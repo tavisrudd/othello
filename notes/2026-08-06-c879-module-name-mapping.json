@@ -12,7 +12,13 @@
     "paper_interface": "PaperInterface",
     "verification_directory": "Verification",
     "axiom_audit": "Verification.AxiomAudit",
-    "operational_gate_term": "metadata-and-tooling-only"
+    "operational_gate_term": "metadata-and-tooling-only",
+    "operational_names": {
+      "certificate_package_manifest_field": "gate",
+      "trust_spine_entity": "Gate",
+      "trust_spine_stable_id_component": "gate",
+      "policy": "Keep Gate/gate in manifests, trust-spine data, build targets, and audit tooling. It is not the reviewer-facing name of a paper closure. Do not rename the gate field in certificate-packages.toml: it is a stable tooling key and the frozen q11/q16 package contracts use it."
+    }
   },
   "frozen_external": [
     {
@@ -39,6 +45,17 @@
         "RelativeConicArcs.Conic",
         "RelativeConicArcs.Arc"
       ],
+      "module_map": {
+        "ProjectiveCap.Projective": "TavisRuddFiniteGeom.Shared.Projective.Projective",
+        "ProjectiveCap.PlaneTransitivity": "TavisRuddFiniteGeom.Shared.Projective.PlaneTransitivity",
+        "ProjectiveCap.PlaneAffineChart": "TavisRuddFiniteGeom.Shared.Projective.PlaneAffineChart",
+        "ProjectiveCap.Grid": "TavisRuddFiniteGeom.Shared.Projective.Grid",
+        "ProjectiveCap.Sym2ConicBridge": "TavisRuddFiniteGeom.Shared.Projective.Sym2ConicBridge",
+        "RelativeConicArcs.Plane": "TavisRuddFiniteGeom.Shared.Projective.Plane",
+        "RelativeConicArcs.ProjectiveBridge": "TavisRuddFiniteGeom.Shared.Projective.ProjectiveBridge",
+        "RelativeConicArcs.Conic": "TavisRuddFiniteGeom.Shared.Projective.Conic",
+        "RelativeConicArcs.Arc": "TavisRuddFiniteGeom.Shared.Projective.Arc"
+      },
       "regrouping": "separate coordinate/projective objects from paper-specific conic classifications"
     },
     {
@@ -49,6 +66,11 @@
         "RelativeConicArcs.SyndromeGeometry",
         "RelativeConicArcs.FiniteFields"
       ],
+      "module_map": {
+        "RelativeConicArcs.CodingBridge": "TavisRuddFiniteGeom.Shared.Coding.CodingBridge",
+        "RelativeConicArcs.SyndromeGeometry": "TavisRuddFiniteGeom.Shared.Coding.SyndromeGeometry",
+        "RelativeConicArcs.FiniteFields": "TavisRuddFiniteGeom.Shared.Coding.FiniteFields"
+      },
       "regrouping": "keep reusable code/MDS/syndrome interfaces here; paper-specific classifications stay in Papers"
     },
     {
@@ -56,11 +78,14 @@
       "target_namespace": "TavisRuddFiniteGeom.Shared.Incidence",
       "legacy_modules": [
         "RelativeConicArcs.Defect",
-        "RelativeConicArcs.MatchingDesignRigidity",
         "RelativeConicArcs.Moments",
-        "RelativeConicArcs.Nucleus",
-        "RelativeConicArcs.TangentPairFourGroup"
+        "RelativeConicArcs.Nucleus"
       ],
+      "module_map": {
+        "RelativeConicArcs.Defect": "TavisRuddFiniteGeom.Shared.Incidence.Defect",
+        "RelativeConicArcs.Moments": "TavisRuddFiniteGeom.Shared.Incidence.Moments",
+        "RelativeConicArcs.Nucleus": "TavisRuddFiniteGeom.Shared.Incidence.Nucleus"
+      },
       "regrouping": "split reusable incidence/defect lemmas from arcs- and Clebsch-specific consequences"
     },
     {
@@ -75,6 +100,15 @@
         "RelativeConicArcs.AMELU.LUPencilClassification",
         "RelativeConicArcs.AMELU.TransportDivisor"
       ],
+      "module_map": {
+        "RelativeConicArcs.AMELU.Definitions": "TavisRuddFiniteGeom.Shared.AMELU.Definitions",
+        "RelativeConicArcs.AMELU.Dictionary": "TavisRuddFiniteGeom.Shared.AMELU.Dictionary",
+        "RelativeConicArcs.AMELU.EncoderTransversal": "TavisRuddFiniteGeom.Shared.AMELU.EncoderTransversal",
+        "RelativeConicArcs.AMELU.SyndromeGeometry": "TavisRuddFiniteGeom.Shared.AMELU.SyndromeGeometry",
+        "RelativeConicArcs.AMELU.ExtensionFieldPencil": "TavisRuddFiniteGeom.Shared.AMELU.ExtensionFieldPencil",
+        "RelativeConicArcs.AMELU.LUPencilClassification": "TavisRuddFiniteGeom.Shared.AMELU.LUPencilClassification",
+        "RelativeConicArcs.AMELU.TransportDivisor": "TavisRuddFiniteGeom.Shared.AMELU.TransportDivisor"
+      },
       "regrouping": "retain only APIs consumed outside AME-LU; keep AME-LU proof-specific modules under Papers/ame_lu"
     },
     {
@@ -83,6 +117,9 @@
       "legacy_modules": [
         "RelativeConicArcs.Certificate"
       ],
+      "module_map": {
+        "RelativeConicArcs.Certificate": "TavisRuddFiniteGeom.Shared.Certificates.Certificate"
+      },
       "regrouping": "retain semantic checker and soundness interfaces; generated leaves remain in frozen certificate repositories"
     }
   ],
@@ -93,7 +130,9 @@
       "target_namespace": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic",
       "legacy_roots": [
         "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
-        "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions",
+        "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions"
+      ],
+      "legacy_roots_external_or_removed": [
         "RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman"
       ],
       "target_roots": [
@@ -105,7 +144,15 @@
         "Shared.Coding",
         "Shared.Incidence",
         "Shared.Certificates"
-      ]
+      ],
+      "paper_private_modules": [
+        "RelativeConicArcs.MatchingDesignRigidity",
+        "RelativeConicArcs.TangentPairFourGroup"
+      ],
+      "paper_private_module_map": {
+        "RelativeConicArcs.MatchingDesignRigidity": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Incidence.MatchingDesignRigidity",
+        "RelativeConicArcs.TangentPairFourGroup": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Incidence.TangentPairFourGroup"
+      }
     },
     {
       "id": "beyond4_prs",
@@ -142,6 +189,10 @@
         "RelativeConicArcs.Gates.AMELUAggregate",
         "RelativeConicArcs.Gates.AMELUAggregateAxioms"
       ],
+      "legacy_roots_external_or_removed": [
+        "RelativeConicArcs.Gates.AMEStabilizerRigidity",
+        "RelativeConicArcs.Gates.AMEStabilizerRigidityAxioms"
+      ],
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.AMELU.PaperInterface",
         "TavisRuddFiniteGeom.Papers.AMELU.Verification.AxiomAudit"
@@ -153,15 +204,15 @@
     },
     {
       "id": "mds_css_transversal",
-      "filesystem_alias": "mds_css_transversal",
-      "target_namespace": "TavisRuddFiniteGeom.Papers.MDSCSSTransversal",
+      "filesystem_alias": "mds_css_transversal_groups",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups",
       "legacy_roots": [
         "RelativeConicArcs.Gates.MDSCSSTransversalGeometry",
         "RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms"
       ],
       "target_roots": [
-        "TavisRuddFiniteGeom.Papers.MDSCSSTransversal.PaperInterface",
-        "TavisRuddFiniteGeom.Papers.MDSCSSTransversal.Verification.AxiomAudit"
+        "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.Verification.AxiomAudit"
       ],
       "imports_shared": [
         "Shared.AMELU",
@@ -226,6 +277,9 @@
       "legacy_roots": [
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
       ],
+      "legacy_roots_external_or_removed": [
+        "RelativeConicArcs.Gates.ClebschRigidityHuman"
+      ],
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.ClebschRigidity.PaperInterface",
         "TavisRuddFiniteGeom.Papers.ClebschRigidity.Verification.AxiomAudit"
@@ -242,7 +296,9 @@
       "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschPassages",
       "legacy_roots": [
         "RelativeConicArcs.Gates.ClebschPassages",
-        "RelativeConicArcs.Gates.ClebschPassageInterfaces"
+        "RelativeConicArcs.Gates.ClebschPassageInterfaces",
+        "RelativeConicArcs.Gates.ClebschGoldenReturn",
+        "RelativeConicArcs.Gates.FourShadowRecognition"
       ],
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.ClebschPassages.PaperInterface",
@@ -273,7 +329,7 @@
     },
     {
       "id": "clebsch_hexagon_code",
-      "filesystem_alias": "clebsch-hexagon-code",
+      "filesystem_alias": "archive/papers/clebsch-hexagon-code",
       "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschHexagonCode",
       "legacy_roots": [
         "RelativeConicArcs.Gates.ClebschPaperTrust"
@@ -283,7 +339,8 @@
         "TavisRuddFiniteGeom.Papers.ClebschHexagonCode.Verification.AxiomAudit"
       ],
       "requires_split": true,
-      "split_regrouping": "ClebschPaperTrust is a multi-paper aggregate; partition its imported sub-gates by mathematical ownership before renaming"
+      "split_regrouping": "ClebschPaperTrust is a multi-paper aggregate; partition its imported sub-gates by mathematical ownership before renaming",
+      "status": "archived aggregate; no active paper directory in the current tree"
     },
     {
       "id": "golden_operator",
