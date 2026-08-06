@@ -1,0 +1,85 @@
+# Area-export configuration for projective Reed--Solomon results beyond
+# redundancy four.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# The declared gate is the aggregate one, which imports the foundation,
+# redundancy-five, polar-induction and stable-component gates, so a single root
+# spans the area.  Its audited declarations are printed by the sibling gate
+# RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit under opened
+# namespaces, and the registry records the fully-qualified names resolved
+# against the extracted declaration set.
+
+schema_version = 1
+area = "prs_beyond_redundancy_four"
+gate = "RelativeConicArcs.Gates.PRSBeyondRedundancyFour"
+trust_statement = "trust/PRS_BEYOND_REDUNDANCY_FOUR.md"
+axiom_audit = "trust/PRSBeyondRedundancyFourAxiomAudit.lean"
+
+statement_title = "Projective Reed--Solomon syndromes beyond redundancy four: formal boundary"
+
+overview = """
+This boundary is the paper-facing import closure for the formal results adopted
+by the manuscript treating redundancies five through seven of projective
+Reed--Solomon codes.
+
+It carries the shared Hankel-kernel and coding interfaces, the redundancy-five
+algebra with its finite-table arithmetic, coherent polar contraction, the
+recursive contained-component and redundancy-six and seven synthesis interfaces,
+the stable-component coordinate algebra with the dense irreducible-component
+selection theorem, and the uniform iteration-budget and covering-radius
+threshold bridges.
+"""
+
+correspondence = """
+A projective Reed--Solomon code's deep holes are described by syndromes, and the
+covering radius question at a given redundancy asks how far a word can sit from
+the code.  The closure develops that question above redundancy four.
+
+It establishes the Hankel-kernel interface the syndrome algebra runs through,
+the redundancy-five algebra and the finite-table arithmetic supporting it, and
+the coherent polar contraction that drives the induction.  On top of those it
+states the recursive contained-component interface and the synthesis results at
+redundancies six and seven, develops the stable-component coordinate algebra,
+proves the dense irreducible-component selection theorem, and bridges the
+uniform iteration budget to the covering-radius threshold.
+
+The synthesis theorems are conditional, and what they assume is deliberately
+explicit.  Concrete projective-coordinate dictionaries, the Seroussi--Roth
+nonextendability theorem, Dür's equivalence between completeness and radius,
+geometric marker-to-row-space identifications and their component ledgers,
+rational-point bounds, genuine projective and semilinear group actions, and the
+semantic validation of externally generated finite records all remain explicit
+hypotheses or structure fields rather than facts this closure establishes.  A
+reader must supply them to draw the unconditional statements.
+"""
+
+boundary = """
+Every terminal is a kernel proof.  The closure imports no project-local axiom,
+generated evaluator, native decision procedure, or external oracle, and contains
+no unsafe declaration or admitted proof.  The assumptions listed above are
+carried as hypotheses and structure fields, so the axiom audit shows them
+nowhere; a consumer reads them from the statements themselves.
+"""
+
+axiom_audit_title = "Axiom audit for projective Reed--Solomon results beyond redundancy four"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with this boundary: the
+Hankel-kernel and coding interfaces, the redundancy-five algebra and finite-table
+arithmetic, coherent polar contraction, the redundancy-six and seven synthesis
+interfaces, the stable-component coordinate algebra and dense
+irreducible-component selection theorem, and the iteration-budget and
+covering-radius threshold bridges.
+"""
+
+readme_anchor = "  asserts no all-prime statement."
+
+readme_bullet = """- `trust/manifests/prs_beyond_redundancy_four.json` content-addresses the
+  projective Reed--Solomon boundary above redundancy four: the Hankel-kernel and
+  coding interfaces, the redundancy-five algebra, coherent polar contraction, the
+  redundancy-six and seven synthesis interfaces, and the covering-radius
+  threshold bridges.  Its synthesis theorems are conditional, carrying their
+  geometric and literature inputs as explicit hypotheses."""

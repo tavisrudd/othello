@@ -31,6 +31,107 @@ terminals = ["RelativeConicArcs.Certificate.check_sound"]
 coverage_rule = "closure"
 
 [[gate]]
+module = "RelativeConicArcs.Gates.PRSBeyondRedundancyFour"
+terminals = [
+  "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member",
+  "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member",
+  "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree",
+  "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member",
+  "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card",
+  "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent",
+  "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow",
+  "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible",
+  "RelativeConicArcs.PRSUniformCoveringRadius.two_mul_sub_three_le_uniformTransverseThreshold",
+  "RelativeConicArcs.PRSUniformCoveringRadius.bottomCurveDeletionBudget_eq",
+  "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearGraphDeletionBudget_eq",
+  "RelativeConicArcs.PRSUniformCoveringRadius.intermediateParameterBudget_lt_uniformParameterBudget",
+  "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget",
+  "RelativeConicArcs.PRSUniformCoveringRadius.uniformParameterBudget_lt_fieldOrder_add_one",
+  "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearGraphDeletionBudget_lt_fieldOrder_add_one",
+  "RelativeConicArcs.PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold",
+  "RelativeConicArcs.PRSUniformCoveringRadius.seroussiRothDimensionRange_of_uniformTransverseThreshold",
+  "RelativeConicArcs.PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.radiusRange_of_externalSeroussiRothDuer",
+  "RelativeConicArcs.PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.radiusRange_six_eight_of_externalSeroussiRothDuer",
+  "RelativeConicArcs.PRSUniformCoveringRadius.deep_iff_splitFree_of_externalSeroussiRothDuer_uniformTransverseThreshold",
+  "RelativeConicArcs.PRSRedundancyFive.affine_span_product_mem_hankelKernel",
+  "RelativeConicArcs.PRSRedundancyFive.affine_pair_infinity_span_product_mem_hankelKernel",
+  "RelativeConicArcs.PRSRedundancyFive.inHankelKernel_scale_iff",
+  "RelativeConicArcs.PRSRedundancyFive.isSplitFree_scale_iff",
+  "RelativeConicArcs.PRSRedundancyFive.isSplitFree_iff_not_liesInThreeColumnSpan",
+  "RelativeConicArcs.PRSRedundancyFive.FamilyData.family_arithmetic",
+  "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingConjugate",
+  "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingRational",
+  "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_characteristicThree",
+  "RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis",
+  "RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_field_orders",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_counts",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_stabilizer",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_histogram_total",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_frobenius_target",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic",
+  "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_orbit_summaries_agree_with_sporadic_records",
+  "RelativeConicArcs.PRSPolarInduction.iteratedProjectiveSequenceContraction_map",
+  "RelativeConicArcs.PRSPolarInduction.sequenceContraction_agrees_with_finite",
+  "RelativeConicArcs.PRSPolarInduction.PointedKernelLift.lift_splitSquarefreeKernelMember",
+  "RelativeConicArcs.PRSPolarInduction.mem_modularContractionKernel_iff",
+  "RelativeConicArcs.PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular",
+  "RelativeConicArcs.PRSPolarInduction.RecursiveContainedInput.bad_implies_persistent_or_modular",
+  "RelativeConicArcs.PRSPolarInduction.tangentTranslate_of_cast_eq_zero",
+  "RelativeConicArcs.PRSPolarInduction.tangentTranslate_surjective",
+  "RelativeConicArcs.PRSPolarInduction.fifthPower_sigmaInversionOrbitCount",
+  "RelativeConicArcs.PRSStableComponents.symmetricFactor_plucker",
+  "RelativeConicArcs.PRSStableComponents.exchangedFactor_plucker",
+  "RelativeConicArcs.PRSStableComponents.antiInvariantFactor_plucker",
+  "RelativeConicArcs.PRSStableComponents.coherentFano_first_hankelMinor",
+  "RelativeConicArcs.PRSStableComponents.coherentFano_second_hankelMinor",
+  "RelativeConicArcs.PRSStableComponents.coherentFano_third_hankelMinor",
+  "RelativeConicArcs.PRSStableComponents.coherentFano_fourth_hankelMinor",
+  "RelativeConicArcs.PRSSquarefreeMarkerDensity.eq_zero_of_eval_eq_zero_on_injective",
+  "RelativeConicArcs.PRSSquarefreeMarkerDensity.splitCoefficientPullback_injective",
+  "RelativeConicArcs.PRSSquarefreeMarkerDensity.eq_zero_of_splitCoefficientPullback_eval_eq_zero_on_injective",
+  "RelativeConicArcs.PRSStableComponents.ContainedRowSpaceData.rowSpace_subset_badCarrier",
+  "RelativeConicArcs.PRSStableComponents.ContainedRowSpaceData.exists_component_containing_rowSpace",
+  "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.recursiveStep",
+  "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.toRecursiveContainedInput",
+  "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.bad_implies_persistent_or_modular",
+  "RelativeConicArcs.PRSStableComponents.mem_modularContractionKernel_prod_iff",
+  "RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_blocks_cover",
+  "RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_no_nonzero_coefficient",
+  "RelativeConicArcs.PRSRedundancySixSeven.redundancySixHighFieldSynthesis",
+  "RelativeConicArcs.PRSRedundancySixSeven.redundancySevenHighFieldSynthesis",
+  "RelativeConicArcs.PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled",
+  "RelativeConicArcs.PRSRedundancySixSeven.RedundancySixOrbitArithmetic.orbit_count_pairs",
+  "RelativeConicArcs.PRSRedundancySixSeven.redundancySixAllFieldSynthesis",
+  "RelativeConicArcs.PRSRedundancySixSeven.redundancySevenAllFieldSynthesis",
+  "RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion",
+  "RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.PRSFoundation"
+terminals = [
+  "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member",
+  "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member",
+  "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member",
+  "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree",
+  "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member",
+  "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member",
+  "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member",
+  "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member",
+  "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member",
+  "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member",
+  "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card",
+  "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent",
+  "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow",
+  "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible",
+  "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent",
+]
+coverage_rule = "closure"
+
+[[gate]]
 module = "RelativeConicArcs.Gates.ClebschArithmeticGluing"
 terminals = [
   "RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective",
@@ -3787,6 +3888,376 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective"
 gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
 expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.two_mul_sub_three_le_uniformTransverseThreshold"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.bottomCurveDeletionBudget_eq"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearGraphDeletionBudget_eq"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.intermediateParameterBudget_lt_uniformParameterBudget"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.uniformParameterBudget_lt_fieldOrder_add_one"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.exactLinearGraphDeletionBudget_lt_fieldOrder_add_one"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.UniformIteratedPackageInput.packages_fit_uniform_threshold"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.seroussiRothDimensionRange_of_uniformTransverseThreshold"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.radiusRange_of_externalSeroussiRothDuer"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.radiusRange_six_eight_of_externalSeroussiRothDuer"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSUniformCoveringRadius.deep_iff_splitFree_of_externalSeroussiRothDuer_uniformTransverseThreshold"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.affine_span_product_mem_hankelKernel"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.affine_pair_infinity_span_product_mem_hankelKernel"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.inHankelKernel_scale_iff"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.isSplitFree_scale_iff"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.isSplitFree_iff_not_liesInThreeColumnSpan"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.FamilyData.family_arithmetic"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingConjugate"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_osculatingRational"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_characteristicThree"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_field_orders"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_counts"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_stabilizer"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_histogram_total"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_frobenius_target"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_orbit_summaries_agree_with_sporadic_records"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.iteratedProjectiveSequenceContraction_map"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.sequenceContraction_agrees_with_finite"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.PointedKernelLift.lift_splitSquarefreeKernelMember"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.mem_modularContractionKernel_iff"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.CoherentPolarInput.splitFree_implies_persistent_or_modular"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.RecursiveContainedInput.bad_implies_persistent_or_modular"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.tangentTranslate_of_cast_eq_zero"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.tangentTranslate_surjective"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSPolarInduction.fifthPower_sigmaInversionOrbitCount"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.symmetricFactor_plucker"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.exchangedFactor_plucker"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.antiInvariantFactor_plucker"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.coherentFano_first_hankelMinor"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.coherentFano_second_hankelMinor"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.coherentFano_third_hankelMinor"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.coherentFano_fourth_hankelMinor"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSSquarefreeMarkerDensity.eq_zero_of_eval_eq_zero_on_injective"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSSquarefreeMarkerDensity.splitCoefficientPullback_injective"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSSquarefreeMarkerDensity.eq_zero_of_splitCoefficientPullback_eval_eq_zero_on_injective"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.ContainedRowSpaceData.rowSpace_subset_badCarrier"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.ContainedRowSpaceData.exists_component_containing_rowSpace"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.recursiveStep"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.toRecursiveContainedInput"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.RecursiveContainedGeometryInput.bad_implies_persistent_or_modular"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.mem_modularContractionKernel_prod_iff"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_blocks_cover"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSStableComponents.cyclicPlaneCatalecticant_no_nonzero_coefficient"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.redundancySixHighFieldSynthesis"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.redundancySevenHighFieldSynthesis"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.RedundancySixOrbitArithmetic.orbit_count_pairs"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.redundancySixAllFieldSynthesis"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSeven.redundancySevenAllFieldSynthesis"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion"
+gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
+expected_axioms = []
 
 # ---------------------------------------------------------------------------------------------
 # Owned modules that no declared extraction unit reaches.
