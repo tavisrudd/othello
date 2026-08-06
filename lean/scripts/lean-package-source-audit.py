@@ -29,11 +29,84 @@ from __future__ import annotations
 
 import argparse
 import collections
+import difflib
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
+
+
+# A package may normalize generated comments at extraction time: internal task
+# identifiers and development paths have no meaning to a reader of the public
+# artifact.  The transformation is admissible only when it is declared, so each one
+# is named here and the package's PROVENANCE.md cites the name.  Declaring it is what
+# lets this audit separate an intended rewrite from corruption; an undeclared
+# difference stays a defect.
+#
+# Each rule is a literal or regular-expression substitution applied to the AUTHORITY
+# bytes before comparison.  A rule may not touch a declaration, a proof, or a numeral.
+DECLARED_TRANSFORMATIONS: dict[str, list[tuple[str, str]]] = {
+    # finitegeom-q25-certificates: heading identifiers, generator repathing, the
+    # source-generator hash relabelling, and the remaining prose identifiers.
+    "q25-banner-normalization-v1": [
+        (r"# Generated C151 ", "# Generated q=25 certificate "),
+        (r"`notes/\d{4}-\d{2}-\d{2}-[cC]151-([A-Za-z0-9._-]+)`", r"`scripts/\1`"),
+        (r"generator SHA256:", "source-generator SHA256:"),
+        (r"lexicographic C150 internal-orbit", "lexicographic normalized-row internal-orbit"),
+        (r"# C331 semantic", "# semantic-exhaustion bridge semantic"),
+        # Only a free-standing identifier in prose.  `C151` also occurs inside
+        # declaration names as a column index — `residualCoverRow050C151_200` — and
+        # rewriting one of those would change mathematics, not a comment.
+        (r"(?<![A-Za-z0-9_])C151(?![A-Za-z0-9_])", "q=25 certificate"),
+    ],
+}
+
+
+def apply_transformation(text: str, rules: list[tuple[str, str]]) -> str:
+    for pattern, replacement in rules:
+        text = re.sub(pattern, replacement, text)
+    return text
+
+
+def inserted_comment_only(authority: str, packaged: str) -> bool:
+    """True when the package adds whole Lean docstring blocks and nothing else.
+
+    A package may add a module banner to a generated source that never had one.
+    That is admissible because it adds no mathematics: every added line must lie
+    inside an added `/-! ... -/` block.
+    """
+    before = authority.splitlines()
+    after = packaged.splitlines()
+    matcher = difflib.SequenceMatcher(None, before, after, autojunk=False)
+    added: list[str] = []
+    for tag, _i1, _i2, j1, j2 in matcher.get_opcodes():
+        if tag == "equal":
+            continue
+        if tag != "insert":
+            return False
+        added.extend(after[j1:j2])
+    if not added:
+        return False
+    depth = 0
+    for line in added:
+        stripped = line.strip()
+        if stripped.startswith("/-"):
+            depth += 1
+        if depth == 0 and stripped:
+            return False
+        if stripped.endswith("-/"):
+            depth = max(0, depth - 1)
+    return depth == 0
+
+
+def blob(repo: Path, rev: str, path: str) -> bytes | None:
+    proc = subprocess.run(
+        ["git", "-C", str(repo), "cat-file", "-p", f"{rev}:{path}"],
+        capture_output=True,
+    )
+    return proc.stdout if proc.returncode == 0 else None
 
 
 def blob_digest(repo: Path, rev: str, path: str) -> str | None:
@@ -56,8 +129,34 @@ def resolve(repo: Path, rev: str) -> str | None:
     return proc.stdout.strip() if proc.returncode == 0 else None
 
 
+def classify_difference(monorepo: Path, authority: str, authority_path: str,
+                        packaged_path: Path, transformation: str | None) -> str:
+    """Label a package source that is not the authority's bytes.
+
+    Without a declared transformation every difference is a defect, which is the
+    only safe default: nothing else on either side would detect a silent edit.
+    """
+    if transformation is None:
+        return "DIFFERS-from-authority"
+    rules = DECLARED_TRANSFORMATIONS[transformation]
+    raw = blob(monorepo, authority, authority_path)
+    if raw is None:
+        return "DIFFERS-from-authority"
+    try:
+        original = apply_transformation(raw.decode("utf-8"), rules)
+        packaged = packaged_path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return "DIFFERS-from-authority"
+    if original == packaged:
+        return f"transformed-by-{transformation}"
+    if inserted_comment_only(original, packaged):
+        return f"transformed-by-{transformation}-plus-added-banner"
+    return "DIFFERS-from-authority"
+
+
 def audit(package: Path, monorepo: Path, base: Path, authority: str,
-          source_prefix: str) -> tuple[dict[str, list[str]], dict[str, str]]:
+          source_prefix: str, transformation: str | None = None
+          ) -> tuple[dict[str, list[str]], dict[str, str]]:
     manifest = json.loads((package / "MANIFEST.json").read_text())
     base_commit = manifest["dependency"]["commit"]
 
@@ -76,7 +175,10 @@ def audit(package: Path, monorepo: Path, base: Path, authority: str,
         elif in_authority == sealed:
             tags.append("identical-to-authority")
         else:
-            tags.append("DIFFERS-from-authority")
+            tags.append(classify_difference(
+                monorepo, authority, f"{source_prefix}{path}", package / path,
+                transformation,
+            ))
         if in_head is not None:
             tags.append(
                 "still-in-monorepo-identical" if in_head == sealed
@@ -113,6 +215,13 @@ def main() -> int:
         help="path prefix mapping a package module path into the monorepo tree",
     )
     parser.add_argument(
+        "--declared-transformation",
+        choices=sorted(DECLARED_TRANSFORMATIONS),
+        help="name of the extraction-time comment normalization the package declares"
+             " in its PROVENANCE.md; sources the rules reproduce exactly are reported"
+             " as transformed rather than differing",
+    )
+    parser.add_argument(
         "--list",
         action="append",
         default=[],
@@ -135,13 +244,16 @@ def main() -> int:
         return 2
 
     detail, header = audit(
-        args.package, args.monorepo, args.base, resolved, args.source_prefix
+        args.package, args.monorepo, args.base, resolved, args.source_prefix,
+        args.declared_transformation,
     )
 
     print(f"package {args.package.name}: {header['module_count']} sealed sources")
     print(f"  sealed package revision {header['sealed_package_revision'][:8]}")
     print(f"  monorepo authority      {resolved[:8]} ({args.authority})")
     print(f"  pinned base commit      {header['pinned_base_commit'][:8]}")
+    if args.declared_transformation:
+        print(f"  declared transformation {args.declared_transformation}")
     for label, paths in sorted(detail.items(), key=lambda kv: -len(kv[1])):
         print(f"{len(paths):5d}  {label}")
     for pattern in args.list:
