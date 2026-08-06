@@ -139,6 +139,22 @@ the declared `q25-banner-normalization-v1` transformation covers sealed Lean sou
 programs.  Re-extraction is the moment to fix both directions: derive the package's scripts from the
 monorepo originals under a named transformation, and carry the missing replay program across.
 
+## Finding: three candidate packages still depend on a base revision carrying order-16 payload
+
+Every package resolves the base into `.lake/packages/finitegeom`, at whatever revision its lock
+names, and those checkouts are part of the sweep's scope.  The base at `a7665be`, which the order-16
+package pins, and the base's own `HEAD` at `ac7e4ee` both carry only `Q16Classification.lean`.  The
+two projective-cap candidates and the order-25 candidate resolve `9711f4a`, and the order-eleven
+package resolves `85dfde9`; all four of those checkouts still carry `Q16CertificateLevels`,
+`Q16Reduction`, and `Q16StepKernel` alongside it.
+
+This is not a shadow to delete.  A dependency checkout is a reproducible materialization of a
+published revision, and the ownership boundary explicitly does not reach into Git history.  What it
+means is that until the pins move, three candidates would build against a base that still contains
+extracted order-16 sources — so the base re-export window should refresh those locks, not only the
+adopted packages' pins, and the order-eleven package's lock is one more thing that window has to
+carry.
+
 ## Finding: packages seal non-Lean payload three different ways
 
 The order-16 package records `generator` and `verification_artifacts`; the order-eleven package
@@ -168,6 +184,7 @@ the certificate payload either way — but the attribution is wrong wherever it 
 ## What this leaves for the window
 
 Delete the 114-module point-orbit residue in the monorepo and the three-module order-16 residue in
-the base, in the same window as the base re-export, and account for the orientation-rename residue
-with the re-export that causes it.  Everything else here is either landed or belongs to the order-25
+the base, in the same window as the base re-export; account for the orientation-rename residue with
+the re-export that causes it; and refresh the four dependency locks that still resolve a base
+revision carrying extracted order-16 sources.  Everything else here is either landed or belongs to the order-25
 extraction, which now has a declared, machine-checked payload list to extract against.

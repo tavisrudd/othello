@@ -269,8 +269,10 @@ commit a self-contained official source state.
    modules in the base, whose deletion needs the base re-export window.  No mirror or backup working
    tree carries non-Lean payload.  Open from that sweep: the order-25 replay table exists only as an
    untracked cache file and an uncommitted candidate copy, the candidate repository has no commits at
-   all, its script set and the monorepo's disagree in both directions, and the adopted packages and
-   the candidate seal their non-Lean payload three different ways with nothing checking it.
+   all, its script set and the monorepo's disagree in both directions, the adopted packages and the
+   candidate seal their non-Lean payload three different ways with nothing checking it, and four
+   dependency locks still resolve a base revision carrying extracted order-16 sources, so the
+   re-export window must refresh those locks too.
 7. Remove every stale shadow after byte identity and authority are established.  Never delete the
    sole current copy, foreign dirty work, or an uncommitted candidate without first preserving it
    in its official repository.
