@@ -4,6 +4,7 @@ This is a summary of my current AI-accelerated research in finite
 geometry, coding theory, and quantum information.
 
 - [top 11 results](#top-11-standout-results)
+- [theorems over infinite families](#theorems-that-quantify-over-infinite-families)
 - [paper abstracts, links, and guides](#non-specialist-guide-to-the-papers) 
 - [trust and verification map](#trust-and-verification)
 
