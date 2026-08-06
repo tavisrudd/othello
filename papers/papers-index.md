@@ -64,8 +64,9 @@ identity and matching-design rigidity*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
-**4 · `clebsch-rigidity`** — *Reconstructing the Clebsch code from its deep-hole syndrome locus*,
-with the companion *Computational strengthenings of Clebsch syndrome rigidity* in the same root
+**4 · `clebsch-rigidity`** — *Reconstructing the Clebsch code and its golden orientation from its
+deep-hole syndrome locus*, with the companion *Computational strengthenings of Clebsch syndrome
+rigidity* in the same root
 - *Status:* warning-free manuscript + PDF, split into a human core and the
   computational companion, each with its own build target, bibliography, claim
   ledger, and replay routes. Review cleared; C182 owns archive/release, whose
@@ -78,8 +79,8 @@ with the companion *Computational strengthenings of Clebsch syndrome rigidity* i
   dependency.** It reproves the shared deep-holes=conic input while citing
   `arcs` for public provenance.
 
-**Clebsch second paper · `clebsch-factorization`** — *Quadratic recovery and cubic orientation in
-conic matching quotients*
+**Clebsch second paper · `clebsch-factorization`** — *Quadratic trade rigidity and cubic orientation
+in conic matching quotients*
 - *Status:* C577 active. The `3,6,10` ranks and cubic survival now have
   conceptual proofs, and C665 adds the completeness theorem naming `B₃/F₇` and
   `H₃/F₁₁` as the only occurring orbits.
@@ -157,7 +158,7 @@ graphs*
   is not yet built. Full-complex reconstruction remains a softened scope remark.
 
 **Active unnumbered candidate · `beyond4_prs`** — *Deep holes of projective Reed--Solomon codes
-beyond redundancy four: exact classifications at redundancies five through seven*
+beyond redundancy four: recursive carriers and exact classifications through redundancy ten*
 - *Status:* user-directed merger admitted to active manuscript staging.  C538 creates the first
   integrated draft; C545 releases a proof-complete Version 1 preprint with a policy-checked DOI;
   C539--C544 close the paper-facing Lean package.

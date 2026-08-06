@@ -45,8 +45,8 @@ The results are grouped as follows.
    section 3, not a manuscript of its own.
 6. *Arcs complete outside a conic: a prescribed-hole defect identity and
    matching-design rigidity*.
-7. *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact
-   classifications at redundancies five through seven*.
+7. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
+   recursive carriers and exact classifications through redundancy ten*.
 8. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
    Structure* — local memory and exact transfer of erasure repair.
 9. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
@@ -1464,7 +1464,7 @@ visible on its fibres, with equality realized by two collinear triples on a
 split quadratic meeting the arc once on each component. A classification-free
 proof of that six-hole stability statement is the remaining route.
 
-## *Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven*
+## *Deep holes of projective Reed–Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten*
 
 A projective Reed–Solomon code is the evaluation code of polynomials of bounded
 degree on the rational normal curve. Its *covering radius* and the geometry of
