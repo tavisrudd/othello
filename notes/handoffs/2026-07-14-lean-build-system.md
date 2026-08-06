@@ -169,20 +169,24 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    tree is coherent, the release-chain replay, the atomic finitegeom re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
-2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
+2. **C879 paper-boundary extraction design.** After C864, establish the ownership/import manifest,
+   shared-library boundaries, paper subdirectories, import firewalls, extraction order, and
+   clean-replay acceptance gate described in `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`;
+   the design does not authorize source moves or repository splits by itself.
+3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
-3. **C326 extraction over the project.** The exporter and driver are validated against core Lean;
+4. **C326 extraction over the project.** The exporter and driver are validated against core Lean;
    what remains is running extraction in a quiet Lean worktree. All five gates report
    `facts-missing`, so every declared terminal-axiom set is unverified until then.
    `lean-trust-extract.py plan` reports whether the window is open.
-4. **Paper-facts steps 4 and 5.** Generated regions in `papers/papers-index.md` and
+5. **Paper-facts steps 4 and 5.** Generated regions in `papers/papers-index.md` and
    `papers-planning.md`, gated on the registry writer's agreement; adequacy-appendix rendering,
    gated on Lean extraction having run.
-5. **C287 first-tag export.** Obtain one commit-clean immutable private-source checkpoint, then
+6. **C287 first-tag export.** Obtain one commit-clean immutable private-source checkpoint, then
    construct the first fresh-history candidate with the C553 API/prose transformation applied only
    in the target. The private monorepo is not modified.
-6. **C698--C702 Paper I v2.** Run in order: signed-two-graph core in `finitegeom`; q11 orientation
+7. **C698--C702 Paper I v2.** Run in order: signed-two-graph core in `finitegeom`; q11 orientation
    bridge; q13 Segre foundation; q13 tangent-code certificates; then the v2 release, aligning
    q11/q13 on one upstream commit and preserving the v1 aggregate unchanged.
 
