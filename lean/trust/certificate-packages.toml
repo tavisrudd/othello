@@ -32,12 +32,12 @@ forbidden_artifact_basenames = [
 [[package]]
 name = "finitegeom-clebsch-q11-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
-commit = "a289097b80fab25bb8abb49d64411b8e68895a2e"
+commit = "76c2e56397687618b79d9e7c78c5f2380447ad48"
 manifest_sha256 = "6affa69397083acc4a171916270ef575fbe7abb8b74a7671d7d284fbceb92f6b"
 gate = "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
-terminal = "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
+terminal = "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
 trust_fact = "external/finitegeom-clebsch-q11-certificates.json"
-trust_fact_sha256 = "006013ce19b03e710d371413a44a7ecd6a686eba065c529b1b01154d84da153a"
+trust_fact_sha256 = "444f3ebf008074cadcdca81e64aefaa4f4211c3d37ebedc9bb398eda28b87dd1"
 owned_module_prefixes = [
   "RelativeConicArcs.Q11A5PointOrbits",
 ]

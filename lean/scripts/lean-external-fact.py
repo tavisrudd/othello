@@ -223,6 +223,16 @@ def render_fact(
     terminal = entry["terminal"]
     if terminal not in declarations:
         raise Refused(f"{terminal}: the gate log records no axiom fact for the pinned terminal")
+    # A gate imports far more than its package proves, so appearing in the log is not evidence of
+    # authorship.  The terminal is the one result the fact offers a consumer as this package's
+    # contribution, and a dependency's theorem printed by the gate would let the fact claim credit
+    # for work the package does not do.  Only a declaration defined in a module the package's own
+    # manifest seals qualifies.
+    if declarations[terminal]["origin"] != "package":
+        raise Refused(
+            f"{terminal}: the pinned terminal is proved by the dependency, not by this package; "
+            "name a declaration the package's own manifest seals"
+        )
 
     return {
         "schema_version": FACT_SCHEMA_VERSION,
@@ -384,6 +394,15 @@ def pinned_facts(config: Path, external_dir: Path) -> tuple[dict[str, Any], list
                 problems.append(
                     f"{name}: {relative} records {key} {fact.get(key)!r}, pinned {pinned!r}"
                 )
+        # The same rule the sealer applies, restated over a published fact, so a fact sealed before
+        # the rule existed is reported rather than trusted.
+        terminal = fact.get("terminal")
+        origin = fact.get("declarations", {}).get(terminal, {}).get("origin")
+        if origin != "package":
+            problems.append(
+                f"{name}: {relative} declares terminal {terminal!r} with origin {origin!r}; "
+                "a published terminal must be proved by the package itself"
+            )
         facts[name] = fact
     return facts, problems
 

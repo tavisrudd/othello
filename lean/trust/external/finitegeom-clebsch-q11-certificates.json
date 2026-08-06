@@ -1583,5 +1583,5 @@
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
   "source_commit": "82bc558118535df36989925c3207d6b4d32709eb",
-  "terminal": "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"
+  "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
 }
