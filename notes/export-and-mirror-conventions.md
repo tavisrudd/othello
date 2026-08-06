@@ -3,7 +3,7 @@
 This guide is the routed reference for moving validated work out of the
 monorepo into its public downstream trees. Read it completely before touching
 any repository under `~/src/lean/` or `~/src/math-papers/`, before any
-companion export, certificate-package re-pin, or standalone paper
+area export, certificate-package re-pin, or standalone paper
 synchronization.
 
 ## Edit authorities and tree roles
@@ -27,11 +27,11 @@ terminal gate; shared definitions and reusable reductions remain monorepo-owned.
 Everything else downstream is a tooled export target, written only by the guarded
 tools named below and only as ordinary forward commits:
 
-- `~/src/lean/finitegeom` — the canonical exported Lean base library. Its
-  content changes only by adopting a companion-export delta.
-- `~/src/lean/finitegeom-*` — certificate/companion packages depending on the
-  base by public Git URL and pinned revision. Package-private certificate
-  sources change in their owning repository; base pins, copied shared gates,
+- `~/src/lean/finitegeom` — the finitegeom repository, holding the exported
+  shared Lean library. Its content changes only by adopting an area-export delta.
+- `~/src/lean/finitegeom-*` — certificate packages depending on finitegeom by
+  public Git URL and pinned revision. Package-private certificate
+  sources change in their owning repository; finitegeom pins, copied shared gates,
   axiom audits, and seals change only by the re-pin sequence below.
 - `~/src/math-papers/<paper-repo>` — standalone paper mirrors with
   independent histories. Their content changes only by
@@ -40,12 +40,12 @@ tools named below and only as ordinary forward commits:
 Do not create ad hoc clones, worktrees, scratch checkouts, or candidate trees
 inside `~/src/lean/` or `~/src/math-papers/`. Exporter candidate trees belong
 in disk-backed cache directories (for example
-`~/.cache/othello-lean-build/companion-export/`), and stray copies of these
+`~/.cache/othello-lean-build/area-export/`), and stray copies of these
 repositories anywhere else are not authorities for anything. Never push any of
 these repositories; publishing is the author's decision. Synchronization of
 shared sources and papers is one-way, monorepo to downstream: edit and validate
 here first, then export. Certificate-package authority is also one-way:
-package-private sources never flow back into the monorepo or base. A mirror is
+package-private sources never flow back into the monorepo or finitegeom. A mirror is
 never merged back.
 
 ## Paper export to `~/src/math-papers/`
@@ -101,7 +101,7 @@ Two refusals have no tool-side workaround and must be resolved deliberately:
   the authority blocks every future sync and silently rots — a pin manifest
   left only in a mirror will keep naming superseded commits. The fix is to
   move the file into the authority so the exporter carries it, not to delete
-  it downstream. Keep every pin that describes the paper's formal companions
+  it downstream. Keep every pin that describes the paper's formal artifacts
   in the authority for this reason.
 
 ## The portfolio summary
@@ -125,7 +125,7 @@ The rule that keeps it honest is in `literature-audit-conventions.md`
 \S "Novelty text has one home": every novelty or priority sentence here quotes a
 ledger row rather than restating it.
 
-## Lean export for a paper: base library, certificate package, release chain
+## Lean export for a paper: finitegeom, certificate package, release chain
 
 This is the full chain that takes a validated Lean change from the authority
 tree to a paper's pinned public formal artifact. Stop at any guarded refusal;
@@ -139,7 +139,7 @@ audit from the gate elaboration's standard output, all per `lean/AGENTS.md`.
 
 ### 2. Extract the trust fact
 
-The companion exporter consumes a generated fact for the export gate:
+The area exporter consumes a generated fact for the export gate:
 
 ```sh
 python3 lean/scripts/lean-trust-extract.py plan --area <area>
@@ -152,36 +152,36 @@ the owning build window. Commit the generated
 (`lean/trust/areas/*.toml`) and the fact from the source **commit**, not the
 worktree.
 
-### 3. Companion-export onto the base library
+### 3. Area-export onto finitegeom
 
 ```sh
-python3 lean/scripts/lean-companion-export.py \
+python3 lean/scripts/lean-area-export.py \
   --config lean/trust/export/<area>.toml \
-  --source-commit <othello-commit> --base-commit <finitegeom-commit> plan
-python3 lean/scripts/lean-companion-export.py ... run --workdir <disk-backed-dir>
+  --source-commit <othello-commit> --finitegeom-commit <finitegeom-commit> plan
+python3 lean/scripts/lean-area-export.py ... run --workdir <disk-backed-dir>
 ```
 
 `run` materializes the candidate twice, requires byte-identical repeats, and
 verifies module identity, manifest completeness, and terminal/axiom-audit
-agreement. Re-exporting an area the base already adopted is supported: the
+agreement. Re-exporting an area finitegeom already adopted is supported: the
 configured README bullet is inserted only when it is absent, so a README that
 needs no other change simply drops out of the delta. The forward-delta gate enforces **containment**: every changed
-path must be planned, while planned files whose bytes the base already
+path must be planned, while planned files whose bytes finitegeom already
 carries are reported as unchanged rather than refused. Copy the printed delta
 into `~/src/lean/finitegeom` with no hand edits, validate the export gate
-there through the guarded runner (`--lean-root`/`--root` select the base
-package), and adopt it as one ordinary forward commit. Publishing that base
-revision is the author's decision, and every downstream package resolves the
-base from the public remote — nothing below can run until the base commit is
-on `origin/main`.
+there through the guarded runner (`--lean-root`/`--root` select the finitegeom
+package), and adopt it as one ordinary forward commit. Publishing that
+finitegeom revision is the author's decision, and every downstream package
+resolves finitegeom from the public remote — nothing below can run until that
+revision is on `origin/main`.
 
 ### 4. Re-pin the certificate package
 
 In the package checkout (for example
-`~/src/lean/finitegeom-clebsch-q11-certificates`), after the base is
+`~/src/lean/finitegeom-clebsch-q11-certificates`), after the finitegeom revision is
 published:
 
-1. Update the base revision in `lakefile.toml` (`rev`) and
+1. Update the finitegeom revision in `lakefile.toml` (`rev`) and
    `lake-manifest.json` (`rev` **and** `inputRev`), plus any README pin.
 2. Copy the authority's aggregate gate module in byte-identically.
 3. Rebuild the gate through the guarded queue against the package root:
@@ -200,7 +200,7 @@ published:
 
 In the paper root, per its `verification/README.md`:
 
-1. Update the manuscript's pin block (package commit, base commit, gate
+1. Update the manuscript's pin block (package commit, finitegeom commit, gate
    digest) and the pinned commits in `verification/build_trust_manifest.py`.
 2. Regenerate the statement identity and the trust manifest (set
    `CLEBSCH_LEAN_ROOT`-style variables to the package checkout as the README

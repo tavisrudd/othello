@@ -52,7 +52,7 @@ Reading the legacy shapes is what makes this landable today.  Rewriting an adopt
 manifest changes its hash, which the monorepo pins in `certificate-packages.toml` and which its
 published trust fact records, so a migration would drag both packages through a reseal and a re-pin
 for a bookkeeping change.  Instead the audit reports the gap and each package adopts `support_files`
-at its next reseal — for the order-eleven package, the base re-export window that is already
+at its next reseal — for the order-eleven package, the finitegeom re-export window that is already
 scheduled to reseal it.
 
 ## The reverse direction
@@ -109,7 +109,7 @@ is drift, not a pending migration — as is an owned family with no sealed sourc
 
 ## What this leaves
 
-The order-eleven package's reseal, in the base re-export window, adopts `support_files` and lists
+The order-eleven package's reseal, in the finitegeom re-export window, adopts `support_files` and lists
 its two gate-evidence files; that single change makes `--strict` passable for it.  The order-16
 package's payload already satisfies the convention and only its field names change, at whatever
 window next reseals it.

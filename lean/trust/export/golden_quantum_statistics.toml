@@ -1,4 +1,4 @@
-# Companion-export configuration for the Golden six-mode balanced-cut unit.
+# Area-export configuration for the Golden six-mode balanced-cut unit.
 #
 # The exporter derives the module closure, terminal list, and observed axioms
 # from the trust registry and the generated fact of the declared gate.  Only
@@ -10,7 +10,7 @@ gate = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
 trust_statement = "trust/GOLDEN_QUANTUM_STATISTICS.md"
 axiom_audit = "trust/GoldenQuantumStatisticsAxiomAudit.lean"
 
-statement_title = "Golden six-mode conference interferometer: symbolic companion"
+statement_title = "Golden six-mode conference interferometer: symbolic formal artifact"
 
 overview = """
 This boundary records the symbolic order-six identities accompanying Tavis
@@ -26,7 +26,7 @@ contraction, and the fourth conference-word trace obtained from that
 contraction.  These are the scalar identities used inside the structural
 three-plus-three balanced-cut argument.
 
-The companion does not prove the all-orders conference exchange rigidity
+This formal artifact does not prove the all-orders conference exchange rigidity
 classification, the aligned-design mean and variance, the continuous-control
 optimum, the Hermitian exchange landscape, the squared-spectrum rigidity and
 stability bounds, the balance obstruction, the optical compilation, the
@@ -46,7 +46,7 @@ axiom_audit_title = "Axiom audit for the Golden balanced-cut identities"
 
 axiom_audit_description = """
 This audit prints the axioms of the symbolic order-six identities exported with
-the Golden six-mode conference interferometer companion.  The statements
+the Golden six-mode conference interferometer artifact.  The statements
 concern a signed triangle block with unit off-diagonal entries over a
 commutative ring: its squared entries, the determinant of the cross Gram
 matrix, the trace contraction, and the resulting fourth conference-word trace.

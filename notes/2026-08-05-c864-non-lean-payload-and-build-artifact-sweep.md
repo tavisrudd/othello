@@ -6,7 +6,7 @@
 they live under `notes/` and the checker scans `lean` and `papers` only.  All nineteen order-25
 generator, replay-program, and replay-data files are now declared and machine-checked.  The
 extractions also left build residue nothing deletes on its own: 114 order-eleven point-orbit
-modules in the monorepo and three order-16 modules in the base, whose removal needs a build window.
+modules in the monorepo and three order-16 modules in finitegeom, whose removal needs a build window.
 No mirror or backup checkout carries non-Lean payload.**
 
 ## Replay
@@ -55,7 +55,7 @@ ignored — to the existing suite, which is green at seventeen tests.
 ## Finding: the order-25 generators were undeclared, and are now declared
 
 Eleven generators are named by the monorepo's generated sources.  Ten are the order-25 family's,
-under `notes/`; the eleventh writes a resident table in the base.  Counted by leaves they write:
+under `notes/`; the eleventh writes a resident table in finitegeom.  Counted by leaves they write:
 
 | generator | generated sources |
 |---|---|
@@ -80,7 +80,7 @@ same one the order-16 cut accepted: when order-25 is externalized those nineteen
 monorepo, and the reports that cite them point at the package instead.
 
 The eleventh generator writes `ClebschArithmeticGluingData`, one of the two frozen tables the
-base keeps permanently.  Its `resident_family` entry now covers `lean/verification/` for both
+monorepo keeps permanently.  Its `resident_family` entry now covers `lean/verification/` for both
 tables, on the reasoning that a frozen human-scale table is only reviewable beside the program that
 wrote it.
 
@@ -96,14 +96,14 @@ sees it.  Measured as disk blocks:
 |---|---|---|---|---|
 | monorepo `lean/`     | 114 | 912 | 51.5 MB | order-eleven point-orbit family, extracted by C864 |
 | monorepo `lean/`     |  11 |  88 | 11.1 MB | `PaperIOrientation*`, renamed by the Paper I remediation |
-| `finitegeom` base    |   3 |  24 |  1.6 MB | order-16 certificate modules, extracted by C864 |
-| `finitegeom` base    |  11 |  88 | 11.1 MB | the same rename, not yet re-exported |
-| `finitegeom-clebsch-q11-certificates` | 1 | 8 | 0.4 MB | `Q11DyeAxioms`, built here, sourced from the base |
+| finitegeom repo    |   3 |  24 |  1.6 MB | order-16 certificate modules, extracted by C864 |
+| finitegeom repo    |  11 |  88 | 11.1 MB | the same rename, not yet re-exported |
+| `finitegeom-clebsch-q11-certificates` | 1 | 8 | 0.4 MB | `Q11DyeAxioms`, built here, sourced from finitegeom |
 
 The order-16 monorepo residue is gone, as the card records; the point-orbit cut left its own and it
 was never swept.  Nothing was deleted here.  Unlinking build outputs under a tree another lane is
 actively building is exactly the interference the lane rules forbid, so removal belongs in the same
-window as the base re-export — at which point the orientation-rename residue in both trees resolves
+window as the finitegeom re-export — at which point the orientation-rename residue in both trees resolves
 too, and it is the Paper I lane's to account for either way.
 
 The order-16 package and both projective-cap candidates carry no residue at all.
@@ -139,11 +139,11 @@ the declared `q25-banner-normalization-v1` transformation covers sealed Lean sou
 programs.  Re-extraction is the moment to fix both directions: derive the package's scripts from the
 monorepo originals under a named transformation, and carry the missing replay program across.
 
-## Finding: three candidate packages still depend on a base revision carrying order-16 payload
+## Finding: three candidate packages still depend on a finitegeom revision carrying order-16 payload
 
-Every package resolves the base into `.lake/packages/finitegeom`, at whatever revision its lock
-names, and those checkouts are part of the sweep's scope.  The base at `a7665be`, which the order-16
-package pins, and the base's own `HEAD` at `ac7e4ee` both carry only `Q16Classification.lean`.  The
+Every package resolves finitegeom into `.lake/packages/finitegeom`, at whatever revision its lock
+names, and those checkouts are part of the sweep's scope.  finitegeom at `a7665be`, which the order-16
+package pins, and finitegeom's own `HEAD` at `ac7e4ee` both carry only `Q16Classification.lean`.  The
 two projective-cap candidates and the order-25 candidate resolve `9711f4a`, and the order-eleven
 package resolves `85dfde9`; all four of those checkouts still carry `Q16CertificateLevels`,
 `Q16Reduction`, and `Q16StepKernel` alongside it.
@@ -151,7 +151,7 @@ package resolves `85dfde9`; all four of those checkouts still carry `Q16Certific
 This is not a shadow to delete.  A dependency checkout is a reproducible materialization of a
 published revision, and the ownership boundary explicitly does not reach into Git history.  What it
 means is that until the pins move, three candidates would build against a base that still contains
-extracted order-16 sources — so the base re-export window should refresh those locks, not only the
+extracted order-16 sources — so the finitegeom re-export window should refresh those locks, not only the
 adopted packages' pins, and the order-eleven package's lock is one more thing that window has to
 carry.
 
@@ -184,7 +184,7 @@ the certificate payload either way — but the attribution is wrong wherever it 
 ## What this leaves for the window
 
 Delete the 114-module point-orbit residue in the monorepo and the three-module order-16 residue in
-the base, in the same window as the base re-export; account for the orientation-rename residue with
+finitegeom, in the same window as the finitegeom re-export; account for the orientation-rename residue with
 the re-export that causes it; and refresh the four dependency locks that still resolve a base
 revision carrying extracted order-16 sources.  Everything else here is either landed or belongs to the order-25
 extraction, which now has a declared, machine-checked payload list to extract against.

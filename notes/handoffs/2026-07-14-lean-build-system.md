@@ -3,7 +3,7 @@
 **Lane**: `build-sys`
 **Date**: 2026-08-04
 **Status**: ACTIVE — the order-16 and order-eleven point-orbit packages are sealed and their
-external trust facts pinned; C864 owns the remaining certificate externalization, the base-library
+external trust facts pinned; C864 owns the remaining certificate externalization, the finitegeom
 repair, and the all-paper export replay
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
@@ -24,7 +24,7 @@ its symlink); read it before any Lean edit, generator run, build, or process int
 ## Load before acting, and known footguns
 
 Routed reads, in addition to `lean/AGENTS.md`: `notes/export-and-mirror-conventions.md` before any
-paper-mirror synchronization, Lean companion export, or certificate re-pin — nothing else may write
+paper-mirror synchronization, Lean area export, or certificate re-pin — nothing else may write
 under `~/src/math-papers/` or `~/src/lean/`; `notes/research-reproducibility-conventions.md` before
 any paper-facing computational claim; `papers/style-guide.md` before touching manuscript prose.
 
@@ -51,10 +51,18 @@ any paper-facing computational claim; `papers/style-guide.md` before touching ma
 
 ## Public shared-Lean contract
 
-The approved main identity is `github.com/tavisrudd/finitegeom` at `~/src/lean/finitegeom`.
+The approved main identity is `github.com/tavisrudd/finitegeom` at `~/src/lean/finitegeom`.  Call
+it the **finitegeom repo**, never "the base" or "the companion": both are role words that shift
+meaning between a pinned revision, a module set, an export target and a candidate branch, and the
+repository already has a name.  Say "the pinned finitegeom revision" for a commit, "the finitegeom
+module set" for its contents, and "upstream library" only where a package's dependency relationship
+is the point.  The unit the exporter moves is an **area** — one declared gate's module closure, named
+by a configuration under `lean/trust/export/` — so `lean-area-export.py` runs an area export.
+"Companion" belongs to a paper's computational companion and to a sibling companion paper, and is
+never used for the finitegeom repo or for a Lean artifact.
 Heavyweight generated closures stay outside it in one-way-dependent certificate packages under
 `~/src/lean/`. Human definitions, reusable schemas, field-independent soundness APIs, and small
-examples stay in the monorepo and the base; generated leaves, enumerated tables, package-private
+examples stay in the monorepo and finitegeom; generated leaves, enumerated tables, package-private
 checkers, generators, and replay outputs belong only to their owning package. The monorepo never
 imports an external certificate closure — it consumes a pinned trust fact. The first-tag size gate
 is at most 100 Lean files / 25,000 code lines, and the planned human-scale union at most 500 /
@@ -86,10 +94,10 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   `notes/`, which its scan roots do not; `--verify-official-libraries` also checks package pins and published facts and rejects a
   monorepo file byte-identical to one an official package owns.  The `pending_family` table in
   `lean/trust/certificate-packages.toml` declares each generated family still resident here and the
-  package that will own it; it is empty only when the externalization is complete.  Its companion
+  package that will own it; it is empty only when the externalization is complete.  Its sibling
   `resident_family` table declares generated data a written determination keeps here permanently.
 - `lean-package-source-audit.py`: read-only comparison of a package's sealed sources against the
-  monorepo revision they came from, the current tree, and the pinned base.  Runs no Lean, takes no
+  monorepo revision they came from, the current tree, and the pinned finitegeom revision.  Runs no Lean, takes no
   lock, so it is valid while another lane holds the tree.  `--declared-transformation` names an
   extraction-time comment normalization the package declares in its `PROVENANCE.md`; sources the
   rules reproduce are reported as transformed, and everything else stays a defect.  It also runs in
@@ -104,8 +112,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   whose Lean source no longer exists, which is how an extraction's residue is found.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
   LaTeX, or BibTeX.
-- `lean-companion-export.py`: `plan`/`run` for companion export onto the canonical `finitegeom`
-  base. Materializes twice, requires byte-identical repeats, never commits or pushes. It also
+- `lean-area-export.py`: `plan`/`run` for area export onto the finitegeom
+  repository. Materializes twice, requires byte-identical repeats, never commits or pushes. It also
   reports candidate sources citing an artifact path the candidate does not carry, warning by default
   and refusing under `--strict-citations`.
 - `lean-blast-radius.py`: read-only import-DAG analysis. Blast radius exact; cost columns are
@@ -119,7 +127,7 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    [`../build-sys-tasks/c864-external-certificate-closeout-and-audit.md`](../build-sys-tasks/c864-external-certificate-closeout-and-audit.md).
    Done: the order-16 package is sealed, packed, restore-rehearsed trace-current, and its external
    trust fact is published and pinned; the Kim--Vu and Al-Seraji--Al-Ogali anchors are exact.
-   The base-library game-free/game split is landed and gate-green in the monorepo: the validity
+   The finitegeom game-free/game split is landed and gate-green in the monorepo: the validity
    predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
    the terminals are in `Q11ResidualGame`.
    The order-eleven point-orbit family is externalized: `finitegeom-clebsch-q11-certificates` owns
@@ -128,9 +136,9 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    trace-current, with its trust fact published and pinned; the monorepo deletions landed and both
    the boundary and external-fact checks are green.
    The package/monorepo byte-identity audit is done and green through the new
-   `lean-package-source-audit.py`; it also established that the base re-export and the package
+   `lean-package-source-audit.py`; it also established that the finitegeom re-export and the package
    re-seal must happen in one window, because the monorepo's orientation rename has not reached the
-   base, the package, or the paper's trust manifest
+   finitegeom, the package, or the paper's trust manifest
    (`../2026-08-05-c864-q11-package-source-audit.md`).
    The Paper I remediation currently holds the shared tree and the Clebsch-rigidity release chain, so
    C864 is taking only steps that need no build window and no quiet tree; the near-term plan is on
@@ -138,22 +146,23 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    planning for the remaining order-eleven families, the order-25 banner transformation now declared
    as `q25-banner-normalization-v1` and machine-checked
    (`../2026-08-05-c864-q25-banner-transformation-declaration.md`), the classification of the
-   generated modules the base carries — one real, two false positives of a banner rule that matched
+   generated modules finitegeom carries — one real, two false positives of a banner rule that matched
    ordinary prose (`../2026-08-05-c864-base-generated-module-classification.md`), and the non-Lean
    payload and build-artifact sweep that closes portfolio-audit step 6
    (`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`): the boundary checker now
    resolves the generator every generated banner names and rejects one no family declares, the
    order-25 generators, replay programs and replay data are declared payload, and the point-orbit and
-   order-16 build residue is measured and queued for the base re-export window.  The non-Lean payload
+   order-16 build residue is measured and queued for the finitegeom re-export window.  The non-Lean payload
    seal convention is settled as one `support_files` list read alongside both earlier spellings, and
    the source audit now runs in reverse
    (`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`): both adopted packages hold
    every authority file in the families they own, and the order-eleven package's reseal window picks
    up its two unsealed gate-evidence files.  The exporter now reports sources citing artifact paths
-   the candidate lacks; the base's published `main` carries three
-   (`../2026-08-05-c864-dangling-artifact-citations.md`), and one open decision — whether the base
-   ships the verification directories its generated tables cite — gates the last window-free item.  Then, once the
-   tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
+   the candidate lacks; finitegeom's published `main` carries three
+   (`../2026-08-05-c864-dangling-artifact-citations.md`); the decision that finitegeom ships the
+   verification directories its generated tables cite is taken, and the exporter now carries whatever
+   a planned module cites under the source `lean/` root.  Then, once the
+   tree is coherent, the release-chain replay, the atomic finitegeom re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
 2. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the

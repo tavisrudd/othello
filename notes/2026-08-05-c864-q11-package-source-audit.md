@@ -8,7 +8,7 @@ audit, none of them in the sealed Lean payload.**
 
 The audit compares every sealed source in `~/src/lean/finitegeom-clebsch-q11-certificates` against
 the monorepo revision the sources were extracted from, against the current monorepo tree, and
-against the pinned `finitegeom` base.  It runs no Lean and takes no build lock, so it is valid while
+against the pinned finitegeom repo.  It runs no Lean and takes no build lock, so it is valid while
 another lane holds the shared tree.
 
 ## Replay
@@ -65,13 +65,13 @@ The fix is to correct `PROVENANCE.md` to `0ddbca65` and to carry the monorepo re
 which commit preceded which deletion.  Both edits reseal the manifest and the trust fact, so they
 belong to the next package-side sealing window rather than to a standalone commit.
 
-## Finding: the orientation rename has not reached the base, the package, or the paper
+## Finding: the orientation rename has not reached finitegeom, the package, or the paper
 
 The monorepo renamed its whole orientation development away from manuscript-relative names: eleven
 `RelativeConicArcs.PaperIOrientation*` modules are now `RelativeConicArcs.SupportOrientation*`, with
 the namespaces renamed to match.  Nothing downstream has followed.
 
-- The base library still carries all eleven under the old names, at the pinned revision `85dfde9e`
+- finitegeom still carries all eleven under the old names, at the pinned revision `85dfde9e`
   and at its own `HEAD` `a7665be`.
 - The package's gate imports `RelativeConicArcs.PaperIOrientationSpine` and audits declarations under
   `RelativeConicArcs.PaperIOrientationSymmetry`.
@@ -81,17 +81,17 @@ the namespaces renamed to match.  Nothing downstream has followed.
 - The Clebsch-rigidity manuscript, its `verification/trust_manifest.json`, and both manifest scripts
   reference the old names.
 
-Nothing is broken at this moment: the package is internally coherent against the base revision it
-pins, and its gate is green.  The breakage is scheduled.  Whenever the base is re-exported with the
+Nothing is broken at this moment: the package is internally coherent against finitegeom revision it
+pins, and its gate is green.  The breakage is scheduled.  Whenever finitegeom is re-exported with the
 renamed modules, the package's gate imports stop resolving, its axiom audit names stop resolving,
 its sealed trust fact becomes stale, the monorepo's pinned copy becomes stale with it, and the
 paper's trust manifest disagrees with the Lean it describes.
 
-The consequence for sequencing is the useful part: the base re-export and the order-eleven package
-re-seal are one atomic operation, not two independent steps.  The base re-export was already
-deferred so the base is exported once rather than twice; this adds the requirement that the same
+The consequence for sequencing is the useful part: the finitegeom re-export and the order-eleven package
+re-seal are one atomic operation, not two independent steps.  The finitegeom re-export was already
+deferred so finitegeom is exported once rather than twice; this adds the requirement that the same
 window re-pin the package, refresh its gate imports and audit names, reseal the manifest and trust
-fact, re-pin the monorepo copy, and reconcile the paper's trust manifest.  Doing the base export
+fact, re-pin the monorepo copy, and reconcile the paper's trust manifest.  Doing finitegeom export
 first and the package re-seal later leaves the package unbuildable in between.
 
 The paper-side references belong to the Paper I remediation that currently holds the tree, not to

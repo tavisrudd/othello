@@ -1,4 +1,4 @@
-# Companion-export configuration for triple concurrence of a six-arc.
+# Area-export configuration for triple concurrence of a six-arc.
 #
 # The exporter derives the module closure, terminal list, and observed axioms
 # from the trust registry and the generated fact of the declared gate.  Only

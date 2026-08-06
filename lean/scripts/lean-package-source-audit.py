@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare an external certificate package's sealed Lean sources against the
 authoritative monorepo revision they were extracted from, against the current
-monorepo tree, and against the pinned base library.
+monorepo tree, and against the pinned finitegeom revision.
 
 An external certificate package owns generated leaves that the monorepo has
 deleted or is about to delete.  Nothing rebuilds the deleted sources, so a
@@ -14,9 +14,9 @@ further deletion, and classifies each sealed source as:
   absent-from-authority         the authority revision has no such file
   still-in-monorepo-identical   the monorepo still carries a byte-identical copy
   still-in-monorepo-DRIFTED     the monorepo copy has since changed
-  BASE-OVERLAP-*                the pinned base library also supplies this module
+  FINITEGEOM-OVERLAP-*          the pinned finitegeom revision also supplies this module
 
-A module supplied by both the package and the pinned base is a duplicate module
+A module supplied by both the package and pinned finitegeom is a duplicate module
 name in one import closure and is always a defect.  A module the monorepo still
 carries is a duplicate source: admissible only while its extraction is pending,
 and only while the two copies agree.
@@ -317,8 +317,8 @@ def audit(package: Path, monorepo: Path, base: Path, authority: str,
             )
         if in_base is not None:
             tags.append(
-                "BASE-OVERLAP-identical" if in_base == sealed
-                else "BASE-OVERLAP-drifted"
+                "FINITEGEOM-OVERLAP-identical" if in_base == sealed
+                else "FINITEGEOM-OVERLAP-drifted"
             )
         detail[" | ".join(tags)].append(path)
 
@@ -339,7 +339,9 @@ def main() -> int:
         help="monorepo revision holding the authoritative pre-extraction sources",
     )
     parser.add_argument("--monorepo", type=Path, default=Path.home() / "src/othello")
-    parser.add_argument("--base", type=Path, default=Path.home() / "src/lean/finitegeom")
+    # The old spelling stays as an alias so recorded replay commands keep working.
+    parser.add_argument("--finitegeom", "--base", dest="base", type=Path,
+                        default=Path.home() / "src/lean/finitegeom")
     parser.add_argument(
         "--source-prefix",
         default="lean/",
@@ -401,7 +403,7 @@ def main() -> int:
     print(f"package {args.package.name}: {header['module_count']} sealed sources")
     print(f"  sealed package revision {header['sealed_package_revision'][:8]}")
     print(f"  monorepo authority      {resolved[:8]} ({args.authority})")
-    print(f"  pinned base commit      {header['pinned_base_commit'][:8]}")
+    print(f"  pinned finitegeom rev   {header['pinned_base_commit'][:8]}")
     if args.declared_transformation:
         print(f"  declared transformation {args.declared_transformation}")
     for label, paths in sorted(detail.items(), key=lambda kv: -len(kv[1])):
@@ -446,7 +448,7 @@ def main() -> int:
         print(f"       PAYLOAD-DRIFT {problem}")
 
     defective = any(
-        "WORKTREE-DRIFT" in label or "BASE-OVERLAP" in label
+        "WORKTREE-DRIFT" in label or "FINITEGEOM-OVERLAP" in label
         or "DIFFERS-from-authority" in label or "still-in-monorepo-DRIFTED" in label
         for label in detail
     )

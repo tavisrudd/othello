@@ -6,7 +6,7 @@
 findings are all on the package side: the order-25 candidate differs from the monorepo authority in
 every one of its generated files by a deliberate banner rewrite that has never been declared, the
 two projective-cap candidates hold no payload at all, and three generated modules have already
-propagated out of the monorepo into the base library and into a published paper export.**
+propagated out of the monorepo into finitegeom and into a published paper export.**
 
 ## Replay
 
@@ -34,7 +34,7 @@ by naming its own generator, the same rule the boundary checker uses.
 |---|---|---|
 | paper mirrors: Clebsch rigidity, arcs, Clebsch passages, order-13 passant code, golden quantum statistics, MDS--CSS transversal groups | none | clean |
 | backup working trees `othello-n18`, `othello-n18-certify` | none | clean |
-| `finitegeom` base | 3 | see the propagation finding |
+| finitegeom repo | 3 | see the propagation finding |
 | `finitegeom-golden-quantum-statistics` | 3 | the same three, legitimately: this is a materialized base export, not a shadow |
 | `finitegeom-projective-cap-q11-certificates` | none | candidate is a shell |
 | `finitegeom-projective-cap-q13-certificates` | none | candidate is a shell |
@@ -88,14 +88,14 @@ and this audit confirms there is nothing in them to reconcile.
 
 Three generated modules — the Clebsch arithmetic-gluing data, the split-quadratic pinching module,
 and the four-copy contraction module under `RelativeConicArcs/AMELU/` — are byte-identical in the
-monorepo, in the `finitegeom` base, and in the golden quantum statistics export.  The golden copy is
+monorepo, in the finitegeom repo, and in the golden quantum statistics export.  The golden copy is
 not a shadow: that repository is a materialized base export and carries a base subset by design.
 That is the point.  These are three of the four sources recorded as `resident-unclassified` in the
-pending-family table, and because the base carries them, every paper export built on the base carries
+pending-family table, and because finitegeom carries them, every paper export built on finitegeom carries
 them too.
 
 The public shared-Lean contract says generated leaves belong only to their owning package, so
-whatever these three turn out to be, the base is currently the wrong place for them, and the cost of
+whatever these three turn out to be, finitegeom is currently the wrong place for them, and the cost of
 leaving them unclassified is not three files but three files times every export.  This raises their
 priority above what their count suggests; it does not decide their disposition, which needs a read of
 what they actually contain.

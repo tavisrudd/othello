@@ -10,7 +10,7 @@ the remaining order-eleven families, order-13, and order-25 are not yet executed
 
 Finish the one-way extraction of every large generated Lean certificate family from the Othello
 monorepo.  Each family must have exactly one official, separately versioned library under
-`~/src/lean/`; the monorepo and shared `finitegeom` base retain only human-scale definitions,
+`~/src/lean/`; the monorepo and finitegeom repository retains only human-scale definitions,
 semantic certificate APIs, proved reductions suitable for reuse, package pins, and compact trust
 facts.  Imported certificate libraries must be restored from guarded content-addressed caches and
 must never be rebuilt merely because an unrelated monorepo leaf changed.
@@ -30,7 +30,7 @@ reconcile their live rows and reports through the normal lifecycle.
   certificate-only aggregate theorems, generators, frozen generator reports, independent replay
   programs, and their canonical outputs belong only to the relevant external certificate library.
 - Human mathematical definitions, reusable theorem schemas, field-independent soundness APIs, and
-  small local examples remain in the monorepo and the public `finitegeom` base.
+  small local examples remain in the monorepo and the public finitegeom repository.
 - A paper may cite and pin an external package, but it must not carry another generator, generated
   source tree, replay output, or certificate shadow.
 - The monorepo must not import an external certificate closure.  It consumes a compact pinned trust
@@ -48,7 +48,7 @@ reconcile their live rows and reports through the normal lifecycle.
 
 - Official repository: `~/src/lean/finitegeom-q16-certificates`, current local revision
   `5bd2048cb5f0346cc43726dcfe4c42b4ea3af2e7`.
-- Base library: `~/src/lean/finitegeom`, revision
+- finitegeom revision:
   `a7665be682907cab5c99b10e3a39a9fc289e2cb3`.
 - The official manifest seals 1,331 Lean modules, the local generator, focused trust gate,
   independent replay, canonical replay summary, and frozen search transcript.
@@ -63,7 +63,7 @@ reconcile their live rows and reports through the normal lifecycle.
   certificate-boundary verifier.  The canonical finitegeom cache is
   `/home/tavis/lean-backups/finitegeom-a7665bea-cache.tgz`.
 - The clean-pin build exposed and fixed a missing direct `CapGame.BuildGame` import in
-  `ProjectiveCap.Sym2ConicBridge`; the focused base target then passed.
+  `ProjectiveCap.Sym2ConicBridge`; the focused finitegeom target then passed.
 - Active q16 cold fill:
   `/home/tavis/.cache/othello-lean-build/run-20260804-151540-87eb8c71`.
   It resumed from byte-verified `Q16CertificateLevels`, `Q16StepKernel`, and `Q16Reduction`
@@ -96,7 +96,7 @@ reconcile their live rows and reports through the normal lifecycle.
   `RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound`, its only consumer; the class count points at
   `RelativeConicArcs.Q16Classification.rejection_profile` through the new
   `entry_package` field, and the pinned fact exhibits the required separation by recording the
-  order-16 terminal's axioms.  That classification theorem is base-owned, not package-owned: the
+  order-16 terminal's axioms.  That classification theorem belongs to finitegeom, not to the package: the
   order-16 package lists it under `external_imports` and holds no copy, which leaves the separation
   argument intact and the earlier attribution wrong
   (`notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`).  The NRC/GRS dictionary entry stays unanchored until the strong
@@ -129,7 +129,7 @@ reconcile their live rows and reports through the normal lifecycle.
 - Land the strong projective/monomial GRS theorem from the C855 worktree, validate its focused gate,
   and remove the NRC/GRS dictionary warning rather than merely renaming or suppressing it.
 - The pinned fact cannot answer the Dye question: it is stale.  The monorepo's `Q11DyeAxioms` now
-  declares no axioms — both Dye statements are theorems there — while the base at the pinned revision
+  declares no axioms — both Dye statements are theorems there — while finitegeom at the pinned revision
   still declares both as axioms and the published trust fact records them as trusted inputs of the
   rigidity terminal.  Answer the audit against monorepo source after the Paper I remediation settles,
   and re-derive the axiom list from a fresh gate run rather than carrying the published one forward.
@@ -148,46 +148,46 @@ reconcile their live rows and reports through the normal lifecycle.
   literature input, or documented external certificate fact; “warning with no entry declaration”
   is not an admissible final state.
 
-### Base-library export defect and the order-eleven boundary
+### finitegeom export defect and the order-eleven boundary
 
-The order-16 cold fill failed after nearly three hours, at the gate, on a base-library module the
-gate never needed.  The package's small result aggregator imported the base umbrella
+The order-16 cold fill failed after nearly three hours, at the gate, on a finitegeom module the
+gate never needed.  The package's small result aggregator imported the finitegeom umbrella
 `RelativeConicArcs.Results`, which reaches the order-eleven non-GRS module, the order-eleven coding
 module, the order-eleven semantic family, and finally `RelativeConicArcs.Q11Residual`, which the
-base cannot compile: it consumes a parametrized-hole validity predicate and a previous-player-win
-transport lemma whose defining module was not exported into the base.  Removing that one import
-drops the gate closure from 1,390 project modules to 1,358 and its base contribution from 59
+finitegeom cannot compile: it consumes a parametrized-hole validity predicate and a previous-player-win
+transport lemma whose defining module was not exported into finitegeom.  Removing that one import
+drops the gate closure from 1,390 project modules to 1,358 and its finitegeom contribution from 59
 modules to 27, and no order-eleven semantic module remains.  The package fix is committed as
 `d780520`; the gate then passed and was confirmed trace-current after a pack, erase and restore.
 
-The monorepo half of the first consequence is done; the second, and the base re-export itself,
-remain deferred so the base is re-exported and re-pinned once rather than twice:
+The monorepo half of the first consequence is done; the second, and the finitegeom re-export itself,
+remain deferred so finitegeom is re-exported and re-pinned once rather than twice:
 
 - **The monorepo source split is landed and gate-green.**  `RelativeConicArcs/ParametrizedHoles.lean`
   now holds the game-free validity predicate under its unchanged fully qualified name,
   `RelativeConicArcs/Q11Residual.lean` keeps the conic parametrization, the icosahedral adjacency
   and both directions of the validity dictionary with no game content, and
   `RelativeConicArcs/Q11ResidualGame.lean` holds the two game terminals.  `Q11Coding` was the second
-  base module broken by the same dropped import and now takes the predicate from the new leaf.  All
+  finitegeom module broken by the same dropped import and now takes the predicate from the new leaf.  All
   nine gates reaching the residual module are green.  This preserves the accepted game residue in
   the Paper I and arcs closures recorded in `notes/2026-08-03-c860-cap-closure-remediation.md`.
   Report: `notes/2026-08-04-c864-q11-residual-game-split.md`.
-- **The base re-export and the order-eleven package re-seal are one atomic window.**  The monorepo
+- **The finitegeom re-export and the order-eleven package re-seal are one atomic window.**  The monorepo
   renamed eleven `RelativeConicArcs.PaperIOrientation*` modules and their namespaces to
-  `SupportOrientation*`; the base still carries the old names at both the pinned revision and its own
+  `SupportOrientation*`; finitegeom still carries the old names at both the pinned revision and its own
   `HEAD`, and the package's gate imports, axiom-audit names, sealed trust fact, the monorepo's pinned
   copy of that fact, and the Clebsch-rigidity trust manifest all still use them.  Exporting the
-  renamed base without re-pinning and resealing the package in the same window leaves the package
+  renamed finitegeom without re-pinning and resealing the package in the same window leaves the package
   unbuildable.  Evidence: `notes/2026-08-05-c864-q11-package-source-audit.md`.
   That window also carries the two record fixes the audit found: correct `PROVENANCE.md` to the real
   extraction revision `0ddbca65`, and seal the monorepo revision in `MANIFEST.json` as a field
   distinct from the package's own `source_commit`.
-- **The base is not yet re-exported.**  The batched re-export must add
-  `RelativeConicArcs/ParametrizedHoles.lean` to the base module set, refresh the base copies of
+- **finitegeom is not yet re-exported.**  The batched re-export must add
+  `RelativeConicArcs/ParametrizedHoles.lean` to the finitegeom module set, refresh finitegeom copies of
   `Q11Residual.lean` and `Q11Coding.lean`, and keep `Q11ResidualGame.lean`,
   `CapGameHoleLocalization.lean` and `ProjectiveCap/ProjectiveCapGame.lean` out of it.
-- **Nothing builds the base standalone before a package pins it.**  That is why a broken export
-  surfaced only inside a consumer's three-hour build.  A standalone base build belongs in the export
+- **Nothing builds finitegeom standalone before a package pins it.**  That is why a broken export
+  surfaced only inside a consumer's three-hour build.  A standalone finitegeom build belongs in the export
   tooling as a gate.
 
 Measured order-eleven payload, for the externalization pass: 148 order-eleven modules in the
@@ -205,7 +205,7 @@ into a displayed-block interface and the group-action payload, which is the righ
 and is preserved inside the package; but the interface does not stay monorepo-side, because its
 `brianchonSet` and `triplePointSet` are built from generated Brianchon tables and
 `triplePointSet_eq_brianchonSet` is proved from the exhaustive intersection ledger, and because the
-base library documents itself as excluding the order-eleven orbit/action family.  The monorepo
+finitegeom documents itself as excluding the order-eleven orbit/action family.  The monorepo
 keeps no point-orbit module and consumes the package's pinned fact; its rigidity gate no longer
 audits the four orbit statements.  Verdict and declaration lists:
 `notes/2026-08-04-c864-point-orbit-data-verdict.md`; ownership review:
@@ -232,7 +232,7 @@ commit a self-contained official source state.
 1. Finish and seal q16: resolve build errors, capture its focused axiom fact, pack the complete
    package and dependency caches, erase disposable build state, restore only from the packs, and
    require the exact gate to be trace-current without rebuilding a generated leaf.
-2. Land and validate the strong C855 projective-GRS repair.  Keep human q11 semantics in the base;
+2. Land and validate the strong C855 projective-GRS repair.  Keep human q11 semantics in finitegeom;
    move the Clebsch q11 exhaustive payload, private checker, generator, replay evidence, and exact
    theorem into `finitegeom-clebsch-q11-certificates`.
 3. Apply the same byte-verified split independently to the ProjectiveCap q11 package.  Do not merge
@@ -254,7 +254,7 @@ commit a self-contained official source state.
    `q25-banner-normalization-v1` and machine-checked by
    `lean-package-source-audit.py --declared-transformation`; the same pass found the candidate 1,786
    files behind across nine families, so order-25 externalization re-extracts rather than adopts it
-   (`notes/2026-08-05-c864-q25-banner-transformation-declaration.md`).  The base carries one
+   (`notes/2026-08-05-c864-q25-banner-transformation-declaration.md`).  finitegeom carries one
    generated module, not three: two were false positives of a banner rule that matched prose about an
    ideal generated by `a`, and the surviving `ClebschArithmeticGluingData` is determined human-scale
    semantic source that stays, declared in the new permanent `resident_family` table
@@ -266,12 +266,12 @@ commit a self-contained official source state.
    generators, two replay programs, replay checker, and replay data are now declared as pending
    payload, and the two resident tables' generators as permanently resident.  The extractions left
    build residue no source rule sees: 114 point-orbit modules in the monorepo and three order-16
-   modules in the base, whose deletion needs the base re-export window.  No mirror or backup working
+   modules in finitegeom, whose deletion needs the finitegeom re-export window.  No mirror or backup working
    tree carries non-Lean payload.  Open from that sweep: the order-25 replay table exists only as an
    untracked cache file and an uncommitted candidate copy, the candidate repository has no commits at
    all, its script set and the monorepo's disagree in both directions, the adopted packages and the
    candidate seal their non-Lean payload three different ways with nothing checking it, and four
-   dependency locks still resolve a base revision carrying extracted order-16 sources, so the
+   dependency locks still resolve a finitegeom revision carrying extracted order-16 sources, so the
    re-export window must refresh those locks too.
 7. Remove every stale shadow after byte identity and authority are established.  Never delete the
    sole current copy, foreign dirty work, or an uncommitted candidate without first preserving it
@@ -285,19 +285,19 @@ commit a self-contained official source state.
 10. Complete the Arcs/Clebsch-rigidity trust disposition above, including the Kim--Vu and
     Al-Seraji--Al-Ogali anchors, the strong NRC/GRS closure, Dye input audit, fresh local/external
     facts, regenerated trust documents, and paper/Lean reconciliation with zero untriaged warning.
-11. Enumerate every registered paper Lean companion export and standalone Lean-for-paper package.
-    The registered companion-export areas are exactly the configurations in `lean/trust/export/`:
+11. Enumerate every registered paper Lean area export and standalone Lean-for-paper package.
+    The registered export areas are exactly the configurations in `lean/trust/export/`:
     Clebsch passages, Clebsch support-cubic orientation, golden quantum statistics, and MDS--CSS
-    transversal groups.  Each must be re-exported here against the resealed base manifest, not
+    transversal groups.  Each must be re-exported here against the resealed finitegeom manifest, not
     only the areas whose certificates moved.
     For each one, run the guarded export plan, materialize two disposable candidates from the exact
-    committed source/base revisions, require byte-identical outputs and complete manifests, verify
+    committed source and finitegeom revisions, require byte-identical outputs and complete manifests, verify
     the declared terminals and axiom facts, and run the paper's documented import-only release
     gate.  Check that every paper reference and package pin resolves to the intended local semantic
     library or official certificate package and that no export reintroduces an extracted payload.
 12. Run the global paper-export audit/check commands after the individual replays, including stale
     manifest, unexpected deletion, reverse-reference, and unregistered-paper detection.  Record a
-    bounded result table naming every paper/export, source revision, base/package revision, gate,
+    bounded result table naming every paper and export, source revision, finitegeom and package revision, gate,
     and pass/fail disposition; no configured paper may be silently skipped.
 13. Re-run the package source audit for every adopted package against its authority revision and
     require zero drift, as the final evidence step before closeout.  A package and the monorepo
@@ -316,7 +316,7 @@ The Paper I theorem-complete remediation is actively rewriting `RelativeConicArc
 tree.  Until it settles, C864 takes only steps that need neither the heavyweight build window nor a
 quiet tree, and evidence that would be invalidated by its next commit is not produced.
 
-Deferred until the tree is coherent again: the Clebsch-rigidity release-chain replay, the base
+Deferred until the tree is coherent again: the Clebsch-rigidity release-chain replay, finitegeom
 re-export and re-pin, the shared generated trust views and external trust projections, and any
 further monorepo certificate deletion.
 
@@ -354,7 +354,7 @@ Runnable now, in order:
    `lean-package-source-audit.py` with the candidate's `PROVENANCE.md` citing the name, plus the
    corrected staleness measurement.  Report:
    `notes/2026-08-05-c864-q25-banner-transformation-declaration.md`.
-5. **Classification of the generated modules the base carries.**  Done; the banner rule is tightened
+5. **Classification of the generated modules finitegeom carries.**  Done; the banner rule is tightened
    in the boundary checker and the portfolio audit, the checker now reads whole files, and the
    `resident-unclassified` entry is replaced by a `resident_family` determination.  Report:
    `notes/2026-08-05-c864-base-generated-module-classification.md`.
@@ -367,16 +367,28 @@ Runnable now, in order:
    promoting the first two to defects.  Both adopted packages are complete against their authority
    and both carry unsealed payload to migrate at their next reseal.  Report:
    `notes/2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`.
-8. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
+8. **Vocabulary settled: finitegeom repo, area export.**  One authority commit renamed the exporter
+   to `lean-area-export.py` (old name kept as a symlink and old flags as aliases, since committed
+   reports record exact replay commands) and swept the lane's live documents, the export area
+   configurations whose prose renders into released trust statements, and the two MDS--CSS manuscript
+   sentences that called the Lean development a companion.  The rule is in the handoff's shared-Lean
+   contract.  Paper-side "companion" almost always meant a sibling paper or the Clebsch-rigidity
+   computational companion document, so exactly one manuscript changed.  Carried to the window: the
+   finitegeom repo's README and PROVENANCE describe themselves as a companion and have no monorepo
+   source, so they need their own deliberate commit there; the MDS--CSS paper facts and PDF are now
+   stale by one warning and come due with its release chain and mirror sync; and the area exports
+   carry the reworded trust statements.  Dated reports from 2026-08-04 and earlier keep their
+   original wording as history.
+9. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
    generated output is repaired by changing its generator and regenerating inside the window.  The
    exporter now reports candidate sources citing artifact paths the candidate does not carry
-   (`--strict-citations` to refuse), and the measurement found three such citations on the base's
+   (`--strict-citations` to refuse), and the measurement found three such citations on finitegeom's
    published `main`, inherited by its golden candidate branch, in two families: the arithmetic-gluing generator
    and, newly, a paper-supplement record cited by two PRS certificate modules, which belongs to the
-   beyond-4 PRS work.  One decision is open before the window — whether the released base carries the
-   two 85 KB verification directories its generated tables cite, which would make the arithmetic-
-   gluing citation correct with no regeneration at all and leave only a `lean/` prefix to drop in the
-   scheme-Fourier generator.  Report:
+   beyond-4 PRS work.  The decision that finitegeom carries the two 85 KB verification directories its
+   generated tables cite is taken: the exporter now carries whatever a planned module cites under the
+   source `lean/` root, which makes the arithmetic-gluing citation correct with no regeneration at
+   all and leaves only a `lean/` prefix to drop in the scheme-Fourier generator.  Report:
    `notes/2026-08-05-c864-dangling-artifact-citations.md`.
 
 ## Cache and build contract
@@ -385,7 +397,7 @@ Runnable now, in order:
   or hand-composed taskset command is allowed.
 - One heavyweight build owns the host at a time.  Use measured profiles and the shared build-owner
   lock across the monorepo, official libraries, dependency checkouts, and restore rehearsals.
-- Every official package records an immutable base revision, resolved `lake-manifest.json`, source
+- Every official package records an immutable finitegeom revision, resolved `lake-manifest.json`, source
   commit, manifest hash, focused import-only trust gate, and exact public terminals.
 - Non-Lean payload is sealed one way: a single `support_files` list in `MANIFEST.json`, holding every
   generator, replay program, replay input, canonical output, and gate evidence file with its path,
@@ -409,7 +421,7 @@ Runnable now, in order:
 2. Every official source and evidence copy was verified against the newest pre-deletion source;
    every intentional difference is listed and justified.
 3. No certificate-owned source, generator, replay output, or private checker remains in the
-   monorepo, base library, paper mirrors, unrelated libraries, backup working trees, or build trees.
+   monorepo, finitegeom, paper mirrors, unrelated libraries, backup working trees, or build trees.
 4. Each official package has a clean working tree, committed manifest and dependency lock, focused
    green gate, exact axiom fact, and green deterministic replay/check command.
 5. Each package has a disk-backed content-addressed cache whose guarded restore is demonstrated from

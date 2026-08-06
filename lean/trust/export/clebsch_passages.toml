@@ -1,4 +1,4 @@
-# Companion-export configuration for the structural Clebsch passages boundary.
+# Area-export configuration for the structural Clebsch passages boundary.
 #
 # The exporter derives the module closure, terminal list, and observed axioms
 # from the trust registry and the generated fact of the declared gate.  Only
@@ -49,7 +49,7 @@ correspondence: the branch square, the chart conductor, the golden structural
 package, the Petersen pullback scalar, the normalized marked chart value, and
 the two structural factors the marked value determines.
 
-The companion does not assert the geometric correspondence between Hitchin's
+This formal artifact does not assert the geometric correspondence between Hitchin's
 spaces and these algebraic models, and it does not claim the integral
 Mukai--Umemura comparison.  Those inputs are established in the accompanying
 paper by ordinary mathematical proof or cited literature, and no manuscript

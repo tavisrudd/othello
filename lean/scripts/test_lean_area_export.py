@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for the guarded companion exporter."""
+"""Tests for the guarded area exporter."""
 
 from __future__ import annotations
 
@@ -12,11 +12,11 @@ import unittest
 from pathlib import Path
 
 
-SCRIPT = Path(__file__).with_name("lean-companion-export.py")
+SCRIPT = Path(__file__).with_name("lean-area-export.py")
 
 
 def load_exporter():
-    spec = importlib.util.spec_from_file_location("lean_companion_export_tested", SCRIPT)
+    spec = importlib.util.spec_from_file_location("lean_area_export_tested", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -38,7 +38,7 @@ area = "triangle_identities"
 gate = "Example.Gates.TriangleIdentities"
 trust_statement = "trust/TRIANGLE_IDENTITIES.md"
 axiom_audit = "trust/TriangleIdentitiesAxiomAudit.lean"
-statement_title = "Triangle identities: symbolic companion"
+statement_title = "Triangle identities: symbolic area"
 overview = "This boundary records symbolic triangle identities."
 correspondence = "The closure proves two ring identities and nothing else."
 boundary = "Both terminals are symbolic kernel proofs over a commutative ring."
@@ -136,11 +136,11 @@ def make_base_repo(root: Path) -> None:
     git(root, "commit", "--quiet", "-m", "base")
 
 
-class CompanionExportTests(unittest.TestCase):
+class AreaExportTests(unittest.TestCase):
     def setUp(self) -> None:
         # The exporter refuses memory-backed destinations, so the fixtures need
         # a disk-backed scratch root rather than the default temporary space.
-        scratch = Path.home() / ".cache" / "othello-lean-companion-export" / "tests"
+        scratch = Path.home() / ".cache" / "othello-lean-area-export" / "tests"
         scratch.mkdir(parents=True, exist_ok=True)
         if EXPORTER.filesystem_type(scratch) in EXPORTER.MEMORY_BACKED_FILESYSTEMS:
             self.skipTest("no disk-backed scratch directory available")
@@ -297,7 +297,7 @@ class CompanionExportTests(unittest.TestCase):
         if EXPORTER.filesystem_type(Path("/dev/shm")) not in EXPORTER.MEMORY_BACKED_FILESYSTEMS:
             self.skipTest("no memory-backed filesystem available")
         with self.assertRaises(EXPORTER.Refused):
-            EXPORTER.guard_paths(self.base, Path("/dev/shm/companion-candidate"))
+            EXPORTER.guard_paths(self.base, Path("/dev/shm/area-candidate"))
 
     def test_configuration_prose_with_a_private_reference_is_refused(self) -> None:
         self.config.write_text(CONFIG.replace(

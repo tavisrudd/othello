@@ -30,7 +30,7 @@ already drawn in the source.
 
 ## Dispositions
 
-**Stays in the monorepo and the base.**  Interface-shaped, no raised elaboration limits, and either
+**Stays in the monorepo and finitegeom.**  Interface-shaped, no raised elaboration limits, and either
 consumed from outside the family or audited by a gate other than the rigidity gate.
 
 | module | why |
@@ -76,7 +76,7 @@ needs the owning proof lane's agreement before anything moves.
 ## Finding: the pinned trust fact overstates the Dye trust boundary
 
 `RelativeConicArcs.Q11DyeAxioms` in the monorepo now declares no axioms at all.  Both Dye statements
-— the ten-point Brianchon bound and the equality classification — are theorems there.  The base
+— the ten-point Brianchon bound and the equality classification — are theorems there.  finitegeom
 library at the pinned revision still declares both as axioms, and the pinned external trust fact
 records `dye1991_brianchon_bound` and `dye1991_equality_classification` as trusted inputs of the
 order-eleven rigidity terminal.
@@ -100,5 +100,5 @@ concurrence spine — which changes both the trust fact this package publishes a
 package consumes.  Cutting first would guarantee an immediate reseal.
 
 The order once it is clear: re-run the package source audit over the seven duplicated modules; agree
-the eight coding terminals with the owning proof lane; then the base re-export, the package re-pin
+the eight coding terminals with the owning proof lane; then the finitegeom re-export, the package re-pin
 and reseal, and the monorepo deletion in the one window the card already requires.

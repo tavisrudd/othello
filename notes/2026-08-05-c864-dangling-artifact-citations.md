@@ -5,7 +5,7 @@
 **Verdict: the two banner repaths cannot be prepared as banner edits.  Hand-editing generated output
 to repair its prose is forbidden; the repair is a generator change applied with its regeneration and
 gate inside the finitegeom re-export window.  What is prepared instead is the check that finds the defect
-class mechanically, now part of the companion exporter, and the measurement it produced: the
+class mechanically, now part of the area exporter, and the measurement it produced: the
 finitegeom repo carries three modules citing artifact paths it does not carry, in two families rather
 than one, and those three are on its published `main`.  The one decision this needed — whether the
 finitegeom repo carries the two verification directories its generated tables cite — is taken: it
@@ -14,7 +14,7 @@ does, and the exporter now carries whatever a planned module cites under the sou
 ## Replay
 
 ```sh
-python3 -m unittest test_lean_companion_export   # in lean/scripts
+python3 -m unittest test_lean_area_export   # in lean/scripts
 ```
 
 The measurement below calls `dangling_citations` over each root's tracked files.  No Lean, no Lake,
@@ -33,7 +33,7 @@ below.
 
 ## The check
 
-`lean-companion-export.py` already refuses a candidate whose content carries private references —
+`lean-area-export.py` already refuses a candidate whose content carries private references —
 local paths, task identifiers, workflow vocabulary.  It had no rule for the opposite failure: a
 reference that is perfectly public, correct in the repository the module was written in, and
 meaningless in the release, because the release is a module subset and the named program was never
@@ -101,7 +101,7 @@ semantic source.
 
 Carrying the apparatus is the better artifact and the smaller change, and it is what the referee
 rules ask for: the reader must be able to understand, reproduce, or check the generated files with
-the artifact in hand.  It does change what the public base contains — non-Lean verification
+the artifact in hand.  It does change what the public finitegeom repo contains — non-Lean verification
 directories, which the finitegeom repo has never carried — so it was taken deliberately rather than
 inside the window.
 
