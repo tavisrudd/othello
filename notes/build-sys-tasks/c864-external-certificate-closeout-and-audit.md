@@ -367,8 +367,17 @@ Runnable now, in order:
    promoting the first two to defects.  Both adopted packages are complete against their authority
    and both carry unsealed payload to migrate at their next reseal.  Report:
    `notes/2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`.
-8. **Remaining without a build window:** the two banner repaths that the base re-export must carry
-   (`ClebschArithmeticGluingData`, `ClebschSchemeFourierData` naming paths their exports lack).
+8. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
+   generated output is repaired by changing its generator and regenerating inside the window.  The
+   exporter now reports candidate sources citing artifact paths the candidate does not carry
+   (`--strict-citations` to refuse), and the measurement found three such citations in the base and
+   the same three in the published golden export, in two families: the arithmetic-gluing generator
+   and, newly, a paper-supplement record cited by two PRS certificate modules, which belongs to the
+   beyond-4 PRS work.  One decision is open before the window — whether the released base carries the
+   two 85 KB verification directories its generated tables cite, which would make the arithmetic-
+   gluing citation correct with no regeneration at all and leave only a `lean/` prefix to drop in the
+   scheme-Fourier generator.  Report:
+   `notes/2026-08-05-c864-dangling-artifact-citations.md`.
 
 ## Cache and build contract
 

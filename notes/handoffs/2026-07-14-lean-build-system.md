@@ -105,7 +105,9 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
   LaTeX, or BibTeX.
 - `lean-companion-export.py`: `plan`/`run` for companion export onto the canonical `finitegeom`
-  base. Materializes twice, requires byte-identical repeats, never commits or pushes.
+  base. Materializes twice, requires byte-identical repeats, never commits or pushes. It also
+  reports candidate sources citing an artifact path the candidate does not carry, warning by default
+  and refusing under `--strict-citations`.
 - `lean-blast-radius.py`: read-only import-DAG analysis. Blast radius exact; cost columns are
   unvalidated size proxies.
 - Resource profiles: `lean-build-profiles.json`.
@@ -147,7 +149,10 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    the source audit now runs in reverse
    (`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`): both adopted packages hold
    every authority file in the families they own, and the order-eleven package's reseal window picks
-   up its two unsealed gate-evidence files.  Then, once the
+   up its two unsealed gate-evidence files.  The exporter now reports sources citing artifact paths
+   the candidate lacks; the base and the published golden export each carry three
+   (`../2026-08-05-c864-dangling-artifact-citations.md`), and one open decision — whether the base
+   ships the verification directories its generated tables cite — gates the last window-free item.  Then, once the
    tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
@@ -230,7 +235,8 @@ portfolio audit [`../2026-08-05-c864-certificate-portfolio-audit.md`](../2026-08
 order-25 banner transformation [`../2026-08-05-c864-q25-banner-transformation-declaration.md`](../2026-08-05-c864-q25-banner-transformation-declaration.md);
 base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md);
 non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md);
-payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md).
+payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md);
+dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
