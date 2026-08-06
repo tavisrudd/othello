@@ -51,9 +51,9 @@
         "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
       },
       {
-        "bytes": 7881,
+        "bytes": 8724,
         "path": "release/verify_release.py",
-        "sha256": "b103e07609d1622f31403d2cbec1d05b17f136925eef05f8c64138e87bcf66e2"
+        "sha256": "9188f8fa51317eea3babed82c650d5fff1249dac566ef52c4b20b8b60971a82e"
       },
       {
         "bytes": 8358,
@@ -96,7 +96,7 @@
         "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
       }
     ],
-    "tree_sha256": "4435e4e98670c87dc724c8d27eecd3b92f191194eeabd8e45e715ab1a6f2e81e"
+    "tree_sha256": "1f1ea11f2d7dab639187c4cb70158c4aa4ed5b9a06a196dbb7184d3ed3b83c25"
   },
   "formal_companion": {
     "artifacts": [

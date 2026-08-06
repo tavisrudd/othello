@@ -54,6 +54,18 @@ def paper_paths() -> list[str]:
     return sorted(paths)
 
 
+def formal_tree_available() -> bool:
+    """Whether this checkout carries the Lean tree the formal profile reads.
+
+    A standalone copy of the paper carries the manuscript and its public
+    artifacts, not the Lean sources or the extracted trust facts that name
+    them.  Distinguishing that from a Lean tree with facts missing keeps the
+    development gate strict while letting a standalone copy state exactly what
+    it cannot check.
+    """
+    return (REPO_ROOT / "lean" / "trust" / "facts").is_dir()
+
+
 def formal_paths() -> list[str]:
     """Return the verification graph of this paper's declared formal roots.
 
@@ -143,6 +155,15 @@ def verify_manifest(require_formal: bool = False) -> dict[str, object]:
         )
     print(f"verified {len(public)} public artifacts")
     print(f"public tree {actual_public['tree_sha256']}")
+
+    if not formal_tree_available():
+        expected_formal = expected["formal_companion"]
+        print(
+            f"formal companion absent from this checkout: "
+            f"{len(expected_formal['artifacts'])} artifacts and tree "
+            f"{expected_formal['tree_sha256']} not checked"
+        )
+        return expected
 
     formal_files = formal_paths()
     present = [(REPO_ROOT / path).exists() for path in formal_files]
