@@ -322,7 +322,7 @@ class TrustSpineTest(unittest.TestCase):
         self.assertIn("Alpha.Sneaky.sneaky", subjects)
 
     def test_axiom_name_uses_the_namespace_not_the_module_path(self):
-        """The real tree has `Q11DyeAxioms.lean` declaring into `RelativeConicArcs.ClebschDye`."""
+        """The real tree has `Q11BrianchonClassification.lean` declaring into `RelativeConicArcs.ClebschDye`."""
         imports, axioms = ts._parse_header(
             "import X\n\nnamespace Outer.Inner\naxiom a : True\nend Outer.Inner\n"
         )

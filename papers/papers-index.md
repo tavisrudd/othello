@@ -326,8 +326,9 @@ paper's remaining adequacy/provenance, scholarly review, immutable-release, or b
   `ReflectionArrangements.lean` certifies the finite `A₃/H₃` coordinate bridges, intersection
   spectra, characteristic boundary, and pointwise transport to the Clebsch secant index;
   `SixArcDefectBridge.lean` proves the projective chord-defect identity; and
-  `Q11DyeAxioms.lean`/`Q11DyeConsequences.lean` isolate exactly Dye's ten-point bound and equality
-  classification as the formal development's axiomatized inputs. `ClebschChordDefect.lean` and
+  `Q11BrianchonClassification.lean`/`Q11DyeConsequences.lean` prove the ten-point bound and the
+  equality classification at order eleven, both stated by Dye, and derive the conic-containment
+  rigidity implication from them. `ClebschChordDefect.lean` and
   `Q9Sylvester.lean` support field uniqueness, while `SmallKChordMoments.lean` and
   `SmallKGeometricBridge.lean` certify the universal small-arc moment consequences. All eleven are
   available kernel-checked roots for Paper I. C320 must admit and name only

@@ -57,7 +57,7 @@ HEADER_SKIP_RE = re.compile(r"^\s*(--.*)?$")
 # the case where an axiom exists in source but no facts artifact accounts for it, which is exactly
 # the state a stale or missing extraction leaves behind.
 AXIOM_SOURCE_RE = re.compile(r"^(?:private\s+|protected\s+)?axiom\s+([A-Za-z0-9_'À-￿.]+)")
-# A namespace is not the module path: `RelativeConicArcs/Q11DyeAxioms.lean` declares into
+# A namespace is not the module path: `RelativeConicArcs/Q11BrianchonClassification.lean` declares into
 # `RelativeConicArcs.ClebschDye`.  Deriving a qualified name from the filename would invent a
 # declaration that does not exist, so the scanner follows the namespace stack instead.
 NAMESPACE_RE = re.compile(r"^namespace\s+([A-Za-z0-9_'.]+)")

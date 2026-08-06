@@ -4,7 +4,7 @@ import RelativeConicArcs.Q11GoldenHexagonWitness
 import RelativeConicArcs.SixArcConcurrenceBound
 
 /-!
-# The six-arc concurrence boundary used by Clebsch rigidity
+# The order-eleven Brianchon bound and its equality classification
 
 Two statements about six-arcs of `PG(2,11)` are needed by the Clebsch rigidity development, both
 phrased in the project's incidence model: a bound of ten on the off-arc points lying on three

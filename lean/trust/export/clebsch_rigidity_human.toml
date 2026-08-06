@@ -40,14 +40,14 @@ stratification, the rigidity spine and the bridge carrying it to the code, and
 the chord-defect estimate the rigidity argument consumes.
 
 Two statements about six-arcs attaining the ten-point triple-concurrence bound
-are recorded in `RelativeConicArcs.Q11DyeAxioms`, specialized to order eleven.
+are recorded in `RelativeConicArcs.Q11BrianchonClassification`, specialized to
+order eleven.
 They appear as the ten-point count of Section 2.2, page 275 and Theorem 1(ii),
 page 275 of R. H. Dye, *Hexagons, conics, `A₅` and `PSL₂(K)`*, Journal of the
 London Mathematical Society (2) 44 (1991), 270--286,
 doi:10.1112/jlms/s2-44.2.270, which is cited as their antecedent.  Both are
-theorems of this library rather than assumptions: they are proved from the
-general-field six-arc concurrence development at their own quantifier range and
-specialized here.
+theorems of this library: they are proved from the general-field six-arc
+concurrence development at their own quantifier range and specialized here.
 
 The order-eleven orbit enumeration itself is not proved here.  The statements
 that quantify over the enumerated orbits are supplied by the external

@@ -39,9 +39,9 @@ proofs collected here are the ones checked in this repository and import no clai
 The development stands on its own.  It shares no declaration with the orientation spine
 `RelativeConicArcs.SupportOrientationSpine`, which treats the antipodal cover, determinant pencil,
 and singular locus of the support cubic; neither uses the other, and the two are distributed as
-separate companion boundaries.  The order-eleven module `RelativeConicArcs.Q11DyeAxioms` records
-the two endpoints below, specialized to order eleven, and derives them from the terminals collected
-here.
+separate trust boundaries.  The order-eleven module
+`RelativeConicArcs.Q11BrianchonClassification` records the two endpoints below, specialized to
+order eleven, and derives them from the terminals collected here.
 
 Every terminal below is a kernel proof.  The general statements quantify over an arbitrary field
 with two invertible, or over an arbitrary finite point type with the incidence hypotheses named in

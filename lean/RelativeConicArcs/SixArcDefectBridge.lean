@@ -1,6 +1,6 @@
 import RelativeConicArcs.ClebschChordDefect
 import RelativeConicArcs.Defect
-import RelativeConicArcs.Q11DyeAxioms
+import RelativeConicArcs.Q11BrianchonClassification
 
 /-!
 # The geometric six-arc defect bridge in `PG(2,11)`
@@ -16,8 +16,8 @@ For an off-arc point of a six-arc the secant index is at most three.  On the fou
 
 turns the two classical secant moments into the exact equality `u + c = 22`.  Here `u` is the
 ordinary uncovered cardinality and `c` is the actual triple-concurrence (Brianchon-point)
-cardinality.  The proof uses no clause of Dye's theorem; `Q11DyeAxioms` is imported only for the
-definition of `brianchonPoints`.
+cardinality.  The proof uses neither the ten-point bound nor its equality classification;
+`Q11BrianchonClassification` is imported only for the definition of `brianchonPoints`.
 -/
 
 namespace RelativeConicArcs.ClebschDye

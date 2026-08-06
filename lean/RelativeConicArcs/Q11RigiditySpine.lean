@@ -4,14 +4,14 @@ import RelativeConicArcs.SixArcDegenerateConicExclusion
 # Causal rigidity spine for six-arcs over the field of order eleven
 
 This module composes the geometric upper bound for a containing plane
-quadratic with the exact six-arc defect identity and Dye's two published
-inputs.  The order is essential: the containing locus first gives at most
-twelve uncovered points; Dye's Brianchon bound gives at least twelve; equality
-then invokes Dye's classification of the Clebsch hexagon.
+quadratic with the exact six-arc defect identity and the two order-eleven
+Brianchon statements.  The order is essential: the containing locus first gives
+at most twelve uncovered points; the Brianchon bound gives at least twelve;
+equality then invokes the classification of the Clebsch hexagon.
 
-The only nonlogical axioms of the terminal theorem are the Brianchon bound and
-equality classification stated in `Q11DyeAxioms` with their precise literature
-pinpoints.
+The bound and the equality classification are proved in
+`Q11BrianchonClassification`, so the terminal theorem below depends on no
+nonlogical axiom.  Dye 1991 states both and is cited there as their antecedent.
 -/
 
 namespace RelativeConicArcs.ClebschDye

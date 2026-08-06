@@ -61,9 +61,10 @@ as the ten-point count of Section 2.2, page 275 and Theorem 1(ii), page 275 of
 R. H. Dye, *Hexagons, conics, `A₅` and `PSL₂(K)`*, Journal of the London
 Mathematical Society (2) 44 (1991), 270--286, doi:10.1112/jlms/s2-44.2.270.
 That paper is cited as the antecedent for both.  The module
-`RelativeConicArcs.Q11DyeAxioms` records the same two statements, specialized to
-order eleven, as explicit axioms; the terminals exported here prove them, at
-their own quantifier range, from the definitions in this library.
+`RelativeConicArcs.Q11BrianchonClassification` records the same two statements,
+specialized to order eleven, and derives each from a terminal exported here; the
+terminals prove them at their own quantifier range from the definitions in this
+library.
 
 This boundary does not prove the deep-hole syndrome classification, the
 code--arc dictionary, the decoder stratification, or the small-arc exclusions,

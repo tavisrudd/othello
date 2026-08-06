@@ -1,13 +1,13 @@
 import RelativeConicArcs.SixArcDefectBridge
 
 /-!
-# Precisely axiomatized Dye consequences for the Clebsch hexagon
+# Consequences of the Brianchon bound for the Clebsch hexagon
 
-The geometric identity `|U(A)| + c(A) = 22` is proved in `SixArcDefectBridge` without Dye.
-This file begins at the explicit two-axiom boundary in `Q11DyeAxioms`: Dye's bound gives the
-universal lower bound `|U(A)| ≥ 12`, and equality inside a nonsingular conic invokes only Dye's
-equality classification.  The `#print axioms` output therefore records the exact classical input
-used by each result.
+The geometric identity `|U(A)| + c(A) = 22` is proved in `SixArcDefectBridge` from the secant
+moments alone.  This file combines it with the two results of `Q11BrianchonClassification`: the
+ten-point bound gives the universal lower bound `|U(A)| ≥ 12`, and equality inside a nonsingular
+conic invokes the classification of the arcs attaining it.  Both of those are theorems, so every
+result below is proved outright and its `#print axioms` output records no nonlogical assumption.
 -/
 
 namespace RelativeConicArcs.ClebschDye
@@ -15,7 +15,7 @@ namespace RelativeConicArcs.ClebschDye
 noncomputable local instance : Fintype Point11 := Fintype.ofFinite _
 noncomputable local instance : DecidableEq Point11 := Classical.decEq _
 
-/-- Dye's Brianchon bound and the proved defect identity force at least twelve uncovered points. -/
+/-- The Brianchon bound and the defect identity together force at least twelve uncovered points. -/
 theorem sixArc_twelve_le_uncovered_card
     {A : Finset Point11}
     (hA : Arc (L := Point11) A)
@@ -42,8 +42,8 @@ theorem sixArc_cards_of_uncovered_subset_conic
   norm_num [K11] at hupper
   omega
 
-/-- **Conditional Clebsch rigidity at the exact Dye seam.**  A six-arc whose uncovered locus is
-contained in a nonsingular conic is projectively equivalent to the certified Clebsch witness. -/
+/-- **Clebsch rigidity from a conic-contained uncovered locus.**  A six-arc whose uncovered locus
+is contained in a nonsingular conic is projectively equivalent to the certified Clebsch witness. -/
 theorem isClebschHexagon_of_uncovered_subset_conic
     {A : Finset Point11}
     (hA : Arc (L := Point11) A)
