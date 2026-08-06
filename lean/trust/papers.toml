@@ -187,12 +187,6 @@ main = "clebsch_factorization.tex"
 lane = "clebsch"
 
 [[paper]]
-id = "clebsch_hexagon_code"
-dir = "papers/clebsch-hexagon-code"
-main = "clebsch_hexagon_code.tex"
-lane = "clebsch"
-
-[[paper]]
 id = "clebsch_passages"
 dir = "papers/clebsch-passages"
 main = "clebsch_passages.tex"

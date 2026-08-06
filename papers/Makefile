@@ -3,7 +3,6 @@ LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 
 SOURCES := \
 	arcs_complete_outside_conic/arcs_complete_outside_conic.tex \
-	clebsch-hexagon-code/clebsch_hexagon_code.tex \
 	clebsch-rigidity/clebsch_rigidity.tex \
 	clebsch-rigidity/clebsch_rigidity_computational_companion.tex \
 	clebsch-factorization/clebsch_factorization.tex \
@@ -29,8 +28,6 @@ check:
 	$(MAKE) warnings
 
 arcs: arcs_complete_outside_conic/arcs_complete_outside_conic.pdf
-
-clebsch: clebsch-hexagon-code/clebsch_hexagon_code.pdf
 
 clebsch-rigidity: clebsch-rigidity/clebsch_rigidity.pdf
 

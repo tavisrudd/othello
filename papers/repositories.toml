@@ -186,12 +186,6 @@ paper_ids = ["clebsch_factorization"]
 disposition = "active"
 
 [[repository]]
-name = "clebsch-hexagon-code"
-source = "papers/clebsch-hexagon-code"
-paper_ids = ["clebsch_hexagon_code"]
-disposition = "archive"
-
-[[repository]]
 name = "clebsch-passages"
 include_release_pdfs = true
 source = "papers/clebsch-passages"

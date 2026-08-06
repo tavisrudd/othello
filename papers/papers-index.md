@@ -114,11 +114,6 @@ F13*)
 - *Boundary:* Paper IV does not own the through-eight or all-`k` conic-filling classification.
   It cites Paper I for motivation and becomes the canonical home of the full q13 code proof.
 
-**Preserved fallback · `clebsch-hexagon-code`** — *Deep-hole rigidity and factorization memory in
-the Clebsch hexagon code*, the 37-page integrated mega-paper at `5a82e80d`, with its matched 58-row manifest and deterministic
-18-check release surface. It remains immutable as a fallback and is not the
-active `clebsch` release target.
-
 **5 · `complete-repair-ports`** — *Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure*
 - *Status:* six-part private manuscript assembled and rebuilt, with synchronized proof and novelty
@@ -264,10 +259,6 @@ repositories: an evidence-based essay and practical how-to
   reconstruction, support bipartition, field uniqueness, and small-arc
   classification. Its printed nineteen-row trust map is authoritative;
   C320 must still freeze the exact gate/checker/replay surface.
-- **Preserved integrated fallback:** `clebsch-hexagon-code` — the 37-page
-  mega-paper with its matched 58-row/18-check evidence surface. Its
-  factorization and passage material is a source for C575's dispositions,
-  not an active release or a trust shortcut for any split paper.
 - **Compilable Clebsch spines:** `clebsch-factorization` for gated Paper II
   and `clebsch-passages` for the still-conditional Paper III.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
@@ -347,8 +338,7 @@ Key computational results and proven lemmas/theorems, mapped to their paper and 
 `equivariant-robust-completion`; `completion` is library-only; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
 `oeis-submissions/*`; `complete-ports` = `complete-repair-ports`; `clebsch` =
-active program rooted at `clebsch-rigidity`; `clebsch-fallback` =
-`clebsch-hexagon-code`.
+active program rooted at `clebsch-rigidity`.
 
 **Proof-location key:** `lean <file>:<line> <ident>` = formalized, `sorry`-clean (paths under
 `lean/`); `paper §N` = proven in that manuscript; `note <file>` = proven in a research note

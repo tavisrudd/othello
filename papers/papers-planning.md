@@ -72,8 +72,9 @@ rigidity** — `arcs_complete_outside_conic`
   none of these tasks.
 
 **4 · Reconstructing the Clebsch code from its deep-hole syndrome locus** — `clebsch-rigidity`
-(the integrated `clebsch-hexagon-code`, *Deep-hole rigidity and factorization memory in the
-Clebsch hexagon code*, is retained only as a fallback)
+(the integrated mega-paper it was split from, *Deep-hole rigidity and factorization memory in the
+Clebsch hexagon code*, is not being published and is retained at
+`archive/papers/clebsch-hexagon-code`)
 - *What:* a symmetry-free rigidity TFAE and low-degree characterization for the `[6,3,4]₁₁`
   code, plus quantitative gaps, decoder/Brianchon reconstruction, intrinsic support chirality,
   uniqueness of `q=11`, the all-field Clebsch formula, the `4≤k≤7` boundary, and the audited

@@ -24,7 +24,7 @@ NONZERO = tuple(range(1, Q))
 IDENTITY_PERM = tuple(range(6))
 IDENTITY_MATRIX = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 
-# The columns of H in the order displayed in clebsch_hexagon_code.tex.
+# The columns of H in the order displayed in the parity-check matrix of clebsch_rigidity.tex.
 COLUMNS = (
     (1, 10, 0),
     (1, 9, 1),
