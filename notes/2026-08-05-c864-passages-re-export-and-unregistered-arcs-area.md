@@ -163,19 +163,64 @@ The order-eleven certificate package is unaffected in the meantime: its gate clo
 reaches any order-eleven semantic module, following the umbrella-import removal in package commit
 `d780520`, so it builds against a finitegeom revision carrying the broken copy.
 
+## The order-eleven package cannot re-pin forward until the arcs area is repaired
+
+With finitegeom `bb31411` published, the package re-pin was attempted: the revision was updated in
+`lakefile.toml`, `lake-manifest.json` (`rev` and `inputRev`) and the README pin, and the eleven
+`RelativeConicArcs.PaperIOrientation*` references in
+`RelativeConicArcs/Gates/ClebschRigidityTrust.lean` — one import and the axiom-audit names — were
+renamed to `SupportOrientation*`, all of which exist at the new revision.
+
+The gate build then failed inside the dependency, not in package sources:
+
+```
+RelativeConicArcs/Q11Residual.lean:302:4: Unknown identifier `ProjectiveBridge.ParametrizedHoleValid`
+RelativeConicArcs/Q11Residual.lean:326:17: Unknown identifier `ProjectiveBridge.isP_parametrizedHoles_iff`
+RelativeConicArcs/Q11Residual.lean:322:31: unsolved goals
+```
+
+This is the predicted consequence of the unregistered arcs area, now demonstrated rather than
+inferred: the two unknown identifiers are exactly what `RelativeConicArcs/ParametrizedHoles.lean`
+defines, and that module has never been exported to finitegeom.  The expectation that the package's
+gate closure avoids the order-eleven semantic modules after the umbrella-import removal in `d780520`
+does not hold once the package pins a finitegeom revision whose own sources cannot compile.
+
+The package therefore stays at its old pin until `arcs_complete_outside_conic_human` is registered
+and re-exported.  The re-pin edits are left uncommitted in the package working tree
+(`lakefile.toml`, `lake-manifest.json`, `README.md`, `RelativeConicArcs/Gates/ClebschRigidityTrust.lean`)
+so they can be reused once the dependency is repaired.
+
+## Upstream finitegeom does not yet match the monorepo on Dye
+
+Upstream `main` resolves to `bb31411b9a74d93f74d89bc9fe06f68e343fc339`, confirmed by
+`git ls-remote https://github.com/tavisrudd/finitegeom main`, which is the revision adopted in this
+window.  At that revision `RelativeConicArcs/Q11DyeAxioms.lean` declares
+
+```
+47:axiom dye1991_brianchon_bound
+55:axiom dye1991_equality_classification
+```
+
+while the monorepo proves both as `theorem` declarations.  The two trees do not agree, and no
+registered export can make them agree, because those declarations belong to `clebsch_rigidity_human`.
+Any axiom fact sealed from a package pinning this revision would record both Dye statements as
+trusted inputs, which is no longer true of the mathematics.
+
 ## State at the end of this window
 
 - Monorepo `c822cef0` carries the re-extracted passages fact.
-- finitegeom `bb31411` carries the adopted passages delta, gate-green, and is unpushed.
-- The order-eleven package still pins `85dfde9e` and is unchanged.
+- finitegeom `bb31411` carries the adopted passages delta, gate-green, and is published on `main`.
+- The order-eleven package still pins `85dfde9e` in its committed state; its attempted forward
+  re-pin is uncommitted and blocked on the arcs area.
 - Four of five registered areas are current on finitegeom; golden quantum statistics is deliberately
   untouched.
 
 ## Open
 
-- Publish finitegeom `bb31411`, then re-pin, rebuild, re-audit and re-seal the order-eleven package
-  forward onto it, including the `SupportOrientation*` renames in its gate imports and axiom-audit
-  names, the monorepo's pinned copy of its fact, and the Clebsch-rigidity trust manifest.
+- Repair `arcs_complete_outside_conic_human` first; the order-eleven package's forward re-pin fails
+  without it, as demonstrated above.  Only then rebuild, re-audit and re-seal the package, and update
+  the monorepo's pinned copy of its fact and the Clebsch-rigidity trust manifest.  The
+  `SupportOrientation*` renames the re-pin needs are already prepared in the package working tree.
 - Decide how the seven unregistered areas become registered, replayable exports.  This is the
   precondition for acceptance items 11 and 12, which cannot be satisfied while most of the published
   library has no configuration to replay.  It spans several lanes and needs its own scope decision
