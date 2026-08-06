@@ -198,6 +198,12 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    shared-library boundaries, paper subdirectories, import firewalls, extraction order, and
    clean-replay acceptance gate described in `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`;
    the design does not authorize source moves or repository splits by itself.
+   The AME--LU and MDS--CSS entries of that plan and of its module-name mapping are audited in
+   [`../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md`](../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md)
+   and carry open corrections: sixteen AME--LU modules assigned to no group, the trust-declared
+   two-uniform rigidity gate missing entirely, the MDS--CSS dependency on nine AME--LU gates
+   undeclared, and `Shared.AMELU` chosen by transitive reachability rather than declaration-level
+   review.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.

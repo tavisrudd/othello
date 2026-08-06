@@ -1,6 +1,8 @@
 # C879 — finitegeom paper-boundary extraction plan and red-team
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** planned
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** planned; the AME--LU and MDS--CSS
+entries of this plan and of `2026-08-06-c879-module-name-mapping.json` carry open corrections from
+`2026-08-06-c879-ame-lu-mds-css-mapping-audit.md`
 
 ## Objective
 
