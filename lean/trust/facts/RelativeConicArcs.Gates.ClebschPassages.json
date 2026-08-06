@@ -1,5 +1,7 @@
 {
   "closure": [
+    "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschInvariantCubic",
@@ -20,9 +22,19 @@
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.Aligned": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.DistinctTriple": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.FourSetParity": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.outer": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.rec": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.recOn": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2081": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2082": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2081\u2082": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedCut": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn": "RelativeConicArcs.AlignedTwoGraph",
@@ -42,50 +54,90 @@
     "RelativeConicArcs.AlignedTwoGraph.PairOutcome": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.casesOn": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rec": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.recOn": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rotate": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2083": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_2": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_3": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_4": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut12": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut13": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut14": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily": "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.complement": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.complementBit_unique": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.cutBit": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_one": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_two": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_zero": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_three": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.cutOfBits": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.edgeTriangle": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.equalBit": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.outsidePair": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.outsidePair.match_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.pairAligned": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_2": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_3": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_4": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_5": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_6": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.pentagonColouring": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily": "RelativeConicArcs.AlignedQueryFamily",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1": "RelativeConicArcs.AlignedQueryFamily",
+    "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit_apply": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver": "RelativeConicArcs.ClebschGoldenConference",
@@ -349,9 +401,19 @@
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.Aligned",
+    "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
     "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
     "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
     "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.outer",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.rec",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.recOn",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2081",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2082",
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2081\u2082",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn",
@@ -371,50 +433,90 @@
     "RelativeConicArcs.AlignedTwoGraph.PairOutcome",
     "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
     "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.casesOn",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rec",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.recOn",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rotate",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2083",
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083",
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
     "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
     "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff",
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut",
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_2",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_3",
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_4",
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut12",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut14",
     "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement",
+    "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.complement",
     "RelativeConicArcs.AlignedTwoGraph.complementBit_unique",
     "RelativeConicArcs.AlignedTwoGraph.cutBit",
     "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_one",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_two",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_zero",
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_three",
+    "RelativeConicArcs.AlignedTwoGraph.cutOfBits",
     "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum",
     "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
     "RelativeConicArcs.AlignedTwoGraph.edgeTriangle",
     "RelativeConicArcs.AlignedTwoGraph.equalBit",
     "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
     "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature",
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
+    "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective",
     "RelativeConicArcs.AlignedTwoGraph.outsidePair",
     "RelativeConicArcs.AlignedTwoGraph.outsidePair.match_1",
     "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_2",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_3",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_4",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_5",
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_6",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1",
     "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification",
     "RelativeConicArcs.AlignedTwoGraph.pentagonColouring",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily",
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation",
     "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount",
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit",
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.xorBit_apply",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1",
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver",
@@ -888,6 +990,35 @@
       "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
       "RelativeConicArcs.AlignedTwoGraph.balancedCut14"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.outer": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.rec": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.recOn": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2081": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2082": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2081\u2082": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.casesOn": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
@@ -971,6 +1102,39 @@
       "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
       "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.casesOn": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rec": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.recOn": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.rotate": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2083": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": [
       "RelativeConicArcs.AlignedTwoGraph.Aligned",
       "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
@@ -987,10 +1151,47 @@
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
       "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorCut.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.cutBit",
       "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_2": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_3": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.anchorSignature.eq_4": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
       "RelativeConicArcs.AlignedTwoGraph.equalBit"
     ],
     "RelativeConicArcs.AlignedTwoGraph.anchorSignature_eq_false_iff_balanced": [
@@ -1012,12 +1213,34 @@
       "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
       "RelativeConicArcs.AlignedTwoGraph.complementBit_unique"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily": [
+      "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.complementBit_unique": [
       "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit"
     ],
     "RelativeConicArcs.AlignedTwoGraph.cutBit": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.cutBit.match_1"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_one": [
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_two": [
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_zero": [
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutBit_three": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.cutOfBits": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut"
     ],
     "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": [
       "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
@@ -1030,8 +1253,38 @@
       "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
+      "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff",
+      "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned",
+      "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
+      "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit",
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.fourCycleSum"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit": [
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
     ],
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix"
@@ -1055,6 +1308,11 @@
     ],
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": [
       "RelativeConicArcs.AlignedTwoGraph.pentagonColouring"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk"
     ],
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
@@ -1086,6 +1344,12 @@
       "RelativeConicArcs.AlignedTwoGraph.cutBit",
       "RelativeConicArcs.AlignedTwoGraph.equalBit"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.pairAligned.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.pairOutcome_of_same_signatures": [
       "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
@@ -1099,6 +1363,36 @@
       "RelativeConicArcs.AlignedTwoGraph.pairAligned",
       "RelativeConicArcs.AlignedTwoGraph.pairSignature.match_1"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_2": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_3": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_4": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_5": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.pairSignature.eq_6": [
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.pairAligned",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.pairSignature_classification": [
       "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
@@ -1109,6 +1403,40 @@
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2081",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2080\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.root\u2081\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.cut",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.edge",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData.mk",
+      "RelativeConicArcs.AlignedTwoGraph.OutsideEdges",
+      "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083",
+      "RelativeConicArcs.AlignedTwoGraph.anchorCut",
+      "RelativeConicArcs.AlignedTwoGraph.anchorSignature",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_one",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_two",
+      "RelativeConicArcs.AlignedTwoGraph.cutBit_cutOfBits_zero",
+      "RelativeConicArcs.AlignedTwoGraph.cutOfBits",
+      "RelativeConicArcs.AlignedTwoGraph.equalBit",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective",
+      "RelativeConicArcs.AlignedTwoGraph.pairSignature",
+      "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
+      "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": [
       "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent",
       "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
@@ -1118,9 +1446,22 @@
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.PairOutcome"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2081\u2082",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083",
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": [
       "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.xorBit.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.xorBit_apply": [
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
     ],
     "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix.eq_1": [
       "RelativeConicArcs.ClebschGoldenConference.conferenceMatrix"
