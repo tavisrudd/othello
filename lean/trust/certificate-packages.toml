@@ -52,7 +52,8 @@ forbidden_artifact_basenames = [
 #
 # `disposition` is `external-pending` when the owning package is decided, and
 # `resident-unclassified` when the source is generated but its ownership has not been
-# determined.  Neither may survive closeout.
+# determined.  Neither may survive closeout.  Generated data that a determination keeps
+# here permanently belongs in `resident_family` below instead.
 
 [[pending_family]]
 name = "order-25 certificate data"
@@ -80,13 +81,16 @@ path_prefixes = [
   "lean/RelativeConicArcs/SixArcDegenerateConicExclusion.lean",
 ]
 
-[[pending_family]]
-name = "generated data modules of undetermined ownership"
-owner = "undetermined"
-disposition = "resident-unclassified"
+# Generated data that a written determination keeps in the monorepo, because it is
+# human-scale semantic source rather than certificate payload: a frozen finite table
+# small enough to read, carrying no generated proof, consumed by hand-written theorems
+# in its own area.  Unlike `pending_family`, this table is permanent, so every entry
+# names the determination that admits it.
+
+[[resident_family]]
+name = "frozen Clebsch rank-three and scheme-Fourier tables"
+determination = "notes/2026-08-05-c864-base-generated-module-classification.md"
 path_prefixes = [
-  "lean/RelativeConicArcs/AMELU/",
   "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean",
   "lean/RelativeConicArcs/ClebschSchemeFourierData.lean",
-  "lean/RelativeConicArcs/SplitQuadraticPinching.lean",
 ]
