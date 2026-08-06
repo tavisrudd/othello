@@ -150,7 +150,7 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    (`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`): both adopted packages hold
    every authority file in the families they own, and the order-eleven package's reseal window picks
    up its two unsealed gate-evidence files.  The exporter now reports sources citing artifact paths
-   the candidate lacks; the base and the published golden export each carry three
+   the candidate lacks; the base's published `main` carries three
    (`../2026-08-05-c864-dangling-artifact-citations.md`), and one open decision — whether the base
    ships the verification directories its generated tables cite — gates the last window-free item.  Then, once the
    tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the

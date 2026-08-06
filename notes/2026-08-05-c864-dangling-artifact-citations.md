@@ -6,8 +6,8 @@
 to repair its prose is forbidden; the repair is a generator change applied with its regeneration and
 gate inside the base re-export window.  What is prepared instead is the check that finds the defect
 class mechanically, now part of the companion exporter, and the measurement it produced: the
-canonical base and the already-published golden quantum statistics export each ship three modules
-citing artifact paths they do not carry, in two families rather than one.  One decision is needed
+canonical base carries three modules citing artifact paths it does not carry, in two families rather
+than one, and those three are on its published `main`.  One decision is needed
 before the window, and it is not a prose decision: whether the released base carries the two
 verification directories that its generated tables cite.**
 
@@ -53,10 +53,13 @@ rather than blocking the export replays already queued for the window.
 
 | root | files | dangling citations |
 |---|---|---|
-| `finitegeom` base | 377 | 3 |
-| golden quantum statistics export | 302 | 3 |
+| `finitegeom` base, `main` at `ac7e4ee` | 377 | 3 |
+| golden quantum statistics candidate branch, `c305d4e` | 302 | 3 |
 
-The same three in both, since the export carries a base subset:
+The golden checkout is not a separate library: it is the same repository on the unmerged local
+branch `candidate/golden-quantum-statistics`, with no remote branch of its own, so its three
+findings are the base's three inherited by a candidate rather than a second publication.  The base's
+three are on published `main`.  In both:
 
 - `RelativeConicArcs/ClebschArithmeticGluingData.lean` cites
   `verification/clebsch_arithmetic_gluing/generate.py`.

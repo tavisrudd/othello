@@ -370,8 +370,8 @@ Runnable now, in order:
 8. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
    generated output is repaired by changing its generator and regenerating inside the window.  The
    exporter now reports candidate sources citing artifact paths the candidate does not carry
-   (`--strict-citations` to refuse), and the measurement found three such citations in the base and
-   the same three in the published golden export, in two families: the arithmetic-gluing generator
+   (`--strict-citations` to refuse), and the measurement found three such citations on the base's
+   published `main`, inherited by its golden candidate branch, in two families: the arithmetic-gluing generator
    and, newly, a paper-supplement record cited by two PRS certificate modules, which belongs to the
    beyond-4 PRS work.  One decision is open before the window — whether the released base carries the
    two 85 KB verification directories its generated tables cite, which would make the arithmetic-
