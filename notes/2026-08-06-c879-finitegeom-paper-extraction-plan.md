@@ -31,13 +31,14 @@ finitegeom/
   Shared/
     Projective/  FiniteFields/  Coding/  Incidence/  Certificates/
   Papers/
-    arcs/  prs/  ame-lu/  clebsch-rigidity/  clebsch-passages/
+    arcs_complete_outside_conic/  beyond4_prs/  ame_lu/
+    clebsch-rigidity/  clebsch-passages/
     q13-passant-code/  mds-css-transversal/
     complete-repair-ports/  equivariant-robust-completion/
 ```
 
 Namespaces should mirror the boundaries, for example `FiniteGeom.Projective.*` and
-`Paper.PRS.*`. The import direction is one-way: papers may import shared APIs;
+`Paper.Beyond4PRS.*`. The import direction is one-way: papers may import shared APIs;
 shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
@@ -80,11 +81,12 @@ not serve as the primary ownership map.
 5. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
-6. Extract one already C864-validated, human-scale paper area as the pilot. Use
-   Clebsch passages first because it has a current tracked export and a bounded
-   formal companion; do not begin with arcs, AME--LU, PRS, q13, or deferred
-   certificate work. Retain shared modules centrally and use temporary compatibility
-   shims where necessary.
+6. Extract one already C864-validated, human-scale paper area as the pilot. Use the
+   main beyond-four PRS geometric gate first: its project-owned closure is small and
+   its paper-specific modules have no other paper consumers. Keep the balanced quantum
+   extension and its AME--LU adapter as a separate later chunk; do not combine that
+   cross-paper branch with the PRS pilot. Retain shared modules centrally and use
+   temporary compatibility shims where necessary.
 7. Validate the pilot from a clean package-local source tree: use the existing area
    manifest and standalone-build gate, build only the paper gate and audit through
    the guarded queue, run its checker, compare declarations and axioms, and run the
@@ -93,9 +95,9 @@ not serve as the primary ownership map.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
    affected paper gate; manifest-only changes require no Lean build.
 9. Extract the remaining leaf papers in dependency order: complete ports,
-   equivariant completion, q13 after its certificate package is sealed, MDS/CSS after
-   the AME--LU API is frozen, then Clebsch rigidity/hexagon code.
-   Extract PRS-specific modules after its shared interfaces are stable.
+   equivariant completion, q13 after its certificate package is sealed, Clebsch
+   passages, MDS/CSS after the AME--LU API is frozen, then Clebsch rigidity/hexagon
+   code. Extract the PRS balanced adapter only after AME--LU's public API is frozen.
 10. Freeze the arcs and AME--LU shared APIs last. They are shared-heavy foundations;
    moving them earlier would repeatedly reopen downstream closures.
 11. Only after each monorepo package passes an independent clean replay, split the
@@ -163,9 +165,9 @@ next safe chunk:
 | C879.2 | Generate area-overlap and reverse-consumer data from C864 manifests. | Deterministic regeneration and hash check; commit script and compact output. |
 | C879.3 | Add the import-firewall checker in report-only mode. | Checker tests against real and adversarial fixtures; commit checker. |
 | C879.4 | Convert the checker to enforcement for shared-to-paper and undeclared paper-to-paper imports. | Existing tree passes; adversarial cases fail as intended; commit policy. |
-| C879.5 | Create the Clebsch-passages paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
-| C879.6 | Materialize a byte-preserving Clebsch-passages candidate from the registered area. | Source audit and empty export delta; commit candidate metadata only. |
-| C879.7 | Validate the candidate’s bounded gate and axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
+| C879.5 | Create the `beyond4_prs` paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
+| C879.6 | Materialize a byte-preserving beyond-four PRS geometric candidate from the registered area, excluding the balanced quantum branch. | Source audit and empty export delta; commit candidate metadata only. |
+| C879.7 | Validate the beyond-four PRS geometric candidate’s bounded gate and axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
 | C879.8 | Move one paper-private module family behind the preserved module names. | Exact reverse-closure check, smallest affected gate, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
 | C879.9 | Move the next paper-private family or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared-module move is permitted in this chunk. |
 | C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-gate list, bounded shared gate, downstream exports, and all affected-paper replays; commit only when synchronized. |
