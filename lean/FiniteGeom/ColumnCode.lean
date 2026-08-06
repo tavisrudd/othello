@@ -7,7 +7,7 @@ import Mathlib.LinearAlgebra.Matrix.DotProduct
 
 The bridge that turns a *geometric* fact — "no hyperplane meets the point set in more than `s`
 points" — into a *coding* fact — "the minimum distance is `n - s`". This is the projective-systems
-↔ linear-codes correspondence, the tool the whole geometric-code lane needs (twisted cubic, the
+↔ linear-codes correspondence, the tool the whole geometric-code development needs (twisted cubic, the
 `q = 9` seed, the uniform `q = 3^h` family, the NRC seeds of `RepairCodes`).
 
 Given `n` points `P : ι → 𝔽^k` (the columns of a generator matrix), the **column code**

@@ -6,9 +6,9 @@ import FiniteGeom.EvalCode
 /-!
 # The moment curve / normal rational curve: general position via Vandermonde (`FiniteGeom`)
 
-The self-contained algebraic core of the `q = 3^h` uniform distance theorem
-([`notes/2026-07-11-codex-coding-mds-cross-field-sweep.md`](../notes) §1.5.1,
-`C(S_q) = [2q+1, 4, q-1]_q`) and, more broadly, of the NRC/twisted-cubic lane of `RepairCodes`.
+The self-contained algebraic core of the `q = 3^h` uniform distance theorem, which gives the
+parameters `C(S_q) = [2q+1, 4, q-1]_q`, and more broadly of the normal rational curve and twisted
+cubic development of `RepairCodes`.
 
 The generator system of that family has as columns the `q` finite twisted-cubic points
 `(1, t, t², t³)` together with the axis line. The distance argument turns on two facts about the

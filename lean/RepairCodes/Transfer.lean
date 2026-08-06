@@ -7,8 +7,7 @@ Ordinary concatenation `C = O ∘ I` of an inner code `I` and an outer code `O`.
 This file proves the finite counting core over the structural interface `ConcatDualWord`.
 The coordinate-free facts that block coefficients are faithful and that concatenation
 orthogonality puts their vector in the outer dual are proved separately in
-`RepairCodes.CodeInstance` and `RepairCodes.OuterDual`. The counting corollary is
-([`notes/2026-07-11-codex-coding-mds-cross-field-sweep.md`](../notes) §1.4):
+`RepairCodes.CodeInstance` and `RepairCodes.OuterDual`. The counting corollary is:
 
 * under `wt_q(w) < d(O⊥)`, a dual word is **blockwise inner-dual** — every block
   lies in `I⊥` (`transfer_blockwise`);

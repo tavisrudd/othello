@@ -5,8 +5,8 @@ import Mathlib.Order.Lattice.Nat
 /-!
 # Hypergraph matching `ν` and transversal `τ` (shared `FiniteGeom` base)
 
-The minimal `Finset`-of-`Finset` hypergraph layer the formalization plan calls
-for ([`notes/handoffs/2026-07-11-lean-formalization-plan.md`](../notes) §3). A
+The minimal `Finset`-of-`Finset` hypergraph layer used by the locally recoverable
+code development. A
 hypergraph is its edge set `H : Finset (Finset V)` — in the LRC application the
 edges are the recovery/repair sets of a coordinate. We define the matching
 number `ν(H)` (largest set of pairwise-disjoint recovery sets = disjoint

@@ -7,7 +7,7 @@ import FiniteGeom.Code
 /-!
 # Reed–Solomon / evaluation codes and the MDS distance lower bound (`FiniteGeom` base)
 
-The distance **lower**-bound tool for the coding lane — the direction that Singleton
+The distance **lower**-bound tool for the coding development — the direction that Singleton
 (`FiniteGeom.Code.singleton_bound`, an *upper* bound) does not supply and that the real
 min-distance claims (the `q = 9` seed, the uniform `q = 3^h` family) turn on.
 
