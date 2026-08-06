@@ -141,12 +141,18 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    module colliding with the pinned finitegeom revision, and an export that would not resolve as a
    repository of its own. That second gate found that finitegeom had never built standalone: four
    libraries declared no roots because the exporter's root insertion donated their modules to an
-   unrelated library. Six of the seven targets now build green. The seventh, `ProjectiveCap`, does
-   not compile — six modules were exported with an import of `ProjectiveCap.ProjectiveCapGame` or
-   `ProjectiveCap.PlaneTransitivityGame` removed while the declarations they use stayed, and
-   finitegeom carries neither module. That area has no export configuration and its repair needs a
-   determination about the game-free split, so it is recorded for its owner; a decision to repair it
-   should land before the certificate package pins a finitegeom revision.
+   unrelated library. All seven targets now build green — the first time finitegeom has built every
+   target it declares. The seventh, `ProjectiveCap`, was repaired separately
+   (`../2026-08-06-c864-projectivecap-standalone-repair.md`) by carrying
+   `ProjectiveCap.ProjectiveCapGame` and `ProjectiveCap.PlaneTransitivityGame` across
+   byte-identically and restoring six consumers' imports.
+   That repair exposed a defect class the toolchain has no guard for: an area export can
+   byte-identically replace a shared base module and delete declarations that consumers outside its
+   closure depend on, leaving no dangling import and passing every gate. The MDS--CSS
+   transversal-group adoption did exactly that on 2026-08-03. finitegeom's projective-cap consumers
+   still predate the monorepo's 2026-08-03 reorganization, so the affine-chart dictionary exists
+   there twice and five import differences from the authority remain; bringing them current is a
+   content refresh of an area that has no export configuration at all.
    Done: the order-16 package is sealed, packed, restore-rehearsed trace-current, and its external
    trust fact is published and pinned; the Kim--Vu and Al-Seraji--Al-Ogali anchors are exact.
    The finitegeom game-free/game split is landed and gate-green in the monorepo: the validity

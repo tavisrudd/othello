@@ -43,14 +43,19 @@ Executed on 2026-08-06 and committed in both repositories; resume at step 12, th
 package's lock refresh.  Findings and evidence:
 `2026-08-06-c864-finitegeom-standalone-build-gate.md`.
 
-One thing phase 2 found is not repaired and is not this plan's to repair.  **finitegeom's
-`ProjectiveCap` library does not compile**: six of its modules were exported with an import of
-`ProjectiveCap.ProjectiveCapGame` or `ProjectiveCap.PlaneTransitivityGame` removed while the
-declarations they use stayed, and finitegeom carries neither module.  The other six default targets
-build green.  The projective-cap area has no export configuration, its externalizations are out of
-scope here, and the repair needs a determination about the game-free split, so it is recorded for
-its owner.  Nothing in phases 3--6 depends on it, but a decision to repair it in finitegeom should
-land *before* step 13 pins a finitegeom revision into the certificate package.
+Phase 2's standalone build found finitegeom's `ProjectiveCap` library broken, and it was repaired
+under a separate instruction before phase 3 began
+(`2026-08-06-c864-projectivecap-standalone-repair.md`): `ProjectiveCap.ProjectiveCapGame` and
+`ProjectiveCap.PlaneTransitivityGame` were carried across byte-identically and six consumers'
+imports restored, taking the manifest to 319 modules.  All seven targets now build green, so the
+revision step 13 pins is one whose every declared target builds.
+
+That repair exposed a defect class no guard covers: an area export can byte-identically replace a
+shared base module and delete declarations that consumers outside its closure depend on, leaving no
+dangling import and satisfying every existing gate.  finitegeom's projective-cap consumers still
+predate the monorepo's 2026-08-03 reorganization, so the affine-chart dictionary exists there twice
+and five import differences from the authority remain.  Neither is in this plan's scope; both need
+the projective-cap area to have an export configuration, which it does not.
 
 - The two orphan gates are deleted, their `lakefile.toml` roots removed, and their entries plus the
   stale `RelativeConicArcs.PaperIOrientationSpine` root removed from `TARGET_MANIFEST.json`
