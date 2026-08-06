@@ -12,15 +12,15 @@
 # direction only.
 
 schema_version = 1
-area = "arcs_complete_outside_conic_human"
+area = "arcs_complete_outside_conic"
 gate = "RelativeConicArcs.Gates.ArcsCompleteOutsideConic"
 trust_statement = "trust/ARCS_COMPLETE_OUTSIDE_CONIC.md"
-axiom_audit = "trust/ArcsCompleteOutsideConicHumanAxiomAudit.lean"
+axiom_audit = "trust/ArcsCompleteOutsideConicAxiomAudit.lean"
 
-statement_title = "Arcs complete outside a prescribed conic: human library boundary"
+statement_title = "Arcs complete outside a prescribed conic: library boundary"
 
 overview = """
-This boundary records the human-scale library accompanying the manuscript
+This boundary records the library accompanying the manuscript
 *Arcs complete outside a prescribed conic*: the reusable plane geometry, the
 asymptotic and averaging arguments, the small-field witnesses, the order-sixteen
 classification definitions, and the kernel-checked step and reduction semantics.
@@ -65,10 +65,10 @@ that consume it rather than as an assumption of the development, so a consumer
 reads it directly from the terminal it appears in.
 """
 
-axiom_audit_title = "Axiom audit for the human Arcs boundary"
+axiom_audit_title = "Axiom audit for the Arcs boundary"
 
 axiom_audit_description = """
-This audit prints the axioms of the terminals exported with the human-scale
+This audit prints the axioms of the terminals exported with the
 boundary for arcs complete outside a prescribed conic: the averaging and
 packing bounds, the small-order witnesses and their normalizations, the
 step and reduction semantics, and the game-free order-eleven residual
@@ -77,8 +77,8 @@ dictionary.
 
 readme_anchor = "  13-module structural closure."
 
-readme_bullet = """- `trust/manifests/arcs_complete_outside_conic_human.json` content-addresses
-  the human boundary for arcs complete outside a prescribed conic, including the
+readme_bullet = """- `trust/manifests/arcs_complete_outside_conic.json` content-addresses
+  the boundary for arcs complete outside a prescribed conic, including the
   averaging and packing bounds, the small-order witnesses, the step and
   reduction semantics, and the game-free order-eleven residual dictionary.  The
   exhaustive order-sixteen families are not part of it."""
