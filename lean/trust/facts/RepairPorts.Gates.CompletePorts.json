@@ -28,6 +28,7 @@
     "RepairPorts.Gates.CompletePorts",
     "RepairPorts.MDSReconstruction",
     "RepairPorts.PointedTransfer",
+    "RepairPorts.PointedTutte",
     "RepairPorts.PositiveDensity",
     "RepairPorts.Reliability"
   ],
@@ -698,11 +699,18 @@
     "RepairPorts.contractHelper": "RepairPorts.Reliability",
     "RepairPorts.contract_sub_delete_eq_discreteDerivative": "RepairPorts.Reliability",
     "RepairPorts.deleteHelper": "RepairPorts.Reliability",
+    "RepairPorts.deletionContractionRankDifference": "RepairPorts.PointedTutte",
+    "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator": "RepairPorts.PointedTutte",
     "RepairPorts.discreteDerivative": "RepairPorts.Reliability",
     "RepairPorts.discreteDerivative.congr_simp": "RepairPorts.Reliability",
     "RepairPorts.discreteDerivative.eq_1": "RepairPorts.Reliability",
     "RepairPorts.discreteDerivative_portSuccessIndicator": "RepairPorts.Reliability",
+    "RepairPorts.disjointTripleRepairs": "RepairPorts.PointedTutte",
+    "RepairPorts.disjointTripleRepairs_reliability": "RepairPorts.PointedTutte",
+    "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping": "RepairPorts.PointedTutte",
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero": "RepairPorts.PointedTransfer",
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation": "RepairPorts.PointedTutte",
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte": "RepairPorts.PointedTutte",
     "RepairPorts.erasureFailureProbability": "RepairPorts.Reliability",
     "RepairPorts.erasureFailureProbability_delete_contract": "RepairPorts.Reliability",
     "RepairPorts.eval_blockerFailurePolynomial": "RepairPorts.Reliability",
@@ -769,6 +777,8 @@
     "RepairPorts.ordinaryFunctionalCostContribution": "RepairPorts.FunctionalCost",
     "RepairPorts.ordinaryFunctionalCostContribution.congr_simp": "RepairPorts.FunctionalCost",
     "RepairPorts.ordinaryFunctionalCostContribution.eq_1": "RepairPorts.FunctionalCost",
+    "RepairPorts.overlappingTripleRepairs": "RepairPorts.PointedTutte",
+    "RepairPorts.overlappingTripleRepairs_reliability": "RepairPorts.PointedTutte",
     "RepairPorts.pivotalIndicator": "RepairPorts.Reliability",
     "RepairPorts.pivotalProbability": "RepairPorts.Reliability",
     "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance": "RepairPorts.PositiveDensity",
@@ -815,11 +825,13 @@
     "RepairPorts.pointedNonembeddedCost_eq_min_zero_nonzero": "RepairPorts.FunctionalCost",
     "RepairPorts.pointedNonembeddedCost_eq_top_iff": "RepairPorts.FunctionalCost",
     "RepairPorts.pointedNonembeddedCost_eq_top_iff.match_1_1": "RepairPorts.FunctionalCost",
+    "RepairPorts.pointedTutteSubsetEvaluation": "RepairPorts.PointedTutte",
     "RepairPorts.pointedZeroFunctionalCost": "RepairPorts.PointedTransfer",
     "RepairPorts.pointedZeroFunctionalCost.eq_1": "RepairPorts.PointedTransfer",
     "RepairPorts.portReliability": "RepairPorts.Reliability",
     "RepairPorts.portReliability.eq_1": "RepairPorts.Reliability",
     "RepairPorts.portReliability_delete_contract": "RepairPorts.Reliability",
+    "RepairPorts.portReliability_pair_homogeneous": "RepairPorts.PointedTutte",
     "RepairPorts.portSucceeds_contractHelper_iff": "RepairPorts.Reliability",
     "RepairPorts.portSucceeds_deleteHelper_iff": "RepairPorts.Reliability",
     "RepairPorts.portSucceeds_mono": "RepairPorts.Reliability",
@@ -835,12 +847,15 @@
     "RepairPorts.representedTargets.eq_1": "RepairPorts.PositiveDensity",
     "RepairPorts.representedTargets_density": "RepairPorts.PositiveDensity",
     "RepairPorts.singleBlockWord_mem_coefficientPort": "RepairPorts.PointedTransfer",
+    "RepairPorts.sixHelperUniverse": "RepairPorts.PointedTutte",
+    "RepairPorts.sixHelperUniverse.eq_1": "RepairPorts.PointedTutte",
     "RepairPorts.subsetAverage": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage.congr_simp": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage.eq_1": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage_add": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage_congr_parameters": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage_const_mul": "RepairPorts.Reliability",
+    "RepairPorts.subsetAverage_contains": "RepairPorts.PointedTutte",
     "RepairPorts.subsetAverage_delete_contract": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage_insert": "RepairPorts.Reliability",
     "RepairPorts.subsetAverage_one": "RepairPorts.Reliability",
@@ -851,6 +866,7 @@
     "RepairPorts.subsetWeight_empty": "RepairPorts.Reliability",
     "RepairPorts.subsetWeight_insert_insert_of_notMem": "RepairPorts.Reliability",
     "RepairPorts.subsetWeight_insert_of_notMem": "RepairPorts.Reliability",
+    "RepairPorts.successfulSetEnumerator": "RepairPorts.PointedTutte",
     "RepairPorts.symbolMinDist_restrictScalars": "RepairPorts.PositiveDensity",
     "RepairPorts.toList_map_foldl_min_eq_inf": "RepairPorts.FunctionalCost",
     "RepairPorts.totalDiscreteInfluence": "RepairPorts.Reliability",
@@ -858,6 +874,7 @@
     "RepairPorts.totalDiscreteInfluence.eq_1": "RepairPorts.Reliability",
     "RepairPorts.truncatePort": "RepairPorts.Reliability",
     "RepairPorts.truncatePort_mono": "RepairPorts.Reliability",
+    "RepairPorts.twoRepair_successIndicator": "RepairPorts.PointedTutte",
     "RepairPorts.two_mul_dualDist_le_pointedZeroFunctionalCost": "RepairPorts.PointedTransfer",
     "RepairPorts.zeroFunctionalPointedClosedCost": "RepairPorts.FunctionalCost",
     "RepairPorts.zeroFunctionalPointedClosedCost.eq_1": "RepairPorts.FunctionalCost",
@@ -1546,11 +1563,18 @@
     "RepairPorts.contractHelper",
     "RepairPorts.contract_sub_delete_eq_discreteDerivative",
     "RepairPorts.deleteHelper",
+    "RepairPorts.deletionContractionRankDifference",
+    "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator",
     "RepairPorts.discreteDerivative",
     "RepairPorts.discreteDerivative.congr_simp",
     "RepairPorts.discreteDerivative.eq_1",
     "RepairPorts.discreteDerivative_portSuccessIndicator",
+    "RepairPorts.disjointTripleRepairs",
+    "RepairPorts.disjointTripleRepairs_reliability",
+    "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero",
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation",
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte",
     "RepairPorts.erasureFailureProbability",
     "RepairPorts.erasureFailureProbability_delete_contract",
     "RepairPorts.eval_blockerFailurePolynomial",
@@ -1617,6 +1641,8 @@
     "RepairPorts.ordinaryFunctionalCostContribution",
     "RepairPorts.ordinaryFunctionalCostContribution.congr_simp",
     "RepairPorts.ordinaryFunctionalCostContribution.eq_1",
+    "RepairPorts.overlappingTripleRepairs",
+    "RepairPorts.overlappingTripleRepairs_reliability",
     "RepairPorts.pivotalIndicator",
     "RepairPorts.pivotalProbability",
     "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance",
@@ -1663,11 +1689,13 @@
     "RepairPorts.pointedNonembeddedCost_eq_min_zero_nonzero",
     "RepairPorts.pointedNonembeddedCost_eq_top_iff",
     "RepairPorts.pointedNonembeddedCost_eq_top_iff.match_1_1",
+    "RepairPorts.pointedTutteSubsetEvaluation",
     "RepairPorts.pointedZeroFunctionalCost",
     "RepairPorts.pointedZeroFunctionalCost.eq_1",
     "RepairPorts.portReliability",
     "RepairPorts.portReliability.eq_1",
     "RepairPorts.portReliability_delete_contract",
+    "RepairPorts.portReliability_pair_homogeneous",
     "RepairPorts.portSucceeds_contractHelper_iff",
     "RepairPorts.portSucceeds_deleteHelper_iff",
     "RepairPorts.portSucceeds_mono",
@@ -1683,12 +1711,15 @@
     "RepairPorts.representedTargets.eq_1",
     "RepairPorts.representedTargets_density",
     "RepairPorts.singleBlockWord_mem_coefficientPort",
+    "RepairPorts.sixHelperUniverse",
+    "RepairPorts.sixHelperUniverse.eq_1",
     "RepairPorts.subsetAverage",
     "RepairPorts.subsetAverage.congr_simp",
     "RepairPorts.subsetAverage.eq_1",
     "RepairPorts.subsetAverage_add",
     "RepairPorts.subsetAverage_congr_parameters",
     "RepairPorts.subsetAverage_const_mul",
+    "RepairPorts.subsetAverage_contains",
     "RepairPorts.subsetAverage_delete_contract",
     "RepairPorts.subsetAverage_insert",
     "RepairPorts.subsetAverage_one",
@@ -1699,6 +1730,7 @@
     "RepairPorts.subsetWeight_empty",
     "RepairPorts.subsetWeight_insert_insert_of_notMem",
     "RepairPorts.subsetWeight_insert_of_notMem",
+    "RepairPorts.successfulSetEnumerator",
     "RepairPorts.symbolMinDist_restrictScalars",
     "RepairPorts.toList_map_foldl_min_eq_inf",
     "RepairPorts.totalDiscreteInfluence",
@@ -1706,6 +1738,7 @@
     "RepairPorts.totalDiscreteInfluence.eq_1",
     "RepairPorts.truncatePort",
     "RepairPorts.truncatePort_mono",
+    "RepairPorts.twoRepair_successIndicator",
     "RepairPorts.two_mul_dualDist_le_pointedZeroFunctionalCost",
     "RepairPorts.zeroFunctionalPointedClosedCost",
     "RepairPorts.zeroFunctionalPointedClosedCost.eq_1",
@@ -1818,6 +1851,26 @@
       "Quot.sound",
       "propext"
     ],
+    "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.disjointTripleRepairs_reliability": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RepairPorts.erasureFailureProbability_delete_contract": [
       "Classical.choice",
       "Quot.sound",
@@ -1868,6 +1921,11 @@
       "Quot.sound",
       "propext"
     ],
+    "RepairPorts.overlappingTripleRepairs_reliability": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance": [
       "Classical.choice",
       "Quot.sound",
@@ -1879,6 +1937,11 @@
       "propext"
     ],
     "RepairPorts.portReliability_delete_contract": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.portReliability_pair_homogeneous": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -5820,6 +5883,10 @@
       "RepairPorts.subsetAverage",
       "RepairPorts.subsetAverage_sub"
     ],
+    "RepairPorts.deletionContractionRankDifference_eq_successfulSetEnumerator": [
+      "RepairPorts.deletionContractionRankDifference",
+      "RepairPorts.successfulSetEnumerator"
+    ],
     "RepairPorts.discreteDerivative.congr_simp": [
       "RepairPorts.discreteDerivative"
     ],
@@ -5832,6 +5899,20 @@
       "RepairPorts.pivotalIndicator",
       "RepairPorts.portSuccessIndicator"
     ],
+    "RepairPorts.disjointTripleRepairs_reliability": [
+      "RepairPorts.disjointTripleRepairs",
+      "RepairPorts.portReliability",
+      "RepairPorts.portReliability_pair_homogeneous",
+      "RepairPorts.sixHelperUniverse"
+    ],
+    "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping": [
+      "RepairPorts.disjointTripleRepairs",
+      "RepairPorts.disjointTripleRepairs_reliability",
+      "RepairPorts.overlappingTripleRepairs",
+      "RepairPorts.overlappingTripleRepairs_reliability",
+      "RepairPorts.portReliability",
+      "RepairPorts.sixHelperUniverse"
+    ],
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero": [
       "FiniteGeom.dualCode",
       "FiniteGeom.dualDist",
@@ -5842,6 +5923,10 @@
       "RepairPorts.exists_pointedFunctionalFiberCost_realizer",
       "RepairPorts.pointedFunctionalFiberCost",
       "RepairPorts.pointedFunctionalFiberCost_eq_top_iff"
+    ],
+    "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte": [
+      "RepairPorts.elementaryPerspectiveSubsetEvaluation",
+      "RepairPorts.pointedTutteSubsetEvaluation"
     ],
     "RepairPorts.erasureFailureProbability": [
       "RepairPorts.portReliability"
@@ -6233,6 +6318,12 @@
       "RepairPorts.instDecidableEqDual_repairPorts",
       "RepairPorts.ordinaryFunctionalCostContribution"
     ],
+    "RepairPorts.overlappingTripleRepairs_reliability": [
+      "RepairPorts.overlappingTripleRepairs",
+      "RepairPorts.portReliability",
+      "RepairPorts.portReliability_pair_homogeneous",
+      "RepairPorts.sixHelperUniverse"
+    ],
     "RepairPorts.pivotalIndicator": [
       "RepairPorts.PortSucceeds"
     ],
@@ -6536,6 +6627,17 @@
       "RepairPorts.subsetAverage_delete_contract",
       "RepairPorts.subsetWeight"
     ],
+    "RepairPorts.portReliability_pair_homogeneous": [
+      "RepairPorts.PortSucceeds",
+      "RepairPorts.portReliability",
+      "RepairPorts.portReliability.eq_1",
+      "RepairPorts.portSuccessIndicator",
+      "RepairPorts.subsetAverage",
+      "RepairPorts.subsetAverage_add",
+      "RepairPorts.subsetAverage_contains",
+      "RepairPorts.subsetAverage_sub",
+      "RepairPorts.twoRepair_successIndicator"
+    ],
     "RepairPorts.portSucceeds_contractHelper_iff": [
       "RepairPorts.PortSucceeds",
       "RepairPorts.contractHelper"
@@ -6621,6 +6723,9 @@
       "RepairCodes.wordSupport_singleBlockWord",
       "RepairPorts.coefficientPort"
     ],
+    "RepairPorts.sixHelperUniverse.eq_1": [
+      "RepairPorts.sixHelperUniverse"
+    ],
     "RepairPorts.subsetAverage": [
       "RepairPorts.subsetWeight"
     ],
@@ -6641,6 +6746,11 @@
     ],
     "RepairPorts.subsetAverage_const_mul": [
       "RepairPorts.subsetAverage",
+      "RepairPorts.subsetWeight"
+    ],
+    "RepairPorts.subsetAverage_contains": [
+      "RepairPorts.subsetAverage",
+      "RepairPorts.subsetAverage_insert",
       "RepairPorts.subsetWeight"
     ],
     "RepairPorts.subsetAverage_delete_contract": [
@@ -6697,6 +6807,10 @@
     ],
     "RepairPorts.truncatePort_mono": [
       "RepairPorts.truncatePort"
+    ],
+    "RepairPorts.twoRepair_successIndicator": [
+      "RepairPorts.PortSucceeds",
+      "RepairPorts.portSuccessIndicator"
     ],
     "RepairPorts.two_mul_dualDist_le_pointedZeroFunctionalCost": [
       "FiniteGeom.dualCode",
