@@ -172,20 +172,35 @@ remain deferred so finitegeom is re-exported and re-pinned once rather than twic
   nine gates reaching the residual module are green.  This preserves the accepted game residue in
   the Paper I and arcs closures recorded in `notes/2026-08-03-c860-cap-closure-remediation.md`.
   Report: `notes/2026-08-04-c864-q11-residual-game-split.md`.
-- **The finitegeom re-export and the order-eleven package re-seal are one atomic window.**  The monorepo
+- **The rename has reached finitegeom; only the package's forward re-pin remains.**  The monorepo
   renamed eleven `RelativeConicArcs.PaperIOrientation*` modules and their namespaces to
-  `SupportOrientation*`; finitegeom still carries the old names at both the pinned revision and its own
-  `HEAD`, and the package's gate imports, axiom-audit names, sealed trust fact, the monorepo's pinned
-  copy of that fact, and the Clebsch-rigidity trust manifest all still use them.  Exporting the
-  renamed finitegeom without re-pinning and resealing the package in the same window leaves the package
-  unbuildable.  Evidence: `notes/2026-08-05-c864-q11-package-source-audit.md`.
+  `SupportOrientation*`.  finitegeom's `main` now carries the new names and none of the old ones —
+  the rename landed there in `99aaf0f`, reapplied as `ac7e4ee` — so the support-cubic orientation
+  export reports an empty delta and the export half of the former atomic window is done.  The old
+  names survive only at the revision the package pins, `85dfde9e`, seventeen commits back, where the
+  package is internally consistent and buildable.  What remains is the package's own forward re-pin:
+  its gate imports, axiom-audit names, sealed trust fact, the monorepo's pinned copy of that fact,
+  and the Clebsch-rigidity trust manifest all still use the old names, so re-pinning forward without
+  resealing in the same change leaves the package unbuildable.  Evidence:
+  `notes/2026-08-05-c864-q11-package-source-audit.md` and
+  `notes/2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`.
   That window also carries the two record fixes the audit found: correct `PROVENANCE.md` to the real
   extraction revision `0ddbca65`, and seal the monorepo revision in `MANIFEST.json` as a field
   distinct from the package's own `source_commit`.
-- **finitegeom is not yet re-exported.**  The batched re-export must add
+- **No registered area can repair finitegeom's order-eleven residual modules.**  The repair must add
   `RelativeConicArcs/ParametrizedHoles.lean` to the finitegeom module set, refresh finitegeom copies of
   `Q11Residual.lean` and `Q11Coding.lean`, and keep `Q11ResidualGame.lean`,
-  `CapGameHoleLocalization.lean` and `ProjectiveCap/ProjectiveCapGame.lean` out of it.
+  `CapGameHoleLocalization.lean` and `ProjectiveCap/ProjectiveCapGame.lean` out of it.  None of those
+  modules appears in any of the five configurations under `lean/trust/export/`.  They belong to
+  `arcs_complete_outside_conic_human`, an area recorded only downstream in finitegeom's
+  `trust/source-manifests/`: root gate `RelativeConicArcs.Gates.ArcsCompleteOutsideConic`, 77 sealed
+  sources, `source_commit` `10d1941a` of 2026-07-28.  Its export configuration has never been tracked
+  in this repository and its trust fact has never been extracted, so a published 77-source area of the
+  shared library cannot be replayed from the authority tree.  finitegeom's `Q11Residual.lean` is
+  consequently the pre-split copy, importing `RelativeConicArcs.ExampleChecks.Q11` and
+  `CapGame.GraphMirror`.  Registering and extracting that area is a deliberate decision, not a
+  mechanical export.  Evidence:
+  `notes/2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`.
 - **Nothing builds finitegeom standalone before a package pins it.**  That is why a broken export
   surfaced only inside a consumer's three-hour build.  A standalone finitegeom build belongs in the export
   tooling as a gate.
@@ -287,9 +302,11 @@ commit a self-contained official source state.
     facts, regenerated trust documents, and paper/Lean reconciliation with zero untriaged warning.
 11. Enumerate every registered paper Lean area export and standalone Lean-for-paper package.
     The registered export areas are exactly the configurations in `lean/trust/export/`:
-    Clebsch passages, Clebsch support-cubic orientation, golden quantum statistics, and MDS--CSS
-    transversal groups.  Each must be re-exported here against the resealed finitegeom manifest, not
-    only the areas whose certificates moved.
+    Clebsch passages, Clebsch support-cubic orientation, Clebsch six-arc concurrence, golden quantum
+    statistics, and MDS--CSS transversal groups.  Each must be re-exported here against the resealed
+    finitegeom manifest, not only the areas whose certificates moved.  finitegeom also carries the
+    unregistered `arcs_complete_outside_conic_human` area described above; it has no configuration
+    here and must acquire one before this step can claim to cover the published library.
     For each one, run the guarded export plan, materialize two disposable candidates from the exact
     committed source and finitegeom revisions, require byte-identical outputs and complete manifests, verify
     the declared terminals and axiom facts, and run the paper's documented import-only release
@@ -401,6 +418,15 @@ Runnable now, in order:
    source `lean/` root, which makes the arithmetic-gluing citation correct with no regeneration at
    all and leaves only a `lean/` prefix to drop in the scheme-Fourier generator.  Report:
    `notes/2026-08-05-c864-dangling-artifact-citations.md`.
+11. **Clebsch passages re-exported and adopted.**  In the granted window the area's stale trust fact
+   was re-extracted, unblocking a plan that had refused because the fact omitted
+   `AlignedFamilyFaithfulness` and `AlignedQueryFamily`.  The export was deterministic, its
+   eighteen-file forward delta adds the signed two-graph core, the gate rebuilt green inside
+   finitegeom in 2m12s at a 3.4 GiB peak, the delta is adopted as finitegeom `bb31411`, and a second
+   export reports an empty delta.  The same window established that the orientation rename had
+   already reached finitegeom, that six-arc concurrence and support-cubic orientation are both
+   current, and that the order-eleven residual repair has no registered area.  Report:
+   `notes/2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`.
 
 ## Cache and build contract
 

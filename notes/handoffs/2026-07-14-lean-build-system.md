@@ -186,10 +186,21 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    bridge; q13 Segre foundation; q13 tangent-code certificates; then the v2 release, aligning
    q11/q13 on one upstream commit and preserving the v1 aggregate unchanged.
 
-The MDS--CSS transversal-groups area is re-exported and adopted in finitegeom (gate green there,
-second export reports an empty delta).  Clebsch passages cannot be re-exported until its owner
-re-extracts the area's trust fact, which omits two modules the current import closure carries; the
-golden quantum statistics area is still unadopted on finitegeom's `main`.
+Four of the five registered areas are current on finitegeom.  MDS--CSS transversal groups was adopted
+in the previous window; Clebsch passages was re-exported and adopted in this one after its stale
+trust fact was re-extracted, bringing the signed two-graph core across and rebuilding green there;
+support-cubic orientation and six-arc concurrence both report empty deltas.  Golden quantum
+statistics is still unadopted on finitegeom's `main`, so exporting it would adopt a new area rather
+than refresh one.
+
+Two findings changed the shape of the remaining export work
+(`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`).  The orientation rename has
+already reached finitegeom, so the former atomic export-and-reseal window reduces to the certificate
+package's own forward re-pin.  And finitegeom's `Q11Residual.lean` and `Q11Coding.lean` belong to
+`arcs_complete_outside_conic_human`, a 77-source area whose export configuration has never been
+tracked here and whose trust fact has never been extracted; no registered area can repair them or
+supply the missing `ParametrizedHoles.lean`, so finitegeom stays unbuildable standalone until that
+area is registered.
 
 Standing blockers: q25 waits on C318/C319; every package waits on its applicable C324 regeneration
 check; the C759 Nanoda pilot waits on a final Lean 4.32 release rather than the pinned 4.32.0-rc1;
@@ -254,7 +265,8 @@ order-25 banner transformation [`../2026-08-05-c864-q25-banner-transformation-de
 base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md);
 non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md);
 payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md);
-dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md).
+dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md);
+passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`](../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
