@@ -203,13 +203,20 @@ seals eleven areas, of which only four are registered under `lean/trust/export/`
 unregistered ones seal 290 modules against 130 registered, and five of them name the same source
 commit `10d1941a` of 2026-07-28.  They span the AME/LU aggregate, both arcs areas, Clebsch
 factorization, Clebsch rigidity, complete ports, and the beyond-four PRS foundation, so registering
-them crosses several lanes.  Two are now registered and re-exported: the human Arcs area, which
-supplies the `ParametrizedHoles.lean` leaf and the game-free `Q11Residual`/`Q11Coding` that finitegeom
-lacked, and the human Clebsch rigidity area, whose refresh makes both Dye statements theorems there
-rather than axioms.  Declaring the rigidity gate and its terminals also dropped the repository-wide
-spine check from 161 findings to 126.  Five remain — `ame_lu`,
-`arcs_complete_outside_conic_additions`, `clebsch_factorization`, `complete_ports`, and
-`prs_beyond_redundancy_four` — and acceptance items 11 and 12 stay unmet until they are registered.
+them crosses several lanes.  All eleven are now registered, re-exported from a tracked configuration,
+and adopted with their gate green; the only configuration without a corresponding area is
+`golden_quantum_statistics`, which is not on finitegeom's `main`.  The human Arcs area supplies the
+`ParametrizedHoles.lean` leaf and the game-free `Q11Residual`/`Q11Coding` that finitegeom lacked, and
+the human Clebsch rigidity area makes both Dye statements theorems there rather than axioms.
+Declaring the previously unregistered gates and their terminals dropped the repository-wide spine
+check from 161 findings to 115.
+
+Native evaluation is now rejected in trust declarations.  Five AME/LU terminals were discharged by
+`native_decide`, reaching the MDS--CSS area too, so the three underlying marginal counts were
+reproved by kernel reduction and the spine now reports any terminal carrying an evaluation axiom,
+recognized by the marker the toolchain builds into the name rather than by a fixed list.  An area
+that audits through a sibling gate prints its declarations under opened namespaces, so the registry
+records names resolved against the extracted declaration set rather than the short printed forms.
 
 Registering the Arcs area exposed an exporter defect, now fixed with a regression test: cited Lean
 modules were carried as verification apparatus, so an export could overwrite a module its area does
