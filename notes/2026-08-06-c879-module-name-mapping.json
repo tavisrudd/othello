@@ -1,0 +1,354 @@
+{
+  "schema": "tavisrudd-finitegeom-module-name-mapping",
+  "schema_version": 1,
+  "authority": {
+    "repository": "othello",
+    "source_commit": "f8447f747d9737aee70948503017f7cb0fad41c2",
+    "status": "planning-map; declaration-level review required before renames"
+  },
+  "naming": {
+    "lean_root": "TavisRuddFiniteGeom",
+    "filesystem_aliases_are_exact": true,
+    "paper_interface": "PaperInterface",
+    "verification_directory": "Verification",
+    "axiom_audit": "Verification.AxiomAudit",
+    "operational_gate_term": "metadata-and-tooling-only"
+  },
+  "frozen_external": [
+    {
+      "repository": "finitegeom-clebsch-q11-certificates",
+      "reason": "separately versioned certificate source; preserve existing module, gate, audit names and API"
+    },
+    {
+      "repository": "finitegeom-q16-certificates",
+      "reason": "separately versioned certificate source; preserve existing module, gate, audit names and API"
+    }
+  ],
+  "shared_groups": [
+    {
+      "id": "projective",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.Projective",
+      "legacy_modules": [
+        "ProjectiveCap.Projective",
+        "ProjectiveCap.PlaneTransitivity",
+        "ProjectiveCap.PlaneAffineChart",
+        "ProjectiveCap.Grid",
+        "ProjectiveCap.Sym2ConicBridge",
+        "RelativeConicArcs.Plane",
+        "RelativeConicArcs.ProjectiveBridge",
+        "RelativeConicArcs.Conic",
+        "RelativeConicArcs.Arc"
+      ],
+      "regrouping": "separate coordinate/projective objects from paper-specific conic classifications"
+    },
+    {
+      "id": "coding",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.Coding",
+      "legacy_modules": [
+        "RelativeConicArcs.CodingBridge",
+        "RelativeConicArcs.SyndromeGeometry",
+        "RelativeConicArcs.FiniteFields"
+      ],
+      "regrouping": "keep reusable code/MDS/syndrome interfaces here; paper-specific classifications stay in Papers"
+    },
+    {
+      "id": "incidence",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.Incidence",
+      "legacy_modules": [
+        "RelativeConicArcs.Defect",
+        "RelativeConicArcs.MatchingDesignRigidity",
+        "RelativeConicArcs.Moments",
+        "RelativeConicArcs.Nucleus",
+        "RelativeConicArcs.TangentPairFourGroup"
+      ],
+      "regrouping": "split reusable incidence/defect lemmas from arcs- and Clebsch-specific consequences"
+    },
+    {
+      "id": "amelu_api",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.AMELU",
+      "legacy_modules": [
+        "RelativeConicArcs.AMELU.Definitions",
+        "RelativeConicArcs.AMELU.Dictionary",
+        "RelativeConicArcs.AMELU.EncoderTransversal",
+        "RelativeConicArcs.AMELU.SyndromeGeometry",
+        "RelativeConicArcs.AMELU.ExtensionFieldPencil",
+        "RelativeConicArcs.AMELU.LUPencilClassification",
+        "RelativeConicArcs.AMELU.TransportDivisor"
+      ],
+      "regrouping": "retain only APIs consumed outside AME-LU; keep AME-LU proof-specific modules under Papers/ame_lu"
+    },
+    {
+      "id": "certificate_api",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.Certificates",
+      "legacy_modules": [
+        "RelativeConicArcs.Certificate"
+      ],
+      "regrouping": "retain semantic checker and soundness interfaces; generated leaves remain in frozen certificate repositories"
+    }
+  ],
+  "paper_groups": [
+    {
+      "id": "arcs_complete_outside_conic",
+      "filesystem_alias": "arcs_complete_outside_conic",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
+        "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions",
+        "RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Coding",
+        "Shared.Incidence",
+        "Shared.Certificates"
+      ]
+    },
+    {
+      "id": "beyond4_prs",
+      "filesystem_alias": "beyond4_prs",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.Beyond4PRS",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtension",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.Beyond4PRS.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit",
+        "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension"
+      ],
+      "prefix_rules": [
+        {
+          "legacy_prefix": "RelativeConicArcs.PRS",
+          "target_prefix": "TavisRuddFiniteGeom.Papers.Beyond4PRS"
+        }
+      ],
+      "split_shared_into": [
+        "Shared.Coding",
+        "Shared.Certificates",
+        "Papers.AMELU.adapter"
+      ]
+    },
+    {
+      "id": "ame_lu",
+      "filesystem_alias": "ame_lu",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.AMELU",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.AMELUAggregate",
+        "RelativeConicArcs.Gates.AMELUAggregateAxioms"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.AMELU.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.AMELU.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.AMELU",
+        "Shared.Coding"
+      ]
+    },
+    {
+      "id": "mds_css_transversal",
+      "filesystem_alias": "mds_css_transversal",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.MDSCSSTransversal",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.MDSCSSTransversalGeometry",
+        "RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.MDSCSSTransversal.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.MDSCSSTransversal.Verification.AxiomAudit"
+      ],
+      "imports_shared": [
+        "Shared.AMELU",
+        "Shared.Coding",
+        "Shared.Projective"
+      ]
+    },
+    {
+      "id": "complete_repair_ports",
+      "filesystem_alias": "complete-repair-ports",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.CompleteRepairPorts",
+      "legacy_roots": [
+        "RepairPorts.Gates.CompletePorts"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.CompleteRepairPorts.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.CompleteRepairPorts.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Coding",
+        "Shared.Incidence"
+      ]
+    },
+    {
+      "id": "equivariant_robust_completion",
+      "filesystem_alias": "equivariant-robust-completion",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.EquivariantRobustCompletion",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.EquivariantRobustCompletion.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.EquivariantRobustCompletion.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Incidence"
+      ]
+    },
+    {
+      "id": "q13_passant_code",
+      "filesystem_alias": "q13-passant-code",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.Q13PassantCode",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.PassantCodeQ13",
+        "RelativeConicArcs.Gates.PassantCodeQ13AxiomAudit"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.Q13PassantCode.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Coding",
+        "Shared.Certificates"
+      ]
+    },
+    {
+      "id": "clebsch_rigidity",
+      "filesystem_alias": "clebsch-rigidity",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschRigidity",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.ClebschRigidity.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.ClebschRigidity.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Incidence",
+        "Shared.Coding"
+      ]
+    },
+    {
+      "id": "clebsch_passages",
+      "filesystem_alias": "clebsch-passages",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschPassages",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.ClebschPassages",
+        "RelativeConicArcs.Gates.ClebschPassageInterfaces"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.ClebschPassages.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.ClebschPassages.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Incidence"
+      ]
+    },
+    {
+      "id": "clebsch_factorization",
+      "filesystem_alias": "clebsch-factorization",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschFactorization",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.ClebschFactorization",
+        "RelativeConicArcs.Gates.ClebschFactorizationAxiomAudit"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.ClebschFactorization.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.ClebschFactorization.Verification.AxiomAudit"
+      ],
+      "split_shared_into": [
+        "Shared.Projective",
+        "Shared.Incidence",
+        "Shared.AMELU"
+      ]
+    },
+    {
+      "id": "clebsch_hexagon_code",
+      "filesystem_alias": "clebsch-hexagon-code",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschHexagonCode",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.ClebschPaperTrust"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.ClebschHexagonCode.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.ClebschHexagonCode.Verification.AxiomAudit"
+      ],
+      "requires_split": true,
+      "split_regrouping": "ClebschPaperTrust is a multi-paper aggregate; partition its imported sub-gates by mathematical ownership before renaming"
+    },
+    {
+      "id": "golden_operator",
+      "filesystem_alias": "golden-operator",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.GoldenOperator",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.GoldenProofSpine",
+        "RelativeConicArcs.Gates.GoldenCubicNodes"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.GoldenOperator.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.GoldenOperator.Verification.AxiomAudit"
+      ],
+      "status": "auxiliary/future-paper grouping; confirm publication ownership before extraction"
+    }
+  ],
+  "aggregate_splits": [
+    {
+      "legacy_root": "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+      "new_roots": [
+        "Papers.Beyond4PRS.PaperInterface",
+        "Papers.Beyond4PRS.Verification.AxiomAudit"
+      ],
+      "reason": "public paper interface and verification are distinct roles"
+    },
+    {
+      "legacy_root": "RelativeConicArcs.Gates.PRSBalancedQuantumExtension",
+      "new_roots": [
+        "Papers.Beyond4PRS.QuantumExtension",
+        "Papers.Beyond4PRS.Verification.QuantumExtensionAxiomAudit"
+      ],
+      "reason": "separate cross-paper AME-LU adapter; do not include in geometric PaperInterface"
+    },
+    {
+      "legacy_root": "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
+      "new_roots": [
+        "Papers.ArcsCompleteOutsideConic.PaperInterface",
+        "Papers.ArcsCompleteOutsideConic.Verification.AxiomAudit",
+        "Shared.Certificates"
+      ],
+      "reason": "paper theorem surface, verification, and reusable certificate soundness are distinct"
+    },
+    {
+      "legacy_root": "RelativeConicArcs.Gates.ClebschPaperTrust",
+      "new_roots": [
+        "Papers.ClebschRigidity.PaperInterface",
+        "Papers.ClebschFactorization.PaperInterface",
+        "Papers.ClebschPassages.PaperInterface",
+        "Papers.ClebschHexagonCode.PaperInterface"
+      ],
+      "reason": "multi-paper aggregate; never rename one aggregate into one paper interface"
+    }
+  ],
+  "unmapped_legacy_roles": [
+    "RelativeConicArcs.Gates.*Trust",
+    "RelativeConicArcs.Gates.*Human",
+    "RelativeConicArcs.Gates.*Additions",
+    "RelativeConicArcs.Gates.*Aggregate",
+    "RelativeConicArcs.Gates.*Axioms"
+  ],
+  "migration_rules": [
+    "Do not rename a module solely because it is internal.",
+    "Do not move a module into Shared until declaration-level consumers are audited.",
+    "Do not rename q11 or q16 certificate-repository modules.",
+    "Every PaperInterface and shared public interface gets its own exact verification target.",
+    "Every mapping that changes a paper-facing Lean module synchronizes finitegeom and all affected paper repositories before closeout."
+  ]
+}
