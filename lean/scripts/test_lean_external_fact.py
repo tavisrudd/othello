@@ -257,6 +257,48 @@ class ExternalFactTest(unittest.TestCase):
         (self.package / "evidence/gate-axioms.log").unlink()
         self.assertEqual(self.seal("--write").returncode, 2)
 
+    def test_a_capture_envelope_is_followed_to_the_output_it_names(self):
+        """A run whose builds go through the output-capturing wrapper records an envelope.
+
+        It quotes only the last few lines of the real streams, so sealing from it
+        would derive the fact from whichever terminals happened to print last and
+        would say so nowhere.
+        """
+        captured = self.run_dir / "logs/gate.stdout.log"
+        captured.write_text(GATE_LOG, encoding="utf-8")
+        envelope = self.run_dir / "logs/gate.envelope.log"
+        tail = GATE_LOG.splitlines()[-1]
+        envelope.write_text(
+            f"$ run-quiet lake build gate\nexit=0 time=1sec\n"
+            f"stdout: {len(GATE_LOG.splitlines())} lines -> {captured}\n"
+            f"--- stdout (last 1) ---\n{tail}\n",
+            encoding="utf-8",
+        )
+        self.make_run(
+            status={
+                "state": "success",
+                "results": [{"target": GATE, "outcome": "built", "log": str(envelope)}],
+            }
+        )
+        self.assertEqual(self.seal("--write").returncode, 0)
+        declarations = self.sealed()["declarations"]
+        self.assertIn("Alpha.Certificates.rejection_profile", declarations)
+        self.assertGreater(len(declarations), 1)
+
+    def test_an_envelope_naming_a_missing_output_is_refused(self):
+        envelope = self.run_dir / "logs/gate.envelope.log"
+        envelope.write_text(
+            f"$ run-quiet lake build gate\nstdout: 9 lines -> {self.run_dir}/logs/gone.log\n",
+            encoding="utf-8",
+        )
+        self.make_run(
+            status={
+                "state": "success",
+                "results": [{"target": GATE, "outcome": "built", "log": str(envelope)}],
+            }
+        )
+        self.assertEqual(self.seal("--write").returncode, 2)
+
     def test_terminal_without_an_axiom_fact_is_refused(self):
         self.write_config(terminal="Alpha.Certificates.absent")
         self.assertEqual(self.seal("--write").returncode, 2)

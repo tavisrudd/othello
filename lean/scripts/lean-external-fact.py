@@ -154,8 +154,32 @@ def gate_run(run_dir: Path, package_root: Path, gate: str) -> tuple[Path, dict[s
             continue
         if result.get("outcome") not in ACCEPTED_OUTCOMES:
             raise Refused(f"{run_dir}: gate outcome is {result.get('outcome')!r}")
-        return Path(result["log"]), manifest
+        return elaboration_log(Path(result["log"])), manifest
     raise Refused(f"{run_dir}: no result for gate {gate}")
+
+
+def elaboration_log(recorded: Path) -> Path:
+    """The log carrying the gate's own output, following a capture envelope to it.
+
+    A run whose builds go through the output-capturing wrapper records an envelope
+    naming where the real streams were written and quoting only their last few
+    lines.  Sealing from the envelope would derive a fact from whichever terminals
+    happened to print last, and would say so nowhere.  The envelope names its own
+    stdout file, so the fact is derived from that instead.
+    """
+    if not recorded.is_file():
+        raise Refused(f"{recorded}: the recorded gate log is missing")
+    match = re.search(
+        r"^stdout: \d+ lines -> (.+)$", recorded.read_text(encoding="utf-8"), re.MULTILINE
+    )
+    if match is None:
+        return recorded
+    stdout = Path(match.group(1))
+    if not stdout.is_file():
+        raise Refused(
+            f"{recorded}: names the captured output {stdout}, which is missing"
+        )
+    return stdout
 
 
 def package_entry(config: Path, name: str) -> dict[str, Any]:
