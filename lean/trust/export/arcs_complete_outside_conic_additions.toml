@@ -1,0 +1,74 @@
+# Area-export configuration for the matching-packing bounds and small
+# odd-order witnesses added to the theory of arcs complete outside a conic.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# This is a boundary of its own rather than part of the human Arcs boundary
+# exported beside it: it adds quantitative packing bounds and explicit witnesses
+# over three further field orders, and neither boundary uses the other's
+# terminals.
+
+schema_version = 1
+area = "arcs_complete_outside_conic_additions"
+gate = "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions"
+trust_statement = "trust/ARCS_COMPLETE_OUTSIDE_CONIC_ADDITIONS.md"
+axiom_audit = "trust/ArcsCompleteOutsideConicAdditionsAxiomAudit.lean"
+
+statement_title = "Matching-packing bounds and small odd-order witnesses: formal boundary"
+
+overview = """
+This boundary records two human-scale additions to the formal theory of arcs
+complete outside a prescribed conic, accompanying the manuscript of that name.
+
+The first is a maximum-matching packing argument: failure of an exact matching
+design forces a two-block deficiency, which in turn gives a quantitative bound
+on the prescribed-hole defect.  The second is a set of explicit relative-conic
+witnesses over the fields of orders thirteen, seventeen, and nineteen.
+"""
+
+correspondence = """
+The packing half develops matching and clique packings of the secant structure.
+It proves that a one-block-short leave is a clique, that a decomposition exists
+once the leave has the cardinality the binomial count predicts, and that the bad
+concurrence edge count together with the maximum block number bounds the scaled
+defect.  The deficiency estimates are then transported to the two forms the
+manuscript uses, one through the matching-packing deficiency and one through the
+maximum concurrence-block deficiency.
+
+The witness half exhibits, for each of the orders thirteen, seventeen, and
+nineteen, a normalized configuration together with kernel-checked proofs of its
+determinant, its mapping behaviour, and its conic form, and then checks the arc,
+disjointness, and coverage conditions by kernel reduction.
+
+The witnesses establish upper bounds alone: eight, nine, and ten at the three
+orders.  The matching lower bounds come from exhaustive classifications that are
+external computations, are not declarations of this closure, and are not claimed
+by any terminal here.
+"""
+
+boundary = """
+Every terminal is a kernel proof, and every finite witness predicate is checked
+by kernel reduction rather than native evaluation.  The closure contains no user
+axiom, unsafe declaration, admitted proof, imported external certificate data,
+or generated certificate family, and the trust registry permits no axiom in this
+area.
+"""
+
+axiom_audit_title = "Axiom audit for the packing bounds and small odd-order witnesses"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with this boundary: the
+matching and clique packing statements, the scaled-defect bounds in both
+deficiency forms, and the normalizations and kernel-checked witness predicates
+at orders thirteen, seventeen, and nineteen.
+"""
+
+readme_anchor = "  are not part of it."
+
+readme_bullet = """- `trust/manifests/arcs_complete_outside_conic_additions.json` content-addresses
+  the packing and witness additions to the Arcs boundary: the matching-packing
+  deficiency bounds on the scaled defect, and the kernel-checked relative-conic
+  witnesses at orders thirteen, seventeen, and nineteen, which establish the
+  upper bounds alone."""
