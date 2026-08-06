@@ -2374,7 +2374,7 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "1b6a9bc5b79f56c52721a4a7e66fd709c0c09edd907e74455572417a5aabb497"
+        "sha256": "73763b37ed9f99106d28ed5e33dd21ba9216c56c123c5b835cf43ed8417abf8c"
       },
       {
         "path": "verification/check_manuscript_build.py",
