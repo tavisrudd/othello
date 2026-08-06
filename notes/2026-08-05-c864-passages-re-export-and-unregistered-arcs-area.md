@@ -121,6 +121,44 @@ constructing and tracking an export configuration for an area that was published
 extracting a trust fact that has never been generated.  Nothing in the current window can
 substitute for that.
 
+### The arcs area is not the exception; it is the majority
+
+Enumerating every area finitegeom seals against the configurations under `lean/trust/export/` shows
+that most of the published library was exported without a tracked configuration.  finitegeom seals
+eleven areas; four have a registered configuration here, and a fifth registered configuration
+(`golden_quantum_statistics`) corresponds to no area on finitegeom's `main`.
+
+| area | registered | modules | source commit | root gate |
+|---------------------------------------|--------------|--------:|---------------|--------------------------------------------------------|
+| `ame_lu`                              | UNREGISTERED |      68 | `10d1941a`    | `RelativeConicArcs.Gates.AMELUAggregate`                 |
+| `arcs_complete_outside_conic_additions` | UNREGISTERED |    33 | `29c8946c`    | `RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions` |
+| `arcs_complete_outside_conic_human`   | UNREGISTERED |      77 | `10d1941a`    | `RelativeConicArcs.Gates.ArcsCompleteOutsideConic`       |
+| `clebsch_factorization`               | UNREGISTERED |      37 | `10d1941a`    | `RelativeConicArcs.Gates.ClebschArithmeticGluing`        |
+| `clebsch_rigidity_human`              | UNREGISTERED |      27 | `10d1941a`    | `RelativeConicArcs.Gates.ClebschRigidityTrust`           |
+| `complete_ports`                      | UNREGISTERED |      31 | `77e5454b`    | `RepairPorts.Gates.CompletePorts`                        |
+| `prs_beyond_redundancy_four`          | UNREGISTERED |      17 | `10d1941a`    | `RelativeConicArcs.Gates.PRSFoundation`                  |
+| `clebsch_passages`                    | registered   |      17 | —             | `RelativeConicArcs.Gates.ClebschPassages`                |
+| `clebsch_six_arc_concurrence`         | registered   |      26 | —             | `RelativeConicArcs.SixArcConcurrenceSpine`               |
+| `clebsch_support_cubic_orientation`   | registered   |      21 | —             | `RelativeConicArcs.SupportOrientationSpine`              |
+| `mds_css_transversal_groups`          | registered   |      66 | —             | `RelativeConicArcs.Gates.MDSCSSTransversalGeometry`      |
+
+The seven unregistered areas seal 290 modules against 130 in the four registered ones.  Five of the
+seven name the same source commit `10d1941a` of 2026-07-28, which is when the untracked export
+apparatus was evidently used; the additions area names `29c8946c` and `complete_ports` names
+`77e5454b`.
+
+They span several lanes' deliverables — the AME/LU aggregate, both arcs areas, Clebsch
+factorization, Clebsch rigidity, complete ports, and the beyond-four PRS foundation — so registering
+them is not a build-sys-local edit.
+
+The immediate consequence for the Dye audit is that the divergence is the same defect in another
+area.  The monorepo proves both Dye statements as theorems in
+`lean/RelativeConicArcs/Q11DyeAxioms.lean` (`dye1991_brianchon_bound` and
+`dye1991_equality_classification` are `theorem` declarations), while finitegeom declares both as
+`axiom` at the pinned revision `85dfde9e` and identically at its current `main`.  Those declarations
+belong to `clebsch_rigidity_human`, an unregistered area, so finitegeom cannot be brought into
+agreement with the monorepo's proofs by any registered export either.
+
 The order-eleven certificate package is unaffected in the meantime: its gate closure no longer
 reaches any order-eleven semantic module, following the umbrella-import removal in package commit
 `d780520`, so it builds against a finitegeom revision carrying the broken copy.
@@ -138,7 +176,14 @@ reaches any order-eleven semantic module, following the umbrella-import removal 
 - Publish finitegeom `bb31411`, then re-pin, rebuild, re-audit and re-seal the order-eleven package
   forward onto it, including the `SupportOrientation*` renames in its gate imports and axiom-audit
   names, the monorepo's pinned copy of its fact, and the Clebsch-rigidity trust manifest.
-- Decide how the `arcs_complete_outside_conic_human` area becomes a registered, replayable export,
-  and repair finitegeom's stale `Q11Residual`/`Q11Coding` and missing `ParametrizedHoles` through it.
+- Decide how the seven unregistered areas become registered, replayable exports.  This is the
+  precondition for acceptance items 11 and 12, which cannot be satisfied while most of the published
+  library has no configuration to replay.  It spans several lanes and needs its own scope decision
+  rather than absorption into C864's owned paths.
+- Through the registered `arcs_complete_outside_conic_human` area, repair finitegeom's stale
+  `Q11Residual`/`Q11Coding` and missing `ParametrizedHoles`.
+- Through the registered `clebsch_rigidity_human` area, replace finitegeom's two Dye `axiom`
+  declarations with the monorepo's proved theorems, then re-derive the order-eleven package's axiom
+  list from a fresh gate run rather than carrying the published one forward.
 - Add a standalone finitegeom build to the export tooling as a gate, which is what would have caught
   the stale copy at export time rather than inside a consumer's build.

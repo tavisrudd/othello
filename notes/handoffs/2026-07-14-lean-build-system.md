@@ -196,11 +196,17 @@ than refresh one.
 Two findings changed the shape of the remaining export work
 (`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`).  The orientation rename has
 already reached finitegeom, so the former atomic export-and-reseal window reduces to the certificate
-package's own forward re-pin.  And finitegeom's `Q11Residual.lean` and `Q11Coding.lean` belong to
-`arcs_complete_outside_conic_human`, a 77-source area whose export configuration has never been
-tracked here and whose trust fact has never been extracted; no registered area can repair them or
-supply the missing `ParametrizedHoles.lean`, so finitegeom stays unbuildable standalone until that
-area is registered.
+package's own forward re-pin.
+
+The larger one: most of the published shared library has no tracked export configuration.  finitegeom
+seals eleven areas, of which only four are registered under `lean/trust/export/`; the seven
+unregistered ones seal 290 modules against 130 registered, and five of them name the same source
+commit `10d1941a` of 2026-07-28.  They span the AME/LU aggregate, both arcs areas, Clebsch
+factorization, Clebsch rigidity, complete ports, and the beyond-four PRS foundation, so registering
+them crosses several lanes and needs its own scope decision.  Until then acceptance items 11 and 12
+cannot be met, finitegeom stays unbuildable standalone because the missing `ParametrizedHoles.lean`
+and the stale `Q11Residual`/`Q11Coding` sit in an unregistered area, and finitegeom's two Dye
+declarations remain `axiom` where the monorepo now proves them as theorems.
 
 Standing blockers: q25 waits on C318/C319; every package waits on its applicable C324 regeneration
 check; the C759 Nanoda pilot waits on a final Lean 4.32 release rather than the pinned 4.32.0-rc1;
