@@ -37,8 +37,21 @@ finitegeom/
     complete-repair-ports/  equivariant-robust-completion/
 ```
 
-Namespaces should mirror the boundaries, for example `FiniteGeom.Projective.*` and
-`Paper.Beyond4PRS.*`. The import direction is one-way: papers may import shared APIs;
+The directory names above are exact paper/repository aliases and are intentionally
+lowercase with underscores or hyphens. They are not Lean module names. Lean module
+components should use the usual PascalCase convention, for example:
+
+```text
+Paper.Beyond4PRS.*
+Paper.ArcsCompleteOutsideConic.*
+Paper.AMELU.*
+FiniteGeom.Projective.*
+```
+
+During the first split, preserve the existing `RelativeConicArcs.*` module names
+behind package-specific source roots; do not force filesystem aliases into Lean
+names. Namespace migration to the PascalCase names above is a later, separate
+chunk. The import direction is one-way: papers may import shared APIs;
 shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
