@@ -62,11 +62,13 @@
       "id": "coding",
       "target_namespace": "TavisRuddFiniteGeom.Shared.Coding",
       "legacy_modules": [
+        "FiniteGeom.Code",
         "RelativeConicArcs.CodingBridge",
         "RelativeConicArcs.SyndromeGeometry",
         "RelativeConicArcs.FiniteFields"
       ],
       "module_map": {
+        "FiniteGeom.Code": "TavisRuddFiniteGeom.Shared.Coding.Code",
         "RelativeConicArcs.CodingBridge": "TavisRuddFiniteGeom.Shared.Coding.CodingBridge",
         "RelativeConicArcs.SyndromeGeometry": "TavisRuddFiniteGeom.Shared.Coding.SyndromeGeometry",
         "RelativeConicArcs.FiniteFields": "TavisRuddFiniteGeom.Shared.Coding.FiniteFields"
@@ -98,7 +100,40 @@
         "RelativeConicArcs.AMELU.SyndromeGeometry",
         "RelativeConicArcs.AMELU.ExtensionFieldPencil",
         "RelativeConicArcs.AMELU.LUPencilClassification",
-        "RelativeConicArcs.AMELU.TransportDivisor"
+        "RelativeConicArcs.AMELU.TransportDivisor",
+        "RelativeConicArcs.AMELU.CSS",
+        "RelativeConicArcs.AMELU.DiagonalTensor",
+        "RelativeConicArcs.AMELU.DiagonalTensorEquiv",
+        "RelativeConicArcs.AMELU.FourMarginalDiagonal",
+        "RelativeConicArcs.AMELU.FourMarginalIntertwining",
+        "RelativeConicArcs.AMELU.GenericDefinitions",
+        "RelativeConicArcs.AMELU.GenericDiagonalTensor",
+        "RelativeConicArcs.AMELU.GenericLURigidity",
+        "RelativeConicArcs.AMELU.GenericMDS",
+        "RelativeConicArcs.AMELU.GenericMarginal",
+        "RelativeConicArcs.AMELU.GenericMarginalCovariance",
+        "RelativeConicArcs.AMELU.GenericPartyPermutation",
+        "RelativeConicArcs.AMELU.GenericSubsystemWeyl",
+        "RelativeConicArcs.AMELU.GenericTensorRigidity",
+        "RelativeConicArcs.AMELU.LURigidity",
+        "RelativeConicArcs.AMELU.LogicalPhase",
+        "RelativeConicArcs.AMELU.MDSShortening",
+        "RelativeConicArcs.AMELU.MarginalAxisRigidity",
+        "RelativeConicArcs.AMELU.MarginalWeylExpansion",
+        "RelativeConicArcs.AMELU.OrderedFourConjugation",
+        "RelativeConicArcs.AMELU.PartialTraceCovariance",
+        "RelativeConicArcs.AMELU.PartyPermutation",
+        "RelativeConicArcs.AMELU.PencilClassification",
+        "RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup",
+        "RelativeConicArcs.AMELU.ProductUnitarySymmetry",
+        "RelativeConicArcs.AMELU.ProductUnitarySymmetryTopology",
+        "RelativeConicArcs.AMELU.ProjectiveClifford",
+        "RelativeConicArcs.AMELU.StabilizerDictionary",
+        "RelativeConicArcs.AMELU.StateMarginalCovariance",
+        "RelativeConicArcs.AMELU.SubsystemConjugation",
+        "RelativeConicArcs.AMELU.SubsystemWeylBasis",
+        "RelativeConicArcs.AMELU.UnitaryConjugation",
+        "RelativeConicArcs.AMELU.WeylBasis"
       ],
       "module_map": {
         "RelativeConicArcs.AMELU.Definitions": "TavisRuddFiniteGeom.Shared.AMELU.Definitions",
@@ -107,9 +142,42 @@
         "RelativeConicArcs.AMELU.SyndromeGeometry": "TavisRuddFiniteGeom.Shared.AMELU.SyndromeGeometry",
         "RelativeConicArcs.AMELU.ExtensionFieldPencil": "TavisRuddFiniteGeom.Shared.AMELU.ExtensionFieldPencil",
         "RelativeConicArcs.AMELU.LUPencilClassification": "TavisRuddFiniteGeom.Shared.AMELU.LUPencilClassification",
-        "RelativeConicArcs.AMELU.TransportDivisor": "TavisRuddFiniteGeom.Shared.AMELU.TransportDivisor"
+        "RelativeConicArcs.AMELU.TransportDivisor": "TavisRuddFiniteGeom.Shared.AMELU.TransportDivisor",
+        "RelativeConicArcs.AMELU.CSS": "TavisRuddFiniteGeom.Shared.AMELU.CSS",
+        "RelativeConicArcs.AMELU.DiagonalTensor": "TavisRuddFiniteGeom.Shared.AMELU.DiagonalTensor",
+        "RelativeConicArcs.AMELU.DiagonalTensorEquiv": "TavisRuddFiniteGeom.Shared.AMELU.DiagonalTensorEquiv",
+        "RelativeConicArcs.AMELU.FourMarginalDiagonal": "TavisRuddFiniteGeom.Shared.AMELU.FourMarginalDiagonal",
+        "RelativeConicArcs.AMELU.FourMarginalIntertwining": "TavisRuddFiniteGeom.Shared.AMELU.FourMarginalIntertwining",
+        "RelativeConicArcs.AMELU.GenericDefinitions": "TavisRuddFiniteGeom.Shared.AMELU.GenericDefinitions",
+        "RelativeConicArcs.AMELU.GenericDiagonalTensor": "TavisRuddFiniteGeom.Shared.AMELU.GenericDiagonalTensor",
+        "RelativeConicArcs.AMELU.GenericLURigidity": "TavisRuddFiniteGeom.Shared.AMELU.GenericLURigidity",
+        "RelativeConicArcs.AMELU.GenericMDS": "TavisRuddFiniteGeom.Shared.AMELU.GenericMDS",
+        "RelativeConicArcs.AMELU.GenericMarginal": "TavisRuddFiniteGeom.Shared.AMELU.GenericMarginal",
+        "RelativeConicArcs.AMELU.GenericMarginalCovariance": "TavisRuddFiniteGeom.Shared.AMELU.GenericMarginalCovariance",
+        "RelativeConicArcs.AMELU.GenericPartyPermutation": "TavisRuddFiniteGeom.Shared.AMELU.GenericPartyPermutation",
+        "RelativeConicArcs.AMELU.GenericSubsystemWeyl": "TavisRuddFiniteGeom.Shared.AMELU.GenericSubsystemWeyl",
+        "RelativeConicArcs.AMELU.GenericTensorRigidity": "TavisRuddFiniteGeom.Shared.AMELU.GenericTensorRigidity",
+        "RelativeConicArcs.AMELU.LURigidity": "TavisRuddFiniteGeom.Shared.AMELU.LURigidity",
+        "RelativeConicArcs.AMELU.LogicalPhase": "TavisRuddFiniteGeom.Shared.AMELU.LogicalPhase",
+        "RelativeConicArcs.AMELU.MDSShortening": "TavisRuddFiniteGeom.Shared.AMELU.MDSShortening",
+        "RelativeConicArcs.AMELU.MarginalAxisRigidity": "TavisRuddFiniteGeom.Shared.AMELU.MarginalAxisRigidity",
+        "RelativeConicArcs.AMELU.MarginalWeylExpansion": "TavisRuddFiniteGeom.Shared.AMELU.MarginalWeylExpansion",
+        "RelativeConicArcs.AMELU.OrderedFourConjugation": "TavisRuddFiniteGeom.Shared.AMELU.OrderedFourConjugation",
+        "RelativeConicArcs.AMELU.PartialTraceCovariance": "TavisRuddFiniteGeom.Shared.AMELU.PartialTraceCovariance",
+        "RelativeConicArcs.AMELU.PartyPermutation": "TavisRuddFiniteGeom.Shared.AMELU.PartyPermutation",
+        "RelativeConicArcs.AMELU.PencilClassification": "TavisRuddFiniteGeom.Shared.AMELU.PencilClassification",
+        "RelativeConicArcs.AMELU.ProductUnitaryAutomorphismGroup": "TavisRuddFiniteGeom.Shared.AMELU.ProductUnitaryAutomorphismGroup",
+        "RelativeConicArcs.AMELU.ProductUnitarySymmetry": "TavisRuddFiniteGeom.Shared.AMELU.ProductUnitarySymmetry",
+        "RelativeConicArcs.AMELU.ProductUnitarySymmetryTopology": "TavisRuddFiniteGeom.Shared.AMELU.ProductUnitarySymmetryTopology",
+        "RelativeConicArcs.AMELU.ProjectiveClifford": "TavisRuddFiniteGeom.Shared.AMELU.ProjectiveClifford",
+        "RelativeConicArcs.AMELU.StabilizerDictionary": "TavisRuddFiniteGeom.Shared.AMELU.StabilizerDictionary",
+        "RelativeConicArcs.AMELU.StateMarginalCovariance": "TavisRuddFiniteGeom.Shared.AMELU.StateMarginalCovariance",
+        "RelativeConicArcs.AMELU.SubsystemConjugation": "TavisRuddFiniteGeom.Shared.AMELU.SubsystemConjugation",
+        "RelativeConicArcs.AMELU.SubsystemWeylBasis": "TavisRuddFiniteGeom.Shared.AMELU.SubsystemWeylBasis",
+        "RelativeConicArcs.AMELU.UnitaryConjugation": "TavisRuddFiniteGeom.Shared.AMELU.UnitaryConjugation",
+        "RelativeConicArcs.AMELU.WeylBasis": "TavisRuddFiniteGeom.Shared.AMELU.WeylBasis"
       },
-      "regrouping": "retain only APIs consumed outside AME-LU; keep AME-LU proof-specific modules under Papers/ame_lu"
+      "regrouping": "these 40 modules are the current AME-LU/MDS/PRS-balanced cross-paper API; the balanced gate reaches 37 of them, while three additional modules are shared by the AME-LU and MDS closures. Keep AME-LU-only modules under Papers/ame_lu"
     },
     {
       "id": "certificate_api",
@@ -121,6 +189,52 @@
         "RelativeConicArcs.Certificate": "TavisRuddFiniteGeom.Shared.Certificates.Certificate"
       },
       "regrouping": "retain semantic checker and soundness interfaces; generated leaves remain in frozen certificate repositories"
+    },
+    {
+      "id": "prs_family",
+      "target_namespace": "TavisRuddFiniteGeom.Shared.PRS",
+      "legacy_modules": [
+        "RelativeConicArcs.PRSContraction",
+        "RelativeConicArcs.PRSFoundation",
+        "RelativeConicArcs.PRSPolarInduction",
+        "RelativeConicArcs.PRSRedundancyFive",
+        "RelativeConicArcs.PRSRedundancyFiveCertificate",
+        "RelativeConicArcs.PRSRedundancyFiveCertified",
+        "RelativeConicArcs.PRSRedundancySixSeven",
+        "RelativeConicArcs.PRSRedundancySixSevenCertificate",
+        "RelativeConicArcs.PRSRedundancyEight",
+        "RelativeConicArcs.PRSResidualQuadratic",
+        "RelativeConicArcs.PRSRedundancyNine",
+        "RelativeConicArcs.PRSSquarefreeMarkerDensity",
+        "RelativeConicArcs.PRSStableComponents",
+        "RelativeConicArcs.PRSUniformCoveringRadius",
+        "RelativeConicArcs.PRSCharacteristicTwoHessianLucas"
+      ],
+      "module_map": {
+        "RelativeConicArcs.PRSContraction": "TavisRuddFiniteGeom.Shared.PRS.Contraction",
+        "RelativeConicArcs.PRSFoundation": "TavisRuddFiniteGeom.Shared.PRS.Foundation",
+        "RelativeConicArcs.PRSPolarInduction": "TavisRuddFiniteGeom.Shared.PRS.PolarInduction",
+        "RelativeConicArcs.PRSRedundancyFive": "TavisRuddFiniteGeom.Shared.PRS.RedundancyFive",
+        "RelativeConicArcs.PRSRedundancyFiveCertificate": "TavisRuddFiniteGeom.Shared.PRS.RedundancyFiveCertificate",
+        "RelativeConicArcs.PRSRedundancyFiveCertified": "TavisRuddFiniteGeom.Shared.PRS.RedundancyFiveCertified",
+        "RelativeConicArcs.PRSRedundancySixSeven": "TavisRuddFiniteGeom.Shared.PRS.RedundancySixSeven",
+        "RelativeConicArcs.PRSRedundancySixSevenCertificate": "TavisRuddFiniteGeom.Shared.PRS.RedundancySixSevenCertificate",
+        "RelativeConicArcs.PRSRedundancyEight": "TavisRuddFiniteGeom.Shared.PRS.RedundancyEight",
+        "RelativeConicArcs.PRSResidualQuadratic": "TavisRuddFiniteGeom.Shared.PRS.ResidualQuadratic",
+        "RelativeConicArcs.PRSRedundancyNine": "TavisRuddFiniteGeom.Shared.PRS.RedundancyNine",
+        "RelativeConicArcs.PRSSquarefreeMarkerDensity": "TavisRuddFiniteGeom.Shared.PRS.SquarefreeMarkerDensity",
+        "RelativeConicArcs.PRSStableComponents": "TavisRuddFiniteGeom.Shared.PRS.StableComponents",
+        "RelativeConicArcs.PRSUniformCoveringRadius": "TavisRuddFiniteGeom.Shared.PRS.UniformCoveringRadius",
+        "RelativeConicArcs.PRSCharacteristicTwoHessianLucas": "TavisRuddFiniteGeom.Shared.PRS.CharacteristicTwoHessianLucas"
+      },
+      "regrouping": "PRS algebra and conditional interfaces are a shared family within the PRS program. The current beyond-four aggregate consumes only the R5--R7 subset; R8, R9, and characteristic-two/Lucas modules remain registered but are not silently assigned to the current paper closure.",
+      "consumer_boundary": "Keep this family central until every current consumer, including unadopted R8/R9/Lucas work and the balanced adapter, has a declared package boundary.",
+      "unmapped_internal_modules": [
+        {
+          "module": "RelativeConicArcs.PRSFourMarkerLowerPackage",
+          "reason": "currently has no registered paper gate or reverse import consumer; do not promote an unused draft module into a shared public library"
+        }
+      ]
     }
   ],
   "paper_groups": [
@@ -167,18 +281,104 @@
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.Beyond4PRS.PaperInterface",
         "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit",
-        "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension"
+        "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension",
+        "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.QuantumExtensionAxiomAudit"
       ],
-      "prefix_rules": [
-        {
-          "legacy_prefix": "RelativeConicArcs.PRS",
-          "target_prefix": "TavisRuddFiniteGeom.Papers.Beyond4PRS"
-        }
+      "release_surfaces": {
+        "current_geometric_export": [
+          "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+          "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit"
+        ],
+        "balanced_quantum_exported_with_current_paper": false,
+        "balanced_quantum_status": "paper-adjacent separate cross-paper closure; retain a separate export and synchronization record"
+      },
+      "paper_facing_legacy_modules": [
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtension",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit",
+        "RelativeConicArcs.PRSBalancedQuantumExtension"
       ],
-      "split_shared_into": [
+      "paper_facing_module_map": {
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFour": "TavisRuddFiniteGeom.Papers.Beyond4PRS.PaperInterface",
+        "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit": "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtension": "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension",
+        "RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit": "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.QuantumExtensionAxiomAudit",
+        "RelativeConicArcs.PRSBalancedQuantumExtension": "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension"
+      },
+      "imports_shared": [
+        "Shared.PRS",
+        "Shared.Projective",
         "Shared.Coding",
-        "Shared.Certificates",
-        "Papers.AMELU.adapter"
+        "Shared.Incidence"
+      ],
+      "imports_shared_by_closure": {
+        "geometric": [
+          "Shared.PRS"
+        ],
+        "balanced_quantum": [
+          "Shared.PRS",
+          "Shared.AMELU",
+          "Shared.Projective",
+          "Shared.Coding",
+          "Shared.Incidence"
+        ]
+      },
+      "closure_audit": {
+        "geometric_gate_project_owned_modules": [
+          "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+          "RelativeConicArcs.Gates.PRSFoundation",
+          "RelativeConicArcs.Gates.PRSPolarInductionRedundancySixSeven",
+          "RelativeConicArcs.Gates.PRSRedundancyFive",
+          "RelativeConicArcs.Gates.PRSStableComponents",
+          "RelativeConicArcs.PRSContraction",
+          "RelativeConicArcs.PRSFoundation",
+          "RelativeConicArcs.PRSPolarInduction",
+          "RelativeConicArcs.PRSRedundancyFive",
+          "RelativeConicArcs.PRSRedundancyFiveCertificate",
+          "RelativeConicArcs.PRSRedundancyFiveCertified",
+          "RelativeConicArcs.PRSRedundancySixSeven",
+          "RelativeConicArcs.PRSRedundancySixSevenCertificate",
+          "RelativeConicArcs.PRSSquarefreeMarkerDensity",
+          "RelativeConicArcs.PRSStableComponents",
+          "RelativeConicArcs.PRSUniformCoveringRadius"
+        ],
+        "geometric_audit_addition": "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit",
+        "balanced_adapter_direct_source": "RelativeConicArcs.PRSBalancedQuantumExtension",
+        "balanced_gate_additions": [
+          "RelativeConicArcs.Gates.PRSBalancedQuantumExtension",
+          "RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit"
+        ],
+        "counting_basis": "The geometric gate closure is 16 project-owned modules; its audit adds one. The balanced gate has a much larger transitive AME-LU closure and is not part of the geometric pilot."
+      },
+      "not_in_current_paper_closure": {
+        "modules": [
+          "RelativeConicArcs.PRSCharacteristicTwoHessianLucas",
+          "RelativeConicArcs.PRSRedundancyEight",
+          "RelativeConicArcs.PRSResidualQuadratic",
+          "RelativeConicArcs.PRSRedundancyNine"
+        ],
+        "gates": [
+          "RelativeConicArcs.Gates.PRSCharacteristicTwoHessianLucas",
+          "RelativeConicArcs.Gates.PRSCharacteristicTwoHessianLucasAxiomAudit",
+          "RelativeConicArcs.Gates.PRSRedundancyEight",
+          "RelativeConicArcs.Gates.PRSRedundancyEightAxiomAudit",
+          "RelativeConicArcs.Gates.PRSRedundancyNine",
+          "RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit"
+        ],
+        "reason": "These are cited or recorded in the paper's wider mathematical/evidence boundary but are deliberately outside the registered R5--R7 Lean aggregate. They must not be assigned to PaperInterface until a later paper-closure decision."
+      },
+      "balanced_cross_paper_dependency": {
+        "source": "RelativeConicArcs.AMELU.*",
+        "target": "Shared.AMELU",
+        "status": "transitive API review required; the current seven-module AMELU mapping is not the full balanced-gate closure"
+      },
+      "split_shared_into": [
+        "Shared.PRS",
+        "Shared.Coding",
+        "Shared.Projective",
+        "Shared.Incidence",
+        "Shared.AMELU"
       ]
     },
     {

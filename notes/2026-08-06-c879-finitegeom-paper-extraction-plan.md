@@ -29,11 +29,11 @@ Use explicit paper and shared source roots:
 ```text
 finitegeom/
   Shared/
-    Projective/  FiniteFields/  Coding/  Incidence/  Certificates/
+    Projective/  FiniteFields/  Coding/  Incidence/  Certificates/  PRS/
   Papers/
     arcs_complete_outside_conic/  beyond4_prs/  ame_lu/
     clebsch-rigidity/  clebsch-passages/
-    q13-passant-code/  mds-css-transversal/
+    q13-passant-code/  mds_css_transversal_groups/
     complete-repair-ports/  equivariant-robust-completion/
 ```
 
@@ -125,6 +125,16 @@ TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit
 TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension
 ```
 
+For the PRS pilot, the registered geometric gate is the boundary, not the whole
+`RelativeConicArcs.PRS*` namespace. Its current closure is 16 project-owned Lean
+modules, with the aggregate audit adding one. The balanced quantum gate is a separate
+52-module project-owned closure (53 with its audit), including 37 AME--LU modules;
+it is not part of the geometric pilot. The R8, R9, and characteristic-two/Lucas gates
+and their audits are currently outside the registered R5--R7 paper closure, even though
+their source modules reuse the PRS foundation. Those source modules therefore belong
+to a central `Shared.PRS` family until their own paper or research-package boundaries
+are declared.
+
 The first source split preserves existing module names. This naming cleanup is a later
 one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
 not trigger a repository-wide rename. Shared-library families use the same rule and
@@ -136,8 +146,8 @@ The first physical split must not also rename namespaces. Initially preserve exi
 module names behind package-specific source roots, for example:
 
 ```text
-Papers/PRS/RelativeConicArcs/PRSFoundation.lean
-Papers/Arcs/RelativeConicArcs/...
+Papers/beyond4_prs/RelativeConicArcs/PRSFoundation.lean
+Papers/arcs_complete_outside_conic/RelativeConicArcs/...
 Shared/RelativeConicArcs/...
 ```
 
@@ -170,12 +180,15 @@ not serve as the primary ownership map.
 5. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
-6. Extract one already C864-validated, human-scale paper area as the pilot. Use the
-   main beyond-four PRS geometric interface first: its project-owned closure is small and
-   its paper-specific modules have no other paper consumers. Keep the balanced quantum
-   extension and its AME--LU adapter as a separate later chunk; do not combine that
-   cross-paper branch with the PRS pilot. Retain shared modules centrally and use
-   temporary compatibility shims where necessary.
+6. Extract one already C864-validated, human-scale paper interface as the pilot. Use the
+   main beyond-four PRS geometric interface first: its registered aggregate is a small
+   16-module project-owned closure. Do not infer that every `RelativeConicArcs.PRS*`
+   module belongs to this paper: the PRS foundation, contraction, polar-induction, and
+   R6/R7 modules are also consumed by the unadopted R8/R9/Lucas branches. Keep that
+   PRS-family infrastructure centrally until those consumers are classified. Keep the
+   balanced quantum extension and its AME--LU adapter as a separate later chunk; do not
+   combine that cross-paper branch with the PRS pilot. Retain shared modules centrally
+   and use temporary compatibility shims where necessary.
 7. Validate the pilot from a clean package-local source tree: use the existing area
    manifest and standalone-build gate, build only the `PaperInterface` and audit through
    the guarded queue, run its checker, compare declarations and axioms, and run the
@@ -255,10 +268,10 @@ next safe chunk:
 | C879.3 | Add the import-firewall checker in report-only mode. | Checker tests against real and adversarial fixtures; commit checker. |
 | C879.4 | Convert the checker to enforcement for shared-to-paper and undeclared paper-to-paper imports. | Existing tree passes; adversarial cases fail as intended; commit policy. |
 | C879.5 | Create the `beyond4_prs` paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
-| C879.6 | Materialize a byte-preserving beyond-four PRS geometric candidate from the registered area, excluding the balanced quantum branch. | Source audit and empty export delta; commit candidate metadata only. |
+| C879.6 | Register the exact beyond-four PRS geometric closure and its exclusions, excluding the balanced quantum branch and the unadopted R8/R9/Lucas branches. | Source audit, closure diff, and empty export delta; commit metadata only. |
 | C879.7 | Validate the beyond-four PRS `PaperInterface` and its axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
-| C879.8 | Move one paper-private module family behind the preserved module names. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
-| C879.9 | Move the next paper-private family or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared-module move is permitted in this chunk. |
+| C879.8 | Move one paper-facing PRS interface/wrapper family behind the preserved module names, without moving PRS-family infrastructure. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
+| C879.9 | Move the next paper-facing wrapper family, or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared PRS-family move is permitted in this chunk. |
 | C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-interface list, bounded shared build target, downstream exports, and all affected-paper replays; commit only when synchronized. |
 | C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only build target, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
 | C879.12+ | Repeat the paper-private/shared-family cycle for the next paper. | Each row is a separate synchronized commit set and must leave every affected package buildable. |
@@ -286,8 +299,8 @@ raising a worker cap or bypassing the queue.
 | C879.5 | No Lean; PRS directory/package scaffold | 5–15 min | Safe. |
 | C879.6 | No elaboration; byte-preserving area materialization and source audit | 5–20 min | Safe if the export has no delta. |
 | C879.7 | Main PRS `PaperInterface` plus `Verification/AxiomAudit`; 16-module main closure and 17-module audited closure | 2–10 min warm; 10–25 min cold | Safe only with restored dependencies and an exact target. |
-| C879.8 | One PRS-private family, initially 1–4 modules, plus its exact `PaperInterface` | 2–10 min | Safe after the family and target are named. |
-| C879.9 | Next PRS-private family, same limit | 2–10 min | Safe only if the reverse closure remains bounded. |
+| C879.8 | One paper-facing wrapper family, initially 1–4 modules, plus its exact `PaperInterface` | 2–10 min | Safe after the family and target are named; PRS infrastructure remains shared. |
+| C879.9 | Next paper-facing wrapper family, same limit | 2–10 min | Safe only if the reverse closure remains bounded. |
 | C879.10 | One shared API family plus every reverse-dependent paper interface | 5–25 min warm; unbounded cold | Conditional; split if more than one heavy paper interface is affected. |
 | C879.11 | PRS balanced adapter, importing AME--LU and PRS interfaces | 5–25 min warm; potentially hours cold | Not guaranteed sub-30-minute; first ship its manifest/API-only change, then measure the exact adapter gate. |
 | C879.12+ | One named family at a time | Must be measured per family | Never instantiate as a bulk migration. |
