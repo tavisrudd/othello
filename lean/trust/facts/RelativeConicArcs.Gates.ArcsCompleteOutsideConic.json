@@ -2536,7 +2536,246 @@
     "RelativeConicArcs.weightTwoLeaderSupports"
   ],
   "schema_version": 1,
-  "terminal_axioms": {},
+  "terminal_axioms": {
+    "RelativeConicArcs.Averaging.exists_completeOutside_of_completeArc": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Averaging.rhoC_le_of_kimVuBound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Averaging.rhoC_le_t2": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Certificate.check_sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Certificate.rawArc_iff_projectiveCap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Conic.NonsingularConic.finite_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Conic.completeOutside_bound_general": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Conic.eventually_lt_centered": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Conic.rhoC_explicit_additive_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.rhoC_GF8": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.rhoC_GF9": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.rhoC_ZMod11": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.rhoC_ZMod5": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.rho_points_ZMod5": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.TangentPairFourGroup.even_standardConic_zeroDefect_charTwo_order": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.TangentPairFourGroup.no_upper_even_equality_branch": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.canonical_reconstruction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.completeAffine_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.completeAffine_bound_eq_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.completeAffine_equality_order": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrenceCenter_pointIndex_eq_half": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrenceCentersOnPair_card_eq_quotient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrenceCentersOnPair_card_mul_sub_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrenceCenters_card_eq_quotient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrenceCenters_card_mul_choose_half": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.concurrence_matching_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.coverage_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.disjoint_arcPairs_existsUnique_concurrence": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.eq_of_ordinaryUncovered_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.eq_zero_of_evaluationMap_injective": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.evaluation_eq_zero_of_eq_sum": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.even_completeOutside_zeroDefect_order_spectrum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.exists_secantDeletionSet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.first_secant_moment": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.linesAboveUncoveredThreshold_eq_secants": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.odd_completeOutside_zeroDefect_order_spectrum": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.odd_standardConic_zeroDefect_charTwo_order": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.pointIndex_le_half_card": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_remainders": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_zero_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.scaledDefect_eq_zero_or_half_sub_two_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.second_secant_moment": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.stability_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.stabilizes_iff_stabilizes_ordinaryUncovered": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ternaryQuadratic_eq_zero_of_standardLine_and_offLineTriangle": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.two_mul_badConcurrenceEdgeCount_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.uncovered_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.verticesOfLineFamily_secants_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
   "unit": "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
   "uses": {
     "ConflictGraph.Cayley.cayleyAdj.eq_1": [
