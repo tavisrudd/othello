@@ -14,7 +14,10 @@ their stated falsifier is actually observed; if one is, stop and say which.
 **The run does not stop for a human at all.**  The author handles every push after the local job is
 complete, so no step waits on one.  The apparent obstacle — a certificate package resolving
 finitegeom by public Git URL, so it cannot build against an unpublished revision — is solved by the
-guarded lock refresh, which prefetches an exact unpublished revision from a local checkout:
+guarded lock refresh, which prefetches an exact unpublished revision from a local checkout.  Edit
+the package's `lakefile.toml` `rev` to the intended revision **first**: the refresh resolves
+whatever the lakefile names and rewrites `lake-manifest.json` from it, so running it before the
+edit merely re-resolves the old pin.
 
 ```sh
 python3 ~/src/othello/lean/scripts/lean-build-queue.py update-lock finitegeom \
@@ -145,10 +148,24 @@ development sits outside the shared library.
 
 **The order-eleven package keeps the `RelativeConicArcs` namespace for now.**  Only its gate is
 renamed.  Moving the package to its own top-level library is the structural fix for module-name
-collisions, but it touches all 122 sealed sources and belongs in its own task; the collision rule in
+collisions, but it touches every sealed source and belongs in its own task; the collision rule in
 step 8 is the interim guard.
 
-## Phase 1 — finish the finitegeom tree
+**The package's declared `terminal` was left as it stands**, naming
+`RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic`, which is now proved
+entirely in the shared library rather than by this package.  The gate imports and prints it, so the
+fact is not false, but the field names a result the package does not itself establish.  Changing
+what an external fact asserts is a decision about the trust boundary rather than a repair, so it
+waits for one.  *Falsifier:* if a paper cites this package's fact as evidence for that terminal, the
+citation overstates what the package contributes and the field must be settled before that paper's
+release chain runs.
+
+## Phase 1 — finish the finitegeom tree — DONE 2026-08-06
+
+Steps 1 through 7 and checkpoints 1 through 3 are complete; a resuming session runs none of them.
+They are kept because the reasoning behind each still governs the tree, and because the failure
+modes they name recur.  Where a step states a measurement or a tree state, that was true when it
+was written, not now; the current state is in "Current state" above.
 
 Deletions here are of build outputs and of two source files nothing imports.  Confirm no build is
 running before the residue sweep: unlinking build outputs under a tree another lane is building is
@@ -181,7 +198,7 @@ the interference the lane rules forbid.
 naming an absent module — check both directions, not just roots.  Every finitegeom area gate builds
 green through the guarded queue.  The monorepo's own gates remain green.
 
-5. Re-run all eleven area exports against the current monorepo and finitegeom commits and require an
+5. Re-run all twelve area exports against the current monorepo and finitegeom commits and require an
    empty forward delta from each.  This is the idempotence check and it is also what proves the hand
    edit in step 3 agrees with what the exporter would generate.
 
@@ -195,7 +212,7 @@ for c in ~/src/othello/lean/trust/export/*.toml; do
 done
 ```
 
-**Checkpoint 2.**  Eleven empty deltas.  Any non-empty delta means the tree and a configuration
+**Checkpoint 2.**  Twelve empty deltas.  Any non-empty delta means the tree and a configuration
 disagree; resolve it before proceeding rather than adopting the delta blindly.
 
 6. Export and adopt the golden quantum statistics area, per the decision above.  Plan, run, copy the
@@ -209,7 +226,7 @@ falsifier fired and the skip is recorded.
    `lean/trust/certificate-packages.toml`, per the decision above, recording the reason in the commit
    message.
 
-## Phase 2 — guards, before anything depends on them
+## Phase 2 — guards, before anything depends on them — DONE 2026-08-06
 
 8. Add a boundary-checker rule rejecting any package module whose name also exists at the pinned
    finitegeom revision.  Lean module names are global across a dependency graph, and two packages
@@ -227,7 +244,7 @@ suites pass: `test_lean_certificate_boundary.py`, `test_lean_area_export.py`,
 
 11. Commit phases 1 and 2 in the monorepo and finitegeom.
 
-## Phase 3 — the order-eleven package
+## Phase 3 — the order-eleven package — DONE 2026-08-06
 
 12. Refresh the package's finitegeom lock from the local checkout with `update-lock` as shown above,
     so it resolves the unpublished revision without waiting on a push.
@@ -236,7 +253,7 @@ suites pass: `test_lean_certificate_boundary.py`, `test_lean_area_export.py`,
 carries the modules the gate needs, including `RelativeConicArcs/ParametrizedHoles.lean`.
 
 13. Re-point the package's already-edited `lakefile.toml`, `lake-manifest.json` (`rev` **and**
-    `inputRev`) and README pin to the pushed revision.  The worktree currently names an earlier one.
+    `inputRev`) and README pin to the finitegeom revision this pass publishes — `dca9ce75`, done.
 14. Rewrite the gate's module header and the corresponding README passages.  Both describe the
     pre-cut content and state that the rigidity conclusion depends on the ten-point Brianchon bound
     and equality classification of R. H. Dye as literature input.  That is false: both are theorems of
@@ -276,7 +293,7 @@ python3 ~/src/othello/lean/scripts/lean-package-source-audit.py \
 **Checkpoint 7.**  `lean-package-source-audit.py` reports zero unexplained drift.
 `lean-external-fact.py check` is green.
 
-## Phase 4 — reconnect the monorepo to the package
+## Phase 4 — reconnect the monorepo to the package — DONE 2026-08-06
 
 20. Record the resealed package revision for the pin update below; publication happens at the end.
 
@@ -286,13 +303,32 @@ python3 ~/src/othello/lean/scripts/lean-package-source-audit.py \
     maintains only the trust-fact copy, never the `commit` field.
 
 **Checkpoint 9.**  `lean-certificate-boundary.py --verify-official-libraries` is green, including the
-new collision rule.
+new collision rule.  (There is no checkpoint 8; the numbering skips it and always did.)
 
-## Phase 5 — published papers
+## Phase 5 — published papers — RESUME HERE
 
-Six papers in this pass have a facts artifact differing from a fresh extraction: AME/LU, arcs
-complete outside a conic, Clebsch factorization, Clebsch passages, Clebsch rigidity, and the Clebsch
-rigidity companion.
+Every count in this phase was measured before phases 1 through 4 ran, and those phases moved
+finitegeom by five commits, the certificate package by three, and the monorepo by more.  **Re-measure
+before acting on any figure below**: run `paper-facts.py check` and `export-paper-repos.py plan
+--source-ref HEAD` first and work from what they report now, treating the numbers here as the shape
+of the problem rather than its current size.
+
+Three consequences of phases 1 through 4 land in this phase:
+
+- The order-eleven gate is renamed.  Any paper pin block, trust manifest, or verification script
+  naming `RelativeConicArcs.Gates.ClebschRigidityTrust` for the *package* now names a module that
+  package no longer has; the name it needs is
+  `RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates`.  The shared library still
+  publishes its own `ClebschRigidityTrust`, so a search for the old name will find a real module and
+  the mistake will not announce itself.
+- Clebsch rigidity's pin block records package commit `a289097b` and the gate digest from that
+  package's own build, and its dependency lock should resolve finitegeom `dca9ce75`.
+- The finitegeom revision every lock should reach is `dca9ce75`, which is the first revision whose
+  every declared target builds.
+
+As measured on 2026-08-05, six papers had a facts artifact differing from a fresh extraction:
+AME/LU, arcs complete outside a conic, Clebsch factorization, Clebsch passages, Clebsch rigidity,
+and the Clebsch rigidity companion.
 
 22. Refresh the stale bibliography entries in beyond-four projective Reed--Solomon, which holds seven
     of the nine `stale-bbl` findings across `prs-beyond-redundancy-four.bbl` and
@@ -381,6 +417,30 @@ every row passing.  Acceptance items 11 and 12 hold for the published set.
 - One heavyweight build owns the host at a time.  Never run direct `lake`, `nix ... lake`, or a
   hand-composed `taskset`/`choom` command; `run-quiet` is output capture, not the guarded entry point.
 - `/tmp` is tmpfs here.  Keep build trees, caches, packs and large logs on disk-backed paths.
+
+Learned on 2026-08-06, each after costing a failed build or a wrong artifact:
+
+- **A root list is the thing that breaks when a module moves.**  Lake resolves a declared root inside
+  the package that declares it, so a package whose lakefile still roots a module the cut removed
+  fails on the missing file instead of taking the module from its dependency — and a library
+  declaring no roots takes its own name as its single root, which usually names no file at all.
+  After moving or deleting any module, check every root list in every repository that could name it.
+- **Check a gate's terminals before building it.**  A gate is an import-only module full of
+  `#print axioms` lines, and each stale name costs a whole build to discover.  Extract them all and
+  confirm each resolves to a declaration in the package or its pinned dependency first.  On this run
+  exactly one of fifty-five was stale, from an upstream rename.
+- **Sealing a trust fact needs a clean-tree run, and a trace-current rebuild produces no evidence.**
+  `lean-external-fact.py seal` refuses a run whose tree was dirty, so the gate must be rebuilt after
+  the sources are committed; but a trace-current target is skipped and prints nothing, and the
+  `--no-build` replay carries none of the gate's own messages.  Delete just that gate's build outputs
+  under the package's `.lake/build` to force re-elaboration, then seal from that run.
+- **The evidence a fact is sealed from is the elaboration output, not the run's envelope.**  The
+  queue records the output-capturing wrapper's envelope as a target's log, and it quotes only the
+  last few stdout lines.  The sealer now follows the envelope to the file it names; if that behaviour
+  is ever reverted, a fact will silently describe whichever terminals printed last.
+- **A rename inside a package does not rename it in the monorepo registry.**  The `gate` field in
+  `lean/trust/certificate-packages.toml` must move with the package's gate, or the sealer reports no
+  result for a gate that did in fact run.
 
 ## Second pass
 
