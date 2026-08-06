@@ -1,0 +1,85 @@
+# Area-export configuration for stabilizer-AME rigidity, operator-pushing
+# atlases, and the MDS--CSS applications.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# The audited declarations are printed by the sibling gate
+# RelativeConicArcs.Gates.AMELUAggregateAxioms, which imports this one.  That
+# module prints them under opened namespaces, so the registry records the
+# fully-qualified names resolved against the extracted declaration set rather
+# than the short forms as printed.
+
+schema_version = 1
+area = "ame_lu"
+gate = "RelativeConicArcs.Gates.AMELUAggregate"
+trust_statement = "trust/AME_LU.md"
+axiom_audit = "trust/AMELUAxiomAudit.lean"
+
+statement_title = "Stabilizer-AME rigidity and local-unitary equivalence: formal boundary"
+
+overview = """
+This boundary records the formal development behind absolutely maximally
+entangled stabilizer states and their local-unitary rigidity: the length-generic
+code and state, exact maximum-distance-separable shortening, marginal
+covariance, the arbitrary-arity diagonal-axis theorem, the supported-label
+dimension squeeze, linear minimum-support transitions with their
+atlas-equivalence relation, the full-Weyl diagonal intertwining criterion, the
+local-unitary to local-Clifford terminal over an explicit marginal Weyl
+expansion, the unconditional equal-phase MDS--CSS specialization, holonomy
+reductions for normal and arbitrary subgroups, projective Clifford finiteness,
+and the associated product-unitary topological groups and scalar-phase
+quotients.
+"""
+
+correspondence = """
+An absolutely maximally entangled state is one every sufficiently small marginal
+of which is maximally mixed, and the question here is when two such stabilizer
+states related by a local unitary are related by a local Clifford operation.
+
+The closure builds the stabilizer dictionary carrying such states to
+maximum-distance-separable codes, proves the marginal covariance and shortening
+statements that make the correspondence usable, and establishes the diagonal-axis
+theorem at arbitrary arity.  It then develops the transition structure: linear
+minimum-support transitions, the equivalence relation their atlases generate, and
+the criterion under which a full-Weyl diagonal operator intertwines two
+realizations.
+
+The rigidity terminal concludes local-Clifford equivalence from local-unitary
+equivalence over the explicit marginal Weyl expansion realization, and the
+equal-phase MDS--CSS specialization is unconditional.  The holonomy reductions
+treat normal and arbitrary subgroups separately, and the finiteness of the
+projective Clifford group is proved rather than assumed.
+"""
+
+boundary = """
+Every terminal is a kernel proof, depending only on `propext` and, where
+classical reasoning or quotients are used, `Classical.choice` and `Quot.sound`.
+The closure uses no project axiom, no unsafe declaration, no admitted proof, and
+no native evaluation, and it imports no external certificate data.
+
+The three finite counts the rigidity separator consumes — the unordered marginal
+triples, the three-edge stars among them, and the perfect matchings — are
+discharged exhaustively by kernel reduction at a raised recursion and heartbeat
+allowance, so their values are checked rather than trusted to a compiled
+evaluator.
+"""
+
+axiom_audit_title = "Axiom audit for stabilizer-AME rigidity and local-unitary equivalence"
+
+axiom_audit_description = """
+This audit prints the axioms of every terminal exported with this boundary: the
+stabilizer dictionary and shortening statements, the diagonal-axis theorem, the
+transition and atlas structure, the intertwining criterion, the local-unitary to
+local-Clifford rigidity terminal, the equal-phase MDS--CSS specialization, the
+holonomy reductions, and projective Clifford finiteness.
+"""
+
+readme_anchor = "  bounded-radius forms."
+
+readme_bullet = """- `trust/manifests/ame_lu.json` content-addresses the stabilizer-AME rigidity
+  boundary: the stabilizer dictionary and exact shortening, the arbitrary-arity
+  diagonal-axis theorem, the transition atlases and intertwining criterion, the
+  local-unitary to local-Clifford rigidity terminal, and the equal-phase MDS--CSS
+  specialization.  Every terminal in it is a kernel proof."""

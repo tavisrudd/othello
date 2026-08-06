@@ -270,7 +270,190 @@ coverage_rule = "closure"
 
 [[gate]]
 module = "RelativeConicArcs.Gates.AMELUAggregate"
-terminals = []
+terminals = [
+  "RelativeConicArcs.AMELU.isMDSCode2m_iff_projection_bijective",
+  "RelativeConicArcs.AMELU.isMDSCode2m_dualCode",
+  "RelativeConicArcs.AMELU.genericShorteningGenerator",
+  "RelativeConicArcs.AMELU.genericShorteningLocalLabel_bijective",
+  "RelativeConicArcs.AMELU.diagonalTensorFlattening_pure_iff_coordinateAxis",
+  "RelativeConicArcs.AMELU.coordinateAxes_preserved_of_diagonalTensor_equivalent",
+  "RelativeConicArcs.AMELU.stabilizerAME_kernelToLocal_bijective",
+  "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_injective_of_supportAtMost",
+  "RelativeConicArcs.AMELU.stabilizerAME_halfParty_kernelToLocal_bijective_of_finrank",
+  "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_existsUnique",
+  "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.erase_sup_erase_eq",
+  "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.space_eq_minimumSupportSpan",
+  "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top",
+  "RelativeConicArcs.AMELU.stabilizerAME_finrank_ker_eq_local",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportSpan_univ_eq_top",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.supportedLocalProjection_bijective",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportTransition_apply_supportedLabel",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportAtlasEquivalent_refl",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.trans",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.symm",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.reindexedMarginalArray_eq_diagonal",
+  "RelativeConicArcs.AMELU.AdditiveStabilizerState.reindexedMarginalArray_eq_diagonal",
+  "RelativeConicArcs.AMELU.additiveStabilizer_reindexedMarginalArray_intertwining",
+  "RelativeConicArcs.AMELU.additiveStabilizer_marginal_party_isClifford",
+  "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_localAction",
+  "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_permutedLocalAction",
+  "RelativeConicArcs.AMELU.additiveStabilizer_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent",
+  "RelativeConicArcs.AMELU.HolonomyAtlas.transition_intertwines_iff_commute_holonomy",
+  "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugeEquivHolonomyCentralizer",
+  "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInSubgroupEquiv",
+  "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInNormalSubgroupEquiv",
+  "RelativeConicArcs.AMELU.genericEqualPhaseState_three",
+  "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_three",
+  "RelativeConicArcs.AMELU.genericMarginalWeylCoefficient_equalPhaseState_cases",
+  "RelativeConicArcs.AMELU.genericReindexedMarginalArray_eq_diagonal",
+  "RelativeConicArcs.AMELU.genericMarginalWeylCoordinates_eq_of_localAction_eq",
+  "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent",
+  "RelativeConicArcs.AMELU.all_isClifford_of_fullWeylDiagonal_intertwining",
+  "RelativeConicArcs.AMELU.generic_all_isClifford_of_localAction_equalPhaseState",
+  "RelativeConicArcs.AMELU.generic_all_isClifford_of_permutedLocalAction_equalPhaseState",
+  "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent_from_generic",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq_from_generic",
+  "RelativeConicArcs.AMELU.projectiveClifford_finite",
+  "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphism_finite",
+  "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphism_finite",
+  "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_finite",
+  "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite",
+  "RelativeConicArcs.AMELU.genericProductUnitaryContinuousProjectivization",
+  "RelativeConicArcs.AMELU.genericPermutedProductUnitaryContinuousProjectivization",
+  "RelativeConicArcs.AMELU.connectedComponent_genericIdentityAutomorphism_eq_scalarPhases",
+  "RelativeConicArcs.AMELU.connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases",
+  "RelativeConicArcs.AMELU.cliffordScalarSubgroup_isClosed",
+  "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_t2Space",
+  "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_discrete",
+  "RelativeConicArcs.AMELU.genericScalarPhaseSubgroup_isClosed",
+  "RelativeConicArcs.AMELU.genericPermutedScalarPhaseSubgroup_isClosed",
+  "RelativeConicArcs.AMELU.genericScalarPhaseContinuousInclusion",
+  "RelativeConicArcs.AMELU.genericPermutedScalarPhaseContinuousInclusion",
+  "RelativeConicArcs.AMELU.genericScalarPhase_projectivization_mulExact",
+  "RelativeConicArcs.AMELU.genericPermutedScalarPhase_projectivization_mulExact",
+  "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_discrete",
+  "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_discrete",
+  "RelativeConicArcs.AMELU.connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset",
+  "RelativeConicArcs.AMELU.connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset",
+  "RelativeConicArcs.AMELU.genericProductUnitaryAutomorphism_finite_component_cover",
+  "RelativeConicArcs.AMELU.genericPermutedProductUnitaryAutomorphism_finite_component_cover",
+  "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureContinuousHom",
+  "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureContinuousHom",
+  "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureHom_ker",
+  "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureHom_ker",
+  "RelativeConicArcs.AMELU.projectiveGenericAutomorphismEquivRealizedAdjointSignature",
+  "RelativeConicArcs.AMELU.projectiveGenericPermutedAutomorphismEquivRealizedAdjointSignature",
+  "RelativeConicArcs.AMELU.projectiveFixedPartyToPermutedAutomorphismHom_injective",
+  "RelativeConicArcs.AMELU.projectiveFixedParty_permutationProjection_mulExact",
+  "RelativeConicArcs.AMELU.genericPartyPermutationExtension_splits_iff",
+  "GroupExtension.outerAction_eq_sectionClass",
+  "GroupExtension.sectionAction_mul",
+  "GroupExtension.factorSet_associativity",
+  "GroupExtension.factorSet_change",
+  "GroupExtension.factorSet_trivializable_iff_splitting",
+  "GroupExtension.factorSet_trivializable_iff",
+  "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_associativity",
+  "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_change",
+  "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_trivializable_iff_splits",
+  "GroupExtension.Splitting.trivializingCochain_coboundary",
+  "GroupExtension.Splitting.semidirectProductEquiv",
+  "GroupExtension.Splitting.existsUnique_inl_mul_splitting",
+  "GroupExtension.Splitting.natCard_middle",
+  "GroupExtension.Splitting.inl_conj_eq_inv",
+  "GroupExtension.Splitting.invertingInvolutionWitness",
+  "RelativeConicArcs.AMELU.genericPartyPermutationGroupExtensionSplitting",
+  "RelativeConicArcs.AMELU.genericPartyPermutationTrivializingCochain_coboundary",
+  "RelativeConicArcs.AMELU.genericPartyPermutationSemidirectProductEquiv",
+  "RelativeConicArcs.AMELU.genericPartyPermutation_natCard",
+  "RelativeConicArcs.AMELU.oneLegQuantumMDSParameters_singletonEquality",
+  "RelativeConicArcs.AMELU.isMDSCode2m_oneLegQuantumMDSParameters",
+  "RelativeConicArcs.AMELU.coordinateAxes_reflected_by_linearEquiv",
+  "RelativeConicArcs.AMELU.IsCliffordMatrix.conjTranspose",
+  "RelativeConicArcs.AMELU.IsCliffordMatrix.conjugate",
+  "RelativeConicArcs.AMELU.IsCliffordMatrix.transpose",
+  "RelativeConicArcs.AMELU.IsUnitaryMatrix.transpose",
+  "RelativeConicArcs.AMELU.inverseTransposeWitness_of_isUnitaryMatrix",
+  "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_chosenLeg",
+  "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_and_physical_isClifford",
+  "RelativeConicArcs.AMELU.encoderConversion_logical_and_physical_isClifford",
+  "RelativeConicArcs.AMELU.genericCSSLabel_lowerDualityShear",
+  "RelativeConicArcs.AMELU.genericCSSLabel_upperDualityShear",
+  "RelativeConicArcs.AMELU.fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus",
+  "RelativeConicArcs.AMELU.diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy",
+  "RelativeConicArcs.AMELU.diagonalMultiplier_ne_zero_at",
+  "RelativeConicArcs.AMELU.diagonalMultiplierSpace_finrank_le_one",
+  "RelativeConicArcs.AMELU.diagonalMultiplierSpace_self_eq_span_one",
+  "RelativeConicArcs.AMELU.diagonalDualityMultiplierSpace_finrank_eq_zero_or_one",
+  "RelativeConicArcs.AMELU.GenericDiagonalDuality.diagonalMultiplierBilinForm_eq_zero",
+  "RelativeConicArcs.AMELU.genericDiagonalDualityOfMultiplier",
+  "RelativeConicArcs.AMELU.isDiagonallyIsodual_iff_finrank_eq_one",
+  "RelativeConicArcs.AMELU.not_isDiagonallyIsodual_iff_finrank_eq_zero",
+  "RelativeConicArcs.AMELU.diagonalDualityNullity_fixedPartyProjectiveTransversal_dichotomy",
+  "RelativeConicArcs.AMELU.offDiagonalBlock_fixedPartyProjectiveTransversal_eq_affineSpecialLinear",
+  "RelativeConicArcs.AMELU.diagonalDuality_existsUnique_unit_smul_eq",
+  "RelativeConicArcs.AMELU.diagonalDuality_multiplier_ratio_eq",
+  "RelativeConicArcs.AMELU.grs_projectiveTransversal_eq_affineSpecialLinear",
+  "RelativeConicArcs.AMELU.affineSpecialLinearOrder_seven",
+  "RelativeConicArcs.AMELU.isMDSCode634_arcKernel",
+  "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel",
+  "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent",
+  "RelativeConicArcs.AMELU.tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace",
+  "RelativeConicArcs.AMELU.pauliSymplecticToDual_injective",
+  "RelativeConicArcs.AMELU.exists_pauliLabel_pairing_eq_dual",
+  "RelativeConicArcs.AMELU.cssLabelSpace_isPauliLagrangian",
+  "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace_iff_support_subset",
+  "RelativeConicArcs.AMELU.equalPhaseState_hasMinimalComputationalSupport",
+  "RelativeConicArcs.AMELU.isAME_equalPhaseState_iff_isMDSCode634",
+  "RelativeConicArcs.AMELU.tensorWeylAction_X_equalPhaseState_eq_translated",
+  "RelativeConicArcs.AMELU.translatedEqualPhaseState_eq_iff",
+  "RelativeConicArcs.AMELU.stateInnerProduct_translatedEqualPhaseState_eq_zero",
+  "RelativeConicArcs.AMELU.tensorWeylAction_Z_translatedEqualPhaseState",
+  "RelativeConicArcs.AMELU.supportedArcSyndrome_bijective_of_card_three",
+  "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_supported_on_three",
+  "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support",
+  "RelativeConicArcs.AMELU.pencilZ_eq_iff_samePencilYOrbit",
+  "RelativeConicArcs.AMELU.admitted_nonGRS_pencil_classified_by_z",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent",
+  "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq",
+  "RelativeConicArcs.AMELU.pencilFrameRatio_crossDifference",
+  "RelativeConicArcs.AMELU.pencilFrameRatio_eq_iff",
+  "RelativeConicArcs.AMELU.twistedPencilGaleDivisor_refl",
+  "RelativeConicArcs.AMELU.pencilGalePairing_multiplier",
+  "RelativeConicArcs.AMELU.pencilGalePairing_multiplier_zero_iff",
+  "RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint",
+  "RelativeConicArcs.AMELU.map_pencilGRSQuartic",
+  "RelativeConicArcs.AMELU.map_pencilA",
+  "RelativeConicArcs.AMELU.map_pencilB",
+  "RelativeConicArcs.AMELU.map_pencilZ",
+  "RelativeConicArcs.AMELU.admitted_nonGRS_map_iff",
+  "RelativeConicArcs.AMELU.card_marginalTriples",
+  "RelativeConicArcs.AMELU.card_marginalStars",
+  "RelativeConicArcs.AMELU.card_perfectMatchings",
+  "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency",
+  "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences",
+  "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus",
+  "RelativeConicArcs.AMELU.splitTorusWeylBlock_isSpecialLinear",
+  "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_self",
+  "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_splitTorusBlock",
+  "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern",
+  "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern",
+  "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve",
+  "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor",
+  "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor",
+  "RelativeConicArcs.AMELU.axialCyclePolynomial_factor",
+  "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors",
+  "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z",
+  "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial",
+  "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven",
+  "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor",
+  "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor",
+  "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor",
+  "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight",
+  "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine",
+  "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative",
+  "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive",
+]
 coverage_rule = "closure"
 
 [[gate]]
@@ -727,27 +910,27 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_marginalTriples"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalTriples._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_marginalStars"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.card_perfectMatchings"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_perfectMatchings._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences"
 gates = ["RelativeConicArcs.Gates.MDSCSSTransversalGeometry"]
-expected_axioms = ["Classical.choice", "Quot.sound", "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1", "propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus"
@@ -2549,6 +2732,916 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive"
 gates = ["RelativeConicArcs.Gates.ClebschRigidityTrust"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.existsUnique_inl_mul_splitting"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.inl_conj_eq_inv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.invertingInvolutionWitness"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.natCard_middle"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.semidirectProductEquiv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.Splitting.trivializingCochain_coboundary"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.factorSet_associativity"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.factorSet_change"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.factorSet_trivializable_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.factorSet_trivializable_iff_splitting"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.outerAction_eq_sectionClass"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "GroupExtension.sectionAction_mul"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.erase_sup_erase_eq"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.space_eq_minimumSupportSpan"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.symm"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.trans"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportAtlasEquivalent_refl"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportSpan_univ_eq_top"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportTransition_apply_supportedLabel"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.reindexedMarginalArray_eq_diagonal"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.supportedLocalProjection_bijective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.AdditiveStabilizerState.reindexedMarginalArray_eq_diagonal"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.GenericDiagonalDuality.diagonalMultiplierBilinForm_eq_zero"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugeEquivHolonomyCentralizer"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInNormalSubgroupEquiv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInSubgroupEquiv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.HolonomyAtlas.transition_intertwines_iff_commute_holonomy"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.IsCliffordMatrix.conjTranspose"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.IsCliffordMatrix.conjugate"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.IsCliffordMatrix.transpose"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.IsUnitaryMatrix.transpose"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_localAction"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_permutedLocalAction"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.additiveStabilizer_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.additiveStabilizer_marginal_party_isClifford"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.additiveStabilizer_reindexedMarginalArray_intertwining"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.admitted_nonGRS_map_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.admitted_nonGRS_pencil_classified_by_z"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.affineSpecialLinearOrder_seven"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.all_isClifford_of_fullWeylDiagonal_intertwining"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.axialCyclePolynomial_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.card_marginalStars"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.card_marginalTriples"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.card_perfectMatchings"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.cliffordScalarSubgroup_isClosed"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.connectedComponent_genericIdentityAutomorphism_eq_scalarPhases"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.coordinateAxes_preserved_of_diagonalTensor_equivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.coordinateAxes_reflected_by_linearEquiv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.cssLabelSpace_isPauliLagrangian"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalDualityMultiplierSpace_finrank_eq_zero_or_one"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalDualityNullity_fixedPartyProjectiveTransversal_dichotomy"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalDuality_existsUnique_unit_smul_eq"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalDuality_multiplier_ratio_eq"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalMultiplierSpace_finrank_le_one"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalMultiplierSpace_self_eq_span_one"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalMultiplier_ne_zero_at"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonalTensorFlattening_pure_iff_coordinateAxis"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_and_physical_isClifford"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_chosenLeg"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.encoderConversion_logical_and_physical_isClifford"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.equalPhaseState_hasMinimalComputationalSupport"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_supported_on_three"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.exists_pauliLabel_pairing_eq_dual"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureContinuousHom"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureHom_ker"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericCSSLabel_lowerDualityShear"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericCSSLabel_upperDualityShear"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericDiagonalDualityOfMultiplier"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericEqualPhaseState_three"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_three"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericMarginalWeylCoefficient_equalPhaseState_cases"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericMarginalWeylCoordinates_eq_of_localAction_eq"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationExtension_splits_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_associativity"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_change"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_trivializable_iff_splits"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationGroupExtensionSplitting"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationSemidirectProductEquiv"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutationTrivializingCochain_coboundary"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPartyPermutation_natCard"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureContinuousHom"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureHom_ker"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedProductUnitaryAutomorphism_finite_component_cover"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedProductUnitaryContinuousProjectivization"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedScalarPhaseContinuousInclusion"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedScalarPhaseSubgroup_isClosed"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericPermutedScalarPhase_projectivization_mulExact"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericProductUnitaryAutomorphism_finite_component_cover"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericProductUnitaryContinuousProjectivization"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericReindexedMarginalArray_eq_diagonal"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericScalarPhaseContinuousInclusion"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericScalarPhaseSubgroup_isClosed"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericScalarPhase_projectivization_mulExact"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericShorteningGenerator"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.genericShorteningLocalLabel_bijective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.generic_all_isClifford_of_localAction_equalPhaseState"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.generic_all_isClifford_of_permutedLocalAction_equalPhaseState"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.grs_projectiveTransversal_eq_affineSpecialLinear"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_discrete"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_t2Space"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.inverseTransposeWitness_of_isUnitaryMatrix"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isAME_equalPhaseState_iff_isMDSCode634"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isDiagonallyIsodual_iff_finrank_eq_one"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isMDSCode2m_dualCode"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isMDSCode2m_iff_projection_bijective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isMDSCode2m_oneLegQuantumMDSParameters"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.isMDSCode634_arcKernel"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq_from_generic"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent_from_generic"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.map_pencilA"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.map_pencilB"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.map_pencilGRSQuartic"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.map_pencilZ"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace_iff_support_subset"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.not_isDiagonallyIsodual_iff_finrank_eq_zero"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.offDiagonalBlock_fixedPartyProjectiveTransversal_eq_affineSpecialLinear"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.oneLegQuantumMDSParameters_singletonEquality"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pauliSymplecticToDual_injective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pencilFrameRatio_crossDifference"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pencilFrameRatio_eq_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pencilGalePairing_multiplier"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pencilGalePairing_multiplier_zero_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.pencilZ_eq_iff_samePencilYOrbit"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveClifford_finite"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveFixedPartyToPermutedAutomorphismHom_injective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveFixedParty_permutationProjection_mulExact"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericAutomorphismEquivRealizedAdjointSignature"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericPermutedAutomorphismEquivRealizedAdjointSignature"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_discrete"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphism_finite"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_discrete"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_finite"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphism_finite"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.splitTorusWeylBlock_isSpecialLinear"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_self"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_splitTorusBlock"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stabilizerAME_finrank_ker_eq_local"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stabilizerAME_halfParty_kernelToLocal_bijective_of_finrank"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stabilizerAME_kernelToLocal_bijective"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_existsUnique"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_injective_of_supportAtMost"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.stateInnerProduct_translatedEqualPhaseState_eq_zero"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.supportedArcSyndrome_bijective_of_card_three"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.tensorWeylAction_X_equalPhaseState_eq_translated"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.tensorWeylAction_Z_translatedEqualPhaseState"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.translatedEqualPhaseState_eq_iff"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.twistedPencilGaleDivisor_refl"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint"
+gates = ["RelativeConicArcs.Gates.AMELUAggregate"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 # ---------------------------------------------------------------------------------------------

@@ -3568,19 +3568,16 @@
     "RelativeConicArcs.AMELU.card_marginalStars": [
       "Classical.choice",
       "Quot.sound",
-      "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1",
       "propext"
     ],
     "RelativeConicArcs.AMELU.card_marginalTriples": [
       "Classical.choice",
       "Quot.sound",
-      "RelativeConicArcs.AMELU.card_marginalTriples._native.native_decide.ax_1_1",
       "propext"
     ],
     "RelativeConicArcs.AMELU.card_perfectMatchings": [
       "Classical.choice",
       "Quot.sound",
-      "RelativeConicArcs.AMELU.card_perfectMatchings._native.native_decide.ax_1_1",
       "propext"
     ],
     "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern": [
@@ -3820,7 +3817,6 @@
     "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences": [
       "Classical.choice",
       "Quot.sound",
-      "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1",
       "propext"
     ],
     "RelativeConicArcs.AMELU.offDiagonalBlock_fixedPartyProjectiveTransversal_eq_affineSpecialLinear": [
@@ -3878,7 +3874,6 @@
     "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency": [
       "Classical.choice",
       "Quot.sound",
-      "RelativeConicArcs.AMELU.card_marginalStars._native.native_decide.ax_1_1",
       "propext"
     ],
     "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven": [

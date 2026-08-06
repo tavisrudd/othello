@@ -3797,7 +3797,901 @@
     "dotProductBilin.congr_simp"
   ],
   "schema_version": 1,
-  "terminal_axioms": {},
+  "terminal_axioms": {
+    "GroupExtension.Splitting.existsUnique_inl_mul_splitting": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.Splitting.inl_conj_eq_inv": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.Splitting.invertingInvolutionWitness": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.Splitting.natCard_middle": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.Splitting.semidirectProductEquiv": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.Splitting.trivializingCochain_coboundary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.factorSet_associativity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.factorSet_change": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.factorSet_trivializable_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.factorSet_trivializable_iff_splitting": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.outerAction_eq_sectionClass": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "GroupExtension.sectionAction_mul": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.erase_sup_erase_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.minimumSupportSpan_univ_eq_top": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AMESupportedSubspaceProfile.space_eq_minimumSupportSpan": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.symm": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.MinimumSupportAtlasEquivalent.trans": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportAtlasEquivalent_refl": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportSpan_univ_eq_top": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.minimumSupportTransition_apply_supportedLabel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.reindexedMarginalArray_eq_diagonal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerProjector.supportedLocalProjection_bijective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.AdditiveStabilizerState.reindexedMarginalArray_eq_diagonal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.GenericDiagonalDuality.diagonalMultiplierBilinForm_eq_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugeEquivHolonomyCentralizer": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInNormalSubgroupEquiv": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.HolonomyAtlas.compatibleGaugesInSubgroupEquiv": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.HolonomyAtlas.transition_intertwines_iff_commute_holonomy": [
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.IsCliffordMatrix.conjTranspose": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.IsCliffordMatrix.conjugate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.IsCliffordMatrix.transpose": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.IsUnitaryMatrix.transpose": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.axial_det_factor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.negativeSigned_det_factor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportCycleCoverInputs.positiveSigned_det_factor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_negative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportOrbitGeometryInputs.card_axial_union_positive": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_localAction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.additiveStabilizer_all_isClifford_of_permutedLocalAction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.additiveStabilizer_locallyUnitaryEquivalent_implies_locallyCliffordEquivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.additiveStabilizer_marginal_party_isClifford": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.additiveStabilizer_reindexedMarginalArray_intertwining": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.admitted_nonGRS_map_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.admitted_nonGRS_pencil_classified_by_z": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.affineSpecialLinearOrder_seven": [
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.all_isClifford_of_fullWeylDiagonal_intertwining": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.axialCyclePolynomial_factor": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.card_marginalStars": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.card_marginalTriples": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.card_perfectMatchings": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.cliffordScalarSubgroup_isClosed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.connectedComponent_genericIdentityAutomorphism_eq_scalarPhases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.connectedComponent_genericPermutedIdentityAutomorphism_eq_scalarPhases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.connectedComponent_genericPermutedProductUnitaryAutomorphism_eq_scalarCoset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.connectedComponent_genericProductUnitaryAutomorphism_eq_scalarCoset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.coordinateAxes_preserved_of_diagonalTensor_equivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.coordinateAxes_reflected_by_linearEquiv": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.cssLabelSpace_isPauliLagrangian": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalDualityMultiplierSpace_finrank_eq_zero_or_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalDualityNullity_fixedPartyProjectiveTransversal_dichotomy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalDuality_existsUnique_unit_smul_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalDuality_multiplier_ratio_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalMultiplierSpace_finrank_le_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalMultiplierSpace_self_eq_span_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalMultiplier_ne_zero_at": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonalTensorFlattening_pure_iff_coordinateAxis": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.diagonallyIsodual_fixedPartyProjectiveTransversal_dichotomy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_and_physical_isClifford": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.encoderConversion_inverseTranspose_chosenLeg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.encoderConversion_logical_and_physical_isClifford": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.equalPhaseState_hasMinimalComputationalSupport": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_supported_on_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.existsUnique_arcSyndrome_weight_three_on_support": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.exists_pauliLabel_pairing_eq_dual": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.familyFactor_coordinateAxes_of_diagonal_equivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.fixedPartyKernel_eq_specialLinear_or_splitTorus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.fixedPartyProjectiveTransversal_eq_affineSpecialLinear_or_splitTorus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureContinuousHom": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericAutomorphismIntrinsicSignatureHom_ker": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericCSSLabel_lowerDualityShear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericCSSLabel_upperDualityShear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericDiagonalDualityOfMultiplier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericEqualPhaseState_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_equalPhaseState_implies_genericLocallyCliffordEquivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericLocallyUnitaryEquivalent_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericMarginalWeylCoefficient_equalPhaseState_cases": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericMarginalWeylCoordinates_eq_of_localAction_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationExtension_splits_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_associativity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_change": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationFactorSet_trivializable_iff_splits": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationGroupExtensionSplitting": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationSemidirectProductEquiv": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutationTrivializingCochain_coboundary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPartyPermutation_natCard": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureContinuousHom": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedAutomorphismIntrinsicSignatureHom_ker": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedProductUnitaryAutomorphism_finite_component_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedProductUnitaryContinuousProjectivization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedScalarPhaseContinuousInclusion": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedScalarPhaseSubgroup_isClosed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericPermutedScalarPhase_projectivization_mulExact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericProductUnitaryAutomorphism_finite_component_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericProductUnitaryContinuousProjectivization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericReindexedMarginalArray_eq_diagonal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericScalarPhaseContinuousInclusion": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericScalarPhaseSubgroup_isClosed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericScalarPhase_projectivization_mulExact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericShorteningGenerator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.genericShorteningLocalLabel_bijective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.generic_all_isClifford_of_localAction_equalPhaseState": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.generic_all_isClifford_of_permutedLocalAction_equalPhaseState": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.grs_projectiveTransversal_eq_affineSpecialLinear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_discrete": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.intrinsicCliffordAdjointSignature_t2Space": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.inverseTransposeWitness_of_isUnitaryMatrix": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState_arcKernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isAME_equalPhaseState_iff_isMDSCode634": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isDiagonallyIsodual_iff_finrank_eq_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isMDSCode2m_dualCode": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isMDSCode2m_iff_projection_bijective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isMDSCode2m_oneLegQuantumMDSParameters": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.isMDSCode634_arcKernel": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_admitted_nonGRS_pencil_iff_pencilZ_eq_from_generic": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.locallyUnitaryEquivalent_equalPhaseState_implies_locallyCliffordEquivalent_from_generic": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.map_pencilA": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.map_pencilB": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.map_pencilGRSQuartic": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.map_pencilZ": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.mem_cssSupportedLabelSpace_iff_support_subset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.negativeSignedCyclePolynomial_factor": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.not_isDiagonallyIsodual_iff_finrank_eq_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.not_locallyUnitaryEquivalent_of_ten_vs_atMostSix_concurrences": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.offDiagonalBlock_fixedPartyProjectiveTransversal_eq_affineSpecialLinear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.oneLegQuantumMDSParameters_singletonEquality": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pauliSymplecticToDual_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pencilFrameRatio_crossDifference": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pencilFrameRatio_eq_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pencilGalePairing_multiplier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pencilGalePairing_multiplier_zero_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.pencilZ_eq_iff_samePencilYOrbit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.positiveSignedCyclePolynomial_factor": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveClifford_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveFixedPartyToPermutedAutomorphismHom_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveFixedParty_permutationProjection_mulExact": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericAutomorphismEquivRealizedAdjointSignature": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericPermutedAutomorphismEquivRealizedAdjointSignature": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_discrete": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphismGroup_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericPermutedProductUnitaryAutomorphism_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_discrete": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphismGroup_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectiveGenericProductUnitaryAutomorphism_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.projectivelyEquivalent_equalPhaseState_locallyCliffordEquivalent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.q13_zFour_not_locallyUnitaryEquivalent_zTwelve": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.rankFourMultiplicity_eq_sixty_add_concurrency": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_axial_of_charSeven": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_three_factors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.reducedTransportDivisor_eq_zero_iff_z": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.signedTransportFactor_sub_two_mul_axial": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.splitTorusWeylBlock_isSpecialLinear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_self": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.splitTorusWeylBlock_mul_splitTorusBlock": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stabilizerAME_finrank_ker_eq_local": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stabilizerAME_halfParty_kernelToLocal_bijective_of_finrank": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stabilizerAME_kernelToLocal_bijective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_existsUnique": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stabilizerKernelLocalProjection_injective_of_supportAtMost": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.stateInnerProduct_translatedEqualPhaseState_eq_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.supportedArcSyndrome_bijective_of_card_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.tensorWeylAction_X_equalPhaseState_eq_translated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.tensorWeylAction_Z_translatedEqualPhaseState": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.tensorWeylAction_equalPhaseState_of_mem_cssLabelSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.translatedEqualPhaseState_eq_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.twistedPencilGaleDivisor_refl": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.AMELU.twistedPencil_sectors_disjoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
   "unit": "RelativeConicArcs.Gates.AMELUAggregate",
   "uses": {
     "FiniteGeom.IsMDS": [

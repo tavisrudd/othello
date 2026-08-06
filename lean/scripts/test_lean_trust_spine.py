@@ -350,6 +350,32 @@ class TrustSpineTest(unittest.TestCase):
         self.assertEqual(len(mismatches), 1)
         self.assertIn("Alpha.Known.permitted_axiom", mismatches[0]["detail"])
 
+    def test_terminal_discharged_by_native_evaluation_is_reported(self):
+        """A trust declaration may not be proved by the compiled evaluator.
+
+        `native_decide` does not reduce in the kernel and names its evaluation
+        axiom after the declaration it discharged, so the axiom is recognized by
+        its marker rather than from a fixed list.  Declaring it as expected must
+        not make it acceptable.
+        """
+        native = "Alpha.Main.terminal._native.native_decide.ax_1_1"
+        self.fx.write_facts(
+            terminal_axioms={"Alpha.Main.terminal": ["Classical.choice", "propext", native]}
+        )
+        _, doc = self.fx.run("audit", "--json")
+        native_findings = [
+            f for f in doc["findings"] if f["code"] == "terminal-native-evaluation"
+        ]
+        self.assertEqual(len(native_findings), 1)
+        self.assertIn(native, native_findings[0]["detail"])
+
+    def test_legacy_native_evaluation_axiom_names_are_reported(self):
+        """Older toolchains expose global names instead of a per-declaration one."""
+        for legacy in ("Lean.ofReduceBool", "Lean.trustCompiler"):
+            with self.subTest(axiom=legacy):
+                self.assertTrue(ts.is_native_evaluation_axiom(legacy))
+        self.assertFalse(ts.is_native_evaluation_axiom("Classical.choice"))
+
     def test_area_permitted_axiom_does_not_excuse_a_terminal(self):
         """The whole point of exact per-terminal sets.
 

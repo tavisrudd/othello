@@ -1079,6 +1079,19 @@ def check_unit_reachability(
     return findings
 
 
+def is_native_evaluation_axiom(name: str) -> bool:
+    """Whether an axiom name is the compiled evaluator standing in for the kernel.
+
+    A `native_decide` proof does not reduce in the kernel.  It emits a
+    declaration-local axiom naming the decision it trusted to the compiled
+    evaluator, so the axiom is not a fixed global name and cannot be recognized
+    from a list; it is recognized by the marker the toolchain builds into it.
+    Older toolchains expose the global `Lean.ofReduceBool` and `Lean.trustCompiler`
+    instead, so both spellings count.
+    """
+    return "native_decide" in name or name in {"Lean.ofReduceBool", "Lean.trustCompiler"}
+
+
 def check_terminals(registry: Registry, facts: dict[str, UnitFacts]) -> list[Finding]:
     findings = []
     for area in registry.areas:
@@ -1123,6 +1136,17 @@ def check_terminals(registry: Registry, facts: dict[str, UnitFacts]) -> list[Fin
                             terminal.name,
                             f"{gate_module}: declared {list(terminal.expected_axioms)} but Lean "
                             f"reports {sorted(observed)}",
+                        )
+                    )
+                native = sorted(a for a in observed if is_native_evaluation_axiom(a))
+                if native:
+                    findings.append(
+                        Finding(
+                            "terminal-native-evaluation",
+                            terminal.name,
+                            f"{gate_module}: discharged by native evaluation, which a trust "
+                            f"declaration may not use; Lean reports {native}.  Replace the "
+                            "native decision with kernel reduction or a proved checker",
                         )
                     )
         for name in sorted(gate_terminals - {t.name for t in area.terminals}):
