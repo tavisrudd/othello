@@ -378,7 +378,7 @@ proves that acceptance implies semantic relative completeness. The accepted coor
 not be normalized or duplicate-free.
 
 The stable manuscript-facing modules are imported and audited by
-`RelativeConicArcs.Gates.ArcsCompleteOutsideConicHuman` and
+`RelativeConicArcs.Gates.ArcsCompleteOutsideConic` and
 `RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions`. The generated
 order-16 theorem `RelativeConicArcs.rhoC_GF16` is exposed separately by the
 certificate-package gate `RelativeConicArcs.Gates.ArcsCompleteOutsideConic`.

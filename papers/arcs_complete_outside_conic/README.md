@@ -35,7 +35,7 @@ The human-scale formal development is distributed in
 0.2.0 release has DOI
 [`10.5281/zenodo.21664257`](https://doi.org/10.5281/zenodo.21664257), and the
 later matching-packing/small-odd supplement is fixed at commit
-[`0b3f37d`](https://github.com/tavisrudd/finitegeom/commit/0b3f37d264f54b52e6c703a75e2704a3f9cbe4b4).
+[`575cf3e`](https://github.com/tavisrudd/finitegeom/commit/575cf3e991168fb96eb24c318263c5d0552aa531).
 The generated exhaustive order-16 proof is in the separately pinned
 [`finitegeom-q16-certificates`](https://github.com/tavisrudd/finitegeom-q16-certificates)
 package at commit
