@@ -186,6 +186,11 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    bridge; q13 Segre foundation; q13 tangent-code certificates; then the v2 release, aligning
    q11/q13 on one upstream commit and preserving the v1 aggregate unchanged.
 
+The MDS--CSS transversal-groups area is re-exported and adopted in finitegeom (gate green there,
+second export reports an empty delta).  Clebsch passages cannot be re-exported until its owner
+re-extracts the area's trust fact, which omits two modules the current import closure carries; the
+golden quantum statistics area is still unadopted on finitegeom's `main`.
+
 Standing blockers: q25 waits on C318/C319; every package waits on its applicable C324 regeneration
 check; the C759 Nanoda pilot waits on a final Lean 4.32 release rather than the pinned 4.32.0-rc1;
 the shared generated trust views await a quiet tree free of foreign uncommitted facts.

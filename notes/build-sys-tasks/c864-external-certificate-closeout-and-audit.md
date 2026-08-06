@@ -379,7 +379,18 @@ Runnable now, in order:
    stale by one warning and come due with its release chain and mirror sync; and the area exports
    carry the reworded trust statements.  Dated reports from 2026-08-04 and earlier keep their
    original wording as history.
-9. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
+9. **MDS--CSS area re-export adopted.**  In the granted window, the MDS--CSS transversal-groups area
+   was re-exported onto finitegeom: deterministic repeat, forward delta of five files — the reworded
+   trust statement, both manifests, `TARGET_MANIFEST.json`, and a refreshed
+   `RelativeConicArcs/AMELU/ExtensionFieldPencil.lean` — the export gate rebuilt green inside
+   finitegeom in 28s at a 1.9 GiB peak, and the delta adopted as one forward commit.  A second
+   export then reported an empty delta over 73 planned files, which is the idempotence check.  The
+   Clebsch areas and golden quantum statistics are deliberately untouched: Clebsch passages refuses
+   to plan because its generated trust fact omits `AlignedFamilyFaithfulness` and
+   `AlignedQueryFamily` from the current import closure and needs its owner's re-extraction, and
+   golden is not on finitegeom's `main` at all, so exporting it would adopt a new area rather than
+   reword one.
+10. **Artifact citations that do not resolve in a release.**  The banner repaths are not hand edits:
    generated output is repaired by changing its generator and regenerating inside the window.  The
    exporter now reports candidate sources citing artifact paths the candidate does not carry
    (`--strict-citations` to refuse), and the measurement found three such citations on finitegeom's
