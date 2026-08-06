@@ -14,7 +14,6 @@
   "publication_type": "preprint",
   "keywords": [
     "Clebsch cubic surface",
-    "incidence orientation cover",
     "icosahedral harmonics",
     "Petersen graph",
     "Gaunt coefficients",
@@ -23,7 +22,20 @@
     "formalized mathematics",
     "conference matrices",
     "two-graphs",
-    "Segre cubic"
+    "Segre cubic",
+    "golden ratio",
+    "Seidel matrices",
+    "principal minors",
+    "switching classes",
+    "Joubert coordinates",
+    "Pfaffians",
+    "quadratic field Q(sqrt 5)",
+    "Hitchin cover",
+    "icosahedral invariants",
+    "Gaunt invariants",
+    "reconstruction",
+    "Lean 4",
+    "spherical harmonics"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [

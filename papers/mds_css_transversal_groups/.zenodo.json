@@ -13,7 +13,6 @@
   "upload_type": "publication",
   "publication_type": "preprint",
   "keywords": [
-    "diagonal isoduality",
     "isodual codes",
     "transversal Clifford group",
     "transversal gates",
@@ -37,19 +36,16 @@
     "Gale duality",
     "Gale transform",
     "six-arcs",
-    "arcs in projective planes",
     "conics",
     "finite projective geometry",
     "generalized Reed–Solomon codes",
     "monomial equivalence",
     "code equivalence",
-    "syndrome geometry",
-    "Frobenius sectors",
     "Heisenberg group",
     "quantum error correction",
-    "Clebsch code",
     "formalized mathematics",
-    "Lean 4"
+    "Lean 4",
+    "arcs"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [

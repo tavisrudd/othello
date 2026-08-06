@@ -13,16 +13,24 @@
   "upload_type": "publication",
   "publication_type": "preprint",
   "keywords": [
-    "Clebsch code",
     "deep holes",
-    "syndrome geometry",
     "projective arcs",
     "finite geometry",
     "coding theory",
     "decoding",
     "signed two-graphs",
     "golden ratio",
-    "formalized mathematics"
+    "formalized mathematics",
+    "MDS codes",
+    "Clebsch hexagon",
+    "uncovered points",
+    "monomial equivalence",
+    "code reconstruction",
+    "conics",
+    "six-arcs",
+    "coset leaders",
+    "Lean 4",
+    "code equivalence"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [

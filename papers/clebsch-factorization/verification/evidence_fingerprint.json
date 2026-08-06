@@ -11,7 +11,7 @@
   "trust_manifest_sha256": "a532e2781300a7fcec12b180b9b5ae867bf01ae4e3c3ae5b55d1889ca610f0b1",
   "runner_sha256": "851b6d07881f05af5a42b7565e4df26ef2a6168a25a3b389ff5073ca740162b7",
   "review_sources_sha256": {
-    "normalized_manuscript": "b0d25adc4eb485020fa4df6527c58d61d6e746b2c7d0417c8a854470565ec01e",
+    "normalized_manuscript": "8710da1b00ffbc639aca77a50e55f25132bd83c16a04bf12346d15f04af70296",
     "normalized_statement_identity": "d11f76cc6b8f557793a7b909254f08b56e7742ce11dfa60145f7cfc77c92c4fb",
     "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
     "paper_readme": "b49e8ebc7562d2e45b6514d1ff7dba9d35d67726c3ec6330d5cb6acc3301daa2",
