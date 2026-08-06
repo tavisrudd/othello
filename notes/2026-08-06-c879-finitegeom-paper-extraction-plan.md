@@ -38,14 +38,17 @@ finitegeom/
 ```
 
 The directory names above are exact paper/repository aliases and are intentionally
-lowercase with underscores or hyphens. They are not Lean module names. Lean module
-components should use the usual PascalCase convention, for example:
+lowercase with underscores or hyphens. They are not Lean module names. The Lean
+namespaces need a personal, ecosystem-unique top level: bare `Paper.*` and
+`FiniteGeom.*` are too generic. Use `TavisRudd` as the pinned project owner, with
+`FiniteGeom` below it. Lean module components should use the usual PascalCase
+convention, for example:
 
 ```text
-Paper.Beyond4PRS.*
-Paper.ArcsCompleteOutsideConic.*
-Paper.AMELU.*
-FiniteGeom.Projective.*
+TavisRudd.FiniteGeom.Papers.Beyond4PRS.*
+TavisRudd.FiniteGeom.Papers.ArcsCompleteOutsideConic.*
+TavisRudd.FiniteGeom.Papers.AMELU.*
+TavisRudd.FiniteGeom.Shared.Projective.*
 ```
 
 During the first split, preserve the existing `RelativeConicArcs.*` module names
