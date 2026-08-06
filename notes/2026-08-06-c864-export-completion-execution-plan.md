@@ -37,11 +37,13 @@ export, certificate re-pin, or paper-mirror synchronization — nothing else may
 `~/src/lean/` or `~/src/math-papers/`.  `notes/research-reproducibility-conventions.md` before any
 paper-facing computational claim.  `papers/style-guide.md` before touching manuscript prose.
 
-### Progress: phases 1 and 2 are done
+### Progress: phases 1 through 4 are done
 
-Executed on 2026-08-06 and committed in both repositories; resume at step 12, the order-eleven
-package's lock refresh.  Findings and evidence:
-`2026-08-06-c864-finitegeom-standalone-build-gate.md`.
+Executed on 2026-08-06 and committed in all three repositories; resume at step 22, the first
+paper-side step of phase 5.  Findings and evidence:
+`2026-08-06-c864-finitegeom-standalone-build-gate.md` for phases 1 and 2, and
+`2026-08-06-c864-order-eleven-package-reseal.md` for phases 3 and 4, which records checkpoints 5,
+6, 7 and 9 green and four further defects the phase exposed.
 
 Phase 2's standalone build found finitegeom's `ProjectiveCap` library broken, and it was repaired
 under a separate instruction before phase 3 began
@@ -93,12 +95,9 @@ the projective-cap area to have an export configuration, which it does not.
 - finitegeom `~/src/lean/finitegeom` is clean, and its local `main` is **ahead of `origin/main`**.
   All twelve of its areas are registered under `lean/trust/export/`, re-exported from tracked
   configurations, gate-green, and idempotent.
-- The order-eleven package `~/src/lean/finitegeom-clebsch-q11-certificates` has an **uncommitted
-  worktree** at `HEAD` `20ae258`, holding work this plan continues: the finitegeom re-pin in
-  `lakefile.toml`, `lake-manifest.json` and `README.md`; the gate renamed to
-  `RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` with `lakefile.toml`,
-  `scripts/seal_manifest.py` and the README updated; and the deletion of seven modules now owned by
-  finitegeom.  **Do not discard this worktree.**  It does not build yet; step 13 is where it does.
+- The order-eleven package `~/src/lean/finitegeom-clebsch-q11-certificates` is clean and committed
+  at `a289097b`, pinning finitegeom at `dca9ce75`, with its gate green, its manifest sealing 115
+  sources plus the two support files, and its trust fact published and pinned in the monorepo.
 - The sandbox cannot reach GitHub over SSH.  Verify a push with
   `git ls-remote https://github.com/tavisrudd/<repo> main`, never a local `origin/main` ref, which
   goes stale and reads as "already pushed".

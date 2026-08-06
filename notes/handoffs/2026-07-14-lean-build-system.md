@@ -134,8 +134,9 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    start there, not from the card's execution order. It carries the resume state, the decisions
    already taken, exact commands, and its own stop points; it excludes the projective-cap, order-13
    and order-25 externalizations and the unpublished papers, so finishing it does not close C864.
-   Its phases 1 and 2 are done and it resumes at step 12
-   (`../2026-08-06-c864-finitegeom-standalone-build-gate.md`): all twelve areas are registered,
+   Its phases 1 through 4 are done and it resumes at step 22, the first paper-side step
+   (`../2026-08-06-c864-finitegeom-standalone-build-gate.md` and
+   `../2026-08-06-c864-order-eleven-package-reseal.md`): all twelve areas are registered,
    adopted and idempotent with golden quantum statistics now among them, the stale build residue is
    swept, the order-eleven `pending_family` entry is gone, and two guards are in place — a package
    module colliding with the pinned finitegeom revision, and an export that would not resolve as a
@@ -159,10 +160,10 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    predicate now sits in `RelativeConicArcs/ParametrizedHoles.lean`, `Q11Residual` is game-free, and
    the terminals are in `Q11ResidualGame`.
    The order-eleven point-orbit family is externalized: `finitegeom-clebsch-q11-certificates` owns
-   it at commit `c366996`, sealing source commit `4f61b2dc` over 122 modules, gate-green,
-   pack/restore-rehearsed
-   trace-current, with its trust fact published and pinned; the monorepo deletions landed and both
-   the boundary and external-fact checks are green.
+   it at commit `a289097b`, sealing source commit `82bc5581` over 115 modules and two support files,
+   pinning finitegeom at `dca9ce75`, gate-green with all fifty-five terminals over the three standard
+   axioms and no Dye statement among them, with its trust fact published and pinned; the monorepo
+   deletions landed and both the boundary and external-fact checks are green.
    The package/monorepo byte-identity audit is done and green through the new
    `lean-package-source-audit.py`; it also established that the finitegeom re-export and the package
    re-seal must happen in one window, because the monorepo's orientation rename has not reached the
@@ -311,7 +312,9 @@ payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-conv
 dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md);
 passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`](../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md);
 export-completion execution plan [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md);
-standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`](../2026-08-06-c864-finitegeom-standalone-build-gate.md).
+standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`](../2026-08-06-c864-finitegeom-standalone-build-gate.md);
+projective-cap repair [`../2026-08-06-c864-projectivecap-standalone-repair.md`](../2026-08-06-c864-projectivecap-standalone-repair.md);
+order-eleven package reseal [`../2026-08-06-c864-order-eleven-package-reseal.md`](../2026-08-06-c864-order-eleven-package-reseal.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
