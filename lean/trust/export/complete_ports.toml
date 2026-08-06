@@ -1,0 +1,68 @@
+# Area-export configuration for the complete bounded repair-port theorem.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# This boundary is the only exported area rooted in the RepairPorts library
+# rather than RelativeConicArcs, and it shares no module with the others.
+
+schema_version = 1
+area = "complete_ports"
+gate = "RepairPorts.Gates.CompletePorts"
+trust_statement = "trust/COMPLETE_PORTS.md"
+axiom_audit = "trust/CompletePortsAxiomAudit.lean"
+
+statement_title = "The complete bounded repair-port theorem: formal boundary"
+
+overview = """
+This boundary records the formal development of bounded repair ports: the
+paper-facing coefficient-port object, the intrinsic reconstruction radius, the
+bridge to standard-code duality, minimum-port reconstruction for maximum
+distance separable codes, exact pointed transfer, and the finite reliability and
+bounded-radius erasure calculus.
+"""
+
+correspondence = """
+A repair port of a code is a set of coefficients from which a lost symbol can be
+reconstructed, and the reconstruction radius is the least size at which such a
+port exists.  The closure develops that object intrinsically, relates it to the
+dual code through the standard duality bridge, and computes it for maximum
+distance separable codes, where a port of minimum size reconstructs.
+
+It then proves exact transfer of ports along pointed maps, and develops the
+erasure calculus in two forms: a finite reliability statement, and a
+bounded-radius statement in which the reconstruction radius is constrained in
+advance.
+
+One statement is conditional.  The strict weighted example assumes the displayed
+regular Singer-action input and asserts nothing without it; every other terminal
+is unconditional.  No executable certificate or fiber enumerator appears in any
+dependency closure of this gate.
+"""
+
+boundary = """
+Every terminal is a kernel proof.  The closure contains no generated certificate
+family, executable checker, fiber enumerator, native evaluation, imported
+external data, unsafe declaration, or admitted proof.  The single conditional
+result carries its hypothesis in its own statement rather than as an assumption
+of the development.
+"""
+
+axiom_audit_title = "Axiom audit for the complete bounded repair-port theorem"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with the bounded
+repair-port boundary: the coefficient-port object and intrinsic reconstruction
+radius, the standard-code duality bridge, minimum-port reconstruction for
+maximum distance separable codes, exact pointed transfer, and the finite
+reliability and bounded-radius erasure calculus.
+"""
+
+readme_anchor = "  upper bounds alone."
+
+readme_bullet = """- `trust/manifests/complete_ports.json` content-addresses the bounded
+  repair-port boundary: the coefficient-port object and intrinsic reconstruction
+  radius, the standard-code duality bridge, minimum-port reconstruction for
+  maximum distance separable codes, exact pointed transfer, and the erasure
+  calculus in its finite reliability and bounded-radius forms."""
