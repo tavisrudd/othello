@@ -59,46 +59,58 @@ shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
 
-## Paper-facing module and gate naming standard
+## Paper-facing and shared module/gate naming standard
 
-This standard applies only to the paper-facing exported closure: modules imported by a
-paper gate, exported through its public API, named by its trust manifest, or required
-to reproduce its paper claim. It does not rename unrelated internal development
-modules. Internal names change only when the module is promoted into a paper-facing
-closure.
+This standard applies to both exported shared libraries and paper-facing exported
+closures: modules imported by a paper or shared gate, exported through a public API,
+named by a trust manifest, or required to reproduce a paper claim. It does not rename
+unrelated internal development modules. Internal names change only when the module is
+promoted into one of these public closures.
 
-Use mathematical subject names for paper-facing ordinary modules and reserve
+Use mathematical subject names for ordinary shared and paper-facing modules and reserve
 infrastructure words for actual infrastructure. This follows the Lean/mathlib norm of
 UpperCamelCase file names, snake_case propositions, and lowerCamelCase data/functions.
 The paper's textbook section or review history is not a module taxonomy.
 
-For each paper, use this shape:
+Use these shapes:
 
 ```text
-Papers/<full-paper-alias>/
-  Foundation.lean
-  PolarInduction.lean
-  RedundancyFive.lean
-  StableComponents.lean
+Shared/<domain>/
+  Definitions.lean
+  <MathematicalSubject>.lean
   Gates/
-    Geometric.lean
-    GeometricAxiomAudit.lean
+    <Boundary>.lean
+    <Boundary>AxiomAudit.lean
+
+Papers/<full-paper-alias>/
+  <MathematicalSubject>.lean
+  Gates/
+    <Boundary>.lean
+    <Boundary>AxiomAudit.lean
 ```
 
 Rules:
 
-- ordinary files name the mathematical object or theorem family;
-- `Gate` means a stable import/build boundary, not a mathematical theorem;
-- `AxiomAudit` means the machine-readable axiom inspection for one named gate;
-- use `CertificateGate` only for a genuinely separate certificate package;
+- ordinary files name the mathematical object, interface, or theorem family;
+- `Gates/<Boundary>.lean` is a stable import/build boundary for one declared closure;
+- `Gates/<Boundary>AxiomAudit.lean` is the machine-readable axiom inspection for that
+  exact boundary;
+- a gate is not itself a mathematical theorem and must not be named `Trust`, `Human`,
+  `Aggregate`, or `Axioms`;
+- use `CertificateGate` only for a genuinely separate certificate boundary;
 - reserve `Trust` for manifests, reports, and external trust facts, not Lean module
   names;
-- replace vague role/status suffixes such as `Human`, `Additions`, `Aggregate`, and
-  `Axioms` with mathematical names or the precise infrastructure name;
+- replace status/history suffixes such as `Human` and `Additions` with mathematical
+  names or precise boundary names;
 - use `Core`, `Foundation`, `Extensions`, or `Examples` only when they describe the
-  actual API layer, not chronology or ownership history;
-- keep generated leaves in the owning certificate package and name their mathematical
+  actual API layer;
+- keep generated leaves in their owning certificate package and name their mathematical
   partition, not a build order or task number.
+
+The q11 and q16 certificate repositories are frozen exceptions to this migration:
+their existing module, gate, and audit names are not renamed. The finitegeom-side
+public adapter, pin, manifest, and paper gate may follow this standard, but the
+separately versioned certificate source remains byte-compatible with its current API.
 
 Thus the eventual PRS roots would be explicit, for example:
 
@@ -111,7 +123,8 @@ TavisRuddFiniteGeom.Papers.Beyond4PRS.Gates.QuantumExtensionAxiomAudit
 
 The first source split preserves existing module names. This naming cleanup is a later
 one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
-not trigger a repository-wide rename.
+not trigger a repository-wide rename. Shared-library families use the same rule and
+must be migrated only with their complete reverse-import gate set.
 
 The first physical split must not also rename namespaces. Initially preserve existing
 module names behind package-specific source roots, for example:
