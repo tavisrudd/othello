@@ -2807,8 +2807,17 @@
       "last": 878,
       "purpose": "independent check of aligned-design faithfulness and its independence from graph 4-hypomorphy",
       "sequence": 312
+    },
+    {
+      "count": 1,
+      "first": 879,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 879,
+      "purpose": "paper-scoped finitegeom layout and extraction plan red-team",
+      "sequence": 313
     }
   ],
-  "next_id": 879,
+  "next_id": 880,
   "schema": "codex-task-id-allocations-v1"
 }

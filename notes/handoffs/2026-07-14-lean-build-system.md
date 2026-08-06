@@ -290,7 +290,8 @@ base generated-module classification [`../2026-08-05-c864-base-generated-module-
 non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md);
 payload seal convention and reverse audit [`../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md`](../2026-08-05-c864-payload-seal-convention-and-reverse-audit.md);
 dangling artifact citations [`../2026-08-05-c864-dangling-artifact-citations.md`](../2026-08-05-c864-dangling-artifact-citations.md);
-passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`](../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md).
+passages re-export and the unregistered arcs area [`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`](../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md);
+export-completion execution plan [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
