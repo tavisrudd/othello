@@ -115,7 +115,7 @@ def check_lean_gates(lean_root: Path | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--companion-root",
+        "--finitegeom-root",
         type=Path,
         help=(
             "checkout of the pinned companion repository; enables resolving the pin "
@@ -151,11 +151,11 @@ def main() -> int:
         "verification/verify_formal_companion.py",
         "--no-loose-commits",
     ]
-    if args.companion_root is not None:
-        location = str(args.companion_root.resolve())
+    if args.finitegeom_root is not None:
+        location = str(args.finitegeom_root.resolve())
         companion_command += [
-            f"--resolve=companion={location}",
-            f"--require-current=companion={location}",
+            f"--resolve=shared-library={location}",
+            f"--require-current=shared-library={location}",
         ]
     run("formal companion pin", companion_command, PAPER)
 

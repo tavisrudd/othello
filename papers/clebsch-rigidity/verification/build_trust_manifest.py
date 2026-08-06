@@ -22,7 +22,7 @@ OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
 PINNED_PACKAGE_COMMIT = "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671"
-PINNED_FINITEGEOM_COMMIT = "3b15c5e9bf1bfba924c63b7b5fafb68d39b6eed5"
+PINNED_FINITEGEOM_COMMIT = "575cf3e991168fb96eb24c318263c5d0552aa531"
 
 
 TERMINALS = {

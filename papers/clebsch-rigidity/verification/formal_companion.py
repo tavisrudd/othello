@@ -200,7 +200,34 @@ def check_current(pin: dict, role: str, checkout: Path) -> None:
     tip = result.stdout.strip()
     if not tip:
         raise CompanionError(f"{role}: {entry['manifest']} has no history")
-    if tip != entry["commit"]:
+    if tip == entry["commit"]:
+        return
+    # Several papers pin one shared library, and their areas are exported at different times, so
+    # requiring each pin to name its own area's export commit forces the portfolio onto as many
+    # revisions as it has areas.  A pin ahead of the newest export is admissible exactly when it
+    # carries that export unchanged: the export must be an ancestor of the pinned commit, and the
+    # manifest must have the same bytes at both.  A pin behind the newest export, or one whose
+    # manifest content differs, is the drift this check exists to catch and still fails.
+    contains = subprocess.run(
+        ["git", "-C", str(checkout), "merge-base", "--is-ancestor", tip, entry["commit"]],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    blobs = [
+        subprocess.run(
+            ["git", "-C", str(checkout), "show", f"{revision}:{entry['manifest']}"],
+            capture_output=True,
+            check=False,
+        )
+        for revision in (tip, entry["commit"])
+    ]
+    unchanged = (
+        blobs[0].returncode == 0
+        and blobs[1].returncode == 0
+        and blobs[0].stdout == blobs[1].stdout
+    )
+    if contains.returncode != 0 or not unchanged:
         raise CompanionError(
             f"{role}: pin names {entry['commit'][:8]} but the companion was last "
             f"exported at {tip[:8]}; advance the pin or explain the difference"
