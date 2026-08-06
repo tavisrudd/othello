@@ -203,10 +203,17 @@ seals eleven areas, of which only four are registered under `lean/trust/export/`
 unregistered ones seal 290 modules against 130 registered, and five of them name the same source
 commit `10d1941a` of 2026-07-28.  They span the AME/LU aggregate, both arcs areas, Clebsch
 factorization, Clebsch rigidity, complete ports, and the beyond-four PRS foundation, so registering
-them crosses several lanes and needs its own scope decision.  Until then acceptance items 11 and 12
-cannot be met, finitegeom stays unbuildable standalone because the missing `ParametrizedHoles.lean`
-and the stale `Q11Residual`/`Q11Coding` sit in an unregistered area, and finitegeom's two Dye
-declarations remain `axiom` where the monorepo now proves them as theorems.
+them crosses several lanes.  Two are now registered and re-exported: the human Arcs area, which
+supplies the `ParametrizedHoles.lean` leaf and the game-free `Q11Residual`/`Q11Coding` that finitegeom
+lacked, and the human Clebsch rigidity area, whose refresh makes both Dye statements theorems there
+rather than axioms.  Declaring the rigidity gate and its terminals also dropped the repository-wide
+spine check from 161 findings to 126.  Five remain — `ame_lu`,
+`arcs_complete_outside_conic_additions`, `clebsch_factorization`, `complete_ports`, and
+`prs_beyond_redundancy_four` — and acceptance items 11 and 12 stay unmet until they are registered.
+
+Registering the Arcs area exposed an exporter defect, now fixed with a regression test: cited Lean
+modules were carried as verification apparatus, so an export could overwrite a module its area does
+not own while leaving that module's seal describing the previous bytes.
 
 Standing blockers: q25 waits on C318/C319; every package waits on its applicable C324 regeneration
 check; the C759 Nanoda pilot waits on a final Lean 4.32 release rather than the pinned 4.32.0-rc1;

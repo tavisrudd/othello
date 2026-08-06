@@ -206,6 +206,46 @@ registered export can make them agree, because those declarations belong to `cle
 Any axiom fact sealed from a package pinning this revision would record both Dye statements as
 trusted inputs, which is no longer true of the mathematics.
 
+## Two areas registered and re-exported
+
+Both blocking areas are now tracked, replayable, and adopted.
+
+**The human Arcs area.** Registration needed three fixes before the exporter would accept it.  The
+gate `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` audits 48 declarations but the registry
+declared an empty terminal list, so the exporter refused the area outright and no terminal was
+covered; each is now declared with the axioms extraction measured, 46 depending on `propext`,
+`Classical.choice` and `Quot.sound` and two on `propext` and `Quot.sound` alone.  The candidate then
+refused for a work-item identifier used as a noun in six docstrings of
+`RelativeConicArcs/ExampleChecks/Q5.lean`, which is a referee-facing violation and was replaced by
+the objects it denoted.  The forward delta adds `RelativeConicArcs/ParametrizedHoles.lean` and the
+gate, and refreshes `Q11Residual.lean` and `Q11Coding.lean` to their game-free form.  The gate
+rebuilt green inside finitegeom in 12m08s at a 9.8 GiB peak, adopted as `0974e45`.
+
+**The human Clebsch rigidity area.** Its gate `RelativeConicArcs.Gates.ClebschRigidityTrust` was
+declared in no area registry at all, which left 35 spine findings standing open against it.
+Declaring the gate, its 48 terminals with measured axioms, and its extracted fact dropped the
+repository-wide spine check from 161 findings to 126.  The extracted closure spans 94 modules and
+declares no project axiom.  The forward delta refreshes `Q11DyeAxioms.lean` so both Dye statements
+are theorems rather than axioms, and brings across the rigidity spine, the code-rigidity bridge, the
+decoding synthesis and the Dye consequences.  The gate rebuilt green inside finitegeom in 17m19s at
+a 5.7 GiB peak, adopted as `4571ee3`.
+
+## An exporter defect: cited Lean modules were carried as apparatus
+
+The Arcs export refused with `the candidate manifest entry for ProjectiveCap/Mirror.lean does not
+match its bytes`.  The cause is an asymmetry between the two halves of the citation rule.
+`dangling_citations`, which reports citations a release would not resolve, exempts `.lean`, `.md`,
+`.toml`, `.lock` and `.nix` — a cited Lean module is covered by a closure and its manifest entry, not
+by apparatus carriage.  `cited_apparatus`, which carries the files, applied no such exemption and
+copied any cited path resolving under the source `lean/` root.
+
+So a docstring naming another module by path caused that module to be copied in beside the closure,
+overwriting whatever the destination sealed at that path while leaving the seal describing the
+previous bytes.  The exporter's own manifest check then refused the candidate it had just built.
+Both sides now apply the same exemptions, with a regression test asserting that a cited Lean module
+is not carried.  The fix also removes a quieter hazard: exporting one area could silently rewrite a
+module that area does not own.
+
 ## State at the end of this window
 
 - Monorepo `c822cef0` carries the re-extracted passages fact.
@@ -217,10 +257,17 @@ trusted inputs, which is no longer true of the mathematics.
 
 ## Open
 
-- Repair `arcs_complete_outside_conic_human` first; the order-eleven package's forward re-pin fails
-  without it, as demonstrated above.  Only then rebuild, re-audit and re-seal the package, and update
-  the monorepo's pinned copy of its fact and the Clebsch-rigidity trust manifest.  The
-  `SupportOrientation*` renames the re-pin needs are already prepared in the package working tree.
+- Publish finitegeom `4571ee3`, then rebuild, re-audit and re-seal the order-eleven package forward
+  onto it, and update the monorepo's pinned copy of its fact and the Clebsch-rigidity trust manifest.
+  Both blockers are cleared: the dependency now compiles, and its axiom fact will record the Dye
+  statements as proved rather than trusted.  The `SupportOrientation*` renames and the revision
+  updates the re-pin needs are already prepared, uncommitted, in the package working tree, and must
+  be repointed from `bb31411` to the published revision before the rebuild.
+- Register the five remaining unregistered areas: `ame_lu`, `arcs_complete_outside_conic_additions`,
+  `clebsch_factorization`, `complete_ports`, and `prs_beyond_redundancy_four`.  The two done here
+  give the pattern — declare the gate and its terminals from the gate's own audit list, extract the
+  fact, write the configuration against the destination file names finitegeom already publishes,
+  then export, build and adopt.
 - Decide how the seven unregistered areas become registered, replayable exports.  This is the
   precondition for acceptance items 11 and 12, which cannot be satisfied while most of the published
   library has no configuration to replay.  It spans several lanes and needs its own scope decision
