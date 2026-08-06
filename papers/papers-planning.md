@@ -4,6 +4,13 @@ The resolved plan for turning the `papers/` candidate directories into submissio
 packaging review (2026-07-12) settled the decomposition, sequencing, and positioning recorded below.
 `papers-index.md` is the registry; this doc is the strategy map and guardrails.
 
+**Coverage.** The tracks and decomposition below are as resolved on 2026-07-12 and are kept as that
+ruling, not refreshed as papers are added.  Seven current papers postdate it and are described only
+in the registry: the AME/LU rigidity paper and the MDS--CSS transversal-groups paper split from it,
+Clebsch Papers II, III and IV (`clebsch-factorization`, `clebsch-passages`, `q13-passant-code`), and
+the two `golden` lane manuscripts.  Read the registry for what exists; read this document for why
+the original decomposition was drawn where it was.
+
 ## Tracks
 
 - **Games track** (impartial cap/Nofil/Node-Kayles): `dihedral-schreier-node-kayles`,

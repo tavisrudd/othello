@@ -12,7 +12,8 @@ four-paper program:** rigidity Paper I, factorization Paper II, `passages`
 Paper III, and the q13 passant-code Paper IV. Papers I--III have GitHub/DOI
 v1 and v2 releases; later changes are forward versions. The `golden` lane
 feeds future Paper-III versions and is not a fifth numbered paper. The former
-37-page mega-paper is retained unchanged as a fallback. See
+37-page mega-paper is not being published and is retained at
+`archive/papers/clebsch-hexagon-code`. See
 `notes/handoffs/2026-07-13-clebsch-paper.md` for the current order and
 `papers-planning.md` for the older decomposition rulings.
 
@@ -206,6 +207,33 @@ JCTA's shorter-paper format or J. Geometry as secondary fits; explicitly **not**
 — the single live doc to read first (status, verification map, remaining work):
 `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alias `clebsch`
 (CLAUDE.md routing), same word as this directory's alias.
+
+**Active unnumbered candidate · `golden-quantum-statistics`** — *Exchange landscapes, orientation,
+and rigidity in the Golden six-mode conference interferometer*
+- *Lane:* `golden`.
+- *Status:* deposited as DOI `10.5281/zenodo.21766747`, with a standalone mirror and an
+  immutable-source release policy; no submission has occurred.
+- *Owns:* the six-mode interferometer built from a symmetric conference matrix of order six, whose
+  square is five times the identity and whose mode space therefore splits into two three-dimensional
+  eigenspaces with eigenvalues plus and minus the square root of five; the classification of the
+  diagonal control's three-by-three transfer by singular values when its ports are unframed; the
+  orientation refinement adding the sign of the top exterior amplitude, with the determinant the
+  unique minimal-degree polynomial carrying that relative orientation up to scale; the
+  matrix-dependent amplitudes such as the permanent that fully calibrated frames expose; and the
+  balanced exchange spectrum of symmetric conference matrices.
+- *Lean:* the `golden_quantum_statistics` export area is configured but is not adopted on the
+  finitegeom repository, so this paper's Lean development currently sits outside the shared library.
+
+**Source programme, not a numbered paper · `golden-operator`** — *The golden conference operator and
+its shadow sisters*
+- *Lane:* `golden`.
+- *Status:* gated in the repository registry, on the ground that the source programme is not adopted
+  as a standalone publication.
+- *Role:* the source-development programme for a future forward version of Paper III
+  (`clebsch-passages`), centered on the common operator theorem rather than the full inventory.
+  Released Paper-III versions remain immutable, and publication integration runs through the
+  `passages` identity rather than a separate release.
+
 
 ## Engineering / methods track — unnumbered spin-off
 
