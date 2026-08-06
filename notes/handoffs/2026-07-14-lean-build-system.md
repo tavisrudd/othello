@@ -138,11 +138,17 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    (`../2026-08-06-c864-phase-five-published-papers.md`): the beyond-four PRS bibliography, the
    restating documents and eight facts artifacts are current, and the Clebsch passages, Clebsch
    factorization, AME/LU, beyond-four PRS and golden quantum statistics release gates are green.
-   **The Clebsch rigidity chain is stopped by a declared falsifier** — the paper cites the
-   order-eleven package's gate as evidence for a terminal finitegeom now proves — so what that
-   package's external fact should assert is the decision blocking Paper I's release. Also open
-   there: MDS--CSS transversal groups has no release verifier at all though its Makefile calls one,
-   and the arcs paper still pins a superseded order-16 package. No mirror has been synchronized.
+   The order-eleven package's external fact declares a terminal the package itself proves — the
+   exhaustive point-orbit partition — and `lean-external-fact.py` refuses any other, so a fact can
+   no longer claim credit for what its dependency proves. The two order-eleven Brianchon statements
+   are theorems of finitegeom, and no artifact calls them axioms: the module is
+   `Q11BrianchonClassification`, and the tree's project-local axiom table names neither. The
+   `_human` suffix is gone from the Clebsch rigidity and arcs areas. Paper I's release chain is
+   green at package `a80e7de6`, and Clebsch rigidity, Clebsch passages and the arcs paper all pin
+   finitegeom `575cf3e9`; a pin may now run ahead of its area's export when it carries that export
+   unchanged. Still open there: MDS--CSS transversal groups has no release verifier at all though
+   its Makefile calls one, and the arcs paper still pins a superseded order-16 package. No mirror
+   has been synchronized and nothing has been pushed.
    The earlier phases resumed at step 22, the first paper-side step
    (`../2026-08-06-c864-finitegeom-standalone-build-gate.md` and
    `../2026-08-06-c864-order-eleven-package-reseal.md`): all twelve areas are registered,
