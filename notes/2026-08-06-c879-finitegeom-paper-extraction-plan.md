@@ -28,27 +28,69 @@ shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
 
+The first physical split must not also rename namespaces. Initially preserve existing
+module names behind package-specific source roots, for example:
+
+```text
+Papers/PRS/RelativeConicArcs/PRSFoundation.lean
+Papers/Arcs/RelativeConicArcs/...
+Shared/RelativeConicArcs/...
+```
+
+The `Paper.*` and `FiniteGeom.*` namespace cleanup is a later, package-local change.
+This prevents a directory move from becoming an immediate repository-wide import
+rewrite and rebuild.
+
 Each paper should own a small manifest declaring its roots, source closure, shared
 dependencies, generated inputs, certificate packages, axiom expectations, and exact
 replay command. The central trust portfolio should be generated from these manifests,
 not serve as the primary ownership map.
 
-## Staged execution
+## Staged execution and bounded validation
 
-1. Inventory the current import and reverse-import graph and classify every module as
-   paper-specific, shared, generated, certificate-owned, or legacy.
-2. Create `Papers/<alias>` directories in the monorepo while retaining one Lake
-   project; update imports and namespaces in bounded closures.
-3. Extract repeated mathematical foundations into named shared libraries. Reject a
-   shared module without a mathematical subject, owner, public API, and multiple
-   genuine consumers.
-4. Add import-firewall checks: shared code cannot import papers, paper internals
-   cannot be imported by another paper, and adapters are explicit.
-5. Extract leaf-paper-specific modules first, retaining shared libraries centrally.
-6. Freeze upstream APIs for arcs and AME--LU, which currently supply foundations to
-   several developments.
-7. Split the shared libraries and paper-specific source into separately pinned Lake
-   packages only after each paper has an independent clean replay.
+1. Freeze the current finitegeom commit, paper roots, source closures, reverse
+   closures, certificate pins, and axiom facts. Refuse the operation if foreign Lean
+   work or dirty certificate artifacts are present.
+2. Generate the ownership graph without running Lean. Classify every module as
+   paper-specific, shared, generated, certificate-owned, compatibility shim, or
+   legacy. Record exact shared modules and extractable modules per paper.
+3. Add per-paper manifests and a read-only import-firewall checker while leaving all
+   Lean source in place. Reject shared-to-paper imports, undeclared paper-to-paper
+   imports, undeclared generated inputs, and roots outside the manifest closure.
+4. Create paper directories and package-specific source roots while retaining the
+   existing module names and one Lake project. Do not combine this step with a
+   namespace rewrite.
+5. Extract one small human-scale leaf as a pilot, preferably
+   `complete-repair-ports`, rather than arcs, AME--LU, PRS, or a certificate-heavy
+   closure. Retain shared modules centrally and use temporary compatibility shims
+   where necessary.
+6. Validate the pilot from a clean package-local source tree: build only its gate and
+   audit through the guarded build queue, run its checker, compare declarations and
+   axioms, and run the source/manifest audits. Do not run a repository-wide build.
+7. For every later change, compute the exact reverse-import closure before building.
+   A paper-private move rebuilds only that paper; a shared API change rebuilds every
+   affected paper gate; manifest-only changes require no Lean build.
+8. Extract the remaining leaf papers in dependency order: complete ports,
+   equivariant completion, q13 after its certificate package is sealed, MDS/CSS after
+   the AME--LU API is frozen, Clebsch passages, then Clebsch rigidity/hexagon code.
+   Extract PRS-specific modules after its shared interfaces are stable.
+9. Freeze the arcs and AME--LU shared APIs last. They are shared-heavy foundations;
+   moving them earlier would repeatedly reopen downstream closures.
+10. Only after each monorepo package passes an independent clean replay, split the
+    shared libraries and paper source into separately pinned Lake packages. Perform
+    namespace cleanup one package at a time after the package boundary is green.
+
+### Build-wait discipline
+
+- Do not run a full-project Lean build for layout, manifest, or graph changes.
+- Use exact gate and reverse-closure targets through `lean-build-queue.py`; never
+  invoke Lake directly or substitute a portfolio-wide target.
+- Keep one heavyweight build at a time and reuse trace-current shared artifacts.
+- Use detached guarded queue runs only for genuinely long, already-bounded gates.
+- After a failure, inspect the first diagnostic and change the target or source before
+  retrying; never repeat an unchanged failed build.
+- Keep generated certificates downstream and opt-in; do not pull them into every
+  paper build.
 
 ## Red-team findings and mitigations
 
@@ -69,13 +111,21 @@ not serve as the primary ownership map.
   Limit them to roots, closure, shared pins, generated inputs, axioms, and replay.
 - Existing `.olean` files can mask missing source after extraction. Validate from a
   clean checkout and distinguish source elaboration from stale-artifact success.
+- A simultaneous path move and namespace rewrite can turn a small leaf extraction
+  into a repository-wide rebuild. Preserve module names in the first split and defer
+  namespace cleanup.
+- A full repository build can hide whether the changed paper closure is actually
+  bounded. Require the exact affected-gate list before every validation build.
+- Starting with arcs or AME--LU would repeatedly disturb shared foundations. Use a
+  small leaf pilot and freeze upstream public APIs before downstream extraction.
 
 ## First acceptance gate
 
-Before moving source, commit an ownership/import manifest and generated reverse-
-dependency report. The report must identify the exact shared modules that remain
-required by each paper and the exact paper-specific modules safe to extract. No source
-deletion or repository split is authorized by this plan alone.
+Before moving source, commit an ownership/import manifest, generated reverse-
+dependency report, and import-firewall checker. The report must identify the exact
+shared modules that remain required by each paper, the exact paper-specific modules
+safe to extract, and the exact gate targets affected by a change. No source deletion,
+namespace rewrite, or repository split is authorized by this plan alone.
 
 ## Scope boundary
 
