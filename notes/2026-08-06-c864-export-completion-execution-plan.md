@@ -11,9 +11,23 @@ Every decision it depends on has already been taken and is recorded in "Decision
 the evidence and the observation that would overturn it.  Do not re-open those decisions unless
 their stated falsifier is actually observed; if one is, stop and say which.
 
-The run stops for a human exactly twice, at the two pushes in step 12 and step 30.  Everything else
-proceeds without asking.  A genuine validation failure is also a stop: report the failing checkpoint
-and its output rather than working around it.
+**The run does not stop for a human at all.**  The author handles every push after the local job is
+complete, so no step waits on one.  The apparent obstacle — a certificate package resolving
+finitegeom by public Git URL, so it cannot build against an unpublished revision — is solved by the
+guarded lock refresh, which prefetches an exact unpublished revision from a local checkout:
+
+```sh
+python3 ~/src/othello/lean/scripts/lean-build-queue.py update-lock finitegeom \
+  --lean-root ~/src/lean/finitegeom-clebsch-q11-certificates \
+  --local-source ~/src/lean/finitegeom
+```
+
+Run everything to completion locally, then hand the author the full list of repositories to push:
+finitegeom, the order-eleven certificate package, and every published paper mirror under
+`~/src/math-papers/`.
+
+A genuine validation failure is a stop: report the failing checkpoint and its output rather than
+working around it.
 
 ### Read before acting
 
@@ -23,12 +37,33 @@ export, certificate re-pin, or paper-mirror synchronization — nothing else may
 `~/src/lean/` or `~/src/math-papers/`.  `notes/research-reproducibility-conventions.md` before any
 paper-facing computational claim.  `papers/style-guide.md` before touching manuscript prose.
 
+### Progress: phase 1 steps 1--3 and checkpoints 1--2 are done
+
+Executed on 2026-08-06 and committed in finitegeom; resume at step 4.
+
+- The two orphan gates are deleted, their `lakefile.toml` roots removed, and their entries plus the
+  stale `RelativeConicArcs.PaperIOrientationSpine` root removed from `TARGET_MANIFEST.json`
+  (`sources` 316 → 314).  finitegeom commits `0508f4e` and the two that follow it.
+- **Checkpoint 1 passed.**  No manifest entry names an absent path, no root names an absent module,
+  `module_count` matches `sources`, and `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` builds
+  green in finitegeom.
+- **Checkpoint 2 passed**, after two fixes it surfaced, both now committed.  The eleven-area
+  idempotence run first refused every area with `base prose disagrees with the base manifest`: the
+  hand edit in step 3 changed the module count while finitegeom's `README.md` and `PROVENANCE.md`
+  still said 316.  This is precisely the failure checkpoint 2 exists to catch — do not skip it after
+  any hand edit to a generated manifest.  The support-cubic orientation area then showed a
+  one-file delta, its trust statement still calling the artifact a companion, which the vocabulary
+  rule forbids; it was adopted.  All eleven adopted areas now report an empty delta.
+- Golden quantum statistics reports a 12-file delta, which is expected and is step 6's work: it is
+  the one configured area not yet adopted on finitegeom.
+
 ### State at the start of this plan
 
 - Monorepo `~/src/othello` is clean and its work is committed.
 - finitegeom `~/src/lean/finitegeom` is clean, and its local `main` is **ahead of `origin/main`**.
-  All eleven of its areas are registered under `lean/trust/export/`, re-exported from tracked
-  configurations, and gate-green.
+  All eleven of its adopted areas are registered under `lean/trust/export/`, re-exported from tracked
+  configurations, gate-green, and idempotent.  A twelfth configuration, golden quantum statistics,
+  is registered but not yet adopted.
 - The order-eleven package `~/src/lean/finitegeom-clebsch-q11-certificates` has an **uncommitted
   worktree** at `HEAD` `20ae258`, holding work this plan continues: the finitegeom re-pin in
   `lakefile.toml`, `lake-manifest.json` and `README.md`; the gate renamed to
@@ -104,12 +139,15 @@ the interference the lane rules forbid.
    carries the base manifest's `sources` forward, so a deleted file's entry persists until removed by
    hand.  This is the one hand edit to a generated file in this plan, and step 5 is what proves it
    consistent.
-4. Sweep the stale build residue, measured in
-   `notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`.  There are five stacks, not
-   two: in the monorepo, 114 point-orbit modules (912 files, 51.5 MB) and 11 `PaperIOrientation*`
-   modules (88 files, 11.1 MB); in finitegeom, 3 order-16 modules (24 files, 1.6 MB) and the same 11
-   renamed modules (88 files, 11.1 MB); and in the order-eleven package, `Q11DyeAxioms` (8 files),
-   which it built locally and now takes from finitegeom.
+4. Sweep the stale build residue.  Re-measure rather than trusting a recorded figure — the current
+   count is 33 modules across three roots, not the larger figures in the earlier sweep, because part
+   was already cleared.  Identify a stale module as one whose `.olean` exists under `.lake/build`
+   while its `.lean` does not, and delete only those.  Confirm no build is running first: unlinking
+   build outputs under a tree another lane is building is the interference the lane rules forbid.
+   Measured on 2026-08-06: monorepo 11 modules (88 files), finitegeom 13 (104 files, 11.8 MB), and
+   the order-eleven package 9 (72 files, 5.5 MB), the last being modules it built locally and now
+   takes from finitegeom.  Earlier figures, superseded, are in
+   `notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`.
 
 **Checkpoint 1.**  `TARGET_MANIFEST.json` has no `sources` entry naming an absent path and no root
 naming an absent module — check both directions, not just roots.  Every finitegeom area gate builds
@@ -163,11 +201,11 @@ suites pass: `test_lean_certificate_boundary.py`, `test_lean_area_export.py`,
 
 ## Phase 3 — the order-eleven package
 
-12. **STOP 1 — push.**  finitegeom must be published before the package can resolve it: packages
-    depend on finitegeom by public Git URL and pinned revision.  Ask the user to push finitegeom.
+12. Refresh the package's finitegeom lock from the local checkout with `update-lock` as shown above,
+    so it resolves the unpublished revision without waiting on a push.
 
-**Checkpoint 5.**  `git ls-remote https://github.com/tavisrudd/finitegeom main` resolves to the
-intended revision.  Do not proceed on a local ref.
+**Checkpoint 5.**  The package's `.lake/packages/finitegeom` checkout is at the intended revision and
+carries the modules the gate needs, including `RelativeConicArcs/ParametrizedHoles.lean`.
 
 13. Re-point the package's already-edited `lakefile.toml`, `lake-manifest.json` (`rev` **and**
     `inputRev`) and README pin to the pushed revision.  The worktree currently names an earlier one.
@@ -212,10 +250,7 @@ python3 ~/src/othello/lean/scripts/lean-package-source-audit.py \
 
 ## Phase 4 — reconnect the monorepo to the package
 
-20. **STOP 2 — push.**  Ask the user to push the package.
-
-**Checkpoint 8.**  `git ls-remote https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates main`
-resolves to the resealed revision.
+20. Record the resealed package revision for the pin update below; publication happens at the end.
 
 21. Update the monorepo's pinned copy of the trust fact under `lean/trust/external/`, and its hash
     pin and `commit` field in `lean/trust/certificate-packages.toml`.  Any commit in the package
@@ -281,9 +316,8 @@ separately reviewable in the mirror's history.  Never add exclusions or rewrites
 **Checkpoint 12.**  Every published mirror is clean, its release gate green, and its release identity
 equal to the authority's.
 
-30. **STOP 3 — push.**  Ask the user to push the mirrors.  (This is the third and last human stop;
-    the two earlier ones are unavoidable because downstream resolution needs a published revision.
-    If the user prefers, stops 2 and 3 can be batched into one at the end of phase 5.)
+30. Leave every mirror committed and unpushed.  Publication of all repositories happens once, at the
+    end, and is the author's action.
 
 ## Phase 6 — closing evidence
 
@@ -299,6 +333,10 @@ equal to the authority's.
 every row passing.  Acceptance items 11 and 12 hold for the published set.
 
 34. Update the C864 card and the build-sys handoff, and append the dated report.
+35. Hand the author one list naming every repository to push and the exact revision each should
+    reach: finitegeom, the order-eleven certificate package, and each published mirror under
+    `~/src/math-papers/` including the portfolio summary.  Verify each afterwards with
+    `git ls-remote https://github.com/tavisrudd/<repo> main`, never a local `origin/main` ref.
 
 ## Hazards this plan already accounts for
 
