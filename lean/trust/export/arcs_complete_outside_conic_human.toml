@@ -1,0 +1,84 @@
+# Area-export configuration for the human-scale library behind
+# "Arcs complete outside a prescribed conic".
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# This boundary carries the reusable geometry and the kernel-checked step and
+# reduction semantics.  The exhaustive order-sixteen transition, row, and leaf
+# families are not part of it: they belong to the separately pinned
+# finitegeom-q16-certificates package, which depends on this library in one
+# direction only.
+
+schema_version = 1
+area = "arcs_complete_outside_conic_human"
+gate = "RelativeConicArcs.Gates.ArcsCompleteOutsideConic"
+trust_statement = "trust/ARCS_COMPLETE_OUTSIDE_CONIC.md"
+axiom_audit = "trust/ArcsCompleteOutsideConicHumanAxiomAudit.lean"
+
+statement_title = "Arcs complete outside a prescribed conic: human library boundary"
+
+overview = """
+This boundary records the human-scale library accompanying the manuscript
+*Arcs complete outside a prescribed conic*: the reusable plane geometry, the
+asymptotic and averaging arguments, the small-field witnesses, the order-sixteen
+classification definitions, and the kernel-checked step and reduction semantics.
+
+The exhaustive order-sixteen transition, row, and leaf families are absent from
+this repository.  They are distributed by the separately pinned
+`finitegeom-q16-certificates` package, which depends on this library in one
+direction.  That package supplies the exhaustive classification and proves the
+exact order-sixteen exclusion and the value of the completion threshold; the
+boundary exported here proves the two-sided bound alone.
+"""
+
+correspondence = """
+The closure develops arcs of a projective plane that are complete outside a
+prescribed conic: an arc is relatively complete when every point off the conic
+lies on one of its secants, and the threshold in question is the least size at
+which such an arc exists over a field of given order.
+
+It carries the averaging argument bounding the threshold in terms of a hypothesis
+imported from the literature, the matching and clique packing combinatorics
+behind the concurrence deficiency estimates, the explicit small-order witnesses
+and their normalizations, and the parametrized-hole validity predicate together
+with the conic parametrization and icosahedral adjacency of the order-eleven
+residual analysis.
+
+The two-player formulation of hole localization is deliberately outside this
+boundary.  The validity predicate and the residual dictionary are exported in
+their game-free form, and the game terminals, the game-side hole localization,
+and the projective cap game are not part of the closure.
+
+The order-sixteen threshold value itself is not proved here.  This boundary
+proves the two-sided bound; the exact value follows from the exhaustive
+classification distributed by the external certificate package named above.
+"""
+
+boundary = """
+Every terminal is a kernel proof.  The closure contains no user axiom, unsafe
+declaration, admitted proof, native evaluation, or imported external certificate
+data, and the trust registry permits no axiom in this area.  The hypothesis
+imported from the literature enters as an explicit hypothesis of the statements
+that consume it rather than as an assumption of the development, so a consumer
+reads it directly from the terminal it appears in.
+"""
+
+axiom_audit_title = "Axiom audit for the human Arcs boundary"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with the human-scale
+boundary for arcs complete outside a prescribed conic: the averaging and
+packing bounds, the small-order witnesses and their normalizations, the
+step and reduction semantics, and the game-free order-eleven residual
+dictionary.
+"""
+
+readme_anchor = "  13-module structural closure."
+
+readme_bullet = """- `trust/manifests/arcs_complete_outside_conic_human.json` content-addresses
+  the human boundary for arcs complete outside a prescribed conic, including the
+  averaging and packing bounds, the small-order witnesses, the step and
+  reduction semantics, and the game-free order-eleven residual dictionary.  The
+  exhaustive order-sixteen families are not part of it."""
