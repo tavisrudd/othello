@@ -12,8 +12,7 @@ already-formalized finite classification in `DihedralSchreier/Density.lean`.
 
 The counting primitives `primeCount` and `primeCountMod` used to state the axiom are defined
 here so that the axiom's statement is self-contained and its `#print axioms` audit exposes the
-precise external input, mirroring `RepairCodes/Imported.lean` and
-`RelativeConicArcs/Q11DyeAxioms.lean`.
+precise external input, mirroring `RepairCodes/Imported.lean`.
 -/
 
 namespace DihedralSchreier

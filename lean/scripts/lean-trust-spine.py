@@ -63,6 +63,35 @@ AXIOM_SOURCE_RE = re.compile(r"^(?:private\s+|protected\s+)?axiom\s+([A-Za-z0-9_
 NAMESPACE_RE = re.compile(r"^namespace\s+([A-Za-z0-9_'.]+)")
 END_RE = re.compile(r"^end\s+([A-Za-z0-9_'.]+)")
 
+
+def strip_block_comments(lines: list[str]) -> list[str]:
+    """Yield each line with Lean block-comment text blanked out, respecting nesting.
+
+    Only the commented spans are blanked, so a line keeps its code and its position: the import,
+    namespace and axiom scanners all work by line and must still see everything outside a comment.
+    """
+    stripped: list[str] = []
+    depth = 0
+    for line in lines:
+        out: list[str] = []
+        index = 0
+        while index < len(line):
+            if line.startswith("/-", index):
+                depth += 1
+                index += 2
+                continue
+            if depth and line.startswith("-/", index):
+                depth -= 1
+                index += 2
+                continue
+            if not depth and line.startswith("--", index):
+                break
+            if not depth:
+                out.append(line[index])
+            index += 1
+        stripped.append("".join(out))
+    return stripped
+
 MARKER_BEGIN_RE = re.compile(
     r"^<!--\s*trust-spine:begin\s+area=(\S+)\s+section=(\S+)\s+version=(\d+)\s*-->\s*$"
 )
@@ -464,6 +493,11 @@ def _git_tracked_lean(lean_root: Path) -> list[str]:
 def _parse_header(text: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
     """Return the import list and the namespace-qualified axioms this source declares.
 
+    Prose is not source: a module header explaining which axiom a gate imports must not be read as
+    declaring one.  Lines are taken with block comments removed and nesting respected, because Lean
+    nests `/- -/`, and a docstring sentence beginning "axiom is imported" would otherwise be
+    reported as a project-local axiom in the shared trust views.
+
     The namespace stack is followed literally: `namespace A.B` pushes, a matching `end A.B` pops, an
     anonymous `end` (closing a `section`) is ignored.  That is a heuristic, and it is only ever used
     as a corroborating signal — the Lean exporter remains the authority on what an axiom is.
@@ -472,7 +506,7 @@ def _parse_header(text: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
     axioms: list[str] = []
     namespaces: list[str] = []
     in_header = True
-    for line in text.splitlines():
+    for line in strip_block_comments(text.splitlines()):
         if in_header:
             match = IMPORT_RE.match(line)
             if match:
