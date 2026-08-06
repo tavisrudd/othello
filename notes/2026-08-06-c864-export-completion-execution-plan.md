@@ -9,17 +9,35 @@
 This is the ordered execution plan from the current state to a finitegeom repository that is
 complete, replayable and buildable standalone, with every published paper consistent with it.
 
-In scope: the finitegeom tree and its eleven areas, the order-eleven certificate package, and the
-nine published papers with standalone mirrors — AME/LU, arcs complete outside a conic, beyond-four
-projective Reed--Solomon, Clebsch factorization, Clebsch passages, Clebsch rigidity, golden quantum
-statistics, MDS--CSS transversal groups, and the order-13 passant code — plus the portfolio summary.
+In scope for this first pass: the finitegeom tree and its eleven areas, the order-eleven certificate
+package, and the published papers — rigidity as Paper I with its computational companion,
+factorization as Paper II, passages as Paper III, arcs complete outside a conic, beyond-four
+projective Reed--Solomon, AME/LU, MDS--CSS transversal groups, and golden quantum statistics — plus
+the portfolio summary.
+
+Two published papers are deferred to a second pass rather than dropped.  The order-13 passant code,
+Paper IV of the Clebsch programme, is deferred by instruction; its certificates stay resident under
+`papers/q13-passant-code/` because the projective-cap order-13 externalization is out of scope, so
+nothing about its Lean state changes in the meantime.  Complete repair ports is deferred for the
+reason below.  Both are paper-side work when resumed: neither needs an export or a build window.
 
 Out of scope by instruction: the projective-cap order-eleven and order-13 externalizations, the
-order-25 externalization, and every unpublished paper.  This matters more than it sounds, because
-all six repositories whose private-reference findings hard-refuse a mirror sync are unpublished —
-complete repair ports, golden operator, dihedral Schreier node Kayles, the archived Clebsch hexagon
-code, equivariant robust completion, and continuation graph rigidity.  Every published paper scans
-clean, so no reference-cleaning work is on this path.
+order-25 externalization, and the unpublished papers — the archived Clebsch hexagon code,
+continuation graph rigidity, dihedral Schreier node Kayles, equivariant robust completion, and the
+golden operator.
+
+Complete repair ports is deferred rather than excluded on principle.  Its manuscript is close, but
+its export carries 128 private-reference findings that hard-refuse a sync, and they are not a
+scrubbing job: they sit in eleven internal working documents — `proof_ledger.md`,
+`adversarial_novelty_review.md`, `theorem-map.md`, `formalization-ledger.md`,
+`second-draft-fix-plan.md`, `formal-statement-adequacy.md`, `verification-map.md`,
+`claim-proof-novelty-ledger.md`, both READMEs, and one file the scanner classifies as an internal
+process file outright.  The question they raise is editorial, not mechanical: which of those
+documents belong in a public paper repository at all.  That belongs to the paper's owner.  Its Lean
+side is unaffected and already done — the `complete_ports` area is registered, re-exported and
+adopted in finitegeom — so only the mirror sync waits.
+
+Every remaining published paper scans clean, so no reference-cleaning work is on this path.
 
 Consequence to state plainly: three of the four `pending_family` entries in
 `lean/trust/certificate-packages.toml` are out of scope here, so that table will not be empty and
@@ -129,9 +147,9 @@ the new collision rule.
 
 ## Phase 4 — published papers
 
-Seven published papers have a facts artifact differing from a fresh extraction: AME/LU, arcs
-complete outside a conic, Clebsch factorization, Clebsch passages, Clebsch rigidity, the Clebsch
-rigidity companion, and the order-13 passant code.
+Six papers in this pass have a facts artifact differing from a fresh extraction: AME/LU, arcs
+complete outside a conic, Clebsch factorization, Clebsch passages, Clebsch rigidity, and the Clebsch
+rigidity companion.  The order-13 passant code has a seventh, refreshed in the second pass.
 
 17. Refresh the stale bibliography entries in beyond-four projective Reed--Solomon, which holds
     seven of the nine `stale-bbl` findings across `prs-beyond-redundancy-four.bbl` and
@@ -153,8 +171,9 @@ epoch is rejected, and that equality is the only thing detecting a stale tracked
 
 Clebsch rigidity must come after phase 3: its pin block records the package commit and gate digest.
 
-**Checkpoint 6.**  `paper-facts.py check` reports no error and no staleness against any published
-paper.  Every published paper's release gate is green in the monorepo.
+**Checkpoint 6.**  `paper-facts.py check` reports no error and no staleness against any paper in this
+pass, and its remaining findings name only the deferred and out-of-scope papers.  Every in-scope
+paper's release gate is green in the monorepo.
 
 22. Synchronize each published mirror with `export-paper-repos.py sync`, then replay that paper's
     release gate inside the mirror and require agreement with the authority's release identity —
@@ -183,6 +202,16 @@ passing.  Acceptance items 11 and 12 are then satisfied for the published set.
 
 ---
 
+## Second decision, needed before phase 1 completes
+
+Golden quantum statistics is a published paper, but its Lean area is the one registered
+configuration with no corresponding area on finitegeom's `main`.  Exporting it would adopt a new
+area rather than refresh an existing one, which is a publication decision rather than a maintenance
+one.  Decide whether that paper's Lean development joins finitegeom in this run.  If it does, the
+export and adoption belong in phase 1 before the push; if it does not, the paper ships with its Lean
+development outside the shared library and that should be stated in its release surface rather than
+left implicit.
+
 ## Known exclusions to restate at closeout
 
 - `papers/clebsch-series-figures/series-figures.tex` is an unregistered paper.  It needs either
@@ -190,5 +219,18 @@ passing.  Acceptance items 11 and 12 are then satisfied for the published set.
 - The `pending_family` table retains its order-25 data, order-25 generator, and order-13
   projective-cap entries, so the boundary checker's externalization scope is deliberately non-empty
   and C864's acceptance item 9 is unmet.
-- The order-13 passant-code certificates remain resident under `papers/q13-passant-code/` and their
-  externalization is out of scope, so that paper ships with its certificates in place.
+- Paper IV, the order-13 passant code, is deferred to the second pass.  Its certificates remain
+  resident under `papers/q13-passant-code/` because the projective-cap order-13 externalization is
+  out of scope, so it ships with its certificates in place whenever it is picked up.
+- Complete repair ports is deferred at the mirror-sync step only, pending the editorial decision on
+  its eleven internal working documents.  Its Lean area is already registered and adopted, so
+  resuming it later is a paper-side task with no export work attached.
+
+## Second pass
+
+Both deferred papers are paper-side only and need no export, build window, or lock.  For the order-13
+passant code: refresh its facts artifact, resolve its `papers-index.md` title drift, run its release
+chain, and sync its mirror.  For complete repair ports: take the editorial decision on the eleven
+internal working documents — exclude them from the export or rewrite them for a public audience —
+then resolve the one remaining `stale-bbl` finding, run its release chain, and sync.  Adding the two
+extends checkpoints 6 and 7 to cover them and extends the phase 5 result table by two rows.
