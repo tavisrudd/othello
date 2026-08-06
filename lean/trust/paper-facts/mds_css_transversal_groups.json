@@ -714,10 +714,10 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 203710,
+      "bytes": 203714,
       "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "e18291691c3db6f58e2490fa3ed0894b141d55cc5c5b1f8bc4c9013b9eabec35"
+      "sha256": "0198e28e318aaf0483ccc7e2bf0c1d5900e257bac064c63fd7c6e048574f36ed"
     }
   ],
   "schema_version": 1,
@@ -736,7 +736,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
-      "sha256": "754b74ae224d920a739a6d17c6fd2cb0c20c998d6b5dd687a75ff7bc72567e87"
+      "sha256": "904cf9649552b5bded01a21faecd2dec581590eb17e39003e160d1ad13216f90"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/02-geometry-ame-dictionary.tex",
@@ -760,7 +760,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/08-verification-boundary.tex",
-      "sha256": "304d2bd569c3cec3e25e5e377671235e7b56246214b85d0ffb504073037ae5c9"
+      "sha256": "07931e4d8c102ee5125b5ebd7ec7ca8d8b9a12b07487180c067609d97aa7b4a6"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/07-conclusion.tex",
