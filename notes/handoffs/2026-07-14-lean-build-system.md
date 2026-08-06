@@ -81,8 +81,9 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   manifest and preserved gate log, and refuses a dirty tree, a foreign root, moved Lean sources, an
   unfinished gate, or evidence differing from the run's own log.
 - `lean-certificate-boundary.py`: rejects certificate-owned sources, imports, and replay artifacts
-  in the monorepo, plus any generated family belonging to no package and to no declared pending
-  family; `--verify-official-libraries` also checks package pins and published facts and rejects a
+  in the monorepo, any generated family belonging to no package and to no declared pending family,
+  and any generator a generated banner names that no family declares — the rule that reaches
+  `notes/`, which its scan roots do not; `--verify-official-libraries` also checks package pins and published facts and rejects a
   monorepo file byte-identical to one an official package owns.  The `pending_family` table in
   `lean/trust/certificate-packages.toml` declares each generated family still resident here and the
   package that will own it; it is empty only when the externalization is complete.  Its companion
@@ -94,7 +95,9 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   extraction-time comment normalization the package declares in its `PROVENANCE.md`; sources the
   rules reproduce are reported as transformed, and everything else stays a defect.
 - `lean-certificate-portfolio-audit.py`: read-only sweep of any set of working roots for generated
-  Lean families, recognizing a generated source by its naming of its own generator.
+  Lean families, recognizing a generated source by its naming of its own generator.  `--payload`
+  reports those generators and whether each is resident; `--build-artifacts` reports build outputs
+  whose Lean source no longer exists, which is how an extraction's residue is found.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
   LaTeX, or BibTeX.
 - `lean-companion-export.py`: `plan`/`run` for companion export onto the canonical `finitegeom`
@@ -128,9 +131,14 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    the card.  Done there without a window: the adversarial boundary-checker fixtures, split-line
    planning for the remaining order-eleven families, the order-25 banner transformation now declared
    as `q25-banner-normalization-v1` and machine-checked
-   (`../2026-08-05-c864-q25-banner-transformation-declaration.md`), and the classification of the
+   (`../2026-08-05-c864-q25-banner-transformation-declaration.md`), the classification of the
    generated modules the base carries — one real, two false positives of a banner rule that matched
-   ordinary prose (`../2026-08-05-c864-base-generated-module-classification.md`).  Then, once the
+   ordinary prose (`../2026-08-05-c864-base-generated-module-classification.md`), and the non-Lean
+   payload and build-artifact sweep that closes portfolio-audit step 6
+   (`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`): the boundary checker now
+   resolves the generator every generated banner names and rejects one no family declares, the
+   order-25 generators, replay programs and replay data are declared payload, and the point-orbit and
+   order-16 build residue is measured and queued for the base re-export window.  Then, once the
    tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
@@ -211,7 +219,8 @@ order-eleven package cut status [`../2026-08-04-c864-q11-package-cut-status.md`]
 Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md);
 portfolio audit [`../2026-08-05-c864-certificate-portfolio-audit.md`](../2026-08-05-c864-certificate-portfolio-audit.md);
 order-25 banner transformation [`../2026-08-05-c864-q25-banner-transformation-declaration.md`](../2026-08-05-c864-q25-banner-transformation-declaration.md);
-base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md).
+base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md);
+non-Lean payload and build artifacts [`../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`](../2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
