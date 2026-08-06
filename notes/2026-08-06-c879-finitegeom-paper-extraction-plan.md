@@ -8,6 +8,20 @@ Progressively separate the shared `finitegeom` Lean repository into reviewer-fri
 paper packages without breaking shared mathematics, trust boundaries, certificate
 provenance, or the current monorepo authority.
 
+## Starting boundary
+
+C879 starts only after the C864 export-completion plan reaches its endpoint. C864 is
+already establishing the useful substrate: tracked area configurations, idempotent
+area exports, source manifests, external certificate-package pins, standalone
+finitegeom validation, and clean paper release surfaces. C879 must consume those
+artifacts rather than re-inventing a second ownership map or repeating the export
+completion pass.
+
+The C864 phase-1 stale-build-residue sweep is not itself a C879 prerequisite to
+repeat. The relevant handoff is the final C864 state: all adopted areas are exported
+from tracked configurations, their deltas are empty, certificate boundaries are
+green, and the affected paper gates have clean release evidence.
+
 ## Proposed architecture
 
 Use explicit paper and shared source roots:
@@ -48,35 +62,43 @@ not serve as the primary ownership map.
 
 ## Staged execution and bounded validation
 
-1. Freeze the current finitegeom commit, paper roots, source closures, reverse
-   closures, certificate pins, and axiom facts. Refuse the operation if foreign Lean
-   work or dirty certificate artifacts are present.
-2. Generate the ownership graph without running Lean. Classify every module as
-   paper-specific, shared, generated, certificate-owned, compatibility shim, or
-   legacy. Record exact shared modules and extractable modules per paper.
-3. Add per-paper manifests and a read-only import-firewall checker while leaving all
+1. Record the C864 endpoint: finitegeom commit, eleven area configurations, area
+   source manifests, certificate pins, standalone-build result, paper roots, and
+   release-fact hashes. Refuse the operation if that endpoint is dirty, non-idempotent,
+   or missing its standalone validation.
+2. Derive the first ownership graph directly from the C864 area manifests and import
+   closures, without running Lean. Compute area intersections and reverse consumers;
+   classify only the residual modules as paper-specific. Treat an area manifest as
+   an export boundary, not as automatic proof of declaration-level ownership.
+3. Review overlap modules at declaration level, including `open` namespaces,
+   re-exports, generated sources, and certificate schemas. Promote only mathematically
+   reusable APIs into `Shared`; keep paper-specific theorem statements and evidence
+   out of shared libraries.
+4. Add per-paper manifests and a read-only import-firewall checker while leaving all
    Lean source in place. Reject shared-to-paper imports, undeclared paper-to-paper
    imports, undeclared generated inputs, and roots outside the manifest closure.
-4. Create paper directories and package-specific source roots while retaining the
+5. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
-5. Extract one small human-scale leaf as a pilot, preferably
-   `complete-repair-ports`, rather than arcs, AME--LU, PRS, or a certificate-heavy
-   closure. Retain shared modules centrally and use temporary compatibility shims
-   where necessary.
-6. Validate the pilot from a clean package-local source tree: build only its gate and
-   audit through the guarded build queue, run its checker, compare declarations and
-   axioms, and run the source/manifest audits. Do not run a repository-wide build.
-7. For every later change, compute the exact reverse-import closure before building.
+6. Extract one already C864-validated, human-scale paper area as the pilot. Use
+   Clebsch passages first because it has a current tracked export and a bounded
+   formal companion; do not begin with arcs, AME--LU, PRS, q13, or deferred
+   certificate work. Retain shared modules centrally and use temporary compatibility
+   shims where necessary.
+7. Validate the pilot from a clean package-local source tree: use the existing area
+   manifest and standalone-build gate, build only the paper gate and audit through
+   the guarded queue, run its checker, compare declarations and axioms, and run the
+   source/manifest audits. Do not run a repository-wide build.
+8. For every later change, compute the exact reverse-import closure before building.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
    affected paper gate; manifest-only changes require no Lean build.
-8. Extract the remaining leaf papers in dependency order: complete ports,
+9. Extract the remaining leaf papers in dependency order: complete ports,
    equivariant completion, q13 after its certificate package is sealed, MDS/CSS after
-   the AME--LU API is frozen, Clebsch passages, then Clebsch rigidity/hexagon code.
+   the AME--LU API is frozen, then Clebsch rigidity/hexagon code.
    Extract PRS-specific modules after its shared interfaces are stable.
-9. Freeze the arcs and AME--LU shared APIs last. They are shared-heavy foundations;
+10. Freeze the arcs and AME--LU shared APIs last. They are shared-heavy foundations;
    moving them earlier would repeatedly reopen downstream closures.
-10. Only after each monorepo package passes an independent clean replay, split the
+11. Only after each monorepo package passes an independent clean replay, split the
     shared libraries and paper source into separately pinned Lake packages. Perform
     namespace cleanup one package at a time after the package boundary is green.
 
@@ -91,6 +113,8 @@ not serve as the primary ownership map.
   retrying; never repeat an unchanged failed build.
 - Keep generated certificates downstream and opt-in; do not pull them into every
   paper build.
+- Do not rerun C864's eleven-area export/idempotence pass unless an area manifest or
+  its source commit changes; C879 consumes its committed result.
 
 ## Red-team findings and mitigations
 
@@ -118,14 +142,20 @@ not serve as the primary ownership map.
   bounded. Require the exact affected-gate list before every validation build.
 - Starting with arcs or AME--LU would repeatedly disturb shared foundations. Use a
   small leaf pilot and freeze upstream public APIs before downstream extraction.
+- C864 area boundaries are not automatically paper ownership boundaries. A module
+  may be exported in several areas or may declare into another namespace. Require
+  overlap review before moving it into `Shared` or a paper directory.
+- Re-exporting a C864 area does not prove its candidate package builds standalone.
+  Keep the standalone finitegeom gate as a prerequisite for every extracted package.
 
 ## First acceptance gate
 
-Before moving source, commit an ownership/import manifest, generated reverse-
-dependency report, and import-firewall checker. The report must identify the exact
-shared modules that remain required by each paper, the exact paper-specific modules
-safe to extract, and the exact gate targets affected by a change. No source deletion,
-namespace rewrite, or repository split is authorized by this plan alone.
+Before moving source, record the C864 endpoint and commit an ownership/import
+manifest derived from its area manifests, a generated reverse-dependency report, and
+an import-firewall checker. The report must identify the exact shared modules that
+remain required by each paper, the exact paper-specific modules safe to extract, and
+the exact gate targets affected by a change. No source deletion, namespace rewrite,
+or repository split is authorized by this plan alone.
 
 ## Scope boundary
 
