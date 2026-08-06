@@ -436,7 +436,7 @@
   "sources": [
     {
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
-      "sha256": "9571d1c014c8906b2a3a42215b4f13b7c5818dca3c3b49753a8c538fba42670f"
+      "sha256": "5b43b5da227a867a5f76cf1cb80a1557f71ee643fb0840670ac3eabf62b4d389"
     }
   ],
   "title": "Arcs complete outside a conic:\\\\ a prescribed-hole defect identity and matching-design rigidity",

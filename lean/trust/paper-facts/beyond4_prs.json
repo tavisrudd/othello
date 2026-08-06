@@ -263,7 +263,7 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.bbl",
-      "text": "T.~Rudd, ``Arcs complete outside a prescribed conic: An exact defect identity and {$\\rho_{\\mathcal C}(16)=9$},'' 2026, companion paper in this bundle."
+      "text": "T.~Rudd, ``Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity,'' 2026, companion paper in this bundle."
     },
     {
       "key": "RuddRigidity2026",
@@ -402,28 +402,28 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Local-unitary rigidity and transversal clifford groups for mds--css ame states. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Local-unitary rigidity and quantitative rounding for stabilizer ame states. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "RuddFactorization2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Quadratic recovery and cubic orientation in conic matching quotients. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Quadratic trade rigidity and cubic orientation in conic matching quotients. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "RuddPrescribedHoles2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Arcs complete outside a prescribed conic: An exact defect identity and {$\\rho_{\\mathcal C}(16)=9$}. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "RuddRigidity2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/beyond4_prs/prs-beyond-redundancy-four.bbl",
-      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code from its deep-hole syndrome locus. \\newblock Companion paper in this bundle, 2026."
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Companion paper in this bundle, 2026."
     },
     {
       "key": "SeroussiRoth1986",
@@ -576,21 +576,21 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Quadratic recovery and cubic orientation in conic matching quotients"
+      "title": "Quadratic trade rigidity and cubic orientation in conic matching quotients"
     },
     {
       "key": "RuddPrescribedHoles2026",
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Arcs Complete Outside a Prescribed Conic: An Exact Defect Identity and {$\\rho_{\\mathcal C}(16)=9$}"
+      "title": "Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity"
     },
     {
       "key": "RuddRigidity2026",
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/beyond4_prs/refs.bib",
-      "title": "Reconstructing the {Clebsch} code from its deep-hole syndrome locus"
+      "title": "Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus"
     },
     {
       "key": "SeroussiRoth1986",
@@ -1181,16 +1181,16 @@
   "paper": "beyond4_prs",
   "pdfs": [
     {
-      "bytes": 554391,
+      "bytes": 553320,
       "pages": 41,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four-tit-submission.pdf",
-      "sha256": "eb2b7f57d6cb99f87f1b83d30170d2aabfa417757c0b0b45ed35366c0ce5c09c"
+      "sha256": "f4dadbe6238f919aa02429943cbc3a5ae3c80461b53c15f462640d1f3578999d"
     },
     {
-      "bytes": 381997,
+      "bytes": 381596,
       "pages": 56,
       "path": "papers/beyond4_prs/prs-beyond-redundancy-four.pdf",
-      "sha256": "526888d498f4503ac24a366610c27d4fc513ec2409003c9771a5f780d68173d6"
+      "sha256": "67a0c251f70c3a140eeede11c63a0cc16a9f03b21d8b6ffde4867585ce245d48"
     }
   ],
   "schema_version": 1,

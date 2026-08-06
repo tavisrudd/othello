@@ -162,10 +162,10 @@
   "paper": "clebsch_rigidity_companion",
   "pdfs": [
     {
-      "bytes": 206758,
-      "pages": 26,
+      "bytes": 206313,
+      "pages": 27,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917"
+      "sha256": "28cfb550fd3b01a9e71ab33bcd5b5443c3ab8e219ac1e50ff50aec1b31fdc8ad"
     },
     {
       "bytes": 136883,

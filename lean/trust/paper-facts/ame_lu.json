@@ -906,7 +906,7 @@
   "sources": [
     {
       "path": "papers/ame_lu/main.tex",
-      "sha256": "7ab33f7de30dc8a0e7b129e7420442a5993478ab7cc06e82a51c5ccd23a40453"
+      "sha256": "02527cc463144de6683c79648be5d2c0a478f6d7eac57e31893d2b4cb43b1e1d"
     },
     {
       "path": "papers/ame_lu/figures/01-operator-holonomy.tex",

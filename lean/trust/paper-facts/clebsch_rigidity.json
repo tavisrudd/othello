@@ -25,6 +25,12 @@
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
     },
     {
+      "key": "BrouwerVanMaldeghem",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
       "key": "CTZ2025",
       "kind": "bibitem",
       "self_authored": false,
@@ -312,10 +318,10 @@
   "paper": "clebsch_rigidity",
   "pdfs": [
     {
-      "bytes": 206758,
-      "pages": 26,
+      "bytes": 206313,
+      "pages": 27,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "6f2a8d6b6f3cc142e24702becabee8f1f7661688a318f59d9fa515b758cca917"
+      "sha256": "28cfb550fd3b01a9e71ab33bcd5b5443c3ab8e219ac1e50ff50aec1b31fdc8ad"
     },
     {
       "bytes": 136883,
@@ -328,7 +334,7 @@
   "sources": [
     {
       "path": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "sha256": "d397627020899d86938ad46ac99d508d6032fddb101e0ce0a860ba9bc38dd058"
+      "sha256": "57fd3071096a35546f7cea27e5c258b501d6c8b5eb60959373cc374c7dbff060"
     }
   ],
   "title": "Reconstructing the Clebsch code and its golden orientation\\\\ from its deep-hole syndrome locus",

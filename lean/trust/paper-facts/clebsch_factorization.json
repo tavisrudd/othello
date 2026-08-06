@@ -267,17 +267,17 @@
   "paper": "clebsch_factorization",
   "pdfs": [
     {
-      "bytes": 283851,
+      "bytes": 282662,
       "pages": 43,
       "path": "papers/clebsch-factorization/clebsch_factorization.pdf",
-      "sha256": "e423e039d00c2d404c84299b4a5af6be443e39ad4d2c79793f65a4e71d08cf11"
+      "sha256": "5ab593ba27fadfab63a367357373bdddec45c170e5909e5f7126cebf3895bacf"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "sha256": "f64ab45852d0ed7a6205fff0e230f3c7c4d3b53c5be31f0ffb41d05a62472f6d"
+      "sha256": "707b317fc6b846cdd648e3ba693dba4bcbfd418aa283213b2b13d26e09527dbf"
     }
   ],
   "title": "Quadratic trade rigidity and cubic orientation\\\\ in conic matching quotients",
