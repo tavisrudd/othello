@@ -85,11 +85,14 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   family; `--verify-official-libraries` also checks package pins and published facts and rejects a
   monorepo file byte-identical to one an official package owns.  The `pending_family` table in
   `lean/trust/certificate-packages.toml` declares each generated family still resident here and the
-  package that will own it; it is empty only when the externalization is complete.
+  package that will own it; it is empty only when the externalization is complete.  Its companion
+  `resident_family` table declares generated data a written determination keeps here permanently.
 - `lean-package-source-audit.py`: read-only comparison of a package's sealed sources against the
   monorepo revision they came from, the current tree, and the pinned base.  Runs no Lean, takes no
   lock, so it is valid while another lane holds the tree.  It iterates the package's sources, so it
-  cannot yet report authority files the package lacks.
+  cannot yet report authority files the package lacks.  `--declared-transformation` names an
+  extraction-time comment normalization the package declares in its `PROVENANCE.md`; sources the
+  rules reproduce are reported as transformed, and everything else stays a defect.
 - `lean-certificate-portfolio-audit.py`: read-only sweep of any set of working roots for generated
   Lean families, recognizing a generated source by its naming of its own generator.
 - `paper-facts.py`: per-manuscript facts from tracked bytes, plus `audit`/`check`. Runs no Lake,
@@ -122,8 +125,12 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    (`../2026-08-05-c864-q11-package-source-audit.md`).
    The Paper I remediation currently holds the shared tree and the Clebsch-rigidity release chain, so
    C864 is taking only steps that need no build window and no quiet tree; the near-term plan is on
-   the card.  Next there: the adversarial boundary-checker fixtures, then split-line planning for the
-   remaining order-eleven families (coding, Brianchon--Petersen, decoding synthesis).  Then, once the
+   the card.  Done there without a window: the adversarial boundary-checker fixtures, split-line
+   planning for the remaining order-eleven families, the order-25 banner transformation now declared
+   as `q25-banner-normalization-v1` and machine-checked
+   (`../2026-08-05-c864-q25-banner-transformation-declaration.md`), and the classification of the
+   generated modules the base carries — one real, two false positives of a banner rule that matched
+   ordinary prose (`../2026-08-05-c864-base-generated-module-classification.md`).  Then, once the
    tree is coherent, the release-chain replay, the atomic base re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
@@ -201,7 +208,10 @@ split feasibility [`../2026-08-04-c864-q11-split-feasibility.md`](../2026-08-04-
 residual game-free/game split [`../2026-08-04-c864-q11-residual-game-split.md`](../2026-08-04-c864-q11-residual-game-split.md);
 point-orbit data verdict [`../2026-08-04-c864-point-orbit-data-verdict.md`](../2026-08-04-c864-point-orbit-data-verdict.md);
 order-eleven package cut status [`../2026-08-04-c864-q11-package-cut-status.md`](../2026-08-04-c864-q11-package-cut-status.md);
-Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md).
+Dye audit and anchor review [`../2026-08-04-c864-dye-audit-and-anchor-review.md`](../2026-08-04-c864-dye-audit-and-anchor-review.md);
+portfolio audit [`../2026-08-05-c864-certificate-portfolio-audit.md`](../2026-08-05-c864-certificate-portfolio-audit.md);
+order-25 banner transformation [`../2026-08-05-c864-q25-banner-transformation-declaration.md`](../2026-08-05-c864-q25-banner-transformation-declaration.md);
+base generated-module classification [`../2026-08-05-c864-base-generated-module-classification.md`](../2026-08-05-c864-base-generated-module-classification.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
