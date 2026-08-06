@@ -195,6 +195,40 @@ elaborate Lean, but only the exact affected gate is allowed. If C879.7 cannot fi
 budget with the available cache, the pilot is too large; choose a smaller human-scale
 area before moving source.
 
+### Runtime review
+
+These are planning estimates, not recorded measurements. They assume the C864 endpoint
+has restored the required caches and that no unrelated Lean process owns the build
+slot. The first real gate run must record GNU-time telemetry; estimates do not authorize
+raising a worker cap or bypassing the queue.
+
+| Chunk | Lean/source scope | Expected wall time | Review |
+|---|---|---:|---|
+| C879.0 | No Lean; endpoint hashes and manifests only | 2–5 min | Safe. |
+| C879.1 | No Lean; manifest parser and fixtures | 5–15 min | Safe. |
+| C879.2 | No Lean; deterministic area-overlap generator | 5–15 min | Safe. |
+| C879.3 | No Lean; report-only firewall tests | 5–15 min | Safe. |
+| C879.4 | No Lean; enforcement tests and real-tree scan | 5–20 min | Safe. |
+| C879.5 | No Lean; PRS directory/package scaffold | 5–15 min | Safe. |
+| C879.6 | No elaboration; byte-preserving area materialization and source audit | 5–20 min | Safe if the export has no delta. |
+| C879.7 | Main PRS gate plus axiom audit; 16-module main closure and 17-module audited closure | 2–10 min warm; 10–25 min cold | Safe only with restored dependencies and an exact target. |
+| C879.8 | One PRS-private family, initially 1–4 modules, plus its exact gate | 2–10 min | Safe after the family and target are named. |
+| C879.9 | Next PRS-private family, same limit | 2–10 min | Safe only if the reverse closure remains bounded. |
+| C879.10 | One shared API family plus every reverse-dependent paper gate | 5–25 min warm; unbounded cold | Conditional; split if more than one heavy paper gate is affected. |
+| C879.11 | PRS balanced adapter, importing AME--LU and PRS interfaces | 5–25 min warm; potentially hours cold | Not guaranteed sub-30-minute; first ship its manifest/API-only change, then measure the exact adapter gate. |
+| C879.12+ | One named family at a time | Must be measured per family | Never instantiate as a bulk migration. |
+
+The PRS pilot must therefore use explicit families rather than “one family” as an
+open-ended unit: foundation/contraction, R5, polar/R6--R7, stable-components, and
+covering-radius interfaces. A family is eligible only when its source list and affected
+gate fit the small-closure bound.
+
+The 25-minute budget applies to the complete chunk, including synchronization and
+commit. If a clean package replay, downstream export, or affected-paper check exceeds
+that budget, stop with the source unchanged and split the chunk or record the measured
+long gate as a separately scheduled operation. It is not acceptable to call a long
+build “background work” while declaring the chunk shipped.
+
 The first chunk after any source move is never a namespace cleanup. Namespace changes
 are separate chunks with their own reverse-closure calculation and gate. The first
 package extraction is likewise separate from namespace cleanup and shared-library
