@@ -92,9 +92,13 @@ Papers/<full-paper-alias>/
 Rules:
 
 - ordinary files name the mathematical object, interface, or theorem family;
-- `Gates/<Boundary>.lean` is a stable import/build boundary for one declared closure;
+- `Gate` is a local project term, not a Lean or Mathlib standard. Here it means a
+  stable Lean root module that imports the complete declared closure for one public
+  area, is used as the exact build/export target, and has no accidental dependency
+  on unrelated paper code;
+- `Gates/<Boundary>.lean` is that root module for one named boundary;
 - `Gates/<Boundary>AxiomAudit.lean` is the machine-readable axiom inspection for that
-  exact boundary;
+  exact boundary, not a second mathematical proof of it;
 - a gate is not itself a mathematical theorem and must not be named `Trust`, `Human`,
   `Aggregate`, or `Axioms`;
 - use `CertificateGate` only for a genuinely separate certificate boundary;
