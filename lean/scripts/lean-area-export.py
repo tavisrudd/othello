@@ -540,8 +540,15 @@ def insert_lakefile_roots(lakefile: str, modules: tuple[str, ...]) -> str:
         quoted = f'"{module}"'
         if re.search(rf"^\s*{re.escape(quoted)},?\s*$", text, re.MULTILINE):
             continue
+        # The roots list must be the named library's own.  Without the negative
+        # lookahead the search runs past the end of that library's section and lands
+        # in the next library that happens to declare roots, so a library declaring
+        # none silently donates its modules to an unrelated build target: this is how
+        # the repair-code and repair-port modules became roots of the relative-conic
+        # arcs library, and the capped-game modules roots of the projective-cap one.
         pattern = re.compile(
-            rf'(name = "{re.escape(library)}"\n(?:.*\n)*?roots = \[\n)((?:\s*"[^"]+",\n)+)',
+            rf'(name = "{re.escape(library)}"\n(?:(?!\[\[lean_lib\]\]).*\n)*?roots = \[\n)'
+            r'((?:\s*"[^"]+",\n)+)',
         )
         match = pattern.search(text)
         if match is None:
@@ -866,6 +873,13 @@ def verify(plan: Plan, out: Path) -> dict[str, Any]:
         if f"#print axioms {terminal}" not in audit:
             raise Refused(f"the axiom audit does not print the axioms of {terminal}")
 
+    standalone = standalone_build_failures(out)
+    if standalone:
+        raise Refused(
+            "the candidate does not resolve as a repository of its own:\n  "
+            + "\n  ".join(standalone)
+        )
+
     if not worktree_is_clean(plan.base.repo):
         raise Refused("the canonical base repository changed during export")
     if resolve_commit(plan.base.repo, "HEAD") != plan.base.head:
@@ -879,6 +893,52 @@ def verify(plan: Plan, out: Path) -> dict[str, Any]:
         "closure_modules": [module.module for module in plan.source.modules],
         "terminals": list(plan.source.terminals),
     }
+
+
+def standalone_build_failures(tree: Path) -> list[str]:
+    """Reasons the candidate would not build as a repository of its own.
+
+    Every consumer of finitegeom builds a module it names, so an area gate can be
+    green while the library around it cannot be built at all: a root whose file is
+    absent, a module claimed by two libraries, or an import naming a module the
+    subset does not carry.  None of those is visible to a gate build, to the manifest
+    checks, or to the forward delta, and the export is what publishes them.  The
+    resolution is static — it needs no elaborator — so it runs on every export rather
+    than waiting for a build window.
+    """
+    modules = {
+        ".".join(path.relative_to(tree).with_suffix("").parts)
+        for path in tree.rglob("*.lean")
+        if not {".git", ".lake"} & set(path.relative_to(tree).parts)
+    }
+    document = tomllib.loads((tree / "lakefile.toml").read_text(encoding="utf-8"))
+    libraries = [library["name"] for library in document.get("lean_lib", [])]
+    failures: list[str] = []
+    owners: dict[str, list[str]] = {}
+    for library in document.get("lean_lib", []):
+        # A library declaring no roots takes its own name as the single root, so a
+        # missing top-level module file is a failure of that target and not a
+        # library that happens to build nothing.
+        for root in library.get("roots") or [library["name"]]:
+            owners.setdefault(root, []).append(library["name"])
+            if root not in modules:
+                failures.append(
+                    f"library {library['name']} declares the root {root},"
+                    " whose module file the tree does not carry"
+                )
+    for root, claiming in sorted(owners.items()):
+        if len(claiming) > 1:
+            failures.append(f"{root} is a root of more than one library: {sorted(claiming)}")
+    for path in sorted(tree.rglob("*.lean")):
+        if {".git", ".lake"} & set(path.relative_to(tree).parts):
+            continue
+        for imported in IMPORT_RE.findall(path.read_text(encoding="utf-8")):
+            if imported.split(".", 1)[0] not in libraries or imported in modules:
+                continue
+            failures.append(
+                f"{path.relative_to(tree)} imports {imported}, which the tree does not carry"
+            )
+    return sorted(set(failures))
 
 
 def tree_fingerprint(root: Path) -> dict[str, str]:

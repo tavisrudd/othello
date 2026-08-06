@@ -381,6 +381,151 @@ forbidden_artifact_basenames = ["generator.cpp"]
             self.assertEqual(result.returncode, 1)
             self.assertIn("byte-identical to certs:scripts/generator.cpp", result.stdout)
 
+    SHARED_URL = "https://github.com/tavisrudd/finitegeom"
+
+    def make_shared_library(self, libraries: Path, modules: dict[str, str]) -> str:
+        """A finitegeom checkout the package can pin, returning its revision."""
+        shared = libraries / "finitegeom"
+        shared.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["git", "init", "-q"], cwd=shared, check=True)
+        for relative, text in modules.items():
+            path = shared / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+        subprocess.run(["git", "add", "-A"], cwd=shared, check=True, capture_output=True)
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "user.email=fixture@example.invalid",
+                "-c",
+                "user.name=fixture",
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "--no-gpg-sign",
+                "-qm",
+                "shared",
+            ],
+            cwd=shared,
+            check=True,
+            capture_output=True,
+        )
+        return subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=shared, check=True, text=True, capture_output=True
+        ).stdout.strip()
+
+    def pin_shared_library(self, package: Path, revision: str) -> None:
+        (package / "lakefile.toml").write_text(
+            f'name = "certs"\n\n[[require]]\nname = "finitegeom"\n'
+            f'git = "{self.SHARED_URL}"\nrev = "{revision}"\n',
+            encoding="utf-8",
+        )
+        (package / "lake-manifest.json").write_text(
+            json.dumps(
+                {
+                    "packages": [
+                        {
+                            "url": self.SHARED_URL,
+                            "rev": revision,
+                            "inputRev": revision,
+                        }
+                    ]
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def prepare_collision_case(
+        self, directory: str, *, package_module: str, shared_module: str
+    ) -> tuple[Path, Path]:
+        root = self.make_repo(directory)
+        libraries = Path(directory) / "libraries"
+        revision = self.make_shared_library(
+            libraries, {shared_module: "theorem shared : True := trivial\n"}
+        )
+        package = self.make_library(
+            root,
+            libraries,
+            fact='{"package": "certs"}\n',
+            sources={package_module: "theorem owned : True := trivial\n"},
+        )
+        self.pin_shared_library(package, revision)
+        pinned = root / "lean/trust/external/certs.json"
+        pinned.parent.mkdir(parents=True)
+        pinned.write_text('{"package": "certs"}\n', encoding="utf-8")
+        return root, libraries
+
+    def test_module_name_colliding_with_the_pinned_shared_library_fails(self) -> None:
+        """Two packages defining one module name is a hard failure in every consumer."""
+        with tempfile.TemporaryDirectory() as directory:
+            root, libraries = self.prepare_collision_case(
+                directory,
+                package_module="Example/Shared.lean",
+                shared_module="Example/Shared.lean",
+            )
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn(
+                "Example.Shared also exists at the pinned shared-library", result.stdout
+            )
+
+    def test_distinct_module_names_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root, libraries = self.prepare_collision_case(
+                directory,
+                package_module="Example/Owned.lean",
+                shared_module="Example/Shared.lean",
+            )
+            self.assertEqual(self.run_library_check(root, libraries).returncode, 0)
+
+    def test_unsealed_colliding_module_still_fails(self) -> None:
+        """A stray file the manifest never sealed collides just as surely."""
+        with tempfile.TemporaryDirectory() as directory:
+            root, libraries = self.prepare_collision_case(
+                directory,
+                package_module="Example/Owned.lean",
+                shared_module="Example/Shared.lean",
+            )
+            stray = libraries / "certs/Example/Shared.lean"
+            stray.write_text("theorem stray : True := trivial\n", encoding="utf-8")
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("Example.Shared also exists", result.stdout)
+
+    def test_pin_disagreeing_with_the_resolved_manifest_fails(self) -> None:
+        """Lake resolves the manifest while a reader believes the lakefile."""
+        with tempfile.TemporaryDirectory() as directory:
+            root, libraries = self.prepare_collision_case(
+                directory,
+                package_module="Example/Owned.lean",
+                shared_module="Example/Shared.lean",
+            )
+            manifest = libraries / "certs/lake-manifest.json"
+            manifest.write_text(
+                json.dumps(
+                    {"packages": [{"url": self.SHARED_URL, "rev": "a" * 40, "inputRev": "a" * 40}]}
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("while lakefile.toml pins", result.stdout)
+
+    def test_pinned_revision_absent_from_the_shared_checkout_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root, libraries = self.prepare_collision_case(
+                directory,
+                package_module="Example/Owned.lean",
+                shared_module="Example/Shared.lean",
+            )
+            self.pin_shared_library(libraries / "certs", "b" * 40)
+            result = self.run_library_check(root, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("does not hold the revision", result.stdout)
+
     def test_package_publishing_no_trust_fact_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = self.make_repo(directory)

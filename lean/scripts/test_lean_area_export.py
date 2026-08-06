@@ -109,6 +109,9 @@ def make_base_repo(root: Path) -> None:
         '  "Example.Base",\n  "Example.Zeta",\n]\n',
     )
     write(root / "Example" / "Base.lean", "/-! # Base -/\n")
+    # Both declared roots need their module files: a library declaring a root the
+    # tree does not carry cannot be built at all, which the standalone check refuses.
+    write(root / "Example" / "Zeta.lean", "/-! # Zeta -/\n")
     data = (root / "Example" / "Base.lean").read_bytes()
     manifest = {
         "external_imports": ["Mathlib.Tactic.Ring"],
@@ -424,6 +427,67 @@ class AreaExportTests(unittest.TestCase):
         git(self.base, "commit", "--quiet", "-m", "toolchain")
         with self.assertRaises(EXPORTER.Refused):
             self.build()
+
+    def commit_base(self, message: str) -> None:
+        git(self.base, "add", "-A")
+        git(self.base, "commit", "--quiet", "-m", message)
+
+    def test_a_root_without_its_module_file_is_refused(self) -> None:
+        """A deleted module leaves a root behind, and the library then builds nothing."""
+        (self.base / "Example" / "Zeta.lean").unlink()
+        self.commit_base("delete a rooted module")
+        plan = self.build()
+        candidate = self.work / "candidate"
+        EXPORTER.materialize(plan, candidate)
+        with self.assertRaises(EXPORTER.Refused) as caught:
+            EXPORTER.verify(plan, candidate)
+        self.assertIn("declares the root Example.Zeta", str(caught.exception))
+
+    def test_an_import_the_tree_does_not_carry_is_refused(self) -> None:
+        """The subset carries the importer and not the imported module."""
+        (self.base / "Example" / "Zeta.lean").write_text("import Example.Absent\n")
+        self.commit_base("import a module the subset lacks")
+        plan = self.build()
+        candidate = self.work / "candidate"
+        EXPORTER.materialize(plan, candidate)
+        with self.assertRaises(EXPORTER.Refused) as caught:
+            EXPORTER.verify(plan, candidate)
+        self.assertIn("imports Example.Absent", str(caught.exception))
+
+    def test_a_module_rooted_by_two_libraries_is_refused(self) -> None:
+        lakefile = self.base / "lakefile.toml"
+        lakefile.write_text(
+            lakefile.read_text()
+            + '\n[[lean_lib]]\nname = "Other"\nroots = [\n  "Example.Zeta",\n]\n'
+        )
+        self.commit_base("claim one module twice")
+        plan = self.build()
+        candidate = self.work / "candidate"
+        EXPORTER.materialize(plan, candidate)
+        with self.assertRaises(EXPORTER.Refused) as caught:
+            EXPORTER.verify(plan, candidate)
+        self.assertIn("root of more than one library", str(caught.exception))
+
+    def test_a_library_declaring_no_roots_is_refused_rather_than_donating_its_modules(
+        self,
+    ) -> None:
+        """The insertion must reach the named library's own list and no other.
+
+        Searching past the end of a library's section finds the next list in the file,
+        so a library declaring no roots silently gives its modules to an unrelated
+        build target, which then builds them and reports the export green.
+        """
+        lakefile = self.base / "lakefile.toml"
+        lakefile.write_text(
+            'name = "example"\n\n[[lean_lib]]\nname = "Example"\n\n'
+            '[[lean_lib]]\nname = "Other"\nroots = [\n  "Other.Placeholder",\n]\n'
+        )
+        write(self.base / "Other" / "Placeholder.lean", "/-! # Placeholder -/\n")
+        (self.base / "Example" / "Zeta.lean").unlink()
+        self.commit_base("leave the exported library without a roots list")
+        with self.assertRaises(EXPORTER.Refused) as caught:
+            self.build()
+        self.assertIn("declares no roots list for library Example", str(caught.exception))
 
 
 if __name__ == "__main__":
