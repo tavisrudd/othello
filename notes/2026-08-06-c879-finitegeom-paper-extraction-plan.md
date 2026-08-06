@@ -102,6 +102,91 @@ not serve as the primary ownership map.
     shared libraries and paper source into separately pinned Lake packages. Perform
     namespace cleanup one package at a time after the package boundary is green.
 
+## Sub-30-minute chunk protocol
+
+Every chunk is independently shippable. A chunk has exactly one small objective, one
+bounded validation envelope, one explicit commit, and a clean stopping state. The
+working tree must be clean after the commit; no chunk leaves an untracked report,
+generated file, source move, or half-applied manifest.
+
+### Synchronization invariant
+
+Every chunk that changes Lean source includes downstream synchronization before it is
+complete. The authoritative order is:
+
+```text
+monorepo authority
+  → finitegeom export/package
+  → every affected standalone paper repository
+```
+
+The source change is prepared and validated first, then propagated with the guarded
+export/mirror workflow. A paper repository is affected when its declared Lean closure,
+shared-library pin, gate, trust fact, or source manifest changes. A shared-library
+change therefore synchronizes every paper in its reverse-import closure; a
+paper-private change synchronizes that paper at minimum.
+
+No chunk may finish with a green monorepo and stale finitegeom or paper source. The
+chunk report records every resulting repository and commit, the exact export/mirror
+command, source-manifest or pin comparisons, and clean replay results. If propagation
+fails, the chunk remains incomplete and no later Lean change begins.
+
+Generated certificate payload is not copied into papers. Its owning package is
+re-pinned and its compact trust fact is propagated through the declared boundary.
+Source authority remains the monorepo; standalone paper repositories are synchronized
+downstream and are never edited as alternate authorities.
+
+The working budget is 25 minutes, leaving five minutes for inspection and commit. A
+chunk that would require a longer Lean gate is not a 30-minute chunk: split the source
+change at a module/API boundary, or leave the source unchanged and ship the preceding
+metadata/checker chunk. Do not hide a multi-hour build inside a small administrative
+step. Detached queue execution is allowed only after the affected closure has already
+been reduced and the chunk's source state is otherwise complete.
+
+Each chunk report records:
+
+```text
+objective:
+changed paths:
+validation command(s):
+validation result:
+commit:
+next safe chunk:
+```
+
+### Chunk sequence
+
+| Chunk | Single objective | Validation and shippable state |
+|---|---|---|
+| C879.0 | Record the completed C864 endpoint and exact input revisions. | Read-only manifest/hash checks; commit the baseline record. |
+| C879.1 | Define the paper/shared manifest schema. | Parser/unit tests only; commit schema and fixtures. |
+| C879.2 | Generate area-overlap and reverse-consumer data from C864 manifests. | Deterministic regeneration and hash check; commit script and compact output. |
+| C879.3 | Add the import-firewall checker in report-only mode. | Checker tests against real and adversarial fixtures; commit checker. |
+| C879.4 | Convert the checker to enforcement for shared-to-paper and undeclared paper-to-paper imports. | Existing tree passes; adversarial cases fail as intended; commit policy. |
+| C879.5 | Create the Clebsch-passages paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
+| C879.6 | Materialize a byte-preserving Clebsch-passages candidate from the registered area. | Source audit and empty export delta; commit candidate metadata only. |
+| C879.7 | Validate the candidate’s bounded gate and axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
+| C879.8 | Move one paper-private module family behind the preserved module names. | Exact reverse-closure check, smallest affected gate, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
+| C879.9 | Move the next paper-private family or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared-module move is permitted in this chunk. |
+| C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-gate list, bounded shared gate, downstream exports, and all affected-paper replays; commit only when synchronized. |
+| C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only gate, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
+| C879.12+ | Repeat the paper-private/shared-family cycle for the next paper. | Each row is a separate synchronized commit set and must leave every affected package buildable. |
+
+Chunks C879.0--C879.6 should not require a Lean elaboration. C879.7 and later may
+elaborate Lean, but only the exact affected gate is allowed. If C879.7 cannot fit the
+budget with the available cache, the pilot is too large; choose a smaller human-scale
+area before moving source.
+
+The first chunk after any source move is never a namespace cleanup. Namespace changes
+are separate chunks with their own reverse-closure calculation and gate. The first
+package extraction is likewise separate from namespace cleanup and shared-library
+movement.
+
+For C879.8 and later, “commit” means a synchronized commit set, not merely a commit in
+the monorepo. The repositories may have different commit IDs, but all must identify
+the same authoritative source revision and pass the applicable source audit before the
+chunk is closed.
+
 ### Build-wait discipline
 
 - Do not run a full-project Lean build for layout, manifest, or graph changes.
