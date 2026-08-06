@@ -243,6 +243,16 @@ the claim. Under the current instruction they are closed by proving the claim.
    rational certificate. It backs C809, which is not yet in the manuscript;
    before C816 promotes it, it needs either a structural rank argument or a
    Lean-checked rational rank computation compressed behind a proved reduction.
+   **Closed 2026-08-05** by the structural argument. The Jacobian is equivariant
+   for the order-sixty stabilizer of the oriented representative, which is the
+   alternating group of degree five; its kernel is therefore a submodule, and
+   every irreducible constituent of such a module has a vector fixed by an
+   element of order three. That reduces the whole 20-by-15 rational rank to a
+   five-dimensional fixed space on which the Jacobian has eight distinct rows in
+   five integer columns, displayed in the report and checkable by hand. Euler's
+   relation supplies the kernel vector, so no certificate is load-bearing; what
+   remains external is the ordinary constant-rank theorem. Report:
+   `notes/2026-08-05-c815-rank-14-weighted-jacobian.md`.
 
 ## Paper-side inventory
 

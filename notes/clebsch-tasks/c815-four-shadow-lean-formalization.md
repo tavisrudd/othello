@@ -7,8 +7,8 @@ compiled-evaluation axiom at any terminal, the documentation and gate-replay
 obligations of the audit checklist are closed, the recognition theorem is
 transported off the root gauge and the conference switching class is proved
 unique, the aligned-design strengths are formalized at the manuscript's quantifier
-range, and the remaining work is the rank-14 weighted Jacobian and gap class B
-before the API is handed to C823
+range, the rank-14 weighted Jacobian now has a structural proof, and the
+remaining work is gap class B before the API is handed to C823
 
 ## Objective
 
@@ -26,7 +26,7 @@ Formalize the reusable converse theorem behind C809: for a symmetric zero-diagon
 4. Prove that nonzero edges make $A^2$ diagonal and that commutation with $A$ makes its diagonal scalar.
 5. On scalar sign matrices, prove the gauge-to-pentagon classification and the converse conference square without replacing the structural argument by a 1,024-case table.
 6. Formalize that five first-row balance equations plus one oriented coefficient select the labelled oriented codes. One audited finite classifier may discharge this exact labelled fibre only after the conference square and pentagon degree statement have been proved symbolically.
-7. State the exact boundary: the rank-14 local weighted rigidity calculation remains an exact external certificate unless a clean existing rational-rank interface makes formalization essentially free.
+7. State the exact boundary: the rank-14 local weighted rigidity calculation remains an exact external certificate unless a clean existing rational-rank interface makes formalization essentially free. **Superseded 2026-08-05:** it is no longer a certificate at all. The equivariant reduction proves the rank structurally, leaving a displayed eight-by-five integer table and the ordinary constant-rank theorem; report `notes/2026-08-05-c815-rank-14-weighted-jacobian.md`. A Lean statement of the reduced linear algebra is now cheap but is not required by the gap inventory and is not yet written.
 
 ## Coordination boundary
 
