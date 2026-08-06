@@ -101,20 +101,6 @@ owner = "finitegeom-projective-cap-q13-certificates"
 disposition = "external-pending"
 path_prefixes = ["papers/q13-passant-code/lean-certificates/"]
 
-[[pending_family]]
-name = "order-eleven families awaiting their cut"
-owner = "finitegeom-clebsch-q11-certificates"
-disposition = "external-pending"
-path_prefixes = [
-  "lean/RelativeConicArcs/ClebschGatewayQ11Extension.lean",
-  "lean/RelativeConicArcs/Q11BrianchonPetersen.lean",
-  "lean/RelativeConicArcs/Q11CodeRigidityBridge.lean",
-  "lean/RelativeConicArcs/Q11DecodingSynthesis.lean",
-  "lean/RelativeConicArcs/Q11DyeConsequences.lean",
-  "lean/RelativeConicArcs/Q11RigiditySpine.lean",
-  "lean/RelativeConicArcs/SixArcDegenerateConicExclusion.lean",
-]
-
 # Generated data that a written determination keeps in the monorepo, because it is
 # human-scale semantic source rather than certificate payload: a frozen finite table
 # small enough to read, carrying no generated proof, consumed by hand-written theorems
