@@ -6,10 +6,11 @@
 
 Resumed the export-completion execution plan
 (`2026-08-06-c864-export-completion-execution-plan.md`) at step 22, the first paper-side step.
-Steps 22 through 25 are done and checkpoint 10 passes. Step 26 is partly done: five published
-papers are green, one is blocked by a stop the plan itself declared, one has no runnable release
-gate, and one needs a pin decision. Steps 27 through 30 and phase 6 have not run, so no mirror has
-been synchronized.
+Steps 22 through 25 are done and checkpoint 10 passes. Step 26 is done for every published paper
+except MDS--CSS transversal groups, which has no runnable release gate at all. Clebsch rigidity
+stopped mid-chain on a falsifier the plan declared; that decision has since been settled and the
+chain ran to completion, both recorded below. Steps 27 through 30 and phase 6 have not run, so no
+mirror has been synchronized and nothing has been pushed.
 
 ## Checkpoint 10 — passed
 
@@ -43,7 +44,7 @@ and `papers/clebsch-series-figures/series-figures.tex`, which the plan lists as 
   factorization, Clebsch passages, Clebsch rigidity, the Clebsch rigidity companion, and both
   beyond-four PRS identities. The order-13 passant code artifact is left stale for the second pass.
 
-## The stop: the plan's own falsifier fired on Clebsch rigidity
+## The stop that fired, and how it was settled
 
 The plan records this decision and its falsifier:
 
@@ -60,13 +61,15 @@ plan's instruction not to reopen a decision unless its falsifier is observed, an
 which when one is, the Clebsch rigidity release chain did not run. Its computational companion shares
 the same release runner and is blocked with it.
 
-Every edit made toward that chain was reverted, so the paper's release surface remains self-consistent
-at its published pins — certificate package `c3669965`, finitegeom `85dfde9e`, gate
-`RelativeConicArcs/Gates/ClebschRigidityTrust.lean`.
+The settlement is recorded under "The trust boundary, settled" below: the fact's terminal now names
+a declaration the package proves, and both `seal` and `check` refuse a terminal that the dependency
+proves instead. The release chain then ran; what it needed is under "Paper I released".
 
-### What the chain will need once the trust boundary is settled
+### What the chain needed, as surveyed before it ran
 
-Surveyed while the chain was being prepared; recorded so the next session does not rediscover it.
+Kept because each item is a defect class rather than a one-off, and because the pins below record
+where the release surface stood before the chain. Every item is resolved; the resolutions and the
+five further defects the chain exposed are under "Paper I released".
 
 - **Pins.** Certificate package `c3669965` → `a289097b`; finitegeom `85dfde9e` → `dca9ce75`; the gate
   digest becomes `d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6`. The sites are
