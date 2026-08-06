@@ -17,10 +17,20 @@
     "finite geometry",
     "complete arcs",
     "conics",
-    "secant coverage",
     "matching designs",
     "finite-field computation",
-    "formalized mathematics"
+    "formalized mathematics",
+    "saturating sets",
+    "secant equations",
+    "ovals",
+    "hyperovals",
+    "nucleus",
+    "Kneser graphs",
+    "Desarguesian planes",
+    "rank-three groups",
+    "hyperfactorizations",
+    "finite projective planes",
+    "Lean 4"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [
