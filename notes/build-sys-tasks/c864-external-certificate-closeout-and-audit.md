@@ -2,9 +2,22 @@
 
 **Lane:** `build-sys`
 
-**Status:** ACTIVE — order-16 package sealed, pinned, and closed out: gate green, packed, and
-restore-rehearsed trace-current.  The order-eleven point-orbit family is externalized and pinned;
-the remaining order-eleven families, order-13, and order-25 are not yet executed.
+**Status:** ACTIVE — all eleven finitegeom areas are registered, re-exported from tracked
+configurations, and gate-green.  The order-16 package is sealed, pinned and closed out; the
+order-eleven point-orbit family is externalized and pinned.  Order-13 and order-25 are not executed.
+
+> ## ▶ START HERE
+>
+> **The current work runs from
+> [`../2026-08-06-c864-export-completion-execution-plan.md`](../2026-08-06-c864-export-completion-execution-plan.md).**
+> It is an ordered, checkpointed plan a fresh session can execute end to end: it records the state to
+> resume from, the decisions already taken with their falsifiers, exact commands, and the only points
+> at which it stops for a human.  Read it before acting on anything below.
+>
+> That plan deliberately excludes the projective-cap order-eleven, order-13 and order-25
+> externalizations and the unpublished papers, so **completing it does not close C864** — three
+> `pending_family` entries survive and acceptance item 9 stays unmet.  The rest of this card is the
+> full C864 scope, which remains the closure requirement.
 
 ## Goal
 

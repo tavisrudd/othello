@@ -129,6 +129,11 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
 1. **C864 certificate closeout.** The integrated closeout for the remaining C686/C687 execution and
    the certificate boundary portion of C287/C324. Card, execution order, and acceptance:
    [`../build-sys-tasks/c864-external-certificate-closeout-and-audit.md`](../build-sys-tasks/c864-external-certificate-closeout-and-audit.md).
+   **The active work runs from the ordered, checkpointed
+   [export-completion execution plan](../2026-08-06-c864-export-completion-execution-plan.md)** —
+   start there, not from the card's execution order. It carries the resume state, the decisions
+   already taken, exact commands, and its own stop points; it excludes the projective-cap, order-13
+   and order-25 externalizations and the unpublished papers, so finishing it does not close C864.
    Done: the order-16 package is sealed, packed, restore-rehearsed trace-current, and its external
    trust fact is published and pinned; the Kim--Vu and Al-Seraji--Al-Ogali anchors are exact.
    The finitegeom game-free/game split is landed and gate-green in the monorepo: the validity

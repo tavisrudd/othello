@@ -4,233 +4,341 @@
 
 **Date:** 2026-08-06
 
-## Purpose and scope
+## How to use this document
 
-This is the ordered execution plan from the current state to a finitegeom repository that is
-complete, replayable and buildable standalone, with every published paper consistent with it.
+This is an executable plan, written so a session holding none of its history can run it end to end.
+Every decision it depends on has already been taken and is recorded in "Decisions taken" below with
+the evidence and the observation that would overturn it.  Do not re-open those decisions unless
+their stated falsifier is actually observed; if one is, stop and say which.
+
+The run stops for a human exactly twice, at the two pushes in step 12 and step 30.  Everything else
+proceeds without asking.  A genuine validation failure is also a stop: report the failing checkpoint
+and its output rather than working around it.
+
+### Read before acting
+
+`lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink) before any Lean edit, build, generator run,
+extraction, or process intervention.  `notes/export-and-mirror-conventions.md` before any area
+export, certificate re-pin, or paper-mirror synchronization — nothing else may write under
+`~/src/lean/` or `~/src/math-papers/`.  `notes/research-reproducibility-conventions.md` before any
+paper-facing computational claim.  `papers/style-guide.md` before touching manuscript prose.
+
+### State at the start of this plan
+
+- Monorepo `~/src/othello` is clean and its work is committed.
+- finitegeom `~/src/lean/finitegeom` is clean, and its local `main` is **ahead of `origin/main`**.
+  All eleven of its areas are registered under `lean/trust/export/`, re-exported from tracked
+  configurations, and gate-green.
+- The order-eleven package `~/src/lean/finitegeom-clebsch-q11-certificates` has an **uncommitted
+  worktree** at `HEAD` `20ae258`, holding work this plan continues: the finitegeom re-pin in
+  `lakefile.toml`, `lake-manifest.json` and `README.md`; the gate renamed to
+  `RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` with `lakefile.toml`,
+  `scripts/seal_manifest.py` and the README updated; and the deletion of seven modules now owned by
+  finitegeom.  **Do not discard this worktree.**  It does not build yet; step 13 is where it does.
+- The sandbox cannot reach GitHub over SSH.  Verify a push with
+  `git ls-remote https://github.com/tavisrudd/<repo> main`, never a local `origin/main` ref, which
+  goes stale and reads as "already pushed".
+
+## Scope
 
 In scope for this first pass: the finitegeom tree and its eleven areas, the order-eleven certificate
-package, and the published papers — rigidity as Paper I with its computational companion,
+package, and the published papers — Clebsch rigidity as Paper I with its computational companion,
 factorization as Paper II, passages as Paper III, arcs complete outside a conic, beyond-four
 projective Reed--Solomon, AME/LU, MDS--CSS transversal groups, and golden quantum statistics — plus
 the portfolio summary.
 
-Two published papers are deferred to a second pass rather than dropped.  The order-13 passant code,
-Paper IV of the Clebsch programme, is deferred by instruction; its certificates stay resident under
-`papers/q13-passant-code/` because the projective-cap order-13 externalization is out of scope, so
-nothing about its Lean state changes in the meantime.  Complete repair ports is deferred for the
-reason below.  Both are paper-side work when resumed: neither needs an export or a build window.
+Deferred to a second pass, described at the end: the order-13 passant code (Paper IV) and complete
+repair ports.  Both are paper-side only when resumed; neither needs an export or a build window.
 
-Out of scope by instruction: the projective-cap order-eleven and order-13 externalizations, the
-order-25 externalization, and the unpublished papers — the archived Clebsch hexagon code,
-continuation graph rigidity, dihedral Schreier node Kayles, equivariant robust completion, and the
-golden operator.
+Out of scope: the projective-cap order-eleven and order-13 externalizations, the order-25
+externalization, and the unpublished papers — continuation graph rigidity, dihedral Schreier node
+Kayles, equivariant robust completion, and the golden operator programme.
 
-Complete repair ports is deferred rather than excluded on principle.  Its manuscript is close, but
-its export carries 128 private-reference findings that hard-refuse a sync, and they are not a
-scrubbing job: they sit in eleven internal working documents — `proof_ledger.md`,
-`adversarial_novelty_review.md`, `theorem-map.md`, `formalization-ledger.md`,
-`second-draft-fix-plan.md`, `formal-statement-adequacy.md`, `verification-map.md`,
-`claim-proof-novelty-ledger.md`, both READMEs, and one file the scanner classifies as an internal
-process file outright.  The question they raise is editorial, not mechanical: which of those
-documents belong in a public paper repository at all.  That belongs to the paper's owner.  Its Lean
-side is unaffected and already done — the `complete_ports` area is registered, re-exported and
-adopted in finitegeom — so only the mirror sync waits.
+Because three of the four `pending_family` entries are out of scope, that table will not be empty and
+**C864 cannot close on this plan**.  This delivers a valid, complete, replayable export and
+consistent published papers, not C864's acceptance item 9.
 
-Every remaining published paper scans clean, so no reference-cleaning work is on this path.
+## Decisions taken
 
-Consequence to state plainly: three of the four `pending_family` entries in
-`lean/trust/certificate-packages.toml` are out of scope here, so that table will not be empty and
-**C864 cannot close on this plan**.  What this plan delivers is a valid, complete export and
-consistent published papers, not C864's own acceptance item 9.
+**The seven order-eleven modules stay in finitegeom, and the `pending_family` entry naming them is
+removed.**  `ClebschGatewayQ11Extension`, `Q11BrianchonPetersen`, `Q11CodeRigidityBridge`,
+`Q11DecodingSynthesis`, `Q11DyeConsequences`, `Q11RigiditySpine` and
+`SixArcDegenerateConicExclusion` are human-scale theory, not enumerated tables; all seven were
+measured byte-identical to the monorepo authority; the rigidity gate's extracted fact shows no
+project axiom and no generated content in them; and the split-line determination in
+`notes/2026-08-05-c864-order-eleven-remaining-split-lines.md` concluded the remaining cut is "the
+order-16 kind", where statements and definitions stay and only exhaustive proofs move.  The package
+carried copies only because finitegeom lacked them.  *Falsifier:* if any of the seven is found to
+carry a generated banner or an enumerated table, it belongs in the package instead — reverse that
+one module and keep the entry for it.
 
-## Blocking decision, needed before phase 3
+**Golden quantum statistics is adopted into finitegeom.**  It is a deposited paper with a DOI and a
+standalone mirror, and it is the one registered export configuration with no counterpart on
+finitegeom's `main`; leaving it out means a published paper's formal artifact has no home in the
+shared library while every other published paper's does.  Adoption is an ordinary forward commit.
+*Falsifier:* if its export refuses to plan, or its gate does not build green inside finitegeom, do
+not force it — record the reason, skip it, and note in the paper's release surface that its Lean
+development sits outside the shared library.
 
-The `pending_family` entry "order-eleven families awaiting their cut" declares seven modules as
-leaving the monorepo for the order-eleven certificate package:
-`ClebschGatewayQ11Extension`, `Q11BrianchonPetersen`, `Q11CodeRigidityBridge`,
-`Q11DecodingSynthesis`, `Q11DyeConsequences`, `Q11RigiditySpine`, and
-`SixArcDegenerateConicExclusion`.
-
-The human Clebsch rigidity area export moved all seven the other way, into finitegeom, and the
-package's byte-identical copies were then deleted so it consumes them from its dependency.  The
-split-line determination in `notes/2026-08-05-c864-order-eleven-remaining-split-lines.md` supports
-that direction — it found the remaining cut to be "the order-16 kind", where statements and
-definitions stay and only exhaustive proofs move — and none of the seven carries generated content.
-
-Either the `pending_family` entry is superseded and must be removed, or the export overreached and
-the seven must be withdrawn from finitegeom and restored to the package.  Resolve this first: it
-determines what the package seals and therefore what phase 3 can validate.  The evidence favours
-removing the entry, but it is a declared scope statement and should not be deleted silently.
-
----
+**The order-eleven package keeps the `RelativeConicArcs` namespace for now.**  Only its gate is
+renamed.  Moving the package to its own top-level library is the structural fix for module-name
+collisions, but it touches all 122 sealed sources and belongs in its own task; the collision rule in
+step 8 is the interim guard.
 
 ## Phase 1 — finish the finitegeom tree
 
-1. Delete `RelativeConicArcs/Gates/ClebschRigidityHuman.lean` and
-   `RelativeConicArcs/Gates/ArcsCompleteOutsideConicHuman.lean`.  Both are residue of the untracked
-   export apparatus, superseded by the gates now exported from tracked configurations, and neither
-   has an authority source.  `ArcsCompleteOutsideConicHuman` still imports `RelativeConicArcs.Q16Reduction`,
-   which the monorepo dropped when the order-16 family was externalized.
-2. Remove the stale manifest root `RelativeConicArcs.PaperIOrientationSpine` from
-   `TARGET_MANIFEST.json`; it names a module the repository no longer carries.
-3. Delete the three order-16 build-residue modules measured in
-   `notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`.
-4. Delete the 114 point-orbit build-residue modules that sweep measured in the monorepo.
+Deletions here are of build outputs and of two source files nothing imports.  Confirm no build is
+running before the residue sweep: unlinking build outputs under a tree another lane is building is
+the interference the lane rules forbid.
 
-**Checkpoint 1.**  Every area gate builds green in finitegeom through the guarded queue.  A second
-run of all eleven area exports reports an empty forward delta for each, which is the idempotence
-check.  `TARGET_MANIFEST.json` has no root naming an absent module.  The monorepo's own gates remain
-green.
+1. Remove the two orphan gates `RelativeConicArcs/Gates/ClebschRigidityHuman.lean` and
+   `RelativeConicArcs/Gates/ArcsCompleteOutsideConicHuman.lean`.  They are residue of the untracked
+   export apparatus, superseded by the gates now exported from tracked configurations, and
+   `ArcsCompleteOutsideConicHuman` still imports `RelativeConicArcs.Q16Reduction`, which the monorepo
+   dropped at order-16 externalization.  Nothing imports either and no trust file names them.
+2. **Both are `roots` entries in finitegeom's `lakefile.toml` (around lines 213 and 220).  Remove
+   those two lines in the same change** — deleting the files alone leaves the library declaring roots
+   that do not exist, which fails the build.
+3. Remove their entries, and the stale root `RelativeConicArcs.PaperIOrientationSpine`, from
+   `TARGET_MANIFEST.json`.  Nothing in the toolchain models a deletion from finitegeom: the exporter
+   carries the base manifest's `sources` forward, so a deleted file's entry persists until removed by
+   hand.  This is the one hand edit to a generated file in this plan, and step 5 is what proves it
+   consistent.
+4. Sweep the stale build residue, measured in
+   `notes/2026-08-05-c864-non-lean-payload-and-build-artifact-sweep.md`.  There are five stacks, not
+   two: in the monorepo, 114 point-orbit modules (912 files, 51.5 MB) and 11 `PaperIOrientation*`
+   modules (88 files, 11.1 MB); in finitegeom, 3 order-16 modules (24 files, 1.6 MB) and the same 11
+   renamed modules (88 files, 11.1 MB); and in the order-eleven package, `Q11DyeAxioms` (8 files),
+   which it built locally and now takes from finitegeom.
 
-5. Push finitegeom.  Everything downstream pins the revision this produces, so push once, here.
+**Checkpoint 1.**  `TARGET_MANIFEST.json` has no `sources` entry naming an absent path and no root
+naming an absent module — check both directions, not just roots.  Every finitegeom area gate builds
+green through the guarded queue.  The monorepo's own gates remain green.
 
-**Checkpoint 2.**  `git ls-remote https://github.com/tavisrudd/finitegeom main` resolves to the
-intended revision.  Verify against the remote, not a local tracking ref: this session's sandbox
-cannot fetch over SSH, and a stale `origin/main` reads as "already pushed".
+5. Re-run all eleven area exports against the current monorepo and finitegeom commits and require an
+   empty forward delta from each.  This is the idempotence check and it is also what proves the hand
+   edit in step 3 agrees with what the exporter would generate.
 
----
+```sh
+SRC=$(git -C ~/src/othello rev-parse HEAD)
+FG=$(git -C ~/src/lean/finitegeom rev-parse HEAD)
+for c in ~/src/othello/lean/trust/export/*.toml; do
+  python3 ~/src/othello/lean/scripts/lean-area-export.py --config "$c" \
+    --source-commit "$SRC" --finitegeom-commit "$FG" \
+    run --workdir ~/.cache/othello-lean-build/area-export/idem-$(basename "$c" .toml)
+done
+```
 
-## Phase 2 — guards that would have caught this session's failures
+**Checkpoint 2.**  Eleven empty deltas.  Any non-empty delta means the tree and a configuration
+disagree; resolve it before proceeding rather than adopting the delta blindly.
 
-6. Add a boundary-checker rule rejecting any package module whose name also exists at the pinned
-   finitegeom revision.  Lean module names are global across a dependency graph; two packages
-   defining one name is a hard build failure in any consumer.  This rule catches both failures seen
-   this session — the seven duplicated modules and the colliding gate.
-7. Add a standalone finitegeom build to the export tooling as a gate.  Nothing builds finitegeom on
+6. Export and adopt the golden quantum statistics area, per the decision above.  Plan, run, copy the
+   printed delta with no hand edits, build its gate inside finitegeom, adopt as one forward commit,
+   then re-run the export and require an empty delta.
+
+**Checkpoint 3.**  Golden's gate is green in finitegeom and its second export is empty — or the
+falsifier fired and the skip is recorded.
+
+7. Remove the `pending_family` entry "order-eleven families awaiting their cut" from
+   `lean/trust/certificate-packages.toml`, per the decision above, recording the reason in the commit
+   message.
+
+## Phase 2 — guards, before anything depends on them
+
+8. Add a boundary-checker rule rejecting any package module whose name also exists at the pinned
+   finitegeom revision.  Lean module names are global across a dependency graph, and two packages
+   defining one name is a hard failure in every consumer.  This rule catches both failures seen on
+   2026-08-06: seven duplicated modules and a colliding gate.
+9. Add a standalone finitegeom build to the export tooling as a gate.  Nothing builds finitegeom on
    its own before a package pins it, which is why a broken export surfaced only three hours into a
    consumer's build.
-8. Add adversarial fixtures for both, in the style of the existing boundary-checker fixtures.
+10. Add adversarial fixtures for both, in the style of the existing boundary-checker fixtures: a
+    module name colliding with the dependency, and an export whose result does not build standalone.
 
-**Checkpoint 3.**  Both new rules go red on a constructed violation and green on the real tree.  The
-existing suites still pass: `test_lean_certificate_boundary.py`, `test_lean_area_export.py`,
+**Checkpoint 4.**  Both rules go red on a constructed violation and green on the real tree.  These
+suites pass: `test_lean_certificate_boundary.py`, `test_lean_area_export.py`,
 `test_lean_trust_spine.py`.
 
----
+11. Commit phases 1 and 2 in the monorepo and finitegeom.
 
-## Phase 3 — reseal the order-eleven certificate package
+## Phase 3 — the order-eleven package
 
-Gated on the blocking decision above and on checkpoint 2.
+12. **STOP 1 — push.**  finitegeom must be published before the package can resolve it: packages
+    depend on finitegeom by public Git URL and pinned revision.  Ask the user to push finitegeom.
 
-9. Rename the gate to `RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates` and
-   update `lakefile.toml`, `scripts/seal_manifest.py`, and the README.
-10. Rewrite the gate's module header.  It describes the pre-cut content and states that the rigidity
-    conclusion depends on the ten-point Brianchon bound and equality classification of R. H. Dye as
-    literature input.  That is now false: both are theorems of finitegeom.  The package README
-    repeats the same claim and the same correction applies.  The README also calls the module "the
-    aggregate Paper I gate", which is manuscript-bound naming the artifact rules forbid.
-11. Re-pin `lakefile.toml`, `lake-manifest.json` (`rev` and `inputRev`) and the README to the
-    revision pushed at step 5.
-12. Migrate the two unsealed payload files, `verification/clebsch_rigidity_trust/axiom-audit.txt`
-    and `gate-run.log`, into a single `support_files` list in `MANIFEST.json`.
-13. Correct `PROVENANCE.md` to the real extraction revision `0ddbca65`, and seal the monorepo
+**Checkpoint 5.**  `git ls-remote https://github.com/tavisrudd/finitegeom main` resolves to the
+intended revision.  Do not proceed on a local ref.
+
+13. Re-point the package's already-edited `lakefile.toml`, `lake-manifest.json` (`rev` **and**
+    `inputRev`) and README pin to the pushed revision.  The worktree currently names an earlier one.
+14. Rewrite the gate's module header and the corresponding README passages.  Both describe the
+    pre-cut content and state that the rigidity conclusion depends on the ten-point Brianchon bound
+    and equality classification of R. H. Dye as literature input.  That is false: both are theorems of
+    finitegeom as of 2026-08-06.  The README also calls the module "the aggregate Paper I gate",
+    which is manuscript-bound naming the artifact rules forbid.  The gate audits 55 terminals — 15
+    package certificates in `Examples.Q11A5PointOrbits` and `Examples.Q11Coding`, and 40 human-side
+    results imported from finitegeom — so describe it as the rigidity development together with the
+    order-eleven certificates.
+15. Migrate the two unsealed payload files, `verification/clebsch_rigidity_trust/axiom-audit.txt` and
+    `gate-run.log`, into a single `support_files` list in `MANIFEST.json`.
+16. Correct `PROVENANCE.md` to the real extraction revision `0ddbca65`, and seal the monorepo
     revision in `MANIFEST.json` as a field distinct from the package's own `source_commit`.
-14. Rebuild the gate against the package root and refresh the tracked axiom audit from that
-    elaboration's own output.
-15. Reseal `MANIFEST.json` in two commits so `source_commit` is self-consistent: first every source
+17. Build the gate against the package root and refresh the tracked axiom audit from that
+    elaboration's own output, corroborated against the package build's log.
+
+```sh
+python3 ~/src/othello/lean/scripts/lean-build-queue.py build \
+  RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates \
+  --lean-root ~/src/lean/finitegeom-clebsch-q11-certificates --cores 20-23
+```
+
+**Checkpoint 6.**  The gate builds green with no module ambiguity.  Its axiom audit records no Dye
+statement as a trusted input and no terminal carries a native evaluation axiom.
+
+18. Run the pre-deletion source audit that the card requires before any deletion becomes final, and
+    require every difference to be named.
+
+```sh
+python3 ~/src/othello/lean/scripts/lean-package-source-audit.py \
+  ~/src/lean/finitegeom-clebsch-q11-certificates \
+  --authority 0ddbca65 --finitegeom ~/src/lean/finitegeom
+```
+
+19. Reseal `MANIFEST.json` in two commits so `source_commit` is self-consistent: first every source
     change, then the manifest alone.
 
-**Checkpoint 4.**  The gate builds green against the pushed finitegeom revision with no module
-ambiguity.  `lean-package-source-audit.py` reports zero unexplained drift against authority
-`0ddbca65`, with every surviving difference named.  `lean-external-fact.py check` is green.  The
-axiom fact records no Dye statement as a trusted input, and no terminal carries a native evaluation
-axiom.
+**Checkpoint 7.**  `lean-package-source-audit.py` reports zero unexplained drift.
+`lean-external-fact.py check` is green.
 
-16. Publish the package revision, then update the monorepo's pinned copy of the trust fact at
-    `lean/trust/external/` and its hash pin and `commit` field in
-    `lean/trust/certificate-packages.toml`.
+## Phase 4 — reconnect the monorepo to the package
 
-**Checkpoint 5.**  `lean-certificate-boundary.py --verify-official-libraries` is green, including
-the new collision rule.
+20. **STOP 2 — push.**  Ask the user to push the package.
 
----
+**Checkpoint 8.**  `git ls-remote https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates main`
+resolves to the resealed revision.
 
-## Phase 4 — published papers
+21. Update the monorepo's pinned copy of the trust fact under `lean/trust/external/`, and its hash
+    pin and `commit` field in `lean/trust/certificate-packages.toml`.  Any commit in the package
+    moves its `HEAD` off that pin, so bump it in the same change; `lean-external-fact.py pin`
+    maintains only the trust-fact copy, never the `commit` field.
+
+**Checkpoint 9.**  `lean-certificate-boundary.py --verify-official-libraries` is green, including the
+new collision rule.
+
+## Phase 5 — published papers
 
 Six papers in this pass have a facts artifact differing from a fresh extraction: AME/LU, arcs
 complete outside a conic, Clebsch factorization, Clebsch passages, Clebsch rigidity, and the Clebsch
-rigidity companion.  The order-13 passant code has a seventh, refreshed in the second pass.
+rigidity companion.
 
-17. Refresh the stale bibliography entries in beyond-four projective Reed--Solomon, which holds
-    seven of the nine `stale-bbl` findings across `prs-beyond-redundancy-four.bbl` and
-    `prs-beyond-redundancy-four-tit-submission.bbl`.
-18. Resolve the title drifts in `papers/papers-index.md` for the published rows, and the
-    citation-title drifts in the published papers' `refs.bib`.
-19. Refresh the four dependency locks that still resolve a finitegeom revision carrying extracted
+22. Refresh the stale bibliography entries in beyond-four projective Reed--Solomon, which holds seven
+    of the nine `stale-bbl` findings across `prs-beyond-redundancy-four.bbl` and
+    `prs-beyond-redundancy-four-tit-submission.bbl`.  A `.bbl` is a build output, so this is a
+    rebuild against the corrected `refs.bib`, not a hand edit.
+23. Resolve the remaining title drifts in `papers/papers-index.md` for published rows, and the
+    citation-title drifts in published papers' `refs.bib`.
+24. Refresh the four dependency locks that still resolve a finitegeom revision carrying extracted
     order-16 sources.
-20. Re-extract the seven stale facts artifacts.
-21. For each published paper in turn: update the pin block, regenerate the statement identity and
-    trust manifest, refresh the tracked PDF through that paper's own manuscript checker in update
-    mode, visually inspect changed pages, commit the release surface, run the aggregate release
-    verifier with `--update-output`, rerun the trust-manifest builder, and finish with the
+25. Re-extract the six stale facts artifacts.
+
+**Checkpoint 10.**  `paper-facts.py check` reports no error and no staleness naming any paper in this
+pass.  Remaining findings name only deferred, out-of-scope, or unregistered items — currently
+`papers/clebsch-series-figures/series-figures.tex`, which is out of scope here.
+
+26. For each published paper in turn, run its release chain per its `verification/README.md`: update
+    the pin block, regenerate the statement identity and trust manifest, refresh the tracked PDF
+    through that paper's own manuscript checker in update mode, visually inspect changed pages,
+    commit the clean release surface, run the aggregate release verifier with `--update-output`,
+    rerun the trust-manifest builder to record the new certificate hash, commit, and finish with the
     clean-source release run.
 
 Never build a PDF by hand.  Each checker pins `SOURCE_DATE_EPOCH` to make the build byte-reproducible
 and then requires the tracked PDF to equal a fresh build exactly; a hand build without the pinned
-epoch is rejected, and that equality is the only thing detecting a stale tracked PDF.
+epoch is rejected, and that equality is the only thing that detects a stale tracked PDF.
 
-Clebsch rigidity must come after phase 3: its pin block records the package commit and gate digest.
+Clebsch rigidity must come after phase 4: its pin block records the package commit and gate digest.
 
-**Checkpoint 6.**  `paper-facts.py check` reports no error and no staleness against any paper in this
-pass, and its remaining findings name only the deferred and out-of-scope papers.  Every in-scope
-paper's release gate is green in the monorepo.
+**Checkpoint 11.**  Every in-scope paper's release gate is green in the monorepo.
 
-22. Synchronize each published mirror with `export-paper-repos.py sync`, then replay that paper's
-    release gate inside the mirror and require agreement with the authority's release identity —
-    matching recorded hashes including the canonical release-surface hash, not merely a passing gate.
-23. Refresh the portfolio summary by copying `papers/summary/` over its mirror.  It is not carried by
-    `export-paper-repos.py`, and nothing checks it, so any novelty or priority sentence must quote a
-    ledger row rather than restate it.
+27. Before syncing any mirror, run `export-paper-repos.py plan --source-ref HEAD` and confirm the
+    paper's `reference_findings` is zero.  All nine published papers currently scan clean; a new
+    finding means a task identifier or internal path entered the export and must be fixed in the
+    authority, never masked with an exclusion.
+28. Synchronize each published mirror and replay its release gate inside the mirror, requiring
+    agreement with the authority's release identity — matching recorded hashes including the
+    canonical release-surface hash, not merely a passing gate.
 
-**Checkpoint 7.**  Every published mirror is clean, its release gate green, and its release identity
+A rename in the authority reads downstream as a deletion and `sync` refuses it.  If that fires,
+reconcile the mirror with an explicit `git rm` commit made *before* the sync, so the removal is
+separately reviewable in the mirror's history.  Never add exclusions or rewrites to
+`papers/repositories.toml` to make a refusal disappear.
+
+29. Refresh the portfolio summary by copying `papers/summary/` over its mirror and committing there.
+    It is not carried by `export-paper-repos.py`, because the registry requires every repository to
+    claim a paper id and the summary is not a paper.  Nothing checks it, so any novelty or priority
+    sentence must quote a ledger row rather than restate it.
+
+**Checkpoint 12.**  Every published mirror is clean, its release gate green, and its release identity
 equal to the authority's.
 
----
+30. **STOP 3 — push.**  Ask the user to push the mirrors.  (This is the third and last human stop;
+    the two earlier ones are unavoidable because downstream resolution needs a published revision.
+    If the user prefers, stops 2 and 3 can be batched into one at the end of phase 5.)
 
-## Phase 5 — closing evidence
+## Phase 6 — closing evidence
 
-24. Re-run `lean-package-source-audit.py` for the order-eleven package against its authority
-    revision and require zero drift.
-25. Run the global paper-export audit and check commands, including stale manifest, unexpected
+31. Re-run `lean-package-source-audit.py` for the order-eleven package against its authority revision
+    and require zero drift.
+32. Run the global paper-export audit and check commands, including stale manifest, unexpected
     deletion, reverse-reference and unregistered-paper detection.
-26. Record a bounded result table naming every published paper and export, its source revision, the
+33. Record a bounded result table naming every in-scope paper and export, its source revision, the
     finitegeom and package revisions, the gate, and the pass or fail disposition.  No configured
-    published paper may be silently skipped.
+    in-scope paper may be silently skipped.
 
-**Checkpoint 8.**  The table is complete over the nine published papers and the summary, every row
-passing.  Acceptance items 11 and 12 are then satisfied for the published set.
+**Checkpoint 13.**  The table covers the eight in-scope papers plus the companion and the summary,
+every row passing.  Acceptance items 11 and 12 hold for the published set.
 
----
+34. Update the C864 card and the build-sys handoff, and append the dated report.
 
-## Second decision, needed before phase 1 completes
+## Hazards this plan already accounts for
 
-Golden quantum statistics is a published paper, but its Lean area is the one registered
-configuration with no corresponding area on finitegeom's `main`.  Exporting it would adopt a new
-area rather than refresh an existing one, which is a publication decision rather than a maintenance
-one.  Decide whether that paper's Lean development joins finitegeom in this run.  If it does, the
-export and adoption belong in phase 1 before the push; if it does not, the paper ships with its Lean
-development outside the shared library and that should be stated in its release surface rather than
-left implicit.
-
-## Known exclusions to restate at closeout
-
-- `papers/clebsch-series-figures/series-figures.tex` is an unregistered paper.  It needs either
-  registration or a written determination that it is not a paper; it is not resolved here.
-- The `pending_family` table retains its order-25 data, order-25 generator, and order-13
-  projective-cap entries, so the boundary checker's externalization scope is deliberately non-empty
-  and C864's acceptance item 9 is unmet.
-- Paper IV, the order-13 passant code, is deferred to the second pass.  Its certificates remain
-  resident under `papers/q13-passant-code/` because the projective-cap order-13 externalization is
-  out of scope, so it ships with its certificates in place whenever it is picked up.
-- Complete repair ports is deferred at the mirror-sync step only, pending the editorial decision on
-  its eleven internal working documents.  Its Lean area is already registered and adopted, so
-  resuming it later is a paper-side task with no export work attached.
+- Deleting a finitegeom module is not modelled by any tool; the manifest keeps stale entries and the
+  lakefile keeps stale roots.  Steps 2 and 3 handle both; checkpoint 1 checks both directions.
+- The build queue's exit 0 carries two outcomes: a `resume:` line means still running, not finished.
+  Exit 126 is an abandoned run, typically an OOM kill.  Exit 124 is the caller's own wait timing out,
+  leaving the build untouched — wait again on the same run directory rather than resubmitting.
+- Killing a foreground queue client does not kill the build; find the run directory and `await` it.
+- `lean-trust-extract.py` refuses a dirty tree, so commit source changes before extracting.
+- An area may audit through a sibling `...AxiomAudit` gate that prints under opened namespaces.
+  Resolve short names against the extracted `project_declarations` and require uniqueness; never
+  declare a guessed fully-qualified name.
+- One heavyweight build owns the host at a time.  Never run direct `lake`, `nix ... lake`, or a
+  hand-composed `taskset`/`choom` command; `run-quiet` is output capture, not the guarded entry point.
+- `/tmp` is tmpfs here.  Keep build trees, caches, packs and large logs on disk-backed paths.
 
 ## Second pass
 
-Both deferred papers are paper-side only and need no export, build window, or lock.  For the order-13
-passant code: refresh its facts artifact, resolve its `papers-index.md` title drift, run its release
-chain, and sync its mirror.  For complete repair ports: take the editorial decision on the eleven
-internal working documents — exclude them from the export or rewrite them for a public audience —
-then resolve the one remaining `stale-bbl` finding, run its release chain, and sync.  Adding the two
-extends checkpoints 6 and 7 to cover them and extends the phase 5 result table by two rows.
+Both deferred papers are paper-side only and need no export, build window, or lock.
+
+For the order-13 passant code: refresh its facts artifact, resolve its `papers-index.md` title drift,
+run its release chain, and sync its mirror.  Its certificates stay resident under
+`papers/q13-passant-code/` because the projective-cap order-13 externalization is out of scope.
+
+For complete repair ports: take the editorial decision on the eleven internal working documents that
+carry its 128 export findings — `proof_ledger.md`, `adversarial_novelty_review.md`, `theorem-map.md`,
+`formalization-ledger.md`, `second-draft-fix-plan.md`, `formal-statement-adequacy.md`,
+`verification-map.md`, `claim-proof-novelty-ledger.md`, both READMEs, and one file the scanner
+classifies as an internal process file.  The question is which belong in a public repository at all,
+not how to scrub identifiers out of them.  Then resolve its one `stale-bbl` finding, run its release
+chain, and sync.  Its Lean area is already registered and adopted, so no export work attaches.
+
+Adding both extends checkpoints 10 through 12 to cover them and the phase 6 table by two rows.
+
+## Restated exclusions
+
+- The `pending_family` table keeps its order-25 data, order-25 generator, and order-13 projective-cap
+  entries, so the boundary checker's externalization scope stays deliberately non-empty and C864's
+  acceptance item 9 is unmet.
+- `papers/clebsch-series-figures/series-figures.tex` is an unregistered manuscript.  It needs either
+  registration or the retirement treatment the integrated mega-paper received on 2026-08-06, which
+  moved it to `archive/papers/` outside the configured paper roots.  Not resolved here.
