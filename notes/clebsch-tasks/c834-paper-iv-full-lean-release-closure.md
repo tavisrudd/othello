@@ -12,7 +12,28 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-04)
+## Resume here (2026-08-05)
+
+The paper package elaborates end to end. `PassantCodeQ13.Gates.Main` and
+`PassantCodeQ13.Gates.AxiomAudit` both build, and all 94 audit terminals report: 53 clean, 41
+carrying declaration-local native-evaluation axioms. Three defects were repaired to get there — a
+generated transporter table overrunning the elaborator recursion depth, two automorphism rewrites
+that could not see through the indexed action, and a gate terminal declaring a data-carrying
+structure as a theorem — and three finite gates were moved from native evaluation to kernel
+reduction. The evidence verifier passes and the referee-facing module inventory is rebuilt from the
+package. Report: `notes/2026-08-05-c834-equivariance-elaboration-and-kernel-gates.md`.
+
+The section below is retained for its plan and its account of the association-transport round. Its
+statement that the association-transport packet and the hidden-field cubic are unelaborated is no
+longer accurate: those modules are trace-current and were skipped as already built. Items 4 and 5 of
+its build-window list, the evidence manifest and the module inventory, are done.
+
+Kernel reduction of the checks over the 364-member decoded support family is blocked by memory, not
+by recursion depth, and needs the packed-mask reformulation rather than a larger limit. The cheapest
+remaining reduction is the association algebra's three native decisions, which prove identities the
+association-transport packet has already reduced in a parallel mask presentation.
+
+## Superseded resume note (2026-08-04)
 
 The shared library is closed. No source file under `lean/RelativeConicArcs/PassantCodeQ13/`
 contains `native_decide`, both replacement proofs are elaborated and committed, and all 23
