@@ -1,0 +1,476 @@
+{
+  "compound_to_commutator_pfaffian_ratio": [
+    "-1"
+  ],
+  "golden_on_locus": true,
+  "minus": {
+    "all_permutations_even": true,
+    "conference_tangent_dimension": 5,
+    "conference_tangent_is_trivial_plus_four": true,
+    "conference_tangent_rank": 11,
+    "element_orders": {
+      "1": 1,
+      "2": 15,
+      "3": 20,
+      "5": 24
+    },
+    "euler_relation": true,
+    "group_is_A5": true,
+    "group_order": 60,
+    "invariant_factors": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      20,
+      20,
+      20
+    ],
+    "isotypic_dimensions": {
+      "five": 10,
+      "four": 4,
+      "trivial": 1
+    },
+    "jacobian_equivariant": true,
+    "jacobian_rank": 14,
+    "kernel_dimension": 1,
+    "kernel_is_scaling_line": true,
+    "module_character": {
+      "1": [
+        15
+      ],
+      "2": [
+        3
+      ],
+      "3": [
+        0
+      ],
+      "5": [
+        0
+      ]
+    },
+    "order_three_element_count": 20,
+    "primitive_entry_values": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "primitive_jacobian_is_integral": true,
+    "primitive_rank_modulo": {
+      "11": 14,
+      "13": 14,
+      "2": 4,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "reduction": {
+      "distinct_rows": 8,
+      "fixed_dimension": 5,
+      "kernel_dimension": 1,
+      "kernel_is_scaling_line": true,
+      "rank": 4
+    },
+    "reductions_uniform": true,
+    "stabilizer_signs_trivial": true,
+    "witness_distinct_rows": [
+      [
+        -12,
+        6,
+        6,
+        0,
+        0
+      ],
+      [
+        -4,
+        4,
+        4,
+        -4,
+        0
+      ],
+      [
+        0,
+        -6,
+        -6,
+        0,
+        12
+      ],
+      [
+        0,
+        -4,
+        -4,
+        4,
+        4
+      ],
+      [
+        2,
+        -6,
+        4,
+        2,
+        -2
+      ],
+      [
+        2,
+        -4,
+        6,
+        -2,
+        -2
+      ],
+      [
+        2,
+        4,
+        -6,
+        2,
+        -2
+      ],
+      [
+        2,
+        6,
+        -4,
+        -2,
+        -2
+      ]
+    ],
+    "witness_element": {
+      "permutation": [
+        1,
+        2,
+        0,
+        5,
+        3,
+        4
+      ],
+      "signs": [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "witness_orbit_basis": [
+      [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    ],
+    "witness_scaling_coordinates": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ]
+  },
+  "plus": {
+    "all_permutations_even": true,
+    "conference_tangent_dimension": 5,
+    "conference_tangent_is_trivial_plus_four": true,
+    "conference_tangent_rank": 11,
+    "element_orders": {
+      "1": 1,
+      "2": 15,
+      "3": 20,
+      "5": 24
+    },
+    "euler_relation": true,
+    "group_is_A5": true,
+    "group_order": 60,
+    "invariant_factors": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      20,
+      20,
+      20
+    ],
+    "isotypic_dimensions": {
+      "five": 10,
+      "four": 4,
+      "trivial": 1
+    },
+    "jacobian_equivariant": true,
+    "jacobian_rank": 14,
+    "kernel_dimension": 1,
+    "kernel_is_scaling_line": true,
+    "module_character": {
+      "1": [
+        15
+      ],
+      "2": [
+        3
+      ],
+      "3": [
+        0
+      ],
+      "5": [
+        0
+      ]
+    },
+    "order_three_element_count": 20,
+    "primitive_entry_values": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "primitive_jacobian_is_integral": true,
+    "primitive_rank_modulo": {
+      "11": 14,
+      "13": 14,
+      "2": 4,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "reduction": {
+      "distinct_rows": 8,
+      "fixed_dimension": 5,
+      "kernel_dimension": 1,
+      "kernel_is_scaling_line": true,
+      "rank": 4
+    },
+    "reductions_uniform": true,
+    "stabilizer_signs_trivial": true,
+    "witness_distinct_rows": [
+      [
+        -12,
+        6,
+        6,
+        0,
+        0
+      ],
+      [
+        -4,
+        4,
+        4,
+        -4,
+        0
+      ],
+      [
+        0,
+        -6,
+        -6,
+        0,
+        -12
+      ],
+      [
+        0,
+        -4,
+        -4,
+        4,
+        -4
+      ],
+      [
+        2,
+        -6,
+        4,
+        2,
+        2
+      ],
+      [
+        2,
+        -4,
+        6,
+        -2,
+        2
+      ],
+      [
+        2,
+        4,
+        -6,
+        2,
+        2
+      ],
+      [
+        2,
+        6,
+        -4,
+        -2,
+        2
+      ]
+    ],
+    "witness_element": {
+      "permutation": [
+        1,
+        2,
+        0,
+        5,
+        3,
+        4
+      ],
+      "signs": [
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ]
+    },
+    "witness_orbit_basis": [
+      [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    ],
+    "witness_scaling_coordinates": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "-1"
+    ]
+  }
+}
