@@ -4,7 +4,7 @@ SOURCE_DATE_EPOCH ?= 1784851200
 export SOURCE_DATE_EPOCH
 export FORCE_SOURCE_DATE = 1
 export TZ = UTC
-TEX_SOURCES := main.tex $(wildcard sections/*.tex) $(wildcard figures/*.tex) $(wildcard appendices/*.tex)
+TEX_SOURCES := main.tex $(wildcard frontmatter/*.tex) $(wildcard sections/*.tex) $(wildcard figures/*.tex) $(wildcard appendices/*.tex)
 PDF_BASENAME := ame-lu
 PDF := $(PDF_BASENAME).pdf
 

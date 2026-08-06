@@ -15,12 +15,23 @@
   "keywords": [
     "absolutely maximally entangled states",
     "stabilizer states",
+    "stabilizer codes",
     "local-unitary equivalence",
     "local Clifford group",
-    "quantitative rigidity",
-    "quantum MDS codes",
     "transversal gates",
-    "formalized mathematics"
+    "no-go theorems",
+    "quantitative rigidity",
+    "operator cleaning",
+    "minimum-support atlas",
+    "Weyl operators",
+    "Weyl–Heisenberg group",
+    "generalized Pauli group",
+    "symplectic group",
+    "qudits",
+    "quantum error correction",
+    "quantum MDS codes",
+    "formalized mathematics",
+    "Lean 4"
   ],
   "notes": "Correspondence: tavis@damnsimple.com",
   "related_identifiers": [
