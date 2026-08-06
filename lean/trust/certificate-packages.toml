@@ -3,7 +3,7 @@ schema_version = 1
 [[package]]
 name = "finitegeom-q16-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-q16-certificates"
-commit = "9ee200c1caf928592dce610a164fe1c6e91acb41"
+commit = "0b04429b6da2226f5cb53d299264cb782e54e000"
 manifest_sha256 = "100e1fea3c458f37737d779dadab62954459b3f2d45d982bdda464bb64f8d5d3"
 gate = "RelativeConicArcs.Gates.Q16CertificateTrust"
 terminal = "RelativeConicArcs.rhoC_GF16"
@@ -32,7 +32,7 @@ forbidden_artifact_basenames = [
 [[package]]
 name = "finitegeom-clebsch-q11-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
-commit = "c36699656de88f6a2fc1a5e53cf9a6153705aa7f"
+commit = "20ae258de47c159b31c75860026b2a801cd06a2a"
 manifest_sha256 = "6077ff0c8ae83ab4d3c367e1da5d2c77af77c0dc1a2e922d22578e3380fb2ceb"
 gate = "RelativeConicArcs.Gates.ClebschRigidityTrust"
 terminal = "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic"

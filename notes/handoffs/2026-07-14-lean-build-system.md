@@ -38,6 +38,10 @@ any paper-facing computational claim; `papers/style-guide.md` before touching ma
   module's namespace is reached through `open`, so searching for its own name finds no consumer.
   Establish declaration-level use before relocating anything; this is what made two of the five
   proposed order-eleven cuts unworkable.
+- Any commit in a certificate package — including a README typo fix — moves its `HEAD` off the
+  `commit` pin in `lean/trust/certificate-packages.toml`, and the boundary check compares the two.
+  Bump the pin in the same change; `lean-external-fact.py pin` maintains only the trust-fact copy,
+  never that field.
 - A content-addressed manifest sealed against `HEAD` is red the moment its own seal is committed.
   Verify against the commit the manifest names, and require the sealed sources to be unmoved.
 - `--quiet-wait` blocks on `pgrep -x lean`, which matches a language server as readily as a build.
