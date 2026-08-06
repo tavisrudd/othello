@@ -58,7 +58,7 @@
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs/Q11DyeAxioms.lean",
+      "module": "RelativeConicArcs/Q11BrianchonClassification.lean",
       "origin": "dependency"
     },
     "RelativeConicArcs.ClebschDye.dye1991_equality_classification": {
@@ -67,7 +67,7 @@
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs/Q11DyeAxioms.lean",
+      "module": "RelativeConicArcs/Q11BrianchonClassification.lean",
       "origin": "dependency"
     },
     "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": {
@@ -1568,20 +1568,20 @@
     }
   },
   "dependency": {
-    "commit": "dca9ce75225685f79a81e0be24927ba6852e1c09",
+    "commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
     "repository": "https://github.com/tavisrudd/finitegeom"
   },
   "evidence": {
     "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
-    "axiom_log_sha256": "6471c46ab44facfaa532cba806289a86851b2cc0b7746f8af2d01410c4112746",
+    "axiom_log_sha256": "995c2b23bc77280222e74eef23af0aa4bdab2fd1f4045e0b990d8f748e858d15",
     "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
   },
   "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "6affa69397083acc4a171916270ef575fbe7abb8b74a7671d7d284fbceb92f6b",
+  "manifest_sha256": "0ecc398aa46234e99de4ee86eb39e3922774694d6ebc4fdf69ec0491ca274c5d",
   "package": "finitegeom-clebsch-q11-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
-  "source_commit": "82bc558118535df36989925c3207d6b4d32709eb",
+  "source_commit": "0d8b99cda3915d514d4e663a168c8eb62baa61fc",
   "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
 }
