@@ -1,0 +1,81 @@
+# Area-export configuration for the human-scale library behind deep-hole
+# rigidity of the Clebsch hexagon code.
+#
+# The exporter derives the module closure, terminal list, and observed axioms
+# from the trust registry and the generated fact of the declared gate.  Only the
+# destination file names and the release prose live here.
+#
+# The exhaustive order-eleven point-orbit and group-action families are not part
+# of this boundary.  They belong to the separately pinned
+# finitegeom-clebsch-q11-certificates package, which depends on this library in
+# one direction only.
+
+schema_version = 1
+area = "clebsch_rigidity_human"
+gate = "RelativeConicArcs.Gates.ClebschRigidityTrust"
+trust_statement = "trust/CLEBSCH_RIGIDITY_HUMAN.md"
+axiom_audit = "trust/ClebschRigidityHumanAxiomAudit.lean"
+
+statement_title = "Deep-hole rigidity of the Clebsch hexagon code: human library boundary"
+
+overview = """
+This boundary records the human-scale library behind the rigidity and decoding
+results for the Clebsch hexagon code: the coding dictionary, the decoding
+synthesis, the rigidity spine and its bridge to the code, the chord defect, the
+order-nine Sylvester configuration, the small-order geometric bridge, and the
+golden orientation spine of the support cubic.
+
+The exhaustive order-eleven point-orbit rows and the group-action payload are
+absent from this repository.  They are distributed by the separately pinned
+finitegeom-clebsch-q11-certificates package, which depends on this library in
+one direction and supplies the enumerated orbit statements.
+"""
+
+correspondence = """
+The closure develops the correspondence between the Clebsch hexagon code and the
+geometry of its deep-hole syndrome locus, and proves that the geometry
+determines the code: the coding dictionary translating between codewords and
+point configurations, the synthesis reconstructing a decoder from the syndrome
+stratification, the rigidity spine and the bridge carrying it to the code, and
+the chord-defect estimate the rigidity argument consumes.
+
+Two statements about six-arcs attaining the ten-point triple-concurrence bound
+are recorded in `RelativeConicArcs.Q11DyeAxioms`, specialized to order eleven.
+They appear as the ten-point count of Section 2.2, page 275 and Theorem 1(ii),
+page 275 of R. H. Dye, *Hexagons, conics, `A₅` and `PSL₂(K)`*, Journal of the
+London Mathematical Society (2) 44 (1991), 270--286,
+doi:10.1112/jlms/s2-44.2.270, which is cited as their antecedent.  Both are
+theorems of this library rather than assumptions: they are proved from the
+general-field six-arc concurrence development at their own quantifier range and
+specialized here.
+
+The order-eleven orbit enumeration itself is not proved here.  The statements
+that quantify over the enumerated orbits are supplied by the external
+certificate package named above.
+"""
+
+boundary = """
+Every terminal is a kernel proof.  The closure contains no user axiom, unsafe
+declaration, admitted proof, native evaluation, or imported external certificate
+data, and the trust registry permits no axiom in this area.  In particular the
+two statements attributed to the literature above are proved rather than
+assumed, so no result in this boundary rests on them as trusted input.
+"""
+
+axiom_audit_title = "Axiom audit for the human Clebsch rigidity boundary"
+
+axiom_audit_description = """
+This audit prints the axioms of the terminals exported with the human-scale
+rigidity boundary for the Clebsch hexagon code: the coding dictionary, the
+decoding synthesis, the rigidity spine and its bridge to the code, the chord
+defect, the order-nine Sylvester configuration, and the specialized six-arc
+statements attributed to the literature.
+"""
+
+readme_anchor = "  axiom audit."
+
+readme_bullet = """- `trust/manifests/clebsch_rigidity_human.json` content-addresses the human
+  boundary for deep-hole rigidity of the Clebsch hexagon code, including the
+  coding dictionary, the decoding synthesis, the rigidity spine and its bridge
+  to the code, and the chord defect.  The exhaustive order-eleven orbit families
+  are not part of it."""
