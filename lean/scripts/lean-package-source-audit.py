@@ -295,7 +295,15 @@ def audit(package: Path, monorepo: Path, base: Path, authority: str,
     for entry in manifest["sources"]:
         path = entry["path"]
         sealed = entry["sha256"]
-        on_disk = hashlib.sha256((package / path).read_bytes()).hexdigest()
+        # A seal outlives the file it describes: a package part way through a cut has
+        # deleted sources its manifest still lists, and that is exactly when this audit
+        # is worth running.  Reporting the gap belongs to the audit; crashing on it
+        # withholds every other finding in the same run.
+        source = package / path
+        on_disk = hashlib.sha256(source.read_bytes()).hexdigest() if source.is_file() else None
+        if on_disk is None:
+            detail["SEALED-BUT-ABSENT"].append(path)
+            continue
         in_authority = blob_digest(monorepo, authority, f"{source_prefix}{path}")
         in_head = blob_digest(monorepo, "HEAD", f"{source_prefix}{path}")
         in_base = blob_digest(base, base_commit, path)

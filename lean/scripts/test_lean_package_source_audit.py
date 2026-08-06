@@ -113,8 +113,52 @@ class SupportSealTests(unittest.TestCase):
             self.assertIn("absent from the package", drifted[0])
 
 
+class SealedSourceTests(unittest.TestCase):
+    """The forward pass over the manifest's own `sources` list."""
+
+    def test_a_sealed_source_the_package_deleted_is_reported_not_fatal(self) -> None:
+        """A package part way through a cut is exactly when this audit is run.
+
+        Its manifest still lists sources the cut removed, and reading them to hash
+        them would end the run before any other finding is printed.
+        """
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "package"
+            monorepo, head = ReverseDirectionTests().authority(
+                str(Path(directory) / "monorepo"), {"lean/Example/Kept.lean": "kept"}
+            )
+            root.mkdir()
+            (root / "Example").mkdir()
+            (root / "Example/Kept.lean").write_text("kept", encoding="utf-8")
+            manifest = {
+                "dependency": {"commit": "0" * 40},
+                "module_count": 2,
+                "source_commit": "1" * 40,
+                "sources": [
+                    {
+                        "path": "Example/Kept.lean",
+                        "bytes": 4,
+                        "sha256": hashlib.sha256(b"kept").hexdigest(),
+                    },
+                    {
+                        "path": "Example/Deleted.lean",
+                        "bytes": 7,
+                        "sha256": hashlib.sha256(b"deleted").hexdigest(),
+                    },
+                ],
+            }
+            (root / "MANIFEST.json").write_text(json.dumps(manifest), encoding="utf-8")
+            detail, _ = sourceaudit.audit(root, monorepo, monorepo, head, "lean/")
+            self.assertEqual(detail["SEALED-BUT-ABSENT"], ["Example/Deleted.lean"])
+            surviving = [
+                paths for tags, paths in detail.items() if tags.startswith("manifest-ok")
+            ]
+            self.assertEqual(surviving, [["Example/Kept.lean"]])
+
+
 class ReverseDirectionTests(unittest.TestCase):
     def authority(self, directory: str, files: dict[str, str]) -> tuple[Path, str]:
+        Path(directory).mkdir(parents=True, exist_ok=True)
         root = Path(directory)
         subprocess.run(["git", "init", "-q"], cwd=root, check=True)
         for relative, text in files.items():
