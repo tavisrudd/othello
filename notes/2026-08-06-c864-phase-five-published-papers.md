@@ -201,6 +201,55 @@ Repository-wide spine findings went from 115 to 112.
 finitegeom, the certificate package and the paper still carry the old module name and the axiom
 prose. They clear through the export, adopt, re-pin and release chain, which has not run.
 
+## Paper I released, and the portfolio put on one finitegeom revision
+
+The Clebsch rigidity release chain ran to completion. Its clean-source gate passes with the pin
+block naming certificate package `a80e7de6` and finitegeom `575cf3e9`, the aggregate gate
+`RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates`, and both manuscripts rebuilt
+warning-free at twenty-seven and thirteen pages.
+
+Five things had to be repaired for it to pass, none of them anticipated by the plan.
+
+- **The orientation rename had never reached the paper.** Twenty-four terminals in
+  `build_trust_manifest.py` named `RelativeConicArcs.PaperIOrientation*` declarations that no longer
+  exist; the gate audits `SupportOrientation*`, and one changed further,
+  `oddModule_rationalCommutant_eq_adjoin_B` becoming `..._eq_adjoinGoldenOperator`.
+- **The formal-companion pin named a deleted gate.** Its `human` artifact pointed at
+  `RelativeConicArcs.Gates.ClebschRigidityHuman`, removed in phase 1 as export residue. The two
+  entries for finitegeom collapse into one under the role `shared-library`, replacing a role word
+  the shared-Lean contract forbids.
+- **Thirteen of the fourteen scholarly-path checks were vacuous.** `verify_release.py` now checks
+  the dependency-owned sources against a finitegeom checkout supplied as `--finitegeom-root`, and
+  reports them unchecked by name when it is not given, instead of passing over paths the
+  certificate package does not carry.
+- **The tool tests pinned a stale page count.** They expected twenty-six pages while the manuscript
+  has been twenty-seven since the acknowledgement revision, so the gate could not have passed.
+- **The gate's longer name overflowed its line.** The digest sentence sets the path as a display,
+  and the validator accepts a centred, sized label.
+
+**One revision for the portfolio.** Requiring each pin to equal its own area's export commit forced
+the papers onto as many finitegeom revisions as there are areas, because areas are exported at
+different times and an idempotent re-export moves nothing. The currency check now admits a pin ahead
+of the newest export exactly when it carries that export unchanged: the export must be an ancestor
+of the pinned commit and the manifest must have the same bytes at both. A pin behind the newest
+export, or one whose manifest content differs, still fails. Clebsch rigidity, Clebsch passages and
+the arcs paper all name finitegeom `575cf3e9`; the arcs paper also cited the deleted
+`ArcsCompleteOutsideConicHuman` gate.
+
+All twelve areas re-export to an empty delta, `paper-facts.py check` names no in-scope paper, the
+certificate boundary and external-fact checks are green, and `export-paper-repos.py plan` reports
+no finding for any of the three papers.
+
+## The `_human` suffix is gone
+
+`clebsch_rigidity` and `arcs_complete_outside_conic` are the area names, with their trust statements,
+axiom audits, manifests, source manifests and release prose renamed to match, in the monorepo and in
+finitegeom. The exporter does not model a rename, so finitegeom's superseded files, its lakefile
+root, its target-manifest entry, its portfolio rows and two duplicated README bullets were removed by
+hand; the stated library size went to 319 modules, which checkpoint 2's base-prose rule caught.
+finitegeom's README command list and provenance note had also named two gates the repository no
+longer has.
+
 ## Open decisions, in the order they block work
 
 1. ~~What the order-eleven package's external fact should assert.~~ Settled above.
