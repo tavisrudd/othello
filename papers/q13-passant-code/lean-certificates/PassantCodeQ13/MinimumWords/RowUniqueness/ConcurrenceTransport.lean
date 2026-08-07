@@ -70,7 +70,8 @@ theorem indexedTripleConcurrence_eq_semantic_direct
   have source_injective : Set.InjOn decodedSupport sourceSupports :=
     decodedSupport_injOn.mono (Finset.filter_subset _ _)
   have minimumSupports_nodup : minimumSupportCodes.Nodup := by
-    native_decide
+    rw [minimumSupportCodes_eq]
+    decide +kernel
   unfold indexedTripleConcurrence tripleConcurrenceIn
   simp only [internalPointIndex_internalPointAt]
   change minimumSupportCodes.countP

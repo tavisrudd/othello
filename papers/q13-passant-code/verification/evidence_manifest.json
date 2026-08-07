@@ -140,8 +140,8 @@
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/StructuralUpgrade.lean",
-      "bytes": 8164,
-      "sha256": "4c0dccfe670d4b22ef440426cce3209811dc63c223162c18d98f22ff9519bed4",
+      "bytes": 10332,
+      "sha256": "91150884f49d3cfa1ec8eecca9dd11f2533fb125fd9bf718e031696bfd3d2fa4",
       "role": "paper-owned pair-only, toric, hidden-cubic, and 183-point plane finite gates"
     },
     {

@@ -14,6 +14,29 @@ Paper IV closure after C860's stages is a defect to report to C860. See
 
 ## Resume here (2026-08-06)
 
+The equivariance transporter theorem and the structural upgrade's three support-family leaves are
+closed, which completes stage 2 item 4 and stage 4 item 7. The package now carries a genuine group
+action on the internal points, an invariance theorem for the decoded minimum-word family proved from
+the orbit description rather than by enumeration, and a kernel-checked transporter theorem consuming
+the generated tables. Unary constancy and concurrence-eight row recovery are decided at the first
+internal point, and the fused pair-color split at the six representative pairs, each over the
+displayed encoded supports. Only the base row of the generated pair table is read, because all six
+representatives share their first point, so the 6006-entry table needs no index split and the
+measurement stage 2 asked for is moot. Two further native decisions fell to the same argument:
+decoding injectivity is now proved from the bit characterization plus a bound, and the encoded
+family's duplicate-freeness is decided over the displayed supports. Clean terminals: 67 of 94. The
+evidence verifier passes. Report:
+`notes/2026-08-06-c834-equivariance-transporter-and-support-family-leaves.md`.
+
+Two measurements to carry forward. A finite check stated over `minimumSupportCodes` makes the kernel
+expand the four orbits and exceeds the memory guard; the same check over the displayed
+`minimumWordSupports` finishes in seconds. A check stated over `InternalPoint` rather than `Fin 78`
+reintroduces the `internalPointIndex` scan and also exceeds the guard. Both were observed as memory
+kills in this round.
+
+The remaining native decisions are the fourteen weight-ten profile shards, the row-uniqueness
+transport, the automorphism anchors, and the fixed-point exhaustion.
+
 The association algebra is closed. `PassantCodeQ13.AssociationAlgebra` now holds only the executable
 presentation, and its three former native decisions — the ranks 42, 36, 36, 36 and the two squaring
 statements — are proved in the new `PassantCodeQ13.AssociationAlgebraIdentities` under their original
