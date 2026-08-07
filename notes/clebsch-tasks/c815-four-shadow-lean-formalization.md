@@ -110,9 +110,19 @@ symmetric matrix with zero diagonal and entries squaring to one on four labels
 has a scalar square, so order six is the only order above two at which a
 cut-independent exchange spectrum is realized.
 
-Left in the row: the eigenvalue phrasing `Spec = {1 - αᵢ²/q}`, the existence of
-the two isometries, and the transport of the cut-dependence statement from the
-aligned count of a half to the compression of the cut that half defines.
+The two analytic items are closed over the reals in
+`RelativeConicArcs.BalancedExchangeEigenvalues`: the characteristic polynomial
+of `1 - q⁻¹ • (A * A)` is the product of `X - (1 - αᵢ²/q)` over the eigenvalues
+of the block, and both spectral isometries exist, so the spectral formula, the
+second moment and the order-six spectrum hold with the isometry existentially
+quantified.  Report:
+`notes/2026-08-06-c815-exchange-eigenvalues-and-isometries.md`.
+
+Left in the row: the transport of the cut-dependence statement from the aligned
+count of a half to the exchange operator of the cut that half defines, across
+`Equiv.sumCompl`.  It is mechanical — the fourth trace of a principal block as a
+sum over the half, and a bijection between the four-subsets of the half and
+those of the block's label set — and unstarted.
 
 ## Evidence source
 

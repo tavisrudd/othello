@@ -1451,3 +1451,36 @@ seven, eleven and thirteen are recorded in the committed certificate
 adjacent `.py` with `--check`.
 
 **Status:** open lead, unpromoted. No C-ID allocated.
+
+## 2026-08-06 — the exchange spectrum lies in the unit interval, and the block eigenvalues are bounded by the square root of the order
+
+**Observation.** The cut identity already proved as
+`RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq` is an equality of
+matrices, not only of characteristic polynomials: `1 - q⁻¹ • (A * A)` *is*
+`q⁻¹ • (B * Bᵀ)` for `B` the cross block.  Over the reals with `0 < q` the right
+side is positive semidefinite, so every eigenvalue of `1 - q⁻¹ • (A * A)` lies in
+`[0, 1]` — the upper bound because `A * A` is positive semidefinite as well.
+Combined with the eigenvalue reading proved in
+`RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod`
+this says every eigenvalue `α` of a principal block on a balanced half satisfies
+`α² ≤ q`, and the exchange spectrum of every balanced cut lies in the unit
+interval.
+
+**Why it is worth recording.** The unit-interval bound is the expected shape for
+an operator that compresses a spectral projection, so it is a free consistency
+check on the whole spectral half, and the block bound `α² ≤ q` is an
+interlacing-type statement about conference matrices that the manuscript does
+not use.
+
+**Route if promoted.** Positive semidefiniteness of `B * Bᵀ` is
+`Matrix.posSemidef_self_mul_conjTranspose` over the reals; the nonnegativity of
+the eigenvalues of a positive semidefinite matrix and the identification of the
+roots of the characteristic polynomial with the eigenvalue multiset are both in
+mathlib.  Alternatively the quadratic form applied to an eigenvector of the
+block avoids multisets entirely.
+
+**Not what was sought:** the row's obligation is the spectral formula and the
+moments, both now proved.  This bound is incidental to them and nothing proved
+depends on it.
+
+**Status:** open lead, unpromoted. No C-ID allocated.

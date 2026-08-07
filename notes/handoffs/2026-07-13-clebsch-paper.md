@@ -228,14 +228,25 @@ the product of the three edge signs enters the block identity
 The same fourth-trace count also excludes order four outright, so order six is
 the only order above two at which a cut-independent spectrum is realized; this
 settles, in the cheap direction, the reading question the scope had left for the
-manuscript owner.  The gate audits sixty-seven terminals with no
-compiled-evaluation axiom, and all three paper-local replays and the release
-gate pass.  Still open in the row: the eigenvalue phrasing `{1 - αᵢ²/q}`, the
-existence of the two isometries — the only place needing the inner-product
-library — and carrying the cut-dependence statement across the equivalence that
-turns a balanced half into cut coordinates.  Reports:
-`notes/2026-08-06-c815-exchange-spectrum-lean.md` and
-`notes/2026-08-06-c815-exchange-second-moment-and-small-orders.md`.
+manuscript owner.  The two analytic items are closed as well, over the reals and in a module of
+their own, `RelativeConicArcs.BalancedExchangeEigenvalues`.  The characteristic
+polynomial of `1 - q⁻¹ • (A * A)` is the product of `X - (1 - αᵢ²/q)` over the
+eigenvalues of the block, which is the manuscript's spectral formula; and both
+spectral isometries exist, because a real symmetric involution has an
+orthonormal eigenbasis with eigenvalues `±1` and a vanishing trace — supplied by
+the vanishing diagonal — makes the two eigenspaces equally large, so each is
+indexed by a half of the cut.  The spectral formula, the second moment and the
+order-six spectrum therefore also hold with the isometry existentially
+quantified, resting on no assumed hypothesis.  The gate audits seventy-four
+terminals with no compiled-evaluation axiom, and all three paper-local replays
+and the release gate pass.  What remains in the row is one mechanical transport:
+the cut-dependence statement is proved on the aligned count of a half rather
+than on the exchange operator of the cut that half defines, and carrying it
+across `Equiv.sumCompl` needs the fourth trace and the four-set count of a
+principal block related to the corresponding sums over the half.  Reports:
+`notes/2026-08-06-c815-exchange-spectrum-lean.md`,
+`notes/2026-08-06-c815-exchange-second-moment-and-small-orders.md` and
+`notes/2026-08-06-c815-exchange-eigenvalues-and-isometries.md`.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic
