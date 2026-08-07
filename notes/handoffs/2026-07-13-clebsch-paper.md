@@ -184,10 +184,27 @@ golden-return gate audits forty-nine terminals with no compiled-evaluation
 axiom, and all three paper-local replays pass.  Report:
 `notes/2026-08-06-c815-fourth-trace-and-swap-descent.md`.
 
+The row's conclusion is closed as well, and by a shorter argument than the
+manuscript's.  Once the four-set weight is constant, applying the closed-walk
+count to the whole matrix rather than to a half pins it: the diagonal of
+`C * C = q • 1` gives `q = N - 1`, and comparing the two expressions for the
+fourth trace forces `(N - 3)w = -3` in the manuscript's normalization, so
+`w = 3` needs `N = 2` and `w = -1` needs `N = 6`.  Hence for every order `2d`
+with `4 ≤ d` the fourth trace of the principal block depends on the balanced
+half, which is the theorem's substantive direction.  The switching
+normalization and `R(3,3) = 6` are not used, and the same equation identifies
+the exceptional order rather than only excluding the others: at order six every
+four-set carries weight `-1`, so that matrix has no aligned four-set.  The
+declaration is
+`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`; the
+gate audits fifty-one terminals with no compiled-evaluation axiom.  The prose
+argument and an exact proposed replacement for the manuscript paragraph are in
+`notes/2026-08-06-c815-exchange-rigidity-simplification.md`, queued for C816,
+which owns manuscript promotion.
+
 What remains in the row is every eigenvalue and singular-value statement, and
-the assembly of the exchange-rigidity contradiction, whose inputs — trace
-formula, dichotomy, descent, root switching, and Ramsey — are now all
-formalized.
+with it the passage from the fourth trace of a principal block to the second
+exchange moment.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic

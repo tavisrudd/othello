@@ -87,6 +87,30 @@ of the modular kernel in the conference tangent space is the real fact and is
 stronger than the coincidence it was mistaken for. Neither the coincidence nor
 any sentence resting on it may enter the manuscript.
 
+## Balanced exchange rigidity: a shorter proof
+
+Added 2026-08-06. The closing paragraph of the balanced exchange rigidity proof
+can lose both its switching normalization and its appeal to `R(3,3) = 6`. Once
+the four-set weight is known to be constant, applying the closed-walk count to
+the whole matrix rather than to a half determines that constant: reading the
+diagonal of \(C^2=qI\) gives \(q=2d-1\), and comparing \(2d(2d-1)^2\) with
+\(2d(2d-1)+12\binom{2d}3+8w\binom{2d}4\) leaves \((2d-3)w=-3\). So \(w=3\)
+forces \(2d=2\) and \(w=-1\) forces \(2d=6\), and the same equation says that
+every four-set of the order-six conference matrix carries weight \(-1\) — it
+identifies the exceptional order instead of only excluding the others.
+
+The full argument, the exact replacement text for
+`sections/05-golden-operator.tex`, and the notes on what the edit does to the
+Jolliffe citation and to the verification rows are in
+`notes/2026-08-06-c815-exchange-rigidity-simplification.md`. The whole chain is
+formalized and gated, so this is a proposal about exposition, not about what is
+proved: `RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`
+states the conclusion for the fourth trace of the principal block, and the
+spectral translation to the exchange moment is the one step still outside Lean.
+The inclusion-matrix rank citation likewise becomes attribution rather than a
+dependency, since the swap descent is proved in
+`RelativeConicArcs.SubsetInclusionSums`.
+
 **Lean items are not owned here.** The C815 report also proposes four Lean
 targets supporting these edits — the complementation antisymmetry over an
 arbitrary commutative ring, the gauge-coordinate triangle derivative and
@@ -120,3 +144,6 @@ The paper's central claim is stronger and simpler: the Clebsch cubic comparison 
 - Discovery context for the characteristic-five result, and the recorded
   negative on any connection to the exceptional root-system code ladder:
   `notes/2026-08-06-c815-characteristic-five-degeneracy.md`.
+- Shorter balanced exchange rigidity proof with its exact manuscript
+  replacement text:
+  `notes/2026-08-06-c815-exchange-rigidity-simplification.md`.
