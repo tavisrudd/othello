@@ -26,16 +26,28 @@ relation; the elliptic invariant is \(\rho = 4B^2/(\Delta\Delta)\), the missing 
 Report and evidence bundle: `notes/2026-08-07-c834-row-uniqueness-structural-proof.md`,
 `notes/2026-08-07-c834-admissible-quadruple-gram.py`, `.json`.
 
-**No Lean file changed in that round.** The implementation that consumes it is stage 5 item 10's
-replacement and is scoped there; it replaces the fifteen-module passant-clique layer under
-`PassantCodeQ13/MinimumWords/RowUniqueness/` by three pieces: the invariant criterion reduced to
-three representative joined pairs through the stage 2 pair transporter (at most 126 triples, each a
-lookup in the displayed supports); the quadruple exhaustion, a decidable statement over `ZMod 13`
-with no geometric data; and the arc statement, structural for the 273 conic supports and one orbit
-representative for the 91 octahedral ones. It needs one new symbolic input, invariance of \(\pi\)
-under the symmetric-square action, by the same degree-zero bi-homogeneity argument that
-`SymmetricSquareInvariance` already uses for \(\rho\). Replacing a green, kernel-closed layer is an
-architecture change and awaits an explicit go-ahead.
+The first piece of the replacement is landed and green:
+`PassantCodeQ13.MinimumWords.RowUniqueness.QuadrupleGram` carries the finite core, the exhaustion
+over the six normalized traces of each of a quadruple's six pairs. It is self-contained residue
+arithmetic modulo thirteen with no geometric data, is discharged by `decide +kernel` in six
+declarations, and builds in **under three seconds at a peak of 0.54 GB** — against about a minute
+each at 3.6 GB for the seven residue shards it is meant to replace. Nothing imports it yet, and both
+package gates remain trace-current.
+
+Two design corrections from that round. Only the multiset of \(\rho\) values is needed per triple,
+not \(\pi\): the weaker condition still forces the quadruple theorem, so \(\pi\) never enters the
+formal development and no new invariance lemma is required. And the remaining piece must be
+sequenced behind the equivariance transport, because without it the criterion — an admissible
+non-collinear triple has \(\rho\) profile \((10,10,10)\) or \((10,12,12)\) — has to be checked over
+all 11830 joined triples, which costs more kernel work than the clique search it would replace. With
+transitivity on ordered joined pairs it collapses to three representative pairs and at most 126
+triples. The bitangent-conic witness formula proved in the report closes four of the eight excluded
+classes without touching the displayed supports, but two classes lie in no conic support at all, so
+it does not close the criterion on its own.
+
+Remaining for stage 5 item 10: the equivariance transport, then the criterion module, then the
+semantic bridge in `RowUniqueness/Transport.lean` from the seven-set hypothesis through
+`QuadrupleGram`, then retirement of `IndexCertificate` and the seven residue modules.
 
 ## Superseded resume note (2026-08-06)
 
