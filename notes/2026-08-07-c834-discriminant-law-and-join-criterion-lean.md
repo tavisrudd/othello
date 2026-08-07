@@ -4,12 +4,12 @@
 
 ## What landed
 
-Two new modules in the paper package under `papers/q13-passant-code/lean-certificates`, both pure
-coordinate algebra over `ZMod 13`, neither running a search over points, lines, or supports. They
-supply the first of the two geometry lemmas that
+Three new modules in the paper package under `papers/q13-passant-code/lean-certificates`, all
+arithmetic over `ZMod 13` and its coordinate triples, none running a search over points, lines, or
+supports. They supply the first of the two geometry lemmas that
 `notes/2026-08-07-c834-row-uniqueness-structural-proof.md` left for the row-uniqueness replacement,
-together with the two further algebraic inputs the semantic bridge to
-`PassantCodeQ13.MinimumWords.RowUniqueness.QuadrupleGram` needs.
+and all but one hypothesis of the quadruple theorem in
+`PassantCodeQ13.MinimumWords.RowUniqueness.QuadrupleGram`.
 
 ### `PassantCodeQ13/MinimumWords/RowUniqueness/PolarGram.lean`
 
@@ -63,11 +63,43 @@ to be a nonzero nonsquare then leaves those three values. This is the associatio
 passant-join row proved rather than tabulated, and it excludes the parameter value `4` for a joined
 pair — the value that says the join is tangent to the conic.
 
+### `PassantCodeQ13/MinimumWords/RowUniqueness/NormalizedTrace.lean`
+
+`QuadrupleGram` quantifies over natural numbers below thirteen combined by explicit modular
+operations, and knows nothing of the plane. This module is the dictionary between it and the
+coordinate statements above.
+
+A normalized lift of an internal point is a coordinate representative whose conic value is the fixed
+nonsquare `11`; `exists_normalizedLift` produces one for every internal point, since rescaling
+multiplies the conic value by a square and the nonsquares form one coset of the squares. Under the
+identification of a point off the conic with a trace-zero matrix, the conic value is the negated
+determinant, so normalized lifts are the matrices of determinant `2` and the normalized trace of a
+pair is `polarValue / 2`.
+
+| declaration | statement |
+|---|---|
+| `polarInvariant_eq_normalizedTrace_sq` | the elliptic parameter of two lifts is the square of their trace |
+| `normalizedPolarGram_eq_trace_expression` | `D = 4 - Σ g² - g₁₂g₁₃g₂₃` for three lifts |
+| `cast_add13`, `cast_mul13`, `cast_sub13`, `cast_neg13`, `cast_tripleGram`, `cast_gramDet4` | each modular residue operation casts to its field operation |
+| `tripleGram_eq_val_normalizedPolarGram` | the residue Gram of a triple of lifts is the residue of `normalizedPolarGram` |
+| `gramDet4_eq_zero` | the residue Gram determinant of a quadruple of lifts vanishes |
+| `tripleGram_eq_zero_iff` | it vanishes for a triple exactly when the three lifts are dependent |
+| `isNonsquare_tripleGram` | **the discriminant law in residues:** otherwise it is a nonsquare |
+| `val_normalizedTrace_mem_joinTraces` | the trace of a passant-joined pair lies in `joinTraces` |
+
+The quadruple statement goes through a general symmetric four-by-four Gram determinant added to
+`PolarGram`, presented by its ten distinct entries, together with its scaling law
+`symmetricGramDeterminantFour_smul`. The trace matrix is `-7` times the matrix of polar values —
+the diagonal `2` is `-7` times the common `polarValue u u = 9` — so the vanishing of the polar Gram
+determinant transports to it with no reduction of numerals modulo thirteen. Trying to prove that
+step by `ring` directly fails, because `ring` does not know the characteristic; factoring the
+scaling out is what avoids the problem.
+
 ## Validation
 
-Both modules elaborate without errors or warnings under the pinned toolchain, and every terminal
-depends only on `propext`, `Classical.choice` and `Quot.sound`. No terminal carries a
-compiled-evaluation axiom; `native_decide` occurs in neither module.
+All three modules elaborate without errors or warnings under the pinned toolchain, and every
+terminal depends only on `propext`, `Classical.choice` and `Quot.sound`. No terminal carries a
+compiled-evaluation axiom; `native_decide` occurs in none of them.
 
 Replay from the repository root:
 
@@ -76,21 +108,23 @@ lean/scripts/guarded-lean --root "$PWD/papers/q13-passant-code/lean-certificates
   PassantCodeQ13/MinimumWords/RowUniqueness/PolarGram.lean
 lean/scripts/guarded-lean --root "$PWD/papers/q13-passant-code/lean-certificates" \
   PassantCodeQ13/MinimumWords/RowUniqueness/PassantJoinInvariant.lean
+lean/scripts/guarded-lean --root "$PWD/papers/q13-passant-code/lean-certificates" \
+  PassantCodeQ13/MinimumWords/RowUniqueness/NormalizedTrace.lean
 lean/scripts/lean-build-queue.py build \
-  PassantCodeQ13.MinimumWords.RowUniqueness.PassantJoinInvariant \
+  PassantCodeQ13.MinimumWords.RowUniqueness.NormalizedTrace \
   --lean-root "$PWD/papers/q13-passant-code/lean-certificates" --cores 20-23
 ```
 
 Measured: `PolarGram` elaborates in about four seconds and builds in eleven at a peak of 1.8 GB;
 `PassantJoinInvariant` elaborates in about four seconds against built dependencies and builds in
-twenty-two at the same peak. The finite
-content is five exhaustions over the elements of `ZMod 13` and over ordered pairs of them, all
+twenty-two at the same peak; `NormalizedTrace` elaborates in ten seconds and builds in four. Every
+finite check is an exhaustion over the elements of `ZMod 13` or over ordered pairs of them,
 discharged by `decide +kernel`; the largest is the two-variable case analysis that pins the three
 parameter values.
 
-Neither module is imported by a package gate yet, so the tracked axiom audit and its terminal count
-are unchanged. They enter the gate with the semantic bridge that consumes them, which is where their
-terminals become paper-facing.
+None of the three is imported by a package gate yet, so the tracked axiom audit and its terminal
+count are unchanged. They enter the gate with the semantic bridge that consumes them, which is where
+their terminals become paper-facing.
 
 One elaboration note for the next round: a `∀` over three elements of `ZMod 13` followed by six
 hypotheses does not get a `Decidable` instance synthesized, while two elements followed by four
@@ -103,13 +137,13 @@ limit.
    nonsquare, the twelve points of `C - ν L^2` off the chord are internal and form the support of a
    weight-twelve word. This is the remaining geometry lemma, and unlike the two above it touches the
    minimum-word family.
-2. **The semantic bridge.** From a quadruple of internal points to the six normalized traces
-   `QuadrupleGram` quantifies over. The pieces are: existence of a lift with a fixed discriminant for
-   each internal point, which is one exhaustion over the six nonsquares; the identification of
-   `normalizedPolarGram` with `QuadrupleGram.tripleGram` and of the four-point relation with
-   `QuadrupleGram.gramDet4`, both of which now have their coordinate side proved; a dictionary
-   between the module's `Nat` residues and `ZMod 13`; and `polarInvariant_of_hasPassantJoin` to place
-   each trace in `joinTraces`.
+2. **The rest of the semantic bridge.** `NormalizedTrace` supplies every hypothesis of
+   `admissible_trace_quadruple_has_vanishing_triple_grams` except the one that says no bitangent
+   conic through the triple is a minimum-word support, which is what the bitangent support lemma
+   will give. What is then left is the assembly in `RowUniqueness/Transport.lean`: from a seven-set
+   of pairwise-joined internal points with zero triple concurrence, choose normalized lifts, apply
+   the quadruple theorem to every four-subset, conclude that all of them are collinear, and identify
+   the resulting line as the passant carrying the seven points.
 3. **Retirement** of `IndexCertificate` and the seven residue modules once
    `RowUniqueness/Transport.lean` reaches `admissible_seven_set_is_geometric_row` through the new
    route.

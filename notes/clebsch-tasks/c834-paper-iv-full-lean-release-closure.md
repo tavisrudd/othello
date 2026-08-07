@@ -67,9 +67,24 @@ compiled-evaluation axiom at any terminal, and neither is on a gate yet: they en
 that consumes them. Report:
 `notes/2026-08-07-c834-discriminant-law-and-join-criterion-lean.md`.
 
-What is left of the item is the bitangent support lemma, the semantic bridge — normalized lifts, the
-`Nat`-to-`ZMod 13` residue dictionary, and the identification of `normalizedPolarGram` with
-`QuadrupleGram.tripleGram` — and the retirement.
+The residue dictionary is closed too.
+`PassantCodeQ13.MinimumWords.RowUniqueness.NormalizedTrace` produces a normalized lift for every
+internal point — the representative whose conic value is the fixed nonsquare `11`, so the
+corresponding trace-zero matrix has determinant two — and carries every coordinate statement into
+the natural-number residue arithmetic `QuadrupleGram` quantifies over: each modular operation casts
+to its field operation, the residue Gram of a triple of lifts is the residue of
+`normalizedPolarGram`, the residue Gram determinant of a quadruple vanishes, the discriminant law
+reads as "zero exactly on collinear triples and a nonsquare otherwise", and the trace of a
+passant-joined pair lies in `joinTraces`. The quadruple vanishing goes through a general symmetric
+four-by-four Gram determinant and its scaling law, added to `PolarGram`, because the trace matrix is
+`-7` times the matrix of polar values and `ring` cannot reduce numerals modulo thirteen.
+
+`NormalizedTrace` therefore supplies every hypothesis of
+`admissible_trace_quadruple_has_vanishing_triple_grams` except the absence of a bitangent witness.
+What is left of the item is the bitangent support lemma, which supplies that hypothesis; the
+assembly in `RowUniqueness/Transport.lean` — choose lifts for a seven-set, apply the quadruple
+theorem to every four-subset, and identify the common line as the passant; and the retirement of
+`IndexCertificate` and the seven residue modules.
 
 The octahedral family is still needed for the converse half, that a passant row is admissible, which
 is the statement that no minimum support meets a passant in more than two points. That is structural
