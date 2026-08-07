@@ -246,6 +246,13 @@ section Real
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
+/-- Over the reals a symmetric matrix is a Hermitian one. -/
+private theorem isHermitian_of_transpose {ι : Type*} {M : Matrix ι ι ℝ} (hM : Mᵀ = M) :
+    M.IsHermitian := by
+  show Mᴴ = M
+  ext i j
+  simpa using congrFun (congrFun hM i) j
+
 /-- The second exchange moment of the cut at a half, read on the half itself.
 For a real symmetric matrix `C` with zero diagonal and off-diagonal entries
 squaring to one, whose square is `q • 1`, and a subset `Y` with
@@ -288,6 +295,50 @@ theorem exists_isometry_trace_pow_two_exchangeCompression_half {C : Matrix n n �
   simp only [cutMatrix] at hCC' ⊢
   rw [trace_pow_two_exchangeCompression_cut hAt hEt hCC' hs hs0 hU hUU hdA hsymA hsqA,
     Fintype.card_coe, alignedFourSetCount_principalBlock C hsym Y]
+
+/-- The exchange spectrum of the cut at a half, read in the eigenvalues of the
+principal block on that half.  For a real symmetric matrix `C` with zero
+diagonal whose square is `q • 1`, and a subset `Y` with
+`Fintype.card n = 2 * Y.card`, an isometry onto the fixed space of the
+normalization exists and the exchange operator it defines has characteristic
+polynomial `∏ (X - (1 - αᵢ²/q))` over the eigenvalues `αᵢ` of the submatrix of
+`C` on `Y`. -/
+theorem exists_isometry_charpoly_exchangeCompression_half {C : Matrix n n ℝ}
+    (hdiag : ∀ i, C i i = 0) (hsym : ∀ i j, C j i = C i j) {q s : ℝ} (hCC : C * C = q • 1)
+    (hs : s * s = q) (hs0 : s ≠ 0) (Y : Finset n) (hcard : Fintype.card n = 2 * Y.card)
+    (hA : (principalBlock C Y).IsHermitian) :
+    ∃ U : Matrix ({x // x ∈ Y} ⊕ {x // x ∉ Y}) {x // x ∈ Y} ℝ,
+      Uᵀ * U = 1 ∧ U * Uᵀ = fixedProjection (s⁻¹ • cutMatrix C Y)
+        ∧ (exchangeCompression (cutInvolution _ _ ℝ) (s⁻¹ • cutMatrix C Y) U).charpoly
+          = ∏ i, (Polynomial.X - Polynomial.C (1 - q⁻¹ * hA.eigenvalues i ^ 2)) :=
+  BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut hA
+    (isHermitian_of_transpose (complementBlock_transpose C hsym Y))
+    (cutMatrix_mul_self C hsym Y hCC) hs hs0 (fun i => hdiag (i : n)) (fun i => hdiag (i : n))
+    (by rw [Fintype.card_coe, card_compl_of_card_eq_two_mul hcard])
+
+/-- At order six the exchange spectrum does not depend on the half: for every
+three-element subset of a six-element label set the exchange operator of the
+resulting cut has characteristic polynomial `(X - 1/5)(X - 4/5)²`.  This is the
+one order above two at which cut-independence survives. -/
+theorem exists_isometry_charpoly_exchangeCompression_half_card_three {C : Matrix n n ℝ}
+    (hdiag : ∀ i, C i i = 0) (hsym : ∀ i j, C j i = C i j)
+    (hsq : ∀ i j, i ≠ j → C i j * C i j = 1) {s : ℝ} (hCC : C * C = (5 : ℝ) • 1)
+    (hs : s * s = (5 : ℝ)) (hs0 : s ≠ 0) (Y : Finset n) (hY : Y.card = 3)
+    (hcard : Fintype.card n = 6) :
+    ∃ U : Matrix ({x // x ∈ Y} ⊕ {x // x ∉ Y}) {x // x ∈ Y} ℝ,
+      Uᵀ * U = 1 ∧ U * Uᵀ = fixedProjection (s⁻¹ • cutMatrix C Y)
+        ∧ (exchangeCompression (cutInvolution _ _ ℝ) (s⁻¹ • cutMatrix C Y) U).charpoly
+          = (Polynomial.X - Polynomial.C ((5 : ℝ)⁻¹))
+            * (Polynomial.X - Polynomial.C (4 * (5 : ℝ)⁻¹)) ^ 2 := by
+  have hbal : Fintype.card n = 2 * Y.card := by rw [hcard, hY]
+  refine BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three
+    (isHermitian_of_transpose (principalBlock_transpose C hsym Y))
+    (isHermitian_of_transpose (complementBlock_transpose C hsym Y))
+    (cutMatrix_mul_self C hsym Y hCC) hs hs0 (fun i => hdiag (i : n)) (fun i => hdiag (i : n))
+    (fun i j => hsym (i : n) (j : n))
+    (fun i j hij => hsq (i : n) (j : n) (Subtype.coe_injective.ne hij)) ?_ ?_
+  · rw [Fintype.card_coe, hY]
+  · rw [card_compl_of_card_eq_two_mul hbal, hY]
 
 /-- The second exchange moment depends on the half.  For a real symmetric matrix
 with zero diagonal and off-diagonal entries squaring to one on `2d` labels with

@@ -39,10 +39,10 @@
       "sha256": "e706956f6fe119f5183cf8f301ba81bcfebc8cebe9448756f60eb6ce12eb50fb"
     },
     {
-      "bytes": 16810,
+      "bytes": 20106,
       "module": "RelativeConicArcs.BalancedExchangeHalfCut",
       "path": "RelativeConicArcs/BalancedExchangeHalfCut.lean",
-      "sha256": "b3c92d3b70f809cd331e124b3a6f73894b16a6504cfdc40003ad399166516478"
+      "sha256": "ebf26a108827caaa57889f8fc3517482f6eee2c774fa00cf8043100510152d88"
     },
     {
       "bytes": 10026,
@@ -147,10 +147,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 16666,
+      "bytes": 17185,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "03104698a0a804f81994de449d0f3abdd6c225dcd759810b50042e3dda947269"
+      "sha256": "02432f539bb4ed690a16b157a1fb6b0a75bc830c24485868d192c19a4bcbc24c"
     },
     {
       "bytes": 5731,

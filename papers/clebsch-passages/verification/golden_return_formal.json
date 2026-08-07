@@ -80,16 +80,18 @@
     "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map",
     "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock",
     "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
     "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq"
   ],
   "axiom_report_provenance": {
-    "build_run_id": "run-20260807-052451-a5a8c553",
+    "build_run_id": "run-20260807-053211-302354fd",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt",
-    "gate_stdout_sha256": "6b0512d23735abcf366cd9027bdd1c26287bd4928a71df82b10a1677366fd755",
+    "gate_stdout_sha256": "f1101a1d6afc8fdba84e2335bc37ddb1eb5f6cb51303ce98bf8ea7260c95eea9",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
   },
-  "axiom_report_sha256": "0afa9b34ca6dcb477b64ad21c994ac5e9fbe7b1ad6f205ed863e895a1e428e8b",
+  "axiom_report_sha256": "831c07adbaa55d1bcb1ffd67996e7727e63cabef73f4b5d8bc3d46dc2fd5454f",
   "claim_map": {
     "OPER-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -182,9 +184,11 @@
         "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map",
         "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock",
         "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+        "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half",
+        "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
         "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq"
       ],
-      "excluded": "The compression statements are stated relative to a supplied isometry onto each spectral space, and over the real numbers both isometries are proved to exist, so nothing in the row rests on an assumed hypothesis.  What is checked: the cross block of a cut of a matrix squaring to a scalar satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth walk sum over any set of labels is |Y|(|Y|-1) + 12·C(|Y|,3) plus the closed four-walk weights of its four-element subsets, each of those weights is 24 or -8 (eight times the Hamilton-cycle weight 3 or -1), equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force the weight constant on four-sets, for a symmetric conference matrix of order 2d with 4 ≤ d the fourth walk sum over a balanced half is not independent of the half, the exchange operator of a balanced cut has the characteristic polynomial and every power trace of 1 - q⁻¹ A², its first two moments are d²/q and (d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q² for c the number of aligned four-sets of the half, that count is not constant over balanced halves once 4 ≤ d, for a half of at most three labels the characteristic polynomial is independent of the half and equals (X - 1/5)(X - 4/5)² at order six, no symmetric matrix with zero diagonal and entries squaring to one on four labels has a scalar square, over the reals the characteristic polynomial of 1 - q⁻¹ A² is the product of X - (1 - αᵢ²/q) over the eigenvalues αᵢ of the principal block, and the cut coordinates of a subset Y of a single label set are the relabelling of the matrix along Equiv.sumCompl, under which the fourth trace of the principal block is the fourfold sum over Y and its aligned four-sets are the aligned four-subsets of Y, so that for a real symmetric matrix with zero diagonal and entries squaring to one on 2d labels with 4 ≤ d whose square is q • 1 no real number is the second exchange moment of every balanced half."
+      "excluded": "The compression statements are stated relative to a supplied isometry onto each spectral space, and over the real numbers both isometries are proved to exist, so nothing in the row rests on an assumed hypothesis.  What is checked: the cross block of a cut of a matrix squaring to a scalar satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth walk sum over any set of labels is |Y|(|Y|-1) + 12·C(|Y|,3) plus the closed four-walk weights of its four-element subsets, each of those weights is 24 or -8 (eight times the Hamilton-cycle weight 3 or -1), equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force the weight constant on four-sets, for a symmetric conference matrix of order 2d with 4 ≤ d the fourth walk sum over a balanced half is not independent of the half, the exchange operator of a balanced cut has the characteristic polynomial and every power trace of 1 - q⁻¹ A², its first two moments are d²/q and (d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q² for c the number of aligned four-sets of the half, that count is not constant over balanced halves once 4 ≤ d, for a half of at most three labels the characteristic polynomial is independent of the half and equals (X - 1/5)(X - 4/5)² at order six, no symmetric matrix with zero diagonal and entries squaring to one on four labels has a scalar square, over the reals the characteristic polynomial of 1 - q⁻¹ A² is the product of X - (1 - αᵢ²/q) over the eigenvalues αᵢ of the principal block, and the cut coordinates of a subset Y of a single label set are the relabelling of the matrix along Equiv.sumCompl, under which the fourth trace of the principal block is the fourfold sum over Y and its aligned four-sets are the aligned four-subsets of Y, so that for a real symmetric matrix with zero diagonal and entries squaring to one on 2d labels with 4 ≤ d whose square is q • 1 no real number is the second exchange moment of every balanced half.  The same identification gives the exchange spectrum at a half as the product of X - (1 - αᵢ²/q) over the eigenvalues of the submatrix on that half, and at order six the characteristic polynomial (X - 1/5)(X - 4/5)² for every three-element subset."
     },
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",
@@ -200,10 +204,10 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-golden-return-formal-v1",
-  "source_closure_sha256": "96a22af4b1a12a1e62c08913024b75d38d2c0d827f00962b4713c14e1dff8a4f",
+  "source_closure_sha256": "030db3fe46dd0eb2b2cfbfcbe441357a8ee8c9b1580484b4eb0ae71c76cb1b66",
   "source_sha256": {
     "RelativeConicArcs/BalancedExchangeEigenvalues.lean": "e706956f6fe119f5183cf8f301ba81bcfebc8cebe9448756f60eb6ce12eb50fb",
-    "RelativeConicArcs/BalancedExchangeHalfCut.lean": "b3c92d3b70f809cd331e124b3a6f73894b16a6504cfdc40003ad399166516478",
+    "RelativeConicArcs/BalancedExchangeHalfCut.lean": "ebf26a108827caaa57889f8fc3517482f6eee2c774fa00cf8043100510152d88",
     "RelativeConicArcs/BalancedExchangeRigidity.lean": "8e6cf0300a51951b683fffc0c897ddcf75936ea615526c6c1c23add055b32269",
     "RelativeConicArcs/BalancedExchangeSpectrum.lean": "3758fc1686e12b2145d950a71ac7130e3fa957088d4427cd448e5e8f96c38abf",
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
@@ -221,7 +225,7 @@
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
     "RelativeConicArcs/ConferenceCutBlocks.lean": "00a67ffe8e9eb00e3dded5153cd91d830fe025ab38b8245469fcc13bed9f7526",
     "RelativeConicArcs/ConferenceCutSpectrum.lean": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "03104698a0a804f81994de449d0f3abdd6c225dcd759810b50042e3dda947269",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "02432f539bb4ed690a16b157a1fb6b0a75bc830c24485868d192c19a4bcbc24c",
     "RelativeConicArcs/GoldenCommutatorDeterminant.lean": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",

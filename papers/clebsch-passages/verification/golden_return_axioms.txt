@@ -78,4 +78,6 @@
 'RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

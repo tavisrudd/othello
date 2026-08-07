@@ -142,7 +142,9 @@ turned into cut coordinates by relabelling along `Equiv.sumCompl`, under which
 the principal block is the submatrix on `Y`, its fourth trace is the fourfold
 sum over `Y`, and its aligned four-sets are the aligned four-subsets of `Y`;
 hence no real number is the second exchange moment of every balanced half of a
-symmetric conference matrix of order `2d` with `4 <= d`.  The Ramsey exclusion
+symmetric conference matrix of order `2d` with `4 <= d`, while at order six the
+polynomial is `(X - 1/5)(X - 4/5)^2` for every three-element subset.
+The Ramsey exclusion
 behind exchange rigidity, the classical inputs to the aligned-design
 faithfulness argument, outer-family coherence, the cross-golden determinant
 comparison, the identification of the six translates with the classical Joubert

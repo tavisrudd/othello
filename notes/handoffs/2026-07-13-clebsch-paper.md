@@ -255,9 +255,13 @@ relabelling along an injection.  The second exchange moment of the cut at a half
 is therefore stated in the aligned count of that half, and for order `2d` with
 `4 ≤ d` no real number is the second moment of every balanced half: the
 dependence on the cut is now a statement about the exchange operator rather than
-about a proxy invariant.  The module is
+about a proxy invariant.  In the same language the exchange spectrum at a half
+is the product of `X - (1 - αᵢ²/q)` over the eigenvalues of the submatrix on
+that half, and at order six it is `(X - 1/5)(X - 4/5)²` for every three-element
+subset, so the exceptional order and the failure above are statements of the
+same shape.  The module is
 `RelativeConicArcs.BalancedExchangeHalfCut`; the golden-return gate audits
-eighty-one terminals with no compiled-evaluation axiom, all three paper-local
+eighty-three terminals with no compiled-evaluation axiom, all three paper-local
 replays and the release gate pass, and the verification README no longer claims
 that no eigenvalue statement is formalized.  Report:
 `notes/2026-08-06-c815-half-cut-transport.md`.

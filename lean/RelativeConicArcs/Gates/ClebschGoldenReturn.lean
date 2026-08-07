@@ -103,7 +103,11 @@ agree.  Consequently the second exchange moment of the cut at a half is
 the displayed expression in the number of aligned four-subsets of that
 half, and for a real symmetric matrix with zero diagonal and entries
 squaring to one on `2d` labels with `4 ≤ d` whose square is `q • 1`, no
-real number is that second moment for every balanced half.
+real number is that second moment for every balanced half.  In the same
+language, the exchange spectrum at a half is `∏ (X - (1 - αᵢ²/q))` over
+the eigenvalues of the submatrix on that half, and at order six it is
+`(X - 1/5)(X - 4/5)²` for every three-element subset, so the exceptional
+order and the failure above are statements of the same kind.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -236,4 +240,6 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map
 #print axioms RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock
 #print axioms RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three
 #print axioms RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq
