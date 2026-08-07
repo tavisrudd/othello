@@ -6,6 +6,10 @@ import RelativeConicArcs.ClebschGoldenDescent
 import RelativeConicArcs.ClebschOperatorShadows
 import RelativeConicArcs.GoldenCommutatorDeterminant
 import RelativeConicArcs.ClebschOuterSegreRelations
+import RelativeConicArcs.ClebschOuterJoubertFrame
+import RelativeConicArcs.ClebschOuterMatchingFrame
+import RelativeConicArcs.SegreIgusaPolar
+import RelativeConicArcs.CrossGoldenDeterminant
 import RelativeConicArcs.ConferenceCutSpectrum
 import RelativeConicArcs.ConferenceCutBlocks
 import RelativeConicArcs.BalancedExchangeRigidity
@@ -27,9 +31,52 @@ bracket matrix is sixteen times the square of the triangle cubic.  Both
 determinant statements are polynomial identities over an arbitrary commutative
 ring.  The six signed translates of the triangle cubic under the reorderings
 fixing the first three labels sum to zero and have cubes summing to zero, so
-they satisfy the two equations of the Segre cubic threefold; the
-identification of that map with the classical Joubert construction, and the
-Segre--Igusa polar map, are not formalized.
+they satisfy the two equations of the Segre cubic threefold.
+
+That map is identified with the coloured-triangle construction.  Renaming the
+six labels along the inverse of each reordering carries the fixed conference
+matrix to a conference matrix of its own, again symmetric with vanishing
+diagonal, unit off-diagonal squares and square `5 • 1`, and the twenty triangle
+products of that matrix, weighted by the sign of the reordering, are the twenty
+coefficients of the corresponding translate; the resulting six sign words are
+displayed, are pairwise distinct, and each obeys the four-point two-graph
+identity.  The same six words are the complementary triangle colourings of the
+six one-factorizations of the complete graph on the six labels: for a triple and
+its complement, the three matchings meeting the triple in an edge also meet the
+complement in an edge, which is a bijection between the two triples, and its
+sign, corrected by the sign of the listing of the triple before its complement,
+is the coefficient.  Every one-factorization gives one of the six words, so
+there are exactly six such colourings; that converse is decided over the
+normalized candidates after the colours are listed by the label they use at a
+fixed root.
+
+The two further constructions on the Segre cubic are also here.  If one
+coordinate of a point of the Segre cubic vanishes then the remaining five
+coordinates have vanishing sum and vanishing cube sum, which is the diagonal
+cubic surface inside the projective three-space cut out by the linear relation.
+The centered squares of a point of the Segre cubic, taken in the
+denominator-free normalization `6 z² - ∑ z²`, sum to zero and satisfy the Igusa
+quartic relation `(∑ V²)² = 4 ∑ V⁴`; this is proved through the characteristic
+polynomial of the six coordinates and Newton's identities in degrees two, three
+and four rather than by a certificate, and it reduces to the power-sum identity
+`48 p₈ = 12 p₄² - 12 p₂² p₄ + p₂⁴ + 32 p₂ p₆`.  Sixteen times the centered
+square of the six outer cubics is the centered family of the six
+commutator-bracket determinants, so the polar map is the centered determinant of
+the manuscript.
+
+Over a commutative ring in which two is invertible and which carries an
+invertible square root `s` of five, the two golden projectors `(1 ± s⁻¹ C)/2` are
+symmetric, sum to the identity and are idempotent, and the commutator of the
+diagonal matrix of the coordinates with the conference matrix is `2 s` times the
+antisymmetric part of the cross-golden block `P₋ Dₓ P₊`.  Taking determinants of
+that order-six identity turns `det = 16 Z²` into `Z² = 500 det (B - Bᵀ)`, and
+since `B - Bᵀ` is skew-symmetric with vanishing diagonal its determinant is the
+square of its Pfaffian, so `Z² = (10 s Pf (B - Bᵀ))²` and over an integral domain
+`Z = ± 10 s Pf (B - Bᵀ)`.  The sign is an orientation of the two spectral spaces:
+replacing `s` by `-s` exchanges the projectors and negates the Pfaffian.  No
+basis is chosen for either spectral space, and the comparison of that Pfaffian
+with the determinant of a three-by-three matrix representing the induced map in
+a chosen pair of orthonormal frames is not formalized.
 The three-vertex principal-block identity gives the formal algebraic core of
 the order-six balanced exchange-spectrum calculation.  For a cut of arbitrary
 size, the cross block of a matrix squaring to a scalar satisfies
@@ -194,6 +241,46 @@ data.  No generated certificate or externally supplied matrix is imported.
 
 #print axioms RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic
 #print axioms RelativeConicArcs.ClebschOuterSegreRelations.sum_outerCubic_cube
+
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerConference_transpose
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerConference_apply_self
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerConference_apply_sq
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerConference_sq
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.tripleLabel_strictMono
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.tripleLabel_injective
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerColouring_sq
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerColouring_eq_smul_triangleSign
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerColouring_injective
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerColouring_four_point
+#print axioms RelativeConicArcs.ClebschOuterJoubertFrame.outerCubic_eq_colouringCubic
+
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.existsUnique_of_isOneFactorization
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.complementLabel_disjoint
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.isOneFactorization_oneFactorization
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.matchingColouring_oneFactorization
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.oneFactorization_injective
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.exists_eq_matchingThrough
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.matchingColouring_comp
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.exists_outerColouring_of_isOneFactorization
+#print axioms RelativeConicArcs.ClebschOuterMatchingFrame.outerCubic_eq_matchingColouringCubic
+
+#print axioms RelativeConicArcs.SegreIgusaPolar.powerSum_eight_of_segre
+#print axioms RelativeConicArcs.SegreIgusaPolar.sum_centeredSquare
+#print axioms RelativeConicArcs.SegreIgusaPolar.igusa_relation_of_segre
+#print axioms RelativeConicArcs.SegreIgusaPolar.sum_erase_eq_zero_of_apply_eq_zero
+#print axioms RelativeConicArcs.SegreIgusaPolar.sum_pow_three_erase_eq_zero_of_apply_eq_zero
+#print axioms RelativeConicArcs.SegreIgusaPolar.igusa_relation_outerCubic
+#print axioms RelativeConicArcs.SegreIgusaPolar.outerCubic_diagonal_section
+#print axioms RelativeConicArcs.SegreIgusaPolar.det_bracket_outerReindex
+#print axioms RelativeConicArcs.SegreIgusaPolar.sixteen_mul_centeredSquare_outerCubic
+
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.goldenProjector_transpose
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.goldenProjector_add_neg
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.goldenProjector_mul_self
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.bracketMatrix_eq_smul_sub_transpose
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.triangleCubic_sq_eq_five_hundred_mul_det
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.triangleCubic_sq_eq_pfaffian_sq
+#print axioms RelativeConicArcs.CrossGoldenDeterminant.triangleCubic_eq_or_eq_neg
 
 #print axioms RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq
 
