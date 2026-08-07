@@ -27,10 +27,10 @@
       "sha256": "8e8d8e91c1cd671fdc93323b0845ff47c9609fe9200cb9e3499abe96d99e0773"
     },
     {
-      "bytes": 13613,
+      "bytes": 15286,
       "module": "RelativeConicArcs.AlignedQueryFaithfulness",
       "path": "RelativeConicArcs/AlignedQueryFaithfulness.lean",
-      "sha256": "ea37695f67e2a8ed0dd21dbf3250677ae8a58a936e4843d2cf5ecb6d2a572457"
+      "sha256": "3ee4df267f30df42ee79d7ad47f794a0280de7dc9dfbd08e70924d5ece56dd63"
     },
     {
       "bytes": 8726,
@@ -69,10 +69,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 8579,
+      "bytes": 8657,
       "module": "RelativeConicArcs.Gates.ClebschPassages",
       "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
-      "sha256": "2a12df4f56ab7df0cc3fd3761eb30c6366db189289c58ee50a865d4d202b46a2"
+      "sha256": "a165ec6158bdbf0b03453d6fef746f7c3d2909ac74f74b8df73b33e3d8e2000f"
     },
     {
       "bytes": 7633,

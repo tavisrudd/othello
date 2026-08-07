@@ -108,6 +108,7 @@ claim.
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq
 #print axioms RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_distinct_alignedAnchor
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq

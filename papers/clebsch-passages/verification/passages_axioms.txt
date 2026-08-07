@@ -47,6 +47,7 @@
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.AlignedTwoGraph.exists_distinct_alignedAnchor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

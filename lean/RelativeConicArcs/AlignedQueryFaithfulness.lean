@@ -20,9 +20,10 @@ points; the anchor itself is the one test meeting `Q` in four.  Any three
 further points lie with `Q` in a seven-point subset, so each such triple
 receives a complement bit, and all these bits agree because every one of the
 seven-point subsets contains the triple from `Q` on which the bit is
-calibrated.  No search over four-sets outside the query family occurs, and the
-anchor is a hypothesis rather than an output: `exists_alignedAnchor` produces
-one from any root and six further points.
+calibrated.  No search over four-sets outside the query family occurs.  The
+anchor is a hypothesis of the sufficiency theorems, and it is never vacuous:
+`exists_distinct_alignedAnchor` produces an aligned four-set of distinct points
+on any point set with at least seven of them.
 
 Nothing here is a finite enumeration.  The finite classifications used are the
 ones already kernel-decided for the normalized seven-point signatures.
@@ -240,6 +241,34 @@ theorem exists_complementBit_of_selectedQuery_eq [Fintype α] [DecidableEq α]
   have heq := complementBit_unique tau sigma q₀ q₁ q₂ epsilon delta hbase hbase'
   rw [heq]
   exact habc'
+
+/-- On at least seven points every two-graph has an aligned four-set of
+pairwise distinct points.  A root together with six further points already
+contains one, by the six-point bound behind the triangle Ramsey equality, so the
+anchor hypothesis of the two sufficiency theorems above is never vacuous. -/
+theorem exists_distinct_alignedAnchor [Fintype α] [DecidableEq α]
+    (hpar : FourSetParity tau) (hcard : 7 ≤ Fintype.card α) :
+    ∃ q₀ q₁ q₂ q₃ : α, DistinctQuadruple q₀ q₁ q₂ q₃ ∧ Aligned tau q₀ q₁ q₂ q₃ := by
+  classical
+  obtain ⟨S, -, hS⟩ :=
+    Finset.exists_superset_card_eq (s := (∅ : Finset α)) (n := 7) (by simp) hcard
+  obtain ⟨r, hr⟩ : ∃ r, r ∈ S := Finset.card_pos.mp (by omega) |>.imp fun _ h => h
+  set T : Finset α := S.erase r with hTdef
+  have hT : T.card = 6 := by rw [hTdef, Finset.card_erase_of_mem hr, hS]
+  have hrT : r ∉ T := fun h => (Finset.mem_erase.mp h).1 rfl
+  let eqv : Fin 6 ≃ {x // x ∈ T} := (Fintype.equivFinOfCardEq (by simpa using hT)).symm
+  let v : Fin 6 → α := fun t => (eqv t : α)
+  have hvT : ∀ t, v t ∈ T := fun t => (eqv t).2
+  have hvinj : Function.Injective v := by
+    intro a b hab
+    exact eqv.injective (Subtype.ext hab)
+  have hrne : ∀ t : Fin 6, r ≠ v t := fun t h => hrT (h ▸ hvT t)
+  obtain ⟨i, j, k, hij, hjk, hanchor⟩ := exists_alignedAnchor tau hpar r v
+  have hik : i < k := hij.trans hjk
+  exact ⟨r, v i, v j, v k,
+    ⟨hrne i, hrne j, hrne k, fun h => hij.ne (hvinj h), fun h => hik.ne (hvinj h),
+      fun h => hjk.ne (hvinj h)⟩,
+    hanchor⟩
 
 /-- Sufficiency of the query family, stated through the family itself.  If the
 two two-graphs agree on which members of `selectedQueryFamily` of the anchor are
