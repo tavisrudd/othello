@@ -160,20 +160,34 @@ accepted the formalization with prose fixes only, all applied.  Reports:
 `notes/2026-08-04-c815-aligned-design-faithfulness.md` and
 `notes/2026-08-04-c815-aligned-faithfulness-review.md`.
 
-Row OPER-3 is covered down to its polynomial core: the cut identity
-`B * Bᵀ = q • 1 - A * A` for a cut of arbitrary size, the trace of the square of
-a zero-diagonal sign matrix, and the four-set Hamilton-cycle dichotomy
-`w ∈ {3, -1}`.  Its order-three block identity and its Ramsey input were
-already proved in earlier work.  Still unformalized there are the support-sorted closed-four-walk count, the
-inclusion-rank descent, and every eigenvalue statement.  The 2026-08-06 author
-instruction withdraws the partial-coverage carve-out this row was granted: no
-manuscript clause may rest on a cited theorem the Lean surface does not prove,
-so OPER-3 must reach full coverage like every other row.  The proposed route
-for the inclusion-rank input is to prove it in the form the manuscript uses —
-equal sums of the aligned-four-set indicator over all balanced halves force
-that indicator to be constant on four-sets — by one-element swap descent,
-rather than by importing the general inclusion-matrix rank theorem.  Reports:
-`notes/2026-08-05-c815-cut-block-core.md` with its 2026-08-06 correction.
+Row OPER-3 now has only its spectral half open.  The polynomial core landed
+first: the cut identity `B * Bᵀ = q • 1 - A * A` for a cut of arbitrary size,
+the trace of the square of a zero-diagonal sign matrix, and the four-set
+Hamilton-cycle dichotomy `w ∈ {3, -1}`, with the order-three block identity and
+the Ramsey input `R(3,3) = 6` already proved in earlier work.  Report:
+`notes/2026-08-05-c815-cut-block-core.md`, whose pessimistic closing paragraph
+the 2026-08-06 author instruction withdrew along with the row's
+partial-coverage carve-out.
+
+The two combinatorial pieces are now proved.  The fourth trace is sorted by the
+support of the closed four-walks it counts, `tr(A⁴) = d(d-1) + 12·C(d,3)` plus
+the four-element supports' weights, each of which is `24` or `-8` — eight times
+the Hamilton-cycle weight, one traversal per starting point and direction — and
+this needs only a zero diagonal with `A i j * A j i = 1`, not symmetry.  The
+inclusion-rank input is proved in the form the manuscript uses and by the route
+proposed for it: equal four-subset weight sums over all balanced halves of a
+`2d`-element label set with `4 ≤ d` force the weight constant on four-sets, by
+one-element swap descent on inclusion sums, in the standalone module
+`RelativeConicArcs.SubsetInclusionSums`.  The inclusion-matrix rank formula of
+Gottlieb and Jolliffe is therefore attribution, not a dependency.  The
+golden-return gate audits forty-nine terminals with no compiled-evaluation
+axiom, and all three paper-local replays pass.  Report:
+`notes/2026-08-06-c815-fourth-trace-and-swap-descent.md`.
+
+What remains in the row is every eigenvalue and singular-value statement, and
+the assembly of the exchange-rigidity contradiction, whose inputs — trace
+formula, dichotomy, descent, root switching, and Ramsey — are now all
+formalized.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic

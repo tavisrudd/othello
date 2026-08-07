@@ -59,7 +59,7 @@ with the report.
 
 The whole of ledger row OPER-3 is C815's, including the eigenvalue and
 singular-value statements: one row has one owner, so that no piece of it can be
-left for a task that does not know it holds it. Its three remaining pieces are
+left for a task that does not know it holds it. Its three remaining pieces were
 the support-sorted closed-four-walk count, the swap-descent form of the
 inclusion-rank input, and the spectral statements resting on
 `B * Bᵀ = q • 1 - A * A`. The row carries no partial-coverage carve-out; see
@@ -67,6 +67,16 @@ the lane handoff's **Formal standard for the whole series**. If the spectral
 half proves large it takes a newly allocated task of its own rather than moving
 into C823, whose scope is the distance, parity, moment and compression row
 family.
+
+The first two are closed. The support-sorted fourth trace, the twenty-four
+traversals of a four-set's three Hamilton cycles, the `24`-or-`-8` weight
+dichotomy, and the swap descent forcing the four-set weight constant when the
+balanced-half sums agree are in
+`RelativeConicArcs.ConferenceCutBlocks` and
+`RelativeConicArcs.SubsetInclusionSums`; report
+`notes/2026-08-06-c815-fourth-trace-and-swap-descent.md`. What is left in the
+row is the spectral half and the assembly of the exchange-rigidity
+contradiction, whose inputs are now all formalized.
 
 ## Evidence source
 
