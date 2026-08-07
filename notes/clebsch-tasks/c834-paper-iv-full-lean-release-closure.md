@@ -34,6 +34,14 @@ the kernel unchanged. Clean terminals: 58 of 94. Report:
 item 1's module was already elaborated in the previous round — and the fourteen weight-ten
 syndrome-disjointness shards are unaffected, since their search is real.
 
+The two ambient-plane axioms of stage 4 item 9 are closed, by the symbolic route the plan confirmed.
+`PassantCodeQ13.PlaneJoin` builds the join of two coordinate triples as their cross product and
+proves existence and uniqueness from three polynomial identities plus the existing normalization
+dictionary; incidence symmetry makes the meet of two lines the join of two points with exchanged
+arguments. Clean terminals: 61 of 94. Report: `notes/2026-08-06-c834-ambient-plane-join-and-meet.md`.
+The structural upgrade's remaining three leaves are the per-point and per-pair statements of item 7,
+unchanged and next.
+
 Two carry-overs for later stages. The round's bit-level lemmas — a bit-setting fold's bits, a mask
 list determined by the matrix it presents, tabulation as mapping, and the vanishing of a selected
 exclusive-or — are private in the identities module and are exactly the transport stage 4's packed

@@ -49,11 +49,12 @@ geometric rows; the independent replay instead enumerates all 1716 passant seven
 The theorem-facing gate is now stronger and smaller: concurrence-eight neighborhoods recover the
 polarity rows directly, unary degree is constant 56, and the fused concurrence-six color is split
 by a pair-derived common-color-seven count.  It also checks the three toric support parities, the
-hidden cubic on the `A9` image, the normalized 183-point plane axioms, and the four-anchor symmetry
-theorem.
+hidden cubic on the `A9` image, and the four-anchor symmetry theorem.  The join and meet axioms of
+the normalized 183-point plane are proved rather than checked, from the cross product of two
+coordinate triples and the normalization dictionary, in `PassantCodeQ13.PlaneJoin`.
 
-The terminal theorems use native evaluation.  The axiom audit must therefore report the
-declaration-local native-decision axioms emitted by the pinned Lean toolchain.  No hash is used as a
+Some terminal theorems still use native evaluation, and the axiom audit reports the
+declaration-local native-decision axioms the pinned Lean toolchain emits for them.  No hash is used as a
 substitute for checking the incidence semantics or profile coverage.
 
 The package does not transport the fixed-point exhaustion to equality of the four projective orbits

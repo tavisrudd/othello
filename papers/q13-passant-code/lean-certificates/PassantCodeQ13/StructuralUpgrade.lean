@@ -1,6 +1,7 @@
 import RelativeConicArcs.PassantCodeQ13.StructuralUpgrade
 import PassantCodeQ13.MinimumWords.RowUniqueness.Base
 import PassantCodeQ13.AssociationTransport.RelationCubic
+import PassantCodeQ13.PlaneJoin
 
 /-!
 # Paper-owned structural certificates for the q=13 passant code
@@ -10,9 +11,14 @@ checks the bounded q=13 inputs that are small enough to evaluate in Lean.  Every
 module is discharged in one of two ways.
 
 The checks whose domain is the 364-member decoded support family — pair-only row recovery, unary
-constancy, and the fused pair-color split — and the point and line axioms of the normalized
-183-point plane, whose domain is the ordered pairs of that plane, are discharged by native
-evaluation, so each carries the declaration-local axiom that compiled evaluation introduces.
+constancy, and the fused pair-color split — are discharged by native evaluation, so each carries the
+declaration-local axiom that compiled evaluation introduces.
+
+The point and line axioms of the normalized 183-point plane are not checks at all.  They are
+inherited from `PassantCodeQ13.PlaneJoin`, where the unique representative incident to two distinct
+representatives is constructed as their cross product and identified by polynomial identities in the
+coordinates.  The pairing of a line with a point is symmetric, so the line axiom is the point axiom
+with its arguments exchanged.
 
 The checks whose domain is the 78 internal points or the 183 plane coordinates — the three toric
 support cardinalities, their passant parities, and the determinant-conic cardinality — are
@@ -123,16 +129,31 @@ instance (predicate : PlaneCoordinate → Prop) [DecidablePred predicate] :
   unfold ExistsUnique
   infer_instance
 
+/-- Incidence is symmetric in its two arguments, which is what makes the plane self-dual here. -/
+private theorem planeIncident_comm {line point : PlaneCoordinate} :
+    PlaneIncident line point ↔ PlaneIncident point line := by
+  show PlaneJoin.dotTriple line.1 point.1 = 0 ↔ PlaneJoin.dotTriple point.1 line.1 = 0
+  rw [PlaneJoin.dotTriple_comm]
+
 /-- Every two distinct normalized points lie on a unique normalized line. -/
 theorem uniqueLine_through_two_points (first second : PlaneCoordinate)
     (different : first ≠ second) :
     ∃! line : PlaneCoordinate, PlaneIncident line first ∧ PlaneIncident line second := by
-  native_decide +revert
+  obtain ⟨join, ⟨joinMem, onFirst, onSecond⟩, unique⟩ :=
+    PlaneJoin.existsUnique_incident (List.mem_toFinset.mp first.2)
+      (List.mem_toFinset.mp second.2) fun equal => different (Subtype.ext equal)
+  refine ⟨⟨join, List.mem_toFinset.mpr joinMem⟩, ⟨onFirst, onSecond⟩, ?_⟩
+  rintro ⟨line, lineMem⟩ ⟨incidentFirst, incidentSecond⟩
+  exact Subtype.ext (unique line ⟨List.mem_toFinset.mp lineMem, incidentFirst, incidentSecond⟩)
 
 /-- Every two distinct normalized lines meet in a unique normalized point. -/
 theorem uniquePoint_on_two_lines (first second : PlaneCoordinate)
     (different : first ≠ second) :
     ∃! point : PlaneCoordinate, PlaneIncident first point ∧ PlaneIncident second point := by
-  native_decide +revert
+  obtain ⟨meet, incidences, unique⟩ := uniqueLine_through_two_points first second different
+  refine ⟨meet, ⟨planeIncident_comm.mp incidences.1, planeIncident_comm.mp incidences.2⟩, ?_⟩
+  intro other otherIncidences
+  exact unique other ⟨planeIncident_comm.mp otherIncidences.1,
+    planeIncident_comm.mp otherIncidences.2⟩
 
 end PassantCodeQ13.StructuralUpgrade

@@ -111,6 +111,7 @@ PassantCodeQ13/SemanticTransports.lean
 PassantCodeQ13/IndexedIncidenceTable.lean
 PassantCodeQ13/AssociationAlgebra.lean
 PassantCodeQ13/AssociationAlgebraIdentities.lean
+PassantCodeQ13/PlaneJoin.lean
 PassantCodeQ13/StructuralUpgrade.lean
 PassantCodeQ13/SymmetricSquareInvariance.lean
 PassantCodeQ13/Equivariance/TransporterData.lean
