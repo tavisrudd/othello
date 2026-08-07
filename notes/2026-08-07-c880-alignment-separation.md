@@ -25,12 +25,12 @@ manuscript file is touched.
    four-sets meeting the anchor in at least two points has \(3n^2-23n+45=31\)
    members at \(n=7\); dropping the test on the anchor itself leaves 30, which
    is optimal. The same drop is valid at eight points.
-4. **At eight points the manuscript's family is far from optimal, and the
-   bracket is wide.** Greedy stripping reduces the 53 selected tests to 45 while
-   still separating every two-graph, so the minimum at eight points is at most
-   45 against a counting lower bound of 20. The small-difference method that
-   settles seven points exactly is vacuous at eight (see below), so the exact
-   value there is open.
+4. **At eight points the manuscript's family is not optimal, and the bracket is
+   \(25\le\mathrm{minimum}(8)\le44\).** Iterated local search finds a
+   separating family of 44 tests where the anchor family uses 53; the lower end
+   is an entropy bound proved in section 5, which improves on the counting bound
+   20 at every \(n\). The exact value at eight points is open: the
+   small-difference method that settles seven points exactly is vacuous there.
 5. **The alignment code's minimum distance jumps from two to four.** At seven
    points there are pairs of two-graphs whose aligned families differ in exactly
    two four-sets — 315 difference patterns, which is what makes the exact bound
@@ -42,9 +42,9 @@ The reading to carry forward: the seven-point near-optimality of the exhibited
 family is a small-case fact, not evidence about the constant 3. At seven points
 the whole test set has only 35 members and any separating family needs 30 of
 them, so a construction of size 31 could hardly be far off. At eight points the
-same construction is already eight tests above what a greedy strip achieves, and
-the ratio between the counting bound \(n(n-3)/2\) and the exhibited \(3n^2-23n+45\)
-still tends to six. Work item 3 therefore stands untouched by these two cases,
+same construction is nine tests above what a search achieves, and the ratio
+between the best lower bound and the exhibited \(3n^2-23n+45\) still tends to
+4.87. Work item 3 therefore stands untouched by these two cases,
 and needs either a structural lower bound or a better construction.
 
 ## Conventions
@@ -148,10 +148,11 @@ At eight points, greedy stripping removes eight of the 53 tests — the anchor
 
 At eight points there are 1,048,576 complement pairs and 70 tests. The
 manuscript's family has 53 members, greedy stripping under twenty-three
-different orders reaches 45 and no further, and the counting bound is 20. So
+different orders reaches 45, iterated local search reaches 44, and the entropy
+bound of section 5 gives 25. So
 
 \[
-  20 \;\le\; \mathrm{minimum}(8) \;\le\; 45 \;<\; 53 = 3n^2-23n+45.
+  25 \;\le\; \mathrm{minimum}(8) \;\le\; 44 \;<\; 53 = 3n^2-23n+45.
 \]
 
 The exact value is open, and the method that closes seven points cannot close
@@ -162,13 +163,87 @@ tests containing no such pair has size 5, which gives \(35-5=30\) — tight. At
 eight points a pigeonhole neighbour search over all pairs finds no difference of
 weight two or three at all and exactly 315 of weight four, and 315 four-element
 constraints on 70 tests leave a mask-free set of at least 40, so that route
-yields nothing above the counting bound. Its search was capped and did not
+yields nothing above the counting bound, and nothing above the entropy bound
+either. Its search was capped and did not
 complete, and an incomplete search would only overstate the bound, so it is
 discarded rather than reported.
 
-The greedy 45 is an upper bound with a witness family recorded in the
-certificate; it is not claimed optimal.
+The 44 is an upper bound with a witness family recorded in the certificate; it
+is not claimed optimal.
 
+
+## 5. A sharper lower bound, and what forces the constant
+
+**Every alignment test answers yes with probability exactly one quarter.** The
+restriction of a two-graph to any four points is uniform over the eight
+two-graphs on four points, of which two — all triples coherent, all triples
+incoherent — are aligned. The measured marginal over all two-graphs is
+0.250000 at seven and at eight points. Hence, if the answers on a family of
+\(k\) tests determine the two-graph up to complement,
+\[
+  \binom{n-1}2-1 \;=\; H(\tau) \;\le\; H(A_1,\dots,A_k)
+  \;\le\; \sum_i H(A_i) \;=\; k\,H(1/4),
+\]
+so
+\[
+  k \;\ge\; \frac{\binom{n-1}2-1}{H(1/4)} \;=\; 1.2326\left(\binom{n-1}2-1\right)
+  \;\approx\; 0.616\,n^2 .
+\]
+This beats the counting bound by the same factor everywhere: 18 rather than 14 at
+seven points, and 25 rather than 20 at eight, which tightens the eight-point
+bracket to \(25\le\mathrm{minimum}(8)\le\) 44. Against the exhibited
+\(3n^2-23n+45\) the remaining asymptotic gap is a factor of 4.87 rather than 6.
+
+**What a single test can possibly notice.** The elementary perturbation
+\(\delta_{xy}\) adds 1 to \(\tau(xyz)\) for every \(z\); it is a two-graph
+perturbation, and only tests containing both \(x\) and \(y\) can see it. The
+test on \(\{p,q,x,y\}\) sees it exactly when \(\tau(pxy)=\tau(qxy)\): the two
+triples through the pair flip together, and the other two triples decide whether
+alignment was possible at all. Writing \(\chi(p)=\tau(pxy)\), which the
+adversary may choose to be any two-colouring of the remaining \(n-2\) points,
+the family detects \(\delta_{xy}\) at every two-graph if and only if the **link
+graph** \(H_{xy}=\{pq : \{p,q,x,y\}\in S\}\) admits no proper two-colouring.
+
+> **Necessary condition.** In any separating family, every link graph is
+> non-bipartite.
+
+That is the precise form of the obstacle the task card names: a "no" answer is
+uninformative exactly when the colouring is proper, and only an odd cycle in the
+link rules that out at every two-graph. It also explains the manuscript's
+construction, which gives every outside pair the complete graph on the four
+anchor points as its link — \(K_4\) being the obvious non-bipartite choice.
+
+**Non-bipartite links are not sufficient, and \(K_4\) is not slack.** The
+triangle-anchor family — every 4-set meeting a fixed triple in at least two
+points — has every link non-bipartite and fails to separate, at seven points (22
+tests) and at eight (35 tests). Sweeping all 64 subgraphs \(R\) of the anchor's
+link, with the family taken to be the tests meeting the anchor in three or four
+points together with the two-point tests whose anchor pair lies in \(R\): at
+seven and at eight points the only \(R\) that separates is the complete \(K_4\).
+Its non-bipartite proper subgraphs — a triangle, a triangle with a pendant edge,
+and \(K_4\) minus an edge — all fail. So the six tests per outside pair are
+forced within the single-anchor shape at both sizes, and the constant 3 is not
+loose there.
+
+**Where the slack must be instead.** The manuscript's family shares nothing
+between outside pairs: a test \(\{p,q,x,y\}\) with \(p,q\) in the anchor serves
+only the pair \(\{x,y\}\) as a link edge, while a test whose four points are all
+outside the anchor serves six pairs at once. Any construction below \(3n^2\)
+must share, and eight points confirm the slack is real: iterated local search
+finds a separating family of 44 tests where the anchor family needs 53.
+Its links are smaller than the anchor family's — the smallest link has four
+edges rather than six, and the mean is 9.43 against 11.36 — which is what
+sharing looks like.
+
+**Adaptivity is the obvious place to look next, and the sensitivity rule says
+why.** One test settles one new coordinate provided a reference point already
+known to satisfy \(\tau(pxy)=\tau(qxy)\) is available, and a decoder that has
+already recovered part of the two-graph can choose that reference. That suggests
+an adaptive decoder needing about \(\binom{n-1}2\) tests — a factor of six below
+the nonadaptive construction and within a factor 1.6 of the entropy bound. This
+is a sketch, not a result: the cases where no such reference exists need a
+fallback, and nothing here bounds the adaptive complexity from below beyond the
+entropy bound, which applies to both models.
 
 ## What this certifies, and what it does not
 
@@ -199,6 +274,11 @@ $S/c880 paper     --n 7      --out $S/paper7.json       # section 3
 $S/c880 paper     --n 8      --out $S/paper8.json       # section 3
 $S/c880 bounds    --n 7 --weight 4 --out $S/bounds7.json    # section 4 control
 $S/c880 bounds    --n 8 --weight 4 --out $S/bounds8.json    # section 4
+$S/c880 search    --n 8 --iters 400 --kick 8 --out $S/search8.json  # section 4 upper bound
+$S/c880 family    --n 7 --anchor 3 --out $S/family7-triangle.json   # section 5
+$S/c880 family    --n 8 --anchor 3 --out $S/family8-triangle.json   # section 5
+$S/c880 links     --n 7 --out $S/links7.json                        # section 5 sweep
+$S/c880 links     --n 8 --out $S/links8.json                        # section 5 sweep
 uv run --with numpy python3 2026-08-07-c880-alignment-separation-replay.py \
     --census 2026-08-07-c880-alignment-separation-census7.json --out $S/replay.json
 ```
@@ -222,7 +302,7 @@ are removable and that none extends.
 
 | file | bytes | sha256 |
 |------|-------|--------|
-| `2026-08-07-c880-alignment-separation.rs` | 40793 | 77790a677bf36de7478a7ab315e02205a656bdd9cfe13eed5c10bc4d6d33f635 |
+| `2026-08-07-c880-alignment-separation.rs` | 51858 | 0437097b2ef7fa9f4e83ad32d934859bc92a6aac1778fd0bdbf2d0a518fb2453 |
 | `2026-08-07-c880-alignment-separation-replay.py` | 8373 | 95cc38756438c7a9d5e7b893b6bdbf917aa7425e9518290022b42982c5ba7fd4 |
 | `2026-08-07-c880-alignment-separation-threshold.json` | 2810 | efe57db769fb9b33500cf31b13fac7e10ee103f5f653fefdb6a90c2fedbe9423 |
 | `2026-08-07-c880-alignment-separation-census7.json` | 677 | cea77f21fef491a53a1d2cff21ad482a5208f121f0d8bc8ba634ef16d78b3a8b |
@@ -231,13 +311,24 @@ are removable and that none extends.
 | `2026-08-07-c880-alignment-separation-paper8.json` | 328 | c15873562c3e0860fc610012bd505ad435e28a10c1bebd5e7e5b9aa88da44fa5 |
 | `2026-08-07-c880-alignment-separation-bounds7.json` | 520 | d1dae32cacae8a42fda37710706389bf9585d0484ed2d768d68ab002af6ee3af |
 | `2026-08-07-c880-alignment-separation-bounds8.json` | 572 | 2b42d2b48ef9c922fe256b9c5c736105a0ab6f9c36a5e3c16ec2dd29d8972058 |
+| `2026-08-07-c880-alignment-separation-family7-triangle.json` | 283 | f3bdf96d29d0bcd304d6c73b53accce9edf5d8e86d535361dd0c7432937baf06 |
+| `2026-08-07-c880-alignment-separation-family8-triangle.json` | 285 | f1c5ee83831a95c358e22e4965e43958fbd6b05f6bdacb189ccb713cd2ae3eac |
+| `2026-08-07-c880-alignment-separation-links7.json` | 5149 | 956ad6e11799d39c65695f4b4b956519c2ffb8715a24333f5450fb4bfa5bc2d5 |
+| `2026-08-07-c880-alignment-separation-links8.json` | 5151 | 6a6a9188d963a6662c2d8e2a411f15a25a9ecb00b500fc6f6d9d67098d36c03f |
+| `2026-08-07-c880-alignment-separation-search8.json` | 637 | 3fa2ddde31d27989afc568d077697a875b674f09ec2d6213b9f8e7e39838993b |
 | `2026-08-07-c880-alignment-separation-replay.json` | 1638 | a306367330ba08a393df7dc83faf1c8b9226cf420c7fd8ebfe7a1c3a09138394 |
 
 ## Next in this task
 
-- Item 3 is the live question: a lower bound that beats counting for general
-  \(n\), or a construction below \(3n^2-23n+45\). The eight-point gap between 45
-  and 53 says the exhibited constant is loose before any asymptotic argument.
+- Item 3 has moved: the entropy bound of section 5 beats counting at every
+  \(n\), and the eight-point gap between 44 and 53 says the exhibited
+  construction is not optimal. What is open is the constant, now bracketed
+  between \(0.616\,n^2\) and \(3n^2\).
+- The link-graph rule says any better construction must share tests between
+  outside pairs rather than spend six private ones on each. A family in which
+  most tests have all four points generic would reach about \(n^2/2\) if
+  non-bipartite links were sufficient — they are not, so the question is what
+  the true local condition is.
 - The weight-two difference patterns at seven points are the mechanism behind
   the exact bound; identifying them structurally for general \(n\) is the most
   direct route to a proved lower bound, and it is a finite question at each \(n\).

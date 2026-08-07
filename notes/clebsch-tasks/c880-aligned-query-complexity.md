@@ -18,14 +18,31 @@ Work items 1 and 2 are closed, and item 3 has its small-case evidence:
 - The manuscript's selected family separates unconditionally, and at seven
   points its single redundant member is the test on the anchor itself; the same
   drop is valid at eight points.
-- At eight points the bracket is \(20\le\mathrm{minimum}\le45\) against the
-  exhibited 53, so the constant is loose there. The weight-two difference
+- Every test answers yes with probability exactly one quarter, so subadditivity
+  of entropy gives \(k\ge(\binom{n-1}2-1)/H(1/4)\approx0.616\,n^2\) at every
+  \(n\), beating the counting bound by a factor 1.2326 and cutting the
+  asymptotic gap against the exhibited \(3n^2-23n+45\) from 6 to 4.87.
+- A test on \(\{p,q,x,y\}\) notices the elementary flip of the pair
+  \(\{x,y\}\) exactly when \(\tau(pxy)=\tau(qxy)\), so a separating family
+  must give every pair a non-bipartite link graph. That is the exact form of the
+  card's structural obstacle, and it is necessary but not sufficient: the
+  triangle-anchor family has non-bipartite links everywhere and fails at seven
+  and at eight points.
+- Within the single-anchor shape the six tests per outside pair are forced: of
+  the 64 subgraphs of the anchor's \(K_4\) link, only the complete one
+  separates, at seven and at eight points. The manuscript's constant is
+  therefore not slack inside its own class, and any improvement must share tests
+  between outside pairs instead of spending six private ones on each.
+- At eight points the bracket is \(25\le\mathrm{minimum}\le44\) against the
+  exhibited 53, so the construction is not optimal. The weight-two difference
   argument that settles seven points is vacuous at eight, where the alignment
   code's minimum distance is four.
 
-Open next: item 3 (a general lower bound or a better construction — the
-structural description of the small-weight difference patterns is the most
-direct route), then items 4, 5, 6 and 8, and item 7 only after the audit.
+Open next: the constant, now bracketed between \(0.616\,n^2\) and \(3n^2\).
+Two concrete routes — a shared-test construction whose links are non-bipartite
+without an anchor, and the adaptive decoder sketched in the report, which would
+need about \(\binom{n-1}2\) tests and would settle item 4 with a factor-six
+separation. Then items 5, 6 and 8, and item 7 only after the audit.
 
 ## Objective
 

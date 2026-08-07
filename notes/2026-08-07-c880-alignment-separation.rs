@@ -1163,6 +1163,290 @@ fn mode_bounds(n: usize, weight: usize, out: &str) {
     );
 }
 
+// ---------------------------------------------------------------- family
+
+/// A test on {p,q,x,y} is sensitive to the elementary flip of the pair {x,y}
+/// exactly when tau(pxy) = tau(qxy), so the tests of a separating family that
+/// contain a given pair must, on the link graph of that pair, leave no proper
+/// two-colouring: the link must be non-bipartite.  This checks that necessary
+/// condition, and measures anchor families of any anchor size against it.
+fn bipartite(adj: &[u128], verts: &[usize]) -> bool {
+    let mut color = std::collections::HashMap::new();
+    for &s in verts {
+        if color.contains_key(&s) {
+            continue;
+        }
+        color.insert(s, 0u8);
+        let mut stack = vec![s];
+        while let Some(v) = stack.pop() {
+            let cv = color[&v];
+            let mut b = adj[v];
+            while b != 0 {
+                let w = b.trailing_zeros() as usize;
+                b &= b - 1;
+                match color.get(&w) {
+                    None => {
+                        color.insert(w, 1 - cv);
+                        stack.push(w);
+                    }
+                    Some(&cw) => {
+                        if cw == cv {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    true
+}
+
+fn mode_family(n: usize, anchor_size: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let vectors: Vec<u128> = reps.iter().map(|&g| m.alignment(g)).collect();
+    let tests = m.tests();
+
+    // marginal of a single alignment test over all two-graphs
+    let yes: u64 = vectors.iter().map(|v| v.count_ones() as u64).sum();
+    let marginal = yes as f64 / (vectors.len() as f64 * tests as f64);
+    let h = |p: f64| -p * p.log2() - (1.0 - p) * (1.0 - p).log2();
+    let entropy_bound = (((m.edge_bits - 1) as f64) / h(marginal)).ceil() as usize;
+
+    let anchor: Vec<usize> = (0..anchor_size).collect();
+    let mut family = 0u128;
+    for (k, f) in m.foursets.iter().enumerate() {
+        if f.iter().filter(|x| anchor.contains(x)).count() >= 2 {
+            family |= 1u128 << k;
+        }
+    }
+
+    // links of the family: for each pair, the graph of the other two points
+    let mut links_nonbipartite = true;
+    let mut bipartite_pairs: Vec<String> = Vec::new();
+    for x in 0..n {
+        for y in (x + 1)..n {
+            let others: Vec<usize> = (0..n).filter(|v| *v != x && *v != y).collect();
+            let mut adj = vec![0u128; n];
+            for (k, f) in m.foursets.iter().enumerate() {
+                if family >> k & 1 == 0 {
+                    continue;
+                }
+                if !f.contains(&x) || !f.contains(&y) {
+                    continue;
+                }
+                let pq: Vec<usize> = f.iter().filter(|v| **v != x && **v != y).cloned().collect();
+                adj[pq[0]] |= 1u128 << pq[1];
+                adj[pq[1]] |= 1u128 << pq[0];
+            }
+            if bipartite(&adj, &others) {
+                links_nonbipartite = false;
+                bipartite_pairs.push(format!("[{},{}]", x, y));
+            }
+        }
+    }
+
+    let mut d = Distinct::new(vectors.len());
+    let separates = d.separates(&vectors, family);
+    let mut keep = family;
+    for t in 0..tests {
+        if keep >> t & 1 == 0 {
+            continue;
+        }
+        let trial = keep & !(1u128 << t);
+        if d.separates(&vectors, trial) {
+            keep = trial;
+        }
+    }
+    let doc = format!(
+        "{{\"artifact\":\"c880-anchor-family\",\"schema\":1,\"n\":{},\"anchor_size\":{},\
+         \"complement_pairs\":{},\"tests_available\":{},\"family_size\":{},\
+         \"alignment_marginal\":{:.6},\"entropy_lower_bound\":{},\
+         \"all_links_nonbipartite\":{},\"bipartite_link_pairs\":[{}],\
+         \"separates\":{},\"greedy_reduced_size\":{}}}\n",
+        n,
+        anchor_size,
+        vectors.len(),
+        tests,
+        family.count_ones(),
+        marginal,
+        entropy_bound,
+        links_nonbipartite,
+        bipartite_pairs.join(","),
+        separates,
+        if separates { keep.count_ones() } else { 0 }
+    );
+    fs::write(out, doc).expect("write output");
+    eprintln!(
+        "n={} anchor={} family={} links_nonbipartite={} separates={} greedy={} (marginal {:.6}, entropy bound {})",
+        n,
+        anchor_size,
+        family.count_ones(),
+        links_nonbipartite,
+        separates,
+        if separates { keep.count_ones() } else { 0 },
+        marginal,
+        entropy_bound
+    );
+}
+
+// ---------------------------------------------------------------- links
+
+/// How much of the anchor's link is really needed?  The manuscript's family
+/// gives every outside pair the complete graph on the four anchor points as its
+/// link.  This sweeps every subgraph R of that link: the family keeps the tests
+/// meeting the anchor in three or four points, plus the tests whose anchor pair
+/// lies in R, and reports which R still separate.
+fn mode_links(n: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let vectors: Vec<u128> = reps.iter().map(|&g| m.alignment(g)).collect();
+    let tests = m.tests();
+    let anchor = [0usize, 1, 2, 3];
+    let anchor_pairs: Vec<[usize; 2]> = vec![[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+    let mut base = 0u128;
+    let mut pair_tests = vec![0u128; 6];
+    for (k, f) in m.foursets.iter().enumerate() {
+        let meet: Vec<usize> = f.iter().filter(|x| anchor.contains(x)).cloned().collect();
+        if meet.len() >= 3 {
+            base |= 1u128 << k;
+        } else if meet.len() == 2 {
+            let idx = anchor_pairs
+                .iter()
+                .position(|p| p[0] == meet[0] && p[1] == meet[1])
+                .unwrap();
+            pair_tests[idx] |= 1u128 << k;
+        }
+    }
+    let mut d = Distinct::new(vectors.len());
+    let mut rows: Vec<String> = Vec::new();
+    let mut best: Option<(u32, usize)> = None;
+    for r in 0u32..64 {
+        let mut fam = base;
+        for i in 0..6 {
+            if r >> i & 1 == 1 {
+                fam |= pair_tests[i];
+            }
+        }
+        // is the retained anchor link non-bipartite?
+        let mut adj = vec![0u128; 4];
+        for i in 0..6 {
+            if r >> i & 1 == 1 {
+                let p = anchor_pairs[i];
+                adj[p[0]] |= 1u128 << p[1];
+                adj[p[1]] |= 1u128 << p[0];
+            }
+        }
+        let nonbip = !bipartite(&adj, &[0, 1, 2, 3]);
+        let sep = d.separates(&vectors, fam);
+        if sep {
+            let sz = fam.count_ones();
+            if best.map(|b| sz < b.0).unwrap_or(true) {
+                best = Some((sz, r.count_ones() as usize));
+            }
+        }
+        rows.push(format!(
+            "{{\"link_edges\":{},\"link_nonbipartite\":{},\"family_size\":{},\"separates\":{}}}",
+            r.count_ones(),
+            nonbip,
+            fam.count_ones(),
+            sep
+        ));
+    }
+    let doc = format!(
+        "{{\"artifact\":\"c880-anchor-links\",\"schema\":1,\"n\":{},\"complement_pairs\":{},\
+         \"tests_available\":{},\"anchor\":[0,1,2,3],\
+         \"smallest_separating_family\":{},\"link_edges_used\":{},\"subgraphs\":[{}]}}\n",
+        n,
+        vectors.len(),
+        tests,
+        best.map(|b| b.0 as i64).unwrap_or(-1),
+        best.map(|b| b.1 as i64).unwrap_or(-1),
+        rows.join(",")
+    );
+    fs::write(out, doc).expect("write output");
+    eprintln!(
+        "n={} smallest separating anchor-link family: {:?}",
+        n, best
+    );
+}
+
+// ---------------------------------------------------------------- search
+
+/// Iterated local search for a small separating family: greedily strip in a
+/// random order, then repeatedly put a few tests back and strip again.
+fn mode_search(n: usize, iters: usize, kick: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let vectors: Vec<u128> = reps.iter().map(|&g| m.alignment(g)).collect();
+    let tests = m.tests();
+    let full: u128 = if tests == 128 {
+        u128::MAX
+    } else {
+        (1u128 << tests) - 1
+    };
+    let mut d = Distinct::new(vectors.len());
+    let mut rng: u64 = 0x9E37_79B9_7F4A_7C15; // fixed seed
+    let mut next = move || {
+        rng ^= rng << 13;
+        rng ^= rng >> 7;
+        rng ^= rng << 17;
+        rng
+    };
+    let mut strip = |d: &mut Distinct, start: u128, order: &[usize]| -> u128 {
+        let mut keep = start;
+        for &t in order {
+            if keep >> t & 1 == 0 {
+                continue;
+            }
+            let trial = keep & !(1u128 << t);
+            if d.separates(&vectors, trial) {
+                keep = trial;
+            }
+        }
+        keep
+    };
+    let mut order: Vec<usize> = (0..tests).collect();
+    let mut best = strip(&mut d, full, &order);
+    eprintln!("initial {}", best.count_ones());
+    for it in 0..iters {
+        for i in (1..order.len()).rev() {
+            let j = (next() % (i as u64 + 1)) as usize;
+            order.swap(i, j);
+        }
+        let mut start = best;
+        for _ in 0..kick {
+            let t = (next() % tests as u64) as usize;
+            start |= 1u128 << t;
+        }
+        let cand = strip(&mut d, start, &order);
+        if cand.count_ones() < best.count_ones() {
+            best = cand;
+            eprintln!("iteration {}: {}", it, best.count_ones());
+        }
+    }
+    let list: Vec<String> = (0..tests)
+        .filter(|t| best >> t & 1 == 1)
+        .map(|t| json_fourset(&m.foursets[t]))
+        .collect();
+    let nn = n as i64;
+    let doc = format!(
+        "{{\"artifact\":\"c880-alignment-search\",\"schema\":1,\"n\":{},\"complement_pairs\":{},\
+         \"tests_available\":{},\"exhibited_family_size\":{},\"iterations\":{},\"kick\":{},\
+         \"best_separating_size\":{},\"best_family\":[{}]}}\n",
+        n,
+        vectors.len(),
+        tests,
+        3 * nn * nn - 23 * nn + 45,
+        iters,
+        kick,
+        best.count_ones(),
+        list.join(",")
+    );
+    fs::write(out, doc).expect("write output");
+    eprintln!("n={} best separating family found: {}", n, best.count_ones());
+}
+
 // ---------------------------------------------------------------- driver
 
 fn main() {
@@ -1202,6 +1486,24 @@ fn main() {
             let weight: usize = getval("--weight").map(|s| s.parse().unwrap()).unwrap_or(3);
             let out = getval("--out").expect("--out");
             mode_bounds(n, weight, &out);
+        }
+        "family" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);
+            let a: usize = getval("--anchor").map(|s| s.parse().unwrap()).unwrap_or(3);
+            let out = getval("--out").expect("--out");
+            mode_family(n, a, &out);
+        }
+        "links" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);
+            let out = getval("--out").expect("--out");
+            mode_links(n, &out);
+        }
+        "search" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);
+            let iters: usize = getval("--iters").map(|s| s.parse().unwrap()).unwrap_or(200);
+            let kick: usize = getval("--kick").map(|s| s.parse().unwrap()).unwrap_or(6);
+            let out = getval("--out").expect("--out");
+            mode_search(n, iters, kick, &out);
         }
         "census" => {
             let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(7);
