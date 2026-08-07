@@ -2,9 +2,12 @@
 
 **Lane:** `build-sys`
 
-**Status:** ACTIVE — all eleven finitegeom areas are registered, re-exported from tracked
+**Status:** ACTIVE — all twelve finitegeom areas are registered, re-exported from tracked
 configurations, and gate-green.  The order-16 package is sealed, pinned and closed out; the
-order-eleven point-orbit family is externalized and pinned.  Order-13 and order-25 are not executed.
+order-eleven point-orbit family is externalized and pinned.  Every published paper is synchronized to
+its standalone repository with its release gate replayed there
+([`../2026-08-06-c864-mirror-sync-and-phase-six.md`](../2026-08-06-c864-mirror-sync-and-phase-six.md)),
+and nothing is pushed from here.  Order-13 and order-25 are not executed.
 
 > ## ▶ START HERE
 >

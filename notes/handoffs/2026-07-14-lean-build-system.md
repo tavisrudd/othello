@@ -146,9 +146,19 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    `_human` suffix is gone from the Clebsch rigidity and arcs areas. Paper I's release chain is
    green at package `a80e7de6`, and Clebsch rigidity, Clebsch passages and the arcs paper all pin
    finitegeom `575cf3e9`; a pin may now run ahead of its area's export when it carries that export
-   unchanged. Still open there: MDS--CSS transversal groups has no release verifier at all though
-   its Makefile calls one, and the arcs paper still pins a superseded order-16 package. No mirror
-   has been synchronized and nothing has been pushed.
+   unchanged. Phase 5 is closed: MDS--CSS transversal groups has the release verifier its Makefile
+   calls, and the arcs paper advances to the published order-16 package `0b04429b`.
+   **Steps 27 through 33 are done**
+   ([`../2026-08-06-c864-mirror-sync-and-phase-six.md`](../2026-08-06-c864-mirror-sync-and-phase-six.md)):
+   all nine published papers and the portfolio summary are synchronized, each mirror's release gate
+   was replayed inside the mirror, every mirror verifies against its export manifest at authority
+   commit `8450caa9`, and the order-eleven package source audit reports zero unexplained drift. The
+   replay found five release-surface defects, all fixed here: the arcs paper had no manuscript build
+   gate, the order-13 passant and Clebsch factorization tracked PDFs did not match their sources, the
+   golden quantum statistics gate overwrote the PDF it was checking, and the AME/LU and MDS--CSS
+   release verifiers could not run in a standalone checkout at all. Nothing is pushed from here: the
+   order-eleven certificate package is ahead of its public `main`, and each paper mirror is ahead of
+   what it published mid-session.
    The earlier phases resumed at step 22, the first paper-side step
    (`../2026-08-06-c864-finitegeom-standalone-build-gate.md` and
    `../2026-08-06-c864-order-eleven-package-reseal.md`): all twelve areas are registered,
@@ -336,7 +346,8 @@ export-completion execution plan [`../2026-08-06-c864-export-completion-executio
 standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`](../2026-08-06-c864-finitegeom-standalone-build-gate.md);
 projective-cap repair [`../2026-08-06-c864-projectivecap-standalone-repair.md`](../2026-08-06-c864-projectivecap-standalone-repair.md);
 order-eleven package reseal [`../2026-08-06-c864-order-eleven-package-reseal.md`](../2026-08-06-c864-order-eleven-package-reseal.md);
-phase 5 published papers [`../2026-08-06-c864-phase-five-published-papers.md`](../2026-08-06-c864-phase-five-published-papers.md).
+phase 5 published papers [`../2026-08-06-c864-phase-five-published-papers.md`](../2026-08-06-c864-phase-five-published-papers.md);
+mirror sync and phase 6 [`../2026-08-06-c864-mirror-sync-and-phase-six.md`](../2026-08-06-c864-mirror-sync-and-phase-six.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
