@@ -89,7 +89,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "8e5513f912fe82f9784f2eb8998751ca67ecab26c0c74aa27323eb870bf54685",
+  "trust_rows_sha256": "2848ebf8f7aac9144ea41ff4fdf7c727fefae5bb80b13b8654553e8a31db55a6",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -190,7 +190,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) = (10 s Pf(B - B^T))^2 and, over an integral domain, Z = plus-or-minus 10 s Pf(B - B^T).  The determinant of the induced map between the two spectral spaces is represented by that Pfaffian rather than by a matrix in a chosen pair of frames.",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",
@@ -211,11 +211,14 @@
       "status": "literature-backed",
       "modes": [
         "conceptual",
-        "classical-input"
+        "classical-input",
+        "formal-partial"
       ],
-      "proof_role": "the operator matching expansion identifies the frame with the classical Howard--Millson--Snowden--Vakil coloured-triangle Joubert family; their Segre--Igusa duality supplies the centered-square map, while the paper identifies it with centered commutator determinants",
+      "proof_role": "the operator matching expansion identifies the frame with the classical Howard--Millson--Snowden--Vakil coloured-triangle Joubert family; their Segre--Igusa duality supplies the centered-square map, while the paper identifies it with centered commutator determinants.  All four clauses are also formalized, and there the classical inputs are proved rather than cited: the two Segre equations hold identically over every commutative ring, each translate is the coloured-triangle cubic of an explicit sign word coefficient by coefficient, those six words are the complementary triangle colourings of the one-factorizations of the complete graph on six labels and every one-factorization gives one of the six, the diagonal section is the vanishing sum and cube sum of the remaining five coordinates, and the centered squares satisfy the Igusa quartic relation by way of the characteristic polynomial of the six coordinates and Newton's identities.",
       "evidence": [
-        "sections/05-golden-operator.tex"
+        "sections/05-golden-operator.tex",
+        "verification/golden_return_formal.json",
+        "verification/golden_return_axioms.txt"
       ]
     },
     {
