@@ -65,7 +65,7 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.indexedTripleConcurrence_eq_semantic
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.row_extension_check_all_indices
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.geometric_rows_have_zero_triple_concurrence
-#print axioms PassantCodeQ13.MinimumWords.RowUniqueness.reconstructionCandidateCheck_eq_true_iff
+#print axioms PassantCodeQ13.MinimumWords.RowUniqueness.rowExtensionCheckAt_sound
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.admissible_seven_set_is_geometric_row
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.reconstructed_rows_eq_geometric_passant_rows
 #print axioms PassantCodeQ13.Automorphisms.projectiveMatrices_length

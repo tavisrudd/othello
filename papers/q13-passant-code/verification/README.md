@@ -167,8 +167,8 @@ PassantCodeQ13/MinimumWords/Concurrence/{Row,Pair}Block{One,Two,Three}.lean
 PassantCodeQ13/MinimumWords/RowUniqueness/Residue{Zero..Six}.lean
     one shard per residue of the row-extension argument
 PassantCodeQ13/MinimumWords/RowUniqueness/
-    {Base,GeometricRows,PairTransport,ConcurrenceTransport,Transport,
-     DecodeInjective,Aggregate}.lean
+    {Base,IndexCertificate,GeometricRows,PairTransport,ConcurrenceTransport,
+     Transport,DecodeInjective,Aggregate}.lean
 PassantCodeQ13/WeightTen/IsolatedProfile/Fibre{0..6}.lean
 PassantCodeQ13/WeightTen/CycleProfile/Residue{0..6}.lean
     one shard per pencil fibre and per cycle residue

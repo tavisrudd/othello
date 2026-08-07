@@ -93,19 +93,4 @@ theorem indexedTripleConcurrence_eq_semantic
   obtain ⟨thirdIndex, rfl⟩ := internalPointAt_bijective.surjective third
   exact indexedTripleConcurrence_eq_semantic_direct firstIndex secondIndex thirdIndex
 
-/-- Counting displayed vertices selected by one encoded support is cardinality of the semantic
-intersection after decoding. -/
-theorem supportIntersectionCount_eq_card (support : Nat) (vertices : Finset InternalPoint) :
-    (verticesInOrder vertices).countP
-        (fun point => support.testBit (internalPointIndex point)) =
-      (decodedSupport support ∩ vertices).card := by
-  rw [countP_eq_card_filter_toFinset (verticesInOrder vertices)
-    (fun point => support.testBit (internalPointIndex point))
-    (verticesInOrder_nodup vertices)]
-  congr 1
-  ext point
-  obtain ⟨index, rfl⟩ := internalPointAt_bijective.surjective point
-  simp [verticesInOrder_toFinset, mem_decodedSupport,
-    internalPointIndex_internalPointAt, and_comm]
-
 end PassantCodeQ13.MinimumWords.RowUniqueness

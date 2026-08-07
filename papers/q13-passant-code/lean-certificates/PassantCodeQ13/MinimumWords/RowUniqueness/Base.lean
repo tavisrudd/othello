@@ -2,13 +2,18 @@ import PassantCodeQ13.MinimumWords.Reconstruction
 import RelativeConicArcs.PassantCodeQ13.Reconstruction
 
 /-!
-# Indexed supports for passant-row reconstruction
+# Decoded supports and the displayed order of the internal points
 
-The four projective minimum-word orbits are decoded from their 78-bit representation into the
-semantic internal-point type.  The row-uniqueness certificate is partitioned by the first point's
-index modulo seven.  For each three-point seed, it constructs the at-most-ten-point pool of
-one-point admissible extensions and checks every four-subset of that pool.  This covers all
-admissible seven-sets without enumerating the ambient `78 choose 7` domain.
+The four projective minimum-word orbits are carried as `78`-bit codes, one bit per internal-point
+index.  This module decodes such a code into the semantic internal-point type, forms the decoded
+hypergraph of the four orbits, and fixes the dictionary between the two presentations of a finite
+set of internal points: the displayed order lists the points of a set by increasing index, and the
+displayed index of a point is its position in that order.
+
+Two executable tests on the semantic type are defined here and identified with their semantic
+meanings elsewhere: the passant-join test of two points, and the concurrence count of a triple in
+the encoded minimum-word family.  The property `GeometricRowsHaveZeroTripleConcurrence` names the
+statement that no decoded minimum-word support contains three points of a passant row.
 -/
 
 namespace PassantCodeQ13.MinimumWords.RowUniqueness
@@ -36,22 +41,6 @@ theorem mem_decodedSupport (support : Nat) (index : Fin 78) :
 /-- The semantic support hypergraph formed by the four displayed projective orbits. -/
 def semanticMinimumSupports : Finset (Finset InternalPoint) :=
   minimumSupportCodes.toFinset.image decodedSupport
-
-/-- Pairwise check that decoding is injective on the four-orbit support list. -/
-def decodedSupportInjectivityCheck : Bool :=
-  minimumSupportCodes.all fun first => minimumSupportCodes.all fun second =>
-    first == second || !(decodedSupport first == decodedSupport second)
-
-/-- A successful pairwise check proves injectivity on the encoded minimum-support family. -/
-theorem decodedSupport_injOn_of_check (check : decodedSupportInjectivityCheck = true) :
-    Set.InjOn decodedSupport minimumSupportCodes.toFinset := by
-  intro first first_mem second second_mem decoded_eq
-  have first_list_mem : first ∈ minimumSupportCodes := List.mem_toFinset.mp first_mem
-  have second_list_mem : second ∈ minimumSupportCodes := List.mem_toFinset.mp second_mem
-  have checked := (List.all_eq_true.mp
-    (List.all_eq_true.mp check first first_list_mem)) second second_list_mem
-  simp [decoded_eq] at checked
-  exact checked
 
 /-- The semantic internal points in the fixed displayed order. -/
 def internalPointOrder : List InternalPoint :=
@@ -88,22 +77,6 @@ theorem verticesInOrder_length (vertices : Finset InternalPoint) :
     verticesInOrder_toFinset] at card_identity
   exact card_identity.symm
 
-/-- Inclusion of finite vertex sets gives a sublist relation in the common displayed order. -/
-theorem verticesInOrder_sublist {smaller larger : Finset InternalPoint}
-    (subset : smaller ⊆ larger) :
-    List.Sublist (verticesInOrder smaller) (verticesInOrder larger) := by
-  unfold verticesInOrder
-  induction internalPointOrder with
-  | nil => simp
-  | cons point points induction_hypothesis =>
-      by_cases point_mem_smaller : point ∈ smaller
-      · have point_mem_larger := subset point_mem_smaller
-        simp [point_mem_smaller, point_mem_larger, induction_hypothesis]
-      · by_cases point_mem_larger : point ∈ larger
-        · simp [point_mem_smaller, point_mem_larger]
-          exact induction_hypothesis.cons point
-        · simp [point_mem_smaller, point_mem_larger, induction_hypothesis]
-
 @[simp] theorem mem_verticesInOrder (point : InternalPoint) (vertices : Finset InternalPoint) :
     point ∈ verticesInOrder vertices ↔ point ∈ vertices := by
   rw [← List.mem_toFinset, verticesInOrder_toFinset]
@@ -135,123 +108,6 @@ def indexedPassantJoin (first second : InternalPoint) : Bool :=
 def indexedTripleConcurrence (first second third : InternalPoint) : Nat :=
   tripleConcurrenceIn minimumSupportCodes (internalPointIndex first)
     (internalPointIndex second) (internalPointIndex third)
-
-/-- Executable intrinsic test against an explicitly supplied encoded support family. -/
-def reconstructionCandidateCheckWith (supports : List Nat)
-    (vertices : Finset InternalPoint) : Bool :=
-  let pairCheck := (verticesInOrder vertices).all fun first =>
-      (verticesInOrder vertices).all fun second =>
-        if first == second then true else indexedPassantJoin first second
-  if pairCheck then
-    supports.all fun support =>
-      (verticesInOrder vertices).countP
-        (fun point => support.testBit (internalPointIndex point)) ≤ 2
-  else false
-
-/-- Executable intrinsic test for a passant clique with zero concurrence on distinct triples. -/
-def reconstructionCandidateCheck (vertices : Finset InternalPoint) : Bool :=
-  reconstructionCandidateCheckWith minimumSupportCodes vertices
-
-/-- The three-point seed selected by displayed internal-point indices. -/
-def indexedSeed (firstIndex secondIndex thirdIndex : Fin 78) : Finset InternalPoint :=
-  {internalPointAt firstIndex, internalPointAt secondIndex, internalPointAt thirdIndex}
-
-/-- Points that extend a seed relative to an explicitly supplied encoded support family. -/
-def extensionPoolWith (supports : List Nat) (firstIndex secondIndex thirdIndex : Fin 78) :
-    Finset InternalPoint :=
-  Finset.univ.filter fun point =>
-    point ∉ indexedSeed firstIndex secondIndex thirdIndex ∧
-      reconstructionCandidateCheckWith supports
-        (insert point (indexedSeed firstIndex secondIndex thirdIndex)) = true
-
-/-- Points that extend a seed to an intrinsic four-point candidate. -/
-def extensionPool (firstIndex secondIndex thirdIndex : Fin 78) : Finset InternalPoint :=
-  extensionPoolWith minimumSupportCodes firstIndex secondIndex thirdIndex
-
-/-- Check every four-point extension against an explicitly supplied encoded support family. -/
-def seedExtensionCheckWith (supports : List Nat)
-    (firstIndex secondIndex thirdIndex : Fin 78) : Bool :=
-  ((verticesInOrder
-    (extensionPoolWith supports firstIndex secondIndex thirdIndex)).sublistsLen 4).all
-      fun extraList =>
-    let extra := extraList.toFinset
-    let vertices := indexedSeed firstIndex secondIndex thirdIndex ∪ extra
-    if reconstructionCandidateCheckWith supports vertices then
-      decide (vertices ∈ RelativeConicArcs.ConicPassantCode.rowSupports Incident)
-    else true
-
-/-- Check every four-point extension of an indexed seed that can form an admissible seven-set. -/
-def seedExtensionCheck (firstIndex secondIndex thirdIndex : Fin 78) : Bool :=
-  seedExtensionCheckWith minimumSupportCodes firstIndex secondIndex thirdIndex
-
-/-- Equal displayed seed sets give equal extension checks against the same support family. -/
-theorem seedExtensionCheckWith_eq_of_seed_eq (supports : List Nat)
-    (firstIndex secondIndex thirdIndex reorderedFirst reorderedSecond reorderedThird : Fin 78)
-    (seed_eq : indexedSeed firstIndex secondIndex thirdIndex =
-      indexedSeed reorderedFirst reorderedSecond reorderedThird) :
-    seedExtensionCheckWith supports firstIndex secondIndex thirdIndex =
-      seedExtensionCheckWith supports reorderedFirst reorderedSecond reorderedThird := by
-  simp only [seedExtensionCheckWith, extensionPoolWith, seed_eq]
-
-/-- Permuting three displayed seed indices does not change the public extension check. -/
-theorem seedExtensionCheck_eq_of_seed_eq
-    (firstIndex secondIndex thirdIndex reorderedFirst reorderedSecond reorderedThird : Fin 78)
-    (seed_eq : indexedSeed firstIndex secondIndex thirdIndex =
-      indexedSeed reorderedFirst reorderedSecond reorderedThird) :
-    seedExtensionCheck firstIndex secondIndex thirdIndex =
-      seedExtensionCheck reorderedFirst reorderedSecond reorderedThird :=
-  seedExtensionCheckWith_eq_of_seed_eq minimumSupportCodes firstIndex secondIndex thirdIndex
-    reorderedFirst reorderedSecond reorderedThird seed_eq
-
-/-- The seed-extension check for all second and third indices at one first index. -/
-def rowExtensionCheckAt (firstIndex : Fin 78) : Bool :=
-  let supports := minimumSupportCodes
-  (List.finRange 78).all fun secondIndex =>
-    (List.finRange 78).all fun thirdIndex =>
-      if decide (firstIndex = secondIndex ∨ firstIndex = thirdIndex ∨
-        secondIndex = thirdIndex ∨ secondIndex.1 < firstIndex.1 ∨
-          thirdIndex.1 < secondIndex.1) then true
-      else if reconstructionCandidateCheckWith supports
-        (indexedSeed firstIndex secondIndex thirdIndex) then
-          seedExtensionCheckWith supports firstIndex secondIndex thirdIndex
-      else true
-
-/-- A successful seed-extension check classifies each admissible four-extension as a row. -/
-theorem seedExtensionCheck_sound
-    (firstIndex secondIndex thirdIndex : Fin 78)
-    (check : seedExtensionCheck firstIndex secondIndex thirdIndex = true)
-    (extraList : List InternalPoint)
-    (extra_mem : extraList ∈
-      (verticesInOrder (extensionPool firstIndex secondIndex thirdIndex)).sublistsLen 4)
-    (candidate : reconstructionCandidateCheck
-      (indexedSeed firstIndex secondIndex thirdIndex ∪ extraList.toFinset) = true) :
-    indexedSeed firstIndex secondIndex thirdIndex ∪ extraList.toFinset ∈
-      RelativeConicArcs.ConicPassantCode.rowSupports Incident := by
-  have classified := (List.all_eq_true.mp check) extraList extra_mem
-  have candidate_with : reconstructionCandidateCheckWith minimumSupportCodes
-      (indexedSeed firstIndex secondIndex thirdIndex ∪ extraList.toFinset) = true := by
-    simpa [reconstructionCandidateCheck] using candidate
-  simpa [candidate_with] using classified
-
-/-- Extract one indexed seed check from the complete first-index check. -/
-theorem seedExtensionCheck_of_rowExtensionCheckAt
-    (firstIndex secondIndex thirdIndex : Fin 78)
-    (indices_distinct : firstIndex ≠ secondIndex ∧ firstIndex ≠ thirdIndex ∧
-      secondIndex ≠ thirdIndex)
-    (first_lt_second : firstIndex.1 < secondIndex.1)
-    (second_lt_third : secondIndex.1 < thirdIndex.1)
-    (seed_candidate : reconstructionCandidateCheck
-      (indexedSeed firstIndex secondIndex thirdIndex) = true)
-    (check : rowExtensionCheckAt firstIndex = true) :
-    seedExtensionCheck firstIndex secondIndex thirdIndex = true := by
-  have second_check := (List.all_eq_true.mp check) secondIndex (by simp)
-  have third_check := (List.all_eq_true.mp second_check) thirdIndex (by simp)
-  have seed_candidate_with : reconstructionCandidateCheckWith minimumSupportCodes
-      (indexedSeed firstIndex secondIndex thirdIndex) = true := by
-    simpa [reconstructionCandidateCheck] using seed_candidate
-  simpa [seedExtensionCheck, indices_distinct.1, indices_distinct.2.1,
-    indices_distinct.2.2, Nat.not_lt.mpr (Nat.le_of_lt first_lt_second),
-    Nat.not_lt.mpr (Nat.le_of_lt second_lt_third), seed_candidate_with] using third_check
 
 /-- Every geometric passant row has zero concurrence on its triples in the decoded minimum layer. -/
 def GeometricRowsHaveZeroTripleConcurrence : Prop :=
