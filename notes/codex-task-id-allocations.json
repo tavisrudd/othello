@@ -2816,8 +2816,17 @@
       "last": 879,
       "purpose": "paper-scoped finitegeom layout and extraction plan red-team",
       "sequence": 313
+    },
+    {
+      "count": 1,
+      "first": 880,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 880,
+      "purpose": "Query-complexity bounds for aligned-design reconstruction and the sharp point threshold",
+      "sequence": 314
     }
   ],
-  "next_id": 880,
+  "next_id": 881,
   "schema": "codex-task-id-allocations-v1"
 }
