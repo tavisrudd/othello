@@ -420,10 +420,108 @@ def analyse(matrix, orientation):
     return report
 
 
+def signed_stabilizer(matrix):
+    """Signed permutations fixing the matrix, modulo the global sign."""
+    from itertools import permutations, product
+    elements = []
+    for sigma in permutations(range(6)):
+        for tail in product([1, -1], repeat=5):
+            signs = (1,) + tail
+            image = [[signs[i] * signs[j] * matrix[sigma[i]][sigma[j]]
+                      for j in range(6)] for i in range(6)]
+            if image == matrix:
+                elements.append((sigma, signs))
+    return elements
+
+
+def edge_action(sigma, signs):
+    action = [[0] * 15 for _ in range(15)]
+    for index, (i, j) in enumerate(EDGES):
+        basis = [[0] * 6 for _ in range(6)]
+        basis[i][j] = basis[j][i] = 1
+        image = [[signs[a] * signs[b] * basis[sigma[a]][sigma[b]] for b in range(6)]
+                 for a in range(6)]
+        for row, (p, q) in enumerate(EDGES):
+            action[row][index] = image[p][q]
+    return action
+
+
+def hand_check(matrix, orientation):
+    """The two inputs the prose proof leaves to the reader, verified."""
+    jacobian = equality_jacobian(matrix, orientation)
+    stabilizer = signed_stabilizer(matrix)
+    result = {"stabilizer_order": len(stabilizer)}
+
+    # the order-three element of the report, given by its orbit basis
+    orbits = [
+        {(0, 1): 1, (0, 2): 1, (1, 2): 1},
+        {(0, 3): 1, (1, 5): -1, (2, 4): 1},
+        {(0, 4): 1, (1, 3): 1, (2, 5): -1},
+        {(0, 5): 1, (1, 4): -1, (2, 3): -1},
+        {(3, 4): 1, (3, 5): -1, (4, 5): -1},
+    ]
+    index_of = {edge: position for position, edge in enumerate(EDGES)}
+    basis = []
+    for orbit in orbits:
+        vector = [0] * 15
+        for edge, sign in orbit.items():
+            vector[index_of[edge]] = sign
+        basis.append(vector)
+
+    order_three = []
+    for sigma, signs in stabilizer:
+        action = edge_action(sigma, signs)
+        powers = action
+        for _ in range(2):
+            powers = [[sum(powers[i][k] * action[k][j] for k in range(15))
+                       for j in range(15)] for i in range(15)]
+        identity = [[1 if i == j else 0 for j in range(15)] for i in range(15)]
+        if powers == identity and action != identity:
+            if all([sum(action[r][c] * v[c] for c in range(15)) for r in range(15)] == v
+                   for v in basis):
+                order_three.append((sigma, signs))
+    result["order_three_elements_fixing_the_orbit_basis"] = len(order_three)
+
+    # raw reduced rows on the five-dimensional fixed space
+    rows = []
+    for row in jacobian:
+        reduced = [sum(row[index_of[edge]] * vector[index_of[edge]] for edge in EDGES)
+                   for vector in basis]
+        if reduced not in rows:
+            rows.append(reduced)
+    result["distinct_reduced_rows"] = len(rows)
+    result["reduced_row_contents"] = [content(row) for row in rows]
+    result["no_row_content_divisible_by_five"] = all(c % 5 for c in result["reduced_row_contents"])
+    result["reduced_rank_rational"] = rank_rational(rows, 5)
+    result["reduced_rank_mod_five"] = rank_mod(rows, 5, 5)
+
+    # the two kernel vectors of the prose proof, in orbit coordinates
+    witnesses = {"v1": [0, 1, -1, 0, 0], "v2": [-1, 3, 0, -1, 1]}
+    kernel = kernel_mod(rows, 5, 5)
+    result["reduced_kernel_spanned_by_the_two_witnesses"] = same_span_mod(
+        kernel, [[c % 5 for c in v] for v in witnesses.values()], 5, 5)
+
+    tangent, _ = conference_tangent(matrix)
+    for name, coordinates in witnesses.items():
+        vector = [sum(coordinates[k] * basis[k][c] for k in range(5)) for c in range(15)]
+        result[f"{name}_multiplier"] = multiplier(matrix, vector)
+        result[f"{name}_in_conference_tangent"] = (
+            rank_rational(tangent, 15) == rank_rational(tangent + [vector], 15))
+
+    # the representative in orbit coordinates
+    edge_vector = [matrix[i][j] for (i, j) in EDGES]
+    result["representative_orbit_coordinates"] = [
+        c for c in kernel_rational(
+            [[basis[k][row] for k in range(5)] + [-edge_vector[row]] for row in range(15)],
+            6)[0][:5]]
+    return result
+
+
 def build():
     return {
         "description": "characteristic-five degeneracy of the C815 weighted Jacobian",
         "golden": analyse(GOLDEN, 1),
+        "golden_hand_check": hand_check(GOLDEN, 1),
         "opposite": analyse(OPPOSITE, -1),
     }
 

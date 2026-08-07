@@ -56,6 +56,36 @@
     "representative_in_kernel_mod_five": true,
     "representative_in_rational_mu_kernel": false
   },
+  "golden_hand_check": {
+    "distinct_reduced_rows": 8,
+    "no_row_content_divisible_by_five": true,
+    "order_three_elements_fixing_the_orbit_basis": 2,
+    "reduced_kernel_spanned_by_the_two_witnesses": true,
+    "reduced_rank_mod_five": 3,
+    "reduced_rank_rational": 4,
+    "reduced_row_contents": [
+      6,
+      4,
+      2,
+      2,
+      4,
+      2,
+      2,
+      6
+    ],
+    "representative_orbit_coordinates": [
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "stabilizer_order": 60,
+    "v1_in_conference_tangent": true,
+    "v1_multiplier": 0,
+    "v2_in_conference_tangent": true,
+    "v2_multiplier": 0
+  },
   "opposite": {
     "compound_derivative_anticommutes_on_mu_kernel": true,
     "compound_derivative_commutes_on_representative": true,

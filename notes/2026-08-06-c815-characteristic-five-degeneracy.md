@@ -96,20 +96,33 @@ does nothing. Hence two and five are not merely the observed bad primes; they
 are the only primes that can be bad, and three is excluded structurally rather
 than by inspection.
 
-## What is proved and what is still computational
+## Status of the proof
 
-Proved outright, each in a line or two from the above: the engine identity; the
-\(\sigma\)-eigenspace description of \(\mathbf1\oplus\mathbf4\); the compound
-square \(C^2=125I\); and the anticommutation \(CD(X)=-D(X)C\) on \(\ker\mu\).
+Complete. The full prose proof now lives in the C815 report itself, under "The
+characteristic-five theorem", and this note records the discovery and the
+surrounding context rather than the argument.
 
-Still carried by the bundle rather than by a written argument: the passage from
-the anticommutation to the entrywise divisibility \(J(\ker\mu)\subseteq
-5\mathbf Z^{20}\). The ramification sketch above is the right mechanism and the
-divisibility is exact in the bundle — every image content is ten, the two coming
-from the uniform evenness C815 already recorded and the five from here — but
-turning the valuation argument into a clean proof needs the five-adic
-elementary-divisor bookkeeping for \(C\) written out. That is the one remaining
-gap, and it is a bounded one.
+The route that closed it is not the valuation bookkeeping this note first
+sketched. Two ingredients replaced it. In gauge coordinates \(y_e=(A_0)_eX_e\)
+the whole derivative becomes combinatorial: the triangle half is
+\(\tau_S\,Y(S)\), the Hodge cofactor array is
+\(2\varepsilon\tau_S(\mathbf J_3-P_S)\) for a perfect matching \(P_S\), and on
+\(\mu=0\) directions the two combine to
+\(\mathrm dF_S=-2\varepsilon\tau_S(4Y(S)+Y_{P_S})\). Then the same equivariant
+reduction C815 already uses works modulo five, because three is invertible there
+and every irreducible \(\mathbf F_5[\mathrm A_5]\)-module has exactly
+one-dimensional order-three fixed space — so fixed-point dimension equals
+composition length, and a submodule with the right fixed space is the whole
+thing. The two hand checks that remain are the mod-five rank of the same
+eight-by-five table and the tangency of its two kernel vectors.
+
+That is a better outcome than the sketch, because it reuses the table the report
+already displays instead of introducing new machinery, and because it explains
+the \(-5\) minor: five divides that minor for every choice of rows and every
+orbit basis, since the table drops rank modulo five.
+
+The compound picture above survives as the reason no prime other than two and
+five can be bad, which the combinatorial proof does not by itself supply.
 
 The characteristic-two collapse is untouched. The primitive Jacobian has rank
 four there, its kernel is eleven-dimensional, and no analogue of the engine
@@ -170,10 +183,10 @@ and there is no evidence yet that one exists. Not allocated.
 
 ## Evidence bundle
 
-- `notes/2026-08-06-c815-characteristic-five-degeneracy.py` — 16,796 bytes,
-  SHA-256 `ae97d18fa3eba6b2f27c8c4af5bd02c1b56dbf35f5fb9fc1e63e2df9e6c3ba64`;
-- `notes/2026-08-06-c815-characteristic-five-degeneracy.json` — 2,420 bytes,
-  SHA-256 `703a7d76b6c4fc243d3bfb3fbc042991a5625cf8fa90b175c07b8c7cd2d1c223`.
+- `notes/2026-08-06-c815-characteristic-five-degeneracy.py` — 20,950 bytes,
+  SHA-256 `38226476475bd85b46a3bc7fdd16589dc5479121561f6d8a80f30766acc4aefe`;
+- `notes/2026-08-06-c815-characteristic-five-degeneracy.json` — 3,056 bytes,
+  SHA-256 `2efca6885f1c010acfa0f67fcfc7a9a82bdfa976f4a47d7ab01b4e9d4349cdc4`.
 
 Replay from the repository root:
 
@@ -198,6 +211,16 @@ anticommutes with \(C\) on \(\ker\mu\) and commutes on the representative
 direction; that every image content on \(\ker\mu\) is ten; and the headline
 equality of the modular kernel with the \(\mu\equiv0\) hyperplane.
 
+It also verifies the two inputs the prose proof in the C815 report leaves to the
+reader, so that nothing in that proof is asserted without a machine check
+alongside it: the stabilizer order and the existence of an order-three element
+fixing the displayed orbit basis; that the eight distinct raw reduced rows have
+contents \(6,4,2,2,4,2,2,6\), none divisible by five, so the content division in
+the displayed table cannot change the modular rank; that the reduced table has
+rank four over the rationals and three modulo five; that its modular kernel is
+spanned by \(u_2-u_3\) and \(-u_1+3u_2-u_4+u_5\); and that both of those lie in
+the conference tangent space with multiplier zero.
+
 ## Mystery ledger
 
 - **Settled — the characteristic-five drop.** The modular kernel is the
@@ -210,9 +233,13 @@ equality of the modular kernel with the \(\mu\equiv0\) hyperplane.
 - **Settled — why three is not a bad prime.** The only prime the compound
   grading can see is the ramified prime of \(\mathbf Z[\varphi]\), which is
   five; two is the separate primitive-normalization factor.
-- **Open — the divisibility step.** The five-adic elementary-divisor argument
-  for \(J(\ker\mu)\subseteq5\mathbf Z^{20}\) is sketched, not written. Bounded;
-  no successor allocated yet.
+- **Settled — the divisibility step.** Closed by the gauge-coordinate reduction
+  and the modular equivariant argument, both written out in the C815 report. The
+  five-adic route this note first proposed was not needed.
+- **Settled — the \(-5\) minor.** Its divisibility by five is forced by the
+  modular rank drop and is independent of the chosen rows and orbit basis; only
+  the cofactor \(-1\) is a normalization artifact. The C815 ledger entry that
+  deflated the minor entirely is corrected there.
 - **Open — characteristic two.** The rank-four collapse of the primitive
   Jacobian has no explanation here and no analogue of the engine identity.
 - **Closed — the exceptional-ladder connection.** Negative, for the reasons
