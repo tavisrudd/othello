@@ -12,6 +12,8 @@ import RelativeConicArcs.ClebschInvariantCubic
 import RelativeConicArcs.AlignedTwoGraph
 import RelativeConicArcs.AlignedFamilyFaithfulness
 import RelativeConicArcs.AlignedQueryFamily
+import RelativeConicArcs.AlignedQueryFaithfulness
+import RelativeConicArcs.SeidelPrincipalMinors
 import RelativeConicArcs.ClebschPassagesCorrespondence
 
 /-!
@@ -27,7 +29,14 @@ in `ClebschGoldenConference`; both bounds behind the triangle Ramsey equality
 on six labelled points, and the aligned anchor they produce, are proved here.
 Aligned-design faithfulness is proved for every two-graph on a finite point set
 with at least seven points: the aligned four-sets determine the two-graph up to
-one global complement bit.
+one global complement bit.  The four-sets meeting one aligned four-point anchor
+in at least two points already suffice for that conclusion, which is the
+sufficiency statement accompanying the count of those tests.  For a Seidel
+matrix — symmetric, vanishing diagonal, off-diagonal entries `1` or `-1` — the
+principal four-by-four minor on four distinct labels is `-3` exactly on the
+aligned four-sets of its two-graph and is `5` otherwise, so its
+determinant-`(-3)` family determines its signing up to diagonal switching and
+one global sign.
 
 The finite steps use three methods.  Kernel `decide` takes the displayed
 reflection matrices entrywise, the finite-field nonsquare witness over the
@@ -39,8 +48,10 @@ reflection formula; these are rewriting procedures producing kernel-checked
 terms, not evaluations of a `Decidable` instance.  One determinant falls to
 cofactor expansion.  The third-outside-point elimination, the normalization of
 an arbitrary two-graph onto that classifier, the extension from seven points to
-larger point sets, and the count of the tests meeting a fixed four-point anchor
-in at least two points are symbolic.
+larger point sets, the count of the tests meeting a fixed four-point anchor in
+at least two points and their sufficiency, and the identification of the
+determinant-`(-3)` family of a Seidel matrix with its aligned family are
+symbolic.
 
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral
@@ -97,6 +108,14 @@ claim.
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven
 #print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq
 #print axioms RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq
+#print axioms RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide
+#print axioms RelativeConicArcs.AlignedTwoGraph.aligned_iff_triangleSign_eq
+#print axioms RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_iff_aligned
+#print axioms RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_or_five
+#print axioms RelativeConicArcs.AlignedTwoGraph.exists_switching_of_det_family_eq
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.chartConductor_eq_branchIdeal
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.goldenRoot_structural_package

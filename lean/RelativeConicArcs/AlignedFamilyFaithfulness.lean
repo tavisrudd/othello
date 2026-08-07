@@ -25,6 +25,12 @@ triangle bit of the seven points.  Larger point sets are handled by covering any
 two triples with one seven-point restriction and matching the complement bits on
 the overlap.
 
+The seven-point step `sevenPoint_agreement` reads only the four-sets meeting its
+anchor in at least two points, never the four-sets disjoint from the anchor or
+meeting it in one point.  That restriction is what
+`exists_complementBit_of_selectedQueryFamily_eq` uses to run the same argument
+along one fixed anchor.
+
 No step here is a search or an enumeration of two-graphs.  The finite checks
 are kernel reductions over small Boolean case splits: the Boolean identities
 behind the transport lemmas range over at most five bits, and the index facts
@@ -239,22 +245,43 @@ end Transport
 private theorem bool_eq_of_iff {a b : Bool} (h : a = true ↔ b = true) : a = b := by
   cases a <;> cases b <;> simp_all
 
+/-- Two distinct elements lying in both of two finite sets bound the size of
+their intersection below by two. -/
+theorem two_le_card_inter_of_two_common {β : Type*} [DecidableEq β]
+    {s t : Finset β} (x y : β) (hxy : x ≠ y) (hxs : x ∈ s) (hxt : x ∈ t)
+    (hys : y ∈ s) (hyt : y ∈ t) : 2 ≤ (s ∩ t).card := by
+  have hsub : ({x, y} : Finset β) ⊆ s ∩ t := by
+    intro z hz
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hz
+    rcases hz with rfl | rfl
+    · exact Finset.mem_inter.mpr ⟨hxs, hxt⟩
+    · exact Finset.mem_inter.mpr ⟨hys, hyt⟩
+  calc 2 = ({x, y} : Finset β).card := (Finset.card_pair hxy).symm
+    _ ≤ (s ∩ t).card := Finset.card_le_card hsub
+
 section SevenPoint
 
 variable {tau sigma : α → α → α → Bool}
 
 /-- Seven points carrying an anchor normalized for both two-graphs, with the
-same aligned four-sets, carry the same triangle bits.  The seven points are
-indexed so that the anchor is `p 0, p 1, p 2, p 3` with root `p 0`, and the
-three remaining points are `p 4, p 5, p 6`.  Distinctness of the seven points
-is not used: the hypotheses are read at distinct indices and the conclusion is
-asserted at distinct indices. -/
+same aligned four-sets among the four-sets meeting the anchor in at least two
+points, carry the same triangle bits.  The seven points are indexed so that the
+anchor is `p 0, p 1, p 2, p 3` with root `p 0`, and the three remaining points
+are `p 4, p 5, p 6`.  Distinctness of the seven points is not used: the
+hypotheses are read at distinct indices and the conclusion is asserted at
+distinct indices.
+
+The restriction on `hfam` is what makes this theorem a statement about the
+selected tests rather than about all thirty-five four-sets of a seven-set: only
+the four-sets sharing at least two indices with `{0, 1, 2, 3}` are read, namely
+the four with three anchor indices and the eighteen with two. -/
 theorem sevenPoint_agreement (p : Fin 7 → α)
     (hsymT : TriangleSymmetric tau) (hparT : FourSetParity tau)
     (hsymS : TriangleSymmetric sigma) (hparS : FourSetParity sigma)
     (hnT : NormalizedAnchor tau (p 0) (p 1) (p 2) (p 3))
     (hnS : NormalizedAnchor sigma (p 0) (p 1) (p 2) (p 3))
     (hfam : ∀ i j k l : Fin 7, i ≠ j → i ≠ k → i ≠ l → j ≠ k → j ≠ l → k ≠ l →
+      2 ≤ (({i, j, k, l} : Finset (Fin 7)) ∩ {0, 1, 2, 3}).card →
       (Aligned tau (p i) (p j) (p k) (p l) ↔ Aligned sigma (p i) (p j) (p k) (p l))) :
     ∀ i j k : Fin 7, i ≠ j → i ≠ k → j ≠ k →
       sigma (p i) (p j) (p k) = tau (p i) (p j) (p k) := by
@@ -272,20 +299,28 @@ theorem sevenPoint_agreement (p : Fin 7 → α)
       rw [aligned_root_pair_iff hparT hnT.root₁₂ (p m),
         aligned_root_pair_iff hparS hnS.root₁₂ (p m)]
       exact hfam 0 2 3 m (by decide) (by decide) h0 (by decide) h2 h3
+        (two_le_card_inter_of_two_common 0 2 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [anchorSignature, anchorCut, cutBit_cutOfBits_zero, cutBit_cutOfBits_two,
         cutBit_three]
       rw [aligned_root_pair_iff hparT hnT.root₀₂ (p m),
         aligned_root_pair_iff hparS hnS.root₀₂ (p m)]
       exact hfam 0 1 3 m (by decide) (by decide) h0 (by decide) h1 h3
+        (two_le_card_inter_of_two_common 0 1 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [anchorSignature, anchorCut, cutBit_cutOfBits_zero, cutBit_cutOfBits_one,
         cutBit_three]
       rw [aligned_root_pair_iff hparT hnT.root₀₁ (p m),
         aligned_root_pair_iff hparS hnS.root₀₁ (p m)]
       exact hfam 0 1 2 m (by decide) (by decide) h0 (by decide) h1 h2
+        (two_le_card_inter_of_two_common 0 1 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [anchorSignature, anchorCut, cutBit_cutOfBits_zero, cutBit_cutOfBits_one,
         cutBit_cutOfBits_two]
       rw [aligned_outer_iff hparT hnT (p m), aligned_outer_iff hparS hnS (p m)]
       exact hfam 1 2 3 m (by decide) (by decide) h1 (by decide) h2 h3
+        (two_le_card_inter_of_two_common 1 2 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
   -- The two-outside-point tests agree, coordinate by coordinate.
   have hpairAll : ∀ m n : Fin 7, (0 : Fin 7) ≠ m → (1 : Fin 7) ≠ m → (2 : Fin 7) ≠ m →
       (3 : Fin 7) ≠ m → (0 : Fin 7) ≠ n → (1 : Fin 7) ≠ n → (2 : Fin 7) ≠ n →
@@ -302,31 +337,43 @@ theorem sevenPoint_agreement (p : Fin 7 → α)
       rw [aligned_anchor_pair_iff hparT hnT.root₀₁ (p m) (p n),
         aligned_anchor_pair_iff hparS hnS.root₀₁ (p m) (p n)]
       exact hfam 1 2 m n (by decide) h1m h1n h2m h2n hmn
+        (two_le_card_inter_of_two_common 1 2 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [pairSignature, pairAligned, anchorCut, cutBit_cutOfBits_zero,
         cutBit_cutOfBits_two]
       rw [aligned_anchor_pair_iff hparT hnT.root₀₂ (p m) (p n),
         aligned_anchor_pair_iff hparS hnS.root₀₂ (p m) (p n)]
       exact hfam 1 3 m n (by decide) h1m h1n h3m h3n hmn
+        (two_le_card_inter_of_two_common 1 3 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [pairSignature, pairAligned, anchorCut, cutBit_cutOfBits_zero, cutBit_three,
         Bool.xor_false, Bool.false_xor]
       rw [aligned_root_outside_iff hsymT hparT (p 1) (p m) (p n),
         aligned_root_outside_iff hsymS hparS (p 1) (p m) (p n)]
       exact hfam 1 0 m n (by decide) h1m h1n h0m h0n hmn
+        (two_le_card_inter_of_two_common 1 0 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [pairSignature, pairAligned, anchorCut, cutBit_cutOfBits_one,
         cutBit_cutOfBits_two]
       rw [aligned_anchor_pair_iff hparT hnT.root₁₂ (p m) (p n),
         aligned_anchor_pair_iff hparS hnS.root₁₂ (p m) (p n)]
       exact hfam 2 3 m n (by decide) h2m h2n h3m h3n hmn
+        (two_le_card_inter_of_two_common 2 3 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [pairSignature, pairAligned, anchorCut, cutBit_cutOfBits_one, cutBit_three,
         Bool.xor_false, Bool.false_xor]
       rw [aligned_root_outside_iff hsymT hparT (p 2) (p m) (p n),
         aligned_root_outside_iff hsymS hparS (p 2) (p m) (p n)]
       exact hfam 2 0 m n (by decide) h2m h2n h0m h0n hmn
+        (two_le_card_inter_of_two_common 2 0 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
     · simp only [pairSignature, pairAligned, anchorCut, cutBit_cutOfBits_two, cutBit_three,
         Bool.xor_false, Bool.false_xor]
       rw [aligned_root_outside_iff hsymT hparT (p 3) (p m) (p n),
         aligned_root_outside_iff hsymS hparS (p 3) (p m) (p n)]
       exact hfam 3 0 m n (by decide) h3m h3n h0m h0n hmn
+        (two_le_card_inter_of_two_common 3 0 (by decide) (by simp) (by decide)
+          (by simp) (by decide))
   -- Hence the two normalized seven-point data coincide.
   set dT : NormalizedSevenData :=
     { cut := ![anchorCut tau (p 0) (p 1) (p 2) (p 3) (p 4),
@@ -559,7 +606,7 @@ theorem exists_complementBit_on_seven [DecidableEq α]
     (fourSetParity_xorBit hparT eT) (triangleSymmetric_xorBit hsymS eS)
     (fourSetParity_xorBit hparS eS) hnT hnS
     (by
-      intro a b c d hab hac had hbc hbd hcd
+      intro a b c d hab hac had hbc hbd hcd _
       rw [aligned_xorBit_iff, aligned_xorBit_iff]
       exact hfam (p a) (p b) (p c) (p d) (hpS a) (hpS b) (hpS c) (hpS d)
         ⟨fun h => hab (hpinj h), fun h => hac (hpinj h), fun h => had (hpinj h),

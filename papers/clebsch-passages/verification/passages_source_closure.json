@@ -9,26 +9,34 @@
     "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
     "Mathlib.LinearAlgebra.Matrix.Notation",
     "Mathlib.Tactic.FinCases",
+    "Mathlib.Tactic.Linarith",
+    "Mathlib.Tactic.LinearCombination",
     "Mathlib.Tactic.NormNum",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 17,
+  "module_count": 19,
   "roots": [
     "RelativeConicArcs.Gates.ClebschPassages"
   ],
   "schema_version": 1,
   "sources": [
     {
-      "bytes": 32968,
+      "bytes": 35545,
       "module": "RelativeConicArcs.AlignedFamilyFaithfulness",
       "path": "RelativeConicArcs/AlignedFamilyFaithfulness.lean",
-      "sha256": "1e7670f2533c172afa37acf3fd081b3467bd010dd4306960060099d0ad21ed56"
+      "sha256": "8e8d8e91c1cd671fdc93323b0845ff47c9609fe9200cb9e3499abe96d99e0773"
     },
     {
-      "bytes": 8534,
+      "bytes": 13613,
+      "module": "RelativeConicArcs.AlignedQueryFaithfulness",
+      "path": "RelativeConicArcs/AlignedQueryFaithfulness.lean",
+      "sha256": "ea37695f67e2a8ed0dd21dbf3250677ae8a58a936e4843d2cf5ecb6d2a572457"
+    },
+    {
+      "bytes": 8726,
       "module": "RelativeConicArcs.AlignedQueryFamily",
       "path": "RelativeConicArcs/AlignedQueryFamily.lean",
-      "sha256": "1b7dfc9171f244495996209594bdfeb78a11134100af74611dacf3fb295f63ce"
+      "sha256": "0b54a64f2fbf9a303369d8e4030d51113b1f33e136be93009331eda7d58eeeec"
     },
     {
       "bytes": 24843,
@@ -61,10 +69,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 7169,
+      "bytes": 8579,
       "module": "RelativeConicArcs.Gates.ClebschPassages",
       "path": "RelativeConicArcs/Gates/ClebschPassages.lean",
-      "sha256": "361740f1fb6b805bbb5d03688ab918b2cf7e5dd72546775a87ea4f1bfbcb104a"
+      "sha256": "2a12df4f56ab7df0cc3fd3761eb30c6366db189289c58ee50a865d4d202b46a2"
     },
     {
       "bytes": 7633,
@@ -101,6 +109,12 @@
       "module": "RelativeConicArcs.QuadraticPinching",
       "path": "RelativeConicArcs/QuadraticPinching.lean",
       "sha256": "550623dc5bfcf48a54f178b4359a0f29fec4e78ed721c11b949f9259c028fdd4"
+    },
+    {
+      "bytes": 19914,
+      "module": "RelativeConicArcs.SeidelPrincipalMinors",
+      "path": "RelativeConicArcs/SeidelPrincipalMinors.lean",
+      "sha256": "3479f18c61d4c26a46031002316c67a50a3acaed455b51f3c99794d1ac8a9d09"
     },
     {
       "bytes": 3417,

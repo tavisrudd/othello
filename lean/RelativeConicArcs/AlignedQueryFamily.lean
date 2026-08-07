@@ -16,10 +16,12 @@ chooses two of each.  The counts are `1`, `4(n-4)` and `6` times `n-4` choose
 `2`, and their sum is `3n^2 - 23n + 45`.
 
 The count is a cardinality of an explicitly described family, so the tests it
-counts are distinct by construction.  Nothing here asserts that these tests
-suffice to reconstruct a two-graph, or bounds the cost of finding the anchor;
-the reconstruction theorem is `exists_complementBit_of_alignedFamily_eq`, whose
-seven-point restrictions each locate their own anchor.
+counts are distinct by construction.  That these tests suffice to reconstruct
+the two-graph up to one global complement bit is
+`exists_complementBit_of_selectedQueryFamily_eq`; the reconstruction theorem
+reading every four-set is `exists_complementBit_of_alignedFamily_eq`, whose
+seven-point restrictions each locate their own anchor.  Nothing here bounds the
+cost of finding the anchor.
 -/
 
 namespace RelativeConicArcs
@@ -41,7 +43,9 @@ private theorem mem_queryFibre {Q : Finset α} {k : ℕ} {S : Finset α} :
   simp only [queryFibre, Finset.mem_filter, Finset.mem_powersetCard]
   exact ⟨fun h => ⟨h.1.2, h.2⟩, fun h => ⟨⟨Finset.subset_univ _, h.1⟩, h.2⟩⟩
 
-private theorem mem_selectedQueryFamily {Q : Finset α} {S : Finset α} :
+/-- Membership in the query family: a four-element set meeting the anchor in at
+least two points. -/
+theorem mem_selectedQueryFamily {Q : Finset α} {S : Finset α} :
     S ∈ selectedQueryFamily Q ↔ S.card = 4 ∧ 2 ≤ (S ∩ Q).card := by
   simp only [selectedQueryFamily, Finset.mem_filter, Finset.mem_powersetCard]
   exact ⟨fun h => ⟨h.1.2, h.2⟩, fun h => ⟨⟨Finset.subset_univ _, h.1⟩, h.2⟩⟩
