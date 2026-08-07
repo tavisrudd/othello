@@ -7,8 +7,10 @@
 ## State
 
 Work items 1, 2, 4 and 6 are closed, and item 3 has its small-case evidence.
-Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
-`notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim).
+Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
+`notes/2026-08-07-c880-mask-ilp-bound.md` (the exact eight-point mask bound),
+`notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim) and
+`notes/2026-08-07-c880-tetrad-screen.md` (the vanishing-tetrad screen).
 
 - Seven points is sharp: the alignment tests fail to determine a two-graph up to
   complement at six points, in 46 groups covering 96 of the 512 complement
@@ -47,10 +49,17 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
   floor \(\binom{n-1}2-1\), one below the triple oracle's, so the coarser
   observable could be cheaper on average. Reviewed by a Fable pass, whose
   corrections are applied: `notes/2026-08-07-c880-framing-review.md`.
-- At eight points the bracket is \(25\le\mathrm{minimum}\le44\) against the
-  exhibited 53, so the construction is not optimal. The weight-two difference
-  argument that settles seven points is vacuous at eight, where the alignment
-  code's minimum distance is four.
+- At eight points the bracket is \(30\le\mathrm{minimum}\le44\) against the
+  exhibited 53, so the construction is not optimal. The lower end is the exact
+  minimum hitting set of the weight-four difference masks, proved optimal by two
+  solvers and by a structural argument: the masks are the evenly crossing pairs
+  of four-four splits of the eight points, a hitting set touches all but a
+  pairwise unevenly crossing family, and such a family is a set of pairwise skew
+  lines of \(\mathrm{PG}(3,2)\), so it has at most five members and the bound is
+  \(35-5\). The same 315 constraints are the seven-point weight-two masks under
+  the split correspondence, which is why both sizes give 30 — and why this route
+  cannot give more than 30 at eight points. Improving it needs constraints from
+  pairs at alignment distance five or more.
 
 The audit changes the framing more than it changes the mathematics. Principal-minor
 reconstruction solves the same problem up to the same gauge — principal minors are
@@ -73,6 +82,21 @@ against Dammak, Lopez, Pouzet and Si Kaddour, whose \(v\ge7\) is the endpoint of
 six-point failure. The non-bipartite link criterion and the exact seven-point value
 have no located predecessor; the link criterion is the weakest supported, since Boolean
 sensitivity and certificate complexity was not searched.
+
+The tetrad screen adds no pre-emption and one setting. No source counts
+four-variable tests as a query complexity or bounds their number, so nothing is
+pre-empted; but the FindOneFactorClusters algorithm of Kummerfeld and Ramsey does
+take a four-set indicator as its primitive observation and pays \(\binom n4\) of
+them in the worst case, each a hypothesis test on sampled data. That is a genre
+match rather than a matched-units baseline — it recovers a clustering under a
+one-factor measurement model, not a two-graph — so item 8 may name it and may not
+claim a speedup against it. Three wording constraints follow for item 7: cite
+that algorithm rather than presenting the four-set oracle as unusual; say
+"removable without losing separation" in full, because "nonredundant tetrad" is
+an occupied term of art meaning rank-redundancy in a fixed model's implied
+constraints; and position the complexity claim inside the existing
+query-counting genre of structure learning, where Franquesa Monés, Zhang and
+Uhler prove matching bounds for conditional-independence tests.
 
 Open next: the constant, now bracketed between \(0.616\,n^2\) and \(3n^2\).
 Two concrete routes — a shared-test construction whose links are non-bipartite

@@ -1163,6 +1163,127 @@ fn mode_bounds(n: usize, weight: usize, out: &str) {
     );
 }
 
+// ---------------------------------------------------------------- masks
+
+/// Every pair-difference mask of weight at most `w`, each with the first
+/// witness pair found for it, by the same pigeonhole split as
+/// `low_weight_masks`.
+fn low_weight_mask_witnesses(
+    vectors: &[u128],
+    tests: usize,
+    w: usize,
+) -> std::collections::HashMap<u128, (u32, u32)> {
+    let blocks = w + 1;
+    let mut out: std::collections::HashMap<u128, (u32, u32)> = std::collections::HashMap::new();
+    for b in 0..blocks {
+        let lo = tests * b / blocks;
+        let hi = tests * (b + 1) / blocks;
+        let bm: u128 = ((1u128 << (hi - lo)) - 1) << lo;
+        let mut keyed: Vec<(u128, u32)> = vectors
+            .iter()
+            .enumerate()
+            .map(|(i, &v)| (v & bm, i as u32))
+            .collect();
+        keyed.sort_unstable();
+        let mut i = 0usize;
+        while i < keyed.len() {
+            let mut j = i + 1;
+            while j < keyed.len() && keyed[j].0 == keyed[i].0 {
+                j += 1;
+            }
+            for a in i..j {
+                for c in (a + 1)..j {
+                    let (ia, ic) = (keyed[a].1, keyed[c].1);
+                    let d = vectors[ia as usize] ^ vectors[ic as usize];
+                    if d != 0 && (d.count_ones() as usize) <= w {
+                        let key = if ia <= ic { (ia, ic) } else { (ic, ia) };
+                        out.entry(d)
+                            .and_modify(|e| {
+                                if key < *e {
+                                    *e = key;
+                                }
+                            })
+                            .or_insert(key);
+                    }
+                }
+            }
+            i = j;
+        }
+    }
+    out
+}
+
+/// The lower-bound certificate: every difference mask of weight at most
+/// `weight`, with a witness pair of switching classes for each.
+///
+/// If two two-graphs have alignment vectors differing exactly on a set M of
+/// tests, then a family that separates them contains a test of M.  So every
+/// separating family is a hitting set of the masks below, and the minimum
+/// separating family is at least the minimum hitting set of them — an exact
+/// integer program on `tests` binary variables, solved and independently
+/// re-solved by the companion script.  Each witness makes its own constraint
+/// checkable on its own, without repeating the scan that found it: recompute
+/// the two alignment vectors from the two edge lists and take their difference.
+fn mode_masks(n: usize, weight: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let vectors: Vec<u128> = reps.iter().map(|&g| m.alignment(g)).collect();
+    let tests = m.tests();
+    eprintln!("n={} pairs={} tests={}", n, vectors.len(), tests);
+
+    let (masks, _largest_bucket, compares) = low_weight_masks(&vectors, tests, weight);
+    let witnesses = low_weight_mask_witnesses(&vectors, tests, weight);
+    assert_eq!(
+        masks.len(),
+        witnesses.len(),
+        "witness scan disagrees with the mask scan"
+    );
+    let mut mask_vec: Vec<u128> = masks.into_iter().collect();
+    mask_vec.sort_unstable();
+    let mut by_weight = vec![0usize; weight + 1];
+    for &mk in mask_vec.iter() {
+        by_weight[mk.count_ones() as usize] += 1;
+    }
+    eprintln!(
+        "masks of weight <= {}: {} (per weight {:?}), comparisons {}",
+        weight,
+        mask_vec.len(),
+        by_weight,
+        compares
+    );
+
+    let mut rows = Vec::new();
+    for &mk in mask_vec.iter() {
+        let (a, b) = witnesses[&mk];
+        let (ga, gb) = (reps[a as usize], reps[b as usize]);
+        assert_eq!(m.alignment(ga) ^ m.alignment(gb), mk, "bad witness");
+        rows.push(format!(
+            "{{\"tests\":{},\"witness\":[{},{}],\"witness_edges\":[{},{}]}}",
+            json_bits(mk, tests),
+            ga,
+            gb,
+            json_edges(&m.edges(ga)),
+            json_edges(&m.edges(gb))
+        ));
+    }
+    let fourset_rows: Vec<String> = m.foursets.iter().map(json_fourset).collect();
+    let doc = format!(
+        "{{\"artifact\":\"c880-difference-masks\",\"schema\":1,\"n\":{},\
+         \"complement_pairs\":{},\"tests_available\":{},\
+         \"difference_weight_scanned\":{},\"masks_by_weight\":{:?},\
+         \"mask_count\":{},\"foursets\":[{}],\"masks\":[{}]}}\n",
+        n,
+        vectors.len(),
+        tests,
+        weight,
+        by_weight,
+        mask_vec.len(),
+        fourset_rows.join(","),
+        rows.join(",")
+    );
+    fs::write(out, doc).expect("write output");
+}
+
 // ---------------------------------------------------------------- family
 
 /// A test on {p,q,x,y} is sensitive to the elementary flip of the pair {x,y}
@@ -1629,6 +1750,12 @@ fn main() {
             let weight: usize = getval("--weight").map(|s| s.parse().unwrap()).unwrap_or(3);
             let out = getval("--out").expect("--out");
             mode_bounds(n, weight, &out);
+        }
+        "masks" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);
+            let weight: usize = getval("--weight").map(|s| s.parse().unwrap()).unwrap_or(4);
+            let out = getval("--out").expect("--out");
+            mode_masks(n, weight, &out);
         }
         "family" => {
             let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);

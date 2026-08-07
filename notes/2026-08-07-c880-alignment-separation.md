@@ -208,6 +208,17 @@ only overstate the bound, so its value is discarded rather than reported.
 The 44 is an upper bound with a witness family recorded in the certificate; it
 is not claimed optimal.
 
+**Superseded, same day.** The capped search was replaced by an exact integer
+program: the minimum hitting set of those 315 constraints is exactly 30, the
+mask-free set of 40 is maximum, and the bracket is
+\(30\le\mathrm{minimum}(8)\le44\). The masks turn out to be the evenly crossing
+pairs of four-four splits of the eight points, which are the seven-point
+weight-two masks in disguise, and their hitting number is 35 minus the largest
+partial spread of \(\mathrm{PG}(3,2)\). Every eight-point statement below that
+uses 25 as the lower end is superseded by
+`notes/2026-08-07-c880-mask-ilp-bound.md`; the entropy bound itself is unchanged
+and remains the only bound that grows with \(n\).
+
 
 ## 5. A sharper lower bound, and what forces the constant
 
@@ -613,7 +624,7 @@ are removable and that none extends.
 
 | file | bytes | sha256 |
 |------|-------|--------|
-| `2026-08-07-c880-alignment-separation.rs` | 57437 | 9392e945cbd73b099006ac6362ac0856f37918dba38f674911756734a9177712 |
+| `2026-08-07-c880-alignment-separation.rs` | 62332 | 946583c8841e54985a5d57d6c632bedc885c6e0d57e0fa734d0b78ad9f38906d |
 | `2026-08-07-c880-alignment-separation-replay.py` | 8373 | 95cc38756438c7a9d5e7b893b6bdbf917aa7425e9518290022b42982c5ba7fd4 |
 | `2026-08-07-c880-alignment-separation-threshold.json` | 2810 | efe57db769fb9b33500cf31b13fac7e10ee103f5f653fefdb6a90c2fedbe9423 |
 | `2026-08-07-c880-alignment-separation-census7.json` | 677 | cea77f21fef491a53a1d2cff21ad482a5208f121f0d8bc8ba634ef16d78b3a8b |
