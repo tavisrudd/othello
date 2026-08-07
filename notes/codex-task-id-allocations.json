@@ -2825,8 +2825,17 @@
       "last": 880,
       "purpose": "Query-complexity bounds for aligned-design reconstruction and the sharp point threshold",
       "sequence": 314
+    },
+    {
+      "count": 1,
+      "first": 881,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 881,
+      "purpose": "Kaipa persona review follow-up: line-orbit/incidence reformulation of R5, elliptic-curve identification, and cubic-pencil literature gaps for the beyond-redundancy-four PRS paper",
+      "sequence": 315
     }
   ],
-  "next_id": 881,
+  "next_id": 882,
   "schema": "codex-task-id-allocations-v1"
 }
