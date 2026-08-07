@@ -31,7 +31,15 @@ manuscript file is touched.
    is an entropy bound proved in section 5, which improves on the counting bound
    20 at every \(n\). The exact value at eight points is open: the
    small-difference method that settles seven points exactly is vacuous there.
-5. **The alignment code's minimum distance jumps from two to four.** At seven
+5. **The scenario has no published competitor, and should not be sold as an
+   algorithm.** No located source reconstructs from an indicator family of fixed
+   order minors, so there is no state of the art for this oracle; but the
+   natural switching-invariant observable is the triple rather than the
+   four-set, and the triples through one fixed point already solve the problem
+   at the optimum. Section 7 sets out the positioning that follows: a rigidity
+   and redundancy result about the aligned design, with the coherence price as
+   robustness, not a query-complexity contribution.
+6. **The alignment code's minimum distance jumps from two to four.** At seven
    points there are pairs of two-graphs whose aligned families differ in exactly
    two four-sets — 315 difference patterns, which is what makes the exact bound
    at seven points possible — and at eight points there are none of weight two,
@@ -289,6 +297,73 @@ The greedy tree is an upper bound on the adaptive optimum, not the optimum; the
 entropy bound of section 5 lower-bounds it by 18 and 25 respectively, and both
 bounds apply to adaptive and nonadaptive decoders alike.
 
+## 7. What this scenario is, and what it is not
+
+The audit settles where this work sits, and it is worth writing the position
+down before any of it reaches the manuscript, because the natural reading of a
+query count is a claim about an algorithm and that is not what these numbers
+are.
+
+**There is no published state of the art for this oracle.** No located source
+reconstructs from an indicator family of fixed-order minors. The nearest
+published work misses in four different directions: principal-minor assignment
+recovers the same object up to the same gauge but from minor *values*;
+Dammak, Lopez, Pouzet and Si Kaddour query the same four-point locality but
+receive the whole induced isomorphism type up to complementation and never
+minimize a query count; Greaves and Suda describe the same design without
+reconstructing anything; and higher-order group synchronization puts
+measurements on hyperedges but they are group-ratio tuples. Being the only
+entrant in a model is not a result, and the negative is bounded by the access
+gaps the audit records.
+
+**The natural gauge-invariant primitive is the triple, not the four-set, and it
+is already optimal.** Switching changes individual Seidel signs, so those are
+not observable in principle — but \(\tau(abc)\) is switching-invariant, and in
+signed-graph language it is exactly the balance bit of the triangle. The
+manuscript's own proof displays the identity
+\(\tau(ijk)=\tau(rij)+\tau(rik)+\tau(rjk)\), so the triples through a single
+fixed point — exactly \(\binom{n-1}2\) of them, the dimension — determine the
+two-graph outright, with one bit of information per query and no waste. Any
+setting in which "only local coherence is measurable" therefore hands the
+decoder triangle coherence and is solved at the optimum immediately. The
+four-set alignment test is a strict coarsening of that, and for the coarser
+oracle to be the primitive one would need a probe that responds to four-point
+coherence and not to three-point coherence. The lane knows no reason why
+anything would. This paragraph is an argument, not a measurement; item 8 of the
+task card is what would settle it, and it is unrun.
+
+**So the query count should not be presented as an algorithmic contribution.**
+Read as an algorithm against a value oracle, the work is pre-empted by
+construction: the state of the art is already exactly optimal, and our own
+oracle is deliberately weaker. Read as an applications claim it would need a
+setting nobody has exhibited.
+
+**Read as rigidity and redundancy of the aligned design, none of that applies.**
+The aligned family is the Greaves and Suda determinant-minus-three design, which
+the paper's geometry hands over as an object rather than as a measurement
+protocol. The natural questions about a determining set are then whether it
+determines, from what size, and how much of it is redundant — and every number
+in this report answers one of those: the design determines the two-graph from
+seven points, six points genuinely fails and not only in the empty-family case,
+exactly 30 of its 35 members are needed at seven points, the optimal deletions
+form two named orbits, and within the anchor construction the complete \(K_4\)
+link is forced. None of this depends on anyone measuring anything.
+
+**The coherence price is then a robustness statement, and it reads better
+backwards.** Since the triple is the natural observable, the four percent of
+section 6 says that being forced down from triple data to four-set coherence —
+by noise, by censoring, or by an apparatus that reports only whether a small
+subsystem is coherent — costs about four percent on average and under a half in
+the worst case. That is a statement about how much the coarser design still
+carries, and it is true whether or not any such apparatus exists.
+
+**Recommended framing for the manuscript**, subject to C816 and C824, who own
+promotion: a rigidity and redundancy result about the aligned design, with the
+coherence-restriction price as a robustness remark, and a plain sentence saying
+that no setting is known whose primitive observation is a four-set alignment
+test. That is what the evidence supports, and it is also where the audit's three
+required wording changes were already pointing.
+
 ## What this certifies, and what it does not
 
 - The threshold and the seven-point minimum are exhaustive statements over all
@@ -302,9 +377,21 @@ bounds apply to adaptive and nonadaptive decoders alike.
 - The trusted boundary is the alignment predicate and the switching-class
   indexing, both of which are stated above and re-derived independently in the
   replay.
-- No literature audit has been run, so nothing here is claimed to be new. The
-  audit is item 6 of the card, and manuscript wording (item 7) is deliberately
-  not drafted before it.
+- The literature audit is `notes/2026-08-07-c880-literature-audit.md`, and its
+  verdicts govern what may be claimed here: nothing supports "first", every
+  claim keeps "to our knowledge", the determinant-family identification becomes
+  a citation to Greaves and Suda, the entropy bound is an application of the
+  standard information-theoretic bound of combinatorial search theory rather
+  than a new method, and the six-point sharpness must be positioned against
+  Dammak, Lopez, Pouzet and Si Kaddour. Its negatives are bounded by the access
+  gaps it records, chiefly the unobtained separating-systems classics and the
+  unsearched Boolean sensitivity literature.
+- Section 7 is positioning and argument, not measurement. That the triple is the
+  natural switching-invariant observable is a proof from the manuscript's own
+  identity; that no real setting has the four-set oracle is a prior, and item 8
+  of the card is what would test it.
+- Manuscript wording (item 7 of the card) is still not drafted here, and C816
+  and C824 own promotion.
 
 ## Reproduction
 
@@ -381,5 +468,7 @@ are removable and that none extends.
 - The weight-two difference patterns at seven points are the mechanism behind
   the exact bound; identifying them structurally for general \(n\) is the most
   direct route to a proved lower bound, and it is a finite question at each \(n\).
-- Items 4 (adaptivity), 5 (regular two-graphs and the promised anchor), 6 (the
-  literature audit) and 8 (a setting that pays per query) are untouched.
+- Item 5 (regular two-graphs and the promised anchor) is untouched. Item 8 (a
+  setting whose primitive observation is a four-set alignment test) is the one
+  that decides whether section 7's positioning can be softened; the lane's prior
+  expectation is that it cannot.
