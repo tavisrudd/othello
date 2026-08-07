@@ -55,6 +55,19 @@ orientation predicates select the opposite six-code fibre; the corrected
 classification is confirmed by an exact independent recomputation committed
 with the report.
 
+## OPER-3 ownership (2026-08-06)
+
+The whole of ledger row OPER-3 is C815's, including the eigenvalue and
+singular-value statements: one row has one owner, so that no piece of it can be
+left for a task that does not know it holds it. Its three remaining pieces are
+the support-sorted closed-four-walk count, the swap-descent form of the
+inclusion-rank input, and the spectral statements resting on
+`B * Bᵀ = q • 1 - A * A`. The row carries no partial-coverage carve-out; see
+the lane handoff's **Formal standard for the whole series**. If the spectral
+half proves large it takes a newly allocated task of its own rather than moving
+into C823, whose scope is the distance, parity, moment and compression row
+family.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.
