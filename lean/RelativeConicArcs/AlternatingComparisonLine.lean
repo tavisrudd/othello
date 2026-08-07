@@ -15,15 +15,18 @@ one constant diagonal entry and one constant off-diagonal entry, hence acts on
 the sum-zero submodule as a scalar.  Transporting this along the pair-sum
 isomorphism onto the Petersen `-2` eigenspace shows that every equivariant
 comparison defined on the sum-zero submodule and landing in that eigenspace is a
-scalar multiple of the pair-sum map.  Requiring the comparison to preserve the
-sum of cubes then forces the cube of the scalar to be one, hence the scalar
-itself to be one over an ordered field.
+scalar multiple of the pair-sum map.  The inverse transport is constructed here
+rather than assumed: one third of the incidence sums of a Petersen `-2`
+eigenvector is the sum-zero vector whose pair sums it is.  Requiring the
+comparison to preserve the sum of cubes then forces the cube of the scalar to be
+one, hence the scalar itself to be one over an ordered field.
 
 Two-transitivity is proved by explicit construction from transpositions together
 with a parity correction rather than by a search over the symmetric group; only
-the two auxiliary statements about avoiding a pair of labels are decided.  The
-fields are unrestricted apart from the invertibility hypotheses stated on each
-declaration.
+finite auxiliary statements — the existence of labels avoiding a given one or a
+given pair, sign arithmetic, and distinctness of two fixed labels — are decided.
+The fields are unrestricted apart from the invertibility hypotheses stated on
+each declaration.
 -/
 
 namespace RelativeConicArcs.AlternatingComparisonLine
@@ -239,7 +242,7 @@ theorem exists_scalar_of_equivariant_comparison
     (hΦ : ∀ σ : Equiv.Perm (Fin 5), Equiv.Perm.sign σ = 1 →
       ∀ y : Fin 5 → K, Φ (fun i => y (σ i)) = fun p => Φ y (pairMap σ p))
     (T : (Fin 5 → K) →ₗ[K] (Fin 5 → K))
-    (hTsum : ∀ y : Fin 5 → K, ∑ i, T y i = 0)
+    (hTsum : ∀ y : Fin 5 → K, ∑ i, y i = 0 → ∑ i, T y i = 0)
     (hTpair : ∀ y : Fin 5 → K, ∑ i, y i = 0 → pairSum (T y) = Φ y) :
     ∃ c : K, ∀ y : Fin 5 → K, ∑ i, y i = 0 → Φ y = fun p => c * pairSum y p := by
   have hinj : ∀ {u v : Fin 5 → K}, ∑ i, u i = 0 → ∑ i, v i = 0 →
@@ -252,7 +255,8 @@ theorem exists_scalar_of_equivariant_comparison
       ∀ y : Fin 5 → K, ∑ i, y i = 0 →
         T (fun i => y (σ i)) = fun i => T y (σ i) := by
     intro σ hσ y hy
-    refine hinj (hTsum _) (sum_comp_eq_zero σ (hTsum y)) ?_
+    refine hinj (hTsum _ (sum_comp_eq_zero σ hy))
+      (sum_comp_eq_zero σ (hTsum y hy)) ?_
     funext p
     rw [hTpair _ (sum_comp_eq_zero σ hy), hΦ σ hσ y, pairSum_comp σ (T y) p,
       hTpair y hy]
@@ -279,6 +283,69 @@ theorem exists_scalar_of_equivariant_comparison
   rw [← hpair]
   funext p
   rw [pairSum, pairSum, Finset.mul_sum]
+
+/-- The coordinate representative of a comparison: one third of the incidence
+sums of its values.  On a Petersen `-2` eigenvector this inverts the pair-sum
+map, by the same computation that makes the pair-sum map a bijection from the
+sum-zero submodule onto that eigenspace. -/
+def coordinateRepresentative (Φ : (Fin 5 → K) →ₗ[K] (Pair 5 → K)) :
+    (Fin 5 → K) →ₗ[K] (Fin 5 → K) where
+  toFun y := fun i => (3 : K)⁻¹ * incidenceSum (Φ y) i
+  map_add' := by
+    intro y z
+    funext i
+    simp only [map_add, incidenceSum, Pi.add_apply, Finset.sum_add_distrib]
+    ring
+  map_smul' := by
+    intro a y
+    funext i
+    simp only [map_smul, incidenceSum, Pi.smul_apply, smul_eq_mul, RingHom.id_apply,
+      ← Finset.mul_sum]
+    ring
+
+/-- One third of the incidence sums of a Petersen `-2` eigenvector is a sum-zero
+vector. -/
+theorem sum_coordinateRepresentative (h5 : (5 : K) ≠ 0)
+    (Φ : (Fin 5 → K) →ₗ[K] (Pair 5 → K)) {y : Fin 5 → K}
+    (hy : IsPetersenNegTwoEigenvector (Φ y)) :
+    ∑ i, coordinateRepresentative Φ y i = 0 := by
+  have htotal : totalPairSum (Φ y) = 0 :=
+    totalPairSum_eq_zero_of_petersenEigen h5 hy
+  show ∑ i, (3 : K)⁻¹ * incidenceSum (Φ y) i = 0
+  rw [← Finset.mul_sum, sum_incidenceSum, htotal]
+  simp
+
+/-- The pair sums of the coordinate representative recover the comparison. -/
+theorem pairSum_coordinateRepresentative (h3 : (3 : K) ≠ 0)
+    (Φ : (Fin 5 → K) →ₗ[K] (Pair 5 → K)) {y : Fin 5 → K}
+    (hy : IsPetersenNegTwoEigenvector (Φ y))
+    (htotal : totalPairSum (Φ y) = 0) :
+    pairSum (coordinateRepresentative Φ y) = Φ y := by
+  funext p
+  have hp := adjacency_eq_total_sub_incidence (Φ y) p
+  rw [hy p, htotal, zero_sub] at hp
+  have hinc : ∑ i ∈ p.vertices, incidenceSum (Φ y) i = 3 * Φ y p := by
+    linear_combination hp
+  show ∑ i ∈ p.vertices, (3 : K)⁻¹ * incidenceSum (Φ y) i = Φ y p
+  rw [← Finset.mul_sum, hinc]
+  field_simp
+
+/-- Every equivariant comparison sending sum-zero vectors to Petersen `-2`
+eigenvectors is a scalar multiple of the pair-sum map on the sum-zero submodule.
+This is the previous theorem with its coordinate representative constructed
+rather than assumed. -/
+theorem exists_scalar_of_equivariant_eigen_comparison
+    (h3 : (3 : K) ≠ 0) (h5 : (5 : K) ≠ 0)
+    (Φ : (Fin 5 → K) →ₗ[K] (Pair 5 → K))
+    (hΦ : ∀ σ : Equiv.Perm (Fin 5), Equiv.Perm.sign σ = 1 →
+      ∀ y : Fin 5 → K, Φ (fun i => y (σ i)) = fun p => Φ y (pairMap σ p))
+    (hEig : ∀ y : Fin 5 → K, ∑ i, y i = 0 → IsPetersenNegTwoEigenvector (Φ y)) :
+    ∃ c : K, ∀ y : Fin 5 → K, ∑ i, y i = 0 → Φ y = fun p => c * pairSum y p := by
+  refine exists_scalar_of_equivariant_comparison h3 h5 Φ hΦ
+    (coordinateRepresentative Φ) (fun y hy => ?_) (fun y hy => ?_)
+  · exact sum_coordinateRepresentative h5 Φ (hEig y hy)
+  · exact pairSum_coordinateRepresentative h3 Φ (hEig y hy)
+      (totalPairSum_eq_zero_of_petersenEigen h5 (hEig y hy))
 
 end Comparison
 

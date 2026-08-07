@@ -15,19 +15,22 @@ the two-element subsets of `Fin 5`, that is, by the vertices of the Kneser graph
 
 where `φ` is a root of `φ² = φ + 1`.  Since `φ` and `φ⁻¹ = φ - 1` are not
 integral, the coordinates stored below are twice the displayed ones, which places
-them in `ℤ√5`: doubling sends `φ` to `1 + √5` and `φ⁻¹` to `√5 - 1`.  All finite
-statements are proved by kernel decision in `ℤ√5` and then transported along the
-unique ring homomorphism sending `√5` to a chosen square root of five in an
-arbitrary commutative ring.
+them in `ℤ√5`: doubling sends `φ` to `1 + √5` and `φ⁻¹` to `√5 - 1`.  Every
+finite statement is proved by kernel decision in `ℤ√5`; the squared length and
+the two-orbit inner-product law are additionally transported along the unique
+ring homomorphism sending `√5` to a chosen square root of five in an arbitrary
+commutative ring, while the statements about the three rotations are made in
+`ℤ√5` only.
 
 The content of the module is that this labelling is geometric: every axis has the
 same length, and the square of the inner product of two distinct axes takes one
 value when the label pairs are disjoint and another when they meet.  In the
 doubled coordinates the squared length is `12`, and the two squared inner products
 are `80` and `16`; in the displayed coordinates they are `3`, `5` and `1`, so the
-unit representatives have squared angles `5/9` and `1/9`.  Hence the incidence
-relation "the squared angle is the smaller one" recovers exactly the Kneser
-adjacency of `K(5,2)`, which is the Petersen graph.
+unit representatives have squared inner products `5/9` and `1/9`.  The larger of
+those two values occurs exactly on the disjoint label pairs, so the relation
+"the squared inner product is `5/9`" is exactly the Kneser adjacency of `K(5,2)`,
+which is the Petersen graph.
 
 Nothing here refers to spherical harmonics; the module supplies the geometric
 input that fixes the two orbit values of a zonal kernel on these axes.
@@ -71,9 +74,10 @@ theorem coordinateForm_doubledFaceAxis_self (p : Pair 5) :
 
 /-- The labelling is geometric.  For two distinct labels the squared inner
 product of the doubled axes is `80` when the label pairs are disjoint and `16`
-when they meet; in displayed coordinates these are `5` and `1`.  So the wider of
-the two angles between distinct axes occurs exactly on the edges of the Kneser
-graph `K(5,2)`. -/
+when they meet; in displayed coordinates these are `5` and `1`, so the unit
+representatives have squared angles `5/9` and `1/9`.  The larger squared inner
+product, that is the narrower angle between the two lines, occurs exactly on the
+edges of the Kneser graph `K(5,2)`. -/
 theorem coordinateForm_doubledFaceAxis_sq (p q : Pair 5) (hpq : p ≠ q) :
     coordinateForm (doubledFaceAxis p) (doubledFaceAxis q) ^ 2 =
       if Disjoint p.vertices q.vertices then 80 else 16 := by

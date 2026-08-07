@@ -7,6 +7,8 @@
   "face_axis_squared_norm": 3,
   "gaussian_apolar_residuals": 0,
   "gaussian_integration_by_parts_residuals": 0,
+  "generated_subgroup_all_even": true,
+  "generated_subgroup_order": 60,
   "legendre_six_values": {
     "one": "1",
     "one_third": "47/243",

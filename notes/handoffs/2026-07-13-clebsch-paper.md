@@ -447,7 +447,14 @@ permuting the axes with their induced label permutations.
 alternating group on five letters by explicit construction, computes its
 commutant on the coordinate module, and concludes that every equivariant
 comparison to the Petersen coefficient module is a multiple of the pair-sum map
-whose scalar is one once the sum of cubes is preserved.  Neither module is on a
+whose scalar is one once the sum of cubes is preserved; the coordinate
+representative that conclusion needs is constructed there, not assumed.  A cold
+referee accepted the route, the certificate and both modules with repairs, all
+applied, and recorded that three assertions of the manuscript section — the
+covariant obstruction, the non-arithmetic content of the Gaunt factorization,
+and the Condon--Shortley remark — are owned by no row of the gap inventory and
+await allocation.  Review:
+`notes/2026-08-07-c815-harmonic-route-referee-review.md`.  Neither module is on a
 gate yet.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,

@@ -37,7 +37,7 @@ C815 owns the new converse/recognition declarations. C800 owns the pre-existing 
 - The universal coefficient bridge used by the converse is either reused from C763 or proved once at the correct abstraction level.
 - The general nonzero-edge quadratic implication, normalized scalar-sign conference-square characterization, and six-test oriented recognition theorem are kernel-checked.
 - The guarded focused gate, axiom audit, hash manifest, and paper-local replay surface pass.
-- Every theorem is mapped to C809's human statement and the local weighted Jacobian boundary remains honest.
+- Every theorem is mapped to C809's human statement and the local weighted Jacobian boundary is stated exactly.
 - No manuscript prose or public release is changed; C816 owns promotion.
 
 Acceptance has not fully passed.  The repair checklist is recorded in
