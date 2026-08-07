@@ -274,7 +274,7 @@ distinct indices.
 The restriction on `hfam` is what makes this theorem a statement about the
 selected tests rather than about all thirty-five four-sets of a seven-set: only
 the four-sets sharing at least two indices with `{0, 1, 2, 3}` are read, namely
-the four with three anchor indices and the eighteen with two. -/
+the twelve with three anchor indices and the eighteen with two. -/
 theorem sevenPoint_agreement (p : Fin 7 → α)
     (hsymT : TriangleSymmetric tau) (hparT : FourSetParity tau)
     (hsymS : TriangleSymmetric sigma) (hparS : FourSetParity sigma)

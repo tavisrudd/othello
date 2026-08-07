@@ -4,9 +4,9 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschPassages",
   "axiom_report_sha256": "6db7f3e3e670b1a3a55784ab511000dff5dd4191e0d91b16915a9e976bf240b8",
   "verifier_sha256": "5b9bb8a62bcc4932b5340251ee5db2982136572be4cc2b329844db836316b878",
-  "source_closure_sha256": "de21316affe189d2f3f026dec44a0775da33c236c672cc50c96a3667cce61a17",
+  "source_closure_sha256": "1b58dabfe2e85b677d439c04716e9c0f3157bd5a247f3796338fb4664b6c6290",
   "source_sha256": {
-    "RelativeConicArcs/AlignedFamilyFaithfulness.lean": "8e8d8e91c1cd671fdc93323b0845ff47c9609fe9200cb9e3499abe96d99e0773",
+    "RelativeConicArcs/AlignedFamilyFaithfulness.lean": "7b03be595261e056c35c9692348e009ab8e7ffb524a7ab620d2d8fc390a33424",
     "RelativeConicArcs/AlignedQueryFaithfulness.lean": "3ee4df267f30df42ee79d7ad47f794a0280de7dc9dfbd08e70924d5ece56dd63",
     "RelativeConicArcs/AlignedQueryFamily.lean": "0b54a64f2fbf9a303369d8e4030d51113b1f33e136be93009331eda7d58eeeec",
     "RelativeConicArcs/AlignedTwoGraph.lean": "62942c1ab50568ad5603b99a2d381f017ed874e091a454100bf46ef276bc2fcd",
@@ -293,8 +293,8 @@
     "excluded": "No full manuscript row is claimed: the finite-set normalization inputs, global geometric correspondences, Pfaffian and classical six-point quotient identifications, face-axis addition theorem, raw moment, and integral Mukai-Umemura comparison remain outside the gate."
   },
   "axiom_report_provenance": {
-    "build_run_id": "run-20260807-161935-a4e2daf0",
-    "gate_stdout_sha256": "4eb47c49451f50c40ba7764983f23e828652beeeeb430983491ad6e48286cf57",
+    "build_run_id": "run-20260807-162549-d7507fb1",
+    "gate_stdout_sha256": "5377d6fd8421889e016cba3a05354ddcbba5cfbac8e4533349685c2c3e660c2e",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand.",
     "gate_stdout": "verification/evidence/gate_stdout/passages.stdout.txt"

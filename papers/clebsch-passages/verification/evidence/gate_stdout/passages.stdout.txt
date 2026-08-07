@@ -1,5 +1,7 @@
-✔ [8631/8633] Built RelativeConicArcs.AlignedQueryFaithfulness (9.2s)
-ℹ [8633/8633] Built RelativeConicArcs.Gates.ClebschPassages (47s)
+✔ [8629/8633] Built RelativeConicArcs.AlignedFamilyFaithfulness (11s)
+✔ [8630/8633] Built RelativeConicArcs.SeidelPrincipalMinors (3.7s)
+✔ [8631/8633] Built RelativeConicArcs.AlignedQueryFaithfulness (1.6s)
+ℹ [8633/8633] Built RelativeConicArcs.Gates.ClebschPassages (38s)
 info: RelativeConicArcs/Gates/ClebschPassages.lean:62:0: 'RelativeConicArcs.QuadraticPinching.conductor_eq_ker' depends on axioms: [propext, Classical.choice, Quot.sound]
 info: RelativeConicArcs/Gates/ClebschPassages.lean:63:0: 'RelativeConicArcs.QuadraticPinching.exists_pinching_add_alpha_mul' depends on axioms: [propext,
  Classical.choice,

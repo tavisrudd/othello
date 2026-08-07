@@ -21,10 +21,10 @@
   "schema_version": 1,
   "sources": [
     {
-      "bytes": 35545,
+      "bytes": 35547,
       "module": "RelativeConicArcs.AlignedFamilyFaithfulness",
       "path": "RelativeConicArcs/AlignedFamilyFaithfulness.lean",
-      "sha256": "8e8d8e91c1cd671fdc93323b0845ff47c9609fe9200cb9e3499abe96d99e0773"
+      "sha256": "7b03be595261e056c35c9692348e009ab8e7ffb524a7ab620d2d8fc390a33424"
     },
     {
       "bytes": 15286,

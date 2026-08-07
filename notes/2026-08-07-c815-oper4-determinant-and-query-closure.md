@@ -82,8 +82,9 @@ carries the hypothesis
 ```
 
 on its aligned-family input, which is satisfied at all ten places the proof used
-it — four tests with three anchor indices and six with two. Weakening the
-hypothesis changed no proof step.
+it: four call sites reading three anchor indices, covering the twelve such
+four-sets of a seven-set, and six reading two, covering the eighteen. Weakening
+the hypothesis changed no proof step.
 
 With that in hand, `exists_complementBit_on_seven_of_anchor` runs the seven-point
 argument along a *supplied* anchor rather than one found inside the seven-set,
