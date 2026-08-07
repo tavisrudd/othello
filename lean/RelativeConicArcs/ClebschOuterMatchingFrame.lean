@@ -220,12 +220,14 @@ theorem exists_eq_matchingThrough (m : Fin 6 → Fin 6)
     (by intro i; rw [hm, hm]; exact hinv i) (by intro i; rw [hm]; exact hfix i)
   exact ⟨g, funext fun i => by rw [← hm i]; exact hg i⟩
 
-/-- A one-factorization whose colours are ordered by the partner they give the
-label `0` is one of the six listed.  The choice of one matching through each
-edge at `0` is a function from the five colours to three values, and the
-partitioning condition selects exactly the six listed families among those two
-hundred and forty-three candidates. -/
-private theorem rooted_classification :
+/-- A one-factorization whose colours are listed by the partner they give the
+label `0` is one of the six listed families.  The choice of one matching through
+each edge at `0` is a function from the five colours to three values, and the
+partitioning condition rules out all but six of those two hundred and
+forty-three candidates.  That each of the six survives, and that they are
+pairwise distinct, are `isOneFactorization_oneFactorization` and
+`oneFactorization_injective`. -/
+private theorem exists_eq_oneFactorization_of_rooted :
     ∀ g : Fin 5 → Fin 3,
       IsOneFactorization (fun c => matchingThrough c (g c)) →
       ∃ t : Fin 6, ∀ c i, matchingThrough c (g c) i = oneFactorization t c i := by
@@ -263,15 +265,14 @@ theorem matchingColouring_comp (F : Fin 5 → Fin 6 → Fin 6) (σ : Equiv.Perm 
     exact if_congr (sameMatching_comp F σ _ _ _ _) rfl rfl
   rw [matchingColouring, matchingColouring, this]
 
-/-- The complementary triangle colouring of every one-factorization of the six
-labels is one of the six coefficient words of the outer family.  With the
-converse statement `matchingColouring_oneFactorization` this identifies the
-outer family with the family of complementary triangle colourings of the
-one-factorizations, and in particular shows that there are exactly six such
-colourings. -/
-theorem exists_outerColouring_of_isOneFactorization (F : Fin 5 → Fin 6 → Fin 6)
+/-- Every one-factorization of the six labels is one of the six listed families
+after a renaming of its colours.  With `isOneFactorization_oneFactorization` and
+`oneFactorization_injective` this says that the six listed families represent
+every one-factorization exactly once up to colour renaming, so the outer index
+`t` is a bijective indexing of one-factorizations modulo that renaming. -/
+theorem exists_perm_eq_oneFactorization (F : Fin 5 → Fin 6 → Fin 6)
     (hF : IsOneFactorization F) :
-    ∃ t : Fin 6, ∀ n, matchingColouring F n = outerColouring t n := by
+    ∃ (σ : Equiv.Perm (Fin 5)) (t : Fin 6), ∀ c, F (σ c) = oneFactorization t c := by
   have hne : ∀ c, F c 0 ≠ 0 := fun c => hF.2.1 c 0
   have hroot : ∀ c, ((F c 0).pred (hne c)).succ = F c 0 := fun c => Fin.succ_pred _ _
   have hinj : Function.Injective fun c => (F c 0).pred (hne c) := by
@@ -294,12 +295,28 @@ theorem exists_outerColouring_of_isOneFactorization (F : Fin 5 → Fin 6 → Fin
   have hGeq : (fun c => F (σ c)) = fun c => matchingThrough c (g c) := funext hg
   have hGfac : IsOneFactorization fun c => matchingThrough c (g c) := by
     rw [← hGeq]; exact isOneFactorization_comp F hF σ
-  obtain ⟨t, ht⟩ := rooted_classification g hGfac
-  refine ⟨t, fun n => ?_⟩
-  rw [← matchingColouring_comp F σ n, hGeq]
-  rw [show (fun c => matchingThrough c (g c)) = oneFactorization t from
-    funext fun c => funext fun i => ht c i]
-  exact matchingColouring_oneFactorization t n
+  obtain ⟨t, ht⟩ := exists_eq_oneFactorization_of_rooted g hGfac
+  exact ⟨σ, t, fun c => by
+    rw [hg c]
+    exact funext fun i => ht c i⟩
+
+/-- The complementary triangle colouring of every one-factorization of the six
+labels is one of the six coefficient words of the outer family, and the index is
+unique.  With `matchingColouring_oneFactorization` this identifies the outer
+family with the family of complementary triangle colourings of the
+one-factorizations, and in particular shows that there are exactly six such
+colourings. -/
+theorem existsUnique_outerColouring_of_isOneFactorization (F : Fin 5 → Fin 6 → Fin 6)
+    (hF : IsOneFactorization F) :
+    ∃! t : Fin 6, ∀ n, matchingColouring F n = outerColouring t n := by
+  obtain ⟨σ, t, hσt⟩ := exists_perm_eq_oneFactorization F hF
+  have hcol : ∀ n, matchingColouring F n = outerColouring t n := by
+    intro n
+    rw [← matchingColouring_comp F σ n,
+      show (fun c => F (σ c)) = oneFactorization t from funext hσt]
+    exact matchingColouring_oneFactorization t n
+  refine ⟨t, hcol, fun t' ht' => outerColouring_injective (funext fun n => ?_)⟩
+  rw [← ht' n, hcol n]
 
 /-- The `t`-th outer cubic is the coloured-triangle cubic of the complementary
 triangle colouring of the `t`-th one-factorization, coefficient by

@@ -123,16 +123,16 @@
       "sha256": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7"
     },
     {
-      "bytes": 11285,
+      "bytes": 13320,
       "module": "RelativeConicArcs.ClebschOuterJoubertFrame",
       "path": "RelativeConicArcs/ClebschOuterJoubertFrame.lean",
-      "sha256": "7b966ef833372e8ed88d4a973f7a66deea9cfb1901f60049475ea2d15723f35d"
+      "sha256": "4b99f27474449d898d5f3fc4f7929e89ce738f45fe85d20d5aea1dfcb48a0371"
     },
     {
-      "bytes": 15923,
+      "bytes": 16946,
       "module": "RelativeConicArcs.ClebschOuterMatchingFrame",
       "path": "RelativeConicArcs/ClebschOuterMatchingFrame.lean",
-      "sha256": "f33f1788e078dc4197cda71f17620293b3751dd0920d0e7d947f8c0a941f6bab"
+      "sha256": "8f8ab30a6f9b243705e45cfa2a03bb6d80fec2486690dc67bb4922b30c8f8b0f"
     },
     {
       "bytes": 3388,
@@ -159,16 +159,16 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 11768,
+      "bytes": 12918,
       "module": "RelativeConicArcs.CrossGoldenDeterminant",
       "path": "RelativeConicArcs/CrossGoldenDeterminant.lean",
-      "sha256": "cff82481b31438ce159dfd2f91c7eb10d5c8dcd71250764d32c564e1a8e88f42"
+      "sha256": "4e7bef3228f45d4561db0291ec66a3dd33be5288dd941223b2afbd3e73b370fc"
     },
     {
-      "bytes": 23803,
+      "bytes": 24623,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "55666be2f97d8a3babbfbf5297fa43a3a6a26384a358cd23bae92326de17c872"
+      "sha256": "9e05b80be0190d8749ef527c0848721f965187a18e19f741fac19f82d12e81d6"
     },
     {
       "bytes": 5731,
@@ -189,10 +189,10 @@
       "sha256": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5"
     },
     {
-      "bytes": 14887,
+      "bytes": 14927,
       "module": "RelativeConicArcs.SegreIgusaPolar",
       "path": "RelativeConicArcs/SegreIgusaPolar.lean",
-      "sha256": "81bb095efc511d45ef1532f5889804886aaa1739e884d561dc1204af7422f163"
+      "sha256": "49dc03581994aa2472673d38f9045e8b09014b0b3f5514a21184ea24f13a964e"
     },
     {
       "bytes": 13357,

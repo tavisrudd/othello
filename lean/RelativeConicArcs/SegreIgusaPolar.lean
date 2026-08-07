@@ -7,24 +7,24 @@ import Mathlib.Tactic.Ring
 # The diagonal section and the polar map of the Segre cubic
 
 A point of the Segre cubic threefold is a six-tuple `z` of ring elements with
-`∑ z = 0` and `∑ z³ = 0`.  This module proves the two constructions the
-manuscript performs on such a point.
+`∑ z = 0` and `∑ z³ = 0`.  This module proves two identities about such a point.
 
 The first is the hyperplane section.  If one coordinate of a point of the Segre
 cubic vanishes, the remaining five coordinates again satisfy a vanishing linear
-sum and a vanishing cube sum; the linear relation cuts the hyperplane down to a
-three-dimensional projective space and the cubic relation is the equation of the
-diagonal cubic surface on it.
+sum and a vanishing cube sum.  That is the whole content of the two theorems
+below: the identification of the locus they cut out with a cubic surface in a
+three-dimensional projective space is geometry outside what is stated here.
 
 The second is the polar map given by the centered squares.  Write `q` for the
 sum of the squares of the six coordinates and attach to each coordinate the
-element `6 z t ² - q`, which is six times the manuscript's centered square and
-is used here in that denominator-free normalization so that the statements hold
-over an arbitrary commutative ring.  These six elements always sum to zero, and
-on the Segre cubic they satisfy the symmetric quartic relation
-`(∑ V²)² = 4 ∑ V⁴`, which is the equation of the Igusa quartic; the relation is
-invariant under rescaling all six entries by a common factor, so it holds for
-the centered squares themselves in any ring where six is invertible.
+element `6 z t ² - q`, which is six times the centered square
+`z t ² - q / 6` and is used in that denominator-free normalization so that the
+statements hold over an arbitrary commutative ring.  These six elements always
+sum to zero, and on the Segre cubic they satisfy the symmetric quartic relation
+`(∑ V²)² = 4 ∑ V⁴`, the equation of the Igusa quartic.  Both sides of that
+relation are homogeneous of degree four, so a reader working in a ring where six
+is invertible may divide it back to the undivided centered squares; that
+division is not formalized.
 
 The quartic relation is proved through the characteristic polynomial of the six
 coordinates rather than by a certificate.  Each coordinate is a root of
@@ -230,9 +230,9 @@ theorem sum_erase_eq_zero_of_apply_eq_zero (z : Fin 6 → R) (t₀ : Fin 6)
 
 /-- The diagonal section, cubic half: if a point of the Segre cubic has a
 vanishing coordinate, the cubes of the remaining five coordinates sum to zero.
-Together with the linear relation this is the equation of the diagonal cubic
-surface inside the three-dimensional projective space cut out by that
-relation. -/
+Together with the linear half this is the pair of equations satisfied by the
+remaining five coordinates; no statement is made about the locus they cut
+out. -/
 theorem sum_pow_three_erase_eq_zero_of_apply_eq_zero (z : Fin 6 → R) (t₀ : Fin 6)
     (h3 : ∑ t, z t ^ 3 = 0) (ht : z t₀ = 0) :
     ∑ t ∈ Finset.univ.erase t₀, z t ^ 3 = 0 := by

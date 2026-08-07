@@ -30,18 +30,25 @@ the invertible factor sixteen gives
   `Z(x)² = 500 · det (B(x) - B(x)ᵀ)`.
 
 The matrix `B(x) - B(x)ᵀ` is skew-symmetric with vanishing diagonal, so its
-determinant is the square of its Pfaffian and the identity above becomes
-`Z(x)² = (10 s · Pf (B(x) - B(x)ᵀ))²`.  Over an integral domain that gives
-`Z(x) = ± 10 s · Pf (B(x) - B(x)ᵀ)`.  The sign is not determined by these
-hypotheses: replacing `s` by `-s` exchanges the two projectors and negates the
-Pfaffian, so the sign records an orientation of the two spectral spaces rather
-than a property of `C`.
+determinant is the square of its Pfaffian.  The Pfaffian itself is pinned
+without any sign ambiguity and without any hypothesis beyond the two
+invertibilities: `B(x) - B(x)ᵀ` is the scalar multiple `(2 s)⁻¹` of the
+commutator, the Pfaffian of a scalar multiple of an order-six matrix scales by
+the cube of that scalar, and the Pfaffian of the commutator is `4 Z(x)`, so
 
-No statement here chooses bases for the two spectral spaces.  The Pfaffian of
-`B(x) - B(x)ᵀ` is the basis-free stand-in for the determinant of the induced
-map between them; the comparison with the determinant of a three-by-three
-matrix representing that map in a chosen pair of orthonormal frames is not
-formalized.
+  `Z(x) = 10 s · Pf (B(x) - B(x)ᵀ)`
+
+on the nose.  Replacing `s` by `-s` exchanges the two projectors and negates the
+Pfaffian, but it negates the factor `10 s` as well, so this identity is
+independent of which square root of five is used.
+
+No statement here chooses bases for the two spectral spaces, and the
+six-by-six matrix `B(x)` has rank at most three, so its own determinant carries
+no information.  The Pfaffian of `B(x) - B(x)ᵀ` is the basis-free stand-in for
+the determinant of the map induced between the two spectral spaces; the
+comparison with the determinant of a three-by-three matrix representing that map
+in a chosen pair of orthonormal frames is not formalized, and it is there, not
+here, that a choice of orientation of the two determinant lines would enter.
 -/
 
 namespace RelativeConicArcs.CrossGoldenDeterminant
@@ -59,6 +66,14 @@ theorem bracketMatrix_eq_commutator (C : Matrix (Fin 6) (Fin 6) R) (x : Fin 6 �
   ext i j
   simp only [bracketMatrix, GoldenMatchingCubics.bracket, Matrix.sub_apply,
     Matrix.diagonal_mul, Matrix.mul_diagonal]
+  ring
+
+/-- The Pfaffian of a scalar multiple of an order-six matrix is the cube of the
+scalar times the Pfaffian, since every term of the expansion is a product of
+three entries. -/
+theorem pfaffianSix_smul (c : R) (A : Matrix (Fin 6) (Fin 6) R) :
+    pfaffianSix (c • A) = c ^ 3 * pfaffianSix A := by
+  simp only [pfaffianSix, Matrix.smul_apply, smul_eq_mul]
   ring
 
 /-- The antisymmetric combination of the two compressions of a matrix `D`
@@ -183,6 +198,34 @@ theorem triangleCubic_sq_eq_five_hundred_mul_det (hs : s * s = 5) (x : Fin 6 →
   rw [hdet]
   ring
 
+/-- The antisymmetric part of the cross-golden block is the scalar multiple
+`(2 s)⁻¹` of the commutator. -/
+theorem crossGoldenBlock_sub_transpose_eq (x : Fin 6 → R) :
+    crossGoldenBlock s x - (crossGoldenBlock s x).transpose =
+      (⅟(2 : R) * ⅟s) • bracketMatrix (conferenceMatrixOver R) x := by
+  rw [bracketMatrix_eq_smul_sub_transpose s x, smul_smul,
+    show ⅟(2 : R) * ⅟s * (2 * s) = 1 by
+      calc ⅟(2 : R) * ⅟s * (2 * s) = (⅟(2 : R) * 2) * (⅟s * s) := by ring
+        _ = 1 := by rw [invOf_mul_self, invOf_mul_self]; ring,
+    one_smul]
+
+/-- The triangle-holonomy cubic of the fixed conference matrix is `10 s` times
+the Pfaffian of the antisymmetric part of the cross-golden block, with no sign
+ambiguity: the identity is unchanged when `s` is replaced by the other square
+root of five, since that negates the Pfaffian and the factor `10 s` together. -/
+theorem triangleCubic_eq_ten_mul_pfaffian (hs : s * s = 5) (x : Fin 6 → R) :
+    triangleCubic (conferenceMatrixOver R) x =
+      10 * s *
+        pfaffianSix (crossGoldenBlock s x - (crossGoldenBlock s x).transpose) := by
+  rw [crossGoldenBlock_sub_transpose_eq, pfaffianSix_smul,
+    ClebschOperatorShadows.pfaffianSix_conferenceBracket_eq_four_triangleCubic]
+  set z := triangleCubic (conferenceMatrixOver R) x with hz
+  have h5 : (5 : R) = s * s := hs.symm
+  have e : 10 * s * ((⅟(2 : R) * ⅟s) ^ 3 * (4 * z)) =
+      (2 * ⅟(2 : R)) ^ 3 * (5 * s * ⅟s ^ 3) * z := by ring
+  rw [e, mul_invOf_self, one_pow, one_mul, h5,
+    show s * s * s * ⅟s ^ 3 = (s * ⅟s) ^ 3 by ring, mul_invOf_self, one_pow, one_mul]
+
 /-- The antisymmetric part of the cross-golden block is skew-symmetric with
 vanishing diagonal, so its determinant is the square of its Pfaffian and the
 identity above is a comparison of squares: the triangle-holonomy cubic and
@@ -204,27 +247,5 @@ theorem triangleCubic_sq_eq_pfaffian_sq (hs : s * s = 5) (x : Fin 6 → R) :
   have h5 : (5 : R) = s * s := hs.symm
   calc (500 : R) * pfaffianSix M ^ 2 = 100 * (5 : R) * pfaffianSix M ^ 2 := by norm_num
     _ = (10 * s * pfaffianSix M) ^ 2 := by rw [h5]; ring
-
-/-- Over an integral domain the comparison of squares has the two expected
-roots: the triangle-holonomy cubic is `± 10 s` times the Pfaffian of the
-antisymmetric part of the cross-golden block.  The sign is a choice of
-orientation and is not determined by the hypotheses, since replacing `s` by
-`-s` exchanges the two golden projectors and negates the Pfaffian. -/
-theorem triangleCubic_eq_or_eq_neg [IsDomain R] (hs : s * s = 5) (x : Fin 6 → R) :
-    triangleCubic (conferenceMatrixOver R) x =
-        10 * s *
-          pfaffianSix (crossGoldenBlock s x - (crossGoldenBlock s x).transpose) ∨
-      triangleCubic (conferenceMatrixOver R) x =
-        -(10 * s *
-          pfaffianSix (crossGoldenBlock s x - (crossGoldenBlock s x).transpose)) := by
-  have h := triangleCubic_sq_eq_pfaffian_sq s hs x
-  have h0 : (triangleCubic (conferenceMatrixOver R) x -
-        10 * s * pfaffianSix (crossGoldenBlock s x - (crossGoldenBlock s x).transpose)) *
-      (triangleCubic (conferenceMatrixOver R) x +
-        10 * s * pfaffianSix (crossGoldenBlock s x - (crossGoldenBlock s x).transpose)) = 0 := by
-    linear_combination h
-  rcases mul_eq_zero.mp h0 with h1 | h1
-  · exact Or.inl (sub_eq_zero.mp h1)
-  · exact Or.inr (eq_neg_of_add_eq_zero_left h1)
 
 end RelativeConicArcs.CrossGoldenDeterminant
