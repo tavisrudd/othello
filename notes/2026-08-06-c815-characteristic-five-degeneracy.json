@@ -1,0 +1,115 @@
+{
+  "description": "characteristic-five degeneracy of the C815 weighted Jacobian",
+  "golden": {
+    "compound_derivative_anticommutes_on_mu_kernel": true,
+    "compound_derivative_commutes_on_representative": true,
+    "compound_square_is_125": true,
+    "conference_rank": 11,
+    "conference_tangent_dimension": 5,
+    "engine_identity_A_X_A": true,
+    "jacobian_kernel_dimension_mod_five": 4,
+    "kernel_equals_mu_hyperplane_mod_five": true,
+    "mu_hyperplane_dimension_mod_five": 4,
+    "mu_kernel_image_contents": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "mu_kernel_image_divisible_by_five": true,
+    "multiplier_of_representative": 10,
+    "multiplier_rank": 1,
+    "primitive_rank_mod": {
+      "11": 14,
+      "13": 14,
+      "2": 4,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "primitive_smith": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      2,
+      20,
+      20,
+      20
+    ],
+    "rank_mod": {
+      "11": 14,
+      "13": 14,
+      "2": 0,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "rank_rational": 14,
+    "rational_mu_kernel_dimension": 4,
+    "representative_in_kernel_mod_five": true,
+    "representative_in_rational_mu_kernel": false
+  },
+  "opposite": {
+    "compound_derivative_anticommutes_on_mu_kernel": true,
+    "compound_derivative_commutes_on_representative": true,
+    "compound_square_is_125": true,
+    "conference_rank": 11,
+    "conference_tangent_dimension": 5,
+    "engine_identity_A_X_A": true,
+    "jacobian_kernel_dimension_mod_five": 4,
+    "kernel_equals_mu_hyperplane_mod_five": true,
+    "mu_hyperplane_dimension_mod_five": 4,
+    "mu_kernel_image_contents": [
+      10,
+      10,
+      10,
+      10
+    ],
+    "mu_kernel_image_divisible_by_five": true,
+    "multiplier_of_representative": 10,
+    "multiplier_rank": 1,
+    "primitive_rank_mod": {
+      "11": 14,
+      "13": 14,
+      "2": 4,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "primitive_smith": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      2,
+      20,
+      20,
+      20
+    ],
+    "rank_mod": {
+      "11": 14,
+      "13": 14,
+      "2": 0,
+      "3": 14,
+      "5": 11,
+      "7": 14
+    },
+    "rank_rational": 14,
+    "rational_mu_kernel_dimension": 4,
+    "representative_in_kernel_mod_five": true,
+    "representative_in_rational_mu_kernel": false
+  }
+}
