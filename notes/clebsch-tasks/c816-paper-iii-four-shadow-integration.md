@@ -27,6 +27,76 @@ Integrate C809's characterization theorem into the forward version of Paper III 
 6. Reassess the abstract, introduction hierarchy, operator-section roadmap, conclusion, and any existing source--operator--cubic diagram. Change the abstract only if the characterization becomes a genuine headline after the literature audit.
 7. Update the claim map, trust table, adequacy/provenance text, bibliography, artifact guide, and verification manifests to point to C815 and C809 with exact proof ownership.
 
+## Theorem D promotion
+
+Added 2026-08-06. C809's Theorem D — the local ambient rigidity statement, that
+the Jacobian of the twenty equality equations has rank fourteen at either
+oriented golden representative with kernel the scaling line — is no longer
+backed by an external rational certificate. It has a structural proof in
+`notes/2026-08-05-c815-rank-14-weighted-jacobian.md`, and the only external
+ingredient left is the ordinary constant-rank theorem. The manuscript may
+therefore cite it as proved rather than certified, provided it carries the
+constant-rank step and the reduced table or a reference for them.
+
+The five items below are proposals for this task to accept or decline, in
+descending order of value. Items 1 and 4 are positioning changes and are
+subject to entry gate 3.
+
+1. **Replace the numerical comparison sentence.** Theorem D currently closes
+   with "the cubic equality cuts the four non-scaling tight-frame deformation
+   directions," which reads as an observation that two dimensions agree.
+   Replace it with the module statement: the conference tangent space at the
+   representative is the trivial-plus-four isotypic subspace of the edge
+   module, the cubic Jacobian is injective on the four-dimensional irreducible,
+   and the ranks fourteen and eleven are therefore one structural fact rather
+   than two coincident computations. This is the highest-value change here,
+   because it converts the theorem's weakest-sounding remark into a claim.
+2. **State the eigenspace description of the splitting.** The displayed line
+   $A_0XA_0=\mu(X)A_0-5X$, obtained by multiplying the conference tangency
+   condition by the representative and using $A_0^2=5I$, makes the
+   trivial-plus-four splitting an eigenspace decomposition of conjugation by
+   the representative rather than the output of a character table. Two
+   sentences, and it removes this theorem's only appeal to a character
+   computation.
+3. **Carry the reduced eight-by-five table with its derivation.** The table is
+   the one place a reader must still do arithmetic on faith. Give the
+   multilinear difference rule, one worked row, and the statement that the
+   remaining rows follow identically. Keeping it as an unexplained display is
+   what makes Theorem D read as certified when it no longer is.
+4. **Add the complementation antisymmetry as a remark.** For every symmetric
+   zero-diagonal matrix the complementary third-compound coefficients are
+   negatives, so on the locus the complementary triangle coefficients are too.
+   That recovers the ten-plus-ten two-graph split the series elsewhere assumes,
+   in three lines, and connects Theorem D to the orientation-torsor material
+   instead of leaving it isolated.
+5. **Keep the characteristic-five theorem out of the manuscript.** It is a real
+   theorem — the modular kernel is exactly the vanishing-multiplier hyperplane
+   of the conference tangent space, proved in the same report — but Theorem D
+   is a statement over the reals and the modular material would be a
+   digression. The one exception worth a footnote is that five divides the
+   reduced table's four-by-four minor for every choice of rows and every orbit
+   basis, since a reader who computes the table will notice the $-5$ and
+   wonder.
+
+**Do not carry forward a retracted reading.** An earlier version of the C815
+report observed that the Jacobian's rank modulo five equals the conference
+tangent rank, both eleven, and presented that as suggestive. It is not: the
+conference count is sixteen variables against a five-dimensional kernel and the
+modular count is fifteen against four, so two offsets cancel. The containment
+of the modular kernel in the conference tangent space is the real fact and is
+stronger than the coincidence it was mistaken for. Neither the coincidence nor
+any sentence resting on it may enter the manuscript.
+
+**Lean items are not owned here.** The C815 report also proposes four Lean
+targets supporting these edits — the complementation antisymmetry over an
+arbitrary commutative ring, the gauge-coordinate triangle derivative and
+tangency characterization, the engine identity, and the cofactor-array
+classification — and recommends against formalizing the modular
+representation-theoretic finish, which would require building Brauer-character
+support first. Those are outside both C815's declared scope and this task's.
+They are candidates for C800 or for a separately reserved identifier; the
+decision is deferred and no identifier has been reserved.
+
 ## Review and release gates
 
 1. Run theorem-level red-team review focused on hypotheses, proportionality versus equality, the nonzero-shadow clause, orientation covariance, and the global weighted boundary.
@@ -44,3 +114,9 @@ The paper's central claim is stronger and simpler: the Clebsch cubic comparison 
 - C809 theorem/report: `notes/2026-08-02-c809-four-shadow-characterization.md`.
 - C815 formalization: `notes/clebsch-tasks/c815-four-shadow-lean-formalization.md`.
 - Existing operator integration/formal ownership: C763 and C800.
+- Theorem D structural proof, the characteristic-five theorem, the corrected
+  mystery ledger, and the manuscript and Lean proposals above:
+  `notes/2026-08-05-c815-rank-14-weighted-jacobian.md`.
+- Discovery context for the characteristic-five result, and the recorded
+  negative on any connection to the exceptional root-system code ladder:
+  `notes/2026-08-06-c815-characteristic-five-degeneracy.md`.

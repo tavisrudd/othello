@@ -220,6 +220,23 @@ conference locus as the trivial plus the irreducible four-dimensional
 constituent, so the two ranks fourteen and eleven are one structural fact.
 Report: `notes/2026-08-05-c815-rank-14-weighted-jacobian.md`.
 
+That report's one open ledger item is closed and two of its readings are
+corrected.  The splitting into the trivial and four-dimensional constituents is
+an eigenspace decomposition of conjugation by the representative, from
+`A₀ X A₀ = μ(X) A₀ - 5 X`, rather than a character computation.  Modulo five
+the Jacobian's kernel is exactly the vanishing-multiplier hyperplane of the
+conference tangent space, proved by the same order-three reduction on the same
+eight-by-five table, because fixed-point dimension equals composition length
+over that field; the ramification of five in the golden order is why no prime
+other than two and five can be bad, and characteristic two remains unexplained.
+The minor `-5` is therefore only half an artifact: its divisibility by five is
+forced by the modular rank drop and is independent of the chosen rows and orbit
+basis.  The earlier reading that the modular rank and the conference rank agree
+for a shared reason is retracted as a cancellation of offsets.  Report:
+`notes/2026-08-06-c815-characteristic-five-degeneracy.md`.  The manuscript and
+Lean proposals arising from all of this are queued in C816's card and are not
+owned by C815; no Lean file changed.
+
 What remains for C815 is the rest of the manuscript clauses of gap class B in
 `notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`.  Two human
 inputs remain in manuscript row OPER-4: the identification of the marked
