@@ -20,8 +20,9 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
   points its single redundant member is the test on the anchor itself; the same
   drop is valid at eight points.
 - Every test answers yes with probability exactly one quarter, so subadditivity
-  of entropy gives \(k\ge(\binom{n-1}2-1)/H(1/4)\approx0.616\,n^2\) at every
-  \(n\), beating the counting bound by a factor 1.2326 and cutting the
+  of entropy gives a **nonadaptive** floor
+  \(k\ge(\binom{n-1}2-1)/H(1/4)\approx0.616\,n^2\) at every \(n\) — it does
+  not bind adaptive decoders, whose floor stays the counting bound, beating the counting bound by a factor 1.2326 and cutting the
   asymptotic gap against the exhibited \(3n^2-23n+45\) from 6 to 4.87.
 - A test on \(\{p,q,x,y\}\) notices the elementary flip of the pair
   \(\{x,y\}\) exactly when \(\tau(pxy)=\tau(qxy)\), so a separating family
@@ -40,10 +41,12 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
   in 30 against a nonadaptive bracket of 25 to 44, consistent with a separation
   but not establishing one. Measured against the value oracle's optimum — the
   two-graph dimension \(\binom{n-1}2\), which order-three minor values achieve
-  with no waste — the adaptive worst case costs 1.47 and 1.43, and the *mean*
-  costs 1.041 and 1.043. So reading one coherence bit per four-set instead of
-  full minor values costs about four percent on typical input and under a half
-  in the worst case, against the manuscript family's factor of six.
+  with no waste — the adaptive worst case costs 1.47 and 1.43, and the mean
+  costs at most 1.041 and 1.043 — an upper bound, since greedy is not optimal.
+  The mean price's sign is open: any complement-invariant one-bit oracle has
+  floor \(\binom{n-1}2-1\), one below the triple oracle's, so the coarser
+  observable could be cheaper on average. Reviewed by a Fable pass, whose
+  corrections are applied: `notes/2026-08-07-c880-framing-review.md`.
 - At eight points the bracket is \(25\le\mathrm{minimum}\le44\) against the
   exhibited 53, so the construction is not optimal. The weight-two difference
   argument that settles seven points is vacuous at eight, where the alignment

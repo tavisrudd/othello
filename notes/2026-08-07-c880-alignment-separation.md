@@ -170,9 +170,10 @@ the complementary 4-subset of that triple, which is \(Q\) itself. Hence:
 > redundant member of it.
 
 That drop is not a seven-point accident: at eight points the family of 53 also
-still separates after the anchor test is removed. It is also the expected drop,
-since the decoder is *given* that the anchor is aligned and so learns nothing by
-testing it.
+still separates after the anchor test is removed.  In the unconditional problem measured here the anchor's own
+answer is an ordinary informative bit, so its redundancy is a measured fact
+rather than a consequence of the promise; the promised-anchor variant is a
+different, smaller problem.
 
 At eight points, greedy stripping removes eight of the 53 tests — the anchor
 \(\{0,1,2,3\}\) and seven others — and the remaining 45 still separate all
@@ -198,9 +199,11 @@ eight points a pigeonhole neighbour search over all pairs finds no difference of
 weight two or three at all and exactly 315 of weight four, and 315 four-element
 constraints on 70 tests leave a mask-free set of at least 40, so that route
 yields nothing above the counting bound, and nothing above the entropy bound
-either. Its search was capped and did not
-complete, and an incomplete search would only overstate the bound, so it is
-discarded rather than reported.
+either. The weight scan itself is complete through
+weight four, which is what licenses the flat statement that no difference of
+weight two or three exists; it is the *mask-free* search over those 315
+constraints that was capped and did not complete, and an incomplete search would
+only overstate the bound, so its value is discarded rather than reported.
 
 The 44 is an upper bound with a witness family recorded in the certificate; it
 is not claimed optimal.
@@ -273,11 +276,14 @@ sharing looks like.
 why.** One test settles one new coordinate provided a reference point already
 known to satisfy \(\tau(pxy)=\tau(qxy)\) is available, and a decoder that has
 already recovered part of the two-graph can choose that reference. That suggests
-an adaptive decoder needing about \(\binom{n-1}2\) tests — a factor of six below
-the nonadaptive construction and within a factor 1.6 of the entropy bound. This
-is a sketch, not a result: the cases where no such reference exists need a
-fallback, and nothing here bounds the adaptive complexity from below beyond the
-entropy bound, which applies to both models.
+an adaptive decoder needing about \(\binom{n-1}2\) tests, a factor of six below
+the nonadaptive construction. This is a sketch, not a result: the cases where no
+such reference exists need a fallback. **The entropy bound above is nonadaptive
+only.** Subadditivity uses the unconditional quarter marginal of a fixed test,
+and an adaptive decoder chooses each test to split the survivors evenly, driving
+the conditional marginal towards a half and the per-question entropy towards one
+full bit. Against adaptive decoders the floor falls back to the counting bound,
+\(\binom{n-1}2-1\) — 14 at seven points and 20 at eight.
 
 ## 6. The price of the coherence restriction, and adaptivity
 
@@ -312,16 +318,30 @@ against the value-oracle optimum is \(22/15=1.47\) at seven points and
 \(30/21=1.43\) at eight — against the manuscript family's factor of six
 asymptotically, and the nonadaptive minimum's factor of two at seven points.
 
-**The average price is about four percent.** The mean number of coherence
-questions is 15.61 against 15, and 21.90 against 21 — ratios 1.041 and 1.043.
-So a decoder that sees only whether each four-set is coherent pays, on typical
-input, almost exactly what a decoder reading full minor values pays. That is the
-statement worth making about this oracle, and it is not a statement anyone has
-been in a position to make, because the model had not been defined.
+**The average price is at most about four percent, and its sign is not
+established.** The mean number of coherence questions is 15.61 against 15, and
+21.90 against 21 — ratios 1.041 and 1.043. But the greedy mean is an upper bound
+on the optimal adaptive mean, whose floor is the counting bound 14, so at seven
+points the true mean price lies somewhere in \([14/15,\,15.61/15]\), between
+about \(-7\%\) and \(+4\%\). It could be negative, and there is a reason to
+think it might be: the alignment bit is complement-invariant while a value bit
+spends part of itself on the gauge. Any complement-invariant one-bit oracle has
+floor \(\binom{n-1}2-1\), one below the triple oracle's \(\binom{n-1}2\), so
+a saving of exactly one query is available to the coarser observable by
+definition. Whether a decoder can realize it on average is open, and settling it
+would be the most striking sentence this material could carry. To our knowledge
+no such comparison has been made, the model not having been defined before; the
+audit's negative for this cluster is bounded by the sources it could not
+obtain.
 
-The greedy tree is an upper bound on the adaptive optimum, not the optimum; the
-entropy bound of section 5 lower-bounds it by 18 and 25 respectively, and both
-bounds apply to adaptive and nonadaptive decoders alike.
+Two cautions on that table. The greedy tree is an upper bound on the adaptive
+optimum, not the optimum. And the entropy bound column is a **nonadaptive** floor
+only, for the reason given at the end of section 5; the valid adaptive floor is
+the counting bound, 14 and 20. The value-oracle optimum of 15 and 21 is exact
+even adaptively: after any \(\binom{n-1}2-1\) independent triple values the two
+survivors lie in distinct complement pairs, since the all-ones two-graph vanishes
+on no triple, so one further query is forced and value queries cannot exploit the
+complement quotient.
 
 ## 7. What this scenario is, and what it is not
 
@@ -401,9 +421,10 @@ coarsening pays anywhere it pays somewhere else, and there are three places.
 
 The triple statistic \(\tau(abc)\) is switching-invariant but not
 complement-invariant: complementing the two-graph flips every triple. The
-four-set alignment bit is invariant under both. So the aligned family is
+four-set alignment bit is invariant under both. So for \(\lvert V\rvert\ge7\) the aligned family is
 precisely the invariant of the group generated by Seidel switching and global
-complementation — which is exactly the equivalence the reconstruction theorem
+complementation — at six points section 1's collisions show it is not a complete
+invariant — which is exactly the equivalence the reconstruction theorem
 works modulo. Anything needing a canonical fingerprint for that class reads it
 off the aligned design natively, while a triple-based fingerprint must first fix
 a global sign. This is the one respect in which the four-set observable is not
@@ -416,8 +437,9 @@ The aligned design has \(\binom n4\) entries, and this task shows it is
 determined by a designated \(3n^2-23n+45\) of them, with no determining set
 smaller than about \(0.616\,n^2\). The compression is by *projection onto a
 subset of coordinates*, not by an arbitrary encoding, which is what makes it
-usable: a verifier can store the sub-design, recover the two-graph in \(O(n^2)\)
-work, and expand any other entry on demand.
+usable: a verifier can store the sub-design, recover the two-graph from it, and
+expand any other entry on demand. Nothing here measures decode time; the
+certificates measure separation only.
 
 | \(n\) | \(\binom n4\) | determining family | entropy floor | ratio |
 |---|---|---|---|---|
@@ -445,13 +467,22 @@ reparametrization of the fourth spectral moment of the Seidel matrix — and it 
 estimable by sampling.
 
 Draw a uniform four-set and ask whether it is aligned. That is one Bernoulli
-draw whose mean is the two-graph's aligned density; \(O(\varepsilon^{-2})\)
-draws give the density, hence the fourth moment, to relative error
-\(\varepsilon\), in \(O(\log n)\) space and without ever forming the matrix.
-Computing \(\operatorname{tr}(A^4)\) exactly costs matrix-multiplication time and
-\(O(n^2)\) space. This is the Flajolet trade in its usual form: an individually
-near-worthless coarse probe, cheap to take, whose aggregate pins a global
-invariant in space independent of the object.
+draw whose mean is the two-graph's aligned density, and the draws are cheap and
+need \(O(\log n)\) space, never forming the matrix. **But the sample complexity
+is not constant.** The four-set term enters \(\operatorname{tr}(A^4)\) scaled by
+\(\binom n4\) and centred at the quarter mean, so an additive error
+\(\varepsilon\) in the density is an error of order \(\varepsilon n^4\) in the
+moment, against a typical moment of order \(n^3\). Relative-error estimation of
+the fourth moment therefore needs \(\Theta(n^2)\) samples, the same order as
+reconstruction. What survives is the space saving — \(O(\log n)\) working space
+against the \(O(n^2)\) of forming the matrix — and the resolution limit is
+explicit: the estimator sees deviations of order \(n^4\) in the moment, which is
+the scale of \(\Theta(n)\) eigenvalues.
+
+The draws are also **pairwise independent**, which is why the population variance
+of the aligned count is exactly the independent-trials value \(3\binom n4/16\):
+6.5625 and 13.125, matching the measured standard deviations 2.5617 and 3.6228 to
+every digit recorded.
 
 What the estimator can and cannot do is decided by the spread of the density
 across two-graphs, which this report measures exactly:
@@ -468,10 +499,15 @@ carries almost nothing about *which* two-graph one has, and is correspondingly
 sharp as a test for *atypicality*. The extremes are the structured objects — the
 complete two-graph attains every four-set, and conference-like two-graphs sit at
 the bottom of the range, the order-six conference having no aligned four-set at
-all. A sublinear tester that samples four-sets and compares against a quarter
-therefore detects regularity-like structure without reconstruction, and this is
-the only setting found so far in which the four-set probe is the natural unit of
-work rather than a handicap.
+all. **That last reading does not survive to large \(n\).** The aligned
+four-sets of a symmetric conference matrix form a \(3\text-(2d,4,(d-3)/2)\)
+design, whose density is \(\lambda/(v-3)=\tfrac14\bigl(1-\Theta(1/n)\bigr)\):
+a conference two-graph sits \(\Theta(n)\) population standard deviations below
+the mean and yet needs \(\Theta(n^2)\) samples to tell apart from a generic one,
+because the gap itself shrinks. Sampled coherence is a sharp test for
+atypicality only at the small sizes computed here; asymptotically it is not a
+shortcut to detecting regularity, and the surviving payoff of this section is the
+space bound, not a sublinear tester.
 
 ### 8.4 Candidate settings, ranked by how much they would need to be true
 
@@ -486,6 +522,19 @@ the analogy as formal. The lane's own golden-operator material remains the one
 candidate where a four-set alignment test might be a realizable measurement, and
 costing it is work item 8. None of these is claimed; they are what item 8 should
 examine, and the prior remains that no setting has this oracle.
+
+## Mystery ledger
+
+Required by the task card's acceptance list. What the closeout pass settled is
+recorded above; these are the surprises it did not.
+
+| open item | what is surprising | evidence gap or owner |
+|---|---|---|
+| The 315-to-315 coincidence | Weight-two difference patterns at seven points number 315; weight-four patterns at eight points also number 315 — the same count at consecutive sizes for different weights. | A lifting mechanism, each seven-point weight-two pair extending through the added point, is finitely checkable and would seed the structural lower bound that item 3 wants. Unchecked. |
+| Parity of the aligned count | At seven points the count is always odd, supported on 5, 7, 9, 11, 13, 17, 19, 25, 35; at eight points both parities occur. | A mod-two invariant at \(n\equiv3\pmod4\), or an accident of the size. Settled by computing the histogram at nine points, which the current enumeration cannot reach. |
+| Near-palindromic removability levels | 35, 280, 560, 280, 56 almost mirrors and does not, and 280 occurs at two different levels. | Orbit counting under the symmetric group should explain it; not attempted. |
+| Gaps in the seven-point histogram | No two-graph has exactly 15, 21 or 23 aligned four-sets, and the upper tail takes the shape 210, 105, 21, 1. | The tail values look like orbit sizes; an orbit-counting explanation is the obvious candidate and is not attempted. |
+| Sign of the coherence price | Whether the coherence oracle costs more or less than the value oracle on average is open, and the one-query floor gap says less is possible. | Needs the optimal adaptive mean at seven points, or any decoder beating mean 15. A lookahead search would settle it cheaply. |
 
 ## What this certifies, and what it does not
 
@@ -509,6 +558,9 @@ examine, and the prior remains that no setting has this oracle.
   Dammak, Lopez, Pouzet and Si Kaddour. Its negatives are bounded by the access
   gaps it records, chiefly the unobtained separating-systems classics and the
   unsearched Boolean sensitivity literature.
+- The eight-point bracket's lower end is analytic, not mechanical: the
+  certificate records the counting bound 20, and the 25 is the entropy bound of
+  section 5 computed by hand from the same quarter marginal.
 - Section 7 is positioning and argument, not measurement. That the triple is the
   natural switching-invariant observable is a proof from the manuscript's own
   identity; that no real setting has the four-set oracle is a prior, and item 8
