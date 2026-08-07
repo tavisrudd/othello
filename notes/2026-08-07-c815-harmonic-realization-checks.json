@@ -1,0 +1,64 @@
+{
+  "apolar_zonal_pairing_residual": "0",
+  "face_axis_kneser_squared_products": {
+    "disjoint": 5,
+    "intersecting": 1
+  },
+  "face_axis_squared_norm": 3,
+  "gaussian_apolar_residuals": 0,
+  "gaussian_integration_by_parts_residuals": 0,
+  "legendre_six_values": {
+    "one": "1",
+    "one_third": "47/243",
+    "sqrt5_over_3": "-65/243"
+  },
+  "marked_cubic_moment": "-15680000/1247103",
+  "marked_quadratic_moment": "2800/351",
+  "marked_sigma_three": "20",
+  "pair_sum_petersen_eigenvalue": -2,
+  "rotation_generators": {
+    "coordinate_three_cycle": {
+      "determinant_one": true,
+      "label_permutation": [
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      "orthogonal": true
+    },
+    "diagonal_two_fold": {
+      "determinant_one": true,
+      "label_permutation": [
+        1,
+        5,
+        4,
+        3,
+        2
+      ],
+      "orthogonal": true
+    },
+    "golden_two_fold": {
+      "determinant_one": true,
+      "label_permutation": [
+        2,
+        1,
+        5,
+        4,
+        3
+      ],
+      "orthogonal": true
+    }
+  },
+  "schema": "clebsch-harmonic-realization-checks/1",
+  "spherical_cubic_residual_mod_sum_zero": "0",
+  "spherical_gram_eigenvalues": {
+    "110/1053": 1,
+    "140/1053": 4,
+    "28/1053": 5
+  },
+  "spherical_gram_equals_kernel_over_thirteen": true,
+  "spherical_quadratic_residual_mod_sum_zero": "0",
+  "zonal_laplacian_mod_unit": "0"
+}
