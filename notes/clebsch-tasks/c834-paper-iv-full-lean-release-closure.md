@@ -14,6 +14,26 @@ Paper IV closure after C860's stages is a defect to report to C860. See
 
 ## Resume here (2026-08-06)
 
+The row-uniqueness transport is closed, which completes stage 5 item 10. Its nine compiled
+evaluations — seven residue shards, the geometric rows' zero triple concurrence, and the indexed
+passant-join test — are all kernel-checked. The certificate is restated on internal-point indices
+and bit sets: row masks and join masks from the packed incidence table, and the union of the
+minimum-word supports through a pair of indices in place of a concurrence count. The seed-extension
+scan becomes a passant-clique search over increasing index lists, whose guards are exactly what the
+semantic hypotheses supply. The geometric rows' statement now follows from the blockwise check that
+already existed, and the join test from the incidence dictionary. Clean terminals: 83 of 94. Both
+gates and the evidence verifier are green. Report:
+`notes/2026-08-06-c834-row-uniqueness-kernel-closure.md`.
+
+Two levers from that round apply to what is left. Kernel memory is released between declarations but
+not inside one, so a check that exceeds the guard as a single declaration can fit as several
+declarations in one module — this is what made a residue class viable without one module per index.
+And a pool carried as a list, filtered from its parent at each level, beats a pool carried as a bit
+mask tested against the whole index range once the levels are narrow.
+
+The remaining native decisions are the fourteen weight-ten profile shards, the automorphism anchors,
+and the fixed-point exhaustion.
+
 The equivariance transporter theorem and the structural upgrade's three support-family leaves are
 closed, which completes stage 2 item 4 and stage 4 item 7. The package now carries a genuine group
 action on the internal points, an invariance theorem for the decoded minimum-word family proved from
@@ -36,8 +56,8 @@ expand the four orbits and exceeds the memory guard; the same check over the dis
 reintroduces the `internalPointIndex` scan and also exceeds the guard. Both were observed as memory
 kills in this round.
 
-The remaining native decisions are the fourteen weight-ten profile shards, the row-uniqueness
-transport, the automorphism anchors, and the fixed-point exhaustion.
+The remaining native decisions after that round were the fourteen weight-ten profile shards, the
+row-uniqueness transport, the automorphism anchors, and the fixed-point exhaustion.
 
 The association algebra is closed. `PassantCodeQ13.AssociationAlgebra` now holds only the executable
 presentation, and its three former native decisions — the ranks 42, 36, 36, 36 and the two squaring
@@ -77,10 +97,7 @@ the orbit-spanning spine; stage 6's statement-identity ledger must point each ma
 one of them.
 
 Item 6 of stage 3 below is therefore done, including the header disclosure it asked to narrow. Item 5
-was already discharged by the previous round, whose elaboration of the packet is trace-current. The
-remaining native decisions are the
-fourteen weight-ten profile shards, the row-uniqueness transport, the structural upgrade's three
-support-family leaves, the automorphism anchors, and the fixed-point exhaustion.
+was already discharged by the previous round, whose elaboration of the packet is trace-current.
 
 ## Superseded resume note (2026-08-05)
 
@@ -223,9 +240,11 @@ neither is elaborated.
 
 **Stage 5 — the remaining enumerations, where tabulation is the right tool.**
 
-10. Row uniqueness: tabulate over the existing seven-way residue shard. The structural route loses
-    here — a triple-indexed transporter costs as much as the enumeration it replaces, and the index
-    ordering guard is not equivariant, so the statement would first have to be restated over sets.
+10. Row uniqueness is closed, and not by tabulation: the check is restated on index bit sets and run
+    as a passant-clique search, one first index per declaration, grouped in the existing seven
+    residue modules. The plan's objection to the structural route stands for a triple-indexed
+    transporter; a point transporter would still give a 78-fold reduction and is not used, because
+    the equivariance of the rows themselves is not formalized.
 11. Automorphism anchors: the anchor triple is fixed, so no orbit reduction applies; tabulate the
     signature statements. Stage 2 has already removed the expensive one.
 12. Weight-ten profiles: the seven isolated fibres and seven cycle residues are shard-sized by
