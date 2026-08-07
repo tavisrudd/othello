@@ -147,3 +147,32 @@ The paper's central claim is stronger and simpler: the Clebsch cubic comparison 
 - Shorter balanced exchange rigidity proof with its exact manuscript
   replacement text:
   `notes/2026-08-06-c815-exchange-rigidity-simplification.md`.
+
+## Required manuscript correction: table (5.1)
+
+Row `r = 2` of the displayed table in
+`papers/clebsch-passages/sections/05-golden-operator.tex` is wrong: the six
+signs on the triples `135`, `145`, `234`, `235`, `245` and `345` are each the
+negative of the correct value. The printed row is `+-+-+---++--++-+-+-+`; the
+correct row is `+-+-+---++--+++-+-+-`. Three independent checks give the
+correction and each refutes the printed row alone: the rule
+`ε_{pT₀}(S) = sgn(p) ε_{T₀}(p⁻¹S)` that the manuscript states two lines below
+the table; the four-point two-graph identity, which the printed row violates on
+eight of the fifteen four-element label sets; and the paper's own first Segre
+relation `Σ_T J_T = 0`, whose column sums fail on exactly those six triples with
+the printed row and hold with the corrected one. The corrected row is the one
+carried by `RelativeConicArcs.ClebschOuterJoubertFrame.outerColouring`, proved
+there to be what the reordering rule produces and to obey the four-point
+identity.
+
+No theorem changes; the sentence the table supports is true of the corrected
+table. Public versions 1 and 2 of Paper III carry the defective row, so the
+correction belongs in a forward version. Provenance:
+`notes/2026-08-07-c815-oper1-oper2-algebraic-closure.md`.
+
+Also available for promotion from the same round: the four operator rows of gap
+class B now have a complete formal surface, so the verification section's
+description of what is kernel-checked for rows OPER-1 and OPER-2 can be
+strengthened, and the cross-golden formula's `±` can be attributed to the
+involution `s ↦ -s` on the square root of five rather than left as an unexplained
+orientation choice.
