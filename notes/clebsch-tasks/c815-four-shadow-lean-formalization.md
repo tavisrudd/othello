@@ -91,17 +91,28 @@ there: whether the manuscript's "unique nontrivial realized order" sentence
 ranges only over the small orders, which is cheap, or over all orders, which
 pulls in the classical order-`≡ 2 (mod 4)` theorem.
 
-The core of that scope is now formalized in
-`RelativeConicArcs.BalancedExchangeSpectrum`, which elaborates without errors or
-warnings: the exchange operator of a balanced cut has the characteristic
-polynomial and every power trace of `1 - q⁻¹ • (A * A)`, and the first exchange
-moment is `d² / q`.  No eigenvalue, singular value, or square-root operation
-appears.  Report: `notes/2026-08-06-c815-exchange-spectrum-lean.md`.  Left in
-the row: the second moment in the manuscript's aligned-four-set form, the
-`4 ≤ d` failure wrapper over `BalancedExchangeRigidity`, the `d ≤ 3` constancy
-clause, the eigenvalue phrasing, the existence of the isometries, and gate
-integration with a regenerated axiom audit — the last blocked in this session by
-a foreign Lean build holding the shared build lock.
+That scope is formalized in `RelativeConicArcs.BalancedExchangeSpectrum` and on
+the golden-return gate.  The exchange operator of a balanced cut has the
+characteristic polynomial and every power trace of `1 - q⁻¹ • (A * A)`, its
+first two moments are `d² / q` and
+`(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q²` for `c` the
+number of aligned four-sets of the half, that count is not the same for every
+balanced half once `4 ≤ d`, and for a half of at most three labels the
+characteristic polynomial is independent of the half, being
+`(X - 1/5)(X - 4/5)²` at order six.  No eigenvalue, singular value, or
+square-root operation appears.  Reports:
+`notes/2026-08-06-c815-exchange-spectrum-lean.md` and
+`notes/2026-08-06-c815-exchange-second-moment-and-small-orders.md`.
+
+The author's reading question is settled in the cheap direction without needing
+the classical congruence theorem: the same fourth-trace count proves that no
+symmetric matrix with zero diagonal and entries squaring to one on four labels
+has a scalar square, so order six is the only order above two at which a
+cut-independent exchange spectrum is realized.
+
+Left in the row: the eigenvalue phrasing `Spec = {1 - αᵢ²/q}`, the existence of
+the two isometries, and the transport of the cut-dependence statement from the
+aligned count of a half to the compression of the cut that half defines.
 
 ## Evidence source
 

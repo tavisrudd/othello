@@ -213,15 +213,29 @@ order enters only as a hypothesis `s * s = q`, so the load-bearing statements
 stay ring-general.  One new module carries it, with the eigenvalue phrasing and
 the existence of the isometry as the only analytic items.
 
-That module, `RelativeConicArcs.BalancedExchangeSpectrum`, is committed and
-elaborates without errors or warnings.  It proves that the exchange operator of
-a balanced cut has the characteristic polynomial and every power trace of
-`1 - q⁻¹ • (A * A)`, and that the first exchange moment is `d² / q`.  Still open
-in the row: the second moment in the manuscript's aligned-four-set form, the
-`4 ≤ d` failure wrapper, the `d ≤ 3` constancy clause, the eigenvalue phrasing,
-the existence of the isometries, and gate integration with a regenerated axiom
-audit, which a foreign Lean build's hold on the shared build lock deferred.
-Report: `notes/2026-08-06-c815-exchange-spectrum-lean.md`.
+That module, `RelativeConicArcs.BalancedExchangeSpectrum`, is committed, is on
+the golden-return gate, and carries the whole spectral half except its two
+analytic items.  The exchange operator of a balanced cut has the characteristic
+polynomial and every power trace of `1 - q⁻¹ • (A * A)`; its first moment is
+`d² / q` and its second is
+`(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q²`, where `c`
+counts the aligned four-sets of the chosen half — the only summand that depends
+on the half.  That count is not the same for every balanced half once `4 ≤ d`,
+which is the failure clause, and when a half has at most three labels the
+characteristic polynomial is computed outright and does not depend on the half:
+the product of the three edge signs enters the block identity
+`A * A = 2 • 1 + τ • A` but cancels, leaving `(X - 1/5)(X - 4/5)²` at order six.
+The same fourth-trace count also excludes order four outright, so order six is
+the only order above two at which a cut-independent spectrum is realized; this
+settles, in the cheap direction, the reading question the scope had left for the
+manuscript owner.  The gate audits sixty-seven terminals with no
+compiled-evaluation axiom, and all three paper-local replays and the release
+gate pass.  Still open in the row: the eigenvalue phrasing `{1 - αᵢ²/q}`, the
+existence of the two isometries — the only place needing the inner-product
+library — and carrying the cut-dependence statement across the equivalence that
+turns a balanced half into cut coordinates.  Reports:
+`notes/2026-08-06-c815-exchange-spectrum-lean.md` and
+`notes/2026-08-06-c815-exchange-second-moment-and-small-orders.md`.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic
