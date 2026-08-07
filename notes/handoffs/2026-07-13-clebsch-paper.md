@@ -394,14 +394,21 @@ than by a certificate and reducing to
 over any commutative ring with two invertible carrying an invertible square root
 `s` of five: the commutator of the diagonal matrix with the conference matrix is
 `2 s` times the antisymmetric part of the cross-golden block, so
-`Z² = 500 det (B - Bᵀ) = (10 s Pf (B - Bᵀ))²`, and over an integral domain
-`Z = ± 10 s Pf (B - Bᵀ)` — the sign being the involution `s ↦ -s`, which
-exchanges the projectors.  The modules are
+`Z² = 500 det (B - Bᵀ)` and, exactly and with no sign ambiguity,
+`Z = 10 s Pf (B - Bᵀ)`; using the other square root of five negates the Pfaffian
+and the factor `10 s` together, so the manuscript's `±` belongs to the
+basis-dependent three-by-three determinant rather than to this identity.  The modules are
 `RelativeConicArcs.ClebschOuterJoubertFrame`,
 `RelativeConicArcs.ClebschOuterMatchingFrame`,
 `RelativeConicArcs.SegreIgusaPolar` and
 `RelativeConicArcs.CrossGoldenDeterminant`; the golden-return gate audits
-one hundred and nineteen terminals with no compiled-evaluation axiom.  One
+one hundred and twenty-three terminals with no compiled-evaluation axiom.  A
+cold referee accepted the arc after recomputing every constant and finite table
+independently; its one substantive repair — the `±` above, which had a false
+justification and left a theorem weaker than provable — is applied, along with
+the marked representatives, the exported one-factorization indexing, and
+several prose corrections.  Review:
+`notes/2026-08-07-c815-oper1-oper2-referee-review.md`.  One
 manuscript defect surfaced and is queued for C816: row `r = 2` of the displayed
 table (5.1) has its last six signs negated, which violates both the four-point
 two-graph identity and the paper's own relation `Σ_T J_T = 0`.  Report:

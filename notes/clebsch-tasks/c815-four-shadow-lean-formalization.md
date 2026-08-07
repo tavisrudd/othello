@@ -150,9 +150,11 @@ including that there are exactly six such colourings, is
 Segre--Igusa polar map are `RelativeConicArcs.SegreIgusaPolar`, with the Igusa
 quartic proved through the characteristic polynomial and Newton's identities;
 and the cross-golden determinant comparison is
-`RelativeConicArcs.CrossGoldenDeterminant`, giving
-`Z² = 500 det (B - Bᵀ) = (10 s Pf (B - Bᵀ))²` and the signed form over a domain.
-The golden-return gate audits one hundred and nineteen terminals with no
+`RelativeConicArcs.CrossGoldenDeterminant`, giving `Z² = 500 det (B - Bᵀ)` and
+the exact `Z = 10 s Pf (B - Bᵀ)`.  A cold referee accepted the arc with repairs,
+all applied; the review is
+`notes/2026-08-07-c815-oper1-oper2-referee-review.md`.
+The golden-return gate audits one hundred and twenty-three terminals with no
 compiled-evaluation axiom, and all paper-local replays and the release gate pass
 except the pre-existing tracked-PDF comparison.  One manuscript defect surfaced:
 row `r = 2` of the displayed table (5.1) has its last six signs negated, which
