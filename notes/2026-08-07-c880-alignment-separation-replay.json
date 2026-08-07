@@ -1,0 +1,147 @@
+{
+ "artifact": "c880-alignment-separation-replay",
+ "census_input_sha256": "cea77f21fef491a53a1d2cff21ad482a5208f121f0d8bc8ba634ef16d78b3a8b",
+ "schema": 1,
+ "seven": {
+  "all_five_sets_removable": true,
+  "complement_pairs": 16384,
+  "full_family_faithful": true,
+  "minimum_tests": 30,
+  "n": 7,
+  "optimal_families_regenerated": 56,
+  "some_six_set_removable": false,
+  "tests": 35
+ },
+ "six": {
+  "colliding_groups": 46,
+  "complement_pairs": 512,
+  "distinct_alignment_vectors": 462,
+  "empty_family_pairs": 6,
+  "largest_group": 6,
+  "n": 6,
+  "nonempty_witness": {
+   "aligned_foursets": [
+    [
+     0,
+     1,
+     2,
+     5
+    ],
+    [
+     0,
+     1,
+     3,
+     4
+    ]
+   ],
+   "coherent_triples_of_two_members": [
+    [
+     [
+      0,
+      1,
+      3
+     ],
+     [
+      0,
+      1,
+      4
+     ],
+     [
+      0,
+      2,
+      3
+     ],
+     [
+      0,
+      3,
+      4
+     ],
+     [
+      0,
+      4,
+      5
+     ],
+     [
+      1,
+      2,
+      4
+     ],
+     [
+      1,
+      3,
+      4
+     ],
+     [
+      1,
+      3,
+      5
+     ],
+     [
+      2,
+      3,
+      5
+     ],
+     [
+      2,
+      4,
+      5
+     ]
+    ],
+    [
+     [
+      0,
+      1,
+      3
+     ],
+     [
+      0,
+      1,
+      4
+     ],
+     [
+      0,
+      2,
+      4
+     ],
+     [
+      0,
+      3,
+      4
+     ],
+     [
+      0,
+      3,
+      5
+     ],
+     [
+      1,
+      2,
+      3
+     ],
+     [
+      1,
+      3,
+      4
+     ],
+     [
+      1,
+      4,
+      5
+     ],
+     [
+      2,
+      3,
+      5
+     ],
+     [
+      2,
+      4,
+      5
+     ]
+    ]
+   ]
+  },
+  "pairs_in_collisions": 96,
+  "two_graphs": 1024
+ }
+}

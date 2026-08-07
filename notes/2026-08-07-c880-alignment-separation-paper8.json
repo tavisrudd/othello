@@ -1,0 +1,1 @@
+{"artifact":"c880-paper-family","schema":1,"n":8,"complement_pairs":1048576,"anchor":[0,1,2,3],"family_size":53,"separates_unconditionally":true,"separates_without_anchor_test":true,"greedy_redundant":8,"greedy_reduced_size":45,"greedy_removed":[[0,1,2,3],[0,1,2,4],[0,1,4,5],[0,1,4,6],[0,2,4,5],[0,2,4,6],[0,3,4,5],[0,3,4,6]]}
