@@ -1,9 +1,10 @@
 # 2026-08-07 — C880: the seven-point hypothesis is sharp, and thirty alignment tests are optimal there
 
-**Task:** C880 (lane `clebsch`), work items 1 and 2 of
-`notes/clebsch-tasks/c880-aligned-query-complexity.md`, together with the part
-of item 3 that the small cases decide. Research and computation only; no
-manuscript file is touched.
+**Task:** C880 (lane `clebsch`), work items 1, 2 and 4 of
+`notes/clebsch-tasks/c880-aligned-query-complexity.md`, the part of item 3 that
+the small cases decide, and the positioning that follows from the literature
+audit in `notes/2026-08-07-c880-literature-audit.md`. Research and computation
+only; no manuscript file is touched, and item 7 is not drafted here.
 
 ## What is settled
 
@@ -39,7 +40,22 @@ manuscript file is touched.
    at the optimum. Section 7 sets out the positioning that follows: a rigidity
    and redundancy result about the aligned design, with the coherence price as
    robustness, not a query-complexity contribution.
-6. **The alignment code's minimum distance jumps from two to four.** At seven
+6. **Adaptivity strictly helps, and the coherence restriction is cheap.** A
+   greedy adaptive decoder finishes in 22 questions at seven points against the
+   proved nonadaptive minimum of 30, which is a separation; at eight points it
+   finishes in 30 against a nonadaptive bracket of 25 to 44. Measured against
+   the value oracle's optimum — the two-graph dimension \(\binom{n-1}2\), which
+   order-three minor values achieve with no waste — the adaptive worst case
+   costs 1.47 and 1.43 and the mean costs 1.041 and 1.043.
+7. **Where the coarsening pays is space and estimation, not queries.** The
+   aligned design compresses from \(\binom n4\) entries to a determining
+   \(3n^2-23n+45\) by projection onto a subset of coordinates; and because the
+   closed four-walk weight of a four-set is 24 when aligned and \(-8\)
+   otherwise, the aligned density is a reparametrization of the fourth spectral
+   moment, estimable from \(O(\varepsilon^{-2})\) sampled four-sets in
+   \(O(\log n)\) space without forming the matrix. Section 8 gives the measured
+   count distribution that decides what such an estimator can separate.
+8. **The alignment code's minimum distance jumps from two to four.** At seven
    points there are pairs of two-graphs whose aligned families differ in exactly
    two four-sets — 315 difference patterns, which is what makes the exact bound
    at seven points possible — and at eight points there are none of weight two,
@@ -54,6 +70,16 @@ same construction is nine tests above what a search achieves, and the ratio
 between the best lower bound and the exhibited \(3n^2-23n+45\) still tends to
 4.87. Work item 3 therefore stands untouched by these two cases,
 and needs either a structural lower bound or a better construction.
+
+The second reading, which took the literature audit to see: the interest of this
+material is not that it counts queries well. Against a value oracle the same
+reconstruction is already exactly optimal, and our oracle is deliberately
+weaker. What survives is a rigidity and redundancy statement about the
+determinant-minus-three design, a measurement of what the coherence restriction
+costs — about four percent on average — and one setting, sublinear estimation of
+a spectral moment, in which the four-set probe is the natural unit of work
+rather than a handicap. Sections 7 and 8 develop that, and it is the framing the
+manuscript should inherit.
 
 ## Conventions
 
