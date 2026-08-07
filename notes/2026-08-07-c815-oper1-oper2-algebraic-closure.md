@@ -17,22 +17,30 @@ section, and the Segre–Igusa polar map. All six are now kernel-checked.
 ### Coherence of the outer six-family
 
 `RelativeConicArcs.ClebschOuterJoubertFrame` attaches to each of the six
-reorderings of the labels `3`, `4`, `5` the conference matrix
-`C.submatrix σ⁻¹ σ⁻¹`. Each is symmetric (`outerConference_transpose`), has
-vanishing diagonal (`outerConference_apply_self`), has off-diagonal entries
-squaring to one (`outerConference_apply_sq`) and satisfies the same conference
-equation `C² = 5 • 1` (`outerConference_sq`). The square is not re-decided: it
-is transported along the relabelling, which is a ring map on matrices.
+reorderings of the labels `3`, `4`, `5` the relabelled matrix
+`C.submatrix σ⁻¹ σ⁻¹`, negated when the reordering is odd. Each is symmetric
+(`outerConference_transpose`), has vanishing diagonal
+(`outerConference_apply_self`), has off-diagonal entries squaring to one
+(`outerConference_apply_sq`) and satisfies the same conference equation
+`C² = 5 • 1` (`outerConference_sq`); the square is not re-decided but
+transported along the relabelling, which is a ring map on matrices, and the
+sign squares away.
 
-The twenty triangle products of each representative, weighted by the sign of its
-reordering, are recorded as an explicit twenty-term sign word. `outerColouring`
-is that table; `outerColouring_eq_smul_triangleSign` proves it is exactly what
-the reordering rule `ε_{pT}(S) = sgn(p) ε_T(p⁻¹S)` produces,
+The negation is what makes these the manuscript's representatives rather than
+mere relabellings. A triangle product is a cubic monomial in the entries, so it
+picks up the sign once, and
+`outerColouring_eq_triangleSign_outerConference` states the property the
+manuscript asks of `C_T`: the twenty triangle products of `outerConference t`
+are exactly the twenty coefficients of the `t`-th translate. Without the
+negation they would be the negatives for the three odd reorderings.
+
+Those coefficients are recorded as an explicit twenty-term sign word.
+`outerColouring` is that table; `outerColouring_eq_smul_triangleSign` proves it
+is exactly what the reordering rule `ε_{pT}(S) = sgn(p) ε_T(p⁻¹S)` produces,
 `outerColouring_injective` proves the six words are pairwise distinct, so the
 family has six members and not fewer, and `outerColouring_four_point` proves
-each word obeys the four-point two-graph identity — the global sign of a row is
-a fourth power and drops out, so this is the four-point identity for the
-representative's triangle products.
+each word obeys the four-point two-graph identity, which is now literally the
+four-point identity for the representative's triangle products.
 
 ### Cross-golden determinant comparison
 
@@ -52,12 +60,17 @@ multiplies by `(2s)⁶ = 8000`, and the earlier `det = 16 Z²` then gives
 
 `B - Bᵀ` is skew-symmetric with vanishing diagonal, so the determinant-square
 theorem of 2026-08-05 applies and the identity becomes a comparison of squares,
-`Z² = (10 s · Pf(B - Bᵀ))²` (`triangleCubic_sq_eq_pfaffian_sq`); over an
-integral domain, `Z = ± 10 s · Pf(B - Bᵀ)`
-(`triangleCubic_eq_or_eq_neg`). That is the manuscript's `Z_T = ±10√5 det B_T`,
-and the proof also explains its sign: replacing `s` by `-s` exchanges the two
-projectors and negates the Pfaffian, so the sign is an orientation of the two
-spectral spaces rather than a property of `C`.
+`Z² = (10 s · Pf(B - Bᵀ))²` (`triangleCubic_sq_eq_pfaffian_sq`). The Pfaffian is
+in fact pinned exactly, with no sign ambiguity and no integral-domain
+hypothesis: `B - Bᵀ` is `(2s)⁻¹` times the commutator, an order-six Pfaffian
+scales by the cube of a scalar, and the Pfaffian of the commutator is `4 Z`, so
+
+  `Z = 10 s · Pf(B - Bᵀ)`   (`triangleCubic_eq_ten_mul_pfaffian`).
+
+Using the other square root of five negates the Pfaffian and the factor `10 s`
+together, so the identity does not depend on that choice. The manuscript's `±`
+therefore belongs to the basis-dependent three-by-three determinant, not to this
+Pfaffian.
 
 ### Outer matching-frame identification
 
@@ -76,9 +89,13 @@ coefficient words, in order (`matchingColouring_oneFactorization`); since the
 words are pairwise distinct so are the factorizations
 (`oneFactorization_injective`).
 
-The converse is proved rather than cited:
-`exists_outerColouring_of_isOneFactorization` shows every one-factorization
-gives one of the six words, so there are exactly six such colourings. The
+The converse is proved rather than cited.
+`exists_perm_eq_oneFactorization` shows that every one-factorization agrees with
+one of the six listed families after a renaming of its colours, so the six
+represent every one-factorization exactly once up to that renaming, and
+`existsUnique_outerColouring_of_isOneFactorization` reads the same fact on the
+colourings with a unique index. There are therefore exactly six such
+colourings. The
 colours are first renamed to be listed by the label each matching uses at the
 root — the colouring does not see colour names
 (`matchingColouring_comp`) — and each normalized matching is then one of the
@@ -93,14 +110,15 @@ Segre cubic, that is, a six-tuple with vanishing sum and vanishing cube sum.
 
 The section is `sum_erase_eq_zero_of_apply_eq_zero` and
 `sum_pow_three_erase_eq_zero_of_apply_eq_zero`: if one coordinate vanishes the
-remaining five again have vanishing sum and vanishing cube sum, which is the
-diagonal cubic surface inside the projective three-space that the linear
-relation cuts out. `outerCubic_diagonal_section` is the same statement for the
-six outer cubics.
+remaining five again have vanishing sum and vanishing cube sum.
+`outerCubic_diagonal_section` is the same statement for the six outer cubics.
+That is the pair of equations the manuscript displays; identifying the locus
+they cut out with a cubic surface in a projective three-space is geometry the
+Lean statements do not carry, and the module prose says so.
 
 The polar map uses the denominator-free normalization `V = 6 z² - Σ z²`, six
-times the manuscript's centered square; both sides of the quartic relation are
-homogeneous of degree four, so the common factor is immaterial. The six always
+times the centered square `z² - (Σ z²)/6`; both sides of the quartic relation
+are homogeneous of degree four, so the common factor is immaterial. The six always
 sum to zero (`sum_centeredSquare`), and on the Segre cubic they satisfy the
 Igusa relation `(Σ V²)² = 4 Σ V⁴` (`igusa_relation_of_segre`,
 `igusa_relation_outerCubic`).
@@ -129,13 +147,15 @@ of those six determinants, which is the manuscript's centered determinant.
 The manuscript writes the cross-golden comparison with `det B_T(x)` for the map
 induced between the two spectral spaces, a determinant defined only after
 choosing bases and orienting the two determinant lines. The Lean statements
-avoid that choice: `Pf(B - Bᵀ)` is the basis-free stand-in, and the `±` is
-exactly the orientation the manuscript also leaves free. The comparison of that
-Pfaffian with the determinant of a three-by-three matrix representing the
-induced map in a chosen pair of orthonormal frames is not formalized; it would
-need block-determinant machinery for a six-by-six matrix split as three plus
-three, and it adds no mathematical content to the identity. This is a
-restriction on the form of the statement, not a gap in it.
+avoid that choice: `Pf(B - Bᵀ)` is the basis-free stand-in, and it carries no
+sign ambiguity at all. The six-by-six matrix `B` has rank at most three, so its
+own determinant vanishes identically and the manuscript's `det` cannot be read
+on it. The comparison of the Pfaffian with the determinant of a three-by-three
+matrix representing the induced map in a chosen pair of orthonormal frames is
+not formalized; it would need block-determinant machinery for a six-by-six
+matrix split as three plus three, and it is there, not in the identity above,
+that an orientation of the two determinant lines enters. This is a restriction
+on the form of the statement, not a gap in it.
 
 ## A correction the manuscript needs
 
@@ -178,7 +198,7 @@ and 2 carry the defective row, so a forward version should correct it.
   warnings.
 - `lean/scripts/lean-build-queue.py build RelativeConicArcs.Gates.ClebschGoldenReturn`
   — success, 1:25 wall, 7.0 GB peak.
-- The golden-return gate now audits 119 terminals. Every one depends only on
+- The golden-return gate audits 123 terminals after the referee repairs. Every one depends only on
   `propext`, `Classical.choice` and `Quot.sound`, several on strictly fewer;
   `native_decide` occurs nowhere in the pinned closure and the replay refuses it.
 - `golden_return_axioms.txt`, `golden_return_source_closure.json` (29 modules)
@@ -206,6 +226,31 @@ python3 verification/verify_golden_return_lean.py --lean-root ../../lean \
   --axiom-log verification/evidence/gate_stdout/golden_return.stdout.txt
 python3 verification/verify_scaffold.py
 ```
+
+## Cold referee review
+
+`notes/2026-08-07-c815-oper1-oper2-referee-review.md` records an independent
+review that read every statement against the manuscript and recomputed every
+constant and finite table from scratch — the twenty triangle signs, all six
+coefficient words from the manuscript's own rule, the one-factorizations of the
+complete graph on six labels and their colourings from its own enumeration, the
+constants five hundred, eight thousand, `(2s)⁶` and sixteen by exact arithmetic
+in the field generated by a square root of five and by sampling modulo eleven,
+and the Igusa and power-sum identities. Verdict: accept with repairs.
+
+Every repair is applied. The substantive one is described above: the `±` had a
+false justification and left a theorem strictly weaker than provable. The others
+are the marked representatives, the exported one-factorization indexing with
+uniqueness of the index, the removal of unproved projective geometry from the
+diagonal-section prose, corrected enumeration counts in one header, a renamed
+private lemma whose docstring now cites the companions that carry its strength,
+and the replacement of references to an unnamed document by the mathematics they
+denoted. The review also independently confirmed the table (5.1) defect, and in
+sharper form: the printed row `r = 2` is the only one of the six that fails the
+four-point identity.
+
+After the repairs the gate audits one hundred and twenty-three terminals, still
+with no compiled-evaluation axiom, and all replays and the scaffold pass again.
 
 ## Ledger state after the round
 
@@ -239,9 +284,12 @@ Taken now, because it was cheap:
   replaced a several-hundred-term cofactor with five small `ring` checks and
   produced a statement of independent interest, that on the Segre cubic the
   eighth power sum is determined by the second, fourth and sixth.
-- The `±` in the manuscript's cross-golden formula is now explained rather than
-  merely permitted: it is the sign ambiguity of the square root of five, and the
-  proof exhibits the involution `s ↦ -s` that realizes it.
+- The `±` in the manuscript's cross-golden formula was first attributed to the
+  square-root choice. The cold referee refuted that: `s ↦ -s` negates the
+  Pfaffian and the factor `10 s` together, so the product is invariant and the
+  equality holds outright. The disjunction was replaced by the exact identity,
+  which is both stronger and cheaper — the scaling route needs no
+  integral-domain hypothesis and no determinant at all.
 
 ## Mystery ledger
 
@@ -262,8 +310,13 @@ Taken now, because it was cheap:
   to any other displayed sign table in the released paper. The bounded check is
   cheap — the four-point identity and the column sums refute a wrong row without
   recomputing anything — and belongs with the C816 manuscript pass.
+- **Settled.** The `±` in the cross-golden formula is not an ambiguity of the
+  Pfaffian identity; it belongs to the basis-dependent three-by-three
+  determinant. The Pfaffian form is an equality on the nose.
 - **Open, deliberately.** The frame comparison of `Pf(B - Bᵀ)` with a
   three-by-three determinant, as described above. It is a statement-form
-  restriction with a named route, not an evidence gap.
+  restriction with a named route, not an evidence gap. The referee confirmed
+  numerically over the reals, with orthonormal eigenframes, that the
+  manuscript's constant `10√5` and its frame-orientation `±` are correct.
 
 No other genuine mystery remains in these two rows.
