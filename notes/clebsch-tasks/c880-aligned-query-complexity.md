@@ -1,8 +1,31 @@
 # C880 — query complexity of aligned-design reconstruction
 
 **Lane:** `clebsch`
-**Status:** queued; research and computation only
+**Status:** active; research and computation only
 **Paper:** III (`papers/clebsch-passages`), theorem `thm:aligned-faithfulness`
+
+## State
+
+Work items 1 and 2 are closed, and item 3 has its small-case evidence:
+`notes/2026-08-07-c880-alignment-separation.md`.
+
+- Seven points is sharp: the alignment tests fail to determine a two-graph up to
+  complement at six points, in 46 groups covering 96 of the 512 complement
+  pairs, only 6 of which have an empty aligned family. A non-degenerate witness
+  pair is recorded for the manuscript.
+- The exact nonadaptive minimum at seven points is 30 of the 35 tests, with 56
+  optimal families in two orbits, computed by three independent routes.
+- The manuscript's selected family separates unconditionally, and at seven
+  points its single redundant member is the test on the anchor itself; the same
+  drop is valid at eight points.
+- At eight points the bracket is \(20\le\mathrm{minimum}\le45\) against the
+  exhibited 53, so the constant is loose there. The weight-two difference
+  argument that settles seven points is vacuous at eight, where the alignment
+  code's minimum distance is four.
+
+Open next: item 3 (a general lower bound or a better construction — the
+structural description of the small-weight difference patterns is the most
+direct route), then items 4, 5, 6 and 8, and item 7 only after the audit.
 
 ## Objective
 
