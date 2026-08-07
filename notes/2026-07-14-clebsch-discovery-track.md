@@ -1548,3 +1548,40 @@ Lean witness rather than a Lean search.
 quantifier range, which is proved.
 
 **Status:** graduated -> C880, `notes/clebsch-tasks/c880-aligned-query-complexity.md`.
+
+---
+
+## 2026-08-07 — the middle-degree Hodge sign is what turns a matching bijection into a two-graph
+
+**Observation.** A one-factorization of the complete graph on six labels induces,
+for each triple, a bijection from the triple to its complement: the three
+matchings meeting the triple in an edge each also meet the complement in an
+edge, and the leftover cross edges pair the two triples. The sign of that
+bijection, read in the increasing orders of both triples, is *not* a two-graph:
+measured on all six one-factorizations, it violates the four-point identity. It
+becomes one exactly after multiplying by `(-1)^{σ(S)-3}` for `σ(S)` the sum of
+the labels of the triple — the same sign that the middle-degree Hodge star
+carries in `RelativeConicArcs.ClebschMiddleExterior.hodgeSign`, proved there to
+be minus one to the inversion count of the listing of a triple before its
+increasing complement. With that factor every one-factorization gives a
+two-graph, and the six give exactly the six coloured-triangle coordinates.
+
+**Why it is worth recording.** The orientation convention of the middle exterior
+power and the sign convention of the coloured-triangle construction are treated
+in the manuscript as two separate normalizations. This says they are one: the
+Hodge sign is not a convention chosen to make the exterior formula come out, it
+is the obstruction cocycle that makes the matching construction a two-graph at
+all. That suggests a shorter route to the four-shadow agreement than the
+matching-expansion computation currently used.
+
+**Route if promoted.** State the complementary triangle colouring for an
+arbitrary one-factorization, prove the four-point identity for it directly from
+the Hodge sign's parity identity `hodgeSign_mul_complement`, and see whether the
+middle-exterior diagonal identity `(K_T)_{SS} = 4 ε_T(S)` then falls out of the
+matching structure rather than out of the twenty-term expansion.
+
+**Not what was sought:** the obligation was the outer matching-frame
+identification for the six labelled factorizations, which is proved in
+`RelativeConicArcs.ClebschOuterMatchingFrame`.
+
+**Status:** open, unpromoted.

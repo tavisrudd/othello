@@ -139,8 +139,29 @@ axiom, all paper-local replays and the full release gate pass, and the trust
 manifest, formal map and verification section were brought into step.  Report:
 `notes/2026-08-07-c815-oper4-determinant-and-query-closure.md`.
 
+## OPER-1 and OPER-2 closure (2026-08-07)
+
+Both rows are closed.  The coherence of the outer six-family and the
+coefficientwise coloured-triangle identification are
+`RelativeConicArcs.ClebschOuterJoubertFrame`; the identification of the six
+coordinates with the one-factorizations of the complete graph on six labels,
+including that there are exactly six such colourings, is
+`RelativeConicArcs.ClebschOuterMatchingFrame`; the diagonal section and the
+Segre--Igusa polar map are `RelativeConicArcs.SegreIgusaPolar`, with the Igusa
+quartic proved through the characteristic polynomial and Newton's identities;
+and the cross-golden determinant comparison is
+`RelativeConicArcs.CrossGoldenDeterminant`, giving
+`Z² = 500 det (B - Bᵀ) = (10 s Pf (B - Bᵀ))²` and the signed form over a domain.
+The golden-return gate audits one hundred and nineteen terminals with no
+compiled-evaluation axiom, and all paper-local replays and the release gate pass
+except the pre-existing tracked-PDF comparison.  One manuscript defect surfaced:
+row `r = 2` of the displayed table (5.1) has its last six signs negated, which
+violates both the four-point two-graph identity and the paper's own first Segre
+relation; the correction is queued for C816.  Report:
+`notes/2026-08-07-c815-oper1-oper2-algebraic-closure.md`.
+
 What remains for C815 is the geometric part of gap class B: ARITH-1, ARITH-2,
-ORIENT-1, the residues of OPER-1 and OPER-2, and HARM-1 and HARM-2.
+ORIENT-1, HARM-1 and HARM-2.
 
 ## Evidence source
 

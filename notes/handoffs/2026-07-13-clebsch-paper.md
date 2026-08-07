@@ -370,10 +370,47 @@ hard-coded for all nine rows in `verify_scaffold.py`, so promoting them is a
 change to the release contract and belongs with the coordinated trust and
 release pass, not to a single row's closure.
 
+Rows OPER-1 and OPER-2 are now closed as well.  Renaming the six labels along
+the inverse of each of the six reorderings carries the fixed conference matrix to
+a conference matrix of its own — symmetric, vanishing diagonal, unit off-diagonal
+squares, square `5 • 1` — and its weighted triangle products are the twenty
+coefficients of the corresponding translate; the six sign words so obtained are
+pairwise distinct and each obeys the four-point two-graph identity, which is the
+coherence of the outer six-family, and each translate is the coloured-triangle
+cubic of its word coefficient by coefficient, which is the Joubert
+identification.  Those same six words are the complementary triangle colourings
+of the one-factorizations of the complete graph on the six labels: for a triple
+and its complement the three matchings meeting the triple in an edge also meet
+the complement in an edge, and the sign of that bijection, corrected by the
+Hodge sign of the listing, is the coefficient.  Every one-factorization gives one
+of the six words, so there are exactly six such colourings and the count is a
+theorem rather than an attribution.  The diagonal section and the Segre--Igusa
+polar map follow: a point of the Segre cubic with a vanishing coordinate has its
+remaining five coordinates summing to zero with vanishing cube sum, and the
+centered squares satisfy the Igusa quartic relation, proved through the
+characteristic polynomial of the six coordinates and Newton's identities rather
+than by a certificate and reducing to
+`48 p₈ = 12 p₄² - 12 p₂² p₄ + p₂⁴ + 32 p₂ p₆`.  The cross-golden comparison holds
+over any commutative ring with two invertible carrying an invertible square root
+`s` of five: the commutator of the diagonal matrix with the conference matrix is
+`2 s` times the antisymmetric part of the cross-golden block, so
+`Z² = 500 det (B - Bᵀ) = (10 s Pf (B - Bᵀ))²`, and over an integral domain
+`Z = ± 10 s Pf (B - Bᵀ)` — the sign being the involution `s ↦ -s`, which
+exchanges the projectors.  The modules are
+`RelativeConicArcs.ClebschOuterJoubertFrame`,
+`RelativeConicArcs.ClebschOuterMatchingFrame`,
+`RelativeConicArcs.SegreIgusaPolar` and
+`RelativeConicArcs.CrossGoldenDeterminant`; the golden-return gate audits
+one hundred and nineteen terminals with no compiled-evaluation axiom.  One
+manuscript defect surfaced and is queued for C816: row `r = 2` of the displayed
+table (5.1) has its last six signs negated, which violates both the four-point
+two-graph identity and the paper's own relation `Σ_T J_T = 0`.  Report:
+`notes/2026-08-07-c815-oper1-oper2-algebraic-closure.md`.
+
 What remains for C815 is the geometric part of gap class B in
 `notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`: ARITH-1 and
-ARITH-2, ORIENT-1, the residues of OPER-1 and OPER-2, and HARM-1 and HARM-2.
-Each is a larger piece of work than either OPER-4 clause.
+ARITH-2, ORIENT-1, and HARM-1 and HARM-2.  Each is a larger piece of work than
+any OPER clause.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
@@ -392,7 +429,7 @@ block that theorem.
 |---|---|---|---|
 | Paper I — *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus* | `papers/clebsch-rigidity/` | GitHub/DOI v1 and v2 released; existing gates are green, but C855 is required to formalize every paper/companion mathematical assertion in Lean and close the full referee-artifact standards debt before the next release is called theorem-complete | [C855](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) |
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; the general Gorenstein mechanism is prior work, while the exact matching-orbit classification, sharp fixed-line carrier boundary, unique Chow point, and sheet-sign cubic survive; C856 closed the fixed-line inheritance, public-docstring, and verification-expectation gaps on every project-owned file, an independent 2026-08-03 review confirmed every C856 claim, and C860 has cleared the shared projective-cap closure — the game modules are out of the paper closures and the five residual geometry modules are documented — so the full transitive closure is at the referee standard | [C577](../clebsch-tasks/c577-factorization-paper.md) |
-| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and the rank-14 weighted Jacobian is proved structurally, and its remaining work is the manuscript clauses of gap class B before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
+| Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and the rank-14 weighted Jacobian is proved structurally; all four operator rows of gap class B are closed and its remaining work is the arithmetic, orientation and harmonic rows before C823 | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md) |
 | Paper IV — *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
