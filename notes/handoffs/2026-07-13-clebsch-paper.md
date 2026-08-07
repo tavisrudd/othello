@@ -336,13 +336,44 @@ for a shared reason is retracted as a cancellation of offsets.  Report:
 Lean proposals arising from all of this are queued in C816's card and are not
 owned by C815; no Lean file changed.
 
-What remains for C815 is the rest of the manuscript clauses of gap class B in
-`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`.  Two human
-inputs remain in manuscript row OPER-4: the identification of the marked
-determinant-minus-three family of a conference matrix with the aligned family,
-and the sufficiency of the query family for a decoder working from one anchor.
-The passages gate now audits fifty-six terminals, still with no compiled
-evaluation anywhere.
+Manuscript row OPER-4 is closed.  Each of the three signed Hamilton-cycle
+products of a four-set omits one pair of opposite edges, so it is the product of
+the two triangles avoiding that pair; the cycle sum is therefore the first
+triangle sign times the sum of the other three, which is `3` exactly when all
+four agree.  With `det = 3 - 2w` this identifies the determinant-minus-three
+family of a Seidel matrix with the aligned family of its two-graph, and the
+four triangle signs' product being one leaves the minor no value but `-3` and
+`5`, so the Greaves and Suda design is the `-3` fibre of a two-valued function.
+The signing is then recovered up to diagonal switching and one global sign.
+This assumes only symmetry, a vanishing diagonal and entries squaring to one,
+not a scalar square, and it needs seven labels rather than order at least ten.
+Separately, the selected query family of a single anchor is proved sufficient:
+the seven-point step never read anything but the tests meeting its anchor in at
+least two points, so weakening its hypothesis to exactly those lets the same
+argument run along one fixed anchor, and any three points lie with the anchor in
+a seven-point subset that calibrates the complement bit on the anchor's own
+triple.  Count and sufficiency now name the same family, and the anchor is
+unconditional on seven points.  The new modules are
+`RelativeConicArcs.SeidelPrincipalMinors` and
+`RelativeConicArcs.AlignedQueryFaithfulness`; the passages gate audits
+sixty-five terminals with no compiled evaluation anywhere, all paper-local
+replays pass, and the full release gate passes including the deterministic
+manuscript build, which also clears the tracked-PDF failure recorded on
+2026-08-05.  One measured negative: dropping the tests that meet the anchor in
+three points collapses the 4,096 normalized seven-point data to 2,329
+signatures, so that economization of the count fails.  Report:
+`notes/2026-08-07-c815-oper4-determinant-and-query-closure.md`.
+
+The row's `coverage` token and the manifest's global formal-coverage status
+still say that no complete manuscript row is claimed.  Both strings are
+hard-coded for all nine rows in `verify_scaffold.py`, so promoting them is a
+change to the release contract and belongs with the coordinated trust and
+release pass, not to a single row's closure.
+
+What remains for C815 is the geometric part of gap class B in
+`notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`: ARITH-1 and
+ARITH-2, ORIENT-1, the residues of OPER-1 and OPER-2, and HARM-1 and HARM-2.
+Each is a larger piece of work than either OPER-4 clause.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared

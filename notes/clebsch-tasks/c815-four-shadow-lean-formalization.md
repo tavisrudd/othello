@@ -124,6 +124,24 @@ count of a half to the exchange operator of the cut that half defines, across
 sum over the half, and a bijection between the four-subsets of the half and
 those of the block's label set — and unstarted.
 
+## OPER-4 closure (2026-08-07)
+
+Row OPER-4 is closed.  The determinant-minus-three family of a Seidel matrix is
+identified with the aligned family of its two-graph, and the principal
+four-by-four minor on distinct labels is shown to take only the values `-3` and
+`5`, in `RelativeConicArcs.SeidelPrincipalMinors`; the same module recovers the
+signing up to diagonal switching and one global sign.  The counted query family
+of a single anchor is proved sufficient in
+`RelativeConicArcs.AlignedQueryFaithfulness`, whose anchor hypothesis is
+discharged unconditionally on seven points by `exists_distinct_alignedAnchor`.
+The passages gate audits sixty-five terminals with no compiled-evaluation
+axiom, all paper-local replays and the full release gate pass, and the trust
+manifest, formal map and verification section were brought into step.  Report:
+`notes/2026-08-07-c815-oper4-determinant-and-query-closure.md`.
+
+What remains for C815 is the geometric part of gap class B: ARITH-1, ARITH-2,
+ORIENT-1, the residues of OPER-1 and OPER-2, and HARM-1 and HARM-2.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.

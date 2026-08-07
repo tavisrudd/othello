@@ -1484,3 +1484,67 @@ moments, both now proved.  This bound is incidental to them and nothing proved
 depends on it.
 
 **Status:** open lead, unpromoted. No C-ID allocated.
+
+---
+
+## 2026-08-07 — the aligned query family sits within a factor of six of the information-theoretic minimum
+
+**Observation.** The selected query family of an aligned anchor has
+`3n^2 - 23n + 45` members and is now proved to determine a two-graph up to
+global complement, in
+`RelativeConicArcs.AlignedQueryFaithfulness.exists_complementBit_of_selectedQueryFamily_eq`.
+A counting bound goes the other way. Two-graphs on `n` labelled points number
+`2^(C(n,2) - n + 1)`, each test returns one bit determined by the two-graph, and
+determination up to complement allows fibres of size two, so any family with
+that property has at least `C(n,2) - n = n(n-3)/2` members. The selected family
+is therefore within a factor tending to six of that minimum.
+
+**Why it is worth recording.** The manuscript presents the quadratic count as
+the size of the decoder it builds, with no statement that a quadratic count is
+forced. The counting bound makes the quadratic order optimal and leaves only the
+constant open, which is a sharper thing to say than "uses `O(n^2)` selected
+determinants".
+
+**Route if promoted.** The prose argument needs only the count of two-graphs on
+`n` points, which is the count of switching classes of graphs. In Lean it needs
+that count as a cardinality statement, which the project does not have; the
+inequality itself is then an injection into a function space.
+
+**Adjacent measured negative.** The obvious way to shrink the constant fails.
+Dropping the `4(n-4)` tests that meet the anchor in three points and keeping only
+the `6·C(n-4,2)` two-anchor-point tests collapses the 4,096 normalized
+seven-point configurations to 2,329 distinct signatures, with 1,767 collisions;
+the smallest collide two cuts differing in a single coordinate. Script and
+output: `notes/2026-08-07-c815-pair-signature-only.py`.
+
+**Not what was sought:** the row's obligation was sufficiency of the family as
+counted, which is proved. Optimality of the constant is incidental to it.
+
+**Status:** open lead, unpromoted. No C-ID allocated.
+
+---
+
+## 2026-08-07 — is seven the exact point threshold for aligned-design faithfulness?
+
+**Observation.** Faithfulness is proved for at least seven points and the
+manuscript states it there, but nothing exhibits two six-point two-graphs with
+the same aligned family that are not complements of one another. The order-six
+conference matrix has no aligned four-set at all, which is
+`RelativeConicArcs.BalancedExchangeRigidity`'s order-six reading, so a witness
+would be a second six-point two-graph with empty aligned family outside its
+complement pair.
+
+**Why it is worth recording.** If a witness exists the hypothesis is sharp and
+the paper can say so; if none exists the theorem holds on six points and the
+hypothesis is an artifact of the proof route. Either answer is a strictly better
+sentence than the current one.
+
+**Route if promoted.** Two-graphs on six labelled points are the `2^10`
+switching classes of graphs on six vertices; computing the aligned family of
+each and grouping by it is immediate, and a positive answer would then need a
+Lean witness rather than a Lean search.
+
+**Not what was sought:** the obligation was faithfulness at the manuscript's
+quantifier range, which is proved.
+
+**Status:** open lead, unpromoted. No C-ID allocated.
