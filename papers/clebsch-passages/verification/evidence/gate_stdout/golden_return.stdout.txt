@@ -1,6 +1,5 @@
-✔ [1421/1423] Built RelativeConicArcs.SubsetInclusionSums (2.0s)
-✔ [1422/1423] Built RelativeConicArcs.ConferenceCutBlocks (2.8s)
-ℹ [1423/1423] Built RelativeConicArcs.Gates.ClebschGoldenReturn (1.8s)
+✔ [1422/1423] Built RelativeConicArcs.ConferenceCutBlocks (2.4s)
+ℹ [1423/1423] Built RelativeConicArcs.Gates.ClebschGoldenReturn (1.3s)
 info: RelativeConicArcs/Gates/ClebschGoldenReturn.lean:84:0: 'RelativeConicArcs.ClebschGoldenConference.conferenceMatrix_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

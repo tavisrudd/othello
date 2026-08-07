@@ -105,10 +105,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 26576,
+      "bytes": 26766,
       "module": "RelativeConicArcs.ConferenceCutBlocks",
       "path": "RelativeConicArcs/ConferenceCutBlocks.lean",
-      "sha256": "c54c3ff3fbc7aebf2b376d22cbebece6d3d8ae894a31aeca5541aea8c30a84cb"
+      "sha256": "c84f408fb49888dd97fd269462a3a7d8ed9b53e0cac560845c75395fc5d9c056"
     },
     {
       "bytes": 1716,

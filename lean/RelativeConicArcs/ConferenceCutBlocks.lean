@@ -41,9 +41,11 @@ matrix contributes nothing unless consecutive labels differ, so its support has
 two, three or four elements; the first two classes contribute the counts
 `d(d-1)` and `12·C(d,3)`, and the last contributes, for each four-element
 support `K`, the sum `closedFourWalkSum A K` of the twenty-four walks through
-`K`.  That sum is eight times the four-set weight above, since each of the
-three Hamilton cycles of `K` is traversed from four starting points in two
-directions.
+`K`.  Only the zero diagonal and the pairwise reciprocity `A i j * A j i = 1`
+enter that count, not symmetry.  For a symmetric sign matrix the four-element
+supports each contribute eight times the four-set weight above, since each of
+the three Hamilton cycles of `K` is traversed from four starting points in two
+directions, hence `24` or `-8`.
 
 The fifth theorem is the rigidity consequence used for a cut of a `2d`-element
 label set into balanced halves: if the four-subset sums of the weights agree on
@@ -237,21 +239,20 @@ private theorem sum_eq_sum_powersetCard_four (F : n → n → n → n → R)
     _ = ∑ i, ∑ j, ∑ k, ∑ l, F i j k l := by
         simp [Fintype.sum_prod_type]
 
-/-- The fourth trace of a zero-diagonal symmetric sign matrix, sorted by the
-support of the closed four-walks it counts: the two-element supports give
-`d(d-1)`, the three-element supports give `12·C(d,3)`, and each four-element
-support `K` gives the sum of the twenty-four closed four-walks through `K`. -/
+/-- The fourth trace of a zero-diagonal matrix whose off-diagonal entries
+multiply pairwise to one, sorted by the support of the closed four-walks it
+counts: the two-element supports give `d(d-1)`, the three-element supports give
+`12·C(d,3)`, and each four-element support `K` gives the sum of the twenty-four
+closed four-walks through `K`.  Symmetry is not used; for a symmetric sign
+matrix the hypothesis is that the off-diagonal entries square to one, and then
+each four-element support contributes `24` or `-8`. -/
 theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
-    (hsym : ∀ i j, A j i = A i j) (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) :
+    (hone : ∀ i j, i ≠ j → A i j * A j i = 1) :
     Matrix.trace (A * A * A * A) =
       (Fintype.card n : R) * ((Fintype.card n : R) - 1)
         + 12 * ((Fintype.card n).choose 3 : R)
         + ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, closedFourWalkSum A K := by
   classical
-  have hone : ∀ i j : n, i ≠ j → A i j * A j i = 1 := by
-    intro i j hij
-    rw [hsym i j]
-    exact hsq i j hij
   have htrace : Matrix.trace (A * A * A * A)
       = ∑ i, ∑ j, ∑ k, ∑ l, walkTerm A i j k l := by
     simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Finset.sum_mul, walkTerm]
@@ -327,10 +328,8 @@ theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
   -- the two- and three-element supports
   have hAterm : ∀ i j : n, i ≠ j → walkTerm A i j i j = 1 := by
     intro i j hij
-    have h := hone i j hij
-    show A i j * A j i * A i j * A j i = 1
-    calc A i j * A j i * A i j * A j i = (A i j * A j i) * (A i j * A j i) := by ring
-      _ = 1 := by rw [h]; ring
+    calc walkTerm A i j i j = (A i j * A j i) * (A i j * A j i) := by unfold walkTerm; ring
+      _ = 1 := by rw [hone i j hij]; ring
   have hBterm : ∀ i j l : n, i ≠ j → i ≠ l → walkTerm A i j i l = 1 := by
     intro i j l hij hil
     calc walkTerm A i j i l = (A i j * A j i) * (A i l * A l i) := by unfold walkTerm; ring
