@@ -24,6 +24,15 @@ The axiom audit's 94 terminals now report 56 clean against 38 carrying a declara
 native-evaluation axiom. Both gates and the evidence verifier are green. Report:
 `notes/2026-08-06-c834-association-algebra-kernel-closure.md`.
 
+Two carry-overs for later stages. The round's bit-level lemmas — a bit-setting fold's bits, a mask
+list determined by the matrix it presents, tabulation as mapping, and the vanishing of a selected
+exclusive-or — are private in the identities module and are exactly the transport stage 4's packed
+pair concurrence needs; promote them into `AssociationTransport.PackedRows` in the build window that
+first consumes them, not before, since that rebuilds the packet. And the four squaring identities now
+exist in two vocabularies, the list form and the `ZMod 2` matrix form, of which only the latter feeds
+the orbit-spanning spine; stage 6's statement-identity ledger must point each manuscript clause at
+one of them.
+
 Item 6 of stage 3 below is therefore done, including the header disclosure it asked to narrow. Item 5
 was already discharged by the previous round, whose elaboration of the packet is trace-current. The
 remaining native decisions are the

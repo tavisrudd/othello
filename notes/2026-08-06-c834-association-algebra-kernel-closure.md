@@ -79,6 +79,32 @@ against 41. The three that moved are exactly
 `papers/q13-passant-code/verification/verify_evidence.py` passes, with the manifest digest of
 `Gates/Main.lean` refreshed for its changed import.
 
+## Leads this round exposed
+
+- **The bit-level lemmas are reusable and should move when a second consumer appears.** The fold
+  description, the list-determined-by-its-matrix step, the tabulation-is-mapping step and the
+  vanishing of a selected exclusive-or are all independent of the association algebra. The
+  structural upgrade's planned packing of pair concurrence as one mask per ordered pair needs
+  exactly this transport. They are private here on purpose: promoting them into
+  `AssociationTransport.PackedRows` now would rebuild the whole packet for no current consumer, so
+  the promotion belongs to the build window that first needs them.
+- **The squaring identities are now proved twice, in two vocabularies.** The list form proved here
+  and `AssociationTransport.relation_matrix_identities` over `ZMod 2` state the same four
+  identities; only the matrix form feeds the orbit-spanning spine. The statement-identity ledger of
+  stage 6 must point each manuscript clause at one of them rather than at both.
+
+## Mystery ledger
+
+- **Why the plan expected a memory cliff here and did not meet one.** Settled. The cost was
+  anticipated for a recomputation of the polar invariant over the 6084 ordered pairs, once per
+  relation. Making the identification symbolic removed that computation entirely, and what remains —
+  four echelon reductions on 78 displayed masks, and four bound checks — is far below the measured
+  per-module ceiling.
+- **Why the executable and displayed presentations both exist.** Not a defect, and now bridged
+  rather than parallel: the computed list is the definition, the displayed list carries no trust,
+  and the theorem identifying them is what lets a check reduce on literals. No evidence gap.
+- Nothing else in this round is unexplained.
+
 ## Package state after this round
 
 The paper package's remaining native decisions are the weight-ten profile certificates, the
