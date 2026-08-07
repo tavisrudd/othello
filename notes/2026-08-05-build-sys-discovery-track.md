@@ -44,3 +44,25 @@ the portfolio audit report, not here.
 family.
 **Status:** open lead, narrowed: the remaining question is whether the families that have not been
 extracted yet should be left with their current banners until their own cut.
+
+### 2026-08-06 — a paper without a manuscript checker drifts silently, and nothing reports it
+
+**Provenance:** the complete repair ports bibliography repair, rebuilding through the README's
+documented `tectonic` command.
+**Was I looking for this?:** no — the task was one stale bibliography entry.
+**Observed:** the rebuild came back a page longer than the tracked PDF.  The tracked source gained
+an AI-assistance disclosure in `ffeca335` on 2026-07-26, and the PDF beside it was never rebuilt, so
+the two had disagreed for eleven days.  Nothing in the repository reported it, because the drift
+detector is the byte-reproducible rebuild-and-compare inside a paper's own manuscript checker, and
+this paper has no `verification/` directory at all.
+**Why it may matter:** the papers that have release chains are exactly the papers that cannot drift
+this way, which means the check is present wherever it is least needed and absent wherever a
+manuscript is still moving.  Four registered papers have no `verification/` directory.  Whether the
+others have the same disclosure-era gap between their tracked source and their tracked PDF is one
+bounded comparison per paper and has not been run.  A cheap partial substitute would be a
+repository-wide staleness probe comparing each tracked PDF's commit against its own `.tex`'s
+commit — it would not prove a PDF current, but it would catch this exact ordering.
+**Evidence:** CHECKED — `git log -1` on each path, and a text diff of the committed PDF against the
+rebuild.
+**Status:** open lead.  Not promoted: it crosses every paper lane, so it needs its own C item rather
+than a repair inside C864.
