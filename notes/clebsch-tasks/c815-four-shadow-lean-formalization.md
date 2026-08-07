@@ -165,6 +165,40 @@ relation; the correction is queued for C816.  Report:
 What remains for C815 is the geometric part of gap class B: ARITH-1, ARITH-2,
 ORIENT-1, HARM-1 and HARM-2.
 
+## Harmonic rows HARM-1 and HARM-2 (2026-08-07)
+
+The route is chosen and scoped in
+`notes/2026-08-07-c815-harmonic-realization-scope.md`, whose exact-arithmetic
+certificate is `notes/2026-08-07-c815-harmonic-realization-checks.py` with output
+`.json` and hashes `.sha256`.  It replaces spherical harmonic analysis by
+algebra: the normalized spherical average is introduced as an explicitly defined
+moment functional, its orthogonal invariance follows from the integration-by-parts
+recursion together with uniqueness, and the addition theorem becomes the apolar
+identity `Z_u(∂) Z_v = 10395 P₆(u·v)`.  One classical statement stays outside the
+route and is deliberately isolated in a module of its own: that the defined
+functional is the surface integral.
+
+Two of the six planned modules are landed and elaborate without errors or
+warnings.  `RelativeConicArcs.IcosahedralFaceAxes` carries the labelled ten-axis
+configuration over `ℤ√5` and transports it along a chosen square root of five to
+any commutative ring: every axis has the same length and the square of the inner
+product of two distinct axes takes one value on disjoint label pairs and another
+on meeting ones, which is the geometric content of the labelling and fixes the
+two orbit values of the degree-six kernel.  It also carries three explicit
+rotations that permute the ten axes and their induced label permutations.
+`RelativeConicArcs.AlternatingComparisonLine` carries the abstract comparison:
+two-transitivity of the alternating group on five letters by explicit
+construction, the commutant of the coordinate module, the resulting scalar action
+on the sum-zero submodule, the comparison theorem identifying every equivariant
+comparison with a multiple of the pair-sum map, and the normalization forcing the
+scalar's cube to be one and hence the scalar to be one over an ordered field.
+
+Still open in the two rows: the moment functional and its invariance, the zonal
+harmonic and the apolar addition theorem, the Gram matrix with its three
+eigenvalues and injectivity, the spherical cubic restriction, the existence of the
+coordinate representative assumed by the comparison theorem, and the measure-theoretic
+identification named above.  Neither new module is on a gate yet.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.

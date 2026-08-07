@@ -419,6 +419,37 @@ What remains for C815 is the geometric part of gap class B in
 ARITH-2, ORIENT-1, and HARM-1 and HARM-2.  Each is a larger piece of work than
 any OPER clause.
 
+The harmonic rows are under way.  Their route removes the analysis rather than
+formalizing spherical harmonic theory: the normalized spherical average is
+introduced as an explicitly defined moment functional on polynomials in three
+variables, its invariance under orthogonal substitution follows from the
+integration-by-parts recursion together with the uniqueness that recursion
+forces, the apolar identity `N(p q) = p(∂) q` holds whenever `p` is harmonic and
+`q` has the same degree, and the spherical addition theorem for the degree-six
+zonal harmonics is then the elementary computation `Z_u(∂) Z_v = 10395 P₆(u·v)`.
+Exactly one classical statement stays outside — that the defined functional is
+the surface integral — and it is confined to a module of its own.  The route,
+its six-module plan, and an exact-arithmetic certificate for every constant it
+uses are in `notes/2026-08-07-c815-harmonic-realization-scope.md`; the
+certificate also verifies the target identity
+`M(F_y³) = -784000/1247103 σ₃(y)` for arbitrary sum-zero `y`, not only at the
+marked vector, so the manuscript's invariant-line step is a convenience rather
+than a necessity.
+
+Two of the six modules are landed and elaborate without errors or warnings.
+`RelativeConicArcs.IcosahedralFaceAxes` proves that the displayed labelling of
+the ten icosahedral face axes is geometric — equal lengths, and the square of the
+inner product of two distinct axes taking one value on disjoint label pairs and
+another on meeting ones — over `ℤ√5` and, by transport along a chosen square
+root of five, over any commutative ring; it also carries three explicit rotations
+permuting the axes with their induced label permutations.
+`RelativeConicArcs.AlternatingComparisonLine` proves two-transitivity of the
+alternating group on five letters by explicit construction, computes its
+commutant on the coordinate module, and concludes that every equivariant
+comparison to the Petersen coefficient module is a multiple of the pair-sum map
+whose scalar is one once the sum of cubes is preserved.  Neither module is on a
+gate yet.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared
