@@ -53,6 +53,24 @@ points of \(C - \nu L^2\) form a weight-twelve word — followed by the semantic
 retirement of `IndexCertificate` and the seven residue modules. The equivariance transport is still
 wanted for other leaves of the package but no longer gates this one.
 
+The first of those two geometry lemmas is closed, together with the two further algebraic inputs the
+bridge needs. `PassantCodeQ13.MinimumWords.RowUniqueness.PolarGram` proves the discriminant law —
+the normalized polar Gram of three internal points is never a nonzero square, and vanishes exactly
+on collinear triples — from the factorization `det G = -2 (det V)^2` and the character of a product
+of three nonsquares; it also writes the normalized Gram in the manuscript's invariants as
+`4 - Σρ - π`, and proves that the four-by-four polar Gram determinant of any four coordinate triples
+vanishes. `PassantCodeQ13.MinimumWords.RowUniqueness.PassantJoinInvariant` proves that the
+dual-conic value of a join is the discriminant of the binary form it carries, that two distinct
+internal points are passant-joined exactly when that value is a nonzero nonsquare, and hence that a
+joined pair has elliptic parameter `9`, `10` or `12`. Both modules elaborate and build clean with no
+compiled-evaluation axiom at any terminal, and neither is on a gate yet: they enter with the bridge
+that consumes them. Report:
+`notes/2026-08-07-c834-discriminant-law-and-join-criterion-lean.md`.
+
+What is left of the item is the bitangent support lemma, the semantic bridge — normalized lifts, the
+`Nat`-to-`ZMod 13` residue dictionary, and the identification of `normalizedPolarGram` with
+`QuadrupleGram.tripleGram` — and the retirement.
+
 The octahedral family is still needed for the converse half, that a passant row is admissible, which
 is the statement that no minimum support meets a passant in more than two points. That is structural
 for the 273 conic supports and a one-orbit-representative check for the 91 octahedral ones.
