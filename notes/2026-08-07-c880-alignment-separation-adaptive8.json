@@ -1,0 +1,1 @@
+{"artifact":"c880-adaptive-decoder","schema":1,"n":8,"complement_pairs":1048576,"tests_available":70,"two_graph_dimension":21,"value_oracle_optimum":21,"entropy_lower_bound":25,"exhibited_nonadaptive":53,"greedy_adaptive_worst_case":30,"greedy_adaptive_mean":21.8958,"internal_nodes":1048575}

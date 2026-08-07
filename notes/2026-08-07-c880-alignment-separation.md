@@ -245,12 +245,57 @@ is a sketch, not a result: the cases where no such reference exists need a
 fallback, and nothing here bounds the adaptive complexity from below beyond the
 entropy bound, which applies to both models.
 
+## 6. The price of the coherence restriction, and adaptivity
+
+The audit (`notes/2026-08-07-c880-literature-audit.md`) establishes that the
+principal-minor literature reconstructs the same object up to the same gauge, so
+there is a benchmark to measure against: the two-graph has dimension
+\(\binom n2-n+1=\binom{n-1}2\), and for a Seidel matrix that many order-three
+minor *values* achieve it, one bit of information per query with no waste. The
+question this task should answer is therefore not "how many tests" but **what
+the coherence restriction costs**, where the decoder is denied the values and
+the order-three data and gets one bit per four-set instead.
+
+A greedy adaptive decoder — at each step ask the test splitting the surviving
+candidates most evenly — answers that.
+
+| \(n\) | dimension, and the value-oracle optimum | entropy bound | greedy adaptive, worst case | greedy adaptive, mean | nonadaptive minimum | the manuscript's family |
+|---|---|---|---|---|---|---|
+| 7 | 15 | 18 | 22 | 15.61 | 30 | 31 |
+| 8 | 21 | 25 | 30 | 21.90 | 25 to 44 | 53 |
+
+Three readings, in increasing order of interest.
+
+**Adaptivity strictly helps, and at seven points that is proved.** The
+nonadaptive minimum there is exactly 30, and an adaptive decoder finishes in 22
+questions in the worst case, so no nonadaptive family can match adaptive
+behaviour. At eight points the greedy adaptive worst case is 30 against a
+nonadaptive bracket of 25 to 44, which is consistent with a separation but does
+not establish one.
+
+**The worst-case price of the restriction is under a half.** Adaptive worst case
+against the value-oracle optimum is \(22/15=1.47\) at seven points and
+\(30/21=1.43\) at eight — against the manuscript family's factor of six
+asymptotically, and the nonadaptive minimum's factor of two at seven points.
+
+**The average price is about four percent.** The mean number of coherence
+questions is 15.61 against 15, and 21.90 against 21 — ratios 1.041 and 1.043.
+So a decoder that sees only whether each four-set is coherent pays, on typical
+input, almost exactly what a decoder reading full minor values pays. That is the
+statement worth making about this oracle, and it is not a statement anyone has
+been in a position to make, because the model had not been defined.
+
+The greedy tree is an upper bound on the adaptive optimum, not the optimum; the
+entropy bound of section 5 lower-bounds it by 18 and 25 respectively, and both
+bounds apply to adaptive and nonadaptive decoders alike.
+
 ## What this certifies, and what it does not
 
 - The threshold and the seven-point minimum are exhaustive statements over all
   two-graphs on the stated point sets. They say nothing about \(n\ge9\).
-- The minimum is the **nonadaptive** query complexity, over families fixed in
-  advance. Item 4 of the task card — whether adaptivity helps — is untouched.
+- The exact minima of sections 2 and 4 are **nonadaptive**, over families fixed
+  in advance. Section 6 measures an adaptive decoder separately; its worst case
+  is an upper bound from a greedy rule, not the adaptive optimum.
 - Separation is unconditional: no promise that any particular four-set is
   aligned. The promised-anchor variant of item 5 is a different, smaller problem
   and is not measured here.
@@ -279,6 +324,8 @@ $S/c880 family    --n 7 --anchor 3 --out $S/family7-triangle.json   # section 5
 $S/c880 family    --n 8 --anchor 3 --out $S/family8-triangle.json   # section 5
 $S/c880 links     --n 7 --out $S/links7.json                        # section 5 sweep
 $S/c880 links     --n 8 --out $S/links8.json                        # section 5 sweep
+$S/c880 adaptive  --n 7 --out $S/adaptive7.json                     # section 6
+$S/c880 adaptive  --n 8 --out $S/adaptive8.json                     # section 6
 uv run --with numpy python3 2026-08-07-c880-alignment-separation-replay.py \
     --census 2026-08-07-c880-alignment-separation-census7.json --out $S/replay.json
 ```
@@ -302,7 +349,7 @@ are removable and that none extends.
 
 | file | bytes | sha256 |
 |------|-------|--------|
-| `2026-08-07-c880-alignment-separation.rs` | 51858 | 0437097b2ef7fa9f4e83ad32d934859bc92a6aac1778fd0bdbf2d0a518fb2453 |
+| `2026-08-07-c880-alignment-separation.rs` | 55008 | f40a4f8c25c4c18ece260f4ffe17daeb4a8be2de1ee9e1521ddc64bdf56e9fce |
 | `2026-08-07-c880-alignment-separation-replay.py` | 8373 | 95cc38756438c7a9d5e7b893b6bdbf917aa7425e9518290022b42982c5ba7fd4 |
 | `2026-08-07-c880-alignment-separation-threshold.json` | 2810 | efe57db769fb9b33500cf31b13fac7e10ee103f5f653fefdb6a90c2fedbe9423 |
 | `2026-08-07-c880-alignment-separation-census7.json` | 677 | cea77f21fef491a53a1d2cff21ad482a5208f121f0d8bc8ba634ef16d78b3a8b |
@@ -316,6 +363,8 @@ are removable and that none extends.
 | `2026-08-07-c880-alignment-separation-links7.json` | 5149 | 956ad6e11799d39c65695f4b4b956519c2ffb8715a24333f5450fb4bfa5bc2d5 |
 | `2026-08-07-c880-alignment-separation-links8.json` | 5151 | 6a6a9188d963a6662c2d8e2a411f15a25a9ecb00b500fc6f6d9d67098d36c03f |
 | `2026-08-07-c880-alignment-separation-search8.json` | 637 | 3fa2ddde31d27989afc568d077697a875b674f09ec2d6213b9f8e7e39838993b |
+| `2026-08-07-c880-alignment-separation-adaptive7.json` | 289 | 95f5ec5f2d049c8d62e1529036f0a07b400ca2ba311ee28ec82de6c773131c94 |
+| `2026-08-07-c880-alignment-separation-adaptive8.json` | 293 | 77e2f8e89e39c4208adb4d93454d3e4a8f53c38dd3af75d1f8d47bcc0a6b9c9c |
 | `2026-08-07-c880-alignment-separation-replay.json` | 1638 | a306367330ba08a393df7dc83faf1c8b9226cf420c7fd8ebfe7a1c3a09138394 |
 
 ## Next in this task

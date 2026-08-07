@@ -1447,6 +1447,82 @@ fn mode_search(n: usize, iters: usize, kick: usize, out: &str) {
     eprintln!("n={} best separating family found: {}", n, best.count_ones());
 }
 
+// ---------------------------------------------------------------- adaptive
+
+/// Greedy adaptive decoder: at each step ask the test whose answer splits the
+/// surviving candidates most evenly, and recurse.  The height of the resulting
+/// decision tree is an upper bound on the adaptive query complexity, and the
+/// mean root-to-leaf length is the expected number of questions.
+fn adaptive_depth(set: &[u128], tests: usize, nodes: &mut u64, total: &mut u64) -> usize {
+    if set.len() <= 1 {
+        *total += 0;
+        return 0;
+    }
+    *nodes += 1;
+    let mut best_t = usize::MAX;
+    let mut best_worst = usize::MAX;
+    for t in 0..tests {
+        let bit = 1u128 << t;
+        let yes = set.iter().filter(|v| *v & bit != 0).count();
+        if yes == 0 || yes == set.len() {
+            continue;
+        }
+        let worst = yes.max(set.len() - yes);
+        if worst < best_worst {
+            best_worst = worst;
+            best_t = t;
+        }
+    }
+    if best_t == usize::MAX {
+        // indistinguishable candidates remain: the family does not separate
+        return usize::MAX / 4;
+    }
+    let bit = 1u128 << best_t;
+    let yes: Vec<u128> = set.iter().filter(|v| *v & bit != 0).cloned().collect();
+    let no: Vec<u128> = set.iter().filter(|v| *v & bit == 0).cloned().collect();
+    *total += set.len() as u64; // one question asked by every candidate here
+    let a = adaptive_depth(&yes, tests, nodes, total);
+    let b = adaptive_depth(&no, tests, nodes, total);
+    1 + a.max(b)
+}
+
+fn mode_adaptive(n: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let vectors: Vec<u128> = reps.iter().map(|&g| m.alignment(g)).collect();
+    let tests = m.tests();
+    let mut nodes = 0u64;
+    let mut total = 0u64;
+    let depth = adaptive_depth(&vectors, tests, &mut nodes, &mut total);
+    let mean = total as f64 / vectors.len() as f64;
+    let dim = m.edge_bits; // the two-graph dimension, C(n-1,2)
+    let h = |p: f64| -p * p.log2() - (1.0 - p) * (1.0 - p).log2();
+    let entropy_bound = (((dim - 1) as f64) / h(0.25)).ceil() as usize;
+    let nn = n as i64;
+    let doc = format!(
+        "{{\"artifact\":\"c880-adaptive-decoder\",\"schema\":1,\"n\":{},\
+         \"complement_pairs\":{},\"tests_available\":{},\"two_graph_dimension\":{},\
+         \"value_oracle_optimum\":{},\"entropy_lower_bound\":{},\
+         \"exhibited_nonadaptive\":{},\"greedy_adaptive_worst_case\":{},\
+         \"greedy_adaptive_mean\":{:.4},\"internal_nodes\":{}}}\n",
+        n,
+        vectors.len(),
+        tests,
+        dim,
+        dim,
+        entropy_bound,
+        3 * nn * nn - 23 * nn + 45,
+        depth,
+        mean,
+        nodes
+    );
+    fs::write(out, doc).expect("write output");
+    eprintln!(
+        "n={} adaptive worst case {}, mean {:.4}; entropy bound {}, value-oracle optimum {}, nonadaptive minimum known separately",
+        n, depth, mean, entropy_bound, dim
+    );
+}
+
 // ---------------------------------------------------------------- driver
 
 fn main() {
@@ -1504,6 +1580,11 @@ fn main() {
             let kick: usize = getval("--kick").map(|s| s.parse().unwrap()).unwrap_or(6);
             let out = getval("--out").expect("--out");
             mode_search(n, iters, kick, &out);
+        }
+        "adaptive" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(7);
+            let out = getval("--out").expect("--out");
+            mode_adaptive(n, &out);
         }
         "census" => {
             let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(7);
