@@ -1523,6 +1523,73 @@ fn mode_adaptive(n: usize, out: &str) {
     );
 }
 
+// ---------------------------------------------------------------- stats
+
+/// Distribution of the number of aligned four-sets over all two-graphs.  This
+/// is what a sampling estimator sees: draw a uniform four-set, ask whether it
+/// is aligned, and the answer is a Bernoulli variable whose mean is the aligned
+/// density of the two-graph.  The spread of that density across two-graphs is
+/// what decides whether the statistic separates anything.
+fn mode_stats(n: usize, out: &str) {
+    let m = build_model(n);
+    let reps = m.pair_reps();
+    let tests = m.tests();
+    let mut hist = vec![0u64; tests + 1];
+    for &g in reps.iter() {
+        hist[m.alignment(g).count_ones() as usize] += 1;
+    }
+    let total: u64 = hist.iter().sum();
+    let mean: f64 = hist
+        .iter()
+        .enumerate()
+        .map(|(k, c)| k as f64 * *c as f64)
+        .sum::<f64>()
+        / total as f64;
+    let var: f64 = hist
+        .iter()
+        .enumerate()
+        .map(|(k, c)| (k as f64 - mean).powi(2) * *c as f64)
+        .sum::<f64>()
+        / total as f64;
+    let min = hist.iter().position(|c| *c > 0).unwrap();
+    let max = tests - hist.iter().rev().position(|c| *c > 0).unwrap();
+    let distinct = hist.iter().filter(|c| **c > 0).count();
+    let rows: Vec<String> = hist
+        .iter()
+        .enumerate()
+        .filter(|(_, c)| **c > 0)
+        .map(|(k, c)| format!("[{},{}]", k, c))
+        .collect();
+    let doc = format!(
+        "{{\"artifact\":\"c880-aligned-count-distribution\",\"schema\":1,\"n\":{},\
+         \"complement_pairs\":{},\"tests\":{},\"uniform_mean\":{:.6},\
+         \"mean\":{:.6},\"variance\":{:.6},\"stddev\":{:.6},\
+         \"min\":{},\"max\":{},\"distinct_values\":{},\"histogram\":[{}]}}\n",
+        n,
+        total,
+        tests,
+        tests as f64 / 4.0,
+        mean,
+        var,
+        var.sqrt(),
+        min,
+        max,
+        distinct,
+        rows.join(",")
+    );
+    fs::write(out, doc).expect("write output");
+    eprintln!(
+        "n={} aligned count: mean {:.4} (uniform {:.4}), sd {:.4}, range {}..{}, {} distinct values",
+        n,
+        mean,
+        tests as f64 / 4.0,
+        var.sqrt(),
+        min,
+        max,
+        distinct
+    );
+}
+
 // ---------------------------------------------------------------- driver
 
 fn main() {
@@ -1585,6 +1652,11 @@ fn main() {
             let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(7);
             let out = getval("--out").expect("--out");
             mode_adaptive(n, &out);
+        }
+        "stats" => {
+            let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(8);
+            let out = getval("--out").expect("--out");
+            mode_stats(n, &out);
         }
         "census" => {
             let n: usize = getval("--n").map(|s| s.parse().unwrap()).unwrap_or(7);

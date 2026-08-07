@@ -1,0 +1,1 @@
+{"artifact":"c880-aligned-count-distribution","schema":1,"n":7,"complement_pairs":16384,"tests":35,"uniform_mean":8.750000,"mean":8.750000,"variance":6.562500,"stddev":2.561738,"min":5,"max":35,"distinct_values":9,"histogram":[[5,1512],[7,5400],[9,5985],[11,1470],[13,1680],[17,210],[19,105],[25,21],[35,1]]}
