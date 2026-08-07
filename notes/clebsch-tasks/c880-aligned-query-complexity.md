@@ -6,7 +6,7 @@
 
 ## State
 
-Work items 1, 2 and 6 are closed, and item 3 has its small-case evidence.
+Work items 1, 2, 4 and 6 are closed, and item 3 has its small-case evidence.
 Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
 `notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim).
 
@@ -34,6 +34,16 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
   separates, at seven and at eight points. The manuscript's constant is
   therefore not slack inside its own class, and any improvement must share tests
   between outside pairs instead of spending six private ones on each.
+- Adaptivity strictly helps, and the coherence restriction is cheap. A greedy
+  adaptive decoder finishes in 22 questions at seven points against a proved
+  nonadaptive minimum of 30, which is a separation; at eight points it finishes
+  in 30 against a nonadaptive bracket of 25 to 44, consistent with a separation
+  but not establishing one. Measured against the value oracle's optimum — the
+  two-graph dimension \(\binom{n-1}2\), which order-three minor values achieve
+  with no waste — the adaptive worst case costs 1.47 and 1.43, and the *mean*
+  costs 1.041 and 1.043. So reading one coherence bit per four-set instead of
+  full minor values costs about four percent on typical input and under a half
+  in the worst case, against the manuscript family's factor of six.
 - At eight points the bracket is \(25\le\mathrm{minimum}\le44\) against the
   exhibited 53, so the construction is not optimal. The weight-two difference
   argument that settles seven points is vacuous at eight, where the alignment
