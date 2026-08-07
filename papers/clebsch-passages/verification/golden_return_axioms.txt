@@ -64,3 +64,4 @@
 'RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four' depends on axioms: [propext, Classical.choice, Quot.sound]

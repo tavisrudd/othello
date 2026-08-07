@@ -43,7 +43,11 @@ which each half has at most three labels the characteristic polynomial is
 computed outright and does not depend on the half: for a three-label half the
 principal block satisfies `A * A = 2 • 1 + τ • A` with `τ` the product of its
 three edge signs, and `τ` cancels from the characteristic polynomial of
-`1 - A²/5`, which is `(X - 1/5)(X - 4/5)²`.
+`1 - A²/5`, which is `(X - 1/5)(X - 4/5)²`.  The same fourth-trace count that
+makes the aligned count nonconstant also excludes a half of two labels: no
+symmetric sign matrix with zero diagonal on four labels squares to a scalar
+matrix, so order six is the only order above two at which a cut-independent
+exchange spectrum occurs.
 
 The results are stated for arbitrary isometries onto the two spectral spaces
 and are therefore conditional on such isometries existing; their existence is
@@ -1035,6 +1039,49 @@ theorem charpoly_one_sub_smul_mul_self_of_card_one (A : Matrix n n R)
     ((1 : Matrix n n R) - v • (A * A)).charpoly = X - 1 := by
   rw [eq_zero_of_card_one A hdiag hcard, Matrix.mul_zero, smul_zero, sub_zero,
     Matrix.charpoly_one, hcard, pow_one]
+
+/-- No symmetric matrix with zero diagonal whose off-diagonal entries square to
+one has a scalar square on four labels.  Such a matrix would satisfy
+`q = 3` by the trace of its square, hence have fourth trace `36`; the
+support-sorted fourth trace makes that `4·3 + 12·C(4,3)` plus the closed
+four-walk weight of its only four-set, forcing that weight to be `-24`, while
+every four-set of such a matrix carries weight `24` or `-8`.  Together with the
+constancy of the exchange spectrum for a half of at most three labels, this
+leaves order six as the only order above two at which a cut-independent
+exchange spectrum is realized. -/
+theorem ne_smul_one_of_card_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
+    (hsym : ∀ i j, A j i = A i j) (hsq : ∀ i j, i ≠ j → A i j * A i j = 1)
+    (hcard : Fintype.card n = 4) (q : R) : A * A ≠ q • 1 := by
+  intro hAA
+  have hone : ∀ i j : n, i ≠ j → A i j * A j i = 1 := by
+    intro i j hij
+    rw [hsym i j]
+    exact hsq i j hij
+  have hfour : ((4 : ℕ) : R) ≠ 0 := by exact_mod_cast (by norm_num : (4 : ℕ) ≠ 0)
+  have hq : q = 3 := by
+    have h1 := ConferenceCutBlocks.trace_mul_self A hdiag hone
+    rw [hAA, Matrix.trace_smul, Matrix.trace_one, smul_eq_mul, hcard] at h1
+    have hzero : ((4 : ℕ) : R) * (q - 3) = 0 := by linear_combination h1
+    rcases mul_eq_zero.mp hzero with h | h
+    · exact absurd h hfour
+    · linear_combination h
+  have hsq4 : A * A * A * A = (q * q) • (1 : Matrix n n R) := by
+    calc A * A * A * A = (A * A) * (A * A) := by rw [Matrix.mul_assoc]
+      _ = (q • (1 : Matrix n n R)) * (q • (1 : Matrix n n R)) := by rw [hAA]
+      _ = (q * q) • (1 : Matrix n n R) := by simp [smul_smul]
+  have hpow := ConferenceCutBlocks.trace_pow_four A hdiag hone
+  have hsingle :
+      ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, ConferenceCutBlocks.closedFourWalkSum A K
+        = ConferenceCutBlocks.closedFourWalkSum A Finset.univ := by
+    rw [show (4 : ℕ) = (Finset.univ : Finset n).card by rw [Finset.card_univ, hcard],
+      Finset.powersetCard_self, Finset.sum_singleton]
+  rw [hsq4, Matrix.trace_smul, Matrix.trace_one, smul_eq_mul, hsingle, hcard, hq] at hpow
+  norm_num at hpow
+  have hdich := ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight A hsym hsq
+    (show (Finset.univ : Finset n).card = 4 by rw [Finset.card_univ, hcard])
+  rw [show ConferenceCutBlocks.closedFourWalkSum A Finset.univ = -24 by
+    linear_combination -hpow] at hdich
+  norm_num at hdich
 
 end SmallOrders
 

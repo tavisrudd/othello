@@ -68,7 +68,11 @@ characteristic polynomial is computed outright and does not depend on the
 half: it is `X - 1` on one label, `(X - 2v)²` with `3 v = 1` on two, and
 `(X - 1/5)(X - 4/5)²` at order six, where the product of the three edge
 signs of the half enters `A * A = 2 • 1 + τ • A` but cancels from the
-characteristic polynomial.  The compression theorems are conditional on
+characteristic polynomial.  The same fourth-trace count excludes order
+four outright: no symmetric matrix with zero diagonal and entries
+squaring to one on four labels has a scalar square, because its only
+four-set would have to carry closed four-walk weight `-24`.  The
+compression theorems are conditional on
 an isometry onto each spectral space being supplied; the existence of
 such isometries and the eigenvalue phrasing of the spectrum are not
 formalized.
@@ -188,3 +192,4 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four
