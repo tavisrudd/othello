@@ -1520,7 +1520,7 @@ output: `notes/2026-08-07-c815-pair-signature-only.py`.
 **Not what was sought:** the row's obligation was sufficiency of the family as
 counted, which is proved. Optimality of the constant is incidental to it.
 
-**Status:** open lead, unpromoted. No C-ID allocated.
+**Status:** graduated -> C880, `notes/clebsch-tasks/c880-aligned-query-complexity.md`.
 
 ---
 
@@ -1547,4 +1547,4 @@ Lean witness rather than a Lean search.
 **Not what was sought:** the obligation was faithfulness at the manuscript's
 quantifier range, which is proved.
 
-**Status:** open lead, unpromoted. No C-ID allocated.
+**Status:** graduated -> C880, `notes/clebsch-tasks/c880-aligned-query-complexity.md`.
