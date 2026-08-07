@@ -213,6 +213,16 @@ order enters only as a hypothesis `s * s = q`, so the load-bearing statements
 stay ring-general.  One new module carries it, with the eigenvalue phrasing and
 the existence of the isometry as the only analytic items.
 
+That module, `RelativeConicArcs.BalancedExchangeSpectrum`, is committed and
+elaborates without errors or warnings.  It proves that the exchange operator of
+a balanced cut has the characteristic polynomial and every power trace of
+`1 - q⁻¹ • (A * A)`, and that the first exchange moment is `d² / q`.  Still open
+in the row: the second moment in the manuscript's aligned-four-set form, the
+`4 ≤ d` failure wrapper, the `d ≤ 3` constancy clause, the eigenvalue phrasing,
+the existence of the isometries, and gate integration with a regenerated axiom
+audit, which a foreign Lean build's hold on the shared build lock deferred.
+Report: `notes/2026-08-06-c815-exchange-spectrum-lean.md`.
+
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic
 under the reorderings fixing the first three labels sum to zero and their cubes

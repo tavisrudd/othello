@@ -91,6 +91,18 @@ there: whether the manuscript's "unique nontrivial realized order" sentence
 ranges only over the small orders, which is cheap, or over all orders, which
 pulls in the classical order-`≡ 2 (mod 4)` theorem.
 
+The core of that scope is now formalized in
+`RelativeConicArcs.BalancedExchangeSpectrum`, which elaborates without errors or
+warnings: the exchange operator of a balanced cut has the characteristic
+polynomial and every power trace of `1 - q⁻¹ • (A * A)`, and the first exchange
+moment is `d² / q`.  No eigenvalue, singular value, or square-root operation
+appears.  Report: `notes/2026-08-06-c815-exchange-spectrum-lean.md`.  Left in
+the row: the second moment in the manuscript's aligned-four-set form, the
+`4 ≤ d` failure wrapper over `BalancedExchangeRigidity`, the `d ≤ 3` constancy
+clause, the eigenvalue phrasing, the existence of the isometries, and gate
+integration with a regenerated axiom audit — the last blocked in this session by
+a foreign Lean build holding the shared build lock.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.
