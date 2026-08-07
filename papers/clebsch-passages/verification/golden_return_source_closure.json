@@ -26,7 +26,7 @@
     "Mathlib.Tactic.NormNum.NatFactorial",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 24,
+  "module_count": 25,
   "roots": [
     "RelativeConicArcs.Gates.ClebschGoldenReturn"
   ],
@@ -37,6 +37,12 @@
       "module": "RelativeConicArcs.BalancedExchangeEigenvalues",
       "path": "RelativeConicArcs/BalancedExchangeEigenvalues.lean",
       "sha256": "e706956f6fe119f5183cf8f301ba81bcfebc8cebe9448756f60eb6ce12eb50fb"
+    },
+    {
+      "bytes": 16810,
+      "module": "RelativeConicArcs.BalancedExchangeHalfCut",
+      "path": "RelativeConicArcs/BalancedExchangeHalfCut.lean",
+      "sha256": "b3c92d3b70f809cd331e124b3a6f73894b16a6504cfdc40003ad399166516478"
     },
     {
       "bytes": 10026,
@@ -141,10 +147,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 14703,
+      "bytes": 16666,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "b6d30d563badfba121de3eaf7e01a61bbf59e3b503ac12dc697d8f9d62d0b9a3"
+      "sha256": "03104698a0a804f81994de449d0f3abdd6c225dcd759810b50042e3dda947269"
     },
     {
       "bytes": 5731,

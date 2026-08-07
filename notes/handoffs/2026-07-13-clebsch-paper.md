@@ -237,16 +237,30 @@ orthonormal eigenbasis with eigenvalues `±1` and a vanishing trace — supplied
 the vanishing diagonal — makes the two eigenspaces equally large, so each is
 indexed by a half of the cut.  The spectral formula, the second moment and the
 order-six spectrum therefore also hold with the isometry existentially
-quantified, resting on no assumed hypothesis.  The gate audits seventy-four
-terminals with no compiled-evaluation axiom, and all three paper-local replays
-and the release gate pass.  What remains in the row is one mechanical transport:
-the cut-dependence statement is proved on the aligned count of a half rather
-than on the exchange operator of the cut that half defines, and carrying it
-across `Equiv.sumCompl` needs the fourth trace and the four-set count of a
-principal block related to the corresponding sums over the half.  Reports:
+quantified, resting on no assumed hypothesis.  Reports:
 `notes/2026-08-06-c815-exchange-spectrum-lean.md`,
 `notes/2026-08-06-c815-exchange-second-moment-and-small-orders.md` and
 `notes/2026-08-06-c815-exchange-eigenvalues-and-isometries.md`.
+
+Row OPER-3 is now closed.  The last item was the transport across
+`Equiv.sumCompl`, which turns a subset `Y` of a single label set into cut
+coordinates: the relabelling that lists the labels of `Y` first has the
+submatrix on `Y` as its principal block, symmetry makes the lower-left block the
+transpose of the cross block, and the scalar square carries over because
+relabelling along an equivalence is a ring map on matrices.  Two invariants of
+that block are then read on `Y` itself — its fourth trace is the fourfold sum
+over `Y`, and its aligned four-sets are the images of the aligned four-subsets
+of `Y`, since the closed four-walk weight of a four-set is preserved by
+relabelling along an injection.  The second exchange moment of the cut at a half
+is therefore stated in the aligned count of that half, and for order `2d` with
+`4 ≤ d` no real number is the second moment of every balanced half: the
+dependence on the cut is now a statement about the exchange operator rather than
+about a proxy invariant.  The module is
+`RelativeConicArcs.BalancedExchangeHalfCut`; the golden-return gate audits
+eighty-one terminals with no compiled-evaluation axiom, all three paper-local
+replays and the release gate pass, and the verification README no longer claims
+that no eigenvalue statement is formalized.  Report:
+`notes/2026-08-06-c815-half-cut-transport.md`.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic

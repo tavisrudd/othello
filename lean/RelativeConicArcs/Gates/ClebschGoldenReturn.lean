@@ -11,6 +11,7 @@ import RelativeConicArcs.ConferenceCutBlocks
 import RelativeConicArcs.BalancedExchangeRigidity
 import RelativeConicArcs.BalancedExchangeSpectrum
 import RelativeConicArcs.BalancedExchangeEigenvalues
+import RelativeConicArcs.BalancedExchangeHalfCut
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -84,6 +85,25 @@ each can be indexed by a half of the cut.  Over the reals the
 characteristic polynomial is also read as a spectrum: that of
 `1 - q⁻¹ A²` is `∏ (X - (1 - αᵢ²/q))` over the eigenvalues `αᵢ` of the
 principal block, which is the manuscript's spectral formula.
+
+The cut statements above are about a matrix already presented in block
+form on a sum type, while the cut-dependence statement is about a matrix
+`C` on a single label set and a subset `Y` of it.  Relabelling `C` along
+`Equiv.sumCompl (· ∈ Y)` reconciles the two: it lists the labels of `Y`
+first, its upper-left block is the submatrix of `C` on `Y`, and symmetry
+of `C` makes its lower-left block the transpose of the cross block, so
+the square `q • 1` is carried across unchanged.  Two invariants of that
+principal block are read on `Y` itself.  Its fourth trace is the fourfold
+sum over `Y` of the closed four-walk weights, which is the quantity the
+counting argument above shows to depend on the half.  Its aligned
+four-sets correspond to the aligned four-subsets of `Y` under the
+inclusion of `Y` into the label set, since relabelling along an injection
+preserves the closed four-walk weight of a four-set; hence the two counts
+agree.  Consequently the second exchange moment of the cut at a half is
+the displayed expression in the number of aligned four-subsets of that
+half, and for a real symmetric matrix with zero diagonal and entries
+squaring to one on `2d` labels with `4 ≤ d` whose square is `q • 1`, no
+real number is that second moment for every balanced half.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -209,3 +229,11 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut
 #print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_trace_pow_two_exchangeCompression_cut
 #print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three
+
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.trace_pow_four_principalBlock
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half
+#print axioms RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq
