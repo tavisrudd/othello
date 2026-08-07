@@ -9,6 +9,7 @@ import RelativeConicArcs.ClebschOuterSegreRelations
 import RelativeConicArcs.ConferenceCutSpectrum
 import RelativeConicArcs.ConferenceCutBlocks
 import RelativeConicArcs.BalancedExchangeRigidity
+import RelativeConicArcs.BalancedExchangeSpectrum
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -46,8 +47,31 @@ symmetric conference matrix of order `N` the diagonal of `C * C = q • 1` gives
 `4 ≤ d` the fourth trace of the principal block does depend on the balanced
 half.  That counting step replaces the switching normalization and the bound
 `R(3,3) = 6` used elsewhere; the Ramsey bound itself is proved independently.
-Every eigenvalue and singular-value statement remains outside this gate:
-nothing here leaves polynomial algebra and finite combinatorics.
+The exchange operator of a balanced cut is here in
+characteristic-polynomial rather than eigenvalue form.  Normalize a
+symmetric matrix `C` with `C * C = q • 1` by an element `s` with
+`s * s = q`, take the sign involution `D` of the cut, and compress
+`D (1 - Q)/2 D` to the fixed space of `Q = s⁻¹ • C` along an isometry `U`,
+that is, a matrix with `Uᵀ U = 1` and `U Uᵀ = (1 + Q)/2`.  That compression
+has the characteristic polynomial and every power trace of `1 - q⁻¹ A²`,
+for `A` the principal block on the chosen half.  The proof uses only the
+antisymmetry of the commutator `D Q - Q D` and its anticommutation with
+`Q`: no eigenvalue, singular value, diagonalization or square-root
+operation enters, and the statements hold over any field of
+characteristic zero.  The first exchange moment is `d²/q` and the second
+is `(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q²`, where
+`c` counts the aligned four-sets of the half, the four-subsets of
+Hamilton-cycle weight `3`.  That count is not the same for every balanced
+half once `4 ≤ d`, so the second moment, and with it the spectrum,
+depends on the cut.  When a half has at most three labels the
+characteristic polynomial is computed outright and does not depend on the
+half: it is `X - 1` on one label, `(X - 2v)²` with `3 v = 1` on two, and
+`(X - 1/5)(X - 4/5)²` at order six, where the product of the three edge
+signs of the half enters `A * A = 2 • 1 + τ • A` but cancels from the
+characteristic polynomial.  The compression theorems are conditional on
+an isometry onto each spectral space being supplied; the existence of
+such isometries and the eigenvalue phrasing of the spectrum are not
+formalized.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -148,3 +172,19 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq
 
 #print axioms RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq
+
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_eq
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_mul
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_cut
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.not_forall_alignedFourSetCount_eq
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three
+#print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three

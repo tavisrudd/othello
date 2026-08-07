@@ -2,8 +2,10 @@ import Mathlib.Data.Matrix.ColumnRowPartitioned
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Trace
+import Mathlib.Tactic.Module
 import Mathlib.Tactic.NoncommRing
 import RelativeConicArcs.ConferenceCutBlocks
+import RelativeConicArcs.BalancedExchangeRigidity
 
 /-!
 # The exchange operator of a balanced cut
@@ -31,6 +33,17 @@ makes the compression of `-(L * L)/4` a Gram matrix `Sᵀ * S`, whose companion
 `Matrix.charpoly_mul_comm'` equates the two compressions; the second makes
 every trace `trace (L ^ j * Q)` vanish, which halves the trace of a power of
 `-(L * L)/4` onto the fixed space.
+
+Two consequences are drawn from the power traces.  The second exchange moment
+is expressed through the number of aligned four-sets of the chosen half, the
+four-subsets whose three signed Hamilton-cycle products sum to `3` rather than
+to `-1`; that count is the only part of the moment that depends on the half, and
+it is not constant once each half has at least four labels.  At the orders in
+which each half has at most three labels the characteristic polynomial is
+computed outright and does not depend on the half: for a three-label half the
+principal block satisfies `A * A = 2 • 1 + τ • A` with `τ` the product of its
+three edge signs, and `τ` cancels from the characteristic polynomial of
+`1 - A²/5`, which is `(X - 1/5)(X - 4/5)²`.
 
 The results are stated for arbitrary isometries onto the two spectral spaces
 and are therefore conditional on such isometries existing; their existence is
@@ -490,6 +503,78 @@ private theorem monic_eq_of_mul_self_eq {R : Type*} [Field R] [CharZero R] {p r 
   · exact sub_eq_zero.mp h1
   · exact absurd h1 hne
 
+section AlignedFourSets
+
+open Finset
+
+variable {R : Type*} [CommRing R] [DecidableEq R] {n : Type*} [DecidableEq n]
+
+/-- The number of aligned four-subsets of a set `Y` of labels: those
+four-element subsets whose three signed Hamilton-cycle products sum to `3`,
+equivalently whose closed four-walk weight is `24`.  For a symmetric matrix
+with zero diagonal whose off-diagonal entries square to one those are the only
+two possible weights, the other being `-8`. -/
+def alignedFourSetCount (A : Matrix n n R) (Y : Finset n) : ℕ :=
+  ((Y.powersetCard 4).filter fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24).card
+
+/-- The sum of the closed four-walk weights over the four-subsets of `Y`, sorted
+by the four-set dichotomy: each aligned four-subset contributes `24` and each of
+the remaining four-subsets contributes `-8`, so the sum is
+`32 c - 8 C(|Y|, 4)` for `c` the number of aligned four-subsets. -/
+theorem sum_closedFourWalkSum_eq_alignedFourSetCount [NoZeroDivisors R] (A : Matrix n n R)
+    (hsym : ∀ i j, A j i = A i j) (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) (Y : Finset n) :
+    ∑ K ∈ Y.powersetCard 4, ConferenceCutBlocks.closedFourWalkSum A K
+      = 32 * (alignedFourSetCount A Y : R) - 8 * (Y.card.choose 4 : R) := by
+  have hsplit :
+      (∑ K ∈ (Y.powersetCard 4).filter
+          (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24),
+            ConferenceCutBlocks.closedFourWalkSum A K)
+        + ∑ K ∈ (Y.powersetCard 4).filter
+            (fun K => ¬ ConferenceCutBlocks.closedFourWalkSum A K = 24),
+              ConferenceCutBlocks.closedFourWalkSum A K
+        = ∑ K ∈ Y.powersetCard 4, ConferenceCutBlocks.closedFourWalkSum A K :=
+    Finset.sum_filter_add_sum_filter_not _ _ _
+  have hcards : ((Y.powersetCard 4).filter
+        (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24)).card
+      + ((Y.powersetCard 4).filter
+        (fun K => ¬ ConferenceCutBlocks.closedFourWalkSum A K = 24)).card
+      = Y.card.choose 4 := by
+    rw [Finset.card_filter_add_card_filter_not, Finset.card_powersetCard]
+  have haligned : ∀ K ∈ (Y.powersetCard 4).filter
+      (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24),
+        ConferenceCutBlocks.closedFourWalkSum A K = (24 : R) :=
+    fun K hK => (Finset.mem_filter.mp hK).2
+  have hother : ∀ K ∈ (Y.powersetCard 4).filter
+      (fun K => ¬ ConferenceCutBlocks.closedFourWalkSum A K = 24),
+        ConferenceCutBlocks.closedFourWalkSum A K = (-8 : R) := by
+    intro K hK
+    obtain ⟨hKmem, hKne⟩ := Finset.mem_filter.mp hK
+    have hKcard : K.card = 4 := (Finset.mem_powersetCard.mp hKmem).2
+    have hdich :=
+      ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight A hsym hsq hKcard
+    rcases mul_eq_zero.mp hdich with h | h
+    · exact absurd (by linear_combination h) hKne
+    · linear_combination h
+  have hcast : (((Y.powersetCard 4).filter
+        (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24)).card : R)
+      + (((Y.powersetCard 4).filter
+        (fun K => ¬ ConferenceCutBlocks.closedFourWalkSum A K = 24)).card : R)
+      = (Y.card.choose 4 : R) := by
+    exact_mod_cast congrArg (fun k : ℕ => (k : R)) hcards
+  rw [← hsplit, Finset.sum_congr rfl haligned, Finset.sum_congr rfl hother,
+    Finset.sum_const, Finset.sum_const, nsmul_eq_mul, nsmul_eq_mul]
+  show (((Y.powersetCard 4).filter
+      (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24)).card : R) * 24
+    + (((Y.powersetCard 4).filter
+      (fun K => ¬ ConferenceCutBlocks.closedFourWalkSum A K = 24)).card : R) * (-8)
+    = 32 * (alignedFourSetCount A Y : R) - 8 * (Y.card.choose 4 : R)
+  rw [show (alignedFourSetCount A Y : R)
+      = (((Y.powersetCard 4).filter
+        (fun K => ConferenceCutBlocks.closedFourWalkSum A K = 24)).card : R) from rfl]
+  linear_combination (-8 : R) * hcast
+
+end AlignedFourSets
+
 section Cut
 
 variable {R : Type*} [Field R] [CharZero R] {n m : Type*} [Fintype n] [DecidableEq n]
@@ -702,6 +787,315 @@ theorem trace_exchangeCompression_cut {A : Matrix n n R} {B : Matrix n m R}
     ConferenceCutBlocks.trace_mul_self A hdiag hone, smul_eq_mul, eq_div_iff hqne]
   linear_combination (-((Fintype.card n : R) * ((Fintype.card n : R) - 1))) * hinv
 
+/-- The second exchange moment of a balanced cut of a symmetric conference
+matrix, in terms of the aligned four-sets of the chosen half.  With `d` the size
+of the half, `q` the scalar the matrix squares to, and `c` the number of
+four-subsets of the half whose three signed Hamilton-cycle products sum to `3`,
+
+`tr(H²) = (d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c) / q²`.
+
+Every summand except the last is determined by the order, so the aligned count
+carries the whole dependence of the second moment on the half. -/
+theorem trace_pow_two_exchangeCompression_cut [DecidableEq R] {A : Matrix n n R}
+    {B : Matrix n m R} {E : Matrix m m R} {q s : R} {U : Matrix (n ⊕ m) n R}
+    (hAt : Aᵀ = A) (hEt : Eᵀ = E)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = q • 1)
+    (hs : s * s = q) (hs0 : s ≠ 0)
+    (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hdiag : ∀ i, A i i = 0) (hsym : ∀ i j, A j i = A i j)
+    (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) :
+    Matrix.trace
+        (exchangeCompression (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E) U ^ 2)
+      = ((Fintype.card n : R) * q ^ 2
+          - 2 * q * ((Fintype.card n : R) * ((Fintype.card n : R) - 1))
+          + ((Fintype.card n : R) * ((Fintype.card n : R) - 1)
+            + 12 * ((Fintype.card n).choose 3 : R)
+            - 8 * ((Fintype.card n).choose 4 : R)
+            + 32 * (alignedFourSetCount A Finset.univ : R))) / q ^ 2 := by
+  have hq : q ≠ 0 := by rw [← hs]; exact mul_ne_zero hs0 hs0
+  have hone : ∀ i j : n, i ≠ j → A i j * A j i = 1 := by
+    intro i j hij
+    rw [hsym i j]
+    exact hsq i j hij
+  have h := trace_exchangeCompression_pow_cut hAt hEt hCC hs hs0 hU hUU 1
+  norm_num at h
+  have hmul : (q⁻¹ • (A * A)) * (q⁻¹ • (A * A)) = (q⁻¹ * q⁻¹) • (A * A * A * A) := by
+    rw [Matrix.smul_mul, Matrix.mul_smul, smul_smul, ← Matrix.mul_assoc]
+  have hexp : ((1 : Matrix n n R) - q⁻¹ • (A * A)) ^ 2
+      = 1 - (q⁻¹ • (A * A) + q⁻¹ • (A * A)) + (q⁻¹ * q⁻¹) • (A * A * A * A) := by
+    simp only [sq, sub_mul, mul_sub, one_mul, mul_one]
+    rw [hmul]
+    abel
+  rw [h, hexp]
+  simp only [Matrix.trace_add, Matrix.trace_sub, Matrix.trace_one, Matrix.trace_smul,
+    smul_eq_mul]
+  rw [ConferenceCutBlocks.trace_mul_self A hdiag hone,
+    ConferenceCutBlocks.trace_pow_four A hdiag hone,
+    sum_closedFourWalkSum_eq_alignedFourSetCount A hsym hsq Finset.univ, Finset.card_univ,
+    eq_div_iff (pow_ne_zero 2 hq)]
+  field_simp
+  ring
+
 end Cut
+
+section SmallOrders
+
+variable {R : Type*} [Field R] [CharZero R] {n : Type*} [Fintype n] [DecidableEq n]
+
+omit [CharZero R] in
+/-- The characteristic polynomial of a scalar matrix. -/
+private theorem charpoly_smul_one (c : R) :
+    ((c • (1 : Matrix n n R))).charpoly = (X - C c) ^ Fintype.card n := by
+  rw [Matrix.smul_one_eq_diagonal, Matrix.charpoly_diagonal, Finset.prod_const,
+    Finset.card_univ]
+
+omit [CharZero R] [DecidableEq n] in
+/-- A matrix with zero diagonal on a one-element label set is zero. -/
+theorem eq_zero_of_card_one (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
+    (hcard : Fintype.card n = 1) : A = 0 := by
+  have hsub : Subsingleton n := Fintype.card_le_one_iff_subsingleton.mp (le_of_eq hcard)
+  ext i j
+  rw [Subsingleton.elim j i, hdiag i, Matrix.zero_apply]
+
+omit [CharZero R] in
+/-- Transport of the exchange normalization along a labelling of the index set:
+the characteristic polynomial does not see the labelling. -/
+private theorem charpoly_one_sub_smul_mul_self_submatrix {k : ℕ} (A : Matrix n n R) (v : R)
+    (e : n ≃ Fin k) :
+    ((1 : Matrix (Fin k) (Fin k) R)
+        - v • (A.submatrix e.symm e.symm * A.submatrix e.symm e.symm)).charpoly
+      = ((1 : Matrix n n R) - v • (A * A)).charpoly := by
+  have hreindex := Matrix.charpoly_reindex e ((1 : Matrix n n R) - v • (A * A))
+  rw [Matrix.reindex_apply] at hreindex
+  rw [Matrix.submatrix_mul_equiv A A e.symm e.symm e.symm, ← hreindex]
+  congr 1
+  ext i j
+  simp [Matrix.submatrix_apply, Matrix.sub_apply, Matrix.smul_apply, Matrix.one_apply,
+    e.symm.injective.eq_iff]
+
+omit [CharZero R] in
+/-- A symmetric matrix with zero diagonal whose off-diagonal entries square to
+one is an involution on two labels. -/
+private theorem mul_self_fin_two (A : Matrix (Fin 2) (Fin 2) R) (hdiag : ∀ i, A i i = 0)
+    (hsym : ∀ i j, A j i = A i j) (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) :
+    A * A = 1 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_two, hdiag, hsym 0 1] <;>
+    exact hsq 0 1 (by decide)
+
+omit [CharZero R] in
+/-- On three labels a symmetric sign matrix with zero diagonal satisfies
+`A * A = 2 • 1 + τ • A`, where `τ` is the product of its three edge signs: the
+`(i, j)` entry of `A * A` is the product of the two edges of the triangle other
+than `ij`, which is `τ` times the entry `A i j`. -/
+private theorem mul_self_fin_three (A : Matrix (Fin 3) (Fin 3) R) (hdiag : ∀ i, A i i = 0)
+    (hsym : ∀ i j, A j i = A i j) (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) :
+    A * A = (2 : R) • 1 + (A 0 1 * A 0 2 * A 1 2) • A := by
+  have s01 := hsq 0 1 (by decide)
+  have s02 := hsq 0 2 (by decide)
+  have s12 := hsq 1 2 (by decide)
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [Matrix.mul_apply, Fin.sum_univ_three, hdiag, hsym 0 1, hsym 0 2, hsym 1 2]
+  · linear_combination s01 + s02
+  · linear_combination (-(A 0 2 * A 1 2)) * s01
+  · linear_combination (-(A 0 1 * A 1 2)) * s02
+  · linear_combination (-(A 0 2 * A 1 2)) * s01
+  · linear_combination s01 + s12
+  · linear_combination (-(A 0 1 * A 0 2)) * s12
+  · linear_combination (-(A 0 1 * A 1 2)) * s02
+  · linear_combination (-(A 0 1 * A 0 2)) * s12
+  · linear_combination s02 + s12
+
+omit [CharZero R] in
+/-- The characteristic polynomial of `3v • 1 - v • N` for a three-label
+symmetric sign matrix `N` with zero diagonal whose three edge signs multiply to
+one: it is `(X - v)(X - 4v)²`, with no dependence on the individual signs.  The
+three off-diagonal squares contribute `-3 v² (X - 3v)` and the two triangle
+products contribute `2 v³`, so the cubic is `u³ - 3v²u + 2v³ = (u - v)²(u + 2v)`
+in `u = X - 3v`. -/
+private theorem charpoly_scaled_sign_fin_three (v : R) (N : Matrix (Fin 3) (Fin 3) R)
+    (hdiag : ∀ i, N i i = 0) (hsym : ∀ i j, N j i = N i j)
+    (hsq : ∀ i j, i ≠ j → N i j * N i j = 1) (hprod : N 0 1 * N 0 2 * N 1 2 = 1) :
+    (((3 : R) * v) • (1 : Matrix (Fin 3) (Fin 3) R) - v • N).charpoly
+      = (X - C v) * (X - C (4 * v)) ^ 2 := by
+  have hd : ∀ i, (((3 : R) * v) • (1 : Matrix (Fin 3) (Fin 3) R) - v • N) i i = 3 * v := by
+    intro i
+    simp [Matrix.sub_apply, Matrix.smul_apply, hdiag i]
+  have ho : ∀ i j, i ≠ j →
+      (((3 : R) * v) • (1 : Matrix (Fin 3) (Fin 3) R) - v • N) i j = -(v * N i j) := by
+    intro i j hij
+    simp [Matrix.sub_apply, Matrix.smul_apply, hij]
+  have hs01 : (C (N 0 1) : R[X]) * C (N 0 1) = 1 := by
+    rw [← map_mul, hsq 0 1 (by decide), map_one]
+  have hs02 : (C (N 0 2) : R[X]) * C (N 0 2) = 1 := by
+    rw [← map_mul, hsq 0 2 (by decide), map_one]
+  have hs12 : (C (N 1 2) : R[X]) * C (N 1 2) = 1 := by
+    rw [← map_mul, hsq 1 2 (by decide), map_one]
+  have hpr : (C (N 0 1) : R[X]) * C (N 0 2) * C (N 1 2) = 1 := by
+    rw [← map_mul, ← map_mul, hprod, map_one]
+  have hcd : ∀ i : Fin 3,
+      (((3 : R) * v) • (1 : Matrix (Fin 3) (Fin 3) R) - v • N).charmatrix i i
+        = X - C (3 * v) := by
+    intro i
+    rw [Matrix.charmatrix_apply_eq, hd i]
+  have hco : ∀ i j : Fin 3, i ≠ j →
+      (((3 : R) * v) • (1 : Matrix (Fin 3) (Fin 3) R) - v • N).charmatrix i j
+        = C (v * N i j) := by
+    intro i j hij
+    rw [Matrix.charmatrix_apply, Matrix.diagonal_apply_ne _ hij, ho i j hij, map_neg]
+    ring
+  rw [Matrix.charpoly, Matrix.det_fin_three, hcd 0, hcd 1, hcd 2, hco 0 1 (by decide),
+    hco 0 2 (by decide),
+    hco 1 0 (by decide), hco 1 2 (by decide), hco 2 0 (by decide), hco 2 1 (by decide),
+    hsym 0 1, hsym 0 2, hsym 1 2]
+  simp only [map_mul, map_ofNat]
+  linear_combination (-(X - 3 * C v) * C v ^ 2) * hs01 + (-(X - 3 * C v) * C v ^ 2) * hs02
+    + (-(X - 3 * C v) * C v ^ 2) * hs12 + (2 * C v ^ 3) * hpr
+
+omit [CharZero R] in
+/-- The exchange normalization of a three-label principal block: for `5 v = 1`
+the characteristic polynomial of `1 - v • (A * A)` is `(X - v)(X - 4v)²`.  The
+product `τ` of the three edge signs enters `A * A = 2 • 1 + τ • A` but cancels
+from the characteristic polynomial, so the polynomial is the same for every such
+block. -/
+theorem charpoly_one_sub_smul_mul_self_fin_three (A : Matrix (Fin 3) (Fin 3) R)
+    (hdiag : ∀ i, A i i = 0) (hsym : ∀ i j, A j i = A i j)
+    (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) {v : R} (hv : 5 * v = 1) :
+    ((1 : Matrix (Fin 3) (Fin 3) R) - v • (A * A)).charpoly
+      = (X - C v) * (X - C (4 * v)) ^ 2 := by
+  have s01 := hsq 0 1 (by decide)
+  have s02 := hsq 0 2 (by decide)
+  have s12 := hsq 1 2 (by decide)
+  have hdiagN : ∀ i, ((A 0 1 * A 0 2 * A 1 2) • A) i i = 0 := by
+    intro i
+    simp [Matrix.smul_apply, hdiag i]
+  have hsymN : ∀ i j, ((A 0 1 * A 0 2 * A 1 2) • A) j i = ((A 0 1 * A 0 2 * A 1 2) • A) i j := by
+    intro i j
+    simp [Matrix.smul_apply, hsym i j]
+  have hsqN : ∀ i j, i ≠ j →
+      ((A 0 1 * A 0 2 * A 1 2) • A) i j * ((A 0 1 * A 0 2 * A 1 2) • A) i j = 1 := by
+    intro i j hij
+    have hij' := hsq i j hij
+    simp only [Matrix.smul_apply, smul_eq_mul]
+    linear_combination (A 0 1 ^ 2 * A 0 2 ^ 2 * A 1 2 ^ 2) * hij'
+      + (A 0 2 ^ 2 * A 1 2 ^ 2) * s01 + (A 1 2 ^ 2) * s02 + s12
+  have hprodN : ((A 0 1 * A 0 2 * A 1 2) • A) 0 1 * ((A 0 1 * A 0 2 * A 1 2) • A) 0 2
+      * ((A 0 1 * A 0 2 * A 1 2) • A) 1 2 = 1 := by
+    simp only [Matrix.smul_apply, smul_eq_mul]
+    linear_combination ((A 0 1 ^ 2 + 1) * A 0 2 ^ 4 * A 1 2 ^ 4) * s01
+      + ((A 0 2 ^ 2 + 1) * A 1 2 ^ 4) * s02 + (A 1 2 ^ 2 + 1) * s12
+  have hM : (1 : Matrix (Fin 3) (Fin 3) R) - v • (A * A)
+      = ((3 : R) * v) • 1 - v • ((A 0 1 * A 0 2 * A 1 2) • A) := by
+    rw [mul_self_fin_three A hdiag hsym hsq]
+    match_scalars
+    · linear_combination -hv
+    · ring
+  rw [hM]
+  exact charpoly_scaled_sign_fin_three v _ hdiagN hsymN hsqN hprodN
+
+omit [CharZero R] in
+/-- The exchange normalization of a principal block on any three-element label
+set: its characteristic polynomial is `(X - v)(X - 4v)²` for `5 v = 1`, so at
+order six the exchange spectrum does not depend on the half. -/
+theorem charpoly_one_sub_smul_mul_self_of_card_three (A : Matrix n n R)
+    (hdiag : ∀ i, A i i = 0) (hsym : ∀ i j, A j i = A i j)
+    (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) {v : R} (hv : 5 * v = 1)
+    (hcard : Fintype.card n = 3) :
+    ((1 : Matrix n n R) - v • (A * A)).charpoly = (X - C v) * (X - C (4 * v)) ^ 2 := by
+  let e : n ≃ Fin 3 := Fintype.equivFinOfCardEq hcard
+  rw [← charpoly_one_sub_smul_mul_self_submatrix A v e]
+  exact charpoly_one_sub_smul_mul_self_fin_three (A.submatrix e.symm e.symm)
+    (fun i => hdiag _) (fun i j => hsym _ _)
+    (fun i j hij => hsq _ _ fun h => hij (e.symm.injective h)) hv
+
+omit [CharZero R] in
+/-- The exchange normalization of a principal block on a two-element label set:
+the block is an involution, so the polynomial is `(X - 2v)²` for `3 v = 1`. -/
+theorem charpoly_one_sub_smul_mul_self_of_card_two (A : Matrix n n R)
+    (hdiag : ∀ i, A i i = 0) (hsym : ∀ i j, A j i = A i j)
+    (hsq : ∀ i j, i ≠ j → A i j * A i j = 1) {v : R} (hv : 3 * v = 1)
+    (hcard : Fintype.card n = 2) :
+    ((1 : Matrix n n R) - v • (A * A)).charpoly = (X - C (2 * v)) ^ 2 := by
+  let e : n ≃ Fin 2 := Fintype.equivFinOfCardEq hcard
+  rw [← charpoly_one_sub_smul_mul_self_submatrix A v e,
+    mul_self_fin_two (A.submatrix e.symm e.symm) (fun i => hdiag _) (fun i j => hsym _ _)
+      (fun i j hij => hsq _ _ fun h => hij (e.symm.injective h))]
+  have hscalar : (1 : Matrix (Fin 2) (Fin 2) R) - v • 1 = ((2 : R) * v) • 1 := by
+    match_scalars
+    linear_combination -hv
+  rw [hscalar, charpoly_smul_one, Fintype.card_fin]
+
+omit [CharZero R] in
+/-- The exchange normalization of a principal block on a one-element label set:
+the block vanishes, so the polynomial is `X - 1`. -/
+theorem charpoly_one_sub_smul_mul_self_of_card_one (A : Matrix n n R)
+    (hdiag : ∀ i, A i i = 0) (v : R) (hcard : Fintype.card n = 1) :
+    ((1 : Matrix n n R) - v • (A * A)).charpoly = X - 1 := by
+  rw [eq_zero_of_card_one A hdiag hcard, Matrix.mul_zero, smul_zero, sub_zero,
+    Matrix.charpoly_one, hcard, pow_one]
+
+end SmallOrders
+
+section OrderSix
+
+variable {R : Type*} [Field R] [CharZero R] {n m : Type*} [Fintype n] [DecidableEq n]
+  [Fintype m] [DecidableEq m]
+
+/-- At order six the exchange operator of a balanced cut has characteristic
+polynomial `(X - 1/5)(X - 4/5)²` whatever the cut, so its spectrum is
+`{1/5, 4/5, 4/5}` and does not depend on the half. -/
+theorem charpoly_exchangeCompression_cut_card_three {A : Matrix n n R} {B : Matrix n m R}
+    {E : Matrix m m R} {s : R} {U : Matrix (n ⊕ m) n R} {W : Matrix (n ⊕ m) m R}
+    (hAt : Aᵀ = A) (hEt : Eᵀ = E)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = (5 : R) • 1)
+    (hs : s * s = (5 : R)) (hs0 : s ≠ 0)
+    (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hW : Wᵀ * W = 1)
+    (hWW : W * Wᵀ = antifixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hdiag : ∀ i, A i i = 0) (hsym : ∀ i j, A j i = A i j)
+    (hsq : ∀ i j, i ≠ j → A i j * A i j = 1)
+    (hn : Fintype.card n = 3) (hm : Fintype.card m = 3) :
+    (exchangeCompression (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E) U).charpoly
+      = (X - C ((5 : R)⁻¹)) * (X - C (4 * (5 : R)⁻¹)) ^ 2 := by
+  have hfive : (5 : R) ≠ 0 := by norm_num
+  rw [charpoly_exchangeCompression_cut hAt hEt hCC hs hs0 hU hUU hW hWW (by rw [hn, hm])]
+  exact charpoly_one_sub_smul_mul_self_of_card_three A hdiag hsym hsq
+    (mul_inv_cancel₀ hfive) hn
+
+end OrderSix
+
+section CutDependence
+
+open Finset
+
+variable {R : Type*} [CommRing R] [CharZero R] [NoZeroDivisors R] [DecidableEq R]
+  {n : Type*} [Fintype n] [DecidableEq n]
+
+/-- The number of aligned four-sets of a balanced half of a symmetric conference
+matrix of order `2d` is not the same for every half, once `4 ≤ d`.  Since the
+second exchange moment of the cut at a half is
+`(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c) / q²` for `c` that
+count, the second moment, and with it the spectrum of the exchange operator,
+depends on the half. -/
+theorem not_forall_alignedFourSetCount_eq (C : Matrix n n R) (hdiag : ∀ i, C i i = 0)
+    (hsym : ∀ i j, C j i = C i j) (hsq : ∀ i j, i ≠ j → C i j * C i j = 1)
+    {q : R} (hCC : C * C = q • 1) {d : ℕ} (hd : 4 ≤ d) (hn : Fintype.card n = 2 * d)
+    (c : ℕ) :
+    ¬ ∀ Y ⊆ (univ : Finset n), Y.card = d → alignedFourSetCount C Y = c := by
+  intro hconst
+  have hone : ∀ i j : n, i ≠ j → C i j * C j i = 1 := by
+    intro i j hij
+    rw [hsym i j]
+    exact hsq i j hij
+  refine BalancedExchangeRigidity.not_forall_sum_walkTerm_eq C hdiag hsym hsq hCC hd hn
+    ((d : R) * ((d : R) - 1) + 12 * (d.choose 3 : R)
+      + (32 * (c : R) - 8 * (d.choose 4 : R))) ?_
+  intro Y hY hYc
+  rw [ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard C hdiag hone Y,
+    sum_closedFourWalkSum_eq_alignedFourSetCount C hsym hsq Y, hconst Y hY hYc, hYc]
+
+end CutDependence
 
 end RelativeConicArcs.BalancedExchangeSpectrum
