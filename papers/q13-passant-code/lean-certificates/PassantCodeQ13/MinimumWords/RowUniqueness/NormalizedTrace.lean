@@ -30,7 +30,8 @@ numbers below thirteen combined by explicit modular operations.  The dictionary 
 `QuadrupleGram.tripleGram` of the three trace residues of a triple is the residue of
 `PolarGram.normalizedPolarGram`, and `QuadrupleGram.gramDet4` of the six trace residues of a
 quadruple vanishes because the four-by-four matrix of polar values of four coordinate triples is
-singular.  Finally the passant-join criterion places each trace residue in
+singular.  The discriminant law then reads in residues: the residue Gram determinant of a triple of
+normalized lifts vanishes exactly on collinear triples, and is a nonsquare on all others.  Finally the passant-join criterion places each trace residue in
 `QuadrupleGram.joinTraces`.
 
 Every finite check here is an exhaustion over the elements of `ZMod 13` or a scalar identity among
@@ -229,6 +230,56 @@ theorem gramDet4_eq_zero {first second third fourth : Triple}
     Nat.mod_lt _ (by norm_num)
   have injected := congrArg ZMod.val (cast_equal.trans (Nat.cast_zero (R := Field13)).symm)
   rwa [ZMod.val_cast_of_lt bounded, ZMod.val_cast_of_lt (by norm_num)] at injected
+
+/-! ## The discriminant law in residues -/
+
+/-- The chosen conic value of normalized lifts is a nonzero nonsquare. -/
+private theorem normalizedLiftDiscriminant_nonsquare :
+    normalizedLiftDiscriminant ≠ 0 ∧ isNonzeroSquare normalizedLiftDiscriminant = false := by
+  decide +kernel
+
+/-- The residue nonsquare test agrees with the field square test on the residue of a field
+element. -/
+theorem isNonsquare_val_iff (value : Field13) :
+    isNonsquare value.val = true ↔ value ≠ 0 ∧ isNonzeroSquare value = false := by
+  revert value
+  decide +kernel
+
+/-- The residue Gram determinant of a triple of normalized lifts vanishes exactly when the three
+lifts are dependent, that is, when the three points are collinear. -/
+theorem tripleGram_eq_zero_iff {first second third : Triple}
+    (first_value : pointDiscriminant first = normalizedLiftDiscriminant)
+    (second_value : pointDiscriminant second = normalizedLiftDiscriminant)
+    (third_value : pointDiscriminant third = normalizedLiftDiscriminant) :
+    tripleGram (normalizedTrace first second).val (normalizedTrace first third).val
+        (normalizedTrace second third).val = 0
+      ↔ coordinateDeterminant first second third = 0 := by
+  obtain ⟨nondegenerate, _⟩ := normalizedLiftDiscriminant_nonsquare
+  rw [tripleGram_eq_val_normalizedPolarGram first_value second_value third_value,
+    ZMod.val_eq_zero]
+  exact normalizedPolarGram_eq_zero_iff (by rw [first_value]; exact nondegenerate)
+    (by rw [second_value]; exact nondegenerate) (by rw [third_value]; exact nondegenerate)
+
+/-- **The discriminant law in residues.**  The residue Gram determinant of a triple of normalized
+lifts in general position is a nonsquare. -/
+theorem isNonsquare_tripleGram {first second third : Triple}
+    (first_value : pointDiscriminant first = normalizedLiftDiscriminant)
+    (second_value : pointDiscriminant second = normalizedLiftDiscriminant)
+    (third_value : pointDiscriminant third = normalizedLiftDiscriminant)
+    (independent : coordinateDeterminant first second third ≠ 0) :
+    isNonsquare (tripleGram (normalizedTrace first second).val
+      (normalizedTrace first third).val (normalizedTrace second third).val) = true := by
+  obtain ⟨nondegenerate, nonsquare⟩ := normalizedLiftDiscriminant_nonsquare
+  rw [tripleGram_eq_val_normalizedPolarGram first_value second_value third_value,
+    isNonsquare_val_iff]
+  refine ⟨fun vanishing => independent ?_, ?_⟩
+  · exact (normalizedPolarGram_eq_zero_iff (by rw [first_value]; exact nondegenerate)
+      (by rw [second_value]; exact nondegenerate)
+      (by rw [third_value]; exact nondegenerate)).mp vanishing
+  · exact isNonzeroSquare_normalizedPolarGram_eq_false
+      (by rw [first_value]; exact nondegenerate) (by rw [first_value]; exact nonsquare)
+      (by rw [second_value]; exact nondegenerate) (by rw [second_value]; exact nonsquare)
+      (by rw [third_value]; exact nondegenerate) (by rw [third_value]; exact nonsquare)
 
 /-! ## Placing a trace in the join list -/
 
