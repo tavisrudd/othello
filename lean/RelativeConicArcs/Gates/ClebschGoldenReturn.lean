@@ -10,6 +10,7 @@ import RelativeConicArcs.ConferenceCutSpectrum
 import RelativeConicArcs.ConferenceCutBlocks
 import RelativeConicArcs.BalancedExchangeRigidity
 import RelativeConicArcs.BalancedExchangeSpectrum
+import RelativeConicArcs.BalancedExchangeEigenvalues
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -72,10 +73,17 @@ characteristic polynomial.  The same fourth-trace count excludes order
 four outright: no symmetric matrix with zero diagonal and entries
 squaring to one on four labels has a scalar square, because its only
 four-set would have to carry closed four-walk weight `-24`.  The
-compression theorems are conditional on
-an isometry onto each spectral space being supplied; the existence of
-such isometries and the eigenvalue phrasing of the spectrum are not
-formalized.
+compression theorems above are stated relative to a
+supplied isometry onto each spectral space.  Over the real numbers both
+isometries exist, so those statements are conditional on nothing: a real
+symmetric matrix squaring to `1` has an orthonormal eigenbasis with
+eigenvalues `±1`, the eigenvectors of eigenvalue `1` are the columns of
+an isometry onto the fixed space, and a vanishing trace — which a
+vanishing diagonal supplies — makes the two eigenspaces equally large, so
+each can be indexed by a half of the cut.  Over the reals the
+characteristic polynomial is also read as a spectrum: that of
+`1 - q⁻¹ A²` is `∏ (X - (1 - αᵢ²/q))` over the eigenvalues `αᵢ` of the
+principal block, which is the manuscript's spectral formula.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -193,3 +201,11 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four
+
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_antifixedProjection
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_trace_pow_two_exchangeCompression_cut
+#print axioms RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three

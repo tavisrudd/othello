@@ -4,6 +4,7 @@
     "Mathlib.Algebra.BigOperators.Group.Finset.Powerset",
     "Mathlib.Algebra.BigOperators.Ring.Finset",
     "Mathlib.Algebra.CharZero.Defs",
+    "Mathlib.Analysis.Matrix.Spectrum",
     "Mathlib.Data.Fin.VecNotation",
     "Mathlib.Data.Finset.Powerset",
     "Mathlib.Data.Fintype.Card",
@@ -25,12 +26,18 @@
     "Mathlib.Tactic.NormNum.NatFactorial",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 23,
+  "module_count": 24,
   "roots": [
     "RelativeConicArcs.Gates.ClebschGoldenReturn"
   ],
   "schema_version": 1,
   "sources": [
+    {
+      "bytes": 20771,
+      "module": "RelativeConicArcs.BalancedExchangeEigenvalues",
+      "path": "RelativeConicArcs/BalancedExchangeEigenvalues.lean",
+      "sha256": "e706956f6fe119f5183cf8f301ba81bcfebc8cebe9448756f60eb6ce12eb50fb"
+    },
     {
       "bytes": 10026,
       "module": "RelativeConicArcs.BalancedExchangeRigidity",
@@ -134,10 +141,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 13376,
+      "bytes": 14703,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "5f75691c107e30d25a6e35527ca1c071ef9abc094df72f89e5163a20548dad92"
+      "sha256": "b6d30d563badfba121de3eaf7e01a61bbf59e3b503ac12dc697d8f9d62d0b9a3"
     },
     {
       "bytes": 5731,
