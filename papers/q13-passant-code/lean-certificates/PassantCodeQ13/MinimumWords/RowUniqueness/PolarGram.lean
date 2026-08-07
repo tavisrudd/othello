@@ -29,7 +29,9 @@ form they carry is the ambient form, and over a finite field a nondegenerate ter
 determined by its discriminant.
 
 A final section records the companion fact for four triples: the four-by-four matrix of their polar
-values is singular, because four coordinate triples are dependent.
+values is singular, because four coordinate triples are dependent.  That section also carries the
+determinant of a symmetric four-by-four matrix presented by its ten distinct entries, together with
+its scaling law, so that a rescaled Gram matrix inherits the vanishing.
 
 Every identity here is a polynomial identity in the coordinates.  The finite content is two
 exhaustions over the elements of `ZMod 13`, both discharged by kernel reduction: that a product of
@@ -191,7 +193,7 @@ them are dependent and the four-by-four matrix of their polar values is singular
 relation that the six normalized traces of a quadruple of internal points satisfy. -/
 
 /-- The determinant of the three-by-three matrix with the displayed entries, read row by row. -/
-private def minorDeterminant (topLeft topMiddle topRight middleLeft middleMiddle middleRight
+def minorDeterminant (topLeft topMiddle topRight middleLeft middleMiddle middleRight
     bottomLeft bottomMiddle bottomRight : Field13) : Field13 :=
   topLeft * (middleMiddle * bottomRight - middleRight * bottomMiddle)
     - topMiddle * (middleLeft * bottomRight - middleRight * bottomLeft)
@@ -225,6 +227,49 @@ def polarGramDeterminantFour (first second third fourth : Triple) : Field13 :=
 theorem polarGramDeterminantFour_eq_zero (first second third fourth : Triple) :
     polarGramDeterminantFour first second third fourth = 0 := by
   simp only [polarGramDeterminantFour, minorDeterminant, polarValue]
+  ring
+
+/-- The determinant of a symmetric four-by-four matrix presented by its four diagonal entries and
+its six entries above the diagonal, expanded along its first row. -/
+def symmetricGramDeterminantFour (firstDiagonal secondDiagonal thirdDiagonal fourthDiagonal
+    firstSecond firstThird firstFourth secondThird secondFourth thirdFourth : Field13) : Field13 :=
+  firstDiagonal *
+      minorDeterminant secondDiagonal secondThird secondFourth secondThird thirdDiagonal
+        thirdFourth secondFourth thirdFourth fourthDiagonal
+    - firstSecond *
+      minorDeterminant firstSecond secondThird secondFourth firstThird thirdDiagonal thirdFourth
+        firstFourth thirdFourth fourthDiagonal
+    + firstThird *
+      minorDeterminant firstSecond secondDiagonal secondFourth firstThird secondThird thirdFourth
+        firstFourth secondFourth fourthDiagonal
+    - firstFourth *
+      minorDeterminant firstSecond secondDiagonal secondThird firstThird secondThird thirdDiagonal
+        firstFourth secondFourth thirdFourth
+
+/-- Scaling every entry of a symmetric four-by-four matrix scales its determinant by the fourth
+power of the factor. -/
+theorem symmetricGramDeterminantFour_smul (factor firstDiagonal secondDiagonal thirdDiagonal
+    fourthDiagonal firstSecond firstThird firstFourth secondThird secondFourth
+    thirdFourth : Field13) :
+    symmetricGramDeterminantFour (factor * firstDiagonal) (factor * secondDiagonal)
+        (factor * thirdDiagonal) (factor * fourthDiagonal) (factor * firstSecond)
+        (factor * firstThird) (factor * firstFourth) (factor * secondThird)
+        (factor * secondFourth) (factor * thirdFourth)
+      = factor ^ 4 * symmetricGramDeterminantFour firstDiagonal secondDiagonal thirdDiagonal
+          fourthDiagonal firstSecond firstThird firstFourth secondThird secondFourth
+          thirdFourth := by
+  simp only [symmetricGramDeterminantFour, minorDeterminant]
+  ring
+
+/-- The polar Gram determinant of four coordinate triples is the symmetric determinant of their ten
+distinct polar values. -/
+theorem polarGramDeterminantFour_eq_symmetric (first second third fourth : Triple) :
+    polarGramDeterminantFour first second third fourth
+      = symmetricGramDeterminantFour (polarValue first first) (polarValue second second)
+          (polarValue third third) (polarValue fourth fourth) (polarValue first second)
+          (polarValue first third) (polarValue first fourth) (polarValue second third)
+          (polarValue second fourth) (polarValue third fourth) := by
+  simp only [polarGramDeterminantFour, symmetricGramDeterminantFour, minorDeterminant, polarValue]
   ring
 
 end PassantCodeQ13.MinimumWords.RowUniqueness

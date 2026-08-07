@@ -62,7 +62,7 @@ theorem mem_internalCoordinates_iff (point : Triple) :
   rw [internalCoordinates, Finset.mem_filter, projectiveTriples, List.mem_toFinset]
 
 /-- A nonzero field element has nonzero square. -/
-private theorem sq_ne_zero_field : ∀ value : Field13, value ≠ 0 → value ^ 2 ≠ 0 := by
+theorem sq_ne_zero_field : ∀ value : Field13, value ≠ 0 → value ^ 2 ≠ 0 := by
   decide +kernel
 
 /-- A product of two nonsquares is a nonzero square. -/
