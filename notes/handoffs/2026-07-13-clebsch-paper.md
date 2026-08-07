@@ -11,6 +11,26 @@
 > **ROUTING AUTHORITY.** No dated planning note, fallback-paper verdict, task
 > report, or archive overrides the order and boundaries stated here.
 
+## Formal standard for the whole series
+
+Every numbered paper meets the same Lean standard. Paper III is held to exactly
+what Papers I and II are held to, with no per-paper exception and no clause
+exempted for being classical, cited, or expensive:
+
+- no `sorry` anywhere in a paper's closure;
+- no `native_decide` and no compiled-evaluation axiom at any terminal, checked
+  by replays that refuse it rather than declared as a boundary;
+- no project axiom and no assumed hypothesis standing in for a proof, the way
+  the Dye inputs once stood in for Paper I's order-eleven classification;
+- every mathematical assertion of the manuscript maps to a kernel-checked
+  declaration, so no ledger row may sit permanently at partial coverage.
+
+A manuscript step whose proof is a literature citation is not outside this
+standard. It is closed by proving the statement in the form the manuscript uses
+it, in whatever weaker form suffices, rather than by importing the cited theorem
+in full generality. Gaps are closed by strengthening the Lean side; no
+manuscript claim is narrowed to make the formal surface agree with it.
+
 ## Numbered series decision
 
 The public series has exactly four numbered papers:
@@ -144,11 +164,16 @@ Row OPER-3 is covered down to its polynomial core: the cut identity
 `B * Bᵀ = q • 1 - A * A` for a cut of arbitrary size, the trace of the square of
 a zero-diagonal sign matrix, and the four-set Hamilton-cycle dichotomy
 `w ∈ {3, -1}`.  Its order-three block identity and its Ramsey input were
-already proved in earlier work.  What stays human there is the support-sorted
-closed-four-walk count, the inclusion-rank descent, and every eigenvalue
-statement; the inclusion-rank input is a classical theorem and is not a
-candidate for formalization, so this row stays at partial coverage by design.
-Report: `notes/2026-08-05-c815-cut-block-core.md`.
+already proved in earlier work.  Still unformalized there are the support-sorted closed-four-walk count, the
+inclusion-rank descent, and every eigenvalue statement.  The 2026-08-06 author
+instruction withdraws the partial-coverage carve-out this row was granted: no
+manuscript clause may rest on a cited theorem the Lean surface does not prove,
+so OPER-3 must reach full coverage like every other row.  The proposed route
+for the inclusion-rank input is to prove it in the form the manuscript uses —
+equal sums of the aligned-four-set indicator over all balanced halves force
+that indicator to be constant on four-sets — by one-element swap descent,
+rather than by importing the general inclusion-matrix rank theorem.  Reports:
+`notes/2026-08-05-c815-cut-block-core.md` with its 2026-08-06 correction.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic

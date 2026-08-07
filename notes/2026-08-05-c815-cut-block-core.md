@@ -73,6 +73,21 @@ row will stay at partial coverage even after the fourth-trace count lands. That
 is a boundary to state in the manuscript's verification section rather than a
 gap to close.
 
+**Superseded 2026-08-06.** The author instruction is that Paper III's theorems
+carry no cited-theorem boundary, exactly as the Dye inputs were retired from
+Paper I: OPER-3 must reach full coverage and the paragraph above must not be
+copied into the manuscript's verification section. The judgement it rests on is
+also too pessimistic. The manuscript does not need the general inclusion-matrix
+rank theorem; it needs the single consequence that equal sums of the
+aligned-four-set indicator over all balanced halves force that indicator to be
+constant on four-sets. That follows by one-element swap descent: two
+`d`-sets differing in one element give
+`Σ_{S ⊆ K ∩ K', |S| = 3} (f (S ∪ {a}) - f (S ∪ {b})) = 0`, and the same
+argument applied to the difference function descends the subset size until the
+difference vanishes pointwise, whence connectivity of the swap graph makes `f`
+constant. That is an induction over `Finset` cardinality, not a rank theorem,
+and the Jolliffe citation stays as attribution rather than as a dependency.
+
 ## Cheap next win this exposed
 
 The four-set weight is defined here from the operator side, as Hamilton-cycle
