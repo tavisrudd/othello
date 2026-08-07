@@ -140,6 +140,39 @@ Reading off the zeros: **a pairwise-joined triple is admissible exactly when it 
 profile \((10,10,10)\) with \(\pi = 8\), or has profile \((10,12,12)\)** — the last profile forcing
 \(\pi = 7\).
 
+Only the profiles are needed downstream. The weaker statement that an admissible non-collinear
+triple has profile \((10,10,10)\) or \((10,12,12)\), with \(\pi\) discarded, already forces the
+quadruple theorem, so \(\pi\) does not appear in the argument below or in the formal development it
+scopes. It is retained here because it is what makes the classification a clean table, and because it
+is what the conic witnesses of the next section are stated in.
+
+### Where the positive concurrences come from
+
+The bitangent construction gives a closed formula for the number of conic supports through a
+non-collinear triple, and hence a proof, free of any enumeration of supports, that eight of the ten
+non-collinear classes are inadmissible. Write \(g_{12},g_{13},g_{23}\) for the normalized traces, so
+\(g_{ij}^2 = \rho_{ij}\) and \(g_{12}g_{13}g_{23} = \pi\); the four sign patterns with these data are
+the four candidate chords. Put
+
+\[
+ D = 4 - \textstyle\sum g^2 - g_{12}g_{13}g_{23},
+ \qquad
+ F = 3 - \tfrac14\textstyle\sum g^2 + \sum g + \tfrac12\bigl(g_{12}g_{13}+g_{12}g_{23}+g_{13}g_{23}\bigr).
+\]
+
+\(D\) is twice the normalized Gram determinant, so it vanishes exactly on collinear triples, and
+\(F\) is the chord's discriminant normalized by \(D\) and by \(\Delta_1\). The candidate is a genuine
+minimum support exactly when \(FD\) and \((4F-D)D\) are both nonsquares, the first condition saying
+that the chord is a secant and the second that no tangent of the bitangent conic is a passant. This
+predicate reproduces the conic-support count of every one of the 9100 non-collinear pairwise-joined
+triples.
+
+It does not, however, close the classification on its own. Two classes, \((9,9,9)\) with \(\pi = 1\)
+and \((9,9,12)\) with \(\pi = 6\), lie in no conic support at all and are inadmissible only through
+the octahedral family. Discarding those two and the invariant patterns that no triple realizes is
+enough to break the quadruple argument, so the classification table, not the witness formula alone,
+is what the theorem rests on.
+
 ## The quadruple theorem
 
 Let \(P_1,\dots,P_4\) be internal points, pairwise joined, all four of whose triples are admissible.
@@ -147,10 +180,9 @@ Normalize the four lifts to a common determinant and let \(g_{ij}\) be the six n
 Three facts constrain them.
 
 1. \(g_{ij}^2 = \rho_{ij} \in \{9,10,12\}\), so each \(g_{ij}\) lies in \(\{3,5,6,7,8,10\}\).
-2. Each triple is admissible, so each of the four triples \((g_{ij},g_{ik},g_{jk})\) satisfies the
-   criterion above, written in the normalized traces as: the three-by-three Gram determinant
-   \(8 - 2\sum g^2 - 2\,g_{ij}g_{ik}g_{jk}\) vanishes, or the squares are \((10,10,10)\) with product
-   \(8\), or \((10,12,12)\) with product \(7\).
+2. Each triple is admissible, so for each of the four triples \((g_{ij},g_{ik},g_{jk})\) either the
+   three-by-three Gram determinant \(8 - 2\sum g^2 - 2\,g_{ij}g_{ik}g_{jk}\) vanishes, or the three
+   squares are \((10,10,10)\) or \((10,12,12)\).
 3. The four lifts are four vectors in a three-dimensional space, so the four-by-four Gram matrix with
    diagonal \(2\) and off-diagonal \(-g_{ij}\) is singular.
 
@@ -183,14 +215,15 @@ The current layer decides row uniqueness by a passant-clique search over increas
 below 78, about 8500 extension nodes, split across seven residue modules and one declaration per
 first index. The proof above replaces it with three pieces, none of which ranges over the plane:
 
-1. **The invariant criterion.** \(\rho\) and \(\pi\) are rational in the displayed coordinates, and
-   both are invariant under the group action, which the package already proves for the polar
-   invariant and the support family. Transitivity on ordered joined pairs — the pair transporter
+1. **The invariant criterion**, needed only in its profile form: an admissible non-collinear triple
+   has \(\rho\) profile \((10,10,10)\) or \((10,12,12)\). \(\rho\) is rational in the displayed
+   coordinates and its invariance under the group action is already proved in the package, as is
+   invariance of the support family. Transitivity on ordered joined pairs — the pair transporter
    generated for stage 2 — reduces the criterion to three representative pairs and their common
    joined neighbours, at most 126 triples, each resolved by a lookup in the 364 displayed supports.
-   This replaces the whole clique search.
+   This replaces the whole clique search, and \(\pi\) is not needed for it.
 2. **The quadruple exhaustion.** A decidable statement over `ZMod 13` with 46656 patterns and no
-   geometric data; with the first triple's admissibility used as a filter, and the per-point sign
+   geometric data; with the first triple's condition used as a filter, and the per-point sign
    normalization fixing three of the six traces, a few hundred cases remain. This is the one new
    finite check and it is far below the package's measured per-module ceiling.
 3. **The arc statement.** No support meets a passant in more than two points: structural for the 273
@@ -211,8 +244,8 @@ python3 notes/2026-08-07-c834-admissible-quadruple-gram.py --check  # verifies t
 
 | artifact | bytes | sha256 |
 |---|---:|---|
-| `notes/2026-08-07-c834-admissible-quadruple-gram.py` | 16429 | `dce969c363d92654315dca6c291443e2d59a8aa6b93dba340b28b181de390796` |
-| `notes/2026-08-07-c834-admissible-quadruple-gram.json` | 3513 | `7e6211bd466617f13d9eb2debcba4a7c03b51cc16e8d66c8318a45ad1a931c3c` |
+| `notes/2026-08-07-c834-admissible-quadruple-gram.py` | 19358 | `04808f5386585d677e8f22303bdd05df0cec3039c34fb10ec4f0380bf4e8d16f` |
+| `notes/2026-08-07-c834-admissible-quadruple-gram.json` | 3863 | `992d196deb9f465bcccaa3c231becc9250f069e7caf462f97bb697bc142a0996` |
 
 The script builds the plane from the conic \(y^2 - xz\) with no input beyond the field, enumerates
 the 364 minimum supports by a parity-driven search that never forms twelve-subsets, and independently
@@ -221,8 +254,10 @@ that they are among them. It then certifies: the incidence numbers; that no supp
 collinear points; that \(\rho\) separates the six scheme classes and that the passant-join relation
 is \(\rho \in \{9,10,12\}\); that collinearity of a joined triple is equivalent to
 \(\sum\rho+\pi = 4\), asserted for every one of the 11830 joined triples; the fourteen-row invariant
-table above with zero criterion failures; the \(2730/1456\) extension split with the collinear pools
-equal to the rest of the line; and the quadruple exhaustion.
+table above with zero criterion failures, in both the full and the profile-only form; that the
+closed \((F,D)\) predicate reproduces the conic-support count of every non-collinear joined triple;
+the \(2730/1456\) extension split with the collinear pools equal to the rest of the line; and the
+quadruple exhaustion, run with the profile-only condition.
 
 What it does not certify: the Lean statements, which are unchanged by this round; and the
 octahedral supports' arc property beyond the direct check over the displayed family, which is a
@@ -252,6 +287,12 @@ construction of three quarters of the family.
   statement is that the product is parabolic, of order thirteen, which cannot happen because every
   involution normalizing a Sylow-13 subgroup lies in \(\operatorname{PSL}(2,13)\) and so is external.
   This is not recorded anywhere in the package and is cheap to add alongside the criterion.
+* **Open: which invariant patterns are realized.** Five patterns with \(D \neq 0\) — profiles
+  \((10,10,12)\) with \(\pi=2\), \((9,9,10)\) with \(\pi=11\), \((10,12,12)\) with \(\pi=6\),
+  \((12,12,12)\) with \(\pi=8\), \((9,9,9)\) with \(\pi=12\) — occur for no triple of internal
+  points. Allowing them back breaks the quadruple argument even when every witnessed class is
+  excluded, so they carry real weight, and no reason for their absence is known. This is why the
+  formal route goes through the classification table rather than through the witness formula alone.
 * **Open: the profile \((10,12,12)\) forces \(\pi = 7\), never \(\pi = 6\).** Both values are square
   roots of \(\rho_{12}\rho_{13}\rho_{23}\), and only one is realized. The same one-sidedness does not
   happen for \((10,10,10)\) or \((9,9,12)\), where both roots occur and separate the concurrence.

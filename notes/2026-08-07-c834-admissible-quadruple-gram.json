@@ -1,4 +1,17 @@
 {
+  "bitangent_witness_failures": 0,
+  "bitangent_witnesses_by_class": {
+    "[10, 10, 10]/5": 4,
+    "[10, 10, 10]/8": 0,
+    "[10, 12, 12]/7": 0,
+    "[12, 12, 12]/5": 1,
+    "[9, 10, 10]/9": 2,
+    "[9, 10, 12]/1": 2,
+    "[9, 12, 12]/3": 1,
+    "[9, 9, 12]/6": 0,
+    "[9, 9, 12]/7": 4,
+    "[9, 9, 9]/1": 0
+  },
   "collinear_triples_inside_supports": 0,
   "conic": "y^2 - x z",
   "criterion_failures": 0,
@@ -27,6 +40,7 @@
   "minimum_supports": 364,
   "pairwise_joined_triples": 11830,
   "passant_lines": 78,
+  "profile_criterion_failures": 0,
   "quadruple_search": {
     "collinear_triples_per_solution": {
       "4": 480

@@ -44,6 +44,10 @@ OUTPUT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # The two admissible non-collinear invariant classes, as (sorted rho triple, pi).
 ADMISSIBLE_CLASSES = ((((10, 10, 10)), 8), (((10, 12, 12)), 7))
 
+# The two rho profiles an admissible non-collinear triple can carry.  Using these in place of
+# the finer classes above loses nothing in the quadruple argument, so pi never enters it.
+ADMISSIBLE_PROFILES = ((10, 10, 10), (10, 12, 12))
+
 
 # --------------------------------------------------------------------------
 # projective model
@@ -193,11 +197,14 @@ def gram_det4(g: dict[tuple[int, int], int]) -> int:
 
 
 def pattern_admissible(a: int, b: int, c: int) -> bool:
-    """Necessary condition on a pairwise-joined triple with normalized traces a,b,c."""
+    """Necessary condition on a pairwise-joined triple with normalized traces a,b,c.
+
+    Only the multiset of ``rho`` values is used: this is the weaker of the two conditions
+    certified below, and it is the one the quadruple argument needs.
+    """
     if gram_det3(a, b, c) == 0:
         return True
-    profile = tuple(sorted((a * a % Q, b * b % Q, c * c % Q)))
-    return (profile, a * b * c % Q) in ADMISSIBLE_CLASSES
+    return tuple(sorted((a * a % Q, b * b % Q, c * c % Q))) in ADMISSIBLE_PROFILES
 
 
 def quadruple_search() -> tuple[int, dict[str, int], dict[str, int]]:
@@ -234,6 +241,36 @@ def quadruple_search() -> tuple[int, dict[str, int], dict[str, int]]:
                                 [2 if i == j else -g[(min(i, j), max(i, j))] % Q
                                  for j in range(4)] for i in range(4)])] += 1
     return solutions, dict(collinear_triples), dict(ranks)
+
+
+def square_roots(value: int) -> list[int]:
+    return [t for t in range(Q) if t * t % Q == value % Q]
+
+
+def trace_patterns(rho_ab: int, rho_ac: int, rho_bc: int, pi: int) -> list[tuple[int, int, int]]:
+    """The normalized-trace patterns of a triple with the given invariants."""
+    return [(a, b, c)
+            for a in square_roots(rho_ab)
+            for b in square_roots(rho_ac)
+            for c in square_roots(rho_bc)
+            if a * b * c % Q == pi % Q]
+
+
+def bitangent_witness(a: int, b: int, c: int) -> bool:
+    """Does this trace pattern name a bitangent conic through the triple that is a support?
+
+    ``D`` is twice the normalized Gram determinant and vanishes exactly on collinear triples;
+    ``F`` is the discriminant of the candidate chord, normalized by ``D`` and the first point's
+    ``Delta``.  The chord must be a secant, which is ``F * D`` a nonsquare, and the bitangent
+    conic must have no passant among its tangents, which is ``(4F - D) * D`` a nonsquare.
+    """
+    squares = (a * a + b * b + c * c) % Q
+    d = (4 - squares - a * b * c) % Q
+    if d == 0:
+        return False
+    f = (3 - squares * pow(4, -1, Q) + a + b + c
+         + (a * b + a * c + b * c) * pow(2, -1, Q)) % Q
+    return (f * d % Q) in NONSQUARES and ((4 * f - d) * d % Q) in NONSQUARES
 
 
 def matrix_rank(rows: list[list[int]]) -> int:
@@ -337,14 +374,34 @@ def compute() -> dict:
         assert is_collinear == ((sum(profile) + p) % Q == 4 % Q), (a, b, c)
         triple_table[(is_collinear, profile, p, conc((a, b, c)))] += 1
 
-    # criterion: admissible  <=>  collinear or (profile, pi) in the two classes
+    # criterion: admissible  <=>  collinear or (profile, pi) in the two classes; and the
+    # weaker profile-only form, which is what the quadruple argument consumes.
     criterion_failures = 0
+    profile_criterion_failures = 0
     for a, b, c in joined_triples:
         profile = tuple(sorted((rho(a, b), rho(a, c), rho(b, c))))
         is_collinear = join_line[a][b] == join_line[a][c]
-        predicted = is_collinear or (profile, pi(a, b, c)) in ADMISSIBLE_CLASSES
-        if predicted != (conc((a, b, c)) == 0):
+        admissible = conc((a, b, c)) == 0
+        if (is_collinear or (profile, pi(a, b, c)) in ADMISSIBLE_CLASSES) != admissible:
             criterion_failures += 1
+        if admissible and not (is_collinear or profile in ADMISSIBLE_PROFILES):
+            profile_criterion_failures += 1
+
+    # the bitangent-conic witness predicate reproduces the conic-support count exactly
+    witness_failures = 0
+    witness_by_class: dict[tuple[tuple[int, ...], int], int] = {}
+    for a, b, c in joined_triples:
+        if join_line[a][b] == join_line[a][c]:
+            continue
+        profile = tuple(sorted((rho(a, b), rho(a, c), rho(b, c))))
+        p = pi(a, b, c)
+        patterns = trace_patterns(rho(a, b), rho(a, c), rho(b, c), p)
+        assert len(patterns) == 4, (a, b, c)
+        predicted = sum(1 for pattern in patterns if bitangent_witness(*pattern))
+        actual = sum(1 for s in toric if a in s and b in s and c in s)
+        if predicted != actual:
+            witness_failures += 1
+        witness_by_class[(profile, p)] = predicted
 
     # --- the ledger's two halves, measured ---
     for a, b, c in joined_triples:
@@ -383,6 +440,11 @@ def compute() -> dict:
             for k, v in sorted(triple_table.items(), key=lambda kv: (not kv[0][0], kv[0][1], kv[0][2]))
         ],
         "criterion_failures": criterion_failures,
+        "profile_criterion_failures": profile_criterion_failures,
+        "bitangent_witness_failures": witness_failures,
+        "bitangent_witnesses_by_class": {
+            f"{list(k[0])}/{k[1]}": v for k, v in sorted(witness_by_class.items())
+        },
         "extension_classes": [
             {"kind": k[0], "pool_size": k[1], "pool_is_rest_of_line": k[2], "count": v}
             for k, v in sorted(extension_table.items(), key=str)
