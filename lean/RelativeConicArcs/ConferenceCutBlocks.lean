@@ -182,107 +182,111 @@ def closedFourWalkSum (A : Matrix n n R) (K : Finset n) : R :=
   ∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K,
     if WalkInjective i j k l then walkTerm A i j k l else 0
 
-/-- Sorting a sum over quadruples that vanishes off the injective ones by the
-four-element support of the quadruple. -/
-private theorem sum_eq_sum_powersetCard_four (F : n → n → n → n → R)
+omit [Fintype n] in
+/-- Sorting a sum over quadruples of labels of `Y` that vanishes off the
+injective ones by the four-element support of the quadruple. -/
+private theorem sum_eq_sum_powersetCard_four (Y : Finset n) (F : n → n → n → n → R)
     (hF : ∀ i j k l, ¬ WalkInjective i j k l → F i j k l = 0) :
-    ∑ K ∈ (Finset.univ : Finset n).powersetCard 4,
-        (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
-      = ∑ i, ∑ j, ∑ k, ∑ l, F i j k l := by
+    ∑ K ∈ Y.powersetCard 4, (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
+      = ∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y, F i j k l := by
   classical
-  have hprod : ∀ K : Finset n, (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
-      = ∑ p ∈ Finset.univ, if p ∈ K ×ˢ K ×ˢ K ×ˢ K then
-          F p.1 p.2.1 p.2.2.1 p.2.2.2 else 0 := by
-    intro K
-    rw [Finset.sum_ite_mem, Finset.univ_inter]
+  have hprod : ∀ K : Finset n, K ⊆ Y →
+      (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
+        = ∑ p ∈ Y ×ˢ Y ×ˢ Y ×ˢ Y, if p ∈ K ×ˢ K ×ˢ K ×ˢ K then
+            F p.1 p.2.1 p.2.2.1 p.2.2.2 else 0 := by
+    intro K hK
+    have hsub : K ×ˢ K ×ˢ K ×ˢ K ⊆ Y ×ˢ Y ×ˢ Y ×ˢ Y :=
+      Finset.product_subset_product hK (Finset.product_subset_product hK
+        (Finset.product_subset_product hK hK))
+    rw [Finset.sum_ite_mem, Finset.inter_eq_right.mpr hsub]
     simp [Finset.sum_product]
-  have hpoint : ∀ p : n × n × n × n,
-      (∑ K ∈ (Finset.univ : Finset n).powersetCard 4,
+  have hpoint : ∀ p ∈ Y ×ˢ Y ×ˢ Y ×ˢ Y,
+      (∑ K ∈ Y.powersetCard 4,
         if p ∈ K ×ˢ K ×ˢ K ×ˢ K then F p.1 p.2.1 p.2.2.1 p.2.2.2 else 0)
         = F p.1 p.2.1 p.2.2.1 p.2.2.2 := by
-    rintro ⟨a, b, c, d⟩
+    rintro ⟨a, b, c, d⟩ hp
+    simp only [Finset.mem_product] at hp
+    obtain ⟨haY, hbY, hcY, hdY⟩ := hp
     by_cases hinj : WalkInjective a b c d
     · obtain ⟨hab, hac, had, hbc, hbd, hcd⟩ := hinj
       have hsupp : ({a, b, c, d} : Finset n).card = 4 := by
         rw [Finset.card_insert_of_notMem (by simp [hab, hac, had]),
           Finset.card_insert_of_notMem (by simp [hbc, hbd]),
           Finset.card_insert_of_notMem (by simp [hcd]), Finset.card_singleton]
-      have hfilter : ((Finset.univ : Finset n).powersetCard 4).filter
+      have hsuppY : ({a, b, c, d} : Finset n) ⊆ Y := by
+        intro x hx
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl | rfl | rfl <;> assumption
+      have hfilter : (Y.powersetCard 4).filter
           (fun K => ((a, b, c, d) : n × n × n × n) ∈ K ×ˢ K ×ˢ K ×ˢ K)
           = {({a, b, c, d} : Finset n)} := by
         ext K
         simp only [Finset.mem_filter, Finset.mem_powersetCard, Finset.mem_singleton,
-          Finset.mem_product, Finset.subset_univ, true_and]
+          Finset.mem_product]
         constructor
-        · rintro ⟨hK, ha, hb, hc, hd⟩
+        · rintro ⟨⟨-, hK⟩, ha, hb, hc, hd⟩
           have hsub : ({a, b, c, d} : Finset n) ⊆ K := by
             intro x hx
             simp only [Finset.mem_insert, Finset.mem_singleton] at hx
             rcases hx with rfl | rfl | rfl | rfl <;> assumption
           exact (Finset.eq_of_subset_of_card_le hsub (by rw [hK, hsupp])).symm
         · rintro rfl
-          refine ⟨hsupp, ?_, ?_, ?_, ?_⟩ <;> simp
+          exact ⟨⟨hsuppY, hsupp⟩, by simp, by simp, by simp, by simp⟩
       rw [Finset.sum_ite, Finset.sum_const_zero, add_zero, hfilter, Finset.sum_const,
         Finset.card_singleton, one_smul]
     · rw [hF a b c d hinj]
       simp
-  calc ∑ K ∈ (Finset.univ : Finset n).powersetCard 4,
-        (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
-      = ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, ∑ p : n × n × n × n,
+  calc ∑ K ∈ Y.powersetCard 4, (∑ i ∈ K, ∑ j ∈ K, ∑ k ∈ K, ∑ l ∈ K, F i j k l)
+      = ∑ K ∈ Y.powersetCard 4, ∑ p ∈ Y ×ˢ Y ×ˢ Y ×ˢ Y,
           (if p ∈ K ×ˢ K ×ˢ K ×ˢ K then F p.1 p.2.1 p.2.2.1 p.2.2.2 else 0) :=
-        Finset.sum_congr rfl fun K _ => hprod K
-    _ = ∑ p : n × n × n × n, ∑ K ∈ (Finset.univ : Finset n).powersetCard 4,
+        Finset.sum_congr rfl fun K hK => hprod K (Finset.mem_powersetCard.mp hK).1
+    _ = ∑ p ∈ Y ×ˢ Y ×ˢ Y ×ˢ Y, ∑ K ∈ Y.powersetCard 4,
           (if p ∈ K ×ˢ K ×ˢ K ×ˢ K then F p.1 p.2.1 p.2.2.1 p.2.2.2 else 0) :=
         Finset.sum_comm
-    _ = ∑ p : n × n × n × n, F p.1 p.2.1 p.2.2.1 p.2.2.2 :=
-        Finset.sum_congr rfl fun p _ => hpoint p
-    _ = ∑ i, ∑ j, ∑ k, ∑ l, F i j k l := by
-        simp [Fintype.sum_prod_type]
+    _ = ∑ p ∈ Y ×ˢ Y ×ˢ Y ×ˢ Y, F p.1 p.2.1 p.2.2.1 p.2.2.2 :=
+        Finset.sum_congr rfl hpoint
+    _ = ∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y, F i j k l := by
+        simp [Finset.sum_product]
 
-/-- The fourth trace of a zero-diagonal matrix whose off-diagonal entries
-multiply pairwise to one, sorted by the support of the closed four-walks it
-counts: the two-element supports give `d(d-1)`, the three-element supports give
-`12·C(d,3)`, and each four-element support `K` gives the sum of the twenty-four
-closed four-walks through `K`.  Symmetry is not used; for a symmetric sign
-matrix the hypothesis is that the off-diagonal entries square to one, and then
-each four-element support contributes `24` or `-8`. -/
-theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
-    (hone : ∀ i j, i ≠ j → A i j * A j i = 1) :
-    Matrix.trace (A * A * A * A) =
-      (Fintype.card n : R) * ((Fintype.card n : R) - 1)
-        + 12 * ((Fintype.card n).choose 3 : R)
-        + ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, closedFourWalkSum A K := by
+omit [Fintype n] in
+/-- The fourth walk sum over a set `Y` of labels, sorted by the support of the
+closed four-walks it counts.  For a zero-diagonal matrix whose off-diagonal
+entries multiply pairwise to one, the two-element supports contribute
+`|Y|(|Y|-1)`, the three-element supports contribute `12·C(|Y|,3)`, and each
+four-element support `K` contributes the sum of the twenty-four closed
+four-walks through `K`.  The sum on the left is the fourth trace of the
+principal block of the matrix on `Y`.  Symmetry is not used; for a symmetric
+sign matrix the hypothesis is that the off-diagonal entries square to one, and
+then each four-element support contributes `24` or `-8`. -/
+theorem sum_walkTerm_eq_add_sum_powersetCard (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
+    (hone : ∀ i j, i ≠ j → A i j * A j i = 1) (Y : Finset n) :
+    (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y, A i j * A j k * A k l * A l i) =
+      (Y.card : R) * ((Y.card : R) - 1) + 12 * (Y.card.choose 3 : R)
+        + ∑ K ∈ Y.powersetCard 4, closedFourWalkSum A K := by
   classical
-  have htrace : Matrix.trace (A * A * A * A)
-      = ∑ i, ∑ j, ∑ k, ∑ l, walkTerm A i j k l := by
-    simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Finset.sum_mul, walkTerm]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    refine Eq.trans (Finset.sum_congr rfl fun _ _ => Finset.sum_comm) ?_
-    refine Eq.trans Finset.sum_comm ?_
-    exact Finset.sum_congr rfl fun _ _ => Finset.sum_comm
-  have hsplit : ∀ i j : n, (∑ k, ∑ l, walkTerm A i j k l)
-      = walkTerm A i j i j + (∑ l ∈ Finset.univ.erase j, walkTerm A i j i l)
-        + (∑ k ∈ Finset.univ.erase i, walkTerm A i j k j)
-        + ∑ k ∈ Finset.univ.erase i, ∑ l ∈ Finset.univ.erase j, walkTerm A i j k l := by
-    intro i j
-    have e1 : (∑ k, ∑ l, walkTerm A i j k l)
-        = (∑ l, walkTerm A i j i l) + ∑ k ∈ Finset.univ.erase i, ∑ l, walkTerm A i j k l :=
-      (Finset.add_sum_erase _ _ (Finset.mem_univ i)).symm
-    have e2 : (∑ l, walkTerm A i j i l)
-        = walkTerm A i j i j + ∑ l ∈ Finset.univ.erase j, walkTerm A i j i l :=
-      (Finset.add_sum_erase _ _ (Finset.mem_univ j)).symm
-    have e3 : ∀ k : n, (∑ l, walkTerm A i j k l)
-        = walkTerm A i j k j + ∑ l ∈ Finset.univ.erase j, walkTerm A i j k l :=
-      fun k => (Finset.add_sum_erase _ _ (Finset.mem_univ j)).symm
+  show (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y, walkTerm A i j k l) = _
+  have hsplit : ∀ i ∈ Y, ∀ j ∈ Y, (∑ k ∈ Y, ∑ l ∈ Y, walkTerm A i j k l)
+      = walkTerm A i j i j + (∑ l ∈ Y.erase j, walkTerm A i j i l)
+        + (∑ k ∈ Y.erase i, walkTerm A i j k j)
+        + ∑ k ∈ Y.erase i, ∑ l ∈ Y.erase j, walkTerm A i j k l := by
+    intro i hi j hj
+    have e1 : (∑ k ∈ Y, ∑ l ∈ Y, walkTerm A i j k l)
+        = (∑ l ∈ Y, walkTerm A i j i l) + ∑ k ∈ Y.erase i, ∑ l ∈ Y, walkTerm A i j k l :=
+      (Finset.add_sum_erase _ _ hi).symm
+    have e2 : (∑ l ∈ Y, walkTerm A i j i l)
+        = walkTerm A i j i j + ∑ l ∈ Y.erase j, walkTerm A i j i l :=
+      (Finset.add_sum_erase _ _ hj).symm
+    have e3 : ∀ k : n, (∑ l ∈ Y, walkTerm A i j k l)
+        = walkTerm A i j k j + ∑ l ∈ Y.erase j, walkTerm A i j k l :=
+      fun k => (Finset.add_sum_erase _ _ hj).symm
     rw [e1, e2, Finset.sum_congr rfl (fun k _ => e3 k), Finset.sum_add_distrib]
     ring
-  have expand : (∑ i, ∑ j, ∑ k, ∑ l, walkTerm A i j k l)
-      = (∑ i : n, ∑ j : n, walkTerm A i j i j)
-        + (∑ i : n, ∑ j : n, ∑ l ∈ Finset.univ.erase j, walkTerm A i j i l)
-        + (∑ i : n, ∑ j : n, ∑ k ∈ Finset.univ.erase i, walkTerm A i j k j)
-        + (∑ i : n, ∑ j : n, ∑ k ∈ Finset.univ.erase i, ∑ l ∈ Finset.univ.erase j,
-            walkTerm A i j k l) := by
-    rw [Finset.sum_congr rfl (fun i _ => Finset.sum_congr rfl (fun j _ => hsplit i j))]
+  have expand : (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y, walkTerm A i j k l)
+      = (∑ i ∈ Y, ∑ j ∈ Y, walkTerm A i j i j)
+        + (∑ i ∈ Y, ∑ j ∈ Y, ∑ l ∈ Y.erase j, walkTerm A i j i l)
+        + (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y.erase i, walkTerm A i j k j)
+        + (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y.erase i, ∑ l ∈ Y.erase j, walkTerm A i j k l) := by
+    rw [Finset.sum_congr rfl (fun i hi => Finset.sum_congr rfl (fun j hj => hsplit i hi j hj))]
     simp only [Finset.sum_add_distrib]
   -- the four-element supports
   have hDterm : ∀ i j k l : n, k ≠ i → l ≠ j →
@@ -296,33 +300,36 @@ theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
         simp only [not_or] at hc
         exact hinj ⟨hc.1, Ne.symm hki, hc.2.1, hc.2.2.1, Ne.symm hlj, hc.2.2.2⟩
       rcases hcases with rfl | rfl | rfl | rfl <;> simp [walkTerm, hdiag]
-  have hD : (∑ i : n, ∑ j : n, ∑ k ∈ Finset.univ.erase i, ∑ l ∈ Finset.univ.erase j,
-        walkTerm A i j k l)
-      = ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, closedFourWalkSum A K := by
-    rw [show (∑ K ∈ (Finset.univ : Finset n).powersetCard 4, closedFourWalkSum A K)
-        = ∑ i : n, ∑ j : n, ∑ k : n, ∑ l : n,
+  have hD : (∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y.erase i, ∑ l ∈ Y.erase j, walkTerm A i j k l)
+      = ∑ K ∈ Y.powersetCard 4, closedFourWalkSum A K := by
+    rw [show (∑ K ∈ Y.powersetCard 4, closedFourWalkSum A K)
+        = ∑ i ∈ Y, ∑ j ∈ Y, ∑ k ∈ Y, ∑ l ∈ Y,
             (if WalkInjective i j k l then walkTerm A i j k l else 0) from
-      sum_eq_sum_powersetCard_four _ (fun i j k l h => if_neg h)]
+      sum_eq_sum_powersetCard_four Y _ (fun i j k l h => if_neg h)]
     refine Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => ?_
-    have inner : ∀ k : n, k ≠ i → (∑ l ∈ Finset.univ.erase j, walkTerm A i j k l)
-        = ∑ l : n, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
+    have inner : ∀ k : n, k ≠ i → (∑ l ∈ Y.erase j, walkTerm A i j k l)
+        = ∑ l ∈ Y, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
       intro k hki
-      calc (∑ l ∈ Finset.univ.erase j, walkTerm A i j k l)
-          = ∑ l ∈ Finset.univ.erase j,
+      calc (∑ l ∈ Y.erase j, walkTerm A i j k l)
+          = ∑ l ∈ Y.erase j,
               (if WalkInjective i j k l then walkTerm A i j k l else 0) :=
             Finset.sum_congr rfl fun l hl => hDterm i j k l hki (Finset.ne_of_mem_erase hl)
-        _ = ∑ l : n, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
-            refine Finset.sum_subset (Finset.erase_subset j Finset.univ) fun l _ hl => ?_
-            have hlj : l = j := by simpa using hl
+        _ = ∑ l ∈ Y, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
+            refine Finset.sum_subset (Finset.erase_subset j Y) fun l hlY hl => ?_
+            have hlj : l = j := by
+              by_contra hne
+              exact hl (Finset.mem_erase.mpr ⟨hne, hlY⟩)
             subst hlj
             exact if_neg fun hinj => hinj.2.2.2.2.1 rfl
-    calc (∑ k ∈ Finset.univ.erase i, ∑ l ∈ Finset.univ.erase j, walkTerm A i j k l)
-        = ∑ k ∈ Finset.univ.erase i,
-            ∑ l : n, (if WalkInjective i j k l then walkTerm A i j k l else 0) :=
+    calc (∑ k ∈ Y.erase i, ∑ l ∈ Y.erase j, walkTerm A i j k l)
+        = ∑ k ∈ Y.erase i,
+            ∑ l ∈ Y, (if WalkInjective i j k l then walkTerm A i j k l else 0) :=
           Finset.sum_congr rfl fun k hk => inner k (Finset.ne_of_mem_erase hk)
-      _ = ∑ k : n, ∑ l : n, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
-          refine Finset.sum_subset (Finset.erase_subset i Finset.univ) fun k _ hk => ?_
-          have hki : k = i := by simpa using hk
+      _ = ∑ k ∈ Y, ∑ l ∈ Y, (if WalkInjective i j k l then walkTerm A i j k l else 0) := by
+          refine Finset.sum_subset (Finset.erase_subset i Y) fun k hkY hk => ?_
+          have hki : k = i := by
+            by_contra hne
+            exact hk (Finset.mem_erase.mpr ⟨hne, hkY⟩)
           subst hki
           exact Finset.sum_eq_zero fun l _ => if_neg fun hinj => hinj.2.1 rfl
   -- the two- and three-element supports
@@ -338,89 +345,105 @@ theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
     intro i j k hji hjk
     calc walkTerm A i j k j = (A i j * A j i) * (A j k * A k j) := by unfold walkTerm; ring
       _ = 1 := by rw [hone i j (Ne.symm hji), hone j k hjk]; ring
-  have hA : ∀ i : n, (∑ j : n, walkTerm A i j i j) = ((Fintype.card n - 1 : ℕ) : R) := by
-    intro i
-    rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i),
+  have hA : ∀ i ∈ Y, (∑ j ∈ Y, walkTerm A i j i j) = ((Y.card - 1 : ℕ) : R) := by
+    intro i hi
+    rw [← Finset.add_sum_erase _ _ hi,
       show walkTerm A i i i i = 0 by simp [walkTerm, hdiag], zero_add,
       Finset.sum_congr rfl (fun j hj => hAterm i j (Ne.symm (Finset.ne_of_mem_erase hj)))]
-    simp [Finset.card_erase_of_mem, Finset.card_univ]
-  have hB : ∀ i : n, (∑ j : n, ∑ l ∈ Finset.univ.erase j, walkTerm A i j i l)
-      = (((Fintype.card n - 1) * (Fintype.card n - 2) : ℕ) : R) := by
-    intro i
-    rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i),
-      show (∑ l ∈ Finset.univ.erase i, walkTerm A i i i l) = 0 from
+    rw [Finset.sum_const, Finset.card_erase_of_mem hi, nsmul_eq_mul, mul_one]
+  have hB : ∀ i ∈ Y, (∑ j ∈ Y, ∑ l ∈ Y.erase j, walkTerm A i j i l)
+      = (((Y.card - 1) * (Y.card - 2) : ℕ) : R) := by
+    intro i hi
+    rw [← Finset.add_sum_erase _ _ hi,
+      show (∑ l ∈ Y.erase i, walkTerm A i i i l) = 0 from
         Finset.sum_eq_zero fun l _ => by simp [walkTerm, hdiag], zero_add]
-    have hj : ∀ j ∈ Finset.univ.erase i,
-        (∑ l ∈ Finset.univ.erase j, walkTerm A i j i l) = ((Fintype.card n - 2 : ℕ) : R) := by
+    have hj : ∀ j ∈ Y.erase i,
+        (∑ l ∈ Y.erase j, walkTerm A i j i l) = ((Y.card - 2 : ℕ) : R) := by
       intro j hjmem
       have hji : j ≠ i := Finset.ne_of_mem_erase hjmem
-      have himem : i ∈ Finset.univ.erase j :=
-        Finset.mem_erase.mpr ⟨Ne.symm hji, Finset.mem_univ i⟩
+      have himem : i ∈ Y.erase j := Finset.mem_erase.mpr ⟨Ne.symm hji, hi⟩
+      have hjY : j ∈ Y := Finset.mem_of_mem_erase hjmem
       rw [← Finset.add_sum_erase _ _ himem,
         show walkTerm A i j i i = 0 by simp [walkTerm, hdiag], zero_add,
         Finset.sum_congr rfl (fun l hl => hBterm i j l (Ne.symm hji)
           (Ne.symm (Finset.ne_of_mem_erase hl)))]
-      rw [Finset.sum_const, Finset.card_erase_of_mem himem, Finset.card_erase_of_mem
-        (Finset.mem_univ j), Finset.card_univ, nsmul_eq_mul, mul_one]
+      rw [Finset.sum_const, Finset.card_erase_of_mem himem, Finset.card_erase_of_mem hjY,
+        nsmul_eq_mul, mul_one]
       congr 1
-    rw [Finset.sum_congr rfl hj, Finset.sum_const, Finset.card_erase_of_mem (Finset.mem_univ i),
-      Finset.card_univ, nsmul_eq_mul]
+    rw [Finset.sum_congr rfl hj, Finset.sum_const, Finset.card_erase_of_mem hi, nsmul_eq_mul]
     push_cast
     ring
-  have hC : ∀ i : n, (∑ j : n, ∑ k ∈ Finset.univ.erase i, walkTerm A i j k j)
-      = (((Fintype.card n - 1) * (Fintype.card n - 2) : ℕ) : R) := by
-    intro i
-    rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i),
-      show (∑ k ∈ Finset.univ.erase i, walkTerm A i i k i) = 0 from
+  have hC : ∀ i ∈ Y, (∑ j ∈ Y, ∑ k ∈ Y.erase i, walkTerm A i j k j)
+      = (((Y.card - 1) * (Y.card - 2) : ℕ) : R) := by
+    intro i hi
+    rw [← Finset.add_sum_erase _ _ hi,
+      show (∑ k ∈ Y.erase i, walkTerm A i i k i) = 0 from
         Finset.sum_eq_zero fun k _ => by simp [walkTerm, hdiag], zero_add]
-    have hj : ∀ j ∈ Finset.univ.erase i,
-        (∑ k ∈ Finset.univ.erase i, walkTerm A i j k j) = ((Fintype.card n - 2 : ℕ) : R) := by
+    have hj : ∀ j ∈ Y.erase i,
+        (∑ k ∈ Y.erase i, walkTerm A i j k j) = ((Y.card - 2 : ℕ) : R) := by
       intro j hjmem
       have hji : j ≠ i := Finset.ne_of_mem_erase hjmem
-      have hjmem' : j ∈ Finset.univ.erase i := hjmem
-      rw [← Finset.add_sum_erase _ _ hjmem',
+      rw [← Finset.add_sum_erase _ _ hjmem,
         show walkTerm A i j j j = 0 by simp [walkTerm, hdiag], zero_add,
         Finset.sum_congr rfl (fun k hk => hCterm i j k hji
           (Ne.symm (Finset.ne_of_mem_erase hk)))]
-      rw [Finset.sum_const, Finset.card_erase_of_mem hjmem', Finset.card_erase_of_mem
-        (Finset.mem_univ i), Finset.card_univ, nsmul_eq_mul, mul_one]
+      rw [Finset.sum_const, Finset.card_erase_of_mem hjmem, Finset.card_erase_of_mem hi,
+        nsmul_eq_mul, mul_one]
       congr 1
-    rw [Finset.sum_congr rfl hj, Finset.sum_const, Finset.card_erase_of_mem (Finset.mem_univ i),
-      Finset.card_univ, nsmul_eq_mul]
+    rw [Finset.sum_congr rfl hj, Finset.sum_const, Finset.card_erase_of_mem hi, nsmul_eq_mul]
     push_cast
     ring
   -- assembling the three support classes
-  rcases isEmpty_or_nonempty n with hempty | hne
-  · rw [htrace, Finset.powersetCard_eq_empty.mpr (by simp)]
+  rcases Y.eq_empty_or_nonempty with rfl | hY
+  · rw [Finset.powersetCard_eq_empty.mpr (by simp)]
     simp
-  have hpos : 1 ≤ Fintype.card n := Fintype.card_pos
-  have hnat : 2 * (Fintype.card n * ((Fintype.card n - 1) * (Fintype.card n - 2)))
-      = 12 * (Fintype.card n).choose 3 := by
-    have hfac : (Fintype.card n).descFactorial 3 = 6 * (Fintype.card n).choose 3 := by
+  have hpos : 1 ≤ Y.card := Finset.card_pos.mpr hY
+  have hnat : 2 * (Y.card * ((Y.card - 1) * (Y.card - 2))) = 12 * Y.card.choose 3 := by
+    have hfac : Y.card.descFactorial 3 = 6 * Y.card.choose 3 := by
       rw [Nat.descFactorial_eq_factorial_mul_choose]
       norm_num [Nat.factorial]
-    have hval : (Fintype.card n).descFactorial 3
-        = (Fintype.card n - 2) * ((Fintype.card n - 1) * Fintype.card n) := by
+    have hval : Y.card.descFactorial 3 = (Y.card - 2) * ((Y.card - 1) * Y.card) := by
       simp [Nat.descFactorial]
-    calc 2 * (Fintype.card n * ((Fintype.card n - 1) * (Fintype.card n - 2)))
-        = 2 * ((Fintype.card n - 2) * ((Fintype.card n - 1) * Fintype.card n)) := by ring
-      _ = 2 * (6 * (Fintype.card n).choose 3) := by rw [← hval, hfac]
-      _ = 12 * (Fintype.card n).choose 3 := by ring
-  have hcast : ((Fintype.card n - 1 : ℕ) : R) = (Fintype.card n : R) - 1 := by
+    calc 2 * (Y.card * ((Y.card - 1) * (Y.card - 2)))
+        = 2 * ((Y.card - 2) * ((Y.card - 1) * Y.card)) := by ring
+      _ = 2 * (6 * Y.card.choose 3) := by rw [← hval, hfac]
+      _ = 12 * Y.card.choose 3 := by ring
+  have hcast : ((Y.card - 1 : ℕ) : R) = (Y.card : R) - 1 := by
     push_cast [Nat.cast_sub hpos]
     ring
-  have hcast2 : (Fintype.card n : R)
-        * (((Fintype.card n - 1) * (Fintype.card n - 2) : ℕ) : R)
-      + (Fintype.card n : R) * (((Fintype.card n - 1) * (Fintype.card n - 2) : ℕ) : R)
-      = 12 * ((Fintype.card n).choose 3 : R) := by
+  have hcast2 : (Y.card : R) * (((Y.card - 1) * (Y.card - 2) : ℕ) : R)
+      + (Y.card : R) * (((Y.card - 1) * (Y.card - 2) : ℕ) : R)
+      = 12 * (Y.card.choose 3 : R) := by
     have hcastnat := congrArg (fun m : ℕ => (m : R)) hnat
     push_cast at hcastnat ⊢
     linear_combination hcastnat
-  rw [htrace, expand, hD, Finset.sum_congr rfl (fun i _ => hA i),
-    Finset.sum_congr rfl (fun i _ => hB i), Finset.sum_congr rfl (fun i _ => hC i)]
-  simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  rw [expand, hD, Finset.sum_congr rfl hA, Finset.sum_congr rfl hB,
+    Finset.sum_congr rfl hC]
+  simp only [Finset.sum_const, nsmul_eq_mul]
   rw [hcast]
   linear_combination hcast2
+
+/-- The fourth trace of a zero-diagonal matrix whose off-diagonal entries
+multiply pairwise to one, sorted by the support of the closed four-walks it
+counts: the two-element supports give `d(d-1)`, the three-element supports give
+`12·C(d,3)`, and each four-element support `K` gives the sum of the twenty-four
+closed four-walks through `K`, which for a symmetric sign matrix is `24` or
+`-8`. -/
+theorem trace_pow_four (A : Matrix n n R) (hdiag : ∀ i, A i i = 0)
+    (hone : ∀ i j, i ≠ j → A i j * A j i = 1) :
+    Matrix.trace (A * A * A * A) =
+      (Fintype.card n : R) * ((Fintype.card n : R) - 1)
+        + 12 * ((Fintype.card n).choose 3 : R)
+        + ∑ K ∈ (Finset.univ : Finset n).powersetCard 4, closedFourWalkSum A K := by
+  have htrace : Matrix.trace (A * A * A * A)
+      = ∑ i, ∑ j, ∑ k, ∑ l, A i j * A j k * A k l * A l i := by
+    simp only [Matrix.trace, Matrix.diag_apply, Matrix.mul_apply, Finset.sum_mul]
+    refine Finset.sum_congr rfl fun i _ => ?_
+    refine Eq.trans (Finset.sum_congr rfl fun _ _ => Finset.sum_comm) ?_
+    refine Eq.trans Finset.sum_comm ?_
+    exact Finset.sum_congr rfl fun _ _ => Finset.sum_comm
+  rw [htrace, ← Finset.card_univ]
+  exact sum_walkTerm_eq_add_sum_powersetCard A hdiag hone Finset.univ
 
 omit [Fintype n] in
 /-- On a four-element label set the closed four-walks are the twenty-four

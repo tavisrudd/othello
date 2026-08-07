@@ -40,6 +40,7 @@
     "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
     "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
     "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one",
+    "RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard",
     "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four",
     "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled",
     "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight",
@@ -48,16 +49,17 @@
     "RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert",
     "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant",
     "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
-    "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq"
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq",
+    "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq"
   ],
   "axiom_report_provenance": {
-    "build_run_id": "run-20260807-020353-990286e8",
+    "build_run_id": "run-20260807-023254-3640835d",
     "gate_stdout": "verification/evidence/gate_stdout/golden_return.stdout.txt",
-    "gate_stdout_sha256": "c9a25e541cb0e19c369d3c73016ae9c49e3c27e0e06d1cd98a3432c0733e2fef",
+    "gate_stdout_sha256": "2c458428729062a1adab437db0b5c76cf909d1f913d417f11cbe47786a338adf",
     "generator": "verification/extract_axiom_report.py",
     "note": "The axiom report is the #print axioms diagnostics of the tracked gate stdout above, one declaration per line. Regenerate it with the named generator; never edit it by hand."
   },
-  "axiom_report_sha256": "64ea11f50fedbcdfcd6eaee186953bcc647c8968d4e02e60bf5c72615f404e63",
+  "axiom_report_sha256": "72de0261e96d0a1aab35abe7103eae6b5f2fe21671c43678aef1d6a73381142c",
   "claim_map": {
     "OPER-1": {
       "coverage": "partial mechanism; no full row claim",
@@ -110,6 +112,7 @@
         "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
         "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
         "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one",
+        "RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard",
         "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four",
         "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled",
         "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight",
@@ -118,9 +121,10 @@
         "RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert",
         "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant",
         "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
-        "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq"
+        "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq",
+        "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq"
       ],
-      "excluded": "the higher-order Ramsey exclusion and the classical aligned-design consequences remain human arguments, as does every eigenvalue and singular-value statement.  What is checked is the polynomial and combinatorial core: the cross block of a cut of a matrix squaring to a scalar satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth trace is d(d-1) + 12·C(d,3) plus the closed four-walk weights of the four-element supports, each of those weights is 24 or -8, that is eight times the Hamilton-cycle weight 3 or -1, and equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force the weight to be constant on four-sets."
+      "excluded": "every eigenvalue and singular-value statement remains a human argument, and with it the passage from the fourth trace of a principal block to the second exchange moment.  What is checked is the rest: the cross block of a cut of a matrix squaring to a scalar satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth walk sum over any set of labels is |Y|(|Y|-1) + 12·C(|Y|,3) plus the closed four-walk weights of its four-element subsets, each of those weights is 24 or -8 (eight times the Hamilton-cycle weight 3 or -1), equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force the weight constant on four-sets, and for a symmetric conference matrix of order 2d with 4 ≤ d the fourth walk sum over a balanced half is not independent of the half."
     },
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",
@@ -136,8 +140,9 @@
   "gate_module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "schema": "clebsch-golden-return-formal-v1",
-  "source_closure_sha256": "50b9f1d7f1b18a8016f0816f09ecb0e35c9a08405879ff9ef27a8e67a28e18e6",
+  "source_closure_sha256": "eb9e6a6bc83ab0c1b8b4a50e250b54fad9400c8d5bb32451b7cdeeb5c909fde3",
   "source_sha256": {
+    "RelativeConicArcs/BalancedExchangeRigidity.lean": "8e6cf0300a51951b683fffc0c897ddcf75936ea615526c6c1c23add055b32269",
     "RelativeConicArcs/ClebschGoldenConference.lean": "aa207dac0e6dd2f38e642488d5ce05a9790e2ee200a23cf6c015bab5f0e31e30",
     "RelativeConicArcs/ClebschGoldenDescent.lean": "f8582958e6c06d9b9d47e6f7fba2d77a3182ec06659d67bd171e76f78e5260ff",
     "RelativeConicArcs/ClebschMiddleExterior.lean": "7d731595069d962814fc1552f8a4a7c0eb5759294776081ecf446a2ddace54a7",
@@ -151,9 +156,9 @@
     "RelativeConicArcs/ClebschOperatorShadows.lean": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7",
     "RelativeConicArcs/ClebschOuterSegreRelations.lean": "d9d183bc0068da893cbc829f9eec755efb34bd02f72f8b7e0fb071eabc608840",
     "RelativeConicArcs/ClebschTwoGraph.lean": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089",
-    "RelativeConicArcs/ConferenceCutBlocks.lean": "c84f408fb49888dd97fd269462a3a7d8ed9b53e0cac560845c75395fc5d9c056",
+    "RelativeConicArcs/ConferenceCutBlocks.lean": "00a67ffe8e9eb00e3dded5153cd91d830fe025ab38b8245469fcc13bed9f7526",
     "RelativeConicArcs/ConferenceCutSpectrum.lean": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97",
-    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "f8108bb184cc1668b899fd425ab4329c6441bd96ba007a60bf5580b66df54be2",
+    "RelativeConicArcs/Gates/ClebschGoldenReturn.lean": "c0e8df7bda9b8433e7d3bb78bf8b0bcd7e3859d44ddfd93982309cdd8d77e093",
     "RelativeConicArcs/GoldenCommutatorDeterminant.lean": "e06a8bb0d4d024aa3b57e5e7166f983d4d887e57473d16922e2f989ba0f78e61",
     "RelativeConicArcs/GoldenCommutatorPfaffian.lean": "10f078732363c54acdd74c69b8e6ec585da48105f3e1f687bbf78e95a3322551",
     "RelativeConicArcs/GoldenMatchingCubics.lean": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5",

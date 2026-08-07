@@ -165,9 +165,11 @@
         "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight",
         "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq",
         "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
-        "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq"
+        "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq",
+        "RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard",
+        "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq"
       ],
-      "excluded": "the general cross-block spectrum formula as a statement about eigenvalues, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments.  The polynomial and combinatorial core is checked: for a cut of arbitrary size of a matrix squaring to a scalar the cross block satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth trace is d(d-1) + 12·C(d,3) plus the closed four-walk weights of its four-element supports, each such weight is 24 or -8, that is eight times the Hamilton-cycle weight 3 or -1, and equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force that weight to be constant on four-sets, by one-element swap descent."
+      "excluded": "every eigenvalue and singular-value statement remains a human argument, and with it the passage from the fourth trace of a principal block to the second exchange moment.  The rest is checked: for a cut of arbitrary size of a matrix squaring to a scalar the cross block satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth walk sum over any set of labels is |Y|(|Y|-1) + 12·C(|Y|,3) plus the closed four-walk weights of its four-element subsets, each such weight is 24 or -8, equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force that weight to be constant on four-sets by one-element swap descent, and summing the count over all labels then makes the fourth walk sum of a symmetric conference matrix of order 2d with 4 ≤ d depend on the balanced half."
     },
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",

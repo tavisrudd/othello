@@ -8,6 +8,7 @@ import RelativeConicArcs.GoldenCommutatorDeterminant
 import RelativeConicArcs.ClebschOuterSegreRelations
 import RelativeConicArcs.ConferenceCutSpectrum
 import RelativeConicArcs.ConferenceCutBlocks
+import RelativeConicArcs.BalancedExchangeRigidity
 
 /-!
 # Trust gate for the golden conference and middle-exterior return
@@ -37,10 +38,16 @@ counts: it is `d(d-1) + 12·C(d,3)` plus the four-set weights, each of which is
 `24` or `-8`, that is eight times `3` or `-1`.  Equal four-subset sums of those
 weights over all balanced halves of a `2d`-element label set with `4 ≤ d` force
 the weight to be constant on four-sets, by the one-element swap descent for
-inclusion sums rather than by the rank formula for inclusion matrices.  The
-higher-order Ramsey exclusion remains a human proof, as does every eigenvalue
-and singular-value statement: nothing here leaves polynomial algebra and finite
-combinatorics.
+inclusion sums rather than by the rank formula for inclusion matrices.  Summing
+the support-sorted trace over all labels then pins that common weight: for a
+symmetric conference matrix of order `N` the diagonal of `C * C = q • 1` gives `q = N - 1`, and comparing
+`N(N-1)²` with `N(N-1) + 12·C(N,3) + C(N,4)·w` forces `(N-3)w = -24`.  With
+`w ∈ {24, -8}` only `N = 2` and `N = 6` survive, so for every order `2d` with
+`4 ≤ d` the fourth trace of the principal block does depend on the balanced
+half.  That counting step replaces the switching normalization and the bound
+`R(3,3) = 6` used elsewhere; the Ramsey bound itself is proved independently.
+Every eigenvalue and singular-value statement remains outside this gate:
+nothing here leaves polynomial algebra and finite combinatorics.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -128,6 +135,7 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul
 #print axioms RelativeConicArcs.ConferenceCutBlocks.trace_mul_self
 #print axioms RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one
+#print axioms RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard
 #print axioms RelativeConicArcs.ConferenceCutBlocks.trace_pow_four
 #print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled
 #print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight
@@ -138,3 +146,5 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq
+
+#print axioms RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq

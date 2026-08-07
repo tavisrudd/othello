@@ -38,6 +38,7 @@
 'RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ConferenceCutBlocks.trace_mul_self' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ConferenceCutBlocks.trace_pow_four' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled' depends on axioms: [propext, Quot.sound]
 'RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight' depends on axioms: [propext, Quot.sound]
@@ -47,3 +48,4 @@
 'RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
