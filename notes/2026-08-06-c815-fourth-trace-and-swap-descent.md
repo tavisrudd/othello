@@ -120,7 +120,7 @@ which the trace identity forces: `32a - 120 = -120`.
 ## The conclusion, closed the same day
 
 The exchange-rigidity conclusion is also proved, in
-`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`, by a
+`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`, by a
 shorter route than the manuscript's: the fourth-trace count applied to the
 whole matrix pins the common four-set weight and leaves only the orders `2` and
 `6`, so neither the switching normalization nor `R(3,3) = 6` is needed. The

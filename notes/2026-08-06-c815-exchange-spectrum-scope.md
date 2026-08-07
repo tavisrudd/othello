@@ -44,7 +44,7 @@ Already formalized and reusable:
 `ConferenceCutBlocks.trace_pow_four` (support-sorted fourth trace),
 `ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight`,
 `SubsetInclusionSums.eq_of_sum_powersetCard_eq`,
-`BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`.
+`BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`.
 
 ## The route: the analysis is removable
 
@@ -130,7 +130,7 @@ not go through the spectrum at all.
 
 `d ≥ 4`: if the spectra agreed for all halves then the second moments would
 agree, hence the four-set walk sums would agree, contradicting
-`BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`.  A thin wrapper.
+`BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`.  A thin wrapper.
 
 `d ≤ 3`: `d = 1` is trivial, `d = 2` has `A² = 1`.  For `d = 3`, every
 off-diagonal product satisfies `A i k · A k j = τ · A i j` with `τ` the product

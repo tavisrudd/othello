@@ -104,7 +104,7 @@ The full argument, the exact replacement text for
 Jolliffe citation and to the verification rows are in
 `notes/2026-08-06-c815-exchange-rigidity-simplification.md`. The whole chain is
 formalized and gated, so this is a proposal about exposition, not about what is
-proved: `RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`
+proved: `RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`
 states the conclusion for the fourth trace of the principal block, and the
 spectral translation to the exchange moment is the one step still outside Lean.
 The inclusion-matrix rank citation likewise becomes attribution rather than a

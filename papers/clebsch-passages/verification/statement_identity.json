@@ -89,7 +89,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "bb047e10ee69bc37a17c1e9a04af99da52e9525172ddc1d39d49727c0f22807d",
+  "trust_rows_sha256": "fca50704b2b59191787da88d360eff62171e94bf3294f18ee284d701ce0e7cb4",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -226,7 +226,7 @@
       "clauses": [
         "cross-block exchange-spectrum formula",
         "universal first moment and aligned-four-set second moment",
-        "order-six uniqueness by inclusion rank and Ramsey exclusion",
+        "order-six uniqueness by swap descent and the whole-matrix fourth-trace pin",
         "credited aligned-design mean, variance, and order-ten purity split"
       ],
       "statement": "For a symmetric conference matrix of order 2d, the balanced exchange spectrum is q inverse times the cross-block Gram spectrum and is independent of the balanced half exactly when d is at most 3; order six is the unique nontrivial realized case and has spectrum 1/5, 4/5, 4/5. In higher orders the second exchange moment is an affine aligned-four-set count whose ensemble mean and variance follow from the classical determinant-minus-three 3-design.",
@@ -236,7 +236,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, characteristic-zero inclusion-rank descent, and the Ramsey equality R(3,3)=6, whose two bounds are themselves kernel-checked, though no Lean declaration states the equality itself; Lean checks the three-vertex signed-matrix square identity used for the order-six converse, while Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences",
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, and the support-sorted fourth trace.  The supplemental golden-return gate now covers the whole exchange mechanism in Lean: the cut-block identity, the support-sorted fourth trace, the one-element swap descent for inclusion sums, the whole-matrix weight pin (N-3)w = -24, cut dependence of the fourth trace and of the aligned four-set count, both exchange moments, the order-six characteristic polynomial, the order-four exclusion, the existence of both spectral isometries over the reals, the eigenvalue reading of the spectrum, and the transport of all of it from a subset of one label set to the cut that subset defines.  The manuscript's printed proof instead closes the rigidity direction by the characteristic-zero inclusion-rank descent, a switching normalization, and the Ramsey equality R(3,3)=6, whose two bounds are kernel-checked though no Lean declaration states the equality itself; the Lean therefore certifies the theorem's conclusion by a different route than the one printed, and the manuscript integration that would align them has not been made.  Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences.",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",

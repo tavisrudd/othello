@@ -33,6 +33,11 @@ at the one order it does not exclude.
 Replacing the switching normalization and the bound `R(3,3) = 6` by this
 counting step is a change of proof, not of statement; the Ramsey bound is
 proved independently in `RelativeConicArcs.AlignedTwoGraph`.
+
+The bound `4 ≤ d` is what the inclusion-sum swap descent needs, namely
+`4 + d ≤ 2d` for four-subsets of a `2d`-element label set.  It is not an
+existence statement: whether a matrix satisfying the hypotheses exists at a
+given order is a separate question, and this module says nothing about it.
 -/
 
 namespace RelativeConicArcs.BalancedExchangeRigidity
@@ -46,7 +51,7 @@ variable {R : Type*} [CommRing R] [CharZero R] [NoZeroDivisors R]
 a balanced half is not independent of the half, once each half has at least
 four labels.  Equivalently, the second exchange moment of the cut is
 cut-dependent for every order `2d` with `4 ≤ d`. -/
-theorem not_forall_sum_walkTerm_eq (C : Matrix n n R) (hdiag : ∀ i, C i i = 0)
+theorem not_forall_sum_closedFourWalkWeight_eq (C : Matrix n n R) (hdiag : ∀ i, C i i = 0)
     (hsym : ∀ i j, C j i = C i j) (hsq : ∀ i j, i ≠ j → C i j * C i j = 1)
     {q : R} (hCC : C * C = q • 1) {d : ℕ} (hd : 4 ≤ d)
     (hn : Fintype.card n = 2 * d) (c : R) :
@@ -63,7 +68,7 @@ theorem not_forall_sum_walkTerm_eq (C : Matrix n n R) (hdiag : ∀ i, C i i = 0)
       ∑ K ∈ Y.powersetCard 4, closedFourWalkSum C K
         = c - ((d : R) * ((d : R) - 1) + 12 * (d.choose 3 : R)) := by
     intro Y hY hYc
-    have hsum := sum_walkTerm_eq_add_sum_powersetCard C hdiag hone Y
+    have hsum := sum_closedFourWalkWeight_eq_add_sum_powersetCard C hdiag hone Y
     rw [hconst Y hY hYc, hYc] at hsum
     linear_combination -hsum
   -- every four-set carries the same weight

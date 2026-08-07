@@ -4,7 +4,7 @@
 **Task:** C815
 **Lane:** `clebsch`
 **Status:** the new argument is formalized and gated
-(`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`); the
+(`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`); the
 manuscript edit below is a proposal for the Paper III integration task and is
 not applied
 
@@ -71,7 +71,7 @@ descent the four-set weight is constant, hence `(2d - 3)w = -3`, hence
 
 ## What is formalized
 
-`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`: for a
+`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`: for a
 symmetric zero-diagonal sign matrix with `C * C = q • 1` on `2d` labels with
 `4 ≤ d`, over a commutative ring of characteristic zero with no zero divisors,
 the fourth walk sums
@@ -84,7 +84,7 @@ over the balanced halves `Y` are not all equal. That sum is the fourth trace of
 the principal block on `Y`; the passage from it to the second exchange moment
 is the spectral step, which remains unformalized.
 
-The proof uses `ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard` for
+The proof uses `ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard` for
 the support-sorted count on a half and on all labels,
 `ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq` for the swap descent,
 `ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight` for the

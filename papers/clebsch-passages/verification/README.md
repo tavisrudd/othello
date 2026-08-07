@@ -144,11 +144,26 @@ sum over `Y`, and its aligned four-sets are the aligned four-subsets of `Y`;
 hence no real number is the second exchange moment of every balanced half of a
 symmetric conference matrix of order `2d` with `4 <= d`, while at order six the
 polynomial is `(X - 1/5)(X - 4/5)^2` for every three-element subset.
+Two qualifications belong with the exchange material.  The clause `4 <= d` is
+what the swap descent needs, namely `4 + d <= 2d`; whether a matrix satisfying
+the hypotheses exists at a given order is a separate question the formal
+artifact does not address, so at any one order the content of that clause is
+conditional on such a matrix existing there.  And the failure of independence is
+formalized at the level of the second moment, hence of the characteristic
+polynomial and of the eigenvalues with multiplicity; no separate statement about
+the spectrum read as a set is proved.
+
 The Ramsey exclusion
 behind exchange rigidity, the classical inputs to the aligned-design
 faithfulness argument, outer-family coherence, the cross-golden determinant
 comparison, the identification of the six translates with the classical Joubert
-coordinates, and the Segre--Igusa polar map remain human proof boundaries.
+coordinates, and the Segre--Igusa polar map remain human proof boundaries.  The
+first of those is a boundary of the manuscript's *printed proof*, not a gap in
+the formal conclusion: the Lean closes the same rigidity statement by the swap
+descent and the whole-matrix fourth-trace pin, without the switching
+normalization or the Ramsey bound.  Until the manuscript is edited to print that
+route, the formal artifact certifies the theorem rather than the argument beside
+it.
 It is replayed against a checkout of the formal artifact with
 
 ```text

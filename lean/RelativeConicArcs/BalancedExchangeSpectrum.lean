@@ -1124,8 +1124,10 @@ variable {R : Type*} [CommRing R] [CharZero R] [NoZeroDivisors R] [DecidableEq R
 matrix of order `2d` is not the same for every half, once `4 ≤ d`.  Since the
 second exchange moment of the cut at a half is
 `(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c) / q²` for `c` that
-count, the second moment, and with it the spectrum of the exchange operator,
-depends on the half. -/
+count, the second moment depends on the half.  Every spectrum reading that
+determines that moment — the characteristic polynomial, or the eigenvalues with
+multiplicity — therefore depends on the half as well; the statement proved here
+is the one about the moment. -/
 theorem not_forall_alignedFourSetCount_eq (C : Matrix n n R) (hdiag : ∀ i, C i i = 0)
     (hsym : ∀ i j, C j i = C i j) (hsq : ∀ i j, i ≠ j → C i j * C i j = 1)
     {q : R} (hCC : C * C = q • 1) {d : ℕ} (hd : 4 ≤ d) (hn : Fintype.card n = 2 * d)
@@ -1136,11 +1138,11 @@ theorem not_forall_alignedFourSetCount_eq (C : Matrix n n R) (hdiag : ∀ i, C i
     intro i j hij
     rw [hsym i j]
     exact hsq i j hij
-  refine BalancedExchangeRigidity.not_forall_sum_walkTerm_eq C hdiag hsym hsq hCC hd hn
+  refine BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq C hdiag hsym hsq hCC hd hn
     ((d : R) * ((d : R) - 1) + 12 * (d.choose 3 : R)
       + (32 * (c : R) - 8 * (d.choose 4 : R))) ?_
   intro Y hY hYc
-  rw [ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard C hdiag hone Y,
+  rw [ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard C hdiag hone Y,
     sum_closedFourWalkSum_eq_alignedFourSetCount C hsym hsq Y, hconst Y hY hYc, hYc]
 
 end CutDependence

@@ -64,8 +64,13 @@ characteristic zero.  The first exchange moment is `d²/q` and the second
 is `(d q² - 2 q d(d-1) + d(d-1) + 12·C(d,3) - 8·C(d,4) + 32 c)/q²`, where
 `c` counts the aligned four-sets of the half, the four-subsets of
 Hamilton-cycle weight `3`.  That count is not the same for every balanced
-half once `4 ≤ d`, so the second moment, and with it the spectrum,
-depends on the cut.  When a half has at most three labels the
+half once `4 ≤ d`, so the second moment depends on the cut, and with it
+every spectrum reading that determines the moment: the characteristic
+polynomial, or the eigenvalues with multiplicity.  What the gate states is
+the failure at the level of the moment.  The bound `4 ≤ d` is what the swap
+descent needs, `4 + d ≤ 2d`; whether a matrix satisfying the hypotheses
+exists at a given order is a separate question the gate does not address.
+When a half has at most three labels the
 characteristic polynomial is computed outright and does not depend on the
 half: it is `X - 1` on one label, `(X - 2v)²` with `3 v = 1` on two, and
 `(X - 1/5)(X - 4/5)²` at order six, where the product of the three edge
@@ -195,7 +200,7 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul
 #print axioms RelativeConicArcs.ConferenceCutBlocks.trace_mul_self
 #print axioms RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one
-#print axioms RelativeConicArcs.ConferenceCutBlocks.sum_walkTerm_eq_add_sum_powersetCard
+#print axioms RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard
 #print axioms RelativeConicArcs.ConferenceCutBlocks.trace_pow_four
 #print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled
 #print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight
@@ -207,7 +212,7 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero
 #print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq
 
-#print axioms RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq
+#print axioms RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq
 
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq
 #print axioms RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow

@@ -196,7 +196,7 @@ normalization and `R(3,3) = 6` are not used, and the same equation identifies
 the exceptional order rather than only excluding the others: at order six every
 four-set carries weight `-1`, so that matrix has no aligned four-set.  The
 declaration is
-`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_walkTerm_eq`; the
+`RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq`; the
 gate audits fifty-one terminals with no compiled-evaluation axiom.  The prose
 argument and an exact proposed replacement for the manuscript paragraph are in
 `notes/2026-08-06-c815-exchange-rigidity-simplification.md`, queued for C816,
@@ -265,6 +265,28 @@ eighty-three terminals with no compiled-evaluation axiom, all three paper-local
 replays and the release gate pass, and the verification README no longer claims
 that no eigenvalue statement is formalized.  Report:
 `notes/2026-08-06-c815-half-cut-transport.md`.
+
+A cold referee reviewed the whole 2026-08-06 arc and accepted it, with repairs
+that were all on the documentation side; every one is now applied.  It read the
+Lean statements against the prose, recomputed each load-bearing constant, and
+replayed the mechanism numerically on the order-ten Paley conference matrix
+across all balanced halves, finding the arithmetic and the trust boundary
+sound.  The repairs: the OPER-3 row of `trust_manifest.json` was stale and now
+names the formalized route; the verification README now says that the Ramsey
+exclusion is a boundary of the manuscript's *printed* proof rather than a gap in
+the formal conclusion, since the Lean closes the same statement by the swap
+descent and the fourth-trace pin; two docstrings that let the second moment's
+variation stand for the spectrum's now say which spectrum readings follow and
+which statement is proved; the artifact now records that `4 ≤ d` is what the
+swap descent needs and that existence at a given order is a separate question;
+and the two public names that embedded the private `walkTerm` are renamed to
+`sum_closedFourWalkWeight_eq_add_sum_powersetCard` and
+`not_forall_sum_closedFourWalkWeight_eq`.  The review also corrected this lane's
+reading of the missing witness: the *existence* of a pair of halves with
+different second moments is a short corollary of the aligned-count theorem, and
+only a *named* pair would need a finite computation; the manuscript needs
+neither.  Review and repair status:
+`notes/2026-08-07-c815-oper3-referee-review.md`.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic

@@ -45,16 +45,16 @@
       "sha256": "ebf26a108827caaa57889f8fc3517482f6eee2c774fa00cf8043100510152d88"
     },
     {
-      "bytes": 10026,
+      "bytes": 10350,
       "module": "RelativeConicArcs.BalancedExchangeRigidity",
       "path": "RelativeConicArcs/BalancedExchangeRigidity.lean",
-      "sha256": "8e6cf0300a51951b683fffc0c897ddcf75936ea615526c6c1c23add055b32269"
+      "sha256": "abb5e89dec25346811e6b4d7e19b3a4a41ae9121e51e0db198eb717f0a62ea8c"
     },
     {
-      "bytes": 60714,
+      "bytes": 60908,
       "module": "RelativeConicArcs.BalancedExchangeSpectrum",
       "path": "RelativeConicArcs/BalancedExchangeSpectrum.lean",
-      "sha256": "3758fc1686e12b2145d950a71ac7130e3fa957088d4427cd448e5e8f96c38abf"
+      "sha256": "f03bec34fa78f70a4fab689876a18dcaf6accaf42574364541d3b97cd15668b6"
     },
     {
       "bytes": 17856,
@@ -135,10 +135,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 27726,
+      "bytes": 28470,
       "module": "RelativeConicArcs.ConferenceCutBlocks",
       "path": "RelativeConicArcs/ConferenceCutBlocks.lean",
-      "sha256": "00a67ffe8e9eb00e3dded5153cd91d830fe025ab38b8245469fcc13bed9f7526"
+      "sha256": "110983279868018fa0ecfa6c691372585de1b5b762271014bfba73f412219176"
     },
     {
       "bytes": 1716,
@@ -147,10 +147,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 17185,
+      "bytes": 17564,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "02432f539bb4ed690a16b157a1fb6b0a75bc830c24485868d192c19a4bcbc24c"
+      "sha256": "fc5343e2f0a5f6791eaac9cdbe459da871b45440f694eae7e29a04cfd9dbee46"
     },
     {
       "bytes": 5731,

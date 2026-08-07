@@ -25,7 +25,7 @@ identification, so the dependence on the cut is now stated about the cut.
   matrices, so `C * C = q • 1` is carried into cut coordinates unchanged.
 - `trace_pow_four_principalBlock` — the fourth trace of the principal block is
   the fourfold sum over `Y` of `C i j * C j k * C k l * C l i`, the quantity
-  whose dependence on the half `not_forall_sum_walkTerm_eq` settles.
+  whose dependence on the half `not_forall_sum_closedFourWalkWeight_eq` settles.
 - `closedFourWalkSum_map` and `alignedFourSetCount_principalBlock` — the closed
   four-walk weight of a four-set is unchanged by relabelling along an injection,
   so the aligned four-sets of the principal block are the images of the aligned
@@ -114,11 +114,17 @@ argument does not weaken the arithmetic already in place.
   trace and the aligned count hold for an arbitrary subset of the labels, which
   is why the moment theorem takes `Fintype.card n = 2 * Y.card` as a hypothesis
   rather than building it into the definitions.
-- **Open, and recorded rather than closed.**  The cut-dependence theorem is a
-  non-constancy statement proved by contradiction through the constant-weight
-  descent, so it exhibits no pair of halves with different second moments.  A
-  witness would need a construction rather than a counting argument, and the
-  manuscript asks for none.
+- **Open, and recorded rather than closed; sharpened by the 2026-08-07 review.**
+  The cut-dependence theorem is a non-constancy statement proved by
+  contradiction through the constant-weight descent, so it names no pair of
+  halves with different second moments.  The claim made here that a witness
+  would need a construction rather than a counting argument is too strong: the
+  *existence* of such a pair is a two-line classical corollary, obtained by
+  instantiating the aligned-count theorem at a fixed half and negating the
+  quantifier.  What the proof does not give is a *named* pair, and at order ten
+  even that is a bounded finite check on one explicit matrix.  The manuscript
+  needs only the negative form, so neither was added.  See
+  `notes/2026-08-07-c815-oper3-referee-review.md`.
 - **Open, unchanged, and outside the row.**  Whether `q` is ever an eigenvalue
   of the square of a principal block on a balanced half — equivalently whether
   the exchange operator can be singular — remains unsettled.  The positive
