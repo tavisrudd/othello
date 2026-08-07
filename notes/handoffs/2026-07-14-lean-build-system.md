@@ -152,6 +152,18 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
    its release gate replayed there and its export manifest verified, and the order-eleven package
    source audit reports zero unexplained drift. Open: the order-eleven certificate package is ahead
    of its public `main` and awaits the author's push.
+   The second pass's complete repair ports half is decided but not executed
+   ([`../2026-08-06-c864-complete-repair-ports-editorial-determination.md`](../2026-08-06-c864-complete-repair-ports-editorial-determination.md)):
+   of its ten internal working documents, the four current ledgers and a rewritten README ship,
+   while the adoption map, fix plan, section map, superseded proof ledger and adversarial novelty
+   review stay private, moved out of the export root rather than excluded in the registry. Its
+   bibliography and rebuilt PDF are repaired. Neither its release chain nor its mirror ran, and
+   neither should yet: the paper has no `verification/` directory to run a chain from, and its lane
+   handoff, the papers index and its own control documents all record publication as gated, with
+   four of twelve adopted theorem slots unadmitted. Its registry disposition is `active`, the only
+   reason materialization would be permitted; re-marking it `gated` is the one immediate item and
+   awaits the author, as does its destination, unsettled between the `math-papers` repository name
+   and the `complete-ports` name both its README and its lane handoff record.
    The earlier phases resumed at step 22, the first paper-side step
    (`../2026-08-06-c864-finitegeom-standalone-build-gate.md` and
    `../2026-08-06-c864-order-eleven-package-reseal.md`): all twelve areas are registered,
@@ -340,7 +352,8 @@ standalone build gate [`../2026-08-06-c864-finitegeom-standalone-build-gate.md`]
 projective-cap repair [`../2026-08-06-c864-projectivecap-standalone-repair.md`](../2026-08-06-c864-projectivecap-standalone-repair.md);
 order-eleven package reseal [`../2026-08-06-c864-order-eleven-package-reseal.md`](../2026-08-06-c864-order-eleven-package-reseal.md);
 phase 5 published papers [`../2026-08-06-c864-phase-five-published-papers.md`](../2026-08-06-c864-phase-five-published-papers.md);
-mirror sync and phase 6 [`../2026-08-06-c864-mirror-sync-and-phase-six.md`](../2026-08-06-c864-mirror-sync-and-phase-six.md).
+mirror sync and phase 6 [`../2026-08-06-c864-mirror-sync-and-phase-six.md`](../2026-08-06-c864-mirror-sync-and-phase-six.md);
+complete repair ports editorial determination [`../2026-08-06-c864-complete-repair-ports-editorial-determination.md`](../2026-08-06-c864-complete-repair-ports-editorial-determination.md).
 
 **Paper I v2** — audit and plan
 [`../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md`](../2026-07-29-c698-c702-paper-i-v2-lean-audit-plan.md);
