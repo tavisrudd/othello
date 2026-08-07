@@ -1,0 +1,222 @@
+{
+  "collinear_triples_inside_supports": 0,
+  "conic": "y^2 - x z",
+  "criterion_failures": 0,
+  "extension_classes": [
+    {
+      "count": 2730,
+      "kind": "collinear",
+      "pool_is_rest_of_line": true,
+      "pool_size": 4
+    },
+    {
+      "count": 1456,
+      "kind": "non-collinear",
+      "pool_is_rest_of_line": true,
+      "pool_size": 0
+    }
+  ],
+  "field": 13,
+  "internal_points": 78,
+  "internal_points_per_passant": [
+    7
+  ],
+  "join_graph_degrees": [
+    42
+  ],
+  "minimum_supports": 364,
+  "pairwise_joined_triples": 11830,
+  "passant_lines": 78,
+  "quadruple_search": {
+    "collinear_triples_per_solution": {
+      "4": 480
+    },
+    "gram_ranks": {
+      "2": 480
+    },
+    "patterns_searched": 46656,
+    "solutions": 480,
+    "trace_values": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      10
+    ]
+  },
+  "rho_join_counts": {
+    "0/False": 273,
+    "1/False": 546,
+    "10/True": 546,
+    "12/True": 546,
+    "3/False": 546,
+    "9/True": 546
+  },
+  "rho_value_counts": {
+    "0": 273,
+    "1": 546,
+    "10": 546,
+    "12": 546,
+    "3": 546,
+    "9": 546
+  },
+  "schema": "c834-admissible-quadruple-gram/1",
+  "toric_supports_from_bitangent_pencil": 273,
+  "triple_classes": [
+    {
+      "collinear": true,
+      "concurrence": 0,
+      "count": 546,
+      "pi": 2,
+      "rho_profile": [
+        9,
+        9,
+        10
+      ]
+    },
+    {
+      "collinear": true,
+      "concurrence": 0,
+      "count": 1092,
+      "pi": 12,
+      "rho_profile": [
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "collinear": true,
+      "concurrence": 0,
+      "count": 546,
+      "pi": 10,
+      "rho_profile": [
+        9,
+        12,
+        12
+      ]
+    },
+    {
+      "collinear": true,
+      "concurrence": 0,
+      "count": 546,
+      "pi": 11,
+      "rho_profile": [
+        10,
+        10,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 2,
+      "count": 364,
+      "pi": 1,
+      "rho_profile": [
+        9,
+        9,
+        9
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 2,
+      "count": 1092,
+      "pi": 6,
+      "rho_profile": [
+        9,
+        9,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 5,
+      "count": 1092,
+      "pi": 7,
+      "rho_profile": [
+        9,
+        9,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 2,
+      "count": 1092,
+      "pi": 9,
+      "rho_profile": [
+        9,
+        10,
+        10
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 2,
+      "count": 2184,
+      "pi": 1,
+      "rho_profile": [
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 1,
+      "count": 1092,
+      "pi": 3,
+      "rho_profile": [
+        9,
+        12,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 4,
+      "count": 364,
+      "pi": 5,
+      "rho_profile": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 0,
+      "count": 364,
+      "pi": 8,
+      "rho_profile": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 0,
+      "count": 1092,
+      "pi": 7,
+      "rho_profile": [
+        10,
+        12,
+        12
+      ]
+    },
+    {
+      "collinear": false,
+      "concurrence": 2,
+      "count": 364,
+      "pi": 5,
+      "rho_profile": [
+        12,
+        12,
+        12
+      ]
+    }
+  ]
+}
