@@ -12,7 +12,32 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-06)
+## Resume here (2026-08-07)
+
+The row-uniqueness layer now has a structural proof, and the two open items of the 2026-08-06 mystery
+ledger are closed by one theorem: four internal points that are pairwise passant-joined and all four
+of whose triples have zero concurrence are collinear. Both halves — collinear admissible triples
+extend by exactly the four remaining points of their passant, non-collinear ones do not extend —
+follow, as does row uniqueness itself. The mechanism is that internal points are trace-zero
+two-by-two matrices in a three-dimensional quadratic space, so four of them satisfy one Gram
+relation; the elliptic invariant is \(\rho = 4B^2/(\Delta\Delta)\), the missing triple invariant is
+\(\pi = -8 B_{12}B_{13}B_{23}/(\Delta_1\Delta_2\Delta_3)\), collinearity of a joined triple is
+\(\sum\rho+\pi = 4\), and admissibility is a fourteen-row table in \((\rho\text{-profile},\pi)\).
+Report and evidence bundle: `notes/2026-08-07-c834-row-uniqueness-structural-proof.md`,
+`notes/2026-08-07-c834-admissible-quadruple-gram.py`, `.json`.
+
+**No Lean file changed in that round.** The implementation that consumes it is stage 5 item 10's
+replacement and is scoped there; it replaces the fifteen-module passant-clique layer under
+`PassantCodeQ13/MinimumWords/RowUniqueness/` by three pieces: the invariant criterion reduced to
+three representative joined pairs through the stage 2 pair transporter (at most 126 triples, each a
+lookup in the displayed supports); the quadruple exhaustion, a decidable statement over `ZMod 13`
+with no geometric data; and the arc statement, structural for the 273 conic supports and one orbit
+representative for the 91 octahedral ones. It needs one new symbolic input, invariance of \(\pi\)
+under the symmetric-square action, by the same degree-zero bi-homogeneity argument that
+`SymmetricSquareInvariance` already uses for \(\rho\). Replacing a green, kernel-closed layer is an
+architecture change and awaits an explicit go-ahead.
+
+## Superseded resume note (2026-08-06)
 
 The row-uniqueness transport is closed, which completes stage 5 item 10. Its nine compiled
 evaluations — seven residue shards, the geometric rows' zero triple concurrence, and the indexed
