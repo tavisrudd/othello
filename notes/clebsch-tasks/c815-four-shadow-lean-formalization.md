@@ -78,6 +78,19 @@ balanced-half sums agree are in
 row is the spectral half and the assembly of the exchange-rigidity
 contradiction, whose inputs are now all formalized.
 
+The spectral half is scoped in
+`notes/2026-08-06-c815-exchange-spectrum-scope.md`. It needs no new task ID: the
+compression to the positive eigenspace is a two-sided characteristic-polynomial
+argument rather than a singular-value decomposition, the two exchange moments do
+not pass through the spectrum at all, and `√q` enters only as a hypothesis
+`s * s = q`, so the load-bearing statements stay ring-general in the style of
+`ConferenceCutBlocks`. One new module of roughly the size of the fourth-trace
+round covers it, with the eigenvalue phrasing and the existence of the isometry
+as the only analytic items. One reading question for the author is recorded
+there: whether the manuscript's "unique nontrivial realized order" sentence
+ranges only over the small orders, which is cheap, or over all orders, which
+pulls in the classical order-`≡ 2 (mod 4)` theorem.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.

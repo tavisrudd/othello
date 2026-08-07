@@ -204,7 +204,14 @@ which owns manuscript promotion.
 
 What remains in the row is every eigenvalue and singular-value statement, and
 with it the passage from the fourth trace of a principal block to the second
-exchange moment.
+exchange moment.  That remainder is now scoped in
+`notes/2026-08-06-c815-exchange-spectrum-scope.md` and stays in C815 rather than
+taking a new task ID.  The scope removes the analytic content: the compression to
+the positive eigenspace is a two-sided characteristic-polynomial argument, the
+two exchange moments never pass through the spectrum, and the square root of the
+order enters only as a hypothesis `s * s = q`, so the load-bearing statements
+stay ring-general.  One new module carries it, with the eigenvalue phrasing and
+the existence of the isometry as the only analytic items.
 
 Two further clauses of gap class B are closed.  The Segre equations of row OPER-2 are
 proved directly: the six signed translates of the conference triangle cubic
