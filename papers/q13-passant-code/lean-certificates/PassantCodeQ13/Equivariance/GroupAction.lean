@@ -270,7 +270,8 @@ theorem orbitMap_projectiveCompose (left right : ProjectiveElement) (point : Int
     rw [determinant_matrixProduct]
     exact mul_ne_zero_field _ _ (determinant_ne_zero_of_mem left.2)
       (determinant_ne_zero_of_mem right.2)
-  show act left.1 (act right.1 point.1) = act (normalizeMatrix (matrixProduct left.1 right.1)) point.1
+  show act left.1 (act right.1 point.1)
+    = act (normalizeMatrix (matrixProduct left.1 right.1)) point.1
   rw [act_normalizeMatrix product_invertible]
   exact act_act (determinant_ne_zero_of_mem right.2) nondegenerate
 
