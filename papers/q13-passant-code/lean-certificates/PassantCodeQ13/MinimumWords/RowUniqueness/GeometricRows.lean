@@ -1,5 +1,5 @@
 import PassantCodeQ13.MinimumWords.RowUniqueness.ConcurrenceTransport
-import PassantCodeQ13.MinimumWords.RowUniqueness.IndexCertificate
+import PassantCodeQ13.MinimumWords.RowUniqueness.PassantRowMasks
 import PassantCodeQ13.WeightTen.PencilTransport
 
 /-!

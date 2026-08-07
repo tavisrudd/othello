@@ -10,9 +10,8 @@ hypergraph of the four orbits, and fixes the dictionary between the two presenta
 set of internal points: the displayed order lists the points of a set by increasing index, and the
 displayed index of a point is its position in that order.
 
-Two executable tests on the semantic type are defined here and identified with their semantic
-meanings elsewhere: the passant-join test of two points, and the concurrence count of a triple in
-the encoded minimum-word family.  The property `GeometricRowsHaveZeroTripleConcurrence` names the
+One executable test on the semantic type is defined here and identified with its semantic meaning
+elsewhere: the concurrence count of a triple in the encoded minimum-word family.  The property `GeometricRowsHaveZeroTripleConcurrence` names the
 statement that no decoded minimum-word support contains three points of a passant row.
 -/
 
@@ -99,10 +98,6 @@ theorem internalPointIndex_internalPointAt (index : Fin 78) :
   have indexed := List.get_idxOf internalPointOrder_nodup listIndex
   rw [point_eq] at indexed
   simpa [listIndex, internalPointIndex] using indexed
-
-/-- Executable passant-join test through displayed point indices. -/
-def indexedPassantJoin (first second : InternalPoint) : Bool :=
-  hasPassantJoin (internalPointIndex first) (internalPointIndex second)
 
 /-- Executable minimum-layer triple concurrence through displayed point indices. -/
 def indexedTripleConcurrence (first second third : InternalPoint) : Nat :=

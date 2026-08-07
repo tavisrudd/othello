@@ -164,11 +164,10 @@ PassantCodeQ13/AssociationTransport/OrbitMasks/{Symmetric,DihedralA,DihedralB,Di
     one shard per minimum-word orbit, identifying its column masks
 PassantCodeQ13/MinimumWords/Concurrence/{Row,Pair}Block{One,Two,Three}.lean
     the concurrence table split into blocks of first points
-PassantCodeQ13/MinimumWords/RowUniqueness/Residue{Zero..Six}.lean
-    one shard per residue of the row-extension argument
 PassantCodeQ13/MinimumWords/RowUniqueness/
-    {Base,IndexCertificate,GeometricRows,PairTransport,ConcurrenceTransport,
-     Transport,DecodeInjective,Aggregate}.lean
+    {Base,PassantRowMasks,GeometricRows,ConcurrenceTransport,PolarGram,
+     PassantJoinInvariant,QuadrupleGram,NormalizedTrace,BitangentSupport,
+     BitangentWitness,Transport,DecodeInjective}.lean
 PassantCodeQ13/WeightTen/IsolatedProfile/Fibre{0..6}.lean
 PassantCodeQ13/WeightTen/CycleProfile/Residue{0..6}.lean
     one shard per pencil fibre and per cycle residue
