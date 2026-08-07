@@ -58,6 +58,16 @@ suffice: **the minimum hitting set is 30.** A maximum unevenly crossing family
 is the five splits through a fixed triple, and the corresponding maximum
 mask-free set has \(5\cdot 2 + 30 = 40\) tests, which is the 40 above.
 
+**The 56 optimal seven-point families are the 56 spreads.** The predecessor
+report found exactly 56 optimal separating families at seven points, in two
+orbits of 21 and 35, and had no reason for either number. There are exactly 56
+maximum unevenly crossing families here, and under the stabilizer of the eighth
+point — the seven-point symmetry group — they fall into orbits of 21 and 35. So
+the optimal seven-point families are the spreads of \(\mathrm{PG}(3,2)\), of
+which there are 56; the two orbits are what one \(S_8\)-orbit looks like after a
+point is fixed, one of them the five splits through a fixed triple and the other
+the five four-sets inside a fixed five-point subset.
+
 **Seven and eight points carry one and the same constraint family.** Adjoining
 an eighth point to the complement identifies the 35 four-subsets of a seven-set
 with the 35 splits, and under that identification the 315 weight-two masks of
@@ -118,6 +128,10 @@ it.
   are the same 315 constraints; the eight-point weight-four masks are the
   seven-point weight-two masks lifted along the split correspondence. Before
   this the coincidence of the counts was unremarked.
+- **Settled: the 56 optimal seven-point families and their orbit sizes 21 and
+  35.** They are the spreads of \(\mathrm{PG}(3,2)\), counted and split by the
+  point stabilizer; the predecessor reported the three numbers as measurements
+  with no structure attached.
 - **Settled: whether the predecessor's 40 was optimal.** It was; the search that
   found it was incomplete, and the exact value is 40.
 - **Open: the eight-point gap between 30 and 44.** The mask route cannot close
@@ -130,7 +144,12 @@ it.
   to have a seven-point shadow. If the minimum-weight differences at general
   \(n\) have a comparable description, the hitting number of that family is the
   most direct route to a proved lower bound growing faster than the entropy
-  bound; if they do not, the entropy bound remains the only general one. The
+  bound; if they do not, the entropy bound remains the only general one. A third
+  possibility, untested, is that minimum-weight differences are always inherited
+  from a seven-point subconfiguration, in which case the hitting-set route is
+  capped at 30 for every \(n\) and the polynomial method — an alignment
+  indicator is a product of two \(\mathbf F_2\)-linear conditions, hence a
+  degree-two function of the two-graph — is the alternative worth trying. The
   nine-point enumeration the question needs — \(2^{28}\) two-graphs, 126
   tests — is beyond the current program's representation, which caps a test
   vector at 128 bits and a class index at 32.
@@ -167,12 +186,12 @@ Both integer programs solve in under a second. All of it is deterministic.
 |------|-------|--------|
 | `2026-08-07-c880-alignment-separation.rs` | 62332 | 946583c8841e54985a5d57d6c632bedc885c6e0d57e0fa734d0b78ad9f38906d |
 | `2026-08-07-c880-mask-ilp.py` | 7142 | 9ace010109cba3d15d9cee1968ae4e7805cee807ece161d3cfb5fe14630efd3d |
-| `2026-08-07-c880-mask-spread-structure.py` | 5870 | afc498a64d7b24a85369b2b2b01d1ade61af48f11bb714d98b7b02820bff6c90 |
+| `2026-08-07-c880-mask-spread-structure.py` | 7132 | 8845762d6641fde6e4d7356247fcf56f2b9f42562feb14570c36edb7da4fdf40 |
 | `2026-08-07-c880-mask-certificate7.json` | 45579 | ff2532a54111c82ae164817c008d87e00f0cb9fea0d261effa4c8c76f6003f2d |
 | `2026-08-07-c880-mask-certificate8.json` | 59395 | a53f28799f4d57278f1766acb4b30c143c4998242cb69edee1f1c768068a65d1 |
 | `2026-08-07-c880-mask-ilp7.json` | 528 | 4940035b943f69b74eda757868648145dddedbde897eeb7def646be69e61e3f8 |
 | `2026-08-07-c880-mask-ilp8.json` | 538 | 35ae4f65604dd056c0360db03d191b4ab8e6a0693cb289c942d9d2aed1177b33 |
-| `2026-08-07-c880-mask-structure.json` | 425 | d78e509afd2ceb4fa99e246ab528c8e60fc88f4a46485ebf5e442965dcf47df4 |
+| `2026-08-07-c880-mask-structure.json` | 516 | 7d794ae1727084efc916ac5e7ca698f33b4f99337c8506b0cc56a1e76e9d77f9 |
 
 The Rust generator gained the `masks` mode for this report; no earlier mode
 changed, so every claim of the predecessor report replays against these bytes,

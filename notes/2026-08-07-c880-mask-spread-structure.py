@@ -114,6 +114,43 @@ def main():
 
     grow([], sp)
     alpha = len(best)
+
+    # every maximum family, to be compared with the 56 optimal seven-point
+    # separating families of the predecessor report
+    maxima = []
+
+    def collect(chosen, cand):
+        if len(chosen) == alpha:
+            maxima.append(frozenset(chosen))
+            return
+        if len(chosen) + len(cand) < alpha:
+            return
+        for i, s in enumerate(cand):
+            collect(chosen + [s], [t for t in cand[i + 1:] if len(s & t) != 2])
+
+    collect([], sp)
+
+    # orbits of the maximum families under the stabiliser of the eighth point,
+    # which is the seven-point symmetry group of the predecessor report
+    def act(perm, family):
+        out = []
+        for s in family:
+            t = frozenset(perm[p] for p in s)
+            out.append(t if 0 in t else all8 - t)
+        return frozenset(out)
+
+    seen, orbits = set(), []
+    perms = [
+        dict(zip(range(1, 8), p)) | {0: 0}
+        for p in itertools.permutations(range(1, 8))
+    ]
+    for f in maxima:
+        if f in seen:
+            continue
+        orbit = {act(p, f) for p in perms}
+        seen |= orbit
+        orbits.append(len(orbit))
+    orbits.sort()
     # a maximum family is a spread: its 5 splits use each point evenly and are
     # pairwise unevenly crossing
     spread_ok = all(len(a & b) != 2 for a, b in itertools.combinations(best, 2))
@@ -127,6 +164,8 @@ def main():
         "eight_point_masks_are_split_pairs": ok_masks8,
         "seven_point_masks_lift_to_the_same_family": ok_masks7,
         "max_unevenly_crossing_family": alpha,
+        "maximum_families": len(maxima),
+        "maximum_family_orbit_sizes_under_the_point_stabiliser": orbits,
         "max_family_is_pairwise_uneven": spread_ok,
         "max_family": [sorted(s) for s in best],
         "minimum_hitting_set_from_structure": len(sp) - alpha,
