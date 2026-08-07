@@ -19,8 +19,10 @@ converse half — that the four remaining points of a passant really are admissi
 that no minimum support contains three collinear points, proved below.
 
 The proof replaces the layer's passant-clique search by two rational invariants of a triple of
-internal points and one exhaustion over six field elements. It is structural in the sense the ledger
-asked for: no step ranges over the 78 internal points, the 364 supports, or subsets of either.
+internal points, two facts about them proved from the ambient quadratic form, and one exhaustion
+over six field elements. No step of the quadruple theorem ranges over the 78 internal points, the
+364 supports, or subsets of either; the only place a support family is still enumerated is the
+converse half, and there only over one orbit representative.
 
 ## The dictionary
 
@@ -76,7 +78,27 @@ under \(B\), a direct expansion gives
 \]
 
 so three pairwise-joined internal points are **collinear exactly when \(\sum\rho + \pi = 4\)**, the
-Gram determinant vanishing precisely when the three coordinate vectors are dependent.
+Gram determinant vanishing precisely when the three coordinate vectors are dependent. Write
+\(D = 4 - \sum\rho - \pi\) for that normalized determinant.
+
+### The discriminant law
+
+\(D\) is not free. Three independent lifts span the whole three-dimensional space, so the form they
+carry is the ambient form itself; over a finite field a nondegenerate ternary form is determined by
+its discriminant, and comparing the two expressions for it pins \(D\) exactly. Concretely
+\(\det G = \det M \cdot (\det V)^2\) for the coordinate matrix \(V\) of the three points, so
+\(\chi(\det G) = \chi(\det M) = \chi(-1/4) = 1\); and \(\det G = \Delta_1\Delta_2\Delta_3 D/4\) with
+all three \(\Delta_i\) nonsquare. Hence:
+
+> **Discriminant law.** For three internal points, \(D = 0\) when they are collinear and \(D\) is a
+> nonsquare otherwise. It is never a nonzero square.
+
+This is the missing constraint on the invariants. It says which pairs \((\rho\text{ profile},\pi)\)
+can occur at all, and it is what makes the classification table below finite in a predictable way
+rather than a list of observations: of the sixteen invariant patterns with \(D \neq 0\), the six with
+\(D\) a square are realized by no triple of internal points, and the ten with \(D\) a nonsquare are
+each realized. Among other things it explains why the profile \((10,12,12)\) forces \(\pi = 7\): the
+other square root \(\pi = 6\) gives \(D = 3\), a square.
 
 ## Minimum supports contain no three collinear points
 
@@ -167,11 +189,14 @@ that the chord is a secant and the second that no tangent of the bitangent conic
 predicate reproduces the conic-support count of every one of the 9100 non-collinear pairwise-joined
 triples.
 
-It does not, however, close the classification on its own. Two classes, \((9,9,9)\) with \(\pi = 1\)
-and \((9,9,12)\) with \(\pi = 6\), lie in no conic support at all and are inadmissible only through
-the octahedral family. Discarding those two and the invariant patterns that no triple realizes is
-enough to break the quadruple argument, so the classification table, not the witness formula alone,
-is what the theorem rests on.
+Two classes, \((9,9,9)\) with \(\pi = 1\) and \((9,9,12)\) with \(\pi = 6\), lie in no conic support
+at all; they are inadmissible only through the octahedral family, and the witness formula says
+nothing about them. It does not need to. Together with the discriminant law the formula is already
+enough for the quadruple theorem, because the patterns those two classes would combine with to
+produce a non-collinear quadruple all have \(D\) a square and so are excluded before the witness
+formula is consulted. The classification table is therefore descriptive, not load-bearing: the proof
+below uses only the discriminant law and the witness formula, and never the octahedral family, the
+group action, or the 364 supports.
 
 ## The quadruple theorem
 
@@ -180,9 +205,10 @@ Normalize the four lifts to a common determinant and let \(g_{ij}\) be the six n
 Three facts constrain them.
 
 1. \(g_{ij}^2 = \rho_{ij} \in \{9,10,12\}\), so each \(g_{ij}\) lies in \(\{3,5,6,7,8,10\}\).
-2. Each triple is admissible, so for each of the four triples \((g_{ij},g_{ik},g_{jk})\) either the
-   three-by-three Gram determinant \(8 - 2\sum g^2 - 2\,g_{ij}g_{ik}g_{jk}\) vanishes, or the three
-   squares are \((10,10,10)\) or \((10,12,12)\).
+2. Each triple is admissible, so for each of the four triples \((g_{ij},g_{ik},g_{jk})\) either
+   \(D\) vanishes, or \(D\) is a nonsquare by the discriminant law and none of that triple's four
+   sign patterns satisfies the witness conditions, since a witness would exhibit a minimum support
+   containing the triple.
 3. The four lifts are four vectors in a three-dimensional space, so the four-by-four Gram matrix with
    diagonal \(2\) and off-diagonal \(-g_{ij}\) is singular.
 
@@ -215,23 +241,24 @@ The current layer decides row uniqueness by a passant-clique search over increas
 below 78, about 8500 extension nodes, split across seven residue modules and one declaration per
 first index. The proof above replaces it with three pieces, none of which ranges over the plane:
 
-1. **The invariant criterion**, needed only in its profile form: an admissible non-collinear triple
-   has \(\rho\) profile \((10,10,10)\) or \((10,12,12)\). \(\rho\) is rational in the displayed
-   coordinates and its invariance under the group action is already proved in the package, as is
-   invariance of the support family. Transitivity on ordered joined pairs — the pair transporter
-   generated for stage 2 — reduces the criterion to three representative pairs and their common
-   joined neighbours, at most 126 triples, each resolved by a lookup in the 364 displayed supports.
-   This replaces the whole clique search, and \(\pi\) is not needed for it.
-2. **The quadruple exhaustion.** A decidable statement over `ZMod 13` with 46656 patterns and no
-   geometric data; with the first triple's condition used as a filter, and the per-point sign
-   normalization fixing three of the six traces, a few hundred cases remain. This is the one new
-   finite check and it is far below the package's measured per-module ceiling.
-3. **The arc statement.** No support meets a passant in more than two points: structural for the 273
-   conic supports, one orbit representative for the 91 octahedral ones.
+1. **The discriminant law.** \(\chi(D) = -1\) for three internal points in general position, from
+   \(\det G = \det M (\det V)^2\) and the three nonsquare values \(\Delta_i\). One determinant
+   identity in the displayed coordinates; no search.
+2. **The bitangent support lemma.** For a secant \(L\) and a nonsquare \(\nu\) with
+   \(\chi(\nu\operatorname{disc}(L)-1) = -1\), the twelve points of \(C - \nu L^2\) off the chord are
+   internal and form the support of a weight-twelve word. Proved above from a line meeting a conic
+   twice, the parity of a passant against it, and the adjugate identity for the tangents; no search.
+3. **The quadruple exhaustion.** Landed as
+   `PassantCodeQ13.MinimumWords.RowUniqueness.QuadrupleGram`: residue arithmetic modulo thirteen with
+   no geometric data, six declarations by kernel reduction, five seconds at a peak of 0.67 GB.
 
-The equivariance transport the previous ledger asked for — that the group carries passant rows to
-passant rows — is still the enabling input for item 1, and it is now worth more than the 78-fold
-reduction it was scoped for: it is what removes the search rather than shrinking it.
+The invariant criterion and the group action drop out entirely. So does the arc statement, for the
+quadruple theorem; it is still needed for the converse half, that the four remaining points of a
+passant really do extend an admissible triple, and there it is structural for the 273 conic supports
+and one orbit representative for the 91 octahedral ones.
+
+The equivariance transport the previous ledger asked for is therefore not needed here at all. It
+remains wanted for other leaves of the package, but the row-uniqueness layer no longer waits on it.
 
 ## Evidence
 
@@ -244,8 +271,8 @@ python3 notes/2026-08-07-c834-admissible-quadruple-gram.py --check  # verifies t
 
 | artifact | bytes | sha256 |
 |---|---:|---|
-| `notes/2026-08-07-c834-admissible-quadruple-gram.py` | 19358 | `04808f5386585d677e8f22303bdd05df0cec3039c34fb10ec4f0380bf4e8d16f` |
-| `notes/2026-08-07-c834-admissible-quadruple-gram.json` | 3863 | `992d196deb9f465bcccaa3c231becc9250f069e7caf462f97bb697bc142a0996` |
+| `notes/2026-08-07-c834-admissible-quadruple-gram.py` | 20443 | `b758d7f9b861ec6e143ca226b84a06cca8a448522cb972459d447f0ab424e801` |
+| `notes/2026-08-07-c834-admissible-quadruple-gram.json` | 3943 | `f6fc1e5a35e380920d91131febbdf3b9a00a1dd421241c151b9e308fdc50ce92` |
 
 The script builds the plane from the conic \(y^2 - xz\) with no input beyond the field, enumerates
 the 364 minimum supports by a parity-driven search that never forms twelve-subsets, and independently
@@ -253,11 +280,13 @@ rebuilds the 273 conic supports from the bitangent-pencil construction of this r
 that they are among them. It then certifies: the incidence numbers; that no support contains three
 collinear points; that \(\rho\) separates the six scheme classes and that the passant-join relation
 is \(\rho \in \{9,10,12\}\); that collinearity of a joined triple is equivalent to
-\(\sum\rho+\pi = 4\), asserted for every one of the 11830 joined triples; the fourteen-row invariant
-table above with zero criterion failures, in both the full and the profile-only form; that the
-closed \((F,D)\) predicate reproduces the conic-support count of every non-collinear joined triple;
-the \(2730/1456\) extension split with the collinear pools equal to the rest of the line; and the
-quadruple exhaustion, run with the profile-only condition.
+\(\sum\rho+\pi = 4\), asserted for every one of the 11830 joined triples; the discriminant law, that
+\(D\) vanishes on all 2730 collinear joined triples and is a nonsquare on all 9100 others; the
+fourteen-row invariant table above with zero criterion failures, in both the full and the
+profile-only form; that the closed \((F,D)\) predicate reproduces the conic-support count of every
+non-collinear joined triple; the \(2730/1456\) extension split with the collinear pools equal to the
+rest of the line; and the quadruple exhaustion, run with the structural condition of the theorem —
+collinear, or \(D\) a nonsquare with no witness among the triple's four sign patterns.
 
 What it does not certify: the Lean statements, which are unchanged by this round; and the
 octahedral supports' arc property beyond the direct check over the displayed family, which is a
@@ -287,15 +316,23 @@ construction of three quarters of the family.
   statement is that the product is parabolic, of order thirteen, which cannot happen because every
   involution normalizing a Sylow-13 subgroup lies in \(\operatorname{PSL}(2,13)\) and so is external.
   This is not recorded anywhere in the package and is cheap to add alongside the criterion.
-* **Open: which invariant patterns are realized.** Five patterns with \(D \neq 0\) — profiles
-  \((10,10,12)\) with \(\pi=2\), \((9,9,10)\) with \(\pi=11\), \((10,12,12)\) with \(\pi=6\),
-  \((12,12,12)\) with \(\pi=8\), \((9,9,9)\) with \(\pi=12\) — occur for no triple of internal
-  points. Allowing them back breaks the quadruple argument even when every witnessed class is
-  excluded, so they carry real weight, and no reason for their absence is known. This is why the
-  formal route goes through the classification table rather than through the witness formula alone.
-* **Open: the profile \((10,12,12)\) forces \(\pi = 7\), never \(\pi = 6\).** Both values are square
-  roots of \(\rho_{12}\rho_{13}\rho_{23}\), and only one is realized. The same one-sidedness does not
-  happen for \((10,10,10)\) or \((9,9,12)\), where both roots occur and separate the concurrence.
-  This is a genuine gap in the invariant story: it says the pair \((\text{profile},\pi)\) is not a
-  free parameter, and the constraint that cuts it down is not identified. It does not affect any
-  statement above, which uses only the necessary direction.
+* **Settled: which invariant patterns are realized.** Of the sixteen patterns with \(D \neq 0\), the
+  six with \(D\) a square — profiles \((10,10,12)\) with \(\pi=2\), \((9,9,10)\) with \(\pi=11\),
+  \((9,10,10)\) with \(\pi=4\), \((10,12,12)\) with \(\pi=6\), \((12,12,12)\) with \(\pi=8\), and
+  \((9,9,9)\) with \(\pi=12\) — occur for no triple of internal points, and the ten with \(D\) a
+  nonsquare all occur. The discriminant law is the reason, and it is exactly what lets the proof drop
+  the classification table.
+* **Settled: the profile \((10,12,12)\) forces \(\pi = 7\), never \(\pi = 6\).** Both values are square
+  roots of \(\rho_{12}\rho_{13}\rho_{23}\), and only one is realized, whereas for \((10,10,10)\) and
+  \((9,9,12)\) both roots occur and separate the concurrence. The discriminant law decides which:
+  \(\pi = 6\) gives \(D = 3\), a square, so it is unrealizable, while for the other two profiles both
+  roots give a nonsquare.
+* **Open: the counts in the classification table are orbit sizes.** Every count is \(2184\) divided
+  by the order of the triple's own symmetry group — six for the three equal-\(\rho\) profiles, two
+  for the isosceles ones, one for \((9,10,12)\) off a line — with one extra factor of two on every
+  collinear row. That extra factor is the pole of the passant, the unique internal point commuting
+  with all seven points of the row, which fixes every subset of it. The reading is clear and the
+  arithmetic checks, but nothing in the development proves that each class is a single orbit; that
+  would follow from the trace coordinates being a complete conjugacy invariant of an irreducible
+  triple of involutions, the standard Fricke statement for two-generator subgroups extended to three.
+  Nothing above depends on it.

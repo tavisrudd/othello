@@ -15,6 +15,10 @@
   "collinear_triples_inside_supports": 0,
   "conic": "y^2 - x z",
   "criterion_failures": 0,
+  "discriminant_law": {
+    "False/nonsquare": 9100,
+    "True/zero": 2730
+  },
   "extension_classes": [
     {
       "count": 2730,

@@ -196,15 +196,28 @@ def gram_det4(g: dict[tuple[int, int], int]) -> int:
     return det(m)
 
 
+def triple_discriminant(a: int, b: int, c: int) -> int:
+    """``D``, the normalized Gram determinant of a triple, twice ``gram_det3``'s inverse scaling."""
+    return (4 - (a * a + b * b + c * c) - a * b * c) % Q
+
+
+def sign_variants(a: int, b: int, c: int) -> list[tuple[int, int, int]]:
+    """The four trace patterns of one triple: flipping a point's lift flips two of the traces."""
+    return [(a, b, c), (-a % Q, -b % Q, c), (-a % Q, b, -c % Q), (a, -b % Q, -c % Q)]
+
+
 def pattern_admissible(a: int, b: int, c: int) -> bool:
     """Necessary condition on a pairwise-joined triple with normalized traces a,b,c.
 
-    Only the multiset of ``rho`` values is used: this is the weaker of the two conditions
-    certified below, and it is the one the quadruple argument needs.
+    Two structural facts, and no appeal to the support family: the triple is collinear, or its
+    Gram discriminant is a nonsquare because the span of three independent lifts carries a
+    nondegenerate ternary form isometric to the ambient one, and no bitangent conic through the
+    triple is a minimum-word support.
     """
-    if gram_det3(a, b, c) == 0:
+    d = triple_discriminant(a, b, c)
+    if d == 0:
         return True
-    return tuple(sorted((a * a % Q, b * b % Q, c * c % Q))) in ADMISSIBLE_PROFILES
+    return d in NONSQUARES and not any(bitangent_witness(*p) for p in sign_variants(a, b, c))
 
 
 def quadruple_search() -> tuple[int, dict[str, int], dict[str, int]]:
@@ -352,6 +365,7 @@ def compute() -> dict:
 
     # --- triple classification ---
     triple_table = Counter()
+    witt_law = Counter()
     extension_table = Counter()
     concurrence: dict[tuple[int, int, int], int] = {}
 
@@ -372,6 +386,11 @@ def compute() -> dict:
         is_collinear = join_line[a][b] == join_line[a][c]
         # invariant identity: collinear  <=>  sum(rho) + pi = 4
         assert is_collinear == ((sum(profile) + p) % Q == 4 % Q), (a, b, c)
+        # discriminant law: D vanishes on collinear triples and is a nonsquare otherwise
+        discriminant = (4 - sum(profile) - p) % Q
+        witt_law[(is_collinear,
+                  "zero" if discriminant == 0
+                  else ("nonsquare" if discriminant in NONSQUARES else "square"))] += 1
         triple_table[(is_collinear, profile, p, conc((a, b, c)))] += 1
 
     # criterion: admissible  <=>  collinear or (profile, pi) in the two classes; and the
@@ -439,6 +458,7 @@ def compute() -> dict:
              "concurrence": k[3], "count": v}
             for k, v in sorted(triple_table.items(), key=lambda kv: (not kv[0][0], kv[0][1], kv[0][2]))
         ],
+        "discriminant_law": {f"{k[0]}/{k[1]}": v for k, v in sorted(witt_law.items())},
         "criterion_failures": criterion_failures,
         "profile_criterion_failures": profile_criterion_failures,
         "bitangent_witness_failures": witness_failures,
