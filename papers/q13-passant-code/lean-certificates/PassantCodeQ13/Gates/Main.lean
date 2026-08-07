@@ -4,7 +4,7 @@ import PassantCodeQ13.MinimumWords.Reconstruction
 import PassantCodeQ13.MinimumWords.Exhaustion
 import PassantCodeQ13.MinimumWords.RowUniqueness.Transport
 import PassantCodeQ13.SemanticTransports
-import PassantCodeQ13.AssociationAlgebra
+import PassantCodeQ13.AssociationAlgebraIdentities
 import PassantCodeQ13.AssociationTransport
 import PassantCodeQ13.Automorphisms.Transport
 import PassantCodeQ13.StructuralUpgrade

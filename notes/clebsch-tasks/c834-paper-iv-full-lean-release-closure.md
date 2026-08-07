@@ -12,7 +12,25 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-05)
+## Resume here (2026-08-06)
+
+The association algebra is closed. `PassantCodeQ13.AssociationAlgebra` now holds only the executable
+presentation, and its three former native decisions — the ranks 42, 36, 36, 36 and the two squaring
+statements — are proved in the new `PassantCodeQ13.AssociationAlgebraIdentities` under their original
+names and namespace, so the tracked axiom audit is unchanged. Both bridges are symbolic: the bits of
+a bit-setting fold identify the computed relation rows and the triple-loop product with the packet's
+mask presentation, and only the four ranks are computed, by kernel reduction on the displayed masks.
+The axiom audit's 94 terminals now report 56 clean against 38 carrying a declaration-local
+native-evaluation axiom. Both gates and the evidence verifier are green. Report:
+`notes/2026-08-06-c834-association-algebra-kernel-closure.md`.
+
+Item 6 of stage 3 below is therefore done, including the header disclosure it asked to narrow. Item 5
+was already discharged by the previous round, whose elaboration of the packet is trace-current. The
+remaining native decisions are the
+weight-ten profile certificates, the row-uniqueness transport, the structural upgrade, the
+automorphism anchors, and the fixed-point exhaustion, plus the two stage-1 cost probes.
+
+## Superseded resume note (2026-08-05)
 
 The paper package elaborates end to end. `PassantCodeQ13.Gates.Main` and
 `PassantCodeQ13.Gates.AxiomAudit` both build, and all 94 audit terminals report: 53 clean, 41

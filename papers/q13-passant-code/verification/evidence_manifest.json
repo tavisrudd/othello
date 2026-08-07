@@ -146,8 +146,8 @@
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/Gates/Main.lean",
-      "bytes": 11331,
-      "sha256": "4c90136138a78373104a90bc8b3c71ac704b19499d3ea3cad067cbfcef994f93",
+      "bytes": 11341,
+      "sha256": "8673d5eae151e2c30c8cec2a15b36ae05fb2498a2ee5e87d7b91d24bf20d4042",
       "role": "paper-owned aggregate theorem terminals for the structural version"
     },
     {

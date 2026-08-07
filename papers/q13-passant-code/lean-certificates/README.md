@@ -30,8 +30,10 @@ independent regression check.
 The shared `RelativeConicArcs.PassantCodeQ13.WeightTen` module then treats an arbitrary supported
 point of an arbitrary weight-ten word: its seven passant fibres are odd, the complementary joins
 are secants, and the support partition forces the isolated `(3,1^6;0)` or cycle `(1^7;2)` profile.
-`PassantCodeQ13.AssociationAlgebra` checks the ranks and encoded squaring identities of the four
-binary elliptic relation matrices used by the orbit-spanning argument.
+`PassantCodeQ13.AssociationAlgebra` encodes the four binary elliptic relation matrices used by the
+orbit-spanning argument as lists of row bit masks, and
+`PassantCodeQ13.AssociationAlgebraIdentities` establishes their ranks and squaring identities by
+transporting them to the displayed row masks.
 `PassantCodeQ13.AssociationTransport` proves once that Boolean parity multiplication is ordinary
 matrix multiplication over `ZMod 2`; four one-product relation shards and four orbit shards then feed the concrete
 squares and Gram/kernel identities to the computation-free abstract association-kernel spine.

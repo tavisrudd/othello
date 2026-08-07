@@ -2,12 +2,19 @@ import PassantCodeQ13.MinimumWords.Base
 import RelativeConicArcs.PassantCodeQ13.AssociationAlgebra
 
 /-!
-# Binary elliptic association-algebra leaves over `ZMod 13`
+# Executable presentation of the binary elliptic association algebra over `ZMod 13`
 
 The six elliptic relations are computed from the normalized polar invariant on the 78 internal
-coordinates.  Their binary adjacency rows are encoded as natural-number bit sets.  Native
-evaluation checks the four identities used to explain the span of the minimum-word orbits and the
-exact ranks of the four relevant relation matrices.
+coordinates.  Their binary adjacency rows are encoded as natural-number bit sets: row `i` of a
+relation is the natural number whose set bits are the coordinates standing in that relation to
+coordinate `i`.  Matrix multiplication over the binary field is the parity of the coincidences of a
+left row with a column, and matrix addition is exclusive-or of rows.
+
+This module fixes those definitions.  The identities they satisfy — the exact ranks of the four
+relation matrices, the square of the relation of polar invariant zero, and the squaring cycle on the
+three rank-36 relations — are proved in `PassantCodeQ13.AssociationAlgebraIdentities`, which reaches
+them through the displayed row masks of `PassantCodeQ13.AssociationTransport` and therefore imports
+this module.
 -/
 
 namespace PassantCodeQ13.AssociationAlgebra
@@ -49,26 +56,5 @@ def xorFour (first second third fourth : List Nat) : List Nat :=
   List.zipWith (fun a rest => a ^^^ rest)
     first (List.zipWith (fun b rest => b ^^^ rest)
       second (List.zipWith (fun c d => c ^^^ d) third fourth))
-
-/-- The four relation matrices have ranks `42,36,36,36`. -/
-theorem relation_matrix_ranks :
-    binaryRank (relationMatrix 0) = 42 ∧
-      binaryRank (relationMatrix 9) = 36 ∧
-      binaryRank (relationMatrix 10) = 36 ∧
-      binaryRank (relationMatrix 12) = 36 := by
-  native_decide
-
-/-- The square of the rho-zero relation is `I + A9 + A10 + A12` over the binary field. -/
-theorem rhoZero_square :
-    matrixProduct (relationMatrix 0) (relationMatrix 0) =
-      xorFour identityMatrix (relationMatrix 9) (relationMatrix 10) (relationMatrix 12) := by
-  native_decide
-
-/-- The three rank-36 relation matrices form a squaring cycle over the binary field. -/
-theorem rankThirtySix_squaring_cycle :
-    matrixProduct (relationMatrix 9) (relationMatrix 9) = relationMatrix 10 ∧
-      matrixProduct (relationMatrix 10) (relationMatrix 10) = relationMatrix 12 ∧
-      matrixProduct (relationMatrix 12) (relationMatrix 12) = relationMatrix 9 := by
-  native_decide
 
 end PassantCodeQ13.AssociationAlgebra
