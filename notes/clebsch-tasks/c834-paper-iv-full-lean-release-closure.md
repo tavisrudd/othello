@@ -24,6 +24,16 @@ The axiom audit's 94 terminals now report 56 clean against 38 carrying a declara
 native-evaluation axiom. Both gates and the evidence verifier are green. Report:
 `notes/2026-08-06-c834-association-algebra-kernel-closure.md`.
 
+The weight-ten aggregate's own two leaves are closed as well, and the stage-1 merge-sort probe is
+answered. `List.mergeSort` is defined by well-founded recursion, so the kernel cannot unfold it for
+any input; the 595-element data reduces fine. The module now sorts by repeated structural insertion,
+proved to permute its input, and `cycle_pair_partition` states the pair-level permutation its
+docstring always claimed rather than an equality of sorted encodings. `local_partition` reduces in
+the kernel unchanged. Clean terminals: 58 of 94. Report:
+`notes/2026-08-06-c834-weight-ten-aggregate-kernel-leaves.md`. Stage 1 is therefore complete —
+item 1's module was already elaborated in the previous round — and the fourteen weight-ten
+syndrome-disjointness shards are unaffected, since their search is real.
+
 Two carry-overs for later stages. The round's bit-level lemmas — a bit-setting fold's bits, a mask
 list determined by the matrix it presents, tabulation as mapping, and the vanishing of a selected
 exclusive-or — are private in the identities module and are exactly the transport stage 4's packed
