@@ -54,8 +54,8 @@ one of them.
 Item 6 of stage 3 below is therefore done, including the header disclosure it asked to narrow. Item 5
 was already discharged by the previous round, whose elaboration of the packet is trace-current. The
 remaining native decisions are the
-weight-ten profile certificates, the row-uniqueness transport, the structural upgrade, the
-automorphism anchors, and the fixed-point exhaustion, plus the two stage-1 cost probes.
+fourteen weight-ten profile shards, the row-uniqueness transport, the structural upgrade's three
+support-family leaves, the automorphism anchors, and the fixed-point exhaustion.
 
 ## Superseded resume note (2026-08-05)
 
