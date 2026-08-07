@@ -1,5 +1,6 @@
 import Mathlib.Data.Matrix.ColumnRowPartitioned
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
+import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.LinearAlgebra.Matrix.Trace
 import Mathlib.Tactic.NoncommRing
 import RelativeConicArcs.ConferenceCutBlocks
@@ -468,5 +469,239 @@ theorem charpoly_compression_mul {D Q : Matrix ι ι R} {U : Matrix ι κ R} {W 
   exact hreg
 
 end Charpoly
+
+/-- Two monic polynomials of the same degree with equal squares are equal: their
+difference and their sum multiply to zero, and their sum has leading
+coefficient `2`. -/
+private theorem monic_eq_of_mul_self_eq {R : Type*} [Field R] [CharZero R] {p r : R[X]}
+    (hp : p.Monic) (hr : r.Monic) (hdeg : p.natDegree = r.natDegree) (h : p * p = r * r) :
+    p = r := by
+  have hfac : (p - r) * (p + r) = 0 := by
+    have hexp : (p - r) * (p + r) = p * p - r * r := by ring
+    rw [hexp, h, sub_self]
+  have hne : p + r ≠ 0 := by
+    intro h0
+    have hcoeff : (p + r).coeff p.natDegree = 2 := by
+      rw [Polynomial.coeff_add, hp.coeff_natDegree, hdeg, hr.coeff_natDegree]
+      norm_num
+    rw [h0] at hcoeff
+    norm_num at hcoeff
+  rcases mul_eq_zero.mp hfac with h1 | h1
+  · exact sub_eq_zero.mp h1
+  · exact absurd h1 hne
+
+section Cut
+
+variable {R : Type*} [Field R] [CharZero R] {n m : Type*} [Fintype n] [DecidableEq n]
+  [Fintype m] [DecidableEq m]
+
+/-- The sign involution of a cut: the identity on the first half of the index
+set and its negative on the second. -/
+def cutInvolution (n m : Type*) [DecidableEq n] [DecidableEq m] (R : Type*) [CommRing R] :
+    Matrix (n ⊕ m) (n ⊕ m) R :=
+  Matrix.fromBlocks 1 0 0 (-1)
+
+omit [CharZero R] [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m] in
+private theorem fromBlocks_sub' (A₁ A₂ : Matrix n n R) (B₁ B₂ : Matrix n m R)
+    (C₁ C₂ : Matrix m n R) (E₁ E₂ : Matrix m m R) :
+    Matrix.fromBlocks A₁ B₁ C₁ E₁ - Matrix.fromBlocks A₂ B₂ C₂ E₂
+      = Matrix.fromBlocks (A₁ - A₂) (B₁ - B₂) (C₁ - C₂) (E₁ - E₂) := by
+  ext (i | i) (j | j) <;> simp
+
+omit [CharZero R] [DecidableEq n] [DecidableEq m] in
+private theorem trace_fromBlocks' (A₁ : Matrix n n R) (B₁ : Matrix n m R) (C₁ : Matrix m n R)
+    (E₁ : Matrix m m R) :
+    Matrix.trace (Matrix.fromBlocks A₁ B₁ C₁ E₁) = Matrix.trace A₁ + Matrix.trace E₁ := by
+  simp [Matrix.trace, Fintype.sum_sum_type]
+
+omit [CharZero R] in
+private theorem fromBlocks_pow (A₁ : Matrix n n R) (E₁ : Matrix m m R) (k : ℕ) :
+    Matrix.fromBlocks A₁ 0 0 E₁ ^ (k + 1)
+      = Matrix.fromBlocks (A₁ ^ (k + 1)) 0 0 (E₁ ^ (k + 1)) := by
+  induction k with
+  | zero => simp
+  | succ k ih =>
+      rw [pow_succ, ih, Matrix.fromBlocks_multiply]
+      simp [pow_succ]
+
+omit [CharZero R] in
+private theorem pow_mul_comm_aux (X : Matrix n m R) (Y : Matrix m n R) (k : ℕ) :
+    (X * Y) ^ (k + 1) = X * ((Y * X) ^ k * Y) := by
+  induction k with
+  | zero => simp
+  | succ k ih =>
+      rw [pow_succ, ih, pow_succ]
+      simp only [Matrix.mul_assoc]
+
+omit [CharZero R] in
+/-- The two products of a rectangular pair have the same power traces. -/
+private theorem trace_pow_mul_comm (X : Matrix n m R) (Y : Matrix m n R) (k : ℕ) :
+    Matrix.trace ((X * Y) ^ (k + 1)) = Matrix.trace ((Y * X) ^ (k + 1)) := by
+  rw [pow_mul_comm_aux, Matrix.trace_mul_comm, Matrix.mul_assoc, ← pow_succ]
+
+/-- In cut coordinates the exchange operator on the whole space is block
+diagonal: the two blocks are the two products of the cross block with its
+transpose, divided by the scalar the matrix squares to. -/
+theorem exchangeOperator_cut {A : Matrix n n R} {B : Matrix n m R} {E : Matrix m m R}
+    {q s : R} (hs : s * s = q) (hs0 : s ≠ 0) :
+    exchangeOperator (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E)
+      = Matrix.fromBlocks (q⁻¹ • (B * Bᵀ)) 0 0 (q⁻¹ • (Bᵀ * B)) := by
+  have hq : q ≠ 0 := by rw [← hs]; exact mul_ne_zero hs0 hs0
+  have hDC : cutInvolution n m R * Matrix.fromBlocks A B Bᵀ E
+      = Matrix.fromBlocks A B (-Bᵀ) (-E) := by
+    rw [cutInvolution, Matrix.fromBlocks_multiply]
+    simp
+  have hCD : Matrix.fromBlocks A B Bᵀ E * cutInvolution n m R
+      = Matrix.fromBlocks A (-B) Bᵀ (-E) := by
+    rw [cutInvolution, Matrix.fromBlocks_multiply]
+    simp
+  have hL : signCommutator (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E)
+      = s⁻¹ • Matrix.fromBlocks 0 ((2 : R) • B) (-((2 : R) • Bᵀ)) 0 := by
+    rw [signCommutator, Matrix.mul_smul, Matrix.smul_mul, hDC, hCD, ← smul_sub, fromBlocks_sub',
+      show A - A = (0 : Matrix n n R) by abel,
+      show B - -B = (2 : R) • B by rw [two_smul]; abel,
+      show -Bᵀ - Bᵀ = -((2 : R) • Bᵀ) by rw [two_smul]; abel,
+      show -E - -E = (0 : Matrix m m R) by abel]
+  have hLL : signCommutator (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E)
+        * signCommutator (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E)
+      = Matrix.fromBlocks (-((4 * q⁻¹ : R) • (B * Bᵀ))) 0 0 (-((4 * q⁻¹ : R) • (Bᵀ * B))) := by
+    rw [hL, Matrix.smul_mul, Matrix.mul_smul, smul_smul, Matrix.fromBlocks_multiply,
+      show s⁻¹ * s⁻¹ = q⁻¹ by rw [← mul_inv, hs], Matrix.fromBlocks_smul]
+    congr 1
+    · simp only [Matrix.zero_mul, zero_add, Matrix.mul_neg, Matrix.smul_mul, Matrix.mul_smul,
+        smul_smul, smul_neg]
+      rw [show (2 : R) * 2 = 4 by norm_num, mul_comm q⁻¹ (4 : R)]
+    · simp
+    · simp
+    · simp only [Matrix.mul_zero, add_zero, Matrix.neg_mul, Matrix.smul_mul, Matrix.mul_smul,
+        smul_smul, smul_neg]
+      rw [show (2 : R) * 2 = 4 by norm_num, mul_comm q⁻¹ (4 : R)]
+  rw [exchangeOperator, hLL, Matrix.fromBlocks_smul, Matrix.fromBlocks_neg]
+  congr 1
+  · rw [smul_neg, neg_neg, smul_smul, show (4 : R)⁻¹ * (4 * q⁻¹) = q⁻¹ by field_simp]
+  · simp
+  · simp
+  · rw [smul_neg, neg_neg, smul_smul, show (4 : R)⁻¹ * (4 * q⁻¹) = q⁻¹ by field_simp]
+
+omit [CharZero R] in
+/-- The cross-block form of the principal block: the first diagonal block of the
+exchange operator is `1 - q⁻¹ A²`. -/
+theorem cutBlock_eq {A : Matrix n n R} {B : Matrix n m R} {E : Matrix m m R} {q : R}
+    (hq : q ≠ 0)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = q • 1) :
+    q⁻¹ • (B * Bᵀ) = 1 - q⁻¹ • (A * A) := by
+  rw [ConferenceCutBlocks.mul_transpose_eq_of_sq_smul A B E q hCC, smul_sub, smul_smul,
+    inv_mul_cancel₀ hq, one_smul]
+
+/-- The characteristic polynomial of the exchange operator of a balanced cut is
+that of `1 - q⁻¹ A²`, for `A` the principal block on the chosen half. -/
+theorem charpoly_exchangeCompression_cut {A : Matrix n n R} {B : Matrix n m R}
+    {E : Matrix m m R} {q s : R} {U : Matrix (n ⊕ m) n R} {W : Matrix (n ⊕ m) m R}
+    (hAt : Aᵀ = A) (hEt : Eᵀ = E)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = q • 1)
+    (hs : s * s = q) (hs0 : s ≠ 0)
+    (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hW : Wᵀ * W = 1)
+    (hWW : W * Wᵀ = antifixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hcard : Fintype.card n = Fintype.card m) :
+    (exchangeCompression (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E) U).charpoly
+      = (1 - q⁻¹ • (A * A)).charpoly := by
+  have hq : q ≠ 0 := by rw [← hs]; exact mul_ne_zero hs0 hs0
+  set C := Matrix.fromBlocks A B Bᵀ E with hC
+  set Q := s⁻¹ • C with hQdef
+  set D := cutInvolution n m R with hDdef
+  have hQ : Q * Q = 1 := by
+    rw [hQdef, Matrix.smul_mul, Matrix.mul_smul, smul_smul, hC, hCC, smul_smul,
+      show s⁻¹ * s⁻¹ * q = 1 by rw [← mul_inv, hs, inv_mul_cancel₀ hq], one_smul]
+  have hQt : Qᵀ = Q := by
+    rw [hQdef, Matrix.transpose_smul, hC, Matrix.fromBlocks_transpose, hAt, hEt,
+      Matrix.transpose_transpose]
+  have hDt : Dᵀ = D := by
+    rw [hDdef, cutInvolution, Matrix.fromBlocks_transpose]
+    simp
+  have hD : D * D = 1 := by
+    rw [hDdef, cutInvolution, Matrix.fromBlocks_multiply]
+    simp
+  have hM : exchangeOperator D Q
+      = Matrix.fromBlocks (q⁻¹ • (B * Bᵀ)) 0 0 (q⁻¹ • (Bᵀ * B)) :=
+    exchangeOperator_cut hs hs0
+  have hNN : (q⁻¹ • (Bᵀ * B)).charpoly = (q⁻¹ • (B * Bᵀ)).charpoly := by
+    have h := Matrix.charpoly_mul_comm' (q⁻¹ • B) Bᵀ
+    rw [Matrix.smul_mul, Matrix.mul_smul, hcard] at h
+    exact ((isRegular_X_pow (Fintype.card m)).left h).symm
+  have hsq : (exchangeCompression D Q U).charpoly * (exchangeCompression D Q U).charpoly
+      = (q⁻¹ • (B * Bᵀ)).charpoly * (q⁻¹ • (B * Bᵀ)).charpoly := by
+    rw [exchangeCompression_eq hQ hDt hQt hU hUU]
+    nth_rewrite 2 [charpoly_compression_eq hQ hDt hQt hU hUU hW hWW hcard]
+    rw [charpoly_compression_mul hQ hQt hU hUU hW hWW Fintype.card_sum, hM,
+      Matrix.charpoly_fromBlocks_zero₁₂, hNN]
+  have hmonic := Matrix.charpoly_monic (exchangeCompression D Q U)
+  have hmonic' := Matrix.charpoly_monic (q⁻¹ • (B * Bᵀ))
+  have hdeg : (exchangeCompression D Q U).charpoly.natDegree
+      = (q⁻¹ • (B * Bᵀ)).charpoly.natDegree := by
+    rw [Matrix.charpoly_natDegree_eq_dim, Matrix.charpoly_natDegree_eq_dim]
+  have := monic_eq_of_mul_self_eq hmonic hmonic' hdeg hsq
+  rw [this, cutBlock_eq hq hCC]
+
+/-- Every power trace of the exchange operator of a balanced cut is that of
+`1 - q⁻¹ A²`. -/
+theorem trace_exchangeCompression_pow_cut {A : Matrix n n R} {B : Matrix n m R}
+    {E : Matrix m m R} {q s : R} {U : Matrix (n ⊕ m) n R}
+    (hAt : Aᵀ = A) (hEt : Eᵀ = E)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = q • 1)
+    (hs : s * s = q) (hs0 : s ≠ 0)
+    (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (k : ℕ) :
+    Matrix.trace
+        (exchangeCompression (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E) U
+          ^ (k + 1))
+      = Matrix.trace ((1 - q⁻¹ • (A * A)) ^ (k + 1)) := by
+  have hq : q ≠ 0 := by rw [← hs]; exact mul_ne_zero hs0 hs0
+  set C := Matrix.fromBlocks A B Bᵀ E with hC
+  set Q := s⁻¹ • C with hQdef
+  set D := cutInvolution n m R with hDdef
+  have hQ : Q * Q = 1 := by
+    rw [hQdef, Matrix.smul_mul, Matrix.mul_smul, smul_smul, hC, hCC, smul_smul,
+      show s⁻¹ * s⁻¹ * q = 1 by rw [← mul_inv, hs, inv_mul_cancel₀ hq], one_smul]
+  have hQt : Qᵀ = Q := by
+    rw [hQdef, Matrix.transpose_smul, hC, Matrix.fromBlocks_transpose, hAt, hEt,
+      Matrix.transpose_transpose]
+  have hDt : Dᵀ = D := by
+    rw [hDdef, cutInvolution, Matrix.fromBlocks_transpose]
+    simp
+  have htr : Matrix.trace ((q⁻¹ • (Bᵀ * B)) ^ (k + 1))
+      = Matrix.trace ((q⁻¹ • (B * Bᵀ)) ^ (k + 1)) := by
+    rw [← Matrix.mul_smul, ← Matrix.smul_mul]
+    exact trace_pow_mul_comm Bᵀ (q⁻¹ • B) k
+  rw [trace_exchangeCompression_pow hQ hDt hQt hU hUU k, exchangeOperator_cut hs hs0,
+    fromBlocks_pow, trace_fromBlocks', htr, ← two_mul, ← mul_assoc,
+    inv_mul_cancel₀ (two_ne_zero), one_mul, cutBlock_eq hq hCC]
+
+/-- The first exchange moment of a balanced cut of a symmetric conference
+matrix: the trace of the exchange operator is `d² / q`, where `d` is the size of
+the half and `q = 2d - 1`.  It does not depend on the half. -/
+theorem trace_exchangeCompression_cut {A : Matrix n n R} {B : Matrix n m R}
+    {E : Matrix m m R} {q s : R} {U : Matrix (n ⊕ m) n R}
+    (hAt : Aᵀ = A) (hEt : Eᵀ = E)
+    (hCC : Matrix.fromBlocks A B Bᵀ E * Matrix.fromBlocks A B Bᵀ E = q • 1)
+    (hs : s * s = q) (hs0 : s ≠ 0)
+    (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection (s⁻¹ • Matrix.fromBlocks A B Bᵀ E))
+    (hdiag : ∀ i, A i i = 0) (hone : ∀ i j, i ≠ j → A i j * A j i = 1)
+    (hqval : q = 2 * (Fintype.card n : R) - 1) :
+    Matrix.trace
+        (exchangeCompression (cutInvolution n m R) (s⁻¹ • Matrix.fromBlocks A B Bᵀ E) U)
+      = (Fintype.card n : R) ^ 2 / q := by
+  subst hqval
+  have hqne : 2 * (Fintype.card n : R) - 1 ≠ 0 := by
+    rw [← hs]; exact mul_ne_zero hs0 hs0
+  have h := trace_exchangeCompression_pow_cut hAt hEt hCC hs hs0 hU hUU 0
+  rw [pow_one, pow_one] at h
+  have hinv : (2 * (Fintype.card n : R) - 1)⁻¹ * (2 * (Fintype.card n : R) - 1) = 1 :=
+    inv_mul_cancel₀ hqne
+  rw [h, Matrix.trace_sub, Matrix.trace_one, Matrix.trace_smul,
+    ConferenceCutBlocks.trace_mul_self A hdiag hone, smul_eq_mul, eq_div_iff hqne]
+  linear_combination (-((Fintype.card n : R) * ((Fintype.card n : R) - 1))) * hinv
+
+end Cut
 
 end RelativeConicArcs.BalancedExchangeSpectrum
