@@ -34,20 +34,28 @@ declarations, and builds in **under three seconds at a peak of 0.54 GB** — aga
 each at 3.6 GB for the seven residue shards it is meant to replace. Nothing imports it yet, and both
 package gates remain trace-current.
 
-Two design corrections from that round. Only the multiset of \(\rho\) values is needed per triple,
-not \(\pi\): the weaker condition still forces the quadruple theorem, so \(\pi\) never enters the
-formal development and no new invariance lemma is required. And the remaining piece must be
-sequenced behind the equivariance transport, because without it the criterion — an admissible
-non-collinear triple has \(\rho\) profile \((10,10,10)\) or \((10,12,12)\) — has to be checked over
-all 11830 joined triples, which costs more kernel work than the clique search it would replace. With
-transitivity on ordered joined pairs it collapses to three representative pairs and at most 126
-triples. The bitangent-conic witness formula proved in the report closes four of the eight excluded
-classes without touching the displayed supports, but two classes lie in no conic support at all, so
-it does not close the criterion on its own.
+A closeout pass then removed the layer's dependence on the classification table, and with it on the
+equivariance transport. The missing constraint is a discriminant law: for three internal points the
+normalized Gram determinant \(D = 4 - \sum\rho - \pi\) vanishes when they are collinear and is a
+nonsquare otherwise, because three independent lifts span the ambient three-dimensional quadratic
+space and over a finite field a nondegenerate ternary form is fixed by its discriminant. That law
+plus the bitangent-conic witness formula — both pure algebra, neither touching the support family —
+is enough for the quadruple theorem. `QuadrupleGram` now states its hypothesis in exactly those
+terms and still builds in five seconds at a peak of 0.67 GB.
 
-Remaining for stage 5 item 10: the equivariance transport, then the criterion module, then the
-semantic bridge in `RowUniqueness/Transport.lean` from the seven-set hypothesis through
-`QuadrupleGram`, then retirement of `IndexCertificate` and the seven residue modules.
+Consequences for stage 5 item 10. The criterion module, the pair transporter, the group action, the
+364 displayed supports, and the octahedral family all drop out of the row-uniqueness path. What
+remains is two geometry lemmas in the displayed coordinates, neither of which runs a search — the
+discriminant law, one determinant identity; and the bitangent support lemma, that for a secant \(L\)
+and a nonsquare \(\nu\) with \(\nu \operatorname{disc}(L) - 1\) a nonsquare the twelve off-chord
+points of \(C - \nu L^2\) form a weight-twelve word — followed by the semantic bridge in
+`RowUniqueness/Transport.lean` from the seven-set hypothesis through `QuadrupleGram`, and then
+retirement of `IndexCertificate` and the seven residue modules. The equivariance transport is still
+wanted for other leaves of the package but no longer gates this one.
+
+The octahedral family is still needed for the converse half, that a passant row is admissible, which
+is the statement that no minimum support meets a passant in more than two points. That is structural
+for the 273 conic supports and a one-orbit-representative check for the 91 octahedral ones.
 
 ## Superseded resume note (2026-08-06)
 
