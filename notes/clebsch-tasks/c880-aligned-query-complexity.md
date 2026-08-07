@@ -6,8 +6,9 @@
 
 ## State
 
-Work items 1 and 2 are closed, and item 3 has its small-case evidence:
-`notes/2026-08-07-c880-alignment-separation.md`.
+Work items 1, 2 and 6 are closed, and item 3 has its small-case evidence.
+Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation) and
+`notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim).
 
 - Seven points is sharp: the alignment tests fail to determine a two-graph up to
   complement at six points, in 46 groups covering 96 of the 512 complement
@@ -38,11 +39,34 @@ Work items 1 and 2 are closed, and item 3 has its small-case evidence:
   argument that settles seven points is vacuous at eight, where the alignment
   code's minimum distance is four.
 
+The audit changes the framing more than it changes the mathematics. Principal-minor
+reconstruction solves the same problem up to the same gauge — principal minors are
+invariant under diagonal sign similarity, which for a Seidel matrix is switching, and
+Oeding's theorem says equal principal minors means the same two-graph. Against a
+*value* oracle it is already solved in \(O(n^2)\) queries by published algorithms
+that call themselves asymptotically optimal, and for a Seidel matrix the cycle-basis
+route needs only \(\binom n2-n+1\) order-three minors, a factor six below the
+exhibited count. Nothing is pre-empted, because the alignment decoder receives neither
+values nor order-three data, only one indicator bit per four-set — but every sentence
+claiming \(O(n^2)\) selected determinants as a contribution must name that
+restriction or it reads as pre-empted. Three further wording consequences: the
+determinant-family identification becomes a citation to Greaves and Suda, whose Table 1
+and Example 2.3 already give the two-valued fourth-order spectrum and the design; the
+entropy bound must be presented as an application of the standard information-theoretic
+bound of combinatorial search theory, its content being the measured quarter marginal
+rather than the method; and the six-point sharpness must be positioned explicitly
+against Dammak, Lopez, Pouzet and Si Kaddour, whose \(v\ge7\) is the endpoint of
+\(4\le k\le v-3\) and whose own sharpness remark is about \(k\), so they prove no
+six-point failure. The non-bipartite link criterion and the exact seven-point value
+have no located predecessor; the link criterion is the weakest supported, since Boolean
+sensitivity and certificate complexity was not searched.
+
 Open next: the constant, now bracketed between \(0.616\,n^2\) and \(3n^2\).
 Two concrete routes — a shared-test construction whose links are non-bipartite
 without an anchor, and the adaptive decoder sketched in the report, which would
 need about \(\binom{n-1}2\) tests and would settle item 4 with a factor-six
-separation. Then items 5, 6 and 8, and item 7 only after the audit.
+separation. Then item 8, which now has a named baseline to cost against, item 5,
+and item 7, which the audit has unblocked.
 
 ## Objective
 
