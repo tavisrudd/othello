@@ -1,11 +1,16 @@
 {
   "external_imports": [
     "Mathlib.Algebra.BigOperators.Group.Finset.Basic",
+    "Mathlib.Algebra.BigOperators.Group.Finset.Powerset",
+    "Mathlib.Algebra.BigOperators.Ring.Finset",
+    "Mathlib.Algebra.CharZero.Defs",
     "Mathlib.Data.Fin.VecNotation",
+    "Mathlib.Data.Finset.Powerset",
     "Mathlib.Data.Fintype.Card",
     "Mathlib.Data.Matrix.Basic",
     "Mathlib.Data.Matrix.Block",
     "Mathlib.Data.Matrix.Mul",
+    "Mathlib.Data.Nat.Choose.Basic",
     "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
     "Mathlib.LinearAlgebra.Matrix.Notation",
     "Mathlib.LinearAlgebra.Matrix.Trace",
@@ -15,7 +20,7 @@
     "Mathlib.Tactic.NormNum.NatFactorial",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 20,
+  "module_count": 21,
   "roots": [
     "RelativeConicArcs.Gates.ClebschGoldenReturn"
   ],
@@ -100,10 +105,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 6735,
+      "bytes": 26576,
       "module": "RelativeConicArcs.ConferenceCutBlocks",
       "path": "RelativeConicArcs/ConferenceCutBlocks.lean",
-      "sha256": "593e2cee94ec992246eb997d8bd3ce9c6a856335bc7238a2aba7bba657ab86d7"
+      "sha256": "c54c3ff3fbc7aebf2b376d22cbebece6d3d8ae894a31aeca5541aea8c30a84cb"
     },
     {
       "bytes": 1716,
@@ -112,10 +117,10 @@
       "sha256": "681314297d88c806e640f6f8796f4d1d1a34b47178159d5cdabc53d52f68ac97"
     },
     {
-      "bytes": 8183,
+      "bytes": 9302,
       "module": "RelativeConicArcs.Gates.ClebschGoldenReturn",
       "path": "RelativeConicArcs/Gates/ClebschGoldenReturn.lean",
-      "sha256": "d2a9f2a8f21b35786dd35cc4d68dda89eebee5c3658f12c190a286a8ebbd27b9"
+      "sha256": "f8108bb184cc1668b899fd425ab4329c6441bd96ba007a60bf5580b66df54be2"
     },
     {
       "bytes": 5731,
@@ -134,6 +139,12 @@
       "module": "RelativeConicArcs.GoldenMatchingCubics",
       "path": "RelativeConicArcs/GoldenMatchingCubics.lean",
       "sha256": "e16a8e173049bc21afd615ecf23b3da176ce5cd1bd3b217c1872c1ec67b291a5"
+    },
+    {
+      "bytes": 13357,
+      "module": "RelativeConicArcs.SubsetInclusionSums",
+      "path": "RelativeConicArcs/SubsetInclusionSums.lean",
+      "sha256": "f32f3d349c5e54a4aa2f9e0b241a7d6db96cda49e470d17920694ba900f61ce8"
     },
     {
       "bytes": 4119,

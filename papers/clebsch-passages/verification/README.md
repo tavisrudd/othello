@@ -123,14 +123,17 @@ coordinates and over every commutative ring.  For a cut of arbitrary size of a
 matrix squaring to a scalar, the cross block satisfies `B * Bᵀ = q • 1 - A * A`
 on the chosen subset, the trace of the square of a zero-diagonal sign matrix is
 the number of ordered pairs of distinct indices, and the three signed
-Hamilton-cycle products of any four-set sum to `3` or to `-1`.  No eigenvalue
-or singular-value statement is formalized.  The closed-walk organization of the fourth
-trace, the inclusion-rank descent and Ramsey exclusion behind
-exchange rigidity, the classical inputs to the
-aligned-design faithfulness argument, outer-family coherence, the cross-golden
-determinant comparison, the identification of the six translates with the
-classical Joubert coordinates, and the Segre--Igusa polar map remain human
-proof boundaries.
+Hamilton-cycle products of any four-set sum to `3` or to `-1`.  The fourth
+trace is sorted by the support of the closed four-walks it counts: it is
+`d(d-1) + 12*C(d,3)` plus the four-set weights, each of which is `24` or `-8`,
+eight times `3` or `-1`; and equal four-subset weight sums over all balanced
+halves of a `2d`-element label set with `4 <= d` force that weight to be
+constant on four-sets, by one-element swap descent on inclusion sums.  No
+eigenvalue or singular-value statement is formalized.  The Ramsey exclusion
+behind exchange rigidity, the classical inputs to the aligned-design
+faithfulness argument, outer-family coherence, the cross-golden determinant
+comparison, the identification of the six translates with the classical Joubert
+coordinates, and the Segre--Igusa polar map remain human proof boundaries.
 It is replayed against a checkout of the formal artifact with
 
 ```text

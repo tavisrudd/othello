@@ -32,10 +32,15 @@ size, the cross block of a matrix squaring to a scalar satisfies
 `B * Bᵀ = q • 1 - A * A` on the chosen subset, the trace of the square of a
 zero-diagonal sign matrix is the number of ordered pairs of distinct indices,
 and the three signed Hamilton-cycle products of any four-set sum to `3` or
-`-1`.  The organization of the fourth trace by the support of a closed
-four-walk, the inclusion-rank descent, and the higher-order Ramsey exclusion
-remain human proofs, as does every eigenvalue and singular-value statement:
-nothing here leaves polynomial algebra.
+`-1`.  The fourth trace is sorted by the support of the closed four-walks it
+counts: it is `d(d-1) + 12·C(d,3)` plus the four-set weights, each of which is
+`24` or `-8`, that is eight times `3` or `-1`.  Equal four-subset sums of those
+weights over all balanced halves of a `2d`-element label set with `4 ≤ d` force
+the weight to be constant on four-sets, by the one-element swap descent for
+inclusion sums rather than by the rank formula for inclusion matrices.  The
+higher-order Ramsey exclusion remains a human proof, as does every eigenvalue
+and singular-value statement: nothing here leaves polynomial algebra and finite
+combinatorics.
 
 Symbolic ring arguments prove switching, pair balance, augmentation descent,
 two-graph reconstruction, and the generic companion identities.  No compiled
@@ -123,3 +128,13 @@ data.  No generated certificate or externally supplied matrix is imported.
 #print axioms RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul
 #print axioms RelativeConicArcs.ConferenceCutBlocks.trace_mul_self
 #print axioms RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one
+#print axioms RelativeConicArcs.ConferenceCutBlocks.trace_pow_four
+#print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled
+#print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight
+#print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight
+#print axioms RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq
+
+#print axioms RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert
+#print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant
+#print axioms RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero
+#print axioms RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq

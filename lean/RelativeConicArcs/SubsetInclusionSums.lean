@@ -81,7 +81,7 @@ theorem sum_powersetCard_insert {M : Type*} [AddCommMonoid M] {a : α} {S : Fins
 
 /-- The one-element exchange step.  If all inclusion sums of `g` at subset size
 `r + 1` over the `(m+1)`-subsets of `X` share the value `c`, then for any two
-distinct labels `a, b` of `X` the difference function
+labels `a, b` of `X` the difference function
 `T ↦ g (T ∪ {a}) - g (T ∪ {b})` has vanishing inclusion sums at subset size `r`
 over the `m`-subsets of `X \ {a, b}`. -/
 theorem sum_sub_eq_zero_of_sum_powersetCard_eq {R : Type*} [CommRing R]

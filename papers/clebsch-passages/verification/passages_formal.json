@@ -158,9 +158,16 @@
         "RelativeConicArcs.ConferenceCutSpectrum.signedTriangle_sq",
         "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
         "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
-        "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one"
+        "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one",
+        "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four",
+        "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled",
+        "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight",
+        "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight",
+        "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq",
+        "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
+        "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq"
       ],
-      "excluded": "the general cross-block spectrum formula as a statement about eigenvalues, the closed-walk organization of the fourth trace, the inclusion-rank descent, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments.  The polynomial core is checked: for a cut of arbitrary size of a matrix squaring to a scalar the cross block satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, and the three signed Hamilton-cycle products of any four-set sum to 3 or to -1, so a four-set is aligned or carries weight -1 with nothing in between."
+      "excluded": "the general cross-block spectrum formula as a statement about eigenvalues, the higher-order Ramsey exclusion, and the classical aligned-design consequences remain human arguments.  The polynomial and combinatorial core is checked: for a cut of arbitrary size of a matrix squaring to a scalar the cross block satisfies B * Bᵀ = q • 1 - A * A on the chosen subset, the trace of the square of a zero-diagonal sign matrix is the number of ordered pairs of distinct indices, the fourth trace is d(d-1) + 12·C(d,3) plus the closed four-walk weights of its four-element supports, each such weight is 24 or -8, that is eight times the Hamilton-cycle weight 3 or -1, and equal four-subset weight sums over all balanced halves of a 2d-element label set with 4 ≤ d force that weight to be constant on four-sets, by one-element swap descent."
     },
     "OPER-4": {
       "coverage": "partial mechanism; no full row claim",
