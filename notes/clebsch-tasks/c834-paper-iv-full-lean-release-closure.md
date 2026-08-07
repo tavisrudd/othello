@@ -24,8 +24,10 @@ displayed encoded supports. Only the base row of the generated pair table is rea
 representatives share their first point, so the 6006-entry table needs no index split and the
 measurement stage 2 asked for is moot. Two further native decisions fell to the same argument:
 decoding injectivity is now proved from the bit characterization plus a bound, and the encoded
-family's duplicate-freeness is decided over the displayed supports. Clean terminals: 67 of 94. The
-evidence verifier passes. Report:
+family's duplicate-freeness is decided over the displayed supports. Two of the four automorphism
+anchor decisions went the same way — the anchor relation pattern and the length of the normalized
+matrix list both reduce in the kernel — leaving the anchor-image identification as the module's only
+compiled evaluation. Clean terminals: 69 of 94. The evidence verifier passes. Report:
 `notes/2026-08-06-c834-equivariance-transporter-and-support-family-leaves.md`.
 
 Two measurements to carry forward. A finite check stated over `minimumSupportCodes` makes the kernel

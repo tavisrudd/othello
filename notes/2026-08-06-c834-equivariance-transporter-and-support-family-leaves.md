@@ -11,8 +11,9 @@ constancy, concurrence-eight recovery of the polar rows, and the fused pair-colo
 evaluate anything over that family. They are reduced to one representative point and six
 representative pairs and then decided by kernel reduction over the displayed encoded supports.
 
-Two native decisions outside the planned scope fell to the same argument and were closed in the same
-round: injectivity of support decoding and duplicate-freeness of the encoded family.
+Four native decisions outside the planned scope fell to the same reasoning and were closed in the
+same round: injectivity of support decoding, duplicate-freeness of the encoded family, the anchor
+relation pattern, and the length of the normalized matrix list.
 
 ## The layer that made the reduction possible
 
@@ -87,14 +88,22 @@ left is that the displayed supports are below that bound. The duplicate-freeness
 family, used by the triple-concurrence transport, is likewise now decided over the displayed
 supports rather than natively.
 
+## Two anchor decisions closed as well
+
+The relation pattern of the first three anchors and the length of the normalized matrix list were
+both compiled evaluations. Neither needs to be: the first is three polar parameters and the second
+is the length of a filtered displayed list, and both reduce in the kernel in seconds. The one
+compiled evaluation left in that module is the identification of the 2184 anchor images with the
+ordered triples carrying the anchor pattern, which stage 5 of the plan owns.
+
 ## Validation
 
 All new and modified modules elaborate without errors or warnings. `PassantCodeQ13.Gates.Main` and
-`PassantCodeQ13.Gates.AxiomAudit` build. The audit's 94 terminals now report 67 clean against 27
-carrying a declaration-local native-evaluation axiom, up from 61 clean. Six terminals became clean:
-the three support-family leaves, and the three that reached compiled evaluation only through
-decoding injectivity. The paper's evidence verifier passes after refreshing the manifest record for
-the rewritten module.
+`PassantCodeQ13.Gates.AxiomAudit` build. The audit's 94 terminals now report 69 clean against 25
+carrying a declaration-local native-evaluation axiom, up from 61 clean. Eight terminals became
+clean: the three support-family leaves, the three that reached compiled evaluation only through
+decoding injectivity, and the two anchor terminals described above. The paper's evidence verifier
+passes after refreshing the manifest record for the rewritten module.
 
 ## Mystery ledger
 

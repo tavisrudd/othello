@@ -8,11 +8,12 @@ The 2184 normalized invertible matrices act bijectively on the 78 internal coord
 the polar relation.  Both statements are proved from the transformation laws of the discriminant and
 its polar form under substitution, so neither quantifies over the matrices by evaluation.
 
-Native evaluation remains in this module for the relation pattern `(10,3,9)` of the first three
-anchors, the length of the normalized matrix list, and the identification of the images of the first
-three anchors with the ordered triples carrying that pattern.  The last check also records that all
-2184 images are distinct, so this is the regular triple orbit used by the automorphism argument.
-Each of those three theorems therefore carries the declaration-local axiom that compiled evaluation
+The relation pattern `(10,3,9)` of the first three anchors and the length of the normalized matrix
+list are decided by kernel reduction, the first over three pairs of coordinates and the second over
+the displayed matrix list.  Native evaluation remains in this module only for the identification of
+the images of the first three anchors with the ordered triples carrying that pattern; that check
+also records that all 2184 images are distinct, so this is the regular triple orbit used by the
+automorphism argument, and it carries the declaration-local axiom that compiled evaluation
 introduces.
 -/
 
@@ -27,12 +28,12 @@ open PassantCodeQ13.WeightTen
 theorem anchorTriplePattern :
     rhoAt (anchors 0) (anchors 1) = 10 ∧ rhoAt (anchors 0) (anchors 2) = 3 ∧
       rhoAt (anchors 1) (anchors 2) = 9 := by
-  native_decide
+  decide +kernel
 
 /-- The normalized projective matrix list has the order of `PGL(2,13)`. -/
 theorem projectiveMatrices_length :
     PassantCodeQ13.MinimumWords.projectiveMatrices.length = 2184 := by
-  native_decide
+  decide +kernel
 
 /-- Every normalized symmetric-square matrix action is a permutation of the internal points.
 
