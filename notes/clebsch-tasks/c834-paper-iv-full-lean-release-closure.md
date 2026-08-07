@@ -12,7 +12,31 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-07)
+## Resume here (2026-08-07, later)
+
+Stage 5 item 10 is closed, and structurally. `admissible_seven_set_is_geometric_row` is proved from
+the Gram relation of four internal points instead of an indexed passant-clique search, and
+`IndexCertificate`, `Aggregate`, `PairTransport` and the seven residue shards are deleted. Two new
+modules carry the geometry: `RowUniqueness.BitangentSupport` proves that the off-chord points of
+`C - nu L^2` are internal and, for an admissible pair, are one of the 364 displayed minimum-weight
+supports — one `decide +kernel` exhaustion over the 183 dual triples and 13 field elements — and
+`RowUniqueness.BitangentWitness` derives the chord from a trace pattern, identifying `4 F` with the
+adjugate row sum of the trace Gram matrix and reducing the witness conditions to two nonsquare tests
+in `ZMod 13`. `RowUniqueness.Transport` assembles them; `RowUniqueness.PassantRowMasks` carries the
+row bit sets the semantic transports still need.
+
+Both package gates build, the evidence verifier passes, and the axiom audit reports 84 terminals of
+which 73 are clean; the 11 carrying a declaration-local native-evaluation axiom are unchanged. What
+remains of the native decisions is the fourteen weight-ten profile shards, the automorphism anchors,
+and the fixed-point exhaustion — stage 5 items 11 to 13 — and then the stage 6 release surfaces.
+Report: `notes/2026-08-07-c834-bitangent-support-and-row-uniqueness-assembly.md`.
+
+The converse half is unchanged and still enumerated: `geometric_rows_have_zero_triple_concurrence`
+is a blockwise kernel check that no displayed support meets a passant in three points. A structural
+replacement would prove directly that a minimum support meets every passant in zero or two points,
+which belongs with stage 5 item 13.
+
+## Superseded resume note (2026-08-07, earlier)
 
 The row-uniqueness layer now has a structural proof, and the two open items of the 2026-08-06 mystery
 ledger are closed by one theorem: four internal points that are pairwise passant-joined and all four
@@ -318,11 +342,10 @@ neither is elaborated.
 
 **Stage 5 — the remaining enumerations, where tabulation is the right tool.**
 
-10. Row uniqueness is closed, and not by tabulation: the check is restated on index bit sets and run
-    as a passant-clique search, one first index per declaration, grouped in the existing seven
-    residue modules. The plan's objection to the structural route stands for a triple-indexed
-    transporter; a point transporter would still give a 78-fold reduction and is not used, because
-    the equivariance of the rows themselves is not formalized.
+10. Row uniqueness is closed, and structurally: no search over points, lines, or supports survives.
+    The finite content is the residue exhaustion of `QuadrupleGram` and the bitangent-support
+    exhaustion over the 183 dual triples and 13 field elements. Neither the group action nor the
+    equivariance transport is used.
 11. Automorphism anchors: the anchor triple is fixed, so no orbit reduction applies; tabulate the
     signature statements. Stage 2 has already removed the expensive one.
 12. Weight-ten profiles: the seven isolated fibres and seven cycle residues are shard-sized by
