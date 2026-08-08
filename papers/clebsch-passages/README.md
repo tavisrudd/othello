@@ -2,7 +2,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682515-blue.svg)](https://doi.org/10.5281/zenodo.21682515)
 
-**Clebsch portfolio:** Paper III of the four-paper *The Clebsch cubic* series.
+**Clebsch portfolio:** The third paper of the four-paper *The Clebsch cubic* series.
 The broader current portfolio also includes the companion paper *Diagonal
 Isoduality and Transversal Clifford Groups of MDS--CSS Codes*. The shared
 progression is expository: this paper is logically independent of the other
