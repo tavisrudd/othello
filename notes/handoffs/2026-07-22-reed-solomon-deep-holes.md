@@ -63,9 +63,14 @@ consequences are kernel-checked, and the certificate's field domain is now separ
 seven field orders the classification depends on it for, with the synthesis input's
 classification range extended to binary `q >= 16` so that separation is not vacuous.  The
 field-range closure ledger, which still listed `q = 16` under R5 direct census, is repaired.
-The report is `notes/2026-08-07-c883-r5-lean-sync.md`; the generated beyond-four trust fact
-still needs regeneration, which the extractor refuses while two untracked `relconic` files sit
-in the Lean worktree.  The open items are the coset-multiplicity and error-distribution
+The abstract and the portfolio summary now carry the exact split-witness count as a
+headline.  The whole export chain has run: the beyond-four trust fact is regenerated, the
+area export was adopted into finitegeom as `16c9396`, and the paper mirror carries a
+Version 2 draft commit `83a83b3` with its release gate green.  Nothing is pushed, and the
+standing decision that no export publishes before Version 2 is release-ready still binds
+that commit.  Clearing the paper export also required repairing the statement map's
+withdrawal paragraph, which cited an internal task note.
+The report is `notes/2026-08-07-c883-r5-lean-sync.md`.  The open items are the coset-multiplicity and error-distribution
 statement, the sporadic table's fibre-square invariant column, identification of the
 Hankel--Pluecker map with a classical apolarity covariant, and the higher-genus reading of the
 fibre-square argument.
