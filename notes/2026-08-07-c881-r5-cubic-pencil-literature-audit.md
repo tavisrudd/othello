@@ -90,14 +90,21 @@ Theorem 3.3 gives the **exact** number of planes of each orbit through each line
 literature.  For the generic class, Kaipa--Pradhan Theorem 1.3 gives, for
 \(\mathrm{char}\,\F_q\neq2,3\) and \(q>4\),
 \[
- |S\cap O_3|=\frac{\#E_L(\F_q)-3\eta_L}{3},
+ |S\cap O_3|=\frac{\#E_L(\F_q)-3\eta_L}{6},
 \]
 with \(\eta_L\in\{0,1,2,4\}\) recording the rational factorization type of the associated
 binary quartic \(\varphi_L\).  So a generic line is split-free exactly when
 \(\#E_L(\F_q)=3\eta_L\le 12\); with the Hasse bound \(\#E_L\ge q+1-2\sqrt q\), that is
-impossible once \(q\ge 23\), and admissible only for \(q\le 19\).  That reproduces our
-generic threshold and, unlike our proof, *explains* it.  Note the reviewer quoted this
-formula with denominator 6; the published denominator is 3.
+impossible once \(q\ge 20\), and admissible only for \(q\le 19\).  That reproduces our
+generic threshold and, unlike the original proof, *explains* it.
+
+The denominator needs care.  The displayed statement of their Theorem 1.3(3) prints 3,
+but their own derivation gives 6: Proposition 4.5(3) reads
+\(|S\cap O_3|=(\nu_L-\eta_L)/3\) and Theorem 5.1 reads
+\(\nu_L=(\#E_L(\F_q)-\eta_L)/2\), which compose to \((\#E_L-3\eta_L)/6\); and only 6
+makes their five incidence counts sum to \(q+1\).  The printed 3 is a typographical slip.
+Cite the derivation, not the display.  Independently confirmed by exhaustive computation
+in `papers/beyond4_prs/supplement/evidence/r5-elliptic-incidence/`.
 
 Characteristic coverage of the generic class is complete in the literature: Kaipa--Pradhan
 for \(\mathrm{char}\neq2,3\), their characteristic-three companion, and Ceria--Pavese for
@@ -189,8 +196,14 @@ Read depth is recorded for every source, including those named only to place the
   characteristic \(>3\)*, Finite Fields Appl. **78** (2022), Paper No. 101960;
   `arXiv:2104.04756v1`.  **Partial** — abstract and §1 introduction, for the
   lines-equal-pencils equivalence and the scope of their point-orbit and plane-orbit
-  distributions (ten non-generic orbits, \(q\) odd and not divisible by 3).  Their tables
-  were not read line by line.  Cache key `arXiv:2104.04756`, SHA-256
+  distributions (ten non-generic orbits, \(q\) odd and not divisible by 3); and §2 read in
+  full, for the map \(\delta_3\) carrying cubics of \(PG(1,q)\) to planes of \(PG(3,q)\),
+  the symplectic polarity \(\sigma:(y_0,y_1,y_2,y_3)\mapsto[-y_3,3y_2,-3y_1,y_0]\) sending
+  each point of the twisted cubic to its osculating plane and the chords of the twisted
+  cubic to the axes of the osculating developable, Lemma 1 on self-polar lines, Lemma 2
+  identifying the polar of a line in the intersection of two osculating planes as the chord
+  through the two contact points, and the six line classes \(O_1,\dots,O_6\) with their
+  duals and sizes.  Their distribution tables were not read line by line.  Cache key `arXiv:2104.04756`, SHA-256
   `8aa3eb759c0d904cef7d5ef515bf57bd09306c3e11cd1392d415f54c95c198fd`, fetched 2026-08-07.
 - **Davydov, Marcugini, Pambianco**, *Twisted cubic and plane-line incidence matrix in
   \(PG(3,q)\)*, J. Geom. **113** (2022), no. 2, Paper No. 29; `arXiv:2103.11248v3`.

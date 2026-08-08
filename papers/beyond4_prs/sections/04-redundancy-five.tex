@@ -411,21 +411,36 @@ Frobenius links are exactly the domain of Certificate R5.
 
 \begin{remark}[Relation to the twisted-cubic line literature]
 \label{rem:r5-line-literature}
-Two conventions for ``the line attached to a pencil'' are in use, and
-they are polar duals of each other; the labels below are stated in the
-first and would be exchanged in the second.  Blokhuis, Pellikaan, and
-Sz\H onyi attach to the pencil $\langle c_1,c_2\rangle$ the line cut out
-by the two linear equations with coefficient vectors $c_1$ and $c_2$
-\cite[Prop.~5.5]{BPS2022}, so their line meets the twisted cubic exactly
-where $c_1$ and $c_2$ have a common root.  Kaipa and Pradhan instead
-identify the pencil itself with a line of $\mathbf P(\Sym^3E^\vee)$,
-whose points are cubics and whose twisted cubic consists of the perfect
-cubes \cite[\S1]{KaipaPradhan2025}.  A pencil with a common quadratic
-factor is therefore a chord in the first convention and an axis in the
-second, and a pencil of the form $\langle T^3,U^3\rangle$ is an axis in
-the first and a chord in the second.  Both descriptions give the same
-split members, since the polarity is an isomorphism of the incidence
-structure.
+Two conventions for ``the line of $\mathrm{PG}(3,q)$ attached to a pencil
+of binary cubics'' are in use, and they are exchanged by a polarity, so
+the class names below must be read in the right one.  G\"unay and
+Lavrauw, and Blokhuis, Pellikaan, and Sz\H onyi, send a cubic to a
+\emph{plane}: the twisted cubic is a curve of points, a cubic is the
+plane meeting it in that cubic's divisor, and a pencil of cubics becomes
+a pencil of planes, whose axis is the line
+\cite[\S2]{GunayLavrauw2022}, \cite[Prop.~5.5]{BPS2022}.  Kaipa and
+Pradhan send a cubic to a \emph{point}, so that the twisted cubic
+consists of the perfect cubes and the pencil \emph{is} the line
+\cite[\S1]{KaipaPradhan2025}.  The bridge is the symplectic polarity
+$\sigma$ of $\mathrm{PG}(3,q)$, which carries each point of the twisted
+cubic to its osculating plane and carries the chords of the twisted
+cubic to the axes of the osculating developable
+\cite[\S2]{GunayLavrauw2022}.
+
+For us the translation is concrete.  The osculating plane at the point
+$\lambda^3$ of the twisted cubic is $\lambda\Sym^2E^\vee$, so
+\[
+ \operatorname{Osc}(\lambda_1)\cap\operatorname{Osc}(\lambda_2)
+       =\lambda_1\lambda_2\langle T,U\rangle
+\]
+is exactly a quadratic-gcd pencil, which is therefore an axis in the
+point convention; by \cite[Lem.~2]{GunayLavrauw2022} its polar is the
+chord joining $\lambda_1^3$ and $\lambda_2^3$, which is what the plane
+convention calls it.  Symmetrically $\langle T^3,U^3\rangle$ joins two
+points of the twisted cubic and so is a chord in the point convention
+and an axis in the plane convention.  The class names in this remark
+follow the plane convention of the source being cited; the split members
+of a pencil are of course the same either way.
 
 Under \eqref{eq:r5-orbit-criterion} every stratum above is a class of
 lines of $\mathrm{PG}(3,q)$ in the sense of Blokhuis, Pellikaan, and
