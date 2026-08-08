@@ -52,9 +52,9 @@ which claims rest on exact execution rather than on a proof.
 
 ## Formal companion
 
-The Lean development is deposited separately and is not part of this release.
-This manuscript-only pre-release intentionally leaves the formal companion for
-a forward version. Until that version is published, the trust table in the
+The Lean development is deposited separately and is not part of this version.
+The current release intentionally excludes the formal companion; a future
+version will add it. Until then, the trust table in the
 manuscript is the authority on which claims are kernel-checked Lean theorems,
 compiled-evaluation leaves, exact executions, or explicit human transports.
 
