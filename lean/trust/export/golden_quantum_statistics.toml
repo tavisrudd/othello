@@ -31,21 +31,24 @@ eigenframe, and proves the characteristic polynomial of its exchange
 compression.  The all-orders terminals give the principal-block eigenvalue
 formula, the aligned-four-set second-moment formula, nonconstancy for every
 half-size at least four, the small principal-block formulas, and order-four
-nonexistence.
+nonexistence.  Over the complex numbers, the Hermitian triangle terminal proves
+the characteristic polynomial and the exact first two moments, second
+elementary invariant, determinant, and degree-three sector formulas as
+functions of squared real triangle holonomy.
 
 The all-orders rigidity directions are separate terminals rather than one
 bundled equivalence.  This formal artifact does not prove the aligned-design
 mean and variance, the continuous-control optimum, the Hermitian exchange
-landscape, the squared-spectrum rigidity and stability bounds, the balance
-obstruction, the optical compilation, the tomographic identifiability
-statements, or any experimental threshold.  Those results are established in
-the accompanying paper by ordinary mathematical proof, cited literature, or
-exact certificate computation.
+phase/control domain and Pareto frontier, the squared-spectrum rigidity and
+stability bounds, the balance obstruction, the optical compilation, the
+tomographic identifiability statements, or any experimental threshold.  Those
+results are established in the accompanying paper by ordinary mathematical
+proof, cited literature, or exact certificate computation.
 """
 
 boundary = """
-Every terminal is a symbolic kernel proof over a commutative ring or the real
-numbers.  The closure contains no generated certificate, native evaluation,
+Every terminal is a symbolic kernel proof over a commutative ring, the real
+numbers, or the complex numbers.  The closure contains no generated certificate, native evaluation,
 imported external data, user axiom, unsafe declaration, or admitted proof.  The
 generated axiom audit records the exact uses of Mathlib's standard classical
 principles.

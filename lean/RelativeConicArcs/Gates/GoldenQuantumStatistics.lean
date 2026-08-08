@@ -1,6 +1,7 @@
 import RelativeConicArcs.BalancedExchangeHalfCut
 import RelativeConicArcs.ConferenceExchangeCompression
 import RelativeConicArcs.ConferenceExchangeSpectrum
+import RelativeConicArcs.HermitianConferenceExchange
 
 /-!
 # Balanced cuts and exchange spectra of order-six conference matrices
@@ -34,8 +35,14 @@ formulas, and nonexistence at order four.  The two directions of conference
 exchange rigidity are exported as separate theorem terminals rather than one
 bundled equivalence.
 
+`RelativeConicArcs.HermitianConferenceExchange` proves the unit-modulus
+Hermitian triangle characteristic polynomial and packages the normalized
+exchange invariants through degree three.  The first two power sums and second
+elementary invariant are constant, while the determinant and two degree-three
+sectors are the stated affine functions of squared real triangle holonomy.
+
 The imported proofs do not formalize the paper's orbit and orientation
-classification, its all-orders rigidity converse, its continuous-control
-optimum, its Hermitian exchange landscape, its stability bounds, or any
-decoding, tomography, optical-compilation, or experimental statement.
+classification, its continuous-control optimum, the admissible Hermitian
+phase/control domain and Pareto frontier, its stability bounds, or any decoding,
+tomography, optical-compilation, or experimental statement.
 -/

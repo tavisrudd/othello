@@ -1532,6 +1532,7 @@ terminals = [
   "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two",
   "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
   "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
+  "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape",
 ]
 coverage_rule = "closure"
 
@@ -2218,6 +2219,11 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
