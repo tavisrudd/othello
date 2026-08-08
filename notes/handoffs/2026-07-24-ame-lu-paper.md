@@ -10,6 +10,16 @@ Discovery companion:
 
 ## Current status
 
+**C887 queued (2026-08-08), highest priority: adversarial referee-review
+validation and remediation.**  A supplied cold review identifies a possible
+headline scope gap at $m=2$, a Bell-pair conjugation error, and several
+literature/novelty-positioning risks.  C887 must independently reproduce every
+mathematical and bibliographic claim before changing the paper, then prepare a
+locally releasable authoritative and standalone revision for all findings that
+survive.  The exact review checklist and acceptance gates are frozen in
+`2026-08-08-c887-ame-lu-referee-review-remediation.md`.  No public deposit,
+push, or submission is authorized.
+
 **Both papers are published (2026-08-03).** The rigidity paper is deposited as
 DOI `10.5281/zenodo.21681856` with mirror `8468914`; the transversal-groups
 paper as DOI `10.5281/zenodo.21766797` with mirror `f90b330`. Each now cites
