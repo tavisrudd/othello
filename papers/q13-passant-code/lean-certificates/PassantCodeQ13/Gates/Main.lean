@@ -37,18 +37,32 @@ theorem incidenceRankAndCodeDimension :
   have rank := PassantCodeQ13.SemanticTransports.incidenceMap_has_rank_fortyTwo
   exact ⟨rank, RelativeConicArcs.PassantCodeQ13.passantCode_finrank_eq_thirtySix rank⟩
 
-/-- The two weight-ten syndrome profiles are empty in every shard. -/
-theorem weightTenCertificate :
-    localPartitionCheck = true ∧
-      (isolatedProfileCheck 0 = true ∧ isolatedProfileCheck 1 = true ∧
-        isolatedProfileCheck 2 = true ∧ isolatedProfileCheck 3 = true ∧
-        isolatedProfileCheck 4 = true ∧ isolatedProfileCheck 5 = true ∧
-        isolatedProfileCheck 6 = true) ∧
-      (cycleProfileCheck 0 = true ∧ cycleProfileCheck 1 = true ∧
-        cycleProfileCheck 2 = true ∧ cycleProfileCheck 3 = true ∧
-        cycleProfileCheck 4 = true ∧ cycleProfileCheck 5 = true ∧
-        cycleProfileCheck 6 = true) :=
-  ⟨local_partition, all_isolated_profiles_disjoint, all_cycle_profiles_disjoint⟩
+/-- At the normalized internal point `(1,0,2)` the other internal points split into seven six-point
+passant fibres and thirty-five secant-join neighbours. -/
+theorem weightTenLocalPartition : localPartitionCheck = true :=
+  local_partition
+
+/-- For each of the seven possible distinguished passant fibres, no choice of one point from each
+of the three left-hand ordinary fibres has the same incidence syndrome as any choice of the base
+column, a three-point increment in the distinguished fibre, and one point from each remaining
+ordinary fibre.  The quantifier ranges over the complete Cartesian domain of choices. -/
+theorem isolatedWeightTenProfilesExcluded :
+    IsolatedReachability.ProfileExcluded 0 ∧ IsolatedReachability.ProfileExcluded 1 ∧
+      IsolatedReachability.ProfileExcluded 2 ∧ IsolatedReachability.ProfileExcluded 3 ∧
+      IsolatedReachability.ProfileExcluded 4 ∧ IsolatedReachability.ProfileExcluded 5 ∧
+      IsolatedReachability.ProfileExcluded 6 :=
+  IsolatedReachability.all_profiles_excluded
+
+/-- Every configuration consisting of the base point, an unordered pair of its secant neighbours,
+and one point in each of the seven passant fibres through it carries three points on a common
+passant or contains a point with three secant neighbours.  Neither is possible in a ten-point
+codeword support all of whose points have secant degree two. -/
+theorem cycleWeightTenConfigurationsObstructed
+    {pair : List Nat} (pair_mem : pair ∈ secantNeighbors.sublistsLen 2)
+    {path : List CycleExclusion.MarkedPoint}
+    (selection : CycleExclusion.Selection CycleExclusion.markedFibres path) :
+    CycleExclusion.obstructed (CycleExclusion.markedStart pair ++ path) = true :=
+  CycleExclusion.obstructed_of_base_pair_and_fibres pair_mem selection
 
 /-- Every supported point of every semantic weight-ten word has the isolated or cycle pencil
 profile checked by the fixed-base certificate leaves. -/

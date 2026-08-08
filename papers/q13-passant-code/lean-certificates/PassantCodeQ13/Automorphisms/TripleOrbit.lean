@@ -1,5 +1,4 @@
-import PassantCodeQ13.Automorphisms.Base
-import PassantCodeQ13.SymmetricSquareInvariance
+import PassantCodeQ13.Automorphisms.AnchorOrbit
 
 /-!
 # Regular projective orbit of the first three anchors
@@ -10,11 +9,11 @@ its polar form under substitution, so neither quantifies over the matrices by ev
 
 The relation pattern `(10,3,9)` of the first three anchors and the length of the normalized matrix
 list are decided by kernel reduction, the first over three pairs of coordinates and the second over
-the displayed matrix list.  Native evaluation remains in this module only for the identification of
-the images of the first three anchors with the ordered triples carrying that pattern; that check
-also records that all 2184 images are distinct, so this is the regular triple orbit used by the
-automorphism argument, and it carries the declaration-local axiom that compiled evaluation
-introduces.
+the displayed matrix list.  The images of the first three anchors are then identified with the
+ordered triples carrying that pattern.  One inclusion is the invariance of the relation; the other
+and the count of the images come from the two kernel-reduced checks of
+`PassantCodeQ13.Automorphisms.AnchorOrbit`, so the orbit is regular and no terminal of this module
+carries a compiled-evaluation axiom.
 -/
 
 namespace PassantCodeQ13.Automorphisms
@@ -89,10 +88,27 @@ theorem matrixAction_preservesRho
     (SymmetricSquare.determinant_ne_zero_of_mem matrix_mem) first_nondegenerate
     second_nondegenerate
 
+set_option maxRecDepth 10000 in
 /-- The projective images of the first three anchors are exactly the triples of pattern
 `(10,3,9)`, and all 2184 images are distinct. -/
 theorem projectiveAnchorTriples_eq_patterned :
     projectiveAnchorTriples = patternedTriples ∧ projectiveAnchorTriples.card = 2184 := by
-  native_decide
+  have subset : projectiveAnchorTriples ⊆ patternedTriples := by
+    intro triple triple_mem
+    obtain ⟨matrix, _, image⟩ := Finset.mem_image.mp triple_mem
+    subst image
+    simp only [patternedTriples, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨(matrixAction_preservesRho matrix _ _).trans anchorTriplePattern.1,
+      (matrixAction_preservesRho matrix _ _).trans anchorTriplePattern.2.1,
+      (matrixAction_preservesRho matrix _ _).trans anchorTriplePattern.2.2⟩
+  have superset : patternedTriples ⊆ projectiveAnchorTriples := by
+    intro triple triple_mem
+    simp only [patternedTriples, Finset.mem_filter, Finset.mem_univ, true_and] at triple_mem
+    obtain ⟨matrix, image⟩ :=
+      exists_matrixAction_of_pattern triple_mem.1 triple_mem.2.1 triple_mem.2.2
+    exact Finset.mem_image.mpr ⟨matrix, Finset.mem_univ _, image⟩
+  refine ⟨Finset.Subset.antisymm subset superset, ?_⟩
+  rw [projectiveAnchorTriples, Finset.card_image_of_injective _ anchorImageTriple_injective,
+    Finset.card_univ, Fintype.card_fin, projectiveMatrices_length]
 
 end PassantCodeQ13.Automorphisms

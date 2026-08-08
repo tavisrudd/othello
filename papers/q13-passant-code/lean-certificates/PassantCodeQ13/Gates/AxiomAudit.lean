@@ -8,9 +8,8 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 -/
 
 #print axioms PassantCodeQ13.WeightTen.local_partition
-#print axioms PassantCodeQ13.WeightTen.all_isolated_profiles_disjoint
-#print axioms PassantCodeQ13.WeightTen.all_cycle_profiles_disjoint
-#print axioms PassantCodeQ13.WeightTen.cycle_pair_partition
+#print axioms PassantCodeQ13.WeightTen.IsolatedReachability.all_profiles_excluded
+#print axioms PassantCodeQ13.WeightTen.CycleExclusion.obstructed_of_base_pair_and_fibres
 #print axioms PassantCodeQ13.Rank.incidenceRows_rank
 #print axioms PassantCodeQ13.SemanticTransports.recoverCoefficient_basisColumn
 #print axioms PassantCodeQ13.SemanticTransports.incidenceColumn_expansion
@@ -23,6 +22,7 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskProduct
 #print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskXor
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoZero_entry_certificate
+#print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoThree_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoNine_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoTen_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoTwelve_entry_certificate
@@ -64,13 +64,18 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.MinimumWords.RowUniqueness.reconstructed_rows_eq_geometric_passant_rows
 #print axioms PassantCodeQ13.Automorphisms.projectiveMatrices_length
 #print axioms PassantCodeQ13.Automorphisms.anchorTriplePattern
+#print axioms PassantCodeQ13.Automorphisms.rhoAt_self
+#print axioms PassantCodeQ13.Automorphisms.anchorImages_are_distinct
+#print axioms PassantCodeQ13.Automorphisms.patternedCodes_are_anchorImages
 #print axioms PassantCodeQ13.Automorphisms.matrixAction_bijective
 #print axioms PassantCodeQ13.Automorphisms.matrixAction_preservesRho
 #print axioms PassantCodeQ13.Automorphisms.projectiveAnchorTriples_eq_patterned
 #print axioms PassantCodeQ13.Automorphisms.firstThreeSignature_eq_iff
 #print axioms PassantCodeQ13.Automorphisms.anchorSignature_injective
 #print axioms PassantCodeQ13.Automorphisms.preservesRho_iff_projective
-#print axioms PassantCodeQ13.Gates.Main.weightTenCertificate
+#print axioms PassantCodeQ13.Gates.Main.weightTenLocalPartition
+#print axioms PassantCodeQ13.Gates.Main.isolatedWeightTenProfilesExcluded
+#print axioms PassantCodeQ13.Gates.Main.cycleWeightTenConfigurationsObstructed
 #print axioms PassantCodeQ13.Gates.Main.arbitraryWeightTenProfileTransport
 #print axioms PassantCodeQ13.Gates.Main.minimumOrbitCertificate
 #print axioms PassantCodeQ13.Gates.Main.fixedPointWeightTwelveExhaustion
