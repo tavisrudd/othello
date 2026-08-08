@@ -2843,8 +2843,17 @@
       "last": 882,
       "purpose": "Resolve whether split-free redundancy-five directions give one-column MDS extensions, given Kaipa's boundary at covering radius n-k-1 and Dur's completeness equivalence; re-check the balanced q=8 quantum corollary",
       "sequence": 316
+    },
+    {
+      "count": 1,
+      "first": 883,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 883,
+      "purpose": "Redundancy-five follow-ups from the Kaipa and Tao passes: Lean sync, characteristic-two count, error distribution, sporadic invariants, Hankel-Plucker covariant, higher-genus generalization",
+      "sequence": 317
     }
   ],
-  "next_id": 883,
+  "next_id": 884,
   "schema": "codex-task-id-allocations-v1"
 }

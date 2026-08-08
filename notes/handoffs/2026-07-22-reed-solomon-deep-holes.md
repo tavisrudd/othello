@@ -56,6 +56,13 @@ no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
+C883 carries the redundancy-five follow-ups from the same two passes, each promotable into the
+manuscript under that ID after review: Lean sync for the two arithmetic corollaries that are
+currently manuscript-only, a characteristic-two companion to the exact split-witness count, the
+coset-multiplicity and error-distribution statement, the sporadic table's fibre-square invariant
+column, identification of the Hankel--Pluecker map with a classical apolarity covariant, and the
+higher-genus reading of the fibre-square argument.
+
 C882 corrected a defect that the literature work surfaced: the paper inferred a
 one-column MDS extension from a split-free direction.  An extension needs a syndrome
 outside the span of every r-1 parity-check columns while split-freeness gives only r-2,
