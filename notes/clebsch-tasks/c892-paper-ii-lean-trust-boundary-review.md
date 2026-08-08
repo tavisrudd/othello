@@ -2,14 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** active 2026-08-08; independent review has reached a **MAJOR / NO-GO**
-verdict and is recorded in
-`../2026-08-08-c892-paper-ii-lean-trust-boundary-review.md`.  The guarded gates
-and the full Lean-independent standalone aggregate are green; the already
-launched authoritative aggregate still needs its final completion envelope
-observed before lifecycle closeout.  This task may write its audit records and
-lifecycle docs, but it does not own repairs to Lean, manuscript, verification,
-export, or standalone-release files.
+**Status:** complete 2026-08-08 with a **MAJOR / NO-GO** verdict, recorded in
+`../2026-08-08-c892-paper-ii-lean-trust-boundary-review.md`.  The guarded gates,
+the full Lean-independent standalone aggregate, and the authoritative aggregate
+are green; the verdict is caused by theorem-coverage and trust-boundary defects,
+not a current elaboration, axiom or replay failure.  No Lean, manuscript,
+verification, export or standalone-release file was changed.
 
 ## Objective
 

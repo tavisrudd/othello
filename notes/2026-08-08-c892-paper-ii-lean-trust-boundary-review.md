@@ -258,13 +258,16 @@ public artifact.
   hyperplane-square gates were trace-current; the stale Paper-II structural
   gate was rebuilt successfully at 1.81 GB peak RSS and then passed an exact
   trace-current aggregate confirmation.
+- The authoritative full aggregate then passed in 2 minutes 27 seconds: every
+  primary and independent replay, all four guarded gate elaborations, the
+  runner's fifty-five-row foundational-axiom allowlist, and the deterministic
+  warning-free forty-three-page manuscript build ended in
+  `clebsch factorization release: CHECK OK`.
 
-The already-launched authoritative full aggregate had not returned its final
-completion envelope within this review's bounded observation window.  Its
-Lean-independent work has been covered by the clean standalone aggregate, and
-all four Lean targets have separately passed the guarded trace-current gate;
-no completion claim for the combined wrapper is made here until its envelope
-is observed.
+The aggregate's success does not weaken the MAJOR verdict.  It confirms that
+the present mixed-boundary artifact is internally green under its current
+checks; M1--M6 identify claims and inputs those checks do not cover or identify
+exactly.
 
 ## EJ + Tao closeout
 
