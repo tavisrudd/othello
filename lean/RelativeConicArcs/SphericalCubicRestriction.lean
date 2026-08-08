@@ -246,4 +246,120 @@ theorem faceAxisCubic_comp_faceAxisLabelPermutation (r : Fin 3) (y : Fin 5 → �
       (faceAxisRotation_rows_orthogonal r))
   exact congrArg (fun z : ℝ ⇒ z / momentFactor 20) h
 
+/-- Apply a word in the three displayed rotation generators from left to right
+to a label. -/
+def applyRotationWord : List (Fin 3) → Fin 5 → Fin 5
+  | [], i => i
+  | r :: word, i => applyRotationWord word (faceAxisLabelPermutation r i)
+
+/-- The cubic moment is invariant under every word in the three displayed
+rotation generators. -/
+theorem faceAxisCubic_comp_applyRotationWord (word : List (Fin 3)) (y : Fin 5 → ℝ) :
+    faceAxisCubic (fun i ↦ y (applyRotationWord word i)) = faceAxisCubic y := by
+  induction word with
+  | nil => rfl
+  | cons r word ih =>
+      rw [show (fun i ↦ y (applyRotationWord (r :: word) i)) =
+          (fun i ↦ (fun j ↦ y (applyRotationWord word j))
+            (faceAxisLabelPermutation r i)) by rfl,
+        faceAxisCubic_comp_faceAxisLabelPermutation, ih]
+
+/-- Explicit words carrying label zero to each of the five labels. -/
+def rootMoverWord : Fin 5 → List (Fin 3)
+  | 0 => []
+  | 1 => [2]
+  | 2 => [2, 0, 2]
+  | 3 => [1, 0, 2]
+  | 4 => [0, 2]
+
+/-- The displayed root-moving words have their asserted endpoints. -/
+theorem applyRotationWord_rootMoverWord (i : Fin 5) :
+    applyRotationWord (rootMoverWord i) 0 = i := by
+  revert i
+  decide
+
+/-- Explicit words in the stabilizer of label zero.  For distinct nonzero
+labels `i,j`, the selected word carries the ordered pair `(1,2)` to `(i,j)`;
+entries outside that domain are irrelevant and set to the empty word. -/
+def stabilizerPairWord : Fin 5 → Fin 5 → List (Fin 3) :=
+  ![!([], [], [], [], []),
+    !([], [], [], [1, 1], [1]),
+    !([], [1, 1, 0, 1], [], [0, 1, 0], [1, 1, 0]),
+    !([], [1, 0, 1], [1, 0], [], [1, 0, 1, 1]),
+    !([], [0, 1], [0, 1, 1], [0], [])]
+
+/-- The twelve stabilizer words fix zero and act sharply transitively on the
+ordered pairs of distinct nonzero labels. -/
+theorem applyRotationWord_stabilizerPairWord {i j : Fin 5}
+    (hi : i ≠ 0) (hj : j ≠ 0) (hij : i ≠ j) :
+    applyRotationWord (stabilizerPairWord i j) 0 = 0 ∧
+      applyRotationWord (stabilizerPairWord i j) 1 = i ∧
+      applyRotationWord (stabilizerPairWord i j) 2 = j := by
+  revert i j
+  decide
+
+/-- A word for the inverse of one displayed generator.  The first and third
+generators are involutions; the inverse of the second is its square. -/
+def inverseGeneratorWord : Fin 3 → List (Fin 3)
+  | 0 => [0]
+  | 1 => [1, 1]
+  | 2 => [2]
+
+/-- Reverse a rotation word and replace each generator by its displayed inverse
+word. -/
+def inverseRotationWord : List (Fin 3) → List (Fin 3)
+  | [] => []
+  | r :: word => inverseRotationWord word ++ inverseGeneratorWord r
+
+/-- Applying concatenated words means applying the first word and then the
+second. -/
+theorem applyRotationWord_append (u v : List (Fin 3)) (i : Fin 5) :
+    applyRotationWord (u ++ v) i = applyRotationWord v (applyRotationWord u i) := by
+  induction u generalizing i with
+  | nil => rfl
+  | cons r u ih => simp [applyRotationWord, ih]
+
+/-- The constructed inverse word undoes a rotation word on every label. -/
+theorem applyRotationWord_inverseRotationWord (word : List (Fin 3)) (i : Fin 5) :
+    applyRotationWord (inverseRotationWord word) (applyRotationWord word i) = i := by
+  induction word generalizing i with
+  | nil => rfl
+  | cons r word ih =>
+      rw [applyRotationWord, inverseRotationWord, applyRotationWord_append, ih]
+      fin_cases r <;> decide
+
+/-- A word carrying a distinct ordered label triple to the standard triple
+`(0,1,2)`: first move its first label to zero, then use the sharply transitive
+zero stabilizer on the other two labels. -/
+def canonicalTripleWord (a b c : Fin 5) : List (Fin 3) :=
+  let move := inverseRotationWord (rootMoverWord a)
+  let b' := applyRotationWord move b
+  let c' := applyRotationWord move c
+  move ++ inverseRotationWord (stabilizerPairWord b' c')
+
+/-- The canonicalizing word sends every ordered triple of distinct labels to
+`(0,1,2)`. -/
+theorem applyRotationWord_canonicalTripleWord {a b c : Fin 5}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    applyRotationWord (canonicalTripleWord a b c) a = 0 ∧
+      applyRotationWord (canonicalTripleWord a b c) b = 1 ∧
+      applyRotationWord (canonicalTripleWord a b c) c = 2 := by
+  revert a b c
+  decide
+
+/-- An explicit rotation word carrying one ordered triple of distinct labels to
+another. -/
+def tripleTransportWord (a b c i j k : Fin 5) : List (Fin 3) :=
+  canonicalTripleWord a b c ++ inverseRotationWord (canonicalTripleWord i j k)
+
+/-- The displayed rotation words act three-transitively on the five labels. -/
+theorem applyRotationWord_tripleTransportWord {a b c i j k : Fin 5}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hij : i ≠ j) (hik : i ≠ k) (hjk : j ≠ k) :
+    applyRotationWord (tripleTransportWord a b c i j k) a = i ∧
+      applyRotationWord (tripleTransportWord a b c i j k) b = j ∧
+      applyRotationWord (tripleTransportWord a b c i j k) c = k := by
+  revert a b c i j k
+  decide
+
 end RelativeConicArcs.SphericalCubicRestriction

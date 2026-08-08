@@ -255,7 +255,7 @@ the following task-owned obligations, in execution order:
    surviving moment is now also proved,
    `M(Hodd² Heven) = -1024/969969`, and the first-coordinate transposition
    proves `M(Hodd³) = M(Hodd Heven²) = 0` symbolically.  What remains in this
-   item is coefficient-orbit reduction, sum-zero collapse, and the rational
+   item is the structure-coefficient orbit reduction, sum-zero collapse, and the rational
    general-weight corollary.  The marked odd/even combination is now assembled for
    either square root of five, and its cubic mean is proved to be the rational
    value `-15680000/1247103`.  It is also identified coefficientwise with the
@@ -266,6 +266,12 @@ the following task-owned obligations, in execution order:
    zonal combination by its displayed five-label permutation, and
    `faceAxisCubic_comp_faceAxisLabelPermutation` gives the resulting cubic
    invariance.
+   Invariance is extended to arbitrary generator words.  Five explicit root
+   movers and twelve explicit words in the root stabilizer are kernel-checked;
+   reversing them with the displayed generator inverses produces
+   `tripleTransportWord`, which carries any ordered triple of distinct labels to
+   any other.  Thus the needed three-transitivity is proved without subgroup
+   closure or an alternating-group computation.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This

@@ -536,6 +536,13 @@ ten-axis zonal field by the displayed label permutations, and the algebraic
 moment functional makes `faceAxisCubic` invariant under all three.  The explicit
 word-orbit reduction and sum-zero collapse remain.
 
+The finite word layer is closed.  `applyRotationWord` preserves
+`faceAxisCubic`; the five root-moving words and twelve sharply transitive
+root-stabilizer words are kernel-checked; and explicit inverse words assemble
+`tripleTransportWord`, proving three-transitivity on ordered distinct triples.
+No subgroup closure, group-order calculation or compiled evaluation enters.
+The structure-coefficient reduction and sum-zero collapse remain.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared
