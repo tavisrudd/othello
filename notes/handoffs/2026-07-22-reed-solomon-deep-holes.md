@@ -1140,7 +1140,7 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C886 | queued; Version 2 mathematics and full paper audit are green | capture the current cold-read signal while the manuscript architecture is fresh, before Version 2 release |
+| 1 | C886 | active; conceptual layer green at 44 TIT pages, full replay and final cold reads open | finish the bounded accessibility pass without changing the proof spine or release scope |
 | 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
 | 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 

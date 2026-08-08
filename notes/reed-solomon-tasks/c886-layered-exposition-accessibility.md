@@ -2,7 +2,17 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** queued.
+**Status:** active.  The end-to-end rendered read and first layered-exposition
+pass are complete.  The abstract now leads through the R5 model before the
+recursive carrier, Section II gives an operational proof map and an R5--R10
+mechanisms table, the end of R5 and Example V.3 identify the recursion in
+miniature, and the introduction and Section VI separate unconditional
+component geometry from conditional finite-field escape.  No theorem,
+proposition, lemma, corollary, or definition environment changed.  Both
+manuscript drivers and the quick verifier are green; the TIT submission
+remains 44 pages.  The full paper-local replay is running unattended.
+Remaining gates are its result, the final rendered-float/copy inspection,
+specialist and generalist cold reads, and the closeout review.
 
 ## Goal
 
