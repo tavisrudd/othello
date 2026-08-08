@@ -2924,8 +2924,17 @@
       "last": 891,
       "purpose": "refresh the full paper-extraction mapping and plan against the current tree",
       "sequence": 325
+    },
+    {
+      "count": 1,
+      "first": 892,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 892,
+      "purpose": "full Paper II Lean closure and manuscript trust-boundary review",
+      "sequence": 326
     }
   ],
-  "next_id": 892,
+  "next_id": 893,
   "schema": "codex-task-id-allocations-v1"
 }
