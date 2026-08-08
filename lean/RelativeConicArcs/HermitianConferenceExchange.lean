@@ -2,6 +2,7 @@ import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Complex.Basic
 import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
 
 /-!
@@ -250,5 +251,67 @@ theorem hermitianExchange_landscape (a b c : ℂ)
     exchangeS21_hermitianExchange a b c ha hb hc⟩
 
 end Complex
+
+section ParetoGeometry
+
+/-- A point in the three degree-three exchange sectors. -/
+structure SectorPoint where
+  h3 : ℝ
+  s21 : ℝ
+  e3 : ℝ
+
+/-- Componentwise dominance of degree-three sector points. -/
+def SectorPoint.Dominates (p q : SectorPoint) : Prop :=
+  q.h3 ≤ p.h3 ∧ q.s21 ≤ p.s21 ∧ q.e3 ≤ p.e3
+
+/-- The Hermitian exchange frontier parametrized by squared holonomy. -/
+noncomputable def hermitianFrontier (t : ℝ) : SectorPoint where
+  h3 := (317 - 4 * t) / 125
+  s21 := (196 + 4 * t) / 125
+  e3 := (20 - 4 * t) / 125
+
+/-- The individual sector bounds and the two supporting inequalities force
+every feasible point below some point of the squared-holonomy frontier. -/
+theorem exists_hermitianFrontier_dominates (p : SectorPoint)
+    (hh : p.h3 ≤ 317 / 125) (hs : p.s21 ≤ 8 / 5) (he : p.e3 ≤ 4 / 25)
+    (hse : p.s21 + p.e3 ≤ 216 / 125)
+    (hhs : p.h3 + p.s21 ≤ 513 / 125) :
+    ∃ t ∈ Set.Icc (0 : ℝ) 1, (hermitianFrontier t).Dominates p := by
+  let t := max 0 ((125 * p.s21 - 196) / 4)
+  have ht0 : 0 ≤ t := le_max_left _ _
+  have htLower : (125 * p.s21 - 196) / 4 ≤ t := le_max_right _ _
+  have ht1 : t ≤ 1 := by
+    apply max_le
+    · norm_num
+    · linarith
+  have hth : t ≤ (317 - 125 * p.h3) / 4 := by
+    apply max_le
+    · linarith
+    · linarith
+  have hte : t ≤ (20 - 125 * p.e3) / 4 := by
+    apply max_le
+    · linarith
+    · linarith
+  refine ⟨t, ⟨ht0, ht1⟩, ?_⟩
+  constructor
+  · change p.h3 ≤ (317 - 4 * t) / 125
+    linarith
+  constructor
+  · change p.s21 ≤ (196 + 4 * t) / 125
+    linarith
+  · change p.e3 ≤ (20 - 4 * t) / 125
+    linarith
+
+/-- Distinct squared-holonomy frontier points are componentwise incomparable. -/
+theorem hermitianFrontier_dominates_iff {t u : ℝ} :
+    (hermitianFrontier t).Dominates (hermitianFrontier u) ↔ t = u := by
+  constructor
+  · rintro ⟨hh, hs, _⟩
+    simp only [hermitianFrontier] at hh hs
+    apply le_antisymm <;> linarith
+  · rintro rfl
+    exact ⟨le_rfl, le_rfl, le_rfl⟩
+
+end ParetoGeometry
 
 end RelativeConicArcs.HermitianConferenceExchange
