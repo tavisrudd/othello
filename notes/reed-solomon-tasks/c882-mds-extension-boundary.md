@@ -140,3 +140,63 @@ Do not weaken `prop:r5-radius`; it is the covering-radius input and is separatel
 The question is only whether the deep-hole to MDS-extension step is licensed at this
 radius.  Version 1 is published and carries the same corollary, so a negative outcome
 raises an erratum question that belongs to the user.
+
+
+## Which redundancies are impacted, and what recovery is available
+
+**Impacted regime: all of them, because every radius gate in the paper lands on
+\(\rho=r-1\).**  The overview table proves \(\rho=4,5,6,7,8,9\) at redundancies
+\(5,\dots,10\).  Dur's Theorem 2.4 makes \(\rho=r-1\) *equivalent* to completeness of the
+normal-rational-curve arc in \(PG(r-1,q)\), so at every level in the paper the arc is
+complete and no one-column MDS extension of the dual exists.  The faulty inference is
+therefore wrong wherever it is stated, not only at redundancy five.
+
+**Impacted deliverables: redundancy five only.**  The inference is stated generally but
+cashed in exactly once.  Surfaces:
+
+- `sections/03-dictionary.tex:110` — the general "hence gives a one-column MDS extension"
+  sentence.  Wrong at every redundancy.
+- `sections/02-overview.tex:53` — the status-table column header "Deep holes/MDS
+  extensions".  Misleading at every row; the rows themselves record radii and are correct.
+- `sections/01-introduction.tex:128--131` — advertises the \(q=8\) quantum consequence.
+- `sections/04-redundancy-five.tex` — the \(q=8\) corollary, its proof, the balance
+  condition, and the sentence reading the orbit table as classifying extensions.
+- Ledger row `R5-Q`; the balanced-quantum Lean closure and its axiom audit; the
+  AME/local-unitary companion; published Version 1.
+
+Everything else — the split-free classifications, the radius gates, the recursive carrier
+theorem, the Lucas carriers, R6 through R10 — is untouched.  Those never use the extension
+step.
+
+**The corollary is not recoverable, and the reason is independent of us.**  A
+minimum-support \(\operatorname{AME}(10,8)\) stabilizer state of this construction needs a
+self-dual \([10,5,6]_8\) MDS code, equivalently a \(10\)-arc in \(PG(4,8)\).  The largest
+arc in \(PG(4,8)\) has \(q+1=9\) points: the even-\(q\) exceptions to that bound are the
+dimensions \(k=3\) and \(k=q-1=7\), and \(k=5\) is neither.  So the object named in the
+corollary does not exist, and no re-reading of "relative projective one-column extension"
+can produce it.  It also cannot be relocated: the extension correspondence needs
+\(\rho=r\), which by Kaipa's Conjecture 2' happens only for \(q\) even with \(r=3\) or
+\(r=q-1\); \(r=3\) is below the paper's range, and \(r=q-1\) gives no self-dual
+parameters.
+
+**What can be kept.**
+
+1. The count.  \(1116\) is certificate-backed and is a statement about split-free
+   directions and deep holes; it survives with the extension clause removed.
+2. The orbit and balance structure, restated as statements about syndrome orbits rather
+   than about extensions.
+3. A correct sentence in place of the wrong one.  Our radius results, through Dur's
+   equivalence, say the normal-rational-curve arc is complete at every redundancy in
+   range, so there is *no* one-column MDS extension.  That is the true statement in the
+   direction we were asserting the false one; it is not new, since it follows from the
+   Seroussi--Roth input already cited, but it lets the dictionary keep a correct remark
+   instead of a deletion.
+4. The AME companion's general MDS-to-AME theorems are unaffected; only the \(q=8\)
+   instantiation is void.  Confirm this rather than assume it.
+
+**One live case worth recording.**  At \(q=8\) and redundancy seven, \(k=2\) and Kaipa's
+exceptional row gives \(\rho=r=7\), so there the arc is incomplete and extensions do
+exist.  That is exactly one of the fields the paper already flags as an open radius gap at
+redundancy seven.  The extensions there are \([10,7,4]_8\), not self-dual, so they carry
+no AME consequence, but it is the only place inside the paper's range where the deep-hole
+to MDS-extension correspondence is alive.
