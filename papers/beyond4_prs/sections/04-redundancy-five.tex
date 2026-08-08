@@ -225,7 +225,8 @@ identity is what drives both the threshold and the shape of the
 exceptions.
 
 \begin{proposition}[Exact split-witness count]\label{prop:r5-count}
-Let $q$ be odd, let $\deg\gcd(W_f)=0$, and let $\phi_f$ be separable.
+Let $\deg\gcd(W_f)=0$ and let $\phi_f$ be separable; the characteristic
+is arbitrary.
 Write
 \begin{itemize}
 \item $N_f$ for the number of completely split squarefree members of
@@ -289,11 +290,16 @@ projection is the stated double cover, and it is branched exactly where
 that discriminant vanishes.  Kaipa and Pradhan form the discriminant of
 the same residual quadratic and define $E_L$ as the non-singular model
 of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}, taking as we do one quarter
-of the discriminant of the same residual quadratic.  For each $x$ the two
-values therefore differ by the square of a nonzero element of $\F_q$,
-coming only from the choice of representative of $g_x$, so they lie in the
-same square class over $\F_q$; no quadratic twist intervenes and the
-cover is unchanged.  For the point counts,
+of the discriminant of the same residual quadratic.  They therefore differ by
+the square of the nonzero rational function $\lambda\in\F_q(x)^\times$
+that relates the two normalizations of the residual quadratic,
+\[
+       D_f=\lambda^2D_L\quad\text{in }\F_q(x)^\times,
+\]
+with equality when the representative of $g_x$ is normalized as they
+normalize it.  Equality of square classes in the function field, rather
+than pointwise at rational $x$, is what rules out a quadratic twist and
+leaves the cover unchanged.  For the point counts,
 note that on that stratum $D_f$ has nonzero discriminant, so the double
 cover displayed above is already smooth and is its own normalization,
 and $Y_f$ is smooth there as well; the two smooth projective models are
@@ -316,11 +322,13 @@ $d_2=4$ and $d_3=0$.
 \begin{proof}
 Riemann--Hurwitz gives different degree four for the separable
 degree-three map $\phi_f$.  A member with a double root is a simple
-branch value and spends different degree one; a member that is a
-perfect cube is totally ramified and spends two when the ramification
-is tame and at least three when it is wild, which happens only in
-characteristic three.  Distinct members are distinct branch values, so
-$d_2+2d_3\leq4$.  Substituting into
+branch value; it spends different degree one when the ramification is
+tame and at least two when it is wild, which happens exactly in
+characteristic two.  A member that is a perfect cube is totally
+ramified; it spends two when tame and at least three when wild, which
+happens exactly in characteristic three.  Distinct members are distinct
+branch values, so $d_2+2d_3\leq4$ in every characteristic, and
+characteristic two gives the sharper $d_2+d_3\leq2$.  Substituting into
 \(\#Y_f(\F_q)=3d_2+d_3\) and maximizing over the integer points of
 that region gives $12$, attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
@@ -340,14 +348,18 @@ one, so Aubry--Perret confines $\#Y_f(\F_q)$ to
 $q+1\pm2\sqrt q$ \cite[p.~468]{AubryPerret1995}.
 \end{proof}
 
-The orbit $\mathcal O_3$ occupies $(q^3-q)/6$ of the $q^3+q^2+q+1$
-points of $\mathrm{PG}(3,q)$, so a line of $q+1$ points meets it in
-$(q+1)/6$ points on average.  Corollary~\ref{cor:r5-equidistribution}
-says every $S_3$ line meets it in that many up to the Weil error: split
-cubics are equidistributed along such a pencil, and split-freeness is
-the extreme case in which the lower bound has gone vacuous.  That is why
-the exceptional fields are small ones, and it is the quantitative
-statement of which Lemma~\ref{lem:s3} records only the sign.
+The main term $(q+1)/6$ is the $S_3$ splitting density.  A completely
+split fibre is one whose Frobenius class is the identity, of density
+$1/|S_3|=1/6$ among the $q+1$ fibres, in the sense of the
+factorization-type correspondence of \cite[Thm.~3.6]{Wang2026}.
+Corollary~\ref{cor:r5-equidistribution} makes that quantitative: split
+members occur with the expected density $1/6$ up to a Weil-scale error
+and a bounded branch correction.  Split-freeness is the extreme
+small-field case in which the lower bound has turned nonpositive, which
+is why the exceptional fields are small ones.  Lemma~\ref{lem:s3}
+records only the sign of this statement.  We claim the density only for
+the completely split class; the other factorization types are not
+counted here.
 
 \begin{lemma}[$S_3$ stratum]\label{lem:s3}
 If $\phi_f$ has geometric monodromy $S_3$ and $q\geq20$, then the pencil
@@ -391,8 +403,10 @@ only admissible value left is $12$, and by Lemma~\ref{lem:r5-branch}
 that value is attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
-Proposition~\ref{prop:r5-count} is the odd-characteristic-uniform form of
-an incidence count in the twisted-cubic line literature.  When $W_f$
+Proposition~\ref{prop:r5-count} is a characteristic-uniform counting
+identity, and in characteristic other than two and three its generic
+specialization is an incidence count in the twisted-cubic line
+literature.  When $W_f$
 misses the twisted cubic, so that $d_3=0$, and
 $\operatorname{char}\F_q\neq2,3$, the quantity $d_2$ is the invariant
 $\eta_L$ attached to the binary quartic of the line and $\#Y_f(\F_q)$
@@ -409,13 +423,17 @@ $\nu_L=(\#E_L(\F_q)-\eta_L)/2$
 printed in the displayed statement of their Theorem~1.3(3) is $3$, which
 is a typographical slip, since $6$ is what their proof gives and what
 makes their five incidence counts sum to $q+1$.  The statement above drops
-the restriction $\operatorname{char}\F_q\neq2,3$, so that characteristic
-three is admitted, brings in lines meeting the curve through the $d_3$
-term, and needs no invariant theory of quartics.  Characteristic two
-stays outside it, since the criterion is a discriminant square class.  An
+the restriction $\operatorname{char}\F_q\neq2,3$ altogether, brings in
+lines meeting the curve through the $d_3$ term, and needs no invariant
+theory of quartics: its proof counts rational roots in fibres and uses
+neither a discriminant nor a division by two.  What does stay inside
+$\operatorname{char}\F_q\neq2,3$ is the comparison itself, through
+Proposition~\ref{prop:r5-fibre-is-elliptic}, since the elliptic model is
+built from a discriminant.  An
 exhaustive check of \eqref{eq:r5-count} and of
-Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the odd
-prime powers $5\leq q\leq27$ is recorded in the supplement.
+Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the
+prime powers $4\leq q\leq32$, in every characteristic, is recorded in the
+supplement.
 
 \begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}
 The preceding cases exhaust every redundancy-five pencil for

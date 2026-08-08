@@ -1,6 +1,5 @@
 {
  "11": {
-  "e6_match": 46,
   "inseparable": 0,
   "max_split_free_Y": 12,
   "split_free": 1716,
@@ -13,7 +12,6 @@
   "stratum": 15301
  },
  "13": {
-  "e6_match": 37,
   "inseparable": 0,
   "max_split_free_Y": 12,
   "split_free": 1898,
@@ -23,8 +21,16 @@
   },
   "stratum": 29653
  },
+ "16": {
+  "inseparable": 0,
+  "max_split_free_Y": 0,
+  "split_free": 2160,
+  "split_free_profile": {
+   "0,0": 2160
+  },
+  "stratum": 67576
+ },
  "17": {
-  "e6_match": 49,
   "inseparable": 0,
   "max_split_free_Y": 12,
   "split_free": 3825,
@@ -36,7 +42,6 @@
   "stratum": 85969
  },
  "19": {
-  "e6_match": 37,
   "inseparable": 0,
   "max_split_free_Y": 12,
   "split_free": 4161,
@@ -47,7 +52,6 @@
   "stratum": 133741
  },
  "23": {
-  "e6_match": 133,
   "inseparable": 0,
   "max_split_free_Y": 2,
   "split_free": 6348,
@@ -58,7 +62,6 @@
   "stratum": 285913
  },
  "25": {
-  "e6_match": 16225,
   "inseparable": 0,
   "max_split_free_Y": 0,
   "split_free": 8100,
@@ -68,7 +71,6 @@
   "stratum": 398425
  },
  "27": {
-  "e6_match": 91,
   "inseparable": 1,
   "max_split_free_Y": 1,
   "split_free": 10192,
@@ -78,8 +80,29 @@
   },
   "stratum": 541269
  },
+ "32": {
+  "inseparable": 0,
+  "max_split_free_Y": 2,
+  "split_free": 16896,
+  "split_free_profile": {
+   "0,0": 16368,
+   "0,2": 528
+  },
+  "stratum": 1064944
+ },
+ "4": {
+  "inseparable": 0,
+  "max_split_free_Y": 6,
+  "split_free": 196,
+  "split_free_profile": {
+   "0,0": 36,
+   "1,0": 40,
+   "1,1": 60,
+   "2,0": 60
+  },
+  "stratum": 286
+ },
  "5": {
-  "e6_match": 145,
   "inseparable": 0,
   "max_split_free_Y": 7,
   "split_free": 375,
@@ -93,7 +116,6 @@
   "stratum": 685
  },
  "7": {
-  "e6_match": 25,
   "inseparable": 0,
   "max_split_free_Y": 12,
   "split_free": 833,
@@ -106,8 +128,18 @@
   },
   "stratum": 2569
  },
+ "8": {
+  "inseparable": 0,
+  "max_split_free_Y": 6,
+  "split_free": 1044,
+  "split_free_profile": {
+   "0,0": 252,
+   "0,2": 36,
+   "2,0": 756
+  },
+  "stratum": 4348
+ },
  "9": {
-  "e6_match": 20,
   "inseparable": 1,
   "max_split_free_Y": 12,
   "split_free": 1300,

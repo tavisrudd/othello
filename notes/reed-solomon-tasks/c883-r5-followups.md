@@ -82,8 +82,8 @@ learned the hard way.
 
 - Item 1 needs no literature check; its math check is that each Lean statement matches the
   manuscript statement it maps to, hypothesis by hypothesis.
-- Item 2 needs both.  Its literature check must include the characteristic-two
-  twisted-cubic line work, Ceria--Pavese in particular, which is cached and unread.
+- Item 2 is closed; its literature check is inherited by item 3, and the characteristic-two
+  twisted-cubic line work, Ceria--Pavese in particular, remains cached and unread.
 - Item 3 needs a full literature check against the coset-leader weight-enumerator line;
   Blokhuis--Pellikaan--Sz\H onyi is the direct predecessor and the MDS coset weight
   distribution papers surfaced in the C881 screen are the nearest coding-side neighbours.
@@ -112,19 +112,23 @@ declaration" while their siblings are kernel-checked is an inconsistency in the 
 map, not a mathematical gap.  Gate: two new theorems in the redundancy-five module, the
 statement-map rows updated, and the redundancy-five and aggregate gates green.
 
-## 2. Characteristic-two split-witness count
+## 2. Characteristic-two split-witness count — CLOSED 2026-08-07 inside C881
 
-The exact count fails in characteristic two for one reason: it reads the splitting of the
-residual quadratic off a discriminant square class.  In characteristic two that is governed
-by an Artin--Schreier trace instead.  Find the companion identity.
+Dissolved rather than solved.  The item assumed the exact count needed a discriminant
+square class and therefore failed in characteristic two.  It does not: the count is a
+statement about numbers of rational roots in fibres, and its proof uses neither a
+discriminant nor a division by two.  Only the *comparison* with the Kaipa--Pradhan elliptic
+model is confined to characteristic other than two and three, because their model is built
+from a discriminant.
 
-Why it matters beyond uniformity: \(q=8\) and \(q=16\) are exactly the sporadic fields whose
-entries item 4 cannot otherwise annotate, and \(q=16\) is the field where the sporadic
-locus is empty while its neighbours are not.  A characteristic-two identity would make the
-redundancy-five count uniform in every characteristic.
+Proposition `prop:r5-count` and Lemma `lem:r5-branch` now carry no characteristic
+hypothesis, and characteristic two turns out to satisfy the sharper branch bound
+\(d_2+d_3\le2\), since simple ramification is wild there.  The replay computes root counts
+by evaluation rather than through a discriminant and now verifies every prime power
+\(4\le q\le32\) in every characteristic.
 
-Gate: a stated identity, a proof of the same member-by-member shape, and an exhaustive check
-over \(q=2,4,8,16,32\) added to the existing replay.
+The consequence for item 4 is that its binary-field blocker is gone; only the encoding
+reconciliation remains.
 
 ## 3. Error distribution and coset multiplicity
 
@@ -151,8 +155,8 @@ values are already computed for the prime fields: at \(q=13,17,19\) every repres
 Blocker to clear first: the extension fields \(q=8,9,16\) are recorded in the certificate's
 own field encoding, which does not match the encoding used by the incidence replay, so the
 representatives cannot be compared until the two encodings are reconciled.  Fix the
-reconciliation rather than dropping those rows.  Characteristic two additionally needs
-item 2.
+reconciliation rather than dropping those rows.  This is now the only blocker, since the
+count itself covers every characteristic.
 
 Gate: a complete column, cross-checked against the certificate's own pencil-member
 histograms.

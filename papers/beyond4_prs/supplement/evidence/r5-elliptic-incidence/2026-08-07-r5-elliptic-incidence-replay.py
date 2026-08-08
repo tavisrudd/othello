@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""R5-ELLIPTIC-INCIDENCE replay: the exact split-witness count on the redundancy-five
-trivial-gcd stratum, in every odd characteristic.
+"""R5-EXACT-COUNT replay: the exact split-witness count on the redundancy-five
+trivial-gcd stratum, in every characteristic.
 
 Objects.  A redundancy-five syndrome is a point f = (a0:...:a4) of PG(4,q) in
 divided-power coordinates.  Its witness system W_f is the kernel of the 2x4 Hankel
@@ -10,41 +10,38 @@ two and W_f is basepoint-free, W_f is a pencil of binary cubics, equivalently a 
 PG(3,q) relative to the twisted cubic, and f is split-free exactly when no member of
 W_f is a completely split squarefree cubic.
 
-The identity under test.  For x in PG(1,q) let g_x be the member of W_f vanishing at x
-(unique up to scalar when W_f is basepoint-free) and let h_x be the residual quadratic
-after dividing out the linear form at x.  Put
+Quantities.  Each x in PG(1,q) lies on exactly one member g_x of the pencil; write
+g_x = l_x h_x with l_x the linear form at x.  Then
 
-    D_f(x) = disc(h_x)/4,
-    nu_f   = #{x in PG(1,q) : D_f(x) is a non-zero square},
-    eta_f  = #{x in PG(1,q) : D_f(x) = 0},
-    N_f    = # split squarefree members of W_f,
-    Y_f    = the off-diagonal fibre square, counted through its first projection as
-             #{(x1,x2) in PG(1,q)^2 : x2 is a root of h_{x1}} = 2 nu_f + eta_f.
+    Y_f = the fibre square, counted through its first projection as
+          sum over x of the number of distinct rational roots of h_x,
+    N_f = the number of completely split squarefree members of W_f,
+    d2  = the number of members with a rational double root and a distinct rational
+          simple root,
+    d3  = the number of members that are perfect cubes of a rational linear form.
 
-Since the square class of disc(h_x) does not depend on the chosen representative of g_x
-or of x, all four quantities are well defined.  The script checks, for every syndrome on
-the trivial-gcd separable stratum:
+Root counts are computed by evaluation rather than through a discriminant, so every
+quantity is defined in the same way in every characteristic; a discriminant square class
+would degenerate in characteristic two, where B^2 - 4AC is always a square.
 
-Write d2 for the number of members of W_f with a rational double root and a distinct
-rational simple root, and d3 for the number of members that are perfect cubes.  The
-script checks, exhaustively over PG(4,q):
+The script checks, exhaustively over PG(4,q):
 
-  E1  nu_f = 3 N_f + d2   and   eta_f = d2 + d3;
-  E2  6 N_f = #Y_f - 3 d2 - d3, the exact split-witness count;
-  E3  d2 <= 4, and on the separable stratum d2 + 2 d3 <= 4, the tame Riemann-Hurwitz
-      bound for a different of degree four; consequently a split-free f has #Y_f <= 12;
-  E4  f is split-free iff #Y_f = 3 d2 + d3.
+  E2  Y_f = 6 N_f + 3 d2 + d3, the exact split-witness count;
+  E3  d2 <= 4, and on the separable stratum d2 + 2 d3 <= 4, the Riemann-Hurwitz bound
+      for a different of degree four; consequently a split-free f has Y_f <= 12;
+  E4  f is split-free if and only if Y_f = 3 d2 + d3.
 
-Inseparable pencils, which occur only in characteristic three, are counted apart; E1, E2
-and E4 hold on them too.  E2 specialises to Theorem 1.3(3) of Kaipa and Pradhan,
-*Incidence of Lines, Points and Planes in PG(3,q) with Respect to the Twisted Cubic*,
-arXiv:2509.15332, when the line misses the twisted cubic and the characteristic is other
-than two and three: there d3 = 0, d2 is their eta_L, and #Y_f is their #E_L(F_q), the
-point count of the non-singular model of w^2 = D_L.  The checks here run in every odd
-characteristic, including three, and on lines meeting the twisted cubic.
+Inseparable pencils, which occur only in characteristic three, are counted apart; E2 and
+E4 hold on them too.  In characteristic other than two and three, and for a pencil
+missing the twisted cubic, E2 specialises to the generic-line incidence count of Kaipa
+and Pradhan, *Incidence of Lines, Points and Planes in PG(3,q) with Respect to the
+Twisted Cubic*, arXiv:2509.15332: there d3 = 0, d2 is their eta_L, and Y_f is the point
+count of the non-singular model of w^2 = D_L.  Take that count from their Proposition
+4.5(3) together with Theorem 5.1, which compose to denominator six; the denominator
+printed in their displayed Theorem 1.3(3) is three.
 
 Run (from this directory):
-  python3 2026-08-07-r5-elliptic-incidence-replay.py [--fields 5,7,9,...] [--json OUT]
+  python3 2026-08-07-r5-elliptic-incidence-replay.py [--fields 4,5,7,...] [--json OUT]
 Exit code 0 iff every check passes.  Deterministic; stdlib only; no timestamps.
 """
 import argparse
@@ -55,6 +52,10 @@ from itertools import combinations
 # ---------------------------------------------------------------- finite fields
 
 CONWAY = {
+    (2, 2): [1, 1, 1],           # x^2 + x + 1 over F_2
+    (2, 3): [1, 1, 0, 1],        # x^3 + x + 1 over F_2
+    (2, 4): [1, 1, 0, 0, 1],     # x^4 + x + 1 over F_2
+    (2, 5): [1, 0, 1, 0, 0, 1],  # x^5 + x^2 + 1 over F_2
     (3, 2): [2, 2, 1],           # x^2 + 2x + 2 over F_3
     (5, 2): [2, 4, 1],
     (3, 3): [1, 2, 0, 1],        # x^3 + 2x + 1 over F_3
@@ -146,13 +147,6 @@ class GF:
     def elements(self):
         return range(self.q)
 
-    def squares(self):
-        s = set()
-        for a in range(1, self.q):
-            s.add(self.mul(a, a))
-        return s
-
-
 def field(q):
     for p in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31):
         n, v = 0, q
@@ -194,45 +188,10 @@ def residual_quadratic(F, c, x):
     return (A, B, C)
 
 
-def disc(F, quad):
-    A, B, C = quad
-    four = F.add(F.add(1, 1), F.add(1, 1))
-    return F.sub(F.mul(B, B), F.mul(four, F.mul(A, C)))
-
-
-def quad_roots(F, quad, SQ):
-    """Rational roots in PG(1,q) of A T^2 + B TU + C U^2, without multiplicity."""
-    A, B, C = quad
-    if A == 0:
-        if B == 0:
-            return [] if C != 0 else None      # None marks the zero form
-        return [INF, F.neg(F.mul(F.inv(B), C))] if C != 0 or True else [INF]
-    d = disc(F, quad)
-    if d == 0:
-        two_inv = F.inv(F.add(1, 1))
-        return [F.neg(F.mul(two_inv, F.mul(F.inv(A), B)))]
-    if d not in SQ:
-        return []
-    out = []
-    for x in F.elements():
-        if F.add(F.add(F.mul(A, F.mul(x, x)), F.mul(B, x)), C) == 0:
-            out.append(x)
-    return out
-
-
 def cubic_root_profile(F, c):
     """(number of distinct rational roots, squarefree over the rationals seen)."""
     roots = [x for x in line_points(F) if ev_cubic(F, c, x) == 0]
     return roots
-
-
-def is_split_squarefree(F, c):
-    """Three distinct rational roots."""
-    roots = cubic_root_profile(F, c)
-    if len(roots) != 3:
-        return False
-    # three distinct rational roots of a cubic force squarefreeness
-    return True
 
 
 def hankel_kernel(F, f):
@@ -307,24 +266,37 @@ def projective_points(F, dim):
 
 # --------------------------------------------------------------- the invariants
 
-def cubic_tables(F, SQ):
+def quad_root_count(F, quad):
+    """Number of distinct rational roots in PG(1,q) of A T^2 + B TU + C U^2.
+
+    Computed by evaluation, so it is valid in every characteristic; the discriminant
+    square class would degenerate in characteristic two, where B^2 - 4AC is always a
+    square."""
+    A, B, C = quad
+    n = 0
+    for x in F.elements():
+        if F.add(F.add(F.mul(A, F.mul(x, x)), F.mul(B, x)), C) == 0:
+            n += 1
+    if A == 0:                      # the root at infinity
+        n += 1
+    return n
+
+
+def cubic_tables(F):
     """For every projective cubic: its distinct rational roots, and for each root the
-    square class of the residual discriminant."""
+    number of distinct rational roots of the residual quadratic."""
     prof = {}
     for c in projective_points(F, 4):
         key = canon(F, c)
         if key in prof:
             continue
         roots = [x for x in line_points(F) if ev_cubic(F, key, x) == 0]
-        entry = {}
-        for x in roots:
-            d = disc(F, residual_quadratic(F, key, x))
-            entry[x] = 0 if d == 0 else (1 if d in SQ else -1)
+        entry = {x: quad_root_count(F, residual_quadratic(F, key, x)) for x in roots}
         prof[key] = (roots, entry)
     return prof
 
 
-def stratum_data(F, f, SQ, prof=None):
+def stratum_data(F, f, prof=None):
     """Return None off the trivial-gcd separable stratum, else the invariant record."""
     basis, rank = hankel_kernel(F, f)
     if rank != 2:
@@ -337,48 +309,39 @@ def stratum_data(F, f, SQ, prof=None):
     for x in line_points(F):
         if all(ev_cubic(F, c, x) == 0 for c in members):
             return None
-    nu = eta = 0
-    Dvals = {}
+    Y = 0
+    seen = set()
     N = d2 = d3 = 0
     for c in members:
         key = canon(F, c)
         roots, entry = prof[key]
         for x in roots:
-            cls = entry[x]
-            Dvals[x] = cls
-            if cls == 0:
-                eta += 1
-            elif cls == 1:
-                nu += 1
+            Y += entry[x]
+            seen.add(x)
         if len(roots) == 3:
             N += 1
         elif len(roots) == 2:
             d2 += 1
-        elif len(roots) == 1 and entry[roots[0]] == 0:
+        elif len(roots) == 1 and entry[roots[0]] == 1:
             d3 += 1
-    if len(Dvals) != F.q + 1:
+    if len(seen) != F.q + 1:
         return None
-    Y = 2 * nu + eta
-    return {"nu": nu, "eta": eta, "N": N, "Y": Y, "d2": d2, "d3": d3, "D": Dvals}
+    return {"N": N, "Y": Y, "d2": d2, "d3": d3}
 
 
-def check_field(F, SQ, report):
+def check_field(F, report):
     q = F.q
-    stats = {"stratum": 0, "split_free": 0, "e6_match": 0, "inseparable": 0,
+    stats = {"stratum": 0, "split_free": 0, "inseparable": 0,
              "max_split_free_Y": 0, "split_free_profile": {}}
-    prof = cubic_tables(F, SQ)
+    prof = cubic_tables(F)
     for f in projective_points(F, 5):
-        rec = stratum_data(F, f, SQ, prof)
+        rec = stratum_data(F, f, prof)
         if rec is None:
             continue
         stats["stratum"] += 1
-        nu, eta, N, Y = rec["nu"], rec["eta"], rec["N"], rec["Y"]
-        d2, d3 = rec["d2"], rec["d3"]
-        # E1
-        assert nu == 3 * N + d2, ("E1", q, f, rec)
-        assert eta == d2 + d3, ("E1b", q, f, rec)
-        # E2
-        assert 6 * N == Y - 3 * d2 - d3, ("E2", q, f, rec)
+        N, Y, d2, d3 = rec["N"], rec["Y"], rec["d2"], rec["d3"]
+        # E1/E2: the exact count
+        assert Y == 6 * N + 3 * d2 + d3, ("E2", q, f, rec)
         # E3: on the separable stratum a line meets the twisted cubic at most twice.
         # Inseparable pencils occur only in characteristic three and are counted apart;
         # the identities above hold on both.
@@ -405,92 +368,19 @@ def check_field(F, SQ, report):
             stats["max_split_free_Y"] = max(stats["max_split_free_Y"], Y)
             stats["split_free_profile"][f"{d2},{d3}"] = (
                 stats["split_free_profile"].get(f"{d2},{d3}", 0) + 1)
-        # E6 is a report, not a gate
-        if square_class_matches(F, f, rec["D"], SQ):
-            stats["e6_match"] += 1
     report[str(q)] = stats
     return stats
 
 
-def square_class_matches(F, f, Dvals, SQ):
-    """Do the square classes of D_f(x) and of the syndrome quartic at x agree up to one sign?
-
-    Well defined: D_f(x) is fixed up to a square by the choice of representative, and the
-    syndrome is fixed up to one global scalar, so a single sign is the whole freedom.
-    """
-    cand = [f[0], f[1], f[2], f[3], f[4]]
-
-    def val(x):
-        if x is INF:
-            return cand[0]
-        v = cand[0]
-        for j in range(1, 5):
-            v = F.add(F.mul(v, x), cand[j])
-        return v
-
-    def chi(a):
-        return 0 if a == 0 else (1 if a in SQ else -1)
-
-    sign = None
-    for x in line_points(F):
-        cd, cv = Dvals[x], chi(val(x))
-        if cd == 0 or cv == 0:
-            if cd != cv:
-                return False
-            continue
-        s = cd * cv
-        if sign is None:
-            sign = s
-        elif sign != s:
-            return False
-    return True
-
-
-def quartic_is_syndrome(F, f, Dvals):
-    """Check that x -> D_f(x) agrees with a scalar multiple of the syndrome quartic.
-
-    In divided-power coordinates the syndrome f = (a0,...,a4) is paired with the binary
-    quartic whose value at (x:1) is a0 x^4 + a1 x^3 + a2 x^2 + a3 x + a4 read in the
-    reversed order fixed by the Hankel convention; the check is projective, so it fixes
-    one non-zero value and compares the rest.
-    """
-    cand = [f[4], f[3], f[2], f[1], f[0]]
-
-    def val(x):
-        if x is INF:
-            return cand[0]
-        v = cand[0]
-        for j in range(1, 5):
-            v = F.add(F.mul(v, x), cand[j])
-        return v
-
-    scale = None
-    for x in line_points(F):
-        dv, cv = Dvals[x], val(x)
-        if scale is None:
-            if cv != 0 and dv != 0:
-                scale = F.mul(dv, F.inv(cv))
-            elif (cv == 0) != (dv == 0):
-                return False
-            continue
-        if dv != F.mul(scale, cv):
-            return False
-    return scale is not None
-
-
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--fields", default="5,7,9,11,13,17,19,23,25,27")
+    ap.add_argument("--fields", default="4,5,7,8,9,11,13,16,17,19,23,25,27,32")
     ap.add_argument("--json", default=None)
     args = ap.parse_args()
     report = {}
     for q in [int(x) for x in args.fields.split(",")]:
         F = field(q)
-        if F.p == 2:
-            print(f"q={q}: skipped, the discriminant criterion needs odd characteristic")
-            continue
-        SQ = F.squares()
-        st = check_field(F, SQ, report)
+        st = check_field(F, report)
         print(f"q={q:>3}: stratum {st['stratum']:>7}  split-free {st['split_free']:>4}"
               f"  max Y on the split-free locus {st['max_split_free_Y']:>3}"
               f"  inseparable {st['inseparable']:>4}")
