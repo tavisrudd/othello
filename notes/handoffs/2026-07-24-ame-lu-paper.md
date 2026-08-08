@@ -32,6 +32,7 @@ both independent of party count.  The radius retains its `n^(-1/2)` term.
 C581's `q^((m+1)/2)` scale remains the correct price only when no exact base
 is assumed and the target axes must be discovered from one marginal.
 Corollary 5.4 and the synchronized trust maps pass the 36-page release gate.
+The clean standalone mirror is synchronized at `6de1178` and unpushed.
 Full report: `2026-08-01-c787-relativized-intertwiner-stability.md`.
 
 **No quantitative successor is allocated.**  The highest-EV theorem bank is

@@ -200,8 +200,12 @@ same boundary.  No novelty adjective or new citation was added.
   `e0cc53fdadac4db3ced9a62c14744ff02fe487a0c4f8f6435b0db05ed5b664f4`
   and the unchanged 82-artifact formal companion tree
   `9689cefd30fe04d163d32ba93e5f84b3a67906db69e57bd1a254c411ddabb131`.
-- No computation, Lean edit/build, standalone mirror, remote, deposit, tag, or
-  submission was used.
+- The immutable `HEAD` export audit has zero findings.  The standalone
+  mirror passes `make check`, its release gate reports the same public and
+  formal identities, and exporter verification covers all 28 tracked files.
+  Its clean forward commit is `6de1178`, unpushed.
+- No computation, Lean edit/build, remote, deposit, tag, or submission was
+  used.
 
 ## EJ + Tao closeout
 
