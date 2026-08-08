@@ -2897,8 +2897,17 @@
       "last": 888,
       "purpose": "second external review validation and two-paper referee remediation",
       "sequence": 322
+    },
+    {
+      "count": 1,
+      "first": 889,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 889,
+      "purpose": "kill-test and extract latent AME-LU/MDS-CSS duality, holonomy, robustness, and extension-field theorems from the unified EJ report",
+      "sequence": 323
     }
   ],
-  "next_id": 889,
+  "next_id": 890,
   "schema": "codex-task-id-allocations-v1"
 }
