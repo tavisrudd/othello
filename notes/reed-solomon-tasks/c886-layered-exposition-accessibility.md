@@ -19,8 +19,11 @@ numbering, and bad-break findings are repaired.  The equation counter now
 advances in printed order, and every formerly manual display has a stable
 label used by its prose references.  The D.10 selector sentence now exposes
 the existing C620 product bound and its finite-field-grid inference.  A fresh
-full paper-local replay is running unattended.  Remaining gates are its
-result and the closeout review.
+full paper-local replay is running unattended in the synchronized standalone
+mirror.  The guarded export audit has zero findings, the 114-file export
+manifest verifies source commit `f55ac2c0`, and the mirror is committed at
+`86794b6`; both mirror builds and its quick verifier are green.  Remaining
+gates are the full replay result and the closeout review.
 
 ## Goal
 
