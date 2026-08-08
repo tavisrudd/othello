@@ -46,6 +46,53 @@ surfaces coherent.  Synchronize the standalone only after the monorepo
 authority passes its gates.  A Zenodo update, push, or submission remains an
 explicit author decision.
 
+## Finding disposition
+
+| Supplied criticism | Verdict | Evidence and disposition |
+|---|---|---|
+| Theorem 1.2/5.3 is unproved at $m=2$ | **narrowed** | The call to B.18 was outside its printed hypothesis, but the exact four-family estimate above proves $5H/16$ at $m=2$.  B.18 now assumes $m\geq2$ with no radius or headline-constant loss. |
+| The current paper says $U\otimes U$ for a Bell pair | **rejected** | Both current occurrences and the pre-split parent already say $U\otimes\overline U$, consistently with $h\otimes I-I\otimes h^T$. |
+| Proposition 5.4 suppresses stabilizer phases incorrectly | **confirmed, local** | The commutator is phase-independent, but the intermediate stabilizer equations require the lifts.  The proof now defines the commutator with $\widetilde W_\ell,\widetilde W_r$, records equality with the bare-Weyl commutator, and uses the lifts on the state. |
+| The qubit specialization is already covered by the 2005 minimum-support criterion | **confirmed** | C804 had proved this reduction from Proposition 3.4 and C807 had audited it; C844 later compressed the concession.  The introduction and owning ledger now state the direct consequence explicitly. |
+| Modern qubit LU literature is missing | **confirmed** | Claudet--Perdrix's complete graphical characterization and Burchardt--de Jong--Vandré's verification algorithm were absent.  Both are now cited beside Englbrecht--Kraus's complete qubit symmetry classification. |
+| Tan's AME--QMDS and symmetry/transversal dictionary is undercredited | **confirmed** | The old sentence used Tan's Theorems 3.5/3.6 as if they belonged only to the four-qutrit computation.  The introduction now credits their general statements separately from Theorem 5.3. |
+| The encoder result is framed too broadly as a new no-go | **confirmed** | The corollary is renamed “Factorwise transversal rigidity” and positioned as Cliffordness of every physical and logical factor in conversions between two class members; no new qualitative hierarchy obstruction is claimed. |
+| “Quantitative counterpart” suggests a robust form of Theorem 1.1 | **confirmed** | The abstract now says “quantitative symmetry counterpart for one fixed state”; the introduction contrasts Proposition B.21's weaker two-state scale $q^{-(m+1)/2}$. |
+| The atlas needs a stabilizer-specific contrast | **confirmed** | The theorem already had the correct hypothesis.  A new adjacent sentence cites Ramadas--Lakshminarayan's orthogonal-array criterion for infinitely many general AME LU classes. |
+| The QMDS support distribution is presented as new | **rejected as a current defect** | Section 4 already calls it the Huber--Grassl Shor--Laflamme distribution and cites their Theorems 8 and 9; the atlas, holonomy, and gauge sequence remain the paper's structured use of that data. |
+| The cleaning/Fourier chain is the strongest new part | **narrowed to an attribution boundary** | C835 already concedes the exact three-region obstruction and identifies the leakage estimate, Fourier rounding, and AME composition as paper-local.  C887 found no direct robust predecessor in a bounded primary-source search, but makes no exhaustive firstness claim and replaced “the new step” by neutral contribution wording. |
+
+## Literature record
+
+Ten primary sources support the dispositions above.  Two were already read at
+`full text` depth in the owning audits; eight are `partial` at the exact
+sections listed below.  Cache presence is not treated as read depth.
+
+| Source | Cache key and SHA-256 | Read depth used here | Load-bearing locator |
+|---|---|---|---|
+| Van den Nest--Dehaene--De Moor | `arXiv:quant-ph/0411115`, `c0f8e192552369d5af9304ebf08995f59b6917e243a570f37ff1b29f3b4cb735` | `full text`, inherited and rechecked through C804 | Theorem 1, Lemmas 1--2, Corollary 1(iv) |
+| Claudet--Perdrix | `arXiv:2409.20183`, `48bd8f73a887a8ef3c36f5310184169a9c2ce630c85b45d3774bfe03644a9475` | `partial`, arXiv v4; abstract, Theorems 32--33, conclusion | generalized local complementation completely characterizes graph/stabilizer LU equivalence |
+| Burchardt--de Jong--Vandré | `arXiv:2410.03961`, `107a3548b8ed622181c7ee81dd1f19051d0e67bd6a72c6c9c59a36911a2cc984` | `partial`, arXiv v2; abstract, Theorem 10, Sections VI and concluding remarks | constructive LU-equivalence verification by modular linear systems |
+| Englbrecht--Kraus | `arXiv:2001.07106`, `fecef9717dbf5807c3d6d7890c16c7bc2c89ac60c85003c14355929b1ffc1cac` | `partial`, inherited from C807; abstract, introduction, Theorems 2--3 and Corollaries 3.1--3.3 | complete qubit stabilizer local-symmetry characterization |
+| Tan | `arXiv:2601.19677`, `460f398f1fe63aa347f2457e44c0fe12d1164bdc33a25ee3f44ce3805d4f48e6` | `partial`; Sections 3.1--3.3 and 5.2 | Theorems 3.5, 3.6, and 5.3 |
+| Huber--Grassl | `arXiv:1907.07733`, `c4e5dfba9f8ccbb3f496c956c96cc83cc9bb2c117f23e0a05be639153d444e94` | `partial`, arXiv v2; Proposition 7 and Theorems 8--9 | AME--QMDS reversal and QMDS weight distributions |
+| Ramadas--Lakshminarayan | `arXiv:2411.04096`, `a73e8c2c48c2d55f07b1e34bc75ba0d18c7115ec4e65d412605f52bf7430c647` | `partial`, arXiv v1; abstract, introduction, Theorem 1 and Corollary 1 | criterion for infinitely many LU classes of uniform/AME states |
+| Pastawski--Yoshida | `arXiv:1408.1720`, `6eba050d7f767067ff16d7f4b22e9868bb91c6dc49844b1fec935c6dc24052bb` | `partial`, inherited from C835; introduction, Sections II.D--II.E, Lemmas 3--5 | exact cleanable-region Clifford obstruction |
+| Bravyi--König | `arXiv:1206.1609`, `027fe684e2fa254e25dc11771e3a9064225e69989442ab54c58e3aa266ed9d93` | `full text`, inherited from C835 | nested-commutator localization and hierarchy mechanism |
+| Jochym-O'Connor--Kubica--Yoder | `arXiv:1710.07256`, `a4adba8c4e92f8369bbb67a3134add9ff3418d7f3bd0839d2ed2fbdf73002933` | `partial`, inherited from C835; cleaning/scrubbing lemmas, Theorem 5 and discussion | disjointness hierarchy restrictions |
+
+The current-source searches that promoted the two missing qubit papers were
+`Claudet Perdrix generalized local complementation LU equivalence graph states
+arXiv` and `Burchardt de Jong Vandré algorithm local unitary equivalence
+stabilizer states arXiv`.  The bounded robust-predecessor screen used
+`approximate transversal gates stabilizer code Clifford rounding Weyl Fourier`,
+`robust transversal logical gates stabilizer codes approximate Clifford`,
+`approximate local symmetries stabilizer states local Clifford robustness`, and
+`quantitative Eastin Knill transversal gates approximate quantum codes`.
+It promoted no direct analogue of the leakage--Fourier--AME chain, but was not
+an exhaustive screened set and licenses no absence claim.  MathSciNet and
+Google Scholar remain NOT COVERED; the prior C807 audit reached zbMATH Open.
+
 ## Required audit
 
 ### 1. Headline quantitative scope
