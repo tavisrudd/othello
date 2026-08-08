@@ -173,15 +173,18 @@ and stability claims.
 ## Phase 5: general balanced-spectrum rigidity
 
 - [ ] Formalize symmetric conference matrices of order 2d.
-- [ ] Prove the normalized cross-Gram spectral correspondence.
-- [ ] Define aligned four-sets and their cut counts.
-- [ ] Prove the purity formula.
-- [ ] Formalize or precisely import the inclusion-matrix injectivity theorem.
-- [ ] Formalize or precisely import R(3,3) = 6.
+- [x] Prove the normalized cross-Gram spectral correspondence.
+- [x] Define aligned four-sets and their cut counts.
+- [x] Prove the purity formula.
+- [x] Discharge the inclusion-matrix step by the kernel-checked
+      support-count argument in `BalancedExchangeRigidity`.
+- [x] Discharge the Ramsey step by the same support-count argument; no Ramsey
+      theorem is imported into this trust route.
 - [ ] Prove cut independence exactly for d at most 3.
-- [ ] Handle the nonexistent order-four symmetric conference case.
+- [x] Handle the nonexistent order-four symmetric conference case.
 - [ ] State unique nontrivial order only on the proved domain.
-- [ ] Give stable public citations for every imported external theorem.
+- [x] Give stable public citations for every imported external theorem; this
+      formal route imports no external theorem for the rigidity converse.
 
 Acceptance: the all-order theorem's hypotheses, both directions, exceptional
 cases, and literature inputs are explicit in the formal interface.

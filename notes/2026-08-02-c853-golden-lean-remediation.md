@@ -97,6 +97,39 @@ reconciliation before new all-orders proof work.
 No mystery remains around the retained values `16`, `12`, and `-42`, the
 order-six balanced characteristic polynomial, or their current trust route.
 
+## General balanced-spectrum reconciliation
+
+The manuscript theorem `thm:general-exchange-rigidity` is already covered
+mathematically by the C815 half-cut development, but not by one bundled Lean
+declaration.  Its clauses map as follows.
+
+- `BalancedExchangeSpectrum.cutBlock_eq` identifies the normalized cross Gram
+  matrix with `1 - q⁻¹A²`.
+- `BalancedExchangeSpectrum.charpoly_exchangeCompression_cut` identifies the
+  exchange-compression characteristic polynomial with that principal-block
+  normalization, and
+  `BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod` reads it
+  as the factors `1 - αᵢ²/q`.
+- `BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half`
+  transports the formula to an actual subset of a real symmetric conference
+  matrix and constructs the required eigenframe isometry.
+- `BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half`
+  is the displayed aligned-four-set purity formula on an actual balanced half.
+- `BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq`
+  proves cut dependence for every half-size `d ≥ 4`.  Its proof is the
+  kernel-checked support-count argument in `BalancedExchangeRigidity`; it does
+  not import the manuscript's Jolliffe inclusion-rank theorem or `R(3,3)=6`.
+- `BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one`,
+  `..._of_card_two`, and `..._of_card_three` give the three small-order
+  characteristic polynomials, while `ne_smul_one_of_card_four` proves that no
+  order-four symmetric conference matrix exists.
+
+These declarations cover both directions and the exceptional cases of the
+manuscript theorem.  The residual is interface compression: one public theorem
+should bundle the separate terminals into the exact `d ≤ 3` classification
+and state the unique-nontrivial-order corollary on its realized domain.  No new
+inclusion-matrix or Ramsey proof is needed for correctness.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript
