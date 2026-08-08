@@ -1,0 +1,24 @@
+{
+  "I_is_z3_minus_3z2": true,
+  "J_is_catalecticant_determinant": true,
+  "discriminant_is_I_H_minus_J_f": true,
+  "identity_holds_mod_2": true,
+  "identity_holds_mod_3": true,
+  "identity_is_integral": true,
+  "perfect_square_locus_parametrization": [
+    "u**2",
+    "-u*v/2",
+    "u*w/3 + v**2/6",
+    "-v*w/2",
+    "w**2"
+  ],
+  "perfect_square_locus_satisfies_27J2_eq_I3": true,
+  "perfect_square_locus_satisfies_residual_generators": true,
+  "plucker_lies_on_klein_quadric": true,
+  "printed_parametrization_generator_vanishing": [
+    false,
+    false,
+    false,
+    true
+  ]
+}

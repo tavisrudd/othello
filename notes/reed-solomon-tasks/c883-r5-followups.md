@@ -183,7 +183,28 @@ count itself covers every characteristic.
 Gate: a complete column, cross-checked against the certificate's own pencil-member
 histograms.
 
-## 5. The Hankel--Pl\"ucker map as a classical covariant
+## 5. The Hankel--Pl\"ucker map as a classical covariant — MATH CLOSED 2026-08-07
+
+Report: `notes/2026-08-07-c883-hankel-plucker-covariant.md`.
+
+The identity is `disc(h_x) = I H - J f`, exact over the integers and therefore valid in
+every characteristic, where `f` is the syndrome quartic in the dual variable and `I`, `J`,
+`H` are its classical invariants and Hessian.  This identifies the two parametrizations
+and extends the comparison with Kaipa--Pradhan past characteristics two and three, where
+their discriminant model is unavailable.  Consequences: `J` is the catalecticant cubic
+that cuts the terminal carrier's first prime; `I = z3 - 3 z2`, so its vanishing is a
+linear line complex; and the carrier's residual component is the locus where the syndrome
+quartic is a perfect square, which is why a projected Veronese appears in the elimination.
+
+Still open before promotion: the literature check, specifically whether `I H - J f` has a
+classical name.  It is not a single transvectant in either natural normalization.
+
+The pass also found a manuscript defect: in the reduced terminal carrier proposition, the
+printed parametrization of the residual prime is in plain coefficients while its printed
+generators are in bottom coordinates, so as printed the parametrization fails three of the
+four generators.  Left for an explicit decision.
+
+The original item, for reference:
 
 Kaipa and Pradhan parametrize generic lines by \((z_0,\dots,z_5)\) on the Klein quadric with
 \(z_5^2=I(\varphi)\): a binary quartic together with a square root of its first invariant.

@@ -12,7 +12,36 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-07, later)
+## Resume here (2026-08-07, latest)
+
+The minimum-word supports are proved to be twelve-point arcs of the plane, structurally, and the
+blockwise enumeration of the 364 supports against the 78 passant rows is gone. The new module is
+`PassantCodeQ13.MinimumWords.SupportArc`: the symmetric square of a two-by-two matrix has determinant
+the cube of that matrix's determinant, so an invertible matrix multiplies the coordinate determinant of
+three triples by a nonzero factor and carries an arc to an arc; the arc property of a whole orbit
+therefore follows from that of its representative, and each of the four representatives is decided over
+its twelve coordinates in three positions. `geometric_rows_have_zero_triple_concurrence` now follows
+because three internal points of a line have vanishing coordinate determinant. Retired: the three
+`Concurrence.RowBlock*` modules, `geometric_rows_have_zero_triple_signatures`, the module
+`RowUniqueness.PassantRowMasks`, and the passant-row bit-set definitions of `ConcurrenceBase`. Both
+package gates and the evidence verifier are green; the audit reports 88 terminals of which 77 are
+clean, and the 11 carrying a declaration-local native-evaluation axiom are exactly the previous ones.
+Report: `notes/2026-08-07-c834-support-arc-structural-closure.md`.
+
+Two things that round establishes for stage 5 item 13. Each of the three families with dihedral
+stabilizer is a conic meeting the base conic in exactly two points, with its twelve remaining points
+the support; the symmetric family lies on no conic. That explains the orbit size 91 and the stabilizer
+order 24 for those three, makes their arc property immediate, and is a three-`decide` Lean addition
+not yet made. And the fixed-point exhaustion is reachable only through the arc property: with it, the
+seven-fibre stage has 22951 nodes and 10296 eight-point partial supports; without it, an exhaustive
+search pruned only by the parity-deficit bound visits 1344675925 nodes, returning the same 56
+codewords the Lean statement asserts. So item 13 must first prove that an arbitrary weight-twelve
+codeword meets every passant in zero or two points, using only minimum distance twelve. Counting is
+exhausted — the two identities give only "at most six passants carry four support points and at most
+two carry six" — and the unexploited lever is that `S + gS` is a codeword, so `|S ∩ gS| <= 6` for every
+`g` outside the order-24 stabilizer, applied to the involution polar to the offending passant.
+
+## Superseded resume note (2026-08-07, later)
 
 Stage 5 item 10 is closed, and structurally. `admissible_seven_set_is_geometric_row` is proved from
 the Gram relation of four internal points instead of an indexed passant-clique search, and
@@ -31,10 +60,8 @@ remains of the native decisions is the fourteen weight-ten profile shards, the a
 and the fixed-point exhaustion — stage 5 items 11 to 13 — and then the stage 6 release surfaces.
 Report: `notes/2026-08-07-c834-bitangent-support-and-row-uniqueness-assembly.md`.
 
-The converse half is unchanged and still enumerated: `geometric_rows_have_zero_triple_concurrence`
-is a blockwise kernel check that no displayed support meets a passant in three points. A structural
-replacement would prove directly that a minimum support meets every passant in zero or two points,
-which belongs with stage 5 item 13.
+The converse half was still enumerated at that point; it is now structural, as the latest resume note
+above records.
 
 ## Superseded resume note (2026-08-07, earlier)
 
@@ -353,10 +380,12 @@ neither is elaborated.
     their structural reduction; no further one exists.
 13. Fixed-point exhaustion: `fixedPoint_slices_are_stabilizer_orbits` reduces to a packed
     action-index table over the order-28 stabilizer and is small. `fixedPoint_weightTwelveExhaustion`
-    needs a proved checker in the style of the weight-ten reachability kernel; its cheap half is
-    exhibiting the solutions and its expensive half is excluding every other candidate, which no
-    table removes. Both leaves also use `eraseDups` and `toFinset`, which are quadratic in decidable
-    equality and need attention independently of the search.
+    is gated on the arc property for an arbitrary weight-twelve codeword, measured above as the only
+    lever that brings its search within kernel reach; the arc property of the displayed family is not
+    usable here, since this is the theorem that puts a codeword in that family. Once the arc property
+    is available, three of the four profiles vanish and the fourth is a 22951-node tree. Both leaves
+    also use `eraseDups` and `toFinset`, which are quadratic in decidable equality and need attention
+    independently of the search.
 
 **Stage 6 — the release surfaces.** The task card requires seven; only the axiom transcript and part
 of generated-artifact provenance have had any work, and the rest had no owner before this plan.
