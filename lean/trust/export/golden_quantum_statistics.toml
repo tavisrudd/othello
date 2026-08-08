@@ -28,15 +28,19 @@ transfer Gram operator to complementary eigenprojections and a squared
 commutator.  At the semantic level, the closure treats a symmetric conference
 matrix on six labels and a three-element subset, constructs an orthonormal
 eigenframe, and proves the characteristic polynomial of its exchange
-compression.
+compression.  The all-orders terminals give the principal-block eigenvalue
+formula, the aligned-four-set second-moment formula, nonconstancy for every
+half-size at least four, the small principal-block formulas, and order-four
+nonexistence.
 
-This formal artifact does not prove the all-orders conference exchange rigidity
-classification, the aligned-design mean and variance, the continuous-control
-optimum, the Hermitian exchange landscape, the squared-spectrum rigidity and
-stability bounds, the balance obstruction, the optical compilation, the
-tomographic identifiability statements, or any experimental threshold.  Those
-results are established in the accompanying paper by ordinary mathematical
-proof, cited literature, or exact certificate computation.
+The all-orders rigidity directions are separate terminals rather than one
+bundled equivalence.  This formal artifact does not prove the aligned-design
+mean and variance, the continuous-control optimum, the Hermitian exchange
+landscape, the squared-spectrum rigidity and stability bounds, the balance
+obstruction, the optical compilation, the tomographic identifiability
+statements, or any experimental threshold.  Those results are established in
+the accompanying paper by ordinary mathematical proof, cited literature, or
+exact certificate computation.
 """
 
 boundary = """

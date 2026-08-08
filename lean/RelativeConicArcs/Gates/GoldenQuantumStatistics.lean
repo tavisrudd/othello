@@ -27,7 +27,12 @@ matrix trace; no separately written scalar polynomial is part of this gate.
 for a real symmetric conference matrix on six labels and an actual
 three-element subset, it constructs an orthonormal eigenframe and proves that
 the resulting exchange compression has characteristic polynomial
-`(X - 1/5)(X - 4/5)^2`.
+`(X - 1/5)(X - 4/5)^2`.  More generally, the imported half-cut and spectrum
+modules prove the eigenvalue formula, the aligned-four-set purity formula,
+nonconstancy for every half-size at least four, the three small principal-block
+formulas, and nonexistence at order four.  The two directions of conference
+exchange rigidity are exported as separate theorem terminals rather than one
+bundled equivalence.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its all-orders rigidity converse, its continuous-control
