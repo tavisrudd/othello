@@ -52,6 +52,21 @@ def coordinateDeterminant (first second third : Triple) : Field13 :=
     - first.y * (second.x * third.z - second.z * third.x)
     + first.z * (second.x * third.y - second.y * third.x)
 
+/-- A nonzero factor may be cancelled from a vanishing product.  Decided over the residue field. -/
+theorem eq_zero_of_mul_eq_zero_field :
+    ∀ factor value : Field13, factor ≠ 0 → factor * value = 0 → value = 0 := by
+  decide +kernel
+
+/-- Rescaling the three arguments multiplies the coordinate determinant by the three factors, because
+the determinant is homogeneous of degree one in each row. -/
+theorem coordinateDeterminant_scaleTriple (leftFactor middleFactor rightFactor : Field13)
+    (left middle right : Triple) :
+    coordinateDeterminant (scaleTriple leftFactor left) (scaleTriple middleFactor middle)
+        (scaleTriple rightFactor right)
+      = leftFactor * middleFactor * rightFactor * coordinateDeterminant left middle right := by
+  simp only [coordinateDeterminant, scaleTriple]
+  ring
+
 /-- The join of the first two triples pairs with the third to the coordinate determinant, so the
 determinant vanishes exactly when the third triple lies on the line joining the first two. -/
 theorem dotTriple_joinTriple_eq_coordinateDeterminant (first second third : Triple) :

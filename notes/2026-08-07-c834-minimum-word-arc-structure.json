@@ -1,0 +1,119 @@
+{
+  "arc_restricted_fibre_search": {
+    "eight_point_partial_supports": 10296,
+    "nodes_per_level": [
+      1,
+      6,
+      36,
+      204,
+      972,
+      3528,
+      8208,
+      10296
+    ],
+    "unrestricted_choices": 279936
+  },
+  "conic_points": 14,
+  "internal_points": 78,
+  "internal_points_per_passant": [
+    7
+  ],
+  "internal_points_per_secant": [
+    6
+  ],
+  "passant_lines": 78,
+  "representatives": {
+    "dihedralA": {
+      "conic_system_rank": 5,
+      "containing_conic_coefficients": [
+        3,
+        6,
+        12,
+        6,
+        10,
+        1
+      ],
+      "containing_conic_point_count": 14,
+      "containing_conic_point_split": {
+        "base conic": 2,
+        "internal": 12
+      },
+      "is_codeword": true,
+      "passant_intersection_profile": {
+        "0": 36,
+        "2": 42
+      },
+      "secant_intersection_profile": {
+        "0": 31,
+        "1": 36,
+        "2": 24
+      }
+    },
+    "dihedralB": {
+      "conic_system_rank": 5,
+      "containing_conic_coefficients": [
+        4,
+        7,
+        3,
+        7,
+        9,
+        1
+      ],
+      "containing_conic_point_count": 14,
+      "containing_conic_point_split": {
+        "base conic": 2,
+        "internal": 12
+      },
+      "is_codeword": true,
+      "passant_intersection_profile": {
+        "0": 36,
+        "2": 42
+      },
+      "secant_intersection_profile": {
+        "0": 31,
+        "1": 36,
+        "2": 24
+      }
+    },
+    "dihedralC": {
+      "conic_system_rank": 5,
+      "containing_conic_coefficients": [
+        8,
+        9,
+        8,
+        12,
+        3,
+        1
+      ],
+      "containing_conic_point_count": 14,
+      "containing_conic_point_split": {
+        "base conic": 2,
+        "internal": 12
+      },
+      "is_codeword": true,
+      "passant_intersection_profile": {
+        "0": 36,
+        "2": 42
+      },
+      "secant_intersection_profile": {
+        "0": 31,
+        "1": 36,
+        "2": 24
+      }
+    },
+    "symmetric": {
+      "conic_system_rank": 6,
+      "is_codeword": true,
+      "passant_intersection_profile": {
+        "0": 36,
+        "2": 42
+      },
+      "secant_intersection_profile": {
+        "0": 31,
+        "1": 36,
+        "2": 24
+      }
+    }
+  },
+  "secant_lines": 91
+}

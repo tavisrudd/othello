@@ -152,8 +152,8 @@
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/Gates/AxiomAudit.lean",
-      "bytes": 6633,
-      "sha256": "717db00112103a5e382b942d4b19978677bcf4cb1743100a4f0a52850e43bbd9",
+      "bytes": 6976,
+      "sha256": "bae0d3b303b4767c811ddb8cd9498cdea8e7b205aa7390f5745853938731be4d",
       "role": "tracked axiom audit for all retained and structural aggregate terminals"
     },
     {

@@ -162,10 +162,14 @@ PassantCodeQ13/AssociationTransport/RelationSquares/{RhoZero,Nine,Ten,Twelve}.le
     one shard per elliptic relation, identifying its squaring identity
 PassantCodeQ13/AssociationTransport/OrbitMasks/{Symmetric,DihedralA,DihedralB,DihedralC}.lean
     one shard per minimum-word orbit, identifying its column masks
-PassantCodeQ13/MinimumWords/Concurrence/{Row,Pair}Block{One,Two,Three}.lean
-    the concurrence table split into blocks of first points
+PassantCodeQ13/MinimumWords/Concurrence/PairBlock{One,Two,Three}.lean
+    the pair concurrence table split into blocks of first points, each
+    block checked in two halves
+PassantCodeQ13/MinimumWords/SupportArc.lean
+    the minimum-word supports are arcs: no three of their points are
+    collinear, proved from the four representatives and the action
 PassantCodeQ13/MinimumWords/RowUniqueness/
-    {Base,PassantRowMasks,GeometricRows,ConcurrenceTransport,PolarGram,
+    {Base,GeometricRows,ConcurrenceTransport,PolarGram,
      PassantJoinInvariant,QuadrupleGram,NormalizedTrace,BitangentSupport,
      BitangentWitness,Transport,DecodeInjective}.lean
 PassantCodeQ13/WeightTen/IsolatedProfile/Fibre{0..6}.lean

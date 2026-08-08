@@ -34,22 +34,6 @@ open RelativeConicArcs.PassantCodeQ13
 open PassantCodeQ13.PlaneJoin
 open PassantCodeQ13.SymmetricSquare
 
-/-! ## Rescaling the coordinate determinant -/
-
-/-- Rescaling the three arguments multiplies the coordinate determinant by the three factors. -/
-theorem coordinateDeterminant_scaleTriple (leftFactor middleFactor rightFactor : Field13)
-    (left middle right : Triple) :
-    coordinateDeterminant (scaleTriple leftFactor left) (scaleTriple middleFactor middle)
-        (scaleTriple rightFactor right)
-      = leftFactor * middleFactor * rightFactor * coordinateDeterminant left middle right := by
-  simp only [coordinateDeterminant, scaleTriple]
-  ring
-
-/-- A nonzero factor may be cancelled from a vanishing product. -/
-private theorem eq_zero_of_mul_eq_zero_field :
-    ∀ factor value : Field13, factor ≠ 0 → factor * value = 0 → value = 0 := by
-  decide +kernel
-
 /-! ## Admissible seven-sets -/
 
 /-- Every admissible seven-set of internal points is the point set of a passant line. -/
