@@ -239,6 +239,20 @@ intended fact to thirty-two terminals.  What remains is to specialize the
 projection to a Hermitian conference involution and prove the control-cube
 trace, minor, and determinant bounds.
 
+The first of those bounds is now end to end.  The Hermitian involution
+projections are complementary, idempotent, orthogonal, and Hermitian.  Trace
+cycling removes the positive frame and identifies the first transfer moment
+with `tr(D Pm D Pp)`.  For six labels, zero diagonal and off-diagonal pair
+products `1/5` reduce this actual matrix trace to
+`(6*sum(x_i^2)-sum(x_i)^2)/20`; the cube hypotheses then prove the exact
+`9/5` bound.  Both the matrix formula and bounded-transfer theorem are
+registered, so the intended trust fact now has thirty-four terminals.
+
+The remaining continuous-control gap starts at `p2`: formalize the Schatten
+fourth-power convexity/Boolean reduction, then the separately convex minor and
+determinant bounds and equality cases.  The active mystery is no longer the
+first-moment normalization or complex frame semantics.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

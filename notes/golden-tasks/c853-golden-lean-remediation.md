@@ -211,7 +211,8 @@ cases, and literature inputs are explicit in the formal interface.
       specialization remain.
 - [ ] Prove each sector bound.
       The mixed-sector inequality from nonnegative spectral variables and the
-      `e1`, `e2` bounds is proved; the matrix-to-control bounds remain.
+      `e1`, `e2` bounds is proved, and the actual transfer first-moment bound
+      `p1≤9/5` is complete.  The higher matrix-to-control bounds remain.
 - [ ] Formalize the separate-convexity and rank-one-minor reductions.
 - [ ] Prove the Boolean reduction.
 - [ ] Characterize every equality case.

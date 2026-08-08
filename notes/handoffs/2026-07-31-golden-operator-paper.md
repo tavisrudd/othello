@@ -626,6 +626,14 @@ identity.  This is a registered thirty-second intended terminal.  Conference
 projection specialization and the cube trace/minor/determinant bounds remain;
 the generated fact is still pending the same unavailable quiet window.
 
+The six-mode first control moment is now fully bridged.  For actual complex
+eigenframes and `K=QmᴴD_xQp`, Lean cycles the frame compression to
+`tr(D_x Pm D_x Pp)`, derives
+`(6 sum(x_i^2)-sum(x_i)^2)/20` from the normalized conference entries, and
+proves `Re tr(KᴴK)≤9/5` on `[-1,1]^6`.  These two new registered terminals make
+the intended surface thirty-four terminals.  Higher moments, minors,
+determinant equality, and the generated-fact quiet window remain open.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window
