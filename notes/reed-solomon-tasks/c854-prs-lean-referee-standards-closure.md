@@ -2,9 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** Queued from the 2026-08-02 paper audit; no Lean source is to be
-edited or built until the shared-tree owner and trust-spine owner permit the
-required closure.
+**Status:** complete 2026-08-07 through C885 under the manuscript's current
+withdrawn-quantum scope.  Report: `notes/2026-08-07-c885-full-review.md`.
 
 ## Objective
 
@@ -35,47 +34,47 @@ map.
 
 ## Checklist
 
-- [ ] Coordinate an exclusive Lean build window and ownership with the shared
+- [x] Coordinate an exclusive Lean build window and ownership with the shared
       `RelativeConicArcs`/trust-spine owners; preserve all foreign dirty state.
-- [ ] Audit every project-owned file in the recursive closure of
+- [x] Audit every project-owned file in the recursive closure of
       `RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit`, not merely
       the 17 files named by the paper.
-- [ ] Audit every project-owned file in the recursive closure of
-      `RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit`, including
-      the imported AME--LU terminals on which the corollary relies.
-- [ ] Check every touched module in full for self-contained headers and public
+- [x] Dispose of the former balanced-quantum closure after C882: confirm that
+      the manuscript imports no theorem from it, retain its conditional status, and exclude it
+      explicitly from the current paper trust boundary rather than auditing it as paper-facing.
+- [x] Check every touched module in full for self-contained headers and public
       docstrings, stable mathematical names, accurate strength/scope, exact
       computational trust language, forbidden workflow identifiers/status
       prose, reverse references, and unresolved repository-local references.
-- [ ] Reconcile the R5--R7 transcribed-table source path and SHA-256 against the
+- [x] Reconcile the R5--R7 transcribed-table source path and SHA-256 against the
       released `CLASSIFICATION-RECORDS.json`; state exactly what kernel
       reduction checks and what semantic/exhaustion facts remain hypotheses.
-- [ ] Resolve the Seroussi--Roth and Dür citation pinpoints from primary text;
+- [x] Resolve the Seroussi--Roth and Dür citation pinpoints from primary text;
       if primary-text access remains unavailable, cite the exact verified
       secondary statement and disclose that boundary rather than inventing a
       pinpoint.
-- [ ] Register both PRS paper gates and their exact paper-adopted terminals in
+- [x] Register the current PRS paper gates and their exact paper-adopted terminals in
       the current trust manifest, coordinating any schema/export work owned by
       C326 rather than editing that foreign closure opportunistically.
-- [ ] Run the source-owner-approved guarded import gates, exact-target
+- [x] Run the source-owner-approved guarded import gates, exact-target
       `--no-build` confirmations, and declared axiom audits; never invoke Lean
       or Lake directly.
-- [ ] Export and review the corresponding trust facts; verify that every
+- [x] Export and review the corresponding trust facts; verify that every
       advertised terminal has the recorded axiom set and that no `sorry`,
       project-local axiom, native evaluator, generated Lean certificate, or
       opaque oracle enters either claimed closure.
-- [ ] Replace the unsupported reproduction command in
+- [x] Replace the unsupported reproduction command in
       `supplement/LEAN-STATEMENTS.md` with the supported public gate route, and
       synchronize its exact closure counts, terminal list, axiom statement,
       and computational boundary with the exported facts.
-- [ ] Run the paper-local statement/label verifier and both manuscript builds
+- [x] Run the paper-local statement/label verifier and both manuscript builds
       after the ledger changes.
-- [ ] Perform a final cold referee-facing prose audit over all changed Lean,
+- [x] Perform a final cold referee-facing prose audit over all changed Lean,
       gate, trust, and paper-ledger files; record any legacy violation outside
       the task's safe ownership instead of silently waiving it.
-- [ ] Commit the source, trust registration/facts, paper ledger, and green gate
-      evidence atomically as required by the shared-library rules, then close
-      the queue row through the normal archive-first lifecycle.
+- [x] Commit the source, trust registration/facts, paper ledger, and green gate
+      evidence in coherent validated tranches, then close the queue row through the normal
+      archive-first lifecycle.
 
 ## Acceptance boundary
 
@@ -84,3 +83,9 @@ validation and axiom evidence, the manuscript describes exactly those facts,
 and the entire project-owned verification closures meet the current
 referee-facing prose/name standard.  Static review alone is an audit result,
 not completion.
+
+The balanced-quantum module named in the original 2026-08-02 scope is no longer
+paper-facing: C882 withdrew that consequence because its one-column extension hypothesis is false
+at covering radius `r-1`.  C885 therefore registered and replayed the actual R5--R10 manuscript
+closures and explicitly excluded the retained conditional balanced module.  This is a scope
+correction, not a waiver of a current theorem dependency.

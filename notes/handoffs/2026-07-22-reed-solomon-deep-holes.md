@@ -179,9 +179,19 @@ rank-two descent, nonsquare transport, genus and deletion bounds, and the exact
 q16/q32/q64 trust split.  The revised abstract tracks those actual headlines.
 A fresh cold reader returned ACCEPT at 97/100.  All fixed-level replays, the
 69-artifact/75-label release checks, warning-free 56-page canonical and 41/50
-TIT builds, and a clean standalone export pass.  The remaining Lean/trust
-standards work is isolated and queued as C854.  The report is
+TIT builds, and a clean standalone export pass.  The then-remaining Lean/trust
+standards work was isolated as C854 and is now closed through C885.  The report is
 `notes/reed-solomon-tasks/c852-prs-proof-bottleneck-exposition.md`.
+
+C885 is complete and absorbs C854 under the corrected withdrawn-quantum scope.
+It repaired the Kaipa--Pradhan normalization note, BPS prior-art framing, q=8
+nonextension prose, citation metadata and Dür pinpoint, Lean headers/docstrings,
+75-label statement map, and paper-facing trust registrations.  The 74-terminal
+aggregate and all published R8, R9, and characteristic-two/Lucas audit surfaces
+have current exact facts and guarded replays.  Both PDFs are warning-clean; all
+33 citations, 72 evidence artifacts, the full Python suite, q=49 Rust record,
+and two Singular eliminations pass.  Report:
+`notes/2026-08-07-c885-full-review.md`.
 
 C545 is complete.  Version 1 was published on 2026-07-29 at
 `github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
@@ -1130,9 +1140,8 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C885 | active; full-review checklist frozen | close the bounded manuscript, citation, Lean, and trust defects before the next Version 2 candidate |
-| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1192,8 +1201,7 @@ history.
 
 ## Next command
 
-`go C885`
+`go C608`
 
-(C885 owns the bounded full-review remediation and absorbs C854 at the paper's
-current withdrawn-quantum boundary; C607 and C608 remain separate decoding
-tasks.)
+(C885 and its absorbed C854 obligations are complete; C608 is the immediate
+decoder consequence, while C607 remains the broader parallel decoding task.)
