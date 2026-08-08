@@ -312,6 +312,66 @@ theorem hermitianFrontier_dominates_iff {t u : ℝ} :
   · rintro rfl
     exact ⟨le_rfl, le_rfl, le_rfl⟩
 
+/-- Componentwise dominance is transitive. -/
+theorem SectorPoint.Dominates.trans {p q r : SectorPoint}
+    (hpq : p.Dominates q) (hqr : q.Dominates r) : p.Dominates r :=
+  ⟨hqr.1.trans hpq.1, hqr.2.1.trans hpq.2.1, hqr.2.2.trans hpq.2.2⟩
+
+/-- Componentwise dominance is antisymmetric. -/
+theorem SectorPoint.Dominates.antisymm {p q : SectorPoint}
+    (hpq : p.Dominates q) (hqp : q.Dominates p) : p = q := by
+  cases p with
+  | mk ph ps pe =>
+    cases q with
+    | mk qh qs qe =>
+      simp only [SectorPoint.Dominates] at hpq hqp
+      congr
+      · exact le_antisymm hqp.1 hpq.1
+      · exact le_antisymm hqp.2.1 hpq.2.1
+      · exact le_antisymm hqp.2.2 hpq.2.2
+
+/-- A feasible point is componentwise maximal if no feasible point dominates
+it without being equal to it. -/
+def SectorPoint.MaximalIn (F : Set SectorPoint) (p : SectorPoint) : Prop :=
+  p ∈ F ∧ ∀ q ∈ F, q.Dominates p → q = p
+
+/-- If every feasible point is dominated by the frontier and every frontier
+point is feasible, then the componentwise-maximal feasible set is exactly the
+squared-holonomy frontier. -/
+theorem maximalIn_iff_mem_hermitianFrontier (F : Set SectorPoint)
+    (hdom : ∀ p ∈ F, ∃ t ∈ Set.Icc (0 : ℝ) 1, (hermitianFrontier t).Dominates p)
+    (hreal : ∀ t ∈ Set.Icc (0 : ℝ) 1, hermitianFrontier t ∈ F) (p : SectorPoint) :
+    p.MaximalIn F ↔ p ∈ hermitianFrontier '' Set.Icc (0 : ℝ) 1 := by
+  constructor
+  · rintro ⟨hpF, hpmax⟩
+    rcases hdom p hpF with ⟨t, ht, htp⟩
+    exact ⟨t, ht, hpmax (hermitianFrontier t) (hreal t ht) htp⟩
+  · rintro ⟨t, ht, rfl⟩
+    refine ⟨hreal t ht, ?_⟩
+    intro q hq hqt
+    rcases hdom q hq with ⟨u, hu, huq⟩
+    have hut : u = t := hermitianFrontier_dominates_iff.mp (huq.trans hqt)
+    subst u
+    exact hqt.antisymm huq
+
+/-- Along the Hermitian frontier, the symmetric and exterior sectors are
+maximized exactly at `t = 0`, while the mixed sector is maximized exactly at
+`t = 1`. -/
+theorem hermitianFrontier_endpoint_equalities (t : ℝ) :
+    (hermitianFrontier t).h3 = 317 / 125 ↔ t = 0 := by
+  simp only [hermitianFrontier]
+  constructor <;> intro h <;> linarith
+
+theorem hermitianFrontier_exterior_endpoint (t : ℝ) :
+    (hermitianFrontier t).e3 = 4 / 25 ↔ t = 0 := by
+  simp only [hermitianFrontier]
+  constructor <;> intro h <;> linarith
+
+theorem hermitianFrontier_mixed_endpoint (t : ℝ) :
+    (hermitianFrontier t).s21 = 8 / 5 ↔ t = 1 := by
+  simp only [hermitianFrontier]
+  constructor <;> intro h <;> linarith
+
 end ParetoGeometry
 
 end RelativeConicArcs.HermitianConferenceExchange
