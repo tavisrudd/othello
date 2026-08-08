@@ -2,17 +2,23 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** active.  The end-to-end rendered read and first layered-exposition
-pass are complete.  The abstract now leads through the R5 model before the
-recursive carrier, Section II gives an operational proof map and an R5--R10
-mechanisms table, the end of R5 and Example V.3 identify the recursion in
-miniature, and the introduction and Section VI separate unconditional
-component geometry from conditional finite-field escape.  No theorem,
-proposition, lemma, corollary, or definition environment changed.  Both
-manuscript drivers and the quick verifier are green; the TIT submission
-remains 44 pages.  The full paper-local replay is running unattended.
-Remaining gates are its result, the final rendered-float/copy inspection,
-specialist and generalist cold reads, and the closeout review.
+**Status:** active.  The end-to-end rendered read, layered-exposition pass, and
+blind specialist/generalist/editor A/B reads are complete.  All three readers
+preferred the revision.  Their substantive cautions have been repaired:
+Section II defines `shallow` and uses `transverse` only as shorthand for the
+noncontained branch; the R5 model and Example V.3 are qualified as models for
+that branch; the R9 and R10 closing gates are explicit; and the Reading Map now
+precedes the related-work survey.  No mathematical statement, hypothesis,
+proof step, existing cross-reference label, or evidence boundary changed.
+Both manuscript drivers,
+the quick verifier, spelling scan, and rendered-layout inspection are green.
+The TIT submission is 45 pages, three pages below the task's 48-page ceiling.
+The fresh copy/layout reader preferred the current 45-page render over the
+baseline at confidence 0.94.  Its terminology, punctuation, notation, table
+numbering, and bad-break findings are repaired.  The full paper-local replay
+is running unattended.  Remaining gates are its result, a dedicated equation-
+numbering cleanup, resolution of the pre-existing D.10 good-base inference
+described below, and the closeout review.
 
 ## Goal
 
@@ -97,3 +103,39 @@ them that way.
 - No theorem, scope, certificate, Lean boundary, or release-gate change.
 - No attempt to make the paper introductory or undergraduate-accessible.
 - No deletion of technical material merely because it is expensive on a first pass.
+
+## Blind A/B record
+
+The frozen baseline and revised TIT PDFs were supplied without repository
+history.  The generalist reader chose the revision 90/10 and scored generalist
+accessibility 79 to 89 while leaving specialist confidence essentially stable
+(92 to 94).  The PRS/finite-geometry reader also chose the revision and checked
+the load-bearing R5 identity, fixed-level gates, carrier conditionality,
+certificate boundaries, and Lean trust boundary without finding a mathematical
+regression.  The journal-layout reader chose the revision, finding no clipping,
+overflow, font-embedding, or grayscale-legibility defect.  The current
+45-page render includes the resulting terminology, scope, table, and ordering
+repairs.  A fresh page-by-page comparison preferred it over the baseline at
+confidence 0.94.  Table IV now stays together; Appendix C's two longtables are
+visibly numbered VIII and IX and no longer split after one row.  Removing the
+forced bibliography break was tested and rejected because it left only two
+references orphaned on page 45; the cleaner 45-page layout was retained.
+
+## Open red-team findings
+
+The external post-revision review identified one pre-existing proof-audit
+question in the redundancy-ten good-base paragraph.  The printed inference
+from individual root-coordinate degree bounds of 22 to a common rational good
+base at every binary $q\geq32$ is valid only if 22 bounds one nonzero product
+selector, not merely each factor separately.  The public C578 certificate
+instead records a nonzero combined selector of total degree at most 102, the
+uniform $q\geq128$ gate, and the separate complete $q=64$ bridge.  Thus the
+headline binary $q\geq64$ result has an existing documented route, but the
+stronger printed $q\geq32$ intermediate sentence is not yet justified by the
+public evidence inspected in C886.  No proof text has been changed pending a
+dedicated mathematical audit.
+
+The same review caught equation numbers that duplicate or run backward in
+printed order: manual tags were retained from an earlier section order.  This
+is a math-neutral but reference-sensitive cleanup and will be handled as its
+own inspected edit rather than mixed into the exposition pass.
