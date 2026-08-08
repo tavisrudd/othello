@@ -187,4 +187,63 @@ theorem normalizedMean_zonalCombination_stabilizerFixedVertexWeight_cube :
   exact normalizedMean_markedTetrahedralField_cube
     (by simpa [pow_two] using sqrt_five_mul_self)
 
+/-- The real orthogonal matrix obtained by dividing the integral scaled
+icosahedral rotation by four and sending the golden generator to `√5`. -/
+noncomputable def faceAxisRotation (r : Fin 3) (i j : Fin 3) : ℝ :=
+  goldenCast (Real.sqrt 5) sqrt_five_mul_self (scaledRotation r i j) / 4
+
+/-- The real face-axis rotations have orthonormal rows. -/
+theorem faceAxisRotation_rows_orthogonal (r i j : Fin 3) :
+    ∑ k, faceAxisRotation r i k * faceAxisRotation r j k =
+      if i = j then 1 else 0 := by
+  have h := congrArg (goldenCast (Real.sqrt 5) sqrt_five_mul_self)
+    (scaledRotation_rows_orthogonal r i j)
+  simp only [map_sum, map_mul, map_ofNat, map_zero, map_ite] at h
+  rw [← h]
+  simp only [faceAxisRotation, div_mul_div_comm, Finset.sum_div]
+  norm_num
+
+/-- The displayed label action of the `r`-th rotation, regarded as a
+permutation. -/
+def faceAxisLabelPermutation (r : Fin 3) : Equiv.Perm (Fin 5) :=
+  Equiv.ofInjective (labelPermutation r) (labelPermutation_injective r)
+
+/-- The permutation wrapper acts by the displayed label function. -/
+@[simp] theorem faceAxisLabelPermutation_apply (r : Fin 3) (i : Fin 5) :
+    faceAxisLabelPermutation r i = labelPermutation r i := rfl
+
+/-- Substitution by a face-axis rotation relabels the zonal field by the same
+permutation of the five labels. -/
+theorem linearSubstitution_faceAxisRotation_zonalCombination_pairSum
+    (r : Fin 3) (y : Fin 5 → ℝ) :
+    linearSubstitution (faceAxisRotation r) (zonalCombination (pairSum y)) =
+      zonalCombination (pairSum (fun i ↦ y (faceAxisLabelPermutation r i))) := by
+  fin_cases r <;>
+    norm_num [zonalCombination, pairSum, faceAxisZonalForm, zonalHarmonic,
+      unitFaceAxis, doubledFaceAxisReal, doubledFaceAxisOver, goldenCast,
+      doubledFaceAxis, doubledAxisCoordinates, faceAxisRotation, scaledRotation,
+      faceAxisLabelPermutation, labelPermutation, linearSubstitution_X,
+      linearSubstitution, linearForm, quadric] <;>
+    ring_nf <;>
+    nlinarith [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 5),
+      Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)]
+
+/-- The cubic moment of the face-axis zonal field attached to a five-label
+weight vector. -/
+noncomputable def faceAxisCubic (y : Fin 5 → ℝ) : ℝ :=
+  normalizedMean 18 (zonalCombination (pairSum y) ^ 3)
+
+/-- The face-axis cubic is invariant under each of the three displayed label
+permutations induced by icosahedral rotations. -/
+theorem faceAxisCubic_comp_faceAxisLabelPermutation (r : Fin 3) (y : Fin 5 → ℝ) :
+    faceAxisCubic (fun i ↦ y (faceAxisLabelPermutation r i)) = faceAxisCubic y := by
+  rw [faceAxisCubic, faceAxisCubic,
+    ← linearSubstitution_faceAxisRotation_zonalCombination_pairSum, ← map_pow]
+  rw [normalizedMean, normalizedMean]
+  have h := congrArg (fun L : MvPolynomial (Fin 3) ℝ →ₗ[ℝ] ℝ ⇒
+      L (zonalCombination (pairSum y) ^ 3))
+    (gaussianMoment_comp_linearSubstitution (faceAxisRotation r)
+      (faceAxisRotation_rows_orthogonal r))
+  exact congrArg (fun z : ℝ ⇒ z / momentFactor 20) h
+
 end RelativeConicArcs.SphericalCubicRestriction

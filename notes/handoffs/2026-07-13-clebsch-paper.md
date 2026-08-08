@@ -530,7 +530,11 @@ unit-axis zonal forms and proves their weighted sum is exactly the designed
 odd/even field.  Hence
 `normalizedMean_zonalCombination_stabilizerFixedVertexWeight_cube` proves the
 manuscript's marked value for the geometric face-axis field.  Rotation
-covariance and the invariant-line reduction remain.
+covariance is now closed as well: the three scaled golden matrices give real
+orthogonal rotations, their polynomial substitutions relabel the entire
+ten-axis zonal field by the displayed label permutations, and the algebraic
+moment functional makes `faceAxisCubic` invariant under all three.  The explicit
+word-orbit reduction and sum-zero collapse remain.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared

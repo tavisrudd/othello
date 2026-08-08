@@ -255,12 +255,17 @@ the following task-owned obligations, in execution order:
    surviving moment is now also proved,
    `M(Hodd² Heven) = -1024/969969`, and the first-coordinate transposition
    proves `M(Hodd³) = M(Hodd Heven²) = 0` symbolically.  What remains in this
-   item is rotation covariance, coefficient-orbit reduction, sum-zero collapse,
-   and the rational general-weight corollary.  The marked odd/even combination is now assembled for
+   item is coefficient-orbit reduction, sum-zero collapse, and the rational
+   general-weight corollary.  The marked odd/even combination is now assembled for
    either square root of five, and its cubic mean is proved to be the rational
    value `-15680000/1247103`.  It is also identified coefficientwise with the
    actual ten-axis zonal combination at `stabilizerFixedVertexWeight`, so the
    marked value now holds for the geometric field itself.
+   The three integral golden rotations are transported to real orthogonal
+   matrices, substitution by each one is proved to relabel the full ten-axis
+   zonal combination by its displayed five-label permutation, and
+   `faceAxisCubic_comp_faceAxisLabelPermutation` gives the resulting cubic
+   invariance.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
