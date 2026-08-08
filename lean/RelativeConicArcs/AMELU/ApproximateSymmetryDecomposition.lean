@@ -25,8 +25,8 @@ every product unitary of defect below the threshold factors through an exact ray
 symmetry with traceless Hermitian local generators.  The quadratic growth
 estimate converting generator size into a defect bound is the second field.  The
 terminal theorem composes the two, and is therefore a conditional formal
-interface rather than an unconditional theorem: the threshold is not explicit
-and no compactness extraction is carried out in Lean.
+interface rather than an unconditional theorem: neither the threshold nor the
+quantitative coefficient is derived in Lean.
 
 All arguments are symbolic and kernel checked.  The module contains no
 generated data, native evaluation, axioms, or admitted declarations.
@@ -132,7 +132,7 @@ theorem defectSq_mul_symmetry {ψ : Label Site Level → ℂ}
 noncomputable def frobeniusSq (h : Site → LocalOperator Level) : ℝ :=
   ∑ j, ∑ a, ∑ b, Complex.normSq ((h j) a b)
 
-/-- The two unformalized inputs of the decomposition of approximate symmetries.
+/-- The unformalized inputs of the decomposition of approximate symmetries.
 
 The first field is the compactness extraction: a positive threshold below which
 every product unitary factors as an exact ray symmetry followed by a product of
@@ -140,21 +140,24 @@ one-site exponentials with small traceless Hermitian generators.  The threshold
 is not explicit and depends on the state; no compactness argument is carried out
 in Lean.
 
-The second field is the quadratic growth estimate for the defect of a product of
-one-site exponentials, in the form needed after the factorization: the product Frobenius norm
-of the generators is controlled by the defect, with the constant `6q/5`. -/
+The last field is the quadratic growth estimate for the defect of a product of
+one-site exponentials, in the form needed after the factorization: the product
+Frobenius norm of the generators is controlled by the defect with the supplied
+coefficient. -/
 structure ApproximateDecompositionInputs (ψ : Label Site Level → ℂ) where
   /-- The defect threshold produced by compactness. -/
   threshold : ℝ
   /-- The threshold is positive. -/
   threshold_pos : 0 < threshold
+  /-- The coefficient in the squared generator-norm estimate. -/
+  coefficient : ℝ
   /-- Below the threshold every product unitary factors through an exact ray
   symmetry, with traceless Hermitian local generators. -/
   exists_nearby_symmetry :
     ∀ U : Site → LocalOperator Level,
       defectSq ψ (tensorOperator U) < threshold →
         ∃ (g : SystemOperator Site Level) (h : Site → LocalOperator Level),
-          IsRaySymmetry ψ g ∧ IsUnitaryOperator g ∧
+          IsRaySymmetry ψ g ∧ IsUnitaryOperator g ∧ IsProductOperator g ∧
             (∀ j, (h j).IsHermitian) ∧ (∀ j, (h j).trace = 0) ∧
             tensorOperator U =
               g * tensorOperator (fun j => NormedSpace.exp (Complex.I • h j))
@@ -164,7 +167,7 @@ structure ApproximateDecompositionInputs (ψ : Label Site Level → ℂ) where
     ∀ h : Site → LocalOperator Level,
       (∀ j, (h j).IsHermitian) → (∀ j, (h j).trace = 0) →
         frobeniusSq h ≤
-          (6 * (Fintype.card Level : ℝ) / 5) *
+          coefficient *
             defectSq ψ (tensorOperator (fun j => NormedSpace.exp (Complex.I • h j)))
 
 /-- The decomposition of approximate symmetries, derived from the compactness
@@ -180,15 +183,15 @@ theorem approximate_decomposition {ψ : Label Site Level → ℂ}
     (U : Site → LocalOperator Level)
     (hU : defectSq ψ (tensorOperator U) < inputs.threshold) :
     ∃ (g : SystemOperator Site Level) (h : Site → LocalOperator Level),
-      IsRaySymmetry ψ g ∧ IsUnitaryOperator g ∧
+      IsRaySymmetry ψ g ∧ IsUnitaryOperator g ∧ IsProductOperator g ∧
         (∀ j, (h j).IsHermitian) ∧ (∀ j, (h j).trace = 0) ∧
         tensorOperator U =
           g * tensorOperator (fun j => NormedSpace.exp (Complex.I • h j)) ∧
         frobeniusSq h ≤
-          (6 * (Fintype.card Level : ℝ) / 5) * defectSq ψ (tensorOperator U) := by
-  obtain ⟨g, h, hsym, hgunit, hherm, htr, hfactor⟩ :=
+          inputs.coefficient * defectSq ψ (tensorOperator U) := by
+  obtain ⟨g, h, hsym, hgunit, hgprod, hherm, htr, hfactor⟩ :=
     inputs.exists_nearby_symmetry U hU
-  refine ⟨g, h, hsym, hgunit, hherm, htr, hfactor, ?_⟩
+  refine ⟨g, h, hsym, hgunit, hgprod, hherm, htr, hfactor, ?_⟩
   have hgrowth := inputs.frobeniusSq_le h hherm htr
   have hdefect :
       defectSq ψ (tensorOperator (fun j => NormedSpace.exp (Complex.I • h j))) =

@@ -8,7 +8,8 @@ its injectivity, the single-exponential identity for product operators, the
 traceless/scalar splitting of Hermitian local generators, the vanishing of the
 traceless generators of a continuous product-unitary ray symmetry, the
 invariance of the defect under exact ray symmetries, and the terminal of the
-conditional decomposition interface.
+conditional decomposition interface.  The final declarations audit the
+lossless transport of that interface through an exact base intertwiner.
 -/
 
 open RelativeConicArcs.AMELU.Multipartite
@@ -30,3 +31,8 @@ open RelativeConicArcs.AMELU.Multipartite
 #print axioms defectSq_symmetry_mul
 #print axioms defectSq_mul_symmetry
 #print axioms approximate_decomposition
+#print axioms rayIntertwiner_eigenvalue
+#print axioms intertwinerDefectSq_intertwiner_mul
+#print axioms IsRayIntertwiner.mul_symmetry
+#print axioms IsUnitaryOperator.mul
+#print axioms relative_approximate_decomposition

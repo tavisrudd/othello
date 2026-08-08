@@ -1,4 +1,5 @@
 import RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition
+import RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition
 import RelativeConicArcs.AMELU.TwoUniformProductSymmetry
 
 /-!
@@ -10,4 +11,6 @@ single-exponential identity for product operators, the traceless/scalar
 splitting of Hermitian local generators, the absence of a nonscalar
 one-parameter product-unitary symmetry, and the hypothesis-explicit interface
 for the decomposition of approximate symmetries.
+It also imports the exact-base translation from one-state symmetry
+decomposition to two-state intertwiner decomposition.
 -/

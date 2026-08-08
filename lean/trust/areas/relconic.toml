@@ -1362,6 +1362,11 @@ terminals = [
   "RelativeConicArcs.AMELU.Multipartite.defectSq_symmetry_mul",
   "RelativeConicArcs.AMELU.Multipartite.defectSq_mul_symmetry",
   "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition",
+  "RelativeConicArcs.AMELU.Multipartite.rayIntertwiner_eigenvalue",
+  "RelativeConicArcs.AMELU.Multipartite.intertwinerDefectSq_intertwiner_mul",
+  "RelativeConicArcs.AMELU.Multipartite.IsRayIntertwiner.mul_symmetry",
+  "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator.mul",
+  "RelativeConicArcs.AMELU.Multipartite.relative_approximate_decomposition",
 ]
 coverage_rule = "closure"
 
@@ -1452,6 +1457,31 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.rayIntertwiner_eigenvalue"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.intertwinerDefectSq_intertwiner_mul"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.IsRayIntertwiner.mul_symmetry"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator.mul"
+gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.AMELU.Multipartite.relative_approximate_decomposition"
 gates = ["RelativeConicArcs.Gates.AMELUTwoUniformRigidity"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[gate]]
