@@ -518,15 +518,19 @@ The second surviving cubic moment is green as well:
 `normalizedMean_tetrahedralOddHarmonic_sq_mul_tetrahedralEvenHarmonic` gives
 `-1024/969969`.  The first-coordinate swap is formalized as an orthogonal
 substitution, negates `Hodd`, fixes `Heven`, and proves the two odd-power moments
-zero.  The marked split and invariant-line assembly are next.
+zero.
 
 The designed marked odd/even combination is now assembled.  For every real `s` with `s² = 5`,
 `markedTetrahedralField s = (-385s/24)Hodd + (35/12)Heven`, and
 `normalizedMean_markedTetrahedralField_cube` derives
 `-15680000/1247103` from the four moment theorems.  The proof uses only the
-square of the odd coefficient, making the rationality mechanism explicit.  Its
-identification with the marked zonal field remains part of the geometric
-assembly.
+square of the odd coefficient, making the rationality mechanism explicit.
+`zonalCombination_pairSum_stabilizerFixedVertexWeight` expands the actual ten
+unit-axis zonal forms and proves their weighted sum is exactly the designed
+odd/even field.  Hence
+`normalizedMean_zonalCombination_stabilizerFixedVertexWeight_cube` proves the
+manuscript's marked value for the geometric face-axis field.  Rotation
+covariance and the invariant-line reduction remain.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared

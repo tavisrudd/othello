@@ -256,9 +256,11 @@ the following task-owned obligations, in execution order:
    `M(Hodd² Heven) = -1024/969969`, and the first-coordinate transposition
    proves `M(Hodd³) = M(Hodd Heven²) = 0` symbolically.  What remains in this
    item is rotation covariance, coefficient-orbit reduction, sum-zero collapse,
-   and final corollaries.  The marked odd/even combination is now assembled for
+   and the rational general-weight corollary.  The marked odd/even combination is now assembled for
    either square root of five, and its cubic mean is proved to be the rational
-   value `-15680000/1247103`.
+   value `-15680000/1247103`.  It is also identified coefficientwise with the
+   actual ten-axis zonal combination at `stabilizerFixedVertexWeight`, so the
+   marked value now holds for the geometric field itself.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This

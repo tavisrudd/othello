@@ -15,6 +15,10 @@ namespace RelativeConicArcs.SphericalCubicRestriction
 
 open MvPolynomial
 open RelativeConicArcs.SphericalMomentFunctional
+open RelativeConicArcs.KneserPairEigenspace
+open RelativeConicArcs.IcosahedralFaceAxes
+open RelativeConicArcs.ZonalHarmonicDegreeSix
+open RelativeConicArcs.FaceAxisHarmonicGram
 
 /-- The square of the `i`-th coordinate variable. -/
 noncomputable def squaredCoordinate (i : Fin 3) : MvPolynomial (Fin 3) ℝ := X i ^ 2
@@ -157,5 +161,30 @@ theorem normalizedMean_markedTetrahedralField_cube {s : ℝ} (hs : s ^ 2 = 5) :
     nlinarith
   rw [ha]
   norm_num
+
+/-- The face-axis zonal combination at the marked five-label weight is the
+odd/even tetrahedral field with the nonnegative real square root of five. -/
+theorem zonalCombination_pairSum_stabilizerFixedVertexWeight :
+    zonalCombination (pairSum stabilizerFixedVertexWeight) =
+      markedTetrahedralField (Real.sqrt 5) := by
+  norm_num [zonalCombination, pairSum, stabilizerFixedVertexWeight,
+    faceAxisZonalForm, zonalHarmonic, unitFaceAxis, doubledFaceAxisReal,
+    doubledFaceAxisOver, goldenCast, doubledFaceAxis, doubledAxisCoordinates,
+    markedTetrahedralField, tetrahedralHarmonicCombination,
+    tetrahedralOddHarmonic, tetrahedralEvenHarmonic, squaredCoordinate,
+    linearForm, quadric]
+  ring_nf
+  nlinarith [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 5),
+    Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 3)]
+
+/-- The marked face-axis zonal field has normalized cubic mean
+`-15680000/1247103`. -/
+theorem normalizedMean_zonalCombination_stabilizerFixedVertexWeight_cube :
+    normalizedMean 18
+      (zonalCombination (pairSum stabilizerFixedVertexWeight) ^ 3) =
+        -15680000 / 1247103 := by
+  rw [zonalCombination_pairSum_stabilizerFixedVertexWeight]
+  exact normalizedMean_markedTetrahedralField_cube
+    (by simpa [pow_two] using sqrt_five_mul_self)
 
 end RelativeConicArcs.SphericalCubicRestriction
