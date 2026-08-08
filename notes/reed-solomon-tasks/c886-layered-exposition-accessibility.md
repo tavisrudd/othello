@@ -17,9 +17,10 @@ The fresh copy/layout reader preferred the current 45-page render over the
 baseline at confidence 0.94.  Its terminology, punctuation, notation, table
 numbering, and bad-break findings are repaired.  The equation counter now
 advances in printed order, and every formerly manual display has a stable
-label used by its prose references.  The full paper-local replay is running
-unattended.  Remaining gates are its result, resolution of the pre-existing
-D.10 good-base inference described below, and the closeout review.
+label used by its prose references.  The D.10 selector sentence now exposes
+the existing C620 product bound and its finite-field-grid inference.  A fresh
+full paper-local replay is running unattended.  Remaining gates are its
+result and the closeout review.
 
 ## Goal
 
@@ -122,19 +123,19 @@ visibly numbered VIII and IX and no longer split after one row.  Removing the
 forced bibliography break was tested and rejected because it left only two
 references orphaned on page 45; the cleaner 45-page layout was retained.
 
-## Open red-team findings
+## Red-team resolution
 
-The external post-revision review identified one pre-existing proof-audit
-question in the redundancy-ten good-base paragraph.  The printed inference
-from individual root-coordinate degree bounds of 22 to a common rational good
-base at every binary $q\geq32$ is valid only if 22 bounds one nonzero product
-selector, not merely each factor separately.  The public C578 certificate
-instead records a nonzero combined selector of total degree at most 102, the
-uniform $q\geq128$ gate, and the separate complete $q=64$ bridge.  Thus the
-headline binary $q\geq64$ result has an existing documented route, but the
-stronger printed $q\geq32$ intermediate sentence is not yet justified by the
-public evidence inspected in C886.  No proof text has been changed pending a
-dedicated mathematical audit.
+The external post-revision review identified one proof-audit question in the
+redundancy-ten good-base paragraph: the printed inference from degree 22 to a
+common rational good base requires 22 to bound one nonzero product selector,
+not its factors separately.  C620 already proves exactly that stronger fact.
+Writing $A_j=B_j+xB_{j+1}$, it proves that $Q'=B_0B_4+B_2^2$ and
+$[x^2]Q=B_1B_4+B_2B_3$ are nonzero on the complement; geometric integrality
+supplies a nonzero quadratic pseudo-remainder coefficient.  The product of
+that coefficient, the two displayed factors, and the five-root Vandermonde is
+nonzero and has individual root degree at most $14+2+2+4=22$.  The manuscript
+now prints this product statement, so the finite-field grid bound gives the
+claimed binary $q\geq32$ good base without changing the $q\geq64$ theorem.
 
 The same review caught equation numbers that duplicated or ran backward in
 printed order because manual tags survived an earlier section order.  The
