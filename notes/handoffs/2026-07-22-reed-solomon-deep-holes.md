@@ -70,8 +70,11 @@ and Dur's Theorem 2.4 makes covering radius r-1 equivalent to completeness of th
 rational curve's arc, so no extension exists at any redundancy classified here.  The
 balanced q=8 quantum corollary and its AME and quantum-MDS consequences are withdrawn
 across every surface; the 1116 count survives as a deep-hole count.  Neither companion
-paper is affected.  A Version 1 erratum is an open user decision.  Diagnosis and impact
-scope are in `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+paper is affected.  The correction will be published as a GitHub release rather than a
+prose erratum; whether that release carries a corrected Version 1 or Version 2 is the one
+open question, and the release note is drafted on the card.  Diagnosis, impact scope, and
+the publication constraints are in
+`notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
 
 C881 has closed its literature half.  A geometry-side screen that no earlier
 audit ran found that the redundancy-five split-free criterion is prior art as a
@@ -91,9 +94,27 @@ radius promotion.  Version 2 now cites all of it, the novelty ledger carries a
 `PRIOR-ART` row beside a narrowed R5 row, and the Lean R5 module and gate
 headers cite the source of the cubic-cover hypothesis they previously left
 unattributed.  Both builds, the paper verifier, and the redundancy-five Lean
-gate are green; Version 1 is untouched and whether it needs an erratum is open.
-The audit is `notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md` and the
-remaining mathematical items are on the task card.
+gate are green.  The audit is
+`notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md`.
+
+C881 then produced its own mathematics from the same comparison, and this is now
+the section's centre.  The exact split-witness count
+`#Y_f = 6 N_f + 3 d2 + d3` holds on the trivial-gcd separable stratum in every
+characteristic, proved by a member-by-member root count using no discriminant and
+no invariant theory, with the Riemann-Hurwitz branch budget `d2 + 2 d3 <= 4` and
+the sharper `d2 + d3 <= 2` in characteristic two.  Its consequences: the fibre
+square is the Kaipa-Pradhan incidence curve, so their elliptic argument is the
+same Weil argument in other coordinates rather than a second one; a two-sided
+Chebotarev splitting law `N_f = (q+1)/6 + O(sqrt q)`; the threshold lowered from
+`q >= 23` to `q >= 20`; the fibre-square invariants forced at `q = 17, 19`; and
+the binary case closed for `q >= 16`, which removes `q = 16` from the
+certificate's logical domain and leaves a seven-field finite bridge.  In the
+tame generic range the identity is equivalent to Kaipa-Pradhan's incidence count
+and drops both their restrictions, so the ledger records it as
+`GENERALIZES-CITED` in row `R5-COUNT`.  Exhaustive verification over every point
+of PG(4,q) for prime powers 4 <= q <= 32 in every characteristic is registered in
+the replay gate.  Three rounds of persona review closed every objection raised.
+Remaining mathematical items are on the C883 card.
 
 C620 is complete: the first fresh carrier has empty split-free locus over
 every admissible binary field, the exact uniform replacement for the
