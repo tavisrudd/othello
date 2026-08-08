@@ -459,6 +459,9 @@ private theorem pairMoment_add_one_eq_zero_of_signBalances
                       | (exfalso; omega)
                       | norm_num
 
+/-- Five balance equations among ten signs force all five remaining row inner
+products to vanish.  This is the integer sign calculation used to pass from
+the root-row balances to the full conference square. -/
 theorem five_sign_balances_force_inner_products
     (a b c d e f g h i j : ℤ)
     (ha : a * a = 1) (hb : b * b = 1) (hc : c * c = 1)

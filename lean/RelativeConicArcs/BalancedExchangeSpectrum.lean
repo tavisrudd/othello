@@ -86,16 +86,19 @@ def exchangeCompression {κ : Type*} (D Q : Matrix ι ι R) (U : Matrix ι κ R)
   Uᵀ * (D * (antifixedProjection Q * (D * U)))
 
 omit [CharZero R] [Fintype ι] in
+/-- The fixed-space projection of a symmetric involution is symmetric. -/
 theorem fixedProjection_transpose {Q : Matrix ι ι R} (hQt : Qᵀ = Q) :
     (fixedProjection Q)ᵀ = fixedProjection Q := by
   simp [fixedProjection, Matrix.transpose_smul, Matrix.transpose_add, hQt]
 
 omit [CharZero R] [Fintype ι] in
+/-- The antifixed-space projection of a symmetric involution is symmetric. -/
 theorem antifixedProjection_transpose {Q : Matrix ι ι R} (hQt : Qᵀ = Q) :
     (antifixedProjection Q)ᵀ = antifixedProjection Q := by
   simp [antifixedProjection, Matrix.transpose_smul, Matrix.transpose_sub, hQt]
 
 omit [Fintype ι] in
+/-- The fixed and antifixed projections sum to the identity. -/
 theorem fixedProjection_add_antifixedProjection (Q : Matrix ι ι R) :
     fixedProjection Q + antifixedProjection Q = 1 := by
   rw [fixedProjection, antifixedProjection, ← smul_add]
@@ -103,6 +106,7 @@ theorem fixedProjection_add_antifixedProjection (Q : Matrix ι ι R) :
     rw [two_smul]; abel]
   rw [smul_smul, inv_mul_cancel₀ (two_ne_zero), one_smul]
 
+/-- The antifixed projection is idempotent when `Q` is an involution. -/
 theorem antifixedProjection_mul_self {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     antifixedProjection Q * antifixedProjection Q = antifixedProjection Q := by
   have hsq : (1 - Q) * (1 - Q) = (2 : R) • (1 - Q) := by
@@ -113,6 +117,7 @@ theorem antifixedProjection_mul_self {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
   congr 1
   field_simp
 
+/-- The fixed projection is idempotent when `Q` is an involution. -/
 theorem fixedProjection_mul_self {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     fixedProjection Q * fixedProjection Q = fixedProjection Q := by
   have hsq : (1 + Q) * (1 + Q) = (2 : R) • (1 + Q) := by
@@ -124,6 +129,7 @@ theorem fixedProjection_mul_self {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
   field_simp
 
 omit [CharZero R] in
+/-- The fixed and antifixed projections are orthogonal in this order. -/
 theorem fixedProjection_mul_antifixedProjection {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     fixedProjection Q * antifixedProjection Q = 0 := by
   have hzero : (1 + Q) * (1 - Q) = 0 := by
@@ -133,6 +139,7 @@ theorem fixedProjection_mul_antifixedProjection {Q : Matrix ι ι R} (hQ : Q * Q
   simp
 
 omit [CharZero R] in
+/-- The antifixed and fixed projections are orthogonal in this order. -/
 theorem antifixedProjection_mul_fixedProjection {Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     antifixedProjection Q * fixedProjection Q = 0 := by
   have hzero : (1 - Q) * (1 + Q) = 0 := by
@@ -142,6 +149,7 @@ theorem antifixedProjection_mul_fixedProjection {Q : Matrix ι ι R} (hQ : Q * Q
   simp
 
 omit [CharZero R] [DecidableEq ι] in
+/-- The commutator of two symmetric matrices is antisymmetric. -/
 theorem signCommutator_transpose {D Q : Matrix ι ι R} (hDt : Dᵀ = D) (hQt : Qᵀ = Q) :
     (signCommutator D Q)ᵀ = -signCommutator D Q := by
   rw [signCommutator, Matrix.transpose_sub, Matrix.transpose_mul, Matrix.transpose_mul,
@@ -172,18 +180,21 @@ theorem sq_signCommutator_mul_involution {D Q : Matrix ι ι R} (hQ : Q * Q = 1)
         rw [Matrix.neg_mul, neg_neg, mul_assoc]
 
 omit [CharZero R] in
+/-- The exchange operator commutes with the normalized involution `Q`. -/
 theorem exchangeOperator_mul_involution {D Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     exchangeOperator D Q * Q = Q * exchangeOperator D Q := by
   rw [exchangeOperator, Matrix.neg_mul, Matrix.mul_neg, Matrix.smul_mul, Matrix.mul_smul,
     sq_signCommutator_mul_involution hQ]
 
 omit [CharZero R] in
+/-- The exchange operator commutes with the fixed-space projection. -/
 theorem exchangeOperator_mul_fixedProjection {D Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     exchangeOperator D Q * fixedProjection Q = fixedProjection Q * exchangeOperator D Q := by
   rw [fixedProjection, Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_add, Matrix.add_mul,
     mul_one, one_mul, exchangeOperator_mul_involution hQ]
 
 omit [CharZero R] in
+/-- The exchange operator commutes with the antifixed-space projection. -/
 theorem exchangeOperator_mul_antifixedProjection {D Q : Matrix ι ι R} (hQ : Q * Q = 1) :
     exchangeOperator D Q * antifixedProjection Q
       = antifixedProjection Q * exchangeOperator D Q := by
@@ -239,6 +250,8 @@ theorem involution_mul_isometry {Q : Matrix ι ι R} {U : Matrix ι κ R} (hQ : 
     simp only [Matrix.mul_assoc, hU, Matrix.mul_one]
   rw [← h₂, h₁, h₃]
 
+/-- An isometry whose range projection is the fixed projection is fixed by that
+projection. -/
 theorem fixedProjection_mul_isometry {Q : Matrix ι ι R} {U : Matrix ι κ R} (hQ : Q * Q = 1)
     (hU : Uᵀ * U = 1) (hUU : U * Uᵀ = fixedProjection Q) : fixedProjection Q * U = U := by
   rw [fixedProjection, Matrix.smul_mul, Matrix.add_mul, Matrix.one_mul,
@@ -270,6 +283,8 @@ theorem signCommutator_mul_isometry {D Q : Matrix ι ι R} {U : Matrix ι κ R} 
   rw [hRHS, signCommutator, Matrix.sub_mul, Matrix.mul_assoc,
     involution_mul_isometry hQ hU hUU, Matrix.mul_assoc]
 
+/-- Applying the sign commutator to a fixed-space isometry lands in the
+antifixed space. -/
 theorem antifixedProjection_mul_signCommutator_mul_isometry {D Q : Matrix ι ι R}
     {U : Matrix ι κ R} (hQ : Q * Q = 1) (hU : Uᵀ * U = 1)
     (hUU : U * Uᵀ = fixedProjection Q) :

@@ -8,7 +8,8 @@ obligations of the audit checklist are closed, the recognition theorem is
 transported off the root gauge and the conference switching class is proved
 unique, the aligned-design strengths are formalized at the manuscript's quantifier
 range, the rank-14 weighted Jacobian now has a structural proof, and the
-remaining work is gap class B before the API is handed to C823
+remaining work is gap class B plus the reduced weighted-Jacobian Lean bridge
+before the API is handed to C823
 
 ## Objective
 
@@ -118,11 +119,10 @@ second moment and the order-six spectrum hold with the isometry existentially
 quantified.  Report:
 `notes/2026-08-06-c815-exchange-eigenvalues-and-isometries.md`.
 
-Left in the row: the transport of the cut-dependence statement from the aligned
-count of a half to the exchange operator of the cut that half defines, across
-`Equiv.sumCompl`.  It is mechanical — the fourth trace of a principal block as a
-sum over the half, and a bijection between the four-subsets of the half and
-those of the block's label set — and unstarted.
+The final transport across `Equiv.sumCompl` is closed in
+`RelativeConicArcs.BalancedExchangeHalfCut`: it identifies the principal block,
+fourth trace, aligned four-subsets, second exchange moment, and order-six
+spectrum for a half of a single label set.  Row OPER-3 is complete.
 
 ## OPER-4 closure (2026-08-07)
 
@@ -178,7 +178,7 @@ identity `N(Z_u Z_v) = 10395 P₆(u·v)`.  One classical statement stays outside
 route and is deliberately isolated in a module of its own: that the defined
 functional is the surface integral.
 
-Four of the six planned modules are landed and elaborate without errors or
+Five of the seven planned modules are landed and elaborate without errors or
 warnings.  `RelativeConicArcs.IcosahedralFaceAxes` carries the labelled ten-axis
 configuration over `ℤ√5` and transports it along a chosen square root of five to
 any commutative ring: every axis has the same length and the square of the inner
@@ -233,3 +233,12 @@ five modules is on a gate yet.
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.
+
+## Complete landed-work audit (2026-08-08)
+
+The full landed C815 surface and the remaining plan were re-audited in
+`notes/2026-08-08-c815-complete-landed-work-audit.md`.  All mathematics,
+certificates, elaborations, gates and the paper-local release replay pass after
+repairing public docstrings and stale live-plan prose.  Before C815 freezes its
+API it must also kernel-check the reduced weighted-Jacobian rank argument, so
+C816 can promote that claim without creating a human-only manuscript assertion.

@@ -51,10 +51,10 @@
       "sha256": "abb5e89dec25346811e6b4d7e19b3a4a41ae9121e51e0db198eb717f0a62ea8c"
     },
     {
-      "bytes": 60908,
+      "bytes": 61885,
       "module": "RelativeConicArcs.BalancedExchangeSpectrum",
       "path": "RelativeConicArcs/BalancedExchangeSpectrum.lean",
-      "sha256": "f03bec34fa78f70a4fab689876a18dcaf6accaf42574364541d3b97cd15668b6"
+      "sha256": "e2145a2c039a39fbd5b3ab4f389ff842598b0b32b2e8aed6ae59a68f76145104"
     },
     {
       "bytes": 17856,
@@ -123,10 +123,10 @@
       "sha256": "5dcf33b398d8f069fd039bd2d17956e1ed81c5819e5753d00a6faba44a5bddf7"
     },
     {
-      "bytes": 13320,
+      "bytes": 13793,
       "module": "RelativeConicArcs.ClebschOuterJoubertFrame",
       "path": "RelativeConicArcs/ClebschOuterJoubertFrame.lean",
-      "sha256": "4b99f27474449d898d5f3fc4f7929e89ce738f45fe85d20d5aea1dfcb48a0371"
+      "sha256": "028c5ea6ad0c89dd0f8a4485f691c5f3df11c11406ab0dbc075c5c0312ff102b"
     },
     {
       "bytes": 16946,

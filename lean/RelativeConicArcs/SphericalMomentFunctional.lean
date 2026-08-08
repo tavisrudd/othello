@@ -19,7 +19,7 @@ on monomials, where `(-1)‼ = 1` and where the double factorial of an even
 argument is set to zero, so that a monomial with an odd exponent is annihilated.
 The double factorial is `momentFactor`, and `normalizedMean d p
 = gaussianMoment p / (d + 1)‼` rescales a form of degree `d` by the divisor that
-makes the constant one have normalized mean one and makes multiplication by
+makes the degree-zero constant one have normalized mean one and makes multiplication by
 `X 0 ^ 2 + X 1 ^ 2 + X 2 ^ 2` leave the normalized mean unchanged.
 
 ## Scope and trust boundary
@@ -237,8 +237,8 @@ theorem eq_gaussianMoment_of_recursion (L : MvPolynomial (Fin 3) ℝ →ₗ[ℝ]
   simpa using key (∑ j, a j) a le_rfl c
 
 /-- The normalized mean of a form of degree `d`: the Gaussian moment divided by
-`(d + 1)‼ = momentFactor (d + 2)`.  Two properties fix that divisor: the constant
-one has normalized mean one, and multiplying a form of degree `d` by
+`(d + 1)‼ = momentFactor (d + 2)`.  Two properties fix that divisor:
+`normalizedMean 0 1 = 1`, and multiplying a form of degree `d` by
 `X 0 ^ 2 + X 1 ^ 2 + X 2 ^ 2` leaves the normalized mean unchanged, which is
 `normalizedMean_quadric_mul` below.  As with `gaussianMoment`, this is an
 explicitly defined quotient of polynomial data and carries no analytic content;

@@ -54,9 +54,13 @@ def outerReindexInverse : Fin 6 → Fin 6 → Fin 6 :=
     ![0, 1, 2, 4, 5, 3],
     ![0, 1, 2, 5, 4, 3]]
 
+/-- The displayed inverse reordering is a right inverse to the `t`-th outer
+coordinate reordering. -/
 theorem outerReindex_outerReindexInverse (t i : Fin 6) :
     outerReindex t (outerReindexInverse t i) = i := by decide +revert
 
+/-- The displayed inverse reordering is a left inverse to the `t`-th outer
+coordinate reordering. -/
 theorem outerReindexInverse_outerReindex (t i : Fin 6) :
     outerReindexInverse t (outerReindex t i) = i := by decide +revert
 
@@ -68,6 +72,7 @@ def outerRelabel (t : Fin 6) : Equiv.Perm (Fin 6) where
   left_inv i := outerReindex_outerReindexInverse t i
   right_inv i := outerReindexInverse_outerReindex t i
 
+/-- The outer relabelling acts by the displayed inverse coordinate reordering. -/
 theorem outerRelabel_apply (t i : Fin 6) : outerRelabel t i = outerReindexInverse t i := rfl
 
 /-- The relabelling of the fixed integral conference matrix along the inverse of
@@ -82,6 +87,8 @@ negatives. -/
 def outerConference (t : Fin 6) : Matrix (Fin 6) (Fin 6) ℤ :=
   outerSign ℤ t • relabelledConference t
 
+/-- Entrywise form of the signed, relabelled conference matrix representing the
+`t`-th outer cubic. -/
 theorem outerConference_apply (t i j : Fin 6) :
     outerConference t i j =
       outerSign ℤ t *
@@ -166,6 +173,8 @@ theorem tripleLabel_strictMono (n : Fin 20) :
     (tripleLabel n).1 < (tripleLabel n).2.1 ∧ (tripleLabel n).2.1 < (tripleLabel n).2.2 := by
   decide +kernel +revert
 
+/-- The increasing-triple indexing of the twenty cubic coefficients is
+injective. -/
 theorem tripleLabel_injective : Function.Injective tripleLabel := by decide +kernel +revert
 
 /-- The coefficient words of the six outer cubics: row `t` lists, in the order

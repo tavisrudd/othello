@@ -37,10 +37,10 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
-      "bytes": 78338,
+      "bytes": 78548,
       "module": "RelativeConicArcs.FourShadowRecognition",
       "path": "RelativeConicArcs/FourShadowRecognition.lean",
-      "sha256": "b981b48dc0af501895d4758ce99da933c4cb7bdad3e498986a5e63fb32be3a3b"
+      "sha256": "5c257c5e8bc7ecdeebb8ca693e20696b280b0a2ebe24983d347039b66a75a601"
     },
     {
       "bytes": 5683,

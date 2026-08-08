@@ -89,23 +89,23 @@ now refuse it.
 
 ## Aligned-design API and claims
 
-- [ ] Formalize the transport from an arbitrary labelled two-graph on seven or
+- [x] Formalize the transport from an arbitrary labelled two-graph on seven or
   more vertices to the normalized seven-point data type, so that
   `normalizedSevenSignature_injective` yields faithfulness at the manuscript's
   quantifier range.
-- [ ] Formalize the finite-set extension to a common seven-set, so that
+- [x] Formalize the finite-set extension to a common seven-set, so that
   `global_agreement_of_common_seven_restrictions` is unconditional over the
   manuscript's hypotheses rather than conditional on supplied co-containment
   and normalization.
-- [ ] Formalize an explicit query family with its distinctness and cardinality
+- [x] Formalize an explicit query family with its distinctness and cardinality
   theorems, so `selectedQueryCount_eq` is a proved family cardinality.
-- [ ] Formalize the anchor existence half from a Lean proof of the Ramsey
+- [x] Formalize the anchor existence half from a Lean proof of the Ramsey
   equality `R(3,3) = 6`, keeping it separate from the numerical identity
   `Nat.choose 6 3 = 20`, so `sixPointAnchor_testCount` covers deterministic
   anchor discovery.
-- [ ] Synchronize the C799 task card, handoff, formal map, and report with those
+- [x] Synchronize the C799 task card, handoff, formal map, and report with those
   exact strengths.
-- [ ] Add missing public documentation for the three balanced-cut constants.
+- [x] Add missing public documentation for the three balanced-cut constants.
 
 ## Four-shadow weighted converse
 

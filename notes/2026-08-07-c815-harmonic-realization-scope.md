@@ -5,7 +5,7 @@
 **Task:** C815, rows HARM-1 and HARM-2 of
 `notes/2026-08-03-c815-paper-iii-formalization-gap-inventory.md`
 
-## What the two rows still exclude
+## Original exclusions and current state
 
 Row HARM-1 excludes the face-axis geometry, the spherical addition theorem, and
 the abstract `A5` comparison.  Row HARM-2 excludes the invariant-line input for
@@ -16,14 +16,23 @@ icosahedral face axes give an injective copy of the Clebsch four-space in the
 real degree-six spherical harmonics, and the spherical cubic on that copy is
 `-784000/1247103` times `sigma_3`.
 
-What Lean has today is the algebra downstream of those exclusions.
-`RelativeConicArcs.PetersenHarmonicKernel` starts from the *displayed* operator
+At the start of this round Lean had only the algebra downstream of those
+exclusions.  `RelativeConicArcs.PetersenHarmonicKernel` starts from the *displayed* operator
 `(196 I + 47 J - 112 A)/243`, divides by thirteen by fiat, and derives the
 pair-sum eigenvalue `140/1053`; `RelativeConicArcs.ClebschInvariantCubic` starts
 from the *hypothesis* that the cubic lies on the `sigma_3` line and from the
 *given* value `-15680000/1247103` at the marked vector.  Neither the geometry
 that produces the two orbit values, nor the analysis that produces the factor
-one thirteenth, nor the value itself, is proved.
+one thirteenth, nor the value itself, was proved there.
+
+Five of the seven modules below are now landed: the face-axis geometry, abstract
+comparison, moment functional, zonal addition theorem, Gram matrix, injectivity,
+and quadratic identity are formalized.  The remaining modules are
+`SphericalCubicRestriction`, whose later design note
+`notes/2026-08-07-c815-spherical-cubic-restriction-design.md` supersedes this
+note's proposed direct symbolic-in-`y` proof, and `SphereIntegralMoments`, which
+identifies the algebraically defined normalized mean with the normalized surface
+integral.
 
 ## Route
 
@@ -90,10 +99,12 @@ generate has order sixty and consists of even permutations, hence is the
 alternating group.  With the invariance of `M` this makes `y |-> M(F_y^3)` an
 `A5`-invariant cubic form on the sum-zero four-space, which is the
 invariant-line input of HARM-2.  The Lean development does not depend on that
-generation statement: because the certificate establishes the cubic identity for
-arbitrary sum-zero `y`, the module proving it will prove the identity directly
-rather than through invariance, and the rotations serve only to record that the
-configuration carries the icosahedral action.
+generation statement.  The later cubic-restriction design instead uses the
+three rotations directly: explicit words give three-transitivity on the five
+labels, which makes the cubic structure constants constant on the three index
+patterns.  One marked evaluation then fixes the scalar.  This avoids both a
+closure computation for the generated subgroup and the large direct expansion
+in symbolic weights.
 
 **The abstract comparison.**  The action of `A5` on five letters is
 two-transitive, so its commutant on the five-coordinate module is spanned by the
@@ -164,7 +175,7 @@ special-function inputs, not a computation.
 | `RelativeConicArcs.ZonalHarmonicDegreeSix` | the degree-six zonal harmonic, its homogeneity, its value at a unit vector, its harmonicity, and `N(Z_u Z_v) = 10395 P_6(u.v)` with `M(Z_u Z_v) = P_6(u.v)/13` | landed; spherical addition theorem of HARM-1 |
 | `RelativeConicArcs.FaceAxisHarmonicGram` | the ten zonal harmonics, `G = K/13`, the three eigenvalues, injectivity on the Petersen `(-2)`-eigenspace, pair-sum tightness, and the quadratic identity `M(F_y^2) = (140/351) sum y_i^2` with its marked value `2800/351` | landed; the Gram half of HARM-1, and the quadratic identity |
 | `RelativeConicArcs.AlternatingComparisonLine` | the commutant computation, the identification of an equivariant comparison with a multiple of the pair-sum map, the construction of the coordinate representative that identification needs, and the `sigma_3`-normalized uniqueness | abstract `A5` comparison of HARM-1 |
-| `RelativeConicArcs.SphericalCubicRestriction` | `M(F_y^3) = -784000/1247103 sigma_3(y)` on the sum-zero module, with the marked value `-15680000/1247103`; the quadratic identity is already closed in the Gram module above | HARM-2 |
+| `RelativeConicArcs.SphericalCubicRestriction` | three rotation invariances, the three coefficient orbits on the sum-zero module, and one marked evaluation giving `M(F_y^3) = -784000/1247103 sigma_3(y)`, with marked value `-15680000/1247103`; the quadratic identity is already closed in the Gram module above | HARM-2 |
 | `RelativeConicArcs.SphereIntegralMoments` | the identification of `M` with the normalized surface integral; the only module importing measure theory | the trust boundary named above |
 
 `RelativeConicArcs.PetersenHarmonicKernel` and

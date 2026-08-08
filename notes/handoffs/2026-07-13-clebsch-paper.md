@@ -514,6 +514,12 @@ paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared
 with Paper I and the golden-operator lane and need explicit permission plus
 widened validation before any edit.
 
+The complete 2026-08-08 landed-work audit is
+`notes/2026-08-08-c815-complete-landed-work-audit.md`.  It found no mathematical
+or trust failure, repaired the public-docstring and live-plan drift it found,
+and added one pre-freeze obligation: formalize the already structural reduced
+weighted-Jacobian rank argument before C816 can promote that assertion.
+
 C756 remains the independent high-upside research task for the all-\(k\)
 conic-filling theorem. Paper IV's general passant-code definitions and
 weight-eight method are reusable inputs to C756, but C761 does not own or
@@ -739,7 +745,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
 | [C809 — four-shadow characterization](../clebsch-tasks/c809-four-shadow-characterization.md) | complete; positive math-only freeze; no paper promotion | none; nonzero triangle--Pfaffian proportionality characterizes the sign conference class, the two orientations are projectively isolated, and any manuscript/novelty integration requires a separately allocated follow-up |
-| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates and every replay are green with no compiled-evaluation axiom at any terminal, the four-shadow recognition theorem holds for arbitrary sign matrices with the conference switching class proved unique, and aligned-design faithfulness is formalized at the manuscript's quantifier range | formalize gap class B, then run the closeout before handing the API to C823 |
+| [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates and every replay are green with no compiled-evaluation axiom at any terminal, the four-shadow recognition theorem holds for arbitrary sign matrices with the conference switching class proved unique, and aligned-design faithfulness is formalized at the manuscript's quantifier range | formalize gap class B and the reduced weighted-Jacobian Lean bridge, then run the closeout before handing the API to C823 |
 | [C816 — Paper III four-shadow integration](../clebsch-tasks/c816-paper-iii-four-shadow-integration.md) | fifth Paper III route task; begin after C800 reconciliation; manuscript promotion authorized | complete the full precedence audit, integrate the characterization and exact weighted boundary, refresh trust/release surfaces, then run Milnor--Serre, red-team, PDF inspection, and a fresh context-free cold-read regrade |
 | [C810 — aligned-certificate distance](../clebsch-tasks/c810-aligned-certificate-distance.md) | complete; exact seven-point distance two and correction radius zero; no paper promotion | none; the all-even spectrum follows from edge-toggle parity, and the conference-only multi-class question is outside the triggered cheap-stop boundary |
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only; paper promotion excluded | stress-test the fibre-recovery claim and quickly delimit standard Kummer precedence before seeking a sharper geometric lemma |
