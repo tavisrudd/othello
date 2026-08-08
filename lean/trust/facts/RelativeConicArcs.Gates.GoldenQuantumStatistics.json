@@ -348,7 +348,57 @@
   ],
   "schema_version": 1,
   "terminal_axioms": {
+    "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four": [
       "Classical.choice",
       "Quot.sound",
       "propext"
