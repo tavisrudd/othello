@@ -1,7 +1,19 @@
 {
   "bibliography": [
     {
+      "key": "Albert2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
       "key": "CollinsSniady2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "DasuBurton2025",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
@@ -69,11 +81,42 @@
       "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Preprint, \\url{https://github.com/tavisrudd/clebsch-rigidity}, 2026."
     },
     {
+      "key": "SayginelEtAl2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "Tan2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "TanFiveQubit2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "TansuwannontTakadaFujii2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
       "key": "AharonovBenOr2008",
       "kind": "bibtex",
       "self_authored": false,
       "source": "papers/mds_css_transversal_groups/refs.bib",
       "title": "Fault-Tolerant Quantum Computation With Constant Error Rate"
+    },
+    {
+      "key": "Albert2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Beyond Transversality: Structure of {Clifford} Circuits for {CSS} Codes"
     },
     {
       "key": "AndersonJochymOConnor2014",
@@ -447,6 +490,13 @@
       "title": "Transversal Gates of the \\(((3,3,2))\\) Qutrit Code and Local Symmetries of the Absolutely Maximally Entangled State of Four Qutrits"
     },
     {
+      "key": "TanFiveQubit2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Classification of Five-Qubit Absolutely Maximally Entangled States"
+    },
+    {
       "key": "TansuwannontChanTakagi2026",
       "kind": "bibtex",
       "self_authored": false,
@@ -522,10 +572,6 @@
     {
       "environment": "corollary",
       "label": "cor:computed-party-splitting"
-    },
-    {
-      "environment": "theorem",
-      "label": "cor:diagonal-isodual-transversal-group"
     },
     {
       "environment": "corollary",
@@ -656,6 +702,10 @@
       "label": "sec:verification"
     },
     {
+      "environment": "theorem",
+      "label": "thm:diagonal-isodual-transversal-group"
+    },
+    {
       "environment": "proposition",
       "label": "thm:dictionary"
     },
@@ -692,7 +742,7 @@
   "manifest_labels": [
     "thm:dictionary",
     "prop:diagonal-multiplier-line",
-    "cor:diagonal-isodual-transversal-group",
+    "thm:diagonal-isodual-transversal-group",
     "thm:lu-lc-rigidity",
     "cor:transversal-clifford",
     "lem:pauli-phase-correction",
@@ -714,10 +764,10 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 204033,
+      "bytes": 207472,
       "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "521ae7cfee355d3d2d9897cbfde1279e746a2fe9d27cfdafafbcb048022b979a"
+      "sha256": "f4dd1618268d02e4a216804400121de66c097b469817edddcf44886aaabba7ce"
     }
   ],
   "schema_version": 1,
@@ -740,7 +790,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
-      "sha256": "904cf9649552b5bded01a21faecd2dec581590eb17e39003e160d1ad13216f90"
+      "sha256": "48652078935aa448997bd9b6a7ede4b60d5d1cca6e28a0b4baf492ef5ba78c86"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/02-geometry-ame-dictionary.tex",
@@ -748,7 +798,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/03-diagonal-isoduality.tex",
-      "sha256": "ef8ddddd9be0a456dc10c64c6ae9485da41ce3e1d0987d7e6b180762b2efc4c0"
+      "sha256": "e5dc1aa85f0460455b2deb88060f8a95bcbb37a987c820157063f88311b6e6dd"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/04-pencil-classification.tex",
@@ -756,7 +806,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/05-logical-clifford-phase.tex",
-      "sha256": "0e0f7b69172770aaa8dd6eb8e74db2e775674181288ac98a783f36a49bb2aa48"
+      "sha256": "d15a1b2420a778d76d9f579e81d70f4feb32eb71b8c50e4549898139cc529c51"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/06-lu-invariants.tex",
@@ -764,7 +814,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/08-verification-boundary.tex",
-      "sha256": "07931e4d8c102ee5125b5ebd7ec7ca8d8b9a12b07487180c067609d97aa7b4a6"
+      "sha256": "bbfbac06eadb13ddfecfc6ee5434049a22fcbb63007880c0b5d27fcc3fe1088d"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/07-conclusion.tex",

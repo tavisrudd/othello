@@ -41,7 +41,7 @@ Hence \(\dim\mathcal D(E,F)\leq1\).  The all-ones vector belongs to
 \end{proof}
 
 \begin{proof}[Proof of
-Corollary~\ref{cor:diagonal-isodual-transversal-group}]
+Theorem~\ref{thm:diagonal-isodual-transversal-group}]
 Write a fixed-party product-Clifford action on Pauli labels as
 \[
  F_i=\begin{pmatrix}\alpha_i&\beta_i\\
@@ -144,7 +144,16 @@ group \(H_q\) extends to a genuine representation of
 \(\mathrm{SL}_2(q)\ltimes H_q\)
 \cite[Theorem~1]{Gerardin1976}.  Apply its Weil factor to each
 \(\phi_i(A)\).  The resulting tensor product is multiplicative in
-\(A\), and exact Egorov covariance preserves the CSS stabilizer line.
+\(A\).  In the symmetric Weyl convention
+\(D_{a,b}=\chi(ab/2)X(a)Z(b)\), a CSS label \((c,h)\in C\oplus C^\perp\)
+has tensor lift
+\[
+ \bigotimes_iD_{c_i,h_i}
+ =\chi(c\mathbin{\cdot}h/2)X(c)Z(h)=X(c)Z(h),
+\]
+because \(c\mathbin{\cdot}h=0\).  Exact Egorov covariance therefore
+preserves the CSS stabilizer group with its trivial character, and hence
+the state ray, rather than only its projective label space.
 Consequently the one-qudit Clifford scalar extension, restricted to the
 linear \(\mathrm{SL}_2(q)\) factor, splits coherently with the propagated
 tensor symmetries.  The exceptional uniqueness clause at \(q=3\) in

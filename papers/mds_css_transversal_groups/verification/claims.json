@@ -45,7 +45,7 @@
       "boundary": "No computational premise; the statement is proved for every finite field and every exact half-dimensional MDS pair."
     },
     {
-      "label": "cor:diagonal-isodual-transversal-group",
+      "label": "thm:diagonal-isodual-transversal-group",
       "statement": "Over an odd prime field the multiplier nullity determines the exact fixed-party projective transversal logical group of the associated [[2m-1,1,m]]_q code: F_q^2 semidirect SL_2(q) when C is diagonally isodual, and F_q^2 semidirect T otherwise.",
       "route": "lean-interface",
       "lean_terminals": [

@@ -34,14 +34,14 @@
         "sha256": "dfd8e10b0a67a4e9bd4bcfa39b7794368c7e656e24b028e9bc8ac4cdb6f41c1e"
       },
       {
-        "bytes": 204033,
+        "bytes": 207472,
         "path": "mds-css-transversal-groups.pdf",
-        "sha256": "521ae7cfee355d3d2d9897cbfde1279e746a2fe9d27cfdafafbcb048022b979a"
+        "sha256": "f4dd1618268d02e4a216804400121de66c097b469817edddcf44886aaabba7ce"
       },
       {
-        "bytes": 21331,
+        "bytes": 21877,
         "path": "refs.bib",
-        "sha256": "eef90d14a4ea3d2c02c9fe65b31ebec01a85f3bee5320535f5c093f5ed4386c7"
+        "sha256": "631657c72df1d1c9fdcc388fa773b9e40b503e3886bf88fa77ca06aed9b7d0a0"
       },
       {
         "bytes": 7657,
@@ -49,9 +49,9 @@
         "sha256": "8c07a319521629377397036a2e7431788e6d92dc6e0f85967bb2cc9289e1642c"
       },
       {
-        "bytes": 7083,
+        "bytes": 8204,
         "path": "sections/01-introduction.tex",
-        "sha256": "904cf9649552b5bded01a21faecd2dec581590eb17e39003e160d1ad13216f90"
+        "sha256": "48652078935aa448997bd9b6a7ede4b60d5d1cca6e28a0b4baf492ef5ba78c86"
       },
       {
         "bytes": 6901,
@@ -59,9 +59,9 @@
         "sha256": "5904ec62cf3e56e71bfbc00e0b66c467e2610c34449a0709f11cd4e90e8d5d0f"
       },
       {
-        "bytes": 7328,
+        "bytes": 7664,
         "path": "sections/03-diagonal-isoduality.tex",
-        "sha256": "ef8ddddd9be0a456dc10c64c6ae9485da41ce3e1d0987d7e6b180762b2efc4c0"
+        "sha256": "e5dc1aa85f0460455b2deb88060f8a95bcbb37a987c820157063f88311b6e6dd"
       },
       {
         "bytes": 9579,
@@ -69,9 +69,9 @@
         "sha256": "808e86a9bb41691e95b4b0ed7350513b0cb8dd4f95bcaf1df22cde8418200d5d"
       },
       {
-        "bytes": 10679,
+        "bytes": 10673,
         "path": "sections/05-logical-clifford-phase.tex",
-        "sha256": "0e0f7b69172770aaa8dd6eb8e74db2e775674181288ac98a783f36a49bb2aa48"
+        "sha256": "d15a1b2420a778d76d9f579e81d70f4feb32eb71b8c50e4549898139cc529c51"
       },
       {
         "bytes": 3418,
@@ -91,7 +91,7 @@
       {
         "bytes": 3914,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "07931e4d8c102ee5125b5ebd7ec7ca8d8b9a12b07487180c067609d97aa7b4a6"
+        "sha256": "bbfbac06eadb13ddfecfc6ee5434049a22fcbb63007880c0b5d27fcc3fe1088d"
       },
       {
         "bytes": 5550,
@@ -104,7 +104,7 @@
         "sha256": "58abf5d92a1e3eae920ebad4e66a938852a51ef003e26ed6b797357b4622eb1a"
       }
     ],
-    "tree_sha256": "5c3d32483d7b54a1179c1516f2c1b14d3ee3056c3fab1c9b2228db23217f8bc4"
+    "tree_sha256": "7064c92cf99bbb881275805471c2ebd96db9acb18ad248dabb6efd0962b6a133"
   },
   "formal_companion": {
     "artifacts": [

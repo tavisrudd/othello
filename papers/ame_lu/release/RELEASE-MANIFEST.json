@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 304519,
+        "bytes": 304715,
         "path": "ame-lu.pdf",
-        "sha256": "db6625d001c07dcc7a311fe9c3b2090de14f660dca20a61ec78bef8c6f016dfb"
+        "sha256": "239d97a02d617354c07fd3ee4675916329ea1fc86a9ec26afab08fd432a353aa"
       },
       {
         "bytes": 2646,
@@ -46,9 +46,9 @@
         "sha256": "5526c93a86bed003285adf5461fb4d6a14da8686de9b5610b6e0c5976bcee409"
       },
       {
-        "bytes": 21892,
+        "bytes": 22161,
         "path": "refs.bib",
-        "sha256": "59706be38bb14f836d2b05d49b45db96ee28ffe7291c46455c0d0b9f6cf42287"
+        "sha256": "323f73e8301d94c2aba6a38e1c276a7ae84954840bc88d1d3465d6d780118259"
       },
       {
         "bytes": 8724,
@@ -56,9 +56,9 @@
         "sha256": "9188f8fa51317eea3babed82c650d5fff1249dac566ef52c4b20b8b60971a82e"
       },
       {
-        "bytes": 9509,
+        "bytes": 9539,
         "path": "sections/01-introduction.tex",
-        "sha256": "edc5069fa4b8f2e71dc1bde83e5a671679495918a893d8e9f00fbde4efdbc879"
+        "sha256": "ecabcf1e0d7a929a061a19b0d215d3ea76e5ca537c22f327c54fce2f4402f764"
       },
       {
         "bytes": 2784,
@@ -96,7 +96,7 @@
         "sha256": "51258d4ac34d2d09f76695df0672bee2bad7f5b93e6d608b372f73ed7e013d18"
       }
     ],
-    "tree_sha256": "a539692f45c24a1909a0e0b1454525694ed40076149f4509961f37482df75ddd"
+    "tree_sha256": "fa1d640e09e5fc6619cabc075cafab04a9eca6976816effefc6d555b975c3dbc"
   },
   "formal_companion": {
     "artifacts": [

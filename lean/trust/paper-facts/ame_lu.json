@@ -37,7 +37,19 @@
       "source": "papers/ame_lu/ame-lu.bbl"
     },
     {
+      "key": "BurchardtDeJongVandre2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
       "key": "ChangJing2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "ClaudetPerdrix2024",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/ame_lu/ame-lu.bbl"
@@ -145,6 +157,12 @@
       "source": "papers/ame_lu/ame-lu.bbl"
     },
     {
+      "key": "RamadasLakshminarayan2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
       "key": "RatherAravindaLakshminarayan2022",
       "kind": "bibitem",
       "self_authored": false,
@@ -171,6 +189,12 @@
     },
     {
       "key": "Tan2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
+      "key": "TanFiveQubit2026",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/ame_lu/ame-lu.bbl"
@@ -263,6 +287,13 @@
       "title": "Existence of Locally Maximally Entangled Quantum States via Geometric Invariant Theory"
     },
     {
+      "key": "BurchardtDeJongVandre2024",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Algorithm to Verify Local Equivalence of Stabilizer States"
+    },
+    {
       "key": "BurchardtRaissi2020",
       "kind": "bibtex",
       "self_authored": false,
@@ -282,6 +313,13 @@
       "self_authored": false,
       "source": "papers/ame_lu/refs.bib",
       "title": "Local Unitary Equivalence of Generic Multi-qubits Based on the {CP} Decomposition"
+    },
+    {
+      "key": "ClaudetPerdrix2024",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Local Equivalence of Stabilizer States: A Graphical Characterisation"
     },
     {
       "key": "Coble1922",
@@ -576,6 +614,13 @@
       "self_authored": false,
       "source": "papers/ame_lu/refs.bib",
       "title": "Transversal Gates of the \\(((3,3,2))\\) Qutrit Code and Local Symmetries of the Absolutely Maximally Entangled State of Four Qutrits"
+    },
+    {
+      "key": "TanFiveQubit2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "Classification of Five-Qubit Absolutely Maximally Entangled States"
     },
     {
       "key": "TansuwannontChanTakagi2026",
@@ -896,17 +941,17 @@
   "paper": "ame_lu",
   "pdfs": [
     {
-      "bytes": 300290,
+      "bytes": 304715,
       "pages": 35,
       "path": "papers/ame_lu/ame-lu.pdf",
-      "sha256": "45f707bd0119ce8cb9ae9aa5610252f731e5d27dc29bf653e9b9810d203d34d6"
+      "sha256": "239d97a02d617354c07fd3ee4675916329ea1fc86a9ec26afab08fd432a353aa"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/ame_lu/main.tex",
-      "sha256": "b33ccd590a331dfa1b6b3776afc876c8ddf35bfdeef1e537a103225175b9b70c"
+      "sha256": "5526c93a86bed003285adf5461fb4d6a14da8686de9b5610b6e0c5976bcee409"
     },
     {
       "path": "papers/ame_lu/figures/01-operator-holonomy.tex",
@@ -930,7 +975,7 @@
     },
     {
       "path": "papers/ame_lu/sections/01-introduction.tex",
-      "sha256": "8627c93cc4c063b8983068e0bc0279fd58b10eff51b6fe8264c92ccf7b782b3d"
+      "sha256": "ecabcf1e0d7a929a061a19b0d215d3ea76e5ca537c22f327c54fce2f4402f764"
     },
     {
       "path": "papers/ame_lu/sections/02-geometry-ame-dictionary.tex",
@@ -942,7 +987,7 @@
     },
     {
       "path": "papers/ame_lu/sections/05-quantitative-rounding.tex",
-      "sha256": "e15b4de1537897fa86f2a4943b80b80fc1adf56b7155ff28f086f6377d372207"
+      "sha256": "2aac8f1979ab7a92517bd4e2349a7050374ac04618605cf2729fb94ff71ae16e"
     },
     {
       "path": "papers/ame_lu/sections/08-verification-boundary.tex",
@@ -958,7 +1003,7 @@
     },
     {
       "path": "papers/ame_lu/sections/B-secondary-quantitative.tex",
-      "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
+      "sha256": "51258d4ac34d2d09f76695df0672bee2bad7f5b93e6d608b372f73ed7e013d18"
     }
   ],
   "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",

@@ -120,7 +120,7 @@ main = "main.tex"
 lane = "ame-lu"
 adopted_labels = [
   "prop:diagonal-multiplier-line",
-  "cor:diagonal-isodual-transversal-group",
+  "thm:diagonal-isodual-transversal-group",
   "lem:six-arc-self-association",
   "thm:lc-pencil",
   "cor:lu-lc-pencil",
