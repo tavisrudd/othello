@@ -50,6 +50,19 @@ open MvPolynomial RelativeConicArcs.SphericalMomentFunctional
 normalized so that its value at `1` is `1`. -/
 noncomputable def legendreSix (s : ℝ) : ℝ := (231 * s ^ 6 - 315 * s ^ 4 + 105 * s ^ 2 - 5) / 16
 
+/-- The value at `1` is `1`. -/
+@[simp] lemma legendreSix_one : legendreSix 1 = 1 := by rw [legendreSix]; norm_num
+
+/-- The degree-six Legendre polynomial sees its argument only through the square.
+An axis of the configuration is a line rather than a chosen vector, and a
+zonal value is therefore determined by the squared inner product of two axes; the
+sign of a chosen representative does not enter. -/
+lemma legendreSix_of_sq {s t : ℝ} (h : s ^ 2 = t) :
+    legendreSix s = (231 * t ^ 3 - 315 * t ^ 2 + 105 * t - 5) / 16 := by
+  subst h
+  rw [legendreSix]
+  ring
+
 /-- The zonal form of degree six with axis `u`: the homogenization of
 `legendreSix` along the axis `u`, obtained by replacing each even power `s ^ (2k)`
 of the argument by `(∑ i, u i * X i) ^ (2k)` times the matching power of
