@@ -12,7 +12,116 @@ document, or remediate any `ProjectiveCap` or `CapGame` module; a residual cap-g
 Paper IV closure after C860's stages is a defect to report to C860. See
 `notes/2026-08-03-c860-execution-design.md`.
 
-## Resume here (2026-08-07, latest)
+## Resume here (2026-08-08, full referee review)
+
+The landed C834 proof packets are mathematically substantial and, where the current tree can replay
+them, sound.  The task as a whole is nevertheless at **MAJOR**, not at final-leaf-plus-release
+surfaces.  A full referee pass traced the task from allocation commit `432c1165` through task commit
+`5a9104ac`: ninety-four relevant commits touching 237 paper/formal files, including 218 Lean files,
+all dated C834 reports, the current gates, generated artifacts, manifests and release prose.
+
+### What the referee accepted
+
+- The shared semantic gate and its axiom audit are trace-current and green.  No source below
+  `lean/RelativeConicArcs/PassantCodeQ13/` contains `native_decide`, `sorry` or a project axiom.
+- `papers/q13-passant-code/verification/verify_evidence.py` passes every recorded generator,
+  statement-shape check and independent replay.
+- The paper package contains no `sorry` or project axiom and only the two `native_decide` calls in
+  `PassantCodeQ13.MinimumWords.Exhaustion` remain.
+- The association-algebra bridges, equivariance and transporter layer, ambient-plane join and meet,
+  structural row-uniqueness proof, minimum-support arc transport, weight-ten replacements and anchor
+  orbit packet are genuine upgrades.  No private task, agent, session or report reference was found
+  in the formal artifact.
+
+### Blocking referee findings
+
+1. **The full package is not currently buildable from source on this host.**  The previous report
+   diagnosed the failure as Lake scheduling the four orbit modules concurrently.  The referee ran a
+   genuinely serialized build through the guarded queue.  `PassantCodeQ13.MinimumWords.OrbitS4`
+   alone was OOM-killed with exit 137 at `7,032,004` kB.  A Lake job cap is therefore insufficient:
+   the single declaration `supportOrbit_representativeS4_eq` is itself too large for the available
+   clean-build envelope.  The four orbit identifications must be sharded or structurally replaced.
+   Until that happens the latest claimed `77/88` axiom state is credible from the individually
+   checked terminals but is not accepted as a replayed aggregate state.
+2. **The current aggregate is a component gate, not the theorem-complete Paper-IV aggregate.**
+   `PassantCodeQ13.Gates.Main` says this explicitly.  It does not yet prove minimum distance twelve,
+   prove that every weight-twelve word belongs to the displayed 364-word family, or state the full
+   reconstruction and automorphism theorem.
+3. **Required packet 6 is absent.**  No source in the shared q13 library or paper package defines an
+   `F8`/`Field8` carrier, the scalar action on the code, its dimension twelve over that field, or an
+   equivalence with `F8^12`.  The quartic relation `B^4+B^3+B=0` only says that the cubic cofactor
+   annihilates the image.  It is not the operator-field module required by the objective.
+4. **Stage 5 item 13 is gated on an open theorem, not an implementation step.**  The arc theorem for
+   the displayed 364 supports cannot be used to show that an arbitrary weight-twelve codeword is an
+   arc, because the exhaustion is what must first put that word in the displayed family.  The bound
+   `|S ∩ gS| ≤ 6` for a translate by the involution polar to an offending passant is a lead, not a
+   proof.  A proof-producing certificate for all four original pencil-profile domains remains the
+   mandatory fallback.
+5. **The release maps have drifted.**  `verification/claim_map.json` still calls the incidence rank
+   and relation squaring native; `verification/README.md` omits newer equivariance and automorphism
+   modules; and the `hiddenField_cubic_on_image` docstring calls the cubic irreducible although the
+   imported quartic module expressly proves no irreducibility statement.  These are stage-6/C857
+   blockers, not evidence against the accepted mathematics.
+6. **The old remaining-work sentence omitted theorem assembly.**  Beyond the fixed-point leaf and
+   release surfaces, C834 still owes the arbitrary weight-eight and weight-ten exclusions in their
+   manuscript forms, global transport of the fixed-point classification, spanning of the semantic
+   code by each family, the complete theorem-level aggregate, and the hidden-field packet.  Human
+   and classical boundaries permitted by this card must still receive exact statement/trust rows;
+   they may not be silently described as kernel checked.
+7. **Stage 7 has an ownership cycle as written.**  C834 is forbidden to publish externally, while
+   the old plan postponed reversal of the pre-release accommodations until publication and also
+   blocked C761 publication on C834.  C834 prepares an exportable theorem-complete companion; C857
+   performs the exhaustive release-standard audit; C761 owns publication, pinned locators and the
+   downstream forward commit that reverses the manuscript-only accommodations.
+
+### Corrected execution order
+
+1. **Restore bounded clean-buildability.**  Replace each monolithic orbit equality by a generated
+   matrix-to-orbit-index table checked in bounded matrix blocks.  A generic theorem must prove that
+   the checked table covers every normalized projective matrix and every displayed orbit member,
+   then derive the semantic orbit equality/permutation used by the existing rank and concurrence
+   consumers.  The generated table carries no trust.  Keep the public orbit theorem names unless a
+   more semantic `List.Perm`/`Finset` interface removes the need for order-sensitive equality.
+2. Rebuild `PassantCodeQ13.Gates.Main` and `PassantCodeQ13.Gates.AxiomAudit` from the repaired orbit
+   boundary.  Treat further clean-build OOMs, especially the pair-concurrence blocks, as sharding
+   defects rather than machine-state excuses.
+3. Close `fixedPoint_slices_are_stabilizer_orbits` independently with a packed `28 × 78` action-index
+   table and symbolic transport.  It does not wait on the hard exhaustion theorem.
+4. Give the arbitrary weight-twelve arc route one bounded mathematical attack using passant parity,
+   the polar involution and the minimum-distance intersection bound.  If it does not force zero-or-two
+   passant intersections, stop that route and build a proved checker for the complete four-profile
+   fixed-point domain.  Do not attempt the 1,344,675,925-node raw search in Lean.
+5. Assemble semantic no-weight-eight and no-weight-ten theorems from the shared reductions, exact
+   finite leaves and projective transport; then globalize the weight-twelve fixed-point classification
+   to all 364 minimum words.
+6. State and prove the complete minimum-layer and reconstruction consequences: the four intrinsic
+   families, their spans equal to the semantic code, exact weighted-pair recovery, and the projective
+   automorphism conclusion, with every retained human/classical seam named exactly.
+7. Construct the hidden field: prove the cubic irreducible over the binary field, define its action
+   on the rho-zero kernel/code, prove field dimension three and code dimension twelve over it, give a
+   noncanonical linear equivalence with `F8^12`, and identify the three conjugate scalar actions.
+8. Only then build the complete theorem aggregate and refresh statement identity, trust manifest,
+   theorem-to-source map, axiom transcript, generated provenance, module inventory, public allowlist
+   and rejecting verifier.  Exercise the clean-checkout build before handing the package to C857.
+
+### Referee mystery ledger
+
+- **Settled:** the earlier aggregate-build diagnosis was not a concurrency problem; one orbit
+  declaration exceeds the available envelope by itself.  Owner: corrected step 1.
+- **Open:** whether minimum distance and the polar involution force every weight-twelve word to meet
+  each passant in zero or two points.  Exact gap: four fixed points of the involution leave room for
+  zero or one further internal two-cycle under `|S ∩ gS| ≤ 6`.  Owner: corrected step 4, with the
+  proved-checker fallback mandatory.
+- **Open:** the operator quartic has not been promoted to the actual `F8` module.  Owner: corrected
+  step 7.
+- **Open:** three families are chord-indexed conics while the symmetric family has no equally
+  intrinsic geometric description.  This does not block the frozen theorem; any new description
+  belongs to a successor rather than C834.
+
+The highest-EV next move is corrected step 1.  No further downstream proof should enlarge the
+package until its existing orbit boundary builds in bounded memory.
+
+## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
 package. The fourteen weight-ten profile shards are deleted and the gate now names the two
