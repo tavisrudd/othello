@@ -2,7 +2,26 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued; allocated 2026-08-07.
+**Status:** active; allocated 2026-08-07.  Work items 1--3 are complete and
+committed; items 4--9 remain.
+
+**Completed 2026-08-07.**  The full literature read is
+`notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md`.  Its verdict is
+harder than the first-pass triage: the redundancy-five split-free criterion is
+prior art at the level of pencils of binary cubics, in every characteristic,
+with Blokhuis--Pellikaan--Szőnyi reaching the same \(q\ge23\) threshold by the
+same genus-one double-point-scheme route, and exact split-witness counts
+published for every line class.  What survives is the syndrome layer.  Applied
+to the Version 2 draft: nine bibliography entries; the finite-geometric
+criterion \(W_f\cap\mathcal O_3=\varnothing\) and a class-by-class attribution
+remark in Section~\ref{sec:r5}; a rewritten related-work paragraph; a
+`PRIOR-ART` row and a narrowed novelty row in the claim--proof--novelty ledger;
+the sources, screened citing set, and coverage gaps in the paper's literature
+audit; and pinpoint citations replacing the previously unattributed
+cubic-cover hypothesis in the Lean module and gate headers.  Both manuscript
+builds (59-page canonical, 42/50 TIT), the paper verifier, single-file
+elaboration of both touched Lean modules, and the redundancy-five Lean gate
+are green.  Version 1 is untouched.
 
 **Target artifact:** `papers/beyond4_prs` (beyond-redundancy-four PRS paper,
 TIT submission `main-tit.tex` plus the Version 2 working draft).
@@ -12,10 +31,9 @@ supplied by the user 2026-08-07.  The review's praise is recorded below only
 as far as it constrains the repairs; its seven numbered additions plus the
 invariant-formulation suggestions are the work list.
 
-**Routing question the user must settle before edits land:** whether the
-literature repairs apply to the submitted Version 1 artifact, to the Version 2
-draft only, or to both.  Do not change the released/submitted artifact without
-that instruction.
+**Routing, settled 2026-08-07:** the repairs apply to the Version 2 working
+draft.  Version 1 is published and immutable; whether it needs an erratum
+naming the pencil-level prior art is an open user decision.
 
 ## Verified external record (checked 2026-08-07, bounded web search)
 
@@ -34,9 +52,10 @@ quartics / lines relative to the twisted cubic).  The introduction currently
 dismisses `KPP2025` as "adjacent normal-form geometry for the redundancy-six
 problem"; that characterization is what the new sources put in question.
 
-The reviewer additionally asserts that Ceria–Pavese already solved the
-characteristic-two line/incidence problem.  Not yet verified — verify before
-citing.
+Ceria–Pavese, *On the geometry of a \((q+1)\)-arc of \(PG(3,q)\), \(q\) even*,
+Discrete Math. 346 (2023), Paper No. 113594, does solve the characteristic-two
+case; confirmed at secondary depth through Kaipa–Pradhan §1, not against the
+paper itself.
 
 ## Overlap that drives the repair
 
@@ -47,10 +66,12 @@ arithmetic-genus-one residual \(Y_f\).  That is the double point scheme of a
 degree-\(\le 3\) rational function attached to a line of \(PG(3,q)\), and
 `lem:s3` then applies an Aubry–Perret/Hasse–Weil count to it.  Blokhuis–
 Pellikaan–Szőnyi run construction, curve, and bound in the same order for the
-redundancy-four coset leader problem.  The manuscript's R5 theorem is not
-pre-empted (different redundancy, different classification target), but the
-route is published prior art and the manuscript neither cites nor distinguishes
-it.
+redundancy-four coset leader problem.  The full read settled this harder than
+the first pass expected: their Proposition 7.4 decides, for \(q\ge23\) and
+every characteristic, exactly which line classes contain a totally split
+squarefree member, so every stratum of the manuscript's Section IV is
+pre-empted at pencil level.  Only the syndrome layer survives.  See the audit's
+per-stratum table.
 
 The reviewer's reformulation of the R5 criterion is
 \[
@@ -64,7 +85,7 @@ distribution question for line orbits** — precisely what Günay–Lavrauw
 
 ## Work items
 
-1. **Literature repair (mandatory).** Add the four verified works, record them
+1. **Literature repair (mandatory).** *Done.* Add the four verified works, record them
    in `literature-audit.md` under `notes/literature-audit-conventions.md`, and
    rewrite the related-work paragraph
    (`sections/01-introduction.tex:166–194`) to state exactly what R5 adds over
@@ -72,7 +93,9 @@ distribution question for line orbits** — precisely what Günay–Lavrauw
    orbit-distribution tables.  Re-check every novelty-ledger row that asserts
    an absence.  Gate: an audit entry per source with search domain and stop
    condition, plus a defensible delta sentence for R5.
-2. **Pre-emption assessment (mandatory, gates item 1's wording).** Determine
+2. **Pre-emption assessment (mandatory, gates item 1's wording).** *Done —
+   pre-empted at pencil level in every stratum; see the audit's per-stratum
+   table.* Determine
    how much of the R5 classification follows from the published line-orbit
    point-distribution tables (Günay–Lavrauw char \(>3\) non-generic classes;
    Kaipa–Pradhan generic lines and char 3; whatever covers char 2).  Three
@@ -80,7 +103,7 @@ distribution question for line orbits** — precisely what Günay–Lavrauw
    some strata.  If a stratum is fully derivable, the manuscript must cite
    rather than reprove it.  Gate: per-stratum verdict against the manuscript's
    own case split (gcd 2, gcd 1, inseparable char 3, \(C_3\), \(S_3\)).
-3. **Add the finite-geometric formulation of R5.** State
+3. **Add the finite-geometric formulation of R5.** *Done.* State
    \(f\ \text{split-free}\iff W_f\cap\mathcal O_3=\varnothing\) early in
    Section~\ref{sec:r5}, with the orbit identification cited.  Cheap, and it
    makes the section legible to a finite geometer.
@@ -92,10 +115,14 @@ distribution question for line orbits** — precisely what Günay–Lavrauw
    normalization of \(Y_f\) with \(E_{W_f}\) up to coordinates.  Prove or
    refute.  Gate: an explicit birational map, or a stated obstruction, plus a
    small-\(q\) numerical check.
-5. **Import the exact incidence count.** If the reviewer's formula
-   \(|L\cap\mathcal O_3|=(\#E_L(\F_q)-3\eta_L)/6\) is stated in
-   `arXiv:2509.15332`, verify its hypotheses and derive
-   split-free \(\iff \#E_{W_f}(\F_q)=3\eta_{W_f}\) on the generic stratum.
+5. **Import the exact incidence count.** *Partly done.*  Kaipa–Pradhan
+   Theorem 1.3 states
+   \(|L\cap\mathcal O_3|=(\#E_L(\F_q)-3\eta_L)/3\) — denominator three, not
+   the reviewer's six — for generic lines in characteristic other than two and
+   three.  The consequence split-free \(\iff \#E_{W_f}(\F_q)=3\eta_{W_f}\le12\),
+   and the \(q\le19\) bound it forces through Hasse, are now printed in the
+   manuscript.  What remains is whether it can replace the proof rather than
+   accompany it.
    Consequences to test: (a) an exact replacement for the crude deletion count
    in `lem:s3` (currently costs diagonal 4 + branch 8 + one singular point,
    forcing \(q\ge 23\)); (b) a Hasse-bound argument showing generic exceptions

@@ -56,6 +56,28 @@ no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
+C881 has closed its literature half.  A geometry-side screen that no earlier
+audit ran found that the redundancy-five split-free criterion is prior art as a
+statement about pencils of binary cubics: a redundancy-five witness system is a
+line of PG(3,q) relative to the twisted cubic, a completely split squarefree
+cubic is a plane meeting that curve in three rational points, and
+Blokhuis--Pellikaan--Szőnyi decide every line class for q >= 23 in every
+characteristic by the same genus-one double-point-scheme route and the same
+threshold.  Exact split-witness counts are published too --
+Davydov--Marcugini--Pambianco and Günay--Lavrauw for the non-generic classes,
+Kaipa--Pradhan for the generic class with an elliptic-curve formula that
+explains the threshold arithmetically, their characteristic-three companion and
+Ceria--Pavese for the remaining characteristics.  What survives as ours is the
+syndrome layer: the divided-power Hankel passage to the pencil, the exclusion of
+line classes no rank-two syndrome realizes, the syndrome inventory, and the
+radius promotion.  Version 2 now cites all of it, the novelty ledger carries a
+`PRIOR-ART` row beside a narrowed R5 row, and the Lean R5 module and gate
+headers cite the source of the cubic-cover hypothesis they previously left
+unattributed.  Both builds, the paper verifier, and the redundancy-five Lean
+gate are green; Version 1 is untouched and whether it needs an erratum is open.
+The audit is `notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md` and the
+remaining mathematical items are on the task card.
+
 C620 is complete: the first fresh carrier has empty split-free locus over
 every admissible binary field, the exact uniform replacement for the
 non-exhaustive projective-additive section is the final-pair trace incidence,
