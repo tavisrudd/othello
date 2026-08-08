@@ -1140,8 +1140,9 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C886 | queued; Version 2 mathematics and full paper audit are green | capture the current cold-read signal while the manuscript architecture is fresh, before Version 2 release |
+| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1201,7 +1202,8 @@ history.
 
 ## Next command
 
-`go C608`
+`go C886`
 
-(C885 and its absorbed C854 obligations are complete; C608 is the immediate
-decoder consequence, while C607 remains the broader parallel decoding task.)
+(C885 and its absorbed C854 obligations are complete; C886 is the bounded
+layered-exposition pass before Version 2 release, C608 is the immediate decoder
+consequence, and C607 remains the broader parallel decoding task.)
