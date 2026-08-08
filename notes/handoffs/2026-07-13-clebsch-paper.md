@@ -469,12 +469,28 @@ the degree out of Euler's identity.  `RelativeConicArcs.ZonalHarmonicDegreeSix`
 defines the degree-six zonal form, proves it homogeneous, evaluates it at a unit
 vector as `P₆` of the inner product, proves it harmonic for a unit axis, and
 concludes `N(Z_u Z_v) = 10395 P₆(u·v)` with normalized form
-`M(Z_u Z_v) = P₆(u·v)/13`, which is the manuscript's `G = K/13`.  The route is
-shorter than the scope note planned: no apolar differential operator is defined
-and the four Leibniz evaluations are unused, because the three terms of `Z_v`
-carrying `x·x` die by the sphere relation followed by the lower-degree clause.
-Report: `notes/2026-08-07-c815-harmonic-moment-and-apolarity.md`.  None of the
-four modules is on a gate yet.
+`M(Z_u Z_v) = P₆(u·v)/13`.  The route is shorter than the scope note planned: no
+apolar differential operator is defined and the four Leibniz evaluations are
+unused, because the three terms of `Z_v` carrying `x·x` die by the sphere
+relation followed by the lower-degree clause.  Report:
+`notes/2026-08-07-c815-harmonic-moment-and-apolarity.md`.
+
+The Gram half of HARM-1 is closed on top of that, together with the quadratic
+identity that no module had owned.  `RelativeConicArcs.FaceAxisHarmonicGram`
+realizes the labelled axes over the reals, rescales them to unit length, and
+computes the Gram matrix of their zonal forms as `(196 I + 47 J - 112 A)/3159`,
+which is the manuscript's `G = K/13`; its entries come from the degree-six
+Legendre polynomial at the squared axis inner products `1`, `5/9` and `1/9`, and
+only the squares enter, so no axis representative's sign is ever determined.  The
+Petersen eigenvalues give the three Gram scalars `110/1053`, `140/1053` and
+`28/1053` as eigenvector equations.  Injectivity is proved where the manuscript
+claims it, on the Petersen `(-2)`-eigenspace, where the Gram form is the positive
+scalar `140/1053` times the squared norm of the coefficient vector — so no
+spectral decomposition of the ten-dimensional space is needed.  Pair-sum
+tightness then gives `M(F_y²) = (140/351) ∑ y_i²` and the marked value
+`2800/351`.  Report: `notes/2026-08-07-c815-face-axis-zonal-gram.md`.  What is
+left in the two rows is the spherical cubic restriction and the surface-integral
+identification.  None of the five modules is on a gate yet.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared

@@ -208,11 +208,27 @@ apolar differential operator is defined; the manuscript's proof consumes only th
 two clauses.  Report:
 `notes/2026-08-07-c815-harmonic-moment-and-apolarity.md`.
 
-Still open in the two rows: the Gram matrix of the ten face-axis zonal forms with
-its three eigenvalues and injectivity, the spherical cubic restriction, and the
+`RelativeConicArcs.FaceAxisHarmonicGram` carries the Gram half.  Realizing the
+labelled axes over the reals and rescaling them to unit length, the normalized
+mean of a product of two face-axis zonal forms is
+`(196 I + 47 J - 112 A)/3159`, whose three entries are `1/13`, `-65/3159` and
+`47/3159` at the squared axis inner products `1`, `5/9` and `1/9`; only the
+squares enter, so the sign of a chosen axis representative never has to be
+determined.  The Petersen eigenvalues `3`, `-2` and `1` then give the Gram
+scalars `110/1053`, `140/1053` and `28/1053`, each stated as an eigenvector
+equation from hypotheses on the coefficient vector alone.  On the `(-2)`
+eigenspace, where the manuscript claims injectivity, the Gram form is the
+positive scalar `140/1053` times the squared norm of the coefficient vector, so
+injectivity needs no spectral decomposition of the ten-dimensional space.
+Pair-sum tightness `∑_p (y_i + y_j)² = 3 ∑_i y_i²` on sum-zero weights turns that
+scalar into the manuscript's quadratic identity `M(F_y²) = (140/351) ∑ y_i²`,
+with the marked value `2800/351`.  Report:
+`notes/2026-08-07-c815-face-axis-zonal-gram.md`.
+
+Still open in the two rows: the spherical cubic restriction, and the
 measure-theoretic identification named above.  The three assertions of the
 manuscript section that no inventory row covers are owned by C884.  None of the
-four modules is on a gate yet.
+five modules is on a gate yet.
 
 ## Evidence source
 
