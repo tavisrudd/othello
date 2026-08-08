@@ -151,9 +151,54 @@ the row; and published Version 1, which carries the same corollary.
 
 ## Remaining
 
-One item, and it is a decision rather than work: **whether published Version 1 receives an
-erratum.**  It carries the same corollary, at release commit `0d3cea2` with Zenodo version
-DOI `10.5281/zenodo.21682216`.  Nothing else in this task is open.
+**Decision taken 2026-08-07: the correction is published as a GitHub release**, not as a
+prose erratum.  Version 1 has a DOI but was never distributed further, so there is no
+citing readership to notify and no need for a standalone erratum document; a superseding
+release with the corrected artifact, and a Zenodo version record beside it, is enough.
+
+Scope question still open, and it changes the work: whether the release carries a
+*corrected Version 1* — the published manuscript with the extension inference and the
+quantum corollary removed and nothing else changed — or *Version 2*, which supersedes it
+and differs substantially in spine, length, and level coverage.  A corrected Version 1 is a
+narrow, auditable delta against `v0.1.0`; Version 2 is a new paper that happens to fix the
+defect.  Do not conflate them in one release.
+
+Publication constraints that bind whichever is chosen:
+
+- The standalone repository is `github.com/tavisrudd/beyond4-prs`, Version 1 at tag
+  `v0.1.0`, commit `0d3cea228b852c45f048c3446604ee2146219144`, Zenodo version DOI
+  `10.5281/zenodo.21682216` under concept DOI `10.5281/zenodo.21682069`.
+- Synchronization is one-way from this repository outward, and the existing history is
+  preserved: the correction is an ordinary forward commit and a new tag, never a
+  replacement of `v0.1.0` or of its Zenodo record.
+- `notes/export-and-mirror-conventions.md` must be read in full before anything writes
+  under the paper repository, and the guarded export entry point is the only route.
+- The release note should state plainly what was withdrawn and why, since that is the
+  entire reason for the release.
+
+## Draft release note
+
+> **Corrected release.**  This release withdraws the balanced quantum corollary at field
+> order eight and the inference that supported it.
+>
+> The paper inferred a one-column MDS extension from a split-free syndrome direction.  That
+> step is wrong.  An extension of the dual code by one column requires a syndrome outside
+> the span of every `r-1` parity-check columns, whereas split-freeness places it outside the
+> span of only `r-2`.  The two conditions differ by one column, and at the covering radius
+> proved in the paper the stronger one is unattainable: by Dur's theorem (Discrete
+> Mathematics 126 (1994), 99--105, Theorem 2.4) covering radius `r-1` is *equivalent* to
+> completeness of the normal rational curve's arc in `PG(r-1,q)`, so no extending point
+> exists.  Independently, the `[10,5,6]_8` code the corollary named would be a ten-point arc
+> in `PG(4,8)`, where the maximum is nine.
+>
+> Withdrawn: the 1116 one-column `[10,5,6]_8` MDS extensions, the minimum-support
+> `AME(10,8)` stabilizer states, and the associated `[[9,1,5]]_8` quantum MDS codes.
+>
+> Unaffected: everything else.  The count of 1116 split-free directions at `q=8` is
+> certificate-backed and stands as a deep-hole count; the redundancy-five, six, and seven
+> classifications, the covering-radius results, and the geometric content are unchanged.  The
+> error was in the direction of one implication, not in any computation.  The companion
+> papers do not depend on the withdrawn corollary.
 
 ## Boundary
 
