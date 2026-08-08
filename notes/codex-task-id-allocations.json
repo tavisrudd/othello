@@ -2915,8 +2915,17 @@
       "last": 890,
       "purpose": "formalize exact-base relative AME intertwiner stability and its trust gate",
       "sequence": 324
+    },
+    {
+      "count": 1,
+      "first": 891,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 891,
+      "purpose": "refresh C879 AME-LU and MDS-CSS extraction mapping and plan against current tree",
+      "sequence": 325
     }
   ],
-  "next_id": 891,
+  "next_id": 892,
   "schema": "codex-task-id-allocations-v1"
 }
