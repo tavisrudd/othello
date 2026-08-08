@@ -1,5 +1,6 @@
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Data.Complex.Basic
 import Mathlib.Tactic.Ring
 
 /-!
@@ -59,5 +60,38 @@ theorem charpoly_pairedTriangle (a b c ar br cr : R)
   rw [haX, hbX, hcX]
   simp only [map_ofNat]
   ring
+
+section Complex
+
+/-- The Hermitian triangle with upper-triangular entries `a`, `b`, `c` and
+their conjugates below the diagonal. -/
+def hermitianTriangle (a b c : ℂ) : Matrix (Fin 3) (Fin 3) ℂ :=
+  pairedTriangle a b c (starRingEnd ℂ a) (starRingEnd ℂ b) (starRingEnd ℂ c)
+
+/-- The real triangle holonomy in the orientation `0 → 1 → 2 → 0`. -/
+def realTriangleHolonomy (a b c : ℂ) : ℝ :=
+  (a * c * starRingEnd ℂ b).re
+
+/-- For unit-modulus edge entries, the characteristic polynomial of a
+Hermitian triangle is `X³ - 3X - 2r`, where `r` is its real triangle
+holonomy. -/
+theorem charpoly_hermitianTriangle (a b c : ℂ)
+    (ha : a * starRingEnd ℂ a = 1) (hb : b * starRingEnd ℂ b = 1)
+    (hc : c * starRingEnd ℂ c = 1) :
+    (hermitianTriangle a b c).charpoly =
+      X ^ 3 - C 3 * X - C ((2 * realTriangleHolonomy a b c : ℝ) : ℂ) := by
+  rw [hermitianTriangle, charpoly_pairedTriangle a b c
+    (starRingEnd ℂ a) (starRingEnd ℂ b) (starRingEnd ℂ c) ha hb hc]
+  congr 2
+  rw [realTriangleHolonomy]
+  calc
+    a * c * starRingEnd ℂ b + b * starRingEnd ℂ c * starRingEnd ℂ a
+        = a * c * starRingEnd ℂ b + starRingEnd ℂ (a * c * starRingEnd ℂ b) := by
+      simp only [map_mul, starRingEnd_self_apply]
+      ring
+    _ = ((2 * (a * c * starRingEnd ℂ b).re : ℝ) : ℂ) :=
+      Complex.add_conj _
+
+end Complex
 
 end RelativeConicArcs.HermitianConferenceExchange
