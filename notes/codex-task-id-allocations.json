@@ -2933,8 +2933,17 @@
       "last": 892,
       "purpose": "full Paper II Lean closure and manuscript trust-boundary review",
       "sequence": 326
+    },
+    {
+      "count": 1,
+      "first": 893,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 893,
+      "purpose": "full independent review of Paper I Lean artifact and manuscript trust boundary",
+      "sequence": 327
     }
   ],
-  "next_id": 893,
+  "next_id": 894,
   "schema": "codex-task-id-allocations-v1"
 }
