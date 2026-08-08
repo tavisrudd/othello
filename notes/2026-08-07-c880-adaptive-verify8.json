@@ -1,0 +1,18 @@
+{
+  "mode": "verify",
+  "n": 8,
+  "instances": 2097152,
+  "exhaustive": true,
+  "seed": 1,
+  "want": 5,
+  "all_recovered": true,
+  "queries_max": 30,
+  "queries_mean": 21.927124,
+  "core_max": 22,
+  "bootstrap_max": 9,
+  "lemma_max": 1,
+  "dimension": 21,
+  "counting_bound": 20,
+  "entropy_bound_nonadaptive": 24.6525,
+  "manuscript_family": 53
+}

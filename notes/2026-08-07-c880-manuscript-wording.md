@@ -446,11 +446,11 @@ not occur, and the drafts for them are not written. Naming them:
    on each outside pair cannot be reduced, since of the 64 subgraphs of the
    anchor's link only the complete one separates* --- and it must carry the
    restriction to \(n=7,8\) explicitly.
-3. **A better decoder.** Not yet. The nonadaptive construction is beaten at
-   eight points by a search that supplies no general family, and the adaptive
-   decoder is under construction; a greedy adaptive tree finishes in 22
-   questions at seven points against the nonadaptive minimum of 30, but greedy
-   is not a theorem. Any manuscript sentence waits on a proved count.
+3. **A better decoder.** This one occurred after the drafts above were written;
+   see the addendum, which supplies its text. The paragraph as first written
+   read: "Not yet. The nonadaptive construction is beaten at eight points by a
+   search that supplies no general family, and the adaptive decoder is under
+   construction." It is superseded.
 4. **The audit finds the claim known, and a citation replaces a theorem.** This
    happened for exactly one claim, the determinant-\((-3)\) family, and Drafts 1
    and 5 make it a citation. It did not happen for the faithfulness theorem,
@@ -472,16 +472,70 @@ not occur, and the drafts for them are not written. Naming them:
    keys already exist; the five keys of Draft 8 are new and no existing key is
    reused with a different meaning.
 
+---
+
+## Addendum, same day — the adaptive decoder landed
+
+`notes/2026-08-07-c880-adaptive-decoder.md` proves an adaptive decoder using at
+most \(\binom n2+n-6\) alignment tests, against a counting lower bound of
+\(\binom n2-n\) that binds every decoder. Two things in the drafts above change.
+
+**Draft 2's last sentence is replaced.** It currently reads:
+
+```tex
+Between that and
+\(3n^2-23n+45\) the ratio tends to \(4.87\); the constant \(3\) is not known
+to be optimal, and this bound says nothing about a decoder that chooses each
+test in the light of earlier answers.
+```
+
+Replace with:
+
+```tex
+Between that and \(3n^2-23n+45\) the ratio tends to \(4.87\), and the constant
+\(3\) is not known to be optimal.  The bound also does not apply to a decoder
+that chooses each test in the light of earlier answers, and such a decoder does
+better than any fixed family can: reading the two-graph on seven points, and
+then adding one point at a time, costs \(\binom n2+n-6\) tests in all.  Two
+known edges at a new point make every further edge cost one test, because a
+test one of whose two conditions is already known reads as a single bit; the
+whole cost of adding a point is the cost of its first two edges, and seven
+tests buy five of them.  So the price of the coherence restriction is a price
+of fixing the tests in advance: adaptively the fourth-order indicator matches
+the order-three minor values to leading order, both at \(n^2/2\).
+```
+
+**A new bibliography entry is not needed**, and no novelty adjective is used:
+the claim is a construction with a stated count, and its comparison is to the
+counting bound, which is standard. The `OPER-4` ledger cell of Draft 9 gains one
+clause in its paper-owned list, after "the exact small-case values at seven and
+eight points":
+
+> and the adaptive decoder reaching \(\binom n2+O(n)\) tests, with the
+> attachment lemma that makes each further edge cost one test.
+
+**What the manuscript should not say.** Not that the decoder is optimal — the
+adaptive complexity is pinned only to a window of width \(2n-6\). Not that
+adaptivity helps at every \(n\) — the proved separation against the entropy
+floor starts at \(n=18\), and at \(n=7\) it is exact (22 against 30) but at
+intermediate \(n\) neither bound settles it. Not that this improves on the
+principal-minor literature, whose value oracle is stronger.
+
+**Where it goes.** Draft 2 already sits after the proof of
+`thm:aligned-faithfulness`, which is the location item 7 names for a sharper
+decoder. The theorem statement itself is unchanged: the manuscript's family
+remains the one the proof uses, and the adaptive count is a remark about the
+model, not a replacement for the construction the faithfulness proof carries.
+
 ## Mystery ledger for item 7
 
 - **Settled here.** Whether the manuscript's \(O(n^2)\) sentence survives the
   audit: it does not, and Draft 1 replaces it with the restriction that is
   actually particular to this decoder. Whether the six-point failure needs a
   certificate to enter the paper: it does not --- the witness pair is a proof.
-- **Open, owned by the adaptive chase.** Whether the manuscript can state a
-  decoder better than \(3n^2-23n+45\). Draft 2's closing sentence, which now
-  says the entropy bound is silent about adaptive decoders, is where a proved
-  adaptive count would land.
+- **Closed by the addendum.** Whether the manuscript can state a decoder better
+  than \(3n^2-23n+45\). It can: \(\binom n2+n-6\) adaptively, with the
+  attachment lemma as the mechanism.
 - **Open, owned by C816.** Whether Drafts 6 and 7 are worth the artifact
   migration. The lane's reading is that Draft 6 earns its place only if the
   paper wants the rigidity-and-redundancy framing that

@@ -1,0 +1,9 @@
+{
+  "mode": "core",
+  "points": 7,
+  "tests": 35,
+  "complement_pairs": 16384,
+  "leaves": 16384,
+  "depth_max": 22,
+  "depth_mean": 15.610291
+}

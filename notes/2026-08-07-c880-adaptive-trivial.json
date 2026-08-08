@@ -1,0 +1,18 @@
+{
+  "mode": "trivial",
+  "all_recovered": true,
+  "rows": [
+    {"n": 7, "graph": "empty", "queries": 10, "core": 10, "bootstrap": 0, "lemma": 0, "counting": 14},
+    {"n": 7, "graph": "complete", "queries": 10, "core": 10, "bootstrap": 0, "lemma": 0, "counting": 14},
+    {"n": 8, "graph": "empty", "queries": 15, "core": 10, "bootstrap": 4, "lemma": 1, "counting": 20},
+    {"n": 8, "graph": "complete", "queries": 15, "core": 10, "bootstrap": 4, "lemma": 1, "counting": 20},
+    {"n": 9, "graph": "empty", "queries": 21, "core": 10, "bootstrap": 8, "lemma": 3, "counting": 27},
+    {"n": 9, "graph": "complete", "queries": 21, "core": 10, "bootstrap": 8, "lemma": 3, "counting": 27},
+    {"n": 10, "graph": "empty", "queries": 28, "core": 10, "bootstrap": 12, "lemma": 6, "counting": 35},
+    {"n": 10, "graph": "complete", "queries": 28, "core": 10, "bootstrap": 12, "lemma": 6, "counting": 35},
+    {"n": 11, "graph": "empty", "queries": 36, "core": 10, "bootstrap": 16, "lemma": 10, "counting": 44},
+    {"n": 11, "graph": "complete", "queries": 36, "core": 10, "bootstrap": 16, "lemma": 10, "counting": 44},
+    {"n": 12, "graph": "empty", "queries": 45, "core": 10, "bootstrap": 20, "lemma": 15, "counting": 54},
+    {"n": 12, "graph": "complete", "queries": 45, "core": 10, "bootstrap": 20, "lemma": 15, "counting": 54}
+  ]
+}

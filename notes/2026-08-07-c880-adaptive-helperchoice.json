@@ -1,0 +1,9 @@
+{
+  "mode": "helperchoice",
+  "want": 5,
+  "six_point_graphs": 32768,
+  "exhaustive": true,
+  "worst_with_choice": 9,
+  "worst_fixed_five": 9,
+  "histogram": {"7": 32766, "9": 2}
+}
