@@ -61,8 +61,7 @@ certificates for every label.
 ## Literature adapters
 
 - Seroussi--Roth Theorem 1 supplies high-rate GRS nonextendability.
-- Dür supplies completeness--covering-radius equivalence, in the form checked
-  against Kaipa Section IV.
+- Dür Theorem 2.4 supplies the completeness--covering-radius equivalence.
 - Kaipa and Zhang--Wan--Kaipa supply the syndrome/MDS dictionary and lower
   persistent families.
 - Aubry--Perret supplies the singular-curve point bound.
@@ -84,13 +83,27 @@ the paper-local verifier and retain their own generator/replay boundaries.
 
 ## Reproduction
 
-The supported aggregate gate is:
+In the public Lean export, from its repository root, the aggregate gate is:
 
     (cd lean && nix develop --command lake build \
       RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
       RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
 
-**Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+Inside the development monorepo, repository policy instead requires the guarded
+queue:
+
+    python3 lean/scripts/lean-build-queue.py build \
+      RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
+      RelativeConicArcs.Gates.PRSBeyondRedundancyFour --cores 20-23
+
+**Withdrawn.**  The paper draws no quantum consequence from the balanced
+`q=8` row.  A split-free direction avoids spans of `r-2` parity-check columns,
+whereas a one-column extension must avoid spans of `r-1` columns; at covering
+radius `r-1`, Dür's equivalence also says that the normal rational curve is a
+complete arc.  The redundancy-five section records this in the remark “No
+one-column MDS extension at this radius.”  The formal modules below are
+retained as conditional developments whose extension hypothesis is unsatisfied
+here; nothing in the manuscript depends on them.
 
 The withdrawn balanced q=8 quantum development retains its separate
 RelativeConicArcs.Gates.PRSBalancedQuantumExtension gate and axiom audit so

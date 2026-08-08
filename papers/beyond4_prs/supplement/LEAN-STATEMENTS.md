@@ -165,12 +165,20 @@ The release-level evidence manifest records the same bytes and hash.
 
 ## Reproduction
 
-From the repository root, the supported aggregate gate is:
+In the public Lean export, from its repository root, the aggregate gate is:
 
 ```text
 (cd lean && nix develop --command lake build \
   RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
   RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
+```
+
+Inside the development monorepo, repository policy instead requires:
+
+```text
+python3 lean/scripts/lean-build-queue.py build \
+  RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
+  RelativeConicArcs.Gates.PRSBeyondRedundancyFour --cores 20-23
 ```
 
 The paper-local verifier independently checks that the statement table has

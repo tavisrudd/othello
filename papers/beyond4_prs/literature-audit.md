@@ -9,17 +9,16 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 35 bibliography entries, nine were read at **full text** or at full
+Of the 33 bibliography entries, ten were read at **full text** or at full
 text at their load-bearing statements (Kaipa; Zhang--Wan--Kaipa; Wang;
 Ball--Lavrauw; Xu 2023; Wu--Ding--Chen; Wang--Wu--Hu;
-Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025), eleven at **partial**
+Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025; Dür 1994), eleven at **partial**
 depth (Kaipa--Patanker--Pradhan; Günay--Lavrauw;
 Davydov--Marcugini--Pambianco 2022; Cesaratto--Matera--Pérez;
 Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret; and the four repository
-companion manuscripts at their cross-cited statements), and fifteen at
-**abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu; Dür 1994;
-Raissi--Gogolin--Riera--Acín;
-Iarrobino--Kanev; Comas--Seiguer; Stichtenoth; Dür;
+companion manuscripts at their cross-cited statements), and twelve at
+**abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu;
+Iarrobino--Kanev; Comas--Seiguer; Dür 1987;
 Lidl--Niederreiter; Ben-Sasson et al.;
 Davydov--Marcugini--Pambianco 2021 and 2023; Kaipa--Pradhan characteristic
 three; Ceria--Pavese; Ferraguti--Micheli).
@@ -71,12 +70,13 @@ the cited papers' bibliographies.
 - Seroussi--Roth — **partial**, published scan, Theorem 1 and its stated
   corollary; cache key `10.1109/TIT.1986.1057188`, SHA-256
   `0b5c152819f91d5e410146ada3527b5b795a55fc6170c14a27e43b8c3e39a5f9`.
-  This verifies the high-rate MDS nonextendability input; Dür's theorem in
-  Kaipa Section IV supplies the separate completeness--radius equivalence.
-- Dür — **metadata and publisher abstract**, DOI
-  `10.1016/0012-365X(94)90256-9`; the abstract states the completeness
-  criterion for the covering radius of doubly extended Reed--Solomon codes.
-  The exact theorem form consumed here was checked in Kaipa Section IV.
+  This verifies the high-rate MDS nonextendability input; Dür Theorem 2.4
+  supplies the separate completeness--radius equivalence.
+- Dür — **full text**, DOI `10.1016/0012-365X(94)90256-9`, Theorem 2.4 and
+  its syndrome/deep-hole setup; cache SHA-256
+  `b28e0b84b00255aadf38d6f6b8d2204a76228f5acc0eacb73066cd40401ed9b1`.
+  Theorem 2.4 states the exact completeness--covering-radius biconditional
+  consumed here.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256
@@ -394,7 +394,7 @@ Surveys volume 6 (2019).
 | Key | DOI or pinned ID | Read depth | Role |
 |---|---|---|---|
 | SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | partial, Theorem 1 and its corollary | covering-radius/MDS-extension input |
-| Dur1994 | `10.1016/0012-365X(94)90256-9` | abstract/metadata only; exact consumed form checked secondarily in Kaipa Section IV at full-text depth | completeness--covering-radius equivalence |
+| Dur1994 | `10.1016/0012-365X(94)90256-9` | full text, especially Theorem 2.4 and the syndrome/deep-hole setup | completeness--covering-radius equivalence |
 | Kaipa2017 | `10.1109/TIT.2017.2706677` | full text, sections recorded above | deep-hole/MDS dictionary |
 | ZWK2020 | `10.1109/TIT.2019.2940962` | full text, Sections I--IV | PRS lower-redundancy frontier |
 | ZhangWan2017 | `arXiv:1711.02292` | abstract/metadata only | explicit PRS deep-hole families |
@@ -402,15 +402,15 @@ Surveys volume 6 (2019).
 | Xu2023 | `10.1051/wujns/2023281015` | full text, main theorem and introduction | even-characteristic PRS families |
 | WuDingChen2023 | `arXiv:2312.05534` | full text, abstract and Section V.A | MDS extensions and PRS radius context |
 | KPP2025 | `arXiv:2312.07118` | partial, abstract/introduction/orbit statements, plus the role assigned to it in `KaipaPradhan2025` §1 | generic-line orbit decomposition for characteristic other than two |
-| BPS2022 | `10.1007/s10623-022-01060-0`, `arXiv:2103.16904` | full text at the load-bearing statements: §1, §3 (Props. 3.1, 3.3, Rem. 3.2), §5.2 (Prop. 5.5), §6 (Defs. 6.1--6.8, Props. 6.9--6.10, Cor. 6.11, Rem. 6.12), §7.1 (Thm. 7.1), §7.2 (Prop. 7.4 with proof, Rems. 7.5--7.6, Thm. 7.7); preprint text read, published version not consulted | prior art for the pencil-level split-free classification, `q >= 23`, all characteristics |
+| BPS2022 | `10.1007/s10623-022-01060-0`, `arXiv:2103.16904` | full text at the load-bearing statements: §1, §3 (Props. 3.1, 3.3, Rem. 3.2), §5.2 (Prop. 5.5), §6 (Defs. 6.1--6.8, Props. 6.9--6.10, Cor. 6.11, Rem. 6.12), §7.1 (Thm. 7.1), §7.2 (Prop. 7.4 with proof, Rems. 7.5--7.6, Thm. 7.7); preprint text read, published version not consulted | codimension-four GRS syndrome/coset enumeration and the twisted-cubic line partition, `q >= 23`, all characteristics |
 | GunayLavrauw2022 | `10.1016/j.ffa.2021.101960`, `arXiv:2104.04756` | partial, abstract, §1, and §2 in full: the map from cubics to planes, the symplectic polarity sigma with its action on the twisted cubic and on chords, Lemmas 1 and 2, and the six line classes with their duals and sizes | the polarity that reconciles the two line-versus-pencil conventions; point-orbit and plane-orbit distributions of the ten non-generic line classes, odd `q` prime to three |
-| DMP2022 | `arXiv:2103.11248` | partial, abstract, introduction, and the statement of Thm. 3.3 | exact planes-per-line counts for `q >= 5`, non-generic classes |
-| DMP2021 | Des. Codes Cryptogr. 89 (2021), 2211--2233 | abstract/metadata only | point-line incidence companion |
-| DMP2023 | `arXiv:2103.12655` | abstract/metadata only | line-orbit partition credited by `BPS2022` Rem. 7.3 |
+| DMP2022 | `10.1007/s00022-022-00644-4`, `arXiv:2103.11248` | partial, abstract, introduction, and the statement of Thm. 3.3 | exact planes-per-line counts for `q >= 5`, non-generic classes |
+| DMP2021 | `10.1007/s10623-021-00911-6`, `arXiv:2104.12254` | abstract/metadata only | point-line incidence companion |
+| DMP2023 | `10.1007/s00009-023-02279-4`, `arXiv:2103.12655` | abstract/metadata only | line-orbit partition credited by `BPS2022` Rem. 7.3 |
 | KaipaPradhan2025 | `arXiv:2509.15332v1` | full text at the load-bearing statements: abstract, §1 with Problems 1.1--1.2, §1.1 with Thm. 1.3, §2, Lem. 4.1 | exact split-witness count for generic lines through a binary quartic and elliptic curve |
 | KaipaPradhan2025char3 | `arXiv:2508.11229` | abstract/metadata only; its role is secondary through `KaipaPradhan2025` §1, read at full text | generic-line incidence in characteristic three |
-| CeriaPavese2023 | Discrete Math. 346 (2023), Paper No. 113594 | abstract/metadata only, via search-result listing, not fetched; its role is secondary through `KaipaPradhan2025` §1 | generic-line incidence in characteristic two |
-| FerragutiMicheli2020 | Des. Codes Cryptogr. 88 (2020), 867--886 | abstract/metadata only, not fetched; the match with the split-free table is `BPS2022` Rem. 7.6's claim and is unverified against this paper | independent confirmation through degree-three permutation rational functions |
+| CeriaPavese2023 | `10.1016/j.disc.2023.113594`, `arXiv:2208.00503` | abstract/metadata only, via search-result listing, not fetched; its role is secondary through `KaipaPradhan2025` §1 | generic-line incidence in characteristic two |
+| FerragutiMicheli2020 | `10.1007/s10623-020-00715-0`, `arXiv:1805.03097` | abstract/metadata only, not fetched; the match with the split-free table is `BPS2022` Rem. 7.6's claim and is unverified against this paper | independent confirmation through degree-three permutation rational functions |
 | CMP2017 | `10.1007/s00493-015-3330-5` | partial, abstract/theorem statements | factorization-family context |
 | AubryPerret1995 | `10.1007/BF02567835` | partial, introduction and p. 468 point bound | singular-curve bound |
 | GmainerHavlicek2013 | `10.1007/BF01237480`, `arXiv:1304.0088` | partial, abstract/Theorem 1 | NRC nuclei |
@@ -419,7 +419,6 @@ Surveys volume 6 (2019).
 | IarrobinoKanev1999 | `10.1007/BFb0093426` | abstract/metadata only | classical apolarity/determinantal background |
 | ComasSeiguer2011 | `10.1007/s10208-010-9077-x` | abstract/metadata only | binary-form rank background |
 | BallLavrauw2019 | `10.4171/EMSS/33`, `arXiv:1908.10772` | full text, especially Section 3 | arcs/NRC background |
-| Stichtenoth2009 | `10.1007/978-3-540-76878-4` | abstract/metadata only | function-field background |
 | Dur1987 | `10.1016/0097-3165(87)90060-4` | abstract/metadata only | code automorphisms |
 | LidlNiederreiter1996 | `10.1017/CBO9780511525926` | abstract/metadata only | finite fields/linearized polynomials |
 | BenSassonEtAl2016 | `10.1109/TIT.2016.2520479` | abstract/metadata only | subspace-polynomial terminology |
@@ -427,7 +426,6 @@ Surveys volume 6 (2019).
 | RuddRigidity2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning only |
 | RuddFactorization2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning and shared factorization-memory context |
 | RuddAMELU2026 | repository companion manuscript, bundle revision | partial, abstract and the LU-rigidity/transversal-conversion theorem statements formerly consumed by the withdrawn quantum corollary | no longer a theorem input; retained as a bundle comparison |
-| RaissiGogolinRieraAcin2018 | DOI `10.1088/1751-8121/aaa151`, arXiv `1701.03359v2` | abstract/metadata only from the official arXiv record | standard minimal-support AME/MDS and QECC context |
 
 No source is characterized beyond its stated read depth. Metadata-only
 background citations support terminology and orientation, not a load-bearing
