@@ -13,10 +13,10 @@ orbit-count hypotheses.  Four further inputs remain visible:
 
 * Seroussi and Roth, *On MDS Extensions of Generalized Reed--Solomon Codes*,
   IEEE Transactions on Information Theory 32 (1986), 349--354,
-  DOI `10.1109/TIT.1986.1057188`, Theorem 1 and Corollary 2 on pp. 350--351;
+  DOI `10.1109/TIT.1986.1057188`, Theorem 1 and Corollary 1 on pp. 350--351;
 * Aubry and Perret, *Coverings of Singular Curves over Finite Fields*,
   Manuscripta Mathematica 88 (1995), 467--478,
-  DOI `10.1007/BF02567835`, Theorem 4 on pp. 474--475;
+  DOI `10.1007/BF02567835`, the arithmetic-genus point bound stated on p. 468;
 * the geometric classification of the separable cubic-cover strata.  A five-coordinate
   syndrome annihilates a pencil of binary cubics, that is a line of `PG(3, q)` relative to
   the twisted cubic, and a completely split squarefree cubic is a plane meeting that curve
@@ -29,9 +29,12 @@ orbit-count hypotheses.  Four further inputs remain visible:
   bound behind the `q ≥ 23` threshold in their Remark 6.12.  For the generic class in
   characteristic other than two and three, the exact number of split squarefree members of
   the pencil is Kaipa and Pradhan, *Incidence of Lines, Points and Planes in `PG(3, q)` with
-  Respect to the Twisted Cubic*, arXiv:2509.15332 (2025), Theorem 1.3.  Neither work treats
-  projective Reed--Solomon syndromes, covering radius, or deep holes.  The threshold this
-  module requires of that input is `q ≥ 20` rather than `q ≥ 23`: `ExactSplitWitnessCount`
+  Respect to the Twisted Cubic*, arXiv:2509.15332 (2025), Theorem 1.3.
+  Blokhuis--Pellikaan--Szőnyi formulate the codimension-four generalized Reed--Solomon
+  problem in syndrome/coset language and compute its extended coset-leader weight enumerator;
+  neither cited line classification supplies the map from a redundancy-five syndrome to the
+  pencil classified here or its radius promotion.  The threshold this module requires of that
+  input is `q ≥ 20` rather than `q ≥ 23`: `ExactSplitWitnessCount`
   records the count relation and the tame Riemann--Hurwitz branch budget as hypotheses,
   `ExactSplitWitnessCount.fibreSquarePoints_le_twelve` bounds a split-free fibre square by
   twelve, and `fieldOrder_le_nineteen_of_splitFree` derives the field bound from that and
@@ -478,17 +481,19 @@ structure OrbitData (case : OrbitArithmeticCase) where
     semilinearOrbitCount =
       nonsporadicOrbitCount case + sporadicSemilinearOrbitCount
 
-/-- The exact split-witness count on the trivial-gcd separable stratum in odd
-characteristic, as an arithmetic relation between the rational-point count of the
+/-- The characteristic-free exact split-witness count on the trivial-gcd separable stratum,
+as an arithmetic relation between the rational-point count of the
 off-diagonal fibre square and the member types of the pencil.
 
 `fibreSquarePoints` is the number of rational points of the fibre square, `splitMembers`
 the number of completely split squarefree members of the pencil, `doubleRootMembers` the
 number of members with a rational double root and a distinct rational simple root, and
 `cubeMembers` the number of members that are perfect cubes of a rational linear form.
-The count relation is proved by summing the rational roots of the residual quadratic over
-the points of the projective line, one pencil member at a time; the branch budget is the
-tame Riemann--Hurwitz bound for a different of degree four. -/
+The count relation is proved by summing rational roots of the residual quadratic over the
+projective line, one pencil member at a time, and uses no characteristic hypothesis.  The
+`branchBudget` field records the general degree-four different bound; in characteristic two
+the separately hypothesized sharper budget `doubleRootMembers + cubeMembers ≤ 2` feeds the
+theorems whose names end in `of_characteristicTwoBranchBudget`. -/
 structure ExactSplitWitnessCount where
   fibreSquarePoints : ℕ
   splitMembers : ℕ
