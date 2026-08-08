@@ -196,12 +196,24 @@ oracle, but no matched-units baseline, so no speedup may be claimed against it.
 
 ### 5. Handoff of the drafted wording
 
-`notes/2026-08-07-c880-manuscript-wording.md` is complete and reviewed; C816
-owns promotion and may reject or reshape any draft. Two of its drafts (the
-seven-point rigidity remark and the second sentence of the verification
-paragraph) require the C880 certificates to move into
-`papers/clebsch-passages/verification/` first; the rest need no artifact
-migration.
+The drafted wording was promoted into Paper III on 2026-08-07 at explicit
+user instruction, ahead of the serialized route: Drafts 1--5, 8 and 9 are in
+`sections/05-golden-operator.tex`, `sections/10-references.tex`,
+`sections/08-verification.tex` and `literature-boundaries.md`, and the
+manuscript build gate passes warning-free at thirty pages, its expected page
+count re-pinned from twenty-nine in the same commit. Three referee passes are
+applied; the third judged the promoted text in context.
+
+Draft 6 and the exact adaptive constant were deliberately left out, and the
+reasoning is recorded under "Decision, 2026-08-07" in
+`notes/2026-08-07-c880-manuscript-wording.md`: the \(n-4\) is a property of
+one decoder rather than of the problem, the threshold \(n\ge19\) is where two
+loose bounds cross rather than where adaptivity starts helping, and the
+migration they need would put a new category of evidence on a release surface
+C824 owns. The manuscript claims \(\binom n2+O(n)\) instead, proved in the
+text from the paper's own theorem. Revisit only if open item 2 pins the
+second-order term, or if C824 adopts the rigidity-and-redundancy framing.
+C816 and C824 still own any reshaping of what is now in the manuscript.
 
 ## Working notes for whoever picks this up
 

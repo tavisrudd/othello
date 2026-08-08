@@ -541,6 +541,48 @@ decoder. The theorem statement itself is unchanged: the manuscript's family
 remains the one the proof uses, and the adaptive count is a remark about the
 model, not a replacement for the construction the faithfulness proof carries.
 
+## Decision, 2026-08-07: the exact adaptive constant stays out of the paper
+
+The referee's third pass offered two repairs for the promoted adaptive
+sentence. Repair (a), taken and now in the manuscript, claims
+\(\binom n2+O(n)\) and proves it in the text. Repair (b) would keep the exact
+\(\binom n2+n-4\) and the threshold \(n\ge19\), migrate the C880 generator
+and certificates into `papers/clebsch-passages/verification/`, and mark the
+bootstrap constant as certificate-checked. Repair (b) is declined, and so is
+Draft 6, which needs the same migration. The reasons, so that C816 and C824 do
+not reopen this without new information:
+
+1. **The constant is not sharp.** The adaptive complexity is pinned only to the
+   window between \(\binom n2-n\) and \(\binom n2+n-4\), of width \(2n-4\).
+   The \(n-4\) is a property of one decoder, not of the problem. Printing it
+   invites a reader to take it for the answer, which is the failure mode the
+   style guide's trust-boundary discipline exists to prevent.
+2. **The threshold is an artifact of two loose bounds crossing.** \(n\ge19\)
+   is where this decoder's upper bound passes under the entropy floor. It is
+   not the point at which adaptivity begins to help — adaptivity demonstrably
+   helps at seven points, where 22 beats the exact minimum 30 — so a printed
+   \(n\ge19\) would suggest that \(8\le n\le18\) is settled negatively when
+   it is simply open.
+3. **The mathematical content is the leading order, and it is already in.**
+   That the coherence restriction is free to leading order — both oracles at
+   \(n^2/2\) — is the whole of what this material says about the paper's
+   object, and repair (a) proves it from the paper's own theorem with no
+   artifact.
+4. **The cost is a new evidence category, not a manifest line.** The paper's
+   `verification` directory currently holds Lean axiom reports, source
+   closures, formal companions, the trust manifest, and the deterministic build
+   check. A Rust search generator with eleven JSON certificates would be a new
+   kind of evidence on a release surface that C824 owns, carried for a
+   second-order constant in a remark.
+
+What would change this: pinning the second-order term, so that a printed
+constant is a theorem about the problem rather than about one decoder — that is
+open item 2 of the task card. Or a decision by C824 to give the paper the
+rigidity-and-redundancy framing that
+`notes/2026-08-07-c880-alignment-separation.md` §7 recommends, in which the
+exact small-case values become part of the story rather than an aside, and
+Draft 6 is then worth its migration.
+
 ## Mystery ledger for item 7
 
 - **Settled here.** Whether the manuscript's \(O(n^2)\) sentence survives the
