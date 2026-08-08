@@ -211,8 +211,16 @@ lean/scripts/lean-build-queue.py build RelativeConicArcs.ZonalHarmonicDegreeSix 
 
 which reported `state: success`, `built RelativeConicArcs.ZonalHarmonicDegreeSix`
 and `gate-passed <aggregate>` in run directory
-`~/.cache/othello-lean-build/run-20260808-032547-4af15fc0`. Neither module has
+`~/.cache/othello-lean-build/run-20260808-032547-4af15fc0`, and again after the
+two Legendre lemmas below were added, in run directory
+`~/.cache/othello-lean-build/run-20260808-033322-dac35a6c`. Neither module has
 been added to any gate, so no paper gate build was run.
+
+Two consumer-facing lemmas were added to the second module after the first of
+those builds, for the Gram module that comes next: `legendreSix_one`, and
+`legendreSix_of_sq`, which rewrites a Legendre value through the square of its
+argument so that the sign of a chosen axis representative never has to be
+determined.
 
 One docstring was corrected after that build and the first module re-elaborated
 clean: the divisor `(d + 1)‼` of `normalizedMean` had been described as the
