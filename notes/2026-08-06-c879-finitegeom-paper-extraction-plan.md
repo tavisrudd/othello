@@ -437,6 +437,18 @@ remain required by each paper, the exact paper-specific modules safe to extract,
 the exact gate targets affected by a change. No source deletion, namespace rewrite,
 or repository split is authorized by this plan alone.
 
+The current metadata preflight is:
+
+```text
+python3 notes/scripts/c879_module_closure.py
+```
+
+It must pass before every execution chunk.  It rejects paper/repository/export
+inventory drift, changed gate closures, missing mapped sources or roots, duplicate
+target names, unresolved aliases, AME--LU coverage gaps, and Lean-tree drift from the
+mapping's immutable authority commit.  Passing this preflight certifies the planning
+snapshot, not declaration-level ownership or a build.
+
 ## Scope boundary
 
 This is a design and sequencing record. It does not authorize builds, certificate
