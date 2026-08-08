@@ -65,6 +65,36 @@ theorem charpoly_pairedTriangle (a b c ar br cr : R)
 
 section Complex
 
+/-- A real diagonal control embedded in complex matrix space. -/
+def realDiagonalControl {m : Type*} [DecidableEq m] (x : m → ℝ) : Matrix m m ℂ :=
+  diagonal fun i => (x i : ℂ)
+
+/-- A real diagonal control is Hermitian. -/
+theorem realDiagonalControl_conjTranspose {m : Type*} [DecidableEq m] (x : m → ℝ) :
+    (realDiagonalControl x)ᴴ = realDiagonalControl x := by
+  ext i j
+  by_cases h : i = j
+  · subst j
+    simp [realDiagonalControl, Matrix.conjTranspose_apply]
+  · simp [realDiagonalControl, Matrix.conjTranspose_apply, h, Ne.symm h]
+
+/-- The transfer block of a complex control between two ordered orthonormal
+frames. -/
+def hermitianTransferBlock {m ι : Type*} [Fintype m]
+    (D : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ) : Matrix ι ι ℂ :=
+  Qmᴴ * D * Qp
+
+/-- The Hermitian transfer Gram matrix is the compression of the
+control-conjugated complementary frame projection. -/
+theorem hermitianTransferBlock_gram {m ι : Type*} [Fintype m] [Fintype ι]
+    (D Pm : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ)
+    (hD : Dᴴ = D) (hQm : Qm * Qmᴴ = Pm) :
+    (hermitianTransferBlock D Qp Qm)ᴴ * hermitianTransferBlock D Qp Qm =
+      Qpᴴ * (D * Pm * D) * Qp := by
+  simp only [hermitianTransferBlock, Matrix.conjTranspose_mul,
+    Matrix.conjTranspose_conjTranspose, hD, Matrix.mul_assoc]
+  rw [← Matrix.mul_assoc Qm Qmᴴ, hQm]
+
 /-- The Hermitian triangle with upper-triangular entries `a`, `b`, `c` and
 their conjugates below the diagonal. -/
 def hermitianTriangle (a b c : ℂ) : Matrix (Fin 3) (Fin 3) ℂ :=
