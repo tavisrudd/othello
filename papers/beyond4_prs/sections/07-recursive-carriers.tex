@@ -2,7 +2,7 @@
 
 The finite-depth theorem reduces the uniform problem to the geometry of polar
 lines contained in the terminal bad locus.  We now determine that locus after
-reduction in each geometric fibre and show that all modular descendants merge
+reduction in each geometric fiber and show that all modular descendants merge
 into one linear carrier.
 
 For \(r\geq6\), put \(n=r-1\), and let the ground field have
@@ -16,17 +16,14 @@ An empty span denotes the empty projective scheme.  Let
 \(\cP_r\) be the rank-at-most-two consecutive catalecticant scheme in
 \(\PP(\Gamma^{r-1}E)\).
 
-The next three propositions prove the unconditional geometric layer.
-Proposition~\ref{prop:reduced-terminal-carrier} finds every reduced terminal
-component, Proposition~\ref{prop:maximal-lucas-union} merges all modular
-descendants, and Proposition~\ref{prop:recursive-component-selection}
-selects the components that can persist up the contraction tower.  On a first
-pass, the reader may take their statements together with the four-row
-component table in the proof of
+The next three propositions prove the unconditional geometric layer: they
+find every reduced terminal component, merge all modular descendants, and
+select the components that persist up the contraction tower.  On a first
+pass, read their statements and the four-row component table in
 Proposition~\ref{prop:recursive-component-selection}, then resume at
 Theorem~\ref{thm:recursive-carrier}.  The intervening elimination and
-characteristic-wise substitutions are the proof of component exhaustiveness;
-they introduce no additional hypothesis into the finite-depth theorem.
+characteristic-wise substitutions prove exhaustiveness and add no hypothesis
+to the finite-depth theorem.
 
 \begin{proposition}[Reduced terminal carrier]\label{prop:reduced-terminal-carrier}
 In bottom coordinates \(c=(c_0,\ldots,c_4)\), put
@@ -53,7 +50,7 @@ characteristic three it is the cone with \(c_2\) free and prime ideal
    c_0c_3^2-c_1^2c_4,\ c_3^3-c_1c_4^2).                   \tag{27}
 \]
 There is no flat reduced integral model having exactly these residual
-fibres.
+fibers.
 \end{proposition}
 
 \begin{proof}
@@ -103,7 +100,7 @@ z_3^2-9z_0z_5,\\
 If \(V\) denotes the seven-generator residual ideal printed below, exact
 reduction gives \(J\subseteq V\), \(3D\,V\subseteq J\), and
 \((J:D^\infty)=V\) over \(\mathbb Q\).  The factor \(3\) is necessary over
-\(\mathbb Z\), which is precisely why the characteristic-three fibre is
+\(\mathbb Z\), which is precisely why the characteristic-three fiber is
 checked separately.
 
 Outside characteristics two and three, elimination of the ordered residual
@@ -123,7 +120,7 @@ Here exhaustiveness is an exact elimination statement, not a visual
 factorization heuristic.  Certificate SC starts from the terminal
 ordered-root incidence ideal, saturates the collision factors, eliminates
 the root variables, and verifies the two generic primes and their
-characteristic-\(2,3\) fibres by Gröbner reduction.  Its public Python and
+characteristic-\(2,3\) fibers by Gröbner reduction.  Its public Python and
 Singular inputs are in
 \texttt{supplement/evidence/stable-components/}; every generator and
 remainder used for this conclusion is hash-pinned there.
@@ -303,7 +300,7 @@ Seroussi--Roth--Dür radius range, so split-free and deep coincide.  The count
 and orbit law are the persistent calculation already used at R6 and R7.
 \end{proof}
 
-The carrier theorem is fibrewise and reduced, and its finite-depth
+The carrier theorem is fiberwise and reduced, and its finite-depth
 consequence is explicitly conditional on the displayed lower packages.  It
 makes no assertion about nilpotent
 structure in a chosen integral incidence model, and in small characteristic
