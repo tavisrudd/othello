@@ -508,6 +508,12 @@ degree-eighteen moments have to be expanded.  The design's constants and its
 label-permutation word tables are certified by
 `notes/2026-08-07-c815-spherical-cubic-design-checks.py`.
 
+The design's first risk gate is passed:
+`RelativeConicArcs.SphericalCubicRestriction.normalizedMean_tetrahedralEvenHarmonic_cube`
+directly normalizes the fifty-five monomials of `Heven³` to
+`-1280/46189` under the default guarded profile.  No squared-coordinate moment
+helper is needed.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared

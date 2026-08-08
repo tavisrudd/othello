@@ -230,6 +230,13 @@ measure-theoretic identification named above.  The three assertions of the
 manuscript section that no inventory row covers are owned by C884.  None of the
 five modules is on a gate yet.
 
+The first cubic-restriction risk gate is green.  The new module
+`RelativeConicArcs.SphericalCubicRestriction` directly expands the fifty-five
+monomials of the even tetrahedral harmonic's cube and proves
+`normalizedMean_tetrahedralEvenHarmonic_cube`, with value `-1280/46189`, under
+the default guarded elaboration profile.  The squared-coordinate fallback in
+the design note is not needed.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.

@@ -65,11 +65,10 @@ The following supported checks passed on the audited tree:
 
 The task is not ready for closeout.  The sound order is:
 
-1. Prototype only `normalizedMean 18 (Heven ^ 3)` in the new
-   `SphericalCubicRestriction` module.  This is the sole measured elaboration
-   risk.  If normalization handles the fifty-five collected monomials, keep the
-   designed squared-coordinate proof; otherwise introduce the designed helper
-   for moments in squared coordinates before building any group layer.
+1. **Passed after the audit:** `normalizedMean 18 (Heven ^ 3)` elaborates in the
+   new `SphericalCubicRestriction` module by direct normalization of the
+   fifty-five collected monomials, with value `-1280/46189`.  The
+   squared-coordinate fallback is unnecessary.
 2. Complete `SphericalCubicRestriction`: the doubled-coordinate zonal formula,
    `Hodd`/`Heven` split, transposition vanishings, two surviving moments,
    rotation covariance, explicit permutation words, the three coefficient
@@ -104,8 +103,8 @@ Condon--Shortley conversion input and is not folded into C815.
 - **Settled:** the design constants, rationality of the marked cubic moment,
   the Gram cross-check, gate trust boundary, and all four operator rows agree
   across Lean, exact certificates and the formal maps.
-- **Open, measured gate:** whether direct `MvPolynomial` normalization of
-  `Heven ^ 3` is cheap enough.  The next prototype supplies the evidence.
+- **Settled after the audit:** direct `MvPolynomial` normalization of
+  `Heven ^ 3` is cheap enough under the default guarded profile.
 - **Open, proof obligation:** the analytic surface-integral bridge.  Owner:
   `SphereIntegralMoments` in C815.
 - **Open, release-contract debt:** completed OPER rows still carry a `partial`
@@ -114,4 +113,3 @@ Condon--Shortley conversion input and is not folded into C815.
 - **Open, promotion gate:** the weighted-Jacobian structural proof has no Lean
   declaration.  Owner: C815 before API freeze, so C816 can promote it without
   weakening the formal standard.
-
