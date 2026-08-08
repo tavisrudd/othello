@@ -638,4 +638,89 @@ theorem mixedSector_le_eight_fifths (a b c : ℝ)
 
 end MixedSectorBound
 
+section CubeVertexReduction
+
+/-- Membership in the real control cube. -/
+def InControlCube {ι : Type*} (x : ι → ℝ) : Prop :=
+  ∀ i, x i ∈ Set.Icc (-1 : ℝ) 1
+
+/-- A Boolean control has every coordinate at an endpoint of the real cube. -/
+def IsBooleanControl {ι : Type*} (x : ι → ℝ) : Prop :=
+  ∀ i, x i = -1 ∨ x i = 1
+
+/-- A function has coordinatewise endpoint domination if its value at every
+cube point is bounded by the larger value obtained by moving any chosen
+coordinate to one of the two endpoints.  Separate convexity implies this
+property. -/
+def CoordinatewiseEndpointDominated {ι : Type*} [DecidableEq ι]
+    (f : (ι → ℝ) → ℝ) : Prop :=
+  ∀ x, InControlCube x → ∀ i,
+    f x ≤ max (f (Function.update x i (-1))) (f (Function.update x i 1))
+
+theorem inControlCube_update_endpoint {ι : Type*} [DecidableEq ι]
+    {x : ι → ℝ} (hx : InControlCube x) (i : ι) {b : ℝ}
+    (hb : b = -1 ∨ b = 1) :
+    InControlCube (Function.update x i b) := by
+  intro j
+  by_cases hji : j = i
+  · subst j
+    rcases hb with rfl | rfl <;> simp
+  · simpa [Function.update, hji] using hx j
+
+/-- One endpoint-dominated coordinate can be moved to a Boolean endpoint
+without decreasing the function. -/
+theorem exists_endpoint_update {ι : Type*} [DecidableEq ι]
+    (f : (ι → ℝ) → ℝ) (hf : CoordinatewiseEndpointDominated f)
+    (x : ι → ℝ) (hx : InControlCube x) (i : ι) :
+    ∃ b : ℝ, (b = -1 ∨ b = 1)
+      ∧ InControlCube (Function.update x i b)
+      ∧ f x ≤ f (Function.update x i b) := by
+  have hmax := hf x hx i
+  by_cases hle : f (Function.update x i (-1)) ≤ f (Function.update x i 1)
+  · refine ⟨1, Or.inr rfl, inControlCube_update_endpoint hx i (Or.inr rfl), ?_⟩
+    simpa [max_eq_right hle] using hmax
+  · have hle' : f (Function.update x i 1) ≤ f (Function.update x i (-1)) :=
+      le_of_not_ge hle
+    refine ⟨-1, Or.inl rfl, inControlCube_update_endpoint hx i (Or.inl rfl), ?_⟩
+    simpa [max_eq_left hle'] using hmax
+
+/-- Endpoint domination on a finite cube reduces every value to a value at a
+Boolean vertex. -/
+theorem exists_booleanControl_ge {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (f : (ι → ℝ) → ℝ) (hf : CoordinatewiseEndpointDominated f)
+    (x : ι → ℝ) (hx : InControlCube x) :
+    ∃ y : ι → ℝ, InControlCube y ∧ IsBooleanControl y ∧ f x ≤ f y := by
+  have aux : ∀ (s : Finset ι) (x : ι → ℝ), InControlCube x →
+      ∃ y : ι → ℝ, InControlCube y
+        ∧ (∀ j ∉ s, y j = x j)
+        ∧ (∀ j ∈ s, y j = -1 ∨ y j = 1)
+        ∧ f x ≤ f y := by
+    intro s
+    induction s using Finset.induction_on with
+    | empty =>
+        intro x hx
+        exact ⟨x, hx, by simp, by simp, le_rfl⟩
+    | @insert i s hi ih =>
+        intro x hx
+        rcases exists_endpoint_update f hf x hx i with ⟨b, hb, hxb, hfxb⟩
+        rcases ih (Function.update x i b) hxb with ⟨y, hy, hout, hbool, hby⟩
+        refine ⟨y, hy, ?_, ?_, hfxb.trans hby⟩
+        · intro j hj
+          have hjs : j ∉ s := fun h => hj (Finset.mem_insert_of_mem h)
+          have hji : j ≠ i := fun h => hj (h ▸ Finset.mem_insert_self i s)
+          rw [hout j hjs]
+          simp [Function.update, hji]
+        · intro j hj
+          rcases Finset.mem_insert.mp hj with hji | hjs
+          · have hjns : j ∉ s := by
+              intro hjs
+              exact hi (hji ▸ hjs)
+            rw [hout j hjns]
+            simpa [Function.update, hji] using hb
+          · exact hbool j hjs
+  rcases aux Finset.univ x hx with ⟨y, hy, _, hbool, hfy⟩
+  exact ⟨y, hy, fun i => hbool i (Finset.mem_univ i), hfy⟩
+
+end CubeVertexReduction
+
 end RelativeConicArcs.HermitianConferenceExchange
