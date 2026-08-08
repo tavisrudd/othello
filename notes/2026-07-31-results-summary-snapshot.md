@@ -69,9 +69,11 @@ The results are grouped as follows.
     odd projective planes.
 
 The first four sections are the four numbered papers of the Clebsch series, in
-that order. The three released papers carry the titles under which versions one
-and two were published; where a forward version has changed a title, the
-section says so.
+that order. The five-paper Clebsch portfolio also includes the separately titled
+MDS--CSS transversal-groups companion, whose Clebsch code is a worked
+application rather than a fifth numbered series installment. The three released
+series papers carry the titles under which versions one and two were published;
+where a forward version has changed a title, the section says so.
 
 ## *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus*
 

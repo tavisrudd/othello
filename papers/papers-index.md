@@ -8,10 +8,11 @@ paper-specific rulings supersede its count where stated below. The
 provisional Baer + completion merge was superseded by the focused Baer/Q25
 ruling on 2026-07-14, dihedral bundles the D₂ₘ family, continuation is
 N1-only, and coding proceeded after its internal audit. **Clebsch is a
-four-paper program:** rigidity Paper I, factorization Paper II, `passages`
-Paper III, and the q13 passant-code Paper IV. Papers I--III have GitHub/DOI
-v1 and v2 releases; later changes are forward versions. The `golden` lane
-feeds future Paper-III versions and is not a fifth numbered paper. The former
+five-paper portfolio:** rigidity Paper I, factorization Paper II, `passages`
+Paper III, q13 passant-code Paper IV, and the separately titled MDS--CSS
+transversal-groups companion. Papers I--III have GitHub/DOI v1 and v2
+releases; later changes are forward versions. The `golden` lane feeds future
+Paper-III versions and is not a sixth paper. The former
 37-page mega-paper is not being published and is retained at
 `archive/papers/clebsch-hexagon-code`. See
 `notes/handoffs/2026-07-13-clebsch-paper.md` for the current order and
@@ -200,7 +201,7 @@ Transversal Clifford Groups of MDS--CSS Codes*
 *Common parentage:* all descend from "Package 2" in `../notes/2026-07-10-codex-publishable-spinout-audit.md`
 and share the `lean/FiniteGeom/` base. The Clebsch program is the exception:
 Paper I descends from the `arcs` q=11 witness
-(`comp-q11-mds-deep-holes`) rather than from Package 2, and the three
+(`comp-q11-mds-deep-holes`) rather than from Package 2, and the four numbered
 Clebsch candidates share that witness's `lean/RelativeConicArcs/` library
 rather than owning one.
 Primary venue fit is Designs, Codes and Cryptography / Finite Fields and Their Applications, with

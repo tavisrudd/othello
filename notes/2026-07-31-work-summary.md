@@ -22,12 +22,13 @@ and completion-distance theory about geometric *legality* rather than game value
 carries a **publication portfolio alongside the open game programme**. Its original seven-paper
 backbone and two OEIS entries have expanded through the Clebsch and projective Reed–Solomon work and
 include a quantum-information branch on MDS–CSS AME states, local-unitary rigidity, and transversal
-Clifford groups (see §3, §7, §8). The Clebsch work is a **four-paper numbered series**: rigidity,
-factorization, the passages paper *Golden descent and operator realizations of the Clebsch cubic*,
-and the q13 passant-code paper. The first three released versions one and two share the title-page
-identity *The Clebsch cubic: recovering, orienting, and realizing*; the q13 paper is the active new
-build. The golden conference operator material is **not** a fifth numbered paper — it is a
-source-development lane feeding future forward versions of the passages paper.
+Clifford groups (see §3, §7, §8). The Clebsch work has a **five-paper portfolio**: the four-paper
+numbered series of rigidity, factorization, the passages paper *Golden descent and operator
+realizations of the Clebsch cubic*, and the q13 passant-code paper, plus the companion *Diagonal
+Isoduality and Transversal Clifford Groups of MDS--CSS Codes*. The first three released versions one
+and two share the title-page identity *The Clebsch cubic: recovering, orienting, and realizing*;
+the q13 paper is the active new build. The golden conference operator material is **not** a sixth
+paper — it is a source-development lane feeding future forward versions of the passages paper.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -1080,8 +1081,8 @@ The remaining headline Clebsch-facing results and censuses are:
 
 ### The golden conference operator source programme
 
-**Not a paper.** This material was once carved out as a fourth Clebsch-family manuscript; under the
-2026-08-01 four-paper decision it is a source-development lane whose mathematics is selectively
+**Not a paper.** This material was once carved out as a Clebsch-family manuscript; under the
+2026-08-01 portfolio decision it is a source-development lane whose mathematics is selectively
 integrated into forward versions of the passages paper. The first integration took the
 source-operator-cubics-harmonic core and left the quantum, anomaly, Majorana, Coble–Burkhardt,
 exceptional-lattice, doily, and higher-conference branches as inventory. Read the priority note at
@@ -2155,8 +2156,8 @@ so it stays inspectable — a better answer than waiting.
 The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." An initial
 packaging review resolved the then-existing body of work into **seven papers in ship order + two
 OEIS entries**, staged under `papers/` with per-paper status maps. That fixed count is now
-historical: the Clebsch work has resolved into a four-paper numbered series with a separate source
-lane behind it, while the projective Reed–Solomon theorem programme has become a major paper-scale
+historical: the Clebsch work has resolved into a five-paper portfolio (four numbered series papers
+plus the MDS--CSS companion) with a separate source lane behind it, while the projective Reed–Solomon theorem programme has become a major paper-scale
 track of its own. The table below remains the original release-order backbone, not a current count
 of every candidate manuscript.
 
@@ -2228,7 +2229,9 @@ The public series has exactly **four numbered papers**: rigidity, factorization,
 with released versions one and two immutable under the earlier title *Arithmetic and harmonic
 realizations of the Clebsch cubic*), and the q13 passant-code paper. The first three have GitHub and
 DOI releases at versions one and two; further strengthening is by forward version only. The q13
-paper is the active new build. **The golden conference operator is no longer a manuscript** — it is
+paper is the active new build. The fifth portfolio paper is the separately titled MDS--CSS
+transversal-groups companion, whose Clebsch code is a worked application rather than a fifth
+numbered series installment. **The golden conference operator is no longer a manuscript** — it is
 a source-development lane feeding forward versions of the passages paper, and its first integration
 took only the source-operator-cubics-harmonic core plus the determinant-versus-permanent boundary.
 Its exchange-statistics material sits in a separate lane-local companion, written as a design-limit
