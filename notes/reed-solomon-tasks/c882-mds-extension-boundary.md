@@ -126,28 +126,34 @@ wherever the quantum consequence is advertised; the claim--proof--novelty ledger
 fields state the extension semantics; the AME/local-unitary companion paper that imports
 the row; and published Version 1, which carries the same corollary.
 
-## What must be checked, in order
+## Checklist, closed
 
-1. ~~Read Kaipa 2017 Section IV and Proposition 4 at full text.~~  Done; quoted above.
-   Cache key `arXiv:1612.05447`.
-2. Read Dür 1994 for the equivalence in its own terms rather than through Kaipa's
-   restatement.  **Access blocked**: Discrete Mathematics 126 (1994), no. 1--3, 99--105,
-   DOI `10.1016/0012-365X(94)90256-9`, "On the covering radius of Reed--Solomon codes";
-   OpenAlex reports it closed with no repository full text, and it predates arXiv.  Kaipa's
-   verbatim restatement is strong secondary evidence, so this reading confirms rather than
-   decides; it is still required before a correction is published.
-3. Decide which of three outcomes holds: the extension sentences are correct as stated
-   under a hypothesis the manuscript does satisfy; they are correct for a different
-   extension notion than the one Kaipa rules out (for instance extension of the code
-   rather than of its dual, or a column added to a different generator matrix); or they
-   are wrong.
-4. If wrong, determine what survives of the \(q=8\) corollary.  The exact count of
-   \(1116\) split-free directions is certificate-backed and independent of the extension
-   reading; what is at stake is the passage from those directions to MDS extensions and
-   from there to the quantum consequences.
-5. Propagate to `RuddAMELU2026`, which imports the row, and to the balanced-quantum Lean
-   closure `RelativeConicArcs.Gates.PRSBalancedQuantumExtension`, whose structure fields
-   state the extension semantics.
+1. **Kaipa 2017, Section IV and Proposition 4, at full text.**  Done; his statement of
+   Dur's theorem is quoted above.  Cache key `arXiv:1612.05447`.
+2. **Dur 1994 in its own terms.**  Done.  The user supplied the paper on 2026-08-07; cache
+   key `10.1016/0012-365X(94)90256-9`, SHA-256
+   `b28e0b84b00255aadf38d6f6b8d2204a76228f5acc0eacb73066cd40401ed9b1`, 7 pages.  His
+   abstract and Theorem 2.4 give the equivalence directly, and his Theorem 2.2 attaches
+   \((q+2)\)-arcs to vectors at distance \(d-1\), the radius that does not occur here.
+   The access block recorded earlier is cleared.
+3. **Which outcome holds.**  The third: the extension sentences are wrong, by one column.
+   The diagnosis is above.
+4. **What survives.**  The \(1116\) count, as a deep-hole count; the orbit and balance
+   structure as statements about syndrome orbits; and, in place of the false claim, the
+   true statement that no one-column MDS extension exists at any redundancy classified
+   here.  The corollary is not recoverable: a \([10,5,6]_8\) MDS code would be a
+   \(10\)-arc in \(PG(4,8)\), where the maximum is nine, and the extension correspondence
+   needs \(\rho=r\), which does not hold at any redundancy in the paper's range.
+5. **Propagation.**  Done.  The Lean closure carries an explicit coverage restriction
+   naming Dur and Kaipa; neither `RuddAMELU2026` nor the MDS--CSS transversal-groups paper
+   cites the beyond-four paper or instantiates the row, so no companion edit was needed or
+   made.
+
+## Remaining
+
+One item, and it is a decision rather than work: **whether published Version 1 receives an
+erratum.**  It carries the same corollary, at release commit `0d3cea2` with Zenodo version
+DOI `10.5281/zenodo.21682216`.  Nothing else in this task is open.
 
 ## Boundary
 
