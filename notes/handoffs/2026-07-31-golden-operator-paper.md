@@ -634,6 +634,14 @@ proves `Re tr(KᴴK)≤9/5` on `[-1,1]^6`.  These two new registered terminals m
 the intended surface thirty-four terminals.  Higher moments, minors,
 determinant equality, and the generated-fact quiet window remain open.
 
+The Boolean-vertex completeness argument is now kernel checked in reusable
+form: Mathlib coordinate convexity gives endpoint domination, and finite-set
+induction reaches a Boolean control without lowering the objective.  The two
+registered terminals make the intended Golden surface thirty-six terminals.
+For `p2`, only Schatten-fourth coordinate convexity and the four vertex values
+remain before this reduction yields `33/25`; the generated fact is still the
+older twenty-five-terminal checkpoint pending a quiet aggregate build.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

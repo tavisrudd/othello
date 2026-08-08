@@ -253,6 +253,15 @@ fourth-power convexity/Boolean reduction, then the separately convex minor and
 determinant bounds and equality cases.  The active mystery is no longer the
 first-moment normalization or complex frame semantics.
 
+The finite-cube completeness mechanism for the higher moments is now formal.
+`CoordinatewiseConvexOnCube` uses Mathlib's `ConvexOn`; the interval maximum
+principle proves coordinatewise endpoint domination, and a Finset induction
+constructs a Boolean control with objective value at least that of the original
+cube point.  These two registered terminals bring the intended surface to
+thirty-six terminals.  For `p2`, the residual is now exactly the
+Schatten-fourth coordinate-convexity theorem plus the four Boolean support-size
+values; vertex completeness itself is no longer trusted prose.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

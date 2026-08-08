@@ -214,7 +214,11 @@ cases, and literature inputs are explicit in the formal interface.
       `e1`, `e2` bounds is proved, and the actual transfer first-moment bound
       `p1≤9/5` is complete.  The higher matrix-to-control bounds remain.
 - [ ] Formalize the separate-convexity and rank-one-minor reductions.
+      The general coordinatewise-convex finite-cube reduction is complete;
+      Schatten-fourth and minor-specific convexity remain.
 - [ ] Prove the Boolean reduction.
+      Complete for every coordinatewise-convex real objective on a finite cube;
+      application to each matrix objective remains.
 - [ ] Characterize every equality case.
 - [ ] Prove that exactly twenty balanced Boolean controls jointly maximize
       all three degree-three sectors.
