@@ -17,12 +17,67 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
-**Next-session entry:** replace the census with an exact mechanism.  The saturated gate
-is: *no clique of size \((q+3)/2\) in the Paley graph of order \(q^2\) is completely
-joined, outside a perfect matching, to its Frobenius image.*  The affine-line case
-(Theorem 2), the two published clique orbits (Theorem 4), and every \(q\le43\) plus
-every \(q\equiv3\pmod4\) up to \(151\) are already closed; see
-`notes/2026-08-02-c756-crown-reformulation-and-line-case.md`.
+## Reviewed publication route (2026-08-08)
+
+**Decision:** replace the Paley-clique bound as the primary gate by equality in the
+general binary passant incidence code.  For the nonsingular conic over odd \(q\), let
+\(M_q\) be the passant-by-internal-point incidence matrix and
+\(K_q=\ker_{\mathbb F_2}M_q\).  The first pass is to record and audit the elementary
+bridge
+\[
+ d(K_q)\ge (q+3)/2,
+\]
+with equality precisely when the support is a \((q+3)/2\)-point internal arc whose
+pairwise joins are external.  Thus proving that equality occurs only for \(q=5\), with
+the projective four-frame, closes the saturated-internal branch.  This target is
+strictly more reusable than the crown formulation: it is intrinsic projective geometry,
+connects directly to Paper IV's passant code, and does not require condition (A) or a
+Paley normalization.
+
+The second exact input to record in that pass is the external-line triangle holonomy.
+If three internal points on an external line are normalized by norm-minus-one roots
+\(z_i\), then
+\[
+ \prod_{i<j}N(z_i-z_j)
+ =\left(\frac{(z_1-z_2)(z_2-z_3)(z_3-z_1)}{z_1z_2z_3}\right)^2,
+\]
+and the factor in parentheses has Frobenius conjugate equal to its negative.  Its square
+is therefore a nonsquare in \(\mathbb F_q\).  Consequently the orientation signs around
+an external-line triple multiply to \(-1\); in particular, for \(q\equiv3\pmod4\), the
+canonical extremal clique \(C_\ell\cup\{\ell^\perp\}\) cannot satisfy condition (A).
+This is a useful exact exclusion, not by itself the classification.
+
+**Bounded execution plan:**
+
+1. Prove the two bridges above in a dated reproducible note, check the equality statement
+   by exhaustive binary-code computation in the smallest fields, and perform a focused
+   source audit of the Droms--Mellinger--Meyer lower/equality results before making any
+   novelty claim.
+2. Put the equality problem, not merely the clique number of \(\Gamma_q\), on the
+   elliptic association scheme already used by Paper IV.  Compute exact small-field
+   orbital data over both primes and extensions, then seek a symbolic rational
+   Delsarte/PSD certificate uniform in \(q\).  Ordinary one-matrix ratio bounds are
+   deprioritized: at \(q=9\) they give about \(9\) against the true clique number \(5\).
+3. Stop this route after two bounded certificate passes if the active dual support does
+   not stabilize or if the certificate complexity grows with \(q\).  Do not turn a
+   numerical SDP pattern into a theorem without an exact symbolic certificate.
+4. If the equality classification lands, close the complete saturated classification
+   and open a separate, unnumbered Clebsch companion-paper task; the live handoff fixes
+   exactly four numbered papers.  Only then return to the nonsaturated masked
+   Rédei target \(h\ge1\) for the full all-\(k\) theorem.
+
+**Publishable fallback:** if the equality gate fails the bounded stop rule, scope a
+specialist partial-results companion after source audit: all-\(k\) structural bounds,
+the complete saturated-external classification, the code/crown reformulation, Baer
+exclusion, mixed moments, and bounded-field evidence.  This fallback must state the
+saturated-internal and nonsaturated gaps explicitly.  The present literature audit is
+not publication-ready: the older Paley report predates the audit conventions, the
+BEHW/Blokhuis chain is not source-complete, MathSciNet coverage is missing, and the
+general passant-code equality cases require a focused predecessor check.
+
+**Next-session entry:** execute step 1, then use its output to specify the smallest exact
+association-scheme certificate problem.  Preserve the crown gate below as an equivalent
+coordinate model and as diagnostic evidence, not as the first proof target.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
