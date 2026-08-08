@@ -374,4 +374,82 @@ theorem hermitianFrontier_mixed_endpoint (t : ℝ) :
 
 end ParetoGeometry
 
+section MixedSectorBound
+
+/-- The elementary three-variable inequality underlying the continuous-control
+bound for the mixed Schur sector.  The variables need only be nonnegative; the
+spectral upper bounds enter through their first two elementary invariants. -/
+theorem mixedSector_le_eight_fifths (a b c : ℝ)
+    (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
+    (he1 : a + b + c ≤ 9 / 5)
+    (he2 : a * b + a * c + b * c ≤ 24 / 25) :
+    (a + b + c) * (a * b + a * c + b * c) - a * b * c ≤ 8 / 5 := by
+  let u := a + b
+  let v := a * b
+  let w := 9 / 5 - c
+  have hu : 0 ≤ u := by dsimp [u]; positivity
+  have huw : u ≤ w := by dsimp [u, w]; linarith
+  have hw : 0 ≤ w := hu.trans huw
+  have hvSquare : v ≤ u ^ 2 / 4 := by
+    dsimp [u, v]
+    nlinarith [sq_nonneg (a - b)]
+  have hvE2 : v ≤ 24 / 25 - c * u := by
+    dsimp [u, v]
+    nlinarith
+  have hsector :
+      (a + b + c) * (a * b + a * c + b * c) - a * b * c =
+        u * v + c * u ^ 2 + c ^ 2 * u := by
+    dsimp [u, v]
+    ring
+  rw [hsector]
+  by_cases hsmall : c ≤ 1 / 5
+  · have huv : u * v ≤ u * (u ^ 2 / 4) :=
+      mul_le_mul_of_nonneg_left hvSquare hu
+    have hu2 : u ^ 2 ≤ w ^ 2 := by
+      have hprod : 0 ≤ (w - u) * (w + u) :=
+        mul_nonneg (sub_nonneg.mpr huw) (add_nonneg hw hu)
+      nlinarith
+    have hu3 : u ^ 3 ≤ w ^ 3 := by
+      have hprod : 0 ≤ (w - u) * (w ^ 2 + w * u + u ^ 2) :=
+        mul_nonneg (sub_nonneg.mpr huw) (by positivity)
+      nlinarith
+    have hcu2 : c * u ^ 2 ≤ c * w ^ 2 :=
+      mul_le_mul_of_nonneg_left hu2 hc
+    have hc2u : c ^ 2 * u ≤ c ^ 2 * w :=
+      mul_le_mul_of_nonneg_left huw (sq_nonneg c)
+    have hc2bound : c ^ 2 ≤ (1 / 5 : ℝ) ^ 2 := by
+      have hprod : 0 ≤ (1 / 5 - c) * (1 / 5 + c) :=
+        mul_nonneg (sub_nonneg.mpr hsmall) (by positivity)
+      nlinarith
+    have hquad : 25 * c ^ 2 + 50 * c - 71 ≤ 0 := by
+      nlinarith
+    have hfactor : 0 ≤ (5 * c - 1) * (25 * c ^ 2 + 50 * c - 71) :=
+      mul_nonneg_of_nonpos_of_nonpos (by linarith) hquad
+    calc
+      u * v + c * u ^ 2 + c ^ 2 * u
+          ≤ u * (u ^ 2 / 4) + c * u ^ 2 + c ^ 2 * u := by linarith
+      _ ≤ w ^ 3 / 4 + c * w ^ 2 + c ^ 2 * w := by
+        nlinarith
+      _ ≤ 8 / 5 := by
+        dsimp [w]
+        nlinarith
+  · have hlarge : 1 / 5 ≤ c := le_of_not_ge hsmall
+    have huv : u * v ≤ u * (24 / 25 - c * u) :=
+      mul_le_mul_of_nonneg_left hvE2 hu
+    have hcoef : 0 ≤ 24 / 25 + c ^ 2 := by positivity
+    have hmono : u * (24 / 25 + c ^ 2) ≤ w * (24 / 25 + c ^ 2) :=
+      mul_le_mul_of_nonneg_right huw hcoef
+    have hfactor : 0 ≤ (5 * c - 4) ^ 2 * (5 * c - 1) :=
+      mul_nonneg (sq_nonneg _) (by linarith)
+    calc
+      u * v + c * u ^ 2 + c ^ 2 * u
+          ≤ u * (24 / 25 - c * u) + c * u ^ 2 + c ^ 2 * u := by linarith
+      _ = u * (24 / 25 + c ^ 2) := by ring
+      _ ≤ w * (24 / 25 + c ^ 2) := hmono
+      _ ≤ 8 / 5 := by
+        dsimp [w]
+        nlinarith
+
+end MixedSectorBound
+
 end RelativeConicArcs.HermitianConferenceExchange
