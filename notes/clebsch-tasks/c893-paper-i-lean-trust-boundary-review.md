@@ -2,9 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active 2026-08-08; independent review only.  This task may write its
-audit records and lifecycle docs, but it does not own repairs to Lean,
-manuscript, verification, export, package, or standalone-release files.
+**Status:** complete 2026-08-08; independent review verdict **MAJOR**.  Full
+report: `notes/2026-08-08-c893-paper-i-lean-trust-boundary-review.md`.  No Lean,
+manuscript, verification, export, package, or standalone-release file was
+edited; all remediation remains owned by C855.
 
 ## Objective
 
