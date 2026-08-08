@@ -44,8 +44,8 @@ For every prime power `q=p^e` and every `m≥2`, each product-unitary
 intertwiner between additive stabilizer `AME(2m,q)` states is Clifford on
 every party. The support bijections on `(m+1)`-party marginals form a
 minimum-support atlas which classifies the residual local symplectic frames.
-The Choi interpretation gives a factorwise transversal Clifford no-go for the
-associated stabilizer `[[2m-1,1,m]]_q` encoders.
+The Choi interpretation gives factorwise transversal Clifford rigidity for
+conversions between the associated stabilizer `[[2m-1,1,m]]_q` encoders.
 
 For an approximate product symmetry with defect `ε`, three-region cleaning
 and Weyl--Fourier rounding put every local factor within normalized

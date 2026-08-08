@@ -38,7 +38,8 @@ This map covers Paper I after the two-paper split. Results owned by
   symmetry-group extension.
 - `lem:pauli-phase-correction`: product-Pauli correction after the label
   Lagrangian is matched.
-- `cor:transversal-clifford`: factorwise transversal Clifford no-go.
+- `cor:transversal-clifford`: factorwise transversal rigidity for encoder
+  conversions.
 - `thm:quantitative-rounding`: introduction-level quantitative theorem.
 - `lem:quantitative-cleaning-commutator` and `lem:nested-weyl-rounding`:
   leakage-aware cleaning and finite Weyl--Fourier concentration.

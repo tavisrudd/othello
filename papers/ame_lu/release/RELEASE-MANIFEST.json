@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 300290,
+        "bytes": 304519,
         "path": "ame-lu.pdf",
-        "sha256": "45f707bd0119ce8cb9ae9aa5610252f731e5d27dc29bf653e9b9810d203d34d6"
+        "sha256": "db6625d001c07dcc7a311fe9c3b2090de14f660dca20a61ec78bef8c6f016dfb"
       },
       {
         "bytes": 2646,
@@ -41,14 +41,14 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5174,
+        "bytes": 5203,
         "path": "main.tex",
-        "sha256": "b33ccd590a331dfa1b6b3776afc876c8ddf35bfdeef1e537a103225175b9b70c"
+        "sha256": "5526c93a86bed003285adf5461fb4d6a14da8686de9b5610b6e0c5976bcee409"
       },
       {
-        "bytes": 21350,
+        "bytes": 21892,
         "path": "refs.bib",
-        "sha256": "47eac5800d57548080d4d7fe5bc2a1d110ac176fa3b9763834283d30c976c6d9"
+        "sha256": "59706be38bb14f836d2b05d49b45db96ee28ffe7291c46455c0d0b9f6cf42287"
       },
       {
         "bytes": 8724,
@@ -56,9 +56,9 @@
         "sha256": "9188f8fa51317eea3babed82c650d5fff1249dac566ef52c4b20b8b60971a82e"
       },
       {
-        "bytes": 8358,
+        "bytes": 9509,
         "path": "sections/01-introduction.tex",
-        "sha256": "8627c93cc4c063b8983068e0bc0279fd58b10eff51b6fe8264c92ccf7b782b3d"
+        "sha256": "edc5069fa4b8f2e71dc1bde83e5a671679495918a893d8e9f00fbde4efdbc879"
       },
       {
         "bytes": 2784,
@@ -71,9 +71,9 @@
         "sha256": "efad615112ef752704c3eea2cbf4b81169ae7aa569e0f5d6fbffb00ce553c2e2"
       },
       {
-        "bytes": 14614,
+        "bytes": 14855,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "e15b4de1537897fa86f2a4943b80b80fc1adf56b7155ff28f086f6377d372207"
+        "sha256": "2aac8f1979ab7a92517bd4e2349a7050374ac04618605cf2729fb94ff71ae16e"
       },
       {
         "bytes": 1638,
@@ -91,12 +91,12 @@
         "sha256": "6575b473197e63d1bfb535a6807f10cc07405baa09e7a2889f0bbefee824e71b"
       },
       {
-        "bytes": 62262,
+        "bytes": 62919,
         "path": "sections/B-secondary-quantitative.tex",
-        "sha256": "4b37abcabe21434092ae82b21a40250b9ae822061ed121d3dc74eca10d8af8c6"
+        "sha256": "51258d4ac34d2d09f76695df0672bee2bad7f5b93e6d608b372f73ed7e013d18"
       }
     ],
-    "tree_sha256": "1f1ea11f2d7dab639187c4cb70158c4aa4ed5b9a06a196dbb7184d3ed3b83c25"
+    "tree_sha256": "a539692f45c24a1909a0e0b1454525694ed40076149f4509961f37482df75ddd"
   },
   "formal_companion": {
     "artifacts": [
