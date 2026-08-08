@@ -25,8 +25,6 @@ ordering and detail.
 
 ### `ame-lu`
 
-- **C888 `[ame-lu]` [ACTIVE; SECOND EXTERNAL REVIEW]** — independently vet and remediate the second referee-style review of the AME rigidity/MDS--CSS paper pair: verify the additional Ian Tan citation; audit the companion against Tansuwannont--Takada--Fujii, Dasu--Burton, Sayginel et al., and the claimed August 2026 Victor Albert preprint; harden the coherent Weil-lift phase/character argument; repair stale Theorem 1.1 references; cross-check the owning Lean comments and trust boundary; rebuild, release-check, and guarded-export both standalones without pushing or depositing → `notes/2026-08-08-c888-ame-pair-second-review.md`.
-
 Source material for C774--C777 is the external Fable session note
 `approximate_rigidity_of_2uniform_states.md`, catalogued against the local corpus in
 `notes/2026-08-01-external-chat-artifact-gap-review.md`. Its scripts were not supplied, so every

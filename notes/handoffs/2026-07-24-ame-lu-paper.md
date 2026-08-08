@@ -10,12 +10,17 @@ Discovery companion:
 
 ## Current status
 
-**C888 active (2026-08-08): second external-review validation.**  The supplied
-follow-up withdraws the AME correctness objections and identifies one possible
-Tan citation plus companion related-work, coherent Weil-phase, and stale
-Theorem 1.1-reference repairs.  Every claim is being rechecked against primary
-sources, current source/PDFs, and the owning Lean comments before adoption.
-No push, deposit, or submission is authorized.  Scope and gates:
+**C888 closed (2026-08-08): both follow-up reviews are remediated and
+exported.**  The MDS paper now distinguishes its site-dependent product
+implementations from the uniform Rains/Dasu--Burton/Prakash--Singhal
+frameworks, proves the common torus blocks explicitly, records the nonsquare
+outer-automorphism obstruction to uniformization, and directly credits the
+Tan and Sayginel bridges.  The Weil character calculation and theorem
+numbering are repaired, the additional six-qubit Tan citation is in both
+relevant bibliographies, and the unchanged Lean boundary was re-audited.
+Both warning-free release gates and the complete MDS evidence replay pass.
+Clean unpushed mirrors are at `d6ca9e5` (AME) and `c5f6cec` (MDS).  No push,
+deposit, tag, or submission was made.  Full audit:
 `2026-08-08-c888-ame-pair-second-review.md`.
 
 **C887 closed (2026-08-08): referee remediation is locally releasable.**  The

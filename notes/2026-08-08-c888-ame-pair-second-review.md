@@ -2,7 +2,7 @@
 
 **Lane:** `ame-lu`
 
-**Status:** active.
+**Status:** complete; both local standalone mirrors synchronized and unpushed.
 
 ## Objective
 
@@ -117,3 +117,27 @@ edited by hand, and paper-facts checks report no errors or staleness.
   `b0e99b22cbcb0006396cead37e5090a82674e68e65966fdeb3d28f423f185129`;
   72 formal artifacts, tree
   `fd9279edd28abb23b13d01ad1070801771aced5c9ae306b8975cb69d1d65f929`.
+
+## Standalone export closeout
+
+Both guarded plans and audits at immutable authority commit
+`3996cb3678e9ae6d58c5c3bccc1e3d60987c2dc1` reported zero private-reference
+findings.  The existing clean mirrors were synchronized, force-rebuilt, checked
+against their paper-local release manifests, checked again against their
+canonical export manifests, and committed:
+
+- AME--LU: mirror commit
+  `d6ca9e564d4e5b9e775a25e768741a12da92a137`, export-manifest SHA-256
+  `f2c0ec6af5b95f1b3f5bc8b2adaf4ad48b1a2fcc4e9973a565d214e2a6709236`,
+  PDF SHA-256
+  `239d97a02d617354c07fd3ee4675916329ea1fc86a9ec26afab08fd432a353aa`;
+- MDS--CSS: mirror commit
+  `c5f6cec1a600695ae35df9eba7bd81cdab19919a`,
+  export-manifest SHA-256
+  `4409b2f0a54bfbb6048b55bba8f462a69d4626177ac5c891bc8241195863f4ea`,
+  PDF SHA-256
+  `ad97bc1747e3367ebb4ff91d58081336927d27c7db6b88fe51aa97a10b7b41ff`.
+
+Both mirrors are clean.  Nothing was pushed, deposited, tagged, or submitted.
+The discovery-track discriminator produced no incidental lead beyond the
+reviewed and adopted scope distinctions, so no companion-log entry was added.
