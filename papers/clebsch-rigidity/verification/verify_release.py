@@ -14,29 +14,11 @@ import re
 
 
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
-# The Paper I sources are split across two repositories, and the identity check must follow that
-# split.  `git diff <commit> -- <path>` over a path a repository does not carry reports no
-# difference, so one list checked against one checkout would pass vacuously for every source that
-# lives in the other.  The dependency-owned half is therefore checked against a finitegeom checkout
-# when one is supplied, and reported unchecked by name when it is not.
-LEAN_SCHOLARLY_PATHS = (
-    "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-    "RelativeConicArcs/Q11A5PointOrbits.lean",
-    "verification/clebsch_rigidity_trust/axiom-audit.txt",
-)
-FINITEGEOM_SCHOLARLY_PATHS = (
-    "RelativeConicArcs/Q11Coding.lean",
-    "RelativeConicArcs/Q11DecodingSynthesis.lean",
-    "RelativeConicArcs/Q11CodeRigidityBridge.lean",
-    "RelativeConicArcs/Q11BrianchonClassification.lean",
-    "RelativeConicArcs/Q11RigiditySpine.lean",
-    "RelativeConicArcs/SixArcDefectBridge.lean",
-    "RelativeConicArcs/SixArcDegenerateConicExclusion.lean",
-    "RelativeConicArcs/Q11DyeConsequences.lean",
-    "RelativeConicArcs/ClebschChordDefect.lean",
-    "RelativeConicArcs/Q9Sylvester.lean",
-    "RelativeConicArcs/SmallKChordMoments.lean",
-    "RelativeConicArcs/SmallKGeometricBridge.lean",
+ROOT_GATE = "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
+PROJECT_PREFIXES = ("RelativeConicArcs.", "ProjectiveCap.", "CapGame.")
+AXIOM_AUDIT = "verification/clebsch_rigidity_trust/axiom-audit.txt"
+FORBIDDEN_LEAN_CODE = re.compile(
+    r"\b(?:sorry|admit|axiom|unsafe|native_decide)\b|\bdebug\.skipKernelTC\b"
 )
 
 
@@ -65,6 +47,115 @@ def run(
         stderr=subprocess.PIPE,
         timeout=timeout,
     )
+
+
+def module_path(module: str) -> Path:
+    return Path(*module.split(".")).with_suffix(".lean")
+
+
+def project_import_closure(
+    package_root: Path,
+    finitegeom_root: Path,
+    root_module: str = ROOT_GATE,
+) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Resolve the exact project-owned import closure across both Lean roots."""
+    pending = [root_module]
+    seen: set[str] = set()
+    package_paths: set[str] = set()
+    finitegeom_paths: set[str] = set()
+    while pending:
+        module = pending.pop()
+        if module in seen:
+            continue
+        seen.add(module)
+        relative = module_path(module)
+        package_path = package_root / relative
+        finitegeom_path = finitegeom_root / relative
+        if package_path.is_file():
+            source = package_path
+            package_paths.add(str(relative))
+        elif finitegeom_path.is_file():
+            source = finitegeom_path
+            finitegeom_paths.add(str(relative))
+        elif module.startswith(PROJECT_PREFIXES):
+            raise RuntimeError(f"project import is absent from both Lean roots: {module}")
+        else:
+            continue
+        source_text = lean_code_without_comments_or_strings(
+            source.read_text(encoding="utf-8")
+        )
+        for line in source_text.splitlines():
+            match = re.match(r"^\s*(?:public\s+)?import\s+(.+?)\s*$", line)
+            if match is not None:
+                pending.extend(match.group(1).split())
+    return tuple(sorted(package_paths)), tuple(sorted(finitegeom_paths))
+
+
+def lean_code_without_comments_or_strings(text: str) -> str:
+    """Erase nested comments, line comments, and strings while preserving code."""
+    result: list[str] = []
+    index = 0
+    block_depth = 0
+    in_string = False
+    while index < len(text):
+        pair = text[index : index + 2]
+        character = text[index]
+        if block_depth:
+            if pair == "/-":
+                block_depth += 1
+                index += 2
+            elif pair == "-/":
+                block_depth -= 1
+                index += 2
+            else:
+                result.append("\n" if character == "\n" else " ")
+                index += 1
+        elif in_string:
+            if character == "\\" and index + 1 < len(text):
+                result.extend("  ")
+                index += 2
+            elif character == '"':
+                in_string = False
+                result.append(" ")
+                index += 1
+            else:
+                result.append("\n" if character == "\n" else " ")
+                index += 1
+        elif pair == "/-":
+            block_depth = 1
+            result.extend("  ")
+            index += 2
+        elif pair == "--":
+            newline = text.find("\n", index + 2)
+            if newline < 0:
+                result.extend(" " * (len(text) - index))
+                break
+            result.extend(" " * (newline - index))
+            index = newline
+        elif character == '"':
+            in_string = True
+            result.append(" ")
+            index += 1
+        else:
+            result.append(character)
+            index += 1
+    if block_depth or in_string:
+        raise ValueError("Lean source has an unterminated comment or string")
+    return "".join(result)
+
+
+def validate_source_policy(root: Path, paths: tuple[str, ...], owner: str) -> None:
+    """Reject trust-expanding declarations and proof escapes in the exact closure."""
+    for relative in paths:
+        path = root / relative
+        code = lean_code_without_comments_or_strings(path.read_text(encoding="utf-8"))
+        match = FORBIDDEN_LEAN_CODE.search(code)
+        if match is not None:
+            line = code.count("\n", 0, match.start()) + 1
+            raise ValueError(
+                f"forbidden Lean source policy token {match.group(0)!r} in "
+                f"{owner}:{relative}:{line}"
+            )
 
 
 def git_snapshot(root: Path, pathspecs: tuple[str, ...]) -> str:
@@ -155,6 +246,51 @@ def require_clean(snapshots: dict[str, str]) -> None:
         )
 
 
+def guarded_lean_result(
+    run_dir: Path,
+    lean_root: Path,
+    pinned_commit: str,
+) -> subprocess.CompletedProcess[str]:
+    """Validate a canonical guarded-run receipt and return its gate transcript."""
+    resolved_run = run_dir.resolve()
+    manifest_path = resolved_run / "manifest.json"
+    status_path = resolved_run / "status.json"
+    if not manifest_path.is_file() or not status_path.is_file():
+        raise RuntimeError("guarded Lean run lacks manifest.json or status.json")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    if status.get("state") != "success" or status.get("exit_code") != 0:
+        raise RuntimeError("guarded Lean run did not finish successfully")
+    if Path(str(manifest.get("lean_root", ""))).resolve() != lean_root.resolve():
+        raise RuntimeError("guarded Lean run used a different Lean root")
+    aggregate = manifest.get("aggregate")
+    if not isinstance(aggregate, list) or ROOT_GATE not in aggregate:
+        raise RuntimeError("guarded Lean run did not validate the Paper I aggregate")
+    source = manifest.get("source")
+    if not isinstance(source, dict):
+        raise RuntimeError("guarded Lean run has no source identity")
+    if source.get("git_head") != pinned_commit or source.get("git_dirty") is not False:
+        raise RuntimeError("guarded Lean run was not made from the clean pinned package")
+    results = status.get("results")
+    if not isinstance(results, list) or not any(
+        isinstance(item, dict) and item.get("outcome") == "gate-passed"
+        for item in results
+    ):
+        raise RuntimeError("guarded Lean run has no successful aggregate result")
+    logs = manifest.get("logs")
+    if not isinstance(logs, dict) or ROOT_GATE not in logs:
+        raise RuntimeError("guarded Lean run does not identify the gate transcript")
+    log_path = Path(str(logs[ROOT_GATE])).resolve()
+    if not log_path.is_relative_to(resolved_run) or not log_path.is_file():
+        raise RuntimeError("guarded Lean gate transcript is absent or outside its run")
+    return subprocess.CompletedProcess(
+        args=["guarded-lean-run", str(resolved_run)],
+        returncode=0,
+        stdout=log_path.read_text(encoding="utf-8"),
+        stderr="",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     paper_root = Path(__file__).resolve().parents[1]
@@ -168,10 +304,10 @@ def main() -> int:
     parser.add_argument(
         "--finitegeom-root",
         type=Path,
+        required=True,
         help=(
-            "checkout of the finitegeom repository the certificate package depends on; enables "
-            "resolving its pinned artifact, checking the dependency-owned Paper I sources, and "
-            "rejecting a pin older than its newest export"
+            "checkout of the pinned finitegeom dependency; required to verify the exact "
+            "dependency-owned transitive closure"
         ),
     )
     parser.add_argument(
@@ -179,11 +315,20 @@ def main() -> int:
         action="store_true",
         help="replace the deterministic release-output certificate after all checks pass",
     )
+    parser.add_argument(
+        "--guarded-lean-run",
+        type=Path,
+        help=(
+            "canonical successful guarded-run directory for the clean pinned package; "
+            "maintainers use this instead of starting a bare Lean build"
+        ),
+    )
     args = parser.parse_args()
     repositories = {
         "paper": paper_root.resolve(),
         "lean": args.lean_root.resolve(),
     }
+    shared = args.finitegeom_root.resolve()
     os.environ["CLEBSCH_LEAN_ROOT"] = str(repositories["lean"])
 
     # FORMAL_COMPANION.json is the single place this paper names an external formal
@@ -199,12 +344,10 @@ def main() -> int:
         f"--resolve=certificate={repositories['lean']}",
         f"--require-current=certificate={repositories['lean']}",
     ]
-    if args.finitegeom_root is not None:
-        shared = args.finitegeom_root.resolve()
-        companion += [
-            f"--resolve=shared-library={shared}",
-            f"--require-current=shared-library={shared}",
-        ]
+    companion += [
+        f"--resolve=shared-library={shared}",
+        f"--require-current=shared-library={shared}",
+    ]
     completed = subprocess.run(companion, cwd=paper_root, text=True, capture_output=True)
     if completed.returncode:
         raise ValueError((completed.stdout + completed.stderr).strip())
@@ -214,13 +357,25 @@ def main() -> int:
     if not isinstance(manifest, dict):
         raise ValueError("manifest root must be an object")
 
+    package_closure, finitegeom_closure = project_import_closure(
+        repositories["lean"], shared
+    )
+    print(
+        "Paper I project closure: "
+        f"{len(package_closure)} package modules, "
+        f"{len(finitegeom_closure)} shared modules"
+    )
+    validate_source_policy(repositories["lean"], package_closure, "lean")
+    validate_source_policy(shared, finitegeom_closure, "finitegeom")
     snapshot_paths = {
         "paper": (".",),
-        "lean": LEAN_SCHOLARLY_PATHS,
+        "lean": (*package_closure, AXIOM_AUDIT),
+        "finitegeom": finitegeom_closure,
     }
+    snapshot_roots = {**repositories, "finitegeom": shared}
     initial = {
         name: git_snapshot(root, snapshot_paths[name])
-        for name, root in repositories.items()
+        for name, root in snapshot_roots.items()
     }
     clean_initial = dict(initial)
     if args.update_output:
@@ -254,47 +409,40 @@ def main() -> int:
         if lean_head.returncode != 0 or lean_head.stdout.strip() != pinned:
             raise RuntimeError("the separate Lean repository is not at the pinned commit")
     lean_identity = run(
-        ["git", "diff", "--quiet", pinned, "--", *LEAN_SCHOLARLY_PATHS],
+        ["git", "diff", "--quiet", pinned, "--", *package_closure, AXIOM_AUDIT],
         repositories["lean"],
     )
     if lean_identity.returncode != 0:
         raise RuntimeError(
             "the Paper I Lean source paths differ from the pinned commit"
         )
-    if args.finitegeom_root is None:
-        names = ", ".join(FINITEGEOM_SCHOLARLY_PATHS)
-        print(
-            "clebsch-rigidity release: UNCHECKED [dependency-owned Paper I sources: "
-            f"{names}] pass --finitegeom-root to check them"
+    pinned_dependency = next(
+        (
+            entry.get("commit")
+            for entry in json.loads(
+                (paper_root / "FORMAL_COMPANION.json").read_text(encoding="utf-8")
+            )["artifacts"]
+            if entry.get("role") == "shared-library"
+        ),
+        None,
+    )
+    if not pinned_dependency:
+        raise RuntimeError("FORMAL_COMPANION.json pins no shared-library commit")
+    dependency_identity = run(
+        [
+            "git",
+            "diff",
+            "--quiet",
+            pinned_dependency,
+            "--",
+            *finitegeom_closure,
+        ],
+        shared,
+    )
+    if dependency_identity.returncode != 0:
+        raise RuntimeError(
+            "the dependency-owned Paper I closure differs from the pinned commit"
         )
-    else:
-        pinned_dependency = next(
-            (
-                entry.get("commit")
-                for entry in json.loads(
-                    (paper_root / "FORMAL_COMPANION.json").read_text(encoding="utf-8")
-                )["artifacts"]
-                if entry.get("role") == "shared-library"
-            ),
-            None,
-        )
-        if not pinned_dependency:
-            raise RuntimeError("FORMAL_COMPANION.json pins no shared-library commit")
-        dependency_identity = run(
-            [
-                "git",
-                "diff",
-                "--quiet",
-                pinned_dependency,
-                "--",
-                *FINITEGEOM_SCHOLARLY_PATHS,
-            ],
-            args.finitegeom_root.resolve(),
-        )
-        if dependency_identity.returncode != 0:
-            raise RuntimeError(
-                "the dependency-owned Paper I sources differ from the pinned commit"
-            )
 
     validator_command = [
         sys.executable,
@@ -347,16 +495,23 @@ def main() -> int:
             or not 1 <= timeout <= 3600
         ):
             raise ValueError(f"{where}.timeout_seconds is invalid")
-        try:
-            result = run(argv, cwd, timeout=timeout)
-        except subprocess.TimeoutExpired as error:
-            detail = bounded(
-                error.stderr if isinstance(error.stderr, str) else ""
+        if check_id == "lean-rigidity-trust-gate" and args.guarded_lean_run:
+            result = guarded_lean_result(
+                args.guarded_lean_run,
+                repositories["lean"],
+                pinned,
             )
-            raise RuntimeError(
-                f"verification check {check_id!r} timed out after "
-                f"{timeout} seconds:\n{detail}"
-            ) from error
+        else:
+            try:
+                result = run(argv, cwd, timeout=timeout)
+            except subprocess.TimeoutExpired as error:
+                detail = bounded(
+                    error.stderr if isinstance(error.stderr, str) else ""
+                )
+                raise RuntimeError(
+                    f"verification check {check_id!r} timed out after "
+                    f"{timeout} seconds:\n{detail}"
+                ) from error
         if result.returncode != 0:
             raise RuntimeError(
                 f"verification check {check_id!r} failed with "
@@ -406,7 +561,7 @@ def main() -> int:
 
     final = {
         name: git_snapshot(root, snapshot_paths[name])
-        for name, root in repositories.items()
+        for name, root in snapshot_roots.items()
     }
     for name, snapshot in final.items():
         if snapshot != initial[name]:

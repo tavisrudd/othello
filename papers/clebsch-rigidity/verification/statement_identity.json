@@ -207,8 +207,8 @@
     }
   ],
   "companion_source": "clebsch_rigidity_computational_companion.tex",
-  "companion_source_sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128",
+  "companion_source_sha256": "408210904cc5a61cebe6fcfd402821ebfb13eec4fd5cf1d4308b08a67c9c2363",
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "b9999274be726a92e5ad1a1d5619028c505b84b89d5e241232e0d743248c4cf9"
+  "source_sha256": "20b686132adf32001b1c37588ec2965f3b46c7794627108b0848346f9267b11d"
 }

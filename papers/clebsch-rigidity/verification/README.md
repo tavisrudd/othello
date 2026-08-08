@@ -64,17 +64,33 @@ regenerates the compact twenty-entry
 counts. The release runner checks every fresh replay against that certificate.
 The manifest records the coverage and residual semantic trust for every use.
 
-From the paper root, with a clean worktree and a checkout of the pinned
-q11 certificate package supplied as
-`--lean-root`, run:
+From the paper root, with clean worktrees, supply the pinned q11 certificate
+package as `--lean-root` and the pinned shared library as `--finitegeom-root`:
 
 ```text
 nix develop --command python3 verification/verify_release.py \
-  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
+  --finitegeom-root /absolute/path/to/finitegeom
 ```
 
-The runner validates the paper root and the exact Paper I formal source
-pathset against the pinned commit, while ignoring unrelated worktree paths.
+The command above is the third-party public recipe.  Workspace maintainers use
+the canonical queue rather than starting its embedded Lean build directly:
+
+```text
+../../lean/scripts/lean-build-queue.py build \
+  RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates \
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
+nix develop --command python3 verification/verify_release.py \
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
+  --finitegeom-root /absolute/path/to/finitegeom \
+  --guarded-lean-run /run/directory/printed/by/the/guard
+```
+
+The runner derives the complete project-owned import closure from the aggregate
+gate, validates its package and shared-library halves against their respective
+pinned commits, and ignores unrelated worktree paths.  It also rejects admitted,
+unsafe, native-evaluation, or project-axiom source escapes anywhere in that
+closure.
 It builds both manuscripts in isolated temporary directories, executes exactly
 the twenty-six admitted checks without a shell, and refuses any scholarly path
 change.

@@ -8,7 +8,7 @@
       "role": "shared-library"
     },
     {
-      "commit": "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671",
+      "commit": "930d5469ac08068553e93177ea3598535d5d9906",
       "depends_on": "shared-library",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
       "manifest": "MANIFEST.json",

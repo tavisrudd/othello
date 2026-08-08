@@ -58,11 +58,27 @@ The reusable formal source is distributed in
 revisions are recorded in the manuscript.  The version-independent archival
 locator of `finitegeom` is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-From this directory, supply a checkout of the q11 certificate package
-as `--lean-root`:
+From this directory, supply the pinned q11 certificate package as `--lean-root`
+and the pinned shared library as `--finitegeom-root`.  A passing release checks
+the exact transitive project-owned closure across both repositories:
 
 ```text
 nix develop --command \
   python3 verification/verify_release.py \
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
+  --finitegeom-root /absolute/path/to/finitegeom
+```
+
+Workspace maintainers must build the aggregate through the guarded queue first
+and pass its successful run directory back to the release verifier:
+
+```text
+../../lean/scripts/lean-build-queue.py build \
+  RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates \
   --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
+nix develop --command \
+  python3 verification/verify_release.py \
+  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
+  --finitegeom-root /absolute/path/to/finitegeom \
+  --guarded-lean-run /run/directory/printed/by/the/guard
 ```

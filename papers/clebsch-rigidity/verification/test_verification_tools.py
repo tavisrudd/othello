@@ -29,6 +29,7 @@ extractor = load("rigidity_statement_extractor", "extract_statement_identity.py"
 release = load("rigidity_release_runner", "verify_release.py")
 capture = load("rigidity_checker_output_capture", "capture_checker_outputs.py")
 manuscript = load("rigidity_manuscript_build", "check_manuscript_build.py")
+trust = load("rigidity_trust_manifest", "verify_trust_manifest.py")
 
 
 class StatementIdentityTests(unittest.TestCase):
@@ -88,6 +89,89 @@ class ReleaseRunnerTests(unittest.TestCase):
             roots = {"paper": Path(directory)}
             with self.assertRaisesRegex(ValueError, "repository-relative"):
                 release.safe_cwd(roots, "paper", "../outside", "test")
+
+    def test_project_import_closure_spans_both_roots(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            package = root / "package"
+            shared = root / "shared"
+            gate = (
+                package
+                / "RelativeConicArcs"
+                / "Gates"
+                / "ClebschRigidityWithOrderElevenCertificates.lean"
+            )
+            dependency = shared / "RelativeConicArcs" / "Shared.lean"
+            cap = shared / "ProjectiveCap" / "Base.lean"
+            gate.parent.mkdir(parents=True)
+            dependency.parent.mkdir(parents=True)
+            cap.parent.mkdir(parents=True)
+            gate.write_text(
+                "import RelativeConicArcs.Shared\nimport Mathlib.Data.Fin.Basic\n",
+                encoding="utf-8",
+            )
+            dependency.write_text("import ProjectiveCap.Base\n", encoding="utf-8")
+            cap.write_text("", encoding="utf-8")
+            package_paths, shared_paths = release.project_import_closure(
+                package, shared
+            )
+            self.assertEqual(
+                package_paths,
+                ("RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",),
+            )
+            self.assertEqual(
+                shared_paths,
+                ("ProjectiveCap/Base.lean", "RelativeConicArcs/Shared.lean"),
+            )
+
+    def test_source_policy_ignores_prose_but_rejects_code(self) -> None:
+        prose = "/- no `sorry` or `native_decide` is used -/\n-- unsafe is forbidden\n"
+        self.assertEqual(release.lean_code_without_comments_or_strings(prose).strip(), "")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "Example.lean"
+            path.write_text(prose + "theorem bad : True := by sorry\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "forbidden Lean source policy"):
+                release.validate_source_policy(root, ("Example.lean",), "test")
+
+    def test_guarded_receipt_requires_clean_pinned_source(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            run_dir = Path(directory)
+            log = run_dir / "logs" / "gate.log"
+            log.parent.mkdir()
+            log.write_text("'Gate.theorem' depends on axioms: [propext]\n")
+            (run_dir / "manifest.json").write_text(
+                json.dumps(
+                    {
+                        "aggregate": [release.ROOT_GATE],
+                        "lean_root": str(PAPER_ROOT),
+                        "logs": {release.ROOT_GATE: str(log)},
+                        "source": {"git_dirty": False, "git_head": "abc123"},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (run_dir / "status.json").write_text(
+                json.dumps(
+                    {
+                        "exit_code": 0,
+                        "results": [{"outcome": "gate-passed"}],
+                        "state": "success",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            result = release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+            self.assertIn("Gate.theorem", result.stdout)
+            manifest = json.loads(
+                (run_dir / "manifest.json").read_text(encoding="utf-8")
+            )
+            manifest["source"]["git_dirty"] = True
+            (run_dir / "manifest.json").write_text(
+                json.dumps(manifest), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(RuntimeError, "clean pinned package"):
+                release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
 
     def test_exact_checker_set_is_unique(self) -> None:
         self.assertEqual(len(capture.CHECKERS), 20)
@@ -184,6 +268,28 @@ class ManifestSemanticTests(unittest.TestCase):
             text = json.dumps(claims[row], sort_keys=True)
             for fragment in fragments:
                 self.assertIn(fragment, text)
+
+    def test_exact_terminal_coverage_accepts_equal_sets(self) -> None:
+        terminals = {"Gate.first", "Gate.second"}
+        trust.require_exact_terminal_coverage(terminals, terminals, terminals)
+
+    def test_exact_terminal_coverage_rejects_manifest_omission(self) -> None:
+        with self.assertRaisesRegex(ValueError, "missing=.*Gate.second"):
+            trust.require_exact_terminal_coverage(
+                {"Gate.first"},
+                {"Gate.first", "Gate.second"},
+                {"Gate.first", "Gate.second"},
+            )
+
+    def test_gate_terminal_parser_rejects_duplicates(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            gate = Path(directory) / "Gate.lean"
+            gate.write_text(
+                "#print axioms Gate.first\n#print axioms Gate.first\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "repeats"):
+                trust.parse_gate_terminals(gate)
 
 
 def release_claim_computations(claim: dict[str, object]) -> list[dict[str, object]]:

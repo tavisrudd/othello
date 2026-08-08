@@ -21,7 +21,7 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_PACKAGE_COMMIT = "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671"
+PINNED_PACKAGE_COMMIT = "930d5469ac08068553e93177ea3598535d5d9906"
 PINNED_FINITEGEOM_COMMIT = "575cf3e991168fb96eb24c318263c5d0552aa531"
 
 
@@ -448,7 +448,7 @@ def components_by_row(
     )
     return {
         2: (
-            "Lean proves the conic-containment implication through the explicit Dye axiom seam; the associated polarity and stabilizer identification remain cited classical consequences.",
+            "Lean proves the conic-containment implication from definitions with only foundational logical axioms; the associated polarity and stabilizer identification remain cited classical consequences.",
             [
                 conceptual("classical equality, polarity, and stabilizer identification", CLASSICAL_DYE_RIGIDITY, "The line bound and chord-defect deduction are proved in the manuscript."),
                 lean("symmetry-free rigidity implication", ["rigidity", "rigidity_spine"], axioms),
@@ -497,7 +497,7 @@ def components_by_row(
             ],
         ),
         17: (
-            "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences.",
+            "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication from definitions with no declared Dye or other project axiom.",
             [
                 conceptual("degenerate-conic reduction and Dye equality boundary", CLASSICAL_DYE, "The manuscript proves the line bound, reduces a degenerate containing conic to the same cardinality equality, proves the chord-defect identity independently, and derives the single-orbit statement relative to a fixed conic from Bezout."),
                 lean("containing-quadratic rigidity implication", ["rigidity", "rigidity_spine"], axioms),
@@ -569,7 +569,7 @@ def components_by_row(
             ],
         ),
         25: (
-            "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the q=11 classification inherits Dye's rigidity boundary.",
+            "Lean checks the chord formulas, an explicit Sylvester-graph clique certificate, and the proved order-eleven rigidity spine; the cited inputs identify the classical surrounding geometry.",
             [
                 conceptual("Sylvester graph interpretation and q=11 rigidity dependency", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The chord arithmetic and explicit finite graph certificate are kernel checked; the manuscript invokes row 17 only for the final q=11 orbit classification."),
                 lean("field-order boundary", ["field_order"], axioms),
@@ -901,7 +901,8 @@ def build_manifest() -> dict[str, object]:
             "command": (
                 "nix develop --command python3 "
                 "verification/verify_release.py "
-                "--lean-root /absolute/path/to/finitegeom"
+                "--lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates "
+                "--finitegeom-root /absolute/path/to/finitegeom"
             ),
             "entry_point": file_evidence(
                 "paper", "verification/verify_release.py"

@@ -8,8 +8,7 @@ surface; not theorem-complete for the two manuscripts.**
 ## Executive finding
 
 The formal core is substantially better than the published trust prose says.
-The exact aggregate gate builds through the guarded queue, all 55 tracked
-terminals match the current axiom transcript, and the only reported axioms are
+All 55 tracked terminals match the current axiom transcript, and the only reported axioms are
 `propext`, `Classical.choice`, and `Quot.sound`.  The complete 208-module
 project-owned closure contains no `sorry`, project axiom, unsafe declaration,
 `native_decide`, or compiled-evaluation escape.
@@ -24,6 +23,12 @@ unproved proposition-valued representation-theoretic interface; substantial
 paper assertions remain human, cited, finite-certificate, or trusted-execution
 results; and 138 of the 208 project-owned modules expose scholarly
 documentation debt.
+
+The guarded build attempted during C893 was later found to have been refused
+behind a foreign Lean process; its apparent success had been read from a
+concurrent q13 run directory.  C855 therefore owns the fresh correctly
+identified q11 gate replay.  This correction does not change the MAJOR verdict
+or any source/axiom-set finding below.
 
 This is not evidence of a false Lean proof or a concealed nonlogical axiom.
 The main paper itself says that Lean is an independent cross-check rather than
@@ -221,7 +226,7 @@ thin to explain the mathematical role of their module.
 
 | Check | Result |
 |---|---|
-| Guarded aggregate gate build | **PASS**, run `20260808-220611-d67f931f`; aggregate gate passed |
+| Guarded aggregate gate build | **NOT ESTABLISHED BY C893**; the attempted run was refused, and the recorded run ID belonged to a concurrent q13 build; fresh replay assigned to C855 |
 | 55 gate terminals versus 55 audit rows | **PASS**, exact name equality and foundational allowlist only |
 | Package and shared Git pins via `verify_formal_companion.py` | **PASS**, both pinned roots |
 | Package `seal_manifest.py` | **PASS**, 115 modules |
@@ -308,8 +313,9 @@ implementation task.
 
 - There are no hidden Dye axioms, project axioms, unsafe/native evaluation
   escapes, or admitted proofs in the exact aggregate closure.
-- The current aggregate has 55 terminals over 208 project modules, and the
-  tracked axiom transcript matches those terminals exactly.
+- The current aggregate source prints 55 terminals over 208 project modules,
+  and the tracked axiom transcript matches those terminals exactly; fresh
+  elaboration remains a distinct C855 gate.
 - The release failure is precisely the README seal; the generator failure is
   precisely reproducible across all 66 outputs; and the omitted-terminal
   weakness is a verifier defect, not a speculative concern.

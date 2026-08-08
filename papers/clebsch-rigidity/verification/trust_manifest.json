@@ -115,7 +115,7 @@
         "kind": "verbatim",
         "sha256": "0f0c13c15894c5f98a5813ac99be6f94148cc87e0129b13847a57b1f6c3a959b"
       },
-      "trust_boundary": "Lean proves the conic-containment implication through the explicit Dye axiom seam; the associated polarity and stabilizer identification remain cited classical consequences."
+      "trust_boundary": "Lean proves the conic-containment implication from definitions with only foundational logical axioms; the associated polarity and stabilizer identification remain cited classical consequences."
     },
     {
       "components": [
@@ -629,7 +629,7 @@
         "kind": "theorem-environment",
         "sha256": "8123932d99110b357477ba025a1e658a7190fbf1efcc8ae28ab0189d08f66794"
       },
-      "trust_boundary": "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication relative to Dye's two declared consequences."
+      "trust_boundary": "The manuscript handles degenerate conics by the proved line bound; Lean checks the nonsingular-conic implication from definitions with no declared Dye or other project axiom."
     },
     {
       "components": [
@@ -1387,7 +1387,7 @@
         "kind": "theorem-environment",
         "sha256": "ee9d60d4e40d522a2d97db84ab658c92aa67802be8eb1a4be556d55a30d17933"
       },
-      "trust_boundary": "Lean checks the chord formulas and an explicit Sylvester-graph clique certificate; the q=11 classification inherits Dye's rigidity boundary."
+      "trust_boundary": "Lean checks the chord formulas, an explicit Sylvester-graph clique certificate, and the proved order-eleven rigidity spine; the cited inputs identify the classical surrounding geometry."
     },
     {
       "components": [
@@ -1923,12 +1923,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128"
+      "sha256": "408210904cc5a61cebe6fcfd402821ebfb13eec4fd5cf1d4308b08a67c9c2363"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b"
+      "sha256": "1e9b4b104859ebb847ecf46c6b7482a3846263d75da4c326e56c1521d044b195"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1937,7 +1937,7 @@
     }
   },
   "lean_repository": {
-    "commit": "a80e7de66a65c1b9cc5367dabbfdb7b8576ba671",
+    "commit": "930d5469ac08068553e93177ea3598535d5d9906",
     "distribution": "separate shared Git repository",
     "finitegeom_commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
     "path": ".",
@@ -1946,19 +1946,19 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "46b012419591ee57d5cff6758d74042a1c1dad8e07d66b8c1b4700b9c1ff5f6c"
+    "sha256": "c5ef665869af791d16556dc9d94aca0dbe0b0b237ede6e3d51ce3cd8162beef0"
   },
-  "manuscript_sha256": "b9999274be726a92e5ad1a1d5619028c505b84b89d5e241232e0d743248c4cf9",
+  "manuscript_sha256": "20b686132adf32001b1c37588ec2965f3b46c7794627108b0848346f9267b11d",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "d4bd8002637173db23d3fdb992ac57a2370d99ee1d3b3a99866f810a568e7d45"
+      "sha256": "60d401b06e1f343cd2448e926f300e127b82ede5b4a111ac26f5b8600858713f"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "f425dfc5672431ac292a3208fe4191f59cc1c56c46d97b01340642cdcf040fe0"
+      "sha256": "74a3bef3f931bdb06498aa49816f5680fcf313e03749f212668ad58e69a158b0"
     }
   ],
   "reproducibility_environment": {
@@ -1988,7 +1988,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "2b9c05de4b01f163036f9f90a6061f99b906494c2c6dbc84bbe19dbc29e96cee"
+    "sha256": "e7cc6a5f5e598058d71106a65554dc5c6b028cc8579025d34440aaadeb76807f"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2344,11 +2344,11 @@
         "timeout_seconds": 1800
       }
     ],
-    "command": "nix develop --command python3 verification/verify_release.py --lean-root /absolute/path/to/finitegeom",
+    "command": "nix develop --command python3 verification/verify_release.py --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates --finitegeom-root /absolute/path/to/finitegeom",
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "ef8eb4319711fd76e4aa7dcc8ad86851f905c131e8ad45109878839a479e9a28"
+      "sha256": "0ef1f08ef646acd9c48498f270288da78a440e737598743ac92306d7da4751b6"
     },
     "output": {
       "path": "verification/verify-release-output.json",
@@ -2364,17 +2364,17 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "670caf9c8a0d9faf8e5efd1c6e5b5b362c3bc5c99e969d31e365fd469f78daa2"
+        "sha256": "e36f5f08c2ee85b72e6da555d44c61d0a9a5e7c316123b538b27da858d49b094"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "73608d670e5b43ed003e79e0618ff4a5594702b98e881ac336a06d28109124bc"
+        "sha256": "b84b08365aa6dafbd705f123f02be8d244af41944a1c40cb0c2e7376b5db29d0"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "73763b37ed9f99106d28ed5e33dd21ba9216c56c123c5b835cf43ed8417abf8c"
+        "sha256": "ed50a738c289e4eba3ea2889cd18cc5d46b0f05171ff7a6262927d659a6cf76d"
       },
       {
         "path": "verification/check_manuscript_build.py",
