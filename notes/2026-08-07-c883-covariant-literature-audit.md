@@ -422,8 +422,10 @@ here.
   table.
 
 **Not added to the shared cache.** The six classical treatises were retrieved as Internet
-Archive `_djvu.txt` OCR files, not PDFs. The cache's `add` refuses non-PDF bytes by design —
-that refusal is the integrity check the cache exists for — so these were not ingested. Their
+Archive `_djvu.txt` OCR files, not PDFs. Two provisions of the cache contract exclude them:
+`add` refuses bytes whose magic is not `%PDF`, which is the integrity check the cache exists
+for, and the key must be a normalized DOI or arXiv identifier, which a nineteenth-century
+treatise does not have. Their
 provenance is instead pinned by Internet Archive item identifier and byte count in the source
 table, which is reproducible: `https://archive.org/download/<id>/<id>_djvu.txt`. Duke's paper
 was already ingested by the earlier reviewer under key `10.1093/imrn/rnab249`; I re-read those
