@@ -123,8 +123,9 @@ through `MeasureTheory.Measure.measurePreserving_homeomorphUnitSphereProd` and
 development does not depend on measure theory.
 
 Three further assertions of the section lie outside the main theorem and outside
-this route, and none of them is owned by any existing row of the gap inventory.
-They are recorded here so that the row is not closed while they are unattended:
+this route.  No row of the gap inventory covers them; they are collected instead
+in `notes/clebsch-tasks/c884-harmonic-section-representation-and-special-function-inputs.md`,
+which begins once the harmonic rows close and before the section is promoted:
 
 1. the covariant-obstruction paragraph, that no rotation-equivariant polynomial
    covariant induces the linear bridge, whose content is the vanishing of
