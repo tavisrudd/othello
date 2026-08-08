@@ -1,9 +1,10 @@
 # Formal statement adequacy
 
 This ledger compares Paper I's manuscript claims with the exact declarations
-currently available under `RelativeConicArcs.AMELU`. The current import
-surface is the pre-split `RelativeConicArcs.Gates.AMELUAggregate`; it is not a
-Paper I release gate.
+currently available under `RelativeConicArcs.AMELU`.  The dedicated
+quantitative import surface is
+`RelativeConicArcs.Gates.AMELUTwoUniformRigidity`; the wider pre-split
+`RelativeConicArcs.Gates.AMELUAggregate` is not a Paper I release gate.
 
 | Manuscript result | Exact Lean surface | Adequacy verdict | Visible boundary |
 |---|---|---|---|
@@ -13,6 +14,7 @@ Paper I release gate.
 | `cor:transversal-clifford` | `encoderConversion_inverseTranspose_chosenLeg`, the `IsCliffordMatrix` closure declarations, and `encoderConversion_logical_and_physical_isClifford` | Choi orientation and Clifford closure are kernel checked | `EncoderTransversal` also contains Paper II carrier material; the Paper I gate must review its import closure rather than import by filename glob |
 | `lem:local-generator-isometry` and the continuous-symmetry core | `Multipartite` generator splitting, single-exponential identity, polarized second-moment identity, product-map algebra, and nonscalar-generator exclusion | named exact cores are unconditional | topological finiteness, every quantitative stability estimate, and inverse threshold are manuscript only |
 | `lem:quantitative-cleaning-commutator`; `lem:nested-weyl-rounding`; `thm:cleaning-global-rounding`; `prop:robust-linear-atlas` | none | not formalized | entire cleaning, Fourier, overlap-gap composition, robust compatibility, constants, and affine obstruction are manuscript proofs |
+| `cor:relative-intertwiner-rounding` | `rayIntertwiner_eigenvalue`, `intertwinerDefectSq_intertwiner_mul`, `IsRayIntertwiner.mul_symmetry`, and `relative_approximate_decomposition` | the exact-base line transport, defect identity, product-intertwiner composition, and preservation of an arbitrary supplied threshold and coefficient are kernel checked | the one-state cleaning theorem supplying `8ε`, `R_clean`, and `π√q ε` is not formalized |
 | Appendix A partial-Weyl recognition | none | not formalized | complete manuscript proof only |
 | Appendix B alternative quantitative routes | no declarations beyond the multipartite core above | quantitative axes, single-marginal and aggregate rounding, budget-free residual theorem, overlap quantization, and 2-unitary gauge corollary are not formalized | no numerical or certificate evidence is claimed |
 
