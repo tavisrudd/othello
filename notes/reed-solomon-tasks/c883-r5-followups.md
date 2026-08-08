@@ -196,8 +196,16 @@ that cuts the terminal carrier's first prime; `I = z3 - 3 z2`, so its vanishing 
 linear line complex; and the carrier's residual component is the locus where the syndrome
 quartic is a perfect square, which is why a projected Veronese appears in the elimination.
 
-Still open before promotion: the literature check, specifically whether `I H - J f` has a
-classical name.  It is not a single transvectant in either natural normalization.
+The literature check is recorded in `notes/2026-08-07-c883-covariant-literature-audit.md`.
+Verdicts: `I H - J f` carries no classical name in any source read, while the neighbouring
+element `2 I H - 3 J f` is named repeatedly, back to Salmon; the identity itself is a
+recorded negative; and the perfect-square locus as a projected Veronese is prior art, while
+its role as the residual component of an elimination is not.  That audit's Q2 verdict was
+itself wrong on the two Kaipa--Pradhan quartics and carries a correction banner; the
+corrected picture is in the covariant report.
+
+Both standing gates are now recorded, so this item is promotable.  Promotion still needs a
+claim-proof-novelty ledger row; the audit drafts two, unapplied.
 
 The pass also found and repaired a manuscript defect: in the reduced terminal carrier
 proposition the printed parametrization of the residual prime was in plain coefficients

@@ -5,9 +5,22 @@
 
 ## Result
 
-The discriminant quartic that Kaipa and Pradhan attach to a line of `PG(3,q)` is a
-classical covariant of the syndrome quartic, and the relation is an identity of integer
-polynomials rather than a numerical coincidence on a stratum.
+Kaipa and Pradhan attach two quartics to a line, and both are covariants of the syndrome
+quartic.  The one their elliptic curve is built from is a classical covariant, and the
+relation is an identity of integer polynomials rather than a numerical coincidence on a
+stratum.
+
+The two must be kept apart, and an earlier version of this report did not:
+
+- their line quartic \(\varphi_L\), whose roots are the **contact** parameters of the
+  tangent lines the line meets, is the **Hessian** \(H\) of the syndrome quartic;
+- their \(D_L\), the discriminant of the residual quadratic, whose roots are the
+  **residual** parameters and from whose invariants their curve \(E_L\) is built, is
+  \(\tfrac32\bigl(I H-J f_a\bigr)\).
+
+Both statements are verified below.  The degree count alone forces the first: \(\varphi_L\)
+is linear in the line's coordinates, those are quadratic in the syndrome, and the space of
+degree-two order-four covariants of a binary quartic is spanned by \(H\) alone.
 
 Write a redundancy-five syndrome in divided-power coordinates as \(a=(a_0,\dots,a_4)\),
 and let
@@ -124,6 +137,52 @@ are green afterwards.  The generator script now checks each of these facts, incl
 two witness evaluations and the characteristic-five coincidence, and reproduced every
 number the review reported.
 
+## The two Kaipa--Pradhan quartics, and a rejected correction
+
+A literature audit run against this report proposed a correction: that their quartic is the
+syndrome quartic \(f_a\) itself, that they never form a discriminant of a residual
+quadratic, and that this report's identification should be withdrawn.  The first two claims
+are wrong, checked against the source, and the third does not follow.
+
+- Their line quartic is not \(f_a\).  Numerically, the roots of \(f_a\) are neither the
+  contact nor the residual parameters; the contact parameters are the roots of \(H\).
+- They do form the discriminant of the residual quadratic.  It is their \(D_L\), defined in
+  equation (20) of `arXiv:2509.15332`, and their Proposition 4.5 asserts it has nonzero
+  discriminant.  Their curve is \(E_L: T^2=4S^3-g_2S-g_3\) with \(g_2=3I(D_L)\) and
+  \(g_3=J(D_L)\), so it is built from that quartic and not from \(\varphi_L\).
+
+The audit's underlying observation was still worth having: there are two quartics, and this
+report's first version named one and described the other.  The repair is to distinguish
+them, which the Result section now does.
+
+The match is exact.  Their invariant normalization is fixed by their own relation
+\(j=1728I^3/(I^3-J^2)\), which forces \(I_{\text{theirs}}=12I\) and
+\(J_{\text{theirs}}=216J\) against the normalization used here.  With
+\(\varphi_L=H\) and their \(z_5=-I(f_a)\), all three of the following are identities in
+\(a_0,\dots,a_4\):
+
+\[
+ z_5^2=I_{\text{theirs}}(\varphi_L),\qquad
+ I(D_L)=\tfrac94\,I(\operatorname{disc}),\qquad
+ J(D_L)=\tfrac{27}8\,J(\operatorname{disc}),
+\]
+
+the last two being exactly the scalings of a quartic under \(D_L=\tfrac32\operatorname{disc}\).
+
+Two consequences.  First, the manuscript's identification of the fibre square with their
+incidence curve stands: they do take the discriminant of the same residual quadratic, and
+the two differ by the constant \(\tfrac32\), which is the normalization difference the
+manuscript already records as a square-class ambiguity.  Second, their square root
+\(z_5\) is \(-I(f_a)\), which is rational, and by the linear-complex identity above equals
+\(-(z_3-3z_2)\) in the Plücker coordinates.  Their construction needs a square root of the
+apolar invariant; in syndrome coordinates that square root is already there.
+
+Whether the constant \(\tfrac32\) is a square in \(\mathbf F_q\) decides a quadratic twist,
+and so bears on the exact point count rather than on the curve's isomorphism class over the
+algebraic closure.  The manuscript's sentence about normalizing the representative of
+\(g_x\) as they normalize it is what covers this; that it covers it exactly has not been
+checked here.
+
 ## Math check
 
 Recorded against the standing gates on the card.
@@ -151,9 +210,9 @@ Recorded against the standing gates on the card.
 ## Reproducibility
 
 - Generator: `notes/2026-08-07-c883-hankel-plucker-covariant.py`, SHA-256
-  `ecad4785c005786d925e7b718f7285cb9c8ee37f745ec869c1c2d99df348b203`.
+  `8aa6b3dca921e66a292546e5b643c5655fb13dcd89832563fddaada61b67fc9f`.
 - Certificate: `notes/2026-08-07-c883-hankel-plucker-covariant.json`, SHA-256
-  `65cd44051eab65980a09b71980c379f19748de708e98e2eb61db657c14722798`.
+  `fd102b8bb9f1bb1c0d1a62a80b2bf1c01994809bf28390b329599a367aa227ad`.
 - Replay: `uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant.py`.
   Every recorded flag is `true` except the last, which records the manuscript defect: the
   printed parametrization satisfies only the fourth of the four printed generators.

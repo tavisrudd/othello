@@ -84,6 +84,18 @@ def quartic_data(a, var):
     return f, I, J, H
 
 
+def quartic_invariants(poly, var):
+    """The classical invariants I and J of a binary quartic given in the variable var."""
+    A, four_B, six_C, four_D, E = sp.Poly(poly, var).all_coeffs()
+    B = sp.Rational(1, 4) * four_B
+    C = sp.Rational(1, 6) * six_C
+    D = sp.Rational(1, 4) * four_D
+    return (
+        sp.expand(A * E - 4 * B * D + 3 * C**2),
+        sp.expand(A * C * E + 2 * B * C * D - A * D**2 - B**2 * E - C**3),
+    )
+
+
 def plucker(a):
     """Signed maximal minors of the Hankel matrix, in the paper's ordering."""
     return [
@@ -216,6 +228,38 @@ def main() -> None:
         int(sp.simplify(generator)) for generator in residual_generators(stale)
     ]
     results["stale_witness_catalecticant"] = int(catalecticant_at(stale))
+
+    # Match against the two quartics that Kaipa and Pradhan attach to a line.
+    #
+    # Their line quartic phi_L has coefficients linear in the line's coordinates.
+    # Those are quadratic in the syndrome, so phi_L has degree two in the syndrome and
+    # order four, and that covariant space is spanned by the Hessian alone; phi_L is
+    # therefore H up to a scalar.  Their second quartic D_L, from which their elliptic
+    # curve is built, is quadratic in the line's coordinates, hence degree four, hence in
+    # the span of I*H and J*f.  Their invariant normalization is fixed by their own
+    # relation j = 1728 I^3/(I^3 - J^2), which gives I_theirs = 12 I and J_theirs = 216 J.
+    hessian_I, hessian_J = quartic_invariants(H, x)
+    their_I_of_phi = 12 * hessian_I
+    their_J_of_phi = 216 * hessian_J
+    z5 = -I
+    results["their_z5_squared_is_apolar_invariant_of_hessian"] = (
+        sp.expand(z5**2 - their_I_of_phi) == 0
+    )
+
+    their_I_of_D = sp.expand(z5 * their_J_of_phi + sp.Rational(5, 4) * their_I_of_phi**2)
+    their_J_of_D = sp.expand(
+        -sp.Rational(1, 8)
+        * (
+            11 * their_I_of_phi**3
+            + 2 * their_J_of_phi**2
+            + 14 * their_J_of_phi * z5 * their_I_of_phi
+        )
+    )
+    disc_I, disc_J = quartic_invariants(disc, x)
+    results["their_D_invariants_match_three_halves_of_ours"] = bool(
+        sp.expand(their_I_of_D - sp.Rational(9, 4) * 12 * disc_I) == 0
+        and sp.expand(their_J_of_D - sp.Rational(27, 8) * 216 * disc_J) == 0
+    )
 
     out = Path(__file__).with_suffix(".json")
     out.write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")

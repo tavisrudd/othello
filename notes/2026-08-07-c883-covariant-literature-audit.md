@@ -6,6 +6,17 @@
 **Predecessor audit reused for pinned identifiers:**
 `notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md`
 
+> **Correction, recorded after this report was written.** Its Q2 verdict is wrong on the
+> point that matters. Kaipa and Pradhan attach *two* quartics to a line. Their line quartic
+> is not the syndrome quartic `f_a`, as this report states; it is the Hessian `H` of the
+> syndrome quartic, which the degree count forces. And they do form the discriminant of a
+> residual quadratic: it is their `D_L` of equation (20) in `arXiv:2509.15332`, their
+> Proposition 4.5 asserts it has nonzero discriminant, and their curve `E_L` is built from
+> its invariants. That quartic equals `(3/2)(I H - J f_a)`, verified symbolically. The Q1
+> and Q3 verdicts are unaffected. See the "two Kaipa--Pradhan quartics" section of
+> `notes/2026-08-07-c883-hankel-plucker-covariant.md`.
+
+
 ## Opening summary
 
 Fourteen sources are named below. **Four were read at full text at the load-bearing

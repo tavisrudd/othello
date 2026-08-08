@@ -38,6 +38,8 @@
     0,
     0
   ],
+  "their_D_invariants_match_three_halves_of_ours": true,
+  "their_z5_squared_is_apolar_invariant_of_hessian": true,
   "witness_catalecticant": 8,
   "witness_on_residual_prime": true
 }
