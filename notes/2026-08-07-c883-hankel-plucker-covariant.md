@@ -72,35 +72,57 @@ cheaper than searching conventions.
    two pictures differ by that choice, and in these coordinates no square root is needed.
 
 3. **The residual component is the perfect-square locus.**  The terminal carrier's
-   residual prime is the locus where the syndrome quartic \(f_a\) is a perfect square of a
-   binary quadratic.  That locus satisfies all four printed generators of the residual
-   prime, and on it \(27J^2=I^3\), so it lies inside the quartic discriminant, as a locus
-   of quartics with repeated roots must.  This answers the standing question of why a
-   projected Veronese surface appears in the recursive-carrier elimination: a Veronese is
-   what the squaring map \(Q\mapsto Q^2\) produces, and the elimination is finding it
-   because the symmetric-factor branch of the ordered-root incidence is the branch on
-   which the syndrome quartic acquires a square.
+   residual prime is the locus where the syndrome quartic \(f_a\) is a scalar multiple of
+   the square of a binary quadratic.  This answers the standing question of why a projected
+   Veronese surface appears in the recursive-carrier elimination: a Veronese is what the
+   squaring map \(Q\mapsto Q^2\) produces, and the elimination is finding it because the
+   symmetric-factor branch of the ordered-root incidence is the branch on which the
+   syndrome quartic acquires a square.
 
-## A manuscript defect this exposed
+   The evidence divides.  That the square locus satisfies all four printed generators is
+   checked here, and gives containment only.  Equality is the elimination statement in the
+   stable-component certificate, which the coordinate review replayed.  The relation
+   \(27J^2=I^3\) on the locus is supporting evidence and not a characterization, since the
+   quartic discriminant hypersurface also contains nonsquare quartics with other
+   repeated-root partitions.
+
+## A manuscript defect this exposed, and its repair
 
 In the reduced terminal carrier proposition, the displayed parametrization of the residual
-prime and the displayed generating set of the same prime are written in different
-coefficient conventions, so as printed the parametrization does not lie on the variety its
-own generators define.
+prime and the displayed generating set of the same prime were written in different
+coefficient conventions, so as printed the parametrization did not lie on the variety its
+own generators define.  The printed map \([u^2:2uv:v^2+2uw:2vw:w^2]\) is the perfect-square
+locus in plain coefficients, while the generators are in the bottom coordinates the
+proposition uses everywhere else.  Substituted into the printed generators it leaves
+\(-10vw^3(uw-v^2)\), \(-5w^2(uw-v^2)(7uw+3v^2)\) and \(-10uvw^2(uw-v^2)\); only
+\(c_0c_3^2-c_1^2c_4\) vanishes.
 
-- The generators are stated in the bottom coordinates the proposition uses elsewhere, the
-  same divided-power coordinates as the Hankel matrix in its proof.  The perfect-square
-  locus, written in those coordinates as
-  \([u^2:-uv/2:(v^2+2uw)/6:-vw/2:w^2]\), satisfies all four.
-- The printed parametrization \([u^2:2uv:v^2+2uw:2vw:w^2]\) is the perfect-square locus in
-  plain rather than divided-power coefficients.  Substituted into the printed generators it
-  gives \(10vw^3(v^2-uw)\) for the first, and fails the second and third as well; only
-  \(c_0c_3^2-c_1^2c_4\) vanishes on it.
+An independent coordinate review confirmed the mismatch, replayed the stable-component
+elimination certificates, and widened the repair.  Its record is
+`notes/2026-08-07-c883-terminal-residual-coordinate-review.md`.  Three findings there were
+not in this report's first version:
 
-The repair is to restate the parametrization in the bottom coordinates, since the
-generators agree with the coordinates used throughout the proof and with the intrinsic
-description above.  This is a defect in a printed theorem statement, so it is left for an
-explicit decision rather than repaired here.
+- **Characteristic five hides it.**  Every residual above carries a factor of five, and
+  \(B(u,-v,w)\equiv A(u,v,w)\bmod 5\) for the corrected map \(B\).  The printed map
+  therefore has the correct fibre in characteristic five, and the mismatch is visible only
+  in characteristic zero and characteristics other than two, three, and five.
+- **The identical display elsewhere is correct.**  The redundancy-eight appendix prints the
+  same plain Veronese, but introduces \(z_i=\binom4ic_i\) first, so it is right there.  The
+  defect was local to the proposition that labels its coordinates \(c_i\).
+- **The irredundancy witness was also invalid.**  The printed witness \((1,0,2,0,1)\) is not
+  on the residual prime at all: it gives generator values \((0,-35,0,0)\), with
+  catalecticant \(-6\).  The replacement \((3,0,1,0,3)\), the image of \((u,v,w)=(1,0,1)\),
+  lies on the prime and has catalecticant \(8\), so it witnesses irredundancy uniformly.
+
+All three repairs are applied.  The proposition now prints
+\([6u^2:3uv:v^2+2uw:3vw:6w^2]\), states that this is the locus of quartics that are scalar
+multiples of squares with \(f_c=6(uX^2-vXY+wY^2)^2\) on it, records the rescaling to the
+appendix's coordinates, and uses the corrected witness.  The generators, the
+characteristic-two plane, the characteristic-three cone, the residual degrees, and the
+two-prime decomposition are unchanged.  Both manuscript builds and the supplement verifier
+are green afterwards.  The generator script now checks each of these facts, including the
+two witness evaluations and the characteristic-five coincidence, and reproduced every
+number the review reported.
 
 ## Math check
 
@@ -129,9 +151,9 @@ Recorded against the standing gates on the card.
 ## Reproducibility
 
 - Generator: `notes/2026-08-07-c883-hankel-plucker-covariant.py`, SHA-256
-  `6a16072b28d9695ca578417e7c37a409c127562f558ff702e4c039738d51366a`.
+  `ecad4785c005786d925e7b718f7285cb9c8ee37f745ec869c1c2d99df348b203`.
 - Certificate: `notes/2026-08-07-c883-hankel-plucker-covariant.json`, SHA-256
-  `90fe8dbf2a179733ae149c8c5e726d85b7f26adddeab4b1a149d1c66fb1ce86e`.
+  `65cd44051eab65980a09b71980c379f19748de708e98e2eb61db657c14722798`.
 - Replay: `uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant.py`.
   Every recorded flag is `true` except the last, which records the manuscript defect: the
   printed parametrization satisfies only the fourth of the four printed generators.

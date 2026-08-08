@@ -165,9 +165,57 @@ def main() -> None:
 
     printed = [u**2, 2 * u * v, v**2 + 2 * u * w, 2 * v * w, w**2]
     printed_values = [sp.simplify(generator) for generator in residual_generators(printed)]
-    results["printed_parametrization_generator_vanishing"] = [
+    results["plain_parametrization_generator_vanishing"] = [
         value == 0 for value in printed_values
     ]
+    results["plain_parametrization_generator_residuals"] = [
+        sp.sstr(sp.factor(value)) for value in printed_values
+    ]
+
+    # The replacement, cleared of denominators and with v negated for sign-freeness.
+    bottom = [6 * u**2, 3 * u * v, v**2 + 2 * u * w, 3 * v * w, 6 * w**2]
+    reversed_bottom = list(reversed(bottom))
+    results["bottom_parametrization_satisfies_generators"] = all(
+        sp.simplify(generator) == 0 for generator in residual_generators(bottom)
+    )
+    results["bottom_parametrization_satisfies_reversed_generators"] = all(
+        sp.simplify(generator) == 0 for generator in residual_generators(reversed_bottom)
+    )
+    quartic_on_bottom = sum(
+        coefficient * sp.Rational(sign) * x ** (4 - power)
+        for coefficient, sign, power in zip(
+            bottom, (1, -4, 6, -4, 1), range(5)
+        )
+    )
+    results["bottom_parametrization_quartic_is_six_times_a_square"] = (
+        sp.simplify(quartic_on_bottom - 6 * (u * x**2 - v * x + w) ** 2) == 0
+    )
+
+    # The two surfaces coincide modulo five, so the mismatch is invisible there.
+    negated = [term.subs(v, -v) for term in bottom]
+    results["plain_equals_bottom_negated_mod_five"] = all(
+        sp.simplify(sp.Poly(sp.expand(b - 6 * a_term), u, v, w).set_modulus(5).as_expr()) == 0
+        for a_term, b in zip(printed, negated)
+    )
+
+    # Irredundancy witnesses: the residual prime is not inside the catalecticant cubic.
+    def catalecticant_at(point):
+        return sp.Matrix([
+            [point[0], point[1], point[2]],
+            [point[1], point[2], point[3]],
+            [point[2], point[3], point[4]],
+        ]).det()
+
+    witness = [3, 0, 1, 0, 3]
+    results["witness_on_residual_prime"] = all(
+        sp.simplify(generator) == 0 for generator in residual_generators(witness)
+    )
+    results["witness_catalecticant"] = int(catalecticant_at(witness))
+    stale = [1, 0, 2, 0, 1]
+    results["stale_witness_generator_values"] = [
+        int(sp.simplify(generator)) for generator in residual_generators(stale)
+    ]
+    results["stale_witness_catalecticant"] = int(catalecticant_at(stale))
 
     out = Path(__file__).with_suffix(".json")
     out.write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")

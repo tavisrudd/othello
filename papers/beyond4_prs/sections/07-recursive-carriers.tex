@@ -27,8 +27,13 @@ The reduced terminal bad carrier is the irredundant union of the prime
 cubic \(V(D)\) and one residual prime.  Away from characteristics two and
 three the residual prime is the projected Veronese surface
 \[
- [u:v:w]\longmapsto [u^2:2uv:v^2+2uw:2vw:w^2].             \tag{26}
+ [u:v:w]\longmapsto [6u^2:3uv:v^2+2uw:3vw:6w^2],           \tag{26}
 \]
+the locus of syndrome quartics that are scalar multiples of squares of binary
+quadratics: on this map \(f_c=6(uX^2-vXY+wY^2)^2\).  The coordinates here are
+the bottom \(c_i\); after the rescaling \(z_i=\binom4ic_i\) the same surface is
+the plain-coefficient Veronese of \eqref{eq:r8-cyclic-veronese}, which is
+written in those rescaled coordinates.
 In characteristic two it is the plane \(V(c_0,c_4)\).  In
 characteristic three it is the cone with \(c_2\) free and prime ideal
 \[
@@ -114,7 +119,8 @@ remainder used for this conclusion is hash-pinned there.
 Each displayed residual ideal is prime: (26) is a projective parametrization
 with prime kernel, the characteristic-two ideal is linear, and (27) is the
 toric prime of the monomial quartic after projection from \(e_2\).  None is
-contained in \(V(D)\): use \((1,0,2,0,1)\), \(e_2\), and
+contained in \(V(D)\): use \((3,0,1,0,3)\), which is the image of
+\((u,v,w)=(1,0,1)\) and has \(D=8\), together with \(e_2\) and
 \((1,0,1,0,0)\), respectively.  Thus the intersection with \((D)\) is an
 irredundant reduced decomposition and has no embedded prime.  The residual
 degree is four generically and one in characteristic two.  Constancy of the

@@ -199,10 +199,15 @@ quartic is a perfect square, which is why a projected Veronese appears in the el
 Still open before promotion: the literature check, specifically whether `I H - J f` has a
 classical name.  It is not a single transvectant in either natural normalization.
 
-The pass also found a manuscript defect: in the reduced terminal carrier proposition, the
-printed parametrization of the residual prime is in plain coefficients while its printed
-generators are in bottom coordinates, so as printed the parametrization fails three of the
-four generators.  Left for an explicit decision.
+The pass also found and repaired a manuscript defect: in the reduced terminal carrier
+proposition the printed parametrization of the residual prime was in plain coefficients
+while its generators are in bottom coordinates.  An independent coordinate review,
+`notes/2026-08-07-c883-terminal-residual-coordinate-review.md`, confirmed it, replayed the
+stable-component elimination, and added two repairs — the appendix's identical display is
+correct because it rescales first, and the printed irredundancy witness `(1,0,2,0,1)` is
+not on the prime at all.  The proposition now prints `[6u^2:3uv:v^2+2uw:3vw:6w^2]` with the
+witness `(3,0,1,0,3)`.  The mismatch was invisible in characteristic five, where the two
+surfaces coincide.
 
 The original item, for reference:
 

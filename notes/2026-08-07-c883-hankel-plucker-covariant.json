@@ -1,6 +1,9 @@
 {
   "I_is_z3_minus_3z2": true,
   "J_is_catalecticant_determinant": true,
+  "bottom_parametrization_quartic_is_six_times_a_square": true,
+  "bottom_parametrization_satisfies_generators": true,
+  "bottom_parametrization_satisfies_reversed_generators": true,
   "discriminant_is_I_H_minus_J_f": true,
   "identity_holds_mod_2": true,
   "identity_holds_mod_3": true,
@@ -14,11 +17,27 @@
   ],
   "perfect_square_locus_satisfies_27J2_eq_I3": true,
   "perfect_square_locus_satisfies_residual_generators": true,
-  "plucker_lies_on_klein_quadric": true,
-  "printed_parametrization_generator_vanishing": [
+  "plain_equals_bottom_negated_mod_five": true,
+  "plain_parametrization_generator_residuals": [
+    "-10*v*w**3*(u*w - v**2)",
+    "-5*w**2*(u*w - v**2)*(7*u*w + 3*v**2)",
+    "-10*u*v*w**2*(u*w - v**2)",
+    "0"
+  ],
+  "plain_parametrization_generator_vanishing": [
     false,
     false,
     false,
     true
-  ]
+  ],
+  "plucker_lies_on_klein_quadric": true,
+  "stale_witness_catalecticant": -6,
+  "stale_witness_generator_values": [
+    0,
+    -35,
+    0,
+    0
+  ],
+  "witness_catalecticant": 8,
+  "witness_on_residual_prime": true
 }
