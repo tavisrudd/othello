@@ -10,15 +10,21 @@ Discovery companion:
 
 ## Current status
 
-**C887 queued (2026-08-08), highest priority: adversarial referee-review
-validation and remediation.**  A supplied cold review identifies a possible
-headline scope gap at $m=2$, a Bell-pair conjugation error, and several
-literature/novelty-positioning risks.  C887 must independently reproduce every
-mathematical and bibliographic claim before changing the paper, then prepare a
-locally releasable authoritative and standalone revision for all findings that
-survive.  The exact review checklist and acceptance gates are frozen in
-`2026-08-08-c887-ame-lu-referee-review-remediation.md`.  No public deposit,
-push, or submission is authorized.
+**C887 closed (2026-08-08): referee remediation is locally releasable.**  The
+headline $m=2$ call into an $m\geq3$ appendix theorem was a real proof bridge
+gap, but an exact four-family estimate gives $5H/16$ and preserves the printed
+radius and $\pi\sqrt q$ constant, including the four-qutrit case.  The Bell
+convention was already correct.  Stabilizer lifts, fixed-state versus two-state
+quantitative scope, the qubit minimum-support precedent and modern LU
+literature, Tan's general AME--QMDS results, factorwise encoder novelty, and the
+stabilizer-only atlas boundary are now explicit.  Both release gates pass; the
+clean standalone is locally at `5f03d42`, one commit ahead and unpushed.  No
+deposit, push, or submission was made.  Full audit:
+`2026-08-08-c887-ame-lu-referee-review-remediation.md`.
+
+**C795 is now the highest-priority AME--LU item.**  It owns the already-known
+uniformity-order scope correction and explicit threshold adoption; red-team
+that reversal before changing the manuscript.
 
 **Both papers are published (2026-08-03).** The rigidity paper is deposited as
 DOI `10.5281/zenodo.21681856` with mirror `8468914`; the transversal-groups

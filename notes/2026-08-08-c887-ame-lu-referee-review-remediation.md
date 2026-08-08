@@ -2,7 +2,7 @@
 
 **Lane:** `ame-lu`
 
-**Status:** active.
+**Status:** complete (2026-08-08).
 
 ## Objective
 
@@ -12,7 +12,7 @@ The review is a lead, not evidence: no mathematical, bibliographic, novelty, or
 priority conclusion may be adopted without reconstruction against the current
 authoritative paper and the cited primary source.
 
-## Reconstruction in progress
+## Resolution
 
 The first proof pass narrows the headline finding.  The printed Appendix B
 theorem assumes $m\geq3$, so the call from the $m\geq2$ cleaning theorem is a
@@ -199,3 +199,70 @@ transversal-gate positioning are too broad; the quantitative headline can be
 misread as a robust two-state theorem; the atlas should be advertised as
 stabilizer-specific; and the cleaning/Fourier chain is likely the strongest
 genuinely new contribution.  Each is a hypothesis for C887, not a conclusion.
+
+## Validation and release reconciliation
+
+- The paper-local warning-free build passed after the mathematical and
+  bibliographic edits; the final PDF is 35 pages and 304,519 bytes.  The
+  affected opening, quantitative-proof, appendix, and bibliography pages and
+  the complete rendered PDF were inspected.
+- The authoritative release gate verified 18 public artifacts with tree
+  `a539692f45c24a1909a0e0b1454525694ed40076149f4509961f37482df75ddd`
+  and 82 formal artifacts with tree
+  `9689cefd30fe04d163d32ba93e5f84b3a67906db69e57bd1a254c411ddabb131`.
+  No Lean statement changed: the repaired estimate lies wholly inside the
+  manuscript-only quantitative proof boundary already declared by the formal
+  ledgers.
+- The guarded exporter planned and audited committed authority revision
+  `4237b03e5fd58258e2efbb5d27503f9d0f4b4733` with zero findings.  The
+  existing standalone history was advanced by local commit
+  `5f03d4236045bf735ec3e0bcb75a03b42e75e71c`; its release replay returned the
+  same public and formal identities, and exporter verification passed with 28
+  tracked files.  The mirror is clean and one commit ahead of its remote.
+  Nothing was pushed, uploaded, deposited, or submitted.
+
+## Adversarial closeout and mystery ledger
+
+The independent boundary-case pass attacked the only nonroutine new proof at
+the level of its combinatorics and constants.  For (m=2), the four families
+have the four distinct three-party supports obtained by omitting one of
+(a_1,a_2,b_1,b_2); full support and coordinate injectivity prevent overlap
+within or between them.  Their exact positive terms total (H/2-P), while
+the application of ((x-y)^2\geq x^2/2-y^2) costs a further (2P), giving
+(H/2-3P).  If (s=\eta_{a_1}+\eta_{a_2}), the two cut-side products give
+(P\leq(s^2+(H-s)^2)/4\leq H^2/4), because (0\leq s\leq H) and the convex
+quadratic is maximal at an endpoint.  Thus the printed radius (H\leq1/4)
+gives (5H/16), strictly more than the (H/4) needed for the advertised
+(\pi\sqrt q) residual bound.  The argument is dimension-independent and
+therefore explicitly covers the four-qutrit AME case.
+
+- **Settled:** the (m=2) proof bridge, Bell convention, stabilizer-lift
+  notation, fixed-state/two-state quantitative boundary, qubit precedent,
+  modern qubit literature, Tan attribution, factorwise encoder contribution,
+  and stabilizer-only atlas scope.
+- **Deliberate unused slack:** both branches of Appendix B.18 actually produce
+  (5H/16), which could improve the displayed residual constant.  C887 leaves
+  the clean (H/4) and (\pi\sqrt q) statement in place because promoting the
+  surplus would alter every headline quantitative surface without addressing
+  a correctness or positioning defect; the stronger inequality remains
+  visible in the proof.
+- **Open outside this closure:** an exhaustive priority claim for the robust
+  leakage--Fourier--AME chain.  The bounded primary-source screen found no
+  direct predecessor, but MathSciNet and Google Scholar were not covered, so
+  the manuscript uses contribution language rather than a firstness claim.
+- **Release boundary, not a mystery:** updating Zenodo or pushing the local
+  standalone remains an explicit author decision.
+
+The extra-juice/Tao pass found no additional theorem available at lower risk
+than the unused constant improvement above.  The discovery discriminator
+found no incidental mathematical lead requiring a new C item: every result
+belongs directly to the supplied review's validation and remediation scope.
+
+## Vibe check
+
+The paper is materially safer.  The most alarming referee finding was real at
+the proof-interface level but not at theorem level, and the repaired four-party
+argument is short enough to audit locally.  The more durable improvement is the
+positioning: a qubit or AME/QMDS specialist now sees immediately what is old,
+what is the prime-power extension, and why the quantitative cleaning/Fourier
+mechanism is the paper's distinctive contribution.
