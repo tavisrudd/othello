@@ -526,12 +526,21 @@ calculations.  The public rank-two replay reconstructs the complete
 \(q=64\) rational-twist mass and its five witnesses; it is not a symbolic
 all-field proof.
 
-Fix five roots and let $x$ be the sixth.  Then each $A_j$ is affine in
-$x$, $Q$ is quadratic, and the reduced cover has at most two simple
-poles, hence genus at most one.  A nonzero pseudo-remainder, the derivative
-and leading coefficient of $Q$, and the five-root Vandermonde have degree
-at most $22$ in each root coordinate.  A rational good base therefore
-exists for every binary $q\geq32$.  The exact deletion table on the
+Fix five roots and let $x$ be the sixth.  Write
+$A_j=B_j+xB_{j+1}$.  Then
+
+\[
+ Q'=B_0B_4+B_2^2,
+ \qquad [x^2]Q=B_1B_4+B_2B_3,
+\]
+
+and coefficient comparison shows that both are nonzero polynomials on the
+complement.  Geometric integrality makes at least one coefficient of the
+quadratic pseudo-remainder nonzero.  Its product with $Q'$, $[x^2]Q$, and
+the five-root Vandermonde is therefore nonzero and has degree at most
+$14+2+2+4=22$ in each root coordinate.  The finite-field grid bound supplies
+a rational good base for every binary $q\geq32$.  The reduced cover has at
+most two simple poles, hence genus at most one.  The exact deletion table on the
 normalized cover is
 \[
 \begin{array}{c|ccccc}
