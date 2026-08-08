@@ -2879,8 +2879,17 @@
       "last": 886,
       "purpose": "layered exposition architecture for PRS Version 2 accessibility and density",
       "sequence": 320
+    },
+    {
+      "count": 1,
+      "first": 887,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 887,
+      "purpose": "Independently vet the external referee-style review of the published AME-LU rigidity paper, reproduce every mathematical and literature claim, and implement all validated manuscript/trust/mirror corrections",
+      "sequence": 321
     }
   ],
-  "next_id": 887,
+  "next_id": 888,
   "schema": "codex-task-id-allocations-v1"
 }
