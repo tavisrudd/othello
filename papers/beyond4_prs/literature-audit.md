@@ -9,19 +9,26 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 26 bibliography entries, seven were read at **full text** in the
-underlying audits (Kaipa; Zhang--Wan--Kaipa; Wang; Ball--Lavrauw; Xu
-2023; Wu--Ding--Chen; Wang--Wu--Hu), nine at **partial** depth
-(Kaipa--Patanker--Pradhan; Cesaratto--Matera--Pérez;
+Of the 35 bibliography entries, nine were read at **full text** or at full
+text at their load-bearing statements (Kaipa; Zhang--Wan--Kaipa; Wang;
+Ball--Lavrauw; Xu 2023; Wu--Ding--Chen; Wang--Wu--Hu;
+Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025), eleven at **partial**
+depth (Kaipa--Patanker--Pradhan; Günay--Lavrauw;
+Davydov--Marcugini--Pambianco 2022; Cesaratto--Matera--Pérez;
 Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret; and the four repository
-companion manuscripts at their cross-cited statements), and ten at
+companion manuscripts at their cross-cited statements), and fifteen at
 **abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu; Dür 1994;
 Raissi--Gogolin--Riera--Acín;
 Iarrobino--Kanev; Comas--Seiguer; Stichtenoth; Dür;
-Lidl--Niederreiter; Ben-Sasson et al.).
+Lidl--Niederreiter; Ben-Sasson et al.;
+Davydov--Marcugini--Pambianco 2021 and 2023; Kaipa--Pradhan characteristic
+three; Ceria--Pavese; Ferraguti--Micheli).
 
 The consolidated verdict is:
 
+- the redundancy-five split-free criterion, read as a question about pencils
+  of binary cubics, is **prior art** and is now cited rather than claimed; see
+  the section on the twisted-cubic line-orbit literature below;
 - the coding dictionary, radius input, apolar/catalecticant language,
   binary-quartic orbit tools, curve bounds, normal-rational-curve nuclei,
   finite-field Galois theory, and subspace-polynomial background are inputs,
@@ -302,6 +309,79 @@ Within this recorded boundary, no predecessor was located for the exact
 reduced-fibre/Pascal-nesting/recursive-transport conjunction or the complete
 degree-nine final-pair classification.
 
+## The twisted-cubic line-orbit literature and redundancy five
+
+Added 2026-08-07 after a geometry-side screen that the earlier coding-side
+screens did not run.
+
+A redundancy-five witness system is a pencil of binary cubics, that is a line
+of PG(3,q) relative to the twisted cubic; a completely split squarefree cubic
+is a point of the orbit of `XY(X-Y)`, equivalently a plane meeting the curve in
+three distinct rational points. Both identifications are stated in the sources
+(Günay--Lavrauw §1; Kaipa--Pradhan §1; Blokhuis--Pellikaan--Szőnyi Prop. 3.1
+and Rem. 3.2). So split-freeness at redundancy five is a point-orbit
+distribution question for line orbits, and in that form it is settled.
+
+Blokhuis--Pellikaan--Szőnyi partition the lines into classes and determine,
+for q >= 23 and in every characteristic, which classes lie in such a plane
+(Thm. 7.1, Prop. 7.4). Their route is the manuscript's: the double point
+scheme of the associated degree-three rational function is a genus-one curve,
+at most twelve points are excluded, and Hasse--Weil forces a fibre with three
+distinct rational points once q >= 23 (Rem. 6.12). The manuscript's Section IV
+reproves this stratum by stratum; the correspondence is printed in the
+manuscript at Remark `rem:r5-line-literature`. The manuscript's only
+divergence is the substitution of the Aubry--Perret bound for Hasse--Weil,
+which drops the simplicity hypothesis and so carries the singular and wild
+cases uniformly.
+
+Exact counts, not only the vanishing test, are also published:
+Davydov--Marcugini--Pambianco Thm. 3.3 for the non-generic classes at q >= 5,
+Günay--Lavrauw for the same classes at odd q prime to three, Kaipa--Pradhan
+Thm. 1.3 for the generic class in characteristic other than two and three,
+their characteristic-three companion, and Ceria--Pavese in characteristic two.
+Kaipa--Pradhan Thm. 1.3 expresses the number of split squarefree members of a
+generic pencil as `(#E_L(F_q) - 3 eta_L)/3`, so a generic line is split-free
+exactly when `#E_L(F_q) = 3 eta_L <= 12`, which the Hasse bound forbids for
+q >= 23 and permits only for q <= 19. That reproduces the manuscript's
+threshold with an arithmetic reason for it.
+
+What remains without a located predecessor is the syndrome layer: the
+divided-power Hankel passage from a syndrome to its pencil, the exclusion of
+line classes that no rank-two syndrome realizes, the split-free syndrome
+inventory with representatives, orbit sizes, stabilizers, and Frobenius
+fusion, and the covering-radius promotion. No source located here contains a
+projective Reed--Solomon deep-hole, covering-radius, or syndrome statement.
+
+**Screened set.** Works citing Blokhuis--Pellikaan--Szőnyi, resolved by DOI
+`10.1007/s10623-022-01060-0`. Counts obtained independently and recorded
+separately: OpenAlex 13 (`W3148163570`), Crossref 10, Semantic Scholar 21
+(`18da046b2cacc19312cdb85421ffc59dbdc11b8f`). The three disagree; the largest
+set was screened over title, year, and external identifiers. Discriminator,
+verbatim: does the citing work state a projective Reed--Solomon deep-hole,
+covering-radius, or syndrome classification at redundancy five or higher? None
+does. The set is the twisted-cubic orbit and incidence school plus two MDS
+coset weight-distribution papers, `arXiv:2101.12722` and `arXiv:2605.10594`,
+neither read beyond its title and neither a redundancy-five classification.
+
+**Why the earlier screens missed it.** They were seeded on the coding papers
+and used the discriminator "does this state a PRS(q-4) or redundancy-five
+deep-hole or covering-radius classification?". The geometry literature does not
+cite those seeds and has no coding content, so it could neither enter that
+screen nor pass that filter. The missing question was about the object in the
+proof rather than the wrapper of the theorem: does any work decide whether a
+pencil of binary cubics contains a totally split squarefree member? The full
+record, including the read depths, the coverage gaps, and two defects in the
+earlier audit records, is in
+`notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md`.
+
+**Not covered.** MathSciNet remains unreachable, so every "to our knowledge"
+qualification it would have gated stays in force. The published Designs, Codes
+and Cryptography version of Blokhuis--Pellikaan--Szőnyi, the Ceria--Pavese
+paper, the Ferraguti--Micheli paper, and the journal version of the
+Kaipa--Pradhan characteristic-three paper were not obtained at full text; no
+verdict above rests on their unread portions. No backward screen was run on
+the pre-1985 twisted-cubic literature.
+
 ## Bibliography metadata and read-depth ledger
 
 Every DOI was resolved on 2026-07-23 by DOI content negotiation; author,
@@ -321,7 +401,16 @@ Surveys volume 6 (2019).
 | XuHongXu2017 | `arXiv:1705.07823` | abstract/metadata only | generalized projective RS families |
 | Xu2023 | `10.1051/wujns/2023281015` | full text, main theorem and introduction | even-characteristic PRS families |
 | WuDingChen2023 | `arXiv:2312.05534` | full text, abstract and Section V.A | MDS extensions and PRS radius context |
-| KPP2025 | `arXiv:2312.07118v3` | partial, abstract/introduction/orbit statements | binary-quartic orbit input |
+| KPP2025 | `arXiv:2312.07118` | partial, abstract/introduction/orbit statements, plus the role assigned to it in `KaipaPradhan2025` §1 | generic-line orbit decomposition for characteristic other than two |
+| BPS2022 | `10.1007/s10623-022-01060-0`, `arXiv:2103.16904` | full text at the load-bearing statements: §1, §3 (Props. 3.1, 3.3, Rem. 3.2), §5.2 (Prop. 5.5), §6 (Defs. 6.1--6.8, Props. 6.9--6.10, Cor. 6.11, Rem. 6.12), §7.1 (Thm. 7.1), §7.2 (Prop. 7.4 with proof, Rems. 7.5--7.6, Thm. 7.7); preprint text read, published version not consulted | prior art for the pencil-level split-free classification, `q >= 23`, all characteristics |
+| GunayLavrauw2022 | `10.1016/j.ffa.2021.101960`, `arXiv:2104.04756` | partial, abstract and §1 | point-orbit and plane-orbit distributions of the ten non-generic line classes, odd `q` prime to three |
+| DMP2022 | `arXiv:2103.11248` | partial, abstract, introduction, and the statement of Thm. 3.3 | exact planes-per-line counts for `q >= 5`, non-generic classes |
+| DMP2021 | Des. Codes Cryptogr. 89 (2021), 2211--2233 | abstract/metadata only | point-line incidence companion |
+| DMP2023 | `arXiv:2103.12655` | abstract/metadata only | line-orbit partition credited by `BPS2022` Rem. 7.3 |
+| KaipaPradhan2025 | `arXiv:2509.15332v1` | full text at the load-bearing statements: abstract, §1 with Problems 1.1--1.2, §1.1 with Thm. 1.3, §2, Lem. 4.1 | exact split-witness count for generic lines through a binary quartic and elliptic curve |
+| KaipaPradhan2025char3 | `arXiv:2508.11229` | abstract/metadata only; its role is secondary through `KaipaPradhan2025` §1, read at full text | generic-line incidence in characteristic three |
+| CeriaPavese2023 | Discrete Math. 346 (2023), Paper No. 113594 | abstract/metadata only, via search-result listing, not fetched; its role is secondary through `KaipaPradhan2025` §1 | generic-line incidence in characteristic two |
+| FerragutiMicheli2020 | Des. Codes Cryptogr. 88 (2020), 867--886 | abstract/metadata only, not fetched; the match with the split-free table is `BPS2022` Rem. 7.6's claim and is unverified against this paper | independent confirmation through degree-three permutation rational functions |
 | CMP2017 | `10.1007/s00493-015-3330-5` | partial, abstract/theorem statements | factorization-family context |
 | AubryPerret1995 | `10.1007/BF02567835` | partial, introduction and p. 468 point bound | singular-curve bound |
 | GmainerHavlicek2013 | `10.1007/BF01237480`, `arXiv:1304.0088` | partial, abstract/Theorem 1 | NRC nuclei |

@@ -17,7 +17,20 @@ orbit-count hypotheses.  Four further inputs remain visible:
 * Aubry and Perret, *Coverings of Singular Curves over Finite Fields*,
   Manuscripta Mathematica 88 (1995), 467--478,
   DOI `10.1007/BF02567835`, Theorem 4 on pp. 474--475;
-* the geometric classification of the separable cubic-cover strata;
+* the geometric classification of the separable cubic-cover strata.  A five-coordinate
+  syndrome annihilates a pencil of binary cubics, that is a line of `PG(3, q)` relative to
+  the twisted cubic, and a completely split squarefree cubic is a plane meeting that curve
+  in three distinct rational points; so this input is the determination of which lines lie
+  in such a plane.  For every characteristic and every `q ≥ 23` that determination is
+  Blokhuis, Pellikaan, and Szőnyi, *The Extended Coset Leader Weight Enumerator of a Twisted
+  Cubic Code*, Designs, Codes and Cryptography 90 (2022), 2223--2247,
+  DOI `10.1007/s10623-022-01060-0`, Theorem 7.1 for the partition of lines and
+  Proposition 7.4 for the verdict on each class, with the genus-one double-point-scheme
+  bound behind the `q ≥ 23` threshold in their Remark 6.12.  For the generic class in
+  characteristic other than two and three, the exact number of split squarefree members of
+  the pencil is Kaipa and Pradhan, *Incidence of Lines, Points and Planes in `PG(3, q)` with
+  Respect to the Twisted Cubic*, arXiv:2509.15332 (2025), Theorem 1.3.  Neither work treats
+  projective Reed--Solomon syndromes, covering radius, or deep holes;
 * semantic validation of the public finite certificate.
 
 No external result or finite-field computation is declared as an axiom.  The synthesis

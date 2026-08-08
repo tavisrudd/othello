@@ -9,6 +9,28 @@ $W_f$ are ordinary symmetric-power coordinates.  Factoring the formal
 quartic $\sum a_iT^iU^{4-i}$ would therefore be noninvariant in
 characteristics two and three.
 
+\paragraph{The criterion in finite-geometric form.}
+At $r=5$ the witness system $W_f\subset\Sym^3E^\vee$ is a pencil of
+binary cubics, that is a line of $\mathrm{PG}(3,q)$ relative to the twisted
+cubic; and a completely split squarefree cubic is a point of the
+$\PGL_2(q)$-orbit $\mathcal O_3=\PGL_2(q)\cdot XY(X-Y)$ of size
+$(q^3-q)/6$, equivalently a plane meeting the twisted cubic in three
+distinct rational points \cite[Prop.~3.1 and Rem.~3.2]{BPS2022},
+\cite[Lem.~4.1]{KaipaPradhan2025}.  Corollary~\ref{cor:splitfree}
+therefore reads
+\begin{equation}\label{eq:r5-orbit-criterion}
+       f\ \text{split-free}
+       \iff
+       W_f\cap\mathcal O_3=\varnothing .
+\end{equation}
+In this form the redundancy-five question is a point-orbit
+distribution question for line orbits of $\mathrm{PG}(3,q)$, and as such it has
+been answered in the finite-geometry literature; the relation is set
+out in Remark~\ref{rem:r5-line-literature}.  What that literature does
+not supply, and what this section adds, is the passage from a
+redundancy-five syndrome to its pencil: which lines arise as some
+$W_f$, and which \emph{syndromes} are thereby split-free.
+
 \begin{proposition}[Radius gate]\label{prop:r5-radius}
 For every prime power $q\geq7$,
 \[
@@ -255,6 +277,74 @@ settled by Lemmas~\ref{lem:cyclic} and \ref{lem:s3}.  The stated finite
 residue, canonical representatives, stabilizers, histograms, and
 Frobenius links are exactly the domain of Certificate R5.
 \end{proof}
+
+\begin{remark}[Relation to the twisted-cubic line literature]
+\label{rem:r5-line-literature}
+Under \eqref{eq:r5-orbit-criterion} every stratum above is a class of
+lines of $\mathrm{PG}(3,q)$ in the sense of Blokhuis, Pellikaan, and
+Sz\H onyi, who partition the lines into classes $O_1,\ldots,O_8$ and
+determine for $q\geq23$, in every characteristic, which classes lie in
+a plane meeting the twisted cubic in three rational points
+\cite[Thm.~7.1 and Prop.~7.4]{BPS2022}.  The correspondence is exact.
+Our quadratic-gcd trichotomy of Proposition~\ref{prop:r5-gcd2} is their
+degree-one case: real chords $O_1$ are shallow, tangents $O_2$ give the
+tangent family, imaginary chords $O_3$ give the conjugate-secant
+family.  The linear-gcd unisecants of
+Proposition~\ref{prop:r5-gcd1} are their $O_4$ and $O_5$.  The two
+cyclic cases of Lemma~\ref{lem:cyclic}(i) are their real axes $O_1'$
+and imaginary axes $O_3'$, with the same congruences mod three; the
+characteristic-three nucleus of Lemma~\ref{lem:cyclic}(ii) is their
+axis $O_7(3)$; the wild pencils of Lemma~\ref{lem:cyclic}(iii) are
+their $O_{8.1}(3)^{\pm}$ and $O_{8.2}(3)$.  Lemma~\ref{lem:s3} is their
+$O_6$, and their Remark 6.12 reaches the same threshold $q\geq23$ by
+the same route: the double point scheme of the degree-three map is a
+genus-one curve, at most twelve points must be excluded, and the
+Hasse--Weil bound then produces a fibre with three distinct rational
+points.  The proof given above replaces Hasse--Weil by the
+Aubry--Perret bound so that their simplicity hypothesis can be dropped,
+which is what lets the same estimate carry the singular and wild cases
+uniformly.  Independent confirmation of the same table comes from the
+classification of degree-three permutation rational functions
+\cite{FerragutiMicheli2020}, as recorded in \cite[Rem.~7.6]{BPS2022}.
+
+Exact counts, rather than the vanishing test, are available too.  For
+the ten non-generic line classes Davydov, Marcugini, and Pambianco give
+the exact number of planes of each orbit through each line for
+$q\geq5$ \cite[Thm.~3.3]{DMP2022}, building on their line-orbit
+classification \cite{DMP2023,DMP2021}; G\"unay and Lavrauw give the
+point-orbit and plane-orbit distributions of the same classes for odd
+$q$ prime to three \cite{GunayLavrauw2022}.  For the generic class and
+$\operatorname{char}\F_q\neq2,3$, Kaipa and Pradhan attach to a line
+$L$ a binary quartic $\varphi_L$ and an elliptic curve $E_L$, and prove
+\[
+       |W_f\cap\mathcal O_3|=\frac{\#E_L(\F_q)-3\eta_L}{3},
+\]
+where $\eta_L\in\{0,1,2,4\}$ records the rational factorization type of
+$\varphi_L$ \cite[Thm.~1.3]{KaipaPradhan2025}.  By
+\eqref{eq:r5-orbit-criterion} a generic line is split-free exactly when
+$\#E_L(\F_q)=3\eta_L\leq12$, which the Hasse bound
+$\#E_L(\F_q)\geq q+1-2\sqrt q$ forbids for $q\geq23$ and permits only
+for $q\leq19$.  That is the threshold of Lemma~\ref{lem:s3} again, now
+with an arithmetic reason for it.  The generic class is settled in
+characteristic three in \cite{KaipaPradhan2025char3} and in
+characteristic two by Ceria and Pavese \cite{CeriaPavese2023}.
+
+What this section contributes is therefore not the pencil-level
+classification but its syndrome-level source and consequence.  The
+passage $f\mapsto W_f$ of Lemma~\ref{lem:hankel} is not present in that
+literature, and it is not surjective onto the lines: the
+characteristic-two inseparable unisecants, split-free as lines, are
+realized by no rank-two syndrome, as the proof of
+Proposition~\ref{prop:r5-gcd1} shows.  Neither do incidence
+distributions produce syndromes; Table~\ref{tab:r5sporadic} records
+canonical representatives in divided-power syndrome coordinates with
+their orbit sizes, stabilizers, and Frobenius fusion, and extracting
+such a list from \cite[Thm.~1.3]{KaipaPradhan2025} would still require
+evaluating $\#E_L$ and $\eta_L$ over all $2q-3+\mu$ generic line orbits.
+The promotion from split-free to deep, through
+Proposition~\ref{prop:r5-radius}, is likewise outside that literature,
+which contains no covering-radius or deep-hole statement.
+\end{remark}
 
 \begin{longtable}{c>{\ttfamily\small}lrrl}
 \caption{Complete sporadic orbit inventory at redundancy five.  A
