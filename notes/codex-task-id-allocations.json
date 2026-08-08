@@ -2922,7 +2922,7 @@
       "kind": "reservation",
       "lane": "build-sys",
       "last": 891,
-      "purpose": "refresh C879 AME-LU and MDS-CSS extraction mapping and plan against current tree",
+      "purpose": "refresh the full paper-extraction mapping and plan against the current tree",
       "sequence": 325
     }
   ],
