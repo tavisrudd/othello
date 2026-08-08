@@ -23,7 +23,12 @@ full paper-local replay is running unattended in the synchronized standalone
 mirror.  The guarded export audit has zero findings, the 114-file export
 manifest verifies source commit `f55ac2c0`, and the mirror is committed at
 `86794b6`; both mirror builds and its quick verifier are green.  Remaining
-gates are the full replay result and the closeout review.
+gates are the full replay result and the closeout review.  The guarded Lean
+area comparison found and adopted a deterministic five-file PRS boundary
+delta onto the clean `finitegeom` checkout.  Both
+`PRSBeyondRedundancyFour` and its axiom-audit gate pass there, and the local
+Lean export is committed at `3ecb127`.  The paper's public Lean revision stays
+unset until the author publishes that commit; no push was performed.
 
 ## Goal
 
