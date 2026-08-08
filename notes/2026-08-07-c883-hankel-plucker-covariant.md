@@ -15,8 +15,8 @@ The two must be kept apart, and an earlier version of this report did not:
 - their line quartic \(\varphi_L\), whose roots are the **contact** parameters of the
   tangent lines the line meets, is the **Hessian** \(H\) of the syndrome quartic;
 - their \(D_L\), the discriminant of the residual quadratic, whose roots are the
-  **residual** parameters and from whose invariants their curve \(E_L\) is built, is
-  \(\tfrac32\bigl(I H-J f_a\bigr)\).
+  **residual** parameters and from whose invariants their curve \(E_L\) is built, has
+  the same function-field square class as \(I H-J f_a\).
 
 Both statements are verified below.  The degree count alone forces the first: \(\varphi_L\)
 is linear in the line's coordinates, those are quadratic in the syndrome, and the space of
@@ -155,33 +155,32 @@ The audit's underlying observation was still worth having: there are two quartic
 report's first version named one and described the other.  The repair is to distinguish
 them, which the Result section now does.
 
-The match is exact.  Their invariant normalization is fixed by their own relation
-\(j=1728I^3/(I^3-J^2)\), which forces \(I_{\text{theirs}}=12I\) and
-\(J_{\text{theirs}}=216J\) against the normalization used here.  With
-\(\varphi_L=H\) and their \(z_5=-I(f_a)\), all three of the following are identities in
-\(a_0,\dots,a_4\):
+The match must include the projective scale of the line representative.  Put
+\(\Delta=a_0a_2-a_1^2\), and work first on the patch \(\Delta\ne0\).  Solving the
+Hankel kernel with its last two ordinary cubic coefficients equal to \((1,0)\) and
+\((0,1)\), converting to Kaipa--Pradhan's divided-power cubic basis, and then applying
+their equations (8) and (20) gives the exact identities
 
 \[
- z_5^2=I_{\text{theirs}}(\varphi_L),\qquad
- I(D_L)=\tfrac94\,I(\operatorname{disc}),\qquad
- J(D_L)=\tfrac{27}8\,J(\operatorname{disc}),
+ \varphi_L=-\frac{H}{3\Delta},\qquad
+ z_5=\frac{I(f_a)}{18\Delta},\qquad
+ D_L=\frac{\operatorname{disc}(h_x)}{36\Delta^2}.
 \]
 
-the last two being exactly the scalings of a quartic under \(D_L=\tfrac32\operatorname{disc}\).
+Since the manuscript writes \(D_f=\operatorname{disc}(h_x)/4\), this is
 
-Two consequences.  First, the manuscript's identification of the fibre square with their
-incidence curve stands: they do take the discriminant of the same residual quadratic, and
-the two differ by the constant \(\tfrac32\), which is the normalization difference the
-manuscript already records as a square-class ambiguity.  Second, their square root
-\(z_5\) is \(-I(f_a)\), which is rational, and by the linear-complex identity above equals
-\(-(z_3-3z_2)\) in the Plücker coordinates.  Their construction needs a square root of the
-apolar invariant; in syndrome coordinates that square root is already there.
+\[
+ D_f=(3\Delta)^2D_L.
+\]
 
-Whether the constant \(\tfrac32\) is a square in \(\mathbf F_q\) decides a quadratic twist,
-and so bears on the exact point count rather than on the curve's isomorphism class over the
-algebraic closure.  The manuscript's sentence about normalizing the representative of
-\(g_x\) as they normalize it is what covers this; that it covers it exactly has not been
-checked here.
+Thus the manuscript's identification of the fibre square with their incidence curve stands
+without a twist: the two Kummer equations differ by an explicit square in the function
+field.  The equality on one dense Plücker patch proves the rational-function square-class
+identity; the other patches give the same projective statement by changing the kernel basis.
+The earlier fixed factor \(3/2\) came from comparing invariants of differently scaled quartic
+representatives.  Quartic invariants detect the scaling but do not determine the line's
+projective normalization, so they could not by themselves establish the claimed polynomial
+equality.
 
 ## Math check
 
@@ -210,23 +209,32 @@ Recorded against the standing gates on the card.
 ## Reproducibility
 
 - Generator: `notes/2026-08-07-c883-hankel-plucker-covariant.py`, SHA-256
-  `8aa6b3dca921e66a292546e5b643c5655fb13dcd89832563fddaada61b67fc9f`.
+  `d4b2e62dd82c5be64fa2a9179375adf2ba79b8ee70e173b89822c6b23cea7509`,
+  11,836 bytes.
+- Independent replay:
+  `notes/2026-08-07-c883-hankel-plucker-covariant-replay.py`, SHA-256
+  `f3cf014046311f6d53cf944186595807d8ce44e5d08f793d875d01fafdb01955`,
+  2,545 bytes.
 - Certificate: `notes/2026-08-07-c883-hankel-plucker-covariant.json`, SHA-256
-  `fd102b8bb9f1bb1c0d1a62a80b2bf1c01994809bf28390b329599a367aa227ad`.
-- Replay: `uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant.py`.
-  Every recorded flag is `true` except the last, which records the manuscript defect: the
-  printed parametrization satisfies only the fourth of the four printed generators.
+  `ba10ebf7ee6441960b4429c98e43666227d378d3f97c5cfd2078db08d126b53c`,
+  1,390 bytes.
+- Regenerate from the repository root with
+  `uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant.py`;
+  check without writing by appending `--check`; independently replay the square-class
+  calculation with
+  `uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant-replay.py`.
+  The three `false` entries in `plain_parametrization_generator_vanishing` are the expected
+  certificate of the repaired printed defect; every assertion flag is `true`.
 
-## Outstanding before promotion
+## Literature status
 
-The card requires a math check and a literature check per item, both recorded, before an
-item may be promoted into the manuscript. The math check is above; the literature check is
-not done. It must establish whether \(IH-Jf\) already carries a classical name in the
-covariant theory of binary quartics. What is known so far is internal: in the basis
+The required literature check is
+`notes/2026-08-07-c883-covariant-literature-audit.md`.  Across its recorded classical
+and modern search boundary, \(IH-Jf\) has no located standard name.  In the basis
 \(\{IH,Jf\}\) the two natural transvectants are \((H,H)_2=-24IH+72Jf\) and
 \((f,T)_3=-23040IH+34560Jf\), so \(IH-Jf=\tfrac1{72}(H,H)_2-\tfrac1{17280}(f,T)_3\) and is
-not a single transvectant in either normalization. Whether the combination is named
-classically, and by whom, is the open question.
+not a single transvectant in either normalization.  The neighbouring
+\(2IH-3Jf\), not the covariant here, is the repeatedly named classical element.
 
 ## Mystery ledger
 
@@ -242,3 +250,5 @@ classically, and by whom, is the open question.
   on the line at all — deserves a sentence in the manuscript if this is promoted.
 - **Settled by this pass:** why the residual component of the terminal carrier is a
   projected Veronese, and why the earlier cheap square-class test came back negative.
+- **Settled by the normalization replay:** the Kaipa--Pradhan comparison has no quadratic
+  twist; the exact function-field square factor is \((3\Delta)^2\) on the displayed patch.

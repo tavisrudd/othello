@@ -38,11 +38,16 @@ every characteristic:
   5. The parametrization printed alongside those generators does not satisfy
      three of them, because it is written in plain rather than divided-power
      coefficients.
+  6. On the patch Delta = a0*a2-a1^2, direct substitution into Kaipa--Pradhan
+     equations (8) and (20) gives D_L = disc(h_x)/(36*Delta^2).  Thus their
+     double cover and the fibre square differ by the square (3*Delta)^2, not a
+     fixed scalar that could produce a quadratic twist.
 
 Replay:  uv run --with sympy python3 notes/2026-08-07-c883-hankel-plucker-covariant.py
 Writes:  notes/2026-08-07-c883-hankel-plucker-covariant.json
 """
 
+import argparse
 import json
 from pathlib import Path
 
@@ -84,18 +89,6 @@ def quartic_data(a, var):
     return f, I, J, H
 
 
-def quartic_invariants(poly, var):
-    """The classical invariants I and J of a binary quartic given in the variable var."""
-    A, four_B, six_C, four_D, E = sp.Poly(poly, var).all_coeffs()
-    B = sp.Rational(1, 4) * four_B
-    C = sp.Rational(1, 6) * six_C
-    D = sp.Rational(1, 4) * four_D
-    return (
-        sp.expand(A * E - 4 * B * D + 3 * C**2),
-        sp.expand(A * C * E + 2 * B * C * D - A * D**2 - B**2 * E - C**3),
-    )
-
-
 def plucker(a):
     """Signed maximal minors of the Hankel matrix, in the paper's ordering."""
     return [
@@ -106,6 +99,54 @@ def plucker(a):
         -a[0] * a[3] + a[1] * a[2],
         a[0] * a[2] - a[1] ** 2,
     ]
+
+
+def kaipa_pradhan_patch_data(a):
+    """Kaipa--Pradhan equations (8) and (20) on the nonzero leading-minor patch."""
+    delta = sp.expand(a[0] * a[2] - a[1] ** 2)
+
+    # A basis of the Hankel kernel in ordinary cubic coefficients, with the
+    # final two coordinates respectively (1,0) and (0,1).
+    first = [
+        (a[1] * a[3] - a[2] ** 2) / delta,
+        (a[1] * a[2] - a[0] * a[3]) / delta,
+        sp.Integer(1),
+        sp.Integer(0),
+    ]
+    second = [
+        (a[1] * a[4] - a[2] * a[3]) / delta,
+        (a[1] * a[3] - a[0] * a[4]) / delta,
+        sp.Integer(0),
+        sp.Integer(1),
+    ]
+
+    # Kaipa--Pradhan use u0 Y^3 - 3 u1 Y^2 X + 3 u2 Y X^2 - u3 X^3.
+    first = [first[0], -first[1] / 3, first[2] / 3, -first[3]]
+    second = [second[0], -second[1] / 3, second[2] / 3, -second[3]]
+    p = {
+        (i, j): sp.cancel(first[i] * second[j] - first[j] * second[i])
+        for i in range(4)
+        for j in range(i + 1, 4)
+    }
+
+    # Equation (8): Pluecker coordinates p_ij in terms of z_0,...,z_5.
+    z0 = p[0, 1]
+    z1 = p[0, 2] / 2
+    z2 = p[0, 3] / 6 + p[1, 2] / 2
+    z5 = p[0, 3] / 6 - p[1, 2] / 2
+    z3 = p[1, 3] / 2
+    z4 = p[2, 3]
+
+    phi = sp.expand(z0 - 4 * z1 * x + 6 * z2 * x**2 - 4 * z3 * x**3 + z4 * x**4)
+    residual = sp.expand(
+        -z5 * phi
+        + (z1**2 - z0 * z2)
+        + 2 * (z0 * z3 - z1 * z2) * x
+        - (z0 * z4 + 2 * z1 * z3 - 3 * z2**2) * x**2
+        + 2 * (z1 * z4 - z2 * z3) * x**3
+        + (z3**2 - z2 * z4) * x**4
+    )
+    return delta, sp.cancel(z5), sp.cancel(phi), sp.cancel(residual)
 
 
 def residual_generators(c):
@@ -120,6 +161,13 @@ def residual_generators(c):
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="compare regenerated canonical JSON with the tracked certificate without writing",
+    )
+    args = parser.parse_args()
     results = {}
 
     disc = residual_discriminant(SYNDROME)
@@ -229,40 +277,27 @@ def main() -> None:
     ]
     results["stale_witness_catalecticant"] = int(catalecticant_at(stale))
 
-    # Match against the two quartics that Kaipa and Pradhan attach to a line.
-    #
-    # Their line quartic phi_L has coefficients linear in the line's coordinates.
-    # Those are quadratic in the syndrome, so phi_L has degree two in the syndrome and
-    # order four, and that covariant space is spanned by the Hessian alone; phi_L is
-    # therefore H up to a scalar.  Their second quartic D_L, from which their elliptic
-    # curve is built, is quadratic in the line's coordinates, hence degree four, hence in
-    # the span of I*H and J*f.  Their invariant normalization is fixed by their own
-    # relation j = 1728 I^3/(I^3 - J^2), which gives I_theirs = 12 I and J_theirs = 216 J.
-    hessian_I, hessian_J = quartic_invariants(H, x)
-    their_I_of_phi = 12 * hessian_I
-    their_J_of_phi = 216 * hessian_J
-    z5 = -I
-    results["their_z5_squared_is_apolar_invariant_of_hessian"] = (
-        sp.expand(z5**2 - their_I_of_phi) == 0
+    # Match the actual line representative and projective scale in Kaipa--Pradhan,
+    # rather than comparing invariant normalizations of differently scaled quartics.
+    delta, their_z5, their_phi, their_disc = kaipa_pradhan_patch_data(SYNDROME)
+    results["kaipa_pradhan_phi_is_scaled_hessian_on_patch"] = (
+        sp.cancel(their_phi + H / (3 * delta)) == 0
     )
-
-    their_I_of_D = sp.expand(z5 * their_J_of_phi + sp.Rational(5, 4) * their_I_of_phi**2)
-    their_J_of_D = sp.expand(
-        -sp.Rational(1, 8)
-        * (
-            11 * their_I_of_phi**3
-            + 2 * their_J_of_phi**2
-            + 14 * their_J_of_phi * z5 * their_I_of_phi
-        )
+    results["kaipa_pradhan_z5_scale_on_patch"] = (
+        sp.cancel(their_z5 - I / (18 * delta)) == 0
     )
-    disc_I, disc_J = quartic_invariants(disc, x)
-    results["their_D_invariants_match_three_halves_of_ours"] = bool(
-        sp.expand(their_I_of_D - sp.Rational(9, 4) * 12 * disc_I) == 0
-        and sp.expand(their_J_of_D - sp.Rational(27, 8) * 216 * disc_J) == 0
+    results["kaipa_pradhan_discriminant_square_class_on_patch"] = (
+        sp.cancel(their_disc - disc / (36 * delta**2)) == 0
     )
+    results["fibre_to_kaipa_pradhan_square_factor"] = "(3*(a0*a2 - a1**2))**2"
 
     out = Path(__file__).with_suffix(".json")
-    out.write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    serialized = json.dumps(results, indent=2, sort_keys=True) + "\n"
+    if args.check:
+        if out.read_text(encoding="utf-8") != serialized:
+            raise SystemExit(f"certificate mismatch: regenerate {out}")
+    else:
+        out.write_text(serialized, encoding="utf-8")
     for key, value in sorted(results.items()):
         print(f"{key}: {value}")
 

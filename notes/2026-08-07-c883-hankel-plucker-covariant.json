@@ -5,9 +5,13 @@
   "bottom_parametrization_satisfies_generators": true,
   "bottom_parametrization_satisfies_reversed_generators": true,
   "discriminant_is_I_H_minus_J_f": true,
+  "fibre_to_kaipa_pradhan_square_factor": "(3*(a0*a2 - a1**2))**2",
   "identity_holds_mod_2": true,
   "identity_holds_mod_3": true,
   "identity_is_integral": true,
+  "kaipa_pradhan_discriminant_square_class_on_patch": true,
+  "kaipa_pradhan_phi_is_scaled_hessian_on_patch": true,
+  "kaipa_pradhan_z5_scale_on_patch": true,
   "perfect_square_locus_parametrization": [
     "u**2",
     "-u*v/2",
@@ -38,8 +42,6 @@
     0,
     0
   ],
-  "their_D_invariants_match_three_halves_of_ours": true,
-  "their_z5_squared_is_apolar_invariant_of_hessian": true,
   "witness_catalecticant": 8,
   "witness_on_residual_prime": true
 }
