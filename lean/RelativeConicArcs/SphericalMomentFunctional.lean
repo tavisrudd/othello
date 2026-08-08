@@ -1,3 +1,4 @@
+import Mathlib.Algebra.BigOperators.Field
 import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 import Mathlib.Data.Nat.Factorial.Basic
 import Mathlib.Data.Real.Basic
@@ -38,6 +39,8 @@ as a theorem about an integral.  Nothing in the module imports measure theory.
   normalization `L 1 = 1` determines a linear functional uniquely.
 * `gaussianMoment_comp_linearSubstitution`: invariance under a substitution by an
   orthogonal matrix.
+* `normalizedMean_sum` and `normalizedMean_C_mul`: linearity of the normalized
+  mean at a fixed degree.
 * `gaussianMoment_quadric_mul` and `normalizedMean_quadric_mul`: multiplying a
   form of degree `d` by `X 0 ^ 2 + X 1 ^ 2 + X 2 ^ 2` multiplies the functional
   by `d + 3` and leaves the normalized mean unchanged.
@@ -242,6 +245,20 @@ explicitly defined quotient of polynomial data and carries no analytic content;
 see the module header. -/
 noncomputable def normalizedMean (d : ℕ) (p : MvPolynomial (Fin 3) ℝ) : ℝ :=
   gaussianMoment p / momentFactor (d + 2)
+
+/-- The normalized mean of a finite sum of forms is the sum of their normalized
+means.  Both sides use the same degree `d`, so the identity is the linearity of
+`gaussianMoment` followed by division by the fixed constant
+`momentFactor (d + 2)`. -/
+lemma normalizedMean_sum {ι : Type*} (d : ℕ) (s : Finset ι)
+    (f : ι → MvPolynomial (Fin 3) ℝ) :
+    normalizedMean d (∑ i ∈ s, f i) = ∑ i ∈ s, normalizedMean d (f i) := by
+  simp only [normalizedMean, map_sum, Finset.sum_div]
+
+/-- A constant factor passes through the normalized mean of a fixed degree. -/
+lemma normalizedMean_C_mul (d : ℕ) (c : ℝ) (p : MvPolynomial (Fin 3) ℝ) :
+    normalizedMean d (C c * p) = c * normalizedMean d p := by
+  rw [normalizedMean, normalizedMean, gaussianMoment_C_mul, mul_div_assoc]
 
 /-- The sum of the squares of the three variables. -/
 noncomputable def quadric : MvPolynomial (Fin 3) ℝ := ∑ i, X i ^ 2
