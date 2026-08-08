@@ -1,6 +1,7 @@
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Complex.Basic
+import Mathlib.Analysis.Convex.Jensen
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Module
@@ -656,6 +657,24 @@ def CoordinatewiseEndpointDominated {ι : Type*} [DecidableEq ι]
     (f : (ι → ℝ) → ℝ) : Prop :=
   ∀ x, InControlCube x → ∀ i,
     f x ≤ max (f (Function.update x i (-1))) (f (Function.update x i 1))
+
+/-- Separate convexity of a function along every coordinate line of the real
+control cube. -/
+def CoordinatewiseConvexOnCube {ι : Type*} [DecidableEq ι]
+    (f : (ι → ℝ) → ℝ) : Prop :=
+  ∀ x, InControlCube x → ∀ i,
+    ConvexOn ℝ (Set.Icc (-1 : ℝ) 1) fun t => f (Function.update x i t)
+
+/-- Separate convexity implies coordinatewise endpoint domination. -/
+theorem coordinatewiseEndpointDominated_of_convexOnCube
+    {ι : Type*} [DecidableEq ι] (f : (ι → ℝ) → ℝ)
+    (hf : CoordinatewiseConvexOnCube f) :
+    CoordinatewiseEndpointDominated f := by
+  intro x hx i
+  have hmax := (hf x hx i).le_max_of_mem_Icc
+    (show (-1 : ℝ) ∈ Set.Icc (-1) 1 by simp)
+    (show (1 : ℝ) ∈ Set.Icc (-1) 1 by simp) (hx i)
+  simpa [Function.update] using hmax
 
 theorem inControlCube_update_endpoint {ι : Type*} [DecidableEq ι]
     {x : ι → ℝ} (hx : InControlCube x) (i : ι) {b : ℝ}
