@@ -1,0 +1,15 @@
+{
+  "mode": "bootstrap",
+  "helpers": 5,
+  "want": 5,
+  "helper_graphs": 1024,
+  "patterns": 32,
+  "cases": 32768,
+  "exhaustive": true,
+  "all_pinned_bits_correct": true,
+  "pinned_min": 5,
+  "pinned_max": 5,
+  "queries_max": 9,
+  "queries_mean": 5.316833,
+  "histogram": {"4": 8224, "5": 10218, "6": 10116, "7": 4144, "8": 62, "9": 4}
+}

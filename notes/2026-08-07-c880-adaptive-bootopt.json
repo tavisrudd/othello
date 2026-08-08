@@ -5,7 +5,6 @@
   "exhaustive": true,
   "optimal_depth_max": 9,
   "optimal_depth_min": 7,
-  "entropy_floor": 7,
   "worst_codes": [0, 1023],
   "histogram": {"7": 1022, "9": 2}
 }

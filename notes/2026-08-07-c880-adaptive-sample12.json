@@ -7,7 +7,7 @@
   "want": 5,
   "all_recovered": true,
   "queries_max": 69,
-  "queries_mean": 57.850600,
+  "queries_mean": 57.799800,
   "core_max": 22,
   "bootstrap_max": 35,
   "lemma_max": 15,

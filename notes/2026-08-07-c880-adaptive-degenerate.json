@@ -1,0 +1,13 @@
+{
+  "mode": "degenerate",
+  "codes": [0, 1023],
+  "exhaustive_over_patterns": true,
+  "worst_any_pattern": 9,
+  "worst_constant_pattern": 8,
+  "constant_pattern_rows": [
+    {"code": 0, "pattern": 0, "tests": 4},
+    {"code": 0, "pattern": 31, "tests": 8},
+    {"code": 1023, "pattern": 0, "tests": 8},
+    {"code": 1023, "pattern": 31, "tests": 4}
+  ]
+}

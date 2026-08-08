@@ -25,12 +25,17 @@
 // test then reads exactly [u_a = u_b + e_ac + e_bc].
 //
 // So attaching a point costs one test per unknown edge, after a bootstrap
-// that supplies the first two.  The bootstrap is done on five fixed helper
-// points: the tests inside {0,v} u H that contain v determine u on H
-// outright, because {0,v} u H has seven points and the paper's own
+// that supplies the first two.  The bootstrap runs on five helper points
+// chosen to carry both a known edge and a known non-edge whenever the known
+// graph carries both: the tests inside {0,v} u H that contain v determine u
+// on H outright, because {0,v} u H has seven points and the paper's own
 // faithfulness theorem separates there, while the tests avoiding v are
-// already known.  Its cost is a constant, measured exhaustively by the
-// `bootstrap` mode over all 2^10 helper graphs and all 2^5 unknown patterns.
+// already known.  Exact minimax play costs 7 tests on every non-monochromatic
+// helper configuration and at most 9 on the two monochromatic ones, which the
+// `bootopt` mode establishes exhaustively over all 2^10 configurations.  A
+// monochromatic configuration arises only while the whole known graph is
+// monochromatic, where the stage costs 4 unless it is the one stage that ends
+// that state; the `degenerate` mode measures those.
 //
 // Build:  rustc -O -o <scratch>/c880ad 2026-08-07-c880-adaptive-decoder.rs
 // Run:    <scratch>/c880ad core      --out <path.json>
@@ -486,15 +491,13 @@ enum BNode {
 
 struct BootTree {
     nodes: Vec<BNode>,
-    depth: usize,
 }
 
 fn build_boot_tree(code: u32, want: u32) -> BootTree {
     let mut opt = BootOpt::new(code, want);
-    let depth = opt.depth(u32::MAX) as usize;
     let mut nodes = Vec::new();
     build_boot_node(&mut opt, u32::MAX, &mut nodes);
-    BootTree { nodes, depth }
+    BootTree { nodes }
 }
 
 fn build_boot_node(opt: &mut BootOpt, post: u32, nodes: &mut Vec<BNode>) -> usize {
@@ -597,22 +600,52 @@ fn decode(
         // choose the helper five out of the first six known points: the six
         // five-subsets have different worst-case bootstrap costs, and the
         // decoder knows the induced graph, so it can take the cheapest.
-        let pool: Vec<usize> = (1..CORE_N).collect(); // {1,...,6}
+        // Choose the helper five so that the known graph on it is not
+        // monochromatic whenever the known graph on K is not: take one edge of
+        // each value and pad.  Every non-monochromatic helper configuration
+        // costs 7, so this is what removes the exceptional class from the
+        // bound rather than merely making it rare.
         let mut helpers = [0usize; H];
-        let mut best_cost = usize::MAX;
-        for drop in 0..pool.len() {
-            let mut cand = [0usize; H];
-            let mut k = 0;
-            for (i, &p) in pool.iter().enumerate() {
-                if i != drop {
-                    cand[k] = p;
-                    k += 1;
+        let mut e_one: Option<(usize, usize)> = None;
+        let mut e_zero: Option<(usize, usize)> = None;
+        'scan: for a in 1..v {
+            for b in (a + 1)..v {
+                if g.edge(idx, a, b) {
+                    if e_one.is_none() {
+                        e_one = Some((a, b));
+                    }
+                } else if e_zero.is_none() {
+                    e_zero = Some((a, b));
+                }
+                if e_one.is_some() && e_zero.is_some() {
+                    break 'scan;
                 }
             }
-            let cost = trees[code_of(&g, idx, &cand) as usize].depth;
-            if cost < best_cost {
-                best_cost = cost;
-                helpers = cand;
+        }
+        match (e_one, e_zero) {
+            (Some((a, b)), Some((c, d))) => {
+                let mut set: Vec<usize> = Vec::with_capacity(H);
+                for x in [a, b, c, d] {
+                    if !set.contains(&x) {
+                        set.push(x);
+                    }
+                }
+                for x in 1..v {
+                    if set.len() == H {
+                        break;
+                    }
+                    if !set.contains(&x) {
+                        set.push(x);
+                    }
+                }
+                set.sort_unstable();
+                helpers.copy_from_slice(&set);
+            }
+            _ => {
+                // the known graph is monochromatic; any five points will do
+                for (k, x) in (1..v).take(H).enumerate() {
+                    helpers[k] = x;
+                }
             }
         }
         let code = code_of(&g, idx, &helpers);
@@ -655,8 +688,7 @@ fn decode(
         let before = oracle.count;
         let rest: Vec<usize> = pending
             .into_iter()
-            .chain(pool.iter().cloned().filter(|p| !helpers.contains(p)))
-            .chain(CORE_N..v)
+            .chain((1..v).filter(|p| !helpers.contains(p)))
             .collect();
         for a in rest {
             // root test, if some resolved b has u_b = e_ab
@@ -736,8 +768,8 @@ fn manuscript_count(n: usize) -> i64 {
 }
 
 // worst-case bound of the decoder from the two measured constants
-fn decoder_bound(n: usize, core_max: usize, boot_max: usize, pinned: usize) -> usize {
-    let mut t = core_max;
+fn decoder_bound(n: usize, core_max: usize, boot_max: usize, pinned: usize, switch: usize) -> usize {
+    let mut t = core_max + switch;
     for v in CORE_N..n {
         t += boot_max + (v - 1 - pinned);
     }
@@ -753,7 +785,7 @@ fn arg(args: &[String], key: &str) -> Option<String> {
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        eprintln!("usage: c880ad <core|bootstrap|verify|sample|predict> [options] --out <path>");
+        eprintln!("usage: c880ad <core|bootstrap|bootopt|degenerate|verify|sample|trivial|predict> [options] --out <path>");
         process::exit(2);
     }
     let mode = args[1].clone();
@@ -829,57 +861,48 @@ fn main() {
                 hist_s
             )
         }
-        "helperchoice" => {
-            // For every graph on six known points, the decoder picks the
-            // five-subset with the cheapest worst-case bootstrap.  This mode
-            // reports the largest cost it can be forced to pay, which is the
-            // per-attachment constant of the decoder's proved bound.
-            let want: u32 = arg(&args, "--want").unwrap_or_else(|| "5".into()).parse().unwrap();
-            let table = boot_opt_table(want);
-            let six = 6usize;
-            let sixpairs = six * (six - 1) / 2; // 15
-            let idx6 = Idx::new(7); // pairs on 1..6
-            let mut worst_choice = 0usize;
-            let mut worst_fixed = 0usize;
-            let mut hist = vec![0usize; 32];
-            for bits in 0..(1u64 << sixpairs) {
-                let g = Graph::from_bits(&idx6, bits);
-                let pool: Vec<usize> = (1..7).collect();
-                let mut best = usize::MAX;
-                for drop in 0..six {
-                    let mut cand = [0usize; H];
-                    let mut k = 0;
-                    for (i, &p) in pool.iter().enumerate() {
-                        if i != drop {
-                            cand[k] = p;
-                            k += 1;
+        "degenerate" => {
+            // The only helper configurations costing more than 7 are the two
+            // monochromatic ones.  A stage of the decoder meets one only while
+            // the known graph is monochromatic, and the known graph stays
+            // monochromatic after attaching v exactly when the pattern u is
+            // constant.  This mode reports the optimal tree's cost on those
+            // two codes, split by pattern, which is what bounds the expensive
+            // stages.
+            let mut rows = String::new();
+            let mut worst_const = 0usize;
+            let mut worst_any = 0usize;
+            for code in [0u32, (1u32 << HPAIRS) - 1] {
+                let tree = build_boot_tree(code, 5);
+                let queries = boot_queries();
+                for u in 0..32u32 {
+                    let mut at = tree.nodes.len() - 1;
+                    let mut d = 0usize;
+                    loop {
+                        match tree.nodes[at] {
+                            BNode::Leaf { .. } => break,
+                            BNode::Test { q, yes, no } => {
+                                d += 1;
+                                at = if boot_predict(queries[q], u, code) { yes } else { no };
+                            }
                         }
                     }
-                    let c = table[code_of(&g, &idx6, &cand) as usize];
-                    best = best.min(c);
-                    if drop == 5 {
-                        worst_fixed = worst_fixed.max(c); // the fixed choice {1,...,5}
+                    worst_any = worst_any.max(d);
+                    if u == 0 || u == 31 {
+                        worst_const = worst_const.max(d);
+                        if !rows.is_empty() {
+                            rows.push_str(",\n");
+                        }
+                        rows.push_str(&format!(
+                            "    {{\"code\": {}, \"pattern\": {}, \"tests\": {}}}",
+                            code, u, d
+                        ));
                     }
-                }
-                worst_choice = worst_choice.max(best);
-                hist[best] += 1;
-            }
-            let mut hist_s = String::new();
-            for (k, c) in hist.iter().enumerate() {
-                if *c > 0 {
-                    if !hist_s.is_empty() {
-                        hist_s.push_str(", ");
-                    }
-                    hist_s.push_str(&format!("\"{}\": {}", k, c));
                 }
             }
             format!(
-                "{{\n  \"mode\": \"helperchoice\",\n  \"want\": {},\n  \"six_point_graphs\": {},\n  \"exhaustive\": true,\n  \"worst_with_choice\": {},\n  \"worst_fixed_five\": {},\n  \"histogram\": {{{}}}\n}}\n",
-                want,
-                1u64 << sixpairs,
-                worst_choice,
-                worst_fixed,
-                hist_s
+                "{{\n  \"mode\": \"degenerate\",\n  \"codes\": [0, 1023],\n  \"exhaustive_over_patterns\": true,\n  \"worst_any_pattern\": {},\n  \"worst_constant_pattern\": {},\n  \"constant_pattern_rows\": [\n{}\n  ]\n}}\n",
+                worst_any, worst_const, rows
             )
         }
         "bootopt" => {
@@ -906,7 +929,7 @@ fn main() {
                 .map(|(c, _)| format!("{}", c))
                 .collect();
             format!(
-                "{{\n  \"mode\": \"bootopt\",\n  \"want\": {},\n  \"helper_graphs\": {},\n  \"exhaustive\": true,\n  \"optimal_depth_max\": {},\n  \"optimal_depth_min\": {},\n  \"entropy_floor\": 7,\n  \"worst_codes\": [{}],\n  \"histogram\": {{{}}}\n}}\n",
+                "{{\n  \"mode\": \"bootopt\",\n  \"want\": {},\n  \"helper_graphs\": {},\n  \"exhaustive\": true,\n  \"optimal_depth_max\": {},\n  \"optimal_depth_min\": {},\n  \"worst_codes\": [{}],\n  \"histogram\": {{{}}}\n}}\n",
                 want,
                 1u32 << HPAIRS,
                 table.iter().max().unwrap(),
@@ -916,10 +939,9 @@ fn main() {
             )
         }
         "trivial" => {
-            // The one complement class on which the helper five is forced to be
-            // monochromatic: the two-graph all of whose triples agree, i.e. the
-            // empty and complete graphs.  Its attachments pay the 9-test
-            // bootstrap at every stage, so it is the decoder's worst class.
+            // The two-graph all of whose triples agree, i.e. the empty and
+            // complete graphs: the one class on which every stage of the
+            // decoder meets a monochromatic helper configuration.
             let nmax: usize = arg(&args, "--nmax").unwrap_or_else(|| "20".into()).parse().unwrap();
             let trees = build_boot_trees(5);
             let mut rows = String::new();
@@ -1022,6 +1044,7 @@ fn main() {
                 .unwrap();
             let boot_max: usize = arg(&args, "--boot-max").expect("--boot-max required").parse().unwrap();
             let pinned: usize = arg(&args, "--pinned").unwrap_or_else(|| "5".into()).parse().unwrap();
+            let switch: usize = arg(&args, "--switch").unwrap_or_else(|| "2".into()).parse().unwrap();
             let mut rows = String::new();
             for n in CORE_N..=nmax {
                 if !rows.is_empty() {
@@ -1030,15 +1053,15 @@ fn main() {
                 rows.push_str(&format!(
                     "    {{\"n\": {}, \"decoder_bound\": {}, \"counting\": {}, \"entropy_nonadaptive\": {:.4}, \"manuscript\": {}}}",
                     n,
-                    decoder_bound(n, core_max, boot_max, pinned),
+                    decoder_bound(n, core_max, boot_max, pinned, switch),
                     counting_bound(n),
                     entropy_bound(n),
                     manuscript_count(n)
                 ));
             }
             format!(
-                "{{\n  \"mode\": \"predict\",\n  \"core_max\": {},\n  \"boot_max\": {},\n  \"pinned\": {},\n  \"rows\": [\n{}\n  ]\n}}\n",
-                core_max, boot_max, pinned, rows
+                "{{\n  \"mode\": \"predict\",\n  \"core_max\": {},\n  \"boot_max\": {},\n  \"pinned\": {},\n  \"switch_allowance\": {},\n  \"rows\": [\n{}\n  ]\n}}\n",
+                core_max, boot_max, pinned, switch, rows
             )
         }
         other => {

@@ -4,9 +4,9 @@
 `notes/clebsch-tasks/c880-aligned-query-complexity.md`.
 
 **Status:** complete for every C880 finding that has survived validation and the
-audit as of this date. The adaptive decoder is still being chased; if it lands
-with a proved count, this file gets an addendum and Draft 2's closing sentence
-is the one that changes.
+audit as of this date, including the adaptive decoder, whose text is in the
+addendum at the end. A referee pass on the same date is applied throughout:
+`notes/2026-08-07-c880-adaptive-and-wording-referee-review.md`.
 
 **Boundary.** No manuscript file is edited here. C816 owns promotion and C824
 owns the final Paper III pass; either may reject or reshape any of this. Every
@@ -138,8 +138,8 @@ because the answers are biased.  A uniformly random two-graph restricts to a
 uniformly random two-graph on any four points, and two of those eight are
 aligned, so every alignment test answers yes with probability exactly
 \(1/4\).  The information-theoretic bound of combinatorial search theory,
-subadditivity of entropy in the form
-\(\binom{n-1}{2}-1=H(\tau)\le\sum_iH(A_i)=k\,H(1/4)\), then gives
+subadditivity of entropy applied to the entropy \(\binom{n-1}{2}-1\) of the
+complement pair, which is what the answers determine, gives
 \[
  k\;\ge\;\frac{\binom{n-1}{2}-1}{H(1/4)}
  \;=\;1.2326\Bigl(\tbinom{n-1}{2}-1\Bigr)\;\approx\;0.616\,n^2
@@ -151,8 +151,8 @@ test in the light of earlier answers.
 
 Tests indexed by four-sets occur elsewhere as a primitive observation.  The
 causal-clustering algorithm of Kummerfeld and Ramsey \cite{KummerfeldRamsey}
-spends one statistical test per quartet of observed variables, up to
-\(\binom n4\) of them, and pays for each in samples.  That test decides
+decides one coherence bit per quartet of observed variables, up to
+\(\binom n4\) of them, each by a pair of statistical tests on sampled data.  That test decides
 whether covariance minors vanish under a one-factor measurement model, not
 whether four triple signs cohere, so the two counts measure different work
 and are not compared here.
@@ -161,7 +161,7 @@ and are not compared here.
 
 **Notes for the promoting task.**
 
-- \(H(1/4)=0.811278\ldots\) bits and \(1/H(1/4)=1.23266\ldots\); the displayed
+- \(H(1/4)=0.8112781\ldots\) bits and \(1/H(1/4)=1.232623\ldots\); the displayed
   \(1.2326\) is truncated, not rounded, so the inequality stays valid as
   printed.
 - The third paragraph is the whole of what the vanishing-tetrad screen
@@ -182,7 +182,7 @@ witness is verified by evaluating two graphs on six points.
 ```tex
 \begin{remark}[Seven points is sharp]
 \label{rem:six-point-witness}
-Six points do not suffice, and not merely because a two-graph may have no
+Six points do not suffice, and not only because a two-graph may have no
 aligned four-set at all.  Represent a two-graph on \(\{0,\dots,5\}\) by the
 unique graph in its switching class in which \(0\) is isolated, and take
 \[
@@ -233,10 +233,10 @@ away-from-anchor tests above remove its balanced-cut ambiguity.
 ```tex
 The two-graph parity
 axiom therefore lowers that general threshold to four, with ambient order
-seven sharp.  The sharpness is a separate statement from theirs: their
-\(v\ge7\) is the endpoint of the admissible range \(4\le k\le v-3\), and the
-sharpness they remark on is in \(k\), so no six-point failure follows from
-their work for either observable.  The homogeneous-triple analysis of
+seven sharp.  That sharpness is a separate statement from Dammak, Lopez,
+Pouzet, and Si Kaddour's: their \(v\ge7\) is the endpoint of the admissible
+range \(4\le k\le v-3\), and the sharpness they remark on is in \(k\), so no
+six-point failure follows from their work for either observable.  The homogeneous-triple analysis of
 ordinary graphs \cite{PouzetHomogeneousTriples} supplies the one-anchor
 viewpoint; the away-from-anchor tests above remove its balanced-cut
 ambiguity.
@@ -314,8 +314,9 @@ that field would take the shorter phrasing the other way.
 
 ## Draft 7 — the verification section
 
-**Appends** to `sections/08-verification.tex` after line 67, which currently
-ends "not as a procedure."
+**Appends** to `sections/08-verification.tex` after line 71, which ends the
+paragraph carrying the human-proof list; line 67 ends a sentence but not that
+paragraph, so inserting there would split it.
 
 ```tex
 The sharpness of the seven-point hypothesis is proved in the text by the
@@ -375,6 +376,15 @@ Mining, ACM, 2016; doi:10.1145/2939672.2939838.
 Page numbers for the KDD paper are not asserted because the audit read the
 PubMed Central copy, which does not carry them.
 
+Three mechanical points for whoever promotes these. The bibliography opens
+`\begin{thebibliography}{9}`, whose width argument is already too narrow for a
+two-digit entry count; widen it to `{99}` while the file is open. The entries
+above abbreviate journal names and give a bare `doi:`, where the existing
+entries spell journals out and wrap DOIs in `\href`; harmonize on promotion.
+And Draft 2's first paragraph and the existing paragraph at lines 357--370 both
+explain that order-three data trivializes the problem, so one of the two
+tellings should be trimmed rather than both kept.
+
 ---
 
 ## Draft 9 — the `OPER-4` ledger row
@@ -397,8 +407,8 @@ quote none of it. **Replaces** the `Established literature boundary` and
 > identifiability class with diagonal sign similarity. Rising--Kulesza--Taskar
 > and Brunel--Urschel own `O(n^2)`-query reconstruction against a principal-minor
 > *value* oracle, with the count called asymptotically optimal there; Brunel
-> owns the cycle-basis algorithm whose Seidel specialization costs
-> `C(n,2)-n+1` order-three minors. Subadditivity of entropy over biased binary
+> owns the cycle-basis algorithm; its Seidel specialization, computed in the
+> audit rather than stated there, costs `C(n,2)-n+1` order-three minors. Subadditivity of entropy over biased binary
 > tests is the standard information-theoretic bound of combinatorial search
 > theory. Kummerfeld--Ramsey own a deployed algorithm whose primitive
 > observation is a four-set indicator.
@@ -461,7 +471,9 @@ not occur, and the drafts for them are not written. Naming them:
 
 ## What promoting these drafts requires
 
-1. Drafts 1, 4 and 5 are self-contained and can go in as they stand.
+1. Drafts 1 and 4 are self-contained and can go in as they stand. Draft 5
+   depends on Draft 3, whose label `rem:six-point-witness` it cites; taking it
+   alone leaves an undefined reference.
 2. Drafts 2 and 3 add two remarks and five bibliography entries. Draft 2's
    third paragraph and Draft 3's optional census sentence are separable.
 3. Draft 6 and the second sentence of Draft 7 need the C880 certificates to
@@ -477,13 +489,14 @@ not occur, and the drafts for them are not written. Naming them:
 ## Addendum, same day — the adaptive decoder landed
 
 `notes/2026-08-07-c880-adaptive-decoder.md` proves an adaptive decoder using at
-most \(\binom n2+n-6\) alignment tests, against a counting lower bound of
-\(\binom n2-n\) that binds every decoder. Two things in the drafts above change.
+most \(\binom n2+n-4\) alignment tests on every instance, against a counting
+lower bound of \(\binom n2-n\) that binds every decoder. Two things in the
+drafts above change.
 
 **Draft 2's last sentence is replaced.** It currently reads:
 
 ```tex
-Between that and
+Against
 \(3n^2-23n+45\) the ratio tends to \(4.87\); the constant \(3\) is not known
 to be optimal, and this bound says nothing about a decoder that chooses each
 test in the light of earlier answers.
@@ -492,17 +505,18 @@ test in the light of earlier answers.
 Replace with:
 
 ```tex
-Between that and \(3n^2-23n+45\) the ratio tends to \(4.87\), and the constant
-\(3\) is not known to be optimal.  The bound also does not apply to a decoder
-that chooses each test in the light of earlier answers, and such a decoder does
-better than any fixed family can: reading the two-graph on seven points, and
-then adding one point at a time, costs \(\binom n2+n-6\) tests in all.  Two
-known edges at a new point make every further edge cost one test, because a
-test one of whose two conditions is already known reads as a single bit; the
-whole cost of adding a point is the cost of its first two edges, and seven
-tests buy five of them.  So the price of the coherence restriction is a price
-of fixing the tests in advance: adaptively the fourth-order indicator matches
-the order-three minor values to leading order, both at \(n^2/2\).
+Against \(3n^2-23n+45\) the ratio tends to \(4.87\), and the constant \(3\)
+is not known to be optimal.  The bound also does not apply to a decoder that
+chooses each test in the light of earlier answers, and for \(n\geq19\) such a
+decoder does better than any fixed family can: reading the two-graph on seven
+points, and then adding one point at a time, costs at most \(\binom n2+n-4\)
+tests.  Two known edges at a new point make every further edge cost one test,
+because a test one of whose two conditions is already decided --- known to
+hold, or known to agree with the other --- reads as a single bit; the whole
+cost of adding a point is the cost of its first two edges, and seven tests buy
+five of them.  So the price of the coherence restriction is a price of fixing
+the tests in advance: adaptively the fourth-order indicator matches the
+order-three minor values to leading order, both at \(n^2/2\).
 ```
 
 **A new bibliography entry is not needed**, and no novelty adjective is used:
@@ -515,10 +529,10 @@ eight points":
 > attachment lemma that makes each further edge cost one test.
 
 **What the manuscript should not say.** Not that the decoder is optimal — the
-adaptive complexity is pinned only to a window of width \(2n-6\). Not that
+adaptive complexity is pinned only to a window of width \(2n-4\). Not that
 adaptivity helps at every \(n\) — the proved separation against the entropy
-floor starts at \(n=18\), and at \(n=7\) it is exact (22 against 30) but at
-intermediate \(n\) neither bound settles it. Not that this improves on the
+floor holds for \(n\ge19\), and at \(n=7\) it is exact (22 against 30), but
+for \(8\le n\le18\) neither bound settles it. Not that this improves on the
 principal-minor literature, whose value oracle is stronger.
 
 **Where it goes.** Draft 2 already sits after the proof of
@@ -534,8 +548,9 @@ model, not a replacement for the construction the faithfulness proof carries.
   actually particular to this decoder. Whether the six-point failure needs a
   certificate to enter the paper: it does not --- the witness pair is a proof.
 - **Closed by the addendum.** Whether the manuscript can state a decoder better
-  than \(3n^2-23n+45\). It can: \(\binom n2+n-6\) adaptively, with the
-  attachment lemma as the mechanism.
+  than \(3n^2-23n+45\). It can: \(\binom n2+n-4\) adaptively, with the
+  attachment lemma as the mechanism, and a separation from every fixed family
+  proved for \(n\ge19\).
 - **Open, owned by C816.** Whether Drafts 6 and 7 are worth the artifact
   migration. The lane's reading is that Draft 6 earns its place only if the
   paper wants the rigidity-and-redundancy framing that
