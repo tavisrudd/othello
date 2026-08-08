@@ -207,6 +207,8 @@ cases, and literature inputs are explicit in the formal interface.
 
 - [ ] Define the real control cube and transfer K_C(x).
 - [ ] Prove each sector bound.
+      The mixed-sector inequality from nonnegative spectral variables and the
+      `e1`, `e2` bounds is proved; the matrix-to-control bounds remain.
 - [ ] Formalize the separate-convexity and rank-one-minor reductions.
 - [ ] Prove the Boolean reduction.
 - [ ] Characterize every equality case.

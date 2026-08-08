@@ -609,6 +609,16 @@ segment points are incomparable.  It does not yet prove the continuous-control
 bounds or Et-Taoui-family realization, so the full Pareto claim remains open at
 exactly those two bridges.
 
+The conditional Pareto package is now exact: under feasibility and realization
+hypotheses, the maximal feasible set equals the full `[0,1]` frontier image,
+with all three endpoint maximizers proved.  The manuscript's elementary mixed
+spectral inequality `e1*e2-e3 ≤ 8/5` from nonnegativity, `e1≤9/5`, and
+`e2≤24/25` is also kernel checked.  Five supporting terminals have been added
+to the intended Golden surface.  The leaf and guarded gate pass, but the shared
+aggregate was again refused after its fixed quiet wait by a foreign Lean build;
+the current generated fact is still the earlier twenty-five-terminal fact,
+not the intended thirty-one-terminal refresh.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

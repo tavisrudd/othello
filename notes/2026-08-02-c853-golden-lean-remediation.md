@@ -214,6 +214,22 @@ incomparable.  This deliberately leaves two strength-bearing bridges open:
 every continuous control must satisfy the six assumed inequalities, and the
 Hermitian conference family must realize every `t ∈ [0,1]`.
 
+That reduction now has its exact maximal-set wrapper.  Assuming those two
+bridges, `maximalIn_iff_mem_hermitianFrontier` identifies the componentwise
+maximal feasible set with precisely the image of `[0,1]`; separate terminals
+prove the symmetric and exterior endpoint at `t=0` and the mixed endpoint at
+`t=1`.  The manuscript's remaining three-variable analytic lemma is also
+kernel checked: nonnegative spectral variables with `e1 ≤ 9/5` and
+`e2 ≤ 24/25` satisfy `e1*e2-e3 ≤ 8/5`.  The proof follows the two active
+branches split at the third variable `1/5`.
+
+These five supporting results are registered in the Golden trust surface,
+bringing the intended fact to thirty-one terminals.  The leaf and guarded gate
+pass.  A new bounded shared-queue attempt again built the leaf and then refused
+the aggregate after the fixed 120-second quiet wait because the same foreign
+Lean build remained live.  The generated fact therefore remains at its prior
+twenty-five-terminal checkpoint and must not be treated as current.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript
