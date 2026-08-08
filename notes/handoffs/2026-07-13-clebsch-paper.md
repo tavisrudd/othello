@@ -520,6 +520,14 @@ The second surviving cubic moment is green as well:
 substitution, negates `Hodd`, fixes `Heven`, and proves the two odd-power moments
 zero.  The marked split and invariant-line assembly are next.
 
+The designed marked odd/even combination is now assembled.  For every real `s` with `s² = 5`,
+`markedTetrahedralField s = (-385s/24)Hodd + (35/12)Heven`, and
+`normalizedMean_markedTetrahedralField_cube` derives
+`-15680000/1247103` from the four moment theorems.  The proof uses only the
+square of the odd coefficient, making the rationality mechanism explicit.  Its
+identification with the marked zonal field remains part of the geometric
+assembly.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared

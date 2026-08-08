@@ -255,8 +255,10 @@ the following task-owned obligations, in execution order:
    surviving moment is now also proved,
    `M(Hodd² Heven) = -1024/969969`, and the first-coordinate transposition
    proves `M(Hodd³) = M(Hodd Heven²) = 0` symbolically.  What remains in this
-   item is the marked-field split, rotation covariance, coefficient-orbit
-   reduction, sum-zero collapse, and final corollaries.
+   item is rotation covariance, coefficient-orbit reduction, sum-zero collapse,
+   and final corollaries.  The marked odd/even combination is now assembled for
+   either square root of five, and its cubic mean is proved to be the rational
+   value `-15680000/1247103`.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This

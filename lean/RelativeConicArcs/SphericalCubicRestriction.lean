@@ -111,4 +111,51 @@ theorem normalizedMean_tetrahedralOddHarmonic_mul_tetrahedralEvenHarmonic_sq :
     linearSubstitution_firstCoordinateSwap_tetrahedralEvenHarmonic]
   ring
 
+/-- A linear combination of the odd and even tetrahedral harmonics. -/
+noncomputable def tetrahedralHarmonicCombination (a b : ℝ) :
+    MvPolynomial (Fin 3) ℝ :=
+  C a * tetrahedralOddHarmonic + C b * tetrahedralEvenHarmonic
+
+/-- The cubic normalized mean of an odd/even tetrahedral combination has only
+the two even-parity contributions. -/
+theorem normalizedMean_tetrahedralHarmonicCombination_cube (a b : ℝ) :
+    normalizedMean 18 (tetrahedralHarmonicCombination a b ^ 3) =
+      3 * a ^ 2 * b * (-1024 / 969969) + b ^ 3 * (-1280 / 46189) := by
+  have hadd (p q : MvPolynomial (Fin 3) ℝ) :
+      normalizedMean 18 (p + q) = normalizedMean 18 p + normalizedMean 18 q := by
+    simp [normalizedMean]
+  have hpoly : tetrahedralHarmonicCombination a b ^ 3 =
+      C (a ^ 3) * tetrahedralOddHarmonic ^ 3 +
+      C (3 * a ^ 2 * b) *
+        (tetrahedralOddHarmonic ^ 2 * tetrahedralEvenHarmonic) +
+      C (3 * a * b ^ 2) *
+        (tetrahedralOddHarmonic * tetrahedralEvenHarmonic ^ 2) +
+      C (b ^ 3) * tetrahedralEvenHarmonic ^ 3 := by
+    rw [tetrahedralHarmonicCombination]
+    push_cast
+    ring
+  rw [hpoly, hadd, hadd, hadd,
+    normalizedMean_C_mul, normalizedMean_C_mul, normalizedMean_C_mul,
+    normalizedMean_C_mul,
+    normalizedMean_tetrahedralOddHarmonic_cube,
+    normalizedMean_tetrahedralOddHarmonic_sq_mul_tetrahedralEvenHarmonic,
+    normalizedMean_tetrahedralOddHarmonic_mul_tetrahedralEvenHarmonic_sq,
+    normalizedMean_tetrahedralEvenHarmonic_cube]
+  ring
+
+/-- The marked tetrahedral field in terms of a chosen square root `s` of five.
+Its odd coefficient is `-385s/24` and its even coefficient is `35/12`. -/
+noncomputable def markedTetrahedralField (s : ℝ) : MvPolynomial (Fin 3) ℝ :=
+  tetrahedralHarmonicCombination (-385 * s / 24) (35 / 12)
+
+/-- For either real square root of five, the marked tetrahedral field has the
+rational normalized cubic moment `-15680000/1247103`. -/
+theorem normalizedMean_markedTetrahedralField_cube {s : ℝ} (hs : s ^ 2 = 5) :
+    normalizedMean 18 (markedTetrahedralField s ^ 3) = -15680000 / 1247103 := by
+  rw [markedTetrahedralField, normalizedMean_tetrahedralHarmonicCombination_cube]
+  have ha : (-385 * s / 24 : ℝ) ^ 2 = 741125 / 576 := by
+    nlinarith
+  rw [ha]
+  norm_num
+
 end RelativeConicArcs.SphericalCubicRestriction
