@@ -2,7 +2,25 @@
 
 **Lane:** golden
 
-**Status:** queued after C845 and before C840
+**Status:** active after C845 and before C840; matrix benchmark landed, semantic
+and coverage remediation in progress
+
+## Landed-work review
+
+The first matrix module and balanced benchmark elaborate and the current gate
+builds, but review found three acceptance blockers:
+
+- the compression module is absent from the gate and trust/export closure;
+- the four scalar legacy terminals remain advertised without actual
+  determinant/trace bridges; and
+- no formal conference-matrix or balanced-cut object witnesses the public
+  benchmark's claimed scope.
+
+Remediation proceeds by closing and registering the matrix semantics first,
+then introducing the formal vocabulary, then expanding to the Hermitian,
+rigidity/stability, all-orders, control, obstruction, and orientation crowns.
+The trust fact and deterministic export are refreshed only after that surface is
+stable.  The dated C853 report records the detailed findings and gates.
 
 ## Goal
 

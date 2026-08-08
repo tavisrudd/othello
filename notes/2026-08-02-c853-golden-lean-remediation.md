@@ -5,6 +5,48 @@
 **Status:** in progress; export prerequisite closed, matrix-level vocabulary and
 the balanced exchange benchmark landed
 
+## Review checkpoint
+
+A full review of the landed C853 surface found no failed Lean proof, but the
+artifact does not yet meet the task contract.
+
+- `ConferenceExchangeCompression` elaborates, but the Golden gate, trust
+  registry, generated fact, and export configuration do not import or advertise
+  it.  It is therefore source code rather than part of the formal companion.
+- The gate still advertises the four scalar `GoldenBalancedCut` terminals.
+  Their determinant, trace-contraction, and fourth-word values are not connected
+  by theorem types to an actual matrix determinant or trace.  The new normalized
+  determinant theorem does not by itself close that bridge.
+- The public benchmark is an algebraically valid theorem about a block matrix
+  satisfying a square identity.  It does not yet expose formal conference-matrix,
+  balanced-cut, or control objects, so its documentation is stronger than its
+  semantic API.
+- The Hermitian landscape, rigidity and stability, all-orders spectrum,
+  continuous-control, balance-obstruction, and orientation layers remain
+  unformalized, as the gate header correctly states.
+- The export prose still describes the superseded scalar-only boundary and does
+  not match the real matrix-level closure or its observed axioms.
+
+The remediation order is:
+
+1. prove actual matrix determinant, trace-contraction, and fourth-word bridge
+   terminals and remove the scalar-only declarations from the advertised gate;
+2. import and register the compression module, then close its spectral bridge to
+   the normalized cross Gram operator;
+3. introduce self-contained conference-matrix, balanced-cut, Hermitian, control,
+   switching, and distance vocabulary and restate the benchmark through it;
+4. formalize the Hermitian landscape, rigidity/stability, all-orders spectrum,
+   continuous-control, balance-obstruction, and orientation terminals in that
+   order;
+5. refresh the claim ledger and referee prose, regenerate the exact trust fact,
+   and rerun deterministic canonical export only after the theorem surface is
+   stable.
+
+The immediate acceptance gate is narrow: the Golden import-only gate must carry
+the compression identities and actual matrix semantics for every retained
+value `16`, `12`, and `-42`, with no scalar surrogate counted as theorem
+coverage.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

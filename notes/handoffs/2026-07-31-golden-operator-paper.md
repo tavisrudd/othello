@@ -558,6 +558,16 @@ balance-obstruction, and orientation layers with exact referee-facing trust
 boundaries.  It may not count scalar algebra as theorem coverage.  The full
 plan is `notes/golden-tasks/c853-golden-lean-remediation.md`.
 
+A landed-work review has activated C853 and confirmed that the matrix benchmark
+and separate compression identities elaborate, but the formal companion is not
+yet acceptance-ready.  The compression module is outside the gate and trust
+closure; four scalar legacy terminals remain advertised without actual matrix
+determinant/trace bridges; and the benchmark still lacks formal conference and
+cut vocabulary.  C853 now closes those semantic and export boundaries before
+expanding to the Hermitian, rigidity/stability, all-orders, control,
+balance-obstruction, and orientation crowns.  The exact findings and remediation
+order are in `notes/2026-08-02-c853-golden-lean-remediation.md`.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window
