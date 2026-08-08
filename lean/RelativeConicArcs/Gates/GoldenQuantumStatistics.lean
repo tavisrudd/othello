@@ -45,7 +45,9 @@ also proves the mixed-sector three-variable bound and the exact Pareto
 domination, antichain, maximality, and endpoint geometry conditional on the
 paper's remaining continuous-control feasibility and family-realization
 bridges.  For an actual six-mode complex transfer, it proves the exact first
-moment control formula and its `9/5` bound on the real cube.
+moment control formula and its `9/5` bound on the real cube.  A reusable finite
+cube theorem proves that separate coordinate convexity reduces every objective
+value to a Boolean vertex.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its continuous-control optimum, the admissible Hermitian
