@@ -33,16 +33,43 @@ derives the extension consequence from the very hypothesis that forbids it.
 If that reading is right the corollary needs a fundamental correction, not rewording, and
 the cross-paper AME/local-unitary consequences imported by the companion paper inherit it.
 
+## Primary-source reading, 2026-08-07
+
+Step 1 below is done, and it supports the objection.  Kaipa's Section IV states Dur's
+theorem verbatim, from the cached full text (`arXiv:1612.05447`):
+
+> **Theorem (Dur 1994).** The covering radius of a \([q+1,k]_q\) RS code \(C\) is
+> \(q-k\) if and only if (any) RNC in \(PG(q-k)\) is a complete arc.  Equivalently
+> there is no MDS extension of \(C^\perp\) by one digit.
+
+and his introduction says directly that when the covering radius equals \(n-k-1\) rather
+than \(n-k\), "the equivalence between deep holes of \(C\) and MDS extensions of
+\(C^\perp\) breaks down."
+
+Our situation sits exactly there.  At redundancy five the code has length \(n=q+1\) and
+dimension \(k=q-4\), so \(n-k=5\) and \(n-k-1=4\); Proposition `prop:r5-radius` proves
+\(\rho=4\), which is \(q-k\).  Dur's theorem then says the relevant normal rational curve
+is a complete arc and there is **no** one-digit MDS extension of \(C^\perp\).  The
+\(q=8\) corollary claims \(1116\) one-column \([10,5,6]_8\) extensions, and \(C^\perp\)
+there is a \([9,5,5]_8\) code whose one-digit extension would be exactly \([10,5,6]_8\).
+On its face that is the object Dur's theorem forbids.
+
+Before concluding, rule out the one way the manuscript could still be right: that its
+"relative projective one-column extension" is not an extension of \(C^\perp\) in Dur's
+sense — a different ambient code, a different arc, or an extension of \(C\) rather than of
+its dual.  If it is the same object, the corollary is wrong and the error is in the
+direction of the implication, not in the count.
+
 ## What must be checked, in order
 
-1. Read Kaipa 2017 (`arXiv:1612.05447`, DOI `10.1109/TIT.2017.2706677`) Section IV and
-   Proposition 4 at full text and quote the exact boundary statement, including which
-   code, which length, and which radius it applies to.  The manuscript already cites this
-   passage for the radius gate, so the same passage is on both sides of the question.
-2. Read Dür 1994 (`10.1016/0012-365X(94)90256-9`) for the completeness--covering-radius
-   equivalence in its own terms rather than through the secondary statement.  The paper's
-   own audit currently records Dür at abstract/metadata only, with the consumed form
-   checked secondarily inside Kaipa; that is not enough to settle this.
+1. ~~Read Kaipa 2017 Section IV and Proposition 4 at full text.~~  Done; quoted above.
+   Cache key `arXiv:1612.05447`.
+2. Read Dür 1994 for the equivalence in its own terms rather than through Kaipa's
+   restatement.  **Access blocked**: Discrete Mathematics 126 (1994), no. 1--3, 99--105,
+   DOI `10.1016/0012-365X(94)90256-9`, "On the covering radius of Reed--Solomon codes";
+   OpenAlex reports it closed with no repository full text, and it predates arXiv.  Kaipa's
+   verbatim restatement is strong secondary evidence, so this reading confirms rather than
+   decides; it is still required before a correction is published.
 3. Decide which of three outcomes holds: the extension sentences are correct as stated
    under a hypothesis the manuscript does satisfy; they are correct for a different
    extension notion than the one Kaipa rules out (for instance extension of the code

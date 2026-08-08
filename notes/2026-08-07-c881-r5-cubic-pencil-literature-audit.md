@@ -281,15 +281,26 @@ in the Sources section above.
 - **Searched and found nothing** — the citing set above, under the stated discriminator,
   contains no redundancy-five projective Reed--Solomon result.  This licenses the narrowed
   novelty claim.
+- **Obtained after the first pass, 2026-08-07.**  Ceria--Pavese `arXiv:2208.00503`
+  (SHA-256 `7d658f2dafd49ca7a26d06d84f91c93e824265a2af8beeab172f197ea4fd42ad`),
+  Davydov--Marcugini--Pambianco point-line `arXiv:2104.12254` (SHA-256
+  `f0a1b81c14e3acacfdf71933d342860e6c366498884bdcc2b7d8c08064b3cea4`), and
+  Ferraguti--Micheli `arXiv:1805.03097` (SHA-256
+  `116ce99ca09ba708b91235d22fe08e4e85641ae56d9bc79a70ffc8a481866667`) are now cached as
+  free preprints.  Caching is not reading: their read depths in the Sources section stand
+  at abstract/metadata only until someone opens them.
 - **Could not access, licenses nothing:** MathSciNet (institutional authentication, not
   reachable from this session) — the "to our knowledge" qualification it would have gated
-  remains in force.  The published Designs, Codes and Cryptography version of
-  Blokhuis--Pellikaan--Szőnyi (preprint read instead), the Ceria--Pavese paper, the
-  Ferraguti--Micheli paper, and the Finite Fields and Their Applications version of the
-  Kaipa--Pradhan characteristic-three paper were not obtained at full text.  None of the
-  verdicts above rests on the unread portion of those four: the pre-emption finding rests
-  on Blokhuis--Pellikaan--Szőnyi and Kaipa--Pradhan `arXiv:2509.15332`, both read at full
-  text at their load-bearing statements.
+  remains in force.  Dür 1994, *On the covering radius of Reed--Solomon codes*, Discrete
+  Mathematics **126** (1994), no. 1--3, 99--105, DOI `10.1016/0012-365X(94)90256-9`, is
+  closed access with no repository full text and predates arXiv; it is the only source in
+  this collection with no free route, and it is load-bearing for the separate
+  MDS-extension question rather than for any verdict here.  The published journal versions
+  of Blokhuis--Pellikaan--Szőnyi, of Ceria--Pavese, of Ferraguti--Micheli, and of the
+  Kaipa--Pradhan characteristic-three paper were not obtained; the preprints were read or
+  cached instead.  None of the verdicts above rests on the unread portions: the pre-emption
+  finding rests on Blokhuis--Pellikaan--Szőnyi and Kaipa--Pradhan `arXiv:2509.15332`, both
+  read at full text at their load-bearing statements.
 - No backward screen was run on the pre-1985 twisted-cubic literature beyond what
   Hirschfeld's *Finite projective spaces of three dimensions* supplies through the four
   sources that cite it.  Recorded as an open gap; it bears on attribution priority within
