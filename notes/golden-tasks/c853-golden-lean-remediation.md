@@ -206,6 +206,9 @@ cases, and literature inputs are explicit in the formal interface.
 ## Phase 6: continuous control and balance obstruction
 
 - [ ] Define the real control cube and transfer K_C(x).
+      The complex transfer block, real diagonal control, and exact Gram
+      compression identity are defined; the cube subtype and conference
+      specialization remain.
 - [ ] Prove each sector bound.
       The mixed-sector inequality from nonnegative spectral variables and the
       `e1`, `e2` bounds is proved; the matrix-to-control bounds remain.

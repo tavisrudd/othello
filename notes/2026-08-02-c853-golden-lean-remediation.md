@@ -230,6 +230,15 @@ the aggregate after the fixed 120-second quiet wait because the same foreign
 Lean build remained live.  The generated fact therefore remains at its prior
 twenty-five-terminal checkpoint and must not be treated as current.
 
+The matrix-to-control remediation has also begun on the correct semantic
+object.  `realDiagonalControl` embeds real controls as Hermitian complex
+diagonal matrices, `hermitianTransferBlock` is `Qmᴴ D Qp`, and
+`hermitianTransferBlock_gram` proves its actual Gram matrix is the compression
+`Qpᴴ(D Pm D)Qp` whenever `Qm Qmᴴ=Pm`.  This registered terminal raises the
+intended fact to thirty-two terminals.  What remains is to specialize the
+projection to a Hermitian conference involution and prove the control-cube
+trace, minor, and determinant bounds.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

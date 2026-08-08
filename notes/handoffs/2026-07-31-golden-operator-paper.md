@@ -619,6 +619,13 @@ aggregate was again refused after its fixed quiet wait by a foreign Lean build;
 the current generated fact is still the earlier twenty-five-terminal fact,
 not the intended thirty-one-terminal refresh.
 
+The complex matrix-to-control bridge now starts from the actual transfer
+`QmᴴDQp`: real diagonal controls are proved Hermitian and the transfer Gram is
+proved equal to `Qpᴴ(D Pm D)Qp` under the complementary-frame projection
+identity.  This is a registered thirty-second intended terminal.  Conference
+projection specialization and the cube trace/minor/determinant bounds remain;
+the generated fact is still pending the same unavailable quiet window.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window
