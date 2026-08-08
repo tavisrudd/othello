@@ -102,22 +102,25 @@ query-counting genre of structure learning, where Franquesa Monés, Zhang and
 Uhler prove matching bounds for conditional-independence tests.
 
 The adaptive side is closed. An explicit decoder reads the two-graph in
-\(\binom n2+n-6\) alignment tests, against the counting lower bound
-\(\binom n2-n\), so the adaptive constant is exactly \(1/2\) and the coherence
-restriction costs nothing to leading order. Its mechanism is an attachment
+\(\binom n2+n-4\) alignment tests on every instance, against the counting lower
+bound \(\binom n2-n\), so the adaptive constant is exactly \(1/2\) and the
+coherence restriction costs nothing to leading order. Its mechanism is an attachment
 lemma: once two edges at a new point are known, every further edge costs one
 test, because a test one of whose two conditions is already known reads as a
-single bit. The bootstrap costs seven tests per point, which is the entropy
-floor for the five bits it pins, except on the two monochromatic helper
-configurations. Adaptivity therefore strictly beats every fixed family from
-\(n=18\) on, against the \(0.616\,n^2\) entropy floor, and beats the exhibited
-\(3n^2-23n+45\) by a factor tending to six. Verified exhaustively at seven and
-eight points and by sampling to \(n=40\):
-`notes/2026-08-07-c880-adaptive-decoder.md`.
+single bit. The bootstrap costs seven tests per point, which exact minimax play
+shows optimal for every helper configuration the decoder can be made to meet.
+Adaptivity therefore strictly beats every fixed family from \(n=19\) on,
+against the \(0.616\,n^2\) entropy floor, and beats the exhibited
+\(3n^2-23n+45\) by a factor tending to six; the range \(8\le n\le18\) is open.
+Verified exhaustively at seven and eight points and by sampling to \(n=40\), and
+repaired after a referee pass:
+`notes/2026-08-07-c880-adaptive-decoder.md` and
+`notes/2026-08-07-c880-adaptive-and-wording-referee-review.md`.
 
 Item 7 is drafted against all five audit and screen constraints, with the
 LaTeX quoting the lines it replaces, the discarded alternatives named, and a
 replacement `OPER-4` ledger row: `notes/2026-08-07-c880-manuscript-wording.md`.
+The same referee pass reviewed the drafts; its repairs are applied.
 
 Open next: the nonadaptive constant, still bracketed between \(0.616\,n^2\) and
 \(3n^2\); the difference-mask route is exhausted, so the routes left are a
