@@ -27,6 +27,15 @@ BUNDLES = (
         ),
     ),
     (
+        "Exact split-witness count at redundancy five",
+        "r5-elliptic-incidence",
+        (
+            ("replay", "2026-08-07-r5-elliptic-incidence-replay.py", "2026-08-07-r5-elliptic-incidence-replay.py", "rederive"),
+            ("census", "2026-08-07-r5-elliptic-incidence-census.json", "2026-08-07-r5-elliptic-incidence-census.json", "compare"),
+            ("checksum", "2026-08-07-r5-elliptic-incidence.sha256", "2026-08-07-r5-elliptic-incidence.sha256", "compare"),
+        ),
+    ),
+    (
         "Certificate R6",
         "r6",
         (

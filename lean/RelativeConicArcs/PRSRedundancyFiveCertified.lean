@@ -34,7 +34,7 @@ theorem redundancyFiveSynthesisWithCertificate
     (input : ExceptionalCoverClassificationInput K CertificateValidation q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)
-    (hHighField : q ≥ 23 →
+    (hHighField : q ≥ 20 →
       input.aubryPerretPointBound ∧ input.cubicCoverStrataClassified) :
     (∀ s, input.coveringRadius.isDeep s ↔ s ∈ input.families.deep) ∧
       2 * input.families.deep.card =

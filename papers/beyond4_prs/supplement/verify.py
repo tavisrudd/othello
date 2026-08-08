@@ -222,8 +222,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 75:
-        raise SystemExit(f"expected 75 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 79:
+        raise SystemExit(f"expected 79 adopted manuscript labels, found {len(labels)}")
 
     formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
     if formal_sources == (False, False):
@@ -334,6 +334,14 @@ def replay() -> None:
                 "2026-07-22-redundancy-five-deep-hole-replay.py",
                 "--json",
                 "2026-07-22-prs-deep-hole-census.json",
+            ],
+        ),
+        (
+            "r5-elliptic-incidence",
+            [
+                "2026-08-07-r5-elliptic-incidence-replay.py",
+                "--fields",
+                "5,7,9,11,13,17,19,23,25,27",
             ],
         ),
         (

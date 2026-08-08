@@ -30,7 +30,12 @@ orbit-count hypotheses.  Four further inputs remain visible:
   characteristic other than two and three, the exact number of split squarefree members of
   the pencil is Kaipa and Pradhan, *Incidence of Lines, Points and Planes in `PG(3, q)` with
   Respect to the Twisted Cubic*, arXiv:2509.15332 (2025), Theorem 1.3.  Neither work treats
-  projective Reed--Solomon syndromes, covering radius, or deep holes;
+  projective Reed--Solomon syndromes, covering radius, or deep holes.  The threshold this
+  module requires of that input is `q ≥ 20` rather than `q ≥ 23`: `ExactSplitWitnessCount`
+  records the count relation and the tame Riemann--Hurwitz branch budget as hypotheses,
+  `ExactSplitWitnessCount.fibreSquarePoints_le_twelve` bounds a split-free fibre square by
+  twelve, and `fieldOrder_le_nineteen_of_splitFree` derives the field bound from that and
+  the Aubry--Perret range;
 * semantic validation of the public finite certificate.
 
 No external result or finite-field computation is declared as an axiom.  The synthesis
@@ -468,6 +473,50 @@ structure OrbitData (case : OrbitArithmeticCase) where
     semilinearOrbitCount =
       nonsporadicOrbitCount case + sporadicSemilinearOrbitCount
 
+/-- The exact split-witness count on the trivial-gcd separable stratum in odd
+characteristic, as an arithmetic relation between the rational-point count of the
+off-diagonal fibre square and the member types of the pencil.
+
+`fibreSquarePoints` is the number of rational points of the fibre square, `splitMembers`
+the number of completely split squarefree members of the pencil, `doubleRootMembers` the
+number of members with a rational double root and a distinct rational simple root, and
+`cubeMembers` the number of members that are perfect cubes of a rational linear form.
+The count relation is proved by summing the rational roots of the residual quadratic over
+the points of the projective line, one pencil member at a time; the branch budget is the
+tame Riemann--Hurwitz bound for a different of degree four. -/
+structure ExactSplitWitnessCount where
+  fibreSquarePoints : ℕ
+  splitMembers : ℕ
+  doubleRootMembers : ℕ
+  cubeMembers : ℕ
+  countRelation :
+    fibreSquarePoints = 6 * splitMembers + 3 * doubleRootMembers + cubeMembers
+  branchBudget : doubleRootMembers + 2 * cubeMembers ≤ 4
+
+/-- A split-free pencil has at most twelve rational points on its fibre square. -/
+theorem ExactSplitWitnessCount.fibreSquarePoints_le_twelve
+    (c : ExactSplitWitnessCount) (hsplit : c.splitMembers = 0) :
+    c.fibreSquarePoints ≤ 12 := by
+  have hb := c.branchBudget
+  have hrel := c.countRelation
+  omega
+
+/-- The redundancy-five field threshold, derived rather than assumed.  If a geometrically
+integral fibre square of arithmetic genus one meets the Aubry--Perret range, written here
+in the squared integer form `(q + 1 - Y) ^ 2 ≤ 4 * q` with `Y ≤ q + 1`, and if the pencil
+is split-free so that `Y ≤ 12`, then the field order is at most nineteen. -/
+theorem fieldOrder_le_nineteen_of_splitFree
+    {q Y : ℕ} (hle : Y ≤ q + 1) (hbound : (q + 1 - Y) ^ 2 ≤ 4 * q)
+    (htwelve : Y ≤ 12) : q ≤ 19 := by
+  by_contra hq
+  have h20 : 20 ≤ q := Nat.lt_of_not_le hq
+  have hd : q - 11 ≤ q + 1 - Y := by omega
+  have hsq : (q - 11) ^ 2 ≤ (q + 1 - Y) ^ 2 := Nat.pow_le_pow_left hd 2
+  have hgt : 4 * q < (q - 11) ^ 2 := by
+    have h : q - 11 + 11 = q := by omega
+    nlinarith [h, h20, Nat.sub_le q 11]
+  omega
+
 /-- Fields below the geometric point-count threshold whose classification is
 supplied by the finite certificate. -/
 def finiteBridgeFieldOrders : List ℕ :=
@@ -485,7 +534,7 @@ structure ExceptionalCoverClassificationInput
   orbitCase : OrbitArithmeticCase
   orbitCaseCondition : orbitCase.FieldCondition families.characteristic q
   fieldOrderAtLeastSeven : q ≥ 7
-  classificationRange : q ≥ 23 ∨ q ∈ finiteBridgeFieldOrders
+  classificationRange : q ≥ 20 ∨ q ∈ finiteBridgeFieldOrders
   seroussiRothCompleteness : Prop
   aubryPerretPointBound : Prop
   cubicCoverStrataClassified : Prop
@@ -495,7 +544,7 @@ structure ExceptionalCoverClassificationInput
   splitFreePredicatesAgree :
     ∀ s, coveringRadius.isSplitFree s ↔ IsSplitFree s
   highField_splitFree_iff_mem_deepFamilies :
-    q ≥ 23 →
+    q ≥ 20 →
     aubryPerretPointBound →
     cubicCoverStrataClassified →
     ∀ s, IsSplitFree s ↔ s ∈ families.deep
@@ -514,7 +563,7 @@ theorem redundancyFiveSynthesis
     (input : ExceptionalCoverClassificationInput K CertificateEvidence q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)
-    (hHighField : q ≥ 23 →
+    (hHighField : q ≥ 20 →
       input.aubryPerretPointBound ∧ input.cubicCoverStrataClassified) :
     (∀ s, input.coveringRadius.isDeep s ↔ s ∈ input.families.deep) ∧
       2 * input.families.deep.card =

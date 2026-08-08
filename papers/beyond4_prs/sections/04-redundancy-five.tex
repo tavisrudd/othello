@@ -219,9 +219,107 @@ $t\mapsto\pm t+\beta$, of order $2q$, and orbit--stabilizer gives
 $(q^2-1)/2$.
 \end{proof}
 
+The count of split members of the pencil is not merely positive or
+zero: it is determined exactly by the fibre square, and the following
+identity is what drives both the threshold and the shape of the
+exceptions.
+
+\begin{proposition}[Exact split-witness count]\label{prop:r5-count}
+Let $q$ be odd, let $\deg\gcd(W_f)=0$, and let $\phi_f$ be separable.
+Write
+\begin{itemize}
+\item $N_f$ for the number of completely split squarefree members of
+      $W_f$,
+\item $d_2$ for the number of members with a rational double root and a
+      distinct rational simple root,
+\item $d_3$ for the number of members that are perfect cubes of a
+      rational linear form.
+\end{itemize}
+Then
+\begin{equation}\label{eq:r5-count}
+       \#Y_f(\F_q)=6N_f+3d_2+d_3 .
+\end{equation}
+In particular $f$ is split-free if and only if
+$\#Y_f(\F_q)=3d_2+d_3$.
+\end{proposition}
+
+\begin{proof}
+Each $x\in\PP^1(\F_q)$ lies on exactly one member $g_x$ of the pencil,
+because the pencil is basepoint-free; write $g_x=\ell_xh_x$ with
+$\ell_x$ the linear form at $x$.  The fibre of $Y_f$ over $x$ under the
+first projection is the set of rational roots of $h_x$, so
+$\#Y_f(\F_q)=\sum_x\#\{\text{rational roots of }h_x\}$, and it suffices
+to total that sum member by member.  A member with three distinct
+rational roots is met at each of them, and there $h_x$ has the two
+remaining roots, contributing $3\cdot2=6$.  A member with a rational
+double root $r$ and distinct rational simple root $s$ is met at both:
+over $r$ the residual is $\ell_r\ell_s$ with two distinct rational
+roots, over $s$ it is $\ell_r^2$ with one, contributing $2+1=3$.  A
+perfect cube is met only at its root, where the residual is a square,
+contributing $1$.  A member with one rational root and an irreducible
+quadratic cofactor contributes $0$ there, and a member with no rational
+root is met at no rational $x$.  Summing gives \eqref{eq:r5-count}.
+\end{proof}
+
+The proof exhibits the fibre square as a double cover, and that is what
+identifies it with the genus-one curve of the incidence literature.
+
+\begin{proposition}[The fibre square is the incidence curve]
+\label{prop:r5-fibre-is-elliptic}
+Keep the hypotheses of Proposition~\ref{prop:r5-count} and let
+$D_f(x)=\operatorname{disc}(h_x)/4$.  The first projection realizes
+$Y_f$ as the double cover
+\[
+       w^2=D_f(x)
+\]
+of $\PP^1$, branched where $D_f$ vanishes.  If moreover $W_f$ misses the
+twisted cubic and $\operatorname{char}\F_q\neq2,3$, then $D_f$ is the
+discriminant quartic that Kaipa and Pradhan attach to the line, so the
+normalization of $Y_f$ is their elliptic curve $E_{W_f}$ and
+\[
+       \#Y_f(\F_q)=\#E_{W_f}(\F_q).
+\]
+\end{proposition}
+
+\begin{proof}
+The fibre of $Y_f$ over $x$ under the first projection is the root set
+of the residual quadratic $h_x$, and its two roots are interchanged by
+the choice of a square root of $\operatorname{disc}(h_x)$; so the
+projection is the stated double cover, and it is branched exactly where
+that discriminant vanishes.  Kaipa and Pradhan form the discriminant of
+the same residual quadratic and define $E_L$ as the non-singular model
+of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}; the two quartics agree
+up to a square, which does not change the cover.  A genus-one curve over
+a finite field carries a rational point, so both models are their own
+Jacobians and the point counts agree.
+\end{proof}
+
+\begin{lemma}[Branch budget]\label{lem:r5-branch}
+Under the hypotheses of Proposition~\ref{prop:r5-count},
+\[
+       d_2+2d_3\leq4,
+\]
+so a split-free $f$ has $\#Y_f(\F_q)\leq12$, with equality only when
+$d_2=4$ and $d_3=0$.
+\end{lemma}
+
+\begin{proof}
+Riemann--Hurwitz gives different degree four for the separable
+degree-three map $\phi_f$.  A member with a double root is a simple
+branch value and spends different degree one; a member that is a
+perfect cube is totally ramified and spends two when the ramification
+is tame and at least three when it is wild, which happens only in
+characteristic three.  Distinct members are distinct branch values, so
+$d_2+2d_3\leq4$.  Substituting into
+\(\#Y_f(\F_q)=3d_2+d_3\) and maximizing over the integer points of
+that region gives $12$, attained only at $(d_2,d_3)=(4,0)$.
+\end{proof}
+
 \begin{lemma}[$S_3$ stratum]\label{lem:s3}
-If $\phi_f$ has geometric monodromy $S_3$ and $q\geq23$, then the pencil
-contains a completely split squarefree cubic.
+If $\phi_f$ has geometric monodromy $S_3$ and $q\geq20$, then the pencil
+contains a completely split squarefree cubic.  For odd $q$ the same
+conclusion holds for every $q\geq20$ without the monodromy hypothesis
+whenever $Y_f$ is geometrically integral.
 \end{lemma}
 
 \begin{proof}
@@ -237,28 +335,55 @@ genus \(\pi_C\), gives
 \[
        \#Y_f(\F_q)\geq q+1-2\sqrt q
 \]
-\cite[p.~468]{AubryPerret1995}.  An integral curve of arithmetic genus
-one has at most one geometric singular point: if it is singular, its
-normalization has genus zero and the total delta invariant is one.
-We therefore delete at most one rational singular point.
-The diagonal costs
-\[
-       Y_f\cdot\Delta=(2,2)\cdot(1,1)=4.
-\]
-Riemann--Hurwitz gives different degree four for the separable cubic
-map, hence at most four branch values.  A singular cubic has at most
-two distinct roots and at most two ordered off-diagonal pairs, so the
-branch deletion costs at most eight.  If
-$q+1-2\sqrt q>13$, a smooth rational point remains outside the
-diagonal and branch fibers.  It gives two distinct rational roots of
-a squarefree cubic, whose third root is rational.  This inequality is
-equivalent to \(q-2\sqrt q>12\) and holds for every prime power
-$q\geq23$.
+\cite[p.~468]{AubryPerret1995}.  Suppose $f$ were split-free.  Then
+$\#Y_f(\F_q)\leq12$ by Lemma~\ref{lem:r5-branch}, so
+$q+1-2\sqrt q\leq12$, that is $(\sqrt q-1)^2\leq12$ and
+$q\leq(1+2\sqrt3)^2<20$.
 \end{proof}
+
+\begin{corollary}[Forced fibre-square invariants]\label{cor:r5-forced}
+Let $q$ be odd with $17\leq q\leq19$ and let $f$ be split-free with
+$Y_f$ geometrically integral.  Then
+\[
+ \#Y_f(\F_q)=12,\qquad d_2=4,\qquad d_3=0 .
+\]
+\end{corollary}
+
+\begin{proof}
+Lemma~\ref{lem:r5-branch} restricts $\#Y_f(\F_q)=3d_2+d_3$ to the
+values $0,1,2,3,4,6,7,9,12$.  Aubry--Perret forces
+$\#Y_f(\F_q)\geq q+1-2\sqrt q$, which exceeds $9$ for $q\geq17$; the
+only admissible value left is $12$, and by Lemma~\ref{lem:r5-branch}
+that value is attained only at $(d_2,d_3)=(4,0)$.
+\end{proof}
+
+Proposition~\ref{prop:r5-count} is the characteristic-uniform form of
+an incidence count in the twisted-cubic line literature.  When $W_f$
+misses the twisted cubic, so that $d_3=0$, and
+$\operatorname{char}\F_q\neq2,3$, the quantity $d_2$ is the invariant
+$\eta_L$ attached to the binary quartic of the line and $\#Y_f(\F_q)$
+is the point count of the associated elliptic curve, and
+\eqref{eq:r5-count} becomes
+\[
+       N_f=\frac{\#E_L(\F_q)-3\eta_L}{6},
+\]
+which is the incidence count of \cite{KaipaPradhan2025}.  We cite it in
+the form derived in their proof, namely
+$|S\cap\mathcal O_3|=(\nu_L-\eta_L)/3$ together with
+$\nu_L=(\#E_L(\F_q)-\eta_L)/2$
+\cite[Prop.~4.5(3) and Thm.~5.1]{KaipaPradhan2025}; the denominator
+printed in the displayed statement of their Theorem~1.3(3) is $3$, which
+is a typographical slip, since $6$ is what their proof gives and what
+makes their five incidence counts sum to $q+1$.  The statement above drops the
+restriction on the characteristic, admits lines meeting the curve
+through the $d_3$ term, and needs no invariant theory of quartics.  An
+exhaustive check of \eqref{eq:r5-count} and of
+Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the odd
+prime powers $5\leq q\leq27$ is recorded in the supplement.
 
 \begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}
 The preceding cases exhaust every redundancy-five pencil for
-$q\geq23$.  Certificate R5 closes exactly
+$q\geq20$.  Certificate R5 closes exactly
 \[
        q\in\{7,8,9,11,13,16,17,19\}.
 \]
@@ -280,6 +405,22 @@ Frobenius links are exactly the domain of Certificate R5.
 
 \begin{remark}[Relation to the twisted-cubic line literature]
 \label{rem:r5-line-literature}
+Two conventions for ``the line attached to a pencil'' are in use, and
+they are polar duals of each other; the labels below are stated in the
+first and would be exchanged in the second.  Blokhuis, Pellikaan, and
+Sz\H onyi attach to the pencil $\langle c_1,c_2\rangle$ the line cut out
+by the two linear equations with coefficient vectors $c_1$ and $c_2$
+\cite[Prop.~5.5]{BPS2022}, so their line meets the twisted cubic exactly
+where $c_1$ and $c_2$ have a common root.  Kaipa and Pradhan instead
+identify the pencil itself with a line of $\mathbf P(\Sym^3E^\vee)$,
+whose points are cubics and whose twisted cubic consists of the perfect
+cubes \cite[\S1]{KaipaPradhan2025}.  A pencil with a common quadratic
+factor is therefore a chord in the first convention and an axis in the
+second, and a pencil of the form $\langle T^3,U^3\rangle$ is an axis in
+the first and a chord in the second.  Both descriptions give the same
+split members, since the polarity is an isomorphism of the incidence
+structure.
+
 Under \eqref{eq:r5-orbit-criterion} every stratum above is a class of
 lines of $\mathrm{PG}(3,q)$ in the sense of Blokhuis, Pellikaan, and
 Sz\H onyi, who partition the lines into classes $O_1,\ldots,O_8$ and
@@ -296,14 +437,17 @@ and imaginary axes $O_3'$, with the same congruences mod three; the
 characteristic-three nucleus of Lemma~\ref{lem:cyclic}(ii) is their
 axis $O_7(3)$; the wild pencils of Lemma~\ref{lem:cyclic}(iii) are
 their $O_{8.1}(3)^{\pm}$ and $O_{8.2}(3)$.  Lemma~\ref{lem:s3} is their
-$O_6$, and their Remark 6.12 reaches the same threshold $q\geq23$ by
-the same route: the double point scheme of the degree-three map is a
+$O_6$, and their Remark 6.12 reaches the threshold $q\geq23$ by the
+same route: the double point scheme of the degree-three map is a
 genus-one curve, at most twelve points must be excluded, and the
 Hasse--Weil bound then produces a fibre with three distinct rational
-points.  The proof given above replaces Hasse--Weil by the
-Aubry--Perret bound so that their simplicity hypothesis can be dropped,
-which is what lets the same estimate carry the singular and wild cases
-uniformly.  Independent confirmation of the same table comes from the
+points.  Two differences remain.  Aubry--Perret in place of
+Hasse--Weil drops their simplicity hypothesis, which is what lets one
+estimate carry the singular and wild cases uniformly; and the exact
+count of Proposition~\ref{prop:r5-count} replaces the deletion
+bookkeeping by an identity, which lowers the threshold to $q\geq20$
+and, through Corollary~\ref{cor:r5-forced}, pins the fibre square of
+every remaining exception at $q=17,19$.  Independent confirmation of the same table comes from the
 classification of degree-three permutation rational functions
 \cite{FerragutiMicheli2020}, as recorded in \cite[Rem.~7.6]{BPS2022}.
 

@@ -2834,8 +2834,17 @@
       "last": 881,
       "purpose": "Kaipa persona review follow-up: line-orbit/incidence reformulation of R5, elliptic-curve identification, and cubic-pencil literature gaps for the beyond-redundancy-four PRS paper",
       "sequence": 315
+    },
+    {
+      "count": 1,
+      "first": 882,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 882,
+      "purpose": "Resolve whether split-free redundancy-five directions give one-column MDS extensions, given Kaipa's boundary at covering radius n-k-1 and Dur's completeness equivalence; re-check the balanced q=8 quantum corollary",
+      "sequence": 316
     }
   ],
-  "next_id": 882,
+  "next_id": 883,
   "schema": "codex-task-id-allocations-v1"
 }

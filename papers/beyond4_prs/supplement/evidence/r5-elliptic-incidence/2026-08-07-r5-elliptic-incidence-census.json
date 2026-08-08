@@ -1,0 +1,122 @@
+{
+ "11": {
+  "e6_match": 46,
+  "inseparable": 0,
+  "max_split_free_Y": 12,
+  "split_free": 1716,
+  "split_free_profile": {
+   "0,0": 660,
+   "0,2": 66,
+   "2,0": 660,
+   "4,0": 330
+  },
+  "stratum": 15301
+ },
+ "13": {
+  "e6_match": 37,
+  "inseparable": 0,
+  "max_split_free_Y": 12,
+  "split_free": 1898,
+  "split_free_profile": {
+   "0,0": 1170,
+   "4,0": 728
+  },
+  "stratum": 29653
+ },
+ "17": {
+  "e6_match": 49,
+  "inseparable": 0,
+  "max_split_free_Y": 12,
+  "split_free": 3825,
+  "split_free_profile": {
+   "0,0": 2448,
+   "0,2": 153,
+   "4,0": 1224
+  },
+  "stratum": 85969
+ },
+ "19": {
+  "e6_match": 37,
+  "inseparable": 0,
+  "max_split_free_Y": 12,
+  "split_free": 4161,
+  "split_free_profile": {
+   "0,0": 3591,
+   "4,0": 570
+  },
+  "stratum": 133741
+ },
+ "23": {
+  "e6_match": 133,
+  "inseparable": 0,
+  "max_split_free_Y": 2,
+  "split_free": 6348,
+  "split_free_profile": {
+   "0,0": 6072,
+   "0,2": 276
+  },
+  "stratum": 285913
+ },
+ "25": {
+  "e6_match": 16225,
+  "inseparable": 0,
+  "max_split_free_Y": 0,
+  "split_free": 8100,
+  "split_free_profile": {
+   "0,0": 8100
+  },
+  "stratum": 398425
+ },
+ "27": {
+  "e6_match": 91,
+  "inseparable": 1,
+  "max_split_free_Y": 1,
+  "split_free": 10192,
+  "split_free_profile": {
+   "0,0": 9828,
+   "0,1": 364
+  },
+  "stratum": 541269
+ },
+ "5": {
+  "e6_match": 145,
+  "inseparable": 0,
+  "max_split_free_Y": 7,
+  "split_free": 375,
+  "split_free_profile": {
+   "0,0": 60,
+   "0,2": 15,
+   "1,0": 120,
+   "2,0": 120,
+   "2,1": 60
+  },
+  "stratum": 685
+ },
+ "7": {
+  "e6_match": 25,
+  "inseparable": 0,
+  "max_split_free_Y": 12,
+  "split_free": 833,
+  "split_free_profile": {
+   "0,0": 189,
+   "1,0": 112,
+   "2,0": 336,
+   "2,1": 168,
+   "4,0": 28
+  },
+  "stratum": 2569
+ },
+ "9": {
+  "e6_match": 20,
+  "inseparable": 1,
+  "max_split_free_Y": 12,
+  "split_free": 1300,
+  "split_free_profile": {
+   "0,0": 360,
+   "0,1": 40,
+   "2,0": 720,
+   "4,0": 180
+  },
+  "stratum": 6921
+ }
+}

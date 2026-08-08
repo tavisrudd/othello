@@ -38,7 +38,11 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `prop:r5-gcd1` | no direct declaration | Manuscript proof, with the finite `q=7` clause supplied by Certificate R5. |
 | `prop:r5-incidence` | no direct declaration | Manuscript proof of the cubic incidence and residual-curve geometry. |
 | `lem:cyclic` | no direct declaration | Manuscript proof of the cyclic stratum. |
-| `lem:s3` | no direct declaration | Manuscript proof using the cited rational-point bound. |
+| `prop:r5-count` | `PRSRedundancyFive.ExactSplitWitnessCount.countRelation` | The exact split-witness relation is an explicit structure field; Lean checks its arithmetic consequences, and the member-by-member root count is a manuscript proof. |
+| `prop:r5-fibre-is-elliptic` | no direct declaration | Manuscript proof identifying the fibre square with the residual-discriminant double cover and hence with the cited incidence curve. |
+| `lem:r5-branch` | `PRSRedundancyFive.ExactSplitWitnessCount.branchBudget`; `ExactSplitWitnessCount.fibreSquarePoints_le_twelve` | The tame Riemann--Hurwitz budget is a structure field; the twelve-point bound on a split-free fibre square is kernel checked. |
+| `lem:s3` | `PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree` | The step from the twelve-point bound and the Aubry--Perret range to the field bound is kernel checked; the point bound itself is imported by citation and the monodromy geometry is a manuscript proof. |
+| `cor:r5-forced` | no direct declaration | Manuscript proof combining the branch budget with the cited point bound. |
 | `prop:r5-bridge` | `PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic`; `certified_orbit_summaries_agree_with_sporadic_records`; `CertificateValidation` | Transcription and arithmetic are kernel checked. Identification and exhaustive-search semantics remain explicit validation fields. |
 | `thm:polar-construction` | `PRSPolarInduction.iteratedProjectiveSequenceContraction_map`; `sequenceContraction_agrees_with_finite`; `PointedKernelLift.lift_splitSquarefreeKernelMember` | Kernel algebra and a conditional squarefree-lift terminal. The polynomial/kernel identification is an input. |
 | `lem:marker-collision` | no direct declaration | Manuscript marker-collision proof. |
