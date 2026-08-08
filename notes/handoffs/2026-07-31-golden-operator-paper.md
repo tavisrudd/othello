@@ -579,6 +579,18 @@ axiom or opaque declaration.  The Hermitian landscape is the next C853
 frontier; the general half-cut rigidity surface should be reconciled before any
 duplicate proof is added.
 
+C853's second remediation checkpoint resolves that reconciliation.  Ten C815
+terminals now expose the all-orders eigenvalue formula, aligned-four-set purity,
+higher-order cut dependence, three small cases, and order-four nonexistence
+through the Golden gate.  The queued aggregate build passes, and the regenerated
+nine-module, twenty-five-terminal fact has no project axiom or opaque
+declaration; every terminal has exactly the standard three expected axioms.
+The new Hermitian triangle module proves the paired characteristic polynomial
+and its complex unit-modulus form `X³ - 3X - 2r`.  That module is not yet
+advertised as manuscript coverage: C853 next owns the Hermitian exchange moment
+formulas and only then the Pareto, rigidity, and stability crown.  The remaining
+all-orders defect is interface bundling, not missing mathematics.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

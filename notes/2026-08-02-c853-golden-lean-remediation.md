@@ -2,8 +2,8 @@
 
 **Lane:** `golden`
 
-**Status:** in progress; export prerequisite closed, matrix-level vocabulary and
-the balanced exchange benchmark landed
+**Status:** in progress; matrix semantics and the all-orders real rigidity
+surface are gated, and the Hermitian triangle layer has started
 
 ## Review checkpoint
 
@@ -129,6 +129,56 @@ manuscript theorem.  The residual is interface compression: one public theorem
 should bundle the separate terminals into the exact `d ≤ 3` classification
 and state the unique-nontrivial-order corollary on its realized domain.  No new
 inclusion-matrix or Ramsey proof is needed for correctness.
+
+## Second remediation checkpoint
+
+The all-orders declarations identified above are now explicit Golden gate
+terminals rather than merely transitive implementation detail.  The guarded
+single-file gate elaboration and queued aggregate build both pass.  The
+regenerated fact has a nine-module closure and twenty-five terminals, with no
+project axiom and no opaque declaration; every terminal observes exactly
+`Classical.choice`, `Quot.sound`, and `propext`.
+
+The first Hermitian layer is also kernel checked in
+`RelativeConicArcs.HermitianConferenceExchange`.  For a paired three-by-three
+triangle over a commutative ring, its characteristic polynomial is proved from
+the three reverse-edge product identities.  The complex specialization then
+uses conjugate reverse edges and unit-modulus hypotheses to prove
+`charpoly = X³ - 3X - 2r`, where `r` is the real oriented triangle holonomy.
+This is supporting infrastructure and is not yet advertised as coverage of the
+full Hermitian landscape theorem.
+
+The remaining issues are now sharply separated:
+
+- bundle the already proved all-orders directions into the manuscript-facing
+  `d ≤ 3` classification interface;
+- derive the Hermitian exchange eigenvalue invariants and the formulas for
+  `p1`, `p2`, `e2`, `e3`, `h3`, and `s(2,1)` from the triangle polynomial and
+  conference block identity;
+- formalize the Hermitian phase/control domain and Pareto/equality claims,
+  followed by squared-spectrum rigidity and stability;
+- formalize continuous control, balance obstruction, and the orientation
+  layer; and
+- repeat gate, fact, claim-ledger, prose, and deterministic-export validation
+  only as each complete theorem surface becomes stable.
+
+The next implementation step is the Hermitian matrix-to-exchange bridge and
+moment formulas.  Registration of the new Hermitian module is deliberately
+deferred until those statements form an honest paper-facing terminal.
+
+## Mystery ledger update
+
+The all-orders coverage question is resolved: C815 already supplies the
+spectral formula, purity formula, higher-order nonconstancy, small cases, and
+order-four nonexistence through a support-count proof.  There is no missing
+inclusion-rank or Ramsey dependency in the Lean route.  The sole all-orders
+residual is a bundled public interface.
+
+The active mathematical uncertainty has moved to the Hermitian bridge: the
+triangle characteristic polynomial is established, but the shortest reusable
+route from it and `C² = 5I` to all normalized exchange moments and the exact
+Pareto domain still has to be designed and checked.  No coverage is claimed
+for that crown yet.
 
 ## Scope decision
 

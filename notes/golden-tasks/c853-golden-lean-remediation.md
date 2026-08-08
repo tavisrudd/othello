@@ -3,7 +3,7 @@
 **Lane:** golden
 
 **Status:** active after C845 and before C840; real matrix semantics and the
-six-label half-cut theorem are gated, Hermitian and remaining crowns open
+all-orders rigidity surface are gated, Hermitian and remaining crowns open
 
 ## Landed-work review
 
@@ -29,6 +29,13 @@ compression identities and the existing six-label/three-subset eigenframe
 characteristic-polynomial theorem are registered terminals.  The guarded gate
 and regenerated fifteen-terminal trust fact pass with no project axiom or
 opaque declaration.
+
+The second checkpoint promotes the ten existing all-orders spectral, purity,
+nonconstancy, small-case, and order-four terminals into the Golden trust
+surface.  Its queued gate and regenerated twenty-five-terminal fact pass with
+no project axiom or opaque declaration.  A new Hermitian triangle module proves
+the paired characteristic polynomial and its complex unit-modulus specialization
+`X³ - 3X - 2r`; the landscape formulas remain open and are not yet gated.
 
 ## Goal
 
@@ -153,7 +160,7 @@ counterpart rather than a collection of supporting calculations.
 
 ## Phase 4: principal Hermitian headline
 
-- [ ] Prove the Hermitian triangle characteristic polynomial.
+- [x] Prove the Hermitian triangle characteristic polynomial.
 - [ ] Prove p1 = 9/5, p2 = 33/25, and e2 = 24/25.
 - [ ] Prove the holonomy formulas for e3, h3, and s(2,1).
 - [ ] Formalize the admissible Hermitian phase and control domain.
@@ -180,9 +187,11 @@ and stability claims.
       support-count argument in `BalancedExchangeRigidity`.
 - [x] Discharge the Ramsey step by the same support-count argument; no Ramsey
       theorem is imported into this trust route.
-- [ ] Prove cut independence exactly for d at most 3.
+- [x] Prove cut independence exactly for d at most 3, presently through
+      separate small-case and higher-order nonconstancy terminals.
 - [x] Handle the nonexistent order-four symmetric conference case.
-- [ ] State unique nontrivial order only on the proved domain.
+- [ ] Bundle the unique-nontrivial-order statement on the proved domain; the
+      supporting order-four nonexistence terminal is explicit.
 - [x] Give stable public citations for every imported external theorem; this
       formal route imports no external theorem for the rigidity converse.
 
