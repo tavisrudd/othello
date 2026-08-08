@@ -224,6 +224,31 @@ theorem exchangeS21_hermitianExchange (a b c : ℂ)
   push_cast
   ring
 
+/-- The algebraic Hermitian exchange landscape for a unit-modulus triangle:
+the triangle characteristic polynomial and all degree-at-most-three exchange
+invariants are controlled by the squared real holonomy. -/
+theorem hermitianExchange_landscape (a b c : ℂ)
+    (ha : a * starRingEnd ℂ a = 1) (hb : b * starRingEnd ℂ b = 1)
+    (hc : c * starRingEnd ℂ c = 1) :
+    (hermitianTriangle a b c).charpoly =
+        X ^ 3 - C 3 * X - C ((2 * realTriangleHolonomy a b c : ℝ) : ℂ)
+      ∧ (hermitianExchange a b c).trace = 9 / 5
+      ∧ (hermitianExchange a b c * hermitianExchange a b c).trace = 33 / 25
+      ∧ exchangeE2 (hermitianExchange a b c) = 24 / 25
+      ∧ (hermitianExchange a b c).det =
+          ((4 * (5 - realTriangleHolonomy a b c ^ 2) / 125 : ℝ) : ℂ)
+      ∧ exchangeH3 (hermitianExchange a b c) =
+          (((317 - 4 * realTriangleHolonomy a b c ^ 2) / 125 : ℝ) : ℂ)
+      ∧ exchangeS21 (hermitianExchange a b c) =
+          (((196 + 4 * realTriangleHolonomy a b c ^ 2) / 125 : ℝ) : ℂ) := by
+  exact ⟨charpoly_hermitianTriangle a b c ha hb hc,
+    trace_hermitianExchange a b c ha hb hc,
+    trace_sq_hermitianExchange a b c ha hb hc,
+    exchangeE2_hermitianExchange a b c ha hb hc,
+    det_hermitianExchange a b c ha hb hc,
+    exchangeH3_hermitianExchange a b c ha hb hc,
+    exchangeS21_hermitianExchange a b c ha hb hc⟩
+
 end Complex
 
 end RelativeConicArcs.HermitianConferenceExchange
