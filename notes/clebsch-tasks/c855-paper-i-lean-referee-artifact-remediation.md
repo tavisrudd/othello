@@ -9,6 +9,18 @@ recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-
 the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
+Trust-boundary hardening packet (2026-08-08): C893's mechanically actionable
+release findings are repaired in the authority and q11 package.  The verifier
+now requires the exact 115-package/93-shared transitive closure, both pinned
+roots, exact manifest/gate/audit terminal equality, source-policy rejection,
+and a clean pinned guarded-run receipt for maintainers.  All 66 point-action
+outputs reproduce from their documented generator; obsolete Dye-axiom prose is
+removed; the package is resealed at `930d5469ac08068553e93177ea3598535d5d9906`;
+the 21 verification tests, pins, manifests, and 27/13-page warning-free builds
+pass.  The fresh q11 aggregate and release-output refresh remain pending because
+a foreign Lean build survived two separate five-minute guarded waits.  Report:
+[`../2026-08-08-c855-paper-i-trust-boundary-hardening.md`](../2026-08-08-c855-paper-i-trust-boundary-hardening.md).
+
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
 is confirmed by the committed check script
