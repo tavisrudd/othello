@@ -57,11 +57,18 @@ An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
 C883 carries the redundancy-five follow-ups from the same two passes, each promotable into the
-manuscript under that ID after review: Lean sync for the two arithmetic corollaries that are
-currently manuscript-only, a characteristic-two companion to the exact split-witness count, the
-coset-multiplicity and error-distribution statement, the sporadic table's fibre-square invariant
-column, identification of the Hankel--Pluecker map with a classical apolarity covariant, and the
-higher-genus reading of the fibre-square argument.
+manuscript under that ID after review.  Its Lean-sync item is closed: the two-sided split-member
+bound, the forced fibre-square invariants at `17 <= q <= 19`, and the characteristic-two
+consequences are kernel-checked, and the certificate's field domain is now separate from the
+seven field orders the classification depends on it for, with the synthesis input's
+classification range extended to binary `q >= 16` so that separation is not vacuous.  The
+field-range closure ledger, which still listed `q = 16` under R5 direct census, is repaired.
+The report is `notes/2026-08-07-c883-r5-lean-sync.md`; the generated beyond-four trust fact
+still needs regeneration, which the extractor refuses while two untracked `relconic` files sit
+in the Lean worktree.  The open items are the coset-multiplicity and error-distribution
+statement, the sporadic table's fibre-square invariant column, identification of the
+Hankel--Pluecker map with a classical apolarity covariant, and the higher-genus reading of the
+fibre-square argument.
 
 C882 corrected a defect that the literature work surfaced: the paper inferred a
 one-column MDS extension from a split-free direction.  An extension needs a syndrome

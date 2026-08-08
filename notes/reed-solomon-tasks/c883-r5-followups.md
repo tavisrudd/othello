@@ -95,7 +95,25 @@ learned the hard way.
 - Item 6 needs a literature check before any claim of a new mechanism, since higher-genus
   double point schemes are classical.
 
-## 1. Lean sync (do first; small and mechanical)
+## 1. Lean sync — CLOSED 2026-08-07
+
+Report: `notes/2026-08-07-c883-r5-lean-sync.md`.
+
+All three corollaries are kernel-checked, the statement map's four
+no-direct-declaration cells are replaced, and both manuscript builds, the paper verifier,
+and the redundancy-five and beyond-four gates are green.  The single shared field list is
+split into `PRSRedundancyFive.requiredBridgeFieldOrders = [7, 8, 9, 11, 13, 17, 19]` and
+`PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders`, which keeps `q = 16`; the
+synthesis input's classification range now carries the characteristic-two branch as well,
+so removing that field from the required bridge does not make the theorem vacuous there.
+One manuscript defect surfaced and was repaired: the field-range closure ledger still
+listed `q = 16` under R5 direct census.
+
+Deferred: the generated trust fact for the beyond-four gate still records the old
+declaration names.  The extractor refuses on a worktree carrying two untracked `relconic`
+files, so regeneration waits on their owner.
+
+The original item, for reference:
 
 The manuscript now carries two arithmetic corollaries with no formal counterpart, both of
 the exact shape already formalized by
@@ -208,7 +226,7 @@ Research direction, not a repair.  Do not hold any other item behind it.
 
 ## Ordering
 
-Item 1 first, since it is mechanical and closes a visible inconsistency.  Items 2 and 5 are
-the two with real mathematical upside and are independent of each other; item 4 depends on
-item 2 for the binary fields and on the encoding fix for the rest.  Item 3 is a
-short write-up once item 2 settles how far the count extends.  Item 6 is open-ended.
+Items 1 and 2 are closed.  Item 5 carries the remaining real mathematical upside and
+depends on nothing else.  Item 4 is unblocked on the binary fields by item 2 and now waits
+only on the encoding reconciliation.  Item 3 is a short write-up, since item 2 settled that
+the count extends to every characteristic.  Item 6 is open-ended.
