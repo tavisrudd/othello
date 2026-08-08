@@ -16,6 +16,85 @@ the Version 2 manuscript under this same C-ID rather than being re-allocated.  I
 fail or stall are recorded here and, if they leave a usable observation behind, logged to
 the discovery track.
 
+## Standing gates: every item carries a math check and a literature check
+
+Both gates bind each item separately.  An item is not finished, and is not eligible for
+promotion into the manuscript, until both are recorded in its dated report.  They are
+written from the failure modes this lane actually hit on 2026-08-07 rather than as a
+generic checklist.
+
+### Math check
+
+1. **Re-derive, do not transcribe.**  Take every imported formula from the source's proof,
+   not from its displayed statement.  Kaipa--Pradhan's Theorem 1.3(3) prints denominator
+   three; their Proposition 4.5(3) and Theorem 5.1 compose to six, and six is what makes
+   their five incidence counts sum to `q+1`.  A displayed formula that has not been
+   re-derived is not yet a citation.
+2. **Run a closure identity.**  Where a set is partitioned, check the parts sum to the
+   whole before using any single part.  That identity is what caught the denominator, and
+   it would have caught it with no access to the source at all.
+3. **Count the objects, not the words.**  The MDS-extension defect was an off-by-one
+   between "outside the span of `r-2` columns" and "outside the span of `r-1`".  For any
+   claim that one property implies another, write both as explicit conditions on the same
+   objects and compare them symbol by symbol.
+4. **Check the direction of every biconditional.**  Dur's equivalence was already cited in
+   the paper, for the direction that supports the radius gate, while its other direction
+   forbade the conclusion drawn three pages later.  When a cited theorem is an "if and only
+   if", state both directions and check the paper against each.
+5. **Fix the convention before comparing.**  Chords and axes exchange under the symplectic
+   polarity, and two of the four sources in this area use each convention.  Any comparison
+   with the literature names its convention first.
+6. **State the characteristic and field scope explicitly**, and test the boundary case.
+   The exact count holds in odd characteristic including three, and fails in characteristic
+   two for a stateable reason.  "Characteristic-uniform" was wrong until it was qualified.
+7. **Verify exhaustively where the domain is finite.**  Follow
+   `notes/research-reproducibility-conventions.md`: committed report, exact generator,
+   compact certificate, replay command, SHA-256 hashes, in one atomic commit.  Where the
+   claim is asymptotic, still verify the range that a certificate covers.
+
+### Literature check
+
+Follow `notes/literature-audit-conventions.md` in full; these are the additions this lane
+learned the hard way.
+
+1. **Screen on the object in the proof, not the wrapper of the theorem.**  Three prior
+   audits screened for "projective Reed--Solomon deep holes" and could not reach a
+   literature that decides the same criterion under the name "which lines of `PG(3,q)` lie
+   in a plane meeting the twisted cubic in three rational points".  Every item states its
+   proof-object query alongside its coding query, and runs both.
+2. **Two seeds minimum, from different fields.**  Seed the forward-citation screen from a
+   coding paper *and* from a finite-geometry paper.  The geometry school does not cite the
+   coding school, so a single-field seed cannot reach it.
+3. **Three graphs, counted separately.**  OpenAlex, Crossref, and Semantic Scholar, with
+   the largest set screened and the disagreement reported, per the conventions.
+4. **Check the shared cache before declaring a gap, and do not trust its silence.**
+   Blokhuis--Pellikaan--Sz\H onyi had been cached for weeks and characterised in four other
+   lanes' notes without ever reaching this paper's bibliography.  Cross-lane presence is not
+   a substitute for this lane's own screen, and cache presence is never evidence of reading.
+5. **Record a read depth for every named source, including dismissals**, with cache key and
+   SHA-256, and state the opening full-text count.  A source named only in order to be
+   dismissed is exactly where the marker gets dropped.
+6. **Try the free route before declaring an access block.**  Three sources sat at
+   abstract-only in this paper's audit purely because nobody fetched the preprints.  Only
+   Dur 1994 had no free route.
+
+### Per-item application
+
+- Item 1 needs no literature check; its math check is that each Lean statement matches the
+  manuscript statement it maps to, hypothesis by hypothesis.
+- Item 2 needs both.  Its literature check must include the characteristic-two
+  twisted-cubic line work, Ceria--Pavese in particular, which is cached and unread.
+- Item 3 needs a full literature check against the coset-leader weight-enumerator line;
+  Blokhuis--Pellikaan--Sz\H onyi is the direct predecessor and the MDS coset weight
+  distribution papers surfaced in the C881 screen are the nearest coding-side neighbours.
+- Item 4 needs a math check on the encoding reconciliation: the two encodings must be
+  proved to agree on a shared test set before any invariant is attributed to a
+  representative.
+- Item 5 needs both.  Its literature check covers classical apolarity and covariant theory
+  of binary quartics, where a named covariant may already exist under a classical name.
+- Item 6 needs a literature check before any claim of a new mechanism, since higher-genus
+  double point schemes are classical.
+
 ## 1. Lean sync (do first; small and mechanical)
 
 The manuscript now carries two arithmetic corollaries with no formal counterpart, both of
