@@ -644,7 +644,7 @@ parties, hence is trivial, and the two sets have the same cardinality.
 \begin{theorem}[Stability without a generator budget]
 \label{thm:budget-free-stability}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
-\(m\geq3\), let \(U=\bigotimes_jU_j\) be a product unitary, and put
+\(m\geq2\), let \(U=\bigotimes_jU_j\) be a product unitary, and put
 \(\eta_j=1-\lvert q^{-1}\Tr U_j\rvert^2\) and \(H=\sum_j\eta_j\).  If
 \(H\leq\frac14\) then \(\varepsilon(U)^2\geq H/4\).  Consequently, if
 \(U=\bigotimes_je^{ih_j}\) with each \(h_j\) traceless Hermitian of
@@ -683,9 +683,27 @@ from it for \(m\geq2\) and contributes the reflected bound.  Adding,
  \varepsilon(U)^2\geq\lVert u-v\rVert^2
    \geq\Bigl(\tfrac12(1-H)-\eta^{m-1}\Bigr)H .
 \]
-At \(H\leq\frac14\) and \(m\geq3\) one has
+For \(m\geq3\), the assumptions give
 \(\eta^{m-1}\leq H^2\leq\frac1{16}\), so the bracket is at least
-\(\frac5{16}\geq\frac14\).  For the second statement,
+\(\frac5{16}\).  It remains to retain the sharper terms when \(m=2\).
+Write \(A=\{a_1,a_2\}\), \(A^c=\{b_1,b_2\}\), and
+\(P=\eta_{a_1}\eta_{a_2}+\eta_{b_1}\eta_{b_2}\).  Before the estimates
+by \(1-H\) and \(\eta^{m-1}\), the four disjoint minimum-support families
+above contribute at least
+\[
+ \frac12\bigl(\eta_{a_1}(1-\eta_{a_2})
+  +\eta_{a_2}(1-\eta_{a_1})
+  +\eta_{b_1}(1-\eta_{b_2})
+  +\eta_{b_2}(1-\eta_{b_1})\bigr)-2P
+ =\frac H2-3P.
+\]
+If \(s=\eta_{a_1}+\eta_{a_2}\), then
+\[
+ P\leq\frac{s^2+(H-s)^2}{4}\leq\frac{H^2}{4}.
+\]
+Thus at \(H\leq\frac14\) the last display is at least
+\((\frac12-\frac3{16})H=\frac5{16}H\).  In both cases this is at least
+\(H/4\).  For the second statement,
 Lemma~\ref{lem:site-contraction} gives
 \(\eta_j\geq c\lVert h_j\rVert_F^2/q\), hence \(H\geq cD^2/q\); and
 \(1-\lvert\mathbb E\,e^{iX}\rvert^2\leq\frac12\mathbb E(X-X')^2

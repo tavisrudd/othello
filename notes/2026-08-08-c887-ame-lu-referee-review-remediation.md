@@ -12,6 +12,34 @@ The review is a lead, not evidence: no mathematical, bibliographic, novelty, or
 priority conclusion may be adopted without reconstruction against the current
 authoritative paper and the cited primary source.
 
+## Reconstruction in progress
+
+The first proof pass narrows the headline finding.  The printed Appendix B
+theorem assumes $m\geq3$, so the call from the $m\geq2$ cleaning theorem is a
+real proof-scope gap.  The review's proposed loss of $\sqrt2$ is only what the
+coarse displayed estimate gives, however.  At $m=2$, retaining the four exact
+minimum-support-family contributions yields
+\[
+ \varepsilon(U)^2\geq H/2-3P,
+ \qquad
+ P=\eta_{a_1}\eta_{a_2}+\eta_{b_1}\eta_{b_2}\leq H^2/4.
+\]
+Hence $H\leq1/4$ gives the stronger bound $5H/16$, so the existing
+$\pi\sqrt q$ conclusion and entry radius survive.  The defect is a local
+proof omission, not a false headline theorem.
+
+The current source and its pre-split parent already use
+$U\otimes\overline U$ in both Bell-pair passages; the supplied Bell correction
+does not apply to this revision.  Git history shows that the phrase
+“quantitative counterpart” entered during C844's Paper-I sharpening, while
+C804/C807 had already proved and audited the exact qubit relationship to the
+Van den Nest--Dehaene--De Moor criterion before that positioning was compressed.
+C796 is the source of the budget-free theorem with the explicit $m\geq3$
+corollary; C833 then invoked it for $m\geq2$, and C835 accepted C833's
+mathematical scope while auditing the cleaning precedent.  C887 must therefore
+repair the inherited proof bridge and restore the already-established qubit
+positioning rather than treat either point as newly discovered.
+
 The target is a locally releasable corrected revision of
 `papers/ame_lu/`, with its theorem, proof, bibliography, trust, and release
 surfaces coherent.  Synchronize the standalone only after the monorepo

@@ -237,13 +237,19 @@ product-Pauli correction \(W_vK\) is an exact symmetry of \(\psi\).
 \begin{proof}
 Fix \(A\), distinct \(i,j\in A\), and put
 \(B=A^c\cup\{i,j\}\).  Both \(A\) and \(B\) have size \(m+1\), while
-\(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\), and set
+\(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\).
+Using the stabilizer lifts \(\widetilde W_\ell\) and
+\(\widetilde W_r\) from \((2.1)\), set
 \[
- C=[UW_\ell U^\dagger,W_r].
+ C=[U\widetilde W_\ell U^\dagger,\widetilde W_r]
+  =[UW_\ell U^\dagger,W_r],
 \]
+where the second equality holds because scalar lift phases cancel from a
+commutator.
 After choosing the phase of \(U\) realizing its defect,
-\(\lVert(UW_\ell U^\dagger-I)\psi\rVert\leq2\varepsilon(U)\), and the
-same holds with the adjoint.  Since \(W_r\psi=\psi\),
+\(\lVert(U\widetilde W_\ell U^\dagger-I)\psi\rVert
+\leq2\varepsilon(U)\), and the same holds with the adjoint.  Since
+\(\widetilde W_r\psi=\psi\),
 \[
  \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{5.8}
 \]
