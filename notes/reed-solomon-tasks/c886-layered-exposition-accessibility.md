@@ -15,10 +15,11 @@ the quick verifier, spelling scan, and rendered-layout inspection are green.
 The TIT submission is 45 pages, three pages below the task's 48-page ceiling.
 The fresh copy/layout reader preferred the current 45-page render over the
 baseline at confidence 0.94.  Its terminology, punctuation, notation, table
-numbering, and bad-break findings are repaired.  The full paper-local replay
-is running unattended.  Remaining gates are its result, a dedicated equation-
-numbering cleanup, resolution of the pre-existing D.10 good-base inference
-described below, and the closeout review.
+numbering, and bad-break findings are repaired.  The equation counter now
+advances in printed order, and every formerly manual display has a stable
+label used by its prose references.  The full paper-local replay is running
+unattended.  Remaining gates are its result, resolution of the pre-existing
+D.10 good-base inference described below, and the closeout review.
 
 ## Goal
 
@@ -135,7 +136,8 @@ stronger printed $q\geq32$ intermediate sentence is not yet justified by the
 public evidence inspected in C886.  No proof text has been changed pending a
 dedicated mathematical audit.
 
-The same review caught equation numbers that duplicate or run backward in
-printed order: manual tags were retained from an earlier section order.  This
-is a math-neutral but reference-sensitive cleanup and will be handled as its
-own inspected edit rather than mixed into the exposition pass.
+The same review caught equation numbers that duplicated or ran backward in
+printed order because manual tags survived an earlier section order.  The
+dedicated repair replaced those constants by counter-advancing labelled tags
+and replaced numeric prose callbacks by label references.  The rendered
+sequence is now monotone from (1) through (37), with no formula changed.
