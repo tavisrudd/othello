@@ -1533,6 +1533,11 @@ terminals = [
   "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
   "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape",
+  "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier",
+  "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities",
+  "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint",
+  "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint",
+  "RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths",
 ]
 coverage_rule = "closure"
 
@@ -2224,6 +2229,31 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 

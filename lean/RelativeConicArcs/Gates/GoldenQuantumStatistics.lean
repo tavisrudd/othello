@@ -39,10 +39,13 @@ bundled equivalence.
 Hermitian triangle characteristic polynomial and packages the normalized
 exchange invariants through degree three.  The first two power sums and second
 elementary invariant are constant, while the determinant and two degree-three
-sectors are the stated affine functions of squared real triangle holonomy.
+sectors are the stated affine functions of squared real triangle holonomy.  It
+also proves the mixed-sector three-variable bound and the exact Pareto
+domination, antichain, maximality, and endpoint geometry conditional on the
+paper's continuous-control feasibility and family-realization bridges.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its continuous-control optimum, the admissible Hermitian
-phase/control domain and Pareto frontier, its stability bounds, or any decoding,
-tomography, optical-compilation, or experimental statement.
+phase/control feasibility and full frontier realization, its stability bounds,
+or any decoding, tomography, optical-compilation, or experimental statement.
 -/
