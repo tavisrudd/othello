@@ -296,6 +296,30 @@
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.rec": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.recOn": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.toCtorIdx": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.casesOn": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.ctorIdx": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_twelve": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.inj": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.injEq": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.noConfusion": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.sizeOf_spec": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusion": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusionType": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_six_of_characteristicTwoBranchBudget": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_twelve": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.rec": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.recOn": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers_bounds": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.aubryPerretPointBound": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.casesOn": "RelativeConicArcs.PRSRedundancyFive",
@@ -309,7 +333,7 @@
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.fieldOrderAtLeastSeven": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.fieldOrder_eq_card": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.finiteCertificateValidation": "RelativeConicArcs.PRSRedundancyFive",
-    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.highField_splitFree_iff_mem_deepFamilies": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.geometricRange_splitFree_iff_mem_deepFamilies": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.inj": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.injEq": "RelativeConicArcs.PRSRedundancyFive",
@@ -369,6 +393,7 @@
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.tangent_card": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.wildArtinSchreier": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.wildArtinSchreier_card_doubled": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput.casesOn": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput.ctorIdx": "RelativeConicArcs.PRSRedundancyFive",
@@ -474,7 +499,9 @@
     "RelativeConicArcs.PRSRedundancyFive.cyclicFamilyCardDoubled.eq_2": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.cyclicFamilyCardDoubled.eq_3": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.factorDet": "RelativeConicArcs.PRSRedundancyFive",
-    "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.fieldOrder_le_twelve_of_characteristicTwoSplitFree": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.geometricClassificationRange_two_sixteen": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.hankelKernelDictionary": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.inHankelKernel": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.inHankelKernel_scale_iff": "RelativeConicArcs.PRSRedundancyFive",
@@ -499,8 +526,10 @@
     "RelativeConicArcs.PRSRedundancyFive.normalRationalCurveInfinity": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.normalRationalCurveInfinity.eq_1": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome.eq_1": "RelativeConicArcs.PRSRedundancyFive",
+    "RelativeConicArcs.PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.syndromeLinearCombination": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFive.syndromeLinearCombination.eq_1": "RelativeConicArcs.PRSRedundancyFive",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.CertificateValidation": "RelativeConicArcs.PRSRedundancyFiveCertificate",
@@ -582,12 +611,12 @@
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.recOn": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.semilinearRepresentativeIndex": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.stabilizerOrder": "RelativeConicArcs.PRSRedundancyFiveCertificate",
+    "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedFieldRecords": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_field_orders": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_orbit_summaries_agree_with_sporadic_records": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_rows_report_exhaustion_and_radius": "RelativeConicArcs.PRSRedundancyFiveCertificate",
-    "RelativeConicArcs.PRSRedundancyFiveCertificate.finiteBridgeFieldOrders": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord.decEq": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord.decEq.match_1": "RelativeConicArcs.PRSRedundancyFiveCertificate",
@@ -608,8 +637,9 @@
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_counts": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_stabilizer": "RelativeConicArcs.PRSRedundancyFiveCertificate",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts": "RelativeConicArcs.PRSRedundancyFiveCertificate",
-    "RelativeConicArcs.PRSRedundancyFiveCertified.finiteBridgeFieldOrders_agree": "RelativeConicArcs.PRSRedundancyFiveCertified",
+    "RelativeConicArcs.PRSRedundancyFiveCertified.certifiedBridgeFieldOrders_exceed_required_only_at_sixteen": "RelativeConicArcs.PRSRedundancyFiveCertified",
     "RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate": "RelativeConicArcs.PRSRedundancyFiveCertified",
+    "RelativeConicArcs.PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders": "RelativeConicArcs.PRSRedundancyFiveCertified",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput": "RelativeConicArcs.PRSRedundancySixSeven",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput.casesOn": "RelativeConicArcs.PRSRedundancySixSeven",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput.ctorIdx": "RelativeConicArcs.PRSRedundancySixSeven",
@@ -1300,6 +1330,30 @@
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.rec",
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.recOn",
     "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.toCtorIdx",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.casesOn",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.ctorIdx",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_twelve",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.inj",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.injEq",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.noConfusion",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusion",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusionType",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_six_of_characteristicTwoBranchBudget",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_twelve",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.rec",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.recOn",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers",
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers_bounds",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.aubryPerretPointBound",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.casesOn",
@@ -1313,7 +1367,7 @@
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.fieldOrderAtLeastSeven",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.fieldOrder_eq_card",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.finiteCertificateValidation",
-    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.highField_splitFree_iff_mem_deepFamilies",
+    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.geometricRange_splitFree_iff_mem_deepFamilies",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.inj",
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.injEq",
@@ -1373,6 +1427,7 @@
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.tangent_card",
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.wildArtinSchreier",
     "RelativeConicArcs.PRSRedundancyFive.FamilyData.wildArtinSchreier_card_doubled",
+    "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput.casesOn",
     "RelativeConicArcs.PRSRedundancyFive.HankelSpanCriterionInput.ctorIdx",
@@ -1478,7 +1533,9 @@
     "RelativeConicArcs.PRSRedundancyFive.cyclicFamilyCardDoubled.eq_2",
     "RelativeConicArcs.PRSRedundancyFive.cyclicFamilyCardDoubled.eq_3",
     "RelativeConicArcs.PRSRedundancyFive.factorDet",
-    "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
+    "RelativeConicArcs.PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree",
+    "RelativeConicArcs.PRSRedundancyFive.fieldOrder_le_twelve_of_characteristicTwoSplitFree",
+    "RelativeConicArcs.PRSRedundancyFive.geometricClassificationRange_two_sixteen",
     "RelativeConicArcs.PRSRedundancyFive.hankelKernelDictionary",
     "RelativeConicArcs.PRSRedundancyFive.inHankelKernel",
     "RelativeConicArcs.PRSRedundancyFive.inHankelKernel_scale_iff",
@@ -1503,8 +1560,10 @@
     "RelativeConicArcs.PRSRedundancyFive.normalRationalCurveInfinity",
     "RelativeConicArcs.PRSRedundancyFive.normalRationalCurveInfinity.eq_1",
     "RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis",
+    "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders",
     "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome",
     "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome.eq_1",
+    "RelativeConicArcs.PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget",
     "RelativeConicArcs.PRSRedundancyFive.syndromeLinearCombination",
     "RelativeConicArcs.PRSRedundancyFive.syndromeLinearCombination.eq_1",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.CertificateValidation",
@@ -1586,12 +1645,12 @@
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.recOn",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.semilinearRepresentativeIndex",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.SporadicOrbitRecord.stabilizerOrder",
+    "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedFieldRecords",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_field_orders",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_orbit_summaries_agree_with_sporadic_records",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.certified_rows_report_exhaustion_and_radius",
-    "RelativeConicArcs.PRSRedundancyFiveCertificate.finiteBridgeFieldOrders",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord.decEq",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.instDecidableEqCertifiedFieldRecord.decEq.match_1",
@@ -1612,8 +1671,9 @@
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_counts",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_orbit_stabilizer",
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts",
-    "RelativeConicArcs.PRSRedundancyFiveCertified.finiteBridgeFieldOrders_agree",
+    "RelativeConicArcs.PRSRedundancyFiveCertified.certifiedBridgeFieldOrders_exceed_required_only_at_sixteen",
     "RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate",
+    "RelativeConicArcs.PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput.casesOn",
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput.ctorIdx",
@@ -3536,6 +3596,123 @@
       "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase",
       "RelativeConicArcs.PRSRedundancyFive.CyclicFamilyCase.ctorIdx"
     ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.casesOn": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.ctorIdx": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_twelve": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.inj": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.injEq": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.inj"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.casesOn",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.noConfusionType": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.casesOn"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_six_of_characteristicTwoBranchBudget": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.nonSplitWeight_le_twelve": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.branchBudget",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.rec": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.recOn": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.mk",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers_bounds": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.countRelation",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers"
+    ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.aubryPerretPointBound": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput"
     ],
@@ -3549,12 +3726,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.certified_splitFree_iff_mem_deepFamilies": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput",
@@ -3562,12 +3740,17 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.classificationRange": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders"
+      "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.families",
+      "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
+      "RelativeConicArcs.PRSRedundancyFive.Syndrome",
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.coveringRadius": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3602,12 +3785,14 @@
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.finiteCertificateValidation": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput"
     ],
-    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.highField_splitFree_iff_mem_deepFamilies": [
+    "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.geometricRange_splitFree_iff_mem_deepFamilies": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.aubryPerretPointBound",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.cubicCoverStrataClassified",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.families",
+      "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
       "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
@@ -3620,12 +3805,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.inj": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3637,12 +3823,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.injEq": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3654,12 +3841,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.noConfusion": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3671,12 +3859,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.mk.sizeOf_spec": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3687,12 +3876,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.noConfusion": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3704,12 +3894,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.noConfusionType": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3720,12 +3911,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.orbitCase": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput",
@@ -3749,12 +3941,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.recOn": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
@@ -3766,12 +3959,13 @@
       "RelativeConicArcs.PRSRedundancyFive.FamilyData",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase",
       "RelativeConicArcs.PRSRedundancyFive.OrbitArithmeticCase.FieldCondition",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome"
+      "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.seroussiRothCompleteness": [
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput"
@@ -4653,6 +4847,9 @@
       "RelativeConicArcs.PRSRedundancyFive.LinearFactor.u",
       "RelativeConicArcs.PRSRedundancyFive.LinearFactor.v"
     ],
+    "RelativeConicArcs.PRSRedundancyFive.geometricClassificationRange_two_sixteen": [
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange"
+    ],
     "RelativeConicArcs.PRSRedundancyFive.hankelKernelDictionary": [
       "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
       "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
@@ -4809,15 +5006,17 @@
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.families",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.fieldOrderAtLeastSeven",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.finiteCertificateValidation",
-      "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.highField_splitFree_iff_mem_deepFamilies",
+      "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.geometricRange_splitFree_iff_mem_deepFamilies",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.orbitCase",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.seroussiRothCompleteness",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.seroussiRothGivesRadiusRange",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.splitFreePredicatesAgree",
+      "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.cyclicCase",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep_card_doubled",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.sporadic",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.IsSplitFree",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData.projectiveOrbitCount",
@@ -4827,10 +5026,10 @@
       "RelativeConicArcs.PRSRedundancyFive.OrbitData.sporadicProjectiveOrbitCount",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData.sporadicSemilinearOrbitCount",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
       "RelativeConicArcs.PRSRedundancyFive.instDecidableEqSyndrome",
       "RelativeConicArcs.PRSRedundancyFive.nonsporadicDeepCardDoubled",
-      "RelativeConicArcs.PRSRedundancyFive.nonsporadicOrbitCount"
+      "RelativeConicArcs.PRSRedundancyFive.nonsporadicOrbitCount",
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome": [
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
@@ -4850,6 +5049,15 @@
       "RelativeConicArcs.PRSRedundancyFive.Syndrome.a4",
       "RelativeConicArcs.PRSRedundancyFive.Syndrome.mk",
       "RelativeConicArcs.PRSRedundancyFive.scaleSyndrome"
+    ],
+    "RelativeConicArcs.PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget": [
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.cubeMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.doubleRootMembers",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget",
+      "RelativeConicArcs.PRSRedundancyFive.ExactSplitWitnessCount.splitMembers",
+      "RelativeConicArcs.PRSRedundancyFive.fieldOrder_le_twelve_of_characteristicTwoSplitFree"
     ],
     "RelativeConicArcs.PRSRedundancyFive.syndromeLinearCombination": [
       "RelativeConicArcs.PRSRedundancyFive.Syndrome",
@@ -5368,9 +5576,9 @@
     "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadic_point_counts": [
       "RelativeConicArcs.PRSRedundancyFiveCertificate.sporadicPointCount"
     ],
-    "RelativeConicArcs.PRSRedundancyFiveCertified.finiteBridgeFieldOrders_agree": [
-      "RelativeConicArcs.PRSRedundancyFive.finiteBridgeFieldOrders",
-      "RelativeConicArcs.PRSRedundancyFiveCertificate.finiteBridgeFieldOrders"
+    "RelativeConicArcs.PRSRedundancyFiveCertified.certifiedBridgeFieldOrders_exceed_required_only_at_sixteen": [
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders",
+      "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
@@ -5381,9 +5589,11 @@
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.families",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.orbitCase",
       "RelativeConicArcs.PRSRedundancyFive.ExceptionalCoverClassificationInput.seroussiRothCompleteness",
+      "RelativeConicArcs.PRSRedundancyFive.FamilyData.characteristic",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.cyclicCase",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.deep",
       "RelativeConicArcs.PRSRedundancyFive.FamilyData.sporadic",
+      "RelativeConicArcs.PRSRedundancyFive.GeometricClassificationRange",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData.projectiveOrbitCount",
       "RelativeConicArcs.PRSRedundancyFive.OrbitData.semilinearOrbitCount",
@@ -5395,6 +5605,10 @@
       "RelativeConicArcs.PRSRedundancyFive.nonsporadicOrbitCount",
       "RelativeConicArcs.PRSRedundancyFive.redundancyFiveSynthesis",
       "RelativeConicArcs.PRSRedundancyFiveCertificate.CertificateValidation"
+    ],
+    "RelativeConicArcs.PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders": [
+      "RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders",
+      "RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders"
     ],
     "RelativeConicArcs.PRSRedundancySixSeven.FixedLevelInput.casesOn": [
       "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
