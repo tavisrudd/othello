@@ -568,6 +568,17 @@ expanding to the Hermitian, rigidity/stability, all-orders, control,
 balance-obstruction, and orientation crowns.  The exact findings and remediation
 order are in `notes/2026-08-02-c853-golden-lean-remediation.md`.
 
+C853's first remediation gate is closed.  The Golden formal gate now replaces
+the scalar determinant/trace surrogates by actual matrix terminals for `16`,
+`12`, and `-42`; imports and registers the transfer/commutator compression
+identities; and exposes the existing theorem for a real symmetric conference
+matrix on six labels, a three-element subset, an orthonormal eigenframe, and
+exchange characteristic polynomial `(X - 1/5)(X - 4/5)^2`.  The guarded gate
+passes.  Its regenerated nine-module, fifteen-terminal fact has no project
+axiom or opaque declaration.  The Hermitian landscape is the next C853
+frontier; the general half-cut rigidity surface should be reconciled before any
+duplicate proof is added.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

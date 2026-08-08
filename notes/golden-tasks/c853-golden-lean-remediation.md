@@ -2,8 +2,8 @@
 
 **Lane:** golden
 
-**Status:** active after C845 and before C840; matrix benchmark landed, semantic
-and coverage remediation in progress
+**Status:** active after C845 and before C840; real matrix semantics and the
+six-label half-cut theorem are gated, Hermitian and remaining crowns open
 
 ## Landed-work review
 
@@ -21,6 +21,14 @@ then introducing the formal vocabulary, then expanding to the Hermitian,
 rigidity/stability, all-orders, control, obstruction, and orientation crowns.
 The trust fact and deterministic export are refreshed only after that surface is
 stable.  The dated C853 report records the detailed findings and gates.
+
+The first remediation gate is now closed.  The advertised surface contains
+actual matrix terminals for `det(S Sᵀ) = 16`, `tr(A² S Sᵀ) = 12`, and the
+fourth-word value `-42`; the scalar legacy terminals have left the gate.  The
+compression identities and the existing six-label/three-subset eigenframe
+characteristic-polynomial theorem are registered terminals.  The guarded gate
+and regenerated fifteen-terminal trust fact pass with no project axiom or
+opaque declaration.
 
 ## Goal
 

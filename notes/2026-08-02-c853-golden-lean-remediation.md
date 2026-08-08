@@ -47,6 +47,35 @@ the compression identities and actual matrix semantics for every retained
 value `16`, `12`, and `-42`, with no scalar surrogate counted as theorem
 coverage.
 
+## First remediation checkpoint
+
+The immediate gate now passes.  `ConferenceExchangeSpectrum` proves
+`det(S Sᵀ) = 16`,
+`tr(A² S Sᵀ) = 12`, and the resulting fourth-word value `-42` as actual
+matrix statements.  The Golden gate no longer imports or advertises the four
+scalar `GoldenBalancedCut` terminals.
+
+The gate now imports `ConferenceExchangeCompression` and advertises its cut
+commutator square, transfer Gram, and compressed squared-commutator identities.
+It also imports the completed semantic theorem
+`BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three`.
+That theorem starts with a real symmetric conference matrix on six labels and
+an actual three-element subset, constructs an orthonormal eigenframe, and proves
+the characteristic polynomial `(X - 1/5)(X - 4/5)^2` of the exchange
+compression.  This closes the review's conference/cut/eigenframe API defect
+without duplicating the existing general half-cut development.
+
+Guarded single-file elaboration of the new matrix terminals passes.  The
+compression leaf and the Golden import-only gate then built through the guarded
+queue; the aggregate gate passed.  The regenerated fact records a nine-module
+closure, fifteen terminals, no project axiom, and no opaque declaration.  Every
+terminal observes exactly `Classical.choice`, `Quot.sound`, and `propext`.
+
+The remaining C853 frontier begins with the Hermitian conference vocabulary and
+landscape.  General balanced-spectrum rigidity already has a reusable formal
+surface in the imported half-cut closure; its exact C853 terminal selection and
+paper correspondence should be reconciled before adding another proof.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript
