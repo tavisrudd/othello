@@ -514,6 +514,12 @@ directly normalizes the fifty-five monomials of `Heven³` to
 `-1280/46189` under the default guarded profile.  No squared-coordinate moment
 helper is needed.
 
+The second surviving cubic moment is green as well:
+`normalizedMean_tetrahedralOddHarmonic_sq_mul_tetrahedralEvenHarmonic` gives
+`-1024/969969`.  The first-coordinate swap is formalized as an orthogonal
+substitution, negates `Hodd`, fixes `Heven`, and proves the two odd-power moments
+zero.  The marked split and invariant-line assembly are next.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared

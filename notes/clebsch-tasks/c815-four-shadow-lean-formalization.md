@@ -237,6 +237,55 @@ monomials of the even tetrahedral harmonic's cube and proves
 the default guarded elaboration profile.  The squared-coordinate fallback in
 the design note is not needed.
 
+## Audited remaining gaps (2026-08-08)
+
+The complete landed-work audit is
+`notes/2026-08-08-c815-complete-landed-work-audit.md`.  C815 remains open for
+the following task-owned obligations, in execution order:
+
+1. **HARM-2, spherical cubic restriction.**  Complete
+   `RelativeConicArcs.SphericalCubicRestriction`: define the transposition-odd
+   tetrahedral harmonic, prove the second surviving degree-eighteen moment and
+   the two symmetry vanishings, identify the marked zonal field with its
+   odd/even split, prove rotation covariance and the explicit permutation-word
+   orbit reduction, collapse the invariant cubic on sum-zero weights to
+   `sigmaThree`, and derive the marked and rational corollaries.  The first risk
+   gate is already green: direct normalization proves the even cube moment
+   `-1280/46189` without a special squared-coordinate evaluator.  The second
+   surviving moment is now also proved,
+   `M(Hodd² Heven) = -1024/969969`, and the first-coordinate transposition
+   proves `M(Hodd³) = M(Hodd Heven²) = 0` symbolically.  What remains in this
+   item is the marked-field split, rotation covariance, coefficient-orbit
+   reduction, sum-zero collapse, and final corollaries.
+2. **HARM-1/HARM-2 analytic bridge.**  Add
+   `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
+   defined `normalizedMean` agrees with normalized surface integration.  This
+   is the only measure-theoretic module in the harmonic packet.
+3. **ARITH-1.**  Formalize the trace-split rank-one reflexive Stein algebra with
+   multiplication `z² = 5J0`, together with the chart-descent comparison used by
+   the manuscript.
+4. **ARITH-2.**  Formalize the complete reduced local fibre as the residue
+   algebra of the quadratic pinching at `xyz`, and replace the displayed
+   spinor-norm witness by the general definition-level API the manuscript uses.
+5. **ORIENT-1.**  Formalize the two-component normalization of the incidence
+   pullback relative to the complete ordered golden, plane-triple, Petersen and
+   chart-lift datum, including the marked geometric identification.
+6. **Weighted-Jacobian promotion bridge.**  Kernel-check the reduced
+   eight-by-five rank calculation and its equivariant bridge to the
+   twenty-by-fifteen weighted Jacobian.  The structural human proof is sound,
+   but C816 cannot promote its local weighted-rigidity assertion under the
+   series-wide formal standard until this declaration exists.
+7. **C815 closeout.**  Attach the seven harmonic modules and all remaining
+   terminals to the appropriate Paper III gate, regenerate the source closure,
+   axiom report and formal maps, replay the three gates and release verifier,
+   run `ej` and `tt`, and freeze the API for C823.
+
+Two adjacent obligations are explicitly not C815 gaps.  C884 owns the
+covariant obstruction, Gaunt/Wigner interpretation and Condon--Shortley input
+before C816 promotes the harmonic section.  C800 owns the single coordinated
+replacement of the formal maps' hard-coded all-row `partial` coverage tokens
+after C815 and C823 freeze their shared sources.
+
 ## Evidence source
 
 Human theorem and exact certificate: `notes/2026-08-02-c809-four-shadow-characterization.md` and its adjacent `.py`/`.json` bundle.

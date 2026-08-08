@@ -105,6 +105,10 @@ Condon--Shortley conversion input and is not folded into C815.
   across Lean, exact certificates and the formal maps.
 - **Settled after the audit:** direct `MvPolynomial` normalization of
   `Heven ^ 3` is cheap enough under the default guarded profile.
+- **Settled after the audit:** the second surviving moment has value
+  `-1024/969969`, while orthogonal transposition invariance kills the two terms
+  with an odd number of `Hodd` factors.  Thus the exact rationality mechanism
+  in the design is now kernel-checked.
 - **Open, proof obligation:** the analytic surface-integral bridge.  Owner:
   `SphereIntegralMoments` in C815.
 - **Open, release-contract debt:** completed OPER rows still carry a `partial`
