@@ -165,32 +165,13 @@ the assertion in (iii) is the required descent statement.  All degrees
 are geometric degrees on the displayed curve or parameter line.
 \end{definition}
 
-The construction is summarized in Figure~\ref{fig:polar-flow}.  The
-upper branch is the level-specific component calculation; the lower
-branch is the general transverse argument.
-\begin{figure}[H]
-\centering
-\[
-\begin{array}{ccccc}
-[f]\in S_n&\dashrightarrow&\Phi_f(U_f)\subset S_{n-1}
- &\longrightarrow&\text{lower ordered splitting cover}\\
-&&\begin{array}{c}
-\searrow\ \text{contained}\\[-2pt]
-\nearrow\ \text{transverse}
-\end{array}
-&&\begin{array}{l}
-\text{persistent/Lucas component},\\
-\text{delete branch, diagonal, and markers}
-\end{array}\\
-&&&&\downarrow\ \text{lift by \eqref{eq:lift}}\\
-&&&&\text{split squarefree witness in }W_f .
-\end{array}
-\]
-\caption{Coherent polar induction.  The contained branch is a
-level-specific component theorem; only the transverse branch is
-controlled by the general point-count argument.}
-\label{fig:polar-flow}
-\end{figure}
+Figure~\ref{fig:polar-flow} gave the conceptual recursion before its formal
+data were introduced.  In the present notation, the contained branch is the
+level-specific assertion that the whole line \(\Phi_f(U_f)\) lies in the
+lower bad scheme.  The transverse branch is the package in
+Definition~\ref{def:lower-package}: it deletes finitely many parameters and
+points on the lower ordered splitting cover, then lifts a surviving witness
+by Equation~\eqref{eq:lift}.
 
 \begin{theorem}[Polar-flag construction]\label{thm:polar-construction}
 The maps of Definition~\ref{def:polar-spaces} commute with field
