@@ -12,7 +12,9 @@ factor as an input turns it into the normalized Choi state of a
 implemented by products of one-site physical operators.
 
 Throughout, \emph{transversal} means a tensor product of one-site physical
-operators with party labels fixed.  Logical groups are projective, so scalar
+operators with party labels fixed; the one-site factors may depend on the
+site.  This is broader than the uniform \(U^{\otimes n}\) convention used in
+several structural classifications.  Logical groups are projective, so scalar
 phases are divided out.  A party-moving symmetry additionally permutes tensor
 factors and is named explicitly.  The exact group has two branches, detected
 by a linear nullity computation.
@@ -53,24 +55,37 @@ unipotents, hence all of \(\mathrm{SL}_2(q)\).  Logical Paulis supply the
 translation factor \(\F_q^2\).  The converse uses the following rigidity
 theorem from the companion paper.
 
-Complementary work describes transversal Clifford structure through
-compatible symplectic bases for self-dual CSS codes
-\cite[Theorem~1]{TansuwannontTakadaFujii2025}, diagonal multi-block
-Clifford symmetries and endomorphism algebras of qubit stabilizer codes
-\cite[Theorem~6.1]{DasuBurton2025}, and code automorphisms or
-ZX-dualities with the required Pauli corrections
-\cite[Sections~III--IV]{SayginelEtAl2025}.  Albert gives normal forms for
-the full code-preserving, transversal, and two-fold-transversal Clifford
-groups of CSS codes \cite[Sections~III--V]{Albert2026}.  For AME-derived
-codes, Tan computes the four-qutrit and six-qubit symmetry/transversal
-dictionaries in concrete cases
-\cite[Section~5]{Tan2026} and \cite[Section~3.4]{TanFiveQubit2026}.
-These results concern qubit
-CSS/stabilizer structure or individual AME examples.  Here the
-one-logical-qudit odd-prime MDS hypothesis reduces the full fixed-party
-product-unitary problem to the nullity of one diagonal code-to-dual
-multiplier space; stabilizer-AME rigidity then makes the resulting
-Clifford image exhaustive among arbitrary product unitaries.
+Rains organized global coordinatewise symplectic symmetries and universal
+fault-tolerant operations through code-invariance algebras
+\cite[Theorems~4 and~14]{RainsNonbinary1999}.  Recent complementary work
+describes transversal Clifford structure through compatible symplectic bases
+for self-dual CSS codes \cite[Theorem~1]{TansuwannontTakadaFujii2025},
+uniform diagonal multi-block Clifford actions and endomorphism algebras of
+qubit stabilizer codes \cite[Section~II and Theorem~6.1]{DasuBurton2025},
+and code automorphisms or ZX-dualities with the required Pauli corrections
+\cite[Sections~III--IV]{SayginelEtAl2025}.  The latter corrections parallel
+Lemma~\ref{lem:pauli-phase-correction}, while their ZX-dualities are closest
+to the party-moving exchanges analyzed in Appendix~\ref{sec:party-extensions}.
+Prakash and Singhal show under the uniform \(V_F^{\otimes n}\) convention
+that an odd-prime \([[n,1]]_p\) code with a complete transversal Clifford set
+has a maximal-self-orthogonal CSS presentation
+\cite[Section~IV.C]{PrakashSinghal2026}.  Albert concurrently gives normal
+forms for code-preserving, transversal, and two-fold-transversal Clifford
+groups of binary CSS codes \cite[Sections~III--V]{Albert2026}.
+
+Our site-dependent convention is load-bearing on the isodual branch: a
+logical \(A\in\mathrm{SL}_2(q)\) is propagated through generally different local
+blocks \(\phi_i(A)\) in \((3.4)\), rather than one repeated physical block.
+Proposition~\ref{prop:diagonal-multiplier-line} can be viewed as an MDS
+collapse of the corresponding endomorphism problem: every off-diagonal
+code-to-dual multiplier lies on at most one projective line.  That collapse
+gives the exact \(T\)-versus-\(\mathrm{SL}_2(q)\) dichotomy, and stabilizer-AME rigidity makes it
+exhaustive among arbitrary product unitaries.  Tan proves the general
+AME--QMDS LU-orbit and symmetry--transversal correspondences
+\cite[Theorems~3.5--3.6]{Tan2026}, and computes the four-qutrit and six-qubit
+dictionaries in concrete cases \cite[Section~5]{Tan2026} and
+\cite[Section~3.4]{TanFiveQubit2026}; here the multiplier theorem computes the
+exact fixed-party subgroup for this MDS--CSS family.
 
 \begin{theorem}[Imported stabilizer-AME rigidity
 \cite{RuddAMEStabilizerRigidity2026}]

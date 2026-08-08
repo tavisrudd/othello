@@ -57,7 +57,7 @@ D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
 \end{array}                                             \tag{3.1}
 \]
 
-If the block at the chosen input is nondiagonal, then \(D_\beta\) or
+If any coordinate block is nondiagonal, then \(D_\beta\) or
 \(D_\gamma\) is nonzero.
 Proposition~\ref{prop:diagonal-multiplier-line} and \((3.1)\) give
 \[
@@ -66,9 +66,14 @@ Proposition~\ref{prop:diagonal-multiplier-line} and \((3.1)\) give
 \]
 The second equality can be inverted, so either one supplies a
 nonsingular diagonal \(S\) with \(SC=C^\perp\).  Consequently, on the
-non-isodual branch every input block is diagonal.  Its determinant is
-one, and the common blocks \(\diag(a,a^{-1})\) always preserve \(L_C\);
-hence the exact linear factor there is \(T\).
+non-isodual branch every coordinate block is diagonal.  Equation~\((3.1)\)
+then gives \(D_\alpha C\subseteq C\) and
+\(D_\delta C^\perp\subseteq C^\perp\).  Applying
+Proposition~\ref{prop:diagonal-multiplier-line} with \(E=F=C\), and then with
+\(E=F=C^\perp\), gives \(D_\alpha=aI\) and \(D_\delta=dI\).  The local
+determinant condition gives \(ad=1\).  Thus every coordinate block is the
+same \(\diag(a,a^{-1})\); these blocks always preserve \(L_C\), so the exact
+linear factor is \(T\).
 
 Now suppose
 \[
@@ -137,6 +142,13 @@ and the elementary matrices in \((3.3)\) satisfy all
 \(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
 applies at the extended evaluation point.  It uses only the diagonal
 duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
+Conjugation by \(\diag(1,t_i)\) is inner on \(\mathrm{SL}_2(q)\) exactly
+when \(t_i\) is a square: the centralizer of \(\mathrm{SL}_2(q)\) in
+\(\mathrm{GL}_2(q)\) is scalar, and a scalar multiple of this diagonal
+matrix has determinant one exactly in the square case.  Since \(t_j=1\), if
+some \(t_i\) is nonsquare then the propagated action cannot be made uniform
+by fixed local Clifford frame changes; its \(i\)-th factor represents the
+diagonal outer automorphism.
 
 For the present odd prime \(q\), and more generally for any odd prime
 power, the finite Stone--von Neumann representation of the Heisenberg

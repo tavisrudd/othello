@@ -34,14 +34,14 @@
         "sha256": "dfd8e10b0a67a4e9bd4bcfa39b7794368c7e656e24b028e9bc8ac4cdb6f41c1e"
       },
       {
-        "bytes": 207472,
+        "bytes": 210953,
         "path": "mds-css-transversal-groups.pdf",
-        "sha256": "f4dd1618268d02e4a216804400121de66c097b469817edddcf44886aaabba7ce"
+        "sha256": "ad97bc1747e3367ebb4ff91d58081336927d27c7db6b88fe51aa97a10b7b41ff"
       },
       {
-        "bytes": 21877,
+        "bytes": 22594,
         "path": "refs.bib",
-        "sha256": "631657c72df1d1c9fdcc388fa773b9e40b503e3886bf88fa77ca06aed9b7d0a0"
+        "sha256": "94968718540441a7e1fc9230c144a4825fee0ec8ec86c90bedd7e7407ab892da"
       },
       {
         "bytes": 7657,
@@ -49,9 +49,9 @@
         "sha256": "8c07a319521629377397036a2e7431788e6d92dc6e0f85967bb2cc9289e1642c"
       },
       {
-        "bytes": 8204,
+        "bytes": 9405,
         "path": "sections/01-introduction.tex",
-        "sha256": "48652078935aa448997bd9b6a7ede4b60d5d1cca6e28a0b4baf492ef5ba78c86"
+        "sha256": "c429f67a39bcee1bda4abcebc3005745e9503281b1afa5ff848d6525ebc4f4e3"
       },
       {
         "bytes": 6901,
@@ -59,9 +59,9 @@
         "sha256": "5904ec62cf3e56e71bfbc00e0b66c467e2610c34449a0709f11cd4e90e8d5d0f"
       },
       {
-        "bytes": 7664,
+        "bytes": 8424,
         "path": "sections/03-diagonal-isoduality.tex",
-        "sha256": "e5dc1aa85f0460455b2deb88060f8a95bcbb37a987c820157063f88311b6e6dd"
+        "sha256": "3e348398c4715ebf3cea85babf394c625b04adf9eeb2adbca87433180ffec011"
       },
       {
         "bytes": 9579,
@@ -104,7 +104,7 @@
         "sha256": "58abf5d92a1e3eae920ebad4e66a938852a51ef003e26ed6b797357b4622eb1a"
       }
     ],
-    "tree_sha256": "7064c92cf99bbb881275805471c2ebd96db9acb18ad248dabb6efd0962b6a133"
+    "tree_sha256": "b0e99b22cbcb0006396cead37e5090a82674e68e65966fdeb3d28f423f185129"
   },
   "formal_companion": {
     "artifacts": [

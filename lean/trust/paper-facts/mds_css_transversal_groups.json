@@ -67,6 +67,18 @@
       "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
     },
     {
+      "key": "PrakashSinghal2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
+      "key": "RainsNonbinary1999",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl"
+    },
+    {
       "key": "RuddAMEStabilizerRigidity2026",
       "kind": "bibitem",
       "self_authored": true,
@@ -413,11 +425,25 @@
       "title": "Holographic Quantum Error-Correcting Codes: Toy Models for the Bulk/Boundary Correspondence"
     },
     {
-      "key": "Rains1999",
+      "key": "PrakashSinghal2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Search for High-Threshold Qutrit Magic-State Distillation Routines"
+    },
+    {
+      "key": "RainsMinimumDistance1999",
       "kind": "bibtex",
       "self_authored": false,
       "source": "papers/mds_css_transversal_groups/refs.bib",
       "title": "Quantum Codes of Minimum Distance Two"
+    },
+    {
+      "key": "RainsNonbinary1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/mds_css_transversal_groups/refs.bib",
+      "title": "Nonbinary Quantum Codes"
     },
     {
       "key": "RaissiGogolinRieraAcin2018",
@@ -764,10 +790,10 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 207472,
+      "bytes": 210953,
       "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "f4dd1618268d02e4a216804400121de66c097b469817edddcf44886aaabba7ce"
+      "sha256": "ad97bc1747e3367ebb4ff91d58081336927d27c7db6b88fe51aa97a10b7b41ff"
     }
   ],
   "schema_version": 1,
@@ -790,7 +816,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/01-introduction.tex",
-      "sha256": "48652078935aa448997bd9b6a7ede4b60d5d1cca6e28a0b4baf492ef5ba78c86"
+      "sha256": "c429f67a39bcee1bda4abcebc3005745e9503281b1afa5ff848d6525ebc4f4e3"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/02-geometry-ame-dictionary.tex",
@@ -798,7 +824,7 @@
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/03-diagonal-isoduality.tex",
-      "sha256": "e5dc1aa85f0460455b2deb88060f8a95bcbb37a987c820157063f88311b6e6dd"
+      "sha256": "3e348398c4715ebf3cea85babf394c625b04adf9eeb2adbca87433180ffec011"
     },
     {
       "path": "papers/mds_css_transversal_groups/sections/04-pencil-classification.tex",
