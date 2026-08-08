@@ -7,6 +7,11 @@ of MDS--CSS Codes* and its paper-local verification package.
 
 [Read the paper (PDF).](mds-css-transversal-groups.pdf)
 
+This is the fifth current paper in the Clebsch portfolio, but its headline is
+the MDS--CSS theorem rather than a new Clebsch reconstruction claim. The
+Clebsch ([6,3,4]_{11}) code appears as the worked syndrome-geometric
+application; the four *The Clebsch cubic* papers remain independent papers.
+
 For an odd-prime linear `[2m,m,m+1]_q` MDS code, the paper proves that the
 space of diagonal code-to-dual multipliers has nullity zero or one and that
 this nullity selects the exact fixed-party projective transversal logical

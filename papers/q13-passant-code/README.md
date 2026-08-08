@@ -26,7 +26,10 @@ The theorem is a standalone coding result, developed from the computational
 companion of *Reconstructing the Clebsch code and its golden orientation from
 its deep-hole syndrome locus* (concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878)).  Reading
-that paper is not needed here.
+that paper is not needed here. This is Paper IV of the *The Clebsch cubic*
+series; the broader five-paper Clebsch portfolio also contains the companion
+MDS--CSS transversal-groups paper. The papers share context but are logically
+independent entry points.
 
 ## Building and checking
 
@@ -50,12 +53,10 @@ which claims rest on exact execution rather than on a proof.
 ## Formal companion
 
 The Lean development is deposited separately and is not part of this release.
-It is expected the day after this deposit.  Until then, the trust table in the
+This manuscript-only pre-release intentionally leaves the formal companion for
+a forward version. Until that version is published, the trust table in the
 manuscript is the authority on which claims are kernel-checked Lean theorems,
-which rest on compiled native evaluation, and which are exact executions or
-explicit human transports.  This version's formal artifact still contains
-native-evaluation leaves, and the manuscript says so; a forward release will
-replace them and add the pinned, independently buildable package.
+compiled-evaluation leaves, exact executions, or explicit human transports.
 
 ## License
 

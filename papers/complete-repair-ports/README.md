@@ -2,10 +2,9 @@
 
 **Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
 **Author:** Tavis Rudd<br>
-**Status:** private corrected manuscript with the revised theorem hierarchy frozen; MDS
-reconstruction, pointed transfer, positive-density fingerprints, and reliability/bounded EXIT have
-complete human proofs and Lean terminals. The modular rewrite has not begun and publication export
-remains gated.
+**Status:** development manuscript, not yet a public release. The revised theorem hierarchy is
+frozen; the MDS reconstruction, pointed transfer, positive-density realization, and
+reliability/bounded-EXIT sections have complete written proofs and scoped formal support.
 
 ## Paper spine
 
@@ -35,52 +34,34 @@ family. The support clutter alone is the generic complete three-uniform
 hypergraph on five helpers; the manuscript does not present generic MDS
 locality as Clebsch-specific.
 
-The C286 correction pass repaired the exact transfer statement's zero-functional branch,
-normalized the coefficient fibers correctly, completed the random/AG and Poisson proof chain,
-and reconciled three context-light paragraph-by-paragraph cold reads. The private PDF remains a
-12-page draft.
+The current PDF is a 12-page draft. Its main mathematical boundary is deliberate: coefficients
+give a direct one-symbol-per-helper scalar protocol, not a minimum-bandwidth or minimum-access
+claim under subpacketization.
 
 ## Evidence boundary
 
-The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT theorem chains are
-Lean-checked under the existing `RepairCodes` and `RepairPorts` namespaces. Outer-family existence,
-the pointed-Tutte specialization, and the retained harmonic geometry use the explicit manuscript
-or literature boundaries recorded in the ledgers. Exact finite harmonic, reliability, EXIT, and
-pointed-Tutte profiles are backed by the committed C218, C219, C226, C227, C243, and C244
-script/JSON bundles and remain appendix material.
+The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT theorem chains have
+formal support in the shared Lean development. Outer-family existence, the pointed-Tutte
+specialization, and the retained harmonic geometry remain explicit manuscript or literature
+boundaries. Exact finite harmonic, reliability, EXIT, and pointed-Tutte profiles are evidence
+support for the appendices, not substitutes for the body proofs.
 
 Classical ingredients remain labeled as such: concatenated-dual decomposition, Singer regularity,
 random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner systems,
 and the Las Vergnas perspective polynomial. A none-found search is not a priority certificate.
-The Clebsch specialization is a manuscript corollary of the MDS dual
-parameters and the prescribed-port theorem; it is not represented as a
-separate Lean terminal.
+The Clebsch specialization is a manuscript corollary of the MDS dual parameters and the
+prescribed-port theorem; it is not a separate claim about Clebsch geometry.
 
-C220's optional cubic blocker-stability strengthening is omitted by scope decision. Sequential
+An optional cubic blocker-stability strengthening is outside the current scope. Sequential
 composition, service regions, coefficient optimization, log-concavity,
 product architecture, and random harmonic-cascade thresholds are outside scope.
 
 ## Files
 
 - `complete_repair_ports.tex` — main manuscript.
-- `complete_repair_ports.pdf` — rebuilt private artifact.
+- `complete_repair_ports.pdf` — current draft PDF.
 - `refs.bib` — bibliography.
-- `proof_ledger.md` — exact claim, trust, and evidence boundary.
-- `adversarial_novelty_review.md` — internal novelty and overclaim audit; excluded from export.
-
-Paper control for the revised draft lives in:
-
-- `theorem-map.md`;
-- `claim-proof-novelty-ledger.md`;
-- `formalization-ledger.md`;
-- `formal-statement-adequacy.md`;
-- `verification-map.md`;
-- `second-draft-fix-plan.md`; and
-- `sections/README.md`.
-
-The legacy `proof_ledger.md` remains the detailed source inventory until the
-new ledgers have absorbed and validated every retained row.  It is not the
-admission authority for the revised body.
+- `sections/` — manuscript sections and their reading order.
 
 ## Build
 
@@ -92,10 +73,6 @@ nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
 
 ## Publication boundary
 
-This directory belongs to the private monorepo. Publication must use the reviewed C275
-deny-by-default allowlist into a new empty destination with fresh Git history. Do not publish,
-fork, history-filter, or broadly copy the private monorepo. The approved paper destination is
-`tavisrudd/complete-ports` staged at `~/src/papers/complete-ports` with the MIT license. Public
-rewrites and checker/archive identity, and the separately owned shared-Lean export at
-`~/src/papers/lean`, remain explicit gates. No initialization, copy, publication, or push is
-authorized by manuscript assembly or these metadata decisions.
+This repository is not yet a citable public release. A future export will carry only the reviewed
+manuscript, its public evidence, and the corresponding formal boundary; publication, licensing,
+identifiers, and push remain author decisions.

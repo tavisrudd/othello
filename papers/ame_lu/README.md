@@ -1,4 +1,4 @@
-# Paper: Local-unitary rigidity and quantitative rounding
+# Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
@@ -71,8 +71,8 @@ Selected finite-coordinate, support-profile, diagonal-axis, holonomy,
 stabilizer-character, Choi, and second-moment cores are kernel checked in the
 shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
 rounding, global quantitative theorem, robust atlas compatibility, and affine
-obstruction are manuscript proofs without Lean or certificate coverage. A
-paper-specific semantic gate has not yet replaced the pre-split aggregate.
-The tracked release manifest and standalone evidence package likewise still
-describe the pre-split combined manuscript; they are not a release-ready
-statement of this Paper I scope.
+obstruction are manuscript proofs without Lean or certificate coverage. The
+corrected local release surface now includes the repaired (m=2) proof bridge,
+the phase-convention clarification, and the current related-work boundary.
+The standalone mirror is synchronized locally but remains unpushed; public
+deposit and submission are author decisions.

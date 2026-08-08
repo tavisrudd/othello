@@ -2,10 +2,17 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
 
-**Series:** *The Clebsch cubic --- I*
+**Clebsch portfolio:** Paper I of the four-paper *The Clebsch cubic* series.
+The broader current portfolio also includes the companion paper *Diagonal
+Isoduality and Transversal Clifford Groups of MDS--CSS Codes*. The shared
+progression is expository: this paper is logically independent of the other
+portfolio papers.
 
-The shared progression is expository; this manuscript is logically
-independent of the other two.
+The five related papers are: I, this rigidity paper; II, *Quadratic trade
+rigidity and cubic orientation in conic matching quotients*; III, *Golden
+descent and operator realizations of the Clebsch cubic*; IV, *Minimum-word
+reconstruction of PG(2,13) from a binary conic code*; and
+the companion MDS--CSS transversal-groups paper.
 
 [Read the paper (PDF).](clebsch_rigidity.pdf)
 

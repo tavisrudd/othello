@@ -1,35 +1,28 @@
-# Paper: Continuation-graph rigidity
+# Semilinear rigidity of four-point-frame continuation graphs
 
 **Title:** *Semilinear rigidity of four-point-frame continuation graphs.*
 
-**Object:** automorphisms of the abstract continuation ("conflict") graph of a projective frame.
-The paper has one headline:
-- **N1** — the four-point-frame continuation graph has exactly its ambient semilinear
-  automorphisms for q ≥ 13 (Thm 7.4; an M₀,₅ four-map-reduct rigidity result).
+## Headline
 
-The broader full-complex reconstruction theorem N2 is retained only as a scope remark pending its
-literature gate; it is not a second headline.
+Let a projective frame determine its abstract continuation, or conflict, graph.
+For (qge13), every automorphism of that graph is induced by an ambient
+semilinear projective transformation (Theorem 7.4). The proof is an
+(M_{0,5}) four-map-reduct rigidity argument: the graph retains enough
+cross-ratio data to recover the ambient semilinear action.
 
-**Status:** N1 working manuscript drafted in `continuation_graph_rigidity.tex`. Theorems are
-`[PROVED]`. Audit verdict:
-**N1 SURVIVES** (Bruno–Mella / cross-ratio-graph prior art provably points the other way);
-**N2 SOFTEN** (collides with the complement / pseudo-complement embedding genre — Batten,
-Drake–Sané, Beutelspacher–Metsch — but the arc-recovery chain survives; gated on a paywalled
-Metsch / Drake–Sané full-text read). Extremal quantities m(k), r(k) are `[OPEN]`.
+This is an N1-only paper. Full-complex reconstruction is a softened scope
+remark rather than a second theorem, and the extremal quantities (m(k)) and
+(r(k)) remain open.
 
-**Scope:** N1 is the standalone paper. N2 is deferred/softened rather than carried.
+## Files and status
 
-**Lean:** planned `ContinuationRigidity` library (Phase 3), **not yet built**.
+- `continuation_graph_rigidity.tex` — manuscript source.
+- `continuation_graph_rigidity.pdf` — working PDF when present.
 
-## Files here
+The written N1 proof is complete. A Lean formalization is planned but is not
+part of the current evidence boundary, and this directory is not yet a citable
+public release.
 
-- `continuation_graph_rigidity.tex` — N1-only working manuscript; N2 appears only in scope remarks.
-
-- `2026-07-10-continuation-graph-rigidity-upgrades.md` — the theorem-package note
-- `2026-07-11-continuation-rigidity-audit-scope.md` — external citation audit (N1/N2 verdicts)
-
-Note: the cap-game residual/reply-graph notes (`conic-involution-residual-graphs`,
-`c77-game-semantic-reply-graphs`) are a *different* program and are **not** sources here.
-
-See `../papers-index.md` and `../papers-planning.md`. Parent audit: Package 2 in
-`../../notes/2026-07-10-codex-publishable-spinout-audit.md`.
+The continuation graph is distinct from the projective cap-game reply graphs:
+this paper studies abstract reconstruction and semilinear automorphisms, not
+game values.

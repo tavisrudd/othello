@@ -1,4 +1,4 @@
-# Deep holes beyond redundancy four
+# Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682069-blue.svg)](https://doi.org/10.5281/zenodo.21682069)
 
@@ -55,6 +55,12 @@ The electronic supplement contains public classification records, generators,
 independent replays, checksums, toolchain locks, and the declaration-level map
 of the conditional Lean formalization.
 
+The tree carries the reviewed Version 2 candidate. Its fixed-level results
+reach redundancies five through ten at the field ranges stated above; the
+arbitrary-redundancy theorem remains conditional on its explicit intermediate
+package hypotheses. Version 1 and its DOI remain immutable, while a public
+Version 2 revision is an author decision.
+
 Run
 
 ```text
@@ -80,7 +86,7 @@ carrier.  It makes no assertion about nilpotent structure in a chosen
 integral model and does not settle the general Reed--Solomon deep-hole
 conjecture.  Version 1 and its public identifiers remain immutable.
 
-Public release remains blocked on the immutable paper and Lean exports,
-independent specialist signoffs, public identifiers, and author/account
-confirmation.  No upload or external publication is performed by the local
-verification commands.
+No upload or external publication is performed by the local verification
+commands. The public release surface records the paper and Lean revisions,
+archive metadata, and independent-reader fields separately from this local
+candidate.

@@ -17,6 +17,7 @@ For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
 the paper proves
 \(\rho_{\mathcal C}(q)\geq\sqrt{2q}+3/2-8/\sqrt{2q}\), classifies zero defect
 in characteristic two, and determines
+\(\rho_{\mathcal C}(5)=4\), \(\rho_{\mathcal C}(8)=\rho_{\mathcal C}(9)=\rho_{\mathcal C}(11)=6\),
 \(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
 \(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\).
 

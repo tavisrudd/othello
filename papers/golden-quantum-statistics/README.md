@@ -20,8 +20,9 @@ paper closes with the calibrated determinant-sign readout and the precise
 resource boundary between ordinary-photon tests and direct three-fermion
 emulation.
 
-This is a theory and design-limit analysis, not a report of a built device or
-a fifth numbered Clebsch-series paper.
+This is a theory and design-limit analysis, not a report of a built device.
+It is an unnumbered Golden-lane companion, separate from the five-paper
+Clebsch portfolio and from the operator manuscript's write surface.
 
 The broader Golden operator inventory remains outside this submission package.
 Paper III remains outside this manuscript's write surface. A forward citation
