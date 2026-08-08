@@ -1364,6 +1364,15 @@ in place.
   `q ≥ 6r−15 + floor(2 sqrt(6r−17))`. This is a uniform high-field containment theorem, not a
   general solution of the Reed–Solomon deep-hole conjecture.
 
+- **Redundancies eight through ten — field-ranged closure.** The fixed-level package now proves
+  exact deep-hole classifications at redundancy eight for `q ≥ 43`, redundancy nine for `q ≥ 53`,
+  and redundancy ten for `q ≥ 59`. At each level only the persistent tangent and conjugate-secant
+  families remain, of size `q(q+1)²/2`, with orbit law `T/T^r` modulo inversion and Frobenius
+  (`r = 7, 8, 9`). The revised 56-page candidate makes the R5–R10 layers, radius gates, and
+  characteristic boundaries explicit; its replay, Lean boundary export, standalone mirror, and
+  release checks are green. This remains a field-ranged result, not the general deep-hole
+  conjecture.
+
 These results combine exact invariant theory, Plücker inversion, Gale duality, catalecticants and
 apolarity, finite-group descent, low-genus point bounds, and independently replayed bounded
 classifications. They do **not** prove the general Reed–Solomon deep-hole conjecture.
@@ -1417,6 +1426,21 @@ Clifford. The bound is uniform across the enlarged extension-field kernels **onl
 prime-field Clifford target: exact q=9 nonsemilinear and q=25 GRS symplectic elements rule out every
 uniform semilinear, split-torus or Desarguesian-spread upgrade *even at zero error*, so that is a
 structural obstruction rather than a loss of precision. No manuscript wording was adopted from it.
+
+The referee-repaired quantitative bridge closes the printed `m = 2` proof scope without losing the
+headline radius or constant. A dimension-only `8ε` rounding corollary is now adopted in Paper I:
+the physical Pauli correction remains globally uncontrolled, but stabilizer cancellation removes it
+on one chosen logical input leg. A second external review repaired the phase convention, restored
+the exact qubit and AME–QMDS literature boundary, added the missing related-work scope, and
+renamed the encoder consequence as factorwise transversal rigidity. The corrected Paper I and its
+companion pass their local release surfaces; mirrors remain synchronized and unpushed.
+
+C889 also proves, but does not yet promote, the stronger fixed-party inter-code theorem: for
+odd-prime `[2m,m,m+1]` MDS codes, equal-phase CSS states are LU-equivalent exactly when the target
+code is diagonally equivalent to the source or its dual. Its code/dual criterion matches all
+twelve earlier party-image rows. The high-distance multiplier line and the five prime-field
+holonomy-centralizer types are likewise settled and banked; the proposed extension-field and
+affine programmes remain negative or structurally blocked.
 
 **A generic coset/syndrome dictionary underlies the finite examples.** Translated equal-phase states
 are classified by code cosets, distinct cosets are orthogonal, dual-code phase stabilizers read the
@@ -1991,7 +2015,7 @@ by the **Lean kernel** (`decide` / `checkCap_sound`), not `native_decide` and no
 
 Those clean reports and the newer repository-wide extraction audit are different evidence layers.
 Scoped current-project aggregates now elaborate and audit successfully: the relconic reconstruction
-and matching-design closure, the exact 17-file R5–R7 PRS paper closure with its 74-target audit, and
+and matching-design closure, the exact PRS R5–R10 paper closure with its current scoped audit, and
 the generic AME marginal-to-rigidity chain all have current gate evidence. The repository-wide
 extractor is still a separate attempt to rederive dependency and terminal-axiom facts across the
 whole tracked development. Its state must not be conflated with those scoped gates or described as a
@@ -2019,7 +2043,7 @@ development**:
   exhaustive `PG(2,16)` eight-arc quadratic-avoidance theorem with `ρ_𝒞(16) = 9`, the q=11
   coding/deep-hole/extension-complex package, exact uncovered-locus reconstruction and stabilizer
   recovery, zero-defect matching-design rigidity and bad-edge stability, the whole `Q25` profile
-  ladder up to the uniform pair-extension theorem, the exact R5–R7 projective-Reed–Solomon paper
+  ladder up to the uniform pair-extension theorem, the exact R5–R10 projective-Reed–Solomon paper
   aggregate, and the arbitrary-length MDS–CSS marginal/covariance/tensor-rigidity chain culminating
   in the generic LU-to-LC theorem. Newer layers: the equality consequences (the discrete
   zero-or-gap alternative for scaled defect, the complete-affine equality orders, the odd zero-defect
@@ -2186,8 +2210,8 @@ independent results. Neither column measures depth, and none of them should be s
 | 5 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | general MDS local reconstruction + exact bounded transfer | spine refrozen under a no-computation admission rule |
 | 6 | Frobenius-equivariant pair extension and robust repair of eight-arcs | every invariant eight-arc in `PG(2,25)` pair-extends | extremal gate cleared; bookkeeping + graph remain |
 | 7 | Semilinear rigidity of four-point-frame continuation graphs | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13` | manuscript complete; Lean planned; audit gated |
-| — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications at redundancies five through seven | exact R5–R7 + coherent-polar high-field containment | 30-page reproducible V1; external release gates |
-| — | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | LU-to-LC for every stabilizer AME state, plus cleaning-based rounding | 35-page deposited candidate; generic Lean core |
+| — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications through redundancy ten | exact R5–R10 at stated field ranges + coherent-polar high-field containment | 56-page reproducible V2; local release gates green, public revision unset |
+| — | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | LU-to-LC for every stabilizer AME state, plus cleaning-based rounding and logical (8\varepsilon) rounding | corrected local release candidate; generic Lean core, mirrors synchronized and unpushed |
 | — | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | multiplier nullity selects the exact fixed-party transversal logical group | 23-page deposited candidate; own semantic Lean gate, axiom audit, and claim manifest |
 | — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, relative to a marked datum, plus a bounded operator core | v1/v2 released under the earlier title; forward version consolidated |
 | — | Quadratic trade rigidity and cubic orientation in conic matching quotients (Clebsch II) | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v1/v2 released; forward human/Lean strengthening active |

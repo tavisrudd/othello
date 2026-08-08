@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-05**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-08**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -922,6 +922,36 @@ marking rather than absolute.
   up to complementation from seven points, not the five-threshold hypergraph result — the same two
   numbers as our theorem, with the reduction between them unsettled and now owed before the next
   revision.
+
+## Week 11 — Aug 6–8 · PRS R5–R10 release closure, AME referee repairs, and a banked theorem harvest
+
+- **Aug 6 — the Clebsch formal surface is tightened.** The Paper III gate was held to the series
+  Lean standard with no carve-out: balanced exchange-rigidity and exchange-spectrum modules
+  closed, while the remaining spectral work was scoped as explicit characteristic-polynomial
+  algebra. Paper IV's association algebra, support decoding, transporter rows, and row-uniqueness
+  leaves were reduced to kernel-checked representative decisions; transport/classification
+  dependencies were separated from the manuscript's finite evidence boundary.
+
+- **Aug 7 — PRS review repairs and Clebsch framing review.** The full PRS reread found no new
+  mathematical contradiction after the terminal-coordinate repair. It corrected the residual
+  quartic parametrization, narrowed the prior-work claim, removed an unsupported arc sentence,
+  reconciled the statement labels and trust terminals, and closed the R5–R10 trust/replay
+  surfaces. The adaptive aligned-design work was framed as query/design rigidity rather than an
+  algorithm, with the exact six-point threshold and seven-point minimum retained. The Clebsch
+  harmonic-route referee repairs closed the OPER-1/OPER-2 rows and the remaining Paper IV
+  row-uniqueness structural decisions without widening the manuscripts' claims.
+
+- **Aug 8 — the PRS candidate and AME pair are both audited to a clean local boundary.** The PRS
+  layered-exposition pass made R9 and R10 closing gates explicit, repaired the good-base degree-22
+  selector argument and equation labels, and left a warning-clean 45-page submission render;
+  the standalone replay, guarded export, Lean boundary export, and release identity agree. The
+  first AME review repaired the genuine (m=2) proof-scope omission without weakening the
+  headline, restored qubit and AME–QMDS attribution boundaries, and added the logical rounding
+  corollary. A second review repaired the phase convention, related-work scope, and theorem
+  numbering across both AME papers. The latent-structure audit then proved the inter-code LU
+  criterion, the high-distance multiplier line, and the five prime-field holonomy centralizers,
+  but banked them rather than opening a new paper; extension-field and affine upgrades were
+  closed by structural counterexamples.
 
 ---
 

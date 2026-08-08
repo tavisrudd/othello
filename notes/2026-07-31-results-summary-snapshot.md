@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-05
+**Date:** 2026-08-08
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -1610,6 +1610,16 @@ once
 This is a uniform high-field containment theorem, not a general solution of the
 Reed–Solomon deep-hole conjecture.
 
+The fixed-level programme now reaches redundancy ten at its stated field
+ranges. Redundancy eight is exact for \(q\ge43\), redundancy nine for
+\(q\ge53\), and redundancy ten for \(q\ge59\); at each level the deep
+syndromes are exactly the persistent tangent and conjugate-secant families of
+size \(q(q+1)^2/2\), with the corresponding \(T/T^r\) orbit law modulo
+inversion and Frobenius. These are field-ranged classifications, not an
+all-field solution of the general deep-hole conjecture. The revised candidate
+exposes the R5--R10 proof layers and separate radius gates; its independent
+replay, Lean boundary export, standalone mirror, and release checks are green.
+
 The methods combine exact invariant theory, Plücker inversion, Gale duality,
 catalecticants and apolarity, finite-group descent, low-genus point bounds, and
 independently replayed bounded classifications.
@@ -1988,6 +1998,17 @@ full prime-field Clifford target. Exact \(q=9\) nonsemilinear and \(q=25\) GRS
 symplectic elements rule out every uniform semilinear, split-torus, or
 Desarguesian-spread upgrade — even at zero error, so this is a structural
 obstruction rather than a loss of precision.
+
+The referee-repaired quantitative bridge covers \(m=2\) without losing the
+printed radius or constant. A dimension-only \(8\varepsilon\) rounding result
+for the induced logical action is now adopted: the physical Pauli correction
+remains globally uncontrolled, but stabilizer cancellation removes it on one
+chosen input leg. For odd-prime \([2m,m,m+1]\) MDS codes, a stronger banked
+inter-code theorem says that fixed-party LU equivalence is exactly diagonal
+equivalence to the target code or its dual; its criterion matches all twelve
+earlier party-image censuses. The associated high-distance multiplier line and
+five-type prime-field holonomy classification are also settled, while the
+inter-code theorem remains reserved for a focused companion revision.
 
 ### The Clebsch syndrome bridge
 
@@ -2936,18 +2957,21 @@ are vacuous because a natural number can encode the whole residual.
   \(\rho_{\mathcal C}\); the \(q=16\) classification compressed to three
   exceptional cases.
 - ***Deep holes of projective Reed–Solomon codes beyond redundancy four:***
-  exact at redundancies three, five, six, and seven, with a uniform high-field
-  containment theorem at arbitrary redundancy; not a proof of the general
-  deep-hole conjecture.
+  exact at redundancies three, five, six, seven, eight, nine, and ten at the
+  stated field ranges, with a uniform high-field containment theorem at
+  arbitrary redundancy; not a proof of the general deep-hole conjecture.
 - ***Complete Bounded Repair Ports:*** manuscript assembled around the general
   MDS reconstruction theorem; central transfer and cubic results formally
   verified; specialist citation review outstanding.
 - ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family, and stable under
-  approximate equality with explicit constants; the marginal-to-rigidity chain
-  and the coset/syndrome dictionary are formally verified, the encoder and
-  transversal-group consequences are not. Uniform semilinear reconstruction is
-  false even at zero error.
+  approximate equality with explicit constants; the \(m=2\) proof bridge is
+  repaired without weakening the headline. The dimension-only logical
+  \(8\varepsilon\) rounding corollary is adopted, while the inter-code LU
+  orbit theorem and high-distance multiplier lemma are banked for the
+  companion. The marginal-to-rigidity chain and coset/syndrome dictionary are
+  formally verified; encoder and exact transversal-group consequences remain
+  human proofs. Uniform semilinear reconstruction is false even at zero error.
 - ***Frobenius-equivariant pair extension and robust repair of eight-arcs:*** foundational
   theorem chain and the exact minimum for \(PG(2,25)\) proved; the
   orbit-replacement graph remains future work.
