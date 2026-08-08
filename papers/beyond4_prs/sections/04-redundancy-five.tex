@@ -288,8 +288,12 @@ the choice of a square root of $\operatorname{disc}(h_x)$; so the
 projection is the stated double cover, and it is branched exactly where
 that discriminant vanishes.  Kaipa and Pradhan form the discriminant of
 the same residual quadratic and define $E_L$ as the non-singular model
-of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}; the two quartics agree
-up to a square, which does not change the cover.  For the point counts,
+of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}, taking as we do one quarter
+of the discriminant of the same residual quadratic.  For each $x$ the two
+values therefore differ by the square of a nonzero element of $\F_q$,
+coming only from the choice of representative of $g_x$, so they lie in the
+same square class over $\F_q$; no quadratic twist intervenes and the
+cover is unchanged.  For the point counts,
 note that on that stratum $D_f$ has nonzero discriminant, so the double
 cover displayed above is already smooth and is its own normalization,
 and $Y_f$ is smooth there as well; the two smooth projective models are
@@ -363,7 +367,7 @@ only admissible value left is $12$, and by Lemma~\ref{lem:r5-branch}
 that value is attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
-Proposition~\ref{prop:r5-count} is the characteristic-uniform form of
+Proposition~\ref{prop:r5-count} is the odd-characteristic-uniform form of
 an incidence count in the twisted-cubic line literature.  When $W_f$
 misses the twisted cubic, so that $d_3=0$, and
 $\operatorname{char}\F_q\neq2,3$, the quantity $d_2$ is the invariant
@@ -380,9 +384,11 @@ $\nu_L=(\#E_L(\F_q)-\eta_L)/2$
 \cite[Prop.~4.5(3) and Thm.~5.1]{KaipaPradhan2025}; the denominator
 printed in the displayed statement of their Theorem~1.3(3) is $3$, which
 is a typographical slip, since $6$ is what their proof gives and what
-makes their five incidence counts sum to $q+1$.  The statement above drops the
-restriction on the characteristic, admits lines meeting the curve
-through the $d_3$ term, and needs no invariant theory of quartics.  An
+makes their five incidence counts sum to $q+1$.  The statement above drops
+the restriction $\operatorname{char}\F_q\neq2,3$, so that characteristic
+three is admitted, brings in lines meeting the curve through the $d_3$
+term, and needs no invariant theory of quartics.  Characteristic two
+stays outside it, since the criterion is a discriminant square class.  An
 exhaustive check of \eqref{eq:r5-count} and of
 Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the odd
 prime powers $5\leq q\leq27$ is recorded in the supplement.
@@ -505,7 +511,7 @@ Proposition~\ref{prop:r5-gcd1} shows.  Neither do incidence
 distributions produce syndromes; Table~\ref{tab:r5sporadic} records
 canonical representatives in divided-power syndrome coordinates with
 their orbit sizes, stabilizers, and Frobenius fusion, and extracting
-such a list from \cite[Thm.~1.3]{KaipaPradhan2025} would still require
+such a list from \cite[Prop.~4.5 and Thm.~5.1]{KaipaPradhan2025} would still require
 evaluating $\#E_L$ and $\eta_L$ over all $2q-3+\mu$ generic line orbits.
 The promotion from split-free to deep, through
 Proposition~\ref{prop:r5-radius}, is likewise outside that literature,
