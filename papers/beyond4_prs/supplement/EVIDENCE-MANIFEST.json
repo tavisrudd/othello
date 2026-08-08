@@ -481,12 +481,12 @@
       "sha256": "78d1e6150abe7e72292cf70bca6347780da4de22d8a9ac21245387c59c6dba12"
     },
     {
-      "bytes": 19460,
+      "bytes": 19606,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "d1a2c1407be8a5618849cd573c45b3022bc608efc2e270620ffd2b18d3cb8e66"
+      "sha256": "26c1208436fb2dcc1ed7c0c23cf2208dbb20ba012520c47882dcca2035e6fc6f"
     },
     {
       "bytes": 9092,
@@ -534,7 +534,7 @@
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "cf7bffe2156f8c9dfa50c5104d88e542b2c92855104b08212fcf0635fde51683"
+      "sha256": "bd49fa440605275fbbf53644d6e656297fecb91f0dcb098e8c278feb694dec53"
     },
     {
       "bytes": 17225,

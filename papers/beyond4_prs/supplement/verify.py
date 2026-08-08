@@ -222,8 +222,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 78:
-        raise SystemExit(f"expected 78 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 79:
+        raise SystemExit(f"expected 79 adopted manuscript labels, found {len(labels)}")
 
     formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
     if formal_sources == (False, False):

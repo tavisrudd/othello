@@ -325,6 +325,30 @@ $d_2+2d_3\leq4$.  Substituting into
 that region gives $12$, attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
+\begin{corollary}[Split members of an $S_3$ pencil]\label{cor:r5-equidistribution}
+If $\phi_f$ has geometric monodromy $S_3$, then
+\[
+ \frac{q+1-2\sqrt q-12}{6}\;\leq\;N_f\;\leq\;\frac{q+1+2\sqrt q}{6}.
+\]
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:r5-count} gives $6N_f=\#Y_f(\F_q)-3d_2-d_3$, and
+Lemma~\ref{lem:r5-branch} bounds $3d_2+d_3$ between $0$ and $12$.  The
+$S_3$ hypothesis makes $Y_f$ geometrically integral of arithmetic genus
+one, so Aubry--Perret confines $\#Y_f(\F_q)$ to
+$q+1\pm2\sqrt q$ \cite[p.~468]{AubryPerret1995}.
+\end{proof}
+
+The orbit $\mathcal O_3$ occupies $(q^3-q)/6$ of the $q^3+q^2+q+1$
+points of $\mathrm{PG}(3,q)$, so a line of $q+1$ points meets it in
+$(q+1)/6$ points on average.  Corollary~\ref{cor:r5-equidistribution}
+says every $S_3$ line meets it in that many up to the Weil error: split
+cubics are equidistributed along such a pencil, and split-freeness is
+the extreme case in which the lower bound has gone vacuous.  That is why
+the exceptional fields are small ones, and it is the quantitative
+statement of which Lemma~\ref{lem:s3} records only the sign.
+
 \begin{lemma}[$S_3$ stratum]\label{lem:s3}
 If $\phi_f$ has geometric monodromy $S_3$ and $q\geq20$, then the pencil
 contains a completely split squarefree cubic.  For odd $q$ the same
@@ -496,8 +520,13 @@ Proposition~\ref{prop:r5-fibre-is-elliptic} identifies their curve with
 our fibre square.  By \eqref{eq:r5-orbit-criterion} a generic line is
 split-free exactly when $\#E_L(\F_q)=3\eta_L\leq12$, which the Hasse
 bound $\#E_L(\F_q)\geq q+1-2\sqrt q$ forbids for $q\geq20$ and permits
-only for $q\leq19$.  That is the threshold of Lemma~\ref{lem:s3} again,
-now with an arithmetic reason for it.  The generic class is settled in
+only for $q\leq19$.  This is not a second route to
+Lemma~\ref{lem:s3} but the same one in other coordinates:
+Proposition~\ref{prop:r5-fibre-is-elliptic} identifies $E_L$ with $Y_f$,
+so both arguments apply a Weil-type bound to a single genus-one curve.
+What the elliptic form adds is not independence but an explanation, since
+$3\eta_L\leq12$ is visibly a bounded quantity while $\#E_L(\F_q)$ grows
+with $q$.  The generic class is settled in
 characteristic three in \cite{KaipaPradhan2025char3} and in
 characteristic two by Ceria and Pavese \cite{CeriaPavese2023}.
 
