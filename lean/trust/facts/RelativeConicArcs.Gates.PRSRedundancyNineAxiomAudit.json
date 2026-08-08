@@ -1,0 +1,1985 @@
+{
+  "closure": [
+    "RelativeConicArcs.Gates.PRSRedundancyNine",
+    "RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit",
+    "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSResidualQuadratic"
+  ],
+  "declaration_module": {
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_implies_splitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.splitFree_implies_deep": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.pointGivesKernelMember": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.orbitCase": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent_isSplitFree": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.projectiveOrbitCount": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.semilinearOrbitCount": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_mem_persistent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_eq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent_sigma_disjoint": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.casesOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.componentCondition": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.ctorIdx": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.hasKernelMember": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.inj": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.injEq": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.sizeOf_spec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusion": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusionType": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.pointGivesKernelMember": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rationalPointOutsideDeletedDivisors": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rec": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.recOn": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member": "RelativeConicArcs.PRSFoundation",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElimType": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusion": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusionType": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat_ctorIdx": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.rec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.recOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.elim": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.toCtorIdx": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.casesOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.ctorIdx": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card_doubled": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_eq": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.fieldOrderPositive": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.inj": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.injEq": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.noConfusion": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusion": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusionType": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.orbitCase": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.rec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.recOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma_card_doubled": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_card": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_sigma_disjoint": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.casesOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.ctorIdx": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional_has_splitSquarefreeWitness": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.isDeep": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.inj": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.injEq": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.noConfusion": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.sizeOf_spec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusion": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusionType": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.pointGivesWitness": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rec": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.recOn": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.toWitnessConstructionInput": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.witnessMakesShallow": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.instDecidableEqOrbitArithmeticCase": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.orbitCountPair": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.orbit_count_pair": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount_eq_projectiveOrbitCount_iff": "RelativeConicArcs.PRSRedundancyNine",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ctorIdx": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext.match_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext_iff": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.inj": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.injEq": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.noConfusion": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.sizeOf_spec": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusion": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusionType": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.rec": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.recOn": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ctorIdx": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext.match_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext_iff": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.inj": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.injEq": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.noConfusion": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.sizeOf_spec": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusion": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusionType": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.rec": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.recOn": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial.eq_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.determinant": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.determinant.eq_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction.eq_1": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_add": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_smul": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_zero": "RelativeConicArcs.PRSContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.first_hankel_identity": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelOne": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelTwo": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelZero": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator.eq_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic.eq_1": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_discriminant": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_add": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_sub": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_product": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_sum": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_sum_product_solve_hankel": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.second_hankel_identity": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator": "RelativeConicArcs.PRSResidualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator.eq_1": "RelativeConicArcs.PRSResidualQuadratic"
+  },
+  "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "lean_version": "4.32.0-rc1",
+  "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "opaque": [],
+  "project_axioms": [],
+  "project_declarations": [
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.casesOn",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_implies_splitFree",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.inj",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusion",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.rec",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.recOn",
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.splitFree_implies_deep",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.casesOn",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.inj",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusion",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.pointGivesKernelMember",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rec",
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.recOn",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.casesOn",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.inj",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusion",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.rec",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.recOn",
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member",
+    "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.casesOn",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.inj",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusion",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.orbitCase",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent_isSplitFree",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.projectiveOrbitCount",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.rec",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.recOn",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.semilinearOrbitCount",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent",
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_mem_persistent",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.casesOn",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.inj",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusion",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_eq",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.rec",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.recOn",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent",
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent_sigma_disjoint",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.casesOn",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.componentCondition",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.ctorIdx",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.hasKernelMember",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.inj",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.injEq",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.noConfusion",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusion",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusionType",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.pointGivesKernelMember",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rationalPointOutsideDeletedDivisors",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rec",
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.recOn",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible",
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member",
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElimType",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusion",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusionType",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat_ctorIdx",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.rec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.recOn",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.elim",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.toCtorIdx",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.casesOn",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.ctorIdx",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card_doubled",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_eq",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.fieldOrderPositive",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.inj",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.injEq",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.noConfusion",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusion",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusionType",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.orbitCase",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.rec",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.recOn",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma_card_doubled",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_card",
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_sigma_disjoint",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.casesOn",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.ctorIdx",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional_has_splitSquarefreeWitness",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.isDeep",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.inj",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.injEq",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.noConfusion",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusion",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusionType",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.pointGivesWitness",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rec",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.recOn",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.toWitnessConstructionInput",
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.witnessMakesShallow",
+    "RelativeConicArcs.PRSRedundancyNine.instDecidableEqOrbitArithmeticCase",
+    "RelativeConicArcs.PRSRedundancyNine.orbitCountPair",
+    "RelativeConicArcs.PRSRedundancyNine.orbit_count_pair",
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount",
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1",
+    "RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis",
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount",
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount_eq_projectiveOrbitCount_iff",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ctorIdx",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext.match_1",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext_iff",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.inj",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.injEq",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.noConfusion",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusion",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusionType",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.rec",
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.recOn",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ctorIdx",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext.match_1",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext_iff",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.inj",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.injEq",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.noConfusion",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.sizeOf_spec",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusion",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusionType",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.rec",
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.recOn",
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial.eq_1",
+    "RelativeConicArcs.PRSResidualQuadratic.determinant",
+    "RelativeConicArcs.PRSResidualQuadratic.determinant.eq_1",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction.eq_1",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_add",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_smul",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply",
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_zero",
+    "RelativeConicArcs.PRSResidualQuadratic.first_hankel_identity",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+    "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator.eq_1",
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic",
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic.eq_1",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_discriminant",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_add",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_sub",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_product",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_sum",
+    "RelativeConicArcs.PRSResidualQuadratic.residual_sum_product_solve_hankel",
+    "RelativeConicArcs.PRSResidualQuadratic.second_hankel_identity",
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator",
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator.eq_1"
+  ],
+  "schema_version": 1,
+  "terminal_axioms": {},
+  "unit": "RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit",
+  "uses": {
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.casesOn": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_implies_splitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.splitFree_implies_deep"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_implies_splitFree": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.inj"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.casesOn",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.casesOn"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.rec": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.recOn": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.mk",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.splitFree_implies_deep": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.casesOn": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.pointGivesKernelMember",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.inj"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.casesOn",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.casesOn"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.pointGivesKernelMember": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rec": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.recOn": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.mk",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.casesOn": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.rec",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.noConfusion",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.inj",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusion",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.casesOn",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusionType",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.casesOn",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_has_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.rec": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.recOn": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.mk",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.rec",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.splitFree_iff_no_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.casesOn": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.inj"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.casesOn",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.casesOn"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.orbitCase": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent_isSplitFree": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.projectiveOrbitCount": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.rec": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.recOn": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.mk",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.semilinearOrbitCount": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent_isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_mem_persistent"
+    ],
+    "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_mem_persistent": [
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.casesOn": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.inj"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.casesOn",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.casesOn"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_card": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_eq",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent_sigma_disjoint"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent_eq": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.persistent",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.rec": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.recOn": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.mk",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies"
+    ],
+    "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent_sigma_disjoint": [
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.sigma",
+      "RelativeConicArcs.PRSFoundation.PersistentFamilies.tangent"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.casesOn": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.componentCondition": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.ctorIdx": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.hasKernelMember",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.pointGivesKernelMember",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rationalPointOutsideDeletedDivisors"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.hasKernelMember": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.inj": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.injEq": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.inj"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusion"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusion": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.casesOn",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.noConfusionType": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.casesOn"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.pointGivesKernelMember": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.hasKernelMember",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rationalPointOutsideDeletedDivisors"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rationalPointOutsideDeletedDivisors": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rec": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk"
+    ],
+    "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.recOn": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.rec"
+    ],
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent",
+      "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible"
+    ],
+    "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_compatible": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.radiusRange",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.persistent",
+      "RelativeConicArcs.PRSFoundation.OrbitExhaustionInput.splitFree_iff_mem_persistent"
+    ],
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_implies_splitFree",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member"
+    ],
+    "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_geometric_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isDeep",
+      "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.exceptional_not_deep_of_compatible_geometric_kernel_member"
+    ],
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member",
+      "RelativeConicArcs.PRSFoundation.HasSplitSquarefreeKernelMember"
+    ],
+    "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_geometric_kernel_member": [
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.componentCondition",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.inHankelKernel",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitFree",
+      "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.isSplitSquarefree",
+      "RelativeConicArcs.PRSFoundation.exceptional_not_splitFree_of_compatible_geometric_kernel_member"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.rec",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElimType",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElimType": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.noConfusionType": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat_ctorIdx": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ofNat",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.rec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.recOn": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.rec",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.elim": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorElim",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.toCtorIdx": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.casesOn": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.ctorIdx": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card_doubled"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card_doubled": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_eq",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.fieldOrderPositive",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma_card_doubled",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_card",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_sigma_disjoint"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_eq": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.fieldOrderPositive": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.inj": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.injEq": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.inj"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.noConfusionType": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.casesOn"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.orbitCase": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.rec": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.recOn": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.mk",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma_card_doubled": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_card": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent_sigma_disjoint": [
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.sigma",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.tangent"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.casesOn": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.ctorIdx": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional_has_splitSquarefreeWitness": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.exceptional_has_kernel_member",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.toWitnessConstructionInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.isDeep": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.inj": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.injEq": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.inj"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusion"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusion": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.noConfusionType": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.casesOn"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.pointGivesWitness": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rec": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.recOn": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rec"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.toWitnessConstructionInput": [
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput",
+      "RelativeConicArcs.PRSFoundation.WitnessConstructionInput.mk",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.pointGivesWitness",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.witnessMakesShallow": [
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.isDeep",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.instDecidableEqOrbitArithmeticCase": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.ctorIdx"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.orbitCountPair": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.orbit_count_pair": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo",
+      "RelativeConicArcs.PRSRedundancyNine.orbitCountPair",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount",
+      "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis": [
+      "RelativeConicArcs.PRSFoundation.deep_iff_mem_persistent_of_exceptional_shallow",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card",
+      "RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.orbitCase",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional_has_splitSquarefreeWitness",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.integralGenusAtMostOneSlice",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.isDeep",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.rationalPointOutsideDeletedDivisors",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.splitSquarefreeWitness",
+      "RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.witnessMakesShallow",
+      "RelativeConicArcs.PRSRedundancyNine.orbitCountPair",
+      "RelativeConicArcs.PRSRedundancyNine.orbit_count_pair",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount",
+      "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount.match_1"
+    ],
+    "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount_eq_projectiveOrbitCount_iff": [
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.casesOn",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.characteristicTwo",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFixed",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderEightFrobeniusFused",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderFour",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderOne",
+      "RelativeConicArcs.PRSRedundancyNine.OrbitArithmeticCase.sigmaOrderTwo",
+      "RelativeConicArcs.PRSRedundancyNine.instDecidableEqOrbitArithmeticCase",
+      "RelativeConicArcs.PRSRedundancyNine.projectiveOrbitCount",
+      "RelativeConicArcs.PRSRedundancyNine.semilinearOrbitCount"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.rec"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ctorIdx": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext.match_1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext.match_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext_iff": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.ext"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.inj": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.injEq": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.inj"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.noConfusion": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusion"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusion": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.noConfusionType": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.casesOn"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.rec": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.recOn": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.rec"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.rec"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ctorIdx": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext.match_1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext.match_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext_iff": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.ext",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.inj": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.noConfusion"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.injEq": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.inj"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.noConfusion": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusion"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk.sizeOf_spec": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusion": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusionType"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.noConfusionType": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.casesOn"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.rec": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.recOn": [
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.mk",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.rec"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.determinant": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.determinant.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_add": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_smul": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_zero": [
+      "RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.first_hankel_identity": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.hankelOne": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.hankelTwo": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p5"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.hankelZero": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a0",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a1",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a2",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a3",
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients.a4",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p0",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p1",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p2",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p3",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients.p4"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.productNumerator.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_discriminant": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_add": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic",
+      "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic.eq_1",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_root_sub": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic",
+      "RelativeConicArcs.PRSResidualQuadratic.residualQuadratic.eq_1",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_product": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.branchPolynomial",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_roots_sum": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.residual_sum_product_solve_hankel": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.first_hankel_identity",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.second_hankel_identity",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.second_hankel_identity": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.determinant",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+      "RelativeConicArcs.PRSResidualQuadratic.productNumerator",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero"
+    ],
+    "RelativeConicArcs.PRSResidualQuadratic.sumNumerator.eq_1": [
+      "RelativeConicArcs.PRSResidualQuadratic.BinaryQuarticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.QuinticCoefficients",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelNegOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelOne",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelTwo",
+      "RelativeConicArcs.PRSResidualQuadratic.hankelZero",
+      "RelativeConicArcs.PRSResidualQuadratic.sumNumerator"
+    ]
+  },
+  "uses_included": true
+}

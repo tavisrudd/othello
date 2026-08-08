@@ -27,7 +27,10 @@ manual edit or stale generation.
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.GoldenQuantumStatistics` | `RelativeConicArcs.Gates.GoldenQuantumStatistics` | 12 | 12 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.MDSCSSTransversalGeometry` | `RelativeConicArcs.Gates.MDSCSSTransversalGeometry` | 93 | 93 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSBeyondRedundancyFour` | `RelativeConicArcs.Gates.PRSBeyondRedundancyFour` | 74 | 74 | extracted and matched |
-| `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSFoundation` | `RelativeConicArcs.Gates.PRSFoundation` | 0 | 0 | extracted and matched |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSCharacteristicTwoHessianLucas` | `RelativeConicArcs.Gates.PRSCharacteristicTwoHessianLucas` | 28 | 28 | extracted and matched |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSFoundation` | `RelativeConicArcs.Gates.PRSFoundation` | 7 | 7 | extracted and matched |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSRedundancyEight` | `RelativeConicArcs.Gates.PRSRedundancyEight` | 19 | 19 | extracted and matched |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.PRSRedundancyNine` | `RelativeConicArcs.Gates.PRSRedundancyNine` | 14 | 14 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.Relconic` | `RelativeConicArcs.Gates.Relconic` | 1 | 0 | 1 await extraction |
 | `trust-spine:relconic:gate:RelativeConicArcs.SixArcConcurrenceSpine` | `RelativeConicArcs.SixArcConcurrenceSpine` | 11 | 11 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.SupportOrientationSpine` | `RelativeConicArcs.SupportOrientationSpine` | 0 | 0 | extracted and matched |
@@ -38,6 +41,6 @@ manual edit or stale generation.
 |---|---:|---:|---|
 | `trust-spine:complete_ports` | 42 | 42 | all terminal axioms extracted and matched |
 | `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
-| `trust-spine:relconic` | 657 | 581 | 76 terminal axiom sets await extraction |
+| `trust-spine:relconic` | 725 | 649 | 76 terminal axiom sets await extraction |
 
-The machine-readable list contains exactly 706 adopted public terminals.
+The machine-readable list contains exactly 774 adopted public terminals.

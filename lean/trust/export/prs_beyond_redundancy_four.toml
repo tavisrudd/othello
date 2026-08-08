@@ -22,8 +22,8 @@ statement_title = "Projective Reed--Solomon syndromes beyond redundancy four: fo
 
 overview = """
 This boundary is the paper-facing import closure for the formal results adopted
-by the manuscript treating redundancies five through seven of projective
-Reed--Solomon codes.
+by the redundancy-five-through-seven aggregate used by the manuscript through
+redundancy ten of projective Reed--Solomon codes.
 
 It carries the shared Hankel-kernel and coding interfaces, the redundancy-five
 algebra with its finite-table arithmetic, coherent polar contraction, the
