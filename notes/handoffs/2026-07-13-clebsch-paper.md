@@ -492,6 +492,21 @@ tightness then gives `M(F_y²) = (140/351) ∑ y_i²` and the marked value
 left in the two rows is the spherical cubic restriction and the surface-integral
 identification.  None of the five modules is on a gate yet.
 
+The cubic restriction is designed and its route is fixed, in
+`notes/2026-08-07-c815-spherical-cubic-restriction-design.md`.  It takes the
+manuscript's invariant-line route rather than the scope note's symbolic-in-`y`
+route, because the direct expansion needs either a triple-zonal formula that the
+apolarity clauses do not reach or tens of thousands of products: the structure
+constants of the cubic form stay abstract, the icosahedral rotations make them
+constant on the three index patterns, and one marked value fixes the scalar.  The
+marked field splits as `a·Hodd + b·Heven` over the squared coordinates with
+`a = -385√5/24` and `b = 35/12`, so its golden part is exactly the
+transposition-odd component; a coordinate transposition kills every odd power of
+that component, which is why the value is rational and why only two
+degree-eighteen moments have to be expanded.  The design's constants and its
+label-permutation word tables are certified by
+`notes/2026-08-07-c815-spherical-cubic-design-checks.py`.
+
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
 paths; `ClebschGoldenConference.lean` and `ClebschTwoGraph.lean` are shared

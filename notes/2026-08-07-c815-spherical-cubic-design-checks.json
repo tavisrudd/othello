@@ -1,0 +1,79 @@
+{
+  "basis_even_is_transposition_even": true,
+  "basis_laplacians_vanish": true,
+  "basis_odd_is_transposition_odd": true,
+  "cubic_moments": {
+    "even^3": "-1280/46189",
+    "odd even^2": "0",
+    "odd^2 even": "-1024/969969",
+    "odd^3": "0"
+  },
+  "doubled_axis_squared_norms": [
+    "12"
+  ],
+  "doubled_axis_squared_products": [
+    [
+      "False",
+      "16"
+    ],
+    [
+      "True",
+      "80"
+    ]
+  ],
+  "doubled_zonal_laplacians_vanish": true,
+  "doubled_zonal_scale": 27648,
+  "generated_all_even": true,
+  "generated_order": 60,
+  "labels": "zero-indexed, matching Fin 5 in the Lean development",
+  "marked_cubic_direct_agrees": true,
+  "marked_cubic_matches_manuscript": true,
+  "marked_cubic_value": "-15680000/1247103",
+  "marked_field_all_exponents_even": true,
+  "marked_field_even_coefficient": "35/12",
+  "marked_field_monomials": {
+    "006": "35/12",
+    "024": "-385*sqrt(5)/24 - 175/8",
+    "042": "-175/8 + 385*sqrt(5)/24",
+    "060": "35/12",
+    "204": "-175/8 + 385*sqrt(5)/24",
+    "222": "525/2",
+    "240": "-385*sqrt(5)/24 - 175/8",
+    "402": "-385*sqrt(5)/24 - 175/8",
+    "420": "-175/8 + 385*sqrt(5)/24",
+    "600": "35/12"
+  },
+  "marked_field_odd_coefficient": "-385*sqrt(5)/24",
+  "marked_field_splits": true,
+  "marked_quadratic_matches_gram_module": true,
+  "marked_quadratic_value": "2800/351",
+  "point_words": {
+    "1": "g2",
+    "2": "g2 g0 g2",
+    "3": "g1 g0 g2",
+    "4": "g0 g2"
+  },
+  "quadratic_moments": {
+    "even^2": "8/13",
+    "odd even": "0",
+    "odd^2": "32/15015"
+  },
+  "schema": "c815-spherical-cubic-design-checks-1",
+  "stabilizer_fixes_zero": true,
+  "stabilizer_order": 12,
+  "stabilizer_ordered_pair_images": 12,
+  "stabilizer_pair_words": {
+    "12": "",
+    "13": "g1 g1",
+    "14": "g1",
+    "21": "g1 g1 g0 g1",
+    "23": "g0 g1 g0",
+    "24": "g1 g1 g0",
+    "31": "g1 g0 g1",
+    "32": "g1 g0",
+    "34": "g1 g0 g1 g1",
+    "41": "g0 g1",
+    "42": "g0 g1 g1",
+    "43": "g0"
+  }
+}
