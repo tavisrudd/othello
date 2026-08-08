@@ -10,6 +10,14 @@ Discovery companion:
 
 ## Current status
 
+**C888 active (2026-08-08): second external-review validation.**  The supplied
+follow-up withdraws the AME correctness objections and identifies one possible
+Tan citation plus companion related-work, coherent Weil-phase, and stale
+Theorem 1.1-reference repairs.  Every claim is being rechecked against primary
+sources, current source/PDFs, and the owning Lean comments before adoption.
+No push, deposit, or submission is authorized.  Scope and gates:
+`2026-08-08-c888-ame-pair-second-review.md`.
+
 **C887 closed (2026-08-08): referee remediation is locally releasable.**  The
 headline $m=2$ call into an $m\geq3$ appendix theorem was a real proof bridge
 gap, but an exact four-family estimate gives $5H/16$ and preserves the printed
