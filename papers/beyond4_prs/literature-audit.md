@@ -414,7 +414,7 @@ Surveys volume 6 (2019).
 | CMP2017 | `10.1007/s00493-015-3330-5` | partial, abstract/theorem statements | factorization-family context |
 | AubryPerret1995 | `10.1007/BF02567835` | partial, introduction and p. 468 point bound | singular-curve bound |
 | GmainerHavlicek2013 | `10.1007/BF01237480`, `arXiv:1304.0088` | partial, abstract/Theorem 1 | NRC nuclei |
-| Wang2026 | `arXiv:2606.12810v1` | full text, all sections | splitting-family semantics |
+| Wang2026 | `arXiv:2606.12810v1` | full text, all sections; Thm. 3.6 for the factorization-type/Frobenius correspondence and Thm. 3.7 with Cor. 3.8 for the Chebotarev count and its density `|C|/|G^geom| + O(q^{-1/2})`, both re-read 2026-08-07 | splitting-family semantics and the splitting density |
 | WangWuHu2026 | `arXiv:2604.21183v4` | full text, all sections; theorem-level reliance listed above | prior projective-subline form of the higher-Lucas divisibility test |
 | IarrobinoKanev1999 | `10.1007/BFb0093426` | abstract/metadata only | classical apolarity/determinantal background |
 | ComasSeiguer2011 | `10.1007/s10208-010-9077-x` | abstract/metadata only | binary-form rank background |

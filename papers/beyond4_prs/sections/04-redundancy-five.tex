@@ -267,8 +267,12 @@ identifies it with the genus-one curve of the incidence literature.
 
 \begin{proposition}[The fibre square is the incidence curve]
 \label{prop:r5-fibre-is-elliptic}
-Keep the hypotheses of Proposition~\ref{prop:r5-count} and let
-$D_f(x)=\operatorname{disc}(h_x)/4$.  The first projection realizes
+Keep the hypotheses of Proposition~\ref{prop:r5-count}, assume
+$\operatorname{char}\F_q\neq2$, and let
+$D_f(x)=\operatorname{disc}(h_x)/4$.  The restriction is needed here and
+not in Proposition~\ref{prop:r5-count}: in characteristic two the
+quotient by four is undefined, and a separable quadratic cover is
+Artin--Schreier rather than the Kummer cover displayed below.  The first projection realizes
 $Y_f$ as the double cover
 \[
        w^2=D_f(x)
@@ -321,10 +325,11 @@ $d_2=4$ and $d_3=0$.
 
 \begin{proof}
 Riemann--Hurwitz gives different degree four for the separable
-degree-three map $\phi_f$.  A member with a double root is a simple
-branch value; it spends different degree one when the ramification is
-tame and at least two when it is wild, which happens exactly in
-characteristic two.  A member that is a perfect cube is totally
+degree-three map $\phi_f$.  A member with a double root has one
+ramification point of index two; it spends different degree one when
+that ramification is tame and at least two when it is wild, which
+happens exactly in characteristic two.  We avoid the term \emph{simple
+ramification}, which is usually taken to include the tame exponent.  A member that is a perfect cube is totally
 ramified; it spends two when tame and at least three when wild, which
 happens exactly in characteristic three.  Distinct members are distinct
 branch values, so $d_2+2d_3\leq4$ in every characteristic, and
@@ -351,7 +356,10 @@ $q+1\pm2\sqrt q$ \cite[p.~468]{AubryPerret1995}.
 The main term $(q+1)/6$ is the expected $S_3$ splitting density.  A
 completely split fibre is one whose Frobenius class is the identity, and
 that class has density $1/|S_3|=1/6$ on the unramified locus, by the
-factorization-type correspondence of \cite[Thm.~3.6]{Wang2026}; so
+factorization-type correspondence of \cite[Thm.~3.6]{Wang2026} together
+with the Chebotarev count and density of
+\cite[Thm.~3.7 and Cor.~3.8]{Wang2026}, whose geometric Galois group is
+$S_3$ under the present hypothesis; so
 $(q+1)/6$ is a Chebotarev main term rather than a count of fibres.
 Corollary~\ref{cor:r5-equidistribution} makes it quantitative: split
 members occur with that expected density up to a Weil-scale error and a
