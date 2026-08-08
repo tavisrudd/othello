@@ -1533,6 +1533,7 @@ terminals = [
   "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
   "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape",
+  "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram",
   "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint",
@@ -2229,6 +2230,11 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 

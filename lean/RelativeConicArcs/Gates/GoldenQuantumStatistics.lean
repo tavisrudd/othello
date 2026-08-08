@@ -35,8 +35,9 @@ formulas, and nonexistence at order four.  The two directions of conference
 exchange rigidity are exported as separate theorem terminals rather than one
 bundled equivalence.
 
-`RelativeConicArcs.HermitianConferenceExchange` proves the unit-modulus
-Hermitian triangle characteristic polynomial and packages the normalized
+`RelativeConicArcs.HermitianConferenceExchange` proves the Hermitian transfer
+Gram compression identity, the unit-modulus triangle characteristic
+polynomial, and the normalized
 exchange invariants through degree three.  The first two power sums and second
 elementary invariant are constant, while the determinant and two degree-three
 sectors are the stated affine functions of squared real triangle holonomy.  It

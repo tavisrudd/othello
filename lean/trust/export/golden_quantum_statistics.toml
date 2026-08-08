@@ -31,8 +31,9 @@ eigenframe, and proves the characteristic polynomial of its exchange
 compression.  The all-orders terminals give the principal-block eigenvalue
 formula, the aligned-four-set second-moment formula, nonconstancy for every
 half-size at least four, the small principal-block formulas, and order-four
-nonexistence.  Over the complex numbers, the Hermitian triangle terminal proves
-the characteristic polynomial and the exact first two moments, second
+nonexistence.  Over the complex numbers, the Hermitian terminals prove the
+conjugate-transpose transfer Gram compression, triangle characteristic
+polynomial, and exact first two moments, second
 elementary invariant, determinant, and degree-three sector formulas as
 functions of squared real triangle holonomy.
 
