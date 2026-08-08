@@ -106,10 +106,15 @@ so its degree is at most two.
 \subsection{Coding consequences and recognition}
 
 The dictionary has two immediate coding consequences.  First, a
-split-free direction is an uncovered point of the normal rational
-curve and hence gives a one-column MDS extension whenever the stated
-covering-radius gate applies.  The classification theorems therefore
-give exact projective deep-hole counts, not only normal forms.  Second,
+split-free direction is a deep hole whenever the stated covering-radius
+gate applies, so the classification theorems give exact projective
+deep-hole counts and not only normal forms.  It is not a one-column MDS
+extension: an extension needs a point outside the span of every
+\(r-1\) columns, while split-freeness gives only \(r-2\), and at
+radius \(r-1\) no point of the larger kind exists.  D\"ur's
+completeness--covering-radius equivalence makes that a biconditional, so
+each radius gate proved here simultaneously rules the corresponding
+extensions out; see Remark~\ref{rem:q8-no-extension}.  Second,
 they give recognition procedures.  From a syndrome one forms $H_f$,
 computes $W_f$, and tests the listed geometric families: a common
 quadratic factor detects the persistent tangent and conjugate-secant

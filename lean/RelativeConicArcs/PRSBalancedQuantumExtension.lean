@@ -6,10 +6,26 @@ import RelativeConicArcs.AMELU.EncoderTransversal
 # Balanced quantum consequence of the redundancy-five extension table
 
 The redundancy-five projective Reed--Solomon certificate has one row whose
-one-column extension is balanced: at field order eight, a `[9,4,6]` MDS code
-extends to a `[10,5,6]` MDS code.  This module checks the exact certificate
+one-column extension would be balanced: at field order eight, a `[9,4,6]` MDS code
+would extend to a `[10,5,6]` MDS code.  This module checks the exact certificate
 row, its `1116 = 360 + 756` decomposition, and the fact that this is the
 unique balanced prime-power parameter among redundancies five through seven.
+
+**Coverage restriction.**  The extension itself does not exist, and the results
+below are conditional on a hypothesis that is unsatisfiable at these parameters.
+A syndrome direction extends the dual code by one column only when it lies in the
+span of no `r - 1` parity-check columns, whereas split-freeness places it outside
+the span of `r - 2`; and by Dur's equivalence, covering radius `r - 1` is the same
+statement as completeness of the normal rational curve's arc in `PG(r - 1, q)`,
+so at that radius no extending point exists.  See Arne Dur, *On the covering
+radius of Reed--Solomon codes*, Discrete Mathematics 126 (1994), 99--105,
+DOI `10.1016/0012-365X(94)90256-9`, Theorem 2.4, and Krishna Kaipa, *Deep Holes
+and MDS Extensions of Reed--Solomon Codes*, IEEE Transactions on Information
+Theory 63 (2017), 4940--4948, DOI `10.1109/TIT.2017.2706677`, Section IV.
+Independently, a `[10,5,6]` MDS code over the field of order eight would be a
+ten-point arc in `PG(4, 8)`, where the largest arc has nine points.  The
+certificate arithmetic and the balanced-row uniqueness statement are unaffected;
+the extension-dependent conclusions are vacuous rather than false.
 
 The standard MDS-to-AME and AME-to-quantum-code correspondences are exposed
 through an explicit proposition-valued interface; their mathematical

@@ -582,45 +582,31 @@ $q$ & direct $=$ orbit sum & nonsporadic & sporadic\\
 \end{tabular}
 \end{table}
 
-\begin{corollary}[The balanced quantum extension at \(q=8\)]
-\label{cor:q8-quantum-extension}
-The \(1116\) projective deep-hole directions of
-\(\PRS_{\F_8}(4)\) give \(1116\) relative projective one-column
-\([10,5,6]_8\) MDS extensions.  For each extension \(D\),
-\[
- \lvert\Psi_D\rangle
-   =8^{-5/2}\sum_{c\in D}\lvert c\rangle
-\]
-is a minimum-support \(\operatorname{AME}(10,8)\) stabilizer state and determines an
-associated \([[9,1,5]]_8\) quantum MDS code.  The directions split as
-the \(360\) nonsporadic and \(756\) sporadic entries of
-Table~\ref{tab:r5-sanity}.
+\begin{remark}[No one-column MDS extension at this radius]
+\label{rem:q8-no-extension}
+At \(q=8\) the split-free count of Table~\ref{tab:r5-sanity} is
+\(1116\), splitting as \(360\) nonsporadic and \(756\) sporadic
+directions.  These are deep holes of \(\PRS_{\F_8}(4)\) by
+Proposition~\ref{prop:r5-radius} and
+Corollary~\ref{cor:splitfree}; they are not one-column MDS extensions,
+and no such extension exists.
 
-Any product-unitary equivalence between two such equal-phase states is
-local Clifford, and every transversal conversion between the associated
-quantum encoders is Clifford factor by factor.  In particular, none of
-the associated quantum MDS codes admits a transversal non-Clifford
-logical unitary.
-\end{corollary}
+The two notions differ by one column.  A syndrome direction is a deep
+hole when it lies in the span of no \(r-2\) parity-check columns and
+the radius is \(r-1\); adjoining a point to the \((q+1)\)-arc of the
+normal rational curve keeps it an arc, equivalently extends the dual
+code by one column, only when that point lies in the span of no
+\(r-1\) columns.  At redundancy five the first condition gives distance
+at least four and Proposition~\ref{prop:r5-radius} gives radius exactly
+four, so no direction achieves the distance five that an extension
+requires.  D\"ur's equivalence states this as a biconditional: the
+covering radius is \(r-1\) precisely when the arc of every normal
+rational curve in \(\mathrm{PG}(r-1,q)\) is complete, so there is no MDS
+extension of the dual by one digit
+\cite{Dur1994}, as stated by Kaipa \cite[Sec.~IV]{Kaipa2017}.  The same
+reading applies at every redundancy classified here, since each radius
+gate proves \(\rho=r-1\).
 
-\begin{proof}
-A projective deep-hole direction gives a one-column MDS extension.
-At \(q=8\), redundancy five turns the \([9,4,6]_8\) projective
-Reed--Solomon code into a \([10,5,6]_8\) MDS code, and
-Table~\ref{tab:r5-sanity} gives the count and its decomposition.
-The linear MDS--AME construction and the one-party Choi
-correspondence give the state and the \([[9,1,5]]_8\) code
-\cite{RaissiGogolinRieraAcin2018}.  The local-unitary and transversal
-claims are the MDS--CSS rigidity and conversion theorems of the
-companion paper \cite{RuddAMELU2026}.
-\end{proof}
-
-\begin{remark}
-The balance condition for a one-column redundancy-\(r\) extension is
-\(q+2=2r\).  Among the exact fixed-level classifications at
-redundancies five through seven, it selects only \((r,q)=(5,8)\):
-the formal alternatives \(q=10,12\) are not prime powers.
-The projective-semilinear orbit table classifies extensions relative
-to the distinguished punctured Reed--Solomon code; it is not asserted
-to be a complete table of local-Clifford or local-unitary state orbits.
+Independently, a \([10,5,6]_8\) MDS code would be a \(10\)-arc in
+\(\mathrm{PG}(4,8)\), and the largest arc there has \(q+1=9\) points.
 \end{remark}

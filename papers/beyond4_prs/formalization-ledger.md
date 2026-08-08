@@ -90,7 +90,9 @@ The supported aggregate gate is:
       RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
       RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
 
-The balanced q=8 quantum consequence retains its separate
+**Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+
+The withdrawn balanced q=8 quantum development retains its separate
 RelativeConicArcs.Gates.PRSBalancedQuantumExtension gate and axiom audit so
 the AME--LU dependency closure is not misreported as part of the PRS
 geometric aggregate; those modules are outside this paper export.

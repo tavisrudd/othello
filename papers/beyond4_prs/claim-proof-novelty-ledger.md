@@ -13,6 +13,7 @@ is used to infer a covering radius or an unrestricted geometric statement.
 - PRIOR-ART: the cited source already contains the stated item.
 - NONE-FOUND: no predecessor was located within the recorded bounded search.
 - DERIVED: follows from rows whose hypotheses are recorded.
+- RETRACTED: the row was adopted and is now withdrawn; the reason is recorded in place.
 
 ## Mathematical result ledger
 
@@ -34,7 +35,7 @@ is used to infer a covering radius or an unrestricted geometric statement.
 | WWH | projective-subline Lucas endpoint iff a divides e | PRIOR-ART / IMPORTED-1 | Wang--Wu--Hu Proposition 11; no novelty claim for this criterion |
 | M9 | first fresh higher Lucas carrier is entirely shallow for m >= 4 | MANUSCRIPT / CERTIFIED | all-field final-pair proof; exact full-carrier q=16,32 certificates and q=64 invariant-block certificate |
 | R10 | persistent-only deep holes for every prime power q >= 59 | DERIVED / MANUSCRIPT / CERTIFIED | odd fields use RC; binary fields use M9; separate radius route |
-| R5-Q | balanced q=8 AME and quantum-MDS consequence | DERIVED / IMPORTED-1 | exact R5 count plus cited coding/quantum dictionaries; no complete LU/LC orbit claim |
+| R5-Q | WITHDRAWN 2026-08-07 — balanced q=8 AME and quantum-MDS consequence | RETRACTED | the claim rested on a split-free direction giving a one-column MDS extension. It does not: an extension needs a point outside the span of every r-1 parity-check columns, split-freeness gives only r-2, and Dur's equivalence makes covering radius r-1 equivalent to completeness of the normal-rational-curve arc, so no extension exists at any redundancy classified here. A [10,5,6]_8 MDS code would also be a 10-arc in PG(4,8), where the maximum is 9. The exact count of 1116 split-free directions at q=8 is unaffected and is recorded as a deep-hole count. Diagnosis in `notes/reed-solomon-tasks/c882-mds-extension-boundary.md` |
 
 ## Imported theorem ledger
 

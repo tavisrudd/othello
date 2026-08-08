@@ -426,7 +426,7 @@ Surveys volume 6 (2019).
 | RuddPrescribedHoles2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning only |
 | RuddRigidity2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning only |
 | RuddFactorization2026 | repository companion manuscript, bundle revision | partial, abstract/introduction and cross-cited headline statement | bundle positioning and shared factorization-memory context |
-| RuddAMELU2026 | repository companion manuscript, bundle revision | partial, abstract and the LU-rigidity/transversal-conversion theorem statements consumed by the quantum corollary | cross-paper theorem input |
+| RuddAMELU2026 | repository companion manuscript, bundle revision | partial, abstract and the LU-rigidity/transversal-conversion theorem statements formerly consumed by the withdrawn quantum corollary | no longer a theorem input; retained as a bundle comparison |
 | RaissiGogolinRieraAcin2018 | DOI `10.1088/1751-8121/aaa151`, arXiv `1701.03359v2` | abstract/metadata only from the official arXiv record | standard minimal-support AME/MDS and QECC context |
 
 No source is characterized beyond its stated read depth. Metadata-only

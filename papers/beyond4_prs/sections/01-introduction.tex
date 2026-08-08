@@ -81,7 +81,10 @@ The correspondence between deep holes,
 one-symbol MDS extensions, and uncovered points of a normal rational
 curve was developed in
 \cite[Prop.~1]{Kaipa2017} and
-\cite[Lem.~II.4 and Thms.~I.4--I.6]{ZWK2020}.
+\cite[Lem.~II.4 and Thms.~I.4--I.6]{ZWK2020}; it belongs to the regime
+in which the covering radius is \(r\), and every radius proved here is
+\(r-1\), where D\"ur's equivalence instead forbids the extension.  See
+Remark~\ref{rem:q8-no-extension}.
 Zhang, Wan, and Kaipa classified projective Reed--Solomon deep-hole
 directions through redundancy four and identified redundancy five as
 the next case \cite{ZWK2020}.  Theorem~\ref{thm:r5} closes that case;
@@ -125,10 +128,8 @@ according as $q\equiv1\pmod3$ with characteristic not three,
 $q\equiv2\pmod3$, or $\operatorname{char}\F_q=3$.
 \end{theorem}
 
-At \(q=8\), the \(1116\) deep-hole directions in
-Corollary~\ref{cor:q8-quantum-extension} give balanced one-column MDS
-extensions, minimum-support \(\operatorname{AME}(10,8)\) stabilizer states,
-and associated \([[9,1,5]]_8\) quantum MDS codes.
+At \(q=8\) the classification gives \(1116\) deep-hole directions,
+splitting as \(360\) nonsporadic and \(756\) sporadic ones.
 
 The Hankel dictionary turns redundancy five into a pencil of cubics.
 Cyclic descent gives the arithmetic families in
@@ -220,9 +221,11 @@ radius gate.
 Three companion papers provide comparisons with relative conic completion,
 inverse rigidity, and conic-ideal factorization memory
 \cite{RuddPrescribedHoles2026,RuddRigidity2026,RuddFactorization2026};
-none is an input here.  The MDS--CSS companion supplies the quantum
-consequences of the balanced \(q=8\) row stated in
-Section~\ref{sec:r5} \cite{RuddAMELU2026}.
+none is an input here.  The MDS--CSS companion \cite{RuddAMELU2026}
+proves general rigidity and conversion theorems for MDS--CSS codes; this
+paper draws no consequence from them, since the one-column extensions
+that would have supplied their input do not exist at these radii
+(Remark~\ref{rem:q8-no-extension}).
 From the viewpoint of binary forms, the question is which linear
 systems contain a totally split squarefree member.  Factorization
 statistics in linear families \cite{CMP2017} and
