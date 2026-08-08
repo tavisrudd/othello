@@ -3,6 +3,7 @@ import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Data.Complex.Basic
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Module
 import Mathlib.Tactic.Ring
 
 /-!
@@ -65,6 +66,60 @@ theorem charpoly_pairedTriangle (a b c ar br cr : R)
 
 section Complex
 
+/-- The positive spectral projection of a complex involution. -/
+noncomputable def hermitianPositiveProjection {m : Type*} [DecidableEq m]
+    (Q : Matrix m m ℂ) : Matrix m m ℂ :=
+  (2⁻¹ : ℂ) • (1 + Q)
+
+/-- The negative spectral projection of a complex involution. -/
+noncomputable def hermitianNegativeProjection {m : Type*} [DecidableEq m]
+    (Q : Matrix m m ℂ) : Matrix m m ℂ :=
+  (2⁻¹ : ℂ) • (1 - Q)
+
+theorem hermitianPositiveProjection_add_negativeProjection
+    {m : Type*} [Fintype m] [DecidableEq m] (Q : Matrix m m ℂ) :
+    hermitianPositiveProjection Q + hermitianNegativeProjection Q = 1 := by
+  simp [hermitianPositiveProjection, hermitianNegativeProjection, smul_add, smul_sub]
+  module
+
+/-- The positive projection of an involution is idempotent. -/
+theorem hermitianPositiveProjection_mul_self
+    {m : Type*} [Fintype m] [DecidableEq m] (Q : Matrix m m ℂ)
+    (hQ : Q * Q = 1) :
+    hermitianPositiveProjection Q * hermitianPositiveProjection Q =
+      hermitianPositiveProjection Q := by
+  simp only [hermitianPositiveProjection, Matrix.smul_mul, Matrix.mul_smul,
+    add_mul, mul_add, Matrix.one_mul, Matrix.mul_one, hQ]
+  module
+
+/-- The negative projection of an involution is idempotent. -/
+theorem hermitianNegativeProjection_mul_self
+    {m : Type*} [Fintype m] [DecidableEq m] (Q : Matrix m m ℂ)
+    (hQ : Q * Q = 1) :
+    hermitianNegativeProjection Q * hermitianNegativeProjection Q =
+      hermitianNegativeProjection Q := by
+  simp only [hermitianNegativeProjection, Matrix.smul_mul, Matrix.mul_smul,
+    sub_mul, mul_sub, Matrix.one_mul, Matrix.mul_one, hQ]
+  module
+
+/-- The two spectral projections of an involution are orthogonal. -/
+theorem hermitianPositiveProjection_mul_negativeProjection
+    {m : Type*} [Fintype m] [DecidableEq m] (Q : Matrix m m ℂ)
+    (hQ : Q * Q = 1) :
+    hermitianPositiveProjection Q * hermitianNegativeProjection Q = 0 := by
+  simp only [hermitianPositiveProjection, hermitianNegativeProjection,
+    Matrix.smul_mul, Matrix.mul_smul, add_mul, mul_sub, Matrix.one_mul,
+    Matrix.mul_one, hQ]
+  module
+
+/-- The spectral projections of a Hermitian involution are Hermitian. -/
+theorem hermitianNegativeProjection_conjTranspose
+    {m : Type*} [Fintype m] [DecidableEq m] (Q : Matrix m m ℂ)
+    (hQ : Qᴴ = Q) :
+    (hermitianNegativeProjection Q)ᴴ = hermitianNegativeProjection Q := by
+  simp [hermitianNegativeProjection, Matrix.conjTranspose_smul,
+    Matrix.conjTranspose_sub, hQ]
+
 /-- A real diagonal control embedded in complex matrix space. -/
 def realDiagonalControl {m : Type*} [DecidableEq m] (x : m → ℝ) : Matrix m m ℂ :=
   diagonal fun i => (x i : ℂ)
@@ -94,6 +149,32 @@ theorem hermitianTransferBlock_gram {m ι : Type*} [Fintype m] [Fintype ι]
   simp only [hermitianTransferBlock, Matrix.conjTranspose_mul,
     Matrix.conjTranspose_conjTranspose, hD, Matrix.mul_assoc]
   rw [← Matrix.mul_assoc Qm Qmᴴ, hQm]
+
+/-- A frame compression has the same trace as multiplication by its range
+projection. -/
+theorem trace_frameCompression {m ι : Type*} [Fintype m] [Fintype ι]
+    (A P : Matrix m m ℂ) (Qp : Matrix m ι ℂ) (hP : Qp * Qpᴴ = P) :
+    (Qpᴴ * A * Qp).trace = (A * P).trace := by
+  calc
+    (Qpᴴ * A * Qp).trace = (Qp * (Qpᴴ * A)).trace :=
+      Matrix.trace_mul_comm (Qpᴴ * A) Qp
+    _ = ((Qp * Qpᴴ) * A).trace := by rw [Matrix.mul_assoc]
+    _ = (P * A).trace := by rw [hP]
+    _ = (A * P).trace := Matrix.trace_mul_comm P A
+
+/-- For positive and negative eigenframes of a Hermitian involution, the first
+transfer moment is a full-space trace involving its two spectral projections. -/
+theorem trace_hermitianTransferBlock_gram {m ι : Type*}
+    [Fintype m] [DecidableEq m] [Fintype ι]
+    (D Q : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ)
+    (hD : Dᴴ = D)
+    (hPp : Qp * Qpᴴ = hermitianPositiveProjection Q)
+    (hPm : Qm * Qmᴴ = hermitianNegativeProjection Q) :
+    ((hermitianTransferBlock D Qp Qm)ᴴ * hermitianTransferBlock D Qp Qm).trace =
+      (D * hermitianNegativeProjection Q * D * hermitianPositiveProjection Q).trace := by
+  rw [hermitianTransferBlock_gram D (hermitianNegativeProjection Q) Qp Qm hD hPm]
+  exact trace_frameCompression (D * hermitianNegativeProjection Q * D)
+    (hermitianPositiveProjection Q) Qp hPp
 
 /-- The Hermitian triangle with upper-triangular entries `a`, `b`, `c` and
 their conjugates below the diagonal. -/
