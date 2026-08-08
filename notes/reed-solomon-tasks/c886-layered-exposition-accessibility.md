@@ -2,7 +2,7 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** active.  The end-to-end rendered read, layered-exposition pass, and
+**Status:** complete.  The end-to-end rendered read, layered-exposition pass, and
 blind specialist/generalist/editor A/B reads are complete.  All three readers
 preferred the revision.  Their substantive cautions have been repaired:
 Section II defines `shallow` and uses `transverse` only as shorthand for the
@@ -19,16 +19,21 @@ numbering, and bad-break findings are repaired.  The equation counter now
 advances in printed order, and every formerly manual display has a stable
 label used by its prose references.  The D.10 selector sentence now exposes
 the existing C620 product bound and its finite-field-grid inference.  A fresh
-full paper-local replay is running unattended in the synchronized standalone
-mirror.  The guarded export audit has zero findings, the 114-file export
+full paper-local replay completed in the synchronized standalone mirror with
+exit status zero after 43 minutes.  The guarded export audit has zero findings,
+the 114-file export
 manifest verifies source commit `f55ac2c0`, and the mirror is committed at
-`86794b6`; both mirror builds and its quick verifier are green.  Remaining
-gates are the full replay result and the closeout review.  The guarded Lean
+`86794b6`; both mirror builds and its quick verifier are green.  The guarded Lean
 area comparison found and adopted a deterministic five-file PRS boundary
 delta onto the clean `finitegeom` checkout.  Both
 `PRSBeyondRedundancyFour` and its axiom-audit gate pass there, and the local
 Lean export is committed at `3ecb127`.  The paper's public Lean revision stays
-unset until the author publishes that commit; no push was performed.
+unset until the author publishes that commit; no push was performed.  The
+portfolio summary now states the exact R5--R10 radius boundaries, distinguishes
+splitting density \(1/6\) from the Chebotarev main term \((q+1)/6\), and carries
+the current abstract.  The public canonical PDF, authority PDF, and standalone
+export are byte-identical with SHA-256
+`d666f1fc7f3a42c89b3005207fb64a2f7dfb0794b2585b30ca2791f0b04620b0`.
 
 ## Goal
 
@@ -150,3 +155,21 @@ printed order because manual tags survived an earlier section order.  The
 dedicated repair replaced those constants by counter-advancing labelled tags
 and replaced numeric prose callbacks by label references.  The rendered
 sequence is now monotone from (1) through (37), with no formula changed.
+
+## Closeout and mystery ledger
+
+The final extra-value and red-team pass compared the revised conceptual layer
+against the theorem hypotheses, field ranges, conditionality, evidence map,
+page ceiling, standalone replay, public PDF, and portfolio summary.  It found
+and closed the last surface drift: the summary had called \((q+1)/6\) a density
+and retained the pre-revision abstract.  No further cheap manuscript change
+survived the density test; additional general exposition would now add bulk or
+duplicate one of the overview, reading-map, or mechanism-table roles.
+
+No genuine mystery remains within C886.  The D.10 common-avoidance inference is
+explicitly supported by one nonzero product selector of individual degree 22;
+the proof spine and all field/radius gates survived specialist red-teaming; the
+generalist, specialist, and layout readers all preferred the revision; and the
+full replay closed the final computational gate.  Responses from the external
+experts contacted after release are independent scholarly feedback, not an
+unfinished C886 acceptance condition.

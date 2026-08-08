@@ -2,7 +2,7 @@
 
 **Lane**: `reed-solomon`
 
-**Date:** 2026-08-02
+**Date:** 2026-08-08
 
 **Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597,
 C603, C620, C646, C656, C660, C819, C820, and C821 complete. A second pair of independent cold reads exposed and
@@ -63,6 +63,17 @@ manuscript/citation/formal replay then found no second theorem-level contradicti
 Kaipa--Pradhan cover comparison by the explicit square normalization.  Optional coset-statistic
 exposition, sporadic-table enrichment, and higher-genus reinterpretation were not promoted and do
 not block the paper.  The closure review is `notes/2026-08-07-c883-full-review.md`.
+
+C886 is complete.  The paper now has a layered two-track exposition: a mature
+generalist can follow the syndrome-to-carrier mechanism without entering every
+elimination, while the specialist proof, exceptional cases, and verification
+boundary remain intact.  Blind specialist, generalist, and layout A/B readers
+all preferred the revision; the TIT render is 45 pages; both builds, the quick
+verifier, and the full 43-minute standalone replay pass.  The paper and Lean
+boundary exports are committed locally, the portfolio abstract is synchronized,
+and the public canonical PDF matches the authority byte-for-byte.  The closure
+record and mystery ledger are in
+`notes/reed-solomon-tasks/c886-layered-exposition-accessibility.md`.
 
 C882 corrected a defect that the literature work surfaced: the paper inferred a
 one-column MDS extension from a split-free direction.  An extension needs a syndrome
@@ -1140,9 +1151,8 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C886 | active; conceptual layer green at 44 TIT pages, full replay and final cold reads open | finish the bounded accessibility pass without changing the proof spine or release scope |
-| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1202,8 +1212,8 @@ history.
 
 ## Next command
 
-`go C886`
+`go C608`
 
-(C885 and its absorbed C854 obligations are complete; C886 is the bounded
-layered-exposition pass before Version 2 release, C608 is the immediate decoder
-consequence, and C607 remains the broader parallel decoding task.)
+(C886 and the Version 2 exposition/release gates are complete; C608 is the
+immediate decoder consequence, and C607 remains the broader parallel decoding
+task.)
