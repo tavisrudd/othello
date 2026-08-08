@@ -2,7 +2,8 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued; allocated 2026-08-07.
+**Status:** complete 2026-08-07.  Closure review:
+`notes/2026-08-07-c883-full-review.md`.
 
 **Origin:** the closeout passes on C881.  The Krishna Kaipa persona review supplied the
 literature and incidence direction; a Terence Tao pass on the finished section supplied the
@@ -264,3 +265,35 @@ Items 1 and 2 are closed.  Item 5 carries the remaining real mathematical upside
 depends on nothing else.  Item 4 is unblocked on the binary fields by item 2 and now waits
 only on the encoding reconciliation.  Item 3 is a short write-up, since item 2 settled that
 the count extends to every characteristic.  Item 6 is open-ended.
+
+## Closure disposition
+
+C883 closes with Items 1, 2, and 5 proved, reviewed, and promoted.  The terminal residual
+coordinate convention and irredundancy witness found during Item 5 are repaired in the
+manuscript.  The complete replay, guarded Lean builds, manuscript build, citation audit, and
+post-landing delta review are recorded in the closure review above.
+
+Items 3, 4, and 6 are deliberately not promoted and are not hidden proof obligations:
+
+- Item 3 is an optional coset-statistic exposition project whose prior-work boundary must start
+  from Blokhuis--Pellikaan--Sz\H onyi's generalized Reed--Solomon syndrome/coset enumerator.
+- Item 4 is an optional table enrichment; the extension-field encoding reconciliation was not
+  completed, and no theorem or release claim depends on the extra columns.
+- Item 6 is a higher-genus research direction, not a repair.  It remains an unallocated lane
+  level-up unless a later task supplies a precise theorem and literature discriminator.
+
+The `ej` plus Tao closeout found no cheap theorem-strength promotion beyond the covariant and
+perfect-square interpretation already landed.  The highest-value immediate work is instead the
+bounded manuscript/formal/citation remediation enumerated by the full review.
+
+## Mystery ledger
+
+- **Settled:** the residual projected Veronese is the perfect-square locus in bottom coordinates;
+  the apparent Kaipa--Pradhan twist disappears after matching the Pl\"ucker projective scale,
+  since the discriminants differ by a square in the function field.
+- **Open, nonblocking:** whether `I H - J f` has a standard name outside the recorded classical
+  search boundary.  No source read names it; the neighbouring `2 I H - 3 J f` is the classical
+  distinguished covariant.
+- **Open, unallocated:** whether coherent polar induction is a degeneration of the higher-genus
+  double-point identity.  C883 supplies no theorem or evidence strong enough to promote that
+  framing.

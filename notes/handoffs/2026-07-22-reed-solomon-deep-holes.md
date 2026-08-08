@@ -56,36 +56,13 @@ no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
-C883 carries the redundancy-five follow-ups from the same two passes, each promotable into the
-manuscript under that ID after review.  Its Lean-sync item is closed: the two-sided split-member
-bound, the forced fibre-square invariants at `17 <= q <= 19`, and the characteristic-two
-consequences are kernel-checked, and the certificate's field domain is now separate from the
-seven field orders the classification depends on it for, with the synthesis input's
-classification range extended to binary `q >= 16` so that separation is not vacuous.  The
-field-range closure ledger, which still listed `q = 16` under R5 direct census, is repaired.
-The abstract and the portfolio summary now carry the exact split-witness count as a
-headline.  The whole export chain has run: the beyond-four trust fact is regenerated, the
-area export was adopted into finitegeom as `16c9396`, and the paper mirror carries a
-Version 2 draft commit `83a83b3` with its release gate green.  Nothing is pushed, and the
-standing decision that no export publishes before Version 2 is release-ready still binds
-that commit.  Clearing the paper export also required repairing the statement map's
-withdrawal paragraph, which cited an internal task note.
-The report is `notes/2026-08-07-c883-r5-lean-sync.md`.
-
-C883's covariant item has its mathematics closed.  The discriminant quartic that
-Kaipa--Pradhan attach to a line is the covariant `I H - J f` of the syndrome quartic, an
-identity of integer polynomials and so valid in every characteristic, which extends the
-comparison past characteristics two and three.  `J` turns out to be the catalecticant cubic
-already cutting the terminal carrier's first prime, `I = z3 - 3 z2` is a linear line
-complex, and the carrier's residual component is the locus where the syndrome quartic is a
-perfect square, which explains the projected Veronese in the elimination.  The literature
-check remains before promotion, and the pass found a printed-coordinate defect in the
-reduced terminal carrier proposition that needs an explicit decision.  The report is
-`notes/2026-08-07-c883-hankel-plucker-covariant.md`.
-The open items are the coset-multiplicity and error-distribution
-statement, the sporadic table's fibre-square invariant column, identification of the
-Hankel--Pluecker map with a classical apolarity covariant, and the higher-genus reading of the
-fibre-square argument.
+C883 is complete.  It kernel-checks the exact split-witness consequences, identifies
+`disc(h_x)=I H-J f` and the residual perfect-square Veronese, closes the classical-covariant
+literature gate, and repairs the terminal residual coordinates and irredundancy witness.  A full
+manuscript/citation/formal replay then found no second theorem-level contradiction and verified the
+Kaipa--Pradhan cover comparison by the explicit square normalization.  Optional coset-statistic
+exposition, sporadic-table enrichment, and higher-genus reinterpretation were not promoted and do
+not block the paper.  The closure review is `notes/2026-08-07-c883-full-review.md`.
 
 C882 corrected a defect that the literature work surfaced: the paper inferred a
 one-column MDS extension from a split-free direction.  An extension needs a syndrome
