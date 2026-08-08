@@ -26,14 +26,14 @@ manuscript or computational argument.
 
 | Paper or group | Evidence and stated boundary |
 |---|---|
-| Clebsch I and its computational companion | The [verification surface](https://github.com/tavisrudd/clebsch-rigidity/tree/main/verification) separates structural arguments from finite censuses; generated q=11 material is independently checked in the [certificate repository](https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates). |
+| Clebsch I and its computational companion | The [verification surface](https://github.com/tavisrudd/clebsch-rigidity/tree/main/verification) separates structural arguments from finite censuses; generated `q = 11` material is independently checked in the [certificate repository](https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates). |
 | Clebsch II | The [verification directory](https://github.com/tavisrudd/clebsch-factorization/tree/main/verification) records statement identity, proof mode, certificates, replays, and the aggregate release check. |
 | Clebsch III | [ARTIFACT.md](https://github.com/tavisrudd/clebsch-passages/blob/main/ARTIFACT.md), the [literature boundaries](https://github.com/tavisrudd/clebsch-passages/blob/main/literature-boundaries.md), and the [release checks](https://github.com/tavisrudd/clebsch-passages/tree/main/verification) separate artifact, literature, and formalization claims. |
 | Clebsch IV | The [public repository](https://github.com/tavisrudd/q13-passant-code) identifies the exact minimum-word certificates and the boundary between structural proof and finite verification. |
 | Arcs complete outside a conic | The [public repository](https://github.com/tavisrudd/arcs-complete-outside-conic) distinguishes general proofs and Lean-formalized identities from certificate-checked or trusted finite classifications. |
-| Projective Reed--Solomon deep holes | The supplement gives [replay instructions](https://github.com/tavisrudd/beyond4-prs/blob/main/supplement/REPRODUCING.md), public classification records, and a [declaration-level Lean trust map](https://github.com/tavisrudd/beyond4-prs/blob/main/supplement/LEAN-STATEMENTS.md). |
+| Projective Reed–Solomon deep holes | The supplement gives [replay instructions](https://github.com/tavisrudd/beyond4-prs/blob/main/supplement/REPRODUCING.md), public classification records, and a [declaration-level Lean trust map](https://github.com/tavisrudd/beyond4-prs/blob/main/supplement/LEAN-STATEMENTS.md). |
 | Stabilizer AME rigidity | The [formal boundary](https://github.com/tavisrudd/ame-lu#formal-boundary) names the kernel-checked cores and the quantitative and global arguments that remain manuscript proofs. |
-| MDS--CSS transversal groups | The [claim-level evidence report](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/supplement/EVIDENCE.md) separates all-length conceptual theorems, six-point certificates, and formal coverage. |
+| MDS–CSS transversal groups | The [claim-level evidence report](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/supplement/EVIDENCE.md) separates all-length conceptual theorems, six-point certificates, and formal coverage. |
 | Golden quantum statistics | The [evidence map](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/verification/EVIDENCE.md) records claim-level checks; the manuscript is a theory and design-limit analysis, not a report of a built device. |
 
 For an essential finite computation, the retained bundle should specify the
@@ -44,7 +44,6 @@ or state why one is unavailable. A negative result is correspondingly phrased
 as “nothing was found in this exhausted domain,” not as an unrestricted
 nonexistence claim.
 
-The shared [finitegeom](https://github.com/tavisrudd/finitegeom) repository
-contains more than 300 Lean files and 83K Lean lines. That measures the scale
-of the formal record, not coverage of any particular theorem; the paper-level
-maps above are the relevant claims.
+The shared [finitegeom](https://github.com/tavisrudd/finitegeom) repository is
+a substantial formal library, but its size does not measure coverage of any
+particular theorem; the paper-level maps above are the relevant claims.

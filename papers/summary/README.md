@@ -13,10 +13,10 @@ recurring mechanism is rigidity: identify an invariant that survives the loss
 of information, then prove that few possibilities remain.
 
 The central Clebsch portfolio currently has five papers: four numbered papers
-in the *The Clebsch cubic* series and the companion *Diagonal Isoduality and
-Transversal Clifford Groups of MDS--CSS Codes*. The MDS--CSS paper has its own
+in *The Clebsch cubic* series and the companion *Diagonal Isoduality and
+Transversal Clifford Groups of MDS–CSS Codes*. The MDS–CSS paper has its own
 all-length theorem and uses the Clebsch code as a worked application; it is not
-a fifth reconstruction paper. The Golden interferometer paper is a related
+a fifth numbered installment. The Golden interferometer paper is a related
 companion, not a sixth Clebsch paper. Every paper is intended to stand on its
 own mathematically.
 
@@ -44,7 +44,7 @@ complex as separate victories.
   prescribed hole set, the first two secant moments give an exact identity with
   a nonnegative remainder. Its equality criterion yields a quantitative lower
   bound, deletion stability, and exact small-field consequences for arcs
-  avoiding a conic. [Arcs Complete Outside a Conic](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
+  avoiding a conic. [Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
 
 - **Sparse data recover marked finite geometry.** In the Clebsch case, a
   conic-containing deep-hole syndrome locus recognizes the non-GRS
@@ -74,12 +74,12 @@ complex as separate victories.
 
 ### Coding theory and quantum information
 
-- **Projective Reed--Solomon deep holes beyond redundancy four.** Exact
+- **Projective Reed–Solomon deep holes beyond redundancy four.** Exact
   classifications reach redundancies five and six for every prime power
   `q ≥ 7`, redundancy seven in the stated split-free/deep-hole ranges, and
   redundancies eight through ten for `q ≥ 43, 53, 59`, respectively. At
   redundancy five, an all-characteristic count gives splitting density `1/6`
-  on the trivial-gcd separable stratum. [Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
+  on the trivial-gcd separable stratum. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
 
 - **Exact and quantitative AME rigidity.** Every product-unitary intertwiner
   between stabilizer `AME(2m,q)` states is local Clifford for every prime power
@@ -88,7 +88,7 @@ complex as separate victories.
   robust-atlas arguments remain manuscript-level, as stated in the paper's
   formal boundary. [Local-Unitary Rigidity and Quantitative Rounding](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
-- **A nullity test determines MDS--CSS transversal groups.** For odd-prime
+- **A nullity test determines MDS–CSS transversal groups.** For odd-prime
   `[2m,m,m+1]q` MDS codes, the diagonal multiplier space has dimension zero or
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
@@ -102,9 +102,9 @@ complex as separate victories.
 
 ## Theorems over infinite families
 
-The exceptional Clebsch, q=13, and q=11 objects arise as answers to general
-questions rather than as assumptions. The following table records one
-infinite-family statement from each major paper.
+The exceptional Clebsch, `q = 13`, and `q = 11` objects arise as answers to general
+questions rather than as assumptions. The following table records selected
+infinite-family statements from the major papers.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
@@ -113,10 +113,10 @@ infinite-family statement from each major paper.
 | Clebsch II | The one-dimensional two-valued strength-two trade occurs only for the `B₃/F₇` and `H₃/F₁₁` orbits. | Full `PGL₂(q)`-orbits of perfect matchings, all odd fields. |
 | Clebsch III | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp. | Every two-graph on at least seven vertices. |
 | Arcs complete outside a conic | The first two secant moments give an exact defect identity with nonnegative remainder. | Every finite projective plane and prescribed hole set. |
-| Projective Reed--Solomon deep holes | Split-free directions, and deep holes wherever the covering-radius gate applies, are classified in the stated ranges. | R5--R6: every `q ≥ 7`; R7: split-free for every `q ≥ 7` and deep holes for `q ≥ 11`; R8--R10: `q ≥ 43, 53, 59`. |
-| Projective Reed--Solomon cubic pencils | On the trivial-gcd separable stratum, `#Y = 6N + 3d₂ + d₃` in every characteristic. | Every field order and characteristic. |
+| Projective Reed–Solomon deep holes | Split-free directions, and deep holes wherever the covering-radius gate applies, are classified in the stated ranges. | R5–R6: every `q ≥ 7`; R7: split-free for every `q ≥ 7` and deep holes for `q ≥ 11`; R8–R10: `q ≥ 43, 53, 59`. |
+| Projective Reed–Solomon cubic pencils | On the trivial-gcd separable stratum, `#Y = 6N + 3d₂ + d₃` in every characteristic. | Every field order and characteristic. |
 | Stabilizer AME rigidity | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
-| MDS--CSS transversal groups | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
+| MDS–CSS transversal groups | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Golden six-mode interferometer | Order six is the unique nontrivial order whose balanced exchange spectrum is cut-independent. | Every symmetric conference order. |
 
 ## Papers and entry points
@@ -128,12 +128,12 @@ formalization boundary, and reproducible entry points.
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
 | *Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus* | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
-| *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes* | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
+| *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
 | *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* | Algebraic combinatorics | A two-valued quadratic trade classifies two exceptional matching geometries. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | A rational golden twist and coarse fourth-order data organize the conference-signing reconstruction. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
-| *Minimum-Word Reconstruction of `PG(2,13)` from a Binary Conic Code* | Coding / finite geometry | Minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
-| *Arcs Complete Outside a Conic* | Finite geometry / designs | A universal defect identity gives bounds and equality structure. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
-| *Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
+| *Minimum-Word Reconstruction of PG(2,13) from a Binary Conic Code* | Coding / finite geometry | Minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
+| *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal defect identity gives bounds and equality structure. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
+| *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | *Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer* | Quantum information / mathematical physics | Cut-independent exchange spectra and orientation-sensitive stability are unique at order six. | [PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [repo](https://github.com/tavisrudd/golden-quantum-statistics) |
 
