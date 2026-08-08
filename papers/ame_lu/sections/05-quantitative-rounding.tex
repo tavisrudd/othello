@@ -286,6 +286,36 @@ The exact atlas theorem gives \(FL=L\), and
 Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
 \end{proof}
 
+The uncontrolled Pauli correction does not obstruct the logical action of a
+chosen encoder.
+
+\begin{corollary}[Logical Clifford rounding]
+\label{cor:logical-clifford-rounding}
+Under the hypotheses and radius of
+Proposition~\ref{prop:robust-linear-atlas}, choose party \(i\) as the logical
+leg, and let \(L_i\) be the logical unitary induced by the other \(2m-1\)
+factors as in the proof of Theorem~\ref{thm:cleaning-global-rounding}.  There
+is an exactly transversally realizable logical Clifford \(L_i'\) such that
+\[
+ q^{-1/2}\min_{|z|=1}\lVert L_i-zL_i'\rVert_{\mathrm{HS}}
+ \leq8\varepsilon(U).
+\]
+\end{corollary}
+
+\begin{proof}
+Write the exact symmetry supplied by the proposition as
+\(W_vK\), where \(K=\bigotimes_jK_j\).  The projection of the stabilizer
+label group onto the Weyl plane at party \(i\) is surjective: this already
+holds for every minimum-support subgroup containing \(i\).  Multiply \(W_vK\)
+by a stabilizer whose \(i\)-th label is \(-v_i\).  The result is still an exact
+product-Clifford symmetry, and its factor at \(i\) is projectively \(K_i\).
+The Choi correspondence therefore makes its other factors an exact
+transversal implementation of
+\(L_i'=(K_i^{\mathsf T})^{-1}\).  The logical unitary \(L_i\) is the same
+transpose--inverse transform of \(U_i\), up to phase, so (5.5) proves the
+displayed bound.
+\end{proof}
+
 The Pauli correction in the proposition is essential.  All localized
 commutators are unchanged when a recovered \(K_i\) is multiplied by a
 local Weyl: that multiplication changes conjugation phases, and the

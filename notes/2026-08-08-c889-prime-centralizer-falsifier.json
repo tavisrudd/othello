@@ -1,0 +1,268 @@
+{
+  "claim": "Every common centralizer is the full group, a split torus, a nonsplit torus, a signed unipotent group, or the center.",
+  "fields": {
+    "3": {
+      "centralizer_order_counts": {
+        "2": 408,
+        "24": 4,
+        "4": 36,
+        "6": 128
+      },
+      "centralizer_type_counts": {
+        "center": 408,
+        "full": 4,
+        "nonsplit_torus": 36,
+        "signed_unipotent": 128
+      },
+      "group_order": 24,
+      "lexicographically_first_examples": {
+        "center": [
+          [
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            1,
+            2,
+            1
+          ]
+        ],
+        "full": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "nonsplit_torus": [
+          [
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            1,
+            2,
+            0
+          ]
+        ],
+        "signed_unipotent": [
+          [
+            0,
+            1,
+            2,
+            1
+          ],
+          [
+            0,
+            1,
+            2,
+            1
+          ]
+        ]
+      },
+      "ordered_pairs_checked": 576
+    },
+    "5": {
+      "centralizer_order_counts": {
+        "10": 576,
+        "120": 4,
+        "2": 13320,
+        "4": 180,
+        "6": 320
+      },
+      "centralizer_type_counts": {
+        "center": 13320,
+        "full": 4,
+        "nonsplit_torus": 320,
+        "signed_unipotent": 576,
+        "split_torus": 180
+      },
+      "group_order": 120,
+      "lexicographically_first_examples": {
+        "center": [
+          [
+            0,
+            1,
+            4,
+            0
+          ],
+          [
+            0,
+            1,
+            4,
+            1
+          ]
+        ],
+        "full": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "nonsplit_torus": [
+          [
+            0,
+            1,
+            4,
+            1
+          ],
+          [
+            0,
+            1,
+            4,
+            1
+          ]
+        ],
+        "signed_unipotent": [
+          [
+            0,
+            1,
+            4,
+            2
+          ],
+          [
+            0,
+            1,
+            4,
+            2
+          ]
+        ],
+        "split_torus": [
+          [
+            0,
+            1,
+            4,
+            0
+          ],
+          [
+            0,
+            1,
+            4,
+            0
+          ]
+        ]
+      },
+      "ordered_pairs_checked": 14400
+    },
+    "7": {
+      "centralizer_order_counts": {
+        "14": 1536,
+        "2": 109200,
+        "336": 4,
+        "6": 896,
+        "8": 1260
+      },
+      "centralizer_type_counts": {
+        "center": 109200,
+        "full": 4,
+        "nonsplit_torus": 1260,
+        "signed_unipotent": 1536,
+        "split_torus": 896
+      },
+      "group_order": 336,
+      "lexicographically_first_examples": {
+        "center": [
+          [
+            0,
+            1,
+            6,
+            0
+          ],
+          [
+            0,
+            1,
+            6,
+            1
+          ]
+        ],
+        "full": [
+          [
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "nonsplit_torus": [
+          [
+            0,
+            1,
+            6,
+            0
+          ],
+          [
+            0,
+            1,
+            6,
+            0
+          ]
+        ],
+        "signed_unipotent": [
+          [
+            0,
+            1,
+            6,
+            2
+          ],
+          [
+            0,
+            1,
+            6,
+            2
+          ]
+        ],
+        "split_torus": [
+          [
+            0,
+            1,
+            6,
+            1
+          ],
+          [
+            0,
+            1,
+            6,
+            1
+          ]
+        ]
+      },
+      "ordered_pairs_checked": 112896
+    }
+  },
+  "schema": "c889-prime-centralizer-falsifier-v1",
+  "scope": {
+    "groups": [
+      "SL(2,3)",
+      "SL(2,5)",
+      "SL(2,7)"
+    ],
+    "tuples": "all ordered pairs"
+  }
+}

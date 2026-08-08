@@ -1,0 +1,140 @@
+{
+  "c624_certificate_sha256": "94171665d436cccc2182fc81b4d0cdfaa714262c92f2a4917b6589c9a709d35d",
+  "cases": [
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_pencil_t2_z1_h3_class",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_pencil_t10_z9",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 12,
+        "dual_only": 12
+      },
+      "party_image_order": 24
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_grs_0_1_2_3_4_5",
+      "orientation_counts": {
+        "both": 4,
+        "code_only": 0,
+        "dual_only": 0
+      },
+      "party_image_order": 4
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_grs_0_1_2_3_4_6",
+      "orientation_counts": {
+        "both": 5,
+        "code_only": 0,
+        "dual_only": 0
+      },
+      "party_image_order": 5
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_grs_0_1_2_3_5_6",
+      "orientation_counts": {
+        "both": 6,
+        "code_only": 0,
+        "dual_only": 0
+      },
+      "party_image_order": 6
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_grs_0_1_2_3_5_9",
+      "orientation_counts": {
+        "both": 12,
+        "code_only": 0,
+        "dual_only": 0
+      },
+      "party_image_order": 12
+    },
+    {
+      "field_order": 17,
+      "matches_c624": true,
+      "name": "q17_tetrahedral_tminus1_grs",
+      "orientation_counts": {
+        "both": 24,
+        "code_only": 0,
+        "dual_only": 0
+      },
+      "party_image_order": 24
+    },
+    {
+      "field_order": 31,
+      "matches_c624": true,
+      "name": "q31_tetrahedral_tminus1_h3",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    },
+    {
+      "field_order": 11,
+      "matches_c624": true,
+      "name": "q11_integral_h3_tau4",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    },
+    {
+      "field_order": 19,
+      "matches_c624": true,
+      "name": "q19_integral_h3_tau5",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    },
+    {
+      "field_order": 29,
+      "matches_c624": true,
+      "name": "q29_integral_h3_tau6",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    },
+    {
+      "field_order": 31,
+      "matches_c624": true,
+      "name": "q31_integral_h3_tau13",
+      "orientation_counts": {
+        "both": 0,
+        "code_only": 60,
+        "dual_only": 60
+      },
+      "party_image_order": 120
+    }
+  ],
+  "criterion": "pi(C) is diagonally equivalent to C or C^perp",
+  "permutations_checked_per_case": 720,
+  "schema": "c889-party-image-crosscheck-v1"
+}

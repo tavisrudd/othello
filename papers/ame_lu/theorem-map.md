@@ -15,6 +15,7 @@ This map covers Paper I after the two-paper split. Results owned by
 | C836 | uniform scale `Theta(min{p^-1,q^-1/2,n^-1/2})`; Reed--Solomon scale `Theta(q^-1)` over prime fields and `Theta(q^-1/2)` at extension degree at least two | explicit existing families only; no fixed-`q` existence claim | closed-form comparison of the four terms in `R_clean` |
 | C837 | after exact branch selection, local frame errors satisfy the collective squared estimate `≤π²ε²` | conclusion of cleaning theorem | chord bound applied to the collective residual norm |
 | C838 | cleaning-rounded symplectic maps satisfy the exact atlas at a dimension-only radius; localized commutators cannot control the affine stabilizer character | every stabilizer AME state; exact product-Pauli correction may be nonlocal in the rounding metric | two intersecting minimum supports and commutator-phase separation; manuscript proof only |
+| C889 | the induced action on any chosen encoder is within \\(8\\varepsilon\\) of an exactly transversally realizable logical Clifford at the atlas radius | every stabilizer AME state; controls the logical image, not local distance of the full physical correction | robust atlas compatibility, surjectivity onto the input Weyl plane, and stabilizer cancellation |
 
 ## Appendix hierarchy
 
@@ -47,6 +48,8 @@ This map covers Paper I after the two-paper split. Results owned by
   quantitative theorem.
 - `prop:robust-linear-atlas`: exact symplectic-atlas compatibility and the
   affine-character boundary.
+- `cor:logical-clifford-rounding`: dimension-only rounding of the induced
+  encoder action despite the uncontrolled global Pauli correction.
 - `lem:stabilizer-overlap-gap` and `cor:uniform-separation`: exact branch
   separation used by every defect-only route.
 

@@ -10,19 +10,21 @@ Discovery companion:
 
 ## Current status
 
-**C889 queued (2026-08-08): independently vet the unified EJ latent-structure
-report before promoting any new theorem.**  The task first reconciles every
-proposal with C622/C623/C631/C774--C838 and first identifies cheap additions
-that strengthen the current papers without opening a competing narrative.
-It then proves or kills the MDS--CSS LU-up-to-duality, party-image, robust-
-logical-rounding, and high-distance-multiplier claims.  Larger survivors are
-banked with complete proofs and provenance for separately authorized follow-up
-versions; they do not trigger current-manuscript edits.  Only gated survivors
-can advance to the proposed holonomy-centralizer/five-phase classification,
-extension-field commutant algebras, holonomy invariants, or affine-cocycle
-stability programme.  It is queued, not started, and does not displace C795's
-existing manuscript-correctness priority.  Scope and acceptance gates:
+**C889 closed (2026-08-08): the latent theorem chain is separated from the
+speculative programmes.**  The prime-field MDS--CSS LU-orbit theorem up to
+duality, its exact party-image criterion, the sharp high-distance conductor
+line, and the five prime-field holonomy-centralizer types are proved and banked.
+Exact cross-checks match all twelve C624 rows and every ordered matrix pair for
+(p=3,5,7).  Only the one-paragraph logical-Clifford rounding consequence
+passes the non-dilution gate; Paper I adopts it at C838's dimension-only atlas
+radius and passes its 36-page release gate.  Paper II, Lean, mirrors, and remotes
+were untouched.  The extension-field simplification and present affine-cocycle
+route fail their structural gates.  Full proof, evidence, and banked ledger:
 `2026-08-08-c889-ame-pair-latent-structure-kill-tests.md`.
+
+**C787 is the highest-EV next quantitative item.**  Reconcile it first against
+C786/C833/C838/C889: its remaining question is two-state stability around an
+exact base intertwiner, not the now-settled one-state logical image.
 
 **C888 closed (2026-08-08): both follow-up reviews are remediated and
 exported.**  The MDS paper now distinguishes its site-dependent product
@@ -49,9 +51,9 @@ clean standalone is locally at `5f03d42`, one commit ahead and unpushed.  No
 deposit, push, or submission was made.  Full audit:
 `2026-08-08-c887-ame-lu-referee-review-remediation.md`.
 
-**C795 is now the highest-priority AME--LU item.**  It owns the already-known
-uniformity-order scope correction and explicit threshold adoption; red-team
-that reversal before changing the manuscript.
+**C795 is closed.**  The uniformity-order scope correction and explicit
+threshold were red-teamed and adopted before C833--C838 superseded the global
+entry bound.
 
 **Both papers are published (2026-08-03).** The rigidity paper is deposited as
 DOI `10.5281/zenodo.21681856` with mirror `8468914`; the transversal-groups
