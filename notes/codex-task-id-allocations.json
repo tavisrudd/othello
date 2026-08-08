@@ -2870,8 +2870,17 @@
       "last": 885,
       "purpose": "remediate C883 full-review manuscript citation Lean and trust findings",
       "sequence": 319
+    },
+    {
+      "count": 1,
+      "first": 886,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 886,
+      "purpose": "layered exposition architecture for PRS Version 2 accessibility and density",
+      "sequence": 320
     }
   ],
-  "next_id": 886,
+  "next_id": 887,
   "schema": "codex-task-id-allocations-v1"
 }
