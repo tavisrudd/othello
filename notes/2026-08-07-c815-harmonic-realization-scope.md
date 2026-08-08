@@ -64,6 +64,17 @@ into the manuscript's Gram identity `G = K/13` with no integral anywhere.  The
 three Gram eigenvalues then follow from the Petersen eigenvalues exactly as the
 manuscript says, and their positivity gives injectivity.
 
+The landed proof takes a shorter path than the one just described, and closes the
+same identity.  Fact 3 is never needed in the general form `N(p q) = p(d) q`;
+what the argument consumes is only its two clauses for `p` harmonic of degree `d`
+— that `N(p q)` vanishes when `q` has degree below `d`, and that
+`N(p (w.x)^d) = d! p(w)` — and both fall out of a single induction on `d` from
+Euler's relation.  Expanding `Z_v` against those two clauses, the three terms
+carrying `x.x` vanish by the sphere relation followed by the lower-degree clause,
+and the surviving term is `(231/16) 6! Z_u(v) = 10395 P_6(u.v)` at once.  The
+four Leibniz evaluations displayed above are therefore not used, and no apolar
+differential operator is defined.
+
 **The face-axis labelling is ring-general.**  Over any commutative ring carrying
 an element `phi` with `phi^2 = phi + 1`, the ten displayed vectors have squared
 norm `3`, and the square of the inner product of two distinct axes is `5` when
@@ -149,8 +160,8 @@ special-function inputs, not a computation.
 | module | content | closes |
 |---|---|---|
 | `RelativeConicArcs.IcosahedralFaceAxes` | the ten labelled axes over a ring with a golden element; squared norms and squared inner products; the Kneser incidence; the three rotation generators and their label permutations | face-axis geometry of HARM-1 |
-| `RelativeConicArcs.SphericalMomentFunctional` | `N` and `M`, the integration-by-parts recursion, uniqueness, orthogonal invariance, the sphere relation, and `N(p q) = p(d) q` for harmonic `p` | the analytic input of both rows, modulo the identification above |
-| `RelativeConicArcs.ZonalHarmonicDegreeSix` | the degree-six zonal harmonic, its harmonicity, and `Z_u(d) Z_v = 10395 P_6(u.v)` | spherical addition theorem of HARM-1 |
+| `RelativeConicArcs.SphericalMomentFunctional` | `N` and `M`, the integration-by-parts recursion, uniqueness, orthogonal invariance, the sphere relation, and the two apolar clauses for harmonic `p`: vanishing against lower degree, and `N(p (w.x)^d) = d! p(w)` | landed; the analytic input of both rows, modulo the identification above |
+| `RelativeConicArcs.ZonalHarmonicDegreeSix` | the degree-six zonal harmonic, its homogeneity, its value at a unit vector, its harmonicity, and `N(Z_u Z_v) = 10395 P_6(u.v)` with `M(Z_u Z_v) = P_6(u.v)/13` | landed; spherical addition theorem of HARM-1 |
 | `RelativeConicArcs.FaceAxisHarmonicGram` | the ten zonal harmonics, `G = K/13`, the three eigenvalues, injectivity | the Gram half of HARM-1 |
 | `RelativeConicArcs.AlternatingComparisonLine` | the commutant computation, the identification of an equivariant comparison with a multiple of the pair-sum map, the construction of the coordinate representative that identification needs, and the `sigma_3`-normalized uniqueness | abstract `A5` comparison of HARM-1 |
 | `RelativeConicArcs.SphericalCubicRestriction` | `M(F_y^2) = (140/351) sum y_i^2` and `M(F_y^3) = -784000/1247103 sigma_3(y)` on the sum-zero module, with the marked values `2800/351` and `-15680000/1247103` | HARM-2, and the manuscript's quadratic identity |

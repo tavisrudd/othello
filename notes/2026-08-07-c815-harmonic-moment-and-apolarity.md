@@ -197,17 +197,29 @@ lean/scripts/guarded-lean RelativeConicArcs/ZonalHarmonicDegreeSix.lean
 ```
 
 Single-file elaboration of the second module requires a compiled artifact for
-the first, which was produced with
+the first. An initial attempt to produce it reported
+`built RelativeConicArcs.SphericalMomentFunctional` and then returned `refused`
+from its closing quiet check, because a Lean build owned by another lane was live
+in the shared tree at the time.
+
+Both modules were subsequently built through Lake, after that other build
+finished, with
 
 ```sh
-lean/scripts/lean-build-queue.py build RelativeConicArcs.SphericalMomentFunctional --cores 20-23
+lean/scripts/lean-build-queue.py build RelativeConicArcs.ZonalHarmonicDegreeSix --cores 20-23
 ```
 
-That command reported `built RelativeConicArcs.SphericalMomentFunctional` and
-then returned `refused` from its closing quiet check, because a foreign Lean
-build owned by another lane was live in the shared tree at the time. The target
-artifact was produced; the refusal concerns the shared-tree gate, not this
-module. Neither module has been added to any gate, so no gate build was run.
+which reported `state: success`, `built RelativeConicArcs.ZonalHarmonicDegreeSix`
+and `gate-passed <aggregate>` in run directory
+`~/.cache/othello-lean-build/run-20260808-032547-4af15fc0`. Neither module has
+been added to any gate, so no paper gate build was run.
+
+One docstring was corrected after that build and the first module re-elaborated
+clean: the divisor `(d + 1)‼` of `normalizedMean` had been described as the
+Gaussian moment of the degree-`d` power of a unit linear form, which is
+`(d - 1)‼`. The two properties that do fix the divisor — that the constant one
+has normalized mean one, and that `normalizedMean_quadric_mul` holds — replace
+that sentence in both the module header and the definition's docstring.
 
 The axiom footprint was checked by temporarily appending `#print axioms` lines to
 the second module and elaborating it. Every one of

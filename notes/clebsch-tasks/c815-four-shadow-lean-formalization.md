@@ -174,11 +174,11 @@ certificate is `notes/2026-08-07-c815-harmonic-realization-checks.py` with outpu
 algebra: the normalized spherical average is introduced as an explicitly defined
 moment functional, its orthogonal invariance follows from the integration-by-parts
 recursion together with uniqueness, and the addition theorem becomes the apolar
-identity `Z_u(∂) Z_v = 10395 P₆(u·v)`.  One classical statement stays outside the
+identity `N(Z_u Z_v) = 10395 P₆(u·v)`.  One classical statement stays outside the
 route and is deliberately isolated in a module of its own: that the defined
 functional is the surface integral.
 
-Two of the six planned modules are landed and elaborate without errors or
+Four of the six planned modules are landed and elaborate without errors or
 warnings.  `RelativeConicArcs.IcosahedralFaceAxes` carries the labelled ten-axis
 configuration over `ℤ√5` and transports it along a chosen square root of five to
 any commutative ring: every axis has the same length and the square of the inner
@@ -193,11 +193,26 @@ on the sum-zero submodule, the comparison theorem identifying every equivariant
 comparison with a multiple of the pair-sum map, and the normalization forcing the
 scalar's cube to be one and hence the scalar to be one over an ordered field.
 
-Still open in the two rows: the moment functional and its invariance, the zonal
-harmonic and the apolar addition theorem, the Gram matrix with its three
-eigenvalues and injectivity, the spherical cubic restriction, the existence of the
-coordinate representative assumed by the comparison theorem, and the measure-theoretic
-identification named above.  Neither new module is on a gate yet.
+`RelativeConicArcs.SphericalMomentFunctional` carries the moment functional
+itself: the monomial definition, the integration-by-parts recursion
+`N(xᵢ p) = N(∂ᵢ p)`, the uniqueness that recursion and `N(1) = 1` force,
+orthogonal invariance read off that uniqueness, the sphere relation
+`N((x·x) p) = (d + 3) N(p)`, and the two apolar clauses for a harmonic `p` of
+degree `d` — vanishing against any form of degree below `d`, and
+`N(p (w·x)^d) = d! p(w)` — by one induction out of Euler's identity.
+`RelativeConicArcs.ZonalHarmonicDegreeSix` carries the degree-six zonal form,
+its homogeneity, its value `P₆(u·v)` at a unit vector, its harmonicity for a
+unit axis, and the addition theorem `N(Z_u Z_v) = 10395 P₆(u·v)` with normalized
+form `M(Z_u Z_v) = P₆(u·v)/13`.  Neither the general apolar identity nor any
+apolar differential operator is defined; the manuscript's proof consumes only the
+two clauses.  Report:
+`notes/2026-08-07-c815-harmonic-moment-and-apolarity.md`.
+
+Still open in the two rows: the Gram matrix of the ten face-axis zonal forms with
+its three eigenvalues and injectivity, the spherical cubic restriction, and the
+measure-theoretic identification named above.  The three assertions of the
+manuscript section that no inventory row covers are owned by C884.  None of the
+four modules is on a gate yet.
 
 ## Evidence source
 

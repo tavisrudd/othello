@@ -424,9 +424,11 @@ formalizing spherical harmonic theory: the normalized spherical average is
 introduced as an explicitly defined moment functional on polynomials in three
 variables, its invariance under orthogonal substitution follows from the
 integration-by-parts recursion together with the uniqueness that recursion
-forces, the apolar identity `N(p q) = p(∂) q` holds whenever `p` is harmonic and
-`q` has the same degree, and the spherical addition theorem for the degree-six
-zonal harmonics is then the elementary computation `Z_u(∂) Z_v = 10395 P₆(u·v)`.
+forces, apolarity supplies the two clauses that the manuscript's proof actually
+consumes for a harmonic `p` of degree `d` — that `N(p q)` vanishes when `q` has
+degree below `d`, and that `N(p (w·x)^d) = d! p(w)` — and the spherical addition
+theorem for the degree-six zonal harmonics follows from them in a few lines as
+`N(Z_u Z_v) = 10395 P₆(u·v)`.
 Exactly one classical statement stays outside — that the defined functional is
 the surface integral — and it is confined to a module of its own.  The route,
 its six-module plan, and an exact-arithmetic certificate for every constant it
@@ -436,7 +438,7 @@ certificate also verifies the target identity
 marked vector, so the manuscript's invariant-line step is a convenience rather
 than a necessity.
 
-Two of the six modules are landed and elaborate without errors or warnings.
+Four of the six modules are landed and elaborate without errors or warnings.
 `RelativeConicArcs.IcosahedralFaceAxes` proves that the displayed labelling of
 the ten icosahedral face axes is geometric — equal lengths, and the square of the
 inner product of two distinct axes taking one value on disjoint label pairs and
@@ -449,13 +451,30 @@ commutant on the coordinate module, and concludes that every equivariant
 comparison to the Petersen coefficient module is a multiple of the pair-sum map
 whose scalar is one once the sum of cubes is preserved; the coordinate
 representative that conclusion needs is constructed there, not assumed.  A cold
-referee accepted the route, the certificate and both modules with repairs, all
-applied, and recorded that three assertions of the manuscript section — the
+referee accepted the route, the certificate and those two modules with repairs,
+all applied, and recorded that three assertions of the manuscript section — the
 covariant obstruction, the non-arithmetic content of the Gaunt factorization,
-and the Condon--Shortley remark — are owned by no row of the gap inventory and
-await allocation.  Review:
-`notes/2026-08-07-c815-harmonic-route-referee-review.md`.  Neither module is on a
-gate yet.
+and the Condon--Shortley remark — are owned by no row of the gap inventory.
+Review: `notes/2026-08-07-c815-harmonic-route-referee-review.md`.  Those three
+are now owned by C884, which runs after the harmonic rows close and before the
+section is promoted.
+
+The analysis is gone.  `RelativeConicArcs.SphericalMomentFunctional` defines the
+moment functional by its monomial formula, proves the integration-by-parts
+recursion `N(xᵢ p) = N(∂ᵢ p)`, proves that the recursion together with `N(1) = 1`
+determines the functional, and reads invariance under an orthogonal substitution
+off that uniqueness; it also proves the sphere relation
+`N((x·x) p) = (d + 3) N(p)` and the two apolar clauses, both by one induction on
+the degree out of Euler's identity.  `RelativeConicArcs.ZonalHarmonicDegreeSix`
+defines the degree-six zonal form, proves it homogeneous, evaluates it at a unit
+vector as `P₆` of the inner product, proves it harmonic for a unit axis, and
+concludes `N(Z_u Z_v) = 10395 P₆(u·v)` with normalized form
+`M(Z_u Z_v) = P₆(u·v)/13`, which is the manuscript's `G = K/13`.  The route is
+shorter than the scope note planned: no apolar differential operator is defined
+and the four Leibniz evaluations are unused, because the three terms of `Z_v`
+carrying `x·x` die by the sphere relation followed by the lower-degree clause.
+Report: `notes/2026-08-07-c815-harmonic-moment-and-apolarity.md`.  None of the
+four modules is on a gate yet.
 
 The C815 working tree is clean.  `AlignedTwoGraph.lean`,
 `PetersenHarmonicKernel.lean` and `Gates/ClebschPassages.lean` remain shared
