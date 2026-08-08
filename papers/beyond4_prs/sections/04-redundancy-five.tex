@@ -348,13 +348,14 @@ one, so Aubry--Perret confines $\#Y_f(\F_q)$ to
 $q+1\pm2\sqrt q$ \cite[p.~468]{AubryPerret1995}.
 \end{proof}
 
-The main term $(q+1)/6$ is the $S_3$ splitting density.  A completely
-split fibre is one whose Frobenius class is the identity, of density
-$1/|S_3|=1/6$ among the $q+1$ fibres, in the sense of the
-factorization-type correspondence of \cite[Thm.~3.6]{Wang2026}.
-Corollary~\ref{cor:r5-equidistribution} makes that quantitative: split
-members occur with the expected density $1/6$ up to a Weil-scale error
-and a bounded branch correction.  Split-freeness is the extreme
+The main term $(q+1)/6$ is the expected $S_3$ splitting density.  A
+completely split fibre is one whose Frobenius class is the identity, and
+that class has density $1/|S_3|=1/6$ on the unramified locus, by the
+factorization-type correspondence of \cite[Thm.~3.6]{Wang2026}; so
+$(q+1)/6$ is a Chebotarev main term rather than a count of fibres.
+Corollary~\ref{cor:r5-equidistribution} makes it quantitative: split
+members occur with that expected density up to a Weil-scale error and a
+bounded ramification correction.  Split-freeness is the extreme
 small-field case in which the lower bound has turned nonpositive, which
 is why the exceptional fields are small ones.  Lemma~\ref{lem:s3}
 records only the sign of this statement.  We claim the density only for
@@ -403,20 +404,20 @@ only admissible value left is $12$, and by Lemma~\ref{lem:r5-branch}
 that value is attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
-Proposition~\ref{prop:r5-count} is a characteristic-uniform counting
-identity, and in characteristic other than two and three its generic
-specialization is an incidence count in the twisted-cubic line
-literature.  When $W_f$
-misses the twisted cubic, so that $d_3=0$, and
-$\operatorname{char}\F_q\neq2,3$, the quantity $d_2$ is the invariant
-$\eta_L$ attached to the binary quartic of the line and $\#Y_f(\F_q)$
-is the point count of the associated elliptic curve, and
-\eqref{eq:r5-count} becomes
+Proposition~\ref{prop:r5-count} is a counting identity valid in every
+characteristic, and the quantitative splitting law of
+Corollary~\ref{cor:r5-equidistribution} follows from it directly.  In
+the tame range it is equivalent to an incidence count in the
+twisted-cubic line literature.  Precisely: when $W_f$ misses the twisted
+cubic, so that $d_3=0$, and $\operatorname{char}\F_q\neq2,3$, the
+quantity $d_2$ is the invariant $\eta_L$ attached to the binary quartic
+of the line and $\#Y_f(\F_q)$ is the point count of the associated
+elliptic curve, so that \eqref{eq:r5-count} reads
 \[
        N_f=\frac{\#E_L(\F_q)-3\eta_L}{6},
 \]
-which is the incidence count of \cite{KaipaPradhan2025}.  We cite it in
-the form derived in their proof, namely
+which is the incidence count of \cite{KaipaPradhan2025}.  That count
+should be taken in the form derived in their proof, namely
 $|S\cap\mathcal O_3|=(\nu_L-\eta_L)/3$ together with
 $\nu_L=(\#E_L(\F_q)-\eta_L)/2$
 \cite[Prop.~4.5(3) and Thm.~5.1]{KaipaPradhan2025}; the denominator
