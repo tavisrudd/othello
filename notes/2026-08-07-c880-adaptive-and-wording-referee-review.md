@@ -564,3 +564,188 @@ Not checked, as before: the primary literature behind the citations, the
 separation lane's own certificates, and a LaTeX build of the drafts.
 
 Unfixed or newly found MAJOR findings: **none**.
+
+---
+
+# Third pass, 2026-08-07 — the promoted text read as published manuscript prose (commit 372ad966)
+
+Both earlier passes stand unchanged above. This pass reads the promoted
+material in place — `sections/05-golden-operator.tex` from the subsection
+"Reconstructing the signing" through the literature paragraphs, the
+verification-section addition, the new bibliography entries, the applied
+`OPER-4` ledger cells, and pages 16–19 of the built PDF — as a journal
+referee of the paper would, cold.
+
+## Third-pass verdict
+
+The promotion is faithful to the reviewed drafts and mechanically clean:
+every cross-reference resolves, no bibliography key is duplicated, the five
+new entries are harmonized to the file's conventions, numbering is
+label-based throughout so the two new remarks shift nothing, and the built
+pages read without float or overflow trouble. But reading the section cold
+exposes two problems that the draft-stage reviews could not see, both
+MAJOR as manuscript prose: the theorem's statement now contains a sharpness
+clause its printed proof never proves or defers, and the remark asserts the
+exact adaptive count \(\binom n2+n-4\) — with the bootstrap constant folded
+into "seven tests buy five of them" — on evidence that is in `notes/`, not in
+the paper, while the verification section flatly says the remark's query
+bounds "are proved there." Both are repairable with a few sentences; neither
+touches a true mathematical claim.
+
+## MAJOR findings
+
+### THIRD-PASS MAJOR 1 — the theorem's sharpness clause is not proved by its proof
+
+**Where.** `sections/05-golden-operator.tex` lines 233–234: "If \(|V|\geq7\),
+then \(\mathcal A(\tau)\) determines \(\tau\) up to complement, and seven is
+the least bound with this property." The proof (lines 252–356) proves only
+the first clause and ends without addressing or deferring the second; the
+only proof of minimality is Remark 5.4 (`rem:six-point-witness`, lines
+411–426), which arrives after the unrelated page-long Remark 5.3 and is never
+pointed to from the theorem or its proof. (The verification section even
+says, correctly and damningly, that the six-point pair "is not … used in the
+proof of Theorem~\ref{thm:aligned-faithfulness}".) A referee who reads
+"Proof. … ∎" will note that a clause of the statement was never established.
+
+**Why it happened.** The wording file offered the strengthened statement as
+an option "if Draft 3 is taken"; Draft 3 was taken, but nothing was added to
+connect the proof to the witness.
+
+**Repair (two small edits, recommended).** (i) End the proof — or follow it
+immediately — with one sentence: "Minimality of the bound seven is witnessed
+by the six-point pair of Remark~\ref{rem:six-point-witness}." (ii) Swap the
+two remarks so the sharpness witness directly follows the proof and the
+query-count remark follows it; this also restores the original design in
+which the paragraph "The same statement in principal minors" reads as the
+continuation of the query-count remark. Alternative repair: revert the
+statement to its unstrengthened form (the wording file's default) and let
+Remark 5.4 carry sharpness alone.
+
+### THIRD-PASS MAJOR 2 — the exact adaptive count is asserted without proof or evidence trail, and the verification section claims one exists
+
+**Where.** `sections/05-golden-operator.tex` lines 390–398: "for \(n\geq19\)
+such a decoder does better than any fixed family can: reading the two-graph
+on seven points, and then adding one point at a time, costs at most
+\(\binom n2+n-4\) tests. … the whole cost of adding a point is the cost of
+its first two edges, and seven tests buy five of them." And
+`sections/08-verification.tex` lines 72–75: "the query bounds of
+Remark~\ref{rem:alignment-query-count} are proved there as well."
+
+**What is wrong.** The two nonadaptive lower bounds in the remark are indeed
+proved inside it. The adaptive count is not, and cannot be reconstructed
+from the remark's own sketch: the sketch never bounds the cost of "reading
+the two-graph on seven points", never justifies the bootstrap constant in
+"seven tests buy five of them" (an exact minimax computation over \(2^{10}\)
+helper configurations), and suppresses the monochromatic exception whose
+\(+2\) is the difference between the derivable \(\binom n2+n-6\)-shape and
+the printed \(\binom n2+n-4\). The attachment mechanism sentence is also one
+half-step short of a proof: it does not say that with two known edges one of
+its two cases always occurs. The constants live in
+`notes/2026-08-07-c880-adaptive-decoder.md` and its certificates, which were
+deliberately not migrated into the paper's `verification` directory — so the
+paper asserts an exact quantitative claim with no proof in the text, no
+citation, no artifact, and a verification section that says "proved there."
+This is precisely the trust-boundary discipline the paper is otherwise
+scrupulous about (style guide: say whether a claim is proved, certificate-
+checked, or trusted). The mathematics itself is sound — I verified it in the
+second pass — but a journal referee cannot know that from the paper.
+
+**Repair, choose one.**
+(a) *Self-contained (recommended if the artifact migration is unwanted).*
+Weaken to what the paper's own content proves and add the two missing
+half-sentences: the faithfulness theorem itself gives a bounded bootstrap
+(the twenty tests through a new point inside a seven-point set determine its
+five edges outright, since the fifteen tests avoiding it are already known),
+and with two known edges one of the two decided-condition cases always
+occurs, so every further edge costs one test. That yields an in-text-provable
+"costs \(\binom n2+O(n)\) tests — the coherence restriction is free to
+leading order" and drops the exact \(n-4\) and the \(n\ge19\) threshold.
+Adjust the 08-verification sentence to match.
+(b) *Keep the constants.* Keep \(\binom n2+n-4\) and \(n\ge19\), state their
+trust boundary ("the bootstrap constant is a certificate-checked exact
+minimax computation"), migrate the C880 generator and certificates into
+`papers/clebsch-passages/verification/` with the manifest updated (the
+deferred half of Draft 7), and change the 08-verification sentence from
+"proved there" to name the certificate-checked step. Until that migration,
+(b) is not available.
+
+## MINOR findings
+
+1. **"for every family of \(k\) tests that determines the two-graph"**
+   (`05-golden-operator.tex` line 388): read literally the set is empty — no
+   family determines the two-graph exactly, alignment data being
+   complement-invariant. Add "up to complement". Four words; a referee will
+   mark it.
+2. **The order-three telling is duplicated in the built text** (first-pass
+   NIT 4, now live): lines 365–368 ("each of which is twice a triangle sign
+   and so returns the two-graph outright") against lines 431–435 ("a
+   \(3\times3\) principal minor is twice the triangle sign, so the full list
+   … reconstruction up to switching is immediate"), one page apart. The
+   principal-minors paragraph's clause should go — its \(1\times1\)/
+   \(2\times2\) content is not in the remark and stays — compressed to "and
+   the third-order minors return the two-graph outright
+   (Remark~\ref{rem:alignment-query-count})".
+3. **\(H(1/4)\) is never defined** (line 385): the display divides by the
+   binary entropy of a quarter, and no definition of \(H\) appears anywhere
+   in the paper. Add a one-clause gloss at first use, e.g. "where
+   \(H(p)=-p\log_2p-(1-p)\log_2(1-p)\) is the binary entropy".
+
+## NITs
+
+1. Line 386: the chain "\(\frac{\binom{n-1}2-1}{H(1/4)}=1.2326(\cdots)\)"
+   asserts an equality that is false (\(1/H(1/4)=1.232623\ldots\) is
+   irrational); the wording file's own note defends only the *inequality* as
+   printed. Write "\(\ge1.2326(\cdots)\)" or "\(=1.2326\ldots\)".
+2. Line 388–389: "Against \(3n^2-23n+45\) the ratio tends to \(4.87\)" —
+   name the ratio ("the ratio of the exhibited count to this floor tends
+   to \(4.87\)").
+3. The remark-order swap of MAJOR 1's repair also closes the small seam that
+   Remark 5.4 currently interrupts the intended continuation from Remark 5.3
+   into "The same statement in principal minors"; no separate edit needed if
+   the swap is done.
+
+## The coordinator's specific questions
+
+**Does anything in the paper depend on the artifact migration having
+happened?** No. The withheld pieces (Draft 6 and Draft 7's second sentence)
+are exactly the ones that promise `verification`-directory artifacts, and
+nothing promoted refers to that directory for the new material — the
+08-verification addition says "proved in the text", which is the opposite
+problem (THIRD-PASS MAJOR 2), not a dangling dependence.
+
+**Was the page re-pin (29 → 30) the right call?** Yes. The gate is a
+determinism and staleness check, not a length budget; the paper grew by
+roughly a page of deliberate mathematical content, the tracked PDF was
+refreshed through the gate's own `--update` path, the re-pin landed in the
+same commit as the content it reflects, and the gate passes warning-free.
+Cutting mathematics to hold a pinned page count would invert the gate's
+purpose. (If MAJOR 2's repair (a) is taken the paper may drop back to 29
+pages, in which case the pin moves again with that commit — that is the
+gate working as designed.)
+
+## Third-pass verification record
+
+Verified: the promoted text against the reviewed drafts (faithful, including
+the addendum fold-in and all second-pass repairs); every claim of Remark 5.3
+against the reports and my own recomputations (the two lower bounds are
+proved in-remark; the \(n\ge19\) arithmetic is checkable from the displayed
+quantities granted the count; the count itself is true but unevidenced in
+the paper — MAJOR 2); the six-point witness (re-verified by hand in pass
+one) now correctly discharging line 443's "six are not"; label resolution
+(`rem:six-point-witness` cited at 05:444 and 08:73, `rem:alignment-query-count`
+at 08:74, both defined once); bibliography (no duplicate `\bibitem` keys, all
+five new keys cited in 05, `thebibliography{99}`, journals spelled out and
+DOIs `\href`-wrapped per the earlier NITs); no hard-coded theorem or remark
+numbers anywhere, so the counter shift from two new remarks breaks nothing;
+pages 16–19 of the tracked PDF via `pdftotext` (theorem and proof on 16–17,
+Remark 5.3 ending page 18, Remark 5.4 and the principal-minors paragraph on
+19; no floats involved, no visible display breakage); the applied `OPER-4`
+cells (both replacement cells present with the adaptive clause and the
+audit-owned Seidel-specialization credit) — and the manuscript's new prose
+stays inside that boundary: no "first" or "new", no speedup claim against
+any named algorithm, Kummerfeld–Ramsey explicitly "not compared here", and
+the exact adaptive count is a sharper statement of a row-listed paper-owned
+item. Not done, per boundaries: no rebuild of the PDF and no run of the
+release gate (the coordinator's reported gate output "30 pages,
+warning-free" is taken on trust; I would want one clean rebuild after the
+MAJOR repairs land).
