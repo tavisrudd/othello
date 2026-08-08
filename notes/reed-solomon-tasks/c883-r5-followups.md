@@ -106,6 +106,10 @@ the exact shape already formalized by
   \((q+1-2\sqrt q-12)/6\le N_f\le(q+1+2\sqrt q)/6\).
 - `cor:r5-forced` — for odd \(17\le q\le19\), the same inputs force
   \(\#Y_f=12\), \(d_2=4\), \(d_3=0\).
+- `cor:r5-binary-shallow` — with the sharper characteristic-two budget \(d_2+d_3\le2\), a
+  split-free fibre square has at most six points, so no binary field with \(q\ge16\) admits
+  a split-free \(S_3\) pencil.  The Lean `finiteBridgeFieldOrders` list should then record
+  that \(q=16\) is a regression check rather than a logical dependency.
 
 Both are pure integer arithmetic over the existing structure.  Leaving them as "no direct
 declaration" while their siblings are kernel-checked is an inconsistency in the statement

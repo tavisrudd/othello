@@ -341,16 +341,33 @@ that region gives $12$, attained only at $(d_2,d_3)=(4,0)$.
 \begin{corollary}[Split members of an $S_3$ pencil]\label{cor:r5-equidistribution}
 If $\phi_f$ has geometric monodromy $S_3$, then
 \[
- \frac{q+1-2\sqrt q-12}{6}\;\leq\;N_f\;\leq\;\frac{q+1+2\sqrt q}{6}.
+ \frac{q+1-2\sqrt q-B}{6}\;\leq\;N_f\;\leq\;\frac{q+1+2\sqrt q}{6},
 \]
+where $B=12$, and $B=6$ when $\operatorname{char}\F_q=2$.
 \end{corollary}
 
 \begin{proof}
 Proposition~\ref{prop:r5-count} gives $6N_f=\#Y_f(\F_q)-3d_2-d_3$, and
-Lemma~\ref{lem:r5-branch} bounds $3d_2+d_3$ between $0$ and $12$.  The
-$S_3$ hypothesis makes $Y_f$ geometrically integral of arithmetic genus
-one, so Aubry--Perret confines $\#Y_f(\F_q)$ to
-$q+1\pm2\sqrt q$ \cite[p.~468]{AubryPerret1995}.
+Lemma~\ref{lem:r5-branch} bounds $3d_2+d_3$ above by $12$ in general and
+by $6$ in characteristic two, where $d_2+d_3\leq2$; it is bounded below
+by $0$ in every characteristic.  The $S_3$ hypothesis makes $Y_f$
+geometrically integral of arithmetic genus one, so Aubry--Perret
+confines $\#Y_f(\F_q)$ to $q+1\pm2\sqrt q$
+\cite[p.~468]{AubryPerret1995}.
+\end{proof}
+
+\begin{corollary}[Binary fields need no certificate above $q=8$]
+\label{cor:r5-binary-shallow}
+If $\operatorname{char}\F_q=2$ and $\phi_f$ has geometric monodromy
+$S_3$, then $f$ is shallow for every $q\geq16$.
+\end{corollary}
+
+\begin{proof}
+A split-free $f$ has $\#Y_f(\F_q)=3d_2+d_3\leq6$ by
+Lemma~\ref{lem:r5-branch}, while Aubry--Perret gives
+$\#Y_f(\F_q)\geq q+1-2\sqrt q$.  For $q=16$ the latter is $9$, and it
+increases with $q$, so no binary field with $q\geq16$ admits a split-free
+$S_3$ pencil.
 \end{proof}
 
 The main term $(q+1)/6$ is the expected $S_3$ splitting density.  A
@@ -446,12 +463,16 @@ supplement.
 
 \begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}
 The preceding cases exhaust every redundancy-five pencil for
-$q\geq20$.  Certificate R5 closes exactly
+$q\geq20$, and in characteristic two for $q\geq16$ by
+Corollary~\ref{cor:r5-binary-shallow}.  The finite residue is therefore
 \[
-       q\in\{7,8,9,11,13,16,17,19\}.
+       q\in\{7,8,9,11,13,17,19\},
 \]
-It finds sporadic $S_3$-stratum orbits exactly at
-$q=7,8,9,11,13,17,19$ and none at $q=16$.
+which Certificate R5 closes.  The certificate additionally covers
+$q=16$, where it finds no sporadic orbit; that field is no longer
+logically certificate-dependent, and the computation is retained as an
+independent regression check.  Sporadic $S_3$-stratum orbits occur
+exactly at $q=7,8,9,11,13,17,19$.
 \end{proposition}
 
 \begin{proof}
