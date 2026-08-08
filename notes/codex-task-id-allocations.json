@@ -2852,8 +2852,17 @@
       "last": 883,
       "purpose": "Redundancy-five follow-ups from the Kaipa and Tao passes: Lean sync, characteristic-two count, error distribution, sporadic invariants, Hankel-Plucker covariant, higher-genus generalization",
       "sequence": 317
+    },
+    {
+      "count": 1,
+      "first": 884,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 884,
+      "purpose": "Paper III harmonic section: own the covariant obstruction, Gaunt/Wigner factorization, and Condon-Shortley conversion paragraphs",
+      "sequence": 318
     }
   ],
-  "next_id": 884,
+  "next_id": 885,
   "schema": "codex-task-id-allocations-v1"
 }
