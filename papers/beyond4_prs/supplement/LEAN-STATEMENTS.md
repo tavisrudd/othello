@@ -8,7 +8,16 @@ Lean-level trust. The aggregate
 gate imports exactly the foundation, redundancy-five, polar-induction and
 redundancy-six/seven, and stable-component gates, together with the
 `PRSUniformCoveringRadius` arithmetic and literature adapter.
-**Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+**Withdrawn.**  The paper draws no quantum consequence from the balanced `q=8`
+row.  A split-free direction is not a one-column MDS extension: an extension
+needs a syndrome outside the span of every `r-1` parity-check columns, whereas
+split-freeness supplies only `r-2`, and Dür's equivalence makes covering radius
+`r-1` the same statement as completeness of the normal rational curve's arc, so
+no such extension exists at these parameters.  The manuscript states this in the
+remark "No one-column MDS extension at this radius" in the redundancy-five
+section.  The formal modules below are retained as conditional developments
+whose extension hypothesis is unsatisfied here; nothing in the manuscript
+depends on them.
 
 The retained balanced-quantum development uses the separate cross-paper closure
 `RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and audit
