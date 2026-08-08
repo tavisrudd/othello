@@ -231,19 +231,21 @@ for both, with attributions.
 \begin{theorem}[Aligned-design faithfulness]
 \label{thm:aligned-faithfulness}
 If \(|V|\geq7\), then \(\mathcal A(\tau)\) determines \(\tau\) up to
-complement.
+complement, and seven is the least bound with this property.
 
 For a symmetric conference matrix of order \(n\geq10\), its marked family of
-principal four-subsets with determinant \(-3\) therefore determines its
-signing up to diagonal switching and global negation.  After one aligned
-four-set \(Q\) is known, the
+principal four-subsets with determinant \(-3\), which is the design of
+Greaves and Suda \cite[Table~1 and Example~2.3]{GreavesSuda}, therefore
+determines its signing up to diagonal switching and global negation.  After
+one aligned four-set \(Q\) is known, the
 \[
  1+4(n-4)+6\binom{n-4}{2}=3n^2-23n+45
 \]
 tests on four-sets meeting \(Q\) in at least two points suffice, and the
-decoder in the proof uses exactly this many.
-An aligned anchor is found deterministically with at most twenty tests, so
-the complete marked reconstruction uses \(O(n^2)\) selected determinants.
+decoder in the proof uses exactly this many.  An aligned anchor is found
+deterministically with at most twenty tests.  Each of those queries reads one
+bit, whether a single fourth-order principal minor equals \(-3\); the
+reconstruction consumes no minor value and no minor of any other order.
 One calibrated triangle product selects between the two global orientations.
 \end{theorem}
 
@@ -353,6 +355,76 @@ remaining complement sends \(C\) to \(-C\), and one triangle product fixes
 that orientation.
 \end{proof}
 
+\begin{remark}[What the query count is measured against]
+\label{rem:alignment-query-count}
+For a Seidel matrix this is the principal-minor assignment problem, whose
+identifiability class is similarity by a diagonal matrix of signs
+\cite[Thm.~6]{HoltzSturmfels}, that is, switching.  Against an oracle
+returning minor \emph{values} the problem is solved in \(O(n^2)\) queries and
+that count is asymptotically optimal
+\cite{RisingKuleszaTaskar,BrunelUrschel}; for a Seidel matrix the cycle-basis
+algorithm needs only the \(\binom n2-n+1\) principal minors of order three
+\cite{BrunelSignedDPP}, each of which is twice a triangle sign and so returns
+the two-graph outright.  The count above improves on none of that and is not
+offered as an algorithm.  It is what a decoder pays when it is given only the
+fourth-order indicator, which is invariant under global negation as the
+order-three data is not.
+
+Two lower bounds hold for that data.  Two-graphs on \(n\) points form an
+\(\mathbf F_2\)-space of dimension \(\binom n2-n+1\); each test returns one
+bit and determination up to complement allows fibres of size two, so any
+family of tests --- and any decision tree, by its leaf count --- has at least
+\(\binom n2-n\) members.  Families fixed in advance obey a stronger bound,
+because the answers are biased.  A uniformly random two-graph restricts to a
+uniformly random two-graph on any four points, and two of those eight are
+aligned, so every alignment test answers yes with probability exactly
+\(1/4\).  The information-theoretic bound of combinatorial search theory,
+subadditivity of entropy applied to the entropy \(\binom{n-1}{2}-1\) of the
+complement pair, which is what the answers determine, gives
+\[
+ k\;\ge\;\frac{\binom{n-1}{2}-1}{H(1/4)}
+ \;=\;1.2326\Bigl(\tbinom{n-1}{2}-1\Bigr)\;\approx\;0.616\,n^2
+\]
+for every family of \(k\) tests that determines the two-graph.  Against
+\(3n^2-23n+45\) the ratio tends to \(4.87\), and the constant \(3\)
+is not known to be optimal.  The bound also does not apply to a decoder that
+chooses each test in the light of earlier answers, and for \(n\geq19\) such a
+decoder does better than any fixed family can: reading the two-graph on seven
+points, and then adding one point at a time, costs at most \(\binom n2+n-4\)
+tests.  Two known edges at a new point make every further edge cost one test,
+because a test one of whose two conditions is already decided --- known to
+hold, or known to agree with the other --- reads as a single bit; the whole
+cost of adding a point is the cost of its first two edges, and seven tests buy
+five of them.  So the price of the coherence restriction is a price of fixing
+the tests in advance: adaptively the fourth-order indicator matches the
+order-three minor values to leading order, both at \(n^2/2\).
+
+Tests indexed by four-sets occur elsewhere as a primitive observation.  The
+causal-clustering algorithm of Kummerfeld and Ramsey \cite{KummerfeldRamsey}
+decides one coherence bit per quartet of observed variables, up to
+\(\binom n4\) of them, each by a pair of statistical tests on sampled data.
+That bit reports whether covariance minors vanish under a one-factor
+measurement model, not whether four triple signs cohere, so the two counts
+measure different work and are not compared here.
+\end{remark}
+
+\begin{remark}[Seven points is sharp]
+\label{rem:six-point-witness}
+Six points do not suffice, and not only because a two-graph may have no
+aligned four-set at all.  Represent a two-graph on \(\{0,\dots,5\}\) by the
+unique graph in its switching class in which \(0\) is isolated, and take
+\[
+ G=\{12,\,15,\,24,\,25,\,35\},
+ \qquad
+ H=\{13,\,14,\,24,\,34,\,35\}.
+\]
+Both two-graphs have aligned family exactly
+\(\bigl\{\{0,1,2,5\},\{0,1,3,4\}\bigr\}\), and \(H\) is neither \(G\) nor its
+complement.  So \(\mathcal A\) does not determine a two-graph on six points up
+to complement, and the hypothesis \(|V|\ge7\) of
+Theorem~\ref{thm:aligned-faithfulness} cannot be weakened.
+\end{remark}
+
 \smallskip
 \noindent\emph{The same statement in principal minors.}\par
 For a Seidel matrix the theorem is a statement about principal minors, and it
@@ -362,12 +434,15 @@ problem: the \(1\times1\) minors vanish, the \(2\times2\) minors are all
 full list of third-order principal minors hands over every triangle product and
 reconstruction up to switching is immediate.  The theorem consults none of
 them.  Its data are the fourth-order principal minors, through
-\(\det C[Q]=3-2w(Q)\) below, and these are invariant under global negation, so
-they cannot distinguish \(C\) from \(-C\) and see each four-set only through
-the single bit \(\det C[Q]\in\{-3,5\}\).  The content is that this
-negation-invariant fourth-order data still determines the matrix up to exactly
-that ambiguity, that seven vertices are enough and six are not, and that a
-quadratic family of these determinants suffices.
+\(\det C[Q]=3-2w(Q)\) below; that these take only the two values \(-3\) and
+\(5\) is Greaves and Suda's Table~1, and the \(-3\) fibre is their design.
+They are invariant under global negation, so they cannot distinguish \(C\)
+from \(-C\) and see each four-set only through the single bit
+\(\det C[Q]\in\{-3,5\}\).  The content is that this negation-invariant
+fourth-order data still determines the matrix up to exactly that ambiguity,
+that seven vertices are enough and six are not by
+Remark~\ref{rem:six-point-witness}, and that a quadratic family of these
+determinants suffices.
 
 This theorem belongs to the reconstruction-up-to-complementation literature.
 On four vertices a two-graph has zero, two, or four triples, so equality of
@@ -378,7 +453,11 @@ four-local reconstruction theorem for ordinary graphs
 Pouzet and Si Kaddour prove that the least local size yielding eventual
 reconstruction is five \cite{PouzetHypergraphIsomorphy}.  The two-graph parity
 axiom therefore lowers that general threshold to four, with ambient order
-seven sharp.  The homogeneous-triple analysis of ordinary graphs
+seven sharp.  That sharpness is a separate statement from Dammak, Lopez,
+Pouzet, and Si Kaddour's: their \(v\ge7\) is the endpoint of the admissible
+range \(4\le k\le v-3\), and the sharpness they remark on is in \(k\), so no
+six-point failure follows from their work for either observable.
+The homogeneous-triple analysis of ordinary graphs
 \cite{PouzetHomogeneousTriples} supplies the one-anchor viewpoint; the
 away-from-anchor tests above remove its balanced-cut ambiguity.
 
