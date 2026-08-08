@@ -2888,8 +2888,17 @@
       "last": 887,
       "purpose": "Independently vet the external referee-style review of the published AME-LU rigidity paper, reproduce every mathematical and literature claim, and implement all validated manuscript/trust/mirror corrections",
       "sequence": 321
+    },
+    {
+      "count": 1,
+      "first": 888,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 888,
+      "purpose": "second external review validation and two-paper referee remediation",
+      "sequence": 322
     }
   ],
-  "next_id": 888,
+  "next_id": 889,
   "schema": "codex-task-id-allocations-v1"
 }
