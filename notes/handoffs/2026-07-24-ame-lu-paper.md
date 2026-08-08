@@ -10,6 +10,11 @@ Discovery companion:
 
 ## Current status
 
+**C890 is active (2026-08-08): formalize C787's exact-base relative
+intertwiner reduction.**  The theorem must distinguish the kernel-checked
+torsor/defect transport from C833's still-unformalized quantitative cleaning
+input, then enter the AME gate and trust audit without overstating coverage.
+
 **C889 closed (2026-08-08): the latent theorem chain is separated from the
 speculative programmes.**  The prime-field MDS--CSS LU-orbit theorem up to
 duality, its exact party-image criterion, the sharp high-distance conductor
