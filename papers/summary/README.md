@@ -66,7 +66,7 @@ or computational volume. Each headline is linked to the paper's public PDF.
 
 1. **Local-unitary equivalence of stabilizer AME states is necessarily local Clifford.** For every prime power q and m ≥ 2, a product-unitary intertwiner between stabilizer AME(2m,q) states is Clifford on every party, with the corresponding statement for the associated transversal code conversion. [Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
-2. **Projective Reed–Solomon deep holes are classified beyond redundancy four.** The paper gives exact classifications at redundancies five and six for every prime power q ≥ 7, then extends the classification through redundancy ten in explicit field ranges. At redundancy five the split members of the pencil are counted exactly, in every characteristic, by #Y = 6N + 3d₂ + d₃; that count fixes a splitting density of (q + 1)/6 up to Weil-scale error, drops the threshold for a split witness to q ≥ 20, and leaves only seven fields to a certificate. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
+2. **Projective Reed–Solomon deep holes are classified beyond redundancy four.** The paper gives exact deep-hole classifications at redundancies five and six for every prime power q ≥ 7, at redundancy seven for q ≥ 11 (with split-free syndrome directions classified for every q ≥ 7), and at redundancies eight, nine, and ten for q ≥ 43, 53, and 59, respectively. On the trivial-gcd separable redundancy-five stratum, #Y = 6N + 3d₂ + d₃ holds in every characteristic. It gives splitting density 1/6, hence the Chebotarev main term (q + 1)/6 with Weil-scale error, lowers the split-witness threshold to q ≥ 20, and leaves seven fields for the finite certificate. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
 
 3. **A universal secant-defect identity gives a quantitative lower bound for arcs avoiding a conic.** An exact identity with nonnegative remainder yields a general lower bound, a matching-design equality criterion, and deletion stability for prescribed-hole covering problems; the paper also settles several small fields exactly. [Arcs Complete Outside a Conic](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
 
@@ -102,8 +102,8 @@ released paper, a theorem of that kind together with the exact range it covers.
 | Clebsch III                        | The balanced exchange spectrum is the squared singular spectrum of the cut block                             | every symmetric conference matrix                                                 |
 | Clebsch III                        | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp                             | every two-graph on at least seven vertices                                        |
 | Arcs complete outside a conic      | The first two secant moments give an exact defect identity with nonnegative remainder                        | every finite projective plane, every prescribed hole set H                        |
-| Projective Reed–Solomon deep holes | Split-free syndrome directions, and deep holes where the covering-radius gate applies, are classified        | every q ≥ 7 at redundancies five to seven; explicit ranges through redundancy ten |
-| Projective Reed–Solomon deep holes | The pencil of a redundancy-five syndrome satisfies #Y = 6N + 3d₂ + d₃, counting split, double-root, and cube members | every field order and every characteristic, on the trivial-gcd separable stratum  |
+| Projective Reed–Solomon deep holes | Split-free syndrome directions—and deep holes wherever the covering-radius gate applies—are classified | R5–R6: deep holes for every q ≥ 7; R7: split-free for every q ≥ 7 and deep holes for q ≥ 11; R8–R10: deep holes for q ≥ 43, 53, and 59 |
+| Projective Reed–Solomon cubic pencils | On the trivial-gcd separable stratum, #Y = 6N + 3d₂ + d₃, where N, d₂, and d₃ count squarefree split members, rational-double-root members, and cubes | every field order and every characteristic |
 | Stabilizer AME rigidity            | Every product-unitary intertwiner between stabilizer AME(2m,q) states is Clifford on each party              | every prime power q = pᵉ and every m ≥ 2                                          |
 | MDS–CSS transversal groups         | The diagonal multiplier space has dimension zero or one, and its nullity fixes the transversal logical group | every length: all [2m,m,m+1]q MDS codes, group over odd prime fields              |
 | Golden six-mode interferometer     | Order six is the unique nontrivial order whose balanced exchange spectrum is cut-independent                 | every symmetric conference order                                                  |
@@ -303,28 +303,29 @@ is one instance of the equality case.
 **Standout result.** Exact projective Reed–Solomon deep-hole classifications
 extend to redundancies five and six for every prime power q ≥ 7, with further
 exact ranges through redundancy ten.  At redundancy five the split members of
-the pencil are counted exactly in every characteristic, which fixes their
-density, lowers the threshold for a split witness to q ≥ 20, and cuts the
-finite residue to seven fields.
+the pencil are counted exactly in every characteristic on the trivial-gcd
+separable stratum.  The count gives splitting density 1/6 and Chebotarev main
+term (q + 1)/6 with Weil-scale error, lowers the threshold for a split witness
+to q ≥ 20, and cuts the finite residue to seven fields.
 
-> *Abstract* We classify projective Reed–Solomon split-free syndrome directions from the first previously open case, redundancy five, through redundancy ten, and obtain deep-hole classifications wherever the covering-radius gate is available. A syndrome is split-free precisely when its two-row Hankel kernel contains no completely split squarefree form. Coherent polar contraction retains a removed root as a marker, allowing a lower split witness to lift without repetition.
+> *Abstract* We classify projective Reed–Solomon split-free syndrome directions, in the stated field ranges, from the first previously open case, redundancy five, through redundancy ten, and obtain deep-hole classifications wherever the covering-radius gate is available. A syndrome is split-free precisely when its two-row Hankel kernel contains no completely split squarefree form. At redundancy five, this kernel is a pencil of cubics. At higher redundancy, coherent polar contraction retains a removed root as a marker, allowing a lower split witness to lift without repetition.
 >
-> For every r ≥ 6, the reduced recursively contained locus is exactly the union of the catalecticant rank-two scheme and one maximal adjacent-zero Lucas carrier. Dense squarefree-marker contractions select one terminal component, while Pascal nesting merges all modular descendants into the maximal carrier. This geometric statement is unconditional. If the explicit pointed lower packages exist at every intermediate redundancy, then for q ≥ 6r − 15 + ⌊2√(6r − 17)⌋, every split-free syndrome lies in this carrier. Under the same hypothesis, when char Fq > r − 1, the Lucas carrier is empty; the radius theorem then gives exactly the tangent and conjugate-secant deep-hole families, with q(q + 1)²/2 projective directions.
+> The split members of the R5 pencil are counted exactly. On the trivial-gcd separable stratum, #Y_f(F_q) = 6N_f + 3d₂ + d₃, where N_f counts the completely split squarefree members, d₂ those with a rational double root, d₃ the perfect cubes, and Y_f is the off-diagonal fiber square. The proof counts rational roots fiber by fiber and uses no discriminant, so it holds in every characteristic. The identity class has splitting density 1/6, giving the Chebotarev main term (q + 1)/6; the identity bounds N_f two-sidedly around that main term at Weil scale, lowers the geometric threshold for a split witness to q ≥ 20, and in characteristic two leaves no split-free S₃ pencil once q ≥ 16. The finite bridge is therefore q ∈ {7, 8, 9, 11, 13, 17, 19}.
 >
-> At redundancy five the split members are counted exactly. On the trivial-gcd separable stratum, #Y_f(F_q) = 6N_f + 3d₂ + d₃, where N_f counts the completely split squarefree members of the pencil, d₂ those with a rational double root, d₃ the perfect cubes, and Y_f is the off-diagonal fibre square. The proof counts rational roots fibre by fibre and uses no discriminant, so it holds in every characteristic. It bounds N_f two-sidedly around the expected density (q + 1)/6 at Weil scale, lowers the geometric threshold for a split witness to q ≥ 20, and in characteristic two leaves no split-free S₃ pencil once q ≥ 16. The finite bridge is therefore the seven fields q ∈ {7, 8, 9, 11, 13, 17, 19}.
+> For every r ≥ 6, the reduced recursively contained locus is exactly the union of the catalecticant rank-two scheme and one maximal adjacent-zero Lucas carrier. Dense squarefree-marker contractions select one terminal component, while Pascal nesting merges all modular descendants into that carrier. This component theorem is unconditional. The finite-field escape statement is separate: if the explicit pointed lower packages exist at every intermediate redundancy, then q ≥ 6r − 15 + ⌊2√(6r − 17)⌋ forces every split-free syndrome into this carrier. Under the same hypothesis, when char F_q > r − 1, the Lucas carrier is empty; the radius theorem then leaves exactly the tangent and conjugate-secant deep-hole families, with q(q + 1)²/2 projective directions.
 >
-> We discharge these packages at the fixed levels. Redundancies five and six are classified for every q ≥ 7; redundancy seven has a complete split-free classification for every q ≥ 7, which is a deep-hole classification for q ≥ 11; and redundancies eight, nine, and ten have exact deep-hole classifications for q ≥ 43, 53, 59, respectively. Certificates close the bounded R5–R7 residues, the full degree-nine Lucas carrier at q = 16, 32, and the invariant block at q = 64. With these closures, a final-pair Artin–Schreier argument proves that at redundancy ten the full degree-nine Lucas carrier is shallow over every F₂ᵐ, m ≥ 4.
+> The required packages are discharged at the fixed levels. Redundancies five and six are classified for every q ≥ 7; redundancy seven has a complete split-free classification for every q ≥ 7, which is a deep-hole classification for q ≥ 11; and redundancies eight, nine, and ten have exact deep-hole classifications for q ≥ 43, 53, and 59, respectively. Certificates close the bounded R5–R7 residues, the full degree-nine Lucas carrier at q = 16, 32, and its invariant block at q = 64. A final-pair Artin–Schreier argument then proves that at redundancy ten the Hankel kernel of every point on the full degree-nine Lucas carrier contains a split squarefree form over F_(2^m), m ≥ 4.
 >
-**Delivers.** Exact classifications of the most misleading received words for
-a major family of error-correcting codes, extending well beyond the first few
+**Delivers.** Exact classifications of received words maximally distant from a
+major family of error-correcting codes, extending well beyond the first few
 understood cases.
 
 **Who cares.** Coding theorists working on Reed–Solomon codes, covering radius,
 and polynomial interpolation.
 
 **Why it matters.** “Deep holes” are maximally far from every codeword.  Their
-classification clarifies the geometry of decoding failure and provides a
-recursive way to organize many field sizes and redundancies.
+classification clarifies the codes' worst-case distance geometry and provides
+a recursive way to organize many field sizes and redundancies.
 
 ---
 
