@@ -85,6 +85,43 @@ an adjacent expert could reasonably interpret the object differently.
 Layering is not “dumbing down.” It exposes the route through the argument while
 leaving the technical content intact.
 
+### Two-track architecture
+
+A specialist paper may serve adjacent experts without making every page equally
+introductory. Give the adjacent expert a complete first-pass route through the
+ideas while preserving the exact proofs, exceptional cases, and audit layer
+required by specialists.
+
+- Distinguish four rhetorical levels: the problem, the governing mechanism, the
+  exact proof, and the verification boundary. Do not give them equal visual
+  weight.
+- Put a conceptual overview before an extended literature survey, dependency
+  ledger, or verification discussion. It should expose the chain of mathematical
+  objects and reductions in ordinary mathematical language.
+- Choose one model case that contains the later mechanism in miniature. State
+  explicitly which branch or scope it models; do not imply that every later
+  obstruction is identical.
+- When a main result combines an unconditional structural theorem with a
+  conditional finite-field or computational consequence, separate those logical
+  layers visibly.
+- Give each navigational device one job. A conceptual overview explains why the
+  argument works; a reading map identifies dependencies and safe skips; theorem
+  statements give exact mathematics; a verification section records trust.
+- Before a dense load-bearing proof, tell a first-pass reader which statements
+  and outputs to retain and which calculations may initially be skipped. The
+  skip must not hide a hypothesis, completeness argument, exceptional case, or
+  change of language.
+- When several levels repeat one mechanism, use a results-and-mechanisms table
+  with columns such as level, new obstruction, geometric mechanism, and closing
+  gate. Define every symbol and technical term before the table.
+- Use a conceptual diagram when one screen can show a multi-stage
+  correspondence, recursion, or branching argument more clearly than prose.
+  Identify an earlier example as the diagram in miniature, and call back to both
+  when the formal proof begins.
+- Preserve density by replacing repetitive orientation prose rather than merely
+  adding another explanatory layer. Audit the overview, reading map, section
+  openings, and conclusion for duplicated proof summaries.
+
 ## Introductions and abstracts
 
 As a diagnostic, the abstract should answer:
@@ -249,6 +286,9 @@ must have a job in the argument, remain legible at publication size, and remain
 interpretable without color alone. Captions should define visual encodings and
 state the mathematical point of the figure.
 
+A conceptual figure should compress a genuine sequence or branching structure;
+it should not merely decorate a list already clear in prose.
+
 Use tables for repeated comparisons, trust maps, class distributions, and exact
 mappings. Lead with the conclusion the table supports. Do not force readers to
 extract the theorem from a histogram.
@@ -321,6 +361,16 @@ Before submission:
    points of friction. Do not show that reader the previous review.
 6. Address high-impact hierarchy and comprehension problems before polishing
    isolated sentences.
+7. Freeze before-and-after PDFs and obtain blind choices from both a
+   primary-audience specialist and an adjacent-field reader. Record specialist
+   confidence and generalist accessibility separately; improvement does not
+   require equal scores.
+8. Red-team every new overview, diagram, and table against the proof spine:
+   hypotheses, quantifiers, branch qualifications, field ranges, conditionality,
+   terminology at first use, and evidence boundaries.
+9. Compare the rendered versions page by page. Check whether the conceptual
+   layer improves navigation without creating orphaned rows, bad float placement,
+   unexplained symbols, excessive density, or a venue-page violation.
 
 Before submission, ask an expert in either primary discipline to find the main
 theorem, follow every language change, identify the trust boundary, and skip
