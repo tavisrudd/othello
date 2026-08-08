@@ -152,7 +152,7 @@ test in the light of earlier answers.
 Tests indexed by four-sets occur elsewhere as a primitive observation.  The
 causal-clustering algorithm of Kummerfeld and Ramsey \cite{KummerfeldRamsey}
 decides one coherence bit per quartet of observed variables, up to
-\(\binom n4\) of them, each by a pair of statistical tests on sampled data.  That test decides
+\(\binom n4\) of them, each by a pair of statistical tests on sampled data.  That bit reports
 whether covariance minors vanish under a one-factor measurement model, not
 whether four triple signs cohere, so the two counts measure different work
 and are not compared here.

@@ -356,3 +356,211 @@ match the audit's boundaries and access-gap list.
 - **Compilation of the drafted TeX** was checked by inspection (environments,
   macros, labels, keys), not by a LaTeX build, since applying the drafts to
   `papers/` is out of bounds for this review.
+
+---
+
+# Second pass, 2026-08-07 — verification of the repairs (commit 792c6264)
+
+The first-pass text above is unchanged. This pass re-referees the repaired
+deliverables as fresh work: the strengthened decoder (helper five chosen to
+carry a known edge and a known non-edge), its new single bound
+\(\binom n2+n-4\) and threshold \(n\ge19\), the regenerated certificates, the
+revised drafted TeX, and the rewritten task card
+`notes/clebsch-tasks/c880-aligned-query-complexity.md`.
+
+## Second-pass verdict
+
+All four MAJOR findings are repaired — the first two by strengthening the
+decoder rather than weakening the claim, and the new mathematics is sound: I
+re-derived the one-expensive-stage argument and the bound, hunted the helper
+selection for edge cases without finding one, recomputed the \(n\ge19\)
+threshold, and reproduced every one of the eleven certificates byte-identically
+from the committed generator. No unfixed or new MAJOR remains. Three new MINOR
+defects and four NITs were found, all prose or comment level, none touching a
+bound: one sentence in the decoder report misstates its own degenerate
+certificate (which says `worst_constant_pattern: 8`, not 4) and draws a false
+"stays monochromatic" conclusion; the Reproduction header still carries the
+old generator hash; and the task card's one-paragraph summary of the bootstrap
+is wrong in a way the report itself corrects.
+
+## The new mathematics, judged on its own merits
+
+**Helper selection (the load-bearing change).** The code scans all pairs of
+\(\{1,\dots,v-1\}\) in lexicographic order for the first known edge and first
+known non-edge; if both exist it takes the union of their endpoints (3 or 4
+points; the two pairs cannot coincide) and pads with the smallest unused
+points to five; otherwise it takes \(\{1,\dots,5\}\). Edge cases checked: the
+graph on \(\{1,\dots,v-1\}\) is fully known at stage \(v\) (edges are written
+exactly once, and every pair scanned is already decided); \(v\ge7\) gives at
+least six candidates, so the padding always reaches exactly five and
+`copy_from_slice` cannot panic; shared endpoints between the two pairs only
+shrink the union; sorting the set is harmless because both witness pairs lie
+inside it, so `code_of` reads a configuration with at least one 1-bit and one
+0-bit — non-monochromatic — whenever the known graph has both values. Cost 7
+then follows from the `bootopt` certificate (maximum 7 over the 1022
+non-monochromatic codes; the two 9s are codes 0 and 1023). **No counterexample
+found; the selection does what the report claims.**
+
+**At most one stage pays 9.** Verified as implemented. Monochromatic helper
+code at stage \(v\) occurs iff \(G|_{\{1,\dots,v-1\}}\) is monochromatic
+(value \(m\) in the decoder's gauge, and monochromaticity is
+complement-invariant). If the truth's helper pattern (decoder gauge) is
+\(\equiv m\), the bootstrap walks the matching rows of the `degenerate`
+certificate — (code 0, pattern 0) and (code 1023, pattern 31), both cost 4. If
+it is not \(\equiv m\), the stage costs at most 9 (the `bootopt` maximum), and
+the newly written helper edges give the known graph both values, which no
+later write can undo — so every later stage is non-monochromatic and costs 7.
+Hence at most one stage per instance exceeds \(7+(v-6)\), by at most 2, which
+is exactly the \(+2\) the bound charges. Airtight.
+
+**The bound and the threshold, re-derived.**
+\(22+\sum_{v=7}^{n-1}(7+(v-6))+2 = 24+\bigl(\tfrac{n(n+1)}2-28\bigr)
+=\binom n2+n-4\), for **every** instance; window against the leaf-count bound
+\(\binom n2-n\) is \(2n-4\). Against the nonadaptive floor
+\((\binom{n-1}2-1)/H(1/4)\) with \(1/H(1/4)=1.232623\ldots\): at \(n=18\),
+\(167>166.404\) (correctly left open); at \(n=19\), \(186<187.359\), and the
+quadratic gap grows monotonically from there, so "below the floor for every
+\(n\ge19\)" is right. All five table rows match the regenerated `predict`
+certificate (24, 32, 74, 206, 816) and the observed column matches the
+verify/sample certificates (22, 30, 69, 195, 782); the \(n=7\) and \(n=8\)
+rows are correctly labeled as bounds that are not tight there.
+
+**Replay.** Rebuilt the committed generator (SHA-256 `7806795…` confirmed on
+disk, `rustc 1.93.1`) and re-ran every mode: `core`, `bootopt`, `degenerate`,
+`bootstrap`, `trivial`, `predict` (with `--boot-max 7 --switch 2`),
+`verify --n 7`, `verify --n 8`, and the three samples at \(n=12,20,40\).
+**All eleven certificates reproduce byte-identically**, and all twelve
+SHA-256/byte entries in the artifact table match the files on disk. Nothing
+was skipped this pass.
+
+## Per-finding closure
+
+| First-pass finding | Grade | Evidence |
+|---|---|---|
+| MAJOR 1 — "\(n\ge18\)" separation unproved | **Fixed** | Repaired by strengthening the decoder: single all-instance bound \(\binom n2+n-4\); separation now claimed for \(n\ge19\) and proved (recomputed above); \(8\le n\le18\) explicitly open (report items 5, §4–§5; card). |
+| MAJOR 2 — drafted TeX unconditional count | **Fixed** | Addendum replacement now reads "for \(n\geq19\) such a decoder does better than any fixed family can: … costs at most \(\binom n2+n-4\) tests" — every-instance true, threshold correct; the "should not say" guard now says \(n\ge19\) with \(8\le n\le18\) open. |
+| MAJOR 3 — invalid entropy floor | **Partly fixed** | Both report passages rewritten correctly (minimax-computed optimum; the chain rule licenses only \(d\ge6\); "do not reinstate" recorded on the card); the independent-replay section now truthfully says 7, 9 and 4 rest on this program alone. **Residue:** the committed generator still asserts the withdrawn claim in a comment — `2026-08-07-c880-adaptive-decoder.rs` line 398, "The information-theoretic floor is 7…". Downgraded to MINOR (new finding 3 below). |
+| MAJOR 4 — stale `verify8.json` | **Fixed** | Regenerated; my independent replay of `verify --n 8` from the committed source is byte-identical (mean 22.052189); the report records the catch at the foot of its artifact table. |
+| MINOR 1 — addendum misquote | **Fixed** | Quote now matches Draft 2's closing sentence verbatim, including the line break. |
+| MINOR 2 — \(1.23266\) | **Fixed** | Note now reads \(0.8112781\ldots\) and \(1.232623\ldots\). |
+| MINOR 3 — Draft 5 "self-contained" | **Fixed** | Promotion item 1 now names Draft 5's dependence on Draft 3's label. |
+| MINOR 4 — one test per quartet | **Fixed** | Now "one coherence bit per quartet …, each by a pair of statistical tests on sampled data" (residual antecedent nit below). |
+| MINOR 5 — one-case mechanism sentence | **Fixed** in the drafted TeX ("already decided — known to hold, or known to agree with the other"); the task card still carries the old one-case phrasing (folded into new finding 4). |
+| MINOR 6 — \(H(\tau)\) mislabel | **Fixed** | Draft 2 now applies subadditivity "to the entropy \(\binom{n-1}2-1\) of the complement pair, which is what the answers determine", and the display drops the false equality. |
+| MINOR 7 — ambiguous "theirs" | **Fixed** | Draft 4 names Dammak, Lopez, Pouzet, and Si Kaddour. |
+| MINOR 8 — Draft 7 insertion point | **Fixed** | Now "after line 71, which ends the paragraph"; verified against the source (line 71 does end it). |
+| MINOR 9 — "first six points" | **Fixed/moot** | The wording vanished with the redesign; the report now defines the state by \(G|_K\) monochromatic. |
+| NIT 1 — "cannot be read otherwise" | **Fixed** ("is not otherwise consulted"). |
+| NIT 2–4 — bibliography width, style, duplication | **Fixed** | The "Three mechanical points" paragraph after Draft 8 instructs the promoter on all three. |
+| NIT 5 — "not merely" | **Fixed** ("and not only because"). |
+| NIT 6 — Brunel clause | **Fixed** | The ledger row now marks the Seidel specialization as "computed in the audit rather than stated there". |
+| NIT 7 — uncertified greedy 5.32 | **Fixed** | `bootstrap-greedy.json` is in the artifact table and reproduces (worst 9, mean 5.316833). |
+
+## New findings, second pass
+
+**NEW MINOR 1 — the report misstates its own degenerate certificate, and
+draws a false "stays monochromatic" conclusion.**
+`notes/2026-08-07-c880-adaptive-decoder.md` lines 165–168: "If \(G|_K\) is
+monochromatic and the new point's edges into \(H\) all take the same value as
+the known edges, then \(G|_{K\cup\{v\}}\) is again monochromatic and the stage
+costs 4, measured over both monochromatic configurations and both constant
+patterns." Two defects. (i) The conclusion is false as stated: the hypothesis
+constrains only the five helper edges, while \(G|_{K\cup\{v\}}\) also contains
+the edges from \(v\) to \(K\setminus H\), learned in the lemma phase and
+unconstrained — the monochromatic state can end through them at a cost-4
+stage. (ii) "measured over both monochromatic configurations and both
+constant patterns" contradicts the certificate: `degenerate` reports
+`worst_constant_pattern: 8`, because the mismatched combinations (code 0 with
+pattern 31, code 1023 with pattern 0) cost 8; the 4 is the maximum over the
+two *matching* rows only. The bound is unaffected — mismatched-constant stages
+are exit stages and sit under the \(\le9\) charge, which is how I verified the
+accounting above — but the sentence must be repaired, e.g.: "…the bootstrap
+costs 4 — the two matching rows of the degenerate certificate — and at most 9
+otherwise, in which case the helper edges leave the known graph
+non-monochromatic and every later stage costs 7." The same false biconditional
+lives in the generator's degenerate-mode comment
+(`2026-08-07-c880-adaptive-decoder.rs` lines 866–869, "stays monochromatic
+after attaching v exactly when the pattern u is constant") — wrong on both
+constant-versus-matching and \(H\)-versus-\(K\).
+
+**NEW MINOR 2 — stale generator hash in the Reproduction header.**
+`notes/2026-08-07-c880-adaptive-decoder.md` lines 248–249 still name the
+generator by the superseded SHA-256 `d98cccc7…`, while the artifact table
+(line 282) and the file on disk have `78067954…`. The header is the sentence a
+replayer reads first, and it currently contradicts the table two paragraphs
+below it. Repair: update the header hash.
+
+**NEW MINOR 3 — the withdrawn entropy-floor claim survives as a code
+comment.** `notes/2026-08-07-c880-adaptive-decoder.rs` line 398: "The
+information-theoretic floor is 7, since each test answers yes with probability
+1/4 and five bits are wanted." This is exactly the argument the report now
+withdraws (and the card forbids reinstating). MAJOR 3's repair listed the code
+comment; it was not done. Repair: replace with "The value 7 is the exact
+minimax optimum over the non-monochromatic codes; entropy licenses only 6
+here."
+
+**NEW MINOR 4 — the task card's bootstrap summary is wrong in two clauses.**
+`notes/clebsch-tasks/c880-aligned-query-complexity.md` lines 108–110: "because
+a test one of whose two conditions is already known reads as a single bit"
+(the one-case phrasing the drafted TeX already fixed), and "The bootstrap
+costs seven tests per point, which exact minimax play shows optimal for every
+helper configuration the decoder can be made to meet" — false: the decoder
+can be made to meet the monochromatic configurations (whenever the known
+graph is monochromatic), where the stage costs 4 or up to 9, and minimax
+optimality of 7 is a statement about the non-monochromatic codes. Repair:
+"…costs seven tests per point outside the monochromatic state, optimal there
+by exact minimax; the monochromatic stages cost 4, except at most one per
+instance at 9."
+
+**NEW NIT 1.** Report line 275: "`bootopt` and `helperchoice` are exhaustive
+over their whole configuration space" — the `helperchoice` mode no longer
+exists; say "`bootopt`, `degenerate` and `bootstrap`".
+
+**NEW NIT 2.** Card lines 27–31: the em-dash insertion splices the sentence so
+that "beating the counting bound by a factor 1.2326" grammatically attaches to
+the *adaptive* floor ("whose floor stays the counting bound, beating the
+counting bound…"), a self-contradiction; the clause describes the entropy
+floor. Split the sentence.
+
+**NEW NIT 3.** Draft 2, third paragraph: after the repair, "That test decides
+whether covariance minors vanish…" has lost its antecedent (the preceding
+sentence now speaks of a coherence *bit* decided by a *pair* of tests). "That
+bit reports whether…" restores it.
+
+**NEW NIT 4.** Report §3's repaired paragraph is correct about what the
+entropy argument gives (\(d\ge6\)) but states it without noting the first-test
+step (\(5\le H(1/4)+(d-1)\)) only holds because the *first* query's marginal
+is exactly \(1/4\); a one-clause justification would keep a referee from
+re-deriving it. Optional.
+
+## The task card, read cold
+
+The five open items are actionable without this conversation. Item 1 names
+the two replay routes and the exact modes, and correctly quarantines the
+invalid entropy argument. Item 2's feasibility split (\(2^{28}\) instances at
+\(n=9\) feasible, \(2^{36}\) at \(n=10\) not) is arithmetically right, and the
+two named alternatives (exact minimax core tree; tighter \(+2\) accounting)
+are real. Item 3 correctly records why the mask route is capped at 30 and
+what remains. Items 4 and 5 match the reports; the wording-handoff
+preconditions match the wording doc's own list (Draft 6 and Draft 7's second
+sentence need the artifact migration). Referenced files all exist, including
+`2026-08-07-c880-framing-review.md` and `2026-08-07-c880-mask-ilp-bound.md`.
+Stale or contradicted content found: only the two clauses of NEW MINOR 4 and
+the splice of NEW NIT 2; the acceptance section's met/not-met split is
+accurate, including the frank line that the bootstrap constants have no
+independent replay.
+
+## Second-pass verification summary
+
+Verified independently this pass: the helper-selection code path (all edge
+cases listed above), the monotone-growth and one-expensive-stage argument as
+implemented, the bound summation and the \(n\ge19\)/open-\(n=18\) threshold
+arithmetic, all table rows against certificates, the verbatim addendum quote,
+the retired-number sweep (`n-6`, `3n-20`, `n=18` and `n=33` as thresholds,
+`21.927124`, `789`, `1.23266`, the entropy floor of 7 — all gone from the
+three files except as corrective statements), and the full byte-identical
+replay of all eleven certificates with all twelve hash-table entries checked.
+Not checked, as before: the primary literature behind the citations, the
+separation lane's own certificates, and a LaTeX build of the drafts.
+
+Unfixed or newly found MAJOR findings: **none**.

@@ -395,8 +395,10 @@ where
 // assignments and 20 available tests, with the posterior as the state.  For a
 // fixed helper edge code, `opt_depth` is the worst-case number of tests an
 // optimal player needs to pin all five coordinates, and `opt_choice` replays
-// that optimal play.  The information-theoretic floor is 7, since each test
-// answers yes with probability 1/4 and five bits are wanted.
+// that optimal play.  The value 7 that comes out is the exact minimax optimum
+// over the non-monochromatic codes, not an entropy floor: the 1/4 answer
+// marginal is unconditional, a conditioned posterior can be split evenly, and
+// the entropy argument licenses only 6.
 
 struct BootOpt {
     want: u32,
@@ -863,12 +865,13 @@ fn main() {
         }
         "degenerate" => {
             // The only helper configurations costing more than 7 are the two
-            // monochromatic ones.  A stage of the decoder meets one only while
-            // the known graph is monochromatic, and the known graph stays
-            // monochromatic after attaching v exactly when the pattern u is
-            // constant.  This mode reports the optimal tree's cost on those
-            // two codes, split by pattern, which is what bounds the expensive
-            // stages.
+            // monochromatic ones, and a stage meets one only while the known
+            // graph is monochromatic.  Such a stage costs 4 when the new
+            // point's helper edges match the known edge value, and at most 9
+            // otherwise -- in which case those helper edges already leave the
+            // known graph non-monochromatic, so no later stage meets a
+            // monochromatic configuration.  This mode reports the optimal
+            // tree's cost on the two codes, split by pattern.
             let mut rows = String::new();
             let mut worst_const = 0usize;
             let mut worst_any = 0usize;

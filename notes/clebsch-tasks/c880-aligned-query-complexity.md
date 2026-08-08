@@ -26,9 +26,10 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
   drop is valid at eight points.
 - Every test answers yes with probability exactly one quarter, so subadditivity
   of entropy gives a **nonadaptive** floor
-  \(k\ge(\binom{n-1}2-1)/H(1/4)\approx0.616\,n^2\) at every \(n\) — it does
-  not bind adaptive decoders, whose floor stays the counting bound, beating the counting bound by a factor 1.2326 and cutting the
-  asymptotic gap against the exhibited \(3n^2-23n+45\) from 6 to 4.87.
+  \(k\ge(\binom{n-1}2-1)/H(1/4)\approx0.616\,n^2\) at every \(n\). It beats
+  the counting bound by a factor 1.2326 and cuts the asymptotic gap against the
+  exhibited \(3n^2-23n+45\) from 6 to 4.87. It does not bind adaptive decoders,
+  whose floor stays the counting bound.
 - A test on \(\{p,q,x,y\}\) notices the elementary flip of the pair
   \(\{x,y\}\) exactly when \(\tau(pxy)=\tau(qxy)\), so a separating family
   must give every pair a non-bipartite link graph. That is the exact form of the
@@ -105,9 +106,11 @@ The adaptive side is closed. An explicit decoder reads the two-graph in
 bound \(\binom n2-n\), so the adaptive constant is exactly \(1/2\) and the
 coherence restriction costs nothing to leading order. Its mechanism is an attachment
 lemma: once two edges at a new point are known, every further edge costs one
-test, because a test one of whose two conditions is already known reads as a
-single bit. The bootstrap costs seven tests per point, which exact minimax play
-shows optimal for every helper configuration the decoder can be made to meet.
+test, because a test one of whose two conditions is already decided — known to
+hold, or known to agree with the other — reads as a single bit. The bootstrap
+costs seven tests per point outside the monochromatic state, and exact minimax
+play shows that optimal there; the monochromatic stages cost 4, except at most
+one per instance at 9.
 Adaptivity therefore strictly beats every fixed family from \(n=19\) on,
 against the \(0.616\,n^2\) entropy floor, and beats the exhibited
 \(3n^2-23n+45\) by a factor tending to six; the range \(8\le n\le18\) is open.

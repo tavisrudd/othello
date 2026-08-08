@@ -147,7 +147,9 @@ candidate assignments, 20 tests, minimax over the posterior — gives:
 Seven is not an entropy floor. The \(H(1/4)\)-per-test cap holds for a test
 whose answer marginal is \(1/4\), which is the unconditional marginal; after
 one answer a later test can split the surviving assignments evenly, and the
-chain rule then licenses only \(5\le H(1/4)+(d-1)\), that is \(d\ge6\). The
+chain rule then licenses only \(5\le H(1/4)+(d-1)\) — the \(H(1/4)\) is the
+first query's marginal, which is unconditional, and every later query is
+charged a full bit — that is, \(d\ge6\). The
 value 7 is the exact minimax optimum, and it rests on the computation above.
 What is structural is which configurations are hard: the two costing 9 are the
 monochromatic ones, in which every helper triple is coherent — the mirror image
@@ -161,13 +163,16 @@ known non-edge whenever the known graph contains both, which is possible on any
 \(K\) with at least six points: take a pair of each kind, at most four points
 in all, and pad. So a bootstrap costs 7 unless \(G|_K\) is complete or empty.
 
-That case can be expensive only once per instance. If \(G|_K\) is
-monochromatic and the new point's edges into \(H\) all take the same value as
-the known edges, then \(G|_{K\cup\{v\}}\) is again monochromatic and the
-stage costs 4, measured over both monochromatic configurations and both
-constant patterns. Otherwise \(G|_{K\cup\{v\}}\) is not monochromatic, so
-every later stage costs 7, and this one costs at most 9. Since the known set
-only grows, at most one stage of an instance pays that 9.
+That case can be expensive only once per instance. If the new point's edges
+into \(H\) all take the known edge value, the bootstrap costs 4 — the two
+matching rows of the degenerate certificate, code 0 with pattern 0 and code
+1023 with pattern 31. Otherwise it costs at most 9, and those helper edges
+already leave \(G|_{K\cup\{v\}}\) non-monochromatic, so no later stage meets a
+monochromatic configuration and every one of them costs 7. Since the known set
+only grows, at most one stage of an instance pays that 9. The monochromatic
+state can also end at a cost-4 stage, through the edges from \(v\) to
+\(K\setminus H\) that the lemma phase learns; that only removes expensive
+stages, so the accounting is unaffected.
 
 Greedy play, kept in the program as a comparison and certified separately, has
 the same worst case of 9 and a better mean of 5.32, since minimax optimizes the
@@ -246,7 +251,7 @@ worst-case price tends to 1.
 ## 6. Reproduction
 
 Generator: `notes/2026-08-07-c880-adaptive-decoder.rs`, SHA-256
-`d98cccc77bf90e49cb434c06b4a1a287eed63ca3a266553ed84e420d8fadf1a9`.
+`035e880b0eb6c97456ec74b3955c7a3b0e9e17fb0b48bf1da352ad58ff69077f`.
 Toolchain: `rustc 1.93.1 (01f6ddf75 2026-02-11)`, no dependencies, deterministic
 except for the sampled instances, whose generator is the seeded xorshift in the
 program and whose seed is recorded in each certificate.
@@ -272,14 +277,14 @@ $S/c880ad sample --n 40 --count 5000 --seed 11 --out 2026-08-07-c880-adaptive-sa
 `verify` and `sample` decode each instance through an oracle that counts its
 calls and is not otherwise consulted, then check the output against the hidden
 two-graph up to complement and abort on any mismatch; the `all_recovered` field
-is that check. `bootopt` and `helperchoice` are exhaustive over their whole
+is that check. `bootopt`, `degenerate` and `bootstrap` are exhaustive over their whole
 configuration space, and say so in their own output.
 
 ### Artifacts
 
 | file | bytes | SHA-256 |
 |---|---|---|
-| `2026-08-07-c880-adaptive-decoder.rs` | — | `780679544cbd0b4b79c2c006e011dc2d92e43128012dc1d54a9ba3c9eec0519c` |
+| `2026-08-07-c880-adaptive-decoder.rs` | — | `035e880b0eb6c97456ec74b3955c7a3b0e9e17fb0b48bf1da352ad58ff69077f` |
 | `2026-08-07-c880-adaptive-core.json` | 145 | `9c2be48a2bc3b278d03a98e1ac395751571a3a91a2dc4cd925dac66bddbb6a28` |
 | `2026-08-07-c880-adaptive-bootopt.json` | 200 | `b49079257ca0814b1039321d8a4538a26a6c4579ffe8f9efc5e979ed0402fb71` |
 | `2026-08-07-c880-adaptive-degenerate.json` | 355 | `d0480631e70368091a3512d4e3965e2a7c7f14e928b15a170ec4316a4a952bba` |
