@@ -1,5 +1,6 @@
+import RelativeConicArcs.BalancedExchangeHalfCut
+import RelativeConicArcs.ConferenceExchangeCompression
 import RelativeConicArcs.ConferenceExchangeSpectrum
-import RelativeConicArcs.GoldenBalancedCut
 
 /-!
 # Balanced cuts and exchange spectra of order-six conference matrices
@@ -16,14 +17,20 @@ polynomial, trace, squared trace, determinant, and degree-three exchange
 sectors of the normalized exchange operator `5⁻¹ • (S * Sᵀ)` at a three-element
 cut of an order-six symmetric conference matrix.
 
-`RelativeConicArcs.GoldenBalancedCut` proves the same order-six determinant and
-trace values as scalar identities over an arbitrary commutative ring.
+`RelativeConicArcs.ConferenceExchangeCompression` identifies the transfer Gram
+operator with a compression of the complementary eigenprojection and with a
+quarter of the compressed squared commutator.  The spectrum module connects the
+values `16`, `12`, and `-42` directly to an actual cross Gram determinant and
+matrix trace; no separately written scalar polynomial is part of this gate.
+
+`RelativeConicArcs.BalancedExchangeHalfCut` supplies the semantic cut theorem:
+for a real symmetric conference matrix on six labels and an actual
+three-element subset, it constructs an orthonormal eigenframe and proves that
+the resulting exchange compression has characteristic polynomial
+`(X - 1/5)(X - 4/5)^2`.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its all-orders rigidity converse, its continuous-control
 optimum, its Hermitian exchange landscape, its stability bounds, or any
-decoding, tomography, optical-compilation, or experimental statement.  They
-also do not identify the normalized exchange operator with a compression of a
-diagonal control between orthonormal eigenframes; the exported results apply to
-that compression only through the equality of the two spectra.
+decoding, tomography, optical-compilation, or experimental statement.
 -/

@@ -10,21 +10,25 @@ gate = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
 trust_statement = "trust/GOLDEN_QUANTUM_STATISTICS.md"
 axiom_audit = "trust/GoldenQuantumStatisticsAxiomAudit.lean"
 
-statement_title = "Golden six-mode conference interferometer: symbolic formal artifact"
+statement_title = "Golden six-mode conference interferometer: matrix formal artifact"
 
 overview = """
-This boundary records the symbolic order-six identities accompanying Tavis
+This boundary records the matrix-level order-six identities accompanying Tavis
 Rudd, *Orientation, exchange statistics, and rigidity in the Golden six-mode
 conference interferometer* (DOI 10.5281/zenodo.21766748).
 """
 
 correspondence = """
-The exported closure proves, over an arbitrary commutative ring, the entrywise
-identity for the square of a signed triangle block with unit off-diagonal
-entries, the determinant of the associated cross Gram matrix, its trace
-contraction, and the fourth conference-word trace obtained from that
-contraction.  These are the scalar identities used inside the structural
-three-plus-three balanced-cut argument.
+The exported closure proves the block conference identity and signed-triangle
+square over a commutative ring.  Over the real numbers it defines the normalized
+cross Gram operator, proves its characteristic polynomial and balanced exchange
+sectors, and connects the values 16, 12, and -42 to an actual matrix determinant
+and trace.  It also proves the matrix identities relating a diagonal-control
+transfer Gram operator to complementary eigenprojections and a squared
+commutator.  At the semantic level, the closure treats a symmetric conference
+matrix on six labels and a three-element subset, constructs an orthonormal
+eigenframe, and proves the characteristic polynomial of its exchange
+compression.
 
 This formal artifact does not prove the all-orders conference exchange rigidity
 classification, the aligned-design mean and variance, the continuous-control
@@ -36,20 +40,21 @@ proof, cited literature, or exact certificate computation.
 """
 
 boundary = """
-Every terminal is a symbolic kernel proof over a commutative ring, checked by
-Mathlib's ring normalization.  The closure contains no generated certificate,
-native evaluation, imported external data, user axiom, unsafe declaration, or
-admitted proof.
+Every terminal is a symbolic kernel proof over a commutative ring or the real
+numbers.  The closure contains no generated certificate, native evaluation,
+imported external data, user axiom, unsafe declaration, or admitted proof.  The
+generated axiom audit records the exact uses of Mathlib's standard classical
+principles.
 """
 
-axiom_audit_title = "Axiom audit for the Golden balanced-cut identities"
+axiom_audit_title = "Axiom audit for the Golden matrix exchange identities"
 
 axiom_audit_description = """
-This audit prints the axioms of the symbolic order-six identities exported with
-the Golden six-mode conference interferometer artifact.  The statements
-concern a signed triangle block with unit off-diagonal entries over a
-commutative ring: its squared entries, the determinant of the cross Gram
-matrix, the trace contraction, and the resulting fourth conference-word trace.
+This audit prints the axioms of the matrix-level order-six identities exported
+with the Golden six-mode conference interferometer artifact.  The statements
+cover the conference block equation, the balanced cross Gram spectrum and
+sectors, its determinant and trace contractions, and the transfer-compression
+and commutator identities.
 """
 
 readme_anchor = "  the 77-module human Arcs boundary."

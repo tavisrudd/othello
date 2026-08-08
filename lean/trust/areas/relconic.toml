@@ -1515,10 +1515,13 @@ terminals = [
   "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
   "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark",
   "RelativeConicArcs.ConferenceExchange.schurWeyl_checksum",
-  "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
-  "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
-  "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve",
-  "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
+  "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen",
+  "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve",
+  "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction",
+  "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq",
+  "RelativeConicArcs.ConferenceExchange.transferBlock_gram",
+  "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram",
+  "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
 ]
 coverage_rule = "closure"
 
@@ -2124,24 +2127,39 @@ gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
-declaration = "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries"
+declaration = "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["propext"]
 
 [[terminal]]
-declaration = "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen"
+declaration = "RelativeConicArcs.ConferenceExchange.transferBlock_gram"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["propext"]
 
 [[terminal]]
-declaration = "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+declaration = "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["propext"]
 
 [[terminal]]
-declaration = "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula"
+declaration = "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
-expected_axioms = ["propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.GoldenCubicNodesBase.cubic_eq_conference_triangleCubic"
