@@ -1,0 +1,215 @@
+{
+ "environment": {
+  "absolute_relative_feasibility_tolerance": "1e-9",
+  "clarabel": "0.10.0",
+  "cvxpy": "1.7.3",
+  "numpy": "2.3.4",
+  "python": "3.13.12",
+  "python_package": "nixpkgs python3.withPackages (ps: [ ps.numpy ps.cvxpy ])",
+  "solver": "CLARABEL"
+ },
+ "fields": [
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 2,
+    "maximum": 2.0,
+    "maximum_multiplicity": 2,
+    "minimum": -1.0,
+    "minimum_multiplicity": 4
+   },
+   "completion_min_eigenvalue": 1e-10,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 1,
+    "maximum": -0.0,
+    "minimum": -0.0
+   },
+   "completion_rank_at_1e-7": 4,
+   "diagonal_residual": "0.000e+00",
+   "edge_magnitude_s": 0.5,
+   "edge_residual": "1.110e-16",
+   "edges": 6,
+   "forbidden_target": 3,
+   "objective_return": 0.5,
+   "q": 5,
+   "quadratic_clique_bound": 3.0,
+   "required_tangent_holonomy": 1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": false,
+   "vertices": 6
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 6,
+    "maximum": 3.4142136,
+    "maximum_multiplicity": 1,
+    "minimum": -3.4142136,
+    "minimum_multiplicity": 1
+   },
+   "completion_min_eigenvalue": 1e-10,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 2,
+    "maximum": 1.0,
+    "minimum": -1.0
+   },
+   "completion_rank_at_1e-7": 1,
+   "diagonal_residual": "5.529e-14",
+   "edge_magnitude_s": 0.9999999996,
+   "edge_residual": "1.578e-13",
+   "edges": 20,
+   "forbidden_target": 4,
+   "objective_return": 0.9999999996,
+   "q": 7,
+   "quadratic_clique_bound": 2.0,
+   "required_tangent_holonomy": -1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 12
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 5,
+    "maximum": 6.0,
+    "maximum_multiplicity": 1,
+    "minimum": -3.0,
+    "minimum_multiplicity": 4
+   },
+   "completion_min_eigenvalue": 8e-10,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 3,
+    "maximum": 0.5,
+    "minimum": -0.9999999
+   },
+   "completion_rank_at_1e-7": 9,
+   "diagonal_residual": "4.441e-16",
+   "edge_magnitude_s": 0.4999999927,
+   "edge_residual": "0.000e+00",
+   "edges": 60,
+   "forbidden_target": 5,
+   "objective_return": 0.4999999927,
+   "q": 9,
+   "quadratic_clique_bound": 3.00000003,
+   "required_tangent_holonomy": 1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 20
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 16,
+    "maximum": 8.6398983,
+    "maximum_multiplicity": 1,
+    "minimum": -4.0,
+    "minimum_multiplicity": 2
+   },
+   "completion_min_eigenvalue": 8.7e-09,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 17,
+    "maximum": 0.9999996,
+    "minimum": -0.3333335
+   },
+   "completion_rank_at_1e-7": 18,
+   "diagonal_residual": "0.000e+00",
+   "edge_magnitude_s": 0.3333333172,
+   "edge_residual": "5.551e-17",
+   "edges": 129,
+   "forbidden_target": 6,
+   "objective_return": 0.3333333172,
+   "q": 11,
+   "quadratic_clique_bound": 4.00000014,
+   "required_tangent_holonomy": -1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 30
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 24,
+    "maximum": 11.4263934,
+    "maximum_multiplicity": 1,
+    "minimum": -4.4411535,
+    "minimum_multiplicity": 2
+   },
+   "completion_min_eigenvalue": 1.4e-09,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 47,
+    "maximum": 0.4733131,
+    "minimum": -0.5647148
+   },
+   "completion_rank_at_1e-7": 30,
+   "diagonal_residual": "3.719e-14",
+   "edge_magnitude_s": 0.2499999955,
+   "edge_residual": "1.205e-14",
+   "edges": 238,
+   "forbidden_target": 7,
+   "objective_return": 0.2499999955,
+   "q": 13,
+   "quadratic_clique_bound": 5.00000007,
+   "required_tangent_holonomy": 1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 42
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 40,
+    "maximum": 19.0458805,
+    "maximum_multiplicity": 1,
+    "minimum": -6.0127852,
+    "minimum_multiplicity": 2
+   },
+   "completion_min_eigenvalue": 3.5e-09,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 72,
+    "maximum": 0.6393165,
+    "minimum": -0.526599
+   },
+   "completion_rank_at_1e-7": 41,
+   "diagonal_residual": "0.000e+00",
+   "edge_magnitude_s": 0.2318948213,
+   "edge_residual": "0.000e+00",
+   "edges": 684,
+   "forbidden_target": 9,
+   "objective_return": 0.2318948213,
+   "q": 17,
+   "quadratic_clique_bound": 5.31229984,
+   "required_tangent_holonomy": 1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 72
+  },
+  {
+   "adjacency_spectrum_1e-7": {
+    "distinct_values": 50,
+    "maximum": 23.7649488,
+    "maximum_multiplicity": 1,
+    "minimum": -9.0,
+    "minimum_multiplicity": 1
+   },
+   "completion_min_eigenvalue": 2.56e-08,
+   "completion_nonedge_value_clusters_1e-7": {
+    "distinct_values": 100,
+    "maximum": 0.7246221,
+    "minimum": -0.5227309
+   },
+   "completion_rank_at_1e-7": 71,
+   "diagonal_residual": "0.000e+00",
+   "edge_magnitude_s": 0.2259196654,
+   "edge_residual": "5.551e-17",
+   "edges": 1065,
+   "forbidden_target": 10,
+   "objective_return": 0.2259196654,
+   "q": 19,
+   "quadratic_clique_bound": 5.42635217,
+   "required_tangent_holonomy": -1,
+   "solver_status": "optimal",
+   "target_excluded_numerically": true,
+   "vertices": 90
+  }
+ ],
+ "graph_source": {
+  "bytes": 12401,
+  "path": "notes/2026-08-08-c756-passant-code-equality.py",
+  "sha256": "acf54490218a59fb05a3dcd479ec216f9d439d16d69227d9be4113407bdb881b"
+ },
+ "schema": "c756-tangent-psd-probe-v1"
+}

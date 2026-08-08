@@ -22,19 +22,21 @@ continuation.
 **Decision:** replace the Paley-clique bound as the primary gate by equality in the
 general binary passant incidence code.  For the nonsingular conic over odd \(q\), let
 \(M_q\) be the passant-by-internal-point incidence matrix and
-\(K_q=\ker_{\mathbb F_2}M_q\).  The first pass is to record and audit the elementary
-bridge
+\(K_q=\ker_{\mathbb F_2}M_q\).  Droms--Mellinger--Meyer, Theorem 7.11, already proves
+the elementary lower bound
 \[
  d(K_q)\ge (q+3)/2,
 \]
-with equality precisely when the support is a \((q+3)/2\)-point internal arc whose
-pairwise joins are external.  Thus proving that equality occurs only for \(q=5\), with
-the projective four-frame, closes the saturated-internal branch.  This target is
+and the 2026-08-08 pass records the exact equality bridge: equality holds precisely
+when the support is a \((q+3)/2\)-point internal arc whose pairwise joins are external.
+Thus proving that, for \(q>3\), equality occurs only for \(q=5\), with the projective
+four-frame, closes the saturated-internal branch.  The qualifier is real: \(K_3\) has
+one equality word of weight three.  This target is
 strictly more reusable than the crown formulation: it is intrinsic projective geometry,
 connects directly to Paper IV's passant code, and does not require condition (A) or a
 Paley normalization.
 
-The second exact input to record in that pass is the external-line triangle holonomy.
+The second exact input recorded in that pass is the external-line triangle holonomy.
 If three internal points on an external line are normalized by norm-minus-one roots
 \(z_i\), then
 \[
@@ -49,35 +51,54 @@ This is a useful exact exclusion, not by itself the classification.
 
 **Bounded execution plan:**
 
-1. Prove the two bridges above in a dated reproducible note, check the equality statement
-   by exhaustive binary-code computation in the smallest fields, and perform a focused
-   source audit of the Droms--Mellinger--Meyer lower/equality results before making any
-   novelty claim.
-2. Put the equality problem, not merely the clique number of \(\Gamma_q\), on the
-   elliptic association scheme already used by Paper IV.  Compute exact small-field
-   orbital data over both primes and extensions, then seek a symbolic rational
-   Delsarte/PSD certificate uniform in \(q\).  Ordinary one-matrix ratio bounds are
-   deprioritized: at \(q=9\) they give about \(9\) against the true clique number \(5\).
-3. Stop this route after two bounded certificate passes if the active dual support does
-   not stabilize or if the certificate complexity grows with \(q\).  Do not turn a
-   numerical SDP pattern into a theorem without an exact symbolic certificate.
-4. If the equality classification lands, close the complete saturated classification
-   and open a separate, unnumbered Clebsch companion-paper task; the live handoff fixes
-   exactly four numbered papers.  Only then return to the nonsaturated masked
-   Rédei target \(h\ge1\) for the full all-\(k\) theorem.
+1. **DONE:** prove the equality bridge and external-line orientation lemma in a dated
+   reproducible note, check them in the smallest fields, and identify the Droms--
+   Mellinger--Meyer attribution boundary.  See
+   `notes/2026-08-08-c756-passant-code-equality.md` and its adjacent evidence bundle.
+2. **DONE as a bounded discriminator:** fix an equality-support point \(P\) and use
+   Paper IV's local Segre-tangent graph
+   \(H_{q,P}\): its vertices are the internal passant-join neighbors of \(P\), and its
+   edges impose both another passant join and the required tangent holonomy.  Equality
+   requires a clique of size \((q+1)/2\).  Exact computation gives a strict gap for
+   every tested \(q>5\), over all odd prime powers through \(49\), while \(q=5\) is
+   sharp.  A numerical PSD completion gives bounds far below the forbidden target
+   through \(q=19\), but the exact stabilizer-orbital completion grows from 3 variables
+   at \(q=5\) to 101 at \(q=19\), with no stable dual support.  Paper IV's exact rank-28
+   \(q=13\) matrix remains a field-specific prototype.  The pair-only elliptic scheme
+   remains a comparison model:
+   it loses the tangent/no-three-collinear information and cannot remove the
+   \(q\equiv3\pmod4\) line-plus-pole cliques.
+3. **STOP RULE TRIGGERED:** both promised certificate passes are spent.  The active
+   support and certificate complexity grow with \(q\), so do not exactify the
+   field-by-field theta optima or turn the numerical SDP pattern into a theorem.  Reopen
+   this route only if a genuinely new closed-form feasible matrix or character
+   inequality has bounded description independent of the orbital dimension.
+4. Keep the equality classification and local graph as a clean open formulation, but
+   route the next work to the publication fallback.  If a future equality proof lands,
+   close the complete saturated classification and open a separate, unnumbered Clebsch
+   companion-paper task; the live handoff fixes exactly four numbered papers.  The
+   nonsaturated masked Rédei target \(h\ge1\) remains independent and necessary for the
+   full all-\(k\) theorem.
 
-**Publishable fallback:** if the equality gate fails the bounded stop rule, scope a
-specialist partial-results companion after source audit: all-\(k\) structural bounds,
+**Publishable fallback — active scoping target:** the equality gate failed the bounded
+stop rule, so scope a specialist partial-results companion after source audit: all-\(k\)
+structural bounds,
 the complete saturated-external classification, the code/crown reformulation, Baer
 exclusion, mixed moments, and bounded-field evidence.  This fallback must state the
 saturated-internal and nonsaturated gaps explicitly.  The present literature audit is
 not publication-ready: the older Paley report predates the audit conventions, the
 BEHW/Blokhuis chain is not source-complete, MathSciNet coverage is missing, and the
-general passant-code equality cases require a focused predecessor check.
+general passant-code equality cases require a focused predecessor check.  The immediate
+deliverable is a theorem inventory and claim graph separating proved all-field results,
+finite evidence, and open gaps, followed by a title/venue decision.  Do not draft a
+manuscript under C756; after the audit, open a separate unnumbered companion task if the
+package survives the novelty and coherence gate.
 
-**Next-session entry:** execute step 1, then use its output to specify the smallest exact
-association-scheme certificate problem.  Preserve the crown gate below as an equivalent
-coordinate model and as diagnostic evidence, not as the first proof target.
+**Next-session entry:** complete the predecessor and forward-citation audit, search
+explicitly for conic-external internal arcs and minimum passant-code words, and build the
+partial companion's theorem inventory/claim graph.  Preserve the code equality and local
+tangent graph as open problems and diagnostic evidence; do not spend another pass fitting
+optimal theta matrices.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
@@ -191,9 +212,16 @@ at \(k = 9\).
 If the theorem lands, the packaging is a **new** headline paper (rigidity + all-k
 classification + golden operator), not a retrofit into Paper I.
 
-## Current state (2026-08-02)
+## Current state (2026-08-08)
 
-Twenty-eight research passes complete; the theorem is **not** proved. Reports:
+Twenty-nine research passes complete; the theorem is **not** proved.  The publication
+route review records the Droms--Mellinger--Meyer lower-bound attribution, proves the exact
+minimum-word/equality bridge and external-line holonomy lemma, constructs the local
+Segre-tangent obstruction through every odd prime power \(q\le49\), and triggers the
+precommitted stop rule after the orbital PSD complexity grows without a stable bounded
+support.  The active next move is source audit and scoping of the explicit partial-results
+fallback, not another field-by-field theta pass.  New report:
+`notes/2026-08-08-c756-passant-code-equality.md`.  Earlier reports:
 `notes/2026-08-02-c756-invariant-half-clique.md` and
 `notes/2026-08-02-c756-coupled-pair-invariant.md` and
 `notes/2026-08-02-c756-baer-subline-containment.md` and
@@ -837,18 +865,15 @@ Two independent uniform obstructions are still required:
 2. exclude every nonsaturated family with \(\delta\ge2\), beginning with the
    defect-two boundary \((q,k)=(53,12)\).
 
-The old secant-pencil and association-scheme candidates are superseded.  The active
-saturated-internal gate is now stated in Paley-graph terms: prove that no clique of
-size \((q+3)/2\) in \(P(q^2)\) is completely joined, outside a perfect matching, to its
-Frobenius image.  Every Baer-subline configuration — affine line and circle alike — and
-the two published second-largest clique orbits are closed; what remains is the
-crown-restricted case of the Baker–Ebert–Hemmeter–Woldar gap conjecture, or equivalently
-the Baer-subline stability statement, which since the twenty-sixth pass suffices alone.
-Since the twenty-eighth pass that gate is needed only for \(q\equiv3\pmod4\): for
-\(q\equiv1\pmod4\) the invariant clique bound \(\omega(\Gamma_q)\le(q+1)/2\) suffices and is
-already proved for line-anchored cliques.  The composition normal form
-(\(G=(R-\gamma)(R-\gamma^q)\), proved for every coherent system over prime \(q\)) is
-retained as the fallback route.
+The old secant-pencil and association-scheme candidates are superseded.  The cleanest
+saturated-internal statement is now the equality case in the binary passant code:
+for \(q>3\), prove that \(K_q\) meets the lower bound \((q+3)/2\) only at \(q=5\), with
+four-frame supports.  Equivalently, after fixing a support point \(P\), exclude cliques
+of size \((q+1)/2\) in the local Segre-tangent graph \(H_{q,P}\).  This formulation keeps
+the no-three-collinear information lost by the global external-join graph.  It is open;
+the optimal-PSD exactification route has stopped.  The older crown, Baer-subline, and
+composition normal forms remain equivalent or weaker diagnostic interfaces, not the
+next investment.
 The nonsaturated branch has no bounded per-line algebraic-compression gate left.  Its clean active
 target is now to prove \(h\ge1\): after deleting any arc point, a conic-external set cannot
 determine every direction on a spare external line.  This is a masked Rédei--Szőnyi-style
@@ -859,9 +884,12 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next proof gate: the saturated-internal coherent double-clique question.  It
-now has the same theorem-shaped status the saturated-external branch had two passes before
-closure, but the tight balance theorem proves that another spectral bound cannot finish it.
+Highest-EV next action: audit and scope the partial-results companion listed in the
+reviewed route.  The strongest open proof gate remains the minimum-passant-code equality
+classification, equivalently the forbidden linear clique in \(H_{q,P}\), but its first
+two certificate passes have met the stop rule and should not be repeated.  The historical
+coordinate routes below explain the obstruction and remain reusable inputs, not the live
+route.  The tight balance theorem proves that another global spectral bound cannot finish it.
 The bare cross-ratio nonsingularity shortcut is closed, the Ball--Lavrauw tangent tensor
 does not globalize its adjugate kernel line, and the prime-field first-cofactor section
 has exact canonical form but linear reduced support and Cartier width.  The four-point

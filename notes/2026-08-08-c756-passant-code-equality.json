@@ -1,0 +1,369 @@
+{
+ "code_checks": [
+  {
+   "dimension": 1,
+   "enumerated_codewords": 2,
+   "equality_supports_match_arcs": true,
+   "equality_words": 1,
+   "external_arcs_of_equality_size": 1,
+   "length": 3,
+   "lower_bound": 3,
+   "minimum_distance": 3,
+   "q": 3,
+   "row_weight": 2
+  },
+  {
+   "dimension": 4,
+   "enumerated_codewords": 16,
+   "equality_supports_match_arcs": true,
+   "equality_words": 5,
+   "external_arcs_of_equality_size": 5,
+   "length": 10,
+   "lower_bound": 4,
+   "minimum_distance": 4,
+   "q": 5,
+   "row_weight": 3
+  },
+  {
+   "dimension": 9,
+   "enumerated_codewords": 512,
+   "equality_supports_match_arcs": true,
+   "equality_words": 0,
+   "external_arcs_of_equality_size": 0,
+   "length": 21,
+   "lower_bound": 5,
+   "minimum_distance": 6,
+   "q": 7,
+   "row_weight": 4
+  },
+  {
+   "dimension": 16,
+   "enumerated_codewords": 65536,
+   "equality_supports_match_arcs": true,
+   "equality_words": 0,
+   "external_arcs_of_equality_size": 0,
+   "length": 36,
+   "lower_bound": 6,
+   "minimum_distance": 8,
+   "q": 9,
+   "row_weight": 5
+  }
+ ],
+ "dependency": {
+  "bytes": 13865,
+  "path": "notes/2026-08-02-c756-invariant-half-clique.py",
+  "sha256": "2e04d757e958fcd67628b3cba472aaaeaa2575ea4f925bf6390fbc6c569435cf"
+ },
+ "schema": "c756-passant-code-equality-v1",
+ "tangent_graph_checks": [
+  {
+   "clique_number": 3,
+   "degree_multiplicities": {
+    "2": 6
+   },
+   "edges": 6,
+   "forbidden_equality_target": 3,
+   "q": 5,
+   "required_tangent_holonomy": 1,
+   "target_excluded": false,
+   "vertices": 6
+  },
+  {
+   "clique_number": 2,
+   "degree_multiplicities": {
+    "3": 8,
+    "4": 4
+   },
+   "edges": 20,
+   "forbidden_equality_target": 4,
+   "q": 7,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 12
+  },
+  {
+   "clique_number": 3,
+   "degree_multiplicities": {
+    "6": 20
+   },
+   "edges": 60,
+   "forbidden_equality_target": 5,
+   "q": 9,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 20
+  },
+  {
+   "clique_number": 4,
+   "degree_multiplicities": {
+    "8": 12,
+    "9": 18
+   },
+   "edges": 129,
+   "forbidden_equality_target": 6,
+   "q": 11,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 30
+  },
+  {
+   "clique_number": 5,
+   "degree_multiplicities": {
+    "10": 14,
+    "12": 28
+   },
+   "edges": 238,
+   "forbidden_equality_target": 7,
+   "q": 13,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 42
+  },
+  {
+   "clique_number": 5,
+   "degree_multiplicities": {
+    "18": 36,
+    "20": 36
+   },
+   "edges": 684,
+   "forbidden_equality_target": 9,
+   "q": 17,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 72
+  },
+  {
+   "clique_number": 5,
+   "degree_multiplicities": {
+    "21": 20,
+    "24": 40,
+    "25": 30
+   },
+   "edges": 1065,
+   "forbidden_equality_target": 10,
+   "q": 19,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 90
+  },
+  {
+   "clique_number": 5,
+   "degree_multiplicities": {
+    "32": 24,
+    "35": 72,
+    "36": 36
+   },
+   "edges": 2292,
+   "forbidden_equality_target": 12,
+   "q": 23,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 132
+  },
+  {
+   "clique_number": 7,
+   "degree_multiplicities": {
+    "40": 52,
+    "42": 104
+   },
+   "edges": 3224,
+   "forbidden_equality_target": 13,
+   "q": 25,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 156
+  },
+  {
+   "clique_number": 8,
+   "degree_multiplicities": {
+    "45": 84,
+    "48": 84,
+    "49": 14
+   },
+   "edges": 4249,
+   "forbidden_equality_target": 14,
+   "q": 27,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 182
+  },
+  {
+   "clique_number": 6,
+   "degree_multiplicities": {
+    "50": 30,
+    "54": 120,
+    "56": 60
+   },
+   "edges": 5670,
+   "forbidden_equality_target": 15,
+   "q": 29,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 210
+  },
+  {
+   "clique_number": 6,
+   "degree_multiplicities": {
+    "60": 64,
+    "63": 128,
+    "64": 48
+   },
+   "edges": 7488,
+   "forbidden_equality_target": 16,
+   "q": 31,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 240
+  },
+  {
+   "clique_number": 7,
+   "degree_multiplicities": {
+    "84": 76,
+    "88": 76,
+    "90": 190
+   },
+   "edges": 15086,
+   "forbidden_equality_target": 19,
+   "q": 37,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 342
+  },
+  {
+   "clique_number": 9,
+   "degree_multiplicities": {
+    "104": 84,
+    "108": 168,
+    "110": 168
+   },
+   "edges": 22680,
+   "forbidden_equality_target": 21,
+   "q": 41,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 420
+  },
+  {
+   "clique_number": 8,
+   "degree_multiplicities": {
+    "112": 44,
+    "117": 176,
+    "120": 176,
+    "121": 66
+   },
+   "edges": 27313,
+   "forbidden_equality_target": 22,
+   "q": 43,
+   "required_tangent_holonomy": -1,
+   "target_excluded": true,
+   "vertices": 462
+  },
+  {
+   "clique_number": 9,
+   "degree_multiplicities": {
+    "150": 200,
+    "154": 200,
+    "156": 200
+   },
+   "edges": 46000,
+   "forbidden_equality_target": 25,
+   "q": 49,
+   "required_tangent_holonomy": 1,
+   "target_excluded": true,
+   "vertices": 600
+  }
+ ],
+ "triangle_holonomy_checks": [
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 4,
+   "q": 3,
+   "triples_checked": 4
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 6,
+   "q": 5,
+   "triples_checked": 20
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 3,
+   "norm_minus_one_roots": 8,
+   "q": 7,
+   "triples_checked": 56
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 4,
+   "norm_minus_one_roots": 10,
+   "q": 9,
+   "triples_checked": 120
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 12,
+   "q": 11,
+   "triples_checked": 220
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 14,
+   "q": 13,
+   "triples_checked": 364
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 20,
+   "q": 19,
+   "triples_checked": 1140
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 5,
+   "norm_minus_one_roots": 24,
+   "q": 23,
+   "triples_checked": 2024
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 5,
+   "norm_minus_one_roots": 26,
+   "q": 25,
+   "triples_checked": 2600
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 28,
+   "q": 27,
+   "triples_checked": 3276
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 3,
+   "norm_minus_one_roots": 32,
+   "q": 31,
+   "triples_checked": 4960
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 2,
+   "norm_minus_one_roots": 44,
+   "q": 43,
+   "triples_checked": 13244
+  },
+  {
+   "all_triangle_products_nonsquare": true,
+   "epsilon": 8,
+   "norm_minus_one_roots": 50,
+   "q": 49,
+   "triples_checked": 19600
+  }
+ ]
+}
