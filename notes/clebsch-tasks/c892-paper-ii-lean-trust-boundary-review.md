@@ -2,12 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete 2026-08-08 with a **MAJOR / NO-GO** verdict, recorded in
-`../2026-08-08-c892-paper-ii-lean-trust-boundary-review.md`.  The guarded gates,
-the full Lean-independent standalone aggregate, and the authoritative aggregate
-are green; the verdict is caused by theorem-coverage and trust-boundary defects,
-not a current elaboration, axiom or replay failure.  No Lean, manuscript,
-verification, export or standalone-release file was changed.
+**Status:** reopened by explicit user instruction on 2026-08-08 and remains
+open until every defect in
+`../2026-08-08-c892-paper-ii-lean-trust-boundary-review.md` is remediated.  The
+prior **MAJOR / NO-GO** verdict is the acceptance baseline, not a closeout.
+C892 now owns the Paper II Lean, manuscript, verification, export and
+standalone-release repairs needed to reach the numbered-series formal standard.
 
 ## Objective
 
@@ -64,9 +64,13 @@ artifact at the referee standard in `lean/AGENTS.md` and
 - the Clebsch discovery track only if the discriminator admits a genuinely
   incidental observation.
 
-All Lean, manuscript, verification, export, and standalone-paper paths are
-read-only under C892.  A repair needs explicit authorization and its owning
-task.
+Following the 2026-08-08 user instruction to keep C892 open until full
+remediation, C892 owns the exact Paper II Lean modules and gates, manuscript and
+verification surfaces, export configuration and generated trust artifacts,
+and synchronized standalone-paper and formal-companion updates needed to close
+the audit.  Shared-library edits still require reverse-import validation, and
+publication, push, tag and deposit remain outside scope without separate
+authority.
 
 ## Acceptance gate
 
@@ -90,6 +94,7 @@ task.
 
 ## Relationship to current work
 
-C892 audits the current post-C856/C860 surface independently.  It does not
-reopen those completed tasks by default and does not replace C577's ownership
-of the immutable locator, downstream synchronization, or publication decision.
+C892 began as an independent audit of the post-C856/C860 surface.  The user has
+now assigned its complete remediation to the same item.  C577 retains the
+publication decision; C892 must return a theorem-complete, fully pinned and
+synchronized candidate before C577 can resume it.
