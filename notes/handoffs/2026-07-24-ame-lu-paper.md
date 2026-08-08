@@ -10,6 +10,20 @@ Discovery companion:
 
 ## Current status
 
+**C889 queued (2026-08-08): independently vet the unified EJ latent-structure
+report before promoting any new theorem.**  The task first reconciles every
+proposal with C622/C623/C631/C774--C838 and first identifies cheap additions
+that strengthen the current papers without opening a competing narrative.
+It then proves or kills the MDS--CSS LU-up-to-duality, party-image, robust-
+logical-rounding, and high-distance-multiplier claims.  Larger survivors are
+banked with complete proofs and provenance for separately authorized follow-up
+versions; they do not trigger current-manuscript edits.  Only gated survivors
+can advance to the proposed holonomy-centralizer/five-phase classification,
+extension-field commutant algebras, holonomy invariants, or affine-cocycle
+stability programme.  It is queued, not started, and does not displace C795's
+existing manuscript-correctness priority.  Scope and acceptance gates:
+`2026-08-08-c889-ame-pair-latent-structure-kill-tests.md`.
+
 **C888 closed (2026-08-08): both follow-up reviews are remediated and
 exported.**  The MDS paper now distinguishes its site-dependent product
 implementations from the uniform Rains/Dasu--Burton/Prakash--Singhal
