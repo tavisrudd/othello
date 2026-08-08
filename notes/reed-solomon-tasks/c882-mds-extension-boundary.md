@@ -2,8 +2,23 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued; allocated 2026-08-07.  **Potentially release-blocking for the
-balanced \(q=8\) quantum corollary.**
+**Status:** corrected in Version 2 on 2026-08-07 and committed.  Version 1 erratum
+remains an open user decision.
+
+The withdrawal landed on: the dictionary's coding-consequence paragraph, the overview
+status-table column header, the introduction's advertisement and its caveat on the prior
+correspondence, the \(q=8\) corollary (replaced by `rem:q8-no-extension`, which states
+why no extension exists), the verification section's cross-paper paragraph, ledger row
+`R5-Q` (now `RETRACTED`, with a new status-vocabulary entry), the Lean statement map, the
+formalization ledger, the verification map, the literature audit's companion row, and the
+coverage restriction in the Lean module `PRSBalancedQuantumExtension`.  Both builds, the
+verifier, the 72-artifact evidence bundle, and the balanced-quantum and aggregate Lean
+gates are green.
+
+**Companion impact: none.**  Neither the AME/local-unitary paper nor the MDS--CSS
+transversal-groups paper cites the beyond-four paper or instantiates the \([10,5,6]_8\)
+row; their Reed--Solomon material stays within \(n\le q+1\).  The dependency ran one way,
+from this paper into their general theorems, so their results are untouched.
 
 **Origin:** Krishna Kaipa persona re-read of the Version 2 draft, 2026-08-07, item 5.
 Raised while the reviewer was checking the twisted-cubic literature repairs; it is

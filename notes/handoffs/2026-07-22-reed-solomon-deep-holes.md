@@ -56,6 +56,16 @@ no predecessor for the exact conjunction within the recorded search boundary.
 An independent finite-geometer/coding cold read found no release-blocking
 defect and cleared four minor exposition repairs.
 
+C882 corrected a defect that the literature work surfaced: the paper inferred a
+one-column MDS extension from a split-free direction.  An extension needs a syndrome
+outside the span of every r-1 parity-check columns while split-freeness gives only r-2,
+and Dur's Theorem 2.4 makes covering radius r-1 equivalent to completeness of the normal
+rational curve's arc, so no extension exists at any redundancy classified here.  The
+balanced q=8 quantum corollary and its AME and quantum-MDS consequences are withdrawn
+across every surface; the 1116 count survives as a deep-hole count.  Neither companion
+paper is affected.  A Version 1 erratum is an open user decision.  Diagnosis and impact
+scope are in `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+
 C881 has closed its literature half.  A geometry-side screen that no earlier
 audit ran found that the redundancy-five split-free criterion is prior art as a
 statement about pencils of binary cubics: a redundancy-five witness system is a
