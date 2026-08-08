@@ -242,3 +242,57 @@ declared trust boundary and belongs in a module of its own. They do not construc
 the Gram matrix of the ten face-axis zonal forms, the eigenvalues, or the
 injectivity, and they do not touch the alternating comparison line or the cubic
 restriction.
+
+## Closeout: what these modules put in reach
+
+**The Gram half of HARM-1 is now mostly plumbing.** `FaceAxisHarmonicGram` needs
+three things, all available. The face axes have squared length three and squared
+inner products five and one on displayed coordinates, transported to `ℝ` by
+`coordinateForm_doubledFaceAxisOver_self` and
+`coordinateForm_doubledFaceAxisOver_sq` at a square root of five; dividing by the
+square root of three makes them unit and turns those into `1`, `5/9` and `1/9`.
+`legendreSix_of_sq` then converts each squared inner product into a Legendre
+value without ever needing the sign of a chosen axis representative, which
+matters because the configuration's rotations permute the axes only up to sign.
+`normalizedMean_zonalHarmonic_mul` supplies the entry itself. What remains is the
+arithmetic `P₆(√5/3) = -65/243`, `P₆(1/3) = 47/243`, the identification of the
+resulting matrix with `(196 I + 47 J - 112 A)/(243 · 13)`, and the passage from
+the Petersen eigenvalues to the three Gram eigenvalues and positivity.
+
+**HARM-2 now has two independent routes.** The scope note observed that the cubic
+identity holds for arbitrary sum-zero `y`, so the invariant-line argument is
+dispensable and the module can prove the identity directly. With orthogonal
+invariance landed, the other route is also open: the three matrices of
+`scaledRotation` are four times rotations, so dividing by four gives exactly the
+row-orthonormality hypothesis of `gaussianMoment_linearSubstitution`, and the
+moment functional is therefore invariant under the icosahedral action on the
+configuration. That makes `y ↦ M(F_y³)` an invariant cubic form by a structural
+argument rather than by symbolic expansion. Neither route is started; the direct
+one remains the cheaper.
+
+**The apolar clauses are degree-generic.** Neither
+`gaussianMoment_mul_eq_zero_of_laplacian_eq_zero` nor
+`gaussianMoment_mul_linearForm_pow` mentions degree six; both quantify over the
+degree. Only the explicit coefficient table of `zonalHarmonic` is degree-specific.
+The harmonic restriction generalization queued as C813 asks for exact restriction
+scalars at other degrees and can consume these two theorems directly.
+
+## Mystery ledger
+
+No genuine mystery remains in this chunk, and none is manufactured here. Every
+constant that appears is forced: `10395 = 11‼ = (2·6-1)‼` is the apolar factor
+`d !` combined with the `231/16` normalization that makes `P₆(1) = 1`, and the
+`13` of the normalized form is `13‼ / 11‼`. The coefficient cancellations that
+make the zonal form harmonic — `231·30 = 315·22`, `315·12 = 105·36`,
+`105·2 = 5·42` — are the three conditions defining the degree-six Legendre
+polynomial and carry no slack.
+
+Two things are open rather than mysterious, and both have a stated owner or gate:
+
+| item | state | gate or owner |
+|---|---|---|
+| the identification of `normalizedMean` with the normalized surface integral over the two-sphere | not formalized; declared trust boundary, isolated by design in a module of its own that is not written | the `SphereIntegralMoments` row of the module plan in `notes/2026-08-07-c815-harmonic-realization-scope.md`, still inside rows HARM-1 and HARM-2 |
+| the general-degree form `N(Z_u Z_v) = (2d-1)‼ P_d(u·v)` and `M(Z_u Z_v) = P_d(u·v)/(2d+1)` | reasoned, unchecked in Lean; not needed by any current manuscript row | logged to the lane discovery track as an open lead; the nearest consumer is C813 |
+
+The three assertions of the manuscript section that no gap-inventory row covers
+are not an open item of this report: they are owned by C884.
