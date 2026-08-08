@@ -1,6 +1,12 @@
 # Release manifest
 
-Status: **Version 1 published; Version 2 is the current local draft**
+Status: **Version 1 published; Version 2 is the current local draft and will supersede it**
+
+Version 2 corrects a defect in Version 1: the inference from a split-free syndrome
+direction to a one-column MDS extension, and the balanced quantum corollary at field
+order eight that rested on it, are withdrawn.  The Version 2 release note must state
+that correction before its new material.  Version 1's tag, commit, and Zenodo record
+below remain immutable.
 
 Version 1 was published on 2026-07-29 in the public GitHub repository and
 archived by Zenodo.  Its immutable record is:

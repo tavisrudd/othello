@@ -151,118 +151,54 @@ the row; and published Version 1, which carries the same corollary.
 
 ## Remaining
 
-**Decision taken 2026-08-07: the correction is published as a GitHub release**, not as a
-prose erratum.  Version 1 has a DOI but was never distributed further, so there is no
-citing readership to notify and no need for a standalone erratum document; a superseding
-release with the corrected artifact, and a Zenodo version record beside it, is enough.
+**Decisions taken 2026-08-07.**  The correction is published as a GitHub release rather
+than a prose erratum, and **Version 2 supersedes Version 1** — there is no separate
+corrected Version 1 artifact.  Version 1 has a DOI but was never distributed further, so
+there is no citing readership to notify.
 
-Scope question still open, and it changes the work: whether the release carries a
-*corrected Version 1* — the published manuscript with the extension inference and the
-quantum corollary removed and nothing else changed — or *Version 2*, which supersedes it
-and differs substantially in spine, length, and level coverage.  A corrected Version 1 is a
-narrow, auditable delta against `v0.1.0`; Version 2 is a new paper that happens to fix the
-defect.  Do not conflate them in one release.
+What follows from that:
 
-Publication constraints that bind whichever is chosen:
+- **Nothing to export yet.**  The correction already lives in the Version 2 draft, so this
+  task produces no artifact of its own.  The publication step rides with the Version 2
+  release and inherits its readiness gates; it is not independently actionable.
+- **The retraction must not be buried in the revision.**  Version 2 differs from Version 1
+  in spine, length, and level coverage, so a reader diffing the two sees a new paper rather
+  than a withdrawal.  The release note below therefore leads with the withdrawal and states
+  it as a correction of record, before describing anything new.
+- **Version 1 stays intact.**  Tag `v0.1.0`, commit
+  `0d3cea228b852c45f048c3446604ee2146219144`, Zenodo version DOI
+  `10.5281/zenodo.21682216` under concept DOI `10.5281/zenodo.21682069`.  The Version 2
+  release is a forward commit and a new tag under the same concept DOI; it never replaces
+  `v0.1.0` or its Zenodo record.
+- Synchronization runs one way out of this repository, and
+  `notes/export-and-mirror-conventions.md` must be read in full before anything writes to
+  the paper repository, through the guarded export entry point only.
 
-- The standalone repository is `github.com/tavisrudd/beyond4-prs`, Version 1 at tag
-  `v0.1.0`, commit `0d3cea228b852c45f048c3446604ee2146219144`, Zenodo version DOI
-  `10.5281/zenodo.21682216` under concept DOI `10.5281/zenodo.21682069`.
-- Synchronization is one-way from this repository outward, and the existing history is
-  preserved: the correction is an ordinary forward commit and a new tag, never a
-  replacement of `v0.1.0` or of its Zenodo record.
-- `notes/export-and-mirror-conventions.md` must be read in full before anything writes
-  under the paper repository, and the guarded export entry point is the only route.
-- The release note should state plainly what was withdrawn and why, since that is the
-  entire reason for the release.
+## Draft release note for the superseding Version 2
 
-## Draft release note
-
-> **Corrected release.**  This release withdraws the balanced quantum corollary at field
-> order eight and the inference that supported it.
+> **This version supersedes v0.1.0 and corrects a defect in it.  Please read the correction
+> before the new material.**
 >
-> The paper inferred a one-column MDS extension from a split-free syndrome direction.  That
-> step is wrong.  An extension of the dual code by one column requires a syndrome outside
-> the span of every `r-1` parity-check columns, whereas split-freeness places it outside the
-> span of only `r-2`.  The two conditions differ by one column, and at the covering radius
-> proved in the paper the stronger one is unattainable: by Dur's theorem (Discrete
-> Mathematics 126 (1994), 99--105, Theorem 2.4) covering radius `r-1` is *equivalent* to
-> completeness of the normal rational curve's arc in `PG(r-1,q)`, so no extending point
-> exists.  Independently, the `[10,5,6]_8` code the corollary named would be a ten-point arc
-> in `PG(4,8)`, where the maximum is nine.
+> **Correction of record.**  Version 1 inferred a one-column MDS extension from a split-free
+> syndrome direction.  That step is wrong.  Extending the dual code by one column requires a
+> syndrome outside the span of every `r-1` parity-check columns, whereas split-freeness
+> places it outside the span of only `r-2`.  The two conditions differ by one column, and at
+> the covering radius the paper itself proves, the stronger one is unattainable: by Dur's
+> theorem (Discrete Mathematics 126 (1994), 99--105, Theorem 2.4) covering radius `r-1` is
+> *equivalent* to completeness of the normal rational curve's arc in `PG(r-1,q)`, so no
+> extending point exists.  Independently, the `[10,5,6]_8` code named in Version 1 would be a
+> ten-point arc in `PG(4,8)`, where the maximum is nine.
 >
-> Withdrawn: the 1116 one-column `[10,5,6]_8` MDS extensions, the minimum-support
-> `AME(10,8)` stabilizer states, and the associated `[[9,1,5]]_8` quantum MDS codes.
+> **Withdrawn:** the 1116 one-column `[10,5,6]_8` MDS extensions, the minimum-support
+> `AME(10,8)` stabilizer states, and the associated `[[9,1,5]]_8` quantum MDS codes.  The
+> error was in the direction of one implication, not in any computation.
 >
-> Unaffected: everything else.  The count of 1116 split-free directions at `q=8` is
-> certificate-backed and stands as a deep-hole count; the redundancy-five, six, and seven
-> classifications, the covering-radius results, and the geometric content are unchanged.  The
-> error was in the direction of one implication, not in any computation.  The companion
-> papers do not depend on the withdrawn corollary.
-
-## Boundary
-
-Do not weaken `prop:r5-radius`; it is the covering-radius input and is separately proved.
-The question is only whether the deep-hole to MDS-extension step is licensed at this
-radius.  Version 1 is published and carries the same corollary, so a negative outcome
-raises an erratum question that belongs to the user.
-
-
-## Which redundancies are impacted, and what recovery is available
-
-**Impacted regime: all of them, because every radius gate in the paper lands on
-\(\rho=r-1\).**  The overview table proves \(\rho=4,5,6,7,8,9\) at redundancies
-\(5,\dots,10\).  Dur's Theorem 2.4 makes \(\rho=r-1\) *equivalent* to completeness of the
-normal-rational-curve arc in \(PG(r-1,q)\), so at every level in the paper the arc is
-complete and no one-column MDS extension of the dual exists.  The faulty inference is
-therefore wrong wherever it is stated, not only at redundancy five.
-
-**Impacted deliverables: redundancy five only.**  The inference is stated generally but
-cashed in exactly once.  Surfaces:
-
-- `sections/03-dictionary.tex:110` — the general "hence gives a one-column MDS extension"
-  sentence.  Wrong at every redundancy.
-- `sections/02-overview.tex:53` — the status-table column header "Deep holes/MDS
-  extensions".  Misleading at every row; the rows themselves record radii and are correct.
-- `sections/01-introduction.tex:128--131` — advertises the \(q=8\) quantum consequence.
-- `sections/04-redundancy-five.tex` — the \(q=8\) corollary, its proof, the balance
-  condition, and the sentence reading the orbit table as classifying extensions.
-- Ledger row `R5-Q`; the balanced-quantum Lean closure and its axiom audit; the
-  AME/local-unitary companion; published Version 1.
-
-Everything else — the split-free classifications, the radius gates, the recursive carrier
-theorem, the Lucas carriers, R6 through R10 — is untouched.  Those never use the extension
-step.
-
-**The corollary is not recoverable, and the reason is independent of us.**  A
-minimum-support \(\operatorname{AME}(10,8)\) stabilizer state of this construction needs a
-self-dual \([10,5,6]_8\) MDS code, equivalently a \(10\)-arc in \(PG(4,8)\).  The largest
-arc in \(PG(4,8)\) has \(q+1=9\) points: the even-\(q\) exceptions to that bound are the
-dimensions \(k=3\) and \(k=q-1=7\), and \(k=5\) is neither.  So the object named in the
-corollary does not exist, and no re-reading of "relative projective one-column extension"
-can produce it.  It also cannot be relocated: the extension correspondence needs
-\(\rho=r\), which by Kaipa's Conjecture 2' happens only for \(q\) even with \(r=3\) or
-\(r=q-1\); \(r=3\) is below the paper's range, and \(r=q-1\) gives no self-dual
-parameters.
-
-**What can be kept.**
-
-1. The count.  \(1116\) is certificate-backed and is a statement about split-free
-   directions and deep holes; it survives with the extension clause removed.
-2. The orbit and balance structure, restated as statements about syndrome orbits rather
-   than about extensions.
-3. A correct sentence in place of the wrong one.  Our radius results, through Dur's
-   equivalence, say the normal-rational-curve arc is complete at every redundancy in
-   range, so there is *no* one-column MDS extension.  That is the true statement in the
-   direction we were asserting the false one; it is not new, since it follows from the
-   Seroussi--Roth input already cited, but it lets the dictionary keep a correct remark
-   instead of a deletion.
-4. The AME companion's general MDS-to-AME theorems are unaffected; only the \(q=8\)
-   instantiation is void.  Confirm this rather than assume it.
-
-**One live case worth recording.**  At \(q=8\) and redundancy seven, \(k=2\) and Kaipa's
-exceptional row gives \(\rho=r=7\), so there the arc is incomplete and extensions do
-exist.  That is exactly one of the fields the paper already flags as an open radius gap at
-redundancy seven.  The extensions there are \([10,7,4]_8\), not self-dual, so they carry
-no AME consequence, but it is the only place inside the paper's range where the deep-hole
-to MDS-extension correspondence is alive.
+> **Unaffected by the correction:** the count of 1116 split-free directions at `q=8`, which
+> is certificate-backed and stands as a deep-hole count; the redundancy-five, six and seven
+> classifications; the covering-radius results; and the geometric content.  The companion
+> papers never depended on the withdrawn corollary.
+>
+> **New in this version.**  [Version 2 summary goes here at release time: the recursive
+> carrier theorem, the exact redundancy-five split-witness count and its Chebotarev
+> splitting law, the fixed-level classifications through redundancy ten, and the
+> twisted-cubic line-orbit attributions.]

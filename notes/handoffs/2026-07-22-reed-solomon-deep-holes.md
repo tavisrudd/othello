@@ -70,9 +70,10 @@ and Dur's Theorem 2.4 makes covering radius r-1 equivalent to completeness of th
 rational curve's arc, so no extension exists at any redundancy classified here.  The
 balanced q=8 quantum corollary and its AME and quantum-MDS consequences are withdrawn
 across every surface; the 1116 count survives as a deep-hole count.  Neither companion
-paper is affected.  The correction will be published as a GitHub release rather than a
-prose erratum; whether that release carries a corrected Version 1 or Version 2 is the one
-open question, and the release note is drafted on the card.  Diagnosis, impact scope, and
+paper is affected.  The correction is published as a GitHub release rather than a prose
+erratum, and Version 2 supersedes Version 1, so there is no separate corrected Version 1
+artifact and no export until Version 2 is release-ready.  The release note is drafted on
+the card and leads with the withdrawal so the retraction is not buried in the revision.  Diagnosis, impact scope, and
 the publication constraints are in
 `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
 
