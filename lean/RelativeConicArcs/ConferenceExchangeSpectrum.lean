@@ -333,6 +333,45 @@ theorem det_normalizedExchange
   simp [signedTriangle, Matrix.smul_apply, Matrix.sub_apply]
   linear_combination (-3 / 125) * ea + (-3 / 125) * eb + (-3 / 125) * ec + (-2 / 125) * eabc
 
+/-- The determinant `16` is the determinant of the actual cross Gram matrix,
+not only of a separately written scalar polynomial. -/
+theorem det_crossGram_eq_sixteen
+    (ha : a * a = 1) (hb : b * b = 1) (hc : c * c = 1)
+    (h : (fromBlocks (signedTriangle a b c) S Sᵀ E)
+          * (fromBlocks (signedTriangle a b c) S Sᵀ E)
+        = (5 : ℝ) • (1 : Matrix (Fin 3 ⊕ Fin 3) (Fin 3 ⊕ Fin 3) ℝ)) :
+    (S * Sᵀ).det = 16 := by
+  have hdet := det_normalizedExchange a b c S E ha hb hc h
+  rw [normalizedExchange, Matrix.det_smul] at hdet
+  norm_num at hdet ⊢
+  linarith
+
+/-- The trace contraction `12` is the trace of the product of the squared
+principal triangle block with its complementary cross Gram matrix. -/
+theorem trace_triangleSq_mul_crossGram_eq_twelve
+    (ha : a * a = 1) (hb : b * b = 1) (hc : c * c = 1)
+    (h : (fromBlocks (signedTriangle a b c) S Sᵀ E)
+          * (fromBlocks (signedTriangle a b c) S Sᵀ E)
+        = (5 : ℝ) • (1 : Matrix (Fin 3 ⊕ Fin 3) (Fin 3 ⊕ Fin 3) ℝ)) :
+    ((signedTriangle a b c * signedTriangle a b c) * (S * Sᵀ)).trace = 12 := by
+  rw [crossGram_eq (5 : ℝ) (signedTriangle a b c) S E h, Matrix.trace_fin_three]
+  simp [signedTriangle, Matrix.mul_apply, Fin.sum_univ_three, Matrix.smul_apply,
+    Matrix.sub_apply, Matrix.one_apply]
+  ring_nf
+  nlinarith [ha, hb, hc]
+
+/-- Substitution of the actual matrix trace contraction into the balanced
+three-plus-three fourth-word formula gives `-42`. -/
+theorem fourthWordTrace_from_matrix_contraction
+    (ha : a * a = 1) (hb : b * b = 1) (hc : c * c = 1)
+    (h : (fromBlocks (signedTriangle a b c) S Sᵀ E)
+          * (fromBlocks (signedTriangle a b c) S Sᵀ E)
+        = (5 : ℝ) • (1 : Matrix (Fin 3 ⊕ Fin 3) (Fin 3 ⊕ Fin 3) ℝ)) :
+    (27 : ℝ) + 27 -
+        8 * ((signedTriangle a b c * signedTriangle a b c) * (S * Sᵀ)).trace = -42 := by
+  rw [trace_triangleSq_mul_crossGram_eq_twelve a b c S E ha hb hc h]
+  norm_num
+
 /-- The degree-three exchange sectors of the eigenvalue triple
 `(1/5, 4/5, 4/5)`, including the Schur-Weyl checksum. -/
 theorem balancedSpectrum_sectors :
