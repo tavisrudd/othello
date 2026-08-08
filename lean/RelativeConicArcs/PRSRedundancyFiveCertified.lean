@@ -20,12 +20,22 @@ namespace RelativeConicArcs.PRSRedundancyFiveCertified
 open PRSRedundancyFive
 open PRSRedundancyFiveCertificate
 
-/-- The algebraic synthesis and public certificate use the same exact finite
-bridge field band. -/
-theorem finiteBridgeFieldOrders_agree :
-    PRSRedundancyFive.finiteBridgeFieldOrders =
-      PRSRedundancyFiveCertificate.finiteBridgeFieldOrders := by
-  rfl
+/-- Every field order whose classification depends on the finite bridge is inside the
+public certificate's own sub-threshold domain. -/
+theorem requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders :
+    ∀ q ∈ PRSRedundancyFive.requiredBridgeFieldOrders,
+      q ∈ PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders := by
+  decide
+
+/-- The certificate's sub-threshold domain exceeds the required bridge in exactly one
+field order, the binary field of order sixteen, which
+`PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget` closes
+geometrically.  Its certificate row is therefore an independent check of a field the
+classification does not need it for. -/
+theorem certifiedBridgeFieldOrders_exceed_required_only_at_sixteen :
+    ∀ q ∈ PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders,
+      q ∈ PRSRedundancyFive.requiredBridgeFieldOrders ∨ q = 16 := by
+  decide
 
 /-- Redundancy-five synthesis with the exact public-certificate validation
 interface as its finite evidence type. -/
@@ -34,7 +44,8 @@ theorem redundancyFiveSynthesisWithCertificate
     (input : ExceptionalCoverClassificationInput K CertificateValidation q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)
-    (hHighField : q ≥ 20 →
+    (hGeometricRange :
+      GeometricClassificationRange input.families.characteristic q →
       input.aubryPerretPointBound ∧ input.cubicCoverStrataClassified) :
     (∀ s, input.coveringRadius.isDeep s ↔ s ∈ input.families.deep) ∧
       2 * input.families.deep.card =
@@ -45,6 +56,6 @@ theorem redundancyFiveSynthesisWithCertificate
             orbits.sporadicProjectiveOrbitCount,
          nonsporadicOrbitCount input.orbitCase +
             orbits.sporadicSemilinearOrbitCount) :=
-  redundancyFiveSynthesis input orbits hSeroussiRoth hHighField
+  redundancyFiveSynthesis input orbits hSeroussiRoth hGeometricRange
 
 end RelativeConicArcs.PRSRedundancyFiveCertified

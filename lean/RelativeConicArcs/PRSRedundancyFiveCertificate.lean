@@ -184,9 +184,12 @@ def certifiedFieldRecords : List CertifiedFieldRecord := [
   field 49 62426 4 4 4 0
 ]
 
-/-- Fields below the geometric point-count threshold whose classification is
-closed by the finite bridge. -/
-def finiteBridgeFieldOrders : List ℕ :=
+/-- The field orders below twenty at which the public certificate carries an exhaustive
+split-free census.  This is the certificate's own domain below the geometric threshold; it
+is wider than the set of field orders whose classification logically depends on the
+certificate, recorded as
+`RelativeConicArcs.PRSRedundancyFive.requiredBridgeFieldOrders`. -/
+def certifiedBridgeFieldOrders : List ℕ :=
   [7, 8, 9, 11, 13, 16, 17, 19]
 
 /-- Exact field domain of the public finite certificate. -/

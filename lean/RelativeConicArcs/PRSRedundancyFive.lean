@@ -35,7 +35,12 @@ orbit-count hypotheses.  Four further inputs remain visible:
   records the count relation and the tame Riemann--Hurwitz branch budget as hypotheses,
   `ExactSplitWitnessCount.fibreSquarePoints_le_twelve` bounds a split-free fibre square by
   twelve, and `fieldOrder_le_nineteen_of_splitFree` derives the field bound from that and
-  the Aubry--Perret range;
+  the Aubry--Perret range.  In characteristic two the branch budget sharpens to
+  `d₂ + d₃ ≤ 2`, since ramification is wild there; a split-free fibre square then has at
+  most six rational points and
+  `splitMembers_pos_of_characteristicTwoBranchBudget` rules out a split-free pencil over
+  every binary field of order at least sixteen, so the classification needs the finite
+  certificate only at the field orders listed in `requiredBridgeFieldOrders`;
 * semantic validation of the public finite certificate.
 
 No external result or finite-field computation is declared as an axiom.  The synthesis
@@ -501,6 +506,84 @@ theorem ExactSplitWitnessCount.fibreSquarePoints_le_twelve
   have hrel := c.countRelation
   omega
 
+/-- The contribution `3 d₂ + d₃` of the non-split members to the fibre-square point count
+is at most twelve.  This is the tame branch budget rewritten in the weights with which the
+two member types enter the count relation. -/
+theorem ExactSplitWitnessCount.nonSplitWeight_le_twelve (c : ExactSplitWitnessCount) :
+    3 * c.doubleRootMembers + c.cubeMembers ≤ 12 := by
+  have hb := c.branchBudget
+  omega
+
+/-- The sharper branch budget available when ramification is wild, that is in
+characteristic two, is `d₂ + d₃ ≤ 2`; it bounds the non-split contribution by six.  The
+hypothesis is supplied rather than derived, since this structure records no field. -/
+theorem ExactSplitWitnessCount.nonSplitWeight_le_six_of_characteristicTwoBranchBudget
+    (c : ExactSplitWitnessCount)
+    (hwild : c.doubleRootMembers + c.cubeMembers ≤ 2) :
+    3 * c.doubleRootMembers + c.cubeMembers ≤ 6 := by
+  omega
+
+/-- A split-free pencil satisfying the characteristic-two branch budget has at most six
+rational points on its fibre square. -/
+theorem ExactSplitWitnessCount.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget
+    (c : ExactSplitWitnessCount)
+    (hwild : c.doubleRootMembers + c.cubeMembers ≤ 2)
+    (hsplit : c.splitMembers = 0) :
+    c.fibreSquarePoints ≤ 6 := by
+  have hrel := c.countRelation
+  omega
+
+/-- Two-sided bound on the number of completely split squarefree members of the pencil.
+The hypotheses are the exact count relation, an upper bound `B` on the non-split weight
+`3 d₂ + d₃`, and a two-sided bound on the rational points of the fibre square of
+Aubry--Perret shape, `|#Y - (q + 1)| ≤ 2 √q`, which holds when the fibre square is
+geometrically integral of arithmetic genus one.  Instantiating `B` by
+`nonSplitWeight_le_twelve` gives the bound valid in every characteristic, and by
+`nonSplitWeight_le_six_of_characteristicTwoBranchBudget` the sharper characteristic-two
+form.  The main term `(q + 1) / 6` is the expected density of the completely split
+Frobenius class for geometric monodromy `S₃`; the field order `q` enters only through the
+supplied point bound. -/
+theorem ExactSplitWitnessCount.splitMembers_bounds
+    (c : ExactSplitWitnessCount) {q B : ℕ}
+    (hweight : 3 * c.doubleRootMembers + c.cubeMembers ≤ B)
+    (hlower : (q : ℝ) + 1 - 2 * Real.sqrt q ≤ c.fibreSquarePoints)
+    (hupper : (c.fibreSquarePoints : ℝ) ≤ (q : ℝ) + 1 + 2 * Real.sqrt q) :
+    ((q : ℝ) + 1 - 2 * Real.sqrt q - B) / 6 ≤ c.splitMembers ∧
+      (c.splitMembers : ℝ) ≤ ((q : ℝ) + 1 + 2 * Real.sqrt q) / 6 := by
+  have hrel : (c.fibreSquarePoints : ℝ) =
+      6 * (c.splitMembers : ℝ) + 3 * (c.doubleRootMembers : ℝ) +
+        (c.cubeMembers : ℝ) := by
+    exact_mod_cast c.countRelation
+  have hweightR : 3 * (c.doubleRootMembers : ℝ) + (c.cubeMembers : ℝ) ≤ (B : ℝ) := by
+    exact_mod_cast hweight
+  have hnonneg : (0 : ℝ) ≤ 3 * (c.doubleRootMembers : ℝ) + (c.cubeMembers : ℝ) := by
+    positivity
+  exact ⟨by linarith, by linarith⟩
+
+/-- Forced fibre-square invariants just below the geometric threshold.  For
+`17 ≤ q ≤ 19` a split-free pencil whose fibre square meets the Aubry--Perret range,
+written in the squared integer form `(q + 1 - Y) ^ 2 ≤ 4 * q` with `Y ≤ q + 1`, has
+exactly twelve rational points on its fibre square, four members with a rational double
+root, and no member that is a perfect cube.  The manuscript states the range for odd `q`,
+which is where prime powers occur; the arithmetic needs only `17 ≤ q ≤ 19`. -/
+theorem ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree
+    (c : ExactSplitWitnessCount) {q : ℕ}
+    (hsplit : c.splitMembers = 0)
+    (hlow : 17 ≤ q) (hhigh : q ≤ 19)
+    (hle : c.fibreSquarePoints ≤ q + 1)
+    (hbound : (q + 1 - c.fibreSquarePoints) ^ 2 ≤ 4 * q) :
+    c.fibreSquarePoints = 12 ∧ c.doubleRootMembers = 4 ∧ c.cubeMembers = 0 := by
+  have hrel := c.countRelation
+  have hb := c.branchBudget
+  have hten : 10 ≤ c.fibreSquarePoints := by
+    by_contra hlt
+    have h9 : 9 ≤ q + 1 - c.fibreSquarePoints := by omega
+    have hsq : 81 ≤ (q + 1 - c.fibreSquarePoints) ^ 2 := by
+      calc (81 : ℕ) = 9 ^ 2 := by norm_num
+        _ ≤ (q + 1 - c.fibreSquarePoints) ^ 2 := Nat.pow_le_pow_left h9 2
+    omega
+  omega
+
 /-- The redundancy-five field threshold, derived rather than assumed.  If a geometrically
 integral fibre square of arithmetic genus one meets the Aubry--Perret range, written here
 in the squared integer form `(q + 1 - Y) ^ 2 ≤ 4 * q` with `Y ≤ q + 1`, and if the pencil
@@ -517,10 +600,61 @@ theorem fieldOrder_le_nineteen_of_splitFree
     nlinarith [h, h20, Nat.sub_le q 11]
   omega
 
-/-- Fields below the geometric point-count threshold whose classification is
-supplied by the finite certificate. -/
-def finiteBridgeFieldOrders : List ℕ :=
-  [7, 8, 9, 11, 13, 16, 17, 19]
+/-- The field bound available in characteristic two, where a split-free fibre square has
+at most six rational points.  If such a fibre square meets the Aubry--Perret range,
+written in the squared integer form `(q + 1 - Y) ^ 2 ≤ 4 * q` with `Y ≤ q + 1`, then the
+field order is at most twelve. -/
+theorem fieldOrder_le_twelve_of_characteristicTwoSplitFree
+    {q Y : ℕ} (hle : Y ≤ q + 1) (hbound : (q + 1 - Y) ^ 2 ≤ 4 * q)
+    (hsix : Y ≤ 6) : q ≤ 12 := by
+  by_contra hq
+  have h13 : 13 ≤ q := Nat.lt_of_not_le hq
+  have hd : q - 5 ≤ q + 1 - Y := by omega
+  have hsq : (q - 5) ^ 2 ≤ (q + 1 - Y) ^ 2 := Nat.pow_le_pow_left hd 2
+  have hgt : 4 * q < (q - 5) ^ 2 := by
+    have h : q - 5 + 5 = q := by omega
+    nlinarith [h, h13, Nat.sub_le q 5]
+  omega
+
+/-- No binary field of order at least sixteen carries a split-free pencil whose fibre
+square is geometrically integral of arithmetic genus one.  The hypotheses are the
+characteristic-two branch budget `d₂ + d₃ ≤ 2` and the Aubry--Perret range in its squared
+integer form; the conclusion is that the pencil has a completely split squarefree member.
+At `q = 16` the range already forces at least nine rational points on the fibre square,
+against the six the budget allows. -/
+theorem splitMembers_pos_of_characteristicTwoBranchBudget
+    (c : ExactSplitWitnessCount) {q : ℕ}
+    (hwild : c.doubleRootMembers + c.cubeMembers ≤ 2)
+    (hq : 16 ≤ q)
+    (hle : c.fibreSquarePoints ≤ q + 1)
+    (hbound : (q + 1 - c.fibreSquarePoints) ^ 2 ≤ 4 * q) :
+    0 < c.splitMembers := by
+  by_contra hzero
+  have hsplit : c.splitMembers = 0 := Nat.eq_zero_of_not_pos hzero
+  have hsix :=
+    c.fibreSquarePoints_le_six_of_characteristicTwoBranchBudget hwild hsplit
+  have := fieldOrder_le_twelve_of_characteristicTwoSplitFree hle hbound hsix
+  omega
+
+/-- Field orders whose split-free classification is a logical dependency on the finite
+certificate.  The binary field of order sixteen is absent because
+`splitMembers_pos_of_characteristicTwoBranchBudget` closes it geometrically; the
+certificate's own domain, which does include that field, is recorded separately as
+`RelativeConicArcs.PRSRedundancyFiveCertificate.certifiedBridgeFieldOrders`. -/
+def requiredBridgeFieldOrders : List ℕ :=
+  [7, 8, 9, 11, 13, 17, 19]
+
+/-- Field orders at which the split-free classification follows from the geometric
+argument rather than from the finite certificate: every `q ≥ 20`, and in characteristic
+two every `q ≥ 16`. -/
+def GeometricClassificationRange (characteristic q : ℕ) : Prop :=
+  q ≥ 20 ∨ (characteristic = 2 ∧ q ≥ 16)
+
+/-- The binary field of order sixteen lies in the geometric range, so the finite
+certificate's row there is an independent check rather than a logical dependency. -/
+theorem geometricClassificationRange_two_sixteen :
+    GeometricClassificationRange 2 16 :=
+  Or.inr ⟨rfl, le_refl 16⟩
 
 /-- External inputs for covering-radius promotion, high-field geometry, finite-certificate
 validation, and agreement with the concrete split-free predicate. -/
@@ -534,7 +668,9 @@ structure ExceptionalCoverClassificationInput
   orbitCase : OrbitArithmeticCase
   orbitCaseCondition : orbitCase.FieldCondition families.characteristic q
   fieldOrderAtLeastSeven : q ≥ 7
-  classificationRange : q ≥ 20 ∨ q ∈ finiteBridgeFieldOrders
+  classificationRange :
+    GeometricClassificationRange families.characteristic q ∨
+      q ∈ requiredBridgeFieldOrders
   seroussiRothCompleteness : Prop
   aubryPerretPointBound : Prop
   cubicCoverStrataClassified : Prop
@@ -543,13 +679,13 @@ structure ExceptionalCoverClassificationInput
     q ≥ 7 → seroussiRothCompleteness → coveringRadius.radiusRange
   splitFreePredicatesAgree :
     ∀ s, coveringRadius.isSplitFree s ↔ IsSplitFree s
-  highField_splitFree_iff_mem_deepFamilies :
-    q ≥ 20 →
+  geometricRange_splitFree_iff_mem_deepFamilies :
+    GeometricClassificationRange families.characteristic q →
     aubryPerretPointBound →
     cubicCoverStrataClassified →
     ∀ s, IsSplitFree s ↔ s ∈ families.deep
   certified_splitFree_iff_mem_deepFamilies :
-    q ∈ finiteBridgeFieldOrders →
+    q ∈ requiredBridgeFieldOrders →
     CertificateEvidence →
     ∀ s, IsSplitFree s ↔ s ∈ families.deep
 
@@ -563,7 +699,8 @@ theorem redundancyFiveSynthesis
     (input : ExceptionalCoverClassificationInput K CertificateEvidence q)
     (orbits : OrbitData input.orbitCase)
     (hSeroussiRoth : input.seroussiRothCompleteness)
-    (hHighField : q ≥ 20 →
+    (hGeometricRange :
+      GeometricClassificationRange input.families.characteristic q →
       input.aubryPerretPointBound ∧ input.cubicCoverStrataClassified) :
     (∀ s, input.coveringRadius.isDeep s ↔ s ∈ input.families.deep) ∧
       2 * input.families.deep.card =
@@ -577,8 +714,8 @@ theorem redundancyFiveSynthesis
     input.fieldOrderAtLeastSeven hSeroussiRoth
   have hexhaustion : ∀ s, IsSplitFree s ↔ s ∈ input.families.deep := by
     rcases input.classificationRange with hq | hq
-    · exact input.highField_splitFree_iff_mem_deepFamilies hq
-        (hHighField hq).1 (hHighField hq).2
+    · exact input.geometricRange_splitFree_iff_mem_deepFamilies hq
+        (hGeometricRange hq).1 (hGeometricRange hq).2
     · exact input.certified_splitFree_iff_mem_deepFamilies hq
         input.finiteCertificateValidation
   refine ⟨?_, input.families.deep_card_doubled, ?_⟩
