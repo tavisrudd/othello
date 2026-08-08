@@ -60,6 +60,57 @@ sense — a different ambient code, a different arc, or an extension of \(C\) ra
 its dual.  If it is the same object, the corollary is wrong and the error is in the
 direction of the implication, not in the count.
 
+## Verdict, 2026-08-07: the extension step is wrong
+
+Dür was obtained (user-supplied copy, cache key `10.1016/0012-365X(94)90256-9`, SHA-256
+`b28e0b84b00255aadf38d6f6b8d2204a76228f5acc0eacb73066cd40401ed9b1`, 7 pages) and read at
+the load-bearing statements.  His Theorem 2.4 reads:
+
+> \(\rho(d,q)=d-2\) if and only if the arc of every normal rational curve in
+> \(PG(d-2,q)\) is complete.
+
+with `complete` defined in his §1 as not contained in an arc with one more point, and his
+Theorem 2.2 attaching \((q+2)\)-arcs to vectors at distance \(d-1\) — the larger of the
+two possible radii, not ours.
+
+**The counting mismatch, stated exactly.**  For redundancy \(r\) the syndrome space is
+\(PG(r-1,q)\) and the distance of a syndrome from the code is the least number of
+normal-rational-curve columns whose span contains it.  Adjoining a point \(P\) to the
+\((q+1)\)-arc keeps it an arc exactly when no \(r-1\) arc points together with \(P\) lie
+in a hyperplane, that is exactly when \(P\) has distance at least \(r\).  So an arc
+extension, equivalently a one-column MDS extension of the dual, needs a syndrome at
+distance \(r\).
+
+At \(r=5\) our split-free criterion says \(f\) lies in the span of no three columns, so a
+split-free syndrome has distance at least four; Proposition `prop:r5-radius` proves
+\(\rho=4\), so its distance is exactly four.  **Four is one short of five.**  A deep hole
+at the covering radius is not an arc-extending point, and Dür's Theorem 2.4 says so
+directly: \(\rho=d-2=r-1\) is *equivalent* to the arc being complete, so no extending
+point exists at all.
+
+The manuscript's inference conflates "uncovered by three columns" with "uncovered by
+four".  The two sentences that carry it are
+`sections/03-dictionary.tex:110` and the first line of the proof of the \(q=8\)
+corollary in `sections/04-redundancy-five.tex`.
+
+**Consequence.**  There are no \(1116\) one-column \([10,5,6]_8\) MDS extensions; at
+\(q=8\) a \([10,5,6]_8\) MDS code would be a \(10\)-arc in \(PG(4,8)\), and the
+completeness that our own radius proposition establishes forbids it.  The count of
+\(1116\) split-free directions is certificate-backed and stands; what fails is the passage
+from those directions to extensions, and with it the \(\operatorname{AME}(10,8)\) state
+and the \([[9,1,5]]_8\) quantum MDS code drawn from each extension.
+
+The error is in the direction of an implication, not in any computation, and it is
+independent of the twisted-cubic literature repairs.
+
+**Surfaces carrying the claim**, to be handled together once the user decides scope: the
+dictionary sentence; the \(q=8\) corollary and its proof; the abstract and introduction
+wherever the quantum consequence is advertised; the claim--proof--novelty ledger row
+`R5-Q`; the balanced-quantum Lean closure
+`RelativeConicArcs.Gates.PRSBalancedQuantumExtension` and its axiom audit, whose structure
+fields state the extension semantics; the AME/local-unitary companion paper that imports
+the row; and published Version 1, which carries the same corollary.
+
 ## What must be checked, in order
 
 1. ~~Read Kaipa 2017 Section IV and Proposition 4 at full text.~~  Done; quoted above.
