@@ -21,6 +21,20 @@ pass.  The fresh q11 aggregate and release-output refresh remain pending because
 a foreign Lean build survived two separate five-minute guarded waits.  Report:
 [`../2026-08-08-c855-paper-i-trust-boundary-hardening.md`](../2026-08-08-c855-paper-i-trust-boundary-hardening.md).
 
+Unconditional commutant draft (2026-08-08): the proposition-valued
+`ClassicalOddA5ThreePlusThreeSplitting` interface is removed in the task-owned
+base-library worktree.  Two explicit signed action generators produce a
+rank-34 rational system on the 36 operator entries, and the drafted Lean proof
+uses their kernel-evaluated matrices plus symbolic `linarith` to identify the
+two-dimensional commutant with `Q[I,B]`; the integral theorem is correspondingly
+unconditional.  The independent exact checker
+`notes/2026-08-08-c855-odd-commutant-check.py` verifies all sixty action
+matrices commute with `B`, the two displayed generator tables, rank 34, and
+commutant dimension two.  The three Lean edits remain intentionally
+uncommitted and no paper/trust surface is updated until the canonical guarded
+build can elaborate them; another two-minute wait was refused by the same
+foreign Lean owner.
+
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
 is confirmed by the committed check script
