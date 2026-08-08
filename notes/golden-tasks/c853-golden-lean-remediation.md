@@ -167,7 +167,9 @@ counterpart rather than a collection of supporting calculations.
 - [x] Prove p1 = 9/5, p2 = 33/25, and e2 = 24/25.
 - [x] Prove the holonomy formulas for e3, h3, and s(2,1).
 - [ ] Formalize the admissible Hermitian phase and control domain.
-- [ ] Prove the exact componentwise-maximal Pareto segment.
+- [ ] Prove the exact componentwise-maximal Pareto segment.  Domination and
+      antichain geometry are proved from the six manuscript inequalities;
+      continuous-control feasibility and full realization remain.
 - [ ] Prove both endpoint maximization statements.
 - [ ] Prove that constancy of each individual degree-three sector over
       balanced cuts characterizes the real switching/permutation class.

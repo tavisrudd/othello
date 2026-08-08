@@ -602,6 +602,13 @@ quiet-window refresh.  The next mathematical frontier is the admissible
 Hermitian phase/control image and Pareto/equality theorem, not another scalar
 identity.
 
+The abstract Hermitian Pareto reduction has also landed.  It proves that the
+paper's four individual sector bounds and two supporting inequalities place
+every feasible point below the displayed `t ∈ [0,1]` segment, and that distinct
+segment points are incomparable.  It does not yet prove the continuous-control
+bounds or Et-Taoui-family realization, so the full Pareto claim remains open at
+exactly those two bridges.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

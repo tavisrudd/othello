@@ -204,6 +204,16 @@ admissible Hermitian phase/control domain, followed by the componentwise Pareto
 segment and endpoint equality cases.  Squared-spectrum rigidity and stability
 remain downstream of that domain theorem.
 
+The abstract Pareto step is now proved as well.  `SectorPoint`, componentwise
+dominance, and `hermitianFrontier` formalize the three-sector geometry.  From
+the four individual bounds and two supporting inequalities used in the paper,
+`exists_hermitianFrontier_dominates` constructs a parameter `t ∈ [0,1]` whose
+frontier point dominates any feasible point, while
+`hermitianFrontier_dominates_iff` proves that distinct frontier points are
+incomparable.  This deliberately leaves two strength-bearing bridges open:
+every continuous control must satisfy the six assumed inequalities, and the
+Hermitian conference family must realize every `t ∈ [0,1]`.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript
