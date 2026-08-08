@@ -43,7 +43,9 @@ elementary invariant are constant, while the determinant and two degree-three
 sectors are the stated affine functions of squared real triangle holonomy.  It
 also proves the mixed-sector three-variable bound and the exact Pareto
 domination, antichain, maximality, and endpoint geometry conditional on the
-paper's continuous-control feasibility and family-realization bridges.
+paper's remaining continuous-control feasibility and family-realization
+bridges.  For an actual six-mode complex transfer, it proves the exact first
+moment control formula and its `9/5` bound on the real cube.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its continuous-control optimum, the admissible Hermitian
