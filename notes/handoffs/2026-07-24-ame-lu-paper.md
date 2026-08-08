@@ -10,10 +10,15 @@ Discovery companion:
 
 ## Current status
 
-**C890 is active (2026-08-08): formalize C787's exact-base relative
-intertwiner reduction.**  The theorem must distinguish the kernel-checked
-torsor/defect transport from C833's still-unformalized quantitative cleaning
-input, then enter the AME gate and trust audit without overstating coverage.
+**C890 closed (2026-08-08): C787's exact-base reduction is kernel checked.**
+Lean now proves exact line transport, defect invariance, product-intertwiner
+composition, and lossless transfer of an arbitrary supplied one-state
+threshold and coefficient.  The dedicated AME gate audits twenty-two
+terminals with only the three standard axioms, while the manuscript and trust
+maps continue to classify C833's `8 epsilon`, `R_clean`, and `pi sqrt(q)
+epsilon` estimates as manuscript-only analytic inputs.  The 37-page release
+gate and clean standalone mirror `faf6580` pass; the mirror is unpushed.  Full
+report: `2026-08-08-c890-relative-intertwiner-stability-lean.md`.
 
 **C889 closed (2026-08-08): the latent theorem chain is separated from the
 speculative programmes.**  The prime-field MDS--CSS LU-orbit theorem up to
