@@ -2205,6 +2205,58 @@
     },
     {
       "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.AMELU.Multipartite.IsRayIntertwiner.mul_symmetry",
+      "declaration_module": "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.IsRayIntertwiner.mul_symmetry",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator.mul",
+      "declaration_module": "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.IsUnitaryOperator.mul",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
       "declaration": "RelativeConicArcs.AMELU.Multipartite.approximate_decomposition",
       "declaration_module": "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
       "expected_axioms": [
@@ -2215,7 +2267,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2241,7 +2293,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2267,7 +2319,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2293,7 +2345,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2319,7 +2371,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2345,13 +2397,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.exp_siteOperator",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.AMELU.Multipartite.intertwinerDefectSq_intertwiner_mul",
+      "declaration_module": "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.intertwinerDefectSq_intertwiner_mul",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -2371,7 +2449,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2397,7 +2475,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2423,13 +2501,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.localGenerator_eq_zero_of_ray_invariant",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.AMELU.Multipartite.rayIntertwiner_eigenvalue",
+      "declaration_module": "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.rayIntertwiner_eigenvalue",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -2449,13 +2553,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.raySymmetry_eigenvalue",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.AMELU.Multipartite.relative_approximate_decomposition",
+      "declaration_module": "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.AMELU.Multipartite.relative_approximate_decomposition",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -2475,7 +2605,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2501,7 +2631,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2527,7 +2657,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2553,7 +2683,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2579,7 +2709,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2605,7 +2735,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [
@@ -2631,7 +2761,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.AMELUTwoUniformRigidity.json",
-          "sha256": "3c03d0c78287e55a6904cdd6364a5eed14b9af20b5d88786fadea1c22cb54782"
+          "sha256": "c36fd437f6648729e6832fa8e73f81017ed7c66c4bfba7b994c67e58cb1a5c7b"
         }
       ],
       "gates": [

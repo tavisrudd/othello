@@ -14,7 +14,7 @@ manual edit or stale generation.
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.EllipticMirror` | `ProjectiveCap.EllipticMirror` | 2 | 2 | extracted and matched |
 | `trust-spine:finitegeom_first_tag:gate:ProjectiveCap.PlaneOutcome` | `ProjectiveCap.PlaneOutcome` | 3 | 3 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.AMELUAggregate` | `RelativeConicArcs.Gates.AMELUAggregate` | 182 | 182 | extracted and matched |
-| `trust-spine:relconic:gate:RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | `RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | 17 | 17 | extracted and matched |
+| `trust-spine:relconic:gate:RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | `RelativeConicArcs.Gates.AMELUTwoUniformRigidity` | 22 | 22 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ArcsCompleteOutsideConic` | `RelativeConicArcs.Gates.ArcsCompleteOutsideConic` | 48 | 48 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions` | `RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions` | 23 | 23 | extracted and matched |
 | `trust-spine:relconic:gate:RelativeConicArcs.Gates.ClebschArithmeticGluing` | `RelativeConicArcs.Gates.ClebschArithmeticGluing` | 23 | 23 | extracted and matched |
@@ -41,6 +41,6 @@ manual edit or stale generation.
 |---|---:|---:|---|
 | `trust-spine:complete_ports` | 42 | 42 | all terminal axioms extracted and matched |
 | `trust-spine:finitegeom_first_tag` | 7 | 7 | all terminal axioms extracted and matched |
-| `trust-spine:relconic` | 725 | 649 | 76 terminal axiom sets await extraction |
+| `trust-spine:relconic` | 730 | 654 | 76 terminal axiom sets await extraction |
 
-The machine-readable list contains exactly 774 adopted public terminals.
+The machine-readable list contains exactly 779 adopted public terminals.
