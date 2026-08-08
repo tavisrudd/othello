@@ -2861,8 +2861,17 @@
       "last": 884,
       "purpose": "Paper III harmonic section: own the covariant obstruction, Gaunt/Wigner factorization, and Condon-Shortley conversion paragraphs",
       "sequence": 318
+    },
+    {
+      "count": 1,
+      "first": 885,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 885,
+      "purpose": "remediate C883 full-review manuscript citation Lean and trust findings",
+      "sequence": 319
     }
   ],
-  "next_id": 885,
+  "next_id": 886,
   "schema": "codex-task-id-allocations-v1"
 }
