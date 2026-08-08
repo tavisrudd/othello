@@ -1130,8 +1130,9 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C885 | active; full-review checklist frozen | close the bounded manuscript, citation, Lean, and trust defects before the next Version 2 candidate |
+| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1191,8 +1192,8 @@ history.
 
 ## Next command
 
-`go C854`
+`go C885`
 
-(The paper repair is complete.  C854 is the next paper-facing closure and
-requires coordinated ownership of the shared Lean and trust trees; C607 and
-C608 remain separate decoding tasks.)
+(C885 owns the bounded full-review remediation and absorbs C854 at the paper's
+current withdrawn-quantum boundary; C607 and C608 remain separate decoding
+tasks.)
