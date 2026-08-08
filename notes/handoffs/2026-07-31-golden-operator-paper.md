@@ -591,6 +591,17 @@ advertised as manuscript coverage: C853 next owns the Hermitian exchange moment
 formulas and only then the Pareto, rigidity, and stability crown.  The remaining
 all-orders defect is interface bundling, not missing mathematics.
 
+C853 has now closed that Hermitian moment step.  The normalized complex
+exchange matrix `I - A²/5` has kernel-checked formulas `p1=9/5`, `p2=33/25`,
+`e2=24/25`, `e3=4(5-r²)/125`, `h3=(317-4r²)/125`, and
+`s(2,1)=(196+4r²)/125`, bundled with `charpoly(A)=X³-3X-2r` in one registered
+landscape terminal.  The leaf and guarded Golden gate elaborate.  A shared
+queue built the leaf but refused the aggregate after the fixed quiet wait due
+to a foreign Lean process, so the generated trust fact still needs a genuine
+quiet-window refresh.  The next mathematical frontier is the admissible
+Hermitian phase/control image and Pareto/equality theorem, not another scalar
+identity.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

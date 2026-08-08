@@ -3,7 +3,7 @@
 **Lane:** `golden`
 
 **Status:** in progress; matrix semantics and the all-orders real rigidity
-surface are gated, and the Hermitian triangle layer has started
+surface are gated, and the algebraic Hermitian exchange landscape is proved
 
 ## Review checkpoint
 
@@ -174,11 +174,35 @@ order-four nonexistence through a support-count proof.  There is no missing
 inclusion-rank or Ramsey dependency in the Lean route.  The sole all-orders
 residual is a bundled public interface.
 
-The active mathematical uncertainty has moved to the Hermitian bridge: the
-triangle characteristic polynomial is established, but the shortest reusable
-route from it and `C² = 5I` to all normalized exchange moments and the exact
-Pareto domain still has to be designed and checked.  No coverage is claimed
-for that crown yet.
+The active mathematical uncertainty has moved to the Hermitian control domain:
+the triangle characteristic polynomial and normalized exchange moments are
+established, but the admissible phase/control image and exact Pareto domain
+still have to be designed and checked.
+
+## Hermitian landscape checkpoint
+
+`HermitianConferenceExchange` now defines the actual normalized complementary
+Gram operator `I - A²/5` attached to a unit-modulus Hermitian triangle.  It
+proves, at matrix level,
+
+- `p1 = tr(H) = 9/5` and `p2 = tr(H²) = 33/25`;
+- `e2 = 24/25` through Newton's trace identity;
+- `e3 = det(H) = 4(5-r²)/125`;
+- `h3 = (317-4r²)/125`; and
+- `s(2,1) = (196+4r²)/125`.
+
+The public `hermitianExchange_landscape` theorem bundles these formulas with
+the triangle characteristic polynomial `X³ - 3X - 2r`.  Guarded elaboration of
+the leaf and import-only Golden gate passes.  The shared queue built the leaf,
+then correctly refused the aggregate after its fixed quiet wait because a
+foreign Lean build remained live.  Consequently the gate registration is
+committed but its generated fact remains to be refreshed in the next genuine
+quiet window; no stale fact is being cited as validation.
+
+The next proof target is no longer scalar algebra.  It is an explicit
+admissible Hermitian phase/control domain, followed by the componentwise Pareto
+segment and endpoint equality cases.  Squared-spectrum rigidity and stability
+remain downstream of that domain theorem.
 
 ## Scope decision
 

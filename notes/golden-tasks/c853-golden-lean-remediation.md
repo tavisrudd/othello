@@ -2,8 +2,8 @@
 
 **Lane:** golden
 
-**Status:** active after C845 and before C840; real matrix semantics and the
-all-orders rigidity surface are gated, Hermitian and remaining crowns open
+**Status:** active after C845 and before C840; real/all-orders semantics and the
+algebraic Hermitian landscape are proved, control geometry and later crowns open
 
 ## Landed-work review
 
@@ -35,7 +35,10 @@ nonconstancy, small-case, and order-four terminals into the Golden trust
 surface.  Its queued gate and regenerated twenty-five-terminal fact pass with
 no project axiom or opaque declaration.  A new Hermitian triangle module proves
 the paired characteristic polynomial and its complex unit-modulus specialization
-`X³ - 3X - 2r`; the landscape formulas remain open and are not yet gated.
+`X³ - 3X - 2r`.  Its actual normalized exchange matrix now also carries the
+exact `p1`, `p2`, `e2`, `e3`, `h3`, and `s(2,1)` formulas.  The bundled
+landscape terminal is registered and guarded-elaborates through the Golden
+gate; generated-fact refresh awaits a genuine shared-tree quiet window.
 
 ## Goal
 
@@ -161,8 +164,8 @@ counterpart rather than a collection of supporting calculations.
 ## Phase 4: principal Hermitian headline
 
 - [x] Prove the Hermitian triangle characteristic polynomial.
-- [ ] Prove p1 = 9/5, p2 = 33/25, and e2 = 24/25.
-- [ ] Prove the holonomy formulas for e3, h3, and s(2,1).
+- [x] Prove p1 = 9/5, p2 = 33/25, and e2 = 24/25.
+- [x] Prove the holonomy formulas for e3, h3, and s(2,1).
 - [ ] Formalize the admissible Hermitian phase and control domain.
 - [ ] Prove the exact componentwise-maximal Pareto segment.
 - [ ] Prove both endpoint maximization statements.
