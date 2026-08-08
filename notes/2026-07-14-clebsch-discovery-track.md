@@ -1585,3 +1585,64 @@ identification for the six labelled factorizations, which is proved in
 `RelativeConicArcs.ClebschOuterMatchingFrame`.
 
 **Status:** open, unpromoted.
+
+## 2026-08-07 — the moment functional's characterization is Stein's identity for the Gaussian
+
+**Provenance.** Formalizing the moment functional of the harmonic realization
+route in `RelativeConicArcs.SphericalMomentFunctional`.
+
+**Was I looking for this?** No. The obligation was to prove that the
+integration-by-parts recursion together with `N(1) = 1` determines the
+functional, because that uniqueness is what makes orthogonal invariance free.
+The framing below is a side observation about what the uniqueness statement is.
+
+**Observed.** `eq_gaussianMoment_of_recursion` says that a linear functional with
+`L(1) = 1` and `L(xᵢ p) = L(∂ᵢ p)` is the Gaussian moment functional. Read
+measure-theoretically that is exactly Stein's characterization of the standard
+Gaussian: the Gaussian is the unique probability measure with
+`∫ xᵢ f = ∫ ∂ᵢ f`, and the operator whose kernel it characterizes is the
+Ornstein--Uhlenbeck generator. The Lean development proves the polynomial shadow
+of that characterization by induction on degree, with no measure theory.
+
+**Why it is worth recording.** The declared trust boundary of the harmonic route
+is that the defined functional is the normalized surface integral. This suggests
+the boundary has a second, possibly cheaper crossing: identify the functional
+with the Gaussian expectation through Stein's characterization on polynomials,
+then pass to the sphere by polar decomposition. Mathlib carries the Gaussian
+moments; whether it carries enough of the characterization to make that route
+shorter than the direct monomial computation is unchecked.
+
+**Evidence:** REASONED for the framing; LEAN for the polynomial statement.
+
+**Status:** open, unpromoted. The surface-integral identification remains the
+declared boundary and is unstarted either way.
+
+## 2026-08-07 — the thirteen in the zonal Gram identity is the degree read twice
+
+**Provenance.** Proving `gaussianMoment_zonalHarmonic_mul` and its normalized
+form in `RelativeConicArcs.ZonalHarmonicDegreeSix`.
+
+**Was I looking for this?** No. The obligation was the degree-six identity
+`M(Z_u Z_v) = P₆(u·v)/13` that the manuscript's Gram step needs. The general
+degree pattern below fell out of the shape of the proof.
+
+**Observed.** Nothing in the landed proof is special to degree six. For a zonal
+form of degree `d` normalized by `P_d(1) = 1`, the same two apolar clauses give
+`N(Z_u Z_v) = (2d-1)‼ · P_d(u·v)`, and dividing by `(2d+1)‼` leaves
+`M(Z_u Z_v) = P_d(u·v)/(2d+1)`. At `d = 6` these are `11‼ = 10395` and
+`13 = 2·6+1`. The manuscript reads the thirteen as `dim H₆`; the proof produces
+it as `2d+1`, and the two readings agree because the degree-`d` spherical
+harmonics on the two-sphere have dimension `2d+1`.
+
+**Why it may matter.** Two things. First, the manuscript's `1053 = 13·81` factor
+is then a statement about the degree alone, not about the icosahedral
+configuration, which is worth saying once in the prose. Second, the harmonic
+restriction generalization queued as C813 asks for exact restriction scalars at
+other degrees; the landed modules are degree-generic except for the explicit
+degree-six coefficient table, so that task can reuse them rather than rebuild
+them.
+
+**Evidence:** LEAN at degree six; REASONED for general `d`, unchecked in Lean.
+
+**Status:** open, unpromoted. Generalizing the modules to arbitrary degree is not
+needed by any current row.
