@@ -6,11 +6,14 @@
 
 ## State
 
-Work items 1, 2, 4 and 6 are closed, and item 3 has its small-case evidence.
+Work items 1, 2, 4, 6 and 7 are closed, and item 3 is closed on the adaptive
+side. Only items 5 and 8, and the nonadaptive constant, remain.
 Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
 `notes/2026-08-07-c880-mask-ilp-bound.md` (the exact eight-point mask bound),
-`notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim) and
-`notes/2026-08-07-c880-tetrad-screen.md` (the vanishing-tetrad screen).
+`notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim),
+`notes/2026-08-07-c880-tetrad-screen.md` (the vanishing-tetrad screen),
+`notes/2026-08-07-c880-manuscript-wording.md` (item 7, drafted LaTeX) and
+`notes/2026-08-07-c880-adaptive-decoder.md` (the adaptive decoder).
 
 - Seven points is sharp: the alignment tests fail to determine a two-graph up to
   complement at six points, in 46 groups covering 96 of the 512 complement
@@ -98,12 +101,29 @@ constraints; and position the complexity claim inside the existing
 query-counting genre of structure learning, where Franquesa Monés, Zhang and
 Uhler prove matching bounds for conditional-independence tests.
 
-Open next: the constant, now bracketed between \(0.616\,n^2\) and \(3n^2\).
-Two concrete routes — a shared-test construction whose links are non-bipartite
-without an anchor, and the adaptive decoder sketched in the report, which would
-need about \(\binom{n-1}2\) tests and would settle item 4 with a factor-six
-separation. Then item 8, which now has a named baseline to cost against, item 5,
-and item 7, which the audit has unblocked.
+The adaptive side is closed. An explicit decoder reads the two-graph in
+\(\binom n2+n-6\) alignment tests, against the counting lower bound
+\(\binom n2-n\), so the adaptive constant is exactly \(1/2\) and the coherence
+restriction costs nothing to leading order. Its mechanism is an attachment
+lemma: once two edges at a new point are known, every further edge costs one
+test, because a test one of whose two conditions is already known reads as a
+single bit. The bootstrap costs seven tests per point, which is the entropy
+floor for the five bits it pins, except on the two monochromatic helper
+configurations. Adaptivity therefore strictly beats every fixed family from
+\(n=18\) on, against the \(0.616\,n^2\) entropy floor, and beats the exhibited
+\(3n^2-23n+45\) by a factor tending to six. Verified exhaustively at seven and
+eight points and by sampling to \(n=40\):
+`notes/2026-08-07-c880-adaptive-decoder.md`.
+
+Item 7 is drafted against all five audit and screen constraints, with the
+LaTeX quoting the lines it replaces, the discarded alternatives named, and a
+replacement `OPER-4` ledger row: `notes/2026-08-07-c880-manuscript-wording.md`.
+
+Open next: the nonadaptive constant, still bracketed between \(0.616\,n^2\) and
+\(3n^2\); the difference-mask route is exhausted, so the routes left are a
+construction sharing tests between outside pairs and a structural account of the
+weight-four difference masks at general \(n\). Then item 8, which now has a
+named genre match but no matched-units baseline, and item 5.
 
 ## Objective
 
