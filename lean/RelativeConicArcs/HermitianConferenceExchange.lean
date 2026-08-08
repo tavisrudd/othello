@@ -176,6 +176,81 @@ theorem trace_hermitianTransferBlock_gram {m ι : Type*}
   exact trace_frameCompression (D * hermitianNegativeProjection Q * D)
     (hermitianPositiveProjection Q) Qp hPp
 
+/-- For a six-dimensional zero-diagonal Hermitian conference involution, the
+full-space transfer trace is the projector-diagonal control formula. -/
+theorem trace_realDiagonalControl_projections_fin_six
+    (Q : Matrix (Fin 6) (Fin 6) ℂ) (x : Fin 6 → ℝ)
+    (hdiag : ∀ i, Q i i = 0)
+    (hpair : ∀ i j, i ≠ j → Q i j * Q j i = 1 / 5) :
+    (realDiagonalControl x * hermitianNegativeProjection Q * realDiagonalControl x *
+        hermitianPositiveProjection Q).trace =
+      (((6 * ∑ i, x i ^ 2) - (∑ i, x i) ^ 2) / 20 : ℝ) := by
+  have h01 := hpair 0 1 (by decide)
+  have h02 := hpair 0 2 (by decide)
+  have h03 := hpair 0 3 (by decide)
+  have h04 := hpair 0 4 (by decide)
+  have h05 := hpair 0 5 (by decide)
+  have h12 := hpair 1 2 (by decide)
+  have h13 := hpair 1 3 (by decide)
+  have h14 := hpair 1 4 (by decide)
+  have h15 := hpair 1 5 (by decide)
+  have h23 := hpair 2 3 (by decide)
+  have h24 := hpair 2 4 (by decide)
+  have h25 := hpair 2 5 (by decide)
+  have h34 := hpair 3 4 (by decide)
+  have h35 := hpair 3 5 (by decide)
+  have h45 := hpair 4 5 (by decide)
+  simp [Matrix.trace, hermitianNegativeProjection, hermitianPositiveProjection,
+    realDiagonalControl, Matrix.mul_apply, Fin.sum_univ_six, hdiag]
+  linear_combination
+    (-(1 / 2) * (x 0 : ℂ) * x 1) * h01
+      + (-(1 / 2) * (x 0 : ℂ) * x 2) * h02
+      + (-(1 / 2) * (x 0 : ℂ) * x 3) * h03
+      + (-(1 / 2) * (x 0 : ℂ) * x 4) * h04
+      + (-(1 / 2) * (x 0 : ℂ) * x 5) * h05
+      + (-(1 / 2) * (x 1 : ℂ) * x 2) * h12
+      + (-(1 / 2) * (x 1 : ℂ) * x 3) * h13
+      + (-(1 / 2) * (x 1 : ℂ) * x 4) * h14
+      + (-(1 / 2) * (x 1 : ℂ) * x 5) * h15
+      + (-(1 / 2) * (x 2 : ℂ) * x 3) * h23
+      + (-(1 / 2) * (x 2 : ℂ) * x 4) * h24
+      + (-(1 / 2) * (x 2 : ℂ) * x 5) * h25
+      + (-(1 / 2) * (x 3 : ℂ) * x 4) * h34
+      + (-(1 / 2) * (x 3 : ℂ) * x 5) * h35
+      + (-(1 / 2) * (x 4 : ℂ) * x 5) * h45
+
+/-- The projector-diagonal first-moment expression is at most `9/5` on the
+six-dimensional real control cube. -/
+theorem controlFirstMoment_le_nine_fifths (x : Fin 6 → ℝ)
+    (hx : ∀ i, x i ∈ Set.Icc (-1 : ℝ) 1) :
+    (6 * ∑ i, x i ^ 2 - (∑ i, x i) ^ 2) / 20 ≤ 9 / 5 := by
+  have hi : ∀ i, x i ^ 2 ≤ 1 := by
+    intro i
+    have hprod : 0 ≤ (1 - x i) * (1 + x i) :=
+      mul_nonneg (sub_nonneg.mpr (hx i).2) (by linarith [(hx i).1])
+    nlinarith
+  have hsquares : (∑ i, x i ^ 2) ≤ 6 := by
+    simp only [Fin.sum_univ_six]
+    linarith [hi 0, hi 1, hi 2, hi 3, hi 4, hi 5]
+  nlinarith [sq_nonneg (∑ i, x i)]
+
+/-- The first exchange moment of an actual Hermitian conference transfer is
+bounded by `9/5` throughout the real control cube. -/
+theorem re_trace_hermitianTransferBlock_gram_le_nine_fifths
+    (Q : Matrix (Fin 6) (Fin 6) ℂ) (Qp Qm : Matrix (Fin 6) (Fin 3) ℂ)
+    (x : Fin 6 → ℝ)
+    (hPp : Qp * Qpᴴ = hermitianPositiveProjection Q)
+    (hPm : Qm * Qmᴴ = hermitianNegativeProjection Q)
+    (hdiag : ∀ i, Q i i = 0)
+    (hpair : ∀ i j, i ≠ j → Q i j * Q j i = 1 / 5)
+    (hx : ∀ i, x i ∈ Set.Icc (-1 : ℝ) 1) :
+    (((hermitianTransferBlock (realDiagonalControl x) Qp Qm)ᴴ *
+        hermitianTransferBlock (realDiagonalControl x) Qp Qm).trace).re ≤ 9 / 5 := by
+  rw [trace_hermitianTransferBlock_gram (realDiagonalControl x) Q Qp Qm
+    (realDiagonalControl_conjTranspose x) hPp hPm,
+    trace_realDiagonalControl_projections_fin_six Q x hdiag hpair]
+  simpa [pow_two, Complex.mul_re] using controlFirstMoment_le_nine_fifths x hx
+
 /-- The Hermitian triangle with upper-triangular entries `a`, `b`, `c` and
 their conjugates below the diagonal. -/
 def hermitianTriangle (a b c : ℂ) : Matrix (Fin 3) (Fin 3) ℂ :=
