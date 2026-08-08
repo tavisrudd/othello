@@ -14,6 +14,32 @@ Paper IV closure after C860's stages is a defect to report to C860. See
 
 ## Resume here (2026-08-07, latest)
 
+Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
+package. The fourteen weight-ten profile shards are deleted and the gate now names the two
+kernel-checked exclusions that already existed but had never been wired in: the isolated profile is
+excluded over the complete Cartesian choice domain, and the two-regular shape by the manuscript's
+geometric rejection. Both anchor decisions fell too: the forced fourth anchor reduces directly,
+and the regular anchor triple orbit is decided as two tables of encoded pairs — one accumulated in
+a single pass over the matrices, which also records that every entry it set was previously clear,
+the other read off the displayed row masks of the relations of polar invariants three, nine and ten.
+Set equality and injectivity follow, and the transport is symbolic. The new modules are
+`Automorphisms/RelationRows.lean` and `Automorphisms/AnchorOrbit.lean`; the generator now emits row
+masks for polar invariant three. All twelve affected terminals depend only on `propext`,
+`Classical.choice` and `Quot.sound`. Report:
+`notes/2026-08-07-c834-anchor-and-weight-ten-native-closure.md`.
+
+Two things that round leaves open, both recorded in the report. The package gates were **not**
+rebuilt: `MinimumWords.{OrbitS4, OrbitDihedralA, OrbitDihedralB, OrbitDihedralC}` have no compiled
+artifact and are OOM-killed at about 6.6 GB against roughly 6 GB of free host memory, on five
+attempts across every profile and affinity setting the guarded runner offers, because Lake schedules
+those four jobs concurrently and the runner exposes no cap on its job count. That cap is a
+`build-sys` request, not a C834 workaround. And the now-dead executable definitions of
+`WeightTen/Base.lean` and the insertion-sort apparatus of `WeightTen/Aggregate.lean` are still
+there, because editing that file invalidates the same unbuildable subtree; delete them in the first
+window that rebuilds it.
+
+## Superseded resume note (2026-08-07, arc closure)
+
 The minimum-word supports are proved to be twelve-point arcs of the plane, structurally, and the
 blockwise enumeration of the 364 supports against the 78 passant rows is gone. The new module is
 `PassantCodeQ13.MinimumWords.SupportArc`: the symmetric square of a two-by-two matrix has determinant
@@ -373,11 +399,12 @@ neither is elaborated.
     The finite content is the residue exhaustion of `QuadrupleGram` and the bitangent-support
     exhaustion over the 183 dual triples and 13 field elements. Neither the group action nor the
     equivariance transport is used.
-11. Automorphism anchors: the anchor triple is fixed, so no orbit reduction applies; tabulate the
-    signature statements. Stage 2 has already removed the expensive one.
-12. Weight-ten profiles: the seven isolated fibres and seven cycle residues are shard-sized by
-    construction and run on the established reachability kernel. Base-point normalization is already
-    their structural reduction; no further one exists.
+11. Automorphism anchors are closed. The fourth-anchor uniqueness reduces in the kernel outright;
+    the anchor triple orbit is decided as two tables of encoded pairs, compared for equality, with
+    a freshness flag on the accumulating pass supplying injectivity of the anchor image map.
+12. Weight-ten profiles are closed by retiring the fourteen native shards and stating the gate on
+    the kernel-checked isolated-reachability and cycle-exclusion aggregates, which were already
+    proved but had never been wired into the gate.
 13. Fixed-point exhaustion: `fixedPoint_slices_are_stabilizer_orbits` reduces to a packed
     action-index table over the order-28 stabilizer and is small. `fixedPoint_weightTwelveExhaustion`
     is gated on the arc property for an arbitrary weight-twelve codeword, measured above as the only
