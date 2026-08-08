@@ -2144,17 +2144,17 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
-expected_axioms = ["propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ConferenceExchange.transferBlock_gram"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
-expected_axioms = ["propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
-expected_axioms = ["propext"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three"

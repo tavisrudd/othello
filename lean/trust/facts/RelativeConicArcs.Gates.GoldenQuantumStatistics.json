@@ -1,22 +1,155 @@
 {
   "closure": [
+    "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeRigidity",
+    "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceExchangeCompression",
     "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.Gates.GoldenQuantumStatistics",
-    "RelativeConicArcs.GoldenBalancedCut"
+    "RelativeConicArcs.SubsetInclusionSums"
   ],
   "declaration_module": {
+    "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_antifixedProjection": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_trace_pow_two_exchangeCompression_cut": "RelativeConicArcs.BalancedExchangeEigenvalues",
+    "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.card_compl_of_card_eq_two_mul": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix.eq_1": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix.match_1_1": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock.eq_1": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_eq_submatrix_embedding": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_transpose": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.trace_pow_four_principalBlock": "RelativeConicArcs.BalancedExchangeHalfCut",
+    "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq": "RelativeConicArcs.BalancedExchangeRigidity",
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount.congr_simp": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.congr_simp": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_fixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_self": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_signCommutator_mul_isometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_transpose": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_eq": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_mul": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_fin_three": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.compression_exchangeOperator_eq": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.congr_simp": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.eq_zero_of_card_one": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.congr_simp": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_pow": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_antifixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_fixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_involution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.congr_simp": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_add_antifixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_antifixedProjection": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_isometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_self": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_signCommutator_mul_antiIsometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_transpose": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry'": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_antiIsometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_isometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.not_forall_alignedFourSetCount_eq": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_involution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_isometry": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_transpose": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.smul_compression_exchangeOperator": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.sq_signCommutator_mul_involution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_cut": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_exchangeOperator_mul_involution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_signCommutator_mul_involution": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut": "RelativeConicArcs.BalancedExchangeSpectrum",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.congr_simp": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.eq_1": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight.eq_1": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self": "RelativeConicArcs.ConferenceCutBlocks",
+    "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four": "RelativeConicArcs.ConferenceCutBlocks",
     "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_frame": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_positiveProjection": "RelativeConicArcs.ConferenceExchangeCompression",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083_eq_esymm": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.crossGram_eq": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution.eq_1": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_mul_self": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_transpose": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.det_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.congr_simp": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.eq_1": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection_mul_self": "RelativeConicArcs.ConferenceExchangeCompression",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection.eq_1": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_add_negativeProjection": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_frame": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_negativeProjection": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_self": "RelativeConicArcs.ConferenceExchangeCompression",
     "RelativeConicArcs.ConferenceExchange.powerSum": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.powerSum.eq_1": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram": "RelativeConicArcs.ConferenceExchangeSpectrum",
@@ -32,14 +165,15 @@
     "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
     "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange": "RelativeConicArcs.ConferenceExchangeSpectrum",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1": "RelativeConicArcs.GoldenBalancedCut",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": "RelativeConicArcs.GoldenBalancedCut"
+    "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve": "RelativeConicArcs.ConferenceExchangeSpectrum",
+    "RelativeConicArcs.ConferenceExchange.transferBlock": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.transferBlock.eq_1": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.ConferenceExchange.transferBlock_gram": "RelativeConicArcs.ConferenceExchangeCompression",
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq": "RelativeConicArcs.SubsetInclusionSums",
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant": "RelativeConicArcs.SubsetInclusionSums",
+    "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero": "RelativeConicArcs.SubsetInclusionSums",
+    "RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert": "RelativeConicArcs.SubsetInclusionSums",
+    "RelativeConicArcs.SubsetInclusionSums.sum_sub_eq_zero_of_sum_powersetCard_eq": "RelativeConicArcs.SubsetInclusionSums"
   },
   "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
@@ -48,18 +182,145 @@
   "opaque": [],
   "project_axioms": [],
   "project_declarations": [
+    "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_antifixedProjection",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection",
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_trace_pow_two_exchangeCompression_cut",
+    "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock",
+    "RelativeConicArcs.BalancedExchangeHalfCut.card_compl_of_card_eq_two_mul",
+    "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map",
+    "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+    "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose",
+    "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix.eq_1",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix.match_1_1",
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+    "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock.eq_1",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_eq_submatrix_embedding",
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_transpose",
+    "RelativeConicArcs.BalancedExchangeHalfCut.trace_pow_four_principalBlock",
+    "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount.congr_simp",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.congr_simp",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_fixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_self",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_signCommutator_mul_isometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_transpose",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_mul",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_fin_three",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two",
+    "RelativeConicArcs.BalancedExchangeSpectrum.compression_exchangeOperator_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.congr_simp",
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.eq_zero_of_card_one",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.congr_simp",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_pow",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_antifixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_fixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_involution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.congr_simp",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_add_antifixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_antifixedProjection",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_isometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_self",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_signCommutator_mul_antiIsometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_transpose",
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry'",
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_antiIsometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_isometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
+    "RelativeConicArcs.BalancedExchangeSpectrum.not_forall_alignedFourSetCount_eq",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_involution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_isometry",
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_transpose",
+    "RelativeConicArcs.BalancedExchangeSpectrum.smul_compression_exchangeOperator",
+    "RelativeConicArcs.BalancedExchangeSpectrum.sq_signCommutator_mul_involution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_cut",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_exchangeOperator_mul_involution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_signCommutator_mul_involution",
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.congr_simp",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.eq_1",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight",
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight.eq_1",
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one",
+    "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective",
+    "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul",
+    "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard",
+    "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+    "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four",
     "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark",
     "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors",
     "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_frame",
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_positiveProjection",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1",
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083_eq_esymm",
     "RelativeConicArcs.ConferenceExchange.crossGram_eq",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution.eq_1",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_mul_self",
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_transpose",
+    "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen",
     "RelativeConicArcs.ConferenceExchange.det_normalizedExchange",
     "RelativeConicArcs.ConferenceExchange.det_smul_one_sub_normalizedExchange",
+    "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram",
+    "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.congr_simp",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.eq_1",
+    "RelativeConicArcs.ConferenceExchange.negativeProjection_mul_self",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1",
     "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection.eq_1",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_add_negativeProjection",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_frame",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_negativeProjection",
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_self",
     "RelativeConicArcs.ConferenceExchange.powerSum",
     "RelativeConicArcs.ConferenceExchange.powerSum.eq_1",
     "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram",
@@ -75,17 +336,23 @@
     "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
     "RelativeConicArcs.ConferenceExchange.trace_normalizedExchange",
     "RelativeConicArcs.ConferenceExchange.trace_sq_normalizedExchange",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1",
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
-    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
-    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1",
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+    "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve",
+    "RelativeConicArcs.ConferenceExchange.transferBlock",
+    "RelativeConicArcs.ConferenceExchange.transferBlock.eq_1",
+    "RelativeConicArcs.ConferenceExchange.transferBlock_gram",
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq",
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant",
+    "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
+    "RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert",
+    "RelativeConicArcs.SubsetInclusionSums.sum_sub_eq_zero_of_sum_powersetCard_eq"
   ],
   "schema_version": 1,
   "terminal_axioms": {
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": [
       "Classical.choice",
       "Quot.sound",
@@ -97,6 +364,26 @@
       "propext"
     ],
     "RelativeConicArcs.ConferenceExchange.crossGram_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -126,21 +413,521 @@
       "Quot.sound",
       "propext"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": [
+    "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve": [
+      "Classical.choice",
+      "Quot.sound",
       "propext"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": [
-      "propext"
-    ],
-    "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries": [
-      "propext"
-    ],
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": [
+    "RelativeConicArcs.ConferenceExchange.transferBlock_gram": [
+      "Classical.choice",
+      "Quot.sound",
       "propext"
     ]
   },
   "unit": "RelativeConicArcs.Gates.GoldenQuantumStatistics",
   "uses": {
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_antifixedProjection": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod",
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_fixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_trace_pow_two_exchangeCompression_cut": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_eq_submatrix_embedding",
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.closedFourWalkSum_map": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix.eq_1": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix.match_1_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_eq_submatrix"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut",
+      "RelativeConicArcs.BalancedExchangeHalfCut.card_compl_of_card_eq_two_mul",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose",
+      "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometry_charpoly_exchangeCompression_cut_card_three",
+      "RelativeConicArcs.BalancedExchangeHalfCut.card_compl_of_card_eq_two_mul",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose",
+      "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_transpose",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half": [
+      "RelativeConicArcs.BalancedExchangeEigenvalues.exists_isometries_cut",
+      "RelativeConicArcs.BalancedExchangeHalfCut.alignedFourSetCount_principalBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.card_compl_of_card_eq_two_mul",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.complementBlock_transpose",
+      "RelativeConicArcs.BalancedExchangeHalfCut.crossBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix_mul_self",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock",
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_transpose",
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.cutMatrix",
+      "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.not_forall_alignedFourSetCount_eq"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock.eq_1": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_eq_submatrix_embedding": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock_transpose": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeHalfCut.trace_pow_four_principalBlock": [
+      "RelativeConicArcs.BalancedExchangeHalfCut.principalBlock"
+    ],
+    "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight",
+      "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount.congr_simp": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.congr_simp": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_fixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_self": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_signCommutator_mul_isometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_self",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_isometry"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_transpose": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_eq": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_signCommutator_mul_isometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.compression_exchangeOperator_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_signCommutator_mul_antiIsometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry'",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_transpose"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_mul": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_transpose",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_add_antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_isometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_transpose"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_compression_mul",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut_card_three": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.eq_zero_of_card_one"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_fin_three"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.compression_exchangeOperator_eq": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.smul_compression_exchangeOperator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq": [
+      "RelativeConicArcs.ConferenceCutBlocks.mul_transpose_eq_of_sq_smul"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.congr_simp": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.congr_simp": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry'",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_pow": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_isometry"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_antifixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_fixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_involution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_mul_involution": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.sq_signCommutator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.congr_simp": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_add_antifixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_antifixedProjection": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_isometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_isometry"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_self": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_signCommutator_mul_antiIsometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_mul_self",
+      "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_antiIsometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection_transpose": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_mul_self",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection_transpose",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_isometry"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.gram_signCommutator_mul_isometry'": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_transpose",
+      "RelativeConicArcs.BalancedExchangeSpectrum.smul_compression_exchangeOperator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_antiIsometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_isometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.not_forall_alignedFourSetCount_eq": [
+      "RelativeConicArcs.BalancedExchangeRigidity.not_forall_sum_closedFourWalkWeight_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_involution": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_isometry": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.antifixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.involution_mul_isometry",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_transpose": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator.eq_1"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.smul_compression_exchangeOperator": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.sq_signCommutator_mul_involution": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_cut": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression_pow",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_exchangeOperator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator_cut",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_exchangeOperator_mul_involution": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeOperator.eq_1",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_signCommutator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_signCommutator_mul_involution": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator",
+      "RelativeConicArcs.BalancedExchangeSpectrum.signCommutator_mul_involution"
+    ],
+    "RelativeConicArcs.BalancedExchangeSpectrum.trace_pow_two_exchangeCompression_cut": [
+      "RelativeConicArcs.BalancedExchangeSpectrum.alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.cutInvolution",
+      "RelativeConicArcs.BalancedExchangeSpectrum.exchangeCompression",
+      "RelativeConicArcs.BalancedExchangeSpectrum.fixedProjection",
+      "RelativeConicArcs.BalancedExchangeSpectrum.sum_closedFourWalkSum_eq_alignedFourSetCount",
+      "RelativeConicArcs.BalancedExchangeSpectrum.trace_exchangeCompression_pow_cut",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_mul_self",
+      "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum": [
+      "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.congr_simp": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum.eq_1": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_eight_mul_fourSetWeight": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled",
+      "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_of_sum_eq": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_eq_twentyFour_or_neg_eight": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum_labelled": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight.eq_1": [
+      "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight_eq_three_or_neg_one": [
+      "RelativeConicArcs.ConferenceCutBlocks.fourSetWeight"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.instDecidableWalkInjective"
+    ],
+    "RelativeConicArcs.ConferenceCutBlocks.trace_pow_four": [
+      "RelativeConicArcs.ConferenceCutBlocks.closedFourWalkSum",
+      "RelativeConicArcs.ConferenceCutBlocks.sum_closedFourWalkWeight_eq_add_sum_powersetCard"
+    ],
     "RelativeConicArcs.ConferenceExchange.balancedExchange_benchmark": [
       "RelativeConicArcs.ConferenceExchange.balancedSpectrum_sectors",
       "RelativeConicArcs.ConferenceExchange.charpoly_normalizedExchange",
@@ -165,6 +952,16 @@
       "RelativeConicArcs.ConferenceExchange.normalizedExchange",
       "RelativeConicArcs.ConferenceExchange.signedTriangle"
     ],
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_frame": [
+      "RelativeConicArcs.ConferenceExchange.commutator_mul_positiveProjection",
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_frame"
+    ],
+    "RelativeConicArcs.ConferenceExchange.commutator_mul_positiveProjection": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
+    ],
     "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083.eq_1": [
       "RelativeConicArcs.ConferenceExchange.completeHomogeneous\u2083"
     ],
@@ -173,6 +970,28 @@
     ],
     "RelativeConicArcs.ConferenceExchange.crossGram_eq": [
       "RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.cutInvolution"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator": [
+      "RelativeConicArcs.ConferenceExchange.cutInvolution"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq": [
+      "RelativeConicArcs.ConferenceExchange.cutInvolution",
+      "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_mul_self": [
+      "RelativeConicArcs.ConferenceExchange.cutInvolution"
+    ],
+    "RelativeConicArcs.ConferenceExchange.cutInvolution_transpose": [
+      "RelativeConicArcs.ConferenceExchange.cutInvolution"
+    ],
+    "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen": [
+      "RelativeConicArcs.ConferenceExchange.det_normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange",
+      "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
     ],
     "RelativeConicArcs.ConferenceExchange.det_normalizedExchange": [
       "RelativeConicArcs.ConferenceExchange.normalizedExchange",
@@ -184,6 +1003,27 @@
       "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
       "RelativeConicArcs.ConferenceExchange.signedTriangle"
     ],
+    "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram": [
+      "RelativeConicArcs.ConferenceExchange.commutator_mul_frame",
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.negativeProjection_mul_self",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection",
+      "RelativeConicArcs.ConferenceExchange.transferBlock",
+      "RelativeConicArcs.ConferenceExchange.transferBlock_gram"
+    ],
+    "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction": [
+      "RelativeConicArcs.ConferenceExchange.signedTriangle",
+      "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve"
+    ],
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.congr_simp": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.negativeProjection.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.negativeProjection_mul_self": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection"
+    ],
     "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1": [
       "RelativeConicArcs.ConferenceExchange.normalizedExchange"
     ],
@@ -193,6 +1033,23 @@
       "RelativeConicArcs.ConferenceExchange.normalizedExchange.eq_1",
       "RelativeConicArcs.ConferenceExchange.signedTriangle",
       "RelativeConicArcs.ConferenceExchange.signedTriangle_sq"
+    ],
+    "RelativeConicArcs.ConferenceExchange.positiveProjection.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_add_negativeProjection": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_frame": [
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_negativeProjection": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
+    ],
+    "RelativeConicArcs.ConferenceExchange.positiveProjection_mul_self": [
+      "RelativeConicArcs.ConferenceExchange.positiveProjection"
     ],
     "RelativeConicArcs.ConferenceExchange.powerSum.eq_1": [
       "RelativeConicArcs.ConferenceExchange.powerSum"
@@ -237,21 +1094,28 @@
       "RelativeConicArcs.ConferenceExchange.normalizedExchange_eq_of_triangle",
       "RelativeConicArcs.ConferenceExchange.signedTriangle"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet.eq_1": [
-      "RelativeConicArcs.GoldenBalancedCut.crossGramDet"
+    "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve": [
+      "RelativeConicArcs.ConferenceExchange.crossGram_eq",
+      "RelativeConicArcs.ConferenceExchange.signedTriangle"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen": [
-      "RelativeConicArcs.GoldenBalancedCut.crossGramDet"
+    "RelativeConicArcs.ConferenceExchange.transferBlock.eq_1": [
+      "RelativeConicArcs.ConferenceExchange.transferBlock"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula": [
-      "RelativeConicArcs.GoldenBalancedCut.traceContraction",
-      "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
+    "RelativeConicArcs.ConferenceExchange.transferBlock_gram": [
+      "RelativeConicArcs.ConferenceExchange.negativeProjection",
+      "RelativeConicArcs.ConferenceExchange.transferBlock"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction.eq_1": [
-      "RelativeConicArcs.GoldenBalancedCut.traceContraction"
+    "RelativeConicArcs.SubsetInclusionSums.eq_of_sum_powersetCard_eq": [
+      "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant",
+      "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero",
+      "RelativeConicArcs.SubsetInclusionSums.sum_sub_eq_zero_of_sum_powersetCard_eq"
     ],
-    "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve": [
-      "RelativeConicArcs.GoldenBalancedCut.traceContraction"
+    "RelativeConicArcs.SubsetInclusionSums.eq_zero_of_sum_powersetCard_eq_zero": [
+      "RelativeConicArcs.SubsetInclusionSums.eq_of_swap_invariant",
+      "RelativeConicArcs.SubsetInclusionSums.sum_sub_eq_zero_of_sum_powersetCard_eq"
+    ],
+    "RelativeConicArcs.SubsetInclusionSums.sum_sub_eq_zero_of_sum_powersetCard_eq": [
+      "RelativeConicArcs.SubsetInclusionSums.sum_powersetCard_insert"
     ]
   },
   "uses_included": true
