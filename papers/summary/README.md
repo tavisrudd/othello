@@ -24,7 +24,8 @@ Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
 parts are prose proofs, cited inputs, kernel-checked formalizations,
 certificate-checked computations, or trusted executions. See
-[VERIFICATION.md](VERIFICATION.md) for the detailed evidence map.
+[VERIFICATION.md](VERIFICATION.md) for links to the detailed paper-level
+evidence maps.
 
 - [selected headline results](#selected-headline-results)
 - [theorems over infinite families](#theorems-over-infinite-families)
@@ -74,10 +75,11 @@ complex as separate victories.
 
 ### Coding theory and quantum information
 
-- **Projective Reed–Solomon deep holes beyond redundancy four.** Exact
-  classifications reach redundancies five and six for every prime power
-  `q ≥ 7`, redundancy seven in the stated split-free/deep-hole ranges, and
-  redundancies eight through ten for `q ≥ 43, 53, 59`, respectively. At
+- **Projective Reed–Solomon deep holes beyond redundancy four.** Split-free
+  syndrome directions—and deep holes wherever the covering-radius gate
+  applies—are classified at redundancies five and six for every prime power
+  `q ≥ 7`, at redundancy seven in the stated split-free/deep-hole ranges, and
+  at redundancies eight through ten for `q ≥ 43, 53, 59`, respectively. At
   redundancy five, an all-characteristic count gives splitting density `1/6`
   on the trivial-gcd separable stratum. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
 
@@ -93,22 +95,24 @@ complex as separate victories.
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
-- **Order six is the unique nontrivial balanced conference order.** For
-  symmetric conference matrices, order six is the unique nontrivial order at
-  which the balanced exchange spectrum is cut-independent. The Golden
-  six-mode analysis adds orientation-sensitive determinant data and stability
-  bounds, while explicitly treating the device as a theory and design-limit
-  model rather than a report of a built experiment. [Exchange Landscapes, Orientation, and Rigidity](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf).
+- **Order six is the unique nontrivial balanced conference order.** For a
+  symmetric conference matrix, split the modes into two equal parts and take
+  the singular-value spectrum of the corresponding cut block. Order six is
+  the unique nontrivial order at which this spectrum is independent of the
+  balanced split. The Golden six-mode analysis adds orientation-sensitive
+  determinant data and stability bounds, while explicitly treating the device
+  as a theory and design-limit model rather than a report of a built
+  experiment. [Exchange Landscapes, Orientation, and Rigidity](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf).
 
 ## Theorems over infinite families
 
-The exceptional Clebsch, `q = 13`, and `q = 11` objects arise as answers to general
-questions rather than as assumptions. The following table records selected
-infinite-family statements from the major papers.
+The exceptional Clebsch, `q = 13`, and `q = 11` objects arise as answers to
+general questions rather than as assumptions. The following table records
+selected infinite-family statements from the major papers.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Clebsch I | An arc whose uncovered locus is a nonsingular conic obeys `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`, with `q` odd. | Every `k`-arc, over every field order `q`. |
+| Clebsch I | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc, over every field order `q`. |
 | Clebsch I companion | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
 | Clebsch II | The one-dimensional two-valued strength-two trade occurs only for the `B₃/F₇` and `H₃/F₁₁` orbits. | Full `PGL₂(q)`-orbits of perfect matchings, all odd fields. |
 | Clebsch III | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp. | Every two-graph on at least seven vertices. |
@@ -121,9 +125,9 @@ infinite-family statements from the major papers.
 
 ## Papers and entry points
 
-Each link below goes directly to the public PDF and repository. The source
-README in every paper repository gives the paper's scope, current status,
-formalization boundary, and reproducible entry points.
+Each link below points to the public PDF file and repository on GitHub. Each
+repository README gives the paper's scope, current status, formalization
+boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
@@ -158,8 +162,8 @@ certificate checks an output, not necessarily search completeness; Lean checks
 the formal statement, not automatically its correspondence with prose; and a
 computation can discover a pattern without proving it. The individual paper
 repositories state these boundaries and retain exact replay information where
-finite computation is essential. The detailed map is in
-[VERIFICATION.md](VERIFICATION.md).
+finite computation is essential. [VERIFICATION.md](VERIFICATION.md) routes
+readers to each repository's claim-level evidence map.
 
 ## Contact and disclosure
 
@@ -177,10 +181,3 @@ formal-proof development, verification, and manuscript drafting and revision.
 I checked the resulting arguments, computations, code, and cited sources,
 reviewed and edited AI-assisted material, and assume responsibility for the
 content.
-
-I was directly involved in every research/agent session; there were no
-autonomous loops. The models supplied much of the volume of work, while I
-selected targets, chose which branches to deepen or stop, maintained the
-definitions and conceptual links across subjects, and decided what could enter
-a paper. My questions sometimes exposed hidden assumptions or suggested lines
-of inquiry that would otherwise have been missed.

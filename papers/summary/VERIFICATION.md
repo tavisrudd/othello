@@ -1,9 +1,10 @@
 # Verification map
 
-This document gives the detailed evidence entry points for the paper summary.
-It is deliberately claim-level: no repository-wide label such as
-“computer-verified” or “verified in Lean” is intended to cover every theorem in
-a paper.
+This document routes readers from the portfolio summary to each paper's
+detailed evidence map. It is a repository-level index, not itself a
+claim-by-claim ledger: those ledgers and boundaries live in the individual
+paper repositories. No label such as “computer-verified” or “verified in Lean”
+is intended to cover every theorem in a paper.
 
 ## Evidence categories
 
