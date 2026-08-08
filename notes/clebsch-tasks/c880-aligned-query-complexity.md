@@ -40,18 +40,17 @@ Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
   separates, at seven and at eight points. The manuscript's constant is
   therefore not slack inside its own class, and any improvement must share tests
   between outside pairs instead of spending six private ones on each.
-- Adaptivity strictly helps, and the coherence restriction is cheap. A greedy
-  adaptive decoder finishes in 22 questions at seven points against a proved
-  nonadaptive minimum of 30, which is a separation; at eight points it finishes
-  in 30 against a nonadaptive bracket of 25 to 44, consistent with a separation
-  but not establishing one. Measured against the value oracle's optimum — the
-  two-graph dimension \(\binom{n-1}2\), which order-three minor values achieve
-  with no waste — the adaptive worst case costs 1.47 and 1.43, and the mean
-  costs at most 1.041 and 1.043 — an upper bound, since greedy is not optimal.
-  The mean price's sign is open: any complement-invariant one-bit oracle has
-  floor \(\binom{n-1}2-1\), one below the triple oracle's, so the coarser
-  observable could be cheaper on average. Reviewed by a Fable pass, whose
-  corrections are applied: `notes/2026-08-07-c880-framing-review.md`.
+- Adaptivity strictly helps, and the coherence restriction is cheap. The
+  structural decoder below supersedes the greedy measurement that first showed
+  this, but the greedy numbers remain the mean-cost evidence: measured against
+  the value oracle's optimum — the two-graph dimension \(\binom{n-1}2\), which
+  order-three minor values achieve with no waste — the greedy adaptive worst
+  case costs 1.47 and 1.43 at seven and eight points, and its mean at most 1.041
+  and 1.043, an upper bound since greedy is not optimal. The mean price's sign
+  is open: any complement-invariant one-bit oracle has floor
+  \(\binom{n-1}2-1\), one below the triple oracle's, so the coarser observable
+  could be cheaper on average. Reviewed by a Fable pass, whose corrections are
+  applied: `notes/2026-08-07-c880-framing-review.md`.
 - At eight points the bracket is \(30\le\mathrm{minimum}\le44\) against the
   exhibited 53, so the construction is not optimal. The lower end is the exact
   minimum hitting set of the weight-four difference masks, proved optimal by two
