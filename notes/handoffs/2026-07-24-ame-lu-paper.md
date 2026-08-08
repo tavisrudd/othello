@@ -22,9 +22,21 @@ were untouched.  The extension-field simplification and present affine-cocycle
 route fail their structural gates.  Full proof, evidence, and banked ledger:
 `2026-08-08-c889-ame-pair-latent-structure-kill-tests.md`.
 
-**C787 is the highest-EV next quantitative item.**  Reconcile it first against
-C786/C833/C838/C889: its remaining question is two-state stability around an
-exact base intertwiner, not the now-settled one-state logical image.
+**C787 closed (2026-08-08): exact-base two-state stability is lossless.**
+For an exact intertwiner `B`, left translation by `B^dagger` identifies
+the two-state defect with the one-state defect and the exact intertwiner set
+with the torsor `B G(psi)`.  C833 therefore transfers verbatim: local
+Clifford frames have constant `8 epsilon`, and below `R_clean` a nearby
+exact intertwiner has collective residual at most `pi sqrt(q) epsilon`,
+both independent of party count.  The radius retains its `n^(-1/2)` term.
+C581's `q^((m+1)/2)` scale remains the correct price only when no exact base
+is assumed and the target axes must be discovered from one marginal.
+Corollary 5.4 and the synchronized trust maps pass the 36-page release gate.
+Full report: `2026-08-01-c787-relativized-intertwiner-stability.md`.
+
+**No quantitative successor is allocated.**  The highest-EV theorem bank is
+C889's prime-field inter-code LU-orbit theorem for a focused Paper-II revision,
+but that requires a separately allocated literature/adoption item.
 
 **C888 closed (2026-08-08): both follow-up reviews are remediated and
 exported.**  The MDS paper now distinguishes its site-dependent product

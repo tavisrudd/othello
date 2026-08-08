@@ -199,6 +199,60 @@ The first inequality is the elementary chord bound
 \(\lVert e^{ih_i}-I\rVert_{\mathrm{HS}}\leq\lVert h_i\rVert_F\).
 Thus the \(\sqrt n\) loss is absent after exact-symmetry recovery.
 
+The same estimate applies to intertwiners between two states as soon as one
+exact intertwiner is fixed.  This separates the cost of finding the correct
+orbit from stability within that orbit.
+
+\begin{corollary}[Relative intertwiner rounding]
+\label{cor:relative-intertwiner-rounding}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
+\(\AME(2m,q)\) states as in
+Theorem~\ref{thm:cleaning-global-rounding}, and suppose that
+\(B=\bigotimes_iB_i\) is an exact product-unitary intertwiner from
+\(\psi\) to \(\phi\).  For \(U=\bigotimes_iU_i\), put
+\[
+ \varepsilon_{\psi\to\phi}(U)=
+ \min_{|z|=1}\lVert U\psi-z\phi\rVert.
+\]
+If \(\varepsilon_{\psi\to\phi}(U)<\tau_p/8\), then each \(U_i\) is within
+normalized Hilbert--Schmidt distance
+\(8\varepsilon_{\psi\to\phi}(U)\) of \(B_iK_i\) for a one-qudit Clifford
+\(K_i\).  If, in addition,
+\(\varepsilon_{\psi\to\phi}(U)<R^{\mathrm{clean}}_{n,q}\), then, up to
+phase,
+\[
+ U=H\bigotimes_i e^{ih_i},
+ \qquad H\psi\in\mathbb C\phi,
+ \qquad
+ \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
+ \leq\pi\sqrt q\,\varepsilon_{\psi\to\phi}(U),
+\]
+where \(H\) is an exact product-unitary intertwiner and the \(h_i\) are
+traceless Hermitian of spectral spread at most \(\pi\).  After branch
+selection,
+\[
+ \sum_i\left(q^{-1/2}\min_{|z|=1}
+   \lVert U_i-zH_i\rVert_{\mathrm{HS}}\right)^2
+ \leq\pi^2\varepsilon_{\psi\to\phi}(U)^2.
+\]
+Thus the stability constants are independent of the party count; the
+certified radius remains \(R^{\mathrm{clean}}_{n,q}\).
+\end{corollary}
+
+\begin{proof}
+Set \(W=B^\dagger U=\bigotimes_iB_i^\dagger U_i\).  Since \(B\psi\) and
+\(\phi\) span the same ray,
+\(\varepsilon(W)=\varepsilon_{\psi\to\phi}(U)\).  The first paragraph of
+the proof of Theorem~\ref{thm:cleaning-global-rounding} gives the local
+\(8\varepsilon\) estimate under \(\varepsilon(W)<\tau_p/8\).  Under the
+stronger radius hypothesis, apply the theorem and (5.7) to \(W\).  If
+\(W=g\bigotimes_i e^{ih_i}\) with \(g\in G(\psi)\), then \(H=Bg\) is an
+exact intertwiner from \(\psi\) to \(\phi\), and left multiplication by
+each \(B_i\) preserves normalized Hilbert--Schmidt distance.  This proves
+all three estimates.  Exact rigidity also makes every \(B_i\) Clifford, but
+that fact is not needed for the reduction.
+\end{proof}
+
 This does not enlarge the entry radius in (5.3).  Before the branch is
 known, cleaning supplies only the separate bounds (5.5) for locally
 chosen Cliffords \(K_i\).  The \(n\) encoded implementation errors are
