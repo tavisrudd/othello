@@ -303,7 +303,8 @@ Write
 \]
 The $\PGL_2$-module filtration gives
 \[
-                    \cM_9/U\simeq\det^4\otimes E.          \tag{31}
+                    \cM_9/U\simeq\det^4\otimes E.
+ \autoeqtag{eq:lucas-m9-quotient}
 \]
 
 \paragraph{Proof route}
@@ -314,7 +315,8 @@ The proof of \(\cM_9(\F_{2^m})\) shallowness has four distinct steps.
       the Artin--Schreier final-pair cover in
       Proposition~\ref{prop:m9-invariant-block}.
 \item Off \(\PP(U)\), projective transport fixes the nonzero quotient
-      coordinate.  The coefficient map in (37) has rank three or four; in
+      coordinate.  The coefficient map in \eqref{eq:binary-hankel-rank} has
+      rank three or four; in
       either case the nonsquare double-pole calculation makes the
       Artin--Schreier cover geometrically integral.
 \item Fixing five roots leaves one moving base root.  The good-base
@@ -372,7 +374,8 @@ and set
 The final pair has sum $Q/\Delta$, product $N/\Delta$, and rational
 distinct roots precisely when
 \[
-                         y^2+y=N\Delta/Q^2                 \tag{32}
+                         y^2+y=N\Delta/Q^2
+ \autoeqtag{eq:artin-schreier-cover}
 \]
 has a rational point away from the root-collision divisors.  These equations
 descend the cover uniformly across all twists.  Fix five roots and let \(x\)
@@ -423,7 +426,8 @@ finite roots with monic polynomial $h=\sum_{i=0}^6h_it^i$, and define
 with coefficients outside $0,\ldots,6$ equal to zero.  If the final
 pair has sum $s$ and product $p$, the two Hankel equations are exactly
 \[
- A_0+sA_1+pA_2=0,\qquad A_1+sA_2+pA_3=0.                  \tag{33}
+ A_0+sA_1+pA_2=0,\qquad A_1+sA_2+pA_3=0.
+ \autoeqtag{eq:final-pair-linear}
 \]
 On
 \[
@@ -432,27 +436,32 @@ On
 \]
 their unique solution is
 \[
- s=Q/\Delta,\qquad p=(A_1^2+A_0A_2)/\Delta,               \tag{34}
+ s=Q/\Delta,\qquad p=(A_1^2+A_0A_2)/\Delta,
+ \autoeqtag{eq:final-pair-sp}
 \]
 and the pair is rational and distinct exactly when
 \[
  \Tr_{\F_{2^m}/\F_2}\!
- \left(\frac{(A_1^2+A_0A_2)\Delta}{Q^2}\right)=0.          \tag{35}
+ \left(\frac{(A_1^2+A_0A_2)\Delta}{Q^2}\right)=0.
+ \autoeqtag{eq:final-pair-trace}
 \]
 Collision with an old root $r$ is
 \[
- r^2\Delta+rQ+(A_1^2+A_0A_2)=0.                           \tag{36}
+ r^2\Delta+rQ+(A_1^2+A_0A_2)=0.
+ \autoeqtag{eq:final-pair-quadratic}
 \]
 The rank-deficient cases are exactly the corresponding rank-one or
-rank-zero alternatives in (33).
+rank-zero alternatives in \eqref{eq:final-pair-linear}.
 \end{proposition}
 
 \begin{proof}
 Substitute $f=h(t)(t^2+st+p)$ in the two consecutive Hankel equations.
-This gives (33); Cramer's rule gives (34).  In characteristic two the
+This gives \eqref{eq:final-pair-linear}; Cramer's rule gives
+\eqref{eq:final-pair-sp}.  In characteristic two the
 quadratic is split with distinct roots precisely when $s\ne0$ and
-$\Tr(p/s^2)=0$, which is (35).  Evaluation of the quadratic at $r$
-gives (36).  Conversely, every split divisor of nonfull support can be
+$\Tr(p/s^2)=0$, which is \eqref{eq:final-pair-trace}.  Evaluation of the
+quadratic at $r$ gives \eqref{eq:final-pair-quadratic}.  Conversely, every
+split divisor of nonfull support can be
 moved off infinity and partitioned into six roots and a final pair.
 The full-support divisor is checked directly in homogeneous coordinates.
 Thus the criterion loses neither infinity nor the degenerate linear-system
@@ -475,7 +484,8 @@ Hankel kernel.
 
 \begin{proof}
 Proposition~\ref{prop:m9-invariant-block} handles $\PP(U)$.  Outside it,
-projective transport normalizes the quotient in (31) to $[e_4]$, leaving
+projective transport normalizes the quotient in
+\eqref{eq:lucas-m9-quotient} to $[e_4]$, leaving
 the affine slice
 \[
               (z_2,z_3,z_4,z_5,z_6,z_7)=(a,b,1,0,c,d)
@@ -491,14 +501,16 @@ M_z=\begin{pmatrix}
  z_2&z_3&z_4&z_5&z_6&z_7\\
  0&z_2&z_3&z_4&z_5&z_6\\
  0&0&z_2&z_3&z_4&z_5
-\end{pmatrix}                                               \tag{37}
+\end{pmatrix}
+\autoeqtag{eq:binary-hankel-rank}
 \]
 has rank at least three whenever $z_4\ne0$ or $z_5\ne0$.
 Indeed, a two-dimensional left kernel either contains a vector supported
 in its last two coordinates or projects isomorphically to the first two;
 the boundary columns then successively force
 $z_2=z_3=z_4=z_5=0$, a contradiction.  At rank four, $Q$ is an
-irreducible quadric and the double-pole coefficient of (35) along $Q=0$
+irreducible quadric and the double-pole coefficient of
+\eqref{eq:final-pair-trace} along $Q=0$
 is nonsquare.  At rank three, write the unique affine relation as
 $\sum\ell_iA_i=\kappa$.  If that coefficient were square on every
 component of $Q=0$, differentiation gives
@@ -506,7 +518,8 @@ component of $Q=0$, differentiation gives
  \ell_0\kappa=\ell_1\kappa=0,\qquad
  \ell_1\ell_2=\ell_0\ell_3.
 \]
-The six column relations in (37) again force $z_4=z_5=0$.  Hence the
+The six column relations in \eqref{eq:binary-hankel-rank} again force
+$z_4=z_5=0$.  Hence the
 Artin--Schreier cover is geometrically integral throughout the complement.
 The displayed rank split and derivative identities are manuscript
 calculations.  The public rank-two replay reconstructs the complete
@@ -544,7 +557,8 @@ At $q=16$ their complete $\PGL_2$-closure has $510$ divisors, while
 $101$ of the $292$ complement orbits contain none of them; ordinary
 split witnesses still exist on all $101$.  Thus the endpoint criterion of
 Wang--Wu--Hu and Proposition~\ref{prop:linearized} describe a proper section.
-The exact uniform replacement is (33)--(36).
+The exact uniform replacement is
+\eqref{eq:final-pair-linear}--\eqref{eq:final-pair-quadratic}.
 
 \begin{proposition}[Pointed R10 stage budgets]\label{prop:r10-pointed-budgets}
 Let \(f\notin\cP_{10}\cup\cM^{\max}_{10,p}\), and retain \(i\) distinct
@@ -566,7 +580,8 @@ Each retained marker contributes one linear marker diagonal and one
 fixed-marker gcd incidence cut out by quadratic minors, of degree at most
 two.  Thus the full pointed degree is
 \[
-             3+2+(14-2i)+i+2i=19+i\leq23.                  \tag{38}
+             3+2+(14-2i)+i+2i=19+i\leq23.
+ \autoeqtag{eq:binary-deletion-budget}
 \]
 The persistent and Lucas pullbacks can vanish identically only on the
 contained schemes classified by
@@ -576,7 +591,7 @@ diagonal is a proper point.  Finally, the evaluation-hyperplane argument in
 the proof of Proposition~\ref{prop:r9-budgets} shows that an identically
 vanishing fixed-marker minor forces the exact-linear-gcd package after
 cancellation, whose contained case is persistent.  Hence every factor in
-(38) is proper on the stated complement.
+The bound \eqref{eq:binary-deletion-budget} is proper on the stated complement.
 \end{proof}
 
 \begin{proposition}[R10 fixed-depth escape]\label{prop:r10-escape}

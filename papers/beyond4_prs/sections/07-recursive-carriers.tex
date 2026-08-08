@@ -36,7 +36,8 @@ The reduced terminal bad carrier is the irredundant union of the prime
 cubic \(V(D)\) and one residual prime.  Away from characteristics two and
 three the residual prime is the projected Veronese surface
 \[
- [u:v:w]\longmapsto [6u^2:3uv:v^2+2uw:3vw:6w^2],           \tag{26}
+ [u:v:w]\longmapsto [6u^2:3uv:v^2+2uw:3vw:6w^2],
+ \autoeqtag{eq:terminal-residual-param}
 \]
 the locus of syndrome quartics that are scalar multiples of squares of binary
 quadratics: on this map \(f_c=6(uX^2-vXY+wY^2)^2\).  The coordinates here are
@@ -47,7 +48,8 @@ In characteristic two it is the plane \(V(c_0,c_4)\).  In
 characteristic three it is the cone with \(c_2\) free and prime ideal
 \[
  (c_1c_3-c_0c_4,\ c_1^3-c_0^2c_3,\
-   c_0c_3^2-c_1^2c_4,\ c_3^3-c_1c_4^2).                   \tag{27}
+   c_0c_3^2-c_1^2c_4,\ c_3^3-c_1c_4^2).
+ \autoeqtag{eq:terminal-char3-prime}
 \]
 There is no flat reduced integral model having exactly these residual
 fibers.
@@ -104,7 +106,8 @@ reduction gives \(J\subseteq V\), \(3D\,V\subseteq J\), and
 checked separately.
 
 Outside characteristics two and three, elimination of the ordered residual
-roots gives the prime kernel of (26); one convenient generating set is
+roots gives the prime kernel of \eqref{eq:terminal-residual-param}; one
+convenient generating set is
 \begin{align*}
 &2c_3^3-3c_2c_3c_4+c_1c_4^2,\\
 &6c_2c_3^2-9c_2^2c_4+2c_1c_3c_4+c_0c_4^2,\\
@@ -112,7 +115,8 @@ roots gives the prime kernel of (26); one convenient generating set is
   c_0c_3^2-c_1^2c_4,
 \end{align*}
 together with their images under \(c_i\leftrightarrow c_{4-i}\).  Direct
-reduction gives the plane in characteristic two and (27) in characteristic
+reduction gives the plane in characteristic two and
+\eqref{eq:terminal-char3-prime} in characteristic
 three.  The ordered-Hessian calculation sends its complementary ruling to
 rank one.
 
@@ -125,8 +129,10 @@ Singular inputs are in
 \texttt{supplement/evidence/stable-components/}; every generator and
 remainder used for this conclusion is hash-pinned there.
 
-Each displayed residual ideal is prime: (26) is a projective parametrization
-with prime kernel, the characteristic-two ideal is linear, and (27) is the
+Each displayed residual ideal is prime:
+\eqref{eq:terminal-residual-param} is a projective parametrization with prime
+kernel, the characteristic-two ideal is linear, and
+\eqref{eq:terminal-char3-prime} is the
 toric prime of the monomial quartic after projection from \(e_2\).  None is
 contained in \(V(D)\): use \((3,0,1,0,3)\), which is the image of
 \((u,v,w)=(1,0,1)\) and has \(D=8\), together with \(e_2\) and
@@ -151,13 +157,15 @@ one.
 For the order-\(a\) nucleus of the degree-\(d\) curve, its coordinate support
 is contained in
 \[
- \widehat S_{d,p}=\{i:\binom di=0\pmod p\},                \tag{28}
+ \widehat S_{d,p}=\{i:\binom di=0\pmod p\},
+ \autoeqtag{eq:lucas-zero-support}
 \]
 because the nucleus conditions include the row \(d\).  If a support is
 \(S\subset\{0,\ldots,d\}\), one coherent lift has support
 \[
  L_d(S)=\{j:(j=d+1\text{ or }j\in S),\
-                 (j=0\text{ or }j-1\in S)\}.              \tag{29}
+                 (j=0\text{ or }j-1\in S)\}.
+ \autoeqtag{eq:lucas-support-lift}
 \]
 This operation preserves inclusions.  Pascal's identity gives
 \(L_d(\widehat S_{d,p})\subset\widehat S_{d+1,p}\).
@@ -201,12 +209,14 @@ the bottom syndrome is
  a_1&a_2&a_3&a_4&a_5\\
  \vdots&\vdots&\vdots&\vdots&\vdots\\
  a_m&a_{m+1}&a_{m+2}&a_{m+3}&a_{m+4}
- \end{pmatrix}.                                            \tag{30}
+ \end{pmatrix}.
+ \autoeqtag{eq:marker-catalecticant}
 \]
 Over an algebraic closure, products of distinct linear forms are dense in
 the projective space of binary forms.  Deleting the projective kernel of the
 linear map does not change its image closure.  Hence the attainable bottom
-syndromes close to the projectivized row space of (30).  This row space is
+syndromes close to the projectivized row space of
+\eqref{eq:marker-catalecticant}.  This row space is
 irreducible.  If it lies in the finite reduced union of
 Proposition~\ref{prop:reduced-terminal-carrier}, its generic point lies in
 one component, so the whole row space lies in that component.  This is a
@@ -248,8 +258,9 @@ into \(\cP_r\).  In characteristic two it has exactly the two minimal primes
 \]
 The second lies in the persistent \(3\times3\)-minor ideal; the first is the
 binary-plane descendant.  Successive overlaps cut it to the binary line,
-then the central point, then the empty projective space, and formula~(29)
-identifies precisely these spaces as Lucas lifts.  On a nucleus, (29) and
+then the central point, then the empty projective space, and
+\eqref{eq:lucas-support-lift} identifies precisely these spaces as Lucas
+lifts.  On a nucleus, \eqref{eq:lucas-support-lift} and
 Proposition~\ref{prop:maximal-lucas-union} then place every surviving lift in
 the maximal modular carrier.
 
