@@ -76,6 +76,27 @@ landscape.  General balanced-spectrum rigidity already has a reusable formal
 surface in the imported half-cut closure; its exact C853 terminal selection and
 paper correspondence should be reconciled before adding another proof.
 
+## Mystery ledger
+
+The checkpoint `ej`+`tt` pass settled the original semantic mystery: the
+cross-Gram benchmark and the eigenframe exchange compression are now connected
+through actual matrix and half-cut theorem types, rather than by scalar
+surrogates or documentation.
+
+One genuine coverage question remains.  The imported closure already contains
+the general half-cut characteristic-polynomial formula, the second-moment
+formula in terms of aligned four-sets, and the higher-order nonconstancy theorem.
+It is not yet known which clauses of the manuscript's general
+balanced-spectrum result are exact consequences of those declarations and
+which still require order-four exclusion, inclusion-matrix, or Ramsey
+terminals.  The evidence gap is an exact theorem-to-claim reconciliation of
+`BalancedExchangeSpectrum`, `BalancedExchangeEigenvalues`,
+`BalancedExchangeHalfCut`, and `BalancedExchangeRigidity`.  C853 owns that
+reconciliation before new all-orders proof work.
+
+No mystery remains around the retained values `16`, `12`, and `-42`, the
+order-six balanced characteristic polynomial, or their current trust route.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript
