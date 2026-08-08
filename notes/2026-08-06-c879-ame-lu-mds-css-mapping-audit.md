@@ -1,6 +1,15 @@
 # C879 — audit of the paper-extraction plan and module-name mapping for AME--LU and MDS--CSS
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** audit complete; corrections proposed, none applied
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** historical audit;
+its corrections were applied and generalized to all papers by C891 on
+2026-08-08
+
+Current authority is `2026-08-06-c879-module-name-mapping.json` together with
+`2026-08-06-c879-finitegeom-paper-extraction-plan.md`; replay
+`python3 notes/scripts/c879_module_closure.py`.  The counts below remain the
+original 2026-08-06 evidence snapshot.  C890 subsequently added
+`RelativeIntertwinerDecomposition`, taking the AME--LU directory from 56 to 57
+modules and the two-uniform closure from eight to nine modules.
 
 Scope: `notes/2026-08-06-c879-finitegeom-paper-extraction-plan.md` and
 `notes/2026-08-06-c879-module-name-mapping.json`, restricted to the `ame_lu` and

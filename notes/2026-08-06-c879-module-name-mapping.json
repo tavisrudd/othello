@@ -1,10 +1,12 @@
 {
   "schema": "tavisrudd-finitegeom-module-name-mapping",
-  "schema_version": 1,
+  "schema_version": 2,
   "authority": {
     "repository": "othello",
-    "source_commit": "f8447f747d9737aee70948503017f7cb0fad41c2",
-    "status": "planning-map; declaration-level review required before renames"
+    "source_commit": "b22bbbb1d6e2343dc61c2d39af23ca7f0ef64931",
+    "status": "current planning snapshot; declaration-level review remains required before source moves or renames",
+    "refreshed_by": "C891",
+    "refreshed_on": "2026-08-08"
   },
   "naming": {
     "lean_root": "TavisRuddFiniteGeom",
@@ -28,6 +30,136 @@
     {
       "repository": "finitegeom-q16-certificates",
       "reason": "separately versioned certificate source; preserve existing module, gate, audit names and API"
+    }
+  ],
+  "inventory": {
+    "paper_registry": "lean/trust/papers.toml",
+    "repository_registry": "papers/repositories.toml",
+    "trust_area_registries": [
+      "lean/trust/areas/relconic.toml",
+      "lean/trust/areas/complete_ports.toml"
+    ],
+    "export_configuration_directory": "lean/trust/export",
+    "registered_paper_ids": [
+      "ame_lu",
+      "mds_css_transversal_groups",
+      "arcs_complete_outside_conic",
+      "beyond4_prs",
+      "beyond4_prs_submission",
+      "clebsch_factorization",
+      "clebsch_passages",
+      "clebsch_rigidity",
+      "clebsch_rigidity_companion",
+      "complete_repair_ports",
+      "continuation_graph_rigidity",
+      "dihedral_schreier_node_kayles",
+      "equivariant_robust_completion",
+      "golden_operator",
+      "golden_quantum_statistics",
+      "passant_code_q13"
+    ],
+    "standalone_repository_names": [
+      "ame-lu",
+      "mds-css-transversal-groups",
+      "arcs-complete-outside-conic",
+      "beyond4-prs",
+      "clebsch-factorization",
+      "clebsch-passages",
+      "clebsch-rigidity",
+      "complete-repair-ports",
+      "continuation-graph-rigidity",
+      "dihedral-schreier-node-kayles",
+      "equivariant-robust-completion",
+      "golden-quantum-statistics",
+      "golden-operator",
+      "q13-passant-code"
+    ],
+    "axiom_expectation_policy": "Do not duplicate terminal axiom sets here. Every gate disposition names its trust-area registry; the per-terminal expected_axioms entries there are authoritative and must move with the gate."
+  },
+  "current_export_areas": [
+    {
+      "area": "ame_lu",
+      "gate": "RelativeConicArcs.Gates.AMELUAggregate",
+      "closure_modules": 67,
+      "paper_ids": ["ame_lu"],
+      "ownership_status": "pre-split aggregate wider than the current Paper I manuscript"
+    },
+    {
+      "area": "arcs_complete_outside_conic",
+      "gate": "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
+      "closure_modules": 72,
+      "paper_ids": ["arcs_complete_outside_conic"],
+      "ownership_status": "tracked paper export"
+    },
+    {
+      "area": "arcs_complete_outside_conic_additions",
+      "gate": "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions",
+      "closure_modules": 31,
+      "paper_ids": ["arcs_complete_outside_conic"],
+      "ownership_status": "tracked companion export for the same paper"
+    },
+    {
+      "area": "clebsch_factorization",
+      "gate": "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+      "closure_modules": 31,
+      "paper_ids": ["clebsch_factorization"],
+      "ownership_status": "tracked paper export"
+    },
+    {
+      "area": "clebsch_passages",
+      "gate": "RelativeConicArcs.Gates.ClebschPassages",
+      "closure_modules": 19,
+      "paper_ids": ["clebsch_passages"],
+      "ownership_status": "tracked paper export"
+    },
+    {
+      "area": "clebsch_rigidity",
+      "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+      "closure_modules": 94,
+      "paper_ids": ["clebsch_rigidity", "clebsch_rigidity_companion"],
+      "ownership_status": "tracked shared formal surface of the manuscript and computational companion"
+    },
+    {
+      "area": "clebsch_six_arc_concurrence",
+      "gate": "RelativeConicArcs.SixArcConcurrenceSpine",
+      "closure_modules": 26,
+      "paper_ids": [],
+      "ownership_status": "exported companion boundary consumed by the order-eleven certificate package; final paper ownership unresolved"
+    },
+    {
+      "area": "clebsch_support_cubic_orientation",
+      "gate": "RelativeConicArcs.SupportOrientationSpine",
+      "closure_modules": 21,
+      "paper_ids": [],
+      "ownership_status": "exported Clebsch-series companion boundary; final paper ownership unresolved"
+    },
+    {
+      "area": "complete_ports",
+      "gate": "RepairPorts.Gates.CompletePorts",
+      "closure_modules": 31,
+      "paper_ids": ["complete_repair_ports"],
+      "ownership_status": "tracked paper export"
+    },
+    {
+      "area": "golden_quantum_statistics",
+      "gate": "RelativeConicArcs.Gates.GoldenQuantumStatistics",
+      "closure_modules": 9,
+      "paper_ids": ["golden_quantum_statistics"],
+      "ownership_status": "tracked paper export"
+    },
+    {
+      "area": "mds_css_transversal_groups",
+      "gate": "RelativeConicArcs.Gates.MDSCSSTransversalGeometry",
+      "closure_modules": 66,
+      "paper_ids": ["mds_css_transversal_groups"],
+      "ownership_status": "tracked paper export with an explicit dependency on AME-LU results"
+    },
+    {
+      "area": "prs_beyond_redundancy_four",
+      "gate": "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
+      "closure_modules": 16,
+      "paper_ids": ["beyond4_prs", "beyond4_prs_submission"],
+      "ownership_status": "tracked shared formal surface of the canonical and submission entry points"
     }
   ],
   "shared_groups": [
@@ -93,6 +225,7 @@
     {
       "id": "amelu_api",
       "target_namespace": "TavisRuddFiniteGeom.Shared.AMELU",
+      "ownership_status": "central pending declaration-level review; this list is a reachability inventory and does not authorize moving all forty modules into Shared.AMELU",
       "legacy_modules": [
         "RelativeConicArcs.AMELU.Definitions",
         "RelativeConicArcs.AMELU.Dictionary",
@@ -177,7 +310,12 @@
         "RelativeConicArcs.AMELU.UnitaryConjugation": "TavisRuddFiniteGeom.Shared.AMELU.UnitaryConjugation",
         "RelativeConicArcs.AMELU.WeylBasis": "TavisRuddFiniteGeom.Shared.AMELU.WeylBasis"
       },
-      "regrouping": "these 40 modules are the current AME-LU/MDS/PRS-balanced cross-paper API; the balanced gate reaches 37 of them, while three additional modules are shared by the AME-LU and MDS closures. Keep AME-LU-only modules under Papers/ame_lu"
+      "paper_private_candidates": [
+        "RelativeConicArcs.AMELU.GenericLURigidity",
+        "RelativeConicArcs.AMELU.LURigidity",
+        "RelativeConicArcs.AMELU.MarginalAxisRigidity"
+      ],
+      "regrouping": "These forty modules are the old balanced-gate reachability set plus ExtensionFieldPencil, SyndromeGeometry, and TransportDivisor. They are not a settled public API. Keep them physically central until declaration-level review separates reusable definitions from AME-LU paper results and explicit paper adapters."
     },
     {
       "id": "certificate_api",
@@ -253,7 +391,7 @@
         "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.PaperInterface",
         "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Coding",
         "Shared.Incidence",
@@ -266,7 +404,10 @@
       "paper_private_module_map": {
         "RelativeConicArcs.MatchingDesignRigidity": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Incidence.MatchingDesignRigidity",
         "RelativeConicArcs.TangentPairFourGroup": "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.Incidence.TangentPairFourGroup"
-      }
+      },
+      "export_areas": ["arcs_complete_outside_conic", "arcs_complete_outside_conic_additions"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml"
     },
     {
       "id": "beyond4_prs",
@@ -304,14 +445,8 @@
         "RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit": "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.AxiomAudit",
         "RelativeConicArcs.Gates.PRSBalancedQuantumExtension": "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension",
         "RelativeConicArcs.Gates.PRSBalancedQuantumExtensionAxiomAudit": "TavisRuddFiniteGeom.Papers.Beyond4PRS.Verification.QuantumExtensionAxiomAudit",
-        "RelativeConicArcs.PRSBalancedQuantumExtension": "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtension"
+        "RelativeConicArcs.PRSBalancedQuantumExtension": "TavisRuddFiniteGeom.Papers.Beyond4PRS.QuantumExtensionAdapter"
       },
-      "imports_shared": [
-        "Shared.PRS",
-        "Shared.Projective",
-        "Shared.Coding",
-        "Shared.Incidence"
-      ],
       "imports_shared_by_closure": {
         "geometric": [
           "Shared.PRS"
@@ -324,6 +459,8 @@
           "Shared.Incidence"
         ]
       },
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; the PRS pilot must complete declaration-level ownership review before source moves",
       "closure_audit": {
         "geometric_gate_project_owned_modules": [
           "RelativeConicArcs.Gates.PRSBeyondRedundancyFour",
@@ -370,10 +507,13 @@
       },
       "balanced_cross_paper_dependency": {
         "source": "RelativeConicArcs.AMELU.*",
-        "target": "Shared.AMELU",
-        "status": "transitive API review required; the current seven-module AMELU mapping is not the full balanced-gate closure"
+        "target": "Papers.AMELU through an explicit adapter",
+        "status": "transitive declaration-level API review required; do not disguise AME-LU paper theorems as Shared.AMELU merely because the balanced gate reaches them"
       },
-      "split_shared_into": [
+      "export_areas": ["prs_beyond_redundancy_four"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml",
+      "imports_shared": [
         "Shared.PRS",
         "Shared.Coding",
         "Shared.Projective",
@@ -387,23 +527,73 @@
       "target_namespace": "TavisRuddFiniteGeom.Papers.AMELU",
       "legacy_roots": [
         "RelativeConicArcs.Gates.AMELUAggregate",
-        "RelativeConicArcs.Gates.AMELUAggregateAxioms"
-      ],
-      "legacy_roots_external_or_removed": [
-        "RelativeConicArcs.Gates.AMEStabilizerRigidity",
-        "RelativeConicArcs.Gates.AMEStabilizerRigidityAxioms"
+        "RelativeConicArcs.Gates.AMELUAggregateAxioms",
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidity",
+        "RelativeConicArcs.Gates.AMELUTwoUniformRigidityAxioms"
       ],
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.AMELU.PaperInterface",
-        "TavisRuddFiniteGeom.Papers.AMELU.Verification.AxiomAudit"
+        "TavisRuddFiniteGeom.Papers.AMELU.Verification.AxiomAudit",
+        "TavisRuddFiniteGeom.Papers.AMELU.QuantitativeIntertwinerStability",
+        "TavisRuddFiniteGeom.Papers.AMELU.Verification.QuantitativeIntertwinerStabilityAxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.AMELU",
-        "Shared.Coding"
-      ]
+        "Shared.Coding",
+        "Shared.Projective",
+        "Shared.Incidence"
+      ],
+      "paper_private_modules": [
+        "RelativeConicArcs.AMELU.HolonomyCentralizer",
+        "RelativeConicArcs.AMELU.StabilizerAMERigidity",
+        "RelativeConicArcs.AMELU.StabilizerAMESupport",
+        "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition",
+        "RelativeConicArcs.AMELU.LocalGeneratorDecomposition",
+        "RelativeConicArcs.AMELU.ProductUnitaryExponential",
+        "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition",
+        "RelativeConicArcs.AMELU.SiteOperators",
+        "RelativeConicArcs.AMELU.TwoUniformDiscreteness",
+        "RelativeConicArcs.AMELU.TwoUniformIsometry",
+        "RelativeConicArcs.AMELU.TwoUniformProductSymmetry"
+      ],
+      "paper_private_module_map": {
+        "RelativeConicArcs.AMELU.HolonomyCentralizer": "TavisRuddFiniteGeom.Papers.AMELU.HolonomyCentralizer",
+        "RelativeConicArcs.AMELU.StabilizerAMERigidity": "TavisRuddFiniteGeom.Papers.AMELU.StabilizerAMERigidity",
+        "RelativeConicArcs.AMELU.StabilizerAMESupport": "TavisRuddFiniteGeom.Papers.AMELU.StabilizerAMESupport",
+        "RelativeConicArcs.AMELU.ApproximateSymmetryDecomposition": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.ApproximateSymmetryDecomposition",
+        "RelativeConicArcs.AMELU.LocalGeneratorDecomposition": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.LocalGeneratorDecomposition",
+        "RelativeConicArcs.AMELU.ProductUnitaryExponential": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.ProductUnitaryExponential",
+        "RelativeConicArcs.AMELU.RelativeIntertwinerDecomposition": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.RelativeIntertwinerDecomposition",
+        "RelativeConicArcs.AMELU.SiteOperators": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.SiteOperators",
+        "RelativeConicArcs.AMELU.TwoUniformDiscreteness": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.TwoUniformDiscreteness",
+        "RelativeConicArcs.AMELU.TwoUniformIsometry": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.TwoUniformIsometry",
+        "RelativeConicArcs.AMELU.TwoUniformProductSymmetry": "TavisRuddFiniteGeom.Papers.AMELU.Quantitative.TwoUniformProductSymmetry"
+      },
+      "gate_dispositions": [
+        {
+          "gate": "RelativeConicArcs.Gates.AMELUAggregate",
+          "export_area": "ame_lu",
+          "closure_modules": 67,
+          "status": "pre-split aggregate wider than the present Paper I manuscript; retain until a narrow exact PaperInterface is declared"
+        },
+        {
+          "gate": "RelativeConicArcs.Gates.AMELUTwoUniformRigidity",
+          "export_area": null,
+          "closure_modules": 9,
+          "status": "current AME-LU Paper I quantitative-core closure; trust-declared and extracted, but not yet covered by an export configuration"
+        }
+      ],
+      "cross_paper_consumers": [
+        "mds_css_transversal_groups",
+        "beyond4_prs"
+      ],
+      "export_areas": ["ame_lu"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml",
+      "ownership_status": "the eleven listed modules are Paper I-private; the forty-module provisional AMELU inventory still needs declaration-level separation"
     },
     {
-      "id": "mds_css_transversal",
+      "id": "mds_css_transversal_groups",
       "filesystem_alias": "mds_css_transversal_groups",
       "target_namespace": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups",
       "legacy_roots": [
@@ -417,8 +607,46 @@
       "imports_shared": [
         "Shared.AMELU",
         "Shared.Coding",
-        "Shared.Projective"
-      ]
+        "Shared.Projective",
+        "Shared.Incidence"
+      ],
+      "paper_private_modules": [
+        "RelativeConicArcs.AMELU.AutomorphismExactSequence",
+        "RelativeConicArcs.AMELU.DiagonalIsoduality",
+        "RelativeConicArcs.AMELU.FourCopyContraction",
+        "RelativeConicArcs.AMELU.MarginalMoment",
+        "RelativeConicArcs.AMELU.NonabelianExtensionInvariant",
+        "RelativeConicArcs.AMELU.PartyExtensionSplitting"
+      ],
+      "paper_private_module_map": {
+        "RelativeConicArcs.AMELU.AutomorphismExactSequence": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.AutomorphismExactSequence",
+        "RelativeConicArcs.AMELU.DiagonalIsoduality": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.DiagonalIsoduality",
+        "RelativeConicArcs.AMELU.FourCopyContraction": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.FourCopyContraction",
+        "RelativeConicArcs.AMELU.MarginalMoment": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.MarginalMoment",
+        "RelativeConicArcs.AMELU.NonabelianExtensionInvariant": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.NonabelianExtensionInvariant",
+        "RelativeConicArcs.AMELU.PartyExtensionSplitting": "TavisRuddFiniteGeom.Papers.MDSCSSTransversalGroups.PartyExtensionSplitting"
+      },
+      "cross_paper_dependencies": [
+        {
+          "paper": "ame_lu",
+          "legacy_gate_imports": [
+            "RelativeConicArcs.Gates.AMELUDefinitions",
+            "RelativeConicArcs.Gates.AMELUDictionary",
+            "RelativeConicArcs.Gates.AMELUExtensionFieldPencil",
+            "RelativeConicArcs.Gates.AMELULogicalPhaseFourCopy",
+            "RelativeConicArcs.Gates.AMELUMarginalMoment",
+            "RelativeConicArcs.Gates.AMELUPartyExtensionSplitting",
+            "RelativeConicArcs.Gates.AMELUPencilClassification",
+            "RelativeConicArcs.Gates.AMELUStabilizerDictionary",
+            "RelativeConicArcs.Gates.AMELUTransportDivisor"
+          ],
+          "target_disposition": "preserve the legacy module names in the first physical split; replace the nine direct imports by one explicit AME-LU paper adapter before namespace migration"
+        }
+      ],
+      "export_areas": ["mds_css_transversal_groups"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml",
+      "ownership_status": "published paper boundary; DiagonalIsoduality and the other five listed modules are paper-private rather than Shared.AMELU"
     },
     {
       "id": "complete_repair_ports",
@@ -431,10 +659,15 @@
         "TavisRuddFiniteGeom.Papers.CompleteRepairPorts.PaperInterface",
         "TavisRuddFiniteGeom.Papers.CompleteRepairPorts.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Coding",
         "Shared.Incidence"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; current export closure is recorded separately",
+      "export_areas": ["complete_ports"],
+      "trust_area": "complete_ports",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/complete_ports.toml"
     },
     {
       "id": "equivariant_robust_completion",
@@ -447,13 +680,17 @@
         "TavisRuddFiniteGeom.Papers.EquivariantRobustCompletion.PaperInterface",
         "TavisRuddFiniteGeom.Papers.EquivariantRobustCompletion.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Incidence"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; no tracked finitegeom export area exists",
+      "export_areas": [],
+      "formal_status": "paper registered, but no tracked finitegeom export area exists"
     },
     {
-      "id": "q13_passant_code",
+      "id": "passant_code_q13",
       "filesystem_alias": "q13-passant-code",
       "target_namespace": "TavisRuddFiniteGeom.Papers.Q13PassantCode",
       "legacy_roots": [
@@ -464,11 +701,15 @@
         "TavisRuddFiniteGeom.Papers.Q13PassantCode.PaperInterface",
         "TavisRuddFiniteGeom.Papers.Q13PassantCode.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Coding",
         "Shared.Certificates"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; certificate and paper ownership must be reviewed together",
+      "export_areas": [],
+      "formal_status": "paper registered; generated q13 material belongs to its certificate boundary, and no tracked paper area export exists"
     },
     {
       "id": "clebsch_rigidity",
@@ -484,11 +725,16 @@
         "TavisRuddFiniteGeom.Papers.ClebschRigidity.PaperInterface",
         "TavisRuddFiniteGeom.Papers.ClebschRigidity.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Incidence",
         "Shared.Coding"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; current export closure is recorded separately",
+      "export_areas": ["clebsch_rigidity"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml"
     },
     {
       "id": "clebsch_passages",
@@ -504,28 +750,41 @@
         "TavisRuddFiniteGeom.Papers.ClebschPassages.PaperInterface",
         "TavisRuddFiniteGeom.Papers.ClebschPassages.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Incidence"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; current export closure is recorded separately",
+      "export_areas": ["clebsch_passages"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml"
     },
     {
       "id": "clebsch_factorization",
       "filesystem_alias": "clebsch-factorization",
       "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschFactorization",
       "legacy_roots": [
-        "RelativeConicArcs.Gates.ClebschFactorization",
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
         "RelativeConicArcs.Gates.ClebschFactorizationAxiomAudit"
+      ],
+      "superseded_legacy_roots": [
+        "RelativeConicArcs.Gates.ClebschFactorization"
       ],
       "target_roots": [
         "TavisRuddFiniteGeom.Papers.ClebschFactorization.PaperInterface",
         "TavisRuddFiniteGeom.Papers.ClebschFactorization.Verification.AxiomAudit"
       ],
-      "split_shared_into": [
+      "imports_shared": [
         "Shared.Projective",
         "Shared.Incidence",
         "Shared.AMELU"
-      ]
+      ],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; current export closure is recorded separately",
+      "export_areas": ["clebsch_factorization"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml"
     },
     {
       "id": "clebsch_hexagon_code",
@@ -540,7 +799,9 @@
       ],
       "requires_split": true,
       "split_regrouping": "ClebschPaperTrust is a multi-paper aggregate; partition its imported sub-gates by mathematical ownership before renaming",
-      "status": "archived aggregate; no active paper directory in the current tree"
+      "registry_status": "archived_unregistered",
+      "export_areas": [],
+      "status": "archived aggregate; no active paper directory or current paper-registry record"
     },
     {
       "id": "golden_operator",
@@ -554,7 +815,87 @@
         "TavisRuddFiniteGeom.Papers.GoldenOperator.PaperInterface",
         "TavisRuddFiniteGeom.Papers.GoldenOperator.Verification.AxiomAudit"
       ],
-      "status": "auxiliary/future-paper grouping; confirm publication ownership before extraction"
+      "imports_shared": [],
+      "paper_private_modules": [],
+      "paper_private_modules_status": "not enumerated; no tracked finitegeom export area exists",
+      "export_areas": [],
+      "status": "registered paper and standalone repository, but no tracked finitegeom export area; confirm the formal ownership boundary before extraction"
+    },
+    {
+      "id": "beyond4_prs_submission",
+      "filesystem_alias": "beyond4_prs",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.Beyond4PRS",
+      "formal_surface_of": "beyond4_prs",
+      "export_areas": ["prs_beyond_redundancy_four"],
+      "status": "secondary manuscript entry point; it does not own a second Lean package"
+    },
+    {
+      "id": "clebsch_rigidity_companion",
+      "filesystem_alias": "clebsch-rigidity",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ClebschRigidity",
+      "formal_surface_of": "clebsch_rigidity",
+      "export_areas": ["clebsch_rigidity"],
+      "status": "computational companion entry point sharing the parent paper's formal surface"
+    },
+    {
+      "id": "continuation_graph_rigidity",
+      "filesystem_alias": "continuation-graph-rigidity",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.ContinuationGraphRigidity",
+      "legacy_roots": [],
+      "target_roots": [],
+      "imports_shared": [],
+      "paper_private_modules": [],
+      "export_areas": [],
+      "formal_status": "paper and standalone repository registered; no Lean paper gate or tracked finitegeom export area"
+    },
+    {
+      "id": "dihedral_schreier_node_kayles",
+      "filesystem_alias": "dihedral-schreier-node-kayles",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.DihedralSchreierNodeKayles",
+      "legacy_roots": [],
+      "target_roots": [],
+      "imports_shared": [],
+      "paper_private_modules": [],
+      "export_areas": [],
+      "formal_status": "paper and standalone repository registered; its DihedralSchreier Lean development has no tracked finitegeom area and includes a separately declared analytic axiom boundary"
+    },
+    {
+      "id": "golden_quantum_statistics",
+      "filesystem_alias": "golden-quantum-statistics",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics",
+      "legacy_roots": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "target_roots": [
+        "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.PaperInterface",
+        "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.Verification.AxiomAudit"
+      ],
+      "imports_shared": [
+        "Shared.Incidence"
+      ],
+      "paper_private_modules": [
+        "RelativeConicArcs.BalancedExchangeEigenvalues",
+        "RelativeConicArcs.BalancedExchangeHalfCut",
+        "RelativeConicArcs.BalancedExchangeRigidity",
+        "RelativeConicArcs.BalancedExchangeSpectrum",
+        "RelativeConicArcs.ConferenceCutBlocks",
+        "RelativeConicArcs.ConferenceExchangeCompression",
+        "RelativeConicArcs.ConferenceExchangeSpectrum",
+        "RelativeConicArcs.SubsetInclusionSums"
+      ],
+      "paper_private_module_map": {
+        "RelativeConicArcs.BalancedExchangeEigenvalues": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.BalancedExchangeEigenvalues",
+        "RelativeConicArcs.BalancedExchangeHalfCut": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.BalancedExchangeHalfCut",
+        "RelativeConicArcs.BalancedExchangeRigidity": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.BalancedExchangeRigidity",
+        "RelativeConicArcs.BalancedExchangeSpectrum": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.BalancedExchangeSpectrum",
+        "RelativeConicArcs.ConferenceCutBlocks": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.ConferenceCutBlocks",
+        "RelativeConicArcs.ConferenceExchangeCompression": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.ConferenceExchangeCompression",
+        "RelativeConicArcs.ConferenceExchangeSpectrum": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.ConferenceExchangeSpectrum",
+        "RelativeConicArcs.SubsetInclusionSums": "TavisRuddFiniteGeom.Papers.GoldenQuantumStatistics.SubsetInclusionSums"
+      },
+      "export_areas": ["golden_quantum_statistics"],
+      "trust_area": "relconic",
+      "axiom_expectations": "per-terminal expectations in lean/trust/areas/relconic.toml"
     }
   ],
   "aggregate_splits": [
@@ -573,6 +914,14 @@
         "Papers.Beyond4PRS.Verification.QuantumExtensionAxiomAudit"
       ],
       "reason": "separate cross-paper AME-LU adapter; do not include in geometric PaperInterface"
+    },
+    {
+      "legacy_root": "RelativeConicArcs.Gates.AMELUTwoUniformRigidity",
+      "new_roots": [
+        "Papers.AMELU.QuantitativeIntertwinerStability",
+        "Papers.AMELU.Verification.QuantitativeIntertwinerStabilityAxiomAudit"
+      ],
+      "reason": "current Paper I quantitative-core closure; keep separate from the wider pre-split AMELUAggregate and add an export configuration before extraction"
     },
     {
       "legacy_root": "RelativeConicArcs.Gates.ArcsCompleteOutsideConic",
@@ -604,6 +953,9 @@
   "migration_rules": [
     "Do not rename a module solely because it is internal.",
     "Do not move a module into Shared until declaration-level consumers are audited.",
+    "Derive candidate ownership from the union of trust-declared gates, tracked export configurations, and the paper registry; absence from an export configuration is a disposition requiring review, not evidence that a gate is unowned.",
+    "Before replacing a module exported by another area, compare its declaration set and every reverse consumer; byte identity inside the active closure is insufficient if declarations outside that closure would disappear.",
+    "A paper registry alias or secondary entry point shares its named formal_surface_of package and does not create a duplicate Lean ownership boundary.",
     "Do not rename q11 or q16 certificate-repository modules.",
     "Every PaperInterface and shared public interface gets its own exact verification target.",
     "Every mapping that changes a paper-facing Lean module synchronizes finitegeom and all affected paper repositories before closeout."

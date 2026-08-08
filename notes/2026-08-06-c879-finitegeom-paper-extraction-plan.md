@@ -1,8 +1,9 @@
 # C879 — finitegeom paper-boundary extraction plan and red-team
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** planned; the AME--LU and MDS--CSS
-entries of this plan and of `2026-08-06-c879-module-name-mapping.json` carry open corrections from
-`2026-08-06-c879-ame-lu-mds-css-mapping-audit.md`
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** refreshed by C891 on
+2026-08-08 against all registered papers, repositories, trust gates, and export
+areas; no source move is authorized, and declaration-level ownership review
+remains the first execution gate
 
 ## Objective
 
@@ -12,8 +13,10 @@ provenance, or the current monorepo authority.
 
 ## Starting boundary
 
-C879 starts only after the C864 export-completion plan reaches its endpoint. C864 is
-already establishing the useful substrate: tracked area configurations, idempotent
+C879 execution starts only after the C864 export-completion plan reaches its endpoint.
+The C891 metadata refresh does not waive that dependency.  As of its snapshot the
+tree has sixteen paper-registry records, fourteen standalone-repository records, and
+twelve tracked Lean export areas.  C864 is establishing the useful substrate: tracked area configurations, idempotent
 area exports, source manifests, external certificate-package pins, standalone
 finitegeom validation, and clean paper release surfaces. C879 must consume those
 artifacts rather than re-inventing a second ownership map or repeating the export
@@ -34,9 +37,11 @@ finitegeom/
     Projective/  FiniteFields/  Coding/  Incidence/  Certificates/  PRS/
   Papers/
     arcs_complete_outside_conic/  beyond4_prs/  ame_lu/
-    clebsch-rigidity/  clebsch-passages/
+    clebsch-rigidity/  clebsch-passages/  clebsch-factorization/
     q13-passant-code/  mds_css_transversal_groups/
     complete-repair-ports/  equivariant-robust-completion/
+    continuation-graph-rigidity/  dihedral-schreier-node-kayles/
+    golden-operator/  golden-quantum-statistics/
 ```
 
 The directory names above are exact paper/repository aliases and are intentionally
@@ -137,6 +142,31 @@ their source modules reuse the PRS foundation. Those source modules therefore be
 to a central `Shared.PRS` family until their own paper or research-package boundaries
 are declared.
 
+The C891 snapshot records the current tracked export closures without treating those
+closures as ownership proofs:
+
+| Export area | Gate | Project-owned closure |
+|---|---|---:|
+| `ame_lu` | `AMELUAggregate` | 67 |
+| `arcs_complete_outside_conic` | `ArcsCompleteOutsideConic` | 72 |
+| `arcs_complete_outside_conic_additions` | `ArcsCompleteOutsideConicAdditions` | 31 |
+| `clebsch_factorization` | `ClebschArithmeticGluing` | 31 |
+| `clebsch_passages` | `ClebschPassages` | 19 |
+| `clebsch_rigidity` | `ClebschRigidityTrust` | 94 |
+| `clebsch_six_arc_concurrence` | `SixArcConcurrenceSpine` | 26 |
+| `clebsch_support_cubic_orientation` | `SupportOrientationSpine` | 21 |
+| `complete_ports` | `CompletePorts` | 31 |
+| `golden_quantum_statistics` | `GoldenQuantumStatistics` | 9 |
+| `mds_css_transversal_groups` | `MDSCSSTransversalGeometry` | 66 |
+| `prs_beyond_redundancy_four` | `PRSBeyondRedundancyFour` | 16 |
+
+The trust-declared `AMELUTwoUniformRigidity` gate is additional: its current closure
+has nine project-owned modules, including C890's
+`RelativeIntertwinerDecomposition`, but it still has no tracked export configuration.
+It is classified as an AME--LU Paper I quantitative-core closure, not as a future
+paper or unclassified work.  The wider `AMELUAggregate` remains a pre-split export
+whose closure exceeds the current Paper I manuscript surface.
+
 The first source split preserves existing module names. This naming cleanup is a later
 one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
 not trigger a repository-wide rename. Shared-library families use the same rule and
@@ -157,19 +187,25 @@ The `Paper.*` and `FiniteGeom.*` namespace cleanup is a later, package-local cha
 This prevents a directory move from becoming an immediate repository-wide import
 rewrite and rebuild.
 
-Each paper should own a small manifest declaring its roots, source closure, shared
+Each registered paper should own or explicitly alias a small manifest declaring its roots, source closure, shared
 dependencies, generated inputs, certificate packages, axiom expectations, and exact
-replay command. The central trust portfolio should be generated from these manifests,
-not serve as the primary ownership map.
+replay command.  Secondary entry points such as the beyond-four submission manuscript
+and the Clebsch computational companion alias their parent formal surface rather than
+creating duplicate Lean packages.  Papers with no current Lean export area are recorded
+as such rather than omitted.  The central trust portfolio should be generated from
+these manifests, not serve as the primary ownership map.
 
 ## Staged execution and bounded validation
 
-1. Record the C864 endpoint: finitegeom commit, eleven area configurations, area
+1. Record the C864 endpoint: finitegeom commit, twelve area configurations, area
    source manifests, certificate pins, standalone-build result, paper roots, and
    release-fact hashes. Refuse the operation if that endpoint is dirty, non-idempotent,
    or missing its standalone validation.
-2. Derive the first ownership graph directly from the C864 area manifests and import
-   closures, without running Lean. Compute area intersections and reverse consumers;
+2. Derive the first ownership graph from the union of the trust-area gate
+   declarations, tracked export configurations, paper registry, repository registry,
+   and import closures, without running Lean.  A trust-declared gate without an export
+   configuration receives an explicit disposition; it is never silently invisible.
+   Compute area intersections and reverse consumers;
    classify only the residual modules as paper-specific. Treat an area manifest as
    an export boundary, not as automatic proof of declaration-level ownership.
 3. Review overlap modules at declaration level, including `open` namespaces,
@@ -178,7 +214,10 @@ not serve as the primary ownership map.
    out of shared libraries.
 4. Add per-paper manifests and a read-only import-firewall checker while leaving all
    Lean source in place. Reject shared-to-paper imports, undeclared paper-to-paper
-   imports, undeclared generated inputs, and roots outside the manifest closure.
+   imports, undeclared generated inputs, and roots outside the manifest closure.  If a
+   module is also exported by another area, reject any replacement that drops a
+   declaration used outside the active closure even when the replacement's bytes and
+   imports are locally consistent.
 5. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
@@ -198,12 +237,18 @@ not serve as the primary ownership map.
 8. For every later change, compute the exact reverse-import closure before building.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
    affected paper interface; manifest-only changes require no Lean build.
-9. Extract the remaining leaf papers in dependency order: complete ports,
-   equivariant completion, q13 after its certificate package is sealed, Clebsch
-   passages, MDS/CSS after the AME--LU API is frozen, then Clebsch rigidity/hexagon
-   code. Extract the PRS balanced adapter only after AME--LU's public API is frozen.
-10. Freeze the arcs and AME--LU shared APIs last. They are shared-heavy foundations;
-   moving them earlier would repeatedly reopen downstream closures.
+9. Freeze the declaration-level public APIs of upstream families before their
+   downstream consumers: AME--LU before MDS--CSS and the PRS balanced adapter; the PRS
+   family before either beyond-four entry point; shared projective/incidence/coding
+   APIs before the Arcs, Clebsch, q13, and equivariant consumers.  A freeze is an API
+   and ownership decision, not a physical source move.
+10. Extract leaf paper surfaces after those freezes: complete ports; continuation and
+    dihedral if they acquire finitegeom gates; golden quantum statistics; equivariant
+    completion; q13 after its certificate package is sealed; the focused Clebsch
+    surfaces; MDS--CSS; and the PRS balanced adapter.  The golden operator and the two
+    exported Clebsch companion boundaries require explicit paper-ownership decisions.
+    Move the shared-heavy Arcs and AME--LU source families last, after their consumers
+    are green, without reopening the already frozen public APIs.
 11. Only after each monorepo package passes an independent clean replay, split the
     shared libraries and paper source into separately pinned Lake packages. Perform
     namespace cleanup one package at a time after the package boundary is green.
@@ -339,7 +384,7 @@ chunk is closed.
   retrying; never repeat an unchanged failed build.
 - Keep generated certificates downstream and opt-in; do not pull them into every
   paper build.
-- Do not rerun C864's eleven-area export/idempotence pass unless an area manifest or
+- Do not rerun C864's twelve-area export/idempotence pass unless an area manifest or
   its source commit changes; C879 consumes its committed result.
 
 ## Red-team findings and mitigations
@@ -371,13 +416,22 @@ chunk is closed.
 - C864 area boundaries are not automatically paper ownership boundaries. A module
   may be exported in several areas or may declare into another namespace. Require
   overlap review before moving it into `Shared` or a paper directory.
+- A trust-declared gate can be paper-facing without having an export configuration.
+  Inventory trust gates and export configurations independently; the AME--LU
+  two-uniform gate is the current concrete example.
+- A secondary manuscript entry point is not a second Lean owner.  Alias it to the
+  parent formal surface and reject divergent duplicate package maps.
+- Byte-identically replacing a shared module can still delete declarations outside
+  the active area's closure.  Compare declaration sets and reverse consumers before
+  every replacement, including exports that appear locally unchanged.
 - Re-exporting a C864 area does not prove its candidate package builds standalone.
   Keep the standalone finitegeom gate as a prerequisite for every extracted package.
 
 ## First acceptance gate
 
 Before moving source, record the C864 endpoint and commit an ownership/import
-manifest derived from its area manifests, a generated reverse-dependency report, and
+manifest derived from the union of trust gates, export configurations, and paper and
+repository registries, a generated reverse-dependency report, and
 an import-firewall checker. The report must identify the exact shared modules that
 remain required by each paper, the exact paper-specific modules safe to extract, and
 the exact gate targets affected by a change. No source deletion, namespace rewrite,
