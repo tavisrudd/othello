@@ -270,6 +270,43 @@ send only its 336 accepted intersections to the exact witness table and canonica
 fixed 25-bit projection was measured and rejected: it still leaves 81,902 distinct right states and
 is structurally worse than the adaptive separator.
 
+The third-profile prototype passed, but its first formulation peaked at 6,564,672 kB.  Splitting
+left acceptance from right rejection removes the repeated 4,320-candidate left traversal from the
+seven residue leaves of each distinguished fibre.  A second reduction avoids materializing the
+18,360 concatenated right halves in a residue: the checker traverses the 216 fibre tails and the
+residue's secant pairs as a product, XORing their component syndromes.  The analogous product form
+was applied to the five-one and two-triple checks.  Guarded replay then measured 2,743,352 kB for
+the complete five-one packet, 3,998,104 kB for the complete two-triple packet, and 4,756,736 kB for
+the third-profile fibre-zero/residue-zero prototype, all green.
+
+The complete third-profile source is now partitioned across seven distinguished-fibre modules.
+Each module checks its left domain once and its seven first-secant-index residues in separate kernel
+declarations; the first complete fibre module passed in 2m58s but peaked at 6,307,228 kB because its
+largest residue contains 111 secant pairs.  Split every residue once more by the parity of its second
+secant index before the final replay: the fourteen resulting pair blocks contain at most 58 pairs,
+so they preserve the same total semantic domain while restoring a material clean-build margin.  An
+exact diagnostic also found that, in each of the first three profiles, the union of all left
+syndromes is disjoint from the union of all right targets.  Global separators for the first two
+profiles have respectively 195 and 1,441 nodes, but they do not yet reduce the semantic-domain
+checks and make individual shard evaluation deeper; retain the smaller local classifiers unless a
+symbolic projective-action transport removes those repeated checks.  The 14 induced fibre
+permutations are dihedral: they have one orbit on fibres and three seven-element orbits on unordered
+fibre pairs, represented by `(0,1)`, `(0,2)` and `(0,3)`.  This can reduce the mathematical profile
+representatives from `7 + 21 + 7` to `1 + 3 + 1` only after Lean proves preservation of zero
+incidence syndrome and transport of the fibre/secant parameterizations; it is not used as evidence
+for the current leaves.
+
+That balanced split is now implemented using the low incidence-index bit of the second secant point,
+so Boolean case analysis supplies its eventual coverage bridge without modular arithmetic.  The
+generated modules now state explicitly that their trees are untrusted accelerators, identify the
+tracked generator, and defer every semantic assertion to downstream kernel checks.  A separate
+search-free soundness module proves XOR over concatenated halves, acceptance/rejection
+incompatibility, and the three checker-to-syndrome-separation bridges.  The evidence manifest now
+pins the generator and all three generated data modules, the referee inventory lists the complete
+leaf family, deterministic regeneration passes, and the rejecting evidence verifier passes.  Lean
+acceptance of the balanced leaves and the new soundness module is not yet claimed: two ordinary
+guarded attempts exhausted their 120-second quiet wait on a persistent foreign `lake.orig` process.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
