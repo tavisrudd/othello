@@ -650,6 +650,12 @@ The intended surface is thirty-nine terminals; actual Schatten-fourth
 coordinate convexity and the Boolean-control/principal-block semantic map are
 the two remaining `p2` bridges.  The generated fact remains at twenty-five.
 
+Actual transfer Gram invariance under global control negation now reduces
+Boolean support sizes four, five, and six to two, one, and zero.  The intended
+surface is forty terminals.  The remaining `p2` work is the support-block
+identification for sizes at most three and Schatten-fourth coordinate
+convexity; the trust fact still awaits a shared quiet window.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

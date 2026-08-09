@@ -276,6 +276,13 @@ three-coordinate fixed-six matrix just evaluated.  The order-four `1/3`
 small-block theorem was explicitly rejected for this purpose because it has
 the wrong conference normalization.
 
+Control complementation is now semantic too: negating the real diagonal
+control negates `Qmᴴ D Qp`, and the conjugate-transpose Gram product is
+unchanged.  Thus support sizes four, five, and six reduce at the actual transfer
+level to sizes two, one, and zero.  This fortieth intended terminal leaves only
+the support-to-principal-block identification and Schatten coordinate
+convexity in the `p2` bridge.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

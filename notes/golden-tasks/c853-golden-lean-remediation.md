@@ -221,6 +221,8 @@ cases, and literature inputs are explicit in the formal interface.
       application to each matrix objective remains.
       The fixed-six support-size `1`, `2`, and `3` second moments are evaluated;
       the Boolean-control-to-principal-block semantic map remains.
+      Transfer Gram invariance under global control complementation is proved,
+      reducing the semantic census to support sizes at most three.
 - [ ] Characterize every equality case.
 - [ ] Prove that exactly twenty balanced Boolean controls jointly maximize
       all three degree-three sectors.
