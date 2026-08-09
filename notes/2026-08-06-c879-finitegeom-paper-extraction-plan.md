@@ -11,6 +11,15 @@ Progressively separate the shared `finitegeom` Lean repository into reviewer-fri
 paper packages without breaking shared mathematics, trust boundaries, certificate
 provenance, or the current monorepo authority.
 
+The primary build invariant is stronger than source ownership: ordinary edits to
+human-scale shared or paper Lean must never schedule a rebuild of the frozen q11,
+q16, or other heavyweight certificate leaves.  A heavyweight certificate rebuild is
+allowed only when a reviewed change to the minimal stable certificate API makes the
+existing artifact genuinely incompatible, after an exact reverse-dependency report,
+an explicit user decision, and a measured rebuild plan.  A missing cache, changed
+paper pin, finitegeom release, or unrelated source edit is a refusal, not permission
+to rebuild a certificate package.
+
 ## Starting boundary
 
 C879 execution starts only after the C864 export-completion plan reaches its endpoint.
@@ -26,8 +35,30 @@ The C864 phase-1 stale-build-residue sweep is not itself a C879 prerequisite to
 repeat. The relevant handoff is the final C864 state: all adopted areas are exported
 from tracked configurations, their deltas are empty, certificate boundaries are
 green, and the affected paper interfaces have clean release evidence.
+An endpoint that encodes q11/q16 importing finitegeom is not a completed C864
+endpoint for C879 purposes; C879.0 must reject and repair that dependency direction
+before accepting the baseline.
 
 ## Proposed architecture
+
+Before any paper split, establish and enforce this package DAG:
+
+```text
+finitegeom  --imports-->  q11-certificates
+finitegeom  --imports-->  q16-certificates
+finitegeom  --imports-->  finitegeom-foundation
+
+q11-certificates  --imports-->  finitegeom-foundation
+q16-certificates  --imports-->  finitegeom-foundation
+```
+
+`finitegeom-foundation` is the minimal, deliberately stable definitions-and-semantics
+API required to state the certificate results.  The certificate packages must not
+depend on `finitegeom`, any paper package, or another certificate package.  Their
+gates expose certificate-only terminals.  Human and paper-level aggregates live in
+`finitegeom` and import those frozen terminals.  Changes above the foundation edge
+may rebuild downstream human modules, but must leave every heavyweight certificate
+target trace-current.
 
 Use explicit paper and shared source roots:
 
@@ -119,10 +150,13 @@ Rules:
 - keep generated leaves in their owning certificate package and name their mathematical
   partition, not a build order or task number.
 
-The q11 and q16 certificate repositories are frozen exceptions to this migration:
-their existing module, gate, and audit names are not renamed. The finitegeom-side
-public adapter, pin, manifest, and paper interface may follow this standard, but the
-separately versioned certificate source remains byte-compatible with its current API.
+The q11 and q16 certificate repositories are frozen exceptions to the naming
+migration: their existing module, gate, and audit names are not renamed.  They are
+not exceptions to the dependency firewall.  Each must import only the stable
+foundation, while finitegeom imports its frozen certificate terminal through a
+public adapter.  The separately versioned certificate source and compiled cache
+remain byte-compatible until an explicitly approved foundation migration requires a
+new artifact.
 
 Thus the eventual PRS public surface would be:
 
@@ -197,6 +231,11 @@ these manifests, not serve as the primary ownership map.
 
 ## Staged execution and bounded validation
 
+0. Record the actual package DAG and compare it with the required certificate DAG
+   above.  Refuse every source move while q11 or q16 requires `finitegeom`, while a
+   heavy leaf remains in finitegeom, or while finitegeom lacks an exact frozen package
+   pin and adapter.  Add the dependency-direction checker and adversarial fixtures
+   before changing a package boundary.
 1. Record the C864 endpoint: finitegeom commit, twelve area configurations, area
    source manifests, certificate pins, standalone-build result, paper roots, and
    release-fact hashes. Refuse the operation if that endpoint is dirty, non-idempotent,
@@ -236,7 +275,10 @@ these manifests, not serve as the primary ownership map.
    source/manifest audits. Do not run a repository-wide build.
 8. For every later change, compute the exact reverse-import closure before building.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
-   affected paper interface; manifest-only changes require no Lean build.
+   affected paper interface; manifest-only changes require no Lean build.  An ordinary
+   finitegeom or paper change must report zero scheduled q11/q16 certificate targets.
+   Only a reviewed foundation API change may invalidate a heavyweight package, and
+   that change stops for explicit user authorization before any source build begins.
 9. Freeze the declaration-level public APIs of upstream families before their
    downstream consumers: AME--LU before MDS--CSS and the PRS balanced adapter; the PRS
    family before either beyond-four entry point; shared projective/incidence/coding
@@ -282,10 +324,15 @@ chunk report records every resulting repository and commit, the exact export/mir
 command, source-manifest or pin comparisons, and clean replay results. If propagation
 fails, the chunk remains incomplete and no later Lean change begins.
 
-Generated certificate payload is not copied into papers. Its owning package is
-re-pinned and its compact trust fact is propagated through the declared boundary.
-Source authority remains the monorepo; standalone paper repositories are synchronized
-downstream and are never edited as alternate authorities.
+Generated certificate payload is not copied into papers.  Its owning package pin and
+compact trust fact are propagated through the declared boundary without rebuilding
+or re-sealing that package.  A finitegeom-only or paper-only change must not re-pin a
+certificate package.  Re-pinning is permitted only when the certificate source or its
+stable foundation dependency changed deliberately; a cache miss or newer finitegeom
+commit is not a re-pin trigger.
+Human and shared source authority remains the monorepo, certificate-only source
+authority remains its owning package, and standalone paper repositories are
+synchronized downstream rather than edited as alternate authorities.
 
 The working budget is 25 minutes, leaving five minutes for inspection and commit. A
 chunk that would require a longer Lean gate is not a 30-minute chunk: split the source
@@ -293,6 +340,12 @@ change at a module/API boundary, or leave the source unchanged and ship the prec
 metadata/checker chunk. Do not hide a multi-hour build inside a small administrative
 step. Detached queue execution is allowed only after the affected closure has already
 been reduced and the chunk's source state is otherwise complete.
+
+No chunk may silently fall back from a missing or stale heavyweight cache to a source
+build.  Normal finitegeom and paper validation requires the exact content-addressed
+q11/q16 cache and fails closed when it is absent.  A certificate cold build is its own
+user-approved operation, never an incidental substep of export, synchronization, pin
+refresh, or manuscript verification.
 
 Each chunk report records:
 
@@ -384,6 +437,17 @@ chunk is closed.
   retrying; never repeat an unchanged failed build.
 - Keep generated certificates downstream and opt-in; do not pull them into every
   paper build.
+- Restore heavyweight certificate artifacts only from an exact cache keyed by
+  package commit, foundation commit, Lean toolchain, Mathlib commit, and target
+  platform.  Use require-cache semantics: a cache miss fails and never falls back to
+  compiling certificate source.
+- Reject a build plan that schedules any q11/q16 source target after a change confined
+  to finitegeom human layers, a paper package, manifests, prose, pins, or release
+  metadata.  The regression gate is an exact dry-run/trace comparison with zero heavy
+  targets.
+- Permit a heavyweight source build only for a reviewed foundation-or-certificate
+  source change, with explicit user authorization and a separately recorded resource
+  envelope.  Never infer permission from a stale trace or completed dependency build.
 - Do not rerun C864's twelve-area export/idempotence pass unless an area manifest or
   its source commit changes; C879 consumes its committed result.
 
@@ -413,6 +477,14 @@ chunk is closed.
   bounded. Require the exact affected-gate list before every validation build.
 - Starting with arcs or AME--LU would repeatedly disturb shared foundations. Use a
   small leaf pilot and freeze upstream public APIs before downstream extraction.
+- The phrase “one-way dependency” is directionally ambiguous and previously encoded
+  the wrong edge.  Every policy, manifest, and report must spell out
+  `finitegeom imports q11/q16` and `q11/q16 import foundation only`; the executable DAG
+  checker, not prose, is authoritative.
+- A package manager may rebuild a dependency checkout after a harmless pin refresh
+  even when source bytes are unchanged.  Therefore ordinary finitegeom and paper
+  workflows never refresh the internal dependency pins of frozen certificate
+  packages and never permit source fallback on cache restoration.
 - C864 area boundaries are not automatically paper ownership boundaries. A module
   may be exported in several areas or may declare into another namespace. Require
   overlap review before moving it into `Shared` or a paper directory.
@@ -429,13 +501,21 @@ chunk is closed.
 
 ## First acceptance gate
 
-Before moving source, record the C864 endpoint and commit an ownership/import
+Before moving source, record the C864 endpoint and commit the required package DAG,
+an executable dependency-direction check, and adversarial fixtures proving that a
+q11/q16 package requiring finitegeom is rejected.  Commit an ownership/import
 manifest derived from the union of trust gates, export configurations, and paper and
 repository registries, a generated reverse-dependency report, and
 an import-firewall checker. The report must identify the exact shared modules that
 remain required by each paper, the exact paper-specific modules safe to extract, and
 the exact gate targets affected by a change. No source deletion, namespace rewrite,
 or repository split is authorized by this plan alone.
+
+The gate also includes a build-plan regression: change a disposable cheap human-layer
+module in a clean fixture, compute the affected targets, and require zero q11/q16
+certificate source targets.  Remove or withhold the exact heavyweight cache and
+require a clear refusal rather than a source build.  C879 cannot move its first paper
+source until both tests pass.
 
 The current metadata preflight is:
 
