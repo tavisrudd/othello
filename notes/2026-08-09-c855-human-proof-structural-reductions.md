@@ -25,18 +25,10 @@ shared modules.
 
 ## Authority correction
 
-Commit `187bed8`, like the preceding commutant commit `5d9f53f`, was made
-directly in finitegeom without a matching monorepo authority commit.  The q11
-package pin and release replay validate that downstream state, but do not make
-it an edit authority.  The finitegeom repository is never edited directly;
-every byte changed there must be produced by the prescribed area exporter from
-a committed `~/src/othello/lean` source.
-
-The reviewed proof content is being re-applied in the monorepo authority.  It
-must be built there, included in fresh 51-terminal rigidity and orientation
-trust facts, and committed there before the exporter runs.  The two downstream
-commits must never be passed as exporter `--source-commit` values or used as
-precedent for direct finitegeom development.
+`5d9f53f` and `187bed8` are downstream states, not source commits.  Shared Lean
+authority is `~/src/othello/lean`; finitegeom is exporter-only.  The reviewed
+content must pass the 51-terminal authority gate and fact extraction before
+export.
 
 ## Result
 

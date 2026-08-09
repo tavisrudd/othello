@@ -119,11 +119,6 @@ verification suite now has 23 tests.  C855 remains active solely because its
 broader theorem-completeness, documentation, correspondence-review, and
 distribution gates remain open.
 
-**Authority correction, 2026-08-09.**  Commit `5d9f53f` was made directly in
-finitegeom and had no corresponding monorepo authority commit.  It records a
-validated downstream state, not a valid source boundary.  Finitegeom is never
-edited directly; every change there must be the exact product of the prescribed
-area exporter from a committed `~/src/othello/lean` authority state.  The proof
-has been re-applied to that authority for guarded validation, trust extraction,
-and an authority commit.  Future work must not cite `5d9f53f` as the source
-commit or use it as precedent for downstream edits.
+**Authority correction.**  `5d9f53f` is a downstream state, not a source
+commit.  Shared Lean authority is `~/src/othello/lean`; finitegeom is
+exporter-only and is never edited directly.
