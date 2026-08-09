@@ -5,8 +5,8 @@
 **Status:** active; R0 is frozen; the universal R1 theorem is false at `q=9`;
 the extension-field detector replacements are now proved by low root degree,
 the `T(2q)` Steinberg filtration, and a discriminant-times-digitwise-Cartan
-embedding for `L(q-7)`; prime-field Fischer retractions and arbitrary-`p'`
-subgroup descent remain
+embedding for `L(q-7)`; the prime-field Fischer decomposition and retractions
+now have a targeted tilting proof; arbitrary-`p'` subgroup descent remains
 
 ## Objective
 
@@ -35,6 +35,7 @@ Current mathematical memos:
 - `notes/2026-08-09-c895-q9-extra-hom-and-repair.md` and its exact
   script/JSON falsifier.
 - `notes/2026-08-09-c895-extension-field-linear-detectors.md`.
+- `notes/2026-08-09-c895-prime-field-fischer-detectors.md`.
 
 ## Exposition boundary
 
