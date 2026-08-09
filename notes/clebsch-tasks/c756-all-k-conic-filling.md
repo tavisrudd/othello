@@ -149,7 +149,10 @@ polynomial, \(e_3,\ldots,e_{15}\) vanish identically.  After centering, the
 projection moments through degree 15 equal a formal antipodal pair.  The
 degree-10 star-ideal generators and degree-9 node separators lie inside this
 window.  The separators exclude covariance ranks zero and one; only the
-nonsingular covariance case remains.
+nonsingular covariance case remains.  Centering also makes every defect-two
+residual pair antipodal.  Triple fibres pass through the centroid and are
+zeros of the covariance quadratic, hence there are at most two per arc point:
+\(D_3(P)\le2\) and \(32\le D_2(P)\le34\).
 
 ## What is already uniform
 
@@ -166,12 +169,12 @@ nonsingular covariance case remains.
 
 ## Next action
 
-Normalize the nonsingular covariance form left by the degree-9 separator
-argument, then contract the eleven degree-10 star-ideal generators against
-the centered moment identities.  Seek a forced singularity or a conflict
-with the passant/internal discriminants.  Stop if the contractions are only
-centroid/pair-budget tautologies or if degree \(\Theta(q)\) returns; do not
-cross the exact degree-16 mask boundary.
+Split the nonsingular covariance into its anisotropic and split square
+classes, using the antipodal residual identity.  Contract the eleven
+degree-10 star-ideal generators in each normal form and seek a forced
+singularity or a conflict with the passant/internal discriminants.  Stop if
+the contractions are only centroid/pair-budget tautologies or if degree
+\(\Theta(q)\) returns; do not cross the exact degree-16 mask boundary.
 
 ## Stop rules
 
@@ -225,6 +228,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-pair-coupled-diagonal-stop.md`;
 - `notes/2026-08-09-c756-defect-two-star-near-transversal.md`;
 - `notes/2026-08-09-c756-tt-star-moment-collapse.md`;
+- `notes/2026-08-09-c756-ej-antipodal-fibres.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
