@@ -208,6 +208,17 @@ at 2,590,464 kB.  No property of the generated tree is trusted.  Expansion to th
 distinguished fibres was prepared but not claimed because the shared lane was then occupied by a
 long foreign q=11 certificate build; land those leaves from this measured shard-zero boundary.
 
+There is a stronger candidate than six duplicate leaves.  Exact replay of the already generated
+28-row fixed-point action table shows that the stabilizer induces 14 distinct permutations of the
+seven passant fibres and is transitive on them.  Stabilizer-row indices `0,9,5,3,2,4,8` carry fibre
+zero respectively to fibres `0,1,2,3,4,5,6`; their complete fibre permutations are
+`0123456`, `1025634`, `2314605`, `3645012`, `4132065`, `5463102`, and `6052143`.
+Consequently the one checked shard can cover the entire five-one profile if a symbolic theorem
+transports zero incidence syndrome under the fixed-point projective action and then repartitions the
+six singleton fibres into the canonical shard-zero halves.  Prefer that theorem when it is smaller
+than six further 55-second leaves; otherwise the already measured leaf family remains the bounded
+fallback.  The transitivity computation is diagnostic only until Lean checks the transport.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
