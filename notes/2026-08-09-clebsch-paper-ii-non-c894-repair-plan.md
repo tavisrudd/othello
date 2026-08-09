@@ -239,8 +239,11 @@ Only after R1--R3 pass their gates:
 
 1. split the current Lemma 3.2 into finite-Hom, outer-parity,
    detecting-source, and contraction lemmas;
-2. put the coefficient-matrix details and two-digit example in a compact
-   appendix if the main proof becomes unreadable;
+2. state only the precise modular propositions, their hypotheses, and their
+   consequences in the main body; put the coefficient matrix, carry/alias
+   analysis, complete divided-power verification, Steinberg-source
+   calculation, two-digit example, and subgroup-descent proof in a
+   self-contained technical appendix;
 3. state the arbitrary-`p'` Dickson corollary before uniform sheet
    exclusion and cite it at every branch;
 4. keep the classification proof's causal paragraph to: trade gives sheets,
@@ -255,10 +258,53 @@ common scalar `prod_a lambda_a`; hence the configuration changes by a common
 homothety, the trade data are unchanged, and the cubic line scales
 accordingly.
 
-Expected manuscript change, assuming the claims survive: roughly **five to
-nine net pages**, concentrated in the modular section and possibly its
-appendix.  This is a medium-large proof repair, not a rewrite of the rest of
-the paper.
+### Page budget
+
+Keep the classification narrative concise even though the complete human
+proof grows.
+
+- **Main body:** at most two net new pages; aim for no net growth by replacing
+  the current dense proof sketch with short proposition statements and a
+  clean causal proof.
+- **Technical appendix:** approximately five to eight pages containing all
+  load-bearing calculations.  It remains part of the paper, not a separate
+  companion or optional supplement.
+- **Overall target:** about 48--50 pages from the current 43-page build.
+  Treat 52 pages as a review threshold: if the proof exceeds it, run a
+  compression pass before integration rather than allowing incremental
+  expansion.
+
+Do not shorten by hiding a human implication behind Lean, a certificate, or
+an unpublished memo.  Concision comes from separating the causal theorem
+spine from its checkable technical proofs and deleting duplicated setup.
+
+### Layered exposition
+
+Apply `papers/style-guide.md` as a two-track architecture rather than treating
+the appendix as a storage area.
+
+1. **Problem and mechanism.** Before the modular exclusion, give a short
+   ordinary-language roadmap: an oversized sheet supplies a genuine simple
+   constituent; the two outer extensions are forced into the moment module;
+   one extension is absent; subgroup descent supplies a detector in every
+   branch.
+2. **Exact first-pass proof.** In the body, state the finite-Hom, parity,
+   contraction, and subgroup propositions with complete hypotheses.  Prove
+   the classification from their outputs.  An adjacent expert should be able
+   to follow this route without reading the coefficient calculation, but no
+   hypothesis, completeness claim, exceptional case, or change of language
+   may be hidden by the skip.
+3. **Specialist proof layer.** Open the technical appendix with one sentence
+   naming the outputs a first-pass reader should retain.  Put the two-digit
+   model case before the general Lucas matrix, then give the full carry,
+   divided-power, Steinberg, and subfield-descent proofs.
+4. **Verification boundary.** Keep formal and finite corroboration in the
+   verification section.  Do not interleave artifact names, hashes, or replay
+   details with either mathematical proof track.
+
+Use one roadmap and one model example.  Delete repeated strategy summaries
+from the introduction, section opening, appendix opening, and conclusion so
+the added layer replaces orientation prose rather than accumulating it.
 
 ## R5 — human verification sequence
 
