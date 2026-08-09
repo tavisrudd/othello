@@ -235,7 +235,9 @@ marked boundary.
 | No even-\(q\) filling | proved | clean uniform obstruction |
 | all-\(k\) chord-moment LP bound | proved | first general quantitative theorem |
 | spare-passant saturation dichotomy | proved | structural spine separating generic and two saturated types |
+| flat Sidon lemma and one-faithful-eigenblock criterion for cyclic Cayley digraphs | proved, elementary | reusable proof device; likely folklore, so no novelty claim without audit |
 | \(\operatorname{Aut}(P(q)[S])=S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p)\) for the Paley first subconstituent | proved for every \(q\equiv3\pmod4\) by one primitive eigenspace | most transferable engine; exact-statement novelty audit still required |
+| normal Cayley and prime-field cyclic DRR corollaries | immediate from the exact automorphism group | include in the same focused Paley predecessor audit |
 | extremal exterior-arc classification: \((q+1)/2\) exterior points occur only at \(q=3,7,11\), with one conic-stabilizer orbit in each field | proved for every odd prime power | **headline theorem**, stated without the covering condition |
 | saturated-external filling corollary: only the \(q=11\) Clebsch hexagon covers | proved for every odd prime power | reconnects the headline to conic-filling |
 | Droms lower bound and equality-to-internal-exterior-arc bridge | prior bound + proved bridge | intrinsic formulation of the remaining saturated-internal problem |
@@ -272,8 +274,10 @@ paper that the full C756 theorem would have supported.
 
 Recommended compressed spine:
 
-1. exact automorphism group of the Paley first subconstituent, proved from one
-   primitive eigenspace, the Jacobi collision theorem, and the Sidon argument;
+1. flat Sidon one-block criterion, then the exact automorphism group of the
+   Paley first subconstituent from one primitive eigenspace and the Jacobi
+   collision theorem, including its local-to-global, normal-Cayley, and
+   prime-field DRR corollaries;
 2. established exterior-set terminology and the extremal-arc-to-matching
    reduction;
 3. Segre coherence, the semilinear parameter exclusions, the exterior-arc

@@ -127,6 +127,52 @@ of C756.  It is not yet novelty-cleared: the earlier audit screened neighboring
 Paley work but was not a focused predecessor audit for this exact automorphism
 group.
 
+### 1.3 EJ2: the general one-block Cayley criterion
+
+The Sidon step abstracts completely from Paley tournaments.
+
+**Flat Sidon lemma.**  Let \(G\) be a finite abelian group, let
+\(\Lambda\subset\widehat G\) have distinct nonzero ordered differences, and
+write
+\[
+ F=\sum_{\lambda\in\Lambda}a_\lambda\lambda.
+\]
+If \(|F(x)|\) is constant on \(G\), then at most one coefficient
+\(a_\lambda\) is nonzero.
+
+Indeed, every nontrivial Fourier coefficient of \(|F|^2\) is a single product
+\(a_\lambda\overline{a_\mu}\), because the ordered difference
+\(\lambda\mu^{-1}\) has a unique representation.  Constancy makes every such
+coefficient zero.
+
+This gives a general cyclic-Cayley rigidity criterion.  If a Cayley digraph on
+a cyclic group \(G\) has a faithful character \(\rho\) whose adjacency
+eigenvalue collision class \(\Lambda\) is Sidon, then every graph automorphism
+pulls \(\rho\) into a constant-modulus vector in
+\(\operatorname{span}\Lambda\), hence into a single character line.  After a
+translation, faithfulness forces the automorphism to be a group multiplier
+belonging to that collision class.  Thus one eigenblock can determine the
+whole automorphism group without simple spectrum.
+
+For the Paley first subconstituent, \(G=S\), the collision class is
+\(\{\rho^{p^j}\}\), and the special inequality
+\(|p^i-p^j|<(q-1)/2\) makes it Sidon.  Three exact corollaries follow:
+
+1. \(P(q)[S]\) is a normal Cayley tournament on the cyclic group \(S\), with
+   automorphism group of order \(n(q-1)/2\);
+2. when \(q\) is prime, its automorphism group is the regular cyclic group
+   \(S\), so it is a directed regular representation of \(S\);
+3. a faithful primitive eigenblock contains, up to scalar, exactly its
+   Frobenius character lines as flat vectors.  Hence it reconstructs the
+   cyclic coordinate on \(S\) up to translation and Frobenius.
+
+The flat Sidon lemma is likely standard harmonic-analysis folklore and should
+be presented as a reusable proof device, not claimed as new without a source
+check.  The exact Paley DRR/normal-Cayley consequences belong in the focused
+predecessor audit.  Generalization to other cyclotomic or Peisert local graphs
+is a possible successor only after the C756 publication gate; it is not a new
+frontier for this task.
+
 ## 2. Proof-trust risks
 
 ### 2.1 Highest risk: primitive Jacobi collision
@@ -230,7 +276,9 @@ version-of-record citation audit.
 The highest-value next pass is therefore bounded and nonexploratory:
 
 1. extract the local Paley automorphism theorem as the central three-lemma
-   engine and run a focused exact-statement predecessor audit;
+   engine, beginning with the flat Sidon lemma, and run a focused exact-statement
+   predecessor audit covering local automorphisms, normal Cayley structure, and
+   directed regular representations;
 2. consolidate Steps A0–H and the endpoint orbit check into a single
    theorem-proof document using that engine;
 3. independently line-audit the primitive-Jacobi lemma and extension-field
@@ -277,6 +325,10 @@ not yet a mathematical one.
 |---|---|---|
 | Is the local Paley automorphism theorem genuinely new? | not settled | run an exact-statement predecessor and forward-citation audit before using it in a title or abstract |
 | Do local automorphisms extend to the full Paley tournament? | settled positive and uniquely | the classified map extends as \(x\mapsto c x^{p^j}\); distinct parameters act distinctly on \(S\) |
+| Is the harmonic step specifically Paley? | settled negative | isolate the flat Sidon lemma and the one-faithful-eigenblock Cayley criterion |
+| What does the exact group say for prime \(q\)? | settled | the local tournament is a cyclic directed regular representation |
+| Does a primitive eigenblock recover coordinates? | settled up to the natural ambiguity | its flat lines are exactly the Frobenius character lines, giving cyclic coordinates up to translation and Frobenius |
+| Should Peisert or higher cyclotomic local graphs be pursued now? | no | possible successor only after the C756 paper gate; do not expand this task |
 | Does the local Paley theorem require the matching, resultant, or covering hypotheses? | settled negative | its proof uses only \(BP=PB\), one primitive collision class, Sidon, and pointwise modulus one |
 | Is the bispectral anticommutator needed in the final proof? | settled negative | retain only the single Paley convolution \(B\); archive \(C,K\), simple-spectrum, and Pfaffian branches |
 | Is covering genuinely needed for the headline classification? | settled negative | the extremal exterior-arc condition already gives saturation; covering is needed only to discard \(q=3,7\) |

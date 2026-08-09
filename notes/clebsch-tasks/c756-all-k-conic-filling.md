@@ -151,9 +151,24 @@ and Gaussian/Pfaffian obstruction are superseded proof-discovery scaffolding.
 This is the most transferable C756 theorem but is not yet novelty-cleared by
 an exact-statement Paley-subconstituent audit.
 
+**EJ2 extraction (2026-08-08):** the one-block step is an instance of a
+general flat Sidon lemma: a constant-modulus function on a finite abelian
+group whose Fourier support has unique nonzero ordered differences has one
+Fourier mode.  Consequently, one faithful eigenblock with Sidon collision
+class controls the full automorphism group of a cyclic Cayley digraph.  For
+the Paley first subconstituent this gives three free corollaries: it is a
+normal cyclic Cayley tournament with automorphism-group order \(n(q-1)/2\);
+for prime \(q\) it is a cyclic directed regular representation; and one
+primitive eigenblock reconstructs the cyclic coordinate up to translation
+and Frobenius.  Treat the flat Sidon lemma as likely folklore and include
+normal-Cayley/DRR terminology in the focused novelty audit.  Peisert and
+higher-cyclotomic extensions are post-publication successors, not C756 scope.
+
 **Next-session entry (superseding the one above):** extract the local Paley
-automorphism theorem as a three-lemma engine and run its focused predecessor
-audit; then consolidate the exterior-arc orbit classification and Clebsch
+automorphism theorem as a three-lemma engine beginning with the flat Sidon
+lemma, and run a focused predecessor audit covering local automorphisms,
+normal Cayley tournaments, and directed regular representations; then
+consolidate the exterior-arc orbit classification and Clebsch
 covering corollary around it.  Independently line-audit the primitive-Jacobi
 half-carry argument and attach precise primary citations for Segre's lemma,
 Stickelberger, the three-point multiplicative Weil bound, and Hasse.  If and
