@@ -6,9 +6,9 @@
 # destination file names and the release prose live here.
 #
 # The exhaustive order-eleven point-orbit and group-action families are not part
-# of this boundary.  They belong to the separately pinned
-# finitegeom-clebsch-q11-certificates package, which depends on this library in
-# one direction only.
+# of this boundary.  The separately pinned certificate package imports Mathlib
+# only.  A cheap paper bridge imports both packages and proves compatibility of
+# their local models.
 
 schema_version = 1
 area = "clebsch_rigidity"
@@ -27,8 +27,9 @@ golden orientation spine of the support cubic.
 
 The exhaustive order-eleven point-orbit rows and the group-action payload are
 absent from this repository.  They are distributed by the separately pinned
-finitegeom-clebsch-q11-certificates package, which depends on this library in
-one direction and supplies the enumerated orbit statements.
+finitegeom-clebsch-q11-certificates package, which imports Mathlib only and
+supplies the enumerated orbit statements in its frozen local model.  A separate
+paper bridge compares that model with this library.
 """
 
 correspondence = """
@@ -49,9 +50,9 @@ doi:10.1112/jlms/s2-44.2.270, which is cited as their antecedent.  Both are
 theorems of this library: they are proved from the general-field six-arc
 concurrence development at their own quantifier range and specialized here.
 
-The order-eleven orbit enumeration itself is not proved here.  The statements
-that quantify over the enumerated orbits are supplied by the external
-certificate package named above.
+The order-eleven orbit enumeration itself is not proved here.  Its statements
+are supplied by the certificate package named above and transported only by the
+separate compatibility bridge.
 """
 
 boundary = """
