@@ -1002,6 +1002,21 @@ and second-order covering counts remain structural possibilities; residual slack
 curves do not supply the missing global carrier: their degrees and stabilizers are
 field-specific.
 
+**Signed-resultant/monodromy outcome (2026-08-08):** the user selected the
+\((R,\gamma)\) route. Its first discriminator closes ordinary monodromy as a
+standalone obstruction: over \(\mathbb F_7\),
+\(R=X^5+4X^4+6X^2+2X\) has a totally split irrational quadratic fibre and
+full geometric monodromy \(S_5\). The exact replacement is a signed/Kummer
+pair resolvent. A new row-resultant identity proves that, on every split
+quadratic fibre, F2 chord externality already implies the F1 derivative
+class, so F1 is only a cheap enumeration filter. The next bounded gate is to
+compute the pair-resultant square-class module and test whether its
+all-negative signature is generically permitted. If it is, stop the
+monodromy route and move to masked Rédei; if it is not, lift the obstruction
+to the saturated-internal classification. See
+`notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md` and its adjacent
+evidence bundle.
+
 ## Current boundary
 
 - Open problem as stated: `papers/clebsch-rigidity/clebsch_rigidity.tex:1485-1489`.
