@@ -1,6 +1,6 @@
 # C894 — unnumbered saturated-exterior and local-Paley companion
 
-**Lane:** clebsch · **Status:** active architecture freeze · **Allocated:** 2026-08-08
+**Lane:** clebsch · **Status:** pre-draft matrix frozen; human safeguards pending · **Allocated:** 2026-08-08
 
 ## Objective
 
@@ -77,15 +77,19 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
 
 ## Mandatory pre-draft gates
 
-1. Obtain or record a human MathSciNet/Scopus exact-statement search for local
-   Paley subconstituent automorphisms and unique extension.
-2. Obtain an external finite-geometry/character-sum cold read of the Segre
-   scale pinning and primitive-Jacobi valuation normalization.
-3. Freeze a theorem/lemma/corollary inventory against the two consolidated
-   C756 proofs, with no superseded bispectral or conditional language.
-4. Freeze terminology: exterior point, passant line, exterior set of a conic,
-   and saturated-exterior branch.
-5. Decide title and venue after the claims survive gates 1--4.  Current fit:
+1. **Pending; packet frozen.** Obtain or record a human MathSciNet/Scopus
+   exact-statement search for local Paley subconstituent automorphisms and
+   unique extension.
+2. **Pending; packet frozen.** Obtain an external
+   finite-geometry/character-sum cold read of the Segre scale pinning and
+   primitive-Jacobi valuation normalization.
+3. **Passed.** The theorem/lemma/corollary inventory is frozen against the two
+   consolidated C756 proofs, with no superseded bispectral or conditional
+   language.
+4. **Passed.** Terminology is frozen: exterior point, passant line, exterior
+   set of a conic, and saturated-exterior branch.
+5. **Blocked on 1--2.** Decide title and venue after the claims survive gates
+   1--4.  Current fit:
    *Designs, Codes and Cryptography*; *Discrete Mathematics* backup.
 
 No manuscript file may be created before gates 1--4 are either passed or
@@ -105,6 +109,7 @@ user.
 - `notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md`
 - `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`
 - `notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`
+- `notes/2026-08-08-c894-claim-proof-citation-matrix-and-safeguard-packet.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -128,28 +133,9 @@ the paper spine.
 
 ## Next action
 
-Build the claim--proof--citation matrix from the frozen lean architecture in
-`notes/2026-08-08-c894-ej-theorem-inventory-and-architecture.md`, then route
-the two human safeguards.  The paper spine now excludes the broad all-\(k\)
-partial-results package: internal/passant-code results belong only in a short
-outlook.  Add the exact primitive Jacobi collision theorem to the human
-novelty query.  Do not draft prose until the matrix is stable.
-
-The matrix must also include the cyclotomic decomposition-field corollary and
-the four-stage rigidity cascade frozen in
-`notes/2026-08-08-c894-tt-cyclotomic-compression.md`.  Aoki/Koblitz/Hoshi close
-the broad attribution question; narrow the human search to the exact mixed sum
-\(-(J(\theta,\chi)+J(\theta\chi,\chi))/2\), its Frobenius-only collision
-class, and the local graph extension theorem.  Do not widen the paper to other
-cyclotomic conductors.
-
-The \(q=11\) endpoint row should use the maximal-order operator and conductor
-ladder in
-`notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`; the
-older parity proof remains an independent check of the intermediate operator.
-Mark the result as classical \(A_4\)/fifth-cyclotomic structure.  The
-\(\mathcal O_5^2\)/\(\mathcal O_5^3\) rank comparison should be replaced by
-the rooted exact sequence and bordering formula in
-`notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`.
-Ring-fence only the further identification with the independently marked
-projective/harmonic six-set.
+The claim--proof--citation matrix and exact ready-to-send safeguard requests
+are frozen in
+`notes/2026-08-08-c894-claim-proof-citation-matrix-and-safeguard-packet.md`.
+Send the institutional-index packet and external specialist packet to
+qualified human readers, record their exact coverage and verdicts, then decide
+title and venue.  Do not draft prose until both returns are recorded.
