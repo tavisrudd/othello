@@ -523,7 +523,13 @@ No genuine unresolved C897 mystery remains.
 
 ## Immutable closeout
 
-The accepted authority revision is commit `ee2fd025`; the one official
-one-way refresh is standalone commit `4a5fbdc`.  Exporter verification and the
-standalone paper-only release aggregate passed, the mirror is clean, and both
-repositories carry the identical PDF SHA-256 recorded above.
+The accepted layering revision is authority commit `ee2fd025`, refreshed to
+standalone commit `4a5fbdc`.  A subsequent ChatGPT pre-GO read identified two
+additional corrections: make irreducibility of the branch sextic paper-local,
+and repair the Haemers--Parsaei Majd volume, year, and pages.  Authority commit
+`74a73b97` adds the complex orbit-closure irreducibility argument and corrects
+the reference to volume 90 (2022), 1983--1990; standalone commit `6989cf8`
+carries the exact export.  Exporter verification and both paper-only release
+aggregates passed, both repositories are clean, and their identical 32-page
+PDF has SHA-256
+`db0536d19e96decc20359783df227b94d6f1190807d12b6cd9c680c8831b9388`.

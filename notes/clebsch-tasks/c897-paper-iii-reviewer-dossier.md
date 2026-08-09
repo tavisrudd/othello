@@ -91,6 +91,16 @@ SHA-256
 The implementation record is
 `notes/2026-08-09-c897-paper-iii-layered-exposition-plan.md`.
 
+A subsequent ChatGPT pre-GO read found two valid residual corrections outside
+the sealed batch: irreducibility of the branch sextic was still attributed
+implicitly rather than proved paper-locally, and the Haemers--Parsaei Majd
+bibliography metadata was stale despite a correct DOI.  Authority commit
+`74a73b97` now proves irreducibility from the complex orbit closure of
+\(\operatorname{SO}(3,\mathbf C)\times S_{\mathbf C}\), records volume 90
+(2022), 1983--1990, and synchronizes exactly to standalone commit `6989cf8`.
+All theorem-statement hashes are unchanged and both paper-only aggregates are
+green; Lean remains outside this pass by author direction.
+
 The dossier must include:
 
 1. a ranked reviewer/critic slate with selection evidence and confidence;
