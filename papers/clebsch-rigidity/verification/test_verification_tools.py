@@ -173,6 +173,68 @@ class ReleaseRunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "clean pinned package"):
                 release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
 
+    def test_guarded_receipt_follows_quiet_stdout_inside_run(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            run_dir = Path(directory)
+            log = run_dir / "logs" / "gate.log"
+            stdout = run_dir / "logs" / "quiet" / "stdout.log"
+            stdout.parent.mkdir(parents=True)
+            stdout.write_text("'Gate.full' depends on axioms: [propext]\n")
+            log.write_text(f"stdout: 1002 lines -> {stdout}\n")
+            (run_dir / "manifest.json").write_text(
+                json.dumps(
+                    {
+                        "aggregate": [release.ROOT_GATE],
+                        "lean_root": str(PAPER_ROOT),
+                        "logs": {release.ROOT_GATE: str(log)},
+                        "source": {"git_dirty": False, "git_head": "abc123"},
+                    }
+                )
+            )
+            (run_dir / "status.json").write_text(
+                json.dumps(
+                    {
+                        "exit_code": 0,
+                        "results": [{"outcome": "gate-passed"}],
+                        "state": "success",
+                    }
+                )
+            )
+            result = release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+            self.assertIn("Gate.full", result.stdout)
+            self.assertNotIn("1002 lines", result.stdout)
+
+    def test_guarded_receipt_rejects_quiet_stdout_outside_run(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            run_dir = root / "run"
+            run_dir.mkdir()
+            log = run_dir / "gate.log"
+            outside = root / "outside.log"
+            outside.write_text("untrusted\n")
+            log.write_text(f"stdout: 1 lines -> {outside}\n")
+            (run_dir / "manifest.json").write_text(
+                json.dumps(
+                    {
+                        "aggregate": [release.ROOT_GATE],
+                        "lean_root": str(PAPER_ROOT),
+                        "logs": {release.ROOT_GATE: str(log)},
+                        "source": {"git_dirty": False, "git_head": "abc123"},
+                    }
+                )
+            )
+            (run_dir / "status.json").write_text(
+                json.dumps(
+                    {
+                        "exit_code": 0,
+                        "results": [{"outcome": "gate-passed"}],
+                        "state": "success",
+                    }
+                )
+            )
+            with self.assertRaisesRegex(RuntimeError, "outside its run"):
+                release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+
     def test_exact_checker_set_is_unique(self) -> None:
         self.assertEqual(len(capture.CHECKERS), 20)
         self.assertEqual(len({name for name, _ in capture.CHECKERS}), 20)

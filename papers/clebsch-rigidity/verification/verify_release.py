@@ -20,6 +20,7 @@ AXIOM_AUDIT = "verification/clebsch_rigidity_trust/axiom-audit.txt"
 FORBIDDEN_LEAN_CODE = re.compile(
     r"\b(?:sorry|admit|axiom|unsafe|native_decide)\b|\bdebug\.skipKernelTC\b"
 )
+QUIET_STDOUT_POINTER = re.compile(r"^stdout: \d+ lines -> (.+)$", re.MULTILINE)
 
 
 def release_surface_sha256(manifest: dict[str, object]) -> str:
@@ -283,10 +284,25 @@ def guarded_lean_result(
     log_path = Path(str(logs[ROOT_GATE])).resolve()
     if not log_path.is_relative_to(resolved_run) or not log_path.is_file():
         raise RuntimeError("guarded Lean gate transcript is absent or outside its run")
+    transcript = log_path.read_text(encoding="utf-8")
+    pointer = QUIET_STDOUT_POINTER.search(transcript)
+    if pointer is not None:
+        transcript_path = Path(pointer.group(1))
+        if not transcript_path.is_absolute():
+            transcript_path = resolved_run / transcript_path
+        transcript_path = transcript_path.resolve()
+        if (
+            not transcript_path.is_relative_to(resolved_run)
+            or not transcript_path.is_file()
+        ):
+            raise RuntimeError(
+                "guarded Lean stdout transcript is absent or outside its run"
+            )
+        transcript = transcript_path.read_text(encoding="utf-8")
     return subprocess.CompletedProcess(
         args=["guarded-lean-run", str(resolved_run)],
         returncode=0,
-        stdout=log_path.read_text(encoding="utf-8"),
+        stdout=transcript,
         stderr="",
     )
 
