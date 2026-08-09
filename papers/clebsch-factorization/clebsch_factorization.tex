@@ -186,15 +186,15 @@ one-dimensional two-valued quadratic-trade space.
 
 For each surviving stabilizer, Section~\ref{sec:balanced} constructs a fixed
 affine line inside the ambient conic fiber.  The forms in that ambient fiber
-that split completely into linear factors comprise its Chow locus.  The
-carrier boundary is summarized by
+that split geometrically into linear factors comprise its geometric Chow
+locus.  The carrier boundary is summarized by
 \[
 \begin{array}{rcl}
  \text{matching carrier and two-valued trade}
    &\Longrightarrow& B_3/\F_7\ \text{or}\ H_3/\F_{11},\\[2pt]
  \text{fixed conic-fiber line away from coalescence}
    &\Longrightarrow& q-1\ \text{trade-condition orbits},\\[2pt]
- \text{fixed conic-fiber line}\cap\text{Chow locus}
+ \text{fixed conic-fiber line}\cap\text{geometric Chow locus}
    &=& \{\text{matching point}\}.
 \end{array}                                                   \tag{1.1}
 \]
@@ -340,7 +340,29 @@ Define the \emph{rank-three matching configuration}
  \Omega_T=G_q\cdot M_T.
 \]
 The stabilizers of the three displayed matchings are respectively
-$S_4,S_4,A_5$, and hence
+$S_4,S_4,A_5$.  For a direct check, with
+\(\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)\) acting by
+\(x\mapsto(ax+b)/(cx+d)\), generators preserving the three rows of (3.1)
+may be chosen as
+\[
+\begin{array}{c|c|c|c}
+T&a&b&\text{relations}\\
+\hline
+A_3&\left(\begin{smallmatrix}0&1\\2&0\end{smallmatrix}\right)
+&\left(\begin{smallmatrix}1&1\\2&3\end{smallmatrix}\right)
+&a^2=b^3=(ab)^4=1\\[3pt]
+B_3&\left(\begin{smallmatrix}0&1\\3&2\end{smallmatrix}\right)
+&\left(\begin{smallmatrix}1&1\\1&5\end{smallmatrix}\right)
+&a^3=b^4=(ab)^2=1\\[3pt]
+H_3&\left(\begin{smallmatrix}0&1\\2&3\end{smallmatrix}\right)
+&\left(\begin{smallmatrix}0&1\\7&8\end{smallmatrix}\right)
+&a^3=b^5=(ab)^2=1.
+\end{array}
+\]
+These are the standard triangle presentations of \(S_4,S_4,A_5\);
+the maximal-subgroup classification and the outer-normalizer check
+\cite{Giudici2007} show that they are the full stabilizers in \(G_q\).
+Thus orbit--stabilizer gives
 \[
  |\Omega_{A_3}|=5,\qquad |\Omega_{B_3}|=14,\qquad
  |\Omega_{H_3}|=22.                                      \tag{3.2}
@@ -357,6 +379,17 @@ contains the triples \(\operatorname{PSL}_2(7),S_4,8,7\) and
 corresponding tetrahedral, octahedral, and icosahedral data; neither the
 orbit counts in (3.2) nor the ambiguity of an unmarked conic is asserted
 here as new.
+
+Two adjacent frameworks should also be separated from the claim here.
+Korchm\'aros, Pace, and Sonnino construct one-factorizations from partitions
+of the external points of an oval, each part meeting every tangent once
+\cite{KorchmarosPaceSonnino2018}; the present carrier instead consists of
+secant matchings on the marked conic, followed by passage through its ideal.
+Likewise, the group--normal-subgroup architecture in which one group fixes
+the factors and a larger group permutes them is the classical homogeneous
+factorization framework of Giudici, Li, Poto\v{c}nik, and Praeger
+\cite{GiudiciLiPotocnikPraeger2006}.  The assertions below concern the
+specific conic-quotient and trade-rigidity mechanism, not that architecture.
 
 \subsection{Trade reduction and the modular obstruction}
 
@@ -967,8 +1000,37 @@ The complementary matchings have the common torus normal form
  \{\{u,cu\}:u\in Q_0\},\qquad
  \{\{u,c^{-1}u\}:u\in Q_0\},                         \tag{3.3a}
 \]
-where \(c^2=1/4\).  Multiplication by \(c^{-2}=4\) has order \(n\) on
-\(Q_0\) for \(q=7,11\), proving the alternating-cycle assertion.
+where \(c^2=1/4\).  Here is the promised derivation.  The setwise edge
+stabilizer in \(G^+\) is
+\[
+ D_e=\{x\mapsto sx:s\in Q_0\}
+ \sqcup\{x\mapsto rs/x:s\in Q_0\},
+\]
+where \(r\) is any nonsquare.  It has order \(q-1\) and acts regularly on
+\(\F_q^\times\): neither a nonidentity multiplication nor an inversion of
+the displayed form has a fixed point.  Since each sheet is a
+one-factorization, its unique matching through \(e\) is \(D_e\)-invariant.
+
+One labeled calculation identifies the relevant involutions.  For \(q=7\),
+\(x\mapsto x/(2-x)\) sends the edge \(\{0,2\}\) of \(M_{B_3}\) to \(e\) and
+the complement to
+\[
+ \{\{1,5\},\{2,3\},\{4,6\}\}
+ =\{\{u,5u\}:u\in Q_0\}.
+\]
+For \(q=11\), \(x\mapsto x/(1-x)\) sends \(\{0,1\}\) of \(M_{H_3}\) to
+\(e\) and the complement to
+\[
+ \{\{1,2\},\{3,6\},\{4,8\},\{5,10\},\{7,9\}\}
+ =\{\{u,2u\}:u\in Q_0\}.
+\]
+Choose \(c=3\) for \(q=7\) and \(c=6\) for \(q=11\).  In each case \(c\)
+is the nonsquare root of \(c^2=1/4\), and the displayed complement is the
+\(c^{-1}\)-matching.  Multiplication by any nonsquare fixes \(e\), exchanges
+the two sheets, and rewrites that matching as the \(c\)-matching.  This
+proves (3.3a), with \(c\) specifically nonsquare.  Multiplication by
+\(c^{-2}=4\) has order \(n\) on \(Q_0\) for \(q=7,11\), proving the
+alternating-cycle assertion.
 
 Write
 \[
@@ -1519,8 +1581,10 @@ matching \(M_T\) with stabilizer \(K=S_4,A_5\).  Put
 \(m=(q+1)/2\) and \(d=m-2\).  Write \(\mathcal A_T\) for the affine space
 of degree-\(m\) forms whose restriction to the conic is the fixed binary form
 vanishing on all \(q+1\) marked rational points.  We call its members that
-split completely into linear factors the Chow locus.  Symmetry leaves one
-affine parameter in \(\mathcal A_T\); complete splitting selects one point.
+split completely into linear factors over \(\overline{\F}_q\) the
+\emph{geometric Chow locus}.  All intersections below are set-theoretic.
+Symmetry leaves one affine parameter in \(\mathcal A_T\); geometric
+splitting selects one rational point.
 
 \begin{theorem}[The fixed line and its Chow point]
 \label{thm:fixed-line-chow-rigidity}
@@ -1537,8 +1601,9 @@ Section~\ref{sec:matching-products}, the following hold.
 Its \(q\) rational points lie in distinct \(G\)-orbits, each with
 stabilizer \(K\).
 
-\item This line meets the Chow locus in the single point \(P_{M_T}\).
-Equivalently, the matching point is the unique Chow point on the fixed line.
+\item The rational fixed line meets the geometric Chow locus in the single
+point \(P_{M_T}\).  Equivalently, the matching point is its unique
+geometrically split point.
 
 \item The orbit of each noncoalescent point has \(2q\) points, and its
 quadratic-trade space is the sheet-sign line.  Consequently \(q-2\) of
@@ -1575,7 +1640,10 @@ points would be equal.  This proves the last assertion of (i).
 Suppose a \(K\)-fixed point of \(\mathcal A_T\) is a product of linear
 forms.  Each factor cuts a degree-two divisor on the conic, while their
 product cuts the squarefree divisor of all \(q+1\) marked points.  Thus
-the factors pair those points into marked secants, and unique
+the factors pair those points into marked secants.  This remains true when
+the factorization is taken over \(\overline{\F}_q\): every factor divisor is
+a two-element subset of the displayed rational divisor, so its joining line
+is rational.  Unique
 factorization makes that matching \(K\)-invariant.  For \(S_4\) on eight
 points, a point stabilizer is
 \(C_3\) and the unique possible two-point block stabilizer is
@@ -1956,6 +2024,11 @@ chosen \(A_4\)-structure; Appendix D compares the arithmetic marker data of
 all three configurations.  No canonical identification of the depth plane
 with the relative-cubic plane is asserted.
 Appendix G gives the verification architecture for all statements.
+The optional finite refinements in Appendices B, D, and F are explicitly
+computer-assisted propositions: their concise tables are article-level
+outputs, while the complete machine-readable inputs, deterministic
+algorithms, checksums, and independent replays are the stable supplement
+listed in Appendix G.  They are not presented as unaided human proofs.
 
 \section{Detector calculations for uniform exclusion}
 \label{app:modular-detectors}
@@ -1967,7 +2040,7 @@ Lemmas~\ref{lem:targeted-linear-detectors},
 those detector channels; no exhaustive description of the finite-group
 socle is asserted.
 
-Fix \(k=\overline{\F}_q\), put
+Fix \(k=\overline{\F}_q\), put \(E=L(1)\), and write
 \[
  \mathbf G=\operatorname{SL}_2(k),\qquad
  \Gamma=\operatorname{SL}_2(q),\qquad
@@ -1977,11 +2050,21 @@ and set \(M=\operatorname{Sym}^2F\) and
 \(Y_1=L(1)\otimes L(1)^{(e)}\).
 Steinberg's tensor-product theorem classifies the simple
 \(\Gamma\)-modules used here
-\cite[Theorems~1.1 and~7.4]{Steinberg1963}.  Modular Hermite reciprocity
-also identifies \(F\) with
-\(\operatorname{Sym}^2\nabla(d)\)
-\cite[Corollary~1.5]{McDowellWildon2022}; the targeted arguments below do
-not require a socle formula for that symmetric square.
+\cite[Theorems~1.1 and~7.4]{Steinberg1963}.  Put
+\(D=\nabla(d)=\operatorname{Sym}^dE\).  Modular Hermite reciprocity gives
+the convention-explicit chain
+\[
+ \operatorname{Sym}^d(\operatorname{Sym}^2E)
+ \simeq\operatorname{Sym}^d(\operatorname{Sym}_2E)
+ \simeq\operatorname{Sym}_2(\operatorname{Sym}^dE)
+ \simeq\operatorname{Sym}^2D.                         \tag{A.1a}
+\]
+Here \(\operatorname{Sym}_2\) is the lower symmetric square; the first and
+last identifications are symmetrizations, valid because \(2<p\)
+\cite[Corollary~1.5]{McDowellWildon2022}.  Thus
+\(M\simeq\operatorname{Sym}^2(\operatorname{Sym}^2D)\); the targeted
+arguments below do not require a socle formula for the inner symmetric
+square.
 
 \subsection{The linear detector channels}
 \label{app:linear-detectors}
@@ -2234,31 +2317,79 @@ Finally take \(S=L(q-7)\).  If \(p\ge7\), then
  L(q-7)\otimes L(1)=L(q-6)\oplus L(q-8),
 \]
 with the second term omitted for \(p=7\); tensoring by \(L(1)^{(e)}\)
-gives the sources \(L(2q-6)\) and \(L(2q-8)\).  Write
-\(e_i=X^{d-i}Y^i\).  The top weight space of \(M\) is spanned by
-\(e_0^{\otimes4}\).  Its \(F^{(p-5)}\)-image has a nonzero term obtained
-by lowering two leaves by \((p-3)/2\) and \((p-7)/2\), contradicting the
-corresponding simple relation in \(L(2q-6)\).  The weight-\((2q-8)\)
-space is one-dimensional, spanned by the orbit sum
-\([0,0\mid0,1]\), and is not primitive because its \(E\)-image is
-\(4e_0^{\otimes4}\ne0\).
+gives the sources \(L(2q-6)\) and \(L(2q-8)\).
+
+We make the plethystic normalization explicit.  Write
+\[
+ e_i=X^{d-i}Y^i,\qquad
+ a_{ij}=e_i\odot e_j\in\operatorname{Sym}^2D,\qquad
+ [i,j\mid k,l]=a_{ij}\odot a_{kl}\in M,
+\]
+with the indices within each pair, and then the two pairs, ordered.
+These are nested symmetric products with no hidden factor of \(2\);
+in particular \([0,0\mid3,3]\) and \([0,3\mid0,3]\) are distinct.  Put
+\[
+ X_0=[0,0\mid0,0],\qquad Y_0=[0,0\mid0,1].
+\]
+For the negative and positive root groups,
+\[
+\begin{aligned}
+ \ell(t)e_i&=\sum_{r=0}^{d-i}\binom{d-i}{r}t^re_{i+r},\\
+ u(t)e_i&=\sum_{r=0}^{i}\binom{i}{r}t^re_{i-r};
+\end{aligned}                                           \tag{A.17a}
+\]
+hence \(E^{(1)}Y_0=X_0\).
+
+For \(p\ge7\), set
+\[
+ a=\frac{p-3}{2},\qquad b=\frac{p-7}{2}.
+\]
+The highest-weight space of \(M\) is \(kX_0\).  A highest vector \(g\) of
+\(L(2q-6)\) satisfies \(F^{(p-5)}g=0\), because the least base-\(p\)
+digit \(p-5\) of the divided-power index exceeds the least digit \(p-6\)
+of its highest weight.  On the target, writing
+\(A(t)=\ell(t)(e_0\odot e_0)\), the coefficient of
+\([0,0\mid b,a]\) in \(F^{(p-5)}X_0\) is
+\[
+ 4\binom db\binom da.                                  \tag{A.17b}
+\]
+Indeed, \(a+b=p-5\); the two factors of \(2\) are respectively the
+inner and outer symmetric-square cross terms.  Since \(d\equiv a\pmod p\),
+Lucas' theorem gives
+\[
+ \binom da=1,\qquad \binom db=\binom ab=\binom a2,
+\]
+so (A.17b) is nonzero, including when \(p=7\) and \(b=0\).
+Thus the image of \(g\) must vanish.  The weight-\((2q-8)\) space is
+\(kY_0\), but \(E^{(1)}Y_0=X_0\ne0\); hence no highest vector of
+\(L(2q-8)\) can map nontrivially either.
 
 If \(p=3\), write
 \[
  L(q-7)\otimes Y_1=T(3)\otimes R^{(2)},
 \]
-where \(T(3)\) has Weyl sequence
-\(0\to\Delta(3)\to T(3)\to\Delta(1)\to0\), and \(R^{(2)}\) contains
-the digits from the second onward.  Let \(g\) be the highest generator
+where the previously suppressed higher-digit factor is
+\[
+ R^{(2)}
+ =\left(\bigotimes_{j=2}^{e-1}L(2)^{(j)}\right)
+   \otimes L(1)^{(e)};
+\]
+the digit \(j=1\) is trivial.  The module \(T(3)\) has Weyl sequence
+\(0\to\Delta(3)\to T(3)\to\Delta(1)\to0\).  Let \(g\) be the highest generator
 of the \(\Delta(3)\)-section, tensored with the highest vector of
 \(R^{(2)}\), and let \(v\) lift the highest generator of the
 \(\Delta(1)\)-quotient, normalized by \(E^{(1)}v=g\).  They have weights
 \(2q-6,2q-8\) and generate the source.  The matching target spaces are
-spanned by \(X=(e_0e_0)^2\) and \(Y=(e_0e_0)(e_0e_1)\), so a map has
-\(g\mapsto\alpha X,\ v\mapsto\beta Y\).  But \(F^{(6)}g=0\), while the
-\((e_0e_0)(e_3e_3)\)-coefficient of \(F^{(6)}X\) is
-\(2\binom d3^2=2\).  Hence \(\alpha=0\), and
-\(E^{(1)}v=g,\ E^{(1)}Y=X\) give \(\beta=0\).
+spanned by \(X_0,Y_0\), so a map has
+\(g\mapsto\alpha X_0,\ v\mapsto\beta Y_0\).  But \(F^{(6)}g=0\), while
+\[
+ \operatorname{coeff}_{[0,0\mid3,3]}(F^{(6)}X_0)
+ =2\binom d3^2=2.                                      \tag{A.17c}
+\]
+Here the factor \(2\) is the outer cross term; Lucas' theorem gives
+\(\binom d3=1\) from the base-\(3\) digits of
+\(d=(3^e-3)/2\).  Hence \(\alpha=0\), and
+\(E^{(1)}v=g,\ E^{(1)}Y_0=X_0\) give \(\beta=0\).
 This proves Lemma~\ref{lem:opposite-parity-quadratic}.
 
 \subsection{Contraction and the prime-field affine class}
@@ -2393,7 +2524,11 @@ On this \(22\)-point orbit, \(A\mapsto M_A\) is a
 \(G\)-equivariant bijection onto \(X\).  This is the
 \emph{matching-decorated parent correspondence}; its bijectivity and
 the assertion that (B.3) consists of six disjoint pairs are exact
-finite inputs.  It is the secant-factorization counterpart of the
+finite inputs.  Concretely, the supplement enumerates the \(22\) translates
+of \(A_+\), deletes each of their six points, solves the resulting
+five-point conic, intersects it with \(\cC_0\), rejects unless the six
+intersections are disjoint two-sets, and compares the resulting canonical
+matching with all \(22\) rows of \(X\).  It is the secant-factorization counterpart of the
 self-polar matching and Brianchon-support reconstruction obtained from
 the Clebsch decoding geometry \cite{RuddRigidity2026}.
 
@@ -2490,7 +2625,7 @@ size four or six recovers only that \(K\)-orbit, not an individual
 matching.
 \end{theorem}
 
-\noindent\emph{Proof mode.}
+\noindent\emph{Computer-assisted proof mode.}
 The subgroup-mark reduction and the implications from equivariance are
 conceptual.  The six representative incidence rows in (B.10) below are
 certificate-checked exact counts and are reconstructed by an independent
@@ -2647,12 +2782,10 @@ The sheet exchanged by $J$ carries the negative copy of this quotient.
 \end{proposition}
 
 \noindent\emph{Proof mode.}
-Projectivity, indecomposability, fixed-point exactness, and the socle
-quotient are conceptual.  Absolute irreducibility of the
-nine-dimensional middle layer and the rank and kernel of
-\(\mathcal D\) are exact generator-matrix calculations in the
-\texttt{relative-cubic-depth} bundle, reconstructed by its independent
-replay.
+Projectivity, localness, and fixed-point exactness are conceptual.  The
+middle layer follows from the earlier \(M_8\)-identification.  The rank and
+kernel of \(\mathcal D\) use the certified profile table (B.8) and its
+independent replay.
 
 \begin{proof}
 The order of $H\simeq A_5$ is prime to $11$, so its trivial module is
@@ -2665,10 +2798,28 @@ characteristic eleven,
 \]
 so this endomorphism algebra is local.  Thus $V$ is indecomposable.  Its
 trivial head occurs once, and consequently $V=P(\mathbf1)$.  The
-constant vector is its one-dimensional socle.  The remaining
-nine-dimensional layer is absolutely irreducible; equivalently, the
-exact generator matrices on it span the full $9$-by-$9$ matrix algebra.
-This gives the displayed Loewy dimensions.
+constant vector is its one-dimensional socle.  The unique head map is
+augmentation, so
+\[
+ \operatorname{rad}V=\ker\!\left(V\xrightarrow{\sum}k\right).
+\]
+On this augmentation module define
+\[
+ \Phi\!\left(\sum_{M\in X_+}a_M[M]\right)
+   =\sum_{M\in X_+}a_M\,\pi_8(x_M).
+\]
+Changing the reference matching translates every \(x_M\) by the same
+vector, and the affine cocycle term cancels for the same reason; thus
+\(\Phi\) is a well-defined \(G^+\)-map.  The same-sheet first-moment
+identity of Proposition~\ref{prop:radical-hadamard} kills the constant
+vector and shows that the induced map
+\[
+ \overline\Phi:\operatorname{rad}V/k\mathbf1\longrightarrow M_8
+\]
+is nonzero.  The target is the absolutely irreducible \(G^+\)-module
+identified in Section~\ref{sec:rank-three}; both sides have dimension
+nine.  Hence \(\overline\Phi\) is an isomorphism.  This proves the
+displayed Loewy dimensions without a generator-matrix calculation.
 
 Taking $K$-fixed points is exact because $11\nmid |K|=12$.  The orbit
 sizes $1,4,6$ give (C.1).  The three vectors in (C.2) span the plane
@@ -2697,23 +2848,9 @@ independent of the reference matching.
 \end{corollary}
 
 \begin{proof}
-The unique trivial head map in Proposition~\ref{prop:modular-depth-quotient}
-is the augmentation map, so
-\[
- \operatorname{rad}P(\mathbf1)=\ker(V\xrightarrow{\sum}k).
-\]
-Changing the reference matching translates every \(x_M\) by the same
-vector, so the augmentation condition makes (C.5) reference-independent.
-The affine cocycle term in \(x_{gM}\) cancels for the same reason, hence
-the map is \(G^+\)-equivariant.  The same-sheet first-moment identity of
-Proposition~\ref{prop:radical-hadamard} sends the constant vector
-\(\mathbf1\), which lies in the augmentation module because
-\(|X_+|=11=0\) in \(k\), to zero.  Thus (C.5) descends to
-\(\operatorname{rad}P(\mathbf1)/\operatorname{soc}P(\mathbf1)\).
-
-Its image contains a nonzero same-sheet quotient and is \(G^+\)-stable.
-The irreducibility of \(M_8\!\downarrow_{G^+}\) therefore makes it
-surjective.  Both sides have dimension nine, so it is an isomorphism.
+The construction and all asserted properties of (C.5) are precisely the
+map \(\overline\Phi\) established in the proof of
+Proposition~\ref{prop:modular-depth-quotient}.
 \end{proof}
 
 \begin{corollary}[The homogeneous projective-cover bridge]
@@ -2889,7 +3026,7 @@ choice leaves the unordered pair.
 \end{enumerate}
 \end{theorem}
 
-\noindent\emph{Proof mode.}
+\noindent\emph{Computer-assisted proof mode.}
 Lemma~\ref{lem:split-inert-frames} and the determinant-character
 deductions are conceptual.  The agreement of the specialization map
 (D.2) with the integral Coxeter frames, the matching stabilizers and
@@ -3092,12 +3229,14 @@ the same quotient.  In the frozen relative basis its matrix is
 and its kernel is again $\langle[1:3:9]\rangle$.
 \end{proposition}
 
-\noindent\emph{Proof mode.}
+\noindent\emph{Computer-assisted proof mode.}
 The invariant/coinvariant construction and the implications of the
 displayed ranks are conceptual.  The dimensions, norm and projection
 ranks, kernel line, rank-one pencil member, contraction matrix, and
 flattening census are exact finite linear algebra in the
-\texttt{relative-cubic-depth} bundle and its independent replay.
+\path{verification/evidence/relative_cubic_depth.json} bundle, generated
+by \path{relative_cubic_depth.py} and checked by its independent replay.
+The fingerprint in Appendix G fixes all three files and their exact inputs.
 
 \begin{proof}
 Exact invariant and commutator calculations give
@@ -3213,8 +3352,8 @@ The reproducible review source is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{75881aa9a1940567512cc964cd4efceb410f99}\\[-2pt]
-\texttt{abcc8172f4c02cb29adf785b40}.
+\small\texttt{57eed77c02adc2d7a61f9ea7461a1df0c9a9e9}\\[-2pt]
+\texttt{8ac3749b4a2c878284c7ceea6d}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Nix inputs, manuscript checker, adversarial boundary checker,
@@ -3371,6 +3510,14 @@ automorphism group,
 (1993), 1--6.
 \newblock doi:10.1112/blms/25.1.1.
 
+\bibitem{KorchmarosPaceSonnino2018}
+G.~Korchm\'aros, N.~Pace, and A.~Sonnino,
+\newblock One-factorisations of complete graphs arising from ovals in finite
+planes,
+\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{160}
+(2018), 62--83.
+\newblock doi:10.1016/j.jcta.2018.06.006.
+
 \bibitem{Han2025}
 H.~Han,
 \newblock Symmetric factorisations of complete graphs,
@@ -3383,6 +3530,13 @@ M.~Giudici,
 \newblock Maximal subgroups of almost simple groups with socle
 $\mathrm{PSL}(2,q)$,
 \newblock arXiv:math/0703685, 2007.
+
+\bibitem{GiudiciLiPotocnikPraeger2006}
+M.~Giudici, C.~H.~Li, P.~Poto\v{c}nik, and C.~E.~Praeger,
+\newblock Homogeneous factorisations of graphs and digraphs,
+\newblock \emph{European Journal of Combinatorics} \textbf{27} (2006),
+11--37.
+\newblock doi:10.1016/j.ejc.2004.08.003.
 
 \bibitem{Faber2023}
 X.~Faber,
