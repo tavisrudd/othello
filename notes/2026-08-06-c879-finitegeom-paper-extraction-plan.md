@@ -1,8 +1,8 @@
 # C879 — finitegeom paper-boundary extraction plan and red-team
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** architecture correction
-in progress; the C891 module mapping is stale and must be regenerated from the
-current tree before it can authorize any move
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** Q11 self-contained
+certificate migration in progress; the C891 module mapping is stale and must be
+regenerated from the current tree before it can authorize any paper move
 
 ## Objective
 
@@ -91,6 +91,11 @@ elaborated in 5.94 seconds at 1.03 GB peak RSS, and the downstream adapter elabo
 in 61.80 seconds at 3.34 GB.  The adapter proved equality of the actual witness and canonical
 point tables and transported a certificate theorem; no heavyweight Q11 target was
 scheduled.  This establishes the mechanism, not the full Q11 ownership manifest.
+
+`lean/scripts/lean-certificate-dependency-firewall.py` is the executable package
+edge policy.  Its Q11 check is green after the self-contained rewrite.  Its portfolio
+scan intentionally remains red for the projective-cap Q11, Q13, Q16, and Q25
+certificate packages until each receives the same local-model/adapter migration.
 
 Use explicit paper and shared source roots:
 
