@@ -162,9 +162,12 @@ At the (q=11) endpoint, the theorem specializes to
 (operatorname{Aut}(P(11)[S])\cong C_5).  This is the cyclic rigidity left
 after fixing the normalized matching edge in the exterior-arc proof.  It is
 compatible with the Clebsch hexagon's (A_5) symmetry, whose Sylow-(5)
-subgroups are cyclic, but it does not by itself recover the full (A_5): that
-larger symmetry still comes from the projective Clebsch configuration.  This is
-a useful explanatory bridge, not another theorem claim.
+subgroups are cyclic.  The later rooted-bordering construction in
+`notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`
+shows that the tournament does recover the abstract conference switching
+completion and its full \(A_5\).  It still does not recover the identification
+with the original projective Clebsch configuration.  This is a useful
+forgetting/reconstruction bridge, not another headline theorem claim.
 
 ## EJ + TT closeout
 

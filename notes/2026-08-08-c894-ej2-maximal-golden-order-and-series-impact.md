@@ -28,6 +28,14 @@ conductor-two suborder”; it is the rank pattern
 \]
 with no canonical map between the two modules yet proved.
 
+> **Open-problem update (2026-08-08).**  The subsequent report
+> `notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`
+> constructs the missing map canonically once the matching edge is retained as
+> a root.  It gives
+> \(0\to A_4\to D_6\to\mathcal O_5\to0\), with orthogonal gluing index five.
+> Every “no canonical map yet” statement below is superseded at the rooted
+> level; only the unrooted/projective marking identification remains open.
+
 This strengthens exposition but is still classical fifth-cyclotomic lattice
 arithmetic, not a new headline for C894.
 
@@ -195,7 +203,7 @@ recording now, but a canonical map is not cheap and must not widen C894.
 | What is the local module over the maximal order? | settled | \(A_4\cong\mathcal O_5^2\) |
 | Why were there two successive halvings? | settled | tournament parity, then the augmentation cyclotomic relation |
 | Does the order-six conference carrier support the same maximal order? | settled on its even lattice | equation (8), giving \(D_6\cong\mathcal O_5^3\) |
-| Is there a canonical marked map \(A_4\to D_6\)? | genuinely open | separate cross-paper construction; not part of C894 |
+| Is there a canonical marked map \(A_4\to D_6\)? | settled positive after retaining the matching edge as root | coordinate inclusion in the rooted exact sequence; only the unrooted projective marking remains open |
 | Does this restore a novelty claim for the endpoint? | settled negative | it is standard fifth-cyclotomic lattice arithmetic |
 
 ## Next action

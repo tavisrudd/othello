@@ -122,8 +122,10 @@ Thus the normalized local Paley spectrum intrinsically recovers the same
 golden quadratic field that appears throughout the Clebsch orientation and
 conference-operator papers. This is stronger than the earlier observation
 that the local \(C_5\) is compatible with a Sylow-\(5\) subgroup of the
-Clebsch \(A_5\): it recovers the arithmetic field, though still not the full
-projective \(A_5\)-action.
+Clebsch \(A_5\): it recovers the arithmetic field.  The subsequent rooted
+bordering theorem reconstructs the abstract conference \(A_5\)-completion
+from the tournament, but still not its external identification with the
+original projective \(A_5\)-action.
 
 Publication use must remain restrained:
 

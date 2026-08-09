@@ -59,9 +59,15 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
   \]
   is integral with \(\Phi^2-\Phi-I=0\).  Thus
   \(A_4\cong\mathcal O_{\mathbb Q(\sqrt5)}^2\).  Use as a short explanatory
-  remark, not a novelty claim.  The order-six conference even lattice carries
-  the analogous rank-three maximal-order module, but no canonical marked map
-  between the two is proved.
+  remark, not a novelty claim.  If the chosen matching edge is retained as a
+  root, the tournament canonically borders to an order-six conference matrix
+  and gives the exact sequence
+  \(0\to A_4\to D_6\to\mathcal O_5\to0\).  The root is necessary; no
+  unrooted \(A_5\)-canonical rank-four submodule exists.  Interpret this as
+  a forgetting/reconstruction ladder \(C_5<D_{10}<A_5\): it reconstructs
+  the abstract switching completion, not the independent projective marking.
+  This is a terminal \(q=11\) consequence and does not solve the remaining
+  saturated-internal or nonsaturated all-\(k\) branches in C756.
 - **Proof device, no novelty claim:** flat Sidon lemma and the one-faithful-
   eigenblock Cayley criterion.
 - **Partial context only:** the all-\(k\) LP bound, saturation dichotomy,
@@ -98,6 +104,7 @@ user.
 - `notes/2026-08-08-c894-tt2-integral-golden-carrier.md`
 - `notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md`
 - `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`
+- `notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -141,5 +148,8 @@ ladder in
 `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`; the
 older parity proof remains an independent check of the intermediate operator.
 Mark the result as classical \(A_4\)/fifth-cyclotomic structure.  The
-\(\mathcal O_5^2\)/\(\mathcal O_5^3\) rank comparison with the conference even
-lattice may be stated, but ring-fence any canonical marked map as future work.
+\(\mathcal O_5^2\)/\(\mathcal O_5^3\) rank comparison should be replaced by
+the rooted exact sequence and bordering formula in
+`notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`.
+Ring-fence only the further identification with the independently marked
+projective/harmonic six-set.
