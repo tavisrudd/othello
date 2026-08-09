@@ -1078,6 +1078,17 @@ gate is consequently a signed tangent-pencil/coherent-\(m\)-arc
 classification, with the full proof and certificate in
 notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md.
 
+The normalized-pencil pass now makes that gate affine.  After sending the
+deleted pair to \(\{0,1\}\), the seed is exactly one point on each nonsquare
+direction through \(0\), and all its secants have square direction.  Each
+nonsquare direction gives a balanced factorization
+\(\widehat H_LQ_L=X^{q-1}-1\) with both factors of degree \((q-1)/2\).
+This is not the nonsaturated masked identity: it is a family of injective
+projection slices, whereas masked \(h=0\) is one chord product covering every
+direction.  The genuine \(q=5\) frame also disproves the tempting claim that
+each balanced factor is one quadratic-character coset.  See
+notes/2026-08-08-c756-normalized-pencil-selector.md.
+
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
 family and does not pre-empt the signed real identity. But the general binary
@@ -1191,8 +1202,8 @@ The final proof should have four modules:
 
 Current subjective distribution for the missing proof mechanism is:
 
-- 55%: one half-Paley/Rédei rigidity lemma closes both branches;
-- 25%: a Segre tangent/polarity theorem closes saturation and a separate
+- 30%: one joint, two-direction half-Paley/Rédei rigidity lemma closes both branches;
+- 50%: a Segre tangent/polarity theorem closes saturation and a separate
   masked Rédei lemma closes nonsaturation;
 - 15%: the signed \(p\)-adic/incidence-lattice model supplies the saturated
   obstruction; and
@@ -1201,10 +1212,11 @@ Current subjective distribution for the missing proof mechanism is:
 Do not invest further in theta/PSD strengthening, global defect moments,
 generic monodromy, unsigned resultants, or unrestricted seed
 classification.  They either discard the switching information or prove a
-substantially stronger statement than all-\(k\) requires.  The immediate
-highest-EV calculation is to write the normalized passant-pencil selector
-and determine whether (A) yields the same Rédei division identity as the
-masked \(h=0\) hypothesis.
+substantially stronger statement than all-\(k\) requires.  The normalized
+selector comparison is complete and says the one-variable carriers differ.
+The immediate highest-EV calculation is therefore the first joint invariant
+of two balanced slices under \(\tau(v)=1-v^q\), with the prior
+single-coordinate moment wall as a hard stop rule.
 
 ## Current boundary
 
@@ -1241,16 +1253,15 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: projectively normalize one missing point and its
-signed passant pencil, write the resulting half-domain selector explicitly,
-and compare its Rédei division identity with the nonsaturated masked
-\(h=0\) identity.  First seek the common half-Paley rigidity lemma above;
-the saturated target is only signed tangent-column inequality for \(q>5\),
-not nonexistence of every coherent seed.  If the two identities do not share
-a rigid carrier, split the work into a Segre tangent/polarity theorem and the
-masked direction theorem.  The signed \(p\)-adic lift of
-\(2K-\epsilon I\), using \(Z\) as integral model, remains the saturated
-fallback.
+Highest-EV next action: normalize two nonsquare directions \(L,L'\), express
+the roots of \(\widehat H_L,\widehat H_{L'}\) as two projections of the same
+radial selector, and test the first resultant/gcd invariant that uses
+\(\chi_2(v-\tau(w))=-1\).  Continue only if its degree is bounded
+independently of \(m\); stop if it reduces to the prior set equality or
+single-coordinate moment theorem.  On failure, split the proof investment:
+a Segre tangent/polarity theorem for saturation and masked \(h\ge1\) for
+nonsaturation.  The signed \(p\)-adic lift of \(2K-\epsilon I\), using \(Z\)
+as integral model, remains the saturated fallback.
 Larger PSD algebras, total-defect averaging, parity, and more global moments
 remain closed.  A focused original-source/forward-citation audit checks the
 exact fusion/frame identities in parallel.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition

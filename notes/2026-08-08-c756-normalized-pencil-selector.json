@@ -1,0 +1,134 @@
+{
+  "claim": "the genuine q=5 normalized four-frame has balanced projection slices, but at least one nonzero slice contains both character classes",
+  "cross_involution_characters": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "field": {
+    "basis": "F_q[s]/(s^2-2)",
+    "least_nonsquare": 2,
+    "q": 5
+  },
+  "normalized_points": [
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "projection_rows": [
+    {
+      "complementary_roots": [
+        1,
+        3
+      ],
+      "kernel": [
+        0,
+        4
+      ],
+      "nonzero_root_characters": [
+        -1,
+        1
+      ],
+      "nonzero_roots": [
+        2,
+        4
+      ],
+      "values": [
+        0,
+        4,
+        2
+      ]
+    },
+    {
+      "complementary_roots": [
+        2,
+        4
+      ],
+      "kernel": [
+        4,
+        3
+      ],
+      "nonzero_root_characters": [
+        1,
+        -1
+      ],
+      "nonzero_roots": [
+        1,
+        3
+      ],
+      "values": [
+        1,
+        0,
+        3
+      ]
+    },
+    {
+      "complementary_roots": [
+        1,
+        4
+      ],
+      "kernel": [
+        2,
+        1
+      ],
+      "nonzero_root_characters": [
+        -1,
+        -1
+      ],
+      "nonzero_roots": [
+        2,
+        3
+      ],
+      "values": [
+        3,
+        2,
+        0
+      ]
+    }
+  ],
+  "schema": "c756-normalized-pencil-selector-v1",
+  "seed_directions": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ]
+  ],
+  "within_difference_characters": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ]
+}
