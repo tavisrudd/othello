@@ -99,15 +99,16 @@ Use three rhetorical layers rather than a compressed table of contents.
    `iota_t^* J_0 = 16 sigma_3^2`.
 2. State the governing marked mechanism: the selected sheet supplies the
    relative orientation of the conference source; its four exact operator
-   descriptions give the classical cubic shadows; the Petersen map returns
-   the sign to the degree-six Gaunt cubic.
+   descriptions give the Joubert--Segre--Igusa--Clebsch chain; the Petersen map
+   gives the degree-six Gaunt realization and computes its exact normalized
+   restriction.  Say separately that its sign comparison is relative to the
+   marked bridge datum.
 3. Give one final sentence for the two independent structural consequences:
    order-six exchange rigidity and sharp aligned-four-set reconstruction.
 
 Retain the sharp order-seven boundary because it distinguishes the
-reconstruction theorem.  Remove the detailed decoder query count and the full
-list of downstream classical models from the abstract; both remain prominent
-in their theorem statements and the body.
+reconstruction theorem.  Remove the detailed decoder query count from the
+abstract; it remains prominent in `thm:aligned-faithfulness` and its proof.
 
 ### Introduction
 
@@ -126,7 +127,11 @@ Use the rational fibre over `[xyz]` as the model case explicitly.  The current
 paragraph explaining that its unordered fibre is rational while either sheet
 requires `Q(sqrt(5))` already contains the mechanism in miniature.  Add one
 sentence identifying it as the specialization that later determines the
-global twist, and call back to it at the start of the specialization proof.
+global twist.  Call back to it where `thm:arithmetic-main` actually determines
+the twist, at “Square class from one fibre” or “The local comparison at
+`xyz`” in `sec:cover`; the later arithmetic-specialization section explains
+the exchanger and spinor consequence rather than first determining the square
+class.
 
 Consolidate the existing roadmap material after the relative-orientation
 proposition.  Give each navigational device one job:
@@ -141,6 +146,12 @@ Delete or merge repeated statements that the harmonic theorem is independent,
 that the cubics live on different spaces, and that the bridge is relative to a
 marking.  Each boundary must remain at its first load-bearing use and in the
 marking appendix, but it need not be restated in every overview paragraph.
+The abstract and conclusion must nevertheless retain the exact scope: only
+after fixing the marked bridge datum does the sheet select the marked source
+or its opposite; the sheet does not supply the ordering, chart lift, outer
+labels, or Petersen labels.  Near the harmonic return, state once that
+`Z_{\mathfrak m}` and `\sigma_3` live on different spaces and that no ambient
+`SO_3`-equivariant map is asserted.
 
 ### Section 5
 
@@ -164,6 +175,13 @@ identity from the marked-orientation section, the Hodge convention, and direct
 conference-class calculations.  The proposed move therefore creates a safe
 skip rather than hiding a dependency.
 
+One definition now lives too late for that move.  Relocate the exact
+four-point two-graph parity equation and a one-clause switching/complement
+gloss from the reconstruction subsection into the outer-family setup.  Leave
+aligned sets, `\mathcal A(\tau)`, reconstruction tables, and query models in
+the independent branch.  Also define `\operatorname{center}_T` explicitly
+before its first use in `thm:operator-shadows`.
+
 Replace the current Section 5 opening by a two-track orientation paragraph:
 
 > The main route of this section identifies four exact descriptions of the
@@ -172,8 +190,16 @@ Replace the current Section 5 opening by a two-track orientation paragraph:
 > same conference carrier.
 
 After the four-shadow proof, add a single transition that explicitly releases
-the first-pass reader to the harmonic section.  Do not repeat the full
-source--shadow--return summary there.
+the first-pass reader:
+
+> For the main source--shadow--return route, continue with
+> Section~`\ref{sec:harmonic}`.  The next two subsections use the same
+> conference carrier but supply no hypothesis for `thm:harmonic-main`.
+
+Distinguish the elementary switching recovery inside `thm:operator-shadows`
+from the later global aligned-design reconstruction, since similar vocabulary
+must not suggest a false dependency.  Do not repeat the full
+source--shadow--return summary in this transition.
 
 Mechanical consequences of the move must be audited:
 
@@ -185,6 +211,17 @@ Mechanical consequences of the move must be audited:
 - references from the introduction, conclusion, README, and artifact prose to
   numbered theorems or subsections.
 
+Inventory all literal rendered theorem and proposition numbers across the
+manuscript, README, artifact prose, and verification material, not merely new
+ones.  Replace internal literals by semantic-label references.  Separately
+audit the stable labels for sections, equations, figures, and tables affected
+by the move; theorem IDs do not protect those navigation targets.  Assign
+stable labels `tab:outer-coefficient-words` and
+`eq:aligned-pair-criterion` to the current displays tagged (5.1) and (5.2),
+replace their internal hard-coded references by label references, and preserve
+the existing `fig:source-shadow-return` and `fig:four-cubic-shadows` labels.
+Do not rewrite bibliographic locators such as “Table 1” in a cited source.
+
 ### Conclusion
 
 Begin with the completed mathematical bridge rather than the integral-model
@@ -192,7 +229,8 @@ boundary.  Use this order:
 
 1. rational descent and the golden fibre determine the exact cover;
 2. the marked source has four operator descriptions and returns through the
-   Petersen four-space to `sigma_3`;
+   Petersen four-space to an exact multiple of `sigma_3`, with the relative
+   sign fixed only after the marked bridge datum is supplied;
 3. exchange rigidity and aligned reconstruction are independent consequences
    of the carrier; and
 4. the exact integral exceptional-prime problem remains open.
@@ -233,10 +271,12 @@ the explicit freeze points below.
 ### Checkpoint 0 — immutable baseline
 
 - Record the authority commit, standalone commit, PDF hash, page count, and a
-  clean mirror status.
-- Save page locations for Figure 1, Table (5.1), Figure 2, the statements with
-  IDs `thm:operator-shadows`, `thm:balanced-exchange-rigidity`,
-  `thm:aligned-faithfulness`, and the conclusion.
+  clean authority and mirror status.
+- Save page locations for `fig:source-shadow-return`, the display that will
+  receive `tab:outer-coefficient-words`, `fig:four-cubic-shadows`, the
+  statements with IDs `thm:operator-shadows`,
+  `thm:balanced-exchange-rigidity`, `thm:aligned-faithfulness`, and the
+  conclusion.
 - Run the existing paper-only aggregate once to establish the baseline.  Do
   not run Lean.
 
@@ -248,8 +288,13 @@ the explicit freeze points below.
   statement extractor.
 - Run a scratch TeX build, unresolved-reference check, stable-ID uniqueness and
   expected-set check, spacing lint, and `git diff --check`.
+- Put every scratch build and non-mutating statement extraction in an isolated
+  temporary output directory.  Assert afterward that no tracked PDF, auxiliary
+  file, snapshot, manifest, or checksum changed.
 - Confirm by source dependency scan that the moved proof cites neither
   `thm:balanced-exchange-rigidity` nor `thm:aligned-faithfulness`.
+- Compare the whole moved subsection against its baseline hash after
+  normalizing only the expected directional transitions.
 - Do not update the tracked PDF, statement snapshot, authority commit, or
   standalone mirror yet.
 
@@ -261,51 +306,69 @@ the explicit freeze points below.
 - After each source file is finished, run the fast checks: scratch build,
   unresolved references, forbidden literal theorem-number scan, spacing lint,
   and `git diff --check`.
-- Compare theorem environments byte-for-byte, keyed by stable ID, against the
-  baseline.  Apart from their location and any explicitly approved theorem
-  prose edit, statement bodies must be unchanged.
+- Run the statement extractor with a temporary `--output` path; its tracked
+  `--check` mode is expected to fail while the snapshot is intentionally stale.
+- Compare the baseline and candidate maps `stable label -> statement SHA-256`
+  byte-for-byte.  Apart from location and any explicitly approved theorem
+  prose edit, statement bodies must be unchanged.  Treat expected JSON changes
+  to order, source lines, and section hashes as movement metadata rather than
+  theorem drift.
 - Still do not touch the mirror or refresh generated artifacts.
 
-### Checkpoint 3 — authority freeze
+### Checkpoint 3 — authority candidate freeze
 
 - Review the whole source diff for accidental changes to hypotheses,
   quantifiers, citations, equations, labels, and trust language.
 - Regenerate `verification/statement_identity.json` once, rebuild the tracked
   PDF once, and update any page-count expectation once.
-- Run the complete paper-only release aggregate and inspect all changed PDF
-  pages, floats, tables, diagrams, headings, and page breaks against the
-  baseline.
-- Stage only Paper III authority and C897 memo paths, run `git diff --cached
-  --check`, and commit one coherent authority revision.
+- Run the complete paper-only release aggregate without `--lean-root` and
+  inspect all changed PDF pages, floats, tables, diagrams, headings, and page
+  breaks against the baseline.
+- After every generator, compare changed paths against an explicit allowlist;
+  reject any auxiliary, unrelated-paper, or unexpected manifest change before
+  staging.
+- Freeze the candidate PDF hash and source diff for blind review, but do not
+  commit authority yet.  This keeps rejected copy edits and their generated
+  artifacts out of permanent history.
 
 If a copy edit is required after this freeze, make it in authority and repeat
 Checkpoint 3.  Do not patch the generated identity, PDF, export manifest, or
 mirror independently.
 
-### Checkpoint 4 — one-way standalone synchronization
+### Checkpoint 4 — blind layered-exposition validation
 
+- Freeze the authority candidate PDF and hash before dispatch.  If reviewers
+  require standalone layout, create a disposable exporter-derived review
+  checkout and do not commit it.
+- Give a primary-audience specialist and an adjacent-field reader the old and
+  new PDFs without the revision rationale.  Counterbalance old/new reading
+  order, conceal version identity where practical, and give both readers the
+  same task sheet.
+- Record navigation errors and comprehension errors as well as time.  Require
+  the adjacent reader to identify the exact safe skips and every language
+  transition.  Ask the primary reader whether moving the independent theorems
+  later reduced their perceived importance or specialist confidence.
+- If either reader finds a hidden dependency, reduced specialist confidence,
+  or a failed safe skip, return to authority and restart at Checkpoint 2 or 3.
+  Do not create an official mirror commit.
+
+### Checkpoint 5 — one-way standalone synchronization
+
+- After the blind gate passes, rerun the authority changed-path allowlist,
+  release aggregate, and rendered-page check.  Stage only declared Paper III
+  authority and C897 memo paths, run `git diff --cached --check`, and commit one
+  coherent authority revision.
 - Run exporter `plan` and the repository-specific coupling `audit` from the
   immutable authority commit.
 - Require the standalone worktree to be clean, then run the normal one-way
   `sync` exactly once for that authority commit.
 - Commit the standalone refresh, run exporter `verify`, run the standalone
-  paper-only release aggregate, and confirm that authority and mirror PDFs
-  have identical hashes and page counts.
+  paper-only release aggregate without `--lean-root`, and confirm that
+  authority and mirror PDFs have identical hashes and page counts.
 - No push, publication, deposit, or submission belongs to this plan.
 
 If the mirror exposes a defect, repair authority first and restart at
 Checkpoint 3.  Never repair export drift in the mirror.
-
-### Checkpoint 5 — blind layered-exposition validation
-
-- Freeze the new standalone commit and PDF hash before dispatch.
-- Give a primary-audience specialist and an adjacent-field reader the old and
-  new PDFs without the revision rationale.  Ask for a blind preference and
-  separately record specialist confidence, first-pass route comprehension,
-  safe-skip accuracy, and trust-boundary visibility.
-- If either reader finds a hidden dependency or reduced specialist confidence,
-  return to authority and restart at Checkpoint 2 or 3 as appropriate.  Do not
-  iterate by copy editing the mirror.
 
 ## Implementation sequence
 
@@ -313,11 +376,12 @@ Checkpoint 3.  Never repair export drift in the mirror.
    dependency-preserving mechanical move.
 2. Execute Checkpoint 2 in the order Section 5, abstract, introduction, then
    conclusion; keep the mirror untouched.
-3. Freeze and commit authority at Checkpoint 3, refreshing generated artifacts
-   only once after the copy is stable.
-4. Export the immutable authority commit through Checkpoint 4.
-5. Run the two-reader blind comparison in Checkpoint 5.  Any adopted change
-   restarts from authority rather than creating mirror-only churn.
+3. Freeze the uncommitted authority candidate at Checkpoint 3, refreshing
+   generated artifacts only after the copy is stable.
+4. Run the two-reader blind comparison at Checkpoint 4 before creating the
+   official standalone refresh.  Any adopted change restarts from authority.
+5. Commit the accepted authority candidate and export that immutable commit
+   once through Checkpoint 5.
 
 Per author direction, this plan includes no Lean work.  Any later Lean replay
 or follow-up is separately queued.
@@ -360,3 +424,31 @@ The plan should be reviewed independently from two perspectives.
    losing a load-bearing convention or trust boundary?
 5. Would this layering answer the density/unity concern without requiring a
    paper split?
+
+## Independent plan-review disposition
+
+Two independent readers reviewed the frozen first draft of this memo against
+the full style guide and the 32-page standalone paper.  The Hitchin-style
+arithmetic/harmonic reader and Snowden-style invariant-theory/editorial reader
+both returned `APPROVE WITH CHANGES`.  Neither found a dependency from
+`thm:operator-shadows` to `thm:balanced-exchange-rigidity` or
+`thm:aligned-faithfulness`, and both judged layering sufficient without a
+split.
+
+The revised memo adopts their substantive amendments:
+
+- preserve the exact normalized harmonic restriction and the named
+  Joubert--Segre--Igusa--Clebsch chain in the abstract;
+- call back to `[xyz]` inside the proof of `thm:arithmetic-main`, where it
+  determines the twist;
+- preserve the full marked-relative and different-domain boundaries;
+- move the four-point two-graph equation into the shared setup and define
+  `\operatorname{center}_T` before `thm:operator-shadows`;
+- make the safe skip point directly to `sec:harmonic` and state that the two
+  later theorems supply no hypothesis to `thm:harmonic-main`;
+- compare stable-label statement hashes and isolate all scratch generation;
+- move blind validation before both the authority commit and the one official
+  standalone synchronization; and
+- counterbalance the blind comparison and record navigation errors, perceived
+  theorem importance, specialist confidence, and adjacent-reader comprehension
+  separately.
