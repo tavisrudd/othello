@@ -3,6 +3,13 @@
 **Lane:** clebsch · **Date:** 2026-08-08 · **Scope:** second-order theorem
 extraction; no manuscript or Lean edits
 
+> **Attribution update (2026-08-08).**  The subsequent literature check
+> `notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md` identifies
+> the operator below with the standard order-five action on the
+> \(A_4\), \(\mathbb Z[\zeta_5]\)-module:
+> \(\mathcal J=-R+R^2+R^3-R^4\) on the augmentation lattice.  Retain it as an
+> explanatory local-Paley coordinate formula, not a novelty-bearing theorem.
+
 ## Verdict
 
 The decomposition-field theorem has two further free consequences.
@@ -144,7 +151,7 @@ For \(x\in L\), \(Ex=(\mathbf1^Tx)\mathbf1=0\). Thus
 
 Equations (9)--(11) prove:
 
-**Theorem (intrinsic conductor-two golden carrier).** The integral
+**Endpoint calculation (intrinsic conductor-two golden carrier).** The integral
 augmentation lattice of \(P(11)[N^+(0)]\) carries a canonical action of
 \[
  \mathbb Z[T]/(T^2-5)\cong\mathbb Z[\sqrt5]
