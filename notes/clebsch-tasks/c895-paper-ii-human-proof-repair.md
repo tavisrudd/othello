@@ -46,7 +46,7 @@ gets one causal roadmap, exact modular propositions, and the short
 classification proof.  A self-contained load-bearing Appendix A gets the targeted
 root-degree, digitwise Cartan, divided-power, Steinberg, Fischer, and Borel
 calculations.  The falsified universal matrix stays outside the paper.  The
-integrated manuscript is 42 pages; 50 pages is the compression threshold.
+integrated manuscript is 43 pages; 50 pages is the compression threshold.
 
 C894, saturated-exterior geometry, the postclassification Paley carrier,
 one-factorizations, survivor stabilizers, and the fields 7 and 11 may not

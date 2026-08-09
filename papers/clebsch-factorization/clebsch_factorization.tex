@@ -55,13 +55,14 @@ vector.  Exactly two occur: the balanced \(B_3/\F_7\) and \(H_3/\F_{11}\)
 orbits.  The trade recovers their two complementary sheets, without assuming
 self-association or Gorensteinness.
 
-The matching carrier is sharp.  For either surviving stabilizer, its fixed
+The restriction to perfect matchings is sharp.  For either surviving stabilizer, its fixed
 locus in the ambient conic-product fiber is an affine line of \(q\) pairwise
-nonconjugate rational points.  Only the matching point is completely
-reducible, although \(q-2\) nonmatching orbits have the same exact trade.
-Thus complete reducibility selects the matching orbit from the fixed line.
-The exceptional one-factorizations are classical; the new boundary is this
-fixed-line and Chow-selection mechanism.
+nonconjugate rational points.  Only the matching point splits completely
+into linear factors, although \(q-2\) nonmatching orbits have the same
+one-dimensional two-valued strength-two trade condition.  Thus complete
+splitting selects the matching orbit from the fixed line.  The exceptional
+one-factorizations are classical; the new boundary is the fixed line and its
+unique completely split point.
 
 For the two matching configurations, the first nonzero signed tensor moment
 is an anti-invariant cubic.  Their \(14\)- and \(22\)-point homogenizations
@@ -69,7 +70,7 @@ are self-associated and arithmetically Gorenstein, and maximal isotropy
 identifies the cubic with the Macaulay inverse system of an Artinian
 reduction.  General self-dual-code criteria already explain the Gorenstein
 consequence of the Schur square; the configuration-specific contributions
-are the all-field orbit classification, sharp carrier boundary, sheet
+are the all-field orbit classification, sharp matching boundary, sheet
 reconstruction, and cubic orientation.  Targeted modular detectors, made
 exhaustive by Faber's tame subgroup theorem, exclude every other matching
 orbit without a field census.  A common alternating-cycle and Dickson
@@ -98,8 +99,9 @@ For the two surviving orbits, quadratic products recover an unordered
 bipartition of that configuration.  The first surviving signed tensor is
 cubic and orients its two parts.  Thus quadratic data recover the
 factorization without choosing an orientation; the first odd covariant
-restores the choice.
-This is a low-degree recognition theorem rather than an orbit census:
+restores the choice.  By the \emph{matching carrier} we mean the locus of
+products of the secant lines in a perfect matching of the marked conic
+points.  This is a low-degree recognition theorem rather than an orbit census:
 within the full matching carrier, the quadratic relation forces one of two
 exceptional geometries without assuming its group type, self-association, or
 Gorenstein coordinate ring.
@@ -109,14 +111,15 @@ defect of a self-dual code by its indecomposable blocks, equivalently by
 the defect of its Schur square
 \cite[Theorem~3.11 and Corollaries~3.12--3.13]{RodriguezPajaresEtAl2025}.
 Accordingly, the general self-associated/Schur-square/Gorenstein mechanism
-is background here, not a priority claim.  The theorem below runs in the
-reverse direction.  With no self-duality or Gorenstein premise, it classifies
+is background here, not a priority claim.  Our theorem starts from different
+input.  With no self-duality or Gorenstein premise, it classifies
 the full matching orbits from the two-valued quadratic-trade condition alone,
 reconstructs their sheets, and identifies the orbit-specific cubic that
-orients them.  The perfect-matching carrier is both genuine and sharp:
+orients them.  The matching carrier is sharp:
 outside it, a stabilizer-fixed affine line contains \(q-2\) nonmatching
-orbits with the same exact trade condition, while its unique secant-product
-Chow point is the matching orbit.
+orbits with the same one-dimensional two-valued strength-two trade condition,
+while its unique point that splits completely into linear factors is the
+matching orbit.
 
 \begin{center}
 \small
@@ -147,8 +150,9 @@ Section~\ref{sec:balanced} recovers the sheets from quadratic products,
 shows exactly where that recovery fails off the matching carrier, and
 proves that the first signed moment is cubic.  Maximal isotropy then gives
 the Gorenstein pairing.  Appendix A proves the modular detector interfaces
-on which the all-field exclusion rests.  Appendices B--F develop optional
-\(H_3\) refinements, and Appendix G records the human, formal, and finite
+on which the all-field exclusion rests.  Appendices B, C, E, and F develop
+optional \(H_3\) refinements, Appendix D compares arithmetic marker data
+across all three types, and Appendix G records the human, formal, and finite
 verification boundaries.
 
 \begin{theorem}[Quadratic-trade classification and cubic orientation]
@@ -180,27 +184,31 @@ one-dimensional two-valued quadratic-trade space.
 \end{enumerate}
 \end{theorem}
 
-The carrier boundary is summarized by the three implications
+For each surviving stabilizer, Section~\ref{sec:balanced} constructs a fixed
+affine line inside the ambient conic fiber.  The forms in that ambient fiber
+that split completely into linear factors comprise its Chow locus.  The
+carrier boundary is summarized by
 \[
 \begin{array}{rcl}
  \text{matching carrier and two-valued trade}
    &\Longrightarrow& B_3/\F_7\ \text{or}\ H_3/\F_{11},\\[2pt]
- \mathcal A_T^K(\F_q)\ \text{away from coalescence}
-   &\Longrightarrow& q-1\ \text{exact-trade orbits},\\[2pt]
- \mathcal A_T^K(\F_q)\cap\text{Chow locus}
-   &=& \{P_{M_T}\}.
+ \text{fixed conic-fiber line away from coalescence}
+   &\Longrightarrow& q-1\ \text{trade-condition orbits},\\[2pt]
+ \text{fixed conic-fiber line}\cap\text{Chow locus}
+   &=& \{\text{matching point}\}.
 \end{array}                                                   \tag{1.1}
 \]
 The middle line consists of one matching orbit and \(q-2\) nonmatching
 orbits; the excluded rational point is the coalescence parameter.  The last
-line is the faithful repair of the failed middle implication.
+line shows that imposing the Chow condition restores uniqueness.
 
 Appendix~\ref{sec:modular-depth} gives a modular interpretation of the
 \(H_3\) affine-origin obstruction and its homogeneous extension.
 Sections~\ref{sec:matching-products}--\ref{sec:balanced} prove the
 quotient, rank, and quadratic/cubic recovery results; Appendix A supplies
-the load-bearing modular detector calculations, Appendices B--F record
-\(H_3\) refinements, and Appendix G documents verification.
+the load-bearing modular detector calculations, Appendices B, C, E, and F
+record \(H_3\) refinements, Appendix D compares arithmetic marker data across
+the three types, and Appendix G documents verification.
 
 \section{Conic matching products}
 \label{sec:matching-products}
@@ -337,7 +345,7 @@ $S_4,S_4,A_5$, and hence
  |\Omega_{A_3}|=5,\qquad |\Omega_{B_3}|=14,\qquad
  |\Omega_{H_3}|=22.                                      \tag{3.2}
 \]
-These marker spaces and their stabilizers are classical.  In particular,
+These matching orbits and their stabilizers are classical.  In particular,
 Edge and Dye identify the exceptional finite conic configurations and
 substantial parts of their incidence geometry
 \cite{Edge1956,Dye1991}.  The exceptional one-factorizations themselves
@@ -928,7 +936,8 @@ orbits satisfy the intrinsic hypotheses.
 \end{proof}
 
 Fix $M_T$ as reference and apply (2.1) to every member of $\Omega_T$.
-Write $R_d=\F_q[X,Y,Z]_d$ and
+For \(j\ge0\), write \(R_j=\F_q[X,Y,Z]_j\), and set \(R_j=0\) for
+\(j<0\).  Put
 \[
  \Delta_Q=4\partial_X\partial_Z-\partial_Y^2,\qquad
  \mathcal H_d=\ker(\Delta_Q:R_d\longrightarrow R_{d-2}).
@@ -1373,8 +1382,8 @@ quadratic step in a form that applies to both balanced configurations.
 \begin{proposition}[Radical--Hadamard recovery]
 \label{prop:radical-hadamard}
 Let \(k\) be a field and
-\(\Omega=\Omega_+\sqcup\Omega_-\), with both sheets of size \(q=0\)
-in \(k\).  Suppose an affine evaluation space
+\(\Omega=\Omega_+\sqcup\Omega_-\), with
+\(|\Omega_+|=|\Omega_-|=q\) and \(q\cdot1_k=0\).  Suppose an affine evaluation space
 \(L\subseteq k^\Omega\) has the following properties:
 \begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
 \item each sheet has zero first moment, and the two sheets have equal
@@ -1402,13 +1411,14 @@ of the sheet sign.
 \end{proposition}
 
 \begin{proof}
-Let \(e_+\) and \(e_-\) be the two sheet indicators.  The radical
-functional evaluates as \(a_+e_++a_-e_-\) with \(a_+\ne a_-\).
+Let \(e_+\) and \(e_-\) be the two sheet indicators.  The evaluation
+vector of a nonzero radical functional is \(a_+e_++a_-e_-\), with
+\(a_+\ne a_-\).
 Together with \(1=e_++e_-\in L\), it therefore yields
 \(e_+,e_-\in L\).
 
 Let \(H_\pm\) be the zero-sum hyperplane on \(\Omega_\pm\).
-The first-moment hypothesis and \(q=0\) put each restriction of \(L\)
+The first-moment hypothesis and \(q\cdot1_k=0\) put each restriction of \(L\)
 inside \(H_\pm\); the rank hypothesis makes both restrictions
 surjective.  Multiplication by \(e_+\) and \(e_-\) now gives
 \[
@@ -1498,7 +1508,7 @@ homomorphism, hence vanishes.  The radial coordinate is consequently
 zero on the base sheet and constant on the other.  The secant-norm
 calculation in Lemma~\ref{lem:shared-radial-cycle} shows that the outer
 constant is nonzero in both types.  Because
-\(q=0\), radial--radial and radial--top second moments vanish.  Thus
+\(q\cdot1_{\F_q}=0\), radial--radial and radial--top second moments vanish.  Thus
 \(r^\vee\) is exactly the one-dimensional radical, and its sheet
 constants are distinct.
 \end{proof}
@@ -1507,10 +1517,10 @@ constants are distinct.
 Let \(T=B_3,H_3\), with \(q=7,11\), respectively, and fix a reference
 matching \(M_T\) with stabilizer \(K=S_4,A_5\).  Put
 \(m=(q+1)/2\) and \(d=m-2\).  Write \(\mathcal A_T\) for the affine space
-of degree-\(m\) forms whose restriction to the conic is the product of its
-\(q+1\) marked rational points.  We call the completely reducible forms
-inside it its Chow locus.  Symmetry leaves one affine parameter in
-\(\mathcal A_T\); complete reducibility selects one point.
+of degree-\(m\) forms whose restriction to the conic is the fixed binary form
+vanishing on all \(q+1\) marked rational points.  We call its members that
+split completely into linear factors the Chow locus.  Symmetry leaves one
+affine parameter in \(\mathcal A_T\); complete splitting selects one point.
 
 \begin{theorem}[The fixed line and its Chow point]
 \label{thm:fixed-line-chow-rigidity}
@@ -1527,17 +1537,16 @@ Section~\ref{sec:matching-products}, the following hold.
 Its \(q\) rational points lie in distinct \(G\)-orbits, each with
 stabilizer \(K\).
 
-\item This line meets the Chow locus of completely reducible degree-\(m\)
-forms in the single point \(P_{M_T}\).  Equivalently, the matching carrier
-is the unique Chow point on the fixed line.
+\item This line meets the Chow locus in the single point \(P_{M_T}\).
+Equivalently, the matching point is the unique Chow point on the fixed line.
 
 \item The orbit of each noncoalescent point has \(2q\) points, and its
 quadratic-trade space is the sheet-sign line.  Consequently \(q-2\) of
-these orbits satisfy the same exact two-valued trade condition as the
-matching orbit but do not come from matchings.
+these orbits satisfy the same one-dimensional two-valued strength-two trade
+condition as the matching orbit but do not come from matchings.
 \end{enumerate}
 Thus the quadratic-trade condition alone does not classify the
-\(B_3/H_3\) configurations; the perfect-matching carrier in
+\(B_3/H_3\) configurations; the matching carrier in
 Theorem~\ref{thm:balanced-orbit-completeness} is essential.  Within that
 carrier, the classification remains exact.
 \end{theorem}
@@ -1582,7 +1591,7 @@ point \(x_t\), the top harmonic configurations on both sheets are
 therefore unchanged; one radial sheet constant remains \(0\), and the
 other changes from the nonzero constant \(c\) of
 Proposition~\ref{prop:modular-sheet-mechanism} to \(c-2t\).
-Because \(q=0\) in the ground field and each top sheet has zero sum, this
+Because \(q\cdot1_{\F_q}=0\) and each top sheet has zero sum, this
 translation changes neither the first moments nor the two equal second
 moments.
 
@@ -1738,24 +1747,24 @@ For \(u,v\in L\), the product \(u\circ v\) lies in the right side of
  L=L^{\perp_B}.                                              \tag{4.6c}
 \]
 
-Reduce the homogeneous coordinate ring by the homogenizing coordinate.
-Its positive graded pieces are
+Let \(\overline R\) be the reduction of the homogeneous coordinate ring by
+the homogenizing coordinate.  Its positive graded pieces are
 \[
- \mathcal A_1=L/\langle\mathbf1\rangle,\qquad
- \mathcal A_2=L^{\circ2}/L,\qquad
- \mathcal A_3=V/L^{\circ2}.
+ \overline R_1=L/\langle\mathbf1\rangle,\qquad
+ \overline R_2=L^{\circ2}/L,\qquad
+ \overline R_3=V/L^{\circ2}.
 \]
 The form \(B\) descends to
 \[
- \mathcal A_1\times\mathcal A_2\longrightarrow\F_q.          \tag{4.6d}
+ \overline R_1\times\overline R_2\longrightarrow\F_q.        \tag{4.6d}
 \]
 Its left radical is
 \((L^{\circ2})^\perp_B/\langle\mathbf1\rangle=0\), and its
 right radical is \(L^\perp_B/L=0\).  Hence (4.6d) is perfect.
 Lemma~\ref{lem:hyperplane-square} gives
-\(L^{\circ3}=V\), so \(\mathcal A_3\) is one-dimensional and
+\(L^{\circ3}=V\), so \(\overline R_3\) is one-dimensional and
 multiplication realizes (4.6d) as the degree-\(1\)-by-degree-\(2\)
-socle pairing.  Therefore \(\mathcal A\) is Artinian Gorenstein with
+socle pairing.  Therefore \(\overline R\) is Artinian Gorenstein with
 Hilbert function
 \[
  (1,q-1,q-1,1).
@@ -1829,7 +1838,7 @@ For \(T=B_3,H_3\), the configuration
 self-associated arithmetically Gorenstein set of \(2q\) points.
 Every one-point deletion imposes independent conditions on quadrics,
 so \(\widehat X_T\) has the Cayley--Bacharach property in degree two.
-Its dualizing residue vector is the sheet sign \(\epsilon\).  The
+Its socle residue vector is the sheet sign \(\epsilon\).  The
 Artinian reduction by the homogenizing coordinate has Hilbert function
 \((1,q-1,q-1,1)\), and its Macaulay inverse system is the cubic line
 \(\F_q\mu_3\).
@@ -1855,8 +1864,10 @@ Thus \(\epsilon\) is the socle residue vector.  Degree-three
 polarization identifies its Macaulay dual generator with \(\mu_3\).
 \end{proof}
 
-The implication above is the zero-defect case of the modern
-self-dual-code criterion: the Gorenstein defect is measured by the
+After base change to an algebraic closure, the signed coordinate form can
+be put in the standard form used for self-dual codes.  In that form, the
+implication above is the zero-defect case of the modern self-dual-code
+criterion: the Gorenstein defect is measured by the
 defect of the Schur square, or equivalently by decomposability
 \cite[Theorem~3.11 and Corollaries~3.12--3.13]{RodriguezPajaresEtAl2025}.  Here
 \(\dim L^{\circ2}=2q-1\) already places both configurations in the
@@ -1895,7 +1906,7 @@ polynomial powers, the canonically scaled secant products satisfy
 
 \begin{proof}
 Substitute \(P_M=P_{M_T}+Qx_M\) and expand.  Each sheet has
-\(q=0\) elements in \(\F_q\), and the signed quotient moments vanish
+\(q\cdot1_{\F_q}=0\), and the signed quotient moments vanish
 through degree two.  All terms below cubic degree cancel, leaving
 \(\operatorname{Sym}^3(m_Q)(\mu_3)\) in degree three.  Since
 \(\F_q[X,Y,Z]\) is a domain, multiplication by \(Q\) is injective;
@@ -1929,10 +1940,10 @@ self-associated Gorenstein homogenization.  The general Schur-square
 criterion explains Gorensteinness; the configuration-specific result is
 the chain from quadratic trade to matching orbit, from matching orbit to
 unordered sheets, and from unordered sheets to the cubic orientation.
-In these configurations the degree filtration is therefore an information
-ledger: quadratic data recognize and recover the unordered factorization,
-while the first odd degree both restores orientation and supplies the
-Gorenstein socle generator.
+In these configurations the degree filtration therefore separates the
+information carried by the construction: quadratic data recognize and
+recover the unordered factorization, while the first odd degree both
+restores orientation and supplies the Macaulay dual generator.
 
 \appendix
 
@@ -1940,9 +1951,10 @@ Gorenstein socle generator.
 \noindent\textbf{Appendix guide.}
 Appendix A is the load-bearing specialist layer for the uniform modular
 exclusion: it proves the three detector interfaces stated in the main
-argument.  Appendices B--F record consequences and refinements of the
-\(H_3\) configuration.  They require a chosen \(A_4\)-structure and do not
-canonically identify the depth plane with the relative-cubic plane.
+argument.  Appendices B, C, E, and F record \(H_3\) refinements that use a
+chosen \(A_4\)-structure; Appendix D compares the arithmetic marker data of
+all three configurations.  No canonical identification of the depth plane
+with the relative-cubic plane is asserted.
 Appendix G gives the verification architecture for all statements.
 
 \section{Detector calculations for uniform exclusion}
@@ -2358,7 +2370,8 @@ The projectivity
  \quad\text{satisfies}\quad
  q_0(\psi(X,Y,Z)^t)=3(XZ-Y^2),                         \tag{B.1}
 \]
-so \(\psi\circ\nu\) identifies the endpoint conic of Section~2 with
+so \(\psi\circ\nu\) identifies the endpoint conic of
+Section~\ref{sec:matching-products} with
 \(\cC_0\).  In these coordinates take the two six-point sets
 \[
 \begin{aligned}
@@ -2558,12 +2571,10 @@ matching--parent bijection from
 Theorem~\ref{thm:six-profile-reconstruction}.
 \end{proof}
 
-This pointwise classifier does not contradict the failure of a linear
-sheet sign in Section~\ref{sec:balanced}.  The map \(D\) uses zero
-incidences with the selected scalar-\(K\) refinement; it is not a linear
-functional on the affine quotient configuration.  Without that extra
-decoration, the quadratic and cubic moment statements remain the
-intrinsic recovery mechanism.
+Although the ambient radial coordinate separates the sheets, \(D\) uses
+additional scalar-\(K\) incidence data and is not an affine-linear functional
+on the abstract configuration.  The quadratic and cubic moments remain the
+intrinsic recovery mechanism of Section~\ref{sec:balanced}.
 
 The profile compression also retains the cubic-first orientation from
 Section~\ref{sec:balanced}.  The three positive vectors satisfy the
@@ -2803,8 +2814,13 @@ conjugate pairs.  Besides the base matchings in (3.1), we use
 \]
 The pair for $A_3$ consists of two copies of $M_{A_3}$, the pair for
 $B_3$ is $(M_{B,-},M_{B,+})$, and the pair for $H_3$ is
-$(M_{H_3},M_{H,-})$.  To make the arithmetic bridge part of the
-definition, let \(\bar k\) be an algebraic closure of the working field
+$(M_{H_3},M_{H,-})$.  Put
+\[
+ f_{A_3}=f_{B_3}=t^2-2,\qquad f_{H_3}=t^2-t-1;
+\]
+the quadratic marker algebra of type \(T\) is \(\F_q[t]/(f_T)\).
+To make the arithmetic bridge part of the definition, let \(\bar k\) be
+an algebraic closure of the working field
 and define the root-specialization maps
 \[
 \begin{array}{c@{\quad}c@{\quad}c}
@@ -3197,8 +3213,8 @@ The reproducible review source is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{31e46b6fe7e8e578b574f5fe462f45379572a4}\\[-2pt]
-\texttt{5a333e0f58265da19bbaa02aaf}.
+\small\texttt{75881aa9a1940567512cc964cd4efceb410f99}\\[-2pt]
+\texttt{abcc8172f4c02cb29adf785b40}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Nix inputs, manuscript checker, adversarial boundary checker,
@@ -3313,10 +3329,8 @@ mechanism, three-ray cubic lemma, and mass-zero factorization are proved in
 the text.
 
 This verification surface proves only the three marked configurations
-defined here.  It does not supply an all-characteristic construction,
-a canonical map from the relative-cubic Tate plane to the depth plane,
-or any passage, holonomy, theta, Fourier, quantum, or Mathieu
-identification.
+defined here.  It does not supply an all-characteristic construction or a
+canonical map from the relative-cubic Tate plane to the depth plane.
 
 \section*{AI assistance disclosure}
 

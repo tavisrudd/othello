@@ -16,8 +16,10 @@ The causal proof remains in the main body.  The complete specialist
 calculations are now the load-bearing Appendix A, ahead of the optional
 \(H_3\) refinements.  A focused abstract read corrected the description of
 the cubic as the Macaulay dual generator and separated the classification
-detectors from the radial rank calculation.  The rebuilt manuscript remains
-42 pages.
+detectors from the radial rank calculation.  A later cold editorial pass
+defined the matching carrier, corrected the Artinian-reduction symbol and
+the ambient/intrinsic distinction, and removed revision-history language.
+The rebuilt manuscript is 43 pages.
 
 ## Human-review gate
 
