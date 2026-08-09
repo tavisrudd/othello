@@ -9,17 +9,33 @@ prior **MAJOR / NO-GO** verdict is the acceptance baseline, not a closeout.
 C892 now owns the Paper II Lean, manuscript, verification, export and
 standalone-release repairs needed to reach the numbered-series formal standard.
 
-The first remediation tranche is validated and included in the next scoped
-C892 commit.  A 2026-08-08 independent
-sub-review found `admit` and commented-import escapes plus a premature exact-37
-interface claim.  The two verifier escapes now have durable regressions, and
-the interface list is explicitly an incomplete lower bound.  Seven direct
-gateway/projective reverse importers, all four Paper II gates, the exact axiom
-audit, the complete authoritative release verifier, and the deterministic PDF
-build are green.  The broad `ProjectiveCap` aggregate remains independently
-blocked by the pre-existing arithmetic goal in `CompleteCapLowerBound`; the
-Paper II closure and direct affected importers do not depend on that failed
-aggregate build.
+The mechanical, referee and local-export remediation tranche is now validated
+and committed.  A 2026-08-08 independent sub-review found `admit` and
+commented-import escapes plus a premature exact-37 interface claim.  The two
+verifier escapes have durable regressions, and the interface list is explicitly
+an incomplete lower bound.  Seven direct gateway/projective reverse importers,
+all four component gates, the exact axiom audit, the complete authoritative and
+standalone release verifiers, and the deterministic 43-page PDF build are
+green.  The standalone paper mirror is synchronized at `3c83deb` from authority
+commit `093db160`.
+
+The registered formal companion now uses
+`RelativeConicArcs.Gates.ClebschFactorizationBoundary`, with 54 exact unique
+terminals and a 62-module export closure: the audited 61-file component closure
+plus the aggregate gate itself, including five `ProjectiveCap` modules and no
+`CapGame` module.  The authority gate and generated trust fact are committed at
+`910ba53b` and `10341863`.  The deterministic area exporter converges to a
+zero-file delta after downstream finitegeom commits `fc3be4a` (repairing four
+pre-existing stale target-manifest entries) and `e30f690` (the 39-file complete
+export).  The finitegeom aggregate gate and separate 54-row axiom audit are
+green.
+
+C892 remains open.  The sentence-level theorem-completeness defect M1 is not
+remediated, and the complete local companion has not been pushed, tagged or
+assigned an immutable public locator.  The broad `ProjectiveCap` aggregate also
+remains independently blocked by the pre-existing arithmetic goal in
+`CompleteCapLowerBound`; the Paper II closure and direct affected importers do
+not depend on that failed aggregate build.
 
 ## Objective
 
@@ -129,5 +145,7 @@ synchronized candidate before C577 can resume it.
 4. Rebuild the manuscript and release artifact, export the complete formal
    area, synchronize the standalone paper and formal companion through the
    guarded exporters, and replay both downstream gates without publishing.
+   **Complete locally:** paper mirror `3c83deb`; finitegeom `e30f690`; both
+   downstream replays are green and no publication action was taken.
 5. Close only after an independent referee pass, `ej`+`tt`, mystery ledger,
    and final standalone verification all return green.

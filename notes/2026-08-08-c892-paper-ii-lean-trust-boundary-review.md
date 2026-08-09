@@ -335,6 +335,34 @@ recorded in `2026-08-08-c892-paper-ii-formal-interface-freeze.md`; it is not a
 completed sentence-level assertion audit or a frozen terminal count.  C892
 cannot close on the mechanical tranche alone.
 
+## 2026-08-09 local export remediation
+
+The incomplete-boundary part of M6 is repaired in the local formal companion.
+`RelativeConicArcs.Gates.ClebschFactorizationBoundary` registers the exact 54
+unique terminals from the structural, arithmetic, Hilbert-symmetry and
+hyperplane-square gates.  Its generated trust fact records a 62-module closure,
+consisting of the previously audited 61-file component closure plus the new
+aggregate gate, with five `ProjectiveCap` modules and no `CapGame` module.  The
+authority commits are `910ba53b` for the gate, registry and export configuration
+and `10341863` for the extracted fact.
+
+The standalone paper mirror is synchronized at `3c83deb` from authority commit
+`093db160`; its full release verifier passes every independent replay and the
+warning-free 43-page PDF build.  The formal companion is synchronized locally
+to finitegeom commit `e30f690`.  Its prerequisite commit `fc3be4a` repairs four
+stale `TARGET_MANIFEST.json` entries already present at the former finitegeom
+HEAD.  The deterministic exporter then reports 62 closure modules, 54
+terminals, no prose drift and a 39-file forward delta; replay against `e30f690`
+returns a zero-file delta.  The downstream aggregate gate passes its exact
+trace probe, and guarded elaboration of
+`trust/ClebschFactorizationAxiomAudit.lean` prints exactly 54 rows with no
+native-evaluation or admitted-proof axiom.
+
+This does not close C892.  M1's manuscript-sentence-level formal coverage is
+still incomplete.  Moreover, no push, tag, deposit or DOI re-pin was authorized,
+so M6's immutable-public-locator clause remains open even though the exported
+artifact itself is now complete locally.
+
 ## Referee sub-review of the remediation tranche
 
 An independent read-only sub-review on 2026-08-08 returned **MAJOR / NO-GO**
