@@ -132,7 +132,7 @@ the tangent functions may be scaled by \(\lambda_e\ne0\) so that
 \[
  \lambda_eT_e(P_d)=(-1)^{t+1}\lambda_dT_d(P_e)                    \tag{8}
 \]
-for distinct arc points. This is Lemma 11 of Ball--Lavrauw,
+for distinct arc points. This is Lemma 12 of the published Ball--Lavrauw paper,
 [*Planar arcs*](https://doi.org/10.1016/j.jcta.2018.06.015).
 Here \(t\) is odd, so the sign is positive.
 
@@ -364,7 +364,7 @@ locators are:
 
 | input | exact source |
 |---|---|
-| scaled Segre lemma of tangents | Ball--Lavrauw, Lemma 11, [DOI 10.1016/j.jcta.2018.06.015](https://doi.org/10.1016/j.jcta.2018.06.015) |
+| scaled Segre lemma of tangents | Ball--Lavrauw, published Lemma 12, [DOI 10.1016/j.jcta.2018.06.015](https://doi.org/10.1016/j.jcta.2018.06.015) |
 | Stickelberger digit valuation | Evans--Hollmann--Krattenthaler--Xiang, Theorem 3.4 and (3.2), [DOI 10.1006/JCTA.1998.2950](https://doi.org/10.1006/JCTA.1998.2950) |
 | three-support multiplicative Weil bound | Lidl--Niederreiter, Theorem 5.41, [book DOI](https://doi.org/10.1017/CBO9780511525926) |
 | elliptic Hasse bound | Hasse, [DOI 10.1515/crll.1936.175.55](https://doi.org/10.1515/crll.1936.175.55) |

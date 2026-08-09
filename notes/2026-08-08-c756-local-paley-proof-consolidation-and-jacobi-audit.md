@@ -261,7 +261,7 @@ eventual companion:
    arXiv:math/9807029 bytes have SHA-256
    369f5a6c5bbc7544b6a0c133e01a0c6501dcfa20f2d55b61c2adcdecee7bb215.
 2. **Scaled Segre lemma of tangents:** Ball--Lavrauw, *Planar arcs*,
-   Lemma 11, DOI 10.1016/j.jcta.2018.06.015.
+   published Lemma 12, DOI 10.1016/j.jcta.2018.06.015.
 3. **Three-support multiplicative Weil bound:** Lidl--Niederreiter,
    *Finite Fields*, second edition, Theorem 5.41, book DOI
    10.1017/CBO9780511525926.  In the C756 application, combine the three
@@ -298,4 +298,3 @@ should not interrupt that spine.
 | Can an imprimitive character collide? | settled negative | multiplier rigidity forces a Frobenius exponent |
 | Is the local theorem ready to consolidate into the companion proof? | yes | use Sections 1--5 as the engine |
 | Is the full companion ready for manuscript allocation? | not yet | consolidate the exterior geometry and install the four citations; retain the human MathSciNet/Scopus novelty qualifier |
-

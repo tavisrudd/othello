@@ -214,7 +214,7 @@ The consolidated proof should state and cite, rather than merely name:
 3. the multiplicative-character Weil bound for three distinct support points;
 4. Hasse's bound for the nonsingular cubic in the scalar endgame.
 
-Exact installation targets are now recorded: Ball--Lavrauw, Lemma 11, DOI
+Exact installation targets are now recorded: Ball--Lavrauw, published Lemma 12, DOI
 `10.1016/j.jcta.2018.06.015`; Evans--Hollmann--Krattenthaler--Xiang,
 Theorem 3.4 and (3.2), DOI `10.1006/JCTA.1998.2950`;
 Lidl--Niederreiter, Theorem 5.41, DOI

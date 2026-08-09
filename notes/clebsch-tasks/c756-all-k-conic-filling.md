@@ -201,7 +201,7 @@ the half-carry valuation from Stickelberger's digit sum.  Equations (3a)--(3b)
 now repair that seam explicitly.  The multiplier lemma, imprimitive exclusion,
 inverse-Frobenius exclusion, flat-Sidon collapse, and uniqueness of extension
 all check.  Evans--Hollmann--Krattenthaler--Xiang Theorem 3.4 supplies the
-matching Stickelberger normalization; Ball--Lavrauw Lemma 11, Lidl--Niederreiter
+matching Stickelberger normalization; Ball--Lavrauw published Lemma 12, Lidl--Niederreiter
 Theorem 5.41, and Hasse supply the other classical inputs.  See
 `notes/2026-08-08-c756-local-paley-proof-consolidation-and-jacobi-audit.md`.
 
@@ -224,7 +224,7 @@ the audited local-Paley lemma, excludes nonidentity Frobenius by the coset
 Weil bound, closes the scalar branch by Hasse, and checks the \(q=3,7,11\)
 endpoints and inversion orbits inline.  The covering inequality explicitly
 removes \(q=3,7\), leaving the Clebsch hexagon at \(q=11\).  Ball--Lavrauw
-Lemma 11, Evans--Hollmann--Krattenthaler--Xiang Theorem 3.4 and (3.2),
+published Lemma 12, Evans--Hollmann--Krattenthaler--Xiang Theorem 3.4 and (3.2),
 Lidl--Niederreiter Theorem 5.41, and Hasse's original theorem are installed
 at the exact steps used.  The proof is independent of finite classification;
 the matching certificate replay remains an external check.
@@ -238,6 +238,19 @@ local-Paley rigidity as the qualified candidate novelty, extremal
 saturated-exterior arcs as the geometric headline, and the all-\(k\) bounds
 plus saturated-internal work as explicitly partial context.  Do not draft or
 edit a numbered manuscript under C756.
+
+**Cold-read and allocation outcome (2026-08-08):** the internal referee pass
+found no mathematical gap and one exact-locator defect: the scaled Segre
+statement is Lemma 12 in the published Ball--Lavrauw paper, not Lemma 11.
+The sign and \(t\)-conventions match, and every live locator is repaired.
+The published PDF is cached and hashed in
+`notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`.
+The bounded C756 publication gate is therefore complete, subject to the
+explicitly human MathSciNet/Scopus and external-specialist safeguards.
+Companion work is allocated as C894 in
+`notes/clebsch-tasks/c894-saturated-exterior-paley-companion.md`.
+C756 remains active only for the genuinely open saturated-internal and
+nonsaturated all-\(k\) branches; no manuscript drafting moves back into C756.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
