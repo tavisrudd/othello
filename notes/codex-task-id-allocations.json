@@ -2978,8 +2978,17 @@
       "last": 897,
       "purpose": "Paper III reviewer identification, critic map, and reviewer-only reading dossier for human-proof and exposition cold reads",
       "sequence": 331
+    },
+    {
+      "count": 1,
+      "first": 898,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 898,
+      "purpose": "Paper I reviewer and critic dossier for human-proof and exposition cold reads",
+      "sequence": 332
     }
   ],
-  "next_id": 898,
+  "next_id": 899,
   "schema": "codex-task-id-allocations-v1"
 }
