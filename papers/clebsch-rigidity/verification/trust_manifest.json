@@ -2406,7 +2406,7 @@
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "e9c1062926d3539279990055bcd9dd0ab7319b5f066dd9205c1440db14d5db79"
+        "sha256": "851a718237e9d05cc02a2a4f02cc14d47bd491e2cb106a97bf3bf6e51ed8847b"
       },
       {
         "path": "verification/verify_computational_companion.py",
