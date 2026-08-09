@@ -136,10 +136,10 @@ first; the paper now proves the second and defines the third.
   pullback rather than an asserted equality of Hitchin's two printed scales.
 - **Settled:** Table (5.1), complementary-minor bridge, determinant-line sign,
   Holtz--Sturmfels scope, aligned terminology, and adaptive-query exposition.
-- **Open acceptance gate:** run fresh sealed Hitchin plus focused regrades on
-  standalone commit `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`.
-  Synchronization and the standalone paper-only release replay are green;
-  regrades are the remaining C897 work, not an unresolved mathematical step.
+- **Settled:** fresh sealed Hitchin, Greaves, Snowden, and Si Kaddour regrades
+  all returned `PASS` on standalone commit
+  `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`, with no unresolved
+  `MAJOR` or `MINOR`.
 
 Vibe check: the repair is focused but genuinely load-bearing.  Two additional
 pages now carry the missing geometry explicitly, while the operator half is

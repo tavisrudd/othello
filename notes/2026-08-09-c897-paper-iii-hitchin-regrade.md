@@ -1,7 +1,9 @@
 # C897 Paper III sealed Hitchin regrade
 
-**Persona:** Nigel Hitchin  
-**Artifact:** standalone commit `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`; `clebsch_passages.pdf` SHA-256 `a9e270277638e0a345d5385d73f6186df47dd68074a70675af3e31deca83090d`  
+**Persona:** Nigel Hitchin
+
+**Artifact:** standalone commit `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`; `clebsch_passages.pdf` SHA-256 `a9e270277638e0a345d5385d73f6186df47dd68074a70675af3e31deca83090d`
+
 **Categorical verdict:** `PASS`
 
 ## PDF-only assessment (frozen before supplements)
