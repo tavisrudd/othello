@@ -106,11 +106,17 @@ def main() -> int:
             lambda: release.lean_import_closure(root, entry),
             "unsupported Lean import syntax was silently skipped",
         )
-    for relative in (
-        "lean/ProjectiveCap/Sym2ConicBridge.lean",
-        "papers/clebsch-factorization/verification/check_manuscript_build.py",
-        "papers/clebsch-factorization/flake.nix",
-        "papers/clebsch-factorization/flake.lock",
+    for label, target in (
+        (
+            "ProjectiveCap source",
+            repo_root / "lean" / "ProjectiveCap" / "Sym2ConicBridge.lean",
+        ),
+        (
+            "manuscript checker",
+            paper_root / "verification" / "check_manuscript_build.py",
+        ),
+        ("paper flake.nix", paper_root / "flake.nix"),
+        ("paper flake.lock", paper_root / "flake.lock"),
     ):
         require(
             fingerprint_mutation_is_visible(
@@ -119,9 +125,9 @@ def main() -> int:
                 manifest,
                 identity,
                 baseline,
-                repo_root / relative,
+                target,
             ),
-            f"fingerprint ignored a mutation of {relative}",
+            f"fingerprint ignored a mutation of the {label}",
         )
 
     gate_root = repo_root / "lean" / "RelativeConicArcs" / "Gates"

@@ -14,7 +14,7 @@
     "normalized_manuscript": "f0856adc00c874a82a44107f3bd1d68177316c9ab667325b7613af8f2d9d7cb8",
     "normalized_statement_identity": "d11f76cc6b8f557793a7b909254f08b56e7742ce11dfa60145f7cfc77c92c4fb",
     "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
-    "release_boundary_checker": "8b3d5c105a5ce0e5919ffcea4007e0cbb4594e14b9dd61644e9641fd24739a46",
+    "release_boundary_checker": "17074251080caf9246bb8ea374d197fd1a899792b384fcecfe108a8bef4b7ce2",
     "manuscript_checker": "fbb951ba09d654d66d2693bb9473a5f306f8f483998fef12619746b769a82453",
     "paper_flake_nix": "9717287b35144a3e671f9b380b6bbaf4c8ec8da9561f5b2cc41fb2d51948c858",
     "paper_flake_lock": "9ae203c10f2e27ff1a11363a02ac43747d9766f8f17c975b5d825ed480d120cc",
