@@ -1,0 +1,780 @@
+{
+  "carrier_binary_coefficient_count": 42,
+  "carrier_elementary_forms": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "centered_elementary_form": "e_1=0",
+  "forced_zero_elementary_forms": [
+    9,
+    10,
+    11
+  ],
+  "interfaces": {
+    "arrangement_line_count": 11,
+    "generator_gradient_degree": 10,
+    "partition_value_degree": 11,
+    "separator_count": 55,
+    "separator_hessian_degree": 9
+  },
+  "maximum_moment_degree": 11,
+  "node_count_mod_q": 8,
+  "node_count_over_Z": 55,
+  "polarization_factorial_inverses_mod_q": {
+    "0": 1,
+    "1": 1,
+    "10": 2,
+    "11": 13,
+    "2": 24,
+    "3": 8,
+    "4": 2,
+    "5": 38,
+    "6": 22,
+    "7": 30,
+    "8": 39,
+    "9": 20
+  },
+  "power_sum_formulas": {
+    "10": [
+      {
+        "coefficient_mod_47": 5,
+        "coefficient_over_Z": 5,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_5^2"
+      },
+      {
+        "coefficient_mod_47": 10,
+        "coefficient_over_Z": 10,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_4 e_6"
+      },
+      {
+        "coefficient_mod_47": 10,
+        "coefficient_over_Z": 10,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "monomial": "e_3 e_7"
+      },
+      {
+        "coefficient_mod_47": 10,
+        "coefficient_over_Z": 10,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "monomial": "e_2 e_8"
+      },
+      {
+        "coefficient_mod_47": 37,
+        "coefficient_over_Z": -10,
+        "exponents_e2_through_e8": [
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3^2 e_4"
+      },
+      {
+        "coefficient_mod_47": 37,
+        "coefficient_over_Z": -10,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_4^2"
+      },
+      {
+        "coefficient_mod_47": 27,
+        "coefficient_over_Z": -20,
+        "exponents_e2_through_e8": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3 e_5"
+      },
+      {
+        "coefficient_mod_47": 37,
+        "coefficient_over_Z": -10,
+        "exponents_e2_through_e8": [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_6"
+      },
+      {
+        "coefficient_mod_47": 15,
+        "coefficient_over_Z": 15,
+        "exponents_e2_through_e8": [
+          2,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_3^2"
+      },
+      {
+        "coefficient_mod_47": 10,
+        "coefficient_over_Z": 10,
+        "exponents_e2_through_e8": [
+          3,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^3 e_4"
+      },
+      {
+        "coefficient_mod_47": 45,
+        "coefficient_over_Z": -2,
+        "exponents_e2_through_e8": [
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^5"
+      }
+    ],
+    "11": [
+      {
+        "coefficient_mod_47": 36,
+        "coefficient_over_Z": -11,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_5 e_6"
+      },
+      {
+        "coefficient_mod_47": 36,
+        "coefficient_over_Z": -11,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "monomial": "e_4 e_7"
+      },
+      {
+        "coefficient_mod_47": 36,
+        "coefficient_over_Z": -11,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "monomial": "e_3 e_8"
+      },
+      {
+        "coefficient_mod_47": 11,
+        "coefficient_over_Z": 11,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3 e_4^2"
+      },
+      {
+        "coefficient_mod_47": 11,
+        "coefficient_over_Z": 11,
+        "exponents_e2_through_e8": [
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3^2 e_5"
+      },
+      {
+        "coefficient_mod_47": 22,
+        "coefficient_over_Z": 22,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_4 e_5"
+      },
+      {
+        "coefficient_mod_47": 22,
+        "coefficient_over_Z": 22,
+        "exponents_e2_through_e8": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3 e_6"
+      },
+      {
+        "coefficient_mod_47": 11,
+        "coefficient_over_Z": 11,
+        "exponents_e2_through_e8": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "monomial": "e_2^2 e_7"
+      },
+      {
+        "coefficient_mod_47": 36,
+        "coefficient_over_Z": -11,
+        "exponents_e2_through_e8": [
+          1,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3^3"
+      },
+      {
+        "coefficient_mod_47": 14,
+        "coefficient_over_Z": -33,
+        "exponents_e2_through_e8": [
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_3 e_4"
+      },
+      {
+        "coefficient_mod_47": 36,
+        "coefficient_over_Z": -11,
+        "exponents_e2_through_e8": [
+          3,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^3 e_5"
+      },
+      {
+        "coefficient_mod_47": 11,
+        "coefficient_over_Z": 11,
+        "exponents_e2_through_e8": [
+          4,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^4 e_3"
+      }
+    ],
+    "2": [
+      {
+        "coefficient_mod_47": 45,
+        "coefficient_over_Z": -2,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2"
+      }
+    ],
+    "3": [
+      {
+        "coefficient_mod_47": 3,
+        "coefficient_over_Z": 3,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3"
+      }
+    ],
+    "4": [
+      {
+        "coefficient_mod_47": 43,
+        "coefficient_over_Z": -4,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_4"
+      },
+      {
+        "coefficient_mod_47": 2,
+        "coefficient_over_Z": 2,
+        "exponents_e2_through_e8": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2"
+      }
+    ],
+    "5": [
+      {
+        "coefficient_mod_47": 5,
+        "coefficient_over_Z": 5,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_5"
+      },
+      {
+        "coefficient_mod_47": 42,
+        "coefficient_over_Z": -5,
+        "exponents_e2_through_e8": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3"
+      }
+    ],
+    "6": [
+      {
+        "coefficient_mod_47": 41,
+        "coefficient_over_Z": -6,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_6"
+      },
+      {
+        "coefficient_mod_47": 3,
+        "coefficient_over_Z": 3,
+        "exponents_e2_through_e8": [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3^2"
+      },
+      {
+        "coefficient_mod_47": 6,
+        "coefficient_over_Z": 6,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_4"
+      },
+      {
+        "coefficient_mod_47": 45,
+        "coefficient_over_Z": -2,
+        "exponents_e2_through_e8": [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^3"
+      }
+    ],
+    "7": [
+      {
+        "coefficient_mod_47": 7,
+        "coefficient_over_Z": 7,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "monomial": "e_7"
+      },
+      {
+        "coefficient_mod_47": 40,
+        "coefficient_over_Z": -7,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3 e_4"
+      },
+      {
+        "coefficient_mod_47": 40,
+        "coefficient_over_Z": -7,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_5"
+      },
+      {
+        "coefficient_mod_47": 7,
+        "coefficient_over_Z": 7,
+        "exponents_e2_through_e8": [
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_3"
+      }
+    ],
+    "8": [
+      {
+        "coefficient_mod_47": 39,
+        "coefficient_over_Z": -8,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "monomial": "e_8"
+      },
+      {
+        "coefficient_mod_47": 4,
+        "coefficient_over_Z": 4,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_4^2"
+      },
+      {
+        "coefficient_mod_47": 8,
+        "coefficient_over_Z": 8,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3 e_5"
+      },
+      {
+        "coefficient_mod_47": 8,
+        "coefficient_over_Z": 8,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_6"
+      },
+      {
+        "coefficient_mod_47": 39,
+        "coefficient_over_Z": -8,
+        "exponents_e2_through_e8": [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3^2"
+      },
+      {
+        "coefficient_mod_47": 39,
+        "coefficient_over_Z": -8,
+        "exponents_e2_through_e8": [
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_4"
+      },
+      {
+        "coefficient_mod_47": 2,
+        "coefficient_over_Z": 2,
+        "exponents_e2_through_e8": [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^4"
+      }
+    ],
+    "9": [
+      {
+        "coefficient_mod_47": 38,
+        "coefficient_over_Z": -9,
+        "exponents_e2_through_e8": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_4 e_5"
+      },
+      {
+        "coefficient_mod_47": 38,
+        "coefficient_over_Z": -9,
+        "exponents_e2_through_e8": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "monomial": "e_3 e_6"
+      },
+      {
+        "coefficient_mod_47": 38,
+        "coefficient_over_Z": -9,
+        "exponents_e2_through_e8": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "monomial": "e_2 e_7"
+      },
+      {
+        "coefficient_mod_47": 3,
+        "coefficient_over_Z": 3,
+        "exponents_e2_through_e8": [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_3^3"
+      },
+      {
+        "coefficient_mod_47": 18,
+        "coefficient_over_Z": 18,
+        "exponents_e2_through_e8": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2 e_3 e_4"
+      },
+      {
+        "coefficient_mod_47": 9,
+        "coefficient_over_Z": 9,
+        "exponents_e2_through_e8": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^2 e_5"
+      },
+      {
+        "coefficient_mod_47": 38,
+        "coefficient_over_Z": -9,
+        "exponents_e2_through_e8": [
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "monomial": "e_2^3 e_3"
+      }
+    ]
+  },
+  "q": 47,
+  "schema": "c756-q47-octic-carrier-v1"
+}

@@ -170,11 +170,15 @@ q&P\text{ external}&P\text{ internal}\\ \hline
 \]
 
 The degree-nine separators and degree-ten generators lie in every window.
-At \(q=47\), ordinary polarization produces a bounded quadratic-through-octic
-carrier.  At \(q=49\), characteristic seven destroys the mixed moments from
-degree seven onward; use Hasse/divided-power coefficients instead.  At
-\(q=53\), the common range through degree fourteen gives the rank-two
-critical core for both point types.
+At \(q=47\), ordinary polarization produces an explicit bounded
+quadratic-through-octic carrier: the 42 coefficients of the binary forms
+\(E_2,\ldots,E_8\) determine all moment tensors through degree eleven and
+one multilinear partition function packages the star product, generators,
+and separators as its value, gradient, and Hessian.  At \(q=49\),
+characteristic seven destroys the mixed moments from degree seven onward;
+use Hasse/divided-power coefficients instead.  At \(q=53\), the common range
+through degree fourteen gives the rank-two critical core for both point
+types.
 
 The aggregate collision identity
 
@@ -258,11 +262,14 @@ notes/2026-08-09-c756-star-collision-character-identity.md.
 
 ## Ordered next actions
 
-1. Build the \(q=47\) octic carrier and the separate \(q=49\)
-   Hasse/divided-power carrier before attempting a certified all-type search.
-2. Cover higher nonsaturated sizes separately; do not infer them from the
+1. Insert the mixed secant/passant discriminants and all 55 internal-node
+   character equations into the constructed \(q=47\) octic partition
+   function, then design a certified all-type search around that bounded
+   system.
+2. Build the separate \(q=49\) Hasse/divided-power carrier.
+3. Cover higher nonsaturated sizes separately; do not infer them from the
    \(k=12\) layer.
-3. In parallel mathematical priority, seek the saturated-internal global
+4. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
 ## Stop rules
@@ -318,6 +325,8 @@ Do not:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
 - Character-weighted all-center trace/norm identity:
   `notes/2026-08-09-c756-all-center-resultant-norm.md`.
+- q=47 quadratic-through-octic partition carrier:
+  `notes/2026-08-09-c756-q47-octic-carrier.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
