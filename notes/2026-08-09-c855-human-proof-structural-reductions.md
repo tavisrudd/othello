@@ -42,19 +42,26 @@ coordinate proofs.
 
 ### 1. Replace the Brauer-character orbit derivation by a two-generator action proof
 
+**Progress: complete.**  Package terminal
+`twoGenerator_pointOrbit_partition` now gives short word certificates for all
+sixty support permutations and all 133 projective points.  The support words
+have length at most twelve; the representative-to-point words have length at
+most nine.  Generator invariance and the point partition prove that the seven
+reachability classes are exactly the displayed blocks, so no stabilizer census
+is needed.
+
 For the order-eleven point-orbit proposition, retain the explicit `A5` action
 and prove only:
 
 1. the displayed permutations generate the 60-element action group;
 2. the seven displayed sets are invariant and partition the 133 projective
    points; and
-3. a representative in each set has the displayed stabilizer cardinality.
+3. every point in a displayed set is reached from its representative by a
+   short word in the two generators.
 
-Orbit--stabilizer then gives the orbit lengths and uniqueness statements.  This
+The set cardinalities then give the orbit lengths and uniqueness statements.  This
 removes Maschke, modular reduction, Brauer characters, and the full subgroup
-fixed-point table from the formal dependency.  Those arguments may remain
-motivation, but they need not be theorem dependencies once the manuscript proof
-is rewritten around the explicit action.
+fixed-point table from the formal dependency.  Paper I now uses this proof.
 
 ### 2. Prove the order-600 monomial group by exhibit-plus-upper-bound
 

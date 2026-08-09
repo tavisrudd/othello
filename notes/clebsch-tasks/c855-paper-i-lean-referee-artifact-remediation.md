@@ -473,3 +473,32 @@ C855 is complete only when:
    from its public instructions, with unsigned local commits and no push.
 
 Successful elaboration alone does not satisfy this task.
+
+## 2026-08-08 continuation: two-generator point-orbit reduction
+
+- Replaced the order-eleven function-valued closure experiment, which was
+  killed for memory, by low-bit word certificates.  The successful compact
+  module uses maximum word lengths twelve on the six-point support and nine on
+  the 133 projective points.
+- Added and gated
+  `RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition`.
+  Its axiom boundary is exactly `propext`, `Classical.choice`, and
+  `Quot.sound`; no native evaluator, oracle, or new axiom enters.
+- Sealed package commit
+  `930675c6b8bf44e06847d15bd6e63560caa6977f` with 116 modules and 185
+  declaration facts.  Final-head guarded receipt:
+  `20260809-062152-919e190f`.
+- Rewrote Proposition `prop:a5-point-orbits` around the two generators and
+  deleted the Maschke/Brauer-character, eigenspace, and proper-subgroup census.
+  The main PDF shrank from 27 to 26 pages; both 26-page and 13-page PDFs build
+  with zero warnings, and the changed proof pages were visually inspected.
+- Updated the formal-companion relationship and row-11 trust boundary to state
+  explicitly that the finite word ledger is a formal proof certificate, while
+  the classical action and geometric-block identifications still use Dye.
+- The authoritative 26-check release and its immutable no-update replay both
+  pass.  Exact project closure is 116 certificate-package modules plus 95
+  shared modules; final release surface is
+  `2bf2649d9982e3fa9c563784505ca5152fe3ca5a7d2ee04db25d7f632cdfac3d`.
+
+This closes structural-reduction item 1 above but does not close C855's broader
+acceptance conditions or authorize standalone synchronization/push work.
