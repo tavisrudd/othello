@@ -4,17 +4,12 @@
 
 **Opened:** 2026-07-24
 
-**Status:** active; unblocked 2026-08-03.  C856 is complete and independently
-verified (`notes/2026-08-03-c856-review-verification.md`), and C860 closed by
-the accepted lighter route: the cap-game modules are out of the Paper II gate
-closure, `ProjectiveCap.PlaneAffineChart` entered it, and the five remaining
-`ProjectiveCap` geometry modules are documented to the referee standard
-(`notes/2026-08-03-c860-cap-closure-remediation.md`).  Their documented
-imports remaining in the closure are accepted by explicit user decision, not
-a defect.  The superseded standalone commit `71751691` must still not be
-pushed.  C577 now owns regenerating the export manifests and module counts
-against the changed closure, a new canonical standalone forward commit, its
-isolated replay, and the remaining publication steps.
+**Status:** complete 2026-08-09 by author direction.  The manuscript,
+human-proof and exposition reviews, paper-owned verification surface, and
+local standalone export are closed at authority commit `9af3eb45` and clean
+mirror commit `2245993`.  C892 separately owns theorem-complete Lean/trust
+remediation before a public forward release; C896 owns the future universal
+socle question.  No repository was pushed.
 
 ## Objective
 
@@ -60,16 +55,10 @@ Paper III.
 
 ## Next action
 
-The post-standards-closure canonical export is forward-committed in the
-standalone repository at `6ce4165` (2026-08-03): the authoritative aggregate
-passed all four guarded gates, replays, PDF build, and warning scan at
-monorepo commit `2797c05e`; the export regenerated cleanly (sixty-two tracked
-files, ten content changes); and the isolated standalone aggregate is green
-on its fingerprint path.  `6ce4165` supersedes `71751691` as the sole
-publication candidate.  Next: the author-owned push of `6ce4165` and the
-immutable public locator.  Once the locator exists, insert it in the
-authoritative manuscript and README, regenerate and forward-commit the
-export, then rerun the isolated release and the separate final release pass.
+None under C577.  The final local export contains sixty-six tracked files and
+passes its complete release gate with a warning-free 45-page PDF.  Any public
+forward version begins only after C892 closes its independent formal/trust
+acceptance gate and then requires separate author publication authority.
 
 ## Boundaries
 
@@ -79,9 +68,9 @@ export, then rerun the isolated release and the separate final release pass.
 
 ## Acceptance and records
 
-Acceptance requires the immutable locator, isolated replay of the frozen
-package, a final PDF/release review with no material objection, and closure
-of the 2026-07-31 all-`q` proof-depth finding.
+C577 acceptance is the closed manuscript/referee/local-export surface recorded
+in `notes/2026-08-09-c577-paper-ii-closeout.md`.  Publication, DOI versioning,
+and the theorem-complete formal companion are not claimed by this closeout.
 
 Current priority boundary and adjacent-crown extraction:
 `notes/2026-08-02-c577-paper-ii-priority-extraction.md`.  Current proof-depth

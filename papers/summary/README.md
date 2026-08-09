@@ -57,11 +57,13 @@ complex as separate victories.
   plane `PG(2,13)`, including its conic and polarity. [Clebsch I](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf),
   [q=13 reconstruction](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf).
 
-- **Quadratic trades recognize exceptional matching geometries.** Across full
-  `PGL₂(q)`-orbits of perfect matchings over odd fields, the specified
-  two-valued strength-two trade occurs only for the `B₃/F₇` and `H₃/F₁₁`
-  geometries. A first nonzero signed cubic detects exchange of their two
-  sheets. [Quadratic Trade Rigidity and Cubic Orientation](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf).
+- **Quadratic trades recognize exceptional matching geometries.** Within full
+  `PGL₂(q)`-orbits of perfect matchings over odd fields, a two-valued
+  strength-two trade occurs only for the `B₃/F₇` and `H₃/F₁₁` geometries.
+  The trade recovers their unordered sheets, and the first nonzero signed
+  cubic orients them. This carrier condition is sharp: off the matching locus,
+  `q − 2` nonmatching orbits retain the same trade.
+  [Quadratic Trade Rigidity and Cubic Orientation](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf).
 
 - **Coarse fourth-order data reconstruct two-graphs.** For every two-graph on
   at least seven vertices, aligned four-sets reconstruct the object up to
@@ -134,7 +136,7 @@ boundary, and reproducible entry points.
 |---|---|---|---|
 | *Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus* | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
-| *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* | Algebraic combinatorics | A two-valued quadratic trade classifies two exceptional matching geometries. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
+| *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | A rational golden twist and coarse fourth-order data organize the conference-signing reconstruction. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Minimum-Word Reconstruction of PG(2,13) from a Binary Conic Code* | Coding / finite geometry | Minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal defect identity gives bounds and equality structure. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -195,19 +197,20 @@ Complete Outside a Conic below.
 
 [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [Repository](https://github.com/tavisrudd/clebsch-factorization) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682217-blue.svg)](https://doi.org/10.5281/zenodo.21682217)
 
-**Standout result.** A specified two-valued quadratic trade occurs only for
-the exceptional B₃/F₇ and H₃/F₁₁ matching geometries, and its cubic detects
-the exchange of their two sheets.
+**Standout result.** Within the full matching carrier, a two-valued quadratic
+trade singles out the B₃/F₇ and H₃/F₁₁ geometries and recovers their unordered
+sheets; the first nonzero signed cubic orients them. Off the carrier, `q − 2`
+nonmatching orbits retain the same trade.
 
-> *Abstract* Restriction to a conic forgets how its marked points were paired into secants. Among full PGL₂(q)-orbits of perfect matchings, we classify those for which the conic-quotient evaluation space has a one-dimensional strength-two trade—a signed relation annihilating all quadratic coordinate products—generated by a two-valued vector. The only examples are the balanced B₃/F₇ and H₃/F₁₁ orbits. The trade itself reconstructs their two complementary sheets, so neither self-association nor Gorensteinness is an input. Thus, within the full matching carrier, an intrinsic low-degree relation recognizes the two exceptional octahedral and icosahedral geometries uniformly over all odd finite fields.
+> *Abstract* Restriction to a conic forgets how its marked points were paired into secants. Among full PGL₂(q)-orbits of perfect matchings over odd finite fields, we classify those whose conic-quotient evaluation space has a one-dimensional strength-two trade—a signed relation annihilating all quadratic coordinate products—generated by a two-valued vector. Exactly two occur: the balanced B₃/F₇ and H₃/F₁₁ orbits. The trade recovers their two complementary sheets, without assuming self-association or Gorensteinness.
 >
-> The matching hypothesis is sharp. For either surviving stabilizer, the fixed locus in the ambient conic-product fiber is an affine line with q pairwise nonconjugate rational points. Its completely reducible Chow locus consists of the matching point alone, yet q − 2 nonmatching orbits have the same exact two-valued trade. Thus the trade ceases to be faithful off the matching carrier, while complete reducibility restores faithfulness. The exceptional one-factorizations themselves are classical; this fixed-line and Chow-selection mechanism is the new boundary.
+> The restriction to perfect matchings is sharp. For either surviving stabilizer, its fixed locus in the ambient conic-product fiber is an affine line of q pairwise nonconjugate rational points. Only the matching point splits completely into linear factors, although q − 2 nonmatching orbits have the same one-dimensional two-valued strength-two trade condition. Thus complete splitting selects the matching orbit from the fixed line. The exceptional one-factorizations are classical; the new boundary is the fixed line and its unique completely split point.
 >
-> For the two matching configurations, the first nonzero signed tensor moment is an anti-invariant cubic. Their 14- and 22-point homogenizations are self-associated and arithmetically Gorenstein, and maximal isotropy identifies this cubic with the inverse system of an Artinian reduction. General self-dual-code criteria already account for the Gorenstein conclusion from the Schur square; the orbit classification, sharp carrier boundary, and sheet-sign cubic are the configuration-specific results. The orienting cubic is simultaneously the first tensor that detects sheet exchange and the socle generator governing Gorenstein duality. A uniform modular argument excludes every other matching orbit without a field census. One alternating-cycle calculation and a Dickson recurrence then handle the two radial nonvanishing problems at once.
+> For the two matching configurations, the first nonzero signed tensor moment is an anti-invariant cubic. Their 14- and 22-point homogenizations are self-associated and arithmetically Gorenstein, and maximal isotropy identifies the cubic with the Macaulay inverse system of an Artinian reduction. General self-dual-code criteria already explain the Gorenstein consequence of the Schur square; the configuration-specific contributions are the all-field orbit classification, sharp matching boundary, sheet reconstruction, and cubic orientation. Targeted modular detectors, made exhaustive by Faber's tame subgroup theorem, exclude every other matching orbit without a field census. A common alternating-cycle and Dickson calculation supplies the radial nonvanishing needed for the quotient ranks.
 >
-**Delivers.** A simple two-level balancing pattern forces a geometric
-arrangement into one of two exceptional pairing patterns, then a signed cubic
-invariant determines each arrangement’s orientation.
+**Delivers.** On the matching carrier, a two-level balancing pattern forces one
+of two exceptional pairing geometries and recovers its unordered sheets; a
+signed cubic then supplies their orientation.
 
 **Who cares.** Finite geometers, combinatorialists, and researchers studying
 designs, matchings, or symmetry-breaking invariants.
