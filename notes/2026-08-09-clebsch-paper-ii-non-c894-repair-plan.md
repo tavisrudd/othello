@@ -161,51 +161,40 @@ the unresolved parity calculation.
 outer-extension normalization is explicit, and no argument relies only on a
 simple head or a list of composition factors.
 
-## R3 — close arbitrary `p'`-subgroup descent
+## R3 — use the tame subgroup theorem directly
 
-State a tailored corollary of the full Dickson subgroup theorem for an
-arbitrary `p'` subgroup `K<=PSL_2(q)`, not merely for maximal subgroups.
+Once the matching stabilizer `K` is proved to be `p'`, regard it as a finite
+subgroup of `PGL_2` over the algebraic closure.  Faber's Theorem C gives the
+complete tame list immediately:
 
-The proof or exact citation must give the following exhaustive alternatives:
+\[
+ K\text{ is cyclic, dihedral, }A_4,S_4,\text{ or }A_5.
+\]
 
-- cyclic or dihedral torus type;
-- `A_4`, `S_4`, or `A_5` exceptional type; or
-- containment in a proper subfield group, with an explicit descent step.
+There is no subfield branch to descend through: subfield groups themselves
+have order divisible by `p`, while every `p'` subgroup inside one is already
+covered by the tame theorem.  Retain the current action-specific cyclic,
+dihedral, exceptional, and transitivity arguments.  Use Giudici only later,
+after sheet size is known and the exact large stabilizer order makes a
+maximal-overgroup argument appropriate.
 
-For the descent step:
-
-1. choose and state the induction parameter;
-2. distinguish `PSL_2(q_0)` from the square-subfield `PGL_2(q_0)` branch;
-3. analyze `K\cap PSL_2(q_0)` and its possible index-two extension;
-4. show that exceptional subgroups acquire no unlisted extension; and
-5. prove termination and show exactly which detector applies at the terminal
-   subgroup.
-
-Do not cite Giudici's maximal-subgroup theorem as though it were this
-corollary.  If no published statement matches, prove the corollary from the
-maximal list in the paper or a short appendix.
-
-After this descent is secure, retain the current cyclic, dihedral,
-exceptional, and transitivity arguments.  Recheck `q=5,7,9,11` separately;
-these endpoint checks are not a replacement for the general descent.
-
-**R3 acceptance gate:** a group theorist can start with an arbitrary `p'`
-matching stabilizer and reach exactly one row of the detector table without
-an implicit maximality assumption.
+**R3 acceptance gate:** a group theorist confirms that the later detector
+arguments need only the algebraic-closure conjugacy type supplied by Faber,
+not an unproved rational-conjugacy refinement.
 
 ## R4 — integrate without burying the theorem
 
 Only after R1--R3 pass their gates:
 
-1. split the current Lemma 3.2 into finite-Hom, outer-parity,
+1. split the current Lemma 3.2 into detector-Hom, outer-parity,
    detecting-source, and contraction lemmas;
 2. state only the precise modular propositions, their hypotheses, and their
-   consequences in the main body; put the coefficient matrix, carry/alias
-   analysis, complete divided-power verification, Steinberg-source
-   calculation, two-digit example, and subgroup-descent proof in a
-   self-contained technical appendix;
-3. state the arbitrary-`p'` Dickson corollary before uniform sheet
-   exclusion and cite it at every branch;
+   consequences in the main body; put the complete divided-power
+   verification, Steinberg-source filtration, digitwise `L(q-7)` embedding,
+   and prime-field contraction details in a self-contained technical
+   appendix; the falsified universal coefficient matrix does not enter;
+3. cite Faber's tame subgroup theorem before uniform sheet exclusion and use
+   Giudici only in the later exact-order maximal-overgroup step;
 4. keep the classification proof's causal paragraph to: trade gives sheets,
    R1--R2 forbid oversized sheets, R3 exhausts stabilizers, and endpoint
    block systems identify the survivors; and
@@ -226,11 +215,11 @@ proof grows.
 - **Main body:** at most two net new pages; aim for no net growth by replacing
   the current dense proof sketch with short proposition statements and a
   clean causal proof.
-- **Technical appendix:** approximately five to eight pages containing all
+- **Technical appendix:** approximately three to six pages containing all
   load-bearing calculations.  It remains part of the paper, not a separate
   companion or optional supplement.
-- **Overall target:** about 48--50 pages from the current 43-page build.
-  Treat 52 pages as a review threshold: if the proof exceeds it, run a
+- **Overall target:** about 46--49 pages from the current 43-page build.
+  Treat 50 pages as a review threshold: if the proof exceeds it, run a
   compression pass before integration rather than allowing incremental
   expansion.
 
