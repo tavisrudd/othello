@@ -8,7 +8,7 @@
       "role": "shared-library"
     },
     {
-      "commit": "38059cab5923dbb2a15d515c711b913d991432d5",
+      "commit": "930675c6b8bf44e06847d15bd6e63560caa6977f",
       "depends_on": "shared-library",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
       "manifest": "MANIFEST.json",
@@ -17,6 +17,6 @@
     }
   ],
   "concept_doi": "10.5281/zenodo.21650878",
-  "relationship": "optional formal companion; no manuscript claim depends on Lean",
+  "relationship": "formal certificate for the finite two-generator orbit census; independent cross-check for the remaining manuscript claims",
   "schema": "formal-companion-v2"
 }

@@ -21,12 +21,13 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_PACKAGE_COMMIT = "38059cab5923dbb2a15d515c711b913d991432d5"
+PINNED_PACKAGE_COMMIT = "930675c6b8bf44e06847d15bd6e63560caa6977f"
 PINNED_FINITEGEOM_COMMIT = "187bed8895fc62784caf2022d717b4daa37871ad"
 
 
 TERMINALS = {
     "orbits": [
+        "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition",
         "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
         "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
         "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
@@ -452,10 +453,10 @@ def components_by_row(
             ],
         ),
         11: (
-            "The gate checks the explicit order-sixty action and its point-orbit partition; its identification with the classical A5 action uses Dye.",
+            "The gate checks the two-generator word certificate for the explicit order-sixty action and proves that its seven reachability classes are exactly the displayed point blocks; identifying this action and the geometric blocks with the classical A5 configuration uses Dye.",
             [
-                conceptual("classical group identification", CLASSICAL_DYE, "The displayed matrices and their finite action are checked exactly."),
-                lean("explicit finite point orbits", ["orbits"], axioms),
+                conceptual("classical group and geometric-block identification", CLASSICAL_DYE, "The two displayed generators, their finite action, and both breadth-first word ledgers are checked exactly."),
+                lean("two-generator finite point orbits", ["orbits"], axioms),
             ],
         ),
         12: (

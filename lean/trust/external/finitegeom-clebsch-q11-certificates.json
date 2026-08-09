@@ -321,6 +321,14 @@
       "module": "RelativeConicArcs.Q11A5PointOrbits",
       "origin": "package"
     },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.orbitIndex_applyPointWord": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
+      "origin": "package"
+    },
     "RelativeConicArcs.Examples.Q11A5PointOrbits.orbitIndex_pointAction": {
       "axioms": [
         "Classical.choice",
@@ -375,6 +383,14 @@
       "module": "RelativeConicArcs.Q11A5PointOrbits",
       "origin": "package"
     },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.point_eq_twoGenerator_word": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
+      "origin": "package"
+    },
     "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition": {
       "axioms": [
         "Classical.choice",
@@ -391,6 +407,15 @@
         "propext"
       ],
       "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.supportPerm_eq_twoGenerator_word": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
       "origin": "package"
     },
     "RelativeConicArcs.Examples.Q11A5PointOrbits.supportPerm_injective": {
@@ -427,6 +452,33 @@
         "propext"
       ],
       "module": "RelativeConicArcs.Q11A5PointOrbits",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_reachable_representative_iff": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
+      "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_supportPermutations": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs.Q11A5PointOrbitsTwoGenerators",
       "origin": "package"
     },
     "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit": {
@@ -1609,15 +1661,15 @@
   },
   "evidence": {
     "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
-    "axiom_log_sha256": "1e96b9a38ce2de799195a2a334871f23b59327849d4d004116b508879407e1be",
+    "axiom_log_sha256": "5e18c71962f1a6fa348bc9546db2f4f671e95777d86beadbe7fe681bec63bbb7",
     "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
   },
   "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "df8e2f386665d875c07a639f62aeff1222d24835e90b8320d1475e388e387c92",
+  "manifest_sha256": "e7b4ed31ec72fb40b72c508fbd9b3f9d7c95aa792111396af4852c0773f9e501",
   "package": "finitegeom-clebsch-q11-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
-  "source_commit": "ba2d9ef5f317d768fde069dc2d5ea0390e3d27a5",
-  "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
+  "source_commit": "227049bf2cbc89a5c96ed6f3e1be8ab67db109a1",
+  "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition"
 }

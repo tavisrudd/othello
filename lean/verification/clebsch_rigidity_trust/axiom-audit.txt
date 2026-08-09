@@ -1,6 +1,9 @@
 'RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -8,6 +11,15 @@
  Classical.choice,
  Quot.sound]
 'RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'RelativeConicArcs.Examples.Q11Coding.witness_mds_columns' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -30,22 +42,27 @@
 'RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschDye.dye1991_brianchon_bound]
+ Quot.sound]
 'RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschDye.dye1991_brianchon_bound]
+ Quot.sound]
 'RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschDye.dye1991_brianchon_bound,
- RelativeConicArcs.ClebschDye.dye1991_equality_classification]
+ Quot.sound]
 'RelativeConicArcs.OddSixArcPrismExtraction.sixArc_uncoveredOnLine_card_le_order_sub_five' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -54,14 +71,10 @@
  Quot.sound]
 'RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschDye.dye1991_brianchon_bound,
- RelativeConicArcs.ClebschDye.dye1991_equality_classification]
+ Quot.sound]
 'RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode' depends on axioms: [propext,
  Classical.choice,
- Quot.sound,
- RelativeConicArcs.ClebschDye.dye1991_brianchon_bound,
- RelativeConicArcs.ClebschDye.dye1991_equality_classification]
+ Quot.sound]
 'RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -84,73 +97,73 @@
 'RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationSymmetry.supportCubic_projectiveStabilizer_equiv_S5' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationSymmetry.mem_orientedSupportCubicStabilizer_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_stabilizer_equiv_A5' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationSymmetry.orientedSupportCubic_index_two' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationSymmetry.orientedSupportCubic_index_two' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCover.antipodalQuotient_fiber_card_two' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCover.antipodalQuotient_fiber_card_two' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCover.fiveOrbitals_selfPaired' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCover.fiveOrbitals_selfPaired' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCover.fiveOrbital_one_mem_each_other_fiber' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCover.fiveOrbital_one_mem_each_other_fiber' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationPentagon.signedOrbitalMatrix_sq' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationPentagon.signedOrbitalMatrix_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationPentagon.orbitalDifference_sq_eq_ten_one_sub_deck' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationHolonomy.supportSign_eq_triangleProduct' depends on axioms: [propext, Quot.sound]
-'RelativeConicArcs.PaperIOrientationHolonomy.fourPoint_twoGraph_identity' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationHolonomy.supportSign_eq_triangleProduct' depends on axioms: [propext, Quot.sound]
+'RelativeConicArcs.SupportOrientationHolonomy.fourPoint_twoGraph_identity' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationHolonomy.pairBalance_iff_sq_five' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationHolonomy.pairBalance_iff_sq_five' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationHolonomy.supportCubic_translation_invariant' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationHolonomy.supportCubic_translation_invariant' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationDeterminant.det_signedOrbital_add_diagonal' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationDeterminant.det_signedOrbital_add_diagonal' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationDeterminant.determinantPencil_oddPart_eq_supportCubic' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationTraceDual.det_crossGoldenBlock_eq_neg_supportCubic' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationNodes.derivative_crossGoldenDeterminantLine_eval' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationNodes.derivative_crossGoldenDeterminantLine_eval' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationNodes.supportCubic_singularLocus_eq_frame' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationNodes.supportCubic_singularLocus_eq_frame' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationNodes.supportCubic_framePoints_ordinaryNodes' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationNodes.supportCubic_framePoints_ordinaryNodes' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCommutant.oddModule_rationalCommutant_eq_adjoin_B' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'RelativeConicArcs.PaperIOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive' depends on axioms: [propext,
+'RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
