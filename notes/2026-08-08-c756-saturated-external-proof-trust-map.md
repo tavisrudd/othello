@@ -123,9 +123,12 @@ This theorem uses neither resultants, complete mappings, Segre coherence,
 general position, nor covering.  Those ingredients are only the geometric
 pipeline that manufactures a local Paley automorphism and then restricts its
 semilinear parameters.  The theorem is therefore the most transferable output
-of C756.  It is not yet novelty-cleared: the earlier audit screened neighboring
-Paley work but was not a focused predecessor audit for this exact automorphism
-group.
+of C756.  The subsequent focused audit in
+`2026-08-08-c756-local-paley-rigidity-literature-audit.md` found no predecessor
+for this exact automorphism group or its unique local-to-global extension
+form.  The closest local predecessor, Javier--Llano--Zuazua (2026), proves
+only the prime-field multiplicative-circulant model.  The candidate novelty is
+therefore qualified by the remaining MathSciNet/Scopus coverage gap.
 
 ### 1.3 EJ2: the general one-block Cayley criterion
 
@@ -323,7 +326,7 @@ not yet a mathematical one.
 
 | mystery | status | exact gap / owner |
 |---|---|---|
-| Is the local Paley automorphism theorem genuinely new? | not settled | run an exact-statement predecessor and forward-citation audit before using it in a title or abstract |
+| Is the local Paley automorphism theorem genuinely new? | no predecessor located in the focused covered sources | candidate novelty is the exact group/unique extension, not the already known prime-field circulant model; retain “to our knowledge” pending a human MathSciNet/Scopus check |
 | Do local automorphisms extend to the full Paley tournament? | settled positive and uniquely | the classified map extends as \(x\mapsto c x^{p^j}\); distinct parameters act distinctly on \(S\) |
 | Is the harmonic step specifically Paley? | settled negative | isolate the flat Sidon lemma and the one-faithful-eigenblock Cayley criterion |
 | What does the exact group say for prime \(q\)? | settled | the local tournament is a cyclic directed regular representation |

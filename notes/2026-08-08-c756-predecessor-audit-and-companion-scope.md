@@ -236,7 +236,7 @@ marked boundary.
 | all-\(k\) chord-moment LP bound | proved | first general quantitative theorem |
 | spare-passant saturation dichotomy | proved | structural spine separating generic and two saturated types |
 | flat Sidon lemma and one-faithful-eigenblock criterion for cyclic Cayley digraphs | proved, elementary | reusable proof device; likely folklore, so no novelty claim without audit |
-| \(\operatorname{Aut}(P(q)[S])=S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p)\) for the Paley first subconstituent | proved for every \(q\equiv3\pmod4\) by one primitive eigenspace | most transferable engine; exact-statement novelty audit still required |
+| \(\operatorname{Aut}(P(q)[S])=S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p)\) for the Paley first subconstituent | proved for every \(q\equiv3\pmod4\) by one primitive eigenspace | most transferable engine; focused audit found no exact predecessor, while Javier--Llano--Zuazua (2026) already gives the prime-field circulant model; use a qualified novelty claim |
 | normal Cayley and prime-field cyclic DRR corollaries | immediate from the exact automorphism group | include in the same focused Paley predecessor audit |
 | extremal exterior-arc classification: \((q+1)/2\) exterior points occur only at \(q=3,7,11\), with one conic-stabilizer orbit in each field | proved for every odd prime power | **headline theorem**, stated without the covering condition |
 | saturated-external filling corollary: only the \(q=11\) Clebsch hexagon covers | proved for every odd prime power | reconnects the headline to conic-filling |

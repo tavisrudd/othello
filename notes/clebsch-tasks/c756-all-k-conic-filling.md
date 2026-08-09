@@ -148,8 +148,10 @@ Equivalently, every automorphism of a Paley out-neighbourhood extends uniquely
 to a semilinear automorphism of the full tournament fixing the base vertex.
 The second matrix, anticommutator, skew square root, simple-spectrum branch,
 and Gaussian/Pfaffian obstruction are superseded proof-discovery scaffolding.
-This is the most transferable C756 theorem but is not yet novelty-cleared by
-an exact-statement Paley-subconstituent audit.
+This is the most transferable C756 theorem.  The later exact-statement audit
+found no covered-source predecessor for its full automorphism group or unique
+local-to-global extension form; the qualified claim still awaits a human
+MathSciNet/Scopus check.
 
 **EJ2 extraction (2026-08-08):** the one-block step is an instance of a
 general flat Sidon lemma: a constant-modulus function on a finite abelian
@@ -174,6 +176,32 @@ half-carry argument and attach precise primary citations for Segre's lemma,
 Stickelberger, the three-point multiplicative Weil bound, and Hasse.  If and
 only if those bounded gates pass, allocate a separate unnumbered companion-paper
 task.  Do not reopen theta fitting or run another field sweep.
+
+**Focused local-Paley literature outcome (2026-08-08):** the audit is complete
+at the covered-source level.  Goldberg (1970) determines the full Paley
+tournament group but not its first subconstituent.  Javier--Llano--Zuazua
+(2026), Proposition 4.4, is the closest local predecessor and already proves
+that a prime Paley out-neighbourhood is a multiplicative circulant tournament;
+it does not determine the local automorphism group, prove normality/DRR, or
+show extension.  No inspected source states
+\(\operatorname{Aut}(P(q)[S])=S\rtimes\operatorname{Gal}\) or the equivalent
+unique-extension theorem.  Treat that exact theorem as qualified candidate
+novelty, state normality and prime-field DRR only as corollaries, and make no
+novelty claim for the elementary flat Sidon lemma.  The direct paper-series
+connection is to Paper I's all-\(k\) boundary and Paper II's Paley-carrier
+remark; Paper IV is a geometric/method interface only because
+\(13\equiv1\pmod4\).  See
+`notes/2026-08-08-c756-local-paley-rigidity-literature-audit.md`.
+
+**Next-session entry (superseding the one above):** consolidate the local
+Paley theorem and saturated-exterior proof into one theorem-proof document,
+with Javier--Llano--Zuazua credited for the prime-field circulant model and
+Goldberg for the full-tournament group.  Independently line-audit the
+primitive-Jacobi half-carry/collision argument and attach exact primary
+citations for Segre, Stickelberger, the three-point Weil bound, and Hasse.
+Retain “to our knowledge” unless a human MathSciNet/Scopus check closes the
+remaining index gap.  Do not edit an existing numbered manuscript or reopen
+theta fitting under C756.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
