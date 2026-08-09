@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; authoritative paper-only remediation is green; standalone
-synchronization and the sealed regrade remain
+**Status:** active; authoritative paper-only remediation and standalone
+synchronization are green; sealed regrades are running
 
 ## Objective
 
@@ -71,9 +71,10 @@ The authoritative remediation is recorded in
 canonical ramification-cycle proof, exact internal rational `J_0` scale,
 complete reduced golden-fibre justification, all local MINOR repairs, and
 rejecting coefficient-word coverage.  The paper-only aggregate is green with
-a warning-free deterministic 32-page PDF.  Mirror synchronization and fresh
-sealed regrades remain; Lean follow-up is explicitly queued outside this
-paper-only pass by author direction.
+a warning-free deterministic 32-page PDF.  The repaired standalone is frozen
+at commit `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`; fresh sealed
+regrades remain.  Lean follow-up is explicitly queued outside this paper-only
+pass by author direction.
 
 The dossier must include:
 
