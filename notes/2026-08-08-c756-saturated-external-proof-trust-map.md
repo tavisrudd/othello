@@ -22,9 +22,11 @@ classification.
 The proof is all-field and human-readable; finite computation is not used to
 deduce the theorem.  Its logic is nevertheless spread across four C756
 reports, and the load-bearing extension-field step uses a new primitive-Jacobi
-collision lemma.  The result is suitable as the headline of the scoped
-specialist companion only after the proof is consolidated into one text and
-the standard character-sum inputs are cited at version-of-record quality.
+collision lemma.  A subsequent line audit repaired its suppressed valuation
+normalization and found no mathematical gap.  The result is suitable as the
+headline of the scoped specialist companion only after the geometric proof is
+consolidated into one text and the now-identified standard character-sum
+citations are installed at version-of-record quality.
 
 One fresh extension-field check was replayed at \(q=27\).  It exactly
 reproduced the committed all-\(k\) certificate row: \(k_{\min}=9\),
@@ -42,7 +44,7 @@ for the proof.
 | C | If \(q\equiv1\pmod4\), no such complete mapping exists because the square group has even order | same report, Proposition 1 | one-line group-sum obstruction; no computation or external theorem |
 | D | If \(q\equiv3\pmod4\), Segre's lemma of tangents forces all resultant signs to cohere, so the matching permutation is an automorphism of the Paley tournament induced on the nonzero squares | `2026-08-01-c756-segre-tangent-coherence.md`, Proposition 1 | human proof; load-bearing classical input is Segre's lemma.  Consolidation must state its hypotheses and fix tangent-function scalings explicitly |
 | E | Every automorphism of the Paley tournament induced on \(S\) commutes with its single signed adjacency operator \(B\); primitive-character noncollision plus the Frobenius-Sidon property implies that it is \(s\mapsto c s^{p^j}\) | `2026-08-01-c756-paley-bispectral-reduction.md`, §4, one-block rigidity, plus the primitive-collision report | linear algebra plus multiplicative Fourier transform; the second matrix \(C\), anticommutator, and skew square-root machinery are not needed in the final proof |
-| F | For conductor \(m=(p^n-1)/2\), equality of the relevant primitive Jacobi values occurs exactly along Frobenius orbits | `2026-08-01-c756-primitive-jacobi-collisions.md`, §§1–3 | new human proof using the Gauss/Jacobi product and Stickelberger valuations; highest referee-risk step.  Recheck the base-\(p\) half-carry lemma for composite \(m\), imprimitive competitors, and \(n=1\) edge cases |
+| F | For conductor \(m=(p^n-1)/2\), equality of the relevant primitive Jacobi values occurs exactly along Frobenius orbits | `2026-08-01-c756-primitive-jacobi-collisions.md`, §§1–3 | line audit passed after equations (3a)--(3b) made the prime choice and the \(p-1\) ramification normalization explicit |
 | G | Every nonidentity Frobenius exponent \(j>0\) contradicts a coset character-sum bound | `2026-08-01-c756-segre-tangent-coherence.md`, Proposition 2 | human proof.  The subgroup-size lower bound is elementary; the three-support-point multiplicative Weil bound is standard but needs a precise citation and a clean statement covering all characters in the expansion |
 | H | In the scalar branch, a genus-one character sum and Hasse leave \(q\in\{3,7,11\}\); the scalar constructions realize those values.  The covering condition then removes \(q=3,7\), and \(q=11\) is the Clebsch hexagon | `2026-08-01-c756-saturated-matching-attack.md`, Proposition 2 and its endgame | human proof with standard Hasse input; reproduce the small-field endpoint and existence checks directly in the paper rather than citing a certificate |
 
@@ -178,7 +180,7 @@ frontier for this task.
 
 ## 2. Proof-trust risks
 
-### 2.1 Highest risk: primitive Jacobi collision
+### 2.1 Former highest risk: primitive Jacobi collision
 
 The new lemma is stronger than the theorem needs: a primitive Jacobi value
 cannot collide with an imprimitive character, and its complete collision class
@@ -187,12 +189,15 @@ binary half-carry profile, sums dyadic iterates to recover base-\(p\) digit
 weight, and uses the test multipliers \(1\) and \((p+1)/2\) to force a power of
 \(p\).  That economy is a strength, but it is also the least standard link.
 
-Before submission, rewrite it as a standalone lemma with every quantifier and
-conductor convention local, then have an independent finite-fields reader
-check: valuation normalization, the treatment of nonunits, the rotation/digit
-identification, and the implication from equality of Jacobi sums to equality
-of all required valuations.  Pomerance--Ulmer and Hoshi are neighboring
-frameworks, not substitutes for this proof.
+The subsequent audit in
+`2026-08-08-c756-local-paley-proof-consolidation-and-jacobi-audit.md`
+checked each of those seams.  It found one major exposition defect and no
+mathematical failure: the old report suppressed the cyclotomic prime and the
+\(p-1\) ramification factor.  Equations (3a)--(3b) of the repaired collision
+report now derive the half-carry valuation from the standard base-\(p\)
+digit-sum formula.  Nonunits, rotations, the test multiplier, inverse
+collisions, and unique extension all pass.  A specialist cold read remains
+desirable before submission, but this is no longer an identified proof gap.
 
 ### 2.2 Classical inputs that need exact citations
 
@@ -204,9 +209,13 @@ The consolidated proof should state and cite, rather than merely name:
 3. the multiplicative-character Weil bound for three distinct support points;
 4. Hasse's bound for the nonsingular cubic in the scalar endgame.
 
-These are standard inputs, but citation imprecision here would obscure which
-parts of the argument are new.  The predecessor audit does not yet supply this
-version-of-record bibliography.
+Exact installation targets are now recorded: Ball--Lavrauw, Lemma 11, DOI
+`10.1016/j.jcta.2018.06.015`; Evans--Hollmann--Krattenthaler--Xiang,
+Theorem 3.4 and (3.2), DOI `10.1006/JCTA.1998.2950`;
+Lidl--Niederreiter, Theorem 5.41, DOI
+`10.1017/CBO9780511525926`; and Hasse, DOI
+`10.1515/crll.1936.175.55`.  The remaining action is to install
+them in the consolidated geometric proof, not to search for the statements.
 
 ### 2.3 Integration risks
 
@@ -284,9 +293,10 @@ The highest-value next pass is therefore bounded and nonexploratory:
    directed regular representations;
 2. consolidate Steps A0–H and the endpoint orbit check into a single
    theorem-proof document using that engine;
-3. independently line-audit the primitive-Jacobi lemma and extension-field
-   conventions;
-4. attach exact primary citations for Segre, Stickelberger, Weil, and Hasse;
+3. use the completed primitive-Jacobi line audit and repaired
+   extension-field valuation conventions;
+4. install the identified primary citations for Segre, Stickelberger, Weil,
+   and Hasse;
 5. only if those checks pass, allocate a separate unnumbered companion-paper
    task and begin manuscript work.
 
@@ -337,9 +347,9 @@ not yet a mathematical one.
 | Is covering genuinely needed for the headline classification? | settled negative | the extremal exterior-arc condition already gives saturation; covering is needed only to discard \(q=3,7\) |
 | Are the \(q=7\) and \(q=11\) extremal exterior arcs unique up to the conic stabilizer? | settled positive | the admissible scalar pairs are inverse under the stabilizer map \(x\mapsto x^{-1}\) |
 | Does the saturated-exterior theorem depend on finite enumeration? | settled negative | Steps A–H are human proofs; certificates are corroboration only |
-| Does extension-field Frobenius create an unhandled spectral branch? | settled, conditional on the Jacobi lemma audit | the primitive collision class is exactly Frobenius; the coset Weil step removes every \(j>0\) |
+| Does extension-field Frobenius create an unhandled spectral branch? | settled | the audited primitive collision class is exactly Frobenius; the coset Weil step removes every \(j>0\) |
 | Is simple spectrum required? | settled negative | one primitive block suffices |
 | Is the proof presently referee-readable end to end? | no | it is distributed across four reports with superseded conditional language |
-| Which new lemma carries the most risk? | settled | primitive Jacobi collision / half-carry digit argument |
+| Which new lemma carried the most risk? | settled after repair and line audit | primitive Jacobi collision / half-carry digit argument; a specialist cold read remains desirable, but the audit found no mathematical gap |
 | Is another computational sweep the next move? | settled negative | consolidate and independently audit the human proof first |
 | May manuscript editing begin under C756? | no | pass the citation and consolidated-proof audit, then allocate a separate unnumbered task |

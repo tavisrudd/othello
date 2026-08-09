@@ -68,8 +68,50 @@ Choose a character \(\omega\) of order \(2m=q-1\), put
  Y_r=J(\theta_r\chi,\chi).
 \]
 
-If \(r\not\equiv0\pmod m\), the Gauss-sum product formula and
-Stickelberger's factorization give
+Let \(K=\mathbb Q(\zeta_{2m})=\mathbb Q(\zeta_m)\); the equality holds because
+\(m\) is odd.  Fix a prime \(\mathfrak p\) of \(K\) above \(p\), extend it to
+a prime \(\mathfrak P\) of \(K(\zeta_p)\), and normalize both prime-ideal
+valuations to have value one on their respective prime ideals.  The extension
+is totally ramified of degree \(p-1\), so
+
+\[
+ v_{\mathfrak P}(z)=(p-1)v_{\mathfrak p}(z)\qquad(z\in K). \tag{3a}
+\]
+
+For a unit \(t\pmod m\), let \(\widetilde t\) be its unique odd lift modulo
+\(2m\), let \(\sigma_t(\zeta_{2m})=\zeta_{2m}^{\widetilde t}\), and put
+\(\mathfrak p_t=\sigma_t^{-1}(\mathfrak p)\).  Since \(\widetilde t\) is odd,
+it fixes the quadratic character and multiplies the exponent of
+\(\theta_r\) by \(t\).
+
+Here is the complete reduction from Stickelberger's digit-sum formula to the
+claimed half-carry count.  Put \(N=2m=p^n-1\),
+\(A=[2tr]_N\), and let \(s_p(x)\) denote the sum of the \(n\) base-\(p\)
+digits of \(x\in[0,N)\).  The Gauss quotient for \(X_r\), followed by
+Stickelberger, gives
+
+\[
+ (p-1)v_{\mathfrak p_t}(X_r)
+ =s_p(A)+s_p(m)-s_p([A+m]_N). \tag{3b}
+\]
+
+The standard rotation identity
+
+\[
+ s_p(x)=\frac{p-1}{N}\sum_{j=0}^{n-1}[xp^j]_N
+\]
+
+turns the right side of (3b) into \(p-1\) times the number of indices \(j\)
+for which \([Ap^j]_N>m\): multiplication by \(p^j\) fixes \(m\pmod N\), and
+adding \(m\) wraps modulo \(N\) exactly in that case.  Since
+
+\[
+ [Ap^j]_N=2[trp^j]_m
+\]
+
+and \([Ap^j]_N\) is even while \(m\) is odd, the strict wrap condition is
+equivalent to \([trp^j]_m>m/2\).  Thus, for
+\(r\not\equiv0\pmod m\),
 
 \[
  X_rY_r=-q,\qquad
@@ -77,12 +119,11 @@ Stickelberger's factorization give
  v_{\mathfrak p_t}(Y_r)=n-h(tr), \tag{3}
 \]
 
-as \(t\) ranges over \((\mathbb Z/m\mathbb Z)^*\).  Here
-\(\mathfrak p_t\) are the conjugates of a fixed prime above \(p\), and the
-prime-ideal valuation is normalized to have integral values.  The valuation
-formula is just the carry form of Stickelberger: adding the exponent \(m\)
-flips the two halves of \(\mathbb Z/2m\mathbb Z\), and the \(n\) Frobenius
-digits give the count (2).
+as \(t\) ranges over \((\mathbb Z/m\mathbb Z)^*\).  The last equality follows
+either by the same calculation or from \(X_rY_r=-q\): \(p\nmid m\), so \(p\)
+is unramified in \(K\) and \(v_{\mathfrak p_t}(q)=n\).  The residue degree is
+\(\operatorname{ord}_m(p)=n\); this also makes clear that repeated \(t\)'s in
+one Frobenius coset name the same prime and the same carry profile.
 
 The remaining work is to prove that this carry profile has no multipliers
 beyond \(H\).
@@ -150,7 +191,7 @@ The first form gives \(a\equiv p^i\pmod m\), as required.  In the second,
 cyclically rotating digits lets us assume
 
 \[
- a\equiv(1+p^r)/2\pmod m,qquad 1\le r<n. \tag{9}
+ a\equiv(1+p^r)/2\pmod m,\qquad 1\le r<n. \tag{9}
 \]
 
 Now take \(t_0=(p+1)/2\).  Since \(n\) is odd,
@@ -269,7 +310,14 @@ complete C756: the nonsaturated branch still needs a uniform obstruction.
 ## 5. Literature boundary
 
 The proof above is self-contained apart from the standard Gauss/Jacobi
-product and Stickelberger valuation formula.  The character-theoretic
+product and Stickelberger valuation formula.  A directly matching source for
+the normalization is Evans--Hollmann--Krattenthaler--Xiang, Theorem 3.4 and
+formula (3.2), *J. Combin. Theory Ser. A* 87 (1999), 74--119,
+DOI 10.1006/JCTA.1998.2950; cached as arXiv:math/9807029, 37 pages,
+SHA-256 369f5a6c5bbc7544b6a0c133e01a0c6501dcfa20f2d55b61c2adcdecee7bb215.
+Their theorem gives the \(\mathfrak P\)-valuation as the base-\(p\) digit sum;
+(3a)--(3b) above record the descent to \(K\) and the exact carry conversion
+rather than leaving either normalization implicit.  The character-theoretic
 nonvanishing criterion for half-interval sums in Pomerance--Ulmer,
 [*On balanced subgroups of the multiplicative group*](https://arxiv.org/abs/1204.6705),
 is a useful neighboring framework, but it is not needed: imprimitive

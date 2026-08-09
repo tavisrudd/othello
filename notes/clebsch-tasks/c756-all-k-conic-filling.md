@@ -193,15 +193,27 @@ remark; Paper IV is a geometric/method interface only because
 \(13\equiv1\pmod4\).  See
 `notes/2026-08-08-c756-local-paley-rigidity-literature-audit.md`.
 
-**Next-session entry (superseding the one above):** consolidate the local
-Paley theorem and saturated-exterior proof into one theorem-proof document,
-with Javier--Llano--Zuazua credited for the prime-field circulant model and
-Goldberg for the full-tournament group.  Independently line-audit the
-primitive-Jacobi half-carry/collision argument and attach exact primary
-citations for Segre, Stickelberger, the three-point Weil bound, and Hasse.
-Retain “to our knowledge” unless a human MathSciNet/Scopus check closes the
-remaining index gap.  Do not edit an existing numbered manuscript or reopen
-theta fitting under C756.
+**Primitive-Jacobi proof audit (2026-08-08):** the local Paley theorem now
+passes a line-by-line human proof audit.  The only major defect found was
+expository but load-bearing: the collision report had not specified the
+cyclotomic prime, the \(p-1\) ramification normalization, or the derivation of
+the half-carry valuation from Stickelberger's digit sum.  Equations (3a)--(3b)
+now repair that seam explicitly.  The multiplier lemma, imprimitive exclusion,
+inverse-Frobenius exclusion, flat-Sidon collapse, and uniqueness of extension
+all check.  Evans--Hollmann--Krattenthaler--Xiang Theorem 3.4 supplies the
+matching Stickelberger normalization; Ball--Lavrauw Lemma 11, Lidl--Niederreiter
+Theorem 5.41, and Hasse supply the other classical inputs.  See
+`notes/2026-08-08-c756-local-paley-proof-consolidation-and-jacobi-audit.md`.
+
+**Next-session entry (superseding the one above):** consolidate the
+saturated-exterior geometry around the now-audited local theorem in one
+theorem-proof document: extremal arc to matching, complete-mapping parity,
+Segre coherence, local Paley restriction-is-an-isomorphism, Frobenius Weil
+exclusion, scalar Hasse endpoint, orbit uniqueness, and covering.  Install the
+four exact citations and keep the \(q=3,7\) endpoints explicit.  Retain “to our
+knowledge” unless a human MathSciNet/Scopus check closes the remaining index
+gap.  Do not edit an existing numbered manuscript or reopen theta fitting under
+C756.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
