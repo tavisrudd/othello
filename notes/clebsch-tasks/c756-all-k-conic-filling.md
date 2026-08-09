@@ -241,6 +241,21 @@ This does not cover \(k>12\), whose defect and interpolation window differ.
 Authority: `notes/2026-08-09-c756-q53-k12-complete-closure.md` and its
 exact script/certificate bundle.
 
+There is also a shorter aggregate certificate for the 44 leaves.  If
+\(\rho(c)\) is projection collision energy, pair-direction double counting
+gives
+\[
+ \sum_{c\ {\rm internal}}\rho(c)
+ =\#\{\{X,Y\}:XY\cap r_0\text{ is internal}\}.
+\]
+For every leaf, the eleven used centers contribute 657 and the sixteen
+missing centers contribute 290.  A complete defect-two center has
+\(\rho\in\{2,3\}\), so simultaneous completeness would give at most 48,
+contradicting 290.  The common diagonal character sum \(-86\) and four-line
+histogram \((48,138,118,26)\) are exact across all four normalized dihedral
+orbits but presently have no symbolic all-\(q\) derivation.  Authority:
+notes/2026-08-09-c756-star-collision-character-identity.md.
+
 ## Ordered next actions
 
 1. Build the \(q=47\) octic carrier and the separate \(q=49\)
