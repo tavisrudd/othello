@@ -295,15 +295,25 @@ is being asked to accept.  The next formal program should begin by freezing
 that theorem and its exact object correspondence, not by adding more internal
 bridge lemmas.
 
-## Mystery ledger
+## Mystery ledger (refreshed 2026-08-09)
 
 | feature | status | evidence gap or owner |
 |---|---|---|
-| Why did the cap-game dependency return after C860? | open | the 2026-08-04 import is unused and contradicts the module header; owning shared-library repair must establish whether it was accidental before removal |
+| Why did the cap-game dependency return after C860? | settled | the import was unused; its removal passes all direct reverse-import gates, and the extracted/exported aggregate closure contains no `CapGame` module |
 | Why are there fifty-five audit rows but fifty-four terminals? | settled | the arithmetic trichotomy is printed in both the arithmetic and structural gates |
 | Why does the printed fingerprint hash differ? | settled | the 2026-08-08 README refresh changed the JSON and the normalization erases, but never verifies, the displayed hash |
-| Is the current public companion the four-gate artifact? | settled negatively from the local release authority | only the arithmetic gate is registered for this area and the structural gate is absent; exact bytes behind the concept DOI remain a public-release check for C577 |
-| Do current sources contain a hidden Lean escape? | settled negatively | complete sixty-two-file source-policy scan plus guarded gate builds found none; the terminal axiom envelope remains the foundational allowlist |
+| Is the complete four-part companion assembled? | settled locally, open publicly | finitegeom `e30f690` carries the exact 54-terminal aggregate and converges under re-export; no push, tag, deposit or immutable public re-pin was authorized |
+| Do current sources contain a hidden Lean escape? | settled negatively | the complete 61-file component source-policy scan, semantic review of the aggregate gate and guarded builds found none; the terminal axiom envelope remains the foundational allowlist |
+| Why did the finitegeom base manifest reject export? | settled | four sources changed in earlier downstream commits without corresponding `TARGET_MANIFEST.json` refreshes; `fc3be4a` repairs the exact byte counts and hashes, and the post-export zero-delta replay checks convergence |
+| Does the aggregate gate state every manuscript assertion at referee strength? | open | M1 still requires the sentence-level assertion inventory, exact object correspondence and theorem proofs owned by C892 |
+
+The export-closeout `ej`+`tt` pass found three cheap upgrades and they are now
+part of the evidence: a stable aggregate gate rather than four ad hoc entry
+points, guarded elaboration of the generated 54-row downstream audit, and a
+zero-delta exporter replay after adoption.  The remaining Tao-level question is
+unchanged and substantive rather than mechanical: the artifact must state and
+prove the exact theorem and object correspondence that the manuscript asks a
+referee to accept.  No other genuine export mystery remains.
 
 ## Required ownership before release
 
