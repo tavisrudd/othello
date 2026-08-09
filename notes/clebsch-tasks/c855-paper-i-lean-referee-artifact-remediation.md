@@ -30,8 +30,9 @@ only inside the guarded run directory, with direct-transcript, in-run pointer,
 and path-escape tests.  Authority sealing ends at commit `9267dfc5`.
 
 Unconditional commutant closure (2026-08-09): the proposition-valued
-`ClassicalOddA5ThreePlusThreeSplitting` interface is removed in the task-owned
-base library at `5d9f53f11770bae8af71a577a65b1e3d927d5c92`.  Two explicit
+`ClassicalOddA5ThreePlusThreeSplitting` interface was removed in the downstream
+finitegeom checkout at `5d9f53f11770bae8af71a577a65b1e3d927d5c92`.  That commit
+was not an authority commit or an exporter-produced adoption.  Two explicit
 signed action generators produce a rank-34 rational system on the 36 operator
 entries, and exact symbolic certificates identify the two-dimensional
 commutant with `Q[I,B]`; the integral theorem is correspondingly unconditional.
@@ -56,11 +57,35 @@ kernel-identified with two intrinsic ten-element generator orbits; the outer
 normalizer exchanges the sheets.  A second bundled theorem identifies the ten
 triple-ambiguity directions with the Brianchon points, their three leader
 supports with the perfect matchings complementary to the invariant
-one-factorization, and the corresponding witness chords as concurrent.  Base
-commit `187bed8895fc62784caf2022d717b4daa37871ad`, q11 seal
+one-factorization, and the corresponding witness chords as concurrent.
+Downstream finitegeom commit `187bed8895fc62784caf2022d717b4daa37871ad`, which
+likewise had no matching monorepo authority commit, q11 seal
 `38059cab5923dbb2a15d515c711b913d991432d5`, final-head guarded receipt
 `20260809-051043-dead8cd3`, and authority seal `7095e6c0` pass the immutable
 26-check release over the exact 58-terminal, 115-package/95-shared boundary.
+
+### Authority/export correction (2026-08-09)
+
+The two commits `5d9f53f` and `187bed8` above were made directly in
+`~/src/lean/finitegeom`; the q11 package then pinned that downstream state.
+This inverted the required direction.  The sole shared-Lean edit authority is
+`~/src/othello/lean`.  The finitegeom repository is never edited directly:
+source, prose, trust metadata, manifests, and hashes may change there only as
+the exact output of the prescribed area-export workflow.
+
+The exact reviewed proof content has been re-applied as authority edits to
+`SupportOrientationCommutant.lean`, `SupportOrientationSpine.lean`,
+`Q11DecodingSynthesis.lean`, and `Gates/ClebschRigidityTrust.lean`.  The
+rigidity registry and orientation export prose are repaired as well.  A fresh
+referee pass gives conditional GO on the mathematics and scholarly surface.
+The authority changes remain uncommitted because two guarded builds were
+refused by the same foreign Lean owner; the rigidity fact is consequently
+still stale at 48 rather than 51 terminals.  After that owner clears, the only
+valid sequence is: build the four authority targets, extract fresh rigidity
+and orientation facts, commit the complete authority change, and run the area
+exporters against finitegeom base `e30f690`.  Apply no hand-written or copied
+change in finitegeom.  Neither `5d9f53f` nor `187bed8` is a valid future
+`--source-commit`, and neither is precedent for downstream development.
 
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
@@ -82,7 +107,7 @@ transfer notes; none is manuscript-integrated yet and all remain behind the
 literature gate.
 
 Six-node Lean closure landed end to end (2026-08-03): the Hassett--Tschinkel
-interface is a proved theorem, the base library carries the change on its
+interface is a proved theorem, the downstream finitegeom repository carries the change on its
 public remote, the q11 certificate package is re-pinned and resealed at
 `9c5d474f502a5ae8e189bc9fdf0fffa7ab96e0c5`, the manuscript pins the new
 package/base/gate triple, and the full twenty-six-check release chain is green
@@ -150,6 +175,9 @@ The task is governed by the current versions of:
 - the [Lean workspace guide](../../lean/AGENTS.md), including scholarly module
   prose, semantic public APIs, trust disclosure, generated-artifact rules,
   transitive gates, and build ownership;
+- the [export and mirror conventions](../export-and-mirror-conventions.md),
+  especially the monorepo-only shared-source authority and the categorical ban
+  on direct finitegeom edits;
 - the [paper style guide](../../papers/style-guide.md), including mathematical
   exposition, citations, theorem/proof correspondence, and referee-facing
   language;
@@ -284,7 +312,7 @@ package: every file in the published transitive closure is in scope.
   correspondence text now names it as the place the bound and the classification are
   proved; the two must be exported in the same round. The facts artifact is extracted:
   26 modules, eleven terminals, each on the three foundational axioms and no project
-  axiom. The export itself is blocked in the base library, whose `TARGET_MANIFEST.json`
+  axiom. The export itself is blocked in the downstream finitegeom repository, whose `TARGET_MANIFEST.json`
   disagrees with its own tree in four entries. Seven consumer modules of the wider order-eleven rigidity
   development remain reached by no unit. Report:
   `notes/2026-08-05-c855-six-arc-extraction-gate.md`.

@@ -14,13 +14,29 @@ triple-ambiguity directions, their perfect-matching leader supports, the
 complement of the invariant one-factorization, and the three concurrent witness
 chords.
 
-The base library commit is `187bed8895fc62784caf2022d717b4daa37871ad`.
+The downstream finitegeom commit is
+`187bed8895fc62784caf2022d717b4daa37871ad`.
 The q11 certificate package is atomically sealed at
 `38059cab5923dbb2a15d515c711b913d991432d5`; its root gate, audit, and guarded
 transcript agree on 58 terminals.  Final-head guarded run
 `20260809-051043-dead8cd3` passes.  The authority release is sealed through
 `7095e6c0` and its immutable 26-check replay passes over 115 package and 95
 shared modules.
+
+## Authority correction
+
+Commit `187bed8`, like the preceding commutant commit `5d9f53f`, was made
+directly in finitegeom without a matching monorepo authority commit.  The q11
+package pin and release replay validate that downstream state, but do not make
+it an edit authority.  The finitegeom repository is never edited directly;
+every byte changed there must be produced by the prescribed area exporter from
+a committed `~/src/othello/lean` source.
+
+The reviewed proof content is being re-applied in the monorepo authority.  It
+must be built there, included in fresh 51-terminal rigidity and orientation
+trust facts, and committed there before the exporter runs.  The two downstream
+commits must never be passed as exporter `--source-commit` values or used as
+precedent for direct finitegeom development.
 
 ## Result
 

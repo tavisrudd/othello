@@ -104,9 +104,9 @@ Lean process is an execution blocker, not a mathematical mystery.
 
 ## 2026-08-09 closure addendum
 
-The execution blocker and commutant boundary are now closed.  The base library
-proves the rational and integral commutants unconditionally at
-`5d9f53f11770bae8af71a577a65b1e3d927d5c92`; the q11 package is clean and sealed
+The execution blocker and commutant boundary are now closed.  The downstream
+finitegeom checkout proves the rational and integral commutants unconditionally
+at `5d9f53f11770bae8af71a577a65b1e3d927d5c92`; the q11 package is clean and sealed
 at `f27a4de69cdcf32e2d3242291621554378e6bfe3`.  Guarded aggregate run
 `20260809-035240-e3c87388` passes over all 115 package modules, and the
 authority's immutable release replay passes all 26 checks over the derived
@@ -118,3 +118,12 @@ pointer only when its resolved target remains inside the guarded run.  The
 verification suite now has 23 tests.  C855 remains active solely because its
 broader theorem-completeness, documentation, correspondence-review, and
 distribution gates remain open.
+
+**Authority correction, 2026-08-09.**  Commit `5d9f53f` was made directly in
+finitegeom and had no corresponding monorepo authority commit.  It records a
+validated downstream state, not a valid source boundary.  Finitegeom is never
+edited directly; every change there must be the exact product of the prescribed
+area exporter from a committed `~/src/othello/lean` authority state.  The proof
+has been re-applied to that authority for guarded validation, trust extraction,
+and an authority commit.  Future work must not cite `5d9f53f` as the source
+commit or use it as precedent for downstream edits.

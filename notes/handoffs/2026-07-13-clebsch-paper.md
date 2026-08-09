@@ -775,7 +775,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | active; the q11 package is regenerated/resealed at `930d546`, exact 115+93 closure and source-policy enforcement, global terminal rejection, mandatory two-root verification, guarded maintainer receipts, corrected Dye prose, 21 verifier tests, 20 checker replays, and warning-free 27/13-page builds are landed; the unconditional rank-34 commutant proof is drafted in three task-owned base modules and independently checked, but remains uncommitted until elaboration | once the persistent foreign Lean owner exits, elaborate and commit the unconditional commutant, reseal/re-pin the package, then run the correctly identified q11 aggregate and receipt-bound release refresh; continue remaining theorem-completeness, full-closure documentation, distribution, independent review, and standalone gates |
+| [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | active; trust hardening, the unconditional commutant, displayed two-generator support sheets, and the Brianchon decoder bridge are reviewed and green downstream, but `5d9f53f` and `187bed8` were mistakenly committed directly in finitegeom without matching monorepo authority commits; the exact reviewed proofs plus registry/prose repairs are now uncommitted authority edits with a conditional referee GO | after the foreign Lean owner clears, build the four authority targets, extract exact 51-terminal rigidity and orientation facts, commit in `~/src/othello`, and run the area exporters against finitegeom base `e30f690`; finitegeom is never edited directly and neither downstream commit is a valid source commit; then resume theorem-completeness and release closure |
 | [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | complete; repaired B-plus manuscript, final independent acceptance 96/100, aggregate gates, and standalone synchronization closed | none; C815 is the current Paper III route task |
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
@@ -832,7 +832,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 | [C709 — six-Majorana lift](../clebsch-tasks/c709-clebsch-majorana-k6-lift.md) | complete; two-graph flux and chiral commutator family survive, quadratic refinement and intrinsic spin structure do not | none |
 | [C710 — \(E_8\)--Hamming marking](../clebsch-tasks/c710-e8-hamming-code-marking.md) | complete; bare \(E_8\) isometry positive, simultaneous Clebsch marking obstructed, hyperbolic \(II_{10,10}\) repair exact | none |
 | [C711 — Paper III sub-700 human proofs](../clebsch-tasks/c711-paper-iii-sub700-human-proofs.md) | complete; seven certificate-independent proofs, per-proof Tao checks, and frozen interfaces | none |
-| [C756 — all-\(k\) conic-filling classification](../clebsch-tasks/c756-all-k-conic-filling.md) | active open-math residue; saturated-internal covering is a dual star \((E\cup S)\)-blocking problem with forced positive diagonal bias and a signed matching tight frame.  The added external/secant-polar rows give only unsigned type Grams; their difference is the existing \(T_4\) allocation in matrix form, so the two-species route has met its stop rule.  Complete-saturated odds remain 60--70%; full all-\(k\) odds are 15--20%. | attack the independent nonsaturated masked Rédei theorem \(h\ge1\) through the Frobenius graph/fixed-locus carrier; stop on another degree-\(\Theta(q)\) or fibre-fragmented reformulation |
+| [C756 — all-\(k\) conic-filling classification](../clebsch-tasks/c756-all-k-conic-filling.md) | active open-math residue; saturated-internal covering is a dual star \((E\cup S)\)-blocking problem with forced positive diagonal bias and a signed matching tight frame.  The two-species Gram adds no new identity.  Frobenius fixed-locus Moore division on the nonsaturated side is canonical but retains base degree \(\Theta(q)\), so the quadratic-twist/interpolation route is also closed.  Complete-saturated odds remain 60--70%; full all-\(k\) odds are 15--20%. | derive the pair-coupled excess count over all spare passants through one arc point and test for a new conic-character evaluation; stop if it only reallocates existing diagonal moments |
 | [C894 — unnumbered saturated-exterior/local-Paley companion](../clebsch-tasks/c894-saturated-exterior-paley-companion.md) | active; the two-theorem claim--proof--citation matrix is frozen.  Haemers--Parsaei Majd 2022 closes generic Seidel-to-conference bordering attribution; the exact mixed collision remains a qualified engine, the tournament-square/golden-sequence refinement remains attribution-only, and the \(q=11\) forgetting/reconstruction endpoint remains distinct from the open all-\(k\) branches.  No manuscript exists. | send the narrowed institutional-index and external-specialist packets, record exact coverage and verdicts, then decide title/venue; drafting stays blocked until both human safeguards return |
 
 C756 optional stuck-state/review reading:
@@ -843,6 +843,15 @@ no missing proof obligation. C552 remains fallback-only and must not displace
 the split-paper route without an explicit user decision.
 
 ## Paper I
+
+**C855 authority invariant.**  Shared Paper I Lean is edited and committed only
+under `~/src/othello/lean`.  The repository `~/src/lean/finitegeom` is never
+edited directly; every changed byte there must come from the prescribed area
+exporter.  The q11 certificate package may own only its package-private
+generated leaves and checker composition under the certificate-package
+exception; it does not own shared library sources.  The downstream commits
+`5d9f53f` and `187bed8` record the mistake being repaired and are neither
+source commits nor precedent.
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
 rigidity* form one warning-free, nineteen-row release surface with twenty-six
@@ -914,7 +923,7 @@ correspondence text now names the six-arc boundary as the place the bound and th
 classification are proved; the two must therefore be exported in the same round.
 The facts artifact is extracted and committed: 26 modules, eleven terminals, every one
 carrying only `propext`, `Classical.choice` and `Quot.sound`, and no project axiom.
-The base library's `TARGET_MANIFEST.json` disagreed with its own tree in four entries
+The downstream finitegeom repository's `TARGET_MANIFEST.json` disagreed with its own tree in four entries
 and is repaired, and both boundaries are exported and adopted there as forward commits,
 with the eleven superseded manuscript-named orientation modules removed in the same
 round. Both gates build in the base and their audits carry no project axiom. One check
@@ -924,7 +933,7 @@ holds the shared tree. Separately, the base does not pass its own published repl
 `ProjectiveCap.Binary` and `ProjectiveCap.EllipticMirror` fail on an
 `InitialPStatement` whose defining module the base never carried — and those failures
 reproduce with this round reverted, so repairing that half-migrated projective-cap
-layer is its owner's work, not Paper I's. In the base library the order-eleven specializations
+layer is its owner's work, not Paper I's. In the downstream finitegeom repository the order-eleven specializations
 remain axioms of `RelativeConicArcs.Q11DyeAxioms`; replacing them by proofs of the
 exported theorems is forward work under the re-pin. Seven consumer modules of the wider order-eleven rigidity development — the defect
 bridge, the degenerate-conic exclusion, perspectivity, the two prism modules, and the
