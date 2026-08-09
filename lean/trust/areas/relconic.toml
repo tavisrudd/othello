@@ -350,6 +350,9 @@ terminals = [
   "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts",
   "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
   "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
+  "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
+  "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
+  "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary",
   "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
   "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card",
   "RelativeConicArcs.ClebschDye.sixArc_cards_of_uncovered_subset_conic",
@@ -3038,6 +3041,21 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
+gates = ["RelativeConicArcs.Gates.ClebschRigidityTrust"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets"
+gates = ["RelativeConicArcs.Gates.ClebschRigidityTrust"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange"
+gates = ["RelativeConicArcs.Gates.ClebschRigidityTrust"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
 gates = ["RelativeConicArcs.Gates.ClebschRigidityTrust"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 

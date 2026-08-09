@@ -16,10 +16,8 @@ orbital, switching-invariant triangle holonomy, the determinant pencil, the
 cross-golden trace dual, the six ordinary nodes, the recovered `S₅/A₅`
 symmetry boundary, and the rational and integral commutants.
 
-The commutant terminals are conditional on
-`SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting`.  That
-interface states the classical conjugate `3+3'` decomposition, Schur-lemma,
-and Galois-descent input explicitly.  Golden equivariance and the
-diagonal/off-diagonal integral descent are kernel checked in the imported
-commutant module.
+The commutant module proves golden equivariance on all sixty action matrices
+and proves the reverse containment from the rank-34 rational linear system
+imposed by an explicit five-cycle and three-cycle.  Thus the rational and
+integral commutant equalities are unconditional kernel-checked theorems.
 -/

@@ -1,20 +1,23 @@
 import RelativeConicArcs.Q11SemanticLeaders
 import RelativeConicArcs.Q11Coding
 import RelativeConicArcs.Q11BrianchonPetersen
+import RelativeConicArcs.ClebschSchemeChirality
 
 /-!
 # Complete decoding synthesis for the Clebsch code
 
 This downstream module packages the already kernel-checked `q = 11` semantic tables into the
 four-branch syndrome-distance oracle, the complete nearest-word ambiguity enumerator, and the
-explicit Brianchon/triple-ambiguity bridge.  It deliberately contains no group-action or chirality
-infrastructure.
+explicit Brianchon/triple-ambiguity bridge.  The final semantic bridge identifies the twenty
+distance-three support triples with the two displayed ten-element generator sheets recovered from
+the six scalar-line blocks; full automorphism invariance of the unordered pair is a separate result.
 -/
 
 namespace RelativeConicArcs.Examples.Q11Coding
 
 open Certificate
 open RelativeConicArcs.Examples.Q11BrianchonPetersen
+open RelativeConicArcs.ClebschSchemeChirality
 
 set_option maxHeartbeats 30000000
 set_option maxRecDepth 100000
@@ -282,6 +285,77 @@ theorem brianchon_weightTwo_leaderSupports (k : Fin 10) :
       syndromeLeaderSupports_two_eq_raw (brianchonDirectionIndex k) hd
     _ = (brianchonMatching k).image pairSupport := brianchon_rawLeaderSupports k
 
+/-! ### Two-generator support sheets and the complete Brianchon dictionary -/
+
+/-- The first orbit of three-subsets under the two displayed icosahedral generators. -/
+def positiveSupportTriples : Finset (Finset (Fin 6)) :=
+  (Finset.univ.filter fun t : Fin 20 => t.val < 10).image triple
+
+/-- The complementary orbit of three-subsets under the two displayed icosahedral generators. -/
+def negativeSupportTriples : Finset (Finset (Fin 6)) :=
+  (Finset.univ.filter fun t : Fin 20 => 10 ≤ t.val).image triple
+
+/-- The two generator orbits are disjoint ten-element sheets and exhaust all twenty support
+triples. -/
+theorem supportChirality_partition :
+    positiveSupportTriples.card = 10 ∧
+      negativeSupportTriples.card = 10 ∧
+      Disjoint positiveSupportTriples negativeSupportTriples ∧
+      positiveSupportTriples ∪ negativeSupportTriples =
+        (Finset.univ : Finset (Fin 6)).powersetCard 3 := by
+  decide
+
+/-- Every affine deep-hole syndrome has exactly the two displayed ten-element generator sheets as
+its twenty minimum-support triples.  The unordered sheets become intrinsic only after the full
+monomial-automorphism preservation theorem is supplied. -/
+theorem distanceThree_leaderSupports_eq_chiralitySheets {s : Vec (ZMod 11)}
+    (hd : CodingBridge.SyndromeDistanceExactly (K := ZMod 11) witnessVec s 3) :
+    CodingBridge.syndromeLeaderSupportsOfWeight (K := ZMod 11) witnessVec s 3 =
+        positiveSupportTriples ∪ negativeSupportTriples ∧
+      positiveSupportTriples.card = 10 ∧
+      negativeSupportTriples.card = 10 ∧
+      Disjoint positiveSupportTriples negativeSupportTriples := by
+  obtain ⟨hpositive, hnegative, hdisjoint, hunion⟩ := supportChirality_partition
+  refine ⟨?_, hpositive, hnegative, hdisjoint⟩
+  rw [distanceThree_leaderSupports_eq_allTriples hd, hunion]
+
+/-- The generated two-generator orbits recover the two support sheets, and the displayed outer
+normalizer exchanges them. -/
+theorem supportChirality_generatorOrbits_and_exchange :
+    (generatedOrbit 0).image triple = positiveSupportTriples ∧
+      (generatedOrbit 10).image triple = negativeSupportTriples ∧
+      positiveSupportTriples.image (fun S => S.image sheetExchangeBlock) =
+        negativeSupportTriples := by
+  constructor
+  · rw [positive_generatedOrbit]
+    rfl
+  · constructor
+    · rw [negative_generatedOrbit]
+      rfl
+    · decide
+
+/-- Complete semantic bridge: the ten triple-ambiguity directions are the Brianchon points, their
+nearest supports are the ten perfect matchings complementary to the invariant one-factorization,
+and every matching consists of three witness chords concurrent at its displayed point. -/
+theorem brianchon_decoder_matching_dictionary :
+    Finset.univ.image brianchonDirectionIndex = directionsOfIndex 3 ∧
+      brianchonMatchings.card = 10 ∧
+      Disjoint invariantTotal brianchonMatchings ∧
+      invariantTotal ∪ brianchonMatchings = allPerfectMatchings ∧
+      ∀ k : Fin 10,
+        IsPerfectMatching (brianchonMatching k) ∧
+        CodingBridge.syndromeLeaderSupportsOfWeight (K := ZMod 11) witnessVec
+            (projectiveVec (brianchonDirectionIndex k)) 2 =
+          (brianchonMatching k).image pairSupport ∧
+        ∀ e ∈ brianchonMatching k,
+          Incident (brianchonPoint k) (rawChordLine e) := by
+  obtain ⟨_hall, hcard, hperfect, hdisjoint, hunion⟩ :=
+    brianchon_matchings_are_complement
+  refine ⟨brianchonDirectionIndices_eq_indexThree, hcard, hdisjoint, hunion, ?_⟩
+  intro k
+  exact ⟨hperfect k, brianchon_weightTwo_leaderSupports k,
+    brianchon_concurrences.2 k⟩
+
 #print axioms totalSyndromeDistance_exact
 #print axioms totalSyndromeDistance_nonzero_branches
 #print axioms distanceThree_leaderSupports_eq_allTriples
@@ -291,5 +365,9 @@ theorem brianchon_weightTwo_leaderSupports (k : Fin 10) :
 #print axioms ambiguity_strata_counts
 #print axioms brianchonDirectionIndices_eq_indexThree
 #print axioms brianchon_weightTwo_leaderSupports
+#print axioms supportChirality_partition
+#print axioms distanceThree_leaderSupports_eq_chiralitySheets
+#print axioms supportChirality_generatorOrbits_and_exchange
+#print axioms brianchon_decoder_matching_dictionary
 
 end RelativeConicArcs.Examples.Q11Coding

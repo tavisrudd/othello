@@ -26,7 +26,8 @@ consumes by hash, pinned in `lean/trust/certificate-packages.toml`.  The
 rigidity conclusion uses the ten-point
 Brianchon bound and the equality classification of six-arcs attaining it; both
 are kernel-checked theorems of this repository and neither is assumed.  The
-same two statements appear as Theorems 1 and 3, pages 275--278 of R. H. Dye,
+same two statements appear as the count in Section 2.2 and Theorem 1(ii), both
+on page 275 of R. H. Dye,
 “Hexagons, conics, \(A_5\) and \(\mathrm{PSL}_2(K)\),” *Journal of the
 London Mathematical Society* (2) 44 (1991), doi:10.1112/jlms/s2-44.2.270, which
 is cited as the antecedent.  The small-arc bridge reduces the four-, five-,
@@ -36,11 +37,11 @@ reductions.
 
 The orientation spine constructs the antipodal cover, golden orbital,
 switching class, determinant pencil, trace dual, six ordinary nodes, and the
-`S₅/A₅` symmetry boundary.  Its final commutant equalities are conditional on
-the proposition-valued classical `3+3'` splitting interface printed below;
-golden equivariance, the reverse rational containment, and the integral
-coefficient test are kernel checked.  No native execution enters these
-terminals.
+`S₅/A₅` symmetry boundary.  Golden equivariance is checked on all sixty action
+matrices, while the reverse commutant containment is the symbolic consequence
+of the rank-34 rational system imposed by an explicit five-cycle and
+three-cycle.  The rational and integral commutant equalities are therefore
+unconditional, and no native execution enters these terminals.
 -/
 
 -- The code--arc dictionary and syndrome conic.
@@ -54,6 +55,11 @@ terminals.
 #print axioms RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts
 #print axioms RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree
 #print axioms RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports
+
+-- The displayed two-generator support sheets and complete Brianchon/decoder dictionary.
+#print axioms RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets
+#print axioms RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange
+#print axioms RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary
 
 -- The symmetry-free rigidity implication and its six-arc concurrence inputs.
 #print axioms RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card
@@ -108,7 +114,7 @@ terminals.
 #print axioms RelativeConicArcs.SupportOrientationNodes.supportCubic_singularLocus_eq_frame
 #print axioms RelativeConicArcs.SupportOrientationNodes.supportCubic_framePoints_ordinaryNodes
 
--- Rational and integral commutants relative to the classical splitting input.
+-- Unconditional rational and integral commutants from the explicit two-generator system.
 #print axioms RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator
 #print axioms RelativeConicArcs.SupportOrientationCommutant.adjoinGolden_integralPoints_eq_ZsqrtFive
 #print axioms RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive
