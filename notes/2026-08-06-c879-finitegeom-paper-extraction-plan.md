@@ -103,6 +103,13 @@ package behind a local `Idx`/field model.  `Q16Reduction`, `Q16Result`, and the
 paper-wide `ArcsCompleteOutsideConic` gate are human downstream modules and remain in
 finitegeom; the adapter transports the generated rejection terminal into that layer.
 
+The other current reverse edges are bounded.  The projective-cap Q11 and Q13 packages
+reach only `ProjectiveCap.CertCheck` and `ProjectiveCap.PlaneOutcome`; their generated
+checks get a local statement model and the outcome transport moves downstream.  Q25
+reaches six human modules (`Certificate`, `FiniteFields`, `Moments`, `Nucleus`,
+`ProjectiveBridge`, and `PlaneTransitivity`); its 9,531-file payload must be separated
+from those six adapters without regenerating or renaming the leaves.
+
 Use explicit paper and shared source roots:
 
 ```text
