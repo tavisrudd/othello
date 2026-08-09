@@ -24,19 +24,25 @@ Quotable form if proved: *deep-hole loci are conics exactly twice, ever.*
 
 ## Scope correction
 
-The nonsaturated \(q=53\) star/covariance route assumes the primal arc is
-all-internal.  Under polarity that gives an all-passant dual arrangement with
-internal nodes.  No current theorem excludes external or mixed-type primal
-arcs in the nonsaturated branch.  Therefore:
+No current theorem excludes external or mixed-type primal arcs in the
+nonsaturated branch.  The point-type audit now shows exactly where that
+matters:
 
-- the all-passant moment, separator, covariance, torus, and aligned results
-  are conditional subbranch results;
-- closing their remaining covariance rows would not close \(q=53\);
-- \(q=47\) and \(q=49\), with defects eight and six at \(k=12\), precede the
-  defect-two \(q=53\) case and remain unclassified.
+- polarity gives a mixed secant/passant arrangement, but every pairwise node
+  is internal because it is the pole of a chord passant;
+- at \(q=53,k=12\), moment collapse, covariance rank two, the critical
+  equations, and the open separator Hessian hold for either deleted-point
+  type and arbitrary types among the remaining points;
+- the all-internal hypothesis first enters the old offset/node-character
+  descent, where every polar line was parameterized as a passant;
+- \(q=47\) has a bounded degree-eight star carrier, while \(q=49\) meets a
+  characteristic-seven Hasse/divided-power wall;
+- \(k=12\) is the first candidate size in these fields, not their only
+  nonsaturated size.
 
-Authority and full audit:
-`notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
+Authorities:
+`notes/2026-08-09-c756-all-k-status-assumption-audit.md` and
+`notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
 
 ## Ownership and routing
 
@@ -119,7 +125,7 @@ and each row is a signed chord-matching vector.  These are necessary global
 interfaces, not contradictions.  Local diagonal signs, Smith torsion, and the
 abstract frame alone do not close the branch.
 
-### Nonsaturated — open before point-type specialization
+### Nonsaturated — mixed-type ledger complete, classification open
 
 For a deleted arc point \(P\), a spare external line gives
 
@@ -131,17 +137,9 @@ For a deleted arc point \(P\), a spare external line gives
 The clean uniform target remains a masked Rédei theorem forcing a missing
 direction for every \(\delta\ge2\).  No such carrier is proved.
 
-The immediate gate is point-type stratification.  For \(q=47,49,53\), record:
-
-1. whether the deleted point is internal or external;
-2. the number and placement of external points in the remaining arc;
-3. the secant/passant types of the polar lines and the types of their nodes;
-4. the spare-center count and direction masks;
-5. which moment, separator, and covariance identities survive.
-
-There is already one exact aggregate handle.  If \(e\) of the \(k\) arc
-points are external, then the number of ordered deleted-point/spare-passant
-pairs, each carrying a degree-\(\delta\) quotient (E), is
+The point-type gate is now exact.  If \(e\) of the \(k\) arc points are
+external, then the number of ordered deleted-point/spare-passant pairs, each
+carrying a degree-\(\delta\) quotient (E), is
 
 \[
  k\left(\frac{q+1}{2}-(k-1)\right)-e. \tag{F}
@@ -149,21 +147,63 @@ pairs, each carrying a degree-\(\delta\) quotient (E), is
 
 At \(k=12\), an external versus internal deleted point supplies respectively
 \(12/13\), \(13/14\), and \(15/16\) spare-line quotients for
-\(q=47,49,53\).  Aggregate these equations over all \((P,\ell)\) before
-normalizing one center.
+\(q=47,49,53\).  In the dual arrangement all 55 nodes are internal, even
+when the eleven lines are a secant/passant mixture.  Simultaneous projection
+forces
 
-Acceptance is either a proof that nonsaturation forces the all-internal model,
-or a complete mixed-type equation/search ledger.  A bounded counterexample
-search over the surviving type profiles is the next safeguard.
+\[
+\begin{array}{c|c|c}
+q&P\text{ external}&P\text{ internal}\\ \hline
+47&e_9,\ldots,e_{11}=0&e_9,\ldots,e_{12}=0\\
+49&e_7,\ldots,e_{12}=0&e_7,\ldots,e_{13}=0\\
+53&e_3,\ldots,e_{14}=0&e_3,\ldots,e_{15}=0.
+\end{array}                                                \tag{G}
+\]
 
-### Conditional subbranch: \(q=53\), all-internal/all-passant
+The degree-nine separators and degree-ten generators lie in every window.
+At \(q=47\), ordinary polarization produces a bounded quadratic-through-octic
+carrier.  At \(q=49\), characteristic seven destroys the mixed moments from
+degree seven onward; use Hasse/divided-power coefficients instead.  At
+\(q=53\), the common range through degree fourteen gives the rank-two
+critical core for both point types.
 
-Only in this subbranch, 55 internal nodes of 11 dual passants must be
-direction-complete from all 16 internal nonnodes on a twelfth passant.  The
-sixteen-center condition forces \(e_3,\ldots,e_{15}=0\); degree-nine node
-separators exclude covariance ranks zero and one; nonsingular covariance
-gives the rank-two critical system \(\nabla\mathcal Z=0\) with nonzero
-off-diagonal separator Hessian.
+The aggregate collision identity
+
+\[
+ \delta\left(k\left(\frac{q+1}{2}-(k-1)\right)-e\right)
+ =\sum_{X\notin A\cup C}(d_X-1)s_A(X)                   \tag{H}
+\]
+
+retains all deleted points and spare lines.  Its character-weighted refinement
+is exact locally: on a spare line it is the quadratic-character sum over the
+degree-\(\delta\) residual divisor \(E_{P,\ell}\).  At defect two it lies in
+\(\{-2,0,2\}\).  A resultant/norm formula for its total is the open global
+type discriminator.
+
+### \(q=53\): type-uniform critical core
+
+For either deleted-point type, degree-nine node separators exclude covariance
+ranks zero and one; nonsingular covariance gives
+
+\[
+ \operatorname{rank}M=2,
+ \qquad \nabla\mathcal Z(c)=0,
+ \qquad \partial_i\partial_j\mathcal Z(c)\ne0\ (i\ne j). \tag{I}
+\]
+
+If the deleted point is internal, its polar line is passant and the existing
+anisotropic conic-overlap table applies even when the other polar lines are
+mixed.  If it is external, its polar line is secant and the split-conic
+overlap gives three branches: seven anisotropic covariance rows, disjoint-root
+split covariance with at least eight nonsquare arrangement values, and the
+aligned split escape \(K\sim C\).  Covariance sharing exactly one conic root
+is impossible because it has at most fourteen favorable internal directions,
+short of the fifteen required centers.
+
+### Conditional subbranch: \(q=53\), all-internal/all-passant offsets
+
+When every primal point is internal, all eleven remaining polar lines are
+passants and the old offset/node-character descent applies.
 
 Elliptic overlap leaves:
 
@@ -181,19 +221,20 @@ Authority:
 `notes/2026-08-09-c756-aligned-critical-closure.md` and its committed exact
 script/certificate bundle.
 
-The nonaligned and split rows remain valid conditional work, but they are not
-the main C756 frontier until the point-type gate is closed.
+The nonaligned and split rows remain valid conditional work.  They do not
+cover mixed line types or the external-deletion split-conic branches.
 
 ## Ordered next actions
 
-1. Build the nonsaturated point-type ledger at \(q=47,49,53\), beginning
-   with the deleted point type and mixed polar-line arrangement.
-2. Derive the surviving direction, moment, separator, and covariance
-   identities separately for each type profile.
-3. Run a bounded all-type counterexample audit on the first open fields if the
-   ledger makes a certified search feasible.
-4. Resume the \(q=53\) nonaligned/split Gram-character collision only with its
-   conditional scope explicit.
+1. Attack the \(q=53\) external-deletion aligned split escape \(K\sim C\):
+   derive the mixed secant/passant offset and two-factor node characters and
+   couple them to (I).
+2. Derive a resultant/norm law for the character-weighted residual-divisor
+   sum refining (H), split by point type.
+3. Build the \(q=47\) octic carrier and the separate \(q=49\)
+   Hasse/divided-power carrier before attempting a certified all-type search.
+4. Cover higher nonsaturated sizes separately; do not infer them from the
+   \(k=12\) layer.
 5. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
@@ -202,7 +243,8 @@ the main C756 frontier until the point-type gate is closed.
 Do not:
 
 - assume a nonsaturated arc is all-internal or its polar arrangement
-  all-passant;
+  all-passant, or conversely discard the type-uniform star identities merely
+  because the arrangement is mixed;
 - call \(q=53\) the first open field, or infer general \(\delta\) from defect
   two without a propagation theorem;
 - count progress in the conditional all-passant route as closure of the full
@@ -226,24 +268,27 @@ Do not:
   independent uncovered-set replay extends only through \(q\le19\).
 - The saturated-external human proof has a successful cold read; C894 owns its
   remaining external-specialist safeguard.
-- The \(q=53\) aligned certificate has independent formula-level invariant
-  checks, not a second independent exhaustive search implementation.
+- The \(q=53\) all-passant aligned certificate has independent formula-level
+  invariant checks, not a second independent exhaustive search implementation.
 - No all-type exact search currently covers \(q=47,49,53\).
 
 ## Current assessment
 
 - Saturated-external: closed.
 - Saturated-internal: sharply constrained but open at global coherence.
-- Nonsaturated, arbitrary type: early; the previous 40% estimate counted a
-  conditional all-internal specialization and is withdrawn.
+- Nonsaturated, arbitrary type: the first-size point/type/window ledger is
+  exact, but no first-open field or higher size is classified.
 - \(q=53\), all-internal, aligned: closed exactly.
-- Near-term full all-\(k\) proof odds: below the former 20--25% estimate until
-  the point-type audit is complete; a counterexample remains live.
+- Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
+  the type audit exposed distinct \(q=47\), \(q=49\), mixed-offset, and
+  higher-size gates; a counterexample remains live.
 
 ## Durable pointers
 
 - Current audit:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
+- Mixed-type equation ledger:
+  `notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
 - Universal and bounded foundation:
   `notes/2026-08-01-c756-all-k-conic-filling.md`.
 - Saturated-internal foundation:
