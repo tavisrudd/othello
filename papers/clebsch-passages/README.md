@@ -19,8 +19,9 @@ conic code*; and the companion MDS--CSS transversal-groups paper.
 The rational twist in Hitchin's double cover of the projective space of
 harmonic cubics is a discriminant rather than a fitted constant: the two
 conjugate Clebsch charts meet in a nonsplit two-branch singularity whose
-residue-field pinching has square class \([5]\), and with Hitchin's branch
-sextic the cover's function field is
+residue-field pinching has square class \([5]\).  A paper-local
+ramification-cycle calculation identifies Hitchin's real sextic boundary as
+the reduced branch divisor, and the cover's function field is
 \(\mathbb Q(\mathbf P(H))(\sqrt{5J_0})\).  A complete golden fibre evaluates
 that class, and a marked bridge datum turns the deck sign into the sign of an
 order-six conference operator \(C\) with \(C^2=5I\).

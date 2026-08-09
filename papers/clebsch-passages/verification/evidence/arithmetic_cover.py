@@ -137,6 +137,21 @@ def image_mod(matrix: tuple[tuple[int, ...], ...],
 
 
 def build_certificate() -> dict[str, object]:
+    grassmannian_dimension = 3 * (7 - 3)
+    skew_zero_locus_rank = 3 * 3
+    mukai_umemura_dimension = grassmannian_dimension - skew_zero_locus_rank
+    grassmannian_canonical_degree = -7
+    skew_bundle_determinant_degree = 3 * 2
+    mukai_umemura_canonical_degree = (
+        grassmannian_canonical_degree + skew_bundle_determinant_degree
+    )
+    incidence_canonical_degree = -4 + mukai_umemura_canonical_degree - (-1)
+    target_canonical_degree = -7
+    ramification_degree = incidence_canonical_degree - target_canonical_degree
+    branch_cycle_degree = 2 * ramification_degree
+    assert (mukai_umemura_dimension, mukai_umemura_canonical_degree) == (3, -1)
+    assert (incidence_canonical_degree, ramification_degree, branch_cycle_degree) == (-4, 3, 6)
+
     points = golden_axes()
     norms = {dot(point, point) for point in points}
     assert norms == {T + 2}
@@ -179,6 +194,19 @@ def build_certificate() -> dict[str, object]:
             "normalized_squared_inner_product": "1/5",
             "nonzero_three_point_determinants": len(determinants),
         },
+        "ramification_bookkeeping": {
+            "grassmannian_dimension": grassmannian_dimension,
+            "skew_zero_locus_rank": skew_zero_locus_rank,
+            "mukai_umemura_dimension": mukai_umemura_dimension,
+            "grassmannian_canonical_degree": grassmannian_canonical_degree,
+            "skew_bundle_determinant_degree": skew_bundle_determinant_degree,
+            "mukai_umemura_canonical_degree": mukai_umemura_canonical_degree,
+            "incidence_canonical_degree": incidence_canonical_degree,
+            "target_canonical_degree": target_canonical_degree,
+            "ramification_degree": ramification_degree,
+            "generic_degree": 2,
+            "branch_cycle_degree": branch_cycle_degree,
+        },
         "exchanger": {
             "matrix": exchanger,
             "maps_t_chart_to_conjugate_chart": True,
@@ -194,13 +222,14 @@ def build_certificate() -> dict[str, object]:
         },
         "scope": {
             "certificate_checks": [
+                "the canonical-degree and branch-cycle bookkeeping",
                 "the displayed golden six-sets and their exact metric data",
                 "all twenty three-point determinants",
                 "the exchanger on the two conjugate charts",
                 "the reduction modulo 11 and nonsquare spinor representative",
             ],
             "not_checked": [
-                "the global incidence degree and branch divisor",
+                "the geometric identification of the reduced branch cycle with J0=0",
                 "the local normalization comparison",
                 "the Clebsch-chart invariant identity",
             ],

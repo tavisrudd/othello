@@ -20,12 +20,16 @@ independent replay for each exact bundle, the release allowlist, and a
 warning-free manuscript build. Python 3.11 or later, GNU `sha256sum`, and
 the TeX Live environment selected by the local `Makefile` are required.
 
-The arithmetic programs audit only the displayed golden configurations,
-their exchanger, and the mod-\(11\) spinor representative. The incidence
-degree, branch divisor, local normalization comparison, and Clebsch-chart
-identity remain human arguments using the cited primary sources. The
+The arithmetic programs audit the canonical-degree bookkeeping, displayed
+golden configurations, their exchanger, and the mod-\(11\) spinor
+representative. The incidence degree, geometric identification of the
+reduced branch cycle, local normalization comparison, and Clebsch-chart
+identity remain human arguments; the branch multiplicity is supplied by the
+paper-local ramification calculation rather than attributed to the primary
+source. The
 orientation-source bundle checks, for the displayed marking, the cover's
-scalar factorization, golden involution, conference signs, and Petersen
+scalar factorization, golden involution, conference signs, all six outer
+coefficient words, and Petersen
 comparison; it does not prove
 normalization of the incidence scheme. The separately released Lean artifact
 supplies partial structural coverage only: its pinned source map and axiom

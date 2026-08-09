@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import itertools
 import json
+import re
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -15,6 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "orientation_source.json"
 HARMONIC = HERE / "harmonic_clebsch.json"
+OPERATOR_SOURCE = HERE.parents[1] / "sections" / "05-golden-operator.tex"
 
 
 @dataclass(frozen=True)
@@ -84,6 +86,52 @@ def matrix_product(left: list[list[int]], right: list[list[int]]):
     ]
 
 
+def permutation_sign(permutation: tuple[int, ...]) -> int:
+    inversions = sum(
+        permutation[i] > permutation[j]
+        for i in range(len(permutation))
+        for j in range(i + 1, len(permutation))
+    )
+    return -1 if inversions % 2 else 1
+
+
+def outer_words(conference: list[list[int]]) -> list[str]:
+    triples = tuple(itertools.combinations(range(6), 3))
+    permutations = (
+        (0, 1, 2, 3, 4, 5), (0, 1, 2, 3, 5, 4),
+        (0, 1, 2, 4, 3, 5), (0, 1, 2, 4, 5, 3),
+        (0, 1, 2, 5, 3, 4), (0, 1, 2, 5, 4, 3),
+    )
+    words = []
+    for permutation in permutations:
+        inverse = [0] * 6
+        for source, target in enumerate(permutation):
+            inverse[target] = source
+        sign = permutation_sign(permutation)
+        coefficients = []
+        for triple in triples:
+            i, j, k = sorted(inverse[value] for value in triple)
+            value = sign * conference[i][j] * conference[j][k] * conference[k][i]
+            coefficients.append("+" if value == 1 else "-")
+        words.append("".join(coefficients))
+    return words
+
+
+def manuscript_outer_words() -> list[str]:
+    source = OPERATOR_SOURCE.read_text(encoding="utf-8")
+    rows = [
+        line.split("&", 2)[2]
+        for line in source.splitlines()
+        if re.match(r"^[0-5]&[0-5]{6}&", line)
+    ]
+    assert len(rows) == 6
+    return [
+        "".join("+" if token == "plus" else "-"
+                for token in re.findall(r"\\sg(plus|minus)", row))
+        for row in rows
+    ]
+
+
 def certificate() -> dict[str, object]:
     axes = (
         (ZERO, T, ONE), (ZERO, T, -ONE), (ONE, ZERO, T),
@@ -129,6 +177,10 @@ def certificate() -> dict[str, object]:
         for i, j, k in triples
     }
     assert transported_triangle == {key: -value for key, value in triangle.items()}
+    words = outer_words(conference)
+    assert manuscript_outer_words() == words
+    assert all(sum(word[column] == "+" for word in words) == 3
+               for column in range(20))
 
     labels = tuple(itertools.combinations(range(5), 2))
     adjacency = [[int(set(left).isdisjoint(right)) for right in labels] for left in labels]
@@ -172,6 +224,7 @@ def certificate() -> dict[str, object]:
         },
         "conference": conference,
         "triangle_coefficients": triangle,
+        "outer_coefficient_words": words,
         "petersen_comparison": {
             "labels": [list(label) for label in labels],
             "basis_pair_sum_vectors": basis_vectors,

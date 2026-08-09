@@ -34,16 +34,37 @@ is
  y^\circ=\frac15(4,-1,-1,-1,-1),\qquad
  \sigma_3(y^\circ)=\frac4{25}.
 \]
-With the polarization and sextic normalization fixed in the introduction,
-Hitchin's invariant calculation gives
+We first make the sextic scale precise.  For a real harmonic cubic \(f\),
+divide Hitchin's symmetric moment operator by \(4\pi\) and write
+\[
+ M_f=\frac1{4\pi}\int_{S^2}f(x)^2
+       \left(xx^{\mathsf T}-\frac4{15}I\right)d\omega
+\]
+Hitchin applies \(3a_3-4a_1a_2\) to the coefficients of its characteristic
+polynomial
+\(\lambda^3+a_1\lambda^2+a_2\lambda+a_3\).  Normalized spherical moments
+of monomials are rational, so this is a rational sextic polynomial on
+\(H\).  Its zero set is Hitchin's irreducible sextic.  In the appendix he
+rescales the moment operator before the final restriction calculation; we
+therefore use the opening formula only to fix the hypersurface, not to
+identify the two printed scales.
+
+The pullback of any rational equation of this hypersurface is a nonzero
+scalar multiple of \(\sigma_3^2\).  That scalar lies in \(\Q\): applying
+\(t\mapsto1-t\) replaces the chart by its conjugate without changing either
+the rational equation or \(\sigma_3^2\).  There is consequently a unique
+rational multiple, denoted \(J_0\), for which Hitchin's appendix calculation
+\cite[Appendix, final displayed formula]{HitchinIcosahedron} reads
 \[
  \iota_t^*J_0=16\sigma_3^2,
- \qquad J_0(xyz)=\left(\frac{16}{25}\right)^2
-\cite[Appendix, final displayed formula]{HitchinIcosahedron}.
+ \qquad J_0(xyz)=\left(\frac{16}{25}\right)^2.
 \]
-The coefficient is fixed by the chosen lift, not by a further geometric
-parameter: at \(y^\circ\), the ratio of \(J_0(xyz)\) to
-\(\sigma_3(y^\circ)^2\) is exactly \(16\).
+This is an internal rational normalization, not an identification of two
+analytic scales in the source.  The coefficient is fixed by the chosen
+lift: at \(y^\circ\), the ratio of \(J_0(xyz)\) to
+\(\sigma_3(y^\circ)^2\) is exactly \(16\).  Over \(\mathbf R\), \(J_0\) is a
+positive multiple of Hitchin's opening invariant, so his sign
+classification is unchanged.
 
 This chart is defined over \(E\), not over \(\Q\).  The nontrivial
 automorphism \(t\mapsto1-t\) carries \(I_t\) and \(V_t\) to the distinct
@@ -172,6 +193,64 @@ hence is integral; its generic function field is therefore a quadratic
 extension.
 
 \smallskip
+\noindent\emph{The reduced branch cycle.}\par
+Let \(\mathcal U\) be the universal rank-three bundle on
+\(\operatorname{Gr}(3,H)\), put
+\(\mathcal O(1)=\det\mathcal U^*\), and write \(h\) for the hyperplane
+class on \(\mathbf P(H)\) and for its pullback to \(\mathcal I\).
+The threefold \(X\) is the smooth zero locus of the rank-nine bundle
+\(\bigwedge^2\mathcal U^*\otimes W\).  Since
+\[
+ K_{\operatorname{Gr}(3,7)}=\mathcal O(-7),\qquad
+ \det(\bigwedge^2\mathcal U^*\otimes W)=\mathcal O(6),
+\]
+adjunction gives \(K_X=\mathcal O_X(-1)\).  Put
+\[
+ \mathcal F=\ker(H\otimes\mathcal O_X\longrightarrow\mathcal U^*).
+\]
+Then \(\det\mathcal F=\mathcal O_X(-1)\), and, for the bundle projection
+\(p:\mathcal I\to X\), one has
+\(\mathcal I=\mathbf P_X(\mathcal F)\), with its tautological
+\(\mathcal O_{\mathcal I}(1)\) equal to
+\(\pi^*\mathcal O_{\mathbf P(H)}(1)\).  The projective-bundle canonical
+formula therefore gives
+\[
+ K_{\mathcal I}
+ =\mathcal O_{\mathcal I}(-4)\otimes
+   p^*(K_X\otimes\det\mathcal F^{-1})
+ =\pi^*\mathcal O_{\mathbf P(H)}(-4).
+\]
+The determinant of \(d\pi\) is consequently a nonzero section of
+\(K_{\mathcal I}\otimes\pi^*K_{\mathbf P(H)}^{-1}
+ =\pi^*\mathcal O(3)\).  Its ramification divisor \(R\) has class \(3h\).
+Because \(\pi\) has generic degree two, the projection formula gives the
+branch cycle
+\[
+ \pi_*R=6h.                                                   \tag{2.1}
+\]
+Here a tamely ramified prime in a quadratic extension has ramification
+index two and residue degree one, so each divisorial branch component occurs
+once in \(\pi_*R\); components of \(R\) contracted to codimension at least
+two do not contribute.
+
+Hitchin proves that a general real point of \(J_0=0\) has exactly one
+incidence configuration, whereas either side has respectively two or zero
+real regular configurations
+\cite[\S9, Proposition~10 and Theorem~11]{HitchinIcosahedron}.
+At such a general boundary point \(\pi\) is quasi-finite, hence finite after
+shrinking the target.  The source is smooth and the target regular of the
+same dimension, so miracle flatness makes this local finite map flat of
+degree two.  Its fibre has only one geometric point and therefore is
+ramified.  The real smooth
+points used here are Zariski dense in the irreducible sextic \(J_0=0\).
+Thus this sextic is a component of the branch cycle.  Equation~(2.1) shows
+that it exhausts that cycle, with multiplicity one.  In particular the
+normal quadratic incidence field is branched exactly along the reduced
+divisor \(J_0=0\).  This scheme-theoretic conclusion is the paper-local
+ramification calculation; the cited real classification supplies the dense
+set of boundary points, not the finite-cover assertion.
+
+\smallskip
 \noindent\emph{Square class from one fibre.}\par
 The first step below is an instance of a standard descent fact for quadratic
 covers, which we isolate because it is the reason that a single arithmetic
@@ -211,9 +290,9 @@ The comparison carried out below supplies exactly that square value, since
 \emph{Square class from the branch divisor.}
 Write \(K=\Q(\mathbf P(H))\).  In characteristic zero every quadratic
 extension of \(K\) has the form \(K(\sqrt d)\).  The prime divisors at
-which \(d\) has odd valuation are exactly the branch divisors.  Hitchin
-identifies the branch hypersurface with the irreducible invariant sextic
-\(J_0=0\) \cite[\S\S9--10]{HitchinIcosahedron}.
+which \(d\) has odd valuation are exactly the branch divisors.  The
+preceding ramification-cycle calculation proves that their reduced union is
+the irreducible sextic \(J_0=0\).
 
 Choose a nonzero rational section \(s\) of
 \(\mathcal O_{\mathbf P(H)}(3)\) and set
@@ -245,8 +324,9 @@ this point.  Because \(\pi\) is proper, there is a Zariski neighborhood
 \(\widetilde B\) be the normalization of \(B\) in the quadratic generic
 field \(K(\sqrt{cJ_0})\).  The normal finite scheme
 \(\pi^{-1}(B)\) is birational to \(\widetilde B\), hence is isomorphic to
-it.  Hitchin's branch calculation identifies the branch locus with
-\(J_0=0\).  Since \(J_0(xyz)\ne0\), shrinking \(B\) away from this divisor
+it.  The branch-cycle calculation above identifies the branch locus with
+the reduced divisor \(J_0=0\).  Since \(J_0(xyz)\ne0\), shrinking \(B\)
+away from this divisor
 makes the finite normalization etale.  The two distinct geometric points
 therefore form the complete reduced scheme-theoretic fibre, whose residue
 algebra is

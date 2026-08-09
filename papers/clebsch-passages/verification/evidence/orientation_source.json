@@ -121,6 +121,14 @@
     "orientation_distinction": "fails in characteristic 2",
     "petersen_inverse": "requires 3 invertible"
   },
+  "outer_coefficient_words": [
+    "--+++-++--++--+---++",
+    "++----++-+-+--++++--",
+    "+-+-+---++--+++-+-+-",
+    "-+-+++---+-+++---+-+",
+    "-++--++-+-+-+--++--+",
+    "+--+-+-++-+--+-+-++-"
+  ],
   "petersen_comparison": {
     "adjacency_eigenvalue": -2,
     "basis_pair_sum_vectors": [

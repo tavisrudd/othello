@@ -61,6 +61,33 @@ def main() -> int:
         new = transported[i][j] * transported[j][k] * transported[k][i]
         assert new == -old
 
+    triples = tuple(itertools.combinations(range(6), 3))
+    permutations = (
+        (0, 1, 2, 3, 4, 5), (0, 1, 2, 3, 5, 4),
+        (0, 1, 2, 4, 3, 5), (0, 1, 2, 4, 5, 3),
+        (0, 1, 2, 5, 3, 4), (0, 1, 2, 5, 4, 3),
+    )
+    words = []
+    for permutation in permutations:
+        inverse = [0] * 6
+        for source, target in enumerate(permutation):
+            inverse[target] = source
+        inversions = sum(
+            permutation[i] > permutation[j]
+            for i in range(6) for j in range(i + 1, 6)
+        )
+        sign = -1 if inversions % 2 else 1
+        word = ""
+        for triple in triples:
+            i, j, k = sorted(inverse[value] for value in triple)
+            coefficient = sign * conference[i][j] * conference[j][k] * conference[k][i]
+            word += "+" if coefficient == 1 else "-"
+        words.append(word)
+    assert words == payload["outer_coefficient_words"]
+    assert words[2] == "+-+-+---++--+++-+-+-"
+    assert all(sum(word[column] == "+" for word in words) == 3
+               for column in range(20))
+
     labels = tuple(itertools.combinations(range(5), 2))
     for distinguished in range(4):
         y = [0] * 5

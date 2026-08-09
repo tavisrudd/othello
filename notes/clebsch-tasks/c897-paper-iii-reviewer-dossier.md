@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; first sealed batch synthesized at overall MAJOR; C897 now
-owns remediation and the sealed regrade
+**Status:** active; authoritative paper-only remediation is green; standalone
+synchronization and the sealed regrade remain
 
 ## Objective
 
@@ -65,6 +65,15 @@ arguments otherwise sound:
 No manuscript, Lean, trust, release, mirror, publication, or contact action was
 taken during the first batch.  C897 itself now retains every remediation
 finding; no successor task is allocated and no finding is handed off to C816.
+
+The authoritative remediation is recorded in
+`notes/2026-08-09-c897-paper-iii-remediation.md`.  It adds the missing
+canonical ramification-cycle proof, exact internal rational `J_0` scale,
+complete reduced golden-fibre justification, all local MINOR repairs, and
+rejecting coefficient-word coverage.  The paper-only aggregate is green with
+a warning-free deterministic 32-page PDF.  Mirror synchronization and fresh
+sealed regrades remain; Lean follow-up is explicitly queued outside this
+paper-only pass by author direction.
 
 The dossier must include:
 

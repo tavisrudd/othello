@@ -15,7 +15,7 @@
         "conceptual",
         "classical-input"
       ],
-      "proof_role": "human proof using Hitchin's incidence degree, branch divisor, Clebsch chart, invariant calculation, and the trace-split rank-one reflexive Stein algebra on projective space",
+      "proof_role": "human proof using Hitchin's incidence degree and real sextic-boundary classification, a paper-local canonical-class and reduced ramification-cycle calculation, an internally normalized rational J0, the Clebsch chart, and the trace-split rank-one reflexive Stein algebra on projective space",
       "statement": "Hitchin's rational icosahedral incidence extension has function field Q(P(H))(sqrt(5J0)), and its Stein algebra is O plus O(-3) with anti-invariant multiplication z^2=5J0 after normalization of the generator; each conjugate Clebsch chart is defined over Q(sqrt(5)), not Q, the charts meet only at xyz and descend to a Q-scheme whose completed conductor and normalization recover Q(sqrt(5)), their fixed-parent sections map canonically to the incidence normalization, and each chart pulls J0 back to 16 sigma3^2.",
       "status": "proven",
       "theorem_labels": [

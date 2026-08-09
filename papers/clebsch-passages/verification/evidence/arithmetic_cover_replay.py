@@ -73,8 +73,21 @@ def main() -> None:
     squares = {value * value % Q for value in range(1, Q)}
     assert certificate["mod_11"]["reflection_norm_product"] not in squares
     assert certificate["field"]["nonzero_three_point_determinants"] == 20
+    assert certificate["ramification_bookkeeping"] == {
+        "branch_cycle_degree": 6,
+        "generic_degree": 2,
+        "grassmannian_canonical_degree": -7,
+        "grassmannian_dimension": 12,
+        "incidence_canonical_degree": -4,
+        "mukai_umemura_canonical_degree": -1,
+        "mukai_umemura_dimension": 3,
+        "ramification_degree": 3,
+        "skew_bundle_determinant_degree": 6,
+        "skew_zero_locus_rank": 9,
+        "target_canonical_degree": -7,
+    }
     assert certificate["scope"]["not_checked"] == [
-        "the global incidence degree and branch divisor",
+        "the geometric identification of the reduced branch cycle with J0=0",
         "the local normalization comparison",
         "the Clebsch-chart invariant identity",
     ]

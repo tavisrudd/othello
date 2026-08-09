@@ -45,7 +45,7 @@ python3 papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py
 sha256sum -c papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256
 ```
 
-It checks the explicit golden configurations over
+It checks the canonical-degree and branch-cycle bookkeeping and the explicit golden configurations over
 \(\mathbf Q[t]/(t^2-t-1)\), all twenty three-point determinants, the
 conjugating projectivity, its reduction modulo \(11\), and the reflection
 norm product.  It contains no Mathieu, Hadamard, matching, or external
@@ -61,7 +61,8 @@ sha256sum -c papers/clebsch-passages/verification/evidence/orientation_source.sh
 
 For the displayed marking, it checks the scalar factorization of the pulled-back
 cover, the conference square, the exact golden exchanger, the reversal of all
-triangle signs, and the primitive Petersen pair-sum identities.  It does not
+triangle signs, all six outer coefficient words against the manuscript table,
+and the primitive Petersen pair-sum identities.  It does not
 prove that the incidence sheet determines that marking or the chart lift.
 Scheme normalization, extension
 across the branch divisor, and the complete geometric bad-prime set remain

@@ -59,7 +59,7 @@ headed ``coefficient word'', the signs occur in the order
 r&p_r&\text{coefficient word of }J_{T_r}\\ \hline
 0&012345&\sgminus\sgminus\sgplus\sgplus\sgplus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgminus\sgminus\sgminus\sgplus\sgplus\\
 1&012354&\sgplus\sgplus\sgminus\sgminus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgplus\sgplus\sgplus\sgminus\sgminus\\
-2&012435&\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\\
+2&012435&\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\\
 3&012453&\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\\
 4&012534&\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\\
 5&012543&\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus
@@ -112,8 +112,10 @@ conference order with this property, and its exchange spectrum is
 \]
 
 For a four-set \(K\), let \(w(K)\) be the sum of its three signed
-Hamilton-cycle products.  Call \(K\) \emph{aligned} if \(w(K)=3\), and let
-\(c_Y\) count the aligned four-sets in \(Y\).  Then
+Hamilton-cycle products.  Call \(K\) \emph{aligned} if \(w(K)=3\); in
+standard two-graph terminology this is the union of the coherent and
+incoherent four-set types.  Let \(c_Y\) count the aligned four-sets in
+\(Y\).  Then
 \[
  \operatorname{tr}(H_Y)=\frac{d^2}{q},\qquad
  \operatorname{tr}(H_Y^2)=\frac{F_d+32c_Y}{q^2},
@@ -375,9 +377,12 @@ Theorem~\ref{thm:aligned-faithfulness} cannot be weakened.
 
 \begin{remark}[What the query count is measured against]
 \label{rem:alignment-query-count}
-For a Seidel matrix this is the principal-minor assignment problem, whose
-identifiability class is similarity by a diagonal matrix of signs
-\cite[Thm.~6]{HoltzSturmfels}, that is, switching.  Against an oracle
+For a general symmetric matrix, Holtz and Sturmfels identify the
+principal-minor ambiguity as diagonal sign similarity under their strict
+nondegeneracy hypothesis \cite[Thm.~6]{HoltzSturmfels}.  No such hypothesis
+is needed here: for a Seidel matrix the order-three minors are twice its
+triangle signs, so they recover the switching class directly.  Against an
+oracle
 returning minor \emph{values} the problem is solved in \(O(n^2)\) queries and
 that count is asymptotically optimal
 \cite{RisingKuleszaTaskar,BrunelUrschel}; for a Seidel matrix the cycle-basis
@@ -413,16 +418,20 @@ earlier answers, and for large \(n\) such a decoder does better than any
 fixed family can, using \(\binom n2+O(n)\) tests --- the counting bound to
 leading order.  Read the two-graph on seven points, which costs at most the
 \(\binom74\) tests available there, and then add one point at a time.
-Attaching a point \(v\) to five points carrying a known restriction costs a
+Attaching a point \(v\) to six points carrying a known restriction costs a
 bounded number of tests, because the twenty tests meeting \(v\) inside those
 seven points determine its five rooted values: the fifteen tests avoiding
 \(v\) are already known, and the theorem separates on seven points.  Every
-further rooted value at \(v\) then costs a single test.  A test is the
-conjunction of two conditions on the unknown values, and one of them is always
-already decided: either a known value at \(v\) makes the corresponding
-condition of the test through the root true, or none does, and then the two
-conditions of a test through three known points agree with each other.  Either
-way the test reads as one bit.  So the price of the coherence restriction is a
+further rooted value at \(v\) then costs a single test.  Indeed, for a new
+old vertex \(u\), the two hypothetical values of \(\tau(ruv)\), together
+with the already recovered data, define two candidate restrictions on any
+seven-set containing \(u,v\) and five of the six anchor vertices.  They agree
+on the anchor five-set and hence are not complements.  By the seven-point
+theorem some alignment test distinguishes them.  Every test not containing
+both \(u\) and \(v\) is already decided, so one of the tests through
+\(u,v\) and two anchors distinguishes the two values.  The decoder evaluates
+both hypothetical outcomes, selects such a test, and its one-bit answer fixes
+\(\tau(ruv)\).  So the price of the coherence restriction is a
 price of fixing the tests in advance: adaptively the fourth-order indicator
 matches the order-three minor values to leading order, both at \(n^2/2\).
 
@@ -537,7 +546,7 @@ separates the four normalized formulas from their classical consequences.
 \node[box] (pf) at (-3.4,0.5) {commutator Pfaffian\\
   \(\frac14\operatorname{Pf}[D_x,C_T]=Z_T\)};
 \node[box] (det) at (3.4,0.5) {oriented cross-golden determinant\\
-  \(\pm10\sqrt5\det B_T(x)=Z_T\)};
+  \(10\sqrt5\det B_T(x)=Z_T\)};
 \node[center] (z) at (0,-1.15) {four normalized formulas agree\\
   \(Z_T=J_T\)};
 \draw[eqline,rounded corners=3pt] (tri.west) -- ++(-4mm,0) |- (z.north west);
@@ -562,8 +571,8 @@ separates the four normalized formulas from their classical consequences.
 \end{tikzpicture}
 \caption{The four constructions of the same marked cubic and their classical
 targets.  Plain connectors denote the normalized identities displayed in the
-upper boxes; arrows denote subsequent constructions.  The transported
-determinant-line orientation selects the sign in the cross-golden formula.}
+upper boxes; arrows denote subsequent constructions.  The determinant-line
+orientation is normalized by the cross-golden formula.}
 \label{fig:four-cubic-shadows}
 \end{figure}
 
@@ -609,9 +618,11 @@ vertices form a pentagon.
 \]
 Over \(E=\Q(\sqrt5)\), put
 \(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) and
-\(B_T(x)=P_{T,-}D_xP_{T,+}\).  After orienting the two determinant lines,
+\(B_T(x)=P_{T,-}D_xP_{T,+}\).  At \(T_0\), orient the two determinant
+lines so that the following equality has positive sign, and transport those
+orientations through the coherent outer marking.  Then
 \[
- Z_T(x)=\pm10\sqrt5\det B_T(x).
+ Z_T(x)=10\sqrt5\det B_T(x).
 \]
 \item The six coordinates \((Z_T)_{T\in\mathcal T}\) satisfy
 \[
@@ -656,9 +667,22 @@ form without an enumeration.
 Expand the Pfaffian of \([D_x,C_T]\) over perfect matchings.  The coefficient
 of \(x_S\) pairs \(S\) bijectively with \(S^c\), and its signed sum is the
 complementary \(3\)-minor of \(C_T\).  The Hodge convention displayed above
-makes that signed minor equal to \((K_T)_{SS}\).  Two dihedral representatives and complementation give
-\((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\), so the Pfaffian is \(4Z_T\);
-squaring gives the determinant identity.
+makes that signed minor equal to \((K_T)_{SS}\).  There are two triangle
+orbits, distinguished by \(\epsilon_T(S)=\pm1\); switching, transported
+relabelling, and complementation reduce them to \(S=012\) and \(S=014\) in
+the displayed matrix.  For these representatives the complementary blocks
+\(C_T[S^c,S]\) are
+\[
+ \begin{pmatrix}1&-1&1\\-1&-1&1\\-1&-1&-1\end{pmatrix},
+ \qquad
+ \begin{pmatrix}1&-1&1\\1&-1&-1\\-1&-1&-1\end{pmatrix}.
+\]
+Their determinants are \(4\) and \(-4\); the Hodge signs
+\(\operatorname{sgn}(S^c,S)\) are both \(-1\), while the internal triangle
+products are \(-1\) and \(+1\).  Hence in both orbits
+\((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\).  This exposes the
+complementary-minor step rather than treating it as formal.  The Pfaffian is
+therefore \(4Z_T\); squaring gives the determinant identity.
 
 The projectors split the axis space into two three-spaces.  Relative to that
 splitting,
