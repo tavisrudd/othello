@@ -238,6 +238,18 @@ waiter was stopped without bypassing or killing that build.  Resume by building
 replace the shard-zero-only README language, run the rejecting verifier, and commit the seven-shard
 packet before extending the same bit-separator generator to the other profiles.
 
+The bit-separator sizing is now complete enough to fix the remaining checker architecture.  Across
+all 21 two-triple fibre-pair shards, separators have 63--117 nodes, depth 8--13 and 1,829 nodes total.
+Across all seven one-triple/two-secant shards they have 1,239--1,709 nodes, depth 14--16 and 9,539
+nodes total.  A fixed linear projection is worse: the first large third-profile shard needs 25
+syndrome bits before its projected left and right images are disjoint, leaving 81,902 distinct right
+states.  Keep the adaptive trees.  Bound kernel evaluation of the large right domains by the same
+natural secant-pair residue split already used by the weight-ten checker; for the fourth profile,
+combine seven pair residues with six first-tail choices if a 110,000-candidate residue leaf is still
+too large.  The global fourth-profile hit separator has 2,699 nodes at depth 17; only its 336 accepted
+syndromes proceed to an exact witness lookup, and the canonical pair split reduces those to the 56
+claimed supports.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
