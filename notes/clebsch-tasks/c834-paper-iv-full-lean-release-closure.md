@@ -167,6 +167,38 @@ replay condition, not a theorem or elaboration blocker.  The highest-EV mathemat
 corrected step 4: the bounded arbitrary-weight-twelve arc/parity attack, with the proved four-profile
 checker as the mandatory fallback.
 
+### Execution update (2026-08-08, corrected step 4 bounded attack closed; fallback begun)
+
+The arbitrary-weight-twelve arc route does not close.  For the involution polar to an offending
+passant, if `gS != S` then minimum distance gives `|S ∩ gS| <= 6`.  Four fixed support points on the
+passant still permit zero or one complete off-axis two-cycle, and six fixed support points still
+permit none.  More basically, before exhaustion the stabilizer of an arbitrary `S` is unknown, so
+`gS = S` is a live branch on which the distance inequality is unavailable; importing the order-24
+stabilizer of a displayed support would be circular.  The code kernel is not self-orthogonal, so no
+generic intersection-parity constraint repairs the gap.  The bounded route is stopped.  Full audit:
+`notes/2026-08-08-c834-polar-involution-bounded-audit.md`.
+
+The proved-checker fallback has begun with a structural simplification.  The first three pencil
+profile constructors are duplicate-free by their disjoint fibre/secant parameterizations.  The
+fourth profile's only duplication is the six ordered decompositions of four secant points into the
+two meet-in-the-middle pairs.  Requiring the left pair to contain the two smallest secant indices
+selects one decomposition.  This removes both the per-match quadratic `eraseDups` test and the final
+global `eraseDups`.  The independent exact replay now returns profile counts and distinct counts
+`0,0,0,56`, with union size 56.  Guarded Lean replay is queued behind the foreign shared build lock;
+after it passes, split the last native aggregate into three empty-profile kernel leaves, one canonical
+fourth-profile equality leaf, and a symbolic assembler.
+
+The queued source replay subsequently passed through `PassantCodeQ13.MinimumWords.Exhaustion` in
+15m17s, including restoration of the orbit, concurrence and fixed-point-stabilizer dependency forest.
+A direct whole-profile `decide +kernel` probe then exposed an architectural boundary: the meet uses
+`Std.HashMap`, which is opaque to kernel reduction, so the `Decidable` instance remains stuck even
+with increased recursion depth.  Numerical profile modules around the same definition would not be
+proof-producing.  Replace the provisional four-leaf design by transparent fingerprint/witness
+certificates: Lean validates coverage of each semantic half, uses symbolic equality-implies-equal-
+fingerprint reasoning, rejects all absent lookups, and validates the unique full-syndrome/support
+witness at each fourth-profile hit.  Natural shards are the distinguished fibre, fibre pair and
+secant-pair residue.  The generated lookup tables are acceleration data, not trusted conclusions.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the

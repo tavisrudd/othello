@@ -41,16 +41,31 @@ def insertSyndromeBucket (buckets : Std.HashMap Nat (List (List Nat)))
   let syndrome := xorCachedColumns points
   buckets.insert syndrome (points :: buckets[syndrome]?.getD [])
 
-/-- Join two families of partial supports whose syndromes sum to the base-point syndrome. -/
-def matchingBaseSupports (left right : List (List Nat)) : List Nat :=
+/-- Join two families of partial supports whose syndromes sum to the base-point syndrome, retaining
+only the pairs accepted by `compatible`.  The profile constructors below already choose distinct
+points, so this predicate carries only the one genuinely necessary compatibility condition: the
+canonical split of four secant points into two pairs. -/
+def matchingBaseSupportsWhere (left right : List (List Nat))
+    (compatible : List Nat → List Nat → Bool) : List Nat :=
   let buckets := left.foldl insertSyndromeBucket {}
   right.flatMap fun rightPoints =>
     let target := cachedColumnSyndromes.getD 0 0 ^^^ xorCachedColumns rightPoints
     (buckets[target]?.getD []).filterMap fun leftPoints =>
-      let points := leftPoints ++ rightPoints
-      if points.eraseDups.length = 11 then
-        some (encodeIndices (0 :: points))
-      else none
+      if compatible leftPoints rightPoints then
+        some (encodeIndices (0 :: (leftPoints ++ rightPoints)))
+      else
+        none
+
+/-- Join profile halves whose construction already guarantees that their points are disjoint. -/
+def matchingBaseSupports (left right : List (List Nat)) : List Nat :=
+  matchingBaseSupportsWhere left right fun _ _ => true
+
+/-- Select exactly one of the six ordered two-pair decompositions of four distinct secant points.
+The three fibre choices precede the left pair and the four fibre choices precede the right pair, so
+this says precisely that the left pair consists of the two smallest secant indices. -/
+def canonicalFourSecantSplit (leftPoints rightPoints : List Nat) : Bool :=
+  (leftPoints.drop 3).all fun leftSecant =>
+    (rightPoints.drop 4).all fun rightSecant => leftSecant < rightSecant
 
 /-- Candidate supports with fibre pattern `(5,1,1,1,1,1,1;0)`. -/
 def fiveOneFibreSolutions : List Nat :=
@@ -94,12 +109,12 @@ def fourSecantSolutions : List Nat :=
     (secantNeighbors.sublistsLen 2).map fun pair => head ++ pair
   let right := (choices (fibres.drop 3)).flatMap fun tail =>
     (secantNeighbors.sublistsLen 2).map fun pair => tail ++ pair
-  matchingBaseSupports left right
+  matchingBaseSupportsWhere left right canonicalFourSecantSplit
 
 /-- All weight-twelve kernel supports found by the four exhaustive fixed-point profiles. -/
 def fixedPointWeightTwelveSolutions : List Nat :=
-  (fiveOneFibreSolutions ++ twoTripleFibreSolutions ++ oneTripleTwoSecantSolutions ++
-    fourSecantSolutions).eraseDups
+  fiveOneFibreSolutions ++ twoTripleFibreSolutions ++ oneTripleTwoSecantSolutions ++
+    fourSecantSolutions
 
 /-- The four displayed projective orbits, restricted to supports containing the fixed point. -/
 def fixedPointOrbitSlices : List Nat :=

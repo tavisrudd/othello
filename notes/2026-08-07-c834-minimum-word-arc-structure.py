@@ -14,7 +14,9 @@ PG(2,13):
 3.  fixing one internal point and choosing one further point on each of the seven passant lines
     through it, the requirement that no three chosen points be collinear leaves 10296 eight-point
     partial supports out of the 6^7 = 279936 unrestricted choices;
-4.  optionally (--full-search, several minutes), the number of nodes visited by an exhaustive
+4.  the complete four fixed-point parity profiles contribute 0, 0, 0 and 56 supports when the four
+    secant points in the last profile use their unique increasing two-pair split; and
+5.  optionally (--full-search, several minutes), the number of nodes visited by an exhaustive
     increasing-index search for weight-twelve codewords through the fixed point, using only the
     parity-deficit bound and no collinearity restriction, together with the number of codewords found.
 
@@ -174,6 +176,89 @@ def fibre_search(base=0):
             "unrestricted_choices": 6 ** 7}
 
 
+def fixed_point_profile_search(base=0):
+    """Replay the four complete pencil profiles with a duplicate-free secant split."""
+    base_point = INTERNAL[base]
+    fibres = [sorted(set(row) - {base})
+              for line, row in zip(PASSANT, PASSANT_POINTS) if incident(line, base_point)]
+    fibre_points = set().union(*(set(fibre) for fibre in fibres))
+    secants = [point for point in range(78) if point != base and point not in fibre_points]
+    syndromes = []
+    for point in range(78):
+        value = 0
+        for line, row in enumerate(PASSANT_POINTS):
+            if point in row:
+                value |= 1 << line
+        syndromes.append(value)
+
+    def choices(groups):
+        return list(itertools.product(*groups))
+
+    def xor_columns(points):
+        value = 0
+        for point in points:
+            value ^= syndromes[point]
+        return value
+
+    def matching(left, right, compatible=lambda _left, _right: True):
+        buckets = {}
+        for points in left:
+            buckets.setdefault(xor_columns(points), []).append(points)
+        supports = []
+        for right_points in right:
+            target = syndromes[base] ^ xor_columns(right_points)
+            for left_points in buckets.get(target, []):
+                if compatible(left_points, right_points):
+                    supports.append(sum(1 << point
+                                        for point in (base, *left_points, *right_points)))
+        return supports
+
+    five_one = []
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left = [five + head
+                for five in itertools.combinations(fibres[special], 5)
+                for head in choices([fibres[index] for index in remaining[:3]])]
+        right = choices([fibres[index] for index in remaining[3:]])
+        five_one.extend(matching(left, right))
+
+    two_triple = []
+    for first, second in itertools.combinations(range(7), 2):
+        remaining = [index for index in range(7) if index not in (first, second)]
+        left = [triple + head
+                for triple in itertools.combinations(fibres[first], 3)
+                for head in choices([fibres[index] for index in remaining[:2]])]
+        right = [triple + tail
+                 for triple in itertools.combinations(fibres[second], 3)
+                 for tail in choices([fibres[index] for index in remaining[2:]])]
+        two_triple.extend(matching(left, right))
+
+    secant_pairs = list(itertools.combinations(secants, 2))
+    one_triple_two_secant = []
+    for special in range(7):
+        remaining = [index for index in range(7) if index != special]
+        left = [triple + head
+                for triple in itertools.combinations(fibres[special], 3)
+                for head in choices([fibres[index] for index in remaining[:3]])]
+        right = [tail + pair
+                 for tail in choices([fibres[index] for index in remaining[3:]])
+                 for pair in secant_pairs]
+        one_triple_two_secant.extend(matching(left, right))
+
+    left = [head + pair for head in choices(fibres[:3]) for pair in secant_pairs]
+    right = [tail + pair for tail in choices(fibres[3:]) for pair in secant_pairs]
+    four_secant = matching(
+        left, right,
+        lambda left_points, right_points: max(left_points[3:]) < min(right_points[4:]))
+
+    profiles = [five_one, two_triple, one_triple_two_secant, four_secant]
+    return {
+        "solution_counts": [len(profile) for profile in profiles],
+        "distinct_solution_counts": [len(set(profile)) for profile in profiles],
+        "union_size": len(set().union(*(set(profile) for profile in profiles))),
+    }
+
+
 def full_search(base=0):
     """Exhaustive increasing-index search with only the parity-deficit bound."""
     syndrome = []
@@ -231,6 +316,7 @@ def main():
         "representatives": {name: describe_representative(coordinates)
                             for name, coordinates in REPRESENTATIVES.items()},
         "arc_restricted_fibre_search": fibre_search(),
+        "fixed_point_profile_search": fixed_point_profile_search(),
     }
     if arguments.full_search:
         certificate["collinearity_free_search"] = full_search()
