@@ -628,23 +628,42 @@ This replaces numerical stability questions by the discrete problem
 closed-form PSD certificate of bounded description, independent of the
 growing stabilizer-orbital algebra.
 
+> **Corollary 20.1 (defect parity and conservation).**  Every completion
+> defect is even, and
+> \[
+> \sum_{R\notin T}\Delta_R
+> =m(m+1)(2m-1)(m-2). \tag{34}
+> \]
+> Thus every nonzero defect is at least two, but global averaging alone cannot
+> exclude an isolated zero.
+
+**Proof.**  Since \(s_R\equiv t_R\pmod2\), one has
+\(s_R^2+t_R\equiv0\pmod2\), while \(m(m+1)\) is even.  For the sum, the seed
+has \(m\) vertices, the support graph has degree \(m(m-1)\), and every seed
+vertex has \(m-1\) neighbors inside the seed.  Hence
+\[
+ \sum_{R\notin T}t_R=m(m-1)^2.
+\]
+Combine this with (29) and
+\(|\mathcal I\setminus T|=(2m-1)(m-1)-m\). \(\square\)
+
 One further arithmetic shadow is visible but does not supply the finisher.
 Set
 \[
- S=2K-\epsilon I,\qquad S^2=q^2I. \tag{34}
+ S=2K-\epsilon I,\qquad S^2=q^2I. \tag{35}
 \]
 Modulo the characteristic, \(\bar S^2=0\), so
 \(\operatorname{im}\bar S\subseteq\ker\bar S\) is a self-orthogonal modular
 code.  Exact prime-field checks for
 \(q=5,7,11,13,17,19,23\) give
 \[
- \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{35}
+ \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{36}
 \]
 No uniform claim is made from those seven cases.  More importantly, the
 kernel already has a weight-three dependency at \(q=5\) and a weight-four
 dependency at \(q=7\), below the coherent targets four and five.  Thus raw
 minimum distance of this characteristic code cannot exclude coherence; any
-use of (34) must retain the \(\{\pm1\}\) coefficient and projective-sign
+use of (35) must retain the \(\{\pm1\}\) coefficient and projective-sign
 constraints.  The striking rank pattern is a Smith/module spinoff question,
 not the live all-\(k\) gate.
 
@@ -703,8 +722,8 @@ the canonical prime-field orientation and verifies (15) entry by entry for
 (15) and another 121,396 entries of the independent incidence identity (23),
 including the general passant-code dimensions.  At \(q=13\) it independently computes the conic invariant \(\rho\)
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
-\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (34) in each tested prime
-field, verifies the seven ranks in (35), and checks the displayed weight-three
+\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (35) in each tested prime
+field, verifies the seven ranks in (36), and checks the displayed weight-three
 and weight-four dependency witnesses.
 
 Replay from the repository root:
@@ -810,6 +829,20 @@ every signed frame vector.  This supplies the bounded-description PSD object
 that the earlier orbital route lacked, while making clear that positivity--not
 numerical approximation--is the remaining theorem.
 
+**TT6.**  The hostile reading is that Theorems 19--20 remain exact
+reformulations of equality: PSD proves \(\Delta_R\ge0\), not
+\(\Delta_R>0\).  Corollary 20.1 closes the tempting average-defect argument;
+the total defect is large but permits one zero, and parity only upgrades the
+positive gap from one to two.  The highest-EV genuinely new move is therefore
+to projectively normalize a bounded seed fragment and seek a bounded-degree
+norm, sum-of-squares, or factorization formula for \(\Delta_R/2\) whose zero
+locus can be classified.  If no such compression appears, stop: enlarging the
+PSD/orbital algebra or taking more global moments repeats a route now proved
+structurally incapable of excluding an isolated zero.  The only serious
+alternate is a \(p\)-adic lift of the square-zero operator (35) that retains
+the \(\{\pm1\}\) coefficients; raw modular rank and distance have already
+failed.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -839,14 +872,18 @@ numerical approximation--is the remaining theorem.
 | Are coherent supports maximal external-join cliques for \(q\equiv3\pmod4\)? | settled positively | outside signed balance is even while \(n\) is odd |
 | Can existence be tested one point before a full support? | settled positively | Theorem 19: a signed \(m\)-seed extends iff one completion score has absolute value \(m\), uniquely |
 | Is the completion score unconstrained? | settled negatively | its exact outside energy is \(2m(m-1)\) |
-| Do one-point-short seeds occur in the certified range? | settled negative for the exact range | the existing local-graph table gives none for every odd prime power (5<q\le49) |
+| Do one-point-short seeds occur in the certified range? | settled negative for the exact range | the existing local-graph table gives none for every odd prime power \(5<q\le49\) |
 | Does the published half-size exterior-set classification settle the seed problem? | settled negative | it classifies exterior points; these seeds are internal and impose signed triangle holonomy |
-| Can a noncompleting seed approach a frame completion arbitrarily closely? | settled negative | Theorem 20 gives squared distance at least (2/m) |
-| Is there a bounded exact PSD certificate for each candidate completion? | settled positively | the Schur defect (Delta_Rinmathbb Z_{ge0}) is the enlarged Gram determinant up to a fixed rational factor |
-| What remains after quantization? | open sharp gate | prove (Delta_R>0) for every signed internal seed and every (q>5) |
+| Can a noncompleting seed approach a frame completion arbitrarily closely? | settled negative | Theorem 20 gives squared distance at least \(2/m\) |
+| Is there a bounded exact PSD certificate for each candidate completion? | settled positively | the Schur defect \(\Delta_R\in\mathbb Z_{\ge0}\) is the enlarged Gram determinant up to a fixed rational factor |
+| What remains after quantization? | open sharp gate | prove \(\Delta_R>0\) for every signed internal seed and every \(q>5\) |
+| Can total defect or parity force strict positivity? | settled negative | Corollary 20.1 gives an even defect and its exact total, but both permit an isolated zero |
+| Is the Schur-defect theorem itself a finisher? | settled negative | it is the exact PSD equality condition; new arithmetic input is still required |
+| What arithmetic input has the best chance? | open highest-EV gate | bounded-degree norm/SOS or factorization of \(\Delta_R/2\) after projective seed normalization |
+| What is the only serious alternate? | open fallback | a \(p\)-adic lift of \(2K-\epsilon I\) retaining signed coefficients, not raw modular distance |
 | Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
 | What explains \(\operatorname{rank}_{\mathbb F_q}(2K-\epsilon I)=(q^2-1)/8\)? | open arithmetic spinoff | exact only for the seven tested prime fields; likely a modular Paley/Smith calculation |
-| Can the characteristic kernel's minimum distance close all-\(k\)? | settled negative as a raw route | weight (3) at \(q=5\) and weight (4) at \(q=7\) are already below the coherent targets |
+| Can the characteristic kernel's minimum distance close all-\(k\)? | settled negative as a raw route | weight \(3\) at \(q=5\) and weight \(4\) at \(q=7\) are already below the coherent targets |
 | Is this a new infinite binary code tower? | settled negative as a positioning claim | general conic-passant code dimensions and the elliptic scheme are prior art; the exceptional-root Taylor tower is different but already pre-empted |
 | Is the signed real fusion/support theorem itself new? | open novelty gate | targeted original-source and forward-citation audit; Hollmann--Xiang supplies the ambient scheme but the exact signed identity was not asserted in the inspected passages |
 | Can minimum-support \(\lambda\)-eigenvectors of \(K\) be classified? | open; now the sharpest equality gate | for \(q\equiv3\pmod4\), exclude equality beyond \(q=5\); for \(q\equiv1\pmod4\), combine equality with the remaining switching condition |
@@ -856,14 +893,14 @@ numerical approximation--is the remaining theorem.
 
 ## Next action
 
-Prove the quantized defect bound \(\Delta_R>0\) for every signed internal
-\(m\)-seed and every \(R\notin T\) when \(q>5\), or classify the seeds and
-verify it on their normal forms.  This is equivalent to the Theorem 19 strict
-score bound and to excluding the smallest regular-simplex
-circuits but works one point earlier.  Use the exact energy (29), the even
-outside-sign profile after completion, the Paley lift, and the projective
-cross-ratio model, and the binary passant-code word as three exact shadows,
-with the line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
+Projectively normalize a bounded seed fragment and test whether
+\(\Delta_R/2\) has a bounded-degree norm/SOS or factorization formula whose
+zero locus is classifiable.  Use the exact energy (29), the Paley lift, the
+cross-ratio model, and the binary passant-code word as exact shadows, with the
+line-plus-pole F2 cliques as rejecting controls.  Stop this route if every
+formula retains degree or support growing with \(m\); neither total defect,
+parity, larger PSD algebras, nor additional global moments can force strict
+positivity.  The sole alternate is a signed \(p\)-adic lift of (35).  In parallel, run the focused
 novelty audit for the signed fusion, support, and frame-circuit theorems.  If equality
 classification is as hard as the existing Paley stability problem, return to
 the composition-specific \(q\equiv1\pmod4\) 2-descent and masked Rédei route;

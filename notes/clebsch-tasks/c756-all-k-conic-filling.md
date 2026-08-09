@@ -1057,6 +1057,10 @@ For each candidate completion the Schur defect
 enlarged Gram determinant; it vanishes exactly at completion.  Otherwise the
 reconstructed vector has squared distance at least \(2/m\) from every signed
 frame vector, so there are no analytic near-misses.
+Every \(\Delta_R\) is even and the total defect is
+\(m(m+1)(2m-1)(m-2)\).  This closes parity and averaging as finishers: both
+allow an isolated zero.  The Schur defect is therefore an exact equality
+certificate, not yet the arithmetic obstruction.
 
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
@@ -1101,11 +1105,13 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: prove \(\Delta_R>0\) for every signed internal
-\(m\)-seed when \(q>5\), or classify the seeds and verify the defect on their
-normal forms.  This is the one-point-short version of classifying the smallest
-regular-simplex circuits, while a focused original-source/forward-citation audit
-checks those exact identities.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition
+Highest-EV next action: projectively normalize a bounded seed fragment and seek
+a bounded-degree norm/SOS or factorization of \(\Delta_R/2\) whose zero locus
+is classifiable.  Stop if its degree or support still grows with \(m\): larger
+PSD algebras, total-defect averaging, parity, and more global moments cannot
+exclude one zero.  The only serious alternate is a signed \(p\)-adic lift of
+\(2K-\epsilon I\).  A focused original-source/forward-citation audit checks the
+exact fusion/frame identities in parallel.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition
 for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
 certificate passes have met their stop rule and should not be repeated.  The historical
 coordinate routes below explain the obstruction and remain reusable inputs, not the live
