@@ -2,15 +2,18 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; reviewer dossier frozen 2026-08-09; cold reads not yet run
+**Status:** active standing programme; reviewer dossier and round-1 manifest
+frozen 2026-08-09; remains open until explicit author closure
 
 ## Objective
 
-Own the human-proof and exposition review programme for Paper IV,
+Own the continuing human-proof and exposition review programme for Paper IV,
 *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
 conic code*.  Identify likely journal reviewers and the most useful critical
 personas, extract their directly related literature and conventions into
-bounded packets, and use those packets for independent cold reads.
+bounded packets, use those packets for independent cold reads, synthesize each
+frozen round, apply author-approved fixes and upgrades, and re-review the
+resulting manuscript until the author explicitly closes C901.
 
 The programme deliberately excludes Lean correctness, package trust, source
 closure, and release engineering.  A human-proof reader may challenge whether
@@ -18,8 +21,10 @@ the manuscript explains a finite reduction, completeness argument, or
 classical input well enough; that does not authorize inspection or remediation
 of the formal artifact under C901.
 
-Keep C901 assigned across the first cold-read batch and its synthesis.  Do not
-allocate a new task merely because several persona reports are run.
+Keep C901 assigned across every cold-read, synthesis, remediation, upgrade, and
+re-review round.  Do not allocate a new task merely because a new round or
+revised manuscript begins.  The author alone decides when this standing
+programme is ready to close.
 
 ## Deliverable
 
@@ -30,6 +35,12 @@ It records the frozen manuscript surface, a venue-conditional editorial
 forecast, a ranked reviewer/critic slate, five isolated source packets,
 cross-persona criticals, and the cold-read protocol.  Later C901 reports must
 record one frozen manuscript hash and remain independent until synthesis.
+
+The post-referee upgrade assessment
+`notes/2026-08-04-c682-paper-iv-clebsch-connection.md` is deliberately deferred:
+do not read or route it into review context until the current referee findings
+have been synthesized and fixed.  When the author activates that upgrade, keep
+its assessment, integration, and re-review under C901.
 
 ## Acceptance gate
 
@@ -50,14 +61,14 @@ record one frozen manuscript hash and remain independent until synthesis.
 
 ## Boundaries
 
-C901 may create the dossier, cold reads, and synthesis.  Manuscript remediation
-requires the user's later authorization and must respect C761 ownership and
-the paper/release gates.  C901 does not contact prospective reviewers, claim
-private editorial knowledge, or infer availability or conflicts not visible
-in public sources.
+C901 may create the dossier, cold reads, syntheses, author-approved manuscript
+fixes and upgrades, validation records, and re-reviews.  It must respect C761
+ownership and every paper/release gate, and it must coordinate rather than
+absorb formal or release work owned by C834/C857/C761.  C901 does not contact
+prospective reviewers, claim private editorial knowledge, or infer availability
+or conflicts not visible in public sources.
 
 The dossier is input only to review sub-agents.  Ordinary manuscript work may
 receive frozen findings and an adopted-finding ledger, not the persona dossier.
 A later conventions-only subset requires a deliberate extraction after the
 reviews show which conventions genuinely belong in normal Paper IV context.
-
