@@ -137,10 +137,10 @@ direction on a spare external line.  Proving this uniformly is intended to
 feed the existing defect squeeze for every \(\delta\ge2\).
 
 The direct Segre comparison, global slope moments, unweighted subresultants,
-dual-pencil weighted norm, and selected missing-set kernel curves do not give
+dual-pencil weighted norm, selected missing-set kernel curves, Frobenius
+fixed-locus interpolation, and the pair-coupled diagonal expansion do not give
 a bounded-degree carrier.  The all-internal defect-two near-transversal
-classification and genuinely pair-coupled carriers remain possible structural
-routes.
+classification remains the live structural route.
 
 ## What is already uniform
 
@@ -157,16 +157,11 @@ routes.
 
 ## Next action
 
-Return to the nonsaturated branch and attack the masked Rédei theorem
-\(h\ge1\): after deleting an arc point, a conic-external set cannot determine
-every direction on a spare external line.  Use the Frobenius graph/fixed-locus
-formulation from the coordinate-free audit.  Seek a global carrier that keeps
-the completely split chord polynomial and its quadratic-character mask
-together.
-
-Stop if the carrier again has degree \(\Theta(q)\), fragments among the
-rational pencil fibres, or reduces to the closed one-line subresultant and
-moment identities.
+Attack the all-internal defect-two boundary \((q,k)=(53,12)\).  Put its two
+allowed fibre profiles into a common near-transversal model across all spare
+passants and seek a global incidence or parity obstruction forced by
+internality.  The target is a uniform lemma that feeds the defect squeeze,
+not a field-specific search.
 
 ## Stop rules
 
@@ -177,6 +172,10 @@ Do not retry these without a genuinely new bounded identity:
 - raw star cardinality, parity, defect averaging, or more untyped moments;
 - the unsigned two-species matching Gram or higher contractions of its
   secant/passant blocks;
+- Frobenius fixed-locus interpolation or the quadratic pencil twist without
+  an additional pair-parameter functional equation;
+- pair-coupled diagonal inclusion--exclusion or higher concurrent-matching
+  moments without a new global relation among the masks;
 - local diagonal-sign classification;
 - signed \(p\)-adic/Smith torsion obstruction;
 - ordinary monodromy, unsigned or pair-only resultants;
@@ -210,6 +209,8 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-local-diagonal-sign-stop.md`;
 - `notes/2026-08-09-c756-outside-matching-tight-frame.md`;
 - `notes/2026-08-09-c756-two-species-matching-gram.md`;
+- `notes/2026-08-09-c756-frobenius-fixed-locus-masked-remainder.md`;
+- `notes/2026-08-09-c756-pair-coupled-diagonal-stop.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
