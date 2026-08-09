@@ -1009,11 +1009,19 @@ standalone obstruction: over \(\mathbb F_7\),
 full geometric monodromy \(S_5\). The exact replacement is a signed/Kummer
 pair resolvent. A new row-resultant identity proves that, on every split
 quadratic fibre, F2 chord externality already implies the F1 derivative
-class, so F1 is only a cheap enumeration filter. The next bounded gate is to
-compute the pair-resultant square-class module and test whether its
-all-negative signature is generically permitted. If it is, stop the
-monodromy route and move to masked Rédei; if it is not, lift the obstruction
-to the saturated-internal classification. See
+class, so F1 is only a cheap enumeration filter. The TT2 check then shows
+that pair resultants alone are still too coarse: they lose the separate
+within- and cross-fibre signs. Theorem 13 makes constant within-fibre triangle
+holonomy equivalent to coherence for \(q\equiv3\pmod4\), while
+\(q\equiv1\pmod4\) retains an even switching ambiguity and a rank-one
+Rédei-type matrix. Theorems 14--15 make triangle holonomy projectively
+invariant and express it as
+\(-\chi_q(g_{ij}g_{jk}g_{ki})\); every forced row collision is confined to
+one switching-color class. The next gate is split by residue class:
+projectively normalize a base conjugate pair and attack this cross-ratio
+two-graph for \(q\equiv3\pmod4\), while testing rank-one 2-descent for
+\(q\equiv1\pmod4\). If both signatures are generically permitted, stop the
+monodromy route and move to masked Rédei. See
 `notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md` and its adjacent
 evidence bundle.
 
