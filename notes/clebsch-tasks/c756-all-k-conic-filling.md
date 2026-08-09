@@ -1086,6 +1086,126 @@ the Paley crown reformulation. Do not claim a new binary tower. The possible
 publishable residue is the signed fusion, its Frobenius-odd support theorem,
 and the exact all-\(k\)/Paper-IV bridge, after a focused novelty audit.
 
+## Likely shape of a full all-\(k\) proof (2026-08-08)
+
+This is a conjectural proof architecture, not a claimed theorem.  The most
+likely final proof is not one monolithic argument.  It is a short synthesis
+of the closed saturated-exterior chain with two remaining rigidity lemmas,
+one saturated-internal and one nonsaturated.  The elegant outcome would prove
+both lemmas from one half-Paley/Rédei rigidity theorem.
+
+### Saturated-internal acceptance gate
+
+Let \(Y\) be a hypothetical equality support of size
+\(n=(q+3)/2=m+1\), and let \(y\) be its signed indicator.  The signed-fusion
+equality and integral incidence factorization give
+\[
+ Ky=\epsilon my,\qquad
+ Z^{\mathsf T}Z=mI-\epsilon K,\qquad
+ Zy=0.
+\]
+The last equation is the decisive geometric form.  Every passant line meets
+\(Y\) in zero or two points, and in the two-point case the signed incidences
+cancel.  Through each \(P\in Y\), the other \(m\) support points occupy
+exactly one point on each of the \(m\) passant lines through \(P\).  Thus an
+equality support is a perfect signed transversal of every passant pencil, not
+merely a small codeword or an extremal eigenvector.
+
+Delete \(R\in Y\) and write \(x=y-\eta_Re_R\).  Then
+\[
+ Zx=-\eta_RZe_R. \tag{A}
+\]
+Consequently the uniform saturated theorem only needs the restricted
+statement
+
+> For \(q>5\), no coherent internal \(m\)-arc has signed
+> singleton-passant vector equal, up to sign, to a point column of \(Z\).
+
+This is the correct target.  Uniform nonexistence of every coherent
+\(m\)-seed and the full minimum distance of every passant code would both be
+stronger than necessary.  The proof should use (A) from the outset.
+
+The likely route is to normalize \(R\) and two seed points projectively, then
+parameterize the \(m\) passants through \(R\) by one quadratic-character half
+of a projective line.  The seed chooses one second point \(P_u\) on each
+passant.  Pairwise passant joins constrain the quadratic characters of the
+divided differences of the selector \(u\mapsto P_u\); triangle holonomy
+retains the compatible square-root signs that ordinary resultants lose.  A
+Rédei--Szőnyi product over the full half-domain should then force the selector
+to be fractional-linear or Frobenius-linear.  The expected projective outputs
+are the known line-plus-pole false positives, rejected by the signed arc
+condition, together with the exceptional \(q=5\) four-frame.
+
+An equivalent classical formulation is a restricted minimum-word/tangent
+theorem: classify signed internal arcs whose passant intersections are
+everywhere even and whose deletion tangent vector is one signed pencil.  A
+Segre tangent-polynomial proof of that statement would be an acceptable
+branch-specific finisher even if no common master lemma emerges.
+
+### Nonsaturated acceptance gate
+
+For the nonsaturated branch, delete one arc point, choose the spare external
+line, and form the masked Rédei direction polynomial.  The required theorem
+remains
+\[
+ h\ge1:
+\]
+a conic-external arc cannot determine every direction on that line.  If
+\(h=0\), the Rédei polynomial has a completely split complement on every
+relevant direction.  Comparing those factorizations should again produce a
+large partial character-preserving map.  Rigidity must force a projective
+degeneration--a line, conic, or line-plus-pole configuration--contradicting
+the arc and point-type hypotheses.  Once \(h\ge1\) is uniform, the existing
+defect inequalities and certified boundary range are intended to exclude
+every nonsaturated \(\delta\ge2\) family.
+
+### Preferred common engine
+
+The highest-value version of the proof establishes a theorem of the following
+shape.
+
+> **Half-Paley rigidity target.**  A map defined on a
+> quadratic-character half of \(\mathbf P^1(\mathbb F_q)\), whose pairwise
+> divided differences and triangle signs have the prescribed Paley pattern,
+> extends projectively, apart from explicitly classified small exceptions.
+
+The saturated branch applies this theorem to the signed passant-pencil
+selector.  The nonsaturated branch applies it to the masked direction
+selector.  In both cases the projective outputs are then rejected
+geometrically, except for the required small examples.  Such a master lemma
+would be the broadly reusable mathematical contribution and would explain
+why the two apparently independent all-\(k\) obstructions belong in one
+paper.
+
+### Expected final assembly and investment order
+
+The final proof should have four modules:
+
+1. the existing reduction of arbitrary conic-filling arcs to the
+   saturated-exterior, saturated-internal, and nonsaturated cases;
+2. the already closed saturated-exterior classification;
+3. the signed perfect-pencil theorem above, leaving only the \(q=5\)
+   saturated-internal example; and
+4. the masked direction theorem \(h\ge1\), followed by the existing
+   parameter squeeze and finite boundary checks.
+
+Current subjective distribution for the missing proof mechanism is:
+
+- 55%: one half-Paley/Rédei rigidity lemma closes both branches;
+- 25%: a Segre tangent/polarity theorem closes saturation and a separate
+  masked Rédei lemma closes nonsaturation;
+- 15%: the signed \(p\)-adic/incidence-lattice model supplies the saturated
+  obstruction; and
+- 5%: composition-specific descent or another unexpected arithmetic route.
+
+Do not invest further in theta/PSD strengthening, global defect moments,
+generic monodromy, unsigned resultants, or unrestricted seed
+classification.  They either discard the switching information or prove a
+substantially stronger statement than all-\(k\) requires.  The immediate
+highest-EV calculation is to write the normalized passant-pencil selector
+and determine whether (A) yields the same Rédei division identity as the
+masked \(h=0\) hypothesis.
+
 ## Current boundary
 
 - Open problem as stated: `papers/clebsch-rigidity/clebsch_rigidity.tex:1485-1489`.
@@ -1121,13 +1241,16 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: use the signed incidence factorization and polarity
-to classify coherent internal \(m\)-arcs through their \(m\) singleton
-passants.  Test first whether the tangent-pole set enters a known half-size
-arc/exterior-set theorem, retaining the row signs; the target is to exclude
-signed tangent-column equality for \(q>5\), or exclude the seeds themselves.
-If polarity does not enter a classifiable family, return to a signed
-\(p\)-adic lift of \(2K-\epsilon I\) using \(Z\) as the integral model.
+Highest-EV next action: projectively normalize one missing point and its
+signed passant pencil, write the resulting half-domain selector explicitly,
+and compare its Rédei division identity with the nonsaturated masked
+\(h=0\) identity.  First seek the common half-Paley rigidity lemma above;
+the saturated target is only signed tangent-column inequality for \(q>5\),
+not nonexistence of every coherent seed.  If the two identities do not share
+a rigid carrier, split the work into a Segre tangent/polarity theorem and the
+masked direction theorem.  The signed \(p\)-adic lift of
+\(2K-\epsilon I\), using \(Z\) as integral model, remains the saturated
+fallback.
 Larger PSD algebras, total-defect averaging, parity, and more global moments
 remain closed.  A focused original-source/forward-citation audit checks the
 exact fusion/frame identities in parallel.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition
