@@ -3005,8 +3005,17 @@
       "last": 900,
       "purpose": "Arcs paper likely-reviewer and critic dossier for persona cold reads of human proofs and exposition",
       "sequence": 334
+    },
+    {
+      "count": 1,
+      "first": 901,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 901,
+      "purpose": "Paper IV reviewer and critic dossier for human-proof and exposition cold reads",
+      "sequence": 335
     }
   ],
-  "next_id": 901,
+  "next_id": 902,
   "schema": "codex-task-id-allocations-v1"
 }
