@@ -143,7 +143,13 @@ a bounded-degree carrier.  At defect two the near-transversal must retain its
 star realization: 55 internal nodes of 11 dual passants must be
 direction-complete from all 16 internal nonnodes on a twelfth passant.
 Arbitrary internal near-transversals exist directly, so the live structural
-route is a star-specific direction theorem.
+route is a star-specific direction theorem.  Coupling all 16 required centers
+already forces the first bounded identity: for the 55-node projection
+polynomial, \(e_3,\ldots,e_{15}\) vanish identically.  After centering, the
+projection moments through degree 15 equal a formal antipodal pair.  The
+degree-10 star-ideal generators and degree-9 node separators lie inside this
+window.  The separators exclude covariance ranks zero and one; only the
+nonsingular covariance case remains.
 
 ## What is already uniform
 
@@ -160,12 +166,12 @@ route is a star-specific direction theorem.
 
 ## Next action
 
-Attack the star-center gate at \((q,k)=(53,12)\): bound the number of
-direction-complete internal centers on one arrangement passant for the 55
-nodes of the other 11 passants.  The required configuration has all 16
-internal nonnodes complete.  Any useful lemma must exploit the common-line
-factorization of the star; arbitrary internal \(q+2\)-point near-transversals
-realize both defect-two profiles.
+Normalize the nonsingular covariance form left by the degree-9 separator
+argument, then contract the eleven degree-10 star-ideal generators against
+the centered moment identities.  Seek a forced singularity or a conflict
+with the passant/internal discriminants.  Stop if the contractions are only
+centroid/pair-budget tautologies or if degree \(\Theta(q)\) returns; do not
+cross the exact degree-16 mask boundary.
 
 ## Stop rules
 
@@ -218,6 +224,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-frobenius-fixed-locus-masked-remainder.md`;
 - `notes/2026-08-09-c756-pair-coupled-diagonal-stop.md`;
 - `notes/2026-08-09-c756-defect-two-star-near-transversal.md`;
+- `notes/2026-08-09-c756-tt-star-moment-collapse.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
