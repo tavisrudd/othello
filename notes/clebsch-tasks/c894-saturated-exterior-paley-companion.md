@@ -43,6 +43,17 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
   the maximal real subfield.  At \(q=11\), this recovers
   \(\mathbb Q(\sqrt5)\).  Treat this as proved but separately un-audited for
   attribution.
+- **Primitive spectral factor:** the faithful-character factor is
+  \(P_\beta(X)^n\), where \(P_\beta\) is even and
+  \(P_\beta(X)=P_{\beta^2}(X^2)\).  This is the spectral form of the exact
+  decomposition group.
+- **Integral \(q=11\) endpoint:** on the augmentation lattice of the local
+  five-vertex tournament,
+  \(\mathcal J=(B^2+5I)/2\) is integral and satisfies
+  \(\mathcal J^2=5I\).  Hence the local carrier intrinsically supports the
+  conductor-two order \(\mathbb Z[\sqrt5]\).  Use as an explanatory endpoint
+  corollary, not a novelty claim or a claimed identification with the
+  rank-six conference lattice.
 - **Proof device, no novelty claim:** flat Sidon lemma and the one-faithful-
   eigenblock Cayley criterion.
 - **Partial context only:** the all-\(k\) LP bound, saturation dichotomy,
@@ -76,6 +87,7 @@ user.
 - `notes/2026-08-08-c756-predecessor-audit-and-companion-scope.md`
 - `notes/2026-08-08-c894-ej-theorem-inventory-and-architecture.md`
 - `notes/2026-08-08-c894-tt-cyclotomic-compression.md`
+- `notes/2026-08-08-c894-tt2-integral-golden-carrier.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -111,3 +123,8 @@ the four-stage rigidity cascade frozen in
 `notes/2026-08-08-c894-tt-cyclotomic-compression.md`.  Add field-generation,
 Galois-stabilizer, and Gaussian-period/Jacobi-sum terms to the human search;
 do not widen the paper to other cyclotomic conductors.
+
+The \(q=11\) endpoint row must include the integral augmentation operator and
+its parity proof from
+`notes/2026-08-08-c894-tt2-integral-golden-carrier.md`.  Ring-fence any
+comparison with the existing rank-six conference lattice as future work.
