@@ -40,6 +40,11 @@ tools named below and only as ordinary forward commits:
   independent histories. Their content changes only by
   `papers/scripts/export-paper-repos.py sync`.
 
+A public Lean repository README is solely for external reviewers: mathematical
+scope, trust boundary, verification command, citation, and license. It does not
+describe synchronization, internal repository roles, publication gates, or DOI
+version workflow, and it does not call a repository a “mirror” or an “authority.”
+
 Do not create ad hoc clones, worktrees, scratch checkouts, or candidate trees
 inside `~/src/lean/` or `~/src/math-papers/`. Exporter candidate trees belong
 in disk-backed cache directories (for example
