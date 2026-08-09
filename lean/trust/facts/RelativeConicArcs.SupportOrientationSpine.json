@@ -219,12 +219,6 @@
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1": "RelativeConicArcs.MarkedClebschBridge",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not": "RelativeConicArcs.MarkedClebschBridge",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch": "RelativeConicArcs.MarkedClebschBridge",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.IntegralOddOperator": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice": "RelativeConicArcs.SupportOrientationCommutant",
@@ -753,12 +747,6 @@
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent",
     "RelativeConicArcs.SupportOrientationCommutant.IntegralOddOperator",
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence",
     "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice",
@@ -2020,46 +2008,6 @@
       "RelativeConicArcs.MarkedClebschBridge.sheetConference",
       "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic"
     ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence": [
       "RelativeConicArcs.SupportOrientationCover.A5",
       "RelativeConicArcs.SupportOrientationCover.Letter",
@@ -2129,7 +2077,6 @@
       "RelativeConicArcs.SupportOrientationCover.Letter"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
       "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice",
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
       "RelativeConicArcs.SupportOrientationCommutant.ZsqrtFiveOperators",
@@ -2140,8 +2087,6 @@
       "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent",
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
       "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
       "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
@@ -2149,7 +2094,9 @@
       "RelativeConicArcs.SupportOrientationCommutant.rationalGoldenOperator",
       "RelativeConicArcs.SupportOrientationCommutant.rationalGoldenOperator_commutes_oddA5Action",
       "RelativeConicArcs.SupportOrientationCover.A5",
-      "RelativeConicArcs.SupportOrientationCover.Letter"
+      "RelativeConicArcs.SupportOrientationCover.Letter",
+      "RelativeConicArcs.SupportOrientationCover.firstOrbitalRepresentative",
+      "RelativeConicArcs.SupportOrientationCover.rotationA5"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant": [
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",

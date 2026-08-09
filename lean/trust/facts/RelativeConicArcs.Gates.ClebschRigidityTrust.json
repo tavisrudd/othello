@@ -14,6 +14,8 @@
     "RelativeConicArcs.ClebschGateway",
     "RelativeConicArcs.ClebschGatewayQ11Extension",
     "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChiralityData",
     "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.CodingBridge",
     "RelativeConicArcs.Conic",
@@ -618,6 +620,36 @@
     "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.SchemeVector": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.blockGenerator": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.columnAdjacent": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.direction": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction_semantics": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.generator_preserves_sheet": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponent": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents_eq_scalarLineBlocks": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.negative_generatedOrbit": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.neighborVector": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.orbitStep": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.positive_generatedOrbit": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.sameIntrinsicComponent": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock_card": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeBlock": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple_semantics": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_fourth_power": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_swaps_sheets": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.triple": "RelativeConicArcs.ClebschSchemeChiralityData",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_card": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_list_nodup": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_range_complete": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.unorderedChiralityCharacter_unique": "RelativeConicArcs.ClebschSchemeChirality",
+    "RelativeConicArcs.ClebschSchemeChirality.vectorSub": "RelativeConicArcs.ClebschSchemeChirality",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix": "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose": "RelativeConicArcs.ClebschTwoGraph",
@@ -858,6 +890,7 @@
     "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndex": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree": "RelativeConicArcs.Q11DecodingSynthesis",
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.brianchon_rawLeaderSupports": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.canonicalSyndromeDistance": "RelativeConicArcs.Q11SemanticBase",
@@ -875,6 +908,7 @@
     "RelativeConicArcs.Examples.Q11Coding.directionsOfIndex.eq_1": "RelativeConicArcs.Q11SemanticDistribution",
     "RelativeConicArcs.Examples.Q11Coding.distanceOne_leader_count_one": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_allTriples": "RelativeConicArcs.Q11DecodingSynthesis",
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leader_count_twenty": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.distance_two_leader_distribution": "RelativeConicArcs.Q11SemanticLeaders",
     "RelativeConicArcs.Examples.Q11Coding.distance_two_secant_pair_rep": "RelativeConicArcs.Q11SemanticPairRep",
@@ -894,6 +928,7 @@
     "RelativeConicArcs.Examples.Q11Coding.mem_affineSyndromesOfDistance_iff": "RelativeConicArcs.Q11SemanticSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.nearestLeaderCount": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.nearestLeaderCount.eq_1": "RelativeConicArcs.Q11DecodingSynthesis",
+    "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.no_nonzero_quadratic_vanishing": "RelativeConicArcs.Q11Coding",
     "RelativeConicArcs.Examples.Q11Coding.nonfive_one_avoidance": "RelativeConicArcs.Q11SemanticOneAvoidance",
     "RelativeConicArcs.Examples.Q11Coding.nonzero_nonfive_has_two_presentation": "RelativeConicArcs.Q11SemanticTwoRep",
@@ -907,6 +942,7 @@
     "RelativeConicArcs.Examples.Q11Coding.oneWord_weight": "RelativeConicArcs.Q11SemanticBase",
     "RelativeConicArcs.Examples.Q11Coding.pairSupport": "RelativeConicArcs.Q11SemanticLeaders",
     "RelativeConicArcs.Examples.Q11Coding.pairSupport.eq_1": "RelativeConicArcs.Q11SemanticLeaders",
+    "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.projectiveSyndromePoint": "RelativeConicArcs.Q11SemanticSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.projectiveVec": "RelativeConicArcs.Q11SemanticBase",
     "RelativeConicArcs.Examples.Q11Coding.projectiveVec.eq_1": "RelativeConicArcs.Q11SemanticRayData",
@@ -922,6 +958,8 @@
     "RelativeConicArcs.Examples.Q11Coding.residualNeighbors": "RelativeConicArcs.Q11Coding",
     "RelativeConicArcs.Examples.Q11Coding.residual_graph_icosahedral_local_data": "RelativeConicArcs.Q11Coding",
     "RelativeConicArcs.Examples.Q11Coding.secant_index_spectrum": "RelativeConicArcs.Q11SemanticSpectrum",
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange": "RelativeConicArcs.Q11DecodingSynthesis",
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_partition": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.syndromeLeaderSupports_two_eq_raw": "RelativeConicArcs.Q11SemanticLeaders",
     "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance": "RelativeConicArcs.Q11DecodingSynthesis",
     "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance.eq_1": "RelativeConicArcs.Q11DecodingSynthesis",
@@ -1625,12 +1663,6 @@
     "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra": "RelativeConicArcs.SmallKGeometricBridge",
     "RelativeConicArcs.SmallKGeometricBridge.sevenArc_uncovered_card": "RelativeConicArcs.SmallKGeometricBridge",
     "RelativeConicArcs.SmallKGeometricBridge.uncovered_empty_eq_offArcIndexFiber_zero": "RelativeConicArcs.SmallKGeometricBridge",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn": "RelativeConicArcs.SupportOrientationCommutant",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.IntegralOddOperator": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence": "RelativeConicArcs.SupportOrientationCommutant",
     "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice": "RelativeConicArcs.SupportOrientationCommutant",
@@ -2603,6 +2635,36 @@
     "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch",
+    "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+    "RelativeConicArcs.ClebschSchemeChirality.SchemeVector",
+    "RelativeConicArcs.ClebschSchemeChirality.blockGenerator",
+    "RelativeConicArcs.ClebschSchemeChirality.columnAdjacent",
+    "RelativeConicArcs.ClebschSchemeChirality.direction",
+    "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit",
+    "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction",
+    "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction_semantics",
+    "RelativeConicArcs.ClebschSchemeChirality.generator_preserves_sheet",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponent",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents",
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents_eq_scalarLineBlocks",
+    "RelativeConicArcs.ClebschSchemeChirality.negative_generatedOrbit",
+    "RelativeConicArcs.ClebschSchemeChirality.neighborVector",
+    "RelativeConicArcs.ClebschSchemeChirality.orbitStep",
+    "RelativeConicArcs.ClebschSchemeChirality.positive_generatedOrbit",
+    "RelativeConicArcs.ClebschSchemeChirality.sameIntrinsicComponent",
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock",
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock_card",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeBlock",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple_semantics",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_fourth_power",
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_swaps_sheets",
+    "RelativeConicArcs.ClebschSchemeChirality.triple",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_card",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_list_nodup",
+    "RelativeConicArcs.ClebschSchemeChirality.triple_range_complete",
+    "RelativeConicArcs.ClebschSchemeChirality.unorderedChiralityCharacter_unique",
+    "RelativeConicArcs.ClebschSchemeChirality.vectorSub",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose",
@@ -2843,6 +2905,7 @@
     "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound",
     "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndex",
     "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary",
     "RelativeConicArcs.Examples.Q11Coding.brianchon_rawLeaderSupports",
     "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
     "RelativeConicArcs.Examples.Q11Coding.canonicalSyndromeDistance",
@@ -2860,6 +2923,7 @@
     "RelativeConicArcs.Examples.Q11Coding.directionsOfIndex.eq_1",
     "RelativeConicArcs.Examples.Q11Coding.distanceOne_leader_count_one",
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_allTriples",
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leader_count_twenty",
     "RelativeConicArcs.Examples.Q11Coding.distance_two_leader_distribution",
     "RelativeConicArcs.Examples.Q11Coding.distance_two_secant_pair_rep",
@@ -2879,6 +2943,7 @@
     "RelativeConicArcs.Examples.Q11Coding.mem_affineSyndromesOfDistance_iff",
     "RelativeConicArcs.Examples.Q11Coding.nearestLeaderCount",
     "RelativeConicArcs.Examples.Q11Coding.nearestLeaderCount.eq_1",
+    "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples",
     "RelativeConicArcs.Examples.Q11Coding.no_nonzero_quadratic_vanishing",
     "RelativeConicArcs.Examples.Q11Coding.nonfive_one_avoidance",
     "RelativeConicArcs.Examples.Q11Coding.nonzero_nonfive_has_two_presentation",
@@ -2892,6 +2957,7 @@
     "RelativeConicArcs.Examples.Q11Coding.oneWord_weight",
     "RelativeConicArcs.Examples.Q11Coding.pairSupport",
     "RelativeConicArcs.Examples.Q11Coding.pairSupport.eq_1",
+    "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples",
     "RelativeConicArcs.Examples.Q11Coding.projectiveSyndromePoint",
     "RelativeConicArcs.Examples.Q11Coding.projectiveVec",
     "RelativeConicArcs.Examples.Q11Coding.projectiveVec.eq_1",
@@ -2907,6 +2973,8 @@
     "RelativeConicArcs.Examples.Q11Coding.residualNeighbors",
     "RelativeConicArcs.Examples.Q11Coding.residual_graph_icosahedral_local_data",
     "RelativeConicArcs.Examples.Q11Coding.secant_index_spectrum",
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_partition",
     "RelativeConicArcs.Examples.Q11Coding.syndromeLeaderSupports_two_eq_raw",
     "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance",
     "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance.eq_1",
@@ -3610,12 +3678,6 @@
     "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra",
     "RelativeConicArcs.SmallKGeometricBridge.sevenArc_uncovered_card",
     "RelativeConicArcs.SmallKGeometricBridge.uncovered_empty_eq_offArcIndexFiber_zero",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn",
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent",
     "RelativeConicArcs.SupportOrientationCommutant.IntegralOddOperator",
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence",
     "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice",
@@ -4124,12 +4186,27 @@
       "Quot.sound",
       "propext"
     ],
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports": [
       "Classical.choice",
       "Quot.sound",
       "propext"
     ],
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -7307,6 +7384,91 @@
       "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
       "RelativeConicArcs.ClebschGoldenConference.triangleSign"
     ],
+    "RelativeConicArcs.ClebschSchemeChirality.columnAdjacent": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.SchemeVector",
+      "RelativeConicArcs.ClebschSchemeChirality.neighborVector",
+      "RelativeConicArcs.ClebschSchemeChirality.vectorSub"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.direction": [
+      "RelativeConicArcs.ClebschSchemeChirality.SchemeVector"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit": [
+      "RelativeConicArcs.ClebschSchemeChirality.orbitStep"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction_semantics": [
+      "RelativeConicArcs.ClebschSchemeChirality.blockGenerator",
+      "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction",
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.generator_preserves_sheet": [
+      "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponent": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.sameIntrinsicComponent"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponent"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents_eq_scalarLineBlocks": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents",
+      "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.negative_generatedOrbit": [
+      "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.neighborVector": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.SchemeVector",
+      "RelativeConicArcs.ClebschSchemeChirality.direction"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.orbitStep": [
+      "RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.positive_generatedOrbit": [
+      "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.sameIntrinsicComponent": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.columnAdjacent"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock_card": [
+      "RelativeConicArcs.ClebschSchemeChirality.NeighborIndex",
+      "RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple_semantics": [
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeBlock",
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple",
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_fourth_power": [
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeBlock",
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.sheetExchange_swaps_sheets": [
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeTriple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.triple_card": [
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.triple_list_nodup": [
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.triple_range_complete": [
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.unorderedChiralityCharacter_unique": [
+      "RelativeConicArcs.ClebschGateway.twoSheetCharacter_eq_of_ker_eq"
+    ],
+    "RelativeConicArcs.ClebschSchemeChirality.vectorSub": [
+      "RelativeConicArcs.ClebschSchemeChirality.SchemeVector"
+    ],
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": [
       "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
     ],
@@ -8702,6 +8864,32 @@
       "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndex",
       "RelativeConicArcs.Examples.Q11Coding.directionsOfIndex"
     ],
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary": [
+      "RelativeConicArcs.Certificate.Vec",
+      "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.AffinePointCode",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.Edge",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.Incident",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.IsPerfectMatching",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.Matching",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.Vertex",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.allPerfectMatchings",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchonMatching",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchonMatchings",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchonPoint",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchonPointCodes",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchon_concurrences",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchon_matchings_are_complement",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.invariantTotal",
+      "RelativeConicArcs.Examples.Q11BrianchonPetersen.rawChordLine",
+      "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndex",
+      "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
+      "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
+      "RelativeConicArcs.Examples.Q11Coding.directionsOfIndex",
+      "RelativeConicArcs.Examples.Q11Coding.pairSupport",
+      "RelativeConicArcs.Examples.Q11Coding.projectiveVec",
+      "RelativeConicArcs.Examples.Q11Coding.witnessVec"
+    ],
     "RelativeConicArcs.Examples.Q11Coding.brianchon_rawLeaderSupports": [
       "RelativeConicArcs.Examples.Q11BrianchonPetersen.brianchonMatching",
       "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndex",
@@ -8864,6 +9052,16 @@
       "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
       "RelativeConicArcs.Examples.Q11Coding.witness_small_independent"
     ],
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets": [
+      "RelativeConicArcs.Certificate.Vec",
+      "RelativeConicArcs.CodingBridge.SyndromeDistanceExactly",
+      "RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight",
+      "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_allTriples",
+      "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples",
+      "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples",
+      "RelativeConicArcs.Examples.Q11Coding.supportChirality_partition",
+      "RelativeConicArcs.Examples.Q11Coding.witnessVec"
+    ],
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leader_count_twenty": [
       "RelativeConicArcs.Certificate.Vec",
       "RelativeConicArcs.CodingBridge.CodimThreeMDSColumns.ambient_finrank",
@@ -9023,6 +9221,9 @@
       "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance",
       "RelativeConicArcs.Examples.Q11Coding.witnessVec"
     ],
+    "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples": [
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
+    ],
     "RelativeConicArcs.Examples.Q11Coding.no_nonzero_quadratic_vanishing": [
       "RelativeConicArcs.Examples.Q11Coding.quadraticEvaluationMatrix",
       "RelativeConicArcs.Examples.Q11Coding.quadraticEvaluation_det_ne_zero"
@@ -9083,6 +9284,9 @@
     ],
     "RelativeConicArcs.Examples.Q11Coding.pairSupport.eq_1": [
       "RelativeConicArcs.Examples.Q11Coding.pairSupport"
+    ],
+    "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples": [
+      "RelativeConicArcs.ClebschSchemeChirality.triple"
     ],
     "RelativeConicArcs.Examples.Q11Coding.projectiveSyndromePoint": [
       "RelativeConicArcs.Certificate.Vec",
@@ -9174,6 +9378,19 @@
     ],
     "RelativeConicArcs.Examples.Q11Coding.secant_index_spectrum": [
       "RelativeConicArcs.Examples.Q11Coding.directionsOfIndex"
+    ],
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange": [
+      "RelativeConicArcs.ClebschSchemeChirality.generatedOrbit",
+      "RelativeConicArcs.ClebschSchemeChirality.negative_generatedOrbit",
+      "RelativeConicArcs.ClebschSchemeChirality.positive_generatedOrbit",
+      "RelativeConicArcs.ClebschSchemeChirality.sheetExchangeBlock",
+      "RelativeConicArcs.ClebschSchemeChirality.triple",
+      "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples",
+      "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples"
+    ],
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_partition": [
+      "RelativeConicArcs.Examples.Q11Coding.negativeSupportTriples",
+      "RelativeConicArcs.Examples.Q11Coding.positiveSupportTriples"
     ],
     "RelativeConicArcs.Examples.Q11Coding.syndromeLeaderSupports_two_eq_raw": [
       "RelativeConicArcs.Certificate.Vec",
@@ -13022,46 +13239,6 @@
       "RelativeConicArcs.requiredLocus",
       "RelativeConicArcs.uncovered"
     ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.casesOn": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.recOn": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.mk",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.rec",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
-    "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
-      "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
-      "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
-    ],
     "RelativeConicArcs.SupportOrientationCommutant.OddCosetIncidence": [
       "RelativeConicArcs.SupportOrientationCover.A5",
       "RelativeConicArcs.SupportOrientationCover.Letter",
@@ -13131,7 +13308,6 @@
       "RelativeConicArcs.SupportOrientationCover.Letter"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
       "RelativeConicArcs.SupportOrientationCommutant.PreservesOddLattice",
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
       "RelativeConicArcs.SupportOrientationCommutant.ZsqrtFiveOperators",
@@ -13142,8 +13318,6 @@
       "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator": [
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting",
-      "RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting.schur_galois_descent",
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
       "RelativeConicArcs.SupportOrientationCommutant.adjoinGoldenOperator",
       "RelativeConicArcs.SupportOrientationCommutant.oddA5ActionMatrix",
@@ -13151,7 +13325,9 @@
       "RelativeConicArcs.SupportOrientationCommutant.rationalGoldenOperator",
       "RelativeConicArcs.SupportOrientationCommutant.rationalGoldenOperator_commutes_oddA5Action",
       "RelativeConicArcs.SupportOrientationCover.A5",
-      "RelativeConicArcs.SupportOrientationCover.Letter"
+      "RelativeConicArcs.SupportOrientationCover.Letter",
+      "RelativeConicArcs.SupportOrientationCover.firstOrbitalRepresentative",
+      "RelativeConicArcs.SupportOrientationCover.rotationA5"
     ],
     "RelativeConicArcs.SupportOrientationCommutant.rationalCommutant": [
       "RelativeConicArcs.SupportOrientationCommutant.RationalOddOperator",
