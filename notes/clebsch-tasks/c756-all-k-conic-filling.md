@@ -171,6 +171,18 @@ of 11 are nonsquares.  The rank-two Gram identity
 \(B_{ij}=a_i^{\mathsf T}Ma_j/2\), connects this diagonal skew to the
 off-diagonal entries of \(\mathcal Z\).
 
+In the aligned branch, normalize line normals as
+\(\alpha_i=\alpha_0u_i\) with \(N(u_i)=1\) and common nonsquare
+\(N(\alpha_i)=\nu\).  Then
+\(B_{ij}=\nu(u_i/u_j+u_j/u_i)/2\).  The conic is an offset norm circle
+\(N(x-\xi)=d\); passant offsets satisfy
+\(s_i^2-4d\nu\in(\mathbf F_{53}^*)^2\), and every internal-node character
+has the explicit numerator recorded in the aligned common-torus report.
+The exact surviving freedom is the displacement \(\xi\) between the star
+centroid and conic center.  It eliminates exactly as the rank-two Laurent
+code \(s_i-c_i=\eta u_i+\eta^qu_i^{-1}\); the conic scale eliminates through
+the common values \(s_i^2-p_i^2\).
+
 ## What is already uniform
 
 - Even \(q\) is impossible because the nucleus is never covered.
@@ -186,12 +198,11 @@ off-diagonal entries of \(\mathcal Z\).
 
 ## Next action
 
-Attack the aligned anisotropic case \(K\sim C\) first, where covariance and
-the conic restriction share the same torus.  Insert the eleven passant-line
-equations into \(\nabla\mathcal Z=0\) together with the nonzero separator
-Hessian.  If it fails, continue only through the finite nonaligned trace
-\(-10,-14\) and seven split rows.  Do not rerun a generic quartic character
-bound or cross the exact degree-16 mask boundary.
+In the aligned branch, combine the rank-two Laurent compatibility minors for
+\(s_i-c_i\) with \(\nabla\mathcal Z=0\), solve for the two offset coordinates
+from two rows, and insert the result into the explicit internal-node
+numerators.  Do not set \(\xi=0\), run generic 11-variable elimination,
+rerun a quartic character bound, or cross the degree-16 mask boundary.
 
 ## Stop rules
 
@@ -248,6 +259,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-ej-antipodal-fibres.md`;
 - `notes/2026-08-09-c756-ej2-torus-contraction.md`;
 - `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`;
+- `notes/2026-08-09-c756-aligned-common-torus.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
