@@ -3,8 +3,9 @@
 **Lane:** `clebsch`
 
 **Status:** active; R0 interface frozen and the R2 Steinberg hard gate has a
-positive tilting-filtration proof, both awaiting specialist challenge; R1
-actual finite-group Hom exhaustiveness is next
+positive tilting-filtration proof; the universal R1 finite-group Hom theorem
+is false at `q=9`, where an explicit catalecticant `L(2,0)` copy is missing
+from its list; replace R1 by the three detector-specific linear-Hom facts
 
 ## Objective
 
@@ -30,6 +31,8 @@ Current mathematical memos:
 - `notes/2026-08-09-c895-preclassification-interface.md`;
 - `notes/2026-08-09-c895-steinberg-source-hom.md`;
 - `notes/2026-08-09-c895-finite-hom-matrix-specification.md`.
+- `notes/2026-08-09-c895-q9-extra-hom-and-repair.md` and its exact
+  script/JSON falsifier.
 
 ## Exposition boundary
 

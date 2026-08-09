@@ -2,7 +2,8 @@
 
 **Date:** 2026-08-09  
 **Task:** C895  
-**Status:** R1 coefficient system specified; Lucas exhaustiveness open
+**Status:** R1 coefficient system specified; proposed Lucas exhaustiveness
+falsified at `q=9` by the extra `L(2,0)` catalecticant copy
 
 ## Objective
 
@@ -177,12 +178,14 @@ Their tensor-flip sign is `(-1)^(sum delta_j)`.  Therefore the proposed
 
 Substitution in (H4)--(H5) verifies that every (H6) is a finite-group map.
 Linear independence follows from their distinct leading monomial tensors.
-These are the easy directions.  The remaining theorem is that they span the
-kernel of the complete system.
+These are the easy directions.  They do not span the kernel of the complete
+system: the `q=9` calculation in
+`notes/2026-08-09-c895-q9-extra-hom-and-repair.md` exhibits an additional
+`L(2,0)` map.
 
-## Exact open factorization
+## Failed factorization and retained diagnostic
 
-The spanning proof must account for facts hidden by the current manuscript:
+The failed spanning claim overlooked facts hidden by the current manuscript:
 
 1. the target indices `0<=r,s<=d` do not form a rectangular product of
    independent base-`p` digit ranges;
@@ -193,8 +196,8 @@ The spanning proof must account for facts hidden by the current manuscript:
 4. a solution could a priori have support outside
    `L(d) tensor L(d)` inside `W tensor W`.
 
-A sufficient proof is a digit induction that orders the variables by the
-most significant non-socle digit and shows:
+A proof of a corrected full-socle theorem would need a digit induction that
+orders the variables by the most significant non-socle digit and shows:
 
 - every nonzero carry/borrow state has a pivot row in (H5), so its variables
   vanish or reduce to a lower state;
@@ -203,9 +206,9 @@ most significant non-socle digit and shows:
 - the two weight aliases meet in one boundary block whose `N=0` and
   `N=q-1` rows have no extra kernel.
 
-Only after these three assertions are displayed may Lucas's congruence be
-used to identify the zero-state block with the tensor product of one-digit
-matrices.  Proving those pivot statements is the remaining R1 hard gate.
+The `q=9` extra kernel shows that the proposed nonzero-state pivot assertion
+is false.  C895 therefore retains (H4)--(H5) as a diagnostic but replaces the
+universal R1 theorem by detector-specific Hom statements.
 
 ## Falsification order
 
