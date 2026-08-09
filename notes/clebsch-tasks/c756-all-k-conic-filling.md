@@ -154,6 +154,13 @@ residual pair antipodal.  Triple fibres pass through the centroid and are
 zeros of the covariance quadratic, hence there are at most two per arc point:
 \(D_3(P)\le2\) and \(32\le D_2(P)\le34\).
 
+Over the quadratic closure, nonsingular covariance has a torus-balanced
+normal form: \(\Lambda(U^aV^b)=0\) for \(a\ne b\) and
+\(\Lambda((UV)^r)=2/\binom{2r}{r}\).  The eleven generator contractions are
+the critical equations of one rank-two weighted constant-term polynomial
+\(\mathcal Z\); every off-diagonal Hessian entry is nonzero by the degree-9
+separators.  Split versus anisotropic covariance is now a descent question.
+
 ## What is already uniform
 
 - Even \(q\) is impossible because the nucleus is never covered.
@@ -169,12 +176,12 @@ zeros of the covariance quadratic, hence there are at most two per arc point:
 
 ## Next action
 
-Split the nonsingular covariance into its anisotropic and split square
-classes, using the antipodal residual identity.  Contract the eleven
-degree-10 star-ideal generators in each normal form and seek a forced
-singularity or a conflict with the passant/internal discriminants.  Stop if
-the contractions are only centroid/pair-budget tautologies or if degree
-\(\Theta(q)\) returns; do not cross the exact degree-16 mask boundary.
+Insert the fixed-conic line discriminants into the split and anisotropic
+forms of the torus-normalized partition function \(\mathcal Z\).  Seek a
+square-class invariant of its rank-two Gram or nonzero separator Hessian that
+conflicts with eleven passants and 55 internal nodes.  Do not run generic
+11-variable elimination without the rank-two carrier, and do not cross the
+exact degree-16 mask boundary.
 
 ## Stop rules
 
@@ -229,6 +236,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-defect-two-star-near-transversal.md`;
 - `notes/2026-08-09-c756-tt-star-moment-collapse.md`;
 - `notes/2026-08-09-c756-ej-antipodal-fibres.md`;
+- `notes/2026-08-09-c756-ej2-torus-contraction.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
