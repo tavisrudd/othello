@@ -41,7 +41,7 @@ for the proof.
 | B | Normalizing a fixed matching edge converts the remaining matching to a permutation of the cyclic square group, and fixed-edge triple determinants make it a complete mapping | `2026-08-01-c756-saturated-matching-attack.md`, §§1–2 | direct determinant calculation; referee should check normalization at \(q=3\) and that every denominator is nonzero |
 | C | If \(q\equiv1\pmod4\), no such complete mapping exists because the square group has even order | same report, Proposition 1 | one-line group-sum obstruction; no computation or external theorem |
 | D | If \(q\equiv3\pmod4\), Segre's lemma of tangents forces all resultant signs to cohere, so the matching permutation is an automorphism of the Paley tournament induced on the nonzero squares | `2026-08-01-c756-segre-tangent-coherence.md`, Proposition 1 | human proof; load-bearing classical input is Segre's lemma.  Consolidation must state its hypotheses and fix tangent-function scalings explicitly |
-| E | The signed matching satisfies two fixed matrix equations; a primitive-character noncollision statement implies that every such local Paley automorphism is \(s\mapsto c s^{p^j}\) | `2026-08-01-c756-paley-bispectral-reduction.md`, §§1–4, especially one-block rigidity | linear algebra plus multiplicative Fourier transform; audit the inverse convention and the passage from a faithful character to equality of field elements |
+| E | Every automorphism of the Paley tournament induced on \(S\) commutes with its single signed adjacency operator \(B\); primitive-character noncollision plus the Frobenius-Sidon property implies that it is \(s\mapsto c s^{p^j}\) | `2026-08-01-c756-paley-bispectral-reduction.md`, §4, one-block rigidity, plus the primitive-collision report | linear algebra plus multiplicative Fourier transform; the second matrix \(C\), anticommutator, and skew square-root machinery are not needed in the final proof |
 | F | For conductor \(m=(p^n-1)/2\), equality of the relevant primitive Jacobi values occurs exactly along Frobenius orbits | `2026-08-01-c756-primitive-jacobi-collisions.md`, §§1–3 | new human proof using the Gauss/Jacobi product and Stickelberger valuations; highest referee-risk step.  Recheck the base-\(p\) half-carry lemma for composite \(m\), imprimitive competitors, and \(n=1\) edge cases |
 | G | Every nonidentity Frobenius exponent \(j>0\) contradicts a coset character-sum bound | `2026-08-01-c756-segre-tangent-coherence.md`, Proposition 2 | human proof.  The subgroup-size lower bound is elementary; the three-support-point multiplicative Weil bound is standard but needs a precise citation and a clean statement covering all characters in the expansion |
 | H | In the scalar branch, a genus-one character sum and Hasse leave \(q\in\{3,7,11\}\); the scalar constructions realize those values.  The covering condition then removes \(q=3,7\), and \(q=11\) is the Clebsch hexagon | `2026-08-01-c756-saturated-matching-attack.md`, Proposition 2 and its endgame | human proof with standard Hasse input; reproduce the small-field endpoint and existence checks directly in the paper rather than citing a certificate |
@@ -86,6 +86,46 @@ The \(q=3\) two-point case is degenerate and unique.
 
 This endpoint table should be checked inline in the consolidated proof.  It
 needs neither a new search nor a certificate.
+
+### 1.2 Hidden master theorem: the local Paley automorphism group
+
+The hard arithmetic step proves a standalone graph theorem.  Let
+\(q=p^n\equiv3\pmod4\), let \(P(q)\) be the Paley tournament, and let
+\(S=(\mathbb F_q^*)^2\), the out-neighbourhood of \(0\).  Then
+\[
+ \operatorname{Aut}(P(q)[S])
+ =
+ \{\,s\mapsto c s^{p^j}:c\in S,\ 0\le j<n\,\}
+ \cong S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p).
+\]
+The \(q=3\) singleton case is interpreted trivially.
+
+The forward inclusion has a three-lemma proof:
+
+1. a local tournament automorphism commutes with the signed adjacency
+   convolution \(B\), so it carries a faithful character into the eigenspace
+   with the same eigenvalue;
+2. the primitive-Jacobi collision theorem says that this eigenspace is exactly
+   the span of the Frobenius conjugates;
+3. those Frobenius exponents are Sidon modulo \((q-1)/2\), and the pullback of
+   a character has pointwise modulus one, so its Fourier support has one term.
+
+Faithfulness then gives \(s\mapsto c s^{p^j}\).  The reverse inclusion is
+immediate from
+\(\chi(c(t-s)^{p^j})=\chi(t-s)\).
+
+Equivalently, every automorphism of the tournament induced on the
+out-neighbours of a vertex extends uniquely to the semilinear automorphism
+\(x\mapsto c x^{p^j}\) of the full Paley tournament fixing that vertex.
+This local-to-global extension form is the cleanest conceptual statement.
+
+This theorem uses neither resultants, complete mappings, Segre coherence,
+general position, nor covering.  Those ingredients are only the geometric
+pipeline that manufactures a local Paley automorphism and then restricts its
+semilinear parameters.  The theorem is therefore the most transferable output
+of C756.  It is not yet novelty-cleared: the earlier audit screened neighboring
+Paley work but was not a focused predecessor audit for this exact automorphism
+group.
 
 ## 2. Proof-trust risks
 
@@ -189,12 +229,14 @@ version-of-record citation audit.
 
 The highest-value next pass is therefore bounded and nonexploratory:
 
-1. consolidate Steps A0–H and the endpoint orbit check into a single
-   theorem-proof document;
-2. independently line-audit the primitive-Jacobi lemma and extension-field
+1. extract the local Paley automorphism theorem as the central three-lemma
+   engine and run a focused exact-statement predecessor audit;
+2. consolidate Steps A0–H and the endpoint orbit check into a single
+   theorem-proof document using that engine;
+3. independently line-audit the primitive-Jacobi lemma and extension-field
    conventions;
-3. attach exact primary citations for Segre, Stickelberger, Weil, and Hasse;
-4. only if those checks pass, allocate a separate unnumbered companion-paper
+4. attach exact primary citations for Segre, Stickelberger, Weil, and Hasse;
+5. only if those checks pass, allocate a separate unnumbered companion-paper
    task and begin manuscript work.
 
 Do not return to theta fitting or to a new finite-field sweep during this gate.
@@ -216,16 +258,27 @@ Jacobi blocks.  One faithful primitive block, together with the exact collision
 lemma, forces the entire local automorphism to be multiplication followed by
 Frobenius.
 
-**TT.**  The shortest publishable route is to suppress the historical sequence
-of conditional gates.  Present Segre coherence, one-block rigidity, primitive
-Jacobi collision, and the Weil/Hasse endgame as one forward proof.  Keep the
-Gaussian/Pfaffian obstruction and other superseded partial closures out of the
-main theorem.
+**TT.**  The archive hid its best reusable theorem inside the matching proof:
+the exact automorphism group of the Paley first subconstituent.  Lead the hard
+part with the single operator \(B\), one faithful eigenspace, the exact Jacobi
+collision class, and the Sidon/unit-modulus argument.  The second operator
+\(C\), anticommutator, skew square root, simple-spectrum branch, and
+Gaussian/Pfaffian obstruction are discovery scaffolding, not final proof.
+
+The resulting paper has a clean two-layer spine: first a standalone
+local-to-global Paley rigidity theorem; then an exterior-arc application in which elementary
+matching reduction, Segre coherence, coset Weil, and scalar Hasse each appear
+once.  Whether the Paley theorem should lead the title is a novelty decision,
+not yet a mathematical one.
 
 ## 6. Mystery ledger
 
 | mystery | status | exact gap / owner |
 |---|---|---|
+| Is the local Paley automorphism theorem genuinely new? | not settled | run an exact-statement predecessor and forward-citation audit before using it in a title or abstract |
+| Do local automorphisms extend to the full Paley tournament? | settled positive and uniquely | the classified map extends as \(x\mapsto c x^{p^j}\); distinct parameters act distinctly on \(S\) |
+| Does the local Paley theorem require the matching, resultant, or covering hypotheses? | settled negative | its proof uses only \(BP=PB\), one primitive collision class, Sidon, and pointwise modulus one |
+| Is the bispectral anticommutator needed in the final proof? | settled negative | retain only the single Paley convolution \(B\); archive \(C,K\), simple-spectrum, and Pfaffian branches |
 | Is covering genuinely needed for the headline classification? | settled negative | the extremal exterior-arc condition already gives saturation; covering is needed only to discard \(q=3,7\) |
 | Are the \(q=7\) and \(q=11\) extremal exterior arcs unique up to the conic stabilizer? | settled positive | the admissible scalar pairs are inverse under the stabilizer map \(x\mapsto x^{-1}\) |
 | Does the saturated-exterior theorem depend on finite enumeration? | settled negative | Steps A–H are human proofs; certificates are corroboration only |

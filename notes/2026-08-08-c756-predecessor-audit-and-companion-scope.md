@@ -235,6 +235,7 @@ marked boundary.
 | No even-\(q\) filling | proved | clean uniform obstruction |
 | all-\(k\) chord-moment LP bound | proved | first general quantitative theorem |
 | spare-passant saturation dichotomy | proved | structural spine separating generic and two saturated types |
+| \(\operatorname{Aut}(P(q)[S])=S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p)\) for the Paley first subconstituent | proved for every \(q\equiv3\pmod4\) by one primitive eigenspace | most transferable engine; exact-statement novelty audit still required |
 | extremal exterior-arc classification: \((q+1)/2\) exterior points occur only at \(q=3,7,11\), with one conic-stabilizer orbit in each field | proved for every odd prime power | **headline theorem**, stated without the covering condition |
 | saturated-external filling corollary: only the \(q=11\) Clebsch hexagon covers | proved for every odd prime power | reconnects the headline to conic-filling |
 | Droms lower bound and equality-to-internal-exterior-arc bridge | prior bound + proved bridge | intrinsic formulation of the remaining saturated-internal problem |
@@ -252,7 +253,10 @@ the saturated-*internal* type.
 
 ## 5. Recommended paper shape
 
-**Working title:** _Exterior arcs of conics and saturated conic-filling
+**Working title if the local Paley theorem passes its focused novelty gate:**
+_Local-to-global rigidity in Paley tournaments and exterior arcs of conics_.
+
+**Fallback title:** _Exterior arcs of conics and saturated conic-filling
 configurations_.
 
 **Series position:** an unnumbered specialist companion to the four fixed
@@ -266,16 +270,21 @@ classification fit that readership.  _Discrete Mathematics_ is the natural
 backup.  This is a credible specialist paper, not the A+/general-classification
 paper that the full C756 theorem would have supported.
 
-Recommended spine:
+Recommended compressed spine:
 
-1. established exterior-set terminology and the filling/covering dictionary;
-2. all-\(k\) LP bound, even-field obstruction, and saturation dichotomy;
-3. complete extremal exterior-arc orbit classification, with the
-   complete-mapping and primitive-Jacobi rigidity proof as the headline, then
-   the Clebsch filling statement as a covering corollary;
-4. passant-code equality as the internal interface, with attribution boundary;
-5. Baer-subline and external-line-holonomy exclusions;
+1. exact automorphism group of the Paley first subconstituent, proved from one
+   primitive eigenspace, the Jacobi collision theorem, and the Sidon argument;
+2. established exterior-set terminology and the extremal-arc-to-matching
+   reduction;
+3. Segre coherence, the semilinear parameter exclusions, the exterior-arc
+   orbit classification, and the Clebsch covering corollary;
+4. all-\(k\) LP bound, even-field obstruction, and saturation dichotomy;
+5. passant-code equality, Baer-subline exclusion, and line holonomy as the
+   internal interface;
 6. bounded local-graph evidence and two explicit open problems.
+
+The anticommutator, second Paley matrix, simple-spectrum route, and
+Gaussian/Pfaffian obstruction are not part of this spine.
 
 Do not reproduce the twenty-nine-pass negative-method catalogue.  Include only
 negative results that explain a theorem boundary or prevent a misleading

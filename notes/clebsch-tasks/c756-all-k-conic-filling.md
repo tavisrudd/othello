@@ -134,13 +134,31 @@ remaining release risk is proof integration: the chain is split across four repo
 and the new primitive-Jacobi collision lemma is the highest-risk referee target.  See
 `notes/2026-08-08-c756-saturated-external-proof-trust-map.md`.
 
-**Next-session entry (superseding the one above):** consolidate the extremal
-exterior-arc orbit classification and its Clebsch covering corollary into one
-theorem-proof document, independently line-audit the primitive-Jacobi
-half-carry argument and all extension-field conventions, and attach precise primary
-citations for Segre's lemma, Stickelberger, the three-point multiplicative Weil bound,
-and Hasse.  If and only if that bounded gate passes, allocate a separate unnumbered
-companion-paper task.  Do not reopen theta fitting or run another field sweep.
+**TT compression (2026-08-08):** the hard step already proves the standalone
+local Paley theorem
+\[
+ \operatorname{Aut}(P(q)[S])
+ =S\rtimes\operatorname{Gal}(\mathbb F_q/\mathbb F_p)
+ \qquad(q\equiv3\pmod4),
+\]
+with no matching, resultant, arc, or covering hypothesis.  Its shortest proof
+uses only the signed adjacency convolution \(B\), the primitive-Jacobi
+Frobenius collision class, and the Sidon/unit-modulus one-block argument.
+Equivalently, every automorphism of a Paley out-neighbourhood extends uniquely
+to a semilinear automorphism of the full tournament fixing the base vertex.
+The second matrix, anticommutator, skew square root, simple-spectrum branch,
+and Gaussian/Pfaffian obstruction are superseded proof-discovery scaffolding.
+This is the most transferable C756 theorem but is not yet novelty-cleared by
+an exact-statement Paley-subconstituent audit.
+
+**Next-session entry (superseding the one above):** extract the local Paley
+automorphism theorem as a three-lemma engine and run its focused predecessor
+audit; then consolidate the exterior-arc orbit classification and Clebsch
+covering corollary around it.  Independently line-audit the primitive-Jacobi
+half-carry argument and attach precise primary citations for Segre's lemma,
+Stickelberger, the three-point multiplicative Weil bound, and Hasse.  If and
+only if those bounded gates pass, allocate a separate unnumbered companion-paper
+task.  Do not reopen theta fitting or run another field sweep.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
