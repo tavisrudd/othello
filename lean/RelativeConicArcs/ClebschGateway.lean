@@ -36,12 +36,14 @@ variable [Fintype P] [Fintype L] [DecidableEq P] [DecidableEq L]
 noncomputable abbrev deepTransform (A : Finset P) : Finset P :=
   distanceThreeDirections (L := L) A
 
+omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
 /-- Membership in the deep transform of a point set: a point belongs to it exactly when it lies
 outside the set and is covered by no secant of the set. -/
 @[simp] theorem mem_deepTransform {A : Finset P} {x : P} :
     x ∈ deepTransform (L := L) A ↔ x ∉ A ∧ ¬Covered (L := L) A x :=
   mem_distanceThreeDirections
 
+omit [DecidableEq L] [Configuration.ProjectivePlane P L] in
 /-- A deep direction is exactly a fresh one-column arc extension. -/
 theorem oneColumnArcExtension_iff_mem_deepTransform {A : Finset P}
     (hA : Arc (L := L) A) {x : P} :
@@ -68,6 +70,7 @@ def appendPoint (p : ι → PlanePoint K) (x : PlanePoint K) : Option ι → Pla
   | none => x
   | some i => p i
 
+omit [DecidableEq K] [DecidableEq ι] in
 /-- Appending a point outside the image of an injective indexed family preserves injectivity. -/
 theorem appendPoint_injective (p : ι → PlanePoint K) (x : PlanePoint K)
     (hp : Function.Injective p) (hx : x ∉ Finset.univ.image p) :
@@ -88,6 +91,7 @@ theorem appendPoint_injective (p : ι → PlanePoint K) (x : PlanePoint K)
       | some j =>
           exact congrArg some (hp hij)
 
+omit [DecidableEq K] [DecidableEq ι] in
 /-- The image of an appended indexed family is the old image with the new point inserted. -/
 theorem image_appendPoint (p : ι → PlanePoint K) (x : PlanePoint K) :
     Finset.univ.image (appendPoint p x) = insert x (Finset.univ.image p) := by
@@ -104,6 +108,7 @@ theorem image_appendPoint (p : ι → PlanePoint K) (x : PlanePoint K) :
     · obtain ⟨i, _hi, rfl⟩ := Finset.mem_image.mp hy
       exact Finset.mem_image.mpr ⟨some i, Finset.mem_univ _, rfl⟩
 
+omit [DecidableEq ι] in
 /-- An injectively indexed projective arc with at least three columns supplies the transparent
 `[n,n-3,≥4]` parity-check package on any chosen projective representatives. -/
 theorem codimThreeMDSColumns_of_arc (p : ι → PlanePoint K)
@@ -195,6 +200,7 @@ variable {K : Type*} [Field K] [Fintype K] [DecidableEq K]
 noncomputable local instance : Fintype (Conic.Point K) := Fintype.ofFinite _
 noncomputable local instance : DecidableEq (Conic.Point K) := Classical.decEq _
 
+omit [Fintype K] in
 private theorem gateway_normalized_rep (p : Conic.Point K) :
     (∃ y z : K, ∃ hn : (![1, y, z] : Vec K) ≠ 0,
       Projectivization.mk K ![1, y, z] hn = p) ∨

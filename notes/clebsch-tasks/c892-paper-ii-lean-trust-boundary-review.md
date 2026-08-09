@@ -9,6 +9,18 @@ prior **MAJOR / NO-GO** verdict is the acceptance baseline, not a closeout.
 C892 now owns the Paper II Lean, manuscript, verification, export and
 standalone-release repairs needed to reach the numbered-series formal standard.
 
+The first remediation tranche is validated and included in the next scoped
+C892 commit.  A 2026-08-08 independent
+sub-review found `admit` and commented-import escapes plus a premature exact-37
+interface claim.  The two verifier escapes now have durable regressions, and
+the interface list is explicitly an incomplete lower bound.  Seven direct
+gateway/projective reverse importers, all four Paper II gates, the exact axiom
+audit, the complete authoritative release verifier, and the deterministic PDF
+build are green.  The broad `ProjectiveCap` aggregate remains independently
+blocked by the pre-existing arithmetic goal in `CompleteCapLowerBound`; the
+Paper II closure and direct affected importers do not depend on that failed
+aggregate build.
+
 ## Objective
 
 Review the complete Lean surface for *Quadratic trade rigidity and cubic
@@ -98,3 +110,24 @@ C892 began as an independent audit of the post-C856/C860 surface.  The user has
 now assigned its complete remediation to the same item.  C577 retains the
 publication decision; C892 must return a theorem-complete, fully pinned and
 synchronized candidate before C577 can resume it.
+
+## Active remediation sequence
+
+1. Repair and adversarially test the mechanical trust boundary: exact unique
+   Lean-terminal identity, complete repository-local import closure, source
+   policy, manuscript-build inputs, displayed fingerprint digest, the
+   `CapGame` dependency regression, warning-clean gateway elaboration, and
+   contradictory verification prose.
+2. Freeze one paper-facing Lean declaration for every theorem-like statement,
+   every mathematical remark, and each exact narrative census or uniqueness
+   assertion omitted by the current statement extractor.  The declarations
+   must state the manuscript objects and quantifiers, not merely package a
+   conclusion-bearing hypothesis or cite an ingredient theorem.
+3. Prove that complete interface, add every terminal to an exact paper-level
+   gate and trust registry, and require a clean axiom transcript with only the
+   foundational allowlist.
+4. Rebuild the manuscript and release artifact, export the complete formal
+   area, synchronize the standalone paper and formal companion through the
+   guarded exporters, and replay both downstream gates without publishing.
+5. Close only after an independent referee pass, `ej`+`tt`, mystery ledger,
+   and final standalone verification all return green.

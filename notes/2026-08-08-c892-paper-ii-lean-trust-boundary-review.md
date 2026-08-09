@@ -312,3 +312,56 @@ bridge lemmas.
 - A distinct substantial Lean task must own M1; folding it into a fingerprint
   repair would hide the real proof scope.
 - C892 remains review-only and makes no repair or publication decision.
+
+## Reopened remediation record
+
+The preceding report is the immutable audit baseline.  By explicit user
+instruction later on 2026-08-08, C892 was reopened and its scope widened from
+review-only to complete remediation; the final bullet above records the old
+scope and no longer controls the task.
+
+The first remediation tranche removes the unused game import and duplicate
+axiom row, follows all repository-local Lean imports, scans the resulting
+closure for admitted or kernel-bypass mechanisms, pins the manuscript checker
+and paper Nix inputs, verifies the displayed fingerprint digest, and tests
+these boundaries adversarially from the authoritative metadata entry point.
+It also reconciles the README gate list, fixed-line evidence row and actual
+manuscript build command, and removes the six `ClebschGateway` unused-section
+warnings with explicit `omit` annotations.  The intended local closure is now
+sixty-one files, including five `ProjectiveCap` files and no `CapGame` file.
+
+M1 and M6 remain open.  An initial 37-row lower-bound interface inventory is
+recorded in `2026-08-08-c892-paper-ii-formal-interface-freeze.md`; it is not a
+completed sentence-level assertion audit or a frozen terminal count.  C892
+cannot close on the mechanical tranche alone.
+
+## Referee sub-review of the remediation tranche
+
+An independent read-only sub-review on 2026-08-08 returned **MAJOR / NO-GO**
+for the uncommitted tranche.  It found two verifier escapes and one design
+overclaim:
+
+1. the source policy rejected `sorry` but accepted the Lean tactic `admit`;
+2. the closure walker silently skipped a valid project-local import carrying
+   a trailing line comment; and
+3. the interface note called thirty-seven names an exact binding freeze even
+   though it did not type the remark clauses or audit mathematical assertions
+   sentence by sentence.
+
+The first two findings are repaired in the authoritative worktree and have
+durable negative regressions in `verification/check_release_boundary.py`.
+The import walker now removes Lean comments and strings before parsing and
+fails closed on unsupported import syntax.  The third finding is repaired by
+reclassifying the interface document as an incomplete lower-bound inventory,
+expanding the Tate-depth obligations, and removing every exact-count claim
+until the sentence-level audit is complete.
+
+The post-repair validation is green for `ClebschGateway`, its five direct
+reverse importers, `ClebschSchemeChirality`, `Sym2ConicBridgeGame`, the four
+Paper II gates, the exact fifty-four-terminal axiom audit, every certificate
+and independent replay, and the deterministic warning-free forty-three-page
+PDF.  The complete authoritative run ended in
+`clebsch factorization release: CHECK OK`.  A deliberately broader
+`ProjectiveCap` aggregate build stopped at the clean pre-existing
+`CompleteCapLowerBound.lean` arithmetic goal; this is outside the Paper II
+closure and does not invalidate the scoped reverse-import result.

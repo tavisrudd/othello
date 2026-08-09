@@ -3197,7 +3197,8 @@ Balanced sheets and cubic orientation
 Fixed-line ambiguity and Chow rigidity
 & invariant-space dimensions, subgroup normalizers, unique block systems,
   and radial translation
-& none; the coalescence-point square rank is outside the theorem \\
+& structural Lean gate for the radial-translation implications; the
+  coalescence-point square rank is outside the theorem \\
 Six-profile reconstruction
 & subgroup marks, orbit--stabilizer, and the three-ray lemmas
 & profile rows and replay; decorated-parent bijection \\
@@ -3223,8 +3224,8 @@ python3 verification/verify_release.py
 It checks the statement identity and all admitted checksum manifests, runs
 the admitted primary checks and independent replays, elaborates the
 Paper-II-structural, arithmetic-gluing, Hilbert-symmetry, and
-hyperplane-square Lean gates, and rebuilds this manuscript through the
-repository Makefile.
+hyperplane-square Lean gates, and rebuilds this manuscript with the pinned
+manuscript Nix environment and build checker.
 
 The reproducible review source is pinned by
 \begin{center}
@@ -3232,12 +3233,13 @@ The reproducible review source is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{b6c8f171d9da8849fd1628371a23c2604a15fd}\\[-2pt]
-\texttt{104ed555e0e7fd4508bee79998}.
+\small\texttt{689109dd2800cc2aafab240b4beedcc4fd1d7c}\\[-2pt]
+\texttt{3d1cc032c393eb93df6f9fbe5c}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
-extractor, paper Makefile, verification documentation, the admitted evidence
-manifests, command vectors, Lean gates, runner, trust manifest, and
+extractor, paper Nix inputs, manuscript checker, adversarial boundary checker,
+verification documentation, the admitted evidence manifests, command vectors,
+Lean gates and their full project-owned import closure, runner, trust manifest, and
 environment: Python 3.13.12, Lean
 4.32.0-rc1, and Mathlib revision
 \begin{center}

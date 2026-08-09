@@ -21,9 +21,9 @@ partition, the exact command and evidence-path allowlist, safe checksum
 targets, every recorded digest, and the primary and independent replays. It
 then elaborates the Paper II structural, arithmetic-gluing, Hilbert-symmetry,
 and hyperplane-square Lean gates, runs the generic first-wall and shared-radial
-replays, and builds the paper through
-the repository Makefile, enforces the gate's axiom allowlist, and rejects
-manuscript warnings.
+replays, and builds the paper with the pinned manuscript Nix environment and
+`check_manuscript_build.py`, enforces the exact gate-terminal identity and
+axiom allowlist, and rejects manuscript warnings.
 
 The structural gate follows the manuscript spine from projective pullback
 through the Lucas finite-root calculation, outer-parity detector and affine
@@ -32,8 +32,9 @@ Steinberg/Hermite, tilting/socle, or Dickson--Giudici classifications. The
 corresponding claims therefore carry both `lean` and `classical-input` modes.
 
 `evidence_fingerprint.json` pins the normalized manuscript and statement
-identity, statement extractor, paper README and Makefile, this documentation,
-the guarded-Lean launcher and project-owned Lean import closure,
+identity, statement extractor, paper README, Nix inputs, manuscript checker,
+adversarial boundary checker, this documentation, the guarded-Lean launcher,
+and the complete project-owned Lean import closure,
 the admitted checksum manifests, exact command vectors, verification runner, trust
 manifest, Python version, Lean toolchain, Mathlib revision, Nix lock, and
 expected success lines. The expected metadata line is derived from the
@@ -49,6 +50,10 @@ after an intentional verification-surface change:
 python3 verification/verify_release.py \
   --update-fingerprint --metadata-only
 ```
+
+That update also rewrites the displayed fingerprint digest in the manuscript
+and refreshes the derived statement-identity source hash. A following ordinary
+metadata run must pass before the refreshed files are accepted.
 
 From the repository root, run:
 

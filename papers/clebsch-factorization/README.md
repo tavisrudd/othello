@@ -43,6 +43,8 @@ excludes every other matching orbit without a field census.
 - `verification/evidence_fingerprint.json`: normalized review-source and
   environment fingerprint.
 - `verification/verify_release.py`: aggregate local verification entry point.
+- `verification/check_release_boundary.py`: adversarial checks for the pinned
+  source, terminal, and displayed-digest boundary.
 
 ## Verification
 
@@ -55,7 +57,8 @@ python3 verification/verify_release.py
 The aggregate checks statement identity, exact trust-ledger coverage,
 checksum manifests, primary certificates and independent replays, the
 generic first-wall and shared-radial bundles, the arithmetic-gluing and
-hyperplane-square Lean gates, the PDF build, and a manuscript-warning scan.
+hyperplane-square, Hilbert-symmetry, and Paper-II-structural Lean gates, the
+PDF build, and a manuscript-warning scan.
 The formal and computational trust boundaries are described in the manuscript
 and in `verification/README.md`.
 

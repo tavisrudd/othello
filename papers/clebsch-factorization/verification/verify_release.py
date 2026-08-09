@@ -41,7 +41,10 @@ LEAN_GATE_COMMANDS = [
         "RelativeConicArcs/Gates/ClebschPaperIIStructural.lean",
     ],
 ]
-LEAN_GATE_TERMINALS = 55
+LEAN_GATE_TERMINALS = 54
+EXPECTED_LEAN_TERMINAL_IDENTITY_SHA256 = (
+    "52cceb4acebec14579edbe39639e732106ea2a97a91b0a8c83f527f6465e45aa"
+)
 ALLOWED_LEAN_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 EXPECTED_EVIDENCE = {
     "matching-module": {
@@ -420,16 +423,25 @@ def check_manuscript_source_lint(source_path: Path) -> None:
 
 
 def check_lean_axiom_audit(wrapper_output: str) -> None:
-    audit = wrapper_output
-    dependency_blocks = re.findall(
-        r"'[^']+' depends on axioms: \[(.*?)\]", audit, re.DOTALL
+    matches = re.findall(
+        r"'([^']+)' (does not depend on any axioms|depends on axioms: \[(.*?)\])",
+        wrapper_output,
+        re.DOTALL,
     )
-    axiom_free = re.findall(r"'[^']+' does not depend on any axioms", audit)
-    if len(dependency_blocks) + len(axiom_free) != LEAN_GATE_TERMINALS:
+    declarations = [declaration for declaration, _, _ in matches]
+    if len(declarations) != LEAN_GATE_TERMINALS:
         raise ValueError("Lean axiom audit terminal count changed")
+    if len(set(declarations)) != len(declarations):
+        raise ValueError("Lean axiom audit contains duplicate terminals")
+    identity = sha256_bytes(
+        "".join(f"{name}\n" for name in sorted(declarations)).encode("utf-8")
+    )
+    if identity != EXPECTED_LEAN_TERMINAL_IDENTITY_SHA256:
+        raise ValueError("Lean axiom audit terminal identity changed")
     found_axioms = {
         name
-        for block in dependency_blocks
+        for _, status, block in matches
+        if status.startswith("depends on axioms:")
         for name in re.findall(r"[A-Za-z][A-Za-z0-9_.]*", block)
     }
     unexpected = found_axioms - ALLOWED_LEAN_AXIOMS
@@ -466,6 +478,49 @@ def normalized_identity_sha256(path: Path) -> str:
     )
 
 
+def displayed_fingerprint_sha256(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    pattern = re.compile(
+        r"Its SHA-256 digest is\s*\\begin\{center\}\s*"
+        r"\\small\\texttt\{([0-9a-f]{38})\}\\\\\[-2pt\]\s*"
+        r"\\texttt\{([0-9a-f]{26})\}"
+    )
+    matches = pattern.findall(text)
+    if len(matches) != 1:
+        raise ValueError("expected one displayed evidence-fingerprint digest")
+    return "".join(matches[0])
+
+
+def check_displayed_fingerprint_sha256(paper_root: Path) -> None:
+    expected = sha256(paper_root / FINGERPRINT)
+    actual = displayed_fingerprint_sha256(
+        paper_root / "clebsch_factorization.tex"
+    )
+    if actual != expected:
+        raise ValueError("displayed evidence-fingerprint digest is stale")
+    print("displayed evidence-fingerprint digest: CHECK OK")
+
+
+def update_displayed_fingerprint_sha256(paper_root: Path) -> None:
+    source = paper_root / "clebsch_factorization.tex"
+    digest = sha256(paper_root / FINGERPRINT)
+    pattern = re.compile(
+        r"(Its SHA-256 digest is\s*\\begin\{center\}\s*"
+        r"\\small\\texttt\{)[0-9a-f]{38}"
+        r"(\}\\\\\[-2pt\]\s*\\texttt\{)[0-9a-f]{26}(\})"
+    )
+    updated, replacements = pattern.subn(
+        lambda match: (
+            match.group(1) + digest[:38] + match.group(2)
+            + digest[38:] + match.group(3)
+        ),
+        source.read_text(encoding="utf-8"),
+    )
+    if replacements != 1:
+        raise ValueError("expected one displayed evidence-fingerprint digest")
+    source.write_text(updated, encoding="utf-8")
+
+
 def lean_import_closure(repo_root: Path, entry: Path) -> dict[str, str]:
     lean_root = repo_root / "lean"
     pending = [entry]
@@ -475,18 +530,110 @@ def lean_import_closure(repo_root: Path, entry: Path) -> dict[str, str]:
         if path in seen:
             continue
         seen.add(path)
-        for line in path.read_text(encoding="utf-8").splitlines():
-            if not line.startswith("import RelativeConicArcs."):
+        source = lean_code_without_comments_or_strings(
+            path.read_text(encoding="utf-8")
+        )
+        for line in source.splitlines():
+            match = re.fullmatch(r"\s*import\s+(\S+)\s*", line)
+            if match is None:
+                if re.match(r"\s*import\b", line):
+                    raise ValueError(
+                        f"unsupported Lean import syntax in {path}: {line.strip()}"
+                    )
                 continue
-            module = line.removeprefix("import ").strip()
+            module = match.group(1)
             imported = lean_root / (module.replace(".", "/") + ".lean")
-            if not imported.is_file():
-                raise ValueError(f"missing project-owned Lean import: {module}")
-            pending.append(imported)
+            if imported.is_file():
+                pending.append(imported)
+            elif module != "Mathlib" and not module.startswith("Mathlib."):
+                raise ValueError(f"external Lean import is not pinned: {module}")
     return {
         str(path.relative_to(repo_root)): sha256(path)
         for path in sorted(seen)
     }
+
+
+def lean_code_without_comments_or_strings(text: str) -> str:
+    result: list[str] = []
+    index = 0
+    block_depth = 0
+    in_string = False
+    while index < len(text):
+        if block_depth:
+            if text.startswith("/-", index):
+                block_depth += 1
+                index += 2
+            elif text.startswith("-/", index):
+                block_depth -= 1
+                index += 2
+            else:
+                result.append("\n" if text[index] == "\n" else " ")
+                index += 1
+            continue
+        if in_string:
+            if text[index] == "\\" and index + 1 < len(text):
+                result.extend("  ")
+                index += 2
+            else:
+                if text[index] == '"':
+                    in_string = False
+                result.append("\n" if text[index] == "\n" else " ")
+                index += 1
+            continue
+        if text.startswith("--", index):
+            newline = text.find("\n", index)
+            if newline == -1:
+                result.extend(" " * (len(text) - index))
+                break
+            result.extend(" " * (newline - index))
+            index = newline
+        elif text.startswith("/-", index):
+            block_depth = 1
+            result.extend("  ")
+            index += 2
+        elif text[index] == '"':
+            in_string = True
+            result.append(" ")
+            index += 1
+        else:
+            result.append(text[index])
+            index += 1
+    if block_depth or in_string:
+        raise ValueError("unterminated Lean comment or string in audited closure")
+    return "".join(result)
+
+
+def check_lean_source_policy(closure: dict[str, str], repo_root: Path) -> None:
+    modifiers = (
+        r"(?:@\[[^\]]*\]\s*|"
+        r"(?:private|protected|noncomputable|nonrec|scoped|local)\s+)*"
+    )
+    forbidden_declaration = re.compile(
+        rf"^\s*{modifiers}(?:axiom|opaque|partial|unsafe)\b", re.MULTILINE
+    )
+    bypass = re.compile(
+        r"\bnative_decide\b"
+        r"|\brun_tac\b"
+        r"|\bdecide\b[^\n]*\+\s*native"
+        r"|\bnative\s*:=\s*true"
+        r"|(?:@\[|attribute\s*\[)[^\]]*(?:implemented_by|extern)"
+        r"|\bofReduceBool\b"
+        r"|\bset_option\s+(?:debug\.skipKernelTC|allowUnsafeReducibility"
+        r"|debug\.byAsSorry|debug\.proofAsSorry"
+        r"|debug\.terminalTacticsAsSorry)",
+        re.MULTILINE,
+    )
+    for relative in closure:
+        text = lean_code_without_comments_or_strings(
+            (repo_root / relative).read_text(encoding="utf-8")
+        )
+        if (
+            re.search(r"\b(?:sorry|admit)\b", text)
+            or forbidden_declaration.search(text)
+        ):
+            raise ValueError(f"Lean source policy rejected {relative}")
+        if bypass.search(text):
+            raise ValueError(f"Lean kernel-bypass policy rejected {relative}")
 
 
 def metadata_success_line(statement_count: int, evidence_count: int) -> str:
@@ -522,6 +669,25 @@ def build_fingerprint(
         "lake_manifest": repo_root / "lean" / "lake-manifest.json",
         "nix_lock": repo_root / "lean" / "flake.lock",
     }
+    gate_paths = (
+        repo_root / "lean" / "RelativeConicArcs" / "Gates"
+        / "ClebschArithmeticGluing.lean",
+        repo_root / "lean" / "RelativeConicArcs" / "Gates"
+        / "ClebschHilbertSymmetry.lean",
+        repo_root / "lean" / "RelativeConicArcs" / "Gates"
+        / "ClebschHyperplaneSquare.lean",
+        repo_root / "lean" / "RelativeConicArcs" / "Gates"
+        / "ClebschPaperIIStructural.lean",
+    )
+    gate_closures = {
+        path.name: lean_import_closure(repo_root, path) for path in gate_paths
+    }
+    combined_closure = {
+        relative: digest
+        for closure in gate_closures.values()
+        for relative, digest in closure.items()
+    }
+    check_lean_source_policy(combined_closure, repo_root)
     return {
         "schema": "clebsch-factorization-evidence-fingerprint-v2",
         "python": platform.python_version(),
@@ -552,6 +718,14 @@ def build_fingerprint(
             "statement_extractor": sha256(
                 paper_root / "verification" / "extract_statement_identity.py"
             ),
+            "release_boundary_checker": sha256(
+                paper_root / "verification" / "check_release_boundary.py"
+            ),
+            "manuscript_checker": sha256(
+                paper_root / "verification" / "check_manuscript_build.py"
+            ),
+            "paper_flake_nix": sha256(paper_root / "flake.nix"),
+            "paper_flake_lock": sha256(paper_root / "flake.lock"),
             "paper_readme": sha256(paper_root / "README.md"),
             "verification_readme": sha256(
                 paper_root / "verification" / "README.md"
@@ -560,33 +734,11 @@ def build_fingerprint(
                 paper_root / "verification" / "evidence" / "manifest.py"
             ),
             "lean_gates": {
-                path.name: sha256(path)
-                for path in (
-                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                    / "ClebschArithmeticGluing.lean",
-                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                    / "ClebschHilbertSymmetry.lean",
-                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                    / "ClebschHyperplaneSquare.lean",
-                    repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                    / "ClebschPaperIIStructural.lean",
-                )
+                path.name: sha256(path) for path in gate_paths
             },
             "guarded_lean": sha256(repo_root / "lean" / "scripts" / "guarded-lean"),
         },
-        "project_lean_import_closure_sha256": {
-            path.name: lean_import_closure(repo_root, path)
-            for path in (
-                repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                / "ClebschArithmeticGluing.lean",
-                repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                / "ClebschHilbertSymmetry.lean",
-                repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                / "ClebschHyperplaneSquare.lean",
-                repo_root / "lean" / "RelativeConicArcs" / "Gates"
-                / "ClebschPaperIIStructural.lean",
-            )
-        },
+        "project_lean_import_closure_sha256": gate_closures,
         "lean_gates": [
             {"command": command, "cwd": "."}
             for command in LEAN_GATE_COMMANDS
@@ -617,6 +769,14 @@ def check_standalone_fingerprint(
         "statement_extractor": sha256(
             paper_root / "verification" / "extract_statement_identity.py"
         ),
+        "release_boundary_checker": sha256(
+            paper_root / "verification" / "check_release_boundary.py"
+        ),
+        "manuscript_checker": sha256(
+            paper_root / "verification" / "check_manuscript_build.py"
+        ),
+        "paper_flake_nix": sha256(paper_root / "flake.nix"),
+        "paper_flake_lock": sha256(paper_root / "flake.lock"),
         "paper_readme": sha256(paper_root / "README.md"),
         "verification_readme": sha256(paper_root / "verification" / "README.md"),
         "evidence_manifest_tool": sha256(
@@ -695,6 +855,17 @@ def main() -> int:
         if args.update_fingerprint:
             fingerprint_path.write_text(fingerprint_rendered, encoding="utf-8")
             print(f"wrote {fingerprint_path}")
+            update_displayed_fingerprint_sha256(paper_root)
+            run(
+                [
+                    "python3",
+                    str(
+                        paper_root / "verification"
+                        / "extract_statement_identity.py"
+                    ),
+                ],
+                paper_root,
+            )
         elif (
             not fingerprint_path.exists()
             or fingerprint_path.read_text(encoding="utf-8") != fingerprint_rendered
@@ -705,6 +876,22 @@ def main() -> int:
             raise ValueError("cannot refresh the formal fingerprint without its Lean companion")
         fingerprint = json.loads(fingerprint_path.read_text(encoding="utf-8"))
         check_standalone_fingerprint(fingerprint, paper_root, manifest)
+    check_displayed_fingerprint_sha256(paper_root)
+    if formal_available:
+        run(
+            [
+                "python3",
+                str(
+                    paper_root / "verification"
+                    / "check_release_boundary.py"
+                ),
+                "--repo-root",
+                str(repo_root),
+                "--paper-root",
+                str(paper_root),
+            ],
+            paper_root,
+        )
     if manifest.get("schema") != EXPECTED_SCHEMA:
         raise ValueError("unexpected trust-manifest schema")
     if manifest.get("statement_identity") != EXPECTED_IDENTITY:
