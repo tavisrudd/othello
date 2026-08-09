@@ -441,8 +441,9 @@ global eigenvalue \(\lambda\), so its signed indicator extended by zero is a
 global eigenvector. \(\square\)
 
 There is also an exact binary shadow.  Reducing (15) modulo two makes
-\(\bar K\) an idempotent, and reducing the two rational spectral projectors
-(their denominator \(q\) is odd) gives
+\(\bar K\) an idempotent.  Reducing the two rational spectral projectors
+(their denominator \(q\) is odd), and using that complementary idempotent
+ranks sum to \(|\mathcal I|\), gives
 \[
  \operatorname{rank}_{\mathbb F_2}\bar K=
  \begin{cases}
@@ -450,11 +451,60 @@ There is also an exact binary shadow.  Reducing (15) modulo two makes
  (q^2-1)/4,&q\equiv3\pmod4.
  \end{cases} \tag{22}
 \]
-At \(q=13\), the support of \(\bar K\) is exactly the elliptic-scheme fusion
-\(A_9+A_{10}+A_{12}\).  Thus it is the canonical projector
-\(e_K\) from C817 onto Paper IV's \([78,36,12]_2\) passant code.  This is a
-real structural bridge, not a new code construction: the general passant-code
-dimension formula and the elliptic association scheme are already prior art.
+
+> **Theorem 18 (uniform passant-code projector bridge).**  Let \(A\) be the
+> binary incidence matrix between internal points and passant lines, with the
+> columns identified with internal points by conic polarity, and put
+> \(C_q=\ker_{\mathbb F_2}A\).  Then
+> \[
+> \bar K=A^2+\left(\frac{q+1}{2}\bmod2\right)I. \tag{23}
+> \]
+> Using the known general dimension formula
+> \(\dim C_q=(q-1)^2/4\), this says
+> \[
+> C_q=\begin{cases}
+> \operatorname{im}\bar K,&q\equiv1\pmod4,\\
+> \ker\bar K,&q\equiv3\pmod4.
+> \end{cases} \tag{24}
+> \]
+> In particular the unsigned support of every equality vector in Theorem 17
+> is a minimum-boundary word of the general passant code.
+
+**Proof.**  For distinct internal points \(P,Q\), the \((P,Q)\)-entry of
+\(A^2\) counts their common incident passant lines after polarity.  The two
+polar lines meet in the pole of \(PQ\), so this parity is one exactly when
+\(PQ\) is external--exactly the support condition for \(\bar K_{PQ}=1\).
+On the diagonal, \(A^2\) is the passant-line valency \((q+1)/2\), proving
+(23).  If \(q\equiv1\pmod4\), every \(x\in C_q\) satisfies
+\(\bar Kx=(A^2+I)x=x\), so \(C_q\subseteq\operatorname{im}\bar K\); (22)
+and the known code dimension make this equality.  If
+\(q\equiv3\pmod4\), \(C_q\subseteq\ker A^2=\ker\bar K\), and the same
+dimension comparison proves equality.  Reducing a signed equality vector
+modulo two gives its support indicator; its eigenvalue is odd in the first
+case and even in the second, so (24) puts that indicator in \(C_q\).
+\(\square\)
+
+At \(q=13\), (23) is exactly the elliptic-scheme identity
+\[
+ \bar K=A_9+A_{10}+A_{12}=I+A_0^2=e_K,
+\]
+the canonical projector from C817 onto Paper IV's \([78,36,12]_2\) passant
+code.  The apparent \(78,36\) coincidence is therefore the visible member of
+the uniform bridge (23)--(24), not a field-specific accident.
+
+There is a second real shadow.  Put \(F=I-E_\lambda\).  After normalizing its
+diagonal, \(F\) is the Gram matrix of a unit-norm tight frame of
+\(q(q-1)/2\) vectors in dimension \((q^2-1)/4\), with inner products
+\[
+ 0,\qquad \pm\frac{2}{q+1}. \tag{25}
+\]
+Theorem 17 says that every linear circuit of this frame has size at least
+\((q+3)/2\).  Equality holds precisely when the circuit vectors, after
+switching, form a regular simplex: their Gram matrix has diagonal one and
+off-diagonal \(-2/(q+1)=-1/(n-1)\).  Thus the saturated-internal problem is
+also the classification of smallest regular-simplex circuits in an explicit
+orthobiangular tight frame.  This is potentially a cleaner spinoff interface
+for frame/design theory, but its novelty has not yet been audited.
 
 ### Pre-emption check against the recorded infinite tower
 
@@ -507,8 +557,9 @@ displayed above. No finite range is promoted to a uniform nonexistence claim.
 
 The independent signed-fusion checker constructs the full integer matrix in
 the canonical prime-field orientation and verifies (15) entry by entry for
-\(q=5,7,11,13,17,19,23\), together with (22).  It checks 121,396 matrix
-entries.  At \(q=13\) it independently computes the conic invariant \(\rho\)
+\(q=5,7,11,13,17,19,23\), together with (22).  It checks 121,396 entries of
+(15) and another 121,396 entries of the independent incidence identity (23),
+including the general passant-code dimensions.  At \(q=13\) it independently computes the conic invariant \(\rho\)
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
 \(e_K=A_9+A_{10}+A_{12}\).
 
@@ -518,13 +569,14 @@ Replay from the repository root:
 python3 notes/2026-08-08-c756-signed-elliptic-fusion.py --check
 ```
 
-The checker is only a finite prime-field cross-check.  Theorems 16--17 and
-(22) have the independent uniform character-convolution proofs above.
+The checker is only a finite prime-field cross-check.  Theorems 16--18 and
+(22)--(24) have the independent uniform character-convolution and polarity
+proofs above; the general code dimension used in Theorem 18 is prior work.
 
 | signed-fusion artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-08-08-c756-signed-elliptic-fusion.py` | 5,900 | `793a08b154ec5fccb90b4e18cda1bfe7b5f4101d587cf9af961e8b301470a120` |
-| `2026-08-08-c756-signed-elliptic-fusion.json` | 2,995 | `1162c4990ca79c7e701e3dedd2b7d09cf92a3382a82396ace390fa196fd42eaa` |
+| `2026-08-08-c756-signed-elliptic-fusion.py` | 7,589 | `97ea9b562988f41c817041647ebc5155c8464d0c91eb9e025deab469c050fa1e` |
+| `2026-08-08-c756-signed-elliptic-fusion.json` | 4,121 | `41ffa4cfd08affbdc65ac7c83b56aba0977dbb63131af174f857890b38f69d99` |
 
 ## EJ + TT closeout
 
@@ -573,7 +625,11 @@ its torsion. Generic class-group counting is closed as a finisher.
 surprise is not a stronger eigenvalue bound--interlacing remains tight--but an
 exact equality problem: coherent systems are minimum-support vectors in a
 distinguished Frobenius-odd eigenspace.  The binary reduction then lands
-exactly on C817's \(q=13\) code projector.
+uniformly on the general passant code, as its projector or complementary
+projector according to \(q\bmod4\); C817's \(q=13\) projector is one exact
+member.  The complementary real projector gives an orthobiangular tight frame
+whose smallest possible circuits are regular simplices.  That frame-circuit
+formulation is the strongest new spinoff interface exposed by this pass.
 
 **TT5.**  The pre-emption check changes the positioning.  C756 already knew
 the Paley crown/eigenfunction reformulation, and the snapshot's pre-empted
@@ -605,6 +661,10 @@ a focused novelty audit.
 | Why did the signed orbital matrix have only two eigenvalues in every test? | settled uniformly | Theorem 16: it is the Frobenius-odd compression of Paley character convolution |
 | Is tight interlacing merely a failed bound? | settled negatively | Theorem 17: it is exactly the equality/minimum-support formulation of coherence |
 | Why do the numbers \(78\) and \(36\) match Paper IV? | settled exactly | at \(q=13\), \(\bar K=A_9+A_{10}+A_{12}=e_K\), the canonical projector onto the passant code |
+| Is the Paper IV bridge only a \(q=13\) coincidence? | settled negative | Theorem 18 identifies \(\bar K\) uniformly with \(A^2+((q+1)/2)I\) and hence with the general passant code projector or complement |
+| Is there a characteristic-zero object beyond the signed graph? | settled | the complementary spectral projector is an explicit orthobiangular unit-norm tight frame with angles \(0,\pm2/(q+1)\) |
+| What is coherence in that frame? | settled | a smallest possible linear circuit whose switched vectors form a regular simplex of size \((q+3)/2\) |
+| Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
 | Is this a new infinite binary code tower? | settled negative as a positioning claim | general conic-passant code dimensions and the elliptic scheme are prior art; the exceptional-root Taylor tower is different but already pre-empted |
 | Is the signed real fusion/support theorem itself new? | open novelty gate | targeted original-source and forward-citation audit; Hollmann--Xiang supplies the ambient scheme but the exact signed identity was not asserted in the inspected passages |
 | Can minimum-support \(\lambda\)-eigenvectors of \(K\) be classified? | open; now the sharpest equality gate | for \(q\equiv3\pmod4\), exclude equality beyond \(q=5\); for \(q\equiv1\pmod4\), combine equality with the remaining switching condition |
@@ -614,11 +674,11 @@ a focused novelty audit.
 
 ## Next action
 
-Classify equality in Theorem 17, equivalently minimum-support vectors in the
-relevant eigenspace of the signed elliptic fusion.  Use the Paley lift and the
-projective cross-ratio model as two exact presentations, with the
-line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
-novelty audit for the signed fusion identity and support theorem.  If equality
+Classify equality in Theorem 17, equivalently smallest regular-simplex circuits
+in the complementary orthobiangular frame.  Use the Paley lift, the projective
+cross-ratio model, and the binary passant-code word as three exact shadows,
+with the line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
+novelty audit for the signed fusion, support, and frame-circuit theorems.  If equality
 classification is as hard as the existing Paley stability problem, return to
 the composition-specific \(q\equiv1\pmod4\) 2-descent and masked Rédei route;
 do not market the binary reduction as a new infinite tower.

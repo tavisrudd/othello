@@ -1,16 +1,21 @@
 {
+  "binary_bridge": "K mod 2 = A_passant^2 + ((q+1)/2 mod 2) I",
   "cases": [
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 4,
       "eigenvalues": [
         -2,
         3
       ],
       "expected_binary_rank": 4,
+      "expected_passant_code_dimension": 4,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 100,
       "other_multiplicity": 6,
+      "passant_code_dimension": 4,
+      "passant_incidence_rank": 6,
       "q": 5,
       "relevant_eigenvalue": 3,
       "relevant_multiplicity": 4,
@@ -18,16 +23,20 @@
       "vertices": 10
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 12,
       "eigenvalues": [
         -4,
         3
       ],
       "expected_binary_rank": 12,
+      "expected_passant_code_dimension": 9,
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 441,
       "other_multiplicity": 12,
+      "passant_code_dimension": 9,
+      "passant_incidence_rank": 12,
       "q": 7,
       "relevant_eigenvalue": -4,
       "relevant_multiplicity": 9,
@@ -35,16 +44,20 @@
       "vertices": 21
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 30,
       "eigenvalues": [
         -6,
         5
       ],
       "expected_binary_rank": 30,
+      "expected_passant_code_dimension": 25,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 3025,
       "other_multiplicity": 30,
+      "passant_code_dimension": 25,
+      "passant_incidence_rank": 30,
       "q": 11,
       "relevant_eigenvalue": -6,
       "relevant_multiplicity": 25,
@@ -52,12 +65,14 @@
       "vertices": 55
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 36,
       "eigenvalues": [
         -6,
         7
       ],
       "expected_binary_rank": 36,
+      "expected_passant_code_dimension": 36,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 6084,
@@ -67,6 +82,8 @@
         10,
         12
       ],
+      "passant_code_dimension": 36,
+      "passant_incidence_rank": 42,
       "q": 13,
       "relevant_eigenvalue": 7,
       "relevant_multiplicity": 36,
@@ -74,16 +91,20 @@
       "vertices": 78
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 64,
       "eigenvalues": [
         -8,
         9
       ],
       "expected_binary_rank": 64,
+      "expected_passant_code_dimension": 64,
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 18496,
       "other_multiplicity": 72,
+      "passant_code_dimension": 64,
+      "passant_incidence_rank": 72,
       "q": 17,
       "relevant_eigenvalue": 9,
       "relevant_multiplicity": 64,
@@ -91,16 +112,20 @@
       "vertices": 136
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 90,
       "eigenvalues": [
         -10,
         9
       ],
       "expected_binary_rank": 90,
+      "expected_passant_code_dimension": 81,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 29241,
       "other_multiplicity": 90,
+      "passant_code_dimension": 81,
+      "passant_incidence_rank": 90,
       "q": 19,
       "relevant_eigenvalue": -10,
       "relevant_multiplicity": 81,
@@ -108,16 +133,20 @@
       "vertices": 171
     },
     {
+      "binary_bridge_failures": 0,
       "binary_rank": 132,
       "eigenvalues": [
         -12,
         11
       ],
       "expected_binary_rank": 132,
+      "expected_passant_code_dimension": 121,
       "identity_failures": 0,
       "least_nonsquare": 5,
       "matrix_entries_checked": 64009,
       "other_multiplicity": 132,
+      "passant_code_dimension": 121,
+      "passant_incidence_rank": 132,
       "q": 23,
       "relevant_eigenvalue": -12,
       "relevant_multiplicity": 121,
@@ -128,5 +157,5 @@
   "field_scope": "odd prime fields",
   "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",
   "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
-  "schema": "c756-signed-elliptic-fusion-v2"
+  "schema": "c756-signed-elliptic-fusion-v3"
 }

@@ -61,6 +61,36 @@ def binary_rank(matrix: list[list[int]]) -> int:
     return len(pivots)
 
 
+def passant_incidence(
+    q: int, d: int, points: list[tuple[int, int]]
+) -> list[list[int]]:
+    """Internal-point/passant-line incidence after identifying by polarity."""
+    projective = [(1, a, (a * a - d * b * b) % q) for a, b in points]
+    size = len(projective)
+    matrix = [[0] * size for _ in range(size)]
+    for i, (x, y, z) in enumerate(projective):
+        for j, (u, v, w) in enumerate(projective):
+            matrix[i][j] = int(i != j and (2 * y * v - x * w - z * u) % q == 0)
+    return matrix
+
+
+def verify_binary_bridge(
+    q: int, d: int, points: list[tuple[int, int]], fusion: list[list[int]]
+) -> tuple[int, int]:
+    incidence = passant_incidence(q, d, points)
+    size = len(points)
+    diagonal = ((q + 1) // 2) & 1
+    failures = 0
+    for i in range(size):
+        for j in range(size):
+            square = sum(incidence[i][k] * incidence[k][j] for k in range(size)) & 1
+            target = (fusion[i][j] & 1) ^ (diagonal if i == j else 0)
+            failures += square != target
+    if failures:
+        raise AssertionError(f"q={q}: {failures} entries violate the binary bridge")
+    return binary_rank(incidence), failures
+
+
 def q13_relation_support(
     d: int, points: list[tuple[int, int]], matrix: list[list[int]]
 ) -> list[int]:
@@ -104,6 +134,7 @@ def certify(q: int) -> dict[str, int | list[int]]:
         raise AssertionError(f"q={q}: nonconstant signed degree {degrees}")
     relevant = epsilon * (q + 1) // 2
     other = -epsilon * (q - 1) // 2
+    incidence_rank, bridge_failures = verify_binary_bridge(q, d, points, matrix)
     result: dict[str, int | list[int]] = {
         "q": q,
         "least_nonsquare": d,
@@ -119,9 +150,15 @@ def certify(q: int) -> dict[str, int | list[int]]:
         "expected_binary_rank": (
             (q - 1) ** 2 // 4 if q % 4 == 1 else (q * q - 1) // 4
         ),
+        "passant_incidence_rank": incidence_rank,
+        "passant_code_dimension": n - incidence_rank,
+        "expected_passant_code_dimension": (q - 1) ** 2 // 4,
+        "binary_bridge_failures": bridge_failures,
     }
     if result["binary_rank"] != result["expected_binary_rank"]:
         raise AssertionError(f"q={q}: unexpected binary rank")
+    if result["passant_code_dimension"] != result["expected_passant_code_dimension"]:
+        raise AssertionError(f"q={q}: unexpected passant-code dimension")
     if q == 13:
         result["paper_iv_support_relations"] = q13_relation_support(d, points, matrix)
     return result
@@ -129,10 +166,11 @@ def certify(q: int) -> dict[str, int | list[int]]:
 
 def certificate() -> dict[str, object]:
     return {
-        "schema": "c756-signed-elliptic-fusion-v2",
+        "schema": "c756-signed-elliptic-fusion-v3",
         "field_scope": "odd prime fields",
         "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
         "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",
+        "binary_bridge": "K mod 2 = A_passant^2 + ((q+1)/2 mod 2) I",
         "cases": [certify(q) for q in PRIMES],
     }
 

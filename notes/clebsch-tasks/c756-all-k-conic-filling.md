@@ -1037,9 +1037,14 @@ distinguished eigenspace has a sharp support bound \((q+3)/2\), and equality
 has exactly the signed F2 plus constant-holonomy pattern; for
 \(q\equiv3\pmod4\) this is equivalent to coherence. Thus the live proof gate
 is now classification of minimum-support eigenvectors of this signed elliptic
-fusion, not another field-by-field theta fit. At \(q=13\), reduction modulo
-two is exactly C817's projector
-\(A_9+A_{10}+A_{12}=e_K\) onto the \([78,36,12]_2\) passant code.
+fusion, not another field-by-field theta fit. Uniformly, if \(A\) is the
+binary passant/internal incidence operator, then
+\(\bar K=A^2+((q+1)/2\bmod2)I\), so the general passant code is the image or
+kernel of \(\bar K\) according to \(q\bmod4\). At \(q=13\), this is exactly
+C817's projector \(A_9+A_{10}+A_{12}=e_K\) onto the \([78,36,12]_2\) code.
+The complementary real projector is an orthobiangular tight frame with angles
+\(0,\pm2/(q+1)\); equality systems are precisely its smallest possible
+regular-simplex circuits. This is now the preferred classification interface.
 
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
@@ -1084,9 +1089,10 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: classify minimum-support eigenvectors of the signed elliptic
-fusion, while running a focused original-source/forward-citation audit for that exact
-identity and support theorem.  This closed-form operator satisfies the card's condition
+Highest-EV next action: classify the smallest regular-simplex circuits of the signed
+elliptic fusion's complementary tight frame, equivalently its minimum-support
+eigenvectors, while running a focused original-source/forward-citation audit for those
+exact identities.  This closed-form operator satisfies the card's condition
 for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
 certificate passes have met their stop rule and should not be repeated.  The historical
 coordinate routes below explain the obstruction and remain reusable inputs, not the live
