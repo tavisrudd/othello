@@ -204,7 +204,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 921",
+      "paper_location": "source line 919",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -362,7 +362,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 994",
+      "paper_location": "source line 992",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -495,7 +495,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1049",
+      "paper_location": "source line 1047",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -847,7 +847,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1182",
+      "paper_location": "source line 1180",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -934,7 +934,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1232",
+      "paper_location": "source line 1230",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1200,7 +1200,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1248",
+      "paper_location": "source line 1246",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1973,9 +1973,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "b6d9374b32ea8c319b03d14945ac1b976b9bf2cbc87c605ca5ccbd20de7b6066"
+    "sha256": "95ccf1ff32180fd806608002d69a912c5a1aae26a8fb5778d553a88b62803d83"
   },
-  "manuscript_sha256": "60a05c83cc16be2dc96a58f1536f744b8791ccd488321dc5f278e19e64ebc056",
+  "manuscript_sha256": "c86570c6d12567f41c2ecd6d8eb59f20caeb6dd32d292f6e84512bff47d2a8a8",
   "public_documents": [
     {
       "path": "README.md",
@@ -2015,7 +2015,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "13b0b4ba45f7abdef970750b5f0e3abc0e0f29699b00a4f5680223d209d0272c"
+    "sha256": "af197acf6b08e23b639ef932b362246a703d246e36bbe9c704a868d5fba1a9cb"
   },
   "verify_all": {
     "checker_output_certificate": {
