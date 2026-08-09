@@ -775,7 +775,7 @@ Full report: `notes/2026-07-31-c712-paper-iii-sub700-lean.md`.
 
 | task | state | next gate |
 |---|---|---|
-| [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | active; reviewed commutant, support-sheet and Brianchon proofs plus registry/prose repairs are staged in the authority with conditional referee GO; rigidity fact remains 48/51 while a foreign Lean owner blocks the build | build four authority targets, extract exact rigidity/orientation facts, commit, then export against finitegeom `e30f690`; resume theorem-completeness afterward |
+| [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | active; authority repair, exact 51-terminal rigidity and 24-terminal orientation facts, guarded replays, and exporter-only finitegeom adoption are complete at source `374d1c3e` and downstream `b871c10` | resume theorem-completeness, correspondence, distribution, and release closure; no export repair remains |
 | [C792 — Paper III exchange-rigidity integration](../clebsch-tasks/c792-paper-iii-exchange-rigidity-integration.md) | complete; repaired B-plus manuscript, final independent acceptance 96/100, aggregate gates, and standalone synchronization closed | none; C815 is the current Paper III route task |
 | [C799 — Paper III aligned-design Lean closure](../clebsch-tasks/c799-paper-iii-aligned-design-lean-closure.md) | complete at the normalized-core boundary; normalized cut classifier, symbolic third-point elimination, conditional overlap consistency, query-polynomial identity, determinant/switching transport, formal audits, and paper gate green | Ramsey existence, arbitrary finite-set normalization, and query-family cardinality remain human inputs; shared `AlignedTwoGraph` API is available to C815 and C823 |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained exchange and determinant identities, reconcile all Paper III formal maps onto one source closure, regenerate audits, and replay both gates |
@@ -847,6 +847,10 @@ the split-paper route without an explicit user decision.
 **C855 authority invariant.**  Shared Lean is edited only in
 `~/src/othello/lean`; finitegeom is exporter-only and never edited directly.
 The q11 package owns only package-private certificate material.
+
+The authority/export repair is complete: source `374d1c3e` supplies the exact
+rigidity and orientation facts, finitegeom adopts their sequential exporter
+deltas at `7309faa` and `b871c10`, and both final replays are zero-delta.
 
 Paper I and its companion *Computational strengthenings of Clebsch syndrome
 rigidity* form one warning-free, nineteen-row release surface with twenty-six

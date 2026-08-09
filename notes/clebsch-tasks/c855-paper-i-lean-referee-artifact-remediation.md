@@ -67,9 +67,10 @@ Reviewed downstream state `187bed8895fc62784caf2022d717b4daa37871ad`, q11 seal
 Shared Lean authority is `~/src/othello/lean`; finitegeom is exporter-only and
 is never edited directly.  Commits `5d9f53f` and `187bed8` are downstream
 states, not source commits.  Their reviewed proof content and the registry/prose
-repairs are staged in the authority with conditional referee GO.  Next gate:
-build the four targets, extract exact 51-terminal rigidity and orientation
-facts, commit the authority, then export against finitegeom base `e30f690`.
+repairs are committed in the authority at `2f2574c2`, with refreshed trust facts
+at `374d1c3e`.  Both guarded areas were exported from that immutable source and
+adopted sequentially in finitegeom at `7309faa` and `b871c10`; final exporter
+replays against `b871c10` are deterministic and zero-delta.
 
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)

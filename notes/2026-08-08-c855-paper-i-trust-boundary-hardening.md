@@ -83,13 +83,12 @@ comparison remains valid; fresh elaboration is explicitly a C855 gate.
 
 ## Remaining C855 boundary
 
-The highest-value next move is the clean guarded aggregate and receipt-bound
-release replay as soon as the foreign Lean owner exits.  After that, C855 still
-must prove `ClassicalOddA5ThreePlusThreeSplitting`, formalize the human/cited/
-certificate/trusted rows, adjudicate the remaining full-closure documentation
-debt, close the distribution boundary, perform independent rendered
-correspondence review, and synchronize/replay the standalone.  This packet does
-not weaken or reclassify any of those acceptance conditions.
+The guarded authority and exporter repair is complete at source `374d1c3e` and
+finitegeom `b871c10`.  The former
+`ClassicalOddA5ThreePlusThreeSplitting` obligation is retired by the
+unconditional rank-34 commutant theorem.  C855 still must close the remaining
+theorem-completeness rows, documentation and distribution boundaries, rendered
+correspondence review, and standalone synchronization/replay.
 
 ## Mystery ledger
 
