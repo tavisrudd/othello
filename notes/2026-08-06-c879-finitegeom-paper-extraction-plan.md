@@ -72,7 +72,7 @@ For Q11 the current declaration-level seam is:
 q11-certificates:
   TavisRuddFiniteGeom.Certificates.Q11.Model,
   TavisRuddFiniteGeom.Certificates.Q11.BrianchonPetersen,
-  and TavisRuddFiniteGeom.Certificates.Q11.A5PointOrbits.*
+  and TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.*
 Clebsch paper bridge:
   the proved local-model compatibility adapter and theorem transport
 finitegeom:
@@ -508,6 +508,9 @@ chunk is closed.
   invoke Lake directly or substitute a portfolio-wide target.
 - Keep one heavyweight build at a time and reuse trace-current shared artifacts.
 - Use detached guarded queue runs only for genuinely long, already-bounded gates.
+- Each certificate package exposes `nix run .#verify` as a read-only check/build
+  entry point.  Source generation is a separate `nix run .#regenerate` operation;
+  verification must never invoke it or modify tracked certificate sources.
 - After a failure, inspect the first diagnostic and change the target or source before
   retrying; never repeat an unchanged failed build.
 - Keep generated certificates downstream and opt-in; do not pull them into every
