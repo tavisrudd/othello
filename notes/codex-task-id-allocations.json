@@ -2969,8 +2969,17 @@
       "last": 896,
       "purpose": "Corrected universal finite-group socle theorem with carry and borrow states",
       "sequence": 330
+    },
+    {
+      "count": 1,
+      "first": 897,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 897,
+      "purpose": "Paper III reviewer identification, critic map, and reviewer-only reading dossier for human-proof and exposition cold reads",
+      "sequence": 331
     }
   ],
-  "next_id": 897,
+  "next_id": 898,
   "schema": "codex-task-id-allocations-v1"
 }
