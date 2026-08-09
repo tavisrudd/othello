@@ -124,6 +124,50 @@ def passant_incidence(
     return matrix
 
 
+def signed_passant_incidence(
+    q: int, d: int, points: list[tuple[int, int]], fusion: list[list[int]]
+) -> list[list[int]]:
+    """Sign each passant row so that its Gram matrix is m I-epsilon K."""
+    incidence = passant_incidence(q, d, points)
+    epsilon = chi(-1, q)
+    signed: list[list[int]] = []
+    for row in incidence:
+        support = [i for i, value in enumerate(row) if value]
+        if len(support) != (q + 1) // 2:
+            raise AssertionError(f"q={q}: unexpected passant row weight")
+        root = support[0]
+        signs = {root: 1}
+        for i in support[1:]:
+            signs[i] = -epsilon * fusion[root][i]
+        if any(
+            fusion[i][j] != -epsilon * signs[i] * signs[j]
+            for i in support
+            for j in support
+            if i != j
+        ):
+            raise AssertionError(f"q={q}: passant row is not anti-coherent")
+        signed.append([signs.get(i, 0) for i in range(len(points))])
+    return signed
+
+
+def verify_signed_passant_factorization(
+    q: int, d: int, points: list[tuple[int, int]], fusion: list[list[int]]
+) -> tuple[int, int, int]:
+    signed = signed_passant_incidence(q, d, points, fusion)
+    size = len(points)
+    m = (q + 1) // 2
+    epsilon = chi(-1, q)
+    failures = 0
+    for i in range(size):
+        for j in range(size):
+            gram = sum(signed[row][i] * signed[row][j] for row in range(size))
+            target = (m if i == j else 0) - epsilon * fusion[i][j]
+            failures += gram != target
+    if failures:
+        raise AssertionError(f"q={q}: {failures} signed factorization failures")
+    return m, modular_rank(signed, q), failures
+
+
 def verify_binary_bridge(
     q: int, d: int, points: list[tuple[int, int]], fusion: list[list[int]]
 ) -> tuple[int, int]:
@@ -185,6 +229,9 @@ def certify(q: int) -> dict[str, int | list[int]]:
     relevant = epsilon * (q + 1) // 2
     other = -epsilon * (q - 1) // 2
     incidence_rank, bridge_failures = verify_binary_bridge(q, d, points, matrix)
+    signed_row_weight, signed_rank, signed_failures = verify_signed_passant_factorization(
+        q, d, points, matrix
+    )
     characteristic_rank, dependency_support = characteristic_shadow(q, epsilon, matrix)
     result: dict[str, int | list[int]] = {
         "q": q,
@@ -205,6 +252,10 @@ def certify(q: int) -> dict[str, int | list[int]]:
         "passant_code_dimension": n - incidence_rank,
         "expected_passant_code_dimension": (q - 1) ** 2 // 4,
         "binary_bridge_failures": bridge_failures,
+        "signed_passant_row_weight": signed_row_weight,
+        "signed_passant_rank": signed_rank,
+        "expected_signed_passant_rank": (q * q - 1) // 4,
+        "signed_passant_factorization_failures": signed_failures,
         "characteristic_rank_of_2K_minus_epsilon_I": characteristic_rank,
         "observed_characteristic_rank_formula": (q * q - 1) // 8,
     }
@@ -212,6 +263,8 @@ def certify(q: int) -> dict[str, int | list[int]]:
         raise AssertionError(f"q={q}: unexpected binary rank")
     if result["passant_code_dimension"] != result["expected_passant_code_dimension"]:
         raise AssertionError(f"q={q}: unexpected passant-code dimension")
+    if result["signed_passant_rank"] != result["expected_signed_passant_rank"]:
+        raise AssertionError(f"q={q}: unexpected signed passant rank")
     if result["characteristic_rank_of_2K_minus_epsilon_I"] != result["observed_characteristic_rank_formula"]:
         raise AssertionError(f"q={q}: unexpected characteristic rank")
     if dependency_support is not None:
@@ -223,11 +276,12 @@ def certify(q: int) -> dict[str, int | list[int]]:
 
 def certificate() -> dict[str, object]:
     return {
-        "schema": "c756-signed-elliptic-fusion-v4",
+        "schema": "c756-signed-elliptic-fusion-v5",
         "field_scope": "odd prime fields",
         "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
         "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",
         "binary_bridge": "K mod 2 = A_passant^2 + ((q+1)/2 mod 2) I",
+        "signed_passant_factorization": "Z^T Z = (q+1)/2 I - chi_q(-1) K",
         "cases": [certify(q) for q in PRIMES],
     }
 

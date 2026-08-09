@@ -506,6 +506,38 @@ also the classification of smallest regular-simplex circuits in an explicit
 orthobiangular tight frame.  This is potentially a cleaner spinoff interface
 for frame/design theory, but its novelty has not yet been audited.
 
+> **Proposition 18.1 (integral passant square root).**  Let \(A\) be the
+> internal-point/passant-line incidence matrix used in Theorem 18, and put
+> \(m=(q+1)/2\).  The nonzero entries of \(A\) can be signed to give a
+> matrix \(Z\in\{0,\pm1\}^{\mathcal I\times\mathcal I}\) such that
+>
+> \[
+> |Z|=A,\qquad Z^{\mathsf T}Z=mI-\epsilon K. \tag{25a}
+> \]
+>
+> In particular \(Z\) has rank \((q^2-1)/4\), and its normalized columns
+> are exactly the complementary frame in (25).
+
+**Proof.**  A passant line contains \(m\) internal points.  Theorem 15 on
+three points of one such line gives signed triangle product \(-\epsilon\),
+so its complete \(K\)-subgraph is anti-coherent: after choosing one row
+sign arbitrarily there are signs \(z_{LP}\) with
+\(K_{PQ}=-\epsilon z_{LP}z_{LQ}\).  Use these signs as the nonzero row of
+\(Z\).  Every internal point lies on \(m\) passant lines.  Two distinct
+internal points lie on one common passant exactly when their join is
+passant, in which case the corresponding off-diagonal Gram entry is
+\(-\epsilon K_{PQ}\); otherwise it is zero.  This proves (25a) entrywise.
+Its right side is \(m\) times the normalized complementary projector, so
+the rank and frame assertions follow. \(\square\)
+
+Modulo two, (25a) is exactly the incidence square in (23).  Thus the real
+frame, the binary passant-code bridge, and the short integral eigenvectors
+are not three parallel coincidences: they are the real, binary, and row
+shadows of one signed incidence factorization.  In particular, the
+norm-\(m\), \(\{0,\pm1\}\)-valued vectors found in the complementary
+eigenspace are the signed rows of \(Z\), supported on the internal points of
+a passant line.
+
 > **Corollary 18.1 (forgetting, reconstruction, and maximality).**  Let
 > \(\{v_P:P\in\mathcal I\}\) be the normalized complementary frame and let
 > \(T\) be an equality support of size \(n=(q+3)/2\), with switching signs
@@ -569,6 +601,43 @@ summand in (28) is \(0\) or \(\pm1\), equality \(|s_R|=m\) holds exactly when
 all \(m\) edges to \(R\) are present and have the one switching pattern that
 extends (27).  The resulting \((m+1)\)-set is an equality support by Theorem
 17.  Uniqueness is Corollary 18.1. \(\square\)
+
+> **Corollary 19.1 (signed tangent reconstruction).**  Let
+> \(x=\sum_{P\in T}\eta_Pe_P\), and use the signed passant incidence matrix
+> \(Z\) from Proposition 18.1.  No passant line contains three points of
+> \(T\).  Exactly \(m\) passant lines contain one point of \(T\), and
+> \[
+> (Zx)_L=
+> \begin{cases}
+> 0,&|L\cap T|\in\{0,2\},\\
+> \pm1,&|L\cap T|=1.
+> \end{cases} \tag{29a}
+> \]
+> For every \(R\notin T\),
+> \[
+> \langle Zx,Ze_R\rangle=-\epsilon s_R,\qquad
+> \min_{\sigma=\pm1}\|Zx-\sigma Ze_R\|^2=2(m-|s_R|). \tag{29b}
+> \]
+> Thus \(R\) completes the seed if and only if
+> \(Zx=\pm Ze_R\).  Equivalently, the \(m\) singleton passant lines are the
+> passant pencil through \(R\), and their signed incidence labels agree
+> with one global choice of the missing sign.
+
+**Proof.**  Three seed points on one passant line would be simultaneously
+coherent by (27) and anti-coherent by the row signing in Proposition 18.1,
+which is impossible.  On a two-point intersection the two terms of \(Zx\)
+have product \(-1\), so they cancel.  Each of the \(\binom m2\) seed pairs
+lies on its unique passant secant.  The \(m\) points supply \(m^2\)
+point--passant incidences, of which \(2\binom m2=m(m-1)\) lie on these
+secants; the remaining \(m\) are distinct singleton lines.  This proves
+(29a).  Finally, (25a) gives
+\[
+\langle Zx,Ze_R\rangle
+=x^{\mathsf T}(mI-\epsilon K)e_R=-\epsilon s_R.
+\]
+Both vectors have squared norm \(m\): this is immediate for \(Ze_R\), while
+it follows for \(Zx\) from (27).  Equation (29b) and the last assertion now
+follow from Theorem 19. \(\square\)
 
 This is a smaller exact gate than classifying full supports: classify signed
 simplex seeds and prove that their completion scores avoid \(\pm m\).  Fixing
@@ -724,7 +793,11 @@ including the general passant-code dimensions.  At \(q=13\) it independently com
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
 \(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (35) in each tested prime
 field, verifies the seven ranks in (36), and checks the displayed weight-three
-and weight-four dependency witnesses.
+and weight-four dependency witnesses.  It now also signs every passant row,
+checks anti-coherence on its full support, and verifies all 121,396 entries
+of the integral factorization (25a).  This is a finite coordinate check of
+Proposition 18.1; the entrywise incidence proof is independent of the
+checker.
 
 Replay from the repository root:
 
@@ -738,8 +811,8 @@ proofs above; the general code dimension used in Theorem 18 is prior work.
 
 | signed-fusion artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-08-08-c756-signed-elliptic-fusion.py` | 9,791 | `8b722c7a16b6687e53d630388db59e5f8ac738b59d9a79dd5598f61b0e209f8c` |
-| `2026-08-08-c756-signed-elliptic-fusion.json` | 5,048 | `6cff1313d21998ea03e06e1f68ad5ec47b664979e7cd1acc61bacc24ad1075b8` |
+| `2026-08-08-c756-signed-elliptic-fusion.py` | 12,019 | `e797763d12f5e82259af454c3dafe466192f7d4d33211d65a72c7fe70f3d6f87` |
+| `2026-08-08-c756-signed-elliptic-fusion.json` | 6,260 | `48677bb9113366b6d0be0b0cb057ee00a7743c5cc3b9e6c8e48fdd6c6fa988c4` |
 
 ## EJ + TT closeout
 
@@ -843,6 +916,25 @@ alternate is a \(p\)-adic lift of the square-zero operator (35) that retains
 the \(\{\pm1\}\) coefficients; raw modular rank and distance have already
 failed.
 
+**EJ5.**  Paying that arithmetic bill produced the integral factorization
+\(Z^{\mathsf T}Z=mI-\epsilon K\).  It simultaneously explains the real
+frame, the binary incidence square, and the norm-\(m\) integral eigenvectors:
+the latter are already supplied by signed passant rows.  More importantly,
+it sends a coherent \(m\)-seed to a signed tangent vector with exactly \(m\)
+nonzero entries.  Completion is equality with one signed incidence column,
+so forgetting/reconstruction is now a concrete point--line statement rather
+than an abstract Gram condition.
+
+**TT7.**  The hostile reading remains necessary: unsigned concurrence of the
+\(m\) singleton passants only forces all external-join incidences.  It does
+not force the common switching sign; the line-plus-pole controls already show
+why triangle holonomy cannot be discarded.  Thus Proposition 18.1 is a
+genuine bounded-degree factorization, but not yet strict positivity of
+\(\Delta_R\).  The next finisher must classify **signed** tangent pencils (or
+prove coherent \(m\)-arcs do not exist), using polarity and classical
+arc/tangent structure before returning to a broader \(p\)-adic lattice
+attack.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -879,7 +971,11 @@ failed.
 | What remains after quantization? | open sharp gate | prove \(\Delta_R>0\) for every signed internal seed and every \(q>5\) |
 | Can total defect or parity force strict positivity? | settled negative | Corollary 20.1 gives an even defect and its exact total, but both permit an isolated zero |
 | Is the Schur-defect theorem itself a finisher? | settled negative | it is the exact PSD equality condition; new arithmetic input is still required |
-| What arithmetic input has the best chance? | open highest-EV gate | bounded-degree norm/SOS or factorization of \(\Delta_R/2\) after projective seed normalization |
+| Does the complementary frame have an integral geometric square root? | settled positively | Proposition 18.1: \(Z^{\mathsf T}Z=mI-\epsilon K\), with \(Z\) signed passant incidence |
+| What are the observed norm-\(m\) complementary-lattice vectors? | settled at the canonical layer | signed passant rows supply them uniformly; classification of all shortest vectors is not claimed |
+| What is one-point forgetting in point--line language? | settled | Corollary 19.1: a seed gives exactly \(m\) signed singleton passants, and completion is equality with one signed point column |
+| Does unsigned tangent concurrence force completion? | settled negative | it retains adjacency but loses the common switching sign; require signed column equality |
+| What arithmetic input now has the best chance? | open highest-EV gate | classify signed tangent pencils/coherent internal \(m\)-arcs after polarity |
 | What is the only serious alternate? | open fallback | a \(p\)-adic lift of \(2K-\epsilon I\) retaining signed coefficients, not raw modular distance |
 | Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
 | What explains \(\operatorname{rank}_{\mathbb F_q}(2K-\epsilon I)=(q^2-1)/8\)? | open arithmetic spinoff | exact only for the seven tested prime fields; likely a modular Paley/Smith calculation |
@@ -893,14 +989,15 @@ failed.
 
 ## Next action
 
-Projectively normalize a bounded seed fragment and test whether
-\(\Delta_R/2\) has a bounded-degree norm/SOS or factorization formula whose
-zero locus is classifiable.  Use the exact energy (29), the Paley lift, the
-cross-ratio model, and the binary passant-code word as exact shadows, with the
-line-plus-pole F2 cliques as rejecting controls.  Stop this route if every
-formula retains degree or support growing with \(m\); neither total defect,
-parity, larger PSD algebras, nor additional global moments can force strict
-positivity.  The sole alternate is a signed \(p\)-adic lift of (35).  In parallel, run the focused
+Use Proposition 18.1 and polarity to classify the coherent internal
+\(m\)-arcs and their \(m\) signed singleton passants.  First test whether the
+tangent-pole set lands in a known half-size arc/exterior-set class; retain the
+row signs, since unsigned concurrence is an exact false-positive boundary.
+The target is a theorem that the signed tangent vector cannot equal a point
+column for \(q>5\), or the stronger nonexistence of coherent \(m\)-arcs.
+If polarity does not enter a classifiable classical family, return to the
+signed \(p\)-adic lift of (35), now using \(Z\) as its integral model; do not
+return to global moments or larger PSD algebras.  In parallel, run the focused
 novelty audit for the signed fusion, support, and frame-circuit theorems.  If equality
 classification is as hard as the existing Paley stability problem, return to
 the composition-specific \(q\equiv1\pmod4\) 2-descent and masked Rédei route;

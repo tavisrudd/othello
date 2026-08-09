@@ -1062,6 +1062,22 @@ Every \(\Delta_R\) is even and the total defect is
 allow an isolated zero.  The Schur defect is therefore an exact equality
 certificate, not yet the arithmetic obstruction.
 
+The complementary projector now has an integral geometric square root.  If
+\(Z\) is the passant/internal incidence matrix with its canonical row
+switchings, then
+\[
+Z^{\mathsf T}Z=mI-\epsilon K.
+\]
+This unifies the real frame and binary incidence square.  A coherent
+\(m\)-seed is an internal \(m\)-arc; its signed line-sum vector \(Zx\) has
+exactly \(m\) nonzero entries, on the singleton passant lines.  It completes
+at \(R\) exactly when \(Zx=\pm Ze_R\): the singleton passants must form the
+passant pencil through \(R\), with one globally compatible sign.  Unsigned
+concurrence is insufficient because it loses triangle holonomy.  The live
+gate is consequently a signed tangent-pencil/coherent-\(m\)-arc
+classification, with the full proof and certificate in
+notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md.
+
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
 family and does not pre-empt the signed real identity. But the general binary
@@ -1105,12 +1121,15 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: projectively normalize a bounded seed fragment and seek
-a bounded-degree norm/SOS or factorization of \(\Delta_R/2\) whose zero locus
-is classifiable.  Stop if its degree or support still grows with \(m\): larger
-PSD algebras, total-defect averaging, parity, and more global moments cannot
-exclude one zero.  The only serious alternate is a signed \(p\)-adic lift of
-\(2K-\epsilon I\).  A focused original-source/forward-citation audit checks the
+Highest-EV next action: use the signed incidence factorization and polarity
+to classify coherent internal \(m\)-arcs through their \(m\) singleton
+passants.  Test first whether the tangent-pole set enters a known half-size
+arc/exterior-set theorem, retaining the row signs; the target is to exclude
+signed tangent-column equality for \(q>5\), or exclude the seeds themselves.
+If polarity does not enter a classifiable family, return to a signed
+\(p\)-adic lift of \(2K-\epsilon I\) using \(Z\) as the integral model.
+Larger PSD algebras, total-defect averaging, parity, and more global moments
+remain closed.  A focused original-source/forward-citation audit checks the
 exact fusion/frame identities in parallel.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition
 for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
 certificate passes have met their stop rule and should not be repeated.  The historical

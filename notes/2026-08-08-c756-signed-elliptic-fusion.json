@@ -11,6 +11,7 @@
       ],
       "expected_binary_rank": 4,
       "expected_passant_code_dimension": 4,
+      "expected_signed_passant_rank": 6,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 100,
@@ -27,6 +28,9 @@
         7
       ],
       "signed_degree": 6,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 6,
+      "signed_passant_row_weight": 3,
       "vertices": 10
     },
     {
@@ -39,6 +43,7 @@
       ],
       "expected_binary_rank": 12,
       "expected_passant_code_dimension": 9,
+      "expected_signed_passant_rank": 12,
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 441,
@@ -56,6 +61,9 @@
         19
       ],
       "signed_degree": 12,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 12,
+      "signed_passant_row_weight": 4,
       "vertices": 21
     },
     {
@@ -68,6 +76,7 @@
       ],
       "expected_binary_rank": 30,
       "expected_passant_code_dimension": 25,
+      "expected_signed_passant_rank": 30,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 3025,
@@ -79,6 +88,9 @@
       "relevant_eigenvalue": -6,
       "relevant_multiplicity": 25,
       "signed_degree": 30,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 30,
+      "signed_passant_row_weight": 6,
       "vertices": 55
     },
     {
@@ -91,6 +103,7 @@
       ],
       "expected_binary_rank": 36,
       "expected_passant_code_dimension": 36,
+      "expected_signed_passant_rank": 42,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 6084,
@@ -107,6 +120,9 @@
       "relevant_eigenvalue": 7,
       "relevant_multiplicity": 36,
       "signed_degree": 42,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 42,
+      "signed_passant_row_weight": 7,
       "vertices": 78
     },
     {
@@ -119,6 +135,7 @@
       ],
       "expected_binary_rank": 64,
       "expected_passant_code_dimension": 64,
+      "expected_signed_passant_rank": 72,
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 18496,
@@ -130,6 +147,9 @@
       "relevant_eigenvalue": 9,
       "relevant_multiplicity": 64,
       "signed_degree": 72,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 72,
+      "signed_passant_row_weight": 9,
       "vertices": 136
     },
     {
@@ -142,6 +162,7 @@
       ],
       "expected_binary_rank": 90,
       "expected_passant_code_dimension": 81,
+      "expected_signed_passant_rank": 90,
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 29241,
@@ -153,6 +174,9 @@
       "relevant_eigenvalue": -10,
       "relevant_multiplicity": 81,
       "signed_degree": 90,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 90,
+      "signed_passant_row_weight": 10,
       "vertices": 171
     },
     {
@@ -165,6 +189,7 @@
       ],
       "expected_binary_rank": 132,
       "expected_passant_code_dimension": 121,
+      "expected_signed_passant_rank": 132,
       "identity_failures": 0,
       "least_nonsquare": 5,
       "matrix_entries_checked": 64009,
@@ -176,11 +201,15 @@
       "relevant_eigenvalue": -12,
       "relevant_multiplicity": 121,
       "signed_degree": 132,
+      "signed_passant_factorization_failures": 0,
+      "signed_passant_rank": 132,
+      "signed_passant_row_weight": 12,
       "vertices": 253
     }
   ],
   "field_scope": "odd prime fields",
   "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",
   "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
-  "schema": "c756-signed-elliptic-fusion-v4"
+  "schema": "c756-signed-elliptic-fusion-v5",
+  "signed_passant_factorization": "Z^T Z = (q+1)/2 I - chi_q(-1) K"
 }
