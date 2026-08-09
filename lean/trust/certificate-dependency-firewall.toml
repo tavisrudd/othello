@@ -1,0 +1,34 @@
+schema_version = 1
+
+# Certificate packages own their complete statement model and depend directly on
+# Mathlib only.  Human libraries consume them through proved downstream adapters.
+
+[[certificate]]
+name = "finitegeom-clebsch-q11-certificates"
+checkout = "finitegeom-clebsch-q11-certificates"
+heavy = true
+allowed_direct_dependencies = ["mathlib"]
+
+[[certificate]]
+name = "finitegeom-projective-cap-q11-certificates"
+checkout = "finitegeom-projective-cap-q11-certificates"
+heavy = true
+allowed_direct_dependencies = ["mathlib"]
+
+[[certificate]]
+name = "finitegeom-projective-cap-q13-certificates"
+checkout = "finitegeom-projective-cap-q13-certificates"
+heavy = true
+allowed_direct_dependencies = ["mathlib"]
+
+[[certificate]]
+name = "finitegeom-q16-certificates"
+checkout = "finitegeom-q16-certificates"
+heavy = true
+allowed_direct_dependencies = ["mathlib"]
+
+[[certificate]]
+name = "finitegeom-q25-certificates"
+checkout = "finitegeom-q25-certificates"
+heavy = true
+allowed_direct_dependencies = ["mathlib"]
