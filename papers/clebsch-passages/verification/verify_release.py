@@ -193,7 +193,12 @@ def main() -> int:
 
     run(
         "spacing lint",
-        ["python3", "../scripts/lint_tex_spacing.py", "clebsch_passages.tex", "sections"],
+        [
+            "python3",
+            "verification/lint_tex_spacing.py",
+            "clebsch_passages.tex",
+            "sections",
+        ],
         PAPER,
     )
     # Deterministic rebuild in a scratch directory, compared byte for byte against the

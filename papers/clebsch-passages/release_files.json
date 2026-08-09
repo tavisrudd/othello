@@ -47,6 +47,7 @@
     "verification/golden_return_axioms.txt",
     "verification/golden_return_formal.json",
     "verification/golden_return_source_closure.json",
+    "verification/lint_tex_spacing.py",
     "verification/passages_axioms.txt",
     "verification/passages_formal.json",
     "verification/passages_source_closure.json",

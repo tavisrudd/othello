@@ -105,6 +105,11 @@ warning-free deterministic 32-page manuscript build.  Per author direction,
 any further Lean work is outside C897's present paper-only pass and will be
 queued separately.
 
+The first standalone replay caught one export-local packaging defect: the
+spacing lint still pointed to a monorepo sibling script.  The paper now carries
+that rejecting lint under `verification/`, and both the Makefile and release
+aggregate invoke the paper-local copy.
+
 ## Extra-juice and Tao-style closeout
 
 The cheap structural strengthening was to compute the whole ramification

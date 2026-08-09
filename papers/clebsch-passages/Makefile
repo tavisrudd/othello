@@ -15,10 +15,10 @@ LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 all: lint clebsch_passages.pdf
 
 lint:
-	python3 ../scripts/lint_tex_spacing.py clebsch_passages.tex sections
+	python3 verification/lint_tex_spacing.py clebsch_passages.tex sections
 
 clebsch_passages.pdf: clebsch_passages.tex sections/*.tex
-	python3 ../scripts/lint_tex_spacing.py clebsch_passages.tex sections
+	python3 verification/lint_tex_spacing.py clebsch_passages.tex sections
 	$(LATEXMK) $(LATEXMK_FLAGS) clebsch_passages.tex
 
 clean:
