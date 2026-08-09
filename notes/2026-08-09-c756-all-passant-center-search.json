@@ -1,0 +1,111 @@
+{
+  "base_certificate": "2026-08-09-c756-aligned-node-clique.json",
+  "base_certificate_sha256": "2b49dd98d42fe5686a646ffb4bb42505624cc11e821fdf9eb7b0975068e53422",
+  "base_script": "2026-08-09-c756-aligned-node-clique.py",
+  "base_script_sha256": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb",
+  "cases": [
+    {
+      "best_witness": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          36
+        ],
+        [
+          3,
+          47
+        ],
+        [
+          7,
+          21
+        ],
+        [
+          8,
+          47
+        ],
+        [
+          10,
+          29
+        ],
+        [
+          11,
+          48
+        ],
+        [
+          14,
+          48
+        ],
+        [
+          17,
+          29
+        ],
+        [
+          22,
+          17
+        ],
+        [
+          26,
+          6
+        ]
+      ],
+      "complete_center_histogram": [
+        {
+          "count": 44,
+          "value": 0
+        }
+      ],
+      "covariance_classes": [
+        {
+          "class": "split",
+          "count": 44
+        }
+      ],
+      "d": 1,
+      "full_cover_candidates": 0,
+      "geometric_candidates": 44,
+      "maximum_complete_centers": 0,
+      "maximum_span_histogram": [
+        {
+          "count": 44,
+          "value": 43
+        }
+      ],
+      "minimum_span_histogram": [
+        {
+          "count": 44,
+          "value": 36
+        }
+      ],
+      "name": "trace_zero_offset",
+      "node_character": 1,
+      "residual_norm_counts": [],
+      "residual_weight_counts": [],
+      "search_nodes": 2096318,
+      "vertex_count": 702
+    },
+    {
+      "best_witness": null,
+      "complete_center_histogram": [],
+      "covariance_classes": [],
+      "d": 2,
+      "full_cover_candidates": 0,
+      "geometric_candidates": 0,
+      "maximum_complete_centers": -1,
+      "maximum_span_histogram": [],
+      "minimum_span_histogram": [],
+      "name": "split_offset",
+      "node_character": -1,
+      "residual_norm_counts": [],
+      "residual_weight_counts": [],
+      "search_nodes": 7092500,
+      "vertex_count": 675
+    }
+  ],
+  "q": 53,
+  "quadratic_extension_nonsquare": 2,
+  "required_center_count": 16,
+  "schema": "c756-all-passant-center-v1"
+}

@@ -4,11 +4,11 @@
 
 **Status:** active open mathematics.  The saturated-external branch is closed
 and transferred to C894.  C756 retains the saturated-internal branch and the
-full nonsaturated branch.  The latter is not reduced to one conic point type;
-at \(q=53,k=12\), external deletion is now impossible for every covariance
-class and mixed secant/passant profile: none of the 230 normalized geometric
-stars has even one of its fifteen required complete centers.  Hence any
-remaining example at that layer is all-internal.  The character-weighted
+full nonsaturated branch.  The latter is not reduced to one conic point type
+in general, but the full \(q=53,k=12\) layer is now impossible.  The 230
+normalized external-deletion stars and the 44 normalized all-passant stars
+have zero complete centers; the other all-passant conic offset class has no
+geometric star.  The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
 degree-\(\delta S(A)\) norm polynomial; its trace coefficient gives the sum
@@ -216,10 +216,6 @@ ranks zero and one; nonsingular covariance gives
  \qquad \partial_i\partial_j\mathcal Z(c)\ne0\ (i\ne j). \tag{I}
 \]
 
-If the deleted point is internal, its polar line is passant and the existing
-anisotropic conic-overlap table applies even when the other polar lines are
-mixed.
-
 External deletion is impossible before the covariance split.  Its unique
 \(UV=2\) conic normal form has exactly 230 normalized eleven-line stars with
 all 55 nodes internal and no triple concurrency.  Those leaves are the full
@@ -228,43 +224,30 @@ has even one complete center among the fifteen required internal directions;
 their best projections span at most 45 of 53 fibres.  This closes the seven
 anisotropic rows, all disjoint-root split rows, the one-shared-root case, and
 the aligned split case simultaneously.  Authority:
-`notes/2026-08-09-c756-external-deletion-all-covariance-closure.md` and its exact bundle.
+`notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 
-### \(q=53\) remaining branch: all-internal/all-passant offsets
+### \(q=53,k=12\): complete negative classification
 
-Every hypothetical \(q=53,k=12\) example is now forced all-internal.  All
-eleven remaining polar lines are passants and the old offset/node-character
-descent applies.
-
-Elliptic overlap leaves:
-
-- aligned anisotropic covariance;
-- nonaligned anisotropic traces \(-10,-14\);
-- seven split-covariance trace/zero rows.
-
-The aligned family is closed exactly.  Split offset descent has no admissible
-eleven-state internal-node clique.  Trace-zero descent has exactly 44
-direction-zero-normalized candidates in four dihedral orbits; all have open
-separator Hessian and fail all eleven critical equations after the Laurent
-center shift is recovered from the star centroid.
-
-Authority:
-`notes/2026-08-09-c756-aligned-critical-closure.md` and its committed exact
-script/certificate bundle.
-
-The nonaligned and split rows are the remaining \(q=53,k=12\) work.  Mixed
-line types and every external-deletion covariance row are closed.
+If no point is external, all twelve polar lines are passants.  The two
+covariance-free conic offset classes have respectively zero and 44 normalized
+eleven-line stars.  Every one of the 44 has zero complete centers among the
+sixteen required directions; each center projection spans between 36 and 43
+of the required 53 fibres.  Thus the all-internal branch also fails before
+covariance, and
+\[
+ \boxed{\text{no conic-filling }12\text{-arc exists over }\mathbf F_{53}.}
+\]
+This does not cover \(k>12\), whose defect and interpolation window differ.
+Authority: `notes/2026-08-09-c756-q53-k12-complete-closure.md` and its
+exact script/certificate bundle.
 
 ## Ordered next actions
 
-1. Test whether the now-forced all-passant geometry admits the same
-   covariance-free star enumeration and direct sixteen-center obstruction;
-   otherwise return to its nonaligned anisotropic and split Gram rows.
-2. Build the \(q=47\) octic carrier and the separate \(q=49\)
+1. Build the \(q=47\) octic carrier and the separate \(q=49\)
    Hasse/divided-power carrier before attempting a certified all-type search.
-3. Cover higher nonsaturated sizes separately; do not infer them from the
+2. Cover higher nonsaturated sizes separately; do not infer them from the
    \(k=12\) layer.
-4. In parallel mathematical priority, seek the saturated-internal global
+3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
 ## Stop rules
@@ -276,8 +259,8 @@ Do not:
   because the arrangement is mixed;
 - call \(q=53\) the first open field, or infer general \(\delta\) from defect
   two without a propagation theorem;
-- count progress in the \(q=53\) all-passant route as closure of the full
-  nonsaturated branch;
+- reopen the closed \(q=53,k=12\) layer without identifying a normalization
+  or projection-completeness flaw in its exact bundle;
 - rerun the closed aligned state graph, generic 11-variable elimination, or
   an unchanged quartic character bound;
 - retry normalized one-variable selectors, their first two slices,
@@ -299,9 +282,8 @@ Do not:
   remaining external-specialist safeguard.
 - The \(q=53\) all-passant aligned certificate has independent formula-level
   invariant checks, not a second independent exhaustive search implementation.
-- No all-type exact search currently covers \(q=47,49,53\).  The new
-  \(q=53\) search covers every external-deletion geometry but not the
-  now-forced all-internal branch.
+- No all-type exact search currently covers \(q=47,49\).  The \(q=53\)
+  search is complete only at \(k=12\); higher sizes remain separate.
 
 ## Current assessment
 
@@ -310,14 +292,10 @@ Do not:
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
   exact, and its character total has the all-center trace/norm law (H'); no
   first-open field or higher size is classified.
-- \(q=53\), external deletion: closed exactly for every covariance class and
-  mixed line-character profile; any hypothetical \(k=12\) example is
-  all-internal.
-- \(q=53\), all-internal, aligned: closed exactly; nonaligned anisotropic and
-  split covariance remain.
+- \(q=53,k=12\): closed exactly for every point type and covariance class.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
-  the distinct \(q=47\), \(q=49\), \(q=53\) all-internal, and higher-size
-  gates remain; a counterexample remains live.
+  the distinct \(q=47\), \(q=49\), higher-size, and saturated-internal gates
+  remain; a counterexample remains live.
 
 ## Durable pointers
 
@@ -327,6 +305,8 @@ Do not:
   `notes/2026-08-09-c756-all-center-resultant-norm.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
+- Complete \(q=53,k=12\) closure:
+  `notes/2026-08-09-c756-q53-k12-complete-closure.md`.
 - Mixed-type equation ledger:
   `notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
 - External-deletion aligned split closure:
