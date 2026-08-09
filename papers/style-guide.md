@@ -181,6 +181,12 @@ well-shaped paragraphs instead of five labeled subsections.
 - Keep one theorem focused on one conceptual scale. Split global classification,
   local stability, and embedded perturbation results when combining them hides
   the headline.
+- Give every theorem-like statement a stable semantic identifier, such as
+  `thm:arithmetic-cover` or `prop:golden-fibre`.  Source prose, internal plans,
+  trust manifests, and verification code should refer to that identifier, not
+  to a rendered theorem number.  Rendered numbers are presentation output and
+  may change when statements move; reordering must not rename the stable
+  identifier or silently break its evidence mapping.
 - Before a proof, identify any classical result on which it depends and any
   exhaustive finite step. Inside the proof, say exactly where each enters.
 - For a substantial proof, provide a strategy paragraph or section that gives
