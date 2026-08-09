@@ -17,6 +17,137 @@ Optional stuck-state/review context:
 `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it during routine
 continuation.
 
+## Twelve-round autonomous continuation outcome (2026-08-09)
+
+**This section supersedes the older “highest-EV next action” text below.**  The
+full all-\(k\) theorem remains open, but the saturated-internal covering gate is
+now substantially sharper and has new publishable partial theorems.
+
+### New primary saturated gate
+
+Put \(q=2m-1\) and let \(Y\) be a saturated-internal exterior arc of size
+\(m+1\).  Under conic polarity, the points of \(Y\) become \(m+1\) passant
+lines in dual-arc position.  Their pairwise intersections form an internal
+star configuration \(\mathcal B(Y)\), and
+\[
+ Y\text{ covers every off-conic point}
+ \quad\Longleftrightarrow\quad
+ \mathcal B(Y)\text{ meets every secant and every passant}. \tag{A}
+\]
+Tangents automatically avoid \(\mathcal B(Y)\).  Thus one no longer needs to
+classify or exclude every coherent equality support; it is enough to prove
+that its star vertices miss one non-tangent line.  This is an
+\((E\cup S)\)-blocking problem with much more structure than the general
+minimum-size theory: every arrangement line contains its complete internal
+half in \(\mathcal B(Y)\).
+
+The exact line-profile identity
+\[
+ \sum_{j\ge1}(j-1)(j-2)a_j
+ =\frac{m(m-2)(m-3)(m-5)}4 \tag{B}
+\]
+gives a new non-enumerative exclusion at \(q=7\).  Splitting the profile by
+line type identifies the non-arrangement passant-pair count with
+\(\sum_{A\in\binom Y4}r(A)\), where \(r(A)\) counts internal diagonal points
+of the four-point quadrangle.  A certified \(q=9\) census gives the local law
+\(r(A)=2\) for all 180 admissible quadrangles, contradicting the blocking
+profile (independently, no saturated six-arc exists).
+
+Define the diagonal character statistic
+\[
+ T_4(Y)=\sum_{A\in\binom Y4}(3-2r(A)).
+\]
+The full projective-plane incidence norm then proves the uniform necessary
+condition
+\[
+ \boxed{
+ T_4(Y)\ge
+ \frac{m(m-2)(m-1)(m+1)}{8(2m-1)}>0
+ } \tag{C}
+\]
+for every hypothetical covering support.  The naive local counterstatement
+“coherent quadrangles have nonpositive bias” is false and is now closed by an
+exact prime-field census: all diagonal types occur by \(q=17\), with positive
+ambient coherent bias in several fields.  Any contradiction to (C) must use
+global support compatibility.
+
+### New global matching-frame gate
+
+Switch the coherent support and let \(R\) be the outside-by-support block of
+the signed elliptic-fusion matrix.  The global equality eigenvector gives
+\[
+ R\mathbf1=0,
+ \qquad
+ R^{\mathsf T}R=(m-2)((m+1)I-J). \tag{D}
+\]
+Every row is a signed matching vector
+\[
+ R_X=\sum_{(i,j)\in M_X}\pm(e_i-e_j),
+\]
+where \(M_X\) is the matching of chords through the outside internal point
+\(X\).  Internal-point covering is exactly the assertion that every row is
+nonzero.  At \(m=3\), these rows are the six roots of \(A_3\), explaining the
+four-frame endpoint.  Abstract matching tight frames may exist for larger
+\(m\); the open theorem concerns the conic-realizable subclass and must also
+use the outside-external/secant-polar rows.
+
+The unsigned star indicator also has the exact contraction
+\[
+ \mathbf1_{\mathcal B}=\frac12A\mathbf1_Y, \tag{E}
+\]
+where \(A\) is internal-point/passant-line incidence.  Equations (C)--(E),
+not the earlier one-variable selector or \(p\)-adic lift, are the primary
+saturated interface.
+
+### Route decisions and current assessment
+
+- The normalized pencil selector and its first two slices close back to the
+  previously known matching/cycle gate.  Do not repeat that calculation.
+- The signed passant incidence is switchable to symmetric or skew form and is
+  integrally primitive in the tested Smith range; the hoped-for torsion
+  obstruction is absent.  Its self-duality cocycle is structurally neat but
+  not load-bearing for all-\(k\).
+- Raw star cardinality and two generic moments stop after the \(q=7\)
+  exclusion.  The useful continuation is the geometric two-species matching
+  design, not more untyped moments.
+- A focused source audit found no predecessor for (A), (C), or (D).  Cite the
+  established \((E\cup S)\)-blocking literature and standard
+  star-configuration ideals; claim novelty only for the structured conic-star
+  consequences.  The adjacent 2025 blocking papers use different line
+  families/properties and do not pre-empt these results.
+
+Current subjective proof odds:
+
+- complete saturated classification: **60--70%**;
+- full all-\(k\) classification: **15--20%**, because the nonsaturated
+  \(h\ge1\) theorem remains essentially unchanged;
+- publishable specialist partial package even without closure: **85--90%**.
+
+Current progress bars (mathematical closure, not drafting): saturated-external
+`[##########] 100%`; saturated-internal `[######----] 60%`; nonsaturated
+`[###-------] 30%`; full all-\(k\) assembly `[######----] 55%`.
+
+**Highest-EV next action:** add the outside-external points to (D).  A covered
+outside external point has a secant polar meeting the star vertices, hence a
+second chord matching.  Derive the external-row frame and the mixed Gram with
+the internal rows from the full projective incidence identity.  Continue only
+if the mixed block supplies an identity independent of (B)--(E); stop if it is
+just the secant/passant line-profile moments in matrix notation.  The parallel
+nonsaturated action remains the masked Rédei theorem \(h\ge1\).
+
+Durable round reports:
+
+- `notes/2026-08-08-c756-normalized-pencil-selector.md`;
+- `notes/2026-08-08-c756-self-dual-signed-incidence.md`;
+- `notes/2026-08-08-c756-covering-dual-blocking.md`;
+- `notes/2026-08-09-c756-star-discriminant-profile.md`;
+- `notes/2026-08-09-c756-diagonal-type-allocation.md`;
+- `notes/2026-08-09-c756-diagonal-character-ustatistic.md`;
+- `notes/2026-08-09-c756-projective-incidence-cap.md`;
+- `notes/2026-08-09-c756-local-diagonal-sign-stop.md`;
+- `notes/2026-08-09-c756-outside-matching-tight-frame.md`;
+- `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
+
 ## Reviewed publication route (2026-08-08)
 
 **Decision:** replace the Paley-clique bound as the primary gate by equality in the
