@@ -325,6 +325,16 @@ least one independent citation index; inspect the six Madison--Wu cited-by paper
 the theorem level; and search explicitly for conic-external internal arcs, not only
 for code terminology.
 
+The follow-up audit is
+\`notes/2026-08-08-c756-predecessor-audit-and-companion-scope.md\`.  It source-read
+the complete archived Droms--Mellinger--Meyer author preprint, screened the accessible
+forward graphs, and found the missing established vocabulary: an exterior set of a
+conic is a point set whose pairwise joins miss the conic.  Blokhuis--Seress--Wilbrink
+and Van de Voorde classify or extend exterior-*point* sets of size \((q+1)/2\), not
+the internal-point arcs of size \((q+3)/2\) arising here.  Consequently the equality
+bridge remains a useful qualified interface, but not a standalone terminology or
+lower-bound novelty claim.  MathSciNet and Semantic Scholar closure remain uncovered.
+
 ## 5. Reproducibility and trust boundary
 
 Evidence bundle:

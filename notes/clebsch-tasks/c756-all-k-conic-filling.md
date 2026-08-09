@@ -94,11 +94,45 @@ finite evidence, and open gaps, followed by a title/venue decision.  Do not draf
 manuscript under C756; after the audit, open a separate unnumbered companion task if the
 package survives the novelty and coherence gate.
 
-**Next-session entry:** complete the predecessor and forward-citation audit, search
-explicitly for conic-external internal arcs and minimum passant-code words, and build the
-partial companion's theorem inventory/claim graph.  Preserve the code equality and local
-tangent graph as open problems and diagnostic evidence; do not spend another pass fitting
-optimal theta matrices.
+**Audit/scoping outcome (2026-08-08):** the package passes the specialist-paper
+scope gate.  Established terminology calls condition (E) an **exterior set of a
+conic**; C756's object is an exterior set that is also an arc.  The closest
+Blokhuis--Seress--Wilbrink and Van de Voorde results concern exterior points of size
+\((q+1)/2\), not internal points of size \((q+3)/2\), so they do not pre-empt the
+internal equality problem.  The companion headline should nevertheless be the
+complete saturated-external classification, not the elementary code bridge.  Include
+the all-\(k\) LP bound and saturation dichotomy, then use the code bridge,
+Baer-subline exclusion, and line holonomy as uniform internal partial results.  Omit
+the negative-method catalogue and most mixed-moment machinery unless it shortens a
+proof.  Primary venue fit: _Designs, Codes and Cryptography_; _Discrete Mathematics_
+backup.  See
+`notes/2026-08-08-c756-predecessor-audit-and-companion-scope.md`.
+
+**Next-session entry:** turn the scoped package into a claim--proof--trust map and replay
+the saturated-external classification end to end, including one explicit extension-field
+audit.  Obtain the Droms--Mellinger--Meyer version of record and a human MathSciNet/Scopus
+check if available; otherwise retain “to our knowledge” in the novelty ledger.  Preserve
+the code equality and local tangent graph as open problems and diagnostic evidence; do not
+spend another pass fitting optimal theta matrices or edit a manuscript under C756.
+
+**Proof-trust outcome (2026-08-08):** the saturated-external theorem survives an
+end-to-end dependency audit and a fresh (q=27\) extension-field replay.  Its all-field
+proof is human, not certificate-dependent: saturation gives the matching; the
+(q\equiv1\pmod4\) branch dies by the complete-mapping group sum; the
+(q\equiv3\pmod4\) branch runs through Segre sign coherence, one-block Paley rigidity,
+the primitive-Jacobi Frobenius collision theorem, a coset Weil exclusion of nontrivial
+Frobenius, and the scalar Hasse/covering endgame.  The replay reproduced the committed
+(q=27\) row exactly, and the matching certificate passed its built-in check.  The
+remaining release risk is proof integration: the chain is split across four reports,
+and the new primitive-Jacobi collision lemma is the highest-risk referee target.  See
+`notes/2026-08-08-c756-saturated-external-proof-trust-map.md`.
+
+**Next-session entry (superseding the one above):** consolidate the saturated-external
+chain into one theorem-proof document, independently line-audit the primitive-Jacobi
+half-carry argument and all extension-field conventions, and attach precise primary
+citations for Segre's lemma, Stickelberger, the three-point multiplicative Weil bound,
+and Hasse.  If and only if that bounded gate passes, allocate a separate unnumbered
+companion-paper task.  Do not reopen theta fitting or run another field sweep.
 
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
