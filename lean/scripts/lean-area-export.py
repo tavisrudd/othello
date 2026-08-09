@@ -768,8 +768,13 @@ def build_plan(
 
     old_count = int(base.manifest["module_count"])
     new_count = int(manifest["module_count"])
+    readme_source = base.readme
+    if "readme_template" in config:
+        readme_source = read_blob(
+            source_repo, source_commit, str(config["readme_template"])
+        ).decode("utf-8")
     readme, readme_drift = retarget_module_counts(
-        base.readme, "README.md", old_count, new_count, accept_drift
+        readme_source, "README.md", old_count, new_count, accept_drift
     )
     readme = insert_readme_bullet(readme, str(config["readme_anchor"]), str(config["readme_bullet"]))
     provenance, provenance_drift = retarget_module_counts(
@@ -777,6 +782,10 @@ def build_plan(
     )
     files["README.md"] = readme.encode("utf-8")
     files["PROVENANCE.md"] = provenance.encode("utf-8")
+    if "flake_template" in config:
+        files["flake.nix"] = read_blob(
+            source_repo, source_commit, str(config["flake_template"])
+        )
 
     # A statement left untouched by an accepted drift produces no forward delta.
     for path, original in (("README.md", base.readme), ("PROVENANCE.md", base.provenance)):
