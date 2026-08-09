@@ -12,7 +12,8 @@ carrier, Lean, or finite certificates as a substitute for any human step.
 
 The earlier C747/C749 closure must be reopened at three interfaces:
 
-1. the actual finite-group Hom basis in the Lucas-socle calculation;
+1. the detector-specific finite-group Hom statements that the false
+   universal Lucas-socle calculation was meant to supply;
 2. the opposite-outer-parity vanishing, especially the Steinberg source; and
 3. descent for arbitrary `p'` matching stabilizers through subfield groups.
 
@@ -26,16 +27,18 @@ Gorenstein arguments remain provisionally accepted.
 | Gate | Mathematical output | Consumed by | Stop condition |
 |---|---|---|---|
 | R0 | Frozen notation and exact preclassification hypotheses | all work | any later argument imports sheet size, one-factorization, or survivor data |
-| R1 | Actual finite-group Hom basis, including aliases and carries | R2 and detector selection | extra Hom classes or a changed digit criterion |
+| R1 | Detector-specific linear Hom occurrence, absence, and outer normalization | R2 and detector selection | any stated detector channel differs from the exact Hom calculation |
 | R2 | Opposite-parity Hom vanishing for every detecting module | uniform sheet exclusion | Steinberg or another detecting Hom space is nonzero |
 | R3 | Complete `p'`-subgroup descent | detector coverage | an untreated `PGL_2(q_0)` or exceptional extension branch |
 | R4 | Integrated modular exclusion | classification theorem | any branch uses an output of the classification |
 | R5 | Independent human cold reads | release freeze | any reader cannot reconstruct R1--R3 from the paper and cited sources |
 
-R1 must precede the final form of R2: the parity argument must know the
-actual finite-group maps, not only possible composition factors.  R3 may be
-researched concurrently, but its detector table cannot be frozen until R1
-and R2 identify which simple modules genuinely work.
+R1 must precede the final form of R2: the parity argument must know the exact
+detector maps, not only possible composition factors.  The universal socle
+formula is abandoned: at `q=9`, the catalecticant minors give an additional
+`L(2,0)=L(q-7)` copy omitted by that formula.  R3 may be researched
+concurrently, but its detector table cannot be frozen until R1 and R2
+identify which simple modules genuinely work.
 
 ## R0 — freeze the proof interface
 
@@ -52,73 +55,30 @@ Explicitly forbid use of sheet size `q`, one-factorizations, regular
 translations, Paley incidence, the fields `7,11`, or the final stabilizers.
 This interface is the circularity audit for every later lemma.
 
-## R1 — prove the finite-group Hom theorem
+## R1 — prove only the detector-specific linear Hom facts
 
-Replace the compressed first part of the current Lemma 3.2 by a standalone
-proposition computing
+Delete the universal finite-group socle classification.  Its smallest
+two-digit case is false: for `q=9`, the three catalecticant minors embed
+`L(2,0)` in `Sym^2(Sym^3 V)` in addition to the listed `L(0,2)` copy.
 
-\[
- \operatorname{Hom}_{H}
- \bigl(L(c_0,\ldots,c_{e-1}),\operatorname{Sym}^2\nabla(d)\bigr)
-\]
+Replace it by three propositions, exactly matching later uses:
 
-as an actual Hom space.
+1. `Hom_H(St,F)=0` in the extension-field exceptional branch;
+2. the occurrence, multiplicity, and determinant-normalized outer parity of
+   `L(q-7)` in `F` in the torus-normalizer branch, including the
+   characteristic-three endpoint whose `q=9` map is the catalecticant map;
+3. the multiplicity-one prime-field Fischer summands and their explicit
+   retractions.
 
-### R1.1 Explicit coefficient system
+The complete coefficient system remains available as a diagnostic in
+`notes/2026-08-09-c895-finite-hom-matrix-specification.md`, but the paper no
+longer needs to factor it for every simple module.  Each of the three targeted
+statements may use a shorter rational, tilting, root-equation, or explicit
+covariant proof suited to that channel.
 
-Define the source basis, target basis, weight representatives, and every row
-and column of the positive-root coefficient matrix.  State the ranges of all
-indices.  Derive the equations from
-
-\[
- u(t)\phi=\phi\bigotimes_j u(t^{p^j}),\qquad t\in\mathbb F_q,
-\]
-
-rather than from an algebraic highest-vector test.
-
-The proof must separately show:
-
-- why the polynomial degree bound permits coefficient comparison;
-- how the two representatives of one finite-torus character are coupled;
-- why evaluating at `t=0` removes the apparent `t^{q-1}-1` ambiguity; and
-- why the negative root group and Weyl element impose no unrecorded
-  equations.
-
-### R1.2 Lucas block factorization
-
-Display the permutation/block-triangular reduction that factors the
-coefficient system into its one-digit recurrences.  Include:
-
-- digit, carry, and borrow conventions;
-- all boundary states at weights `0` and `q-1`;
-- the treatment of aliased torus weights; and
-- a proof that no cross-digit kernel remains.
-
-It is not sufficient to say that Lucas's theorem factors the matrix.  The
-factorization, or an equivalent induction with the same information, must be
-visible and checkable.
-
-### R1.3 Exhaustiveness in the actual target
-
-Prove directly in `\nabla(d)\otimes\nabla(d)` that every finite-group map is
-one of the displayed digitwise maps.  Do not infer this from
-`soc(\nabla(d))\otimes soc(\nabla(d))` without proving the required socle
-identity.  Use the finite negative-root orbit/Vandermonde argument only with
-all exponent ranges and injectivity hypotheses stated.
-
-Then take the tensor-flip eigenspace and derive the even-parity condition for
-`Sym^2 \nabla(d)`.
-
-### R1.4 Transparency example and audit
-
-Add one complete two-digit example showing an aliased weight, its coupled
-coefficient rows, the Lucas blocks, and the resulting flip sign.  Small-field
-linear algebra may corroborate this example but is not proof.
-
-**R1 acceptance gate:** a modular-representation reader can reconstruct the
-dimension and a basis of every stated Hom space from the displayed system,
-and can point to the exact argument excluding additional submodules of the
-full target.
+**R1 acceptance gate:** a modular-representation reader verifies the exact
+Hom dimension and outer normalization of every detector actually used by the
+uniform exclusion.  No universal socle claim remains.
 
 ## R2 — prove the outer-parity obstruction
 
