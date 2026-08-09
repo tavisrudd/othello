@@ -4,7 +4,7 @@
   "main_source_sha256": "ca68ab93a602bec8430bad5080c605ac0f308cbb66d1f0e64d6e35b5d9adf5fa",
   "section_sha256": {
     "sections/01-introduction.tex": "ed60a63cfc2af4cdd492e845c376463e2208b344d7a7862ee0d6300a32a3db4f",
-    "sections/02-orientation-cover.tex": "55f2aea5858d0dd1571e393707c4110a35246dcd30093eba2abca643ea7e9ee1",
+    "sections/02-orientation-cover.tex": "1d96c3287adec03e733fd85df6238fcbee803fdd21ad555e1a63037dc9815d28",
     "sections/03-orientation-source.tex": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822",
     "sections/04-arithmetic-specialization.tex": "815b609cc5354707dad08e015952ddcc5592e78c5a81347def79bbc5a89357a0",
     "sections/05-golden-operator.tex": "07a4c3d852306dd8816e7b0fbc7708e935d27481eeb7ed0890464bfb8ced519c",
@@ -12,7 +12,7 @@
     "sections/09-conclusion.tex": "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
     "sections/08-verification.tex": "074c375067c70dd9e0bee0a92bea7d953e9d51134928b12f8e69729ce5c06618",
-    "sections/10-references.tex": "467115d7514f6ef0c4c0b20432824d135c1f3e4fc3a0f1804bc5ff36ea45364b"
+    "sections/10-references.tex": "b676aff8b96e1e97d7c747259b2df1e6c17cad62a879a882773e6aeee509da83"
   },
   "statement_count": 8,
   "statements": [
