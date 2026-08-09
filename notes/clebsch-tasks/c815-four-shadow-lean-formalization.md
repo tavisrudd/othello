@@ -283,6 +283,13 @@ the following task-owned obligations, in execution order:
    weighted axis-power tensors before expanding.  The remaining HARM-2 work is
    now exactly coefficient symmetry, the three index-pattern orbits, the
    sum-zero `sigmaThree` collapse, and the general rational corollary.
+
+   **Paused worktree handoff (2026-08-09).**  The uncommitted continuation in
+   `lean/RelativeConicArcs/SphericalCubicRestriction.lean` is preserved as Git
+   stash commit `30679dc4d99eb785ceaddd002659b9b651766898`, with subject
+   `C815 pause SphericalCubicRestriction`.  Resume it with
+   `git stash apply 30679dc4d99eb785ceaddd002659b9b651766898`; after validating
+   and committing the recovered file, drop that stash explicitly.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
