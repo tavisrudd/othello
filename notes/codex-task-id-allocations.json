@@ -2960,8 +2960,17 @@
       "last": 895,
       "purpose": "Paper II non-C894 modular human-proof repair",
       "sequence": 329
+    },
+    {
+      "count": 1,
+      "first": 896,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 896,
+      "purpose": "Corrected universal finite-group socle theorem with carry and borrow states",
+      "sequence": 330
     }
   ],
-  "next_id": 896,
+  "next_id": 897,
   "schema": "codex-task-id-allocations-v1"
 }
