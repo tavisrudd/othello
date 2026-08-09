@@ -44,26 +44,23 @@ def certificate_violations(root: Path, policy: dict) -> list[str]:
     if lake.get("name") != name:
         problems.append(f"{name}: lakefile declares package {lake.get('name')!r}")
     requirements = {entry["name"]: entry for entry in lake.get("require", [])}
-    unexpected = sorted(set(requirements) - allowed)
-    missing = sorted(allowed - set(requirements))
-    for dependency in unexpected:
-        problems.append(f"{name}: forbidden direct dependency {dependency}")
-    for dependency in missing:
-        problems.append(f"{name}: required direct dependency {dependency} is missing")
+    if set(requirements) != allowed:
+        problems.append(
+            f"{name}: direct dependencies are {sorted(requirements)}, expected {sorted(allowed)}"
+        )
     for dependency, entry in sorted(requirements.items()):
         url = normalized_url(str(entry.get("git", "")))
-        if url.startswith(PROJECT_URL_PREFIX):
+        if dependency in allowed and url.startswith(PROJECT_URL_PREFIX):
             problems.append(
                 f"{name}: project-owned dependency {dependency} at {url} is forbidden"
             )
 
     resolved = direct_manifest_packages(json.loads(manifest.read_text(encoding="utf-8")))
-    unexpected_resolved = sorted(set(resolved) - allowed)
-    missing_resolved = sorted(allowed - set(resolved))
-    for dependency in unexpected_resolved:
-        problems.append(f"{name}: manifest resolves forbidden direct dependency {dependency}")
-    for dependency in missing_resolved:
-        problems.append(f"{name}: manifest omits direct dependency {dependency}")
+    if set(resolved) != allowed:
+        problems.append(
+            f"{name}: manifest direct dependencies are {sorted(resolved)},"
+            f" expected {sorted(allowed)}"
+        )
     for dependency in sorted(allowed & set(requirements) & set(resolved)):
         requested = requirements[dependency]
         actual = resolved[dependency]

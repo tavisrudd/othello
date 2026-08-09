@@ -91,7 +91,7 @@ class CertificateDependencyFirewallTests(unittest.TestCase):
             )
             result = self.run_check(config, libraries)
             self.assertEqual(result.returncode, 1)
-            self.assertIn("forbidden direct dependency finitegeom", result.stdout)
+            self.assertIn("direct dependencies are ['finitegeom', 'mathlib']", result.stdout)
 
     def test_project_owned_dependency_under_an_allowed_name_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -121,7 +121,9 @@ class CertificateDependencyFirewallTests(unittest.TestCase):
             manifest.write_text(json.dumps(document) + "\n", encoding="utf-8")
             result = self.run_check(config, libraries)
             self.assertEqual(result.returncode, 1)
-            self.assertIn("manifest resolves forbidden direct dependency finitegeom", result.stdout)
+            self.assertIn(
+                "manifest direct dependencies are ['finitegeom', 'mathlib']", result.stdout
+            )
 
 
 if __name__ == "__main__":
