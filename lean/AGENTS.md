@@ -223,6 +223,16 @@ lean/scripts/lean-build-queue.py pack ~/lean-backups/<name>.tgz
 `pack` takes the same ownership lock, refuses active foreign Lean work, refuses overwrite and
 memory-backed destinations, and runs `lake pack` through `run-quiet`.
 
+Certificate regeneration uses the package's separate flake app through the same owner guard:
+
+```sh
+lean/scripts/lean-build-queue.py regenerate --lean-root ~/src/lean/<certificate-package>
+```
+
+The command refuses a live foreign Lean process and runs only the package's explicit
+`nix run .#regenerate` app. Ordinary verification must use the read-only `.#verify` app and must
+never invoke regeneration.
+
 ## Shared-library validation
 
 - A lane that consumes `RelativeConicArcs` exits through its documented import-only module set under

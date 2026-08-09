@@ -35,6 +35,10 @@ STUBS = {
     # the `lake` inside the build shell resolves to our stub.  Asserts the real argv shape.
     "nix": """#!/usr/bin/env bash
 set -uo pipefail
+if [ "${1:-}" = run ] && [ "${2:-}" = path:.#regenerate ]; then
+  printf 'regenerated\n' > "$FAKE_LAKE_STATE/regenerated"
+  exit 0
+fi
 [ "${1:-}" = develop ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 [ "${2:-}" = --command ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 if [ "${3:-}" = lake ] && [ "${4:-}" = pack ]; then
@@ -345,6 +349,30 @@ class QueueTest(unittest.TestCase):
             timeout=30,
         )
 
+    def regenerate(self):
+        (self.lean_root / "flake.nix").write_text("{}\n")
+        return subprocess.run(
+            [
+                sys.executable,
+                str(RUNNER),
+                "regenerate",
+                "--lean-root",
+                str(self.lean_root),
+                "--lock-file",
+                str(self.lock_file),
+                "--nix-binary",
+                str(self.bin / "nix"),
+                "--pgrep-binary",
+                str(self.bin / "pgrep"),
+                "--run-quiet-binary",
+                str(self.bin / "run-quiet"),
+            ],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
     def restore(self, archive: Path):
         return subprocess.run(
             [
@@ -543,6 +571,11 @@ class QueueTest(unittest.TestCase):
         result = self.update_lock("finitegeom")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.state / "updated-package").read_text(), "finitegeom\n")
+
+    def test_regenerate_uses_the_guarded_package_app(self) -> None:
+        result = self.regenerate()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual((self.state / "regenerated").read_text(), "regenerated\n")
 
     def test_restore_is_quiet_and_disk_backed(self) -> None:
         archive = self.tmp / "packs/fixture.tgz"

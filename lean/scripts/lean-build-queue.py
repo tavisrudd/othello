@@ -955,6 +955,48 @@ def command_update_lock(args: argparse.Namespace) -> int:
         lock.close()
 
 
+def command_regenerate(args: argparse.Namespace) -> int:
+    """Run a package's explicit regeneration app under the build-owner guard."""
+    lean_root = args.lean_root.expanduser().resolve()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        fail(f"{lean_root} is not a Lake package")
+    if not (lean_root / "flake.nix").is_file():
+        fail(f"{lean_root} has no flake.nix")
+    pgrep = shutil.which(args.pgrep_binary)
+    if pgrep is None:
+        fail(f"{args.pgrep_binary} is unavailable; cannot check for a live foreign build")
+    lock_file = (
+        args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    ).expanduser().resolve()
+    run_id = (
+        f"regenerate-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-"
+        f"{uuid.uuid4().hex[:8]}"
+    )
+    lock = acquire_lock(lock_file, run_id, ["<nix run .#regenerate>"])
+    try:
+        wait_for_quiet(pgrep, 0, 60)
+        quiet_root = STATE_ROOT_DEFAULT / "regenerations" / run_id
+        quiet_root.mkdir(parents=True, exist_ok=False)
+        env = os.environ.copy()
+        env["RUN_QUIET_LOGDIR"] = str(quiet_root)
+        inner = [args.nix_binary, "run", "path:.#regenerate"]
+        result = subprocess.run(
+            [args.run_quiet_binary, shlex.join(inner)],
+            cwd=lean_root,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.stdout:
+            print(result.stdout, end="")
+        if result.stderr:
+            print(result.stderr, end="", file=sys.stderr)
+        return EXIT_OK if result.returncode == 0 else EXIT_BUILD_FAILED
+    finally:
+        lock.close()
+
+
 def command_restore(args: argparse.Namespace) -> int:
     """Restore a disk-backed Lake artifact archive under the owner guard."""
     lean_root = args.lean_root.expanduser().resolve()
@@ -1570,6 +1612,18 @@ def parser() -> argparse.ArgumentParser:
         "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
     )
     update_lock.set_defaults(function=command_update_lock)
+
+    regenerate = subparsers.add_parser(
+        "regenerate", help="run the package regeneration app under the owner guard"
+    )
+    regenerate.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    regenerate.add_argument("--lock-file", type=Path, default=None)
+    regenerate.add_argument("--nix-binary", default="nix")
+    regenerate.add_argument("--pgrep-binary", default="pgrep")
+    regenerate.add_argument(
+        "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
+    )
+    regenerate.set_defaults(function=command_regenerate)
 
     restore = subparsers.add_parser(
         "restore", help="restore a disk-backed Lake pack under the owner guard"
