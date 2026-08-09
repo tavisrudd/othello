@@ -234,6 +234,13 @@ class ExternalFactTest(unittest.TestCase):
         self.commit_package()
         self.assertEqual(self.seal("--write").returncode, 2)
 
+    def test_commit_moving_a_root_level_lean_source_is_refused(self):
+        source = self.package / "RelativeConicArcs/Q11.lean"
+        source.parent.mkdir()
+        source.write_text("-- added after the recorded gate\n", encoding="utf-8")
+        self.commit_package()
+        self.assertEqual(self.seal("--write").returncode, 2)
+
     def test_failed_run_is_refused(self):
         self.make_run(status={"state": "failure", "results": []})
         self.assertEqual(self.seal("--write").returncode, 2)

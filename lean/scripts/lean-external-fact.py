@@ -61,7 +61,9 @@ def lean_sources_unchanged_since(root: Path, commit: str) -> bool:
     if not commit:
         return False
     result = subprocess.run(
-        ["git", "diff", "--quiet", commit, "HEAD", "--", "lean"], cwd=root, check=False
+        ["git", "diff", "--quiet", commit, "HEAD", "--", ":(glob)**/*.lean"],
+        cwd=root,
+        check=False,
     )
     return result.returncode == 0
 
@@ -141,7 +143,8 @@ def gate_run(run_dir: Path, package_root: Path, gate: str) -> tuple[Path, dict[s
     verified_at = source.get("git_head", "")
     # The gate verified a set of Lean sources, not a commit.  A later package commit that leaves
     # every Lean source untouched — sealing the manifest, adding evidence — does not invalidate
-    # what the gate established, but any movement in `lean/` does.
+    # what the gate established.  Packages may place sources under `lean/` or at repository root,
+    # so the comparison covers every tracked Lean pathname.
     if verified_at != git_head(package_root) and not lean_sources_unchanged_since(
         package_root, verified_at
     ):
