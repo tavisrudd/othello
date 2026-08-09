@@ -2951,8 +2951,17 @@
       "last": 894,
       "purpose": "scope and build the unnumbered saturated-exterior and local-Paley companion paper",
       "sequence": 328
+    },
+    {
+      "count": 1,
+      "first": 895,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 895,
+      "purpose": "Paper II non-C894 modular human-proof repair",
+      "sequence": 329
     }
   ],
-  "next_id": 895,
+  "next_id": 896,
   "schema": "codex-task-id-allocations-v1"
 }
