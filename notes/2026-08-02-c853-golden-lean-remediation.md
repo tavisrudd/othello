@@ -262,6 +262,20 @@ thirty-six terminals.  For `p2`, the residual is now exactly the
 Schatten-fourth coordinate-convexity theorem plus the four Boolean support-size
 values; vertex completeness itself is no longer trusted prose.
 
+The fixed-six vertex arithmetic is now partly closed on actual matrices.
+One-coordinate and two-coordinate Hermitian principal blocks have second
+moments `1` and `32/25`; the three-coordinate value `33/25` is the existing
+landscape theorem.  A public wrapper now extends any proved uniform Boolean
+bound to the full cube from coordinatewise convexity.  The intended trust
+surface has thirty-nine terminals.
+
+Two semantic steps remain before this is the manuscript's `p2` theorem: prove
+coordinate convexity of the actual Schatten-fourth transfer objective, and map
+every six-mode Boolean control (up to complement) to the zero-, one-, two-, or
+three-coordinate fixed-six matrix just evaluated.  The order-four `1/3`
+small-block theorem was explicitly rejected for this purpose because it has
+the wrong conference normalization.
+
 ## Scope decision
 
 The user requires every mathematical statement of the manuscript

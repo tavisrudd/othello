@@ -642,6 +642,14 @@ For `p2`, only Schatten-fourth coordinate convexity and the four vertex values
 remain before this reduction yields `33/25`; the generated fact is still the
 older twenty-five-terminal checkpoint pending a quiet aggregate build.
 
+Fixed-six Boolean vertex arithmetic has advanced without reusing the
+wrong-normalization order-four theorem: actual support-one and support-two
+principal blocks give `p2=1` and `32/25`, while support three gives `33/25`
+from the Hermitian landscape.  The general convex-cube wrapper is complete.
+The intended surface is thirty-nine terminals; actual Schatten-fourth
+coordinate convexity and the Boolean-control/principal-block semantic map are
+the two remaining `p2` bridges.  The generated fact remains at twenty-five.
+
 C840 is now queued after C853 and owns the independent claim-by-claim Lean
 reconciliation, canonical exported-candidate validation, honest
 partial-coverage boundary, manifests, gate, and deferred quiet-window

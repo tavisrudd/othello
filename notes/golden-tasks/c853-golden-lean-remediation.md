@@ -219,6 +219,8 @@ cases, and literature inputs are explicit in the formal interface.
 - [ ] Prove the Boolean reduction.
       Complete for every coordinatewise-convex real objective on a finite cube;
       application to each matrix objective remains.
+      The fixed-six support-size `1`, `2`, and `3` second moments are evaluated;
+      the Boolean-control-to-principal-block semantic map remains.
 - [ ] Characterize every equality case.
 - [ ] Prove that exactly twenty balanced Boolean controls jointly maximize
       all three degree-three sectors.
