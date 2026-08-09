@@ -2,9 +2,8 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-08-04
-**Status**: ACTIVE — the order-16 and order-eleven point-orbit packages are sealed and their
-external trust facts pinned; C864 owns the remaining certificate externalization, the finitegeom
-repair, and the all-paper export replay
+**Status**: ACTIVE — C879 is replacing the Q11 and Q16 packages with branded Mathlib-only local
+models and cheap downstream compatibility bridges before either package is sealed again
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -83,7 +82,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
 - `lean/scripts/guarded-lean`: one bounded single-file elaboration through `run-quiet`.
 - `lean-build-queue.py`: `plan` (silent preflight, no Lake), `build`/`run` (locked queue, guarded
   cache restore, atomic heartbeats, trace-current skipping, final aggregate gate), `await`, `lock`,
-  `status` (owner-descendant view, no process-table search), `pack` (guarded `lake pack`).
+  `status` (owner-descendant view, no process-table search), `pack` (guarded `lake pack`), and
+  `regenerate` (the package's separate `.#regenerate` app under the same owner guard).
 - `lean-build-systemd.py`: the adjacent managed path, explicitly selected, same lock and caps.
 - `lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log with a hermetic failure
   suite. Unexercised against real Lake output.
