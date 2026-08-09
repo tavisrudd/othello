@@ -354,6 +354,15 @@ details; its numbering no longer overrides this execution plan.
    as a safety copy until the locked Lean queue becomes available and the
    recovered source can be elaborated, validated, and committed; drop it only
    after those gates pass.
+
+   Local continuation after that restore now adds the three-pattern coefficient
+   classifier, expands the polarized cubic on the five-label module, collapses
+   it on the sum-zero hyperplane, and uses the marked value to derive the exact
+   real identity
+   `faceAxisCubic_eq_gauntCoefficient_mul_realSigmaThree`.  This continuation
+   has received source-only review but no Lean invocation: the q11 build owns
+   the queue and must not be disturbed.  The only uncommitted C815 path is
+   `lean/RelativeConicArcs/SphericalCubicRestriction.lean`.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
