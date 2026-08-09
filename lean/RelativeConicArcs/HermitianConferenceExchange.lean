@@ -267,6 +267,44 @@ noncomputable def hermitianExchange (a b c : ℂ) : Matrix (Fin 3) (Fin 3) ℂ :
   (1 : Matrix (Fin 3) (Fin 3) ℂ)
     - (1 / 5 : ℂ) • (hermitianTriangle a b c * hermitianTriangle a b c)
 
+/-- The fixed-six complementary normalization `I - A²/5` for a principal
+block of any support size. -/
+noncomputable def fixedSixComplement {n : Type*} [Fintype n] [DecidableEq n]
+    (A : Matrix n n ℂ) : Matrix n n ℂ :=
+  1 - (1 / 5 : ℂ) • (A * A)
+
+/-- A one-coordinate principal block has fixed-six second moment one. -/
+theorem trace_sq_fixedSixComplement_fin_one (A : Matrix (Fin 1) (Fin 1) ℂ)
+    (hdiag : A 0 0 = 0) :
+    (fixedSixComplement A * fixedSixComplement A).trace = 1 := by
+  rw [Matrix.trace_fin_one]
+  simp [fixedSixComplement, Matrix.mul_apply, hdiag]
+
+/-- The Hermitian principal block on two coordinates. -/
+def hermitianEdge (a : ℂ) : Matrix (Fin 2) (Fin 2) ℂ :=
+  !![0, a; starRingEnd ℂ a, 0]
+
+/-- A two-coordinate unit-modulus principal block has fixed-six second moment
+`32/25`. -/
+theorem trace_sq_fixedSixComplement_hermitianEdge (a : ℂ)
+    (ha : a * starRingEnd ℂ a = 1) :
+    (fixedSixComplement (hermitianEdge a) *
+        fixedSixComplement (hermitianEdge a)).trace = 32 / 25 := by
+  have ha2 : a ^ 2 * starRingEnd ℂ a ^ 2 = 1 := by
+    calc
+      a ^ 2 * starRingEnd ℂ a ^ 2 = (a * starRingEnd ℂ a) ^ 2 := by ring
+      _ = 1 := by rw [ha]; norm_num
+  rw [Matrix.trace_fin_two]
+  simp [fixedSixComplement, hermitianEdge, Matrix.mul_apply, Fin.sum_univ_two]
+  ring_nf
+  rw [ha, ha2]
+  norm_num
+
+/-- The three-coordinate fixed-six normalization is the Hermitian exchange
+matrix already used for balanced supports. -/
+theorem fixedSixComplement_hermitianTriangle (a b c : ℂ) :
+    fixedSixComplement (hermitianTriangle a b c) = hermitianExchange a b c := rfl
+
 /-- The second elementary spectral invariant, written through Newton's
 identity in terms of matrix traces. -/
 noncomputable def exchangeE2 (H : Matrix (Fin 3) (Fin 3) ℂ) : ℂ :=
