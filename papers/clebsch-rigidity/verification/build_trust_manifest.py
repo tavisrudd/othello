@@ -21,8 +21,8 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_PACKAGE_COMMIT = "f27a4de69cdcf32e2d3242291621554378e6bfe3"
-PINNED_FINITEGEOM_COMMIT = "5d9f53f11770bae8af71a577a65b1e3d927d5c92"
+PINNED_PACKAGE_COMMIT = "38059cab5923dbb2a15d515c711b913d991432d5"
+PINNED_FINITEGEOM_COMMIT = "187bed8895fc62784caf2022d717b4daa37871ad"
 
 
 TERMINALS = {
@@ -46,6 +46,11 @@ TERMINALS = {
         "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts",
         "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
         "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
+        "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary",
+    ],
+    "support_chirality": [
+        "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
+        "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
     ],
     "rigidity": [
         "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -546,7 +551,7 @@ def components_by_row(
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),
                 replay("support cubic, continuation operator, and diagonal determinant pencil", ["check_orientation_two_graph.py"], orientation_coverage, "The manuscript proves the switching invariance, inverse gauge construction, association-algebra identity, and Jacobi complementary-minor deduction.", direct_coordinates),
-                lean("antipodal cover through rational and integral commutants", ["orientation_symmetry", "orientation_spine"], axioms),
+                lean("intrinsic support sheets through rational and integral commutants", ["support_chirality", "orientation_symmetry", "orientation_spine"], axioms),
             ],
         ),
         24: (

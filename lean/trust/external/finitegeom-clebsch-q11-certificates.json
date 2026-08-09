@@ -510,6 +510,15 @@
       "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
       "origin": "dependency"
     },
+    "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
+      "origin": "dependency"
+    },
     "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports": {
       "axioms": [
         "Classical.choice",
@@ -537,6 +546,15 @@
       "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
       "origin": "dependency"
     },
+    "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
+      "origin": "dependency"
+    },
     "RelativeConicArcs.Examples.Q11Coding.distanceThree_leader_count_twenty": {
       "axioms": [
         "Classical.choice",
@@ -554,6 +572,24 @@
       ],
       "module": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
       "origin": "package"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
+      "origin": "dependency"
+    },
+    "RelativeConicArcs.Examples.Q11Coding.supportChirality_partition": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "RelativeConicArcs/Q11DecodingSynthesis.lean",
+      "origin": "dependency"
     },
     "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact": {
       "axioms": [
@@ -1568,20 +1604,20 @@
     }
   },
   "dependency": {
-    "commit": "5d9f53f11770bae8af71a577a65b1e3d927d5c92",
+    "commit": "187bed8895fc62784caf2022d717b4daa37871ad",
     "repository": "https://github.com/tavisrudd/finitegeom"
   },
   "evidence": {
     "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
-    "axiom_log_sha256": "d8e41565b189767c97a653d2db0f572a9bef756565d514390e753cef3b711987",
+    "axiom_log_sha256": "1e96b9a38ce2de799195a2a334871f23b59327849d4d004116b508879407e1be",
     "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
   },
   "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "22b9ef8ecc8a5915332514ed99dab5ff6f1da9b3de8adb7a127b867a9176177e",
+  "manifest_sha256": "df8e2f386665d875c07a639f62aeff1222d24835e90b8320d1475e388e387c92",
   "package": "finitegeom-clebsch-q11-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
-  "source_commit": "02205751fdf43108ece6cd31b7e5cfbd78c4f061",
+  "source_commit": "ba2d9ef5f317d768fde069dc2d5ea0390e3d27a5",
   "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
 }
