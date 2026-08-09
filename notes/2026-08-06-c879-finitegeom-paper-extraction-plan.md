@@ -97,6 +97,12 @@ edge policy.  Its Q11 check is green after the self-contained rewrite.  Its port
 scan intentionally remains red for the projective-cap Q11, Q13, Q16, and Q25
 certificate packages until each receives the same local-model/adapter migration.
 
+The Q16 ownership seam is not its current repository boundary.  The generated level,
+step-kernel, leaf, and rejection checks belong in the self-contained certificate
+package behind a local `Idx`/field model.  `Q16Reduction`, `Q16Result`, and the
+paper-wide `ArcsCompleteOutsideConic` gate are human downstream modules and remain in
+finitegeom; the adapter transports the generated rejection terminal into that layer.
+
 Use explicit paper and shared source roots:
 
 ```text
