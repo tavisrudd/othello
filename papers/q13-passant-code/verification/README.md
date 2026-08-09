@@ -131,6 +131,7 @@ PassantCodeQ13/MinimumWords/OrbitDihedralA.lean
 PassantCodeQ13/MinimumWords/OrbitDihedralB.lean
 PassantCodeQ13/MinimumWords/OrbitDihedralC.lean
 PassantCodeQ13/MinimumWords/OrbitDihedral.lean
+PassantCodeQ13/MinimumWords/FixedPointStabilizer.lean
 PassantCodeQ13/MinimumWords/Exhaustion.lean
 PassantCodeQ13/MinimumWords/ConcurrenceBase.lean
 PassantCodeQ13/MinimumWords/Reconstruction.lean

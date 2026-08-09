@@ -137,6 +137,29 @@ def render_indices(name: str, indices: list[int]) -> str:
     )
 
 
+def fixed_point_stabilizer_action_indices() -> list[list[int]]:
+    points = internal_points()
+    point_index = {point: position for position, point in enumerate(points)}
+    stabilizer = [matrix for matrix in projective_matrices() if act(matrix, points[0]) == points[0]]
+    rows = [[point_index[act(matrix, point)] for point in points] for matrix in stabilizer]
+    if len(rows) != 28 or any(sorted(row) != list(range(78)) for row in rows):
+        raise SystemExit("fixed-point stabilizer action table has the wrong shape or a non-permutation row")
+    return rows
+
+
+def render_action_rows(name: str, rows: list[list[int]]) -> str:
+    rendered_rows = []
+    for row in rows:
+        chunks = [", ".join(str(index) for index in row[start:start + 26])
+                  for start in range(0, len(row), 26)]
+        rendered_rows.append("  [" + ",\n   ".join(chunks) + "]")
+    return (
+        "/-- For each normalized matrix fixing internal point zero, the image index of every "
+        "internal point. -/\n"
+        f"def {name} : List (List Nat) := [\n" + ",\n".join(rendered_rows) + "\n]\n"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
@@ -156,6 +179,8 @@ def main() -> None:
         union.extend(code for code in orbit if code not in union)
     if len(union) != 364:
         raise SystemExit(f"minimumWordSupports: expected 364 supports, computed {len(union)}")
+    blocks.append(render_action_rows(
+        "fixedPointStabilizerActionIndices", fixed_point_stabilizer_action_indices()))
     blocks.append(render("minimumWordSupports", union))
 
     text = (
@@ -172,6 +197,8 @@ def main() -> None:
         "The adjacent matrix-orbit index list has one entry per normalized projective matrix and\n"
         "records which displayed support that matrix produces.  Bounded Lean modules check those\n"
         "entries against the action and check that their first occurrences reproduce the orbit.\n"
+        "The 28 by 78 fixed-point stabilizer table records the same action on point indices; Lean\n"
+        "checks every entry before using the rows to identify the four fixed-point orbit slices.\n"
         "-/\n"
         "\n"
         "-- The generated matrix-index lists have 2184 entries, so their literals need a recursion\n"

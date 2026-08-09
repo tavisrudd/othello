@@ -149,6 +149,24 @@ Corrected steps 1 and 2 are therefore closed.  The highest-EV next move is corre
 transport.  The theorem-completeness findings above remain open; this build repair does not change
 the task's overall **MAJOR** status.
 
+### Execution update (2026-08-08, corrected step 3 structurally closed)
+
+`fixedPoint_slices_are_stabilizer_orbits` no longer uses native evaluation.  The deterministic orbit
+generator now emits the 28 rows of 78 internal-point image indices for the normalized matrices fixing
+internal point zero.  `MinimumWords.FixedPointStabilizer` checks every one of the 2,184 entries against
+the symmetric-square action, proves by induction that folding a checked row equals semantic action on
+an arbitrary encoded support, and reduces only the four compact table-orbit comparisons.  The public
+theorem and its gate wrapper retain their names and statements.  `MinimumWords.Exhaustion` now has
+only the genuinely open `fixedPoint_weightTwelve_exhaustion` native leaf.
+
+The new module elaborates under the guarded single-thread runner in 1m46s; the regenerated data module
+builds in 5.89s at 586,704 kB.  Generator byte identity and the full rejecting evidence verifier pass,
+and the release inventory and evidence provenance include the table.  A complete downstream package
+replay remains pending because a foreign multi-target Lean queue owns the shared build lock; this is a
+replay condition, not a theorem or elaboration blocker.  The highest-EV mathematical move is now
+corrected step 4: the bounded arbitrary-weight-twelve arc/parity attack, with the proved four-profile
+checker as the mandatory fallback.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the

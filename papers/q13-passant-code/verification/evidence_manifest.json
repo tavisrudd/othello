@@ -182,15 +182,15 @@
     },
     {
       "paper_iv_path": "lean-certificates/generate_minimum_word_orbits.py",
-      "bytes": 7632,
-      "sha256": "6d2d0586e4c42d233b0db6ae87f3a2e9d17afefd9659d2cc99a7f100264995d3",
-      "role": "deterministic generator and byte-for-byte checker for the four minimum-word orbit supports and their normalized-matrix-to-orbit-position tables"
+      "bytes": 9066,
+      "sha256": "ccccc32ea1f4eeb1e079bcaf52396c22e36f55252482dc2eab3babee98fc0416",
+      "role": "deterministic generator and byte-for-byte checker for the four minimum-word orbit supports, their normalized-matrix-to-orbit-position tables, and the 28 by 78 fixed-point stabilizer action-index table"
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/MinimumWords/OrbitData.lean",
-      "bytes": 55349,
-      "sha256": "c707dadd265530aa2c75b8ede84363ed5c4596ab0f2fba6d564159fde10a8467",
-      "role": "generated supports of the four minimum-word orbits and the position of every normalized projective matrix image in its displayed orbit"
+      "bytes": 64428,
+      "sha256": "7d680dc9288aaa645586dfe590c158b6219d6725354cf1c1ebdb4c5725880ac5",
+      "role": "generated supports of the four minimum-word orbits, the position of every normalized projective matrix image in its displayed orbit, and all internal-point image indices for the fixed-point stabilizer"
     },
     {
       "paper_iv_path": "lean-certificates/check_association_transport_statements.py",
@@ -276,7 +276,7 @@
       "cwd": "lean-certificates",
       "command": "python3 generate_minimum_word_orbits.py --check",
       "output_contains": "q=13 minimum-word orbit data: PASS",
-      "certifies": "the checked orbit supports and matrix-to-orbit-position tables are byte-identical to deterministic regeneration from the symmetric-square action of the normalized projective group"
+      "certifies": "the checked orbit supports, matrix-to-orbit-position tables, and fixed-point stabilizer action-index rows are byte-identical to deterministic regeneration from the symmetric-square action of the normalized projective group"
     },
     {
       "cwd": "lean-certificates",
