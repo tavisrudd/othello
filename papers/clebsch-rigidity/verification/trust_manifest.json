@@ -2345,7 +2345,7 @@
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "0ef1f08ef646acd9c48498f270288da78a440e737598743ac92306d7da4751b6"
+      "sha256": "3670f285a137865140f37fab724a60dca7cedd297e794278b64513ff03baad72"
     },
     "output": {
       "path": "verification/verify-release-output.json",
@@ -2371,7 +2371,7 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "ed50a738c289e4eba3ea2889cd18cc5d46b0f05171ff7a6262927d659a6cf76d"
+        "sha256": "8324f247fa6a305f78bdba3097e17231775a545df0675e0a90698f43e4e9eb44"
       },
       {
         "path": "verification/check_manuscript_build.py",
