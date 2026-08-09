@@ -570,6 +570,12 @@ block that theorem.
 | Paper IV — *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
+C898 is complete. Its sealed reviewer dossier, five independent cold reads,
+synthesis, and adopted remediation produced Paper I authority commit `c8438909`
+and verified standalone export `9259b39`. The characteristic-five stabilizer
+correction and the human proof/exposition repairs are closed; the author
+transferred the remaining formal Lean/release replay outside C898.
+
 C703 records the title-page identity of the released I--III trilogy stage:
 *The Clebsch cubic: recovering, orienting, and realizing* and a restrained
 opening image, while their canonical titles, logical independence, and

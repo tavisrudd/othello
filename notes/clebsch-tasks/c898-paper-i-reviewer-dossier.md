@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active and retained; round 1 frozen `MAJOR`; manuscript remediation
-validated, formal release replay queued
+**Status:** complete and archived 2026-08-09; repaired authority `c8438909`,
+verified standalone export `9259b39`
 
 ## Objective
 
@@ -51,11 +51,11 @@ external remediation cold read on the intermediate repaired PDF is frozen at
 minor findings were adopted before the next freeze.
 
 The revised manuscript, companion, exact checkers, deterministic PDF build,
-verification-tool tests, and trust manifest pass. The remaining aggregate Lean
-and final release-certificate replay is explicitly queued in the remediation
-record and must use the disk-backed pinned worktrees there. It was deferred at
-the user's request while another large Lean rebuild was active; C898 remains
-assigned throughout.
+verification-tool tests, and trust manifest pass. The authority checkpoint is
+`c8438909`; the tool-generated standalone export is verified and committed at
+`9259b39`. The author transferred the remaining formal Lean/release replay to
+the agent already performing the larger Lean refactor, so C898 owns no further
+formal or release task.
 
 The sealed dossier is input only to review sub-agents. Remediation work receives
 the frozen reports and an adopted-finding ledger, not the full persona dossier.

@@ -1,7 +1,7 @@
 # C898 — Paper I round-1 remediation
 
 **Date:** 2026-08-09  
-**Status:** manuscript remediation validated; formal release replay queued  
+**Status:** complete on review/remediation scope; formal replay transferred
 **Owning task:** C898, retained for later rounds
 
 ## Scope
@@ -96,15 +96,8 @@ while another large Lean rebuild was in progress. The interrupted run record is
 `/home/tavis/.cache/othello-lean-build/run-20260809-211052-df95c0f6`; it did not
 report a theorem failure.
 
-Queued C898 release work, to run only when the competing Lean rebuild has
-finished:
-
-1. rerun the guarded aggregate gate from the disk-backed q11 worktree;
-2. run `verification/verify_release.py` with that successful guarded run and
-   the disk-backed finitegeom worktree
-   `/home/tavis/.cache/othello-worktrees/c898-finitegeom-187bed8`;
-3. refresh and commit the release certificate and trust-manifest hash; and
-4. record the resulting commit/PDF pair as the frozen input to C898 round 2.
-
-Until those queued steps pass, the repaired PDF is the manuscript-review
-candidate but not the formal round-2 release freeze.
+On 2026-08-09 the author transferred the remaining aggregate Lean and final
+release-certificate replay to the agent already performing the larger Lean
+refactor. Those actions are no longer owned by C898 and do not block its
+archive. The review/remediation authority is committed at `c8438909`; its
+tool-generated standalone export is verified and committed at `9259b39`.
