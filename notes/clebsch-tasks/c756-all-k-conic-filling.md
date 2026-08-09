@@ -1025,6 +1025,30 @@ monodromy route and move to masked Rédei. See
 `notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md` and its adjacent
 evidence bundle.
 
+**Signed-elliptic-fusion EJ outcome (2026-08-08):** the new closed-form
+operator meets the exact condition that reopens the stopped equality route.
+On internal conjugate pairs define \(K_{PQ}=\chi_q(g_{PQ})\) on external-join
+edges and zero elsewhere. Up to switching when \(q\equiv1\pmod4\),
+\[
+ K^2=\chi_q(-1)K+(q^2-1)I/4.
+\]
+It is the Frobenius-odd compression of Paley character convolution. Its
+distinguished eigenspace has a sharp support bound \((q+3)/2\), and equality
+has exactly the signed F2 plus constant-holonomy pattern; for
+\(q\equiv3\pmod4\) this is equivalent to coherence. Thus the live proof gate
+is now classification of minimum-support eigenvectors of this signed elliptic
+fusion, not another field-by-field theta fit. At \(q=13\), reduction modulo
+two is exactly C817's projector
+\(A_9+A_{10}+A_{12}=e_K\) onto the \([78,36,12]_2\) passant code.
+
+The infinite-tower positioning is bounded. The exceptional-root code ladder
+pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
+family and does not pre-empt the signed real identity. But the general binary
+conic-passant code and elliptic scheme are already known, and C756 already had
+the Paley crown reformulation. Do not claim a new binary tower. The possible
+publishable residue is the signed fusion, its Frobenius-odd support theorem,
+and the exact all-\(k\)/Paper-IV bridge, after a focused novelty audit.
+
 ## Current boundary
 
 - Open problem as stated: `papers/clebsch-rigidity/clebsch_rigidity.tex:1485-1489`.
@@ -1040,8 +1064,9 @@ Two independent uniform obstructions are still required:
 2. exclude every nonsaturated family with \(\delta\ge2\), beginning with the
    defect-two boundary \((q,k)=(53,12)\).
 
-The old secant-pencil and association-scheme candidates are superseded.  The cleanest
-saturated-internal statement is now the equality case in the binary passant code:
+The old secant-pencil and field-by-field association-scheme certificate candidates are
+superseded.  The cleanest saturated-internal statement is now equality in the signed
+elliptic fusion, whose mod-two shadow at \(q=13\) is the binary passant-code projector:
 for \(q>3\), prove that \(K_q\) meets the lower bound \((q+3)/2\) only at \(q=5\), with
 four-frame supports.  Equivalently, after fixing a support point \(P\), exclude cliques
 of size \((q+1)/2\) in the local Segre-tangent graph \(H_{q,P}\).  This formulation keeps
@@ -1059,10 +1084,11 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: audit and scope the partial-results companion listed in the
-reviewed route.  The strongest open proof gate remains the minimum-passant-code equality
-classification, equivalently the forbidden linear clique in \(H_{q,P}\), but its first
-two certificate passes have met the stop rule and should not be repeated.  The historical
+Highest-EV next action: classify minimum-support eigenvectors of the signed elliptic
+fusion, while running a focused original-source/forward-citation audit for that exact
+identity and support theorem.  This closed-form operator satisfies the card's condition
+for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
+certificate passes have met their stop rule and should not be repeated.  The historical
 coordinate routes below explain the obstruction and remain reusable inputs, not the live
 route.  The tight balance theorem proves that another global spectral bound cannot finish it.
 The bare cross-ratio nonsingularity shortcut is closed, the Ball--Lavrauw tangent tensor
@@ -1075,9 +1101,9 @@ passed its continue gate, and the digit-tower pass has now converted it into pro
 structure: coherence alone forces rational power sums through the critical degree,
 uniform valuation \((q+3)/2\), and the composition normal form
 \(G=(R-\gamma)(R-\gamma^q)\) with \(R\) rational of degree \((q+3)/2\) and \(\gamma\)
-a quadratic point.  The active interface is the \((R,\gamma)\) classification:
-bounded split-fiber census, coherence expressed on the fiber, and the
-monodromy/exceptional-polynomial route for \(R(X)-R(Y)\).  The direct adjugate/second-compound calculation stays
+a quadratic point.  The \((R,\gamma)\) classification remains the arithmetic
+fallback, but ordinary monodromy and pair resultants have failed their discriminators;
+its surviving sign data are now compressed by the signed-fusion equality problem.  The direct adjugate/second-compound calculation stays
 parked unless a global low-degree carrier emerges.
 The fragmented-Moore/intercept mechanism is independently durable negative material: it is
 the precise explanation requested here for why the chord-moment compression family cannot

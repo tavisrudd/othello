@@ -335,7 +335,150 @@ it is a finite permutation/Kummer-module calculation with a clear stop rule.
 It also avoids spending a uniform argument on two residue classes whose
 signed linear algebra is provably different.
 
-## 5. Reproducible verification
+## 5. EJ: the signed elliptic fusion
+
+There is a stronger operator hiding in (10)--(12).  Let \(\mathcal I\) be the
+set of \(q(q-1)/2\) internal points, viewed as unordered conjugate pairs, and
+choose one root \(z_P\) above each \(P\in\mathcal I\).  For distinct \(P,Q\)
+put
+\[
+ K_{PQ}=\begin{cases}
+ \chi_q(g_{PQ}),&\chi_q(1-g_{PQ})=-1,\\
+ 0,&\chi_q(1-g_{PQ})=+1,
+ \end{cases}
+ \qquad K_{PP}=0. \tag{14}
+\]
+Conjugating one chosen root leaves the zero pattern fixed and multiplies its
+incident nonzero entries by \(-\chi_q(-1)\).  Thus for
+\(q\equiv1\pmod4\) the matrix is defined up to diagonal switching, while for
+\(q\equiv3\pmod4\) it is intrinsic.  Its spectrum and support theory are
+unambiguous in both cases.
+
+> **Theorem 16 (signed elliptic-fusion identity).**  If
+> \(\epsilon=\chi_q(-1)\), then
+> \[
+> K^2=\epsilon K+\frac{q^2-1}{4}I. \tag{15}
+> \]
+> Consequently the two eigenvalues and their multiplicities are
+> \[
+> \lambda=\epsilon\frac{q+1}{2}
+> \quad\left(\frac{(q-1)^2}{4}\text{ times}\right),
+> \qquad
+> \mu=-\epsilon\frac{q-1}{2}
+> \quad\left(\frac{q^2-1}{4}\text{ times}\right). \tag{16}
+> \]
+
+**Proof.**  Fix a trace-zero \(s\) with \(s^2=D\) a nonsquare and write the
+chosen roots as \(z_P=a_P+b_Ps\).  Put \(\sigma_P=\chi_q(b_P)\), and for
+distinct \(P,Q\) set
+\[
+ A_{PQ}=\chi_q(N(z_P-z_Q)),\qquad
+ B_{PQ}=\chi_q(N(z_P-z_Q^q)),\qquad
+ L_{PQ}=\frac{A_{PQ}-B_{PQ}}2,
+\]
+with \(L_{PP}=0\).  The entry \(L_{PQ}\) is \(A_{PQ}\) exactly on an F2
+edge and is zero otherwise.  Since
+\(\chi_q((z_P-z_P^q)(z_Q-z_Q^q))=-\sigma_P\sigma_Q\), (14) says
+\[
+ K=-D_\sigma L D_\sigma. \tag{17}
+\]
+
+Now let \(M\) be quadratic-character convolution on \(\mathbb F_{q^2}\):
+\(M_{xy}=\chi_{q^2}(x-y)\).  The standard character correlation gives
+\[
+ M^2=q^2I-J. \tag{18}
+\]
+On the Frobenius-odd subspace
+\(W=\{f:f(x^q)=-f(x)\}\), the all-ones operator vanishes, so
+\(M^2=q^2I\).  Identify \(W\) with functions on \(\mathcal I\) by assigning
+opposite values to the two roots of every pair.  In the oriented-pair basis,
+the matrix of \(M|_W\) is
+\[
+ 2L+\epsilon I. \tag{19}
+\]
+Indeed the off-diagonal pair contributes \(A_{PQ}-B_{PQ}\), while the
+same-pair term is
+\(-\chi_q(N(z_P-z_P^q))=\epsilon\).  Squaring (19) and using (18) gives
+\(L^2=-\epsilon L+(q^2-1)I/4\); switching by (17) gives (15).
+The roots of the quadratic in (15) are (16), and their multiplicities follow
+from \(\operatorname{tr}K=0\). \(\square\)
+
+This proof identifies the operator, rather than merely its spectrum: it is the
+Frobenius-odd half of Paley character convolution, compressed to conjugate
+pairs.  Hollmann--Xiang's elliptic association scheme supplies the surrounding
+cross-ratio orbit algebra; (14) is a signed fusion of those orbitals rather
+than an ordinary zero-one fusion.
+
+> **Theorem 17 (sharp Frobenius-odd support bound).**  Every nonzero
+> \(\lambda\)-eigenvector of \(K\) has support at least
+> \[
+> n=\frac{q+3}{2}. \tag{20}
+> \]
+> Equality holds precisely when, after switching by its coordinate signs, its
+> support induces \(\epsilon(J_n-I_n)\).  Hence every coherent system gives a
+> minimum-support \(\lambda\)-eigenvector.  Conversely, an equality vector
+> gives F2 and the required constant triangle holonomy; for
+> \(q\equiv3\pmod4\) Theorems 13--15 recover full coherence, while for
+> \(q\equiv1\pmod4\) the previously identified even switching ambiguity
+> remains.
+
+**Proof.**  The orthogonal projector onto the \(\lambda\)-eigenspace is
+\[
+ E_\lambda=\frac{q-1}{2q}I+\frac{\epsilon}{q}K. \tag{21}
+\]
+For \(x=E_\lambda x\), choose \(i\) with \(|x_i|\) maximal and write
+\(s=|\operatorname{supp}x|\).  The \(i\)-th coordinate and the triangle
+inequality give
+\[
+ 1\le \frac{q-1}{2q}+\frac{s-1}{q},
+\]
+so \(s\ge(q+3)/2\).  Equality forces every other support vertex to be a
+nonzero \(K\)-neighbor, all nonzero coordinates to have the same magnitude,
+and \(K_{ij}=\epsilon\,\operatorname{sgn}(x_i)\operatorname{sgn}(x_j)\).
+These conditions also suffice.  A coherent support has exactly that switched
+principal matrix by Theorem 15; its extremal Rayleigh quotient equals the
+global eigenvalue \(\lambda\), so its signed indicator extended by zero is a
+global eigenvector. \(\square\)
+
+There is also an exact binary shadow.  Reducing (15) modulo two makes
+\(\bar K\) an idempotent, and reducing the two rational spectral projectors
+(their denominator \(q\) is odd) gives
+\[
+ \operatorname{rank}_{\mathbb F_2}\bar K=
+ \begin{cases}
+ (q-1)^2/4,&q\equiv1\pmod4,\\
+ (q^2-1)/4,&q\equiv3\pmod4.
+ \end{cases} \tag{22}
+\]
+At \(q=13\), the support of \(\bar K\) is exactly the elliptic-scheme fusion
+\(A_9+A_{10}+A_{12}\).  Thus it is the canonical projector
+\(e_K\) from C817 onto Paper IV's \([78,36,12]_2\) passant code.  This is a
+real structural bridge, not a new code construction: the general passant-code
+dimension formula and the elliptic association scheme are already prior art.
+
+### Pre-emption check against the recorded infinite tower
+
+The pre-empted exceptional-root-system code ladder in the 2026-07-31 results
+snapshot is a different tower: Calderbank--Kantor two-weight codes linked by
+Brouwer--Shult Taylor extensions.  It does not pre-empt Theorems 16--17.
+However, it is the right warning against claiming a new infinite code family
+from (22).  The binary objects sit in the already known general conic-passant
+code and elliptic-scheme families; at \(q=13\) the identity with C817's
+projector is exact.  The potentially new residue is therefore the **signed
+real fusion and its Frobenius-odd equality classification**, not an infinite
+binary tower.  A publication claim for that residue still needs a targeted
+original-source and forward-citation audit.
+
+The Paley crown reformulation itself is also not new within C756: the
+twenty-fifth pass already identified coherent systems with Frobenius-odd
+\(\{0,\pm1\}\)-valued Paley eigenfunctions of support \(q+3\).  Theorems
+16--17 improve that result by descending it projectively to internal points,
+proving the exact signed-fusion quadratic relation, proving the sharp lower
+bound inside the entire Frobenius-odd eigenspace, and exposing the Paper IV
+projector.  They do not by themselves exclude equality, so they sharpen the
+open problem rather than solve all-\(k\).
+
+## 6. Reproducible verification
 
 The exact checker verifies (1), without using characters, on every split-fibre
 row in the independent subset census for \(q=5,7\): 1,550 row identities over
@@ -361,6 +504,27 @@ enumerator and shares its finite-field tables; the displayed theorem has an
 independent symbolic proof. The explicit \(S_5\) example is checked by the
 same tables, while every field evaluation needed for its human proof is
 displayed above. No finite range is promoted to a uniform nonexistence claim.
+
+The independent signed-fusion checker constructs the full integer matrix in
+the canonical prime-field orientation and verifies (15) entry by entry for
+\(q=5,7,11,13,17,19,23\), together with (22).  It checks 121,396 matrix
+entries.  At \(q=13\) it independently computes the conic invariant \(\rho\)
+and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
+\(e_K=A_9+A_{10}+A_{12}\).
+
+Replay from the repository root:
+
+```sh
+python3 notes/2026-08-08-c756-signed-elliptic-fusion.py --check
+```
+
+The checker is only a finite prime-field cross-check.  Theorems 16--17 and
+(22) have the independent uniform character-convolution proofs above.
+
+| signed-fusion artifact | bytes | SHA-256 |
+|---|---:|---|
+| `2026-08-08-c756-signed-elliptic-fusion.py` | 5,900 | `793a08b154ec5fccb90b4e18cda1bfe7b5f4101d587cf9af961e8b301470a120` |
+| `2026-08-08-c756-signed-elliptic-fusion.json` | 2,995 | `1162c4990ca79c7e701e3dedd2b7d09cf92a3382a82396ace390fa196fd42eaa` |
 
 ## EJ + TT closeout
 
@@ -404,6 +568,22 @@ and the coarse Hasse size scale once \(q>4\). A useful 2-descent must therefore
 use the particular pullback \(Y^2=\Phi(R(X))\), not merely the rank or size of
 its torsion. Generic class-group counting is closed as a finisher.
 
+**EJ2.**  The two Kummer layers fuse into the projective signed operator
+\(K\), and character convolution proves its entire spectrum in one line.  The
+surprise is not a stronger eigenvalue bound--interlacing remains tight--but an
+exact equality problem: coherent systems are minimum-support vectors in a
+distinguished Frobenius-odd eigenspace.  The binary reduction then lands
+exactly on C817's \(q=13\) code projector.
+
+**TT5.**  The pre-emption check changes the positioning.  C756 already knew
+the Paley crown/eigenfunction reformulation, and the snapshot's pre-empted
+exceptional-root code ladder forbids any casual “new infinite tower” framing.
+The latter is a different family and does not kill Theorems 16--17, but the
+general binary conic code and elliptic scheme are known.  The publishable
+candidate is only the signed real fusion, its support theorem, and the bridge
+between the all-\(k\) equality problem and the Paper IV projector, subject to
+a focused novelty audit.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -422,15 +602,23 @@ its torsion. Generic class-group counting is closed as a finisher.
 | Can triangle holonomy be written in the existing pair invariant? | settled | Theorem 15: \(\tau_{ijk}=-\chi_q(g_{ij}g_{jk}g_{ki})\) |
 | Are the forced row collisions arbitrary? | settled negatively | they occur only within one switching-color class; exact capacities are (13) |
 | Why does the same reduction not close \(q\equiv1\pmod4\)? | settled | even \(n\) leaves the switching vector \((\eta_i)\) subject only to \(\prod_i\eta_i=1\) |
+| Why did the signed orbital matrix have only two eigenvalues in every test? | settled uniformly | Theorem 16: it is the Frobenius-odd compression of Paley character convolution |
+| Is tight interlacing merely a failed bound? | settled negatively | Theorem 17: it is exactly the equality/minimum-support formulation of coherence |
+| Why do the numbers \(78\) and \(36\) match Paper IV? | settled exactly | at \(q=13\), \(\bar K=A_9+A_{10}+A_{12}=e_K\), the canonical projector onto the passant code |
+| Is this a new infinite binary code tower? | settled negative as a positioning claim | general conic-passant code dimensions and the elliptic scheme are prior art; the exceptional-root Taylor tower is different but already pre-empted |
+| Is the signed real fusion/support theorem itself new? | open novelty gate | targeted original-source and forward-citation audit; Hollmann--Xiang supplies the ambient scheme but the exact signed identity was not asserted in the inspected passages |
+| Can minimum-support \(\lambda\)-eigenvectors of \(K\) be classified? | open; now the sharpest equality gate | for \(q\equiv3\pmod4\), exclude equality beyond \(q=5\); for \(q\equiv1\pmod4\), combine equality with the remaining switching condition |
 | Does the \(q=5\) cyclic quartic exhaust the permitted signed signatures? | open | same module plus degree-two specialization constraint |
 | Is the saturated-internal branch closed? | no | signed-module gate, then fallback to masked Rédei if generic signature survives |
 | Does this affect the nonsaturated branch? | no | the masked Rédei target \(h\ge1\) remains independently necessary for full all-\(k\) |
 
 ## Next action
 
-For \(q\equiv3\pmod4\), projectively normalize one base conjugate pair and
-rewrite constant triangle holonomy in pair/triple cross-ratio coordinates, with the
-line-plus-pole cliques as rejecting controls. Compute only the residual
-two-layer Kummer module left after normalization. In parallel, test the
-rank-one 2-descent obstruction for \(q\equiv1\pmod4\). Stop the
-\((R,\gamma)\) route if both residue-class signatures survive generically.
+Classify equality in Theorem 17, equivalently minimum-support vectors in the
+relevant eigenspace of the signed elliptic fusion.  Use the Paley lift and the
+projective cross-ratio model as two exact presentations, with the
+line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
+novelty audit for the signed fusion identity and support theorem.  If equality
+classification is as hard as the existing Paley stability problem, return to
+the composition-specific \(q\equiv1\pmod4\) 2-descent and masked Rédei route;
+do not market the binary reduction as a new infinite tower.
