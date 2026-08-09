@@ -181,7 +181,15 @@ has the explicit numerator recorded in the aligned common-torus report.
 The exact surviving freedom is the displacement \(\xi\) between the star
 centroid and conic center.  It eliminates exactly as the rank-two Laurent
 code \(s_i-c_i=\eta u_i+\eta^qu_i^{-1}\); the conic scale eliminates through
-the common values \(s_i^2-p_i^2\).
+the common values \(s_i^2-p_i^2\).  After the passant parametrization, every
+node value factors as
+\[
+ Q(x_{ij})=-d\frac{
+ (z-a)(z-a^{-1})(z-b)(z-b^{-1})}{(z^2-1)^2},
+ \quad z=u_i/u_j, a=v_iv_j, b=v_i/v_j.
+\]
+Here \(a,b\in\mathbf F_{53}^*\) in both offset descent cases, so each of the
+55 internal-node tests is a two-factor base-field character condition.
 
 ## What is already uniform
 
@@ -200,9 +208,11 @@ the common values \(s_i^2-p_i^2\).
 
 In the aligned branch, combine the rank-two Laurent compatibility minors for
 \(s_i-c_i\) with \(\nabla\mathcal Z=0\), solve for the two offset coordinates
-from two rows, and insert the result into the explicit internal-node
-numerators.  Do not set \(\xi=0\), run generic 11-variable elimination,
-rerun a quartic character bound, or cross the degree-16 mask boundary.
+from two rows, and insert the result into the two rational node factors in
+the aligned-resultant report.  Seek a forced collision factor or zero
+separator Hessian.  Do not set \(\xi=0\), run generic 11-variable
+elimination, rerun a quartic character bound, or cross the degree-16 mask
+boundary.
 
 ## Stop rules
 
@@ -260,6 +270,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-ej2-torus-contraction.md`;
 - `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`;
 - `notes/2026-08-09-c756-aligned-common-torus.md`;
+- `notes/2026-08-09-c756-aligned-node-resultant.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:

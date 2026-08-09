@@ -129,9 +129,11 @@ Equation (12) itself has a one-dimensional torus parametrization.  If
  \qquad
  p_i=\frac{\rho}{2}(v_i-v_i^{-1}).                        \tag{13}
 \]
-The rational descent of \(v_i\) is split or norm-one according to the square
-class of \(4d\nu\).  Thus the aligned branch naturally carries two tori:
-the direction variables \(u_i\) and the passant-offset variables \(v_i\).
+If \(4d\nu\) is square, choose \(\rho\in\mathbf F_{53}\) and then
+\(v_i\in\mathbf F_{53}^*\).  If it is nonsquare, choose
+\(\rho^q=-\rho\); then \(v_i^q=-v_i\), so the \(v_i\) lie in the nonzero
+trace-zero coset.  Thus the aligned branch carries the norm-one direction
+torus \(u_i\) and a split-or-trace-zero offset parametrization \(v_i\).
 
 ## 4. Exact internal-node numerator
 
