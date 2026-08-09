@@ -1052,6 +1052,11 @@ One point earlier, a signed seed of size \(m=(q+1)/2\) has completion scores
 \(s_R\) with exact energy \(2m(m-1)\), and extends iff one uniquely determined
 score reaches \(\pm m\).  The existing local-graph table actually excludes
 even these seeds for every tested odd prime power \(5<q\le49\).
+For each candidate completion the Schur defect
+\(\Delta_R=m(m+1)-s_R^2-t_R\) is a nonnegative integer proportional to the
+enlarged Gram determinant; it vanishes exactly at completion.  Otherwise the
+reconstructed vector has squared distance at least \(2/m\) from every signed
+frame vector, so there are no analytic near-misses.
 
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
@@ -1096,8 +1101,8 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: prove \(\max|s_R|<m\) for every signed internal
-\(m\)-seed when \(q>5\), or classify the seeds and verify the bound on their
+Highest-EV next action: prove \(\Delta_R>0\) for every signed internal
+\(m\)-seed when \(q>5\), or classify the seeds and verify the defect on their
 normal forms.  This is the one-point-short version of classifying the smallest
 regular-simplex circuits, while a focused original-source/forward-citation audit
 checks those exact identities.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition

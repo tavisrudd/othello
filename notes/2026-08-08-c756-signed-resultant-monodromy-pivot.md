@@ -584,23 +584,67 @@ de Voorde half-size exterior-set theorems do not pre-empt this gate: their
 points are exterior, while (27) concerns internal points and also carries a
 signed triangle condition.
 
+> **Theorem 20 (quantized completion defect).**  In the setting of Theorem 19,
+> put
+> \[
+> t_R=\#\{P\in T:K_{RP}\ne0\},\qquad
+> \Delta_R=m(m+1)-s_R^2-t_R. \tag{31}
+> \]
+> Then \(\Delta_R\) is a nonnegative integer, and for the normalized
+> complementary-frame Gram matrix \(G\),
+> \[
+> \det G_{T\cup\{R\}}
+> =\frac1m\left(\frac{m+1}{m}\right)^{m-1}
+>   \frac{\Delta_R}{m(m+1)}. \tag{32}
+> \]
+> Moreover \(\Delta_R=0\) if and only if \(R\) is the unique completion.
+> If \(w_T\) is the unit vector reconstructed from the signed seed, then
+> \[
+> \min_{\sigma=\pm1}\|w_T-\sigma v_R\|^2
+> =2\left(1-\frac{|s_R|}{m}\right). \tag{33}
+> \]
+> Hence a noncompleting seed has uniform separation at least \(2/m\) in
+> squared distance from every signed frame vector.
+
+**Proof.**  After switching, the seed Gram matrix has diagonal one and
+off-diagonal \(-1/m\), so
+\[
+ G_T=\frac{m+1}{m}I-\frac1mJ,qquad
+ G_T^{-1}=\frac{m}{m+1}(I+J).
+\]
+The cross-Gram vector to \(R\) has entries \(0\) or \(\pm1/m\); its squared
+norm and coordinate sum are \(t_R/m^2\) and \(s_R/m\), up to a harmless
+global sign.  The Schur complement is therefore
+\(1-(t_R+s_R^2)/(m(m+1))\), proving nonnegativity and (32).  Since
+\(|s_R|\le t_R\le m\), equality forces \(t_R=m\) and \(|s_R|=m\), exactly
+Theorem 19's completion condition.  Finally
+\(w_T=-\sum_{P\in T}\eta_Pv_P\) has unit norm and
+\(|\langle w_T,v_R\rangle|=|s_R|/m\), which gives (33). \(\square\)
+
+Thus there are no analytic near-misses: the missing vector is either an exact
+frame member or is separated from the whole signed frame by a quantized gap.
+This replaces numerical stability questions by the discrete problem
+\(\Delta_R=0\).  It does not itself prove strict positivity, but it is a
+closed-form PSD certificate of bounded description, independent of the
+growing stabilizer-orbital algebra.
+
 One further arithmetic shadow is visible but does not supply the finisher.
 Set
 \[
- S=2K-\epsilon I,\qquad S^2=q^2I. \tag{31}
+ S=2K-\epsilon I,\qquad S^2=q^2I. \tag{34}
 \]
 Modulo the characteristic, \(\bar S^2=0\), so
 \(\operatorname{im}\bar S\subseteq\ker\bar S\) is a self-orthogonal modular
 code.  Exact prime-field checks for
 \(q=5,7,11,13,17,19,23\) give
 \[
- \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{32}
+ \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{35}
 \]
 No uniform claim is made from those seven cases.  More importantly, the
 kernel already has a weight-three dependency at \(q=5\) and a weight-four
 dependency at \(q=7\), below the coherent targets four and five.  Thus raw
 minimum distance of this characteristic code cannot exclude coherence; any
-use of (31) must retain the \(\{\pm1\}\) coefficient and projective-sign
+use of (34) must retain the \(\{\pm1\}\) coefficient and projective-sign
 constraints.  The striking rank pattern is a Smith/module spinoff question,
 not the live all-\(k\) gate.
 
@@ -659,8 +703,8 @@ the canonical prime-field orientation and verifies (15) entry by entry for
 (15) and another 121,396 entries of the independent incidence identity (23),
 including the general passant-code dimensions.  At \(q=13\) it independently computes the conic invariant \(\rho\)
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
-\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (31) in each tested prime
-field, verifies the seven ranks in (32), and checks the displayed weight-three
+\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (34) in each tested prime
+field, verifies the seven ranks in (35), and checks the displayed weight-three
 and weight-four dependency witnesses.
 
 Replay from the repository root:
@@ -758,6 +802,14 @@ exterior-set predecessor does not apply because it has the wrong point type
 and no signed triangle condition.  The live analytic target is now an
 extremal score bound for internal signed seeds, not a full-support search.
 
+**EJ4 continuation.**  The score admits a quantized Schur defect
+\(\Delta_R=m(m+1)-s_R^2-t_R\).  It is exactly the enlarged Gram determinant
+up to a fixed rational unit, and vanishes exactly at completion.  Otherwise
+the reconstructed vector stays at squared distance at least \(2/m\) from
+every signed frame vector.  This supplies the bounded-description PSD object
+that the earlier orbital route lacked, while making clear that positivity--not
+numerical approximation--is the remaining theorem.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -789,6 +841,9 @@ extremal score bound for internal signed seeds, not a full-support search.
 | Is the completion score unconstrained? | settled negatively | its exact outside energy is \(2m(m-1)\) |
 | Do one-point-short seeds occur in the certified range? | settled negative for the exact range | the existing local-graph table gives none for every odd prime power (5<q\le49) |
 | Does the published half-size exterior-set classification settle the seed problem? | settled negative | it classifies exterior points; these seeds are internal and impose signed triangle holonomy |
+| Can a noncompleting seed approach a frame completion arbitrarily closely? | settled negative | Theorem 20 gives squared distance at least (2/m) |
+| Is there a bounded exact PSD certificate for each candidate completion? | settled positively | the Schur defect (Delta_Rinmathbb Z_{ge0}) is the enlarged Gram determinant up to a fixed rational factor |
+| What remains after quantization? | open sharp gate | prove (Delta_R>0) for every signed internal seed and every (q>5) |
 | Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
 | What explains \(\operatorname{rank}_{\mathbb F_q}(2K-\epsilon I)=(q^2-1)/8\)? | open arithmetic spinoff | exact only for the seven tested prime fields; likely a modular Paley/Smith calculation |
 | Can the characteristic kernel's minimum distance close all-\(k\)? | settled negative as a raw route | weight (3) at \(q=5\) and weight (4) at \(q=7\) are already below the coherent targets |
@@ -801,9 +856,10 @@ extremal score bound for internal signed seeds, not a full-support search.
 
 ## Next action
 
-Prove the Theorem 19 score bound \(\max_{R\notin T}|s_R|<m\) for every signed
-internal \(m\)-seed when \(q>5\), or classify the seeds and verify it on their
-normal forms.  This is equivalent to excluding the smallest regular-simplex
+Prove the quantized defect bound \(\Delta_R>0\) for every signed internal
+\(m\)-seed and every \(R\notin T\) when \(q>5\), or classify the seeds and
+verify it on their normal forms.  This is equivalent to the Theorem 19 strict
+score bound and to excluding the smallest regular-simplex
 circuits but works one point earlier.  Use the exact energy (29), the even
 outside-sign profile after completion, the Paley lift, and the projective
 cross-ratio model, and the binary passant-code word as three exact shadows,
