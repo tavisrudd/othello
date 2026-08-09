@@ -47,7 +47,7 @@ cube theorem turns coordinatewise convexity into a complete Boolean-vertex
 reduction and extends a uniform vertex bound to the full cube.  At fixed
 six-mode normalization, actual one- and two-coordinate principal blocks have
 second moments `1` and `32/25`; the three-coordinate landscape value is
-`33/25`.
+`33/25`.  The transfer Gram is invariant under complementing a control.
 
 The all-orders rigidity directions are separate terminals rather than one
 bundled equivalence.  This formal artifact does not prove the aligned-design
