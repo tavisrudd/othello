@@ -124,6 +124,8 @@ PassantCodeQ13/WeightTen/Aggregate.lean
 PassantCodeQ13/MinimumWords/Base.lean
 PassantCodeQ13/MinimumWords/NormalizedIndexTable.lean
 PassantCodeQ13/MinimumWords/OrbitData.lean
+PassantCodeQ13/MinimumWords/OrbitCertificate.lean
+PassantCodeQ13/MinimumWords/OrbitCertificates.lean
 PassantCodeQ13/MinimumWords/OrbitS4.lean
 PassantCodeQ13/MinimumWords/OrbitDihedralA.lean
 PassantCodeQ13/MinimumWords/OrbitDihedralB.lean
@@ -163,6 +165,10 @@ PassantCodeQ13/AssociationTransport/RelationSquares/{RhoZero,Nine,Ten,Twelve}.le
     one shard per elliptic relation, identifying its squaring identity
 PassantCodeQ13/AssociationTransport/OrbitMasks/{Symmetric,DihedralA,DihedralB,DihedralC}.lean
     one shard per minimum-word orbit, identifying its column masks
+PassantCodeQ13/MinimumWords/OrbitCertificates/Matrices{0000To0155,...,2028To2183}.lean
+    fourteen consecutive blocks of 156 normalized projective matrices; each
+    leaf checks all four generated matrix-to-orbit-position tables in
+    independently kernel-reduced declarations
 PassantCodeQ13/MinimumWords/Concurrence/PairBlock{One,Two,Three}.lean
     the pair concurrence table split into blocks of first points, each
     block checked in two halves

@@ -22,7 +22,7 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskProduct
 #print axioms PassantCodeQ13.AssociationTransport.maskMatrix_maskXor
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoZero_entry_certificate
-#print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoThree_entry_certificate
+#print axioms PassantCodeQ13.Automorphisms.relationRowsRhoThree_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoNine_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoTen_entry_certificate
 #print axioms PassantCodeQ13.AssociationTransport.relationRowsRhoTwelve_entry_certificate
@@ -66,7 +66,7 @@ pinned Lean toolchain.  Native evaluation is expected to expose declaration-loca
 #print axioms PassantCodeQ13.Automorphisms.anchorTriplePattern
 #print axioms PassantCodeQ13.Automorphisms.rhoAt_self
 #print axioms PassantCodeQ13.Automorphisms.anchorImages_are_distinct
-#print axioms PassantCodeQ13.Automorphisms.patternedCodes_are_anchorImages
+#print axioms PassantCodeQ13.Automorphisms.anchorImageTriple_injective
 #print axioms PassantCodeQ13.Automorphisms.matrixAction_bijective
 #print axioms PassantCodeQ13.Automorphisms.matrixAction_preservesRho
 #print axioms PassantCodeQ13.Automorphisms.projectiveAnchorTriples_eq_patterned

@@ -118,8 +118,36 @@ all dated C834 reports, the current gates, generated artifacts, manifests and re
   intrinsic geometric description.  This does not block the frozen theorem; any new description
   belongs to a successor rather than C834.
 
-The highest-EV next move is corrected step 1.  No further downstream proof should enlarge the
-package until its existing orbit boundary builds in bounded memory.
+### Execution update (2026-08-08, corrected steps 1 and 2 complete)
+
+The orbit boundary now builds in bounded memory.  The deterministic orbit generator emits, beside
+each displayed 91-support orbit, the position of every one of the 2,184 normalized matrix images in
+that orbit.  Fourteen leaf modules check consecutive blocks of 156 matrices against all four tables
+by kernel reduction.  The common symbolic assembler proves that the blocks cover the whole matrix
+list and that duplicate removal recovers the displayed orbit, then derives the original four public
+semantic orbit equalities without changing their names or downstream interfaces.
+
+The decisive structural simplification is local block lookup.  The first implementation indexed the
+full matrix and orbit-index lists at `start + offset`; memory therefore grew with the block's absolute
+position, reaching 5,350,616 kB even after numerical sharding.  The landed checker reads
+`(projectiveMatrices.drop start).getD offset` and the corresponding dropped index table, with one
+symbolic theorem identifying local and absolute lookup in range.  Across the fourteen final leaves,
+peak memory is 2,827,456--3,272,272 kB.  The aggregator peaks at 1,924,060 kB and the four public
+orbit modules at 2,361,240--2,490,776 kB, replacing the old single-module OOM at 7,032,004 kB.
+
+The repaired boundary was replayed through the package.  `PassantCodeQ13.Gates.Main` built in
+17m37s at 5,548,812 kB, including the stale concurrence, exhaustion, row-uniqueness, association and
+equivariance dependencies.  A clean audit build exposed two obsolete cached names; the audit now
+tracks `Automorphisms.relationRowsRhoThree_certificate` and
+`Automorphisms.anchorImageTriple_injective`.  `PassantCodeQ13.Gates.AxiomAudit` and its aggregate
+trace pass, the orbit generator's byte-for-byte check passes, and the rejecting evidence verifier
+passes.  The evidence manifest and module inventory record the new generated tables and shard
+family.
+
+Corrected steps 1 and 2 are therefore closed.  The highest-EV next move is corrected step 3:
+`fixedPoint_slices_are_stabilizer_orbits` via the bounded `28 × 78` action-index table and symbolic
+transport.  The theorem-completeness findings above remain open; this build repair does not change
+the task's overall **MAJOR** status.
 
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 

@@ -95,17 +95,26 @@ def act(matrix: tuple[int, int, int, int], point: tuple[int, int, int]) -> tuple
     ))
 
 
-def support_orbit(representative: list[tuple[int, int, int]]) -> list[int]:
+def support_orbit_with_indices(
+    representative: list[tuple[int, int, int]],
+) -> tuple[list[int], list[int]]:
     index = {point: position for position, point in enumerate(internal_points())}
     failure = len(index)
     orbit: list[int] = []
+    orbit_indices: list[int] = []
     for matrix in projective_matrices():
         code = 0
         for point in representative:
             code |= 1 << index.get(act(matrix, point), failure)
         if code not in orbit:
             orbit.append(code)
-    return orbit
+        orbit_indices.append(orbit.index(code))
+    return orbit, orbit_indices
+
+
+def support_orbit(representative: list[tuple[int, int, int]]) -> list[int]:
+    """Return the orbit supports, preserving the generator's shared helper API."""
+    return support_orbit_with_indices(representative)[0]
 
 
 def render(name: str, orbit: list[int]) -> str:
@@ -114,6 +123,18 @@ def render(name: str, orbit: list[int]) -> str:
         lines.append("  " + ", ".join(str(code) for code in orbit[start:start + 3]) + ",")
     body = "\n".join(lines).rstrip(",")
     return f"/-- {DOCSTRINGS[name]} -/\ndef {name} : List Nat := [\n{body}]\n"
+
+
+def render_indices(name: str, indices: list[int]) -> str:
+    lines = []
+    for start in range(0, len(indices), 24):
+        lines.append("  " + ", ".join(str(index) for index in indices[start:start + 24]) + ",")
+    body = "\n".join(lines).rstrip(",")
+    return (
+        f"/-- For each normalized projective matrix, the position of its image support in "
+        f"`{name}`. -/\n"
+        f"def {name}MatrixOrbitIndices : List Nat := [\n{body}]\n"
+    )
 
 
 def main() -> None:
@@ -125,10 +146,13 @@ def main() -> None:
     blocks = []
     union: list[int] = []
     for name, representative in REPRESENTATIVES.items():
-        orbit = support_orbit(representative)
+        orbit, orbit_indices = support_orbit_with_indices(representative)
         if len(orbit) != 91:
             raise SystemExit(f"{name}: expected 91 supports, computed {len(orbit)}")
+        if len(orbit_indices) != 2184 or sorted(set(orbit_indices)) != list(range(91)):
+            raise SystemExit(f"{name}: matrix-to-orbit index table has the wrong coverage")
         blocks.append(render(name, orbit))
+        blocks.append(render_indices(name, orbit_indices))
         union.extend(code for code in orbit if code not in union)
     if len(union) != 364:
         raise SystemExit(f"minimumWordSupports: expected 364 supports, computed {len(union)}")
@@ -145,7 +169,14 @@ def main() -> None:
         "positions of its points in the normalized internal-point order.  The last list is the\n"
         "union of the four orbits without repetition.  Lean checks every list against the\n"
         "projective action itself; the lists carry no trust of their own.\n"
+        "The adjacent matrix-orbit index list has one entry per normalized projective matrix and\n"
+        "records which displayed support that matrix produces.  Bounded Lean modules check those\n"
+        "entries against the action and check that their first occurrences reproduce the orbit.\n"
         "-/\n"
+        "\n"
+        "-- The generated matrix-index lists have 2184 entries, so their literals need a recursion\n"
+        "-- bound above the parser default.  This changes elaboration depth, not proof reduction.\n"
+        "set_option maxRecDepth 10000\n"
         "\n"
         "namespace PassantCodeQ13.MinimumWords\n"
         "\n"

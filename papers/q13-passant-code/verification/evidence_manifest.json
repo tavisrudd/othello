@@ -152,8 +152,8 @@
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/Gates/AxiomAudit.lean",
-      "bytes": 7393,
-      "sha256": "fa8c39d5797cbb194a949e83946afef1594112e1294af15b096c3cc367e9b505",
+      "bytes": 7376,
+      "sha256": "59a4dab98e02df7d9d3d0db48c66d83effbec6579250a53f380c025295ea4642",
       "role": "tracked axiom audit for all retained and structural aggregate terminals"
     },
     {
@@ -182,15 +182,15 @@
     },
     {
       "paper_iv_path": "lean-certificates/generate_minimum_word_orbits.py",
-      "bytes": 5996,
-      "sha256": "c7f816895c4ca4f8b639055088234e816b0b8505207f96b45155c4971a5fb469",
-      "role": "deterministic generator and byte-for-byte checker for the four minimum-word orbit supports"
+      "bytes": 7632,
+      "sha256": "6d2d0586e4c42d233b0db6ae87f3a2e9d17afefd9659d2cc99a7f100264995d3",
+      "role": "deterministic generator and byte-for-byte checker for the four minimum-word orbit supports and their normalized-matrix-to-orbit-position tables"
     },
     {
       "paper_iv_path": "lean-certificates/PassantCodeQ13/MinimumWords/OrbitData.lean",
-      "bytes": 19481,
-      "sha256": "bc3d263f1dc305541e1df60c8901dfba98355dbcf43629d4922a22899d8f8556",
-      "role": "generated supports of the four minimum-word orbits of the normalized projective action"
+      "bytes": 55349,
+      "sha256": "c707dadd265530aa2c75b8ede84363ed5c4596ab0f2fba6d564159fde10a8467",
+      "role": "generated supports of the four minimum-word orbits and the position of every normalized projective matrix image in its displayed orbit"
     },
     {
       "paper_iv_path": "lean-certificates/check_association_transport_statements.py",
@@ -276,7 +276,7 @@
       "cwd": "lean-certificates",
       "command": "python3 generate_minimum_word_orbits.py --check",
       "output_contains": "q=13 minimum-word orbit data: PASS",
-      "certifies": "the checked orbit supports are byte-identical to deterministic regeneration from the symmetric-square action of the normalized projective group"
+      "certifies": "the checked orbit supports and matrix-to-orbit-position tables are byte-identical to deterministic regeneration from the symmetric-square action of the normalized projective group"
     },
     {
       "cwd": "lean-certificates",
