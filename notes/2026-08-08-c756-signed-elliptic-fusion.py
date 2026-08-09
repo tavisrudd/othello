@@ -15,6 +15,10 @@ from pathlib import Path
 
 PRIMES = (5, 7, 11, 13, 17, 19, 23)
 OUTPUT = Path(__file__).with_suffix(".json")
+CHARACTERISTIC_DEPENDENCIES = {
+    5: ((0, 2, 7), (1, 1, 1)),
+    7: ((0, 3, 7, 19), (1, 6, 6, 1)),
+}
 
 
 def chi(x: int, q: int) -> int:
@@ -59,6 +63,52 @@ def binary_rank(matrix: list[list[int]]) -> int:
                 pivots[pivot] = value
                 break
     return len(pivots)
+
+
+def modular_rank(matrix: list[list[int]], prime: int) -> int:
+    rows = [[entry % prime for entry in row] for row in matrix]
+    rank = 0
+    for column in range(len(rows[0])):
+        pivot = next(
+            (i for i in range(rank, len(rows)) if rows[i][column]), None
+        )
+        if pivot is None:
+            continue
+        rows[rank], rows[pivot] = rows[pivot], rows[rank]
+        inverse = pow(rows[rank][column], -1, prime)
+        rows[rank] = [(entry * inverse) % prime for entry in rows[rank]]
+        for i in range(rank + 1, len(rows)):
+            if rows[i][column]:
+                multiple = rows[i][column]
+                rows[i] = [
+                    (a - multiple * b) % prime
+                    for a, b in zip(rows[i], rows[rank])
+                ]
+        rank += 1
+        if rank == len(rows):
+            break
+    return rank
+
+
+def characteristic_shadow(
+    q: int, epsilon: int, fusion: list[list[int]]
+) -> tuple[int, list[int] | None]:
+    size = len(fusion)
+    operator = [
+        [2 * fusion[i][j] - (epsilon if i == j else 0) for j in range(size)]
+        for i in range(size)
+    ]
+    rank = modular_rank(operator, q)
+    witness = CHARACTERISTIC_DEPENDENCIES.get(q)
+    if witness is None:
+        return rank, None
+    indices, coefficients = witness
+    if any(
+        sum(coefficient * operator[row][column] for coefficient, column in zip(coefficients, indices)) % q
+        for row in range(size)
+    ):
+        raise AssertionError(f"q={q}: bad characteristic dependency witness")
+    return rank, list(indices)
 
 
 def passant_incidence(
@@ -135,6 +185,7 @@ def certify(q: int) -> dict[str, int | list[int]]:
     relevant = epsilon * (q + 1) // 2
     other = -epsilon * (q - 1) // 2
     incidence_rank, bridge_failures = verify_binary_bridge(q, d, points, matrix)
+    characteristic_rank, dependency_support = characteristic_shadow(q, epsilon, matrix)
     result: dict[str, int | list[int]] = {
         "q": q,
         "least_nonsquare": d,
@@ -154,11 +205,17 @@ def certify(q: int) -> dict[str, int | list[int]]:
         "passant_code_dimension": n - incidence_rank,
         "expected_passant_code_dimension": (q - 1) ** 2 // 4,
         "binary_bridge_failures": bridge_failures,
+        "characteristic_rank_of_2K_minus_epsilon_I": characteristic_rank,
+        "observed_characteristic_rank_formula": (q * q - 1) // 8,
     }
     if result["binary_rank"] != result["expected_binary_rank"]:
         raise AssertionError(f"q={q}: unexpected binary rank")
     if result["passant_code_dimension"] != result["expected_passant_code_dimension"]:
         raise AssertionError(f"q={q}: unexpected passant-code dimension")
+    if result["characteristic_rank_of_2K_minus_epsilon_I"] != result["observed_characteristic_rank_formula"]:
+        raise AssertionError(f"q={q}: unexpected characteristic rank")
+    if dependency_support is not None:
+        result["short_characteristic_dependency_support"] = dependency_support
     if q == 13:
         result["paper_iv_support_relations"] = q13_relation_support(d, points, matrix)
     return result
@@ -166,7 +223,7 @@ def certify(q: int) -> dict[str, int | list[int]]:
 
 def certificate() -> dict[str, object]:
     return {
-        "schema": "c756-signed-elliptic-fusion-v3",
+        "schema": "c756-signed-elliptic-fusion-v4",
         "field_scope": "odd prime fields",
         "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
         "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",

@@ -1044,7 +1044,10 @@ kernel of \(\bar K\) according to \(q\bmod4\). At \(q=13\), this is exactly
 C817's projector \(A_9+A_{10}+A_{12}=e_K\) onto the \([78,36,12]_2\) code.
 The complementary real projector is an orthobiangular tight frame with angles
 \(0,\pm2/(q+1)\); equality systems are precisely its smallest possible
-regular-simplex circuits. This is now the preferred classification interface.
+regular-simplex circuits. Any \(n-1\) signed members uniquely reconstruct the
+last, distinct equality supports meet in at most \(n-2\), and for
+\(q\equiv3\pmod4\) outside-sign parity makes every coherent support a maximal
+external-join clique. This is now the preferred classification interface.
 
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
@@ -1092,7 +1095,8 @@ closed-negative.
 Highest-EV next action: classify the smallest regular-simplex circuits of the signed
 elliptic fusion's complementary tight frame, equivalently its minimum-support
 eigenvectors, while running a focused original-source/forward-citation audit for those
-exact identities.  This closed-form operator satisfies the card's condition
+exact identities.  Start from uniquely completable \((n-1)\)-seeds and the
+even outside-sign profile, not full-support enumeration.  This closed-form operator satisfies the card's condition
 for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
 certificate passes have met their stop rule and should not be repeated.  The historical
 coordinate routes below explain the obstruction and remain reusable inputs, not the live

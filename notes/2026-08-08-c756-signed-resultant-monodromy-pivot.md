@@ -506,6 +506,57 @@ also the classification of smallest regular-simplex circuits in an explicit
 orthobiangular tight frame.  This is potentially a cleaner spinoff interface
 for frame/design theory, but its novelty has not yet been audited.
 
+> **Corollary 18.1 (forgetting, reconstruction, and maximality).**  Let
+> \(\{v_P:P\in\mathcal I\}\) be the normalized complementary frame and let
+> \(T\) be an equality support of size \(n=(q+3)/2\), with switching signs
+> \(\eta_P\).  Then
+> \[
+> \sum_{P\in T}\eta_Pv_P=0. \tag{26}
+> \]
+> Any \(n-1\) signed members determine the missing member uniquely.  Hence two
+> distinct equality supports meet in at most \(n-2\) points.  Moreover, for
+> every \(R\notin T\), the nonzero values among
+> \(\eta_PK_{RP}\), \(P\in T\), split equally between \(+1\) and \(-1\).
+> In particular, when \(q\equiv3\pmod4\), every coherent support is already a
+> maximal clique in the external-join graph.
+
+**Proof.**  Equation (26) is the unique dependence of the switched regular
+simplex.  Every proper subset is independent by Theorem 17, and therefore the
+missing vector is the negative signed sum of the other \(n-1\); the frame has
+no repeated or antipodal vectors because its off-diagonal inner products have
+absolute value less than one.  On a complete equality support the switching
+signs are determined up to one global sign by the entries of \(K\), proving
+the intersection assertion.  Taking the inner product of (26) with
+\(v_R\) proves the equal-sign balance.  For \(q\equiv3\pmod4\), \(n\) is odd,
+so an outside vertex cannot have a nonzero \(K\)-entry to every member of
+\(T\). \(\square\)
+
+This is the exact forgetting/reconstruction analogue sought elsewhere in the
+Clebsch series: the configuration is redundant by one signed frame vector,
+and deleting any one member loses no information.  It is stronger than merely
+saying that the support is a minimum word, but it still does not construct or
+exclude the support.
+
+One further arithmetic shadow is visible but does not supply the finisher.
+Set
+\[
+ S=2K-\epsilon I,\qquad S^2=q^2I. \tag{27}
+\]
+Modulo the characteristic, \(\bar S^2=0\), so
+\(\operatorname{im}\bar S\subseteq\ker\bar S\) is a self-orthogonal modular
+code.  Exact prime-field checks for
+\(q=5,7,11,13,17,19,23\) give
+\[
+ \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{28}
+\]
+No uniform claim is made from those seven cases.  More importantly, the
+kernel already has a weight-three dependency at \(q=5\) and a weight-four
+dependency at \(q=7\), below the coherent targets four and five.  Thus raw
+minimum distance of this characteristic code cannot exclude coherence; any
+use of (27) must retain the \(\{\pm1\}\) coefficient and projective-sign
+constraints.  The striking rank pattern is a Smith/module spinoff question,
+not the live all-\(k\) gate.
+
 ### Pre-emption check against the recorded infinite tower
 
 The pre-empted exceptional-root-system code ladder in the 2026-07-31 results
@@ -561,7 +612,9 @@ the canonical prime-field orientation and verifies (15) entry by entry for
 (15) and another 121,396 entries of the independent incidence identity (23),
 including the general passant-code dimensions.  At \(q=13\) it independently computes the conic invariant \(\rho\)
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
-\(e_K=A_9+A_{10}+A_{12}\).
+\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (27) in each tested prime
+field, verifies the seven ranks in (28), and checks the displayed weight-three
+and weight-four dependency witnesses.
 
 Replay from the repository root:
 
@@ -575,8 +628,8 @@ proofs above; the general code dimension used in Theorem 18 is prior work.
 
 | signed-fusion artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-08-08-c756-signed-elliptic-fusion.py` | 7,589 | `97ea9b562988f41c817041647ebc5155c8464d0c91eb9e025deab469c050fa1e` |
-| `2026-08-08-c756-signed-elliptic-fusion.json` | 4,121 | `41ffa4cfd08affbdc65ac7c83b56aba0977dbb63131af174f857890b38f69d99` |
+| `2026-08-08-c756-signed-elliptic-fusion.py` | 9,791 | `8b722c7a16b6687e53d630388db59e5f8ac738b59d9a79dd5598f61b0e209f8c` |
+| `2026-08-08-c756-signed-elliptic-fusion.json` | 5,048 | `6cff1313d21998ea03e06e1f68ad5ec47b664979e7cd1acc61bacc24ad1075b8` |
 
 ## EJ + TT closeout
 
@@ -640,6 +693,14 @@ candidate is only the signed real fusion, its support theorem, and the bridge
 between the all-\(k\) equality problem and the Paper IV projector, subject to
 a focused novelty audit.
 
+**EJ3.**  The frame circuit carries a one-point forgetting/reconstruction law:
+any \(n-1\) signed members recover the last, so distinct equality supports
+intersect in at most \(n-2\) points.  Its outside balance is also exact; in the
+odd-\(n\) branch it makes every coherent support automatically maximal in the
+external-join graph.  The characteristic degeneration \(S^2=q^2I\) exposes a
+clean modular code and an unexplained rank \((q^2-1)/8\) in seven prime fields,
+but explicit shorter dependencies close raw modular distance as a finisher.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -664,7 +725,12 @@ a focused novelty audit.
 | Is the Paper IV bridge only a \(q=13\) coincidence? | settled negative | Theorem 18 identifies \(\bar K\) uniformly with \(A^2+((q+1)/2)I\) and hence with the general passant code projector or complement |
 | Is there a characteristic-zero object beyond the signed graph? | settled | the complementary spectral projector is an explicit orthobiangular unit-norm tight frame with angles \(0,\pm2/(q+1)\) |
 | What is coherence in that frame? | settled | a smallest possible linear circuit whose switched vectors form a regular simplex of size \((q+3)/2\) |
+| Does deleting one point lose the equality configuration? | settled negative | Corollary 18.1 reconstructs the missing signed frame vector uniquely from the other \(n-1\) |
+| Can two equality supports differ in only one point? | settled negative | distinct supports intersect in at most \(n-2\) points |
+| Are coherent supports maximal external-join cliques for \(q\equiv3\pmod4\)? | settled positively | outside signed balance is even while \(n\) is odd |
 | Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
+| What explains \(\operatorname{rank}_{\mathbb F_q}(2K-\epsilon I)=(q^2-1)/8\)? | open arithmetic spinoff | exact only for the seven tested prime fields; likely a modular Paley/Smith calculation |
+| Can the characteristic kernel's minimum distance close all-\(k\)? | settled negative as a raw route | weight (3) at \(q=5\) and weight (4) at \(q=7\) are already below the coherent targets |
 | Is this a new infinite binary code tower? | settled negative as a positioning claim | general conic-passant code dimensions and the elliptic scheme are prior art; the exceptional-root Taylor tower is different but already pre-empted |
 | Is the signed real fusion/support theorem itself new? | open novelty gate | targeted original-source and forward-citation audit; Hollmann--Xiang supplies the ambient scheme but the exact signed identity was not asserted in the inspected passages |
 | Can minimum-support \(\lambda\)-eigenvectors of \(K\) be classified? | open; now the sharpest equality gate | for \(q\equiv3\pmod4\), exclude equality beyond \(q=5\); for \(q\equiv1\pmod4\), combine equality with the remaining switching condition |
@@ -675,7 +741,9 @@ a focused novelty audit.
 ## Next action
 
 Classify equality in Theorem 17, equivalently smallest regular-simplex circuits
-in the complementary orthobiangular frame.  Use the Paley lift, the projective
+in the complementary orthobiangular frame.  Use Corollary 18.1 to work with
+uniquely completable \((n-1)\)-seeds and the even outside-sign profile, rather
+than searching full supports.  Use the Paley lift, the projective
 cross-ratio model, and the binary passant-code word as three exact shadows,
 with the line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
 novelty audit for the signed fusion, support, and frame-circuit theorems.  If equality

@@ -4,6 +4,7 @@
     {
       "binary_bridge_failures": 0,
       "binary_rank": 4,
+      "characteristic_rank_of_2K_minus_epsilon_I": 3,
       "eigenvalues": [
         -2,
         3
@@ -13,18 +14,25 @@
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 100,
+      "observed_characteristic_rank_formula": 3,
       "other_multiplicity": 6,
       "passant_code_dimension": 4,
       "passant_incidence_rank": 6,
       "q": 5,
       "relevant_eigenvalue": 3,
       "relevant_multiplicity": 4,
+      "short_characteristic_dependency_support": [
+        0,
+        2,
+        7
+      ],
       "signed_degree": 6,
       "vertices": 10
     },
     {
       "binary_bridge_failures": 0,
       "binary_rank": 12,
+      "characteristic_rank_of_2K_minus_epsilon_I": 6,
       "eigenvalues": [
         -4,
         3
@@ -34,18 +42,26 @@
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 441,
+      "observed_characteristic_rank_formula": 6,
       "other_multiplicity": 12,
       "passant_code_dimension": 9,
       "passant_incidence_rank": 12,
       "q": 7,
       "relevant_eigenvalue": -4,
       "relevant_multiplicity": 9,
+      "short_characteristic_dependency_support": [
+        0,
+        3,
+        7,
+        19
+      ],
       "signed_degree": 12,
       "vertices": 21
     },
     {
       "binary_bridge_failures": 0,
       "binary_rank": 30,
+      "characteristic_rank_of_2K_minus_epsilon_I": 15,
       "eigenvalues": [
         -6,
         5
@@ -55,6 +71,7 @@
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 3025,
+      "observed_characteristic_rank_formula": 15,
       "other_multiplicity": 30,
       "passant_code_dimension": 25,
       "passant_incidence_rank": 30,
@@ -67,6 +84,7 @@
     {
       "binary_bridge_failures": 0,
       "binary_rank": 36,
+      "characteristic_rank_of_2K_minus_epsilon_I": 21,
       "eigenvalues": [
         -6,
         7
@@ -76,6 +94,7 @@
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 6084,
+      "observed_characteristic_rank_formula": 21,
       "other_multiplicity": 42,
       "paper_iv_support_relations": [
         9,
@@ -93,6 +112,7 @@
     {
       "binary_bridge_failures": 0,
       "binary_rank": 64,
+      "characteristic_rank_of_2K_minus_epsilon_I": 36,
       "eigenvalues": [
         -8,
         9
@@ -102,6 +122,7 @@
       "identity_failures": 0,
       "least_nonsquare": 3,
       "matrix_entries_checked": 18496,
+      "observed_characteristic_rank_formula": 36,
       "other_multiplicity": 72,
       "passant_code_dimension": 64,
       "passant_incidence_rank": 72,
@@ -114,6 +135,7 @@
     {
       "binary_bridge_failures": 0,
       "binary_rank": 90,
+      "characteristic_rank_of_2K_minus_epsilon_I": 45,
       "eigenvalues": [
         -10,
         9
@@ -123,6 +145,7 @@
       "identity_failures": 0,
       "least_nonsquare": 2,
       "matrix_entries_checked": 29241,
+      "observed_characteristic_rank_formula": 45,
       "other_multiplicity": 90,
       "passant_code_dimension": 81,
       "passant_incidence_rank": 90,
@@ -135,6 +158,7 @@
     {
       "binary_bridge_failures": 0,
       "binary_rank": 132,
+      "characteristic_rank_of_2K_minus_epsilon_I": 66,
       "eigenvalues": [
         -12,
         11
@@ -144,6 +168,7 @@
       "identity_failures": 0,
       "least_nonsquare": 5,
       "matrix_entries_checked": 64009,
+      "observed_characteristic_rank_formula": 66,
       "other_multiplicity": 132,
       "passant_code_dimension": 121,
       "passant_incidence_rank": 132,
@@ -157,5 +182,5 @@
   "field_scope": "odd prime fields",
   "identity": "K^2 = chi_q(-1) K + (q^2-1)/4 I",
   "orientation": "a+b*s with 0 <= a < q and 1 <= b <= (q-1)/2",
-  "schema": "c756-signed-elliptic-fusion-v3"
+  "schema": "c756-signed-elliptic-fusion-v4"
 }
