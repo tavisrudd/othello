@@ -284,12 +284,12 @@ the following task-owned obligations, in execution order:
    now exactly coefficient symmetry, the three index-pattern orbits, the
    sum-zero `sigmaThree` collapse, and the general rational corollary.
 
-   **Paused worktree handoff (2026-08-09).**  The uncommitted continuation in
-   `lean/RelativeConicArcs/SphericalCubicRestriction.lean` is preserved as Git
-   stash commit `30679dc4d99eb785ceaddd002659b9b651766898`, with subject
-   `C815 pause SphericalCubicRestriction`.  Resume it with
-   `git stash apply 30679dc4d99eb785ceaddd002659b9b651766898`; after validating
-   and committing the recovered file, drop that stash explicitly.
+   **Resumed worktree handoff (2026-08-09).**  The uncommitted continuation in
+   `lean/RelativeConicArcs/SphericalCubicRestriction.lean` was restored from Git
+   stash commit `30679dc4d99eb785ceaddd002659b9b651766898`.  The stash is retained
+   as a safety copy until the locked Lean queue becomes available and the
+   recovered source can be elaborated, validated, and committed; drop it only
+   after those gates pass.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
