@@ -161,6 +161,16 @@ the critical equations of one rank-two weighted constant-term polynomial
 \(\mathcal Z\); every off-diagonal Hessian entry is nonzero by the degree-9
 separators.  Split versus anisotropic covariance is now a descent question.
 
+Comparing covariance with the anisotropic conic restriction on the
+distinguished passant gives an elliptic overlap squeeze.  Apart from the
+aligned branch \(K\sim C\), nonaligned anisotropic covariance has trace
+\(-10\) or \(-14\) and at least 10 of 11 arrangement covariance values are
+nonsquares; split covariance has one of seven trace/zero rows and at least 9
+of 11 are nonsquares.  The rank-two Gram identity
+\(B_{ii}B_{jj}-B_{ij}^2=\det(M/2)(a_i\wedge a_j)^2\), for
+\(B_{ij}=a_i^{\mathsf T}Ma_j/2\), connects this diagonal skew to the
+off-diagonal entries of \(\mathcal Z\).
+
 ## What is already uniform
 
 - Even \(q\) is impossible because the nucleus is never covered.
@@ -176,12 +186,12 @@ separators.  Split versus anisotropic covariance is now a descent question.
 
 ## Next action
 
-Insert the fixed-conic line discriminants into the split and anisotropic
-forms of the torus-normalized partition function \(\mathcal Z\).  Seek a
-square-class invariant of its rank-two Gram or nonzero separator Hessian that
-conflicts with eleven passants and 55 internal nodes.  Do not run generic
-11-variable elimination without the rank-two carrier, and do not cross the
-exact degree-16 mask boundary.
+Attack the aligned anisotropic case \(K\sim C\) first, where covariance and
+the conic restriction share the same torus.  Insert the eleven passant-line
+equations into \(\nabla\mathcal Z=0\) together with the nonzero separator
+Hessian.  If it fails, continue only through the finite nonaligned trace
+\(-10,-14\) and seven split rows.  Do not rerun a generic quartic character
+bound or cross the exact degree-16 mask boundary.
 
 ## Stop rules
 
@@ -237,6 +247,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-tt-star-moment-collapse.md`;
 - `notes/2026-08-09-c756-ej-antipodal-fibres.md`;
 - `notes/2026-08-09-c756-ej2-torus-contraction.md`;
+- `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
