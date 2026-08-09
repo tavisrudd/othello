@@ -1568,20 +1568,20 @@
     }
   },
   "dependency": {
-    "commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
+    "commit": "5d9f53f11770bae8af71a577a65b1e3d927d5c92",
     "repository": "https://github.com/tavisrudd/finitegeom"
   },
   "evidence": {
     "axiom_log": "verification/clebsch_rigidity_trust/gate-run.log",
-    "axiom_log_sha256": "995c2b23bc77280222e74eef23af0aa4bdab2fd1f4045e0b990d8f748e858d15",
+    "axiom_log_sha256": "d8e41565b189767c97a653d2db0f572a9bef756565d514390e753cef3b711987",
     "replay": "lake build --no-build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
   },
   "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "0ecc398aa46234e99de4ee86eb39e3922774694d6ebc4fdf69ec0491ca274c5d",
+  "manifest_sha256": "22b9ef8ecc8a5915332514ed99dab5ff6f1da9b3de8adb7a127b867a9176177e",
   "package": "finitegeom-clebsch-q11-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
   "schema_version": 1,
-  "source_commit": "0d8b99cda3915d514d4e663a168c8eb62baa61fc",
+  "source_commit": "02205751fdf43108ece6cd31b7e5cfbd78c4f061",
   "terminal": "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition"
 }

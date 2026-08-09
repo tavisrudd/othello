@@ -37,18 +37,6 @@ FORBIDDEN_SCOPE = {
     "reflection",
     "torsor",
 }
-ODD_A5_COMMUTANT_TERMINALS = {
-    "RelativeConicArcs.SupportOrientationCommutant.oddModule_rationalCommutant_eq_adjoinGoldenOperator",
-    "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
-}
-CLASSICAL_ODD_A5_SPLITTING = (
-    "The proposition-valued interface "
-    "RelativeConicArcs.SupportOrientationCommutant."
-    "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
-    "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
-)
-
-
 def fail(message: str) -> NoReturn:
     raise ValueError(message)
 
@@ -226,11 +214,8 @@ def validate_lean(
         for item in conditional_interfaces
     ):
         fail(f"{where}.conditional_interfaces must be a list of nonempty strings")
-    if ODD_A5_COMMUTANT_TERMINALS & set(terminals):
-        if conditional_interfaces != [CLASSICAL_ODD_A5_SPLITTING]:
-            fail(f"{where} must disclose the classical odd-A5 splitting interface")
-    elif conditional_interfaces:
-        fail(f"{where} declares a conditional interface for unrelated terminals")
+    if conditional_interfaces:
+        fail(f"{where} declares a conditional interface")
     validation = value.get("validation")
     if not isinstance(validation, dict):
         fail(f"{where}.validation must be an object")

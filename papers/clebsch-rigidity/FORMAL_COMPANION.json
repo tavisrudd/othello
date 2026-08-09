@@ -1,14 +1,14 @@
 {
   "artifacts": [
     {
-      "commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
+      "commit": "5d9f53f11770bae8af71a577a65b1e3d927d5c92",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
       "manifest": "trust/manifests/clebsch_rigidity.json",
       "repository": "https://github.com/tavisrudd/finitegeom",
       "role": "shared-library"
     },
     {
-      "commit": "930d5469ac08068553e93177ea3598535d5d9906",
+      "commit": "f27a4de69cdcf32e2d3242291621554378e6bfe3",
       "depends_on": "shared-library",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
       "manifest": "MANIFEST.json",

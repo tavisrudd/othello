@@ -43,9 +43,10 @@ successful output. The twenty selected exact checker invocations and pinned
 Nix environment are release-local; the aggregate formal gate is
 `RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` in the
 certificate package.  It imports the causal rigidity spine and all eight
-orientation packets.  The commutant terminals are conditional only on the
-explicit classical conjugate `3+3'` Schur--Galois interface recorded in the
-trust manifest; golden equivariance and integral descent are kernel checked.
+orientation packets.  The commutant terminals are unconditional: the pinned
+library proves the reverse containment from explicit five-cycle and
+three-cycle commutation equations, while golden equivariance and integral
+descent are kernel checked.
 
 The main paper's q11 orbit decomposition and decoding oracle are structural
 proofs from eigenspaces, stabilizers, orbit--stabilizer, and chord-incidence

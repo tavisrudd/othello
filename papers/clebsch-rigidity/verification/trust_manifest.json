@@ -58,7 +58,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -174,7 +174,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
@@ -247,7 +247,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -414,7 +414,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -597,7 +597,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -730,7 +730,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
@@ -894,7 +894,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
@@ -1126,13 +1126,10 @@
                 "Quot.sound"
               ]
             },
-            "conditional_interfaces": [
-              "The proposition-valued interface RelativeConicArcs.SupportOrientationCommutant.ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate 3+3' decomposition, Schur-lemma upper containment, and Galois descent."
-            ],
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.SupportOrientationSymmetry.mem_supportCubicProjectiveStabilizer_iff_cubicLine",
@@ -1181,7 +1178,7 @@
         "kind": "theorem-environment",
         "sha256": "54a5a78c75a42f50c7ace57ad8bc610fdea522c24f230f230c1813c226a25d65"
       },
-      "trust_boundary": "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine; the two commutant equalities use the explicitly recorded classical 3+3' splitting interface."
+      "trust_boundary": "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine, including the unconditional rational and integral commutant equalities from the explicit two-generator system."
     },
     {
       "components": [
@@ -1224,7 +1221,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
@@ -1272,7 +1269,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1335,7 +1332,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
@@ -1414,7 +1411,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
@@ -1529,7 +1526,7 @@
             "gate": {
               "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
               "repository": "lean",
-              "sha256": "d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6"
+              "sha256": "6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4"
             },
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
@@ -1937,9 +1934,9 @@
     }
   },
   "lean_repository": {
-    "commit": "930d5469ac08068553e93177ea3598535d5d9906",
+    "commit": "f27a4de69cdcf32e2d3242291621554378e6bfe3",
     "distribution": "separate shared Git repository",
-    "finitegeom_commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
+    "finitegeom_commit": "5d9f53f11770bae8af71a577a65b1e3d927d5c92",
     "path": ".",
     "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
   },
@@ -1948,17 +1945,17 @@
     "repository": "paper",
     "sha256": "c5ef665869af791d16556dc9d94aca0dbe0b0b237ede6e3d51ce3cd8162beef0"
   },
-  "manuscript_sha256": "20b686132adf32001b1c37588ec2965f3b46c7794627108b0848346f9267b11d",
+  "manuscript_sha256": "e8274057b69967f18b4e5919af693e565c9dae63587c69beef23a37d899e1ac4",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "60d401b06e1f343cd2448e926f300e127b82ede5b4a111ac26f5b8600858713f"
+      "sha256": "9f0cccf38a2721b93b40540eab26b3b7999041691bb9c4b13987e122cc683f1f"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "74a3bef3f931bdb06498aa49816f5680fcf313e03749f212668ad58e69a158b0"
+      "sha256": "7aabca342370a6dff4808076f4cdd7d879b433c28f9a70590ff08d35c01392f2"
     }
   ],
   "reproducibility_environment": {
@@ -1988,7 +1985,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "e7cc6a5f5e598058d71106a65554dc5c6b028cc8579025d34440aaadeb76807f"
+    "sha256": "eb58cfcc8d55e26efa4361076c886f6dc612154edfd8425e77827e89be1f498f"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2364,12 +2361,12 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "e36f5f08c2ee85b72e6da555d44c61d0a9a5e7c316123b538b27da858d49b094"
+        "sha256": "7ea298dd29e14112d42344be0e5f0874181f6b78350bf809b947caf3d0765657"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "b84b08365aa6dafbd705f123f02be8d244af41944a1c40cb0c2e7376b5db29d0"
+        "sha256": "34e546058ee95576703f2aed39465b708d74f51862cbef85e6364f871a0eccc3"
       },
       {
         "path": "verification/test_verification_tools.py",

@@ -44,11 +44,11 @@ output is `verification/clebsch_rigidity_trust/axiom-audit.txt`.
 The gate audits the order-eleven certificates the package proves together with
 the results it imports from the dependency, including the ten-point Brianchon
 bound and its equality classification, which are theorems there. It also prints
-the causal rigidity and eight-packet orientation terminals. The rational and integral commutant theorems take the
-explicit proposition-valued classical `3+3'` splitting interface recorded in
-the trust manifest; because this is a theorem parameter rather than a global
-axiom, it does not appear in `#print axioms`. The other printed axioms are part
-of Lean's ordinary logical trust boundary or are shown absent.
+the causal rigidity and eight-packet orientation terminals. The rational and
+integral commutant theorems are unconditional consequences of the explicit
+two-generator commutation system. Their printed axioms are part of Lean's
+ordinary logical trust boundary; project axioms and admitted declarations are
+absent.
 
 The main paper's q11 orbit and decoder proofs do not depend on those generated
 tables: they close by stabilizer/orbit arguments and chord-incidence identities.

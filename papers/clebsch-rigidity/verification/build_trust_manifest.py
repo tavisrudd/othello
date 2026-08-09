@@ -21,8 +21,8 @@ IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
 GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
 AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_PACKAGE_COMMIT = "930d5469ac08068553e93177ea3598535d5d9906"
-PINNED_FINITEGEOM_COMMIT = "575cf3e991168fb96eb24c318263c5d0552aa531"
+PINNED_PACKAGE_COMMIT = "f27a4de69cdcf32e2d3242291621554378e6bfe3"
+PINNED_FINITEGEOM_COMMIT = "5d9f53f11770bae8af71a577a65b1e3d927d5c92"
 
 
 TERMINALS = {
@@ -109,13 +109,6 @@ TERMINALS = {
         "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive",
     ],
 }
-
-CLASSICAL_ODD_A5_SPLITTING = (
-    "The proposition-valued interface "
-    "RelativeConicArcs.SupportOrientationCommutant."
-    "ClassicalOddA5ThreePlusThreeSplitting supplies the classical conjugate "
-    "3+3' decomposition, Schur-lemma upper containment, and Galois descent."
-)
 
 CLASSICAL_DYE = [
     "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and "
@@ -340,8 +333,6 @@ def lean(
             },
         },
     }
-    if "orientation_spine" in groups:
-        lean_evidence["conditional_interfaces"] = [CLASSICAL_ODD_A5_SPLITTING]
     return {
         "route": "kernel-checked-lean",
         "subclaim": subclaim,
@@ -550,7 +541,7 @@ def components_by_row(
             ],
         ),
         23: (
-            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine; the two commutant equalities use the explicitly recorded classical 3+3' splitting interface.",
+            "The support bipartition and intrinsic orientation theorem have complete human proofs. The exact replay checks every finite identity independently. Lean kernel-checks the eight-step orientation spine, including the unconditional rational and integral commutant equalities from the explicit two-generator system.",
             [
                 conceptual("intrinsic support bipartition", CLASSICAL_EDGE_DYE, "The manuscript proves invariance without choosing an orientation."),
                 replay("support and automorphism replay", ["check_chirality.py", "check_code_automorphisms.py"], support_coverage, "The scripts exhaust the ambiguity supports and displayed code automorphisms.", direct_coordinates),

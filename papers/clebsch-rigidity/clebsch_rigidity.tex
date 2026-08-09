@@ -1817,10 +1817,10 @@ classification are theorems of the development rather than assumptions: the
 bound is proved for every field in which two is invertible and specialized to
 $q=11$, and the classification is obtained from the golden normal form together
 with the two explicit projectivities carrying its order-eleven instances onto
-the displayed witness.  The commutant theorems take an explicit
-proposition-valued interface for the classical conjugate $3+3'$ decomposition,
-Schur's lemma, and Galois descent; Lean checks golden equivariance, the reverse
-containment, and the diagonal/off-diagonal integral test.  The generated q11
+the displayed witness.  The commutant theorems are unconditional: Lean checks
+golden equivariance on all sixty signed action matrices, proves the reverse
+containment from the displayed five-cycle and three-cycle commutation system,
+and checks the diagonal/off-diagonal integral test.  The generated q11
 rows are finite leaves internal to this redundant cross-check; they are not
 premises of the orbit--stabilizer or incidence proofs above.  The companion
 searches lie outside this gate.  The reusable Lean development is distributed in
@@ -1835,9 +1835,9 @@ Its pinned artifacts are
 \begin{center}
 \small
 certificate-package commit:
-\path{930d5469ac08068553e93177ea3598535d5d9906}\\
+\path{f27a4de69cdcf32e2d3242291621554378e6bfe3}\\
 shared-library commit:
-\path{575cf3e991168fb96eb24c318263c5d0552aa531}\\
+\path{5d9f53f11770bae8af71a577a65b1e3d927d5c92}\\
 aggregate gate:
 \path{RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean}\\
 Mathlib commit:
@@ -1853,15 +1853,15 @@ The SHA-256 digest of
 \end{center}
 is
 \begin{center}
-\small\path{d0290697c9a2dbce5edfeeea1f2873dd91270a33581dec3da8369867244d8ce6}.
+\small\path{6dbab6ce51bb8e1c28388edb3f901755b8649b9ea27ef99b10476c34ae5813e4}.
 \end{center}
 This formalization is an
 independent cross-check, not a proof dependency of the manuscript.  Its
 recorded axiom audit lists the standard logical axioms alone for every audited
 terminal, and the gate uses neither admitted declarations nor native
-execution.  Because the classical $3+3'$
-input is a theorem parameter rather than a global axiom, the trust manifest
-records that interface beside the two commutant terminals.
+execution.  In particular, the rational and integral commutant terminals have
+no proposition-valued representation-theoretic interface in their trust
+boundary.
 
 \section{Conclusion}
 
