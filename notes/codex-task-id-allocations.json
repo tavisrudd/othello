@@ -2942,8 +2942,17 @@
       "last": 893,
       "purpose": "full independent review of Paper I Lean artifact and manuscript trust boundary",
       "sequence": 327
+    },
+    {
+      "count": 1,
+      "first": 894,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 894,
+      "purpose": "scope and build the unnumbered saturated-exterior and local-Paley companion paper",
+      "sequence": 328
     }
   ],
-  "next_id": 894,
+  "next_id": 895,
   "schema": "codex-task-id-allocations-v1"
 }
