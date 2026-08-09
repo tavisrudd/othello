@@ -211,7 +211,8 @@ stabilizer, and its complete-exterior-set interpretation are classical
 conic-locus identification of Proposition~\ref{prop:deep-holes-conic}
 directly here, and Proposition~\ref{prop:golden-normal-form} reproves the
 classical existence, orbit, polarity, and stabilizer statements from one
-normal form over $\mathbf Z[\varphi]$. The new contribution is the symmetry-free coding criterion,
+normal form over $\mathbf Z[\varphi]$. The new contribution is the
+symmetry-free arbitrary-quadratic-containment coding criterion,
 the decoder reconstruction and support bipartition, the uniform
 conic-filling window, and the concurrence spectrum that refines Dye's
 bound.  The reconstructed support bipartition and syndrome
@@ -284,11 +285,30 @@ type occurs depends on the order: at $q=19$ the two types are interchanged,
 the vertices being internal and the Brianchon points external. Tagged to
 $q=11$, Edge's reading makes the hexagon a complete exterior
 set in the terminology of Blokhuis, Seress, and Wilbrink
-\cite[pp.~143,146]{BSW1992}. Their $q=11$ list also contains a Pasch
+\cite[pp.~143,146]{BSW1992}. Up to their stated notion of isomorphism, their
+$q=11$ census records one six-arc type and also a Pasch
 configuration, but its four collinear triples prevent it from defining an
-MDS code. Thus exteriority alone gives only
+MDS code. This supplies the classical complete-exterior-set predecessor,
+without our identifying their isomorphism quotient with a particular
+projective stabilizer action. Our rigidity argument starts instead from the
+weaker hypothesis that $\cU(A)$ lies on an arbitrary quadratic; it proves
+that the quadratic is nonsingular, that containment is equality, and that
+the arc lies in one projective orbit. Thus exteriority alone gives only
 $\cC(\F_{11})\subseteq\cU(A)$; the arc hypothesis selects the Clebsch
 branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
+
+A second close predecessor is the elliptic-line-cover result of Blokhuis,
+Brouwer, and Sz\H{o}nyi. Immediately after their Proposition~1.6 they report,
+from a computer search, that at $q=11$ the extremal cover of the complement
+of a fixed conic by fifteen elliptic lines is unique up to
+isomorphism~\cite[following Proposition~1.6]{BBS2010}. Whenever
+$\cU(A)=\cC(\F_{11})$, the fifteen chords of $A$ form precisely such a
+cover. Their published statement starts with the fixed conic and the line
+cover; it does not formulate the implication from containment in an
+arbitrary quadratic, prove that the containing quadratic is nonsingular and
+filled, or identify six arc vertices at the projective/monomial-equivalence
+level. We use their lower bound for the uniform field window, but the
+order-eleven rigidity proof does not use their computational uniqueness.
 
 The displayed hexagon is the arc $K_2$ of Storme and Van~Maldeghem
 \cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
@@ -314,9 +334,11 @@ five self-polar triangles admit exactly one polarity, represented by
                   -\varphi&-\varphi&3\varphi+1\end{pmatrix},
  \qquad\det S=4\varphi,
 \]
-and already determined by any two of those triangles.  The projective
-stabilizer is $\A$, acting on the six vertices as $\mathrm{PSL}_2(5)$ acts
-on the projective line over $\F_5$.  Finally, the associated quadratic form
+and already determined by any two of those triangles.  If
+$\operatorname{char}K\ne5$, the projective stabilizer is $\A$, acting on
+the six vertices as $\mathrm{PSL}_2(5)$ acts on the projective line over
+$\F_5$; in characteristic five it is $S_5$, acting as
+$\mathrm{PGL}_2(5)$.  Finally, the associated quadratic form
 takes values of norm $-5$ on the six vertices and of norm $-9$ on the ten
 Brianchon points: the vertices lie off the associated conic exactly when
 $\operatorname{char}K\ne5$, and the Brianchon points lie off it exactly when
@@ -357,10 +379,21 @@ realized by
 
 For the stabilizer, the subgroup of $S_6$ preserving the five
 non-concurrent matchings has order $120$, acting on them as $S_5$ through
-the outer automorphism of $S_6$.  Recording which root the normalization
-produces maps this subgroup onto the two roots, with fibres the cosets of
-the induced projective stabilizer; the displayed $G$ shows the map is onto,
-so that stabilizer has index two and is $\A$.
+the outer automorphism of $S_6$.  When the roots are distinct, recording
+which root the normalization produces maps this subgroup onto the two
+roots, with fibres the cosets of the induced projective stabilizer; the
+displayed $G$ shows the map is onto, so that stabilizer has index two and is
+$\A$.  In characteristic five the two roots coalesce.  The same
+normalization then realizes all $120$ concurrence-pattern symmetries as
+projectivities of $X_\varphi$. Concretely, with $\varphi=3\in\F_5$, the
+matrix
+\[
+ R=\begin{pmatrix}0&0&1\\0&1&2\\3&0&2\end{pmatrix}
+\]
+permutes the six displayed vertices as $(1\ 5\ 2\ 4)$ and induces a
+four-cycle on the five non-concurrent matchings. It is therefore in the odd
+coset of the pattern $S_5$ rather than its $A_5$ subgroup. Thus the
+stabilizer is the full $S_5$.
 
 For the polarity, self-polarity of the five triangles imposes fifteen
 linear conditions on the six-dimensional space of symmetric matrices.  The
@@ -387,8 +420,9 @@ exactly when the characteristic is not two and $5$ is a square, together
 with transitivity of $\mathrm{PGL}_3(K)$
 \cite[\S2.2, Theorem~1, pp.~274--276]{Dye1991}.  The unique polarity making
 the five triangles self-polar is his Theorem~2(iii)
-\cite[pp.~277--278]{Dye1991}, and the stabilizer $\A$ his Theorem~3
-\cite[p.~278]{Dye1991}; that two triangles in general position have a
+\cite[pp.~277--278]{Dye1991}. His Theorem~3 gives stabilizer $A_5$ except
+in characteristic five, where it gives $S_5$\cite[p.~278]{Dye1991}; that
+two triangles in general position have a
 unique common self-polar conic is classical.  What differs is the
 presentation: the triple-perspective normalization forces the factorization
 $(x-1)(x^2-x-1)=0$ rather than Dye's
@@ -402,9 +436,12 @@ gives $|\cU(A)|=22-10=12=q+1$ only at $q=11$, while at $q=19$ the uncovered
 locus already has $140$ points against a conic of $20$.  Dye's calculation
 also shows that the six
 vertices lie on no conic in characteristic $11$
-\cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem
-record that the arc is incomplete at $q=11$~\cite[Prop.~13]{SVM1995}, so
-the associated redundancy-three code has covering radius three.
+\cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem's
+Propositions~11--12 identify this as the two-transitive $A_5$-arc $K_2$;
+their Proposition~13 classifies the complete two-transitive arcs and omits
+this order-eleven six-arc~\cite[Props.~11--13]{SVM1995}. It is therefore
+incomplete, so the associated redundancy-three code has covering radius
+three.
 
 \section{A universal chord-defect identity}
 \label{sec:chord-defect}
@@ -534,10 +571,11 @@ pp.~274--275]{Dye1991}.  The transitivity step is the classical
 double-implies-triple perspective theorem for a commutative field; what is
 used here is its reading as a transitivity relation on the six
 one-factorizations of $K_6$.  The remaining content is the exclusion of the
-values five, seven, eight, and nine through that step, which we
-have not found in the literature: Dye's paper treats hexagons with exactly
-ten Brianchon points, and to our knowledge no earlier source constrains the
-count of a six-arc strictly between zero and ten.
+values five, seven, eight, and nine through that step. The seven-value
+formulation and the proof given here do not appear in the six-arc sources
+cited above; Dye's paper treats hexagons with exactly ten Brianchon points.
+We make no exhaustive absence claim about the broader concurrence-count
+literature.
 
 The census of the computational companion corroborates the spectrum at
 $q=11$: across its fifteen projective classes of six-arcs the count
@@ -851,7 +889,8 @@ whose columns are the six displayed points of $A$, and let
 \]
 be the resulting $[6,3,4]_{11}$ MDS code. Since the six columns of $H$ do
 not lie on any conic (their evaluation matrix against the six quadratic
-monomials $X^2,XY,XZ,Y^2,YZ,Z^2$ is nonsingular), $C$ is not monomially
+monomials $X^2,XY,XZ,Y^2,YZ,Z^2$ has determinant
+$3\in\F_{11}^{\times}$), $C$ is not monomially
 equivalent to a GRS code: the dual of a GRS code is GRS, and the parity-check
 column system of a length-six, dimension-three GRS code lies on a normal
 rational curve, here a conic, in the classical
@@ -935,8 +974,13 @@ transitive on the six vertices, ten Brianchon points, and fifteen triangle
 vertices~\cite[Theorems~2--3 and Corollary~1, pp.~276--279]{Dye1991}.
 For completeness, the orbit lengths themselves have a shorter finite
 certificate that avoids characters and the proper-subgroup census.  Choose
-the two normalized projectivities $s,t$ in rows $1$ and $12$ of the formal
-action table.  On the six vertices they induce
+the normalized projectivities
+\[
+ s=\begin{pmatrix}7&6&6\\8&9&8\\6&6&7\end{pmatrix},\qquad
+ t=\begin{pmatrix}7&6&6\\6&8&3\\2&1&7\end{pmatrix}
+ \quad\text{in }\operatorname{PGL}_3(11).
+\]
+On the six vertices they induce
 \[
  s=(3\ 4)(5\ 6),\qquad t=(1\ 2\ 3)(4\ 6\ 5).
 \]
@@ -944,21 +988,34 @@ A breadth-first word ledger in $s,t$ recovers all sixty distinct support
 permutations; its longest word has length twelve.  Thus $s,t$ generate the
 displayed order-sixty action.
 
-Label the $133$ normalized projective points by the seven displayed blocks.
-The two $133$-entry action rows for $s$ and $t$ preserve this label.  Starting
-at one representative in each block, a second breadth-first ledger reaches
-every point of that block, with longest word length nine.  Hence preservation
-gives containment of each generated orbit in its labelled block, while the
-word ledger gives the reverse containment.  The seven block cardinalities are
+In the normalization by first nonzero coordinate, the seven orbit seeds and
+their certified sizes are
 \[
- 12,30,30,10,15,30,6,
+\begin{array}{c|c|l}
+\text{seed}&\text{size}&\text{geometric block}\\
+\hline
+{[1{:}0{:}0]}&12&\text{associated conic}\\
+{[1{:}0{:}1]}&30&\text{---}\\
+{[1{:}0{:}2]}&30&\text{---}\\
+{[1{:}0{:}3]}&10&\text{Brianchon points}\\
+{[1{:}0{:}4]}&15&\text{self-polar triangle vertices}\\
+{[1{:}0{:}6]}&30&\text{---}\\
+{[1{:}1{:}7]}&6&\text{hexagon vertices}.
+\end{array}
 \]
-which is the asserted multiset.  The matrix-to-row checks are independent of
-the block labels, so this is an action certificate rather than an orbit table
-used as its own justification.  The formal terminal
-\texttt{twoGenerator\_pointOrbit\_partition} checks both ledgers, the label
+The two $133$-entry action rows computed from the displayed matrices preserve
+these blocks. Starting at each seed, a second breadth-first ledger reaches
+every point of its block, with longest word length nine. Hence preservation
+gives containment of each generated orbit in its labelled block, while the
+word ledger gives the reverse containment. The matrix-to-row checks are
+independent of the block labels, so this is an action certificate rather than
+an orbit table used as its own justification. The formal terminal
+\path{twoGenerator_pointOrbit_partition} checks both ledgers, the label
 invariance, the partition, and these cardinalities by ordinary kernel
-reduction.
+reduction. Independently, the paper-owned exact replay
+\path{check_code_automorphisms.py} reconstructs all $133$ points from the
+displayed matrices and seeds, verifies the two support permutations, and
+recomputes both breadth-first depth bounds and the seven-orbit partition.
 
 The six-, ten-, and fifteen-point blocks are the transitive sets identified
 by Dye above.  His Theorem~6(v), specialized at
@@ -1102,7 +1159,10 @@ Edge's finite-plane construction
 \cite[\S\S30.2--31]{Edge1956} and Dye's general-field synthetic theory
 \cite[Theorem~2, pp.~277--278]{Dye1991} exhibit five triangles on the six
 vertices, self-polar for $\cC$. Their vertex-pair matchings partition the
-fifteen pairs into five perfect matchings of $K_6$.
+fifteen pairs into five perfect matchings of $K_6$. In the classical
+terminology this one-factorization is a \emph{synthematic total}; the action
+of $S_6$ on the six totals is the standard construction of its outer
+automorphism~\cite{GillespieOCathainPraeger2018}.
 Section~\ref{sec:support-bipartition}
 turns its ten pairs of matchings into the Brianchon--support dictionary.
 
@@ -1269,6 +1329,25 @@ set of five perfect matchings, also preserved by
 its full $S_5$ normalizer. The alternating-cycle construction of
 Figure~\ref{fig:synthematic-petersen} is therefore equivariant, and the
 outside normalizer coset exchanges the two support orbits. Fix a
+concrete finite witness by
+\[
+\begin{array}{c|c|c|c}
+ &\text{permutation of }\{0,\ldots,5\}
+ &\text{action on }\{T_0,\ldots,T_4\}
+ &\text{action on }\{\mathcal O_+,\mathcal O_-\}\\
+\hline
+s&(2\ 3)(4\ 5)&(T_1\ T_2)(T_3\ T_4)&\text{preserves each}\\
+t&(0\ 1\ 2)(3\ 5\ 4)&(T_0\ T_4\ T_1)&\text{preserves each}\\
+r&(2\ 4\ 3\ 5)&(T_1\ T_3\ T_2\ T_4)&\text{exchanges them}.
+\end{array}
+\tag{\(*\)}\label{tab:normalizer-actions}
+\]
+Applying these permutations to the five displayed matchings verifies the
+middle column directly; applying them to the twenty three-subsets verifies
+the last. The first two generators
+generate the order-$60$ subgroup $A_5$, while all three generate its
+order-$120$ normalizer. Thus the table supplies both preservation and
+exchange without an undisplayed action list. Fix a
 maximum-distance syndrome $s$ and a three-support $S$. The three columns
 indexed by $S$ are independent because $A$ is an arc, so they give a unique
 coefficient vector representing $s$. None of its three coefficients can
@@ -1400,10 +1479,11 @@ Consequently the continuation algebra and its integral commutant are
 
 \begin{proof}[Proof of Theorem~\ref{thm:orientation-two-graph} and
 Corollary~\ref{cor:orientation-cubic-geometry}]
-The proof has four stages: the orbital pentagon produces the golden operator,
-triangle holonomy identifies its switching class with the support cubic,
-principal minors give the determinant pencil, and the cubic then recovers
-the node frame, its symmetry, and the integral commutant.
+The proof has five stages: the orbital pentagon produces the golden operator;
+triangle holonomy identifies its switching class with the support cubic;
+principal minors give the determinant pencil; the singular locus recovers
+the node frame and its symmetry; and Galois descent gives the rational and
+integral commutants.
 
 \paragraph{The orbital pentagon.}
 The degree-six action has point stabilizer $D_5$.  Its two orbits on
@@ -1454,6 +1534,11 @@ B=\begin{pmatrix}
 1&-1&-1&1&1&0
 \end{pmatrix}.
 \]
+This is a symmetric conference matrix of order six. Up to switching and
+permutation, every conference matrix of order six is the Paley matrix
+\cite[\S2]{HaemersParsaeiMajd2022}. The classical classification supplies
+context for the gauge; the intrinsic recovery from syndrome and support data
+is the content here.
 The pentagon gives $B^2=5I$ directly. The dot product of row zero with any
 other row is zero because the four remaining entries split as two plus and
 two minus. For two nonzero rows, the contribution through vertex zero is
@@ -1527,9 +1612,11 @@ Gauge classes at $0$ therefore correspond bijectively to the
 $5!/(5\cdot2)=12$ pentagons on the other five axes.  The stabilizer of $0$
 in $S_6$ preserves the gauge and acts transitively on those pentagons with
 dihedral stabilizer of order ten, so $S_6$ is transitive on the twelve
-classes and every point stabilizer has order $720/12=60$.  Negation is the
-switching $D_0=1$, $D_i=-1$, which replaces a pentagon by its pentagram and
-so fixes no class; the twelve classes pair into six with stabilizers of
+classes and every point stabilizer has order $720/12=60$. To compare $-B$
+with the chosen gauge, first negate $B$ and then switch by $D_0=1$,
+$D_i=-1$; this restores $B_{0i}=1$ and replaces the pentagon by its
+pentagram. Global negation itself is not switching, and it fixes no
+switching class; the twelve classes pair into six with stabilizers of
 order $120$.  Since triangle products are switching-invariant, the
 order-sixty stabilizer preserves every $c_{ijk}$ while the outer coset
 reverses them all; this is the $\A\subset S_5$ distinction of
@@ -1629,14 +1716,43 @@ Completeness of the singular locus needs neither that smoothness nor a
 transversality hypothesis.  Because $\det(\Phi_x)=-C(x)$, differentiating
 the cross-golden determinant along a centered coordinate line and
 evaluating identifies each of its five partial derivatives with the
-corresponding gradient quadric of $C$, up to sign.  Those five quadrics
-vanish simultaneously at a nonzero centered vector exactly when that vector
-is a nonzero multiple of one of the six centered axis vectors
-$\mathbf1-6e_a$.  Hence the determinantal cubic threefold in
+corresponding gradient quadric of $C$, up to sign. Here is an exact
+exhaustion of their common zero set. Represent the translation quotient by
+$x_0=0$ and write $y_i=x_i$ for $1\le i\le5$. In these coordinates the
+five gradient quadrics are
+\[
+\begin{aligned}
+q_1={}&-y_2y_3-y_2y_4+y_2y_5+y_3y_4-y_3y_5+y_4y_5,\\
+q_2={}&-y_1y_3-y_1y_4+y_1y_5+y_3y_4+y_3y_5-y_4y_5,\\
+q_3={}&-y_1y_2+y_1y_4-y_1y_5+y_2y_4+y_2y_5-y_4y_5,\\
+q_4={}&-y_1y_2+y_1y_3+y_1y_5+y_2y_3-y_2y_5-y_3y_5,\\
+q_5={}& y_1y_2-y_1y_3+y_1y_4+y_2y_3-y_2y_4-y_3y_4.
+\end{aligned}
+\]
+Stratify projective
+four-space by the largest nonzero coordinate: in chart $r$, set $y_r=1$
+and $y_{r+1}=\cdots=y_5=0$. With lexicographic order, the reduced
+Gr\"obner bases of the five gradient quadrics are
+\[
+\begin{array}{c|l}
+r&\text{reduced basis in }\mathbf Q[y_1,\ldots,y_{r-1}]\\
+\hline
+1&\varnothing\\
+2&y_1\\
+3&y_1,\ y_2\\
+4&y_1,\ y_2,\ y_3\\
+5&y_1-y_4,\ y_2-y_4,\ y_3-y_4,\ y_4(y_4-1).
+\end{array}
+\]
+The first four charts give the first four coordinate classes; the last
+gives the fifth coordinate class and the all-ones class. In the translation
+quotient these are exactly the six centered axis classes
+$[\mathbf1-6e_a]$. Hence the determinantal cubic threefold in
 $\mathbf P(\Lambda^\perp)$ has exactly the six classes
 $p_a=[\mathbf1-6e_a]$ as singular points, and these already form a
 projective frame because the kernel of the cross-golden compression is the
-all-ones line.  Both steps are kernel-checked, the derivative identity over
+all-ones line. The same derivative identity and chart classification are
+also kernel-checked: the derivative identity over
 any commutative ring containing a root of $t^2=t+1$ and the classification
 of singular points over any field of characteristic zero containing such a
 root; Section~\ref{sec:verification} names the declarations.
@@ -1679,7 +1795,8 @@ space is nondegenerate, so every singularity is an ordinary double point.
 The node frame identifies every projective cubic automorphism with a frame
 permutation.  Let $N\le S_6$ normalize the five matchings $\mathcal T$ in
 Figure~\ref{fig:synthematic-petersen}.  Its action on $\mathcal T$ is
-faithful, and the displayed table supplies normalizers inducing generators
+faithful, and the finite table~\eqref{tab:normalizer-actions} supplies
+normalizers inducing generators
 of $A_5$ and an odd permutation; hence $N\cong S_5$.  The even generators
 preserve every $c_{ijk}$ and the odd element reverses them all.  Moreover,
 the identity and the five transpositions $(0\,i)$ give six distinct cubic
@@ -1757,7 +1874,9 @@ characteristic zero containing such a root,
 \small\path{singularPoints_crossGoldenDeterminant_eq_axisClasses}
 \end{center}
 identifies the singular points with the six axis classes.  Neither uses a
-smoothness or transversality hypothesis.
+smoothness or transversality hypothesis. The chartwise Gr\"obner bases
+displayed in the node-frame argument are the load-bearing finite human
+certificate; these declarations independently rederive the same result.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and the orientation two-graph
@@ -1770,7 +1889,8 @@ classification give singular-locus completeness without a smoothness
 input.  The paper-owned replay independently constructs
 the coset actions, signed operator, triangle products, diagonal pencil,
 cross-golden trace dual, switching class, gradient ideals, and Hessian blocks.
-The gradient exhaustion is independent rather than the proof of completeness.
+Its gradient exhaustion independently recomputes the displayed human
+certificate rather than replacing it.
 It reads no later-paper artifact:
 \begin{center}
 \small\path{check_orientation_two_graph.py}.
@@ -1815,7 +1935,7 @@ Mathlib commit:
 \end{center}
 The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
-\small\path{36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a}.
+\small\path{98744378dee557bcd29a5ab5ab9f4fad827b62721c32558f47edefd06955397a}.
 \end{center}
 The SHA-256 digest of
 \begin{center}
@@ -1962,11 +2082,26 @@ W.~L.~Edge,
 \newblock Conics and orthogonal projectivities in a finite plane,
 \newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956), 362--382.
 
+\bibitem{GillespieOCathainPraeger2018}
+N.~I.~Gillespie, P.~{\'O} Cath{\'a}in, and C.~E.~Praeger,
+\newblock Construction of the outer automorphism of $S_6$ via a complex
+Hadamard matrix,
+\newblock \emph{Mathematics in Computer Science} \textbf{12}(4) (2018),
+453--458.
+\newblock doi:10.1007/s11786-018-0382-0; arXiv:1805.01273.
+
 \bibitem{GuruswamiVardy2005}
 V.~Guruswami and A.~Vardy,
 \newblock Maximum-likelihood decoding of Reed--Solomon codes is NP-hard,
 \newblock \emph{IEEE Transactions on Information Theory} \textbf{51}(7)
 (2005), 2249--2256.
+
+\bibitem{HaemersParsaeiMajd2022}
+W.~H.~Haemers and L.~Parsaei Majd,
+\newblock Spectral symmetry in conference matrices,
+\newblock \emph{Designs, Codes and Cryptography} \textbf{90} (2022),
+1983--1990.
+\newblock doi:10.1007/s10623-021-00858-8; arXiv:2004.05829.
 
 \bibitem{HassettTschinkel2010}
 B.~Hassett and Y.~Tschinkel,

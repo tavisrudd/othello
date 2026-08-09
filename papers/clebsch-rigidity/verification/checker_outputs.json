@@ -6,9 +6,9 @@
       "sha256": "57584df55bf172b385a91665d732af9bcab33a895cf423215a25121d83f7743d"
     },
     "check_code_automorphisms.py": {
-      "bytes": 636,
-      "lines": 18,
-      "sha256": "445605d6bb2b140ee6bbee1f95c59cb0a13c91ce2c60453e09915b6733e23c8e"
+      "bytes": 779,
+      "lines": 21,
+      "sha256": "c978f783c728912fce202e39530491959bf89aae582833a6bc3911e7fe54d51b"
     },
     "check_decoding.py": {
       "bytes": 1199,

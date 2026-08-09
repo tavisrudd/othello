@@ -48,10 +48,12 @@ library proves the reverse containment from explicit five-cycle and
 three-cycle commutation equations, while golden equivariance and integral
 descent are kernel checked.
 
-The main paper's q11 orbit decomposition and decoding oracle are structural
-proofs from eigenspaces, stabilizers, orbit--stabilizer, and chord-incidence
-identities. Generated q11 tables are retained only as an independent formal
-cross-check and as evidence for the companion's sharper finite census claims.
+The main paper's q11 orbit decomposition has an explicit two-generator finite
+certificate, independently checked by the formal gate and the paper-owned
+automorphism replay. Its decoding oracle is a structural proof from
+chord-incidence identities. Generated q11 tables are retained only as a
+redundant formal cross-check and as evidence for the companion's sharper
+finite census claims.
 
 The reusable formal source is distributed in
 `https://github.com/tavisrudd/finitegeom`; the aggregate q11 gate is in

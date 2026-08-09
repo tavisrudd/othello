@@ -9,8 +9,9 @@ was run, and no manuscript was changed. The Lean sources were read read-only.
 
 **Verdict: proved, for every field of odd characteristic, and strictly stronger than the axiom.**
 The equality configurations form one projective orbit; they exist exactly when five is a square;
-the normal form is a golden-ratio hexagon; and the projective stabilizer is the alternating group
-of degree five, which was a separately cited Dye result.
+the normal form is a golden-ratio hexagon; and, away from characteristic five, the projective
+stabilizer is the alternating group of degree five. In characteristic five Dye's Theorem 3 gives
+the larger stabilizer `S₅`; the earlier unqualified A₅ wording was an error.
 
 ## What was still open
 
@@ -150,22 +151,24 @@ square. In particular the equality configurations form a single orbit of the pro
 group, which is the second declared Dye axiom, specialized at order eleven to
 `dye1991_equality_classification`.
 
-## By-product: the stabilizer is the alternating group of degree five
+## By-product: the stabilizer is alternating away from characteristic five
 
 Let `M` be the concurrence pattern above and `Stab(M) ≤ S₆` its setwise stabilizer, of order one
 hundred twenty; under the outer automorphism it is the transitive copy of `S₅`, that is
 `PGL₂(5)` acting on the six one-factorizations. For `σ ∈ Stab(M)`, relabelling `A` by `σ` and
 renormalizing returns a parameter `p(σ) ∈ {φ, φ̄}`. Two relabellings return the same parameter
 exactly when they differ by a permutation induced by a projectivity of `A`, so the fibres of `p` are
-the cosets of the induced projective stabilizer `P ≤ Stab(M)`, and `P = p⁻¹(φ)`. The matrix `G`
-above shows `p` is onto, so `P` has index two in `S₅` and is therefore the alternating group of
-degree five. Under the outer automorphism `P` is `PSL₂(5)` acting on the six arc points as
-`PSL₂(5)` acts on the projective line over the field of five elements. This is Dye's polarity and
-stabilizer statement — item "Dye's results give projective uniqueness, the unique associated
+the cosets of the induced projective stabilizer `P ≤ Stab(M)`, and `P = p⁻¹(φ)`. When
+`char K ≠ 5`, the matrix `G` above is nonsingular and shows that `p` is onto, so `P` has index
+two in `S₅` and is therefore the alternating group of degree five. Under the outer automorphism
+`P` is `PSL₂(5)` acting on the six arc points as `PSL₂(5)` acts on the projective line over the
+field of five elements. In characteristic five the two roots coalesce and this index-two argument
+does not apply; Dye's Theorem 3 gives the larger projective stabilizer `S₅`. This is Dye's polarity
+and stabilizer statement — item "Dye's results give projective uniqueness, the unique associated
 polarity, and the alternating stabilizer" in the assertion inventory, previously carried as a full
-external-transfer gap — obtained here as a corollary rather than a citation. The index-two count was
-also confirmed directly: of the one hundred twenty pattern-preserving relabellings, exactly sixty
-return each root.
+external-transfer gap — obtained here as a corollary away from characteristic five. The index-two
+count likewise applies only when the roots are distinct: of the one hundred twenty
+pattern-preserving relabellings, exactly sixty return each root.
 
 ## Verdict per clause
 
@@ -175,7 +178,7 @@ return each root.
 | `dye1991_equality_classification` (one projective orbit)       | **proved here, every odd characteristic**  |
 | existence condition (characteristic not two, five a square)    | proved here as a corollary, not cited      |
 | the equality arc is an arc at all (no three collinear)         | proved here, unconditionally               |
-| Dye's alternating-group stabilizer, previously cited only      | proved here as a corollary                 |
+| Dye's alternating-group stabilizer, previously cited only      | proved here as a corollary when `char K ≠ 5`; Dye gives `S₅` in characteristic five |
 | Dye's unique associated polarity                               | proved below, every odd characteristic     |
 
 With the polarity section below, every clause of the cited Dye package that Paper I actually

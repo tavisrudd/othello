@@ -118,17 +118,20 @@ TERMINALS = {
 
 CLASSICAL_DYE = [
     "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and "
-    "Theorem 3, page 278",
+    "Theorem 3, page 278, including its characteristic-five S5 exception",
 ]
 CLASSICAL_DYE_RIGIDITY = [
     "Dye 1991, Section 2.2, page 275, for the ten-point bound, "
     "Theorem 1(ii), page 275, for equality classification, "
-    "and Theorem 3, page 278, for the stabilizer",
+    "and Theorem 3, page 278, for the A5 stabilizer and its "
+    "characteristic-five enlargement to S5",
     "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity",
 ]
 CLASSICAL_DYE_ASSOCIATED_CONIC = [
     "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the "
     "discussion preceding Theorem 6, pages 281--282",
+    "Dye 1991, Theorem 3, page 278, for the A5 stabilizer away from "
+    "characteristic five and the S5 stabilizer in characteristic five",
 ]
 CLASSICAL_EDGE_DYE = [
     "Edge 1956, Sections 29--32",
@@ -391,7 +394,9 @@ def components_by_row(
     automorphism_coverage = (
         "Over F_11, the checker tests all 6! coordinate permutations and "
         "constructs the complete projective and monomial automorphism actions "
-        "of the displayed six-column code."
+        "of the displayed six-column code; from the two displayed generators "
+        "and seven seeds it also reconstructs all 133 projective points and "
+        "the complete seven-orbit breadth-first partition."
     )
     decoder_coverage = (
         "Over F_11, the three checkers enumerate every projective syndrome "
@@ -453,10 +458,11 @@ def components_by_row(
             ],
         ),
         11: (
-            "The gate checks the two-generator word certificate for the explicit order-sixty action and proves that its seven reachability classes are exactly the displayed point blocks; identifying this action and the geometric blocks with the classical A5 configuration uses Dye.",
+            "The gate and an independent paper-owned replay check the two-generator word certificate for the explicit order-sixty action and prove that its seven reachability classes are exactly the displayed point blocks; identifying the geometric blocks with the classical A5 configuration uses Dye.",
             [
                 conceptual("classical group and geometric-block identification", CLASSICAL_DYE, "The two displayed generators, their finite action, and both breadth-first word ledgers are checked exactly."),
                 lean("two-generator finite point orbits", ["orbits"], axioms),
+                replay("independent two-generator point-orbit partition", ["check_code_automorphisms.py"], automorphism_coverage, "The replay reconstructs every normalized projective point, both displayed generator actions, all seven seeded orbits, and both maximum word depths.", direct_coordinates),
             ],
         ),
         12: (
@@ -576,7 +582,7 @@ def components_by_row(
         26: (
             "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization.",
             [
-                conceptual("Clebsch-family chord count and associated-conic inclusion", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, and uses Dye's edge criterion for the associated-conic inclusion."),
+                conceptual("Clebsch-family chord count, associated-conic inclusion, and stabilizer exception", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, records the characteristic-five stabilizer enlargement, and uses Dye's edge criterion for the associated-conic inclusion."),
                 lean("uncovered-locus polynomial", ["clebsch_formula"], axioms),
                 replay("q=19 specialization", ["check_q19_nonexample.py"], q19_coverage, "The replay independently constructs and checks the q=19 specialization.", direct_coordinates),
             ],

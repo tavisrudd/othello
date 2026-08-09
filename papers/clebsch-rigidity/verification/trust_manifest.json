@@ -4,7 +4,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2, page 275, for the ten-point bound, Theorem 1(ii), page 275, for equality classification, and Theorem 3, page 278, for the stabilizer",
+            "Dye 1991, Section 2.2, page 275, for the ten-point bound, Theorem 1(ii), page 275, for equality classification, and Theorem 3, page 278, for the A5 stabilizer and its characteristic-five enlargement to S5",
             "Dye 1991, Theorem 2, pages 276--278, for the unique associated polarity"
           ],
           "route": "conceptual-cited-inputs",
@@ -121,7 +121,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "classical group and geometric-block identification",
@@ -201,10 +201,35 @@
           },
           "route": "kernel-checked-lean",
           "subclaim": "two-generator finite point orbits"
+        },
+        {
+          "computation": {
+            "artifacts": [
+              {
+                "path": "check_code_automorphisms.py",
+                "repository": "paper",
+                "sha256": "d88d7ed23a579c26bdcad997d35d7f214a5b76d61205388578cfe550865e4469"
+              }
+            ],
+            "checker_commands": [
+              {
+                "argv": [
+                  "python3",
+                  "check_code_automorphisms.py"
+                ]
+              }
+            ],
+            "coverage": "Over F_11, the checker tests all 6! coordinate permutations and constructs the complete projective and monomial automorphism actions of the displayed six-column code; from the two displayed generators and seven seeds it also reconstructs all 133 projective points and the complete seven-orbit breadth-first partition.",
+            "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
+            "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
+            "soundness_bridge": "The replay reconstructs every normalized projective point, both displayed generator actions, all seven seeded orbits, and both maximum word depths."
+          },
+          "route": "exact-replay",
+          "subclaim": "independent two-generator point-orbit partition"
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 919",
+      "paper_location": "source line 958",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -212,13 +237,13 @@
         "kind": "theorem-environment",
         "sha256": "b55e4af0607168f516b0305837cf0f59a895cd4360802630524c76b99304e2db"
       },
-      "trust_boundary": "The gate checks the two-generator word certificate for the explicit order-sixty action and proves that its seven reachability classes are exactly the displayed point blocks; identifying this action and the geometric blocks with the classical A5 configuration uses Dye."
+      "trust_boundary": "The gate and an independent paper-owned replay check the two-generator word certificate for the explicit order-sixty action and prove that its seven reachability classes are exactly the displayed point blocks; identifying the geometric blocks with the classical A5 configuration uses Dye."
     },
     {
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278",
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception",
             "Davydov--Marcugini--Pambianco 2021, Theorem 6.3",
             "Hirschfeld 1998, the plane arc/covering-radius dictionary"
           ],
@@ -298,7 +323,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 877",
+      "paper_location": "source line 916",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -314,7 +339,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 894",
+      "paper_location": "source line 933",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -329,7 +354,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "deep-hole orbit deduction",
@@ -341,7 +366,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
+                "sha256": "d88d7ed23a579c26bdcad997d35d7f214a5b76d61205388578cfe550865e4469"
               }
             ],
             "checker_commands": [
@@ -352,7 +377,7 @@
                 ]
               }
             ],
-            "coverage": "Over F_11, the checker tests all 6! coordinate permutations and constructs the complete projective and monomial automorphism actions of the displayed six-column code.",
+            "coverage": "Over F_11, the checker tests all 6! coordinate permutations and constructs the complete projective and monomial automorphism actions of the displayed six-column code; from the two displayed generators and seven seeds it also reconstructs all 133 projective points and the complete seven-orbit breadth-first partition.",
             "independent_replay": "The replay reconstructs its domain from explicit coordinates and does not import Lean output.",
             "residual_trust": "Exact Python integer and finite-field arithmetic, plus the manuscript's coordinate-to-geometric correspondence.",
             "soundness_bridge": "The replay checks the displayed monomial automorphisms and syndrome action."
@@ -362,7 +387,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 992",
+      "paper_location": "source line 1049",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -462,7 +487,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
+                "sha256": "d88d7ed23a579c26bdcad997d35d7f214a5b76d61205388578cfe550865e4469"
               }
             ],
             "checker_commands": [
@@ -495,7 +520,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1047",
+      "paper_location": "source line 1104",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -542,7 +567,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 576",
+      "paper_location": "source line 614",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -556,7 +581,7 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "degenerate-conic reduction and Dye equality boundary",
@@ -847,7 +872,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1180",
+      "paper_location": "source line 1240",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -934,7 +959,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1230",
+      "paper_location": "source line 1290",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -966,7 +991,7 @@
               {
                 "path": "check_code_automorphisms.py",
                 "repository": "paper",
-                "sha256": "0edc7d4ed4f5a478cf69fb3ec51972ef0a51ae7db191a24968782908db9af182"
+                "sha256": "d88d7ed23a579c26bdcad997d35d7f214a5b76d61205388578cfe550865e4469"
               }
             ],
             "checker_commands": [
@@ -1200,7 +1225,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1246",
+      "paper_location": "source line 1306",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1223,7 +1248,7 @@
         },
         {
           "cited_inputs": [
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "Clebsch q=11 specialization",
@@ -1334,7 +1359,7 @@
           "cited_inputs": [
             "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
             "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception"
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "Sylvester graph interpretation and q=11 rigidity dependency",
@@ -1420,11 +1445,12 @@
       "components": [
         {
           "cited_inputs": [
-            "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the discussion preceding Theorem 6, pages 281--282"
+            "Dye 1991, Theorem 1, pages 275--276, and the edge criterion in the discussion preceding Theorem 6, pages 281--282",
+            "Dye 1991, Theorem 3, page 278, for the A5 stabilizer away from characteristic five and the S5 stabilizer in characteristic five"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "Clebsch-family chord count and associated-conic inclusion",
-          "unconditional_remainder": "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, and uses Dye's edge criterion for the associated-conic inclusion."
+          "subclaim": "Clebsch-family chord count, associated-conic inclusion, and stabilizer exception",
+          "unconditional_remainder": "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, records the characteristic-five stabilizer enlargement, and uses Dye's edge criterion for the associated-conic inclusion."
         },
         {
           "lean": {
@@ -1484,13 +1510,13 @@
         }
       ],
       "id": "prop-golden-normal-form+prop-clebsch-family-uncovered",
-      "paper_location": "source line 299",
+      "paper_location": "source line 319",
       "route": "mixed",
       "row": 26,
       "source": {
         "id": "prop:golden-normal-form+prop:clebsch-family-uncovered",
         "kind": "theorem-environment",
-        "sha256": "2f525c1ed925bd5d5862d157ff3477738429f2857ea8e8a48c92e9150a169be2"
+        "sha256": "f3dcbef54e4b246526504846213845f2bc50fece522116655bd36b008b102257"
       },
       "trust_boundary": "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization."
     },
@@ -1500,7 +1526,7 @@
           "cited_inputs": [
             "Brouwer--Cohen--Neumaier 1989, Section 13.1.2, for the Sylvester graph interpretation",
             "Abiad--Jabal Ameli--Reijnders 2025, Table 1, for the distance-two clique number five; independently formalized from the explicit finite model",
-            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278",
+            "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278, including its characteristic-five S5 exception",
             "Blokhuis--Brouwer--Szonyi 2010, Proposition 1.5, for the partial-cover bound with noncollinear holes"
           ],
           "route": "conceptual-cited-inputs",
@@ -1791,7 +1817,7 @@
         }
       ],
       "id": "thm-q13-tangent-code+lem-pencil-saturation+thm-small-k-conic-filling",
-      "paper_location": "source line 452",
+      "paper_location": "source line 453",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1950,12 +1976,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "408210904cc5a61cebe6fcfd402821ebfb13eec4fd5cf1d4308b08a67c9c2363"
+      "sha256": "1925a2c38c13c280b1f1f7402d946e84103216022a4aab8907505c4967caa5a6"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "1e9b4b104859ebb847ecf46c6b7482a3846263d75da4c326e56c1521d044b195"
+      "sha256": "20c8eb4e59745f6bd8671aa9fe30d1e266d092d550fc712b0c67c4eef08e4446"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1973,19 +1999,19 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "95ccf1ff32180fd806608002d69a912c5a1aae26a8fb5778d553a88b62803d83"
+    "sha256": "241d09f5b6784097bea5f950643bd7baf16c9f629f2ad38ac526d1fb568ebe9f"
   },
-  "manuscript_sha256": "c86570c6d12567f41c2ecd6d8eb59f20caeb6dd32d292f6e84512bff47d2a8a8",
+  "manuscript_sha256": "bc9d7ad1a1dedf0eb0b9af9a1245bf1d31ef37cdb1ac29f73b6e53e8be2e4158",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "9f0cccf38a2721b93b40540eab26b3b7999041691bb9c4b13987e122cc683f1f"
+      "sha256": "d1801356381624eaae7fda737861a1929ec80e3ad7440baab4b439fe4e030726"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "7aabca342370a6dff4808076f4cdd7d879b433c28f9a70590ff08d35c01392f2"
+      "sha256": "022b3f230d7edffbe095f4e92e5273927683e975547edb23264994ebc04732a9"
     }
   ],
   "reproducibility_environment": {
@@ -2015,7 +2041,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "af197acf6b08e23b639ef932b362246a703d246e36bbe9c704a868d5fba1a9cb"
+    "sha256": "d123bc00f321d9162daceec40106c46bc27317d76254e87da7336381e6f32bf3"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2027,7 +2053,7 @@
       "output": {
         "path": "verification/checker_outputs.json",
         "repository": "paper",
-        "sha256": "36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a"
+        "sha256": "98744378dee557bcd29a5ab5ab9f4fad827b62721c32558f47edefd06955397a"
       }
     },
     "checks": [
@@ -2132,9 +2158,9 @@
         "cwd": ".",
         "id": "check-code-automorphisms",
         "repository": "paper",
-        "stdout_bytes": 636,
-        "stdout_lines": 18,
-        "stdout_sha256": "445605d6bb2b140ee6bbee1f95c59cb0a13c91ce2c60453e09915b6733e23c8e",
+        "stdout_bytes": 779,
+        "stdout_lines": 21,
+        "stdout_sha256": "c978f783c728912fce202e39530491959bf89aae582833a6bc3911e7fe54d51b",
         "timeout_seconds": 900
       },
       {
@@ -2391,7 +2417,7 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "b43d20c959482b4938849bcf4082e328ac52c7d2ec1860a3a64e6d43eec98b67"
+        "sha256": "e773751dc45dfc76d32a17e66ee94275c6d1f315693e2dbb4dcd5a19ccd19a39"
       },
       {
         "path": "verification/verify_trust_manifest.py",
@@ -2401,12 +2427,12 @@
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "0dd4316fbae17987487ce9054a64f5664cd9d2c884a0a255bed5961cba5f7c12"
+        "sha256": "e585968859982c3a5b264fff7c75ab6241d91f0e79b1c8bb1f409bcc45577e84"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "851a718237e9d05cc02a2a4f02cc14d47bd491e2cb106a97bf3bf6e51ed8847b"
+        "sha256": "1da50a48e0bed965c83d3dfafa6635885bc638c41aff6265b6537280696a955b"
       },
       {
         "path": "verification/verify_computational_companion.py",

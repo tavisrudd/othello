@@ -50,10 +50,11 @@ two-generator commutation system. Their printed axioms are part of Lean's
 ordinary logical trust boundary; project axioms and admitted declarations are
 absent.
 
-The main paper's q11 orbit and decoder proofs do not depend on those generated
-tables: they close by stabilizer/orbit arguments and chord-incidence identities.
-The table modules are a redundant formal replay and support the companion's
-strictly sharper finite census results.
+The main paper's q11 orbit decomposition uses the displayed two-generator
+finite certificate, independently recomputed by the paper-owned automorphism
+replay and the formal gate; its decoder proof closes by chord-incidence
+identities. The larger table modules remain a redundant formal cross-check and
+support the companion's strictly sharper finite census results.
 
 The twelve Python programs at the paper root and the certificate and replay
 programs under `verification/` are deterministic exact checks. They enumerate

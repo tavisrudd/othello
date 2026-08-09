@@ -38,7 +38,7 @@ WARNING_RE = re.compile(
 )
 PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
 EXPECTED_PAGES = {
-    "clebsch_rigidity.tex": 26,
+    "clebsch_rigidity.tex": 28,
     "clebsch_rigidity_computational_companion.tex": 13,
 }
 # 2026-01-01T00:00:00Z. Fixed so that independent builds of one source agree.
@@ -71,16 +71,34 @@ def build_pdf(source: Path, build_root: Path, expected_pages: int) -> bytes:
         env=deterministic_environment(),
     )
     if completed.returncode != 0:
-        detail = (completed.stderr or completed.stdout).splitlines()
+        combined = "\n".join(part for part in (completed.stdout, completed.stderr) if part)
+        lines = combined.splitlines()
+        fatal_indices = [
+            index
+            for index, line in enumerate(lines)
+            if line.startswith("!") or "Fatal error" in line or "Emergency stop" in line
+        ]
+        if fatal_indices:
+            detail = []
+            for index in fatal_indices:
+                detail.extend(lines[max(0, index - 3) : index + 4])
+        else:
+            detail = lines[-40:]
         raise RuntimeError(
-            f"{source.name} build failed:\n" + "\n".join(detail[-20:])
+            f"{source.name} build failed:\n" + "\n".join(detail[-40:])
         )
     log = (build_root / source.with_suffix(".log").name).read_text(
         encoding="utf-8", errors="replace"
     )
     warnings = WARNING_RE.findall(log)
     if warnings:
-        raise RuntimeError(f"{source.name} log contains {len(warnings)} warnings")
+        warning_lines = [
+            line for line in log.splitlines() if WARNING_RE.search(line)
+        ]
+        raise RuntimeError(
+            f"{source.name} log contains {len(warnings)} warnings:\n"
+            + "\n".join(warning_lines)
+        )
     match = PAGES_RE.search(log)
     if match is None:
         raise RuntimeError(f"{source.name} log contains no page count")

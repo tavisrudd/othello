@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active and retained; source-grounded dossier frozen; first independent cold-read round pending
+**Status:** active and retained; round 1 frozen `MAJOR`; manuscript remediation
+validated, formal release replay queued
 
 ## Objective
 
@@ -36,8 +37,25 @@ record, and newly frozen manuscript hash will be added as dated `C898` notes.
 The frozen dossier was built on 2026-08-09 at
 `notes/2026-08-09-clebsch-paper-i-reviewer-dossier.md`. It records the exact
 manuscript commit and PDF hash, five isolated persona packets, the controlling
-human-proof/exposition criticals, and a reproducible source ledger. No cold
-read has yet been launched under C898.
+human-proof/exposition criticals, and a reproducible source ledger. Round 1
+was launched on 2026-08-09 under the frozen-surface and isolation
+manifest `notes/2026-08-09-c898-paper-i-cold-read-round-1-manifest.md`.
+All five independent reports and their synthesis are now frozen. The synthesis
+is `notes/2026-08-09-c898-paper-i-cold-read-round-1-synthesis.md`; remediation
+was authorized under the same C898 id.
+
+The round-1 remediation record is
+`notes/2026-08-09-c898-paper-i-round-1-remediation.md`. A user-supplied
+external remediation cold read on the intermediate repaired PDF is frozen at
+`notes/2026-08-09-c898-paper-i-external-remediation-cold-read.md`; its four
+minor findings were adopted before the next freeze.
+
+The revised manuscript, companion, exact checkers, deterministic PDF build,
+verification-tool tests, and trust manifest pass. The remaining aggregate Lean
+and final release-certificate replay is explicitly queued in the remediation
+record and must use the disk-backed pinned worktrees there. It was deferred at
+the user's request while another large Lean rebuild was active; C898 remains
+assigned throughout.
 
 The sealed dossier is input only to review sub-agents. Remediation work receives
 the frozen reports and an adopted-finding ledger, not the full persona dossier.

@@ -23,6 +23,20 @@ Q = 11
 NONZERO = tuple(range(1, Q))
 IDENTITY_PERM = tuple(range(6))
 IDENTITY_MATRIX = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+POINT_ORBIT_GENERATORS = (
+    ((7, 6, 6), (8, 9, 8), (6, 6, 7)),
+    ((7, 6, 6), (6, 8, 3), (2, 1, 7)),
+)
+POINT_ORBIT_SEEDS = (
+    (1, 0, 0),
+    (1, 0, 1),
+    (1, 0, 2),
+    (1, 0, 3),
+    (1, 0, 4),
+    (1, 0, 6),
+    (1, 1, 7),
+)
+POINT_ORBIT_SIZES = (12, 30, 30, 10, 15, 30, 6)
 
 # The columns of H in the order displayed in the parity-check matrix of clebsch_rigidity.tex.
 COLUMNS = (
@@ -54,6 +68,20 @@ def matrix_mul(a: tuple[tuple[int, ...], ...], b: tuple[tuple[int, ...], ...]) -
 
 def matrix_vec(a: tuple[tuple[int, ...], ...], v: tuple[int, ...]) -> tuple[int, ...]:
     return tuple(sum(a[i][j] * v[j] for j in range(len(v))) % Q for i in range(len(a)))
+
+
+def normalize_projective(v: tuple[int, int, int]) -> tuple[int, int, int]:
+    pivot = next(i for i, x in enumerate(v) if x % Q)
+    scalar = inv(v[pivot])
+    return tuple(scalar * x % Q for x in v)
+
+
+def projective_points() -> set[tuple[int, int, int]]:
+    return {
+        normalize_projective(v)
+        for v in product(range(Q), repeat=3)
+        if v != (0, 0, 0)
+    }
 
 
 def matrix_scale(a: int, m: tuple[tuple[int, ...], ...]) -> tuple[tuple[int, ...], ...]:
@@ -145,6 +173,36 @@ def subgroup_generated(
                 result.add(product_perm)
                 frontier.append(product_perm)
     return result
+
+
+def permutation_word_distances(
+    generators: tuple[tuple[int, ...], ...],
+) -> dict[tuple[int, ...], int]:
+    distances = {IDENTITY_PERM: 0}
+    frontier = [IDENTITY_PERM]
+    while frontier:
+        current = frontier.pop(0)
+        for generator in generators:
+            image = compose_perm(generator, current)
+            if image not in distances:
+                distances[image] = distances[current] + 1
+                frontier.append(image)
+    return distances
+
+
+def point_orbit_distances(
+    seed: tuple[int, int, int],
+) -> dict[tuple[int, int, int], int]:
+    distances = {normalize_projective(seed): 0}
+    frontier = [normalize_projective(seed)]
+    while frontier:
+        current = frontier.pop(0)
+        for generator in POINT_ORBIT_GENERATORS:
+            image = normalize_projective(matrix_vec(generator, current))
+            if image not in distances:
+                distances[image] = distances[current] + 1
+                frontier.append(image)
+    return distances
 
 
 def normal_closure(g: tuple[int, ...], group: set[tuple[int, ...]]) -> set[tuple[int, ...]]:
@@ -309,6 +367,38 @@ def main() -> None:
     assert len(point_stabilizer) == 10
     assert Counter(perm_order(g) for g in point_stabilizer) == Counter({1: 1, 2: 5, 5: 4})
 
+    generator_permutations = tuple(
+        next(
+            p
+            for p in lifts
+            if all(
+                proportionality_scalar(matrix_vec(generator, COLUMNS[i]), COLUMNS[p[i]])
+                is not None
+                for i in range(6)
+            )
+        )
+        for generator in POINT_ORBIT_GENERATORS
+    )
+    assert generator_permutations == (
+        (0, 1, 3, 2, 5, 4),
+        (1, 2, 0, 5, 3, 4),
+    )
+    support_word_distances = permutation_word_distances(generator_permutations)
+    assert set(support_word_distances) == support_group
+    assert max(support_word_distances.values()) == 12
+
+    all_points = projective_points()
+    assert len(all_points) == 133
+    orbit_distances = tuple(point_orbit_distances(seed) for seed in POINT_ORBIT_SEEDS)
+    point_orbits = tuple(set(distances) for distances in orbit_distances)
+    assert tuple(map(len, point_orbits)) == POINT_ORBIT_SIZES
+    assert max(max(distances.values()) for distances in orbit_distances) == 9
+    assert set().union(*point_orbits) == all_points
+    assert sum(map(len, point_orbits)) == len(all_points)
+    conic = {point for point in all_points if (point[0] * point[2] - point[1] ** 2) % Q == 0}
+    assert point_orbits[0] == conic
+    assert point_orbits[-1] == {normalize_projective(column) for column in COLUMNS}
+
     monomial = monomial_group(lifts)
     assert len(monomial) == 600
     verify_monomial_group(monomial)
@@ -342,6 +432,9 @@ def main() -> None:
     print("support_group_identification=A5")
     print("support_action_2_transitive=True")
     print(f"support_point_stabilizer_order={len(point_stabilizer)}")
+    print("support_generator_word_depth=12")
+    print("projective_points=133 point_orbits=12,30,30,10,15,30,6")
+    print("point_orbit_word_depth=9 conic_orbit=12 hexagon_orbit=6")
     print(f"monomial_automorphisms={len(monomial)}")
     print(f"support_projection_image={len(support_image)}")
     print(f"support_projection_kernel={len(kernel)}")
