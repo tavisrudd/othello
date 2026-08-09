@@ -96,6 +96,11 @@ No manuscript file may be created before gates 1--4 are either passed or
 explicitly recorded as submission-stage human safeguards approved by the
 user.
 
+For the classical endpoint, cite Haemers--Parsaei Majd (2022), Section 2 and
+Theorem 2, for normalized Seidel-to-conference bordering and the order-six
+pentagon core. The remaining human attribution query concerns only the
+specific tournament-square passage and golden lattice exact sequence.
+
 ## Authoritative inputs
 
 - `notes/2026-08-08-c756-local-paley-proof-consolidation-and-jacobi-audit.md`
@@ -110,6 +115,7 @@ user.
 - `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`
 - `notes/2026-08-08-c894-rooted-conference-completion-and-exact-sequence.md`
 - `notes/2026-08-08-c894-claim-proof-citation-matrix-and-safeguard-packet.md`
+- `notes/2026-08-08-c894-accessible-safeguard-advance.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of

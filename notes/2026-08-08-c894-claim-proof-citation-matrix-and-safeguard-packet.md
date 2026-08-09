@@ -55,7 +55,7 @@ therefore manuscript drafting remains blocked.
 | ID | exact paper claim | internal proof authority | imported input / exact locator | posture and remaining gate |
 |---|---|---|---|---|
 | Q1 | On \(A_4\), \(\Phi=(B^2+7I)/4\) is integral, satisfies \(\Phi^2-\Phi-I=0\), and gives \(A_4\cong\mathcal O_5^2\). | C894 EJ2 maximal-order report §§2–4. | Classical order-five \(A_4\) context: Martinet 2020 slides, pp. 8–10, author-hosted at https://jamartin.perso.math.cnrs.fr/Slides/autcurveluminy.pdf. | Explanatory classical endpoint only. |
-| Q2 | A rooted local five-tournament canonically borders to the order-six conference class and yields \(0\to A_4\to D_6\to\mathcal O_5\to0\), with orthogonal gluing index five. | C894 rooted conference completion report §§1–4; explicit formulas for \(A_B,C_B,\iota,q\). | No external theorem is needed for the proof. Classical tournament/conference-bordering attribution remains in the human query. | Compact secondary proposition, not a headline and no novelty claim before attribution. |
+| Q2 | A rooted local five-tournament canonically borders to the order-six conference class and yields \(0\to A_4\to D_6\to\mathcal O_5\to0\), with orthogonal gluing index five. | C894 rooted conference completion report §§1–4; explicit formulas for \(A_B,C_B,\iota,q\). | Classical normalized Seidel bordering and the order-six pentagon core: Haemers–Parsaei Majd 2022, §2 and Theorem 2, DOI 10.1007/s10623-021-00858-8. The source does not contain the tournament-square formula or lattice exact sequence. | Compact secondary proposition, not a headline and no novelty claim. Human attribution query narrowed to the tournament/lattice refinement. |
 | Q3 | Forgetting tournament direction and then the root gives \(C_5<D_{10}<A_5\), with \(D_{10}\) of order ten; the tournament reconstructs the abstract switching completion but not the independent projective/harmonic marking. | C894 rooted conference completion report §5. | Paper III supplies the independently presented conference class; Paper I supplies the projective Clebsch marking. | Series bridge. State the exact reconstruction boundary; never claim recovery of the original geometric marking. |
 | O1 | The saturated-internal equality and nonsaturated conic-filling branches remain open; the present result does not solve all-\(k\). | C756 card and handoff; C894 rooted report §6 and mystery ledger. | Droms–Mellinger–Meyer, DOI 10.1007/s10623-006-0022-6, for the prior code bound only. | Two-sentence outlook. No partial-result section, bounded sweep, or implication that the all-\(k\) problem is closed. |
 
@@ -101,18 +101,21 @@ Scopus access.
    \]
    recorded: for faithful local characters, equality occurs exactly under
    Frobenius, with no imprimitive collision?
-3. Is the five-tournament-to-rooted-conference bordering formula, or the
-   resulting marked golden exact sequence
+3. Is the specific functorial passage from a regular five-tournament through
+   \(A_B=(B^2+5I-E)/2\) to the rooted conference class, or the resulting
+   marked golden exact sequence
    \(0\to A_4\to D_6\to\mathcal O_5\to0\), standard in a citable source?
-   This question is attribution-only; C894 makes no novelty claim for it.
+   Generic normalized Seidel bordering is already attributed to
+   Haemers–Parsaei Majd 2022. This question is attribution-only; C894 makes
+   no novelty claim for the refinement.
 
 **Mandatory seed and forward-citation checks.**
 
 - Goldberg 1970 and Javier–Llano–Zuazua 2026 for question 1;
 - Koblitz 1991, Aoki 1996, Hoshi 2023, and the Ono–Kida–Gyoja/Yanai line
   cited by Aoki for question 2;
-- regular tournaments of order five, symmetric conference matrices of
-  order six, switching classes, and \(A_4/D_6\) golden lattice modules for
+- forward citations of Haemers–Parsaei Majd 2022, regular tournaments of
+  order five, switching classes, and \(A_4/D_6\) golden lattice modules for
   question 3.
 
 **Required return format.**
@@ -161,7 +164,7 @@ specialist obligation for either headline.
 |---|---|
 | exact predecessor for G1 | remove the priority sentence and re-evaluate whether the graph theorem is a headline or a cited engine; E5–E7 remain intact |
 | predecessor only for A1 | cite it and shorten the arithmetic proof framing; G1 and the geometric theorem are not automatically pre-empted |
-| predecessor for Q2 | add attribution; no architecture change |
+| predecessor for the Q2 refinement | add attribution; no architecture change |
 | specialist finds a repairable normalization defect | block drafting, repair the consolidated proof, rerun one cold read, and refresh this matrix |
 | specialist accepts and human index search finds no exact G1 predecessor | gates 1–4 pass; title/venue decision and manuscript allocation become authorized |
 
@@ -200,7 +203,8 @@ the unresolved all-\(k\) branches.
 | Which external inputs are load-bearing? | settled | Stickelberger, scaled Segre, Weil, and Hasse only |
 | Could an arithmetic predecessor pre-empt the whole paper? | settled negative | it can demote A1, but does not by itself prove G1 or E5 |
 | Could a G1 predecessor change the paper architecture? | yes | human institutional-index search |
-| Is the \(q=11\) endpoint part of the novelty crown? | settled negative | attribution-only conference-bordering query |
+| Is generic Seidel-to-conference bordering classical? | settled positive | cite Haemers–Parsaei Majd 2022, §2 and Theorem 2 |
+| Is the \(q=11\) endpoint part of the novelty crown? | settled negative | only the tournament-square/lattice refinement remains in the attribution-only query |
 | Does the endpoint solve all-\(k\)? | settled negative | C756 retains saturated-internal and nonsaturated branches |
 | Are the two human safeguards actionable? | settled | exact ready-to-send packets in §§3–4 |
 | May drafting begin? | no | both human returns remain outstanding |

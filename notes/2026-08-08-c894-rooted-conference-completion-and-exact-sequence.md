@@ -4,6 +4,13 @@
 marked \(A_4\)-to-\(D_6\) comparison opened by EJ2; no manuscript or Lean
 edits
 
+**Attribution update.** Haemers--Parsaei Majd (2022), Section 2 and Theorem 2
+(DOI 10.1007/s10623-021-00858-8), gives the classical normalized
+Seidel-to-conference completion and identifies the order-six core with the
+pentagon. Their source does not contain the specific tournament-square formula
+or the golden lattice exact sequence below. Those refinements retain no novelty
+claim pending the narrowed human attribution query.
+
 ## Verdict
 
 The open problem has a canonical solution at exactly the marking level
@@ -261,7 +268,8 @@ the canonicity boundary rather than leaving it as an ambiguity.
 | Can the root be omitted? | settled negative | rational signed \(A_5\)-module irreducibility |
 | Does this recover the original projective Clebsch hexagon? | still no | requires a functorial identification of the matching-edge six-set with the independently marked harmonic/conference six-set |
 | Does this solve all-\(k\)? | no | it is the terminal \(q=11\) reconstruction after the hard classification step, not a replacement for the remaining C756 branches |
-| Is the bordering/exact-sequence package new? | deliberately unclaimed | targeted literature attribution before any novelty sentence |
+| Generic normalized Seidel-to-conference bordering and the order-six pentagon core | classical: Haemers--Parsaei Majd (2022), Section 2 and Theorem 2 | cite as background |
+| Is the tournament-square refinement or golden lattice exact sequence new? | deliberately unclaimed | narrowed human attribution query before any novelty sentence |
 
 ## Propagation checklist
 
@@ -278,8 +286,9 @@ the canonicity boundary rather than leaving it as an ambiguity.
 
 ## Next action
 
-Insert the rooted completion theorem as one row in the C894
-claim--proof--citation matrix.  The remaining human literature packet should
-add `regular tournament order five conference bordering`, `rooted conference
-matrix pentagon core`, and `D6 A4 golden exact sequence`; do not make this a
-third headline or reopen Paper III prose under C894.
+The rooted completion theorem is now one row in the C894
+claim--proof--citation matrix. The remaining human literature packet should
+ask only about the functorial tournament-square passage to the rooted
+conference class and the `D6 A4 golden exact sequence`; the generic bordering
+and pentagon core are attributed. Do not make this a third headline or reopen
+Paper III prose under C894.
