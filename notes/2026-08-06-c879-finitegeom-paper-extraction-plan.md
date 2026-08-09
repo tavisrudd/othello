@@ -43,20 +43,18 @@ before accepting the baseline.
 Before any paper split, establish and enforce this package DAG:
 
 ```text
-finitegeom  --imports-->  q11-certificates
-finitegeom  --imports-->  q16-certificates
-
 q11-certificates  --imports-->  Mathlib only
 q16-certificates  --imports-->  Mathlib only
 every other heavyweight certificate package  --imports-->  Mathlib only
+
+Clebsch paper bridge  --imports-->  finitegeom + q11-certificates
+Arcs paper bridge     --imports-->  finitegeom + q16-certificates
 ```
 
-The first two finitegeom edges are opt-in adapter edges, not imports of the
-ordinary human library roots.  No default finitegeom target, shared human module,
-or paper-independent interface may import a certificate adapter.  A paper interface
-imports an adapter only when one of its claims uses that certificate.  Thus editing
-finitegeom human source is upstream of no heavyweight certificate target even though
-the Lake package can resolve the frozen certificate dependency.
+The paper bridges are separate cheap packages.  The finitegeom package does not
+resolve, import, or pin a heavyweight certificate package.  A bridge imports a
+certificate only when the corresponding paper claim uses it.  Editing finitegeom
+therefore cannot schedule, resolve, or invalidate a certificate target.
 
 Each certificate package owns the frozen local types, operations, coordinate data, and
 predicates needed to state its terminals.  It imports no project-owned foundation,
@@ -72,15 +70,17 @@ For Q11 the current declaration-level seam is:
 
 ```text
 q11-certificates:
-  a private frozen coordinate model, Q11BrianchonPetersen,
-  and the Q11A5PointOrbits certificate family
+  TavisRuddFiniteGeom.Certificates.Q11.Model,
+  TavisRuddFiniteGeom.Certificates.Q11.BrianchonPetersen,
+  and TavisRuddFiniteGeom.Certificates.Q11.A5PointOrbits.*
+Clebsch paper bridge:
+  the proved local-model compatibility adapter and theorem transport
 finitegeom:
-  the proved local-model compatibility adapter, Q11Coding semantic synthesis,
-  decoder/rigidity/orientation layers,
-  and the paper-facing Clebsch aggregate
+  Q11Coding semantic synthesis, decoder/rigidity/orientation layers,
+  and the human Clebsch API
 ```
 
-`Q11BrianchonPetersen` is a strict-kernel Q11 certificate, not foundation.  Its
+The Brianchon--Petersen module is a strict-kernel Q11 certificate, not foundation.  Its
 current import by the orbit package is evidence that it belongs in the Q11 package.
 The package's present Clebsch-wide gate is not a certificate-only gate: it imports
 finitegeom human modules and must be split.  The Q11 package exposes only its orbit and
@@ -101,7 +101,8 @@ The Q16 ownership seam is not its current repository boundary.  The generated le
 step-kernel, leaf, and rejection checks belong in the self-contained certificate
 package behind a local `Idx`/field model.  `Q16Reduction`, `Q16Result`, and the
 paper-wide `ArcsCompleteOutsideConic` gate are human downstream modules and remain in
-finitegeom; the adapter transports the generated rejection terminal into that layer.
+finitegeom; the separate Arcs paper bridge transports the generated rejection terminal
+into that layer.
 
 The other current reverse edges are bounded.  The projective-cap Q11 and Q13 packages
 reach only `ProjectiveCap.CertCheck` and `ProjectiveCap.PlaneOutcome`; their generated
@@ -138,11 +139,17 @@ TavisRuddFiniteGeom.Papers.AMELU.*
 TavisRuddFiniteGeom.Shared.Projective.*
 ```
 
-During the split, preserve the existing `RelativeConicArcs.*` module names behind
-package-specific source roots.  Namespace migration is not an extraction deliverable:
-it invalidates downstream artifacts without improving isolation.  Consider it only
-later for an already isolated human package with a demonstrated benefit and no
-heavyweight reverse dependency. The import direction is one-way: papers may import shared APIs;
+Heavyweight certificate packages are the deliberate exception to compatibility
+preservation: their one-time cache migration retires every legacy module path and
+declaration namespace.  All Q11 certificate source, generated leaves, terminals, and
+verification modules use `TavisRuddFiniteGeom.Certificates.Q11.*`; Q16 uses
+`TavisRuddFiniteGeom.Certificates.Q16.*`.  No `RelativeConicArcs` path, import,
+namespace, declaration, generator output, manifest entry, or documented public name
+may remain in either sealed package.  Compatibility aliases, when temporarily needed,
+belong only in the cheap downstream paper bridge and must not be imported or exported
+by a certificate package.
+
+For human packages, the import direction is one-way: papers may import shared APIs;
 shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
@@ -200,13 +207,14 @@ Rules:
 - keep generated leaves in their owning certificate package and name their mathematical
   partition, not a build order or task number.
 
-The q11 and q16 certificate repositories are frozen exceptions to the naming
-migration: their existing module, gate, and audit names are not renamed.  They are
-not exceptions to the dependency firewall.  Each imports Mathlib only and owns its
-frozen local statement model, while finitegeom imports its terminal through a proved
-compatibility adapter.  The separately versioned certificate source and compiled
-cache remain byte-compatible until an explicitly approved certificate change requires
-a new artifact.
+The Q11 and Q16 repositories become frozen only after this migration.  Their complete
+public surfaces use `TavisRuddFiniteGeom.Certificates.Q11.*` and
+`TavisRuddFiniteGeom.Certificates.Q16.*`; mathematical certificate aggregates and
+`Verification/AxiomAudit` replace operational gate names.  Each imports Mathlib only
+and owns its local statement model.  A separate paper bridge proves compatibility and
+transports its terminal into the human theorem.  After sealing, the certificate source
+and compiled cache remain unchanged until an explicitly approved certificate-source
+change requires a new artifact.
 
 Thus the eventual PRS public surface would be:
 
@@ -253,12 +261,12 @@ It is classified as an AME--LU Paper I quantitative-core closure, not as a futur
 paper or unclassified work.  The wider `AMELUAggregate` remains a pre-split export
 whose closure exceeds the current Paper I manuscript surface.
 
-The first source split preserves existing module names. This naming cleanup is a later
+The first human-source split preserves existing module names. This naming cleanup is a later
 one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
 not trigger a repository-wide rename. Shared-library families use the same rule and
 may expose their own `PaperInterface` only when they genuinely have a reviewer-facing
-public surface. Existing q11 and q16 certificate repositories remain byte-compatible
-exceptions and are not renamed.
+public surface. Q11 and Q16 are explicit exceptions: their complete branded namespace
+migrations precede their single expensive rebuilds.
 
 The first physical split must not also rename namespaces. Initially preserve existing
 module names behind package-specific source roots, for example:
@@ -309,11 +317,13 @@ these manifests, not serve as the primary ownership map.
    module is also exported by another area, reject any replacement that drops a
    declaration used outside the active closure even when the replacement's bytes and
    imports are locally consistent.
-5. Establish the self-contained Q11 local model, compatibility adapter, and
-   certificate-only gate, then perform its one-time
+5. Establish the self-contained, fully branded Q11 local model, mathematical
+   certificate aggregate, verification audit, and downstream compatibility adapter;
+   remove every legacy path and name; then perform its one-time
    explicitly approved cache migration.  Prove that a disposable finitegeom human
    edit schedules zero Q11 targets before beginning any paper split.  Repeat for Q16
-   only as its own separately approved migration.
+   only after completing the same namespace, prose, generator, manifest, and
+   dependency audit.
 6. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
@@ -350,7 +360,8 @@ these manifests, not serve as the primary ownership map.
     are green, without reopening the already frozen public APIs.
 12. Only after each monorepo package passes an independent clean replay, split the
     shared libraries and paper source into separately pinned Lake packages. Preserve
-    existing public module names; namespace cleanup is outside this extraction plan.
+    existing human public module names; Q11/Q16 certificate namespace cleanup is
+    already complete at this point.
 
 ## Sub-30-minute chunk protocol
 
@@ -426,10 +437,10 @@ next safe chunk:
 | C879.0 | Regenerate the live module map and add the package-DAG firewall. | Parser/unit tests plus adversarial reverse-edge and missing-adapter fixtures; the current reversed tree is reported, not accepted. |
 | C879.1 | Spike the self-contained Q11 local model and proved downstream adapter. | Build only the Mathlib-only model and cheap adapter; inspect their exact imports. |
 | C879.2 | Commit the declaration-level Q11 ownership manifest and certificate-only gate design. | Exact import/use report; reject human or paper imports from the certificate package. |
-| C879.3 | Move the local Q11 coordinate model and `Q11BrianchonPetersen` into the Q11 package. | Cheap adapter elaboration only; no heavyweight fallback. |
-| C879.4 | Rewire finitegeom to the opt-in Q11 adapter and remove every Q11-to-finitegeom edge. | DAG/import firewall and dry-run affected-target regression; no source build yet. |
+| C879.3 | Move the local Q11 coordinate model and Brianchon--Petersen certificate into the Q11 package; complete the `TavisRuddFiniteGeom.Certificates.Q11` rename and whole-artifact prose audit. | Cheap source-layer elaboration only; no heavyweight fallback; static scan finds no legacy path or namespace. |
+| C879.4 | Put the compatibility theorem in a separate Clebsch paper bridge and remove every certificate-to-project edge. | DAG/import firewall and dry-run affected-target regression; finitegeom resolves no Q11 package; no source build yet. |
 | C879.5 | Perform the one-time explicitly approved Q11 certificate rebuild and publish its exact cache. | Measured heavy gate, trust fact, sealed manifest, cache restore replay, exporter-only finitegeom adoption. |
-| C879.6 | Prove the Q11 rebuild firewall, then decide the separately gated Q16 migration. | Disposable cheap finitegeom edit schedules zero Q11 targets; missing cache refuses source fallback. |
+| C879.6 | Prove the Q11 rebuild firewall, then complete the fully audited Q16 migration and its single approved rebuild. | Disposable cheap finitegeom edit schedules zero Q11 targets; Q16 has no legacy namespace or project dependency before its build; missing caches refuse source fallback. |
 | C879.7 | Validate the beyond-four PRS `PaperInterface` and its axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
 | C879.8 | Move one paper-facing PRS interface/wrapper family behind the preserved module names, without moving PRS-family infrastructure. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
 | C879.9 | Move the next paper-facing wrapper family, or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared PRS-family move is permitted in this chunk. |
@@ -479,10 +490,11 @@ that budget, stop with the source unchanged and split the chunk or record the me
 long gate as a separately scheduled operation. It is not acceptable to call a long
 build “background work” while declaring the chunk shipped.
 
-The first chunk after any source move is never a namespace cleanup. Namespace changes
+The first chunk after any human-source move is never a namespace cleanup. Namespace changes
 are separate chunks with their own reverse-closure calculation and exact target. The first
 package extraction is likewise separate from namespace cleanup and shared-library
-movement.
+movement. The Q11/Q16 certificate migrations are explicit exceptions: their complete
+renames precede their single approved rebuilds.
 
 For C879.8 and later, “commit” means a synchronized commit set, not merely a commit in
 the monorepo. The repositories may have different commit IDs, but all must identify
@@ -533,16 +545,17 @@ chunk is closed.
   Limit them to roots, closure, shared pins, generated inputs, axioms, and replay.
 - Existing `.olean` files can mask missing source after extraction. Validate from a
   clean checkout and distinguish source elaboration from stale-artifact success.
-- A simultaneous path move and namespace rewrite can turn a small leaf extraction
-  into a repository-wide rebuild. Preserve module names in the first split and defer
-  namespace cleanup.
+- A simultaneous path move and namespace rewrite can turn a small human-source
+  extraction into a repository-wide rebuild. Preserve human module names in the first
+  split. Q11/Q16 deliberately absorb their complete rename into the already-required
+  one-time certificate rebuild.
 - A full repository build can hide whether the changed paper closure is actually
   bounded. Require the exact affected-gate list before every validation build.
 - Starting with arcs or AME--LU would repeatedly disturb shared foundations. Use a
   small leaf pilot and freeze upstream public APIs before downstream extraction.
-- The phrase “one-way dependency” is directionally ambiguous and previously encoded
-  the wrong edge.  Every policy, manifest, and report must spell out
-  `finitegeom adapters import q11/q16` and `q11/q16 import Mathlib only`; the executable DAG
+- The phrase “one-way dependency” is directionally ambiguous. Every policy, manifest,
+  and report must spell out `paper bridges import finitegeom plus q11/q16`,
+  `finitegeom imports neither certificate package`, and `q11/q16 import Mathlib only`; the executable DAG
   checker, not prose, is authoritative.
 - A package manager may rebuild a dependency checkout after a harmless pin refresh
   even when source bytes are unchanged.  Therefore ordinary finitegeom and paper
@@ -596,6 +609,8 @@ snapshot, not declaration-level ownership or a build.
 
 ## Scope boundary
 
-This record authorizes the Q11 local-model/adapter boundary work explicitly requested for the
-current architecture correction.  Heavy source builds, certificate regeneration,
-mirror writes, Q16 migration, deletion, and publication remain separately gated.
+This record authorizes the complete Q11 and Q16 local-model, branded-namespace,
+certificate-aggregate, verification, and paper-bridge migrations, including one
+expensive guarded source build of each after its full pre-build audit. It does not
+authorize publication, mirror writes, history rewrites, or any later certificate
+rebuild.

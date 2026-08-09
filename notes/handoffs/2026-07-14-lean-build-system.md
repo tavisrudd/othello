@@ -24,7 +24,7 @@ its symlink); read it before any Lean edit, generator run, build, or process int
 ## Load before acting, and known footguns
 
 Routed reads, in addition to `lean/AGENTS.md`: `notes/export-and-mirror-conventions.md` before any
-paper-mirror synchronization, Lean area export, or certificate re-pin — nothing else may write
+paper-mirror synchronization, Lean area export, certificate migration, or paper-bridge re-pin — nothing else may write
 under `~/src/math-papers/` or `~/src/lean/`; `notes/research-reproducibility-conventions.md` before
 any paper-facing computational claim; `papers/style-guide.md` before touching manuscript prose.
 
@@ -64,11 +64,15 @@ is the point.  The unit the exporter moves is an **area** — one declared gate'
 by a configuration under `lean/trust/export/` — so `lean-area-export.py` runs an area export.
 "Companion" belongs to a paper's computational companion and to a sibling companion paper, and is
 never used for the finitegeom repo or for a Lean artifact.
-Heavyweight generated closures stay outside it in one-way-dependent certificate packages under
+Heavyweight generated closures stay outside it in Mathlib-only certificate packages under
 `~/src/lean/`. Human definitions, reusable schemas, field-independent soundness APIs, and small
 examples stay in the monorepo and finitegeom; generated leaves, enumerated tables, package-private
 checkers, generators, and replay outputs belong only to their owning package. The monorepo never
-imports an external certificate closure — it consumes a pinned trust fact. The first-tag size gate
+imports an external certificate closure — it consumes a pinned trust fact. Cheap paper bridges,
+not finitegeom, import both the human API and a certificate and prove theorem transport. Q11 and
+Q16 retire every `RelativeConicArcs` path and declaration during their one-time migration; their
+sealed APIs are `TavisRuddFiniteGeom.Certificates.Q11.*` and
+`TavisRuddFiniteGeom.Certificates.Q16.*`. The first-tag size gate
 is at most 100 Lean files / 25,000 code lines, and the planned human-scale union at most 500 /
 75,000. Each paper export carries its own `flake.nix`/`flake.lock` resolving exact pins; certificate
 packages are opt-in leaves, and no portfolio-wide certificate umbrella is allowed. Commit-scoped
@@ -237,6 +241,9 @@ Lean source, package, mirror, or remote changed.  Full report:
    shared-library boundaries, paper subdirectories, import firewalls, extraction order, and
    clean-replay acceptance gate described in `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`;
    the design does not authorize source moves or repository splits by itself.
+   Q11 and Q16 are explicitly authorized foundation work: finish each package's dependency,
+   namespace, generated-source, manifest, and scholarly-prose audit before its single expensive
+   rebuild; preserve no legacy namespace compatibility inside either certificate package.
    The AME--LU and MDS--CSS entries of that plan and of its module-name mapping are audited in
    [`../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md`](../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md)
    and carry open corrections: sixteen AME--LU modules assigned to no group, the trust-declared
@@ -263,10 +270,8 @@ Lean source, package, mirror, or remote changed.  Full report:
 Every registered area is current on finitegeom and reports an empty forward delta, golden quantum
 statistics included since its adoption on 2026-08-06.
 
-Two findings changed the shape of the remaining export work
-(`../2026-08-05-c864-passages-re-export-and-unregistered-arcs-area.md`).  The orientation rename has
-already reached finitegeom, so the former atomic export-and-reseal window reduces to the certificate
-package's own forward re-pin.
+The former certificate re-pin workflow is retired. Heavy packages import Mathlib only;
+paper bridges pin finitegeom and the applicable frozen certificate independently.
 
 The larger one: most of the published shared library has no tracked export configuration.  finitegeom
 seals eleven areas, of which only four are registered under `lean/trust/export/`; the seven

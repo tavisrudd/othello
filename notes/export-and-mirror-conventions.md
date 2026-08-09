@@ -3,7 +3,7 @@
 This guide is the routed reference for moving validated work out of the
 monorepo into its public downstream trees. Read it completely before touching
 any repository under `~/src/lean/` or `~/src/math-papers/`, before any
-area export, certificate-package re-pin, or standalone paper
+area export, certificate-package migration, paper-bridge re-pin, or standalone paper
 synchronization.
 
 ## Edit authorities and tree roles
@@ -20,19 +20,22 @@ Certificate-only source is the narrow exception.  Once a certificate package
 has passed a byte-for-byte provenance migration, its repository under
 `~/src/lean/finitegeom-*` is the authority for its generated leaves,
 package-private checker composition, aggregate certificate gate, and generator.
-Those files must not also exist in the monorepo or `finitegeom`.  The package
-depends one-way on a pinned `finitegeom` commit and exposes only its audited
-terminal gate; shared definitions and reusable reductions remain monorepo-owned.
+Those files must not also exist in the monorepo or `finitegeom`. Every heavyweight
+certificate package imports Mathlib only, owns the frozen local model needed to state
+its terminal, and exposes an audited mathematical certificate aggregate. A cheap
+paper bridge imports both the certificate and the human finitegeom API, proves their
+compatibility, and transports the terminal. Neither finitegeom nor a certificate
+package imports the other. Shared definitions and reusable reductions remain
+monorepo-owned.
 
 Everything else downstream is a tooled export target, written only by the guarded
 tools named below and only as ordinary forward commits:
 
 - `~/src/lean/finitegeom` — the finitegeom repository, holding the exported
   shared Lean library. Its content changes only by adopting an area-export delta.
-- `~/src/lean/finitegeom-*` — certificate packages depending on finitegeom by
-  public Git URL and pinned revision. Package-private certificate
-  sources change in their owning repository; finitegeom pins, copied shared gates,
-  axiom audits, and seals change only by the re-pin sequence below.
+- `~/src/lean/finitegeom-*` — Mathlib-only certificate packages and cheap paper
+  bridges. Package-private certificate sources change in their owning repository;
+  paper bridges pin the certificate and finitegeom revisions they compare.
 - `~/src/math-papers/<paper-repo>` — standalone paper mirrors with
   independent histories. Their content changes only by
   `papers/scripts/export-paper-repos.py sync`.
@@ -171,30 +174,23 @@ carries are reported as unchanged rather than refused. Copy the printed delta
 into `~/src/lean/finitegeom` with no hand edits, validate the export gate
 there through the guarded runner (`--lean-root`/`--root` select the finitegeom
 package), and adopt it as one ordinary forward commit. Publishing that
-finitegeom revision is the author's decision, and every downstream package
-resolves finitegeom from the public remote — nothing below can run until that
-revision is on `origin/main`.
+finitegeom revision is the author's decision. Paper bridges resolve finitegeom from
+the public remote; certificate packages do not resolve it.
 
-### 4. Re-pin the certificate package
+### 4. Re-pin the paper bridge
 
-In the package checkout (for example
-`~/src/lean/finitegeom-clebsch-q11-certificates`), after the finitegeom revision is
-published:
+In the paper-bridge checkout, after the finitegeom revision is published:
 
-1. Update the finitegeom revision in `lakefile.toml` (`rev`) and
-   `lake-manifest.json` (`rev` **and** `inputRev`), plus any README pin.
-2. Copy the authority's aggregate gate module in byte-identically.
-3. Rebuild the gate through the guarded queue against the package root:
-   `lean/scripts/lean-build-queue.py run <Gate> --lean-root <package> ...`.
-4. Refresh the tracked axiom audit. The convention is a byte-identical copy
-   of the authority gate elaboration's standard output; corroborate it
-   against the package build's own log (stripping Lake's `info:` prefixes
-   must reproduce the audit exactly).
-5. Reseal `MANIFEST.json` in two commits so `source_commit` is
-   self-consistent: first commit every source change, then regenerate the
-   manifest — dependency commit, per-module digests, generator digest,
-   `source_commit` naming the sources commit — and seal it as a second
-   commit that touches only `MANIFEST.json`.
+1. Update the bridge's finitegeom pin. Do not change the frozen certificate pin
+   unless certificate source deliberately changed and its replacement artifact was
+   sealed.
+2. Rebuild only the cheap compatibility and paper-interface targets through the
+   guarded queue, requiring the exact certificate cache and forbidding source fallback.
+3. Refresh the bridge's axiom audit and release identity.
+
+A finitegeom, paper, prose, manifest, or release change never rebuilds or reseals a
+certificate package. A certificate cold build is a separately approved operation
+after its full source, generated-prose, namespace, and dependency audit.
 
 ### 5. Run the paper's release chain
 
