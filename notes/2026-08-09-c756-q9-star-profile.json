@@ -1,0 +1,19 @@
+{
+  "avoiding_nontangent_histogram": {},
+  "conic_points": 10,
+  "covering_arcs": 0,
+  "dependency": "SageMath 10.7",
+  "field": "GF(9) with Sage primitive modulus",
+  "internal_diagonal_histogram": {
+    "2": 180
+  },
+  "internal_points": 36,
+  "maximizer_examples": [],
+  "maximum_blocked_nontangent_points": -1,
+  "maximum_total_nontangent_points": 81,
+  "ordinary_line_profiles": [],
+  "passant_quadrangles": 180,
+  "projective_points": 91,
+  "saturated_internal_arcs": 0,
+  "schema": "c756-q9-star-profile-v1"
+}
