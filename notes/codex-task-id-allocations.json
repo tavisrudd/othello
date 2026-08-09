@@ -2996,8 +2996,17 @@
       "last": 899,
       "purpose": "Paper III likely-reviewer and critic dossier for persona cold reads of human proofs and exposition",
       "sequence": 333
+    },
+    {
+      "count": 1,
+      "first": 900,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 900,
+      "purpose": "Arcs paper likely-reviewer and critic dossier for persona cold reads of human proofs and exposition",
+      "sequence": 334
     }
   ],
-  "next_id": 900,
+  "next_id": 901,
   "schema": "codex-task-id-allocations-v1"
 }
