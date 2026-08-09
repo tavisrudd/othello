@@ -537,23 +537,70 @@ and deleting any one member loses no information.  It is stronger than merely
 saying that the support is a minimum word, but it still does not construct or
 exclude the support.
 
+> **Theorem 19 (one-point-short seed criterion).**  Put
+> \(m=(q+1)/2=n-1\).  Let \(T\subset\mathcal I\) have size \(m\), and suppose
+> there are signs \(\eta_P\) with
+> \[
+> K_{PQ}=\epsilon\eta_P\eta_Q\qquad(P,Q\in T,\ P\ne Q). \tag{27}
+> \]
+> For \(R\notin T\), define the integer completion score
+> \[
+> s_R=\sum_{P\in T}\eta_PK_{RP}. \tag{28}
+> \]
+> Then
+> \[
+> \sum_{R\notin T}s_R^2=2m(m-1). \tag{29}
+> \]
+> The seed \(T\) extends to an equality support if and only if
+> \(|s_R|=m\) for some \(R\notin T\).  Such \(R\) is unique.
+
+**Proof.**  Let \(y\) equal \(\eta_P\) on \(T\) and zero elsewhere.  On
+\(T\), (27) gives \((Ky)_P=\epsilon(m-1)y_P\).  Also
+\[
+ y^{\mathsf T}Ky=\epsilon m(m-1),\qquad
+ \frac{q^2-1}{4}=m(m-1).
+\]
+Using (15),
+\[
+ \|Ky\|^2=y^{\mathsf T}K^2y=m(m-1)(m+1).
+\]
+Subtracting the \(m(m-1)^2\) contribution on \(T\) proves (29).  Since each
+summand in (28) is \(0\) or \(\pm1\), equality \(|s_R|=m\) holds exactly when
+all \(m\) edges to \(R\) are present and have the one switching pattern that
+extends (27).  The resulting \((m+1)\)-set is an equality support by Theorem
+17.  Uniqueness is Corollary 18.1. \(\square\)
+
+This is a smaller exact gate than classifying full supports: classify signed
+simplex seeds and prove that their completion scores avoid \(\pm m\).  Fixing
+one member of a seed makes the other \(m-1=(q-1)/2\) members a clique in the
+previous local Segre--tangent graph \(H_{q,P}\).  The already certified table
+through every odd prime power \(q\le49\) has
+\[
+ \omega(H_{q,P})<(q-1)/2\qquad(5<q\le49), \tag{30}
+\]
+so in that whole range no one-point-short seed exists at all--a stronger
+reading of the old full-support census.  The Blokhuis--Seress--Wilbrink and Van
+de Voorde half-size exterior-set theorems do not pre-empt this gate: their
+points are exterior, while (27) concerns internal points and also carries a
+signed triangle condition.
+
 One further arithmetic shadow is visible but does not supply the finisher.
 Set
 \[
- S=2K-\epsilon I,\qquad S^2=q^2I. \tag{27}
+ S=2K-\epsilon I,\qquad S^2=q^2I. \tag{31}
 \]
 Modulo the characteristic, \(\bar S^2=0\), so
 \(\operatorname{im}\bar S\subseteq\ker\bar S\) is a self-orthogonal modular
 code.  Exact prime-field checks for
 \(q=5,7,11,13,17,19,23\) give
 \[
- \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{28}
+ \operatorname{rank}_{\mathbb F_q}\bar S=(q^2-1)/8. \tag{32}
 \]
 No uniform claim is made from those seven cases.  More importantly, the
 kernel already has a weight-three dependency at \(q=5\) and a weight-four
 dependency at \(q=7\), below the coherent targets four and five.  Thus raw
 minimum distance of this characteristic code cannot exclude coherence; any
-use of (27) must retain the \(\{\pm1\}\) coefficient and projective-sign
+use of (31) must retain the \(\{\pm1\}\) coefficient and projective-sign
 constraints.  The striking rank pattern is a Smith/module spinoff question,
 not the live all-\(k\) gate.
 
@@ -612,8 +659,8 @@ the canonical prime-field orientation and verifies (15) entry by entry for
 (15) and another 121,396 entries of the independent incidence identity (23),
 including the general passant-code dimensions.  At \(q=13\) it independently computes the conic invariant \(\rho\)
 and finds support relations exactly \(\{9,10,12\}\), verifying the bridge to
-\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (27) in each tested prime
-field, verifies the seven ranks in (28), and checks the displayed weight-three
+\(e_K=A_9+A_{10}+A_{12}\).  It also row-reduces (31) in each tested prime
+field, verifies the seven ranks in (32), and checks the displayed weight-three
 and weight-four dependency witnesses.
 
 Replay from the repository root:
@@ -622,7 +669,7 @@ Replay from the repository root:
 python3 notes/2026-08-08-c756-signed-elliptic-fusion.py --check
 ```
 
-The checker is only a finite prime-field cross-check.  Theorems 16--18 and
+The checker is only a finite prime-field cross-check.  Theorems 16--19 and
 (22)--(24) have the independent uniform character-convolution and polarity
 proofs above; the general code dimension used in Theorem 18 is prior work.
 
@@ -701,6 +748,16 @@ external-join graph.  The characteristic degeneration \(S^2=q^2I\) exposes a
 clean modular code and an unexplained rank \((q^2-1)/8\) in seven prime fields,
 but explicit shorter dependencies close raw modular distance as a finisher.
 
+**EJ4.**  Delete one point before attempting classification.  A signed
+\(m=(q+1)/2\)-seed has the exact completion-score energy
+\(2m(m-1)\), and it extends precisely when one outside score reaches the
+algebraic maximum \(m\); reconstruction makes that maximizer unique.  The old
+local-graph certificates in fact exclude even these seeds through \(q=49\),
+which strengthens the finite reading for free.  The tempting half-size
+exterior-set predecessor does not apply because it has the wrong point type
+and no signed triangle condition.  The live analytic target is now an
+extremal score bound for internal signed seeds, not a full-support search.
+
 ## Mystery ledger
 
 | feature | status | exact remaining boundary |
@@ -728,6 +785,10 @@ but explicit shorter dependencies close raw modular distance as a finisher.
 | Does deleting one point lose the equality configuration? | settled negative | Corollary 18.1 reconstructs the missing signed frame vector uniquely from the other \(n-1\) |
 | Can two equality supports differ in only one point? | settled negative | distinct supports intersect in at most \(n-2\) points |
 | Are coherent supports maximal external-join cliques for \(q\equiv3\pmod4\)? | settled positively | outside signed balance is even while \(n\) is odd |
+| Can existence be tested one point before a full support? | settled positively | Theorem 19: a signed \(m\)-seed extends iff one completion score has absolute value \(m\), uniquely |
+| Is the completion score unconstrained? | settled negatively | its exact outside energy is \(2m(m-1)\) |
+| Do one-point-short seeds occur in the certified range? | settled negative for the exact range | the existing local-graph table gives none for every odd prime power (5<q\le49) |
+| Does the published half-size exterior-set classification settle the seed problem? | settled negative | it classifies exterior points; these seeds are internal and impose signed triangle holonomy |
 | Are these tight frames or their minimum-circuit classification already known? | open novelty/spinoff gate | search signed fusions and frame constructions derived from the elliptic scheme before claiming a frame theorem |
 | What explains \(\operatorname{rank}_{\mathbb F_q}(2K-\epsilon I)=(q^2-1)/8\)? | open arithmetic spinoff | exact only for the seven tested prime fields; likely a modular Paley/Smith calculation |
 | Can the characteristic kernel's minimum distance close all-\(k\)? | settled negative as a raw route | weight (3) at \(q=5\) and weight (4) at \(q=7\) are already below the coherent targets |
@@ -740,10 +801,11 @@ but explicit shorter dependencies close raw modular distance as a finisher.
 
 ## Next action
 
-Classify equality in Theorem 17, equivalently smallest regular-simplex circuits
-in the complementary orthobiangular frame.  Use Corollary 18.1 to work with
-uniquely completable \((n-1)\)-seeds and the even outside-sign profile, rather
-than searching full supports.  Use the Paley lift, the projective
+Prove the Theorem 19 score bound \(\max_{R\notin T}|s_R|<m\) for every signed
+internal \(m\)-seed when \(q>5\), or classify the seeds and verify it on their
+normal forms.  This is equivalent to excluding the smallest regular-simplex
+circuits but works one point earlier.  Use the exact energy (29), the even
+outside-sign profile after completion, the Paley lift, and the projective
 cross-ratio model, and the binary passant-code word as three exact shadows,
 with the line-plus-pole F2 cliques as rejecting controls.  In parallel, run the focused
 novelty audit for the signed fusion, support, and frame-circuit theorems.  If equality

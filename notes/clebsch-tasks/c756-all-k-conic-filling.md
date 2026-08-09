@@ -1048,6 +1048,10 @@ regular-simplex circuits. Any \(n-1\) signed members uniquely reconstruct the
 last, distinct equality supports meet in at most \(n-2\), and for
 \(q\equiv3\pmod4\) outside-sign parity makes every coherent support a maximal
 external-join clique. This is now the preferred classification interface.
+One point earlier, a signed seed of size \(m=(q+1)/2\) has completion scores
+\(s_R\) with exact energy \(2m(m-1)\), and extends iff one uniquely determined
+score reaches \(\pm m\).  The existing local-graph table actually excludes
+even these seeds for every tested odd prime power \(5<q\le49\).
 
 The infinite-tower positioning is bounded. The exceptional-root code ladder
 pre-empted in the 2026-07-31 snapshot is a different Calderbank--Kantor/Taylor
@@ -1092,11 +1096,11 @@ is to geometrically label the compressed prefix-extension classes.  The unexpect
 entropic uncertainty, degree-two Lloyd moments, and unstructured local cumulants are
 closed-negative.
 
-Highest-EV next action: classify the smallest regular-simplex circuits of the signed
-elliptic fusion's complementary tight frame, equivalently its minimum-support
-eigenvectors, while running a focused original-source/forward-citation audit for those
-exact identities.  Start from uniquely completable \((n-1)\)-seeds and the
-even outside-sign profile, not full-support enumeration.  This closed-form operator satisfies the card's condition
+Highest-EV next action: prove \(\max|s_R|<m\) for every signed internal
+\(m\)-seed when \(q>5\), or classify the seeds and verify the bound on their
+normal forms.  This is the one-point-short version of classifying the smallest
+regular-simplex circuits, while a focused original-source/forward-citation audit
+checks those exact identities.  Do not return to full-support enumeration.  This closed-form operator satisfies the card's condition
 for reopening the equality route.  The older local minimum-passant-code/forbidden-clique
 certificate passes have met their stop rule and should not be repeated.  The historical
 coordinate routes below explain the obstruction and remain reusable inputs, not the live
