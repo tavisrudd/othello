@@ -344,25 +344,18 @@ details; its numbering no longer overrides this execution plan.
    landed scaled-rotation theorem, and factors the marked calculation through
    weighted axis-power tensors before expanding.  The restored continuation adds
    coefficient symmetry, reduction to the three index-pattern orbits, and the
-   full coefficient expansion, but has not been elaborated while the Lean queue
-   is locked.  Once that continuation passes, the remaining HARM-2 work is the
-   sum-zero `sigmaThree` collapse and the general rational corollary.
+   full coefficient expansion.  The later local continuation adds the
+   three-pattern coefficient classifier, collapses the expansion on the
+   sum-zero hyperplane, and uses the marked value to derive the exact real
+   identity `faceAxisCubic_eq_gauntCoefficient_mul_realSigmaThree`.
 
-   **Resumed worktree handoff (2026-08-09).**  The uncommitted continuation in
-   `lean/RelativeConicArcs/SphericalCubicRestriction.lean` was restored from Git
-   stash commit `30679dc4d99eb785ceaddd002659b9b651766898`.  The stash is retained
-   as a safety copy until the locked Lean queue becomes available and the
-   recovered source can be elaborated, validated, and committed; drop it only
-   after those gates pass.
-
-   Local continuation after that restore now adds the three-pattern coefficient
-   classifier, expands the polarized cubic on the five-label module, collapses
-   it on the sum-zero hyperplane, and uses the marked value to derive the exact
-   real identity
-   `faceAxisCubic_eq_gauntCoefficient_mul_realSigmaThree`.  This continuation
-   has received source-only review but no Lean invocation: the q11 build owns
-   the queue and must not be disturbed.  The only uncommitted C815 path is
-   `lean/RelativeConicArcs/SphericalCubicRestriction.lean`.
+   **Paused worktree handoff (2026-08-09).**  That complete uncommitted
+   continuation is preserved as Git stash commit
+   `b57ad3aefef21a17729a168b10570067cb94cc2f`, with subject
+   `C815 pause SphericalCubicRestriction after sigmaThree collapse`.  It has
+   received source-only review but no Lean invocation because the q11 build owns
+   the queue.  Resume it by applying the stable commit hash; after guarded
+   elaboration, validation and commit, drop the stash explicitly.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
