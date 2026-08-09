@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; R0 interface freeze and R1/R2 falsification memos next
+**Status:** active; R0 interface frozen and the R2 Steinberg hard gate has a
+positive tilting-filtration proof, both awaiting specialist challenge; R1
+actual finite-group Hom exhaustiveness is next
 
 ## Objective
 
@@ -22,6 +24,11 @@ substitute:
 
 The governing plan is
 `notes/2026-08-09-clebsch-paper-ii-non-c894-repair-plan.md`.
+
+Current mathematical memos:
+
+- `notes/2026-08-09-c895-preclassification-interface.md`;
+- `notes/2026-08-09-c895-steinberg-source-hom.md`.
 
 ## Exposition boundary
 
