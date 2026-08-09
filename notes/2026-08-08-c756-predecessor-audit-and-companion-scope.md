@@ -25,10 +25,10 @@ important terminology and novelty correction.
    Semantic Scholar returned HTTP 429 throughout, MathSciNet was inaccessible, and
    the published versions of several paywalled papers were not read.
 5. The best companion is therefore **not** a paper about a newly discovered code
-   bound.  Its headline should be the complete saturated-external classification,
-   framed by the all-\(k\) structural bounds, with the internal code equality,
-   Baer-subline exclusion, and line holonomy as sharp partial results and open
-   interfaces.
+   bound.  Its headline should be the covering-free extremal exterior-arc orbit
+   classification, with the Clebsch filling theorem as a corollary, framed by
+   the all-\(k\) structural bounds.  The internal code equality, Baer-subline
+   exclusion, and line holonomy remain sharp partial results and open interfaces.
 
 Three of the thirteen individually named sources below were read at full text.
 For Droms--Mellinger--Meyer this means the complete archived author preprint, not
@@ -235,7 +235,8 @@ marked boundary.
 | No even-\(q\) filling | proved | clean uniform obstruction |
 | all-\(k\) chord-moment LP bound | proved | first general quantitative theorem |
 | spare-passant saturation dichotomy | proved | structural spine separating generic and two saturated types |
-| saturated-external classification: only the \(q=11\) Clebsch hexagon covers | proved for every odd prime power | **headline theorem** |
+| extremal exterior-arc classification: \((q+1)/2\) exterior points occur only at \(q=3,7,11\), with one conic-stabilizer orbit in each field | proved for every odd prime power | **headline theorem**, stated without the covering condition |
+| saturated-external filling corollary: only the \(q=11\) Clebsch hexagon covers | proved for every odd prime power | reconnects the headline to conic-filling |
 | Droms lower bound and equality-to-internal-exterior-arc bridge | prior bound + proved bridge | intrinsic formulation of the remaining saturated-internal problem |
 | coherent systems in a Baer subline force \(q=5\) | proved for every odd prime power | strongest uniform internal exclusion |
 | external-line triangle holonomy | proved for every odd prime power | removes the canonical \(q\equiv3\pmod4\) line-plus-pole candidate |
@@ -269,8 +270,9 @@ Recommended spine:
 
 1. established exterior-set terminology and the filling/covering dictionary;
 2. all-\(k\) LP bound, even-field obstruction, and saturation dichotomy;
-3. complete saturated-external classification, with the complete-mapping and
-   primitive-Jacobi rigidity proof as the headline;
+3. complete extremal exterior-arc orbit classification, with the
+   complete-mapping and primitive-Jacobi rigidity proof as the headline, then
+   the Clebsch filling statement as a covering corollary;
 4. passant-code equality as the internal interface, with attribution boundary;
 5. Baer-subline and external-line-holonomy exclusions;
 6. bounded local-graph evidence and two explicit open problems.
@@ -299,10 +301,13 @@ novelty or proof-trust gate.
 ## 7. EJ + TT closeout and mystery ledger
 
 **EJ.**  The closest predecessor did not pre-empt the internal result; it supplied
-the right vocabulary and a cleaner contrast theorem.  The free upgrade is to
-present the two saturated types as adjacent exterior-set problems of different
-point type and different extremal size.  The full saturated-external theorem,
-not the elementary code bridge, is the publishable crown.
+the right vocabulary and a cleaner contrast theorem.  The free upgrade is
+stronger than packaging: an exterior set of \((q+1)/2\) exterior points that is
+an arc already produces the saturated perfect matching, with no covering
+hypothesis.  The proof classifies these extremal exterior arcs up to the conic
+stabilizer at \(q=3,7,11\); covering then selects the \(q=11\) Clebsch orbit.
+This covering-free orbit theorem, not the elementary code bridge, is the
+publishable crown.
 
 **TT.**  The archive is much larger than the paper.  A strong specialist paper
 should expose one complete classification and one sharply formulated failure of
@@ -318,5 +323,5 @@ the reproducibility note.
 | Did Droms et al. state the equality bridge? | no in full author preprint | published VOR still needs direct wording check |
 | Is a \(K_q\) equality classification already published? | no predecessor located in covered sources | Semantic Scholar, MathSciNet, full paywalled follow-ups remain gaps |
 | Does Yip's strengthened McConnel theorem close a C756 branch? | settled negative as a direct application | it controls a full \(q\)-point function graph, not a half-sized exterior arc |
-| Is the partial package coherent enough for a paper task? | settled positive | headline is saturated-external classification; internal and nonsaturated gaps explicit |
-| Is the package release-ready? | no | VOR, human citation-index, extension-field, and claim--proof audits remain |
+| Is the partial package coherent enough for a paper task? | settled positive | headline is the extremal exterior-arc orbit classification; internal and nonsaturated gaps explicit |
+| Is the package release-ready? | no | VOR, human citation-index, proof consolidation, and independent Jacobi-lemma audit remain |

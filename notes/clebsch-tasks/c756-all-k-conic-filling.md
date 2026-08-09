@@ -100,8 +100,11 @@ conic**; C756's object is an exterior set that is also an arc.  The closest
 Blokhuis--Seress--Wilbrink and Van de Voorde results concern exterior points of size
 \((q+1)/2\), not internal points of size \((q+3)/2\), so they do not pre-empt the
 internal equality problem.  The companion headline should nevertheless be the
-complete saturated-external classification, not the elementary code bridge.  Include
-the all-\(k\) LP bound and saturation dichotomy, then use the code bridge,
+complete extremal exterior-arc classification, not the elementary code bridge:
+an exterior set of \((q+1)/2\) exterior points that is also an arc occurs only
+for \(q\in\{3,7,11\}\), with one conic-stabilizer orbit in each field, and the
+covering condition then selects the \(q=11\) Clebsch hexagon.  Include the
+all-\(k\) LP bound and saturation dichotomy, then use the code bridge,
 Baer-subline exclusion, and line holonomy as uniform internal partial results.  Omit
 the negative-method catalogue and most mixed-moment machinery unless it shortens a
 proof.  Primary venue fit: _Designs, Codes and Cryptography_; _Discrete Mathematics_
@@ -115,20 +118,25 @@ check if available; otherwise retain “to our knowledge” in the novelty ledge
 the code equality and local tangent graph as open problems and diagnostic evidence; do not
 spend another pass fitting optimal theta matrices or edit a manuscript under C756.
 
-**Proof-trust outcome (2026-08-08):** the saturated-external theorem survives an
-end-to-end dependency audit and a fresh (q=27\) extension-field replay.  Its all-field
-proof is human, not certificate-dependent: saturation gives the matching; the
-(q\equiv1\pmod4\) branch dies by the complete-mapping group sum; the
-(q\equiv3\pmod4\) branch runs through Segre sign coherence, one-block Paley rigidity,
+**Proof-trust/EJ outcome (2026-08-08):** the saturated-external theorem survives an
+end-to-end dependency audit and a fresh \(q=27\) extension-field replay.  Its all-field
+proof is human, not certificate-dependent.  Moreover, covering is not needed for the
+strongest headline: the extremal exterior-arc hypothesis itself exhausts every passant
+pencil and gives the perfect matching.  The \(q\equiv1\pmod4\) branch dies by the
+complete-mapping group sum; the \(q\equiv3\pmod4\) branch runs through Segre sign
+coherence, one-block Paley rigidity,
 the primitive-Jacobi Frobenius collision theorem, a coset Weil exclusion of nontrivial
-Frobenius, and the scalar Hasse/covering endgame.  The replay reproduced the committed
-(q=27\) row exactly, and the matching certificate passed its built-in check.  The
+Frobenius, and the scalar Hasse endgame.  It leaves \(q\in\{3,7,11\}\); the endpoint
+parameters form one inversion orbit per field, and covering removes \(q=3,7\).
+The replay reproduced the committed \(q=27\) row exactly, and the matching certificate
+passed its built-in check.  The
 remaining release risk is proof integration: the chain is split across four reports,
 and the new primitive-Jacobi collision lemma is the highest-risk referee target.  See
 `notes/2026-08-08-c756-saturated-external-proof-trust-map.md`.
 
-**Next-session entry (superseding the one above):** consolidate the saturated-external
-chain into one theorem-proof document, independently line-audit the primitive-Jacobi
+**Next-session entry (superseding the one above):** consolidate the extremal
+exterior-arc orbit classification and its Clebsch covering corollary into one
+theorem-proof document, independently line-audit the primitive-Jacobi
 half-carry argument and all extension-field conventions, and attach precise primary
 citations for Segre's lemma, Stickelberger, the three-point multiplicative Weil bound,
 and Hasse.  If and only if that bounded gate passes, allocate a separate unnumbered
