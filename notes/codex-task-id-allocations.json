@@ -3014,8 +3014,17 @@
       "last": 901,
       "purpose": "Paper IV reviewer and critic dossier for human-proof and exposition cold reads",
       "sequence": 335
+    },
+    {
+      "count": 1,
+      "first": 902,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 902,
+      "purpose": "Paper III cheap-upgrade literature audits, red-team review, proof gates, and wording recommendations",
+      "sequence": 336
     }
   ],
-  "next_id": 902,
+  "next_id": 903,
   "schema": "codex-task-id-allocations-v1"
 }
