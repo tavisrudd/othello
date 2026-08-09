@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "coherent_quadrangles": 5,
+      "diagonal_character_sum": 15,
+      "internal_diagonal_histogram": {
+        "0": 5
+      },
+      "internal_points": 10,
+      "q": 5
+    },
+    {
+      "coherent_quadrangles": 0,
+      "diagonal_character_sum": 0,
+      "internal_diagonal_histogram": {},
+      "internal_points": 21,
+      "q": 7
+    },
+    {
+      "coherent_quadrangles": 1320,
+      "diagonal_character_sum": 0,
+      "internal_diagonal_histogram": {
+        "1": 660,
+        "2": 660
+      },
+      "internal_points": 55,
+      "q": 11
+    },
+    {
+      "coherent_quadrangles": 5187,
+      "diagonal_character_sum": 6825,
+      "internal_diagonal_histogram": {
+        "0": 3003,
+        "2": 2184
+      },
+      "internal_points": 78,
+      "q": 13
+    },
+    {
+      "coherent_quadrangles": 37128,
+      "diagonal_character_sum": 23256,
+      "internal_diagonal_histogram": {
+        "0": 11424,
+        "1": 9792,
+        "2": 13464,
+        "3": 2448
+      },
+      "internal_points": 136,
+      "q": 17
+    },
+    {
+      "coherent_quadrangles": 88920,
+      "diagonal_character_sum": 27360,
+      "internal_diagonal_histogram": {
+        "0": 10260,
+        "1": 44460,
+        "2": 27360,
+        "3": 6840
+      },
+      "internal_points": 171,
+      "q": 19
+    },
+    {
+      "coherent_quadrangles": 412896,
+      "diagonal_character_sum": 145728,
+      "internal_diagonal_histogram": {
+        "0": 48576,
+        "1": 188232,
+        "2": 170016,
+        "3": 6072
+      },
+      "internal_points": 253,
+      "q": 23
+    }
+  ],
+  "dependency": "Python 3 standard library",
+  "schema": "c756-coherent-quadrangle-diagonal-v1",
+  "source": "2026-08-08-c756-signed-elliptic-fusion.py"
+}
