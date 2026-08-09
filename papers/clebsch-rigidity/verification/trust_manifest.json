@@ -362,7 +362,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 1023",
+      "paper_location": "source line 994",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -495,7 +495,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1078",
+      "paper_location": "source line 1049",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -847,7 +847,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1211",
+      "paper_location": "source line 1182",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -934,7 +934,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1261",
+      "paper_location": "source line 1232",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1200,7 +1200,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1277",
+      "paper_location": "source line 1248",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -2015,7 +2015,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "b407a8844f7ca04b6b8d47b813563c9fc7dc871fb6af88ee32b21c506385d5e0"
+    "sha256": "13b0b4ba45f7abdef970750b5f0e3abc0e0f29699b00a4f5680223d209d0272c"
   },
   "verify_all": {
     "checker_output_certificate": {
