@@ -134,26 +134,11 @@ type & linear quotient & sheets/cubic\\
 \end{tabular}
 \end{center}
 \noindent
-The proof separates classification from its consequences.
-Section~\ref{sec:matching-products} constructs the quotient for arbitrary
-matchings.  Section~\ref{sec:rank-three} then starts from a hypothetical
-two-valued trade, derives its two projective sheets, and excludes every
-sheet size except \(q=7,11\).  The difficult step is the outer-parity
-obstruction: targeted linear detectors and a root-defect injection rule out
-the unwanted quadratic copy.  Faber's tame subgroup theorem makes the
-detector split exhaustive; Dickson's maximal-subgroup theorem is used only
-after the exact sheet size is known.  The same section obtains the ranks
-\(3,6,10\); one selected alternating cycle supplies the radial component in
-both balanced cases.
-
-Section~\ref{sec:balanced} recovers the sheets from quadratic products,
-shows exactly where that recovery fails off the matching carrier, and
-proves that the first signed moment is cubic.  Maximal isotropy then gives
-the Gorenstein pairing.  Appendix A proves the modular detector interfaces
-on which the all-field exclusion rests.  Appendices B, C, E, and F develop
-optional \(H_3\) refinements, Appendix D compares arithmetic marker data
-across all three types, and Appendix G records the human, formal, and finite
-verification boundaries.
+The all-field bottleneck is the outer-parity obstruction.  Faber's tame
+subgroup theorem makes the detector split exhaustive, while the targeted
+linear detectors and root-defect injection in Appendix A rule out the
+unwanted quadratic copy.  Dickson's maximal-subgroup theorem enters only
+after the exact sheet size is known.
 
 \begin{theorem}[Quadratic-trade classification and cubic orientation]
 \label{thm:factorization-recovery}
@@ -184,6 +169,63 @@ one-dimensional two-valued quadratic-trade space.
 \end{enumerate}
 \end{theorem}
 
+\Needspace{24\baselineskip}
+\medskip
+\noindent\textbf{Proof and reading map.}
+\begin{center}
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{@{}c c c@{}}
+&
+\fbox{\parbox{0.30\textwidth}{\centering
+Matching products have a common conic restriction; differences define the
+conic-ideal quotient.\\[-1pt]
+\emph{Section~\ref{sec:matching-products}}}}
+&\\
+\(\swarrow\) && \(\searrow\)\\
+\fbox{\parbox{0.25\textwidth}{\centering
+Compute the three quotient ranks \(3,6,10\).\\[-1pt]
+\emph{Section~\ref{sec:rank-three}; (ii)}}}
+&&
+\fbox{\parbox{0.29\textwidth}{\centering
+A two-valued quadratic trade forces projective sheets and a finite list of
+possible sizes.\\[-1pt]
+\emph{Section~\ref{sec:rank-three}}}}
+\\
+&& \(\Downarrow\)\\
+&&
+\fbox{\parbox{0.29\textwidth}{\centering
+Faber's subgroup split is exhaustive; the outer-parity detectors force the
+surviving sheet sizes.\\[-1pt]
+\emph{Section~\ref{sec:rank-three}; Appendix~\ref{app:modular-detectors}}}}
+\\
+&& \(\Downarrow\)\\
+&&
+\fbox{\parbox{0.29\textwidth}{\centering
+Dickson's subgroup classification identifies the survivors as
+\(B_3/\F_7\) and \(H_3/\F_{11}\).\\[-1pt]
+\emph{Section~\ref{sec:rank-three}; (i)}}}
+\\
+& \(\swarrow\) & \(\searrow\)\\
+&
+\fbox{\parbox{0.30\textwidth}{\centering
+Quadratic moments recover the unordered sheets; the signed cubic orients
+them and gives the Gorenstein duality.\\[-1pt]
+\emph{Section~\ref{sec:balanced}; (iii)--(v)}}}
+&
+\fbox{\parbox{0.30\textwidth}{\centering
+The fixed affine line exposes the off-carrier ambiguity; geometric splitting
+restores the matching point.\\[-1pt]
+\emph{Section~\ref{sec:balanced}; (vi)}}}
+\end{tabular}
+\end{center}
+\noindent
+Classification follows the right-hand chain.  The lower boxes prove recovery,
+orientation, and the carrier boundary.  Appendix A is required only at the
+detector node.  Appendices B--F may be skipped on a first pass; Appendix G
+records the trust boundary and supplies no logical premise.
+
 For each surviving stabilizer, Section~\ref{sec:balanced} constructs a fixed
 affine line inside the ambient conic fiber.  The forms in that ambient fiber
 that split geometrically into linear factors comprise its geometric Chow
@@ -201,14 +243,6 @@ locus.  The carrier boundary is summarized by
 The middle line consists of one matching orbit and \(q-2\) nonmatching
 orbits; the excluded rational point is the coalescence parameter.  The last
 line shows that imposing the Chow condition restores uniqueness.
-
-Appendix~\ref{sec:modular-depth} gives a modular interpretation of the
-\(H_3\) affine-origin obstruction and its homogeneous extension.
-Sections~\ref{sec:matching-products}--\ref{sec:balanced} prove the
-quotient, rank, and quadratic/cubic recovery results; Appendix A supplies
-the load-bearing modular detector calculations, Appendices B, C, E, and F
-record \(H_3\) refinements, Appendix D compares arithmetic marker data across
-the three types, and Appendix G documents verification.
 
 \section{Conic matching products}
 \label{sec:matching-products}
@@ -3352,8 +3386,8 @@ The reproducible review source is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{57eed77c02adc2d7a61f9ea7461a1df0c9a9e9}\\[-2pt]
-\texttt{8ac3749b4a2c878284c7ceea6d}.
+\small\texttt{a0d66b9ccf1aa44f7c383bf95e0386f440e8ef}\\[-2pt]
+\texttt{ca87d47f8e4da83067003a1376}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Nix inputs, manuscript checker, adversarial boundary checker,
