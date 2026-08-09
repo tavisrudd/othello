@@ -44,7 +44,10 @@ on explicit feasibility and realization hypotheses.  At matrix level it
 derives the exact first-moment formula for a six-mode Hermitian transfer and
 proves the `9/5` bound throughout the real control cube.  Its general finite
 cube theorem turns coordinatewise convexity into a complete Boolean-vertex
-reduction.
+reduction and extends a uniform vertex bound to the full cube.  At fixed
+six-mode normalization, actual one- and two-coordinate principal blocks have
+second moments `1` and `32/25`; the three-coordinate landscape value is
+`33/25`.
 
 The all-orders rigidity directions are separate terminals rather than one
 bundled equivalence.  This formal artifact does not prove the aligned-design

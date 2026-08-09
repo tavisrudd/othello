@@ -47,7 +47,10 @@ paper's remaining continuous-control feasibility and family-realization
 bridges.  For an actual six-mode complex transfer, it proves the exact first
 moment control formula and its `9/5` bound on the real cube.  A reusable finite
 cube theorem proves that separate coordinate convexity reduces every objective
-value to a Boolean vertex.
+value to a Boolean vertex and extends any uniform Boolean bound to the cube.
+The fixed-six one- and two-coordinate principal-block second moments are
+evaluated at `1` and `32/25`; the three-coordinate value is `33/25` from the
+landscape theorem.
 
 The imported proofs do not formalize the paper's orbit and orientation
 classification, its continuous-control optimum, the admissible Hermitian

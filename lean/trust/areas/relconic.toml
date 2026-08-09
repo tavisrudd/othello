@@ -1538,6 +1538,9 @@ terminals = [
   "RelativeConicArcs.HermitianConferenceExchange.re_trace_hermitianTransferBlock_gram_le_nine_fifths",
   "RelativeConicArcs.HermitianConferenceExchange.coordinatewiseEndpointDominated_of_convexOnCube",
   "RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge",
+  "RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le",
+  "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one",
+  "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge",
   "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities",
   "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint",
@@ -2259,6 +2262,21 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one"
+gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge"
 gates = ["RelativeConicArcs.Gates.GoldenQuantumStatistics"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
