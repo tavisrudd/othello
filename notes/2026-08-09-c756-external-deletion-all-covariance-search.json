@@ -1,0 +1,149 @@
+{
+  "base_script": "2026-08-09-c756-aligned-split-mixed-search.py",
+  "base_script_sha256": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f",
+  "conic_normal_form": "UV=2W^2",
+  "distinguished_line": "W=0 (secant)",
+  "q": 53,
+  "required_center_count": 15,
+  "result": {
+    "best_witness": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        8
+      ],
+      [
+        2,
+        32
+      ],
+      [
+        6,
+        46
+      ],
+      [
+        8,
+        18
+      ],
+      [
+        10,
+        32
+      ],
+      [
+        11,
+        20
+      ],
+      [
+        16,
+        43
+      ],
+      [
+        22,
+        42
+      ],
+      [
+        24,
+        16
+      ],
+      [
+        25,
+        31
+      ]
+    ],
+    "complete_center_histogram": [
+      {
+        "count": 230,
+        "value": 0
+      }
+    ],
+    "covariance_classes": [
+      {
+        "class": "anisotropic",
+        "count": 118
+      },
+      {
+        "class": "split",
+        "count": 112
+      }
+    ],
+    "full_cover_candidates": 0,
+    "geometric_candidates": 230,
+    "maximum_complete_centers": 0,
+    "maximum_span_histogram": [
+      {
+        "count": 11,
+        "value": 40
+      },
+      {
+        "count": 11,
+        "value": 41
+      },
+      {
+        "count": 96,
+        "value": 42
+      },
+      {
+        "count": 101,
+        "value": 43
+      },
+      {
+        "count": 11,
+        "value": 45
+      }
+    ],
+    "minimum_span_histogram": [
+      {
+        "count": 68,
+        "value": 34
+      },
+      {
+        "count": 68,
+        "value": 35
+      },
+      {
+        "count": 70,
+        "value": 36
+      },
+      {
+        "count": 24,
+        "value": 37
+      }
+    ],
+    "residual_norm_counts": [],
+    "residual_weight_counts": [],
+    "search_nodes": 57849196,
+    "searched_seed_offsets": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "vertex_count": 1378
+  },
+  "schema": "c756-external-deletion-all-covariance-v1"
+}

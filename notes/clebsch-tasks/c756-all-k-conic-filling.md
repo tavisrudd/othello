@@ -5,9 +5,12 @@
 **Status:** active open mathematics.  The saturated-external branch is closed
 and transferred to C894.  C756 retains the saturated-internal branch and the
 full nonsaturated branch.  The latter is not reduced to one conic point type;
-the \(q=53\) external-deletion aligned split escape is closed for every mixed
-secant/passant profile.  The character-weighted all-center residual sum is now
-the difference of the \(\pm1\) root multiplicities of an exact
+at \(q=53,k=12\), external deletion is now impossible for every covariance
+class and mixed secant/passant profile: none of the 230 normalized geometric
+stars has even one of its fifteen required complete centers.  Hence any
+remaining example at that layer is all-internal.  The character-weighted
+all-center residual sum is the difference of the \(\pm1\) root
+multiplicities of an exact
 degree-\(\delta S(A)\) norm polynomial; its trace coefficient gives the sum
 modulo the characteristic.  At defect two the scalar resultant detects the
 zero-weight case but necessarily loses the sign \(W=\pm2\).
@@ -215,21 +218,23 @@ ranks zero and one; nonsingular covariance gives
 
 If the deleted point is internal, its polar line is passant and the existing
 anisotropic conic-overlap table applies even when the other polar lines are
-mixed.  If it is external, its polar line is secant and the split-conic
-overlap gives three branches: seven anisotropic covariance rows, disjoint-root
-split covariance with at least eight nonsquare arrangement values, and the
-aligned split case \(K\sim C\).  Covariance sharing exactly one conic root
-is impossible because it has at most fourteen favorable internal directions,
-short of the fifteen required centers.  The aligned split case is impossible
-as well: its unique \(UV=2\) normal form has 230 normalized mixed-type
-geometric candidates, and the first critical derivative is nonzero on every
-candidate.  Authority:
-`notes/2026-08-09-c756-aligned-split-mixed-closure.md` and its exact bundle.
+mixed.
 
-### Conditional subbranch: \(q=53\), all-internal/all-passant offsets
+External deletion is impossible before the covariance split.  Its unique
+\(UV=2\) conic normal form has exactly 230 normalized eleven-line stars with
+all 55 nodes internal and no triple concurrency.  Those leaves are the full
+covariance-free geometric list, not merely the aligned split list, and none
+has even one complete center among the fifteen required internal directions;
+their best projections span at most 45 of 53 fibres.  This closes the seven
+anisotropic rows, all disjoint-root split rows, the one-shared-root case, and
+the aligned split case simultaneously.  Authority:
+`notes/2026-08-09-c756-external-deletion-all-covariance-closure.md` and its exact bundle.
 
-When every primal point is internal, all eleven remaining polar lines are
-passants and the old offset/node-character descent applies.
+### \(q=53\) remaining branch: all-internal/all-passant offsets
+
+Every hypothetical \(q=53,k=12\) example is now forced all-internal.  All
+eleven remaining polar lines are passants and the old offset/node-character
+descent applies.
 
 Elliptic overlap leaves:
 
@@ -247,13 +252,14 @@ Authority:
 `notes/2026-08-09-c756-aligned-critical-closure.md` and its committed exact
 script/certificate bundle.
 
-The nonaligned and split rows remain valid conditional work.  They do not
-cover mixed line types or the remaining external-deletion covariance rows.
+The nonaligned and split rows are the remaining \(q=53,k=12\) work.  Mixed
+line types and every external-deletion covariance row are closed.
 
 ## Ordered next actions
 
-1. Attack the remaining \(q=53\) external-deletion anisotropic and
-   disjoint-root split covariance rows with the mixed line characters.
+1. Test whether the now-forced all-passant geometry admits the same
+   covariance-free star enumeration and direct sixteen-center obstruction;
+   otherwise return to its nonaligned anisotropic and split Gram rows.
 2. Build the \(q=47\) octic carrier and the separate \(q=49\)
    Hasse/divided-power carrier before attempting a certified all-type search.
 3. Cover higher nonsaturated sizes separately; do not infer them from the
@@ -270,7 +276,7 @@ Do not:
   because the arrangement is mixed;
 - call \(q=53\) the first open field, or infer general \(\delta\) from defect
   two without a propagation theorem;
-- count progress in the conditional all-passant route as closure of the full
+- count progress in the \(q=53\) all-passant route as closure of the full
   nonsaturated branch;
 - rerun the closed aligned state graph, generic 11-variable elimination, or
   an unchanged quartic character bound;
@@ -293,7 +299,9 @@ Do not:
   remaining external-specialist safeguard.
 - The \(q=53\) all-passant aligned certificate has independent formula-level
   invariant checks, not a second independent exhaustive search implementation.
-- No all-type exact search currently covers \(q=47,49,53\).
+- No all-type exact search currently covers \(q=47,49,53\).  The new
+  \(q=53\) search covers every external-deletion geometry but not the
+  now-forced all-internal branch.
 
 ## Current assessment
 
@@ -302,12 +310,14 @@ Do not:
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
   exact, and its character total has the all-center trace/norm law (H'); no
   first-open field or higher size is classified.
-- \(q=53\), all-internal, aligned: closed exactly.
-- \(q=53\), external deletion, aligned split covariance: closed exactly for
-  every mixed line-character profile.
+- \(q=53\), external deletion: closed exactly for every covariance class and
+  mixed line-character profile; any hypothetical \(k=12\) example is
+  all-internal.
+- \(q=53\), all-internal, aligned: closed exactly; nonaligned anisotropic and
+  split covariance remain.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
-  the type audit exposed distinct \(q=47\), \(q=49\), mixed-offset, and
-  higher-size gates; a counterexample remains live.
+  the distinct \(q=47\), \(q=49\), \(q=53\) all-internal, and higher-size
+  gates remain; a counterexample remains live.
 
 ## Durable pointers
 
@@ -315,6 +325,8 @@ Do not:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
 - Character-weighted all-center trace/norm identity:
   `notes/2026-08-09-c756-all-center-resultant-norm.md`.
+- External-deletion all-covariance closure:
+  `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Mixed-type equation ledger:
   `notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
 - External-deletion aligned split closure:
