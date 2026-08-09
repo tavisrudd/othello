@@ -3,6 +3,8 @@
 **Task:** `C900`  
 **Lane:** `relconic`  
 **Date:** 2026-08-09  
+**Status:** open through persona reviews, accepted manuscript fixes, and sealed
+context-clean re-reviews
 **Scope:** likely human-proof and mathematical referees for *Arcs complete
 outside a conic: a prescribed-hole defect identity and matching-design
 rigidity*. Formalization, software, certificate, and artifact-trust review are
