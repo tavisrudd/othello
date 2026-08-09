@@ -134,11 +134,34 @@ theorem realDiagonalControl_conjTranspose {m : Type*} [DecidableEq m] (x : m →
     simp [realDiagonalControl, Matrix.conjTranspose_apply]
   · simp [realDiagonalControl, Matrix.conjTranspose_apply, h, Ne.symm h]
 
+/-- Negating a real control negates its diagonal control matrix. -/
+theorem realDiagonalControl_neg {m : Type*} [DecidableEq m] (x : m → ℝ) :
+    realDiagonalControl (-x) = -realDiagonalControl x := by
+  ext i j
+  by_cases h : i = j
+  · subst j
+    simp [realDiagonalControl]
+  · simp [realDiagonalControl, h]
+
 /-- The transfer block of a complex control between two ordered orthonormal
 frames. -/
 def hermitianTransferBlock {m ι : Type*} [Fintype m]
     (D : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ) : Matrix ι ι ℂ :=
   Qmᴴ * D * Qp
+
+/-- Complementing a Boolean control negates the transfer block. -/
+theorem hermitianTransferBlock_neg {m ι : Type*} [Fintype m]
+    (D : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ) :
+    hermitianTransferBlock (-D) Qp Qm = -hermitianTransferBlock D Qp Qm := by
+  simp [hermitianTransferBlock, Matrix.mul_neg]
+
+/-- Complementing a control leaves its exchange Gram matrix unchanged. -/
+theorem hermitianTransferBlock_neg_gram {m ι : Type*} [Fintype m] [Fintype ι]
+    (D : Matrix m m ℂ) (Qp Qm : Matrix m ι ℂ) :
+    (hermitianTransferBlock (-D) Qp Qm)ᴴ * hermitianTransferBlock (-D) Qp Qm =
+      (hermitianTransferBlock D Qp Qm)ᴴ * hermitianTransferBlock D Qp Qm := by
+  rw [hermitianTransferBlock_neg]
+  simp
 
 /-- The Hermitian transfer Gram matrix is the compression of the
 control-conjugated complementary frame projection. -/
