@@ -1,0 +1,64 @@
+{
+  "conic": "UV=8W^2",
+  "direction_count": 24,
+  "distinguished_line": "W=0 (secant)",
+  "e7_zero_stars": 0,
+  "field_model": "F_7[w]/(w^2-3), encoded a+7b",
+  "full_forced_window_stars": 0,
+  "internal_node_character": 1,
+  "maximum_complete_centers": 0,
+  "maximum_span_histogram": [
+    {
+      "count": 22,
+      "maximum_span": 40
+    }
+  ],
+  "minimum_span_histogram": [
+    {
+      "count": 22,
+      "minimum_span": 35
+    }
+  ],
+  "nonsquare": 8,
+  "normalized_geometric_stars": 22,
+  "normalized_seed_offsets": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27
+  ],
+  "q": 49,
+  "schema": "c756-q49-external-deletion-v1",
+  "search_nodes": 16571670,
+  "stars_with_all_thirteen_complete_centers": 0,
+  "stars_with_any_complete_center": 0,
+  "type_profiles": [
+    {
+      "count": 22,
+      "passants": 6,
+      "secants": 5
+    }
+  ],
+  "vertex_count": 1176
+}

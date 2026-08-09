@@ -1,0 +1,15 @@
+{
+  "conic": "X^2-8Y^2=W^2",
+  "direction_count": 25,
+  "distinguished_line": "W=0 (passant)",
+  "field_engine": "2026-08-09-c756-q49-external-deletion-search.py",
+  "field_engine_sha256": "7ec51984ce230f4129cc51a0bd82137923ae90661326074667b5b4c25e7533ad",
+  "field_model": "F_7[w]/(w^2-3), encoded a+7b",
+  "internal_node_character": 1,
+  "nonsquare": 8,
+  "normalized_geometric_stars": 0,
+  "q": 49,
+  "schema": "c756-q49-all-passant-v1",
+  "search_nodes": 636224,
+  "vertex_count": 600
+}
