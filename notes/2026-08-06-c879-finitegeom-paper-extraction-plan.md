@@ -1,9 +1,8 @@
 # C879 — finitegeom paper-boundary extraction plan and red-team
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** refreshed by C891 on
-2026-08-08 against all registered papers, repositories, trust gates, and export
-areas; no source move is authorized, and declaration-level ownership review
-remains the first execution gate
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** architecture correction
+in progress; the C891 module mapping is stale and must be regenerated from the
+current tree before it can authorize any move
 
 ## Objective
 
@@ -46,19 +45,52 @@ Before any paper split, establish and enforce this package DAG:
 ```text
 finitegeom  --imports-->  q11-certificates
 finitegeom  --imports-->  q16-certificates
-finitegeom  --imports-->  finitegeom-foundation
 
-q11-certificates  --imports-->  finitegeom-foundation
-q16-certificates  --imports-->  finitegeom-foundation
+q11-certificates  --imports-->  Mathlib only
+q16-certificates  --imports-->  Mathlib only
+every other heavyweight certificate package  --imports-->  Mathlib only
 ```
 
-`finitegeom-foundation` is the minimal, deliberately stable definitions-and-semantics
-API required to state the certificate results.  The certificate packages must not
-depend on `finitegeom`, any paper package, or another certificate package.  Their
-gates expose certificate-only terminals.  Human and paper-level aggregates live in
-`finitegeom` and import those frozen terminals.  Changes above the foundation edge
-may rebuild downstream human modules, but must leave every heavyweight certificate
-target trace-current.
+The first two finitegeom edges are opt-in adapter edges, not imports of the
+ordinary human library roots.  No default finitegeom target, shared human module,
+or paper-independent interface may import a certificate adapter.  A paper interface
+imports an adapter only when one of its claims uses that certificate.  Thus editing
+finitegeom human source is upstream of no heavyweight certificate target even though
+the Lake package can resolve the frozen certificate dependency.
+
+Each certificate package owns the frozen local types, operations, coordinate data, and
+predicates needed to state its terminals.  It imports no project-owned foundation,
+`finitegeom`, paper package, or other certificate package.  A cheap downstream adapter
+proves the local model equivalent to the human API and transports the certificate
+terminal into the paper-facing statement.  A hash, version assertion, or unproved type
+comparison is insufficient: compatibility is a Lean equality/equivalence plus theorem
+transport.  Human and paper-level aggregates live in `finitegeom` downstream of the
+adapter.  Consequently no project-owned source change can invalidate a heavyweight
+certificate artifact.
+
+For Q11 the current declaration-level seam is:
+
+```text
+q11-certificates:
+  a private frozen coordinate model, Q11BrianchonPetersen,
+  and the Q11A5PointOrbits certificate family
+finitegeom:
+  the proved local-model compatibility adapter, Q11Coding semantic synthesis,
+  decoder/rigidity/orientation layers,
+  and the paper-facing Clebsch aggregate
+```
+
+`Q11BrianchonPetersen` is a strict-kernel Q11 certificate, not foundation.  Its
+current import by the orbit package is evidence that it belongs in the Q11 package.
+The package's present Clebsch-wide gate is not a certificate-only gate: it imports
+finitegeom human modules and must be split.  The Q11 package exposes only its orbit and
+Brianchon terminals; the Clebsch paper aggregate remains downstream in finitegeom.
+
+The Q11 compatibility spike is green: the final stable-named Mathlib-only local model
+elaborated in 5.94 seconds at 1.03 GB peak RSS, and the downstream adapter elaborated
+in 61.80 seconds at 3.34 GB.  The adapter proved equality of the actual witness and canonical
+point tables and transported a certificate theorem; no heavyweight Q11 target was
+scheduled.  This establishes the mechanism, not the full Q11 ownership manifest.
 
 Use explicit paper and shared source roots:
 
@@ -76,11 +108,10 @@ finitegeom/
 ```
 
 The directory names above are exact paper/repository aliases and are intentionally
-lowercase with underscores or hyphens. They are not Lean module names. The Lean
-namespaces need a personal, ecosystem-unique top level: bare `Paper.*` and
-`FiniteGeom.*` are too generic. Use the explicit project brand
-`TavisRuddFiniteGeom`. Lean module components should use the usual PascalCase
-convention, for example:
+lowercase with underscores or hyphens. They are not Lean module names.  Existing
+public namespaces remain unchanged.  A genuinely new public module family uses the
+ecosystem-unique top level `TavisRuddFiniteGeom`, rather than bare `Paper.*` or
+`FiniteGeom.*`. Lean module components use the usual PascalCase convention, for example:
 
 ```text
 TavisRuddFiniteGeom.Papers.Beyond4PRS.*
@@ -89,10 +120,11 @@ TavisRuddFiniteGeom.Papers.AMELU.*
 TavisRuddFiniteGeom.Shared.Projective.*
 ```
 
-During the first split, preserve the existing `RelativeConicArcs.*` module names
-behind package-specific source roots; do not force filesystem aliases into Lean
-names. Namespace migration to the PascalCase names above is a later, separate
-chunk. The import direction is one-way: papers may import shared APIs;
+During the split, preserve the existing `RelativeConicArcs.*` module names behind
+package-specific source roots.  Namespace migration is not an extraction deliverable:
+it invalidates downstream artifacts without improving isolation.  Consider it only
+later for an already isolated human package with a demonstrated benefit and no
+heavyweight reverse dependency. The import direction is one-way: papers may import shared APIs;
 shared APIs may not import papers. A genuine cross-paper result, such as the PRS
 balanced quantum extension consuming AME--LU results, must use an explicit adapter
 and declared paper dependency.
@@ -152,11 +184,11 @@ Rules:
 
 The q11 and q16 certificate repositories are frozen exceptions to the naming
 migration: their existing module, gate, and audit names are not renamed.  They are
-not exceptions to the dependency firewall.  Each must import only the stable
-foundation, while finitegeom imports its frozen certificate terminal through a
-public adapter.  The separately versioned certificate source and compiled cache
-remain byte-compatible until an explicitly approved foundation migration requires a
-new artifact.
+not exceptions to the dependency firewall.  Each imports Mathlib only and owns its
+frozen local statement model, while finitegeom imports its terminal through a proved
+compatibility adapter.  The separately versioned certificate source and compiled
+cache remain byte-compatible until an explicitly approved certificate change requires
+a new artifact.
 
 Thus the eventual PRS public surface would be:
 
@@ -176,8 +208,10 @@ their source modules reuse the PRS foundation. Those source modules therefore be
 to a central `Shared.PRS` family until their own paper or research-package boundaries
 are declared.
 
-The C891 snapshot records the current tracked export closures without treating those
-closures as ownership proofs:
+The C891 snapshot below is retained only as a stale planning snapshot.  Its module
+counts and immutable-tree assumption are not execution inputs; regenerate them from
+the current trust facts and export manifests before use.  Export closures are never
+ownership proofs:
 
 | Export area | Gate | Project-owned closure |
 |---|---|---:|
@@ -217,9 +251,8 @@ Papers/arcs_complete_outside_conic/RelativeConicArcs/...
 Shared/RelativeConicArcs/...
 ```
 
-The `Paper.*` and `FiniteGeom.*` namespace cleanup is a later, package-local change.
-This prevents a directory move from becoming an immediate repository-wide import
-rewrite and rebuild.
+No namespace cleanup is implied by the physical split.  Preserving public module names
+prevents a directory move from becoming an import rewrite and rebuild.
 
 Each registered paper should own or explicitly alias a small manifest declaring its roots, source closure, shared
 dependencies, generated inputs, certificate packages, axiom expectations, and exact
@@ -231,7 +264,8 @@ these manifests, not serve as the primary ownership map.
 
 ## Staged execution and bounded validation
 
-0. Record the actual package DAG and compare it with the required certificate DAG
+0. Regenerate the actual module and package maps from the current trees.  Record the
+   actual package DAG and compare it with the required certificate DAG
    above.  Refuse every source move while q11 or q16 requires `finitegeom`, while a
    heavy leaf remains in finitegeom, or while finitegeom lacks an exact frozen package
    pin and adapter.  Add the dependency-direction checker and adversarial fixtures
@@ -257,10 +291,15 @@ these manifests, not serve as the primary ownership map.
    module is also exported by another area, reject any replacement that drops a
    declaration used outside the active closure even when the replacement's bytes and
    imports are locally consistent.
-5. Create paper directories and package-specific source roots while retaining the
+5. Establish the self-contained Q11 local model, compatibility adapter, and
+   certificate-only gate, then perform its one-time
+   explicitly approved cache migration.  Prove that a disposable finitegeom human
+   edit schedules zero Q11 targets before beginning any paper split.  Repeat for Q16
+   only as its own separately approved migration.
+6. Create paper directories and package-specific source roots while retaining the
    existing module names and one Lake project. Do not combine this step with a
    namespace rewrite.
-6. Extract one already C864-validated, human-scale paper interface as the pilot. Use the
+7. Extract one already C864-validated, human-scale paper interface as the pilot. Use the
    main beyond-four PRS geometric interface first: its registered aggregate is a small
    16-module project-owned closure. Do not infer that every `RelativeConicArcs.PRS*`
    module belongs to this paper: the PRS foundation, contraction, polar-induction, and
@@ -269,31 +308,31 @@ these manifests, not serve as the primary ownership map.
    balanced quantum extension and its AME--LU adapter as a separate later chunk; do not
    combine that cross-paper branch with the PRS pilot. Retain shared modules centrally
    and use temporary compatibility shims where necessary.
-7. Validate the pilot from a clean package-local source tree: use the existing area
+8. Validate the pilot from a clean package-local source tree: use the existing area
    manifest and standalone-build gate, build only the `PaperInterface` and audit through
    the guarded queue, run its checker, compare declarations and axioms, and run the
    source/manifest audits. Do not run a repository-wide build.
-8. For every later change, compute the exact reverse-import closure before building.
+9. For every later change, compute the exact reverse-import closure before building.
    A paper-private move rebuilds only that paper; a shared API change rebuilds every
    affected paper interface; manifest-only changes require no Lean build.  An ordinary
    finitegeom or paper change must report zero scheduled q11/q16 certificate targets.
-   Only a reviewed foundation API change may invalidate a heavyweight package, and
-   that change stops for explicit user authorization before any source build begins.
-9. Freeze the declaration-level public APIs of upstream families before their
+   Only a reviewed change inside that certificate package may invalidate a heavyweight
+   artifact, and that change stops for explicit user authorization before any source build begins.
+10. Freeze the declaration-level public APIs of upstream families before their
    downstream consumers: AME--LU before MDS--CSS and the PRS balanced adapter; the PRS
    family before either beyond-four entry point; shared projective/incidence/coding
    APIs before the Arcs, Clebsch, q13, and equivariant consumers.  A freeze is an API
    and ownership decision, not a physical source move.
-10. Extract leaf paper surfaces after those freezes: complete ports; continuation and
+11. Extract leaf paper surfaces after those freezes: complete ports; continuation and
     dihedral if they acquire finitegeom gates; golden quantum statistics; equivariant
     completion; q13 after its certificate package is sealed; the focused Clebsch
     surfaces; MDS--CSS; and the PRS balanced adapter.  The golden operator and the two
     exported Clebsch companion boundaries require explicit paper-ownership decisions.
     Move the shared-heavy Arcs and AME--LU source families last, after their consumers
     are green, without reopening the already frozen public APIs.
-11. Only after each monorepo package passes an independent clean replay, split the
-    shared libraries and paper source into separately pinned Lake packages. Perform
-    namespace cleanup one package at a time after the package boundary is green.
+12. Only after each monorepo package passes an independent clean replay, split the
+    shared libraries and paper source into separately pinned Lake packages. Preserve
+    existing public module names; namespace cleanup is outside this extraction plan.
 
 ## Sub-30-minute chunk protocol
 
@@ -305,11 +344,15 @@ generated file, source move, or half-applied manifest.
 ### Synchronization invariant
 
 Every chunk that changes Lean source includes downstream synchronization before it is
-complete. The authoritative order is:
+complete.  The route depends on source authority:
 
 ```text
-monorepo authority
-  → finitegeom export/package
+certificate-only authority in every heavyweight package
+  → sealed certificate package and cache
+  → finitegeom adapter pin through its exporter and affected paper pins
+
+human/paper authority in the monorepo
+  → finitegeom through its exporter
   → every affected standalone paper repository
 ```
 
@@ -327,11 +370,11 @@ fails, the chunk remains incomplete and no later Lean change begins.
 Generated certificate payload is not copied into papers.  Its owning package pin and
 compact trust fact are propagated through the declared boundary without rebuilding
 or re-sealing that package.  A finitegeom-only or paper-only change must not re-pin a
-certificate package.  Re-pinning is permitted only when the certificate source or its
-stable foundation dependency changed deliberately; a cache miss or newer finitegeom
+certificate package.  Re-pinning is permitted only when the certificate source changed
+deliberately; a cache miss or newer finitegeom
 commit is not a re-pin trigger.
 Human and shared source authority remains the monorepo, certificate-only source
-authority remains its owning package, and standalone paper repositories are
+authority remains its owning package, finitegeom is never edited directly, and standalone paper repositories are
 synchronized downstream rather than edited as alternate authorities.
 
 The working budget is 25 minutes, leaving five minutes for inspection and commit. A
@@ -362,13 +405,13 @@ next safe chunk:
 
 | Chunk | Single objective | Validation and shippable state |
 |---|---|---|
-| C879.0 | Record the completed C864 endpoint and exact input revisions. | Read-only manifest/hash checks; commit the baseline record. |
-| C879.1 | Define the paper/shared manifest schema. | Parser/unit tests only; commit schema and fixtures. |
-| C879.2 | Generate area-overlap and reverse-consumer data from C864 manifests. | Deterministic regeneration and hash check; commit script and compact output. |
-| C879.3 | Add the import-firewall checker in report-only mode. | Checker tests against real and adversarial fixtures; commit checker. |
-| C879.4 | Convert the checker to enforcement for shared-to-paper and undeclared paper-to-paper imports. | Existing tree passes; adversarial cases fail as intended; commit policy. |
-| C879.5 | Create the `beyond4_prs` paper directory/package scaffold without moving Lean. | Manifest, source listing, and clean-tree checks; commit scaffold. |
-| C879.6 | Register the exact beyond-four PRS geometric closure and its exclusions, excluding the balanced quantum branch and the unadopted R8/R9/Lucas branches. | Source audit, closure diff, and empty export delta; commit metadata only. |
+| C879.0 | Regenerate the live module map and add the package-DAG firewall. | Parser/unit tests plus adversarial reverse-edge and missing-adapter fixtures; the current reversed tree is reported, not accepted. |
+| C879.1 | Spike the self-contained Q11 local model and proved downstream adapter. | Build only the Mathlib-only model and cheap adapter; inspect their exact imports. |
+| C879.2 | Commit the declaration-level Q11 ownership manifest and certificate-only gate design. | Exact import/use report; reject human or paper imports from the certificate package. |
+| C879.3 | Move the local Q11 coordinate model and `Q11BrianchonPetersen` into the Q11 package. | Cheap adapter elaboration only; no heavyweight fallback. |
+| C879.4 | Rewire finitegeom to the opt-in Q11 adapter and remove every Q11-to-finitegeom edge. | DAG/import firewall and dry-run affected-target regression; no source build yet. |
+| C879.5 | Perform the one-time explicitly approved Q11 certificate rebuild and publish its exact cache. | Measured heavy gate, trust fact, sealed manifest, cache restore replay, exporter-only finitegeom adoption. |
+| C879.6 | Prove the Q11 rebuild firewall, then decide the separately gated Q16 migration. | Disposable cheap finitegeom edit schedules zero Q11 targets; missing cache refuses source fallback. |
 | C879.7 | Validate the beyond-four PRS `PaperInterface` and its axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
 | C879.8 | Move one paper-facing PRS interface/wrapper family behind the preserved module names, without moving PRS-family infrastructure. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
 | C879.9 | Move the next paper-facing wrapper family, or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared PRS-family move is permitted in this chunk. |
@@ -376,9 +419,11 @@ next safe chunk:
 | C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only build target, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
 | C879.12+ | Repeat the paper-private/shared-family cycle for the next paper. | Each row is a separate synchronized commit set and must leave every affected package buildable. |
 
-Chunks C879.0--C879.6 should not require a Lean elaboration. C879.7 and later may
-elaborate Lean, but only the exact affected `PaperInterface` or named mathematical
-aggregate is allowed. If C879.7 cannot fit the
+Chunks C879.0 and C879.2 require no Lean elaboration.  C879.1 and C879.3--C879.4 may
+elaborate only the local model and cheap human adapter modules.  C879.5 is the explicit one-time heavy
+Q11 migration and is not subject to the 30-minute chunk fiction; it records its real
+resource envelope.  C879.7 and later may elaborate Lean, but only the exact affected
+`PaperInterface` or named mathematical aggregate is allowed. If C879.7 cannot fit the
 budget with the available cache, the pilot is too large; choose a smaller human-scale
 area before moving source.
 
@@ -392,12 +437,12 @@ raising a worker cap or bypassing the queue.
 | Chunk | Lean/source scope | Expected wall time | Review |
 |---|---|---:|---|
 | C879.0 | No Lean; endpoint hashes and manifests only | 2–5 min | Safe. |
-| C879.1 | No Lean; manifest parser and fixtures | 5–15 min | Safe. |
-| C879.2 | No Lean; deterministic area-overlap generator | 5–15 min | Safe. |
-| C879.3 | No Lean; report-only firewall tests | 5–15 min | Safe. |
-| C879.4 | No Lean; enforcement tests and real-tree scan | 5–20 min | Safe. |
-| C879.5 | No Lean; PRS directory/package scaffold | 5–15 min | Safe. |
-| C879.6 | No elaboration; byte-preserving area materialization and source audit | 5–20 min | Safe if the export has no delta. |
+| C879.1 | Q11 local-model and adapter spike only | 2–10 min | Safe; no heavyweight target. |
+| C879.2 | No Lean; declaration ownership and gate manifest | 5–15 min | Safe. |
+| C879.3 | Q11 source relocation plus cheap adapter | 5–20 min before the separately gated rebuild | Conditional. |
+| C879.4 | DAG firewall and affected-target dry run | 5–20 min | Must schedule zero heavy targets. |
+| C879.5 | One-time Q11 certificate rebuild, seal, and exact cache | Measured separately; about 52 min from the current baseline | Explicit approval required. |
+| C879.6 | Cache-required Q11 adapter regression | 5–20 min | Missing cache must refuse. |
 | C879.7 | Main PRS `PaperInterface` plus `Verification/AxiomAudit`; 16-module main closure and 17-module audited closure | 2–10 min warm; 10–25 min cold | Safe only with restored dependencies and an exact target. |
 | C879.8 | One paper-facing wrapper family, initially 1–4 modules, plus its exact `PaperInterface` | 2–10 min | Safe after the family and target are named; PRS infrastructure remains shared. |
 | C879.9 | Next paper-facing wrapper family, same limit | 2–10 min | Safe only if the reverse closure remains bounded. |
@@ -438,14 +483,14 @@ chunk is closed.
 - Keep generated certificates downstream and opt-in; do not pull them into every
   paper build.
 - Restore heavyweight certificate artifacts only from an exact cache keyed by
-  package commit, foundation commit, Lean toolchain, Mathlib commit, and target
+  package commit, Lean toolchain, Mathlib commit, and target
   platform.  Use require-cache semantics: a cache miss fails and never falls back to
   compiling certificate source.
 - Reject a build plan that schedules any q11/q16 source target after a change confined
   to finitegeom human layers, a paper package, manifests, prose, pins, or release
   metadata.  The regression gate is an exact dry-run/trace comparison with zero heavy
   targets.
-- Permit a heavyweight source build only for a reviewed foundation-or-certificate
+- Permit a heavyweight source build only for a reviewed certificate
   source change, with explicit user authorization and a separately recorded resource
   envelope.  Never infer permission from a stale trace or completed dependency build.
 - Do not rerun C864's twelve-area export/idempotence pass unless an area manifest or
@@ -479,7 +524,7 @@ chunk is closed.
   small leaf pilot and freeze upstream public APIs before downstream extraction.
 - The phrase “one-way dependency” is directionally ambiguous and previously encoded
   the wrong edge.  Every policy, manifest, and report must spell out
-  `finitegeom imports q11/q16` and `q11/q16 import foundation only`; the executable DAG
+  `finitegeom adapters import q11/q16` and `q11/q16 import Mathlib only`; the executable DAG
   checker, not prose, is authoritative.
 - A package manager may rebuild a dependency checkout after a harmless pin refresh
   even when source bytes are unchanged.  Therefore ordinary finitegeom and paper
@@ -517,13 +562,15 @@ certificate source targets.  Remove or withhold the exact heavyweight cache and
 require a clear refusal rather than a source build.  C879 cannot move its first paper
 source until both tests pass.
 
-The current metadata preflight is:
+The old metadata preflight is:
 
 ```text
 python3 notes/scripts/c879_module_closure.py
 ```
 
-It must pass before every execution chunk.  It rejects paper/repository/export
+It is currently expected to fail because its C891 module map is stale.  Refresh its
+committed mapping from the live registries before making it an execution gate again.
+After refresh it rejects paper/repository/export
 inventory drift, changed gate closures, missing mapped sources or roots, duplicate
 target names, unresolved aliases, AME--LU coverage gaps, and Lean-tree drift from the
 mapping's immutable authority commit.  Passing this preflight certifies the planning
@@ -531,6 +578,6 @@ snapshot, not declaration-level ownership or a build.
 
 ## Scope boundary
 
-This is a design and sequencing record. It does not authorize builds, certificate
-regeneration, mirror writes, repository extraction, deletion, or changes to package
-boundaries.
+This record authorizes the Q11 local-model/adapter boundary work explicitly requested for the
+current architecture correction.  Heavy source builds, certificate regeneration,
+mirror writes, Q16 migration, deletion, and publication remain separately gated.
