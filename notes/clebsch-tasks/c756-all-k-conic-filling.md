@@ -191,6 +191,15 @@ node value factors as
 Here \(a,b\in\mathbf F_{53}^*\) in both offset descent cases, so each of the
 55 internal-node tests is a two-factor base-field character condition.
 
+The aligned branch is now closed.  After quotienting the common norm torus,
+the split-offset descent has no eleven-state internal-node character clique
+without a triple concurrency.  The trace-zero descent has exactly 44
+direction-zero-normalized candidates in four dihedral orbits; centering their
+55 star nodes imposes the Laurent displacement, all 44 have open separator
+Hessian, and every one fails every component of \(\nabla\mathcal Z=0\).
+Authority: `notes/2026-08-09-c756-aligned-critical-closure.md` and its exact
+script/certificate bundle.
+
 ## What is already uniform
 
 - Even \(q\) is impossible because the nucleus is never covered.
@@ -206,13 +215,13 @@ Here \(a,b\in\mathbf F_{53}^*\) in both offset descent cases, so each of the
 
 ## Next action
 
-In the aligned branch, combine the rank-two Laurent compatibility minors for
-\(s_i-c_i\) with \(\nabla\mathcal Z=0\), solve for the two offset coordinates
-from two rows, and insert the result into the two rational node factors in
-the aligned-resultant report.  Seek a forced collision factor or zero
-separator Hessian.  Do not set \(\xi=0\), run generic 11-variable
-elimination, rerun a quartic character bound, or cross the degree-16 mask
-boundary.
+Attack the two remaining covariance families from the elliptic overlap
+squeeze: nonaligned anisotropic trace \(-10\) or \(-14\), and the seven
+split-covariance trace/zero rows.  Couple their forced skew diagonal
+characters to the rank-two Gram form of \(\nabla\mathcal Z=0\) and the
+nonzero separator Hessian.  Do not reopen the closed aligned state graph, run
+generic 11-variable elimination, rerun a quartic character bound, or cross
+the degree-16 mask boundary.
 
 ## Stop rules
 
@@ -240,13 +249,13 @@ Do not retry these without a genuinely new bounded identity:
 ## Current assessment
 
 - Complete saturated classification: **60--70%**.
-- Full all-\(k\) classification: **15--20%**, because masked Rédei
+- Full all-\(k\) classification: **20--25%**, because masked Rédei
   \(h\ge1\) remains open.
 - Publishable specialist partial package: **85--90%**, now owned by C894 for
   the closed saturated-exterior component.
 
 Mathematical closure: saturated-external 100%; saturated-internal 60%;
-nonsaturated 30%; full assembly 55%.
+nonsaturated 40%; full assembly 60%.
 
 ## Durable report index
 
@@ -271,6 +280,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`;
 - `notes/2026-08-09-c756-aligned-common-torus.md`;
 - `notes/2026-08-09-c756-aligned-node-resultant.md`;
+- `notes/2026-08-09-c756-aligned-critical-closure.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
