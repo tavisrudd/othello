@@ -134,11 +134,12 @@ type & linear quotient & sheets/cubic\\
 \end{tabular}
 \end{center}
 \noindent
-The all-field bottleneck is the outer-parity obstruction.  Faber's tame
-subgroup theorem makes the detector split exhaustive, while the targeted
-linear detectors and root-defect injection in Appendix A rule out the
-unwanted quadratic copy.  Dickson's maximal-subgroup theorem enters only
-after the exact sheet size is known.
+The all-field bottleneck is \emph{outer parity}.  A selected simple
+\(H=\operatorname{PSL}_2(q)\)-detector has two
+\(G=\operatorname{PGL}_2(q)\)-extensions, exchanged by the determinant
+square-class character; the trade forces the opposite one into quadratic
+moments.  Appendix A rules it out, Faber makes the detector cases exhaustive,
+and Dickson enters only after the sheet size is known.
 
 \begin{theorem}[Quadratic-trade classification and cubic orientation]
 \label{thm:factorization-recovery}
@@ -189,40 +190,47 @@ Compute the three quotient ranks \(3,6,10\).\\[-1pt]
 \emph{Section~\ref{sec:rank-three}; (ii)}}}
 &&
 \fbox{\parbox{0.29\textwidth}{\centering
-A two-valued quadratic trade forces projective sheets and a finite list of
-possible sizes.\\[-1pt]
+A two-valued quadratic trade forces two
+\(\operatorname{PSL}_2(q)\)-sheets.\\[-1pt]
 \emph{Section~\ref{sec:rank-three}}}}
 \\
+\(\substack{\Downarrow\\[-2pt]\text{\scriptsize rank data used below}}\)
 && \(\Downarrow\)\\
-&&
+& &
 \fbox{\parbox{0.29\textwidth}{\centering
-Faber's subgroup split is exhaustive; the outer-parity detectors force the
-surviving sheet sizes.\\[-1pt]
+Faber's subgroup split is exhaustive; the detectors force each sheet to
+have size \(q\).\\[-1pt]
 \emph{Section~\ref{sec:rank-three}; Appendix~\ref{app:modular-detectors}}}}
 \\
-&& \(\Downarrow\)\\
-&&
+\(\vdots\) && \(\Downarrow\)\\
+& &
 \fbox{\parbox{0.29\textwidth}{\centering
-Dickson's subgroup classification identifies the survivors as
-\(B_3/\F_7\) and \(H_3/\F_{11}\).\\[-1pt]
-\emph{Section~\ref{sec:rank-three}; (i)}}}
+Dickson's classification and the invariant-matching check identify the only
+possible survivors as \(B_3/\F_7\) and \(H_3/\F_{11}\).\\[-1pt]
+\emph{Section~\ref{sec:rank-three}; (i), necessity}}}
 \\
-& \(\swarrow\) & \(\searrow\)\\
+\(\vdots\) &&\\[-2pt]
+\(\searrow\) && \(\swarrow\)\\
 &
-\fbox{\parbox{0.30\textwidth}{\centering
-Quadratic moments recover the unordered sheets; the signed cubic orients
-them and gives the Gorenstein duality.\\[-1pt]
-\emph{Section~\ref{sec:balanced}; (iii)--(v)}}}
+\fbox{\parbox{0.32\textwidth}{\centering
+The moment identities prove the converse in (i), recover the unordered
+sheets, and show that the signed cubic orients them and gives Gorenstein
+duality.\\[-1pt]
+\emph{Section~\ref{sec:balanced}; (i), converse; (iii)--(v)}}}
+&\\
+& \(\Downarrow\) &\\
 &
-\fbox{\parbox{0.30\textwidth}{\centering
-The fixed affine line exposes the off-carrier ambiguity; geometric splitting
-restores the matching point.\\[-1pt]
+\fbox{\parbox{0.32\textwidth}{\centering
+The fixed affine line exposes the off-carrier ambiguity; its inherited trade
+and geometric splitting give the sharp carrier boundary.\\[-1pt]
 \emph{Section~\ref{sec:balanced}; (vi)}}}
+&
 \end{tabular}
 \end{center}
 \noindent
-Classification follows the right-hand chain.  The lower boxes prove recovery,
-orientation, and the carrier boundary.  Appendix A is required only at the
+The right-hand chain proves the necessity in (i); the two branches merge for
+its converse and the recovery/orientation results.  The boundary inherits its
+trade clause from that merged node.  Appendix A is required only at the
 detector node.  Appendices B--F may be skipped on a first pass; Appendix G
 records the trust boundary and supplies no logical premise.
 
@@ -426,6 +434,20 @@ factorization framework of Giudici, Li, Poto\v{c}nik, and Praeger
 specific conic-quotient and trade-rigidity mechanism, not that architecture.
 
 \subsection{Trade reduction and the modular obstruction}
+
+Here is the application dictionary for the abstract reduction.  We take
+\(G=\operatorname{PGL}_2(q)\), \(H=\operatorname{PSL}_2(q)\), and
+\(\Omega\) to be a full matching orbit; once the two trade levels are
+identified with its \(H\)-orbits, they are the candidate sheets.  The module
+\(\mathcal A\) is the space of ambient affine-linear functions,
+\(E=\mathcal A^\vee\) is its homogenized point-vector module, and
+\(F=\ker(E\to k)=\operatorname{Sym}^{(q-3)/2}L(2)\) is the translation
+module.  The quadratic moment map is
+\(\mu([M])=v_M^2\).  The next lemma converts the
+trade relation into simultaneous occurrences of the two \(G\)-extensions of
+one \(H\)-detector in \(\operatorname{Sym}^2E\); the uniform exclusion later
+rules out the opposite-parity occurrence by eliminating both its zero-linear
+and split-pullback alternatives.
 
 \begin{lemma}[Projective--trade reduction]
 \label{lem:projective-trade-reduction}
@@ -3386,8 +3408,8 @@ The reproducible review source is pinned by
 \end{center}
 Its SHA-256 digest is
 \begin{center}
-\small\texttt{a0d66b9ccf1aa44f7c383bf95e0386f440e8ef}\\[-2pt]
-\texttt{ca87d47f8e4da83067003a1376}.
+\small\texttt{cba36da50ac039ef08a14130a3e62b5c3a2617}\\[-2pt]
+\texttt{672696836ec57c126d48ba1c6b}.
 \end{center}
 That fingerprint fixes a normalized manuscript, statement contents,
 extractor, paper Nix inputs, manuscript checker, adversarial boundary checker,
