@@ -117,3 +117,24 @@ Condon--Shortley conversion input and is not folded into C815.
 - **Open, promotion gate:** the weighted-Jacobian structural proof has no Lean
   declaration.  Owner: C815 before API freeze, so C816 can promote it without
   weakening the formal standard.
+
+## Continuation correction: spherical-cubic commits
+
+The spherical-cubic implementation continued after the audit snapshot above.
+A second guarded audit of those later commits found that they did not elaborate
+as landed.  The failures were structural rather than numerical: an invalid
+binder glyph, a permutation constructed with the wrong `Equiv` API, rotation
+words composed in the wrong direction, covariance pulled back by the forward
+rather than inverse label permutation, and multiple tactic blocks that had not
+been accepted by Lean.
+
+The module has now been repaired through
+`faceAxisCubic_eq_sum_coefficients`.  In particular, the marked field is reduced
+to weighted degree-two and degree-three axis tensors after the lower tensors
+vanish; doubled axis coordinates are cast from exact `ℤ√5` identities; zonal
+transport is deduced from the existing scaled-rotation theorem; and covariance
+is a single reindexing by the induced permutation of two-subsets rather than
+thirty generator-specific table rewrites.  The required guarded single-file
+check passes with an empty diagnostic log, and the source contains no `sorry` or
+`admit`.  The remaining cubic work is the coefficient-orbit and sum-zero
+collapse layer stated in the plan above.

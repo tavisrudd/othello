@@ -272,6 +272,17 @@ the following task-owned obligations, in execution order:
    `tripleTransportWord`, which carries any ordered triple of distinct labels to
    any other.  Thus the needed three-transitivity is proved without subgroup
    closure or an alternating-group computation.
+   A continuation audit on 2026-08-08 found that the post-audit spherical-cubic
+   commits had not in fact landed in an elaborating state: they contained an
+   invalid binder glyph, an incorrect `Equiv.ofInjective` construction, reversed
+   word composition, and several untested `decide`/polynomial proof blocks.
+   Those defects are repaired.  The guarded module now elaborates with no errors,
+   warnings, `sorry`, or `admit`.  The repair also replaces the thirty-case
+   covariance table by a permutation of `Pair 5`, derives axis transport from the
+   landed scaled-rotation theorem, and factors the marked calculation through
+   weighted axis-power tensors before expanding.  The remaining HARM-2 work is
+   now exactly coefficient symmetry, the three index-pattern orbits, the
+   sum-zero `sigmaThree` collapse, and the general rational corollary.
 2. **HARM-1/HARM-2 analytic bridge.**  Add
    `RelativeConicArcs.SphereIntegralMoments`, proving that the explicitly
    defined `normalizedMean` agrees with normalized surface integration.  This
