@@ -49,7 +49,7 @@
       "commands": []
     },
     "paper-ii-structural": {
-      "role": "kernel-checked projective pullback, Lucas coefficient and finite-root calculations, outer-parity and detector implications, affine contraction, rank-three endpoint composition, and the table-free fixed-line radial argument: invariance of the presented evaluation space between noncoalescent parameters, the Radical--Hadamard hypotheses derived there from the reference parameter, and the q-2 count",
+      "role": "kernel-checked projective pullback, finite-root and outer-defect abstractions, detector and affine-contraction implications, rank-three endpoint composition, and the table-free fixed-line radial argument; it does not prove the all-field detector or tame-subgroup assertions",
       "checksum_manifest": "verification/paper_ii_structural.sha256",
       "commands": []
     },
@@ -121,7 +121,9 @@
     {"label": "thm:factorization-recovery", "modes": ["conceptual", "classical-input", "certificate"], "evidence": ["matching-module", "h3-equivariant-rank", "balanced-sheet", "gorenstein-gate", "generic-first-wall", "small-field-trade", "shared-radial", "profile-incidence", "decorated-parent"]},
     {"label": "prop:matching-secant-quotient", "modes": ["conceptual"], "evidence": []},
     {"label": "lem:projective-trade-reduction", "modes": ["conceptual", "lean"], "evidence": ["paper-ii-structural"]},
-    {"label": "lem:lucas-socle-square-parity", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "paper-ii-structural"]},
+    {"label": "lem:targeted-linear-detectors", "modes": ["conceptual", "classical-input"], "evidence": []},
+    {"label": "lem:opposite-parity-quadratic", "modes": ["conceptual", "classical-input"], "evidence": []},
+    {"label": "lem:affine-class-contraction", "modes": ["conceptual"], "evidence": []},
     {"label": "lem:uniform-sheet-exclusion", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "small-field-trade", "paper-ii-structural"]},
     {"label": "thm:balanced-orbit-completeness", "modes": ["conceptual", "classical-input", "certificate", "lean"], "evidence": ["generic-first-wall", "small-field-trade", "paper-ii-structural"]},
     {"label": "lem:shared-radial-cycle", "modes": ["conceptual", "certificate"], "evidence": ["shared-radial"]},
@@ -149,8 +151,8 @@
     {"label": "prop:relative-cubic-tate-plane", "modes": ["conceptual", "certificate"], "evidence": ["relative-cubic-depth"]}
   ],
   "boundaries": [
-    "The Paper II structural Lean gate verifies the paper-specific coefficient, finite-root, defect, detector, contraction, and endpoint implications. Steinberg and modular Hermite reciprocity identify the concrete coefficient blocks with finite-group Hom spaces; tilting and socle theory identify the ambient symmetric-square slices and validate the root/Weyl intertwiner; Dickson--Giudici identifies the abstract subgroup candidates. Those cited identifications remain classical inputs, so the all-q claims retain classical-input alongside lean.",
-    "The generic first-wall checker verifies local formulas conditional on the human Lucas-socle and adjacent-wall theorems; it does not replace either theorem or the outer-parity subgroup calculation.",
+    "The Paper II structural Lean gate verifies paper-specific finite-root, outer-defect, contraction, endpoint, and fixed-line abstractions. It does not prove the all-field detector lemmas, the Doty--Henke tilting identification, the printed source-specific Hom vanishings, or Faber's tame subgroup theorem; those remain human proofs with classical inputs.",
+    "The generic first-wall checker verifies local formulas only. It does not prove an exhaustive finite-group socle theorem and is not used to replace the targeted detector or outer-parity arguments.",
     "The small-field trade bundle is exhaustive only at q=9; its q=13,17,19 rows are bounded cross-checks and are not used for the all-q classification.",
     "The fixed-line Chow-rigidity theorem is structural. Lean checks the reusable radial translation, the derivation of the noncoalescent Radical--Hadamard hypotheses from the reference parameter, the sheet-sign annihilator, and the q-2 parameter count. That derivation presents each evaluation space as the parameter-independent top space together with the constant function and the radial level; identifying the geometric evaluation spaces with that presentation is a conceptual input rather than a Lean conclusion. The invariant-space dimensions, exceptional-subgroup normalizers, unique block systems, and unique Chow intersection remain conceptual and classical inputs. The coalescence-point square rank is expressly outside the theorem and is not supplied by a table.",
     "The shared-radial replay checks the two classified configurations and every edge-selected pair; the human resultant identity proves the common nonvanishing mechanism.",

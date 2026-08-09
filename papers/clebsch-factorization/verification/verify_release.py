@@ -227,9 +227,17 @@ EXPECTED_CLAIMS = {
         {"conceptual", "lean"},
         {"paper-ii-structural"},
     ),
-    "lem:lucas-socle-square-parity": (
-        {"conceptual", "classical-input", "certificate", "lean"},
-        {"generic-first-wall", "paper-ii-structural"},
+    "lem:targeted-linear-detectors": (
+        {"conceptual", "classical-input"},
+        set(),
+    ),
+    "lem:opposite-parity-quadratic": (
+        {"conceptual", "classical-input"},
+        set(),
+    ),
+    "lem:affine-class-contraction": (
+        {"conceptual"},
+        set(),
     ),
     "lem:uniform-sheet-exclusion": (
         {"conceptual", "classical-input", "certificate", "lean"},

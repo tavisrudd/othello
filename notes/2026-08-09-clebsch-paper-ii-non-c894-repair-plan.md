@@ -2,7 +2,8 @@
 
 **Date:** 2026-08-09  
 **Scope:** Paper II human proof only  
-**Status:** proposed repair plan; no theorem surface is refrozen by this note
+**Status:** complete; targeted repair integrated, final context-free
+human-proof read PASS, and focused abstract/exposition repair applied
 
 ## Decision
 
@@ -287,10 +288,11 @@ checks be regenerated.
 | proof is correct but too long for the main narrative | amber | move the checkable matrix calculation to an appendix, retain a precise proposition in the spine |
 | endpoint-lift intrinsicity | green | one paragraph |
 
-## Immediate next action
+## Final state
 
-Begin with the Steinberg-source Hom calculation and the explicit R1 matrix
-specification as two mathematical memos.  They are the fastest falsification
-tests for the retained architecture.  Do not edit the theorem statement or
-declare the human surface repaired until both memos pass an adversarial
-modular-representation read.
+The revised paper passed a fresh context-free human-proof read with no
+actionable defect.  The load-bearing detector appendix now precedes the
+optional \(H_3\) refinements, and the abstract distinguishes the all-field
+classification mechanism from the radial rank calculation.  The stronger
+universal socle problem belongs to C896; formal/trust completion belongs to
+C892 and publication packaging to C577.

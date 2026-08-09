@@ -8,18 +8,18 @@
     "lake_manifest": "1d518c7cdaea9c60a08ab7652ae592a92f44f37d49ee3c596e88ff4d6b2b4b0e",
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
-  "trust_manifest_sha256": "a532e2781300a7fcec12b180b9b5ae867bf01ae4e3c3ae5b55d1889ca610f0b1",
-  "runner_sha256": "39541728f111672bdb659663d4572cccd7dc4c481d30dcf6a608233cc21cf88c",
+  "trust_manifest_sha256": "62cc17ce3810db416532c5520026f2109e608c5839383e05a57478c672400955",
+  "runner_sha256": "5d03064c7ec2bb63350b5bbe90556f862248c1f7ecea0bcffd58502cd971b887",
   "review_sources_sha256": {
-    "normalized_manuscript": "f0856adc00c874a82a44107f3bd1d68177316c9ab667325b7613af8f2d9d7cb8",
-    "normalized_statement_identity": "d11f76cc6b8f557793a7b909254f08b56e7742ce11dfa60145f7cfc77c92c4fb",
-    "statement_extractor": "a9c4eed0aafa50a98881550c3efaf647e0fc3a474f509380758e40e85d0d3f1b",
+    "normalized_manuscript": "f67e6fc163d589f337d9ab3046a7dd97f70304f4a508d1bd4662ce8b4c369fd9",
+    "normalized_statement_identity": "3a5e3df8faff36a1936ebcf6a9fc3afb86ccfbd00a8c8170a4d31b54f6125f4d",
+    "statement_extractor": "902ba1d31789d308d74b9e97252004ec55a8de79e5d8432773d4ccf64756d5db",
     "release_boundary_checker": "17074251080caf9246bb8ea374d197fd1a899792b384fcecfe108a8bef4b7ce2",
-    "manuscript_checker": "fbb951ba09d654d66d2693bb9473a5f306f8f483998fef12619746b769a82453",
+    "manuscript_checker": "6bf82ec09483629c7e9fa0da752b245ae4a469b9002bdc0c2f4f6f0295371821",
     "paper_flake_nix": "9717287b35144a3e671f9b380b6bbaf4c8ec8da9561f5b2cc41fb2d51948c858",
     "paper_flake_lock": "9ae203c10f2e27ff1a11363a02ac43747d9766f8f17c975b5d825ed480d120cc",
     "paper_readme": "dd9dbe02505f83657dd9f8deb404c4fc89fb97a33c0a9d478c96b9ddb33a6893",
-    "verification_readme": "5905bcc1c620593749f4d528a5e653d72aeb06464b1cd2e7de6cf880d21bc04b",
+    "verification_readme": "19480e81645705a499b51f3b2aa15123bcf8176dca320d74fb3394f48ac1b95b",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",
@@ -358,7 +358,7 @@
     }
   },
   "expected_success": {
-    "metadata": "metadata: 29 statements, 14 evidence bundles: CHECK OK",
+    "metadata": "metadata: 31 statements, 14 evidence bundles: CHECK OK",
     "release": "clebsch factorization release: CHECK OK"
   }
 }

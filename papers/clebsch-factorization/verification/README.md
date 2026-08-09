@@ -26,10 +26,12 @@ replays, and builds the paper with the pinned manuscript Nix environment and
 axiom allowlist, and rejects manuscript warnings.
 
 The structural gate follows the manuscript spine from projective pullback
-through the Lucas finite-root calculation, outer-parity detector and affine
-contraction, to the rank-three endpoint. It does not reprove the cited
-Steinberg/Hermite, tilting/socle, or Dickson--Giudici classifications. The
-corresponding claims therefore carry both `lean` and `classical-input` modes.
+through finite-root and outer-defect abstractions, affine contraction, and
+the rank-three endpoint. It does not prove the all-field detector lemmas,
+the Doty--Henke tilting calculation, the source-specific Hom vanishings, or
+Faber's tame subgroup theorem. Those human and classical inputs are proved
+or cited in the manuscript's specialist appendix and are not marked as Lean
+proofs in the trust manifest.
 
 `evidence_fingerprint.json` pins the normalized manuscript and statement
 identity, statement extractor, paper README, Nix inputs, manuscript checker,
