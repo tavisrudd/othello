@@ -4,7 +4,9 @@
 
 **Status:** active open mathematics.  The saturated-external branch is closed
 and transferred to C894.  C756 retains the saturated-internal branch and the
-full nonsaturated branch.  The latter is not reduced to one conic point type.
+full nonsaturated branch.  The latter is not reduced to one conic point type;
+the \(q=53\) external-deletion aligned split escape is closed for every mixed
+secant/passant profile.
 
 > **LIVE CARD.**  Keep only current conclusions, gates, stop rules, ownership,
 > and authoritative pointers here.  Put evidence, failed routes, correction
@@ -196,9 +198,13 @@ anisotropic conic-overlap table applies even when the other polar lines are
 mixed.  If it is external, its polar line is secant and the split-conic
 overlap gives three branches: seven anisotropic covariance rows, disjoint-root
 split covariance with at least eight nonsquare arrangement values, and the
-aligned split escape \(K\sim C\).  Covariance sharing exactly one conic root
+aligned split case \(K\sim C\).  Covariance sharing exactly one conic root
 is impossible because it has at most fourteen favorable internal directions,
-short of the fifteen required centers.
+short of the fifteen required centers.  The aligned split case is impossible
+as well: its unique \(UV=2\) normal form has 230 normalized mixed-type
+geometric candidates, and the first critical derivative is nonzero on every
+candidate.  Authority:
+`notes/2026-08-09-c756-aligned-split-mixed-closure.md` and its exact bundle.
 
 ### Conditional subbranch: \(q=53\), all-internal/all-passant offsets
 
@@ -222,15 +228,14 @@ Authority:
 script/certificate bundle.
 
 The nonaligned and split rows remain valid conditional work.  They do not
-cover mixed line types or the external-deletion split-conic branches.
+cover mixed line types or the remaining external-deletion covariance rows.
 
 ## Ordered next actions
 
-1. Attack the \(q=53\) external-deletion aligned split escape \(K\sim C\):
-   derive the mixed secant/passant offset and two-factor node characters and
-   couple them to (I).
-2. Derive a resultant/norm law for the character-weighted residual-divisor
+1. Derive a resultant/norm law for the character-weighted residual-divisor
    sum refining (H), split by point type.
+2. Attack the remaining \(q=53\) external-deletion anisotropic and
+   disjoint-root split covariance rows with the mixed line characters.
 3. Build the \(q=47\) octic carrier and the separate \(q=49\)
    Hasse/divided-power carrier before attempting a certified all-type search.
 4. Cover higher nonsaturated sizes separately; do not infer them from the
@@ -279,6 +284,8 @@ Do not:
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
   exact, but no first-open field or higher size is classified.
 - \(q=53\), all-internal, aligned: closed exactly.
+- \(q=53\), external deletion, aligned split covariance: closed exactly for
+  every mixed line-character profile.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the type audit exposed distinct \(q=47\), \(q=49\), mixed-offset, and
   higher-size gates; a counterexample remains live.
@@ -289,6 +296,8 @@ Do not:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
 - Mixed-type equation ledger:
   `notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
+- External-deletion aligned split closure:
+  `notes/2026-08-09-c756-aligned-split-mixed-closure.md`.
 - Universal and bounded foundation:
   `notes/2026-08-01-c756-all-k-conic-filling.md`.
 - Saturated-internal foundation:
