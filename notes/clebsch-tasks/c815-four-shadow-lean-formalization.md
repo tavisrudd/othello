@@ -241,7 +241,69 @@ the design note is not needed.
 
 The complete landed-work audit is
 `notes/2026-08-08-c815-complete-landed-work-audit.md`.  C815 remains open for
-the following task-owned obligations, in execution order:
+the task-owned obligations inventoried below.
+
+### Churn-aware execution plan (revised 2026-08-09)
+
+Referee exposure sets the mathematical priority: printed abstract and headline
+theorem clauses outrank auxiliary completeness and future-version upgrades.
+Build locality sets the source order so that the shared Paper III gates are not
+repeatedly invalidated and resealed:
+
+1. **Finish the open harmonic source cluster.**  Complete the already restored
+   `RelativeConicArcs.SphericalCubicRestriction`, including the coefficient
+   collapse to `sigmaThree` and its general-weight corollary, then add
+   `RelativeConicArcs.SphereIntegralMoments` and the exact paper-facing terminal
+   for the normalized spherical integral.  Do not add either module to a gate
+   or regenerate a manifest midway through this cluster.
+2. **Close the arithmetic and orientation headline cluster.**  Develop ARITH-1,
+   then ARITH-2, then ORIENT-1 on their shared algebraic foundations: the global
+   Stein algebra and chart descent first, the complete reduced golden fibre and
+   general spinor API second, and the normalized marked pullback with its deck
+   and geometric identification third.  Keep paper-facing wrappers downstream
+   of reusable foundations so statement refinement does not repeatedly
+   invalidate the base modules.
+3. **Close the remaining small headline-strength gaps in one source round.**
+   Add the oriented three-by-three cross-golden determinant bridge required by
+   the printed operator theorem; add paper-facing declarations for seven-point
+   sharpness, the deterministic decoder and exact query use, and the one-triangle
+   orientation calibration required by the printed aligned-design theorem; then
+   kernel-check the reduced weighted-Jacobian bridge needed by C816.  Prefer new
+   downstream modules to edits of shared conference and two-graph foundations.
+4. **Freeze the C815 source API before changing gate imports.**  After all three
+   clusters elaborate individually, attach every new module and terminal to the
+   appropriate Paper III gates in one edit, run one dependency-ordered queued
+   validation ending in the aggregate gates, and extract the axiom reports and
+   source closures once.  Regenerate formal maps, manifests, verification prose
+   and hashes only after that aggregate is green; no intermediate generated
+   surface is authoritative.
+5. **Hand the frozen API to C823.**  C815 closes its own exact gate and ledger
+   surface, but does not repeat the shared Paper III reconciliation that C800
+   owns after C823.  C800 performs that single final shared-source, manifest and
+   release reconciliation once the C799, C815 and C823 APIs are all frozen.
+
+### Core-artifact boundary
+
+C815 must not add a generated certificate or data tree to the core
+`RelativeConicArcs` library.  Reusable definitions, compact proved checkers and
+symbolic transport remain in core.  If a future finite obligation requires a
+large generated payload or many generated shards, stop before generation and
+route the payload to a paper-local or standalone certificate package, leaving
+only its stable checker and theorem interface in core.  Small human-written
+kernel-decision leaves may remain when their module partition bounds elaboration
+and stores no generated certificate.
+
+The 2026-08-09 source-only audit found no Paper III extraction candidate.  The
+union of the three pinned Paper III closures is forty-eight files and about
+594 KB; its largest file is the 79 KB human-written four-shadow proof.  The
+only certificate-shaped leaves are four approximately 1.7 KB middle-exterior
+row modules, each performing kernel decision and storing no generated data.
+The new harmonic files are likewise human proof sources; the largest is the
+approximately 65 KB `SphericalCubicRestriction`, which may be split across
+ordinary modules if elaboration requires it but is not a certificate package.
+
+The numbered inventory below records mathematical content and acceptance
+details; its numbering no longer overrides this execution plan.
 
 1. **HARM-2, spherical cubic restriction.**  Complete
    `RelativeConicArcs.SphericalCubicRestriction`: define the transposition-odd
@@ -276,13 +338,15 @@ the following task-owned obligations, in execution order:
    commits had not in fact landed in an elaborating state: they contained an
    invalid binder glyph, an incorrect `Equiv.ofInjective` construction, reversed
    word composition, and several untested `decide`/polynomial proof blocks.
-   Those defects are repaired.  The guarded module now elaborates with no errors,
-   warnings, `sorry`, or `admit`.  The repair also replaces the thirty-case
+   Those defects are repaired in the landed prefix, which elaborates with no
+   errors, warnings, `sorry`, or `admit`.  The repair also replaces the thirty-case
    covariance table by a permutation of `Pair 5`, derives axis transport from the
    landed scaled-rotation theorem, and factors the marked calculation through
-   weighted axis-power tensors before expanding.  The remaining HARM-2 work is
-   now exactly coefficient symmetry, the three index-pattern orbits, the
-   sum-zero `sigmaThree` collapse, and the general rational corollary.
+   weighted axis-power tensors before expanding.  The restored continuation adds
+   coefficient symmetry, reduction to the three index-pattern orbits, and the
+   full coefficient expansion, but has not been elaborated while the Lean queue
+   is locked.  Once that continuation passes, the remaining HARM-2 work is the
+   sum-zero `sigmaThree` collapse and the general rational corollary.
 
    **Resumed worktree handoff (2026-08-09).**  The uncommitted continuation in
    `lean/RelativeConicArcs/SphericalCubicRestriction.lean` was restored from Git
