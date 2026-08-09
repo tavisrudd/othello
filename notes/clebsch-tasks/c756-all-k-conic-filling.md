@@ -157,14 +157,16 @@ routes.
 
 ## Next action
 
-Add the outside-external points to the matching-frame interface (D).  A
-covered outside external point has a secant polar meeting the star vertices,
-hence a second chord matching.  Derive the external-row frame and its mixed
-Gram with the internal rows from full projective incidence.
+Return to the nonsaturated branch and attack the masked Rédei theorem
+\(h\ge1\): after deleting an arc point, a conic-external set cannot determine
+every direction on a spare external line.  Use the Frobenius graph/fixed-locus
+formulation from the coordinate-free audit.  Seek a global carrier that keeps
+the completely split chord polynomial and its quadratic-character mask
+together.
 
-Continue only if the mixed block yields an identity independent of (B)--(E).
-Stop if it is merely the secant/passant line-profile moments in matrix form.
-The parallel nonsaturated target remains the masked Rédei theorem \(h\ge1\).
+Stop if the carrier again has degree \(\Theta(q)\), fragments among the
+rational pencil fibres, or reduces to the closed one-line subresultant and
+moment identities.
 
 ## Stop rules
 
@@ -173,6 +175,8 @@ Do not retry these without a genuinely new bounded identity:
 - normalized one-variable pencil selectors or their first two slices;
 - field-by-field theta/PSD fitting or larger orbital algebras;
 - raw star cardinality, parity, defect averaging, or more untyped moments;
+- the unsigned two-species matching Gram or higher contractions of its
+  secant/passant blocks;
 - local diagonal-sign classification;
 - signed \(p\)-adic/Smith torsion obstruction;
 - ordinary monodromy, unsigned or pair-only resultants;
@@ -205,6 +209,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-projective-incidence-cap.md`;
 - `notes/2026-08-09-c756-local-diagonal-sign-stop.md`;
 - `notes/2026-08-09-c756-outside-matching-tight-frame.md`;
+- `notes/2026-08-09-c756-two-species-matching-gram.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
