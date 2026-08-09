@@ -37,6 +37,12 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
   eigenvalue collision class is exactly its Frobenius orbit and contains no
   imprimitive competitor.  Add this exact Jacobi-spectrum statement to the
   human predecessor query before making any independent novelty claim.
+- **Free arithmetic corollary:** a faithful eigenvalue generates the
+  decomposition field
+  \(\mathbb Q(\zeta_{(q-1)/2})^{\langle p\rangle}\), and its square generates
+  the maximal real subfield.  At \(q=11\), this recovers
+  \(\mathbb Q(\sqrt5)\).  Treat this as proved but separately un-audited for
+  attribution.
 - **Proof device, no novelty claim:** flat Sidon lemma and the one-faithful-
   eigenblock Cayley criterion.
 - **Partial context only:** the all-\(k\) LP bound, saturation dichotomy,
@@ -69,6 +75,7 @@ user.
 - `notes/2026-08-08-c756-local-paley-rigidity-literature-audit.md`
 - `notes/2026-08-08-c756-predecessor-audit-and-companion-scope.md`
 - `notes/2026-08-08-c894-ej-theorem-inventory-and-architecture.md`
+- `notes/2026-08-08-c894-tt-cyclotomic-compression.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -98,3 +105,9 @@ the two human safeguards.  The paper spine now excludes the broad all-\(k\)
 partial-results package: internal/passant-code results belong only in a short
 outlook.  Add the exact primitive Jacobi collision theorem to the human
 novelty query.  Do not draft prose until the matrix is stable.
+
+The matrix must also include the cyclotomic decomposition-field corollary and
+the four-stage rigidity cascade frozen in
+`notes/2026-08-08-c894-tt-cyclotomic-compression.md`.  Add field-generation,
+Galois-stabilizer, and Gaussian-period/Jacobi-sum terms to the human search;
+do not widen the paper to other cyclotomic conductors.
