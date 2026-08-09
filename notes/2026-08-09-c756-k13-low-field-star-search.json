@@ -1,0 +1,56 @@
+{
+  "arrangement_line_count": 12,
+  "fields": [
+    {
+      "all_internal_no_size_11": true,
+      "external_vertex_count": 1081,
+      "normalized_geometric_stars": 0,
+      "q": 47,
+      "search_nodes": 5078055
+    },
+    {
+      "all_internal_no_size_11": true,
+      "external_vertex_count": 1176,
+      "normalized_geometric_stars": 0,
+      "q": 49,
+      "search_nodes": 9503210
+    },
+    {
+      "external_normalized_geometric_stars": 0,
+      "external_search_nodes": 32396729,
+      "external_vertex_count": 1378,
+      "internal_normalized_geometric_stars": 0,
+      "internal_search_nodes": 1219168,
+      "internal_vertex_count": 702,
+      "q": 53
+    }
+  ],
+  "k": 13,
+  "pinned_files": {
+    "q47_external": {
+      "filename": "2026-08-09-c756-q47-external-deletion-search.py",
+      "sha256": "75aa40736cb3fb2442115760b7a35d99e010172d7a58769a6a237079b818de8b"
+    },
+    "q47_internal_no_size_11": {
+      "filename": "2026-08-09-c756-q47-all-passant-search.json",
+      "sha256": "4d56e438a115b3db56a7ec32e17b6d10b4568d66c0b1a2050fb9a7e92fc52e2e"
+    },
+    "q49_external": {
+      "filename": "2026-08-09-c756-q49-external-deletion-search.py",
+      "sha256": "7ec51984ce230f4129cc51a0bd82137923ae90661326074667b5b4c25e7533ad"
+    },
+    "q49_internal_no_size_11": {
+      "filename": "2026-08-09-c756-q49-all-passant-search.json",
+      "sha256": "3abca4f2973b3c4a5c2f0e9c8cb78c2ef355861894abed53ae39b2444da4f419"
+    },
+    "q53_external": {
+      "filename": "2026-08-09-c756-aligned-split-mixed-search.py",
+      "sha256": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f"
+    },
+    "q53_internal": {
+      "filename": "2026-08-09-c756-aligned-node-clique.py",
+      "sha256": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb"
+    }
+  },
+  "schema": "c756-k13-low-field-star-v1"
+}

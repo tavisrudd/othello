@@ -11,7 +11,9 @@ field.  At \(q=47\), all 22 external-deletion stars fail \(E_9=0\); at
 all-passant rows have no geometric star.  At \(q=53\), the 230
 external-deletion and 44 all-passant stars have zero complete centers.  The
 direction bound excludes \(q>53\), while even fields and \(q\le43\) were
-already settled.  The character-weighted
+already settled.  At \(k=13\), exact twelve-line geometry closes
+\(q=47,49,53\), reducing the complete fixed-size frontier to \(q=59,61\).
+The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
 degree-\(\delta S(A)\) norm polynomial; its trace coefficient gives the sum
@@ -85,6 +87,7 @@ Authorities:
 - The classification is exact for every \(k\) and odd prime power \(q\le43\):
   only the \(q=5\) four-frame and \(q=11\) hexagon occur.
 - No conic-filling \(12\)-arc exists over any finite field.
+- For \(k=13\), the only unresolved fields are \(q=59,61\).
 
 ## Current branch map
 
@@ -298,9 +301,11 @@ notes/2026-08-09-c756-star-collision-character-identity.md.
 
 ## Ordered next actions
 
-1. Start the \(k=13\) point-type/defect/window ledger; do not infer it from
-   the now-closed \(k=12\) layer.
-2. In parallel mathematical priority, seek the saturated-internal global
+1. Shard the \(q=59\) twelve-line mixed and all-passant searches and test the
+   forced window \(E_8,\ldots,E_{16}\) at every leaf.
+2. At \(q=61\), insert \(E_6,\ldots,E_{17}\) from the outset; its first
+   equation begins at covariance degree.
+3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
 ## Stop rules
@@ -318,6 +323,8 @@ Do not:
   node-character sign;
 - replace the divided \(q=49\) identity \(E_7=0\) by the Frobenius-tautological
   power sum \(P_7=0\);
+- infer any \(k=13\) coefficient window from \(k=12\); the exact table starts
+  only at \(E_8\) for \(q=59\) and \(E_6\) for \(q=61\);
 - rerun the closed aligned state graph, generic 11-variable elimination, or
   an unchanged quartic character bound;
 - retry normalized one-variable selectors, their first two slices,
@@ -353,6 +360,7 @@ Do not:
 - \(q=47,k=12\): closed exactly for every point type.
 - \(q=49,k=12\): closed exactly for every point type.
 - \(q=53,k=12\): closed exactly for every point type and covariance class.
+- \(k=13\): closed at \(q=47,49,53\); only \(q=59,61\) remain globally.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
@@ -369,6 +377,8 @@ Do not:
   `notes/2026-08-09-c756-q47-k12-complete-closure.md`.
 - Complete q=49,k=12 and global k=12 closure:
   `notes/2026-08-09-c756-q49-and-global-k12-closure.md`.
+- k=13 ledger and q=47,49,53 geometric closure:
+  `notes/2026-08-09-c756-k13-ledger-low-field-closure.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
