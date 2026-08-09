@@ -280,6 +280,66 @@ terminals = [
 coverage_rule = "closure"
 
 [[gate]]
+module = "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+terminals = [
+  "RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective",
+  "RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root",
+  "RelativeConicArcs.ClebschArithmeticGluing.b3_two_roots",
+  "RelativeConicArcs.ClebschArithmeticGluing.h3_five_roots",
+  "RelativeConicArcs.ClebschArithmeticGluing.h3_golden_roots",
+  "RelativeConicArcs.ClebschArithmeticGluing.reduced_vertex_polynomials_split",
+  "RelativeConicArcs.ClebschArithmeticGluing.matchingEdgeLists_encode_frozen_matchings",
+  "RelativeConicArcs.ClebschArithmeticGluing.frozen_matching_mates_are_fixedPointFree_involutions",
+  "RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused",
+  "RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings",
+  "RelativeConicArcs.ClebschArithmeticGluing.silverTransporter_swaps_matchings",
+  "RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings",
+  "RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orbits",
+  "RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orders_and_square_determinants",
+  "RelativeConicArcs.ClebschArithmeticGluing.projective_group_orders",
+  "RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit",
+  "RelativeConicArcs.ClebschArithmeticGluing.b3_split_stabilizers_and_orbits",
+  "RelativeConicArcs.ClebschArithmeticGluing.h3_certificate_literal_checks",
+  "RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data",
+  "RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer",
+  "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy",
+  "RelativeConicArcs.ClebschArithmeticGluing.stabilizer_eq_character_kernel",
+  "RelativeConicArcs.ClebschArithmeticGluing.sheetCharacter_eq_of_kernel_eq",
+  "RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three",
+  "RelativeConicArcs.HilbertSymmetry.value_three_eq_one",
+  "RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero",
+  "RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback",
+  "RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient",
+  "RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue",
+  "RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial",
+  "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence",
+  "RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q",
+  "RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization",
+  "RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B",
+  "RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling",
+  "RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero",
+  "RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq",
+  "RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary",
+  "RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations",
+  "RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero",
+  "RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero",
+  "RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one",
+  "RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference",
+  "RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff",
+  "RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd",
+  "RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff",
+  "RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters",
+  "RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card",
+]
+coverage_rule = "closure"
+
+[[gate]]
 module = "RelativeConicArcs.Gates.ClebschRigidityTrust"
 terminals = [
   "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -4093,117 +4153,117 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.b3_split_stabilizers_and_orbits"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.b3_two_roots"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orbits"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orders_and_square_determinants"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.frozen_matching_mates_are_fixedPointFree_involutions"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.h3_certificate_literal_checks"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.h3_five_roots"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.h3_golden_roots"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.matchingEdgeLists_encode_frozen_matchings"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.projective_group_orders"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.reduced_vertex_polynomials_split"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.sheetCharacter_eq_of_kernel_eq"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.silverTransporter_swaps_matchings"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.stabilizer_eq_character_kernel"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective"
-gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing"]
+gates = ["RelativeConicArcs.Gates.ClebschArithmeticGluing", "RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
 expected_axioms = ["propext"]
 
 [[terminal]]
@@ -4215,6 +4275,161 @@ expected_axioms = []
 declaration = "RelativeConicArcs.PRSFoundation.HankelKernelDictionary.not_splitFree_iff_not_not_has_kernel_member"
 gates = ["RelativeConicArcs.Gates.PRSBeyondRedundancyFour"]
 expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HilbertSymmetry.value_three_eq_one"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = []
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card"
+gates = ["RelativeConicArcs.Gates.ClebschFactorizationBoundary"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RelativeConicArcs.PRSFoundation.CoveringRadiusInput.deep_iff_splitFree"

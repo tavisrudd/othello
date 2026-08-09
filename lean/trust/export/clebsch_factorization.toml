@@ -1,4 +1,4 @@
-# Area-export configuration for rank-three arithmetic gluing.
+# Area-export configuration for the Paper II formal boundary.
 #
 # The exporter derives the module closure, terminal list, and observed axioms
 # from the trust registry and the generated fact of the declared gate.  Only the
@@ -6,61 +6,60 @@
 
 schema_version = 1
 area = "clebsch_factorization"
-gate = "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+gate = "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
 trust_statement = "trust/CLEBSCH_FACTORIZATION.md"
 axiom_audit = "trust/ClebschFactorizationAxiomAudit.lean"
 
-statement_title = "Rank-three arithmetic gluing: formal boundary"
+statement_title = "Clebsch factorization Paper II: formal boundary"
 
 overview = """
-This boundary records the rank-three arithmetic gluing development: the literal
-`A3`, `B3` and `H3` reductions at the field orders five, seven and eleven, their
-matching sheet actions, the polynomial splitting checks, the Coxeter-square
-orbits, exact small-field projective stabilizer and orbit theorems, literal
-checks against the larger golden certificate tables, and the bounded split and
-fused trichotomy.
+This boundary records the 54 unique Lean terminals used by the second
+Clebsch-factorization paper.  It combines the structural all-field
+conic-matching reduction, the explicit `A3`, `B3`, and `H3` arithmetic endpoint
+checks at field orders five, seven, and eleven, Hilbert-symmetry forcing, and the
+hyperplane-square annihilator argument.
 """
 
 correspondence = """
-The closure works with rank-three reflection data glued along sheets.  At each of
-the three field orders it exhibits the literal reduction to the `A3`, `B3` and
-`H3` types, checks that the sheet action matches, and verifies the corresponding
-polynomial splitting.  It computes the Coxeter-square orbits and proves the exact
-projective stabilizer and orbit statements at those orders, checks the larger
-golden certificate tables literally, and establishes the trichotomy separating
-the bounded split and fused cases.
+The structural terminals follow the mathematical order of the quadratic-trade
+argument: pullback splitting, Lucas coefficients and parity, finite-field root
+defect, the Frobenius section, detector coefficients, contraction and coboundary
+descent, regular matching and dihedral parity, the exceptional-order endgame,
+and fixed-line radial translation.  The arithmetic terminals then verify the
+literal rank-three reductions, matching sheet actions, polynomial splitting,
+Coxeter-square orbits, exact projective stabilizer and orbit statements, golden
+certificate tables, and the bounded split/fused trichotomy.  Two Hilbert
+terminals force socle degree three and its final one-dimensional value; one
+hyperplane-square terminal proves that the stated full-support quadratic
+annihilator line leaves no nonzero cubic annihilator.
 
-The scope is deliberately narrow in two ways a reader should not overread.  The
-gate asserts nothing in abstract octahedral, icosahedral, tetrahedral, dihedral,
-orthogonal, spinor-norm, or number-field terminology; the finite statements are
-about the explicit data at the three orders.  No all-prime statement is asserted,
-so nothing here generalizes the finite checks to every field order.  The imported
-sheet-character theorem is used only through an abstract equal-kernel interface.
+This correspondence is a formal boundary, not a claim that every sentence in
+the manuscript has been formalized.  In particular, the gate does not supply
+the classical representation-theoretic and subgroup identifications recorded
+as inputs in the claim ledger, nor does it generalize the finite endpoint checks
+to an all-prime theorem.
 """
 
 boundary = """
-Every terminal is a kernel proof, and the finite statements are discharged by
-kernel reduction through `decide` rather than by native evaluation.  The closure
-uses no project axiom, no unsafe declaration, and no admitted proof, and imports
-no external certificate data.  The classical and replay inputs used alongside
-these terminals are recorded in the manuscript's claim ledger rather than assumed
-here.
+Every exported terminal is a kernel proof.  Finite statements are discharged by
+kernel reduction through `decide`, not native evaluation.  The closure uses no
+project axiom, unsafe declaration, or admitted proof.  Classical and replay
+inputs used alongside these terminals remain identified separately in the
+manuscript claim ledger.
 """
 
-axiom_audit_title = "Axiom audit for rank-three arithmetic gluing"
+axiom_audit_title = "Axiom audit for the Paper II formal boundary"
 
 axiom_audit_description = """
-This audit prints the axioms of the terminals exported with the arithmetic
-gluing boundary: the literal reductions and sheet actions at the three field
-orders, the polynomial splitting checks, the Coxeter-square orbits, the exact
-projective stabilizer and orbit theorems, and the bounded split and fused
-trichotomy.
+This audit prints the axioms of all 54 unique terminals exported with the Paper
+II boundary: 28 structural terminals, 23 arithmetic-gluing terminals, two
+Hilbert-symmetry terminals, and one hyperplane-square terminal.
 """
 
 readme_anchor = "  specialization.  Every terminal in it is a kernel proof."
 
-readme_bullet = """- `trust/manifests/clebsch_factorization.json` content-addresses the rank-three
-  arithmetic gluing boundary: the literal reductions and sheet actions at field
-  orders five, seven and eleven, the Coxeter-square orbits, the exact projective
-  stabilizer and orbit theorems, and the bounded split and fused trichotomy.  It
-  asserts no all-prime statement."""
+readme_bullet = """- `trust/manifests/clebsch_factorization.json` content-addresses the 54-terminal
+  Paper II boundary: the structural conic-matching reduction, the explicit
+  rank-three arithmetic endpoints, Hilbert-symmetry forcing, and the
+  hyperplane-square annihilator argument.  It does not claim that classical
+  manuscript inputs are formalized or assert an all-prime endpoint theorem."""
