@@ -57,6 +57,12 @@ Some terminal theorems still use native evaluation, and the axiom audit reports 
 declaration-local native-decision axioms the pinned Lean toolchain emits for them.  No hash is used as a
 substitute for checking the incidence semantics or profile coverage.
 
+Replacement of the remaining fixed-point native terminal has begun with a transparent balanced
+exact-syndrome classifier.  `MinimumWords.ExhaustionFiveOne` kernel-checks distinguished-fibre shard
+zero on both complete meet-in-the-middle half-domains; the generated tree is acceleration data only,
+and Lean does not trust its ordering or coverage.  The other six five-one shards and the remaining
+three profiles are not yet claimed by this partial packet.
+
 The package does not transport the fixed-point exhaustion to equality of the four projective orbits
 with the complete weight-twelve layer, or classify all coordinate automorphisms.  These are
 explicit semantic boundaries, not computational claims.

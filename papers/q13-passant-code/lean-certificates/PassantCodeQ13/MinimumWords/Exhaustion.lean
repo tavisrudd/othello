@@ -68,14 +68,20 @@ def canonicalFourSecantSplit (leftPoints rightPoints : List Nat) : Bool :=
     (rightPoints.drop 4).all fun rightSecant => leftSecant < rightSecant
 
 /-- Candidate supports with fibre pattern `(5,1,1,1,1,1,1;0)`. -/
+def fiveOneLeft (special : Nat) : List (List Nat) :=
+  let remaining := remainingFibres special
+  (fibres.getD special []).sublistsLen 5 |>.flatMap fun five =>
+    (choices ((remaining.take 3).map fun index => fibres.getD index [])).map fun head => five ++ head
+
+/-- Right halves of the `(5,1,1,1,1,1,1;0)` meet for one distinguished fibre. -/
+def fiveOneRight (special : Nat) : List (List Nat) :=
+  let remaining := remainingFibres special
+  choices ((remaining.drop 3).map fun index => fibres.getD index [])
+
+/-- Candidate supports with fibre pattern `(5,1,1,1,1,1,1;0)`. -/
 def fiveOneFibreSolutions : List Nat :=
   (List.range 7).flatMap fun special =>
-    let remaining := remainingFibres special
-    let left := (fibres.getD special []).sublistsLen 5 |>.flatMap fun five =>
-      (choices ((remaining.take 3).map fun index => fibres.getD index [])).map fun head =>
-        five ++ head
-    let right := choices ((remaining.drop 3).map fun index => fibres.getD index [])
-    matchingBaseSupports left right
+    matchingBaseSupports (fiveOneLeft special) (fiveOneRight special)
 
 /-- Candidate supports with fibre pattern `(3,3,1,1,1,1,1;0)`. -/
 def twoTripleFibreSolutions : List Nat :=

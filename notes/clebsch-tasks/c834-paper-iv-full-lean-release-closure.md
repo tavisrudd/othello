@@ -199,6 +199,15 @@ fingerprint reasoning, rejects all absent lookups, and validates the unique full
 witness at each fourth-profile hit.  Natural shards are the distinguished fibre, fibre pair and
 secant-pair residue.  The generated lookup tables are acceleration data, not trusted conclusions.
 
+The first transparent-classifier leaf now validates that architecture.  The five-one profile was
+factored into named semantic left and right halves.  A deterministic generator emits a balanced
+decision tree for the exact left-half syndromes of distinguished-fibre shard zero, and
+`MinimumWords.ExhaustionFiveOne.fiveOneShardCheck_zero` checks by kernel reduction that all 1,296
+left candidates are accepted and all 216 right targets are rejected.  The leaf elaborated in 55.62s
+at 2,590,464 kB.  No property of the generated tree is trusted.  Expansion to the other six
+distinguished fibres was prepared but not claimed because the shared lane was then occupied by a
+long foreign q=11 certificate build; land those leaves from this measured shard-zero boundary.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the

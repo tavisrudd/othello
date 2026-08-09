@@ -193,6 +193,18 @@
       "role": "generated supports of the four minimum-word orbits, the position of every normalized projective matrix image in its displayed orbit, and all internal-point image indices for the fixed-point stabilizer"
     },
     {
+      "paper_iv_path": "lean-certificates/generate_fixed_point_exhaustion.py",
+      "bytes": 3206,
+      "sha256": "cb30375262dbdfceaa2e4852b816003c540407bcb775fd04239545a152523338",
+      "role": "deterministic generator and byte-for-byte checker for transparent exact-syndrome classifiers used by the proof-producing fixed-point exhaustion"
+    },
+    {
+      "paper_iv_path": "lean-certificates/PassantCodeQ13/MinimumWords/ExhaustionFiveOneData.lean",
+      "bytes": 111823,
+      "sha256": "7bc773f0b689c6a020c5b9fbb3c020eb7c9058901b3c547501d8ca4ba98a4b8b",
+      "role": "generated balanced exact-syndrome classifier for distinguished-fibre shard zero of the five-one fixed-point profile; Lean checks its behavior on both complete semantic half-domains"
+    },
+    {
       "paper_iv_path": "lean-certificates/check_association_transport_statements.py",
       "bytes": 6869,
       "sha256": "0d2027aaa50266b78274a6b815ec9a30f81c62743287b560f446bb13b69db094",
@@ -277,6 +289,12 @@
       "command": "python3 generate_minimum_word_orbits.py --check",
       "output_contains": "q=13 minimum-word orbit data: PASS",
       "certifies": "the checked orbit supports, matrix-to-orbit-position tables, and fixed-point stabilizer action-index rows are byte-identical to deterministic regeneration from the symmetric-square action of the normalized projective group"
+    },
+    {
+      "cwd": "lean-certificates",
+      "command": "python3 generate_fixed_point_exhaustion.py --check",
+      "output_contains": "q=13 fixed-point exhaustion classifier shard zero: PASS",
+      "certifies": "the transparent balanced classifier for five-one shard zero is byte-identical to deterministic regeneration from the complete semantic left-half syndrome set"
     },
     {
       "cwd": "lean-certificates",
