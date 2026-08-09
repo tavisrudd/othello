@@ -6,7 +6,11 @@
 and transferred to C894.  C756 retains the saturated-internal branch and the
 full nonsaturated branch.  The latter is not reduced to one conic point type;
 the \(q=53\) external-deletion aligned split escape is closed for every mixed
-secant/passant profile.
+secant/passant profile.  The character-weighted all-center residual sum is now
+the difference of the \(\pm1\) root multiplicities of an exact
+degree-\(\delta S(A)\) norm polynomial; its trace coefficient gives the sum
+modulo the characteristic.  At defect two the scalar resultant detects the
+zero-weight case but necessarily loses the sign \(W=\pm2\).
 
 > **LIVE CARD.**  Keep only current conclusions, gates, stop rules, ownership,
 > and authoritative pointers here.  Put evidence, failed routes, correction
@@ -179,8 +183,24 @@ The aggregate collision identity
 retains all deleted points and spare lines.  Its character-weighted refinement
 is exact locally: on a spare line it is the quadratic-character sum over the
 degree-\(\delta\) residual divisor \(E_{P,\ell}\).  At defect two it lies in
-\(\{-2,0,2\}\).  A resultant/norm formula for its total is the open global
-type discriminator.
+\(\{-2,0,2\}\).  If \(B_{P,\ell}\) is the residual Artin algebra and
+\(u=(Q_\ell\bmod E_{P,\ell})^{(q-1)/2}\), then the local weight is
+\(\operatorname{Tr}(u)\), its scalar resultant sign is \(N(u)\), and the
+product of the characteristic norm polynomials over all deleted points and
+centers is
+
+\[
+ (Z-1)^{(\delta S(A)+T_A)/2}(Z+1)^{(\delta S(A)-T_A)/2}. \tag{H'}
+\]
+
+Thus \(T_A\) is the difference of the \(\pm1\) root multiplicities of one
+exact all-center resultant; its negative next-to-leading coefficient is
+\(T_A\) modulo the characteristic.  At defect two,
+\(W_{P,\ell}^2=2(1+\chi(\operatorname{Res}(E_{P,\ell},Q_\ell)))\).
+The scalar norm alone cannot distinguish all-external from all-internal
+residual pairs; the remaining covariance work must retain the trace of the
+linear remainder of \(Q_\ell^{(q-1)/2}\) modulo \(E_{P,\ell}\).  Authority:
+`notes/2026-08-09-c756-all-center-resultant-norm.md`.
 
 ### \(q=53\): type-uniform critical core
 
@@ -232,15 +252,13 @@ cover mixed line types or the remaining external-deletion covariance rows.
 
 ## Ordered next actions
 
-1. Derive a resultant/norm law for the character-weighted residual-divisor
-   sum refining (H), split by point type.
-2. Attack the remaining \(q=53\) external-deletion anisotropic and
+1. Attack the remaining \(q=53\) external-deletion anisotropic and
    disjoint-root split covariance rows with the mixed line characters.
-3. Build the \(q=47\) octic carrier and the separate \(q=49\)
+2. Build the \(q=47\) octic carrier and the separate \(q=49\)
    Hasse/divided-power carrier before attempting a certified all-type search.
-4. Cover higher nonsaturated sizes separately; do not infer them from the
+3. Cover higher nonsaturated sizes separately; do not infer them from the
    \(k=12\) layer.
-5. In parallel mathematical priority, seek the saturated-internal global
+4. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
 ## Stop rules
@@ -282,7 +300,8 @@ Do not:
 - Saturated-external: closed.
 - Saturated-internal: sharply constrained but open at global coherence.
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
-  exact, but no first-open field or higher size is classified.
+  exact, and its character total has the all-center trace/norm law (H'); no
+  first-open field or higher size is classified.
 - \(q=53\), all-internal, aligned: closed exactly.
 - \(q=53\), external deletion, aligned split covariance: closed exactly for
   every mixed line-character profile.
@@ -294,6 +313,8 @@ Do not:
 
 - Current audit:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
+- Character-weighted all-center trace/norm identity:
+  `notes/2026-08-09-c756-all-center-resultant-norm.md`.
 - Mixed-type equation ledger:
   `notes/2026-08-09-c756-nonsaturated-point-type-ledger.md`.
 - External-deletion aligned split closure:
