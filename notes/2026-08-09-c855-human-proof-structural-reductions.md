@@ -3,6 +3,25 @@
 **Date:** 2026-08-09  
 **Status:** prioritization note; C855 remains active
 
+## Landed in this batch
+
+Items 3 and 4 below are now paper-facing kernel theorems rather than proposals.
+`Q11DecodingSynthesis` defines the two ten-element support sheets, proves that
+every distance-three syndrome has exactly those twenty supports, identifies the
+sheets with the two generator orbits, and proves that the displayed outer
+normalizer exchanges them.  Its bundled Brianchon theorem identifies the ten
+triple-ambiguity directions, their perfect-matching leader supports, the
+complement of the invariant one-factorization, and the three concurrent witness
+chords.
+
+The base library commit is `187bed8895fc62784caf2022d717b4daa37871ad`.
+The q11 certificate package is atomically sealed at
+`38059cab5923dbb2a15d515c711b913d991432d5`; its root gate, audit, and guarded
+transcript agree on 58 terminals.  Final-head guarded run
+`20260809-051043-dead8cd3` passes.  The authority release is sealed through
+`7095e6c0` and its immutable 26-check replay passes over 115 package and 95
+shared modules.
+
 ## Result
 
 The best remaining route is not to formalize the manuscripts' longest human
@@ -55,6 +74,12 @@ classification.
 
 ### 3. Turn support chirality into a character-kernel theorem
 
+**Progress:** the finite semantic bridge is complete: the two generated sheets,
+their `10+10` cardinalities, the leader-support equality at every deep-hole
+syndrome, and outer exchange are now Lean terminals.  The stronger statement
+that every monomial automorphism preserves the unordered sheets still belongs
+with item 2's full automorphism-group theorem.
+
 The twenty three-subsets need not be classified twice.  Define the support
 sign as the triangle holonomy, use the existing two ten-element generated
 orbits, and show that the normalizer's sign character has the orientation-
@@ -72,6 +97,12 @@ The reusable ingredients already exist in `ClebschSchemeChirality`,
 not a new exhaustive table.
 
 ### 4. Collapse the Brianchon/support proof to `K6` matching combinatorics
+
+**Progress:** complete for the decoder corollary.  The new bundled terminal
+proves the ten direction identities, perfect-matching supports, complement of
+the five invariant matchings, and concurrence of all three witness chords.
+The manuscript's stronger `A5`-equivariance formulation remains naturally
+paired with item 1's explicit-action theorem.
 
 The geometric statement can factor through the fifteen edges and fifteen
 perfect matchings of `K6`.  The five self-polar matchings form the invariant

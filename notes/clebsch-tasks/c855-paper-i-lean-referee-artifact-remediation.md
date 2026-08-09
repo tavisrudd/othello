@@ -50,6 +50,18 @@ exhibit-plus-upper-bound automorphism theorem, a character-kernel chirality
 bridge, a generator-fixed invariant-cubic system, and orbit-certificate
 quotients for the remaining finite classifications.
 
+Support-chirality/Brianchon bridge closure (2026-08-09): the first reduction
+batch is landed.  Every distance-three syndrome's twenty supports are now
+kernel-identified with two intrinsic ten-element generator orbits; the outer
+normalizer exchanges the sheets.  A second bundled theorem identifies the ten
+triple-ambiguity directions with the Brianchon points, their three leader
+supports with the perfect matchings complementary to the invariant
+one-factorization, and the corresponding witness chords as concurrent.  Base
+commit `187bed8895fc62784caf2022d717b4daa37871ad`, q11 seal
+`38059cab5923dbb2a15d515c711b913d991432d5`, final-head guarded receipt
+`20260809-051043-dead8cd3`, and authority seal `7095e6c0` pass the immutable
+26-check release over the exact 58-terminal, 115-package/95-shared boundary.
+
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
 is confirmed by the committed check script
