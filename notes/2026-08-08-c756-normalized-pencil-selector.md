@@ -219,13 +219,64 @@ incidence, and 5% for another arithmetic route.
 | What is the saturated next gate? | open | bounded-degree relation between two balanced slices under \(\tau\), with the prior moment wall as stop rule |
 | What is the nonsaturated next gate? | unchanged open | prove the masked direction theorem \(h\ge1\) |
 
+## 6. Joint-slice audit
+
+The proposed next calculation also has an exact identification.  For a
+nonsquare direction \(L\), let
+\(\ell_L:\mathbb F_{q^2}\to\mathbb F_q\) have kernel \(L\).  The cross
+condition in Proposition 21 and the perfect-matching theorem say that the
+two projected sets
+\[
+ \ell_L(V),\qquad \ell_L(\tau(V))
+\]
+coincide, with a canonical bijection induced by pairs whose difference lies
+in \(L\).  In the earlier direction coordinatization these are precisely
+\[
+ X_c=\rho(c)X_{c^{-1}},
+\]
+and the induced bijection is \(\pi_c\).
+
+> **Proposition 22 (joint-slice identification).**  For two distinct
+> nonsquare directions \(L,L'\), the paired two-coordinate distribution
+> \[
+> \{(\ell_L(v),\ell_{L'}(v)):v\in V\}
+> \]
+> determines exactly the previously isolated composite matching
+> \(\pi_{c'}^{-1}\pi_c\), up to affine rescaling of each coordinate.
+> Consequently a resultant, gcd, or interpolation invariant of two slices
+> is new only if it extracts a field-arithmetic restriction on that
+> composite's cycle structure.
+
+**Proof.**  The map
+\(v\mapsto(\ell_L(v),\ell_{L'}(v))\) is an
+\(\mathbb F_q\)-linear isomorphism because its two kernels are distinct.
+Thus the paired projections recover \(V\) and the two projection matchings.
+Composing one matching with the inverse of the other gives
+\(\pi_{c'}^{-1}\pi_c\).  Changing either functional rescales its coordinate,
+which is exactly the freedom already present in the factors \(d_c\) and
+\(\rho(c)\) of Corollary 7.1. \(\square\)
+
+This meets the stop rule from the prior pass.  The single-slice set equality
+and all of its symmetric moments were exhausted by Theorem 8; the missing
+cycle invariant was already named and no bounded-degree carrier was found.
+Renaming it a two-slice resultant does not make it a new attack.  The
+one-common-lemma architecture is therefore downgraded again: approximately
+15% common half-Paley, 65% separate Segre/polarity plus masked Rédei, 15%
+signed \(p\)-adic incidence, and 5% another route.
+
+**TT2.**  The useful question is no longer whether two projections contain
+more data--they tautologically do--but whether the field arithmetic forces
+their matching composite into a small conjugacy class.  That is the old
+cycle gate.  With no new bounded carrier, the correct move is to stop this
+branch and spend the next pass on the self-dual signed incidence operator,
+where integrality and polarity have not yet been combined.
+
 ## Next action
 
-Choose two projectively normalized nonsquare directions \(L,L'\).  Express
-the roots of \(\widehat H_L\) and \(\widehat H_{L'}\) as two linear
-projections of the same radial selector, incorporate
-\(\chi_2(v-\tau(w))=-1\), and compute the first resultant or gcd invariant
-that is not a symmetric function of either slice alone.  Continue only if
-its degree is bounded independently of \(m\).  Otherwise split the all-\(k\)
-programme: pursue a branch-specific Segre tangent/polarity theorem for
-saturation and retain the masked Rédei \(h\ge1\) theorem for nonsaturation.
+Determine whether the signed passant incidence matrix can be switched
+symmetric or skew-symmetric uniformly under polarity.  If so, compute its
+exact square and recast \(Zy=0\) as a sparse-kernel problem for one self-dual
+integral operator.  Continue only if the symmetry yields arithmetic beyond
+\(Z^{\mathsf T}Z=mI-\epsilon K\); otherwise pursue a branch-specific Segre
+tangent theorem for saturation.  The nonsaturated gate remains the separate
+masked Rédei theorem \(h\ge1\).
