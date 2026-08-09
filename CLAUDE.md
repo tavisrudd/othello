@@ -1,4 +1,4 @@
-# Othello workspace guide
+# workspace guide
 
 The repository contains the root Python `othello` package, the Rust port/Queens solver under
 `rust/`, projective-cap/Nofil research, papers, and Lean developments. Queens/Othello performance
@@ -24,8 +24,7 @@ without announcing the steps.
 
 At the start of a session:
 
-1. Before any other repository operation, read this complete guide in a dedicated command with no
-   search, status check, build, or other operation.
+1. read this complete guide in a dedicated command with no other operation.
 2. Select a lane from the user's explicit alias, named handoff, or named task — never infer it from
    git, a task ID's number, or the previous session. A bare `C<id>` or `go C<id>` selects that task
    **and its lane**: look up the exact `C<id>` row in `notes/2026-07-07-codex-task-queue.md`, treat
@@ -90,7 +89,8 @@ Cross-lane hygiene:
 
 - Treat other lanes' edits, commits, builds, and generated artifacts as foreign.
 - Before editing, check the selected handoff's allowed paths. Explicit user scope can expand them.
-- Do not review, stage, rebuild, kill, clean, or opportunistically fix foreign work.
+- Do not review, stage, rebuild, kill, clean, or opportunistically fix foreign work. 
+- DO note foreign issues and raise them to the user.
 - The queue records IDs and completion; it never overrides the selected lane's local order.
 
 Named-expert context is not a lane. Before developing or formalizing a nontrivial proof, consult
@@ -117,14 +117,9 @@ this guide; if its guarded entry point cannot target a root, stop. Unless the
 handoff says otherwise, extracted and synchronized copies are downstream:
 edit and validate the monorepo authority first, then forward-commit the copy.
 
-The authoritative manuscript sources remain under this repository's `papers/`. The following
-released papers also have standalone Git mirrors under `~/src/math-papers/`:
-
-- `papers/ame_lu` → `~/src/math-papers/ame-lu`
-- `papers/beyond4_prs` → `~/src/math-papers/beyond4-prs`
-- `papers/clebsch-factorization` → `~/src/math-papers/clebsch-factorization`
-- `papers/clebsch-rigidity` → `~/src/math-papers/clebsch-rigidity`
-- `papers/arcs_complete_outside_conic` → `~/src/math-papers/arcs-complete-outside-conic`
+The authoritative manuscript sources remain under this repository's
+`papers/`. Released papers also have standalone local Git mirrors
+under `~/src/math-papers/<paper-alias>`.
 
 Synchronization is one-way from this repository to those mirrors. Make manuscript edits here
 first, then propagate and validate every intended public change in the matching standalone
@@ -136,9 +131,7 @@ destructive history replacement.
 
 Before any paper-mirror synchronization, Lean companion export, certificate-package re-pin, or
 other operation that writes under `~/src/math-papers/` or `~/src/lean/`, read
-`notes/export-and-mirror-conventions.md` completely. It names the edit authorities, the guarded
-export tools, and the full Lean-for-paper release chain; only those tools write downstream, and
-never create ad hoc clones or worktrees under either root. This is a routed read, not startup
+`notes/export-and-mirror-conventions.md` completely. This is a routed read, not startup
 context.
 
 ## Literature cache: load on demand
@@ -184,18 +177,16 @@ profile, or worker cap. Build ownership and the one-heavy-build rule are
 host-wide. Regeneration requires the owning build window and atomic validation.
 If a guard cannot target the root, stop; never hand-compose a replacement.
 
-The nested guide holds the always-on build-safety rules, the shared-library
-(`RelativeConicArcs.Gates`) validation and exit protocol, measured memory caps, the restart-sentinel
-protocol, process ancestry checks, finite-certificate sharding rules, and exact command forms.
-
 ## Intent-based mode and short commands
 
-Default mode is collaborative. `mi` enables intent-based mode for the rest of the current session;
-a handoff may persist it with `Mode: intent-based` under its date.
+Default mode is intent-based (as in "Turn the ship around"'s
+delegation style). `mi` enables intent-based mode for the rest of the
+current session; a handoff may persist it with `Mode: intent-based`
+under its date.
 
-`yc` means “your call.” `vb` means “vibe check”: translate the technical evidence into a candid
-progress assessment (good/bad, disappointing/great, etc.) — momentum, risks, and likely route
-viability, not a recitation of implementation status.
+`yc` means “your call.” `vb` means “vibe check”: translate the
+technical state *short* minimal summary (good/bad, (un)blocked,
+disappointing/great, etc.) not a recitation.
 
 `ej` means “extra juice”: from where we've landed, surface the extra
 unexpected value now in reach — free or cheap upgrades on current
@@ -329,26 +320,9 @@ rg -n 'C210|210' ..
   `git add -p` or `git add -A`.
 
 ## Build, test, and dependencies
-
-Build/test Rust through `rust/Makefile`: `make release`, `make test`, `make clippy`, `make fmt`.
-Never substitute a bare `cargo build`; the Makefile injects the required znver5/mold flags. Quick
-`cargo check`, `fmt`, `clippy`, and `test` are acceptable. Wrap noisy builds with `run-quiet`.
-
-A change is not done until its validation gate passes. The Othello gate is cross-engine
-value-equivalence (minimax/alphabeta/ordered/strong), the independent grid move/flip reference, and
-exact endgames `6 / -40 / 4`. `strong+` and `strong++` deliberately change strength/value semantics.
-Queens validation and n=16 sizing remain in `notes/queens-othello-perf-playbook.md`.
-
-Use ecosystem crates properly (`clap`, `rayon`, `libc`, etc.); do not invent a no-dependency rule.
-
-## Dormant performance work
-
-Before any Queens/Othello hot-path implementation, benchmark, or n=16 work, read
-`notes/queens-othello-perf-playbook.md`. It contains the validation gate, A/B harness, tmux protocol,
-box hygiene, and layout rules.
-
-Never declare a hard “floor,” “limit,” or “unreachable” result. Present the evidence and remaining
-levers; the user decides what constitutes a limit.
+- we are on nixos. use it
+- Makefiles good
+- Use libs properly (`clap`, `rayon`, `libc`, etc.); do not invent a no-dependency rule.
 
 ## Handoffs, archives, and task IDs
 
@@ -371,3 +345,12 @@ that file.
 At session end: update the live map, move any accumulated history to the companion archive, append
 the dated report, and commit docs with the code they describe. Move finished handoffs under
 `notes/handoffs/done/` only after the user answers the lane-finish questions.
+
+## Chat session reports
+
+Keep your chat session reports to the user brief, organized and to the
+point. User is busy and does not want to parse a wall of text. Use
+numbered lists user can read fast and refer to in replies. DO NOT give
+a travelogue. Details are for the on-disk reports. Speak to the user
+with the precision you would use for a sub-agent. Use short-hand
+anywhere it doesn't hurt clarity to save tokens. 
