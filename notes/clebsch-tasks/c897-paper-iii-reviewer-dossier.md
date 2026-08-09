@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; reviewer/critic dossier built; sealed cold-read batch pending
+**Status:** active; first sealed batch synthesized at overall MAJOR; C897 now
+owns remediation and the sealed regrade
 
 ## Objective
 
@@ -22,13 +23,48 @@ freeze their reports before cross-comparison, and synthesize overlapping and
 conflicting findings without routing the dossier into normal Paper III
 context.
 
+By explicit author instruction on 2026-08-09, C897 also owns remediation of
+the resulting findings.  Prove the rational branch, complete-fibre and exact
+`J_0` normalization statements at the manuscript's printed strength; repair
+the six-sign table, complementary-minor bridge, citation hypotheses,
+orientation wording, query exposition and trust-map mismatch; add rejecting
+regression coverage; synchronize the intended public surfaces; and rerun fresh
+sealed human-proof reads before C897 may close.
+
 ## Deliverable
 
 Primary dossier:
 `notes/2026-08-09-clebsch-paper-iii-reviewer-dossier.md`.
 
-Cold-read reports and their synthesis will be added as dated `C897` notes once
-the batch is launched.
+Cold-read reports and their synthesis are the dated `C897` notes listed below.
+
+## First sealed batch closeout
+
+The batch ran against standalone commit
+`7208275e6b5f979fea487d2130943bbd979aed37` and PDF SHA-256
+`6794202d653d6908b495120c47848162a15d357c1438611e9e42f10384472622`.
+The launch manifest is
+`notes/2026-08-09-c897-paper-iii-first-batch-manifest.md`; the four frozen
+reports are:
+
+- `notes/2026-08-09-c897-paper-iii-hitchin-cold-read.md`;
+- `notes/2026-08-09-c897-paper-iii-greaves-cold-read.md`;
+- `notes/2026-08-09-c897-paper-iii-snowden-cold-read.md`; and
+- `notes/2026-08-09-c897-paper-iii-si-kaddour-cold-read.md`.
+
+The independent categorical verdicts are one MAJOR and three MINOR.  The
+overall MAJOR is a load-bearing human-proof gap, not a demonstrated false
+theorem: the manuscript does not prove the reduced order-one branch divisor
+of the rational degree-two incidence cover, the complete reduced golden fibre,
+or one exact rational normalization of `J_0`.  The synthesis also resolves a
+six-sign error in Table (5.1), records the local proof and citation repairs,
+and finds the conference/exchange/design and seven-point reconstruction
+arguments otherwise sound:
+`notes/2026-08-09-c897-paper-iii-cold-read-synthesis.md`.
+
+No manuscript, Lean, trust, release, mirror, publication, or contact action was
+taken during the first batch.  C897 itself now retains every remediation
+finding; no successor task is allocated and no finding is handed off to C816.
 
 The dossier must include:
 
@@ -54,15 +90,28 @@ The dossier must include:
 - The first-pass reports are independent, identify the earliest unsupported
   implication, and distinguish proof, citation, normalization, and exposition
   findings before synthesis.
+- The rational cover repair proves reduced order-one ramification exactly on
+  `J_0=0`, the complete reduced golden fibre in the finite etale locus, and one
+  internally fixed rational `J_0` scale without narrowing the theorem.
+- Every local MINOR is repaired, including the exact Table (5.1) row and a
+  release check that rejects disagreement between the printed and formal outer
+  words.
+- The affected manuscript, trust, release and standalone surfaces agree, and a
+  fresh sealed geometric reader plus the necessary focused readers return no
+  unresolved MAJOR or MINOR finding.
 
 ## Boundaries
 
-This task is literature and review preparation only.  It does not edit the
-Paper III manuscript, Lean sources, trust/release surfaces, or standalone
-mirror; it does not contact prospective reviewers; and it does not assert
-private editorial knowledge.  The dossier and any persona packets remain
-review-sub-agent material only.  Any later conventions-only manuscript context
-requires a separately selected, specialized extraction.
+The dossier and persona packets remain review-sub-agent material only and are
+not routed into ordinary Paper III context.  The frozen first-pass reports and
+synthesis are the remediation ledger.  C897 may edit the authoritative Paper
+III manuscript, its exact proof and verification support, trust/release
+surfaces, and the standalone mirror through the normal one-way synchronization
+and validation chain.  Before any Lean work or mirror synchronization, load
+the separately required nested rules and guarded workflows.
+
+C897 does not contact prospective reviewers, assert private editorial
+knowledge, push, publish, deposit, or submit without explicit authority.
 
 Numerical review grades are reported in chat only.  Do not persist them in
 handoffs, task cards, dossiers, cold-read reports, or review syntheses; on-disk
