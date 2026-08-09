@@ -28,7 +28,8 @@ The governing plan is
 Current mathematical memos:
 
 - `notes/2026-08-09-c895-preclassification-interface.md`;
-- `notes/2026-08-09-c895-steinberg-source-hom.md`.
+- `notes/2026-08-09-c895-steinberg-source-hom.md`;
+- `notes/2026-08-09-c895-finite-hom-matrix-specification.md`.
 
 ## Exposition boundary
 
