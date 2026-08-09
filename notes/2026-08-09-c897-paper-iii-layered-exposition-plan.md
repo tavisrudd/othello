@@ -4,8 +4,8 @@
 
 **Date:** 2026-08-09
 
-**Status:** implementation accepted; paper-only and blind gates green;
-official standalone synchronization pending
+**Status:** complete; implementation, paper-only gate, blind comparison, and
+official standalone synchronization green
 
 **Reference artifact:** standalone commit
 `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`, 32 pages, PDF SHA-256
@@ -520,3 +520,10 @@ restored the orbit reduction, representative calculations, and sign check.
   remediation.
 
 No genuine unresolved C897 mystery remains.
+
+## Immutable closeout
+
+The accepted authority revision is commit `ee2fd025`; the one official
+one-way refresh is standalone commit `4a5fbdc`.  Exporter verification and the
+standalone paper-only release aggregate passed, the mirror is clean, and both
+repositories carry the identical PDF SHA-256 recorded above.

@@ -78,6 +78,19 @@ returned `PASS` with no unresolved finding.  Their closeout is
 `notes/2026-08-09-c897-paper-iii-regrade-synthesis.md`.  Lean follow-up is
 explicitly queued outside this paper-only pass by author direction.
 
+The author then retained C897 for a style-guide layering pass.  The accepted
+revision places the four-shadow theorem on the uninterrupted first-pass route,
+marks exchange rigidity, reconstruction, and finite-field specialization as
+independent safe skips, preserves every theorem statement by stable semantic
+ID, and adds a release-gated rejection of internal rendered theorem numbers.
+Two counterbalanced sealed readers independently preferred the revision and
+found no hidden dependency.  Authority commit `ee2fd025` synchronizes to
+standalone commit `4a5fbdc`; both carry the same warning-free 32-page PDF with
+SHA-256
+`0ee06115a2817e8bdd4c1ff1618e4f5b935f9a21e5d045b481d424e2254b3fb8`.
+The implementation record is
+`notes/2026-08-09-c897-paper-iii-layered-exposition-plan.md`.
+
 The dossier must include:
 
 1. a ranked reviewer/critic slate with selection evidence and confidence;
