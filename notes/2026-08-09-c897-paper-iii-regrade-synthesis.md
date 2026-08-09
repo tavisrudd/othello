@@ -31,7 +31,7 @@ The frozen reports and SHA-256 digests are:
 - `notes/2026-08-09-c897-paper-iii-greaves-regrade.md`,
   `862dc485519fa38b11e8c6001a151dd1466ee8bd443b4dd7925c9dc631dcd267`;
 - `notes/2026-08-09-c897-paper-iii-snowden-regrade.md`,
-  `996850d9cad75a78dcfec873ac4be65d5e52e3ea56ad85eff9f78abcd53c0991`;
+  `50516eada364f04a27c8fb65e2f27386c43fe76ccebbfcc49aa0d795b86dc0b8`;
   and
 - `notes/2026-08-09-c897-paper-iii-si-kaddour-regrade.md`,
   `cf495e655c2da9f7a32485d8d697f8116998c0c37808138ca908d8cdb0f59c97`.
