@@ -6,6 +6,11 @@
 transferred to C894.  C756 retains the saturated-internal and nonsaturated
 branches.
 
+> **KEEP THIS CARD CLEAN.**  This is a routing and current-context map, not a
+> work log.  Record dated findings, validation details, failed attempts, and
+> superseded plans in dated C756 reports; keep here only the current state,
+> live gates, stop rules, ownership, and authoritative pointers.
+
 ## Goal
 
 Remove the \(k\le8\) boundary from the conic-filling classification and prove,
