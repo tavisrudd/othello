@@ -52,12 +52,16 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
 - **Classical cyclotomic \(q=11\) endpoint, explanatory only:** on the augmentation lattice of the local
   five-vertex tournament,
   \(\mathcal J=(B^2+5I)/2\) is integral and satisfies
-  \(\mathcal J^2=5I\).  Hence the local carrier intrinsically supports the
-  conductor-two order \(\mathbb Z[\sqrt5]\).  In cyclic-shift coordinates it
-  is the standard \(A_4\), \(\mathbb Z[\zeta_5]\)-module identity
-  \(\mathcal J=-R+R^2+R^3-R^4\).  Use as a short explanatory remark, not a
-  novelty claim or a claimed identification with the rank-six conference
-  lattice.
+  \(\mathcal J^2=5I\), but this is only the intermediate conductor-two stage.
+  In cyclic-shift coordinates \(\mathcal J\equiv I\pmod2\), and
+  \[
+  \Phi=(I+\mathcal J)/2=(B^2+7I)/4=-(R+R^4)
+  \]
+  is integral with \(\Phi^2-\Phi-I=0\).  Thus
+  \(A_4\cong\mathcal O_{\mathbb Q(\sqrt5)}^2\).  Use as a short explanatory
+  remark, not a novelty claim.  The order-six conference even lattice carries
+  the analogous rank-three maximal-order module, but no canonical marked map
+  between the two is proved.
 - **Proof device, no novelty claim:** flat Sidon lemma and the one-faithful-
   eigenblock Cayley criterion.
 - **Partial context only:** the all-\(k\) LP bound, saturation dichotomy,
@@ -93,6 +97,7 @@ user.
 - `notes/2026-08-08-c894-tt-cyclotomic-compression.md`
 - `notes/2026-08-08-c894-tt2-integral-golden-carrier.md`
 - `notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md`
+- `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -125,13 +130,16 @@ novelty query.  Do not draft prose until the matrix is stable.
 
 The matrix must also include the cyclotomic decomposition-field corollary and
 the four-stage rigidity cascade frozen in
-`notes/2026-08-08-c894-tt-cyclotomic-compression.md`.  Add field-generation,
-Galois-stabilizer, and Gaussian-period/Jacobi-sum terms to the human search;
-do not widen the paper to other cyclotomic conductors.
+`notes/2026-08-08-c894-tt-cyclotomic-compression.md`.  Aoki/Koblitz/Hoshi close
+the broad attribution question; narrow the human search to the exact mixed sum
+\(-(J(\theta,\chi)+J(\theta\chi,\chi))/2\), its Frobenius-only collision
+class, and the local graph extension theorem.  Do not widen the paper to other
+cyclotomic conductors.
 
-The \(q=11\) endpoint row should compress the integral augmentation operator to
-the cyclic-shift identity in
-`notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md`; the parity
-proof remains an independent coordinate-free check.  Mark it as classical
-\(A_4\)/fifth-cyclotomic structure and ring-fence any comparison with the
-existing rank-six conference lattice as future work.
+The \(q=11\) endpoint row should use the maximal-order operator and conductor
+ladder in
+`notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`; the
+older parity proof remains an independent check of the intermediate operator.
+Mark the result as classical \(A_4\)/fifth-cyclotomic structure.  The
+\(\mathcal O_5^2\)/\(\mathcal O_5^3\) rank comparison with the conference even
+lattice may be stated, but ring-fence any canonical marked map as future work.

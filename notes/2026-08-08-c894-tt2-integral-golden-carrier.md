@@ -3,12 +3,16 @@
 **Lane:** clebsch · **Date:** 2026-08-08 · **Scope:** second-order theorem
 extraction; no manuscript or Lean edits
 
-> **Attribution update (2026-08-08).**  The subsequent literature check
+> **Attribution and strength update (2026-08-08).**  The subsequent literature check
 > `notes/2026-08-08-c894-cyclotomic-and-golden-literature-check.md` identifies
 > the operator below with the standard order-five action on the
-> \(A_4\), \(\mathbb Z[\zeta_5]\)-module:
-> \(\mathcal J=-R+R^2+R^3-R^4\) on the augmentation lattice.  Retain it as an
-> explanatory local-Paley coordinate formula, not a novelty-bearing theorem.
+> \(A_4\), \(\mathbb Z[\zeta_5]\)-module.  The EJ2 correction
+> `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md` then
+> observes that \(\mathcal J\equiv I\pmod2\), so
+> \((I+\mathcal J)/2\) is integral and supplies the **maximal** golden order.
+> The “exact conductor-two” interpretation below is superseded; retain
+> \(\mathcal J\) only as the intermediate stage of the conductor
+> \(4\to2\to1\) ladder.
 
 ## Verdict
 
@@ -29,9 +33,10 @@ Second, at \(q=11\) the local tournament does more than recover the field
  \mathcal J^2=5I.
 \]
 Thus \(L\) is intrinsically a module for \(\mathbb Z[\sqrt5]\). The division
-by two is integral on \(L\), not merely rational. This is the cleanest direct
-arithmetic bridge from the new local-Paley theorem to the conductor-two
-golden order in the existing Clebsch series.
+by two is integral on \(L\), not merely rational.  This statement remains
+correct, but it is not maximal: EJ2 proves that \((I+\mathcal J)/2\) is also
+integral and extends the action to
+\(\mathbb Z[(1+\sqrt5)/2]\).
 
 Neither statement should become a third paper headline. The primitive factor
 belongs with the collision theorem; the \(q=11\) operator is a compact endpoint
@@ -164,8 +169,9 @@ The construction is invariant under relabelling and under reversing every
 tournament edge, because it depends only on \(B^2\).
 
 The order \(\mathbb Z[\sqrt5]\) has conductor two in
-\(\mathcal O_{\mathbb Q(\sqrt5)}\). This exact order, rather than merely the
-golden field, is therefore visible in the integral local-Paley carrier.
+\(\mathcal O_{\mathbb Q(\sqrt5)}\). It is visible as an intermediate order in
+the integral local-Paley carrier; it is not the full endomorphism order exposed
+by the cyclic augmentation structure.
 
 ## 4. Why the factor \(1/2\) matters
 

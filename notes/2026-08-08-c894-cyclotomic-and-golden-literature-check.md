@@ -65,7 +65,11 @@ firmer demotion than the architecture notes presently give them.
    \(\mathbb Z[\zeta_5]\)-module; Martinet explicitly treats the dimension-four
    order-five lattice, including \(A_4\), in those terms.  Retain (1) only as
    a compact explanatory endpoint or series bridge.  Do not call the
-   construction novel, and do not promote it to a theorem headline.
+   construction novel, and do not promote it to a theorem headline.  The EJ2
+   follow-up `notes/2026-08-08-c894-ej2-maximal-golden-order-and-series-impact.md`
+   strengthens this: \((I+\mathcal J)/2\) is integral, so the actual intrinsic
+   action is by the maximal order \(\mathbb Z[(1+\sqrt5)/2]\), with
+   \(A_4\cong\mathcal O_5^2\).
 
 5. **The 2025/2026 Javier--Llano--Zuazua paper creates no additional threat.**
    Its full text has no Jacobi, cyclotomic, eigenvalue, spectrum, or golden
@@ -83,7 +87,7 @@ The publication hierarchy after this check is therefore:
 | exact mixed-Jacobi collision class | named proof engine; exact novelty still belongs in the human-index query |
 | one eigenvalue generates the decomposition field | attributed interpretation/corollary; no independent novelty |
 | primitive spectral factor and CM form | routine corollaries; no novelty |
-| \(q=11\) integral \(\sqrt5\)-operator | explanatory \(A_4\)/cyclotomic remark; no novelty |
+| \(q=11\) integral golden operator | explanatory maximal-order \(A_4\cong\mathcal O_5^2\) remark; no novelty |
 
 ## Source findings
 
@@ -152,7 +156,7 @@ advertised novelty crown.
 | Is decomposition-field generation a new broad Jacobi-sum phenomenon? | settled negative | cite Aoki 1996 and Hoshi 2023 |
 | Is Frobenius-only collision new in all Jacobi-sum settings? | settled negative as a broad claim | Koblitz 1991 is a direct prime-conductor analogue |
 | Is the exact local-Paley mixed-sum collision theorem already stated? | open, deliberately not asserted either way | human MathSciNet/Scopus plus Aoki/Ono--Kida--Gyoja forward-citation check |
-| Is the \(q=11\) integral golden carrier a new lattice structure? | settled negative | equation (1) identifies the standard \(A_4\), \(\mathbb Z[\zeta_5]\) structure |
+| Is the \(q=11\) integral golden carrier a new lattice structure? | settled negative and strengthened | the standard \(A_4\), \(\mathbb Z[\zeta_5]\) structure extends the displayed conductor-two action to the maximal real order |
 | Does Javier--Llano--Zuazua threaten the new arithmetic rows? | settled negative | no arithmetic/spectral content in full text |
 | Do these demotions weaken either paper headline? | settled negative | none; both headlines are unchanged |
 
