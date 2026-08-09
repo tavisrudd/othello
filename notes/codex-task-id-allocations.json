@@ -2987,8 +2987,17 @@
       "last": 898,
       "purpose": "Paper I reviewer and critic dossier for human-proof and exposition cold reads",
       "sequence": 332
+    },
+    {
+      "count": 1,
+      "first": 899,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 899,
+      "purpose": "Paper III likely-reviewer and critic dossier for persona cold reads of human proofs and exposition",
+      "sequence": 333
     }
   ],
-  "next_id": 899,
+  "next_id": 900,
   "schema": "codex-task-id-allocations-v1"
 }
