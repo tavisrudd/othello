@@ -139,8 +139,11 @@ feed the existing defect squeeze for every \(\delta\ge2\).
 The direct Segre comparison, global slope moments, unweighted subresultants,
 dual-pencil weighted norm, selected missing-set kernel curves, Frobenius
 fixed-locus interpolation, and the pair-coupled diagonal expansion do not give
-a bounded-degree carrier.  The all-internal defect-two near-transversal
-classification remains the live structural route.
+a bounded-degree carrier.  At defect two the near-transversal must retain its
+star realization: 55 internal nodes of 11 dual passants must be
+direction-complete from all 16 internal nonnodes on a twelfth passant.
+Arbitrary internal near-transversals exist directly, so the live structural
+route is a star-specific direction theorem.
 
 ## What is already uniform
 
@@ -157,11 +160,12 @@ classification remains the live structural route.
 
 ## Next action
 
-Attack the all-internal defect-two boundary \((q,k)=(53,12)\).  Put its two
-allowed fibre profiles into a common near-transversal model across all spare
-passants and seek a global incidence or parity obstruction forced by
-internality.  The target is a uniform lemma that feeds the defect squeeze,
-not a field-specific search.
+Attack the star-center gate at \((q,k)=(53,12)\): bound the number of
+direction-complete internal centers on one arrangement passant for the 55
+nodes of the other 11 passants.  The required configuration has all 16
+internal nonnodes complete.  Any useful lemma must exploit the common-line
+factorization of the star; arbitrary internal \(q+2\)-point near-transversals
+realize both defect-two profiles.
 
 ## Stop rules
 
@@ -176,6 +180,8 @@ Do not retry these without a genuinely new bounded identity:
   an additional pair-parameter functional equation;
 - pair-coupled diagonal inclusion--exclusion or higher concurrent-matching
   moments without a new global relation among the masks;
+- arbitrary all-internal near-transversal classification, or the elementary
+  pair budget over its directions, without the star realization;
 - local diagonal-sign classification;
 - signed \(p\)-adic/Smith torsion obstruction;
 - ordinary monodromy, unsigned or pair-only resultants;
@@ -211,6 +217,7 @@ Latest saturated-internal round:
 - `notes/2026-08-09-c756-two-species-matching-gram.md`;
 - `notes/2026-08-09-c756-frobenius-fixed-locus-masked-remainder.md`;
 - `notes/2026-08-09-c756-pair-coupled-diagonal-stop.md`;
+- `notes/2026-08-09-c756-defect-two-star-near-transversal.md`;
 - `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
 
 Foundational branch authorities:
