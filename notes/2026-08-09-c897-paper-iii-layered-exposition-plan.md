@@ -4,7 +4,8 @@
 
 **Date:** 2026-08-09
 
-**Status:** plan only; manuscript implementation not started
+**Status:** implementation accepted; paper-only and blind gates green;
+official standalone synchronization pending
 
 **Reference artifact:** standalone commit
 `9fe1f912d0fb48d61a1b2587387d1a2516c3afb8`, 32 pages, PDF SHA-256
@@ -216,8 +217,8 @@ manuscript, README, artifact prose, and verification material, not merely new
 ones.  Replace internal literals by semantic-label references.  Separately
 audit the stable labels for sections, equations, figures, and tables affected
 by the move; theorem IDs do not protect those navigation targets.  Assign
-stable labels `tab:outer-coefficient-words` and
-`eq:aligned-pair-criterion` to the current displays tagged (5.1) and (5.2),
+stable labels `tab:outer-coefficient-words`, `eq:two-graph-parity`, and
+`eq:aligned-pair-criterion` to the displays tagged (5.1), (5.2), and (5.3),
 replace their internal hard-coded references by label references, and preserve
 the existing `fig:source-shadow-return` and `fig:four-cubic-shadows` labels.
 Do not rewrite bibliographic locators such as “Table 1” in a cited source.
@@ -452,3 +453,70 @@ The revised memo adopts their substantive amendments:
 - counterbalance the blind comparison and record navigation errors, perceived
   theorem importance, specialist confidence, and adjacent-reader comprehension
   separately.
+
+## Implementation and blind disposition
+
+The accepted authority candidate implements the planned order and prose
+layers.  The operator theorem now immediately follows the shared outer-family
+setup, while the exchange-spectrum and reconstruction theorems follow an
+explicit safe-skip transition.  The exact two-graph parity equation lives in
+that shared setup, `\operatorname{center}_T` is defined before first use, and
+the abstract, introduction, `[xyz]` proof callback, and conclusion preserve
+the exact harmonic coefficient, marking boundary, different-domain warning,
+and named Joubert--Segre--Igusa--Clebsch chain.
+
+The frozen candidate retained all eight theorem-statement SHA-256 values when
+compared by stable semantic label.  Its warning-free deterministic PDF has 32
+pages and SHA-256
+`0ee06115a2817e8bdd4c1ff1618e4f5b935f9a21e5d045b481d424e2254b3fb8`.
+The complete paper-only release aggregate passed; by author direction the Lean
+gates remained explicitly unchecked.
+
+The final `ej`+`tt` durability pass made the stable-reference policy
+executable: the manuscript source-hygiene lint now rejects literal internal
+theorem, proposition, lemma, or corollary numbers while allowing numeric
+locators inside citations.  A rejecting sentinel and the full release
+aggregate both passed.
+
+Two sealed readers received anonymous A/B packets in opposite orders and the
+same task sheet.  Both independently selected the layered candidate, found a
+complete first-pass route with no hidden dependency, and judged the later
+independent theorems to retain their mathematical importance.  Both requested
+one identical navigation refinement: mark finite-field specialization as
+optional on the central route.  Stable subsection labels and that explicit
+skip were added, after which the statement-identity and paper-only release
+gates passed again.  Numerical grades remain chat-only under the C897 dossier
+boundary.
+
+## History audit
+
+The first-batch MAJOR was a load-bearing human-proof gap, not a demonstrated
+false theorem and not an exposition-only finding.  Targeted file history shows
+that no earlier committed version contained the complete reduced-branch-cycle
+or internal rational `J_0` normalization proofs: both first appear in the C897
+repair commit `da25f481`.  The complete-fibre argument had been strengthened
+during the 2026-07-26 arithmetic repairs, but it still depended on the then
+unproved exact branch assertion.  Thus ordinary manuscript edits did not
+compress a previously complete proof into the MAJOR gap.
+
+One separate MINOR did arise from compression during manuscript consolidation:
+commit `5f144ed6` abbreviated the complementary-minor/triangle-holonomy bridge
+to “two dihedral representatives and complementation.”  The C897 repair
+restored the orbit reduction, representative calculations, and sign check.
+
+## Mystery ledger
+
+- **Was the MAJOR created by manuscript compression?** Settled negatively by
+  the targeted history audit above.  The exact proofs were missing rather than
+  shortened from an earlier complete committed form.
+- **Does layering hide a dependency or demote the independent theorems?**
+  Settled negatively by statement-hash/dependency checks and both sealed
+  readers.
+- **Residual dense bridge.** The coherent-outer-marking to signed Joubert-frame
+  passage remains the point of highest specialist density.  Its exact table,
+  normalization, marking boundary, and classical citations are present, and
+  neither blind reader found a hidden logical step.  No task-owned evidence gap
+  remains; any further expansion would be optional pedagogy rather than C897
+  remediation.
+
+No genuine unresolved C897 mystery remains.

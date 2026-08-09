@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reject TeX spacing commands whose leading backslash was dropped."""
+"""Reject recurrent TeX source-hygiene failures."""
 
 from __future__ import annotations
 
@@ -9,6 +9,10 @@ from pathlib import Path
 
 
 MALFORMED_SPACING = re.compile(r",\s*q{1,2}uad\b")
+LITERAL_RESULT_REFERENCE = re.compile(
+    r"\b(?:Theorem|Proposition|Lemma|Corollary)~?\s*\d+(?:\.\d+)*\b"
+)
+CITE_COMMAND = re.compile(r"\\cite(?:\[[^]]*\])?\{[^}]*\}")
 
 
 def tex_files(paths: list[Path]) -> list[Path]:
@@ -38,12 +42,20 @@ def main() -> int:
             line = source.count("\n", 0, match.start()) + 1
             column = match.start() - source.rfind("\n", 0, match.start())
             findings.append(f"{path}:{line}:{column}: {match.group()!r}")
+        citation_spans = [match.span() for match in CITE_COMMAND.finditer(source)]
+        for match in LITERAL_RESULT_REFERENCE.finditer(source):
+            if any(start <= match.start() < end for start, end in citation_spans):
+                continue
+            line = source.count("\n", 0, match.start()) + 1
+            column = match.start() - source.rfind("\n", 0, match.start())
+            findings.append(
+                f"{path}:{line}:{column}: literal rendered result reference "
+                f"{match.group()!r}; use a stable semantic label"
+            )
     if findings:
-        parser.error(
-            "missing TeX command escape before quad/qquad:\n" + "\n".join(findings)
-        )
+        parser.error("TeX source-hygiene failure:\n" + "\n".join(findings))
     noun = "file" if len(files) == 1 else "files"
-    print(f"TeX spacing-command lint: {len(files)} {noun}: CHECK OK")
+    print(f"TeX source-hygiene lint: {len(files)} {noun}: CHECK OK")
     return 0
 
 

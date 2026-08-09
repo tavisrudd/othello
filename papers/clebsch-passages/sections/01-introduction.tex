@@ -66,6 +66,17 @@ between their ambient harmonic spaces.}
 \label{fig:source-shadow-return}
 \end{figure}
 
+\paragraph{First-pass route.}
+The main argument runs through the incidence cover in
+Section~\ref{sec:cover}, its marked pullback in
+Section~\ref{sec:orientation-source}, the golden fibre and exchanger in
+Sections~\ref{sec:golden-fibre} and~\ref{sec:golden-exchanger}, the four operator shadows in
+Section~\ref{sec:four-shadows}, and the harmonic return in
+Section~\ref{sec:harmonic}.  The finite-field specialization in
+Section~\ref{sec:finite-field-specialization} and the exchange-spectrum and
+reconstruction subsections of Section~\ref{sec:golden-operator} are independent
+consequences and may be skipped on a first reading.
+
 Hitchin defines a real invariant sextic from the characteristic polynomial
 of a quadratic moment operator.  His appendix rescales that operator while
 computing its restriction, so we separate the geometric hypersurface from
@@ -126,6 +137,9 @@ The factor \(5\) has a concrete descent meaning: the cubic \([xyz]\) and
 its unordered geometric fibre are rational, but choosing either
 icosahedral configuration---equivalently, either conjugate Clebsch chart
 through that point---requires \(\Q(\sqrt5)\).
+This fibre is the model case for the descent: its residue algebra determines
+the global quadratic twist in the proof of
+Theorem~\ref{thm:arithmetic-main}.
 
 The choice can be retained globally after normalizing the pullback to the
 Clebsch chart, but its comparison with the conference and harmonic signs is
@@ -199,39 +213,35 @@ Here \(Z_{\mathfrak m}\) and \(\sigma_3\) are different cubics on spaces of
 dimensions five and four.  The proposition compares their orientations relative
 to \(\mathfrak m\); it does not identify their polynomial domains.
 
-The operator stage is Theorem~\ref{thm:operator-shadows}.  The six outer
-translates of \(Z_{\mathfrak m}\) are simultaneously triangle cubics,
-middle-exterior diagonals, commutator Pfaffians, and cross-golden
+Theorem~\ref{thm:operator-shadows} is the operator stage on the main route.
+The six outer translates of \(Z_{\mathfrak m}\) are simultaneously triangle
+cubics, middle-exterior diagonals, commutator Pfaffians, and cross-golden
 determinants.  Their Joubert coordinates land on the Segre cubic, whose
-coordinate sections are diagonal Clebsch cubic surfaces; centered squaring
-is the classical Segre--Igusa polar map
-\cite[Sections~2.1--2.2]{HMSVOuter}.  The marked
-datum defines the operator family.  Before recognizing its four cubic
-shadows, Theorem~\ref{thm:balanced-exchange-rigidity} shows that order six is
-the unique nontrivial symmetric conference order whose balanced exchange
-spectrum is independent of the cut.  At higher orders the classical
-determinant-\((-3)\) design still fixes the mean and variance of the first
-nonconstant exchange moment.  Independently,
-Theorem~\ref{thm:aligned-faithfulness} proves a sharp four-local reconstruction
-theorem for two-graphs: from seven vertices onward their aligned four-sets
-recover them up to complement.  For conference matrices this says that from
-order ten onward the marked design recovers the signing up to switching and
-global negation, and a quadratic family of selected determinant tests already
-suffices.  This operator stage
-is the structural passage between the arithmetic source and the harmonic
-theorem below.
+coordinate sections are diagonal Clebsch cubic surfaces; centered squaring is
+the classical Segre--Igusa polar map
+\cite[Sections~2.1--2.2]{HMSVOuter}.  The marked datum defines this operator
+family.
 
-The arithmetic proof has three steps.  Hitchin's degree and branch-sextic
-calculation reduces the generic extension to
-\(K(\sqrt{cJ_0})\); the complete etale fibre at \([xyz]\), with residue
-algebra \(\Q(\sqrt5)\), determines \(c=5\); and the explicit projective
-orthogonal transformation between the two configurations yields spinor
-class \([2]\).  Independently, the harmonic proof identifies the pair-sum
-coefficients with the Petersen \((-2)\)-eigenspace and determines the
-invariant cubic from one exact spherical-moment calculation.
-Between these arguments, Proposition~\ref{thm:orientation-source} normalizes the
-chart pullback and, relative to the stated marking and lift, follows its deck
-involution through the golden conference matrix and Petersen pair-sum map.
+The proof follows the language changes in
+Figure~\ref{fig:source-shadow-return}.  First, the rational incidence model and
+its canonical classes give a quadratic field branched exactly along the
+reduced sextic; the complete etale fibre at \([xyz]\) then determines its
+square class \([5]\).  Next, Proposition~\ref{thm:orientation-source}
+normalizes the chart pullback and, relative to the stated marking and lift,
+follows deck exchange through the golden conference source and Petersen
+pair-sum map.  Finally, Theorem~\ref{thm:operator-shadows} identifies the four
+operator formulas, and Theorem~\ref{thm:harmonic-main} identifies the Petersen
+coefficient module and computes the invariant cubic by one exact
+spherical-moment evaluation.
+
+Two later subsections of Section~\ref{sec:golden-operator} use the same
+conference carrier but supply no hypothesis to this route.
+Theorem~\ref{thm:balanced-exchange-rigidity} characterizes order six by
+cut-independent balanced exchange spectrum.  Independently,
+Theorem~\ref{thm:aligned-faithfulness} proves that aligned four-sets reconstruct
+two-graphs from seven vertices onward, with seven sharp.  For conference
+matrices the latter recovers the signing from order ten onward, up to switching
+and global negation.
 
 Hitchin proves the generic degree, identifies the branch sextic, constructs
 the Clebsch chart, computes its restriction, and classifies the fibre over
@@ -248,10 +258,8 @@ equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
 comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 
-The numerical harmonic restriction is logically independent of the
-incidence cover.  The relative orientation theorem compares their signs only
-after choosing a sheet and the complete marked bridge datum.  It
-places the classical degree-six bond-order observable---the rotationally
+The harmonic theorem places the classical degree-six bond-order
+observable---the rotationally
 invariant cubic formed from degree-six harmonic coefficients---
 \cite{SNR1981,SNR1983} on the same four-space and computes its exact
 restriction.  The coefficient factors as
@@ -263,10 +271,9 @@ The first factor is the universal \((6,6,6)\) Gaunt coupling
 \(\bigl(\begin{smallmatrix}6&6&6\\0&0&0\end{smallmatrix}\bigr)^2\);
 the second is the restriction scalar of the marked Petersen embedding.
 Thus the prime \(11\) in the denominator belongs to the universal angular
-momentum normalization, not to the golden descent.  This paper
-relates the two constructions through their four-dimensional
-\(A_5\)-module and invariant polynomial \(\sigma_3\), rather than by a
-rational map between their ambient harmonic spaces.
+momentum normalization, not to the golden descent.  The relative comparison
+uses their four-dimensional \(A_5\)-modules and the invariant polynomial
+\(\sigma_3\).
 
 The decomposition of spherical harmonics under icosahedral symmetry is
 classical, including the degree-six symmetry types used here
