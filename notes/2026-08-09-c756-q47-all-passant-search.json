@@ -1,0 +1,15 @@
+{
+  "base_geometry_script": "2026-08-09-c756-aligned-node-clique.py",
+  "base_geometry_script_sha256": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb",
+  "conic": "N(x)=W^2",
+  "direction_count": 24,
+  "distinguished_line": "W=0 (passant)",
+  "internal_node_character": -1,
+  "normal_norm_character": -1,
+  "normalized_geometric_stars": 0,
+  "q": 47,
+  "quadratic_extension_nonsquare": 5,
+  "schema": "c756-q47-all-passant-v1",
+  "search_nodes": 349889,
+  "vertex_count": 552
+}

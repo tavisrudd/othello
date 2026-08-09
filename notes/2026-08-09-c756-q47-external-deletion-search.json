@@ -1,0 +1,120 @@
+{
+  "base_geometry_script": "2026-08-09-c756-aligned-split-mixed-search.py",
+  "base_geometry_script_sha256": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f",
+  "best_witness": [
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      2,
+      15
+    ],
+    [
+      3,
+      33
+    ],
+    [
+      5,
+      23
+    ],
+    [
+      7,
+      21
+    ],
+    [
+      12,
+      24
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      15,
+      2
+    ],
+    [
+      18,
+      42
+    ],
+    [
+      20,
+      15
+    ]
+  ],
+  "conic": "UV=5W^2",
+  "direction_count": 23,
+  "distinguished_line": "W=0 (secant)",
+  "e10_zero_stars": 0,
+  "e11_zero_stars": 0,
+  "e9_zero_stars": 0,
+  "full_forced_window_stars": 0,
+  "internal_node_character": -1,
+  "maximum_complete_centers": 0,
+  "maximum_span_histogram": [
+    {
+      "count": 11,
+      "maximum_span": 40
+    },
+    {
+      "count": 11,
+      "maximum_span": 41
+    }
+  ],
+  "minimum_span_histogram": [
+    {
+      "count": 22,
+      "minimum_span": 36
+    }
+  ],
+  "normalized_geometric_stars": 22,
+  "normalized_seed_offsets": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "q": 47,
+  "schema": "c756-q47-external-deletion-v1",
+  "search_nodes": 8655142,
+  "stars_with_all_twelve_complete_centers": 0,
+  "stars_with_any_complete_center": 0,
+  "type_profiles": [
+    {
+      "count": 11,
+      "passants": 9,
+      "secants": 2
+    },
+    {
+      "count": 11,
+      "passants": 6,
+      "secants": 5
+    }
+  ],
+  "vertex_count": 1081
+}

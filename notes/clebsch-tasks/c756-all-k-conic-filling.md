@@ -5,10 +5,12 @@
 **Status:** active open mathematics.  The saturated-external branch is closed
 and transferred to C894.  C756 retains the saturated-internal branch and the
 full nonsaturated branch.  The latter is not reduced to one conic point type
-in general, but the full \(q=53,k=12\) layer is now impossible.  The 230
-normalized external-deletion stars and the 44 normalized all-passant stars
-have zero complete centers; the other all-passant conic offset class has no
-geometric star.  The character-weighted
+in general, but the full \(k=12\) layers at \(q=47\) and \(q=53\) are now
+impossible.  At \(q=47\), the 22 normalized external-deletion stars all fail
+the first octic equation \(E_9=0\), while the genuine all-passant row has no
+geometric star.  At \(q=53\), the 230 normalized external-deletion stars and
+the 44 normalized all-passant stars have zero complete centers; the other
+recorded all-passant row has no geometric star.  The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
 degree-\(\delta S(A)\) norm polynomial; its trace coefficient gives the sum
@@ -230,6 +232,22 @@ anisotropic rows, all disjoint-root split rows, the one-shared-root case, and
 the aligned split case simultaneously.  Authority:
 `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 
+### \(q=47,k=12\): complete negative classification
+
+The residue-class sign must be changed from the \(q=53\) geometry:
+\(\chi(-1)=-1\), so internal split-model nodes satisfy
+\(\chi(UV-5)=-1\).  With that corrected predicate, external deletion has
+exactly 22 normalized mixed secant/passant stars.  Every leaf has
+\(E_9\ne0\), against the twelve-center interpolation window
+\(E_9=E_{10}=E_{11}=0\); independently, no leaf has one complete center.
+If there is no external point, all polar lines are passants, and the genuine
+norm-normalized all-passant row has no eleven-line geometric star.  Therefore
+\[
+ \boxed{\text{no conic-filling }12\text{-arc exists over }\mathbf F_{47}.}
+\]
+This does not cover \(k>12\).  Authority:
+notes/2026-08-09-c756-q47-k12-complete-closure.md.
+
 ### \(q=53,k=12\): complete negative classification
 
 If no point is external, all twelve polar lines are passants.  The two
@@ -262,14 +280,11 @@ notes/2026-08-09-c756-star-collision-character-identity.md.
 
 ## Ordered next actions
 
-1. Insert the mixed secant/passant discriminants and all 55 internal-node
-   character equations into the constructed \(q=47\) octic partition
-   function, then design a certified all-type search around that bounded
-   system.
-2. Build the separate \(q=49\) Hasse/divided-power carrier.
-3. Cover higher nonsaturated sizes separately; do not infer them from the
+1. Build the \(q=49\) Hasse/divided-power carrier and retain its
+   residue-class point-type signs explicitly.
+2. Cover higher nonsaturated sizes separately; do not infer them from the
    \(k=12\) layer.
-4. In parallel mathematical priority, seek the saturated-internal global
+3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
 ## Stop rules
@@ -283,6 +298,8 @@ Do not:
   two without a propagation theorem;
 - reopen the closed \(q=53,k=12\) layer without identifying a normalization
   or projection-completeness flaw in its exact bundle;
+- reopen the closed \(q=47,k=12\) layer with the unchanged \(q=53\)
+  node-character sign;
 - rerun the closed aligned state graph, generic 11-variable elimination, or
   an unchanged quartic character bound;
 - retry normalized one-variable selectors, their first two slices,
@@ -304,20 +321,22 @@ Do not:
   remaining external-specialist safeguard.
 - The \(q=53\) all-passant aligned certificate has independent formula-level
   invariant checks, not a second independent exhaustive search implementation.
-- No all-type exact search currently covers \(q=47,49\).  The \(q=53\)
-  search is complete only at \(k=12\); higher sizes remain separate.
+- Exact all-type searches cover \(k=12\) at \(q=47,53\), with independent
+  formula-level checks but not second independent exhaustive enumerators.
+  No all-type exact search covers \(q=49\), and higher sizes remain separate.
 
 ## Current assessment
 
 - Saturated-external: closed.
 - Saturated-internal: sharply constrained but open at global coherence.
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
-  exact, and its character total has the all-center trace/norm law (H'); no
-  first-open field or higher size is classified.
+  exact, and its character total has the all-center trace/norm law (H');
+  \(k=12\) is closed at \(q=47,53\), but \(q=49\) and higher sizes are open.
+- \(q=47,k=12\): closed exactly for every point type.
 - \(q=53,k=12\): closed exactly for every point type and covariance class.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
-  the distinct \(q=47\), \(q=49\), higher-size, and saturated-internal gates
-  remain; a counterexample remains live.
+  the distinct \(q=49\), higher-size, and saturated-internal gates remain; a
+  counterexample remains live.
 
 ## Durable pointers
 
@@ -327,6 +346,8 @@ Do not:
   `notes/2026-08-09-c756-all-center-resultant-norm.md`.
 - q=47 quadratic-through-octic partition carrier:
   `notes/2026-08-09-c756-q47-octic-carrier.md`.
+- Complete q=47,k=12 closure:
+  `notes/2026-08-09-c756-q47-k12-complete-closure.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
