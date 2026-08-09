@@ -1,304 +1,262 @@
 # C756 — all-\(k\) conic-filling classification
 
-**Lane**: `clebsch`
+**Lane:** `clebsch`
 
-**Status**: active open mathematics.  The saturated-exterior branch is closed and
-transferred to C894.  C756 retains the saturated-internal and nonsaturated
-branches.
+**Status:** active open mathematics.  The saturated-external branch is closed
+and transferred to C894.  C756 retains the saturated-internal branch and the
+full nonsaturated branch.  The latter is not reduced to one conic point type.
 
-> **KEEP THIS CARD CLEAN.**  This is a routing and current-context map, not a
-> work log.  Record dated findings, validation details, failed attempts, and
-> superseded plans in dated C756 reports; keep here only the current state,
-> live gates, stop rules, ownership, and authoritative pointers.
+> **LIVE CARD.**  Keep only current conclusions, gates, stop rules, ownership,
+> and authoritative pointers here.  Put evidence, failed routes, correction
+> trails, and detail in dated C756 reports.
 
 ## Goal
 
-Remove the \(k\le8\) boundary from the conic-filling classification and prove,
-or decisively fail to prove, the complete statement:
+Remove the \(k\le8\) boundary and prove, or find a counterexample to, the
+complete statement:
 
 > For every \(k\) and every prime power \(q\), the only \(k\)-arcs in
 > \(\mathrm{PG}(2,q)\) whose uncovered locus is the full point set of a
 > nonsingular conic are the projective four-frame over \(\mathbb F_5\) and
 > the Clebsch hexagon over \(\mathbb F_{11}\).
 
-Quotable form: *deep-hole loci are conics exactly twice, ever.*
+Quotable form if proved: *deep-hole loci are conics exactly twice, ever.*
+
+## Scope correction
+
+The nonsaturated \(q=53\) star/covariance route assumes the primal arc is
+all-internal.  Under polarity that gives an all-passant dual arrangement with
+internal nodes.  No current theorem excludes external or mixed-type primal
+arcs in the nonsaturated branch.  Therefore:
+
+- the all-passant moment, separator, covariance, torus, and aligned results
+  are conditional subbranch results;
+- closing their remaining covariance rows would not close \(q=53\);
+- \(q=47\) and \(q=49\), with defects eight and six at \(k=12\), precede the
+  defect-two \(q=53\) case and remain unclassified.
+
+Authority and full audit:
+`notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
 
 ## Ownership and routing
 
-- C756 is a research task, not a manuscript task.  Do not edit `papers/`
-  under this ID.
-- C756 owns its task card, dated C756 reports, and task-specific evidence.
-- C894 owns the saturated-exterior/local-Paley companion, its publication
-  safeguards, and any manuscript decision arising from that closed branch.
-- Paper IV supplies reusable passant-code definitions and the weight-eight
-  method, but neither owns nor blocks this theorem.
+- C756 is a research task; do not edit `papers/` under this ID.
+- C756 owns this card, dated C756 reports, and task-specific evidence.
+- C894 owns the saturated-exterior/local-Paley publication package.
+- Paper IV supplies reusable definitions and the weight-eight method but does
+  not own or block this theorem.
 - Optional stuck-state/referee context:
   `notes/clebsch-tasks/c756-proof-expert-dossier.md`.  Do not preload it for
   routine continuation.
 
+## Proved common core
+
+- The conic-filling condition is equivalent to hereditary chord externality
+  plus full off-conic covering.
+- Even \(q\) is impossible because the nucleus is never covered.
+- In odd characteristic, chord externality is the fixed quadratic-character
+  condition on pairwise binary-quadratic resultants.
+- The covering LP has degree cap \(\lfloor k/2\rfloor\).
+- A spare external line gives either
+  \(\binom{k-1}{2}\ge q\), or saturation with
+  \(k=(q+1)/2\) and all points external, or
+  \(k=(q+3)/2\) and all points internal.
+- In the nonsaturated case the direction quotient improves the bound to
+  \(\binom{k-1}{2}\ge q+2\); defects zero and one are impossible.
+- The classification is exact for every \(k\) and odd prime power \(q\le43\):
+  only the \(q=5\) four-frame and \(q=11\) hexagon occur.
+
 ## Current branch map
 
-### Saturated-external — closed and transferred
+### Saturated-external — closed, publication work in C894
 
-An exterior set of \((q+1)/2\) exterior conic points that is also an arc exists
-only for \(q\in\{3,7,11\}\), in one conic-stabilizer orbit per field; covering
-selects the \(q=11\) Clebsch hexagon.  The all-field proof is human and
-independent of finite classification.  Its local-Paley engine and publication
-package are routed to C894; do not reopen them here.
+An exterior arc of \((q+1)/2\) external conic points exists only for
+\(q\in\{3,7,11\}\), in one conic-stabilizer orbit per field; covering selects
+the \(q=11\) hexagon.  The all-field proof and cold read are authoritative.
+Do not reopen this branch in C756.
 
-Authority:
+Authorities:
 `notes/2026-08-08-c756-saturated-exterior-consolidated-proof.md` and
 `notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`.
 
-### Saturated-internal — primary open branch
+### Saturated-internal — open global-coherence gate
 
-Put \(q=2m-1\).  A hypothetical saturated-internal example is an exterior arc
-\(Y\) of size \(m+1\).  Under conic polarity its points become \(m+1\) passants
-in dual-arc position, and their pairwise intersections form an internal star
-configuration \(\mathcal B(Y)\).  The covering condition is exactly
+Put \(q=2m-1\).  Polarity turns a hypothetical example into \(m+1\) passants
+in dual-arc position whose pairwise intersections form an internal star
+\(\mathcal B(Y)\).  Covering is exactly
 
 \[
- Y\text{ covers every off-conic point}
- \quad\Longleftrightarrow\quad
  \mathcal B(Y)\text{ meets every secant and every passant}. \tag{A}
 \]
 
-Tangents automatically avoid \(\mathcal B(Y)\).  Thus the live geometric gate
-is to prove that every such star for \(q>5\) misses a non-tangent line.
+Tangents automatically avoid the star.  The live geometric gate is:
 
-The exact line-profile identity is
+> prove that every such coherent star for \(q>5\) misses a non-tangent line.
+
+Exact necessary structure already available:
 
 \[
  \sum_{j\ge1}(j-1)(j-2)a_j
- =\frac{m(m-2)(m-3)(m-5)}4. \tag{B}
+ =\frac{m(m-2)(m-3)(m-5)}4, \tag{B}
 \]
 
-It excludes \(q=7\).  The certified diagonal allocation excludes the rigid
-\(q=9\) profile.  If \(r(A)\) counts internal diagonal points of a four-point
-quadrangle and
-
-\[
- T_4(Y)=\sum_{A\in\binom Y4}(3-2r(A)),
-\]
-
-full-plane incidence gives the necessary global bias
+which excludes \(q=7\), plus the certified diagonal allocation excluding the
+rigid \(q=9\) profile.  Covering also forces
 
 \[
  T_4(Y)\ge
  \frac{m(m-2)(m-1)(m+1)}{8(2m-1)}>0. \tag{C}
 \]
 
-Local diagonal signs alone cannot contradict (C); all diagonal types occur
-and positive ambient coherent bias appears by \(q=17\).  Any contradiction
-must use global compatibility.
-
-The signed matching-frame form is the other live interface.  For the
-outside-by-support block \(R\) of the switched elliptic-fusion matrix,
+For the outside-by-support signed matching block,
 
 \[
  R\mathbf1=0,
- \qquad
- R^{\mathsf T}R=(m-2)((m+1)I-J). \tag{D}
+ \qquad R^{\mathsf T}R=(m-2)((m+1)I-J), \tag{D}
 \]
 
-Every row is a signed chord-matching vector
+and each row is a signed chord-matching vector.  These are necessary global
+interfaces, not contradictions.  Local diagonal signs, Smith torsion, and the
+abstract frame alone do not close the branch.
+
+### Nonsaturated — open before point-type specialization
+
+For a deleted arc point \(P\), a spare external line gives
 
 \[
- R_X=\sum_{(i,j)\in M_X}\pm(e_i-e_j).
+ D_P(T)=(T^q-T)E_P(T),\qquad
+ \deg E_P=\delta:=\binom{k-1}{2}-q. \tag{E}
 \]
 
-Internal-point covering says exactly that every row is nonzero.  At \(m=3\)
-these are the six roots of \(A_3\), explaining the four-frame endpoint.  The
-unsigned star indicator also satisfies
+The clean uniform target remains a masked Rédei theorem forcing a missing
+direction for every \(\delta\ge2\).  No such carrier is proved.
+
+The immediate gate is point-type stratification.  For \(q=47,49,53\), record:
+
+1. whether the deleted point is internal or external;
+2. the number and placement of external points in the remaining arc;
+3. the secant/passant types of the polar lines and the types of their nodes;
+4. the spare-center count and direction masks;
+5. which moment, separator, and covariance identities survive.
+
+There is already one exact aggregate handle.  If \(e\) of the \(k\) arc
+points are external, then the number of ordered deleted-point/spare-passant
+pairs, each carrying a degree-\(\delta\) quotient (E), is
 
 \[
- \mathbf1_{\mathcal B}=\tfrac12A\mathbf1_Y, \tag{E}
+ k\left(\frac{q+1}{2}-(k-1)\right)-e. \tag{F}
 \]
 
-where \(A\) is internal-point/passant-line incidence.
+At \(k=12\), an external versus internal deleted point supplies respectively
+\(12/13\), \(13/14\), and \(15/16\) spare-line quotients for
+\(q=47,49,53\).  Aggregate these equations over all \((P,\ell)\) before
+normalizing one center.
 
-Equivalent diagnostic interfaces remain available: equality in the binary
-passant code at weight \((q+3)/2\), minimum-support signed elliptic-fusion
-eigenvectors, the signed tangent-pencil equation \(Zx=\pm Ze_R\), and the
-Paley crown formulation.  They are not separate open branches.
+Acceptance is either a proof that nonsaturation forces the all-internal model,
+or a complete mixed-type equation/search ledger.  A bounded counterexample
+search over the surviving type profiles is the next safeguard.
 
-### Nonsaturated — independent open branch
+### Conditional subbranch: \(q=53\), all-internal/all-passant
 
-The defect-zero and defect-one cases are closed.  The first unremoved
-defect-two boundary is \((q,k)=(53,12)\).  The clean acceptance target is the
-masked Rédei statement
+Only in this subbranch, 55 internal nodes of 11 dual passants must be
+direction-complete from all 16 internal nonnodes on a twelfth passant.  The
+sixteen-center condition forces \(e_3,\ldots,e_{15}=0\); degree-nine node
+separators exclude covariance ranks zero and one; nonsingular covariance
+gives the rank-two critical system \(\nabla\mathcal Z=0\) with nonzero
+off-diagonal separator Hessian.
 
-\[
- h\ge1:
-\]
+Elliptic overlap leaves:
 
-after deleting an arc point, a conic-external set cannot determine every
-direction on a spare external line.  Proving this uniformly is intended to
-feed the existing defect squeeze for every \(\delta\ge2\).
+- aligned anisotropic covariance;
+- nonaligned anisotropic traces \(-10,-14\);
+- seven split-covariance trace/zero rows.
 
-The direct Segre comparison, global slope moments, unweighted subresultants,
-dual-pencil weighted norm, selected missing-set kernel curves, Frobenius
-fixed-locus interpolation, and the pair-coupled diagonal expansion do not give
-a bounded-degree carrier.  At defect two the near-transversal must retain its
-star realization: 55 internal nodes of 11 dual passants must be
-direction-complete from all 16 internal nonnodes on a twelfth passant.
-Arbitrary internal near-transversals exist directly, so the live structural
-route is a star-specific direction theorem.  Coupling all 16 required centers
-already forces the first bounded identity: for the 55-node projection
-polynomial, \(e_3,\ldots,e_{15}\) vanish identically.  After centering, the
-projection moments through degree 15 equal a formal antipodal pair.  The
-degree-10 star-ideal generators and degree-9 node separators lie inside this
-window.  The separators exclude covariance ranks zero and one; only the
-nonsingular covariance case remains.  Centering also makes every defect-two
-residual pair antipodal.  Triple fibres pass through the centroid and are
-zeros of the covariance quadratic, hence there are at most two per arc point:
-\(D_3(P)\le2\) and \(32\le D_2(P)\le34\).
+The aligned family is closed exactly.  Split offset descent has no admissible
+eleven-state internal-node clique.  Trace-zero descent has exactly 44
+direction-zero-normalized candidates in four dihedral orbits; all have open
+separator Hessian and fail all eleven critical equations after the Laurent
+center shift is recovered from the star centroid.
 
-Over the quadratic closure, nonsingular covariance has a torus-balanced
-normal form: \(\Lambda(U^aV^b)=0\) for \(a\ne b\) and
-\(\Lambda((UV)^r)=2/\binom{2r}{r}\).  The eleven generator contractions are
-the critical equations of one rank-two weighted constant-term polynomial
-\(\mathcal Z\); every off-diagonal Hessian entry is nonzero by the degree-9
-separators.  Split versus anisotropic covariance is now a descent question.
-
-Comparing covariance with the anisotropic conic restriction on the
-distinguished passant gives an elliptic overlap squeeze.  Apart from the
-aligned branch \(K\sim C\), nonaligned anisotropic covariance has trace
-\(-10\) or \(-14\) and at least 10 of 11 arrangement covariance values are
-nonsquares; split covariance has one of seven trace/zero rows and at least 9
-of 11 are nonsquares.  The rank-two Gram identity
-\(B_{ii}B_{jj}-B_{ij}^2=\det(M/2)(a_i\wedge a_j)^2\), for
-\(B_{ij}=a_i^{\mathsf T}Ma_j/2\), connects this diagonal skew to the
-off-diagonal entries of \(\mathcal Z\).
-
-In the aligned branch, normalize line normals as
-\(\alpha_i=\alpha_0u_i\) with \(N(u_i)=1\) and common nonsquare
-\(N(\alpha_i)=\nu\).  Then
-\(B_{ij}=\nu(u_i/u_j+u_j/u_i)/2\).  The conic is an offset norm circle
-\(N(x-\xi)=d\); passant offsets satisfy
-\(s_i^2-4d\nu\in(\mathbf F_{53}^*)^2\), and every internal-node character
-has the explicit numerator recorded in the aligned common-torus report.
-The exact surviving freedom is the displacement \(\xi\) between the star
-centroid and conic center.  It eliminates exactly as the rank-two Laurent
-code \(s_i-c_i=\eta u_i+\eta^qu_i^{-1}\); the conic scale eliminates through
-the common values \(s_i^2-p_i^2\).  After the passant parametrization, every
-node value factors as
-\[
- Q(x_{ij})=-d\frac{
- (z-a)(z-a^{-1})(z-b)(z-b^{-1})}{(z^2-1)^2},
- \quad z=u_i/u_j, a=v_iv_j, b=v_i/v_j.
-\]
-Here \(a,b\in\mathbf F_{53}^*\) in both offset descent cases, so each of the
-55 internal-node tests is a two-factor base-field character condition.
-
-The aligned branch is now closed.  After quotienting the common norm torus,
-the split-offset descent has no eleven-state internal-node character clique
-without a triple concurrency.  The trace-zero descent has exactly 44
-direction-zero-normalized candidates in four dihedral orbits; centering their
-55 star nodes imposes the Laurent displacement, all 44 have open separator
-Hessian, and every one fails every component of \(\nabla\mathcal Z=0\).
-Authority: `notes/2026-08-09-c756-aligned-critical-closure.md` and its exact
+Authority:
+`notes/2026-08-09-c756-aligned-critical-closure.md` and its committed exact
 script/certificate bundle.
 
-## What is already uniform
+The nonaligned and split rows remain valid conditional work, but they are not
+the main C756 frontier until the point-type gate is closed.
 
-- Even \(q\) is impossible because the nucleus is never covered.
-- The condition splits into hereditary chord externality and full off-conic
-  covering.
-- The covering LP has the correct degree cap \(\lfloor k/2\rfloor\).
-- The spare-external-line dichotomy forces either
-  \(\binom{k-1}{2}\ge q\), or saturation with
-  \(k=(q+1)/2\) and all points external, or
-  \(k=(q+3)/2\) and all points internal.
-- The full classification is certified for every odd prime power \(q\le43\):
-  only the \(q=5\) four-frame and \(q=11\) Clebsch hexagon occur.
+## Ordered next actions
 
-## Next action
-
-Attack the two remaining covariance families from the elliptic overlap
-squeeze: nonaligned anisotropic trace \(-10\) or \(-14\), and the seven
-split-covariance trace/zero rows.  Couple their forced skew diagonal
-characters to the rank-two Gram form of \(\nabla\mathcal Z=0\) and the
-nonzero separator Hessian.  Do not reopen the closed aligned state graph, run
-generic 11-variable elimination, rerun a quartic character bound, or cross
-the degree-16 mask boundary.
+1. Build the nonsaturated point-type ledger at \(q=47,49,53\), beginning
+   with the deleted point type and mixed polar-line arrangement.
+2. Derive the surviving direction, moment, separator, and covariance
+   identities separately for each type profile.
+3. Run a bounded all-type counterexample audit on the first open fields if the
+   ledger makes a certified search feasible.
+4. Resume the \(q=53\) nonaligned/split Gram-character collision only with its
+   conditional scope explicit.
+5. In parallel mathematical priority, seek the saturated-internal global
+   dual-star nonblocking theorem.
 
 ## Stop rules
 
-Do not retry these without a genuinely new bounded identity:
+Do not:
 
-- normalized one-variable pencil selectors or their first two slices;
-- field-by-field theta/PSD fitting or larger orbital algebras;
-- raw star cardinality, parity, defect averaging, or more untyped moments;
-- the unsigned two-species matching Gram or higher contractions of its
-  secant/passant blocks;
-- Frobenius fixed-locus interpolation or the quadratic pencil twist without
-  an additional pair-parameter functional equation;
-- pair-coupled diagonal inclusion--exclusion or higher concurrent-matching
-  moments without a new global relation among the masks;
-- arbitrary all-internal near-transversal classification, or the elementary
-  pair budget over its directions, without the star realization;
-- local diagonal-sign classification;
-- signed \(p\)-adic/Smith torsion obstruction;
-- ordinary monodromy, unsigned or pair-only resultants;
-- ordinary rank, cofactor variants, row-transition interpolation, or
-  unrestricted seed classification;
-- direct Segre discriminants, low-degree subresultants, or naive global
-  divisor interpolation for the nonsaturated branch.
+- assume a nonsaturated arc is all-internal or its polar arrangement
+  all-passant;
+- call \(q=53\) the first open field, or infer general \(\delta\) from defect
+  two without a propagation theorem;
+- count progress in the conditional all-passant route as closure of the full
+  nonsaturated branch;
+- rerun the closed aligned state graph, generic 11-variable elimination, or
+  an unchanged quartic character bound;
+- retry normalized one-variable selectors, their first two slices,
+  unweighted subresultants, local diagonal-sign classification, Smith torsion,
+  raw cardinality/parity/defect averaging, or abstract matching-frame
+  contractions without a new global identity;
+- classify arbitrary near transversals without retaining star realization;
+- claim that counting in general cannot close the theorem merely because
+  untyped low moments stalled;
+- cross the degree-16 mask boundary blindly.  A targeted degree-16
+  cross-center identity is allowed if its lost-information role is explicit;
+- edit a manuscript under C756.
+
+## Evidence boundaries
+
+- The \(q\le43\) exhaustive classification has internal cross-checks; a wholly
+  independent uncovered-set replay extends only through \(q\le19\).
+- The saturated-external human proof has a successful cold read; C894 owns its
+  remaining external-specialist safeguard.
+- The \(q=53\) aligned certificate has independent formula-level invariant
+  checks, not a second independent exhaustive search implementation.
+- No all-type exact search currently covers \(q=47,49,53\).
 
 ## Current assessment
 
-- Complete saturated classification: **60--70%**.
-- Full all-\(k\) classification: **20--25%**, because masked Rédei
-  \(h\ge1\) remains open.
-- Publishable specialist partial package: **85--90%**, now owned by C894 for
-  the closed saturated-exterior component.
+- Saturated-external: closed.
+- Saturated-internal: sharply constrained but open at global coherence.
+- Nonsaturated, arbitrary type: early; the previous 40% estimate counted a
+  conditional all-internal specialization and is withdrawn.
+- \(q=53\), all-internal, aligned: closed exactly.
+- Near-term full all-\(k\) proof odds: below the former 20--25% estimate until
+  the point-type audit is complete; a counterexample remains live.
 
-Mathematical closure: saturated-external 100%; saturated-internal 60%;
-nonsaturated 40%; full assembly 60%.
+## Durable pointers
 
-## Durable report index
+- Current audit:
+  `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
+- Universal and bounded foundation:
+  `notes/2026-08-01-c756-all-k-conic-filling.md`.
+- Saturated-internal foundation:
+  `notes/2026-08-01-c756-saturated-internal-branch.md`.
+- Nonsaturated direction quotient:
+  `notes/2026-08-01-c756-nonsaturated-direction-reduction.md`.
+- All-internal premise of the defect-two star model:
+  `notes/2026-08-09-c756-defect-two-star-near-transversal.md`.
+- Latest conditional chain:
+  `notes/2026-08-09-c756-tt-star-moment-collapse.md`,
+  `notes/2026-08-09-c756-ej-antipodal-fibres.md`,
+  `notes/2026-08-09-c756-ej2-torus-contraction.md`,
+  `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`, and
+  `notes/2026-08-09-c756-aligned-critical-closure.md`.
 
-Latest saturated-internal round:
-
-- `notes/2026-08-08-c756-normalized-pencil-selector.md`;
-- `notes/2026-08-08-c756-self-dual-signed-incidence.md`;
-- `notes/2026-08-08-c756-covering-dual-blocking.md`;
-- `notes/2026-08-09-c756-star-discriminant-profile.md`;
-- `notes/2026-08-09-c756-diagonal-type-allocation.md`;
-- `notes/2026-08-09-c756-diagonal-character-ustatistic.md`;
-- `notes/2026-08-09-c756-projective-incidence-cap.md`;
-- `notes/2026-08-09-c756-local-diagonal-sign-stop.md`;
-- `notes/2026-08-09-c756-outside-matching-tight-frame.md`;
-- `notes/2026-08-09-c756-two-species-matching-gram.md`;
-- `notes/2026-08-09-c756-frobenius-fixed-locus-masked-remainder.md`;
-- `notes/2026-08-09-c756-pair-coupled-diagonal-stop.md`;
-- `notes/2026-08-09-c756-defect-two-star-near-transversal.md`;
-- `notes/2026-08-09-c756-tt-star-moment-collapse.md`;
-- `notes/2026-08-09-c756-ej-antipodal-fibres.md`;
-- `notes/2026-08-09-c756-ej2-torus-contraction.md`;
-- `notes/2026-08-09-c756-ej3-elliptic-overlap-squeeze.md`;
-- `notes/2026-08-09-c756-aligned-common-torus.md`;
-- `notes/2026-08-09-c756-aligned-node-resultant.md`;
-- `notes/2026-08-09-c756-aligned-critical-closure.md`;
-- `notes/2026-08-09-c756-star-blocking-matching-frame-literature.md`.
-
-Foundational branch authorities:
-
-- `notes/2026-08-01-c756-all-k-conic-filling.md`;
-- `notes/2026-08-01-c756-saturated-internal-branch.md`;
-- `notes/2026-08-01-c756-nonsaturated-direction-reduction.md`;
-- `notes/2026-08-01-c756-masked-rs-collision-audit.md`;
-- `notes/2026-08-08-c756-passant-code-equality.md`;
-- `notes/2026-08-08-c756-signed-resultant-monodromy-pivot.md`;
-- `notes/2026-08-08-c756-saturated-exterior-consolidated-proof.md`;
-- `notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`.
-
-Historical method details live in the dated reports, not in this card.
-
-## Current boundary
-
-- Open problem statement:
-  `papers/clebsch-rigidity/clebsch_rigidity.tex:1485-1489`.
-- The \(k\ge8\) / \(k\ge9\) obstruction boundary:
-  `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex:1646-1647`.
+Historical method details remain in dated C756 reports, not this card.
