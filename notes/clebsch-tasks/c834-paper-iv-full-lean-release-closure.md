@@ -219,6 +219,25 @@ six singleton fibres into the canonical shard-zero halves.  Prefer that theorem 
 than six further 55-second leaves; otherwise the already measured leaf family remains the bounded
 fallback.  The transitivity computation is diagnostic only until Lean checks the transport.
 
+A second structural reduction makes duplicated leaves cheap enough that transport need not block
+progress.  Exact balanced membership trees were solving a stronger problem than required: the proof
+only needs a Boolean function that accepts every left-half syndrome and rejects every right target,
+and Lean checks both assertions over the complete domains.  Greedy decision trees on individual
+syndrome bits compress the seven five-one classifiers from 18,181 lines / 784,996 bytes to 155 lines /
+3,485 bytes.  They have only 13--23 nodes and depth six.  The same diagnostic construction gives
+73--91 nodes at depth nine for sampled two-triple shards, 1,257 nodes at depth fifteen for a complete
+one-triple/two-secant shard (4,320 left syndromes against 128,520 right targets), and 2,699 nodes at
+depth seventeen separating the fourth profile's 336 hit syndromes from its 770,688 misses.  The hit
+case can then use a separate 336-entry witness lookup.
+
+The generator now independently refuses any five-one shard with a left/right syndrome collision,
+and the compact seven-leaf Lean source is prepared.  Its guarded build is not yet claimed: the shared
+lane remained continuously occupied by the foreign q=11 row sequence through at least `G17`, so the
+waiter was stopped without bypassing or killing that build.  Resume by building
+`PassantCodeQ13.MinimumWords.ExhaustionFiveOne`; if green, refresh the two evidence-manifest hashes,
+replace the shard-zero-only README language, run the rejecting verifier, and commit the seven-shard
+packet before extending the same bit-separator generator to the other profiles.
+
 ## Superseded resume note (2026-08-07, latest before the full referee review)
 
 Stage 5 items 11 and 12 are closed, leaving item 13 as the only native-evaluation leaf in the
