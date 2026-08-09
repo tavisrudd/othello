@@ -1,0 +1,114 @@
+{
+  "cases": [
+    {
+      "expected_rank": 6,
+      "nonzero_smith_invariant_counts": {
+        "1": 6
+      },
+      "q": 5,
+      "rank": 6,
+      "self_dual_sign": 1,
+      "self_dual_type": "symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 10
+    },
+    {
+      "expected_rank": 12,
+      "nonzero_smith_invariant_counts": {
+        "1": 12
+      },
+      "q": 7,
+      "rank": 12,
+      "self_dual_sign": 1,
+      "self_dual_type": "symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 21
+    },
+    {
+      "expected_rank": 30,
+      "nonzero_smith_invariant_counts": {
+        "1": 30
+      },
+      "q": 11,
+      "rank": 30,
+      "self_dual_sign": -1,
+      "self_dual_type": "skew-symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 55
+    },
+    {
+      "expected_rank": 42,
+      "nonzero_smith_invariant_counts": {
+        "1": 42
+      },
+      "q": 13,
+      "rank": 42,
+      "self_dual_sign": 1,
+      "self_dual_type": "symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 78
+    },
+    {
+      "expected_rank": 72,
+      "nonzero_smith_invariant_counts": {
+        "1": 72
+      },
+      "q": 17,
+      "rank": 72,
+      "self_dual_sign": -1,
+      "self_dual_type": "skew-symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 136
+    },
+    {
+      "expected_rank": 90,
+      "nonzero_smith_invariant_counts": {
+        "1": 90
+      },
+      "q": 19,
+      "rank": 90,
+      "self_dual_sign": -1,
+      "self_dual_type": "skew-symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 171
+    },
+    {
+      "expected_rank": 132,
+      "nonzero_smith_invariant_counts": {
+        "1": 132
+      },
+      "q": 23,
+      "rank": 132,
+      "self_dual_sign": 1,
+      "self_dual_type": "symmetric",
+      "square_identity_failures": 0,
+      "symmetry_failures": 0,
+      "torsion_order_of_cokernel_on_image": 1,
+      "vertices": 253
+    }
+  ],
+  "claimed_range": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23
+  ],
+  "dependency": "SageMath 10.7",
+  "schema": "c756-self-dual-signed-incidence-v1",
+  "source": "2026-08-08-c756-signed-elliptic-fusion.py"
+}
