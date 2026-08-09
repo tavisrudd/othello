@@ -233,6 +233,26 @@ class AreaExportTests(unittest.TestCase):
         git(self.base, "commit", "--quiet", "-m", "adopted")
         self.assertNotIn("README.md", self.build().files)
 
+    def test_public_readme_and_flake_templates_replace_base_files(self) -> None:
+        write(
+            self.source / "lean" / "public" / "README.md",
+            "# Public library\n\n- boundary bullet anchor\n",
+        )
+        write(self.source / "lean" / "public" / "flake.nix", "{ outputs = _: {}; }\n")
+        git(self.source, "add", "lean/public/README.md", "lean/public/flake.nix")
+        git(self.source, "commit", "--quiet", "-m", "public templates")
+        self.config.write_text(
+            CONFIG
+            + 'readme_template = "lean/public/README.md"\n'
+            + 'flake_template = "lean/public/flake.nix"\n'
+        )
+
+        files = self.build().files
+
+        self.assertTrue(files["README.md"].startswith(b"# Public library\n"))
+        self.assertIn(b"triangle_identities.json", files["README.md"])
+        self.assertEqual(files["flake.nix"], b"{ outputs = _: {}; }\n")
+
     def test_unplanned_change_is_refused(self) -> None:
         plan = self.build()
         candidate = self.work / "candidate"
