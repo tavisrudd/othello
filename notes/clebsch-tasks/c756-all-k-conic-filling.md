@@ -215,6 +215,30 @@ knowledge” unless a human MathSciNet/Scopus check closes the remaining index
 gap.  Do not edit an existing numbered manuscript or reopen theta fitting under
 C756.
 
+**Saturated-exterior consolidation outcome (2026-08-08):** the bounded
+geometry and citation gates pass.  The complete all-field proof is now in
+`notes/2026-08-08-c756-saturated-exterior-consolidated-proof.md`.  It states
+the extremal exterior-arc theorem first, proves the perfect-matching and
+complete-mapping reductions, pins the Segre tangent-function scales, invokes
+the audited local-Paley lemma, excludes nonidentity Frobenius by the coset
+Weil bound, closes the scalar branch by Hasse, and checks the \(q=3,7,11\)
+endpoints and inversion orbits inline.  The covering inequality explicitly
+removes \(q=3,7\), leaving the Clebsch hexagon at \(q=11\).  Ball--Lavrauw
+Lemma 11, Evans--Hollmann--Krattenthaler--Xiang Theorem 3.4 and (3.2),
+Lidl--Niederreiter Theorem 5.41, and Hasse's original theorem are installed
+at the exact steps used.  The proof is independent of finite classification;
+the matching certificate replay remains an external check.
+
+**Next-session entry (superseding the one above):** give the consolidated
+proof a cold specialist/referee read, with special attention to the Segre
+normalization and primitive-Jacobi valuation, and seek the remaining human
+MathSciNet/Scopus novelty check.  If that read finds no defect, allocate the
+separate unnumbered companion-paper task and freeze its claim inventory:
+local-Paley rigidity as the qualified candidate novelty, extremal
+saturated-exterior arcs as the geometric headline, and the all-\(k\) bounds
+plus saturated-internal work as explicitly partial context.  Do not draft or
+edit a numbered manuscript under C756.
+
 The twenty-sixth pass closed gate 1's containment half and advanced gate 2 without
 closing it.  **Baer-subline containment is now settled unconditionally for every odd
 prime power** (Theorem 6): a coherent system lies in no Baer subline missing \(\infty\),

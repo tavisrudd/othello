@@ -20,13 +20,13 @@ conic-filling theorem is a corollary of a broader extremal exterior-arc
 classification.
 
 The proof is all-field and human-readable; finite computation is not used to
-deduce the theorem.  Its logic is nevertheless spread across four C756
-reports, and the load-bearing extension-field step uses a new primitive-Jacobi
-collision lemma.  A subsequent line audit repaired its suppressed valuation
-normalization and found no mathematical gap.  The result is suitable as the
-headline of the scoped specialist companion only after the geometric proof is
-consolidated into one text and the now-identified standard character-sum
-citations are installed at version-of-record quality.
+deduce the theorem.  Its former four-report chain is now consolidated in
+`2026-08-08-c756-saturated-exterior-consolidated-proof.md`.  The load-bearing
+primitive-Jacobi line audit repaired its suppressed valuation normalization
+and found no mathematical gap, and the exact Segre, Stickelberger, Weil, and
+Hasse citations are installed at their points of use.  The mathematical and
+citation gates therefore pass; a cold specialist read and the remaining human
+MathSciNet/Scopus novelty check are the pre-allocation safeguards.
 
 One fresh extension-field check was replayed at \(q=27\).  It exactly
 reproduced the committed all-\(k\) certificate row: \(k_{\min}=9\),
@@ -35,6 +35,11 @@ the theorem's first unsearched-looking extension-field regime, not a substitute
 for the proof.
 
 ## 1. Claim-to-proof map
+
+The consolidated proof is
+`2026-08-08-c756-saturated-exterior-consolidated-proof.md`, §§1--7.  The
+locations below retain the discovery provenance of each step for forensic
+review; they are no longer the reader-facing dependency chain.
 
 | step | exact claim | proof location | trust and publication action |
 |---|---|---|---|
@@ -280,28 +285,18 @@ all-\(q\) theorem as proved by Steps A–H, not “computer verified.”
 
 ## 4. Publication decision and next action
 
-The proof-trust gate is **provisionally passed**: no logical hole was found,
-and the extension-field replay agrees.  The package is not manuscript-ready
-because the proof is fragmented and its standard inputs have not received a
-version-of-record citation audit.
+The mathematical proof-trust and citation gates are **passed**: no logical
+hole was found, the extension-field replay agrees, the primitive-Jacobi seam
+was repaired and audited, and Steps A0--H plus the endpoint orbit check now
+appear in one theorem-proof document with exact citations.
 
-The highest-value next pass is therefore bounded and nonexploratory:
-
-1. extract the local Paley automorphism theorem as the central three-lemma
-   engine, beginning with the flat Sidon lemma, and run a focused exact-statement
-   predecessor audit covering local automorphisms, normal Cayley structure, and
-   directed regular representations;
-2. consolidate Steps A0–H and the endpoint orbit check into a single
-   theorem-proof document using that engine;
-3. use the completed primitive-Jacobi line audit and repaired
-   extension-field valuation conventions;
-4. install the identified primary citations for Segre, Stickelberger, Weil,
-   and Hasse;
-5. only if those checks pass, allocate a separate unnumbered companion-paper
-   task and begin manuscript work.
-
-Do not return to theta fitting or to a new finite-field sweep during this gate.
-Neither attacks the remaining proof-trust risk.
+The highest-value next pass is a cold specialist/referee read of that
+consolidated document, especially the Segre normalization and the
+Stickelberger half-carry derivation.  In parallel, a human MathSciNet/Scopus
+check should test the qualified local-Paley novelty claim.  If no defect or
+predecessor appears, allocate a separate unnumbered companion-paper task with
+a frozen claim inventory.  Do not draft under C756, return to theta fitting,
+or run another finite-field sweep.
 
 ## 5. EJ + TT closeout
 
@@ -349,7 +344,7 @@ not yet a mathematical one.
 | Does the saturated-exterior theorem depend on finite enumeration? | settled negative | Steps A–H are human proofs; certificates are corroboration only |
 | Does extension-field Frobenius create an unhandled spectral branch? | settled | the audited primitive collision class is exactly Frobenius; the coset Weil step removes every \(j>0\) |
 | Is simple spectrum required? | settled negative | one primitive block suffices |
-| Is the proof presently referee-readable end to end? | no | it is distributed across four reports with superseded conditional language |
+| Is the proof presently referee-readable end to end? | yes, pending a cold read | the consolidated theorem-proof removes the four-report dependency chase and superseded conditional language |
 | Which new lemma carried the most risk? | settled after repair and line audit | primitive Jacobi collision / half-carry digit argument; a specialist cold read remains desirable, but the audit found no mathematical gap |
 | Is another computational sweep the next move? | settled negative | consolidate and independently audit the human proof first |
 | May manuscript editing begin under C756? | no | pass the citation and consolidated-proof audit, then allocate a separate unnumbered task |
