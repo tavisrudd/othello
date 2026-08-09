@@ -21,19 +21,34 @@ pass.  The fresh q11 aggregate and release-output refresh remain pending because
 a foreign Lean build survived two separate five-minute guarded waits.  Report:
 [`../2026-08-08-c855-paper-i-trust-boundary-hardening.md`](../2026-08-08-c855-paper-i-trust-boundary-hardening.md).
 
-Unconditional commutant draft (2026-08-08): the proposition-valued
+Trust-boundary closure addendum (2026-08-09): the fresh clean 115-module q11
+aggregate passed at package commit `f27a4de69cdcf32e2d3242291621554378e6bfe3`;
+the guarded transcript is run `20260809-035240-e3c87388`.  The authority's
+immutable release replay passes all 26 checks over 115 package and 93 shared
+modules.  The release adapter now follows the queue's full quiet transcript
+only inside the guarded run directory, with direct-transcript, in-run pointer,
+and path-escape tests.  Authority sealing ends at commit `9267dfc5`.
+
+Unconditional commutant closure (2026-08-09): the proposition-valued
 `ClassicalOddA5ThreePlusThreeSplitting` interface is removed in the task-owned
-base-library worktree.  Two explicit signed action generators produce a
-rank-34 rational system on the 36 operator entries, and the drafted Lean proof
-uses their kernel-evaluated matrices plus symbolic `linarith` to identify the
-two-dimensional commutant with `Q[I,B]`; the integral theorem is correspondingly
-unconditional.  The independent exact checker
+base library at `5d9f53f11770bae8af71a577a65b1e3d927d5c92`.  Two explicit
+signed action generators produce a rank-34 rational system on the 36 operator
+entries, and exact symbolic certificates identify the two-dimensional
+commutant with `Q[I,B]`; the integral theorem is correspondingly unconditional.
+The independent exact checker
 `notes/2026-08-08-c855-odd-commutant-check.py` verifies all sixty action
 matrices commute with `B`, the two displayed generator tables, rank 34, and
-commutant dimension two.  The three Lean edits remain intentionally
-uncommitted and no paper/trust surface is updated until the canonical guarded
-build can elaborate them; another two-minute wait was refused by the same
-foreign Lean owner.
+commutant dimension two.  Guarded module run `20260809-021335-f4dbe369` and gate
+run `20260809-023011-d26730cd` pass; the three terminal axiom sets are exactly
+`[propext, Classical.choice, Quot.sound]`.  The q11 package and paper/trust
+surface are repinned and resealed as recorded above.
+
+Further human-proof reductions are prioritized in
+[`../2026-08-09-c855-human-proof-structural-reductions.md`](../2026-08-09-c855-human-proof-structural-reductions.md).
+The main opportunities are explicit two-generator orbit proofs, an
+exhibit-plus-upper-bound automorphism theorem, a character-kernel chirality
+bridge, a generator-fixed invariant-cubic system, and orbit-certificate
+quotients for the remaining finite classifications.
 
 Human-proof preparation for section 2 (2026-08-03): the q13 minimum-word scheme
 checkpoint [`../2026-08-03-c855-q13-scheme-proofs.md`](../2026-08-03-c855-q13-scheme-proofs.md)
@@ -204,9 +219,11 @@ package: every file in the published transitive closure is in scope.
   the Paper I closure, `lean/trust/areas/relconic.toml` permits no axiom, and the
   rigidity gate's build log carries no Dye axiom at any of its 201 axiom reports.
   Report: `notes/2026-08-04-c855-order-eleven-witness-identification.md`.
-- [ ] Prove `ClassicalOddA5ThreePlusThreeSplitting` in Lean (possibly from
-  already kernel-checked library results); a citation or declared unproved
-  interface is not sufficient for release.
+- [x] Replace `ClassicalOddA5ThreePlusThreeSplitting` by an unconditional Lean
+  proof.  Two explicit action generators cut the rational operator space down
+  to `Q[I,B]`; the integral theorem follows without a proposition-valued
+  interface.  The three gate terminals expose only the accepted foundational
+  axioms.
 - [ ] Formalize every correspondence assertion connecting the q11 spine,
   orientation packets, finite-field leaves, code reconstruction, and companion
   classifications. No equality of “same mechanism” may live only in prose.
