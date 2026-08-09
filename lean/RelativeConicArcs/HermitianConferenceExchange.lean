@@ -778,6 +778,18 @@ theorem exists_booleanControl_ge {ι : Type*} [Fintype ι] [DecidableEq ι]
   rcases aux Finset.univ x hx with ⟨y, hy, _, hbool, hfy⟩
   exact ⟨y, hy, fun i => hbool i (Finset.mem_univ i), hfy⟩
 
+/-- A uniform Boolean-vertex bound extends to the whole finite cube for every
+coordinatewise convex objective. -/
+theorem le_of_coordinatewiseConvexOnCube_of_booleanControl_le
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (f : (ι → ℝ) → ℝ) (M : ℝ) (hf : CoordinatewiseConvexOnCube f)
+    (hvertex : ∀ y, IsBooleanControl y → f y ≤ M)
+    (x : ι → ℝ) (hx : InControlCube x) : f x ≤ M := by
+  rcases exists_booleanControl_ge f
+      (coordinatewiseEndpointDominated_of_convexOnCube f hf) x hx with
+    ⟨y, _, hy, hxy⟩
+  exact hxy.trans (hvertex y hy)
+
 end CubeVertexReduction
 
 end RelativeConicArcs.HermitianConferenceExchange
