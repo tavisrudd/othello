@@ -1,6 +1,6 @@
 # C894 — unnumbered saturated-exterior and local-Paley companion
 
-**Lane:** clebsch · **Status:** queued · **Allocated:** 2026-08-08
+**Lane:** clebsch · **Status:** active architecture freeze · **Allocated:** 2026-08-08
 
 ## Objective
 
@@ -31,7 +31,12 @@ This is an unnumbered companion to the four-paper Clebsch series, not Paper V.
 - **Geometric headline:** complete saturated-exterior/extremal exterior-arc
   classification and the Clebsch covering corollary.
 - **Corollaries, not separate novelty:** normal cyclic Cayley structure,
-  automorphism-group order \(n(q-1)/2\), and prime-field DRR.
+  automorphism-group order \(n(q-1)/2\), prime-field DRR, and primitive-block
+  coordinate recovery up to translation and Frobenius.
+- **Named arithmetic engine, separately qualified:** the faithful local-Paley
+  eigenvalue collision class is exactly its Frobenius orbit and contains no
+  imprimitive competitor.  Add this exact Jacobi-spectrum statement to the
+  human predecessor query before making any independent novelty claim.
 - **Proof device, no novelty claim:** flat Sidon lemma and the one-faithful-
   eigenblock Cayley criterion.
 - **Partial context only:** the all-\(k\) LP bound, saturation dichotomy,
@@ -63,6 +68,7 @@ user.
 - `notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`
 - `notes/2026-08-08-c756-local-paley-rigidity-literature-audit.md`
 - `notes/2026-08-08-c756-predecessor-audit-and-companion-scope.md`
+- `notes/2026-08-08-c894-ej-theorem-inventory-and-architecture.md`
 
 The discovery-stage matrices \(C,K\), anticommutator, simple-spectrum branch,
 Gaussian/Pfaffian obstruction, theta fitting, and field sweeps are not part of
@@ -86,6 +92,9 @@ the paper spine.
 
 ## Next action
 
-Build the frozen theorem inventory and a one-page paper architecture, then
-route the two human safeguards.  Do not draft prose until the claim inventory
-is stable.
+Build the claim--proof--citation matrix from the frozen lean architecture in
+`notes/2026-08-08-c894-ej-theorem-inventory-and-architecture.md`, then route
+the two human safeguards.  The paper spine now excludes the broad all-\(k\)
+partial-results package: internal/passant-code results belong only in a short
+outlook.  Add the exact primitive Jacobi collision theorem to the human
+novelty query.  Do not draft prose until the matrix is stable.
