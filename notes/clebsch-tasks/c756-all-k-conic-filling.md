@@ -179,6 +179,17 @@ extension conic lemma follows; otherwise only their common kernel must meet
 the first non-shadow odd equation.  The latter clause is essential:
 dimension alone forces tower kernels of dimension at least one for \(q=25\)
 and at least five for \(q=27\).
+In canonical ghost-tail coordinates the entire semilinear tower untwists to
+one ordinary stacked Cartier--Toeplitz matrix \(\mathbb M_R\), with
+\(\mathcal K_R=\ker\mathbb M_R\).  Its entries are denominator-free
+polynomials in the coefficients of \(R\), so positive-kernel loci are exact
+determinantal strata on the completely split factor locus.  Lucas gives the
+row count at every digit.  The only live parameters where row count alone
+forces a nonzero kernel are now \(q=25,27,81\) (the additional \(q=9\) row
+is already closed); at \(q=81\), the kernel must meet the native \(j=2\)
+checks and the reflected shadow-successor rungs \(j=5,14\).  Outside these
+three fields, any tower kernel is a special rank-drop stratum rather than a
+dimension necessity.
 Equivalently, if \(x_i\) are the roots of \(R\) and
 \(w_i=1/R'(x_i)\), the entire hierarchy is the division-free syndrome law
 \[
@@ -220,6 +231,18 @@ degree bound proves the uniform gap
  \deg H_2\ge(p+1)/2.
 \]
 Thus any surviving extension ghost has characteristic-scale degree.
+More generally, every rung gives the exact no-wrap implication
+\(j\deg H_2<n\Rightarrow j\deg H_2\le\nu_j\), where \(\nu_j\) is the
+carry-prefix degree bound.  The union of the resulting forbidden degree
+intervals is a universal digit-arithmetic sieve; only its complement needs
+wrapped multiplication or sparse/reflected checks.  In characteristic three,
+the rung \(j=q/9\) additionally excludes \(\deg H_2=4\) for every
+\(q=3^e\), \(e\ge3\), while degree three remains open.
+After wrap, the full interpolant orbit is cyclic of length dividing
+\((q-1)/2\), with \(P_{(q-1)/2}=1\), inversion
+\(P_jP_{(q-1)/2-j}\equiv1\pmod R\), and Frobenius acting on index cycles of
+length at most \(e\).  This supplies the finite orbit structure on which the
+determinantal kernel and carry flags must be combined.
 Multiplying back the root
 divisor of \(S\) packages the entire hierarchy as a full-field norm
 identity: the two completely split degree-\(q\) products

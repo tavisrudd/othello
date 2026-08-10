@@ -419,7 +419,16 @@ For \(q=25\), the native \(j=3\) visible exponents are
 \(\{0,1,2,3,5,6\}\), and reflection adds \(10\).  For \(q=27\), the
 native \(j=2\) visible exponents are \(\{0,1,3,4,9\}\), while the reflected
 \(j=5\) rung supplies \(\{0,9,18\}\).  These are the correct first kernel
-tests.
+tests.  The row-budget theorem (77)--(78) below reveals one further forced
+seam, \(q=81\).  There the native \(j=2\) set is
+\[
+ \{0,1,3,4,9,10,12,13,18,19,21,22,27,28,30,31,36\}.
+\]
+The \(j=9\) power rung reflects into the successor \(j=5\) and adds
+\(\{0,9,18,27,36,45,54,63,72\}\); the \(j=3\) rung reflects into
+\(j=14\) and adds
+\(\{0,3,6,9,27,30,33,36,54,57,60,63\}\).
+Thus all dimension-forced low-characteristic kernel tests are explicit.
 
 Reflection always lands immediately after one of these shadows.  If
 \(b=e-a\), put
@@ -438,8 +447,10 @@ The \(j=p^a\) power rung reflects into the successor \(j_b^+\), while
 \]
 Thus every available digit level probes the same unknown \(H_2\) as the
 ratio of a reflected successor and a canonical nowhere-zero shadow.  The
-two forced seams are the first instances: \((j_b^-,j_b^+)=(2,3)\) at
-\(q=25\), and \((4,5)\) at \(q=27\).  A uniform proof may therefore be
+two smallest forced seams are the first instances:
+\((j_b^-,j_b^+)=(2,3)\) at \(q=25\), and \((4,5)\) at \(q=27\); at
+\(q=81\) the reflected pairs are \((4,5)\) and \((13,14)\).  A uniform
+proof may therefore be
 organized as rigidity of the shadow--successor ratios (66), rather than as
 unrelated higher powers.
 
@@ -479,6 +490,44 @@ Finally the interpolants form one multiplication orbit:
  \qquad P_1=H_2,
  \qquad P_{j+1}\equiv H_2P_j\pmod R.                    \tag{62}
 \]
+This orbit has an exact cyclic closure that is useful once reduction modulo
+\(R\) begins.  Put \(N=(q-1)/2\).  Since
+\(H_2(x_i)=w_i^2\in(\mathbb F_q^*)^2\),
+\[
+ \boxed{
+ P_N=1,
+ \qquad P_{j+N}=P_j,
+ \qquad P_jP_{N-j}\equiv1\pmod R.}                      \tag{62a}
+\]
+There is also a semilinear rotation of the index circle.  If
+\(\Phi_b(\sum_ra_rX^r)=\sum_ra_r^{p^b}X^{rp^b}\), and
+\([u]_N\) denotes the residue in \(\{0,\ldots,N-1\}\), then
+\[
+ \boxed{
+ P_{[p^bj]_N}\equiv\Phi_b(P_j)\pmod R.}                 \tag{62b}
+\]
+Indeed, both sides take the value \(w_i^{2p^bj}\) at every root of \(R\).
+Thus the wrapped problem is finite: it is a cyclic Krylov orbit of length
+dividing \(N\), equipped with the permutation \(j\mapsto[pj]_N\) and the
+degree flags (61) on the available half of the indices.  In particular,
+the inverse of every flagged state is another named orbit state, rather than
+an unrelated polynomial.  A common-kernel classification may therefore be
+made orbit-by-orbit under multiplication by \(p\) on \(\mathbb Z/N\mathbb Z\),
+then intersected with the carry and sparse syndrome checks.  This is the
+finite wrapped counterpart of the no-wrap sieve (67)--(68).
+For \(e\ge2\), multiplication by \(p\) has order exactly \(e\) modulo
+\(N\): one has \(p^e\equiv1\pmod N\), whereas
+\(0<p^b-1<N\) for \(0<b<e\).  Hence every index orbit in (62b) has length
+dividing \(e\), and Burnside gives the field-independent inventory
+\[
+ \boxed{
+ \#\bigl((\mathbb Z/N\mathbb Z)/\langle p\rangle\bigr)
+ =\frac1e\sum_{b=0}^{e-1}\gcd(N,p^b-1).}                \tag{62c}
+\]
+The semilinear compatibility of the wrapped states is therefore local on
+cycles of at most the extension degree, even though the polynomial carrier
+has size on the scale of \(q\).
+
 Thus the saturated extension theorem is equivalently a **carry-flag
 rigidity statement**: if multiplication by \(H_2\) drives the orbit (62)
 through all digit bounds (61) and all sparse/reflected checks, then
@@ -505,6 +554,49 @@ If \(3\le d:=\deg H_2\le(p-1)/2\), then \(sd<n\), so no reduction modulo
 Thus every proper-extension counterexample outside the conic branch must
 start at characteristic-scale degree; no bounded low-degree ghost family can
 survive as \(p\) grows.
+
+The same argument is not tied to the top rung.  If
+\(d=\deg H_2\) and \(jd<n\), then the multiplication orbit has not yet
+wrapped modulo \(R\), so
+\[
+ P_j=H_2^j,
+ \qquad \deg P_j=jd.
+\]
+Combining this identity with (61) gives the universal no-wrap test
+\[
+ \boxed{
+ jd<n\quad\Longrightarrow\quad jd\le \nu_j.}           \tag{67}
+\]
+Equivalently, every integer degree in
+\[
+ \boxed{
+ \mathfrak D_{p,e}
+ =\bigcup_{2j+1<n}
+   \left\{d:\ \nu_j<jd<n\right\}}                      \tag{68}
+\]
+is structurally forbidden.  The set (68) is determined solely by the
+base-\(p\) digits of \(j\), through (59)--(61); it involves no choice of a
+field model or root subset.  Formula (64) is the single-rung interval
+obtained from \(j=q/p\), while (68) retains every carry interval at once.
+It is the exact degree-level front end of the carry-flag problem: only the
+complement of \(\{0,1,2\}\cup\mathfrak D_{p,e}\) can require the genuinely
+wrapped multiplication and sparse/reflected checks.
+
+There is a small characteristic-three gain that the \(p\ge5\) top-rung
+statement does not see.  For \(q=3^e\), \(e\ge3\), put \(s=q/9\) and take
+\(j=s\).  Here the first carry occurs at \(s\), so
+\[
+ D_s=s-1,
+ \qquad \nu_s=n-s-1=\frac{7s+1}{2}.
+\]
+If \(d=4\), then \(4s<n=(9s+3)/2\), but
+\(4s>(7s+1)/2\) because \(s>1\), contradicting (67).  Hence
+\[
+ \boxed{
+ \deg H_2\ne4\qquad(q=3^e,\ e\ge3).}                   \tag{69}
+\]
+Degree three remains a genuine wrapped/sparse seam and is not excluded by
+this argument.
 
 The same pencil supplies a hierarchy, not just (6).  For
 \(b=2j+1<n\), let \(H_{2j}\) be the degree-\(<n\) remainder of
@@ -628,6 +720,145 @@ Thus the universal object is
  \mathcal K_R=\bigcap_{a\in I_{p,e}}
    \ker\overline{\mathcal L}_{R,a}.                       \tag{49}
 \]
+This common kernel has an explicit ordinary-linear determinantal model.
+Write
+\[
+ R(Z)=\sum_{k=0}^nr_kZ^k,
+ \qquad r_n=1,
+ \qquad
+ \mathscr G=\{u:1\le u\le n-3,\ u\equiv0,-1\pmod p\}.
+                                                               \tag{70}
+\]
+The set \(\mathscr G\) has size \(q/p-1\).  For
+\(g=(g_u)_{u\in\mathscr G}\), choose the canonical representative of its
+ghost class by defining its Laurent coefficients through
+\[
+ c_s(g)=
+ \begin{cases}g_s,&s\in\mathscr G,\\0,&1\le s\le n,
+                                      \ s\notin\mathscr G,
+ \end{cases}
+ \qquad
+ c_{n+t}(g)=-\sum_{k=0}^{n-1}r_kc_{k+t}(g)\quad(t\ge1). \tag{71}
+\]
+The three final zeros among \(c_1,\ldots,c_n\) fix the degree-at-most-two
+ambiguity, and the recurrence is just the vanishing of the negative part of
+\(R\sum_{s\ge1}c_sZ^{-s}\).  Hence there are coefficients
+\(T_{s,u}(R)\) such that
+\[
+ c_s(g)=\sum_{u\in\mathscr G}T_{s,u}(R)g_u.             \tag{72}
+\]
+
+Fix an available power rung \(j=p^a\), and write
+\(A^{(a)}_\ell=[Z^\ell]R^{j-1}\), with this coefficient understood to be
+zero outside the polynomial's support.  For every Lucas-visible Laurent
+index
+\[
+ \mathscr R_a=\left\{r:1\le r\le n-2j-1,
+             \ \binom{r+2j-1}{2j}\ne0\pmod p\right\},
+\]
+the coefficient of \(Z^{-r}\) in \(R^{j-1}F^j\) is
+\[
+ \sum_sA^{(a)}_{js-r}c_s(g)^j
+ =\sum_{u\in\mathscr G}M_a(R)_{r,u}g_u^j,
+ \qquad
+ M_a(R)_{r,u}
+ =\sum_sA^{(a)}_{js-r}T_{s,u}(R)^j.                    \tag{73}
+\]
+All sums are finite from the support of \(R^{j-1}\).  Thus the \(a\)-th
+power rung is exactly
+\(M_a(R)g^{[p^a]}=0\).  Raising this equation to
+\(p^{e-a}\) removes the Frobenius twist because \(g^{p^e}=g\).  Therefore,
+under the ghost-coordinate identification,
+\[
+ \boxed{
+ \mathcal K_R=\ker\mathbb M_R,
+ \qquad
+ \mathbb M_R=
+ \operatorname{stack}_{a\in I_{p,e}}
+       M_a(R)^{[p^{e-a}]},
+ \qquad
+ \dim\mathcal K_R=\frac qp-1-\operatorname{rank}\mathbb M_R.} \tag{74}
+\]
+Here the bracketed exponent on a matrix means entrywise Frobenius.  Formula
+(74) replaces the common semilinear-kernel problem by the rank stratification
+of one explicit Cartier--Toeplitz matrix over the coefficient space of
+completely split factors \(R\mid X^q-X\).  It also isolates the nonlinear
+work exactly: restrict the first non-shadow equations (58), and their
+reflected rows, to the linear nullspace of \(\mathbb M_R\).  No fixed field
+or choice of roots enters the construction.
+The recurrence (71), the coefficients of \(R^{p^a-1}\), and hence every
+entry of \(\mathbb M_R\) are polynomials in \(r_0,\ldots,r_{n-1}\); no
+denominator is introduced.  Consequently the locus
+\(\dim\mathcal K_R\ge h\) is cut out by the
+\((q/p-h)\)-minors of \(\mathbb M_R\).  The saturated theorem has therefore
+been reduced to a determinantal stratification on the completely split
+factor locus, followed only on positive-kernel strata by the first
+non-shadow equations.  This gives a uniform elimination target without
+enumerating the split factors.
+
+The row budget of this matrix is also digit-explicit.  For \(a\ge1\), put
+\(P=p^a\) and \(L_a=n-2P-2\).  In the range \(r=1,\ldots,L_a+1\), Lucas'
+criterion says that a row is visible exactly when the \(a\)-th digit of
+\(r-1\) lies in \(\{0,\ldots,p-3\}\).  If
+\[
+ L_a+1=b_ap^{a+1}+c_a,
+ \qquad 0\le c_a<p^{a+1},
+\]
+the exact number of rows is therefore
+\[
+ \boxed{
+ m_a=b_a(p-2)p^a+\min\{c_a,(p-2)p^a\}.}                 \tag{75}
+\]
+The \(a=0\) rung defines the first ghost space and contributes zero rows on
+the quotient.  Consequently
+\[
+ \boxed{
+ \dim\mathcal K_R\ge
+ \kappa_{p,e}:=
+ \max\!\left\{0,\frac qp-1-
+       \sum_{\substack{a\in I_{p,e}\\a\ge1}}m_a\right\}.} \tag{76}
+\]
+This bound is independent of \(R\).  It recovers \(\kappa_{5,2}=1\) and
+\(\kappa_{3,3}=5\) immediately, while distinguishing uniformly the
+parameters where the power tower is dimensionally capable of full rank from
+those where a nonlinear non-shadow equation is mandatory.  Rank defects
+beyond \(\kappa_{p,e}\) are precisely the determinantal special strata of
+(74).
+
+The arithmetic in (75)--(76) can be evaluated uniformly.  In
+characteristic three the available nontrivial levels are
+\(1\le a\le e-2\), and
+\[
+ m_a=\frac{q-3^{a+1}}6,
+ \qquad
+ \sum_{a=1}^{e-2}m_a=\frac{q(2e-5)}{12}+\frac34.
+\]
+For \(p\ge5\), the first nontrivial level alone has enough rows except at
+\((p,e)=(5,2)\): for \(e=2,p\ge7\), (75) gives
+\(m_1=(p^2-4p+1)/2\ge p-1\); for \(e\ge3\), counting at most \(2p\)
+invisible positions per block of length \(p^2\) gives the same inequality
+for \(p\ge7\), and for \(p=5,e\ge4\), while \(p=5,e=3\) gives
+\(m_1=33>24\) directly.  Hence the complete dimension-forced list is
+\[
+ \boxed{
+ \begin{array}{c|c}
+ (p,e)&\kappa_{p,e}\\ \hline
+ (3,2)&2\\
+ (3,3),(3,4)&5\\
+ (5,2)&1\\
+ \text{all other }p\text{ odd},\ e\ge2&0.
+ \end{array}}                                           \tag{77}
+\]
+The \(q=9\) row is independently closed.  Thus the only live parameters at
+which the power tower is *forced by row count* to leave a kernel are
+\[
+ \boxed{q=25,\quad q=27,\quad q=81.}                    \tag{78}
+\]
+This does not assert full rank outside those fields: it says that every
+additional kernel there lies on a proper determinantal rank stratum of
+\(\mathbb M_R\).  Conversely, at the three seams in (78), the nonlinear
+non-shadow test is logically unavoidable regardless of \(R\).
+
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
 the forced low-characteristic seams violates the first non-shadow rung in
@@ -687,7 +918,7 @@ If it were proved for many \(m\), the finite-field direction theorem could
 force the graph of \(S\) into a subfield-linear or boundary family.  Until
 then, one must not replace the norm equality (33) by a permutation claim.
 
-The reduction changes the extension-field problem in four ways.
+The reduction changes the extension-field problem in six ways.
 
 1. The unknown is no longer an arbitrary \((q+3)/2\)-point configuration.
    It is the complementary split factor \(S\) of \(X^q-X\).
@@ -762,26 +993,31 @@ through enough of those equations.
 | Where do reflected checks land? | settled | immediately after a shadow, with ratio identity (66) |
 | What controls the useful degree bound at each rung? | settled | first-carry formula (60) and Reed--Solomon bound (61) |
 | How are those degree bounds coupled? | settled | single multiplication orbit (62) |
+| What happens after the orbit wraps? | settled structurally | cyclic closure and Frobenius index cycles (62a)--(62c) |
+| Which degrees are excluded without wrap? | settled arithmetically | all-rung forbidden set (68), including degree four in characteristic three (69) |
 | Can a nonconic ghost have bounded small degree? | no for \(p\ge5\) | top-rung gap (64) forces degree at least \((p+1)/2\) |
 | Is there more information beyond the first ghost? | settled | nonlinear Cartier hierarchy (39) from every odd divided coefficient |
 | Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
-| What semilinear statement would close the extension branch? | open, exact | classify \(\mathcal K_R\) in (49), then impose the first non-shadow rung (58); injectivity alone is dimensionally impossible at \(q=25,27\) |
+| Can the common semilinear kernel be linearized explicitly? | settled | stacked Cartier--Toeplitz matrix \(\mathbb M_R\), formula (74) |
+| Where is a tower kernel forced dimensionally? | settled | exactly the live seams \(q=25,27,81\), formula (78) |
+| What matrix statement would close the extension branch? | open, exact | control the determinantal rank strata of \(\mathbb M_R\), then impose the first non-shadow rung (58) on their nullspaces |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
 | What remains to prove? | open | couple the ghost supports under \(H_{2j}\equiv H_2^j\pmod R\) and force \(\deg H_2\le2\) |
 
 ## Next action
 
-Analyze the first non-shadow equation (58) together with the simultaneous
-semilinear tower (45) on the two-component Pade space (42).  The exact
-theorem target is a uniform classification of the common kernel
-\(\mathcal K_R\) in (49) on the \(q/p-1\)-dimensional quotient (47), with
-the forced \(q=25,27\) kernel dimensions as boundary tests.  Apply \(j=3\)
-at \(q=25\), and \(j=2\) at \(q=27\), retaining the compatibility
+Analyze the determinantal rank strata of the explicit matrix
+\(\mathbb M_R\) in (74), then restrict the first non-shadow equation (58)
+to its nullspaces.  The exact theorem target is a uniform classification of
+the common kernel \(\mathcal K_R\) in (49) on the
+\(q/p-1\)-dimensional quotient (47), with
+the forced \(q=25,27,81\) kernel dimensions as boundary tests.  Apply \(j=3\)
+at \(q=25\), and \(j=2\) at \(q=27,81\), retaining the compatibility
 \(RS=X^q-X\) and \(H_2\equiv S^2\pmod R\).
 Equivalently, work directly with the barycentric weights and prove from the
 Lucas-visible moment system (53) that \((w_i^2)\) is a quadratic evaluation
-vector.  On the forced \(q=25,27\) seams, use the native-plus-reflected
+vector.  On the forced \(q=25,27,81\) seams, use the native-plus-reflected
 exponent sets recorded after (58).  Uniformly, prove carry-flag rigidity for
 the multiplication orbit (62).
 In parallel, test the exact theorem-shaped
