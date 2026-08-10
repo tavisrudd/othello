@@ -59,14 +59,14 @@ rev = "{bridge["certificate_commit"]}"
 
 [[lean_lib]]
 name = "{bridge["lean_library"]}"
-roots = ["{bridge["module"]}"]
+roots = ["{bridge["audit_module"]}"]
 '''
 
 
 def flake(bridge: dict) -> str:
     package = bridge["certificate_package"]
     gate = bridge["certificate_gate"]
-    module = bridge["module"]
+    module = bridge["audit_module"]
     return f'''{{
   description = "Lean compatibility bridge for {bridge["name"]}";
 
@@ -125,7 +125,8 @@ def readme(bridge: dict) -> str:
 
 {scope}
 
-The compatibility theorem is `{bridge["module"]}`. The upstream certificate is
+The compatibility theorem is `{bridge["module"]}`. Its combined axiom audit is
+`{bridge["audit_module"]}`. The upstream certificate is
 frozen at `{bridge["certificate_commit"]}` and the finite-geometry library is
 frozen at `{bridge["finitegeom_commit"]}`. The certificate imports Mathlib only;
 this small package is the first point at which both formal models are imported.
@@ -155,11 +156,14 @@ def sha256(data: bytes) -> str:
 
 def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     module_path = bridge["module"].replace(".", "/") + ".lean"
+    audit_path = bridge["audit_module"].replace(".", "/") + ".lean"
     source = blob(commit, "lean/" + bridge["source"])
+    audit_source = blob(commit, "lean/" + bridge["audit_source"])
     license_text = blob(commit, bridge["license_source"])
     flake_lock = blob(commit, FLAKE_LOCK_PATH)
     files = {
         module_path: source,
+        audit_path: audit_source,
         "LICENSE": license_text,
         "lakefile.toml": lakefile(bridge).encode(),
         "lean-toolchain": (TOOLCHAIN + "\n").encode(),
@@ -170,15 +174,20 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     manifest = {
         "schema_version": 1,
         "source_commit": commit,
-        "roots": [bridge["module"]],
+        "roots": [bridge["audit_module"]],
         "sources": [
             {
                 "path": module_path,
                 "bytes": len(source),
                 "sha256": sha256(source),
-            }
+            },
+            {
+                "path": audit_path,
+                "bytes": len(audit_source),
+                "sha256": sha256(audit_source),
+            },
         ],
-        "module_count": 1,
+        "module_count": 2,
         "license": {
             "path": "LICENSE",
             "sha256": sha256(license_text),
@@ -291,6 +300,87 @@ def adopt(
     return destination, adopted_commit
 
 
+def sync(
+    commit: str,
+    bridge: dict,
+    files: dict[str, bytes],
+    libraries_root: Path,
+) -> tuple[Path, str]:
+    libraries_root = libraries_root.expanduser().resolve()
+    repository = bridge["repository"]
+    if Path(repository).name != repository:
+        raise ValueError(f"unsafe repository name: {repository}")
+    destination = libraries_root / repository
+    if not destination.is_dir():
+        raise ValueError(f"bridge checkout is missing: {destination}")
+    head = subprocess.run(
+        ["git", "-C", str(destination), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    if head != bridge["bridge_commit"]:
+        raise ValueError(
+            f"bridge HEAD is {head}, expected {bridge['bridge_commit']}"
+        )
+    status = subprocess.run(
+        ["git", "-C", str(destination), "status", "--short"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    if status:
+        raise ValueError(f"bridge checkout is dirty: {destination}")
+    tracked = set(
+        subprocess.run(
+            ["git", "-C", str(destination), "ls-files"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.splitlines()
+    )
+    removed = tracked - set(files)
+    if removed:
+        raise ValueError(f"bridge sync would delete tracked paths: {sorted(removed)}")
+    write_files(destination, files)
+    subprocess.run(
+        ["git", "-C", str(destination), "add", "--", *sorted(files)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    if not subprocess.run(
+        ["git", "-C", str(destination), "diff", "--cached", "--quiet"],
+        check=False,
+    ).returncode:
+        return destination, head
+    environment = os.environ.copy()
+    environment.update(source_identity(commit))
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(destination),
+            "-c",
+            "commit.gpgsign=false",
+            "commit",
+            "-m",
+            "Refresh reviewer package",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=environment,
+    )
+    updated = subprocess.run(
+        ["git", "-C", str(destination), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return destination, updated
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True)
@@ -301,6 +391,10 @@ def main() -> int:
     materialize.add_argument("--destination", type=Path, required=True)
     adoption = subparsers.add_parser("adopt")
     adoption.add_argument(
+        "--libraries-root", type=Path, default=Path.home() / "src/lean"
+    )
+    synchronization = subparsers.add_parser("sync")
+    synchronization.add_argument(
         "--libraries-root", type=Path, default=Path.home() / "src/lean"
     )
     args = parser.parse_args()
@@ -317,6 +411,12 @@ def main() -> int:
             commit, bridge, files, args.libraries_root
         )
         print(f"adopted {bridge['name']} at {destination} commit={adopted_commit}")
+        return 0
+    if args.command == "sync":
+        destination, updated_commit = sync(
+            commit, bridge, files, args.libraries_root
+        )
+        print(f"synchronized {bridge['name']} at {destination} commit={updated_commit}")
         return 0
     destination_safe(args.destination)
     destination = args.destination.expanduser().resolve()

@@ -55,6 +55,13 @@ class PaperBridgeAuditTests(unittest.TestCase):
             "namespace Paper.Compatibility\nend Paper.Compatibility\n",
             encoding="utf-8",
         )
+        audit_source = source_root / "bridge/Verification/AxiomAudit.lean"
+        audit_source.parent.mkdir(parents=True)
+        audit_source.write_text(
+            "import Human.Gate\nimport Cert.AxiomAudit\n"
+            "import Paper.Compatibility\n",
+            encoding="utf-8",
+        )
         finitegeom_commit = self.git_repo(
             libraries / "finitegeom",
             {"lakefile.toml": 'name = "finitegeom"\n'},
@@ -87,12 +94,16 @@ class PaperBridgeAuditTests(unittest.TestCase):
             "bridge_commit": bridge_commit,
             "export_source_commit": export_source_commit,
             "source": "bridge/Compatibility.lean",
+            "audit_source": "bridge/Verification/AxiomAudit.lean",
+            "audit_module": "Paper.Verification.AxiomAudit",
             "module": "Paper.Compatibility",
             "finitegeom_commit": finitegeom_commit,
             "finitegeom_import": "Human.Model",
+            "finitegeom_gate": "Human.Gate",
             "certificate_package": "certs",
             "certificate_commit": certificate_commit,
             "certificate_import": "Cert.Certificate",
+            "certificate_audit_module": "Cert.AxiomAudit",
             "cache_archive": "certs.tgz",
             "cache_sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
             "forbid_source_fallback": True,

@@ -66,6 +66,21 @@ def audit_bridge(
     namespace_line = f"namespace {bridge['module']}"
     if namespace_line not in source.read_text(encoding="utf-8").splitlines():
         problems.append(f"{name}: missing exact namespace {bridge['module']}")
+    audit_source = source_root / bridge["audit_source"]
+    if not audit_source.is_file():
+        problems.append(f"{name}: audit source is missing at {bridge['audit_source']}")
+    else:
+        expected_audit_imports = [
+            bridge["finitegeom_gate"],
+            bridge["certificate_audit_module"],
+            bridge["module"],
+        ]
+        actual_audit_imports = imports(audit_source)
+        if actual_audit_imports != expected_audit_imports:
+            problems.append(
+                f"{name}: audit imports are {actual_audit_imports}, "
+                f"expected {expected_audit_imports}"
+            )
     for label, root, expected in (
         ("finitegeom", finitegeom, bridge["finitegeom_commit"]),
         ("certificate", certificate, bridge["certificate_commit"]),

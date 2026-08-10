@@ -25,6 +25,8 @@ class PaperBridgeExportTests(unittest.TestCase):
             "lean_library": "SamplePaperBridge",
             "source": "paper-bridges/sample/CertificateCompatibility.lean",
             "module": "TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility",
+            "audit_source": "paper-bridges/sample/Verification/AxiomAudit.lean",
+            "audit_module": "TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit",
             "license_source": "papers/sample/LICENSE",
             "finitegeom_commit": "a" * 40,
             "certificate_package": "finitegeom-sample-certificates",
@@ -39,6 +41,10 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn('name = "finitegeom"', text)
         self.assertIn('name = "finitegeom-sample-certificates"', text)
         self.assertEqual(text.count("[[require]]"), 2)
+        self.assertIn(
+            'roots = ["TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit"]',
+            text,
+        )
 
     def test_reviewer_readme_has_one_safe_command(self) -> None:
         text = MODULE.readme(self.bridge())
@@ -99,6 +105,34 @@ class PaperBridgeExportTests(unittest.TestCase):
                 ).stdout
                 self.assertEqual(status, "")
         self.assertEqual(hashes[0], hashes[1])
+
+    def test_sync_adds_files_as_a_forward_commit(self) -> None:
+        commit = str(MODULE.git("rev-parse", "HEAD")).strip()
+        bridge = self.bridge()
+        with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
+            root = Path(directory)
+            destination, initial = MODULE.adopt(
+                commit, bridge, {"README.md": b"first\n"}, root
+            )
+            bridge["bridge_commit"] = initial
+            synced_destination, updated = MODULE.sync(
+                commit,
+                bridge,
+                {"README.md": b"second\n", "AxiomAudit.lean": b"#print axioms x\n"},
+                root,
+            )
+            self.assertEqual(synced_destination, destination)
+            self.assertNotEqual(updated, initial)
+            self.assertEqual((destination / "README.md").read_bytes(), b"second\n")
+            self.assertEqual(
+                subprocess.run(
+                    ["git", "-C", str(destination), "status", "--short"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ).stdout,
+                "",
+            )
 
 
 if __name__ == "__main__":
