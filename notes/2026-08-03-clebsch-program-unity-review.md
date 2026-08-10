@@ -6,6 +6,14 @@
 of Papers I, II, III, the Paper IV and golden lane context, and the C855
 proof results. Brief by design.
 
+## 2026-08-09 author decision
+
+The numbered series has five papers and is titled *Clebsch: Rigidity from
+Sparse Shadows*. Paper V is the short recognition and marked-round-trip
+culmination developed from this review; the Golden and MDS--CSS papers remain
+unnumbered companions. This decision supersedes this note's earlier four-paper
+routing assumptions without rewriting the historical option analysis below.
+
 ## What actually unifies the program
 
 The series has a stated unity — the epigraph's arc (takes shape, finds its

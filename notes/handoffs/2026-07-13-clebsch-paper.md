@@ -1,11 +1,11 @@
-# Clebsch four-paper program
+# Clebsch: Rigidity from Sparse Shadows
 
 **Lane:** `clebsch`
 
 **Date:** 2026-08-09
 
 > **LIVE MAP ONLY.** This is the routing and state surface for the active
-> four-paper program. Detailed live task internals belong in C-task cards;
+> five-paper numbered series. Detailed live task internals belong in C-task cards;
 > completed and superseded detail belongs in the archives linked below.
 >
 > **ROUTING AUTHORITY.** No dated planning note, fallback-paper verdict, task
@@ -33,24 +33,27 @@ manuscript claim is narrowed to make the formal surface agree with it.
 
 ## Numbered series decision
 
-The public series has exactly four numbered papers:
+The public series is *Clebsch: Rigidity from Sparse Shadows* and has exactly
+five numbered papers:
 
 1. Paper I — `clebsch-rigidity`;
 2. Paper II — `clebsch-factorization`;
 3. Paper III — alias `passages`, rooted at `clebsch-passages`;
-4. Paper IV — alias `q13-passant-code`, rooted at `q13-passant-code`.
+4. Paper IV — alias `q13-passant-code`, rooted at `q13-passant-code`;
+5. Paper V — the culminating recognition and marked-round-trip paper, with
+   title and manuscript root to be settled under C903.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.
 
-`golden` is a source-development lane feeding a future forward version of
-Paper III, not a fifth numbered paper. The Paper-I computational companion is
-unnumbered and becomes a forward-pointing evidence companion once Paper IV is
-public. The mega-paper remains an unpublished fallback only.
+`golden` remains a source-development lane and unnumbered companion rather than
+Paper V. The MDS--CSS and Paper-I computational companions are likewise
+unnumbered. The mega-paper remains an unpublished fallback only.
 
 The numbered-paper streams are concurrent.  An explicit selector such as
-`go clebsch paper I`, `go clebsch paper III`, or `go clebsch paper IV`
+`go clebsch paper I`, `go clebsch paper III`, `go clebsch paper IV`, or
+`go clebsch paper V`
 selects only that paper's stream; it does not pause, reorder, or absorb work
 in the other papers.  An unqualified `go clebsch` with no carried task or
 paper selection must ask which paper stream the user wants rather than

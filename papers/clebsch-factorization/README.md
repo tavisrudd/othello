@@ -2,17 +2,19 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682217-blue.svg)](https://doi.org/10.5281/zenodo.21682217)
 
-**Clebsch portfolio:** Paper II of the four-paper *The Clebsch cubic* series.
-The broader current portfolio also includes the companion paper *Diagonal
-Isoduality and Transversal Clifford Groups of MDS--CSS Codes*. The shared
+**Clebsch portfolio:** Paper II of the five-paper *Clebsch: Rigidity from Sparse
+Shadows* series. Related companions include *Diagonal Isoduality and
+Transversal Clifford Groups of MDS--CSS Codes* and the Golden interferometer
+paper. The shared
 progression is expository: this paper is logically independent of the other
 portfolio papers.
 
-The five related papers are: I, *Reconstructing the Clebsch code and its
+The five numbered papers are: I, *Reconstructing the Clebsch code and its
 golden orientation from its deep-hole syndrome locus*; II, this paper; III,
 *Golden descent and operator realizations of the Clebsch cubic*; IV,
 *Reconstructing PG(2,13), its conic, and polarity from the minimum words of a
-binary conic code*; and the companion MDS--CSS transversal-groups paper.
+binary conic code*; and V, the culminating recognition and marked-round-trip
+paper.
 
 This directory contains the manuscript
 *Quadratic trade rigidity and cubic orientation in conic matching quotients*.

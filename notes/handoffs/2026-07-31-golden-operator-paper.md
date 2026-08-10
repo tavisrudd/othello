@@ -4,9 +4,10 @@
 
 **Date:** 2026-07-31
 
-> **NUMBERED-SERIES ROUTING.** By the 2026-08-01 four-paper decision,
-> `golden` is the source-development lane for a future forward version of
-> Paper III (`passages`), not a standalone fifth numbered paper. Released
+> **NUMBERED-SERIES ROUTING.** The numbered series is now the five-paper
+> *Clebsch: Rigidity from Sparse Shadows*. `golden` remains the
+> source-development lane for a future forward version of Paper III
+> (`passages`) and an unnumbered companion; it is not Paper V. Released
 > Paper-III versions remain immutable. This lane continues to own its source
 > mathematics, evidence, and manuscript experiments; publication integration
 > is coordinated through C763 in the Clebsch handoff and the `passages`

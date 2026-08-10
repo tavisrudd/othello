@@ -12,13 +12,13 @@ sparse data repeatedly force rich algebraic or geometric structure. The
 recurring mechanism is rigidity: identify an invariant that survives the loss
 of information, then prove that few possibilities remain.
 
-The central Clebsch portfolio currently has five papers: four numbered papers
-in *The Clebsch cubic* series and the companion *Diagonal Isoduality and
-Transversal Clifford Groups of MDS–CSS Codes*. The MDS–CSS paper has its own
-all-length theorem and uses the Clebsch code as a worked application; it is not
-a fifth numbered installment. The Golden interferometer paper is a related
-companion, not a sixth Clebsch paper. Every paper is intended to stand on its
-own mathematically.
+The numbered series *Clebsch: Rigidity from Sparse Shadows* has five papers.
+The first four are the rigidity, factorization, passages, and q13
+passant-code papers listed below; Paper V will state the common recognition
+theorem and close the marked reconstruction round trip. *Diagonal Isoduality
+and Transversal Clifford Groups of MDS–CSS Codes* and the Golden interferometer
+paper are related unnumbered companions. Every paper is intended to stand on
+its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which

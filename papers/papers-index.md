@@ -7,12 +7,13 @@ Fable review (2026-07-12) supplied the original decomposition; later
 paper-specific rulings supersede its count where stated below. The
 provisional Baer + completion merge was superseded by the focused Baer/Q25
 ruling on 2026-07-14, dihedral bundles the D₂ₘ family, continuation is
-N1-only, and coding proceeded after its internal audit. **Clebsch is a
-five-paper portfolio:** rigidity Paper I, factorization Paper II, `passages`
-Paper III, q13 passant-code Paper IV, and the separately titled MDS--CSS
-transversal-groups companion. Papers I--III have GitHub/DOI v1 and v2
-releases; later changes are forward versions. The `golden` lane feeds future
-Paper-III versions and is not a sixth paper. The former
+N1-only, and coding proceeded after its internal audit. **Clebsch: Rigidity
+from Sparse Shadows is a five-paper numbered series:** rigidity Paper I,
+factorization Paper II, `passages` Paper III, q13 passant-code Paper IV, and a
+culminating recognition and marked-round-trip Paper V. The MDS--CSS
+transversal-groups and Golden interferometer papers are unnumbered companions.
+Papers I--III have GitHub/DOI v1 and v2 releases; later changes are forward
+versions. The former
 37-page mega-paper is not being published and is retained at
 `archive/papers/clebsch-hexagon-code`. See
 `notes/handoffs/2026-07-13-clebsch-paper.md` for the current order and
