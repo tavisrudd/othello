@@ -44,12 +44,17 @@ three-primary gluing is forced.  Roulleau pre-empts the rational $E^5$ slogan.
 The five kernels now form one resolvent packet over $X_0(3)$: the rational
 $S_6$ triple is the degree-three $X_0(6)$ cover and the exotic $A_5$ pair is
 the quadratic discriminant cover.  Cheltsov--Kuznetsov--Shramov's resolved
-$S_6$-quartics have exactly the classical branch's rational representation
-and $E^5$ isogeny type; proving equality of their integral symplectic lattice
-with the rational-slope branch is the new highest-value shadow-sister gate.
-Nothing from this checkpoint is in the manuscript; finite-flat residue
+$S_6$-quartics now realize the classical branch exactly at the polarized
+period-locus level.  The integral rigidity theorem in
+`notes/2026-08-10-c904-quartic-x06-shadow-sister.md` forces every unimodular
+standard-type $S_6$ lattice to be the $A_5$ root--weight lattice, whose
+stabilizer is $\Gamma_0(6)$; the quartic's nonconstant period therefore has
+closure $X_0(6)$.  Its four discriminant values have exactly the cusp
+cross-ratio, giving an explicit candidate Hauptmodul and quartic--cubic map,
+but the primitive Picard--Lefschetz cusp-width labeling remains the exact next
+gate.  Nothing from this checkpoint is in the manuscript; finite-flat residue
 control, full integral carrier saturation, descent, boundary, and Hecke
-geometry remain the upgrade gates.
+geometry remain the broader upgrade gates.
 
 ## Goal
 

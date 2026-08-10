@@ -1,0 +1,7 @@
+CERTIFICATE PASS
+boundary cross-ratio orbit = -8,-1/8,1/9,8/9,9/8,9
+frame constants 15/10/6 = 6,12,36 -> cusp widths 1,2,6
+quartic cusp widths: 1/2->1, 1/6->2, 1/4->3, 7/10->6
+y(t)=3(5-14t)/(8(4t-1))
+T(t)=6561/100*(t-1/2)*(t-1/6)^2/((t-1/4)*(t-7/10)^2)
+local gluings 3*4=12; SL2(Z/6) orbit=12 stabilizer c=0 mod 6
