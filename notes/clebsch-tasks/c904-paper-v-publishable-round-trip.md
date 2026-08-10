@@ -154,8 +154,26 @@ entire rational codimension-three Hodge space dimension 50, so this is the
 full integral Hodge lattice: no algebraic cut of `Theta x Theta` gives an odd
 multisection.  The surviving smooth-family gate
 is now the generic odd index of Voisin's fine charge-three
-`M_9 -> J` fourfold fibre, or an intrinsic Hecke carrier.  No manuscript or
+`M_9 -> J` fourfold fibre.  No manuscript or
 Lean source changed.
+
+The seventh pass in
+`notes/2026-08-10-c904-m9-common-line-hecke-parity.md` closes the tempting
+one-line flank.  For a charge-two instanton and a general line, the fixed-line
+section incidence is a rank-four quadric in `P^5`, with vertex the known
+common-line pencil and second `P^3` ruling the Faenzi elementary-transform
+family of non-locally-free charge-three sheaves.  The quadric has degree two,
+its Hecke resolution has exactly the index of the old charge-two
+Severi--Brauer conic, and its boundary normal is `O(-2)`.  Every
+universal-twist-independent determinant line also has even Hecke degree.
+Thus charge three removes the ambient moduli gerbe but does not make the
+inherited common-line carrier odd.  The factorization of the five-axis
+isogeny through an odd `3^4` quotient does not bypass the gate either:
+primitive descent through its two-primary kernel is equivalent at the
+Abel--Jacobi level to constructing the universal identity cycle.  Exact
+Python replay and a three-database bounded literature closure accompany the
+claim.  The sole smooth-family crown is now an odd carrier intrinsic to the
+generic fourfold itself.  No manuscript or Lean source changed.
 
 ## Goal
 

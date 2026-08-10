@@ -1,0 +1,6 @@
+rank(det-quadric Hessian)=4; vertex=P1
+finite-field counts agree with both P3-bundle resolutions
+common-line incidence top degree=2; geometric ruling top degree=1
+0 -> E3 -> E2 -> O_L -> 0 gives (c1,c2,c3)(E3)=(0,3,0)
+E3(1) has (c1,c2,c3)=(2h,6[line],0), the M9 numerical class
+PASS

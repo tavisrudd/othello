@@ -45,6 +45,16 @@ projective bundle or give a relative degree-one/odd zero-cycle.  The final
 gate has moved from the \(\mathbf P^3\) of sections to the four-dimensional
 generic fibre of \(M_9\to J\).
 
+The common-line Hecke route is now also exact and does not improve this
+parity.  Faenzi's charge-two-to-charge-three elementary transforms are
+parametrized by the same Severi--Brauer conic as the charge-two moduli class.
+Their projective-three-space section family resolves a rank-four determinant
+quadric of degree two; the boundary normal on a geometric Hecke fibre is
+\(\mathcal O_{\mathbf P^1}(-2)\).  Moreover every
+universal-normalization-independent determinant line has even Hecke degree.
+Thus an odd carrier must be intrinsic to the generic fourfold, not inherited
+from the one-line boundary.
+
 One attractive odd workaround is now ruled out exactly.  The two
 twisted-cubic families lie over theta divisors.  Cutting
 \(\Theta\times\Theta\) by three relative divisor classes and then using the
@@ -71,7 +81,7 @@ The honest current conclusion is therefore:
 \begin{array}{c}
 \text{quintic model: exact two-primary ceiling;}\\
 \text{sextic charge-three model: fine, but }M_9\to J\text{ remains;}\\
-\text{all algebraic codimension-three theta cuts: even.}
+\text{theta cuts and one-line Hecke carriers: even.}
 \end{array}}
 \]
 
@@ -203,15 +213,43 @@ geometry, and a non-uniruledness argument.  It is not an explicit birational
 description of the generic fourfold fibre of \(M_9\to J\).  No odd index is
 printed there.
 
-The next high-EV question is therefore precise:
+The common-line question is now closed negatively at the carrier level.  For
+a charge-two instanton \(E\) and a general line \(L\), Faenzi's kernels
 
-> Does the common line define a charge-two/charge-three Hecke correspondence
-> whose projection to the fourfold fibre of \(M_9\to J\) has odd degree?
+\[
+ 0\to G_q\to E\to\mathcal O_L\to0,
+ \qquad [q]\in\mathbf P(E|_L^\vee),
+\]
 
-If yes, the resulting odd correspondence combines with the already proved
-relative \([2]\) Fano-incidence cycle by Bezout.  If every such Hecke carrier
-has even degree, its parity class should identify the same two-primary gerbe
-as the quintic pencil and produce a sharp impossibility theorem.
+form a Severi--Brauer conic with the same class as the charge-two gerbe.
+After geometric splitting, the associated \(\mathbf P^3\)'s of sections
+resolve the rank-four quadric
+
+\[
+ \{\det(s|_L)=0\}\subset\mathbf P H^0(E(1))=\mathbf P^5,
+\]
+
+whose degree is two.  The boundary normal restricts to
+\(\mathcal O_{\mathbf P^1}(-2)\).  If \(a\) defines an intrinsic determinant
+line on charge three, then
+
+\[
+ 0=\chi(2[\mathcal O_X]-3[\mathcal O_L],a)
+\]
+
+forces \(\chi(\mathcal O_L,a)\) even, so its Hecke degree is even as well.
+The detailed proof and the necessary distinction from Voisin's different
+\(D_{5,1}\) and \(D'_{5,1}\) loci are recorded in
+`2026-08-10-c904-m9-common-line-hecke-parity.md`.
+
+The next high-EV question is therefore sharper:
+
+> Does the generic fourfold fibre of \(M_9\to J\) carry an odd zero-cycle
+> that does not factor through the charge-two Hecke conic?
+
+An affirmative answer combines with the relative \([2]\) Fano-incidence
+cycle by Bezout.  The one-line construction itself can answer affirmatively
+only if the old charge-two Brauer class already splits.
 
 ## 5. Exact no-go for all algebraic theta cuts
 
@@ -276,7 +314,7 @@ Its proper role is now clear:
   primitive relative minimal class;
 - the Abel--Jacobi audit explains why those achievements do not automatically
   produce a relative cubic identity cycle: all visible quintic, Fano, Prym,
-  and theta-cut routes meet the same factor two;
+  theta-cut, and common-line Hecke routes meet the same factor two;
 - charge three is the one surviving geometric route to an odd lift.
 
 If the \(M_9\) Hecke gate closes, it belongs as the final theorem of a
@@ -318,6 +356,12 @@ obstruction become the opening of a sequel.
   irreducibility passage.  Cache SHA-256
   `bd141b86f38ba1b90e5f3a91f963125d897da147ea3ec4c3c041cf0251ce1405`.
 
+- Daniele Faenzi, *Even and odd instanton bundles on Fano threefolds of
+  Picard number 1*, arXiv:1109.3858v2.  Read: introduction and complete
+  Section 3.1, especially Theorem 3.1, Steps 2--3 and the elementary-transform
+  boundary dimension.  PDF SHA-256
+  `0024a632f2ca141eb4f3c09c43c65a3464646fd72fd951417abb2a3a9db90e8f`.
+
 - Claire Voisin, *Abel--Jacobi map, integral Hodge classes and decomposition
   of the diagonal*, arXiv:1005.5621.  Read: Theorem 2.1 and its full proof
   spine through the construction of \(M_9\), plus Theorem 2.11.  Cache
@@ -336,7 +380,10 @@ for charge-two cubic instantons, the printed \(M_9\) invariants, charge-three
 cubic instantons, and the degree-six Abel--Jacobi map.  No later primary
 source was located that computes the generic index of \(M_9\to J\), gives a
 common-line odd Hecke multisection, or repairs Xu's charge-two argument.
-This is a bounded search statement, not a global novelty claim.
+The bounded three-database forward-citation closure and its exact query
+boundary are recorded in
+`2026-08-10-c904-charge-three-instanton-literature-closure.md`.  This is a
+bounded search statement, not a global novelty claim.
 
 ## 8. Reproducibility
 
@@ -391,19 +438,25 @@ The strongest attempted shortcut was the theta-pair construction: two
 degree-three transfers times an odd addition multisection.  Exact saturation
 reverses it.  Every divisor-generated addition cut has even degree.  The
 failure is not a poor choice of basis or three divisors; it is the image ideal
-of the full saturated rank-50 lattice.
+of the full saturated rank-50 lattice.  Skew Howe duality shows that this is
+the entire integral codimension-three Hodge lattice, so no non-divisor
+algebraic theta cut escapes.
 
 ### Overconstraint
 
-Three independent parity detectors now agree:
+Five independent parity detectors now agree:
 
 1. charge-two determinant weights generate \(2\mathbf Z\);
 2. the common-line pencil has index at most two and no forced odd point;
-3. the full relative-NS theta-cut lattice pairs with \(\Theta^2\) in
-   \(2\mathbf Z\).
+3. the full integral theta-cut Hodge lattice pairs with \(\Theta^2\) in
+   \(2\mathbf Z\);
+4. the common-line section incidence is a rank-four quadric of degree two;
+5. the Hecke-boundary normal and every intrinsic determinant polarization
+   have even degree on the charge-three conic.
 
-The odd degree in charge three is therefore not cosmetic.  It is the only
-nearby place where the parity obstruction actually disappears.
+Odd charge removes the ambient moduli gerbe, but not the inherited one-line
+geometry.  Any successful odd degree must come from the interior geometry of
+the generic fourfold.
 
 ## 10. Mystery ledger
 
@@ -418,5 +471,8 @@ nearby place where the parity obstruction actually disappears.
   \(M_9\to J\).
 - **Can twisted-cubic theta geometry close it?**  No: the complete integral
   Hodge lattice has pairing ideal \(2\mathbf Z\).
-- **Could a common-line Hecke cycle intrinsic to \(M_9\) be odd?**  Open.  It
-  is the surviving concrete flank.
+- **Can the one-common-line Hecke boundary close it?**  Only if the old
+  charge-two conic already splits.  All intrinsic determinant and boundary
+  cuts remain even.
+- **Could a carrier intrinsic to the interior of \(M_9\) be odd?**  Open.  It
+  is the sole surviving smooth-family flank.
