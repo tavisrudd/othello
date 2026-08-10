@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; literature and red-team gates first; recommendations only
+**Status:** complete 2026-08-09; eight candidates audited; three narrowed wording
+survivors delivered; recommendations only
 
 ## Objective
 
@@ -153,6 +154,18 @@ summaries.  Promotion remains with the owning routed integration task.
   findings and synthesis.
 - `notes/2026-08-09-c902-paper-iii-cheap-upgrade-wording.md` — ready-to-paste
   recommendations only for candidates that pass all applicable gates.
+
+## Completion outcome
+
+- Candidates 1, 5, and 8 were already landed and require no duplicate wording.
+- Candidate 2 survives as one bounded triangle--Pfaffian recognition theorem.
+- Candidate 3 survives as an unnumbered determinant-line norm paragraph.
+- Candidate 4 survives as one marking-aware spectral-compatibility sentence.
+- Candidate 6 is deferred with both C894 human safeguards still open.
+- Candidate 7's promotion to proposition status is rejected.
+- The literature audit, proof packets, four-pass adversarial review, and exact
+  recommendation wording are the four deliverables above.  No manuscript,
+  ledger, mirror, release artifact, or public surface was edited.
 
 ## Acceptance
 
