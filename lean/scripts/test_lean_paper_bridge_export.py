@@ -77,6 +77,7 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertEqual(files["LICENSE"], b"license\n")
         self.assertEqual(files["flake.lock"], b"source\n")
         self.assertIn(b'"path": "LICENSE"', files["MANIFEST.json"])
+        self.assertEqual(files[".gitignore"], b"/.lake/\n/lake-manifest.json\n")
 
     def test_tmpfs_and_existing_destinations_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "disk-backed"):

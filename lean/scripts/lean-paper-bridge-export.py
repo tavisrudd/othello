@@ -19,6 +19,7 @@ CONFIG_PATH = "lean/trust/paper-bridges.toml"
 FLAKE_LOCK_PATH = "lean/paper-bridges/flake.lock"
 TOOLCHAIN = "leanprover/lean4:v4.32.0-rc1"
 MATHLIB_REV = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
+GITIGNORE = "/.lake/\n/lake-manifest.json\n"
 
 
 def git(*args: str, text: bool = True) -> str | bytes:
@@ -182,6 +183,7 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
         "flake.nix": flake(bridge).encode(),
         "flake.lock": flake_lock,
         "README.md": readme(bridge).encode(),
+        ".gitignore": GITIGNORE.encode(),
     }
     manifest = {
         "schema_version": 1,
@@ -341,7 +343,12 @@ def sync(
         capture_output=True,
         text=True,
     ).stdout
-    if status:
+    unexpected_status = [
+        line
+        for line in status.splitlines()
+        if line[3:] != "lake-manifest.json" and not line[3:].startswith(".lake/")
+    ]
+    if unexpected_status:
         raise ValueError(f"bridge checkout is dirty: {destination}")
     tracked = set(
         subprocess.run(
