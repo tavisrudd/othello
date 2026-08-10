@@ -2,11 +2,11 @@
 """Shared validator for a paper's formal-companion pin.
 
 ``FORMAL_COMPANION.json`` is the single place a paper names an external formal
-artifact. One schema serves every paper: a list of pinned artifacts, each with a
-role, the repository it lives in, the immutable commit, and the gate, manifest
-and axiom audit that commit is expected to carry. A paper that pins one artifact
-lists one; a paper whose certificate package sits on a base library lists both
-and links them with ``depends_on``.
+artifact. A list of pinned artifacts records each role, repository, immutable
+commit, and the gate, manifest and axiom audit that commit is expected to carry.
+Schema v3 distinguishes shared libraries, Mathlib-only certificate packages,
+and cheap paper bridges. A bridge depends on one library and one certificate;
+neither upstream package depends on the other.
 
 A commit is a Git object name and therefore content-addressed: it identifies one
 tree and cannot be made to denote another. Well-formedness is checked always.
@@ -36,7 +36,7 @@ import subprocess
 from pathlib import Path
 
 
-SCHEMA = "formal-companion-v2"
+SCHEMAS = {"formal-companion-v2", "formal-companion-v3"}
 COMMIT_RE = re.compile(r"\b[0-9a-f]{40}\b")
 DOI_RE = re.compile(r"^10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+$")
 # A pinned artifact always names where it lives and which immutable commit. A gate
@@ -44,6 +44,7 @@ DOI_RE = re.compile(r"^10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+$")
 # a package merely depends on is pinned by revision alone.
 ARTIFACT_KEYS = {"role", "repository", "commit"}
 OPTIONAL_KEYS = {"gate", "manifest", "axiom_audit", "depends_on", "coverage"}
+KINDS = {"shared-library", "certificate", "bridge"}
 # Text the guard reads. Binary artifacts and generated evidence are excluded:
 # a commit named there is data under some other check, not a claim in prose.
 GUARD_SUFFIXES = {".md", ".tex", ".json", ".txt", ".nix", ".toml"}
@@ -64,8 +65,9 @@ class CompanionError(SystemExit):
 def load(paper: Path) -> dict:
     """Read and structurally validate the pin."""
     pin = json.loads((paper / "FORMAL_COMPANION.json").read_text(encoding="utf-8"))
-    if pin.get("schema") != SCHEMA:
-        raise CompanionError(f"schema, expected {SCHEMA}")
+    schema = pin.get("schema")
+    if schema not in SCHEMAS:
+        raise CompanionError(f"schema, expected one of {sorted(SCHEMAS)}")
     doi = pin.get("concept_doi")
     if not isinstance(doi, str) or not DOI_RE.match(doi):
         raise CompanionError("concept DOI")
@@ -77,10 +79,11 @@ def load(paper: Path) -> dict:
 
     roles: set[str] = set()
     for entry in artifacts:
-        missing = ARTIFACT_KEYS - set(entry)
+        required = ARTIFACT_KEYS | ({"kind"} if schema == "formal-companion-v3" else set())
+        missing = required - set(entry)
         if missing:
             raise CompanionError(f"artifact fields {sorted(missing)}")
-        unknown = set(entry) - ARTIFACT_KEYS - OPTIONAL_KEYS
+        unknown = set(entry) - ARTIFACT_KEYS - OPTIONAL_KEYS - {"kind"}
         if unknown:
             raise CompanionError(f"unknown artifact fields {sorted(unknown)}")
         if entry["role"] in roles:
@@ -90,10 +93,44 @@ def load(paper: Path) -> dict:
             raise CompanionError(f"commit for role {entry['role']}")
         if not entry["repository"].startswith("https://"):
             raise CompanionError(f"repository for role {entry['role']}")
+        if schema == "formal-companion-v3" and entry["kind"] not in KINDS:
+            raise CompanionError(f"kind for role {entry['role']}")
+    role_entries = {entry["role"]: entry for entry in artifacts}
     for entry in artifacts:
-        depends = entry.get("depends_on")
-        if depends is not None and depends not in roles:
-            raise CompanionError(f"depends_on {depends} names no role")
+        raw_depends = entry.get("depends_on")
+        if schema == "formal-companion-v2":
+            if raw_depends is None:
+                depends = []
+            elif isinstance(raw_depends, str):
+                depends = [raw_depends]
+            else:
+                raise CompanionError(f"depends_on for role {entry['role']} must be a string")
+        else:
+            if raw_depends is None:
+                depends = []
+            elif not isinstance(raw_depends, list) or not all(
+                isinstance(role, str) for role in raw_depends
+            ):
+                raise CompanionError(f"depends_on for role {entry['role']} must be a list")
+            else:
+                depends = raw_depends
+        if len(depends) != len(set(depends)):
+            raise CompanionError(f"duplicate dependency for role {entry['role']}")
+        for dependency in depends:
+            if dependency not in roles:
+                raise CompanionError(f"depends_on {dependency} names no role")
+            if dependency == entry["role"]:
+                raise CompanionError(f"role {entry['role']} depends on itself")
+        if schema == "formal-companion-v3":
+            kind = entry["kind"]
+            dependency_kinds = {role_entries[role]["kind"] for role in depends}
+            if kind in {"shared-library", "certificate"} and depends:
+                raise CompanionError(f"{kind} role {entry['role']} must be dependency-free")
+            if kind == "bridge" and dependency_kinds != {"shared-library", "certificate"}:
+                raise CompanionError(
+                    f"bridge role {entry['role']} must depend on one shared-library"
+                    " role and one certificate role"
+                )
     return pin
 
 
