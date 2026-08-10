@@ -727,6 +727,39 @@ comparison of their off-diagonal intersection cycles, retaining the
 \(z^2\)-trace before passing to character, is now the precise geometric
 route to the missing cross-direction law.
 
+The involution preserves the endpoint point types as well.  On line
+coefficients it induces
+\[
+ \boxed{
+ v_i=(x_i,1,-y_i)
+ \longmapsto
+ v_i^\iota=
+ \left(\frac bc-x_i,1,\frac ec+y_i\right),
+ \qquad
+ Q_{\rm pr}(v_i^\iota)=Q_{\rm pr}(v_i).}                \tag{23ai}
+\]
+The last equality follows because the contragredient of an isometry of
+\(Q_{\rm du}\) is an isometry of its adjugate form.  If \(B_{\rm pr}\) is
+the polar form of \(Q_{\rm pr}\), the three-dimensional Lagrange identity
+therefore gives parallel formulas for the ordinary and mirror intersection
+values:
+\[
+ \begin{aligned}
+ Q_{\rm du}(v_i\times v_j)
+   &\doteq Q_{\rm pr}(v_i)Q_{\rm pr}(v_j)
+              -B_{\rm pr}(v_i,v_j)^2,\\
+ Q_{\rm du}(v_i\times v_j^\iota)
+   &\doteq Q_{\rm pr}(v_i)Q_{\rm pr}(v_j)
+              -B_{\rm pr}(v_i,v_j^\iota)^2.
+ \end{aligned}                                         \tag{23aj}
+\]
+Here the projective proportionalities become the affine formulas after
+division by the corresponding squared last coordinates, exactly as in
+(32).  Hence the mirror cover carries a twisted copy of the same endpoint
+Gram data, with no change in the internal/external type vector.  Comparing
+the ordinary Gram matching sum with this reflected Gram matching sum is the
+value-level refinement unavailable to the Euler-character projection.
+
 More importantly, it isolates every accidental collision of conic values.
 Formula (23z) says
 \[

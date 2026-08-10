@@ -555,7 +555,11 @@ which preserves \(Q_{\rm du}\), fixes every direction conic, and commutes
 with the deck involution.  The reflected arrangement \(F^\iota\) is exactly
 \(\jmath(F)\).  Thus ordinary nodes and mirror collisions are respectively
 the off-diagonal intersections \(D_i\cap D_j\) and
-\(D_i\cap\jmath(D_j)\) inside one Klein-four incidence geometry.
+\(D_i\cap\jmath(D_j)\) inside one Klein-four incidence geometry.  On line
+vectors, \(v_i\mapsto v_i^\iota=(b/c-x_i,1,e/c+y_i)\) preserves
+\(Q_{\rm pr}\), so the mirror intersections have the same Lagrange--Gram
+formula with \(B(v_i,v_j)\) replaced by \(B(v_i,v_j^\iota)\), without
+changing the endpoint type vector.
 
 ### \(q=53\): type-uniform critical core
 
