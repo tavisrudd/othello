@@ -301,6 +301,20 @@ def guarded_finitegeom_result(
     if not isinstance(logs, dict) or FINITEGEOM_GATE not in logs:
         raise RuntimeError("guarded finitegeom run does not identify the gate transcript")
     log_path = Path(str(logs[FINITEGEOM_GATE])).resolve()
+    if not log_path.is_file():
+        target_result = next(
+            (
+                item
+                for item in results
+                if isinstance(item, dict)
+                and item.get("target") == FINITEGEOM_GATE
+                and item.get("outcome") in {"skipped-current", "built"}
+                and isinstance(item.get("log"), str)
+            ),
+            None,
+        )
+        if target_result is not None:
+            log_path = Path(str(target_result["log"])).resolve()
     if not log_path.is_relative_to(resolved_run) or not log_path.is_file():
         raise RuntimeError("guarded Lean gate transcript is absent or outside its run")
     transcript = log_path.read_text(encoding="utf-8")

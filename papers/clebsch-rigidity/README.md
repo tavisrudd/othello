@@ -37,17 +37,12 @@ Build the manuscript from `papers/` with
 `make -B clebsch-rigidity`; the `clebsch` target builds the preserved
 mega-paper fallback.
 
-The Paper I verification surface is under `verification/`. It contains the
-nineteen-row statement identity, the companion's five-mode claim map, trust
-manifest, validators, clean release runner, unit tests, and deterministic
-successful output. The twenty selected exact checker invocations and pinned
-Nix environment are release-local; the aggregate formal gate is
-`RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean` in the
-certificate package.  It imports the causal rigidity spine and all eight
-orientation packets.  The commutant terminals are unconditional: the pinned
-library proves the reverse containment from explicit five-cycle and
-three-cycle commutation equations, while golden equivariance and integral
-descent are kernel checked.
+The verification material is under `verification/`. It contains the
+nineteen-row statement identity, claim map, trust manifest, deterministic
+checker transcripts, validators, and unit tests. The commutant terminals are
+unconditional: the finitegeom library proves the reverse containment from
+explicit five-cycle and three-cycle commutation equations, while golden
+equivariance and integral descent are kernel checked.
 
 The main paper's q11 orbit decomposition has an explicit two-generator finite
 certificate, independently checked by the formal gate and the paper-owned
@@ -56,31 +51,26 @@ chord-incidence identities. Generated q11 tables are retained only as a
 redundant formal cross-check and as evidence for the companion's sharper
 finite census claims.
 
-The reusable formal source is distributed in
-`https://github.com/tavisrudd/finitegeom`; the aggregate q11 gate is in
-`https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`.  Both
-revisions are recorded in the manuscript.  The version-independent archival
-locator of `finitegeom` is the Zenodo concept DOI
+The reusable human-scale formal source is distributed in
+`https://github.com/tavisrudd/finitegeom`; the frozen q11 certificate is in
+`https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates`; and their
+small compatibility proof is in
+`https://github.com/tavisrudd/finitegeom-clebsch-rigidity-bridge`. Exact
+revisions are recorded in `FORMAL_COMPANION.json`. The version-independent
+archival locator of `finitegeom` is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-From this directory, supply the pinned q11 certificate package as `--lean-root`
-and the pinned shared library as `--finitegeom-root`.  A passing release checks
-the exact transitive project-owned closure across both repositories:
+From this directory, supply clean checkouts at those revisions, the sealed q11
+Lake pack, and the finitegeom human-gate receipt:
 
 ```text
 nix run .#verify -- \
-  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
-  --finitegeom-root /absolute/path/to/finitegeom
-```
-
-Workspace maintainers must build the aggregate through the guarded queue first
-and pass its successful run directory back to the release verifier:
-
-```text
-../../lean/scripts/lean-build-queue.py build \
-  RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates \
-  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
-nix run .#verify -- \
-  --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
+  --certificate-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
   --finitegeom-root /absolute/path/to/finitegeom \
-  --guarded-lean-run /run/directory/printed/by/the/guard
+  --bridge-root /absolute/path/to/finitegeom-clebsch-rigidity-bridge \
+  --certificate-pack /absolute/path/to/q11.lake-pack.tar.gz \
+  --guarded-finitegeom-run /absolute/path/to/successful/run
 ```
+
+This verifies sealed certificate evidence and hashes without rebuilding the
+q11 certificate. See `verification/README.md` for the trust boundary and the
+separate `nix run .#regenerate` command used after intentional source changes.

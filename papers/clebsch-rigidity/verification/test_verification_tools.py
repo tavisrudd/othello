@@ -305,6 +305,46 @@ class ReleaseRunnerTests(unittest.TestCase):
             self.assertNotIn("1002 lines", result.stdout)
             self.assertEqual(transcript, stdout)
 
+    def test_guarded_receipt_uses_trace_current_transcript(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            run_dir = Path(directory)
+            logs = run_dir / "logs"
+            logs.mkdir()
+            missing = logs / "gate.log"
+            replay = logs / "gate.nobuild.log"
+            replay.write_text("'Gate.replayed' depends on axioms: [propext]\n")
+            (run_dir / "manifest.json").write_text(
+                json.dumps(
+                    {
+                        "aggregate": [release.FINITEGEOM_GATE],
+                        "lean_root": str(PAPER_ROOT),
+                        "logs": {release.FINITEGEOM_GATE: str(missing)},
+                        "source": {"git_dirty": False, "git_head": "abc123"},
+                    }
+                )
+            )
+            (run_dir / "status.json").write_text(
+                json.dumps(
+                    {
+                        "exit_code": 0,
+                        "results": [
+                            {
+                                "log": str(replay),
+                                "outcome": "skipped-current",
+                                "target": release.FINITEGEOM_GATE,
+                            },
+                            {"outcome": "gate-passed", "target": "<aggregate>"},
+                        ],
+                        "state": "success",
+                    }
+                )
+            )
+            result, transcript = release.guarded_finitegeom_result(
+                run_dir, PAPER_ROOT, "abc123"
+            )
+            self.assertIn("Gate.replayed", result.stdout)
+            self.assertEqual(transcript, replay)
+
     def test_guarded_receipt_rejects_quiet_stdout_outside_run(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

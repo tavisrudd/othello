@@ -25,7 +25,7 @@
           verify = pkgs.writeShellApplication {
             name = "verify-clebsch-rigidity-release";
             runtimeInputs = with pkgs;
-              [ python3 texlive.combined.scheme-full git coreutils stdenv.cc ];
+              [ python3 texlive.combined.scheme-full git coreutils stdenv.cc nix ];
             text = ''
               exec python3 verification/verify_release.py "$@"
             '';

@@ -14,9 +14,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -56,10 +56,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
               "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card",
@@ -70,7 +71,8 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -107,7 +109,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 96",
+      "paper_location": "source line 98",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -130,69 +132,72 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "TRUST_FACT.json",
+              "repository": "certificate",
+              "sha256": "108189a640fd939a379d1df632cee0c1307219d34c05ca1a048706b8561b9e3d"
             },
             "axioms": {
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.brianchon_points_one_orbit": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.mem_standardConicIndices_iff": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_eq_projectiveVec": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_witnessIndex": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.point_orbit_partition": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_six_orbit": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ],
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit": [
-                "propext",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_twelve_orbit": [
                 "Classical.choice",
-                "Quot.sound"
+                "Quot.sound",
+                "propext"
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "TavisRuddFiniteGeom/Certificates/Q11.lean",
+              "repository": "certificate",
+              "sha256": "1872b55abe0166764b6c831b9e3fbb6f87325962e6c68ed5eb46a39fd033ce8b"
             },
+            "repository": "certificate",
             "terminals": [
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex",
-              "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff"
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.point_orbit_partition",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_six_orbit",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_twelve_orbit",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.brianchon_points_one_orbit",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_eq_projectiveVec",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_witnessIndex",
+              "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.mem_standardConicIndices_iff"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "certificate_build": false,
+              "command": "nix run .#verify -- CERTIFICATE_PACK FINITEGEOM_ROOT CERTIFICATE_ROOT",
+              "method": "sealed-certificate-through-paper-bridge",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -229,7 +234,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 958",
+      "paper_location": "source line 1002",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -254,9 +259,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic": [
@@ -276,17 +281,19 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
               "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic",
               "RelativeConicArcs.Examples.Q11Coding.witness_code_coveringRadius_three"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -323,7 +330,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 916",
+      "paper_location": "source line 960",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -339,7 +346,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 933",
+      "paper_location": "source line 977",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -387,7 +394,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 1049",
+      "paper_location": "source line 1093",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -411,9 +418,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -448,10 +455,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound",
@@ -461,7 +469,8 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -520,7 +529,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 1104",
+      "paper_location": "source line 1148",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -567,7 +576,7 @@
         }
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 614",
+      "paper_location": "source line 658",
       "route": "mixed",
       "row": 16,
       "source": {
@@ -590,9 +599,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_conic": [
@@ -632,10 +641,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
               "RelativeConicArcs.ClebschDye.sixArc_twelve_le_uncovered_card",
@@ -646,7 +656,8 @@
               "RelativeConicArcs.ClebschDye.isClebschHexagon_of_uncovered_subset_planeConic"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -658,7 +669,7 @@
         }
       ],
       "id": "thm-rigidity+cor-conic-stabilizer-orbit",
-      "paper_location": "source line 143",
+      "paper_location": "source line 188",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -753,9 +764,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode": [
@@ -765,15 +776,17 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -872,7 +885,7 @@
         "Dye 1991, Section 2.2 and Theorem 1(ii), page 275, and Theorem 3, page 278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 1240",
+      "paper_location": "source line 1284",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -897,9 +910,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_counts": [
@@ -934,10 +947,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact",
               "RelativeConicArcs.Examples.Q11Coding.ambiguity_strata_sound",
@@ -947,7 +961,8 @@
               "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -959,7 +974,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 1290",
+      "paper_location": "source line 1334",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -1044,9 +1059,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets": [
@@ -1180,10 +1195,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
               "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
@@ -1213,7 +1229,8 @@
               "RelativeConicArcs.SupportOrientationCommutant.oddLattice_integralCommutant_eq_ZsqrtFive"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1225,7 +1242,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition+thm-orientation-two-graph+cor-orientation-cubic-geometry",
-      "paper_location": "source line 1306",
+      "paper_location": "source line 1350",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -1257,9 +1274,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments": [
@@ -1274,16 +1291,18 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschDye.sixArc_uncovered_add_brianchon_card",
               "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1305,9 +1324,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1322,16 +1341,18 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1368,9 +1389,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card": [
@@ -1385,16 +1406,18 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
               "RelativeConicArcs.Q9Sylvester.distanceTwo_clique_number_five"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1455,9 +1478,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula": [
@@ -1465,15 +1488,17 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.ClebschChordDefect.clebsch_uncovered_formula"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1510,7 +1535,7 @@
         }
       ],
       "id": "prop-golden-normal-form+prop-clebsch-family-uncovered",
-      "paper_location": "source line 319",
+      "paper_location": "source line 363",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1553,9 +1578,9 @@
         {
           "lean": {
             "audit": {
-              "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-              "repository": "lean",
-              "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+              "path": "trust/ClebschRigidityAxiomAudit.lean",
+              "repository": "finitegeom",
+              "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
             },
             "axioms": {
               "RelativeConicArcs.SmallKGeometricBridge.fiveArc_not_conic_card": [
@@ -1580,10 +1605,11 @@
               ]
             },
             "gate": {
-              "path": "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
-              "repository": "lean",
-              "sha256": "ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e"
+              "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+              "repository": "finitegeom",
+              "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
             },
+            "repository": "finitegeom",
             "terminals": [
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_uncovered_card",
               "RelativeConicArcs.SmallKGeometricBridge.fourArc_conic_card_order",
@@ -1591,7 +1617,8 @@
               "RelativeConicArcs.SmallKGeometricBridge.sevenArc_primePower_conic_card_spectra"
             ],
             "validation": {
-              "command": "nix develop --command env LEAN_NUM_THREADS=1 lake build RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+              "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+              "method": "guarded-finitegeom-receipt",
               "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc"
@@ -1976,12 +2003,12 @@
     "manuscript": {
       "path": "clebsch_rigidity_computational_companion.tex",
       "repository": "paper",
-      "sha256": "1925a2c38c13c280b1f1f7402d946e84103216022a4aab8907505c4967caa5a6"
+      "sha256": "9f218d2e0f87e0e16390b1e8e122cc7edc9fc04c6a3eb32fef5bb71d4e882681"
     },
     "pdf": {
       "path": "clebsch_rigidity_computational_companion.pdf",
       "repository": "paper",
-      "sha256": "20c8eb4e59745f6bd8671aa9fe30d1e266d092d550fc712b0c67c4eef08e4446"
+      "sha256": "53c584ab8360aeab2e582abce6b1b34c59307fd5dd1c48d4b07579e61ab4aa18"
     },
     "trust_ledger": {
       "path": "verification/computational_companion_trust.json",
@@ -1989,36 +2016,66 @@
       "sha256": "884603c4596e2827acae3c9b26a5e43fa2bd2808c664438fd5f833d7ff19d90a"
     }
   },
-  "lean_repository": {
-    "commit": "930675c6b8bf44e06847d15bd6e63560caa6977f",
-    "distribution": "separate shared Git repository",
-    "finitegeom_commit": "187bed8895fc62784caf2022d717b4daa37871ad",
-    "path": ".",
-    "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
+  "formal_companion": {
+    "path": "FORMAL_COMPANION.json",
+    "repository": "paper",
+    "sha256": "654edc1f5dc192aae51a425bd862c44f1aa4838d796378b059faf71844b2d82e"
+  },
+  "formal_verification": {
+    "bridge_gate": {
+      "path": "TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+      "repository": "bridge",
+      "sha256": "8ac420a1afb1a6bb43598f0a6ea3dafee7b170c0c029a4d713f5473efe84860d"
+    },
+    "bridge_manifest": {
+      "path": "MANIFEST.json",
+      "repository": "bridge",
+      "sha256": "6a58da828d8c6b888ff9b674e2bcfce6684e962f8d236261c808522e0f66be0f"
+    },
+    "certificate_manifest": {
+      "path": "MANIFEST.json",
+      "repository": "certificate",
+      "sha256": "c9b21cc7fc1d7162e78fc25af66d0d39184866e1295c7ed15c6b74a537597305"
+    },
+    "certificate_trust_fact": {
+      "path": "TRUST_FACT.json",
+      "repository": "certificate",
+      "sha256": "108189a640fd939a379d1df632cee0c1307219d34c05ca1a048706b8561b9e3d"
+    },
+    "finitegeom_audit": {
+      "path": "trust/ClebschRigidityAxiomAudit.lean",
+      "repository": "finitegeom",
+      "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
+    },
+    "finitegeom_gate": {
+      "path": "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+      "repository": "finitegeom",
+      "sha256": "6e52066855d72d4cf7ce14af1e30496f48630e10765622ad34326764cf2794eb"
+    }
   },
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "241d09f5b6784097bea5f950643bd7baf16c9f629f2ad38ac526d1fb568ebe9f"
+    "sha256": "2f7316721822382caaa497d320eeb2396ddfbd3ab0eaf28ce8a642bc31bac8ec"
   },
-  "manuscript_sha256": "bc9d7ad1a1dedf0eb0b9af9a1245bf1d31ef37cdb1ac29f73b6e53e8be2e4158",
+  "manuscript_sha256": "79500255f1e247a72b13c17bde7a1eb4a70906672da1569c96430f4366af9526",
   "public_documents": [
     {
       "path": "README.md",
       "repository": "paper",
-      "sha256": "d1801356381624eaae7fda737861a1929ec80e3ad7440baab4b439fe4e030726"
+      "sha256": "e5eeab946af7f985ebd7abd31c7daf4183c05a9096ec40be39efadca47f57119"
     },
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "022b3f230d7edffbe095f4e92e5273927683e975547edb23264994ebc04732a9"
+      "sha256": "07bb0c20d2056d3eeae294b1ff798f39b0b9e576af72cd520bec5be2ebb873be"
     }
   ],
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",
       "repository": "paper",
-      "sha256": "9717287b35144a3e671f9b380b6bbaf4c8ec8da9561f5b2cc41fb2d51948c858"
+      "sha256": "d5ea85fa290d81cca73f66e37f706127afcc217c34f0cf1f08407ef2d5ab77e5"
     },
     "formal_toolchain": {
       "lean": "4.32.0-rc1",
@@ -2037,11 +2094,11 @@
     },
     "platform": "x86_64-linux"
   },
-  "schema": "clebsch-rigidity-trust-manifest-v1",
+  "schema": "clebsch-rigidity-trust-manifest-v2",
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "d123bc00f321d9162daceec40106c46bc27317d76254e87da7336381e6f32bf3"
+    "sha256": "f405768739e38213172b60d5c5c4afef03729abb7336e28e875faf39053ed7e3"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -2377,31 +2434,40 @@
       },
       {
         "argv": [
-          "nix",
-          "develop",
-          "--command",
-          "env",
-          "LEAN_NUM_THREADS=1",
-          "lake",
-          "build",
-          "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
+          "guarded-finitegeom-run",
+          "RelativeConicArcs.Gates.ClebschRigidityTrust"
         ],
         "axiom_audit": {
-          "path": "verification/clebsch_rigidity_trust/axiom-audit.txt",
-          "repository": "lean",
-          "sha256": "7703d3649faee598a4315a4ca52d55863bdeff5073a8d60076337e8f74558d07"
+          "path": "trust/ClebschRigidityAxiomAudit.lean",
+          "repository": "finitegeom",
+          "sha256": "607b9a6c348f3d7c5072c032627eb5fd290ce54d231ffc473bdce51b31727ea5"
         },
         "cwd": ".",
-        "id": "lean-rigidity-trust-gate",
-        "repository": "lean",
+        "id": "lean-finitegeom-trust-gate",
+        "repository": "finitegeom",
+        "timeout_seconds": 1800
+      },
+      {
+        "argv": [
+          "nix",
+          "run",
+          ".#verify",
+          "--",
+          "CERTIFICATE_PACK",
+          "FINITEGEOM_ROOT",
+          "CERTIFICATE_ROOT"
+        ],
+        "cwd": ".",
+        "id": "lean-certificate-compatibility",
+        "repository": "bridge",
         "timeout_seconds": 1800
       }
     ],
-    "command": "nix develop --command python3 verification/verify_release.py --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates --finitegeom-root /absolute/path/to/finitegeom",
+    "command": "nix run .#verify -- --certificate-root CERTIFICATE_ROOT --finitegeom-root FINITEGEOM_ROOT --bridge-root BRIDGE_ROOT --certificate-pack CERTIFICATE_PACK --guarded-finitegeom-run GUARDED_FINITEGEOM_RUN",
     "entry_point": {
       "path": "verification/verify_release.py",
       "repository": "paper",
-      "sha256": "3670f285a137865140f37fab724a60dca7cedd297e794278b64513ff03baad72"
+      "sha256": "f3785f0904c1c3d3816dc3cad5abc68745a7053028359d0aaa04f42f6153cb76"
     },
     "output": {
       "path": "verification/verify-release-output.json",
@@ -2417,22 +2483,22 @@
       {
         "path": "verification/build_trust_manifest.py",
         "repository": "paper",
-        "sha256": "e773751dc45dfc76d32a17e66ee94275c6d1f315693e2dbb4dcd5a19ccd19a39"
+        "sha256": "37a6322446ce24afbc913eb19bcdf00fd25d7d599fca8ce78f5a7fe141405e2e"
       },
       {
         "path": "verification/verify_trust_manifest.py",
         "repository": "paper",
-        "sha256": "34e546058ee95576703f2aed39465b708d74f51862cbef85e6364f871a0eccc3"
+        "sha256": "87abd637d39fe1913143c94da78fd95acd25e20e6842b1761a80239f0bbfb857"
       },
       {
         "path": "verification/test_verification_tools.py",
         "repository": "paper",
-        "sha256": "e585968859982c3a5b264fff7c75ab6241d91f0e79b1c8bb1f409bcc45577e84"
+        "sha256": "d0f17f9ebd2939743608820208b4ed6bb9213ff7917db5862b4cfd63d723daf8"
       },
       {
         "path": "verification/check_manuscript_build.py",
         "repository": "paper",
-        "sha256": "1da50a48e0bed965c83d3dfafa6635885bc638c41aff6265b6537280696a955b"
+        "sha256": "d359e10d333b72d39fd8fe63df57cfeb4e099c75ef5524b13aaf579fa168229f"
       },
       {
         "path": "verification/verify_computational_companion.py",

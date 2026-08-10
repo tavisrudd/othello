@@ -1959,21 +1959,25 @@ rows are finite leaves internal to this redundant cross-check; they are not
 premises of the orbit--stabilizer or incidence proofs above.  The companion
 searches lie outside this gate.  The reusable Lean development is distributed in
 \href{https://github.com/tavisrudd/finitegeom}{\texttt{finitegeom}}, while
-the generated q11 tables and aggregate Paper I gate are in
+the generated q11 tables are frozen in
 \href{https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates}
-{\texttt{the q11 package}}.  The
+{\texttt{the q11 package}}.  Their proved compatibility with the human model is
+checked in
+\href{https://github.com/tavisrudd/finitegeom-clebsch-rigidity-bridge}
+{\texttt{the Paper I bridge}}.  Neither upstream repository imports the other.  The
 version-independent archival locator of \texttt{finitegeom} is the Zenodo concept
 DOI \href{https://doi.org/10.5281/zenodo.21650878}
 {\texttt{10.5281/zenodo.21650878}}. The formalization uses Lean 4.32.0-rc1.
-Its pinned artifacts are
+The exact shared-library, certificate, and bridge commits are pinned once in
+\path{FORMAL_COMPANION.json}.  Their verification boundaries are
 \begin{center}
 \small
-certificate-package commit:
-\path{930675c6b8bf44e06847d15bd6e63560caa6977f}\\
-shared-library commit:
-\path{187bed8895fc62784caf2022d717b4daa37871ad}\\
-aggregate gate:
-\path{RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean}\\
+human gate:
+\path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}\\
+certificate aggregate:
+\path{TavisRuddFiniteGeom/Certificates/Q11.lean}\\
+compatibility bridge:
+\path{TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean}\\
 Mathlib commit:
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
 \end{center}
@@ -1981,14 +1985,8 @@ The SHA-256 digest of \path{verification/checker_outputs.json} is
 \begin{center}
 \small\path{98744378dee557bcd29a5ab5ab9f4fad827b62721c32558f47edefd06955397a}.
 \end{center}
-The SHA-256 digest of
-\begin{center}
-\small\path{RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean}
-\end{center}
-is
-\begin{center}
-\small\path{ef8e048de4b8f460847532e9231463d40c7e5c8a49dae1a68d28367678e2ff8e}.
-\end{center}
+The three repository manifests record the exact source and verification-boundary
+hashes checked by the release verifier.
 The two-generator word ledger used in Proposition~\ref{prop:a5-point-orbits}
 is a formal finite certificate; the remaining formalization is an independent
 cross-check rather than a manuscript proof dependency.  Its
