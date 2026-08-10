@@ -1125,6 +1125,41 @@ the normal word \(C^{j_0-1}G\) whenever it is nonzero.  Thus a surviving
 kernel class cannot be localized on a small subset of the split divisor;
 the sparse Lucas rows supplement this universal strided bound.
 
+The power tower gives a stronger support bound for the kernel word itself.
+For nonzero \(g\in\mathcal K_R\), put \(G=s_R(g)\) and
+\[
+ D_g=\gcd(R,G).
+\]
+For every flagged rung, the remainder \(P_j\equiv G^j\pmod R\) vanishes at
+each root of \(D_g\), so \(D_g\mid P_j\).  Moreover \(P_j\ne0\): otherwise
+the squarefree polynomial \(R\) would divide \(G^j\), hence would divide
+\(G\), impossible for a nonzero numerator of degree less than \(n\).
+Combining this observation with (61) yields
+\[
+ \boxed{
+ |\operatorname{supp}(\mathsf E_Rg)|
+ =n-\deg D_g
+ \ge n-\min_j\nu_j,}                                   \tag{101}
+\]
+where the minimum may be taken over any collection of rungs imposed on the
+kernel.  In particular the top power rung (63) gives, for \(p\ge5\),
+\[
+ \boxed{
+ |\operatorname{supp}(\mathsf E_Rg)|
+ \ge n-\frac{2q}{p}
+ =\frac{q(p-4)+3p}{2p}.}                               \tag{102}
+\]
+For \(p=3\), \(e\ge3\), the rung \(j=q/9\) used in (69) has
+\(\nu_j=(7q/9+1)/2\), and therefore
+\[
+ \boxed{
+ |\operatorname{supp}(\mathsf E_Rg)|\ge\frac q9+1.}   \tag{103}
+\]
+Thus every nonzero common-kernel class is supported on a positive
+characteristic-dependent fraction of the completely split divisor.  The
+non-shadow Gram pencil is consequently a genuinely global obstruction on
+that divisor, not a local correction concentrated at a few roots.
+
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
 the forced low-characteristic seams violates the first non-shadow rung in

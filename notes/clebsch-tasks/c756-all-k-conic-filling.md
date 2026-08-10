@@ -634,6 +634,10 @@ over every finite field.  Authorities:
    least \(p\)-power above \(2j_0\); its Vandermonde minor forces every
    surviving nonshadow word to have support at least
    \(2+\lfloor(n-2j_0-2)/P_0\rfloor\).
+   Independently, the common divisor \(\gcd(R,G)\) divides every flagged
+   remainder \(P_j\), so the top power rung forces every nonzero Cartier
+   kernel word to have support at least \(n-2q/p\) for \(p\ge5\), and at
+   least \(q/9+1\) in characteristic three.
    Prove that the resulting carry-controlled multiplication flag forces
    \(\deg H_2\le2\); or
    classify the equivalent completely split lacunary norm
