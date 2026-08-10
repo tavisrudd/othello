@@ -744,6 +744,47 @@ if \(U'=\alpha(T)U+\beta(T)\) with \(\alpha\in B^\times\), then triangular
 binomial expansion gives
 \(\sum_{a=0}^d(U')^aB=\sum_{a=0}^dU^aB\).
 
+The same filtration is exactly what the all-center collision identity
+measures.  For one projection put
+\[
+ \rho=\sum_t\binom{\mu_t}{2},
+ \qquad s_d=|\{t:\mu_t\ge d+1\}|\quad(d\ge1).
+\]
+Since \(\binom\mu2=1+2+\cdots+(\mu-1)\), equations (43) and (47b) give
+the equivalent identities
+\[
+ \boxed{
+ \rho=\sum_{d\ge1}d\,s_d
+      =\sum_{d\ge0}\dim M^{[d]}.}                       \tag{47g}
+\]
+In particular
+\[
+ \boxed{
+ \delta\le\rho\le\binom{\delta+1}{2}.}                \tag{47h}
+\]
+The lower equality means that every repeated direction is double, while the
+upper equality means that all excess is concentrated in one direction.
+Thus the familiar defect-two alternatives \(\rho=2,3\) are the first case
+of a uniform Hilbert-function statement.
+
+There is a signed spectral form as well.  For a direction character
+\(\varepsilon(t)\in\{1,-1\}\), let
+\(C_d=\mathbb F_q[T]/(\operatorname{rad}E_P^{[d-1]})\).
+Then, as an integer signed count and after reduction to \(\mathbb F_q\) as
+an algebra trace,
+\[
+ \boxed{
+ \sum_t\varepsilon(t)\binom{\mu_t}{2}
+ =\sum_{d\ge1}d\sum_{\mu_t\ge d+1}\varepsilon(t)
+ =\sum_{d\ge1}d\operatorname{Tr}_{C_d/\mathbb F_q}
+                    (\varepsilon).}                    \tag{47i}
+\]
+Consequently the all-center collision law couples the reduced support
+layers of the excess modules across deleted-point centers.  It controls the
+multiplicity Hilbert functions, whereas the open resultant requires the
+unprojected conic-value trace \(\sigma_t\); this pinpoints, uniformly in the
+defect, the exact information lost by Euler-character projection.
+
 There is a dual barycentric model for every layer.  Use the perfect trace
 pairing on the split node algebra,
 \[

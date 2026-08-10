@@ -430,6 +430,17 @@ Multiplication by the trace function \(\sigma\) on this module has
 determinant \(\operatorname{Res}(J_P,\Sigma_J)\).  Quotienting by
 \(B+UB+\cdots+U^dB\) similarly gives a canonical carrier for every higher
 direction-multiplicity layer.
+The projection collision energy has the exact uniform interpretation
+\[
+ \rho=\sum_t\binom{\mu_t}{2}
+      =\sum_{d\ge0}\dim M^{[d]}
+      =\sum_{d\ge1}d\,|\{t:\mu_t\ge d+1\}|.
+\]
+Hence the all-center collision identity is a trace identity for the full
+Hilbert function of these reduced support layers; in particular
+\(\delta\le\rho\le\binom{\delta+1}{2}\).  This generalizes the old
+defect-two energies \(2,3\), while also showing precisely why that identity
+still lacks the actual conic-value trace needed by the resultant.
 Since the resultant needs only trace values, not jets, its scalar input may
 be reduced further modulo \(K_P=\operatorname{rad}J_P\).  The resulting
 \(\Sigma_3\) has degree less than
