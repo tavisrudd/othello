@@ -479,7 +479,12 @@ over the triple-direction support, then
 Hence both the zero detector and the odd-multiplicity sign resultant reduce
 to the complementary-divisor resultant of \(L-\Upsilon_3\).  The live
 nonsaturated gate is now to control this unmatched-divisor trace from the
-incidence of the lifted endpoint conics on the quadric pencil.
+incidence of the lifted endpoint conics on the quadric pencil.  Algebraically,
+if \(F_t=G_t^2H_t\), coefficient comparison shows that this trace uses only
+the first two coefficients of \(H_t\), and writes them explicitly in terms
+of the first two coefficients of \(F_t\) and \(G_t\).  This identifies the
+divisor-trace and repeated-root subresultant routes without computing a full
+fibre gcd.
 
 ### \(q=53\): type-uniform critical core
 

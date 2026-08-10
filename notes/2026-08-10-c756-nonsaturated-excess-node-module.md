@@ -429,6 +429,55 @@ higher multiplicity.  The next nonsaturated lemma is to control \(\Upsilon_3\)
 from the moving residual divisors \(\widetilde U_t\) on the same quadric
 pencil.
 
+This residual trace also has a division-free coefficient interface.  On a
+direction fibre write
+\[
+ F(U,t)=G_t(U)^2H_t(U),
+\]
+where the roots of the monic polynomial \(G_t\) are the repeated nodes and
+the roots of \(H_t\) are the unmatched intersections.  Put
+\[
+ \begin{aligned}
+ F(U,t)&=U^n+f_1(t)U^{n-1}+f_2(t)U^{n-2}+\cdots,\\
+ G_t(U)&=U^{\mu_t}+g_1(t)U^{\mu_t-1}
+                    +g_2(t)U^{\mu_t-2}+\cdots,\\
+ H_t(U)&=U^{n-2\mu_t}+h_1(t)U^{n-2\mu_t-1}
+                    +h_2(t)U^{n-2\mu_t-2}+\cdots.
+ \end{aligned}                                          \tag{23l}
+\]
+Here coefficients beyond the degree of a factor are interpreted as zero,
+or equivalently as its elementary symmetric coefficients.
+Coefficient comparison in \(F=G_t^2H_t\) gives
+\[
+ \boxed{
+ h_1=f_1-2g_1,
+ \qquad
+ h_2=f_2+3g_1^2-2g_2-2f_1g_1.}                         \tag{23m}
+\]
+If \(Q_{\rm du}(t,U)=a(t)U^2+b(t)U+c(t)\), Newton's identities on
+the roots of \(H_t\) therefore give
+\[
+ \boxed{
+ \begin{aligned}
+ \nu_t={}&a(t)\bigl(f_1(t)^2-2f_2(t)-2g_1(t)^2
+                         +4g_2(t)\bigr)\\
+          &-b(t)\bigl(f_1(t)-2g_1(t)\bigr)
+            +(n-2\mu_t)c(t).
+ \end{aligned}}                                        \tag{23n}
+\]
+The complementary expression
+\[
+ L(t)-\nu_t
+ =2\{a(t)(g_1(t)^2-2g_2(t))-b(t)g_1(t)+\mu_tc(t)\}
+ =2\sigma_t                                             \tag{23o}
+\]
+recovers both (23h) and (30).  Thus the divisor and subresultant routes are
+the same interface: over the bounded algebra \(C_3\), controlling
+\(\Upsilon_3\) requires only the degree, first coefficient, and second
+coefficient of the unmatched factor, equivalently the first two
+coefficients of the repeated-root factor.  No full fibre gcd or enumeration
+is needed.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level
