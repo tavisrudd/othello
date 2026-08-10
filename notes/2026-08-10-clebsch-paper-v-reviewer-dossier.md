@@ -15,16 +15,28 @@ release mechanics, and the optional icosahedral tower are out of scope.
 
 ## Frozen review surface
 
-Commit: 3558e7e3309a387eb2b3b7fd10436486a7493937.
+Commit: 62cd52eecedb536077e2ac7852d8fcfac917100b.
 
 - source: papers/clebsch-round-trip/golden_companion_reconstruction.tex;
-  SHA-256 225e4237707d14fdecbf46a95d867352b1bb3fdeb21065b94b49daad66a25402;
+  SHA-256 baa8fbbffd1b46efbae4ab08e7179897b8de824f059ed2e879cf7758c8b2dcc9;
 - PDF: papers/clebsch-round-trip/golden_companion_reconstruction.pdf;
-  SHA-256 f00abed27023f31b92eaeee87214c863732915ead815592a4622c98729275dd4;
+  SHA-256 7e0d6ca7c6b13861cc36175a81d12015f362e3c4e1dbb69ddbeb0d19b72e563c;
 - visible length: eleven pages.
 
 Cold coordination must recheck both hashes. A changed source or PDF is a new
 review surface and may not be mixed silently with this freeze.
+
+### First batch and remediation
+
+The first frozen batch returned GO from the invariant-pencil reader and MINOR
+from the marking and singular-geometry readers.  The marking reader found that
+Proposition~\texttt{prop:outer-pencil-action} projectivized before recording
+the sign of the conference generator.  The revised proposition now prints the
+linear action before its projectivization.  The geometry reader found that the
+stabilizer count used the inclusion (A_5\subset\operatorname{PSL}_2(11))
+without proving it.  The revised proof inserts the determinant-class argument
+from the simplicity of (A_5).  The surface above is the resulting second
+freeze; it requires a fresh sealed re-review of both repaired causal chains.
 
 ## Likely referees and critics
 
