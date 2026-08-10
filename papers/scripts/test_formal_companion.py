@@ -18,6 +18,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class FormalCompanionV3Tests(unittest.TestCase):
+    def test_exported_validators_match_shared_source(self) -> None:
+        repository = SCRIPT.parents[2]
+        expected = SCRIPT.read_bytes()
+        for relative in (
+            "papers/clebsch-rigidity/verification/formal_companion.py",
+            "papers/clebsch-passages/verification/formal_companion.py",
+        ):
+            self.assertEqual((repository / relative).read_bytes(), expected)
+
     def pin(self) -> dict:
         commit = "a" * 40
         return {

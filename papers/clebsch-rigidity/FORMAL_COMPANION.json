@@ -1,22 +1,35 @@
 {
   "artifacts": [
     {
-      "commit": "187bed8895fc62784caf2022d717b4daa37871ad",
+      "commit": "b871c10b4a91200a0913644d39b9f0ce44f655ca",
+      "kind": "shared-library",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
       "manifest": "trust/manifests/clebsch_rigidity.json",
       "repository": "https://github.com/tavisrudd/finitegeom",
       "role": "shared-library"
     },
     {
-      "commit": "930675c6b8bf44e06847d15bd6e63560caa6977f",
-      "depends_on": "shared-library",
-      "gate": "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+      "commit": "0d964975ceef7ff0ac36216ecd0e10b4b7f2a184",
+      "gate": "TavisRuddFiniteGeom.Certificates.Q11",
+      "kind": "certificate",
       "manifest": "MANIFEST.json",
       "repository": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
       "role": "certificate"
+    },
+    {
+      "commit": "a99284b31f3fb1a7c803584a26ff5fc539b8d81e",
+      "depends_on": [
+        "shared-library",
+        "certificate"
+      ],
+      "gate": "TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility",
+      "kind": "bridge",
+      "manifest": "MANIFEST.json",
+      "repository": "https://github.com/tavisrudd/finitegeom-clebsch-rigidity-bridge",
+      "role": "paper-bridge"
     }
   ],
   "concept_doi": "10.5281/zenodo.21650878",
   "relationship": "formal certificate for the finite two-generator orbit census; independent cross-check for the remaining manuscript claims",
-  "schema": "formal-companion-v2"
+  "schema": "formal-companion-v3"
 }
