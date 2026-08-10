@@ -162,5 +162,16 @@ Pinardin--Zhang citation context:
 
 Because OpenAlex and Crossref did not resolve the first seed, and Semantic
 Scholar was rate-limited on the second, the required three-graph width is
-**not closed**.  This pass therefore does not license a final negative novelty
-sentence.  The ledger rows `C904-V1`--`C904-V3` remain `OPEN`.
+**not closed**. This pass does not license a negative novelty sentence.
+
+## Manuscript attribution resolution, 2026-08-10
+
+Paper V now makes no “first,” “new,” “to our knowledge,” or negative-priority
+claim. It cites Pinardin--Zhang for the invariant pencil, chordal members, and
+outer involution; HMSV for the exceptional six-point/outer dictionary;
+Cheltsov--Marquand--Tschinkel--Zhang for the unmarked chordal cubic and its
+larger automorphism group; and Goethals--Seidel/BMS for the conference
+switching conventions. The claim-specific ledger therefore closes V1--V3 for
+**attribution while leaving priority unasserted**. The unresolved search width
+is recorded for any future priority claim but no longer blocks publication of
+the proved, correctly attributed comparison.
