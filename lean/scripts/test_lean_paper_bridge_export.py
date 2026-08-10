@@ -61,11 +61,12 @@ class PaperBridgeExportTests(unittest.TestCase):
 
     def test_verifier_builds_only_mathlib_before_certificate_no_build(self) -> None:
         text = MODULE.flake(self.bridge())
-        dependency = text.index("lake build Mathlib")
+        dependency = text.index("lake -j 1 build Mathlib")
         certificate = text.index(
-            "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample"
+            "lake -j 1 build --no-build TavisRuddFiniteGeom.Certificates.Sample"
         )
         self.assertLess(dependency, certificate)
+        self.assertIn("export LEAN_NUM_THREADS=1", text)
 
     def test_materialization_carries_immutable_license(self) -> None:
         original_blob = MODULE.blob

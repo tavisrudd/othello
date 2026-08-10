@@ -91,6 +91,7 @@ def flake(bridge: dict) -> str:
               fi
               certificate_pack="$(realpath "$1")"
               test -f "$certificate_pack"
+              export LEAN_NUM_THREADS=1
               if test "$#" -eq 3; then
                 finitegeom_source="$(realpath "$2")"
                 certificate_source="$(realpath "$3")"
@@ -106,9 +107,9 @@ def flake(bridge: dict) -> str:
               certificate_root=".lake/packages/{package}"
               test -d "$certificate_root"
               (cd "$certificate_root" && lake unpack "$certificate_pack")
-              (cd "$certificate_root" && lake build Mathlib)
-              (cd "$certificate_root" && lake build --no-build {gate})
-              lake build {module}
+              (cd "$certificate_root" && lake -j 1 build Mathlib)
+              (cd "$certificate_root" && lake -j 1 build --no-build {gate})
+              lake -j 1 build {module}
             '';
           }};
         in {{
