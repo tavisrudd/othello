@@ -65,6 +65,15 @@ tail.  The next theorem must kill these ghosts using the higher odd divided
 coefficients of the same completely reducible pencil; no additional census
 is relevant.
 
+The higher power rungs now have a denominator-free ordinary-linear model:
+their common kernel is \(\ker\mathbb M_R\) for the stacked
+Cartier--Toeplitz matrix (74).  Row count forces a kernel only at the live
+parameters \(q=25,27,81\); elsewhere kernel existence is an explicit
+determinantal rank condition.  The first non-shadow equation is a mixed
+quadratic/cubic bundle in characteristics three and five.  For \(p\ge7\),
+all conic--ghost cross terms vanish and it descends to a pure quadratic map
+on \(\ker\mathbb M_R\).  This is the current exact structural gate.
+
 ## 1. Completely reducible pencil identity
 
 Put \(n=(q+3)/2\), \(h=n-1=(q+1)/2\), and identify

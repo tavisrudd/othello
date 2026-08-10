@@ -53,6 +53,16 @@ with the special star realization, conic square class, and all-center
 covering identities can occur.  This is the correct nonsaturated structural
 gate after the fixed-size census stops.
 
+The carrier extends to a canonical filtration \(M^{[d]}\) with dual
+barycentric edge-weight spaces.  Its conic determinant splits into a zero
+norm on the reduced triple-direction support \(K_P\) and, when nonzero, a
+quadratic-character resultant only on the odd-multiplicity support
+\(K_{\rm odd}\).  Writing the node conic values as \(\eta s^2\) identifies
+zero trace with isotropy and lifts all nodes to the smooth branched quadric
+\(\mathscr X_\eta\).  On its direction-conic pencil, each trace is the trace
+of \(z^2\) over the doubled repeated-node divisor.  Deriving the resulting
+cross-direction divisor trace law is the current exact nonsaturated gate.
+
 ## 1. The reduced node cover
 
 Put
