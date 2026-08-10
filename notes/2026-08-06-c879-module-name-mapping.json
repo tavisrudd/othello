@@ -34,6 +34,20 @@
       "reason": "separately versioned Mathlib-only certificate source; downstream bridges own compatibility"
     }
   ],
+  "pending_certificate_namespaces": [
+    {
+      "repository": "finitegeom-projective-cap-q11-certificates",
+      "namespace": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
+    },
+    {
+      "repository": "finitegeom-projective-cap-q13-certificates",
+      "namespace": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13"
+    },
+    {
+      "repository": "finitegeom-q25-certificates",
+      "namespace": "TavisRuddFiniteGeom.Certificates.Q25"
+    }
+  ],
   "inventory": {
     "paper_registry": "lean/trust/papers.toml",
     "repository_registry": "papers/repositories.toml",
@@ -972,6 +986,7 @@
     "Before replacing a module exported by another area, compare its declaration set and every reverse consumer; byte identity inside the active closure is insufficient if declarations outside that closure would disappear.",
     "A paper registry alias or secondary entry point shares its named formal_surface_of package and does not create a duplicate Lean ownership boundary.",
     "Q11 and Q16 certificate modules use only their branded TavisRuddFiniteGeom.Certificates namespaces; no RelativeConicArcs compatibility namespace remains in either certificate package.",
+    "Generated certificate namespace migrations use the owning tracked generator or a tracked hash-guarded transformer over the canonical generated Lean source; generated modules are never hand-edited.",
     "Every PaperInterface and shared public interface gets its own exact verification target.",
     "Every mapping that changes a paper-facing Lean module synchronizes finitegeom and all affected paper repositories before closeout."
   ]
