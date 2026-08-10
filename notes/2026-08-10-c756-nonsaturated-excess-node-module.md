@@ -304,6 +304,63 @@ must use that the particular square-root vectors on different matchings come
 from one endpoint Gram system (or from the all-center identities), not merely
 that each vector has nonzero coordinates.
 
+Those square roots have a global geometric carrier.  Homogenize the dual
+conic equation and form the quadratic twist of its branched double plane
+\[
+ \boxed{
+ \mathscr X_\eta:
+ z^2=\eta^{-1}Q_{\rm du}(T,U,W)\subset\mathbf P^3.}      \tag{23d}
+\]
+Because the characteristic is odd and the conic is nonsingular,
+\(\mathscr X_\eta\) is a smooth quadric surface.  Condition (19) says
+exactly that every star node has two rational lifts to \(\mathscr X_\eta\),
+exchanged by \(z\mapsto-z\), and the affine \(z\)-coordinates are the
+components \(s_i\) in (23a).
+
+Each line factor of the endpoint arrangement pulls back to a plane conic on
+\(\mathscr X_\eta\).  Two such lifted conics meet in the two deck-conjugate
+points lying over their node, because that node is off the branch conic.
+Hence the choices of signs in \(s\) are a voltage system on the complete
+endpoint graph realized by one fixed branched quadric, not unrelated choices
+on the direction fibres.  The remaining value-level theorem may therefore
+be stated geometrically:
+
+> derive the zero norm (49c) and parity resultant (51b) from the incidence
+> and divisor relations among these lifted endpoint conics on
+> \(\mathscr X_\eta\).
+
+This is the precise cross-matching structure absent from the abstract
+orthogonal model.  It does not yet supply a canonical sheet choice or a
+trace identity; those are the new geometric gates.
+
+The direction fibres have an exact divisor interpretation on this surface.
+Let \(D_i\subset\mathscr X_\eta\) be the pullback of the \(i\)-th arrangement
+line, and let \(C_t\) be the pullback of the dual-plane line \(T=tW\).
+All are hyperplane sections of the quadric.  If
+\(\widetilde N_t\) is the reduced degree-\(2\mu_t\) divisor consisting of
+both lifts of the repeated nodes of direction \(t\), and
+\(\widetilde U_t\) is the reduced divisor over the unmatched endpoint-line
+intersections, then
+\[
+ \boxed{
+ \left.\sum_{i=1}^nD_i\right|_{C_t}
+ =2\widetilde N_t+\widetilde U_t.}                       \tag{23e}
+\]
+Indeed, two endpoint lines pass through each repeated node, whereas only one
+passes through every unmatched intersection.  Moreover the coordinate
+section \(z\) satisfies
+\[
+ \boxed{
+ \sigma_t=\frac\eta2
+   \operatorname{Tr}_{\widetilde N_t/\mathbb F_q}(z^2).} \tag{23f}
+\]
+Both lifts contribute the same square, so (23f) is exactly (23a) with no
+sheet choice.  The nonsaturated resultant has therefore become a norm of
+divisor traces of one fixed quadratic section on the pencil of hyperplane
+conics \(C_t\).  A successful all-center law can now be sought as a trace or
+residue identity on that pencil; (23e) supplies the multiplicity divisor it
+must use.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level
@@ -771,6 +828,8 @@ prove nonexistence.
 | Where does the conic character live? | settled | square class (19) in the split node algebra |
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
 | Is there an orthogonal model for the weighted form? | settled | square-root projector (23b); zero trace is isotropy (23c) |
+| Are the square-root signs globally geometric? | settled | rational node lifts on the branched quadric \(\mathscr X_\eta\), formula (23d) |
+| What divisor carries a direction trace? | settled | doubled repeated-node divisor (23e), with trace formula (23f) |
 | Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
 | Is the second excess intrinsic? | settled | module \(M^{[1]}\) and determinant identity (46) |
 | Is there a carrier for every multiplicity layer? | settled | intercept-degree filtration (42)--(44) |
@@ -793,4 +852,6 @@ projection (33) is too coarse.  First exclude the zero-trace case (50), then
 prove the odd-fibre sign law (51), equivalently the parity resultant (51b).
 Use the dual edge-chain model (47d)--(47f) and retain any coherent
 edge-sign/voltage law in the Gram square roots (23a), since (23c) turns zero
-trace into isotropy.  Do not resolve this by a fixed-field census.
+trace into isotropy.  Equivalently, derive a trace/residue law for the
+section \(z^2\) on the hyperplane-conic pencil of \(\mathscr X_\eta\), using
+the doubled-node divisor (23e).  Do not resolve this by a fixed-field census.

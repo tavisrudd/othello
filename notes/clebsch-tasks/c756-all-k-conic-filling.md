@@ -448,6 +448,18 @@ orthogonal projector
 \((\sum s_i^2)I-ss^{\mathsf T}\).  Hence zero trace is exactly isotropy of
 the square-root edge vector on a direction matching; a structural proof
 should retain any endpoint-coherent sign/voltage law before squaring.
+These signs live on a concrete surface: the twist
+\(\mathscr X_\eta:z^2=\eta^{-1}Q_{\rm du}(T,U,W)\) is a smooth quadric
+branched over the dual conic, every node has two rational deck-conjugate
+lifts, and every arrangement line pulls back to a plane conic.  Thus each
+endpoint edge is the deck pair of intersections of two lifted conics.  The
+remaining trace theorem can be sought from divisor/incidence relations on
+\(\mathscr X_\eta\), rather than from arbitrary square-root vectors.  On the
+hyperplane conic above a direction \(t\), the arrangement divisor restricts
+as twice the lifted repeated-node divisor plus the unmatched divisor, and
+\(\sigma_t\) is \(\eta/2\) times the trace of \(z^2\) on that repeated
+divisor.  Thus the final resultant is a norm of divisor traces in one pencil
+of conics.
 
 ### \(q=53\): type-uniform critical core
 
@@ -585,7 +597,8 @@ over every finite field.  Authorities:
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
    node module.  Evaluate its degree-\(\delta-r\) endpoint-pair resultant
-   \(\operatorname{Res}(J_P,\Sigma_3)\) using the star Gram relations, then
+   \(\operatorname{Res}(J_P,\Sigma_3)\) using the star Gram relations and
+   the lifted endpoint conics on \(\mathscr X_\eta\), then
    compare it with the constant conic square class.
 
 ## Stop rules
