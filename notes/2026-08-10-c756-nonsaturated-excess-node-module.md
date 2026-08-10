@@ -760,6 +760,50 @@ Gram data, with no change in the internal/external type vector.  Comparing
 the ordinary Gram matching sum with this reflected Gram matching sum is the
 value-level refinement unavailable to the Euler-character projection.
 
+The comparison is in fact a rank-two perturbation before affine
+normalization.  Let \(\mathcal J\) be the involution on line vectors in
+(23ai), and decompose the primal quadratic space orthogonally as
+\[
+ V=V_+\perp V_-,
+ \qquad v=v^++v^-,
+ \qquad \mathcal Jv=v^+-v^-.
+\]
+For the chosen sign of \(\mathcal J\), one has
+\(\dim V_+=1\) and \(\dim V_-=2\).  Put
+\[
+ G^\pm_{ij}=B_{\rm pr}(v_i^\pm,v_j^\pm).
+\]
+Then
+\[
+ B_{\rm pr}(v_i,v_j)=G^+_{ij}+G^-_{ij},
+ \qquad
+ B_{\rm pr}(v_i,v_j^\iota)=G^+_{ij}-G^-_{ij}.
+\]
+If \(\mathcal L\) and \(\mathcal L^\iota\) are the ordinary and mirror
+Lagrange-numerator matrices,
+\[
+ \mathcal L_{ij}=Q_iQ_j-B_{\rm pr}(v_i,v_j)^2,
+ \qquad
+ \mathcal L^\iota_{ij}
+   =Q_iQ_j-B_{\rm pr}(v_i,v_j^\iota)^2,
+\]
+then
+\[
+ \boxed{
+ \mathcal L^\iota-\mathcal L
+ =4\,G^+\circ G^-,
+ \qquad
+ \operatorname{rank}(\mathcal L^\iota-\mathcal L)\le2.} \tag{23ak}
+\]
+Indeed \(G^+\) has rank at most one, so
+\(G^+\circ G^-\) is a diagonal rescaling of \(G^-\), whose rank is at most
+two.  Thus the mirror incidence does not introduce an unrelated Gram
+system: it is a rank-two deformation of the ordinary one.  After restoring
+the squared affine last-coordinate denominators, (23ak) gives a
+low-rank homogeneous numerator identity for the two matching sums.  A
+successful trace comparison should carry those denominators as line-bundle
+weights rather than discard this rank bound.
+
 More importantly, it isolates every accidental collision of conic values.
 Formula (23z) says
 \[

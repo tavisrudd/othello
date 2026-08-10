@@ -559,7 +559,11 @@ the off-diagonal intersections \(D_i\cap D_j\) and
 vectors, \(v_i\mapsto v_i^\iota=(b/c-x_i,1,e/c+y_i)\) preserves
 \(Q_{\rm pr}\), so the mirror intersections have the same Lagrange--Gram
 formula with \(B(v_i,v_j)\) replaced by \(B(v_i,v_j^\iota)\), without
-changing the endpoint type vector.
+changing the endpoint type vector.  Decomposing the primal quadratic space
+into the \(1+2\) eigenspaces of this reflection shows more:
+the ordinary and mirror Lagrange-numerator matrices differ by
+\(4(G_+\circ G_-)\), a matrix of rank at most two.  The remaining comparison
+must retain the squared affine normalization weights.
 
 ### \(q=53\): type-uniform critical core
 
