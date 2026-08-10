@@ -118,6 +118,19 @@ F13*)
 - *Boundary:* Paper IV does not own the through-eight or all-`k` conic-filling classification.
   It cites Paper I for motivation and becomes the canonical home of the full q13 code proof.
 
+**Clebsch fifth paper · `clebsch-round-trip`** — *The Golden Companion Correspondence*
+- *Status:* complete 11-page manuscript with a paper-owned exact checker;
+  claim-specific literature closure and isolated cold-referee review remain
+  open before release.
+- *Scope:* identifies the signed Paper-II residue as a chordal Hankel cubic,
+  recovers the original six axes from stabilizer pairs on its singular
+  quartic, places it beside the conference cubic in the invariant pencil,
+  and proves the exact oriented marked return through the normalized outer
+  difference \(q-1\).
+- *Boundary:* the conference and chordal lines are distinct; the inverse
+  requires a selected chordal line, and Paper IV remains an independent
+  reconstruction branch.
+
 **5 · `complete-repair-ports`** — *Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure*
 - *Status:* six-part private manuscript assembled and rebuilt, with synchronized proof and novelty

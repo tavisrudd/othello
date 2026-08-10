@@ -14,6 +14,16 @@ culmination developed from this review; the Golden and MDS--CSS papers remain
 unnumbered companions. This decision supersedes this note's earlier four-paper
 routing assumptions without rewriting the historical option analysis below.
 
+## 2026-08-10 theorem correction
+
+Paper V disproves the literal one-cubic identification assumed in the
+historical discussion below. Papers I and III carry the conference companion;
+Paper II carries a distinct chordal companion. The proved replacement is
+stronger and more precise: both lie in one invariant pencil, their different
+singular shadows recover the same six-axis carrier, and \(q-1\) gives the
+exact oriented marked transport after a chordal line is selected. The
+historical Rosetta options below are retained only as provenance.
+
 ## What actually unifies the program
 
 The series has a stated unity — the epigraph's arc (takes shape, finds its

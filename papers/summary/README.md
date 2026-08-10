@@ -14,11 +14,12 @@ of information, then prove that few possibilities remain.
 
 The numbered five-paper series *Clebsch: Rigidity from Sparse Shadows* asks:
 how much of a structured object can be reconstructed from its sparse shadows?
-Papers I--III follow syndrome loci, quadratic trades, and arithmetic/operator
-shadows toward a common marked cubic and golden operator. Paper IV is the
-parallel minimum-word branch, reconstructing a marked conic plane and polarity
-without asserting a cubic identification. Paper V will prove the exact
-transports and reverse recognition that close the upper round trip.
+Papers I and III recover marked conference companions, while Paper II
+recovers a signed chordal companion. Paper V proves that these distinct
+cubics lie in one invariant pencil, recover the same six-axis carrier, and
+admit exact marked return maps. Paper IV is the parallel minimum-word branch,
+reconstructing a marked conic plane and polarity without asserting a cubic
+identification.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
 Golden interferometer paper are related unnumbered companions. Every paper is
 intended to stand on its own mathematically.
@@ -77,6 +78,14 @@ complex as separate victories.
   `−784000σ₃/1247103`. The same carrier independently yields exchange-spectrum
   rigidity and sharp reconstruction of two-graphs from aligned four-sets.
   [Golden Descent and Operator Realizations](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf).
+
+- **Distinct cubic shadows recover one marked carrier.** The signed
+  Paper-II residue is a chordal Hankel cubic, not the conference cubic of
+  Papers I and III. Its singular quartic recovers the original six axes by
+  exact stabilizer pairs. The two cubics occupy one invariant pencil, and
+  the normalized outer difference gives an exact oriented round trip once a
+  chordal companion is selected.
+  [The Golden Companion Correspondence](../clebsch-round-trip/golden_companion_reconstruction.pdf).
 
 ### Coding theory and quantum information
 
@@ -141,6 +150,7 @@ boundary, and reproducible entry points.
 | *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
+| *The Golden Companion Correspondence* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../clebsch-round-trip/golden_companion_reconstruction.pdf) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -249,8 +259,9 @@ consequences of the same carrier.
 geometers, and mathematical physicists.
 
 **Why it matters.** Complementary descriptions make different aspects of the
-same structured calculation visible.  Their complete identification across the
-series remains part of the continuing program.
+same structured calculation visible. Paper V determines their precise
+relation: the Paper-II cubic is a distinct chordal companion of the
+conference cubic, not the same cubic in different coordinates.
 
 ---
 
@@ -275,6 +286,31 @@ problems, minimum-weight structure, and the information retained by a code.
 **Why it matters.** A small layer of codewords retains enough incidence data to
 recover a much richer geometric object.  The result supplies a q=13
 reconstruction counterpart to the earlier Clebsch recognition work.
+
+---
+
+#### V — The Golden Companion Correspondence
+
+[PDF](../clebsch-round-trip/golden_companion_reconstruction.pdf)
+
+**Standout result.** The Paper-II signed cubic is a chordal Hankel companion,
+not the conference cubic of Papers I and III. Its singular quartic recovers
+the original six axes, and the normalized outer difference gives an exact
+oriented marked round trip between the two companion lines.
+
+> *Abstract* Paper II of this series produces a signed cubic in a ten-dimensional matching quotient. We identify its canonical five-dimensional residue and prove that it is not the conference cubic appearing in Papers I and III: the two are distinguished companions in the two-dimensional pencil invariant under the irreducible five-dimensional action of A₅. The conference member has six nodes. The Paper-II residue is a chordal Hankel determinant, singular along a rational normal quartic. Its twelve rational singular points form A₅/C₅; pairing points with the same stabilizer gives A₅/D₅ and identifies its six fibres equivariantly with the original matched axes. Thus the two companion cubics realize one six-axis carrier through different singular shadows. We determine the normalized outer-normalizer action exactly on the Paper-II pencil and prove that, after one chordal companion is retained, its difference operator gives an exact oriented round trip between sheet and conference orientations. The result rules out a tempting literal identification of the two invariant cubic lines while recovering the marked equivalence that replaces it.
+
+**Delivers.** A precise correction and completion of the upper series map:
+the source cubics are distinct, their common carrier is intrinsic, and their
+orientation transport is explicit and reversible at the stated marked level.
+
+**Who cares.** Invariant theorists, algebraic combinatorialists,
+representation theorists, and readers interested in reconstruction from
+singular loci.
+
+**Why it matters.** A false literal coincidence is replaced by a stronger
+structural statement: different sparse shadows can recover the same carrier,
+and the exact missing marking can itself be identified.
 
 ---
 

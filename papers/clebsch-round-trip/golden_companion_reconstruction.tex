@@ -7,6 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{array,booktabs}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage[hidelinks]{hyperref}
@@ -44,8 +45,8 @@
 
 \begin{center}
 \small\itshape
-From deep holes, the cubic takes shape, finds its bearings,\\
-stands fixed while its shadows move; from minimum words, the plane returns,\\
+From deep holes, a cubic takes shape; its companion finds its bearings,\\
+the carrier stands fixed while their shadows move; from minimum words, the plane returns,\\
 and \textbf{the scattered shadows gather home}.
 \end{center}
 
@@ -95,6 +96,48 @@ Howard--Millson--Snowden--Vakil
 standard \cite[\S\S1--3]{GoethalsSeidel1967}.  Our contribution is to locate
 and normalize the specific Paper-II tensor in this pencil over \(\F_{11}\),
 then identify its marked axes.
+
+\Needspace{18\baselineskip}
+\medskip
+\noindent\textbf{Series perspective.}
+\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
+determine the structures that produced them.  Papers~I and III reconstruct
+marked conference companions, whereas Paper~II reconstructs a signed chordal
+companion.  The present paper proves that they lie in one invariant pencil,
+recover the same six-axis carrier, and admit an exact oriented transport
+relative to a selected chordal line.  Paper~IV is the parallel lower branch:
+minimum-word pairs reconstruct a marked conic plane and polarity, with no
+cubic identification asserted.  Figure~\ref{fig:series-map} records this
+division.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
+    align=center,font=\footnotesize,minimum height=8mm,text width=29mm,
+    inner sep=2.5pt},
+  active/.style={paper,very thick,fill=black!12},
+  package/.style={paper,text width=38mm}
+]
+\node[paper]   (p1) at (0,1.45) {\textbf{I}\\conference companion};
+\node[paper]   (p2) at (0,0.35) {\textbf{II}\\chordal companion};
+\node[paper]   (p3) at (0,-0.75) {\textbf{III}\\conference companion};
+\node[active]  (p5) at (5.25,0.35) {\textbf{V}\\marked companion correspondence};
+\node[package] (gold) at (10.5,0.35) {one six-axis carrier\\conference \(+\) chordal};
+\node[paper]   (p4) at (0,-2.05) {\textbf{IV}\\minimum-word pairs};
+\node[package] (plane) at (5.25,-2.05) {marked conic plane\\and polarity};
+\draw[<->] (p1.east) -- ([yshift=3mm]p5.west);
+\draw[<->] (p2.east) -- (p5.west);
+\draw[<->] (p3.east) -- ([yshift=-3mm]p5.west);
+\draw[->,thick] (p5.east) -- (gold.west);
+\draw[->,thick] (p4.east) -- (plane.west);
+\end{tikzpicture}
+\caption{Series map.  Upper double arrows are the marked transports and
+returns proved here; the right arrow is the common-carrier theorem.  The
+lower solid arrow is Paper~IV's independent reconstruction.}
+\label{fig:series-map}
+\end{figure}
 
 Fix the \(H_3\) matching
 \[

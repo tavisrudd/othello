@@ -84,28 +84,16 @@ Use `[current]` in any forward version of Paper III as it stands.  Use
 `[final]` only in a version that also states the recognition theorem, since
 the drawing tags it as forthcoming and a reader will look for it.
 
-## Which claims are not established, and in which of three senses
+## Claim boundaries
 
-Three things in this set fall short of "a theorem the host manuscript
-states", in three quite different ways.  They are drawn differently on
-purpose and must not be conflated.
+Paper V now proves the upper marked companion correspondence. D1 deliberately
+shows two distinct cubic lines—conference and chordal—rather than the
+superseded claim that all three sources produce one cubic. Paper IV is a
+separate solid reconstruction branch; the absence of a connecting edge to
+the upper branch is load-bearing.
 
-* **Unproved — no theorem exists.  The Paper IV edge in D1 is dashed**
-  (`csfopen`) **and labelled "recognition genre (bridge unproved)".**  Paper
-  IV reconstructs PG(2,13) from the minimum-word layer, which places it
-  squarely in the programme's recognition genre, but no current theorem
-  carries that reconstructed plane to the oriented cubic torsor.  The bridge
-  is an open obligation.  Do not redraw this edge solid, and do not caption
-  it as an identification.
-* **Unwritten — no paper exists.  The Paper V node in D1 states an intent,
-  not a result.**  Paper V is unwritten and the Rosetta theorem — that the
-  support cubic, the sheet-sign cubic, and the marked triangle cubic are one
-  torsor — is not proved.  The node is labelled "unwritten" and its text
-  says "intends".  Until that paper has a stable public locator, captions in
-  the numbered papers should point at the identifications rather than at the
-  theorem.
-* **Proved, awaiting promotion — the theorem exists, the manuscript
-  sentence does not.  The return arrow of `\ClebschCausalSpine[final]` is a
+One promotion distinction remains in D6. **The return arrow of
+`\ClebschCausalSpine[final]` is a
   double rule** (`csfforth`) **tagged "proved; awaiting promotion".**  The
   triangle–Pfaffian recognition is proved and formalized; what is pending is
   only its appearance in the Paper III manuscript.  A double rule reads as
