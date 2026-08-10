@@ -33,6 +33,13 @@ def generated_group(generators):
     return tuple(sorted(group))
 
 
+def inverse(permutation):
+    result = [0] * len(permutation)
+    for source, target in enumerate(permutation):
+        result[target] = source
+    return tuple(result)
+
+
 TRANSLATION = (1, 2, 3, 4, 0, 5)
 NEGATIVE_INVERSION = (5, 4, 2, 3, 1, 0)
 GROUP = generated_group((TRANSLATION, NEGATIVE_INVERSION))
@@ -144,6 +151,23 @@ def square_roots(value, field_order):
 def main():
     assert len(GROUP) == 60
     assert len(TRIPLES_PLUS) == len(TRIPLES_MINUS) == 10
+    group_set = set(GROUP)
+    normalizer = []
+    for permutation in itertools.permutations(POINTS):
+        inverse_permutation = inverse(permutation)
+        conjugate = {
+            compose(compose(permutation, element), inverse_permutation)
+            for element in GROUP
+        }
+        if conjugate == group_set:
+            normalizer.append(permutation)
+    assert len(normalizer) == 120
+    outer_elements = [element for element in normalizer if element not in group_set]
+    assert all(
+        {image_subset(element, triple) for triple in TRIPLES_PLUS}
+        == set(TRIPLES_MINUS)
+        for element in outer_elements
+    )
     axes = [tuple(5 if index == axis else -1 for index in POINTS) for axis in POINTS]
     partitions = sorted(
         {
@@ -157,6 +181,7 @@ def main():
     assert len(axis_parameters) == len(partition_parameters) == 1
     print(f"A5 order: {len(GROUP)}")
     print(f"triple-orbit sizes: {len(TRIPLES_PLUS)}, {len(TRIPLES_MINUS)}")
+    print("normalizer in S6: order 120; its outer coset fixes P and negates Q, so t~-t")
     print(f"six-axis singular parameter t: {axis_parameters.pop()}")
     print(f"ten-partition singular parameter t: {partition_parameters.pop()}")
     for field_order in (7, 11, 13, 17, 19, 23, 29, 31):

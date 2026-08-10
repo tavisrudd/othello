@@ -1,5 +1,6 @@
 A5 order: 60
 triple-orbit sizes: 10, 10
+normalizer in S6: order 120; its outer coset fixes P and negates Q, so t~-t
 six-axis singular parameter t: None
 ten-partition singular parameter t: 0
 F_7 singular census (None=infinity): {0: 10, 3: 5, 4: 5, None: 6}
