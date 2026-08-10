@@ -2,8 +2,9 @@
 
 **Lane:** clebsch
 
-**Status:** active after C905; research notes, exact evidence, literature
-audit, and framing only; no manuscript or Lean edits
+**Status:** complete 2026-08-10; theorem packet, exact evidence, literature
+audit, and framing are in `notes/2026-08-10-c906-exceptional-tower-judo.md`;
+no manuscript or Lean edits were made
 
 ## Goal
 
@@ -44,3 +45,15 @@ and reverse recovery where it is actually possible.
 5. Run hard red team, TT, and EJ through EJ7.
 6. Hand surviving interfaces to the remaining upgrade tasks without
    manuscript promotion.
+
+## Closed outcome
+
+The unmarked fold/tower is pre-empted by the classical quadratic-graph
+residue theory.  The surviving judo is the exact sparse marked-entry and
+information-loss theorem: the Paper-V/Clebsch gateway selects an oriented
+golden marking over the bare `E_6` carrier; marked quadratic suspension and
+residue are inverse through `E_10`; forgetting the bottom data has fibres
+`432`, `864`, or `1728`, and forgetting the nested residues contributes the
+exact factors `28`, `120`, and `496`.  Transitivity proves that a bare upward
+section is impossible.  The exact composition and arithmetic-lift direction
+remain behind focused literature gates and were not promoted to a manuscript.

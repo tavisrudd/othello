@@ -44,12 +44,14 @@ five numbered papers:
    active under C904; title and manuscript root are its first freeze.
 
 The cross-series reconstruction-profile task C905 is closed in
-`../2026-08-10-c905-reconstruction-profile-theorem.md`.  It gives the exact
-paperwise carrier/fibre/marking calculus, closes the Fano/Hamming and 11-cell
-reverse lemmas, and supplies the composition/no-section interface.  C906 is
-the active research-only successor: it may test sparse canonical entry and
-reverse recovery on C705/C865/C870, but may not edit manuscripts or Lean and
-may not relabel the classical exceptional folds as new.
+`../2026-08-10-c905-reconstruction-profile-theorem.md`.  Its research-only
+exceptional-tower successor C906 is also closed in
+`../2026-08-10-c906-exceptional-tower-judo.md`: the unmarked fold/tower is
+classical, while the surviving theorem is an exact sparse marked entry through
+the `E_6` carrier, reversible only with a residue flag, with bottom fibres
+`432/864/1728` and exact higher residue multipliers.  That composition and its
+arithmetic-lift frontier remain literature-gated and were not promoted to any
+manuscript or Lean source.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
