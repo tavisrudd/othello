@@ -294,7 +294,7 @@ of the rank-one projector \(\tau I-ss^{\mathsf T}\).  In particular,
 and for \(\mu\ge3\) this makes the quotient form degenerate.  The zero-trace
 gate is therefore an isotropic-square-root gate on each direction matching;
 the nonzero sign gate is the discriminant of these orthogonal quotients.
-This formulation suggests retaining the edge-sign/voltage compatibility of
+This formulation suggests retaining the deck-sign compatibility of
 the square roots supplied by the endpoint Gram determinants, rather than
 discarding it after squaring.
 It is also a stop rule: every nondegenerate quadratic space of dimension at
@@ -320,9 +320,12 @@ components \(s_i\) in (23a).
 Each line factor of the endpoint arrangement pulls back to a plane conic on
 \(\mathscr X_\eta\).  Two such lifted conics meet in the two deck-conjugate
 points lying over their node, because that node is off the branch conic.
-Hence the choices of signs in \(s\) are a voltage system on the complete
-endpoint graph realized by one fixed branched quadric, not unrelated choices
-on the direction fibres.  The remaining value-level theorem may therefore
+Hence the choices of signs in \(s\) form a deck-labeled doubled-edge
+incidence system on the complete endpoint graph, realized by one fixed
+branched quadric rather than by unrelated choices on the direction fibres.
+This is not yet a two-sheeted cover of the endpoint vertices: a genuine
+voltage cocycle would have to be derived from the incidence of the lifted
+conics.  The remaining value-level theorem may therefore
 be stated geometrically:
 
 > derive the zero norm (49c) and parity resultant (51b) from the incidence
@@ -851,7 +854,7 @@ relations in (38).  Preserve actual conic values: the Euler-character
 projection (33) is too coarse.  First exclude the zero-trace case (50), then
 prove the odd-fibre sign law (51), equivalently the parity resultant (51b).
 Use the dual edge-chain model (47d)--(47f) and retain any coherent
-edge-sign/voltage law in the Gram square roots (23a), since (23c) turns zero
+ deck-sign law in the Gram square roots (23a), since (23c) turns zero
 trace into isotropy.  Equivalently, derive a trace/residue law for the
 section \(z^2\) on the hyperplane-conic pencil of \(\mathscr X_\eta\), using
 the doubled-node divisor (23e).  Do not resolve this by a fixed-field census.

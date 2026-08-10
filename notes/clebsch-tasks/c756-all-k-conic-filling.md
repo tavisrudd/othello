@@ -447,7 +447,7 @@ Finally, writing the constant conic class as
 orthogonal projector
 \((\sum s_i^2)I-ss^{\mathsf T}\).  Hence zero trace is exactly isotropy of
 the square-root edge vector on a direction matching; a structural proof
-should retain any endpoint-coherent sign/voltage law before squaring.
+should retain any endpoint-coherent deck-sign law before squaring.
 These signs live on a concrete surface: the twist
 \(\mathscr X_\eta:z^2=\eta^{-1}Q_{\rm du}(T,U,W)\) is a smooth quadric
 branched over the dual conic, every node has two rational deck-conjugate
