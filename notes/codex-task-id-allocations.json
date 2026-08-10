@@ -3023,8 +3023,17 @@
       "last": 902,
       "purpose": "Paper III cheap-upgrade literature audits, red-team review, proof gates, and wording recommendations",
       "sequence": 336
+    },
+    {
+      "count": 1,
+      "first": 903,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 903,
+      "purpose": "Land five-paper series title, epigraph, diagram, blurb, and count references",
+      "sequence": 337
     }
   ],
-  "next_id": 903,
+  "next_id": 904,
   "schema": "codex-task-id-allocations-v1"
 }
