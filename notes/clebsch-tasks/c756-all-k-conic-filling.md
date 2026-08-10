@@ -766,6 +766,17 @@ over every finite field.  Authorities:
 `notes/2026-08-10-c756-q73-k14-all-passant-closure.md`, and
 `notes/2026-08-10-c756-q73-and-global-k14-closure.md`.
 
+## All-\(k\) structural gate inventory
+
+| branch | completed uniformly | terminal open gates |
+|---|---|---|
+| saturated internal | complementary split-factor model; Cartier ghost quotient; stacked Cartier--Toeplitz matrix; exact forced seams; nonshadow Gram pencil; support bounds | control every rank-drop stratum of \(\mathbb M_R\); prove quadratic/cubic nonshadow rigidity on its kernel |
+| nonsaturated | excess-module filtration; collision Hilbert law; bounded zero/parity resultants; complementary trace and norm; mirror/sign-norm factorization; predescent ordinary-factor extraction; tangent/general/overlap support split; torus and bi-character zero models | derive endpoint-coherent zero-trace exclusion; evaluate the nonzero trace product on \(K_{\rm odd}\) |
+
+These are theorem dependencies, not a claim that the all-\(k\) theorem is
+already proved.  Both branches now have uniform finite carriers and exact
+terminal statements; neither terminal obstruction is yet closed.
+
 ## Ordered next actions
 
 1. Do not open a \(k=15\) census.  Treat q=67,71,73 only as theorem-design
