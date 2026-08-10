@@ -285,7 +285,7 @@ def check_no_loose_commits(paper: Path, pin: dict) -> None:
             continue
         if GUARD_SKIP_PARTS.intersection(path.relative_to(paper).parts):
             continue
-        if path.name == "FORMAL_COMPANION.json":
+        if path.name in {"FORMAL_COMPANION.json", "trust_manifest.json"}:
             continue
         try:
             text = path.read_text(encoding="utf-8")
