@@ -346,18 +346,39 @@ points lying over their node, because that node is off the branch conic.
 Hence the choices of signs in \(s\) form a deck-labeled doubled-edge
 incidence system on the complete endpoint graph, realized by one fixed
 branched quadric rather than by unrelated choices on the direction fibres.
-This is not yet a two-sheeted cover of the endpoint vertices: a genuine
-voltage cocycle would have to be derived from the incidence of the lifted
-conics.  The remaining value-level theorem may therefore
-be stated geometrically:
+
+There is an exact nonabelian cocycle after splitting the two rulings of the
+quadric.  Over the quadratic splitting algebra of \(\mathscr X_\eta\),
+identify
+\(\mathscr X_\eta\simeq\mathbf P^1\times\mathbf P^1\).  Each \(D_i\) is a
+smooth divisor of type \((1,1)\), because its primal conic value is nonzero.
+Its two ruling projections are therefore isomorphisms, so \(D_i\) is the
+graph of a projectivity
+\[
+ g_i\in\operatorname{PGL}_2.                            \tag{23d1}
+\]
+For an edge \(\{i,j\}\), the two points of \(D_i\cap D_j\) project to the
+two fixed points, counted with multiplicity, of
+\[
+ h_{ij}=g_i^{-1}g_j.
+\]
+These relative projectivities obey the complete-graph cocycle law
+\[
+ \boxed{h_{ij}h_{jk}=h_{ik}.}                           \tag{23d2}
+\]
+Thus the lifted intersections are not arbitrary doubled edges: they come
+from one \(\operatorname{PGL}_2\)-valued vertex potential.  What is still
+missing is an abelian deck-sheet cocycle, or an equivalent trace identity,
+obtained from this nonabelian carrier.  The remaining value-level theorem
+may therefore be stated geometrically:
 
 > derive the zero norm (49c) and parity resultant (51b) from the incidence
 > and divisor relations among these lifted endpoint conics on
 > \(\mathscr X_\eta\).
 
 This is the precise cross-matching structure absent from the abstract
-orthogonal model.  It does not yet supply a canonical sheet choice or a
-trace identity; those are the new geometric gates.
+orthogonal model.  The ruling cocycle does not yet supply a canonical sheet
+choice or a trace identity; those are the new geometric gates.
 
 The direction fibres have an exact divisor interpretation on this surface.
 Let \(D_i\subset\mathscr X_\eta\) be the pullback of the \(i\)-th arrangement
@@ -1876,6 +1897,7 @@ prove nonexistence.
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
 | Is there an orthogonal model for the weighted form? | settled | square-root projector (23b); zero trace is isotropy (23c) |
 | Are the square-root signs globally geometric? | settled | rational node lifts on the branched quadric \(\mathscr X_\eta\), formula (23d) |
+| Is there an endpoint-coherence cocycle? | settled nonabelianly | ruling graphs \(g_i\) and \(\operatorname{PGL}_2\) cocycle \(h_{ij}h_{jk}=h_{ik}\), (23d1)--(23d2) |
 | What divisor carries a direction trace? | settled | doubled repeated-node divisor and scheme-theoretic unmatched pullback (23e), with trace formula (23f) |
 | Is there an exact complementary trace law? | settled | \(\Sigma_3=(L-\Upsilon_3)/2\), formulas (23g)--(23k) |
 | Does the unmatched divisor also have a norm invariant? | settled | typed endpoint product \(\Pi\), formulas (23q)--(23w) |

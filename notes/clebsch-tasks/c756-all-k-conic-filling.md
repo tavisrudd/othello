@@ -480,6 +480,11 @@ lifts, and every arrangement line pulls back to a plane conic.  Thus each
 endpoint edge is the deck pair of intersections of two lifted conics.  The
 remaining trace theorem can be sought from divisor/incidence relations on
 \(\mathscr X_\eta\), rather than from arbitrary square-root vectors.  On the
+quadratic splitting algebra of the quadric, each lifted endpoint conic is
+the graph of a projectivity \(g_i\in\operatorname{PGL}_2\); its edge lifts
+are fixed points of \(h_{ij}=g_i^{-1}g_j\), with the exact cocycle
+\(h_{ij}h_{jk}=h_{ik}\).  This is the nonabelian endpoint-coherence carrier
+from which a deck/inversion trace law must be extracted.  On the
 hyperplane conic above a direction \(t\), the arrangement divisor restricts
 as twice the lifted repeated-node divisor plus the unmatched divisor, and
 \(\sigma_t\) is \(\eta/2\) times the trace of \(z^2\) on that repeated
