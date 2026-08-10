@@ -1,0 +1,7 @@
+C904 relative Abel--Jacobi parity gate
+charge 2: chi(E tensor E)=-4, chi(E(1))=6, chi(E|line)=2; weight gcd=2
+charge 3: chi(E)=-1; weight gcd=1
+codimension-3 divisor Hodge lattice rank=50; saturation index=1
+gcd <Theta^2,D1 D2 D3>: products=2, saturation=2
+odd Theta x Theta divisor cut=IMPOSSIBLE
+PASS

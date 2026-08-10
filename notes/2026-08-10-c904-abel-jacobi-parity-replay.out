@@ -1,0 +1,5 @@
+corrected charge-2 determinant-weight gcd=2
+charge-3 determinant-weight gcd=1
+680 divisor triples; modular ranks={2: 50, 3: 50, 5: 50, 7: 50, 11: 50}
+gcd <Theta^2,D1 D2 D3>=2
+PASS

@@ -136,6 +136,25 @@ is solely an odd-index theorem for the relative rationally connected
 Abel--Jacobi lift; exotic-deck descent, semiabelian Chow extension, and
 priority closure remain separate.  No manuscript or Lean source changed.
 
+The sixth pass in
+`notes/2026-08-10-c904-relative-abel-jacobi-parity-gate.md` computes the
+degree-five/degree-six boundary exactly.  Xu's proposed fine charge-two
+moduli shortcut is invalid: the omitted point term in
+`ch(O_X(1))` changes the claimed Euler weight five to six, as Voisin already
+records.  Uniformly, a rank-two class with `c1=0,c2=n[l],c3=0` has
+determinant-weight ideal `gcd(2,n) Z`.  Thus the quintic model has exact
+two-primary determinant ceiling, while the sextic bundle becomes fine after
+twisting to charge three.  Iliev--Markushevich's fixed-line pencil reduces
+the quintic generic index to one or two, so a nonzero class has a minimal
+quadratic splitting field; its actual value on the special marked family is
+still open.  A second exact no-go closes the proposed twisted-cubic shortcut:
+all 680 degree-three divisor products span a saturated rank-50 lattice, and
+their `Theta^2` pairing ideal is exactly `2 Z`, so no relative-NS cut of
+`Theta x Theta` gives an odd multisection.  The surviving smooth-family gate
+is now the generic odd index of Voisin's fine charge-three
+`M_9 -> J` fourfold fibre, or a non-divisor Hecke carrier.  No manuscript or
+Lean source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable
