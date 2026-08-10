@@ -43,6 +43,21 @@ forbidden_artifact_basenames = [
   "generate-q11-point-action.py",
 ]
 
+[[package]]
+name = "finitegeom-projective-cap-q11-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-projective-cap-q11-certificates"
+commit = "54fb4f8323a2fa492a02ee1e6216e2b9083930c1"
+manifest_sha256 = "270ec5d395b391d1d04bc67368d369a4b873dc8d5787029c0ffff16790ab379b"
+gate = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
+terminal = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.classForThird_valid"
+trust_fact = "external/finitegeom-projective-cap-q11-certificates.json"
+trust_fact_sha256 = "634e26974fc6a1882b6dbf35e8976849884270ec2acc88953694a7f94bdec3d8"
+owned_module_prefixes = [
+  "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
+]
+allowed_import_path_prefixes = []
+forbidden_artifact_basenames = []
+
 # Generated families still resident in the monorepo, each named with the official package
 # that will own it.  A generated source outside both the owned prefixes above and these
 # prefixes is a family that was never declared, and is rejected.  These declarations are

@@ -1,0 +1,39 @@
+{
+  "declarations": {
+    "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.classForThird_sizeThree_of_gridCap": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.classForThird_valid": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
+      "origin": "package"
+    }
+  },
+  "dependency": {
+    "commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+    "repository": "https://github.com/leanprover-community/mathlib4"
+  },
+  "evidence": {
+    "axiom_log": "evidence/gate-axioms.log",
+    "axiom_log_sha256": "bc964c26b39917e98b3266bfd234519df9765b56dca9cd8ee6fcd90146b8f9c5",
+    "replay": "lake build --no-build TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
+  },
+  "gate": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "manifest_sha256": "270ec5d395b391d1d04bc67368d369a4b873dc8d5787029c0ffff16790ab379b",
+  "package": "finitegeom-projective-cap-q11-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-projective-cap-q11-certificates",
+  "schema_version": 1,
+  "source_commit": "0807e7927cb6bc37c644dc04822a5d68726dd0c6",
+  "terminal": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.classForThird_valid"
+}
