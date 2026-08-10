@@ -535,6 +535,16 @@ After centering
 \(q_i-q_j=c(r_i-r_j)(r_i+r_j)\).  Ordinary and mirror collisions are the
 two signs, while
 \(\sigma_t=c\sum_{e\in\mathcal M_t}r_e^2+\mu_t\psi(t)\).
+If \(\mathcal A(Z,T)=\prod_i(Z-r_i(T))\), then the whole value polynomial is
+the sign norm
+\[
+ (-1)^n\mathcal A(Z,T)\mathcal A(-Z,T)
+ =c^{-n}\mathfrak F(\psi(T)+cZ^2,T).
+\]
+Accordingly, ordinary directions are carried by
+\(\operatorname{disc}_Z\mathcal A\), while mirror directions are the
+off-diagonal square part of
+\(\operatorname{Res}_Z(\mathcal A(Z),(-1)^n\mathcal A(-Z))\).
 Hence
 \(\operatorname{disc}_V\mathfrak F\doteq
 (T^q-T)^2E_P^2\Theta_Q^2\): value collisions decompose into the ordinary

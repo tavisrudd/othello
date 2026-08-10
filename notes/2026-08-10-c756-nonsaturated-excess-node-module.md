@@ -690,6 +690,51 @@ common norm conic, while the mirror involution is its sign change in the
 \(r\)-coordinate.  This is the simplest fibre model in which to compare the
 ordinary and mirror incidence cycles.
 
+The entire value polynomial is the norm for this sign involution.  Define
+\[
+ \mathcal A(Z,T)=\prod_{i=1}^n(Z-r_i(T)),
+ \qquad
+ \mathcal V(W,T)=\prod_{i=1}^n(W-r_i(T)^2).             \tag{23ap}
+\]
+Then
+\[
+ \boxed{
+ (-1)^n\mathcal A(Z,T)\mathcal A(-Z,T)
+   =\mathcal V(Z^2,T),
+ \qquad
+ \mathfrak F(V,T)
+   =c^n\mathcal V\left(\frac{V-\psi(T)}c,T\right).}     \tag{23aq}
+\]
+Thus \(\mathfrak F\) is the invariant-theoretic quotient of the centered
+endpoint arrangement by \(Z\mapsto-Z\).  Collisions before the quotient
+split into equal-sign and opposite-sign pairs:
+\[
+ \boxed{
+ \begin{aligned}
+ \operatorname{disc}_Z\mathcal A
+   &=\prod_{i<j}(r_i-r_j)^2
+     \doteq(T^q-T)^2E_P^2,\\
+ \operatorname{Res}_Z\bigl(\mathcal A(Z,T),
+                    (-1)^n\mathcal A(-Z,T)\bigr)
+   &=\prod_{i,j}(r_i+r_j)\\
+   &=\left(\prod_i2r_i\right)
+     \left(\prod_{i<j}(r_i+r_j)^2\right).
+ \end{aligned}}                                        \tag{23ar}
+\]
+After multiplication by the fixed powers of \(c\), the off-diagonal square
+in the second line is \(\Theta_Q^2\), while its diagonal factor is
+\(\Delta_Q\).  Equations (23aa), (23ac), and (23ad) are therefore the
+discriminant--resultant identities of one elementary \(\mathbb Z/2\)-norm,
+not three unrelated eliminations.
+
+At an ordinary matched edge, simultaneous vanishing of its ordinary and
+mirror factors means \(r_i=r_j=0\): that node lies on the fixed axis of
+\(\jmath\).  All other overlap between the ordinary and mirror covers comes
+from distinct endpoint pairs becoming equal only after the sign quotient.
+This separates fixed-axis overlap from genuine cross-pair overlap inside
+\(K_{\rm mir}\), and gives a natural two-stage analysis of the remaining
+mirror-support algebra.
+
 Let \(\Theta_Q(T)=\prod_{i<j}\ell_{ij}(T)\).  Taking the discriminant of
 (23x) in the value variable and using the direction factorization (8) gives
 \[
