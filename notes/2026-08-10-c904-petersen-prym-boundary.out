@@ -1,0 +1,7 @@
+Petersen graph: dim H^1=6
+A5-fixed classes: 4 total, 3 nonzero connected covers
+S5 action: 1 fixed cover plus 1 odd-conjugate pair
+fixed-cover signed-cycle determinant: 1536
+exotic-pair determinant: 6^4=1296
+exotic-pair Gram class: 6*A5^vee = 6I-J
+CHECK PASS

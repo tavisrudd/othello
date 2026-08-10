@@ -52,7 +52,12 @@ stabilizer is $\Gamma_0(6)$; the quartic's nonconstant period therefore has
 closure $X_0(6)$.  Its four discriminant values have exactly the cusp
 cross-ratio, giving an explicit candidate Hauptmodul and quartic--cubic map,
 but the primitive Picard--Lefschetz cusp-width labeling remains the exact next
-gate.  Nothing from this checkpoint is in the manuscript; finite-flat residue
+gate.  Its ten-line boundary now supplies an exact integral bridge: the three
+connected $A_5$-equivariant Petersen double covers split as one $S_5$-fixed
+cover plus an odd-conjugate pair, and either paired cover has Prym signed-cycle
+lattice $6A_5^\vee=6I-J$, exactly the cubic six-axis lattice.  Identifying the
+paired covers with the CKS fibers at $\tau=\pm1$ is the remaining local
+geometric check.  Nothing from this checkpoint is in the manuscript; finite-flat residue
 control, full integral carrier saturation, descent, boundary, and Hecke
 geometry remain the broader upgrade gates.
 

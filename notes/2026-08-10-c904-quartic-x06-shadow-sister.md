@@ -4,7 +4,7 @@ Date: 2026-08-10
 Scope: high-EV mathematics, exact computation, and bounded priority audit.  No
 manuscript or Lean source was edited.
 
-Literature depth: one primary source was read in full and three were read
+Literature depth: one primary source was read in full and four were read
 partially from their full PDFs at the sections stated in the source ledger.
 The negative priority search is
 bounded and is not publication-grade: MathSciNet, zbMATH, and a full
@@ -268,6 +268,82 @@ prove the cusp-width labeling.  A Picard--Lefschetz calculation must:
 2. compute the resulting transvection in the root--weight normalization; and
 3. show that the widths are respectively $1,2,3,6$ in the displayed order.
 
+There is now a finite-graph route to this gate.  The CKS map
+
+\[
+ s(\tau)=\frac{\tau^3-\tau}{5\tau^2+3},
+ \qquad t=\frac{\tau^2+1}{4},
+\]
+
+identifies the four quartic degenerations with the three graph types of the
+singular Wiman--Edge fibers:
+
+- $t=1/4$ and $t=1/2$ both lie over $s=0$, whose ten-line dual graph is the
+  Petersen graph; the two quartics select two different admissible double
+  covers of that graph;
+- $t=1/6$ lies over $s=\pm1/\sqrt{-3}$, whose five-conic dual graph is $K_5$;
+- $t=7/10$ lies over $s=\pm1/\sqrt{125}$, whose irreducible six-nodal dual
+  graph is one vertex with six loops.
+
+Farb--Looijenga, Proposition 4.1, compute the integral variation tensors on
+the rank-six graph homology: in their golden-lattice normalization the three
+types have multipliers $4+2X$, $3+4X$, and $1$, respectively.  The Prym
+character lattice is the rank-five anti-invariant homology of the admissible
+two-cover of the graph.  Thus the remaining width calculation reduces to:
+
+1. recover the $\mathbf F_2$ voltage character of each CKS discriminant cover;
+2. form the integral anti-invariant cycle lattice of the resulting graph
+   double cover; and
+3. restrict Farb--Looijenga's edge-square variation tensor and compare it
+   with the root--weight cusp normalization.
+
+This should both produce the widths and distinguish the two Petersen covers.
+It is a finite integral graph calculation followed by one geometric check
+that the voltage character agrees with the conic-bundle rulings.
+
+### TT3: the Petersen boundary already contains the cubic axis lattice
+
+The finite part of that calculation is now exact.  Connected double covers
+of the Petersen graph are classified by the nonzero classes in
+$H^1(P,\mathbf F_2)$.  Direct integral enumeration gives
+
+\[
+ \left|H^1(P,\mathbf F_2)^{A_5}\right|=4.
+\]
+
+Thus there are exactly three connected $A_5$-equivariant covers.  Under the
+residual odd permutation in $S_5$, one is fixed and the other two are
+exchanged.  This is precisely the $1+2$ pattern over the CKS ten-line fiber:
+$s^{-1}(0)=\{0,1,-1\}$, with $\tau=0$ fixed and $\tau=\pm1$ paired.  The
+parameter match alone does not yet prove that the three geometric conic-bundle
+covers exhaust these three voltage classes; that is the remaining local
+ruling check.
+
+More importantly, take either member of the odd-conjugate pair.  Give every
+edge of the graph cover norm one and take the anti-invariant signed-cycle
+lattice, equivalently the toric character lattice with the usual Prym
+half-polarization normalization.  An explicit unimodular basis change gives
+
+\[
+  \operatorname{Gram}(H_1(\widetilde P,\mathbf Z)^-)=6I-J
+  =6A_5^\vee,
+  \qquad \det=6^4.
+\]
+
+This is exactly the six-$D_5$-axis polarization lattice obtained independently
+on the cubic side.  The $S_5$-fixed cover has determinant $1536$ instead and
+is not in this integral isometry class.  Hence the exotic cubic lattice is
+already present, without interpolation, in the Petersen boundary of the
+classical quartic branch.  This is the first exact cross-family meeting found
+at the integral boundary level rather than only on a common rational modular
+curve.
+
+The theorem presently proved is the graph-lattice statement.  To promote it
+to geometry one must still identify the CKS covers at $\tau=\pm1$ with the
+odd-conjugate voltage pair and verify that the admissible-Prym polarization
+uses the asserted half-restriction at this boundary.  Both are local checks;
+neither is licensed by the matching orbit sizes alone.
+
 Once that is done, the formula for $y(t)$ is forced.  There is also a short
 degree-one argument available.  The compactified period map is a nonconstant
 map $\mathbf P^1\to X_0(6)\simeq\mathbf P^1$.  If the four points of $D$ are
@@ -384,6 +460,10 @@ Focused web searches on 2026-08-10 used the exact queries
 "S6-invariant quartic threefolds" "Weyl groups" abelian varieties
 "S_6-invariant quartics" intermediate Jacobian elliptic curve fifth power
 "A5" "Gamma_0(6)" principally polarized abelian fivefold
+"symplectic lattice" "root lattice" "weight lattice" S_n
+"self-dual" "A_5" lattice S_6 symplectic
+integral symplectic representations symmetric group standard lattice classification
+S_n invariant lattices standard representation root weight lattice classification
 ```
 
 No result located a direct connection between the $S_6$-quartic intermediate
@@ -430,6 +510,12 @@ $E^5$ mechanism but does not pre-empt the integral lemma above.
   classification statement and Sections 3.1--3.3, including Theorem 3.1 and
   the $p=1$ proof.  Cache key `10.2991/jnmp.2006.13.2.2`; SHA-256
   `bc43fc126db7d1fc30252a9088806dee54717aa5f28e9e3982e8a1f28f8cc816`.
+- **Partial:** Benson Farb and Eduard Looijenga, *Arithmeticity of the
+  monodromy of the Wiman--Edge pencil*, arXiv:1911.01210, later *Annales de
+  l'Institut Fourier* 71 (2021).  Read from the cached full PDF: the
+  degeneration summary, Sections 3.3 and 4.1, and especially Proposition 4.1
+  and Remark 4.2.  Cache key `arXiv:1911.01210`; SHA-256
+  `4de9866aaa1a4fd48cd0c532521962849ecbd4decab84f132a91720a4b5091fc`.
 
 The first source supplies the quartic geometry, rational $S_6$ type, and
 nonconstant elliptic factor.  The second supplies the classical $A_5$
@@ -458,6 +544,13 @@ cyclic summands rather than the primary polynomial and CRT implementations:
 python3 notes/2026-08-10-c904-quartic-shadow-modular-replay.py
 ```
 
+Petersen boundary certificate and independent coset replay:
+
+```sh
+python3 notes/2026-08-10-c904-petersen-prym-boundary.py
+python3 notes/2026-08-10-c904-petersen-prym-boundary-replay.py
+```
+
 The tracked certificate records the cross-ratio orbit, the rational-map
 identity, the tight frames, and the twelve-gluing orbit.  It does not certify
 the geometric Picard--Lefschetz identification.
@@ -467,6 +560,9 @@ the geometric Picard--Lefschetz identification.
 | `notes/2026-08-10-c904-quartic-shadow-modular.py` | 7908 | `350a9ad0f58c27558f25ef4aa331dd6705ec4b2c192b8140a8056ff8da395d85` |
 | `notes/2026-08-10-c904-quartic-shadow-modular-replay.py` | 3361 | `8a8aa9af829f5520b411bf36392aaeeb5734af4e6ea40781a5b40ecbdd6261ce` |
 | `notes/2026-08-10-c904-quartic-shadow-modular.out` | 314 | `bb27678b549d127afb22a16c081b7ee76ed13c3d6cf7d8a6ab38cb2a4abb710f` |
+| `notes/2026-08-10-c904-petersen-prym-boundary.py` | 6451 | `759742c4ce666daea82972c038ecbd79bb60e7fa38992c9b6a14f03678a5cd2b` |
+| `notes/2026-08-10-c904-petersen-prym-boundary-replay.py` | 2251 | `3c549a95fb582ee8a326c03515509fd4e765252767f51b7e633d613c05cee841` |
+| `notes/2026-08-10-c904-petersen-prym-boundary.out` | 259 | `af04d7a5d9ef55d0e072c709ed408ec134e15b78937461a7c7f1f25ba879935a` |
 
 ## 9. Mystery ledger
 
@@ -482,8 +578,15 @@ the geometric Picard--Lefschetz identification.
 - **Settled:** the quartic discriminant divisor and the $X_0(6)$ cusps define
   isomorphic unordered four-pointed lines.
 - **Open, exact gate:** identify the four primitive Picard--Lefschetz
-  transvections and cusp widths.  This owns the displayed $y(t)$ and $T(t)$
-  formulas.
+  transvections and cusp widths.  The gate is now reduced to the
+  anti-invariant homology and edge-square forms of three explicit admissible
+  graph double covers, plus the CKS voltage-character identification.  This
+  owns the displayed $y(t)$ and $T(t)$ formulas.
+- **Settled, finite boundary theorem:** the Petersen graph has exactly three
+  connected $A_5$-equivariant double covers, split as $1+2$ by $S_5$; each
+  member of the pair has signed-cycle Gram lattice $6A_5^\vee=6I-J$, exactly
+  the cubic six-axis lattice.  Geometric realization by the $\tau=\pm1$ CKS
+  covers remains explicitly open.
 - **Open, Annals gate:** build the relative algebraic correspondence between
   the classical quartic and exotic cubic branches and control its integral
   descent and boundary.
