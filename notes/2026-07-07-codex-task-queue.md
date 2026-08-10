@@ -255,3 +255,4 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
 `2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.
+- **C904 `[clebsch]` [ACTIVE; PAPER V MANUSCRIPT-FIRST; LEAN DEFERRED TO 2026-08-10]** — bring the short marked golden round-trip culmination to a publishable state: freeze and prove the exact three-paper transport and inverse theorem, close literature/citation and layered exposition, build a quarantined reviewer dossier, and run sealed cold-referee remediation to final `GO`; Paper IV remains the independent lower branch unless a separately audited bridge is proved → `notes/clebsch-tasks/c904-paper-v-publishable-round-trip.md`.
