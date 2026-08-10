@@ -730,6 +730,51 @@ common norm conic, while the mirror involution is its sign change in the
 \(r\)-coordinate.  This is the simplest fibre model in which to compare the
 ordinary and mirror incidence cycles.
 
+The norm conic has a uniform torus model that retains the deck signs.  Let
+\[
+ E=\mathbb F_q[\lambda]/(\lambda^2-c/\eta)
+\]
+be the quadratic étale algebra, split or nonsplit according to the square
+class of \(c/\eta\), and let the bar denote its standard involution.  For a
+lifted matched node in (23ao), put
+\[
+ \xi_e=s_e+\lambda r_e(t)\in E.
+\]
+Then
+\[
+ \boxed{
+ N_{E/\mathbb F_q}(\xi_e)
+ =\xi_e\bar\xi_e
+ =s_e^2-\frac c\eta r_e(t)^2
+ =\frac{\psi(t)}{\eta}.}                               \tag{23ax}
+\]
+Thus all matched lifts in one direction lie on one norm fibre.  When
+\(\psi(t)\ne0\) this is a torsor of the norm-one torus; when
+\(\psi(t)=0\) it is the toric boundary corresponding to a tangent member of
+the direction pencil.  The two geometric involutions act by
+\[
+ \jmath:\xi\longmapsto\bar\xi,
+ \qquad
+ \text{deck}:\xi\longmapsto-\bar\xi,
+ \qquad
+ \jmath\circ\text{deck}:\xi\longmapsto-\xi.             \tag{23ay}
+\]
+Moreover
+\[
+ \boxed{
+ \sigma_t
+ =\frac\eta4\sum_{e\in\mathcal M_t}
+       \operatorname{Tr}_{E/\mathbb F_q}(\xi_e^2)
+   +\frac{\mu_t\psi(t)}2.}                             \tag{23az}
+\]
+Indeed
+\(\operatorname{Tr}(\xi_e^2)=
+2s_e^2+2(c/\eta)r_e^2\), and (23ao) reduces each summand to
+\(\eta s_e^2\).  Unlike the square-class projection, (23az) retains the
+actual deck-labeled lifts.  The remaining geometric theorem can therefore
+be phrased as a relation among points on these norm fibres, induced by the
+incidence of the lifted endpoint conics as \(t\) varies.
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[

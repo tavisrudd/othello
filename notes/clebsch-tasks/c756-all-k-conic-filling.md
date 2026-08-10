@@ -535,6 +535,16 @@ After centering
 \(q_i-q_j=c(r_i-r_j)(r_i+r_j)\).  Ordinary and mirror collisions are the
 two signs, while
 \(\sigma_t=c\sum_{e\in\mathcal M_t}r_e^2+\mu_t\psi(t)\).
+Equivalently, in the quadratic étale algebra
+\(E=\mathbb F_q[\lambda]/(\lambda^2-c/\eta)\), the lifted nodes
+\(\xi_e=s_e+\lambda r_e\) lie on the common norm fibre
+\(N(\xi_e)=\psi(t)/\eta\), and
+\[
+ \sigma_t=\frac\eta4\sum_e\operatorname{Tr}_{E/\mathbb F_q}(\xi_e^2)
+           +\frac{\mu_t\psi(t)}2.
+\]
+Mirror and deck act as \(\xi\mapsto\bar\xi\) and
+\(\xi\mapsto-\bar\xi\), so this carrier retains the coherent lift signs.
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and
