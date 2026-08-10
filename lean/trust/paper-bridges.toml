@@ -7,8 +7,8 @@ schema_version = 1
 [[bridge]]
 name = "clebsch-rigidity"
 repository = "finitegeom-clebsch-rigidity-bridge"
-bridge_commit = "927d98fa33998e9769137d745c0263880e63ea67"
-export_source_commit = "e91166530b5d3046730be3bc46542211c8004592"
+bridge_commit = "fabccbe8f63e006e81c866d3e6322a3a78867b55"
+export_source_commit = "95354563bc3ba4bd5fb4ef2436979dc134ab2783"
 lean_library = "ClebschRigidityBridge"
 source = "paper-bridges/clebsch-rigidity/TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean"
 license_source = "papers/clebsch-rigidity/LICENSE"
@@ -29,8 +29,8 @@ forbid_source_fallback = true
 [[bridge]]
 name = "arcs-complete-outside-conic"
 repository = "finitegeom-arcs-complete-outside-conic-bridge"
-bridge_commit = "2978e95d16373861d76aebfcb8d17e66bd295168"
-export_source_commit = "e91166530b5d3046730be3bc46542211c8004592"
+bridge_commit = "667b44a9e94af0e466503d901dcb29f06531c85f"
+export_source_commit = "95354563bc3ba4bd5fb4ef2436979dc134ab2783"
 lean_library = "ArcsCompleteOutsideConicBridge"
 source = "paper-bridges/arcs-complete-outside-conic/TavisRuddFiniteGeom/Papers/ArcsCompleteOutsideConic/CertificateCompatibility.lean"
 license_source = "papers/arcs_complete_outside_conic/LICENSE"
