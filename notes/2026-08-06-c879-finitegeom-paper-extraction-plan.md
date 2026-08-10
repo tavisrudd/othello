@@ -139,6 +139,10 @@ the cap game, affine-chart, parity, intrusion, and plane-transitivity layers. Th
 certificate-local extraction is only the data types, Boolean checker, and checker
 soundness needed to state and validate the generated books. The plane-outcome and
 game transport theorems belong exclusively in the downstream adapter.
+Q11 and Q13 each own a byte-identical copy of that small stable kernel rather than
+depending on a new certificate-foundation package; this deliberate duplication keeps
+either frozen certificate independently restorable and prevents changes in one from
+invalidating the other.
 
 Use explicit paper and shared source roots under the ecosystem namespace:
 
