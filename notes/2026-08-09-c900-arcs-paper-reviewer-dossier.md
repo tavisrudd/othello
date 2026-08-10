@@ -10,6 +10,10 @@ outside a conic: a prescribed-hole defect identity and matching-design
 rigidity*. Formalization, software, certificate, and artifact-trust review are
 deliberately out of scope.
 
+Numerical or letter review grades are reported in chat only. Do not persist
+them, component scores, or cross-paper rankings in this dossier, a C note, or a
+lane handoff.
+
 > **REVIEW-SUB-AGENT MATERIAL ONLY.** Do not list, link, or load this dossier
 > in the `relconic` handoff, startup context, named-expert routing table,
 > ordinary Arcs-paper work, or any Lean task. A parent agent may pass one
@@ -636,12 +640,6 @@ The reader correctly identified the paper's hierarchy as follows:
   different trust boundaries;
 - the inverse uncovered-locus reconstruction theorem and sharp F5 four-frame
   example were understood as a separate coda.
-
-The reader ranked the current paper at **93--94**, below Paper II (94) and
-above Paper I (92), and described the comparison as: the Arcs paper is more
-elegant and general, while Paper II is deeper and harder. Component scores
-were: correctness 95, novelty 94, theorem strength 93, conceptual elegance 97,
-technical depth 91, breadth 96, exposition 92, auditability 93.
 
 The central reservation was not correctness. It was that the identity is
 **elementary once found**, being a sharp linear combination of the classical
