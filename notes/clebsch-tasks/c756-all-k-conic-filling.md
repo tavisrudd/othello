@@ -18,9 +18,14 @@ all-passant row has no leaf.  Thus the complete \(k=13\) layer is impossible
 over every finite field.  At \(k=14\), none of the 96 exact \(q=61\) mixed
 leaves admits a thirteenth line, so that field also closes.  At \(q=67\) the
 mixed branch has no thirteen-line star, while all 92 all-passant stars fail
-already at \(E_{12}\).  The fixed-size frontier is exactly \(q=71,73\).
-At q=71 the all-passant branch has no thirteen-line star, so only the mixed
-branch remains at that field.
+already at \(E_{12}\).  At \(q=71\), the all-passant branch has no star and
+all 39 mixed stars fail their first forced equation \(E_8=0\).  At \(q=73\),
+neither branch has a geometric star.  Thus the complete \(k=14\) layer is
+also impossible over every finite field, and no \(k=15\) census is planned.
+In the saturated-internal branch, coherence canonically produces a dual
+3-net of order \((q+3)/2\); the collinear-component conic theorem and subgroup
+arithmetic now exclude every prime \(q>5\).  Extension fields remain at a
+precise characteristic-threshold version of that theorem.
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -96,7 +101,9 @@ Authorities:
   only the \(q=5\) four-frame and \(q=11\) hexagon occur.
 - No conic-filling \(12\)-arc exists over any finite field.
 - No conic-filling \(13\)-arc exists over any finite field.
-- For \(k=14\), the only unresolved fields are \(q=71,73\).
+- No conic-filling \(14\)-arc exists over any finite field.
+- A saturated-internal coherent support is a dual 3-net of order
+  \((q+3)/2\); over prime fields this leaves only the \(q=5\) four-frame.
 
 ## Current branch map
 
@@ -111,7 +118,7 @@ Authorities:
 `notes/2026-08-08-c756-saturated-exterior-consolidated-proof.md` and
 `notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`.
 
-### Saturated-internal — open global-coherence gate
+### Saturated-internal — prime fields closed; extension conic gate open
 
 Put \(q=2m-1\).  Polarity turns a hypothetical example into \(m+1\) passants
 in dual-arc position whose pairwise intersections form an internal star
@@ -123,7 +130,18 @@ in dual-arc position whose pairwise intersections form an internal star
 
 Tangents automatically avoid the star.  The live geometric gate is:
 
-> prove that every such coherent star for \(q>5\) misses a non-tangent line.
+> prove that every such coherent star over a proper extension field with
+> \(q>5\) misses a non-tangent line.
+
+Coherence now has a standard incidence model.  For an oriented support
+\(Z\subset\mathbb F_{q^2}\), the three sets consisting of \(Z\), \(Z^q\),
+and the character-opposite directions together with the trace-zero direction
+form a dual 3-net of order \((q+3)/2\).  If \(q\) is prime, Theorem 5.1 of
+Blokhuis--Korchmaros--Mazzocca forces the two affine components onto a conic;
+splitting and the two-line subgroup classification leave only \(q=5\).
+For proper prime powers the net order exceeds the characteristic.  The live
+gate is the same conic conclusion using the extra Frobenius exchange and
+quadratic-character direction component.
 
 Exact necessary structure already available:
 
@@ -325,26 +343,37 @@ At q=61 none of the 96 exact twelve-line mixed stars admits a compatible
 thirteenth line, and the all-passant row has no twelve-line star.  At q=67,
 the complete mixed search visits 946,250,059 recursion states and has no
 thirteen-line geometric star.  The all-passant search has exactly 92 stars;
-all 92 first fail \(E_{12}=0\), and none has a complete unused center.  Hence
-the only unresolved k=14 fields are q=71 and q=73.  Authorities:
+all 92 first fail \(E_{12}=0\), and none has a complete unused center.  These
+are the first two closed fields in the four-field k=14 direction-bound
+frontier.  Authorities:
 notes/2026-08-09-c756-k14-ledger-q61-closure.md and
 notes/2026-08-09-c756-q67-k14-closure.md.
 
-### \(q=71,k=14\): all-passant branch closed
+### \(q=71,73,k=14\): complete negative classification
 
-The complete anisotropic all-passant search visits 22,579,655 recursion
-states across all 36 normalized seed representatives and has no thirteen-line
-geometric star.  Thus only the mixed external-deletion branch remains at
-q=71.  Authority:
-notes/2026-08-10-c756-q71-k14-all-passant-closure.md.
+At q=71, the complete anisotropic all-passant search has no thirteen-line
+star.  The mixed search visits 2,570,632,814 recursion nodes and returns 39
+geometric stars; all 39 first fail the forced equation \(E_8=0\), and none
+has a complete center.  At q=73, the all-passant search has no star in
+38,310,405 states, while the independently implemented mixed search has no
+star in 4,198,162,536 states.  Together with q=61,67, this closes \(k=14\)
+over every finite field.  Authorities:
+`notes/2026-08-10-c756-q71-k14-all-passant-closure.md`,
+`notes/2026-08-10-c756-q71-k14-mixed-closure.md`,
+`notes/2026-08-10-c756-q73-k14-all-passant-closure.md`, and
+`notes/2026-08-10-c756-q73-and-global-k14-closure.md`.
 
 ## Ordered next actions
 
-1. Complete the q=71 thirteen-line mixed search and test \(E_8\) first at
-   every leaf; the all-passant branch is already closed geometrically.
-2. Keep q=73 and its \(E_6\) window behind the q=71 feasibility gate.
-3. In parallel mathematical priority, seek the saturated-internal global
-   dual-star nonblocking theorem.
+1. Do not open a \(k=15\) census.  Treat q=67,71,73 only as theorem-design
+   data for the all-\(q\) branches.
+2. For saturated-internal configurations, prove the special-direction conic
+   lemma for the coherent dual 3-net over proper extension fields.  Start
+   from the two Redei polynomials and isolate the Newton coefficients lost at
+   indices divisible by the characteristic.
+3. For the nonsaturated branch, prove the masked Redei missing-direction
+   theorem \(h\ge1\) for arbitrary defect, retaining both direction and
+   intercept on the Frobenius-fixed incidence space.
 
 ## Stop rules
 
@@ -402,8 +431,12 @@ Do not:
   geometric mixed leaves fail \(E_6=0\), and the other remaining rows have no
   twelve-line star.
 - \(k=14\): q=61 closes by exact nonextension; q=67 has no mixed star and
-  all 92 all-passant stars fail \(E_{12}\); at q=71 the all-passant branch has
-  no star; exactly q=71,73 remain, with only mixed geometry live at q=71.
+  all 92 all-passant stars fail \(E_{12}\); at q=71 all 39 mixed stars fail
+  \(E_8\), and q=73 has no geometric star of either type.  The layer is
+  closed over every finite field.
+- Saturated-internal: coherent supports are dual 3-nets; all prime fields
+  \(q>5\) are excluded structurally.  Proper extension fields remain at the
+  special-direction conic lemma.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
@@ -426,6 +459,12 @@ Do not:
   `notes/2026-08-09-c756-global-k13-closure.md`.
 - k=14 ledger and q=61 extension closure:
   `notes/2026-08-09-c756-k14-ledger-q61-closure.md`.
+- q=71 mixed closure:
+  `notes/2026-08-10-c756-q71-k14-mixed-closure.md`.
+- q=73 and global k=14 closure:
+  `notes/2026-08-10-c756-q73-and-global-k14-closure.md`.
+- Coherent dual-3-net reduction and prime-field theorem:
+  `notes/2026-08-10-c756-coherent-dual-three-net.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
