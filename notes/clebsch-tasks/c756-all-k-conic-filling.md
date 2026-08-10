@@ -535,6 +535,10 @@ After centering
 \(q_i-q_j=c(r_i-r_j)(r_i+r_j)\).  Ordinary and mirror collisions are the
 two signs, while
 \(\sigma_t=c\sum_{e\in\mathcal M_t}r_e^2+\mu_t\psi(t)\).
+This is the \(c\ne0\) branch.  If \(c=0\), then
+\(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
+over one projective direction and
+\(\deg\gcd(K_P,\operatorname{rad}\Theta_Q)\le1\).
 The fixed quadratic trace is the endpoint inertia form
 \[
  L(T,W)=c\sum_i(Y_iW-X_iT)^2+n\psi(T,W),

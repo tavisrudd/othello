@@ -643,6 +643,28 @@ joining \((x_i,y_i)\) to
 where \(\iota_Q\) is the central involution about
 \((b/(2c),-e/(2c))\).  The expression is symmetric in \(i,j\), as required.
 
+The boundary \(c=0\) is simpler and should be split off before introducing
+the centered involution.  In homogeneous direction coordinates put
+\(B(T,W)=bT+eW\).  Nondegeneracy of \(Q_{\rm du}\) implies \(B\ne0\), and
+(23z) becomes
+\[
+ \boxed{
+ q_i-q_j
+ =\bigl((y_i-y_j)W-T(x_i-x_j)\bigr)B(T,W),
+ \qquad
+ \Theta_Q=B^{\binom n2}.}                               \tag{23z0}
+\]
+Thus every nonordinary value collision is concentrated at the single
+projective direction \(B=0\), where the restriction of \(Q_{\rm du}\) to
+the direction line is constant in \(U\).  In this case
+\[
+ \boxed{\deg\gcd(K_P,\operatorname{rad}\Theta_Q)\le1.}  \tag{23z1}
+\]
+All other triple directions are transverse and use the canonical value gcd
+(23ae).  Hence the centered sign-norm construction below is needed only
+when \(c\ne0\); the isotropic pencil-center case already confines the whole
+mirror complication to at most one fibre.
+
 Completing the square makes the two factors canonical.  Put
 \[
  r_i(T)=y_i+\frac e{2c}
