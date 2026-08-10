@@ -158,6 +158,64 @@ scheme-theoretic proof gates.
 Until those gates close, this remains a successor theorem prospect and not a
 Paper-V claim.
 
+## EJ elevation: ramification and a uniform finite-field formula
+
+The three divisors are the complete ramification stratification of the
+icosahedral quotient
+\[
+ \pi:R\longrightarrow R/G.
+\]
+Their ramification indices are (5,3,2), respectively.  Thus the degree
+calculation is also the Riemann--Hurwitz identity
+\[
+ 12(5-1)+20(3-1)+30(2-1)=118=2|A_5|-2.
+\]
+This packages the tower as the arithmetic form of the classical
+((2,3,5)) quotient, rather than as three unrelated fixed-point counts.
+
+There is a stronger uniform statement over finite fields.  Let
+(k=\F_q), with \(q\) prime to (30), and let a constant (A_5) act
+faithfully and icosahedrally on a split (R\cong\PP^1_k).  Geometrically,
+(Z_r\) is the transitive (G)-set (G/C_r), of degree
+\[
+ d_5=12,\qquad d_3=20,\qquad d_2=30.
+\]
+Its group of (G)-equivariant automorphisms is
+(N_G(C_r)/C_r\cong C_2).  Frobenius therefore acts on (Z_r) by one
+sign (\epsilon_r\in\{1,-1\}): the sign is (1) when the two fixed
+points of (C_r) are rational and (-1) when Frobenius exchanges them.
+Consequently, for every (n\geq1),
+\[
+ \#Z_r(\F_{q^n})=\frac{d_r}{2}(1+\epsilon_r^n),
+\]
+and the free rational points form exactly
+\[
+ \frac{q^n+1-
+   \sum_{r\in\{2,3,5\}}\frac{d_r}{2}(1+\epsilon_r^n)}{60}
+\]
+regular (A_5)-orbits.  This is a simultaneous infinite-family and
+infinite-tower theorem: the only arithmetic inputs are the three split
+types.  It also gives the zeta factors
+\[
+ Z(Z_r,t)=
+ \begin{cases}
+   (1-t)^{-d_r},&\epsilon_r=1,\\
+   (1-t^2)^{-d_r/2},&\epsilon_r=-1.
+ \end{cases}
+\]
+
+For the Paper-V action over (\F_{11}),
+((\epsilon_5,\epsilon_3,\epsilon_2)=(1,-1,-1)).  Hence
+\[
+ Z(R\setminus(Z_5\sqcup Z_3\sqcup Z_2),t)
+   =\frac{(1-t)^{11}(1-t^2)^{25}}{1-11t},
+\]
+which recovers both the odd and even orbit formulas at once.  Promotion
+would require a citation for the classical ((2,3,5)) quotient and an
+independent check that the three Frobenius signs are intrinsic under the
+declared notion of marked (A_5)-action.  The derivation itself is
+group-theoretic once the stabilizer theorem is proved.
+
 ## Stronger arithmetic theorem to investigate
 
 The more substantial target is a relative theorem over a localization of
