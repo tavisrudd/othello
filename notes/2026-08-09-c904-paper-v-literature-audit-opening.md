@@ -2,13 +2,13 @@
 
 **Date:** 2026-08-09  
 **Lane:** `clebsch`  
-**Stage:** theorem-design audit; no novelty sentence licensed yet  
+**Stage:** drafted theorem; claim-specific closure in progress
 **Conventions:** `notes/literature-audit-conventions.md` applies in full
 
 ## Opening summary
 
-Seven primary sources with recorded **full-text** reads and four sources at
-**partial** depth were screened for the proposed Paper-V round trip.  The
+Seven primary sources with recorded **full-text** reads and eight sources at
+**partial** or shallower depth were screened for the proposed Paper-V round trip.  The
 classical outer-`S_6`, six-point, matching, Joubert, Segre, conference, and
 conic-hexagon infrastructure is heavily occupied.  The plausible new claim is
 therefore not the existence of those models or an abstract dictionary among
@@ -45,10 +45,14 @@ both are nonzero and `A_5`-invariant; it needs an exact selector and comparison.
 
 | source | read depth | sections used | boundary licensed |
 |---|---|---|---|
-| Bussemaker--Mathon--Seidel, *Tables of two-graphs* | **partial**, published cache key `10.1007/BFb0092256`, SHA-256 `ac9d300a4a0e5f46d4d4b36b66d5f620f616ffad3197ae93fad50b8ff224748a` | narrative Chapters 5--6 | Order-six conference two-graph uniqueness, pentagon representative, automorphism group `A_5`, and Paley/two-graph conventions. |
+| Bussemaker--Mathon--Seidel, *Tables of two-graphs* | **partial**, published cache key `10.1007/BFb0092256`; previously cached SHA-256 `ac9d300a4a0e5f46d4d4b36b66d5f620f616ffad3197ae93fad50b8ff224748a`; TU/e publisher PDF rechecked SHA-256 `09a3a493e3d5c88981c89de327bb0e00be9b316610f80dd59cb1f55ab1c29ba8` | p. 12, Chapter 6 p. 21, and Table 9 p. 83 | The pentagon-plus-isolated-vertex switching class has full automorphism group `A_5`; the order-six conference two-graph is unique and Table 9 records it. |
 | I. Dolgachev, *Corrado Segre and nodal cubic threefolds* | **partial**, arXiv preprint, key `arXiv:1501.06432`, SHA-256 `98a898303e06a395bad95888a826e677a955d4b8fc88914c6ede54e31406601e` | §§2--3 | Joubert/Coble ancestry, six-point quotient, nodal and determinantal geometry; does not license a new nodal-frame recovery claim. |
 | S. Kondō, *The Segre cubic and Borcherds products* | **partial**, arXiv preprint, key `arXiv:1110.1126`, SHA-256 `0595df2ed7631ba366b1603aca9a924ef08cb93cdc84b906f2877b68c777e9be` | §§1--2 | Segre--Igusa duality and quadrics through the nodes; detailed geometry is deferred to Hunt. |
 | M. K. Srinivasan, *The perfect matching association scheme* | **partial**, arXiv v1, key `arXiv:1807.00481`, SHA-256 `d6cc59c76758dc33a4bbaed145fa27e20df39e94727632b431ea7eb7ef9acb8b` | introduction and Theorems 1.1--1.2 discussion | Multiplicity-free matching scheme and orbital eigenvalue machinery; not the conic restriction or oriented cubic bridge. |
+| A. Pinardin and Z. Zhang, *A5-equivariant geometry of quadric threefolds* | **partial**, arXiv v1 preprint, key `arXiv:2508.11496v1`; PDF SHA-256 `c0279ed450210aaba183f45eabae9b56a716032b2d7e7323879f1e4c9cb1b976`; source-tar SHA-256 `e1e9faca679d5e56715da6dc730ed8e6f372f6d764267a4df7aaa3a363214605` | §3.2, §6.2 equations (6.3)--(6.5), and §8.2 | Explicitly owns the nonstandard five-dimensional `A_5` action, its two-dimensional invariant cubic pencil, the two chordal members singular along rational normal quartics, and the nonstandard `S_5` extension whose extra involution exchanges those two quartics.  It does not identify Paper II's signed tensor with a marked member or give the normalized sheet-to-conference difference map. |
+| Cheltsov--Marquand--Tschinkel--Zhang, *Equivariant geometry of cubic threefolds with non-isolated singularities* | **partial**, arXiv preprint, key `arXiv:2505.03986`, SHA-256 `7c16be3cdd2f21c99da9631de6e11e1b92cc128144b2c57249aeb8f196ed8861` | introduction's singular-locus classification and opening of §5 | Records the classical uniqueness/secant description of the chordal cubic and `Aut(X)=PGL_2`; attributes the general singular-locus classification to Yokoyama. |
+| Cheltsov--Marquand--Tschinkel--Zhang, *Equivariant geometry of singular cubic threefolds, II* | **partial**, arXiv preprint, key `arXiv:2405.02744`, SHA-256 `30b5afc9fc5e04ca2c73fe36adb0b466261c639fc72484c3350878a23d9af493` | Lemma 8.3 and proof | Classifies the `A_5`-invariant cubic with five `A_2` singularities used by Pinardin--Zhang §3.2.  This is not either chordal member. |
+| Yokoyama, *Stability of cubic 3-folds* | **secondary only** for Proposition 4.2; DOI metadata `10.3836/tjm/1244208939` | characterization reached through Cheltsov--Marquand--Tschinkel--Zhang | General classification of one-dimensional cubic-threefold singular loci only; full text not accessed. |
 
 ## Claim boundary
 
@@ -58,8 +62,15 @@ both are nonzero and `A_5`-invariant; it needs an exact selector and comparison.
 | unique order-six conference switching class and pentagon model are new | **pre-empted; cite classical sources** |
 | a nonzero `A_5`-invariant cubic is automatically the conference cubic | **false; invariant space has dimension two** |
 | exact Paper-II marked transport commuting with sheet exchange and cubic orientation | **no predecessor located, but mathematical claim not yet proved** |
+| the five-isotypic Paper-II cubic equals the conference cubic | **false; exact audit finds distinct invariant-pencil members** |
+| the nonstandard `A_5` invariant pencil and its two chordal cubics are new | **pre-empted by Pinardin--Zhang; do not claim** |
+| Paper II's projected tensor is one marked chordal member and recovers the six axes through its rational singular curve | **no predecessor located; proof and older-source chain still under audit** |
+| characteristic-zero chordality alone proves the required mod-11 singular scheme and rational-point orbit | **not licensed; exact reduction/Jacobian and orbit checks are required** |
+| the unmarked chordal cubic canonically determines six axes | **false as stated; its automorphism group is `PGL_2`, and the pairing uses the recovered `A_5` marking** |
+| Paper-II sheet reversal is automatically the outer-normalizer exchange of the two chordal members | **not proved and contradicted by the current marked calculation: sheet reversal negates one chordal generator, while the six-axis outer element exchanges the two chordal lines** |
+| the outer involution or its exchange of the two chordal quartics is new | **pre-empted by Pinardin--Zhang §8.2; only the exact mod-11 normalization and source-orientation compatibility remain candidates** |
 | exact conference/Joubert triangle--Pfaffian normalization | **no predecessor located in inherited audit; final negative not licensed yet** |
-| full marked round trip with both composites | **no predecessor located; requires theorem first and pinned citation closure** |
+| full marked round trip with both composites at the declared retained-output level | **proved by the current exact formulas, but no predecessor located; categorical typing and pinned citation closure remain required** |
 
 ## Required next searches
 
@@ -75,5 +86,81 @@ both are nonzero and `A_5`-invariant; it needs an exact selector and comparison.
 5. Pinned forward-citation closure for the final theorem against OpenAlex,
    Crossref, Semantic Scholar, and zbMATH.
 
+## Characteristic-11 boundary
+
+Pinardin--Zhang's displayed action matrices and pencil generators are integral,
+so their polynomial invariance identities reduce modulo `11`.  The two
+characteristic-zero chordal parameters are conjugate over `Q(sqrt(5))`; under
+the choice `zeta_5=3` in `F_11`, the unordered pair reduces to
+`9 f_1+f_2` and `5 f_1+f_2`.  This parameter calculation is an audit
+calculation, not a statement quoted from the source.
+
+None of that alone licenses good reduction of the singular quartics.  C904's
+exact certificate separately reconstructs the Paper-II member over `F_11`,
+checks its full gradient on `P^4(F_11)`, identifies it projectively with the
+Hankel determinant after the required outer twist, and recovers twelve
+distinct rational singular points in six equal-`C_5`-stabilizer fibres.  A
+manuscript proof must replace the rational-point census by the determinant's
+scheme-theoretic singular-locus calculation and must state that the axis
+pairing is `A_5`-marked.
+
+Pinardin--Zhang provides no inline older citation for the precise invariant
+pencil or its two chordal members.  Its equation supplement [37] was inspected
+at **partial** depth but has no durable cache record; it is an equation aid,
+not a reproducible mod-`11` certificate.
+
 MathSciNet is **NOT COVERED**.  Google Scholar is unavailable.  No negative
 novelty conclusion may be strengthened by treating those gaps as absence.
+
+## Forward-citation closure attempt, 2026-08-09
+
+The closest seeds were pinned by arXiv identifier:
+
+- Pinardin--Zhang, `arXiv:2508.11496`;
+- Cheltsov--Marquand--Tschinkel--Zhang, `arXiv:2505.03986`.
+
+The service results were not collapsed:
+
+| service | `2508.11496` | `2505.03986` | interpretation |
+|---|---:|---:|---|
+| OpenAlex | seed unresolved; identifier search returned two adjacent works | resolved as `W4416011598`, `cited_by_count=0` | The first result is not a zero.  The second is a service count of zero. |
+| Crossref | DataCite arXiv DOI and arXiv identifier did not resolve to the seed | same | The bibliographic fallback returned unrelated numerical false matches; therefore neither is a zero. |
+| Semantic Scholar | resolved as `b9ad02f13e8b30bd035b5023d8894f8c71e166d4`, `citationCount=0`, empty citation array | endpoint returned HTTP 429 on both attempts | The first is a distinguished empty result; the second licenses nothing. |
+| zbMATH Open | exact arXiv search resolved one arXiv record, `902808629` | exact arXiv web/API search found no promoted result in this pass | zbMATH supplies no independent forward count used here. |
+
+Load-bearing query strings were:
+
+```text
+GET https://api.openalex.org/works/arXiv:2508.11496
+GET https://api.openalex.org/works?search=arXiv%3A2508.11496&per-page=10
+GET https://api.openalex.org/works/https://doi.org/10.48550/arXiv.2505.03986
+GET https://api.crossref.org/works/10.48550/arXiv.2508.11496
+GET https://api.crossref.org/works/10.48550/arXiv.2505.03986
+GET https://api.crossref.org/works?query.bibliographic=arXiv%3A2508.11496&rows=5&select=DOI,title,author,is-referenced-by-count
+GET https://api.crossref.org/works?query.bibliographic=arXiv%3A2505.03986&rows=5&select=DOI,title,author,is-referenced-by-count
+GET https://api.semanticscholar.org/graph/v1/paper/ARXIV:2508.11496?fields=paperId,title,citationCount,citations.paperId,citations.title,citations.year,citations.externalIds
+GET https://api.semanticscholar.org/graph/v1/paper/ARXIV:2505.03986?fields=paperId,title,citationCount,citations.paperId,citations.title,citations.year,citations.externalIds
+GET https://api.zbmath.org/v1/document/_search?search_string=arxiv%3A2508.11496
+GET https://api.zbmath.org/v1/document/_search?search_string=arxiv%3A2505.03986
+```
+
+The largest surfaced adjacent set had size two and came from the OpenAlex
+identifier search over title/full metadata.  Both members were promoted and
+screened at `partial` depth by searching their full texts and reading every
+Pinardin--Zhang citation context:
+
+- Cheltsov--Pinardin--Prokhorov, *Simple subgroups of the real space Cremona
+  group*, arXiv v2, cache key `arXiv:2511.10477`, SHA-256
+  `fcc9a38836e4a266752c3894694586675c47bf291f9d2de6d76e4b41b6e07f2d`.
+  The PZ citation is general birational-geometry background; no chordal,
+  conference, matching, or normalized companion transport occurs.
+- Cheltsov--Krylov--Ma'u, *G-birationally rigid cubic threefolds*, arXiv v1,
+  cache key `arXiv:2604.20426`, SHA-256
+  `58fe45824a639bf51a951b9a4c3c81fd3f8d4b108b5185bf02162739c0bc1d8d`.
+  The PZ citations concern solidity, alpha invariants, and analogous
+  birational-rigidity proofs; no Paper-V-adjacent transport occurs.
+
+Because OpenAlex and Crossref did not resolve the first seed, and Semantic
+Scholar was rate-limited on the second, the required three-graph width is
+**not closed**.  This pass therefore does not license a final negative novelty
+sentence.  The ledger rows `C904-V1`--`C904-V3` remain `OPEN`.

@@ -4,14 +4,25 @@
 
 **Status:** active; manuscript-first; Lean deferred to 2026-08-10
 
+**Research checkpoint:** the literal-cubic target failed, but the replacement
+Paper-II chordal-axis bridge is proved exactly and independently replayed.
+The six-axis outer involution exchanges chordal lines; on either selected
+line, however, its difference operator `q-1` is an isomorphism to the
+conference line and identifies sheet sign with conference orientation.  The
+marked oriented round trip is therefore proved.  The selected chordal line is
+load-bearing and must be declared in transports from Papers I and III.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable
-state.  The paper is a short culmination, not a new mega-paper: under explicit
-markings, the Paper-I support cubic, Paper-II sheet-sign cubic, and Paper-III
-arithmetic triangle cubic land in one oriented cubic torsor, and that common
-shadow reconstructs the signed-permutation class of the golden conference
-operator and its quadratic spectral algebra.  Close the human proofs,
+state.  The paper is a short culmination, not a new mega-paper.  The original
+literal-cubic Rosetta target has failed its first exact gate: Paper II's
+five-isotypic signed cubic is a chordal member of the same marked
+icosahedral invariant pencil, not the Paper-I conference member.  The revised
+target is an exact companion reconstruction theorem: the distinguished
+conference and chordal members recover one six-axis carrier by different
+singular shadows, and the declared markings make the transports and reverse
+maps commute at the retained-output level.  Close the human proofs,
 literature and citation boundary, layered exposition, deterministic paper
 build, and dossier-isolated cold referee loop before calling the manuscript
 ready.
@@ -21,7 +32,7 @@ ready.
 - Paper IV remains the independent minimum-word reconstruction branch unless a
   separately audited theorem constructs a canonical bridge to the oriented
   cubic.  Its current theorem is not such a bridge.
-- “Round trip” means recovery of the common marked golden output package.  It
+- “Round trip” means recovery of the common marked golden pencil package.  It
   does not mean recovery of every original code, matching quotient, or global
   Stein cover unless the corresponding inverse is explicitly proved.
 - The Paper-III chart normalization and cross-identification of labelled
@@ -39,7 +50,8 @@ ready.
 
 ## Work plan
 
-1. Freeze the exact theorem packet: the three marked transports, equivariance,
+1. Freeze the exact revised theorem packet: the distinguished pencil members,
+   three marked transports, equivariance,
    involutions, reconstruction target, and both composites of the round trip.
 2. Audit the existing proof corpus claim by claim, separating proved inputs,
    paper-local proofs still required, and tempting but unsupported upgrades.
@@ -68,8 +80,9 @@ ready.
    page-level citation where appropriate.  Novelty language is supported by a
    claim-specific literature ledger.
 3. The abstract, introduction, proof strategy, theorem statements, and
-   conclusion agree on scope: one lossless common golden output, not recovery
-   of every original source and not a Paper-IV cubic bridge.
+   conclusion agree on scope: one lossless marked companion package with
+   distinct conference and chordal members, not one common cubic, not recovery
+   of every original source, and not a Paper-IV cubic bridge.
 4. The proof exposes the causal chain: marked transport, axis recovery,
    switching-class recovery, conference recognition, spectral algebra, and
    commutative round trips.  Finite or formal evidence never substitutes for

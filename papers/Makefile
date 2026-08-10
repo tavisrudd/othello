@@ -7,6 +7,7 @@ SOURCES := \
 	clebsch-rigidity/clebsch_rigidity_computational_companion.tex \
 	clebsch-factorization/clebsch_factorization.tex \
 	clebsch-passages/clebsch_passages.tex \
+	clebsch-round-trip/golden_companion_reconstruction.tex \
 	coding-repair-hypergraphs/complete_repair_hypergraphs.tex \
 	dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex \
 	equivariant-robust-completion/frobenius_pair_extension.tex
@@ -15,7 +16,7 @@ PDFS := $(SOURCES:.tex=.pdf)
 LOGS := $(SOURCES:.tex=.log)
 
 .PHONY: all check lint warnings clean distclean list \
-	arcs clebsch clebsch-rigidity clebsch-rigidity-companion clebsch-factorization clebsch-passages \
+	arcs clebsch clebsch-rigidity clebsch-rigidity-companion clebsch-factorization clebsch-passages clebsch-round-trip \
 	dihedral repair-hypergraphs equivariant-completion
 
 all: lint $(PDFS)
@@ -36,6 +37,8 @@ clebsch-rigidity-companion: clebsch-rigidity/clebsch_rigidity_computational_comp
 clebsch-factorization: clebsch-factorization/clebsch_factorization.pdf
 
 clebsch-passages: clebsch-passages/clebsch_passages.pdf
+
+clebsch-round-trip: clebsch-round-trip/golden_companion_reconstruction.pdf
 
 dihedral: dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.pdf
 

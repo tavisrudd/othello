@@ -2,18 +2,21 @@
 
 **Date:** 2026-08-09
 **Lane:** `clebsch`
-**Status:** revised after three sealed early reviews; Paper-II kill gate open
-**Working title:** *The Golden Reconstruction Theorem*
+**Status:** revised after sealed early and companion reviews; chordal-axis
+bridge and marked oriented round trip proved
+**Working title:** *The Golden Companion Reconstruction Theorem*
 **Working root:** `papers/clebsch-round-trip/`
 
-## One-sentence theorem target
+## One-sentence theorem target, revised after the Paper-II gate
 
-Relative to explicit paper-specific markings, the golden output packages of
-Papers I--III determine one oriented balanced six-axis cubic; that cubic
-recovers the six-axis frame, the golden conference switching class, and its
-quadratic spectral algebra, and rebuilding the cubic returns the original
-marked output package up to the declared switching, relabelling, and
-orientation involutions.
+Relative to explicit paper-specific markings, the Paper-I conference cubic
+and the five-isotypic shadow of Paper II are distinguished members of one
+icosahedral invariant cubic pencil: the former recovers the six-axis carrier
+from six nodes and the latter from the twelve rational points of its singular
+quartic; the marked pencil should recover the golden conference switching
+class, its quadratic spectral algebra, and exactly the retained outputs of
+Papers I--III.  The selected chordal line is part of the marked package; with
+that marking the outer difference `q-1` gives the exact oriented round trip.
 
 “Output package” is deliberate.  The theorem does not claim to reconstruct
 the full q11 code, the full matching quotient, or the global arithmetic cover.
@@ -66,26 +69,31 @@ Each of the first three papers supplies a functor into the common groupoid.
 2. **Paper II.**  Its stable theorem `thm:balanced-cubic` recovers the
    (H_3) sheet pair and its first nonzero signed tensor (mu_3), with the
    outer coset negating (mu_3).  The missing theorem is a commuting
-   transport from the oriented (H_3) matching-sheet package to the
-   six-axis triangle-holonomy package.  For a marked base matching, its six
-   pairs form the natural degree-six (A_5)-set.  Their augmentation is the
-   unique five-dimensional constituent of the restricted Paper-II output.
-   The bridge must construct the equivariant intertwiner and compare the
-   pulled-back cubic coefficient by coefficient.  This comparison is
-   essential: invariant cubics on the five-dimensional (A_5)-module form a
-   two-dimensional space.  It must also prove that sheet exchange maps to
-   cubic orientation reversal.  An abstract bijection of two-element torsors
-   after choosing basepoints is insufficient.
+   (H_3) sheet pair and its first nonzero signed tensor (mu_3).  The exact
+   gate now proves that its canonical five-isotypic projection is not the
+   conference cubic: after the outer-twisted (A_5)-identification it is the
+   chordal Hankel cubic, singular along a rational normal quartic.  The twelve
+   rational points of that curve form (A_5/C_5); equal-stabilizer pairing
+   recovers the six axes (A_5/D_5).  This chordal-axis bridge has passed an
+   independent exact replay.  The remaining transport must place this
+   chordal member, the conference member, and the sheet/orientation
+   involutions in one marked invariant pencil and prove the reverse map.  An
+   odd six-axis normalizer negates the conference generator and exchanges the
+   two chordal lines.  On either selected chordal line, its difference
+   operator is an isomorphism to the conference line and intertwines scalar
+   sheet reversal with conference reversal.
 3. **Paper III.**  Its stable proposition `thm:orientation-source` supplies
    ([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}) relative to a marked bridge
    datum.  The normalized chart lift and the cross-identification of the
    five-labelled systems remain hypotheses.  The selected component does not
    recover them.
 
-After these transports, the three target objects must be isomorphic by an
-explicit coordinated relabelling, with the orientation involutions commuting.
-The proof may normalize one common representative, but it must then prove
-independence from switchings and equivariance under relabelling.
+After these transports, the three outputs must determine the same marked
+pencil package by an explicit coordinated relabelling, with the orientation
+involutions commuting.  The theorem must not say that the Paper-II chordal
+cubic equals the conference cubic.  The proof may normalize one common
+representative, but it must then prove independence from switchings and
+equivariance under relabelling.
 
 ### B. Reconstruction from the cubic
 
@@ -132,20 +140,24 @@ enough to recover only the labels that were supplied as marking inputs.
 
 The current corpus proves the Paper-I reconstruction and the common
 six-axis inverse.  Paper III returns its marked conference source but not the
-chart lift or global cover.  Paper II's (F_{\mathrm{II}}), and therefore
-both of its composites, are the earliest open proof obligations.  Its retained
-output must be named explicitly: either the full signed tensor package, if an
-inverse is proved, or only the marked five-dimensional golden residue.
+chart lift or global cover.  Paper II now reaches the axis carrier through its
+chordal singular curve, but the marked choice between the two chordal members
+and the reverse reconstruction are the earliest open proof obligations.  Its
+retained output must be named explicitly: either the full signed tensor
+package, if an inverse is proved, or only the marked five-dimensional chordal
+residue.
 
 ## Proof spine under review
 
 1. Define the two concrete data types, their equivalences, and orientation
    involutions.
 2. Give the Paper-I transport as the model case, including its inverse.
-3. Construct and prove the Paper-II matching-sheet transport.
+3. Identify the Paper-II chordal member and recover the six-axis carrier from
+   its singular quartic.
 4. State the Paper-III relative transport and its noncanonical inputs.
-5. Prove the three transports agree on one normalized representative and
-   are equivariant under switching, relabelling, and every stabilizer.
+5. Construct the common marked invariant pencil; place the conference,
+   chordal, and other needed distinguished members; prove equivariance under
+   switching, relabelling, outer exchange, and every stabilizer.
 6. Recover the six-axis frame and coefficient normalization from the nodal
    cubic.
 7. Recover ([C]), prove (C^2=5I), and identify (mathbf Q[C]).
@@ -153,10 +165,12 @@ inverse is proved, or only the marked five-dimensional golden residue.
 9. State the norm/Pfaffian and conductor-two consequences with their integral
    boundary.
 
-The earliest unsupported implication is Step 3.  Drafting the main theorem is
-blocked until that step is either proved or the theorem is narrowed to Papers
-I and III.  A two-paper theorem may still be publishable, but it would no
-longer justify “three reconstructions” or the present Paper-V role.
+The old Step 3 equality is disproved.  Its replacement—the marked
+chordal-axis bridge—is exact and independently replayed.  The marked
+orientation and reverse map are now supplied by `q-1`; the surviving boundary
+is that Papers I and III must declare a chordal companion choice, while Paper
+II supplies one.  The next gate is full source-by-source retained-output and
+naturality review, not the existence of the orientation map.
 
 ## Exposition map under review
 
@@ -166,9 +180,9 @@ Target length: 12--18 pages, with the theorem on page 2.
 |---:|---|---|
 | 1--2 | Introduction, object table, theorem | define every retained output and marking; state the exact theorem and honest Paper-IV boundary |
 | 2--3 | Common model and scope | display one conference matrix and cubic; separate input/output data types and involutions |
-| 3--7 | Marked transports | import Papers I and III briefly; give Paper II and its exact intertwiner most of the space |
+| 3--7 | Marked transports | import Papers I and III briefly; give Paper II's projection, chordal identification, and axis recovery most of the space |
 | 7--10 | One common inverse | nodes recover normalized axes; holonomy recovers switching; conference and spectral recognition follow |
-| 10--13 | Exact round trips | print a source/output table and prove both composites at the retained-output level |
+| 10--13 | Marked pencil and exact round trips | distinguish the six-node and chordal members; print a source/output table and prove both composites at the retained-output level |
 | 13--14 | Corollaries and boundaries | norm/Pfaffian mechanism; rational versus integral boundary; Paper IV remains separate |
 | 14--16 | Precedence, verification, conclusion | claim-specific audit; concise evidence map; qualify “lossless” by its exact object |
 
