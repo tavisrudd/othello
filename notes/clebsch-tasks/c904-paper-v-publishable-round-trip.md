@@ -104,14 +104,13 @@ Paper V manuscript.
 
 The fourth pass in
 `notes/2026-08-10-c904-relative-minimal-cycle-two-primary-gate.md` resolves
-the smooth-family problem up to one exact two-primary index.  The Fano
-incidence correspondence gives an integral relative cycle inducing `[2]`,
-hence a rational identity cycle.  After a finite etale two-primary refinement,
-the fibrewise divisor certificate rigidifies to a primitive relative cycle of
-class $\Theta^4/4!$.  It does **not** formally give an integral relative
-universal cubic cycle: Voisin's lifting argument changes from a curve base to a
-surface, and the generic rationally connected fibre's index is the remaining
-obstruction.  Exact Sage plus independent SymPy certificates show why every
+the smooth-family problem up to one exact lifting index.  The Fano incidence
+correspondence gives an integral relative cycle inducing `[2]`, hence a
+rational identity cycle.  Its provisional extra-cover requirement is
+superseded by the fifth pass below.  It does **not** formally give an integral
+relative universal cubic cycle: Voisin's lifting argument changes from a
+curve base to a surface, and the generic rationally connected fibre's index
+is the remaining obstruction.  Exact Sage plus independent SymPy certificates show why every
 canonical construction stalls: theta pullbacks from the full generic
 endomorphism order span an index-$16$ divisor lattice, the quotient is exactly
 the four-dimensional exotic $A_5$ heart, its fourfold products have saturation
@@ -119,9 +118,23 @@ defect $2^{16}$, and the minimal class has order four.  Six axes, fifteen
 genus-two curves, Prym/incidence, and Hecke transport generate exactly the even
 class line.  The exotic deck exchanges the two gluings through the literal
 involution $x\mapsto2/x$; the twist deck is trivial on divisor classes.  The
-next high-EV gate is a conceptual theta-group identification and computation
-of the resulting modular Picard torsor/cusp residues.  No manuscript or Lean
-source changed.
+index-$16$ quotient is the Rosati norm-square defect, not the Picard torsor.
+
+The fifth pass in
+`notes/2026-08-10-c904-theta-rigidification-on-marked-base.md` closes the
+smooth-base Picard gate positively.  The exotic marking cuts full mod-$2$
+elliptic monodromy $S_3$ to $C_3$; on the actual principal homology lattice
+the order-three generator satisfies $M^2+M+I=0$ modulo two and hence has no
+fixed vector on $J[2]$.  Every symmetric-line-bundle torsor therefore has a
+unique invariant quadratic refinement.  Exact Sage and independent
+Fraction/SymPy certificates verify this for all fifteen Neron--Severi
+generators and all $2^{10}$ points.  Thus the primitive relative class
+$\Theta^4/4!$ exists on the present smooth exotic marked base without any
+additional cover.  The four cusp widths become $2,2,6,6$ on this cover, so
+all local mod-$2$ theta residues vanish.  The remaining smooth-family crown
+is solely an odd-index theorem for the relative rationally connected
+Abel--Jacobi lift; exotic-deck descent, semiabelian Chow extension, and
+priority closure remain separate.  No manuscript or Lean source changed.
 
 ## Goal
 
