@@ -41,29 +41,32 @@ a prescribed-hole defect identity and matching-design rigidity}
 \maketitle
 
 \begin{abstract}
-For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) be the
-least size of an arc disjoint from \(\cC\) whose secants cover every
-remaining point outside \(\cC\).  We prove
+For an arc in any finite projective plane and any prescribed set of points
+allowed to remain uncovered, we combine the first two classical secant
+moments into an exact identity with a pointwise nonnegative remainder.
+Its vanishing turns the canonical secant-concurrency decomposition of
+\(KG(k,2)\) into a simple
+\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; in a
+Desarguesian plane this design has a rank-three projective realization.
+The same remainder gives explicit edge and deletion stability away from
+equality.
+
+As the principal application, for a nonsingular conic
+\(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) be the least size of an arc
+disjoint from \(\cC\) whose secants cover every remaining point outside
+\(\cC\).  We prove
 \[
  \rhoC(q)\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
 We determine the possible zero-defect orders and classify zero defect in
-characteristic two: odd \(k\) gives an oval whose nucleus lies on \(\cC\),
-while even \(k\) forces \(k=q+2\).  A kernel-checked finite classification
-proves \(\rhoC(16)=9\).  Separate exhaustive classifications, with
-kernel-checked attaining witnesses, give
+characteristic two: for odd \(k\ge7\), equality gives an oval whose nucleus
+lies on \(\cC\), while for even \(k\ge6\), it forces \(k=q+2\).  A
+kernel-checked finite classification proves \(\rhoC(16)=9\).  Separate
+exhaustive classifications, with kernel-checked attaining witnesses, give
 \(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).
-
-The mechanism is a theorem for every finite projective plane and every
-prescribed hole set \(\cH\): the first two secant moments combine into an
-exact identity with a pointwise nonnegative remainder.  Its vanishing
-turns the canonical secant-concurrency decomposition of \(KG(k,2)\) into
-a simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; in a
-Desarguesian plane this design has a rank-three projective realization.
-Its total gives an explicit deletion bound away from equality.  The defect
-identity, equality criterion, and deletion stability are independently
-formalized in Lean.
+The defect identity, equality criterion, and deletion stability are
+independently formalized in Lean.
 \end{abstract}
 
 \noindent\textbf{Keywords.} complete arc; conic; saturating set; secant
@@ -110,8 +113,9 @@ and retain $\cU_{\cC}(A)$ for the conic-relative locus.
 Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
 \end{definition}
 
-In a Desarguesian plane, projective representatives of the points of \(A\)
-form a parity-check matrix of a \([k,k-3,4]_q\) MDS code.  If
+For \(k\ge4\), projective representatives of the points of \(A\) in a
+Desarguesian plane form a parity-check matrix of a \([k,k-3,4]_q\) MDS
+code.  If
 \(U(A)\ne\varnothing\), then \(U(A)\) is exactly its projective deep-hole
 syndrome locus: points of \(A\), points on secants, and points of \(U(A)\)
 have coset weight one, two, and three, respectively.
@@ -133,7 +137,7 @@ remain uncovered, let \(\cX_{\cH}(A)\) be the covered points outside
 \(\IH(A)=\sum_{y\in\cH}r(y)\).
 
 \begin{theorem}[Exact prescribed-hole defect]\label{thm:main}
-For every arc \(A\) and prescribed hole \(\cH\), define
+For every \(k\)-arc \(A\) with \(k\ge3\) and prescribed hole \(\cH\), define
 \[
  \Delta_{\cH}(A)=
  N(q-1)-\frac{6}{m}\binom{k}{4}
@@ -189,16 +193,18 @@ attaining witnesses and upper bounds, while the exhaustive lower exclusions
 are trusted classifier executions; the evidence map in
 Appendix~\ref{app:verification} records the distinction.
 
-The identity carries more information than the resulting scalar bound.
-The algebra is short; the point is the linear combination that factors
+The identity extracts more structure from the classical moments than the
+resulting scalar bound retains; it is not an independent third incidence
+equation.  The algebra is short, but the linear combination factors
 pointwise into nonnegative terms.  Its summands record exactly where a
 secant-index distribution falls short of the extremal pattern.  Their
 vanishing produces the matching design used for equality rigidity, while
 their total gives stability.  For conic holes, the equality theory forces
 each parity of \(k\) into three possible plane orders.  In characteristic
-two the odd branch is exactly the oval--nucleus configuration, while the
-even branch leaves only the hyperoval scale, by a tangent-involution
-congruence on the maximum-index points of the prescribed conic.
+two and in the ranges above, the odd branch is exactly the oval--nucleus
+configuration, while the even branch leaves only the hyperoval scale, by a
+chord-involution congruence on the maximum-index points of the prescribed
+conic.
 
 The exact small-order assertions in Theorem~\ref{thm:main-conic} have
 separate finite inputs.  At order $16$, a checked augmentation certificate
@@ -211,16 +217,21 @@ states the two trust boundaries separately.
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
 on the conic~\cite{BartoliEtAl2018}.  A line hole recovers affine
-completeness, including the related hyperfocused constructions
-\cite{NgWild2001,GiuliettiMontanucci2006,KorchmarosSzonyi2008}; see
-Corollary~\ref{cor:affine}.  Complete exterior sets point in the opposite
-direction: their joins miss the conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.
+completeness; see Corollary~\ref{cor:affine}.  Hyperfocusedness is a
+different secant-blocking condition, requiring a minimum focus set on an
+external line.  For translation arcs, Giulietti and Montanucci separately
+relate hyperfocusedness to affine extendability
+\cite[Definition~2 and Proposition~3.4]{GiuliettiMontanucci2006}; see also
+\cite{NgWild2001,KorchmarosSzonyi2008}.  Complete exterior sets point in
+the opposite direction: their joins miss the
+conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.
 Thus complete exteriority gives
 \(\cC(\F_q)\subseteq U(A)\), whereas \(\cC\)-completeness is equivalent to
 \(U(A)\subseteq\cC(\F_q)\).
 
 The point-index equations themselves are classical; compare
-Hirschfeld~\cite[Chapter~9]{Hirschfeld1998}, Ball~\cite{Ball1997}, and the
+Hirschfeld~\cite[Chapter~9]{Hirschfeld1998},
+Ball~\cite[p.~34]{Ball1997}, and the
 recent explicit complete-arc bound of
 Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The new step is
 the exact local remainder after splitting those equations over a
@@ -232,8 +243,8 @@ Nagy, and Sz\H{o}nyi~\cite[Theorem~7.5]{KorchmarosNagySzonyi2024} prove
 that, for odd $q$ and odd $r\ge5$, the points left uncovered by the
 $(q+1)$-secants of their rational BKS $(k,q+1)$-arc in
 \(\PG(2,q^r)\) are exactly the points of the proper subplane
-\(\PG(2,q)\) not belonging to the arc.  Thus localization of holes in a
-prescribed subplane is prior art.  Their theorem concerns a particular
+\(\PG(2,q)\) not belonging to the arc.  Thus localization on the defining
+subfield subplane is prior art.  Their theorem concerns a particular
 curve-derived $(k,q+1)$-arc; the contribution here is instead the exact
 defect identity for an arbitrary prescribed hole set, together with its
 equality and stability theory and its specialization to a prescribed conic
@@ -301,6 +312,11 @@ For every $k$-arc $A$ in a projective plane of order $q$,
    &=3\binom{k}{4}. \label{eq:second-moment}
 \end{align}
 \end{proposition}
+
+These equations are the standard first two secant-index moments; see
+Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and
+Ball~\cite[p.~34]{Ball1997}.  We include the proof to fix the indexing
+convention used in the prescribed-hole split.
 
 \begin{proof}
 There are $\binom{k}{2}$ secants.  Each contains $q+1$ points, exactly two
@@ -895,27 +911,35 @@ of index \(m\), and hence
 \]
 Let \(\nu\) be the nucleus of \(\cC\).  If \(\nu\in A\), then
 the \(k-1\) lines from \(\nu\) to the other arc points are exactly the
-tangent \(A\)-secants: any further tangent secant would contain \(\nu\)
-and two other arc points.  All nontangent secants meet \(\cC\) in zero or
-two points, so \(\IC(A)\equiv k-1\pmod2\), impossible because \(m\) is
-even.  Thus \(\nu\notin A\).  Now the tangent \(A\)-secants are exactly
-the secants through \(\nu\), and therefore
+conic-tangent secants of \(A\): any further conic-tangent secant would
+contain \(\nu\) and two other arc points.  All conic-nontangent secants
+meet \(\cC\) in zero or two points, so
+\(\IC(A)\equiv k-1\pmod2\), impossible because \(m\) is even.  Thus
+\(\nu\notin A\).  Now the conic-tangent secants of \(A\) are exactly the
+secants through \(\nu\), and therefore
 \(\IC(A)\equiv r(\nu)\pmod2\).  Zero defect gives
 \(r(\nu)\in\{1,m\}\), so \(r(\nu)=m\).  Hence an arc secant
 \(PQ\) is tangent to \(\cC\), say at \(T\).
 
-After a projective change of coordinates, assume that \(\cC\) is the
-standard conic.  Each point \(R\notin\cC\) induces an involution
-\(\sigma_R\) on \(\cC\) by taking the other point on the chord through
-\(R\).  Let \(S\) be the set of maximum-index conic points.  This set is
-invariant under every \(\sigma_R\) with \(R\in A\).  Indeed, if \(Y\in S\),
-the secants through \(Y\) form a perfect matching of \(A\), so \(R\) has a
-partner \(R'\in A\).  The other conic point on \(RR'\) is
-\(\sigma_R(Y)\); it lies on an \(A\)-secant, and zero defect forces its
-positive conic index to be \(m\).
+Projection from a point \(R\notin\cC\) pairs the two intersections with
+\(\cC\) of every chord through \(R\); a tangent contact is paired with
+itself.  This defines an involution \(\sigma_R\) of
+\(\cC(\F_q)\).  In characteristic two, \(\sigma_\nu\) is the identity,
+whereas for \(R\ne\nu\) the unique conic tangent through \(R\) gives the
+unique fixed point of \(\sigma_R\).
 
-The involutions \(\sigma_P\) and \(\sigma_Q\) fix \(T\).  In the standard
-conic parameter this can be seen directly.  Move \(T\) to
+Let \(S\) be the set of maximum-index conic points.  This set is invariant
+under every \(\sigma_R\) with \(R\in A\).  Indeed, if \(Y\in S\), the
+secants through \(Y\) form a perfect matching of \(A\), so \(R\) has a
+partner \(R'\in A\).  The second conic intersection of \(RR'\), with a
+tangent contact counted as fixed, is \(\sigma_R(Y)\); it lies on an
+\(A\)-secant, and zero defect forces its positive conic index to be \(m\).
+The tangent contact \(T\) itself lies on the secant \(PQ\), so it has
+positive conic index; zero defect therefore gives \(T\in S\).
+
+The involutions \(\sigma_P\) and \(\sigma_Q\) fix \(T\).  A projective
+change of coordinates makes their product law explicit.  Move \(\cC\) to
+the standard conic and \(T\) to
 \((1,0,0)\) on \(XZ=Y^2\), and write the other conic points as
 \(c(u)=(u^2,u,1)\).  The tangent at \(T\) is \(Z=0\), and the chord through
 \(c(u)\) and \(c(v)\) meets it at
@@ -1084,6 +1108,11 @@ contribution is at most
 Thus $P_s(a)\ge0$ implies
 $0\le(2a-3)s^3/4+4s^2$, and division by $s^2$ gives the claim.
 \end{proof}
+
+For ordinary complete arcs, the leading \(\sqrt{2q}\) scale is classical;
+compare Ball~\cite[Theorem~3.1]{Ball1997}.  The theorem below obtains the
+displayed additive refinement for conic-relative completeness from the
+prescribed-hole correction.
 
 \begin{theorem}[Explicit additive lower bound]
 \label{thm:asymptotic}
@@ -1259,6 +1288,13 @@ Corollary~\ref{cor:matching-nonexistence-gap} gives the stated quantitative
 bound.
 \end{proof}
 
+Following Alspach and Heinrich's hyperoval construction
+\cite[Theorem~1.2]{AlspachHeinrich1990}, call the
+\(\operatorname{MATCH}(10,5,1)\) class formed by the \(63\) concurrence
+matchings of the regular hyperoval in \(\PG(2,8)\) the
+\emph{regular-hyperoval design}.  It is one of Mathon's two abstract
+classes.
+
 \begin{theorem}[Rank-three ten-point classification]
 \label{thm:match-ten-realization}
 Let $K$ be a field.  Among the simple
@@ -1281,16 +1317,25 @@ found precisely two nonisomorphic
 \(\operatorname{MATCH}(10,5,1)\) designs applies to
 Definition~\ref{def:rank-three-realization}
 \cite[p.~40, opening classification paragraph]{AlspachHeinrich1990}.
-Equivalently, these are the two
-partial geometries denoted \(\operatorname{pg}(5,7,3)\) in Reichard and
-Woldar's (line size, point degree, \(\alpha\)) convention, or
+Each matching design has an associated partial geometry: take
+\(E(K_{10})\) as points and the \(63\) matching blocks as lines.  A line
+has five points and each point lies on seven lines.  If an edge \(e\) is
+not in a perfect matching \(M\), exactly three edges of \(M\) are disjoint
+from \(e\).  For each such edge, the \(\lambda=1\) property gives a unique
+block through it and \(e\), and these three blocks are distinct.  Thus the
+geometry is denoted \(\operatorname{pg}(5,7,3)\) in Reichard and Woldar's
+(line size, point degree, \(\alpha\)) convention, or
 \(\operatorname{pg}(4,6,3)\) in the common
-\(\operatorname{pg}(s,t,\alpha)\) convention.  Reichard and Woldar
-identify Mathon's result as a full classification and construct models of
-both classes in Proposition~5.1.5 and Corollary~5.1.6
-\cite[Proposition~5.1.5 and Corollary~5.1.6]{ReichardWoldar2022}.
-This published two-class completeness
-is an external input.  The paper-local enumeration in
+\(\operatorname{pg}(s,t,\alpha)\) convention.
+
+Reichard and Woldar report Mathon's full two-class result and construct
+the corresponding partial geometries in Proposition~5.1.4; their
+Proposition~5.1.5 computes automorphism groups, and Corollary~5.1.6
+distinguishes the two models
+\cite[Proposition~5.1.4, Proposition~5.1.5, and
+Corollary~5.1.6]{ReichardWoldar2022}.  Mathon's published two-class
+completeness~\cite{Mathon1981}, as reported both there and by
+Alspach--Heinrich, is an external input.  The paper-local enumeration in
 Appendix~\ref{app:verification} reconstructs and checks representatives of
 the two classes, but is not used to prove that the list is complete.
 
@@ -1407,7 +1452,7 @@ through $\nu$ is one of these $q+1$ tangents.
 \begin{proposition}[Case $\nu\in A$]
 \label{prop:nucleus-in}
 Let $A$ be a $k$-arc disjoint from $\cC$ with $\nu\in A$.  Exactly $k-1$
-$A$-secants are tangent to $\cC$.  In particular,
+secants of $A$ are tangent to $\cC$.  In particular,
 \[
  \IC(A)\ge k-1,
  \qquad
@@ -1423,10 +1468,10 @@ If $A$ is $\cC$-complete, then
 
 \begin{proof}
 For every $a\in A\setminus\{\nu\}$, the line $\nu a$ is tangent to
-$\cC$, giving $k-1$ tangent secants.  No line joining two points of
+$\cC$, giving $k-1$ conic-tangent secants.  No line joining two points of
 $A\setminus\{\nu\}$ can be tangent: every tangent contains $\nu$, which
 would place three points of $A$ on one line.  Hence these are exactly the
-tangent $A$-secants.
+conic-tangent secants of $A$.
 
 Every tangent contributes one to $\IC(A)$, while every other line
 contributes zero or two.  This proves the lower bound and parity statement.
@@ -1440,7 +1485,7 @@ Let $A$ be a $\cC$-complete arc with $\nu\notin A$.  Then
 \[
  1\le r(\nu)\le m,
 \]
-the tangent $A$-secants are exactly the secants through $\nu$, and
+the conic-tangent secants of $A$ are exactly the secants through $\nu$, and
 \[
  \IC(A)\equiv r(\nu)\pmod2,
  \qquad
@@ -1458,8 +1503,8 @@ Consequently,
 The nucleus is a required point outside $A\cup\cC$, so relative
 completeness gives $r(\nu)\ge1$; Lemma~\ref{lem:max-index} gives the upper
 bound.  A line is tangent to $\cC$ exactly when it passes through $\nu$.
-Thus the number of tangent $A$-secants is $r(\nu)$.  Reducing the sum of the
-intersection sizes $|\ell\cap\cC|$ modulo two gives
+Thus the number of conic-tangent secants of $A$ is $r(\nu)$.  Reducing the
+sum of the intersection sizes $|\ell\cap\cC|$ modulo two gives
 $\IC(A)\equiv r(\nu)\pmod2$.  The remaining claims follow from
 Corollary~\ref{cor:conic-bound}.
 \end{proof}
@@ -2118,6 +2163,11 @@ in planes over finite fields,
 (2024), 105851.
 \newblock doi:10.1016/j.jcta.2023.105851.
 \newblock arXiv:2302.10162.
+
+\bibitem{Mathon1981}
+R.~Mathon,
+\newblock The partial geometries $\operatorname{pg}(5,7,3)$,
+\newblock \emph{Congressus Numerantium} \textbf{31} (1981), 129--139.
 
 \bibitem{Nagy2018}
 Z.~L.~Nagy,
