@@ -81,7 +81,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
 
 - `lean/scripts/guarded-lean`: one bounded single-file elaboration through `run-quiet`.
 - `lean-build-queue.py`: `plan` (silent preflight, no Lake), `build`/`run` (locked queue, guarded
-  cache restore, atomic heartbeats, trace-current skipping, final aggregate gate), `await`, `lock`,
+  cache restore, explicit Lean-task and Lake-job caps, atomic heartbeats, trace-current skipping,
+  final aggregate gate), `await`, `lock`,
   `status` (owner-descendant view, no process-table search), `pack` (guarded `lake pack`), and
   `regenerate` (the package's separate `.#regenerate` app under the same owner guard).
 - `lean-build-systemd.py`: the adjacent managed path, explicitly selected, same lock and caps.

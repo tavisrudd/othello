@@ -57,8 +57,12 @@ correspondence only if
 
 could be odd.  On the certified exotic principal lattice, the 680 divisor
 triple products span a rank-50 **saturated** lattice, and the ideal of all
-these pairings is exactly \(2\mathbf Z\).  Thus no divisor-generated integral
-theta cut can supply the missing odd multisection.
+these pairings is exactly \(2\mathbf Z\).  The generic non-CM Hodge group is
+\(\mathrm{SL}_2\), and skew Howe duality identifies the rational
+codimension-three Hodge space with
+\(\mathbf S_{(2,2,2)}\mathbf Q^5\), also of dimension 50.  Hence the
+saturated product lattice is the full integral Hodge lattice.  No algebraic
+codimension-three theta cut can supply the missing odd multisection.
 
 The honest current conclusion is therefore:
 
@@ -67,7 +71,7 @@ The honest current conclusion is therefore:
 \begin{array}{c}
 \text{quintic model: exact two-primary ceiling;}\\
 \text{sextic charge-three model: fine, but }M_9\to J\text{ remains;}\\
-\text{all relative-NS theta cuts: even.}
+\text{all algebraic codimension-three theta cuts: even.}
 \end{array}}
 \]
 
@@ -209,7 +213,7 @@ relative \([2]\) Fano-incidence cycle by Bezout.  If every such Hecke carrier
 has even degree, its parity class should identify the same two-primary gerbe
 as the quintic pencil and produce a sharp impossibility theorem.
 
-## 5. Exact no-go for divisor theta cuts
+## 5. Exact no-go for all algebraic theta cuts
 
 Take the fifteen-element integral Neron--Severi basis on the exotic principal
 quotient.  Its degree-three divisor monomials give
@@ -232,15 +236,33 @@ has image \(2\mathbf Z\).  In particular every product
 \(D_1D_2D_3\) has even pairing, and saturation introduces no hidden odd
 class.
 
-This rules out the specific proposed construction: cut
-\(\Theta\times\Theta\) to a five-cycle by three classes coming from the
-globalized relative Neron--Severi lattice, lift the two theta coordinates by
-twisted cubics, and hope for an odd transfer.  The addition degree is even
-before the projective-plane transfers are applied.
+This is the whole integral Hodge lattice in codimension three.  At a generic
+non-CM point, write
 
-The computation does not rule out a non-divisor algebraic codimension-three
-class outside the divisor-generated rational Hodge subspace, nor an odd
-carrier intrinsic to \(M_9\).
+\[
+               H^1(J,\mathbf Q)=V_5\otimes U_2,
+\]
+
+where the Hodge group \(\mathrm{SL}(U_2)\) acts on the second factor.  The
+skew Cauchy decomposition gives
+
+\[
+ \left(\bigwedge^6(V_5\otimes U_2)\right)^{\mathrm{SL}(U_2)}
+       \cong \mathbf S_{(2,2,2)}V_5.
+\]
+
+The hook formula gives dimension 50.  Divisor triple products already span a
+50-dimensional rational subspace, so they exhaust the rational Hodge space;
+their saturation in \(\bigwedge^6\mathbf Z^{10}\) is therefore precisely the
+full integral Hodge lattice.
+
+This rules out the proposed construction in its strongest cohomological
+form: cut
+\(\Theta\times\Theta\) to a five-cycle by three classes coming from the
+globalized family, lift the two theta coordinates by twisted cubics, and hope
+for an odd transfer.  Every algebraic codimension-three class is integral
+Hodge, hence the addition degree is even before the projective-plane
+transfers are applied.  An odd carrier intrinsic to \(M_9\) is not ruled out.
 
 ## 6. Paper V and series fit
 
@@ -394,7 +416,7 @@ nearby place where the parity obstruction actually disappears.
 - **Does charge three close the relative identity?**  Open and now sharply
   localized to an odd cycle/multisection on the fourfold fibre of
   \(M_9\to J\).
-- **Can twisted-cubic theta geometry close it using only relative divisors?**
-  No: the exact pairing ideal is \(2\mathbf Z\).
-- **Could a non-divisor codimension-three class or common-line Hecke cycle be
-  odd?**  Open.  These are the two surviving concrete flanks.
+- **Can twisted-cubic theta geometry close it?**  No: the complete integral
+  Hodge lattice has pairing ideal \(2\mathbf Z\).
+- **Could a common-line Hecke cycle intrinsic to \(M_9\) be odd?**  Open.  It
+  is the surviving concrete flank.

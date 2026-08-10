@@ -80,9 +80,11 @@ state="$FAKE_LAKE_STATE"
 }
 [ "${1:-}" = build ] || { echo "unexpected lake argv: $*" >&2; exit 91; }
 shift
+jobs=unset
+if [ "${1:-}" = -j ]; then jobs="${2:-}"; shift 2; fi
 nobuild=0
 if [ "${1:-}" = --no-build ]; then nobuild=1; shift; fi
-echo "pwd=$PWD threads=${LEAN_NUM_THREADS:-unset} nobuild=$nobuild targets=$*" >> "$state/lake-calls.log"
+echo "pwd=$PWD threads=${LEAN_NUM_THREADS:-unset} nobuild=$nobuild targets=$* jobs=$jobs" >> "$state/lake-calls.log"
 rc=0
 mkdir -p "$state/built"
 for target in "$@"; do
@@ -482,6 +484,7 @@ class QueueTest(unittest.TestCase):
         calls = (self.state / "lake-calls.log").read_text()
         self.assertNotIn("threads=2 nobuild=0 targets=Fix.Alpha", calls)
         self.assertIn("threads=2 nobuild=0 targets=Fix.Beta", calls)
+        self.assertIn("threads=2 nobuild=0 targets=Fix.Beta jobs=2", calls)
 
         # Resource controls actually reached the tools.
         self.assertEqual((self.state / "cores.log").read_text().split(), ["0-1", "0-1"])

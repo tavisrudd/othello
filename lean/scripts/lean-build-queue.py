@@ -361,9 +361,10 @@ def spawn_and_wait(
 
 
 def shell_script(threads: int, lake_args: str) -> str:
-    # LEAN_NUM_THREADS is exported into the build shell: Lake is a Lean program, so its job pool is
-    # Lean's task pool, and this is the only way to size it.
-    return f"export LEAN_NUM_THREADS={threads}; exec lake build {lake_args}"
+    # Bound both layers explicitly. LEAN_NUM_THREADS sizes each Lean process's task pool, while
+    # Lake's `-j` bounds the number of module builds it may launch concurrently. CPU affinity alone
+    # is not a Lake job limit: multiple memory-heavy Lean processes can share one allowed core.
+    return f"export LEAN_NUM_THREADS={threads}; exec lake build -j {threads} {lake_args}"
 
 
 def nix_argv(nix: str, threads: int, lake_args: str) -> list[str]:

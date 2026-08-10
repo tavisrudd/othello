@@ -149,10 +149,12 @@ the quintic generic index to one or two, so a nonzero class has a minimal
 quadratic splitting field; its actual value on the special marked family is
 still open.  A second exact no-go closes the proposed twisted-cubic shortcut:
 all 680 degree-three divisor products span a saturated rank-50 lattice, and
-their `Theta^2` pairing ideal is exactly `2 Z`, so no relative-NS cut of
-`Theta x Theta` gives an odd multisection.  The surviving smooth-family gate
+their `Theta^2` pairing ideal is exactly `2 Z`.  Skew Howe duality gives the
+entire rational codimension-three Hodge space dimension 50, so this is the
+full integral Hodge lattice: no algebraic cut of `Theta x Theta` gives an odd
+multisection.  The surviving smooth-family gate
 is now the generic odd index of Voisin's fine charge-three
-`M_9 -> J` fourfold fibre, or a non-divisor Hecke carrier.  No manuscript or
+`M_9 -> J` fourfold fibre, or an intrinsic Hecke carrier.  No manuscript or
 Lean source changed.
 
 ## Goal
