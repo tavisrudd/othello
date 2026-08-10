@@ -665,6 +665,24 @@ All other triple directions are transverse and use the canonical value gcd
 when \(c\ne0\); the isotropic pencil-center case already confines the whole
 mirror complication to at most one fibre.
 
+That exceptional fibre is explicit too.  At the projective direction
+\(t_0\) cut out by \(B=0\), the restriction
+\[
+ Q_{\rm du}(t_0,U)=A(t_0)
+\]
+is constant in \(U\).  Since every repeated node is off the conic,
+\(A(t_0)\ne0\) whenever \(t_0\) is a covered direction, and
+\[
+ \boxed{
+ L(t_0)=nA(t_0),\qquad
+ \sigma_{t_0}=\mu_{t_0}A(t_0),\qquad
+ \nu_{t_0}=(n-2\mu_{t_0})A(t_0).}                      \tag{23z2}
+\]
+Thus the exceptional trace vanishes exactly when
+\(p\mid\mu_{t_0}\); otherwise its character is
+\(\chi(\mu_{t_0})\chi(A(t_0))\).  The \(c=0\) branch has no unresolved
+mirror geometry at all.
+
 Completing the square makes the two factors canonical.  Put
 \[
  r_i(T)=y_i+\frac e{2c}

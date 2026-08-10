@@ -538,7 +538,9 @@ two signs, while
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and
-\(\deg\gcd(K_P,\operatorname{rad}\Theta_Q)\le1\).
+\(\deg\gcd(K_P,\operatorname{rad}\Theta_Q)\le1\).  On that direction
+\(Q\) is constant in \(U\), giving
+\(\sigma_t=\mu_tQ(t,U)\); it vanishes exactly when \(p\mid\mu_t\).
 The fixed quadratic trace is the endpoint inertia form
 \[
  L(T,W)=c\sum_i(Y_iW-X_iT)^2+n\psi(T,W),
