@@ -304,7 +304,7 @@ conditions below impose the missing compatibility with
 
 This congruence has an exact finite-dimensional excess quotient.  Define
 \[
- \mathcal V_R=left\{H:\deg H<n,
+ \mathcal V_R=\left\{H:\deg H<n,
    D_Z^{(2)}(H/R)=O(Z^{-n})\right\},\qquad
  \mathcal C_R=\{H:\deg H\le2\}.                         \tag{46}
 \]

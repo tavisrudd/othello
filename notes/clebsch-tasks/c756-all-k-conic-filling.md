@@ -284,7 +284,7 @@ residual pairs; the remaining covariance work must retain the trace of the
 linear remainder of \(Q_\ell^{(q-1)/2}\) modulo \(E_{P,\ell}\).  Authority:
 `notes/2026-08-09-c756-all-center-resultant-norm.md`.
 
-The masked direction and intercept data also have a uniform finite-algebra
+The masked direction and intercept data also have a uniform finite-module
 carrier.  Let \(A_{\rm node}\) be the split function algebra of the
 \(q+\delta\) chord nodes and let
 \(B_{\rm dir}=\operatorname{Map}(\mathbb F_q,\mathbb F_q)\) pull back along
