@@ -795,10 +795,11 @@ over every finite field.  Authorities:
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
    node module.  Split \(K_P\) into transverse and mirror-overlap support
-   using \(K_{\rm mir}=\gcd(K_P,\Theta_Q)\).  On the transverse part extract
-   the ordinary repeated-value factor from
-   \(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\), or equivalently take the
-   sign norm of the centered repeated-root factor.  On \(K_{\rm mir}\), use
+   using \(K_{\rm mir}=\gcd(K_P,\Theta_Q)\).  Extract the ordinary factor
+   uniformly before descent as
+   \(\mathcal G_t=\gcd_Z(\mathcal A,\partial_Z\mathcal A)\), then take its
+   sign norm; on the transverse part this also equals
+   \(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\).  On \(K_{\rm mir}\), use
    the commuting mirror/deck involutions and the rank-two reflected Gram
    correction.  Prove that the endpoint-coherent norm-one coordinates
    cannot satisfy the bi-character zero sum \(\sum_e y_e=0\), then evaluate

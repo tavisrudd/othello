@@ -822,7 +822,7 @@ Thus, whenever \(\psi(t)\ne0\),
  \sum_{e\in\mathcal M_t}(\tau_e+\tau_e^{-1})=-2\mu_t.} \tag{23bd}
 \]
 The conic coefficients and its square class have disappeared from this last
-equation: the zero gate is a universal second-character identity on the
+equation: the zero gate is a universal trace identity on the
 norm-one torus.  The map
 \[
  \tau\longmapsto\frac{\psi(t)}4\frac{(\tau+1)^2}{\tau}
@@ -1848,11 +1848,12 @@ prove nonexistence.
 
 ## Next action
 
-Split \(K_P=K_{\rm mir}K_{\rm tr}\) as in (23af).  On \(K_{\rm tr}\),
-extract the matched-value factor from
-\(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\), equivalently take the sign
-norm of the ordinary repeated-root factor in (23at).  On \(K_{\rm mir}\),
-separate fixed-axis overlap from genuine cross-pair overlap using the
+Split \(K_P=K_{\rm mir}K_{\rm tr}\) as in (23af).  On all fibres, extract
+the ordinary repeated-root factor before descent by (23bn), then take its
+sign norm by (23bo).  On \(K_{\rm tr}\), this also equals the direct
+value gcd \(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\).  On
+\(K_{\rm mir}\), separate fixed-axis overlap from genuine cross-pair overlap
+for the character comparison using the
 quadric involution (23ag) and its rank-two Gram correction (23ak).  Retain
 the lifted-node coordinates
 \(\xi_e\), or their norm-one quotients \(\tau_e\), across endpoint-conic
