@@ -565,6 +565,14 @@ The torus boundary \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two.
 Every covered tangent fibre forces \(c/\eta\) square, splits as
 \(s=\pm\sqrt{c/\eta}\,r\), and has
 \(\sigma_t=c\sum_e r_e^2\).
+For \(c\ne0\), this yields the coprime support decomposition
+\[
+ K_P=K_{\rm tan}K_{\rm ov}K_{\rm gen},
+ \quad
+ K_{\rm ov}=\gcd(K_P/K_{\rm tan},\Theta_Q),
+\]
+into tangent, smooth mirror-overlap, and smooth transverse factors.  The
+zero norm and parity resultant factor across these three algebras.
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and

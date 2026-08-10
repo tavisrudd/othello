@@ -893,6 +893,33 @@ equations (23ba)--(23bg), while all tangent exceptions lie on a reduced
 support of degree at most two.  They retain a component-sign problem, but
 not an unbounded new family of fibre geometries.
 
+For \(c\ne0\), combine the tangent and mirror reductions into the coprime
+factorization
+\[
+ \boxed{
+ \begin{aligned}
+ K_{\rm sm}&=K_P/K_{\rm tan},\\
+ K_{\rm ov}&=\gcd(K_{\rm sm},\Theta_Q),\\
+ K_{\rm gen}&=K_{\rm sm}/K_{\rm ov},\\
+ K_P&=K_{\rm tan}K_{\rm ov}K_{\rm gen}.
+ \end{aligned}}                                        \tag{23bj}
+\]
+The three supports are respectively tangent, smooth mirror-overlap, and
+smooth transverse.  On \(K_{\rm gen}\), the repeated-value gcd (23ae) and
+the torus coordinate (23ba) both apply.  On \(K_{\rm ov}\), the torus
+coordinate still applies but value collisions must be separated before
+descent by the sign norm.  On \(K_{\rm tan}\), use the split-line formula
+(23bi).  Consequently
+\[
+ \boxed{
+ \operatorname{Res}(K_P,\Sigma_3)
+ =\prod_{\star\in\{\mathrm{tan},\mathrm{ov},\mathrm{gen}\}}
+   \operatorname{Res}(K_\star,\Sigma_3),}               \tag{23bk}
+\]
+and the same coprime factorization applies after intersecting with
+\(K_{\rm odd}\).  Only the smooth overlap factor can carry an unbounded
+failure of clean value-gcd extraction.
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[
@@ -1762,6 +1789,7 @@ prove nonexistence.
 | Is the mirror coordinate-dependent? | no | quadric involution (23ag), commuting with deck |
 | Is there a uniform quotient model? | settled | centered sign norm (23ap)--(23at) |
 | What is zero trace on a smooth direction fibre? | settled structurally | norm-one torus equation (23bd), or bi-character zero sum (23bf)--(23bg) |
+| How large is the tangent exception? | settled | \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two, with split-line trace (23bi) |
 | What happens when the pencil center is isotropic? | settled | mirror support has degree at most one and its trace is explicit, (23z0)--(23z2) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
 | Does the abstract module force a contradiction? | no | must use star realization and covering identities |
@@ -1780,5 +1808,6 @@ the lifted-node coordinates
 incidences.  The exact first target is to rule out the bi-character zero sum
 (23bg) coherently across directions; the second is to evaluate the product
 of the nonzero traces on \(K_{\rm odd}\).  The \(c=0\) mirror fibre is already
-explicit by (23z2).  Do not replace this value-level problem by the
+explicit by (23z2), and the tangent support has degree at most two by
+(23bh)--(23bi).  Do not replace this value-level problem by the
 Euler-character projection or a fixed-field census.
