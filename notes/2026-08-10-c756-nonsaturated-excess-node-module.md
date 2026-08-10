@@ -843,10 +843,13 @@ Since every node value is a nonzero element of
 \[
  \boxed{
  \chi(y_e)=\chi(\eta\psi(t)),\qquad
- \chi(y_e-4)=\chi(c\psi(t))}                            \tag{23bf}
+ \chi(y_e-4)=
+ \begin{cases}
+  \chi(c\psi(t)),&y_e\ne4,\\
+  0,&y_e=4.
+ \end{cases}}                                          \tag{23bf}
 \]
-whenever \(y_e\ne4\); the second equality has the corresponding zero value
-when \(r_e=0\).  Indeed
+Here \(y_e=4\) is equivalent to \(r_e=0\).  Indeed
 \[
  \frac{\psi(t)}4y_e=\eta s_e^2,
  \qquad
