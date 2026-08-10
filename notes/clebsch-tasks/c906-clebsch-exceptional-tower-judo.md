@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** queued after C905; research notes, exact evidence, literature
+**Status:** active after C905; research notes, exact evidence, literature
 audit, and framing only; no manuscript or Lean edits
 
 ## Goal

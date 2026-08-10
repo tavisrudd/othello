@@ -43,6 +43,14 @@ five numbered papers:
 5. Paper V — the culminating recognition and marked-round-trip paper, now
    active under C904; title and manuscript root are its first freeze.
 
+The cross-series reconstruction-profile task C905 is closed in
+`../2026-08-10-c905-reconstruction-profile-theorem.md`.  It gives the exact
+paperwise carrier/fibre/marking calculus, closes the Fano/Hamming and 11-cell
+reverse lemmas, and supplies the composition/no-section interface.  C906 is
+the active research-only successor: it may test sparse canonical entry and
+reverse recovery on C705/C865/C870, but may not edit manuscripts or Lean and
+may not relabel the classical exceptional folds as new.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.

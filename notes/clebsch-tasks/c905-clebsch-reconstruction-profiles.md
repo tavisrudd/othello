@@ -2,8 +2,10 @@
 
 **Lane:** clebsch
 
-**Status:** active; research notes, exact evidence, literature audit, and
-framing only; no manuscript or Lean edits
+**Status:** complete 2026-08-10; theorem packet, exact evidence, bounded
+literature audit, hard red team, TT/EJ closeout, and C906 carrier interface
+are in `notes/2026-08-10-c905-reconstruction-profile-theorem.md`; no
+manuscript or Lean source was edited
 
 ## Goal
 
