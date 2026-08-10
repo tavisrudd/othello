@@ -132,6 +132,14 @@ paper interface; the certificate packages import neither those shared modules no
 separate project foundation. Legacy `ProjectiveCap.*`, `RelativeConicArcs.*`, and
 `FiniteGeom.*` module paths are migration inputs, not final compatibility APIs.
 
+Do not satisfy this boundary by copying the current project foundation into a
+certificate package. `ProjectiveCap.CertCheck` currently closes over thirteen
+project modules and `ProjectiveCap.PlaneOutcome` over nineteen; the latter includes
+the cap game, affine-chart, parity, intrusion, and plane-transitivity layers. The
+certificate-local extraction is only the data types, Boolean checker, and checker
+soundness needed to state and validate the generated books. The plane-outcome and
+game transport theorems belong exclusively in the downstream adapter.
+
 Use explicit paper and shared source roots under the ecosystem namespace:
 
 ```text
