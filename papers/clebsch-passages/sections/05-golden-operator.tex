@@ -204,11 +204,23 @@ vertices form a pentagon.
 \]
 Over \(E=\Q(\sqrt5)\), put
 \(P_{T,\pm}=(I\pm C_T/\sqrt5)/2\) and
-\(B_T(x)=P_{T,-}D_xP_{T,+}\).  At \(T_0\), orient the two determinant
-lines so that the following equality has positive sign, and transport those
-orientations through the coherent outer marking.  Then
+\(V_{T,\pm}=\operatorname{im}P_{T,\pm}\).  Define the restricted map
+\[
+ B_T(x)=P_{T,-}D_x\big|_{V_{T,+}}:V_{T,+}\longrightarrow V_{T,-}.
+\]
+Its basis-free determinant lies in
+\(\det(V_{T,-})\otimes\det(V_{T,+})^{-1}\).  At \(T_0\), orient these
+determinant lines so that the following equality has positive sign, and
+transport the orientations through the coherent outer marking.  The inherited
+symmetric forms and these orientations trivialize the determinant line, and
 \[
  Z_T(x)=10\sqrt5\det B_T(x).
+\]
+Galois exchange swaps the two rank-three summands, so the determinant-line
+contraction differs from the ordinary field norm by \((-1)^{3\cdot3}=-1\):
+\[
+ \det[D_x,C_T]
+ =-8000\,N_{E/\Q}\!\left(\det B_T(x)\right).
 \]
 \item The six coordinates \((Z_T)_{T\in\mathcal T}\) satisfy
 \[
@@ -310,14 +322,14 @@ diagonal and every off-diagonal entry nonzero.  Put
 If \(\Phi_A=\mu\mathcal T_A\) for some \(\mu\ne0\), then \(n=6\) and
 \(A^2=\lambda I\) for some \(\lambda>0\).
 
-If those entries also have one absolute value, then, up to scale, switching,
+If the off-diagonal entries also have a common absolute value, then, up to scale, switching,
 and relabelling, \(A\) is the pentagon conference matrix; conversely
 \(\Phi_A=\pm4\mathcal T_A\); relative to an orientation of the signed label space,
-the sign is its two-valued orientation character.
+the sign is that space's two-valued orientation character.
 \end{theorem}
 
 \begin{proof}
-Their degrees force \(n/2=3\).  Since
+Equality of degrees forces \(n/2=3\).  Since
 \([D_{x+t\mathbf1},A]=[D_x,A]\), proportionality makes \(\mathcal T_A\)
 translation-invariant.  Its coefficient of \(tx_ix_j\), for \(i\ne j\), is
 \[
@@ -337,16 +349,8 @@ The hypotheses exclude zero proportionality and vanishing off-diagonal entries;
 the remaining weighted solutions of \(A^2=\lambda I\) are not classified.
 
 \paragraph{Why the determinant.}
-The basis-free determinant of \(B_T(x):V_{T,+}\to V_{T,-}\) lies in
-\(\det(V_{T,-})\otimes\det(V_{T,+})^{-1}\).  Galois exchange swaps the two
-spaces, and the symmetric pairing contracts this line with its conjugate.
-With the compatible orientations above, the odd-rank swap contributes a minus
-sign to the ordinary field norm, so
-\[
- \det[D_x,C_T]
- =-8000\,N_{E/\Q}\!\left(\det B_T(x)\right).
-\]
-Equivalently \(Z_T(x)=10\sqrt5\det B_T(x)\).  A permanent has no analogous
+The restricted determinant above is intrinsic; its scalar is fixed by the
+marked determinant-line orientations.  A permanent has no analogous
 basis-free meaning: changing orthonormal frames sends a matrix \(B\) to
 \(R_-^{\mathsf T}BR_+\); already for \(B=I_3\), right multiplication by a
 rotation through angle \(\theta\) in a coordinate plane changes its permanent
