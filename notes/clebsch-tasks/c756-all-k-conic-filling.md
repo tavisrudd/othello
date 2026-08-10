@@ -625,7 +625,11 @@ over every finite field.  Authorities:
    system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Classify the common
    kernel of the semilinear digit tower \(j=p^a\), then analyze the mixed
    conic--ghost non-shadow map: \(j=2\) unless \(p=5\), where one must use
-   \(j=3\).
+   \(j=3\).  In root coordinates its normal rows are weighted
+   Reed--Solomon evaluation rows; for \(p\ge7\) its quadratic part is the
+   diagonal Gram pencil
+   \(\mathsf E_R^{\mathsf T}\operatorname{diag}(w_iP(x_i))\mathsf E_R\)
+   restricted to \(\ker\mathbb M_R\).
    Prove that the resulting carry-controlled multiplication flag forces
    \(\deg H_2\le2\); or
    classify the equivalent completely split lacunary norm

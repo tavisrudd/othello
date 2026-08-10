@@ -1040,6 +1040,53 @@ rank defect, the same statements use the appropriate maximal minors.  These
 are theorem-shaped determinant gates on coefficient strata, not searches
 over field configurations.
 
+Both the normal matrices and the large-characteristic quadratic cone have
+an exact root-evaluation Gram model.  Let
+\[
+ \mathsf E_R:\mathcal K_R\longrightarrow\mathbb F_q^n,
+ \qquad g\longmapsto(G(x_i))_{i=1}^n,
+ \qquad G=s_R(g),                                       \tag{93}
+\]
+and, for an exponent \(m\), put
+\[
+ D_m=\operatorname{diag}(w_ix_i^m)_{i=1}^n.
+\]
+The root-set syndrome formula (51) says that the \(m\)-th non-shadow
+equation for \(H=C+G\) is
+\[
+ \sum_iw_ix_i^m(C(x_i)+G(x_i))^{j_0}=0
+ \qquad(m\in\mathscr E_{j_0}).                          \tag{94}
+\]
+Consequently its normal row at the conic point \(C\) is
+\[
+ \boxed{
+ j_0\bigl(w_ix_i^mC(x_i)^{j_0-1}\bigr)_{i=1}^n
+       \mathsf E_R.}                                    \tag{95}
+\]
+This is the root-coordinate version of \(\mathbb N_R(C)\): a weighted
+Reed--Solomon evaluation row restricted to the Cartier kernel.
+
+For \(p\ge7\), the cancellation (85)--(86) leaves the symmetric Gram forms
+\[
+ \boxed{
+ Q_m(g)=g^{\mathsf T}\mathsf E_R^{\mathsf T}D_m
+                    \mathsf E_Rg
+ \qquad(m\in\mathscr E_2).}                             \tag{96}
+\]
+If \(z=(z_m)\) and \(P_z(X)=\sum_mz_mX^m\), their whole linear pencil is
+\[
+ \sum_mz_mQ_m
+ =\mathsf E_R^{\mathsf T}
+   \operatorname{diag}(w_iP_z(x_i))\mathsf E_R.         \tag{97}
+\]
+Thus every large-characteristic rank-drop stratum is confronted not by
+arbitrary quadrics but by the common isotropic cone of a diagonal
+Reed--Solomon Gram pencil on \(\ker\mathbb M_R\).  The next viable rank
+argument is to prove that this restricted pencil has empty projective base
+locus on the completely split factor locus.  At the forced characteristics,
+(95) gives the analogous determinantal transversality problem before the
+quadratic or cubic residual terms are considered.
+
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
 the forced low-characteristic seams violates the first non-shadow rung in
