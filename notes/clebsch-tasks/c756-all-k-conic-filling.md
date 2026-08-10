@@ -534,6 +534,18 @@ Hence
 (T^q-T)^2E_P^2\Theta_Q^2\): value collisions decompose into the ordinary
 chord cover and a conic-centered mirror cover.  Separating these two forced
 square divisors is now an explicit alternative route to \(\Upsilon_3\).
+The mirror square is intrinsic:
+\[
+ \operatorname{Res}_U(F,F^\iota)\doteq\Delta_Q\Theta_Q^2,
+ \qquad
+ \Theta_Q^2\doteq
+ \operatorname{disc}_V(\mathfrak F)/\operatorname{disc}_U(F).
+\]
+Away from \(\Theta_Q=0\), the matched-value factor is exactly
+\(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\).  Thus the triple-direction
+support splits into a transverse part, where \(\Sigma_3\) is extracted by
+ordinary value-polynomial subresultants, and the explicit mirror-overlap
+support \(\gcd(K_P,\Theta_Q)\), where accidental value collisions can occur.
 
 ### \(q=53\): type-uniform critical core
 

@@ -657,6 +657,71 @@ belonging to the first source, while (23aa) packages both sources globally.
 Separating these two square divisors, rather than reconstructing every
 fibre gcd, is a new structural route to \(\Upsilon_3\).
 
+The mirror factor is itself a cross-resultant.  Assume \(c\ne0\) in the
+chosen affine chart and form the reflected endpoint arrangement
+\[
+ F^\iota(U,T)=
+ \prod_{j=1}^n
+ \left(U+T\left(\frac bc-x_j\right)+\frac ec+y_j\right).
+                                                               \tag{23ab}
+\]
+The intercept difference between the \(i\)-th original factor and the
+\(j\)-th reflected factor is \(c^{-1}\ell_{ij}(T)\).  Hence, with
+\(\Delta_Q(T)=\prod_i\ell_{ii}(T)\),
+\[
+ \boxed{
+ \operatorname{Res}_U(F,F^\iota)
+ \doteq\prod_{i,j}\ell_{ij}(T)
+ =\Delta_Q(T)\Theta_Q(T)^2.}                            \tag{23ac}
+\]
+The off-diagonal factors occur twice because \(\ell_{ij}=\ell_{ji}\);
+\(\Delta_Q\) records the directions joining an endpoint to its own
+\(\iota_Q\)-image.  Equivalently, comparison of (8) and (23aa) gives
+\[
+ \boxed{
+ \Theta_Q(T)^2
+ \doteq
+ \frac{\operatorname{disc}_V\mathfrak F(V,T)}
+      {\operatorname{disc}_UF(U,T)}.}                  \tag{23ad}
+\]
+Thus the mirror cover can be constructed either as the off-diagonal square
+part of one cross-resultant or as a quotient of two discriminants.
+
+More importantly, it isolates every accidental collision of conic values.
+Formula (23z) says
+\[
+ q_i(t)=q_j(t)
+ \quad\Longrightarrow\quad
+ t=t_{ij}\ \text{or}\ \ell_{ij}(t)=0.
+\]
+If \(\Theta_Q(t)\ne0\), equality classes among the \(q_i(t)\) are therefore
+exactly the matched endpoint pairs of direction \(t\).  Different matched
+pairs cannot share a value, nor can a matched value equal an unmatched one,
+because either event would give a second chord incident with an already
+matched endpoint.  Since the characteristic is odd,
+\[
+ \boxed{
+ \mathfrak G_t(V)
+ =\gcd_V\bigl(\mathfrak F(V,t),\partial_V\mathfrak F(V,t)\bigr)
+ \qquad(\Theta_Q(t)\ne0).}                              \tag{23ae}
+\]
+
+Put
+\[
+ K_{\rm mir}=\gcd(K_P,\Theta_Q),
+ \qquad K_{\rm tr}=K_P/K_{\rm mir}.                     \tag{23af}
+\]
+Because \(K_P\) is squarefree, these are coprime reduced supports.  On the
+transverse algebra \(\mathbb F_q[T]/(K_{\rm tr})\), the desired trace
+\(\Sigma_3\) is the negative first coefficient of the canonical repeated
+factor (23ae), obtainable stratumwise by ordinary subresultants of the
+single global value polynomial \(\mathfrak F\).  Every failure of this clean
+separation is confined to the mirror-overlap algebra
+\(\mathbb F_q[T]/(K_{\rm mir})\).  This does not yet evaluate the trace
+character on the transverse part, but it splits the geometric difficulty
+from the algebraic extraction and identifies one explicit smaller support
+for the former.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level
