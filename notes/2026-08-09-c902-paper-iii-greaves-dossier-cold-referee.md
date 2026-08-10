@@ -200,3 +200,65 @@ After freezing the PDF-only assessment, I inspected only these public supplement
 No supplemental file changed a finding or the verdict. They clarified the declared proof
 and literature boundaries, but I did not use them as proof premises and did not run the
 verification programs.
+
+---
+
+## Sealed regrade — 2026-08-09
+
+This section is an append-only regrade of the frozen report above. The original report is
+preserved verbatim.
+
+I verified the repaired authority commit
+`6e05b2d5405c1f00f88922dccf8ed49863b77c6c` and repaired PDF SHA-256
+`3251cb90a915e253ffdd01909174ff9248282ccb06e1a5b1705f308e64ab9d19`
+before reviewing. I read only the repaired PDF passages requested: Theorem 5.1(2), its
+proof, Theorem 5.2, the following “Why the determinant” paragraph, and the tiny edit in
+the golden-involution paragraph. I did not inspect diffs, history, C902 notes, or other
+reviews.
+
+### Disposition of the determinant-line finding
+
+The repair fully resolves Finding 1.
+
+- `V_{T,+}` and `V_{T,-}` are now defined at first use, and `B_T(x)` is explicitly the
+  restricted map `V_{T,+} -> V_{T,-}`, so its determinant can no longer be misread as
+  the zero determinant of a rank-three ambient `6 x 6` operator.
+- The theorem immediately locates the intrinsic determinant in
+  `det(V_{T,-}) tensor det(V_{T,+})^{-1}`.
+- It states how the inherited symmetric forms and transported orientations trivialize
+  that determinant line before writing the scalar identity
+  `Z_T=10 sqrt(5) det B_T`.
+- It gives the missing sign calculation where it belongs: Galois exchange swaps two
+  rank-three summands, so the determinant-line contraction contributes
+  `(-1)^(3*3)=-1`, yielding
+  `det[D_x,C_T]=-8000 N_{E/Q}(det B_T)`.
+- The proof's block matrix still gives the same magnitude:
+  `(2 sqrt(5))^6=8000` and `Z_T^2=500 det(B_T)^2`. Thus the inserted sign convention
+  agrees with, rather than modifies, the previously checked formula.
+
+The shortened “Why the determinant” paragraph now appropriately refers back to the
+already-defined restricted determinant. It retains the basis-free determinant/permanent
+contrast without duplicating the norm argument.
+
+### Other repair checks
+
+The Theorem 5.2 copy edit from an anaphoric reference to “the off-diagonal entries” is
+clear and mathematically unchanged. The golden-involution transition now separates the
+explicit transported-conjugation calculation from its deck-exchange consequence more
+cleanly; it introduces no change in meaning and makes the role of the lone switching sign
+easier to follow.
+
+I found no new correctness, normalization, exposition, or layout defect. The page break
+after the opening commutator identities leaves all new determinant-line definitions
+together at the top of the next page; the block proof, Theorem 5.2, and “Why the
+determinant” paragraph remain well spaced and readable. The small square at the end of
+Theorem 5.2's proof is the normal proof-ending mark, not a rendering artifact.
+
+The original Finding 2 about a more exact Howard--Millson--Snowden--Vakil pinpoint
+remains optional editorial advice, not a correctness or acceptance condition. It did not
+drive the frozen `MINOR` verdict.
+
+### Final regraded verdict
+
+**GO.** The only requested mathematical-normalization repair is complete, exact, and
+cleanly integrated. No new defect was introduced.
