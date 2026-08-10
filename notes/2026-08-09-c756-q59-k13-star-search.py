@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact restartable q=59/61, k=13 star search for C756.
+"""Exact restartable k=13/14 frontier star search for C756.
 
 Each invocation exhausts one normalized distinguished-line offset.  Keeping
 the shards separate makes the long search restartable and bounds the
@@ -35,19 +35,36 @@ def requested_q() -> int:
     return int(sys.argv[position + 1])
 
 
+def requested_target_size() -> int:
+    if "--target-size" not in sys.argv:
+        return 12
+    position = sys.argv.index("--target-size")
+    if position + 1 == len(sys.argv):
+        raise SystemExit("--target-size requires a value")
+    return int(sys.argv[position + 1])
+
+
 Q = requested_q()
-if Q not in (59, 61):
-    raise SystemExit("this search supports exactly q=59 and q=61")
+TARGET_SIZE = requested_target_size()
+if (TARGET_SIZE, Q) not in {
+    (12, 59),
+    (12, 61),
+    (13, 61),
+    (13, 67),
+    (13, 71),
+    (13, 73),
+}:
+    raise SystemExit("unsupported target-size/field pair")
 NONSQUARE = next(
     value
     for value in range(2, Q)
     if pow(value, (Q - 1) // 2, Q) == Q - 1
 )
-TARGET_SIZE = 12
 INTERNAL_NODE_CHARACTER = -1 if Q % 4 == 3 else 1
-FORCED_MIN_DEGREE = 8 if Q == 59 else 6
-MIXED_FORCED_MAX_DEGREE = 16 if Q == 59 else 17
-PASSANT_FORCED_MAX_DEGREE = 17 if Q == 59 else 18
+DEFECT = TARGET_SIZE * (TARGET_SIZE - 1) // 2 - Q
+FORCED_MIN_DEGREE = DEFECT + 1
+MIXED_FORCED_MAX_DEGREE = (Q - 1) // 2 - TARGET_SIZE - 1
+PASSANT_FORCED_MAX_DEGREE = (Q + 1) // 2 - TARGET_SIZE - 1
 CACHE_SIZE = 200_000
 
 
@@ -214,6 +231,14 @@ def elementary_forms(nodes, maximum_degree: int):
     return forms
 
 
+def homogeneous_value(form, x: int, y: int) -> int:
+    degree = len(form) - 1
+    return sum(
+        coefficient * pow(x, x_degree, Q) * pow(y, degree - x_degree, Q)
+        for x_degree, coefficient in enumerate(form)
+    ) % Q
+
+
 def projection_spans(model: Model, nodes, selected):
     used = {vertex.direction for vertex in selected}
     direction_count = max(vertex.direction for vertex in model.vertices) + 1
@@ -226,7 +251,7 @@ def projection_spans(model: Model, nodes, selected):
     return spans
 
 
-def analyze_leaf(model: Model, selected):
+def analyze_leaf(model: Model, selected, *, torus_diagnostic: bool = False):
     nodes = affine_nodes(model, selected)
     forms = elementary_forms(nodes, model.forced_max_degree)
     first_nonzero = next(
@@ -246,6 +271,19 @@ def analyze_leaf(model: Model, selected):
         "minimum_span": min(spans),
         "maximum_span": max(spans),
     }
+    if torus_diagnostic:
+        first_form = forms[FORCED_MIN_DEGREE]
+        direction_count = max(vertex.direction for vertex in model.vertices) + 1
+        zero_directions = []
+        for direction in range(direction_count):
+            a, b = model.coefficients(type(selected[0])(direction, 0))
+            if homogeneous_value(first_form, a, b) == 0:
+                zero_directions.append(direction)
+        selected_directions = {vertex.direction for vertex in selected}
+        result["first_forced_zero_model_directions"] = len(zero_directions)
+        result["first_forced_zero_selected_directions"] = sum(
+            direction in selected_directions for direction in zero_directions
+        )
     if model.name == "mixed-external-deletion":
         result["secants"] = sum(
             MIXED.line_character(vertex, NONSQUARE) == 1 for vertex in selected
@@ -254,7 +292,13 @@ def analyze_leaf(model: Model, selected):
     return result
 
 
-def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
+def enumerate_seed(
+    model: Model,
+    seed_s: int,
+    *,
+    extend_one: bool = False,
+    torus_diagnostic: bool = False,
+):
     matching_seeds = [
         i
         for i, vertex in enumerate(model.vertices)
@@ -279,6 +323,11 @@ def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
     all_complete_centers = 0
     first_nonzero_counts = Counter()
     type_profiles = Counter()
+    stars_with_first_forced_zero_model_direction = 0
+    stars_with_first_forced_zero_selected_direction = 0
+    first_forced_zero_model_directions = 0
+    first_forced_zero_selected_directions = 0
+    first_forced_zero_direction_profiles = Counter()
     best_score = None
     best_witness = None
     extensions = {}
@@ -287,11 +336,20 @@ def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
         nonlocal search_nodes, leaves, forced_window
         nonlocal any_complete_center, all_complete_centers
         nonlocal best_score, best_witness
+        nonlocal stars_with_first_forced_zero_model_direction
+        nonlocal stars_with_first_forced_zero_selected_direction
+        nonlocal first_forced_zero_model_directions
+        nonlocal first_forced_zero_selected_directions
         search_nodes += 1
         if len(chosen) == TARGET_SIZE:
             leaves += 1
-            selected = sorted(model.vertices[index] for index in chosen)
-            analysis = analyze_leaf(model, selected)
+            selected = sorted(
+                (model.vertices[index] for index in chosen),
+                key=lambda vertex: (vertex.direction, vertex.s),
+            )
+            analysis = analyze_leaf(
+                model, selected, torus_diagnostic=torus_diagnostic
+            )
             first_nonzero_counts[analysis["first_nonzero_forced_degree"]] += 1
             forced_window += int(analysis["forced_window"])
             any_complete_center += int(analysis["complete_centers"] > 0)
@@ -300,6 +358,18 @@ def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
             )
             if model.name == "mixed-external-deletion":
                 type_profiles[(analysis["secants"], analysis["passants"])] += 1
+            if torus_diagnostic:
+                model_zeros = analysis["first_forced_zero_model_directions"]
+                selected_zeros = analysis[
+                    "first_forced_zero_selected_directions"
+                ]
+                stars_with_first_forced_zero_model_direction += int(model_zeros > 0)
+                stars_with_first_forced_zero_selected_direction += int(
+                    selected_zeros > 0
+                )
+                first_forced_zero_model_directions += model_zeros
+                first_forced_zero_selected_directions += selected_zeros
+                first_forced_zero_direction_profiles[(model_zeros, selected_zeros)] += 1
             prefix = (
                 model.forced_max_degree + 1
                 if analysis["first_nonzero_forced_degree"] is None
@@ -320,7 +390,8 @@ def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
                     bit = extension_candidates & -extension_candidates
                     extension_vertex = bit.bit_length() - 1
                     extended = sorted(
-                        selected + [model.vertices[extension_vertex]]
+                        selected + [model.vertices[extension_vertex]],
+                        key=lambda vertex: (vertex.direction, vertex.s),
                     )
                     extended_nodes = affine_nodes(model, extended)
                     spans = projection_spans(model, extended_nodes, extended)
@@ -395,22 +466,56 @@ def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
             extensions[key] for key in sorted(extensions)
         ]
         result["one_line_extension_count"] = len(extensions)
+    if torus_diagnostic:
+        result.update(
+            {
+                "stars_with_first_forced_zero_model_direction":
+                    stars_with_first_forced_zero_model_direction,
+                "stars_with_first_forced_zero_selected_direction":
+                    stars_with_first_forced_zero_selected_direction,
+                "first_forced_zero_model_directions":
+                    first_forced_zero_model_directions,
+                "first_forced_zero_selected_directions":
+                    first_forced_zero_selected_directions,
+                "first_forced_zero_direction_profiles": [
+                    {
+                        "model_directions": key[0],
+                        "selected_directions": key[1],
+                        "count": count,
+                    }
+                    for key, count in sorted(
+                        first_forced_zero_direction_profiles.items()
+                    )
+                ],
+            }
+        )
     return result
 
 
-def exact_output(mode: str, seed_s: int, *, extend_one: bool = False):
+def exact_output(
+    mode: str,
+    seed_s: int,
+    *,
+    extend_one: bool = False,
+    torus_diagnostic: bool = False,
+):
     model = mixed_model() if mode == "mixed" else passant_model()
     return {
-        "schema": f"c756-q{Q}-k13-star-shard-v1",
+        "schema": f"c756-q{Q}-k{TARGET_SIZE + 1}-star-shard-v1",
         "q": Q,
-        "k": 13,
+        "k": TARGET_SIZE + 1,
         "mode": model.name,
         "target_size": TARGET_SIZE,
         "internal_node_character": INTERNAL_NODE_CHARACTER,
         "forced_degrees": [FORCED_MIN_DEGREE, model.forced_max_degree],
         "direction_count": max(vertex.direction for vertex in model.vertices) + 1,
         "vertex_count": len(model.vertices),
-        "shard": enumerate_seed(model, seed_s, extend_one=extend_one),
+        "shard": enumerate_seed(
+            model,
+            seed_s,
+            extend_one=extend_one,
+            torus_diagnostic=torus_diagnostic,
+        ),
         "pinned_files": {
             MIXED_BASE_PATH.name: MIXED_BASE_SHA256,
             PASSANT_BASE_PATH.name: PASSANT_BASE_SHA256,
@@ -430,7 +535,8 @@ def aggregate_output(mode: str, shard_directory: Path):
         path = shard_directory / f"c756-q{Q}-{prefix}-seed-{seed_s}.json"
         payload = json.loads(path.read_text())
         if (
-            payload.get("schema") != f"c756-q{Q}-k13-star-shard-v1"
+            payload.get("schema")
+            != f"c756-q{Q}-k{TARGET_SIZE + 1}-star-shard-v1"
             or payload.get("mode") != model_name
             or payload.get("shard", {}).get("seed_s") != seed_s
         ):
@@ -439,11 +545,15 @@ def aggregate_output(mode: str, shard_directory: Path):
 
     degree_counts = Counter()
     profile_counts = Counter()
+    zero_direction_profile_counts = Counter()
     for row in rows:
         for item in row.get("first_nonzero_forced_degree", []):
             degree_counts[item["degree"]] += item["count"]
         for item in row.get("type_profiles", []):
             profile_counts[(item["secants"], item["passants"])] += item["count"]
+        for item in row.get("first_forced_zero_direction_profiles", []):
+            key = (item["model_directions"], item["selected_directions"])
+            zero_direction_profile_counts[key] += item["count"]
     extensions = {}
     for row in rows:
         for extension in row.get("one_line_extensions", []):
@@ -452,9 +562,9 @@ def aggregate_output(mode: str, shard_directory: Path):
                 raise SystemExit("inconsistent duplicate extension record")
             extensions[key] = extension
     result = {
-        "schema": f"c756-q{Q}-k13-star-aggregate-v1",
+        "schema": f"c756-q{Q}-k{TARGET_SIZE + 1}-star-aggregate-v1",
         "q": Q,
-        "k": 13,
+        "k": TARGET_SIZE + 1,
         "mode": model_name,
         "normalization": (
             "central inversion sends seed offset s to -s; representatives "
@@ -490,6 +600,30 @@ def aggregate_output(mode: str, shard_directory: Path):
             PASSANT_BASE_PATH.name: PASSANT_BASE_SHA256,
         },
     }
+    diagnostic_keys = (
+        "stars_with_first_forced_zero_model_direction",
+        "stars_with_first_forced_zero_selected_direction",
+        "first_forced_zero_model_directions",
+        "first_forced_zero_selected_directions",
+    )
+    if any(any(key in row for key in diagnostic_keys) for row in rows):
+        present_rows = [row for row in rows if row["seed_present"]]
+        if not all(
+            all(key in row for key in diagnostic_keys)
+            and "first_forced_zero_direction_profiles" in row
+            for row in present_rows
+        ):
+            raise SystemExit("incomplete torus diagnostics across shards")
+        for key in diagnostic_keys:
+            result[key] = sum(row[key] for row in present_rows)
+        result["first_forced_zero_direction_profiles"] = [
+            {
+                "model_directions": key[0],
+                "selected_directions": key[1],
+                "count": count,
+            }
+            for key, count in sorted(zero_direction_profile_counts.items())
+        ]
     if any("one_line_extensions" in row for row in rows):
         result["extension_target_size"] = TARGET_SIZE + 1
         result["one_line_extensions"] = [
@@ -580,10 +714,16 @@ def aggregate_extension_output(root_certificate: Path, shard_directory: Path):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--q", type=int, choices=(59, 61), default=Q)
+    parser.add_argument(
+        "--q", type=int, choices=(59, 61, 67, 71, 73), default=Q
+    )
+    parser.add_argument(
+        "--target-size", type=int, choices=(12, 13), default=TARGET_SIZE
+    )
     parser.add_argument("--mode", choices=("mixed", "all-passant"))
     parser.add_argument("--seed-s", type=int)
     parser.add_argument("--extend-one", action="store_true")
+    parser.add_argument("--torus-diagnostic", action="store_true")
     parser.add_argument(
         "--aggregate-mode", choices=("mixed", "all-passant")
     )
@@ -594,6 +734,8 @@ def main():
     arguments = parser.parse_args()
     if arguments.q != Q:
         parser.error("internal --q preparse mismatch")
+    if arguments.target_size != TARGET_SIZE:
+        parser.error("internal --target-size preparse mismatch")
     shard_mode = arguments.mode is not None or arguments.seed_s is not None
     aggregate_mode = arguments.aggregate_mode is not None
     extension_aggregate_mode = arguments.aggregate_extensions_from is not None
@@ -603,17 +745,26 @@ def main():
         if arguments.mode is None or arguments.seed_s is None:
             parser.error("shard mode requires --mode and --seed-s")
         if not 0 <= arguments.seed_s < Q:
-            parser.error("--seed-s must lie in [0,58]")
-        if arguments.extend_one and (Q != 61 or arguments.mode != "mixed"):
+            parser.error(f"--seed-s must lie in [0,{Q - 1}]")
+        if arguments.extend_one and (
+            Q != 61 or TARGET_SIZE != 12 or arguments.mode != "mixed"
+        ):
             parser.error("--extend-one is implemented for q=61 mixed shards")
+        if arguments.torus_diagnostic and (
+            Q != 67 or TARGET_SIZE != 13 or arguments.mode != "all-passant"
+        ):
+            parser.error(
+                "--torus-diagnostic is implemented for q=67 all-passant shards"
+            )
         output = exact_output(
             arguments.mode,
             arguments.seed_s,
             extend_one=arguments.extend_one,
+            torus_diagnostic=arguments.torus_diagnostic,
         )
     elif aggregate_mode:
-        if arguments.extend_one:
-            parser.error("--extend-one belongs to shard mode")
+        if arguments.extend_one or arguments.torus_diagnostic:
+            parser.error("shard diagnostics belong to shard mode")
         if arguments.aggregate_mode is None or arguments.shard_directory is None:
             parser.error(
                 "aggregate mode requires --aggregate-mode and --shard-directory"
@@ -622,8 +773,8 @@ def main():
             arguments.aggregate_mode, arguments.shard_directory
         )
     else:
-        if arguments.extend_one:
-            parser.error("--extend-one belongs to shard mode")
+        if arguments.extend_one or arguments.torus_diagnostic:
+            parser.error("shard diagnostics belong to shard mode")
         if arguments.shard_directory is None:
             parser.error("extension aggregation requires --shard-directory")
         output = aggregate_extension_output(

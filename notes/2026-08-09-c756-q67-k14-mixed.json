@@ -1,0 +1,669 @@
+{
+  "first_nonzero_forced_degree": [],
+  "forced_window_stars": 0,
+  "geometric_stars": 0,
+  "k": 14,
+  "mode": "mixed-external-deletion",
+  "normalization": "central inversion sends seed offset s to -s; representatives 0..33",
+  "pinned_files": {
+    "2026-08-09-c756-aligned-node-clique.py": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb",
+    "2026-08-09-c756-aligned-split-mixed-search.py": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f"
+  },
+  "present_seed_representatives": 34,
+  "q": 67,
+  "schema": "c756-q67-k14-star-aggregate-v1",
+  "search_nodes": 946250059,
+  "seed_representatives": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "shards": [
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 100260997,
+        "maxsize": 200000,
+        "misses": 239089
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25778585,
+      "seed_present": true,
+      "seed_s": 0,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 99261444,
+        "maxsize": 200000,
+        "misses": 236944
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25531955,
+      "seed_present": true,
+      "seed_s": 1,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 118693155,
+        "maxsize": 200000,
+        "misses": 301923
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30362913,
+      "seed_present": true,
+      "seed_s": 2,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 99770090,
+        "maxsize": 200000,
+        "misses": 238203
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25661315,
+      "seed_present": true,
+      "seed_s": 3,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 116556813,
+        "maxsize": 200000,
+        "misses": 298330
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 29846268,
+      "seed_present": true,
+      "seed_s": 4,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 97655162,
+        "maxsize": 200000,
+        "misses": 237409
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25152133,
+      "seed_present": true,
+      "seed_s": 5,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 121094869,
+        "maxsize": 200000,
+        "misses": 305347
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30943397,
+      "seed_present": true,
+      "seed_s": 6,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 117127236,
+        "maxsize": 200000,
+        "misses": 299437
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 29981286,
+      "seed_present": true,
+      "seed_s": 7,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 97353444,
+        "maxsize": 200000,
+        "misses": 237104
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25066213,
+      "seed_present": true,
+      "seed_s": 8,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98301183,
+        "maxsize": 200000,
+        "misses": 237600
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25300331,
+      "seed_present": true,
+      "seed_s": 9,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 96023453,
+        "maxsize": 200000,
+        "misses": 237700
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 24758438,
+      "seed_present": true,
+      "seed_s": 10,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 120411607,
+        "maxsize": 200000,
+        "misses": 307657
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30783113,
+      "seed_present": true,
+      "seed_s": 11,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 115798842,
+        "maxsize": 200000,
+        "misses": 301348
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 29670088,
+      "seed_present": true,
+      "seed_s": 12,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 120030726,
+        "maxsize": 200000,
+        "misses": 303672
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30687905,
+      "seed_present": true,
+      "seed_s": 13,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98138542,
+        "maxsize": 200000,
+        "misses": 236453
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25261072,
+      "seed_present": true,
+      "seed_s": 14,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98212201,
+        "maxsize": 200000,
+        "misses": 236177
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25273425,
+      "seed_present": true,
+      "seed_s": 15,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 99270812,
+        "maxsize": 200000,
+        "misses": 238753
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25536891,
+      "seed_present": true,
+      "seed_s": 16,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 119405177,
+        "maxsize": 200000,
+        "misses": 304866
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30534782,
+      "seed_present": true,
+      "seed_s": 17,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 121170204,
+        "maxsize": 200000,
+        "misses": 305482
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30958342,
+      "seed_present": true,
+      "seed_s": 18,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 119471738,
+        "maxsize": 200000,
+        "misses": 306932
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30557959,
+      "seed_present": true,
+      "seed_s": 19,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 120940037,
+        "maxsize": 200000,
+        "misses": 305685
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30901037,
+      "seed_present": true,
+      "seed_s": 20,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 120114055,
+        "maxsize": 200000,
+        "misses": 307553
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30704647,
+      "seed_present": true,
+      "seed_s": 21,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 121032837,
+        "maxsize": 200000,
+        "misses": 304432
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30918395,
+      "seed_present": true,
+      "seed_s": 22,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 119652271,
+        "maxsize": 200000,
+        "misses": 307740
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30594693,
+      "seed_present": true,
+      "seed_s": 23,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 115640432,
+        "maxsize": 200000,
+        "misses": 303663
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 29636786,
+      "seed_present": true,
+      "seed_s": 24,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 95497376,
+        "maxsize": 200000,
+        "misses": 235481
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 24633680,
+      "seed_present": true,
+      "seed_s": 25,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 96434505,
+        "maxsize": 200000,
+        "misses": 234073
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 24840419,
+      "seed_present": true,
+      "seed_s": 26,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 119355296,
+        "maxsize": 200000,
+        "misses": 303610
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30520676,
+      "seed_present": true,
+      "seed_s": 27,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98253199,
+        "maxsize": 200000,
+        "misses": 237090
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25293393,
+      "seed_present": true,
+      "seed_s": 28,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98067455,
+        "maxsize": 200000,
+        "misses": 236886
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25238338,
+      "seed_present": true,
+      "seed_s": 29,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 98360415,
+        "maxsize": 200000,
+        "misses": 236555
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 25314345,
+      "seed_present": true,
+      "seed_s": 30,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 95452267,
+        "maxsize": 200000,
+        "misses": 233696
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 24603905,
+      "seed_present": true,
+      "seed_s": 31,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 119688244,
+        "maxsize": 200000,
+        "misses": 303396
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 30603607,
+      "seed_present": true,
+      "seed_s": 32,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 200000,
+        "hits": 96229189,
+        "maxsize": 200000,
+        "misses": 235672
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 24799727,
+      "seed_present": true,
+      "seed_s": 33,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    }
+  ],
+  "stars_with_all_complete_centers": 0,
+  "stars_with_any_complete_center": 0,
+  "type_profiles": []
+}

@@ -95,10 +95,12 @@ python3 notes/2026-08-09-c756-q59-k13-star-search.py \
 Hashes:
 
 ```text
-3421f660be97ecd99db766476a5cce61f1d228620bd7f0c8a3be0c07a8d59bd8  notes/2026-08-09-c756-q59-k13-star-search.py
+f5d0d53cf687bd44fda0f8e89584930983eac4d22905807d22901e4ee105c3d6  notes/2026-08-09-c756-q59-k13-star-search.py
 0fa8a47e48ddcfdb65630feb3ec64297f5d0c5a58ad9d8fcff7720eab4d8eda3  notes/2026-08-09-c756-q61-k13-mixed.json
 cda5a20472f410ba0f78bd3f461ea71cca4e5c00029c1d80bfb0fc98740a3e55  notes/2026-08-09-c756-q61-k14-extension.json
 ```
+
+Byte counts in the same order are 30,888; 23,747; and 867.
 
 ## Evidence boundary
 

@@ -16,8 +16,9 @@ already settled.  At \(k=13\), exact twelve-line geometry also closes
 geometry and every one fails the first forced equation \(E_6=0\); the
 all-passant row has no leaf.  Thus the complete \(k=13\) layer is impossible
 over every finite field.  At \(k=14\), none of the 96 exact \(q=61\) mixed
-leaves admits a thirteenth line, so that field also closes; the fixed-size
-frontier is exactly \(q=67,71,73\).
+leaves admits a thirteenth line, so that field also closes.  At \(q=67\) the
+mixed branch has no thirteen-line star, while all 92 all-passant stars fail
+already at \(E_{12}\).  The fixed-size frontier is exactly \(q=71,73\).
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -93,7 +94,7 @@ Authorities:
   only the \(q=5\) four-frame and \(q=11\) hexagon occur.
 - No conic-filling \(12\)-arc exists over any finite field.
 - No conic-filling \(13\)-arc exists over any finite field.
-- For \(k=14\), the only unresolved fields are \(q=67,71,73\).
+- For \(k=14\), the only unresolved fields are \(q=71,73\).
 
 ## Current branch map
 
@@ -316,11 +317,22 @@ has even one complete center.  Hence no conic-filling \(13\)-arc exists over
 any finite field.  Authority:
 notes/2026-08-09-c756-global-k13-closure.md.
 
+### \(q=61,67,k=14\): complete negative classification
+
+At q=61 none of the 96 exact twelve-line mixed stars admits a compatible
+thirteenth line, and the all-passant row has no twelve-line star.  At q=67,
+the complete mixed search visits 946,250,059 recursion states and has no
+thirteen-line geometric star.  The all-passant search has exactly 92 stars;
+all 92 first fail \(E_{12}=0\), and none has a complete unused center.  Hence
+the only unresolved k=14 fields are q=71 and q=73.  Authorities:
+notes/2026-08-09-c756-k14-ledger-q61-closure.md and
+notes/2026-08-09-c756-q67-k14-closure.md.
+
 ## Ordered next actions
 
-1. Shard the \(q=67\) thirteen-line mixed and all-passant searches and test
-   \(E_{12}\) first at every leaf.
-2. Keep the stronger \(q=71,73\) windows behind the q=67 feasibility gate.
+1. Shard the q=71 thirteen-line mixed and all-passant searches and test
+   \(E_8\) first at every leaf.
+2. Keep q=73 and its \(E_6\) window behind the q=71 feasibility gate.
 3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
@@ -379,8 +391,8 @@ Do not:
 - \(k=13\): closed exactly over every finite field; at \(q=61\), all 96
   geometric mixed leaves fail \(E_6=0\), and the other remaining rows have no
   twelve-line star.
-- \(k=14\): \(q=61\) closes because none of those 96 leaves extends by one
-  line; exactly \(q=67,71,73\) remain.
+- \(k=14\): q=61 closes by exact nonextension; q=67 has no mixed star and
+  all 92 all-passant stars fail \(E_{12}\); exactly q=71,73 remain.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
