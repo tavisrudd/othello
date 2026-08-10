@@ -41,6 +41,7 @@ if [ "${1:-}" = run ] && [ "${2:-}" = path:.#regenerate ]; then
 fi
 if [ "${1:-}" = run ] && [ "${2:-}" = path:.#verify ] && [ "${3:-}" = -- ]; then
   printf '%s\n' "${4:-}" > "$FAKE_LAKE_STATE/verified-archive"
+  printf '%s\n' "${5:-}" "${6:-}" > "$FAKE_LAKE_STATE/verified-sources"
   exit 0
 fi
 [ "${1:-}" = develop ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
@@ -377,7 +378,7 @@ class QueueTest(unittest.TestCase):
             timeout=30,
         )
 
-    def verify(self, archive: Path):
+    def verify(self, archive: Path, local_sources: tuple[Path, Path] | None = None):
         (self.lean_root / "flake.nix").write_text("{}\n")
         return subprocess.run(
             [
@@ -397,6 +398,16 @@ class QueueTest(unittest.TestCase):
                 str(self.bin / "pgrep"),
                 "--run-quiet-binary",
                 str(self.bin / "run-quiet"),
+                *(
+                    [
+                        "--finitegeom-source",
+                        str(local_sources[0]),
+                        "--certificate-source",
+                        str(local_sources[1]),
+                    ]
+                    if local_sources
+                    else []
+                ),
             ],
             env=self.env(),
             capture_output=True,
@@ -617,6 +628,20 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(
             (self.state / "verified-archive").read_text(),
             f"{archive.resolve()}\n",
+        )
+
+    def test_verify_passes_explicit_local_sources(self) -> None:
+        archive = self.tmp / "packs/fixture.tgz"
+        archive.parent.mkdir()
+        archive.write_text("fixture", encoding="utf-8")
+        sources = (self.tmp / "finitegeom", self.tmp / "certificate")
+        for source in sources:
+            (source / ".git").mkdir(parents=True)
+        result = self.verify(archive, sources)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            (self.state / "verified-sources").read_text(),
+            f"{sources[0].resolve()}\n{sources[1].resolve()}\n",
         )
 
     def test_restore_is_quiet_and_disk_backed(self) -> None:

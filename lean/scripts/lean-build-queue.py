@@ -1011,6 +1011,19 @@ def command_verify(args: argparse.Namespace) -> int:
     fs_type, mount = filesystem_type(archive, args.mountinfo)
     if fs_type in {"tmpfs", "ramfs"}:
         fail(f"artifact archive must be disk-backed; {archive} is on {fs_type} at {mount}")
+    local_sources = (args.finitegeom_source, args.certificate_source)
+    if any(source is not None for source in local_sources) and not all(
+        source is not None for source in local_sources
+    ):
+        fail("--finitegeom-source and --certificate-source must be supplied together")
+    resolved_sources: list[Path] = []
+    for source in local_sources:
+        if source is None:
+            continue
+        resolved = source.expanduser().resolve()
+        if not (resolved / ".git").exists():
+            fail(f"local verification source is not a Git checkout: {resolved}")
+        resolved_sources.append(resolved)
     pgrep = shutil.which(args.pgrep_binary)
     if pgrep is None:
         fail(f"{args.pgrep_binary} is unavailable; cannot check for a live foreign build")
@@ -1026,6 +1039,7 @@ def command_verify(args: argparse.Namespace) -> int:
         env = os.environ.copy()
         env["RUN_QUIET_LOGDIR"] = str(quiet_root)
         inner = [args.nix_binary, "run", "path:.#verify", "--", str(archive)]
+        inner.extend(str(source) for source in resolved_sources)
         result = subprocess.run(
             [args.run_quiet_binary, shlex.join(inner)],
             cwd=lean_root,
@@ -1675,6 +1689,8 @@ def parser() -> argparse.ArgumentParser:
         "verify", help="run the package verification app under the owner guard"
     )
     verify.add_argument("archive", type=Path)
+    verify.add_argument("--finitegeom-source", type=Path)
+    verify.add_argument("--certificate-source", type=Path)
     verify.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
     verify.add_argument("--lock-file", type=Path, default=None)
     verify.add_argument("--mountinfo", type=Path, default=MOUNTINFO_DEFAULT, help=argparse.SUPPRESS)

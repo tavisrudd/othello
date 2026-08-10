@@ -84,12 +84,23 @@ def flake(bridge: dict) -> str:
             name = "verify-paper-certificate-bridge";
             runtimeInputs = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
             text = ''
-              if test "$#" -ne 1; then
-                echo "usage: nix run .#verify -- /path/to/certificate.lake-pack.tar.gz" >&2
+              if test "$#" -ne 1 && test "$#" -ne 3; then
+                echo "usage: nix run .#verify -- /path/to/certificate.lake-pack.tar.gz [finitegeom-source certificate-source]" >&2
                 exit 2
               fi
               certificate_pack="$(realpath "$1")"
               test -f "$certificate_pack"
+              if test "$#" -eq 3; then
+                finitegeom_source="$(realpath "$2")"
+                certificate_source="$(realpath "$3")"
+                test -d "$finitegeom_source/.git"
+                test -d "$certificate_source/.git"
+                export GIT_CONFIG_COUNT=2
+                export GIT_CONFIG_KEY_0="url.file://$finitegeom_source/.insteadOf"
+                export GIT_CONFIG_VALUE_0="https://github.com/tavisrudd/finitegeom"
+                export GIT_CONFIG_KEY_1="url.file://$certificate_source/.insteadOf"
+                export GIT_CONFIG_VALUE_1="https://github.com/tavisrudd/{package}"
+              fi
               lake update
               certificate_root=".lake/packages/{package}"
               test -d "$certificate_root"

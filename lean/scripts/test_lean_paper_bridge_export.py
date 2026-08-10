@@ -53,6 +53,12 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertNotIn("mirror", text.lower())
         self.assertIn("See `LICENSE`", text)
 
+    def test_verifier_supports_explicit_unpublished_sources(self) -> None:
+        text = MODULE.flake(self.bridge())
+        self.assertIn("GIT_CONFIG_COUNT=2", text)
+        self.assertIn("finitegeom_source", text)
+        self.assertIn("certificate_source", text)
+
     def test_materialization_carries_immutable_license(self) -> None:
         original_blob = MODULE.blob
         try:
