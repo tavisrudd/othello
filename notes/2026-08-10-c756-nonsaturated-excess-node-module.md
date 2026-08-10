@@ -643,6 +643,53 @@ joining \((x_i,y_i)\) to
 where \(\iota_Q\) is the central involution about
 \((b/(2c),-e/(2c))\).  The expression is symmetric in \(i,j\), as required.
 
+Completing the square makes the two factors canonical.  Put
+\[
+ r_i(T)=y_i+\frac e{2c}
+       -T\left(x_i-\frac b{2c}\right),
+ \qquad
+ \psi(T)=aT^2+dT+f-\frac{(bT+e)^2}{4c}.                \tag{23al}
+\]
+Then the centered fibre coordinate
+\(\widetilde U=U+(bT+e)/(2c)\) gives
+\[
+ \boxed{
+ Q_{\rm du}(T,U,1)=c\widetilde U^2+\psi(T),
+ \qquad
+ q_i(T)=c\,r_i(T)^2+\psi(T).}                          \tag{23am}
+\]
+Consequently
+\[
+ q_i-q_j=c(r_i-r_j)(r_i+r_j),
+\]
+where \(r_i-r_j\) is the ordinary chord factor and
+\(c(r_i+r_j)=\ell_{ij}\) is the mirror factor.  The quadric involution
+\(\jmath\) is simply \(\widetilde U\mapsto-\widetilde U\).
+
+The three traces are therefore centered second moments.  If
+\(\mathcal M_t\) is the ordinary matching, write \(r_e(t)\) for the common
+centered intercept on an edge \(e\), and retain \(r_i(t)\) on unmatched
+vertices.  Then
+\[
+ \boxed{
+ \begin{aligned}
+ L(t)&=c\sum_{i=1}^nr_i(t)^2+n\psi(t),\\
+ \sigma_t&=c\sum_{e\in\mathcal M_t}r_e(t)^2+\mu_t\psi(t),\\
+ \nu_t&=c\sum_{i\in I_t}r_i(t)^2+(n-2\mu_t)\psi(t).
+ \end{aligned}}                                        \tag{23an}
+\]
+The identity \(L=2\sigma+\nu\) is now the partition of the centered second
+moment into doubled matched values and unmatched values.  If
+\(Q_{\rm du}(t,u_e)=\eta s_e^2\), every matched edge lies on the same binary
+quadratic level set
+\[
+ \eta s_e^2-c\,r_e(t)^2=\psi(t).                       \tag{23ao}
+\]
+Thus the zero-trace gate is a constrained second-moment problem on one
+common norm conic, while the mirror involution is its sign change in the
+\(r\)-coordinate.  This is the simplest fibre model in which to compare the
+ordinary and mirror incidence cycles.
+
 Let \(\Theta_Q(T)=\prod_{i<j}\ell_{ij}(T)\).  Taking the discriminant of
 (23x) in the value variable and using the direction factorization (8) gives
 \[

@@ -529,6 +529,12 @@ of \(\mathfrak G_t\) and \(\mathfrak H_t\) are \(-\sigma_t\) and
  q_i-q_j=((y_i-y_j)-T(x_i-x_j))
  \bigl((b-c(x_i+x_j))T+c(y_i+y_j)+e\bigr).
 \]
+After centering
+\(r_i=y_i+e/(2c)-T(x_i-b/(2c))\), this is simply
+\(q_i=c r_i^2+\psi(T)\) and
+\(q_i-q_j=c(r_i-r_j)(r_i+r_j)\).  Ordinary and mirror collisions are the
+two signs, while
+\(\sigma_t=c\sum_{e\in\mathcal M_t}r_e^2+\mu_t\psi(t)\).
 Hence
 \(\operatorname{disc}_V\mathfrak F\doteq
 (T^q-T)^2E_P^2\Theta_Q^2\): value collisions decompose into the ordinary
