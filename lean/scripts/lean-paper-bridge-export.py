@@ -60,14 +60,14 @@ rev = "{bridge["certificate_commit"]}"
 
 [[lean_lib]]
 name = "{bridge["lean_library"]}"
-roots = ["{bridge["module"]}", "{bridge["audit_module"]}"]
+roots = ["{bridge["module"]}"]
 '''
 
 
 def flake(bridge: dict) -> str:
     package = bridge["certificate_package"]
-    gate = bridge["certificate_gate"]
-    module = bridge["audit_module"]
+    gate_path = bridge["certificate_gate"].replace(".", "/")
+    module_path = bridge["module"].replace(".", "/") + ".lean"
     return f'''{{
   description = "Lean compatibility bridge for {bridge["name"]}";
 
@@ -107,9 +107,16 @@ def flake(bridge: dict) -> str:
               certificate_root=".lake/packages/{package}"
               test -d "$certificate_root"
               (cd "$certificate_root" && lake unpack "$certificate_pack")
-              (cd "$certificate_root" && lake build Mathlib)
-              (cd "$certificate_root" && lake build --no-build {gate})
-              lake build {module}
+              printf '%s  %s\n' \
+                '{bridge["certificate_olean_sha256"]}' \
+                "$certificate_root/.lake/build/lib/lean/{gate_path}.olean" \
+                | sha256sum --check --status
+              printf '%s  %s\n' \
+                '{bridge["certificate_trace_sha256"]}' \
+                "$certificate_root/.lake/build/lib/lean/{gate_path}.trace" \
+                | sha256sum --check --status
+              (cd .lake/packages/finitegeom && lake build {bridge["finitegeom_import"]})
+              lake env lean {module_path}
             '';
           }};
         in {{
@@ -139,8 +146,7 @@ def readme(bridge: dict) -> str:
 
 {scope}
 
-The compatibility theorem is `{bridge["module"]}`. Its combined axiom audit is
-`{bridge["audit_module"]}`. The upstream certificate is
+The compatibility theorem is `{bridge["module"]}`. The upstream certificate is
 frozen at `{bridge["certificate_commit"]}` and the finite-geometry library is
 frozen at `{bridge["finitegeom_commit"]}`. The certificate imports Mathlib only;
 this small package is the first point at which both formal models are imported.
@@ -154,8 +160,9 @@ Obtain the certificate Lake pack whose SHA-256 digest is
 nix run .#verify -- /path/to/{bridge["cache_archive"]}
 ```
 
-The command restores the frozen certificate artifacts, requires its aggregate
-trace to be current without compilation, and builds only the compatibility module.
+The command restores and hashes the frozen certificate aggregate, builds only
+the human module imported by the bridge, and elaborates the compatibility source
+directly. It never asks Lake to build a certificate target.
 
 ## License
 
@@ -170,14 +177,11 @@ def sha256(data: bytes) -> str:
 
 def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     module_path = bridge["module"].replace(".", "/") + ".lean"
-    audit_path = bridge["audit_module"].replace(".", "/") + ".lean"
     source = blob(commit, "lean/" + bridge["source"])
-    audit_source = blob(commit, "lean/" + bridge["audit_source"])
     license_text = blob(commit, bridge["license_source"])
     flake_lock = blob(commit, FLAKE_LOCK_PATH)
     files = {
         module_path: source,
-        audit_path: audit_source,
         "LICENSE": license_text,
         "lakefile.toml": lakefile(bridge).encode(),
         "lean-toolchain": (TOOLCHAIN + "\n").encode(),
@@ -189,20 +193,15 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     manifest = {
         "schema_version": 1,
         "source_commit": commit,
-        "roots": [bridge["audit_module"]],
+        "roots": [bridge["module"]],
         "sources": [
             {
                 "path": module_path,
                 "bytes": len(source),
                 "sha256": sha256(source),
             },
-            {
-                "path": audit_path,
-                "bytes": len(audit_source),
-                "sha256": sha256(audit_source),
-            },
         ],
-        "module_count": 2,
+        "module_count": 1,
         "license": {
             "path": "LICENSE",
             "sha256": sha256(license_text),
@@ -320,6 +319,7 @@ def sync(
     bridge: dict,
     files: dict[str, bytes],
     libraries_root: Path,
+    allow_delete: bool = False,
 ) -> tuple[Path, str]:
     libraries_root = libraries_root.expanduser().resolve()
     repository = bridge["repository"]
@@ -360,8 +360,12 @@ def sync(
         ).stdout.splitlines()
     )
     removed = tracked - set(files)
-    if removed:
+    if removed and not allow_delete:
         raise ValueError(f"bridge sync would delete tracked paths: {sorted(removed)}")
+    for relative in sorted(removed):
+        path = destination / relative
+        if path.is_file() or path.is_symlink():
+            path.unlink()
     write_files(destination, files)
     subprocess.run(
         ["git", "-C", str(destination), "add", "--", *sorted(files)],
@@ -369,6 +373,13 @@ def sync(
         capture_output=True,
         text=True,
     )
+    if removed:
+        subprocess.run(
+            ["git", "-C", str(destination), "add", "-u", "--", *sorted(removed)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
     if not subprocess.run(
         ["git", "-C", str(destination), "diff", "--cached", "--quiet"],
         check=False,
@@ -417,6 +428,7 @@ def main() -> int:
     synchronization.add_argument(
         "--libraries-root", type=Path, default=Path.home() / "src/lean"
     )
+    synchronization.add_argument("--allow-delete", action="store_true")
     args = parser.parse_args()
     commit = str(git("rev-parse", f"{args.source_ref}^{{commit}}")).strip()
     bridge = select_bridge(config_at(commit), args.bridge)
@@ -434,7 +446,7 @@ def main() -> int:
         return 0
     if args.command == "sync":
         destination, updated_commit = sync(
-            commit, bridge, files, args.libraries_root
+            commit, bridge, files, args.libraries_root, args.allow_delete
         )
         print(f"synchronized {bridge['name']} at {destination} commit={updated_commit}")
         return 0

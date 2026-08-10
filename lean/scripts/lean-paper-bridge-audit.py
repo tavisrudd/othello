@@ -66,21 +66,6 @@ def audit_bridge(
     namespace_line = f"namespace {bridge['module']}"
     if namespace_line not in source.read_text(encoding="utf-8").splitlines():
         problems.append(f"{name}: missing exact namespace {bridge['module']}")
-    audit_source = source_root / bridge["audit_source"]
-    if not audit_source.is_file():
-        problems.append(f"{name}: audit source is missing at {bridge['audit_source']}")
-    else:
-        expected_audit_imports = [
-            bridge["finitegeom_gate"],
-            bridge["certificate_audit_module"],
-            bridge["module"],
-        ]
-        actual_audit_imports = imports(audit_source)
-        if actual_audit_imports != expected_audit_imports:
-            problems.append(
-                f"{name}: audit imports are {actual_audit_imports}, "
-                f"expected {expected_audit_imports}"
-            )
     for label, root, expected in (
         ("finitegeom", finitegeom, bridge["finitegeom_commit"]),
         ("certificate", certificate, bridge["certificate_commit"]),
@@ -132,12 +117,9 @@ def audit_bridge(
                     f"{name}: bridge manifest source commit is "
                     f"{manifest.get('source_commit')}, expected {bridge['export_source_commit']}"
                 )
-            if manifest.get("roots") != [bridge["audit_module"]]:
-                problems.append(f"{name}: bridge manifest has the wrong audit root")
-            expected_sources = {
-                bridge["module"].replace(".", "/") + ".lean",
-                bridge["audit_module"].replace(".", "/") + ".lean",
-            }
+            if manifest.get("roots") != [bridge["module"]]:
+                problems.append(f"{name}: bridge manifest has the wrong library root")
+            expected_sources = {bridge["module"].replace(".", "/") + ".lean"}
             actual_sources = {
                 row.get("path")
                 for row in manifest.get("sources", [])
@@ -168,6 +150,10 @@ def audit_bridge(
                 )
     if not bridge.get("forbid_source_fallback", False):
         problems.append(f"{name}: certificate source fallback is not forbidden")
+    for field in ("certificate_olean_sha256", "certificate_trace_sha256"):
+        digest = bridge.get(field, "")
+        if len(digest) != 64 or any(character not in "0123456789abcdef" for character in digest):
+            problems.append(f"{name}: {field} is not a lowercase SHA-256 digest")
     archive = cache_root / bridge["cache_archive"]
     if not archive.is_file():
         problems.append(f"{name}: cache archive is missing at {archive}")

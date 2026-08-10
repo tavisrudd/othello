@@ -25,15 +25,16 @@ class PaperBridgeExportTests(unittest.TestCase):
             "lean_library": "SamplePaperBridge",
             "source": "paper-bridges/sample/CertificateCompatibility.lean",
             "module": "TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility",
-            "audit_source": "paper-bridges/sample/Verification/AxiomAudit.lean",
-            "audit_module": "TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit",
             "license_source": "papers/sample/LICENSE",
             "finitegeom_commit": "a" * 40,
             "certificate_package": "finitegeom-sample-certificates",
             "certificate_commit": "b" * 40,
             "certificate_gate": "TavisRuddFiniteGeom.Certificates.Sample",
+            "finitegeom_import": "Human.Model",
             "cache_sha256": "c" * 64,
             "cache_archive": "sample.lake-pack.tar.gz",
+            "certificate_olean_sha256": "d" * 64,
+            "certificate_trace_sha256": "e" * 64,
         }
 
     def test_lakefile_has_only_two_project_dependencies(self) -> None:
@@ -42,8 +43,7 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn('name = "finitegeom-sample-certificates"', text)
         self.assertEqual(text.count("[[require]]"), 2)
         self.assertIn(
-            'roots = ["TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility", '
-            '"TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit"]',
+            'roots = ["TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility"]',
             text,
         )
 
@@ -60,13 +60,20 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("finitegeom_source", text)
         self.assertIn("certificate_source", text)
 
-    def test_verifier_builds_only_mathlib_before_certificate_no_build(self) -> None:
+    def test_verifier_never_builds_a_certificate_target(self) -> None:
         text = MODULE.flake(self.bridge())
-        dependency = text.index("lake build Mathlib")
-        certificate = text.index(
-            "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample"
+        self.assertIn('(cd "$certificate_root" && lake unpack "$certificate_pack")', text)
+        self.assertEqual(text.count("sha256sum --check --status"), 2)
+        self.assertIn("(cd .lake/packages/finitegeom && lake build Human.Model)", text)
+        self.assertIn(
+            "lake env lean TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean",
+            text,
         )
-        self.assertLess(dependency, certificate)
+        self.assertNotIn("lake build --no-build", text)
+        certificate_block = text[
+            text.index('certificate_root="'):text.index("(cd .lake/packages/finitegeom")
+        ]
+        self.assertNotIn("lake build", certificate_block)
         self.assertIn("export LEAN_NUM_THREADS=1", text)
 
     def test_materialization_carries_immutable_license(self) -> None:
@@ -123,7 +130,7 @@ class PaperBridgeExportTests(unittest.TestCase):
                 self.assertEqual(status, "")
         self.assertEqual(hashes[0], hashes[1])
 
-    def test_sync_adds_files_as_a_forward_commit(self) -> None:
+    def test_sync_requires_explicit_permission_to_delete_tracked_files(self) -> None:
         commit = str(MODULE.git("rev-parse", "HEAD")).strip()
         bridge = self.bridge()
         with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
@@ -132,15 +139,40 @@ class PaperBridgeExportTests(unittest.TestCase):
                 commit, bridge, {"README.md": b"first\n"}, root
             )
             bridge["bridge_commit"] = initial
+            obsolete = destination / "AxiomAudit.lean"
+            obsolete.write_bytes(b"#print axioms x\n")
+            subprocess.run(
+                ["git", "-C", str(destination), "add", "--", "AxiomAudit.lean"],
+                check=True,
+            )
+            subprocess.run(
+                [
+                    "git", "-C", str(destination), "-c", "commit.gpgsign=false",
+                    "commit", "-m", "Add obsolete audit",
+                ],
+                check=True,
+                capture_output=True,
+            )
+            initial = subprocess.run(
+                ["git", "-C", str(destination), "rev-parse", "HEAD"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            bridge["bridge_commit"] = initial
+            with self.assertRaisesRegex(ValueError, "would delete tracked paths"):
+                MODULE.sync(commit, bridge, {"README.md": b"second\n"}, root)
             synced_destination, updated = MODULE.sync(
                 commit,
                 bridge,
-                {"README.md": b"second\n", "AxiomAudit.lean": b"#print axioms x\n"},
+                {"README.md": b"second\n"},
                 root,
+                allow_delete=True,
             )
             self.assertEqual(synced_destination, destination)
             self.assertNotEqual(updated, initial)
             self.assertEqual((destination / "README.md").read_bytes(), b"second\n")
+            self.assertFalse(obsolete.exists())
             self.assertEqual(
                 subprocess.run(
                     ["git", "-C", str(destination), "status", "--short"],
