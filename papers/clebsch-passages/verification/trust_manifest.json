@@ -57,6 +57,7 @@
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
         "relative marked source convention and its golden-fibre identification with conference and triangle-cubic reversal",
+        "deck exchange preserves the unmarked generated quadratic algebra while reversing its marked generator",
         "label-compatible primitive Petersen comparison and relative harmonic sign transport",
         "unspecified geometric integral localization"
       ],
@@ -76,7 +77,7 @@
         "independent-replay"
       ],
       "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance witness and exact regression audit",
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, and the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, preserves the unmarked generated algebra Q[C_m]=Q[-C_m], and reverses its marked generator; the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
       "status": "certified",
       "theorem_labels": [
         "thm:orientation-source"
@@ -86,12 +87,15 @@
       "clauses": [
         "conference square, triangle holonomy, switching reconstruction, and middle-exterior diagonal",
         "commutator Pfaffian and determinant-square identities",
-        "cross-golden determinant description over Q(sqrt(5))"
+        "cross-golden determinant description and determinant-line norm over Q(sqrt(5))",
+        "nondegenerate real triangle-Pfaffian proportionality forces order six and a scalar square, with exact sign-locus recognition"
       ],
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",
-        "verification/golden_return_axioms.txt"
+        "verification/golden_return_axioms.txt",
+        "verification/four_shadow_formal.json",
+        "verification/four_shadow_axioms.txt"
       ],
       "id": "OPER-1",
       "modes": [
@@ -99,11 +103,12 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is represented by that Pfaffian rather than by a matrix in a chosen pair of frames.",
-      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2, and Z_T=plus-or-minus 10 sqrt(5) det(B_T).",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.",
+      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation.",
       "status": "proven",
       "theorem_labels": [
-        "thm:operator-shadows"
+        "thm:operator-shadows",
+        "thm:triangle-pfaffian-recognition"
       ]
     },
     {

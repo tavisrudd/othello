@@ -1,7 +1,7 @@
 # clebsch-passages verification
 
 `trust_manifest.json` is the nine-row claim/evidence map.
-`statement_identity.json` freezes the eight theorem-like statements in
+`statement_identity.json` freezes the nine theorem-like statements in
 manuscript order.
 
 Run from the repository root:

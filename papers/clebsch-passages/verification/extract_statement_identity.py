@@ -22,6 +22,7 @@ EXPECTED_LABELS = (
     "prop:golden-fibre",
     "prop:spinor-specialization",
     "thm:operator-shadows",
+    "thm:triangle-pfaffian-recognition",
     "thm:balanced-exchange-rigidity",
     "thm:aligned-faithfulness",
     "thm:harmonic-main",

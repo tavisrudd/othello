@@ -168,24 +168,14 @@ orientation is normalized by the cross-golden formula.}
 
 \smallskip
 \noindent\emph{What the four descriptions do and do not assert.}\par
-The four formulas below are not four coincidences of equal standing, and it is
-worth separating them before proving them.  For \emph{every} symmetric matrix
-\(A\), expanding \(\operatorname{Pf}[D_x,A]\) over perfect matchings makes the
-coefficient of \(x_S\) the signed complementary minor \(\det A[S^c,S]\), which
-the Hodge convention fixed above identifies with
-\((*\!\bigwedge^3A)_{SS}\).  So the middle-exterior diagonal and the commutator
-Pfaffian are one identity written twice, and their agreement records the
-orientation convention rather than any property of \(C\).  The cross-golden
-determinant presupposes the splitting into golden eigenspaces, so once
-\(C^2=5I\) is known it is a reformulation; its content is that
-\(B_T(x)\) is defined without choosing bases, so its determinant is a map of
-determinant lines.  The remaining agreement is not formal.  The complementary
-minor \(\det A[S^c,S]\) is a polynomial in the entries joining \(S\) to its
-complement, whereas the triangle product
-\(a_{ij}a_{jk}a_{ki}\) uses only entries inside \(S\); for a general symmetric
-zero-diagonal matrix the two are unrelated.  That they are proportional here is
-a property of the conference class, and it is the one identification among the
-four that could fail.
+For every symmetric matrix \(A\), the coefficient of \(x_S\) in
+\(\operatorname{Pf}[D_x,A]\) is the signed complementary minor
+\(\det A[S^c,S]\), hence the corresponding diagonal entry of
+\(*\!\bigwedge^3A\).  The cross-golden determinant is the spectral-block form
+of this identity once \(C^2=5I\).  Only the triangle comparison is
+matrix-specific.
+Theorem~\ref{thm:triangle-pfaffian-recognition} forces scalar-square rigidity
+on the nondegenerate real locus and gives exact recognition on the sign locus.
 
 For a six-tuple \((a_U)_{U\in\mathcal T}\), write
 \[
@@ -306,12 +296,59 @@ van der Geer.  Here the determinant identity in the theorem identifies that
 polar vector with the centered commutator determinants.
 \end{proof}
 
+\begin{theorem}[Triangle--Pfaffian recognition]
+\label{thm:triangle-pfaffian-recognition}
+Let \(A=(a_{ij})\) be real symmetric of even order \(n\geq4\), with zero
+diagonal and every off-diagonal entry nonzero.  Put
+\[
+ \mathcal T_A(x)=\sum_{|S|=3}
+ \left(\prod_{\{i,j\}\subset S}a_{ij}\right)x_S,
+ \qquad
+ \Phi_A(x)=\operatorname{Pf}[D_x,A],
+ \qquad x_S=\prod_{i\in S}x_i.
+\]
+If \(\Phi_A=\mu\mathcal T_A\) for some \(\mu\ne0\), then \(n=6\) and
+\(A^2=\lambda I\) for some \(\lambda>0\).
+
+If those entries also have one absolute value, then, up to scale, switching,
+and relabelling, \(A\) is the pentagon conference matrix; conversely
+\(\Phi_A=\pm4\mathcal T_A\); relative to an orientation of the signed label space,
+the sign is its two-valued orientation character.
+\end{theorem}
+
+\begin{proof}
+Their degrees force \(n/2=3\).  Since
+\([D_{x+t\mathbf1},A]=[D_x,A]\), proportionality makes \(\mathcal T_A\)
+translation-invariant.  Its coefficient of \(tx_ix_j\), for \(i\ne j\), is
+\[
+ a_{ij}\sum_{r\ne i,j}a_{ir}a_{rj}=a_{ij}(A^2)_{ij}.
+\]
+Thus \(A^2\) is diagonal.  Now \([A,A^2]=0\) and \(a_{ij}\ne0\) make its
+diagonal constant.  Hence \(A^2=\lambda I\), where
+\(\lambda=(A^2)_{ii}=\sum_{r\ne i}a_{ir}^2>0\).
+
+In the equal-absolute-value case, rescale to a sign matrix \(B\), so
+\(B^2=5I\).  The pentagon gauge argument at the start of the preceding proof
+gives the class.  Its complementary-minor calculation gives the factor \(4\);
+a signed relabelling multiplies it by that relabelling's determinant.
+\end{proof}
+
+The hypotheses exclude zero proportionality and vanishing off-diagonal entries;
+the remaining weighted solutions of \(A^2=\lambda I\) are not classified.
+
 \paragraph{Why the determinant.}
-The map \(B_T(x):V_{T,+}\to V_{T,-}\) is defined without choosing bases.
-Its determinant is therefore a map between determinant lines and becomes the
-displayed scalar once those lines are oriented.  A permanent has no analogous
-basis-free meaning.  Indeed, changing orthonormal frames sends a matrix \(B\)
-to \(R_-^{\mathsf T}BR_+\); already for \(B=I_3\), right multiplication by a
+The basis-free determinant of \(B_T(x):V_{T,+}\to V_{T,-}\) lies in
+\(\det(V_{T,-})\otimes\det(V_{T,+})^{-1}\).  Galois exchange swaps the two
+spaces, and the symmetric pairing contracts this line with its conjugate.
+With the compatible orientations above, the odd-rank swap contributes a minus
+sign to the ordinary field norm, so
+\[
+ \det[D_x,C_T]
+ =-8000\,N_{E/\Q}\!\left(\det B_T(x)\right).
+\]
+Equivalently \(Z_T(x)=10\sqrt5\det B_T(x)\).  A permanent has no analogous
+basis-free meaning: changing orthonormal frames sends a matrix \(B\) to
+\(R_-^{\mathsf T}BR_+\); already for \(B=I_3\), right multiplication by a
 rotation through angle \(\theta\) in a coordinate plane changes its permanent
 from \(1\) to \(\cos(2\theta)\).  Thus the permanent supplies no further cubic
 shadow of the marked operator.
