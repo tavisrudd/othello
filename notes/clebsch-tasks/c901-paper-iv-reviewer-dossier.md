@@ -64,6 +64,21 @@ promoted to the manuscript.  The next permitted work is the safe layered-
 exposition pass and a separate pre-draft claim--proof--citation matrix for the
 four core frame-correspondence claims.
 
+The four candidate claims and their literature, human-proof,
+reproducibility, specialist-review, and conditional-placement gates are now
+frozen in
+`notes/2026-08-09-c901-paper-iv-frame-correspondence-predraft-matrix.md`.
+This matrix records no novelty verdict and does not authorize manuscript
+promotion.
+
+The claim-specific audit of the existing novelty paragraph is
+`notes/2026-08-09-c901-paper-iv-claim-specific-literature-audit.md`.  It closes
+C877's former Droms--Mellinger--Meyer access gap, credits their Table 8 for the
+reported \([78,36,12]_2\) parameter, and leaves only the proof, minimum-shell
+classification, weighted-pair reconstruction, \(A_9\) marking, and orbit Gram
+certificates as unlocated contributions.  It does not audit or promote the
+frame-correspondence upgrades.
+
 ## Acceptance gate
 
 - Reviewer likelihood is tied to the venue routes, closest cited work,
