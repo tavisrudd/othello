@@ -9,6 +9,19 @@ recorded in [`../2026-08-02-c855-paper-i-assertion-inventory.md`](../2026-08-02-
 the formalization bullets of section 2 and all of sections 3--11 are open. Required before the Paper I formal artifact is called
 referee-ready or packaged for its next public release.
 
+Current certificate boundary (2026-08-09):
+
+- `finitegeom-clebsch-q11-certificates` is the Mathlib-only certificate source at
+  `0d964975ceef7ff0ac36216ecd0e10b4b7f2a184`. Its public namespace is
+  `TavisRuddFiniteGeom.Certificates.Q11`; it does not import finitegeom.
+- `TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility` is the cheap
+  downstream bridge. It imports the pinned certificate and finitegeom revisions,
+  proves equality of their witness and point tables, and exposes the frozen terminal.
+- Paper I's release metadata still names the superseded combined package at `930675c6`.
+  Repin it through the release verifier after that verifier accepts the separate
+  finitegeom, certificate, and bridge roots. Never rerun the retired combined aggregate
+  or rebuild Q11 for a finitegeom, bridge, paper, pin, or release-metadata change.
+
 Trust-boundary hardening packet (2026-08-08): C893's mechanically actionable
 release findings are repaired in the authority and q11 package.  The verifier
 now requires the exact 115-package/93-shared transitive closure, both pinned
