@@ -12,6 +12,9 @@ trust_fact_sha256 = "73717f01a4ad9e3cf83839e6193232ef6d7c85bceb1937bf4e13f72be68
 owned_module_prefixes = [
   "TavisRuddFiniteGeom.Certificates.Q16",
 ]
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/arcs-complete-outside-conic/",
+]
 forbidden_artifact_basenames = [
   "analyze_c201_q16.py",
   "check_q16_uncovered_patterns.json",
@@ -33,6 +36,9 @@ trust_fact_sha256 = "108189a640fd939a379d1df632cee0c1307219d34c05ca1a048706b8561
 owned_module_prefixes = [
   "TavisRuddFiniteGeom.Certificates.Q11",
 ]
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/clebsch-rigidity/",
+]
 forbidden_artifact_basenames = [
   "generate-q11-point-action.py",
 ]
@@ -46,6 +52,17 @@ forbidden_artifact_basenames = [
 # `resident-unclassified` when the source is generated but its ownership has not been
 # determined.  Neither may survive closeout.  Generated data that a determination keeps
 # here permanently belongs in `resident_family` below instead.
+
+[[pending_family]]
+name = "order-11 projective-cap reply-book certificates"
+owner = "finitegeom-projective-cap-q11-certificates"
+disposition = "external-pending"
+path_prefixes = [
+  "lean/ProjectiveCap/CertData/Q11.lean",
+  "lean/ProjectiveCap/CertData/Q11Assembly.lean",
+  "notes/2026-07-07-anchored-cert-to-lean.py",
+  "notes/2026-07-08-q11-assembly-to-lean.py",
+]
 
 [[pending_family]]
 name = "order-25 certificate data"

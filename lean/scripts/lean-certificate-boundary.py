@@ -70,6 +70,7 @@ def violations(repo_root: Path, lean_root: Path, config: Path) -> list[str]:
     paths = tracked_paths(repo_root)
     for package in document.get("package", []):
         prefixes = tuple(package["owned_module_prefixes"])
+        allowed_import_paths = tuple(package.get("allowed_import_path_prefixes", []))
         forbidden_names = set(package["forbidden_artifact_basenames"])
         for path in paths:
             relative = path.relative_to(repo_root)
@@ -80,7 +81,9 @@ def violations(repo_root: Path, lean_root: Path, config: Path) -> list[str]:
                 problems.append(f"{relative}: module belongs to {package['name']}")
             if path.suffix == ".lean" and path.is_file():
                 for imported in IMPORT_RE.findall(path.read_text(encoding="utf-8")):
-                    if imported.startswith(prefixes):
+                    if imported.startswith(prefixes) and not str(relative).startswith(
+                        allowed_import_paths
+                    ):
                         problems.append(
                             f"{relative}: imports {imported}, owned by {package['name']}"
                         )

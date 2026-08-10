@@ -65,6 +65,20 @@ forbidden_artifact_basenames = ["generator.cpp"]
             self.assertIn("imports Example.Generated.Leaf", result.stdout)
             self.assertIn("generator.cpp", result.stdout)
 
+    def test_registered_downstream_bridge_import_passes(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            config = root / "lean/trust/certificate-packages.toml"
+            config.write_text(
+                config.read_text(encoding="utf-8")
+                + 'allowed_import_path_prefixes = ["lean/paper-bridges/sample/"]\n',
+                encoding="utf-8",
+            )
+            source = root / "lean/paper-bridges/sample/Compatibility.lean"
+            source.parent.mkdir(parents=True)
+            source.write_text("import Example.Generated.Leaf\n", encoding="utf-8")
+            self.assertEqual(self.run_check(root).returncode, 0)
+
     def test_owned_module_source_in_the_monorepo_fails(self) -> None:
         """The return path that matters most: the payload comes back as monorepo source."""
         with tempfile.TemporaryDirectory() as directory:
