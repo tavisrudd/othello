@@ -178,7 +178,7 @@ the descended digit maps have zero common kernel on the ghost quotient, the
 extension conic lemma follows; otherwise only their common kernel must meet
 the first non-shadow odd equation.  The latter clause is essential:
 dimension alone forces tower kernels of dimension at least one for \(q=25\)
-and at least five for \(q=27\).
+and at least five for each of \(q=27,81\).
 In canonical ghost-tail coordinates the entire semilinear tower untwists to
 one ordinary stacked Cartier--Toeplitz matrix \(\mathbb M_R\), with
 \(\mathcal K_R=\ker\mathbb M_R\).  Its entries are denominator-free
