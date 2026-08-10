@@ -2,9 +2,9 @@
 
 Date: 2026-08-09
 
-Status: reopened integration in progress; cold mathematical gates pass after
-repair; the deterministic build is warning-free at 33 pages, while the tracked
-page-count contract remains 32 pending author approval.
+Status: complete; all cold and dossier-primed referee gates pass after repair,
+the deterministic 33-page authority is green, and the verified standalone is
+synchronized at `ac0276c`.
 
 ## Applied scope
 
@@ -17,9 +17,10 @@ Only the three audited survivors were applied to the canonical Paper III source:
    conference class, with the proportionality sign recording the orientation
    character of the signed label space.  Zero proportionality, zero support,
    and remote weighted solutions remain excluded.
-2. “Why the determinant” now identifies `det B_T` as a determinant-line element.
-   The cold review corrected the proposed norm sign: after compatible
-   orientations, the ordinary field norm satisfies
+2. The operator theorem now defines `B_T` at first use as the restricted map
+   between the two golden eigenspaces and identifies its determinant-line
+   scalar before using it.  The cold review corrected the proposed norm sign:
+   after compatible orientations, the ordinary field norm satisfies
    `det[D_x,C_T]=-8000 N_{E/Q}(det B_T)`.  The positive block square is the
    signed odd-rank determinant-line contraction, not the unsigned ordinary
    field norm.
@@ -61,6 +62,14 @@ packet or one another's reports.
   missing four-shadow evidence in `OPER-1`; all three were repaired.  Final
   verdict `PASS` after statement, axiom-hash, JSON, and source-hygiene checks.
 
+The later dossier-primed Greaves/Suda cold referee read the complete frozen
+33-page PDF before its assigned sources or supplement.  Its initial `MINOR`
+found no false theorem or headline proof gap, independently recomputed every
+operator, sign, moment, design, and reconstruction check, and requested only
+that the restricted determinant-line meaning and odd-rank norm sign appear at
+first use.  After that repair, its sealed regrade is `GO` with no new defect:
+`notes/2026-08-09-c902-paper-iii-greaves-dossier-cold-referee.md`.
+
 ## Validation state
 
 Passed:
@@ -74,11 +83,12 @@ Passed:
 - three repaired cold-review regrades.
 
 Rendered pages 11 and 16--20 were inspected at full-page resolution: the marked
-spectral sentence remains with its exchanger calculation; the recognition
-theorem and proof fit cleanly on page 18; the norm display breaks at a logical
-paragraph boundary into page 19; and the following exchange theorem retains its
-section hierarchy.  Page 33 contains only the last four bibliography entries,
-with no orphaned heading, clipped display, or box warning.
+spectral sentence remains with its exchanger calculation; the restricted-map,
+determinant-line, and norm definitions stay together at the top of page 17;
+the recognition theorem and proof fit cleanly on page 18; and the following
+exchange theorem retains its section hierarchy.  Page 33 contains only the
+last four bibliography entries, with no orphaned heading, clipped display, or
+box warning.
 
 Gate resolution:
 
@@ -86,8 +96,9 @@ Gate resolution:
   `check_manuscript_build.py` now pins 33 pages, the deterministic tracked PDF
   was refreshed, and the complete authoritative release gate passes, including
   all three pinned Lean source-closure checks.
-- Standalone synchronization remains downstream of the dossier-primed cold
-  referee pass requested before closeout.
+- The dossier-primed cold referee regraded the repair `GO`.  Export audit found
+  no private-surface leakage; the standalone release aggregate passes at 33
+  pages and exporter verification matches authority source commit `ffdd44d0`.
 
 ## Mystery ledger (`ej` + `tt`)
 
@@ -101,5 +112,10 @@ Gate resolution:
 - **Settled — page budget.**  The theorem costs one page after local
   compression; the author approved the resulting 33-page contract and the
   deterministic build now passes at that count.
+- **Settled — first-use determinant semantics.**  The dossier-primed referee
+  exposed the only remaining ambiguity: `B_T` could be misread as a singular
+  ambient operator.  The theorem now defines the restricted map, its
+  determinant line, its trivialization, and the odd-rank norm sign together;
+  the sealed regrade is `GO`.
 - **No other genuine mystery remains.**  The weighted remote locus and C894
   safeguards are deliberate boundaries owned outside this reopened integration.

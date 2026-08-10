@@ -2,9 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** reopened by author direction 2026-08-09; three audited survivors
-applied and cold regrades pass after one norm-sign repair; awaiting author choice
-on the 32-to-33-page validation contract before PDF refresh and release closeout
+**Status:** complete 2026-08-09; three audited survivors applied, all cold
+regrades pass after the norm-sign and determinant-line clarification, the
+author-approved 33-page release is green, and standalone commit `ac0276c` is
+verified
 
 ## Objective
 
@@ -165,13 +166,17 @@ authorize unrelated Paper III restructuring.
 
 - Candidates 1, 5, and 8 were already landed and require no duplicate wording.
 - Candidate 2 survives as one bounded triangle--Pfaffian recognition theorem.
-- Candidate 3 survives as an unnumbered determinant-line norm paragraph.
+- Candidate 3 survives as a determinant-line norm identity defined at first use
+  in the operator theorem, with the permanent comparison retained afterward.
 - Candidate 4 survives as one marking-aware spectral-compatibility sentence.
 - Candidate 6 is deferred with both C894 human safeguards still open.
 - Candidate 7's promotion to proposition status is rejected.
 - The literature audit, proof packets, four-pass adversarial review, and exact
-  recommendation wording are the four deliverables above.  No manuscript,
-  ledger, mirror, release artifact, or public surface was edited.
+  recommendation wording are the four first-phase deliverables above.  In the
+  reopened phase the three survivors were integrated, the trust and statement
+  surfaces were reconciled, four isolated reviews plus a dossier-primed
+  Greaves/Suda referee regrade passed, and the deterministic authority and
+  standalone were synchronized at 33 pages.
 
 ## Acceptance
 
