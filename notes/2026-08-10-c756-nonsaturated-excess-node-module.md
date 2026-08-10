@@ -920,6 +920,33 @@ and the same coprime factorization applies after intersecting with
 \(K_{\rm odd}\).  Only the smooth overlap factor can carry an unbounded
 failure of clean value-gcd extraction.
 
+Even on \(K_{\rm ov}\), the local ambiguity is uniformly bounded.  For a
+fixed smooth direction, let \(m_r\in\{0,1,2\}\) be the number of endpoint
+intersections with centered coordinate \(r\).  The upper bound two is the
+no-three-concurrent condition.  The value
+\(c r^2+\psi(t)\), for \(r\ne0\), therefore has multiplicity
+\[
+ M_{\{r,-r\}}=m_r+m_{-r}\le4                           \tag{23bl}
+\]
+in \(\mathfrak F(V,t)\), while its exponent in the desired ordinary
+matched-value factor is
+\[
+ \gamma_{\{r,-r\}}
+ =\mathbf1_{m_r=2}+\mathbf1_{m_{-r}=2}.                \tag{23bm}
+\]
+Up to interchanging \(r\) and \(-r\), the possibilities are
+\[
+ (m_r,m_{-r})=(1,0),(2,0),(1,1),(2,1),(2,2).
+\]
+For value multiplicities \(1,3,4\), the ordinary exponent is forced to be
+\(0,1,2\), respectively.  The only ambiguity is multiplicity two:
+\((2,0)\) is one ordinary pair, whereas \((1,1)\) is one pure mirror pair.
+At the fixed value \(r=0\), the multiplicity is \(m_0\le2\), and an exact
+double is necessarily ordinary.
+Thus the overlap problem is not an unbounded higher-gcd problem.  It is a
+binary labeling of the exact-double roots, supplied geometrically by whether
+the equality occurs in \(F\) or in the reflected incidence \(F^\iota\).
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[

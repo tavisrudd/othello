@@ -573,6 +573,11 @@ For \(c\ne0\), this yields the coprime support decomposition
 \]
 into tangent, smooth mirror-overlap, and smooth transverse factors.  The
 zero norm and parity resultant factor across these three algebras.
+On the overlap, no conic-value root has multiplicity above four.  Roots of
+multiplicity \(3\) and \(4\) contribute respectively one and two ordinary
+pairs automatically; only an exact double root needs a binary label
+distinguishing an ordinary pair from a pure mirror pair.  A double root on
+the fixed axis \(r=0\) is necessarily ordinary.
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and
