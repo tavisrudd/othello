@@ -14,9 +14,17 @@ import re
 
 
 SHELLS = {"bash", "dash", "fish", "powershell", "pwsh", "sh", "zsh"}
-ROOT_GATE = "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
+FINITEGEOM_GATE = "RelativeConicArcs.Gates.ClebschRigidityTrust"
+CERTIFICATE_GATE = "TavisRuddFiniteGeom.Certificates.Q11"
+BRIDGE_GATE = (
+    "TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility"
+)
 PROJECT_PREFIXES = ("RelativeConicArcs.", "ProjectiveCap.", "CapGame.")
-AXIOM_AUDIT = "verification/clebsch_rigidity_trust/axiom-audit.txt"
+FINITEGEOM_AUDIT = "trust/ClebschRigidityAxiomAudit.lean"
+CERTIFICATE_MANIFEST = "MANIFEST.json"
+CERTIFICATE_TRUST_FACT = "TRUST_FACT.json"
+CERTIFICATE_AXIOM_AUDIT = "verification/axiom-audit.txt"
+BRIDGE_MANIFEST = "MANIFEST.json"
 FORBIDDEN_LEAN_CODE = re.compile(
     r"\b(?:sorry|admit|axiom|unsafe|native_decide)\b|\bdebug\.skipKernelTC\b"
 )
@@ -55,33 +63,33 @@ def module_path(module: str) -> Path:
 
 
 def project_import_closure(
-    package_root: Path,
-    finitegeom_root: Path,
-    root_module: str = ROOT_GATE,
-) -> tuple[tuple[str, ...], tuple[str, ...]]:
-    """Resolve the exact project-owned import closure across both Lean roots."""
+    roots: dict[str, Path],
+    root_module: str,
+) -> dict[str, tuple[str, ...]]:
+    """Resolve a project-owned import closure across the three formal roots."""
     pending = [root_module]
     seen: set[str] = set()
-    package_paths: set[str] = set()
-    finitegeom_paths: set[str] = set()
+    paths: dict[str, set[str]] = {name: set() for name in roots}
     while pending:
         module = pending.pop()
         if module in seen:
             continue
         seen.add(module)
         relative = module_path(module)
-        package_path = package_root / relative
-        finitegeom_path = finitegeom_root / relative
-        if package_path.is_file():
-            source = package_path
-            package_paths.add(str(relative))
-        elif finitegeom_path.is_file():
-            source = finitegeom_path
-            finitegeom_paths.add(str(relative))
-        elif module.startswith(PROJECT_PREFIXES):
-            raise RuntimeError(f"project import is absent from both Lean roots: {module}")
-        else:
+        matches = [
+            (name, root / relative)
+            for name, root in roots.items()
+            if (root / relative).is_file()
+        ]
+        if len(matches) > 1:
+            owners = ", ".join(name for name, _ in matches)
+            raise RuntimeError(f"project import has multiple owners ({owners}): {module}")
+        if not matches:
+            if module.startswith((*PROJECT_PREFIXES, "TavisRuddFiniteGeom.")):
+                raise RuntimeError(f"project import is absent from all formal roots: {module}")
             continue
+        owner, source = matches[0]
+        paths[owner].add(str(relative))
         source_text = lean_code_without_comments_or_strings(
             source.read_text(encoding="utf-8")
         )
@@ -89,7 +97,18 @@ def project_import_closure(
             match = re.match(r"^\s*(?:public\s+)?import\s+(.+?)\s*$", line)
             if match is not None:
                 pending.extend(match.group(1).split())
-    return tuple(sorted(package_paths)), tuple(sorted(finitegeom_paths))
+    return {name: tuple(sorted(owned)) for name, owned in paths.items()}
+
+
+def merge_closures(
+    roots: dict[str, Path], root_modules: tuple[str, ...]
+) -> dict[str, tuple[str, ...]]:
+    merged: dict[str, set[str]] = {name: set() for name in roots}
+    for module in root_modules:
+        closure = project_import_closure(roots, module)
+        for name, paths in closure.items():
+            merged[name].update(paths)
+    return {name: tuple(sorted(paths)) for name, paths in merged.items()}
 
 
 def lean_code_without_comments_or_strings(text: str) -> str:
@@ -247,12 +266,12 @@ def require_clean(snapshots: dict[str, str]) -> None:
         )
 
 
-def guarded_lean_result(
+def guarded_finitegeom_result(
     run_dir: Path,
-    lean_root: Path,
+    finitegeom_root: Path,
     pinned_commit: str,
-) -> subprocess.CompletedProcess[str]:
-    """Validate a canonical guarded-run receipt and return its gate transcript."""
+) -> tuple[subprocess.CompletedProcess[str], Path]:
+    """Validate the human-gate receipt and return its transcript and path."""
     resolved_run = run_dir.resolve()
     manifest_path = resolved_run / "manifest.json"
     status_path = resolved_run / "status.json"
@@ -262,26 +281,26 @@ def guarded_lean_result(
     status = json.loads(status_path.read_text(encoding="utf-8"))
     if status.get("state") != "success" or status.get("exit_code") != 0:
         raise RuntimeError("guarded Lean run did not finish successfully")
-    if Path(str(manifest.get("lean_root", ""))).resolve() != lean_root.resolve():
-        raise RuntimeError("guarded Lean run used a different Lean root")
+    if Path(str(manifest.get("lean_root", ""))).resolve() != finitegeom_root.resolve():
+        raise RuntimeError("guarded finitegeom run used a different root")
     aggregate = manifest.get("aggregate")
-    if not isinstance(aggregate, list) or ROOT_GATE not in aggregate:
-        raise RuntimeError("guarded Lean run did not validate the Paper I aggregate")
+    if not isinstance(aggregate, list) or FINITEGEOM_GATE not in aggregate:
+        raise RuntimeError("guarded run did not validate the Paper I human gate")
     source = manifest.get("source")
     if not isinstance(source, dict):
-        raise RuntimeError("guarded Lean run has no source identity")
+        raise RuntimeError("guarded finitegeom run has no source identity")
     if source.get("git_head") != pinned_commit or source.get("git_dirty") is not False:
-        raise RuntimeError("guarded Lean run was not made from the clean pinned package")
+        raise RuntimeError("guarded run was not made from the clean pinned finitegeom revision")
     results = status.get("results")
     if not isinstance(results, list) or not any(
         isinstance(item, dict) and item.get("outcome") == "gate-passed"
         for item in results
     ):
-        raise RuntimeError("guarded Lean run has no successful aggregate result")
+        raise RuntimeError("guarded finitegeom run has no successful gate result")
     logs = manifest.get("logs")
-    if not isinstance(logs, dict) or ROOT_GATE not in logs:
-        raise RuntimeError("guarded Lean run does not identify the gate transcript")
-    log_path = Path(str(logs[ROOT_GATE])).resolve()
+    if not isinstance(logs, dict) or FINITEGEOM_GATE not in logs:
+        raise RuntimeError("guarded finitegeom run does not identify the gate transcript")
+    log_path = Path(str(logs[FINITEGEOM_GATE])).resolve()
     if not log_path.is_relative_to(resolved_run) or not log_path.is_file():
         raise RuntimeError("guarded Lean gate transcript is absent or outside its run")
     transcript = log_path.read_text(encoding="utf-8")
@@ -304,7 +323,131 @@ def guarded_lean_result(
         returncode=0,
         stdout=transcript,
         stderr="",
+    ), transcript_path if pointer is not None else log_path
+
+
+def formal_artifacts(paper_root: Path) -> dict[str, dict[str, object]]:
+    payload = json.loads(
+        (paper_root / "FORMAL_COMPANION.json").read_text(encoding="utf-8")
     )
+    artifacts = payload.get("artifacts")
+    if not isinstance(artifacts, list):
+        raise ValueError("FORMAL_COMPANION.json has no artifacts array")
+    result = {
+        entry.get("role"): entry
+        for entry in artifacts
+        if isinstance(entry, dict) and isinstance(entry.get("role"), str)
+    }
+    expected = {"certificate", "shared-library", "paper-bridge"}
+    if set(result) != expected:
+        raise ValueError("FORMAL_COMPANION.json does not name the three formal roles")
+    return result
+
+
+def require_pinned_checkout(
+    root: Path, commit: object, paths: tuple[str, ...], label: str
+) -> None:
+    if not isinstance(commit, str) or re.fullmatch(r"[0-9a-f]{40}", commit) is None:
+        raise ValueError(f"{label} pin is not a full Git commit")
+    head = run(["git", "rev-parse", "HEAD"], root)
+    if head.returncode != 0 or head.stdout.strip() != commit:
+        raise RuntimeError(f"{label} checkout is not at its pinned commit")
+    identity = run(["git", "diff", "--quiet", commit, "--", *paths], root)
+    if identity.returncode != 0:
+        raise RuntimeError(f"{label} release paths differ from the pinned commit")
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def validate_sealed_certificate_contract(
+    certificate_root: Path,
+    finitegeom_root: Path,
+    bridge_root: Path,
+    certificate_pack: Path,
+    artifacts: dict[str, dict[str, object]],
+) -> None:
+    certificate_manifest_path = certificate_root / CERTIFICATE_MANIFEST
+    trust_fact_path = certificate_root / CERTIFICATE_TRUST_FACT
+    bridge_manifest_path = bridge_root / BRIDGE_MANIFEST
+    certificate_manifest = json.loads(certificate_manifest_path.read_text(encoding="utf-8"))
+    trust_fact = json.loads(trust_fact_path.read_text(encoding="utf-8"))
+    bridge_manifest = json.loads(bridge_manifest_path.read_text(encoding="utf-8"))
+    if certificate_manifest.get("roots") != [CERTIFICATE_GATE]:
+        raise ValueError("certificate manifest has the wrong aggregate root")
+    if trust_fact.get("gate") != CERTIFICATE_GATE:
+        raise ValueError("certificate trust fact has the wrong gate")
+    if trust_fact.get("manifest_sha256") != sha256(certificate_manifest_path):
+        raise ValueError("certificate trust fact does not seal the certificate manifest")
+    evidence = trust_fact.get("evidence")
+    if not isinstance(evidence, dict):
+        raise ValueError("certificate trust fact has no evidence object")
+    axiom_log = evidence.get("axiom_log")
+    if not isinstance(axiom_log, str):
+        raise ValueError("certificate trust fact has no axiom-log path")
+    axiom_path = certificate_root / axiom_log
+    if not axiom_path.is_file() or evidence.get("axiom_log_sha256") != sha256(axiom_path):
+        raise ValueError("certificate trust fact axiom evidence is absent or stale")
+    if bridge_manifest.get("roots") != [BRIDGE_GATE]:
+        raise ValueError("paper bridge manifest has the wrong root")
+    dependencies = bridge_manifest.get("dependencies")
+    expected_dependencies = {
+        "finitegeom": artifacts["shared-library"].get("commit"),
+        "finitegeom-clebsch-q11-certificates": artifacts["certificate"].get("commit"),
+    }
+    if dependencies != expected_dependencies:
+        raise ValueError("paper bridge dependencies differ from FORMAL_COMPANION.json")
+    if not certificate_pack.is_file():
+        raise ValueError("certificate pack is absent")
+    if bridge_manifest.get("certificate_cache_sha256") != sha256(certificate_pack):
+        raise ValueError("certificate pack differs from the bridge's sealed cache digest")
+    flake = (bridge_root / "flake.nix").read_text(encoding="utf-8")
+    required_fragments = (
+        ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.olean",
+        ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.trace",
+        'cd "$certificate_root" && lake unpack',
+        "sha256sum --check --status",
+        "lake env lean TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+    )
+    if any(fragment not in flake for fragment in required_fragments):
+        raise ValueError("paper bridge verifier omits a sealed compatibility check")
+    for line in flake.splitlines():
+        if "lake build" in line and (
+            "certificate_root" in line
+            or "TavisRuddFiniteGeom.Certificates" in line
+        ):
+            raise ValueError("paper bridge verifier can schedule a certificate build")
+
+
+def manifest_axioms(
+    manifest: dict[str, object], repository: str
+) -> dict[str, list[str]]:
+    """Collect the axiom map claimed by one formal repository."""
+    claims = manifest.get("claims")
+    if not isinstance(claims, list):
+        raise ValueError("manifest claims must be an array")
+    result: dict[str, list[str]] = {}
+    for claim in claims:
+        if not isinstance(claim, dict):
+            continue
+        components = [claim, *claim.get("components", [])]
+        for component in components:
+            if not isinstance(component, dict):
+                continue
+            lean = component.get("lean")
+            if not isinstance(lean, dict) or lean.get("repository") != repository:
+                continue
+            axioms = lean.get("axioms")
+            if not isinstance(axioms, dict):
+                raise ValueError(f"{repository} Lean component has no axiom map")
+            for terminal, values in axioms.items():
+                if not isinstance(terminal, str) or not isinstance(values, list):
+                    raise ValueError(f"{repository} Lean component has an invalid axiom map")
+                if terminal in result and result[terminal] != values:
+                    raise ValueError(f"conflicting axiom claims for {terminal}")
+                result[terminal] = values
+    return result
 
 
 def main() -> int:
@@ -316,7 +459,7 @@ def main() -> int:
         type=Path,
         default=paper_root / "verification" / "trust_manifest.json",
     )
-    parser.add_argument("--lean-root", type=Path, required=True)
+    parser.add_argument("--certificate-root", type=Path, required=True)
     parser.add_argument(
         "--finitegeom-root",
         type=Path,
@@ -327,43 +470,57 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--bridge-root",
+        type=Path,
+        required=True,
+        help="checkout of the pinned paper compatibility bridge",
+    )
+    parser.add_argument(
+        "--certificate-pack",
+        type=Path,
+        required=True,
+        help="sealed Q11 Lake pack required by the paper bridge verifier",
+    )
+    parser.add_argument(
         "--update-output",
         action="store_true",
         help="replace the deterministic release-output certificate after all checks pass",
     )
     parser.add_argument(
-        "--guarded-lean-run",
+        "--guarded-finitegeom-run",
         type=Path,
-        help=(
-            "canonical successful guarded-run directory for the clean pinned package; "
-            "maintainers use this instead of starting a bare Lean build"
-        ),
+        required=True,
+        help="successful guarded receipt for the pinned finitegeom human gate",
     )
     args = parser.parse_args()
     repositories = {
         "paper": paper_root.resolve(),
-        "lean": args.lean_root.resolve(),
+        "certificate": args.certificate_root.resolve(),
+        "finitegeom": args.finitegeom_root.resolve(),
+        "bridge": args.bridge_root.resolve(),
     }
-    shared = args.finitegeom_root.resolve()
-    os.environ["CLEBSCH_LEAN_ROOT"] = str(repositories["lean"])
+    certificate_pack = args.certificate_pack.resolve()
 
     # FORMAL_COMPANION.json is the single place this paper names an external formal
-    # artifact. The guard rejects a commit restated beside a pinned repository
-    # anywhere else, so the manifest's own copies cannot drift away from it. The
-    # certificate package is resolved against the Lean root already supplied and
-    # required to be that package's newest export; finitegeom is checked the same
-    # way when its checkout is given.
+    # artifact. Resolve every role independently so no combined repository can
+    # silently replace the sealed certificate, human library, or compatibility
+    # theorem.
     companion = [
         sys.executable,
         str(paper_root / "verification" / "verify_formal_companion.py"),
         "--no-loose-commits",
-        f"--resolve=certificate={repositories['lean']}",
-        f"--require-current=certificate={repositories['lean']}",
     ]
-    companion += [
-        f"--resolve=shared-library={shared}",
-        f"--require-current=shared-library={shared}",
-    ]
+    for role, repository in (
+        ("certificate", "certificate"),
+        ("shared-library", "finitegeom"),
+        ("paper-bridge", "bridge"),
+    ):
+        companion.extend(
+            (
+                f"--resolve={role}={repositories[repository]}",
+                f"--require-current={role}={repositories[repository]}",
+            )
+        )
     completed = subprocess.run(companion, cwd=paper_root, text=True, capture_output=True)
     if completed.returncode:
         raise ValueError((completed.stdout + completed.stderr).strip())
@@ -373,22 +530,37 @@ def main() -> int:
     if not isinstance(manifest, dict):
         raise ValueError("manifest root must be an object")
 
-    package_closure, finitegeom_closure = project_import_closure(
-        repositories["lean"], shared
+    artifacts = formal_artifacts(paper_root)
+    formal_roots = {
+        name: repositories[name]
+        for name in ("certificate", "finitegeom", "bridge")
+    }
+    closures = merge_closures(
+        formal_roots, (CERTIFICATE_GATE, FINITEGEOM_GATE, BRIDGE_GATE)
     )
     print(
         "Paper I project closure: "
-        f"{len(package_closure)} package modules, "
-        f"{len(finitegeom_closure)} shared modules"
+        + ", ".join(f"{len(closures[name])} {name} modules" for name in formal_roots)
     )
-    validate_source_policy(repositories["lean"], package_closure, "lean")
-    validate_source_policy(shared, finitegeom_closure, "finitegeom")
+    for name in formal_roots:
+        validate_source_policy(repositories[name], closures[name], name)
     snapshot_paths = {
         "paper": (".",),
-        "lean": (*package_closure, AXIOM_AUDIT),
-        "finitegeom": finitegeom_closure,
+        "certificate": (
+            *closures["certificate"],
+            CERTIFICATE_MANIFEST,
+            CERTIFICATE_TRUST_FACT,
+            CERTIFICATE_AXIOM_AUDIT,
+            "evidence/gate-axioms.log",
+        ),
+        "finitegeom": (
+            *closures["finitegeom"],
+            FINITEGEOM_AUDIT,
+            "trust/manifests/clebsch_rigidity.json",
+        ),
+        "bridge": (*closures["bridge"], BRIDGE_MANIFEST, "flake.nix"),
     }
-    snapshot_roots = {**repositories, "finitegeom": shared}
+    snapshot_roots = repositories
     initial = {
         name: git_snapshot(root, snapshot_paths[name])
         for name, root in snapshot_roots.items()
@@ -403,62 +575,33 @@ def main() -> int:
         )
     require_clean(clean_initial)
 
-    lean_repository = manifest.get("lean_repository")
-    if not isinstance(lean_repository, dict):
-        raise ValueError("manifest.lean_repository must be an object")
-    pinned = lean_repository.get("commit")
-    if not isinstance(pinned, str) or not pinned:
-        raise ValueError("manifest.lean_repository.commit must be nonempty")
-    paper_git = run(["git", "rev-parse", "--show-toplevel"], paper_root)
-    lean_git = run(["git", "rev-parse", "--show-toplevel"], repositories["lean"])
-    if paper_git.returncode != 0 or lean_git.returncode != 0:
-        raise RuntimeError("paper and Lean roots must belong to Git repositories")
-    if paper_git.stdout.strip() == lean_git.stdout.strip():
-        ancestry = run(
-            ["git", "merge-base", "--is-ancestor", pinned, "HEAD"],
-            repositories["lean"],
+    for role, repository in (
+        ("certificate", "certificate"),
+        ("shared-library", "finitegeom"),
+        ("paper-bridge", "bridge"),
+    ):
+        require_pinned_checkout(
+            repositories[repository],
+            artifacts[role].get("commit"),
+            snapshot_paths[repository],
+            repository,
         )
-        if ancestry.returncode != 0:
-            raise RuntimeError("the pinned Lean commit is not an ancestor of HEAD")
-    else:
-        lean_head = run(["git", "rev-parse", "HEAD"], repositories["lean"])
-        if lean_head.returncode != 0 or lean_head.stdout.strip() != pinned:
-            raise RuntimeError("the separate Lean repository is not at the pinned commit")
-    lean_identity = run(
-        ["git", "diff", "--quiet", pinned, "--", *package_closure, AXIOM_AUDIT],
-        repositories["lean"],
+    validate_sealed_certificate_contract(
+        repositories["certificate"],
+        repositories["finitegeom"],
+        repositories["bridge"],
+        certificate_pack,
+        artifacts,
     )
-    if lean_identity.returncode != 0:
-        raise RuntimeError(
-            "the Paper I Lean source paths differ from the pinned commit"
-        )
-    pinned_dependency = next(
-        (
-            entry.get("commit")
-            for entry in json.loads(
-                (paper_root / "FORMAL_COMPANION.json").read_text(encoding="utf-8")
-            )["artifacts"]
-            if entry.get("role") == "shared-library"
-        ),
-        None,
+    guarded_finitegeom, finitegeom_transcript = guarded_finitegeom_result(
+        args.guarded_finitegeom_run,
+        repositories["finitegeom"],
+        str(artifacts["shared-library"]["commit"]),
     )
-    if not pinned_dependency:
-        raise RuntimeError("FORMAL_COMPANION.json pins no shared-library commit")
-    dependency_identity = run(
-        [
-            "git",
-            "diff",
-            "--quiet",
-            pinned_dependency,
-            "--",
-            *finitegeom_closure,
-        ],
-        shared,
-    )
-    if dependency_identity.returncode != 0:
-        raise RuntimeError(
-            "the dependency-owned Paper I closure differs from the pinned commit"
-        )
+    os.environ["CLEBSCH_CERTIFICATE_ROOT"] = str(repositories["certificate"])
+    os.environ["CLEBSCH_FINITEGEOM_ROOT"] = str(repositories["finitegeom"])
+    os.environ["CLEBSCH_BRIDGE_ROOT"] = str(repositories["bridge"])
+    os.environ["CLEBSCH_FINITEGEOM_AXIOM_AUDIT"] = str(finitegeom_transcript)
 
     validator_command = [
         sys.executable,
@@ -466,8 +609,12 @@ def main() -> int:
         str(manifest_path),
         "--manuscript",
         str(paper_root / "clebsch_rigidity.tex"),
-        "--lean-root",
-        str(repositories["lean"]),
+        "--certificate-root",
+        str(repositories["certificate"]),
+        "--finitegeom-root",
+        str(repositories["finitegeom"]),
+        "--bridge-root",
+        str(repositories["bridge"]),
     ]
     if args.update_output:
         validator_command.append("--allow-stale-release-output")
@@ -511,12 +658,31 @@ def main() -> int:
             or not 1 <= timeout <= 3600
         ):
             raise ValueError(f"{where}.timeout_seconds is invalid")
-        if check_id == "lean-rigidity-trust-gate" and args.guarded_lean_run:
-            result = guarded_lean_result(
-                args.guarded_lean_run,
-                repositories["lean"],
-                pinned,
-            )
+        if check_id == "lean-finitegeom-trust-gate":
+            result = guarded_finitegeom
+        elif check_id == "lean-certificate-compatibility":
+            try:
+                result = run(
+                    [
+                        "nix",
+                        "run",
+                        ".#verify",
+                        "--",
+                        str(certificate_pack),
+                        str(repositories["finitegeom"]),
+                        str(repositories["certificate"]),
+                    ],
+                    repositories["bridge"],
+                    timeout=timeout,
+                )
+            except subprocess.TimeoutExpired as error:
+                detail = bounded(
+                    error.stderr if isinstance(error.stderr, str) else ""
+                )
+                raise RuntimeError(
+                    f"verification check {check_id!r} timed out after "
+                    f"{timeout} seconds:\n{detail}"
+                ) from error
         else:
             try:
                 result = run(argv, cwd, timeout=timeout)
@@ -547,9 +713,9 @@ def main() -> int:
             ):
                 raise ValueError(f"{where}.axiom_audit is invalid")
             audit_path = repositories[audit_repository] / audit_path_value
-            expected_axioms = parse_axiom_output(
-                audit_path.read_text(encoding="utf-8")
-            )
+            if check_id != "lean-finitegeom-trust-gate":
+                raise RuntimeError(f"verification check {check_id!r} has an axiom audit")
+            expected_axioms = manifest_axioms(manifest, "finitegeom")
             actual_axioms = parse_axiom_output(result.stdout + "\n" + result.stderr)
             if not expected_axioms or not matches_axiom_audit(
                 expected_axioms, actual_axioms
@@ -603,12 +769,12 @@ def main() -> int:
             "companion_trust_sha256": manifest["computational_companion"][
                 "trust_ledger"
             ]["sha256"],
+            "formal_companion_sha256": manifest["formal_companion"]["sha256"],
             "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
             "manuscript_sha256": manifest["manuscript_sha256"],
             "release_surface_sha256": release_surface_sha256(manifest),
             "statement_identity_sha256": manifest["statement_identity"]["sha256"],
         },
-        "lean_commit": pinned,
         "status": "passed",
     }
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"

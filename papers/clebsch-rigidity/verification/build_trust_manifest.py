@@ -14,27 +14,48 @@ from pathlib import Path
 
 PAPER_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PAPER_ROOT.parents[1]
-LEAN_ROOT = Path(
-    os.environ.get("CLEBSCH_LEAN_ROOT", REPOSITORY_ROOT / "lean")
+CERTIFICATE_ROOT = Path(
+    os.environ.get(
+        "CLEBSCH_CERTIFICATE_ROOT",
+        Path.home() / "src/lean/finitegeom-clebsch-q11-certificates",
+    )
+).resolve()
+FINITEGEOM_ROOT = Path(
+    os.environ.get("CLEBSCH_FINITEGEOM_ROOT", Path.home() / "src/lean/finitegeom")
+).resolve()
+BRIDGE_ROOT = Path(
+    os.environ.get(
+        "CLEBSCH_BRIDGE_ROOT",
+        Path.home() / "src/lean/finitegeom-clebsch-rigidity-bridge",
+    )
+).resolve()
+FINITEGEOM_AXIOM_AUDIT = Path(
+    os.environ.get(
+        "CLEBSCH_FINITEGEOM_AXIOM_AUDIT",
+        REPOSITORY_ROOT / "lean/verification/clebsch_rigidity_trust/axiom-audit.txt",
+    )
 ).resolve()
 IDENTITY_PATH = PAPER_ROOT / "verification" / "statement_identity.json"
 OUTPUT_PATH = PAPER_ROOT / "verification" / "trust_manifest.json"
-GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean"
-AUDIT_PATH = "verification/clebsch_rigidity_trust/axiom-audit.txt"
-PINNED_PACKAGE_COMMIT = "930675c6b8bf44e06847d15bd6e63560caa6977f"
-PINNED_FINITEGEOM_COMMIT = "187bed8895fc62784caf2022d717b4daa37871ad"
+FINITEGEOM_GATE_PATH = "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+FINITEGEOM_AUDIT_PATH = "trust/ClebschRigidityAxiomAudit.lean"
+CERTIFICATE_GATE_PATH = "TavisRuddFiniteGeom/Certificates/Q11.lean"
+CERTIFICATE_TRUST_FACT_PATH = "TRUST_FACT.json"
+BRIDGE_GATE_PATH = (
+    "TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean"
+)
 
 
 TERMINALS = {
     "orbits": [
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.point_orbit_partition",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_six_orbit",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.unique_twelve_orbit",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.brianchon_points_one_orbit",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_eq_projectiveVec",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.pointVec_witnessIndex",
-        "RelativeConicArcs.Examples.Q11A5PointOrbits.mem_standardConicIndices_iff",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.point_orbit_partition",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_six_orbit",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.unique_twelve_orbit",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.brianchon_points_one_orbit",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_eq_projectiveVec",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.pointVec_witnessIndex",
+        "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.mem_standardConicIndices_iff",
     ],
     "code_locus": [
         "RelativeConicArcs.Examples.Q11Coding.witness_mds_columns",
@@ -164,7 +185,9 @@ def sha256(path: Path) -> str:
 def file_evidence(repository: str, path: str) -> dict[str, str]:
     roots = {
         "paper": PAPER_ROOT,
-        "lean": LEAN_ROOT,
+        "certificate": CERTIFICATE_ROOT,
+        "finitegeom": FINITEGEOM_ROOT,
+        "bridge": BRIDGE_ROOT,
     }
     return {
         "repository": repository,
@@ -173,8 +196,7 @@ def file_evidence(repository: str, path: str) -> dict[str, str]:
     }
 
 
-def parse_axioms() -> dict[str, list[str]]:
-    text = (LEAN_ROOT / AUDIT_PATH).read_text(encoding="utf-8")
+def parse_lean_axiom_output(text: str) -> dict[str, list[str]]:
     pattern = re.compile(
         r"'([^']+)' (does not depend on any axioms|depends on axioms: \[(.*?)\])",
         re.DOTALL,
@@ -187,6 +209,37 @@ def parse_axioms() -> dict[str, list[str]]:
             if body is None
             else [item.strip() for item in body.replace("\n", " ").split(",")]
         )
+    return result
+
+
+def parse_axioms() -> dict[str, list[str]]:
+    human_axioms = parse_lean_axiom_output(
+        FINITEGEOM_AXIOM_AUDIT.read_text(encoding="utf-8")
+    )
+    human_expected = {
+        terminal
+        for group, terminals in TERMINALS.items()
+        if group != "orbits"
+        for terminal in terminals
+    }
+    result = {
+        terminal: human_axioms[terminal]
+        for terminal in human_expected
+        if terminal in human_axioms
+    }
+    trust_fact = json.loads(
+        (CERTIFICATE_ROOT / CERTIFICATE_TRUST_FACT_PATH).read_text(encoding="utf-8")
+    )
+    declarations = trust_fact.get("declarations")
+    if not isinstance(declarations, dict):
+        raise ValueError("certificate trust fact has no declarations object")
+    for terminal in TERMINALS["orbits"]:
+        declaration = declarations.get(terminal)
+        if not isinstance(declaration, dict) or not isinstance(
+            declaration.get("axioms"), list
+        ):
+            raise ValueError(f"certificate trust fact omits {terminal}")
+        result[terminal] = declaration["axioms"]
     expected = {terminal for group in TERMINALS.values() for terminal in group}
     if set(result) != expected:
         missing = sorted(expected - set(result))
@@ -326,16 +379,30 @@ def lean(
             terminal for group in groups for terminal in TERMINALS[group]
         )
     )
+    repository = "certificate" if groups == ["orbits"] else "finitegeom"
+    if repository == "certificate":
+        gate_path = CERTIFICATE_GATE_PATH
+        audit_path = CERTIFICATE_TRUST_FACT_PATH
+        validation = {
+            "method": "sealed-certificate-through-paper-bridge",
+            "command": "nix run .#verify -- CERTIFICATE_PACK FINITEGEOM_ROOT CERTIFICATE_ROOT",
+            "certificate_build": False,
+        }
+    else:
+        gate_path = FINITEGEOM_GATE_PATH
+        audit_path = FINITEGEOM_AUDIT_PATH
+        validation = {
+            "method": "guarded-finitegeom-receipt",
+            "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
+        }
     lean_evidence = {
-        "gate": file_evidence("lean", GATE_PATH),
-        "audit": file_evidence("lean", AUDIT_PATH),
+        "repository": repository,
+        "gate": file_evidence(repository, gate_path),
+        "audit": file_evidence(repository, audit_path),
         "terminals": terminals,
         "axioms": {terminal: axioms[terminal] for terminal in terminals},
         "validation": {
-            "command": (
-                "nix develop --command env LEAN_NUM_THREADS=1 lake build "
-                "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
-            ),
+            **validation,
             "toolchain": {
                 "lean": "4.32.0-rc1",
                 "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
@@ -804,21 +871,32 @@ def checks() -> list[dict[str, object]]:
         )
     result.append(
         {
-            "id": "lean-rigidity-trust-gate",
-            "repository": "lean",
+            "id": "lean-finitegeom-trust-gate",
+            "repository": "finitegeom",
+            "cwd": ".",
+            "argv": [
+                "guarded-finitegeom-run",
+                "RelativeConicArcs.Gates.ClebschRigidityTrust",
+            ],
+            "timeout_seconds": 1800,
+            "axiom_audit": file_evidence("finitegeom", FINITEGEOM_AUDIT_PATH),
+        }
+    )
+    result.append(
+        {
+            "id": "lean-certificate-compatibility",
+            "repository": "bridge",
             "cwd": ".",
             "argv": [
                 "nix",
-                "develop",
-                "--command",
-                "env",
-                "LEAN_NUM_THREADS=1",
-                "lake",
-                "build",
-                "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates",
+                "run",
+                ".#verify",
+                "--",
+                "CERTIFICATE_PACK",
+                "FINITEGEOM_ROOT",
+                "CERTIFICATE_ROOT",
             ],
             "timeout_seconds": 1800,
-            "axiom_audit": file_evidence("lean", AUDIT_PATH),
         }
     )
     return result
@@ -838,7 +916,7 @@ def build_manifest() -> dict[str, object]:
     if len(claims) != 19 or set(routes) != {claim["row"] for claim in claims}:
         raise ValueError("claim-route map is incomplete")
     return {
-        "schema": "clebsch-rigidity-trust-manifest-v1",
+        "schema": "clebsch-rigidity-trust-manifest-v2",
         "manuscript_sha256": sha256(PAPER_ROOT / "clebsch_rigidity.tex"),
         "manuscript_pdf": file_evidence("paper", "clebsch_rigidity.pdf"),
         "computational_companion": {
@@ -874,17 +952,27 @@ def build_manifest() -> dict[str, object]:
         "statement_identity": file_evidence(
             "paper", "verification/statement_identity.json"
         ),
+        "formal_companion": file_evidence("paper", "FORMAL_COMPANION.json"),
+        "formal_verification": {
+            "certificate_manifest": file_evidence(
+                "certificate", "MANIFEST.json"
+            ),
+            "certificate_trust_fact": file_evidence(
+                "certificate", CERTIFICATE_TRUST_FACT_PATH
+            ),
+            "finitegeom_gate": file_evidence(
+                "finitegeom", FINITEGEOM_GATE_PATH
+            ),
+            "finitegeom_audit": file_evidence(
+                "finitegeom", FINITEGEOM_AUDIT_PATH
+            ),
+            "bridge_manifest": file_evidence("bridge", "MANIFEST.json"),
+            "bridge_gate": file_evidence("bridge", BRIDGE_GATE_PATH),
+        },
         "public_documents": [
             file_evidence("paper", "README.md"),
             file_evidence("paper", "verification/README.md"),
         ],
-        "lean_repository": {
-            "distribution": "separate shared Git repository",
-            "url": "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
-            "path": ".",
-            "commit": PINNED_PACKAGE_COMMIT,
-            "finitegeom_commit": PINNED_FINITEGEOM_COMMIT,
-        },
         "reproducibility_environment": {
             "platform": "x86_64-linux",
             "flake": file_evidence("paper", "flake.nix"),
@@ -902,10 +990,12 @@ def build_manifest() -> dict[str, object]:
         },
         "verify_all": {
             "command": (
-                "nix develop --command python3 "
-                "verification/verify_release.py "
-                "--lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates "
-                "--finitegeom-root /absolute/path/to/finitegeom"
+                "nix run .#verify -- "
+                "--certificate-root CERTIFICATE_ROOT "
+                "--finitegeom-root FINITEGEOM_ROOT "
+                "--bridge-root BRIDGE_ROOT "
+                "--certificate-pack CERTIFICATE_PACK "
+                "--guarded-finitegeom-run GUARDED_FINITEGEOM_RUN"
             ),
             "entry_point": file_evidence(
                 "paper", "verification/verify_release.py"
@@ -939,11 +1029,32 @@ def build_manifest() -> dict[str, object]:
 
 
 def main() -> int:
+    global CERTIFICATE_ROOT, FINITEGEOM_ROOT, BRIDGE_ROOT, FINITEGEOM_AXIOM_AUDIT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--stdout", action="store_true")
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
+    parser.add_argument("--certificate-root", type=Path, default=CERTIFICATE_ROOT)
+    parser.add_argument("--finitegeom-root", type=Path, default=FINITEGEOM_ROOT)
+    parser.add_argument("--bridge-root", type=Path, default=BRIDGE_ROOT)
+    parser.add_argument(
+        "--guarded-finitegeom-run",
+        type=Path,
+        help="successful guarded receipt supplying the human-gate axiom transcript",
+    )
     args = parser.parse_args()
+    CERTIFICATE_ROOT = args.certificate_root.resolve()
+    FINITEGEOM_ROOT = args.finitegeom_root.resolve()
+    BRIDGE_ROOT = args.bridge_root.resolve()
+    if args.guarded_finitegeom_run is not None:
+        from verify_release import formal_artifacts, guarded_finitegeom_result
+
+        artifacts = formal_artifacts(PAPER_ROOT)
+        _, FINITEGEOM_AXIOM_AUDIT = guarded_finitegeom_result(
+            args.guarded_finitegeom_run,
+            FINITEGEOM_ROOT,
+            str(artifacts["shared-library"]["commit"]),
+        )
     rendered = json.dumps(build_manifest(), indent=2, sort_keys=True) + "\n"
     if args.check:
         if args.output.read_text(encoding="utf-8") != rendered:

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import sys
 import tempfile
@@ -27,6 +28,7 @@ def load(name: str, filename: str):
 
 extractor = load("rigidity_statement_extractor", "extract_statement_identity.py")
 release = load("rigidity_release_runner", "verify_release.py")
+builder = load("rigidity_trust_manifest_builder", "build_trust_manifest.py")
 capture = load("rigidity_checker_output_capture", "capture_checker_outputs.py")
 manuscript = load("rigidity_manuscript_build", "check_manuscript_build.py")
 trust = load("rigidity_trust_manifest", "verify_trust_manifest.py")
@@ -90,38 +92,56 @@ class ReleaseRunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "repository-relative"):
                 release.safe_cwd(roots, "paper", "../outside", "test")
 
-    def test_project_import_closure_spans_both_roots(self) -> None:
+    def test_project_import_closure_spans_three_roots(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            package = root / "package"
-            shared = root / "shared"
+            bridge = root / "bridge"
+            certificate = root / "certificate"
+            finitegeom = root / "finitegeom"
             gate = (
-                package
-                / "RelativeConicArcs"
-                / "Gates"
-                / "ClebschRigidityWithOrderElevenCertificates.lean"
+                bridge
+                / "TavisRuddFiniteGeom"
+                / "Papers"
+                / "ClebschRigidity"
+                / "CertificateCompatibility.lean"
             )
-            dependency = shared / "RelativeConicArcs" / "Shared.lean"
-            cap = shared / "ProjectiveCap" / "Base.lean"
+            dependency = finitegeom / "RelativeConicArcs" / "Shared.lean"
+            certificate_leaf = (
+                certificate
+                / "TavisRuddFiniteGeom"
+                / "Certificates"
+                / "Q11"
+                / "PointOrbits.lean"
+            )
             gate.parent.mkdir(parents=True)
             dependency.parent.mkdir(parents=True)
-            cap.parent.mkdir(parents=True)
+            certificate_leaf.parent.mkdir(parents=True)
             gate.write_text(
-                "import RelativeConicArcs.Shared\nimport Mathlib.Data.Fin.Basic\n",
+                "import RelativeConicArcs.Shared\n"
+                "import TavisRuddFiniteGeom.Certificates.Q11.PointOrbits\n",
                 encoding="utf-8",
             )
-            dependency.write_text("import ProjectiveCap.Base\n", encoding="utf-8")
-            cap.write_text("", encoding="utf-8")
-            package_paths, shared_paths = release.project_import_closure(
-                package, shared
+            dependency.write_text("import Mathlib.Data.Fin.Basic\n", encoding="utf-8")
+            certificate_leaf.write_text("", encoding="utf-8")
+            paths = release.project_import_closure(
+                {
+                    "bridge": bridge,
+                    "certificate": certificate,
+                    "finitegeom": finitegeom,
+                },
+                release.BRIDGE_GATE,
             )
             self.assertEqual(
-                package_paths,
-                ("RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",),
+                paths["bridge"],
+                ("TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",),
             )
             self.assertEqual(
-                shared_paths,
-                ("ProjectiveCap/Base.lean", "RelativeConicArcs/Shared.lean"),
+                paths["finitegeom"],
+                ("RelativeConicArcs/Shared.lean",),
+            )
+            self.assertEqual(
+                paths["certificate"],
+                ("TavisRuddFiniteGeom/Certificates/Q11/PointOrbits.lean",),
             )
 
     def test_source_policy_ignores_prose_but_rejects_code(self) -> None:
@@ -134,6 +154,81 @@ class ReleaseRunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "forbidden Lean source policy"):
                 release.validate_source_policy(root, ("Example.lean",), "test")
 
+    def test_sealed_bridge_contract_rejects_certificate_builds(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            certificate = root / "certificate"
+            finitegeom = root / "finitegeom"
+            bridge = root / "bridge"
+            for path in (certificate, finitegeom, bridge):
+                path.mkdir()
+            manifest = {"roots": [release.CERTIFICATE_GATE]}
+            manifest_path = certificate / release.CERTIFICATE_MANIFEST
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            evidence = certificate / "evidence" / "gate-axioms.log"
+            evidence.parent.mkdir()
+            evidence.write_text("sealed axioms\n", encoding="utf-8")
+            (certificate / release.CERTIFICATE_TRUST_FACT).write_text(
+                json.dumps(
+                    {
+                        "gate": release.CERTIFICATE_GATE,
+                        "manifest_sha256": hashlib.sha256(
+                            manifest_path.read_bytes()
+                        ).hexdigest(),
+                        "evidence": {
+                            "axiom_log": "evidence/gate-axioms.log",
+                            "axiom_log_sha256": hashlib.sha256(
+                                evidence.read_bytes()
+                            ).hexdigest(),
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            pack = root / "q11.lake-pack.tar.gz"
+            pack.write_bytes(b"sealed pack")
+            artifacts = {
+                "certificate": {"commit": "c" * 40},
+                "shared-library": {"commit": "f" * 40},
+                "paper-bridge": {"commit": "b" * 40},
+            }
+            (bridge / release.BRIDGE_MANIFEST).write_text(
+                json.dumps(
+                    {
+                        "roots": [release.BRIDGE_GATE],
+                        "dependencies": {
+                            "finitegeom": "f" * 40,
+                            "finitegeom-clebsch-q11-certificates": "c" * 40,
+                        },
+                        "certificate_cache_sha256": hashlib.sha256(
+                            pack.read_bytes()
+                        ).hexdigest(),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            safe_flake = "\n".join(
+                (
+                    ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.olean",
+                    ".lake/build/lib/lean/TavisRuddFiniteGeom/Certificates/Q11.trace",
+                    '(cd "$certificate_root" && lake unpack "$certificate_pack")',
+                    "sha256sum --check --status",
+                    "lake env lean TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+                )
+            )
+            (bridge / "flake.nix").write_text(safe_flake, encoding="utf-8")
+            release.validate_sealed_certificate_contract(
+                certificate, finitegeom, bridge, pack, artifacts
+            )
+            (bridge / "flake.nix").write_text(
+                safe_flake + '\n(cd "$certificate_root" && lake build Bad)\n',
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "certificate build"):
+                release.validate_sealed_certificate_contract(
+                    certificate, finitegeom, bridge, pack, artifacts
+                )
+
     def test_guarded_receipt_requires_clean_pinned_source(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             run_dir = Path(directory)
@@ -143,9 +238,9 @@ class ReleaseRunnerTests(unittest.TestCase):
             (run_dir / "manifest.json").write_text(
                 json.dumps(
                     {
-                        "aggregate": [release.ROOT_GATE],
+                        "aggregate": [release.FINITEGEOM_GATE],
                         "lean_root": str(PAPER_ROOT),
-                        "logs": {release.ROOT_GATE: str(log)},
+                        "logs": {release.FINITEGEOM_GATE: str(log)},
                         "source": {"git_dirty": False, "git_head": "abc123"},
                     }
                 ),
@@ -161,8 +256,11 @@ class ReleaseRunnerTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            result = release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+            result, transcript = release.guarded_finitegeom_result(
+                run_dir, PAPER_ROOT, "abc123"
+            )
             self.assertIn("Gate.theorem", result.stdout)
+            self.assertEqual(transcript, log)
             manifest = json.loads(
                 (run_dir / "manifest.json").read_text(encoding="utf-8")
             )
@@ -170,8 +268,8 @@ class ReleaseRunnerTests(unittest.TestCase):
             (run_dir / "manifest.json").write_text(
                 json.dumps(manifest), encoding="utf-8"
             )
-            with self.assertRaisesRegex(RuntimeError, "clean pinned package"):
-                release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+            with self.assertRaisesRegex(RuntimeError, "clean pinned finitegeom"):
+                release.guarded_finitegeom_result(run_dir, PAPER_ROOT, "abc123")
 
     def test_guarded_receipt_follows_quiet_stdout_inside_run(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -184,9 +282,9 @@ class ReleaseRunnerTests(unittest.TestCase):
             (run_dir / "manifest.json").write_text(
                 json.dumps(
                     {
-                        "aggregate": [release.ROOT_GATE],
+                        "aggregate": [release.FINITEGEOM_GATE],
                         "lean_root": str(PAPER_ROOT),
-                        "logs": {release.ROOT_GATE: str(log)},
+                        "logs": {release.FINITEGEOM_GATE: str(log)},
                         "source": {"git_dirty": False, "git_head": "abc123"},
                     }
                 )
@@ -200,9 +298,12 @@ class ReleaseRunnerTests(unittest.TestCase):
                     }
                 )
             )
-            result = release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+            result, transcript = release.guarded_finitegeom_result(
+                run_dir, PAPER_ROOT, "abc123"
+            )
             self.assertIn("Gate.full", result.stdout)
             self.assertNotIn("1002 lines", result.stdout)
+            self.assertEqual(transcript, stdout)
 
     def test_guarded_receipt_rejects_quiet_stdout_outside_run(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -216,9 +317,9 @@ class ReleaseRunnerTests(unittest.TestCase):
             (run_dir / "manifest.json").write_text(
                 json.dumps(
                     {
-                        "aggregate": [release.ROOT_GATE],
+                        "aggregate": [release.FINITEGEOM_GATE],
                         "lean_root": str(PAPER_ROOT),
-                        "logs": {release.ROOT_GATE: str(log)},
+                        "logs": {release.FINITEGEOM_GATE: str(log)},
                         "source": {"git_dirty": False, "git_head": "abc123"},
                     }
                 )
@@ -233,11 +334,62 @@ class ReleaseRunnerTests(unittest.TestCase):
                 )
             )
             with self.assertRaisesRegex(RuntimeError, "outside its run"):
-                release.guarded_lean_result(run_dir, PAPER_ROOT, "abc123")
+                release.guarded_finitegeom_result(run_dir, PAPER_ROOT, "abc123")
 
     def test_exact_checker_set_is_unique(self) -> None:
         self.assertEqual(len(capture.CHECKERS), 20)
         self.assertEqual(len({name for name, _ in capture.CHECKERS}), 20)
+
+    def test_formal_checks_separate_human_gate_from_certificate_bridge(self) -> None:
+        checks = {check["id"]: check for check in builder.checks()}
+        self.assertEqual(len(checks), 27)
+        self.assertEqual(
+            checks["lean-finitegeom-trust-gate"]["argv"],
+            ["guarded-finitegeom-run", release.FINITEGEOM_GATE],
+        )
+        bridge_argv = checks["lean-certificate-compatibility"]["argv"]
+        self.assertEqual(bridge_argv[:4], ["nix", "run", ".#verify", "--"])
+        self.assertNotIn("lake", bridge_argv)
+
+    def test_builder_combines_human_and_sealed_certificate_axioms(self) -> None:
+        axioms = builder.parse_axioms()
+        expected = {
+            terminal
+            for terminals in builder.TERMINALS.values()
+            for terminal in terminals
+        }
+        self.assertEqual(set(axioms), expected)
+        self.assertIn(
+            "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition",
+            axioms,
+        )
+
+    def test_builder_terminal_partition_matches_separate_gates(self) -> None:
+        certificate_terminals = set(builder.TERMINALS["orbits"])
+        human_terminals = {
+            terminal
+            for group, terminals in builder.TERMINALS.items()
+            if group != "orbits"
+            for terminal in terminals
+        }
+        self.assertEqual(
+            human_terminals,
+            trust.parse_gate_terminals(
+                builder.FINITEGEOM_ROOT / builder.FINITEGEOM_GATE_PATH
+            ),
+        )
+        self.assertEqual(
+            human_terminals,
+            trust.parse_gate_terminals(
+                builder.FINITEGEOM_ROOT / builder.FINITEGEOM_AUDIT_PATH
+            ),
+        )
+        fact = json.loads(
+            (
+                builder.CERTIFICATE_ROOT / builder.CERTIFICATE_TRUST_FACT_PATH
+            ).read_text(encoding="utf-8")
+        )
+        self.assertLessEqual(certificate_terminals, set(fact["declarations"]))
 
     def test_manuscript_log_patterns(self) -> None:
         self.assertIsNone(manuscript.WARNING_RE.search("Package hyperref Info"))
@@ -250,7 +402,7 @@ class ReleaseRunnerTests(unittest.TestCase):
         self.assertEqual(
             manuscript.EXPECTED_PAGES,
             {
-                "clebsch_rigidity.tex": 28,
+                "clebsch_rigidity.tex": 29,
                 "clebsch_rigidity_computational_companion.tex": 13,
             },
         )

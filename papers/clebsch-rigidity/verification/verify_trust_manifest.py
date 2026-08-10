@@ -11,10 +11,26 @@ from pathlib import Path
 from typing import NoReturn
 
 
-SCHEMA = "clebsch-rigidity-trust-manifest-v1"
-LEAN_REPOSITORY_URL = (
-    "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
-)
+SCHEMA = "clebsch-rigidity-trust-manifest-v2"
+FORMAL_ROLES = {"certificate", "shared-library", "paper-bridge"}
+ALLOWED_AXIOMS = {"Classical.choice", "Quot.sound", "propext"}
+EXPECTED_ARTIFACTS = {
+    "certificate": (
+        "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates",
+        "TavisRuddFiniteGeom.Certificates.Q11",
+        "MANIFEST.json",
+    ),
+    "shared-library": (
+        "https://github.com/tavisrudd/finitegeom",
+        "RelativeConicArcs.Gates.ClebschRigidityTrust",
+        "trust/manifests/clebsch_rigidity.json",
+    ),
+    "paper-bridge": (
+        "https://github.com/tavisrudd/finitegeom-clebsch-rigidity-bridge",
+        "TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility",
+        "MANIFEST.json",
+    ),
+}
 REQUIRED_CITATION_FRAGMENTS = {
     17: ("Dye 1991",),
     25: ("Dye 1991", "Brouwer--Cohen--Neumaier", "Abiad--Jabal Ameli--Reijnders"),
@@ -187,11 +203,29 @@ def validate_lean(
 ) -> None:
     if not isinstance(value, dict):
         fail(f"{where} must be an object")
+    repository = require_string(value.get("repository"), f"{where}.repository")
+    if repository not in {"certificate", "finitegeom"}:
+        fail(f"{where}.repository is not a formal proof owner")
     gate = validate_file(value.get("gate"), repositories, f"{where}.gate")
     audit_path = validate_file(value.get("audit"), repositories, f"{where}.audit")
-    if gate.name != "ClebschRigidityWithOrderElevenCertificates.lean":
-        fail(f"{where}.gate is not the Paper I aggregate gate")
-    audit = audit_cache.setdefault(audit_path, parse_audit(audit_path))
+    expected_gate = (
+        "Q11.lean" if repository == "certificate" else "ClebschRigidityTrust.lean"
+    )
+    if gate.name != expected_gate:
+        fail(f"{where}.gate is not the {repository} Paper I gate")
+    if repository == "certificate":
+        trust_fact = json.loads(audit_path.read_text(encoding="utf-8"))
+        declarations = trust_fact.get("declarations")
+        if not isinstance(declarations, dict):
+            fail(f"{where}.audit has no sealed declarations")
+        audit = {
+            terminal: declaration.get("axioms")
+            for terminal, declaration in declarations.items()
+            if isinstance(declaration, dict)
+            and isinstance(declaration.get("axioms"), list)
+        }
+    else:
+        audit = {}
     terminals = value.get("terminals")
     if (
         not isinstance(terminals, list)
@@ -204,10 +238,18 @@ def validate_lean(
     if not isinstance(axioms, dict) or set(axioms) != set(terminals):
         fail(f"{where}.axioms keys must equal its terminals")
     for terminal in terminals:
-        if terminal not in audit:
-            fail(f"{where} terminal absent from axiom audit: {terminal}")
-        if axioms[terminal] != audit[terminal]:
-            fail(f"{where} axiom mismatch for {terminal}")
+        values = axioms[terminal]
+        if (
+            not isinstance(values, list)
+            or any(not isinstance(item, str) for item in values)
+            or not set(values) <= ALLOWED_AXIOMS
+        ):
+            fail(f"{where} has a nonstandard axiom for {terminal}")
+        if repository == "certificate":
+            if terminal not in audit:
+                fail(f"{where} terminal absent from sealed trust fact: {terminal}")
+            if values != audit[terminal]:
+                fail(f"{where} axiom mismatch for {terminal}")
     conditional_interfaces = value.get("conditional_interfaces", [])
     if not isinstance(conditional_interfaces, list) or any(
         not isinstance(item, str) or not item
@@ -219,12 +261,20 @@ def validate_lean(
     validation = value.get("validation")
     if not isinstance(validation, dict):
         fail(f"{where}.validation must be an object")
-    command = require_string(validation.get("command"), f"{where}.validation.command")
-    if command != (
-        "nix develop --command env LEAN_NUM_THREADS=1 lake build "
-        "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
+    method = require_string(validation.get("method"), f"{where}.validation.method")
+    if repository == "certificate":
+        if method != "sealed-certificate-through-paper-bridge":
+            fail(f"{where}.validation does not use the paper bridge")
+        command = require_string(validation.get("command"), f"{where}.validation.command")
+        if not command.startswith("nix run .#verify -- "):
+            fail(f"{where}.validation does not use the bridge verifier app")
+        if validation.get("certificate_build") is not False:
+            fail(f"{where}.validation permits a certificate build")
+    elif (
+        method != "guarded-finitegeom-receipt"
+        or validation.get("gate") != "RelativeConicArcs.Gates.ClebschRigidityTrust"
     ):
-        fail(f"{where}.validation.command does not run the Paper I gate")
+        fail(f"{where}.validation does not require the finitegeom receipt")
 
 
 def validate_computation(
@@ -434,8 +484,8 @@ def validate_checks(
                 repositories,
                 f"{item}.axiom_audit",
             )
-    if len(value) != 26:
-        fail(f"{where} must contain exactly twenty-six admitted checks")
+    if len(value) != 27:
+        fail(f"{where} must contain exactly twenty-seven admitted checks")
 
 
 def main() -> int:
@@ -452,7 +502,9 @@ def main() -> int:
         type=Path,
         default=paper_root / "clebsch_rigidity.tex",
     )
-    parser.add_argument("--lean-root", type=Path, required=True)
+    parser.add_argument("--certificate-root", type=Path, required=True)
+    parser.add_argument("--finitegeom-root", type=Path, required=True)
+    parser.add_argument("--bridge-root", type=Path, required=True)
     parser.add_argument(
         "--allow-stale-release-output",
         action="store_true",
@@ -461,7 +513,9 @@ def main() -> int:
     args = parser.parse_args()
     repositories = {
         "paper": paper_root.resolve(),
-        "lean": args.lean_root.resolve(),
+        "certificate": args.certificate_root.resolve(),
+        "finitegeom": args.finitegeom_root.resolve(),
+        "bridge": args.bridge_root.resolve(),
     }
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict) or manifest.get("schema") != SCHEMA:
@@ -481,11 +535,12 @@ def main() -> int:
     )
     validate_displayed_digest(
         manuscript_text,
-        repositories["lean"]
-        / "RelativeConicArcs"
-        / "Gates"
-        / "ClebschRigidityWithOrderElevenCertificates.lean",
-        "RelativeConicArcs/Gates/ClebschRigidityWithOrderElevenCertificates.lean",
+        repositories["bridge"]
+        / "TavisRuddFiniteGeom"
+        / "Papers"
+        / "ClebschRigidity"
+        / "CertificateCompatibility.lean",
+        "TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
     )
     validate_file(
         manifest.get("manuscript_pdf"),
@@ -524,6 +579,59 @@ def main() -> int:
         repositories,
         "manifest.statement_identity",
     )
+    companion_pin_path = validate_file(
+        manifest.get("formal_companion"),
+        repositories,
+        "manifest.formal_companion",
+    )
+    companion_pin = json.loads(companion_pin_path.read_text(encoding="utf-8"))
+    artifacts = companion_pin.get("artifacts")
+    if (
+        not isinstance(artifacts, list)
+        or {entry.get("role") for entry in artifacts if isinstance(entry, dict)}
+        != FORMAL_ROLES
+    ):
+        fail("manifest formal companion does not pin the three formal roles")
+    for artifact in artifacts:
+        if not isinstance(artifact, dict):
+            fail("manifest formal companion contains a malformed artifact")
+        role = artifact["role"]
+        if (
+            artifact.get("repository"),
+            artifact.get("gate"),
+            artifact.get("manifest"),
+        ) != EXPECTED_ARTIFACTS[role]:
+            fail(f"manifest formal companion has the wrong {role} contract")
+        if role == "paper-bridge" and artifact.get("depends_on") != [
+            "shared-library",
+            "certificate",
+        ]:
+            fail("manifest paper bridge has the wrong dependency boundary")
+    formal_verification = manifest.get("formal_verification")
+    expected_formal = {
+        "certificate_manifest": ("certificate", "MANIFEST.json"),
+        "certificate_trust_fact": ("certificate", "TRUST_FACT.json"),
+        "finitegeom_gate": (
+            "finitegeom",
+            "RelativeConicArcs/Gates/ClebschRigidityTrust.lean",
+        ),
+        "finitegeom_audit": ("finitegeom", "trust/ClebschRigidityAxiomAudit.lean"),
+        "bridge_manifest": ("bridge", "MANIFEST.json"),
+        "bridge_gate": (
+            "bridge",
+            "TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean",
+        ),
+    }
+    if not isinstance(formal_verification, dict) or set(formal_verification) != set(
+        expected_formal
+    ):
+        fail("manifest.formal_verification has the wrong artifact set")
+    for name, evidence in formal_verification.items():
+        if not isinstance(evidence, dict) or (
+            evidence.get("repository"), evidence.get("path")
+        ) != expected_formal[name]:
+            fail(f"manifest.formal_verification.{name} has the wrong location")
+        validate_file(evidence, repositories, f"manifest.formal_verification.{name}")
     identity_payload = json.loads(identity_path.read_text(encoding="utf-8"))
     if identity_payload.get("source_sha256") != digest(manuscript):
         fail("statement identity source hash mismatch")
@@ -560,30 +668,39 @@ def main() -> int:
     ]
     if not lean_components:
         fail("manifest contains no Lean evidence components")
-    gate_paths = {
-        repositories[require_string(lean["gate"].get("repository"), "lean.gate.repository")]
-        / require_string(lean["gate"].get("path"), "lean.gate.path")
-        for lean in lean_components
-    }
-    audit_paths = {
-        repositories[require_string(lean["audit"].get("repository"), "lean.audit.repository")]
-        / require_string(lean["audit"].get("path"), "lean.audit.path")
-        for lean in lean_components
-    }
-    if len(gate_paths) != 1 or len(audit_paths) != 1:
-        fail("all Paper I Lean components must use one aggregate gate and one audit")
+    finitegeom_components = [
+        lean for lean in lean_components if lean.get("repository") == "finitegeom"
+    ]
+    certificate_components = [
+        lean for lean in lean_components if lean.get("repository") == "certificate"
+    ]
+    if not finitegeom_components or not certificate_components:
+        fail("manifest must use both finitegeom and the sealed Q11 certificate")
     manifest_terminals = {
-        terminal
-        for lean in lean_components
-        for terminal in lean["terminals"]
+        terminal for lean in finitegeom_components for terminal in lean["terminals"]
     }
-    gate_terminals = parse_gate_terminals(next(iter(gate_paths)))
-    audit_terminals = set(parse_audit(next(iter(audit_paths))))
+    gate_terminals = parse_gate_terminals(
+        repositories["finitegeom"] / "RelativeConicArcs/Gates/ClebschRigidityTrust.lean"
+    )
+    audit_terminals = parse_gate_terminals(
+        repositories["finitegeom"] / "trust/ClebschRigidityAxiomAudit.lean"
+    )
     require_exact_terminal_coverage(
         manifest_terminals,
         gate_terminals,
         audit_terminals,
     )
+    certificate_fact = json.loads(
+        (repositories["certificate"] / "TRUST_FACT.json").read_text(encoding="utf-8")
+    )
+    certificate_declarations = certificate_fact.get("declarations")
+    if not isinstance(certificate_declarations, dict):
+        fail("certificate trust fact has no declarations")
+    certificate_terminals = {
+        terminal for lean in certificate_components for terminal in lean["terminals"]
+    }
+    if not certificate_terminals or not certificate_terminals <= set(certificate_declarations):
+        fail("manifest certificate terminals are not sealed by the Q11 trust fact")
     environment = manifest.get("reproducibility_environment")
     if not isinstance(environment, dict):
         fail("manifest.reproducibility_environment must be an object")
@@ -593,7 +710,7 @@ def main() -> int:
     if not isinstance(verify_all, dict):
         fail("manifest.verify_all must be an object")
     command = require_string(verify_all.get("command"), "manifest.verify_all.command")
-    if "verification/verify_release.py" not in command or "nix develop" not in command:
+    if "nix run .#verify --" not in command or "--certificate-root" not in command:
         fail("manifest.verify_all.command is not the clean release entry point")
     validate_file(verify_all.get("entry_point"), repositories, "manifest.verify_all.entry_point")
     release_output_path = validate_file(
@@ -618,6 +735,7 @@ def main() -> int:
         "companion_manuscript_sha256": companion_surface["manuscript"]["sha256"],
         "companion_pdf_sha256": companion_surface["pdf"]["sha256"],
         "companion_trust_sha256": companion_surface["trust_ledger"]["sha256"],
+        "formal_companion_sha256": manifest["formal_companion"]["sha256"],
         "manuscript_pdf_sha256": manifest["manuscript_pdf"]["sha256"],
         "manuscript_sha256": manifest["manuscript_sha256"],
         "release_surface_sha256": release_surface_sha256(manifest),
@@ -653,23 +771,9 @@ def main() -> int:
                         f"manifest claim row {claim['row']} checker command is "
                         f"absent from verify_all.checks: {command}"
                     )
-    lean_repository = manifest.get("lean_repository")
-    if not isinstance(lean_repository, dict):
-        fail("manifest.lean_repository must be an object")
-    distribution = require_string(
-        lean_repository.get("distribution"),
-        "manifest.lean_repository.distribution",
-    )
-    if distribution != "separate shared Git repository":
-        fail("manifest.lean_repository.distribution must identify a separate repository")
-    url = require_string(lean_repository.get("url"), "manifest.lean_repository.url")
-    if url != LEAN_REPOSITORY_URL:
-        fail(f"manifest.lean_repository.url must be {LEAN_REPOSITORY_URL}")
-    path = require_string(lean_repository.get("path"), "manifest.lean_repository.path")
-    if path != ".":
-        fail("manifest.lean_repository.path must be relative to the checkout root")
-    require_string(lean_repository.get("commit"), "manifest.lean_repository.commit")
-    print("Clebsch rigidity trust manifest: valid (19 claims, 26 checks)")
+    if "lean_repository" in manifest:
+        fail("manifest must not duplicate FORMAL_COMPANION repository pins")
+    print("Clebsch rigidity trust manifest: valid (19 claims, 27 checks)")
     return 0
 
 
