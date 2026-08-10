@@ -469,7 +469,17 @@ hyperplane conic above a direction \(t\), the arrangement divisor restricts
 as twice the lifted repeated-node divisor plus the unmatched divisor, and
 \(\sigma_t\) is \(\eta/2\) times the trace of \(z^2\) on that repeated
 divisor.  Thus the final resultant is a norm of divisor traces in one pencil
-of conics.
+of conics.  More sharply, summing the conic value over all endpoint-line
+intersections produces a fixed polynomial \(L(T)\) of degree at most two.
+If \(\Upsilon_3\) interpolates the trace on the unmatched residual divisor
+over the triple-direction support, then
+\[
+ \Sigma_3\equiv(L-\Upsilon_3)/2\pmod {K_P}.
+\]
+Hence both the zero detector and the odd-multiplicity sign resultant reduce
+to the complementary-divisor resultant of \(L-\Upsilon_3\).  The live
+nonsaturated gate is now to control this unmatched-divisor trace from the
+incidence of the lifted endpoint conics on the quadric pencil.
 
 ### \(q=53\): type-uniform critical core
 
@@ -607,8 +617,10 @@ over every finite field.  Authorities:
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
    node module.  Evaluate its degree-\(\delta-r\) endpoint-pair resultant
-   \(\operatorname{Res}(J_P,\Sigma_3)\) using the star Gram relations and
-   the lifted endpoint conics on \(\mathscr X_\eta\), then
+   \(\operatorname{Res}(J_P,\Sigma_3)\) by controlling the unmatched-divisor
+   trace \(\Upsilon_3\) in
+   \(\Sigma_3=(L-\Upsilon_3)/2\) using the lifted endpoint conics on
+   \(\mathscr X_\eta\), then
    compare it with the constant conic square class.
 
 ## Stop rules

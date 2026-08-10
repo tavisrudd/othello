@@ -374,6 +374,61 @@ conics \(C_t\).  A successful all-center law can now be sought as a trace or
 residue identity on that pencil; (23e) supplies the multiplicity divisor it
 must use.
 
+The first such trace identity is exact and global.  The \(i\)-th arrangement
+line meets the affine direction line at
+\[
+ a_i(t)=y_i-tx_i.
+\]
+Let \(I_t\) be the endpoints unmatched by the direction-\(t\) chord
+matching, and put
+\[
+ L(T)=\sum_{i=1}^nQ_{\rm du}(T,y_i-Tx_i),
+ \qquad
+ \nu_t=\sum_{i\in I_t}Q_{\rm du}(t,a_i(t)).             \tag{23g}
+\]
+Because \(Q_{\rm du}\) is quadratic and each \(a_i(T)\) is linear,
+\(L(T)\) has degree at most two.  Every matched pair contributes the same
+node value twice, while every unmatched endpoint contributes once.  Hence
+\[
+ \boxed{L(t)=2\sigma_t+\nu_t.}                          \tag{23h}
+\]
+On \(\mathscr X_\eta\), this is exactly the trace of \(z^2\) in the divisor
+identity (23e):
+\[
+ \operatorname{Tr}_{\widetilde U_t/\mathbb F_q}(z^2)
+ =\frac2\eta\nu_t,
+ \qquad
+ \operatorname{Tr}_{(\sum_iD_i)|C_t/\mathbb F_q}(z^2)
+ =\frac2\eta L(t).
+\]
+
+Let \(\Upsilon_3\) be the degree-less-than-\(s\) interpolation polynomial for
+\(t\mapsto\nu_t\) on the roots of \(K_P\).  Reduction of (23h) gives
+\[
+ \boxed{
+ \Sigma_3\equiv\frac{L-\Upsilon_3}{2}\pmod {K_P}.}     \tag{23i}
+\]
+Consequently the two remaining gates admit the exact complementary-divisor
+formulas
+\[
+ \operatorname N_{C_3/\mathbb F_q}(\Sigma_3)
+ =2^{-s}\operatorname{Res}_T(K_P,L-\Upsilon_3),          \tag{23j}
+\]
+and, whenever this norm is nonzero,
+\[
+ \chi\!\left(\operatorname{Res}_T(K_{\rm odd},\Sigma_3)\right)
+ =\chi(2)^{-\deg K_{\rm odd}}
+  \chi\!\left(\operatorname{Res}_T
+       (K_{\rm odd},L-\Upsilon_3)\right).               \tag{23k}
+\]
+Thus the zero norm and parity resultant are norms of a degree-two endpoint
+trace minus the trace on the unmatched divisor.  A fibre of multiplicity
+\(\mu_t\) leaves only \(n-2\mu_t\) unmatched endpoints, so this
+complementary trace carrier becomes smaller precisely where \(J_P\) has
+higher multiplicity.  The next nonsaturated lemma is to control \(\Upsilon_3\)
+from the moving residual divisors \(\widetilde U_t\) on the same quadric
+pencil.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level
