@@ -92,11 +92,17 @@ def flake(bridge: dict) -> str:
               certificate_pack="$(realpath "$1")"
               test -f "$certificate_pack"
               export LEAN_NUM_THREADS=1
+              local_sources=0
               if test "$#" -eq 3; then
                 finitegeom_source="$(realpath "$2")"
                 certificate_source="$(realpath "$3")"
                 test -d "$finitegeom_source/.git"
                 test -d "$certificate_source/.git"
+                test "$(git -C "$finitegeom_source" rev-parse HEAD)" = '{bridge["finitegeom_commit"]}'
+                test -z "$(git -C "$finitegeom_source" status --short --untracked-files=no)"
+                test "$(git -C "$certificate_source" rev-parse HEAD)" = '{bridge["certificate_commit"]}'
+                test -z "$(git -C "$certificate_source" status --short --untracked-files=no)"
+                local_sources=1
                 export GIT_CONFIG_COUNT=2
                 export GIT_CONFIG_KEY_0="url.file://$finitegeom_source/.insteadOf"
                 export GIT_CONFIG_VALUE_0="https://github.com/tavisrudd/finitegeom"
@@ -104,7 +110,12 @@ def flake(bridge: dict) -> str:
                 export GIT_CONFIG_VALUE_1="https://github.com/tavisrudd/{package}"
               fi
               lake update
+              finitegeom_root=".lake/packages/finitegeom"
               certificate_root=".lake/packages/{package}"
+              if test "$local_sources" -eq 1; then
+                rm -rf "$finitegeom_root"
+                ln -s "$finitegeom_source" "$finitegeom_root"
+              fi
               test -d "$certificate_root"
               (cd "$certificate_root" && lake unpack "$certificate_pack")
               printf '%s  %s\n' \
@@ -115,7 +126,11 @@ def flake(bridge: dict) -> str:
                 '{bridge["certificate_trace_sha256"]}' \
                 "$certificate_root/.lake/build/lib/lean/{gate_path}.trace" \
                 | sha256sum --check --status
-              (cd .lake/packages/finitegeom && lake build {bridge["finitegeom_import"]})
+              if test "$local_sources" -eq 1; then
+                (cd "$finitegeom_root" && lake build --no-build {bridge["finitegeom_import"]})
+              else
+                (cd "$finitegeom_root" && lake build {bridge["finitegeom_import"]})
+              fi
               lake env lean {module_path}
             '';
           }};

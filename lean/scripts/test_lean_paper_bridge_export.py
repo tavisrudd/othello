@@ -59,19 +59,28 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("GIT_CONFIG_COUNT=2", text)
         self.assertIn("finitegeom_source", text)
         self.assertIn("certificate_source", text)
+        self.assertIn('ln -s "$finitegeom_source" "$finitegeom_root"', text)
+        self.assertIn(
+            '(cd "$finitegeom_root" && lake build --no-build Human.Model)', text
+        )
 
     def test_verifier_never_builds_a_certificate_target(self) -> None:
         text = MODULE.flake(self.bridge())
         self.assertIn('(cd "$certificate_root" && lake unpack "$certificate_pack")', text)
         self.assertEqual(text.count("sha256sum --check --status"), 2)
-        self.assertIn("(cd .lake/packages/finitegeom && lake build Human.Model)", text)
+        self.assertIn('(cd "$finitegeom_root" && lake build Human.Model)', text)
         self.assertIn(
             "lake env lean TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean",
             text,
         )
-        self.assertNotIn("lake build --no-build", text)
+        self.assertNotIn(
+            "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample", text
+        )
         certificate_block = text[
-            text.index('certificate_root="'):text.index("(cd .lake/packages/finitegeom")
+            text.index('certificate_root="'):text.index(
+                'if test "$local_sources" -eq 1; then\n'
+                '                (cd "$finitegeom_root"'
+            )
         ]
         self.assertNotIn("lake build", certificate_block)
         self.assertIn("export LEAN_NUM_THREADS=1", text)
