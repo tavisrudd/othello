@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-09
 **Lane:** `clebsch`
-**Status:** pre-draft review packet; no manuscript claim yet
+**Status:** revised after three sealed early reviews; Paper-II kill gate open
 **Working title:** *The Golden Reconstruction Theorem*
 **Working root:** `papers/clebsch-round-trip/`
 
@@ -19,26 +19,38 @@ orientation involutions.
 the full q11 code, the full matching quotient, or the global arithmetic cover.
 Paper IV remains the logically independent lower branch of the series map.
 
-## Objects and equivalences to freeze
+## Concrete data types to freeze
 
-The common target should be a small marked groupoid, not an equality of three
-unrelated coordinate polynomials.  An object is
+Do not place the input and the reconstructed output in one omnibus groupoid.
+Use two concrete presentations and prove their equivalence.
 
-\[
- (X,[C],Z,\epsilon),
-\]
+1. An **admissible oriented cubic shadow** is a five-dimensional rational
+   vector space with an actual cubic generator (Z), not a pre-supplied frame
+   or conference operator.  Admissibility says that its singular scheme is
+   exactly six reduced ordinary nodes in projective-frame position and that,
+   after the intrinsic normalization lemma, its nonzero triangle
+   coefficients admit an edge lift whose triangle and Pfaffian shadows are
+   proportional.  The six-set (X(Z)) and the conference operator are outputs.
+   Relabelling acts through the recovered frame; orientation reversal negates
+   the generator.
+2. An **oriented golden conference package** is a symmetric zero-diagonal
+   sign matrix (C) on six labelled axes with (C^2=5I), modulo diagonal
+   switching, together with the choice between ([C]) and ([-C]).  Relabelling
+   and switching are equivalences; orientation reversal is the separate
+   involution (C\mapsto-C).
 
-where (X) is a six-element projective frame, ([C]) is a switching class of
-symmetric zero-diagonal sign operators on (X), (C^2=5I), (Z) is the
-triangle-holonomy cubic with its chosen generator, and (epsilon) records the
-outer orientation.  Morphisms are coordinated relabellings and switchings.
-Orientation reversal sends ((C,Z,epsilon)) to
-((-C,-Z,-epsilon)); forgetting (epsilon) retains the embedded quadratic
-algebra (mathbf Q[C]=mathbf Q[-C]).
+The forward map sends (C) to its triangle products.  The inverse recovers the
+node frame, normalizes the coefficient presentation, and reconstructs the
+switching class from those products.  C809's translation-invariance theorem
+then turns the triangle/Pfaffian comparison into (C^2=\lambda I); the sign
+locus fixes (\lambda=5).  Thus the conference identity is a conclusion rather
+than part of cubic admissibility.  A separate normalization lemma is
+load-bearing because the nodes alone do not choose affine coordinates or
+scale.
 
-This definition still needs a referee-level check that (C\mapsto-C) is best
-treated as an involution of objects rather than a morphism in the oriented
-groupoid.
+For the spectral output, distinguish the unpointed algebra
+(\mathbf Q[C]=\mathbf Q[-C]) from the pointed embedding
+(t\mapsto(I+C)/2), which changes under orientation reversal.
 
 ## Proposed principal theorem
 
@@ -55,10 +67,15 @@ Each of the first three papers supplies a functor into the common groupoid.
    (H_3) sheet pair and its first nonzero signed tensor (mu_3), with the
    outer coset negating (mu_3).  The missing theorem is a commuting
    transport from the oriented (H_3) matching-sheet package to the
-   six-axis triangle-holonomy package.  It must construct the six axes from
-   the recovered (A_5)-stabilizer, identify the two outer characters, and
-   prove that sheet exchange maps to cubic orientation reversal.  An abstract
-   bijection of two-element torsors after choosing basepoints is insufficient.
+   six-axis triangle-holonomy package.  For a marked base matching, its six
+   pairs form the natural degree-six (A_5)-set.  Their augmentation is the
+   unique five-dimensional constituent of the restricted Paper-II output.
+   The bridge must construct the equivariant intertwiner and compare the
+   pulled-back cubic coefficient by coefficient.  This comparison is
+   essential: invariant cubics on the five-dimensional (A_5)-module form a
+   two-dimensional space.  It must also prove that sheet exchange maps to
+   cubic orientation reversal.  An abstract bijection of two-element torsors
+   after choosing basepoints is insufficient.
 3. **Paper III.**  Its stable proposition `thm:orientation-source` supplies
    ([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}) relative to a marked bridge
    datum.  The normalized chart lift and the cross-identification of the
@@ -72,9 +89,10 @@ independence from switchings and equivariance under relabelling.
 
 ### B. Reconstruction from the cubic
 
-Starting from a common target cubic (Z):
+Starting from an oriented six-axis cubic (Z):
 
-1. its six ordinary singular points recover the projective six-axis frame;
+1. its six ordinary singular points recover the projective six-axis frame,
+   and the normalization lemma recovers the coefficient presentation;
 2. the four-point two-graph identities recover the switching class of (C)
    from the triangle coefficients;
 3. the pair-balance identities give (C^2=5I), while the independent
@@ -115,17 +133,21 @@ enough to recover only the labels that were supplied as marking inputs.
 The current corpus proves the Paper-I reconstruction and the common
 six-axis inverse.  Paper III returns its marked conference source but not the
 chart lift or global cover.  Paper II's (F_{\mathrm{II}}), and therefore
-both of its composites, are the earliest open proof obligations.
+both of its composites, are the earliest open proof obligations.  Its retained
+output must be named explicitly: either the full signed tensor package, if an
+inverse is proved, or only the marked five-dimensional golden residue.
 
 ## Proof spine under review
 
-1. Define the common marked groupoid and all three involutions.
+1. Define the two concrete data types, their equivalences, and orientation
+   involutions.
 2. Give the Paper-I transport as the model case, including its inverse.
 3. Construct and prove the Paper-II matching-sheet transport.
 4. State the Paper-III relative transport and its noncanonical inputs.
 5. Prove the three transports agree on one normalized representative and
-   descend equivariantly to the groupoid.
-6. Recover the six-axis frame from the nodal cubic.
+   are equivariant under switching, relabelling, and every stabilizer.
+6. Recover the six-axis frame and coefficient normalization from the nodal
+   cubic.
 7. Recover ([C]), prove (C^2=5I), and identify (mathbf Q[C]).
 8. Verify every forward/inverse composite at the exact output level.
 9. State the norm/Pfaffian and conductor-two consequences with their integral
@@ -142,13 +164,13 @@ Target length: 12--18 pages, with the theorem on page 2.
 
 | pages | section | job |
 |---:|---|---|
-| 1--2 | Introduction and principal theorem | state the lossless common-output theorem, markings, honest Paper-IV boundary, and one causal paragraph |
-| 2--3 | The six-axis model case | display one conference matrix, triangle cubic, orientation involution, and the groupoid conventions |
-| 3--6 | Three marked transports | Paper I in miniature; expand the new Paper-II commuting diagram; state Paper III relative to its bridge datum |
-| 6--10 | Reconstruction | nodes recover axes; triangle holonomy recovers switching; balance and shadow recognition recover (C^2=5I); spectral algebra follows |
-| 10--12 | The commuting round trips | print each returned output and prove both composites; separate marking inputs from reconstructed data |
-| 12--14 | Norm, conductor, and boundaries | determinant-line norm and conductor-two corollaries; no integral lattice identification without a map |
-| 14--16 | Related work, verification, conclusion | claim-specific precedence; concise evidence map; end with the common shadow being lossless |
+| 1--2 | Introduction, object table, theorem | define every retained output and marking; state the exact theorem and honest Paper-IV boundary |
+| 2--3 | Common model and scope | display one conference matrix and cubic; separate input/output data types and involutions |
+| 3--7 | Marked transports | import Papers I and III briefly; give Paper II and its exact intertwiner most of the space |
+| 7--10 | One common inverse | nodes recover normalized axes; holonomy recovers switching; conference and spectral recognition follow |
+| 10--13 | Exact round trips | print a source/output table and prove both composites at the retained-output level |
+| 13--14 | Corollaries and boundaries | norm/Pfaffian mechanism; rational versus integral boundary; Paper IV remains separate |
+| 14--16 | Precedence, verification, conclusion | claim-specific audit; concise evidence map; qualify “lossless” by its exact object |
 
 The series diagram belongs after the principal theorem, not on the title page.
 A second proof-spine diagram may be justified only if it shows the two
