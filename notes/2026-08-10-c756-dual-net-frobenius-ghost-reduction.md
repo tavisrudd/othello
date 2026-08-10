@@ -854,8 +854,10 @@ which the power tower is *forced by row count* to leave a kernel are
  \boxed{q=25,\quad q=27,\quad q=81.}                    \tag{78}
 \]
 This does not assert full rank outside those fields: it says that every
-additional kernel there lies on a proper determinantal rank stratum of
-\(\mathbb M_R\).  Conversely, at the three seams in (78), the nonlinear
+additional kernel there lies on the determinantal rank-drop locus of
+\(\mathbb M_R\).  Proving that this locus is proper on the completely split
+factor locus is part of the remaining theorem.  Conversely, at the three
+seams in (78), the nonlinear
 non-shadow test is logically unavoidable regardless of \(R\).
 
 Unlike the power rungs, a non-shadow rung does **not** in general descend to the ghost
