@@ -104,6 +104,10 @@ Authorities:
 - No conic-filling \(14\)-arc exists over any finite field.
 - A saturated-internal coherent support is a dual 3-net of order
   \((q+3)/2\); over prime fields this leaves only the \(q=5\) four-frame.
+- Over every odd prime power, the two affine net components have the
+  complementary-factor form
+  \((x,\pm S(x))\) on the nonroots of \(S\), where
+  \(RS=X^q-X\), \(\deg R=(q+3)/2\), and \(\deg S=(q-3)/2\).
 
 ## Current branch map
 
@@ -142,6 +146,24 @@ splitting and the two-line subgroup classification leave only \(q=5\).
 For proper prime powers the net order exceeds the characteristic.  The live
 gate is the same conic conclusion using the extra Frobenius exchange and
 quadratic-character direction component.
+
+The extension seam is now algebraic.  If \(H_2\) is the degree-\(<\deg R\)
+remainder of \(S^2\) modulo \(R\), conic containment is exactly
+\(\deg H_2\le2\), equivalently the vanishing of the coefficient band
+\[
+ [X^j]S^3=0\qquad((q+3)/2\le j\le q-1).
+\]
+Writing the proper Laurent part of \(S^3/(X^q-X)\) as
+\(\sum c_rX^{-r}\), the third odd divided coefficient forces
+\(r(r+1)c_r=0\) through the whole required range.  Only
+\(r\equiv0,-1\pmod p\) can survive.  Every higher odd coefficient supplies
+the corresponding Lucas/Hasse constraint for the remainder of
+\(S^{2j}\) modulo \(R\).  These ghost spaces are affine-stable, so coordinate
+translation is not an additional equation.  Multiplying back the root
+divisor of \(S\) packages the entire hierarchy as a full-field norm
+identity: the two completely split degree-\(q\) products
+\(\prod_{x\in\mathbb F_q}(U+Vx\pm WS(x))\) differ by
+\(\gamma WQ_D(V,W)C_S(U,V)\), whose \(U\)-degree is only \((q-3)/2\).
 
 Exact necessary structure already available:
 
@@ -368,9 +390,10 @@ over every finite field.  Authorities:
 1. Do not open a \(k=15\) census.  Treat q=67,71,73 only as theorem-design
    data for the all-\(q\) branches.
 2. For saturated-internal configurations, prove the special-direction conic
-   lemma for the coherent dual 3-net over proper extension fields.  Start
-   from the two Redei polynomials and isolate the Newton coefficients lost at
-   indices divisible by the characteristic.
+   lemma over proper extension fields by coupling the Laurent ghost supports
+   of \(H_{2j}\equiv H_2^j\pmod R\).  Start with \(H_4\) and the fourth Hasse
+   derivative, or classify the equivalent completely split lacunary norm
+   pair; do not retry translations of the affine coordinate.
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem \(h\ge1\) for arbitrary defect, retaining both direction and
    intercept on the Frobenius-fixed incidence space.
@@ -436,7 +459,8 @@ Do not:
   closed over every finite field.
 - Saturated-internal: coherent supports are dual 3-nets; all prime fields
   \(q>5\) are excluded structurally.  Proper extension fields remain at the
-  special-direction conic lemma.
+  special-direction conic lemma, now reduced to the affine-stable
+  \(r\equiv0,-1\pmod p\) Laurent ghosts and their higher-power coupling.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
@@ -465,6 +489,8 @@ Do not:
   `notes/2026-08-10-c756-q73-and-global-k14-closure.md`.
 - Coherent dual-3-net reduction and prime-field theorem:
   `notes/2026-08-10-c756-coherent-dual-three-net.md`.
+- Extension-field complementary-factor and Frobenius-ghost reduction:
+  `notes/2026-08-10-c756-dual-net-frobenius-ghost-reduction.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
