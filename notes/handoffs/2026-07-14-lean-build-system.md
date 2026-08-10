@@ -250,6 +250,11 @@ Lean source, package, mirror, or remote changed.  Full report:
    exporter-produced standalone commit `1e3cce4`; its final verifier is green, and
    `clebsch_rigidity.pdf` has SHA-256
    `85d6fa17475a6771027904c329bd5c10f04e5ed19553c7931d25810d27772a4f`.
+   The standalone projective-cap Q11 certificate is sealed at package commit `54fb4f83`;
+   guarded run `run-20260810-171214-7ce5ea23` built its final aggregate in 47m30s at
+   5.43 GB peak, and its Lake pack has SHA-256
+   `24860c9e950cca12ff17b4875257bbe8b56860c6ac2353c9ef8ee3eebfd7ff32`.
+   Its legacy monorepo family remains pending until the downstream bridge and source removal land.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
