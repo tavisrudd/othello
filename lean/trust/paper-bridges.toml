@@ -6,6 +6,8 @@ schema_version = 1
 
 [[bridge]]
 name = "clebsch-rigidity"
+repository = "finitegeom-clebsch-rigidity-bridge"
+lean_library = "ClebschRigidityBridge"
 source = "paper-bridges/clebsch-rigidity/TavisRuddFiniteGeom/Papers/ClebschRigidity/CertificateCompatibility.lean"
 module = "TavisRuddFiniteGeom.Papers.ClebschRigidity.CertificateCompatibility"
 finitegeom_commit = "b871c10b4a91200a0913644d39b9f0ce44f655ca"
@@ -14,12 +16,15 @@ certificate_package = "finitegeom-clebsch-q11-certificates"
 certificate_commit = "0d964975ceef7ff0ac36216ecd0e10b4b7f2a184"
 certificate_import = "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits"
 certificate_terminal = "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition"
+certificate_gate = "TavisRuddFiniteGeom.Certificates.Q11"
 cache_sha256 = "5c4dd11fc2790352815eee434a160aa562082ba5a4f5a6184b3fd39b6f7c3884"
 cache_archive = "q11-0d964975ceef7ff0.lake-pack.tar.gz"
 forbid_source_fallback = true
 
 [[bridge]]
 name = "arcs-complete-outside-conic"
+repository = "finitegeom-arcs-complete-outside-conic-bridge"
+lean_library = "ArcsCompleteOutsideConicBridge"
 source = "paper-bridges/arcs-complete-outside-conic/TavisRuddFiniteGeom/Papers/ArcsCompleteOutsideConic/CertificateCompatibility.lean"
 module = "TavisRuddFiniteGeom.Papers.ArcsCompleteOutsideConic.CertificateCompatibility"
 finitegeom_commit = "b871c10b4a91200a0913644d39b9f0ce44f655ca"
@@ -28,6 +33,7 @@ certificate_package = "finitegeom-q16-certificates"
 certificate_commit = "f8b39a43f48ce661d4fadcda040cb43330fed547"
 certificate_import = "TavisRuddFiniteGeom.Certificates.Q16.Certificate"
 certificate_terminal = "TavisRuddFiniteGeom.Certificates.Q16.exhaustive_local_certificate"
+certificate_gate = "TavisRuddFiniteGeom.Certificates.Q16"
 cache_sha256 = "f0e83f959b224f228a5eb55551b7436c293318904d4146e21c186b47ff059228"
 cache_archive = "q16-f8b39a43f48ce661.lake-pack.tar.gz"
 forbid_source_fallback = true
