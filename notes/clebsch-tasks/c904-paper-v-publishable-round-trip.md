@@ -94,4 +94,3 @@ ready.
 - the current Papers I--III statements and stable markings;
 - the Paper-I--IV reviewer-dossier protocol, copied structurally but never
   mixed into normal drafting context.
-
