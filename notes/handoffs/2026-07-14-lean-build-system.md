@@ -246,6 +246,10 @@ Lean source, package, mirror, or remote changed.  Full report:
    finitegeom reverse edges from the projective-cap Q11, Q13, and Q25 certificate packages using
    package-local statement models plus proved downstream adapters; do not touch those source trees
    until their tracked `.gitignore` modifications are owned or cleared.
+   Paper I is current on the separated three-repository boundary at monorepo commit `0b322c1d` and
+   exporter-produced standalone commit `1e3cce4`; its final verifier is green, and
+   `clebsch_rigidity.pdf` has SHA-256
+   `85d6fa17475a6771027904c329bd5c10f04e5ed19553c7931d25810d27772a4f`.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
