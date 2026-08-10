@@ -52,11 +52,22 @@ def audit_bridge(
 ) -> list[str]:
     name = bridge["name"]
     problems: list[str] = []
+    status = bridge.get("status", "active")
+    if status not in {"active", "authority-pending-export"}:
+        problems.append(f"{name}: unsupported bridge status {status!r}")
+    pending_export = status == "authority-pending-export"
+    if pending_export and any(
+        field in bridge for field in ("bridge_commit", "export_source_commit")
+    ):
+        problems.append(
+            f"{name}: pending export must not claim bridge or export commits"
+        )
     source = source_root / bridge["source"]
     finitegeom = libraries_root / "finitegeom"
     certificate = libraries_root / bridge["certificate_package"]
     if not source.is_file():
         return [f"{name}: bridge source is missing at {bridge['source']}"]
+    source_text = source.read_text(encoding="utf-8")
     expected_imports = [bridge["finitegeom_import"], bridge["certificate_import"]]
     actual_imports = imports(source)
     if actual_imports != expected_imports:
@@ -64,8 +75,24 @@ def audit_bridge(
             f"{name}: imports are {actual_imports}, expected {expected_imports}"
         )
     namespace_line = f"namespace {bridge['module']}"
-    if namespace_line not in source.read_text(encoding="utf-8").splitlines():
+    if namespace_line not in source_text.splitlines():
         problems.append(f"{name}: missing exact namespace {bridge['module']}")
+    compatibility = bridge.get("compatibility_declarations", [])
+    transport_at = source_text.find("structure TransportWitness")
+    for declaration in compatibility:
+        declaration_at = source_text.find(f"theorem {declaration}")
+        if declaration_at < 0:
+            problems.append(f"{name}: missing compatibility theorem {declaration}")
+        elif transport_at < 0 or declaration_at > transport_at:
+            problems.append(
+                f"{name}: compatibility theorem {declaration} is not before transport"
+            )
+    for declaration in bridge.get("published_declarations", []):
+        if f"theorem {declaration}" not in source_text:
+            problems.append(f"{name}: missing published theorem {declaration}")
+    for token in bridge.get("forbidden_source_tokens", []):
+        if token in source_text:
+            problems.append(f"{name}: forbidden source token {token!r}")
     for label, root, expected in (
         ("finitegeom", finitegeom, bridge["finitegeom_commit"]),
         ("certificate", certificate, bridge["certificate_commit"]),
@@ -91,9 +118,9 @@ def audit_bridge(
                 f"{name}: finitegeom directly depends on certificate package {sorted(found)}"
             )
     bridge_root = libraries_root / bridge["repository"]
-    if not bridge_root.is_dir():
+    if not pending_export and not bridge_root.is_dir():
         problems.append(f"{name}: bridge checkout is missing at {bridge_root}")
-    else:
+    elif not pending_export:
         try:
             actual = git_output(bridge_root, "rev-parse", "HEAD")
             dirty = git_output(bridge_root, "status", "--short")

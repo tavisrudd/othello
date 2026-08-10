@@ -161,11 +161,21 @@ def readme(bridge: dict) -> str:
             "This Lean package identifies the order-eleven certificate coordinates with "
             "the witness and projective-point tables used in the Clebsch rigidity formalization."
         )
-    else:
+    elif bridge["name"] == "arcs-complete-outside-conic":
         scope = (
             "This Lean package identifies the order-sixteen certificate field and canonical "
             "projective representatives with the geometric model used for arcs outside a conic."
         )
+    elif bridge["name"] == "projective-cap-q11":
+        scope = (
+            "This Lean package identifies the order-eleven certificate's residual-grid model "
+            "with the projective-cap game and transports the certified local outcome to every "
+            "rank-three projective model."
+        )
+    elif bridge["name"] == "sample-paper":
+        scope = "This Lean package checks the sample certificate compatibility theorem."
+    else:
+        raise ValueError(f"no reviewer-facing scope for paper bridge {bridge['name']}")
     return f'''# {bridge["repository"]}
 
 {scope}
@@ -223,6 +233,7 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
         "sources": [
             {
                 "path": module_path,
+                "module": bridge["module"],
                 "bytes": len(source),
                 "sha256": sha256(source),
             },

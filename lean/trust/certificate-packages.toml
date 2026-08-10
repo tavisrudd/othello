@@ -55,7 +55,9 @@ trust_fact_sha256 = "634e26974fc6a1882b6dbf35e8976849884270ec2acc88953694a7f94bd
 owned_module_prefixes = [
   "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
 ]
-allowed_import_path_prefixes = []
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/projective-cap-q11/",
+]
 forbidden_artifact_basenames = []
 
 # Generated families still resident in the monorepo, each named with the official package

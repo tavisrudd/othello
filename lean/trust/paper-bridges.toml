@@ -47,3 +47,40 @@ certificate_trace_sha256 = "c7e71581d2edafb21629e272333b5603cfcfeb7713b40b2e7670
 cache_sha256 = "f0e83f959b224f228a5eb55551b7436c293318904d4146e21c186b47ff059228"
 cache_archive = "q16-f8b39a43f48ce661.lake-pack.tar.gz"
 forbid_source_fallback = true
+
+[[bridge]]
+name = "projective-cap-q11"
+status = "authority-pending-export"
+repository = "finitegeom-projective-cap-q11-bridge"
+lean_library = "ProjectiveCapQ11Bridge"
+source = "paper-bridges/projective-cap-q11/TavisRuddFiniteGeom/Papers/ProjectiveCapQ11.lean"
+license_source = "papers/arcs_complete_outside_conic/LICENSE"
+module = "TavisRuddFiniteGeom.Papers.ProjectiveCapQ11"
+finitegeom_commit = "b871c10b4a91200a0913644d39b9f0ce44f655ca"
+finitegeom_import = "ProjectiveCap.PlaneOutcome"
+certificate_package = "finitegeom-projective-cap-q11-certificates"
+certificate_commit = "54fb4f8323a2fa492a02ee1e6216e2b9083930c1"
+certificate_import = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
+certificate_terminal = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.classForThird_valid"
+certificate_gate = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
+certificate_olean_sha256 = "db1caecd2faa1e783caa9f9375a79811718a099d27a01eb288d5d207c223637f"
+certificate_trace_sha256 = "eabf915d823a13b9e0ccc71936e7ef901267ccaed2ae42b5bbc927570076270f"
+cache_sha256 = "24860c9e950cca12ff17b4875257bbe8b56860c6ac2353c9ef8ee3eebfd7ff32"
+cache_archive = "projective-q11-0807e7927cb6bc37.lake-pack.tar.gz"
+forbid_source_fallback = true
+compatibility_declarations = [
+  "gridPoint_type_compatibility",
+  "collinear_compatibility",
+  "gridCap_compatibility",
+  "move_compatibility",
+  "replyBook_validFor_compatibility",
+]
+published_declarations = [
+  "oddEscapeGameStatement",
+  "initialPStatement_finrank",
+]
+forbidden_source_tokens = [
+  "namespace ProjectiveCap.Certificate.CertData",
+  "ProjectiveCap.CertData.Q11",
+  "RelativeConicArcs",
+]

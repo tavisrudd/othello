@@ -6,6 +6,7 @@ from __future__ import annotations
 import importlib.util
 import subprocess
 import tempfile
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -100,7 +101,28 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertEqual(files["LICENSE"], b"license\n")
         self.assertEqual(files["flake.lock"], b"source\n")
         self.assertIn(b'"path": "LICENSE"', files["MANIFEST.json"])
+        self.assertIn(
+            b'"module": "TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility"',
+            files["MANIFEST.json"],
+        )
         self.assertEqual(files[".gitignore"], b"/.lake/\n/lake-manifest.json\n")
+
+    def test_unknown_bridge_cannot_receive_generic_reviewer_prose(self) -> None:
+        bridge = self.bridge()
+        bridge["name"] = "unknown"
+        with self.assertRaisesRegex(ValueError, "no reviewer-facing scope"):
+            MODULE.readme(bridge)
+
+    def test_projective_q11_export_uses_only_the_sealed_pack(self) -> None:
+        with (MODULE.REPO / MODULE.CONFIG_PATH).open("rb") as handle:
+            bridge = MODULE.select_bridge(tomllib.load(handle), "projective-cap-q11")
+        text = MODULE.flake(bridge)
+        self.assertIn("nix run .#verify", MODULE.readme(bridge))
+        self.assertIn(bridge["cache_sha256"], text)
+        self.assertIn('(cd "$certificate_root" && lake unpack "$certificate_pack")', text)
+        self.assertNotIn(f'lake build {bridge["certificate_gate"]}', text)
+        self.assertNotIn("materialize", text.lower())
+        self.assertNotIn("generate", text.lower())
 
     def test_tmpfs_and_existing_destinations_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "disk-backed"):

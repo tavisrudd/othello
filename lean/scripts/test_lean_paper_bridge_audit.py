@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -128,6 +129,55 @@ class PaperBridgeAuditTests(unittest.TestCase):
             path.write_text("import Cert.Certificate\n", encoding="utf-8")
             problems = MODULE.audit_bridge(bridge, source, libraries, cache)
             self.assertTrue(any("imports are" in p for p in problems))
+
+    def test_pending_export_checks_boundary_without_requiring_checkout(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            bridge, source, libraries, cache = self.fixture(directory)
+            bridge["status"] = "authority-pending-export"
+            bridge.pop("bridge_commit")
+            bridge.pop("export_source_commit")
+            bridge_root = libraries / bridge["repository"]
+            shutil.rmtree(bridge_root)
+            self.assertEqual(MODULE.audit_bridge(bridge, source, libraries, cache), [])
+
+    def test_pending_export_cannot_claim_unpublished_commits(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            bridge, source, libraries, cache = self.fixture(directory)
+            bridge["status"] = "authority-pending-export"
+            problems = MODULE.audit_bridge(bridge, source, libraries, cache)
+            self.assertTrue(any("must not claim" in problem for problem in problems))
+
+    def test_unknown_bridge_status_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            bridge, source, libraries, cache = self.fixture(directory)
+            bridge["status"] = "invented"
+            problems = MODULE.audit_bridge(bridge, source, libraries, cache)
+            self.assertTrue(any("unsupported bridge status" in problem for problem in problems))
+
+    def test_transport_before_compatibility_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            bridge, source, libraries, cache = self.fixture(directory)
+            bridge["compatibility_declarations"] = ["model_compatibility"]
+            path = source / bridge["source"]
+            path.write_text(
+                "import Human.Model\nimport Cert.Certificate\n"
+                "namespace Paper.Compatibility\n"
+                "structure TransportWitness where\n  witness : Unit\n"
+                "theorem model_compatibility : True := by trivial\n"
+                "end Paper.Compatibility\n",
+                encoding="utf-8",
+            )
+            problems = MODULE.audit_bridge(bridge, source, libraries, cache)
+            self.assertTrue(any("not before transport" in problem for problem in problems))
+
+    def test_forbidden_legacy_source_token_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            bridge, source, libraries, cache = self.fixture(directory)
+            bridge["forbidden_source_tokens"] = ["Legacy.Namespace"]
+            path = source / bridge["source"]
+            path.write_text(path.read_text() + "\n-- Legacy.Namespace\n", encoding="utf-8")
+            problems = MODULE.audit_bridge(bridge, source, libraries, cache)
+            self.assertTrue(any("forbidden source token" in problem for problem in problems))
 
 
 if __name__ == "__main__":
