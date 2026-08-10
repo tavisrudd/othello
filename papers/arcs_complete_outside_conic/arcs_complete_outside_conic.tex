@@ -41,13 +41,17 @@ a prescribed-hole defect identity and matching-design rigidity}
 \maketitle
 
 \begin{abstract}
-For an arc in any finite projective plane and any prescribed set of points
-allowed to remain uncovered, we combine the first two classical secant
-moments into an exact identity with a pointwise nonnegative remainder.
+An arc is a point set with no three collinear; its secants are the lines
+joining pairs of its points.  For an arc in any finite projective plane and
+any prescribed set of points allowed to remain uncovered, we combine the
+first two moments of the number of secants through an external point into an
+exact identity with a pointwise nonnegative remainder.
 Its vanishing turns the canonical secant-concurrency decomposition of
-\(KG(k,2)\) into a simple
-\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design; in a
-Desarguesian plane this design has a rank-three projective realization.
+the pairs of secants with disjoint endpoint pairs into maximum-matching
+cliques.  Equivalently, it produces a simple
+\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design in which every
+pair of independent edges occurs once.  In a Desarguesian plane, its matching
+blocks are realized by concurrent chord families of the planar \(k\)-arc.
 The same remainder gives explicit edge and deletion stability away from
 equality.
 
@@ -113,13 +117,6 @@ and retain $\cU_{\cC}(A)$ for the conic-relative locus.
 Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
 \end{definition}
 
-For \(k\ge4\), projective representatives of the points of \(A\) in a
-Desarguesian plane form a parity-check matrix of a \([k,k-3,4]_q\) MDS
-code.  If
-\(U(A)\ne\varnothing\), then \(U(A)\) is exactly its projective deep-hole
-syndrome locus: points of \(A\), points on secants, and points of \(U(A)\)
-have coset weight one, two, and three, respectively.
-
 The minimum is attained because the finite point set
 $\PG(2,q)\setminus\cC$ contains an inclusion-maximal arc \(A\).  For every
 point \(x\notin A\cup\cC\), maximality forces \(A\cup\{x\}\) to contain
@@ -128,16 +125,17 @@ three collinear points, so \(x\) lies on a secant of \(A\).  Thus \(A\) is
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
-For a point \(x\)
-outside a \(k\)-arc \(A\), let \(r(x)\) be the number of secants of \(A\)
-through \(x\), and put \(m=\lfloor k/2\rfloor\) and
-\(N=\binom{k}{2}\).  If a set \(\cH\) disjoint from \(A\) is allowed to
-remain uncovered, let \(\cX_{\cH}(A)\) be the covered points outside
-\(A\cup\cH\) and let
-\(\IH(A)=\sum_{y\in\cH}r(y)\).
-
 \begin{theorem}[Exact prescribed-hole defect]\label{thm:main}
-For every \(k\)-arc \(A\) with \(k\ge3\) and prescribed hole \(\cH\), define
+Let \(A\) be a \(k\)-arc, \(k\ge3\), in a projective plane \(\Pi\) of
+order \(q\), and let \(\cH\subseteq\Pi\setminus A\).  For
+\(x\in\Pi\setminus A\), let \(r(x)\) be the number of secants of \(A\) through
+\(x\), and put
+\[
+ m=\lfloor k/2\rfloor,\qquad N=\binom{k}{2},
+\]
+let \(\cX_{\cH}(A)\) be the points of
+\(\Pi\setminus(A\cup\cH)\) lying on a secant of \(A\), and put
+\(\IH(A)=\sum_{y\in\cH}r(y)\).  Define
 \[
  \Delta_{\cH}(A)=
  N(q-1)-\frac{6}{m}\binom{k}{4}
@@ -153,66 +151,75 @@ Then
 
 \begin{corollary}[Equality rigidity and deletion stability]
 \label{cor:intro-rigidity}
-The concurrency cliques of the secants canonically decompose
-\(KG(k,2)\).  For \(k\ge4\), if \(\Delta_{\cH}(A)=0\), these cliques are
-maximum matchings and form a simple
-\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design with a
-star--matching incidence realization in the dual plane.  When the plane
-is Desarguesian, this is a rank-three projective realization over its
-underlying field.  For \(k\ge4\), the defect controls both the edge count
-and the vertex-cover number of the graph formed by the nonmaximum
-concurrency cliques; after deleting at most \(m\Delta_{\cH}(A)\)
-secants, every surviving Kneser edge lies in a maximum concurrency
-clique.
+Label the secants by the edges of \(K_k\).  Two secants with disjoint
+endpoint pairs are adjacent in the Kneser graph \(KG(k,2)\), and their
+concurrency cliques canonically decompose its edges.  For \(k\ge4\), if
+\(\Delta_{\cH}(A)=0\), these cliques are maximum matchings and form a
+simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design.  When
+the plane is Desarguesian over \(K\), the original \(k\)-arc realizes this
+design in \(\PG(2,K)\): the chords indexed by every matching block are
+concurrent.  This is a rank-three projective realization.  Dually, edges
+sharing a vertex lie on star lines and disjoint edges lie on matching lines;
+this is the star--matching incidence realization.  The defect controls both
+the edge count and the vertex-cover number of the graph formed by the
+nonmaximum concurrency cliques; after deleting at most
+\(m\Delta_{\cH}(A)\) secants, every surviving Kneser edge lies in a maximum
+concurrency clique.
 \end{corollary}
 
-\begin{theorem}[\(q+1\)-hole lower bound and exact small orders]
+\begin{theorem}[\(q+1\)-hole lower bound]
 \label{thm:main-conic}
+Let \(\Pi\) be a projective plane of order \(q\), let
+\(\cH\subseteq\Pi\) have \(q+1\) points, and let
+\(A\subseteq\Pi\setminus\cH\) be a \(k\)-arc such that every point of
+\(\Pi\setminus(A\cup\cH)\) lies on a secant of \(A\).
 If
 \[
- L_2(q)=\min\left\{k\ge3:
- q^2-k\le\binom{k}{2}(q-1)
- -\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}\right\},
+ L_2(q)=\min\left\{j\ge3:
+ q^2-j\le\binom{j}{2}(q-1)
+ -\frac{6}{\lfloor j/2\rfloor}\binom{j}{4}\right\},
 \]
-then every \(k\)-arc complete outside a prescribed set of \(q+1\) points
-satisfies \(k\ge L_2(q)\).  In particular, every nonsingular conic satisfies
+then \(k\ge L_2(q)\).  In particular, every nonsingular conic satisfies
 \[
  \rhoC(q)\ge L_2(q)
  \ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-Moreover,
+\end{theorem}
+
+\begin{theorem}[Exact small orders]
+\label{thm:intro-small-orders}
 \[
  \rhoC(13)=8,\qquad \rhoC(16)=9,\qquad
  \rhoC(17)=9,\qquad \rhoC(19)=10.
 \]
 \end{theorem}
 
-The order-\(16\) lower exclusion in this theorem is an exhaustive
-Lean-kernel-checked certificate.  At orders \(13,17,19\), Lean checks the
-attaining witnesses and upper bounds, while the exhaustive lower exclusions
-are trusted classifier executions; the evidence map in
-Appendix~\ref{app:verification} records the distinction.
+The universal identity, equality criterion, and stability statements have
+ordinary proofs in the text.  The exact small orders have separate finite
+inputs: the order-\(16\) lower exclusion is an exhaustive kernel-checked
+certificate, whereas the lower exclusions at orders \(13,17,19\) are trusted
+classifier executions with independently checked attaining witnesses.
+Appendix~\ref{app:verification} records these two trust boundaries once.
 
-The identity extracts more structure from the classical moments than the
-resulting scalar bound retains; it is not an independent third incidence
-equation.  The algebra is short, but the linear combination factors
-pointwise into nonnegative terms.  Its summands record exactly where a
-secant-index distribution falls short of the extremal pattern.  Their
-vanishing produces the matching design used for equality rigidity, while
-their total gives stability.  For conic holes, the equality theory forces
-each parity of \(k\) into three possible plane orders.  In characteristic
-two and in the ranges above, the odd branch is exactly the oval--nucleus
-configuration, while the even branch leaves only the hyperoval scale, by a
-chord-involution congruence on the maximum-index points of the prescribed
-conic.
+\paragraph{Proof map.}
+The argument has four moves.  The first two classical secant moments are
+split between required points and allowed holes; one linear combination then
+factors pointwise into nonnegative terms.  Vanishing turns the concurrence
+cliques of the secants into maximum matchings, while the same summands bound
+the edges and secants that obstruct this pattern away from equality.  Finally,
+specializing the holes to a conic gives the scalar bound and, when the
+remainder vanishes, parity-dependent order equations; the difficult
+characteristic-two branch closes by a chord-involution sign argument.  Thus
+the identity extracts equality and stability from the classical moments; it
+is not an independent third incidence equation.
 
-The exact small-order assertions in Theorem~\ref{thm:main-conic} have
-separate finite inputs.  At order $16$, a checked augmentation certificate
-enumerates the eight-arc leaves, and checked quadratic-evaluation records
-reject every leaf.  Exhaustive projective classifications reject size $7$
-at order $13$, size $8$ at order $17$, and sizes $8,9$ at order $19$; the attaining
-witnesses are checked independently in Lean.  Appendix~\ref{app:verification}
-states the two trust boundaries separately.
+\paragraph{Optional coding translation.}
+For \(k\ge4\), projective representatives of the points of \(A\) in a
+Desarguesian plane form a parity-check matrix of a \([k,k-3,4]_q\) MDS
+code.  If \(U(A)\ne\varnothing\), then \(U(A)\) is its projective
+deep-hole syndrome locus: points of \(A\), points on secants, and points of
+\(U(A)\) have coset weight one, two, and three, respectively.  This is a
+dictionary for the uncovered-locus statements, not an input to their proofs.
 
 The surrounding notions differ at the defining containment.  Saturating
 sets need not be arcs, while almost-complete conic subsets select points
@@ -245,10 +252,8 @@ $(q+1)$-secants of their rational BKS $(k,q+1)$-arc in
 \(\PG(2,q^r)\) are exactly the points of the proper subplane
 \(\PG(2,q)\) not belonging to the arc.  Thus localization on the defining
 subfield subplane is prior art.  Their theorem concerns a particular
-curve-derived $(k,q+1)$-arc; the contribution here is instead the exact
-defect identity for an arbitrary prescribed hole set, together with its
-equality and stability theory and its specialization to a prescribed conic
-for ordinary arcs.
+curve-derived $(k,q+1)$-arc, not an arbitrary-hole remainder for ordinary
+arcs.
 
 The equality structure belongs to the established theory of matching
 designs.  Alspach and Heinrich~\cite{AlspachHeinrich1990} call a family of
@@ -256,27 +261,22 @@ $s$-edge matchings in $K_n$ a $\operatorname{MATCH}(n,s,\lambda)$ design
 when every pair of independent edges occurs in exactly $\lambda$ members.
 Their framework generalizes hyperfactorizations, which were introduced in
 connection with higher block designs.  Here the prescribed-hole equality
-condition selects the much narrower class whose matching blocks arise as
-secant concurrences in one projective plane.
-Our contribution at this interface is the geometric implication: vanishing
-of the prescribed-hole defect canonically produces a simple
-$\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)$ design, represented by
-concurrence points of secants in one projective plane.  The local remainder
-controls both the number of graph edges that fail to lie in such
-maximum-matching cliques and the number of secants needed to meet all
-those edges.  After projective duality,
-Corollary~\ref{cor:star-matching-realization} upgrades the matching design
-to an incidence realization of the full star--matching pairwise-balanced
-design.  In a Desarguesian plane it is a rank-three realization over the
-underlying field, providing the bridge to the field and characteristic
-restrictions recorded in Appendix~\ref{sec:equality-classifications}.
+condition selects matching blocks realized by secant concurrences in one
+projective plane.  After duality,
+Corollary~\ref{cor:star-matching-realization} makes this the full
+star--matching pairwise-balanced design and, in a Desarguesian plane, a
+rank-three realization over the underlying field.  The resulting field and
+characteristic restrictions are recorded in
+Appendix~\ref{sec:equality-classifications}.
 
-Sections~\ref{sec:classical}--\ref{sec:conic} give the main route:
-exact accounting, equality rigidity, and the conic lower bound.  The
-appendices contain the finite proof of the \(q=16\) result together with
-the secondary realization classification, upper-bound transfer,
-characteristic-two incidence lemmas, reconstruction theorem, and
-verification contracts.
+For a first pass, read Sections~\ref{sec:classical}--\ref{sec:conic} and the
+conclusion: they contain the complete route from exact accounting through
+equality rigidity and stability to the conic bound and equality spectra.  A
+reader interested only in that mechanism may stop there.  The exact finite
+values continue in Appendix~\ref{sec:examples}; the equality-realization
+classification, upper-bound transfer, nucleus refinements, inverse
+reconstruction, verification contracts, and coordinate witnesses are
+independent secondary layers and may be read separately.
 
 \section{The classical secant equations}
 \label{sec:classical}
@@ -761,6 +761,12 @@ are $q^2-k$ points outside $A\cup\cC$.  Write
        =\sum_{\ell\text{ an $A$-secant}}|\ell\cap\cC|.
 \]
 
+The specialization has two layers.  Dropping the nonnegative conic-incidence
+term gives the universal \(q+1\)-hole lower bound; retaining it at zero defect
+forces the parity-dependent order spectra.  Conic geometry is needed only for
+the equality classification and finite applications, not for the defect
+identity or its scalar correction.
+
 \begin{corollary}[Conic-loss and uncovered-locus inequalities]
 \label{cor:conic-bound}
 For every such arc,
@@ -791,8 +797,7 @@ rearranges to~\eqref{eq:conic-complete}.
 The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
 concurrence among secants; the last accounts for secant incidence spent on
 the exempt conic.  Dropping the last term recovers
-Corollary~\ref{cor:q-plus-one-holes}; conic geometry enters the equality
-theory and finite applications, not this scalar lower bound.
+Corollary~\ref{cor:q-plus-one-holes}.
 
 \begin{corollary}[Even-size equality spectrum]
 \label{cor:even-equality-spectrum}
@@ -890,6 +895,12 @@ $\cC$-complete with zero defect.
 Let \(k\ge6\) be even, let \(q\) be a power of two, and suppose that a
 \(\cC\)-complete \(k\)-arc has zero defect.  Then \(k=q+2\).
 \end{corollary}
+
+The proof first removes one candidate order arithmetically.  In the remaining
+exceptional order, parity excludes \(\nu\in A\) and then forces
+\(r(\nu)=m\), hence a secant of \(A\) tangent to the conic.  The induced
+chord involutions preserve the maximum-index conic points, and their
+permutation signs are incompatible.
 
 \begin{proof}
 Put \(Q=k-2\) and \(B=Q(Q+1)/2\).  By
@@ -1309,6 +1320,11 @@ only if
 The other abstract design has no rank-three realization over any field.
 \end{theorem}
 
+The proof keeps three layers separate.  Mathon's theorem supplies the two
+abstract matching-design classes; the partial-geometry calculation translates
+their incidence parameters; and a normalized projective realization is then
+tested by exact elimination.  Only the last layer is computer-assisted.
+
 \begin{proof}
 Alspach and Heinrich allow repeated matchings in their definition, but
 when \(\lambda=1\) a repeated five-matching would repeat each of its pairs
@@ -1536,16 +1552,21 @@ inequality.
 \section{Verified finite-field examples}
 \label{sec:examples}
 
-The verified values at $q=5,8,9,11$ use the lower bound $L_2(q)$ and explicit
-coordinates.  At $q=5$ the witness is the projective four-frame.  Exhaustive
+This appendix has two independent tasks.  The first combines the universal
+bound with explicit coordinates and trusted projective classifications to
+settle the small odd orders.  The second proves \(\rhoC(16)=9\) through a
+kernel-checked augmentation certificate.  A reader following only the latter
+should retain three steps: the defect bound gives eight; a hypothetical
+\(\cC\)-complete eight-arc forces its ordinary-uncovered locus onto a
+quadratic avoiding the arc; and the certificate excludes every such
+quadratic, while a displayed nine-point witness gives the upper bound.
+
+The values at $q=5,8,9,11$ use the lower bound $L_2(q)$ and explicit
+coordinates; at $q=5$ the witness is the projective four-frame.  Exhaustive
 projective classifications reject size $7$ at $q=13$, size $8$ at $q=17$,
-and sizes $8,9$ at $q=19$; checked witnesses attain sizes $8,9,10$.  At $q=16$,
-the defect bound and a checked witness give $8\le\rhoC(16)\le9$;
-a checked exhaustive augmentation covering list excludes eight.  The proof has three
-steps: the defect bound supplies the lower bound eight; a hypothetical
-$\cC$-complete eight-arc would have its ordinary-uncovered locus on a
-quadratic avoiding the arc; and the certificate rules out every such
-quadratic, while the displayed nine-point witness supplies the upper bound.
+and sizes $8,9$ at $q=19$; checked witnesses attain sizes $8,9,10$.  At
+$q=16$, the defect bound and a checked witness give
+$8\le\rhoC(16)\le9$, and the checked covering list excludes eight.
 
 \subsection{Evaluation obstruction}
 
@@ -1852,9 +1873,13 @@ uncovered locus $\cC(\F_5)$.
 
 \subsection{Formal gate and evidence roles}
 
-The main body develops the mathematical mechanism; the appendices separate
-secondary deductions from finite exclusion.  The corresponding evidence and
-trust boundaries are summarized below.  In the public \texttt{finitegeom}
+This appendix is not part of the first-pass mathematical route.  Its job is to
+separate three evidence roles: ordinary proofs with independent formalization,
+kernel-checked finite certificates, and trusted exact computation.  The table
+below maps each claim to its role and remaining trust; the surrounding prose
+records the reproducible artifact identities and certificate contracts.
+
+In the public \texttt{finitegeom}
 repository, the trust boundary is recorded in
 \path{trust/ARCS_COMPLETE_OUTSIDE_CONIC.md}.  The matching-packing and small
 odd-order supplement is recorded separately in
