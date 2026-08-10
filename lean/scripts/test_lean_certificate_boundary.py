@@ -79,6 +79,19 @@ forbidden_artifact_basenames = ["generator.cpp"]
             source.write_text("import Example.Generated.Leaf\n", encoding="utf-8")
             self.assertEqual(self.run_check(root).returncode, 0)
 
+    def test_broad_certificate_import_allowlist_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make_repo(directory)
+            config = root / "lean/trust/certificate-packages.toml"
+            config.write_text(
+                config.read_text(encoding="utf-8")
+                + 'allowed_import_path_prefixes = ["lean/"]\n',
+                encoding="utf-8",
+            )
+            result = self.run_check(root)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("unsafe allowed_import_path_prefix", result.stdout)
+
     def test_owned_module_source_in_the_monorepo_fails(self) -> None:
         """The return path that matters most: the payload comes back as monorepo source."""
         with tempfile.TemporaryDirectory() as directory:

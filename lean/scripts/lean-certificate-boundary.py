@@ -71,6 +71,11 @@ def violations(repo_root: Path, lean_root: Path, config: Path) -> list[str]:
     for package in document.get("package", []):
         prefixes = tuple(package["owned_module_prefixes"])
         allowed_import_paths = tuple(package.get("allowed_import_path_prefixes", []))
+        for prefix in allowed_import_paths:
+            if not prefix.startswith("lean/paper-bridges/") or not prefix.endswith("/"):
+                problems.append(
+                    f"{package['name']}: unsafe allowed_import_path_prefix {prefix}"
+                )
         forbidden_names = set(package["forbidden_artifact_basenames"])
         for path in paths:
             relative = path.relative_to(repo_root)
