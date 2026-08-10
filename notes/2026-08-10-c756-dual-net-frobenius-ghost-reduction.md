@@ -969,6 +969,58 @@ test (84) is a genuine first subgate before the global quadratic/cubic
 analysis.  Formulas (85)--(86) replace a futile uniform tangent-space
 strategy by the correct characteristic split.
 
+For \(p\ge7\), the quotient quadratic in (86) has an explicit
+Cartier-component form.  Put \(Y=Z^p\) and make the full decompositions
+\[
+ R(Z)=\sum_{a=0}^{p-1}Z^aR_a(Y),
+ \qquad
+ \frac{G(Z)}{R(Z)}=\sum_{b=0}^{p-1}Z^bF_b(Y).            \tag{88}
+\]
+Every \(F_b\) is a proper Laurent series in \(Y\).  The first ghost
+condition says that among the coefficients with Laurent index at most
+\(n\), only \(F_0\) and \(F_1\) can be nonzero; the later recurrence (71)
+may and generally does populate all \(F_b\).  The exact residue-\(k\)
+component of \(R(G/R)^2\) is
+\[
+ \boxed{
+ E_k(Y)=
+ \sum_{\substack{0\le a,b,c<p\\a+b+c\equiv k\ ({\rm mod}\ p)}}
+ Y^{(a+b+c-k)/p}R_a(Y)F_b(Y)F_c(Y).}                   \tag{89}
+\]
+Here the exponent of \(Y\) is an integer between zero and two.  A term
+\(Y^{-m}Z^k\) has Laurent index \(r=pm-k\), and these are precisely the
+Lucas-visible residues for \(j=2\).  Hence (86) is equivalent to the exact
+block-convolution equations
+\[
+ \boxed{
+ [Y^{-m}]E_k=0
+ \quad\left(4\le k\le p-1,\quad
+ 1\le m\le M_k:=\left\lfloor\frac{n-5+k}{p}\right\rfloor\right).} \tag{90}
+\]
+
+The two-slot core of (89) is still rigid.  Put \(A=F_0\), \(B=F_1\).  For
+\(4\le k\le p-1\), the terms with \(b,c\in\{0,1\}\) have no wrap and give
+\[
+ E_k=R_kA^2+2R_{k-1}AB+R_{k-2}B^2+\Delta_k,             \tag{91}
+\]
+where \(\Delta_k\) is the explicit sum in (89) over pairs with
+\(b\ge2\) or \(c\ge2\).  If the power tower forces \(\Delta_k\) to vanish
+through the window (90), then, wherever \(A\ne0\), the ratio
+\(\lambda=B/A\) satisfies the repeated-root recurrence
+\[
+ R_k+2\lambda R_{k-1}+\lambda^2R_{k-2}=0.
+\]
+Its characteristic polynomial is \((X+\lambda)^2\), so the Cartier slices
+have the osculating form \(R_k=(\alpha+\beta k)(-\lambda)^k\).  Equivalently,
+the binary quadratics
+\(R_kU^2+2R_{k-1}UV+R_{k-2}V^2\) have common root \([A:B]\).
+Thus the next large-characteristic lemma is exact and narrower than (86):
+use the power-tower equations to eliminate the late-residue correction
+\(\Delta_k\) in (91), then rule out the resulting truncated osculating
+Cartier profile for a completely split factor \(R\mid Z^q-Z\).  The warning
+about \(\Delta_k\) is essential; the initial two-slot ghost condition is not
+an identity for the full rational tail.
+
 At the three forced seams the normal row budgets are already dimensionally
 sufficient to permit transversality on the minimum kernel stratum:
 \[
@@ -978,7 +1030,7 @@ sufficient to permit transversality on the minimum kernel stratum:
  25&3&1&6\\
  27&2&5&5\\
  81&2&5&17.
- \end{array}}                                           \tag{87}
+ \end{array}}                                           \tag{92}
 \]
 Thus the minimal \(q=27\) seam is especially sharp: after choosing bases,
 (84) is the nonvanishing of one \(5\times5\) determinant.  At \(q=25\) it
