@@ -112,12 +112,14 @@ paper-wide `ArcsCompleteOutsideConic` gate are human downstream modules and rema
 finitegeom; the separate Arcs paper bridge transports the generated rejection terminal
 into that layer.
 
-The other current reverse edges are bounded.  The projective-cap Q11 and Q13 packages
-reach only `ProjectiveCap.CertCheck` and `ProjectiveCap.PlaneOutcome`; their generated
-checks get a local statement model and the outcome transport moves downstream.  Q25
-reaches six human modules (`Certificate`, `FiniteFields`, `Moments`, `Nucleus`,
-`ProjectiveBridge`, and `PlaneTransitivity`); its 9,531-file payload must be separated
-from those six adapters without regenerating or renaming the leaves.
+The other current reverse edges are bounded.  The two-module projective-cap Q11 package
+and the 113-module Q13 package reach only `ProjectiveCap.CertCheck` and
+`ProjectiveCap.PlaneOutcome`; their generated checks get a local statement model and
+the outcome transport moves downstream.  Q25 has 9,531 modules and reaches ten human
+modules: `Certificate`, `FiniteFields`, `Moments`, `Nucleus`, `ProjectiveBridge`,
+`PlaneTransitivity`, and the four Baer-completion modules `BaerPlane`,
+`CollisionProfile`, `OrbitCounting`, and `PairExtension`. Its generated payload must
+be separated from all ten human modules without regenerating or renaming the leaves.
 
 Use explicit paper and shared source roots:
 

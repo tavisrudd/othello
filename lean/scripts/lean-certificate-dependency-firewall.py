@@ -29,12 +29,12 @@ def direct_manifest_packages(document: dict) -> dict[str, dict]:
 def source_import_violations(root: Path, policy: dict) -> list[str]:
     source_root = policy.get("source_root")
     module_prefix = policy.get("module_prefix")
-    if source_root is None or module_prefix is None:
+    if source_root is None:
         return []
     source = root / source_root
     if not source.is_dir():
         return [f"{policy['name']}: certificate source root is missing at {source_root}"]
-    allowed = ("Mathlib", module_prefix)
+    allowed = tuple(x for x in ("Mathlib", module_prefix) if x is not None)
     problems: list[str] = []
     for path in sorted(source.rglob("*.lean")):
         relative = path.relative_to(root)
@@ -45,7 +45,12 @@ def source_import_violations(root: Path, policy: dict) -> list[str]:
             if not stripped.startswith("import "):
                 continue
             for imported in stripped.removeprefix("import ").split():
-                if imported == "Mathlib" or imported.startswith(allowed):
+                local_source = source / (imported.replace(".", "/") + ".lean")
+                if (
+                    imported == "Mathlib"
+                    or imported.startswith(allowed)
+                    or local_source.is_file()
+                ):
                     continue
                 problems.append(
                     f"{policy['name']}: forbidden source import {imported} at"
