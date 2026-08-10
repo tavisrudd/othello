@@ -687,6 +687,46 @@ The off-diagonal factors occur twice because \(\ell_{ij}=\ell_{ji}\);
 Thus the mirror cover can be constructed either as the off-diagonal square
 part of one cross-resultant or as a quotient of two discriminants.
 
+This mirror is induced by a global automorphism of the branched quadric, not
+just by the endpoint-coordinate formula.  Homogenize
+\[
+ Q_{\rm du}
+ =aT^2+bTU+cU^2+dTW+eUW+fW^2
+\]
+and define
+\[
+ \boxed{
+ \jmath(T,U,W,z)
+ =\left(T,-U-\frac{bT+eW}{c},W,z\right).}               \tag{23ag}
+\]
+Completing the square in \(U\) shows
+\(Q_{\rm du}\circ\jmath=Q_{\rm du}\).  Hence \(\jmath\) is an involution of
+\(\mathscr X_\eta\), it preserves every direction conic \(C_t\), and it
+commutes with the deck involution \(z\mapsto-z\).  The image under
+\(\jmath\) of the line
+\(U+Tx_i-y_iW=0\) is precisely
+\[
+ U+T\left(\frac bc-x_i\right)
+   +\left(\frac ec+y_i\right)W=0,
+\]
+the corresponding factor of \(F^\iota\).  Therefore \(\Theta_Q\) is the
+off-diagonal direction divisor of intersections between the lifted endpoint
+conics \(D_i\) and their \(\jmath\)-images; \(\Delta_Q\) is the diagonal
+part.  The two commuting involutions generate a Klein four action on each
+direction conic:
+\[
+ (U,z),\qquad
+ \left(-U-\frac{bt+e}{c},z\right),\qquad
+ (U,-z),\qquad
+ \left(-U-\frac{bt+e}{c},-z\right).                    \tag{23ah}
+\]
+Ordinary chord nodes are intersections among the \(D_i\), while mirror
+collisions are intersections between \(D_i\) and \(\jmath(D_j)\).  This
+places both covers in one incidence geometry on \(\mathscr X_\eta\).  A
+comparison of their off-diagonal intersection cycles, retaining the
+\(z^2\)-trace before passing to character, is now the precise geometric
+route to the missing cross-direction law.
+
 More importantly, it isolates every accidental collision of conic values.
 Formula (23z) says
 \[

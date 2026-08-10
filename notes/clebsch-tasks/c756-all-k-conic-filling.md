@@ -546,6 +546,16 @@ Away from \(\Theta_Q=0\), the matched-value factor is exactly
 support splits into a transverse part, where \(\Sigma_3\) is extracted by
 ordinary value-polynomial subresultants, and the explicit mirror-overlap
 support \(\gcd(K_P,\Theta_Q)\), where accidental value collisions can occur.
+Geometrically the mirror is the quadric involution
+\[
+ \jmath(T,U,W,z)=
+ \left(T,-U-\frac{bT+eW}{c},W,z\right),
+\]
+which preserves \(Q_{\rm du}\), fixes every direction conic, and commutes
+with the deck involution.  The reflected arrangement \(F^\iota\) is exactly
+\(\jmath(F)\).  Thus ordinary nodes and mirror collisions are respectively
+the off-diagonal intersections \(D_i\cap D_j\) and
+\(D_i\cap\jmath(D_j)\) inside one Klein-four incidence geometry.
 
 ### \(q=53\): type-uniform critical core
 
