@@ -83,7 +83,14 @@ class PaperBridgeAuditTests(unittest.TestCase):
                     '[[require]]\nname = "certs"\npath = "../certs"\n'
                 ),
                 "MANIFEST.json": json.dumps(
-                    {"source_commit": export_source_commit}
+                    {
+                        "source_commit": export_source_commit,
+                        "roots": ["Paper.Verification.AxiomAudit"],
+                        "sources": [
+                            {"path": "Paper/Compatibility.lean"},
+                            {"path": "Paper/Verification/AxiomAudit.lean"},
+                        ],
+                    }
                 ),
                 "README.md": "# Reviewer package\n",
             },

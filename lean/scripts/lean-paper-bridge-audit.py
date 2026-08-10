@@ -132,6 +132,19 @@ def audit_bridge(
                     f"{name}: bridge manifest source commit is "
                     f"{manifest.get('source_commit')}, expected {bridge['export_source_commit']}"
                 )
+            if manifest.get("roots") != [bridge["audit_module"]]:
+                problems.append(f"{name}: bridge manifest has the wrong audit root")
+            expected_sources = {
+                bridge["module"].replace(".", "/") + ".lean",
+                bridge["audit_module"].replace(".", "/") + ".lean",
+            }
+            actual_sources = {
+                row.get("path")
+                for row in manifest.get("sources", [])
+                if isinstance(row, dict)
+            }
+            if actual_sources != expected_sources:
+                problems.append(f"{name}: bridge manifest source set is incomplete")
         try:
             dependencies = direct_dependencies(bridge_root)
         except (OSError, tomllib.TOMLDecodeError, KeyError):
