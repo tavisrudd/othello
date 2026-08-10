@@ -1,0 +1,7 @@
+relative NS smith= [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2]
+full product projection smith= [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7] index= 7
+relative product projection smith= [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 28] index= 458752
+adjoin minimal projection smith= [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 4, 4, 4, 28] index= 114688
+relative/full product index= 65536
+minimal-class order= 4
+PASS

@@ -102,6 +102,27 @@ relative rigidification, quartic transport, cusp extension, deck descent, and
 full priority closure remain.  No upgrade has been imported into the frozen
 Paper V manuscript.
 
+The fourth pass in
+`notes/2026-08-10-c904-relative-minimal-cycle-two-primary-gate.md` resolves
+the smooth-family problem up to one exact two-primary index.  The Fano
+incidence correspondence gives an integral relative cycle inducing `[2]`,
+hence a rational identity cycle.  After a finite etale two-primary refinement,
+the fibrewise divisor certificate rigidifies to a primitive relative cycle of
+class $\Theta^4/4!$.  It does **not** formally give an integral relative
+universal cubic cycle: Voisin's lifting argument changes from a curve base to a
+surface, and the generic rationally connected fibre's index is the remaining
+obstruction.  Exact Sage plus independent SymPy certificates show why every
+canonical construction stalls: theta pullbacks from the full generic
+endomorphism order span an index-$16$ divisor lattice, the quotient is exactly
+the four-dimensional exotic $A_5$ heart, its fourfold products have saturation
+defect $2^{16}$, and the minimal class has order four.  Six axes, fifteen
+genus-two curves, Prym/incidence, and Hecke transport generate exactly the even
+class line.  The exotic deck exchanges the two gluings through the literal
+involution $x\mapsto2/x$; the twist deck is trivial on divisor classes.  The
+next high-EV gate is a conceptual theta-group identification and computation
+of the resulting modular Picard torsor/cusp residues.  No manuscript or Lean
+source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

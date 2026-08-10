@@ -1,0 +1,30 @@
+exotic deck permutation (5, 2, 1, 4, 3, 0) exchanges omega and omega^2
+rank 15 index 16 after 17 theta pullbacks
+A5 group-ring theta-pullback index 16
+full endomorphism congruence denominator 36
+full endomorphism scaled-lattice index 9432487241417956603723776
+full endomorphism theta-pullback index 16 after 274 distinct pullbacks
+missing divisor quotient invariants (2, 2, 2, 2)
+relative divisor coordinates in the fixed NS basis=
+[ 1  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+[ 0  0  0  0  1  0  0  0  0  0  0  0  0  0  0]
+[ 0  0  0  0  0  0  0  0  1  0  0  0  0  0  0]
+[ 0  0  0  0  0  0  0  0  0  1  0  0  0  0  0]
+[ 0  1  0  0  0  0  0  0  0  0  1  0  0  0  0]
+[ 0  0  0  1  0  0  0  0  0  0  0  1  0  0  0]
+[ 0  0  0  0  0  1  0  0  0  0  0  1  0  0  0]
+[ 0  0  0  0  0  0  1  0  0  0  1  0  0  0  0]
+[ 0  0  0  0  0  0 -1  0  0  0  1  0  0  0  0]
+[ 0  0  1  0  0  0  0  0  0  0  1  1  0  0  0]
+[ 0  0 -1  0  0  0  0  0  0  0 -1  1  0  0  0]
+[ 0  0  0  0  0  0  0  1  0  0  1  1  0  0  0]
+[ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  1]
+[ 0  0  0  0  0  0  0  0  0  0  0  0  2  0  0]
+[ 0  0  0  0  0  0  0  0  0  0  0  0  0  2  0]
+missing parity A5-module fixed dimension 0 commutant dimension 2 is six-point heart True
+relative divisor products 3060 rank 15 saturation index 65536 minimal order 4
+relative product quotient invariants (2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4)
+axis-Poincare NS index 3779136 products 3060 rank 15 saturation index 38979614075268328541818074867695616 minimal order 1296
+combined visible NS index 16 products 3060 rank 15 saturation index 65536 minimal order 4
+PASS
+PASS
