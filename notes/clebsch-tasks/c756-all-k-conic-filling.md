@@ -369,6 +369,26 @@ square-normalized sum over endpoint Gram entries.  Reducing modulo \(J_P\)
 produces a polynomial \(\Sigma_J\) of degree less than \(\delta-r\), and the
 remaining conic character is exactly
 \(\chi(\operatorname{Res}(J_P,\Sigma_J))\).
+Intrinsically, \(J_P\) is the slope characteristic polynomial on the
+second-excess module
+\[
+ M^{[1]}=A_{\rm node}/(B_{\rm dir}+UB_{\rm dir}),
+ \qquad \dim M^{[1]}=\delta-r.
+\]
+Multiplication by the trace function \(\sigma\) on this module has
+determinant \(\operatorname{Res}(J_P,\Sigma_J)\).  Quotienting by
+\(B+UB+\cdots+U^dB\) similarly gives a canonical carrier for every higher
+direction-multiplicity layer.
+Since the resultant needs only trace values, not jets, its scalar input may
+be reduced further modulo \(K_P=\operatorname{rad}J_P\).  The resulting
+\(\Sigma_3\) has degree less than
+\(|\{t:\mu_t\ge3\}|\), while
+\(\operatorname{Res}(J_P,\Sigma_3)=
+\operatorname{Res}(J_P,\Sigma_J)\).
+This resultant vanishes exactly when some triple-or-higher fibre has
+\(\sigma_t=0\).  If it is nonzero, its quadratic character is the product of
+\(\chi(\sigma_t)\) only over odd multiplicities \(\mu_t\ge3\); even
+multiplicities contribute squares.
 
 ### \(q=53\): type-uniform critical core
 
@@ -505,7 +525,7 @@ over every finite field.  Authorities:
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
    node module.  Evaluate its degree-\(\delta-r\) endpoint-pair resultant
-   \(\operatorname{Res}(J_P,\Sigma_J)\) using the star Gram relations, then
+   \(\operatorname{Res}(J_P,\Sigma_3)\) using the star Gram relations, then
    compare it with the constant conic square class.
 
 ## Stop rules

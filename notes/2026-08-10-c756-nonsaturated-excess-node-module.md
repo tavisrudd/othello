@@ -429,6 +429,94 @@ Equations (38)--(41) are the requested cross-direction law.  The remaining
 problem is no longer to construct the trace: it is to evaluate the character
 of one degree-\((\delta-r)\) resultant from the star endpoint relations.
 
+The second excess also has a canonical module realization.  For \(d\ge0\),
+let
+\[
+ \mathcal F_d=\sum_{a=0}^d U^a\pi^*B\subseteq A,
+ \qquad
+ M^{[d]}=A/\mathcal F_d.                                 \tag{42}
+\]
+On a fibre of size \(\mu\), the distinct intercepts make
+\(1,U,\ldots,U^d\) have rank \(\min(d+1,\mu)\).  Therefore
+\[
+ \boxed{
+ \dim M^{[d]}
+ =\sum_t\max(\mu_t-d-1,0),}                              \tag{43}
+\]
+and slope multiplication on this quotient has characteristic polynomial
+\[
+ \boxed{
+ E_P^{[d]}(Z)=
+ \prod_{t\in\mathbb F_q}(Z-t)^{\max(\mu_t-d-1,0)}.}      \tag{44}
+\]
+For \(d=0\), this recovers \(M\) and \(E_P\).  For \(d=1\), it gives the
+canonical second-excess module
+\[
+ M^{[1]}=A/(\pi^*B+U\pi^*B),
+ \qquad \dim M^{[1]}=\delta-r,
+ \qquad E_P^{[1]}=J_P.                                  \tag{45}
+\]
+Because \(M^{[1]}\) remains a \(B\)-module, the trace function
+\(\sigma\in B\) acts on it.  Fibrewise scalar multiplication gives
+\[
+ \boxed{
+ \det(m_\sigma\mid M^{[1]})
+ =\prod_t\sigma_t^{\max(\mu_t-2,0)}
+ =\operatorname{Res}_T(J_P,\Sigma_J).}                  \tag{46}
+\]
+Thus the open conic character is the determinant of a canonical operator on
+a canonical \((\delta-r)\)-dimensional module.  More generally, (42)--(44)
+give an all-multiplicity excess filtration; they do not make any
+\(M^{[d]}\) an algebra or make multiplication by \(U\) descend.
+The spectral polynomials require no new elimination: they satisfy the
+radical recursion
+\[
+ E_P^{[d+1]}
+ =\frac{E_P^{[d]}}{\operatorname{rad}E_P^{[d]}}.         \tag{47}
+\]
+
+The scalar trace carrier is smaller still, because a resultant against
+\(J_P\) uses values at its roots but no derivatives.  Put
+\[
+ K_P=\operatorname{rad}J_P
+ =\prod_{\mu_t\ge3}(T-t),
+ \qquad
+ s=\deg K_P=|\{t:\mu_t\ge3\}|,                           \tag{48}
+\]
+If \(s=0\), then \(J_P=1\) and the determinant is already trivial.
+Otherwise let \(\Sigma_3\) be the degree-less-than-\(s\) representative of
+\(\Sigma\) modulo \(K_P\).  Then
+\[
+ \boxed{
+ \operatorname{Res}(J_P,\Sigma_J)
+ =\operatorname{Res}(J_P,\Sigma_3),
+ \qquad \deg\Sigma_3<s\le\min(\delta-r,\lfloor\delta/2\rfloor).}
+                                                               \tag{49}
+\]
+Thus multiplicities belong to the module \(M^{[1]}\) and to \(J_P\), while
+the endpoint-pair scalar input lives only on the reduced support of
+triple-or-higher directions.  Each such direction consumes at least two
+units of \(\delta\), which gives the bound \(s\le\lfloor\delta/2\rfloor\)
+in (49).
+
+There is a final parity compression.  From (35),
+\[
+ \operatorname{Res}(J_P,\Sigma_3)=0
+ \quad\Longleftrightarrow\quad
+ \sigma_t=0\text{ for some }\mu_t\ge3.                  \tag{50}
+\]
+If the determinant is nonzero, even exponents \(\mu_t-2\) disappear under
+quadratic character, so
+\[
+ \boxed{
+ \chi\!\left(\operatorname{Res}(J_P,\Sigma_3)\right)
+ =\prod_{\substack{t:\mu_t\ge3\\ \mu_t\text{ odd}}}
+   \chi(\sigma_t).}                                      \tag{51}
+\]
+Thus the remaining nonsaturated theorem splits cleanly into two structural
+claims: exclude zero conic-value traces on triple-or-higher fibres, and
+control the product of trace signs only on odd-multiplicity fibres.
+
 This also separates the present trace from the earlier all-center
 Euler-character norm.  If the weights \(q_i\) in (20) are replaced by their
 Euler signs \(q_i^{(q-1)/2}=\epsilon\), then
@@ -495,6 +583,10 @@ prove nonexistence.
 | Where does the conic character live? | settled | square class (19) in the split node algebra |
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
 | Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
+| Is the second excess intrinsic? | settled | module \(M^{[1]}\) and determinant identity (46) |
+| Is there a carrier for every multiplicity layer? | settled | intercept-degree filtration (42)--(44) |
+| How small is the scalar trace carrier? | settled | degree \(s\) support reduction \(\Sigma_3\) in (49) |
+| Which fibres affect the nonzero determinant character? | settled | only odd \(\mu_t\ge3\), formula (51) |
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
 | Is there a cross-direction trace formula? | settled | endpoint-pair interpolation (38), reduced to \(\Sigma_J\) in (40) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
@@ -504,6 +596,8 @@ prove nonexistence.
 ## Next action
 
 Evaluate the character of the bounded endpoint-pair resultant
-\(\operatorname{Res}(J_P,\Sigma_J)\) in (41), using the star endpoint
+\(\operatorname{Res}(J_P,\Sigma_3)\) in (49), using the star endpoint
 relations in (38).  Preserve actual conic values: the Euler-character
-projection (33) is too coarse.  Do not resolve this by a fixed-field census.
+projection (33) is too coarse.  First exclude the zero-trace case (50), then
+prove the odd-fibre sign law (51).  Do not resolve this by a fixed-field
+census.
