@@ -413,7 +413,7 @@ The two current structural carriers have the same architecture:
 
 | branch | forced Frobenius base | finite excess carrier | all-\(q\) target |
 |---|---|---|---|
-| saturated-internal | \(X^q-X=RS\) | \(\mathcal G_R=\mathcal V_R/\mathcal C_R\), dimension \(q/p-1\) | classify the digit-tower kernel \(\mathcal K_R\), then use the quadratic Cartier rung on it |
+| saturated-internal | \(X^q-X=RS\) | \(\mathcal G_R=\mathcal V_R/\mathcal C_R\), dimension \(q/p-1\) | classify \(\mathcal K_R\), then use \(j=2\) for \(p\ne5\) or \(j=3\) for \(p=5\) |
 | nonsaturated | one node over every root of \(T^q-T\) | \(M=A/\pi^*B\), dimension \(\delta\), with second excess \(J_P\) of degree \(\delta-r\) | control \(\operatorname{Res}(J_P,\Sigma)\) from the conic-Gram matching sums |
 
 In both cases the correct operation is quotienting on the Frobenius-fixed

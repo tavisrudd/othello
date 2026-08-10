@@ -176,9 +176,37 @@ Frobenius-semilinear digit tower: for \(p\ge5\) every level
 Lucas selects the corresponding base-\(p\) digit of the Laurent index.  If
 the descended digit maps have zero common kernel on the ghost quotient, the
 extension conic lemma follows; otherwise only their common kernel must meet
-the genuinely nonlinear \(j=2\) equation.  The latter clause is essential:
+the first non-shadow odd equation.  The latter clause is essential:
 dimension alone forces tower kernels of dimension at least one for \(q=25\)
 and at least five for \(q=27\).
+Equivalently, if \(x_i\) are the roots of \(R\) and
+\(w_i=1/R'(x_i)\), the entire hierarchy is the division-free syndrome law
+\[
+ \sum_i w_i^{2j+1}x_i^m=0
+ \quad\text{whenever}\quad
+ 0\le m\le n-2j-2,
+ \ \binom{m+2j}{2j}\not\equiv0\pmod p.
+\]
+The conic conclusion is exactly that the squared weight vector
+\((w_i^2)\) is the evaluation of a quadratic polynomial on the \(x_i\).
+Frobenius reflects a power rung \(j=p^a\) into the non-power rung
+\(j^\vee=(p^{e-a}+1)/2\), rotating monomial exponents modulo \(q-1\).  In
+the forced tower-kernel seams this adds the explicit high exponent sets
+\(\{0,5,10\}\) at \(q=25\) and \(\{0,9,18\}\) at \(q=27\).
+Every rung with \(2j+1=p^b\) is a tautological Frobenius shadow of the
+ordinary barycentric identities and must be skipped.  Hence \(j=2\) gives no
+new information in characteristic five: the correct first kernel test is
+\(j=3\) at \(q=25\),
+where its native exponent set \(\{0,1,2,3,5,6\}\) is enlarged by the
+reflected exponent \(10\).  At \(q=27\), \(j=2\) remains informative, with
+native set \(\{0,1,3,4,9\}\).
+For general \(j\), Kummer's theorem gives the exact visible prefix: if
+\(s=v_p(j)\) and \(d\equiv2j/p^s\pmod p\), the first carry occurs at
+\(p^s(p-d)\).  Barycentric Reed--Solomon duality turns that prefix into an
+explicit degree bound on the interpolant \(H_{2j}\).  The identities
+\(H_{2(j+1)}\equiv H_2H_{2j}\pmod R\) therefore form a single
+digit-controlled multiplication orbit.  The extension theorem is now a
+carry-flag rigidity statement for that orbit.
 Multiplying back the root
 divisor of \(S\) packages the entire hierarchy as a full-field norm
 identity: the two completely split degree-\(q\) products
@@ -444,9 +472,12 @@ over every finite field.  Authorities:
    data for the all-\(q\) branches.
 2. For saturated-internal configurations, prove the special-direction conic
    lemma over proper extension fields by analyzing the nonlinear Cartier
-   system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Couple the genuinely
-   nonlinear quadratic rung \(j=2\) to the simultaneous semilinear digit
-   tower \(j=p^a\), or classify the equivalent completely split lacunary norm
+   system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Classify the common
+   kernel of the semilinear digit tower \(j=p^a\), then apply the first
+   non-shadow rung: \(j=2\) unless \(p=5\), where one must use \(j=3\).
+   Prove that the resulting carry-controlled multiplication flag forces
+   \(\deg H_2\le2\); or
+   classify the equivalent completely split lacunary norm
    pair; do not retry translations of the affine coordinate.
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess

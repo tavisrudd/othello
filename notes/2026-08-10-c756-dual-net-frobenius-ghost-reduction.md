@@ -321,6 +321,148 @@ The last quotient is the finite saturated ghost module.  It is the precise
 analogue of the defect module in the nonsaturated branch: conic containment
 means that the class of the actual remainder \(H_2\) vanishes in (47).
 
+There is a root-set realization of this quotient that removes all polynomial
+division from the higher equations.  Put
+\[
+ w_i=\frac1{R'(x_i)}=-S(x_i),\qquad h_i=H_2(x_i).
+\]
+For any numerator \(H\) of degree less than \(n\), partial fractions give
+\[
+ \frac{H(Z)}{R(Z)}
+ =\sum_{i=1}^n\frac{H(x_i)w_i}{Z-x_i},
+ \qquad
+ [Z^{-r}]\frac HR
+ =\sum_{i=1}^n H(x_i)w_ix_i^{r-1}.                       \tag{50}
+\]
+Evaluation on the roots identifies the numerator space with
+\(\mathbb F_q^n\).  Under this identification, \(\mathcal C_R\) is the
+degree-two Reed--Solomon evaluation code, while \(\mathcal V_R\) is obtained
+by deleting exactly the \(q/p-1\) ghost parity checks from its barycentric
+dual checks.
+
+More generally, because \(H_{2j}(x_i)=h_i^j\), equation (28) has the exact
+syndrome form
+\[
+ c_{j,r}=\sum_{i=1}^n h_i^jw_ix_i^{r-1}.                 \tag{51}
+\]
+For the actual complementary-factor remainder,
+\(h_i=S(x_i)^2=w_i^2\), so define the Lucas-visible exponent set
+\[
+ \mathscr E_j=\left\{m:0\le m\le n-2j-2,
+   \binom{m+2j}{2j}\ne0\pmod p\right\}.                 \tag{52}
+\]
+Then the whole odd hierarchy is equivalent to the root-set moment system
+\[
+ \boxed{
+ \sum_{i=1}^n w_i^{2j+1}x_i^m=0
+ \qquad(m\in\mathscr E_j,\ 2j+1<n).}                    \tag{53}
+\]
+Thus the saturated all-\(q\) theorem can be stated without \(H_{2j}\):
+classify the \(n\)-subsets of \(\mathbb F_q\) whose barycentric weights
+satisfy (53), and prove that their squared weight vector
+\((w_i^2)\) lies in the degree-two evaluation code.  The Frobenius--Cartier
+tower is the subfamily \(j=p^a\); the quadratic rung is \(j=2\).
+
+The root-set form also reveals a Frobenius reflection between different
+rungs.  For a positive exponent define its reduction as a function on the
+whole field by
+\[
+ \rho_q(d)=1+((d-1)\bmod(q-1)),\qquad \rho_q(0)=0.       \tag{54}
+\]
+If the \(j=p^a\) moment in (53) vanishes, raise it to
+\(p^{e-a}\).  Since every \(w_i\ne0\) and
+\(w_i^{2q}=w_i^2\), this gives
+\[
+ \boxed{
+ \sum_i w_i^{p^{e-a}+2}
+          x_i^{\rho_q(mp^{e-a})}=0.}                     \tag{55}
+\]
+The weight exponent in (55) is \(2j^\vee+1\), where
+\[
+ j^\vee=\frac{p^{e-a}+1}{2}.
+\]
+For every \(1\le a\le e-1\), this reflected rung satisfies
+\(2j^\vee+1<n\).  Hence each available power rung contributes a rotated
+set of generally high monomial exponents to a native non-power rung.  At
+\(q=25\), the three visible \(j=5\) exponents \(m=0,1,2\) reflect to the
+\(j^\vee=3\) exponents \(0,5,10\); at \(q=27\), the visible \(j=3\)
+exponents reflect to the \(j^\vee=5\) exponents \(0,9,18\).  These are
+structural digit rotations, not field censuses.  They identify the first
+extra checks to combine with the first non-shadow rung on the forced kernels.
+
+There is also a uniform family of shadow rungs that must be removed from the
+route.  Whenever \(p^b<n\), set
+\[
+ j_b=\frac{p^b-1}{2},\qquad 2j_b+1=p^b.
+\]
+Lucas' theorem gives
+\[
+ \binom{m+p^b-1}{p^b-1}\ne0\pmod p
+ \quad\Longleftrightarrow\quad m\equiv0\pmod {p^b}.     \tag{56}
+\]
+Writing \(m=p^bt\), the corresponding equation in (53) is merely
+\[
+ \sum_iw_i^{p^b}x_i^{p^bt}
+ =\left(\sum_iw_ix_i^t\right)^{p^b}=0,                   \tag{57}
+\]
+the Frobenius image of the standard barycentric identity.  Thus every rung
+with \(2j+1\) a pure power of \(p\) is tautological.  In characteristic
+three this includes \(j=1,4,13,\ldots\); in characteristic five it includes
+the quadratic rung \(j=2\).  Consequently the first useful additional
+non-shadow rung after the tower constraints is
+\[
+ j=2\quad(p=3\text{ or }p\ge7),
+ \qquad j=3\quad(p=5).                                   \tag{58}
+\]
+For \(q=25\), the native \(j=3\) visible exponents are
+\(\{0,1,2,3,5,6\}\), and reflection adds \(10\).  For \(q=27\), the
+native \(j=2\) visible exponents are \(\{0,1,3,4,9\}\), while the reflected
+\(j=5\) rung supplies \(\{0,9,18\}\).  These are the correct first kernel
+tests.
+
+The consecutive part of every syndrome set has a closed digit formula.  Put
+\[
+ L_j=n-2j-2,
+ \qquad s_j=v_p(j),
+ \qquad d_j\equiv\frac{2j}{p^{s_j}}\pmod p,
+ \quad 1\le d_j\le p-1.                                  \tag{59}
+\]
+By Kummer's carry criterion, the first carry in adding \(m\) to \(2j\)
+occurs at \(m=p^{s_j}(p-d_j)\).  Hence the largest initial interval contained
+in \(\mathscr E_j\) is
+\[
+ \boxed{
+ \{0,1,\ldots,D_j\}\subseteq\mathscr E_j,
+ \qquad
+ D_j=\min\{L_j,\ p^{s_j}(p-d_j)-1\}.}                   \tag{60}
+\]
+
+Let \(P_j\) be the degree-less-than-\(n\) interpolant of the vector
+\((w_i^{2j})_i\); thus \(P_j=H_{2j}\).  The standard barycentric duality
+\[
+ \left(\operatorname{RS}_{D_j}\right)^\perp
+ =w\,\operatorname{RS}_{n-D_j-2}
+\]
+turns the prefix in (60) into the exact degree bound
+\[
+ \boxed{\deg P_j\le\nu_j:=n-D_j-2.}                     \tag{61}
+\]
+The non-prefix elements of \(\mathscr E_j\), together with the reflected
+set (55), are additional linear checks on this bounded interpolant.
+
+Finally the interpolants form one multiplication orbit:
+\[
+ P_0=1,
+ \qquad P_1=H_2,
+ \qquad P_{j+1}\equiv H_2P_j\pmod R.                    \tag{62}
+\]
+Thus the saturated extension theorem is equivalently a **carry-flag
+rigidity statement**: if multiplication by \(H_2\) drives the orbit (62)
+through all digit bounds (61) and all sparse/reflected checks, then
+\(\deg H_2\le2\).  This formulation separates the universal mechanism
+(multiplication by one residue class) from the characteristic dependence
+(the explicit carry profile \(D_j\)).
+
 The same pencil supplies a hierarchy, not just (6).  For
 \(b=2j+1<n\), let \(H_{2j}\) be the degree-\(<n\) remainder of
 \(S^{2j}\) modulo \(R\), and write
@@ -445,8 +587,9 @@ Thus the universal object is
 \]
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
-the forced low-characteristic seams violates the quadratic equation (40).
-This is independent of a fixed search window.
+the forced low-characteristic seams violates the first non-shadow rung in
+(58), together with its reflected checks.  This is independent of a fixed
+search window.
 
 ## 7. Structural consequences and routing
 
@@ -570,22 +713,32 @@ through enough of those equations.
 | Does translation invariance shrink the ghost space? | settled negative | the residues \(0,-1\pmod p\) form an affine-stable Frobenius module |
 | Is there a finite structural model for the first ghost space? | settled | two-component Frobenius--Pade congruence (42) |
 | What is its exact excess dimension modulo conics? | settled | \(q/p-1\), quotient (47) |
+| Is there a division-free root-set form? | settled | barycentric Reed--Solomon syndrome system (53) |
+| Do the power rungs couple to non-power rungs? | settled | Frobenius reflection and exponent rotation (55) |
+| Is every odd rung informative? | no | all \(2j+1=p^b\) are tautological Frobenius shadows (57) |
+| What controls the useful degree bound at each rung? | settled | first-carry formula (60) and Reed--Solomon bound (61) |
+| How are those degree bounds coupled? | settled | single multiplication orbit (62) |
 | Is there more information beyond the first ghost? | settled | nonlinear Cartier hierarchy (39) from every odd divided coefficient |
 | Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
-| What semilinear statement would close the extension branch? | open, exact | classify \(\mathcal K_R\) in (49), then impose (40); injectivity alone is dimensionally impossible at \(q=25,27\) |
+| What semilinear statement would close the extension branch? | open, exact | classify \(\mathcal K_R\) in (49), then impose the first non-shadow rung (58); injectivity alone is dimensionally impossible at \(q=25,27\) |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
 | What remains to prove? | open | couple the ghost supports under \(H_{2j}\equiv H_2^j\pmod R\) and force \(\deg H_2\le2\) |
 
 ## Next action
 
-Analyze the quadratic Cartier equation (40) together with the simultaneous
+Analyze the first non-shadow equation (58) together with the simultaneous
 semilinear tower (45) on the two-component Pade space (42).  The exact
 theorem target is a uniform classification of the common kernel
 \(\mathcal K_R\) in (49) on the \(q/p-1\)-dimensional quotient (47), with
-the forced \(q=25,27\) kernel dimensions as boundary tests.  Apply (40) on
-that kernel, retaining the compatibility
+the forced \(q=25,27\) kernel dimensions as boundary tests.  Apply \(j=3\)
+at \(q=25\), and \(j=2\) at \(q=27\), retaining the compatibility
 \(RS=X^q-X\) and \(H_2\equiv S^2\pmod R\).
+Equivalently, work directly with the barycentric weights and prove from the
+Lucas-visible moment system (53) that \((w_i^2)\) is a quadratic evaluation
+vector.  On the forced \(q=25,27\) seams, use the native-plus-reflected
+exponent sets recorded after (58).  Uniformly, prove carry-flag rigidity for
+the multiplication orbit (62).
 In parallel, test the exact theorem-shaped
 alternative: classify completely split norm pairs satisfying the lacunarity
 identity (33), using iterated Redei--Szonyi derivatives rather than ordinary
