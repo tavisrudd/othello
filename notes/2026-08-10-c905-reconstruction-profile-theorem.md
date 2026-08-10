@@ -833,7 +833,79 @@ Thus the series' degree pattern has a cap-tower analogue:
 \]
 For (n=2) the pair profile has additional ambiguity; for (n=3) the exact
 four-cap exhaustion proves that the fibre is precisely \(\{E_3,O_3\}\) up to
-affine transport.  The exact fibre for (n\ge4) is open here.
+affine transport.  Dimension four is exceptional in a more interesting way.
+
+> **Triality fibre theorem (exact finite result).**  In the fixed labelled
+> ambient space \(\mathbf F_3^4\), the complete eight-cap fibre of the common
+> profile of \(E_4\) and \(O_4\) has exactly three members:
+> \[
+>   E_4,\qquad O_4,\qquad
+>   X_4=\{(2,2,2,2)+\varepsilon e_i:
+>             1\le i\le4,\ \varepsilon\in\{1,2\}\}.
+> \]
+> Their polynomial moment functionals agree in degrees below four, while
+> their degree-four moment vectors are pairwise distinct.
+
+The completeness proof is structural.  The target profile
+has one value of multiplicity four, at \((2,2,2,2)\), and all other nonzero
+values have multiplicity one.  Any eight-set with that profile is therefore
+partitioned into four pairs with a common sum.  Translating their common
+midpoint to zero makes it
+\(\{\pm v_1,\ldots,\pm v_4\}\).  Its twenty-four nonopposite pair sums are
+exactly
+\[
+ R=\{r\in\mathbf F_3^4:\operatorname{wt}(r)=2\},
+\]
+the mod-three \(D_4\) roots.  With \(q(x)=\sum_i x_i^2\), the conditions
+\(v_i+v_j,v_i-v_j\in R\) give
+\[
+ q(v_i)=1,\qquad v_i\mathbin{\cdot}v_j=0\quad(i\ne j).
+\]
+Conversely, an orthonormal basis has all \(\pm v_i\pm v_j\) in \(R\), and
+basis independence makes the twenty-four sums distinct.  The fibre is thus
+the set of orthonormal decompositions into four lines.
+
+There are exactly three.  A unit vector over \(\mathbf F_3\) has Hamming
+weight one or four.  If an orthonormal basis contains a weight-one line,
+orthogonality forces the four coordinate lines.  Otherwise all four lines
+have full support.  Normalize their first coordinates to one; orthogonality
+then says that two sign rows differ in exactly two positions.  The full-sign
+lines split into exactly the even and odd parity Hadamard frames.  These give
+\(X_4,E_4,O_4\), respectively.
+
+This triple is not accidental.  After translation by the common centre,
+\(E_4\) and \(O_4\) are the two half-spin sign systems and \(X_4\) is the
+coordinate vector system.  The order-four Hadamard matrix
+\[
+ H=\begin{pmatrix}
+ 1&1&1&1\\ 1&1&-1&-1\\ 1&-1&1&-1\\ 1&-1&-1&1
+ \end{pmatrix}
+ \quad (H^2=I\text{ over }\mathbf F_3)
+\]
+exchanges one spin system with the vector system, while coordinatewise
+complement exchanges the two spin systems and fixes the vector system.
+These transpositions generate the visible \(S_3\) triality on the fibre.
+All three caps are therefore affinely equivalent: again the theorem detects
+a marking fibre, now of size three, rather than three cap isomorphism types.
+Precisely, the induced triality action is the homogeneous space
+\(S_3/S_2\); the three-point fibre is not an \(S_3\)-torsor.
+
+The moment statement is also conceptual.  For any centered orthonormal frame
+\(\{\pm v_i\}\), odd moments through degree three cancel and the quadratic
+moment tensor is
+\(2\sum_i v_iv_i^{\mathsf T}=2I\).  Translating back preserves equality in
+degrees below four.  The monomial \(x_1x_2x_3x_4\) takes summed values
+\(1,0,2\) on \(E_4,O_4,X_4\), respectively, and separates the three.
+
+The replay additionally checks the proof without using the classification:
+the forced antipodal reduction leaves
+\(\binom{40}{4}=91{,}390\) candidates, and exact exhaustion returns exactly
+the three displayed sets.
+
+The equality \(2^{n-1}=2n\), needed for the half-spin and vector systems to
+have the same cardinality, singles out \(n=4\) among \(n\ge3\).  Thus this
+third mate is exceptional rather than an obvious infinite extension.  The
+exact fibre for \(n\ge5\) remains open here.
 
 ### CAP2 — power spectrum versus bispectrum
 
@@ -903,8 +975,8 @@ Until those gates pass, this is a fishing question only.
 ### Best order of attack
 
 1. Audit and conceptually package the completed four-cap theorem.
-2. Determine the exact profile fibre of the now-proved affine-cube parity
-   pair for (n\ge4).
+2. Determine the exact profile fibre of the affine-cube parity pair for
+   (n\ge5); dimension four is now the exact three-point triality fibre.
 3. Test the minimal bispectral data in CAP2.
 4. Develop NT1 alongside C906, because its fibre actions are already needed
    for the exceptional tower.
@@ -948,15 +1020,15 @@ with all four of the following kept together:
 
 1. equality of the complete distinct-pair sum profile, rather than equality
    of a design boundary or a difference autocorrelation;
-2. complete fibre classification in \(\mathbf F_3^3\): singleton on planar
-   four-caps and a reflected pair on affine bases;
+2. complete fibre classification in \(\mathbf F_3^3\), followed by the
+   exceptional three-point \(D_4\)-triality fibre in \(\mathbf F_3^4\);
 3. a sharp polynomial-moment statement for the parity tower: every degree
    below \(n\) fails, while one degree-\(n\) monomial succeeds; and
 4. the correct quotient statement: the ambiguity is a labelled orientation
    bit inside one affine isomorphism class.
 
 This is the current strongest candidate, not yet a novelty verdict.  The
-exact fibre for \(n\ge4\) is unknown, and broader homometric-set, cap-bitrade,
+exact fibre for \(n\ge5\) is unknown, and broader homometric-set, cap-bitrade,
 and additive-reconstruction literature has not yet been closed.
 
 ### Red-team limits on the theorem
@@ -965,7 +1037,8 @@ and additive-reconstruction literature has not yet been closed.
   not lower-bound arbitrary invariants, query complexity, correlation order,
   or bispectral degree.
 - Equality of \(m_{E_n}\) and \(m_{O_n}\) proves a two-point subfibre, not a
-  complete fibre when \(n\ge4\).
+  complete fibre in general.  Dimension four already has a third mate; no
+  complete classification is claimed for \(n\ge5\).
 - Affine equivalence exchanges the two parity halves.  Hence this is an
   orientation/marking obstruction, not non-isomorphism reconstruction.
 - The exhaustive \(n=3\) check is exact evidence but is not yet packaged to
@@ -980,20 +1053,21 @@ and additive-reconstruction literature has not yet been closed.
 
 Only two adjacent candidates survive the bounded extraction pass:
 
-1. classify the full \(m\)-profile fibre of \(E_n\) for \(n=4\), then seek a
-   general theorem or produce a larger-fibre counterexample;
+1. explain the exact \(D_4\)-triality action on the three-point \(n=4\)
+   fibre without exhaustion, then test \(n=5\) inside a symmetry-reduced
+   candidate class;
 2. determine the smallest affine-equivariant additional statistic that
    orients the full structured fibre, separating polynomial-moment degree
    from correlation order.
 
-Failure is informative in both cases.  Extra mates at \(n=4\) would give an
-explicit lower bound on the size of any pair-shadow reconstruction fibre;
+Failure is informative in both cases.  The third mate at \(n=4\) already
+gives an exact lower bound of three for this pair-shadow reconstruction fibre;
 failure of a bounded-order separator would give a genuine local-to-global
 impossibility theorem for this tower.
 
 ## 6E. Claim-specific literature boundary
 
-**Opening depth summary.**  Three sources below were read at full text, one
+**Opening depth summary.**  Three sources below were read at full text, three
 at stated partial depth, and one at abstract/accessible-excerpt depth only.
 This is a bounded pre-emption audit, not a completed absence search.  It
 licenses the classical-ownership statements above and no "first" or "to our
@@ -1033,12 +1107,51 @@ knowledge" sentence.
    endpoint's TLS certificate.  The abstract suffices only to establish that
    general \(k\)-deck reconstruction under group actions is prior terrain;
    it does not settle any exact Clebsch or cap fibre.
+6. J. C. Baez, *The Octonions*, arXiv:math/0105155 (published web version).
+   **Read depth: partial**, Section 2.4, "Spinors and Trialities," read in the
+   author's HTML version; the arXiv PDF is cached as `arXiv:math/0105155`,
+   SHA-256
+   `f8087fb91b10cdbee2157e8eec8c33ac6b918b0de2c8c1fd16b4d8183f0868cc`.
+   The relied-on result is the classical
+   \(S_3=\operatorname{Out}(\operatorname{Spin}(8))\) permutation of the
+   vector and two half-spin representations.  The reduction of the three
+   weight systems modulo three and their identification with the computed
+   cap fibre are C905's inference, not Baez's claim.
+7. J. Awan, C. Frechette, Y. Li, and E. McMahon, *Demicaps in AG(4,3) and
+   Their Relation to Maximal Cap Partitions*, arXiv:2106.14141.
+   **Read depth: partial**, abstract, Sections 1--3, and the relevant affine
+   group discussion in Section 5, through the arXiv HTML rendering; the PDF
+   is cached as `arXiv:2106.14141`, SHA-256
+   `d9ca802cbe9875cb5efa46562474eb71f50d63eb63931d6972eebd34f368a84c`.
+   Its
+   demicaps are anchored ten-point subcaps of maximal twenty-caps, not the
+   eight-cap missing-third-profile fibre here.  This distinction is only a
+   scope check, not an absence verdict about the whole cap literature.
+
+The bounded exact-phrase/structure search that exposed the triality boundary
+used these queries verbatim:
+
+- `D4 triality vector spinor weights Hadamard matrix mod 3 cap`;
+- `ternary cap D4 triality 8 points F3^4`;
+- `homometric sets F3^4 triality cap pair sums`;
+- `Steiner bitrade D4 triality ternary cap`;
+- `"8-cap" "AG(4,3)"`;
+- `"AG(4,3)" cap 8 triality`;
+- `"F_3^4" cap Hadamard triality`; and
+- `"pair sums" cap "F_3^4"`.
+
+The results located the classical triality and the separate AG(4,3)
+maximal-cap/demicap literature, but no result page advertised the exact
+three-member missing-third-profile fibre.  Because this was a web-result
+screen rather than a pinned multi-index citation-graph audit, it licenses no
+negative novelty claim.
 
 **Coverage gaps.**  The Radcliffe--Scott full text was not obtained.
 MathSciNet is NOT COVERED.  The cap-homometry and cap-bitrade forward
 citation graphs have not been exhaustively screened, and no three-index
 forward-citation negative has been attempted.  Therefore the adjacent-crown
-composition remains a research candidate only.
+composition, including the triality fibre formulation, remains a research
+candidate only.
 
 ## 7. C906 handoff rule
 

@@ -3,7 +3,10 @@
 
 This script writes nothing.  It exhausts caps in F_3^2 and the four-caps in
 F_3^3, groups them by their labelled missing-third profile, and checks the
-canonical reflection and moment claims recorded in the C905 report.
+canonical reflection and moment claims recorded in the C905 report.  It also
+classifies the complete labelled fibre of the parity-cap profile in F_3^4,
+using the profile-forced central symmetry to reduce to 4-subsets of the 40
+antipodal directions.
 """
 
 from collections import Counter, defaultdict
@@ -100,11 +103,107 @@ def check_space_four_caps():
     return sorted(histogram.items())
 
 
+def parity_half(n, parity):
+    return tuple(
+        x for x in product(range(2), repeat=n) if sum(x) % 2 == parity
+    )
+
+
+def translate(points, shift):
+    return tuple(sorted(add(x, shift) for x in points))
+
+
+def affine_hadamard(points):
+    center = (2, 2, 2, 2)
+    hadamard = (
+        (1, 1, 1, 1),
+        (1, 1, 2, 2),
+        (1, 2, 1, 2),
+        (1, 2, 2, 1),
+    )
+    return tuple(
+        sorted(
+            tuple(
+                (
+                    center[i]
+                    + sum(
+                        hadamard[i][j] * ((x[j] - center[j]) % 3)
+                        for j in range(4)
+                    )
+                )
+                % 3
+                for i in range(4)
+            )
+            for x in points
+        )
+    )
+
+
+def check_four_dimensional_parity_fibre():
+    universe = list(product(range(3), repeat=4))
+    index = {x: i for i, x in enumerate(universe)}
+    even = parity_half(4, 0)
+    odd = parity_half(4, 1)
+    axial = tuple(
+        sorted(
+            x
+            for i in range(4)
+            for x in (
+                tuple(0 if j == i else 2 for j in range(4)),
+                tuple(1 if j == i else 2 for j in range(4)),
+            )
+        )
+    )
+    target = profile(even, index)
+    assert profile(odd, index) == target
+    assert profile(axial, index) == target
+    assert affine_hadamard(even) == axial
+    assert affine_hadamard(axial) == even
+    assert affine_hadamard(odd) == odd
+
+    repeated = [(universe[i], value) for i, value in enumerate(target) if value > 1]
+    assert repeated == [((2, 2, 2, 2), 4)]
+
+    # If an 8-set has four pairs with the same sum, those pairs cover the set:
+    # each point has a unique partner.  Translate their common midpoint to 0.
+    midpoint = (2, 2, 2, 2)
+    zero = (0, 0, 0, 0)
+    directions = []
+    seen = {zero}
+    for x in universe:
+        if x in seen:
+            continue
+        directions.append(x)
+        seen.add(x)
+        seen.add(neg(x))
+    assert len(directions) == 40
+
+    fibre = []
+    for chosen in combinations(directions, 4):
+        centered = tuple(sorted((*chosen, *(neg(x) for x in chosen))))
+        candidate = translate(centered, midpoint)
+        if profile(candidate, index) == target:
+            fibre.append(candidate)
+
+    if sorted(fibre) != sorted([even, odd, axial]):
+        raise AssertionError(
+            f"unexpected F3^4 fibre: size={len(fibre)}, "
+            f"even={even in fibre}, odd={odd in fibre}, "
+            f"axial={axial in fibre}, first={fibre[:4]}"
+        )
+    for degree in range(1, 4):
+        assert moment(even, degree) == moment(odd, degree) == moment(axial, degree)
+    assert len({moment(points, 4) for points in (even, odd, axial)}) == 3
+    return len(fibre)
+
+
 def main():
     plane = check_plane()
     space = check_space_four_caps()
+    parity_four = check_four_dimensional_parity_fibre()
     print("F3^2 size/profile-fibre histograms:", plane)
     print("F3^3 four-cap profile-fibre histogram:", space)
+    print("F3^4 parity-cap labelled profile fibre size:", parity_four)
     print("PASS")
 
 
