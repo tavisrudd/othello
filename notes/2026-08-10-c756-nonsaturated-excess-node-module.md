@@ -533,6 +533,41 @@ residual divisor of degree one or two.  This supplies a second invariant for
 the complementary-divisor resultant without assuming that unmatched lifts
 are rational.
 
+The factors of \(\Pi\) retain the original point types.  Let \(D\) be a
+symmetric matrix for \(Q_{\rm du}\), choose the compatible primal form
+\[
+ Q_{\rm pr}(v)=v^{\mathsf T}\operatorname{adj}(D)v,
+\]
+and put
+\[
+ v_i=(x_i,1,-y_i),
+ \qquad q_i(T)=Q_{\rm du}(T,y_i-Tx_i,1).
+\]
+Writing \(p_i(T)=p_{i,0}+Tp_{i,1}\), one has
+\(p_{i,0}\times p_{i,1}=v_i\).  The Gram-determinant identity for the
+restriction of a ternary quadratic form to a line gives
+\[
+ \boxed{
+ \operatorname{disc}_T q_i
+ =-4\,v_i^{\mathsf T}\operatorname{adj}(D)v_i
+ =-4Q_{\rm pr}(v_i).}                                  \tag{23t}
+\]
+Indeed, if the Gram matrix of the restriction in the basis
+\((p_{i,1},p_{i,0})\) is
+\(\left(\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right)\),
+then \(b^2-4ac=-4\det\), while the determinant is the adjugate value on
+the cross product.  Consequently
+\[
+ \boxed{
+ \Pi(T)=\prod_{i=1}^nq_i(T),
+ \qquad [\operatorname{disc}q_i]=[-Q_{\rm pr}(v_i)]}   \tag{23u}
+\]
+in square classes.  Thus the complementary norm carrier is not an arbitrary
+degree-\(2n\) polynomial: it is a product of quadratic restrictions whose
+split types are exactly the primal conic types of the endpoint lines.  This
+is the direct point-type input available for a character evaluation of
+(23r), including mixed arrangements.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level

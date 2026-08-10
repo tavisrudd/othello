@@ -512,7 +512,11 @@ also gives the complementary norm law
                             \operatorname{Res}(H_t,Q),
 \]
 so the unmatched norm square class is the value of the fixed endpoint
-polynomial \(\Pi(T)=\prod_iQ(T,y_i-Tx_i)\).
+polynomial \(\Pi(T)=\prod_iQ(T,y_i-Tx_i)\).  Its quadratic factors are
+typed: for the line vector \(v_i=(x_i,1,-y_i)\),
+\(\operatorname{disc}_TQ(T,y_i-Tx_i)=-4Q_{\rm pr}(v_i)\).
+Hence the complementary norm retains the original internal/external mixture
+rather than discarding it.
 
 ### \(q=53\): type-uniform critical core
 
