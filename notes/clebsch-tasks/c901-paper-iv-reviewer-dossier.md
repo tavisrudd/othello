@@ -9,8 +9,8 @@ findings repaired, authoritative gate green, and focused re-review green
 ## Objective
 
 Own the continuing human-proof and exposition review programme for Paper IV,
-*Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
-conic code*.  Identify likely journal reviewers and the most useful critical
+*Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the
+minimum words of a binary conic code*.  Identify likely journal reviewers and the most useful critical
 personas, extract their directly related literature and conventions into
 bounded packets, use those packets for independent cold reads, synthesize each
 frozen round, apply author-approved fixes and upgrades, and re-review the

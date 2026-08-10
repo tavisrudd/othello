@@ -9,8 +9,8 @@ warning-free PDF, visual, and adversarial gates green; returned to C761
 
 Rebuild Paper IV around the longer title
 
-> *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
-> conic code*
+> *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from
+> the minimum words of a binary conic code*
 
 and integrate the successful C817 mathematics into one structural theorem
 chain.  The new version must replace the weight-eight and weight-ten brute

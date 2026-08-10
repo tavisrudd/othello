@@ -100,8 +100,8 @@ Clebsch cubic*
   release gates are closed; submission still requires an immutable finitegeom
   release containing the supplemental golden-return sources.
 
-**Clebsch fourth paper · `q13-passant-code`** — *Minimum-word reconstruction of $\PG(2,13)$ from a
-binary conic code* (earlier titled *A binary [78,36,12] code from the passant lines of a conic over
+**Clebsch fourth paper · `q13-passant-code`** — *Reconstructing $\PG(2,13)$, its conic, and polarity
+from the minimum words of a binary conic code* (earlier titled *A binary [78,36,12] code from the passant lines of a conic over
 F13*)
 - *Status:* a manuscript-only pre-release was deposited 2026-08-03 as DOI
   `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version. C761 has

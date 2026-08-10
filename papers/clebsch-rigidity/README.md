@@ -10,8 +10,8 @@ portfolio papers.
 
 The five related papers are: I, this rigidity paper; II, *Quadratic trade
 rigidity and cubic orientation in conic matching quotients*; III, *Golden
-descent and operator realizations of the Clebsch cubic*; IV, *Minimum-word
-reconstruction of PG(2,13) from a binary conic code*; and
+descent and operator realizations of the Clebsch cubic*; IV, *Reconstructing
+PG(2,13), its conic, and polarity from the minimum words of a binary conic code*; and
 the companion MDS--CSS transversal-groups paper.
 
 [Read the paper (PDF).](clebsch_rigidity.pdf)

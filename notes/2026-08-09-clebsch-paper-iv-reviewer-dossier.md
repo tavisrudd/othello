@@ -3,8 +3,9 @@
 **Lane:** `clebsch`  
 **Date:** 2026-08-09  
 **Task:** C901  
-**Scope:** likely human-proof and mathematical referees for *Minimum-word
-reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code*.
+**Scope:** likely human-proof and mathematical referees for *Reconstructing
+\(\operatorname{PG}(2,13)\), its conic, and polarity from the minimum words
+of a binary conic code*.
 Formalization, software correctness, package trust, and release engineering are
 deliberately out of scope.
 
@@ -629,4 +630,3 @@ reconstruct the relation dictionary; Ball accepts the tangent sign and PSD
 handoff; Tranchida accepts intrinsic plane recovery from the abstract group;
 and Mellinger can state both the exact novelty and the finite exhaustion route
 without opening the verification source.
-

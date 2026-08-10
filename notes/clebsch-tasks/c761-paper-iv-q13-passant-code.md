@@ -3,9 +3,9 @@
 **Lane:** `clebsch`
 
 **Status:** active; release blocked on C834 full-Lean closure by author
-direction 2026-08-02.  C831/C832 structural version integrated under the longer
-title *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a
-binary conic code*.  The eleven-page warning-free manuscript now leads with
+direction 2026-08-02.  The current title is *Reconstructing
+\(\operatorname{PG}(2,13)\), its conic, and polarity from the minimum words
+of a binary conic code*.  The fifteen-page warning-free manuscript now leads with
 exact weighted-pair recovery of the full marked conic plane.  Its rank-28
 theta certificate, global moment--stabilizer distance proof,
 toric--octahedral minimum geometry, compact \(\mathbf F_8\) operator-field

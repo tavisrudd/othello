@@ -11,8 +11,8 @@ portfolio papers.
 The five related papers are: I, *Reconstructing the Clebsch code and its
 golden orientation from its deep-hole syndrome locus*; II, *Quadratic trade
 rigidity and cubic orientation in conic matching quotients*; III, this paper;
-IV, *Minimum-word reconstruction of PG(2,13) from a binary
-conic code*; and the companion MDS--CSS transversal-groups paper.
+IV, *Reconstructing PG(2,13), its conic, and polarity from the minimum words
+of a binary conic code*; and the companion MDS--CSS transversal-groups paper.
 
 [Read the paper (PDF).](clebsch_passages.pdf)
 
