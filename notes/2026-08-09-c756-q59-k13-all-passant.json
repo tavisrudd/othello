@@ -1,0 +1,413 @@
+{
+  "first_nonzero_forced_degree": [],
+  "forced_window_stars": 0,
+  "geometric_stars": 0,
+  "k": 13,
+  "mode": "all-passant-internal-deletion",
+  "normalization": "central inversion sends seed offset s to -s; representatives 0..29",
+  "pinned_files": {
+    "2026-08-09-c756-aligned-node-clique.py": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb",
+    "2026-08-09-c756-aligned-split-mixed-search.py": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f"
+  },
+  "present_seed_representatives": 15,
+  "q": 59,
+  "schema": "c756-q59-k13-star-aggregate-v1",
+  "search_nodes": 3042991,
+  "seed_representatives": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "shards": [
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 25907,
+        "hits": 612776,
+        "maxsize": 200000,
+        "misses": 25907
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 199684,
+      "seed_present": true,
+      "seed_s": 0,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 1
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 2
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 29949,
+        "hits": 687148,
+        "maxsize": 200000,
+        "misses": 29949
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 224873,
+      "seed_present": true,
+      "seed_s": 3,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 4
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 31116,
+        "hits": 659082,
+        "maxsize": 200000,
+        "misses": 31116
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 217682,
+      "seed_present": true,
+      "seed_s": 5,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 28073,
+        "hits": 557750,
+        "maxsize": 200000,
+        "misses": 28073
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 186666,
+      "seed_present": true,
+      "seed_s": 6,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 31349,
+        "hits": 661712,
+        "maxsize": 200000,
+        "misses": 31349
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 218280,
+      "seed_present": true,
+      "seed_s": 7,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 8
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 9
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 10
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 11
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 12
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 13
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 14
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 15
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 26937,
+        "hits": 536814,
+        "maxsize": 200000,
+        "misses": 26937
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 178731,
+      "seed_present": true,
+      "seed_s": 16,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 27669,
+        "hits": 500583,
+        "maxsize": 200000,
+        "misses": 27669
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 169331,
+      "seed_present": true,
+      "seed_s": 17,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 28203,
+        "hits": 582626,
+        "maxsize": 200000,
+        "misses": 28203
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 193178,
+      "seed_present": true,
+      "seed_s": 18,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 19
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 20
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 30601,
+        "hits": 669376,
+        "maxsize": 200000,
+        "misses": 30601
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 220128,
+      "seed_present": true,
+      "seed_s": 21,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 26316,
+        "hits": 590786,
+        "maxsize": 200000,
+        "misses": 26316
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 194634,
+      "seed_present": true,
+      "seed_s": 22,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 26362,
+        "hits": 521348,
+        "maxsize": 200000,
+        "misses": 26362
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 174402,
+      "seed_present": true,
+      "seed_s": 23,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 24
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 30369,
+        "hits": 672994,
+        "maxsize": 200000,
+        "misses": 30369
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 221511,
+      "seed_present": true,
+      "seed_s": 25,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 29573,
+        "hits": 697721,
+        "maxsize": 200000,
+        "misses": 29573
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 227719,
+      "seed_present": true,
+      "seed_s": 26,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "geometric_stars": 0,
+      "search_nodes": 0,
+      "seed_present": false,
+      "seed_s": 27
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 30596,
+        "hits": 624243,
+        "maxsize": 200000,
+        "misses": 30596
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 207083,
+      "seed_present": true,
+      "seed_s": 28,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    },
+    {
+      "best_witness": null,
+      "cache": {
+        "currsize": 30953,
+        "hits": 629946,
+        "maxsize": 200000,
+        "misses": 30953
+      },
+      "first_nonzero_forced_degree": [],
+      "forced_window_stars": 0,
+      "geometric_stars": 0,
+      "search_nodes": 209089,
+      "seed_present": true,
+      "seed_s": 29,
+      "stars_with_all_complete_centers": 0,
+      "stars_with_any_complete_center": 0,
+      "type_profiles": []
+    }
+  ],
+  "stars_with_all_complete_centers": 0,
+  "stars_with_any_complete_center": 0,
+  "type_profiles": []
+}

@@ -11,8 +11,11 @@ field.  At \(q=47\), all 22 external-deletion stars fail \(E_9=0\); at
 all-passant rows have no geometric star.  At \(q=53\), the 230
 external-deletion and 44 all-passant stars have zero complete centers.  The
 direction bound excludes \(q>53\), while even fields and \(q\le43\) were
-already settled.  At \(k=13\), exact twelve-line geometry closes
-\(q=47,49,53\), reducing the complete fixed-size frontier to \(q=59,61\).
+already settled.  At \(k=13\), exact twelve-line geometry also closes
+\(q=59\), while at \(q=61\) exactly 96 normalized mixed leaves survive
+geometry and every one fails the first forced equation \(E_6=0\); the
+all-passant row has no leaf.  Thus the complete \(k=13\) layer is impossible
+over every finite field.
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -87,7 +90,7 @@ Authorities:
 - The classification is exact for every \(k\) and odd prime power \(q\le43\):
   only the \(q=5\) four-frame and \(q=11\) hexagon occur.
 - No conic-filling \(12\)-arc exists over any finite field.
-- For \(k=13\), the only unresolved fields are \(q=59,61\).
+- No conic-filling \(13\)-arc exists over any finite field.
 
 ## Current branch map
 
@@ -299,12 +302,23 @@ histogram \((48,138,118,26)\) are exact across all four normalized dihedral
 orbits but presently have no symbolic all-\(q\) derivation.  Authority:
 notes/2026-08-09-c756-star-collision-character-identity.md.
 
+### \(q=59,61,k=13\): complete negative classification
+
+At \(q=59\), the 30 normalized mixed seed rows and 15 present all-passant
+seed rows have no twelve-line geometric star after respectively 187,764,531
+and 3,042,991 search nodes.  At \(q=61\), the all-passant row again has no
+star; the mixed row has exactly 96 normalized stars, all of type three
+secants plus nine passants, and every one fails \(E_6=0\).  None of those 96
+has even one complete center.  Hence no conic-filling \(13\)-arc exists over
+any finite field.  Authority:
+notes/2026-08-09-c756-global-k13-closure.md.
+
 ## Ordered next actions
 
-1. Shard the \(q=59\) twelve-line mixed and all-passant searches and test the
-   forced window \(E_8,\ldots,E_{16}\) at every leaf.
-2. At \(q=61\), insert \(E_6,\ldots,E_{17}\) from the outset; its first
-   equation begins at covariance degree.
+1. Use the 96 exact \(q=61\) mixed leaves as roots for the thirteen-line
+   \(k=14\) extension gate; do not rerun the full twelve-line tree.
+2. Freeze the \(k=14\) point-type/window ledger before touching the remaining
+   larger fields.
 3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
@@ -360,7 +374,9 @@ Do not:
 - \(q=47,k=12\): closed exactly for every point type.
 - \(q=49,k=12\): closed exactly for every point type.
 - \(q=53,k=12\): closed exactly for every point type and covariance class.
-- \(k=13\): closed at \(q=47,49,53\); only \(q=59,61\) remain globally.
+- \(k=13\): closed exactly over every finite field; at \(q=61\), all 96
+  geometric mixed leaves fail \(E_6=0\), and the other remaining rows have no
+  twelve-line star.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
@@ -379,6 +395,8 @@ Do not:
   `notes/2026-08-09-c756-q49-and-global-k12-closure.md`.
 - k=13 ledger and q=47,49,53 geometric closure:
   `notes/2026-08-09-c756-k13-ledger-low-field-closure.md`.
+- Global k=13 closure at q=59,61:
+  `notes/2026-08-09-c756-global-k13-closure.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:
