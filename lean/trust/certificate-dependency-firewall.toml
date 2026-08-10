@@ -8,6 +8,8 @@ name = "finitegeom-clebsch-q11-certificates"
 checkout = "finitegeom-clebsch-q11-certificates"
 heavy = true
 allowed_direct_dependencies = ["mathlib"]
+source_root = "TavisRuddFiniteGeom/Certificates/Q11"
+module_prefix = "TavisRuddFiniteGeom.Certificates.Q11"
 
 [[certificate]]
 name = "finitegeom-projective-cap-q11-certificates"
@@ -26,6 +28,8 @@ name = "finitegeom-q16-certificates"
 checkout = "finitegeom-q16-certificates"
 heavy = true
 allowed_direct_dependencies = ["mathlib"]
+source_root = "TavisRuddFiniteGeom/Certificates/Q16"
+module_prefix = "TavisRuddFiniteGeom.Certificates.Q16"
 
 [[certificate]]
 name = "finitegeom-q25-certificates"

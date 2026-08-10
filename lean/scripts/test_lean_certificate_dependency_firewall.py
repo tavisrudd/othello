@@ -26,7 +26,13 @@ class CertificateDependencyFirewallTests(unittest.TestCase):
         config.write_text(
             'schema_version = 1\n[[certificate]]\nname = "certs"\n'
             'checkout = "certs"\nheavy = true\n'
-            'allowed_direct_dependencies = ["mathlib"]\n',
+            'allowed_direct_dependencies = ["mathlib"]\n'
+            'source_root = "Certs"\nmodule_prefix = "Certs"\n',
+            encoding="utf-8",
+        )
+        (package / "Certs").mkdir()
+        (package / "Certs/Certificate.lean").write_text(
+            "import Mathlib.Data.Fin.Basic\nimport Certs.Model\n",
             encoding="utf-8",
         )
         self.write_package(package, [("mathlib", MATHLIB_URL, MATHLIB_REV)])
@@ -123,6 +129,19 @@ class CertificateDependencyFirewallTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn(
                 "manifest direct dependencies are ['finitegeom', 'mathlib']", result.stdout
+            )
+
+    def test_project_source_import_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            config, libraries = self.fixture(directory)
+            (libraries / "certs/Certs/Certificate.lean").write_text(
+                "import RelativeConicArcs.Foundation\n",
+                encoding="utf-8",
+            )
+            result = self.run_check(config, libraries)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn(
+                "forbidden source import RelativeConicArcs.Foundation", result.stdout
             )
 
 

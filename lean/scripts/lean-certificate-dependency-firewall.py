@@ -26,6 +26,34 @@ def direct_manifest_packages(document: dict) -> dict[str, dict]:
     }
 
 
+def source_import_violations(root: Path, policy: dict) -> list[str]:
+    source_root = policy.get("source_root")
+    module_prefix = policy.get("module_prefix")
+    if source_root is None or module_prefix is None:
+        return []
+    source = root / source_root
+    if not source.is_dir():
+        return [f"{policy['name']}: certificate source root is missing at {source_root}"]
+    allowed = ("Mathlib", module_prefix)
+    problems: list[str] = []
+    for path in sorted(source.rglob("*.lean")):
+        relative = path.relative_to(root)
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            stripped = line.strip()
+            if not stripped.startswith("import "):
+                continue
+            for imported in stripped.removeprefix("import ").split():
+                if imported == "Mathlib" or imported.startswith(allowed):
+                    continue
+                problems.append(
+                    f"{policy['name']}: forbidden source import {imported} at"
+                    f" {relative}:{line_number}"
+                )
+    return problems
+
+
 def certificate_violations(root: Path, policy: dict) -> list[str]:
     name = policy["name"]
     allowed = set(policy["allowed_direct_dependencies"])
@@ -73,6 +101,7 @@ def certificate_violations(root: Path, policy: dict) -> list[str]:
             problems.append(
                 f"{name}: {dependency} lakefile pin does not match its resolved manifest entry"
             )
+    problems.extend(source_import_violations(root, policy))
     return problems
 
 
