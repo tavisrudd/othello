@@ -1,7 +1,14 @@
-schema_version = 1
+schema_version = 2
 migration = "q25"
 status = "pending"
-module_count = 9531
+migration_inputs = 9531
+migration_input_generated = 9493
+migration_input_handwritten = 38
+transformed_generated_modules = 1945
+regenerated_generated_modules = 7548
+final_generated_modules = 9493
+final_handwritten_modules = 18
+final_modules = 9511
 final_namespace = "TavisRuddFiniteGeom.Certificates.Q25"
 generators = [
   "notes/2026-07-15-c151-exactness-generator.py",

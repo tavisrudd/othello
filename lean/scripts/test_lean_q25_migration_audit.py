@@ -52,7 +52,15 @@ class Q25MigrationAuditTests(unittest.TestCase):
             root, config = self.fixture(directory)
             result = self.run_audit(root, config)
             self.assertEqual(result.returncode, 0, result.stdout)
-            self.assertIn("FACT status=pending modules=9531", result.stdout)
+            self.assertIn(
+                "FACT status=pending migration_inputs=9531 generated=9493 handwritten=38",
+                result.stdout,
+            )
+            self.assertIn(
+                "FACT final_modules=9511 generated=9493 handwritten=18 "
+                "transformed=1945 regenerated=7548",
+                result.stdout,
+            )
             self.assertIn("legacy_imports=10 nucleus_used=false", result.stdout)
 
     def test_family_total_drift_fails(self) -> None:
@@ -62,7 +70,19 @@ class Q25MigrationAuditTests(unittest.TestCase):
             config.write_text(text.replace("count = 1942", "count = 1941", 1), encoding="utf-8")
             result = self.run_audit(root, config)
             self.assertEqual(result.returncode, 1)
-            self.assertIn("family counts total 9530", result.stdout)
+            self.assertIn("migration-input family counts total 9530", result.stdout)
+
+    def test_final_category_drift_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root, config = self.fixture(directory)
+            text = config.read_text(encoding="utf-8")
+            config.write_text(
+                text.replace("final_handwritten_modules = 18", "final_handwritten_modules = 19", 1),
+                encoding="utf-8",
+            )
+            result = self.run_audit(root, config)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("final_handwritten_modules must be 18", result.stdout)
 
     def test_missing_legacy_import_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

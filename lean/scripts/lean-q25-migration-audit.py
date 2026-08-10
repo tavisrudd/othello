@@ -12,7 +12,14 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = REPOSITORY_ROOT / "lean/trust/certificate-migrations/q25.toml"
 FINAL_NAMESPACE = "TavisRuddFiniteGeom.Certificates.Q25"
-MODULE_COUNT = 9531
+MIGRATION_INPUTS = 9531
+MIGRATION_INPUT_GENERATED = 9493
+MIGRATION_INPUT_HANDWRITTEN = 38
+TRANSFORMED_GENERATED_MODULES = 1945
+REGENERATED_GENERATED_MODULES = 7548
+FINAL_GENERATED_MODULES = 9493
+FINAL_HANDWRITTEN_MODULES = 18
+FINAL_MODULES = 9511
 FAMILY_COUNTS = {
     "root_modules": 39,
     "Gates": 2,
@@ -76,7 +83,7 @@ def audit(root: Path, config: Path) -> tuple[list[str], list[str]]:
     problems: list[str] = []
     facts: list[str] = []
 
-    if document.get("schema_version") != 1:
+    if document.get("schema_version") != 2:
         problems.append("unsupported schema_version")
     if document.get("migration") != "q25":
         problems.append("migration must be q25")
@@ -84,8 +91,25 @@ def audit(root: Path, config: Path) -> tuple[list[str], list[str]]:
         problems.append("migration status must be pending")
     if document.get("final_namespace") != FINAL_NAMESPACE:
         problems.append(f"final_namespace must be {FINAL_NAMESPACE}")
-    if document.get("module_count") != MODULE_COUNT:
-        problems.append(f"module_count must be {MODULE_COUNT}")
+    expected_counts = {
+        "migration_inputs": MIGRATION_INPUTS,
+        "migration_input_generated": MIGRATION_INPUT_GENERATED,
+        "migration_input_handwritten": MIGRATION_INPUT_HANDWRITTEN,
+        "transformed_generated_modules": TRANSFORMED_GENERATED_MODULES,
+        "regenerated_generated_modules": REGENERATED_GENERATED_MODULES,
+        "final_generated_modules": FINAL_GENERATED_MODULES,
+        "final_handwritten_modules": FINAL_HANDWRITTEN_MODULES,
+        "final_modules": FINAL_MODULES,
+    }
+    for key, expected in expected_counts.items():
+        if document.get(key) != expected:
+            problems.append(f"{key} must be {expected}")
+    if MIGRATION_INPUT_GENERATED + MIGRATION_INPUT_HANDWRITTEN != MIGRATION_INPUTS:
+        problems.append("migration input category totals drift")
+    if TRANSFORMED_GENERATED_MODULES + REGENERATED_GENERATED_MODULES != FINAL_GENERATED_MODULES:
+        problems.append("generated output category totals drift")
+    if FINAL_GENERATED_MODULES + FINAL_HANDWRITTEN_MODULES != FINAL_MODULES:
+        problems.append("final module category totals drift")
 
     families = document.get("family", [])
     family_names = [entry.get("name") for entry in families]
@@ -93,10 +117,10 @@ def audit(root: Path, config: Path) -> tuple[list[str], list[str]]:
         problems.append("family names must be unique")
     declared_families = {entry.get("name"): entry.get("count") for entry in families}
     if declared_families != FAMILY_COUNTS:
-        problems.append("family entries do not match the frozen 9,531-module inventory")
+        problems.append("family entries do not match the 9,531 migration inputs")
     family_total = sum(entry.get("count", 0) for entry in families)
-    if family_total != MODULE_COUNT:
-        problems.append(f"family counts total {family_total}, expected {MODULE_COUNT}")
+    if family_total != MIGRATION_INPUTS:
+        problems.append(f"migration-input family counts total {family_total}, expected {MIGRATION_INPUTS}")
 
     imports = document.get("legacy_import", [])
     declared_imports = {entry.get("module") for entry in imports}
@@ -134,7 +158,15 @@ def audit(root: Path, config: Path) -> tuple[list[str], list[str]]:
     for collision in collisions:
         problems.append(f"target namespace collision: {collision}")
 
-    facts.append(f"status=pending modules={family_total} families={len(families)}")
+    facts.append(
+        f"status=pending migration_inputs={family_total} "
+        f"generated={MIGRATION_INPUT_GENERATED} handwritten={MIGRATION_INPUT_HANDWRITTEN}"
+    )
+    facts.append(
+        f"final_modules={FINAL_MODULES} generated={FINAL_GENERATED_MODULES} "
+        f"handwritten={FINAL_HANDWRITTEN_MODULES} transformed={TRANSFORMED_GENERATED_MODULES} "
+        f"regenerated={REGENERATED_GENERATED_MODULES}"
+    )
     facts.append(f"legacy_imports={len(imports)} nucleus_used=false")
     facts.append(f"local_groups={len(local_groups)} downstream_families={len(downstream)}")
     facts.append(f"tracked_generators={len(generators)} target_collisions={len(collisions)}")
