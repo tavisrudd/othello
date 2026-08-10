@@ -569,7 +569,10 @@ as
   \chi\operatorname{Res}(K_{\rm odd,sm},\mathcal S).
 \]
 Thus the same universal torus sum \(S_t\) controls both zero and sign gates;
-the other factor is an explicit quadratic resultant.
+the other factor is an explicit quadratic resultant.  In the quadratic
+algebra \(E_\psi=\mathbb F_q[T]/(\psi/\operatorname{lc}\psi)\), it is
+\(\operatorname{lc}(\psi)^{\deg K}N_{E_\psi/\mathbb F_q}(K(\theta))\), so
+it uses only the two tangent directions, with multiplicity.
 The torus boundary \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two.
 Every covered tangent fibre forces \(c/\eta\) square, splits as
 \(s=\pm\sqrt{c/\eta}\,r\), and has

@@ -903,6 +903,26 @@ and the product of the nonzero \(S_t\) gives the residual parity sign.  The
 only additional factor is the explicit quadratic resultant of \(\psi\);
 odd tangent fibres remain on the degree-at-most-two support below.
 
+That quadratic factor is itself a bounded evaluation.  If
+\[
+ E_\psi=\mathbb F_q[\theta]/(\psi(\theta)/A),
+ \qquad A=\operatorname{lc}(\psi),
+\]
+and \(d=\deg K_{\rm odd,sm}\), then
+\[
+ \boxed{
+ \operatorname{Res}(K_{\rm odd,sm},\psi)
+ =A^d
+  N_{E_\psi/\mathbb F_q}
+     \bigl(K_{\rm odd,sm}(\theta)\bigr).}               \tag{23br}
+\]
+Here the norm is the determinant of multiplication, so the same formula
+covers irreducible, split, and double-root quadratics.  If \(\psi\) drops
+degree, use the corresponding homogeneous resultant.
+Thus the non-universal smooth factor requires only evaluation at the two
+tangent directions.  Every unbounded value-level contribution is contained
+in \(\operatorname{Res}(K_{\rm odd,sm},\mathcal S)\).
+
 The omitted tangent fibres form a uniformly bounded support.  Put
 \[
  K_{\rm tan}=\gcd(K_P,\psi),
