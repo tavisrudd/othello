@@ -53,12 +53,12 @@ class Q25MigrationAuditTests(unittest.TestCase):
             result = self.run_audit(root, config)
             self.assertEqual(result.returncode, 0, result.stdout)
             self.assertIn(
-                "FACT status=pending migration_inputs=9531 generated=9493 handwritten=38",
+                "FACT status=pending migration_inputs=9531 generated=9492 handwritten=39",
                 result.stdout,
             )
             self.assertIn(
-                "FACT final_modules=9511 generated=9493 handwritten=18 "
-                "transformed=1945 regenerated=7548",
+                "FACT final_modules=9511 generated=9492 handwritten=19 "
+                "transformed=1945 regenerated=7547",
                 result.stdout,
             )
             self.assertIn("legacy_imports=10 nucleus_used=false", result.stdout)
@@ -77,12 +77,12 @@ class Q25MigrationAuditTests(unittest.TestCase):
             root, config = self.fixture(directory)
             text = config.read_text(encoding="utf-8")
             config.write_text(
-                text.replace("final_handwritten_modules = 18", "final_handwritten_modules = 19", 1),
+                text.replace("final_handwritten_modules = 19", "final_handwritten_modules = 20", 1),
                 encoding="utf-8",
             )
             result = self.run_audit(root, config)
             self.assertEqual(result.returncode, 1)
-            self.assertIn("final_handwritten_modules must be 18", result.stdout)
+            self.assertIn("final_handwritten_modules must be 19", result.stdout)
 
     def test_missing_legacy_import_fails(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
