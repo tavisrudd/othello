@@ -316,6 +316,30 @@ Thus the nonsaturated conic problem has been reduced further: it is enough
 to control a single global discriminant character, or equivalently the
 weighted product of trace characters in (28), rather than every node value.
 
+That weighted product is itself a bounded resultant.  Take \(E_P\) monic
+in the affine slope chart and define the second excess polynomial
+\[
+ J_P(T)=\frac{E_P(T)}{\operatorname{rad}E_P(T)}
+       =\prod_{t\in R_0}(T-t)^{\mu_t-2},
+ \qquad \deg J_P=\delta-r.                               \tag{34}
+\]
+Then the interpolation polynomial \(\Sigma\) from (26) satisfies
+\[
+ \operatorname{Res}_T(J_P,\Sigma)
+ =\prod_{t\in R_0}\sigma_t^{\mu_t-2},                   \tag{35}
+\]
+and hence
+\[
+ \boxed{
+ \chi(\operatorname{disc}\mathcal C_Q|_M)
+ =\epsilon^{\delta+r}
+  \chi\!\left(\operatorname{Res}_T(J_P,\Sigma)\right).} \tag{36}
+\]
+Thus the remaining conic character lives on a divisor of degree
+\(\delta-r\), supported exactly where a direction has a third or later
+chord.  Formula (36) is the nonsaturated analogue of quotienting the
+saturated first-ghost space by its three-dimensional conic subspace.
+
 The trace itself is accessible from the repeated-root polynomial.  If
 \[
  G_t(U)=\prod_{i=1}^{\mu_t}(U-u_i)
@@ -419,6 +443,7 @@ prove nonexistence.
 | Is there a canonical quadratic invariant without choosing means? | settled | covariance form (14) and determinant (17) |
 | Where does the conic character live? | settled | square class (19) in the split node algebra |
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
+| Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
 | Does the abstract module force a contradiction? | no | must use star realization and covering identities |
@@ -427,6 +452,7 @@ prove nonexistence.
 ## Next action
 
 Derive a cross-direction identity for the Gram matching sums (32),
-equivalently the first two coefficients of \(G_t\), and compare its global
-character with (28).  Preserve actual conic values: the Euler-character
-projection (33) is too coarse.  Do not resolve this by a fixed-field census.
+equivalently the first two coefficients of \(G_t\), and evaluate their
+bounded resultant (36) modulo \(J_P\).  Preserve actual conic values: the
+Euler-character projection (33) is too coarse.  Do not resolve this by a
+fixed-field census.

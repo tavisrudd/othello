@@ -305,7 +305,10 @@ conic contribution to
 \(\epsilon^{\delta+r}\prod_{\mu_t\ge2}
 \chi(\sigma_t)^{\mu_t-2}\), where
 \(\sigma_t=\sum_{\pi^{-1}(t)}Q(t,u)\); only multiplicity at least three
-remains unknown.  Each \(\sigma_t\) depends only on the first two
+remains unknown.  Equivalently this product is the character of
+\(\operatorname{Res}(J_P,\Sigma)\), where
+\(J_P=E_P/\operatorname{rad}E_P\) has degree \(\delta-r\) and
+\(\Sigma(t)=\sigma_t\).  Each \(\sigma_t\) depends only on the first two
 coefficients of the repeated-root factor of \(F(U,t)\), and equivalently is
 a square-normalized matching sum of
 \(Q(v_i)Q(v_j)-B(v_i,v_j)^2\) over chord endpoints.  The
@@ -444,8 +447,8 @@ over every finite field.  Authorities:
    pair; do not retry translations of the affine coordinate.
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
-   node module.  Control its weighted global discriminant through the first
-   two repeated-root coefficients or the equivalent Gram matching sums, then
+   node module.  Control its degree-\(\delta-r\) second-excess resultant
+   through the first two repeated-root coefficients or the equivalent Gram matching sums, then
    compare it with the constant conic square class through star realization.
 
 ## Stop rules
