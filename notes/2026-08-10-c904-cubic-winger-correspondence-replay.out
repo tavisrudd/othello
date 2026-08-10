@@ -1,0 +1,6 @@
+PASS independent GAP replay
+A5=60 A4-class=5 D5-class=6 pairs=30
+intersection orders=[ 2 ] <V4,W5>=0
+pair involution quotient=2
+fixed dimensions V4^A4=1 W5^D5=1
+irreducible degrees=[ 1, 4, 5, 3, 3 ] carrier multiplicities=[ 0, 1, 2, 1, 1 ]

@@ -22,6 +22,19 @@ quotient tower remains a separately gated successor prospect: its mathematics
 passes red team, but its classical literature audit and expanded arithmetic
 certificate are not closed and it is not imported into the manuscript.
 
+**Post-freeze Annals-upgrade checkpoint:**
+`notes/2026-08-10-c904-annals-ceiling-dossier.md` now isolates a stronger,
+quarantined theorem program.  Exact new results include the six-$D_5$-axis
+polarization matrix $6I-J$ (type $(1,6,6,6,6)$, degree $6^4$), the optimal
+twenty-dimensional cubic--Winger correspondence carrier, and a unique
+three-primary Winger match.  The two-primary obstruction forces an independent
+sign cover $r^2=T$; combined with the twist cover it is a genus-one curve of
+conductor $450$, rank zero, and torsion $\mathbf Z/2$, so no rational smooth
+fibre splits both characters.  Roulleau pre-empts the rational $E^5$ slogan.
+Nothing from this checkpoint is in the manuscript; relative cycles, the
+actual polarization kernel, descent, boundary, and Hecke geometry remain the
+upgrade gates.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

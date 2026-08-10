@@ -1,0 +1,11 @@
+A5 six-axis polarization discriminant versus Winger V4
+  Sylow-5 axes=6
+  generator axis permutations=[(0, 2, 4, 1, 5, 3), (3, 5, 0, 2, 1, 4)]
+  p=2: Hom dimension=0, End dimensions=(2,1), minimum orbit spans=(4,4), singular nonzero axis endos=0, invertible intertwiner=None
+  p=3: Hom dimension=1, End dimensions=(1,1), minimum orbit spans=(4,4), singular nonzero axis endos=0, invertible intertwiner=[[2, 0, 1, 2], [1, 1, 2, 2], [1, 2, 1, 0], [2, 1, 0, 1]]
+  conclusion: the full coefficient discriminant is not Winger V4 mod 6
+  (already obstructed modulo 2; ordinary-character matching cannot see this)
+  its mod-2 endomorphism field is F4; its mod-3 part is exactly Winger V4
+  GL2(F2) action on P1(F4)=[(2, 1, 0, 4, 3), (0, 2, 1, 4, 3)]: orbits 3+2, no fixed line
+  the two-point orbit is the sign quotient, so it trivializes on a quadratic cover
+PASS

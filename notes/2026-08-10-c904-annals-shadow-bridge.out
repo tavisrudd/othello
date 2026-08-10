@@ -1,0 +1,31 @@
+Quadratic twist-splitting cover
+  D(T)=(T - 729/5)*(T + 27)
+  T(z)=27*(27*z**2 + 5)/(5*(z - 1)*(z + 1))
+  eta(z)=864*z/(5*(z - 1)*(z + 1))
+  deck z->-z is the quadratic-twist cocycle [-1]
+  boundary preimages: -27<-0, 729/5<-infinity, infinity<-{+1,-1}, 0<-{27z^2+5=0}
+  pulled-back universal Tate surface: 2 I1 + 2 I3 + IV
+  root lattice A2^3; Shioda--Tate rank 2; Oguiso--Shioda lattice A2* + Z/3
+Two independent quadratic characters
+  twist cover square class D(T); mod-2 sign cover square class T
+  composite cover v^2=(u^2+27)(u^2-729/5) has genus 1
+  Jacobian j of the composite base=357911/2160
+  birational model: Y^2=X(X^2+1188/5 X+746496/25)
+Fricke lift obstruction
+  on q=z^2: q'=-5*q/(22*q + 5)
+  the cubic chordal branch maps to the smooth value T=5, so the cover is not Fricke-stable
+A5 representation obstruction and minimal repair
+  Hom_A5(W5,V4)=0
+  V4 tensor W5 decomposition={'1': 0, 'V3': 1, "V3'": 1, 'V4': 1, 'W5': 2}
+  minimal pure-power bridge: 4*dim(W5)=5*dim(V4)=20
+  candidate: J(X) tensor V4  ~  A_V(C) tensor W5
+Six-axis polarization certificate
+  regular-simplex projector overlap tr(P_i P_j)=1/25
+  Roulleau F_i.F_j=24 forces elliptic polarization degree d=5
+  norm sum: sum_i N_i=6 on the W5 isotypic space
+  quotient Gram=6I-J, Smith invariants=(1,6,6,6,6)
+  natural six-axis isogeny degree=6^4=1296
+Orientation-forgetting congruence theorem
+  <Gamma_1(N),-I>=Gamma_0(N) exactly for N=1,2,3,4,6
+  N=3 is the unique nontrivial odd prime level with this property
+PASS

@@ -1,0 +1,4 @@
+Independent PARI/GP arithmetic replay
+ellrank=[0, 0, 0, []]
+elltors=[2, [2], [[14, -7]]]
+conductor=450

@@ -1,0 +1,7 @@
+Independent Sage replay
+p=2: Hom=0 End=(2,1) iso=False
+p=3: Hom=1 End=(1,1) iso=True
+P1(F4) orbit sizes under GL2(F2): 2,3; no fixed line
+independent covers: square classes T,D; composite genus-one j=357911/2160
+composite base: conductor=450 rank=0 torsion=Z/2; no affine rational points
+PASS
