@@ -553,6 +553,12 @@ On \(\psi(t)\ne0\), the norm-one coordinate
 \]
 Hence zero trace is exactly
 \(\sum_e(\tau_e+\tau_e^{-1})=-2\mu_t\), independent of the conic coefficients.
+With \(y_e=\tau_e+\tau_e^{-1}+2=4Q_e/\psi(t)\), this is simply
+\(\sum_e y_e=0\), where every term lies on the fixed bi-character slice
+\[
+ \chi(y_e)=\chi(\eta\psi(t)),\qquad
+ \chi(y_e-4)=\chi(c\psi(t)).
+\]
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and

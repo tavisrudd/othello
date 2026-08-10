@@ -819,6 +819,40 @@ are the mirror collisions already isolated by \(\Theta_Q\).  This torus
 coordinate is therefore the natural carrier for any endpoint-coherent
 deck-sign law.
 
+There is a useful affine version with only two character parameters.  Put
+\[
+ y_e=\tau_e+\tau_e^{-1}+2
+     =\frac{(\tau_e+1)^2}{\tau_e}
+     =\frac{4Q_{\rm du}(t,u_e)}{\psi(t)}.               \tag{23be}
+\]
+Since every node value is a nonzero element of
+\(\eta(\mathbb F_q^\times)^2\), one has \(y_e\ne0\) and
+\[
+ \boxed{
+ \chi(y_e)=\chi(\eta\psi(t)),\qquad
+ \chi(y_e-4)=\chi(c\psi(t))}                            \tag{23bf}
+\]
+whenever \(y_e\ne4\); the second equality has the corresponding zero value
+when \(r_e=0\).  Indeed
+\[
+ \frac{\psi(t)}4y_e=\eta s_e^2,
+ \qquad
+ \frac{\psi(t)}4(y_e-4)=c\,r_e(t)^2.
+\]
+Formula (23bc) becomes
+\[
+ \boxed{
+ \sigma_t=\frac{\psi(t)}4\sum_{e\in\mathcal M_t}y_e,
+ \qquad
+ \sigma_t=0\Longleftrightarrow\sum_e y_e=0.}            \tag{23bg}
+\]
+Thus the zero detector is a zero-sum problem on the bi-character slice
+specified by (23bf).  Abstract zero sums on that slice may exist; the
+remaining input is that the \(y_e\) arise coherently from endpoint-conic
+intersections across all directions.  This is nevertheless a
+field-independent one-dimensional target, rather than an arbitrary
+isotropic vector in \(\mathbb F_q^{\mu_t}\).
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[
