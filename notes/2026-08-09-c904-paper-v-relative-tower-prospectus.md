@@ -148,7 +148,13 @@ scheme-theoretic proof gates.
 - give the scheme-level proof that every tame cyclic subgroup fixes a
   reduced degree-two divisor and that geometric point stabilizers are cyclic;
 - independently review the odd/even descent statement and add it to the
-  certificate if this theorem is promoted;
+  certificate if this theorem is promoted, including the quadratic
+  Frobenius action and at least one odd-extension check;
+- prove that \(N_G(C_r)/C_r\) exchanges the two fixed points, so the
+  normalizer map is a degree-two cover; equivalently, identify the whole
+  stratum as the single geometric orbit \(G/C_r\);
+- pin the imported core checker and its certificate: the tower script's own
+  hash does not freeze the imported core dependency;
 - audit classical icosahedral orbit/branch-divisor sources and modern
   treatments of finite subgroups of \(\PGL_2\);
 - decide priority only after forward-citation closure; otherwise present the
@@ -165,26 +171,32 @@ icosahedral quotient
 \[
  \pi:R\longrightarrow R/G.
 \]
-Their ramification indices are (5,3,2), respectively.  Thus the degree
+Their ramification indices are \(5,3,2\), respectively.  Thus the degree
 calculation is also the Riemann--Hurwitz identity
 \[
  12(5-1)+20(3-1)+30(2-1)=118=2|A_5|-2.
 \]
 This packages the tower as the arithmetic form of the classical
-((2,3,5)) quotient, rather than as three unrelated fixed-point counts.
+\((2,3,5)\) quotient, rather than as three unrelated fixed-point counts.
+The proof does not require \(R\) to be split: over any field with
+\(30\in k^\times\), it applies to a geometrically rational curve with a
+faithful constant \(A_5\)-action that is geometrically icosahedral.  The
+three finite étale inertia divisors, their maps to \(G/N_G(C_r)\), and the
+free complement commute with arbitrary base change.  Splitness and rational
+point counts are separate arithmetic conclusions.
 
 There is a stronger uniform statement over finite fields.  Let
-(k=\F_q), with \(q\) prime to (30), and let a constant (A_5) act
-faithfully and icosahedrally on a split (R\cong\PP^1_k).  Geometrically,
-(Z_r\) is the transitive (G)-set (G/C_r), of degree
+\(k=\F_q\), with \(q\) prime to \(30\), and let a constant \(A_5\) act
+faithfully and icosahedrally on a split \(R\cong\PP^1_k\).  Geometrically,
+\(Z_r\) is the transitive \(G\)-set \(G/C_r\), of degree
 \[
  d_5=12,\qquad d_3=20,\qquad d_2=30.
 \]
-Its group of (G)-equivariant automorphisms is
-(N_G(C_r)/C_r\cong C_2).  Frobenius therefore acts on (Z_r) by one
-sign (\epsilon_r\in\{1,-1\}): the sign is (1) when the two fixed
-points of (C_r) are rational and (-1) when Frobenius exchanges them.
-Consequently, for every (n\geq1),
+Its group of \(G\)-equivariant automorphisms is
+\(N_G(C_r)/C_r\cong C_2\).  Frobenius therefore acts on \(Z_r\) by one
+sign \(\epsilon_r\in\{1,-1\}\): the sign is \(1\) when the two fixed
+points of \(C_r\) are rational and \(-1\) when Frobenius exchanges them.
+Consequently, for every \(n\geq1\),
 \[
  \#Z_r(\F_{q^n})=\frac{d_r}{2}(1+\epsilon_r^n),
 \]
@@ -193,7 +205,7 @@ and the free rational points form exactly
  \frac{q^n+1-
    \sum_{r\in\{2,3,5\}}\frac{d_r}{2}(1+\epsilon_r^n)}{60}
 \]
-regular (A_5)-orbits.  This is a simultaneous infinite-family and
+regular \(A_5\)-orbits.  This is a simultaneous infinite-family and
 infinite-tower theorem: the only arithmetic inputs are the three split
 types.  It also gives the zeta factors
 \[
@@ -203,17 +215,28 @@ types.  It also gives the zeta factors
    (1-t^2)^{-d_r/2},&\epsilon_r=-1.
  \end{cases}
 \]
+Because the simple group \(A_5\) lands in \(\operatorname{PSL}_2(q)\),
+these signs are read directly from the split tori:
+\[
+ \epsilon_2=1\iff q\equiv1\pmod4,\qquad
+ \epsilon_3=1\iff q\equiv1\pmod3,\qquad
+ \epsilon_5=1\iff q\equiv1\pmod5.
+\]
+For \(r=3,5\), this says that the eigenvalue ratio of an element of order
+\(r\) lies in \(\F_q\); for \(r=2\), a trace-zero lift has split
+characteristic polynomial exactly when \(-1\) is a square.  Existence of
+the \(A_5\)-action already forces the compatible alternatives modulo \(5\).
 
-For the Paper-V action over (\F_{11}),
-((\epsilon_5,\epsilon_3,\epsilon_2)=(1,-1,-1)).  Hence
+For the Paper-V action over \(\F_{11}\),
+\((\epsilon_5,\epsilon_3,\epsilon_2)=(1,-1,-1)\).  Hence
 \[
  Z(R\setminus(Z_5\sqcup Z_3\sqcup Z_2),t)
    =\frac{(1-t)^{11}(1-t^2)^{25}}{1-11t},
 \]
 which recovers both the odd and even orbit formulas at once.  Promotion
-would require a citation for the classical ((2,3,5)) quotient and an
+would require a citation for the classical \((2,3,5)\) quotient and an
 independent check that the three Frobenius signs are intrinsic under the
-declared notion of marked (A_5)-action.  The derivation itself is
+declared notion of marked \(A_5\)-action.  The derivation itself is
 group-theoretic once the stabilizer theorem is proved.
 
 ## Stronger arithmetic theorem to investigate
