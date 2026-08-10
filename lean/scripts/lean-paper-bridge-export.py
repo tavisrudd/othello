@@ -60,7 +60,7 @@ rev = "{bridge["certificate_commit"]}"
 
 [[lean_lib]]
 name = "{bridge["lean_library"]}"
-roots = ["{bridge["audit_module"]}"]
+roots = ["{bridge["module"]}", "{bridge["audit_module"]}"]
 '''
 
 

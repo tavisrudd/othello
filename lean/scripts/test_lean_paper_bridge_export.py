@@ -42,7 +42,8 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn('name = "finitegeom-sample-certificates"', text)
         self.assertEqual(text.count("[[require]]"), 2)
         self.assertIn(
-            'roots = ["TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit"]',
+            'roots = ["TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility", '
+            '"TavisRuddFiniteGeom.Papers.Sample.Verification.AxiomAudit"]',
             text,
         )
 
