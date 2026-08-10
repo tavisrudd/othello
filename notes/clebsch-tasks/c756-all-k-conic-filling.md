@@ -200,7 +200,14 @@ Its normal derivative along the conic locus is another explicit
 denominator-free matrix \(\mathbb N_R(C)\); the first subgate is the
 determinantal transversality condition
 \(\ker\mathbb M_R\cap\ker\mathbb N_R(C)=0\), followed by exclusion of
-disjoint zeros of the full quadratic/cubic map.
+disjoint zeros of the full quadratic/cubic map.  This tangent test is useful
+in characteristics three and five, hence at all three forced seams.  For
+\(p\ge7\), residue support makes \(\mathbb N_R(C)\) identically zero: every
+rank-drop ghost has second-order contact with the conic locus, so the
+quadratic normal cone must be used directly.  Moreover the same cancellation
+removes all conic dependence from the full \(j=2\) equation, leaving a pure
+homogeneous quadratic map on \(\ker\mathbb M_R\).  Hence only
+characteristics three and five require the genuinely mixed bundle.
 Equivalently, if \(x_i\) are the roots of \(R\) and
 \(w_i=1/R'(x_i)\), the entire hierarchy is the division-free syndrome law
 \[

@@ -919,6 +919,64 @@ locus with the three-dimensional conic space.  Proving (84) eliminates every
 nonconic component tangent to the conic locus; the remaining global task is
 to exclude isolated or disjoint zeros of the full quadratic/cubic map (82).
 
+This linear criterion has a sharp characteristic boundary.  If \(p\ge7\),
+then \(j_0=2\), and (83) vanishes identically on the first ghost space.
+Indeed, the coefficient of \(Z^{-r}\) in \(CG/R\), with \(\deg C\le2\),
+uses only \(c_r,c_{r+1},c_{r+2}\).  Since the nonzero initial coefficients
+of \(G/R\) have indices \(0,-1\pmod p\), a contributing output index has
+residue
+\[
+ r\equiv0,-1,-2,-3\pmod p.
+\]
+These are exactly the blind residues of
+\(\binom{r+3}{4}\) when \(p\ge7\).  Therefore
+\[
+ \boxed{
+ \mathbb N_R(C)=0
+ \qquad(p\ge7,\ j_0=2).}                                \tag{85}
+\]
+So a special rank-drop kernel in characteristic at least seven has
+second-order contact with the conic locus, and must be attacked by the
+quadratic normal cone itself.  In fact the cancellation is stronger.  Since
+the pure conic term also vanishes, expansion of \((C+G)^2\) and (85) gives
+\[
+ \boxed{
+ \mathcal Q_{R,2}(C,g)=\mathcal Q_{R,2}(0,g)
+ =\Pi_2\operatorname{pr}_{<0}\left(\frac{G^2}{R}\right)
+ \qquad(p\ge7).}                                        \tag{86}
+\]
+Thus in characteristic at least seven the first non-shadow equation *does*
+descend, by this extra residue cancellation, to a homogeneous quadratic map
+on \(\mathcal G_R\).  The exact rank-drop target there is simply
+\[
+ \{g\in\ker\mathbb M_R:\mathcal Q_{R,2}(0,g)=0\}=\{0\}.
+\]
+In characteristics three and five, digit
+carries make (83) nontrivial; these are exactly the characteristics of all
+three dimension-forced seams (78).  There the determinantal transversality
+test (84) is a genuine first subgate before the global quadratic/cubic
+analysis.  Formulas (85)--(86) replace a futile uniform tangent-space
+strategy by the correct characteristic split.
+
+At the three forced seams the normal row budgets are already sufficient for
+transversality on the minimum kernel stratum:
+\[
+ \boxed{
+ \begin{array}{c|c|c|c}
+ q&j_0&\kappa_{p,e}&\#\text{ native normal rows}\\ \hline
+ 25&3&1&6\\
+ 27&2&5&5\\
+ 81&2&5&17.
+ \end{array}}                                           \tag{87}
+\]
+Thus the minimal \(q=27\) seam is especially sharp: after choosing bases,
+(84) is the nonvanishing of one \(5\times5\) determinant.  At \(q=25\) it
+is the nonvanishing of a six-component column, and at \(q=81\) it is full
+column rank of a \(17\times5\) matrix.  If \(\mathbb M_R\) has a larger
+rank defect, the same statements use the appropriate maximal minors.  These
+are theorem-shaped determinant gates on coefficient strata, not searches
+over field configurations.
+
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
 the forced low-characteristic seams violates the first non-shadow rung in
