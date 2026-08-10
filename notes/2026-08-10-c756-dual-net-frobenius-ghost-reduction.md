@@ -1087,6 +1087,44 @@ locus on the completely split factor locus.  At the forced characteristics,
 (95) gives the analogous determinantal transversality problem before the
 quadratic or cubic residual terms are considered.
 
+The syndrome rows contain a uniform Frobenius-strided MDS subcode.  Let
+\[
+ P_0=p^{\min\{b:p^b>2j_0\}},
+ \qquad
+ A_0=\left\lfloor\frac{n-2j_0-2}{P_0}\right\rfloor.
+                                                               \tag{98}
+\]
+For \(0\le a\le A_0\), addition of \(2j_0<P_0\) to \(aP_0\) produces no
+carry between the lower \(b\) digits and the remaining digits.  Lucas'
+theorem therefore gives
+\[
+ \boxed{
+ \{0,P_0,2P_0,\ldots,A_0P_0\}
+ \subseteq\mathscr E_{j_0}.}                            \tag{99}
+\]
+Because \(x\mapsto x^{P_0}\) is a permutation of \(\mathbb F_q\), the
+matrix \(((x_i^{P_0})^a)_{0\le a\le A_0,i}\) is Vandermonde on every set
+of at most \(A_0+1\) roots.  Hence any nonzero word \(v=(v_i)\) satisfying
+\[
+ \sum_iw_iv_i^{j_0}x_i^{aP_0}=0
+ \qquad(0\le a\le A_0)
+\]
+obeys the support bound
+\[
+ \boxed{|\operatorname{supp}v|\ge A_0+2.}              \tag{100}
+\]
+Here taking a \(j_0\)-th power does not alter support and every \(w_i\) is
+nonzero.  For \(p\ge7\), one has \(P_0=p\), so every projective base point
+of the quadratic Gram pencil satisfies
+\[
+ |\operatorname{supp}(\mathsf E_Rg)|
+ \ge2+\left\lfloor\frac{n-6}{p}\right\rfloor.
+\]
+At \(p=3,5\), (100) applies to the full non-shadow word \(C+G\), and to
+the normal word \(C^{j_0-1}G\) whenever it is nonzero.  Thus a surviving
+kernel class cannot be localized on a small subset of the split divisor;
+the sparse Lucas rows supplement this universal strided bound.
+
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
 the forced low-characteristic seams violates the first non-shadow rung in

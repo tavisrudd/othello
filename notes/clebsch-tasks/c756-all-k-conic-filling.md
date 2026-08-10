@@ -629,7 +629,11 @@ over every finite field.  Authorities:
    Reed--Solomon evaluation rows; for \(p\ge7\) its quadratic part is the
    diagonal Gram pencil
    \(\mathsf E_R^{\mathsf T}\operatorname{diag}(w_iP(x_i))\mathsf E_R\)
-   restricted to \(\ker\mathbb M_R\).
+   restricted to \(\ker\mathbb M_R\).  The Lucas-visible rows always contain
+   the Frobenius-strided sequence \(0,P_0,2P_0,\ldots\), with \(P_0\) the
+   least \(p\)-power above \(2j_0\); its Vandermonde minor forces every
+   surviving nonshadow word to have support at least
+   \(2+\lfloor(n-2j_0-2)/P_0\rfloor\).
    Prove that the resulting carry-controlled multiplication flag forces
    \(\deg H_2\le2\); or
    classify the equivalent completely split lacunary norm
