@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 import subprocess
 import tempfile
 import unittest
@@ -65,8 +66,26 @@ class PaperBridgeAuditTests(unittest.TestCase):
         cache.mkdir()
         archive = cache / "certs.tgz"
         archive.write_bytes(b"compiled certificate")
+        export_source_commit = "e" * 40
+        bridge_commit = self.git_repo(
+            libraries / "paper-bridge",
+            {
+                "lakefile.toml": (
+                    'name = "paper-bridge"\n'
+                    '[[require]]\nname = "finitegeom"\npath = "../finitegeom"\n'
+                    '[[require]]\nname = "certs"\npath = "../certs"\n'
+                ),
+                "MANIFEST.json": json.dumps(
+                    {"source_commit": export_source_commit}
+                ),
+                "README.md": "# Reviewer package\n",
+            },
+        )
         bridge = {
             "name": "paper",
+            "repository": "paper-bridge",
+            "bridge_commit": bridge_commit,
+            "export_source_commit": export_source_commit,
             "source": "bridge/Compatibility.lean",
             "module": "Paper.Compatibility",
             "finitegeom_commit": finitegeom_commit,

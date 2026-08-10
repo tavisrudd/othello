@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import subprocess
 import tomllib
 from pathlib import Path
@@ -89,6 +90,54 @@ def audit_bridge(
             problems.append(
                 f"{name}: finitegeom directly depends on certificate package {sorted(found)}"
             )
+    bridge_root = libraries_root / bridge["repository"]
+    if not bridge_root.is_dir():
+        problems.append(f"{name}: bridge checkout is missing at {bridge_root}")
+    else:
+        try:
+            actual = git_output(bridge_root, "rev-parse", "HEAD")
+            dirty = git_output(bridge_root, "status", "--short")
+        except subprocess.CalledProcessError:
+            problems.append(f"{name}: cannot read bridge Git state at {bridge_root}")
+        else:
+            if actual != bridge["bridge_commit"]:
+                problems.append(
+                    f"{name}: bridge HEAD is {actual}, expected {bridge['bridge_commit']}"
+                )
+            if dirty:
+                problems.append(f"{name}: bridge checkout is dirty")
+        manifest_path = bridge_root / "MANIFEST.json"
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            problems.append(f"{name}: bridge MANIFEST.json is missing or invalid")
+        else:
+            if manifest.get("source_commit") != bridge["export_source_commit"]:
+                problems.append(
+                    f"{name}: bridge manifest source commit is "
+                    f"{manifest.get('source_commit')}, expected {bridge['export_source_commit']}"
+                )
+        try:
+            dependencies = direct_dependencies(bridge_root)
+        except (OSError, tomllib.TOMLDecodeError, KeyError):
+            problems.append(f"{name}: bridge lakefile.toml is missing or invalid")
+        else:
+            expected = {"finitegeom", bridge["certificate_package"]}
+            if dependencies != expected:
+                problems.append(
+                    f"{name}: bridge dependencies are {sorted(dependencies)}, "
+                    f"expected {sorted(expected)}"
+                )
+        try:
+            readme = (bridge_root / "README.md").read_text(encoding="utf-8").lower()
+        except OSError:
+            problems.append(f"{name}: bridge README.md is missing")
+        else:
+            forbidden = [word for word in ("authority", "mirror") if word in readme]
+            if forbidden:
+                problems.append(
+                    f"{name}: bridge README contains forbidden workflow words {forbidden}"
+                )
     if not bridge.get("forbid_source_fallback", False):
         problems.append(f"{name}: certificate source fallback is not forbidden")
     archive = cache_root / bridge["cache_archive"]
