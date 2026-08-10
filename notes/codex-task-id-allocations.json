@@ -3041,8 +3041,17 @@
       "last": 904,
       "purpose": "Paper V publishable manuscript and dossier-isolated referee closure",
       "sequence": 338
+    },
+    {
+      "count": 2,
+      "first": 905,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 906,
+      "purpose": "reconstruction-profile theorem and E6 tower judo",
+      "sequence": 339
     }
   ],
-  "next_id": 905,
+  "next_id": 907,
   "schema": "codex-task-id-allocations-v1"
 }
