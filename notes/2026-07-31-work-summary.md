@@ -22,13 +22,15 @@ and completion-distance theory about geometric *legality* rather than game value
 carries a **publication portfolio alongside the open game programme**. Its original seven-paper
 backbone and two OEIS entries have expanded through the Clebsch and projective Reed–Solomon work and
 include a quantum-information branch on MDS–CSS AME states, local-unitary rigidity, and transversal
-Clifford groups (see §3, §7, §8). The Clebsch work has a **five-paper portfolio**: the four-paper
-numbered series of rigidity, factorization, the passages paper *Golden descent and operator
-realizations of the Clebsch cubic*, and the q13 passant-code paper, plus the companion *Diagonal
-Isoduality and Transversal Clifford Groups of MDS--CSS Codes*. The first three released versions one
-and two share the title-page identity *The Clebsch cubic: recovering, orienting, and realizing*;
-the q13 paper is the active new build. The golden conference operator material is **not** a sixth
-paper — it is a source-development lane feeding future forward versions of the passages paper.
+Clifford groups (see §3, §7, §8). The Clebsch work has a **five-paper numbered series**, *Clebsch:
+Rigidity from Sparse Shadows*: rigidity, factorization, the passages paper *Golden descent and
+operator realizations of the Clebsch cubic*, the q13 passant-code paper, and *The Golden Companion
+Correspondence*. The separately titled *Diagonal Isoduality and Transversal Clifford Groups of
+MDS--CSS Codes* is an unnumbered companion. The first three released versions one and two share the
+earlier title-page identity *The Clebsch cubic: recovering, orienting, and realizing*; Papers IV and
+V now have clean standalone manuscript packages. The golden conference operator material is **not**
+a sixth numbered paper — it is a source-development body feeding future forward versions of the
+passages paper.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -339,6 +341,15 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   `q=3`, slack one factors into `q = 5,9,27` (all removed by the finite classification), so
   `C(k−1,2) ≥ q+2` always; at slack two the first surviving boundary is `(q,k) = (53,12)`.
 
+  The finite boundary has since moved substantially. Exact searches close the complete `k=12` and
+  `k=13` layers over every finite field. At `k=14`, `q=61` and `q=67` are completely impossible:
+  the former has 96 exact twelve-line mixed stars and no extension, while the latter has no mixed
+  survivor after 946,250,059 recursion states and none of its 92 all-passant stars passes the first
+  necessary identity. At `q=71`, all 36 normalized all-passant seed classes are closed after
+  22,579,655 states. The live finite cases are therefore the mixed branch at `q=71` and both
+  branches at `q=73`; none of these finite closures substitutes for the missing uniform masked
+  Rédei theorem or the saturated-internal global-coherence argument.
+
   **The saturated-internal branch is now a pure clique bound, and half of it is closed.** Dropping
   the arc condition and keeping only chord externality makes such an arc a clique of size `(q+3)/2`
   in the graph `Γ_q` on the `q(q−1)/2` internal points of the conic, adjacent when their join is an
@@ -560,8 +571,10 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   fibre-constant subcode is codimension one and folds onto the base graph's code — certified against
   the quadric links, the Paley two-graphs, the pentagon and random graphs, with no quadratic form
   anywhere. An earlier claim that the fold works only at plus type, and so carried content beyond the
-  graph statement, was **withdrawn as an indexing error**. What survives is the code-level
-  weight-enumerator statement and the affine-root-lattice carrier, too thin to carry a paper. Two
+  graph statement, was **withdrawn as an indexing error**. What survives in the unmarked code track
+  is the weight-enumerator statement and the affine-root-lattice carrier, too thin to carry a paper.
+  A later, logically distinct result composes a marked Clebsch entry with the classical tower and
+  computes the forgotten marking fibres; it remains research-only pending novelty closure. Two
   narrow frontiers remain: the parabolic deficit, and whether 120 points of `PG(8,4)` can sit in
   four-general position invariantly under a large proper subgroup of `O₈⁺(2)` (not expected to work).
   Audit limits that travel with the material: Chakravarti's 1990 IMA chapter is held at metadata only
@@ -1078,6 +1091,62 @@ The remaining headline Clebsch-facing results and censuses are:
   normalizer maps trivially to the relevant outer automorphism group. These facts jointly kill the
   quadratic-refinement, Maslov-holonomy, and Witt-bridge versions of the original roof while
   preserving the carrier-level outer bit.
+
+### Human-proof closure across Papers I--IV
+
+- **Paper I.** The order-eleven inverse theorem is unchanged. The genuine correction is adjacent:
+  the characteristic-five projective stabilizer is `S₅`, not `A₅`, because
+  the golden roots coalesce. The manuscript now exposes the full six-node exhaustion and five
+  chartwise reduced Gröbner certificates and limits its concurrence-spectrum priority sentence to
+  the proved seven-value form.
+- **Paper II.** A false universal finite-group socle theorem has been removed. The all-field
+  completeness proof now uses only its actual detector channels — Steinberg absence, normalized
+  linear and prime-field Fischer detectors, the complete opposite-parity root-defect seam, affine
+  contraction, Faber's tame subgroup theorem, and an explicit `q=9` endpoint — while preserving the
+  theorem and making the endpoint lift intrinsic.
+- **Paper III.** The rational degree-two incidence field is proved paper-locally to branch exactly
+  over the reduced sextic `J₀=0`, with `ι_t^*J₀=16σ₃²`; the two conjugate configurations are the
+  complete reduced fibre with residue algebra `Q(√5)`. The integrated upgrade also proves the
+  order-six triangle--Pfaffian recognition theorem, corrects the signed norm identity, and states
+  precisely that deck exchange preserves the unmarked algebra while reversing the marked generator.
+- **Paper IV.** The human proof now prints the orbital representatives and transport, integral
+  scheme-product rows, parity products, `F₈` Frobenius descent and commutant argument, and orbit-Gram
+  concurrence rows that had previously been implicit. No false field case, sign, polarity,
+  reconstruction, or headline theorem remains; full Lean closure and public release remain.
+
+### The fifth Clebsch paper and the common reconstruction profile
+
+- **The marked companion round trip.** *The Golden Companion Correspondence* is the eleven-page
+  fifth numbered paper. Paper II's five-dimensional residue is the chordal member of the same
+  `A₅`-invariant cubic pencil as the conference member in Papers I and III. Its rational-normal-
+  quartic singular locus recovers the original six-axis carrier, and the normalized outer
+  difference gives the oriented inverse on the actual image. The chordal line is necessary marking;
+  forgetting it destroys canonical reversibility. The theorem records this image and base-change
+  boundary instead of claiming that an arbitrary cubic in the pencil comes from the construction.
+
+- **A common theorem, with typed fibres.** The five papers do not share one shadow functor on one
+  category. They do share a reconstruction-profile calculus: each sparse shadow recovers its
+  carrier up to a stated projective orbit, orientation involution, homogeneous fibre, or marking
+  torsor, and every minimality claim carries its own collision or lower-bound witness. A calibrated
+  odd datum kills the recurring orientation `C₂`; Paper V adds the chordal marking necessary and
+  sufficient for exact oriented return. The strongest honest series sentence is: sparse shadows
+  recover carriers, and their exact fibres measure what was forgotten.
+
+- **Classical tower, nonclassical marked entry.** The unmarked quadratic
+  `E₆ → E₇ → E₈ → E₉ → E₁₀` fold and its root-pair/Gosset/Schläfli bottom are classical. The
+  surviving finite-carrier result is their exact composition with a sparse marked Clebsch entry:
+  an oriented golden double-six selects the `E₆` carrier, the tritangent-support kernel recovers its
+  bare line geometry, and a residue flag makes every higher fold reversible. Forgetting the flag
+  leaves explicit fibres; already at `E₆` one bare carrier supports 432 golden, 864 ordered
+  operator/apolar, or 1,728 full Paper-V gateway markings. This composition is research-only until
+  its novelty boundary is closed.
+
+- **A proved arithmetic upgrade held outside Paper V.** The extension-field census is the inertia
+  stratification of the tame icosahedral quotient with branch signature `(2,3,5)`: disjoint degree
+  12, 20, and 30 strata, a free complement, a uniform finite-field split-type formula, and a zeta
+  function. The stronger relative theorem over a localization of `Z[√5]` remains open at integral
+  good reduction and unit control, and the proved census stays outside the manuscript until its
+  classical attribution and larger certificate close.
 
 ### The golden conference operator source programme
 
@@ -1837,7 +1906,9 @@ classification + golden operator), not a retrofit. Current state: proved for eve
 odd `q ≤ 43`, saturated-external branch uniformly closed, saturated-internal branch reduced to a pure
 clique bound in the external-join graph on internal points — settled for `q ≡ 1 (mod 4)` as far as it
 has been measured, and provably not settleable that way for `q ≡ 3 (mod 4)` — and nonsaturated branch
-reduced to slack `≥ 2` with `(q,k) = (53,12)` the first surviving boundary. The exact remaining
+reduced to slack `≥ 2`. The complete `k=12` and `k=13` layers are now impossible over every finite
+field; at `k=14`, `q=61` and `q=67` are closed completely and the `q=71` all-passant branch is
+closed, leaving the mixed `q=71` case and both `q=73` branches as the first finite frontier. The exact remaining
 obstruction is a clique bound
 `m(q) < √(2q) + O(1)` for a Paley-type graph on the points off the conic, measured to be tight
 rather than generous — so it may be false for some `q`, and that possibility is itself the finding.
@@ -1858,8 +1929,8 @@ theorem-complete is the companion export route, not the mathematics. The passage
 things from the two-graph audit before its next revision: the descendant-correspondence citations,
 and a decision on whether its faithfulness theorem is a corollary of four-local graph reconstruction
 up to complementation. The q13 passant-code paper is retitled, has a manuscript-only pre-release
-deposited, and remains the active build: human proof, paper-owned evidence, semantic modules and
-sharded Lean gates are green, with four concrete transports and full release outstanding. The golden operator lane keeps its
+deposited, and remains an active build: its expanded human proof and paper-owned evidence are green,
+while full Lean closure and public release remain. The golden operator programme keeps its
 proved source mathematics but is no longer chasing a manuscript of its own; its live obligation is
 absorbing the five literature pre-emptions into whatever forward version consumes it. Keep the
 modular sequel separate: its proved centre is the
@@ -2149,6 +2220,16 @@ semantics (`win`/`grundy`) are self-contained and not yet anchored to a cited `I
 values, and differential tests until `CombinatorialGames` bumps. The kernel is kept deliberately tiny
 so it stays inspectable — a better answer than waiting.
 
+**Certificate packages now have a strict one-way boundary.** The heavyweight q11 and q16 finite
+closures live in independently frozen, Mathlib-only packages under final branded namespaces. They
+do not import the shared `finitegeom` library, and the monorepo does not import them. Registered
+paper-local bridge roots alone may import both a human API and a frozen certificate, hash the sealed
+aggregate artifact, and prove the transport theorem without rebuilding the certificate. Boundary
+checks reject undeclared bridges, reverse dependencies, local-model escape, and a certificate fact
+claiming a theorem proved only by its dependency. Paper I is pinned to the sealed q11 bridge. The
+same architecture and final namespace map are fixed for the remaining projective q11, q13, and q25
+families, but those migrations are not yet complete.
+
 ---
 
 ## 8. The publication track
@@ -2156,8 +2237,8 @@ so it stays inspectable — a better answer than waiting.
 The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." An initial
 packaging review resolved the then-existing body of work into **seven papers in ship order + two
 OEIS entries**, staged under `papers/` with per-paper status maps. That fixed count is now
-historical: the Clebsch work has resolved into a five-paper portfolio (four numbered series papers
-plus the MDS--CSS companion) with a separate source lane behind it, while the projective Reed–Solomon theorem programme has become a major paper-scale
+historical: the Clebsch work has resolved into five numbered series papers plus the unnumbered
+MDS--CSS companion, with a separate source-development body behind it, while the projective Reed–Solomon theorem programme has become a major paper-scale
 track of its own. The table below remains the original release-order backbone, not a current count
 of every candidate manuscript.
 
@@ -2173,10 +2254,10 @@ hand-written.
 material the rigidity paper, its companion, and the trade-rigidity paper now carry; and two rows are
 not papers — `golden_operator` is a source-lane draft feeding forward versions of the passages
 paper, and `golden_quantum_statistics` is the lane-local exchange-statistics companion written as a
-design-limit and theory note. So the rows describe **fourteen live manuscripts**, of which twelve
-are papers or paper companions. The newest two rows are early builds and their statement counts say
-so: `passant_code_q13` is the fourth numbered Clebsch paper with its human proof landed but its
-manuscript still being written out, and `golden_quantum_statistics` is a short note. The statement and label columns need the same
+design-limit and theory note. The generated rows predate the fifth numbered Paper V and therefore
+are no longer a complete portfolio count; Paper V is an eleven-page standalone manuscript not yet
+represented in that block. `passant_code_q13` is the fourth numbered Clebsch paper, and
+`golden_quantum_statistics` is a short note. The statement and label columns need the same
 care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
 the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
 independent results. Neither column measures depth, and none of them should be summed across rows.
@@ -2214,25 +2295,26 @@ independent results. Neither column measures depth, and none of them should be s
 | — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications through redundancy ten | exact R5–R10 at stated field ranges + coherent-polar high-field containment | 56-page reproducible V2; local release gates green, public revision unset |
 | — | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | LU-to-LC for every stabilizer AME state, plus cleaning-based rounding and logical (8\varepsilon) rounding | corrected local release candidate; generic Lean core, mirrors synchronized and unpushed |
 | — | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | multiplier nullity selects the exact fixed-party transversal logical group | 23-page deposited candidate; own semantic Lean gate, axiom audit, and claim manifest |
-| — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, relative to a marked datum, plus a bounded operator core | v1/v2 released under the earlier title; forward version consolidated |
-| — | Quadratic trade rigidity and cubic orientation in conic matching quotients (Clebsch II) | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v1/v2 released; forward human/Lean strengthening active |
-| — | Minimum-word reconstruction of `PG(2,13)` from a binary conic code (Clebsch IV) | weighted pair concurrences among minimum words reconstruct the marked plane and `PGL(2,13)` | manuscript-only pre-release deposited; human proof + semantic Lean spine + sharded leaves green; four transports and full release remain |
+| — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, rational branch closure, triangle--Pfaffian recognition, and a bounded operator core | v1/v2 released under the earlier title; forward human proof and standalone manuscript green |
+| — | Quadratic trade rigidity and cubic orientation in conic matching quotients (Clebsch II) | the conic-ideal factorization quotient and its `B₃/H₃` completeness, with one-factorization derived | v1/v2 released; repaired all-field human proof and local export green; formal strengthening active |
+| — | Minimum-word reconstruction of `PG(2,13)` from a binary conic code (Clebsch IV) | weighted pair concurrences among minimum words reconstruct the marked plane and `PGL(2,13)` | 15-page standalone manuscript; human proof green; full Lean closure and public release remain |
+| — | The Golden Companion Correspondence (Clebsch V) | the chordal and conference cubics share one invariant pencil, and a marked chordal line gives the exact oriented return | 11-page warning-free standalone; self-contained finite evidence and human proof green; Lean deferred |
 | — | *(not a paper)* golden conference operator source programme | one operator, and the cubic/polar/determinantal/fermionic/anomaly/lattice shadows it generates | source lane for Clebsch III forward versions; five literature pre-emptions to absorb |
 
 The arcs manuscript was retitled when it acquired the zero-defect matching-design capstone that
 earlier work identified as the missing structural complement: `ρ_𝒞(16) = 9` is now an application
 rather than a headline.
 
-**The Clebsch assignment changed on 2026-08-01 and supersedes every earlier description of it.**
-The public series has exactly **four numbered papers**: rigidity, factorization, the passages paper
+**The Clebsch assignment changed on 2026-08-10 and supersedes every earlier description of it.**
+The public series has exactly **five numbered papers**: rigidity, factorization, the passages paper
 (now titled *Golden descent and operator realizations of the Clebsch cubic* in its forward version,
 with released versions one and two immutable under the earlier title *Arithmetic and harmonic
-realizations of the Clebsch cubic*), and the q13 passant-code paper. The first three have GitHub and
-DOI releases at versions one and two; further strengthening is by forward version only. The q13
-paper is the active new build. The fifth portfolio paper is the separately titled MDS--CSS
-transversal-groups companion, whose Clebsch code is a worked application rather than a fifth
-numbered series installment. **The golden conference operator is no longer a manuscript** — it is
-a source-development lane feeding forward versions of the passages paper, and its first integration
+realizations of the Clebsch cubic*), the q13 passant-code paper, and *The Golden Companion
+Correspondence*. The first three have GitHub and DOI releases at versions one and two; further
+strengthening is by forward version only. Papers IV and V have clean standalone manuscript packages.
+The separately titled MDS--CSS transversal-groups paper is an unnumbered companion whose Clebsch
+code is a worked application. **The golden conference operator is no longer a manuscript** — it is
+a source-development body feeding forward versions of the passages paper, and its first integration
 took only the source-operator-cubics-harmonic core plus the determinant-versus-permanent boundary.
 Its exchange-statistics material sits in a separate lane-local companion, written as a design-limit
 and theory note rather than an experimental proposal. The Paper-I computational companion stays

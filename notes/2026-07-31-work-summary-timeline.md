@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-08**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-10**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -952,6 +952,61 @@ marking rather than absolute.
   criterion, the high-distance multiplier line, and the five prime-field holonomy centralizers,
   but banked them rather than opening a new paper; extension-field and affine upgrades were
   closed by structural counterexamples.
+
+## Week 11 continues — Aug 9–10 · Five-paper Clebsch closure and certificate separation
+
+- **Aug 9 — Papers I--IV receive a coordinated human-proof audit and repair wave.** C898's five-way
+  Paper I read found a false characteristic-five `A₅` stabilizer clause and missing human-readable
+  six-node/chart certificates; the theorem survived, the clause became `S₅`, the certificates were
+  exposed, and the final remediation read closed minor. C895 removed Paper II's false universal
+  socle theorem, replaced it with the exact detector package and Faber tame-subgroup exhaustion,
+  and earned a fresh full-paper PASS; C577 then closed the 46-page manuscript, referee, and local
+  export surface. C897 supplied Paper III's missing rational branch-divisor and complete-fibre
+  proofs, took four sealed PASS regrades, and layered the exposition. C902 added only the three
+  survivors of its eight-item cheap-upgrade audit: triangle--Pfaffian recognition, the corrected
+  signed norm identity, and the marked/unmarked deck-exchange sentence. C901 repaired Paper IV's
+  orbital tables, scheme products, `F₈` descent/commutant proof, and orbit-Gram transports; focused
+  rereview is green, while the standing programme remains author-close only.
+
+- **Aug 9 — the arcs paper's first cold-review loop and layered exposition close green.** C900
+  routed independent geometry, matching, design, conic, and generalist reads through a frozen
+  dossier, repaired the main theorem's lost quantifiers and notation plus the finite-evidence
+  boundaries, and obtained clean-close GO. The standing review/fix/re-review programme remains
+  open; the result is a green round, not an author-declared final close.
+
+- **Aug 9–10 — C756 moves the nonsaturated all-`k` frontier through three exact layers.** The full
+  `k=12` and `k=13` classifications are negative over every finite field. At `k=14`, q=61 closes
+  after none of 96 mixed stars extends; q=67 closes after a 946,250,059-state mixed search and all
+  92 all-passant stars fail; and q=71's all-passant branch closes after 22,579,655 states over 36
+  normalized seeds. The mixed q=71 branch, both q=73 branches, and the saturated-internal global
+  coherent-star theorem remain live.
+
+- **Aug 9–10 — C879/C864 enforce independent certificate kernels and cheap paper bridges.** Q11 and
+  Q16 are frozen Mathlib-only packages under branded namespaces; registered bridge roots alone may
+  import both finitegeom and a certificate, hash its sealed aggregate, and prove transport without
+  rebuilding it. The verifier now rejects unregistered bridges, reverse imports, local-model escape,
+  and facts credited to dependencies. Bridge verification was placed under the host-wide guarded
+  Lean owner and serialized through the runtime; cache restore, adoption, axiom-audit roots, export
+  pins, and Paper I's sealed-Q11 pin were refreshed. The mapping snapshot now fixes the final Q11,
+  Q13, Q16, Q25, and projective-cap namespaces; the remaining projective package migrations are
+  mapped but not executed.
+
+- **Aug 10 — C904 lands the fifth numbered paper, *The Golden Companion Correspondence*.** The
+  eleven-page Paper V proves the marked chordal/conference pencil correspondence, recovers the
+  six-axis carrier from the chordal singular quartic, and gives the exact image-restricted oriented
+  return. Its vendored finite evidence, literature ledger, standalone replay, three sealed GO reads,
+  and all five deterministic paper-only builds are green. The EJ/TT pass also proved the tame
+  icosahedral `(2,3,5)` inertia stratification, finite-field split-type formula, and zeta function;
+  those stay outside Paper V pending literature and certificate closure.
+
+- **Aug 10 — C905 and C906 extract the series theorem and stop at the classical tower boundary.**
+  C905 typed the five paperwise reconstruction profiles, proved the missing Hamming/Fano and
+  11-cell inverses, identified the `n=4` cap fibre as `D₄` triality, and isolated the Segre--Igusa
+  inverse on `D₊(e₅)`. C906 conceded the unmarked exceptional fold and graph chain to
+  Brouwer--Shult/Brouwer--Van Maldeghem and the classical root-pair/Gosset/Schläfli chain, then kept
+  only the marked judo theorem: a sparse Clebsch entry into a residue-flagged reversible tower, with
+  exact bottom fibres 432/864/1728. Both are research reports; neither was promoted to a manuscript
+  or Lean source.
 
 ---
 

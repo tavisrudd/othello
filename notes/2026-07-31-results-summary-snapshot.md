@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-08
+**Date:** 2026-08-10
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -38,42 +38,45 @@ The results are grouped as follows.
    conic code* — a code whose minimum words reconstruct the geometry and the
    full symmetry group they came from. It was earlier titled *A binary
    [78,36,12] code from the passant lines of a conic over \(\mathbb F_{13}\)*.
-5. The golden conference operator source programme — one marked order-six
+5. *The Golden Companion Correspondence* — the marked chordal member of the
+   same \(A_5\)-invariant cubic pencil as the conference member in sections 1
+   and 3, with an exact oriented return to the six-axis carrier.
+6. The golden conference operator source programme — one marked order-six
    conference operator and the cubic, polar, determinantal, fermionic,
    anomaly, and lattice shadows it generates. This is a source-development
    body of mathematics feeding future forward versions of the paper in
    section 3, not a manuscript of its own.
-6. *Arcs complete outside a conic: a prescribed-hole defect identity and
+7. *Arcs complete outside a conic: a prescribed-hole defect identity and
    matching-design rigidity*.
-7. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
+8. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
    recursive carriers and exact classifications through redundancy ten*.
-8. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
+9. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
    Structure* — local memory and exact transfer of erasure repair.
-9. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
+10. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
    States* — every product-unitary intertwiner of a stabilizer absolutely
    maximally entangled state is local Clifford.  The transversal-group half of
    this material now stands alone as *Diagonal Isoduality and Transversal
    Clifford Groups of MDS–CSS Codes*.
-10. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
+11. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
     extending Frobenius-invariant arcs by conjugate point pairs.
-11. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
+12. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
     graph that remembers its ambient plane.
-12. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
+13. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
     Schur-generates the two outer Fano modules, while the conic-link code is
     their defect-two jet modification.
-13. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
+14. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
     matrices of order 668, and a ladder of binary codes along the exceptional
     root systems that is proved but closed as a publication route.
-14. Two open programmes with substantial partial results: complete arcs of
+15. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
 
-The first four sections are the four numbered papers of the Clebsch series, in
-that order. The five-paper Clebsch portfolio also includes the separately titled
-MDS--CSS transversal-groups companion, whose Clebsch code is a worked
-application rather than a fifth numbered series installment. The three released
-series papers carry the titles under which versions one and two were published;
-where a forward version has changed a title, the section says so.
+The first five sections are the five numbered papers of *Clebsch: Rigidity from
+Sparse Shadows*, in that order. The separately titled MDS--CSS
+transversal-groups paper is an unnumbered companion whose Clebsch code is a
+worked application. The first three released series papers carry the titles
+under which versions one and two were published; where a forward version has
+changed a title, the section says so.
 
 ## *Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus*
 
@@ -251,6 +254,18 @@ removed by the classification below; so every nonsaturated conic-filling arc has
 rational point or two distinct rational points, and the first case the finite
 classification does not already remove is \((q,k)=(53,12)\).
 
+That first boundary and the next two size layers have now been pushed much
+farther by exact, independently replayable searches. The complete \(k=12\)
+and \(k=13\) layers are impossible over every finite field. For \(k=14\),
+the fields \(q=61\) and \(q=67\) are completely closed: at \(61\), none of
+the \(96\) exact twelve-line mixed stars extends; at \(67\), a complete mixed
+search of \(946{,}250{,}059\) recursion states and all \(92\) all-passant
+stars fails. At \(q=71\), a complete \(22{,}579{,}655\)-state anisotropic
+search closes the all-passant branch. The mixed branch at \(71\), both
+branches at \(73\), and the global saturated-internal coherence theorem remain
+open. These are finite negative classifications at stated domains, not a
+uniform nonsaturated theorem.
+
 The bounded classification is complete for all sizes over each odd prime power
 \(q\le43\): the only conic-filling arcs are the four-frame at \(q=5\) and the
 hexagon at \(q=11\). Nine of the sixteen fields close by counting alone, because
@@ -381,6 +396,15 @@ imported; Calvo
 the exact covering \(\mathcal U(A)=\mathcal C(\mathbb F_{11})\) — each source
 gives only the classical inclusion — together with the rigidity, gap,
 low-degree, decoding, and through-eight-points statements.
+
+A later full human-proof audit corrected an overstatement adjacent to this
+claim: in characteristic five the projective stabilizer is \(S_5\), not
+\(A_5\), because the golden roots coalesce. It also exposed the complete
+six-node exhaustion and the five chartwise singularity calculations in a
+checkable human certificate. Neither correction changes the order-eleven
+inverse theorem. The priority sentence is now restricted to the proved
+seven-value concurrence spectrum rather than claiming an exhaustive absence
+from the literature.
 
 The manuscript is split into a human core carrying the theorems and a separate
 companion, *Computational strengthenings of Clebsch syndrome rigidity*,
@@ -530,13 +554,22 @@ exact ranks, sheet recovery, cubic orientation, profile reconstruction,
 modular explanation, arithmetic gluing, and a completeness theorem naming the
 two occurring configurations.
 
+The completeness proof no longer rests on a false universal socle statement.
+Its all-field exclusion is now assembled from exactly the required channels:
+Steinberg absence, a determinant-normalized linear detector, prime-field
+Fischer detectors, the full opposite-parity root-defect calculation (including
+the \(T(2q)\) seam), affine-class contraction, and Faber's tame-subgroup
+theorem. The endpoint lift is projectively intrinsic, and the exceptional
+\(q=9\) case is handled explicitly. These repairs strengthen the proof surface
+without weakening the theorem.
+
 ## *Golden descent and operator realizations of the Clebsch cubic*
 
 A note proving two independent results on the same Clebsch four-space. Its
 released versions one and two carry the earlier title *Arithmetic and harmonic
 realizations of the Clebsch cubic*; the forward version renamed it because it
 now also carries a bounded selection of the conference-operator material of
-section 5, running as one chain from the incidence descent
+section 6, running as one chain from the incidence descent
 \(\sqrt{5J_0}\) through the relation \(C^2=5I\) to the triangle and
 middle-exterior cubics, the commutator Pfaffian and cross-golden determinant,
 the Joubert–Segre and Segre–Igusa shadows, and back to the degree-six harmonic
@@ -780,6 +813,28 @@ parameter.
   \(M_{12}\), while Hadamard row-column duality exchanges them by the forced
   outer automorphism.
 
+### Branch, norm, and recognition closure
+
+The rational degree-two incidence field is branched exactly along the reduced
+multiplicity-one sextic \(J_0=0\). Its scale is intrinsic:
+\(\iota_t^*J_0=16\sigma_3^2\). Consequently the two conjugate configurations
+over the base point form the complete reduced fibre with residue algebra
+\(\mathbb Q(\sqrt5)\); this is now proved in the paper rather than inferred
+from the real boundary picture.
+
+For a real symmetric even-order matrix with nonzero off-diagonal entries,
+nonzero triangle--Pfaffian proportionality forces order six and a positive
+scalar square. With equal absolute values it gives exactly the pentagon
+conference class, and the proportionality sign is its orientation character.
+The determinant-line comparison is signed: after compatible orientations,
+\[
+ \det[D_x,C_T]=-8000\,N_{E/\mathbb Q}(\det B_T).
+\]
+The positive block square is the signed odd-rank determinant-line contraction,
+not the unsigned field norm. Deck exchange preserves the unmarked algebra
+\(\mathbb Q[C]=\mathbb Q[-C]\) while reversing the marked generator and the
+relative orientation.
+
 ### Further Clebsch results outside the current paper spines
 
 - The integral Hadamard identities degenerate modulo three to an exact
@@ -846,6 +901,28 @@ structure; and while the exact relative-commutant calculation for the
 ten-dimensional rational Klein representation of \(\operatorname{PSL}_2(11)\)
 is positive, its discriminant-five lift fails. The proposed degree-23
 \(M_{23}\)/Golay coherence test is a future unity test, not a result.
+
+Across Papers I--V, the honest common statement is a reconstruction-profile
+calculus, not one functor on one category. Each sparse shadow recovers a
+declared carrier up to an explicit projective orbit, orientation involution,
+homogeneous fibre, or marking torsor; every asserted minimality has its own
+collision or lower-bound witness. A calibrated odd datum kills the recurring
+orientation \(C_2\), while Paper V shows that a chordal line is additionally
+necessary and sufficient for exact oriented return. In short: sparse shadows
+recover carriers, and their exact fibres measure what was forgotten.
+
+This profile comparison also separates a classical exceptional-root tower from
+the genuinely marked entry into it. The unmarked
+\(E_6\to E_7\to E_8\to E_9\to E_{10}\) quadratic fold is classical, as is
+the \(E_8\)-root-pair/Gosset/Schläfli bottom chain. What survives is an exact
+finite-carrier composition: the Clebsch data selects an oriented golden
+double-six on the \(27\)-line \(E_6\) carrier; the tritangent-support kernel
+recovers the bare line/tritangent geometry; and a retained residue flag makes
+the tower reversible. Forgetting the flag has explicit fibres. Already over a
+bare \(E_6\) carrier there are \(432\) golden markings, \(864\) ordered
+operator/apolar markings, and \(1728\) full Paper-V gateway markings. This
+composition has not passed a publication-grade novelty audit and is not
+assigned to a manuscript.
 
 ## *Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary conic code*
 
@@ -923,8 +1000,41 @@ The proof is led by a human argument; computation records discovery and is
 retained only where finite bulk has resisted conceptual compression. Two Lean
 surfaces support it — shared semantic modules carrying the logical spine, and a
 paper-owned package checking the irreducibly finite leaves in small auditable
-shards. Neither is a claim that the main theorem is machine-checked. Four
-concrete transports and the public release remain open.
+shards. Neither is a claim that the main theorem is machine-checked. The human
+surface now prints the six orbital representatives, the required integral
+scheme-product rows, the parity products identifying the binary projector, the
+Frobenius descent and commutant argument producing \(\mathbb F_8\), and the
+four orbit-Gram concurrence rows. A focused reread found no counterexample or
+field, sign, polarity, or reconstruction defect. Full Lean closure and public
+release remain open.
+
+## *The Golden Companion Correspondence*
+
+The fifth numbered Clebsch paper closes the marked round trip among the first
+three papers. The five-dimensional residue of the quadratic-trade paper is the
+**chordal** member of the same \(A_5\)-invariant cubic pencil whose
+**conference** member appears in Papers I and III. Its
+rational-normal-quartic singular locus recovers the original six-axis carrier,
+and the normalized outer difference gives the oriented, image-restricted
+inverse.
+
+The marking is essential. Unmarked data does not choose a canonical inverse;
+a chordal line supplies the additional datum needed for exact return. The
+theorem is stated over its actual image and records the base-change boundary,
+so it does not assert that every member of the invariant pencil comes from a
+Clebsch carrier. The eleven-page paper has a self-contained finite certificate
+for every frozen transitive input, and its final proof surface passed three
+independent cold reads after two convention repairs.
+
+There is a further proved arithmetic consequence that is not yet in the paper.
+The extension-field census is the inertia stratification of the tame
+icosahedral quotient, with branch signature \((2,3,5)\): the degree
+\(12,20,30\) strata are disjoint, the complement is free, and this gives a
+uniform finite-field split-type formula and zeta function. It remains outside
+the manuscript until its classical attribution boundary and larger arithmetic
+certificate are closed. The higher relative theorem over a localization of
+\(\mathbb Z[\sqrt5]\) is also open; its obstruction is integral good reduction,
+not another finite-field census.
 
 ## The golden conference operator source programme
 
@@ -2903,7 +3013,9 @@ are vacuous because a natural number can encode the whole residual.
   \(43\), the saturated-external branch is closed uniformly, the
   saturated-internal branch is now a pure clique bound that is settled in the
   class \(q\equiv1\pmod4\) as far as it has been measured, and the nonsaturated
-  branch is reduced to slack at least two. The exact remaining obstruction is an
+  branch is reduced to slack at least two; the complete \(k=12\) and \(k=13\)
+  layers and the \(q=61,67\) cases at \(k=14\) are now closed, as is the
+  all-passant \(q=71\) branch. The exact remaining obstruction is an
   upper bound on the largest arc whose secants all avoid a fixed conic —
   measured to be tight, so possibly false.
 - ***Quadratic trade rigidity and cubic orientation in conic matching
@@ -2918,7 +3030,10 @@ are vacuous because a natural number can encode the whole residual.
   global complement bit on at least seven points. Both
   prior proof gaps are closed — the chart factorization is scheme-theoretic through
   a global Stein algebra, and the two realizations share one marked orientation
-  source. The forward version has absorbed a bounded operator core as one chain
+  source. The rational branch divisor and complete reduced fibre are now proved
+  paper-locally, and the triangle--Pfaffian recognition theorem, signed norm
+  identity, and marked/unmarked deck-exchange boundary are integrated. The
+  forward version has absorbed a bounded operator core as one chain
   from the incidence descent to the harmonic return, plus the
   determinant-versus-permanent boundary; the released versions one and two are
   unchanged and keep the earlier title. The strongest bridge is explicitly
@@ -2935,8 +3050,16 @@ are vacuous because a natural number can encode the whole residual.
   \(8\le d\le12\); this closes it at the top and adds everything above it. A
   manuscript-only pre-release is deposited; the underlying incidence graph is
   pre-empted as a known semisymmetric graph, and an earlier claim that its
-  side-asymmetry contradicts published work is retracted. Four
-  concrete transports and full public release remain.
+  side-asymmetry contradicts published work is retracted. The human proof now
+  exposes the orbital representatives, scheme products, \(\mathbb F_8\)
+  commutant descent, and orbit-Gram transports that an audit found implicit.
+  Full Lean closure and public release remain.
+- ***The Golden Companion Correspondence:*** an eleven-page fifth numbered
+  paper proves that Paper II's chordal cubic and Papers I/III's conference
+  cubic lie in the same invariant pencil, recovers the six-axis carrier from
+  the chordal singular quartic, and gives the exact marked oriented return.
+  Human proof, finite evidence, literature ledger, clean standalone package,
+  and three cold reads are green; the formal layer remains separate work.
 - **The golden conference operator source programme:** mathematics proved and
   frozen across the cubic, polar, determinantal, pure-spinor, Boolean,
   measurement, fermionic, anomaly, Clifford, and lattice shadows, with the
@@ -3009,7 +3132,10 @@ are vacuous because a natural number can encode the whole residual.
   level codes are Calderbank--Kantor two-weight codes, the fold is
   Brouwer--Shult, the tower is named and related in the strongly-regular-graph
   literature, and the code-level residue turned out to be a formal property of
-  any matched Taylor double. It is not a publication route.
+  any matched Taylor double. It is not a publication route. The later marked
+  Clebsch-entry composition is a distinct research-only candidate: it retains
+  the residue flag, computes the exact forgotten fibres, and has not yet passed
+  the novelty gate needed for manuscript placement.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim. The cap
   game's causal-local route is falsified by an explicit \(\mathbb F_{11}\)
