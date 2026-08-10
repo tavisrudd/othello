@@ -412,6 +412,24 @@ This resultant vanishes exactly when some triple-or-higher fibre has
 \(\sigma_t=0\).  If it is nonzero, its quadratic character is the product of
 \(\chi(\sigma_t)\) only over odd multiplicities \(\mu_t\ge3\); even
 multiplicities contribute squares.
+The trace carrier itself is the split algebra
+\(C_3=\mathbb F_q[T]/(K_P)\), and \(\Sigma_3\) has a direct degree-less-than-
+\(\deg K_P\) Lagrange formula over triple directions, so no degree-\(q\)
+interpolation is needed.  Factoring \(J_P=K_{\rm odd}L^2\) separates the
+zero detector on \(K_P\) from the nonzero sign resultant on the smaller
+odd-multiplicity support \(K_{\rm odd}\).
+Dualizing the intercept filtration identifies \((M^{[d]})^\vee\) with edge
+weights whose first \(d+1\) intercept moments vanish on every direction
+matching; fibrewise these are the barycentric vectors
+\(P(u_i)/G_t'(u_i)\).  Thus both saturated and nonsaturated carriers are
+Reed--Solomon annihilator modules, coupled respectively by one split factor
+and by the endpoint graph coloring.
+Finally, writing the constant conic class as
+\(Q(t,u_i)=\eta s_i^2\) makes weighted covariance congruent to the
+orthogonal projector
+\((\sum s_i^2)I-ss^{\mathsf T}\).  Hence zero trace is exactly isotropy of
+the square-root edge vector on a direction matching; a structural proof
+should retain any endpoint-coherent sign/voltage law before squaring.
 
 ### \(q=53\): type-uniform critical core
 

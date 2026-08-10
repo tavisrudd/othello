@@ -250,7 +250,7 @@ Extend the quadratic character by \(\chi(0)=0\).  By (19),
 \(\prod_iq_i\) has square class \(\epsilon^\mu\).  Therefore (22)
 reduces the entire conic contribution to one fibre trace:
 \[
- \chi(\det\mathcal C_{Q,t})
+\chi(\det\mathcal C_{Q,t})
  =\chi(\sigma_t)^{\mu-2}\epsilon^\mu,                     \tag{23}
 \]
 including the degenerate case.  Since \(Q(t,U)\) is quadratic in
@@ -262,6 +262,41 @@ including the degenerate case.  Since \(Q(t,U)\) is quadratic in
 \]
 so this trace is already contained in the first two levels of the intercept
 flag.
+
+There is a useful orthogonal model behind (23).  Choose once and for all
+\(\eta\in\mathbb F_q^*\) with \(\chi(\eta)=\epsilon\).  The split-algebra
+condition (19) permits
+\[
+ q_{\mathcal N}=\eta s^2,
+ \qquad s\in A^\times,                                  \tag{23a}
+\]
+where changing any component sign of \(s\) has no effect below.  On a fibre,
+write \(s=(s_1,\ldots,s_\mu)\) and
+\(\tau=s^{\mathsf T}s=\sum_i s_i^2\).  Then
+\[
+ \sigma_t=\eta\tau,
+\]
+and after the diagonal change of variables \(z_i=s_if_i\), the weighted
+covariance is
+\[
+ \boxed{
+ \mathcal C_{Q,t}=\eta^2\,\operatorname{diag}(s)
+       (\tau I-ss^{\mathsf T})\operatorname{diag}(s).}   \tag{23b}
+\]
+The middle matrix kills \(s\), exactly corresponding to constants before
+the diagonal change.  Thus \(\mathcal C_{Q,t}\) is the orthogonal quotient
+of the rank-one projector \(\tau I-ss^{\mathsf T}\).  In particular,
+\[
+ \boxed{
+ \sigma_t=0\quad\Longleftrightarrow\quad
+ s^{\mathsf T}s=0,}                                     \tag{23c}
+\]
+and for \(\mu\ge3\) this makes the quotient form degenerate.  The zero-trace
+gate is therefore an isotropic-square-root gate on each direction matching;
+the nonzero sign gate is the discriminant of these orthogonal quotients.
+This formulation suggests retaining the edge-sign/voltage compatibility of
+the square roots supplied by the endpoint Gram determinants, rather than
+discarding it after squaring.
 
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
@@ -399,13 +434,31 @@ representative in (26) is
 Substituting the Lagrange identity (31) gives the endpoint-only formula
 \[
  \boxed{
- \Sigma(T)=\sum_{i<j}
+\Sigma(T)=\sum_{i<j}
  \frac{Q_{\rm pr}(v_i)Q_{\rm pr}(v_j)-B(v_i,v_j)^2}
       {\omega_{ij}^2}
  \left(1-(T-t_{ij})^{q-1}\right).}                       \tag{38}
 \]
 Thus the required trace polynomial is a single sum over all endpoint pairs;
 the direction fibres no longer need to be separated or their gcds computed.
+Equivalently, introduce the weighted Cauchy transform
+\[
+ \mathscr G_Q(Z)=\sum_{i<j}
+   \frac{Q_{\rm du}(t_{ij},u_{ij})}{Z-t_{ij}}
+ =\sum_t\frac{\sigma_t}{Z-t}.
+\]
+The finite-field Lagrange identity
+\[
+ 1-(T-t)^{q-1}=-\frac{T^q-T}{T-t}
+\]
+turns (37) into the compact rational formula
+\[
+ \boxed{\Sigma(T)=-(T^q-T)\mathscr G_Q(T).}              \tag{38a}
+\]
+Thus the remaining scalars are exactly the residues of one endpoint-Gram
+Cauchy transform.  A structural evaluation of that transform modulo
+\(K_P\), rather than separate matching calculations, would settle both the
+zero detector and the parity resultant.
 
 Lucas' theorem for the all-\((p-1)\)-digit integer \(q-1\) gives
 \[
@@ -449,6 +502,14 @@ and slope multiplication on this quotient has characteristic polynomial
  E_P^{[d]}(Z)=
  \prod_{t\in\mathbb F_q}(Z-t)^{\max(\mu_t-d-1,0)}.}      \tag{44}
 \]
+More generally, if \(\varphi\in B\) and \(\Phi(T)\) represents it modulo
+\(T^q-T\), then fibrewise scalar multiplication gives the norm identity
+\[
+ \boxed{
+ \det(m_\varphi\mid M^{[d]})
+ =\prod_t\varphi(t)^{\max(\mu_t-d-1,0)}
+ =\operatorname{Res}_T(E_P^{[d]},\Phi).}                 \tag{44a}
+\]
 For \(d=0\), this recovers \(M\) and \(E_P\).  For \(d=1\), it gives the
 canonical second-excess module
 \[
@@ -475,6 +536,73 @@ radical recursion
  =\frac{E_P^{[d]}}{\operatorname{rad}E_P^{[d]}}.         \tag{47}
 \]
 
+The filtration has one reduced support layer at a time.  For \(d\ge1\),
+the natural quotient map gives
+\[
+ 0\longrightarrow \mathcal F_d/\mathcal F_{d-1}
+ \longrightarrow M^{[d-1]}
+ \longrightarrow M^{[d]}\longrightarrow0,              \tag{47a}
+\]
+and the left term has one dimension over each direction with
+\(\mu_t\ge d+1\), and zero dimensions elsewhere.  Consequently
+\[
+ \boxed{
+ \det\!\left(Z-T\mid\mathcal F_d/\mathcal F_{d-1}\right)
+ =\operatorname{rad}E_P^{[d-1]}
+ =\prod_{\mu_t\ge d+1}(Z-t).}                           \tag{47b}
+\]
+Thus the multiplicity partition is the conjugate of the sequence of reduced
+support lengths:
+\[
+ \boxed{
+ \delta=\sum_{d\ge1}|\{t:\mu_t\ge d+1\}|.}             \tag{47c}
+\]
+This is an all-defect, all-multiplicity decomposition of the direction
+quotient into reduced spectral layers.  It also proves that the construction
+does not depend on translating or rescaling the intercept coordinate:
+if \(U'=\alpha(T)U+\beta(T)\) with \(\alpha\in B^\times\), then triangular
+binomial expansion gives
+\(\sum_{a=0}^d(U')^aB=\sum_{a=0}^dU^aB\).
+
+There is a dual barycentric model for every layer.  Use the perfect trace
+pairing on the split node algebra,
+\[
+ \langle a,f\rangle=\sum_{(t,u)\in\mathcal N}a(t,u)f(t,u).
+\]
+The annihilator of \(\mathcal F_d\) is
+\[
+ W^{[d]}=\left\{a\in A:
+   \sum_{u\in\pi^{-1}(t)}a(t,u)u^r=0
+   \text{ for every }t\text{ and }0\le r\le d\right\}, \tag{47d}
+\]
+so the pairing identifies
+\[
+ \boxed{(M^{[d]})^\vee\cong W^{[d]}.}                  \tag{47e}
+\]
+This is a node-edge chain model: \(\mathcal N\) is the edge set of the
+complete endpoint graph, each slope fibre is a matching, and \(W^{[d]}\)
+consists of edge weights whose first \(d+1\) intercept moments vanish on
+every color matching.
+
+It is also division-free up to the canonical barycentric weights inside
+each fibre.  If
+\(G_t(U)=\prod_{i=1}^{\mu_t}(U-u_i)\), the standard partial-fraction
+identity gives
+\[
+ \boxed{
+ W_t^{[d]}=
+ \left\{
+   \left(\frac{P(u_i)}{G_t'(u_i)}\right)_{i=1}^{\mu_t}:
+   \deg P\le\mu_t-d-2
+ \right\}.}                                             \tag{47f}
+\]
+The right side is zero when \(\mu_t\le d+1\).  Thus the nonsaturated excess
+flag and the saturated ghost system have the same local mechanism:
+Reed--Solomon moment annihilators represented by inverse derivatives of a
+split polynomial.  What differs is the coupling.  In the saturated branch
+one factor \(R\) couples all roots; here the endpoint graph and its
+direction-matching coloring couple the fibrewise factors \(G_t\).
+
 The scalar trace carrier is smaller still, because a resultant against
 \(J_P\) uses values at its roots but no derivatives.  Put
 \[
@@ -498,6 +626,40 @@ the endpoint-pair scalar input lives only on the reduced support of
 triple-or-higher directions.  Each such direction consumes at least two
 units of \(\delta\), which gives the bound \(s\le\lfloor\delta/2\rfloor\)
 in (49).
+There is no need to construct the degree-\(q\) polynomial \(\Sigma\) before
+making this reduction.  Since \(K_P\) is squarefree, its Lagrange idempotent
+at a root \(t\) is
+\[
+ \ell_t^{K}(T)=\frac{K_P(T)}{(T-t)K_P'(t)}.
+\]
+Consequently the reduced trace has the direct bounded formula
+\[
+ \boxed{
+ \Sigma_3(T)=
+ \sum_{\mu_t\ge3}\sigma_t\ell_t^K(T)
+ =\sum_{\substack{i<j\\ \mu_{t_{ij}}\ge3}}
+ Q_{\rm du}(t_{ij},u_{ij})
+ \frac{K_P(T)}{(T-t_{ij})K_P'(t_{ij})}.}                \tag{49a}
+\]
+The repeated terms with the same direction add to \(\sigma_t\).  Formula
+(49a) is an endpoint-Gram interpolation of degree less than \(s\) from the
+outset; all unique and merely double directions have disappeared before any
+resultant is formed.
+Equivalently, the reduced support algebra
+\[
+ C_3=\mathbb F_q[T]/(K_P)
+   \cong\prod_{\mu_t\ge3}\mathbb F_q                 \tag{49b}
+\]
+has dimension \(s\), and the class of \(\Sigma_3\) is exactly the trace
+vector \((\sigma_t)_{\mu_t\ge3}\).  Its norm is the universal zero detector
+\[
+ \boxed{
+ N_{C_3/\mathbb F_q}(\Sigma_3)
+ =\operatorname{Res}(K_P,\Sigma_3)
+ =\prod_{\mu_t\ge3}\sigma_t.}                           \tag{49c}
+\]
+This separates invertibility of the trace vector from the multiplicity
+weights carried by \(M^{[1]}\).
 
 There is a final parity compression.  From (35),
 \[
@@ -516,6 +678,26 @@ quadratic character, so
 Thus the remaining nonsaturated theorem splits cleanly into two structural
 claims: exclude zero conic-value traces on triple-or-higher fibres, and
 control the product of trace signs only on odd-multiplicity fibres.
+The latter has its own polynomial carrier.  Write the unique square-class
+factorization
+\[
+ J_P=K_{\rm odd}L^2,
+ \qquad
+ K_{\rm odd}=\prod_{\substack{t:\mu_t\ge3\\
+                              \mu_t\text{ odd}}}(T-t).  \tag{51a}
+\]
+Once the zero detector in (50) is nonzero, multiplicativity of the resultant
+gives
+\[
+ \boxed{
+ \chi\!\left(\operatorname{Res}(J_P,\Sigma_3)\right)
+ =\chi\!\left(\operatorname{Res}(K_{\rm odd},\Sigma_3)\right).} \tag{51b}
+\]
+Thus \(K_P=\operatorname{rad}J_P\) is the support needed to detect
+degeneracy, whereas the squarefree parity part \(K_{\rm odd}\) is the
+strictly smaller support needed for the nonzero sign.  These roles must not
+be conflated: a zero trace on an even-multiplicity fibre kills the original
+determinant although it is absent from \(K_{\rm odd}\).
 
 This also separates the present trace from the earlier all-center
 Euler-character norm.  If the weights \(q_i\) in (20) are replaced by their
@@ -548,7 +730,7 @@ The two current structural carriers have the same architecture:
 | branch | forced Frobenius base | finite excess carrier | all-\(q\) target |
 |---|---|---|---|
 | saturated-internal | \(X^q-X=RS\) | \(\mathcal G_R=\mathcal V_R/\mathcal C_R\), dimension \(q/p-1\) | classify \(\mathcal K_R\), then use \(j=2\) for \(p\ne5\) or \(j=3\) for \(p=5\) |
-| nonsaturated | one node over every root of \(T^q-T\) | \(M=A/\pi^*B\), dimension \(\delta\), with second excess \(J_P\) of degree \(\delta-r\) | control \(\operatorname{Res}(J_P,\Sigma)\) from the conic-Gram matching sums |
+| nonsaturated | one node over every root of \(T^q-T\) | filtered modules \(M^{[d]}\), with dual barycentric edge-chain spaces \(W^{[d]}\) | control the zero norm on \(K_P\) and the parity resultant on \(K_{\rm odd}\) from the conic-Gram matching sums |
 
 In both cases the correct operation is quotienting on the Frobenius-fixed
 finite base.  The residual statement is then finite-dimensional for a
@@ -582,10 +764,13 @@ prove nonexistence.
 | Is there a canonical quadratic invariant without choosing means? | settled | covariance form (14) and determinant (17) |
 | Where does the conic character live? | settled | square class (19) in the split node algebra |
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
+| Is there an orthogonal model for the weighted form? | settled | square-root projector (23b); zero trace is isotropy (23c) |
 | Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
 | Is the second excess intrinsic? | settled | module \(M^{[1]}\) and determinant identity (46) |
 | Is there a carrier for every multiplicity layer? | settled | intercept-degree filtration (42)--(44) |
+| Does every layer have a dual edge-chain model? | settled | moment-annihilator and fibrewise barycentric spaces (47d)--(47f) |
 | How small is the scalar trace carrier? | settled | degree \(s\) support reduction \(\Sigma_3\) in (49) |
+| Can \(\Sigma_3\) be formed without degree-\(q\) interpolation? | settled | direct reduced-support Lagrange formula (49a) |
 | Which fibres affect the nonzero determinant character? | settled | only odd \(\mu_t\ge3\), formula (51) |
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
 | Is there a cross-direction trace formula? | settled | endpoint-pair interpolation (38), reduced to \(\Sigma_J\) in (40) |
@@ -599,5 +784,7 @@ Evaluate the character of the bounded endpoint-pair resultant
 \(\operatorname{Res}(J_P,\Sigma_3)\) in (49), using the star endpoint
 relations in (38).  Preserve actual conic values: the Euler-character
 projection (33) is too coarse.  First exclude the zero-trace case (50), then
-prove the odd-fibre sign law (51).  Do not resolve this by a fixed-field
-census.
+prove the odd-fibre sign law (51), equivalently the parity resultant (51b).
+Use the dual edge-chain model (47d)--(47f) and retain any coherent
+edge-sign/voltage law in the Gram square roots (23a), since (23c) turns zero
+trace into isotropy.  Do not resolve this by a fixed-field census.
