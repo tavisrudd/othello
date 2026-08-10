@@ -561,6 +561,15 @@ With \(y_e=\tau_e+\tau_e^{-1}+2=4Q_e/\psi(t)\), this is simply
 \]
 The second equality is for \(y_e\ne4\); at the fixed-axis value \(y_e=4\)
 its left side is zero.
+Writing \(S_t=\sum_e y_e\), the smooth odd-support parity resultant factors
+as
+\[
+ \chi\operatorname{Res}(K_{\rm odd,sm},\Sigma_3)
+ =\chi\operatorname{Res}(K_{\rm odd,sm},\psi)\,
+  \chi\operatorname{Res}(K_{\rm odd,sm},\mathcal S).
+\]
+Thus the same universal torus sum \(S_t\) controls both zero and sign gates;
+the other factor is an explicit quadratic resultant.
 The torus boundary \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two.
 Every covered tangent fibre forces \(c/\eta\) square, splits as
 \(s=\pm\sqrt{c/\eta}\,r\), and has

@@ -869,6 +869,40 @@ intersections across all directions.  This is nevertheless a
 field-independent one-dimensional target, rather than an arbitrary
 isotropic vector in \(\mathbb F_q^{\mu_t}\).
 
+The same normalized sum controls the nonzero parity gate.  Let
+\[
+ K_{\rm odd,sm}
+ =K_{\rm odd}/\gcd(K_{\rm odd},\psi),
+\]
+and let \(\mathcal S(T)\) be the interpolation, on its roots, of
+\[
+ S_t=\sum_{e\in\mathcal M_t}y_e.
+\]
+Formula (23bg) gives
+\[
+ \boxed{
+ \Sigma_3\equiv\frac{\psi\,\mathcal S}{4}
+       \pmod {K_{\rm odd,sm}},}                         \tag{23bp}
+\]
+and hence
+\[
+ \boxed{
+ \begin{aligned}
+ \operatorname{Res}(K_{\rm odd,sm},\Sigma_3)
+ &=4^{-\deg K_{\rm odd,sm}}
+   \operatorname{Res}(K_{\rm odd,sm},\psi)
+   \operatorname{Res}(K_{\rm odd,sm},\mathcal S),\\
+ \chi\operatorname{Res}(K_{\rm odd,sm},\Sigma_3)
+ &=\chi\operatorname{Res}(K_{\rm odd,sm},\psi)\,
+   \chi\operatorname{Res}(K_{\rm odd,sm},\mathcal S).
+ \end{aligned}}                                        \tag{23bq}
+\]
+The power of four disappears in quadratic character.  Thus both terminal
+questions use one universal carrier: zeros of \(S_t\) give the zero norm,
+and the product of the nonzero \(S_t\) gives the residual parity sign.  The
+only additional factor is the explicit quadratic resultant of \(\psi\);
+odd tangent fibres remain on the degree-at-most-two support below.
+
 The omitted tangent fibres form a uniformly bounded support.  Put
 \[
  K_{\rm tan}=\gcd(K_P,\psi),
