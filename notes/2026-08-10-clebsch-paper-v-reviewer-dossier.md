@@ -240,3 +240,5 @@ byte-identical frozen inputs outside the PDF.  Its release spot check found
 that TeX ligatured the two command hyphens into an en dash.  The final freeze
 uses verbatim text; PDF extraction now returns the literal executable
 double-hyphen check flag.  No mathematical prose or claim changed.
+All three readers matched the final hashes and returned GO on this last
+release-surface check.

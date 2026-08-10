@@ -2,8 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; manuscript and cold-referee gates closed; paper-only export
-pending; Lean deferred by user instruction
+**Status:** active; manuscript, cold-referee, and paper-only export gates
+closed; Lean deferred by user instruction
 
 **Research checkpoint:** the literal-cubic target failed, but the replacement
 Paper-II chordal-axis bridge is proved exactly and independently replayed.
@@ -81,8 +81,10 @@ ready.
 7. Run final claim-specific, citation, stable-reference, detritus,
    Milnor--Serre, rendered-page, venue-length, and release-surface checks.
 
-Steps 1--7 are closed on the authority manuscript except for the paper-only
-mirror export.  The separate Lean publication gate remains deferred.
+Steps 1--7 are closed on the authority manuscript and all five standalone
+series repositories.  Their deterministic paper-only manuscript gates pass,
+and the portfolio summary is synchronized.  The separate Lean publication
+gate remains deferred.
 
 ## Publication gates
 
