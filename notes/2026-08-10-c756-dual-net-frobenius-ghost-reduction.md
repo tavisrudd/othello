@@ -413,8 +413,7 @@ Their availability is uniform.  If \(q=p^e\) and \(p\ge5\), (44)--(45)
 exist for every \(0\le a\le e-1\), since
 \(p^e>4p^a-1\).  If \(p=3\), they exist for
 \(0\le a\le e-2\); the smallest proper extension \(q=9\) is independently
-closed.  Hence the
-live extension problem carries a semilinear equation at every base-
+closed.  Hence the live extension problem carries a semilinear equation at every base-
 \(p\) digit for \(p\ge5\), and at every non-top digit in characteristic
 three.  What remains is to exploit their simultaneous dependence on the
 same completely split factor \(R\), together with the genuinely nonlinear
@@ -441,7 +440,7 @@ These are dimension deductions, not census results.
 
 Thus the universal object is
 \[
- \mathcal K_R=igcap_{a\in I_{p,e}}
+ \mathcal K_R=\bigcap_{a\in I_{p,e}}
    \ker\overline{\mathcal L}_{R,a}.                       \tag{49}
 \]
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
