@@ -954,14 +954,14 @@ on \(\mathcal G_R\).  The exact rank-drop target there is simply
  \{g\in\ker\mathbb M_R:\mathcal Q_{R,2}(0,g)=0\}=\{0\}.
 \]
 In characteristics three and five, digit
-carries make (83) nontrivial; these are exactly the characteristics of all
+carries allow (83) to be nonzero; these are exactly the characteristics of all
 three dimension-forced seams (78).  There the determinantal transversality
 test (84) is a genuine first subgate before the global quadratic/cubic
 analysis.  Formulas (85)--(86) replace a futile uniform tangent-space
 strategy by the correct characteristic split.
 
-At the three forced seams the normal row budgets are already sufficient for
-transversality on the minimum kernel stratum:
+At the three forced seams the normal row budgets are already dimensionally
+sufficient to permit transversality on the minimum kernel stratum:
 \[
  \boxed{
  \begin{array}{c|c|c|c}
