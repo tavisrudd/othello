@@ -1,8 +1,9 @@
 # C879 — finitegeom paper-boundary extraction plan and red-team
 
-**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** Q11 self-contained
-certificate migration in progress; the C891 module mapping is stale and must be
-regenerated from the current tree before it can authorize any paper move
+**Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** Q11 and Q16 are
+self-contained, sealed, and restorable; their cheap paper compatibility bridges
+are proved against the pinned finitegeom revision. The human-area module mapping
+must be refreshed from the current tree before any paper source move.
 
 ## Objective
 
@@ -86,11 +87,18 @@ The package's present Clebsch-wide gate is not a certificate-only gate: it impor
 finitegeom human modules and must be split.  The Q11 package exposes only its orbit and
 Brianchon terminals; the Clebsch paper aggregate remains downstream in finitegeom.
 
-The Q11 compatibility spike is green: the final stable-named Mathlib-only local model
-elaborated in 5.94 seconds at 1.03 GB peak RSS, and the downstream adapter elaborated
-in 61.80 seconds at 3.34 GB.  The adapter proved equality of the actual witness and canonical
-point tables and transported a certificate theorem; no heavyweight Q11 target was
-scheduled.  This establishes the mechanism, not the full Q11 ownership manifest.
+The Q11 compatibility bridge is green. It proves equality of the certificate and
+human witness tables and canonical point enumerations, then exposes the frozen
+two-generator terminal at the paper boundary. No heavyweight Q11 target is scheduled.
+
+The completed bridge boundary is recorded in `lean/trust/paper-bridges.toml`.
+The Clebsch bridge identifies the six witness vectors and all 133 normalized
+projective representatives; the Arcs bridge gives a ring equivalence between the
+two four-bit `GF(16)` implementations and identifies all 273 normalized projective
+representatives. Both expose the corresponding frozen certificate terminal under
+the paper namespace. `lean/scripts/lean-paper-bridge-audit.py` requires the exact
+finitegeom and certificate commits, exact imports, clean dependency checkouts,
+matching cache archives, and no finitegeom-to-certificate dependency.
 
 `lean/scripts/lean-certificate-dependency-firewall.py` is the executable package
 edge policy.  Its Q11 check is green after the self-contained rewrite.  Its portfolio
@@ -437,7 +445,7 @@ next safe chunk:
 
 | Chunk | Single objective | Validation and shippable state |
 |---|---|---|
-| C879.0 | Regenerate the live module map and add the package-DAG firewall. | Parser/unit tests plus adversarial reverse-edge and missing-adapter fixtures; the current reversed tree is reported, not accepted. |
+| C879.0 | Regenerate the live module map and add the package-DAG firewall. | Parser/unit tests plus adversarial reverse-edge and missing-adapter fixtures; accept only the required certificate DAG. |
 | C879.1 | Spike the self-contained Q11 local model and proved downstream adapter. | Build only the Mathlib-only model and cheap adapter; inspect their exact imports. |
 | C879.2 | Commit the declaration-level Q11 ownership manifest and certificate-only gate design. | Exact import/use report; reject human or paper imports from the certificate package. |
 | C879.3 | Move the local Q11 coordinate model and Brianchon--Petersen certificate into the Q11 package; complete the `TavisRuddFiniteGeom.Certificates.Q11` rename and whole-artifact prose audit. | Cheap source-layer elaboration only; no heavyweight fallback; static scan finds no legacy path or namespace. |
@@ -605,8 +613,8 @@ The old metadata preflight is:
 python3 notes/scripts/c879_module_closure.py
 ```
 
-It is currently expected to fail because its C891 module map is stale.  Refresh its
-committed mapping from the live registries before making it an execution gate again.
+It currently fails closed because its module map predates the live human-source tree.
+Refresh the committed mapping from the live registries before making it an execution gate again.
 After refresh it rejects paper/repository/export
 inventory drift, changed gate closures, missing mapped sources or roots, duplicate
 target names, unresolved aliases, AME--LU coverage gaps, and Lean-tree drift from the
