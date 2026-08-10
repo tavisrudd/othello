@@ -254,7 +254,17 @@ Lean source, package, mirror, or remote changed.  Full report:
    guarded run `run-20260810-171214-7ce5ea23` built its final aggregate in 47m30s at
    5.43 GB peak, and its Lake pack has SHA-256
    `24860c9e950cca12ff17b4875257bbe8b56860c6ac2353c9ef8ee3eebfd7ff32`.
-   Its legacy monorepo family remains pending until the downstream bridge and source removal land.
+   Its exporter-created downstream bridge is at standalone commit `570f304f`; the static bridge
+   audit is green against finitegeom `b871c10b` and certificate `54fb4f83`. Its cheap verifier and
+   registry pin remain queued behind the active Q13 build; the legacy monorepo family stays pending
+   until that bridge is green and its consumers move.
+   Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
+   materialized outputs at Lean-source commit `0dc0510`. Its single-worker resume is
+   `run-20260810-202435-807db1d3`; Classes 0--12 are preserved, and the current frontier is Class13.
+   After it finishes, cherry-pick metadata commits `156af07`, `d0a4213`, `ed50b4d`, `51ec6c2`,
+   refresh only the cheap aggregate root, then seal and pack. Q25 is independently Mathlib-only at
+   `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
+   the six-module preflight beginning at `Normalization`, and the final external registry entry.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
