@@ -54,9 +54,15 @@ mystery ledger are frozen in
 
 The deterministic paper gate passes at the author-approved 13-page invariant,
 and the standalone paper mirror is synchronized and verified at forward commit
-`b130d01`.  The deferred upgrade assessment remains unread.  The next action
-is author activation of that assessment or another requested review pass;
-neither event allocates a new C id.
+`b130d01`.  Later upgrade and review rounds continue under this same C id.
+
+The author activated and reviewed the deferred assessment on 2026-08-09.  Its
+agreed four-way disposition---safe editorial work, cheap claims requiring
+vetting, costly candidates, and exclusions---is frozen in
+`notes/2026-08-09-c901-paper-iv-upgrade-triage.md`.  No upgrade claim has been
+promoted to the manuscript.  The next permitted work is the safe layered-
+exposition pass and a separate pre-draft claim--proof--citation matrix for the
+four core frame-correspondence claims.
 
 ## Acceptance gate
 
