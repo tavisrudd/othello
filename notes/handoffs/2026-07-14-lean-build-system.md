@@ -260,7 +260,7 @@ Lean source, package, mirror, or remote changed.  Full report:
    until that bridge is green and its consumers move.
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
    materialized outputs at Lean-source commit `0dc0510`. Its single-worker resume is
-   `run-20260810-202435-807db1d3`; Classes 0--12 are preserved, and the current frontier is Class13.
+   `run-20260810-202435-807db1d3`; Classes 0--13 are preserved, and the current frontier is Class14.
    After it finishes, cherry-pick metadata commits `156af07`, `d0a4213`, `ed50b4d`, `51ec6c2`,
    refresh only the cheap aggregate root, then seal and pack. Q25 is independently Mathlib-only at
    `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
