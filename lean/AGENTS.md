@@ -171,8 +171,8 @@ The runner automatically:
 - reads RAM, mount, and tmpfs usage silently—never print `ps`, `df`, or memory tables into context;
 - refuses memory-backed run state and unsafe RAM/tmpfs budgets;
 - builds `--serial-first` dependencies with one thread;
-- passes the requested thread cap to both `LEAN_NUM_THREADS` and Lake's `-j`, so the cap bounds
-  per-process Lean tasks and concurrent module processes independently of CPU affinity;
+- passes the requested thread cap through `LEAN_NUM_THREADS`; this does not strictly serialize
+  sibling external Lean processes, so memory-heavy sibling modules must be separate queue targets;
 - after the first stale probe, restores the Mathlib binary cache once through the same
   `taskset`/`choom`/`run-quiet` envelope before falling back to a source build; use
   `--cache-mode require` for a clean replay that must not silently skip cache restoration,
