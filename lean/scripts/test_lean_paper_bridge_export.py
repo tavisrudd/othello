@@ -22,7 +22,9 @@ class PaperBridgeExportTests(unittest.TestCase):
             "name": "sample-paper",
             "repository": "finitegeom-sample-paper-bridge",
             "lean_library": "SamplePaperBridge",
+            "source": "paper-bridges/sample/CertificateCompatibility.lean",
             "module": "TavisRuddFiniteGeom.Papers.Sample.CertificateCompatibility",
+            "license_source": "papers/sample/LICENSE",
             "finitegeom_commit": "a" * 40,
             "certificate_package": "finitegeom-sample-certificates",
             "certificate_commit": "b" * 40,
@@ -42,6 +44,17 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("nix run .#verify -- /path/to/sample.lake-pack.tar.gz", text)
         self.assertNotIn("authority", text.lower())
         self.assertNotIn("mirror", text.lower())
+        self.assertIn("See `LICENSE`", text)
+
+    def test_materialization_carries_immutable_license(self) -> None:
+        original_blob = MODULE.blob
+        try:
+            MODULE.blob = lambda commit, path: b"license\n" if path.endswith("LICENSE") else b"source\n"
+            files = MODULE.materialized_files("d" * 40, self.bridge())
+        finally:
+            MODULE.blob = original_blob
+        self.assertEqual(files["LICENSE"], b"license\n")
+        self.assertIn(b'"path": "LICENSE"', files["MANIFEST.json"])
 
     def test_tmpfs_and_existing_destinations_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "disk-backed"):

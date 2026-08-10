@@ -137,6 +137,11 @@ nix run .#verify -- /path/to/{bridge["cache_archive"]}
 
 The command restores the frozen certificate artifacts, requires its aggregate
 trace to be current without compilation, and builds only the compatibility module.
+
+## License
+
+This repository is licensed under the Creative Commons Attribution 4.0
+International License. See `LICENSE`.
 '''
 
 
@@ -147,8 +152,10 @@ def sha256(data: bytes) -> str:
 def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     module_path = bridge["module"].replace(".", "/") + ".lean"
     source = blob(commit, "lean/" + bridge["source"])
+    license_text = blob(commit, bridge["license_source"])
     files = {
         module_path: source,
+        "LICENSE": license_text,
         "lakefile.toml": lakefile(bridge).encode(),
         "lean-toolchain": (TOOLCHAIN + "\n").encode(),
         "flake.nix": flake(bridge).encode(),
@@ -166,6 +173,10 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
             }
         ],
         "module_count": 1,
+        "license": {
+            "path": "LICENSE",
+            "sha256": sha256(license_text),
+        },
         "dependencies": {
             "finitegeom": bridge["finitegeom_commit"],
             bridge["certificate_package"]: bridge["certificate_commit"],
