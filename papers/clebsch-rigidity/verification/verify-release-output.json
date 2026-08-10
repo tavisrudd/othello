@@ -1,5 +1,5 @@
 {
-  "check_count": 26,
+  "check_count": 27,
   "checks": [
     {
       "id": "verification-tool-tests",
@@ -102,20 +102,24 @@
       "status": "passed"
     },
     {
-      "id": "lean-rigidity-trust-gate",
+      "id": "lean-finitegeom-trust-gate",
+      "status": "passed"
+    },
+    {
+      "id": "lean-certificate-compatibility",
       "status": "passed"
     }
   ],
   "inputs": {
-    "checker_outputs_sha256": "36ab223c1d92cf4bd82a2e52f830b37faa03e7405d3fb742bb1bb3cdc4d76d7a",
-    "companion_manuscript_sha256": "408210904cc5a61cebe6fcfd402821ebfb13eec4fd5cf1d4308b08a67c9c2363",
-    "companion_pdf_sha256": "1e9b4b104859ebb847ecf46c6b7482a3846263d75da4c326e56c1521d044b195",
+    "checker_outputs_sha256": "98744378dee557bcd29a5ab5ab9f4fad827b62721c32558f47edefd06955397a",
+    "companion_manuscript_sha256": "9f218d2e0f87e0e16390b1e8e122cc7edc9fc04c6a3eb32fef5bb71d4e882681",
+    "companion_pdf_sha256": "53c584ab8360aeab2e582abce6b1b34c59307fd5dd1c48d4b07579e61ab4aa18",
     "companion_trust_sha256": "884603c4596e2827acae3c9b26a5e43fa2bd2808c664438fd5f833d7ff19d90a",
-    "manuscript_pdf_sha256": "95ccf1ff32180fd806608002d69a912c5a1aae26a8fb5778d553a88b62803d83",
-    "manuscript_sha256": "c86570c6d12567f41c2ecd6d8eb59f20caeb6dd32d292f6e84512bff47d2a8a8",
-    "release_surface_sha256": "2bf2649d9982e3fa9c563784505ca5152fe3ca5a7d2ee04db25d7f632cdfac3d",
-    "statement_identity_sha256": "af197acf6b08e23b639ef932b362246a703d246e36bbe9c704a868d5fba1a9cb"
+    "formal_companion_sha256": "654edc1f5dc192aae51a425bd862c44f1aa4838d796378b059faf71844b2d82e",
+    "manuscript_pdf_sha256": "85d6fa17475a6771027904c329bd5c10f04e5ed19553c7931d25810d27772a4f",
+    "manuscript_sha256": "286c5ab2c9699092bc8359261c5db6966b05cdb5c16b34ac7f2f6bf4845c65dd",
+    "release_surface_sha256": "45daef58791f50f50b9dfc88db298d8ba87999160c4846a6dec50162cab1833d",
+    "statement_identity_sha256": "fe2808d667f260e5f1222b495902e92ce2dfc69696d53ccaf411c49430c16d50"
   },
-  "lean_commit": "930675c6b8bf44e06847d15bd6e63560caa6977f",
   "status": "passed"
 }
