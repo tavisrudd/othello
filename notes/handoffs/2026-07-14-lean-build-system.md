@@ -87,7 +87,8 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
   `regenerate` (the package's separate `.#regenerate` app under the same owner guard).
 - `lean-build-systemd.py`: the adjacent managed path, explicitly selected, same lock and caps.
 - `lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log with a hermetic failure
-  suite. Unexercised against real Lake output.
+  suite. Exercised against the Q13 restart: validated sentinels remained current and byte-identical,
+  and the resumed log rebuilt neither.
 - `lean-trust-spine.py`: read-only `audit`/`check` of the declared trust boundary against tree
   facts, plus `generate`/`graph`/`render`. Declarations in `lean/trust/`. Runs no Lake.
 - `lean-trust-extract.py`: the only trust-spine component that runs Lean; `run` extracts declared
@@ -260,8 +261,9 @@ Lean source, package, mirror, or remote changed.  Full report:
    registry pin remain queued behind the active Q13 build; the legacy monorepo family stays pending
    until that bridge is green and its consumers move.
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
-   materialized outputs at Lean-source commit `0dc0510`. Its single-worker resume is
-   `run-20260810-202435-807db1d3`; Classes 0--14 are preserved, and the current frontier is Class15.
+   materialized outputs at Lean-source commit `0dc0510`. Classes 0--29 are preserved; sequential
+   run `run-20260810-233857-b4421bc3` owns Classes 30--109, Data, Assembly, and the root gate, with
+   Class30 current. Each high-memory class is a separate queue target, preventing sibling overlap.
    After it finishes, cherry-pick metadata commits `156af07`, `d0a4213`, `ed50b4d`, `51ec6c2`,
    refresh only the cheap aggregate root, then seal and pack. Q25 is independently Mathlib-only at
    `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
