@@ -247,4 +247,7 @@ The author then sharpened one sentence in the series perspective: the
 conference and chordal companions, after a chordal line is marked, “recover
 each other with orientation.”  No theorem, proof, boundary, or verification
 text changed.  The surface above is the resulting wording-only freeze and
-requires a final hash and scope spot check.
+received a final hash and scope spot check from all three readers.  Each
+returned GO and confirmed that “recover each other” is bidirectional only
+after the chordal line is marked, with the image-restricted source boundary
+unchanged.
