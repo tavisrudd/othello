@@ -30,10 +30,26 @@ twenty-dimensional cubic--Winger correspondence carrier, and a unique
 three-primary Winger match.  The two-primary obstruction forces an independent
 sign cover $r^2=T$; combined with the twist cover it is a genus-one curve of
 conductor $450$, rank zero, and torsion $\mathbf Z/2$, so no rational smooth
-fibre splits both characters.  Roulleau pre-empts the rational $E^5$ slogan.
-Nothing from this checkpoint is in the manuscript; relative cycles, the
-actual polarization kernel, descent, boundary, and Hecke geometry remain the
-upgrade gates.
+fibre splits both characters.  The follow-up
+`notes/2026-08-10-c904-exotic-f4-gluing.md` proves that this is the **actual**
+two-primary marking cover: the three $\mathbf F_2$ gluings preserve $S_6$,
+while each of the two exotic $\mathbf F_4$ gluings has stabilizer exactly
+$A_5$, so strong Torelli forces the cubic family onto the exotic pair.  It
+also constructs the relative rational thirty-cycle carrier; only integral
+saturation and boundary extension remain on that gate.  The same report proves
+the twin-simplex theorem: Winger's five $A_4$ quotient axes have Gram
+$3(5I-J)$ and cubic's six $D_5$ axes have Gram $6I-J$, so their discriminants
+meet exactly in the unique $(\mathbf Z/3)^4$ heart and the generic
+three-primary gluing is forced.  Roulleau pre-empts the rational $E^5$ slogan.
+The five kernels now form one resolvent packet over $X_0(3)$: the rational
+$S_6$ triple is the degree-three $X_0(6)$ cover and the exotic $A_5$ pair is
+the quadratic discriminant cover.  Cheltsov--Kuznetsov--Shramov's resolved
+$S_6$-quartics have exactly the classical branch's rational representation
+and $E^5$ isogeny type; proving equality of their integral symplectic lattice
+with the rational-slope branch is the new highest-value shadow-sister gate.
+Nothing from this checkpoint is in the manuscript; finite-flat residue
+control, full integral carrier saturation, descent, boundary, and Hecke
+geometry remain the upgrade gates.
 
 ## Goal
 

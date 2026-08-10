@@ -2,6 +2,11 @@ Independent Sage replay
 p=2: Hom=0 End=(2,1) iso=False
 p=3: Hom=1 End=(1,1) iso=True
 P1(F4) orbit sizes under GL2(F2): 2,3; no fixed line
+three invariant symplectic forms; all four F4 endomorphisms self-adjoint
+S6 graph stabilizers 720,720,60,60; the order-120 normalizer swaps the exotic pair
+twin simplex Smith forms: Winger (3,15,15,15), cubic (1,6,6,6,6)
+Winger 5-residue: simple 3D heart with scalar endomorphisms
+degree-3 root cover and full S3 splitting cover are rational resolvents
 independent covers: square classes T,D; composite genus-one j=357911/2160
 composite base: conductor=450 rank=0 torsion=Z/2; no affine rational points
 PASS

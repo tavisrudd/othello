@@ -31,6 +31,18 @@ multiplicities := List(Irr(G), chi -> ScalarProduct(carrier, chi));;
 if Collected(List([1..Length(degrees)], i -> [degrees[i],multiplicities[i]])) = [] then Error("unreachable"); fi;
 if Sum([1..Length(degrees)], i -> degrees[i] * multiplicities[i]) <> 20 then Error("carrier decomposition"); fi;
 
+ordinaryTable := CharacterTable("A5");;
+brauer5 := BrauerTable(ordinaryTable, 5);;
+decomposition5 := DecompositionMatrix(brauer5);;
+ordinaryDegrees := List(Irr(ordinaryTable), chi -> chi[1]);;
+goldenPositions := Positions(ordinaryDegrees, 3);;
+if Length(goldenPositions) <> 2 then Error("golden positions"); fi;
+if decomposition5[goldenPositions[1]] <> [0,1,0]
+   or decomposition5[goldenPositions[2]] <> [0,1,0] then
+  Error("golden mod-5 fusion");
+fi;
+if List(Irr(brauer5), chi -> chi[1]) <> [1,3,5] then Error("Brauer degrees"); fi;
+
 Print("PASS independent GAP replay\n");
 Print("A5=", Size(G), " A4-class=", Length(Ks), " D5-class=", Length(Hs), " pairs=", Length(pairs), "\n");
 Print("intersection orders=", intersectionOrders, " <V4,W5>=", ScalarProduct(V4,W5), "\n");
@@ -38,3 +50,5 @@ Print("pair involution quotient=", Size(Normalizer(G,pairStabilizer))/Size(pairS
 Print("fixed dimensions V4^A4=", ScalarProduct(RestrictedClassFunction(V4,K),TrivialCharacter(K)),
       " W5^D5=", ScalarProduct(RestrictedClassFunction(W5,H),TrivialCharacter(H)), "\n");
 Print("irreducible degrees=", degrees, " carrier multiplicities=", multiplicities, "\n");
+Print("mod-5 Brauer degrees=", List(Irr(brauer5), chi -> chi[1]),
+      " both golden 3s -> [0,1,0]\n");

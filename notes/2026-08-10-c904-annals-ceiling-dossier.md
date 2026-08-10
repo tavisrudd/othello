@@ -160,10 +160,19 @@ $A_5\times\operatorname{GL}_2(\mathbf F_2)$-stable half-dimensional simple
 submodule exists.  A globally trivial product model for the two-primary
 six-axis gluing is therefore impossible over the full $X_0(3)$ base.
 
-The two-point orbit is $\mathbf P^1(\mathbf F_4)\setminus
-\mathbf P^1(\mathbf F_2)$, and $S_3$ acts on it through its sign quotient.
-Thus a quadratic cover kills precisely this obstruction.  Section 4
-identifies that cover as $r^2=T$.
+The orbit selection is now proved in
+`2026-08-10-c904-exotic-f4-gluing.md`.  All five candidates are maximal
+isotropics.  The three points of $\mathbf P^1(\mathbf F_2)$ preserve the full
+simplex Weyl group $S_6$, whereas either point of
+$\mathbf P^1(\mathbf F_4)\setminus\mathbf P^1(\mathbf F_2)$ has stabilizer
+exactly the exceptional $A_5$; the order-$120$ normalizer exchanges the
+pair.  Strong Torelli and the generic $A_5$ automorphism group of Hartlieb's
+cubic component exclude the three $S_6$-stable gluings.  The cubic therefore
+uses the exotic pair.
+
+The $S_3$ mod-two monodromy acts on that pair through its sign quotient.
+Thus the quadratic cover is the actual marking cover for the cubic gluing,
+not merely one possible orbit cover.  Section 4 identifies it as $r^2=T$.
 
 The positive $3$-part fits the geometry exceptionally tightly.  The full
 $\Gamma_0(3)$ monodromy has a unique invariant line in elliptic $3$-torsion.
@@ -177,8 +186,12 @@ gluing, is forced to be
 
 where $\ell\subset E[3]$ is that cyclic line.  A $\Gamma_1(3)$ marking chooses
 a nonzero generator of $\ell$; the quadratic central twist forgets its sign
-and leaves precisely the $\Gamma_0(3)$ line.  Turning this forced candidate
-into the actual kernel is a remaining geometric/integral proof gate.
+and leaves precisely the $\Gamma_0(3)$ line.  The twin-simplex theorem in
+`2026-08-10-c904-exotic-f4-gluing.md` now turns this into the actual generic
+three-primary identification: the five Winger $A_4$ quotient axes have Gram
+$3(5I-J)$, the six cubic $D_5$ axes have Gram $6I-J$, and their discriminants
+meet exactly in this unique simple $(\mathbf Z/3)^4$ heart.  Finite-flat
+extension in residue characteristic three remains open.
 
 ## 3. The obstruction and optimal correspondence carrier
 
@@ -445,9 +458,11 @@ The following are mandatory proof gates:
 3. determine the actual finite kernel group scheme, not merely its degree and
    ambient polarization discriminant, and decide whether the genus-one
    composite cover is minimal;
-4. identify the $3$-primary gluing with the Looijenga--Zi edge lattice by an
-   explicit integral incidence map;
-5. construct the thirty marked cycles relatively and prove their saturation;
+4. extend the now-forced generic $3$-primary gluing and Looijenga--Zi
+   primitive edge class as one finite-flat integral correspondence at the
+   residue-three boundary;
+5. prove integral saturation of the now-constructed relative rational
+   thirty-cycle carrier;
 6. descend them arithmetically and exclude an extra constant character;
 7. compare limiting mixed Hodge structures or Neron models at
    $I_1,II,I_0^*,I_3$; and
@@ -495,18 +510,32 @@ than an Annals theorem.
   $n(n-2)$ times a square.
 - **Settled:** Whether the full discriminant is simply Winger mod six.  It is
   not: the match is exact at three and fails at two.
-- **Settled in representation theory, open geometrically:** The mod-two
-  $\mathbf F_4$ module forces a second sign cover $r^2=T$; together with the
-  twist cover it gives a genus-one base.  What geometric datum on the six
-  quotient curves realizes this cocycle remains open.
+- **Settled geometrically and representation-theoretically:** The mod-two
+  $\mathbf F_4$ module has three $S_6$-stable and two exactly-$A_5$-stable
+  gluings.  Strong Torelli forces the cubic onto the exotic pair, whose sign
+  cover is $r^2=T$; together with the twist cover it gives a genus-one base.
+- **Settled at the polarized-gluing level:** The five kernels form one packet
+  over $X_0(3)$.  The rational triple is the degree-three $X_0(6)$ resolvent;
+  the exotic pair is the quadratic discriminant resolvent; their rational
+  fibre product is the full $S_3$ splitting cover.
 - **Settled arithmetically:** The composite genus-one base has conductor 450,
   rank zero, and torsion $\mathbf Z/2$; its rational points are only the two
   points at infinity.  Thus no rational smooth fibre splits both characters.
-- **Open--central:** Prove that the unique mod-three intertwiner is the actual
-  Looijenga--Zi edge-incidence map and selects the principal gluing kernel.
+- **Settled at the generic kernel level, open for the full carrier:** The
+  twin-simplex Gram matrices force the unique mod-three intertwiner to select
+  the same principal gluing line, and Looijenga--Zi's primitive
+  $u_{\rm edge}/3$ realizes the Winger factor.  Integral saturation of every
+  summand of the thirty-cycle carrier and finite-flat residue-three extension
+  remain open.
 - **Open--boundary:** Explain geometrically why Fricke sends a branch point of
   the splitting cover to a smooth point; this may force a correspondence of
   compactifications rather than a map of covers.
+- **Open--shadow sister:** Cheltsov--Kuznetsov--Shramov's resolved
+  $S_6$-quartics have faithful $S_6$, rational root-lattice cohomology, and
+  intermediate Jacobian isogenous to $E^5$.  Prove that their integral
+  symplectic lattice is the rational-slope $X_0(6)$ lattice.  This would
+  realize the classical triple geometrically and pair it with the exotic
+  cubic as two-primary neighbors of one universal source.
 - **Open--arithmetic:** Determine exact fields of definition and group schemes
   in characteristics two, three, and five.  No characteristic claim is made
   here.
