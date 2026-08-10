@@ -227,3 +227,12 @@ MAJOR. Numerical grades are chat-only.
 
 After any fix, rebuild and refreeze. Re-reviewers must be told that the
 surface changed and must read repaired passages in the full causal chain.
+
+## Final batch
+
+The second freeze passed all three independent dossier-driven reads.  The
+invariant-pencil reader returned GO on the first freeze.  After the two MINOR
+repairs recorded above, both the marking reader and the singular-geometry /
+conference reader matched the new hashes, re-read the complete causal chain,
+and returned GO.  No mathematical or expository referee issue remains open on
+the frozen surface.
