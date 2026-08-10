@@ -319,6 +319,12 @@ def commit_seal(package_root: Path, paths: list[str]) -> str:
 def cmd_seal(args: argparse.Namespace) -> int:
     package_root = args.package_root.resolve()
     entry = package_entry(args.config, args.package or package_root.name)
+    if args.preserve_evidence:
+        log_path, _ = gate_run(args.run_dir.resolve(), package_root, entry["gate"])
+        evidence_path = package_root / args.evidence
+        evidence_path.parent.mkdir(parents=True, exist_ok=True)
+        evidence_path.write_bytes(log_path.read_bytes())
+        print(f"preserved {evidence_path} from {log_path}")
     if args.reseal_manifest:
         reseal_manifest(package_root)
     fact = render_fact(package_root, entry, args.run_dir.resolve(), args.evidence)
@@ -440,6 +446,11 @@ def main() -> int:
         "--reseal-manifest",
         action="store_true",
         help="regenerate the package manifest through its own sealer before writing the fact",
+    )
+    seal.add_argument(
+        "--preserve-evidence",
+        action="store_true",
+        help="copy the recorded gate stdout byte-for-byte to --evidence before sealing",
     )
     seal.add_argument(
         "--commit",
