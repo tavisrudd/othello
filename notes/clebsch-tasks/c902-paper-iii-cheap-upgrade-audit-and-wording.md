@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete 2026-08-09; eight candidates audited; three narrowed wording
-survivors delivered; recommendations only
+**Status:** reopened by author direction 2026-08-09; three audited survivors
+applied and cold regrades pass after one norm-sign repair; awaiting author choice
+on the 32-to-33-page validation contract before PDF refresh and release closeout
 
 ## Objective
 
@@ -140,8 +141,10 @@ Only survivors receive recommendations.  For each, give:
 - cross-surface updates required to prevent drift; and
 - a delete/replace list showing what existing prose the addition pays for.
 
-This task does not edit manuscripts, ledgers, mirrors, release metadata, or public
-summaries.  Promotion remains with the owning routed integration task.
+The first phase did not edit manuscripts, ledgers, mirrors, release metadata, or
+public summaries.  The author reopened C902 to integrate candidates 2--4 directly.
+That scope expansion does not revive candidates 1, 5, 6, 7, or 8 and does not
+authorize unrelated Paper III restructuring.
 
 ## Deliverables
 
@@ -154,6 +157,9 @@ summaries.  Promotion remains with the owning routed integration task.
   findings and synthesis.
 - `notes/2026-08-09-c902-paper-iii-cheap-upgrade-wording.md` — ready-to-paste
   recommendations only for candidates that pass all applicable gates.
+- `notes/2026-08-09-c902-paper-iii-cheap-upgrade-integration-review.md` — exact
+  applied diff, isolated cold-review findings, repairs, build/PDF inspection,
+  trust reconciliation, and final retain/revert verdict.
 
 ## Completion outcome
 
@@ -182,3 +188,18 @@ summaries.  Promotion remains with the owning routed integration task.
   marked projective or harmonic configuration.
 - The final wording packet is recommendation-only and names the exact routed owner of
   any eventual edit.
+
+## Reopened-phase acceptance
+
+- Only candidates 2--4 are integrated; the other five dispositions remain fixed.
+- The recognition theorem retains its nonzero proportionality, nonzero-edge,
+  real-field, zero-shadow, and weighted-locus boundaries.
+- The norm paragraph remains determinant-line aware and does not manufacture a
+  canonically signed scalar before orientations are chosen.
+- The spectral sentence distinguishes the unchanged unmarked algebra from the
+  sign-reversed marked generator.
+- The claim/trust map and verification prose remain synchronized with the source.
+- Isolated cold algebra, marking/architecture, and trust/exposition sub-reviews
+  are frozen before synthesis; every accepted defect is repaired and re-reviewed.
+- The authoritative paper builds warning-free, the relevant verification gates
+  pass, and the rendered insertion pages are inspected before closeout.

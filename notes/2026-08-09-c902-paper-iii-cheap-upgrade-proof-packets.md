@@ -101,8 +101,10 @@ B_x = P_- D_x P_+ : V_+ -> V_-.
 Then `det(B_x)` is naturally an element of
 `det(V_-) tensor det(V_+)^{-1}`, rather than a scalar until bases are chosen.
 Galois exchange swaps `V_+` and `V_-`; the symmetric pairing identifies the
-conjugate determinant map with its transpose.  Thus the product with its
-conjugate is a rational determinant-line norm.
+conjugate determinant line with the dual line.  The induced contraction has
+the odd-rank swap sign.  After compatible scalar trivializations,
+`Z_C=10 sqrt(5) det(B_x)` makes `det(B_x)` Galois anti-invariant, so
+`N_{E/Q}(det B_x)=-det(B_x)^2`.
 
 Relative to `V_+ direct-sum V_-`, the commutator has block form
 
@@ -115,7 +117,7 @@ Both blocks have size three.  The block determinant identity therefore gives
 
 ```
 det[D_x,C] = (2 sqrt(5))^6 det(B_x)^2
-           = 8000 N_{E/Q}(det B_x).
+           = -8000 N_{E/Q}(det B_x).
 ```
 
 Combining this with the paper's existing identity
@@ -131,8 +133,10 @@ the manuscript.
 
 ### Boundary
 
-This is a basis-free interpretation of an existing determinant identity.  It
-does not construct an integral determinant line, a global relative moduli
+This is a basis-free interpretation of an existing determinant identity.  The
+positive square is the signed odd-rank determinant-line contraction; the
+ordinary quadratic field norm carries the displayed minus sign.  It does not
+construct an integral determinant line, a global relative moduli
 object, or a canonically signed scalar determinant.  It should not be promoted
 to a separate theorem, and it carries no novelty claim.
 

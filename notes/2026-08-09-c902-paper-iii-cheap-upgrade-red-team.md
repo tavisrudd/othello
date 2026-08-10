@@ -24,9 +24,12 @@ encode the two relative orientation classes.  Global matrix negation is not an
 explanation for the two ratios: it changes both cubic shadows by the same sign.
 
 **Determinant norm.**  Recomputed `(2 sqrt(5))^6=64*125=8000`.  For two
-three-dimensional blocks, the block-determinant sign is positive.  The result
-is a determinant-line norm until bases are selected; scalar wording must retain
-that qualification.
+three-dimensional blocks, the block-determinant sign is positive.  The first
+audit nevertheless missed the separate odd-rank sign between that positive
+determinant-line contraction and the ordinary field norm.  The isolated cold
+integration reviews caught it: since `Z=10 sqrt(5) det(B)`, the scalar
+`det(B)` is Galois anti-invariant and `N(det B)=-det(B)^2`.  The correct ordinary
+field-norm formula is therefore `det[D_x,C]=-8000 N(det B)`.
 
 **Spectral compatibility.**  `Q[C]=Q[-C]` is literal equality of generated
 unital subalgebras.  It does not identify the marked generators and does not
@@ -85,8 +88,9 @@ proof authority:
 - The recognition statement does not claim the weighted converse beyond
   `A^2=lambda I`, does not absorb the zero-support locus, and does not imply a
   local deformation theorem.
-- The norm statement preserves the determinant-line type and makes the
-  trivialization-dependent sign explicit.
+- The repaired norm statement preserves the determinant-line type, distinguishes
+  its signed odd-rank contraction from the ordinary field norm, and gives the
+  latter the required minus sign.
 - The spectral sentence preserves deck exchange and the relative marking.
 - No recommendation alters the cover theorem, the four-shadow inventory, the
   principal-minor reconstruction boundary, or the Gaunt multiplicity-one

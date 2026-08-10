@@ -92,8 +92,9 @@ There is also a basis-free reason for the determinant.  If $V_+$ and $V_-$
 are the two spectral spaces and
 $B_x=P_-D_xP_+\colon V_+\to V_-$, then $\det(B_x)$ lies naturally in
 $\det(V_-)\otimes\det(V_+)^{-1}$.  Galois exchange swaps the two spectral
-spaces, while the symmetric pairing identifies the conjugate map with the
-transpose.  Thus the scalar invariant is the determinant-line norm.  Indeed,
+spaces, while the symmetric pairing identifies the conjugate line with its
+dual.  The induced contraction has the odd-rank swap sign, so after compatible
+orientations the ordinary field norm satisfies
 relative to $V_+\oplus V_-$,
 \[
  [D_x,C]=
@@ -102,7 +103,7 @@ relative to $V_+\oplus V_-$,
  2\sqrt5\,B_x&0
  \end{pmatrix},
  \qquad
- \det[D_x,C]=8000\,N_{\mathbf Q(\sqrt5)/\mathbf Q}(\det B_x).
+ \det[D_x,C]=-8000\,N_{\mathbf Q(\sqrt5)/\mathbf Q}(\det B_x).
 \]
 Together with $\det[D_x,C]=16Z_C(x)^2$, this gives
 $Z_C(x)=\pm10\sqrt5\,\det(B_x)$ after compatible determinant-line
