@@ -223,6 +223,7 @@ def build():
         "base_certificate_sha256": hashlib.sha256(
             (HERE / "paper_ii_chordal_axis.json").read_bytes()
         ).hexdigest(),
+        "base_checker_sha256": hashlib.sha256(CORE_PATH.read_bytes()).hexdigest(),
     }
 
 

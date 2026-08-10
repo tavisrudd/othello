@@ -5,7 +5,8 @@
     "3": 20,
     "5": 24
   },
-  "base_certificate_sha256": "1a8717efc476cc7e978cafb33af391470fe071d2c97841ddd3bf4201137b776b",
+  "base_certificate_sha256": "b7e0adde2bc32c7ad7f35b4f97703c1c91a63fab7b563d2bef5a9e97962c344b",
+  "base_checker_sha256": "8971dabc4fd668be8ce7858e965be7ac1919405121c97605e2db4985d95a18c1",
   "f11_rational_point_count": 12,
   "f11_stabilizer_order_counts": {
     "5": 12

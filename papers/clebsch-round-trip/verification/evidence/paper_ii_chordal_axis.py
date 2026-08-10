@@ -18,16 +18,32 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
-MATCHING_PATH = ROOT / "papers/clebsch-factorization/verification/evidence/matching_module.py"
-SCOUT_PATH = ROOT / "papers/clebsch-factorization/verification/evidence/matching_orbit_scout.json"
+FROZEN = HERE / "frozen"
+MATCHING_PATH = FROZEN / "matching_module.py"
+SCOUT_PATH = FROZEN / "matching_orbit_scout.json"
+INPUT_PATHS = tuple(
+    FROZEN / name
+    for name in (
+        "matching_module.py",
+        "matching_orbit_scout.json",
+        "coxeter_conic_phase.py",
+        "common_duality.py",
+        "common_duality.json",
+        "a5_subgroup_decoder.py",
+        "h3_good_reduction.json",
+        "h3_arithmetic_phase.json",
+        "deep_hole_transform.json",
+        "decorated_parent.json",
+        "decorated_parent_replay.py",
+    )
+)
 OUTPUT = HERE / "paper_ii_chordal_axis.json"
 SCHEMA = "paper-v-chordal-axis-v2"
 P = 11
 
 
 def load_module(path: Path):
-    spec = importlib.util.spec_from_file_location("c904_matching", path)
+    spec = importlib.util.spec_from_file_location("paper_v_matching", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -653,7 +669,7 @@ def build_certificate():
             data, conference_line, data["projected_cubic"]
         ),
         "invariant_pencil_singular_census": pencil,
-        "inputs": {path.name: file_record(path) for path in (MATCHING_PATH, SCOUT_PATH)},
+        "inputs": {path.name: file_record(path) for path in INPUT_PATHS},
         "scope": "exact finite-field reconnaissance; naturality and inverse are not proved here",
     }
 
