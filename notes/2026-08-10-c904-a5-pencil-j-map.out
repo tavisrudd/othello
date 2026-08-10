@@ -1,0 +1,16 @@
+y3: P=-24/25, Q=0
+xyz: P=6/25, Q=-6*(2*zeta**3 + 2*zeta**2 + 1)/25
+xu2: P=3/25, Q=-(2*zeta**3 + 2*zeta**2 + 1)/25
+yuv: P=6/25, Q=6*(2*zeta**3 + 2*zeta**2 + 1)/25
+zv2: P=3/25, Q=-(2*zeta**3 + 2*zeta**2 + 1)/25
+z2u: P=3/25, Q=(2*zeta**3 + 2*zeta**2 + 1)/25
+x2v: P=3/25, Q=(2*zeta**3 + 2*zeta**2 + 1)/25
+van Geemen--Yamauchi a(t): -32*(2*t*zeta**3 + 2*t*zeta**2 + t - 3)**4/(9*(2*t*zeta**3 + 2*t*zeta**2 + t + 1)**3*(2*t*zeta**3 + 2*t*zeta**2 + t + 3)**2)
+van Geemen--Yamauchi b(t): -8*(2*t*zeta**3 + 2*t*zeta**2 + t - 3)**2*(2*t*zeta**3 + 2*t*zeta**2 + t - 1)/((2*t*zeta**3 + 2*t*zeta**2 + t + 1)*(2*t*zeta**3 + 2*t*zeta**2 + t + 3)**2)
+elliptic-factor j(u), u^2=5t^2: 9*(3*u**2 + 5)*(27*u**2 + 5)**3/(125*u**2)
+elliptic-factor j(t): 9*(3*t**2 + 1)*(27*t**2 + 1)**3/t**2
+X0(3) Hauptmodul T=81t^2: j=(T+27)(T+3)^3/T
+3-isogenous companion j: (T + 27)*(T + 243)**3/T**3
+Fricke correspondence on unmarked cubic parameter s=t^2: s -> 1/(9s)
+standard-form discriminant factor: 4096000*u**2*(u - 3)**10*(u + 3)**2*(3*u**2 + 5)**2/81*(u + 1)**9*(u + 3)**10
+PASS
