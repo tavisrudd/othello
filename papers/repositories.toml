@@ -207,6 +207,48 @@ paper_ids = ["clebsch_rigidity", "clebsch_rigidity_companion"]
 disposition = "active"
 
 [[repository]]
+name = "golden-companion-correspondence"
+include_release_pdfs = true
+source = "papers/clebsch-round-trip"
+paper_ids = ["golden_companion_correspondence"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check evidence lint warnings clean distclean"
+new = ".PHONY: all check evidence warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint golden_companion_reconstruction.pdf\n\ncheck: evidence lint golden_companion_reconstruction.pdf warnings"
+new = "all: golden_companion_reconstruction.pdf\n\ncheck: evidence golden_companion_reconstruction.pdf warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "golden_companion_reconstruction.pdf: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "golden_companion_reconstruction.pdf: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
 name = "complete-repair-ports"
 source = "papers/complete-repair-ports"
 paper_ids = ["complete_repair_ports"]
