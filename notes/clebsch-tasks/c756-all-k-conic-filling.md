@@ -306,6 +306,7 @@ Moore Cartier divisor.  Weighting covariance by \(Q\) reduces the global
 conic contribution to
 \(\epsilon^{\delta+r}\prod_{\mu_t\ge2}
 \chi(\sigma_t)^{\mu_t-2}\), where
+\(r=|\{t:\mu_t\ge2\}|\) and
 \(\sigma_t=\sum_{\pi^{-1}(t)}Q(t,u)\); only multiplicity at least three
 remains unknown.  Equivalently this product is the character of
 \(\operatorname{Res}(J_P,\Sigma)\), where
