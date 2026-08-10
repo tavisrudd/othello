@@ -3,7 +3,8 @@
 **Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** Q11 and Q16 are
 self-contained, sealed, and restorable; their cheap paper compatibility bridges
 are proved against the pinned finitegeom revision. The live human-area module
-mapping passes; paper-package integration is next.
+mapping must be refreshed whenever the paper or repository registries change;
+paper-package integration follows that exact-current replay.
 
 ## Objective
 
@@ -24,7 +25,7 @@ to rebuild a certificate package.
 
 C879 execution starts only after the C864 export-completion plan reaches its endpoint.
 The C891 metadata refresh does not waive that dependency.  As of its snapshot the
-tree has sixteen paper-registry records, fourteen standalone-repository records, and
+tree has seventeen paper-registry records, fifteen standalone-repository records, and
 twelve tracked Lean export areas.  C864 is establishing the useful substrate: tracked area configurations, idempotent
 area exports, source manifests, external certificate-package pins, standalone
 finitegeom validation, and clean paper release surfaces. C879 must consume those
@@ -102,15 +103,14 @@ matching cache archives, and no finitegeom-to-certificate dependency.
 
 `lean/scripts/lean-certificate-dependency-firewall.py` is the executable package
 edge policy.  Its Q11 check is green after the self-contained rewrite.  Its portfolio
-scan intentionally remains red for the projective-cap Q11, Q13, Q16, and Q25
+scan intentionally remains red for the projective-cap Q11, Q13, and Q25
 certificate packages until each receives the same local-model/adapter migration.
 
-The Q16 ownership seam is not its current repository boundary.  The generated level,
-step-kernel, leaf, and rejection checks belong in the self-contained certificate
-package behind a local `Idx`/field model.  `Q16Reduction`, `Q16Result`, and the
-paper-wide `ArcsCompleteOutsideConic` gate are human downstream modules and remain in
+The Q16 seam is now established. The generated level, step-kernel, leaf, and rejection
+checks are in the self-contained certificate package behind its local `Idx`/field
+model. `Q16Reduction`, `Q16Result`, and the paper-wide human interface remain in
 finitegeom; the separate Arcs paper bridge transports the generated rejection terminal
-into that layer.
+into that layer without a finitegeom-to-certificate edge.
 
 The other current reverse edges are bounded.  The two-module projective-cap Q11 package
 and the 113-module Q13 package reach only `ProjectiveCap.CertCheck` and
@@ -121,26 +121,28 @@ modules: `Certificate`, `FiniteFields`, `Moments`, `Nucleus`, `ProjectiveBridge`
 `CollisionProfile`, `OrbitCounting`, and `PairExtension`. Its generated payload must
 be separated from all ten human modules without regenerating or renaming the leaves.
 
-Use explicit paper and shared source roots:
+Use explicit paper and shared source roots under the ecosystem namespace:
 
 ```text
 finitegeom/
-  Shared/
-    Projective/  FiniteFields/  Coding/  Incidence/  Certificates/  PRS/
-  Papers/
-    arcs_complete_outside_conic/  beyond4_prs/  ame_lu/
-    clebsch-rigidity/  clebsch-passages/  clebsch-factorization/
-    q13-passant-code/  mds_css_transversal_groups/
-    complete-repair-ports/  equivariant-robust-completion/
-    continuation-graph-rigidity/  dihedral-schreier-node-kayles/
-    golden-operator/  golden-quantum-statistics/
+  TavisRuddFiniteGeom/
+    Shared/
+      Projective/  FiniteFields/  Coding/  Incidence/  Certificates/  PRS/
+    Papers/
+      ArcsCompleteOutsideConic/  Beyond4PRS/  AMELU/
+      ClebschRigidity/  ClebschPassages/  ClebschFactorization/
+      Q13PassantCode/  MDSCSSTransversalGroups/
+      CompleteRepairPorts/  EquivariantRobustCompletion/
+      ContinuationGraphRigidity/  DihedralSchreierNodeKayles/
+      GoldenOperator/  GoldenQuantumStatistics/
 ```
 
-The directory names above are exact paper/repository aliases and are intentionally
-lowercase with underscores or hyphens. They are not Lean module names.  Existing
-public namespaces remain unchanged.  A genuinely new public module family uses the
-ecosystem-unique top level `TavisRuddFiniteGeom`, rather than bare `Paper.*` or
-`FiniteGeom.*`. Lean module components use the usual PascalCase convention, for example:
+Repository directories retain their exact lowercase paper aliases, but Lean source
+paths and namespaces use PascalCase components under the ecosystem-unique top level
+`TavisRuddFiniteGeom`, rather than bare `Paper.*`, `FiniteGeom.*`, or
+`RelativeConicArcs.*`. The reorganization retires the legacy `RelativeConicArcs`
+module and declaration namespace in bounded, reverse-closure-checked moves; it does
+not preserve that namespace as the final public API. For example:
 
 ```text
 TavisRuddFiniteGeom.Papers.Beyond4PRS.*
@@ -271,24 +273,24 @@ It is classified as an AME--LU Paper I quantitative-core closure, not as a futur
 paper or unclassified work.  The wider `AMELUAggregate` remains a pre-split export
 whose closure exceeds the current Paper I manuscript surface.
 
-The first human-source split preserves existing module names. This naming cleanup is a later
-one-paper-facing-family chunk with its own reverse-closure and synchronization; it does
-not trigger a repository-wide rename. Shared-library families use the same rule and
-may expose their own `PaperInterface` only when they genuinely have a reviewer-facing
-public surface. Q11 and Q16 are explicit exceptions: their complete branded namespace
-migrations precede their single expensive rebuilds.
+Do not create new paper or shared packages under legacy module paths. Each bounded
+human-source family moves directly to its final `TavisRuddFiniteGeom.Papers.*` or
+`TavisRuddFiniteGeom.Shared.*` source path and namespace, with its complete reverse
+closure and downstream synchronization in the same chunk. This avoids institutionalizing
+an intermediate `RelativeConicArcs` API and avoids building a newly extracted package
+twice. It does not authorize a repository-wide rename: each family still has its own
+declaration review and exact affected-interface gate. Shared families expose a
+`PaperInterface` only when they genuinely have a reviewer-facing public surface.
+Q11 and Q16 remain the strictest case: their complete branded namespace migrations
+precede their single expensive rebuilds, and no later human-layer edit can reach them.
 
-The first physical split must not also rename namespaces. Initially preserve existing
-module names behind package-specific source roots, for example:
+Final source roots therefore look like:
 
 ```text
-Papers/beyond4_prs/RelativeConicArcs/PRSFoundation.lean
-Papers/arcs_complete_outside_conic/RelativeConicArcs/...
-Shared/RelativeConicArcs/...
+TavisRuddFiniteGeom/Papers/Beyond4PRS/PRSFoundation.lean
+TavisRuddFiniteGeom/Papers/ArcsCompleteOutsideConic/...
+TavisRuddFiniteGeom/Shared/...
 ```
-
-No namespace cleanup is implied by the physical split.  Preserving public module names
-prevents a directory move from becoming an import rewrite and rebuild.
 
 Each registered paper should own or explicitly alias a small manifest declaring its roots, source closure, shared
 dependencies, generated inputs, certificate packages, axiom expectations, and exact
@@ -370,9 +372,9 @@ these manifests, not serve as the primary ownership map.
     Move the shared-heavy Arcs and AME--LU source families last, after their consumers
     are green, without reopening the already frozen public APIs.
 12. Only after each monorepo package passes an independent clean replay, split the
-    shared libraries and paper source into separately pinned Lake packages. Preserve
-    existing human public module names; Q11/Q16 certificate namespace cleanup is
-    already complete at this point.
+    shared libraries and paper source into separately pinned Lake packages. Move each
+    bounded family directly to its final `TavisRuddFiniteGeom` public module names;
+    Q11/Q16 certificate namespace cleanup is already complete at this point.
 
 ## Sub-30-minute chunk protocol
 
@@ -455,7 +457,7 @@ next safe chunk:
 | C879.5 | Perform the one-time explicitly approved Q11 certificate rebuild and publish its exact cache. | Measured heavy gate, trust fact, sealed manifest, cache restore replay, exporter-only finitegeom adoption. |
 | C879.6 | Prove the Q11 rebuild firewall, then complete the fully audited Q16 migration and its single approved rebuild. | Disposable cheap finitegeom edit schedules zero Q11 targets; Q16 has no legacy namespace or project dependency before its build; missing caches refuse source fallback. |
 | C879.7 | Validate the beyond-four PRS `PaperInterface` and its axiom audit. | Guarded exact-target build and paper checker; commit the validation record. |
-| C879.8 | Move one paper-facing PRS interface/wrapper family behind the preserved module names, without moving PRS-family infrastructure. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
+| C879.8 | Move and rename one paper-facing PRS interface/wrapper family directly into its final paper namespace, without moving PRS-family infrastructure. | Exact reverse-closure check, smallest affected `PaperInterface`, guarded downstream export, and affected-paper replay; commit only when every tree is synchronized. |
 | C879.9 | Move the next paper-facing wrapper family, or stop if the reverse closure exceeds the budget. | Repeat C879.8; no shared PRS-family move is permitted in this chunk. |
 | C879.10 | Extract one genuinely shared API family identified by overlap review. | Declaration-level review, affected-interface list, bounded shared build target, downstream exports, and all affected-paper replays; commit only when synchronized. |
 | C879.11 | Add the first explicit paper adapter for a real cross-paper dependency. | Adapter-only build target, import-firewall check, axiom audit, downstream pin updates, and affected-paper replay. |
@@ -503,11 +505,11 @@ that budget, stop with the source unchanged and split the chunk or record the me
 long gate as a separately scheduled operation. It is not acceptable to call a long
 build “background work” while declaring the chunk shipped.
 
-The first chunk after any human-source move is never a namespace cleanup. Namespace changes
-are separate chunks with their own reverse-closure calculation and exact target. The first
-package extraction is likewise separate from namespace cleanup and shared-library
-movement. The Q11/Q16 certificate migrations are explicit exceptions: their complete
-renames precede their single approved rebuilds.
+No human-source move may leave a newly extracted family under `RelativeConicArcs`.
+The namespace change is part of that family's bounded move, reverse-closure calculation,
+and exact target; shared-library movement remains a separate ownership decision. The
+Q11/Q16 certificate migrations apply the same final-namespace rule before their single
+approved rebuilds.
 
 For C879.8 and later, “commit” means a synchronized commit set, not merely a commit in
 the monorepo. The repositories may have different commit IDs, but all must identify

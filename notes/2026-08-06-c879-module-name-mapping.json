@@ -3,10 +3,10 @@
   "schema_version": 2,
   "authority": {
     "repository": "othello",
-    "source_commit": "9d73a57eaf6bf68f3f65b1aa8683a957e2aa52b6",
+    "source_commit": "6e5d5ebffeac21585e22602215cf2f0dac86d842",
     "status": "current planning snapshot; declaration-level review remains required before source moves or renames",
     "refreshed_by": "C879",
-    "refreshed_on": "2026-08-09"
+    "refreshed_on": "2026-08-10"
   },
   "naming": {
     "lean_root": "TavisRuddFiniteGeom",
@@ -52,6 +52,7 @@
       "clebsch_passages",
       "clebsch_rigidity",
       "clebsch_rigidity_companion",
+      "golden_companion_correspondence",
       "complete_repair_ports",
       "continuation_graph_rigidity",
       "dihedral_schreier_node_kayles",
@@ -68,6 +69,7 @@
       "clebsch-factorization",
       "clebsch-passages",
       "clebsch-rigidity",
+      "golden-companion-correspondence",
       "complete-repair-ports",
       "continuation-graph-rigidity",
       "dihedral-schreier-node-kayles",
@@ -838,6 +840,17 @@
       "formal_surface_of": "clebsch_rigidity",
       "export_areas": ["clebsch_rigidity"],
       "status": "computational companion entry point sharing the parent paper's formal surface"
+    },
+    {
+      "id": "golden_companion_correspondence",
+      "filesystem_alias": "golden-companion-correspondence",
+      "target_namespace": "TavisRuddFiniteGeom.Papers.GoldenCompanionCorrespondence",
+      "legacy_roots": [],
+      "target_roots": [],
+      "imports_shared": [],
+      "paper_private_modules": [],
+      "export_areas": [],
+      "formal_status": "paper and standalone repository registered; no Lean paper gate or tracked finitegeom export area"
     },
     {
       "id": "continuation_graph_rigidity",
