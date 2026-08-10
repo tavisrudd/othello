@@ -2,8 +2,8 @@
 
 **Lane:** `build-sys` · **Date:** 2026-08-06 · **Status:** Q11 and Q16 are
 self-contained, sealed, and restorable; their cheap paper compatibility bridges
-are proved against the pinned finitegeom revision. The human-area module mapping
-must be refreshed from the current tree before any paper source move.
+are proved against the pinned finitegeom revision. The live human-area module
+mapping passes; paper-package integration is next.
 
 ## Objective
 
@@ -613,9 +613,8 @@ The old metadata preflight is:
 python3 notes/scripts/c879_module_closure.py
 ```
 
-It currently fails closed because its module map predates the live human-source tree.
-Refresh the committed mapping from the live registries before making it an execution gate again.
-After refresh it rejects paper/repository/export
+It passes against the current registries and human-source tree. Refresh the committed
+mapping whenever those inputs change. The preflight rejects paper/repository/export
 inventory drift, changed gate closures, missing mapped sources or roots, duplicate
 target names, unresolved aliases, AME--LU coverage gaps, and Lean-tree drift from the
 mapping's immutable authority commit.  Passing this preflight certifies the planning

@@ -3,10 +3,10 @@
   "schema_version": 2,
   "authority": {
     "repository": "othello",
-    "source_commit": "b22bbbb1d6e2343dc61c2d39af23ca7f0ef64931",
+    "source_commit": "7f20f98fa31ad0f82bcdc0d20324fb5009e44596",
     "status": "current planning snapshot; declaration-level review remains required before source moves or renames",
-    "refreshed_by": "C891",
-    "refreshed_on": "2026-08-08"
+    "refreshed_by": "C879",
+    "refreshed_on": "2026-08-09"
   },
   "naming": {
     "lean_root": "TavisRuddFiniteGeom",
@@ -96,14 +96,14 @@
     {
       "area": "arcs_complete_outside_conic_additions",
       "gate": "RelativeConicArcs.Gates.ArcsCompleteOutsideConicAdditions",
-      "closure_modules": 31,
+      "closure_modules": 30,
       "paper_ids": ["arcs_complete_outside_conic"],
       "ownership_status": "tracked companion export for the same paper"
     },
     {
       "area": "clebsch_factorization",
-      "gate": "RelativeConicArcs.Gates.ClebschArithmeticGluing",
-      "closure_modules": 31,
+      "gate": "RelativeConicArcs.Gates.ClebschFactorizationBoundary",
+      "closure_modules": 62,
       "paper_ids": ["clebsch_factorization"],
       "ownership_status": "tracked paper export"
     },
@@ -117,16 +117,16 @@
     {
       "area": "clebsch_rigidity",
       "gate": "RelativeConicArcs.Gates.ClebschRigidityTrust",
-      "closure_modules": 94,
+      "closure_modules": 96,
       "paper_ids": ["clebsch_rigidity", "clebsch_rigidity_companion"],
       "ownership_status": "tracked shared formal surface of the manuscript and computational companion"
     },
     {
       "area": "clebsch_six_arc_concurrence",
       "gate": "RelativeConicArcs.SixArcConcurrenceSpine",
-      "closure_modules": 26,
+      "closure_modules": 25,
       "paper_ids": [],
-      "ownership_status": "exported companion boundary consumed by the order-eleven certificate package; final paper ownership unresolved"
+      "ownership_status": "exported Clebsch-series human boundary; no certificate package imports it; final paper ownership unresolved"
     },
     {
       "area": "clebsch_support_cubic_orientation",
@@ -145,7 +145,7 @@
     {
       "area": "golden_quantum_statistics",
       "gate": "RelativeConicArcs.Gates.GoldenQuantumStatistics",
-      "closure_modules": 9,
+      "closure_modules": 10,
       "paper_ids": ["golden_quantum_statistics"],
       "ownership_status": "tracked paper export"
     },
