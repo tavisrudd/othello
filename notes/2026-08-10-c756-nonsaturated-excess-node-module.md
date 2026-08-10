@@ -383,6 +383,52 @@ convention.  Thus the missing scalar is a square-normalized matching sum in
 the conic Gram matrix.  Formula (32), rather than the abstract module alone,
 is the concrete star input for the next obstruction.
 
+These fibrewise matching sums have a canonical cross-direction
+interpolation.  For \(t\in\mathbb F_q\), put
+\[
+ \Lambda_t(T)=1-(T-t)^{q-1}.
+\]
+This is the delta function of \(t\) on \(\mathbb F_q\).  Since every chord
+pair belongs to exactly one direction, the degree-less-than-\(q\)
+representative in (26) is
+\[
+ \boxed{
+ \Sigma(T)=
+ \sum_{i<j}Q_{\rm du}(t_{ij},u_{ij})\Lambda_{t_{ij}}(T).} \tag{37}
+\]
+Substituting the Lagrange identity (31) gives the endpoint-only formula
+\[
+ \boxed{
+ \Sigma(T)=\sum_{i<j}
+ \frac{Q_{\rm pr}(v_i)Q_{\rm pr}(v_j)-B(v_i,v_j)^2}
+      {\omega_{ij}^2}
+ \left(1-(T-t_{ij})^{q-1}\right).}                       \tag{38}
+\]
+Thus the required trace polynomial is a single sum over all endpoint pairs;
+the direction fibres no longer need to be separated or their gcds computed.
+
+Lucas' theorem for the all-\((p-1)\)-digit integer \(q-1\) gives
+\[
+ (T-t)^{q-1}=\sum_{m=0}^{q-1}T^mt^{q-1-m}.               \tag{39}
+\]
+Hence every coefficient of \(\Sigma\) is an ordinary conic-weighted slope
+moment of the star nodes.  Since (36) depends only on \(\Sigma\bmod J_P\),
+define the bounded Gram carrier
+\[
+ \boxed{
+ \Sigma_J(T)\equiv\Sigma(T)\pmod {J_P},
+ \qquad \deg\Sigma_J<\delta-r.}                          \tag{40}
+\]
+Then
+\[
+ \chi(\operatorname{disc}\mathcal C_Q|_M)
+ =\epsilon^{\delta+r}
+  \chi\!\left(\operatorname{Res}_T(J_P,\Sigma_J)\right). \tag{41}
+\]
+Equations (38)--(41) are the requested cross-direction law.  The remaining
+problem is no longer to construct the trace: it is to evaluate the character
+of one degree-\((\delta-r)\) resultant from the star endpoint relations.
+
 This also separates the present trace from the earlier all-center
 Euler-character norm.  If the weights \(q_i\) in (20) are replaced by their
 Euler signs \(q_i^{(q-1)/2}=\epsilon\), then
@@ -450,14 +496,14 @@ prove nonexistence.
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
 | Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
+| Is there a cross-direction trace formula? | settled | endpoint-pair interpolation (38), reduced to \(\Sigma_J\) in (40) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
 | Does the abstract module force a contradiction? | no | must use star realization and covering identities |
 | What is the uniform nonsaturated theorem target? | open | excess-module obstruction above |
 
 ## Next action
 
-Derive a cross-direction identity for the Gram matching sums (32),
-equivalently the first two coefficients of \(G_t\), and evaluate their
-bounded resultant (36) modulo \(J_P\).  Preserve actual conic values: the
-Euler-character projection (33) is too coarse.  Do not resolve this by a
-fixed-field census.
+Evaluate the character of the bounded endpoint-pair resultant
+\(\operatorname{Res}(J_P,\Sigma_J)\) in (41), using the star endpoint
+relations in (38).  Preserve actual conic values: the Euler-character
+projection (33) is too coarse.  Do not resolve this by a fixed-field census.

@@ -200,6 +200,11 @@ new information in characteristic five: the correct first kernel test is
 where its native exponent set \(\{0,1,2,3,5,6\}\) is enlarged by the
 reflected exponent \(10\).  At \(q=27\), \(j=2\) remains informative, with
 native set \(\{0,1,3,4,9\}\).
+More generally, every reflected rung is the immediate successor
+\(j_b^+=(p^b+1)/2\) of a tautological shadow
+\(j_b^-=(p^b-1)/2\), and
+\(H_{2j_b^+}\equiv H_2H_{2j_b^-}\pmod R\).  The extension problem can thus
+be routed through rigidity of these shadow--successor ratios.
 For general \(j\), Kummer's theorem gives the exact visible prefix: if
 \(s=v_p(j)\) and \(d\equiv2j/p^s\pmod p\), the first carry occurs at
 \(p^s(p-d)\).  Barycentric Reed--Solomon duality turns that prefix into an
@@ -207,6 +212,14 @@ explicit degree bound on the interpolant \(H_{2j}\).  The identities
 \(H_{2(j+1)}\equiv H_2H_{2j}\pmod R\) therefore form a single
 digit-controlled multiplication orbit.  The extension theorem is now a
 carry-flag rigidity statement for that orbit.
+The top rung \(j=q/p\) is completely visible for \(p\ge5\).  Its no-wrap
+degree bound proves the uniform gap
+\[
+ \deg H_2\le2
+ \quad\text{or}\quad
+ \deg H_2\ge(p+1)/2.
+\]
+Thus any surviving extension ghost has characteristic-scale degree.
 Multiplying back the root
 divisor of \(S\) packages the entire hierarchy as a full-field norm
 identity: the two completely split degree-\(q\) products
@@ -346,6 +359,16 @@ a square-normalized matching sum of
 earlier Euler-character norm does not determine this value-level trace:
 replacing the weights by their constant signs reduces weighted covariance
 tautologically to ordinary covariance.
+The cross-direction trace is nevertheless explicit without fibrewise gcds:
+if \(\Lambda_t(T)=1-(T-t)^{q-1}\), then
+\[
+ \Sigma(T)=\sum_{i<j}Q(t_{ij},u_{ij})\Lambda_{t_{ij}}(T).
+\]
+Substituting the conic Lagrange identity writes this entirely as a
+square-normalized sum over endpoint Gram entries.  Reducing modulo \(J_P\)
+produces a polynomial \(\Sigma_J\) of degree less than \(\delta-r\), and the
+remaining conic character is exactly
+\(\chi(\operatorname{Res}(J_P,\Sigma_J))\).
 
 ### \(q=53\): type-uniform critical core
 
@@ -481,9 +504,9 @@ over every finite field.  Authorities:
    pair; do not retry translations of the affine coordinate.
 3. For the nonsaturated branch, prove the masked Redei missing-direction
    theorem for arbitrary defect through the \(\delta\)-dimensional excess
-   node module.  Control its degree-\(\delta-r\) second-excess resultant
-   through the first two repeated-root coefficients or the equivalent Gram matching sums, then
-   compare it with the constant conic square class through star realization.
+   node module.  Evaluate its degree-\(\delta-r\) endpoint-pair resultant
+   \(\operatorname{Res}(J_P,\Sigma_J)\) using the star Gram relations, then
+   compare it with the constant conic square class.
 
 ## Stop rules
 

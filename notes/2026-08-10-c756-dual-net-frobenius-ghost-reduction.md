@@ -361,7 +361,8 @@ Thus the saturated all-\(q\) theorem can be stated without \(H_{2j}\):
 classify the \(n\)-subsets of \(\mathbb F_q\) whose barycentric weights
 satisfy (53), and prove that their squared weight vector
 \((w_i^2)\) lies in the degree-two evaluation code.  The Frobenius--Cartier
-tower is the subfamily \(j=p^a\); the quadratic rung is \(j=2\).
+tower is the subfamily \(j=p^a\); the first useful additional rung is
+specified in (58).
 
 The root-set form also reveals a Frobenius reflection between different
 rungs.  For a positive exponent define its reduction as a function on the
@@ -420,6 +421,28 @@ native \(j=2\) visible exponents are \(\{0,1,3,4,9\}\), while the reflected
 \(j=5\) rung supplies \(\{0,9,18\}\).  These are the correct first kernel
 tests.
 
+Reflection always lands immediately after one of these shadows.  If
+\(b=e-a\), put
+\[
+ j_b^- =\frac{p^b-1}{2},
+ \qquad
+ j_b^+ =\frac{p^b+1}{2}=j_b^-+1.                         \tag{65}
+\]
+The \(j=p^a\) power rung reflects into the successor \(j_b^+\), while
+\(j_b^-\) is the tautological shadow.  Their interpolants obey
+\[
+ \boxed{
+ P_{j_b^+}\equiv H_2P_{j_b^-}\pmod R,
+ \qquad
+ P_{j_b^-}(x_i)=w_i^{p^b-1}\ne0.}                        \tag{66}
+\]
+Thus every available digit level probes the same unknown \(H_2\) as the
+ratio of a reflected successor and a canonical nowhere-zero shadow.  The
+two forced seams are the first instances: \((j_b^-,j_b^+)=(2,3)\) at
+\(q=25\), and \((4,5)\) at \(q=27\).  A uniform proof may therefore be
+organized as rigidity of the shadow--successor ratios (66), rather than as
+unrelated higher powers.
+
 The consecutive part of every syndrome set has a closed digit formula.  Put
 \[
  L_j=n-2j-2,
@@ -462,6 +485,26 @@ through all digit bounds (61) and all sparse/reflected checks, then
 \(\deg H_2\le2\).  This formulation separates the universal mechanism
 (multiplication by one residue class) from the characteristic dependence
 (the explicit carry profile \(D_j\)).
+
+The top Frobenius rung already gives a uniform degree gap.  Assume
+\(p\ge5\), put \(s=q/p=p^{e-1}\), and take \(j=s\).  This rung is available,
+and its first-carry threshold is \(s(p-2)\), larger than
+\(L_s=n-2s-2\).  Hence \(D_s=L_s\), so (61) gives
+\[
+ \deg P_s\le2s.                                          \tag{63}
+\]
+If \(3\le d:=\deg H_2\le(p-1)/2\), then \(sd<n\), so no reduction modulo
+\(R\) occurs in \(P_s=H_2^s\).  Therefore
+\(\deg P_s=sd>2s\), contradicting (63).  Consequently
+\[
+ \boxed{
+ \deg H_2\le2
+ \quad\text{or}\quad
+ \deg H_2\ge\frac{p+1}{2}\qquad(p\ge5).}                \tag{64}
+\]
+Thus every proper-extension counterexample outside the conic branch must
+start at characteristic-scale degree; no bounded low-degree ghost family can
+survive as \(p\) grows.
 
 The same pencil supplies a hierarchy, not just (6).  For
 \(b=2j+1<n\), let \(H_{2j}\) be the degree-\(<n\) remainder of
@@ -716,8 +759,10 @@ through enough of those equations.
 | Is there a division-free root-set form? | settled | barycentric Reed--Solomon syndrome system (53) |
 | Do the power rungs couple to non-power rungs? | settled | Frobenius reflection and exponent rotation (55) |
 | Is every odd rung informative? | no | all \(2j+1=p^b\) are tautological Frobenius shadows (57) |
+| Where do reflected checks land? | settled | immediately after a shadow, with ratio identity (66) |
 | What controls the useful degree bound at each rung? | settled | first-carry formula (60) and Reed--Solomon bound (61) |
 | How are those degree bounds coupled? | settled | single multiplication orbit (62) |
+| Can a nonconic ghost have bounded small degree? | no for \(p\ge5\) | top-rung gap (64) forces degree at least \((p+1)/2\) |
 | Is there more information beyond the first ghost? | settled | nonlinear Cartier hierarchy (39) from every odd divided coefficient |
 | Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
 | What semilinear statement would close the extension branch? | open, exact | classify \(\mathcal K_R\) in (49), then impose the first non-shadow rung (58); injectivity alone is dimensionally impossible at \(q=25,27\) |
