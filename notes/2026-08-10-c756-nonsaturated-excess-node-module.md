@@ -1934,7 +1934,9 @@ for the character comparison using the
 quadric involution (23ag) and its rank-two Gram correction (23ak).  Retain
 the lifted-node coordinates
 \(\xi_e\), or their norm-one quotients \(\tau_e\), across endpoint-conic
-incidences.  The exact first target is to rule out the bi-character zero sum
+incidences.  Use the ruling projectivities (23d1)--(23d2) as the exact
+endpoint-coherence law rather than treating those coordinates independently.
+The exact first target is to rule out the bi-character zero sum
 (23bg) coherently across directions; the second is to evaluate the product
 of the nonzero \(S_t\) in (23bq).  The remaining smooth conic factor is the
 explicit resultant of \(\psi\).  The \(c=0\) mirror fibre is already
