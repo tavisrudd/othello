@@ -144,6 +144,26 @@ depending on a new certificate-foundation package; this deliberate duplication k
 either frozen certificate independently restorable and prevents changes in one from
 invalidating the other.
 
+For both projective-cap packages the final local modules are `Model`, `Checker`, the
+generated data family, and a certificate-only `Assembly`. The assembly boundary is
+immediately before `TransportWitness`: anchored-class selection, class validity, and
+the size-three classification remain certificate-local; transport witnesses,
+odd-escape game statements, and projective initial-position theorems move downstream.
+The frozen generated Lean is the migration input because the original q11/q13 `.cert`
+inputs are not tracked and the q13 generator does not reproduce the current payload.
+A hash-guarded transformer therefore performs this namespace-only migration; neither
+package claims regeneration until canonical inputs and generators are repaired.
+
+For Q25 the certificate-local model is limited to the concrete `GF(25)` encoding,
+raw projective coordinates and cap checker, conjugation/fixed indices, and the pair,
+line-mask, residual, exhaustion, and minimum checker families. Generic moments,
+incidence, collision/orbit counting, pair extension, normalization, and projective
+transport remain downstream. `RelativeConicArcs.Nucleus` has no declaration-level use
+and is removed rather than copied. The 9,531 generated modules move mechanically under
+`TavisRuddFiniteGeom.Certificates.Q25`; fifteen tracked generators and the schema,
+manifest, provenance hashes, and import-only aggregates must agree before its single
+final build.
+
 Use explicit paper and shared source roots under the ecosystem namespace:
 
 ```text
