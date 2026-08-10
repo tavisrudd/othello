@@ -535,6 +535,12 @@ After centering
 \(q_i-q_j=c(r_i-r_j)(r_i+r_j)\).  Ordinary and mirror collisions are the
 two signs, while
 \(\sigma_t=c\sum_{e\in\mathcal M_t}r_e^2+\mu_t\psi(t)\).
+The fixed quadratic trace is the endpoint inertia form
+\[
+ L(T,W)=c\sum_i(Y_iW-X_iT)^2+n\psi(T,W),
+\]
+so the complementary-divisor law now lives in the same centered covariance
+coordinates as the earlier star obstruction.
 If \(\mathcal A(Z,T)=\prod_i(Z-r_i(T))\), then the whole value polynomial is
 the sign norm
 \[

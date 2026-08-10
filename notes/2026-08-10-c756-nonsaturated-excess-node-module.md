@@ -690,6 +690,38 @@ common norm conic, while the mirror involution is its sign change in the
 \(r\)-coordinate.  This is the simplest fibre model in which to compare the
 ordinary and mirror incidence cycles.
 
+The degree-two polynomial \(L\) is the endpoint inertia tensor about the
+conic center.  Set
+\[
+ X_i=x_i-\frac b{2c},
+ \qquad
+ Y_i=y_i+\frac e{2c},
+\]
+and homogenize \(\psi\) in \((T,W)\).  Since
+\(r_i(T,W)=Y_iW-X_iT\), equation (23an) becomes
+\[
+ \boxed{
+ L(T,W)=c\sum_{i=1}^n(Y_iW-X_iT)^2+n\psi(T,W).}         \tag{23av}
+\]
+Equivalently, if
+\[
+ \mathsf I_B=
+ \begin{pmatrix}
+  \sum_iX_i^2&-\sum_iX_iY_i\\
+  -\sum_iX_iY_i&\sum_iY_i^2
+ \end{pmatrix},
+\]
+then the matrix of \(L\) is
+\[
+ \boxed{\operatorname{Mat}(L)=c\,\mathsf I_B
+                         +n\,\operatorname{Mat}(\psi).} \tag{23aw}
+\]
+Thus the globally known part of the complementary trace law is precisely a
+binary covariance/inertia form, not an arbitrary quadratic interpolant.  In
+particular, perfect-matching fibres evaluate \(\sigma=L/2\) directly on this
+tensor.  Any all-center covariance identity can now be compared with the
+unmatched residual trace in the same centered coordinates.
+
 The entire value polynomial is the norm for this sign involution.  Define
 \[
  \mathcal A(Z,T)=\prod_{i=1}^n(Z-r_i(T)),
