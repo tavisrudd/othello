@@ -545,6 +545,14 @@ Equivalently, in the quadratic étale algebra
 \]
 Mirror and deck act as \(\xi\mapsto\bar\xi\) and
 \(\xi\mapsto-\bar\xi\), so this carrier retains the coherent lift signs.
+On \(\psi(t)\ne0\), the norm-one coordinate
+\(\tau_e=\xi_e/\bar\xi_e\), defined up to inversion, gives the universal formulas
+\[
+ Q_e=\frac{\psi(t)}4(\tau_e+\tau_e^{-1}+2),\qquad
+ \sigma_t=\frac{\psi(t)}4\sum_e(\tau_e+\tau_e^{-1}+2).
+\]
+Hence zero trace is exactly
+\(\sum_e(\tau_e+\tau_e^{-1})=-2\mu_t\), independent of the conic coefficients.
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and

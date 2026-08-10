@@ -775,6 +775,50 @@ actual deck-labeled lifts.  The remaining geometric theorem can therefore
 be phrased as a relation among points on these norm fibres, induced by the
 incidence of the lifted endpoint conics as \(t\) varies.
 
+On a nonzero norm fibre the torsor may be quotiented canonically.  Put
+\[
+ \tau_e=\frac{\xi_e}{\bar\xi_e}\in E^\times,
+ \qquad
+ \tau_e\bar\tau_e=1.                                   \tag{23ba}
+\]
+Changing the deck lift or applying the mirror sends \(\tau_e\) to
+\(\tau_e^{-1}\), so the unordered pair
+\(\{\tau_e,\tau_e^{-1}\}\) belongs to the underlying node.
+Since
+\(\xi_e^2=(\xi_e\bar\xi_e)\tau_e=(\psi(t)/\eta)\tau_e\), equations
+(23ax)--(23az) simplify to
+\[
+ \boxed{
+ Q_{\rm du}(t,u_e)
+ =\eta s_e^2
+ =\frac{\psi(t)}4\bigl(\tau_e+\tau_e^{-1}+2\bigr),}     \tag{23bb}
+\]
+and
+\[
+ \boxed{
+ \sigma_t
+ =\frac{\psi(t)}4
+   \sum_{e\in\mathcal M_t}
+       \bigl(\tau_e+\tau_e^{-1}+2\bigr).}              \tag{23bc}
+\]
+Thus, whenever \(\psi(t)\ne0\),
+\[
+ \boxed{
+ \sigma_t=0
+ \quad\Longleftrightarrow\quad
+ \sum_{e\in\mathcal M_t}(\tau_e+\tau_e^{-1})=-2\mu_t.} \tag{23bd}
+\]
+The conic coefficients and its square class have disappeared from this last
+equation: the zero gate is a universal second-character identity on the
+norm-one torus.  The map
+\[
+ \tau\longmapsto\frac{\psi(t)}4\frac{(\tau+1)^2}{\tau}
+\]
+is precisely the quotient by \(\tau\leftrightarrow\tau^{-1}\); its collisions
+are the mirror collisions already isolated by \(\Theta_Q\).  This torus
+coordinate is therefore the natural carrier for any endpoint-coherent
+deck-sign law.
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[
