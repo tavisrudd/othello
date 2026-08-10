@@ -1068,6 +1068,29 @@ root classes distinct: roots \(r\) and \(-r\) coalesce after descent to
 \(W=r^2\).  Thus ordinary subresultants may be computed before taking the
 sign norm, with the overlap correction supported exactly on \(K_{\rm mir}\).
 
+In fact this gives unconditional ordinary-factor extraction before descent.
+The no-three-concurrent condition and (23as) imply
+\[
+ \boxed{
+ \mathcal G_t(Z)
+ =\gcd_Z\bigl(\mathcal A(Z,t),\partial_Z\mathcal A(Z,t)\bigr),} \tag{23bn}
+\]
+and hence
+\[
+ \boxed{
+ \mathfrak G_t(V)
+ =c^{\mu_t}\,
+  \mathcal N_\pm(\mathcal G_t)
+    \left(\frac{V-\psi(t)}c\right).}                    \tag{23bo}
+\]
+These formulas remain valid on mirror-overlap fibres.  What fails there is
+only extraction from the descended value polynomial \(\mathfrak F\) alone:
+an exact double value root does not reveal whether its two preimages were
+equal or opposite.  Taking the ordinary gcd in \(Z\) first supplies that
+binary label canonically.  The unbounded open problem is therefore the
+cross-direction character of the resulting first coefficient, not recovery
+of the matched factor itself.
+
 Let \(\Theta_Q(T)=\prod_{i<j}\ell_{ij}(T)\).  Taking the discriminant of
 (23x) in the value variable and using the direction factorization (8) gives
 \[
@@ -1813,6 +1836,7 @@ prove nonexistence.
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
 | Is there a cross-direction trace formula? | settled | endpoint-pair interpolation (38), reduced to \(\Sigma_J\) in (40) |
 | What creates accidental conic-value collisions? | settled | conic mirror cover \(\Theta_Q\), cross-resultant (23ac), and overlap support \(K_{\rm mir}\) in (23af) |
+| Is mirror-overlap multiplicity unbounded locally? | no | value multiplicity is at most four; only exact doubles need an ordinary/mirror label, (23bl)--(23bm) |
 | Is the mirror coordinate-dependent? | no | quadric involution (23ag), commuting with deck |
 | Is there a uniform quotient model? | settled | centered sign norm (23ap)--(23at) |
 | What is zero trace on a smooth direction fibre? | settled structurally | norm-one torus equation (23bd), or bi-character zero sum (23bf)--(23bg) |

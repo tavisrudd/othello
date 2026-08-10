@@ -577,7 +577,11 @@ On the overlap, no conic-value root has multiplicity above four.  Roots of
 multiplicity \(3\) and \(4\) contribute respectively one and two ordinary
 pairs automatically; only an exact double root needs a binary label
 distinguishing an ordinary pair from a pure mirror pair.  A double root on
-the fixed axis \(r=0\) is necessarily ordinary.
+the fixed axis \(r=0\) is necessarily ordinary.  Algebraically the label is
+canonical before descent:
+\(\mathcal G_t=\gcd_Z(\mathcal A,\partial_Z\mathcal A)\), and
+\(\mathfrak G_t\) is its sign norm.  Thus overlap obstructs value-only
+extraction, not ordinary-factor recovery.
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and
