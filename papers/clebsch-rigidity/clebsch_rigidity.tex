@@ -9,8 +9,10 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{float}
+\usepackage{needspace}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
 \usepackage[hidelinks]{hyperref}
 
 \newtheorem{theorem}{Theorem}[section]
@@ -47,8 +49,8 @@ from its deep-hole syndrome locus}
 \begin{center}
 \small\itshape
 From deep holes, the cubic \textbf{takes shape}, finds its bearings,\\
-stands fixed while its shadows move, rebuilds the plane that cast it,\\
-and gathers its shadows home.
+stands fixed while its shadows move; from minimum words, the plane returns,\\
+and the scattered shadows gather home.
 \end{center}
 
 \begin{abstract}
@@ -229,14 +231,51 @@ and the original computational form of an exact $q=13$ binary incidence-code
 theorem.  Paper~IV gives the structural and reproducible account of that
 $q=13$ consequence~\cite{RuddPassant2026}.
 
-This is Paper~I of a five-paper sequence organized by what successive
-constructions forget and recover.  Paper~II studies what the conic matching
-quotient remembers~\cite{RuddFactorization2026}.  Paper~III, also called
-\emph{passages}, supplies the characteristic-zero golden source and develops
-its broader structural consequences~\cite{RuddPassages2026}.  Paper~IV
-reconstructs a marked conic plane and its polarity from the minimum words of
-a binary code~\cite{RuddPassant2026}.  Paper~V will give the common
-recognition theorem and close the marked reconstruction round trip.  The
+\Needspace{18\baselineskip}
+\medskip
+\noindent\textbf{Series perspective.}
+\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
+determine the structures that produced them.  The present paper begins with
+deep-hole syndrome data and reconstructs the code, conic geometry, and golden
+orientation.  Papers~I--III give three marked routes toward a common
+cubic--operator package; Paper~V will prove their exact transports and reverse
+recognition.  Paper~IV is the parallel lower branch: minimum-word pairs
+reconstruct a marked conic plane and polarity, with no cubic identification
+asserted.  Figure~\ref{fig:series-map} records this division.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
+    align=center,font=\footnotesize,minimum height=8mm,text width=29mm,
+    inner sep=2.5pt},
+  active/.style={paper,very thick,fill=black!12},
+  package/.style={paper,text width=38mm}
+]
+\node[active]  (p1) at (0,1.45) {\textbf{I}\\deep-hole syndrome};
+\node[paper]   (p2) at (0,0.35) {\textbf{II}\\quadratic trade};
+\node[paper]   (p3) at (0,-0.75) {\textbf{III}\\arithmetic/operator shadows};
+\node[package] (gold) at (5.25,0.35) {marked cubic and\\golden operator};
+\node[paper]   (p5) at (10.5,0.35) {\textbf{V}\\recognition and return};
+\node[paper]   (p4) at (0,-2.05) {\textbf{IV}\\minimum-word pairs};
+\node[package] (plane) at (5.25,-2.05) {marked conic plane\\and polarity};
+\draw[dashed,->] (p1.east) -- ([yshift=3mm]gold.west);
+\draw[dashed,->] (p2.east) -- (gold.west);
+\draw[dashed,->] (p3.east) -- ([yshift=-3mm]gold.west);
+\draw[<->,thick] (gold.east) -- (p5.west);
+\draw[->,thick] (p4.east) -- (plane.west);
+\end{tikzpicture}
+\caption{Series map.  Dashed arrows mark the comparisons Paper~V will close;
+its two-way solid arrow marks recognition and return.  The lower solid arrow
+is Paper~IV's independent reconstruction.}
+\label{fig:series-map}
+\end{figure}
+
+Paper~II studies what the conic matching quotient remembers
+\cite{RuddFactorization2026}; Paper~III supplies the characteristic-zero
+golden source~\cite{RuddPassages2026}; and Paper~IV gives the independent
+minimum-word reconstruction~\cite{RuddPassant2026}.  The
 reconstructed operator also has uses beyond this inverse problem: the
 unnumbered Golden quantum-statistics companion studies its
 exchange-statistical interpretation~\cite{RuddGoldenQuantum2026}.
