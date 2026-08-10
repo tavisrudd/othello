@@ -1,0 +1,9 @@
+Petersen: three nonzero A5 classes; all-one is S5-fixed; exotic pair is odd-swapped
+K5: unique nonzero A5 class, represented by all-one voltage
+six-loop rose: unique nonzero A5 class, represented by all-one voltage
+Petersen all-one over tau: det=1536; exact integral isometry PASS
+Petersen exotic: det=1296; exact integral isometry PASS
+K5 all-one: det=162; exact integral isometry PASS
+six-loop rose: det=6; exact integral isometry PASS
+Igusa descent: q_tau=2 q_t, so q_t=(L_2,2b) PASS
+Gamma_0(6) widths: t=7/10,1/4,1/6,1/2 -> 1,2,3,6 PASS

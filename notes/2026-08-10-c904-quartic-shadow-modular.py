@@ -161,13 +161,14 @@ def emit():
         Q(-8), Q(-1, 8), Q(1, 9), Q(8, 9), Q(9, 8), Q(9)
     }
 
-    # Width matching: 1/2,1/6,1/4,7/10 have widths 1,2,3,6.
-    y = 3 * (5 - 14 * X) / (8 * (4 * X - 1))
+    # Signed-cycle Prym boundary forms give widths 6,3,2,1 at
+    # 1/2,1/6,1/4,7/10.  These fix the X0(6) coordinate.
+    y = -(2 * X + 1) / (6 * X - 1)
     targets = {
-        Q(1, 2): Q(-3, 4),
-        Q(1, 6): Q(-3),
-        Q(1, 4): None,
-        Q(7, 10): Q(-1),
+        Q(1, 2): Q(-1),
+        Q(1, 6): None,
+        Q(1, 4): Q(-3),
+        Q(7, 10): Q(-3, 4),
     }
     for t, value in targets.items():
         numerator = sum(c * t**i for i, c in enumerate(y.num))
@@ -178,8 +179,8 @@ def emit():
             assert numerator == value * denominator
 
     T = -(4 * y + 3) * (y + 3)**2 / (y + 1)**2
-    expected_T = Q(6561, 100) * ((X - Q(1, 2)) * (X - Q(1, 6))**2) / (
-        (X - Q(1, 4)) * (X - Q(7, 10))**2)
+    expected_T = Q(-80, 3) * ((X - Q(7, 10)) * (X - Q(1, 4))**2) / (
+        (X - Q(1, 6)) * (X - Q(1, 2))**2)
     assert T == expected_T
 
     # The three isolated boundary orbits give tight-frame constants 6,12,36.
@@ -235,10 +236,10 @@ def emit():
     return "\n".join([
         "CERTIFICATE PASS",
         "boundary cross-ratio orbit = -8,-1/8,1/9,8/9,9/8,9",
-        "frame constants 15/10/6 = 6,12,36 -> cusp widths 1,2,6",
-        "quartic cusp widths: 1/2->1, 1/6->2, 1/4->3, 7/10->6",
-        "y(t)=3(5-14t)/(8(4t-1))",
-        "T(t)=6561/100*(t-1/2)*(t-1/6)^2/((t-1/4)*(t-7/10)^2)",
+        "frame constants for 15/10/6 node orbits: 6,12,36",
+        "quartic cusp widths: 1/2->6, 1/6->3, 1/4->2, 7/10->1",
+        "y(t)=-(2t+1)/(6t-1)",
+        "T(t)=-80/3*(t-7/10)*(t-1/4)^2/((t-1/6)*(t-1/2)^2)",
         "local gluings 3*4=12; SL2(Z/6) orbit=12 stabilizer c=0 mod 6",
     ]) + "\n"
 

@@ -1,0 +1,12 @@
+CERTIFICATE PASS
+K5 A5-fixed H1(F2) classes = 0,183 (one nonzero)
+Petersen A5-fixed H1(F2) classes = 0,73,154,211
+Petersen S5-fixed nonzero class = 73; odd permutation swaps 154,211
+rose edge form = (L_1,1q), det 6, SNF 1,1,1,1,6
+K5 edge form = (L_3,3q), det 162, SNF 1,3,3,3,6
+Petersen S5 edge form = (L_2,4q), det 1536, SNF 2,4,4,4,12
+Petersen odd edge forms = (L_6,6q), det 1296, SNF 1,6,6,6,6
+tau=0 to t=1/4 has ramification 2: (L_2,4q) becomes (L_2,2q)
+quartic cusp widths: 7/10->1, 1/4->2, 1/6->3, 1/2->6
+corrected y(t)=-(2t+1)/(6t-1)
+corrected T(t)=-4(4t-1)^2(10t-7)/((2t-1)^2(6t-1))

@@ -25,7 +25,7 @@ def cr(z):
 
 
 def y(t):
-    return 3 * (5 - 14 * t) / (8 * (4 * t - 1))
+    return -(2 * t + 1) / (6 * t - 1)
 
 
 def via_y(t):
@@ -34,8 +34,8 @@ def via_y(t):
 
 
 def direct(t):
-    return F(6561, 100) * (t - F(1, 2)) * (t - F(1, 6)) ** 2 / (
-        (t - F(1, 4)) * (t - F(7, 10)) ** 2
+    return F(-80, 3) * (t - F(7, 10)) * (t - F(1, 4)) ** 2 / (
+        (t - F(1, 6)) * (t - F(1, 2)) ** 2
     )
 
 
@@ -72,11 +72,11 @@ def main():
     # The cleared difference has degree at most six; seven regular values
     # suffice.  We check ten, independently evaluating the two formulas.
     tests = [F(k) for k in range(-4, 7)
-             if F(k) not in {F(1, 4), F(7, 10)}]
+             if F(k) not in {F(1, 6), F(1, 2)}]
     assert len(tests) >= 7 and all(via_y(t) == direct(t) for t in tests)
-    assert y(F(1, 2)) == F(-3, 4)
-    assert y(F(1, 6)) == F(-3)
-    assert y(F(7, 10)) == F(-1)
+    assert y(F(1, 2)) == F(-1)
+    assert y(F(1, 4)) == F(-3)
+    assert y(F(7, 10)) == F(-3, 4)
 
     roots = []
     for i, j in combinations(range(6), 2):

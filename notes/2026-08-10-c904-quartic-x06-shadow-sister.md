@@ -4,7 +4,7 @@ Date: 2026-08-10
 Scope: high-EV mathematics, exact computation, and bounded priority audit.  No
 manuscript or Lean source was edited.
 
-Literature depth: one primary source was read in full and four were read
+Literature depth: one primary source was read in full and five were read
 partially from their full PDFs at the sections stated in the source ledger.
 The negative priority search is
 bounded and is not publication-grade: MathSciNet, zbMATH, and a full
@@ -30,12 +30,11 @@ the $A_5$-cubic on the two branches already isolated over $X_0(3)$:
 - the $A_5$-cubic realizes one of the two exotic two-primary gluings, exchanged
   by the quadratic discriminant cover.
 
-An exact cross-ratio calculation gives a unique compelling Hauptmodul after
-the expected cusp-width labeling, and an explicit degree-three map from the
-quartic parameter to the cubic parameter.  That formula is still a theorem
-candidate, not a proved period identity: its remaining gate is a
-Picard--Lefschetz computation identifying the four quartic degenerations with
-the four labeled cusps of $X_0(6)$.
+An exact admissible-cover calculation identifies the primitive cusp widths,
+fixes the Hauptmodul, and gives an explicit degree-three map from the quartic
+parameter to the cubic parameter.  At the ten-line boundary, its exotic
+Petersen covers carry the same integral $6I-J$ lattice as the cubic's six
+$D_5$ axes.
 
 ## 2. Integral rigidity theorem
 
@@ -179,12 +178,12 @@ its image closure is consequently the whole irreducible modular curve.
 The closure of the intermediate-Jacobian period locus of the resolved
 $S_6$-invariant quartic pencil is the classical $A_5$ Weyl curve $X_0(6)$.
 
-This corollary identifies the locus, not yet the quartic parameter $t$ with a
-specified Hauptmodul.  A clean manuscript proof should make the family-level
+This corollary identifies the locus; the boundary calculation below then
+identifies the quartic parameter $t$ with a specified Hauptmodul.  A clean manuscript proof should make the family-level
 local-system argument explicit rather than presenting the fiberwise lemma as
 if it automatically chose a global marking.
 
-## 4. Exact boundary arithmetic and the candidate Hauptmodul
+## 4. Exact boundary arithmetic and the Hauptmodul
 
 The quartic discriminant set is
 
@@ -214,21 +213,22 @@ The three isolated additional node orbits have standard-carrier vectors
  \end{array}
 \]
 
-Their frame constants have ratio $1:2:6$, matching three cusp widths of
-$\Gamma_0(6)$.  Assigning these to widths $1,2,6$ and the Igusa degeneration
-$t=1/4$ to the remaining width $3$ gives the Möbius coordinate
+The frame constants are useful orbit checks, but they are **not** primitive
+Picard--Lefschetz widths.  The admissible-cover calculation below instead
+gives widths $6,3,2,1$ at $t=1/2,1/6,1/4,7/10$, respectively.  It therefore
+fixes the Möbius coordinate
 
 \[
- y(t)=\frac{3(5-14t)}{8(4t-1)},
+ y(t)=-\frac{2t+1}{6t-1},
 \]
 
 with
 
 \[
- \frac12\mapsto-\frac34,\qquad
- \frac16\mapsto-3,\qquad
- \frac14\mapsto\infty,\qquad
- \frac7{10}\mapsto-1.
+ \frac12\mapsto-1,\qquad
+ \frac16\mapsto\infty,\qquad
+ \frac14\mapsto-3,\qquad
+ \frac7{10}\mapsto-\frac34.
 \]
 
 The earlier $X_0(6)\to X_0(3)$ root-cover formula
@@ -237,38 +237,32 @@ The earlier $X_0(6)\to X_0(3)$ root-cover formula
  T=-\frac{(4y+3)(y+3)^2}{(y+1)^2}
 \]
 
-then gives the exact candidate quartic-to-cubic shadow map
+then gives the exact quartic-to-cubic shadow map
 
 \[
  \boxed{
- T(t)=\frac{6561}{100}
- \frac{(t-\frac12)(t-\frac16)^2}
- {(t-\frac14)(t-\frac7{10})^2}.}
+ T(t)=-\frac{80}{3}
+ \frac{(t-\frac7{10})(t-\frac14)^2}
+ {(t-\frac16)(t-\frac12)^2}.}
 \]
 
 In the Coble-cover coordinate $t=(\tau^2+1)/4$, this is
 
 \[
- T(\tau)=\frac{729}{4}
- \frac{(\tau^2-1)(3\tau^2+1)^2}
- {\tau^2(5\tau^2-9)^2}.
+ T(\tau)=-16
+ \frac{\tau^4(5\tau^2-9)}
+ {(3\tau^2+1)(\tau^2-1)^2}.
 \]
 
 The ramification has exactly the required $X_0(6)\to X_0(3)$ pattern:
-$T=0$ has multiplicities $1,2$ at $t=1/2,1/6$, and $T=\infty$ has
-multiplicities $1,2$ at $t=1/4,7/10$.
+$T=0$ has multiplicities $2,1$ at $t=1/4,7/10$, and $T=\infty$ has
+multiplicities $1,2$ at $t=1/6,1/2$.
 
-### Exact remaining gate
+### Integral cusp calculation
 
 The projective singular-point coordinates are not themselves integral
-vanishing cycles.  The frame calculation therefore does **not** by itself
-prove the cusp-width labeling.  A Picard--Lefschetz calculation must:
-
-1. identify the primitive vanishing lattice at each of the four degenerations;
-2. compute the resulting transvection in the root--weight normalization; and
-3. show that the widths are respectively $1,2,3,6$ in the displayed order.
-
-There is now a finite-graph route to this gate.  The CKS map
+vanishing cycles, which is why the first frame heuristic gave the reverse
+answer.  The correct calculation starts from the CKS map
 
 \[
  s(\tau)=\frac{\tau^3-\tau}{5\tau^2+3},
@@ -285,21 +279,27 @@ singular Wiman--Edge fibers:
 - $t=7/10$ lies over $s=\pm1/\sqrt{125}$, whose irreducible six-nodal dual
   graph is one vertex with six loops.
 
-Farb--Looijenga, Proposition 4.1, compute the integral variation tensors on
-the rank-six graph homology: in their golden-lattice normalization the three
-types have multipliers $4+2X$, $3+4X$, and $1$, respectively.  The Prym
-character lattice is the rank-five anti-invariant homology of the admissible
-two-cover of the graph.  Thus the remaining width calculation reduces to:
+For an admissible double cover, the principal Prym polarization is half the
+Jacobian restriction, so its anti-invariant monodromy form is one copy of the
+signed edge-square form.  The four primitive graph forms are
 
-1. recover the $\mathbf F_2$ voltage character of each CKS discriminant cover;
-2. form the integral anti-invariant cycle lattice of the resulting graph
-   double cover; and
-3. restrict Farb--Looijenga's edge-square variation tensor and compare it
-   with the root--weight cusp normalization.
+\[
+\begin{array}{c|c|c}
+t&\text{graph cover}&\text{primitive }X_0(6)\text{ width}\\ \hline
+\frac7{10}&\text{six-loop rose}&1\\
+\frac14&\text{$S_5$-fixed Petersen cover}&2\\
+\frac16&\text{unique $A_5$-cover of $K_5$}&3\\
+\frac12&\text{odd-conjugate Petersen pair}&6.
+\end{array}
+\]
 
-This should both produce the widths and distinguish the two Petersen covers.
-It is a finite integral graph calculation followed by one geometric check
-that the voltage character agrees with the conic-bundle rulings.
+At the Igusa point the graph computation is naturally over $\tau$, while
+$t-1/4=\tau^2/4$; descent therefore halves the even $\tau$-variation form.
+This produces the primitive width two rather than four.  CKS Corollary 4.9
+also supplies the missing voltage discriminator: the $S_3$ line stabilizer
+fixes the two ruling components at $\tau=0$ but swaps them at $\tau=\pm1$.
+Thus $\tau=0$ is the unique $S_5$-fixed Petersen cover and $\tau=\pm1$ are
+the odd-conjugate pair.
 
 ### TT3: the Petersen boundary already contains the cubic axis lattice
 
@@ -315,9 +315,9 @@ Thus there are exactly three connected $A_5$-equivariant covers.  Under the
 residual odd permutation in $S_5$, one is fixed and the other two are
 exchanged.  This is precisely the $1+2$ pattern over the CKS ten-line fiber:
 $s^{-1}(0)=\{0,1,-1\}$, with $\tau=0$ fixed and $\tau=\pm1$ paired.  The
-parameter match alone does not yet prove that the three geometric conic-bundle
-covers exhaust these three voltage classes; that is the remaining local
-ruling check.
+parameter match is promoted to a geometric identification by CKS Corollary
+4.9: its trivial-versus-sign ruling character is exactly the fixed-versus-
+swapped voltage character.
 
 More importantly, take either member of the odd-conjugate pair.  Give every
 edge of the graph cover norm one and take the anti-invariant signed-cycle
@@ -338,23 +338,19 @@ classical quartic branch.  This is the first exact cross-family meeting found
 at the integral boundary level rather than only on a common rational modular
 curve.
 
-The theorem presently proved is the graph-lattice statement.  To promote it
-to geometry one must still identify the CKS covers at $\tau=\pm1$ with the
-odd-conjugate voltage pair and verify that the admissible-Prym polarization
-uses the asserted half-restriction at this boundary.  Both are local checks;
-neither is licensed by the matching orbit sizes alone.
-
-Once that is done, the formula for $y(t)$ is forced.  There is also a short
-degree-one argument available.  The compactified period map is a nonconstant
+The graph theorem, CKS ruling character, and the standard half-polarization
+formula for an etale Prym together promote this lattice equality to the
+quartic boundary.  In particular, the formula for $y(t)$ above is forced.
+There is also a short degree-one argument.  The compactified period map is a nonconstant
 map $\mathbf P^1\to X_0(6)\simeq\mathbf P^1$.  If the four points of $D$ are
 proved to be exactly its cusp preimages, the four target cusps each have one
 preimage.  A degree $d>1$ map would then be totally ramified over all four,
 contributing $4(d-1)>2d-2$, contrary to Riemann--Hurwitz.  Hence $d=1$.
-Beauville's full three-page argument already proves that the desingularized
+Beauville's full three-page argument proves that the desingularized
 intermediate Jacobian is zero at the three isolated nodal values
 $t=1/2,1/6,7/10$ (his reciprocal parameter is $2,6,10/7$).  Thus only the
-Igusa degeneration and the primitive local monodromy normalization remain
-substantive in this boundary step.
+Igusa semistable descent needed separate care; the even signed-cycle form and
+the quadratic relation $t-1/4=\tau^2/4$ supply exactly that factor of two.
 
 ## 5. TT/EJ passes
 
@@ -395,11 +391,10 @@ integral gluings as
 
 ### TT2: strongest skeptic's objection
 
-The theorem identifies a period **locus**, not a geometric correspondence and
-not yet an explicit parameter.  The phrase ``quartic equals $X_0(6)$'' must
+The theorem identifies a period **locus**, not a geometric correspondence.
+The phrase ``quartic equals $X_0(6)$'' must
 always mean its intermediate-Jacobian period curve.  It does not identify the
-quartic threefold itself with a modular object, and it does not make the
-candidate $T(t)$ formula proved.
+quartic threefold itself with a modular object.
 
 ### EJ2: the new series-level punchline
 
@@ -423,13 +418,12 @@ quartic shadow to the exotic cubic shadow.
   standard family-level transport;
 - equality of the two unordered four-point cross-ratio orbits;
 - the three exact tight-frame constants;
-- the unique candidate formula after the stated cusp labeling;
+- the four primitive signed-cycle cusp forms and their widths;
+- the unique Hauptmodul formula after that cusp labeling;
 - the degree-three composition and its ramification algebra.
 
 ### What is not yet theorem-grade
 
-- the cusp-width labeling and therefore the explicit equality of the period
-  Hauptmodul with $y(t)$;
 - an integral correspondence between the quartic and cubic variations;
 - finite-flat control at $2$ and $3$;
 - extension across the boundary and the geometric realization of the Hecke
@@ -438,14 +432,14 @@ quartic shadow to the exotic cubic shadow.
 
 ### Ceiling assessment
 
-The period-locus theorem is genuinely new-looking and beautiful, but by itself
-is more likely a strong specialist result than an Annals paper.  The top-tier
-package becomes plausible if the next step proves the explicit Hauptmodul and
-then constructs the relative geometric correspondence between the classical
+The period-locus and boundary theorem is genuinely new-looking and beautiful,
+but by itself is more likely a strong specialist result than an Annals paper.
+The top-tier package becomes plausible if the next step constructs the
+relative geometric correspondence between the classical
 quartic and exotic cubic branches, with boundary and two-primary behavior.
 
-The highest-EV next move is therefore the four-cusp Picard--Lefschetz theorem,
-not a further representation search.
+The highest-EV next move is therefore the relative correspondence, not a
+further representation search.
 
 ## 7. Literature and priority boundary
 
@@ -487,7 +481,8 @@ $E^5$ mechanism but does not pre-empt the integral lemma above.
   *Coble fourfold, $S_6$-invariant quartic threefolds, and Wiman--Edge
   sextics*, arXiv:1712.08906, published in *Algebra & Number Theory* 14
   (2020).  Read from the cached full PDF: introduction and (1.3), Theorem
-  1.14, Proposition 3.30, Sections 3.1 and 4.2, especially Remark 4.5.  Cache
+  1.14, Proposition 3.30, Sections 3.1 and 4.2, especially Corollary 4.9 and
+  Remark 4.5.  Cache
   key `arXiv:1712.08906`; SHA-256
   `14c94b0b671cf5e172893086fed33f6600a593d74a5a83efda5384978022c598`.
 - **Partial:** Angel Carocca, Victor Gonzalez-Aguilera, and Ruben E.
@@ -516,6 +511,13 @@ $E^5$ mechanism but does not pre-empt the integral lemma above.
   degeneration summary, Sections 3.3 and 4.1, and especially Proposition 4.1
   and Remark 4.2.  Cache key `arXiv:1911.01210`; SHA-256
   `4de9866aaa1a4fd48cd0c532521962849ecbd4decab84f132a91720a4b5091fc`.
+- **Partial:** Sebastian Casalaina-Martin, Samuel Grushevsky, Klaus Hulek,
+  and Radu Laza, *Extending the Prym map to toroidal compactifications of the
+  moduli space of abelian varieties*, arXiv:1403.1938, later *JEMS* 19
+  (2017).  Read from the cached full PDF: Sections 3.3 and 4, especially
+  Proposition 4.3 and Remark 4.4 on the anti-invariant graph character lattice
+  and edge-square monodromy forms.  Cache key `arXiv:1403.1938`; SHA-256
+  `6b5cda29ef536166280c508db27838844914ce2d652abfe0cbf3d808a9236ecd`.
 
 The first source supplies the quartic geometry, rational $S_6$ type, and
 nonconstant elliptic factor.  The second supplies the classical $A_5$
@@ -551,18 +553,31 @@ python3 notes/2026-08-10-c904-petersen-prym-boundary.py
 python3 notes/2026-08-10-c904-petersen-prym-boundary-replay.py
 ```
 
-The tracked certificate records the cross-ratio orbit, the rational-map
-identity, the tight frames, and the twelve-gluing orbit.  It does not certify
-the geometric Picard--Lefschetz identification.
+Full four-cusp Prym certificate and independent admissible-cover replay:
+
+```sh
+python3 notes/2026-08-10-c904-quartic-prym-cusp-widths.py --check
+python3 notes/2026-08-10-c904-quartic-admissible-cover-widths.py
+```
+
+The tracked certificates record the cross-ratio orbit, rational-map identity,
+tight frames, twelve-gluing orbit, graph-cover classification, saturated
+signed-cycle lattices, and their exact integral root--weight isometries.  The
+CKS ruling-character identification and standard Prym polarization formula
+remain human geometric inputs.
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-08-10-c904-quartic-shadow-modular.py` | 7908 | `350a9ad0f58c27558f25ef4aa331dd6705ec4b2c192b8140a8056ff8da395d85` |
-| `notes/2026-08-10-c904-quartic-shadow-modular-replay.py` | 3361 | `8a8aa9af829f5520b411bf36392aaeeb5734af4e6ea40781a5b40ecbdd6261ce` |
-| `notes/2026-08-10-c904-quartic-shadow-modular.out` | 314 | `bb27678b549d127afb22a16c081b7ee76ed13c3d6cf7d8a6ab38cb2a4abb710f` |
+| `notes/2026-08-10-c904-quartic-shadow-modular.py` | 7941 | `253015daca31df1cdd11ecf8ce610af91041eea6074d6244ed514fed7ebe0be3` |
+| `notes/2026-08-10-c904-quartic-shadow-modular-replay.py` | 3347 | `88b60840f5de5b7ec1515fd6b5ddefa4e743f608c8a3b18a7a9b317c096fe407` |
+| `notes/2026-08-10-c904-quartic-shadow-modular.out` | 301 | `b0609450bb8fd6745f995dae3cea9a500bc7ea1ee450fc809eac4c0424b1442c` |
 | `notes/2026-08-10-c904-petersen-prym-boundary.py` | 6451 | `759742c4ce666daea82972c038ecbd79bb60e7fa38992c9b6a14f03678a5cd2b` |
 | `notes/2026-08-10-c904-petersen-prym-boundary-replay.py` | 2251 | `3c549a95fb582ee8a326c03515509fd4e765252767f51b7e633d613c05cee841` |
 | `notes/2026-08-10-c904-petersen-prym-boundary.out` | 259 | `af04d7a5d9ef55d0e072c709ed408ec134e15b78937461a7c7f1f25ba879935a` |
+| `notes/2026-08-10-c904-quartic-prym-cusp-widths.py` | 10744 | `5be0c8114acff7eadbd464d33868611088c332bbb2c3a40742f0b917863a6913` |
+| `notes/2026-08-10-c904-quartic-prym-cusp-widths.out` | 591 | `0b16c98363c664095902c2685689b22bca2cbe7903f64ce3365bea39536601ef` |
+| `notes/2026-08-10-c904-quartic-admissible-cover-widths.py` | 9178 | `cce8266832b245d05546aff72a649cf033db5ea57bc03dd8fbd1b56f0f60d2ff` |
+| `notes/2026-08-10-c904-quartic-admissible-cover-widths.out` | 541 | `5db590ca5d3f622ca2b6b242b4a1dd3fb0b3c37b41f5661232d95ca5b575b131` |
 
 ## 9. Mystery ledger
 
@@ -577,16 +592,13 @@ the geometric Picard--Lefschetz identification.
   gluings are the $3\cdot4$ local projective lines at two and three.
 - **Settled:** the quartic discriminant divisor and the $X_0(6)$ cusps define
   isomorphic unordered four-pointed lines.
-- **Open, exact gate:** identify the four primitive Picard--Lefschetz
-  transvections and cusp widths.  The gate is now reduced to the
-  anti-invariant homology and edge-square forms of three explicit admissible
-  graph double covers, plus the CKS voltage-character identification.  This
-  owns the displayed $y(t)$ and $T(t)$ formulas.
-- **Settled, finite boundary theorem:** the Petersen graph has exactly three
+- **Settled:** the four primitive admissible-cover forms have widths
+  $1,2,3,6$, fixing the displayed $y(t)$ and $T(t)$ formulas.
+- **Settled, integral boundary theorem:** the Petersen graph has exactly three
   connected $A_5$-equivariant double covers, split as $1+2$ by $S_5$; each
   member of the pair has signed-cycle Gram lattice $6A_5^\vee=6I-J$, exactly
-  the cubic six-axis lattice.  Geometric realization by the $\tau=\pm1$ CKS
-  covers remains explicitly open.
+  the cubic six-axis lattice.  CKS Corollary 4.9 identifies the pair
+  geometrically with the $\tau=\pm1$ covers.
 - **Open, Annals gate:** build the relative algebraic correspondence between
   the classical quartic and exotic cubic branches and control its integral
   descent and boundary.
