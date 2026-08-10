@@ -523,12 +523,12 @@ endpoint polynomial
 \[
  \Pi(T)=\operatorname{Res}_U(F(U,T),Q_{\rm du}(T,U))
        =\prod_{i=1}^nQ_{\rm du}(T,y_i-Tx_i),
- qquad \deg\Pi\le2n.                                   \tag{23q}
+ \qquad \deg\Pi\le2n.                                   \tag{23q}
 \]
 Multiplicativity of the resultant and \(F_t=G_t^2H_t\) give
 \[
  \boxed{
- \Pi(t)=operatorname{Res}_U(G_t,Q_{\rm du}(t,U))^2
+ \Pi(t)=\operatorname{Res}_U(G_t,Q_{\rm du}(t,U))^2
         \operatorname{Res}_U(H_t,Q_{\rm du}(t,U)).}    \tag{23r}
 \]
 Hence, including the zero case,
