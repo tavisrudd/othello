@@ -1,0 +1,79 @@
+{
+  "a5_element_order_counts": {
+    "1": 1,
+    "2": 15,
+    "3": 20,
+    "5": 24
+  },
+  "base_certificate_sha256": "1a8717efc476cc7e978cafb33af391470fe071d2c97841ddd3bf4201137b776b",
+  "f11_rational_point_count": 12,
+  "f11_stabilizer_order_counts": {
+    "5": 12
+  },
+  "f121_projective_line_points": 122,
+  "field_model": "F_11[u]/(u^2-2)",
+  "fixed_pair_fibre_sizes": {
+    "2": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "3": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "5": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  "free_locus_is_one_regular_orbit_over_f121": true,
+  "geometric_stabilizer_order_counts": {
+    "1": 60,
+    "2": 30,
+    "3": 20,
+    "5": 12
+  },
+  "normalizer_orders": {
+    "2": [
+      4
+    ],
+    "3": [
+      6
+    ],
+    "5": [
+      10
+    ]
+  },
+  "schema": "paper-v-icosahedral-stabilizer-tower-v1",
+  "unique_exact_stabilizer_subgroups": {
+    "1": 1,
+    "2": 15,
+    "3": 10,
+    "5": 6
+  }
+}
