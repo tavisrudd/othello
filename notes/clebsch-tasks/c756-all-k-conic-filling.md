@@ -19,6 +19,8 @@ over every finite field.  At \(k=14\), none of the 96 exact \(q=61\) mixed
 leaves admits a thirteenth line, so that field also closes.  At \(q=67\) the
 mixed branch has no thirteen-line star, while all 92 all-passant stars fail
 already at \(E_{12}\).  The fixed-size frontier is exactly \(q=71,73\).
+At q=71 the all-passant branch has no thirteen-line star, so only the mixed
+branch remains at that field.
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -328,10 +330,18 @@ the only unresolved k=14 fields are q=71 and q=73.  Authorities:
 notes/2026-08-09-c756-k14-ledger-q61-closure.md and
 notes/2026-08-09-c756-q67-k14-closure.md.
 
+### \(q=71,k=14\): all-passant branch closed
+
+The complete anisotropic all-passant search visits 22,579,655 recursion
+states across all 36 normalized seed representatives and has no thirteen-line
+geometric star.  Thus only the mixed external-deletion branch remains at
+q=71.  Authority:
+notes/2026-08-10-c756-q71-k14-all-passant-closure.md.
+
 ## Ordered next actions
 
-1. Shard the q=71 thirteen-line mixed and all-passant searches and test
-   \(E_8\) first at every leaf.
+1. Complete the q=71 thirteen-line mixed search and test \(E_8\) first at
+   every leaf; the all-passant branch is already closed geometrically.
 2. Keep q=73 and its \(E_6\) window behind the q=71 feasibility gate.
 3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
@@ -392,7 +402,8 @@ Do not:
   geometric mixed leaves fail \(E_6=0\), and the other remaining rows have no
   twelve-line star.
 - \(k=14\): q=61 closes by exact nonextension; q=67 has no mixed star and
-  all 92 all-passant stars fail \(E_{12}\); exactly q=71,73 remain.
+  all 92 all-passant stars fail \(E_{12}\); at q=71 the all-passant branch has
+  no star; exactly q=71,73 remain, with only mixed geometry live at q=71.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
