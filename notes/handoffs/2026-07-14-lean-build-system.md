@@ -2,8 +2,8 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-08-04
-**Status**: ACTIVE — C879 is replacing the Q11 and Q16 packages with branded Mathlib-only local
-models and cheap downstream compatibility bridges before either package is sealed again
+**Status**: ACTIVE — C879 is separating paper/shared human layers from frozen Mathlib-only
+certificate packages; Q11 and Q16 are sealed behind cheap downstream compatibility bridges
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -131,7 +131,7 @@ trust, axiom, and clean-replay evidence is never reused by file hash.
 ## Active frontier, in order
 
 **C891 closed (2026-08-08): the complete paper-extraction map is current.**
-The C879 map now checks all sixteen paper records, fourteen standalone
+The C879 map now checks all seventeen paper records, fifteen standalone
 repositories, twelve tracked export areas, and every AME module; it records
 secondary-entry-point aliases, absent export areas, the MDS--CSS dependency on
 AME--LU, and the two unresolved Clebsch companion bindings.  Its read-only
@@ -237,19 +237,15 @@ Lean source, package, mirror, or remote changed.  Full report:
    tree is coherent, the release-chain replay, the atomic finitegeom re-export and package re-seal, the
    q13/q25 packages, the portfolio audit, the Arcs/Clebsch-rigidity trust disposition, and the
    all-paper export replay.
-2. **C879 paper-boundary extraction design.** After C864, establish the ownership/import manifest,
-   shared-library boundaries, paper subdirectories, import firewalls, extraction order, and
-   clean-replay acceptance gate described in `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`;
-   the design does not authorize source moves or repository splits by itself.
-   Q11 and Q16 are explicitly authorized foundation work: finish each package's dependency,
-   namespace, generated-source, manifest, and scholarly-prose audit before its single expensive
-   rebuild; preserve no legacy namespace compatibility inside either certificate package.
-   The AME--LU and MDS--CSS entries of that plan and of its module-name mapping are audited in
-   [`../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md`](../2026-08-06-c879-ame-lu-mds-css-mapping-audit.md)
-   and carry open corrections: sixteen AME--LU modules assigned to no group, the trust-declared
-   two-uniform rigidity gate missing entirely, the MDS--CSS dependency on nine AME--LU gates
-   undeclared, and `Shared.AMELU` chosen by transitive reachability rather than declaration-level
-   review.
+2. **C879 paper-boundary extraction.** Execute the ownership/import manifest, final
+   `TavisRuddFiniteGeom` namespaces, import firewalls, extraction order, and clean-replay gates in
+   `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`. Q11 and Q16 are branded,
+   Mathlib-only, sealed, and cached; their bridges hash the frozen aggregate artifacts and never
+   invoke a certificate build target. The live mapping covers seventeen paper records, fifteen
+   standalone repositories, twelve export areas, and all AME--LU modules. Next remove the remaining
+   finitegeom reverse edges from the projective-cap Q11, Q13, and Q25 certificate packages using
+   package-local statement models plus proved downstream adapters; do not touch those source trees
+   until their tracked `.gitignore` modifications are owned or cleared.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
