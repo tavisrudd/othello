@@ -176,7 +176,9 @@ Frobenius-semilinear digit tower: for \(p\ge5\) every level
 Lucas selects the corresponding base-\(p\) digit of the Laurent index.  If
 the descended digit maps have zero common kernel on the ghost quotient, the
 extension conic lemma follows; otherwise only their common kernel must meet
-the genuinely nonlinear \(j=2\) equation.
+the genuinely nonlinear \(j=2\) equation.  The latter clause is essential:
+dimension alone forces tower kernels of dimension at least one for \(q=25\)
+and at least five for \(q=27\).
 Multiplying back the root
 divisor of \(S\) packages the entire hierarchy as a full-field norm
 identity: the two completely split degree-\(q\) products

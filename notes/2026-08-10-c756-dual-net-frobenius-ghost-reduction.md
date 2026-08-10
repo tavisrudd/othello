@@ -420,7 +420,7 @@ three.  What remains is to exploit their simultaneous dependence on the
 same completely split factor \(R\), together with the genuinely nonlinear
 quadratic rung (40).
 
-This yields a sharp intermediate theorem target.  Write
+This yields a sharp intermediate carrier.  Write
 \(\mathcal G_R=\mathcal V_R/\mathcal C_R\), and let
 \(I_{p,e}\) be the available digit levels above.  Each map in (45) descends
 to \(\overline{\mathcal L}_{R,a}\) on \(\mathcal G_R\).  Therefore
@@ -430,11 +430,24 @@ to \(\overline{\mathcal L}_{R,a}\) on \(\mathcal G_R\).  Therefore
  \ker\overline{\mathcal L}_{R,a}=0}                       \tag{48}
 \]
 for every complementary split factor \(R\mid X^q-X\) would by itself prove
-the special-direction conic lemma over all proper extensions.  If (48)
-fails, its common kernel is the exact residual space on which to impose the
-quadratic equation (40).  This gate is independent of a fixed field size:
-prove digit-tower injectivity, or classify its kernel uniformly and kill it
-with the first non-Frobenius rung.
+the special-direction conic lemma in any parameter range where it holds.  It
+cannot be the universal theorem without a kernel clause.  Indeed, at
+\(q=25\) the ghost quotient has dimension four, while the only nontrivial
+Frobenius rung \(a=1\) has just three visible coefficients
+\((1\le r\le3)\), so its kernel has dimension at least one.  At \(q=27\)
+the quotient has dimension eight and the \(a=1\) rung has only the three
+visible indices \(r=1,2,3\), so its kernel has dimension at least five.
+These are dimension deductions, not census results.
+
+Thus the universal object is
+\[
+ \mathcal K_R=igcap_{a\in I_{p,e}}
+   \ker\overline{\mathcal L}_{R,a}.                       \tag{49}
+\]
+The correct theorem target is to determine \(\mathcal K_R\) uniformly,
+prove it zero where dimensions permit, and show that every nonzero class in
+the forced low-characteristic seams violates the quadratic equation (40).
+This is independent of a fixed search window.
 
 ## 7. Structural consequences and routing
 
@@ -560,7 +573,7 @@ through enough of those equations.
 | What is its exact excess dimension modulo conics? | settled | \(q/p-1\), quotient (47) |
 | Is there more information beyond the first ghost? | settled | nonlinear Cartier hierarchy (39) from every odd divided coefficient |
 | Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
-| What semilinear statement would close the extension branch? | open, exact | digit-tower injectivity (48), with (40) only on any common kernel |
+| What semilinear statement would close the extension branch? | open, exact | classify \(\mathcal K_R\) in (49), then impose (40); injectivity alone is dimensionally impossible at \(q=25,27\) |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
 | What remains to prove? | open | couple the ghost supports under \(H_{2j}\equiv H_2^j\pmod R\) and force \(\deg H_2\le2\) |
@@ -569,9 +582,10 @@ through enough of those equations.
 
 Analyze the quadratic Cartier equation (40) together with the simultaneous
 semilinear tower (45) on the two-component Pade space (42).  The exact
-first theorem target is digit-tower injectivity (48) on the
-\(q/p-1\)-dimensional quotient (47).  If it has a common kernel, classify
-that kernel uniformly and apply (40) only there, retaining the compatibility
+theorem target is a uniform classification of the common kernel
+\(\mathcal K_R\) in (49) on the \(q/p-1\)-dimensional quotient (47), with
+the forced \(q=25,27\) kernel dimensions as boundary tests.  Apply (40) on
+that kernel, retaining the compatibility
 \(RS=X^q-X\) and \(H_2\equiv S^2\pmod R\).
 In parallel, test the exact theorem-shaped
 alternative: classify completely split norm pairs satisfying the lacunarity
