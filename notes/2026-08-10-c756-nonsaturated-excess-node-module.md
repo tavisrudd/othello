@@ -411,13 +411,18 @@ statement uniform in \(\delta\).
 
 The two current structural carriers have the same architecture:
 
-| branch | forced rational base | excess carrier | target |
+| branch | forced Frobenius base | finite excess carrier | all-\(q\) target |
 |---|---|---|---|
-| saturated-internal | roots of \(X^q-X=RS\) | complementary factor \(S\) and Laurent ghosts of \(S^3/(X^q-X)\) | force \(S^2\bmod R\) to have degree at most two |
-| nonsaturated | one node above every root of \(T^q-T\) | \(M=A/\pi^*B\), dimension \(\delta\) | obstruct the conic square class on the intercept flag |
+| saturated-internal | \(X^q-X=RS\) | \(\mathcal G_R=\mathcal V_R/\mathcal C_R\), dimension \(q/p-1\) | prove digit-tower injectivity, then use the quadratic Cartier rung on any common kernel |
+| nonsaturated | one node over every root of \(T^q-T\) | \(M=A/\pi^*B\), dimension \(\delta\), with second excess \(J_P\) of degree \(\delta-r\) | control \(\operatorname{Res}(J_P,\Sigma)\) from the conic-Gram matching sums |
 
 In both cases the correct operation is quotienting on the Frobenius-fixed
-finite base.  Neither branch is helped by extending the fixed-field census.
+finite base.  The residual statement is then finite-dimensional for a
+structural reason, but its dimension is a formula in \(q\) or \(\delta\),
+not a fixed search window.  This is the reusable pattern for the all-\(q\)
+proof: forced Moore/Frobenius factor, canonical excess quotient, then a
+Cartier or discriminant obstruction on that quotient.  Neither branch is
+helped by extending the fixed-field census.
 
 ## EJ + TT closeout
 
