@@ -8,8 +8,8 @@
 # This boundary carries the reusable geometry and the kernel-checked step and
 # reduction semantics.  The exhaustive order-sixteen transition, row, and leaf
 # families are not part of it: they belong to the separately pinned
-# finitegeom-q16-certificates package, which depends on this library in one
-# direction only.
+# finitegeom-q16-certificates package.  The downstream paper bridge imports
+# both this human-scale library and that Mathlib-only certificate package.
 
 schema_version = 1
 area = "arcs_complete_outside_conic"
@@ -27,8 +27,8 @@ classification definitions, and the kernel-checked step and reduction semantics.
 
 The exhaustive order-sixteen transition, row, and leaf families are absent from
 this repository.  They are distributed by the separately pinned
-`finitegeom-q16-certificates` package, which depends on this library in one
-direction.  That package supplies the exhaustive classification and proves the
+`finitegeom-q16-certificates` package, which imports Mathlib only.  A downstream
+paper bridge combines it with this library.  The certificate package supplies the
 exact order-sixteen exclusion and the value of the completion threshold; the
 boundary exported here proves the two-sided bound alone.
 """

@@ -1,191 +1,92 @@
 {
   "declarations": {
-    "RelativeConicArcs.Conic.completeOutside_bound_general": {
+    "TavisRuddFiniteGeom.Certificates.Q16.Data.books4_valid": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs/Conic.lean",
-      "origin": "dependency"
-    },
-    "RelativeConicArcs.Q16Classification.arbitrary_eight_arc_classification_chain": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.arbitrary_eight_arc_projectiveQuadraticAvoidance": {
+    "TavisRuddFiniteGeom.Certificates.Q16.Data.books5_valid": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.eval_pullbackQuadratic": {
+    "TavisRuddFiniteGeom.Certificates.Q16.Data.books6_valid": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16QuadraticTransport",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.exceptionalFormOne_factorization": {
+    "TavisRuddFiniteGeom.Certificates.Q16.Data.books7_valid": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.exceptionalFormThree_factorization": {
+    "TavisRuddFiniteGeom.Certificates.Q16.Data.rejectedLeaves_valid": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.exceptionalFormTwo_arc_hits": {
+    "TavisRuddFiniteGeom.Certificates.Q16.exhaustive_local_certificate": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.exceptionalFormTwo_conic_equation": {
+    "TavisRuddFiniteGeom.Certificates.Q16.level8_quadraticAvoidance": {
       "axioms": [
         "Classical.choice",
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     },
-    "RelativeConicArcs.Q16Classification.exceptionalKernelOne": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.exceptionalKernelThree": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.exceptionalKernelTwo": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.exceptional_arcs_mem_level8": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.exceptional_leaf_records": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.exceptional_records_mem_rejectedLeaves": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16ExceptionalArithmetic",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.level8_quadraticAvoidance": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16QuadraticAvoidance",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.pullbackQuadratic_ne_zero": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16QuadraticTransport",
-      "origin": "package"
-    },
-    "RelativeConicArcs.Q16Classification.rejection_profile": {
+    "TavisRuddFiniteGeom.Certificates.Q16.rejection_profile": {
       "axioms": [
         "Quot.sound",
         "propext"
       ],
-      "module": "RelativeConicArcs.Q16Profile",
-      "origin": "package"
-    },
-    "RelativeConicArcs.no_completeOutside_GF16_card_eight": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16Result",
-      "origin": "package"
-    },
-    "RelativeConicArcs.rhoC_GF16": {
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ],
-      "module": "RelativeConicArcs.Q16Result",
+      "module": "TavisRuddFiniteGeom.Certificates.Q16.Verification.AxiomAudit",
       "origin": "package"
     }
   },
   "dependency": {
-    "commit": "a7665be682907cab5c99b10e3a39a9fc289e2cb3",
-    "repository": "https://github.com/tavisrudd/finitegeom"
+    "commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+    "repository": "https://github.com/leanprover-community/mathlib4"
   },
   "evidence": {
     "axiom_log": "evidence/gate-axioms.log",
-    "axiom_log_sha256": "5fe9ebc40f6f684cb7c220f7120965e62fd561da550b65d34fc7fad7b299dbb7",
-    "replay": "lake build --no-build RelativeConicArcs.Gates.Q16CertificateTrust"
+    "axiom_log_sha256": "9a560ac4603e2b1eba3f0ad955abe4b846aa3b3ba5533320f159ad0062c22c96",
+    "replay": "lake build --no-build TavisRuddFiniteGeom.Certificates.Q16"
   },
-  "gate": "RelativeConicArcs.Gates.Q16CertificateTrust",
+  "gate": "TavisRuddFiniteGeom.Certificates.Q16",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
-  "manifest_sha256": "100e1fea3c458f37737d779dadab62954459b3f2d45d982bdda464bb64f8d5d3",
+  "manifest_sha256": "0d27f360edf8e85022195a04edbe7bdda30ba4517071dd7c19719d2bd3983bbc",
   "package": "finitegeom-q16-certificates",
   "repository": "https://github.com/tavisrudd/finitegeom-q16-certificates",
   "schema_version": 1,
-  "source_commit": "d780520bc995df9db2575b52261786a1142649b0",
-  "terminal": "RelativeConicArcs.rhoC_GF16"
+  "source_commit": "27fcf2b71bf64413c2250cb5921ba8e548e6e6be",
+  "terminal": "TavisRuddFiniteGeom.Certificates.Q16.exhaustive_local_certificate"
 }

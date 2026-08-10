@@ -3,22 +3,14 @@ schema_version = 1
 [[package]]
 name = "finitegeom-q16-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-q16-certificates"
-commit = "0b04429b6da2226f5cb53d299264cb782e54e000"
-manifest_sha256 = "100e1fea3c458f37737d779dadab62954459b3f2d45d982bdda464bb64f8d5d3"
-gate = "RelativeConicArcs.Gates.Q16CertificateTrust"
-terminal = "RelativeConicArcs.rhoC_GF16"
+commit = "f8b39a43f48ce661d4fadcda040cb43330fed547"
+manifest_sha256 = "0d27f360edf8e85022195a04edbe7bdda30ba4517071dd7c19719d2bd3983bbc"
+gate = "TavisRuddFiniteGeom.Certificates.Q16"
+terminal = "TavisRuddFiniteGeom.Certificates.Q16.exhaustive_local_certificate"
 trust_fact = "external/finitegeom-q16-certificates.json"
-trust_fact_sha256 = "bd1304f11dd59c2ef271861f3e9fcfb47341bd2c884e6066d7fa5a8780e52496"
+trust_fact_sha256 = "73717f01a4ad9e3cf83839e6193232ef6d7c85bceb1937bf4e13f72be681e3f4"
 owned_module_prefixes = [
-  "RelativeConicArcs.Q16Certificate",
-  "RelativeConicArcs.Q16ExceptionalArithmetic",
-  "RelativeConicArcs.Q16LeafData",
-  "RelativeConicArcs.Q16Profile",
-  "RelativeConicArcs.Q16QuadraticAvoidance",
-  "RelativeConicArcs.Q16QuadraticTransport",
-  "RelativeConicArcs.Q16Reduction",
-  "RelativeConicArcs.Q16Result",
-  "RelativeConicArcs.Q16StepKernel",
+  "TavisRuddFiniteGeom.Certificates.Q16",
 ]
 forbidden_artifact_basenames = [
   "analyze_c201_q16.py",
@@ -34,15 +26,15 @@ name = "finitegeom-clebsch-q11-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
 commit = "930675c6b8bf44e06847d15bd6e63560caa6977f"
 manifest_sha256 = "e7b4ed31ec72fb40b72c508fbd9b3f9d7c95aa792111396af4852c0773f9e501"
-gate = "RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates"
-terminal = "RelativeConicArcs.Examples.Q11A5PointOrbits.twoGenerator_pointOrbit_partition"
+gate = "TavisRuddFiniteGeom.Certificates.Q11"
+terminal = "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition"
 trust_fact = "external/finitegeom-clebsch-q11-certificates.json"
 trust_fact_sha256 = "33deb74507ecce5c3e9a32b199cbb7dc4350082a66222675d5591488960899e2"
 owned_module_prefixes = [
-  "RelativeConicArcs.Q11A5PointOrbits",
+  "TavisRuddFiniteGeom.Certificates.Q11",
 ]
 forbidden_artifact_basenames = [
-  "generate-q11-a5-point-action.py",
+  "generate-q11-point-action.py",
 ]
 
 # Generated families still resident in the monorepo, each named with the official package

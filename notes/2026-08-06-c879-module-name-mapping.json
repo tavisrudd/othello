@@ -22,14 +22,16 @@
       "policy": "Keep Gate/gate in manifests, trust-spine data, build targets, and audit tooling. It is not the reviewer-facing name of a paper closure. Do not rename the gate field in certificate-packages.toml: it is a stable tooling key and the frozen q11/q16 package contracts use it."
     }
   },
-  "frozen_external": [
+  "standalone_certificates": [
     {
       "repository": "finitegeom-clebsch-q11-certificates",
-      "reason": "separately versioned certificate source; preserve existing module, gate, audit names and API"
+      "namespace": "TavisRuddFiniteGeom.Certificates.Q11",
+      "reason": "separately versioned Mathlib-only certificate source; downstream bridges own compatibility"
     },
     {
       "repository": "finitegeom-q16-certificates",
-      "reason": "separately versioned certificate source; preserve existing module, gate, audit names and API"
+      "namespace": "TavisRuddFiniteGeom.Certificates.Q16",
+      "reason": "separately versioned Mathlib-only certificate source; downstream bridges own compatibility"
     }
   ],
   "inventory": {
@@ -956,7 +958,7 @@
     "Derive candidate ownership from the union of trust-declared gates, tracked export configurations, and the paper registry; absence from an export configuration is a disposition requiring review, not evidence that a gate is unowned.",
     "Before replacing a module exported by another area, compare its declaration set and every reverse consumer; byte identity inside the active closure is insufficient if declarations outside that closure would disappear.",
     "A paper registry alias or secondary entry point shares its named formal_surface_of package and does not create a duplicate Lean ownership boundary.",
-    "Do not rename q11 or q16 certificate-repository modules.",
+    "Q11 and Q16 certificate modules use only their branded TavisRuddFiniteGeom.Certificates namespaces; no RelativeConicArcs compatibility namespace remains in either certificate package.",
     "Every PaperInterface and shared public interface gets its own exact verification target.",
     "Every mapping that changes a paper-facing Lean module synchronizes finitegeom and all affected paper repositories before closeout."
   ]
