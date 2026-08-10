@@ -561,6 +561,10 @@ With \(y_e=\tau_e+\tau_e^{-1}+2=4Q_e/\psi(t)\), this is simply
 \]
 The second equality is for \(y_e\ne4\); at the fixed-axis value \(y_e=4\)
 its left side is zero.
+The torus boundary \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two.
+Every covered tangent fibre forces \(c/\eta\) square, splits as
+\(s=\pm\sqrt{c/\eta}\,r\), and has
+\(\sigma_t=c\sum_e r_e^2\).
 This is the \(c\ne0\) branch.  If \(c=0\), then
 \(q_i-q_j=((y_i-y_j)W-T(x_i-x_j))(bT+eW)\), so every mirror collision lies
 over one projective direction and

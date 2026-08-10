@@ -869,6 +869,30 @@ intersections across all directions.  This is nevertheless a
 field-independent one-dimensional target, rather than an arbitrary
 isotropic vector in \(\mathbb F_q^{\mu_t}\).
 
+The omitted tangent fibres form a uniformly bounded support.  Put
+\[
+ K_{\rm tan}=\gcd(K_P,\psi),
+ \qquad \deg K_{\rm tan}\le2.                           \tag{23bh}
+\]
+If \(t\) is a covered root of \(\psi\), then (23ao) becomes
+\[
+ \eta s_e^2=c\,r_e(t)^2.
+\]
+The node value is nonzero, so \(r_e,s_e\ne0\); consequently
+\(c/\eta\) must be a square.  The tangent member of the quadric pencil
+splits into the two lines
+\(s=\pm\sqrt{c/\eta}\,r\), and
+\[
+ \boxed{
+ \sigma_t=c\sum_{e\in\mathcal M_t}r_e(t)^2,
+ \qquad
+ \sigma_t=0\Longleftrightarrow\sum_e r_e(t)^2=0.}       \tag{23bi}
+\]
+Thus every root of \(K_P/K_{\rm tan}\) is governed by the norm-one torus
+equations (23ba)--(23bg), while all tangent exceptions lie on a reduced
+support of degree at most two.  They retain a component-sign problem, but
+not an unbounded new family of fibre geometries.
+
 The degree-two polynomial \(L\) is the endpoint inertia tensor about the
 conic center.  Set
 \[
