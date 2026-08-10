@@ -823,7 +823,9 @@ terminal statements; neither terminal obstruction is yet closed.
    the commuting mirror/deck involutions and the rank-two reflected Gram
    correction.  Prove that the endpoint-coherent norm-one coordinates
    cannot satisfy the bi-character zero sum \(\sum_e y_e=0\), then evaluate
-   the nonzero product on \(K_{\rm odd}\).  The \(c=0\) exceptional mirror
+   the nonzero product of the same sums \(S_t=\sum_e y_e\) on
+   \(K_{\rm odd,sm}\); the remaining factor is
+   \(\operatorname{Res}(K_{\rm odd,sm},\psi)\).  The \(c=0\) exceptional mirror
    fibre is already explicit.
 
 ## Stop rules

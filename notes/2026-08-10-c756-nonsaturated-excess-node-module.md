@@ -1874,6 +1874,7 @@ prove nonexistence.
 | Is the mirror coordinate-dependent? | no | quadric involution (23ag), commuting with deck |
 | Is there a uniform quotient model? | settled | centered sign norm (23ap)--(23at) |
 | What is zero trace on a smooth direction fibre? | settled structurally | norm-one torus equation (23bd), or bi-character zero sum (23bf)--(23bg) |
+| Does the smooth parity law need a different carrier? | no | the same torus sum \(\mathcal S\), with explicit \(\psi\)-resultant factor (23bp)--(23bq) |
 | How large is the tangent exception? | settled | \(K_{\rm tan}=\gcd(K_P,\psi)\) has degree at most two, with split-line trace (23bi) |
 | What happens when the pencil center is isotropic? | settled | mirror support has degree at most one and its trace is explicit, (23z0)--(23z2) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
@@ -1893,7 +1894,8 @@ the lifted-node coordinates
 \(\xi_e\), or their norm-one quotients \(\tau_e\), across endpoint-conic
 incidences.  The exact first target is to rule out the bi-character zero sum
 (23bg) coherently across directions; the second is to evaluate the product
-of the nonzero traces on \(K_{\rm odd}\).  The \(c=0\) mirror fibre is already
+of the nonzero \(S_t\) in (23bq).  The remaining smooth conic factor is the
+explicit resultant of \(\psi\).  The \(c=0\) mirror fibre is already
 explicit by (23z2), and the tangent support has degree at most two by
 (23bh)--(23bi).  Do not replace this value-level problem by the
 Euler-character projection or a fixed-field census.
