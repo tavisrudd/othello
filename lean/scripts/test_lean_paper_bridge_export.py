@@ -59,6 +59,14 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("finitegeom_source", text)
         self.assertIn("certificate_source", text)
 
+    def test_verifier_builds_only_mathlib_before_certificate_no_build(self) -> None:
+        text = MODULE.flake(self.bridge())
+        dependency = text.index("lake build Mathlib")
+        certificate = text.index(
+            "lake build --no-build TavisRuddFiniteGeom.Certificates.Sample"
+        )
+        self.assertLess(dependency, certificate)
+
     def test_materialization_carries_immutable_license(self) -> None:
         original_blob = MODULE.blob
         try:

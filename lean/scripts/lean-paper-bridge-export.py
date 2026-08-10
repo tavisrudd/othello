@@ -105,6 +105,7 @@ def flake(bridge: dict) -> str:
               certificate_root=".lake/packages/{package}"
               test -d "$certificate_root"
               (cd "$certificate_root" && lake unpack "$certificate_pack")
+              (cd "$certificate_root" && lake build Mathlib)
               (cd "$certificate_root" && lake build --no-build {gate})
               lake build {module}
             '';
