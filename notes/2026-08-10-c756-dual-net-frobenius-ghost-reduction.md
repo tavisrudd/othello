@@ -1302,6 +1302,10 @@ through enough of those equations.
 | Can the common semilinear kernel be linearized explicitly? | settled | stacked Cartier--Toeplitz matrix \(\mathbb M_R\), formula (74) |
 | Where is a tower kernel forced dimensionally? | settled | exactly the live seams \(q=25,27,81\), formula (78) |
 | Does the non-shadow rung descend to the ghost quotient? | no | mixed conic--ghost terms require the bundle map (79)--(82) |
+| What happens to the tangent map for \(p\ge7\)? | settled | it vanishes, leaving the pure quadratic normal cone (85)--(86) |
+| Does that quadratic cone have a structured matrix model? | settled | diagonal Reed--Solomon Gram pencil (93)--(97) |
+| Can a surviving nonshadow word be localized? | no | Frobenius-strided MDS bound (98)--(100) |
+| Can a common Cartier-kernel word be localized? | no | power-rung gcd bounds (101)--(103) force macroscopic support |
 | What matrix statement would close the extension branch? | open, exact | control the determinantal rank strata of \(\mathbb M_R\), then prove nonlinear bundle rigidity (82) |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
@@ -1318,6 +1322,11 @@ the common kernel \(\mathcal K_R\) in (49) on the
 the forced \(q=25,27,81\) kernel dimensions as boundary tests.  Apply \(j=3\)
 at \(q=25\), and \(j=2\) at \(q=27,81\), retaining the compatibility
 \(RS=X^q-X\) and \(H_2\equiv S^2\pmod R\).
+For \(p\ge7\), work with the restricted diagonal Gram pencil (97) and prove
+that its projective base locus on \(\ker\mathbb M_R\) is empty; use the
+macroscopic support bound (102), not a generic-quadrics heuristic.  In
+characteristics three and five, use the weighted evaluation normal rows
+(95) for transversality before the residual quadratic/cubic terms.
 Equivalently, work directly with the barycentric weights and prove from the
 Lucas-visible moment system (53) that \((w_i^2)\) is a quadratic evaluation
 vector.  On the forced \(q=25,27,81\) seams, use the native-plus-reflected

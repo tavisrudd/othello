@@ -60,8 +60,21 @@ quadratic-character resultant only on the odd-multiplicity support
 \(K_{\rm odd}\).  Writing the node conic values as \(\eta s^2\) identifies
 zero trace with isotropy and lifts all nodes to the smooth branched quadric
 \(\mathscr X_\eta\).  On its direction-conic pencil, each trace is the trace
-of \(z^2\) over the doubled repeated-node divisor.  Deriving the resulting
-cross-direction divisor trace law is the current exact nonsaturated gate.
+of \(z^2\) over the doubled repeated-node divisor.
+
+The complementary divisor law is now explicit:
+\(\Sigma_3=(L-\Upsilon_3)/2\), where \(L\) is the endpoint inertia quadratic
+and \(\Upsilon_3\) is the unmatched trace.  Its norm square class is carried
+by the typed endpoint product \(\Pi\).  After centering the conic, ordinary
+and mirror value collisions are the two factors \(r_i-r_j\) and \(r_i+r_j\);
+the whole value polynomial is the sign norm
+\((-1)^n\mathcal A(Z)\mathcal A(-Z)\).  The mirror is a genuine quadric
+involution, and the only failure of ordinary value-gcd extraction lies on
+\(\gcd(K_P,\Theta_Q)\).  On nonzero norm fibres, zero trace is the universal
+norm-one-torus equation (23bd), equivalently the bi-character zero sum
+(23bf)--(23bg).  The current exact gate is to derive an endpoint-coherent
+relation among those torus coordinates, then evaluate the zero norm and
+odd-support resultant.  No all-\(k\) contradiction is claimed yet.
 
 ## 1. The reduced node cover
 
@@ -1705,7 +1718,10 @@ prove nonexistence.
 | Can the conic class be coupled to the intercept flag canonically? | settled | weighted determinant (22), reduced globally to (28) |
 | Is there an orthogonal model for the weighted form? | settled | square-root projector (23b); zero trace is isotropy (23c) |
 | Are the square-root signs globally geometric? | settled | rational node lifts on the branched quadric \(\mathscr X_\eta\), formula (23d) |
-| What divisor carries a direction trace? | settled | doubled repeated-node divisor (23e), with trace formula (23f) |
+| What divisor carries a direction trace? | settled | doubled repeated-node divisor and scheme-theoretic unmatched pullback (23e), with trace formula (23f) |
+| Is there an exact complementary trace law? | settled | \(\Sigma_3=(L-\Upsilon_3)/2\), formulas (23g)--(23k) |
+| Does the unmatched divisor also have a norm invariant? | settled | typed endpoint product \(\Pi\), formulas (23q)--(23w) |
+| What does the all-center collision energy measure? | settled | total Hilbert length \(\rho=\sum_d\dim M^{[d]}\), with \(\deg J_P\le\rho-\delta\), formulas (47g)--(47k) |
 | Can the unknown product be bounded by defect? | settled | resultant (36) on the degree-\(\delta-r\) second excess polynomial \(J_P\) |
 | Is the second excess intrinsic? | settled | module \(M^{[1]}\) and determinant identity (46) |
 | Is there a carrier for every multiplicity layer? | settled | intercept-degree filtration (42)--(44) |
@@ -1715,19 +1731,27 @@ prove nonexistence.
 | Which fibres affect the nonzero determinant character? | settled | only odd \(\mu_t\ge3\), formula (51) |
 | Which arrangement data determine the remaining trace? | settled | first two repeated-root coefficients (30), equivalently the Gram matching sum (32) |
 | Is there a cross-direction trace formula? | settled | endpoint-pair interpolation (38), reduced to \(\Sigma_J\) in (40) |
+| What creates accidental conic-value collisions? | settled | conic mirror cover \(\Theta_Q\), cross-resultant (23ac), and overlap support \(K_{\rm mir}\) in (23af) |
+| Is the mirror coordinate-dependent? | no | quadric involution (23ag), commuting with deck |
+| Is there a uniform quotient model? | settled | centered sign norm (23ap)--(23at) |
+| What is zero trace on a smooth direction fibre? | settled structurally | norm-one torus equation (23bd), or bi-character zero sum (23bf)--(23bg) |
+| What happens when the pencil center is isotropic? | settled | mirror support has degree at most one and its trace is explicit, (23z0)--(23z2) |
 | Does the prior Euler-character norm determine this trace? | no | character projection gives the tautology (33) and loses the conic values |
 | Does the abstract module force a contradiction? | no | must use star realization and covering identities |
-| What is the uniform nonsaturated theorem target? | open | excess-module obstruction above |
+| What is the uniform nonsaturated theorem target? | open, exact | endpoint-coherent torus relation controlling the zero norm on \(K_P\) and parity resultant on \(K_{\rm odd}\) |
 
 ## Next action
 
-Evaluate the character of the bounded endpoint-pair resultant
-\(\operatorname{Res}(J_P,\Sigma_3)\) in (49), using the star endpoint
-relations in (38).  Preserve actual conic values: the Euler-character
-projection (33) is too coarse.  First exclude the zero-trace case (50), then
-prove the odd-fibre sign law (51), equivalently the parity resultant (51b).
-Use the dual edge-chain model (47d)--(47f) and retain any coherent
- deck-sign law in the Gram square roots (23a), since (23c) turns zero
-trace into isotropy.  Equivalently, derive a trace/residue law for the
-section \(z^2\) on the hyperplane-conic pencil of \(\mathscr X_\eta\), using
-the doubled-node divisor (23e).  Do not resolve this by a fixed-field census.
+Split \(K_P=K_{\rm mir}K_{\rm tr}\) as in (23af).  On \(K_{\rm tr}\),
+extract the matched-value factor from
+\(\gcd_V(\mathfrak F,\partial_V\mathfrak F)\), equivalently take the sign
+norm of the ordinary repeated-root factor in (23at).  On \(K_{\rm mir}\),
+separate fixed-axis overlap from genuine cross-pair overlap using the
+quadric involution (23ag) and its rank-two Gram correction (23ak).  Retain
+the lifted-node coordinates
+\(\xi_e\), or their norm-one quotients \(\tau_e\), across endpoint-conic
+incidences.  The exact first target is to rule out the bi-character zero sum
+(23bg) coherently across directions; the second is to evaluate the product
+of the nonzero traces on \(K_{\rm odd}\).  The \(c=0\) mirror fibre is already
+explicit by (23z2).  Do not replace this value-level problem by the
+Euler-character projection or a fixed-field census.
