@@ -256,6 +256,27 @@ torsor: Paper I's fixed-conic arcs form
 \(\operatorname{PGL}_2(11)/A_5\), while Paper IV's ordered conic triples form
 a genuine \(\operatorname{PGL}_2(13)\)-torsor.
 
+### Paperwise minimality matrix
+
+There is no honest theorem saying that every displayed shadow is globally
+minimal.  The exact status is:
+
+| passage | least proved shadow | reconstructed output | exact residual fibre | datum killing it | sharpness actually proved |
+|---|---|---|---|---|---|
+| I.a | conic containment of the uncovered locus (equivalently the full uncovered conic at equality) | Clebsch hexagon/code, conic and polarity | fixed-conic orbit \(\operatorname{PGL}_2(11)/A_5\) | a chosen representative/frame | sufficiency at fixed \(q\); all-field companion makes \(q=11\) existence sharp, not the number of observed syndromes |
+| I.b | the two five-valent syndrome orbitals | unordered conference orientation | free \(C_2\) | one triangle sign | one bit necessary and sufficient |
+| II | strength-two trade **plus matching-carrier splitting** | unordered exceptional sheet pair | free \(C_2\) | first nonzero signed moment \(\mu_3\) | degree three sharp among signed tensor moments; affine-line collision makes the carrier gate necessary |
+| III.a | branch sextic plus one complete rational fibre | rational quadratic cover | \(\mathbf Q^\times/(\mathbf Q^\times)^2\) before calibration | fibre residue algebra | branch alone provably insufficient |
+| III.b | all aligned four-sets on \(n\ge7\) marked vertices | two-graph up to complement | free \(C_2\) | one triangle value | threshold seven sharp; displayed decoder not query-optimal |
+| IV | weighted two-section of the minimum supports | code, scheme, group, plane, conic and polarity | structural fibre trivial up to isomorphism; coordinate \(\operatorname{PGL}_2(13)\)-torsor | ordered conic triple only if coordinates are wanted | arity two sharp because unary data are constant |
+| V.a | chordal residue with its \(A_5\)-action | axes and conference class up to opposite | free \(C_2\) | orientation sign | the finite marking is necessary because the bare chordal cubic has \(\operatorname{PGL}_2\) symmetry |
+| V.b | common marked pencil package plus selected chordal line | exact oriented companion return | singleton | none | selected line necessary and sufficient; source reconstruction stops at the declared retained outputs |
+
+Thus “minimal” without a qualifier is licensed only for I.b's bit, II's
+moment degree inside its statistic class, III.b's vertex threshold, IV's
+arity, and V.b's selected-line marking.  Every other entry is a proved
+sufficient shadow with a separately stated obstruction or scope boundary.
+
 ## 4. External-field gateway matrix
 
 The gateway question is assessed with the same profile discipline.
@@ -265,9 +286,9 @@ The gateway question is assessed with the same profile discipline.
 | Segre cubic \(\leftrightarrow\) Igusa quartic | explicit inverse polar formula on (e_5\ne0); the fifteen Segre planes are exactly the exceptional locus | none on the generic marked projective locus; level structure is required for the moduli interpretation | **genuinely birational** |
 | ordered six-point moduli \(\leftrightarrow\) genus-two level-2 data | classical GIT/Torelli-level correspondence on the appropriate open locus | forgetting the level/order leaves an (S_6)-type marking torsor | **bidirectional after marking** |
 | Clebsch (15/10/6) configuration \(\leftrightarrow\) two-qubit Pauli doily | exact (S_6\cong\operatorname{Sp}_4(2)\) incidence dictionary recovers observables, contexts, grids, and ovoids | Pauli phases and Clebsch conference signs differ by point gauge | **incidence-bidirectional; phase-negative** |
-| Fano sheet design \(\leftrightarrow\) binary Hamming code | incidence span gives the code; minimum supports recover the Fano lines | one sheet/chirality bit is external to the bare design | **marked-bidirectional** |
+| Fano sheet design \(\leftrightarrow\) binary Hamming code | incidence span gives the embedded \([7,4,3]\) code; its seven weight-three supports recover the Fano lines on the same coordinate set | an abstract four-space without its seven coordinate functionals is insufficient; one sheet/chirality bit is external to the bare design | **coordinate-code bidirectional; abstract-code negative** |
 | (H_3) biplane \(\to\) ternary Golay code | the eleven cross-sheet blocks generate the code | the code has many more weight-five supports and does not canonically select these eleven or the outer polarity; PGL chirality is not an (M_{11}) symmetry | **not bidirectional from the bare code** |
-| (H_3) biplane \(\leftrightarrow\) regular 11-cell vertex--facet incidence | the biplane and its dual give the two incidence sides and every outer-coset element is a polarity | recovery of the full face poset/flag adjacency from this marked incidence has not been proved | **one inverse lemma short** |
+| (H_3) biplane \(\leftrightarrow\) regular 11-cell vertex--facet incidence | the complementary \(2\)-\((11,6,3)\) design recovers all edges as pairs and all faces as two-facet intersections; every polarity extends uniquely to the face poset | the biplane complement and a vertex/facet choice are required; the polarity remains an extra self-duality marking | **full abstract-polytope recovery proved** |
 | node--plane code \(\leftrightarrow\) (R_{10}), the two halves of (W_{10}) | the two minimum layers are exactly the duad and syntheme halves; the full (1440)-group exchanges them | a chosen exchange polarity lies in a 36-class; the golden marking narrows this only to a six-pack | **bidirectional as a marked finite code/design, not canonically polarized** |
 | (R_{10}\to Q_{10}) by Construction A | standard lattice construction | recovering the code intrinsically from the abstract lattice requires a distinguished coordinate frame | **one-way unless framed** |
 | Segre/Igusa shadows \(\leftarrow A=dZ\) | \(\operatorname{adj}A=6Wq^{\mathsf T}\) extracts both null factors; inverse polar recovers the Segre point generically | (A) is a common parent, but either bare sister need not recover the full ordered parent tensor without markings | **strong common-parent bridge** |
@@ -319,23 +340,108 @@ unreconstructed bridge datum through both maps is legitimate but must appear
 in both object types.  Paper V is the model; a noninvertible exceptional fold
 cannot be called a round trip.
 
-## 6. Proof obligations still open in C905
+### Interface F — rank-four polytope from the symmetric design
 
-1. Verify the stabilizer and fibre wording in every row against the paper's
-   exact equivalence convention; especially distinguish an orbit from a
-   torsor.
-2. Decide whether the Fano/Hamming reverse is canonical from minimum supports
-   under the exact code convention, or only after monomial-coordinate
-   marking.
-3. Determine whether the marked (H_3) biplane plus a polarity reconstructs
-   the complete regular 11-cell abstract polytope, or only vertex--facet
-   incidence.
-4. State the Segre--Igusa inverse domain scheme-theoretically and avoid
-   extending the inverse across the fifteen exceptional planes.
-5. Run the required literature audit before calling the profile theorem,
-   gateway packaging, or carrier/fibre synthesis new.
-6. Hard-red-team every “minimal” above: where the source only proves a
-   sufficient marking, replace “minimal” by “sufficient.”
+Let \((V,\mathcal B)\) be the complementary symmetric
+\(2\)-\((11,6,3)\) design arising from the \(H_3\) sheets.  Define edges to
+be all two-subsets of \(V\), triangular faces to be the three-subsets lying
+in two blocks, and facets to be the blocks.  Then this construction recovers
+the complete face poset of the regular 11-cell.  Any incidence-reversing
+polarity of the design extends uniquely to an order-reversing automorphism
+of that poset.
+
+Indeed, symmetric-design duality gives \(|B\cap B'|=3\) for distinct
+blocks.  If \(x_j\) counts vertex triples contained in \(j\) blocks, then
+\[
+ \sum_jx_j=\binom{11}{3}=165,
+ \quad \sum_jj x_j=11\binom63=220,
+ \quad \sum_j\binom j2x_j=\binom{11}{2}=55.
+\]
+The last two equations and the first give
+\(\sum_j(\binom j2-(j-1))x_j=0\).  Every summand is nonnegative and is
+positive for \(j=0\) or \(j\ge3\), hence every triple lies in one or two
+blocks.  Exactly fifty-five lie in two, and these are precisely the
+pairwise block intersections.  Each facet therefore has six vertices,
+fifteen edges and ten triangular faces; each edge lies in three faces and
+each face in two facets.  This is the eleven-hemi-icosahedron incidence of
+the 11-cell.  Under a polarity, a vertex pair maps to the intersection of
+its two image facets, so the extension on edges and faces is forced.
+
+### Interface G — exact Segre--Igusa inverse open
+
+Let \(X\subset\mathbf P^5\) be the marked Segre cubic
+\(e_1=e_3=0\), and let \(W:X\dashrightarrow Y\) be its centered-square
+polar map to the Igusa quartic.  The safe inverse domain is the principal
+open
+\[
+ U=D_+(e_5)\subset X.
+\]
+On \(U\), the cubic inverse coordinates
+\[
+ y_i=\operatorname{center}_i
+       \left(w_i\sum_jw_j^2-4w_i^3\right)
+\]
+satisfy \(y_i=-4e_5(z)z_i\), so \(W|_U\) is an isomorphism onto its
+scheme-theoretic image with the displayed inverse.  The complementary
+divisor \(X\cap V(e_5)\) is the reduced union of the fifteen Segre planes;
+each is contracted to the corresponding singular line of \(Y\).  No claim
+extends the inverse across this divisor, and no claim that the image is the
+entire smooth Igusa locus is needed.
+
+### Interface H — composition of reconstruction profiles
+
+For composable groupoid maps
+\[
+ \mathcal X\xrightarrow{S}\mathcal Y\xrightarrow{T}\mathcal Z,
+\]
+the fibre of \(TS\) over \(z\) is the Grothendieck construction of the
+family \(\operatorname{Fib}_S(y)\) over
+\(y\in\operatorname{Fib}_T(z)\).  Thus reverse recovery of a composite has
+two logically separate obligations: recover an intermediate \(y\), then
+recover an \(x\) over it.  A marking carried through the forward maps is not
+a reconstruction of either choice.
+
+For nested stabilizers \(H\le K\le L\le G\), the homogeneous projections
+\[
+ G/H\longrightarrow G/K\longrightarrow G/L
+\]
+have fibres \(K/H\), \(L/K\), and \(L/H\), with
+\([L:H]=[L:K][K:H]\).  No equivariant reverse exists at a nontrivial stage
+by the no-section lemma.  Consequently a binary advice channel needs at
+least \(\lceil\log_2[L:H]\rceil\) bits to select a labelled source in the
+composite fibre, and equality is only a coding bound, not a canonical
+section.  This is the exact interface C906 must use when stacking root-link
+folds: fibre information composes even when the familiar object names do
+not.
+
+## 6. C905 proof-obligation ledger
+
+1. **Closed — equivalence typing.**  Paper I's fixed-conic locus is the
+   homogeneous orbit \(\operatorname{PGL}_2(11)/A_5\), not a torsor;
+   Papers I.b, II, III.b and V.a carry free \(C_2\) fibres; Paper III.a
+   carries a square-class family; Paper IV has trivial structural fibre up
+   to isomorphism and a separate coordinate torsor.  These are now stated
+   separately in every row.
+2. **Closed — Fano/Hamming convention.**  For an embedded binary Hamming
+   code on a seven-point coordinate set, the seven weight-three supports
+   canonically recover the Fano design.  A bare abstract four-dimensional
+   vector space has no such recovery.  The gateway row now declares the
+   coordinate-code category explicitly.
+3. **Closed — 11-cell inverse.**  Interface F proves that the complementary
+   \(2\)-\((11,6,3)\) design recovers the whole face poset, and that a
+   polarity extends uniquely.  No unproved flag-adjacency datum remains.
+4. **Closed — Segre--Igusa domain.**  Interface G restricts inverse polarity
+   to \(D_+(e_5)\), identifies the reduced fifteen-plane exceptional
+   divisor, and makes no claim across it.
+5. **Bounded, not globally closed — novelty.**  The claim-specific audit in
+   Section 6E proves substantial pre-emption and records its coverage gaps.
+   Therefore this report makes no global novelty or priority claim for the
+   reconstruction-profile packaging or the cap-triality composition.
+6. **Closed — minimality language.**  Every paperwise row now distinguishes
+   a proved collision/lower bound from sufficiency.  In particular Paper
+   II's degree-three claim is only within signed tensor moments, Paper IV's
+   unary collision is only arity sharpness, and unproved global fibre
+   classifications are not called minimal.
 
 ## 6A. Negative profiles: failed bridges as theorems
 
@@ -1067,7 +1173,7 @@ impossibility theorem for this tower.
 
 ## 6E. Claim-specific literature boundary
 
-**Opening depth summary.**  Three sources below were read at full text, three
+**Opening depth summary.**  Four sources below were read at full text, three
 at stated partial depth, and one at abstract/accessible-excerpt depth only.
 This is a bounded pre-emption audit, not a completed absence search.  It
 licenses the classical-ownership statements above and no "first" or "to our
@@ -1127,6 +1233,16 @@ knowledge" sentence.
    demicaps are anchored ten-point subcaps of maximal twenty-caps, not the
    eight-cap missing-third-profile fibre here.  This distinction is only a
    scope check, not an absence verdict about the whole cap literature.
+8. D. Leemans and E. Schulte, *Groups of type \(L_2(q)\) acting on
+   polytopes*, arXiv:math/0606660v1.  **Read depth: full text**, cached as
+   `arXiv:math/0606660`, SHA-256
+   `80a87dddf2549f3a16feaf2fb13b859680bfafc7b78103cea95f167a0df20b11`.
+   Theorem 4 identifies the unique \(L_2(11)\) regular rank-four polytope as
+   the self-dual 11-cell of type \(\{3,5,3\}\), with eleven vertices,
+   eleven hemi-icosahedral facets, fifty-five edges, fifty-five triangular
+   faces, and complete edge graph.  Interface F's recovery of those faces
+   from the symmetric design is C905's proof, not a claim attributed to this
+   source.
 
 The bounded exact-phrase/structure search that exposed the triality boundary
 used these queries verbatim:
@@ -1153,7 +1269,79 @@ forward-citation negative has been attempted.  Therefore the adjacent-crown
 composition, including the triality fibre formulation, remains a research
 candidate only.
 
-## 7. C906 handoff rule
+## 7. TT and EJ1--EJ7 closeout
+
+The acceptance pass asked not whether the five rows share vocabulary, but
+whether the vocabulary predicts anything and survives composition.
+
+1. **TT — type the objects before comparing them: settled.**  The master
+   matrix separates embedded codes from abstract vector spaces, structural
+   reconstruction from coordinate choice, homogeneous orbits from torsors,
+   and rational twists from finite orientation fibres.
+2. **EJ1 — compose the profiles: settled.**  Interface H shows that a tower
+   fibre is an iterated fibre, not a list of object names.  This supplies the
+   exact accounting interface needed by C906.
+3. **EJ2 — turn the missing 11-cell inverse into a theorem: settled.**
+   Interface F recovers all edges and faces from the symmetric design and
+   extends every polarity uniquely.
+4. **EJ3 — exploit the first cap counterexample: settled beyond the original
+   target.**  The \(n=4\) fibre is exactly the vector/two-spin triality
+   triple, with a conceptual orthogonal-frame proof and an independent
+   exhaustive check.
+5. **EJ4 — make failure quantitative: settled at the interface level.**
+   Stabilizer indices, fibre cardinalities, kernel dimensions, and locality
+   collisions are now distinct lower bounds.  No claim converts one kind
+   into another without a proof.
+6. **EJ5 — isolate bad loci rather than weaken generic theorems: settled for
+   Segre--Igusa.**  The inverse lives on \(D_+(e_5)\); the reduced
+   fifteen-plane divisor is exactly where it fails.
+7. **EJ6 — arithmetic visibility: viable but not promoted.**  Frobenius
+   splitting can probe a finite étale marking fibre, but finite prime data
+   need bounded candidates or discriminant control.  NT1 records the exact
+   gate.
+8. **EJ7 — broader local-to-global theorem: viable but not promoted.**  The
+   cochain/synchronization statement is classical; new content would require
+   the minimal observation complex or exact coherent-closure depth of a
+   Clebsch/exceptional family.  LG1--LG6 record the falsifiers.
+
+The strongest series-level sentence surviving this pass is therefore:
+
+> Sparse shadows recover a carrier; their exact fibres measure what was
+> forgotten, and marked reversibility is possible precisely when those
+> fibres are split rather than silently carried.
+
+### Mystery ledger
+
+**Settled here.**
+
+- The apparent \(n=4\) cap anomaly is \(D_4\) triality: the vector and two
+  half-spin frames have equal size only because \(2^{n-1}=2n\) at \(n=4\).
+- The \(H_3\) design does recover the complete 11-cell face poset; the
+  missing inverse lemma is no longer open.
+- The Fano/Hamming reverse is canonical for the embedded coordinate code and
+  false for a bare abstract four-space.
+- The Segre--Igusa inverse has the exact principal-open domain
+  \(D_+(e_5)\); no extension across the contracted planes is possible.
+- No single global minimality notion covers arity, moment degree, vertex
+  threshold, advice bits, and arithmetic splitting degree.  The paperwise
+  matrix is the strongest honest theorem.
+
+**Still open, with exact gate.**
+
+- **Parity-cap fibre for \(n\ge5\):** classify a symmetry-reduced candidate
+  family or exhibit a fourth mate.  Equality of the displayed pair's shadow
+  is proved; completeness is not.
+- **Priority of the mod-three triality-shadow formulation:** close the
+  homometric/cap-bitrade forward-citation audit before any novelty sentence.
+- **Robust reconstruction:** no stability bound relates perturbations of a
+  shadow to distance from the reconstructed orbit.  A future theorem needs a
+  metric and a sharp adversarial collision.
+- **Uniform local-to-global depth:** Paper IV closes after one common-neighbor
+  refinement, but no infinite-family coherent-closure bound is proved.
+- **Exceptional-tower reverse:** exact fold fibres, stabilizer actions and
+  section obstructions are the owning questions of C906.
+
+## 8. C906 handoff rule
 
 The exceptional tower may consume only a **proved carrier interface**:
 
