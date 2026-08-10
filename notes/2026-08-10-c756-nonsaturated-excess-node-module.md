@@ -568,6 +568,27 @@ split types are exactly the primal conic types of the endpoint lines.  This
 is the direct point-type input available for a character evaluation of
 (23r), including mixed arrangements.
 
+There is also an aggregate discriminant consequence.  After a projective
+change of direction coordinate avoiding roots at infinity, the standard
+product formula gives
+\[
+ \operatorname{disc}\Pi
+ =\prod_i\operatorname{disc}(q_i)
+   \prod_{i<j}\operatorname{Res}(q_i,q_j)^2.            \tag{23v}
+\]
+The identity is homogeneous and therefore extends back to the binary
+direction line.  If \(\Pi\) is squarefree, (23t) yields
+\[
+ \boxed{
+ [\operatorname{disc}\Pi]
+ =\prod_{i=1}^n[-Q_{\rm pr}(v_i)]}                      \tag{23w}
+\]
+in square classes.  If two endpoint factors share a branch direction, the
+corresponding resultant and \(\operatorname{disc}\Pi\) both vanish.  Thus
+the product of the endpoint point types is exactly the discriminant class
+of the global complementary-norm carrier; all pairwise interactions drop
+out as squares.
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level

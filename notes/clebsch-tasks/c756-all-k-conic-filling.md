@@ -516,7 +516,10 @@ polynomial \(\Pi(T)=\prod_iQ(T,y_i-Tx_i)\).  Its quadratic factors are
 typed: for the line vector \(v_i=(x_i,1,-y_i)\),
 \(\operatorname{disc}_TQ(T,y_i-Tx_i)=-4Q_{\rm pr}(v_i)\).
 Hence the complementary norm retains the original internal/external mixture
-rather than discarding it.
+rather than discarding it.  When \(\Pi\) is squarefree, the product
+discriminant formula further gives
+\([\operatorname{disc}\Pi]=\prod_i[-Q_{\rm pr}(v_i)]\), since all pairwise
+factor resultants occur squared.
 
 ### \(q=53\): type-uniform critical core
 
