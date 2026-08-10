@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active standing programme; reviewer dossier and round-1 manifest
-frozen 2026-08-09; remains open until explicit author closure
+**Status:** active standing programme; round-one reports frozen, adopted
+findings repaired, authoritative gate green, and focused re-review green
+2026-08-09; remains open until explicit author closure
 
 ## Objective
 
@@ -41,6 +42,20 @@ The post-referee upgrade assessment
 do not read or route it into review context until the current referee findings
 have been synthesized and fixed.  When the author activates that upgrade, keep
 its assessment, integration, and re-review under C901.
+
+## Round-one state
+
+The frozen synthesis is
+`notes/2026-08-09-c901-paper-iv-cold-read-round-1-synthesis.md`.  Every adopted
+finding has been repaired in the authoritative manuscript.  The complete
+repair, hashes, scoped validation, focused Ball/Xiang/Tranchida re-review, and
+mystery ledger are frozen in
+`notes/2026-08-09-c901-paper-iv-round-1-remediation.md`.
+
+The deterministic paper gate passes at the author-approved 13-page invariant.
+The deferred upgrade assessment remains unread.  The next action is author
+activation of that assessment or another requested review pass; neither event
+allocates a new C id.
 
 ## Acceptance gate
 
