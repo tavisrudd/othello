@@ -293,8 +293,9 @@ these manifests, not serve as the primary ownership map.
 0. Regenerate the actual module and package maps from the current trees.  Record the
    actual package DAG and compare it with the required certificate DAG
    above.  Refuse every source move while q11 or q16 requires `finitegeom`, while a
-   heavy leaf remains in finitegeom, or while finitegeom lacks an exact frozen package
-   pin and adapter.  Add the dependency-direction checker and adversarial fixtures
+   heavy leaf remains in finitegeom, or while the corresponding cheap paper bridge
+   lacks an exact frozen certificate pin and proved adapter.  Add the
+   dependency-direction checker and adversarial fixtures
    before changing a package boundary.
 1. Record the C864 endpoint: finitegeom commit, twelve area configurations, area
    source manifests, certificate pins, standalone-build result, paper roots, and
@@ -378,10 +379,12 @@ complete.  The route depends on source authority:
 ```text
 certificate-only authority in every heavyweight package
   → sealed certificate package and cache
-  → finitegeom adapter pin through its exporter and affected paper pins
+  → cheap paper bridge pins the certificate and exported finitegeom revisions
+  → affected paper pin and release metadata
 
-human/paper authority in the monorepo
+human/shared authority in the monorepo
   → finitegeom through its exporter
+  → cheap paper bridge pin or compatibility update
   → every affected standalone paper repository
 ```
 
