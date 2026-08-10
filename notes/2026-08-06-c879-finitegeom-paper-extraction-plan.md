@@ -119,7 +119,18 @@ the outcome transport moves downstream.  Q25 has 9,531 modules and reaches ten h
 modules: `Certificate`, `FiniteFields`, `Moments`, `Nucleus`, `ProjectiveBridge`,
 `PlaneTransitivity`, and the four Baer-completion modules `BaerPlane`,
 `CollisionProfile`, `OrbitCounting`, and `PairExtension`. Its generated payload must
-be separated from all ten human modules without regenerating or renaming the leaves.
+be separated from all ten human modules and moved directly to its final namespace
+before one final leaf build; no intermediate compatibility build is permitted.
+
+Their final certificate namespaces are
+`TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
+`TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.*`, and
+`TavisRuddFiniteGeom.Certificates.Q25.*`. The local statement models live under the
+same branded certificate families. The downstream adapters prove type equivalences
+and theorem transport into `TavisRuddFiniteGeom.Shared.Projective.*` or the owning
+paper interface; the certificate packages import neither those shared modules nor a
+separate project foundation. Legacy `ProjectiveCap.*`, `RelativeConicArcs.*`, and
+`FiniteGeom.*` module paths are migration inputs, not final compatibility APIs.
 
 Use explicit paper and shared source roots under the ecosystem namespace:
 
