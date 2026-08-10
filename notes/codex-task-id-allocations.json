@@ -3032,8 +3032,17 @@
       "last": 903,
       "purpose": "Land five-paper series title, epigraph, diagram, blurb, and count references",
       "sequence": 337
+    },
+    {
+      "count": 1,
+      "first": 904,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 904,
+      "purpose": "Paper V publishable manuscript and dossier-isolated referee closure",
+      "sequence": 338
     }
   ],
-  "next_id": 904,
+  "next_id": 905,
   "schema": "codex-task-id-allocations-v1"
 }
