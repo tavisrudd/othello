@@ -79,6 +79,14 @@ classification, weighted-pair reconstruction, \(A_9\) marking, and orbit Gram
 certificates as unlocated contributions.  It does not audit or promote the
 frame-correspondence upgrades.
 
+The layered-exposition, copy-edit, attribution, and claim-specific repair
+round is accepted by a final isolated dossier-loaded cold read with no
+mandatory finding.  The warning-free 15-page authority is committed at
+`84f227ef` and exported to the standalone paper repository at `f1c01ea`;
+the deterministic manuscript guard, evidence replay, exporter audit, mirror
+manifest verification, and authority/mirror byte comparison are green.  C901
+remains open by author instruction for later upgrades and re-reviews.
+
 ## Acceptance gate
 
 - Reviewer likelihood is tied to the venue routes, closest cited work,
