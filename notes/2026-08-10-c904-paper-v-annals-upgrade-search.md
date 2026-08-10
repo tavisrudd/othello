@@ -5,6 +5,36 @@ Date: 2026-08-10
 Status: research and framing only.  No manuscript source was edited and no
 Lean command was run.
 
+## Fricke hard-push addendum
+
+The later exact pass is recorded in
+`notes/2026-08-10-c904-fricke-hecke-shadow-sisters.md` and certified by
+`notes/2026-08-10-c904-fricke-hecke-certificate.py`.  It materially upgrades
+items 4, 5, 8, and 9 below:
+
+- the published Prym curve is the `D(T)=(T+27)(T-729/5)` quadratic twist of
+  the universal Tate model;
+- the standard Tate Fricke partner carries the **`-3` twist**, not `+3`;
+- the actual Prym trace multiplier is the parameter-dependent square class
+  `(T-5)(5T-729)`;
+- modulo eleven this class is `5(T-5)^2`, and direct evaluation gives trace
+  `-3` for all eight smooth Paper-V parameters;
+- the projective Picard--Fuchs system is hypergeometric, while the twist adds
+  scalar `-I` chordal monodromy and changes the integral rank-two group from
+  `Gamma_1(3)` to `Gamma_0(3)`;
+- the descended Prym model is the rational elliptic surface with fibres
+  `I_1,II,I_0^*,I_3`; Shioda--Tate gives geometric Mordell--Weil rank two,
+  and Oguiso--Shioda identify its torsion-free lattice as
+  `A_1^*+<1/6>`;
+- the full pulled-back three-isogeny correspondence has components of
+  bidegrees `(1,1),(3,3),(3,3),(9,9)`; and
+- the affine bridge `T=5w-27` identifies the cubic modular base with the
+  `V_4` elliptic modular base of the Winger pencil.
+
+Where the exploratory discussion below inferred arithmetic from `j` alone,
+the focused addendum supersedes it.  The full cubic motive and principal
+polarization remain hard gates.
+
 ## Executive verdict
 
 The search found one genuinely high-surprise structure that is both exact and
@@ -421,6 +451,8 @@ Inputs and artifacts:
 | `notes/2026-08-10-c904-a5-pencil-boundary.out` | 858 | `fa59f9e7894d49611a3dafd64eb5c21a0deae7d62f19e6281c00c0eb848fd56f` |
 | `notes/2026-08-10-c904-a5-pencil-j-map.py` | 5,626 | `e76612c19740cd6dd4e96f0e365ac8c27bc3aaf55dfd2b915b297b0ee623376c` |
 | `notes/2026-08-10-c904-a5-pencil-j-map.out` | 1,052 | `d60a636f35e8d85a6535aaa7c8bbdc7a5a9f35c424ecfa2cecca44e2c3463663` |
+| `notes/2026-08-10-c904-fricke-hecke-certificate.py` | 26,393 | `e7c3249082d26b9335e7961dbdb9e94a75cfe029e8bce6d03831ba4dfd269e7a` |
+| `notes/2026-08-10-c904-fricke-hecke-certificate.out` | 3,445 | `ad3b22d14062d44d02eab7a02e929bf14fac2f336a6f371bcabfd90156538a96` |
 
 The boundary census is an independent finite-field scan of the canonical
 integral pencil.  The `F_11` point counts independently enumerate projective

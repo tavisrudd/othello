@@ -1,0 +1,62 @@
+Universal 3-isogeny
+  E_T:  y^2+(T+27)xy+(T+27)^2 y=x^3
+  Delta(E_T)=T*(T + 27)**8
+  j(E_T)=(T + 3)**3*(T + 27)/T
+  j(E_T/<(0,0)>)=(T + 27)*(T + 243)**3/T**3
+  Velu x-map: (T**4 + T**3*x + 108*T**3 + 81*T**2*x + 4374*T**2 + 2187*T*x + 78732*T + x**3 + 19683*x + 531441)/x**2
+X_0(3) passport
+  J zeros: T=-27 (order 1), T=-3 (order 3)
+  J poles: T=0 (order 1), T=infinity (order 3)
+  J-1728=(T**2 + 18*T - 27)**2/T
+Picard--Fuchs reduction
+  universal: f'' + (1/T) f' + (-6/(T*(T + 27)**2)) f = 0
+  Prym twist coefficient P(T)=3*(5*T**2 - 396*T - 6561)/(T*(T + 27)*(5*T - 729))
+  Prym twist coefficient Q(T)=(25*T**3 - 4605*T**2 - 64881*T + 2657205)/(T*(T + 27)**2*(5*T - 729)**2)
+  chordal T=729/5 is scalar -I monodromy, invisible projectively
+  <Gamma_1(3),-I>=Gamma_0(3): same coarse curve, different stack lift
+Fricke/CM factorization
+  J(T)-J(729/T)=(T - 27)*(T + 27)*(T**2 - 10*T + 729)*(T**2 + 46*T + 729)/T**3
+  T^2-10T+729: j=-32768 (CM discriminant -11)
+  T^2+46T+729: j=8000 (CM discriminant -8)
+  T=27: j=54000 (CM discriminant -12)
+  T=-27: j=0 (CM discriminant -3 boundary)
+  for alpha^2+alpha+3=0, the D=-11 roots are alpha^6 and alpha_bar^6
+  T=-3 <-> -243 has j=0 <-> -12288000 (the D=-3 conductor step)
+Full degree-three Hecke pullback
+  irreducible component bidegrees=[(1, 1), (3, 3), (3, 3), (9, 9)]
+  Fricke component: T*U-729
+  one cubic component: T**3 - T**2*U**3 - 36*T**2*U**2 - 270*T**2*U - 729*T*U**2 - 26244*T*U - 531441*U
+  the other cubic is its transpose; the last component has bidegree (9,9)
+Arithmetic Fricke twist
+  E_{729/T} is the quadratic twist by -3 of E_T/<(0,0)>
+  finite-field checks (p,(-3/p)): [(5, -1), (7, 1), (11, -1), (13, 1), (17, -1), (19, 1), (23, -1), (29, -1)]
+Explicit Prym/Tate comparison
+  twist multiplier modulo squares: 1600*(u - 3)**5/(2187*(u + 1)**4*(u + 3)**3*(3*u**2 + 5))
+  square class D(T)=(T+27)(T-729/5)
+  global Q(T) model: y^2=x^3+a4(T)x+a6(T)
+    a4(T)=-675*(T + 3)*(T + 27)*(5*T - 729)**2
+    a6(T)=6750*(T + 27)*(5*T - 729)**3*(T**2 + 18*T - 27)
+    Delta=34012224000000*T*(T + 27)**2*(5*T - 729)**6 (plus order 3 at infinity)
+    Kodaira fibers: I1 at 0, II at -27, I0* at 729/5, I3 at infinity
+    Shioda--Tate: root lattice D4+A2, geometric Mordell--Weil rank 2
+  explicit Prym discriminant=8589934592000*u**2*(u - 3)**30*(3*u**2 + 5)**2/(4782969*(u + 1)**24*(u + 3)**18)
+  Tate degeneration plus D(T) detects the full cubic boundary support
+  (the displayed u-chart has removable coordinate poles at u=-1,-3)
+  Prym Fricke trace character: ((T-5)(5T-729)/q)
+  direct Prym Fricke checks (p,count): [(11, 6), (19, 12), (29, 22), (31, 24)]
+  descended-model Fricke checks (p,count): [(7, 3), (11, 8), (13, 9), (17, 13), (19, 15), (23, 19), (29, 25), (31, 27)]
+  direct F_11 Prym traces by r: {1: -3, 2: -3, 4: -3, 5: -3, 6: -3, 8: -3, 9: -3, 10: -3}
+  F_11 T-values by r: {1: 9, 2: 4, 4: 1, 5: 3, 6: 4, 8: 9, 9: 1, 10: 3}
+  F_11 j-values by r: {1: 4, 2: 10, 4: 10, 5: 4, 6: 10, 8: 4, 9: 10, 10: 4}
+Winger bridge
+  T=5w-27
+  j_W(w)=5*w*(5*w - 24)**3/(5*w - 27)
+  Winger-coordinate Fricke involution: w'=27*w/(5*w - 27)
+  the two pencils share T=infinity,0,-27 as three marked singular fibres
+  Winger Bring fibre w=-1 maps to smooth cubic T=-32
+  cubic chordal T=729/5 maps to smooth Winger w=864/25
+Paper-V F_11 anomaly
+  formal rational lift of the r-map: r'=36*(r - 3)/(11*r - 36)
+  modulo 11: r'=3-r
+  chordal T=729/5 meets its Fricke partner T=5 only at p=11
+PASS
