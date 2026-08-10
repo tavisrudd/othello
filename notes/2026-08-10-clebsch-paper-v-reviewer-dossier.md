@@ -15,12 +15,12 @@ release mechanics, and the optional icosahedral tower are out of scope.
 
 ## Frozen review surface
 
-Commit: 62cd52eecedb536077e2ac7852d8fcfac917100b.
+Commit: a53192147228db20d5ceef579c44151ef17a5907.
 
 - source: papers/clebsch-round-trip/golden_companion_reconstruction.tex;
-  SHA-256 baa8fbbffd1b46efbae4ab08e7179897b8de824f059ed2e879cf7758c8b2dcc9;
+  SHA-256 aead500646214845fb2165280fcbae96e562bacb619c515212f9809a53ed4196;
 - PDF: papers/clebsch-round-trip/golden_companion_reconstruction.pdf;
-  SHA-256 7e0d6ca7c6b13861cc36175a81d12015f362e3c4e1dbb69ddbeb0d19b72e563c;
+  SHA-256 de51972c4d199fa9c181600dd3978dd91dd7bda83e15fd60a0324f2aad3fd0c3;
 - visible length: eleven pages.
 
 Cold coordination must recheck both hashes. A changed source or PDF is a new
@@ -234,5 +234,7 @@ The second freeze passed all three independent dossier-driven reads.  The
 invariant-pencil reader returned GO on the first freeze.  After the two MINOR
 repairs recorded above, both the marking reader and the singular-geometry /
 conference reader matched the new hashes, re-read the complete causal chain,
-and returned GO.  No mathematical or expository referee issue remains open on
-the frozen surface.
+and returned GO.  The third freeze changes only the printed replay command
+from a monorepo-relative path to the repository-relative path and vendors the
+byte-identical frozen inputs outside the PDF.  It requires a final hash and
+release-surface spot check; no mathematical prose or claim changed.

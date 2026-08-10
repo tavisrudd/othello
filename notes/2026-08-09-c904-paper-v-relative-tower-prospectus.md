@@ -137,9 +137,9 @@ python3 papers/clebsch-round-trip/verification/evidence/icosahedral_stabilizer_t
 ```
 
 It returns `CHECK OK (12+20+30+60)`. The script SHA-256 is
-`b3d03b4a4f4206f6af64a543023d833e0b90730bd797586b74d9c3d536b5fcc0`;
+`42aac040653ef7deb139c99724bef9827bbf4cd31f46aad99883dcf3ef763c7c`;
 the adjacent JSON certificate SHA-256 is
-`72ff7f4f48fb70aa28398060fac67ad9c370761ff8eadd0b0386083e22b70520`.
+`bd17a96de940caf4f8b6511796d10a46a375d4c3ba0ae5be07c4cba991b876c2`.
 This closes the finite \(\F_{121}\) census, not the literature or
 scheme-theoretic proof gates.
 
@@ -153,8 +153,9 @@ scheme-theoretic proof gates.
 - prove that \(N_G(C_r)/C_r\) exchanges the two fixed points, so the
   normalizer map is a degree-two cover; equivalently, identify the whole
   stratum as the single geometric orbit \(G/C_r\);
-- pin the imported core checker and its certificate: the tower script's own
-  hash does not freeze the imported core dependency;
+- keep the imported core checker, certificate, and frozen transitive inputs
+  pinned; the current certificate now records both base checker and base
+  certificate hashes;
 - audit classical icosahedral orbit/branch-divisor sources and modern
   treatments of finite subgroups of \(\PGL_2\);
 - decide priority only after forward-citation closure; otherwise present the
