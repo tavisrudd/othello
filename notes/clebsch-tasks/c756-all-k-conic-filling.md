@@ -190,7 +190,8 @@ is already closed); at \(q=81\), the kernel must meet the native \(j=2\)
 checks and the reflected shadow-successor rungs \(j=5,14\).  Outside these
 three fields, any tower kernel is a special rank-drop stratum rather than a
 dimension necessity.
-The first non-shadow rung does not descend to the ghost quotient: its mixed
+In general the first non-shadow rung does not descend to the ghost quotient:
+its mixed
 binomial terms retain the three-dimensional conic part of \(H_2\).  Using
 the canonical ghost-tail section, its exact carrier is a degree-two map for
 \(p\ne5\), or a degree-three map for \(p=5\), on

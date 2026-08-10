@@ -858,7 +858,7 @@ additional kernel there lies on a proper determinantal rank stratum of
 \(\mathbb M_R\).  Conversely, at the three seams in (78), the nonlinear
 non-shadow test is logically unavoidable regardless of \(R\).
 
-Unlike the power rungs, a non-shadow rung does **not** descend to the ghost
+Unlike the power rungs, a non-shadow rung does **not** in general descend to the ghost
 quotient: mixed binomial terms remember the degree-at-most-two part of
 \(H_2\).  Let
 \(s_R:\mathcal G_R\to\mathcal V_R\) be the canonical section specified by
