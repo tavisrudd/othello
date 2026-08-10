@@ -181,8 +181,11 @@ def affine_nodes(model: Model, selected: list[object]):
                     (aj * left.s - ai * right.s) * inverse % Q,
                 )
             )
-    if len(nodes) != 66 or len(set(nodes)) != 66:
-        raise AssertionError("the selected lines do not have 66 distinct nodes")
+    expected_nodes = len(selected) * (len(selected) - 1) // 2
+    if len(nodes) != expected_nodes or len(set(nodes)) != expected_nodes:
+        raise AssertionError(
+            f"the selected lines do not have {expected_nodes} distinct nodes"
+        )
     inverse_count = pow(len(nodes), -1, Q)
     center_x = sum(point[0] for point in nodes) * inverse_count % Q
     center_y = sum(point[1] for point in nodes) * inverse_count % Q
@@ -251,7 +254,7 @@ def analyze_leaf(model: Model, selected):
     return result
 
 
-def enumerate_seed(model: Model, seed_s: int):
+def enumerate_seed(model: Model, seed_s: int, *, extend_one: bool = False):
     matching_seeds = [
         i
         for i, vertex in enumerate(model.vertices)
@@ -278,6 +281,7 @@ def enumerate_seed(model: Model, seed_s: int):
     type_profiles = Counter()
     best_score = None
     best_witness = None
+    extensions = {}
 
     def search(chosen, candidates):
         nonlocal search_nodes, leaves, forced_window
@@ -305,6 +309,40 @@ def enumerate_seed(model: Model, seed_s: int):
             if best_score is None or score > best_score:
                 best_score = score
                 best_witness = [[vertex.direction, vertex.s] for vertex in selected]
+            if extend_one:
+                extension_candidates = full
+                for prior in chosen:
+                    extension_candidates &= model.adjacency[prior]
+                for i, left in enumerate(chosen):
+                    for right in chosen[:i]:
+                        extension_candidates &= ~forbidden(left, right)
+                while extension_candidates:
+                    bit = extension_candidates & -extension_candidates
+                    extension_vertex = bit.bit_length() - 1
+                    extended = sorted(
+                        selected + [model.vertices[extension_vertex]]
+                    )
+                    extended_nodes = affine_nodes(model, extended)
+                    spans = projection_spans(model, extended_nodes, extended)
+                    key = tuple(
+                        (vertex.direction, vertex.s) for vertex in extended
+                    )
+                    extensions[key] = {
+                        "vertices": [list(pair) for pair in key],
+                        "complete_centers": sum(span == Q for span in spans),
+                        "required_centers": len(spans),
+                        "minimum_span": min(spans),
+                        "maximum_span": max(spans),
+                        "secants": sum(
+                            MIXED.line_character(vertex, NONSQUARE) == 1
+                            for vertex in extended
+                        ),
+                        "passants": sum(
+                            MIXED.line_character(vertex, NONSQUARE) == -1
+                            for vertex in extended
+                        ),
+                    }
+                    extension_candidates ^= bit
             return
         order, bounds = MIXED.color_sort(candidates, model.adjacency)
         for position in range(len(order) - 1, -1, -1):
@@ -325,7 +363,7 @@ def enumerate_seed(model: Model, seed_s: int):
     seed = matching_seeds[0]
     search([seed], full & model.adjacency[seed])
     cache_info = forbidden.cache_info()
-    return {
+    result = {
         "seed_s": seed_s,
         "seed_present": True,
         "search_nodes": search_nodes,
@@ -352,9 +390,15 @@ def enumerate_seed(model: Model, seed_s: int):
             "currsize": cache_info.currsize,
         },
     }
+    if extend_one:
+        result["one_line_extensions"] = [
+            extensions[key] for key in sorted(extensions)
+        ]
+        result["one_line_extension_count"] = len(extensions)
+    return result
 
 
-def exact_output(mode: str, seed_s: int):
+def exact_output(mode: str, seed_s: int, *, extend_one: bool = False):
     model = mixed_model() if mode == "mixed" else passant_model()
     return {
         "schema": f"c756-q{Q}-k13-star-shard-v1",
@@ -366,7 +410,7 @@ def exact_output(mode: str, seed_s: int):
         "forced_degrees": [FORCED_MIN_DEGREE, model.forced_max_degree],
         "direction_count": max(vertex.direction for vertex in model.vertices) + 1,
         "vertex_count": len(model.vertices),
-        "shard": enumerate_seed(model, seed_s),
+        "shard": enumerate_seed(model, seed_s, extend_one=extend_one),
         "pinned_files": {
             MIXED_BASE_PATH.name: MIXED_BASE_SHA256,
             PASSANT_BASE_PATH.name: PASSANT_BASE_SHA256,
@@ -400,13 +444,21 @@ def aggregate_output(mode: str, shard_directory: Path):
             degree_counts[item["degree"]] += item["count"]
         for item in row.get("type_profiles", []):
             profile_counts[(item["secants"], item["passants"])] += item["count"]
-    return {
+    extensions = {}
+    for row in rows:
+        for extension in row.get("one_line_extensions", []):
+            key = tuple(tuple(pair) for pair in extension["vertices"])
+            if key in extensions and extensions[key] != extension:
+                raise SystemExit("inconsistent duplicate extension record")
+            extensions[key] = extension
+    result = {
         "schema": f"c756-q{Q}-k13-star-aggregate-v1",
         "q": Q,
         "k": 13,
         "mode": model_name,
         "normalization": (
-            "central inversion sends seed offset s to -s; representatives 0..29"
+            "central inversion sends seed offset s to -s; representatives "
+            f"0..{(Q - 1) // 2}"
         ),
         "seed_representatives": list(range((Q + 1) // 2)),
         "present_seed_representatives": sum(row["seed_present"] for row in rows),
@@ -438,6 +490,92 @@ def aggregate_output(mode: str, shard_directory: Path):
             PASSANT_BASE_PATH.name: PASSANT_BASE_SHA256,
         },
     }
+    if any("one_line_extensions" in row for row in rows):
+        result["extension_target_size"] = TARGET_SIZE + 1
+        result["one_line_extensions"] = [
+            extensions[key] for key in sorted(extensions)
+        ]
+        result["one_line_extension_count"] = len(extensions)
+        result["extensions_with_any_complete_center"] = sum(
+            extension["complete_centers"] > 0
+            for extension in extensions.values()
+        )
+        result["extensions_with_all_complete_centers"] = sum(
+            extension["complete_centers"] == extension["required_centers"]
+            for extension in extensions.values()
+        )
+    return result
+
+
+def aggregate_extension_output(root_certificate: Path, shard_directory: Path):
+    root_bytes = root_certificate.read_bytes()
+    root = json.loads(root_bytes)
+    if (
+        Q != 61
+        or root.get("schema") != "c756-q61-k13-star-aggregate-v1"
+        or root.get("mode") != "mixed-external-deletion"
+        or root.get("geometric_stars") != 96
+    ):
+        raise SystemExit("invalid q=61 k=13 root certificate")
+    source_rows = [
+        row for row in root["shards"] if row["geometric_stars"] > 0
+    ]
+    extension_rows = []
+    extensions = {}
+    for source in source_rows:
+        seed_s = source["seed_s"]
+        path = shard_directory / f"c756-q61-mixed-seed-{seed_s}.json"
+        payload = json.loads(path.read_text())
+        row = payload.get("shard", {})
+        if (
+            payload.get("schema") != "c756-q61-k13-star-shard-v1"
+            or payload.get("mode") != "mixed-external-deletion"
+            or row.get("seed_s") != seed_s
+            or row.get("geometric_stars") != source["geometric_stars"]
+            or "one_line_extensions" not in row
+        ):
+            raise SystemExit(f"invalid extension shard: {path}")
+        extension_rows.append(row)
+        for extension in row["one_line_extensions"]:
+            key = tuple(tuple(pair) for pair in extension["vertices"])
+            if key in extensions and extensions[key] != extension:
+                raise SystemExit("inconsistent duplicate extension record")
+            extensions[key] = extension
+    return {
+        "schema": "c756-q61-k14-one-line-extension-v1",
+        "q": 61,
+        "k": 14,
+        "source_k": 13,
+        "source_geometric_stars": sum(
+            row["geometric_stars"] for row in extension_rows
+        ),
+        "source_seed_representatives": [
+            row["seed_s"] for row in extension_rows
+        ],
+        "source_search_nodes_replayed": sum(
+            row["search_nodes"] for row in extension_rows
+        ),
+        "root_certificate": {
+            "filename": root_certificate.name,
+            "sha256": hashlib.sha256(root_bytes).hexdigest(),
+        },
+        "one_line_extension_count": len(extensions),
+        "extensions_with_any_complete_center": sum(
+            extension["complete_centers"] > 0
+            for extension in extensions.values()
+        ),
+        "extensions_with_all_complete_centers": sum(
+            extension["complete_centers"] == extension["required_centers"]
+            for extension in extensions.values()
+        ),
+        "one_line_extensions": [
+            extensions[key] for key in sorted(extensions)
+        ],
+        "pinned_files": {
+            MIXED_BASE_PATH.name: MIXED_BASE_SHA256,
+            PASSANT_BASE_PATH.name: PASSANT_BASE_SHA256,
+        },
+    }
 
 
 def main():
@@ -445,9 +583,11 @@ def main():
     parser.add_argument("--q", type=int, choices=(59, 61), default=Q)
     parser.add_argument("--mode", choices=("mixed", "all-passant"))
     parser.add_argument("--seed-s", type=int)
+    parser.add_argument("--extend-one", action="store_true")
     parser.add_argument(
         "--aggregate-mode", choices=("mixed", "all-passant")
     )
+    parser.add_argument("--aggregate-extensions-from", type=Path)
     parser.add_argument("--shard-directory", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--check", type=Path)
@@ -455,25 +595,40 @@ def main():
     if arguments.q != Q:
         parser.error("internal --q preparse mismatch")
     shard_mode = arguments.mode is not None or arguments.seed_s is not None
-    aggregate_mode = (
-        arguments.aggregate_mode is not None
-        or arguments.shard_directory is not None
-    )
-    if shard_mode == aggregate_mode:
-        parser.error("select either shard mode or aggregate mode")
+    aggregate_mode = arguments.aggregate_mode is not None
+    extension_aggregate_mode = arguments.aggregate_extensions_from is not None
+    if sum((shard_mode, aggregate_mode, extension_aggregate_mode)) != 1:
+        parser.error("select exactly one shard or aggregate mode")
     if shard_mode:
         if arguments.mode is None or arguments.seed_s is None:
             parser.error("shard mode requires --mode and --seed-s")
         if not 0 <= arguments.seed_s < Q:
             parser.error("--seed-s must lie in [0,58]")
-        output = exact_output(arguments.mode, arguments.seed_s)
-    else:
+        if arguments.extend_one and (Q != 61 or arguments.mode != "mixed"):
+            parser.error("--extend-one is implemented for q=61 mixed shards")
+        output = exact_output(
+            arguments.mode,
+            arguments.seed_s,
+            extend_one=arguments.extend_one,
+        )
+    elif aggregate_mode:
+        if arguments.extend_one:
+            parser.error("--extend-one belongs to shard mode")
         if arguments.aggregate_mode is None or arguments.shard_directory is None:
             parser.error(
                 "aggregate mode requires --aggregate-mode and --shard-directory"
             )
         output = aggregate_output(
             arguments.aggregate_mode, arguments.shard_directory
+        )
+    else:
+        if arguments.extend_one:
+            parser.error("--extend-one belongs to shard mode")
+        if arguments.shard_directory is None:
+            parser.error("extension aggregation requires --shard-directory")
+        output = aggregate_extension_output(
+            arguments.aggregate_extensions_from,
+            arguments.shard_directory,
         )
     rendered = json.dumps(
         output, indent=2, sort_keys=True

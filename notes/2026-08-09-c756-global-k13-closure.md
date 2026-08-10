@@ -115,11 +115,11 @@ done
 Bundle hashes:
 
 ```text
-9f192ea76b2703508cbad728bf5085c81abd899faede0dd7363dafdc69347113  notes/2026-08-09-c756-q59-k13-star-search.py
+3421f660be97ecd99db766476a5cce61f1d228620bd7f0c8a3be0c07a8d59bd8  notes/2026-08-09-c756-q59-k13-star-search.py
 a145813f5dbf3c1dc7bd57c57e80c4ed673ba4fe83b2ee16dc51a425c0da8128  notes/2026-08-09-c756-q59-k13-mixed.json
 244240f38ea7a7a9ad01d032a69625db8b8070eec9d51a8df94b62c899c2b245  notes/2026-08-09-c756-q59-k13-all-passant.json
-be9fdbb55bbf23f7285483087bc85600ac0c161576e465b47e3ea5cb08c11f51  notes/2026-08-09-c756-q61-k13-mixed.json
-817ee9adca954a2b6299c52bab489d34598288ce93076731ea4cb06a0de6dcda  notes/2026-08-09-c756-q61-k13-all-passant.json
+0fa8a47e48ddcfdb65630feb3ec64297f5d0c5a58ad9d8fcff7720eab4d8eda3  notes/2026-08-09-c756-q61-k13-mixed.json
+ab2bf90676dae9844d5dab63119ebd060eede0628384c97f87473a668b606339  notes/2026-08-09-c756-q61-k13-all-passant.json
 ```
 
 ## Evidence boundary

@@ -15,7 +15,9 @@ already settled.  At \(k=13\), exact twelve-line geometry also closes
 \(q=59\), while at \(q=61\) exactly 96 normalized mixed leaves survive
 geometry and every one fails the first forced equation \(E_6=0\); the
 all-passant row has no leaf.  Thus the complete \(k=13\) layer is impossible
-over every finite field.
+over every finite field.  At \(k=14\), none of the 96 exact \(q=61\) mixed
+leaves admits a thirteenth line, so that field also closes; the fixed-size
+frontier is exactly \(q=67,71,73\).
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -91,6 +93,7 @@ Authorities:
   only the \(q=5\) four-frame and \(q=11\) hexagon occur.
 - No conic-filling \(12\)-arc exists over any finite field.
 - No conic-filling \(13\)-arc exists over any finite field.
+- For \(k=14\), the only unresolved fields are \(q=67,71,73\).
 
 ## Current branch map
 
@@ -315,10 +318,9 @@ notes/2026-08-09-c756-global-k13-closure.md.
 
 ## Ordered next actions
 
-1. Use the 96 exact \(q=61\) mixed leaves as roots for the thirteen-line
-   \(k=14\) extension gate; do not rerun the full twelve-line tree.
-2. Freeze the \(k=14\) point-type/window ledger before touching the remaining
-   larger fields.
+1. Shard the \(q=67\) thirteen-line mixed and all-passant searches and test
+   \(E_{12}\) first at every leaf.
+2. Keep the stronger \(q=71,73\) windows behind the q=67 feasibility gate.
 3. In parallel mathematical priority, seek the saturated-internal global
    dual-star nonblocking theorem.
 
@@ -377,6 +379,8 @@ Do not:
 - \(k=13\): closed exactly over every finite field; at \(q=61\), all 96
   geometric mixed leaves fail \(E_6=0\), and the other remaining rows have no
   twelve-line star.
+- \(k=14\): \(q=61\) closes because none of those 96 leaves extends by one
+  line; exactly \(q=67,71,73\) remain.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
@@ -397,6 +401,8 @@ Do not:
   `notes/2026-08-09-c756-k13-ledger-low-field-closure.md`.
 - Global k=13 closure at q=59,61:
   `notes/2026-08-09-c756-global-k13-closure.md`.
+- k=14 ledger and q=61 extension closure:
+  `notes/2026-08-09-c756-k14-ledger-q61-closure.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:

@@ -4,7 +4,7 @@
   "geometric_stars": 0,
   "k": 13,
   "mode": "all-passant-internal-deletion",
-  "normalization": "central inversion sends seed offset s to -s; representatives 0..29",
+  "normalization": "central inversion sends seed offset s to -s; representatives 0..30",
   "pinned_files": {
     "2026-08-09-c756-aligned-node-clique.py": "bf3c2fe00f9b09e2889532da697f9ef09d9ecffdfac2785d232541f164b79bbb",
     "2026-08-09-c756-aligned-split-mixed-search.py": "f1c11decc6df8c5e9bc0a57a5e98dfd35c9fdd2c4ce8fabaa3db5b115ab9249f"
