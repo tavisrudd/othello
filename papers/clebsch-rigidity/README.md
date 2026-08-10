@@ -67,8 +67,7 @@ and the pinned shared library as `--finitegeom-root`.  A passing release checks
 the exact transitive project-owned closure across both repositories:
 
 ```text
-nix develop --command \
-  python3 verification/verify_release.py \
+nix run .#verify -- \
   --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
   --finitegeom-root /absolute/path/to/finitegeom
 ```
@@ -80,8 +79,7 @@ and pass its successful run directory back to the release verifier:
 ../../lean/scripts/lean-build-queue.py build \
   RelativeConicArcs.Gates.ClebschRigidityWithOrderElevenCertificates \
   --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates
-nix develop --command \
-  python3 verification/verify_release.py \
+nix run .#verify -- \
   --lean-root /absolute/path/to/finitegeom-clebsch-q11-certificates \
   --finitegeom-root /absolute/path/to/finitegeom \
   --guarded-lean-run /run/directory/printed/by/the/guard
