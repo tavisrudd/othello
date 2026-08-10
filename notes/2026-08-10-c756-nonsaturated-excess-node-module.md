@@ -478,6 +478,29 @@ coefficient of the unmatched factor, equivalently the first two
 coefficients of the repeated-root factor.  No full fibre gcd or enumeration
 is needed.
 
+Equivalently, these coefficient formulas are logarithmic residues on the
+direction line.  With residues taken in the \(U\)-line over a fixed \(t\),
+\[
+ \boxed{
+ \begin{aligned}
+ \sigma_t&=-\operatorname{Res}_{U=\infty}
+       \left(Q_{\rm du}(t,U)\frac{G_t'(U)}{G_t(U)}\,dU\right),\\
+ \nu_t&=-\operatorname{Res}_{U=\infty}
+       \left(Q_{\rm du}(t,U)\frac{H_t'(U)}{H_t(U)}\,dU\right),\\
+ L(t)&=-\operatorname{Res}_{U=\infty}
+       \left(Q_{\rm du}(t,U)\frac{F_U(U,t)}{F(U,t)}\,dU\right).
+ \end{aligned}}                                        \tag{23p}
+\]
+At a finite root the logarithmic derivative has residue equal to its
+multiplicity, so the global residue theorem proves each line.  The identity
+\(d\log F=2d\log G_t+d\log H_t\) then proves (23h) directly.  On the
+branched quadric, replace \(Q_{\rm du}\) by \(\eta z^2\); the two deck lifts
+account for the factor two in the divisor traces following (23h).
+Thus the moving unmatched term is a residue of one quadratic section against
+the logarithmic derivative of the residual divisor.  A global control of
+that residue over \(C_3\) would immediately control both resultants
+(23j)--(23k).
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level

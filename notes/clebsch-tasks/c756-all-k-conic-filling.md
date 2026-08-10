@@ -499,7 +499,11 @@ if \(F_t=G_t^2H_t\), coefficient comparison shows that this trace uses only
 the first two coefficients of \(H_t\), and writes them explicitly in terms
 of the first two coefficients of \(F_t\) and \(G_t\).  This identifies the
 divisor-trace and repeated-root subresultant routes without computing a full
-fibre gcd.
+fibre gcd.  Equivalently,
+\(\nu_t=-\operatorname{Res}_{U=\infty}(Q_{\rm du}\,d\log H_t)\), while
+\(\sigma_t\) uses \(G_t\); the factorization \(F_t=G_t^2H_t\) makes the
+complementary trace law a logarithmic-residue identity on the direction
+pencil.
 
 ### \(q=53\): type-uniform critical core
 
