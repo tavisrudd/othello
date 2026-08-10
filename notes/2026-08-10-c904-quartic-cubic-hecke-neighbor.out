@@ -1,0 +1,19 @@
+Quartic--cubic transverse two-gluing certificate
+  X0(6)->X0(3): T(t)=-4*(4*t - 1)**2*(10*t - 7)/((2*t - 1)**2*(6*t - 1))
+  mod-2 marking square class R(t)=-(6*t - 1)*(10*t - 7)
+  twist marking square class S(t)=-5*(2*t + 1)*(26*t - 11)*(796*t**2 - 596*t + 79)
+  genera of R, S, and RS double covers: 0,1,2; biquadratic cover genus=3
+  genus-3 parametrization t(x)=(x**2 - 12*x + 148)/(4*(x**2 + 60))
+  hyperelliptic model Y^2=-5*(3*x**2 - 12*x + 268)*(9*x**2 - 228*x + 164)*(9*x**2 - 36*x - 1244)*(9*x**2 + 156*x - 604)
+  P1(F4) graphs: every distinct pair has zero vector as its only intersection
+  rational S6 orbit={infinity,0,1}; exotic A5 orbit={w,w+1}
+  common lattice: four scale-2 symplectic planes plus one unimodular plane
+  primitive integral comparison: f=2*id
+  polarized multiplier: f^dagger f=[4]
+  Smith invariants=(1, 1, 1, 1, 2, 2, 4, 4, 4, 4)
+  kernel=(Z/2)^2 + (Z/4)^4; degree=2^10
+  six-axis tight-frame map=6*id=3f
+  sum of six elliptic axis classes=6 times the ppav minimal curve class
+  G=6I-J has Hasse invariants -1 at p=2,3: no product-ppav similitude
+  general transverse-gluing theorem checked for 1<=h<=6, 0<=m<=3
+PASS

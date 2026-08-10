@@ -1,0 +1,8 @@
+Independent transverse-gluing replay
+  pulled-back square classes R(deg2), S(deg4), RS(deg6) are squarefree and disjoint
+  corresponding double-cover genera=0,1,2; V4-cover genus=3
+  integral comparison diagonal=(1, 4, 1, 4, 1, 4, 1, 4, 2, 2)
+  determinantal-divisor Smith invariants=(1, 1, 1, 1, 2, 2, 4, 4, 4, 4)
+  multiplier=4; order=2^10; exponent=4; two-torsion order=2^6
+  six axis classes=6 times minimal; product-form Hasse obstruction at p=2,3
+PASS

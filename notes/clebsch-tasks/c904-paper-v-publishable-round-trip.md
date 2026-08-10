@@ -62,6 +62,29 @@ checkpoint is in the manuscript; finite-flat residue
 control, full integral carrier saturation, descent, boundary, and Hecke
 geometry remain the broader upgrade gates.
 
+The second Annals-gate pass in
+`notes/2026-08-10-c904-quartic-cubic-hecke-correspondence.md` promotes that
+boundary match to an exact relative ppav isogeny after the two necessary
+quadratic markings.  On the resulting explicit genus-three cover of the
+$X_0(6)$ parameter line, the quartic rational gluing and cubic exotic gluing
+are transverse maximal isotropics.  The primitive map is $2I$, has multiplier
+$4$, Smith type $(1^4,2^2,4^4)$, kernel
+$(\mathbf Z/2)^2\oplus(\mathbf Z/4)^4$, and degree $2^{10}$; the six-axis sum
+is exactly $3$ times this primitive isogeny.  Nagel--Saito and the cubic Fano
+incidence give the rational Chow-motive bridge; Beauville's integral conic
+cylinder and the honest homomorphism
+$\alpha(1-\sigma):J(\widetilde\Delta_Q)\to J(X)$ reduce the integral cycle
+gate to one exact question: represent this homomorphism by an integral family
+of zero-cycles on the special $A_5$ Fano surfaces.  Voisin's criterion and an
+exact final parity audit show that this is a genuine two-primary gate:
+$\Phi$, the six axes, and the Prym construction yield respectively $4$, $6$,
+and $2$ times the minimal class $\Theta^4/4!$, while the form $6I-J$ has Hasse
+obstructions at $2,3$ to the evident product-$E^5$ polarized-similitude
+shortcut.  The remaining Annals crown is the odd minimal class/special
+universal cycle (or a special obstruction), global rigidification/descent,
+finite-flat boundary control, deck behavior, and full priority closure.  None
+of this upgrade has been imported into the Paper V manuscript.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable
