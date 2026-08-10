@@ -4,6 +4,13 @@ Date: 2026-08-10
 Status: quarantined Paper V research; no manuscript or Lean edits
 Scope: exact integral ppav theorem, relative-motive reduction, boundary and priority gates
 
+**Later checkpoint.**  The odd-minimal-class gate left open below is closed
+in `2026-08-10-c904-six-axis-minimal-class-saturation.md`: fourfold divisor
+products are saturated for all twenty principal gluings of $(E^5,6I-J)$, and
+coprime Smith projection indices $7,17$ prove $\Theta^4/4!$ algebraic on the
+exotic cubic quotient.  The historical analysis below is preserved because
+it records how the obstruction was localized.
+
 ## Executive verdict
 
 The Petersen/cubic equality `6I-J` is not only a boundary coincidence.  After

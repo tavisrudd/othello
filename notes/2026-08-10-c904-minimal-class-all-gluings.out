@@ -1,0 +1,22 @@
+C904 all principal gluing parity audit
+  p2=infinity p3=infinity NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=infinity p3=0        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=infinity p3=1        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=infinity p3=2        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=zero     p3=infinity NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=zero     p3=0        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=zero     p3=1        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=zero     p3=2        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=one      p3=infinity NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=one      p3=0        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=one      p3=1        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=one      p3=2        NS-index=78364164096 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega    p3=infinity NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega    p3=0        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega    p3=1        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega    p3=2        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega2   p3=infinity NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega2   p3=0        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega2   p3=1        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+  p2=omega2   p3=2        NS-index=1253826625536 Hodge-rank=15 order=1 Hodge-index=1 products=3060
+PASS

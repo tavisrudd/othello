@@ -1,0 +1,7 @@
+projection columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 17] smith=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7] index=7
+projection columns=[0, 1, 2, 6, 7, 8, 10, 11, 13, 16, 17, 18, 23, 31, 36] smith=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17] index=17
+rational Hodge rank=15 (explicit basis)
+gcd of full-rank projection indices=1
+minimal class lies in the rational divisor-product span
+therefore the divisor-product lattice is saturated and contains theta^4/4!
+PASS

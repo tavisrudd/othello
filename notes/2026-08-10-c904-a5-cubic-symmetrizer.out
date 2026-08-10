@@ -1,0 +1,5 @@
+C904 generic irreducible-A5 cubic symmetrizer
+  cubic monomials=35 invariant-pencil dimension=2
+  generic symmetrizer dimension=1
+  symmetrizer=scalar line; generic cubic is not Sebastiani--Thom
+PASS
