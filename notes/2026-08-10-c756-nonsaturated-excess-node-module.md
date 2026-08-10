@@ -735,6 +735,50 @@ This separates fixed-axis overlap from genuine cross-pair overlap inside
 \(K_{\rm mir}\), and gives a natural two-stage analysis of the remaining
 mirror-support algebra.
 
+The sign norm also commutes with the repeated/unmatched factorization.  On a
+direction fibre define
+\[
+ \mathcal G_t(Z)=\prod_{e\in\mathcal M_t}(Z-r_e(t)),
+ \qquad
+ \mathcal H_t(Z)=\prod_{i\in I_t}(Z-r_i(t)).
+                                                               \tag{23as}
+\]
+Then
+\[
+ \mathcal A(Z,t)=\mathcal G_t(Z)^2\mathcal H_t(Z).
+\]
+For a monic polynomial \(P\), let
+\[
+ \mathcal N_\pm(P)(W)
+ =(-1)^{\deg P}P(Z)P(-Z)\big|_{Z^2=W}.
+\]
+This sign norm is multiplicative, and therefore
+\[
+ \boxed{
+ \mathcal V(W,t)
+ =\mathcal N_\pm(\mathcal G_t)(W)^2
+  \mathcal N_\pm(\mathcal H_t)(W).}                    \tag{23at}
+\]
+Under \(V=\psi(t)+cW\), the two factors on the right become exactly
+\(\mathfrak G_t(V)\) and \(\mathfrak H_t(V)\), up to their monic powers of
+\(c\).  In particular, if
+\[
+ \mathcal G_t(Z)=Z^{\mu_t}+g_1^r(t)Z^{\mu_t-1}
+                         +g_2^r(t)Z^{\mu_t-2}+\cdots,
+\]
+then
+\[
+ \boxed{
+ \sigma_t
+ =c\bigl((g_1^r(t))^2-2g_2^r(t)\bigr)+\mu_t\psi(t).}   \tag{23au}
+\]
+This is the centered form of (30), now obtained functorially as the first
+coefficient of the sign norm of the repeated-root factor.  Mirror overlap
+is precisely the failure of the sign norms in (23at) to keep the ordinary
+root classes distinct: roots \(r\) and \(-r\) coalesce after descent to
+\(W=r^2\).  Thus ordinary subresultants may be computed before taking the
+sign norm, with the overlap correction supported exactly on \(K_{\rm mir}\).
+
 Let \(\Theta_Q(T)=\prod_{i<j}\ell_{ij}(T)\).  Taking the discriminant of
 (23x) in the value variable and using the direction factorization (8) gives
 \[

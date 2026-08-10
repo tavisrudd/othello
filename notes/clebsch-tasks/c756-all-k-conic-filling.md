@@ -545,6 +545,13 @@ Accordingly, ordinary directions are carried by
 \(\operatorname{disc}_Z\mathcal A\), while mirror directions are the
 off-diagonal square part of
 \(\operatorname{Res}_Z(\mathcal A(Z),(-1)^n\mathcal A(-Z))\).
+Fibrewise, \(\mathcal A_t=\mathcal G_t^2\mathcal H_t\), and the sign norm
+is multiplicative:
+\(\mathcal N_\pm(\mathcal A_t)=
+\mathcal N_\pm(\mathcal G_t)^2\mathcal N_\pm(\mathcal H_t)\).
+After \(V=\psi+cZ^2\), these are exactly the matched and unmatched value
+factors, so \(\sigma_t\) is the first coefficient of
+\(\mathcal N_\pm(\mathcal G_t)\).
 Hence
 \(\operatorname{disc}_V\mathfrak F\doteq
 (T^q-T)^2E_P^2\Theta_Q^2\): value collisions decompose into the ordinary
