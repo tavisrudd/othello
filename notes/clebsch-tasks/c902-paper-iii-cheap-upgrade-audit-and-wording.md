@@ -26,9 +26,14 @@ the item rather than drafting it into the paper.
    the formal algebra isomorphism `E ~= Q[C]` as a theorem.
 5. Complete Paper III's principal-minor/reconstruction discoverability wording,
    keywords, and subject metadata without making a fresh priority claim.
-6. Test the exact conductor-two cross-anchor between Papers I and III, sharply
-   separating the rational order comparison from any unproved lattice
-   identification.
+6. Audit C894's rooted maximal-order bridge
+   `0 -> A4 -> D6 -> O5 -> 0`, sharply distinguishing the raw coordinate
+   lattice `Z^6` from the conference even lattice `D6`, rooted from unrooted
+   canonicity, an exact sequence from a canonical splitting, and abstract
+   switching completion from the independently marked projective and harmonic
+   configurations.  Recommend wording only if C894's outstanding attribution
+   safeguards pass or Paper III supplies a self-contained proof that passes this
+   task's proof and red-team gates.
 7. Decide whether the already named Gaunt factorization gains anything from
    proposition status after auditing its classical representation-theoretic and
    special-function precedence.
@@ -73,6 +78,18 @@ and priority audit.
   and icosahedral-restriction sources at the exact normalization claimed.
 - Audit every cross-paper characterization against the owning paper and its ledger,
   not against a portfolio paraphrase.
+- For every integral spectral statement, distinguish `(I+C)/2`, which is not
+  integral on the raw lattice `Z^6`, from its integral maximal-order action on
+  `D6`; do not revive the superseded claim that the natural Paper III carrier
+  stops at the conductor-two order.
+- Treat Haemers--Parsaei Majd's normalized Seidel-to-conference bordering and
+  order-six pentagon core as classical.  Carry C894's tournament-square and
+  `A4`/`D6` exact-sequence refinement as attribution-only until its narrowed
+  human predecessor query returns.
+- Any portfolio use of C894's theorem that covering selects `q=11` from the
+  saturated-exterior possibilities `q=3,7,11` remains deferred until C894's
+  institutional-index and external-specialist safeguards pass and a stable
+  citable surface exists.
 - Where a negative uses forward-citation closure, resolve pinned seeds and obtain
   OpenAlex, Crossref, and Semantic Scholar counts independently, screen the largest
   set, and record service disagreements and access failures.
@@ -147,5 +164,8 @@ summaries.  Promotion remains with the owning routed integration task.
   specialist red team.
 - No recommendation regresses C733's marked-relative boundary, C897's layered
   architecture, the `golden` lane boundary, or the paper's formal trust language.
+- No recommendation turns the rooted exact sequence into an unrooted canonical
+  submodule, a preferred direct-sum splitting, or recovery of an independently
+  marked projective or harmonic configuration.
 - The final wording packet is recommendation-only and names the exact routed owner of
   any eventual edit.
