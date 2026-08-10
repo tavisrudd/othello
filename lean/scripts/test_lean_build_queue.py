@@ -39,6 +39,10 @@ if [ "${1:-}" = run ] && [ "${2:-}" = path:.#regenerate ]; then
   printf 'regenerated\n' > "$FAKE_LAKE_STATE/regenerated"
   exit 0
 fi
+if [ "${1:-}" = run ] && [ "${2:-}" = path:.#verify ] && [ "${3:-}" = -- ]; then
+  printf '%s\n' "${4:-}" > "$FAKE_LAKE_STATE/verified-archive"
+  exit 0
+fi
 [ "${1:-}" = develop ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 [ "${2:-}" = --command ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 if [ "${3:-}" = lake ] && [ "${4:-}" = pack ]; then
@@ -373,6 +377,33 @@ class QueueTest(unittest.TestCase):
             timeout=30,
         )
 
+    def verify(self, archive: Path):
+        (self.lean_root / "flake.nix").write_text("{}\n")
+        return subprocess.run(
+            [
+                sys.executable,
+                str(RUNNER),
+                "verify",
+                str(archive),
+                "--lean-root",
+                str(self.lean_root),
+                "--lock-file",
+                str(self.lock_file),
+                "--mountinfo",
+                str(self.mountinfo),
+                "--nix-binary",
+                str(self.bin / "nix"),
+                "--pgrep-binary",
+                str(self.bin / "pgrep"),
+                "--run-quiet-binary",
+                str(self.bin / "run-quiet"),
+            ],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
     def restore(self, archive: Path):
         return subprocess.run(
             [
@@ -576,6 +607,17 @@ class QueueTest(unittest.TestCase):
         result = self.regenerate()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.state / "regenerated").read_text(), "regenerated\n")
+
+    def test_verify_uses_the_guarded_package_app(self) -> None:
+        archive = self.tmp / "packs/fixture.tgz"
+        archive.parent.mkdir()
+        archive.write_text("fixture", encoding="utf-8")
+        result = self.verify(archive)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            (self.state / "verified-archive").read_text(),
+            f"{archive.resolve()}\n",
+        )
 
     def test_restore_is_quiet_and_disk_backed(self) -> None:
         archive = self.tmp / "packs/fixture.tgz"
