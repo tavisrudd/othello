@@ -297,6 +297,12 @@ the nonzero sign gate is the discriminant of these orthogonal quotients.
 This formulation suggests retaining the edge-sign/voltage compatibility of
 the square roots supplied by the endpoint Gram determinants, rather than
 discarding it after squaring.
+It is also a stop rule: every nondegenerate quadratic space of dimension at
+least three over a finite field of odd order is isotropic.  Therefore the
+abstract fibre dimension and square class cannot exclude (23c).  Any proof
+must use that the particular square-root vectors on different matchings come
+from one endpoint Gram system (or from the all-center identities), not merely
+that each vector has nonzero coordinates.
 
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign

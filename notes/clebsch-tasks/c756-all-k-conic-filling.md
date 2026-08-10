@@ -190,6 +190,17 @@ is already closed); at \(q=81\), the kernel must meet the native \(j=2\)
 checks and the reflected shadow-successor rungs \(j=5,14\).  Outside these
 three fields, any tower kernel is a special rank-drop stratum rather than a
 dimension necessity.
+The first non-shadow rung does not descend to the ghost quotient: its mixed
+binomial terms retain the three-dimensional conic part of \(H_2\).  Using
+the canonical ghost-tail section, its exact carrier is a degree-two map for
+\(p\ne5\), or a degree-three map for \(p=5\), on
+\(\mathcal C_R\oplus\ker\mathbb M_R\).  The strong rigidity target is that
+its zero locus is exactly \(\mathcal C_R\oplus\{0\}\).
+Its normal derivative along the conic locus is another explicit
+denominator-free matrix \(\mathbb N_R(C)\); the first subgate is the
+determinantal transversality condition
+\(\ker\mathbb M_R\cap\ker\mathbb N_R(C)=0\), followed by exclusion of
+disjoint zeros of the full quadratic/cubic map.
 Equivalently, if \(x_i\) are the roots of \(R\) and
 \(w_i=1/R'(x_i)\), the entire hierarchy is the division-free syndrome law
 \[
@@ -557,8 +568,9 @@ over every finite field.  Authorities:
 2. For saturated-internal configurations, prove the special-direction conic
    lemma over proper extension fields by analyzing the nonlinear Cartier
    system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Classify the common
-   kernel of the semilinear digit tower \(j=p^a\), then apply the first
-   non-shadow rung: \(j=2\) unless \(p=5\), where one must use \(j=3\).
+   kernel of the semilinear digit tower \(j=p^a\), then analyze the mixed
+   conic--ghost non-shadow map: \(j=2\) unless \(p=5\), where one must use
+   \(j=3\).
    Prove that the resulting carry-controlled multiplication flag forces
    \(\deg H_2\le2\); or
    classify the equivalent completely split lacunary norm

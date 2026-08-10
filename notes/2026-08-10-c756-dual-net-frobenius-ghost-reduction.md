@@ -783,9 +783,8 @@ Here the bracketed exponent on a matrix means entrywise Frobenius.  Formula
 (74) replaces the common semilinear-kernel problem by the rank stratification
 of one explicit Cartier--Toeplitz matrix over the coefficient space of
 completely split factors \(R\mid X^q-X\).  It also isolates the nonlinear
-work exactly: restrict the first non-shadow equations (58), and their
-reflected rows, to the linear nullspace of \(\mathbb M_R\).  No fixed field
-or choice of roots enters the construction.
+work, but with one important qualification.  No fixed field or choice of
+roots enters the construction.
 The recurrence (71), the coefficients of \(R^{p^a-1}\), and hence every
 entry of \(\mathbb M_R\) are polynomials in \(r_0,\ldots,r_{n-1}\); no
 denominator is introduced.  Consequently the locus
@@ -858,6 +857,67 @@ This does not assert full rank outside those fields: it says that every
 additional kernel there lies on a proper determinantal rank stratum of
 \(\mathbb M_R\).  Conversely, at the three seams in (78), the nonlinear
 non-shadow test is logically unavoidable regardless of \(R\).
+
+Unlike the power rungs, a non-shadow rung does **not** descend to the ghost
+quotient: mixed binomial terms remember the degree-at-most-two part of
+\(H_2\).  Let
+\(s_R:\mathcal G_R\to\mathcal V_R\) be the canonical section specified by
+(71), and write
+\[
+ H=C+s_R(g),
+ \qquad C\in\mathcal C_R,
+ \qquad g\in\mathcal K_R.                               \tag{79}
+\]
+For the first non-shadow index \(j_0\) in (58), let
+\(\mathcal Q_{R,j_0}(C,g)\) be the vector of Lucas-visible coefficients of
+the proper part of
+\[
+ \frac{H^{j_0}}R
+ =R^{j_0-1}\left(\frac HR\right)^{j_0}.                 \tag{80}
+\]
+Then \(\mathcal Q_{R,j_0}\) is a homogeneous polynomial map of degree
+\(j_0\) in \((C,g)\), and
+\[
+ \mathcal Q_{R,j_0}(C,0)=0                              \tag{81}
+\]
+for every conic numerator \(C\).  The exact strong rigidity target is the
+set-theoretic equality
+\[
+ \boxed{
+ \left\{(C,g)\in\mathcal C_R\oplus\mathcal K_R:
+        \mathcal Q_{R,j_0}(C,g)=0\right\}
+ =\mathcal C_R\oplus\{0\}.}                             \tag{82}
+\]
+It is enough, but stronger than necessary, because the actual complementary
+factor selects one specific pair \((C(R),g(R))\).  At \(q=25\), (82) is a
+cubic system over a kernel forced to have dimension at least one; at
+\(q=27,81\) it is a quadratic system over a kernel forced to have dimension
+at least five.  The reflected shadow--successor rows constrain the same
+mixed \((C,g)\) system.  This is the precise nonlinear bundle over the
+determinantal strata (74), and avoids the false claim that the non-shadow
+equation is intrinsically defined on \(\mathcal G_R\).
+
+The first normal obstruction along the conic locus is linear again.  If
+\(G=s_R(g)\), polarization of (80) gives
+\[
+ \boxed{
+ D_g\mathcal Q_{R,j_0}(C,0)[g]
+ =j_0\,\Pi_{j_0}\operatorname{pr}_{<0}
+       \left(\frac{C^{j_0-1}G}{R}\right),}              \tag{83}
+\]
+where \(\Pi_{j_0}\) retains the Lucas-visible rows.  The scalar \(j_0\) is
+nonzero in the relevant characteristics.  After inserting the recurrence
+matrix \(T(R)\) from (72), (83) is another denominator-free matrix
+\(\mathbb N_R(C)\) on \(\mathcal K_R\).  Hence
+\[
+ \boxed{
+ \ker\mathbb M_R\cap\ker\mathbb N_R(C)=0}              \tag{84}
+\]
+is the exact infinitesimal rigidity criterion at the conic numerator \(C\).
+Failure of (84) is again determinantal, now on the product of the split-factor
+locus with the three-dimensional conic space.  Proving (84) eliminates every
+nonconic component tangent to the conic locus; the remaining global task is
+to exclude isolated or disjoint zeros of the full quadratic/cubic map (82).
 
 The correct theorem target is to determine \(\mathcal K_R\) uniformly,
 prove it zero where dimensions permit, and show that every nonzero class in
@@ -1000,7 +1060,8 @@ through enough of those equations.
 | Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
 | Can the common semilinear kernel be linearized explicitly? | settled | stacked Cartier--Toeplitz matrix \(\mathbb M_R\), formula (74) |
 | Where is a tower kernel forced dimensionally? | settled | exactly the live seams \(q=25,27,81\), formula (78) |
-| What matrix statement would close the extension branch? | open, exact | control the determinantal rank strata of \(\mathbb M_R\), then impose the first non-shadow rung (58) on their nullspaces |
+| Does the non-shadow rung descend to the ghost quotient? | no | mixed conic--ghost terms require the bundle map (79)--(82) |
+| What matrix statement would close the extension branch? | open, exact | control the determinantal rank strata of \(\mathbb M_R\), then prove nonlinear bundle rigidity (82) |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
 | What remains to prove? | open | couple the ghost supports under \(H_{2j}\equiv H_2^j\pmod R\) and force \(\deg H_2\le2\) |
@@ -1008,8 +1069,9 @@ through enough of those equations.
 ## Next action
 
 Analyze the determinantal rank strata of the explicit matrix
-\(\mathbb M_R\) in (74), then restrict the first non-shadow equation (58)
-to its nullspaces.  The exact theorem target is a uniform classification of
+\(\mathbb M_R\) in (74), then analyze the mixed conic--ghost map
+\(\mathcal Q_{R,j_0}\) in (79)--(82) over its nullspaces.  The exact theorem
+target is a uniform classification of
 the common kernel \(\mathcal K_R\) in (49) on the
 \(q/p-1\)-dimensional quotient (47), with
 the forced \(q=25,27,81\) kernel dimensions as boundary tests.  Apply \(j=3\)
