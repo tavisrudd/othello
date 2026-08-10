@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; manuscript-first; Lean deferred to 2026-08-10
+**Status:** active; manuscript and cold-referee gates closed; paper-only export
+pending; Lean deferred by user instruction
 
 **Research checkpoint:** the literal-cubic target failed, but the replacement
 Paper-II chordal-axis bridge is proved exactly and independently replayed.
@@ -11,6 +12,15 @@ line, however, its difference operator `q-1` is an isomorphism to the
 conference line and identifies sheet sign with conference orientation.  The
 marked oriented round trip is therefore proved.  The selected chordal line is
 load-bearing and must be declared in transports from Papers I and III.
+
+**Current surface:** *The Golden Companion Correspondence*, eleven pages,
+warning-free.  The exact marked theorem, source-return boundary, attribution
+ledger, layered exposition, stable references, and rendered opening are
+closed.  Three independent dossier-primed readers returned GO on the final
+freeze after two narrow convention repairs.  The optional tame icosahedral
+quotient tower remains a separately gated successor prospect: its mathematics
+passes red team, but its classical literature audit and expanded arithmetic
+certificate are not closed and it is not imported into the manuscript.
 
 ## Goal
 
@@ -70,6 +80,9 @@ ready.
    reviews until correctness and exposition are `GO`.
 7. Run final claim-specific, citation, stable-reference, detritus,
    Milnor--Serre, rendered-page, venue-length, and release-surface checks.
+
+Steps 1--7 are closed on the authority manuscript except for the paper-only
+mirror export.  The separate Lean publication gate remains deferred.
 
 ## Publication gates
 
