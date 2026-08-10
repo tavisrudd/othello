@@ -6,11 +6,11 @@ LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 SOURCE := golden_companion_reconstruction.tex
 
-.PHONY: all check evidence lint warnings clean distclean
+.PHONY: all check evidence lint manuscript warnings clean distclean
 
-all: lint golden_companion_reconstruction.pdf
+all: lint manuscript
 
-check: evidence lint golden_companion_reconstruction.pdf warnings
+check: evidence lint manuscript warnings
 
 evidence:
 	python3 verification/evidence/paper_ii_chordal_axis.py --check
@@ -18,11 +18,11 @@ evidence:
 lint:
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 
-golden_companion_reconstruction.pdf: $(SOURCE)
+manuscript: $(SOURCE)
 	python3 ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
-warnings: golden_companion_reconstruction.pdf
+warnings: manuscript
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' golden_companion_reconstruction.log; then \
 		exit 1; \
 	fi
