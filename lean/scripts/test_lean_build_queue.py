@@ -39,6 +39,10 @@ if [ "${1:-}" = run ] && [ "${2:-}" = path:.#regenerate ]; then
   printf 'regenerated\n' > "$FAKE_LAKE_STATE/regenerated"
   exit 0
 fi
+if [ "${1:-}" = run ] && [ "${2:-}" = path:.#materialize ] && [ "${3:-}" = -- ]; then
+  printf '%s\n' "${4:-}" "${5:-}" "${6:-}" "${7:-}" > "$FAKE_LAKE_STATE/materialized-args"
+  exit 0
+fi
 if [ "${1:-}" = run ] && [ "${2:-}" = path:.#verify ] && [ "${3:-}" = -- ]; then
   printf '%s\n' "${4:-}" > "$FAKE_LAKE_STATE/verified-archive"
   printf '%s\n' "${5:-}" "${6:-}" > "$FAKE_LAKE_STATE/verified-sources"
@@ -354,7 +358,7 @@ class QueueTest(unittest.TestCase):
             timeout=30,
         )
 
-    def regenerate(self):
+    def regenerate(self, app: str = "regenerate", app_args: tuple[str, ...] = ()):
         (self.lean_root / "flake.nix").write_text("{}\n")
         return subprocess.run(
             [
@@ -371,6 +375,9 @@ class QueueTest(unittest.TestCase):
                 str(self.bin / "pgrep"),
                 "--run-quiet-binary",
                 str(self.bin / "run-quiet"),
+                "--app",
+                app,
+                *(('--', *app_args) if app_args else ()),
             ],
             env=self.env(),
             capture_output=True,
@@ -618,6 +625,16 @@ class QueueTest(unittest.TestCase):
         result = self.regenerate()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.state / "regenerated").read_text(), "regenerated\n")
+
+    def test_materialize_passes_arguments_through_the_guarded_app(self) -> None:
+        result = self.regenerate(
+            "materialize", ("input-root", "output-root", "--staging-root", "stage")
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            (self.state / "materialized-args").read_text(),
+            "input-root\noutput-root\n--staging-root\nstage\n",
+        )
 
     def test_verify_uses_the_guarded_package_app(self) -> None:
         archive = self.tmp / "packs/fixture.tgz"

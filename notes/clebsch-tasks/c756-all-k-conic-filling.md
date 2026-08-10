@@ -156,10 +156,28 @@ remainder of \(S^2\) modulo \(R\), conic containment is exactly
 Writing the proper Laurent part of \(S^3/(X^q-X)\) as
 \(\sum c_rX^{-r}\), the third odd divided coefficient forces
 \(r(r+1)c_r=0\) through the whole required range.  Only
-\(r\equiv0,-1\pmod p\) can survive.  Every higher odd coefficient supplies
-the corresponding Lucas/Hasse constraint for the remainder of
-\(S^{2j}\) modulo \(R\).  These ghost spaces are affine-stable, so coordinate
-translation is not an additional equation.  Multiplying back the root
+\(r\equiv0,-1\pmod p\) can survive.  If \(F=H_2/R\), this is the truncated
+rank-two Cartier tail
+\(F=A(Z^{-p})+ZB(Z^{-p})+O(Z^{-(n-2)})\).  Every higher odd coefficient
+acts on the same tail through the exact nonlinear coupling
+\[
+ \frac{H_{2j}}R=\operatorname{pr}_{<0}(R^{j-1}F^j).
+\]
+The ghost module is affine-stable, so coordinate translation is not an
+additional equation.  After reciprocation, the same condition is a
+two-component Frobenius--Pade congruence against the unit reciprocal factor
+\(R^\vee\), while the higher equations impose the nonlinear compatibility
+with \(H_2\equiv S^2\pmod R\).  Its numerator space has dimension
+\(q/p+2\); quotienting by the three-dimensional conic numerators leaves an
+exact \(q/p-1\)-dimensional saturated ghost module.  More generally, the
+rungs \(j=p^a\) form a
+Frobenius-semilinear digit tower: for \(p\ge5\) every level
+\(0\le a\le e-1\) is available, and for \(p=3\) every non-top level is.
+Lucas selects the corresponding base-\(p\) digit of the Laurent index.  If
+the descended digit maps have zero common kernel on the ghost quotient, the
+extension conic lemma follows; otherwise only their common kernel must meet
+the genuinely nonlinear \(j=2\) equation.
+Multiplying back the root
 divisor of \(S\) packages the entire hierarchy as a full-field norm
 identity: the two completely split degree-\(q\) products
 \(\prod_{x\in\mathbb F_q}(U+Vx\pm WS(x))\) differ by
@@ -265,6 +283,35 @@ The scalar norm alone cannot distinguish all-external from all-internal
 residual pairs; the remaining covariance work must retain the trace of the
 linear remainder of \(Q_\ell^{(q-1)/2}\) modulo \(E_{P,\ell}\).  Authority:
 `notes/2026-08-09-c756-all-center-resultant-norm.md`.
+
+The masked direction and intercept data also have a uniform finite-algebra
+carrier.  Let \(A_{\rm node}\) be the split function algebra of the
+\(q+\delta\) chord nodes and let
+\(B_{\rm dir}=\operatorname{Map}(\mathbb F_q,\mathbb F_q)\) pull back along
+the slope map.  The excess module
+\[
+ M=A_{\rm node}/B_{\rm dir}
+\]
+has dimension exactly \(\delta\).  Slope multiplication descends to \(M\)
+and has characteristic polynomial \(E_P\); the classes
+\([U],[U^2],\ldots\) form a canonical intercept flag spanning every repeated
+fibre.  Fibrewise trace gives a canonical covariance form on \(M\), whose
+intercept-power Gram determinant at multiplicity \(\mu\) is
+\(\mu^{\mu-2}\prod_{a<b}(u_a-u_b)^2\).  The node-character condition is the
+constant square class of \(Q(T,U)\in A_{\rm node}^\times\).  This quotient
+lives only on the Frobenius-fixed finite base and does not assume a global
+Moore Cartier divisor.  Weighting covariance by \(Q\) reduces the global
+conic contribution to
+\(\epsilon^{\delta+r}\prod_{\mu_t\ge2}
+\chi(\sigma_t)^{\mu_t-2}\), where
+\(\sigma_t=\sum_{\pi^{-1}(t)}Q(t,u)\); only multiplicity at least three
+remains unknown.  Each \(\sigma_t\) depends only on the first two
+coefficients of the repeated-root factor of \(F(U,t)\), and equivalently is
+a square-normalized matching sum of
+\(Q(v_i)Q(v_j)-B(v_i,v_j)^2\) over chord endpoints.  The
+earlier Euler-character norm does not determine this value-level trace:
+replacing the weights by their constant signs reduces weighted covariance
+tautologically to ordinary covariance.
 
 ### \(q=53\): type-uniform critical core
 
@@ -390,13 +437,16 @@ over every finite field.  Authorities:
 1. Do not open a \(k=15\) census.  Treat q=67,71,73 only as theorem-design
    data for the all-\(q\) branches.
 2. For saturated-internal configurations, prove the special-direction conic
-   lemma over proper extension fields by coupling the Laurent ghost supports
-   of \(H_{2j}\equiv H_2^j\pmod R\).  Start with \(H_4\) and the fourth Hasse
-   derivative, or classify the equivalent completely split lacunary norm
+   lemma over proper extension fields by analyzing the nonlinear Cartier
+   system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Couple the genuinely
+   nonlinear quadratic rung \(j=2\) to the simultaneous semilinear digit
+   tower \(j=p^a\), or classify the equivalent completely split lacunary norm
    pair; do not retry translations of the affine coordinate.
 3. For the nonsaturated branch, prove the masked Redei missing-direction
-   theorem \(h\ge1\) for arbitrary defect, retaining both direction and
-   intercept on the Frobenius-fixed incidence space.
+   theorem for arbitrary defect through the \(\delta\)-dimensional excess
+   node module.  Control its weighted global discriminant through the first
+   two repeated-root coefficients or the equivalent Gram matching sums, then
+   compare it with the constant conic square class through star realization.
 
 ## Stop rules
 
@@ -446,7 +496,9 @@ Do not:
 - Saturated-internal: sharply constrained but open at global coherence.
 - Nonsaturated, arbitrary type: the first-size point/type/window ledger is
   exact, and its character total has the all-center trace/norm law (H');
-  \(k=12\) is closed globally, but higher sizes are open.
+  \(k=12\) is closed globally, but higher sizes are open.  The direction and
+  intercept excess is compressed canonically into a \(\delta\)-dimensional
+  module whose slope characteristic polynomial is \(E_P\).
 - \(q=47,k=12\): closed exactly for every point type.
 - \(q=49,k=12\): closed exactly for every point type.
 - \(q=53,k=12\): closed exactly for every point type and covariance class.
@@ -491,6 +543,8 @@ Do not:
   `notes/2026-08-10-c756-coherent-dual-three-net.md`.
 - Extension-field complementary-factor and Frobenius-ghost reduction:
   `notes/2026-08-10-c756-dual-net-frobenius-ghost-reduction.md`.
+- Nonsaturated excess-node module:
+  `notes/2026-08-10-c756-nonsaturated-excess-node-module.md`.
 - External-deletion all-covariance closure:
   `notes/2026-08-09-c756-external-deletion-all-covariance-closure.md`.
 - Complete \(q=53,k=12\) closure:

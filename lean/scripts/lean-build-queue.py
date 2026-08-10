@@ -956,7 +956,7 @@ def command_update_lock(args: argparse.Namespace) -> int:
 
 
 def command_regenerate(args: argparse.Namespace) -> int:
-    """Run a package's explicit regeneration app under the build-owner guard."""
+    """Run a package's explicit source-producing app under the build-owner guard."""
     lean_root = args.lean_root.expanduser().resolve()
     if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
         fail(f"{lean_root} is not a Lake package")
@@ -968,18 +968,24 @@ def command_regenerate(args: argparse.Namespace) -> int:
     lock_file = (
         args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
     ).expanduser().resolve()
+    app = args.app
+    app_args = list(args.app_args)
+    if app_args[:1] == ["--"]:
+        app_args = app_args[1:]
     run_id = (
-        f"regenerate-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-"
+        f"{app}-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-"
         f"{uuid.uuid4().hex[:8]}"
     )
-    lock = acquire_lock(lock_file, run_id, ["<nix run .#regenerate>"])
+    lock = acquire_lock(lock_file, run_id, [f"<nix run .#{app}>"])
     try:
         wait_for_quiet(pgrep, 0, 60)
         quiet_root = STATE_ROOT_DEFAULT / "regenerations" / run_id
         quiet_root.mkdir(parents=True, exist_ok=False)
         env = os.environ.copy()
         env["RUN_QUIET_LOGDIR"] = str(quiet_root)
-        inner = [args.nix_binary, "run", "path:.#regenerate"]
+        inner = [args.nix_binary, "run", f"path:.#{app}"]
+        if app_args:
+            inner.extend(["--", *app_args])
         result = subprocess.run(
             [args.run_quiet_binary, shlex.join(inner)],
             cwd=lean_root,
@@ -1674,7 +1680,7 @@ def parser() -> argparse.ArgumentParser:
     update_lock.set_defaults(function=command_update_lock)
 
     regenerate = subparsers.add_parser(
-        "regenerate", help="run the package regeneration app under the owner guard"
+        "regenerate", help="run a package source-producing app under the owner guard"
     )
     regenerate.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
     regenerate.add_argument("--lock-file", type=Path, default=None)
@@ -1682,6 +1688,17 @@ def parser() -> argparse.ArgumentParser:
     regenerate.add_argument("--pgrep-binary", default="pgrep")
     regenerate.add_argument(
         "--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet")
+    )
+    regenerate.add_argument(
+        "--app",
+        choices=("regenerate", "materialize"),
+        default="regenerate",
+        help="flake app to run; source-producing apps remain separate from verification",
+    )
+    regenerate.add_argument(
+        "app_args",
+        nargs=argparse.REMAINDER,
+        help="arguments after -- are passed to the selected flake app",
     )
     regenerate.set_defaults(function=command_regenerate)
 

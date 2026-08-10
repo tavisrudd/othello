@@ -233,6 +233,15 @@ The command refuses a live foreign Lean process and runs only the package's expl
 `nix run .#regenerate` app. Ordinary verification must use the read-only `.#verify` app and must
 never invoke regeneration.
 
+For a package whose source-producing operation is accurately named `materialize`, select that app
+and pass its explicit roots after `--`; the same owner lock and quiet check apply:
+
+```sh
+lean/scripts/lean-build-queue.py regenerate \
+  --lean-root ~/src/lean/<certificate-package> --app materialize -- \
+  INPUT_ROOT OUTPUT_ROOT --staging-root STAGING_ROOT
+```
+
 ## Shared-library validation
 
 - A lane that consumes `RelativeConicArcs` exits through its documented import-only module set under

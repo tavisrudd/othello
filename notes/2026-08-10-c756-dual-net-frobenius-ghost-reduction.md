@@ -267,6 +267,60 @@ projective/Cartier invariant.
 
 ## 6. Higher odd divided ghosts
 
+The first ghost space has an intrinsic Cartier description.  Up to the
+precision required for the conic criterion, (6)--(7) say exactly that
+\[
+ F(Z)=A(Z^{-p})+ZB(Z^{-p})+O(Z^{-(n-2)})                 \tag{37}
+\]
+for Laurent polynomials \(A,B\) with no terms producing nonnegative powers
+of \(Z\).  In other words, the surviving tail is the rank-two
+\(\mathbb F_q(Z^p)\)-module
+\[
+ \ker D_Z^{(2)}=\mathbb F_q(Z^p)+Z\mathbb F_q(Z^p)       \tag{38}
+\]
+at the relevant truncation.  This is the precise Cartier/Frobenius meaning
+of the two residues \(0,-1\pmod p\).
+
+Equivalently, move infinity to the formal origin by setting \(t=Z^{-1}\)
+and introducing reciprocal polynomials
+\[
+ R^\vee(t)=t^nR(t^{-1}),\qquad
+ H_2^\vee(t)=t^{n-1}H_2(t^{-1}).                         \tag{41}
+\]
+Since \(R^\vee(0)=1\), the first ghost condition is precisely the
+two-component Frobenius--Pade congruence
+\[
+ \boxed{
+ \frac{tH_2^\vee(t)}{R^\vee(t)}
+ \equiv A_0(t^p)+t^{p-1}C(t^p)\pmod {t^{n-2}}.}          \tag{42}
+\]
+Here \(A_0(0)=0\); the constant term of \(C\) accounts for the first possible
+index \(p-1\).  Multiplying by the unit \(R^\vee\) makes (42) a finite
+linear congruence.  Thus the extension seam can also be viewed as a
+rank-two Frobenius--Pade numerator problem for a reciprocal polynomial that
+splits completely after returning to the \(Z\)-coordinate.  The nonlinear
+conditions below impose the missing compatibility with
+\(H_2\equiv S^2\pmod R\).
+
+This congruence has an exact finite-dimensional excess quotient.  Define
+\[
+ \mathcal V_R=left\{H:\deg H<n,
+   D_Z^{(2)}(H/R)=O(Z^{-n})\right\},\qquad
+ \mathcal C_R=\{H:\deg H\le2\}.                         \tag{46}
+\]
+The first \(n\) Laurent coefficients of \(H/R\) are triangular coordinates
+on the \(n\)-dimensional numerator space.  Among the first \(n-3\), exactly
+\(q/p-1\) ghost coordinates survive.  Therefore
+\[
+ \boxed{
+ \dim\mathcal V_R=\frac qp+2,\qquad
+ \dim\mathcal C_R=3,\qquad
+ \dim(\mathcal V_R/\mathcal C_R)=\frac qp-1.}            \tag{47}
+\]
+The last quotient is the finite saturated ghost module.  It is the precise
+analogue of the defect module in the nonsaturated branch: conic containment
+means that the class of the actual remainder \(H_2\) vanishes in (47).
+
 The same pencil supplies a hierarchy, not just (6).  For
 \(b=2j+1<n\), let \(H_{2j}\) be the degree-\(<n\) remainder of
 \(S^{2j}\) modulo \(R\), and write
@@ -285,9 +339,102 @@ and hence
 \]
 This is the divided-power replacement for the broken high-degree moment
 argument.  Lucas' theorem makes every blind digit pattern in (30) explicit.
-The remaining work is to couple the remainders
-\(H_{2j}\equiv H_2^j\pmod R\), rather than treating their ghost slots
-independently.
+The coupling among the remainders is itself an exact Laurent identity.
+Since \(H_2=RF\) and \(H_{2j}\equiv H_2^j\pmod R\),
+\[
+ \boxed{
+ \frac{H_{2j}}R
+ =\operatorname{pr}_{<0}\!\left(R^{j-1}F^j\right),}      \tag{39}
+\]
+where \(\operatorname{pr}_{<0}\) denotes the proper Laurent part at
+infinity.  Thus (30) is one nonlinear Cartier system on the single
+rank-two tail (37), not a family of independent ghost supports.
+
+For example, the first new equation is
+\[
+ \frac{H_4}R=\operatorname{pr}_{<0}(RF^2),
+ \qquad
+ \binom{r+3}{4}[Z^{-r}]\operatorname{pr}_{<0}(RF^2)=0.
+                                                               \tag{40}
+\]
+For \(p\ge5\), its blind residues are
+\(r\equiv0,-1,-2,-3\pmod p\).  The point of (40) is not that this larger
+blind set alone helps, but that multiplication by the fixed split factor
+\(R\) forces the square of the two-residue tail (37) into it.  Higher
+\(j\) impose the analogous constraints on
+\(\operatorname{pr}_{<0}(R^{j-1}F^j)\).
+
+The distinguished uniform rung is \(j=p\).  It is available when
+\(2p+1<n\), equivalently \(q>4p-1\).  This holds for every proper extension
+field in the live branch: for \(p\ge5\), already \(p^2>4p-1\), while for
+\(p=3\) the only exception is the separately closed field \(q=9\).  At this
+rung, (39) becomes
+\[
+ \boxed{
+ \frac{H_{2p}}R
+ =\operatorname{pr}_{<0}(R^{p-1}F^p),\qquad
+ F^p=\sum_{r\ge1}c_r^pZ^{-pr}.}                          \tag{43}
+\]
+The corresponding multiplier is
+\(\binom{r+2p-1}{2p}\).  Since \(2p\) has base-\(p\) digits \((2,0)\),
+Lucas' theorem says that this multiplier is nonzero exactly when the
+\(p\)-digit of \(r+2p-1\) is at least two.  Thus (43) is the first canonical
+equation that couples the two-residue first tail to the next base-\(p\)
+digit.  It supplies a uniform all-extension schedule: use the quadratic
+rung (40) for local multiplicative pressure and the Frobenius rung (43) for
+digit propagation.
+
+In fact (43) is the first member of a Frobenius--Cartier tower.  Whenever
+\(2p^a+1<n\), take \(j=p^a\) in (39).  Then
+\[
+ \frac{H_{2p^a}}R
+ =\operatorname{pr}_{<0}\!\left(R^{p^a-1}F^{p^a}\right),
+ \qquad
+ F^{p^a}=\sum_{r\ge1}c_r^{p^a}Z^{-p^ar}.                \tag{44}
+\]
+Let \(\Pi_a\) retain, in the range of (30), precisely those Laurent indices
+for which the \(a\)-th base-\(p\) digit of
+\(r+2p^a-1\) is at least two.  Lucas' theorem rewrites the whole rung as
+\[
+ \boxed{
+ \mathcal L_{R,a}(F):=
+ \Pi_a\operatorname{pr}_{<0}
+       \!\left(R^{p^a-1}F^{p^a}\right)=0.}               \tag{45}
+\]
+The map \(\mathcal L_{R,a}\) is \(p^a\)-semilinear in \(F\).  Thus these
+rungs are finite semilinear constraints in \(F\), for fixed \(R\), not
+higher-degree polynomial searches.  Moreover, if \(H\in\mathcal C_R\), then
+\(H^{p^a}/R\) begins at Laurent order at least
+\(n-2p^a\), just beyond the constrained range in (30).  Hence every
+\(\mathcal L_{R,a}\) annihilates \(\mathcal C_R\) and descends to a
+\(p^a\)-semilinear map on the \(q/p-1\)-dimensional ghost quotient (47).
+
+Their availability is uniform.  If \(q=p^e\) and \(p\ge5\), (44)--(45)
+exist for every \(0\le a\le e-1\), since
+\(p^e>4p^a-1\).  If \(p=3\), they exist for
+\(0\le a\le e-2\); the smallest proper extension \(q=9\) is independently
+closed.  Hence the
+live extension problem carries a semilinear equation at every base-
+\(p\) digit for \(p\ge5\), and at every non-top digit in characteristic
+three.  What remains is to exploit their simultaneous dependence on the
+same completely split factor \(R\), together with the genuinely nonlinear
+quadratic rung (40).
+
+This yields a sharp intermediate theorem target.  Write
+\(\mathcal G_R=\mathcal V_R/\mathcal C_R\), and let
+\(I_{p,e}\) be the available digit levels above.  Each map in (45) descends
+to \(\overline{\mathcal L}_{R,a}\) on \(\mathcal G_R\).  Therefore
+\[
+ \boxed{
+ \bigcap_{a\in I_{p,e}}
+ \ker\overline{\mathcal L}_{R,a}=0}                       \tag{48}
+\]
+for every complementary split factor \(R\mid X^q-X\) would by itself prove
+the special-direction conic lemma over all proper extensions.  If (48)
+fails, its common kernel is the exact residual space on which to impose the
+quadratic equation (40).  This gate is independent of a fixed field size:
+prove digit-tower injectivity, or classify its kernel uniformly and kill it
+with the first non-Frobenius rung.
 
 ## 7. Structural consequences and routing
 
@@ -353,8 +500,8 @@ The reduction changes the extension-field problem in four ways.
 4. The first ghost module is affine-stable, so coordinate translation alone
    gives no further constraint.
 5. Every higher odd coefficient supplies the Lucas-controlled relation
-   (30).  A proof should couple these relations through multiplication in
-   \(\mathbb F_q[X]/(R)\).
+   (30), coupled explicitly by the nonlinear Laurent identity (39).  The
+   Frobenius rungs \(j=p^a\) form the digitwise semilinear tower (45).
 6. Equivalently, one may classify the completely split lacunary norm
    deformation (33), which packages all higher couplings at once.
 
@@ -395,10 +542,10 @@ factor \(S\).  The exceptional conic is exactly the assertion that the
 square of those weights has interpolation degree two.
 
 **TT.**  Do not describe the extension obstruction as generic failure of
-Newton identities.  It is the explicit two-residue Laurent ghost (7), with a
-full divided-power hierarchy (30) behind it.  The next attempt should work in
-the quotient algebra \(\mathbb F_q[X]/(R)\) and prove that the ghost support
-is incompatible with \(H_{2j}=H_2^j\) for enough \(j\).
+Newton identities.  It is the rank-two Cartier tail (37), with the nonlinear
+divided-power system (39)--(40) behind it.  The next attempt should prove
+that no nonzero two-residue tail is compatible with the split factor \(R\)
+through enough of those equations.
 
 ## Mystery ledger
 
@@ -409,17 +556,24 @@ is incompatible with \(H_{2j}=H_2^j\) for enough \(j\).
 | What is conic containment algebraically? | settled | divisibility (3), equivalent band (4) |
 | Which first moments are genuinely lost in characteristic \(p\)? | settled | only Laurent indices \(0,-1\pmod p\) in (7) |
 | Does translation invariance shrink the ghost space? | settled negative | the residues \(0,-1\pmod p\) form an affine-stable Frobenius module |
-| Is there more information beyond the first ghost? | settled | hierarchy (30) from every odd divided coefficient |
+| Is there a finite structural model for the first ghost space? | settled | two-component Frobenius--Pade congruence (42) |
+| What is its exact excess dimension modulo conics? | settled | \(q/p-1\), quotient (47) |
+| Is there more information beyond the first ghost? | settled | nonlinear Cartier hierarchy (39) from every odd divided coefficient |
+| Which higher equations are uniform across all live extensions? | settled | digitwise Frobenius--Cartier tower (45) |
+| What semilinear statement would close the extension branch? | open, exact | digit-tower injectivity (48), with (40) only on any common kernel |
 | Is there a global carrier for all ghost couplings? | settled | the full-field norm identity (33) |
 | Are the full-field maps permutations in the permitted directions? | not implied | requires root/nonroot separation (36) |
 | What remains to prove? | open | couple the ghost supports under \(H_{2j}\equiv H_2^j\pmod R\) and force \(\deg H_2\le2\) |
 
 ## Next action
 
-Analyze multiplication of a two-residue Laurent tail modulo the split
-polynomial \(R\).  Start with \(H_4\equiv H_2^2\pmod R\) and the \(j=2\)
-constraint in (30); determine whether Lucas support alone eliminates the
-\(r\equiv0,-1\pmod p\) ghosts.  In parallel, test the exact theorem-shaped
+Analyze the quadratic Cartier equation (40) together with the simultaneous
+semilinear tower (45) on the two-component Pade space (42).  The exact
+first theorem target is digit-tower injectivity (48) on the
+\(q/p-1\)-dimensional quotient (47).  If it has a common kernel, classify
+that kernel uniformly and apply (40) only there, retaining the compatibility
+\(RS=X^q-X\) and \(H_2\equiv S^2\pmod R\).
+In parallel, test the exact theorem-shaped
 alternative: classify completely split norm pairs satisfying the lacunarity
 identity (33), using iterated Redei--Szonyi derivatives rather than ordinary
 Newton moments.
