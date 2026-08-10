@@ -80,14 +80,14 @@ paragraph boundary into page 19; and the following exchange theorem retains its
 section hierarchy.  Page 33 contains only the last four bibliography entries,
 with no orphaned heading, clipped display, or box warning.
 
-Open:
+Gate resolution:
 
-- `check_manuscript_build.py` pins 32 pages.  The new theorem produces 33 pages,
-  so the tracked PDF cannot be refreshed and the aggregate gate cannot pass
-  until the author approves changing the validation contract to 33, or directs
-  a content cut sufficient to preserve 32.
-- PDF page inspection and standalone synchronization follow only after that
-  decision and a green authoritative gate.
+- The author approved the 33-page validation contract on 2026-08-09.
+  `check_manuscript_build.py` now pins 33 pages, the deterministic tracked PDF
+  was refreshed, and the complete authoritative release gate passes, including
+  all three pinned Lean source-closure checks.
+- Standalone synchronization remains downstream of the dossier-primed cold
+  referee pass requested before closeout.
 
 ## Mystery ledger (`ej` + `tt`)
 
@@ -98,8 +98,8 @@ Open:
 - **Settled — formal owner.**  No tenth trust row is needed.  The existing
   four-shadow formal map already proves the scalar-square and sign-matrix
   recognition mechanisms; adding it to `OPER-1` closes the evidence-map gap.
-- **Open — page budget.**  The theorem costs one page after local compression.
-  This is an editorial/validation choice, not a mathematical gap.  Author
-  approval is required before changing the pinned count.
+- **Settled — page budget.**  The theorem costs one page after local
+  compression; the author approved the resulting 33-page contract and the
+  deterministic build now passes at that count.
 - **No other genuine mystery remains.**  The weighted remote locus and C894
   safeguards are deliberate boundaries owned outside this reopened integration.
