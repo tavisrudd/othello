@@ -767,6 +767,32 @@ upper equality means that all excess is concentrated in one direction.
 Thus the familiar defect-two alternatives \(\rho=2,3\) are the first case
 of a uniform Hilbert-function statement.
 
+The matching constraint sharpens the upper end.  Put
+\(m=\lfloor n/2\rfloor\), so \(\mu_t\le m\), and write
+\[
+ \delta=a(m-1)+b,
+ \qquad 0\le b<m-1.
+\]
+Convexity of \(x(x+1)/2\), applied to \(x_t=\mu_t-1\), gives
+\[
+ \boxed{
+ \rho\le a\binom m2+\binom{b+1}{2}.}                   \tag{47j}
+\]
+Equality packs the excess into \(a\) fibres of size \(m\), one fibre of
+size \(b+1\) when \(b>0\), and unique fibres everywhere else.
+
+More importantly for the conic gate, (47g) starts with
+\[
+ \boxed{
+ \rho-\delta=\sum_{d\ge1}\dim M^{[d]},
+ \qquad
+ \deg J_P=\dim M^{[1]}\le\rho-\delta.}                 \tag{47k}
+\]
+Thus collision energy above the all-double minimum pays directly for the
+dimension of the unresolved resultant carrier.  Summed over deleted-point
+centers, the all-center collision identity therefore bounds the total
+second-excess dimension before any conic-value calculation is made.
+
 There is a signed spectral form as well.  For a direction character
 \(\varepsilon(t)\in\{1,-1\}\), let
 \(C_d=\mathbb F_q[T]/(\operatorname{rad}E_P^{[d-1]})\).

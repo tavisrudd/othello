@@ -440,7 +440,11 @@ Hence the all-center collision identity is a trace identity for the full
 Hilbert function of these reduced support layers; in particular
 \(\delta\le\rho\le\binom{\delta+1}{2}\).  This generalizes the old
 defect-two energies \(2,3\), while also showing precisely why that identity
-still lacks the actual conic-value trace needed by the resultant.
+still lacks the actual conic-value trace needed by the resultant.  It does
+bound the open carrier sharply:
+\(\deg J_P=\dim M^{[1]}\le\rho-\delta\).  Hence aggregate collision energy
+above the all-double minimum bounds the total unresolved resultant dimension
+across centers.
 Since the resultant needs only trace values, not jets, its scalar input may
 be reduced further modulo \(K_P=\operatorname{rad}J_P\).  The resulting
 \(\Sigma_3\) has degree less than
