@@ -60,6 +60,11 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("finitegeom_source", text)
         self.assertIn("certificate_source", text)
         self.assertIn('ln -s "$finitegeom_source" "$finitegeom_root"', text)
+        self.assertIn('ln -s "$certificate_source" "$certificate_root"', text)
+        self.assertIn(
+            'if test "$local_sources" -eq 0 || ! test -f lake-manifest.json; then',
+            text,
+        )
         self.assertIn(
             '(cd "$finitegeom_root" && lake build --no-build Human.Model)', text
         )
@@ -67,7 +72,7 @@ class PaperBridgeExportTests(unittest.TestCase):
     def test_verifier_never_builds_a_certificate_target(self) -> None:
         text = MODULE.flake(self.bridge())
         self.assertIn('(cd "$certificate_root" && lake unpack "$certificate_pack")', text)
-        self.assertEqual(text.count("sha256sum --check --status"), 2)
+        self.assertEqual(text.count("sha256sum --check --status"), 3)
         self.assertIn('(cd "$finitegeom_root" && lake build Human.Model)', text)
         self.assertIn(
             "lake env lean TavisRuddFiniteGeom/Papers/Sample/CertificateCompatibility.lean",

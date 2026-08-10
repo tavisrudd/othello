@@ -109,15 +109,24 @@ def flake(bridge: dict) -> str:
                 export GIT_CONFIG_KEY_1="url.file://$certificate_source/.insteadOf"
                 export GIT_CONFIG_VALUE_1="https://github.com/tavisrudd/{package}"
               fi
-              lake update
+              printf '%s  %s\n' \
+                '{bridge["cache_sha256"]}' \
+                "$certificate_pack" \
+                | sha256sum --check --status
+              if test "$local_sources" -eq 0 || ! test -f lake-manifest.json; then
+                lake update
+              fi
               finitegeom_root=".lake/packages/finitegeom"
               certificate_root=".lake/packages/{package}"
               if test "$local_sources" -eq 1; then
                 rm -rf "$finitegeom_root"
                 ln -s "$finitegeom_source" "$finitegeom_root"
+                rm -rf "$certificate_root"
+                ln -s "$certificate_source" "$certificate_root"
+              else
+                (cd "$certificate_root" && lake unpack "$certificate_pack")
               fi
               test -d "$certificate_root"
-              (cd "$certificate_root" && lake unpack "$certificate_pack")
               printf '%s  %s\n' \
                 '{bridge["certificate_olean_sha256"]}' \
                 "$certificate_root/.lake/build/lib/lean/{gate_path}.olean" \
@@ -175,9 +184,11 @@ Obtain the certificate Lake pack whose SHA-256 digest is
 nix run .#verify -- /path/to/{bridge["cache_archive"]}
 ```
 
-The command restores and hashes the frozen certificate aggregate, builds only
-the human module imported by the bridge, and elaborates the compatibility source
-directly. It never asks Lake to build a certificate target.
+The command verifies the pack and frozen certificate aggregate hashes, checks the
+human module imported by the bridge (building it only in a clean public replay),
+and elaborates the compatibility source directly. With explicit local source
+checkouts it reuses their sealed artifacts; a public replay restores the pack.
+It never asks Lake to build a certificate target.
 
 ## License
 
