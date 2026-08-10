@@ -24,12 +24,12 @@ forbidden_artifact_basenames = [
 [[package]]
 name = "finitegeom-clebsch-q11-certificates"
 repository = "https://github.com/tavisrudd/finitegeom-clebsch-q11-certificates"
-commit = "930675c6b8bf44e06847d15bd6e63560caa6977f"
-manifest_sha256 = "e7b4ed31ec72fb40b72c508fbd9b3f9d7c95aa792111396af4852c0773f9e501"
+commit = "0d964975ceef7ff0ac36216ecd0e10b4b7f2a184"
+manifest_sha256 = "c9b21cc7fc1d7162e78fc25af66d0d39184866e1295c7ed15c6b74a537597305"
 gate = "TavisRuddFiniteGeom.Certificates.Q11"
 terminal = "TavisRuddFiniteGeom.Certificates.Q11.PointOrbits.twoGenerator_pointOrbit_partition"
 trust_fact = "external/finitegeom-clebsch-q11-certificates.json"
-trust_fact_sha256 = "33deb74507ecce5c3e9a32b199cbb7dc4350082a66222675d5591488960899e2"
+trust_fact_sha256 = "108189a640fd939a379d1df632cee0c1307219d34c05ca1a048706b8561b9e3d"
 owned_module_prefixes = [
   "TavisRuddFiniteGeom.Certificates.Q11",
 ]
