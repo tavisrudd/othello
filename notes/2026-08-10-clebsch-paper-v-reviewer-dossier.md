@@ -15,12 +15,12 @@ release mechanics, and the optional icosahedral tower are out of scope.
 
 ## Frozen review surface
 
-Commit: 2716aa4f1b1e3c3e4250e3c49c1fb1247a89738d.
+Commit: 0960d4e7d9f4e7361f51b314cb52ef34c37759fc.
 
 - source: papers/clebsch-round-trip/golden_companion_reconstruction.tex;
-  SHA-256 718320ff6adbf1d513b7459e0ae0a76338358e63a8c3d14cccad6604bfa7c83d;
+  SHA-256 44af9cb129cb122304ac0aa946b590f815f8c2de9e68e1395bfe433c3d6685a2;
 - PDF: papers/clebsch-round-trip/golden_companion_reconstruction.pdf;
-  SHA-256 e590d9f2f9719bc947a209ec70e2adfeb9adfa5caf177a195487d8e0c8737cd2;
+  SHA-256 d2b63db69975ba71158a086c0a072514cd398c613219d0ff947f7dfc517d21c4;
 - visible length: eleven pages.
 
 Cold coordination must recheck both hashes. A changed source or PDF is a new
@@ -242,3 +242,9 @@ uses verbatim text; PDF extraction now returns the literal executable
 double-hyphen check flag.  No mathematical prose or claim changed.
 All three readers matched the final hashes and returned GO on this last
 release-surface check.
+
+The author then sharpened one sentence in the series perspective: the
+conference and chordal companions, after a chordal line is marked, “recover
+each other with orientation.”  No theorem, proof, boundary, or verification
+text changed.  The surface above is the resulting wording-only freeze and
+requires a final hash and scope spot check.
