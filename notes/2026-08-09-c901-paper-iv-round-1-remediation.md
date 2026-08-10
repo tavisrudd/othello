@@ -86,6 +86,13 @@ Result: all paper evidence passed, TeX spacing lint passed, and the
 deterministic manuscript check passed at 13 pages with no TeX warnings.  Lean
 was neither inspected nor run because it is outside C901's review scope.
 
+The committed authority at `eb8fe055` was exported one-way to the standalone
+`q13-passant-code` repository.  Its scoped `make check` passed at 13 pages
+with all available evidence green; the absent formal companion was reported
+and was not pulled into C901.  The mirror was forward-committed at `b130d01`,
+and exporter verification matched all 32 tracked files to source commit
+`eb8fe0555889ac4a9e0735c51efdda3bfc194088`.
+
 ## `ej` + `tt` closeout
 
 The cheap extra value was to turn every certificate-shaped referee objection

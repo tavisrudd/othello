@@ -52,10 +52,11 @@ repair, hashes, scoped validation, focused Ball/Xiang/Tranchida re-review, and
 mystery ledger are frozen in
 `notes/2026-08-09-c901-paper-iv-round-1-remediation.md`.
 
-The deterministic paper gate passes at the author-approved 13-page invariant.
-The deferred upgrade assessment remains unread.  The next action is author
-activation of that assessment or another requested review pass; neither event
-allocates a new C id.
+The deterministic paper gate passes at the author-approved 13-page invariant,
+and the standalone paper mirror is synchronized and verified at forward commit
+`b130d01`.  The deferred upgrade assessment remains unread.  The next action
+is author activation of that assessment or another requested review pass;
+neither event allocates a new C id.
 
 ## Acceptance gate
 
