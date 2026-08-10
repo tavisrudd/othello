@@ -224,6 +224,10 @@ basis, and normalize generators \(C_M,H_M\) so that their first nonzero
 coefficients are one.  In this ordered pencil basis, an odd element of the
 order-\(120\) normalizer of \(G\) on the six axes acts by
 \[
+ C_M\longmapsto-C_M,\qquad H_M\longmapsto8C_M+H_M,
+\]
+and therefore projectively by
+\[
  [a:b]\longmapsto[-a+8b:b].
 \]
 It reverses the chosen conference generator, fixes the ten-point member
@@ -458,7 +462,11 @@ outer two derivatives force \(z_1=z_3=0\).  Hence the saturated Jacobian
 ideal equals \(I_R\), proving the scheme-theoretic assertion.
 \end{proof}
 
-The group \(G\) acts on \(R\cong\PP^1\).  For \(x\in R(\F_{11})\), its
+The group \(G\) acts faithfully on \(R\cong\PP^1\), hence through
+\(\PGL_2(11)\).  Its composite with the determinant-class quotient
+\(\PGL_2(11)/\operatorname{PSL}_2(11)\cong C_2\) is trivial because
+\(G\cong A_5\) is simple.  Thus \(G\) lies in
+\(\operatorname{PSL}_2(11)\).  For \(x\in R(\F_{11})\), its
 stabilizer lies in the
 order-\(55\) Borel subgroup of \(\operatorname{PSL}_2(11)\), hence has order
 dividing \(\gcd(60,55)=5\).  A Sylow \(5\)-subgroup is split and fixes two
