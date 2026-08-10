@@ -15,12 +15,12 @@ release mechanics, and the optional icosahedral tower are out of scope.
 
 ## Frozen review surface
 
-Commit: a53192147228db20d5ceef579c44151ef17a5907.
+Commit: 2716aa4f1b1e3c3e4250e3c49c1fb1247a89738d.
 
 - source: papers/clebsch-round-trip/golden_companion_reconstruction.tex;
-  SHA-256 aead500646214845fb2165280fcbae96e562bacb619c515212f9809a53ed4196;
+  SHA-256 718320ff6adbf1d513b7459e0ae0a76338358e63a8c3d14cccad6604bfa7c83d;
 - PDF: papers/clebsch-round-trip/golden_companion_reconstruction.pdf;
-  SHA-256 de51972c4d199fa9c181600dd3978dd91dd7bda83e15fd60a0324f2aad3fd0c3;
+  SHA-256 e590d9f2f9719bc947a209ec70e2adfeb9adfa5caf177a195487d8e0c8737cd2;
 - visible length: eleven pages.
 
 Cold coordination must recheck both hashes. A changed source or PDF is a new
@@ -234,7 +234,9 @@ The second freeze passed all three independent dossier-driven reads.  The
 invariant-pencil reader returned GO on the first freeze.  After the two MINOR
 repairs recorded above, both the marking reader and the singular-geometry /
 conference reader matched the new hashes, re-read the complete causal chain,
-and returned GO.  The third freeze changes only the printed replay command
-from a monorepo-relative path to the repository-relative path and vendors the
-byte-identical frozen inputs outside the PDF.  It requires a final hash and
-release-surface spot check; no mathematical prose or claim changed.
+and returned GO.  The third freeze changed only the printed replay command
+from a monorepo-relative path to the repository-relative path and vendored the
+byte-identical frozen inputs outside the PDF.  Its release spot check found
+that TeX ligatured the two command hyphens into an en dash.  The final freeze
+uses verbatim text; PDF extraction now returns the literal executable
+double-hyphen check flag.  No mathematical prose or claim changed.
