@@ -6,7 +6,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import shutil
 import subprocess
+import tempfile
 import tomllib
 from pathlib import Path
 
@@ -200,6 +203,94 @@ def destination_safe(destination: Path) -> None:
         raise ValueError(f"destination already exists: {resolved}")
 
 
+def write_files(destination: Path, files: dict[str, bytes]) -> None:
+    for relative, data in files.items():
+        relative_path = Path(relative)
+        if relative_path.is_absolute() or ".." in relative_path.parts:
+            raise ValueError(f"unsafe materialized path: {relative}")
+        path = destination / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+
+
+def source_identity(commit: str) -> dict[str, str]:
+    fields = (
+        str(git("show", "-s", "--format=%an%x00%ae%x00%aI", commit))
+        .strip()
+        .split("\0")
+    )
+    if len(fields) != 3 or not all(fields):
+        raise ValueError(f"cannot derive Git identity from {commit}")
+    name, email, timestamp = fields
+    return {
+        "GIT_AUTHOR_NAME": name,
+        "GIT_AUTHOR_EMAIL": email,
+        "GIT_AUTHOR_DATE": timestamp,
+        "GIT_COMMITTER_NAME": name,
+        "GIT_COMMITTER_EMAIL": email,
+        "GIT_COMMITTER_DATE": timestamp,
+    }
+
+
+def adopt(
+    commit: str,
+    bridge: dict,
+    files: dict[str, bytes],
+    libraries_root: Path,
+) -> tuple[Path, str]:
+    libraries_root = libraries_root.expanduser().resolve()
+    if not libraries_root.is_dir():
+        raise ValueError(f"libraries root is missing: {libraries_root}")
+    repository = bridge["repository"]
+    if Path(repository).name != repository:
+        raise ValueError(f"unsafe repository name: {repository}")
+    destination = libraries_root / repository
+    destination_safe(destination)
+    staging_root = Path.home() / ".cache/othello-lean-build/paper-bridge-adopt"
+    staging_root.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=bridge["name"] + "-", dir=staging_root))
+    write_files(staging, files)
+    subprocess.run(
+        ["git", "init", "--initial-branch", "main", str(staging)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(staging), "add", "--", *sorted(files)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    environment = os.environ.copy()
+    environment.update(source_identity(commit))
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(staging),
+            "-c",
+            "commit.gpgsign=false",
+            "commit",
+            "-m",
+            "Initial reviewer package",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=environment,
+    )
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(staging), str(destination))
+    adopted_commit = subprocess.run(
+        ["git", "-C", str(destination), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return destination, adopted_commit
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True)
@@ -208,6 +299,10 @@ def main() -> int:
     subparsers.add_parser("plan")
     materialize = subparsers.add_parser("materialize")
     materialize.add_argument("--destination", type=Path, required=True)
+    adoption = subparsers.add_parser("adopt")
+    adoption.add_argument(
+        "--libraries-root", type=Path, default=Path.home() / "src/lean"
+    )
     args = parser.parse_args()
     commit = str(git("rev-parse", f"{args.source_ref}^{{commit}}")).strip()
     bridge = select_bridge(config_at(commit), args.bridge)
@@ -217,12 +312,15 @@ def main() -> int:
         for path in sorted(files):
             print(path)
         return 0
+    if args.command == "adopt":
+        destination, adopted_commit = adopt(
+            commit, bridge, files, args.libraries_root
+        )
+        print(f"adopted {bridge['name']} at {destination} commit={adopted_commit}")
+        return 0
     destination_safe(args.destination)
     destination = args.destination.expanduser().resolve()
-    for relative, data in files.items():
-        path = destination / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(data)
+    write_files(destination, files)
     print(f"materialized {bridge['name']} at {destination}")
     return 0
 

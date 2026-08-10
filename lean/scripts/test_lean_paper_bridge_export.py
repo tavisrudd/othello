@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -63,6 +64,41 @@ class PaperBridgeExportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
             with self.assertRaisesRegex(ValueError, "already exists"):
                 MODULE.destination_safe(Path(directory))
+
+    def test_write_files_materializes_exact_bytes(self) -> None:
+        with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
+            root = Path(directory)
+            MODULE.write_files(root, {"nested/file": b"exact\n"})
+            self.assertEqual((root / "nested/file").read_bytes(), b"exact\n")
+            with self.assertRaisesRegex(ValueError, "unsafe materialized path"):
+                MODULE.write_files(root, {"../escape": b"bad\n"})
+
+    def test_adoption_rejects_repository_path_escape(self) -> None:
+        bridge = self.bridge()
+        bridge["repository"] = "../escape"
+        with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
+            with self.assertRaisesRegex(ValueError, "unsafe repository name"):
+                MODULE.adopt("HEAD", bridge, {}, Path(directory))
+
+    def test_adoption_creates_reproducible_clean_commits(self) -> None:
+        commit = str(MODULE.git("rev-parse", "HEAD")).strip()
+        bridge = self.bridge()
+        files = {"README.md": b"reviewer package\n"}
+        hashes = []
+        for _ in range(2):
+            with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
+                destination, adopted_commit = MODULE.adopt(
+                    commit, bridge, files, Path(directory)
+                )
+                hashes.append(adopted_commit)
+                status = subprocess.run(
+                    ["git", "-C", str(destination), "status", "--short"],
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                ).stdout
+                self.assertEqual(status, "")
+        self.assertEqual(hashes[0], hashes[1])
 
 
 if __name__ == "__main__":
