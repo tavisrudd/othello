@@ -54,6 +54,7 @@ class PaperBridgeExportTests(unittest.TestCase):
         finally:
             MODULE.blob = original_blob
         self.assertEqual(files["LICENSE"], b"license\n")
+        self.assertEqual(files["flake.lock"], b"source\n")
         self.assertIn(b'"path": "LICENSE"', files["MANIFEST.json"])
 
     def test_tmpfs_and_existing_destinations_are_rejected(self) -> None:

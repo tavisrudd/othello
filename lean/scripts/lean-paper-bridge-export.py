@@ -13,6 +13,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 CONFIG_PATH = "lean/trust/paper-bridges.toml"
+FLAKE_LOCK_PATH = "lean/paper-bridges/flake.lock"
 TOOLCHAIN = "leanprover/lean4:v4.32.0-rc1"
 MATHLIB_REV = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 
@@ -153,12 +154,14 @@ def materialized_files(commit: str, bridge: dict) -> dict[str, bytes]:
     module_path = bridge["module"].replace(".", "/") + ".lean"
     source = blob(commit, "lean/" + bridge["source"])
     license_text = blob(commit, bridge["license_source"])
+    flake_lock = blob(commit, FLAKE_LOCK_PATH)
     files = {
         module_path: source,
         "LICENSE": license_text,
         "lakefile.toml": lakefile(bridge).encode(),
         "lean-toolchain": (TOOLCHAIN + "\n").encode(),
         "flake.nix": flake(bridge).encode(),
+        "flake.lock": flake_lock,
         "README.md": readme(bridge).encode(),
     }
     manifest = {
