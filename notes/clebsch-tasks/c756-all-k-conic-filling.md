@@ -503,7 +503,16 @@ fibre gcd.  Equivalently,
 \(\nu_t=-\operatorname{Res}_{U=\infty}(Q_{\rm du}\,d\log H_t)\), while
 \(\sigma_t\) uses \(G_t\); the factorization \(F_t=G_t^2H_t\) makes the
 complementary trace law a logarithmic-residue identity on the direction
-pencil.
+pencil.  The unmatched pullback must be taken scheme-theoretically: unlike
+the repeated nodes, its points need not split over \(\mathbb F_q\).  The
+quadratic fibre algebra nevertheless has trace \(2Q/\eta\).  Multiplicativity
+also gives the complementary norm law
+\[
+ \operatorname{Res}(F_t,Q)=\operatorname{Res}(G_t,Q)^2
+                            \operatorname{Res}(H_t,Q),
+\]
+so the unmatched norm square class is the value of the fixed endpoint
+polynomial \(\Pi(T)=\prod_iQ(T,y_i-Tx_i)\).
 
 ### \(q=53\): type-uniform critical core
 

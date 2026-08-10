@@ -352,16 +352,20 @@ line, and let \(C_t\) be the pullback of the dual-plane line \(T=tW\).
 All are hyperplane sections of the quadric.  If
 \(\widetilde N_t\) is the reduced degree-\(2\mu_t\) divisor consisting of
 both lifts of the repeated nodes of direction \(t\), and
-\(\widetilde U_t\) is the reduced divisor over the unmatched endpoint-line
-intersections, then
+\(\widetilde U_t\) is the scheme-theoretic pullback of the unmatched
+endpoint-line divisor, then
 \[
  \boxed{
  \left.\sum_{i=1}^nD_i\right|_{C_t}
  =2\widetilde N_t+\widetilde U_t.}                       \tag{23e}
 \]
 Indeed, two endpoint lines pass through each repeated node, whereas only one
-passes through every unmatched intersection.  Moreover the coordinate
-section \(z\) satisfies
+passes through every unmatched intersection.  The repeated nodes are off
+the branch conic and split into two rational lifts.  An unmatched point may
+instead be split, inert, or ramified; its scheme-theoretic inverse image
+always has degree two, so (23e) and the trace formulas below remain valid
+without an unstated rationality assumption.  Moreover the coordinate section
+\(z\) satisfies
 \[
  \boxed{
  \sigma_t=\frac\eta2
@@ -500,6 +504,34 @@ Thus the moving unmatched term is a residue of one quadratic section against
 the logarithmic derivative of the residual divisor.  A global control of
 that residue over \(C_3\) would immediately control both resultants
 (23j)--(23k).
+
+The same factorization gives a complementary norm law.  Define the fixed
+endpoint polynomial
+\[
+ \Pi(T)=\operatorname{Res}_U(F(U,T),Q_{\rm du}(T,U))
+       =\prod_{i=1}^nQ_{\rm du}(T,y_i-Tx_i),
+ qquad \deg\Pi\le2n.                                   \tag{23q}
+\]
+Multiplicativity of the resultant and \(F_t=G_t^2H_t\) give
+\[
+ \boxed{
+ \Pi(t)=operatorname{Res}_U(G_t,Q_{\rm du}(t,U))^2
+        \operatorname{Res}_U(H_t,Q_{\rm du}(t,U)).}    \tag{23r}
+\]
+Hence, including the zero case,
+\[
+ \boxed{
+ [\operatorname{Res}_U(H_t,Q_{\rm du}(t,U))]
+ =[\Pi(t)]\quad\text{in }\mathbb F_q^\times/
+                  (\mathbb F_q^\times)^2}              \tag{23s}
+\]
+whenever the two sides are nonzero.  Thus the unmatched divisor has both a
+trace carrier \(\nu_t\) and a globally prescribed norm square class.  In the
+perfect-matching case \(H_t=1\), one gets \(\nu_t=0\) and
+\(\sigma_t=L(t)/2\) outright; near-perfect fibres reduce the open trace to a
+residual divisor of degree one or two.  This supplies a second invariant for
+the complementary-divisor resultant without assuming that unmatched lifts
+are rational.
 
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
