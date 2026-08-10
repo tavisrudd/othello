@@ -589,6 +589,74 @@ the product of the endpoint point types is exactly the discriminant class
 of the global complementary-norm carrier; all pairwise interactions drop
 out as squares.
 
+There is a second direction cover hidden in the endpoint values themselves.
+Define the monic value polynomial
+\[
+ \mathfrak F(V,T)=\prod_{i=1}^n(V-q_i(T))
+ =V^n-L(T)V^{n-1}+\cdots.                              \tag{23x}
+\]
+At a direction \(t\), put
+\[
+ \begin{aligned}
+ \mathfrak G_t(V)
+   &=\prod_{\{i,j\}\in\mathcal M_t}
+       (V-Q_{\rm du}(t,u_{ij})),\\
+ \mathfrak H_t(V)
+   &=\prod_{i\in I_t}(V-q_i(t)).
+ \end{aligned}
+\]
+The endpoint matching gives the exact value-factorization
+\[
+ \boxed{
+ \mathfrak F(V,t)=\mathfrak G_t(V)^2\mathfrak H_t(V),
+ \quad
+ -[V^{\mu_t-1}]\mathfrak G_t=\sigma_t,
+ \quad
+ -[V^{n-2\mu_t-1}]\mathfrak H_t=\nu_t.}                \tag{23y}
+\]
+When \(\mathfrak H_t=1\), its displayed first coefficient is interpreted as
+zero.
+This remains true when distinct nodes have the same conic value: the
+displayed factors need not be coprime.  Thus the open divisor trace is the
+first coefficient of a forced square factor in one scalar value polynomial,
+not merely a fibrewise sum.
+
+Write
+\[
+ Q_{\rm du}(T,U,1)=aT^2+bTU+cU^2+dT+eU+f.
+\]
+Since \(a_i(T)-a_j(T)=(y_i-y_j)-T(x_i-x_j)\), direct subtraction gives
+\[
+ \boxed{
+ q_i(T)-q_j(T)
+ =\bigl((y_i-y_j)-T(x_i-x_j)\bigr)\ell_{ij}(T),
+ \quad
+ \ell_{ij}(T)=\bigl(b-c(x_i+x_j)\bigr)T
+                    +c(y_i+y_j)+e.}                    \tag{23z}
+\]
+The first factor vanishes at the ordinary chord direction \(t_{ij}\); the
+second is a conic-balanced mirror direction.  If \(c\ne0\), it is the slope
+joining \((x_i,y_i)\) to
+\[
+ \iota_Q(x_j,y_j)=\left(\frac bc-x_j,-\frac ec-y_j\right),
+\]
+where \(\iota_Q\) is the central involution about
+\((b/(2c),-e/(2c))\).  The expression is symmetric in \(i,j\), as required.
+
+Let \(\Theta_Q(T)=\prod_{i<j}\ell_{ij}(T)\).  Taking the discriminant of
+(23x) in the value variable and using the direction factorization (8) gives
+\[
+ \boxed{
+ \operatorname{disc}_V\mathfrak F(V,T)
+ \doteq (T^q-T)^2E_P(T)^2\Theta_Q(T)^2.}                \tag{23aa}
+\]
+Thus equality of endpoint conic values has two completely explicit sources:
+the original chord matching and the mirror matching against
+\(\iota_Q(B)\).  Formula (23y) places the desired trace in the square factor
+belonging to the first source, while (23aa) packages both sources globally.
+Separating these two square divisors, rather than reconstructing every
+fibre gcd, is a new structural route to \(\Upsilon_3\).
+
 Equations (17) and (22) are the promised bridge between the residual
 direction polynomial and conic type.  They do not yet give a sign
 contradiction: one must use star realization or a new value-level

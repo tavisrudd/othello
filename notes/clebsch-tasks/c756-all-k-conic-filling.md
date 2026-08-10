@@ -520,6 +520,20 @@ rather than discarding it.  When \(\Pi\) is squarefree, the product
 discriminant formula further gives
 \([\operatorname{disc}\Pi]=\prod_i[-Q_{\rm pr}(v_i)]\), since all pairwise
 factor resultants occur squared.
+Finally, the scalar value polynomial
+\(\mathfrak F(V,T)=\prod_i(V-Q(T,y_i-Tx_i))\) factors on every covered
+direction as \(\mathfrak G_t(V)^2\mathfrak H_t(V)\); the first coefficients
+of \(\mathfrak G_t\) and \(\mathfrak H_t\) are \(-\sigma_t\) and
+\(-\nu_t\).  Each value difference splits as
+\[
+ q_i-q_j=((y_i-y_j)-T(x_i-x_j))
+ \bigl((b-c(x_i+x_j))T+c(y_i+y_j)+e\bigr).
+\]
+Hence
+\(\operatorname{disc}_V\mathfrak F\doteq
+(T^q-T)^2E_P^2\Theta_Q^2\): value collisions decompose into the ordinary
+chord cover and a conic-centered mirror cover.  Separating these two forced
+square divisors is now an explicit alternative route to \(\Upsilon_3\).
 
 ### \(q=53\): type-uniform critical core
 
