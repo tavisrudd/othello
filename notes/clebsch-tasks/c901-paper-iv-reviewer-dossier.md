@@ -81,8 +81,9 @@ frame-correspondence upgrades.
 
 The layered-exposition, copy-edit, attribution, and claim-specific repair
 round is accepted by a final isolated dossier-loaded cold read with no
-mandatory finding.  The warning-free 15-page authority is committed at
-`84f227ef` and exported to the standalone paper repository at `f1c01ea`;
+mandatory finding.  A final causal-wording reconciliation with the independent
+13-page review is included in the warning-free 15-page authority at
+`67c4c909` and exported to the standalone paper repository at `f700d85`;
 the deterministic manuscript guard, evidence replay, exporter audit, mirror
 manifest verification, and authority/mirror byte comparison are green.  C901
 remains open by author instruction for later upgrades and re-reviews.
