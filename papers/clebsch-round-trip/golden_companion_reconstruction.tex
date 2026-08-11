@@ -71,6 +71,11 @@ chordal and conference groupoids.  Without the selected chordal line the map
 is a residual double cover, not an equivalence; we compute the complete
 marking dependency and its Klein-four sharpness action.
 
+On the recovered six-set, a pair-defect identity also recognizes the
+conference locus intrinsically: a two-graph has no aligned four-set exactly
+when its Seidel matrix is conference.  Thus the conference switching classes
+are exactly the six-point shadows invisible to the four-point alignment test.
+
 The classification places the signed cubic of Paper~II in one of the two
 chordal lines of the \(A_5\)-invariant cubic pencil and returns the retained
 outputs of Papers~I--III exactly.  We then extract the integral structure
@@ -122,6 +127,14 @@ computed.  Fourth, the same recovered six-set supports an integral
 root--weight normalization.  In order six, its residue is the natural
 \(\F_4A_5\)-heart, and outer reversal acts on it by Frobenius.
 
+The conference object has a second intrinsic description on the recovered
+carrier.  If \(m(xy)\) is the signed defect of a pair, the number of aligned
+four-sets is \(16^{-1}\sum m(xy)^2\).  Hence the alignment-invisible
+six-point two-graphs are exactly the conference ones.  This recognition is
+weaker than the recovered \(A_5\)-marking---there are twelve labeled
+conference switching classes---but the marking selects the invariant opposite
+pair used by the outer-difference construction.
+
 The exceptional six-point dictionaries and Joubert--Segre constructions are
 classical; we use Howard--Millson--Snowden--Vakil
 \cite[\S\S1.1--1.6 and 2.1--2.4]{HMSVOuter}.  The invariant pencil and its
@@ -133,7 +146,12 @@ unmarked chordal geometry has the larger
 automorphism group \(\PGL_2\) \cite[\S5]{CheltsovEtAl2025Chordal}.
 Conference switching follows Goethals--Seidel
 \cite[\S\S1--3]{GoethalsSeidel1967}, and the order-six switching class is
-classical \cite{BMS1979}.  Our claims concern the marked compatibility,
+classical \cite{BMS1979}.  Gillespie studies coherent and incoherent four-set
+counts for regular two-graphs \cite[\S4.1]{GillespieTwoGraph}, while the
+fourth-power equality criterion for conference Seidel matrices appears in
+Iranmanesh--Askari Farsangi \cite[Theorem~2.4]{IranmaneshFarsangi2015}.
+Lemma~\ref{lem:six-point-alignment-recognition} gives the direct order-six
+defect count used here.  Our claims concern the marked compatibility,
 normalization, exact information loss, and the root--weight residue obtained
 when these ingredients are composed.  We make no priority claim beyond this
 attribution boundary.
@@ -632,6 +650,59 @@ and pentagon representative also appear in
 Bussemaker--Mathon--Seidel
 \cite[pp.~12, 21, and Table~9 on p.~83]{BMS1979}; our switching
 convention follows Goethals--Seidel \cite[\S\S1--3]{GoethalsSeidel1967}.
+\end{proof}
+
+\begin{lemma}[Six-point alignment recognition]
+\label{lem:six-point-alignment-recognition}
+Let \(\Delta\) be a two-graph on a six-set \(\Omega\), represented by a
+symmetric sign matrix \(S\).  Put
+\[
+ \sigma(xyz)=S_{xy}S_{yz}S_{zx},\qquad
+ m(xy)=\sum_{z\notin\{x,y\}}\sigma(xyz)
+      =S_{xy}(S^2)_{xy}.
+\]
+Call \(Q\in\binom{\Omega}{4}\) aligned when \(\sigma\) is constant on
+\(\binom Q3\), and write \(A(\Delta)\) for the family of aligned four-sets.
+Then
+\[
+ 16\,\#\{Q\in\tbinom{\Omega}{4}:Q\text{ is aligned}\}
+    =\sum_{\{x,y\}\in\binom{\Omega}{2}}m(xy)^2.
+\]
+Consequently \(\Delta\) has no aligned four-set if and only if
+\(S^2=5I\).  Relative to the recovered \(A_5\)-action, the unordered pair
+of Lemma~\ref{lem:unoriented-conference-companion} is therefore the pair of
+\(A_5\)-fixed two-graphs in the empty-alignment locus.
+\end{lemma}
+
+\begin{proof}
+Fix \(t=\{x,y,z\}\) and \(w\notin t\).  Set
+\[
+ \alpha=\sigma(xyw)\sigma(t),\qquad
+ \beta=\sigma(xzw)\sigma(t),\qquad
+ \gamma=\sigma(yzw)\sigma(t).
+\]
+Each pair in \(t\cup\{w\}\) occurs in two of its four triples, so
+\(\alpha\beta\gamma=1\).  The indicator that \(t\cup\{w\}\) is aligned is
+therefore
+\[
+ \frac{(1+\alpha)(1+\beta)(1+\gamma)}8
+   =\frac{1+\alpha+\beta+\gamma}{4}.
+\]
+Summing over the three choices of \(w\) gives
+\[
+ \lambda_3(t)
+   =\frac{\sigma(t)}4\sum_{p\in\binom t2}m(p),
+\]
+where \(\lambda_3(t)\) counts aligned four-sets through \(t\).  Every aligned
+four-set contains four triples, so a second summation yields
+\[
+4|A(\Delta)|
+  =\frac14\sum_t\sigma(t)\sum_{p\in\binom t2}m(p)
+  =\frac14\sum_p m(p)^2.
+\]
+This is the claimed identity.  Finally
+\(m(xy)=S_{xy}(S^2)_{xy}\), while every diagonal entry of \(S^2\) is five.
+Thus all defects vanish exactly when \(S^2=5I\).
 \end{proof}
 
 Paper~I's corollary \emph{Nodes, symmetry, and integral commutant} proves
@@ -1446,6 +1517,7 @@ The execution is replay evidence for Proposition
 \ref{prop:paper-ii-placement}, not a premise of the classification theorem.
 In particular, it substitutes for none of Lemma
 \ref{lem:hankel-singular-locus}, Proposition~\ref{prop:special-orbit},
+Lemma~\ref{lem:six-point-alignment-recognition},
 Theorem~\ref{thm:conference-saturation}, or Proposition
 \ref{prop:extension-line}.
 
@@ -1454,7 +1526,8 @@ Theorem~\ref{thm:conference-saturation}, or Proposition
 
 The scattered shadows gather on one carrier, but not by becoming equal.
 Paper~II supplies a chordal cubic; its special orbit returns the six axes;
-outer difference returns the conference orientation of Papers~I and III.
+the empty-alignment criterion recognizes the conference locus; outer
+difference returns the conference orientation of Papers~I and III.
 The selected-line correspondence is an equivalence, and the bare
 correspondence is exactly its \(C_2\)-quotient.  This is the complete
 information-loss statement, including its scalar and outer sharpness.
@@ -1511,6 +1584,12 @@ J.-M. Goethals and J.~J. Seidel,
 \newblock \emph{Canadian Journal of Mathematics} \textbf{19} (1967),
 1001--1010, doi:10.4153/CJM-1967-091-8.
 
+\bibitem{GillespieTwoGraph}
+N.~I. Gillespie,
+\newblock \emph{Equiangular lines, incoherent sets and quasi-symmetric
+designs},
+\newblock preprint (2018), arXiv:1809.05739v3.
+
 \bibitem{HMSVOuter}
 B.~Howard, J.~Millson, A.~Snowden, and R.~Vakil,
 \newblock A description of the outer automorphism of \(S_6\), and the
@@ -1523,6 +1602,12 @@ W.~H. Haemers and F.~Parsaei Majd,
 \newblock Spectral symmetry in conference matrices,
 \newblock \emph{Designs, Codes and Cryptography} \textbf{90} (2022),
 1983--1990, doi:10.1007/s10623-021-00858-8.
+
+\bibitem{IranmaneshFarsangi2015}
+M.~Iranmanesh and A.~Askari Farsangi,
+\newblock \emph{Upper and lower bounds for the power of eigenvalues in
+Seidel matrix},
+\newblock published article (2015), doi:10.14317/jami.2015.627.
 
 \bibitem{PinardinZhang2025}
 A.~Pinardin and Z.~Zhang,
