@@ -49,8 +49,14 @@ elementary divisors are consecutive and recover exactly the unordered Tate
 width.  Cyclic root monodromy preserves this multiset.  What remains missing is
 not the local filtration but its presentation-independent, functorial
 compatibility across composed weak factorizations and with analytic Stokes
-data.  The next theorem needed is a strict birational Rees/Stokes enhancement,
-or a proof that such an enhancement cannot exist.
+data.  The first composition audit is positive: the associated-graded Tate
+polynomial is coherent under both transverse and nested two-step blow-up
+exchanges.  It also exposes the next obstruction sharply: mutations preserve
+Euler and Serre data while changing the exceptional flag.  Irregular-Hodge
+theory supplies a canonical-up-to-shift filtration, strict projective
+pushforward, and Thom--Sebastiani convolution in its own category, but the
+quantum blow-up isomorphism is not known to lift to that category.  That lift,
+rather than a new polynomial identity, is now the highest-EV theorem gate.
 
 A second proposed refinement, the `p`-primary length of a global spectral
 cycle, does not survive audit in the published formalism.  The blow-up and
@@ -432,6 +438,135 @@ across blow-up presentations, not choose one branch globally.  KKPYY
 explicitly identify integral enhanced atoms and their blow-up compatibility as
 future work rather than an available theorem.
 
+### 5.2 Two-step composition is coherent on the associated graded
+
+Write
+
+\[
+P_r(T)=T+\cdots+T^{r-1}
+\]
+
+for the exceptional Tate polynomial of a codimension-`r` blow-up.  The two
+standard order-exchange tests both pass identically.
+
+For transverse smooth centers `A,B` of codimensions `r,s`, with intersection
+`C`, blowing up `A` and then the strict transform of `B` gives `C`-coefficient
+`P_sP_r`; reversing the order gives `P_rP_s`.
+
+For a smooth flag `A subset Z subset X`, put
+
+\[
+\operatorname{codim}_X Z=r,
+\qquad
+\operatorname{codim}_Z A=c.
+\]
+
+Blowing up `A` and then `Bl_A Z` is the standard nested-order exchange of
+blowing up `Z` and then the center `P(N_{Z/X}|_A)`.  On the first side the
+total `A`-coefficient is
+
+\[
+P_{r+c}+P_rP_c.
+\]
+
+On the second side, the new center is a `P^(r-1)`-bundle over `A` of
+codimension `c+1`, so the coefficient is
+
+\[
+P_{c+1}(1+P_r).
+\]
+
+Direct expansion gives the general identity
+
+\[
+\boxed{P_{r+c}+P_rP_c=P_{c+1}(1+P_r).}
+\]
+
+The certificate checks `300` nested and `276` transverse instances with total
+codimension at most `26`; the displayed polynomial identities prove all
+codimensions.  Thus blow-up order causes no defect at the associated-graded
+level.  Any failure of presentation independence lies in the extension or
+wall-crossing data.
+
+This test uses the classical normalization that identifies Section 5.1's
+consecutive local valuation levels with the shifts `1,...,r-1`.  It does not
+compare the different multivariable Novikov lattices of a composed
+factorization.  Constructing that comparison is part of the filtered quantum
+lift, not a consequence of the polynomial identity.
+
+Bittner's blow-up presentation of `K_0(Var_k)` explains why the graded
+consistency is structural at the motivic level: smooth proper generators
+modulo the blow-up relation already give the whole Grothendieck group.  Thus,
+if an intrinsic filtered quantum assignment satisfying the blow-up relation
+existed, factorization independence of its associated graded would be formal.
+Bittner does not construct that assignment or compare its Novikov lattices.
+
+### 5.3 Mutation isolates the flag ambiguity
+
+The smallest example already shows why Euler and Serre data do not repair that
+extension problem.  In the basis `(O,O(1))` of `K_0(P^1)`, the Euler matrix is
+
+\[
+E=\begin{pmatrix}1&2\\0&1\end{pmatrix}.
+\]
+
+Mutation to `(O(-1),O)` has basis matrix
+
+\[
+B=\begin{pmatrix}2&1\\-1&0\end{pmatrix},
+\qquad B^tEB=E.
+\]
+
+Nevertheless the first flag line changes from the span of `(1,0)` to the span
+of `(2,-1)`.  The normalized Serre nilpotent is
+
+\[
+N=-E^{-1}E^t-I
+=\begin{pmatrix}2&2\\-2&-2\end{pmatrix},
+\]
+
+whose canonical weight line is the span of `(1,-1)`, different from both
+exceptional first lines.  So the canonical monodromy-weight filtration retains
+the block width but does not recover the Tate/exceptional flag.  This is the
+exact chamber ambiguity that a strict enhancement must overcome.
+
+### 5.4 Irregular Hodge theory is the precise conditional repair
+
+Sabbah's category of irregular mixed Hodge modules supplies three ingredients
+of exactly the desired shape:
+
+- every morphism is bi-strict for the irregular Hodge and weight filtrations,
+  and projective pushforward is strict (Theorem 0.3);
+- an irreducible rigid, locally formally unitary holonomic `D`-module on `P^1`
+  has a canonical irregular Hodge filtration up to an overall shift (Theorem
+  0.7), which is enough for a width obstruction;
+- the irregular Hodge filtration obeys a Thom--Sebastiani convolution formula
+  (Theorem 3.39), the filtered analogue needed for products.
+
+Sabbah--Yu additionally identify the filtration with the Harder--Narasimhan
+filtration of Kontsevich bundles for exponential Gauss--Manin systems and prove
+strict projective pushforward there.  Qin--Zhang's 2026 theorem identifies
+irregular Hodge numbers with limiting Hodge numbers and proves deformation
+invariance for non-degenerate regular functions.  These results make the route
+structurally credible, but they do **not** prove the needed quantum statement.
+
+Three bridges remain absent:
+
+1. Cai's rank-two object is a local Levelt--Turrittin block of the cubic quantum
+   connection; it has not been identified here as a global object of irregular
+   mixed-Hodge origin carrying the induced canonical filtration.
+2. Quantum connections of arbitrary centers occurring in weak factorization
+   are not known to arise functorially from exponential mixed Hodge modules.
+3. Iritani's formal blow-up isomorphism has not been lifted to a morphism in
+   that filtered category, so Sabbah's strictness theorem cannot simply be
+   applied to it.
+
+Consequently irregular Hodge theory is now the best-specified candidate, not a
+proof of stable irrationality.  A sufficient theorem would lift Iritani's
+blow-up decomposition to irregular mixed Hodge modules, identify its local
+filtration shifts with Section 5.1's elementary divisors, and make the lift
+compatible with the two-step exchanges of Section 5.2.
+
 ## 6. Spectral-cycle alternate attack: negative audit
 
 Along the particular diagonal Novikov loop used in the certificate, the cycle
@@ -617,6 +752,21 @@ divisors, but rejects the inference that this relative boundary lattice is an
 intrinsic invariant of the variety.  The gate is narrowed to
 presentation-independent strict composition and analytic Stokes gluing.
 
+The present composition pass proves that the associated-graded Tate ledger is
+coherent under the transverse and nested two-step blow-up exchanges, so no
+polynomial anomaly blocks functoriality.  The `P^1` mutation audit then shows
+that Euler, Serre, and monodromy-weight data still do not select the exceptional
+flag.  The literature `aa` pass identifies irregular mixed Hodge modules as the
+closest existing strict filtered category, but locates the unproved bridge at
+the quantum blow-up isomorphism itself.
+
+The closing `ej`+`tt` audit places the polynomial identities in Bittner's
+global blow-up presentation, then rejects the tempting overclaim that this
+already supplies a motivic measure: neither the intrinsic filtered quantum
+assignment nor the comparison of its multivariable `q`-lattices exists.  It
+also keeps separate Cai's local Levelt--Turrittin block from a global object of
+irregular mixed-Hodge origin.  Those two seams are the exact surviving gate.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -650,16 +800,17 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 28,069 bytes;
-- independent replay: 11,907 bytes;
-- JSON certificate: 293,817 bytes.
+- Sage generator: 35,543 bytes;
+- independent replay: 14,849 bytes;
+- JSON certificate: 300,682 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
-of the source matrices, Iritani's asymptotic formulae, and the quantum
-Kunneth/projective-bundle formula is human-audited.  The bounded checks do not
+of the source matrices, Iritani's asymptotic formulae, the quantum
+Kunneth/projective-bundle formula, and the geometric identification of the two
+standard blow-up order exchanges is human-audited.  The bounded checks do not
 assert existence or nonexistence of any weak factorization or the missing
-global Rees/Stokes compatibility.
+global irregular-Hodge/Rees/Stokes compatibility.
 
 ## 10. Sources
 
@@ -682,6 +833,28 @@ global Rees/Stokes compatibility.
   remark locates the missing Γ-integral/Stokes semiorthogonal compatibility.
   Shared-cache PDF SHA-256:
   `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
+- Franziska Bittner, *The universal Euler characteristic for varieties of
+  characteristic zero*, arXiv:math/0111062, especially Theorem 3.1's
+  presentation of `K_0(Var_k)` by smooth complete varieties and blow-up
+  relations.  This establishes abstract motivic coherence, not a filtered
+  quantum realization.  Shared-cache PDF SHA-256:
+  `484d2c3586977503dc6f1b43fca158af059cd0f9c5322731d0ebae6d643e160c`.
+- Claude Sabbah, *Irregular Hodge theory*, arXiv:1511.00176v5, especially
+  Theorems 0.3, 0.7, and 3.39 on strictness, canonical filtrations for rigid
+  locally formally unitary connections, and Thom--Sebastiani.  Shared-cache
+  PDF SHA-256:
+  `8221dd998d7b6459c525255c92755b2a60229088eb851a182be961528540b3ba`.
+- Claude Sabbah and Jeng-Daw Yu, *On the irregular Hodge filtration of
+  exponentially twisted mixed Hodge modules*, arXiv:1406.1339, especially the
+  strict projective-pushforward and Kontsevich-bundle comparison.  Shared-cache
+  PDF SHA-256:
+  `d034597e2f31a3cf400130b2a9124733438062014a603c82c0a54ea7a2cec22d`.
+- Yichen Qin and Dingxin Zhang, *Classical and irregular Hodge numbers*,
+  arXiv:2603.06040, especially Theorems 1.1.1 and 1.3.1.  These identify the
+  numerical irregular filtration with limiting Hodge data and prove
+  deformation invariance for non-degenerate functions; they do not establish
+  filtered quantum blow-up compatibility.  Shared-cache PDF SHA-256:
+  `95b699eb50c830dea8b5b6241bcc4450e1be8c72b50f20350741101b9efed6f5`.
 - Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
   Nicolas Perrin, *An atomic criterion for irrationality without quantum
   computations*, arXiv:2607.26718v1, especially Section 2 on atoms of
@@ -710,7 +883,21 @@ global Rees/Stokes compatibility.
   preserves it.  What is open is whether these relative lattices descend to a
   presentation-independent filtered quantum object respected by composed
   blow-up and projective-bundle isomorphisms.
-  The exact target is now basis-independent: preserve the cubic-isotypic
+- **Settled for the first composition relations:** the associated-graded Tate
+  polynomial is identical under transverse and nested two-step blow-up order
+  exchanges, and Bittner's presentation makes the abstract motivic blow-up
+  ledger factorization-independent.  The missing object is an intrinsic
+  filtered quantum realization of that ledger.  The `P^1` mutation calculation
+  simultaneously proves that Euler and Serre data do not select the exceptional
+  flag; its canonical monodromy-weight line is a third line.
+- **Open, with a named candidate category:** irregular mixed Hodge modules have
+  canonical-up-to-shift filtrations in the rigid locally formally unitary case,
+  strict projective pushforward, and Thom--Sebastiani.  Evidence gap: the local
+  cubic Levelt--Turrittin block and Iritani blow-up map have not been lifted to
+  this category, and arbitrary weak-factorization centers have no functorial
+  exponential-Hodge realization.  Qin--Zhang's numerical theorem does not
+  supply that lift.
+- **Open target:** preserve the cubic-isotypic
   unipotent Serre block.  Its endpoint length is `m+1`, while every
   self-carrier length is `m-1`; the conditional arbitrary-center width formula
   has the same gap two.  Evidence gap: current formal gauges allow integer

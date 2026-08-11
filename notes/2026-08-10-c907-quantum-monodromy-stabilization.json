@@ -10523,6 +10523,42 @@
     "interpretation": "For every m>=2 the endpoint multiplicity m+1 lies in the signed integer span of the admissible coarse center weights. This refutes a multiplicity-only stable obstruction; it does not construct geometrically realizable weak-factorization centers.",
     "model": "In endpoint dimension 3+m, a center X x P^(s-3), with t=s-2, contributes t(m-t) copies of the cubic atom under the ungraded blow-up formula."
   },
+  "composition_source": {
+    "arxiv": "math/0111062",
+    "cached_pdf_sha256": "484d2c3586977503dc6f1b43fca158af059cd0f9c5322731d0ebae6d643e160c",
+    "paper": "Franziska Bittner, The universal Euler characteristic for varieties of characteristic zero",
+    "result": "Theorem 3.1, blow-up presentation of K_0(Var_k)"
+  },
+  "filtration_sources": [
+    {
+      "arxiv": "1511.00176v5",
+      "cached_pdf_sha256": "8221dd998d7b6459c525255c92755b2a60229088eb851a182be961528540b3ba",
+      "paper": "Claude Sabbah, Irregular Hodge theory",
+      "results": [
+        "Theorem 0.3",
+        "Theorem 0.7",
+        "Theorem 3.39"
+      ]
+    },
+    {
+      "arxiv": "1406.1339",
+      "cached_pdf_sha256": "d034597e2f31a3cf400130b2a9124733438062014a603c82c0a54ea7a2cec22d",
+      "paper": "Claude Sabbah and Jeng-Daw Yu, On the irregular Hodge filtration of exponentially twisted mixed Hodge modules",
+      "results": [
+        "strict projective pushforward",
+        "Kontsevich-bundle comparison"
+      ]
+    },
+    {
+      "arxiv": "2603.06040",
+      "cached_pdf_sha256": "95b699eb50c830dea8b5b6241bcc4450e1be8c72b50f20350741101b9efed6f5",
+      "paper": "Yichen Qin and Dingxin Zhang, Classical and irregular Hodge numbers",
+      "results": [
+        "Theorem 1.1.1",
+        "Theorem 1.3.1"
+      ]
+    }
+  ],
   "iritani_local_q_adic_tate_spacing": {
     "checked_center_codimension_range": [
       2,
@@ -12951,7 +12987,7 @@
     "general_statement": "The P^m factor has m+1 semisimple formal solutions with power exponent 0; tensoring therefore gives m+1 copies of the cubic rank-two block with unchanged residues."
   },
   "sage_version": "10.7",
-  "schema": "c907-quantum-monodromy-stabilization-v6",
+  "schema": "c907-quantum-monodromy-stabilization-v7",
   "source": {
     "arxiv": "2608.01577v1",
     "cached_pdf_sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",
@@ -13009,5 +13045,288 @@
     "negative_kodaira_dimension_reduction": "Minimal surfaces are P^2 or ruled over a curve; projective-bundle and blow-up decompositions reduce their fractional exponents to points and curves.",
     "one_step_conclusion": "For every smooth cubic threefold X, X x P^1 is irrational.",
     "residue_sets_disjoint": true
+  },
+  "two_step_tate_composition": {
+    "interpretation": "The associated graded passes the elementary order-exchange tests. However, the P^1 mutation calculation shows that identical Euler and Serre data admit different exceptional flags; the canonical monodromy weight line is neither exceptional first line. A Stokes chamber or a new intrinsic strict filtration is therefore additional data.",
+    "maximum_total_codimension_checked": 26,
+    "mutation_flag_ambiguity": {
+      "canonical_monodromy_weight_line": [
+        "1",
+        "-1"
+      ],
+      "category": "D^b(P^1)",
+      "euler_matrix": [
+        [
+          "1",
+          "2"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "euler_matrix_unchanged": true,
+      "flag_lines_distinct": true,
+      "mutated_exceptional_pair": [
+        "O(-1)",
+        "O"
+      ],
+      "mutated_first_flag_line": [
+        2,
+        -1
+      ],
+      "mutation_basis_matrix": [
+        [
+          "2",
+          "1"
+        ],
+        [
+          "-1",
+          "0"
+        ]
+      ],
+      "normalized_serre_nilpotent": [
+        [
+          "2",
+          "2"
+        ],
+        [
+          "-2",
+          "-2"
+        ]
+      ],
+      "original_exceptional_pair": [
+        "O",
+        "O(1)"
+      ],
+      "original_first_flag_line": [
+        1,
+        0
+      ],
+      "weight_line_differs_from_both_exceptional_lines": true
+    },
+    "nested_boundary_samples": [
+      {
+        "codimension_A_in_Z_c": 1,
+        "codimension_Z_in_X_r": 2,
+        "identity_verified": true,
+        "left_A_coefficient": [
+          0,
+          1,
+          1
+        ],
+        "right_A_coefficient": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "codimension_A_in_Z_c": 24,
+        "codimension_Z_in_X_r": 2,
+        "identity_verified": true,
+        "left_A_coefficient": [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ],
+        "right_A_coefficient": [
+          0,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      {
+        "codimension_A_in_Z_c": 1,
+        "codimension_Z_in_X_r": 25,
+        "identity_verified": true,
+        "left_A_coefficient": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "right_A_coefficient": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "nested_checked_count": 300,
+    "nested_checked_domain": "2<=r, 1<=c, r+c<=bound+2",
+    "nested_general_identity": "P_(r+c)+P_r*P_c=P_(c+1)*(1+P_r), for r>=2 and c>=1",
+    "polynomial_convention": "P_r(T)=T+...+T^(r-1)",
+    "status": "Positive coherence for the classically normalized candidate associated graded. Its Tate polynomials agree under the standard transverse and nested two-step blow-up exchanges. This removes blow-up order as an obstruction at the polynomial level, but does not compare the multivariable Novikov lattices or identify the Stokes extension data or a presentation-independent filtration.",
+    "transverse_boundary_samples": [
+      {
+        "codimension_A_r": 2,
+        "codimension_B_s": 2,
+        "identity_verified": true,
+        "intersection_coefficient_both_orders": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "codimension_A_r": 2,
+        "codimension_B_s": 24,
+        "identity_verified": true,
+        "intersection_coefficient_both_orders": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "codimension_A_r": 24,
+        "codimension_B_s": 2,
+        "identity_verified": true,
+        "intersection_coefficient_both_orders": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "transverse_checked_count": 276,
+    "transverse_checked_domain": "2<=r,s, r+s<=bound+2",
+    "transverse_general_identity": "P_s*P_r=P_r*P_s, for r,s>=2"
   }
 }

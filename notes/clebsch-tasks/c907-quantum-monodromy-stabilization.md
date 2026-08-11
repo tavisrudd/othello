@@ -36,7 +36,16 @@ consecutive `q`-adic elementary divisors for the exceptional Fourier block,
 affinely normalized to `0,...,r-2`, and cyclic root monodromy preserves their
 multiset.  The live gate is therefore presentation-independent strict
 composition of these relative Rees lattices through weak factorization, plus
-the analytic Stokes gluing—not recovery of the local Tate width itself.
+the analytic Stokes gluing—not recovery of the local Tate width itself.  The
+first composition audit is positive: the Tate polynomials agree identically
+under transverse and nested two-step blow-up order exchanges.  A `P^1`
+mutation audit proves that unchanged Euler/Serre data still allow different
+exceptional flags, while the canonical monodromy-weight line is neither flag.
+Irregular mixed Hodge modules now give the exact conditional repair—strict
+projective pushforward, canonical-up-to-shift filtration in the rigid locally
+formally unitary case, and Thom--Sebastiani—but neither Cai's local rank-two
+block nor Iritani's blow-up map is known to lift functorially to that category.
+That filtered quantum lift is the highest-EV live gate.
 
 ## Goal
 

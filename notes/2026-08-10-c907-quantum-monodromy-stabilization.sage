@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v6"
+SCHEMA = "c907-quantum-monodromy-stabilization-v7"
 
 
 def matrix_strings(M):
@@ -202,6 +202,155 @@ def convolution(left, right):
         for j, b in enumerate(right):
             result[i + j] += a * b
     return result
+
+
+def polynomial_sum(*polynomials):
+    length = max(len(polynomial) for polynomial in polynomials)
+    return [
+        sum(polynomial[i] if i < len(polynomial) else 0 for polynomial in polynomials)
+        for i in range(length)
+    ]
+
+
+def blowup_tate_coefficients(codimension):
+    """Coefficients of T+...+T^(codimension-1), including the zero codim-1 case."""
+    assert codimension >= 1
+    return [0] + [1] * (codimension - 1)
+
+
+def nested_blowup_coherence_check(r, c):
+    """Tate ledger for a flag A subset Z subset X.
+
+    Here codim_X(Z)=r and codim_Z(A)=c.  Compare blowing up A and then
+    Bl_A(Z) with blowing up Z and then P(N_{Z/X}|_A).
+    """
+    assert r >= 2 and c >= 1
+    p_r = blowup_tate_coefficients(r)
+    p_c = blowup_tate_coefficients(c)
+    p_r_plus_c = blowup_tate_coefficients(r + c)
+    p_c_plus_one = blowup_tate_coefficients(c + 1)
+    projective_r_minus_one = [1] * r
+
+    left_direct_a = p_r_plus_c
+    left_a_via_strict_transform_z = convolution(p_r, p_c)
+    left = polynomial_sum(left_direct_a, left_a_via_strict_transform_z)
+    right = convolution(p_c_plus_one, projective_r_minus_one)
+    assert left == right
+
+    return {
+        "codimension_Z_in_X_r": r,
+        "codimension_A_in_Z_c": c,
+        "left_A_coefficient": left,
+        "right_A_coefficient": right,
+        "identity_verified": True,
+    }
+
+
+def transverse_blowup_coherence_check(r, s):
+    """Tate ledger for transverse centers of codimensions r and s."""
+    assert r >= 2 and s >= 2
+    first_a_then_b = convolution(
+        blowup_tate_coefficients(s), blowup_tate_coefficients(r)
+    )
+    first_b_then_a = convolution(
+        blowup_tate_coefficients(r), blowup_tate_coefficients(s)
+    )
+    assert first_a_then_b == first_b_then_a
+    return {
+        "codimension_A_r": r,
+        "codimension_B_s": s,
+        "intersection_coefficient_both_orders": first_a_then_b,
+        "identity_verified": True,
+    }
+
+
+def mutation_flag_ambiguity_check():
+    """The P^1 Euler/Serre data do not select its exceptional flag."""
+    euler = matrix(QQ, [[1, 2], [0, 1]])
+    mutation = matrix(QQ, [[2, 1], [-1, 0]])
+    assert mutation.det() == 1
+    assert mutation.transpose() * euler * mutation == euler
+    original_first_line = vector(QQ, [1, 0])
+    mutated_first_line = vector(QQ, [2, -1])
+    assert matrix(QQ, [original_first_line, mutated_first_line]).det() != 0
+
+    serre = euler.inverse() * euler.transpose()
+    normalized_unipotent = -serre
+    nilpotent = normalized_unipotent - identity_matrix(QQ, 2)
+    weight_line = nilpotent.right_kernel().basis()[0]
+    assert nilpotent.rank() == 1
+    assert mutation * weight_line in span(QQ, [weight_line])
+    assert original_first_line not in span(QQ, [weight_line])
+    assert mutated_first_line not in span(QQ, [weight_line])
+
+    return {
+        "category": "D^b(P^1)",
+        "original_exceptional_pair": ["O", "O(1)"],
+        "mutated_exceptional_pair": ["O(-1)", "O"],
+        "euler_matrix": matrix_strings(euler),
+        "mutation_basis_matrix": matrix_strings(mutation),
+        "euler_matrix_unchanged": True,
+        "original_first_flag_line": [1, 0],
+        "mutated_first_flag_line": [2, -1],
+        "flag_lines_distinct": True,
+        "normalized_serre_nilpotent": matrix_strings(nilpotent),
+        "canonical_monodromy_weight_line": [str(value) for value in weight_line],
+        "weight_line_differs_from_both_exceptional_lines": True,
+    }
+
+
+def two_step_tate_composition_certificate(bound):
+    nested = [
+        nested_blowup_coherence_check(r, c)
+        for r in range(2, bound + 2)
+        for c in range(1, bound + 3 - r)
+    ]
+    transverse = [
+        transverse_blowup_coherence_check(r, s)
+        for r in range(2, bound + 1)
+        for s in range(2, bound + 3 - r)
+    ]
+    nested_samples = [
+        check
+        for check in nested
+        if (check["codimension_Z_in_X_r"], check["codimension_A_in_Z_c"])
+        in {(2, 1), (2, bound), (bound + 1, 1)}
+    ]
+    transverse_samples = [
+        check
+        for check in transverse
+        if (check["codimension_A_r"], check["codimension_B_s"])
+        in {(2, 2), (2, bound), (bound, 2)}
+    ]
+    return {
+        "status": (
+            "Positive coherence for the classically normalized candidate associated graded. "
+            "Its Tate polynomials agree under the standard transverse and nested two-step "
+            "blow-up exchanges. This removes blow-up order as an obstruction at the polynomial "
+            "level, but does not compare the multivariable Novikov lattices or identify the "
+            "Stokes extension data or a presentation-independent filtration."
+        ),
+        "polynomial_convention": "P_r(T)=T+...+T^(r-1)",
+        "nested_general_identity": (
+            "P_(r+c)+P_r*P_c=P_(c+1)*(1+P_r), for r>=2 and c>=1"
+        ),
+        "transverse_general_identity": "P_s*P_r=P_r*P_s, for r,s>=2",
+        "maximum_total_codimension_checked": bound + 2,
+        "nested_checked_domain": "2<=r, 1<=c, r+c<=bound+2",
+        "nested_checked_count": len(nested),
+        "nested_boundary_samples": nested_samples,
+        "transverse_checked_domain": "2<=r,s, r+s<=bound+2",
+        "transverse_checked_count": len(transverse),
+        "transverse_boundary_samples": transverse_samples,
+        "mutation_flag_ambiguity": mutation_flag_ambiguity_check(),
+        "interpretation": (
+            "The associated graded passes the elementary order-exchange tests. However, "
+            "the P^1 mutation calculation shows that identical Euler and Serre data admit "
+            "different exceptional flags; the canonical monodromy weight line is neither "
+            "exceptional first line. A Stokes chamber or a new intrinsic strict filtration "
+            "is therefore additional data."
+        ),
+    }
 
 
 def tate_graded_candidate_check(m):
@@ -502,6 +651,38 @@ def build_certificate(bound):
             "cached_pdf_sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
             "formulae": ["(5.11)", "(5.19)", "(5.27)", "Theorem 5.18", "Remark 1.5"],
         },
+        "composition_source": {
+            "paper": (
+                "Franziska Bittner, The universal Euler characteristic for varieties "
+                "of characteristic zero"
+            ),
+            "arxiv": "math/0111062",
+            "cached_pdf_sha256": "484d2c3586977503dc6f1b43fca158af059cd0f9c5322731d0ebae6d643e160c",
+            "result": "Theorem 3.1, blow-up presentation of K_0(Var_k)",
+        },
+        "filtration_sources": [
+            {
+                "paper": "Claude Sabbah, Irregular Hodge theory",
+                "arxiv": "1511.00176v5",
+                "cached_pdf_sha256": "8221dd998d7b6459c525255c92755b2a60229088eb851a182be961528540b3ba",
+                "results": ["Theorem 0.3", "Theorem 0.7", "Theorem 3.39"],
+            },
+            {
+                "paper": (
+                    "Claude Sabbah and Jeng-Daw Yu, On the irregular Hodge filtration "
+                    "of exponentially twisted mixed Hodge modules"
+                ),
+                "arxiv": "1406.1339",
+                "cached_pdf_sha256": "d034597e2f31a3cf400130b2a9124733438062014a603c82c0a54ea7a2cec22d",
+                "results": ["strict projective pushforward", "Kontsevich-bundle comparison"],
+            },
+            {
+                "paper": "Yichen Qin and Dingxin Zhang, Classical and irregular Hodge numbers",
+                "arxiv": "2603.06040",
+                "cached_pdf_sha256": "95b699eb50c830dea8b5b6241bcc4450e1be8c72b50f20350741101b9efed6f5",
+                "results": ["Theorem 1.1.1", "Theorem 1.3.1"],
+            },
+        ],
         "cai_rank_two_certificate": cai_certificate(),
         "projective_stabilization": {
             "general_statement": (
@@ -622,6 +803,7 @@ def build_certificate(bound):
                 "Remark 1.5 separately leaves the general analytic Stokes/Gamma compatibility conjectural."
             ),
         },
+        "two_step_tate_composition": two_step_tate_composition_certificate(bound),
         "candidate_spectral_cycle_refinement": {
             "status": (
                 "Negative audit. Prime-power endpoint cycles exclude every projective self-carrier in "

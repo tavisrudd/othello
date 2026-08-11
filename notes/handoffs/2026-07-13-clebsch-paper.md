@@ -83,6 +83,14 @@ its exceptional Fourier block has consecutive `q`-adic elementary divisors,
 affinely `0,...,r-2`, and root monodromy preserves the multiset.  The unresolved
 step is now presentation-independent strict composition of these local Rees
 lattices through weak factorization, together with the analytic Stokes gluing.
+The associated-graded composition itself now passes the transverse and nested
+two-step blow-up exchanges.  Mutation on `D^b(P^1)` shows why that is not
+enough: Euler and Serre data remain unchanged while the exceptional flag
+changes, and the canonical monodromy-weight line is a third line.  Irregular
+mixed Hodge modules supply strict projective pushforward,
+canonical-up-to-shift filtrations in the rigid locally formally unitary case,
+and Thom--Sebastiani; the highest-EV remaining theorem is to lift Cai's local
+block and Iritani's blow-up map functorially into that filtered category.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

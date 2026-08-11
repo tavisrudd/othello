@@ -210,6 +210,76 @@ def main():
         assert check["sector_monodromy_permutation"] == list(range(1, n)) + [0]
         assert check["monodromy_preserves_elementary_divisor_multiset"]
 
+    composition = certificate["two_step_tate_composition"]
+
+    def blowup_polynomial(codimension):
+        return [0] + [1] * (codimension - 1)
+
+    def convolve(left, right):
+        result = [0] * (len(left) + len(right) - 1)
+        for i, a in enumerate(left):
+            for j, b in enumerate(right):
+                result[i + j] += a * b
+        return result
+
+    def add_polynomials(*polynomials):
+        length = max(len(polynomial) for polynomial in polynomials)
+        return [
+            sum(polynomial[i] if i < len(polynomial) else 0 for polynomial in polynomials)
+            for i in range(length)
+        ]
+
+    maximum_total = composition["maximum_total_codimension_checked"]
+    nested_count = 0
+    for codimension in range(2, maximum_total):
+        for inner_codimension in range(1, maximum_total + 1 - codimension):
+            left = add_polynomials(
+                blowup_polynomial(codimension + inner_codimension),
+                convolve(
+                    blowup_polynomial(codimension),
+                    blowup_polynomial(inner_codimension),
+                ),
+            )
+            right = convolve(
+                blowup_polynomial(inner_codimension + 1),
+                [1] * codimension,
+            )
+            assert left == right
+            nested_count += 1
+    assert nested_count == composition["nested_checked_count"]
+
+    transverse_count = 0
+    for r in range(2, maximum_total - 1):
+        for s in range(2, maximum_total + 1 - r):
+            first = convolve(blowup_polynomial(s), blowup_polynomial(r))
+            second = convolve(blowup_polynomial(r), blowup_polynomial(s))
+            assert first == second
+            transverse_count += 1
+    assert transverse_count == composition["transverse_checked_count"]
+
+    for check in composition["nested_boundary_samples"]:
+        assert check["left_A_coefficient"] == check["right_A_coefficient"]
+        assert check["identity_verified"]
+    for check in composition["transverse_boundary_samples"]:
+        assert check["identity_verified"]
+
+    mutation = composition["mutation_flag_ambiguity"]
+    euler = sp.Matrix([[1, 2], [0, 1]])
+    basis_change = sp.Matrix([[2, 1], [-1, 0]])
+    assert basis_change.det() == 1
+    assert basis_change.T * euler * basis_change == euler
+    assert sp.Matrix.hstack(sp.Matrix([1, 0]), sp.Matrix([2, -1])).det() != 0
+    serre = euler.inv() * euler.T
+    nilpotent = -serre - sp.eye(2)
+    kernel = nilpotent.nullspace()
+    assert len(kernel) == 1
+    assert kernel[0][0] == -kernel[0][1] and kernel[0][0] != 0
+    assert basis_change * kernel[0] == kernel[0]
+    assert mutation["euler_matrix_unchanged"]
+    assert mutation["flag_lines_distinct"]
+    assert mutation["canonical_monodromy_weight_line"] == ["1", "-1"]
+    assert mutation["weight_line_differs_from_both_exceptional_lines"]
+
     spectral_checks = certificate["candidate_spectral_cycle_refinement"]["checks"]
     for check in spectral_checks:
         m = check["stabilizing_projective_dimension_m"]
@@ -258,6 +328,7 @@ def main():
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
         f"Iritani q-adic lattice checks through r={len(q_adic['checks'])+1}, "
+        f"two-step Tate checks ({nested_count} nested, {transverse_count} transverse), "
         f"spectral-cycle checks m=2..{len(spectral_checks)+1}, "
         f"prime-power tower checks through n={len(projective_checks)}"
     )
