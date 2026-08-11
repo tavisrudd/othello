@@ -745,8 +745,12 @@ extension.  Spectral stabilization now supplies exact index-two families in
 every dimension at least three, index-three families in every dimension at
 least four, and index-four families in every dimension at least five; the
 order-four tower proves the factorial ceiling is not squarefree.  The towers
-are polarized products, so arbitrary height and indecomposable realization
-remain open.  The complementary graph theorem now proves that every slope
+are polarized products, so arbitrary height and an indecomposable tower
+remain open.  Their order-four fivefold base is nevertheless already
+polarized-indecomposable: a cyclic-primary regular-nilpotent slope has local
+reduced centralizer and hence no nontrivial Rosati-symmetric idempotent.  New
+height-four tests also have exact index four.  The complementary graph
+theorem now proves that every slope
 with squarefree minimal polynomial is primitive: unramified orthogonal
 splitting reduces it blockwise to the Jordan-scalar mixed-adjugate theorem,
 and faithful flatness descends the result, including at two.  Complete

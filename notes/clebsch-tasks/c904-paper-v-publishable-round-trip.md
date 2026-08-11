@@ -324,8 +324,14 @@ preserved.  Exact certificates give index two in every dimension \(g\ge3\),
 index three in every dimension \(g\ge4\), and index four in every dimension
 \(g\ge5\).  Thus higher Tor layers really occur and the universal bound is
 not squarefree.  These stabilized ppavs are polarized products; arbitrary
-factorial height and indecomposable realization remain live.  See
-`notes/2026-08-11-c904-spectral-stabilization-defect-towers.md`.
+factorial height and an indecomposable **tower** remain live.  The order-four
+five-dimensional base itself is now proved polarized-indecomposable: its
+regular-nilpotent slope is cyclic-primary, so the reduced centralizer is
+local and has no nontrivial Rosati-symmetric idempotent.  New height-four
+tests also have exact curve/top index four, supporting—but not proving—the
+full (p)-typical Jordan-height formula.  See
+`notes/2026-08-11-c904-spectral-stabilization-defect-towers.md` and
+`notes/2026-08-11-c904-jordan-height-indecomposable-audit.md`.
 
 The complementary positive classification theorem is also proved.  For a
 prime graph gluing of \(pI_g\), a squarefree minimal polynomial of the
