@@ -190,7 +190,7 @@ argument needs its own proposition.
 3. Add one conclusion paragraph identifying this as the degree-three instance
    of residual marking after reconstruction.
 
-Do not make Paper IV carry the general Frobenius--Schur theorem unless its
+Do not make Paper IV carry the general Frobenius-orbit commutant theorem unless its
 formal proof is nearly free from the existing hidden-field formalization. The
 epilogue should own and prove the general lemma; Paper IV needs only a
 corollary of its current theorem. This avoids turning a focused 15-page paper
@@ -276,12 +276,37 @@ equivalence. The remaining switching and coordinated-relabeling quotients are
 recorded by their exact stabilizer groups. No unproved claim of logical
 independence among every auxiliary marking is required.
 
-#### Theorem V.E: finite output interface
+#### Theorem V.E: coordinate-free lattice tower
 
-The common marked object canonically determines the oriented \(A_5\) six-set,
-its augmentation/root lattice, and the marked golden invariant plane. This is
-the complete output interface. It is not yet a rank-ten symplectic lattice,
-PEL datum, principal polarization, or cubic realization.
+The common marked object canonically determines the oriented \(A_5\) six-set
+\(\Omega\), its permutation lattice \(P=\mathbf Z^\Omega\), and two distinct
+lattices that must not be conflated:
+
+\[
+A_{\mathrm{aug}}(\Omega)=\ker(P\xrightarrow{\sum}\mathbf Z),
+\qquad
+D(\Omega)=\{x\in P:\textstyle\sum x_\omega\equiv0\pmod2\}.
+\]
+
+Here \(A_{\mathrm{aug}}\) has rank five and is the source used later by the
+rank-ten symplectic envelope; \(D(\Omega)\) has rank six and its dual for the
+standard permutation pairing
+
+\[
+D(\Omega)^\vee=P+\mathbf Z\frac{\mathbf1_\Omega}{2}
+\]
+
+is the normalization lattice used by the golden residue theorem. Prove
+functorially that the six-point heart
+
+\[
+\operatorname{Aug}(\mathbf F_2^\Omega)/\langle\mathbf1_\Omega\rangle
+\]
+
+is the common four-dimensional simple constituent through which these two
+integral outputs meet. This lattice tower, together with the marked golden
+plane, is the complete Paper V interface. It is not yet a rank-ten symplectic
+lattice, PEL datum, principal polarization, or cubic realization.
 
 #### Theorem V.F: residual marking synthesis
 
@@ -296,10 +321,47 @@ collection of pairwise sign checks.
 Paper IV supplies a parallel, but differently based, principal
 \(C_3=\operatorname{Gal}(\mathbf F_8/\mathbf F_2)\)-torsor
 \(\{\alpha,\alpha^2,\alpha^4\}\) recovered from its hidden commutant field.
-The theorem compares the two reconstruction profiles; it does not assert a
-common base groupoid, shadow functor, carrier, or map between their geometries.
+Place both statements under the following precise Frobenius-orbit commutant
+lemma. If a
+simple \(\mathbf F_qG\)-module becomes a multiplicity-free Frobenius orbit of
+\(r\) absolutely simple constituents, then its commutant is
+\(\mathbf F_{q^r}\); choosing one
+constituent, or one recovered element whose Frobenius orbit has length \(r\),
+is a principal \(C_r\)-rigidification. Apply it only after checking these
+hypotheses separately in the two examples. The theorem compares their
+reconstruction profiles; it does not assert a common base groupoid, shadow
+functor, carrier, or map between their geometries, and it does not call all
+primitive field elements one Frobenius orbit.
 
-#### Theorem V.G: normalization--residue bridge
+#### Theorem V.G: symmetric-conference root--weight saturation
+
+For a normalized symmetric conference matrix \(B\) of order
+\(n\equiv2\pmod4\), prove that
+
+\[
+D_n^\vee=\mathbf Z^n+\mathbf Z\frac{(1,\ldots,1)}2
+\]
+
+is the minimal over-lattice of \(\mathbf Z^n\) stable under
+\(\varphi_B=(I+B)/2\), independently of switching, and that
+
+\[
+\varphi_B^2-\varphi_B=\frac{n-2}{4}I.
+\]
+
+Consequently the coefficient algebra after reduction modulo two is
+
+\[
+\mathbf F_2[t]/\left(t^2+t+\frac{n-2}{4}\right),
+\]
+
+which is \(\mathbf F_4\) for \(n\equiv6\pmod8\) and
+\(\mathbf F_2\times\mathbf F_2\) for \(n\equiv2\pmod8\). Present this as a
+supporting structural theorem, not the principal novelty claim. Do not call
+the associated quadratic order maximal for arbitrary \(n\); maximality is
+proved separately in the golden case.
+
+#### Theorem V.H: golden normalization--residue specialization
 
 Let \(B\) be the oriented order-six conference operator recovered by the
 common carrier. Prove that
@@ -325,11 +387,23 @@ where \(H\) is the natural two-dimensional \(\mathbf F_4A_5\)-module and
 \]
 
 The extension is therefore the unique nonsplit middle module up to
-isomorphism. Restriction of \(\bar\varphi\) to \(H\) identifies the golden
-orientation torsor with \(\{\omega,\omega^2\}\); reversal and the outer
-normalizer both act by Frobenius. State explicitly that this selects a
-canonical nonsplit extension object, not a basis-free nonzero vector in the
-one-dimensional Ext space.
+isomorphism, although the three nonzero vectors in the Ext line remain
+distinct when the two endpoints are rigidified. Restriction of
+\(\bar\varphi\) to \(H\) identifies the golden-orientation torsor with
+\(\{\omega,\omega^2\}\); reversal and the outer normalizer both act by
+Frobenius.
+
+Express the result as a Cartesian square of principal \(C_2\)-torsors over
+the unrigidified carrier and the unordered exotic conjugacy class. The induced
+nontrivial map
+
+\[
+\operatorname{Out}(A_5)\longrightarrow
+\operatorname{Gal}(\mathbf F_4/\mathbf F_2)
+\]
+
+is an isomorphism relative to the recovered six-set action. Do not describe
+this as an absolute canonical identification independent of that action.
 
 ### Structural proof compression
 
@@ -345,17 +419,22 @@ All of Paper V should reduce to eight reusable arguments:
 4. **Carrier rigidity lemma.** An equivariant automorphism fixing the marked
    node frame, selected line, and cubic generator is the identity in the
    chosen normalized representative.
-5. **Finite output lemma.** Recover the oriented six-set, augmentation lattice,
-   and golden plane functorially, without claiming an integral Hodge lift.
+5. **Lattice-tower lemma.** Recover \(A_{\mathrm{aug}}(\Omega)\),
+   \(D(\Omega)\), and \(D(\Omega)^\vee\) functorially and identify their
+   common six-point heart. Keep the rank-five augmentation lattice distinct
+   from the rank-six \(D\)-type lattice.
 6. **Rigidification-cover lemma.** Package the upper marked groupoid as one
    principal \(C_2\)-cover of the unrigidified carrier groupoid and express all
    upper equivalences as pullbacks of it. Paper V should cite Paper IV's
    degree-three torsor as a parallel reconstruction profile rather than
-   reproduce its code or orbit census.
-7. **Root--weight normalization lemma.** From the common column class of
-   \((I+B)/2\), prove directly that \(D_6^\vee\) is the minimal stable
-   saturation and that normalization before reduction changes the dual-number
-   residue of \(\mathbf Z[B]\) into \(\mathbf F_4\).
+   reproduce its code or orbit census. A one-paragraph Frobenius-orbit
+   commutant lemma
+   supplies the common formal mechanism.
+7. **Conference root--weight lemma.** From the common column class of
+   \((I+B)/2\), prove the general \(D_n^\vee\) saturation law and its
+   mod-eight split/inert residue dichotomy. Specialize only afterward to the
+   maximal golden order, where normalization changes the dual-number residue
+   of \(\mathbf Z[B]\) into \(\mathbf F_4\).
 8. **Triangle-presentation Ext lemma.** On the natural module for
    \(A_5\simeq\operatorname{SL}_2(4)\), the \((2,3,5)\)-relation norms have
    ranks \((1,0,0)\). Hence \(\dim Z^1=3\), \(\dim B^1=2\), and the Ext line
@@ -392,13 +471,13 @@ reproved in V.
 3. The three imported reconstruction functors -- 3 pages.
 4. The involution difference bridge -- 3 pages.
 5. Natural return maps and triangle identities -- 3--4 pages.
-6. Finite output interface -- 1--2 pages.
+6. Coordinate-free lattice tower and six-point heart -- 2 pages.
 7. Residual rigidification torsors, Paper IV, and the epilogue interface --
    1--2 pages.
-8. Root--weight normalization, the nonsplit Ext line, and Frobenius residue --
-   3--4 pages.
+8. General conference saturation, the golden Ext specialization, and the
+   Cartesian Frobenius square -- 4--5 pages.
 
-**Target:** 20--26 pages. A shorter paper is acceptable only if every groupoid,
+**Target:** 22--28 pages. A shorter paper is acceptable only if every groupoid,
 normalization, and Ext argument remains self-contained. Keep the
 six-dimensional root--weight bridge here; move only rank-ten symplectic, PEL,
 and geometric material to the epilogue.
@@ -485,7 +564,7 @@ No claim is made that reduction modulo eleven uniquely determines an abelian
 variety or principal polarization.
 
 The six-set is the classical set \(A_5/D_5\), already visible in the cubic
-geometry. Import Theorem V.G as a stated proposition: it identifies the
+geometry. Import Theorem V.H as a stated proposition: it identifies the
 golden-orientation torsor with
 \(\{\omega,\omega^2\}\subset\operatorname{End}_{A_5}(H)=\mathbf F_4\).
 Do not repeat its \(D_6^\vee\), Ext, or normalization proof. The new work here
@@ -494,7 +573,7 @@ symplectic space, classify the self-dual principal gluings, and compare the
 result with cubic homology. Retain only the downstream deck-equivariance
 statement needed by the geometric family.
 
-The Frobenius--Schur principle abstracted from Paper IV may be recalled in one
+The Frobenius-orbit commutant principle abstracted from Paper IV may be recalled in one
 paragraph as motivation, with a citation to V.F. It is not reproved here.
 
 ### Theorem E.B: exotic cubic period realization
@@ -710,14 +789,17 @@ The epilogue should close with:
 5. The \(q-1\) bridge has a human nonvanishing and normalization proof.
 6. Both composites carry natural isomorphisms satisfying the triangle
    identities.
-7. The finite output interface recovers the oriented six-set, augmentation
-   lattice, golden plane, and canonical \(D_6^\vee\) normalization--residue
-   extension, but no rank-ten Hodge or PEL object.
+7. The output interface distinguishes the rank-five augmentation lattice from
+   the rank-six \(D\)-type root--weight tower and identifies their common
+   six-point heart; it recovers no rank-ten Hodge or PEL object.
 8. The Ext line is proved structurally from the \((2,3,5)\)-presentation, and
    the theorem distinguishes the canonical nonsplit middle module from a
    noncanonical scalar generator of Ext.
-9. No theorem depends on a computation or certificate.
-10. Paper IV is not assigned an unproved geometric carrier bridge; its imported
+9. The general conference theorem states only root--weight saturation and the
+   split/inert residue dichotomy; maximality and the \(A_5\)-heart are reserved
+   for the order-six specialization.
+10. No theorem depends on a computation or certificate.
+11. Paper IV is not assigned an unproved geometric carrier bridge; its imported
    residual-torsor statement is precisely identified.
 
 ### Geometric epilogue
@@ -759,12 +841,13 @@ The epilogue should close with:
 
 1. Freeze the exact marked object and structural theorem packet for Paper V.
 2. Rewrite every Paper V transport as a functor through the carrier groupoid.
-3. Prove the natural triangle identities and finite output interface.
-4. Freeze Paper V at 20--26 pages with no computational proof dependency.
-5. In the epilogue, import V.G and prove the canonical rank-ten symplectic-
+3. Prove the natural triangle identities and coordinate-free lattice tower.
+4. Freeze Paper V at 22--28 pages with no computational proof dependency.
+5. In the epilogue, import V.H and prove the canonical rank-ten symplectic-
    envelope theorem.
 6. Prove deck-equivariance of every downstream geometric construction; cite
-   V.F--V.G for Frobenius--Schur descent and the maximal-order heart.
+   V.F--V.H for the Frobenius-orbit commutant lemma and the maximal-order
+   heart.
 7. Freeze the exact period-image normalization and generic-degree theorem.
 8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
@@ -808,7 +891,7 @@ juxtaposed. Apply these kill criteria:
 - if the recent quantum stack cannot be made sufficiently self-contained,
   publish the cubic minimal-class theorem separately and remove the epilogue
   promise from Papers I--V;
-- if Paper V exceeds 26 pages, compress functorial preliminaries or move
+- if Paper V exceeds 28 pages, compress functorial preliminaries or move
   rank-ten material back to the epilogue; do not remove the six-dimensional
   normalization--residue theorem that gives the orientation causal force.
 
@@ -820,7 +903,7 @@ juxtaposed. Apply these kill criteria:
 - Paper V is a short structural synthesis, not a repository for later research.
 - The geometric epilogue is the independent high-venue punchline.
 - The epilogue proves the residue-to-rank-ten symplectic handoff and restates
-  V.G, so it remains independently readable without duplicating Paper V's
+  V.H, so it remains independently readable without duplicating Paper V's
   structural proof.
 
 This is the smallest architecture in which the successor reads simultaneously

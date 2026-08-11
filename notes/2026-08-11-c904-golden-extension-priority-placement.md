@@ -227,7 +227,7 @@ This reverses the earlier provisional placement for four reasons.
 
 Add after the residual marking theorem:
 
-> **Theorem V.G (normalization--residue bridge).**  The oriented conference
+> **Theorem V.H (golden normalization--residue specialization).**  The oriented conference
 > operator determines the minimal maximal-order lattice \(D_6^\vee\).  Its
 > reduction fits into the unique nonsplit sequence
 > \[
@@ -244,11 +244,12 @@ The proof occupies three to four pages:
 3. one page for the Ext calculation and Frobenius/outer-normalizer match;
 4. at most half a page for functoriality under switching and relabelling.
 
-This revises Paper V's target from 17--22 pages to approximately **20--26
-pages**.  It does not import the rank-ten symplectic lattice, PEL
+Together with the newly separated general conference theorem V.G, this
+revises Paper V's target to approximately **22--28 pages**. It does not import
+the rank-ten symplectic lattice, PEL
 classification, period map, Chow theory, or quantum argument.
 
-The epilogue should restate Theorem V.G in a concise proposition for
+The epilogue should restate Theorem V.H in a concise proposition for
 standalone readability and cite Paper V for its structural proof.  Its first
 new theorem is then the rank-ten integral symplectic envelope and exotic
 cubic realization.
@@ -305,4 +306,4 @@ canonicity the series needs and avoids an overstated scalar normalization.
 | What is the extension group? | \(\operatorname{Ext}^1_{\mathbf F _4A_5}(\mathbf F _4,H)\simeq\mathbf F _4\). |
 | Is the golden class the generator? | It is nonzero and hence spans; canonically it is the unique nonsplit extension isomorphism class, not a distinguished vector without scalar rigidification. |
 | Is the mechanism classical? | Quadratic-order conference lattices and the \(A_5\) uniserial modules are classical separately; no exact symmetric \(D_6^\vee\to\mathbf F _4\)-heart synthesis was located in the bounded audit. |
-| Paper V or epilogue? | Paper V, as Theorem V.G; the epilogue restates and consumes it but does not duplicate the proof. |
+| Paper V or epilogue? | Paper V, as Theorem V.H after the general conference theorem V.G; the epilogue restates and consumes it but does not duplicate the proof. |
