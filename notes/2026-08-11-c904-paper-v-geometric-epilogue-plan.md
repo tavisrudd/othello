@@ -27,9 +27,12 @@ unnumbered, independently readable geometric epilogue.
   \qquad
   Y_b\text{ universally }CH_0\text{-trivial and irrational}.
   \]
-- **Paper IV** remains the logically independent lower reconstruction branch.
-  It completes the series theme but is not given a nonexistent cubic or
-  \(A_5\)-carrier arrow.
+- **Paper IV** remains a geometrically independent lower reconstruction
+  branch, but it is no longer merely decorative in the series architecture.
+  Its hidden \(\mathbf F_8\) commutant supplies the degree-three model of the
+  residual cyclic-marking principle synthesized by Paper V and refined by the
+  epilogue. It is
+  not given a nonexistent cubic or \(A_5\)-carrier arrow.
 
 The epilogue should not be called Paper VI. It should be visibly the payoff of
 the series while retaining a standalone high-venue identity.
@@ -58,8 +61,10 @@ All four currently print the same series topology:
 - Paper II reconstructs a signed chordal companion;
 - Paper V proves their marked companion correspondence and common six-axis
   carrier;
-- Paper IV is an independent lower branch reconstructing a marked conic plane
-  and polarity.
+- Paper IV is the lower branch reconstructing a marked conic plane and
+  polarity; its hidden \(\mathbf F_8\) commutant exhibits the same residual-
+  marking mechanism in degree three that the upper branch exhibits in degree
+  two.
 
 Papers I--III are not journal-published, but public GitHub/DOI versions already
 exist and are immutable predecessors. Coordinated changes must therefore be
@@ -84,12 +89,18 @@ The causal diagram should become
 \end{array}
 \]
 
-Separately,
+The lower branch meets this diagram only through a structural theorem:
 
 \[
-\text{Paper IV}\longrightarrow
-\text{independent marked conic-plane and polarity branch}.
+\text{Paper IV conic reconstruction}
+\longrightarrow
+\text{\(\mathbf F_8\)-generator \(C_3\)-torsor}
+\longrightarrow
+\text{residual cyclic-marking principle}.
 \]
+
+The geometry remains independent. What is shared is the descent mechanism,
+not a common incidence object or group action.
 
 The numbered series answers:
 
@@ -111,8 +122,9 @@ load-bearing bridges are frozen. Use the following staged policy.
 
 1. Papers I--III promise only that Paper V identifies their common marked
    finite carrier.
-2. Paper IV identifies itself as the independent lower branch and makes no
-   cubic promise.
+2. Paper IV identifies itself as the geometrically independent lower branch,
+   extracts its residual \(C_3\) Frobenius-orbit torsor, and makes no cubic
+   promise.
 3. Once the integral-envelope and quantum bridges are frozen, Paper V may end
    with one forward sentence announcing the geometric epilogue.
 4. Later forward versions of Papers I--III may add one restrained
@@ -126,7 +138,9 @@ The final shared series paragraph, used only after those gates pass, may say:
 > integral envelope, realizes its exotic principal gluing by a
 > non-isotrivial cubic pencil, and proves that irrationality survives one
 > stabilization even though the resulting fourfolds are universally
-> \(CH_0\)-trivial. Paper IV is the independent lower reconstruction branch.
+> \(CH_0\)-trivial. Paper IV supplies the lower degree-three model of the same
+> residual cyclic-marking principle, while its conic-plane geometry remains
+> independent.
 
 ### Paper-specific promises
 
@@ -137,9 +151,11 @@ The final shared series paragraph, used only after those gates pass, may say:
 - **Paper III:** its marked incidence sheet and conference source provide the
   characteristic-zero presentation entering Paper V. A sheet alone still does
   not supply its chart lift, outer labels, Petersen labels, or orientation.
-- **Paper IV:** its weighted-pair reconstruction remains independent. It
-  supports the reconstruction philosophy but contributes no technical input to
-  the cubic epilogue.
+- **Paper IV:** its weighted-pair reconstruction and plane/polarity theorem
+  remain independent. Its hidden \(\mathbf F_8\) commutant and recovered
+  Frobenius-orbit \(C_3\)-torsor supply the degree-three model of the
+  residual-marking lemma used in the epilogue. This is a structural input, not
+  a conic-to-cubic correspondence.
 
 ### Abstract and conclusion policy
 
@@ -152,6 +168,29 @@ forward sentence about Paper V only. No earlier paper should claim the
 epilogue theorem before its finite-to-integral bridge, quantum bridge, and
 priority audit are frozen.
 
+### Minimal Paper IV integration packet
+
+Keep the change to Paper IV to roughly one page, two only if the orbit-label
+argument needs its own proposition.
+
+1. Recast the existing hidden-field theorem as the concrete statement that
+   the recovered Frobenius orbit \(\{\alpha,\alpha^2,\alpha^4\}\) forms a free
+   \(C_3\)-torsor. Do not call this the set of all field generators: a finite
+   field can have more than one Frobenius orbit of primitive elements.
+2. Verify and label which three minimum-word families are toric. Only after
+   that check may the manuscript assert that their Gram operators realize the
+   three Frobenius conjugates in some order. The repeated scalar on the
+   octahedral family must remain visible as the reason stabilizer data is
+   necessary.
+3. Add one conclusion paragraph identifying this as the degree-three instance
+   of residual marking after reconstruction.
+
+Do not make Paper IV carry the general Frobenius--Schur theorem unless its
+formal proof is nearly free from the existing hidden-field formalization. The
+epilogue should own and prove the general lemma; Paper IV needs only a
+corollary of its current theorem. This avoids turning a focused 15-page paper
+into infrastructure for a later one and avoids a disproportionate Lean gate.
+
 ## Paper V: structural culmination
 
 Recommended title:
@@ -163,8 +202,13 @@ Recommended title:
 Paper V proves that the upper three branches recover one marked golden pencil
 and six-axis carrier over the finite reconstruction base. It ends by isolating
 the oriented \(A_5\) six-set and marked golden plane as a functorial output
-interface. The geometric epilogue, not Paper V, owns the integral envelope,
-principal polarization, and complex realization.
+interface. It then compares, without identifying their carriers, the upper
+residual \(C_2\)-orientation torsor with Paper IV's lower residual
+\(C_3\)-orbit torsor as two instances of residual cyclic marking after
+reconstruction. Only the lower instance is intrinsically Frobenius at this
+stage; the epilogue proves that the upper instance becomes Frobenius on the
+exotic heart. The geometric epilogue, not Paper V, owns the integral
+envelope, principal polarization, and complex realization.
 
 Paper V contains no Chow theory, quantum theory, modular-curve development,
 Prym geometry, gluing census, or load-bearing computation.
@@ -229,6 +273,16 @@ its augmentation/root lattice, and the marked golden invariant plane. This is
 the complete output interface. It is not yet a rank-ten symplectic lattice,
 PEL datum, principal polarization, or cubic realization.
 
+#### Theorem V.F: residual marking synthesis
+
+After the carrier has been reconstructed, the remaining named scalar,
+orientation, or sheet is naturally a finite cyclic torsor. In the upper branch
+this is the free \(C_2\)-torsor of golden orientations. In Paper IV it is the
+free \(C_3=\operatorname{Gal}(\mathbf F_8/\mathbf F_2)\)-torsor
+\(\{\alpha,\alpha^2,\alpha^4\}\) recovered from the hidden commutant field.
+The theorem compares their reconstruction profiles; it does not assert a
+common shadow functor, a common carrier, or a map between their geometries.
+
 ### Structural proof compression
 
 All of Paper V should reduce to five reusable arguments:
@@ -245,6 +299,10 @@ All of Paper V should reduce to five reusable arguments:
    chosen normalized representative.
 5. **Finite output lemma.** Recover the oriented six-set, augmentation lattice,
    and golden plane functorially, without claiming an integral Hodge lift.
+6. **Residual marking lemma.** Once the carrier is fixed, identify the remaining
+   cyclic ambiguity as a torsor under the appropriate Frobenius or outer action.
+   Paper V should cite Paper IV's degree-three instance rather than reproduce
+   its code or orbit census.
 
 One hand normalization may be printed for each scalar or sign. There should be
 no exhaustive matrix table and no phrase of the form "a computer calculation
@@ -261,7 +319,10 @@ Paper V should cite, not reproduce:
 - Paper III, Proposition 1.2 and Theorem 5.1, for the marked incidence sheet,
   relative conference source, and operator presentations.
 
-The deep-hole rigidity theorem, modular detector calculations, Gorenstein
+From Paper IV, cite only the hidden-field proposition and its torsor corollary:
+\(\operatorname{End}_{\mathbf F_2\operatorname{PGL}_2(13)}K=\mathbf F_8\)
+and the recovered generator orbit \(\{\alpha,\alpha^2,\alpha^4\}\). The
+deep-hole rigidity theorem, modular detector calculations, Gorenstein
 appendices, harmonic return, exchange-spectrum theorem, and Paper IV's finite
 plane reconstruction remain achievements of their own papers rather than being
 reproved in V.
@@ -274,9 +335,10 @@ reproved in V.
 4. The involution difference bridge -- 3 pages.
 5. Natural return maps and triangle identities -- 3--4 pages.
 6. Finite output interface -- 1--2 pages.
-7. Boundaries, Paper IV, and epilogue interface -- 1 page.
+7. Residual marking torsors, Paper IV, and the epilogue interface -- 2--3
+   pages.
 
-**Target:** 16--22 pages. A shorter paper is acceptable only if every groupoid
+**Target:** 18--24 pages. A shorter paper is acceptable only if every groupoid
 and normalization argument remains self-contained. If integral or arithmetic
 material pushes V past this range, move it to the epilogue.
 
@@ -362,17 +424,36 @@ No claim is made that reduction modulo eleven uniquely determines an abelian
 variety or principal polarization.
 
 The six-set alone is not enough: it is the classical set \(A_5/D_5\) already
-visible in the cubic geometry. Prove an orientation-comparison theorem sending
-the marked golden orientation/plane of Paper V to a choice of generator in
+visible in the cubic geometry. Let \(\mathscr O_{\mathrm{gold}}\) be the free
+\(C_2\)-torsor of golden orientations recovered by Paper V, and let
 
 \[
-\operatorname{End}_{A_5}(H_2)=\mathbf F_4.
+\mathscr E_{\mathrm{ex}}=\{\omega,\omega^2\}
+\subset \operatorname{End}_{A_5}(H_2)=\mathbf F_4
 \]
 
-Reversing the golden orientation must act by Frobenius and exchange
-\(\omega\) with \(\omega^2\). This is the nontrivial series-specific datum
-that selects one exotic sheet; without it the integral-envelope construction
-would use only a classical six-set and Paper V would be dispensable.
+be the free Frobenius \(C_2\)-torsor of exotic gluings. Prove a coordinate-free
+equivariant isomorphism
+
+\[
+\mathscr O_{\mathrm{gold}}\simeq\mathscr E_{\mathrm{ex}}
+\]
+
+under the identified outer-normalizer quotient. One intrinsically defined,
+groupoid-natural calibration determines the isomorphism; a bare choice of
+basepoints does not. Named generators are proof coordinates, not theorem data.
+Explicitly prohibit the false shortcut obtained by reducing the
+integral golden order modulo two: \(t^2-5\equiv(t+1)^2\pmod2\), so this
+reduction is nonreduced and is not \(\mathbf F_4\). The torsor comparison, not
+ring reduction, is the nontrivial series-specific datum selecting one exotic
+sheet.
+
+State first the Frobenius--Schur descent lemma abstracted from Paper IV: a
+multiplicity-free Frobenius orbit of \(r\) absolutely simple binary
+constituents has commutant \(\mathbf F_{2^r}\), and the Frobenius orbit of a
+recovered element with irreducible degree-\(r\) minimal polynomial forms a
+Galois torsor. Paper IV is the degree-three model; the exotic heart is
+the degree-two application.
 
 ### Theorem E.B: exotic cubic period realization
 
@@ -501,7 +582,8 @@ than a juxtaposition of two unrelated examples.
 ### Epilogue section and page plan
 
 1. Introduction and separation theorem -- 4--5 pages.
-2. Finite carrier and canonical integral envelope -- 6--8 pages.
+2. Frobenius torsors, finite carrier, and canonical integral envelope -- 7--9
+   pages.
 3. Exotic packet and cubic period realization -- 7--10 pages.
 4. Local--global divisor-product theorem and geometric application -- 9--11
    pages.
@@ -588,14 +670,17 @@ The epilogue should close with:
 7. The finite output interface recovers only the oriented six-set,
    augmentation lattice, and golden plane.
 8. No theorem depends on a computation or certificate.
-9. Paper IV is not assigned an unproved carrier bridge.
+9. Paper IV is not assigned an unproved geometric carrier bridge; its imported
+   residual-torsor statement is precisely identified.
 
 ### Geometric epilogue
 
 1. The canonical integral-envelope theorem makes the finite-to-integral
    series connection causal.
-2. The orientation-comparison theorem identifies V's golden orientation with
-   the \(\mathbf F_4\) generator and exchanges the exotic pair under reversal.
+2. The orientation-comparison theorem identifies the golden and exotic free
+   \(C_2\)-torsors equivariantly through an intrinsic groupoid-natural
+   calibration, not an arbitrary basepoint choice; it does not identify
+   \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
 3. The cubic axes realize that exact envelope with polarization \(6I-J\).
 4. The period-map theorem states its exact strength: landing,
    image-normalization, and generic degree are not conflated.
@@ -624,9 +709,10 @@ The epilogue should close with:
 1. Freeze the exact marked object and structural theorem packet for Paper V.
 2. Rewrite every Paper V transport as a functor through the carrier groupoid.
 3. Prove the natural triangle identities and finite output interface.
-4. Freeze Paper V at 16--22 pages with no computational proof dependency.
+4. Freeze Paper V at 18--24 pages with no computational proof dependency.
 5. In the epilogue, prove the canonical integral-envelope theorem.
-6. Prove the golden-orientation/\(\mathbf F_4\)-generator comparison.
+6. Prove Frobenius--Schur descent, then the equivariant isomorphism between the
+   golden-orientation and exotic-gluing \(C_2\)-torsors.
 7. Freeze the exact period-image normalization and generic-degree theorem.
 8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
@@ -645,7 +731,8 @@ The epilogue should close with:
 
 The successor is genuinely Annals-shaped only if all of the following land:
 
-1. the canonical finite-to-integral envelope;
+1. the canonical finite-to-integral envelope and intrinsic golden/exotic
+   torsor calibration;
 2. the strong period-image normalization and generic-degree theorem;
 3. the geometric application of the primewise minimal-class theorem;
 4. a self-contained special-case sixth-root/weak-factorization proof; and
@@ -668,7 +755,9 @@ juxtaposed. Apply these kill criteria:
 
 ## Final publication shape
 
-- Papers I--IV remain substantial standalone reconstruction theorems.
+- Papers I--III remain the upper reconstruction inputs. Paper IV remains a
+  substantial standalone lower reconstruction theorem and supplies the
+  degree-three residual-marking model without a geometric cubic arrow.
 - Paper V is a short structural synthesis, not a repository for later research.
 - The geometric epilogue is the independent high-venue punchline.
 - The epilogue itself proves the exact finite-to-integral handoff, so its
