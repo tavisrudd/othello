@@ -647,6 +647,17 @@ block that theorem.
 | Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one Chow-halving/index-one problem on $\mathcal D_+$; fixed-fibre lifting and the special-$A_5$ degree-fifteen relay are exact, while every ambient, tautological, axis, elliptic, Fano/Prym, Brauer, cusp-only, inherited degree-five, and presently sourced rational-simple-connectedness shortcut is dead.  Proved successors include the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet, exotic cubic saturation, prime-support/factorial bound, exact defect towers, and semisimple graph-slope primitivity.  The direct EV is a genuinely non-split integral two-local correspondence or new charge-three surface-field geometry; the adjacent EV is the $p$-typical nilpotent-gluing classification.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
+**2026-08-11 Paper V manuscript update.** The row's frozen-surface wording is
+superseded at the manuscript-first gate. *The Golden Companion
+Correspondence* is now an eighteen-page, warning-free structural authority.
+It proves the intrinsic selected-line equivalence, exact residual
+\(uq\)-quotient, source returns, common binary heart, uniform symmetric
+conference saturation, unique nonsplit order-six \(\mathbf F_4A_5\)
+extension, and the geometric/residue Frobenius identification. The exact
+Papers I--IV back patches are prepared but unapplied. Lean and mirror
+publication remain deferred by user instruction. Current report:
+notes/2026-08-11-c904-paper-v-structural-draft-closeout.md.
+
 C904's original Annals-upgrade frontier remains the relative Shen-cycle
 descent gate.  Fixed-fibre lifting is closed by the unordered `2/5`
 construction, but Shen's cycle is existential rather than horizontal.  The

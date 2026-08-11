@@ -2,8 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; manuscript, cold-referee, and paper-only export gates
-closed; Lean deferred by user instruction
+**Status:** complete at the manuscript-first gate; 18-page structural
+authority, deterministic paper check, visual review, claim ledger, and
+unapplied predecessor back-patch packet closed. Lean and mirror publication
+remain deferred by user instruction.
 
 **Research checkpoint:** the literal-cubic target failed, but the replacement
 Paper-II chordal-axis bridge is proved exactly and independently replayed.
@@ -13,14 +15,18 @@ conference line and identifies sheet sign with conference orientation.  The
 marked oriented round trip is therefore proved.  The selected chordal line is
 load-bearing and must be declared in transports from Papers I and III.
 
-**Current surface:** *The Golden Companion Correspondence*, eleven pages,
-warning-free.  The exact marked theorem, source-return boundary, attribution
-ledger, layered exposition, stable references, and rendered opening are
-closed.  Three independent dossier-primed readers returned GO on the final
-freeze after two narrow convention repairs.  The optional tame icosahedral
-quotient tower remains a separately gated successor prospect: its mathematics
-passes red team, but its classical literature audit and expanded arithmetic
-certificate are not closed and it is not imported into the manuscript.
+**Current surface:** *The Golden Companion Correspondence*, eighteen pages,
+warning-free. The revised paper proves the intrinsic selected-line
+classification, the residual \(uq\)-quotient, the exact source returns, the
+rank-five/rank-six common-heart theorem, uniform symmetric-conference
+root--weight saturation, the order-six nonsplit \(\mathbf F_4A_5\)-extension,
+and the Frobenius identification. Every load-bearing mechanism is printed as
+a human proof; the checker replays only the Paper-II normalization leaf.
+Sequential theorem, paragraph-job, proof, category, literature, trust, and
+rendered-page reads are GO. Closeout:
+notes/2026-08-11-c904-paper-v-structural-draft-closeout.md.
+Exact Papers I--IV patches are prepared but unapplied in
+notes/2026-08-11-c904-paper-v-unapplied-backpatch-packet.md.
 
 **Post-freeze Annals-upgrade checkpoint:**
 `notes/2026-08-10-c904-annals-ceiling-dossier.md` now isolates a stronger,
