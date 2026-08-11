@@ -45,6 +45,14 @@ therefore forgets precisely this grading.  The next theorem needed is a
 birationally functorial filtered or integral-exponent enhancement of the
 quantum atom, or a proof that such an enhancement cannot exist.
 
+A second proposed refinement, the `p`-primary length of a global spectral
+cycle, does not survive audit in the published formalism.  The blow-up and
+projective-bundle theorems identify analytic germs with disjoint unions of
+local copies; they do not retain a chosen global Novikov loop.  Iterated
+projective bundles also give dimension-admissible local-copy and wreath
+counterpatterns.  Prime-power cycle length is therefore demoted from a live
+cofinal obstruction to a conditional diagonal-loop observation.
+
 Nothing in this report is promoted to the frozen Paper V manuscript.
 
 ## 1. Exact reconstruction of Cai's block
@@ -244,10 +252,11 @@ have to recover an absolute filtration through this cyclic monodromy.  KKPYY
 explicitly identify integral enhanced atoms and their blow-up compatibility as
 future work rather than an available theorem.
 
-## 6. Spectral-cycle alternate attack
+## 6. Spectral-cycle alternate attack: negative audit
 
-The cycle itself survives relabelling even though its individual branches do
-not.  In the self-carrier model of Section 4, the center
+Along the particular diagonal Novikov loop used in the certificate, the cycle
+type survives a relabelling of its branches.  In the self-carrier model of
+Section 4, the center
 `X x P^(t-1)` has a `t`-cycle and the exceptional cluster has an `(m-t)`-cycle.
 Along a diagonal one-parameter loop, every orbit length divides
 
@@ -260,7 +269,7 @@ so their least common multiple cannot contain the endpoint `p^k`-cycle.  The
 certificate verifies the exact reproducing `t` lists for `2<=m<=24` and the
 prime-power exclusion; the valuation argument proves it for every prime power.
 
-This is potentially cofinal.  If `X x P^m` is rational for one `m`, then
+This would be cofinal if the cycle were functorial.  If `X x P^m` is rational for one `m`, then
 `X x P^M` is rational for every larger `M`, because products of projective
 spaces are rational of the corresponding dimension.  Thus an obstruction for
 all
@@ -271,14 +280,111 @@ M=p^k-1
 
 would prove full stable irrationality.
 
-The present calculation is not that obstruction.  The published atom
-formalism does not yet provide a functorial `p`-primary spectral-cycle object
-through a complete weak factorization.  An arbitrary center may carry its own
-cover monodromy, and the blow-up summands may assemble wreath-product rather
-than diagonal-product cycles.  The exact next theorem is to control those two
-effects; until then the prime-power result is a self-carrier exclusion only.
+The source-level audit shows that the premise fails in the present theory.
+KKPYY Theorems 4.5 and 4.11 identify the F-bundle of a blow-up or projective
+bundle, on suitable **analytic germs**, with the F-bundle of a disjoint union
+of copies of the source and center.  Their atomic composition retains the
+degree of a connected spectral-cover component as a multiplicity.  It does
+not retain a distinguished large Novikov loop or the permutation induced by
+that loop.  Shrinking to the germs on which the decomposition is stated can
+split or trivialize exactly the monodromy used above.
 
-## 7. Alternate-attack checkpoint
+There is also an exact dimension-compatible counterpattern to any attempted
+repair using only local-copy counts and unrestricted continuation.  Put
+
+\[
+n=p^k,
+\qquad
+Z_k\longrightarrow Z_{k-1}\longrightarrow\cdots\longrightarrow Z_0=X,
+\]
+
+where each arrow is a rank-`p` projective bundle.  Then
+
+\[
+\dim Z_k=3+k(p-1),
+\qquad
+\operatorname{CF}(Z_k)=p^k\operatorname{CF}(X)=n\operatorname{CF}(X).
+\]
+
+For the endpoint `X x P^(n-1)`, whose dimension is `n+2`, a weak-factorization
+center may have dimension at most `n`.  The tower is therefore
+dimension-admissible whenever
+
+\[
+3+k(p-1)\le p^k.
+\]
+
+This holds for every odd `p` with `k>=2` and for `p=2`, `k>=3`; the lone
+nontrivial exception is `n=4`.  If global continuation is restored without
+additional structure, the compatible iterated wreath group contains the
+`p^k`-cycle given by the `p`-adic odometer.  The certificate checks these
+dimensions and odometer cycles over its bounded range.
+
+This tower is **not** asserted to occur as a center in an actual weak
+factorization.  Its role is sharper and purely negative: local atom data plus
+dimension cannot prove the desired descent, while unrestricted wreath mixing
+can synthesize the supposedly forbidden cycle.  A viable enhancement would
+have to retain global monodromy, prove compatibility for common-resolution
+maps, and impose geometric restrictions excluding these projective-bundle
+towers.  None of those statements is in the cited theory.  The prime-power
+route is therefore no longer a live standalone route.
+
+## 7. Fractional-Calabi--Yau carrier attack
+
+There is a cleaner categorical reformulation of the recursive-carrier gate.
+For the Kuznetsov component of a smooth cubic threefold, the standard Serre
+relation is
+
+\[
+S^3=[5],
+\]
+
+so its lower and upper Serre dimensions are both `5/3`.  Serre dimension is
+additive under tensor products, while
+`D^b(P^m)` has Serre dimension `m`.  Consequently
+
+\[
+\operatorname{Sdim}\bigl(\operatorname{Ku}(X)\otimes D^b(\mathbf P^m)\bigr)
+=m+\frac53.
+\]
+
+Every center in a weak factorization of the `(m+3)`-fold
+`X x P^m` has dimension at most `m+1`.  Thus a carrier inequality
+
+\[
+\mathcal A\subset D^b(Z)\text{ admissible and fractional CY}
+\quad\Longrightarrow\quad
+\operatorname{Sdim}(\mathcal A)\le\dim Z
+\]
+
+would prove full stable irrationality immediately, with the uniform gap
+
+\[
+\left(m+\frac53\right)-(m+1)=\frac23.
+\]
+
+This attractive argument is **conditional**.  Elagin--Lunts prove additivity,
+but Serre dimension is not monotone for general admissible subcategories: they
+exhibit an admissible subcategory of the derived category of the Hirzebruch
+surface `F_3` whose upper Serre dimension is `3`, exceeding the ambient
+dimension `2`.  Their counterexample does not have coincident lower and upper
+Serre dimensions and therefore does not refute the restricted
+fractional-Calabi--Yau carrier inequality above.  No proof of that restricted
+inequality was located in the bounded current literature audit.
+
+This is now the sharp recursive minimum-carrier question.  It is conceptually
+stronger than the quantum multiplicity bookkeeping and is not something a
+finite classical computation can establish.  The certificate records the
+exact `2/3` gap for `0<=m<=24`; additivity proves the displayed formula for all
+`m`.
+
+KKPYY Section 6.4 also sketches Serre-enhanced atoms, but explicitly defers the
+non-archimedean duality and integral compatibility details to forthcoming
+work.  Its F-bundle convention writes a dual graded relation, so the
+categorical `S^3=[5]` relation used here should not be silently identified with
+that convention.
+
+## 8. Alternate-attack checkpoint
 
 The earlier `ej` pass upgraded the bounded search twice: it replaced the
 observed gcd pattern by the all-`m` formulas in Section 3, and extracted the
@@ -294,9 +400,13 @@ ranges where the formulas use them, and rewrote every relation positively.
 It also rejected an apparent `m=1` conclusion: excluding self-carrier centers
 does not by itself exclude an unrelated surface carrying the same atom.  The
 present `aa` pass closes exactly that gap by the surface lemma, while leaving
-the `m>=2` self-carrier ceiling intact.
+the `m>=2` self-carrier ceiling intact.  The subsequent source-level `aa`
+audit rejects the proposed prime-power upgrade at its functoriality seam: the
+cited decomposition theorems are local on analytic germs, and iterated
+rank-`p` projective bundles supply the exact dimension/wreath counterpattern
+recorded in Section 6.
 
-## 8. Reproduction
+## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
 
@@ -329,9 +439,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 14,559 bytes;
-- independent replay: 6,676 bytes;
-- JSON certificate: 168,441 bytes.
+- Sage generator: 19,391 bytes;
+- independent replay: 8,657 bytes;
+- JSON certificate: 187,596 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -339,7 +449,7 @@ of the source matrices and the quantum Kunneth/projective-bundle formula is
 human-audited.  The bounded checks do not assert existence or nonexistence of
 any weak factorization.
 
-## 9. Sources
+## 10. Sources
 
 - Jiaji Cai, *The cubic threefold is symplectically irrational*,
   arXiv:2608.01577v1, especially Proposition 6 and Sections 2--3.  Cached PDF
@@ -347,7 +457,10 @@ any weak factorization.
   `06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e`.
 - Ludmil Katzarkov, Maxim Kontsevich, Tony Pantev, and Tony Yue Yu,
   *Birational Invariants from Hodge Structures and Quantum Multiplication*,
-  arXiv:2508.05105v2, especially Theorems 4.5 and 4.11 and Section 5.4.  Cached
+  arXiv:2508.05105v2, especially Theorems 4.5 and 4.11, Sections 4.2--4.3,
+  and Section 5.4.  The analytic-germ and disjoint-union scope used in the
+  negative spectral-cycle audit is explicit in those two decomposition
+  theorems.  Cached
   PDF SHA-256:
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
 - Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
@@ -357,6 +470,12 @@ any weak factorization.
   derived directly from KKPYY Claim 6.15 and surface classification.  Cached
   PDF SHA-256:
   `bb1ee656bd55008a5403e057d0856e65c81b100f2fa07d1c90e184766dd0f407`.
+- Soheyla Feyzbakhsh and Laura Pertusi, *Serre-invariant stability conditions
+  and Ulrich bundles on cubic threefolds*, arXiv:2109.13549, especially the
+  cubic-threefold relation `S^3=[5]` for `Ku(X)`.
+- Alexey Elagin and Valery Lunts, *Three notions of dimension for triangulated
+  categories*, arXiv:1901.09461, especially additivity of Serre dimension and
+  the Hirzebruch-surface counterexample to general monotonicity.
 
 ## Mystery ledger
 
@@ -376,8 +495,15 @@ any weak factorization.
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.
 - **Open:** whether the surface argument can be promoted to a recursive
-  minimum-carrier theorem in higher dimensions.  Evidence gap: starting at
-  `m=2`, a three-dimensional center can carry the cubic atom itself.
-- **Open:** whether `p`-primary spectral-cycle length is functorial through
-  blow-ups.  The prime-power self-carrier obstruction is exact and cofinal,
-  but arbitrary-center monodromy and wreath mixing are uncontrolled.
+  minimum-carrier theorem in higher dimensions.  The sharp categorical form
+  is the restricted fractional-Calabi--Yau carrier inequality in Section 7:
+  it would close every stabilization with a uniform Serre-dimension gap `2/3`,
+  but general Serre-dimension monotonicity is false and the needed restricted
+  theorem is not known.
+- **Settled negatively at the present formal level:** `p`-primary
+  spectral-cycle length is not part of the local analytic-germ invariant used
+  by the cited blow-up and projective-bundle theorems.  Prime-power
+  self-carrier exclusion remains an exact diagonal-loop calculation, but
+  dimension-admissible iterated projective-bundle towers and their possible
+  wreath monodromy defeat any descent based only on local copies and
+  dimension.  A substantially stronger global enhancement would be needed.

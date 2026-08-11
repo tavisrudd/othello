@@ -94,6 +94,19 @@ def main():
     assert surface["residue_sets_disjoint"]
     assert surface["fourfold_weak_factorization_center_dimension_bound"] == 2
 
+    serre_checks = certificate["candidate_fractional_cy_carrier_bound"]["checks"]
+    for check in serre_checks:
+        m = check["stabilizing_projective_dimension_m"]
+        cubic_dimension = sp.Rational(5, 3)
+        product_dimension = cubic_dimension + m
+        center_bound = m + 1
+        assert check["cubic_kuznetsov_serre_relation"] == "S^3=[5]"
+        assert sp.Rational(check["cubic_kuznetsov_serre_dimension"]) == cubic_dimension
+        assert sp.Rational(check["projective_space_serre_dimension"]) == m
+        assert sp.Rational(check["tensor_product_serre_dimension"]) == product_dimension
+        assert check["weak_factorization_center_dimension_bound"] == center_bound
+        assert sp.Rational(check["conditional_dimension_gap"]) == sp.Rational(2, 3)
+
     cancellation_checks = certificate["coarse_blowup_cancellation_model"]["checks"]
     for check in cancellation_checks:
         m = check["stabilizing_projective_dimension_m"]
@@ -146,11 +159,37 @@ def main():
         else:
             assert check["prime_power_data"] is None
 
+    tower_patterns = certificate["candidate_spectral_cycle_refinement"][
+        "prime_power_local_tower_counterpatterns"
+    ]
+    for pattern in tower_patterns:
+        p = pattern["prime"]
+        k = pattern["exponent"]
+        n = p**k
+        assert pattern["local_copy_count"] == n
+        assert pattern["stabilizing_projective_dimension_m"] == n - 1
+        assert pattern["endpoint_dimension"] == n + 2
+        assert pattern["rank_p_tower_length"] == k
+        center_dimension = 3 + k * (p - 1)
+        assert pattern["tower_center_dimension"] == center_dimension
+        assert pattern["weak_factorization_center_dimension_bound"] == n
+        assert pattern["dimension_admissible_center"] == (center_dimension <= n)
+        odometer = list(range(1, n)) + [0]
+        assert pattern["iterated_wreath_odometer_permutation"] == odometer
+        cursor = 0
+        orbit = []
+        for _ in range(n):
+            orbit.append(cursor)
+            cursor = odometer[cursor]
+        assert cursor == 0 and sorted(orbit) == list(range(n))
+        assert pattern["odometer_cycle_length"] == n
+
     print(
         "independent replay passed: indicial polynomial, projective checks "
-        f"m=0..{len(projective_checks)-1}, surface exclusion, "
+        f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation and Tate checks m=1..{len(cancellation_checks)}, "
-        f"spectral-cycle checks m=2..{len(spectral_checks)+1}"
+        f"spectral-cycle checks m=2..{len(spectral_checks)+1}, "
+        f"prime-power tower checks through n={len(projective_checks)}"
     )
 
 

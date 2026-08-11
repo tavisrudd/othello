@@ -11,8 +11,15 @@ projective bundles and point blow-ups to curves and points with the same
 restriction.  Since fourfold weak-factorization centers have dimension at
 most two, the cubic `+/-1/6` block proves that `X x P^1` is irrational for
 every smooth cubic threefold.  Full stable irrationality remains open from
-`m=2`, where cubic self-carrier centers enter.  The next live gate is the
-integer/Tate-filtered atom or a recursive minimum-carrier theorem.
+`m=2`, where cubic self-carrier centers enter.  A source-level audit also
+demotes the prime-power spectral-cycle idea: KKPYY's decomposition is local on
+analytic germs and does not retain the global loop, while iterated rank-`p`
+projective bundles give dimension-admissible local-copy/wreath counterpatterns.
+The recursive gate now has a sharp categorical form: the fractional-CY carrier
+inequality would compare Serre dimension `m+5/3` with center dimension at most
+`m+1`, but general Serre-dimension monotonicity is false and the required
+restricted theorem is open.  The next live gates are therefore the
+integer/Tate-filtered atom or this restricted carrier theorem.
 
 ## Goal
 

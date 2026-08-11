@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v2"
+SCHEMA = "c907-quantum-monodromy-stabilization-v4"
 
 
 def matrix_strings(M):
@@ -264,6 +264,24 @@ def surface_carrier_exclusion():
     }
 
 
+def serre_dimension_candidate_check(m):
+    cubic_serre_dimension = QQ(5) / 3
+    projective_serre_dimension = QQ(m)
+    product_serre_dimension = cubic_serre_dimension + projective_serre_dimension
+    center_dimension_bound = m + 1
+    gap = product_serre_dimension - center_dimension_bound
+    assert gap == QQ(2) / 3
+    return {
+        "stabilizing_projective_dimension_m": m,
+        "cubic_kuznetsov_serre_relation": "S^3=[5]",
+        "cubic_kuznetsov_serre_dimension": str(cubic_serre_dimension),
+        "projective_space_serre_dimension": str(projective_serre_dimension),
+        "tensor_product_serre_dimension": str(product_serre_dimension),
+        "weak_factorization_center_dimension_bound": center_dimension_bound,
+        "conditional_dimension_gap": str(gap),
+    }
+
+
 def spectral_cycle_self_carrier_check(m):
     endpoint_cycle = m + 1
     reproducing_t = [
@@ -293,6 +311,57 @@ def spectral_cycle_self_carrier_check(m):
     }
 
 
+def prime_power_tower_counterpatterns(bound):
+    """Dimension audit for the local-copy/wreath loophole.
+
+    A k-stage tower of rank-p projective bundles over the cubic has dimension
+    3+k(p-1) and p^k local copies of the cubic atom.  The published local
+    projective-bundle theorem does not retain global monodromy.  If one adds
+    arbitrary continuation, the compatible iterated wreath group contains
+    the p^k-cycle given by the p-adic odometer.
+    """
+    patterns = []
+    for n in range(2, bound + 2):
+        prime_divisors = ZZ(n).prime_divisors()
+        if len(prime_divisors) != 1:
+            continue
+        prime = int(prime_divisors[0])
+        exponent = 0
+        remainder = n
+        while remainder % prime == 0:
+            exponent += 1
+            remainder //= prime
+        assert remainder == 1
+        center_dimension = 3 + exponent * (prime - 1)
+        endpoint_dimension = n + 2
+        center_dimension_bound = endpoint_dimension - 2
+        odometer = list(range(1, n)) + [0]
+        assert sorted(odometer) == list(range(n))
+        cursor = 0
+        orbit = []
+        for _ in range(n):
+            orbit.append(cursor)
+            cursor = odometer[cursor]
+        assert cursor == 0
+        assert sorted(orbit) == list(range(n))
+        patterns.append(
+            {
+                "prime": prime,
+                "exponent": exponent,
+                "local_copy_count": n,
+                "stabilizing_projective_dimension_m": n - 1,
+                "endpoint_dimension": endpoint_dimension,
+                "rank_p_tower_length": exponent,
+                "tower_center_dimension": center_dimension,
+                "weak_factorization_center_dimension_bound": center_dimension_bound,
+                "dimension_admissible_center": center_dimension <= center_dimension_bound,
+                "iterated_wreath_odometer_permutation": odometer,
+                "odometer_cycle_length": n,
+            }
+        )
+    return patterns
+
+
 def build_certificate(bound):
     assert bound >= 3
     return {
@@ -314,6 +383,25 @@ def build_certificate(bound):
             "checks": [projective_space_check(m) for m in range(bound + 1)],
         },
         "surface_carrier_exclusion_and_one_step_irrationality": surface_carrier_exclusion(),
+        "candidate_fractional_cy_carrier_bound": {
+            "status": (
+                "Conditional exact reduction, not a theorem. Serre dimension is additive under tensor "
+                "products, but it is not monotone for general admissible subcategories."
+            ),
+            "checked_m_range": [0, bound],
+            "checks": [serre_dimension_candidate_check(m) for m in range(bound + 1)],
+            "conditional_argument": (
+                "Ku(X) has S^3=[5], hence Serre dimension 5/3. Tensoring with D(P^m) gives "
+                "m+5/3, whereas every weak-factorization center has dimension at most m+1. "
+                "A carrier inequality for this fractional-Calabi-Yau component would prove stable "
+                "irrationality with a uniform gap 2/3."
+            ),
+            "known_failure_of_general_monotonicity": (
+                "Elagin-Lunts exhibit an admissible subcategory of D^b(F_3) with upper Serre "
+                "dimension 3, larger than the surface dimension 2. Their example does not settle "
+                "the restricted fractional-Calabi-Yau/equal-Serre-dimensions carrier inequality."
+            ),
+        },
         "coarse_blowup_cancellation_model": {
             "model": (
                 "In endpoint dimension 3+m, a center X x P^(s-3), with t=s-2, "
@@ -347,19 +435,29 @@ def build_certificate(bound):
         },
         "candidate_spectral_cycle_refinement": {
             "status": (
-                "Prime-power endpoint cycles exclude every projective self-carrier in the diagonal-loop "
-                "model, but no functorial theorem currently controls arbitrary-center or wreath-product "
-                "monodromy through a complete weak factorization."
+                "Negative audit. Prime-power endpoint cycles exclude every projective self-carrier in "
+                "the diagonal-loop model, but KKPYY's blowup and projective-bundle identifications are "
+                "local analytic-germ decompositions and do not retain global loop monodromy."
             ),
             "checked_m_range": [2, bound],
             "checks": [spectral_cycle_self_carrier_check(m) for m in range(2, bound + 1)],
+            "prime_power_local_tower_counterpatterns": prime_power_tower_counterpatterns(bound),
             "cofinal_reduction": (
                 "If X x P^m is rational for one m, then it is rational for every larger m. "
                 "Therefore an obstruction for all m=p^k-1 would prove stable irrationality."
             ),
-            "missing_theorem": (
-                "Define a p-primary spectral-cycle invariant preserved by Iritani blow-up maps and prove "
-                "that a p^k endpoint cycle cannot be assembled through arbitrary lower-dimensional centers."
+            "counterpattern_interpretation": (
+                "A k-stage rank-p projective-bundle tower over X has p^k local cubic-atom copies in "
+                "dimension 3+k(p-1). Whenever this is at most p^k it is dimension-admissible as a center "
+                "for endpoint stabilization m=p^k-1. The local theorem forgets global monodromy; the "
+                "largest compatible continuation group is an iterated wreath group containing the p^k "
+                "odometer cycle. This is not a geometric weak-factorization construction, but it refutes "
+                "any descent based only on local-copy count, dimension, and unrestricted wreath mixing."
+            ),
+            "source_boundary": (
+                "KKPYY Theorems 4.5 and 4.11 identify analytic germs with the F-bundle of a disjoint "
+                "union of local copies. Their atomic composition retains the cover degree as multiplicity, "
+                "not a chosen global Novikov loop or its permutation."
             ),
         },
     }
