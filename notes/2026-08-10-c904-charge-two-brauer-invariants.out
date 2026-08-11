@@ -1,0 +1,15 @@
+marked charge-two geometric Brauer invariant audit
+  dim H2(J,F2)=45
+  dim NS/2=15
+  dim Br(J)[2]=30
+  dim Br[2]^A5=4
+  dim Br[2]^C3=10
+  dim Br[2]^(A5 x C3)=2
+  joint invariant nonzero coset rank profiles=[(1, 4, [(4, 640), (6, 3200), (8, 17664), (10, 11264)]), (2, 4, [(4, 640), (6, 3200), (8, 17664), (10, 11264)]), (3, 4, [(4, 640), (6, 3200), (8, 17664), (10, 11264)])]
+  quotient A5 image order=60 classes=[(1, 1), (2, 15), (3, 20), (5, 24)]
+  dim Br[2]^C2=18
+  dim Br[2]^V4=13
+  Hilbert determinant degree d_m=(m-1)(3m-2)
+  gcd(d_m, -4<=m<=6)=2; all sampled degrees even
+  invariant classes survive; cocycle identification remains necessary
+PASS

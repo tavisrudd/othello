@@ -180,6 +180,23 @@ gives a degree-two closed point on a proper compactified generic fibre, so
 its index divides two: the exact final dichotomy is `1` versus `2`.  No
 manuscript or Lean source changed.
 
+The eighth pass closes the remaining ambiguity on the inherited charge-two
+carrier.  In `notes/2026-08-10-c904-charge-two-brauer-residue.md`, Druel's
+generic strictly-semistable Luna slice gives the cyclic algebra
+\((L/K,z)\), where \(L/K\) is the nontrivial cover ordering the two generic
+line factors.  Its residue is nonzero, so the charge-two universal-sheaf
+gerbe has period two and generic index two; geometric integrality shows that
+the residue survives the marked \(A_5\) base change.  The
+Iliev--Markushevich fixed-line quintic vertex pencil and the distinct Faenzi
+quotient/Hecke conic both represent this class and have degree image exactly
+\(2\mathbf Z\).  Exact marked Brauer-lattice replay independently leaves two
+binary unramified degrees of freedom and confirms that every canonical
+Hilbert determinant degree is even with gcd two.  A three-database literature
+closure found no source printing the residue calculation.  This settles the
+entire charge-two and one-line boundary route negatively, but it still does
+not decide an odd zero-cycle intrinsic to the complement in Voisin's
+charge-three \(M_9\) fourfold.  No manuscript or Lean source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

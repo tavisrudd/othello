@@ -18,15 +18,15 @@ fine-moduli shortcut is false: Xu's claimed value
 \]
 
 For a charge-two rank-two bundle the full determinant-weight ideal is
-exactly \(2\mathbf Z\).  Thus the Iliev--Markushevich--Tikhomirov
-\(\mathbf P^5\)-fibration carries a genuine order-at-most-two moduli gerbe;
-the determinant construction cannot produce a universal sheaf or an odd
-lift.  Their pencil of reducible quintics containing a fixed line is a
-linear \(\mathbf P^1\) inside every geometric \(\mathbf P^5\).  Over the
-generic point it reduces the possible index to \(1\) or \(2\): if the class
-is nonzero, one quadratic splitting extension is both sufficient and
-minimal.  The common line therefore identifies the exact quadratic gate; it
-does not by itself split it.
+exactly \(2\mathbf Z\).  The boundary calculation in
+`2026-08-10-c904-charge-two-brauer-residue.md` now goes further: Druel's
+Luna slice has quaternion residue equal to the nontrivial cover which orders
+the two generic Jordan--Hoelder line factors.  Thus the charge-two gerbe is
+nonzero of period two and generic index two, including after the marked
+\(A_5\) base change.  The Iliev--Markushevich fixed-line quintic pencil and
+the distinct Faenzi quotient/Hecke conic both represent this class.  Their
+generic degree maps have image exactly \(2\mathbf Z\); one quadratic
+splitting extension is sufficient and minimal.
 
 The degree-six route is arithmetically different and remains live.  Twisting
 Voisin's rank-two bundle with \(c_1=2h,c_2=6l\) by \(\mathcal O_X(-1)\)
@@ -196,16 +196,27 @@ generic charge-two moduli point.  The resulting twisted linear
 \(\mathbf P^1\) has the same Brauer class as the ambient twisted
 \(\mathbf P^5\).  Consequently its index divides two.  Thus:
 
-> **Common-line index dichotomy.**  The generic quintic Abel--Jacobi fibre
-> over the marked family has index \(1\) or \(2\).  If its moduli-gerbe class
-> is nonzero, every splitting field has even degree and a quadratic splitting
-> field exists.
+> **Common-line index theorem.**  The generic quintic Abel--Jacobi fibre over
+> the marked family has index two.  Every splitting field has even degree,
+> and a quadratic splitting field exists.
 
-The theorem computes the minimal possible base change conditional on
-nontriviality.  It does not prove that the special \(A_5\) class is nonzero.
-An integral universal zero-cycle can exist even when the Brauer class is
-nonzero, so splitting the projective bundle is sufficient but not logically
-necessary for the desired cubic correspondence.
+The boundary residue removes the conditional.  At the generic strictly
+semistable divisor, Druel's two cross-extension coordinates have weights
+\(+1,-1\), with coarse parameter \(z=xy\).  Ordering the two line factors
+gives a quadratic extension \(L/K\), and the swap comparison has square
+\(zI\).  Hence the gerbe has local class \((L/K,z)\) and nonzero residue equal
+to the ordering cover.  Its period and generic index are exactly two.
+
+Two conics must be kept distinct.  The quintic vertex pencil is
+\(\mathbf P H^0(E(1)\otimes I_l)\); the Faenzi quotient/Hecke conic is
+\(\mathbf P\operatorname{Hom}(E|_l,\mathcal O_l)\).  Both are
+projectivizations of rank-two twisted spaces and represent the same class.
+The ordering cover remains geometrically nontrivial after the marked
+\(A_5\) base change, so neither generic conic splits there.
+
+An integral universal zero-cycle can nevertheless exist when this Brauer
+class is nonzero, so splitting the projective bundle is sufficient but not
+logically necessary for the desired cubic correspondence.
 
 ## 4. Degree six: the surviving odd route
 
@@ -264,9 +275,9 @@ The next high-EV question is therefore sharper:
 
 An affirmative answer combines with the relative \([2]\) Fano-incidence
 cycle by Bezout.  The one-line construction itself can answer affirmatively
-only if the old charge-two Brauer class already splits.  In every case it
-supplies a degree-two point on the compactified generic fibre, proving that
-the remaining lifting index divides two.
+only after the now-proved minimal quadratic splitting extension.  Without
+that extension it supplies a degree-two point on the compactified generic
+fibre, proving that the remaining lifting index divides two.
 
 ## 5. Exact no-go for all algebraic theta cuts
 
@@ -464,7 +475,8 @@ algebraic theta cut escapes.
 Five independent parity detectors now agree:
 
 1. charge-two determinant weights generate \(2\mathbf Z\);
-2. the common-line pencil has index at most two and no forced odd point;
+2. the common-line pencil and the distinct Hecke conic both have exact index
+   two;
 3. the full integral theta-cut Hodge lattice pairs with \(\Theta^2\) in
    \(2\mathbf Z\);
 4. the common-line section incidence is a rank-four quadric of degree two;
@@ -478,8 +490,8 @@ the generic fourfold.
 ## 10. Mystery ledger
 
 - **Does the charge-two gerbe vanish on the special marked \(A_5\) family?**
-  Open.  The determinant lattice and common-line pencil show that the only
-  possibilities are split or exact order two; they do not distinguish them.
+  Settled negatively.  Its ordering-cover boundary residue survives the
+  marking, so its period and generic index are exactly two.
 - **Does a nontrivial gerbe preclude the desired universal zero-cycle?**
   No.  Voisin explicitly warns that a Brauer--Severi fibration may admit a
   universal zero-cycle without splitting.
@@ -488,8 +500,8 @@ the generic fourfold.
   \(M_9\to J\).
 - **Can twisted-cubic theta geometry close it?**  No: the complete integral
   Hodge lattice has pairing ideal \(2\mathbf Z\).
-- **Can the one-common-line Hecke boundary close it?**  Only if the old
-  charge-two conic already splits.  All intrinsic determinant and boundary
-  cuts remain even.
+- **Can the one-common-line Hecke boundary close it?**  No on the present
+  base.  Its conic is nonsplit of index two, and all intrinsic determinant
+  and boundary cuts remain even.
 - **Could a carrier intrinsic to the interior of \(M_9\) be odd?**  Open.  It
   is the sole surviving smooth-family flank.
