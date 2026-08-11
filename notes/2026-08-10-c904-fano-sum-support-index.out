@@ -1,0 +1,12 @@
+C904 Fano-sum ambient-support index
+source rank=50; image rank=15
+order modulo theta image=2
+order modulo 3theta=[F+F] image=6
+PASS
+
+Independent replay:
+independent SymPy HNF replay
+source generators=680; image rank=15
+order modulo theta image=2
+order modulo 3theta=[F+F] image=6
+PASS
