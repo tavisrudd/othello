@@ -262,9 +262,10 @@ Lean source, package, mirror, or remote changed.  Full report:
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
    materialized outputs at Lean-source commit `0dc0510`. Classes 0--81 are complete; run
    `run-20260810-233857-b4421bc3` stopped at Class82 under host-memory pressure. Checkpoint
-   `q13-0dc0510-classes80-81` seals the latest sentinels. Resume Class82--109 as separate targets
-   under the one-worker `q13-serialized` profile, whose 12 GiB admission reserve prevents a retry
-   during the same low-headroom condition.
+   `q13-0dc0510-classes80-81` seals the latest sentinels. Run
+   `run-20260811-142415-601f4871` resumes Class82--109 as separate targets under the one-worker,
+   cache-required `q13-serialized` profile; its 12 GiB admission reserve prevents a retry during
+   the same low-headroom condition.
    After it finishes, cherry-pick metadata commits `156af07`, `d0a4213`, `ed50b4d`, `51ec6c2`,
    refresh only the cheap aggregate root, then seal and pack. Q25 is independently Mathlib-only at
    `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
