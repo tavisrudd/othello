@@ -584,14 +584,18 @@ the Abel--Jacobi base and restricts trivially to its open fourfold fibre.
 Any nonzero compactified anticanonical volume is therefore model-dependent.
 The full Kunneth audit on
 `Sym^2(Bl_0 Theta)` leaves two precise two-local targets: the `(1,5)` channel
-has a genuine odd integral Hodge coset whose algebraicity is unknown, while
-the `(2,4)` channel is the existing integral algebraic-projector gate; the
-entire `(3,3)` channel is even.  These, or the original intrinsic relative
-Chow half, are the direct frontier.  See
+has residual lattice `(Z/2)^10`, while nonsplit `(2,4)` has dyadic dimension
+44; algebraicity is unknown in both, and the entire `(3,3)` channel is even.
+Uniformly in the ppav dimension, the half anti-graph of any odd symmetric-
+theta multisection is an odd integral Hodge curve class whose double is
+algebraic.  The theta resolution has no local dyadic topological defect, but
+no integral or two-local algebraic Kunneth projector is available in the
+literature.  These, or the original intrinsic relative Chow half, are the
+direct frontier.  See
 `notes/2026-08-11-c904-m9-bridgeland-anticanonical-obstruction.md`,
 `notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
-`notes/2026-08-11-c904-sym2m-kunneth-parity-audit.md`.  No manuscript or Lean
-source changed.
+`notes/2026-08-11-c904-symmetric-theta-full-kunneth-parity.md`.  No
+manuscript or Lean source changed.
 
 ## Goal
 

@@ -666,14 +666,18 @@ Kuznetsov class, cannot be a primitive nine-dimensional stable-object moduli
 space, and its open-fibre canonical class is trivial by integral GRR.  The
 full `Sym^2(Bl_0 Theta)` Kunneth audit instead isolates two direct two-local
 targets.  The `(1,5)` channel has an odd integral Hodge coset after the
-symmetric quotient, but its algebraicity is unknown; `(2,4)` is exactly the
-existing integral algebraic-projector gate, while `(3,3)` is forced even.
+symmetric quotient, with residual lattice `(Z/2)^10`; nonsplit `(2,4)` has
+dyadic residual dimension 44, while `(3,3)` is forced even.  Uniformly in
+the ppav dimension, the half anti-graph of an odd symmetric-theta
+multisection is an odd integral Hodge curve class whose double is algebraic.
+The theta resolution has no local dyadic topological defect, but no
+integral/two-local algebraic Kunneth projector is known.
 Rational simple connectedness is dead as a direct shortcut because the
 generic field has transcendence degree five and the available theorem's
 surface-base and very-twisting hypotheses are absent.  See
 `notes/2026-08-11-c904-m9-bridgeland-anticanonical-obstruction.md`,
 `notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
-`notes/2026-08-11-c904-sym2m-kunneth-parity-audit.md`.
+`notes/2026-08-11-c904-symmetric-theta-full-kunneth-parity.md`.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
