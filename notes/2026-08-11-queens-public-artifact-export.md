@@ -8,9 +8,14 @@ were rechecked for pre-emption.
 
 ## The exported repository
 
-`~/src/queens-nimbers`, fresh `git init`, one commit (`d611e4b`), **no remote and no push** —
-publishing to GitHub is the user's action. Crate name `queens-nimbers`, library `queens_nimbers`,
-binary `queens`, MIT license.
+`~/src/queens-nimbers`, fresh history, published by the user at
+`github.com/tavisrudd/queens-nimbers` (first commit `d611e4b`). Crate name `queens-nimbers`,
+library `queens_nimbers`, binary `queens`, MIT license. A second commit (`874c2a0`) adds
+`.zenodo.json` for release DOI minting, an OEIS package README, descriptive filenames for the two
+OEIS documents, and a cold-reader pass over all prose: internal work-breakdown labels, session and
+handoff references, agent-guide citations, and a private path were removed from source comments,
+the OEIS documents no longer address a submitter, and the program link is recorded now that the
+code is public.
 
 | Exported path         | Source in this repo                                                        |
 |-----------------------|-----------------------------------------------------------------------------|
@@ -73,8 +78,8 @@ Nothing pre-empts either submission. Both remain the user's to submit.
 
 ## Open gates
 
-1. Repository name and GitHub identity are provisional (`queens-nimbers`); `Cargo.toml` names
-   `github.com/tavisrudd/queens-nimbers` as the repository URL.
+1. The Zenodo integration must be switched on for the repository before a release mints a DOI;
+   `.zenodo.json` supplies the metadata but not the hook.
 2. MIT was chosen as the license; no license file existed in this monorepo to inherit from.
 3. The Lean package has not been built from the exported tree.
 4. Once published, the public URL unblocks the A344227 `%H` program link, the n = 18 comment, and
