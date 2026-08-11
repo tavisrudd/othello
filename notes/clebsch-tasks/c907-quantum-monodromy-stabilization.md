@@ -24,8 +24,10 @@ remaining live gates together with the integer/Tate-filtered atom.  The latter
 now has a basis-independent exact form: the endpoint Beilinson Euler lattice
 has one unipotent Serre block of length `m+1`, while every projective
 self-carrier has length `m-1`.  A Γ-integral, Stokes-filtered blow-up theorem
-preserving cubic-isotypic Serre width would turn this uniform gap two into the
-full stable obstruction.  Iritani Theorem 1.1 preserves the formal connection
+with a strict cubic-isotypic filtration and the additive associated-graded
+blow-up formula would turn this uniform gap two into the full stable
+obstruction.  Serre-block preservation alone is insufficient because
+semiorthogonal extensions can join blocks.  Iritani Theorem 1.1 preserves the formal connection
 and Poincaré pairing, but Remark 1.5 explicitly places the non-orthogonal
 Stokes/Γ gluing beyond that formal direct sum; the missing theorem is therefore
 confirmed at source rather than inferred from the computation.

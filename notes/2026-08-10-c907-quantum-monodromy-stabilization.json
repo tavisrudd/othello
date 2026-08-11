@@ -2508,7 +2508,8 @@
       2,
       24
     ],
-    "status": "Exact rational/integral-lattice avatar of the Tate extreme-term gap, but not yet a birational invariant. The missing theorem is a Gamma-integral, Stokes-filtered blowup decomposition that retains the alpha-isotypic Serre block rather than splitting it into unlabelled local copies."
+    "status": "Exact rational/integral-lattice avatar of the Tate extreme-term gap, but not yet a birational invariant. The missing theorem is a strict alpha-isotypic Stokes/Rees filtration whose associated graded obeys the blowup formula. Preserving only the Euler pairing or Serre operator is insufficient because semiorthogonal extensions can join shorter Jordan blocks.",
+    "strictness_requirement": "The sufficient enhancement must identify a canonical filtered alpha-isotypic object and make the blowup map strict, with associated-graded identity [Bl_Z Y]_alpha=[Y]_alpha+(T+...+T^(r-1))[Z]_alpha. Block length is a basis-independent diagnostic of this filtration, not a substitute for filtered additivity."
   },
   "candidate_spectral_cycle_refinement": {
     "checked_m_range": [

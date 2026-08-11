@@ -303,8 +303,30 @@ exceptional width `D-s-2`, so every center contribution has width at most
 \]
 
 again two below the endpoint width `m`.  Direct sums cannot create a longer
-Jordan block.  Thus a Γ-integral, Stokes-filtered blow-up theorem preserving
-this cubic-isotypic Serre width would prove full stable irrationality.
+Jordan block.
+
+In particular, this defeats all previously found iterated-projective-bundle
+counterpatterns **inside the candidate filtered theory**.  A tower with fibre
+dimensions `d_1,...,d_k` has logarithmic width `sum d_i`; after it appears as a
+blow-up center, the same dimension calculation caps its exceptional width by
+`m-2`.  The prime-power wreath towers can reproduce copy count and global
+cycle length, but not the endpoint Serre width.
+
+The `tt` closeout exposes one further necessary clause.  Serre block length is
+a basis-independent diagnostic of the desired Tate filtration, but it is not
+itself additive under a semiorthogonal decomposition: off-diagonal extensions
+can join shorter Jordan blocks.  The sufficient theorem must therefore produce
+a **strict cubic-isotypic Stokes/Rees filtration** whose associated graded
+satisfies
+
+\[
+[\operatorname{Bl}_Z Y]_\alpha
+=[Y]_\alpha+(T+\cdots+T^{r-1})[Z]_\alpha.
+\]
+
+Then the extreme associated-graded terms, equivalently the certified width
+gap, prove full stable irrationality.  A theorem preserving only the Euler
+pairing or the Serre operator does not suffice.
 
 The qualification is essential.  The ordinary derived blow-up decomposition
 is semiorthogonal rather than Serre-block diagonal; off-diagonal extensions can
@@ -312,6 +334,12 @@ join Jordan blocks.  KKPYY's local analytic-germ atom forgets the absolute
 Tate filtration, and its Section 6.4 explicitly defers Γ-integral compatibility
 to forthcoming work.  Hence the block gap is an exact candidate invariant, not
 an established birational invariant.
+
+For block length over `Q` or `C`, integrality is stronger than logically
+necessary: a complex-analytic Stokes-filtered theorem with the strictness and
+associated-graded identity above would already suffice.  The Γ-integral
+structure is the canonical known mechanism expected to identify that Stokes
+filtration with the Euler lattice and its Tate grading.
 
 Iritani's original theorem confirms that this is the exact seam rather than a
 missing easy corollary.  Theorem 1.1 constructs the formal blow-up quantum
@@ -515,6 +543,13 @@ cited decomposition theorems are local on analytic germs, and iterated
 rank-`p` projective bundles supply the exact dimension/wreath counterpattern
 recorded in Section 6.
 
+The final `ej`+`tt` pass extracts the basis-independent Serre-width form of the
+Tate gap and verifies that it defeats every iterated-projective-bundle tower,
+not only the one-step self-carriers.  It also rejects the overstrong claim that
+Serre-block preservation alone would suffice: semiorthogonal extensions can
+join blocks.  The surviving exact gate is strict filtered additivity of the
+cubic-isotypic Stokes/Rees object.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -548,9 +583,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 23,811 bytes;
+- Sage generator: 24,345 bytes;
 - independent replay: 10,161 bytes;
-- JSON certificate: 264,123 bytes.
+- JSON certificate: 264,541 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -607,7 +642,9 @@ any weak factorization.
   has the same gap two.  Evidence gap: current formal gauges allow integer
   powers of `z`, the atom formalism quotients them out, projective Novikov
   monodromy cyclically permutes every candidate label, and Γ-integral/Stokes
-  blow-up compatibility is not yet available in the cited theory.
+  blow-up compatibility is not yet available in the cited theory.  The theorem
+  must be strict on the filtration and additive on its associated graded;
+  preservation of the Euler pairing or Serre operator alone is insufficient.
 - **Open:** whether geometric constraints on centers forbid the formal
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.

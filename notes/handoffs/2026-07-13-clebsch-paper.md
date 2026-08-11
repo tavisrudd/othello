@@ -72,8 +72,11 @@ integer/Tate-filtered atom are the live gates; no Paper V or Lean promotion is
 authorized.  The Tate gate now has a basis-independent exact target: the
 Beilinson Euler lattice gives the endpoint a unipotent Serre block of length
 `m+1`, while every projective self-carrier has length `m-1`.  Turning this
-uniform gap two into the full obstruction requires the unavailable
-Γ-integral, Stokes-filtered compatibility of the blow-up decomposition;
+uniform gap two into the full obstruction requires a strict cubic-isotypic
+Stokes/Rees filtration whose associated graded obeys the additive blow-up
+formula; preserving the Serre block alone is insufficient because
+semiorthogonal extensions can join blocks.  The expected Γ-integral mechanism
+is unavailable in general;
 Iritani Theorem 1.1 and Remark 1.5 confirm this exact formal-versus-Stokes
 boundary.
 

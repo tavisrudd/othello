@@ -514,9 +514,10 @@ def build_certificate(bound):
         "candidate_integral_serre_width_refinement": {
             "status": (
                 "Exact rational/integral-lattice avatar of the Tate extreme-term gap, but not yet a "
-                "birational invariant. The missing theorem is a Gamma-integral, Stokes-filtered blowup "
-                "decomposition that retains the alpha-isotypic Serre block rather than splitting it into "
-                "unlabelled local copies."
+                "birational invariant. The missing theorem is a strict alpha-isotypic Stokes/Rees "
+                "filtration whose associated graded obeys the blowup formula. Preserving only the Euler "
+                "pairing or Serre operator is insufficient because semiorthogonal extensions can join "
+                "shorter Jordan blocks."
             ),
             "beilinson_checks_range": [0, bound],
             "beilinson_checks": [beilinson_serre_width_check(d) for d in range(bound + 1)],
@@ -531,6 +532,12 @@ def build_certificate(bound):
                 "If an alpha-carrier on an s-fold has Tate width at most s-3, then in ambient dimension "
                 "D=m+3 its exceptional contribution has width at most (s-3)+(D-s-2)=m-2, hence Serre "
                 "block length at most m-1, versus endpoint length m+1."
+            ),
+            "strictness_requirement": (
+                "The sufficient enhancement must identify a canonical filtered alpha-isotypic object and "
+                "make the blowup map strict, with associated-graded identity [Bl_Z Y]_alpha=[Y]_alpha+"
+                "(T+...+T^(r-1))[Z]_alpha. Block length is a basis-independent diagnostic of this "
+                "filtration, not a substitute for filtered additivity."
             ),
         },
         "candidate_spectral_cycle_refinement": {
