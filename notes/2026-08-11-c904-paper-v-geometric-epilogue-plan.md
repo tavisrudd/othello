@@ -289,15 +289,39 @@ State the theorem uniformly on \(K\)-points for every extension
 classification, not a new integral model or a theorem in arbitrary
 characteristic.
 
-#### Theorem V.B: structural bridge
+#### Theorem V.B: minimal carrier and structural bridge
 
-The outer involution exchanges the two chordal lines. On either selected line,
-its difference map
+Prove that the expanded intrinsic carrier of V.A is equivalent to a minimal
+carrier consisting only of the recovered five-dimensional \(A_5\)-module and
+one normalized actual chordal generator \(h\). The invariant pencil is
+\(\Pi=\operatorname{Sym}^3(A^*)^{A_5}\); the action of the nontrivial
+normalizer coset on \(\Pi\) is independent of its representative because
+\(A_5\) fixes \(\Pi\) pointwise. Hence
+
 \[
-q-1
+L=Kh,
+\qquad
+c=8^{-1}(q-1)h
 \]
-is an isomorphism onto the conference line and identifies sheet sign with
-conference orientation.
+
+recover the selected chordal line and oriented conference generator. The
+singular quartic of \(h\) recovers the axes by the canonical
+\(A_5/C_5\to A_5/D_5\) normalizer quotient, while the nodes and triangle
+coefficients of \(c\) recover the same axes and conference switching class.
+
+Thus the causal chain is
+
+\[
+h\Longrightarrow R_h\Longrightarrow\Omega
+\Longrightarrow q\Longrightarrow c
+\Longrightarrow(c_{ijk})\Longrightarrow[B].
+\]
+
+The general involution lemma explains the only nonformal step: on either
+nonfixed chordal line, \(q-1\) is an isomorphism onto the anti-invariant
+conference line and identifies sheet sign with conference orientation. The
+numbers \(8\) and the Paper-II pivot \(3\) are normalization constants checked
+once, not structural content.
 
 #### Theorem V.C: natural round trip
 
@@ -468,35 +492,45 @@ this as an absolute canonical identification independent of that action.
 
 ### Structural proof compression
 
-All of Paper V should reduce to eight reusable arguments:
+All of Paper V should reduce to ten reusable arguments:
 
-1. **Marked-carrier groupoid lemma.** Package choices, gauge morphisms, and
-   stabilizers once, rather than checking every pairwise map separately.
-2. **Multiplicity-one lemma.** Any relevant \(A_5\)-equivariant map between the
-   irreducible carrier lines is scalar; one normalized generator fixes it.
-3. **Involution difference lemma.** On a line exchanged by an involution,
+1. **Character-theoretic pencil lemma.** Compute
+   \(\dim\operatorname{Sym}^3(A^*)^{A_5}=2\) and the normalizer action from
+   the character table. Multiplicity one then reduces every equivariant tensor
+   placement to nonvanishing plus one scalar normalization.
+2. **Determinantal chordal lemma.** Identify the selected cubic with the
+   Hankel determinant and prove scheme-theoretically that its Jacobian ideal
+   is the ideal of the rank-one Hankel locus, hence a rational normal quartic.
+3. **Normalizer-quotient axis lemma.** Replace the twelve-point census by the
+   canonical subgroup map \(A_5/C_5\to A_5/D_5\), using
+   \(N_{A_5}(C_5)=D_5\), and prove that it recovers the nodal six-set.
+4. **Simplicial switching lemma.** Interpret the tetrahedral identity as the
+   cocycle condition on the complete simplex. Its vanishing cohomology gives
+   an edge signing unique modulo vertex switching; pair balance then gives
+   \(B^2=5I\).
+5. **Involution difference lemma.** On a line exchanged by an involution,
    \(q-1\) identifies the anti-invariant line with the conference orientation
    line once nonvanishing is proved.
-4. **Carrier rigidity lemma.** An equivariant automorphism fixing the marked
-   node frame, selected line, and cubic generator is the identity in the
-   chosen normalized representative.
-5. **Lattice-tower lemma.** Recover \(A_{\mathrm{aug}}(\Omega)\),
+6. **Carrier rigidity and groupoid lemma.** A morphism is determined by the
+   recovered projective frame. Package choices, stabilizers, units, counits,
+   and triangle identities once; carrier rigidity makes the latter formal.
+7. **Lattice-tower lemma.** Recover \(A_{\mathrm{aug}}(\Omega)\),
    \(D(\Omega)\), and \(D(\Omega)^\vee\) functorially and identify their
    common six-point heart. Keep the rank-five augmentation lattice distinct
    from the rank-six \(D\)-type lattice.
-6. **Rigidification-cover lemma.** Package the upper marked groupoid as one
+8. **Rigidification-cover lemma.** Package the upper marked groupoid as one
    principal \(C_2\)-cover of the unrigidified carrier groupoid and express all
    upper equivalences as pullbacks of it. Paper V should cite Paper IV's
    degree-three torsor as a parallel reconstruction profile rather than
    reproduce its code or orbit census. A one-paragraph Frobenius-orbit
    commutant lemma
    supplies the common formal mechanism.
-7. **Conference root--weight lemma.** From the common column class of
+9. **Conference root--weight lemma.** From the common column class of
    \((I+B)/2\), prove the general \(D_n^\vee\) saturation law and its
    mod-eight split/inert residue dichotomy. Specialize only afterward to the
    maximal golden order, where normalization changes the dual-number residue
    of \(\mathbf Z[B]\) into \(\mathbf F_4\).
-8. **Triangle-presentation Ext lemma.** On the natural module for
+10. **Triangle-presentation Ext lemma.** On the natural module for
    \(A_5\simeq\operatorname{SL}_2(4)\), the \((2,3,5)\)-relation norms have
    ranks \((1,0,0)\). Hence \(\dim Z^1=3\), \(\dim B^1=2\), and the Ext line
    is one-dimensional. This replaces a block-table citation in the proof;

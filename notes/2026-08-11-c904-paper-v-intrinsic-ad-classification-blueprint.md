@@ -52,6 +52,14 @@ Morphisms come only from equivariant six-axis bijections and their induced
 linear maps. They preserve \(z,L,h\) and every declared label. Arbitrary
 scalar intertwiners are excluded.
 
+This expanded carrier is the convenient classification object, not the
+minimal datum. Theorem V.B should prove it equivalent to the groupoid whose
+objects retain only the recovered five-dimensional \(A_5\)-module and one
+normalized actual chordal generator \(h\): the pencil and outer action are
+representation-theoretic, \(L=Kh\), \(z=8^{-1}(q-1)h\), and both geometric
+six-set constructions are derived. The full compression is recorded in
+`2026-08-11-c904-paper-v-inevitability-spine.md`.
+
 ## 2. Exact statement of V.A
 
 Define independently:
