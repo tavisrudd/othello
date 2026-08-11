@@ -3,7 +3,7 @@
   "schema_version": 2,
   "authority": {
     "repository": "othello",
-    "source_commit": "08369a9dbb9aaedd3303a8b3f904c2048d09625a",
+    "source_commit": "a1ab926cc3e7ccea092c9a877269d228337dca21",
     "status": "current planning snapshot; declaration-level review remains required before source moves or renames",
     "refreshed_by": "C879",
     "refreshed_on": "2026-08-10"
