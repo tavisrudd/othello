@@ -3050,8 +3050,17 @@
       "last": 906,
       "purpose": "reconstruction-profile theorem and E6 tower judo",
       "sequence": 339
+    },
+    {
+      "count": 1,
+      "first": 907,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 907,
+      "purpose": "Quantum-monodromy stabilization test for stable irrationality of cubic threefolds",
+      "sequence": 340
     }
   ],
-  "next_id": 907,
+  "next_id": 908,
   "schema": "codex-task-id-allocations-v1"
 }
