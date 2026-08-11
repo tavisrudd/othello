@@ -48,7 +48,7 @@ For one scalar coordinate, contracting two mixed divisor forms along the
 fibre gives, up to the common orientation sign, the base divisor
 
 \[
-                       \Omega_{p(uv^t+vu^t)}.
+                       \Omega_{p^2(uv^t+vu^t)}.
 \]
 
 Its coefficient matrix is zero modulo `p`, so it automatically satisfies
@@ -65,9 +65,11 @@ divisors, a nonzero fibre integral requires
 \]
 
 The fibre matching expansion pairs the `s` mixed `x`-legs with the `s`
-mixed `y`-legs.  Each pair contributes an integral base divisor of the form
-above; the remaining fibre coefficient is an integral minor of the pure
-fibre divisor matrices.  The resulting number of base divisor factors is
+mixed `y`-legs.  Integral Plücker straightening replaces two mixed brackets
+by one base and one fibre bracket, with coefficients `+1` and `-1`; induction
+on the number of mixed brackets leaves only base brackets and an integral
+minor of the pure fibre divisor matrices.  Each paired contribution is the
+integral base divisor displayed above.  The resulting number of base divisor factors is
 
 \[
              b+s=(d+h-1-2s-l)+s=d-1.

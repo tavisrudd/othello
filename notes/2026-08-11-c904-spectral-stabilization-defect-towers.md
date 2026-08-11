@@ -117,13 +117,32 @@ scalar coordinate and base columns \(u,v\), direct wedge contraction gives
 a base two-form of the shape
 
 \[
-              \Omega_{p(uv^t+vu^t)}
+              \Omega_{p^2(uv^t+vu^t)}
 
 \]
 
 up to the harmless alternating sign convention.  This is itself an
 integral base divisor.  For \(h\) scalar coordinates, multilinear expansion
 of the fibre coefficient is the usual integral matching/minor expansion.
+
+For completeness, this expansion is integral by the following standard-
+monomial induction.  Write the two homology directions of each elliptic
+factor as a rank-two symplectic bracket.  In a product of divisor brackets,
+use the Plücker relation
+
+\[
+ [a,b][c,d]=[a,c][b,d]-[a,d][b,c]
+\]
+
+to replace a pair of brackets joining base and fibre legs by a base bracket
+and a fibre bracket.  This lowers the number of mixed brackets by two and has
+coefficients \(\pm1\).  Repeating gives a sum of standard monomials containing
+only base brackets and fibre brackets.  After collecting the graph-basis
+terms, each paired contribution is
+\(\Omega_{p^2(uv^t+vu^t)}\); the remaining fibre coefficient is an integral
+minor of the pure fibre divisor matrices.  This proves the matching rule by
+induction, with no localization or division.
+
 A surviving monomial with \(2s\) mixed forms and \(\ell\) scalar-fibre
 divisors satisfies \(s+\ell=h\).  Fibre coordinate matching pairs the mixed
 legs; every pair contracts to an integral base divisor of the displayed
