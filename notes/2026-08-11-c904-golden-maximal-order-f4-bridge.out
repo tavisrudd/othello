@@ -1,0 +1,19 @@
+C904 golden maximal-order to F4-heart bridge
+  conference: B^2=5I
+  maximal-order saturation: Lmax=Z^6+Z*(1/2,...,1/2), index=2
+  phi=(I+B)/2 preserves Lmax and satisfies phi^2-phi-1=0
+  reduction: Lmax/2Lmax has F4-dimension=3
+  oriented stabilizer order=60, generators orders=(2, 3)
+  generator permutations=((0, 1, 3, 2, 5, 4), (1, 2, 0, 5, 3, 4))
+  invariant F4-lines=0
+  invariant F4-planes=1 (unique)
+  canonical submodule=[A5,Lmax/2], F4-dimension=2, F2-dimension=4
+  canonical submodule basis=((0, 1, 1, 0, 0, 0), (0, 0, 0, 1, 1, 0), (0, 1, 0, 1, 0, 0), (0, 0, 1, 0, 0, 1))
+  quotient is the trivial F4-line
+  submodule-to-six-heart Hom dimension=2, invertible=True
+  intertwiner=((0, 1, 0, 0), (1, 1, 1, 0), (1, 1, 0, 1), (0, 0, 1, 0))
+  transported omega=((0, 1, 0, 1), (1, 0, 1, 0), (1, 0, 1, 1), (0, 1, 1, 1))
+  transported omega^2=((1, 1, 0, 1), (1, 1, 1, 0), (1, 0, 0, 1), (0, 1, 1, 0))
+  golden conjugation phi->1-phi transports omega->omega^2
+  outer normalizer conjugation transports omega->omega^2
+PASS

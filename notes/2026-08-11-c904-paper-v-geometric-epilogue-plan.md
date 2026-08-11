@@ -432,9 +432,12 @@ No claim is made that reduction modulo eleven uniquely determines an abelian
 variety or principal polarization.
 
 The six-set is the classical set \(A_5/D_5\), already visible in the cubic
-geometry. The dependency audit must therefore state whether the golden plane,
-selected line, or orientation does any work beyond reconstructing that set;
-the series narrative must not assume the answer. Let
+geometry. The maximal-order bridge now proves that the orientation does real
+additional work: its signed conference operator \(B\) determines
+\(\varphi=(I+B)/2\) on the \(D_6\) weight lattice and hence selects a primitive
+element of the exotic \(\mathbf F_4\). The dependency audit must still state
+whether the golden plane and selected chordal line contribute separately; the
+series narrative must not assign them work they do not perform. Let
 \(\mathscr O_{\mathrm{gold}}\) be the free
 \(C_2\)-torsor of golden orientations recovered by Paper V, and let
 
@@ -443,27 +446,44 @@ the series narrative must not assume the answer. Let
 \subset \operatorname{End}_{A_5}(H_2)=\mathbf F_4
 \]
 
-be the free Frobenius \(C_2\)-torsor of exotic gluings. Work in the groupoid of
-\(N\)-equivariant \(C_2\)-torsors, where \(N/A_5\simeq C_2\) is the identified
-outer-normalizer quotient. Prove that \(\mathscr O_{\mathrm{gold}}\) and
-\(\mathscr E_{\mathrm{ex}}\) define the same isomorphism class there by showing
-that both outer actions are nontrivial.
+be the free Frobenius \(C_2\)-torsor of exotic gluings. The exact
+maximal-order bridge now gives the intrinsic pointwise comparison that the
+unmarked plan treated as optional. If \(B\) is the oriented golden conference
+operator, set
 
-Do not select a pointwise isomorphism unless a later marked statement truly
-needs one. Any two such isomorphisms differ by the deck involution. Formulate
-the geometric output as the unordered exotic conjugacy class and prove that
-the integral gluing, period image, minimal-class theorem, and cubic family are
-all equivariant under that deck action. Then the two choices give naturally
-isomorphic outputs, so no artificial basepoint calibration is load-bearing.
-Only a theorem naming one literal sheet would still require an intrinsic
-calibration.
+\[
+L^{\max}=\mathbf Z^6+
+\mathbf Z\frac{(1,1,1,1,1,1)}2,
+\qquad
+\varphi=\frac{I+B}{2}.
+\]
 
-This is an equality of equivariant torsor classes, not the vacuous assertion
-that two abstract free \(C_2\)-sets are isomorphic. It must retain the common
-outer-normalizer action. Also prohibit the false shortcut obtained by reducing
-the integral golden order modulo two:
-\(t^2-5\equiv(t+1)^2\pmod2\), so this reduction is nonreduced and is not
-\(\mathbf F_4\).
+Then \(L^{\max}\) is the minimal \(\mathbf Z[\varphi]\)-stable saturation of
+the fibre-odd lattice. Modulo two it is a three-dimensional
+\(\mathbf F_4\)-module, and its canonical commutator submodule
+
+\[
+H=[A_5,L^{\max}/2L^{\max}]
+\]
+
+is the unique proper nonzero \(\mathbf F_4A_5\)-submodule. It is
+two-dimensional over \(\mathbf F_4\) and is the four-dimensional six-point
+heart. Restricting \(\bar\varphi\) therefore selects a literal
+\(\omega\in\operatorname{End}_{A_5}(H)=\mathbf F_4\), independently of the
+chosen intertwiner. Reversing \(B\) sends \(\varphi\) to \(1-\varphi\) and
+\(\omega\) to \(\omega^2\), exactly as does the outer normalizer. This proves
+a canonical isomorphism
+
+\[
+\mathscr O_{\mathrm{gold}}\simeq\mathscr E_{\mathrm{ex}}.
+\]
+
+Retain the unordered conjugacy-class formulation as a robust corollary and
+prove downstream deck-equivariance, but the marked theorem no longer depends
+on an arbitrary calibration. Also retain the warning: direct reduction of the
+nonmaximal order \(\mathbf Z[B]\simeq\mathbf Z[\sqrt5]\) is nonreduced modulo
+two. The bridge works only after the canonical index-two saturation to the
+maximal order \(\mathbf Z[\varphi]\).
 
 State first the Frobenius--Schur descent lemma abstracted from Paper IV: a
 multiplicity-free Frobenius orbit of \(r\) absolutely simple binary
@@ -695,10 +715,11 @@ The epilogue should close with:
 
 1. The canonical integral-envelope theorem makes the finite-to-integral
    series connection causal.
-2. The orientation-comparison theorem identifies the golden and exotic free
-   \(C_2\)-torsors as the same object up to isomorphism in the category of
-   outer-normalizer-equivariant torsors; it neither chooses an arbitrary
-   basepoint nor identifies \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
+2. The maximal-order saturation theorem identifies the golden and exotic free
+   \(C_2\)-torsors pointwise and functorially: the commutator heart of
+   \(L^{\max}/2\) carries \(\omega\), and golden reversal carries
+   \(\omega\) to \(\omega^2\). It does not identify the nonmaximal quotient
+   \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
 3. Every later construction is deck-equivariant, so changing the torsor
    isomorphism changes only the representative of the same exotic conjugacy
    class.
@@ -735,9 +756,8 @@ The epilogue should close with:
 3. Prove the natural triangle identities and finite output interface.
 4. Freeze Paper V at 17--22 pages with no computational proof dependency.
 5. In the epilogue, prove the canonical integral-envelope theorem.
-6. Prove Frobenius--Schur descent, identify the golden and exotic torsor
-   classes equivariantly, and prove deck-equivariance of every downstream
-   construction.
+6. Prove Frobenius--Schur descent and the maximal-order commutator-heart
+   theorem, then prove deck-equivariance of every downstream construction.
 7. Freeze the exact period-image normalization and generic-degree theorem.
 8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
@@ -756,8 +776,8 @@ The epilogue should close with:
 
 The successor is genuinely Annals-shaped only if all of the following land:
 
-1. the canonical finite-to-integral envelope, equality of the golden/exotic
-   equivariant torsor classes, and deck-equivariance of the realization;
+1. the canonical finite-to-integral envelope, the maximal-order pointwise
+   golden/exotic torsor bridge, and deck-equivariance of the realization;
 2. the strong period-image normalization and generic-degree theorem;
 3. the geometric application of the primewise minimal-class theorem;
 4. a self-contained special-case sixth-root/weak-factorization proof; and
@@ -770,8 +790,9 @@ juxtaposed. Apply these kill criteria:
 
 - if no exact finite-to-integral handoff is proved, do not say the cubic
   theorem is what the reconstructed carrier “forces”;
-- if family-level deck-equivariance is not proved, either restore an intrinsic
-  sheet calibration or state the two exotic realizations separately;
+- if family-level deck-equivariance is not proved, retain the intrinsic marked
+  sheet supplied by maximal-order saturation and state its conjugate
+  separately;
 - if the epilogue uses only the abstract six-set, say that the series
   reconstructs a carrier admitting the realization, not that every marking
   recovered by V is logically necessary for it;

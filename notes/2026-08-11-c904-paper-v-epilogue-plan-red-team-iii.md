@@ -7,6 +7,13 @@
 **Scope:** hostile review of the revised publication architecture after adding
 Paper IV's hidden-field torsor. No manuscript, Lean, mirror, or release edit.
 
+**Forward correction:** the crown-level calibration gate identified below was
+subsequently closed by
+`2026-08-11-c904-golden-maximal-order-f4-bridge.md`. The canonical index-two
+maximal-order saturation has a commutator heart isomorphic to the six-point
+heart, and golden conjugation acts there as Frobenius. Retain the audit below
+as the statement of what had to be proved, not as the current open status.
+
 ## Verdict
 
 **Conditional GO, with one crown-level gate and three scope corrections.**

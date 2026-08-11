@@ -1,0 +1,10 @@
+C904 independent Sage golden/F4 replay
+  det(Lmax basis)=1/2, saturation index=2
+  phi integral on Lmax, phi^2-phi-1=0
+  generated proper F4[A5] submodules: unique dimension=4
+  submodule=[A5,Lmax/2], quotient=trivial F4-line
+  submodule is six-point heart: Hom dimension=2, invertible=True
+  omega=((0, 1, 0, 1), (1, 0, 1, 0), (1, 0, 1, 1), (0, 1, 1, 1))
+  omega^2=((1, 1, 0, 1), (1, 1, 1, 0), (1, 0, 0, 1), (0, 1, 1, 0))
+  golden and outer conjugations both act by Frobenius
+PASS

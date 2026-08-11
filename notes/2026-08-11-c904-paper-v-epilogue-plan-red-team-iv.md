@@ -8,6 +8,15 @@
 basepoint calibration by working up to deck conjugacy. No manuscript, Lean,
 mirror, or release edit.
 
+**Forward correction:** the marked alternative left open below is now proved
+in `2026-08-11-c904-golden-maximal-order-f4-bridge.md`. Passing from the
+nonmaximal \(\mathbf Z[B]\) lattice to its canonical index-two
+\(\mathbf Z[\varphi]\)-saturation produces the six-point heart as the unique
+proper \(\mathbf F_4\)-submodule, and \(B\mapsto-B\) becomes
+\(\omega\mapsto\omega^2\). The unmarked quotient formulation remains useful
+as a fallback and for compression, but it is no longer forced by a missing
+calibration.
+
 ## Verdict
 
 **GO for the unmarked geometric theorem; NO for a canonically named sheet.**

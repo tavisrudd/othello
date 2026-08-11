@@ -29,6 +29,15 @@ should **not** reduce the operator order `Z[sqrt(5)]` modulo two: that order
 has polynomial `t^2-5`, whose reduction is `(t+1)^2`, not the separable field
 `F_4`.  A torsor comparison avoids this false arithmetic shortcut.
 
+**Forward resolution.**  The later exact theorem
+`2026-08-11-c904-golden-maximal-order-f4-bridge.md` sharpens this warning. The
+direct reduction remains false, but the fibre-odd lattice has a canonical
+index-two over-lattice stable under
+`phi=(1+B)/2`, hence under the maximal order `Z[phi]`. Its reduction has a
+unique proper `F_4 A5` commutator submodule, canonically the six-point heart;
+`B -> -B` restricts to `omega -> omega^2`. Thus the desired pointwise torsor
+comparison is now proved after saturation rather than merely postulated.
+
 Paper IV supplies the degree-three model and the general descent lemma.  This
 gives it a direct structural role without assigning it a nonexistent cubic
 map.
