@@ -313,6 +313,17 @@ Tate filtration, and its Section 6.4 explicitly defers Γ-integral compatibility
 to forthcoming work.  Hence the block gap is an exact candidate invariant, not
 an established birational invariant.
 
+Iritani's original theorem confirms that this is the exact seam rather than a
+missing easy corollary.  Theorem 1.1 constructs the formal blow-up quantum
+`D`-module direct sum and intertwines both the quantum connection and the
+symmetric Poincaré pairing.  But Remark 1.5 says that the Stokes structure at
+`z=0` does **not** admit the corresponding orthogonal decomposition in the
+known toric case; instead it has a semiorthogonal decomposition matching
+Orlov's through the Γ-integral structure.  The general analytic statement is
+presented there as expected, not proved.  Thus the formal direct sum preserves
+exactly the data that split the copies and discards exactly the Stokes extension
+data in which the length-`m+1` Serre block would live.
+
 This is not yet a stable birational invariant.  Cai's obstruction deliberately
 uses exponents modulo integers because the formal isomorphisms in the blow-up
 theorem may contain integer powers of `z`.  Katzarkov--Kontsevich--Pantev--Yu's
@@ -561,6 +572,11 @@ any weak factorization.
   theorems.  Cached
   PDF SHA-256:
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
+- Hiroshi Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555,
+  especially Theorem 1.1 and Remark 1.5.  The former preserves the connection
+  and Poincaré pairing in the formal direct sum; the latter locates the missing
+  Γ-integral/Stokes semiorthogonal compatibility.  Shared-cache PDF SHA-256:
+  `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
 - Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
   Nicolas Perrin, *An atomic criterion for irrationality without quantum
   computations*, arXiv:2607.26718v1, especially Section 2 on atoms of
