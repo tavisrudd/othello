@@ -1,7 +1,7 @@
-== (I) trace identity, exhaustive over all two-graphs ==
-  n=5: 64 two-graphs, mismatches=0
-  n=6: 1024 two-graphs, mismatches=0
-  n=7: 32768 two-graphs, mismatches=0
+== (I) pair-degree law and its spectral form, exhaustive ==
+  n=5: 64 two-graphs, pair-degree mismatches=0, trace mismatches=0
+  n=6: 1024 two-graphs, pair-degree mismatches=0, trace mismatches=0
+  n=7: 32768 two-graphs, pair-degree mismatches=0, trace mismatches=0
 == (II)+(III) minimisers of the aligned family ==
   n=5: min|A|=0  spectral bound=-0.625  minimisers=12  of which conference=0
   n=6: min|A|=0  spectral bound=0  minimisers=12  of which conference=12

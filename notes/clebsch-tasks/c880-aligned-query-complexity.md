@@ -122,12 +122,14 @@ repaired after a referee pass:
 `notes/2026-08-07-c880-adaptive-decoder.md` and
 `notes/2026-08-07-c880-adaptive-and-wording-referee-review.md`.
 
-Item 5 is answered, structurally and without certificates. The number of aligned
-four-sets is an exact spectral invariant,
-\(\lvert A\rvert=\tfrac14\binom n4+\tfrac1{32}(\operatorname{tr}S^4-n(n-1)(2n-3))\),
-and Cauchy--Schwarz on \(\operatorname{tr}(S^2)=n(n-1)\) makes the conference
-two-graphs the **exact minimisers**: \(\lvert A\rvert\ge n(n-1)(n-2)(n-6)/96\)
-with equality iff \(S^2=(n-1)I\). That single inequality proves both halves of
+Item 5 is answered, structurally and without certificates. Writing \(a(p)\) for
+the number of coherent triples through a pair and \(m(p)=n-2-2a(p)\) for its
+defect, the number of aligned four-sets is a function of the pair degrees alone:
+\(\lvert A\rvert=\tfrac1{16}\bigl((n-6)\binom n3+\sum_p m(p)^2\bigr)\), with
+spectral form \(\tfrac14\binom n4+\tfrac1{32}(\operatorname{tr}S^4-n(n-1)(2n-3))\).
+The sum of squares makes the conference two-graphs the **exact minimisers**:
+\(\lvert A\rvert\ge n(n-1)(n-2)(n-6)/96\) with equality iff every defect
+vanishes, iff \(S^2=(n-1)I\). That single inequality proves both halves of
 the point threshold — every two-graph on at least seven points has an aligned
 four-set, and the six-point exceptions are precisely the conference two-graphs,
 twelve labelled, matching the enumeration exactly. The promise therefore pins

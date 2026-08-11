@@ -4,14 +4,16 @@
 This script is a check, not evidence.  Every claim in that report is proved by
 hand; this only guards against an algebra slip in the four identities below.
 
-  (I)   |A(S)| = C(n,4)/4 + (tr(S^4) - n(n-1)(2n-3))/32          (Proposition 3)
-  (II)  min |A| over all two-graphs is attained exactly at S^2=(n-1)I,
+  (I)   |A(S)| = ((n-6)*C(n,3) + sum_p m(p)^2)/16, m(p) = n-2-2a(p),
+        and its spectral form C(n,4)/4 + (tr(S^4) - n(n-1)(2n-3))/32
+                                                          (Corollary 3, 6)
+  (II)  min |A| over all two-graphs is attained exactly at m == 0,
         i.e. exactly at the conference two-graphs                (Theorem 4)
   (III) the twelve six-point minimisers are the twelve labelled conference
         two-graphs, matching the enumeration in
         `notes/2026-08-07-c880-alignment-separation.md`          (Corollary 5)
   (IV)  lambda_3 == (n-6)/4 for the Paley conference two-graph on ten points,
-        so its aligned family is a 3-(10,4,1) design             (Theorem 7)
+        so its aligned family is a 3-(10,4,1) design           (Corollary 7)
 
 Replay:
   uv run --with numpy python notes/2026-08-11-c880-item5-structure-check.py
@@ -46,6 +48,18 @@ def aligned_sets(S, n):
     return out
 
 
+def aligned_count_by_pair_degrees(S, n):
+    """Corollary 3: |A| = ((n-6)C(n,3) + sum_p m(p)^2)/16, m(p) = n-2-2a(p)."""
+    total = 0
+    for x, y in itertools.combinations(range(n), 2):
+        coherent = sum(1 for w in range(n)
+                       if w not in (x, y) and S[x, y] * S[y, w] * S[w, x] == -1)
+        total += (n - 2 - 2 * coherent) ** 2
+    num = (n - 6) * comb(n, 3) + total
+    assert num % 16 == 0, (n, total)
+    return num // 16
+
+
 def aligned_count_by_trace(S, n):
     t4 = int(np.trace(np.linalg.matrix_power(S, 4)))
     num = 8 * comb(n, 4) + t4 - n * (n - 1) * (2 * n - 3)
@@ -69,14 +83,16 @@ def paley_conference_two_graph():
     return S, n
 
 
-print("== (I) trace identity, exhaustive over all two-graphs ==")
+print("== (I) pair-degree law and its spectral form, exhaustive ==")
 for n in (5, 6, 7):
-    bad = sum(
-        aligned_count_by_trace(S := seidel_from_descendant(n, mask), n)[0]
-        != len(aligned_sets(S, n))
-        for mask in range(1 << comb(n - 1, 2))
-    )
-    print(f"  n={n}: {1 << comb(n - 1, 2)} two-graphs, mismatches={bad}")
+    bad_pair = bad_trace = 0
+    for mask in range(1 << comb(n - 1, 2)):
+        S = seidel_from_descendant(n, mask)
+        direct = len(aligned_sets(S, n))
+        bad_pair += aligned_count_by_pair_degrees(S, n) != direct
+        bad_trace += aligned_count_by_trace(S, n)[0] != direct
+    print(f"  n={n}: {1 << comb(n - 1, 2)} two-graphs,"
+          f" pair-degree mismatches={bad_pair}, trace mismatches={bad_trace}")
 
 print("== (II)+(III) minimisers of the aligned family ==")
 for n in (5, 6, 7, 8):
