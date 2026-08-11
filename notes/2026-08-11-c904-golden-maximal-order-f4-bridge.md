@@ -165,6 +165,82 @@ involutions therefore agree on the exotic gluing pair.
   deck-equivariant; deck-equivariance remains useful for the unmarked fallback.
 - Priority for this exact saturation/heart bridge has not yet been audited.
 
+## Second-order corollaries
+
+### The exotic field is the normalized golden residue field
+
+Let
+
+\[
+R=\mathbf Z[B]\simeq\mathbf Z[\sqrt5],
+\qquad
+\mathcal O=\mathbf Z[\varphi]
+=\mathbf Z\!\left[\frac{1+\sqrt5}{2}\right].
+\]
+
+Then \(\mathcal O\) is the normalization of \(R\), with conductor two. Their
+special fibres are qualitatively different:
+
+\[
+R/2R\simeq\mathbf F_2[\epsilon]/(\epsilon^2),
+\qquad
+\mathcal O/2\mathcal O\simeq
+\mathbf F_2[t]/(t^2+t+1)=\mathbf F_4.
+\]
+
+Thus the exotic field is not an unrelated modular commutant. It is the
+separable residue field obtained by normalizing the golden order before
+reducing at the inert prime two. The lattice passage
+\(L\subset D_6^\vee\) is the corresponding module normalization. Golden
+Galois conjugation specializes to Frobenius:
+
+\[
+\varphi\longmapsto1-\varphi
+\quad\rightsquigarrow\quad
+\omega\longmapsto\omega^2.
+\]
+
+This gives the cleanest conceptual statement of the Paper V-to-epilogue
+bridge.
+
+### General symmetric-conference saturation law
+
+Let \(B\) be a symmetric conference matrix of even order \(n\), normalized so
+its first row is all ones off the diagonal, and assume \(n\equiv2\pmod4\).
+Then
+
+\[
+B^2=(n-1)I,
+\qquad
+\varphi_B=\frac{I+B}{2},
+\qquad
+(D_n^\vee,\varphi_B)
+\]
+
+is the minimal \(\varphi_B\)-stable over-lattice of \(\mathbf Z^n\), and
+
+\[
+\varphi_B^2-\varphi_B=\frac{n-2}{4}I.
+\]
+
+Indeed \(\varphi_Be_0=(1/2)\mathbf1\), while orthogonality with the normalized
+first row makes every other row sum equal to one; hence
+\(\varphi_B(D_n^\vee)\subset D_n^\vee\). Modulo two, the coefficient algebra
+is
+
+\[
+\mathbf F_2[t]/
+\left(t^2+t+\frac{n-2}{4}\right).
+\]
+
+Consequently it is \(\mathbf F_4\) when \(n\equiv6\pmod8\), and split when
+\(n\equiv2\pmod8\). The order-six bridge is the first irreducible case. What
+is special to \(A_5\) is not the maximal-order saturation but the canonical
+four-dimensional commutator heart inside the resulting \(\mathbf F_4^3\).
+
+This general lemma is cheap and structural, but its priority in the
+conference-matrix literature has not been audited.
+
 ## Reproducibility
 
 Primary exact replay from `/home/tavis/src/othello/rust`:

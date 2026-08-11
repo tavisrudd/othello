@@ -485,6 +485,19 @@ nonmaximal order \(\mathbf Z[B]\simeq\mathbf Z[\sqrt5]\) is nonreduced modulo
 two. The bridge works only after the canonical index-two saturation to the
 maximal order \(\mathbf Z[\varphi]\).
 
+Present this as a normalization-before-reduction theorem:
+
+\[
+\mathbf Z[B]/2\simeq\mathbf F_2[\epsilon]/(\epsilon^2),
+\qquad
+\mathbf Z[\varphi]/2\simeq\mathbf F_4.
+\]
+
+Thus the exotic commutant field is the separable residue field of the
+normalized golden order, and golden Galois conjugation specializes to
+Frobenius. This arithmetic square is the conceptual bridge; the commutator
+heart identifies the correct four-dimensional geometric constituent.
+
 State first the Frobenius--Schur descent lemma abstracted from Paper IV: a
 multiplicity-free Frobenius orbit of \(r\) absolutely simple binary
 constituents has commutant \(\mathbf F_{2^r}\), and the Frobenius orbit of a
