@@ -100,3 +100,23 @@ extension, or Paper-IV comparison changed.
 The final external-review artifact remains
 `papers/clebsch-round-trip/golden_companion_reconstruction.pdf`, with the hash
 recorded above.
+
+## Mystery ledger
+
+- **Settled — why the six-point boundary is special.**  At six points the
+  constant term in the general defect count vanishes, leaving the pure sum of
+  squares $16|A|=\sum m^2$.  Empty alignment therefore forces conference
+  regularity without spectral theory.
+- **Settled — why recognition does not orient.**  Empty alignment leaves twelve
+  labeled switching classes, in six complement pairs.  The recovered
+  $A_5$-action, not the defect identity, selects the invariant opposite pair;
+  the selected chordal line and outer difference then orient it.
+- **Settled — whether the broader C880 theorem belongs in Paper V.**  It does
+  not.  General extremality, design parameters, arithmetic nonexistence, and
+  query complexity belong to Paper III/C880.  Their import would add a second
+  narrative without strengthening V's classification theorem.
+- **Open evidence boundary — precedence.**  No exact predecessor was located,
+  but MathSciNet, direct zbMATH results, three rate-limited Semantic Scholar
+  queries, and the 2015 publisher PDF remain uncovered as recorded in the
+  audit.  Paper V therefore makes no independent novelty sentence for the
+  identity.  No mathematical mystery remains for the imported lemma.
