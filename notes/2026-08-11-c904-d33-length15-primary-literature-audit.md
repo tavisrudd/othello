@@ -17,9 +17,9 @@ fibre of
 is a \(\mathbf P^1\)-bundle over a finite etale
 \(K=\mathbf C(M_9)\)-scheme \(R_{3,3}(E)\) of length \(15\).
 Geometrically it is the disjoint union of fifteen projective lines.
-Equivalently, Voisin's intermediate rational quotient
-\(Z\dashrightarrow M_9\), whose fibre over \(S^2\Theta\) is
-\(\operatorname {Pic}^2(E_3)\), is generically finite of degree \(15\).
+It is tempting to identify their quotient with Voisin's intermediate
+rational quotient \(Z\), but that stronger comparison requires an additional
+linearity calculation and is not used below.
 
 The odd degree supplies a degree-\(15\) zero-cycle on the actual generic
 \(D_{3,3}\)-fibre. The statement should say *geometrically rank-two
@@ -99,11 +99,9 @@ If the generic comparison is proved, then
    =\operatorname {ind}(R_{3,3}(E))\mid 15.
 \]
 
-Thus the mysterious generic \(D_{3,3}\)-curve has odd index. Equivalently,
-the degree-\(15\) map \(Z\dashrightarrow M_9\) preserves the two-primary
-part of the index. Voisin's vertical
-\(\operatorname {Pic}^2(E_3)\)-torsor has index dividing \(3\), so it also
-does not alter the two-primary part. Consequently the packet transfers the
+Thus the mysterious generic \(D_{3,3}\)-curve has odd index.  Voisin's
+generic \(\operatorname {Sym}^2(E_3)\) fibre has index dividing \(3\), so it
+also does not alter the two-primary part. Consequently the packet transfers the
 two-primary index question for the generic Abel--Jacobi fourfold to the
 unordered-theta fibre.
 
@@ -138,7 +136,7 @@ rank-one points.
 Artifacts as read:
 
 - 2026-08-11-c904-factorable-quadric-packet.sage,
-  SHA-256 cf3e0f7587e9ac13f490252f703f2fc94086f59585cb62389ae9e8f61da540bd;
+  SHA-256 836d56922ed6aa1ade6ec7db2249f81e0b569d50a3bf6ac76570b354f7358961;
 - its output,
   SHA-256 d7e5f0df050e0bef6ef5aa2b109ee471c57a84cb48543189e0ac0abc83dbc64d;
 - 2026-08-11-c904-factorable-quadric-packet-replay.m2,
@@ -213,16 +211,17 @@ For \(C_s=A_s\cup B_s\) on \(H_1\cup H_2\), put
  D_s=A_s\cap B_s\subset E_3=Y\cap H_1\cap H_2.
 \]
 
-The divisor \(D_s\) has degree \(2\). Along a fixed wedge pencil
-\(\mathbf P(U)\), the components move in fixed linear systems on the two
-cubic surfaces, so \(\mathcal O_{E_3}(D_s)\) is constant and \(D_s\) runs
-through \(|D|\cong\mathbf P^1\). Thus \(\mathbf P(U)\) is exactly an Abel
-fibre of \(S^2E_3\to\operatorname {Pic}^2(E_3)\). Conversely that Abel
-fibre recovers the fixed rank-two wedge quadric and \(U\).
-
-This identifies the line packet with the geometric generic fibre of
-\(Z\dashrightarrow M_9\), converting length \(15\) into its degree. Voisin
-supplies all the objects, but neither this comparison nor the degree.
+The divisor \(D_s\) has degree \(2\).  Along a fixed wedge pencil
+\(\mathbf P(U)\), the components move in fixed pencils inside their
+two-dimensional twisted-cubic linear systems.  To identify
+\(\mathbf P(U)\) with an Abel fibre of
+\(S^2E_3\to\operatorname {Pic}^2(E_3)\), one must still prove that the
+resulting map to the degree-two linear system is induced by a nonzero linear
+map of two-dimensional section spaces.  Nonconstancy alone does not control
+its degree.  This stronger comparison is therefore pending and is not needed
+for the index theorem: Voisin's map from the full \(D_{3,3}\) incidence to
+\(S^2\Theta\), whose generic fibre is birational to \(S^2E_3\), already
+supplies the odd index-dividing-three relay.
 
 ## Priority and venue verdict
 
@@ -277,5 +276,7 @@ or relative-cycle theorem, it can support an Annals-level crown.
   rank-one point.
 - **Pending:** relative null-correlation normal form/dominance.
 - **Pending:** exclusion of generic unbalanced and multicomponent strata.
-- **Pending:** explicit identification with the Abel ruling.
+- **Pending but non-load-bearing:** explicit identification of each packet
+  line with the Abel ruling, and hence any degree claim for Voisin's further
+  quotient \(Z\dashrightarrow M_9\).
 - **Novelty:** likely new within the stated search boundary.

@@ -1,0 +1,6 @@
+PASS independent Macaulay2 packet replay
+packet affine-cone dimension = 1
+packet projective degree = 15
+rank-one packet empty = true
+packet radical = true
+packet prime over QQ = true

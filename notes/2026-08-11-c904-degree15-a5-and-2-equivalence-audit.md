@@ -44,13 +44,11 @@ be \(A_5\)-fixed.  Consequently the assertion “the fifteen points of
 \(R_E\) are the fifteen involutions” is not even intrinsically formulated
 for generic \(E\).
 
-There is a second obstruction to a global sheet labelling.  Voisin's
-intermediate \(Z\) is birationally fibred over the irreducible
-\(S^2\Theta\) with connected generic fibre
-\(\operatorname{Pic}^2(E_3)\); hence \(Z\) is irreducible.  If
-\(Z\dashrightarrow M_9\) has degree \(15\), its generic cover is therefore
-connected.  It cannot be the split constant cover consisting of fifteen
-globally labelled sheets.
+There is a second obstruction to a global sheet labelling.  The explicit
+characteristic-zero packet is a prime degree-15 field point, not a split
+constant cover.  Voisin's intermediate \(Z\) is also irreducible, but
+identifying the packet quotient with \(Z\) requires an additional linearity
+calculation and is not used here.
 
 An involution/axis theorem remains possible in either of two stronger
 forms, neither supplied by the current count:
@@ -114,28 +112,24 @@ Put \(K=\mathbf C(J)\), and let
  Y=(S^2\Theta\to J)_\eta.
 \]
 
-Take smooth projective \(K\)-models \(\overline V,\overline Y\).  The
-intermediate space \(Z_\eta\) gives a correspondence
+Take smooth projective \(K\)-models \(\overline V,\overline Y\).  The full
+type-\((3,3)\) incidence \(D_\eta\) gives a correspondence
 
 \[
                     \overline V\dashrightsquigarrow\overline Y
 \]
 
-of multiplicity \(15\): its projection to \(V\) is generically finite of
-degree \(15\), while its other projection is the
-\(\operatorname{Pic}^2(E_3)\)-fibration over \(Y\).
+of multiplicity \(15\): choose the degree-15 zero-cycle on its generic fibre
+over \(V\), spread it to a multisection, and push it through
+\(D_\eta\dashrightarrow Y\).  No degree claim for Voisin's further quotient
+\(Z\dashrightarrow M_9\) is needed.
 
-Conversely, the plane cubic \(E_3\) carries its degree-three hyperplane
-class.  Equivalently,
-
-\[
- p\longmapsto \mathcal O_{E_3}(1)(-p)
-\]
-
-identifies \(E_3\) with \(\operatorname{Pic}^2(E_3)\), and a hyperplane
-divisor supplies a degree-three zero-cycle on the latter over the generic
-field of \(Y\).  Closing a resulting degree-three multisection inside
-\(Z_\eta\) gives the reverse correspondence
+Conversely, Voisin identifies the generic fibre of
+\(D_\eta\dashrightarrow Y\) birationally with
+\(\operatorname{Sym}^2(E_3)\).  A hyperplane divisor on the plane cubic
+supplies a degree-three zero-cycle; its pair-sums give a degree-three
+zero-cycle on the symmetric square.  Closing the resulting multisection
+inside \(D_\eta\) gives the reverse correspondence
 
 \[
                     \overline Y\dashrightsquigarrow\overline V

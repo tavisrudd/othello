@@ -1,0 +1,23 @@
+PASS null-correlation wedge quadrics
+seed = 904
+lift attempt = 1
+regular section = (1, 1, 1, 1)
+residual section curve Hilbert polynomial = 6*t
+residual section curve Hilbert values H(1),H(2) = 5 12
+residual section curve smooth = True
+residual section curve prime = True
+packet ideal generators = 20
+rank-two hyperplane discriminant degree = 4
+rank-two hyperplane discriminant components = 1
+rank-two hyperplane component degrees = [4]
+discriminant singular scheme dimension = 2
+top-block rank-one locus dimension = 2
+packet on top-block rank-one locus dimension = -1
+rank-one packet empty = True
+computing packet dimension
+packet dimension = 1
+packet Hilbert polynomial = 15
+packet projective degree = 15
+computing packet radical
+packet is radical = True
+radical Hilbert polynomial = 15

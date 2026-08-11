@@ -321,30 +321,62 @@ fibrewise, and C907 owns the second.  This is a strong separation between
 universal `CH_0`-triviality and one-step stable rationality.  Do **not**
 upgrade it to full stable irrationality without a separate C907 theorem.
 
-### Thirteenth-pass compression of the live charge-three gate
+### Thirteenth-pass degree-fifteen and two-equivalence theorem
 
-The midnight closeout does not prove odd index, but it replaces the last
-unstructured curve by a finite determinantal packet.  For a general
-charge-three bundle (E), the normalization of the generic curve
-(D_{3,3,E}\) is birational to a projective-line bundle over the finite
-scheme (R_{3,3}(E)) of factorable quadrics in the Pluecker wedge system
+The midnight closeout replaces the last unstructured charge-three curve by
+an exact finite packet.  For a general charge-three bundle \(E\), the
+normalization of the generic curve \(D_{3,3,E}\) is birational to a
+projective-line bundle over the finite scheme \(R_{3,3}(E)\) of factorable
+quadrics in the Pluecker wedge system
 
 \[
  \bigwedge^2H^0(X,E)\longrightarrow H^0(X,{\cal O}_X(2)).
 \]
 
-Their zero-cycle indices are equal.  Thus the live computation is now the
-length, residue-degree gcd, and exotic deck action of the Artin scheme cut
-out by the Pluecker equation and the (3\times3) minors of the universal
-symmetric (5\times5) wedge matrix.  An odd packet closes the relative
-lifting gate; an even length alone is not a no-go.  The repeated integer 21
-is quarantined as a clue only.  See
-`notes/2026-08-11-c904-d33-factorable-quadric-index-reduction.md`.
+Their zero-cycle indices are equal.  The exact Sage/Macaulay2 packet is
+prime of degree 15 over `QQ`; a transverse good \(\mathbf F_5\) point,
+Hensel lifting and Galois transitivity put all fifteen geometric points in
+the type-\((3,3)\) stratum.  The uniform count is conceptual: on the
+normalization of the join of two Veronese conics,
+
+\[
+ \int(\xi+h_1)(\xi+h_2)(3\xi-2h_1-2h_2)=12+4-1=15.
+\]
+
+The odd packet closes the two-primary index of the intervening generic
+\(D_{3,3}\)-curve, but it does not itself give an odd zero-cycle on the
+Abel--Jacobi fourfold.  Together with Voisin's index-dividing-three
+\(\operatorname{Sym}^2(E_3)\) relay, it makes the generic charge-three and
+unordered-theta fibres 2-equivalent: their canonical 2-dimensions and their
+two-primary indices after every extension agree.  The exact remaining crown
+is index one versus two on the unordered-theta side.  Do not claim equal
+upper motives without geometric splitting and Rost nilpotence, and do not
+identify the packet with Voisin's further quotient without the missing
+linearity calculation.  For the actual Paper-V pencil, still print/check that
+the finite all-good packet open meets the generic \(M_9\)-fibre over the
+special \(A_5\) locus; the general-cubic theorem alone does not silently
+supply this specialization.  See
+`notes/2026-08-11-c904-d33-degree-fifteen-index-equivalence.md` and
+`notes/2026-08-11-c904-factorable-packet-independent-audit.md`.
 
 ### Current dead-path ledger
 
 The following routes are closed and must not be revived without genuinely new
 input.
+
+- **Degree 15 as an odd point on the Abel--Jacobi fourfold:** dead.  It is
+  an odd multisection of `D_{3,3} -> M_9`, not a zero-cycle on
+  `M_9 -> J`.  Its correct global consequence is 2-equivalence with the
+  unordered-theta fibre.
+- **Fibrewise identification with the fifteen `A_5` involutions/axis
+  pairs:** dead for a generic bundle.  The group moves `R(E)` to `R(gE)`;
+  it does not act on one generic fibre.  An `A_5`-linearized ordinary test is
+  also obstructed by `Pf(w_E)=F L`: the irreducible ambient five-space has no
+  invariant linear `L`.  The cardinality coincidence remains only a clue.
+- **Automatic degree-15 statement for Voisin's further quotient `Z`:** not
+  licensed.  A packet line is a pencil inside a twisted-cubic `P^2`; its
+  identification with the Abel ruling requires a separate linearity proof.
+  This comparison is unnecessary for the 2-equivalence theorem.
 
 - **Charge-two Brauer class on the charge-three fibre:** dead.  The Faenzi
   Hecke conic is the splitting variety of the charge-two class, and its

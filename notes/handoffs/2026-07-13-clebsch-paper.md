@@ -663,13 +663,23 @@ exit further.  The normalization of the generic curve
 `D_{3,3} -> M_9` is birational to a projective-line bundle over a finite
 factorable-quadric scheme `R_{3,3}(E)` inside the Pluecker wedge system of a
 general charge-three bundle, and the two zero-cycle indices are equal.  The
-next exact calculation is therefore finite: form the symmetric `5x5` matrix
-of the six wedge quadrics, impose the Pluecker equation and all `3x3` minors,
-saturate away from other splitting strata, and compute the length,
-residue-degree gcd, and exotic deck action.  No parity verdict or packet
-length is claimed yet; in particular, the repeated integer 21 remains only
-a quarantined clue.  See
-`notes/2026-08-11-c904-d33-factorable-quadric-index-reduction.md`.
+exact model calculation now gives a reduced, prime degree-15 packet over
+`QQ` (fifteen reduced geometric points).  A transverse good mod-5 point,
+Hensel lifting and Galois transitivity identify all fifteen with the
+type-`(3,3)` stratum.  The generic count is also conceptual on the normalized
+join of two Veronese conics: the three compatibility divisors intersect in
+`12+4-1=15`.  This proves odd index for the intervening `D_{3,3}` curve; it
+does **not** produce an odd zero-cycle on `M_9 -> J`.  Combined with
+Voisin's index-dividing-three `Sym^2(E_3)` relay, it makes the generic
+charge-three fibre and unordered-theta fibre 2-equivalent.  Hence their
+canonical 2-dimensions and their two-primary indices after every extension
+agree.  The surviving gate is precisely index one versus two for the
+unordered-theta fibre.  Equal upper motives are not licensed, and the
+further Abel-quotient comparison remains non-load-bearing and unproved.  The
+Paper-V use still requires checking that the all-good finite packet open
+meets the generic \(M_9\)-fibre over the special marked \(A_5\) pencil.  See
+`notes/2026-08-11-c904-d33-degree-fifteen-index-equivalence.md` and
+`notes/2026-08-11-c904-factorable-packet-independent-audit.md`.
 
 Three successor theorems are now quarantined from the frozen paper.  First,
 the five marked principal halves form the exact

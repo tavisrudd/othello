@@ -1,7 +1,8 @@
 # C904: the generic \(D_{3,3}\) curve is a finite factorable-quadric packet
 
 Date: 2026-08-11
-Status: theorem-grade reduction; the final finite scheme has not been counted
+Status: superseded in part by the exact degree-15 packet computation; retained
+for the geometric reduction and corrected index boundary
 Scope: the sole live two-primary cancellation locus in the charge-three
 Abel--Jacobi fibre; no manuscript or Lean change
 
@@ -129,12 +130,17 @@ projective line of the two-dimensional vector space \({\cal U}_r\), hence
 has a \(k(r)\)-point.  Every closed point of \(R\) therefore lifts without
 changing degree, giving the reverse divisibility.  This proves equality.
 
-For C904, an odd-length packet is already enough for the positive exit: it
-contains an odd-degree closed component and hence the generic
-\(D_{3,3}\)-curve has an odd zero-cycle.  An even total length alone is not
-a negative theorem; the gcd of the residue degrees must be computed.
+For C904, an odd-length packet proves that the generic
+\(D_{3,3}\)-curve over \(M_9\) has an odd zero-cycle.  It does **not** by
+itself produce an odd zero-cycle on the generic Abel--Jacobi fibre
+\(M_{9,k(J)}\).  Combined with Voisin's map to
+\(\operatorname{Sym}^2\Theta\), whose vertical \(\operatorname{Pic}^2(E_3)\)
+index divides three, it identifies the 2-primary index of that fourfold with
+the still-open 2-primary index of the unordered-theta fibre.  Thus the packet
+removes the intervening curve-cancellation ambiguity but does not close the
+original relative lifting gate.
 
-## 3. Exact finite calculation now required
+## 3. Exact finite calculation completed in the successor note
 
 Choose a basis of \(V\), write the six wedge quadrics as symmetric
 \(5\times5\) matrices \(A_{ij}\), and use Pluecker coordinates \(p_{ij}\)
@@ -153,15 +159,16 @@ The finite factorable packet is obtained from
 
 followed by saturation away from nonregular sections and the other splitting
 strata.  This computes the actual Artin scheme, not merely an intersection
-number.  The required outputs are:
+number.  The successor audit now gives:
 
-1. its length;
-2. its reduced/etale status at the generic point;
-3. the residue-field degree gcd;
-4. the deck action over the exotic marked base.
+1. generic length fifteen, both exactly and by a conceptual intersection;
+2. a reduced prime degree-fifteen model over \(\mathbf Q\);
+3. a transverse mod-5 type-\((3,3)\) lift closing the good-stratum check;
+4. odd index for the normalized generic \(D_{3,3}\)-curve.
 
-This is the highest-EV next exact computation.  It is substantially smaller
-than computing \(CH_0\) of the full rationally connected fourfold.
+The exotic deck action remains interesting but is no longer needed for
+parity: finite rank fifteen already supplies an odd-degree residue component.
+See `2026-08-11-c904-d33-degree-fifteen-index-equivalence.md`.
 
 ## 4. Dead routes and one quarantined coincidence
 
@@ -203,7 +210,14 @@ theorem.
 - **Closed:** the generic \(D_{3,3}\) curve is birationally ruled by
   projective lines over a finite factorable-quadric scheme.
 - **Closed:** its zero-cycle index equals the index of that finite scheme.
-- **Open:** the length and residue-degree gcd of the packet.
-- **Open:** whether its exotic deck action forces an odd orbit.
+- **Closed after this reduction:** an exact computation gives a reduced,
+  prime degree-15 packet over \(\mathbf Q\) in one characteristic-zero model;
+  the remaining deformation argument must identify it with the generic
+  type-\((3,3)\) packet before that count is used globally.
+- **Not load-bearing:** the exotic deck action; total rank fifteen already
+  forces an odd residue degree.
+- **Open and load-bearing:** the index-one versus index-two question for the
+  unordered-theta fibre; degree 15 transfers the original \(M_9\) gate to
+  this gate rather than solving it.
 - **Quarantined clue:** the repeated integer 21 has no proved geometric
   bridge to the packet.
