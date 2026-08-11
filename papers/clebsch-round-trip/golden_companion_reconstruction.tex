@@ -75,6 +75,8 @@ On the recovered six-set, a pair-defect identity also recognizes the
 conference locus intrinsically: a two-graph has no aligned four-set exactly
 when its Seidel matrix is conference.  Thus the conference switching classes
 are exactly the six-point shadows invisible to the four-point alignment test.
+This unmarked criterion leaves twelve labeled switching classes; the recovered
+\(A_5\)-marking selects the invariant opposite pair.
 
 The classification places the signed cubic of Paper~II in one of the two
 chordal lines of the \(A_5\)-invariant cubic pencil and returns the retained
@@ -434,8 +436,9 @@ Schur's lemma gives
 \begin{proposition}[Paper-II placement]
 \label{prop:paper-ii-placement}
 After the outer-twisted multiplicity-one identification with \(A_0\), the
-chosen-sheet projection of Paper~II's signed moment is a normalized metric
-chordal shadow.  Its projective equation in standard binary-quartic
+chosen-sheet projection of Paper~II's signed moment is a metric chordal
+shadow whose actual cubic is normalized by its first nonzero coefficient.
+Its projective equation in standard binary-quartic
 coordinates is
 \[
  H=z_0z_2z_4+2z_1z_2z_3-z_0z_3^2-z_1^2z_4-z_2^3
@@ -655,7 +658,8 @@ convention follows Goethals--Seidel \cite[\S\S1--3]{GoethalsSeidel1967}.
 \begin{lemma}[Six-point alignment recognition]
 \label{lem:six-point-alignment-recognition}
 Let \(\Delta\) be a two-graph on a six-set \(\Omega\), represented by a
-symmetric sign matrix \(S\).  Put
+Seidel matrix \(S\), so \(S_{xx}=0\) and
+\(S_{xy}=S_{yx}\in\{\pm1\}\) for \(x\ne y\).  Put
 \[
  \sigma(xyz)=S_{xy}S_{yz}S_{zx},\qquad
  m(xy)=\sum_{z\notin\{x,y\}}\sigma(xyz)
@@ -703,7 +707,16 @@ four-set contains four triples, so a second summation yields
 This is the claimed identity.  Finally
 \(m(xy)=S_{xy}(S^2)_{xy}\), while every diagonal entry of \(S^2\) is five.
 Thus all defects vanish exactly when \(S^2=5I\).
+Diagonal switching fixes every triple sign.  Global complementation
+\(S\mapsto-S\) negates \(\sigma\) and \(m\), so both the aligned family and
+the square identity are intrinsic to the two-graph up to complement.
 \end{proof}
+
+Paper~III's theorem \emph{Aligned-design faithfulness} proves that aligned
+four-sets determine a two-graph up to complement from seven points onward,
+with seven sharp \cite{RuddPassages2026}.  The lemma identifies its sharp
+six-point failure locus: it is precisely the unmarked conference locus.  The
+recovered \(A_5\)-action then selects the opposite pair needed here.
 
 Paper~I's corollary \emph{Nodes, symmetry, and integral commutant} proves
 that this triangle cubic has exactly six ordinary nodes in projective-frame
@@ -746,7 +759,8 @@ six-set.
 \begin{proposition}[Normalized outer action]
 \label{prop:outer-pencil-action}
 Let \(c_B\) be either coefficient-normalized conference generator and let
-\(h\) be the corresponding normalized Paper-II chordal generator.  In the
+\(h\) be the coefficient-normalized Paper-II chordal generator of
+Proposition~\ref{prop:paper-ii-placement}.  In the
 ordered basis \((c_B,h)\),
 \[
               [q_\Pi]=\begin{pmatrix}-1&8\\0&1\end{pmatrix}.
@@ -756,6 +770,8 @@ lines are exchanged, and
 \[
           (q_\Pi-1)h=8c_B.
 \]
+In particular, \(h\) is normalized in the sense of
+Definition~\ref{def:metric-chordal-shadow}.
 \end{proposition}
 
 \begin{proof}
@@ -772,7 +788,7 @@ In the basis \(e_i-e_6\), its augmentation matrix is
 \]
 Reversing the conference class changes every triangle sign, hence sends
 \(c_B\) to \(-c_B\).  Proposition~\ref{prop:paper-ii-placement} identifies
-the Paper-II line with the chordal line and fixes its scalar.  Comparing one
+the Paper-II line with the chordal line and fixes its pivot scalar.  Comparing one
 coefficient now makes the remaining scalar transparent.  With the monomial
 order \(\mathcal M\) of Proposition~\ref{prop:paper-ii-placement}, coefficient
 normalization gives
@@ -1604,10 +1620,11 @@ W.~H. Haemers and F.~Parsaei Majd,
 1983--1990, doi:10.1007/s10623-021-00858-8.
 
 \bibitem{IranmaneshFarsangi2015}
-M.~Iranmanesh and A.~Askari Farsangi,
+A.~Iranmanesh and J.~Askari Farsangi,
 \newblock \emph{Upper and lower bounds for the power of eigenvalues in
 Seidel matrix},
-\newblock published article (2015), doi:10.14317/jami.2015.627.
+\newblock \emph{Journal of Applied Mathematics and Informatics} \textbf{33}
+(2015), 627--633, doi:10.14317/jami.2015.627.
 
 \bibitem{PinardinZhang2025}
 A.~Pinardin and Z.~Zhang,
