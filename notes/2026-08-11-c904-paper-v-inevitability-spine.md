@@ -9,6 +9,15 @@ coordinate computation, repeated inverse, or declarative marking by a short
 structural theorem. This is a proof-compression plan, not an expansion of the
 paper's geometric scope.
 
+**Forward hostile correction:**
+`2026-08-11-c904-paper-v-inevitability-red-team-tt.md` supersedes the bare
+minimal datum below. Over extensions containing \(\mu_3\), an actual cubic
+does not kill scalar automorphisms. Use a normalized invariant quadratic form
+and isometric morphisms (or the literal quadratic augmentation module), and
+distinguish base change of the fixed package from classification of arbitrary
+forms. The causal recovery of \(q_\Pi\) from the recovered six-set remains
+valid.
+
 ## Central principle
 
 The minimal common input should be one normalized actual chordal generator

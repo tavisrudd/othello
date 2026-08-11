@@ -8,6 +8,14 @@
 the maps; this note specifies what must be added for V.A and V.D to become
 intrinsic classification theorems rather than image-restricted equivalences.
 
+**Forward hostile correction:** the arbitrary-extension groupoid and the
+expanded axioms below are too strong as written. See
+`2026-08-11-c904-paper-v-inevitability-red-team-tt.md`. The repaired carrier
+uses an actual normalized invariant quadratic form and isometric morphisms (or
+the literal quadratic augmentation model), while the exact-
+\(C_5\)-to-\(D_5\) identification and triangle/balance equations become
+theorems rather than recognition axioms.
+
 ## 1. The classification object must not mention the source papers
 
 Work over an extension \(K/\mathbf F_{11}\). Define an intrinsic marked
