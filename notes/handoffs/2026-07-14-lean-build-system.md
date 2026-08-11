@@ -255,10 +255,10 @@ Lean source, package, mirror, or remote changed.  Full report:
    guarded run `run-20260810-171214-7ce5ea23` built its final aggregate in 47m30s at
    5.43 GB peak, and its Lake pack has SHA-256
    `24860c9e950cca12ff17b4875257bbe8b56860c6ac2353c9ef8ee3eebfd7ff32`.
-   Its exporter-created downstream bridge is at standalone commit `570f304f`; the static bridge
-   audit is green against finitegeom `b871c10b` and certificate `54fb4f83`. Its cheap verifier and
-   registry pin remain queued behind the active Q13 build; the legacy monorepo family stays pending
-   until that bridge is green and its consumers move.
+   Its exporter-created downstream bridge is at standalone commit `0be8925c`; the guarded bridge
+   verifier and static audit are green against finitegeom `b871c10b`, certificate `54fb4f83`, and
+   the sealed pack. The registry entry is active. The legacy monorepo family stays pending until
+   its consumers move.
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
    materialized outputs. Its serialized heavy build and aggregate gate are green; the metadata
    refresh rebuilt only the cheap aggregate root. The package is sealed at `99156ddf`, and its Lake
