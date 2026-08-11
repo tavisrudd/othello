@@ -5,7 +5,7 @@ TEXSHELL ?= nix develop ..\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
-SOURCE := golden_companion_reconstruction.tex
+SOURCE := chordal_conference_reconstruction.tex
 
 .PHONY: all check evidence lint manuscript warnings clean distclean
 
@@ -24,7 +24,7 @@ manuscript: $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: manuscript
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' golden_companion_reconstruction.log; then \
+	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' chordal_conference_reconstruction.log; then \
 		exit 1; \
 	fi
 

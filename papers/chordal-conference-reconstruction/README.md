@@ -1,12 +1,12 @@
-# The Golden Companion Correspondence
+# Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor
 
-[Read the paper (PDF).](golden_companion_reconstruction.pdf)
+[Read the paper (PDF).](chordal_conference_reconstruction.pdf)
 
-Paper II of the *Clebsch: Rigidity from Sparse Shadows* series produces a
-signed cubic from a matching quotient. This paper identifies its canonical
-five-dimensional residue and proves that it is a chordal companion—not the
-conference cubic reconstructed in Papers I and III—in the same
-two-dimensional \(A_5\)-invariant pencil.
+Two geometrically inequivalent cubic shadows occur on the same
+five-dimensional metric \(A_5\)-carrier: a chordal cubic and a conference
+cubic. This paper asks whether they nevertheless retain equivalent source
+information. It proves that they do after one chordal line is selected, and
+computes the exact \(C_2\)-ambiguity left when that selection is forgotten.
 
 The chordal cubic is singular along a rational normal quartic. Its twelve
 \(\mathbf F_{11}\)-points form \(A_5/C_5\); the stabilizer quotient recovers
@@ -23,12 +23,14 @@ operator produces the unique nonsplit \(\mathbf F_4A_5\)-extension, and
 golden reversal becomes Frobenius. Thus the geometric and integral residual
 markings are the same \(C_2\)-torsor.
 
-This is Paper V of the five-paper series. Papers I--III supply the marked
-inputs, while Paper IV is an independent minimum-word reconstruction branch.
+This is Paper V of *Clebsch: Rigidity from Sparse Shadows*. Papers I--III
+supply concrete sources realizing the two cubic shadows. Paper IV is an
+independent minimum-word reconstruction branch whose residual marking follows
+the same Frobenius-orbit principle.
 
 ## Building and checking
 
-The manuscript is golden_companion_reconstruction.tex. From this directory:
+The manuscript is chordal_conference_reconstruction.tex. From this directory:
 
     make check
 

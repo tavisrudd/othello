@@ -38,7 +38,8 @@
 \newcommand{\cC}{\mathscr C}
 \newcommand{\cG}{\mathscr G}
 
-\title{The Golden Companion Correspondence}
+\title{Chordal and Conference Cubics:\\
+Reconstruction and a Residual \(C_2\)-Torsor}
 \author{Tavis Rudd}
 \date{August 2026}
 
@@ -60,37 +61,53 @@ and \textbf{the scattered shadows gather home}.
 \end{center}
 
 \begin{abstract}
-On the quadratic augmentation module of the six Sylow-\(5\) subgroups of
-\(A_5\), we classify the normalized chordal and conference shadows that occur
-in the Clebsch reconstruction series.  A chordal cubic first recovers a split
-twelve-point \(C_5\)-orbit on its singular rational normal quartic.  The
-stabilizer quotient of that orbit recovers the six-set, and the literal outer
-permutation of the six-set recovers the oriented conference companion by a
-single difference operator.  This gives an equivalence of the selected-line
-chordal and conference groupoids.  Without the selected chordal line the map
-is a residual double cover, not an equivalence; we compute the complete
-marking dependency and its Klein-four sharpness action.
+Let \(\Omega\) be the six Sylow-\(5\) subgroups of \(A_5\), and let \(V\) be
+the five-dimensional augmentation module of \(\F_{11}^{\Omega}\), with its
+standard quadratic form.  The \(A_5\)-invariant cubic pencil in \(\PP(V)\)
+contains a conference cubic with six isolated nodes and two chordal cubics,
+each singular along a rational normal quartic.  Over
+\(\overline{\F}_{11}\), the conference cubic is not projectively isomorphic
+to either chordal cubic.  We prove that they nevertheless encode the same
+marked carrier.  The singular quartic recovers the constant double cover
+\(A_5/C_5\to\Omega=A_5/D_{10}\).  If either chordal line \(L\) is selected,
+where \(L\) is a one-dimensional subspace of the invariant pencil, the outer
+involution \(q\) of that pencil gives mutually inverse reconstruction functors
+between a normalized chordal generator \(h\in L\) and an oriented conference
+generator \(c\), over every field extension of \(\F_{11}\).  Forgetting \(L\)
+quotients by the free involution
+\((L,h,c)\mapsto(qL,-qh,c)\), which fixes \(c\); this is distinct from the
+conference-orientation torsor below.
 
-On the recovered six-set, a pair-defect identity also recognizes the
-conference locus intrinsically: a two-graph has no aligned four-set exactly
-when its Seidel matrix is conference.  Thus the conference switching classes
-are exactly the six-point shadows invisible to the four-point alignment test.
-This unmarked criterion leaves twelve labeled switching classes; the recovered
-\(A_5\)-marking selects the invariant opposite pair.
+The conference locus also has an intrinsic six-point recognition theorem.
+Let \(S\) represent a two-graph \(\Delta\) on a six-set \(X\), with
+\(S_{xx}=0\) and \(S_{xy}=S_{yx}\in\{\pm1\}\).  Put
+\(\sigma(xyz)=S_{xy}S_{yz}S_{zx}\) and
+\(m(xy)=\sum_{z\notin\{x,y\}}\sigma(xyz)\).  If \(A(\Delta)\) is the family
+of four-subsets on which all four triple signs agree, then
+\[
+       16|A(\Delta)|=
+       \sum_{\{x,y\}\in\binom X2}m(xy)^2.
+\]
+Consequently \(A(\Delta)=\varnothing\) exactly when \(S^2=5I\), the
+conference condition.
 
-The classification places the signed cubic of Paper~II in one of the two
-chordal lines of the \(A_5\)-invariant cubic pencil and returns the retained
-outputs of Papers~I--III exactly.  We then extract the integral structure
-forced by the recovered six-set.  The rank-five augmentation lattice and the
-rank-six \(D\)-type lattice meet in the same four-dimensional binary heart.
-More generally, a symmetric conference operator of order
-\(n\equiv2\pmod4\) minimally stabilizes \(D_n^\vee\), with a split/inert
-mod-eight residue dichotomy.  At \(n=6\), normalization before reduction
-produces the unique nonsplit extension of a trivial \(\F_4\)-line by the
-natural \(\F_4A_5\)-module.  Golden reversal becomes Frobenius on this heart.
-Thus the residual involution in the geometric correspondence and the
-residual involution in the integral normalization are the same marked
-symmetry.
+The recovered six-set also controls an integral normalization.  For every
+symmetric conference matrix \(B\) of order \(n\equiv2\pmod4\), normalized so
+that the off-diagonal entries in its first row are \(+1\),
+\(D_n^\vee=\Z^n+\Z\mathbf1/2\) is the least \(\varphi=(I+B)/2\)-stable lattice
+containing \(\Z^n\).  Moreover
+\(\varphi^2-\varphi=(n-2)I/4\), so
+the algebra \(\F_2[\bar\varphi]\) induced on
+\(D_n^\vee/2D_n^\vee\) is \(\F_4\) for \(n\equiv6\pmod8\) and
+\(\F_2\times\F_2\) for \(n\equiv2\pmod8\).  At \(n=6\), the residue is the
+unique nonsplit extension, up to isomorphism of \(\F_4A_5\)-modules, of a
+trivial line by the natural module \(H\), with
+\(\End_{A_5}(H)=\F_4\).  The map
+\([B]\mapsto\bar\varphi|_H\) identifies
+\(\{[B],[-B]\}\) with the two primitive scalars
+\(\{\omega,\omega^2\}\subset\F_4\); conference reversal corresponds to
+Frobenius \(z\mapsto z^2\).  This is an equivariant identification of
+principal \(C_2\)-torsors.
 \end{abstract}
 
 \noindent\textbf{Keywords.} chordal cubic; conference matrix; reconstruction;
@@ -103,14 +120,15 @@ root lattice; modular representation; Frobenius descent.
 \section{Introduction and statement}
 \label{sec:introduction}
 
-An invariant can retain the correct symmetry and still be the wrong
-invariant.  The irreducible five-dimensional representation of \(A_5\) has a
-two-dimensional space of invariant cubics.  One line contains the triangle
-cubic of an oriented conference matrix.  Two other points of the pencil are
-chordal cubics, each singular along a rational normal quartic.  The signed
-matching tensor of Paper~II lands on a chordal line, not on the conference
-line.  The purpose of this paper is to explain why that failure is exactly
-what makes the reconstruction work.
+Different lossy invariants of the same source need not look alike.  The
+inverse question is whether they nevertheless retain equivalent information.
+On the irreducible five-dimensional metric \(A_5\)-module, the invariant
+cubic pencil contains geometrically different members: a conference line and
+two chordal lines, each chordal cubic singular along a rational normal
+quartic.  We prove that, after one chordal line is retained, either shadow
+reconstructs the other and their common six-axis carrier.  Forgetting that
+line leaves exactly a \(C_2\)-ambiguity.  The result classifies information
+loss between inequivalent cubic shadows; it does not identify the cubics.
 
 The explanation has four steps.  First, the singular quartic of a chordal
 cubic contains a distinguished split \(A_5/C_5\)-orbit.  Sending each point
@@ -160,16 +178,18 @@ attribution boundary.
 
 \Needspace{18\baselineskip}
 \medskip
-\noindent\textbf{Series perspective.}
-\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
-determine the structures that produced them.  Papers~I and III reconstruct
-marked conference companions, whereas Paper~II reconstructs a signed chordal
-companion.  The present paper proves that these are exact marked forms of one
-carrier and computes the ambiguity left by forgetting their markings.
-Paper~IV is a parallel lower branch: its minimum words reconstruct a conic
-plane and an \(\F_8\)-operator field.  The two branches have no common geometric
-carrier, but their final residual markings are instances of the same
-Frobenius-orbit principle.  Figure~\ref{fig:series-map} records this division.
+\noindent\textbf{Reconstruction perspective.}
+This paper asks when two different shadows encode the same source
+information.  One is chordal, the other conference-type, and their projective
+geometries are not isomorphic.  After a chordal line is selected, the theorem
+constructs intrinsic reconstruction functors in both directions; without that
+selection, the correspondence is exactly a residual \(C_2\)-quotient.
+Papers~I--III supply concrete sources realizing the two shadow types, but the
+classification itself is formulated on the fixed metric carrier.  A separate
+integral theorem identifies the upper residual marking with Frobenius on the
+common binary heart.  Paper~IV supplies an independent \(C_3\)-Frobenius
+instance on an \(\F_8\)-commutant, with no common geometric carrier asserted.
+Figure~\ref{fig:series-map} records this division.
 
 \begin{figure}[ht]
 \centering
@@ -391,14 +411,14 @@ normalization--residue theorem.  Section~\ref{sec:residual-markings} compares
 its \(C_2\)-rigidification with Paper~IV's separate \(C_3\)-rigidification.
 
 \medskip
-\noindent\textbf{Scope.}
-The classification is intrinsic after the literal quadratic augmentation
-carrier has been fixed.  It does not classify twisted forms of that carrier,
-identify the chordal and conference cubics, or reconstruct source-local charts
-that were not retained as bridge data.  The integral theorem likewise
-identifies a common binary heart, not the two integral lattices themselves.
-These distinctions are the information-loss content of the result rather than
-technical qualifications.
+\noindent\textbf{Scope and exact information loss.}
+The classification is intrinsic after fixing the literal quadratic
+augmentation carrier and concerns its neutral scalar extensions.  It does not
+classify arbitrary twisted forms, identify the chordal and conference cubics,
+or manufacture source-local charts not retained in the bridge datum.  These
+boundaries record the information actually present in the shadows.  Likewise,
+the integral theorem does not identify the two integral lattices; it identifies
+their common binary heart and the residual marking carried there.
 
 \section{The metric chordal normal form}
 \label{sec:placement}
@@ -1549,15 +1569,17 @@ The selected-line correspondence is an equivalence, and the bare
 correspondence is exactly its \(C_2\)-quotient.  This is the complete
 information-loss statement, including its scalar and outer sharpness.
 
-The same six-set then separates two integral outputs that had previously
-looked interchangeable.  The rank-five augmentation and rank-six
-root--weight lattices meet only in their binary heart.  On the latter,
-normalization before reduction converts the golden order into \(\F_4\), and
-the residual geometric involution becomes Frobenius.  Paper~IV exhibits the
-degree-three version of the same residual-field mechanism on an independent
-carrier.  Thus the series ends not with a single universal model, but with a
-structural answer to its recurring question: the missing marking is measured
-by the commutant field of the shadow that survives.
+The broader conclusion is an information-loss principle.  The integral
+theorem makes it concrete: the rank-five augmentation and rank-six
+root--weight lattices remain distinct, but their common binary heart carries
+an \(\F_4\)-commutant on which reversal is Frobenius.  Distinct shadows need
+not become isomorphic in order to encode equivalent source data; what matters
+is whether their residual ambiguity can be isolated and rigidified.  In the
+upper branch that ambiguity is a \(C_2\)-torsor, while in the independent
+Paper-IV branch it is a \(C_3\)-Frobenius orbit.  In both constructions the
+commutant field records the marking still missing after reconstruction.  Thus
+sparse invariants can retain a source up to a residual Galois-type
+rigidification even when the visible shadows have different geometry.
 
 \section*{AI assistance disclosure}
 
