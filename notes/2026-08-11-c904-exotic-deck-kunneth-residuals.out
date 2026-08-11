@@ -1,0 +1,7 @@
+deck relations: s^2=1 and s*g*s=g^-1 on every residual module
+p15 pairing rank 10
+p15 tensor fixed dimensions C3/full-S3 50 25
+p15 odd degree exists C3/full-S3 True False
+p24 pairing rank 44
+p24 tensor fixed dimensions C3/full-S3 776 396
+p24 odd degree exists C3/full-S3 True True
