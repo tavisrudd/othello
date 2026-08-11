@@ -1,0 +1,267 @@
+# C907 — Quantum-monodromy stabilization test
+
+**Date:** 2026-08-10
+
+**Lane:** `clebsch`
+
+## Verdict
+
+Cai's fractional formal-monodromy block survives stabilization by every
+projective space: the small quantum connection of
+
+\[
+X\times\mathbf P^m
+\]
+
+has `m+1` copies of the cubic rank-two block, each with fractional exponents
+congruent to `+/-1/6` modulo integers.  This is an exact classical computation
+and a general product/projective-bundle formula, not a bounded numerical
+observation.
+
+It does **not** yet obstruct stable rationality.  From stabilization dimension
+`m=2` onward, the ungraded multiplicity of that atom admits universal
+two-sided blow-up-center cancellation patterns using centers which themselves
+carry the cubic atom.  Thus a proof that remembers only the fractional
+exponents modulo integers and their multiplicity cannot close stable
+irrationality.
+
+The exact surviving refinement is Tate/integer graded: its endpoint polynomial
+has nonzero extreme terms that no lower-dimensional self-carrier center has.
+The present formal category explicitly permits integer-power gauge changes and
+therefore forgets precisely this grading.  The next theorem needed is a
+birationally functorial filtered or integral-exponent enhancement of the
+quantum atom, or a proof that such an enhancement cannot exist.
+
+Nothing in this report is promoted to the frozen Paper V manuscript.
+
+## 1. Exact reconstruction of Cai's block
+
+Use Cai's convention
+
+\[
+z^2\partial_z S=(K+zG)S
+\]
+
+for the cubic threefold, with `q=u^2`, over
+`Q(sqrt(3))(u)`.  Starting from Cai's displayed matrices rather than from his
+claimed answer, the Sage generator:
+
+1. puts `K` into its two scalar blocks and one rank-two zero-eigenvalue Jordan
+   block;
+2. solves the first off-block Sylvester equation exactly;
+3. computes the rank-two pieces
+
+   \[
+   M_1=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},
+   \qquad
+   (R_2)_{21}=-16/81
+   \]
+
+   in the generator's normalization, where the Jordan link is `1`; and
+4. derives the indicial polynomial
+
+   \[
+   (\rho+19/18)(\rho-1/18)+16/81
+   =\rho^2+\rho+5/36.
+   \]
+
+Its roots are `-1/6` and `-5/6`, hence the residues modulo integers are
+`+/-1/6`.  The different off-diagonal normalization in Cai's displayed block
+has Jordan link `2` and return link `-8/81`; their product, and therefore the
+indicial polynomial, is the same.
+
+An independent SymPy replay uses an explicit basis change and first gauge
+matrix and recomputes every identity from `K` and `G`.
+
+## 2. Stabilization by projective spaces
+
+For `P^m`, write `n=m+1`.  At nonzero quantum parameter, multiplication by
+`c_1(P^m)` is `n` times the cyclic shift.  In its Fourier eigenbasis the
+diagonal of the grading operator is
+
+\[
+\frac1n\sum_{k=0}^{m}(m/2-k)=0.
+\]
+
+Consequently all `n` rank-one formal solutions of the projective-space factor
+have integer-power exponent zero.  The quantum Kunneth connection is the
+tensor connection, so tensoring those solutions with the cubic rank-two
+solutions gives exactly `m+1` rank-two blocks with unchanged residues
+`+/-1/6`.
+
+Cai's flatness argument upgrades the cubic block from the small to the big
+quantum connection.  The projective-bundle theorem below then supplies the
+corresponding big-connection stabilization statement.
+
+Equivalently, this is the trivial-bundle case of the projective-bundle
+decomposition theorem for maximal A-model F-bundles in
+Katzarkov--Kontsevich--Pantev--Yu, Theorem 4.11.  The certificate checks the
+cyclic power identity, exact Fourier diagonalization, vanishing grading
+diagonal, and resulting copy count for every `0 <= m <= 24`.  The displayed
+trace identity proves the same statement for all `m`.
+
+## 3. Why ungraded atom multiplicity cannot be stable
+
+Let `alpha` denote the cubic rank-two atom and set the endpoint dimension to
+
+\[
+D=3+m.
+\]
+
+The projective bundle `X x P^m` contains `m+1` copies of `alpha`.  Consider a
+self-carrier center
+
+\[
+Z_t=X\times\mathbf P^{t-1},\qquad 1\le t\le m-1.
+\]
+
+It has dimension `t+2`, carries `t` copies of `alpha`, and has codimension
+`m+1-t` in a `D`-fold.  The blow-up formula therefore contributes
+
+\[
+w_t=t(m-t)
+\]
+
+copies of `alpha`.  Exact arithmetic gives
+
+\[
+\gcd_{1\le t\le m-1}t(m-t)=
+\begin{cases}
+1,&m\text{ even},\\
+2,&m\text{ odd}.
+\end{cases}
+\]
+
+This always divides `m+1`.  More strongly, the following explicit two-sided
+balances use only `t=1,2`:
+
+- `m=2`: `3 w_1 = m+1`;
+- even `m>=4`: `3 w_1 = (m+1)+w_2`;
+- odd `m>=3`, with `f=(m+1)/2`:
+  `2f w_1 = (m+1)+f w_2`.
+
+Hence the atom-count ledger of a hypothetical common resolution has no
+congruence or positivity contradiction from `m>=2`.  The certificate checks
+the full weight lists, gcd formula, and explicit relations for `1 <= m <= 24`;
+the formulas prove them for every `m`.
+
+This is a ceiling for the **coarse additive invariant**, not a constructed
+weak factorization.  The calculation neither embeds all listed centers in one
+factorization nor proves that a stable-rationality factorization exists.  It
+shows that any successful quantum proof must use geometric realizability,
+filtration, or data finer than ungraded atom multiplicity.
+
+## 4. The exact refinement that survives arithmetically
+
+If Tate/integer shifts are retained, the stabilized endpoint contributes
+
+\[
+P_m(L)=1+L+\cdots+L^m.
+\]
+
+The same center `Z_t` contributes
+
+\[
+B_{m,t}(L)=
+(1+\cdots+L^{t-1})(L+\cdots+L^{m-t}).
+\]
+
+Every `B_{m,t}` has zero constant coefficient and zero `L^m` coefficient.
+No signed integer combination of these self-carrier center polynomials can
+equal `P_m`.  The certificate verifies the full coefficient arrays through
+`m=24`, while the two extreme coefficients prove the statement generally.
+
+This is not yet a stable birational invariant.  Cai's obstruction deliberately
+uses exponents modulo integers because the formal isomorphisms in the blow-up
+theorem may contain integer powers of `z`.  Katzarkov--Kontsevich--Pantev--Yu's
+Hodge atoms likewise fold the Hodge grading so that Tate twists are invisible.
+The polynomial separation therefore identifies the missing structure rather
+than proving stable irrationality.
+
+## 5. Closeout passes
+
+The explicit `ej` pass upgraded the bounded search twice: it replaced the
+observed gcd pattern by the all-`m` formulas in Section 3, and extracted the
+Tate-graded polynomial separation in Section 4 at no additional geometric
+assumption.  That separation is the strongest positive residue of the failed
+multiplicity-only route.
+
+The `tt` pass challenged the three delicate seams: the product grading, the
+allowed center dimensions, and the passage from a signed relation to a
+two-sided positive common-resolution ledger.  It confirmed the zero
+projective-space exponent directly, checked that `t=1,2` occur only in the
+ranges where the formulas use them, and rewrote every relation positively.
+It also rejected an apparent `m=1` conclusion: excluding self-carrier centers
+does not exclude an unrelated surface carrying the same atom.
+
+## 6. Reproduction
+
+Working directory: repository root `/home/tavis/src/othello`.
+
+Generate the canonical certificate with SageMath 10.7:
+
+```sh
+nix shell nixpkgs#sage --command sage \
+  notes/2026-08-10-c907-quantum-monodromy-stabilization.sage \
+  --bound 24 \
+  --output notes/2026-08-10-c907-quantum-monodromy-stabilization.json
+```
+
+Check it without modifying the worktree:
+
+```sh
+nix shell nixpkgs#sage --command sage \
+  notes/2026-08-10-c907-quantum-monodromy-stabilization.sage \
+  --bound 24 \
+  --check notes/2026-08-10-c907-quantum-monodromy-stabilization.json
+```
+
+Independent replay with SymPy 1.14.0:
+
+```sh
+nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
+  notes/2026-08-10-c907-quantum-monodromy-stabilization-independent.py \
+  notes/2026-08-10-c907-quantum-monodromy-stabilization.json
+```
+
+The certificate is canonical JSON with no timestamps or host paths.  The
+tracked `SHA256SUMS` file records:
+
+- Sage generator: 10,321 bytes;
+- independent replay: 4,641 bytes;
+- JSON certificate: 149,862 bytes.
+
+Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
+arithmetic, and SymPy symbolic simplification; the mathematical identification
+of the source matrices and the quantum Kunneth/projective-bundle formula is
+human-audited.  The bounded checks do not assert existence or nonexistence of
+any weak factorization.
+
+## 7. Sources
+
+- Jiaji Cai, *The cubic threefold is symplectically irrational*,
+  arXiv:2608.01577v1, especially Proposition 6 and Sections 2--3.  Cached PDF
+  SHA-256:
+  `06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e`.
+- Ludmil Katzarkov, Maxim Kontsevich, Tony Pantev, and Tony Yue Yu,
+  *Birational Invariants from Hodge Structures and Quantum Multiplication*,
+  arXiv:2508.05105v2, especially Theorems 4.5 and 4.11 and Section 5.4.  Cached
+  PDF SHA-256:
+  `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
+
+## Mystery ledger
+
+- **Settled:** the fractional block is not destroyed by stabilization;
+  projective space replicates it `m+1` times with unchanged residues.
+- **Settled:** raw multiplicity, parity, and positivity cannot be the stable
+  obstruction from `m>=2`; the explicit self-carrier balances explain why.
+- **Open:** whether the integer/Tate grading has a canonical filtered quantum
+  refinement respected by the blow-up and projective-bundle isomorphisms.
+  Evidence gap: current formal gauges allow integer powers of `z` and the atom
+  formalism quotients them out.
+- **Open:** whether geometric constraints on centers forbid the formal
+  self-carrier balances in a minimal weak factorization.  Evidence gap: no
+  common resolution or non-realizability theorem is known.
+- **Open:** whether an arbitrary surface can carry the same fractional atom.
+  This prevents reading the empty self-carrier list at `m=1` as a proof that
+  `X x P^1` is irrational.
