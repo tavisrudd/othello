@@ -264,9 +264,14 @@ Lean source, package, mirror, or remote changed.  Full report:
    refresh rebuilt only the cheap aggregate root. The package is sealed at `99156ddf`, and its Lake
    pack has SHA-256 `50a155b477534b7ee6ad78bade6a6ea7b310d819a9c1843beca80dce9fbaf7e1`.
    The package fact is registered and pinned; adoption at the official checkout waits for its
-   pre-existing dirty legacy tree to be reconciled without overwriting it. Q25 is independently Mathlib-only at
-   `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
-   the six-module preflight beginning at `Normalization`, and the final external registry entry.
+   pre-existing dirty legacy tree to be reconciled without overwriting it. Q25 is independently
+   Mathlib-only in the clean disk worktree
+   `/home/tavis/.cache/othello-worktrees/c879-q25-d23c221`. Guarded regeneration installed exactly
+   7,547 allowlisted sources, committed at `c0a142e5`; the 9,511-module manifest is resealed at
+   `fcef0f3`. The handwritten preflight is green through `Normalization`; `LineMaskChecker` needed
+   only removal of a tactic after an already closed goal. Resume the same `q25-two-witness`
+   profile at `LineMaskChecker` when its memory-admission floor is available, then run the single
+   aggregate build, seal its fact/pack, and add the external registry entry.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
