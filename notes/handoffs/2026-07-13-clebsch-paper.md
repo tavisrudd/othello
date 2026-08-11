@@ -644,7 +644,7 @@ block that theorem.
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C577's manuscript, human-proof, exposition, and local-export stream is complete at warning-free 45-page authority `9af3eb45` and clean unpushed mirror `2245993`; C892 separately owns full remediation of the formal/trust **MAJOR / NO-GO** audit | [C892](../clebsch-tasks/c892-paper-ii-lean-trust-boundary-review.md) for formal/trust closure before any public forward release |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and the rank-14 weighted Jacobian is proved structurally; all four operator rows of gap class B are closed and its remaining work is the arithmetic, orientation and harmonic rows before C823.  C897's first sealed human-proof batch was **MAJOR** for a missing proof, not a demonstrated false theorem.  C897 repaired the reduced branch/complete-fibre argument and exact rational `J_0` scale, corrected Table (5.1), expanded the local proofs and rejecting checks, and obtained fresh Hitchin, Greaves, Snowden, and Si Kaddour `PASS` regrades.  Its final style-guide pass layered the complete source--shadow--return route and preserved every theorem by stable semantic ID; a post-read correction then made branch-sextic irreducibility paper-local and repaired the Haemers--Parsaei Majd metadata.  Final authority `74a73b97` synchronizes to standalone `6989cf8` with an identical warning-free 32-page PDF; C897 is complete, while Lean follow-up remains separately queued by author direction | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md); [C897 dossier](../clebsch-tasks/c897-paper-iii-reviewer-dossier.md); `notes/2026-08-09-c897-paper-iii-layered-exposition-plan.md` |
 | Paper IV — *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the minimum words of a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release; C901 separately owns an isolated human-proof/exposition review programme and keeps its persona material outside ordinary Paper IV context | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md); [C901](../clebsch-tasks/c901-paper-iv-reviewer-dossier.md) |
-| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one exact Chow-halving problem on $\mathcal D_+$; fixed-fibre lifting is solved, while ambient, tautological, six-axis, elliptic-support, Fano/Prym, and conic--Prym routes are dead.  Proved successors are the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet with canonical degree-$2^{10}$ log-boundary extension, the exotic cubic saturation, the all-prime Jordan-scalar theorem, and the prime-support/factorial bound for arbitrary maximal-isotropic gluings.  Exact defects already occur at $(p,g)=(2,3)$ and $(3,4)$, while the exotic $\mathbf F_4$ gluing is a non-scalar positive stratum.  The highest-EV successor is the divided-power obstruction classification for arbitrary gluings.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
+| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one Chow-halving/index-one problem on $\mathcal D_+$; fixed-fibre lifting and the special-$A_5$ degree-fifteen relay are exact, while every ambient, tautological, axis, elliptic, Fano/Prym, Brauer, cusp-only, and rational-simple-connectedness shortcut is dead.  Proved successors include the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet, exotic cubic saturation, prime-support/factorial bound, exact defect towers, and semisimple graph-slope primitivity.  The direct EV is the intrinsic charge-three polarization/index computation; the adjacent EV is the $p$-typical nilpotent-gluing classification.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C904's original Annals-upgrade frontier remains the relative Shen-cycle
@@ -655,8 +655,18 @@ exact obstruction lies in the geometric kernel of `CH_1(D_+)/2`, not in
 `D_+=3 Theta` has exact minimal-class multiplier ideal `6Z`, while
 six-axis norms, formal universal-sheaf expressions, Fano/Prym carriers, and
 the direct conic--Prym cylinder are all proved even or otherwise dead.  The
-live exit is therefore an intrinsic relative cycle, an odd-degree complete
-half relation, or the exact even descent index.
+exceptional plane-quintic route is now closed for the full saturated Fano
+surface lattice: modulo two its Rosati norms generate a codimension-one
+two-sided ideal, separated from the identity by a multiplicative residue
+character.  No nonscalar, adjugate, or endomorphism-dressed repair escapes.
+The live exit is therefore an intrinsic relative cycle, an odd-degree complete
+half relation, or the exact even descent index.  The highest-EV source-backed
+direct calculation is an integral GRR computation of a determinant or
+anticanonical fourth self-intersection on the fine Bridgeland model of the
+charge-three fibre: odd parity would force index one.  No source computes it.
+Rational simple connectedness is dead as a direct shortcut because the
+generic field has transcendence degree five and the available theorem's
+surface-base and very-twisting hypotheses are absent.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
@@ -701,10 +711,12 @@ canonical 2-dimensions and their two-primary indices after every extension
 agree.  The surviving gate is precisely index one versus two for the
 unordered-theta fibre.  Equal upper motives are not licensed, and the
 further Abel-quotient comparison remains non-load-bearing and unproved.  The
-Paper-V use still requires checking that the all-good finite packet open
-meets the generic \(M_9\)-fibre over the special marked \(A_5\) pencil.  See
+former Paper-V specialization caveat is closed: an exact smooth
+\(A_5\)-pencil member has a finite etale all-good length-fifteen packet, a
+full-rank presentation Jacobian lifts it horizontally, and Sage plus
+independent Macaulay2 replay every packet condition.  See
 `notes/2026-08-11-c904-d33-degree-fifteen-index-equivalence.md` and
-`notes/2026-08-11-c904-factorable-packet-independent-audit.md`.
+`notes/2026-08-11-c904-a5-factorable-packet-specialization.md`.
 
 Three successor theorems are now quarantined from the frozen paper.  First,
 the five marked principal halves form the exact
@@ -727,13 +739,20 @@ every dimension at least three, index-three families in every dimension at
 least four, and index-four families in every dimension at least five; the
 order-four tower proves the factorial ceiling is not squarefree.  The towers
 are polarized products, so arbitrary height and indecomposable realization
-remain open.  Third, C904+C907 yields the successor contrast
+remain open.  The complementary graph theorem now proves that every slope
+with squarefree minimal polynomial is primitive: unramified orthogonal
+splitting reduces it blockwise to the Jordan-scalar mixed-adjugate theorem,
+and faithful flatness descends the result, including at two.  Complete
+dyadic ranks three and four verify that nilpotent slope data is exactly the
+first defect boundary; at odd primes it is necessary but not sufficient.
+The adjacent crown is the resulting \(p\)-typical Jordan-height
+classification.  Third, C904+C907 yields the successor contrast
 `X` universally `CH_0`-trivial but `X times P^1` irrational for every
 smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
 `notes/2026-08-10-c904-relative-shen-half-construction-attack.md`,
 `notes/2026-08-10-c904-hecke-pentad-log-boundary.md`,
 `notes/2026-08-10-c904-adjacent-annals-uniform-theorems.md`, and
-`notes/2026-08-10-c904-jordan-scalar-minimal-class-priority-audit.md`.
+`notes/2026-08-11-c904-semisimple-graph-slope-primitivity.md`.
 
 C898 is complete. Its sealed reviewer dossier, five independent cold reads,
 synthesis, and adopted remediation produced Paper I authority commit `c8438909`

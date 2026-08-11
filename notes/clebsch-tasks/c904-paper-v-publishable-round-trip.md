@@ -327,6 +327,20 @@ not squarefree.  These stabilized ppavs are polarized products; arbitrary
 factorial height and indecomposable realization remain live.  See
 `notes/2026-08-11-c904-spectral-stabilization-defect-towers.md`.
 
+The complementary positive classification theorem is also proved.  For a
+prime graph gluing of \(pI_g\), a squarefree minimal polynomial of the
+symmetric slope \(T\) implies primitive divisor-product minimal class at
+every prime, including two.  After an unramified splitting extension, the
+self-adjoint eigenspaces lift to exact nondegenerate orthogonal summands; each
+block has scalar graph slope, so the all-prime mixed-adjugate construction
+applies, and faithful flatness descends membership without a trace multiplier.
+The full dyadic graph charts in ranks three and four certify the exact first
+layer: all 532 squarefree slopes are primitive, while all 556 nonsquarefree
+slopes have order two.  The converse is false at odd primes; the live
+classification is \(p\)-typical nilpotent height, not merely squarefreeness.
+See `notes/2026-08-11-c904-semisimple-graph-slope-primitivity.md` and its
+bounded priority audit.
+
 The same pass packages the five marked principal halves as a complete Hecke
 packet.  Its discriminant geometry is
 \(\mathbf P^1(\mathbf F_4)\): three classical \(S_6\) sheets and the two exotic
@@ -385,12 +399,15 @@ two-primary indices after every extension agree.  The exact remaining crown
 is index one versus two on the unordered-theta side.  Do not claim equal
 upper motives without geometric splitting and Rost nilpotence, and do not
 identify the packet with Voisin's further quotient without the missing
-linearity calculation.  For the actual Paper-V pencil, still print/check that
-the finite all-good packet open meets the generic \(M_9\)-fibre over the
-special \(A_5\) locus; the general-cubic theorem alone does not silently
-supply this specialization.  See
+linearity calculation.  The former Paper-V specialization caveat is now
+closed exactly: a smooth \(A_5\)-pencil member over \(\mathbf F_5\) has a
+finite etale length-fifteen packet with Frobenius degrees
+\(1,1,1,4,4,4\), no rank-one point, and all fifteen residual pairs of type
+\((3,3)\); a rank-thirty-five presentation Jacobian gives Hensel lifting and
+smooth projection to the pencil direction.  Sage and independent Macaulay2
+replays agree.  See
 `notes/2026-08-11-c904-d33-degree-fifteen-index-equivalence.md` and
-`notes/2026-08-11-c904-factorable-packet-independent-audit.md`.
+`notes/2026-08-11-c904-a5-factorable-packet-specialization.md`.
 
 ### Current dead-path ledger
 
@@ -439,7 +456,14 @@ input.
   gives \(-5\operatorname{Id}\) only as a correspondence on \(F\times X\).
   Promoting that Albanese identity to a cycle on \(J\times X\) is exactly the
   unresolved universal-cycle descent; natural Fano-curve cuts instead give
-  even scalar and the composite multiplier is divisible by ten.
+  even scalar and the composite multiplier is divisible by ten.  This now
+  holds for every nonscalar repair from the full saturated `NS(F)`: modulo
+  two, all Rosati norms generate a codimension-one two-sided ideal in the
+  25-dimensional endomorphism algebra, and the multiplicative residue
+  character kills that ideal but sends the identity to one.  Sums,
+  adjugates, and arbitrary integral pre/post endomorphisms therefore remain
+  on the even line.  See
+  `notes/2026-08-11-c904-exceptional-quintic-residue-ideal.md`.
 
 - **Formal relative spreading of Shen's fixed-fibre cycle:** dead without new
   input.  Shen's construction uses a decomposition of the diagonal fibre by
@@ -515,6 +539,15 @@ input.
   point would not lift to the global surface field without a horizontal cycle
   or a local--global theorem for the identified two-obstruction.
 
+- **Rational simple connectedness of the charge-three fibre as a direct
+  section theorem:** dead.  The generic Abel--Jacobi fibre is over the
+  five-variable field `k(J)`, whereas the available de Jong--He--Starr
+  theorem is a surface-base result and additionally requires a relative
+  ample line, rationally connected evaluation fibres for fixed-length chains,
+  and a very twisting surface.  Voisin and the Bridgeland-moduli results prove
+  rational connectedness/Fano, not those hypotheses.  Surface slices cannot
+  produce a point over `k(J)`.
+
 - **Axis or non-axis elliptic supports for the primitive minimal class:**
   dead exactly on the generic non-CM exotic fivefold.  The subgroup generated
   by every elliptic curve has quotient \((\mathbf Z/2)^6\) in the integral
@@ -536,7 +569,12 @@ class in the geometric kernel of `CH_1/2`; neither residual `C3`, Picard
 descent, nor universal-sheaf tautological classes see it.  Otherwise compute
 its finite Chow-orbit module, invariant-class descent, and relation-descent
 class, thereby determining the minimal even base change.  No manuscript or
-Lean source changed.
+Lean source changed.  The highest-EV source-backed direct calculation is now
+the fine Bridgeland model of the charge-three fibre: compute an intrinsic
+determinant/anticanonical fourth self-intersection by integral GRR.  An odd
+value would force index one; no published computation of this top
+polarization was found, and standard Chern-character extraction must retain
+the already identified two-primary denominators.
 
 ## Goal
 
