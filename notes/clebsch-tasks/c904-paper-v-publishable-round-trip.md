@@ -660,6 +660,61 @@ certificate bundle
 `notes/2026-08-11-c904-bdgf-theta-and-full-ns-p15-audit.md`.  No manuscript
 or Lean source changed.
 
+The standard non-divisor universal-family route is now closed too.
+The cubic middle Chow--Kunneth projector is integral at two, and
+`c_2(E)` contains the primitive Abel--Jacobi leg, but the required
+`(5,3)` component of every integral codimension-four universal Chern
+expression has the exact form `-6 f_4 + 2 D f_3 + S f_2`.  The first two
+terms are visibly even and the last retains the independent
+`Theta^2=2 Theta^[2]` Gysin factor.  Thus every one-step universal
+Chern/`pi_3` construction, including the Ext-diagonal factorization, still
+acts through `2 End`; even cubic projectors return to the already closed
+tautological `(2,4)` wall.  This does not prove that every algebraic
+correspondence is even, but it forces any success to be iterated or genuinely
+non-tautological.  See
+`notes/2026-08-11-c904-universal-pi3-gamma-parity.md`.
+
+The intrinsic charge-three RSC flank also has an exact geometry boundary.
+The degree-fifteen `D_{3,3}` projective lines are contracted when the
+incidence is forgotten, so they are not curves on the Abel--Jacobi fourfold;
+the Hecke lines cover only its boundary divisor.  Voisin's projected residual
+curves are the sole live intrinsic family, and the sources prove only a
+one-point sweeping/MRC statement, not dominant rationally connected
+two-point evaluation, free-chain geometry, or a very twisting surface.
+There is also no published smooth proper polarized family to which the
+surface theorem can presently be applied.  Any RSC revival must begin by
+computing the tangent/normal splitting of those residual curves.  See
+`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md`.
+
+The highest-EV adjacent crown is consequently the intrinsic `p`-typical
+classification of the divisor-product defect itself.  The regular-primary
+minimal-curve problem is now reduced exactly to mixed cofactors of the
+congruence centralizer.  Its first carry is the truncated de Rham/necklace
+ghost differential `d(u^n)=n u^(n-1) du`, whose `p`-exponent is
+`p^floor(log_p h)`; the sole remaining theorem is an integral
+open-chain/marked-cycle straightening lemma, including Frobenius-unit,
+bilinear-type, and unramified-descent control.  A new independently replayed
+regular nilpotent sixfold proves that the eventual theorem must be graded:
+its minimal-curve defect is four but its top divisor-product index is eight.
+Uniformly, the graded orders satisfy `d_(k+1) | (k+1)d_k`, and this example
+realizes the new dyadic factor sharply.  See
+`notes/2026-08-11-c904-regular-primary-ghost-bridge-reduction.md` and
+`notes/2026-08-11-c904-regular-primary-degree-sensitive-defect.md`.
+
+The tempting final shortcut through ordinary Hochschild or cyclic homology is
+also closed.  The canonical cyclic shadow is only the Connes `B=d` edge of the
+two-periodic diagonal resolution of the truncated Frobenius algebra: under
+the Frobenius identification the commutator is multiplication by `y-x`, its
+companion is `(y^h-x^h)/(y-x)`, and diagonal restriction gives the Euler
+element `h u^(h-1)`.  The actual cofactor lattice is much larger than this
+cyclic quotient.  The first unresolved theorem is precisely that the cyclic
+readout descends through every signed square-switch/three-term Pluecker
+relation with arbitrary Frobenius labels and closed-loop contractions, and
+then remains primitive after unramified descent.  Thus “identify the whole
+quotient with cyclic homology” is a dead route; proving this Pluecker descent
+is the sharpened crown gate.  See
+`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md`.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

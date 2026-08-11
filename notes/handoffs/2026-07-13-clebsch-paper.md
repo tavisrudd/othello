@@ -707,6 +707,22 @@ shows why geometric RC alone is insufficient.  See
 `notes/2026-08-11-c904-bdgf-symmetric-theta-descent.md`, and
 `notes/2026-08-11-c904-bdgf-theta-and-full-ns-p15-audit.md`.
 
+The standard universal-family and explicit charge-three versions of those
+two exits are now closed to one sharper boundary.  The cubic middle projector
+is integral at two, but the `(5,3)` component of every one-step integral
+universal Chern construction retains either the gamma-filtration factor two
+or the independent `Theta^2=2 Theta^[2]` Gysin factor; the Ext diagonal does
+not remove it.  On the geometric side, the degree-fifteen `D_{3,3}` lines are
+contracted on the Abel--Jacobi fourfold and the Hecke lines remain in its
+boundary.  Only Voisin's projected residual curves remain plausible for RSC,
+and their tangent/normal splitting, two-point evaluation, very-twisting
+surface, and proper polarized ambient family are all absent.  Thus the direct
+C904 gate is now genuinely non-tautological correspondence geometry or a new
+analysis of those residual curves, not another universal-Chern or visible-line
+calculation.  See
+`notes/2026-08-11-c904-universal-pi3-gamma-parity.md` and
+`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md`.
+
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
 Kunneth classes prevent that from computing the unordered-theta index, and
@@ -796,6 +812,33 @@ smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
 `notes/2026-08-10-c904-hecke-pentad-log-boundary.md`,
 `notes/2026-08-10-c904-adjacent-annals-uniform-theorems.md`, and
 `notes/2026-08-11-c904-semisimple-graph-slope-primitivity.md`.
+
+That adjacent crown now has an exact local model and a necessary correction.
+For a cyclic-primary block, the graph minimal-curve defect is the order of the
+principal element in the mixed-cofactor lattice of the congruence centralizer.
+The commutator carry reduces to the truncated de Rham/necklace ghost relation
+`d(u^n)=n u^(n-1)du`, with exact exponent
+`p^floor(log_p h)`.  Proving the regular-primary formula is equivalent to one
+explicit integral open-chain/marked-cycle straightening lemma, including
+Frobenius-unit and unramified-descent control.  The full invariant is not one
+scalar: a new independently replayed indecomposable dyadic sixfold has
+minimal-curve order four but top divisor-product index eight.  Its graded
+orders meet the universal recurrence `d_(k+1) | (k+1)d_k` sharply.  Hence an
+Annals-scale result must classify the graded carry-enhanced complex, not only
+the distinguished ghost exponent.  See
+`notes/2026-08-11-c904-regular-primary-ghost-bridge-reduction.md`,
+`notes/2026-08-11-c904-witt-ghost-exponent-source-audit.md`, and
+`notes/2026-08-11-c904-regular-primary-degree-sensitive-defect.md`.
+
+The open-chain quotient is not literally the Hochschild or cyclic complex.
+Its exact standard part is the Connes `B=d` edge of the two-periodic diagonal
+resolution, with diagonal Euler element `h u^(h-1)`.  The remaining new step
+is descent of the cyclic readout through signed square-switch/three-term
+Pluecker relations, including arbitrary Frobenius labels, closed-loop
+contractions, and primitive unramified descent.  The full mixed-cofactor
+quotient is strictly larger, so ordinary cyclic-homology identification is a
+dead path.  See
+`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md`.
 
 C898 is complete. Its sealed reviewer dossier, five independent cold reads,
 synthesis, and adopted remediation produced Paper I authority commit `c8438909`
