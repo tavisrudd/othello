@@ -1,0 +1,7 @@
+degree 1: monomials=4 invariant_dim=3
+degree 2: monomials=14 invariant_dim=10
+degree 3: monomials=40 invariant_dim=26
+obvious degree-3 span rank=26
+all degree-3 invariant rank=26
+rank after adjoining all invariants=26
+residual invariant quotient dimension=0

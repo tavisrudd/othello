@@ -1,0 +1,8 @@
+C904 universal determinant divisor invariant audit
+rank NS(J)=15; rank NS(J)^A5=1
+NS(J)^A5=Z*Theta and Theta is primitive: PASS
+H^2(J,Z)^A5=Z*Theta integrally: PASS
+integral degree-one twist kernel basis=[(1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 3, -2)]
+reduction maps integral twist kernel onto full mod-2 invariant space: PASS
+on M, H^2(M,Z)=f^*H^2(J,Z) direct_sum Z*e; hence <h,e> is saturated
+PASS

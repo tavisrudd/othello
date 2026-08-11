@@ -1,0 +1,14 @@
+C904 residual C3 descent scope audit
+columns: dim, fixed, rank(norm), ker(norm), rank(g-1), H1
+  J[2]: (10, 0, 0, 10, 10, 0)
+  Alt^2 J[2] = H^2(J,F2): (45, 25, 25, 20, 20, 0)
+  NS(J)/2 (actual rank-15 divisor lattice): (15, 15, 15, 0, 0, 0)
+  Br(J)[2] = H^2/(NS/2): (30, 10, 10, 20, 20, 0)
+  exotic gluing graph heart H_graph: (4, 0, 0, 4, 4, 0)
+  Rosati norm-square defect Q(R): (4, 4, 4, 0, 0, 0)
+quadratic-refinement torsors checked=15; fixed points=15 unique
+graph heart: fixed-free C3 action omega^2
+Rosati defect heart: trivial C3 action (same A5 module, different C3 module)
+common twist-plus-sign cusp widths=(2, 2, 6, 6)
+all four local parabolics act trivially on mod-2 theta data
+PASS

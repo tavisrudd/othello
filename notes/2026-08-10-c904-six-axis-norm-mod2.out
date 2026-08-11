@@ -1,0 +1,12 @@
+C904 six D5 norm mod-2 audit
+  principal basis denominator=6
+  principal symplectic determinant=1
+  norm identities: N_i^2=5N_i; N_iN_jN_i=N_i; sum N_i=6I
+  mod2 rank histogram={0: 2, 2: 12, 4: 30, 6: 20}
+  invertible combinations=0
+  maximum mod2 rank=6; witnesses=20
+  max-rank bitsets=000111,001011,001101,001110,010011,010101,010110,011001,011010,011100,100011,100101,100110,101001,101010,101100,110001,110010,110100,111000
+  Fano divisor-cut degree ideals=(2, 2, 2, 2, 2, 2) (including C_s.F_H=10)
+  D5-fixed divisor-cut degree ideals=(10, 10, 10, 10, 10, 10) (primitive axis channel)
+  graph-transpose alone has wrong codimension; incidence cut induces 2*i_H
+PASS
