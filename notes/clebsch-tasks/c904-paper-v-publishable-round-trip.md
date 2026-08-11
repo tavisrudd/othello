@@ -374,6 +374,18 @@ fibrewise, and C907 owns the second.  This is a strong separation between
 universal `CH_0`-triviality and one-step stable rationality.  Do **not**
 upgrade it to full stable irrationality without a separate C907 theorem.
 
+The cross-lane proof bridge is now independently GO after one invariant
+correction.  Attach to each maximal big-quantum atom the additive multiplicity
+\(\nu_6\) of primitive sixth-root formal-monodromy eigenvalues, rather than a
+Boolean exponent flag.  Cai's cubic zero atom has \(\nu_6=2\); the projective
+bundle formula puts it in \(X\times\mathbf P^1\) with coefficient two.  The
+chemical formula is free abelian on atom classes, and every
+weak-factorization center has dimension at most two and \(\nu_6=0\), so
+cancellation is impossible.  Flatness preserves the formal-monodromy
+characteristic polynomial along each connected reduced unramified spectral
+component.  See the C904/C907 enhanced-atom bridge blueprint and the
+one-step-stabilization red-team note.
+
 ### Thirteenth-pass degree-fifteen and two-equivalence theorem
 
 The midnight closeout replaces the last unstructured charge-three curve by

@@ -817,6 +817,15 @@ smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
 `notes/2026-08-10-c904-adjacent-annals-uniform-theorems.md`, and
 `notes/2026-08-11-c904-semisimple-graph-slope-primitivity.md`.
 
+The C904+C907 theorem bridge is independently GO after replacing the Boolean
+sixth-root flag by the additive primitive-sixth-root formal-monodromy
+multiplicity \(\nu_6\).  Cai's cubic atom has multiplicity two,
+projective-bundle persistence contributes it with coefficient two, and every
+fourfold weak-factorization center has dimension at most two and multiplicity
+zero.  Flatness makes the formal-monodromy characteristic polynomial constant
+along the connected atom.  The exact proof is in the C904/C907 enhanced-atom
+bridge blueprint and the one-step-stabilization red-team note.
+
 That adjacent crown now has an exact local model and a necessary correction.
 For a cyclic-primary block, the graph minimal-curve defect is the order of the
 principal element in the mixed-cofactor lattice of the congruence centralizer.

@@ -28,36 +28,36 @@ Fix the parity group \(G=\boldsymbol\mu_2\), with its nontrivial element acting
 on \(H^i\) by \((-1)^i\). Work on the \(G\)-fixed, hence even-bulk, base of
 the maximal A-model \(F\)-bundle.
 
-For a geometric \(G\)-atomic \(F\)-bundle \(\mathcal A\), define
+For a geometric \(G\)-atomic \(F\)-bundle \(\mathcal A\), let
 
 \[
-\operatorname{Frac}(\mathcal A)
-\subset \mathbf Q/\mathbf Z
+\operatorname{Mon}(\mathcal A)
 \]
 
-to be the multiset of fractional powers \(\rho\bmod\mathbf Z\) in its
-Levelt--Turrittin formal solutions after removing the exponential factors.
-Equivalently, retain the corresponding eigenvalues
-\(\exp(2\pi i\rho)\) of formal monodromy.
+be the multiset of eigenvalues in \(\mathbf C^\times\) of formal monodromy
+after Levelt--Turrittin exponential separation.  This definition makes sense
+for every atom and avoids choosing logarithms or assuming rational exponents.
 
-Only the following boolean enhancement is needed:
+Use the additive integer
 
 \[
-\varepsilon_6(\mathcal A)=1
-\quad\Longleftrightarrow\quad
-\operatorname{Frac}(\mathcal A)
-\text{ contains }1/6\text{ or }-1/6.
+\nu_6(\mathcal A)
+=\#\{\zeta\in\operatorname{Mon}(\mathcal A):
+       \zeta=e^{\pi i/3}\text{ or }e^{-\pi i/3}\},
 \]
 
-Using formal-monodromy eigenvalues rather than chosen powers removes every
-integer-shift ambiguity.
+counted with algebraic multiplicity.  Formal-monodromy eigenvalues remove
+every integer-shift ambiguity, and multiplicity rather than a Boolean flag is
+required because the chemical formula lives in a free abelian group on atom
+classes.  Extend \(\nu_6\) linearly to that free abelian group.
 
 ## Paper-local invariance lemma
 
 The one bridge not stated verbatim in the sources should be printed and proved.
 
-> **Formal-exponent lemma.** The multiset
-> \(\operatorname{Frac}(\mathcal A)\) is invariant under:
+> **Formal-monodromy lemma.** The multiset
+> \(\operatorname{Mon}(\mathcal A)\), and hence \(\nu_6(\mathcal A)\), is
+> invariant under:
 >
 > 1. isomorphism of \(F\)-bundle germs;
 > 2. regular formal gauge transformations;
@@ -73,13 +73,15 @@ Proof sketch:
 - A regular gauge conjugates formal monodromy.
 - Multiplication by \(u^N\), with integral \(N\), shifts exponents by integers.
 - A base change independent of \(u\) does not change the loop variable.
-- Flatness in the bulk directions makes the family isomonodromic on a
-  connected spectral component.
+- After exponential separation, flatness in a bulk direction \(s\) gives
+  \(\partial_sR=[\Gamma_s(0),R]\) for the regular-singular residue.  Hence
+  the characteristic polynomial of \(\exp(2\pi iR)\) is constant on a
+  connected reduced unramified spectral component.
 - Formal monodromy of a direct sum is the disjoint union of the two spectra.
 
 This is a standard formal-connection fact, but printing the five-line proof
-prevents a referee from having to infer that a numerical exponent survives
-the KKPYY atom equivalences.
+prevents a referee from having to infer that the monodromy multiplicity
+survives the KKPYY atom equivalences.
 
 ## Exact source clauses
 
@@ -118,8 +120,13 @@ Thus Cai's rank-two even block lies inside the zero spectral atom
 \(\alpha_X\), and
 
 \[
-\varepsilon_6(\alpha_X)=1.
+\nu_6(\alpha_X)=2.
 \]
+
+Here Cai's big connection and KKPYY's maximal A-model \(F\)-bundle are the
+same scalar-extended big-quantum connection on the parity-fixed base; the
+atom comparison preserves the loop variable \(u\).  This identification,
+rather than the small-connection calculation alone, is load-bearing.
 
 The odd \(H^3(X)\) part may lie in the same zero atom. This causes no problem:
 the argument needs only the presence of the sixth-root eigenvalues in its even
@@ -145,7 +152,7 @@ Use the following exact clauses:
   \(F\)-bundle, compatibly with disjoint unions, blowups, and projective
   bundles.
 
-These clauses are enough to attach the formal-exponent lemma to an atom. The
+These clauses are enough to attach the formal-monodromy lemma to an atom. The
 André-motive, Tannakian, Hodge-polynomial, pairing, and integral-lattice
 enhancements in the rest of the paper are not needed.
 
@@ -165,8 +172,15 @@ For the trivial rank-two bundle on \(X\),
 X\times\mathbf P^1=\mathbf P_X(\mathcal O_X^{\oplus2}),
 \]
 
-so its chemical formula contains \(\alpha_X\) with multiplicity two. In
-particular, \(\varepsilon_6(\alpha_X)=1\) survives stabilization.
+so its chemical formula contains \(\alpha_X\) with multiplicity two.  In
+particular, the product formula contributes
+\(2\nu_6(\alpha_X)=4\), so the sixth-root multiplicity survives
+stabilization with positive coefficient.
+
+This coefficient cannot cancel in weak factorization.  The chemical formula
+takes values in the free abelian group on atom classes; projectivization gives
+coefficient \(+2\), while every center occurring in a fourfold weak
+factorization has dimension at most two and therefore has \(\nu_6=0\).
 
 The C907 Fourier calculation of the small connection gives the same answer:
 the \(\mathbf P^1\) factor has integral exponent zero, so tensoring preserves
@@ -204,8 +218,8 @@ Proof:
    by point blowups. KKPYY Theorem 4.5, or Proposition 5.22(2), adds only
    point atoms.
 
-Therefore no atom represented in dimension at most two has
-\(\varepsilon_6=1\).
+Therefore every atom represented in dimension at most two has
+\(\nu_6=0\).
 
 Hypotheses used in Claim 6.15:
 
@@ -235,22 +249,23 @@ Its proof is exactly the needed weak-factorization ledger:
   point atoms.
 
 For \(Y=X\times\mathbf P^1\), \(d=4\). The atom \(\alpha_X\) occurs in
-\(\operatorname{CFF}_G(Y)\), has \(\varepsilon_6=1\), and by the
-low-dimensional lemma cannot be represented in dimension at most two.
+\(\operatorname{CFF}_G(Y)\) with coefficient two and has
+\(\nu_6(\alpha_X)=2\), while the low-dimensional lemma gives
+\(\nu_6=0\) for every atom represented in dimension at most two.
 Proposition 5.17 gives the contradiction.
 
 ## Complete proof spine
 
 The publishable proof can be displayed in five lines:
 
-1. Cai Proposition 6 gives \(\varepsilon_6(\alpha_X)=1\) on the cubic zero
+1. Cai Proposition 6 gives \(\nu_6(\alpha_X)=2\) on the cubic zero
    atom identified in KKPYY Example 6.21.
 2. KKPYY Theorem 4.11 / Proposition 5.22(3) puts two copies of
    \(\alpha_X\) in \(X\times\mathbf P^1\).
 3. KKPYY Claim 6.15, surface classification, and the projective-bundle and
    point-blowup formulas show that every atom of dimension at most two has
    only \(0\) or \(1/2\) fractional powers.
-4. The paper-local formal-exponent lemma shows the sixth-root signature is
+4. The paper-local formal-monodromy lemma shows the sixth-root multiplicity is
    invariant under all atom equivalences.
 5. KKPYY Proposition 5.17 with \(d=4\) proves
    \(X\times\mathbf P^1\) irrational.
@@ -262,7 +277,7 @@ The publishable proof can be displayed in five lines:
 A self-contained special-case proof can define only:
 
 - the zero spectral component of the maximal A-model \(F\)-bundle;
-- its fractional formal-monodromy spectrum;
+- its formal-monodromy eigenvalue spectrum;
 - the chemical-formula identities for a blowup and a projective bundle.
 
 Then repeat the one-paragraph proof of Proposition 5.17 for a weak
@@ -276,7 +291,7 @@ This avoids:
 - pairings, Serre operators, and Gamma-integral enhancements;
 - all higher-dimensional carrier analysis.
 
-In practice the paper should state the formal-exponent lemma and the
+In practice the paper should state the formal-monodromy lemma and the
 low-dimensional lemma, then cite KKPYY Theorems 4.5 and 4.11 for the two
 chemical-formula identities.
 
@@ -308,7 +323,7 @@ language.
 | Big/maximal A-model \(F\)-bundle, not only small quantum cohomology | atom and birational formulas | Cai upgrades to big; KKPYY works maximally |
 | Parity-equivariant theory \(G=\mu_2\) | even-bulk base and odd/even surface split | available in KKPYY framework |
 | Cubic zero spectral component does not split locally | identifies \(\alpha_X\) | KKPYY Example 6.21 |
-| Formal exponent is invariant under regular/integer-power gauges and atom transport | distinguishes \(\alpha_X\) | print the paper-local lemma |
+| Formal monodromy is invariant under regular/integer-power gauges and atom transport | distinguishes \(\alpha_X\) | print the paper-local lemma |
 | Projective-bundle decomposition for the trivial rank-two bundle | \(X\times\mathbf P^1\) | KKPYY Theorem 4.11 / Proposition 5.22(3) |
 | Surface MMP/classification over \(\mathbf C\) | exhausts surfaces | classical |
 | \(K_S\) nef in the non-ruled minimal case | surface spectrum | KKPYY Claim 6.15 |
