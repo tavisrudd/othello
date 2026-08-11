@@ -1,0 +1,8 @@
+PASS C904 A4 frame parity obstruction
+A4-fixed Hom dimension: 1
+primitive map rank: 3; mod-2 rank: 3
+Winger/cubic frame scalar: 12/5
+odd rational normalization: (5/2)B gives scalar 15
+target p=2 Smith data: (1,6,6,6,6); maximal gluing dimension: 4
+half-integral odd image dimension: 3*2=6 > 4
+conclusion: every integral five-map frame multiplier is even

@@ -214,6 +214,46 @@ is \(D_{3,3}\): decide the integral descent lattice for
 may or may not halve the sharp ordered degree two.  No manuscript or Lean
 source changed.
 
+### Current dead-path ledger
+
+The following routes are closed and must not be revived without genuinely new
+input.
+
+- **Charge-two Brauer class on the charge-three fibre:** dead.  The Faenzi
+  Hecke conic is the splitting variety of the charge-two class, and its
+  function field is the function field of the generic charge-three boundary
+  divisor.  Hence the inherited class vanishes on that divisor; treating the
+  ordering cover as a residue would make a new class ramified, not produce the
+  required unramified obstruction.
+- **Poincare-cubic/Fano bypass:** dead.  The canonical divided-power lift of
+  \(P^3/3!\) restricts to the Fano surface with scalar \(4\), so the resulting
+  cubic correspondence induces \(\pm4\operatorname{Id}\), not the identity.
+  More generally, a minimal \(d\)-fold in a principally polarized
+  \(g\)-fold gives scalar \(\binom{g-1}{d-1}\); in dimension five every
+  proper intermediate carrier is even.  This is the Pascal-parity wall.
+- **Natural Fano, genus-two, and divisor-generated theta carriers:** dead at
+  the odd gate.  Saturating the full natural Neron--Severi lattices does not
+  break parity; the genus-two surfaces have restricted polarization type
+  \((2,2)\), and the exact theta-resolution relation is \(2a=z+\ell\).
+- **Numerical ordered-pair tests:** insufficient in principle.  The unique odd
+  numerical monomial does not decide whether the ordering double cover is
+  connected.  The missing datum is the Picard-valued determinant
+  \(\eta\in\operatorname{Pic}^0(C)[2]\), invisible to degrees and intersection
+  numbers.
+
+- **Winger `A4` five-frame:** dead at the integral gate.  With the actual
+  twin-simplex polarizations its five conjugates have rational frame scalar
+  `12/5`, whose smallest odd normalization is `15` via the scale `5/2`.
+  The primitive rank-three map has mod-two rank three, so the half-scaled
+  elliptic map has six-dimensional mod-two image; no principal cubic gluing
+  can absorb it because its maximal isotropic has dimension four.  This rules
+  out every classical and exotic gluing at once.
+
+The intrinsic \(D_{3,3}/\operatorname{Sym}^2\Theta\) route is now the sole
+live odd-carrier architecture.  It asks for a primitive non-Lefschetz Chow
+class, or an exact proof that its generic index is two.  No manuscript or
+Lean source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

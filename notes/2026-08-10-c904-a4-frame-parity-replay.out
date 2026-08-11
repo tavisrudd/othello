@@ -1,0 +1,3 @@
+PASS C904 A4 frame parity independent Sage replay
+fixed=1 rank=3 mod2-rank=3 frame=12/5 odd-normalization=15
+half-integral odd image dimension 6 exceeds gluing dimension 4
