@@ -85,7 +85,7 @@ complex as separate victories.
   exact stabilizer pairs. The two cubics occupy one invariant pencil, and
   the normalized outer difference gives an exact oriented round trip once a
   chordal companion is selected.
-  [The Golden Companion Correspondence](../clebsch-round-trip/golden_companion_reconstruction.pdf).
+  [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf).
 
 ### Coding theory and quantum information
 
@@ -150,7 +150,7 @@ boundary, and reproducible entry points.
 | *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
-| *The Golden Companion Correspondence* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../clebsch-round-trip/golden_companion_reconstruction.pdf) |
+| *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -289,9 +289,9 @@ reconstruction counterpart to the earlier Clebsch recognition work.
 
 ---
 
-#### V — The Golden Companion Correspondence
+#### V — Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor
 
-[PDF](../clebsch-round-trip/golden_companion_reconstruction.pdf)
+[PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf)
 
 **Standout result.** The Paper-II signed cubic is a chordal Hankel companion,
 not the conference cubic of Papers I and III. Its singular quartic recovers

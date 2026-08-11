@@ -207,10 +207,10 @@ paper_ids = ["clebsch_rigidity", "clebsch_rigidity_companion"]
 disposition = "active"
 
 [[repository]]
-name = "golden-companion-correspondence"
+name = "chordal-conference-reconstruction"
 include_release_pdfs = true
-source = "papers/clebsch-round-trip"
-paper_ids = ["golden_companion_correspondence"]
+source = "papers/chordal-conference-reconstruction"
+paper_ids = ["chordal_conference_reconstruction"]
 disposition = "active"
 
 [[repository.rewrite]]

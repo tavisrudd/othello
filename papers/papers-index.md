@@ -118,7 +118,7 @@ F13*)
 - *Boundary:* Paper IV does not own the through-eight or all-`k` conic-filling classification.
   It cites Paper I for motivation and becomes the canonical home of the full q13 code proof.
 
-**Clebsch fifth paper · `clebsch-round-trip`** — *The Golden Companion Correspondence*
+**Clebsch fifth paper · `chordal-conference-reconstruction`** — *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor*
 - *Status:* complete 11-page manuscript with a paper-owned exact checker;
   claim-specific literature closure and isolated cold-referee review remain
   open before release.

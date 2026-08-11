@@ -205,9 +205,9 @@ main = "clebsch_rigidity_computational_companion.tex"
 lane = "clebsch"
 
 [[paper]]
-id = "golden_companion_correspondence"
-dir = "papers/clebsch-round-trip"
-main = "golden_companion_reconstruction.tex"
+id = "chordal_conference_reconstruction"
+dir = "papers/chordal-conference-reconstruction"
+main = "chordal_conference_reconstruction.tex"
 lane = "clebsch"
 
 [[paper]]
