@@ -193,7 +193,9 @@ Define the exact groupoids of marked conference, chordal, and incidence
 packages, including their permitted switching and coordinated relabelling.
 The three reconstruction functors factor through the groupoid of marked
 carriers \(\mathscr G\) and induce equivalences onto their declared image
-subgroupoids.
+subgroupoids. Characterize those essential images by intrinsic equations and
+stabilizer conditions rather than defining them to be the images of the
+functors.
 
 #### Theorem V.B: structural bridge
 
@@ -314,13 +316,21 @@ The series supplies the finite input and provenance, not a prerequisite.
 > Hence universal \(CH_0\)-triviality does not imply rationality after one
 > stabilization, even in a non-isotrivial family of smooth cubic threefolds.
 
-State separately the broader strengthening:
+Give equal main-theorem status to the independent strengthening:
 
 > For every smooth cubic threefold \(X\), the fourfold
 > \(X\times\mathbf P^1\) is irrational.
 
-The universal theorem supports the family punchline; it should not displace it
-from the title, abstract, or theorem order.
+The clean theorem order is:
+
+1. irrationality survives one stabilization for every smooth cubic;
+2. the exotic carrier family is universally \(CH_0\)-trivial;
+3. therefore its stabilized fourfolds are simultaneously universally
+   \(CH_0\)-trivial and irrational.
+
+The combined family remains the title and conceptual corollary, but the
+stronger every-cubic theorem must not be buried to preserve the series
+narrative.
 
 ### Theorem E.A: canonical integral envelope
 
@@ -350,6 +360,19 @@ finite-to-integral handoff at the level of an abstract rational symplectic
 space and reference lattice; it is not inferred from reduction modulo eleven.
 No claim is made that reduction modulo eleven uniquely determines an abelian
 variety or principal polarization.
+
+The six-set alone is not enough: it is the classical set \(A_5/D_5\) already
+visible in the cubic geometry. Prove an orientation-comparison theorem sending
+the marked golden orientation/plane of Paper V to a choice of generator in
+
+\[
+\operatorname{End}_{A_5}(H_2)=\mathbf F_4.
+\]
+
+Reversing the golden orientation must act by Frobenius and exchange
+\(\omega\) with \(\omega^2\). This is the nontrivial series-specific datum
+that selects one exotic sheet; without it the integral-envelope construction
+would use only a classical six-set and Paper V would be dispensable.
 
 ### Theorem E.B: exotic cubic period realization
 
@@ -556,40 +579,44 @@ The epilogue should close with:
 1. The marked object lists every retained choice and quotient symmetry.
 2. The source, target, and carrier groupoids have explicit gauge morphisms and
    stabilizers.
-3. Every map from Papers I--III lands in the carrier groupoid.
-4. The \(q-1\) bridge has a human nonvanishing and normalization proof.
-5. Both composites carry natural isomorphisms satisfying the triangle
+3. Their essential images have intrinsic characterizations rather than
+   definitions by image.
+4. Every map from Papers I--III lands in the carrier groupoid.
+5. The \(q-1\) bridge has a human nonvanishing and normalization proof.
+6. Both composites carry natural isomorphisms satisfying the triangle
    identities.
-6. The finite output interface recovers only the oriented six-set,
+7. The finite output interface recovers only the oriented six-set,
    augmentation lattice, and golden plane.
-7. No theorem depends on a computation or certificate.
-8. Paper IV is not assigned an unproved carrier bridge.
+8. No theorem depends on a computation or certificate.
+9. Paper IV is not assigned an unproved carrier bridge.
 
 ### Geometric epilogue
 
 1. The canonical integral-envelope theorem makes the finite-to-integral
    series connection causal.
-2. The cubic axes realize that exact envelope with polarization \(6I-J\).
-3. The period-map theorem states its exact strength: landing,
+2. The orientation-comparison theorem identifies V's golden orientation with
+   the \(\mathbf F_4\) generator and exchanges the exotic pair under reversal.
+3. The cubic axes realize that exact envelope with polarization \(6I-J\).
+4. The period-map theorem states its exact strength: landing,
    image-normalization, and generic degree are not conflated.
-4. The exotic cubic family is proved non-isotrivial.
-5. Minimal-class integrality follows from the local structural theorem and an
+5. The exotic cubic family is proved non-isotrivial.
+6. Minimal-class integrality follows from the local structural theorem and an
    explicit geometric local-chart lemma, with correct factorial and
    off-diagonal normalizations.
-6. Voisin is applied only at the fixed-fibre strength supplied by the source.
-7. The enhanced atom invariant is defined on the actual equivalence relation
+7. Voisin is applied only at the fixed-fibre strength supplied by the source.
+8. The enhanced atom invariant is defined on the actual equivalence relation
    used in weak factorization.
-8. The formal-isomonodromy and Cai-to-maximal-block identifications are
+9. The formal-isomonodromy and Cai-to-maximal-block identifications are
    printed.
-9. The low-dimensional center theorem covers every point, curve, and surface
+10. The low-dimensional center theorem covers every point, curve, and surface
    center that can occur for a fourfold.
-10. The no-cancellation step uses the additive enhanced-atom group, not an
+11. The no-cancellation step uses the additive enhanced-atom group, not an
    informal block count.
-11. The manuscript says "irrational after one stabilization," never "stably
+12. The manuscript says "irrational after one stabilization," never "stably
    irrational."
-12. The special quantum argument is sufficiently self-contained to withstand
+13. The special quantum argument is sufficiently self-contained to withstand
    the recency of its two source pillars.
-13. A claim-specific priority audit supports the family separation theorem and
+14. A claim-specific priority audit supports the family separation theorem and
     the every-cubic strengthening separately.
 
 ## Drafting order
@@ -599,18 +626,19 @@ The epilogue should close with:
 3. Prove the natural triangle identities and finite output interface.
 4. Freeze Paper V at 16--22 pages with no computational proof dependency.
 5. In the epilogue, prove the canonical integral-envelope theorem.
-6. Freeze the exact period-image normalization and generic-degree theorem.
-7. Replace the minimal-class certificate by the primewise structural proof and
+6. Prove the golden-orientation/\(\mathbf F_4\)-generator comparison.
+7. Freeze the exact period-image normalization and generic-degree theorem.
+8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
-8. Write the fixed-fibre Voisin application and quarantine all relative-cycle
+9. Write the fixed-fibre Voisin application and quarantine all relative-cycle
    material.
-9. Write the \(\nu_6\) special-case bridge, surface theorem, and weak-factorization
+10. Write the \(\nu_6\) special-case bridge, surface theorem, and weak-factorization
    no-cancellation proof.
-10. Obtain an independent quantum/\(F\)-bundle review.
-11. Freeze the epilogue theorem, title, and priority statement.
-12. Only then coordinate forward-version perspective figures, conclusions,
+11. Obtain an independent quantum/\(F\)-bundle review.
+12. Freeze the epilogue theorem, title, and priority statement.
+13. Only then coordinate forward-version perspective figures, conclusions,
     and references across Papers I--V.
-13. Run separate literature, referee, and release gates for Paper V and the
+14. Run separate literature, referee, and release gates for Paper V and the
     epilogue; their claims and likely reviewers are materially different.
 
 ## Position and contingency
