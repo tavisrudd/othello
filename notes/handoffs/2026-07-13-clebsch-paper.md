@@ -53,6 +53,15 @@ the `E_6` carrier, reversible only with a residue flag, with bottom fibres
 arithmetic-lift frontier remain literature-gated and were not promoted to any
 manuscript or Lean source.
 
+The research-only stable-rationality test C907 is closed in
+`../2026-08-10-c907-quantum-monodromy-stabilization.md`.  Cai's cubic
+rank-two quantum block is reconstructed exactly and stabilization by
+`P^m` gives `m+1` unchanged `+/-1/6` copies.  Coarse atom multiplicity cannot
+be the stable obstruction: universal two-sided self-carrier balances exist
+for every `m>=2`.  The surviving gate is a birationally functorial
+integer/Tate-filtered quantum atom; current integer-power gauges erase exactly
+that grading.  No result was promoted to Paper V or Lean.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.
