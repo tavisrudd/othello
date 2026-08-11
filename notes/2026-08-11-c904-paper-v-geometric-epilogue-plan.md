@@ -19,8 +19,8 @@ unnumbered, independently readable geometric epilogue.
   integral variation of Hodge structure.
 - **The geometric epilogue** begins with the missing finite-to-integral bridge:
   it constructs the canonical integral envelope of that oriented six-set,
-  classifies its principal gluings, and proves that the exotic gluing is
-  realized by the non-isotrivial \(A_5\)-cubic pencil. It then proves the
+  classifies its principal gluings, and proves that the exotic conjugacy class
+  is realized by the non-isotrivial \(A_5\)-cubic pencil. It then proves the
   separation theorem for
   \[
   Y_b=X_b\times\mathbf P^1:
@@ -94,7 +94,7 @@ The lower branch meets this diagram only through a structural theorem:
 \[
 \text{Paper IV conic reconstruction}
 \longrightarrow
-\text{\(\mathbf F_8\)-generator \(C_3\)-torsor}
+\text{\(\mathbf F_8\)-Frobenius-orbit \(C_3\)-torsor}
 \longrightarrow
 \text{residual cyclic-marking principle}.
 \]
@@ -177,11 +177,12 @@ argument needs its own proposition.
    the recovered Frobenius orbit \(\{\alpha,\alpha^2,\alpha^4\}\) forms a free
    \(C_3\)-torsor. Do not call this the set of all field generators: a finite
    field can have more than one Frobenius orbit of primitive elements.
-2. Verify and label which three minimum-word families are toric. Only after
-   that check may the manuscript assert that their Gram operators realize the
-   three Frobenius conjugates in some order. The repeated scalar on the
-   octahedral family must remain visible as the reason stabilizer data is
-   necessary.
+2. Optionally verify and label which three minimum-word families are toric.
+   Only after that check may the manuscript assert that their Gram operators
+   realize the three Frobenius conjugates in some order. This refinement is
+   not an integration gate: the hidden-field theorem already supplies the
+   torsor. If included, the repeated scalar on the octahedral family must
+   remain visible as the reason stabilizer data is necessary.
 3. Add one conclusion paragraph identifying this as the degree-three instance
    of residual marking after reconstruction.
 
@@ -275,17 +276,23 @@ PEL datum, principal polarization, or cubic realization.
 
 #### Theorem V.F: residual marking synthesis
 
-After the carrier has been reconstructed, the remaining named scalar,
-orientation, or sheet is naturally a finite cyclic torsor. In the upper branch
-this is the free \(C_2\)-torsor of golden orientations. In Paper IV it is the
-free \(C_3=\operatorname{Gal}(\mathbf F_8/\mathbf F_2)\)-torsor
-\(\{\alpha,\alpha^2,\alpha^4\}\) recovered from the hidden commutant field.
-The theorem compares their reconstruction profiles; it does not assert a
-common shadow functor, a common carrier, or a map between their geometries.
+Let \(\mathcal C\) be the unrigidified upper carrier groupoid and
+\(\widetilde{\mathcal C}\to\mathcal C\) its orientation-rigidified cover.
+Prove once that this is a principal \(C_2\)-torsor in groupoids. The three
+upper reconstruction functors are equivalences over \(\mathcal C\), and their
+marked versions are obtained by pulling back this one torsor. Thus the
+round-trip and marking assertions form one Cartesian diagram rather than a
+collection of pairwise sign checks.
+
+Paper IV supplies a parallel, but differently based, principal
+\(C_3=\operatorname{Gal}(\mathbf F_8/\mathbf F_2)\)-torsor
+\(\{\alpha,\alpha^2,\alpha^4\}\) recovered from its hidden commutant field.
+The theorem compares the two reconstruction profiles; it does not assert a
+common base groupoid, shadow functor, carrier, or map between their geometries.
 
 ### Structural proof compression
 
-All of Paper V should reduce to five reusable arguments:
+All of Paper V should reduce to six reusable arguments:
 
 1. **Marked-carrier groupoid lemma.** Package choices, gauge morphisms, and
    stabilizers once, rather than checking every pairwise map separately.
@@ -299,10 +306,11 @@ All of Paper V should reduce to five reusable arguments:
    chosen normalized representative.
 5. **Finite output lemma.** Recover the oriented six-set, augmentation lattice,
    and golden plane functorially, without claiming an integral Hodge lift.
-6. **Residual marking lemma.** Once the carrier is fixed, identify the remaining
-   cyclic ambiguity as a torsor under the appropriate Frobenius or outer action.
-   Paper V should cite Paper IV's degree-three instance rather than reproduce
-   its code or orbit census.
+6. **Rigidification-cover lemma.** Package the upper marked groupoid as one
+   principal \(C_2\)-cover of the unrigidified carrier groupoid and express all
+   upper equivalences as pullbacks of it. Paper V should cite Paper IV's
+   degree-three torsor as a parallel reconstruction profile rather than
+   reproduce its code or orbit census.
 
 One hand normalization may be printed for each scalar or sign. There should be
 no exhaustive matrix table and no phrase of the form "a computer calculation
@@ -335,10 +343,10 @@ reproved in V.
 4. The involution difference bridge -- 3 pages.
 5. Natural return maps and triangle identities -- 3--4 pages.
 6. Finite output interface -- 1--2 pages.
-7. Residual marking torsors, Paper IV, and the epilogue interface -- 2--3
-   pages.
+7. Residual rigidification torsors, Paper IV, and the epilogue interface --
+   1--2 pages.
 
-**Target:** 18--24 pages. A shorter paper is acceptable only if every groupoid
+**Target:** 17--22 pages. A shorter paper is acceptable only if every groupoid
 and normalization argument remains self-contained. If integral or arithmetic
 material pushes V past this range, move it to the epilogue.
 
@@ -423,8 +431,11 @@ space and reference lattice; it is not inferred from reduction modulo eleven.
 No claim is made that reduction modulo eleven uniquely determines an abelian
 variety or principal polarization.
 
-The six-set alone is not enough: it is the classical set \(A_5/D_5\) already
-visible in the cubic geometry. Let \(\mathscr O_{\mathrm{gold}}\) be the free
+The six-set is the classical set \(A_5/D_5\), already visible in the cubic
+geometry. The dependency audit must therefore state whether the golden plane,
+selected line, or orientation does any work beyond reconstructing that set;
+the series narrative must not assume the answer. Let
+\(\mathscr O_{\mathrm{gold}}\) be the free
 \(C_2\)-torsor of golden orientations recovered by Paper V, and let
 
 \[
@@ -432,21 +443,27 @@ visible in the cubic geometry. Let \(\mathscr O_{\mathrm{gold}}\) be the free
 \subset \operatorname{End}_{A_5}(H_2)=\mathbf F_4
 \]
 
-be the free Frobenius \(C_2\)-torsor of exotic gluings. Prove a coordinate-free
-equivariant isomorphism
+be the free Frobenius \(C_2\)-torsor of exotic gluings. Work in the groupoid of
+\(N\)-equivariant \(C_2\)-torsors, where \(N/A_5\simeq C_2\) is the identified
+outer-normalizer quotient. Prove that \(\mathscr O_{\mathrm{gold}}\) and
+\(\mathscr E_{\mathrm{ex}}\) define the same isomorphism class there by showing
+that both outer actions are nontrivial.
 
-\[
-\mathscr O_{\mathrm{gold}}\simeq\mathscr E_{\mathrm{ex}}
-\]
+Do not select a pointwise isomorphism unless a later marked statement truly
+needs one. Any two such isomorphisms differ by the deck involution. Formulate
+the geometric output as the unordered exotic conjugacy class and prove that
+the integral gluing, period image, minimal-class theorem, and cubic family are
+all equivariant under that deck action. Then the two choices give naturally
+isomorphic outputs, so no artificial basepoint calibration is load-bearing.
+Only a theorem naming one literal sheet would still require an intrinsic
+calibration.
 
-under the identified outer-normalizer quotient. One intrinsically defined,
-groupoid-natural calibration determines the isomorphism; a bare choice of
-basepoints does not. Named generators are proof coordinates, not theorem data.
-Explicitly prohibit the false shortcut obtained by reducing the
-integral golden order modulo two: \(t^2-5\equiv(t+1)^2\pmod2\), so this
-reduction is nonreduced and is not \(\mathbf F_4\). The torsor comparison, not
-ring reduction, is the nontrivial series-specific datum selecting one exotic
-sheet.
+This is an equality of equivariant torsor classes, not the vacuous assertion
+that two abstract free \(C_2\)-sets are isomorphic. It must retain the common
+outer-normalizer action. Also prohibit the false shortcut obtained by reducing
+the integral golden order modulo two:
+\(t^2-5\equiv(t+1)^2\pmod2\), so this reduction is nonreduced and is not
+\(\mathbf F_4\).
 
 State first the Frobenius--Schur descent lemma abstracted from Paper IV: a
 multiplicity-free Frobenius orbit of \(r\) absolutely simple binary
@@ -478,12 +495,13 @@ members have stabilizer exactly \(A_5\); at three, identify the selected
 monodromy line. Use the \(A_5\)-commutant of the mod-two heart and the
 polarization form, not a twenty-case census.
 
-The period map is nonconstant and lands in the exotic PEL sheet. For the
-publication-strength bridge, prove the stronger statement that the
-normalization of its image closure is the exotic PEL curve and that the cubic
-parameter map is generically finite of an explicitly stated degree. Do not
-claim an isomorphism of parameter lines or a Hauptmodul formula without the
-corresponding boundary theorem.
+The period map is nonconstant and lands in one member of the exotic conjugate
+PEL pair. For the publication-strength bridge, prove the stronger statement
+that the normalization of its image closure is the corresponding exotic PEL
+curve and that the cubic parameter map is generically finite of an explicitly
+stated degree. Prove that the deck-conjugate statement has the same degree and
+geometric consequences. Do not claim an isomorphism of parameter lines or a
+Hauptmodul formula without the corresponding boundary theorem.
 
 The proof should be structural:
 
@@ -500,7 +518,7 @@ required.
 
 ### Theorem E.C: structural primitive minimal class
 
-For the exotic principal gluing, the minimal class
+For either member of the exotic principal-gluing pair, the minimal class
 \[
 \frac{\Theta^4}{4!}
 \]
@@ -678,41 +696,48 @@ The epilogue should close with:
 1. The canonical integral-envelope theorem makes the finite-to-integral
    series connection causal.
 2. The orientation-comparison theorem identifies the golden and exotic free
-   \(C_2\)-torsors equivariantly through an intrinsic groupoid-natural
-   calibration, not an arbitrary basepoint choice; it does not identify
-   \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
-3. The cubic axes realize that exact envelope with polarization \(6I-J\).
-4. The period-map theorem states its exact strength: landing,
+   \(C_2\)-torsors as the same object up to isomorphism in the category of
+   outer-normalizer-equivariant torsors; it neither chooses an arbitrary
+   basepoint nor identifies \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
+3. Every later construction is deck-equivariant, so changing the torsor
+   isomorphism changes only the representative of the same exotic conjugacy
+   class.
+4. The cubic axes realize that exact envelope with polarization \(6I-J\).
+5. The period-map theorem states its exact strength: landing,
    image-normalization, and generic degree are not conflated.
-5. The exotic cubic family is proved non-isotrivial.
-6. Minimal-class integrality follows from the local structural theorem and an
+6. The exotic cubic family is proved non-isotrivial.
+7. Minimal-class integrality follows from the local structural theorem and an
    explicit geometric local-chart lemma, with correct factorial and
    off-diagonal normalizations.
-7. Voisin is applied only at the fixed-fibre strength supplied by the source.
-8. The enhanced atom invariant is defined on the actual equivalence relation
+8. Voisin is applied only at the fixed-fibre strength supplied by the source.
+9. The enhanced atom invariant is defined on the actual equivalence relation
    used in weak factorization.
-9. The formal-isomonodromy and Cai-to-maximal-block identifications are
+10. The formal-isomonodromy and Cai-to-maximal-block identifications are
    printed.
-10. The low-dimensional center theorem covers every point, curve, and surface
+11. The low-dimensional center theorem covers every point, curve, and surface
    center that can occur for a fourfold.
-11. The no-cancellation step uses the additive enhanced-atom group, not an
+12. The no-cancellation step uses the additive enhanced-atom group, not an
    informal block count.
-12. The manuscript says "irrational after one stabilization," never "stably
+13. The manuscript says "irrational after one stabilization," never "stably
    irrational."
-13. The special quantum argument is sufficiently self-contained to withstand
+14. The special quantum argument is sufficiently self-contained to withstand
    the recency of its two source pillars.
-14. A claim-specific priority audit supports the family separation theorem and
+15. A claim-specific priority audit supports the family separation theorem and
     the every-cubic strengthening separately.
+16. A dependency table states exactly which epilogue theorem uses the six-set,
+    golden plane, selected chordal line, and orientation; unused markings are
+    not described as causally necessary.
 
 ## Drafting order
 
 1. Freeze the exact marked object and structural theorem packet for Paper V.
 2. Rewrite every Paper V transport as a functor through the carrier groupoid.
 3. Prove the natural triangle identities and finite output interface.
-4. Freeze Paper V at 18--24 pages with no computational proof dependency.
+4. Freeze Paper V at 17--22 pages with no computational proof dependency.
 5. In the epilogue, prove the canonical integral-envelope theorem.
-6. Prove Frobenius--Schur descent, then the equivariant isomorphism between the
-   golden-orientation and exotic-gluing \(C_2\)-torsors.
+6. Prove Frobenius--Schur descent, identify the golden and exotic torsor
+   classes equivariantly, and prove deck-equivariance of every downstream
+   construction.
 7. Freeze the exact period-image normalization and generic-degree theorem.
 8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
@@ -731,8 +756,8 @@ The epilogue should close with:
 
 The successor is genuinely Annals-shaped only if all of the following land:
 
-1. the canonical finite-to-integral envelope and intrinsic golden/exotic
-   torsor calibration;
+1. the canonical finite-to-integral envelope, equality of the golden/exotic
+   equivariant torsor classes, and deck-equivariance of the realization;
 2. the strong period-image normalization and generic-degree theorem;
 3. the geometric application of the primewise minimal-class theorem;
 4. a self-contained special-case sixth-root/weak-factorization proof; and
@@ -745,6 +770,11 @@ juxtaposed. Apply these kill criteria:
 
 - if no exact finite-to-integral handoff is proved, do not say the cubic
   theorem is what the reconstructed carrier “forces”;
+- if family-level deck-equivariance is not proved, either restore an intrinsic
+  sheet calibration or state the two exotic realizations separately;
+- if the epilogue uses only the abstract six-set, say that the series
+  reconstructs a carrier admitting the realization, not that every marking
+  recovered by V is logically necessary for it;
 - if only period-map landing is proved, say “an exotic realization,” not “the
   exotic realization” or an identification of parameter curves;
 - if the recent quantum stack cannot be made sufficiently self-contained,
