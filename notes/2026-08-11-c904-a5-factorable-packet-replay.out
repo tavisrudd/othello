@@ -1,0 +1,7 @@
+PASS independent A5 packet replay
+target smooth = true
+wedge basepoint-free = true
+packet projective degree = 15
+rank-one packet empty = true
+packet radical = true
+packet component degrees = {1, 1, 1, 4, 4, 4}

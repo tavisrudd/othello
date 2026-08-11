@@ -1,0 +1,28 @@
+M0 rank/kernel = 20 4
+C0 rank/left-kernel = 6 4
+projective transforms tested = 150
+kernel candidates tested = 93750
+PASS A5-family finite-field presentation
+G =
+[0 4 3 4 3]
+[3 1 4 0 2]
+[4 2 1 3 3]
+[2 4 4 3 1]
+[2 4 0 2 3]
+a = [x0 - 2*x1 - x2, 2*x0 + x1 + 2*x2 + x3, 2*x0 + 2*x2 + 2*x3, x0 - x1 + 2*x2 - x3, 2*x0 - 2*x1 + 2*x2 + 2*x3, -x1 - 2*x2 - 2*x3]
+c = [1, 3, 2, 2, 4, 4]
+target = 2*x0^2*x1 + 2*x1^3 + 2*x0^2*x2 + x1^2*x2 + 2*x0*x2^2 - 2*x1*x2^2 + 2*x2^3 + 2*x0^2*x3 - 2*x0*x1*x3 + 2*x0*x2*x3 + x1*x2*x3 - 2*x2^2*x3 + 2*x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3 - x0^2*z - x0*x1*z - 2*x1^2*z + x0*x2*z + x2^2*z + 2*x0*x3*z + 2*x1*x3*z - x2*x3*z - x3^2*z + x0*z^2 + x1*z^2 - 2*x2*z^2 + z^3
+presentation Jacobian rank = 35
+target smooth / wedge system basepoint-free = True / True
+packet dimension = 1
+packet Hilbert polynomial = 15
+rank-one packet empty = True
+packet radical / etale = True
+packet finite-field component degrees = [1, 1, 1, 4, 4, 4]
+type-(3,3) component = (4, True, '0')
+type-(3,3) component = (4, True, '0')
+type-(3,3) component = (4, True, '0')
+type-(3,3) component = (1, True, '4')
+type-(3,3) component = (1, True, '3')
+type-(3,3) component = (1, True, 'infinity')
+type-(3,3) closed-component records = [(1, True, '3'), (1, True, '4'), (1, True, 'infinity'), (4, True, '0'), (4, True, '0'), (4, True, '0')]
