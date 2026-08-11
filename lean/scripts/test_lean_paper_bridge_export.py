@@ -60,6 +60,13 @@ class PaperBridgeExportTests(unittest.TestCase):
         self.assertIn("GIT_CONFIG_COUNT=2", text)
         self.assertIn("finitegeom_source", text)
         self.assertIn("certificate_source", text)
+        self.assertIn(
+            'git -C "$finitegeom_source" rev-parse --is-inside-work-tree', text
+        )
+        self.assertIn(
+            'git -C "$certificate_source" rev-parse --is-inside-work-tree', text
+        )
+        self.assertNotIn('test -d "$certificate_source/.git"', text)
         self.assertIn('ln -s "$finitegeom_source" "$finitegeom_root"', text)
         self.assertIn('ln -s "$certificate_source" "$certificate_root"', text)
         self.assertIn(

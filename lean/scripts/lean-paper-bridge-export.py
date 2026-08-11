@@ -96,8 +96,8 @@ def flake(bridge: dict) -> str:
               if test "$#" -eq 3; then
                 finitegeom_source="$(realpath "$2")"
                 certificate_source="$(realpath "$3")"
-                test -d "$finitegeom_source/.git"
-                test -d "$certificate_source/.git"
+                test "$(git -C "$finitegeom_source" rev-parse --is-inside-work-tree)" = true
+                test "$(git -C "$certificate_source" rev-parse --is-inside-work-tree)" = true
                 test "$(git -C "$finitegeom_source" rev-parse HEAD)" = '{bridge["finitegeom_commit"]}'
                 test -z "$(git -C "$finitegeom_source" status --short --untracked-files=no)"
                 test "$(git -C "$certificate_source" rev-parse HEAD)" = '{bridge["certificate_commit"]}'
