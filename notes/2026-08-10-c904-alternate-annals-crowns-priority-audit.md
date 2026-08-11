@@ -48,6 +48,16 @@ stabilization,” not “\(X\) is stably irrational.”
 By readiness, the six-axis theorem is first. By surprise and venue ceiling, the
 C904+C907 conjunction is first.
 
+**Subsequent hostile audit.**  A source-level reread of all five C907 gates
+returned `MINOR`, not `MAJOR`: Cai's sixth-root block, projective-bundle
+multiplicity, the dimension-two carrier exclusion, weak-factorization center
+bound, and KKPYY no-cancellation criterion all pass.  The missing item is a
+short printed bridge attaching fractional formal monodromy to the enhanced
+local atom.  `2026-08-10-c904-c907-enhanced-atom-bridge-blueprint.md` gives a
+self-contained special-case proof after the two deep big-A-model blowup and
+projective-bundle decompositions.  Updated Annals confidence is about 70% now
+and 85% after that bridge receives an independent quantum/F-bundle review.
+
 ## 1. Universal \(\mathrm{CH}_0\)-triviality versus one stabilization
 
 ### Exact input
