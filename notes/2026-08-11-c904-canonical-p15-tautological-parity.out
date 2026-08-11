@@ -1,0 +1,15 @@
+C904 canonical p15 tautological parity audit
+Hilbert polynomial=5*n^4 - 10*n^3 + 10*n^2 - 5*n + 1
+RR: int(h^4)=120; int(h^2(c1^2+c2))=240
+adjunction: c1=-h - e; c2=h^2 - 2*h*e + 2*e^2
+c2(T_M): int(h^2 S)=120, coefficient=24, degree(P(S1+S2))=-240, hypothetical-half-degree=-120
+h^2/2: int(h^2 S)=60, coefficient=12, degree(P(S1+S2))=-120, hypothetical-half-degree=-60
+exceptional surface: int(h^2 S)=0, coefficient=0, degree(P(S1+S2))=0, hypothetical-half-degree=0
+c1(T_M)^2: int(h^2 S)=120, coefficient=24, degree(P(S1+S2))=-240, hypothetical-half-degree=-120
+ch2(T_M): int(h^2 S)=-60, coefficient=-12, degree(P(S1+S2))=120, hypothetical-half-degree=60
+td2(T_M): int(h^2 S)=20, coefficient=4, degree(P(S1+S2))=-40, hypothetical-half-degree=-20
+horizontal tautological lattice <h^2/2, exceptional>: coefficient ideal=12Z
+A5-invariant NS-product surfaces: product-rank=50, invariant-rank=3, trace-ideal=60Z, coefficient-ideal=12Z
+universal scalar no-go: theta^3=6 theta^[3] and int(theta^3 S)=5a imply a in 6Z
+no integral A5-horizontal scalar surface has odd coefficient trace
+PASS
