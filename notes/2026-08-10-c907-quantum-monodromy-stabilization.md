@@ -18,8 +18,21 @@ congruent to `+/-1/6` modulo integers.  This is an exact classical computation
 and a general product/projective-bundle formula, not a bounded numerical
 observation.
 
-It does **not** yet obstruct stable rationality.  From stabilization dimension
-`m=2` onward, the ungraded multiplicity of that atom admits universal
+This already gives a one-step stable-irrationality theorem:
+
+\[
+\boxed{\text{For every smooth cubic threefold }X,
+       \ X\times\mathbf P^1\text{ is irrational}.}
+\]
+
+Indeed, every center in a weak factorization of a rational fourfold has
+dimension at most two.  KKPYY's nef-canonical normal form and the
+classification of surfaces force every point, curve, or surface quantum block
+to have fractional exponents only `0` or `1/2` modulo integers, never
+`+/-1/6`.
+
+This does **not** yet settle full stable rationality.  From stabilization
+dimension `m=2` onward, the ungraded multiplicity of the cubic atom admits universal
 two-sided blow-up-center cancellation patterns using centers which themselves
 carry the cubic atom.  Thus a proof that remembers only the fractional
 exponents modulo integers and their multiplicity cannot close stable
@@ -100,7 +113,47 @@ cyclic power identity, exact Fourier diagonalization, vanishing grading
 diagonal, and resulting copy count for every `0 <= m <= 24`.  The displayed
 trace identity proves the same statement for all `m`.
 
-## 3. Why ungraded atom multiplicity cannot be stable
+## 3. Surface-carrier exclusion and `X x P^1`
+
+The following lemma is the load-bearing alternate attack.
+
+**Surface lemma.** Every formal quantum-connection block of a smooth complex
+projective surface has fractional power exponent congruent to `0` or `1/2`
+modulo integers.
+
+For a minimal surface with nef canonical class, KKPYY Claim 6.15 introduces
+the parity projector `T` and the grading operator `Gr`.  In complex dimension
+two,
+
+\[
+g=Gr+\tfrac12T
+\]
+
+has integral eigenvalues in every cohomological degree.  Gauging the connection
+plus `T/(2u)` by `u^g` gives a regular-singular connection with nilpotent
+residue.  Undoing the half-parity shift leaves fractional powers `0` on even
+cohomology and `1/2` on odd cohomology.
+
+If the minimal surface has Kodaira dimension `-infinity`, it is `P^2` or a
+ruled surface over a curve.  The projective-space calculation gives exponent
+zero for `P^2`; the projective-bundle theorem reduces ruled surfaces to their
+base curves; and Cai's curve calculation gives only `0` or `1/2`.  Passing to a
+nonminimal surface adds point blocks through blow-ups and does not change this
+list.  This proves the lemma for all smooth projective surfaces.
+
+Now suppose `X x P^1` were rational.  Weak factorization would connect it to
+`P^4` through blow-ups and blow-downs with smooth centers of dimension at most
+two.  Cai's integer-power property for the blow-up connection preserves
+fractional exponents modulo integers.  Starting from `P^4`, whose blocks have
+exponent zero, points, curves, and the surface lemma can introduce only `0` or
+`1/2`.  But Section 2 gives two copies of the cubic rank-two block with
+residues `+/-1/6`.  This is a contradiction.
+
+The argument is algebraic: it uses ordinary weak factorization of a hypothetical
+birational map, so it proves irrationality rather than only failure of a
+particular symplectic factorization.
+
+## 4. Why ungraded atom multiplicity cannot settle full stability
 
 Let `alpha` denote the cubic rank-two atom and set the endpoint dimension to
 
@@ -151,7 +204,7 @@ factorization nor proves that a stable-rationality factorization exists.  It
 shows that any successful quantum proof must use geometric realizability,
 filtration, or data finer than ungraded atom multiplicity.
 
-## 4. The exact refinement that survives arithmetically
+## 5. The exact refinement that survives arithmetically
 
 If Tate/integer shifts are retained, the stabilized endpoint contributes
 
@@ -178,23 +231,25 @@ Hodge atoms likewise fold the Hodge grading so that Tate twists are invisible.
 The polynomial separation therefore identifies the missing structure rather
 than proving stable irrationality.
 
-## 5. Closeout passes
+## 6. Alternate-attack checkpoint
 
-The explicit `ej` pass upgraded the bounded search twice: it replaced the
+The earlier `ej` pass upgraded the bounded search twice: it replaced the
 observed gcd pattern by the all-`m` formulas in Section 3, and extracted the
 Tate-graded polynomial separation in Section 4 at no additional geometric
 assumption.  That separation is the strongest positive residue of the failed
 multiplicity-only route.
 
-The `tt` pass challenged the three delicate seams: the product grading, the
+The earlier `tt` pass challenged the three delicate seams: the product grading, the
 allowed center dimensions, and the passage from a signed relation to a
 two-sided positive common-resolution ledger.  It confirmed the zero
 projective-space exponent directly, checked that `t=1,2` occur only in the
 ranges where the formulas use them, and rewrote every relation positively.
 It also rejected an apparent `m=1` conclusion: excluding self-carrier centers
-does not exclude an unrelated surface carrying the same atom.
+does not by itself exclude an unrelated surface carrying the same atom.  The
+present `aa` pass closes exactly that gap by the surface lemma, while leaving
+the `m>=2` self-carrier ceiling intact.
 
-## 6. Reproduction
+## 7. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
 
@@ -227,9 +282,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 10,321 bytes;
-- independent replay: 4,641 bytes;
-- JSON certificate: 149,862 bytes.
+- Sage generator: 12,202 bytes;
+- independent replay: 5,535 bytes;
+- JSON certificate: 151,808 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -237,7 +292,7 @@ of the source matrices and the quantum Kunneth/projective-bundle formula is
 human-audited.  The bounded checks do not assert existence or nonexistence of
 any weak factorization.
 
-## 7. Sources
+## 8. Sources
 
 - Jiaji Cai, *The cubic threefold is symplectically irrational*,
   arXiv:2608.01577v1, especially Proposition 6 and Sections 2--3.  Cached PDF
@@ -248,6 +303,13 @@ any weak factorization.
   arXiv:2508.05105v2, especially Theorems 4.5 and 4.11 and Section 5.4.  Cached
   PDF SHA-256:
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
+- Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
+  Nicolas Perrin, *An atomic criterion for irrationality without quantum
+  computations*, arXiv:2607.26718v1, especially Section 2 on atoms of
+  surfaces.  This is corroborating context; the exponent restriction above is
+  derived directly from KKPYY Claim 6.15 and surface classification.  Cached
+  PDF SHA-256:
+  `bb1ee656bd55008a5403e057d0856e65c81b100f2fa07d1c90e184766dd0f407`.
 
 ## Mystery ledger
 
@@ -255,6 +317,8 @@ any weak factorization.
   projective space replicates it `m+1` times with unchanged residues.
 - **Settled:** raw multiplicity, parity, and positivity cannot be the stable
   obstruction from `m>=2`; the explicit self-carrier balances explain why.
+- **Settled:** no surface carries the cubic fractional block; consequently
+  `X x P^1` is irrational for every smooth cubic threefold.
 - **Open:** whether the integer/Tate grading has a canonical filtered quantum
   refinement respected by the blow-up and projective-bundle isomorphisms.
   Evidence gap: current formal gauges allow integer powers of `z` and the atom
@@ -262,6 +326,6 @@ any weak factorization.
 - **Open:** whether geometric constraints on centers forbid the formal
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.
-- **Open:** whether an arbitrary surface can carry the same fractional atom.
-  This prevents reading the empty self-carrier list at `m=1` as a proof that
-  `X x P^1` is irrational.
+- **Open:** whether the surface argument can be promoted to a recursive
+  minimum-carrier theorem in higher dimensions.  Evidence gap: starting at
+  `m=2`, a three-dimensional center can carry the cubic atom itself.

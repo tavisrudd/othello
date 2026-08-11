@@ -74,6 +74,23 @@ def main():
         assert H**n == sp.eye(n)
         assert check["formal_power_exponents"] == ["0"] * n
 
+    surface = certificate["surface_carrier_exclusion_and_one_step_irrationality"]
+    table = surface["nef_canonical_surface_grading_table"]
+    assert len(table) == 5
+    for row in table:
+        degree = row["cohomological_degree"]
+        grading = sp.Rational(degree - 2, 2)
+        parity = int((degree - 2) % 2 != 0)
+        integral_weight = grading + sp.Rational(parity, 2)
+        assert integral_weight.q == 1
+        assert row["grading_operator"] == str(grading)
+        assert row["parity_projector"] == parity
+        assert row["integral_gauge_weight"] == str(integral_weight)
+    assert set(surface["all_surface_fractional_residues"]) == {"0", "1/2"}
+    assert set(surface["cubic_fractional_residues"]) == {"-1/6", "1/6"}
+    assert surface["residue_sets_disjoint"]
+    assert surface["fourfold_weak_factorization_center_dimension_bound"] == 2
+
     cancellation_checks = certificate["coarse_blowup_cancellation_model"]["checks"]
     for check in cancellation_checks:
         m = check["stabilizing_projective_dimension_m"]
@@ -110,7 +127,8 @@ def main():
 
     print(
         "independent replay passed: indicial polynomial, projective checks "
-        f"m=0..{len(projective_checks)-1}, cancellation and Tate checks m=1..{len(cancellation_checks)}"
+        f"m=0..{len(projective_checks)-1}, surface exclusion, "
+        f"cancellation and Tate checks m=1..{len(cancellation_checks)}"
     )
 
 

@@ -8151,11 +8151,63 @@
     "general_statement": "The P^m factor has m+1 semisimple formal solutions with power exponent 0; tensoring therefore gives m+1 copies of the cubic rank-two block with unchanged residues."
   },
   "sage_version": "10.7",
-  "schema": "c907-quantum-monodromy-stabilization-v1",
+  "schema": "c907-quantum-monodromy-stabilization-v2",
   "source": {
     "arxiv": "2608.01577v1",
     "cached_pdf_sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",
     "equation_convention": "z^2 dS/dz = (K + zG)S",
     "paper": "Jiaji Cai, The cubic threefold is symplectically irrational"
+  },
+  "surface_carrier_exclusion_and_one_step_irrationality": {
+    "all_surface_fractional_residues": [
+      "0",
+      "1/2"
+    ],
+    "cubic_fractional_residues": [
+      "-1/6",
+      "1/6"
+    ],
+    "fourfold_weak_factorization_center_dimension_bound": 2,
+    "nef_canonical_surface_grading_table": [
+      {
+        "cohomological_degree": 0,
+        "fractional_exponent_after_undoing_half_parity_shift": "0",
+        "grading_operator": "-1",
+        "integral_gauge_weight": "-1",
+        "parity_projector": 0
+      },
+      {
+        "cohomological_degree": 1,
+        "fractional_exponent_after_undoing_half_parity_shift": "1/2",
+        "grading_operator": "-1/2",
+        "integral_gauge_weight": "0",
+        "parity_projector": 1
+      },
+      {
+        "cohomological_degree": 2,
+        "fractional_exponent_after_undoing_half_parity_shift": "0",
+        "grading_operator": "0",
+        "integral_gauge_weight": "0",
+        "parity_projector": 0
+      },
+      {
+        "cohomological_degree": 3,
+        "fractional_exponent_after_undoing_half_parity_shift": "1/2",
+        "grading_operator": "1/2",
+        "integral_gauge_weight": "1",
+        "parity_projector": 1
+      },
+      {
+        "cohomological_degree": 4,
+        "fractional_exponent_after_undoing_half_parity_shift": "0",
+        "grading_operator": "1",
+        "integral_gauge_weight": "1",
+        "parity_projector": 0
+      }
+    ],
+    "nef_surface_argument": "KKPYY Claim 6.15 gauges the connection plus one-half the parity projector by the integral weights in this table to a nilpotent-residue regular singular connection.",
+    "negative_kodaira_dimension_reduction": "Minimal surfaces are P^2 or ruled over a curve; projective-bundle and blow-up decompositions reduce their fractional exponents to points and curves.",
+    "one_step_conclusion": "For every smooth cubic threefold X, X x P^1 is irrational.",
+    "residue_sets_disjoint": true
   }
 }

@@ -4,6 +4,16 @@
 
 **Status:** active; exploratory research only; no Paper V or Lean promotion
 
+**AA checkpoint:** the low-dimensional-carrier branch is positive.  KKPYY
+Claim 6.15 forces every nef-canonical surface block to have fractional
+exponents only `0` or `1/2`; ruled/rational surfaces reduce through
+projective bundles and point blow-ups to curves and points with the same
+restriction.  Since fourfold weak-factorization centers have dimension at
+most two, the cubic `+/-1/6` block proves that `X x P^1` is irrational for
+every smooth cubic threefold.  Full stable irrationality remains open from
+`m=2`, where cubic self-carrier centers enter.  The next live gate is the
+integer/Tate-filtered atom or a recursive minimum-carrier theorem.
+
 ## Goal
 
 Test whether Cai's formal-monodromy obstruction for cubic threefolds can be

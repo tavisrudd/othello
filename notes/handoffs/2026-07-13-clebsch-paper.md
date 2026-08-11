@@ -53,6 +53,16 @@ the `E_6` carrier, reversible only with a residue flag, with bottom fibres
 arithmetic-lift frontier remain literature-gated and were not promoted to any
 manuscript or Lean source.
 
+The research-only C907 quantum route is active.  Its exact generic-parameter
+certificate proves that `X x P^m` carries `m+1` copies of Cai's cubic
+`+/-1/6` block.  The alternate surface-carrier attack now proves
+`X x P^1` irrational for every smooth cubic threefold: all point, curve, and
+surface blocks have fractional exponents only `0` or `1/2`.  Coarse atom
+multiplicity cannot settle full stability from `m=2`, where universal
+self-carrier balances begin.  The live gates are an integer/Tate-filtered atom
+and a recursive minimum-carrier theorem; no Paper V or Lean promotion is
+authorized.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.

@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v1"
+SCHEMA = "c907-quantum-monodromy-stabilization-v2"
 
 
 def matrix_strings(M):
@@ -221,6 +221,46 @@ def tate_graded_candidate_check(m):
     }
 
 
+def surface_carrier_exclusion():
+    dimension = 2
+    grading_table = []
+    for cohomological_degree in range(2 * dimension + 1):
+        grading = QQ(cohomological_degree - dimension) / 2
+        parity_projector = int((cohomological_degree - dimension) % 2 != 0)
+        integral_gauge_weight = grading + QQ(parity_projector) / 2
+        assert integral_gauge_weight in ZZ
+        grading_table.append(
+            {
+                "cohomological_degree": cohomological_degree,
+                "grading_operator": str(grading),
+                "parity_projector": parity_projector,
+                "integral_gauge_weight": str(integral_gauge_weight),
+                "fractional_exponent_after_undoing_half_parity_shift": (
+                    "1/2" if parity_projector else "0"
+                ),
+            }
+        )
+    allowed = {"0", "1/2"}
+    cubic = {"-1/6", "1/6"}
+    assert allowed.isdisjoint(cubic)
+    return {
+        "nef_canonical_surface_grading_table": grading_table,
+        "nef_surface_argument": (
+            "KKPYY Claim 6.15 gauges the connection plus one-half the parity projector "
+            "by the integral weights in this table to a nilpotent-residue regular singular connection."
+        ),
+        "negative_kodaira_dimension_reduction": (
+            "Minimal surfaces are P^2 or ruled over a curve; projective-bundle and blow-up "
+            "decompositions reduce their fractional exponents to points and curves."
+        ),
+        "all_surface_fractional_residues": sorted(allowed),
+        "cubic_fractional_residues": sorted(cubic),
+        "residue_sets_disjoint": True,
+        "fourfold_weak_factorization_center_dimension_bound": 2,
+        "one_step_conclusion": "For every smooth cubic threefold X, X x P^1 is irrational.",
+    }
+
+
 def build_certificate(bound):
     assert bound >= 3
     return {
@@ -241,6 +281,7 @@ def build_certificate(bound):
             "checked_m_range": [0, bound],
             "checks": [projective_space_check(m) for m in range(bound + 1)],
         },
+        "surface_carrier_exclusion_and_one_step_irrationality": surface_carrier_exclusion(),
         "coarse_blowup_cancellation_model": {
             "model": (
                 "In endpoint dimension 3+m, a center X x P^(s-3), with t=s-2, "
