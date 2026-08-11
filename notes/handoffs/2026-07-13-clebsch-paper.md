@@ -722,7 +722,12 @@ maximal-isotropic gluing has defect supported only at `p`, of order dividing
 three occur already at `(p,g)=(2,3)` and `(3,4)`; the non-scalar exotic `F4`
 gluing is instead a positive stratum.  The highest-EV next theorem is the
 intrinsic carry-sensitive Tor-boundary classification, not a universal positive
-extension.  Third, C904+C907 yields the successor contrast
+extension.  Spectral stabilization now supplies exact index-two families in
+every dimension at least three, index-three families in every dimension at
+least four, and index-four families in every dimension at least five; the
+order-four tower proves the factorial ceiling is not squarefree.  The towers
+are polarized products, so arbitrary height and indecomposable realization
+remain open.  Third, C904+C907 yields the successor contrast
 `X` universally `CH_0`-trivial but `X times P^1` irrational for every
 smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
 `notes/2026-08-10-c904-relative-shen-half-construction-attack.md`,

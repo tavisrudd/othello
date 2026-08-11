@@ -2,8 +2,8 @@
 
 Date: 2026-08-11
 
-Status: exact bounded classification and two independently replayed
-counterexamples; conceptual all-gluing classification remains open;
+Status: exact bounded classification, spectral stabilization theorem, and
+three infinite defect families; conceptual all-gluing classification remains open;
 quarantined from the Paper V manuscript and Lean
 
 ## Executive verdict
@@ -36,7 +36,10 @@ The exact computations prove:
    `963` have defect one and `1,332` have defect two; and
 5. all elementary ternary gluings in dimensions two and three are primitive
    (`40` and `1,120` cases respectively), but this stops exactly before the
-   first possible ternary factorial obstruction in dimension four.
+   first possible ternary factorial obstruction in dimension four; and
+6. spectral block stabilization propagates exact index two to every
+   dimension at least three, exact index three to every dimension at least
+   four, and exact index four to every dimension at least five.
 
 The dimension-three counterexample is especially sharp as an isogeny-locus
 statement.  Every principally polarized complex abelian threefold has
@@ -313,6 +316,17 @@ predecessor for an in-isogeny-locus integral divisor-product defect.  Existing
 results give rational Lefschetz generation, algebraicity/IHC, or statements
 after inverting factorial and polarization degrees.  This remains a bounded
 negative: MathSciNet and full forward-citation closure are not complete.
+
+The separate stabilization theorem
+`2026-08-11-c904-spectral-stabilization-defect-towers.md` upgrades the two
+isolated defects to infinite families and realizes a genuine second
+two-primary layer.  Its order-four regular-nilpotent fivefold has both curve
+and top divided classes of exact index four; adjoining a spectrally disjoint
+scalar graph block preserves the exact index by integral fibre retraction.
+The same argument gives the order-two and order-three towers.  This makes the
+factorial ceiling provably nonsquarefree and leaves arbitrary height,
+indecomposable realization, and an intrinsic carry-sensitive classification
+as the three high-value gates.
 
 ## 6. Reproducibility
 

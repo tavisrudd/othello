@@ -1,0 +1,17 @@
+dyadic-order-two-base
+  p=2 g=3 slope_charpoly=x^3 scalar=1 sylvester_det=1
+  nilpotence_index=3
+  ns_rank=6 ns_coefficient_index=512
+  curve_product_rank=6 saturation_index=2 elementary=[2] divided_power_order=2
+  top_product_rank=1 saturation_index=2 elementary=[2] divided_power_order=2
+triadic-order-three-base
+  p=3 g=4 slope_charpoly=x^4 + 2*x^3 + 2*x + 1 scalar=0 sylvester_det=1
+  ns_rank=10 ns_coefficient_index=14348907
+  curve_product_rank=10 saturation_index=3 elementary=[3] divided_power_order=3
+  top_product_rank=1 saturation_index=3 elementary=[3] divided_power_order=3
+dyadic-order-four-base
+  p=2 g=5 slope_charpoly=x^5 scalar=1 sylvester_det=1
+  nilpotence_index=5
+  ns_rank=15 ns_coefficient_index=33554432
+  curve_product_rank=15 saturation_index=4096 elementary=[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4] divided_power_order=4
+  top_product_rank=1 saturation_index=4 elementary=[4] divided_power_order=4

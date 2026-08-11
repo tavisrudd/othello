@@ -315,6 +315,18 @@ classification and a realization theorem for its higher-power layers.  See
 `notes/2026-08-11-c904-prime-gluing-divided-power-obstruction.md` and
 `notes/2026-08-11-c904-integral-lefsche-gluing-defects.md`.
 
+The first realization theorem is now proved.  If a defective graph slope
+\(A_0\) is stabilized by a scalar block \(aI_h\) with
+\(a\notin\operatorname{Spec}(A_0)\), integral fibre matching retracts the
+larger divisor-product lattice onto the base lattice.  Provided the base top
+divided class has the same upper bound, the exact minimal-class index is
+preserved.  Exact certificates give index two in every dimension \(g\ge3\),
+index three in every dimension \(g\ge4\), and index four in every dimension
+\(g\ge5\).  Thus higher Tor layers really occur and the universal bound is
+not squarefree.  These stabilized ppavs are polarized products; arbitrary
+factorial height and indecomposable realization remain live.  See
+`notes/2026-08-11-c904-spectral-stabilization-defect-towers.md`.
+
 The same pass packages the five marked principal halves as a complete Hecke
 packet.  Its discriminant geometry is
 \(\mathbf P^1(\mathbf F_4)\): three classical \(S_6\) sheets and the two exotic
