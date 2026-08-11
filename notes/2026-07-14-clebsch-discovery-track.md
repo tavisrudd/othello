@@ -1646,3 +1646,31 @@ them.
 
 **Status:** open, unpromoted. Generalizing the modules to arbitrary degree is not
 needed by any current row.
+
+## 2026-08-11 — the near-conference two-graphs at sizes where no conference matrix exists
+
+**Where.** C880 item 5, while proving that conference two-graphs are the exact
+minimisers of the aligned-four-set count
+(`notes/2026-08-11-c880-item5-conference-promise.md`, Theorem 4).
+
+**What.** The spectral bound `|A| >= n(n-1)(n-2)(n-6)/96` is attained only when
+`S^2 = (n-1)I`, so only for `n = 2 mod 4`. At the other sizes the minimum sits
+strictly above it and is attained by a large, structured family: 3024 two-graphs
+with `|A| = 5` at `n = 7` against a bound of 2.19, and 4200 with `|A| = 10` at
+`n = 8` against a bound of 7. These are the two-graphs whose Seidel spectrum is
+as close to two-valued as the congruence permits — minimisers of `tr(S^4)`
+subject to `tr(S^2) = n(n-1)` over Seidel matrices.
+
+**Why it may matter.** Minimising `tr(S^4)` at a fixed `tr(S^2)` is the discrete
+version of asking for the flattest possible Seidel spectrum, which is the same
+extremal problem that governs equiangular line systems at non-conference sizes.
+If those minimisers turn out to be the descendants or extensions of the
+conference two-graphs at the neighbouring admissible sizes, the aligned-count
+functional gives a new and very cheap invariant for separating them.
+
+**Evidence:** COMPUTED exhaustively at `n <= 8`
+(`notes/2026-08-11-c880-item5-structure-check.py`); the extremal
+characterization itself is PROVED.
+
+**Status:** open, unpromoted. Not needed by C880, whose question is answered by
+the `n = 2 mod 4` case. Would need its own row to pursue.

@@ -1,0 +1,106 @@
+"""C880 item 5 — arithmetic guard for the hand proofs in
+`notes/2026-08-11-c880-item5-conference-promise.md`.
+
+This script is a check, not evidence.  Every claim in that report is proved by
+hand; this only guards against an algebra slip in the four identities below.
+
+  (I)   |A(S)| = C(n,4)/4 + (tr(S^4) - n(n-1)(2n-3))/32          (Proposition 3)
+  (II)  min |A| over all two-graphs is attained exactly at S^2=(n-1)I,
+        i.e. exactly at the conference two-graphs                (Theorem 4)
+  (III) the twelve six-point minimisers are the twelve labelled conference
+        two-graphs, matching the enumeration in
+        `notes/2026-08-07-c880-alignment-separation.md`          (Corollary 5)
+  (IV)  lambda_3 == (n-6)/4 for the Paley conference two-graph on ten points,
+        so its aligned family is a 3-(10,4,1) design             (Theorem 7)
+
+Replay:
+  uv run --with numpy python notes/2026-08-11-c880-item5-structure-check.py
+"""
+
+import itertools
+from math import comb
+
+import numpy as np
+
+
+def seidel_from_descendant(n, mask):
+    """Two-graph on {0..n-1} given by its descendant graph at 0 (vertex 0 isolated).
+
+    Seidel convention: zero diagonal, -1 on edges, +1 on non-edges.
+    """
+    S = np.ones((n, n), dtype=np.int64)
+    np.fill_diagonal(S, 0)
+    for b, (i, j) in enumerate(itertools.combinations(range(1, n), 2)):
+        if mask >> b & 1:
+            S[i, j] = S[j, i] = -1
+    return S
+
+
+def aligned_sets(S, n):
+    """The 4-sets on which sigma(xyz) = S_xy S_yz S_zx is constant."""
+    out = []
+    for Q in itertools.combinations(range(n), 4):
+        sig = [S[a, b] * S[b, c] * S[a, c] for a, b, c in itertools.combinations(Q, 3)]
+        if abs(sum(sig)) == 4:
+            out.append(Q)
+    return out
+
+
+def aligned_count_by_trace(S, n):
+    t4 = int(np.trace(np.linalg.matrix_power(S, 4)))
+    num = 8 * comb(n, 4) + t4 - n * (n - 1) * (2 * n - 3)
+    assert num % 32 == 0, (n, t4)
+    return num // 32, t4
+
+
+def paley_conference_two_graph():
+    """The conference two-graph on ten points, from the Paley matrix over GF(9)."""
+    els = [(a, b) for a in range(3) for b in range(3)]  # F_3[x]/(x^2+1)
+    mul = lambda u, v: ((u[0] * v[0] - u[1] * v[1]) % 3, (u[0] * v[1] + u[1] * v[0]) % 3)
+    sub = lambda u, v: ((u[0] - v[0]) % 3, (u[1] - v[1]) % 3)
+    squares = {mul(e, e) for e in els if e != (0, 0)}
+    n = 10
+    S = np.ones((n, n), dtype=np.int64)
+    np.fill_diagonal(S, 0)
+    for i in range(9):
+        for j in range(9):
+            if i != j:
+                S[i, j] = 1 if sub(els[i], els[j]) in squares else -1
+    return S, n
+
+
+print("== (I) trace identity, exhaustive over all two-graphs ==")
+for n in (5, 6, 7):
+    bad = sum(
+        aligned_count_by_trace(S := seidel_from_descendant(n, mask), n)[0]
+        != len(aligned_sets(S, n))
+        for mask in range(1 << comb(n - 1, 2))
+    )
+    print(f"  n={n}: {1 << comb(n - 1, 2)} two-graphs, mismatches={bad}")
+
+print("== (II)+(III) minimisers of the aligned family ==")
+for n in (5, 6, 7, 8):
+    best, count, conference = None, 0, 0
+    for mask in range(1 << comb(n - 1, 2)):
+        S = seidel_from_descendant(n, mask)
+        val, _ = aligned_count_by_trace(S, n)
+        if best is None or val < best:
+            best, count, conference = val, 0, 0
+        if val == best:
+            count += 1
+            if np.array_equal(S @ S, (n - 1) * np.eye(n, dtype=np.int64)):
+                conference += 1
+    bound = n * (n - 1) * (n - 2) * (n - 6) / 96
+    print(f"  n={n}: min|A|={best}  spectral bound={bound:g}  minimisers={count}"
+          f"  of which conference={conference}")
+
+print("== (IV) Paley conference two-graph on ten points ==")
+S, n = paley_conference_two_graph()
+A = aligned_sets(S, n)
+lam3 = {t: 0 for t in itertools.combinations(range(n), 3)}
+for Q in A:
+    for t in itertools.combinations(Q, 3):
+        lam3[t] += 1
+print(f"  S^2 = (n-1)I: {np.array_equal(S @ S, (n - 1) * np.eye(n, dtype=np.int64))}")
+print(f"  |A|={len(A)}  spectral prediction={n * (n - 1) * (n - 2) * (n - 6) // 96}"
+      f"  lambda_3 values={sorted(set(lam3.values()))}")

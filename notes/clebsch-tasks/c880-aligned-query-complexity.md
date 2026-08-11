@@ -6,14 +6,17 @@
 
 ## State
 
-Work items 1, 2, 4, 6 and 7 are closed, and item 3 is closed on the adaptive
-side. Only items 5 and 8, and the nonadaptive constant, remain.
+Work items 1, 2, 4, 6 and 7 are closed, item 3 is closed on the adaptive
+side, and item 5 is closed on the promised-anchor side and reduced to a single
+open counting question on the regular side. Only item 8, the nonadaptive
+constant, and that counting question remain.
 Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
 `notes/2026-08-07-c880-mask-ilp-bound.md` (the exact eight-point mask bound),
 `notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim),
 `notes/2026-08-07-c880-tetrad-screen.md` (the vanishing-tetrad screen),
 `notes/2026-08-07-c880-manuscript-wording.md` (item 7, drafted LaTeX) and
-`notes/2026-08-07-c880-adaptive-decoder.md` (the adaptive decoder).
+`notes/2026-08-07-c880-adaptive-decoder.md` (the adaptive decoder) and
+`notes/2026-08-11-c880-item5-conference-promise.md` (item 5, all proofs by hand).
 
 - Seven points is sharp: the alignment tests fail to determine a two-graph up to
   complement at six points, in 46 groups covering 96 of the 512 complement
@@ -119,6 +122,30 @@ repaired after a referee pass:
 `notes/2026-08-07-c880-adaptive-decoder.md` and
 `notes/2026-08-07-c880-adaptive-and-wording-referee-review.md`.
 
+Item 5 is answered, structurally and without certificates. The number of aligned
+four-sets is an exact spectral invariant,
+\(\lvert A\rvert=\tfrac14\binom n4+\tfrac1{32}(\operatorname{tr}S^4-n(n-1)(2n-3))\),
+and Cauchy--Schwarz on \(\operatorname{tr}(S^2)=n(n-1)\) makes the conference
+two-graphs the **exact minimisers**: \(\lvert A\rvert\ge n(n-1)(n-2)(n-6)/96\)
+with equality iff \(S^2=(n-1)I\). That single inequality proves both halves of
+the point threshold — every two-graph on at least seven points has an aligned
+four-set, and the six-point exceptions are precisely the conference two-graphs,
+twelve labelled, matching the enumeration exactly. The promise therefore pins
+the instance to the sparsest-signal extreme rather than to an easier one. Three
+further results say why nothing is gained: the aligned family is a
+\(3\)-\((n,4,\tfrac{n-6}4)\) design exactly for conference two-graphs and only a
+2-design for the other regular ones, but the law is inert, inflating a decoder's
+known set by at most \(1+O(1/n)\); the anchor promise is an index-four subgroup
+condition, worth exactly two bits and no change to any bound; and no elementary
+pair flip stays in the conference class, so every local lower-bound mechanism
+dies, while the rigidity replacing it certifies only \(O(n)\) of savings. What
+survives is a reduction: from below, the conference-promised complexity is
+\(\log_2 N_n-1\) for \(N_n\) the number of labelled conference two-graphs, at
+least \(n\log_2 n-O(n)\) unconditionally, and it drops below the unpromised
+\(\Theta(n^2)\) exactly when \(\log_2 N_n=o(n^2)\) — an open counting question
+about symmetric conference matrices. Details and proofs:
+`notes/2026-08-11-c880-item5-conference-promise.md`.
+
 Item 7 is drafted against all five audit and screen constraints, with the
 LaTeX quoting the lines it replaces, the discarded alternatives named, and a
 replacement `OPER-4` ledger row: `notes/2026-08-07-c880-manuscript-wording.md`.
@@ -190,8 +217,26 @@ bound.
 
 ### 4. Items 5 and 8
 
-Item 5 (regular two-graphs, and the promised-anchor variant) is untouched. Item
-8 now has a named genre match, Kummerfeld and Ramsey's four-set indicator
+Item 5's promised-anchor half is closed negatively and its design half is closed
+by an inertness proof. One question survives it, and one route.
+
+**The surviving question.** Is \(\log_2 N_n=o(n^2)\), where \(N_n\) counts
+labelled conference two-graphs on \(n\) points? This is the entire lower-bound
+content of the conference promise, and it is a counting problem about symmetric
+conference matrices rather than about alignment tests. The 2026-08-07 literature
+audit did not search it. Nothing else in C880 depends on the answer.
+
+**The route that would produce a separation.** Narrow the promise from "some
+conference two-graph" to "some labelled copy of the Paley conference two-graph".
+Reconstruction becomes labelling recovery, and a counting argument suggests
+\(\Theta(n\log n)\) nonadaptive tests suffice: a permutation moving \(k\) points
+should change the alignment of a \(\Theta(k/n)\) fraction of four-sets, while
+only \(n^{O(k)}\) such permutations exist. The missing step is exactly that
+discrimination bound, which for Paley is a character-sum estimate. Proving it
+would give the first genuine separation between the promised and unpromised
+problems; everything else in item 5 says the general promise gives none.
+
+Item 8 has a named genre match, Kummerfeld and Ramsey's four-set indicator
 oracle, but no matched-units baseline, so no speedup may be claimed against it.
 
 ### 5. Handoff of the drafted wording
@@ -491,6 +536,5 @@ Not met, and carried as open work above:
 
 - Item 8's acceptance condition — a named baseline with matched units — is not
   met by any setting located, and the report says so rather than reaching.
-- Item 5 has no evidence at all.
 - The bootstrap constants have no independent replay; the reason is stated in
   the report's Reproduction section rather than being papered over.
