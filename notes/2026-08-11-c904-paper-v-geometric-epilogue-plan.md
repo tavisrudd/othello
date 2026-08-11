@@ -229,7 +229,7 @@ Define the common object with exactly the necessary data:
 
 \[
 \mathscr G=
-(\text{metric chordal shadow }(A,Q,h),\
+(\text{normalized cubic }h\text{ on }(A_0,Q_0),\
 \text{derived six-axis carrier},\
 \text{derived golden orientation},\
 \text{declared outer labels}).
@@ -244,39 +244,70 @@ not silently quotiented.
 
 #### Theorem V.A: equivalence of marked companion groupoids
 
-Define the common carrier without mentioning Papers I--III and without
-including a conference matrix among its input data. Its minimal object is a
-metric chordal shadow
+Fix intrinsically
 
 \[
-(A,Q,h),
+\Omega_0=\operatorname{Syl}_5(A_5),\qquad
+A_0=\operatorname{Aug}(\mathbf F_{11}^{\Omega_0}),\qquad
+Q_0(x)=\sum_{\omega\in\Omega_0}x_\omega^2.
 \]
 
-where \(A\) is the five-dimensional absolutely irreducible
-\(\mathbf F_{11}A_5\)-module, \(Q\) is an actual normalized invariant
-quadratic form, and \(h\) is an actual normalized invariant cubic whose
-saturated Jacobian scheme is a rational normal quartic. Morphisms are
-equivariant isometries preserving \(h\), together with the coordinated
-relabelings allowed by the sources.
+The common carrier is a nonzero actual invariant cubic
+\(h\in\operatorname{Sym}^3(A_0^*)^{A_5}\) whose saturated Jacobian scheme is
+a rational normal quartic, followed by the scalar normalization in V.B.
+Morphisms are equivariant \(Q_0\)-isometries preserving \(h\), together with
+the coordinated relabelings allowed by the sources. This fixes the standard
+augmentation isometry class, rather than merely the line of an invariant
+quadratic form; in the basis \(e_i-e_6\), its Gram matrix is \(I+J\) and has
+determinant \(6\).
 
-The form \(Q\) removes the hidden scalar inertia: over an extension containing
+The form \(Q_0\) removes the hidden scalar inertia: over an extension containing
 \(\mu_3\), a scalar cube root fixes \(h\), but an isometry preserving both
-\(Q\) and \(h\) has scalar satisfying \(\lambda^2=\lambda^3=1\).
+\(Q_0\) and \(h\) has scalar satisfying \(\lambda^2=\lambda^3=1\).
+
+Papers I and III carry \(Q_0\) on their six-axis augmentations. In Paper II,
+use the same intertwiner already fixed by the pivot/cubic normalization and
+compare one Gram coefficient with \(Q_0\); do not rescale afterward. Thus the
+quadratic framing is supplied by every source rather than added only to the
+target category.
 
 The theorem derives, rather than assumes:
 
-1. the split special divisor \(Z_5=A_5/C_5\) on the singular quartic;
-2. its normalizer quotient \(\Omega=A_5/D_5\);
+1. the split reduced special divisor \(Z_5\), a transitive \(A_5\)-scheme of
+   type \(A_5/C_5\), with twelve pairwise disjoint reduced points each having
+   a unique Sylow \(C_5\) stabilizer, but not a canonically labeled copy of
+   that coset space;
+2. the canonical stabilizer map
+   \(Z_5\to\Omega_0=\operatorname{Syl}_5(A_5)\cong A_5/D_5\);
 3. the literal outer action \(q_\Pi\) on the invariant pencil;
-4. the six-nodal companion \(c=8^{-1}(q_\Pi-1)h\);
-5. the equality of its node set with \(\Omega\);
-6. the triangle cocycle, pair balance, and the conference switching class.
+4. the unique unordered pair \(\{[B],[-B]\}\) of \(A_5\)-invariant
+   conference switching classes on \(\Omega_0\), whose orientations are
+   exchanged by the outer involution and whose actual coefficient-normalized
+   triangle cubics form a canonical pair \(\{\pm c_B\}\) spanning the
+   anti-invariant line;
+5. the scalar \(\alpha\) in
+   \((q_\Pi-1)h=\alpha c_B\), normalized by \(\alpha^2=8^2\);
+6. after choosing the compatible orientation,
+   \(c=(q_\Pi-1)h/8\), with its nodes and triangle identities supplied by
+   Paper I's conference-cubic theorem.
 
-Define the marked conference, metric-chordal, and retained-incidence
+Define the selected-line conference, metric-chordal, and retained-incidence
 groupoids independently. Prove their equivalence over \(\mathbf F_{11}\).
-For each extension \(K/\mathbf F_{11}\), prove equivalence of their fixed
-neutral scalar extensions. Do not claim classification of arbitrary twisted
-\(K\)-forms without a separate descent theorem.
+The bare conference groupoid is the quotient by the residual selected-line
+\(C_2\), equivalently
+
+\[
+\mathscr C_{\mathrm{conf}}
+\simeq
+\mathscr C_{\mathrm{ch}}/\langle uq\rangle,
+\qquad (q_\Pi-1)(-q_\Pi h)=(q_\Pi-1)h,
+\]
+
+not an equivalent selected-line object. Make this double cover part of the
+headline marking theorem. For each extension
+\(K/\mathbf F_{11}\), prove equivalence of the fixed neutral scalar
+extensions. Arbitrary twisted \(K\)-forms remain outside the theorem without
+a separate descent result.
 
 The inverse formulas recover the retained paper-specific output, including
 the Paper-II pivot normalization and Paper-III carried bridge datum, but not a
@@ -284,16 +315,17 @@ chart lift or global cover supplied only as input.
 
 #### Theorem V.B: minimal carrier and structural bridge
 
-Prove that the expanded carrier is the functorial output of \((A,Q,h)\).
-From the saturated Jacobian quartic form
+Prove that the expanded carrier is the functorial output of
+\((A_0,Q_0,h)\). From the saturated Jacobian quartic recover \(Z_5\), then
+use the stabilizer map
 
 \[
-Z_5=\coprod_{P\in\operatorname{Syl}_5(A_5)}R_h^P
-\longrightarrow \Omega=A_5/D_5.
+Z_5\longrightarrow\Omega_0=\operatorname{Syl}_5(A_5).
 \]
 
-Identify \(A\) isometrically with the literal quadratic augmentation of
-\(\Omega\). A representative of the nontrivial permutation-normalizer coset
+The ambient space is already the literal quadratic augmentation of
+\(\Omega_0\). An involutive representative of the nontrivial
+permutation-normalizer coset
 then induces a canonical operator \(q_\Pi\) on
 
 \[
@@ -305,18 +337,19 @@ Intertwiner scalars cancel in conjugation, and changing the representative by
 new marking. The causal chain is
 
 \[
-(A,Q,h)\Longrightarrow R_h\Longrightarrow Z_5\Longrightarrow\Omega
-\Longrightarrow q_\Pi\Longrightarrow c
-\Longrightarrow(c_{ijk})\Longrightarrow[B].
+(A_0,Q_0,h)\Longrightarrow R_h\Longrightarrow Z_5\Longrightarrow\Omega_0
+\Longrightarrow \{[B],[-B]\}\Longrightarrow q_\Pi
+\Longrightarrow\alpha\Longrightarrow c.
 \]
 
-The numbers \(8\) and the Paper-II pivot \(3\) are the two printed
-normalizations. Character theory and multiplicity one do not determine them.
+The equations \(\alpha^2=8^2\) and the Paper-II pivot \(3\) are the two
+printed normalizations. Character theory and multiplicity one do not
+determine them.
 
 #### Theorem V.C: natural round trip
 
 Prove strict rigidity for ambient equivariant isometries: the recovered
-projective frame determines the projective map, while \(Q\) and \(h\) remove
+projective frame determines the projective map, while \(Q_0\) and \(h\) remove
 its scalar ambiguity. The two composites then carry natural isomorphisms to
 the identities, and the triangle identities follow formally from uniqueness.
 Do not define morphisms to be maps induced by six-axis bijections; that would
@@ -330,12 +363,14 @@ a list of names. In particular,
 \[
 h\Rightarrow L=Kh,\qquad
 (q_\Pi,h)\Rightarrow c,\qquad
-c\Rightarrow\operatorname{Sing}(c)=\Omega.
+c\Rightarrow\operatorname{Sing}(c)=\Omega_0.
 \]
 
 Before scalar normalization, forgetting a generator while retaining its line
-has fibre \(K^\times\), not \(C_2\). After the square-one normalization, the
-fibre is the two sheet signs. For every forgetful functor print a single table
+has fibre \(K^\times\), not \(C_2\). After \(\alpha^2=8^2\), each selected
+chordal line has two compatible conference orientations (four normalized
+generators across both lines). For every forgetful functor print a single
+table
 containing:
 
 - the automorphism stabilizer before and after forgetting;
@@ -343,7 +378,8 @@ containing:
 - whether another retained marking canonically supplies a section;
 - a concrete symmetry witnessing nontriviality when no section exists.
 
-With \(Q\) fixed, sheet reversal is the actual isometry \(u=-I\). Use the
+With \(Q_0\) fixed, sheet reversal is the actual isometry \(u=-I\). It is an
+automorphism only after the cubic sign has been forgotten. Use the
 exact pencil action, including
 \[
 [q]=\begin{pmatrix}-1&8\\0&1\end{pmatrix}
@@ -362,9 +398,15 @@ q:(L,h,c)\mapsto(qL,qh,-c),
 uq:(L,h,c)\mapsto(qL,-qh,c).
 \]
 
-They form a Klein four action on the fully unmarked line/sign fibre. After a
-line is fixed, the normalized \(q_\Pi-1\) bridge identifies sheet sign with
-conference orientation, so those two torsors are dependent.
+Here \(q\) is a morphism only in the groupoid allowing the coordinated outer
+relabeling. The total marked fibre consists of compatible triples
+\((L,h,[B])\) satisfying \((q_\Pi-1)h=8c_B\). Its base retains the unordered
+chordal pair and unordered conference pair, but forgets the selected line,
+normalized sign, compatible orientation, and every outer label moved by
+\(q\). At this fully forgotten vertex---and only there---\(u\) and \(q\) form
+a free transitive Klein four action. After a line is fixed, the normalized
+\(q_\Pi-1\) bridge identifies sheet sign with conference orientation, so
+those two torsors are dependent.
 
 Sharpness means that a missing marking is moved by an automorphism of the
 unmarked object but cannot be changed by a morphism in the more rigid
@@ -504,23 +546,25 @@ this as an absolute canonical identification independent of that action.
 
 ### Structural proof compression
 
-All of Paper V should reduce to five reusable arguments:
+All of Paper V should reduce to four reusable arguments:
 
 1. **Metric chordal normal form.** Compute the two-dimensional invariant
    pencil, identify the Hankel determinant and its saturated singular quartic,
-   and place the Paper-II projection by multiplicity one plus one geometric
-   discriminator. Print pivot \(3\) once.
-2. **Special orbit and outer companion.** Construct
-   \(A_5/C_5\to A_5/D_5\), derive \(q_\Pi\) from the literal permutation
-   normalizer, prove equality with the nodal six-set, and print scalar \(8\).
-3. **Simplicial conference recognition.** Prove the triangle sign, cocycle,
-   and balance identities; reconstruct the switching class and derive
-   \(B^2=5I\).
-4. **Strict rigidity and marking fibres.** Use the metric carrier to prove
+   and place the Paper-II projection by multiplicity one for its relevant
+   equivariant source map plus one geometric discriminator. The invariant
+   pencil itself remains two-dimensional. Print pivot \(3\) once.
+2. **Special orbit and conference pair.** Recover the canonical stabilizer
+   map \(Z_5\to\Omega_0\), derive \(q_\Pi\) from the literal permutation
+   normalizer, prove uniqueness of the \(A_5\)-fixed unordered conference pair
+   by reducing a normalized row to a five-vertex \(2\)-regular core \(C_5\), and identify
+   its triangle cubic with the anti-invariant line. The single equation
+   \(\alpha^2=8^2\) orients the pair; Paper I then supplies the node and
+   triangle package.
+3. **Strict rigidity and marking fibres.** Use the metric carrier to prove
    full faithfulness, source return, the dependency lattice, and the actual
    sheet/outer actions. Units, counits, and triangle identities are then
    formal.
-5. **Root--weight normalization and residue.** Recover the lattice tower,
+4. **Root--weight normalization and residue.** Recover the lattice tower,
    prove the general \(D_n^\vee\) theorem and mod-eight dichotomy, and
    specialize to the order-six \(\mathbf F_4\)-heart, Ext line, and Frobenius
    torsor.

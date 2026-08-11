@@ -9,11 +9,14 @@ rank-ten symplectic, cubic, Chow, or quantum changes are authorized here.
 
 **Forward correction:** the subsequent hostile audit found \(\mu_3\) scalar
 inertia and circular expanded axioms in V.A--V.D. The repaired plan is
-`2026-08-11-c904-paper-v-intrinsic-ad-classification-blueprint.md`: use a
-normalized metric chordal shadow \((A,Q,h)\), classify the neutral package
-over \(\mathbf F_{11}\) with functorial base change, derive the outer action
-from the recovered six-set, and treat the marking object as a dependency
-lattice. The V.E--V.H conclusions below remain valid.
+`2026-08-11-c904-paper-v-intrinsic-ad-classification-blueprint.md`: fix the
+standard quadratic augmentation \((A_0,Q_0)\), classify normalized cubics
+\(h\) on its neutral base changes, recover the canonical stabilizer six-set,
+derive the outer action from its literal permutation normalizer, and use the
+unique unordered pair of \(A_5\)-invariant conference switching classes plus
+\(\alpha^2=8^2\) for orientation. The
+marking object is a dependency lattice. The V.E--V.H conclusions below
+remain valid.
 
 ## Verdict
 
