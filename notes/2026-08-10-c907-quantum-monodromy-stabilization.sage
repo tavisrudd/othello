@@ -385,16 +385,25 @@ def build_certificate(bound):
         "surface_carrier_exclusion_and_one_step_irrationality": surface_carrier_exclusion(),
         "candidate_fractional_cy_carrier_bound": {
             "status": (
-                "Conditional exact reduction, not a theorem. Serre dimension is additive under tensor "
-                "products, but it is not monotone for general admissible subcategories."
+                "Conditional numerical gap, not yet a reduction. Serre dimension is additive under "
+                "tensor products, but the ordinary projective-bundle semiorthogonal decomposition "
+                "splits the tensor category into m+1 copies, and Serre dimension is not monotone for "
+                "general admissible subcategories."
             ),
             "checked_m_range": [0, bound],
             "checks": [serre_dimension_candidate_check(m) for m in range(bound + 1)],
             "conditional_argument": (
                 "Ku(X) has S^3=[5], hence Serre dimension 5/3. Tensoring with D(P^m) gives "
                 "m+5/3, whereas every weak-factorization center has dimension at most m+1. "
-                "A carrier inequality for this fractional-Calabi-Yau component would prove stable "
-                "irrationality with a uniform gap 2/3."
+                "If a gluing-sensitive enhanced atom forced this whole tensor category, rather than "
+                "its m+1 separate Ku(X) summands, into one center, then a fractional-Calabi-Yau carrier "
+                "inequality would prove stable irrationality with a uniform gap 2/3."
+            ),
+            "additive_ledger_seam": (
+                "The standard exceptional collection of P^m gives a semiorthogonal decomposition of "
+                "Ku(X) tensor D(P^m) into m+1 copies of Ku(X). Ordinary blowup/atomic ledgers may "
+                "distribute those copies among different centers, so the carrier inequality alone is "
+                "insufficient."
             ),
             "known_failure_of_general_monotonicity": (
                 "Elagin-Lunts exhibit an admissible subcategory of D^b(F_3) with upper Serre "

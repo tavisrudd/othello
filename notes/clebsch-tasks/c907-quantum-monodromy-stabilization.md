@@ -15,11 +15,12 @@ every smooth cubic threefold.  Full stable irrationality remains open from
 demotes the prime-power spectral-cycle idea: KKPYY's decomposition is local on
 analytic germs and does not retain the global loop, while iterated rank-`p`
 projective bundles give dimension-admissible local-copy/wreath counterpatterns.
-The recursive gate now has a sharp categorical form: the fractional-CY carrier
-inequality would compare Serre dimension `m+5/3` with center dimension at most
-`m+1`, but general Serre-dimension monotonicity is false and the required
-restricted theorem is open.  The next live gates are therefore the
-integer/Tate-filtered atom or this restricted carrier theorem.
+The recursive gate has a sharp conditional numerical form: Serre dimension
+`m+5/3` exceeds the center bound `m+1`, but the ordinary projective-bundle
+decomposition splits this into `m+1` distributable copies.  Exploiting the gap
+requires both a gluing-sensitive enhanced atom and a restricted fractional-CY
+carrier theorem; general Serre-dimension monotonicity is false.  These are the
+remaining live gates together with the integer/Tate-filtered atom.
 
 ## Goal
 

@@ -63,11 +63,13 @@ self-carrier balances begin.  The prime-power global-cycle refinement has now
 failed its source-level functoriality audit: the published decompositions are
 local on analytic germs, and iterated projective bundles give admissible
 local-copy/wreath counterpatterns.  The recursive gate has sharpened to a
-restricted fractional-CY carrier inequality: it would compare Serre dimension
-`m+5/3` with center dimension at most `m+1`, but general Serre-dimension
-monotonicity is false and the needed restricted theorem remains open.  The live
-gates are that inequality and an integer/Tate-filtered atom; no Paper V or Lean
-promotion is authorized.
+conditional Serre-dimension gap: `m+5/3` exceeds the center bound `m+1`, but
+the ordinary projective-bundle decomposition splits it into `m+1`
+distributable copies.  The categorical route therefore needs both a
+gluing-sensitive enhanced atom and a restricted fractional-CY carrier
+inequality; general Serre-dimension monotonicity is false.  These and the
+integer/Tate-filtered atom are the live gates; no Paper V or Lean promotion is
+authorized.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

@@ -349,7 +349,7 @@ additive under tensor products, while
 \]
 
 Every center in a weak factorization of the `(m+3)`-fold
-`X x P^m` has dimension at most `m+1`.  Thus a carrier inequality
+`X x P^m` has dimension at most `m+1`.  A carrier inequality of the form
 
 \[
 \mathcal A\subset D^b(Z)\text{ admissible and fractional CY}
@@ -357,13 +357,29 @@ Every center in a weak factorization of the `(m+3)`-fold
 \operatorname{Sdim}(\mathcal A)\le\dim Z
 \]
 
-would prove full stable irrationality immediately, with the uniform gap
+would therefore create the uniform numerical gap
 
 \[
 \left(m+\frac53\right)-(m+1)=\frac23.
 \]
 
-This attractive argument is **conditional**.  Elagin--Lunts prove additivity,
+It is not yet a valid reduction.  The standard exceptional collection on
+`P^m` gives
+
+\[
+\operatorname{Ku}(X)\otimes D^b(\mathbf P^m)
+=\langle\operatorname{Ku}(X),\ldots,\operatorname{Ku}(X)\rangle
+\]
+
+with `m+1` semiorthogonal copies.  The ordinary additive blow-up/atomic ledger
+can distribute those copies among different centers; it does not force the
+whole tensor category of Serre dimension `m+5/3` into a single center.
+Therefore the displayed carrier inequality would prove stable irrationality
+only after a **gluing-sensitive enhanced atom theorem** shows that the relevant
+Serre dynamics across the projective branches is retained and must be carried
+as one object.
+
+There is a second independent gap.  Elagin--Lunts prove additivity,
 but Serre dimension is not monotone for general admissible subcategories: they
 exhibit an admissible subcategory of the derived category of the Hirzebruch
 surface `F_3` whose upper Serre dimension is `3`, exceeding the ambient
@@ -372,11 +388,12 @@ Serre dimensions and therefore does not refute the restricted
 fractional-Calabi--Yau carrier inequality above.  No proof of that restricted
 inequality was located in the bounded current literature audit.
 
-This is now the sharp recursive minimum-carrier question.  It is conceptually
-stronger than the quantum multiplicity bookkeeping and is not something a
-finite classical computation can establish.  The certificate records the
-exact `2/3` gap for `0<=m<=24`; additivity proves the displayed formula for all
-`m`.
+The sharp categorical route therefore needs **both** the gluing-sensitive atom
+theorem and the restricted fractional-CY carrier inequality.  It is
+conceptually stronger than the quantum multiplicity bookkeeping and is not
+something a finite classical computation can establish.  The certificate
+records the exact `2/3` numerical gap for `0<=m<=24`; additivity proves the
+displayed formula for all `m`, but not either missing theorem.
 
 KKPYY Section 6.4 also sketches Serre-enhanced atoms, but explicitly defers the
 non-archimedean duality and integral compatibility details to forthcoming
@@ -439,9 +456,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 19,391 bytes;
+- Sage generator: 20,082 bytes;
 - independent replay: 8,657 bytes;
-- JSON certificate: 187,596 bytes.
+- JSON certificate: 188,133 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -495,11 +512,11 @@ any weak factorization.
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.
 - **Open:** whether the surface argument can be promoted to a recursive
-  minimum-carrier theorem in higher dimensions.  The sharp categorical form
-  is the restricted fractional-Calabi--Yau carrier inequality in Section 7:
-  it would close every stabilization with a uniform Serre-dimension gap `2/3`,
-  but general Serre-dimension monotonicity is false and the needed restricted
-  theorem is not known.
+  minimum-carrier theorem in higher dimensions.  Section 7 isolates an exact
+  Serre-dimension gap `2/3`, but exploiting it requires both a gluing-sensitive
+  enhancement that prevents the `m+1` projective summands from being
+  distributed among centers and a restricted fractional-Calabi--Yau carrier
+  inequality.  General Serre-dimension monotonicity is false.
 - **Settled negatively at the present formal level:** `p`-primary
   spectral-cycle length is not part of the local analytic-germ invariant used
   by the cited blow-up and projective-bundle theorems.  Prime-power
