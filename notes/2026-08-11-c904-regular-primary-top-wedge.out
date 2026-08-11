@@ -1,0 +1,9 @@
+dyadic-regular-height-three
+  g=3 height=3 ns_index=8
+  degree_ranks=[6, 6, 1]
+  top_index=2
+dyadic-regular-height-six
+  g=6 height=6 ns_index=32768
+  degree_ranks=[21, 105, 175, 105, 21, 1]
+  top_index=8
+PASS

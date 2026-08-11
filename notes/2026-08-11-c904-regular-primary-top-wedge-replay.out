@@ -1,0 +1,8 @@
+monomials=230230
+ns_index=68719476736
+top_gcd=8
+witness=(0, 0, 1, 6, 6, 17)
+curve_monomials=53130
+curve_rank=21
+curve_order=4
+PASS
