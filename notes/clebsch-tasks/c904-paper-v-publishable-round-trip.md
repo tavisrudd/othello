@@ -678,13 +678,18 @@ The intrinsic charge-three RSC flank also has an exact geometry boundary.
 The degree-fifteen `D_{3,3}` projective lines are contracted when the
 incidence is forgotten, so they are not curves on the Abel--Jacobi fourfold;
 the Hecke lines cover only its boundary divisor.  Voisin's projected residual
-curves are the sole live intrinsic family, and the sources prove only a
-one-point sweeping/MRC statement, not dominant rationally connected
-two-point evaluation, free-chain geometry, or a very twisting surface.
-There is also no published smooth proper polarized family to which the
-surface theorem can presently be applied.  Any RSC revival must begin by
-computing the tangent/normal splitting of those residual curves.  See
-`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md`.
+curves were the sole live intrinsic family, but their first exact tangent
+test is negative.  Voisin constructs the curve only upstairs in `M_{6,1}`
+and does not prove its projection nonconstant or complete.  If a nonconstant
+projected `P^1` does remain in the smooth locally-free Abel fibre, GRR gives
+degree zero for its pulled-back tangent bundle; the `O(2)` tangent direction
+then forces a negative normal summand, so the curve is not free.  Any possible
+positivity must come entirely from boundary elementary modifications on an
+as-yet unnamed compactification.  Thus an RSC revival now requires a proper
+polarized `M_9` fibre model, boundary extension and limiting-sheaf analysis,
+not merely a tangent computation on the printed open family.  See
+`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md` and
+`notes/2026-08-11-c904-voisin-residual-curve-freeness-obstruction.md`.
 
 The highest-EV adjacent crown is consequently the intrinsic `p`-typical
 classification of the divisor-product defect itself.  The regular-primary

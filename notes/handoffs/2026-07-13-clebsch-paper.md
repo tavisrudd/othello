@@ -715,13 +715,17 @@ or the independent `Theta^2=2 Theta^[2]` Gysin factor; the Ext diagonal does
 not remove it.  On the geometric side, the degree-fifteen `D_{3,3}` lines are
 contracted on the Abel--Jacobi fourfold and the Hecke lines remain in its
 boundary.  Only Voisin's projected residual curves remain plausible for RSC,
-and their tangent/normal splitting, two-point evaluation, very-twisting
-surface, and proper polarized ambient family are all absent.  Thus the direct
-C904 gate is now genuinely non-tautological correspondence geometry or a new
-analysis of those residual curves, not another universal-Chern or visible-line
-calculation.  See
+but their open tangent test is now negative: Voisin does not prove the
+projection nonconstant or complete, and any nonconstant complete `P^1`
+contained in the smooth Abel fibre has tangent degree zero by GRR, hence a
+negative normal summand.  Positivity can only be created by boundary
+modifications on a new proper compactification.  Thus the direct C904 gate is
+now genuinely non-tautological correspondence geometry or a proper boundary
+theory for `M_9`, not another universal-Chern, visible-line, or open
+residual-curve calculation.  See
 `notes/2026-08-11-c904-universal-pi3-gamma-parity.md` and
-`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md`.
+`notes/2026-08-11-c904-intrinsic-charge3-rsc-surface-field-audit.md`, and
+`notes/2026-08-11-c904-voisin-residual-curve-freeness-obstruction.md`.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
