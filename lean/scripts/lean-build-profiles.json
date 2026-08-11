@@ -19,6 +19,12 @@
       "verified_max_threads": 1,
       "worker_peak_mib": 4096
     },
+    "q13-serialized": {
+      "description": "Standalone projective-cap Q13 class modules; one external Lean process with extra admission headroom for host-memory pressure.",
+      "reserve_mib": 12288,
+      "verified_max_threads": 1,
+      "worker_peak_mib": 7000
+    },
     "q25-two-witness": {
       "concurrent_sibling_peak_mib": 1330,
       "description": "C143 Q25 two-witness leaves with the heavy shared checker serialized first.",
