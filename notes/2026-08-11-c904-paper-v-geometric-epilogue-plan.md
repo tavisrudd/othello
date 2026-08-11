@@ -14,27 +14,31 @@ unnumbered, independently readable geometric epilogue.
 
 - **Paper V** remains a short, purely structural culmination. It proves the
   exact marked correspondence among the upper three reconstruction branches,
-  recovers their common golden six-axis carrier, and extracts the integral
-  carrier consumed by the epilogue.
-- **The geometric epilogue** realizes the exotic principal gluing of that
-  carrier as the non-isotrivial (A_5)-cubic pencil and proves the separation
-  theorem
+  recovers their common finite golden six-axis carrier, and stops. Its output
+  interface is the oriented \(A_5\) six-set and marked golden plane, not an
+  integral variation of Hodge structure.
+- **The geometric epilogue** begins with the missing finite-to-integral bridge:
+  it constructs the canonical integral envelope of that oriented six-set,
+  classifies its principal gluings, and proves that the exotic gluing is
+  realized by the non-isotrivial \(A_5\)-cubic pencil. It then proves the
+  separation theorem for
   \[
-  X_b\text{ universally }CH_0\text{-trivial},
+  Y_b=X_b\times\mathbf P^1:
   \qquad
-  X_b\times\mathbf P^1\text{ irrational}.
+  Y_b\text{ universally }CH_0\text{-trivial and irrational}.
   \]
 - **Paper IV** remains the logically independent lower reconstruction branch.
   It completes the series theme but is not given a nonexistent cubic or
-  (A_5)-carrier arrow.
+  \(A_5\)-carrier arrow.
 
 The epilogue should not be called Paper VI. It should be visibly the payoff of
 the series while retaining a standalone high-venue identity.
 
 Recommended working title:
 
-> **Universal (CH_0)-triviality without one-step rationality**  
-> *The exotic cubic realization of the golden (A_5) carrier*
+> **Irrationality after one stabilization of universally
+> \(CH_0\)-trivial cubic threefolds**
+> *The exotic cubic realization of the golden \(A_5\) carrier*
 
 An optional series-facing rubric is **Clebsch: Geometric Epilogue**.
 
@@ -57,32 +61,41 @@ All four currently print the same series topology:
 - Paper IV is an independent lower branch reconstructing a marked conic plane
   and polarity.
 
-Because none of Papers I--IV is yet published, their perspective paragraphs,
-figures, conclusions, and forward promises may be coordinated with the final
-architecture. Their mathematical theorem statements need not be distorted to
-do so.
+Papers I--III are not journal-published, but public GitHub/DOI versions already
+exist and are immutable predecessors. Coordinated changes must therefore be
+made as ordinary forward versions. Paper IV remains an active new-paper build.
+Their mathematical theorem statements need not be distorted to coordinate the
+series, and no public history should be rewritten.
 
 ## Whole-series architecture
 
 The causal diagram should become
 
 \[
-\begin{array}{ccc}
-\text{Papers I, II, III} & \longrightarrow &
-\text{Paper V: marked golden carrier}\\
-&&\downarrow\\
-\text{Paper IV: independent lower branch}&&
-\text{geometric epilogue: exotic cubic realization}\\
-&&\downarrow\\
-&&CH_0\text{-trivial but }X\times\mathbf P^1\text{ irrational}.
+\begin{array}{ccccc}
+\text{Papers I, II, III}&\longrightarrow&
+\text{Paper V}&\longrightarrow&\text{finite marked golden carrier}\\
+&&&&\downarrow\\
+&&&&\text{canonical integral envelope}\\
+&&&&\downarrow\\
+&&&&\text{exotic cubic realization}\\
+&&&&\downarrow\\
+&&&&Y=X\times\mathbf P^1\text{ is }CH_0\text{-trivial but irrational}.
 \end{array}
+\]
+
+Separately,
+
+\[
+\text{Paper IV}\longrightarrow
+\text{independent marked conic-plane and polarity branch}.
 \]
 
 The numbered series answers:
 
 > What structure do sparse shadows determine?
 
-The epilogue answers:
+The epilogue answers, for the upper branch:
 
 > What does the recovered structure force in algebraic geometry?
 
@@ -93,25 +106,32 @@ order.
 
 ### Shared perspective paragraph
 
-Replace the repeated series paragraph with a common forward-looking statement
-of the following form:
+Do not place the full epilogue promise into all four papers before its two
+load-bearing bridges are frozen. Use the following staged policy.
 
-> Papers I--III reconstruct three marked presentations of a common golden
-> six-axis carrier. Paper V proves their exact marked correspondence and
-> isolates the resulting integral (A_5)-carrier. A geometric epilogue
-> realizes its exotic principal gluing as a non-isotrivial family of cubic
-> threefolds and uses that realization to separate universal
-> (CH_0)-triviality from rationality after one stabilization. Paper IV is the
-> independent lower branch, in which pair data reconstruct a complete marked
-> conic plane and polarity.
+1. Papers I--III promise only that Paper V identifies their common marked
+   finite carrier.
+2. Paper IV identifies itself as the independent lower branch and makes no
+   cubic promise.
+3. Once the integral-envelope and quantum bridges are frozen, Paper V may end
+   with one forward sentence announcing the geometric epilogue.
+4. Later forward versions of Papers I--III may add one restrained
+   retrospective pointer to the completed epilogue.
 
-The exact wording should remain provisional until the epilogue's theorem and
-title are frozen.
+The final shared series paragraph, used only after those gates pass, may say:
+
+> Papers I--III reconstruct three marked presentations of a common finite
+> golden six-axis carrier, and Paper V proves their exact marked
+> correspondence. A geometric epilogue constructs the carrier's canonical
+> integral envelope, realizes its exotic principal gluing by a
+> non-isotrivial cubic pencil, and proves that irrationality survives one
+> stabilization even though the resulting fourfolds are universally
+> \(CH_0\)-trivial. Paper IV is the independent lower reconstruction branch.
 
 ### Paper-specific promises
 
 - **Paper I:** its recovered conference operator, triangle cubic, six-axis node
-  frame, and integral golden order are inputs to Paper V.
+  frame, and golden order are inputs to Paper V's finite marked carrier.
 - **Paper II:** its signed chordal companion and selected chordal line provide
   the load-bearing marking for the return map in Paper V.
 - **Paper III:** its marked incidence sheet and conference source provide the
@@ -127,9 +147,10 @@ The four abstracts should remain mathematically self-contained. The coordinated
 series promise belongs in the introduction figure and conclusion, not in four
 abstracts advertising a future theorem.
 
-Each conclusion may carry one paper-specific forward sentence. No earlier paper
-should claim the epilogue theorem before the epilogue proof and priority audit
-are frozen.
+Before the epilogue gates close, each conclusion may carry one paper-specific
+forward sentence about Paper V only. No earlier paper should claim the
+epilogue theorem before its finite-to-integral bridge, quantum bridge, and
+priority audit are frozen.
 
 ## Paper V: structural culmination
 
@@ -140,8 +161,10 @@ Recommended title:
 ### Exact purpose
 
 Paper V proves that the upper three branches recover one marked golden pencil
-and six-axis carrier. It then extracts the integral carrier that the geometric
-epilogue classifies and realizes.
+and six-axis carrier over the finite reconstruction base. It ends by isolating
+the oriented \(A_5\) six-set and marked golden plane as a functorial output
+interface. The geometric epilogue, not Paper V, owns the integral envelope,
+principal polarization, and complex realization.
 
 Paper V contains no Chow theory, quantum theory, modular-curve development,
 Prym geometry, gluing census, or load-bearing computation.
@@ -164,11 +187,13 @@ not silently quotiented.
 
 ### Main theorem packet
 
-#### Theorem V.A: marked companion correspondence
+#### Theorem V.A: equivalence of marked companion groupoids
 
-The distinguished outputs of Papers I--III reconstruct the same marked carrier
-\(\mathscr G\). Every transport factors through \(\mathscr G\), and the declared
-forward and reverse transports are equivariant.
+Define the exact groupoids of marked conference, chordal, and incidence
+packages, including their permitted switching and coordinated relabelling.
+The three reconstruction functors factor through the groupoid of marked
+carriers \(\mathscr G\) and induce equivalences onto their declared image
+subgroupoids.
 
 #### Theorem V.B: structural bridge
 
@@ -180,49 +205,44 @@ q-1
 is an isomorphism onto the conference line and identifies sheet sign with
 conference orientation.
 
-#### Theorem V.C: exact round trip
+#### Theorem V.C: natural round trip
 
-Both composites fix the six axes, selected chordal line, marked cubic generator,
-and orientation character. They are therefore the identity at exactly the
-retained-output level claimed in the theorem.
+The two composites carry natural isomorphisms to the identity functors on the
+declared image subgroupoids, and those isomorphisms satisfy the triangle
+identities. On chosen normalized representatives they fix the six axes,
+selected chordal line, marked cubic generator, and orientation character.
 
-#### Theorem V.D: marking minimality
+#### Theorem V.D: load-bearing marking boundary
 
-Forgetting any load-bearing marking produces the corresponding genuine
-ambiguity: switching, global sign, sheet exchange, chordal-line exchange, or
-uncoordinated label transport. In particular, a sheet alone chooses none of the
-chart, outer, or Petersen markings used in Paper III.
+Forgetting the selected chordal line or the orientation/sheet sign produces
+the corresponding genuine ambiguity, so neither can be omitted from the
+equivalence. The remaining switching and coordinated-relabeling quotients are
+recorded by their exact stabilizer groups. No unproved claim of logical
+independence among every auxiliary marking is required.
 
-#### Theorem V.E: integral carrier extraction
+#### Theorem V.E: finite output interface
 
-The common marked object determines the rank-ten symplectic (A_5)-datum
-\[
-\mathcal H=A_5^\vee e\oplus A_5 f
-\]
-together with its orientation character and distinguished six-axis polarization
-form. This is an output interface, not yet a PEL classification or cubic
-realization.
-
-The exact normalization of Theorem V.E must be stated only at the strength
-actually proved by the structural lattice map. Equality of rational quadratic
-algebras is not enough.
+The common marked object canonically determines the oriented \(A_5\) six-set,
+its augmentation/root lattice, and the marked golden invariant plane. This is
+the complete output interface. It is not yet a rank-ten symplectic lattice,
+PEL datum, principal polarization, or cubic realization.
 
 ### Structural proof compression
 
 All of Paper V should reduce to five reusable arguments:
 
-1. **Marked-carrier groupoid lemma.** Package choices and automorphisms once,
-   rather than checking every pairwise map separately.
-2. **Multiplicity-one lemma.** Any relevant (A_5)-equivariant map between the
+1. **Marked-carrier groupoid lemma.** Package choices, gauge morphisms, and
+   stabilizers once, rather than checking every pairwise map separately.
+2. **Multiplicity-one lemma.** Any relevant \(A_5\)-equivariant map between the
    irreducible carrier lines is scalar; one normalized generator fixes it.
 3. **Involution difference lemma.** On a line exchanged by an involution,
-   (q-1) identifies the anti-invariant line with the conference orientation
+   \(q-1\) identifies the anti-invariant line with the conference orientation
    line once nonvanishing is proved.
-4. **Carrier rigidity lemma.** An equivariant endomorphism fixing the marked
-   node frame, selected line, and cubic generator is the identity.
-5. **Integral extraction lemma.** Recover the root--weight lattice and
-   symplectic pairing from the six-axis incidence and one polarization
-   normalization.
+4. **Carrier rigidity lemma.** An equivariant automorphism fixing the marked
+   node frame, selected line, and cubic generator is the identity in the
+   chosen normalized representative.
+5. **Finite output lemma.** Recover the oriented six-set, augmentation lattice,
+   and golden plane functorially, without claiming an integral Hodge lift.
 
 One hand normalization may be printed for each scalar or sign. There should be
 no exhaustive matrix table and no phrase of the form "a computer calculation
@@ -250,19 +270,23 @@ reproved in V.
 2. The common marked carrier -- 2 pages.
 3. The three imported reconstruction functors -- 3 pages.
 4. The involution difference bridge -- 3 pages.
-5. The two return maps and identity composites -- 2--3 pages.
-6. Integral carrier extraction -- 2--3 pages.
+5. Natural return maps and triangle identities -- 3--4 pages.
+6. Finite output interface -- 1--2 pages.
 7. Boundaries, Paper IV, and epilogue interface -- 1 page.
 
-**Target:** 14--18 pages.
+**Target:** 16--22 pages. A shorter paper is acceptable only if every groupoid
+and normalization argument remains self-contained. If integral or arithmetic
+material pushes V past this range, move it to the epilogue.
 
 ### Explicit Paper V exclusions
 
-- (X_0(6)) and \(\mathbf P^1(\mathbf F_4)\);
+- \(X_0(6)\) and \(\mathbf P^1(\mathbf F_4)\);
 - quartic, Petersen-cover, Prym, and Hecke geometry;
-- universal (CH_0)-triviality and minimal-class saturation;
+- universal \(CH_0\)-triviality and minimal-class saturation;
+- arithmetic spread-out to a localization of \(\mathbf Z[\sqrt5]\);
+- integral symplectic or PEL classification;
 - quartic-to-cubic Chow transport;
-- (M_9\), (D_{3,3}), Brauer, RSC, and relative-cycle descent;
+- \(M_9\), \(D_{3,3}\), Brauer, RSC, and relative-cycle descent;
 - Winger carriers and log-Neron boundary packets;
 - quantum atoms and irrationality;
 - computational discovery history and dead-route ledgers.
@@ -272,55 +296,105 @@ reproved in V.
 ### Publication identity
 
 The epilogue is an unnumbered, standalone paper. It redefines the carrier it
-uses and proves its algebro-geometric realization, so a reader need not have
-read Papers I--V. The series is its provenance, not a prerequisite.
+uses, constructs its canonical integral envelope, and proves its
+algebro-geometric realization, so a reader need not have read Papers I--V.
+The series supplies the finite input and provenance, not a prerequisite.
 
 ### Main separation theorem
 
-> Let (X\to B^\circ) be the smooth (A_5)-cubic pencil realizing the exotic
-> principal sheet of the integral golden carrier extracted in Paper V. For
-> every (b\in B^\circ(\mathbf C)),
+> Let \(X\to B^\circ\) be the smooth \(A_5\)-cubic pencil realizing an exotic
+> principal sheet of the canonical integral envelope of the finite golden
+> carrier. For every \(b\in B^\circ(\mathbf C)\),
 > \[
 > X_b\text{ is universally }CH_0\text{-trivial},
 > \qquad
-> X_b\times\mathbf P^1\text{ is irrational}.
+> Y_b=X_b\times\mathbf P^1
+> \text{ is universally }CH_0\text{-trivial and irrational}.
 > \]
-> Hence universal (CH_0)-triviality does not imply rationality after one
+> Hence universal \(CH_0\)-triviality does not imply rationality after one
 > stabilization, even in a non-isotrivial family of smooth cubic threefolds.
 
 State separately the broader strengthening:
 
-> For every smooth cubic threefold (X), the fourfold
-> (X\times\mathbf P^1) is irrational.
+> For every smooth cubic threefold \(X\), the fourfold
+> \(X\times\mathbf P^1\) is irrational.
 
 The universal theorem supports the family punchline; it should not displace it
 from the title, abstract, or theorem order.
 
-### Theorem E.A: carrier realization
+### Theorem E.A: canonical integral envelope
 
-The integral carrier \(\mathcal H\) has principal gluing packet
+Let \(\Omega\) be the oriented \(A_5\) six-set output by Paper V. Construct
+functorially
+
 \[
-\mathbf P^1(\mathbf F_4).
+A(\Omega)=\ker(\mathbf Z^\Omega\to\mathbf Z),
+\qquad
+\mathbb V(\Omega)=
+  \bigl(A(\Omega)\otimes\mathbf Q\bigr)e
+  \oplus
+  \bigl(A(\Omega)\otimes\mathbf Q\bigr)f,
 \]
-The three rational slopes are the classical (S_6)-sheets and the two
-conjugate non-rational slopes are the exotic (A_5)-sheets. The nonconstant
-principally polarized realization of an exotic sheet is the
-intermediate-Jacobian variation of the marked (A_5)-cubic pencil.
+
+with its invariant rational symplectic form, and the reference self-dual
+root--weight lattice
+
+\[
+\mathcal H_{\mathrm{ref}}(\Omega)
+  =A(\Omega)^\vee e\oplus A(\Omega)f.
+\]
+
+Prove a universal property showing that this construction depends only on the
+marked finite carrier and commutes with its declared gauge. This theorem is the
+finite-to-integral handoff at the level of an abstract rational symplectic
+space and reference lattice; it is not inferred from reduction modulo eleven.
+No claim is made that reduction modulo eleven uniquely determines an abelian
+variety or principal polarization.
+
+### Theorem E.B: exotic cubic period realization
+
+For the marked \(A_5\)-cubic pencil, identify the six \(D_5\)-fixed elliptic
+axes with the six-set \(\Omega\), prove that their integral polarization is
+\(6I-J\), place the axis-source lattice in \(\mathbb V(\Omega)\), and identify
+the cubic's principally polarized homology as one of its self-dual
+overlattices. The reference lattice \(\mathcal H_{\mathrm{ref}}\) is a
+comparison point, not the object being glued again.
+
+For five independent axes the source polarization has Smith type
+\((1,6,6,6,6)\). Classify its stable maximal-isotropic kernels prime by prime.
+At two they form
+
+\[
+\mathbf P^1(\mathbf F_4)
+=\mathbf P^1(\mathbf F_2)\sqcup\{\omega,\omega^2\},
+\]
+
+with three \(S_6\)-symmetric points and one Frobenius-conjugate pair whose
+members have stabilizer exactly \(A_5\); at three, identify the selected
+monodromy line. Use the \(A_5\)-commutant of the mod-two heart and the
+polarization form, not a twenty-case census.
+
+The period map is nonconstant and lands in the exotic PEL sheet. For the
+publication-strength bridge, prove the stronger statement that the
+normalization of its image closure is the exotic PEL curve and that the cubic
+parameter map is generically finite of an explicitly stated degree. Do not
+claim an isomorphism of parameter lines or a Hauptmodul formula without the
+corresponding boundary theorem.
 
 The proof should be structural:
 
-1. calculate the (A_5)-commutant of the mod-(2) heart as \(\mathbf F_4\);
-2. identify stable maximal isotropics with \(\mathbf P^1(\mathbf F_4)\);
-3. compute stabilizers conceptually, not by a twenty-case census;
-4. identify the exotic six-axis polarization as (6I-J) by two-transitivity
-   and one normalization;
-5. use Torelli and the nonconstant period map to identify the cubic
-   realization and non-isotriviality.
+1. recover \(6I-J\) by two-transitivity and one geometric normalization;
+2. compare the actual integral homology lattice with the canonical envelope;
+3. identify the gluing stabilizer with the exotic \(A_5\) sheet;
+4. use Torelli and the nonconstant period map for non-isotriviality;
+5. prove the normalization and generic-degree statement by a separate
+   family-level argument.
 
-Only the part of the (X_0(6)) description needed to identify the family should
-enter the epilogue. The complete quartic/Prym boundary packet is not required.
+Only the modular information needed for this image-normalization theorem
+should enter the epilogue. The complete quartic/Prym boundary packet is not
+required.
 
-### Theorem E.B: structural primitive minimal class
+### Theorem E.C: structural primitive minimal class
 
 For the exotic principal gluing, the minimal class
 \[
@@ -332,27 +406,32 @@ Replace the existing finite saturation certificate by a local--global theorem:
 
 1. divisor-product obstruction is supported only at primes dividing the
    gluing degree;
-2. at (2), the exotic graph slope has squarefree minimal polynomial
-   (x^2+x+1), so semisimple graph-slope primitivity applies;
-3. at (3), the gluing is scalar or Jordan-scalar, so mixed-adjugate
+2. at \(2\), the exotic graph slope has squarefree minimal polynomial
+   \(x^2+x+1\), so semisimple graph-slope primitivity applies;
+3. at \(3\), the gluing is scalar or Jordan-scalar, so mixed-adjugate
    primitivity applies;
-4. away from (2,3), the relevant lattices are unimodular;
+4. away from \(2,3\), the relevant lattices are unimodular;
 5. primewise membership implies integral global membership.
+
+Add an explicit application lemma placing the actual exotic cubic homology
+lattice in these local graph charts and matching the divided-power
+normalization with \(\Theta^4/4!\). The abstract local theorems alone are not
+the geometric application.
 
 No twenty-gluing enumeration, monomial census, or coprime (7/17) Smith
 certificate appears in the published proof.
 
-### Theorem E.C: universal (CH_0)-triviality
+### Theorem E.D: universal \(CH_0\)-triviality
 
 Apply Voisin's fixed-fibre theorem to the algebraic primitive minimal class.
-Conclude universal (CH_0)-triviality for every smooth member of the
-(A_5)-pencil.
+Conclude universal \(CH_0\)-triviality for every smooth member of the
+\(A_5\)-pencil.
 
 This theorem is fibrewise. It makes no claim of a relative integral universal
-cycle over the pencil and uses none of the (M_9), Shen-halving, or relative
+cycle over the pencil and uses none of the \(M_9\), Shen-halving, or relative
 descent program.
 
-### Theorem E.D: primitive-sixth-root obstruction
+### Theorem E.E: primitive-sixth-root obstruction
 
 Define an additive invariant \(\nu_6\) of the enhanced formal-monodromy atom:
 the multiplicity of primitive sixth-root formal-monodromy eigenvalues.
@@ -360,16 +439,20 @@ the multiplicity of primitive sixth-root formal-monodromy eigenvalues.
 Prove:
 
 1. \(\nu_6\) is invariant under regular/integer-(u) gauge, flat transport,
-   and the precise atom equivalences used in weak factorization;
+   and the precise atom equivalences used in weak factorization; print the
+   formal-isomonodromy lemma giving constancy along a connected reduced
+   unramified spectral component;
 2. Cai's cubic block contributes the primitive ±\(1/6\) exponents;
-3. the projective-bundle formula places two copies in
-   (X\times\mathbf P^1);
+   identify this block explicitly with the same maximal big-quantum
+   \(F\)-bundle block used by the atom formalism;
+3. the projective-bundle formula places two positive copies in
+   \(X\times\mathbf P^1\);
 4. point, curve, and surface center atoms have only integral or half-integral
    exponents and therefore \(\nu_6=0\);
 5. the enhanced atom ledger is additive, so weak-factorization center terms
    cannot cancel the cubic contribution.
 
-This proves irrationality of (X\times\mathbf P^1). The paper does not claim
+This proves irrationality of \(X\times\mathbf P^1\). The paper does not claim
 full stable irrationality.
 
 ### Conceptual unity
@@ -385,23 +468,29 @@ The paper should be framed as a separation between two transverse detectors:
 \end{array}
 \]
 
-The novelty is not merely the conjunction of two properties. It is that the
-canonical exotic realization of the carrier recovered by the series forces a
-positive-dimensional family on which these two tests diverge.
+The carrier does not cause the quantum obstruction: that obstruction holds for
+every cubic. The conceptual theorem is that the carrier canonically produces a
+positive-dimensional family on which the diagonal obstruction vanishes, while
+the universal cubic atom proves that irrationality survives one stabilization.
+The exact integral-envelope and period-realization theorems make this more
+than a juxtaposition of two unrelated examples.
 
 ### Epilogue section and page plan
 
-1. Introduction and separation theorem -- 4 pages.
-2. Self-contained golden carrier and exotic cubic realization -- 5--6 pages.
-3. Local--global divisor-product theorem -- 8--9 pages.
-4. Minimal class and Voisin consequence -- 4--5 pages.
-5. Enhanced formal-monodromy atom -- 5--6 pages.
-6. Low-dimensional center theorem -- 5--6 pages.
-7. Projective bundle, weak factorization, and no cancellation -- 4 pages.
+1. Introduction and separation theorem -- 4--5 pages.
+2. Finite carrier and canonical integral envelope -- 6--8 pages.
+3. Exotic packet and cubic period realization -- 7--10 pages.
+4. Local--global divisor-product theorem and geometric application -- 9--11
+   pages.
+5. Fixed-fibre Voisin consequence -- 3--4 pages.
+6. Enhanced atom and formal-isomonodromy lemma -- 6--8 pages.
+7. Low-dimensional centers, projective bundle, and weak factorization -- 7--9
+   pages.
 8. Comparison, series provenance, and boundaries -- 2 pages.
 
-**Target:** 38--42 pages. Allow at most 44 pages if the recent quantum inputs
-require a fuller self-contained special-case development.
+**Target:** 45--55 pages. A crown-level parameter-curve or boundary
+normalization may push the paper toward 55--65 pages; do not compress by
+outsourcing the finite-to-integral or quantum bridges.
 
 ### Epilogue exclusions
 
@@ -409,8 +498,9 @@ require a fuller self-contained special-case development.
 - a relative universal cycle over the marked base;
 - integral quartic-to-cubic Chow transport;
 - the full quartic/Petersen/Prym/log-boundary packet;
+- a full \(X_0(6)\) Hauptmodul or cusp theorem beyond the period-image result;
 - Winger carriers and large rational correspondences;
-- (M_9\), (D_{3,3}), charge-two Brauer, and RSC routes;
+- \(M_9\), \(D_{3,3}\), charge-two Brauer, and RSC routes;
 - general gluing-defect towers not needed for the exotic cubic;
 - computational certificates as proof.
 
@@ -419,17 +509,18 @@ not a subsection of this epilogue.
 
 ## Abstract architecture for the epilogue
 
-The abstract should make five moves:
+The abstract should make six moves:
 
-1. introduce the integral marked (A_5)-carrier, mentioning in one clause that
+1. introduce the finite marked \(A_5\)-carrier, mentioning in one clause that
    it arises from the Clebsch reconstruction series;
-2. state that its exotic principal sheet is realized by a non-isotrivial cubic
-   pencil;
-3. state the primitive-minimal-class theorem and universal
-   (CH_0)-triviality;
-4. state the primitive-sixth-root obstruction to rationality of
-   (X\times\mathbf P^1);
-5. state the separation theorem.
+2. state the canonical integral-envelope theorem;
+3. state the precise exotic cubic period-realization theorem;
+4. state the primitive-minimal-class theorem and universal
+   \(CH_0\)-triviality;
+5. state the primitive-sixth-root obstruction to rationality of
+   \(X\times\mathbf P^1\);
+6. state that these stabilized fourfolds themselves are universally
+   \(CH_0\)-trivial and irrational.
 
 Do not summarize the five reconstruction papers individually in the abstract.
 
@@ -440,82 +531,121 @@ The epilogue should open with the general mathematical question:
 > How much rationality is forced when the decomposition-of-diagonal
 > obstruction vanishes?
 
-It should then explain why the examples are canonical rather than searched for:
-they are the exotic complex realization of the integral carrier recovered in
-Paper V.
+It should then explain why the examples are canonical rather than searched
+for: the epilogue constructs the integral envelope of Paper V's finite marked
+carrier and identifies its exotic complex realization.
 
 Paper V should close with:
 
-> The sparse shadows have returned to one marked integral carrier. The
-> reconstruction problem ends here. The geometric epilogue asks what this
-> recovered carrier forces.
+> The sparse shadows have returned to one finite marked carrier. The
+> reconstruction problem ends here. A geometric epilogue asks whether its
+> canonical integral envelope has a distinguished complex realization and
+> what that realization forces.
 
 The epilogue should close with:
 
-> The numbered series ends with reconstruction. Its recovered carrier is not
-> merely a common combinatorial presentation: its exotic integral realization
-> produces a non-isotrivial family on which two central tests for rationality
-> diverge.
+> The numbered series ends with reconstruction. The epilogue's integral-
+> envelope theorem shows that its recovered finite carrier is not merely a
+> common combinatorial presentation: its exotic realization produces a
+> non-isotrivial family on which two central tests for rationality diverge.
 
 ## Acceptance gates
 
 ### Paper V
 
 1. The marked object lists every retained choice and quotient symmetry.
-2. Every map from Papers I--III lands in that one object.
-3. The (q-1) bridge has a human nonvanishing proof.
-4. Both composites are identities at exactly the claimed output level.
-5. The integral extraction is an explicit lattice map, not an equality of
-   rational endomorphism algebras.
-6. No theorem depends on a computation or certificate.
-7. Paper IV is not assigned an unproved carrier bridge.
+2. The source, target, and carrier groupoids have explicit gauge morphisms and
+   stabilizers.
+3. Every map from Papers I--III lands in the carrier groupoid.
+4. The \(q-1\) bridge has a human nonvanishing and normalization proof.
+5. Both composites carry natural isomorphisms satisfying the triangle
+   identities.
+6. The finite output interface recovers only the oriented six-set,
+   augmentation lattice, and golden plane.
+7. No theorem depends on a computation or certificate.
+8. Paper IV is not assigned an unproved carrier bridge.
 
 ### Geometric epilogue
 
-1. The carrier-realization theorem makes the series connection causal.
-2. The exotic cubic family is proved non-isotrivial.
-3. Minimal-class integrality follows from the local structural theorem, with
-   correct factorial and off-diagonal normalizations.
-4. Voisin is applied only at the fixed-fibre strength supplied by the source.
-5. The enhanced atom invariant is defined on the actual equivalence relation
+1. The canonical integral-envelope theorem makes the finite-to-integral
+   series connection causal.
+2. The cubic axes realize that exact envelope with polarization \(6I-J\).
+3. The period-map theorem states its exact strength: landing,
+   image-normalization, and generic degree are not conflated.
+4. The exotic cubic family is proved non-isotrivial.
+5. Minimal-class integrality follows from the local structural theorem and an
+   explicit geometric local-chart lemma, with correct factorial and
+   off-diagonal normalizations.
+6. Voisin is applied only at the fixed-fibre strength supplied by the source.
+7. The enhanced atom invariant is defined on the actual equivalence relation
    used in weak factorization.
-6. The low-dimensional center theorem covers every point, curve, and surface
+8. The formal-isomonodromy and Cai-to-maximal-block identifications are
+   printed.
+9. The low-dimensional center theorem covers every point, curve, and surface
    center that can occur for a fourfold.
-7. The no-cancellation step uses the additive enhanced-atom group, not an
+10. The no-cancellation step uses the additive enhanced-atom group, not an
    informal block count.
-8. The manuscript says "irrational after one stabilization," never "stably
+11. The manuscript says "irrational after one stabilization," never "stably
    irrational."
-9. The special quantum argument is sufficiently self-contained to withstand
+12. The special quantum argument is sufficiently self-contained to withstand
    the recency of its two source pillars.
-10. A claim-specific priority audit supports the family separation theorem and
+13. A claim-specific priority audit supports the family separation theorem and
     the every-cubic strengthening separately.
 
 ## Drafting order
 
 1. Freeze the exact marked object and structural theorem packet for Paper V.
-2. Rewrite every Paper V transport through that one object.
-3. Prove the integral carrier extraction and freeze the epilogue interface.
-4. Freeze Paper V at 14--18 pages with no computational proof dependency.
-5. Freeze the epilogue carrier-realization theorem.
-6. Replace the minimal-class certificate by the primewise structural proof.
-7. Write the fixed-fibre Voisin application and quarantine all relative-cycle
+2. Rewrite every Paper V transport as a functor through the carrier groupoid.
+3. Prove the natural triangle identities and finite output interface.
+4. Freeze Paper V at 16--22 pages with no computational proof dependency.
+5. In the epilogue, prove the canonical integral-envelope theorem.
+6. Freeze the exact period-image normalization and generic-degree theorem.
+7. Replace the minimal-class certificate by the primewise structural proof and
+   its geometric local-chart application.
+8. Write the fixed-fibre Voisin application and quarantine all relative-cycle
    material.
-8. Write the \(\nu_6\) special-case bridge, surface theorem, and weak-factorization
+9. Write the \(\nu_6\) special-case bridge, surface theorem, and weak-factorization
    no-cancellation proof.
-9. Freeze the epilogue theorem and title.
-10. Only then coordinate the perspective figures, conclusions, and forward
-    references across Papers I--V.
-11. Run separate literature, referee, and release gates for Paper V and the
+10. Obtain an independent quantum/\(F\)-bundle review.
+11. Freeze the epilogue theorem, title, and priority statement.
+12. Only then coordinate forward-version perspective figures, conclusions,
+    and references across Papers I--V.
+13. Run separate literature, referee, and release gates for Paper V and the
     epilogue; their claims and likely reviewers are materially different.
+
+## Position and contingency
+
+The successor is genuinely Annals-shaped only if all of the following land:
+
+1. the canonical finite-to-integral envelope;
+2. the strong period-image normalization and generic-degree theorem;
+3. the geometric application of the primewise minimal-class theorem;
+4. a self-contained special-case sixth-root/weak-factorization proof; and
+5. a final priority audit of both the family conjunction and the every-cubic
+   stabilization theorem.
+
+Without the first two, the cycle and quantum halves remain an excellent
+Inventiones/JAMS-shaped conjunction but are too easily described as
+juxtaposed. Apply these kill criteria:
+
+- if no exact finite-to-integral handoff is proved, do not say the cubic
+  theorem is what the reconstructed carrier “forces”;
+- if only period-map landing is proved, say “an exotic realization,” not “the
+  exotic realization” or an identification of parameter curves;
+- if the recent quantum stack cannot be made sufficiently self-contained,
+  publish the cubic minimal-class theorem separately and remove the epilogue
+  promise from Papers I--V;
+- if Paper V exceeds 22 pages, move every integral construction back to the
+  epilogue rather than weakening the structural-only rule.
 
 ## Final publication shape
 
 - Papers I--IV remain substantial standalone reconstruction theorems.
 - Paper V is a short structural synthesis, not a repository for later research.
 - The geometric epilogue is the independent high-venue punchline.
-- The series connection is anticipated in every introduction, certified by an
-  exact carrier handoff theorem in V, and restated self-containedly in the
-  epilogue.
+- The epilogue itself proves the exact finite-to-integral handoff, so its
+  series provenance is causal without making it dependent on unreproduced
+  arguments from V.
 
 This is the smallest architecture in which the successor reads simultaneously
 as a genuine payoff of the series and as a serious standalone theorem.
