@@ -260,9 +260,9 @@ Lean source, package, mirror, or remote changed.  Full report:
    registry pin remain queued behind the active Q13 build; the legacy monorepo family stays pending
    until that bridge is green and its consumers move.
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
-   materialized outputs at Lean-source commit `0dc0510`. Classes 0--36 are complete; sequential
+   materialized outputs at Lean-source commit `0dc0510`. Classes 0--37 are complete; sequential
    run `run-20260810-233857-b4421bc3` owns Classes 30--109, Data, Assembly, and the root gate, with
-   Class37 current. Each high-memory class is a separate queue target, preventing sibling overlap.
+   Class38 current. Each high-memory class is a separate queue target, preventing sibling overlap.
    After it finishes, cherry-pick metadata commits `156af07`, `d0a4213`, `ed50b4d`, `51ec6c2`,
    refresh only the cheap aggregate root, then seal and pack. Q25 is independently Mathlib-only at
    `72130996`; before its one aggregate build it still needs the guarded 7,547-source regeneration,
