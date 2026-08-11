@@ -260,7 +260,7 @@ Lean source, package, mirror, or remote changed.  Full report:
    registry pin remain queued behind the active Q13 build; the legacy monorepo family stays pending
    until that bridge is green and its consumers move.
    Projective-cap Q13 is independently Mathlib-only with 113 authenticated frozen inputs and 114
-   materialized outputs at Lean-source commit `0dc0510`. Classes 0--84 are complete; Class85 is
+   materialized outputs at Lean-source commit `0dc0510`. Classes 0--86 are complete; Class87 is
    current in `run-20260811-142415-601f4871`. Every remaining class is a separate target under the
    one-worker, cache-required `q13-serialized` profile; its 12 GiB admission reserve prevents a
    retry during low-headroom conditions. Checkpoint `q13-0dc0510-classes80-81` seals the latest
