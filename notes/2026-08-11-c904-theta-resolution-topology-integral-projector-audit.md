@@ -240,8 +240,8 @@ No audited theorem provides any of the following for this fourfold:
 
 - an integral or \(\mathbf Z_{(2)}\) Chow--Kunneth decomposition;
 - integral generation of cohomology by universal Chern components;
-- a codimension-three algebraic inverse-Lefschetz correspondence on
-  \(M\times M\);
+- an integral or \(\mathbf Z_{(2)}\) codimension-three algebraic
+  inverse-Lefschetz correspondence on \(M\times M\);
 - a theorem that all rational Hodge tensors on \(M^2\) are algebraic.
 
 Markman's integral-generator results are for moduli of sheaves on
@@ -267,12 +267,24 @@ For an odd-degree class in
   \(H^1\otimes H^5\) directions and the forty-four dyadic nonsplit
   \(H^2\otimes H^4\) directions.
 
-Rational inverse Lefschetz exists at the level of Hodge structures, and
-the Lefschetz standard conjecture is classical on the ambient abelian
-variety.  Neither statement produces the required codimension-three cycle
-on \(M^2\).  Pulling an ambient inverse-Lefschetz correspondence to
-\(M^2\) has the wrong codimension; lowering it by the theta class is exactly
-the operation whose two-local integrality and algebraicity are at issue.
+There is in fact a rational algebraic codimension-three lowering
+correspondence on \(M^2\).  If \(b:M\to J\) is the resolution map and
+\(\Lambda_J\) is Lieberman's algebraic rational inverse-Lefschetz operator,
+then
+
+\[
+                 b^*\circ\Lambda_J^2\circ b_*
+       \in CH^3(M\times M)_{\mathbf Q}.
+\]
+
+The graph Gysin shifts degree by two, the two lowering operators shift by
+minus four, and pullback has degree zero, so the composite has the required
+net degree minus two.  On the inherited odd cohomology it gives the desired
+rational \((1,5)\) lowering component, up to the standard nonzero Lefschetz
+scalars.  This corrects the earlier claim that even rational algebraicity on
+\(M^2\) was unsupported.  What remains unsupported is precisely an integral
+or \(\mathbf Z_{(2)}\) refinement; Lieberman's correspondence is rational
+and does not control the Smith-factor twos.
 
 Therefore the safe implication is
 
@@ -312,7 +324,7 @@ There is no source-backed theorem eliminating the second alternative.
 
 - full integral torsion decomposition of every cohomology group of \(M\);
 - an integral Chow--Kunneth decomposition of \(M\);
-- algebraicity on \(M^2\) of the rational inverse-Lefschetz Hodge tensor;
+- integral-at-two algebraicity on \(M^2\) of the inverse-Lefschetz tensor;
 - odd symmetric-square cycle \(\Rightarrow\) odd theta-supported curve.
 
 The first missing item is not the current bottleneck: the local calculation
@@ -344,6 +356,13 @@ The last three are the same algebraic two-local gate.
   Corollary 3.9 and Lemma 7.5 with its proof.  arXiv:`2406.09124`; cached
   PDF SHA-256
   `c1aa5d752c9c081827d0aa2cec4ab6408e3868449ef3f7e7ba11a7f936bbdb25`.
+
+- J. S. Milne, *Lefschetz classes on abelian varieties*, Duke Math. J. 96
+  (1999), Section 5, especially Proposition 5.7, Theorem 5.9, and Remark
+  5.11.  Read depth: **claim-specific partial**.  This supplies rational-
+  equivalence inverse-Lefschetz correspondences on the ambient abelian
+  variety.  Cached PDF SHA-256
+  `28ae245e58748438b7070680cac83f8b2f695c43f1643b59cde21eb94077fe53`.
 
 The exact surface/module boundary sources (Markman, Bülles, King--Walter)
 were already audited at theorem level in

@@ -47,11 +47,16 @@ What it does require is exactly the old missing two-local projector.  The
 diagonal gives the identity in codimension four.  To realize the odd
 degree-five class in codimension three one must apply an integral inverse to
 cup product by theta.  That inverse has ten elementary divisors two in the
-$H^1/H^5$ sector.  Rationally the required linear Hodge projector exists,
-but no audited theorem algebraizes it as a codimension-three correspondence
-on $M\times M$.  The $H^2/H^4$ sector has forty-four analogous dyadic
-directions.  Rational cohomology generation by universal-family Chern
-components does not by itself prove this algebraicity statement.
+$H^1/H^5$ sector.  Rationally the relevant lowering correspondence is
+algebraic: if $b:M\to J$ is the theta-resolution map and $\Lambda_J$ is
+Lieberman's algebraic rational inverse-Lefschetz operator on the abelian
+fivefold, then
+$b^*\circ\Lambda_J^2\circ b_*$ is represented in
+$CH^3(M\times M)_{\mathbf Q}$.  What is missing is an integral or
+$\mathbf Z_{(2)}$ representative.  The $H^2/H^4$ sector has forty-four
+analogous dyadic directions.  Rational cohomology generation by
+universal-family Chern components alone would not prove this sharper
+algebraicity statement; the ambient abelian correspondence does.
 
 Equivalently, every proposed odd multisection produces an integral Hodge
 curve class $\lambda$ on $M$ with odd theta degree and with $2\lambda$
@@ -268,13 +273,12 @@ multisection has exactly two possibilities:
 
 The second possibility is precisely an integral-at-two Chow projector
 phenomenon.  In motivic language, one must lower the algebraic diagonal by
-one theta Lefschetz operator.  Rational inverse Lefschetz is available at
-the level of Hodge structures (and the Lefschetz standard conjecture is
-classical on the ambient abelian variety), but passage to a
-codimension-three algebraic correspondence on the theta resolution is an
-additional, currently unsupported step.  The Smith forms (2.2)--(2.4) show
-exactly where an integral inverse needs division by two.  This is the same
-obstruction encountered in the universal-Ext diagonal approach.
+one theta Lefschetz operator.  The ambient abelian inverse-Lefschetz
+correspondence gives a rational codimension-three realization on the theta
+resolution via $b^*\Lambda_J^2b_*$.  The unsupported step is its integral
+or two-local refinement.  The Smith forms (2.2)--(2.4) show exactly where
+that refinement needs division by two.  This is the same obstruction
+encountered in the universal-Ext diagonal approach.
 
 Thus:
 
@@ -355,9 +359,10 @@ computed.
   dimension and isolate a curve class, not an uncontrolled higher cycle.
 - **Settled:** in dimension five the $(3,3)$ channel is even, while the live
   residual lattices have exact dyadic dimensions ten and forty-four.
-- **Open:** whether the odd $(1,5)$ Hodge coset is algebraic.  This is an
-  integral inverse-Lefschetz correspondence at two, not a rational Hodge
-  question.
+- **Open:** whether the odd $(1,5)$ Hodge coset is integrally algebraic.
+  Its rational algebraicity follows from the ambient abelian
+  inverse-Lefschetz correspondence; the remaining question is an integral
+  inverse-Lefschetz correspondence at two.
 - **Open:** whether a non-split $(2,4)$ algebraic correspondence realizes one
   of its forty-four dyadic directions.  Decomposable tensors merely recover
   the already known odd-theta-curve gate.
@@ -368,14 +373,32 @@ computed.
 
 ## 6. Source and replay boundary
 
-The only external input newly used here is the already audited integral
-symmetric-product pullback theorem:
+The external inputs newly used here are the integral symmetric-product
+pullback theorem and the algebraicity of rational inverse Lefschetz:
 
 - Dmitry V. Gugnin, *On Integral Cohomology Ring of Symmetric Products*,
   arXiv:1502.01862, Theorem 1, PDF pp. 4--7.  Cached PDF SHA-256
   74c1d9704d7ddd24f76f314162a44c05727db9770648f6d285679e23b67b4107;
   extracted text SHA-256
   bbf2266aaf41c7740fd9cbe0675c3ab96262b1cb729f847ef1f25c91b4ebe031.
+
+- J. S. Milne, *Lefschetz classes on abelian varieties*, Duke Math. J. 96
+  (1999), Section 5, especially Theorem 5.9 and Remark 5.11.  Read depth:
+  **claim-specific partial**.  The theorem and remark give rational-
+  equivalence cycles inducing inverse-Lefschetz correspondences.  Cached PDF
+  SHA-256
+  28ae245e58748438b7070680cac83f8b2f695c43f1643b59cde21eb94077fe53.
+
+For priority, Faulkner Valiente--Miller Eismeier,
+*A Lefschetz decomposition over Z, and applications*,
+arXiv:2507.00844v1, Theorems 1.1--1.2 and Lemmas 2.12--2.13, already give
+the general integral symplectic Lefschetz filtration and its failure to
+split equivariantly.  Read depth: **claim-specific partial**; cached PDF
+SHA-256
+3a3ef5208198526fdfcdeaabc00abbae77650b2015bce5806cce92e3d8a0ac91.
+Their Theorem 1.2 recovers the general associated-graded source of the
+dimension-five $(4,6)$ Smith defect; the C904 replay retains the exact basis,
+the $(5,7)$ channel, and the theta-resolution application.
 
 The weak Lefschetz, Gysin, excess-intersection, and symplectic exterior
 algebra steps are proved directly above.  The exact Smith forms are replayed

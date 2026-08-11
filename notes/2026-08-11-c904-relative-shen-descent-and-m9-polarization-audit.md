@@ -266,13 +266,16 @@ Neither charge-three source verifies these conditions.
   twisting surfaces. Their Question 8.10 still asks even whether the general
   fibre is unirational.
 
-There is also a decisive base-dimension mismatch. The fourfold
-`V=(M_9 -> J)_eta` is defined over `C(J)`, where `dim J=5`. De
-Jong--He--Starr's theorem applies over function fields of surfaces. Restricting
-the Abel--Jacobi family to a surface `S subset J` could at best produce a
-`C(S)`-point; it neither specializes upward nor supplies a zero-cycle over the
-generic point of `J`. For a marked one-parameter cubic family the total
-intermediate-Jacobian base has dimension six, so the mismatch persists.
+For the original generic fibre over `C(J)` there is a decisive base-dimension
+mismatch: de Jong--He--Starr applies over function fields of surfaces, not the
+five-dimensional base `J`.  This objection does **not** apply to the later
+finite-component reduction.  There the relevant bases are the finitely many
+surfaces `S_i` supporting the fixed divisor-product cycle, and Corollary 12.2
+would indeed give a `C(S_i)`-point on a suitable proper model if its free-line,
+chain, very-twisting-surface, and relative-polarization hypotheses were proved.
+None of the audited charge-three sources proves those hypotheses.  Thus the
+surface theorem is a live conditional tool for the `S_i` reduction, but not a
+present theorem about `M_9`.
 
 Conversely, if the desired half or odd carrier could be represented by a
 proper rationally connected parameter space over `K=C(B)`, ordinary
@@ -281,10 +284,11 @@ proof for the charge-three fibre would be substantial new geometry but would
 not, by the cited surface theorem alone, globalize the current generic-index
 lift.
 
-**Verdict:** dead as a direct application. A viable resurrection would require
-either a higher-dimensional-base section theorem with the requisite higher
-rational connectedness, or a reduction of the actual generic-index problem to
-a two-dimensional base. Neither reduction appears in the audited sources.
+**Verdict:** dead as a direct application over `C(J)`, but conditionally
+applicable after the now-available reduction to the surfaces `S_i`.  The
+remaining missing input is not base dimension; it is rational simple
+connectedness by the specified free-line geometry, a very twisting surface,
+and a proper polarized relative model.
 
 ## 7. Sharpest safe theorem/obstruction formulation
 
@@ -428,6 +432,10 @@ forward-citation count was claimed.
   without computing its fourth self-intersection.
 - **Dead as stated:** apply the de Jong--He--Starr surface theorem directly to
   the generic Abel--Jacobi fibre over the five-dimensional base `J`.
-- **Open but not presently a closure:** prove the charge-three fibre satisfies
-  Hypothesis 6.8 and contains a very twisting surface; no audited rational-curve
-  family supplies the needed two-point evaluation geometry.
+- **Corrected/live on the finite components:** the theorem is dimensionally
+  applicable after pullback to each surface `S_i`; the remaining missing inputs
+  are a proper polarized relative model, Hypothesis 6.8, and a very twisting
+  surface.
+- **Open but not presently a closure:** no audited rational-curve family
+  supplies the needed one- and two-point free-line evaluation geometry on the
+  charge-three fibre.
