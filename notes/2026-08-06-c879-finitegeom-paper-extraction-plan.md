@@ -102,9 +102,11 @@ finitegeom and certificate commits, exact imports, clean dependency checkouts,
 matching cache archives, and no finitegeom-to-certificate dependency.
 
 `lean/scripts/lean-certificate-dependency-firewall.py` is the executable package
-edge policy.  Its Q11 check is green after the self-contained rewrite.  Its portfolio
-scan intentionally remains red for the projective-cap Q11, Q13, and Q25
-certificate packages until each receives the same local-model/adapter migration.
+edge policy. Its Q11/Q16 checks are green after the self-contained rewrites. The
+projective-cap Q11 certificate is likewise Mathlib-only and sealed; Q13 is Mathlib-only
+with its frozen payload under guarded compilation; Q25 is statically separated and
+awaits materialization and compilation. The portfolio scan stays red only for a package
+whose external fact, downstream adapter, or legacy-family removal is incomplete.
 
 The Q16 seam is now established. The generated level, step-kernel, leaf, and rejection
 checks are in the self-contained certificate package behind its local `Idx`/field
@@ -112,15 +114,17 @@ model. `Q16Reduction`, `Q16Result`, and the paper-wide human interface remain in
 finitegeom; the separate Arcs paper bridge transports the generated rejection terminal
 into that layer without a finitegeom-to-certificate edge.
 
-The other current reverse edges are bounded.  The two-module projective-cap Q11 package
-and the 113-module Q13 package reach only `ProjectiveCap.CertCheck` and
-`ProjectiveCap.PlaneOutcome`; their generated checks get a local statement model and
-the outcome transport moves downstream.  Q25 has 9,531 modules and reaches ten human
+The migrated reverse edges were bounded. The projective-cap Q11 and Q13 migration inputs
+reached only `ProjectiveCap.CertCheck` and `ProjectiveCap.PlaneOutcome`; their generated
+checks now use duplicated Mathlib-only local models, and outcome transport is downstream.
+Q25 has 9,531 migration-input modules and reaches ten human
 modules: `Certificate`, `FiniteFields`, `Moments`, `Nucleus`, `ProjectiveBridge`,
 `PlaneTransitivity`, and the four Baer-completion modules `BaerPlane`,
 `CollisionProfile`, `OrbitCounting`, and `PairExtension`. Its generated payload must
 be separated from all ten human modules and moved directly to its final namespace
-before one final leaf build; no intermediate compatibility build is permitted.
+before one final leaf build; no intermediate compatibility build is permitted. Its final
+tree has 9,511 Lean modules: 1,945 frozen transformed modules, 7,547 regenerated modules,
+and 19 handwritten modules.
 
 Their final certificate namespaces are
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
@@ -152,17 +156,20 @@ odd-escape game statements, and projective initial-position theorems move downst
 The frozen generated Lean is the migration input because the original q11/q13 `.cert`
 inputs are not tracked and the q13 generator does not reproduce the current payload.
 A hash-guarded transformer therefore performs this namespace-only migration; neither
-package claims regeneration until canonical inputs and generators are repaired.
+package claims regeneration from the unavailable historical certificate input. Every
+high-memory Q13 class is a separate guarded queue target: `LEAN_NUM_THREADS` and CPU
+affinity do not themselves prevent Lake from overlapping sibling module processes.
 
 For Q25 the certificate-local model is limited to the concrete `GF(25)` encoding,
 raw projective coordinates and cap checker, conjugation/fixed indices, and the pair,
 line-mask, residual, exhaustion, and minimum checker families. Generic moments,
 incidence, collision/orbit counting, pair extension, normalization, and projective
 transport remain downstream. `RelativeConicArcs.Nucleus` has no declaration-level use
-and is removed rather than copied. The 9,531 generated modules move mechanically under
-`TavisRuddFiniteGeom.Certificates.Q25`; fifteen tracked generators and the schema,
-manifest, provenance hashes, and import-only aggregates must agree before its single
-final build.
+and is removed rather than copied. The 7,547 regenerated modules and 1,945 authenticated
+frozen modules move mechanically under `TavisRuddFiniteGeom.Certificates.Q25`; the two
+canonical data artifacts, seventeen script/support inputs, transactional generation
+plan, manifest, provenance hashes, declaration-surface audit, and import-only aggregates
+must agree before its single final build.
 
 Use explicit paper and shared source roots under the ecosystem namespace:
 
