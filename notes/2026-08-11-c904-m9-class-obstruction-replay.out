@@ -1,0 +1,5 @@
+ch(I_C(2h))=(Fraction(1, 1), Fraction(2, 1), Fraction(0, 1), Fraction(-2, 1))
+ch(A)=(Fraction(2, 1), Fraction(2, 1), Fraction(0, 1), Fraction(-2, 1))
+ch(E=A(-h))=(Fraction(2, 1), Fraction(0, 1), Fraction(-3, 1), Fraction(0, 1)); chi(E)=-1
+Eisenstein norm residues mod 3=[0, 1]; norm 8 impossible
+GRR horizontal cancellation=-2+2=0
