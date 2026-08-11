@@ -141,6 +141,39 @@ def main():
             assert coefficients[0] == coefficients[-1] == 0
         assert check["endpoint_outside_center_integer_span_by_extreme_degrees"]
 
+    serre_width = certificate["candidate_integral_serre_width_refinement"]
+    for check in serre_width["beilinson_checks"]:
+        d = check["projective_dimension"]
+        n = d + 1
+        euler = sp.Matrix(
+            n,
+            n,
+            lambda i, j: sp.binomial(d + j - i, d) if j >= i else 0,
+        )
+        assert euler.det() == 1
+        serre = euler.inv() * euler.T
+        sign = (-1) ** d
+        assert sp.factor(serre.charpoly().as_expr()) == (sp.Symbol("lambda") - sign) ** n
+        nilpotent = sign * serre - sp.eye(n)
+        assert nilpotent**n == sp.zeros(n)
+        if d > 0:
+            assert nilpotent**d != sp.zeros(n)
+        assert check["rank"] == n
+        assert check["semisimple_sign"] == sign
+        assert check["unipotent_nilpotence_index"] == n
+        assert check["logarithm_nilpotence_index"] == n
+        assert check["single_jordan_block"]
+    for check in serre_width["self_carrier_checks"]:
+        m = check["stabilizing_projective_dimension_m"]
+        assert check["endpoint_serre_block_length"] == m + 1
+        assert check["maximum_self_carrier_block_length"] == m - 1
+        assert check["uniform_block_length_gap"] == 2
+        for center in check["self_carriers"]:
+            t = center["t"]
+            assert center["center_projective_dimension"] == t - 1
+            assert center["exceptional_projective_dimension"] == m - t - 1
+            assert center["tensor_logarithm_nilpotence_index"] == m - 1
+
     spectral_checks = certificate["candidate_spectral_cycle_refinement"]["checks"]
     for check in spectral_checks:
         m = check["stabilizing_projective_dimension_m"]
@@ -187,7 +220,7 @@ def main():
     print(
         "independent replay passed: indicial polynomial, projective checks "
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
-        f"cancellation and Tate checks m=1..{len(cancellation_checks)}, "
+        f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
         f"spectral-cycle checks m=2..{len(spectral_checks)+1}, "
         f"prime-power tower checks through n={len(projective_checks)}"
     )

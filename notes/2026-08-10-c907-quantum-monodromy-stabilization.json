@@ -353,6 +353,2163 @@
     "known_failure_of_general_monotonicity": "Elagin-Lunts exhibit an admissible subcategory of D^b(F_3) with upper Serre dimension 3, larger than the surface dimension 2. Their example does not settle the restricted fractional-Calabi-Yau/equal-Serre-dimensions carrier inequality.",
     "status": "Conditional numerical gap, not yet a reduction. Serre dimension is additive under tensor products, but the ordinary projective-bundle semiorthogonal decomposition splits the tensor category into m+1 copies, and Serre dimension is not monotone for general admissible subcategories."
   },
+  "candidate_integral_serre_width_refinement": {
+    "beilinson_checks": [
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 1,
+        "projective_dimension": 0,
+        "rank": 1,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 1
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 2,
+        "projective_dimension": 1,
+        "rank": 2,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^2 + 2*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 2
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 3,
+        "projective_dimension": 2,
+        "rank": 3,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^3 - 3*lambda^2 + 3*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 3
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 4,
+        "projective_dimension": 3,
+        "rank": 4,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^4 + 4*lambda^3 + 6*lambda^2 + 4*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 4
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 5,
+        "projective_dimension": 4,
+        "rank": 5,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^5 - 5*lambda^4 + 10*lambda^3 - 10*lambda^2 + 5*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 5
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 6,
+        "projective_dimension": 5,
+        "rank": 6,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^6 + 6*lambda^5 + 15*lambda^4 + 20*lambda^3 + 15*lambda^2 + 6*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 6
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 7,
+        "projective_dimension": 6,
+        "rank": 7,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^7 - 7*lambda^6 + 21*lambda^5 - 35*lambda^4 + 35*lambda^3 - 21*lambda^2 + 7*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 7
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 8,
+        "projective_dimension": 7,
+        "rank": 8,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^8 + 8*lambda^7 + 28*lambda^6 + 56*lambda^5 + 70*lambda^4 + 56*lambda^3 + 28*lambda^2 + 8*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 8
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 9,
+        "projective_dimension": 8,
+        "rank": 9,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^9 - 9*lambda^8 + 36*lambda^7 - 84*lambda^6 + 126*lambda^5 - 126*lambda^4 + 84*lambda^3 - 36*lambda^2 + 9*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 9
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 10,
+        "projective_dimension": 9,
+        "rank": 10,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^10 + 10*lambda^9 + 45*lambda^8 + 120*lambda^7 + 210*lambda^6 + 252*lambda^5 + 210*lambda^4 + 120*lambda^3 + 45*lambda^2 + 10*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 10
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 11,
+        "projective_dimension": 10,
+        "rank": 11,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^11 - 11*lambda^10 + 55*lambda^9 - 165*lambda^8 + 330*lambda^7 - 462*lambda^6 + 462*lambda^5 - 330*lambda^4 + 165*lambda^3 - 55*lambda^2 + 11*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 11
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 12,
+        "projective_dimension": 11,
+        "rank": 12,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^12 + 12*lambda^11 + 66*lambda^10 + 220*lambda^9 + 495*lambda^8 + 792*lambda^7 + 924*lambda^6 + 792*lambda^5 + 495*lambda^4 + 220*lambda^3 + 66*lambda^2 + 12*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 12
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 13,
+        "projective_dimension": 12,
+        "rank": 13,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^13 - 13*lambda^12 + 78*lambda^11 - 286*lambda^10 + 715*lambda^9 - 1287*lambda^8 + 1716*lambda^7 - 1716*lambda^6 + 1287*lambda^5 - 715*lambda^4 + 286*lambda^3 - 78*lambda^2 + 13*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 13
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 14,
+        "projective_dimension": 13,
+        "rank": 14,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^14 + 14*lambda^13 + 91*lambda^12 + 364*lambda^11 + 1001*lambda^10 + 2002*lambda^9 + 3003*lambda^8 + 3432*lambda^7 + 3003*lambda^6 + 2002*lambda^5 + 1001*lambda^4 + 364*lambda^3 + 91*lambda^2 + 14*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 14
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 15,
+        "projective_dimension": 14,
+        "rank": 15,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^15 - 15*lambda^14 + 105*lambda^13 - 455*lambda^12 + 1365*lambda^11 - 3003*lambda^10 + 5005*lambda^9 - 6435*lambda^8 + 6435*lambda^7 - 5005*lambda^6 + 3003*lambda^5 - 1365*lambda^4 + 455*lambda^3 - 105*lambda^2 + 15*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 15
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 16,
+        "projective_dimension": 15,
+        "rank": 16,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^16 + 16*lambda^15 + 120*lambda^14 + 560*lambda^13 + 1820*lambda^12 + 4368*lambda^11 + 8008*lambda^10 + 11440*lambda^9 + 12870*lambda^8 + 11440*lambda^7 + 8008*lambda^6 + 4368*lambda^5 + 1820*lambda^4 + 560*lambda^3 + 120*lambda^2 + 16*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 16
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 17,
+        "projective_dimension": 16,
+        "rank": 17,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^17 - 17*lambda^16 + 136*lambda^15 - 680*lambda^14 + 2380*lambda^13 - 6188*lambda^12 + 12376*lambda^11 - 19448*lambda^10 + 24310*lambda^9 - 24310*lambda^8 + 19448*lambda^7 - 12376*lambda^6 + 6188*lambda^5 - 2380*lambda^4 + 680*lambda^3 - 136*lambda^2 + 17*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 17
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 18,
+        "projective_dimension": 17,
+        "rank": 18,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^18 + 18*lambda^17 + 153*lambda^16 + 816*lambda^15 + 3060*lambda^14 + 8568*lambda^13 + 18564*lambda^12 + 31824*lambda^11 + 43758*lambda^10 + 48620*lambda^9 + 43758*lambda^8 + 31824*lambda^7 + 18564*lambda^6 + 8568*lambda^5 + 3060*lambda^4 + 816*lambda^3 + 153*lambda^2 + 18*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 18
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 19,
+        "projective_dimension": 18,
+        "rank": 19,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^19 - 19*lambda^18 + 171*lambda^17 - 969*lambda^16 + 3876*lambda^15 - 11628*lambda^14 + 27132*lambda^13 - 50388*lambda^12 + 75582*lambda^11 - 92378*lambda^10 + 92378*lambda^9 - 75582*lambda^8 + 50388*lambda^7 - 27132*lambda^6 + 11628*lambda^5 - 3876*lambda^4 + 969*lambda^3 - 171*lambda^2 + 19*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 19
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 20,
+        "projective_dimension": 19,
+        "rank": 20,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^20 + 20*lambda^19 + 190*lambda^18 + 1140*lambda^17 + 4845*lambda^16 + 15504*lambda^15 + 38760*lambda^14 + 77520*lambda^13 + 125970*lambda^12 + 167960*lambda^11 + 184756*lambda^10 + 167960*lambda^9 + 125970*lambda^8 + 77520*lambda^7 + 38760*lambda^6 + 15504*lambda^5 + 4845*lambda^4 + 1140*lambda^3 + 190*lambda^2 + 20*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 20
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 21,
+        "projective_dimension": 20,
+        "rank": 21,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^21 - 21*lambda^20 + 210*lambda^19 - 1330*lambda^18 + 5985*lambda^17 - 20349*lambda^16 + 54264*lambda^15 - 116280*lambda^14 + 203490*lambda^13 - 293930*lambda^12 + 352716*lambda^11 - 352716*lambda^10 + 293930*lambda^9 - 203490*lambda^8 + 116280*lambda^7 - 54264*lambda^6 + 20349*lambda^5 - 5985*lambda^4 + 1330*lambda^3 - 210*lambda^2 + 21*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 21
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 22,
+        "projective_dimension": 21,
+        "rank": 22,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^22 + 22*lambda^21 + 231*lambda^20 + 1540*lambda^19 + 7315*lambda^18 + 26334*lambda^17 + 74613*lambda^16 + 170544*lambda^15 + 319770*lambda^14 + 497420*lambda^13 + 646646*lambda^12 + 705432*lambda^11 + 646646*lambda^10 + 497420*lambda^9 + 319770*lambda^8 + 170544*lambda^7 + 74613*lambda^6 + 26334*lambda^5 + 7315*lambda^4 + 1540*lambda^3 + 231*lambda^2 + 22*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 22
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 23,
+        "projective_dimension": 22,
+        "rank": 23,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^23 - 23*lambda^22 + 253*lambda^21 - 1771*lambda^20 + 8855*lambda^19 - 33649*lambda^18 + 100947*lambda^17 - 245157*lambda^16 + 490314*lambda^15 - 817190*lambda^14 + 1144066*lambda^13 - 1352078*lambda^12 + 1352078*lambda^11 - 1144066*lambda^10 + 817190*lambda^9 - 490314*lambda^8 + 245157*lambda^7 - 100947*lambda^6 + 33649*lambda^5 - 8855*lambda^4 + 1771*lambda^3 - 253*lambda^2 + 23*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 23
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 24,
+        "projective_dimension": 23,
+        "rank": 24,
+        "semisimple_sign": -1,
+        "serre_characteristic_polynomial": "lambda^24 + 24*lambda^23 + 276*lambda^22 + 2024*lambda^21 + 10626*lambda^20 + 42504*lambda^19 + 134596*lambda^18 + 346104*lambda^17 + 735471*lambda^16 + 1307504*lambda^15 + 1961256*lambda^14 + 2496144*lambda^13 + 2704156*lambda^12 + 2496144*lambda^11 + 1961256*lambda^10 + 1307504*lambda^9 + 735471*lambda^8 + 346104*lambda^7 + 134596*lambda^6 + 42504*lambda^5 + 10626*lambda^4 + 2024*lambda^3 + 276*lambda^2 + 24*lambda + 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 24
+      },
+      {
+        "euler_determinant": 1,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "logarithm_nilpotence_index": 25,
+        "projective_dimension": 24,
+        "rank": 25,
+        "semisimple_sign": 1,
+        "serre_characteristic_polynomial": "lambda^25 - 25*lambda^24 + 300*lambda^23 - 2300*lambda^22 + 12650*lambda^21 - 53130*lambda^20 + 177100*lambda^19 - 480700*lambda^18 + 1081575*lambda^17 - 2042975*lambda^16 + 3268760*lambda^15 - 4457400*lambda^14 + 5200300*lambda^13 - 5200300*lambda^12 + 4457400*lambda^11 - 3268760*lambda^10 + 2042975*lambda^9 - 1081575*lambda^8 + 480700*lambda^7 - 177100*lambda^6 + 53130*lambda^5 - 12650*lambda^4 + 2300*lambda^3 - 300*lambda^2 + 25*lambda - 1",
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "single_jordan_block": true,
+        "unipotent_nilpotence_index": 25
+      }
+    ],
+    "beilinson_checks_range": [
+      0,
+      24
+    ],
+    "conditional_arbitrary_center_bound": "If an alpha-carrier on an s-fold has Tate width at most s-3, then in ambient dimension D=m+3 its exceptional contribution has width at most (s-3)+(D-s-2)=m-2, hence Serre block length at most m-1, versus endpoint length m+1.",
+    "general_formula": "The Beilinson Euler lattice of P^m has one unipotent Serre block of length m+1. For Z_t=X x P^(t-1), the exceptional cubic carrier is tensored with P^(m-t-1), so the logarithmic Serre index is (t-1)+(m-t-1)+1=m-1: a uniform gap of two.",
+    "self_carrier_checks": [
+      {
+        "endpoint_serre_block_length": 3,
+        "maximum_self_carrier_block_length": 1,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 0,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 1
+          }
+        ],
+        "stabilizing_projective_dimension_m": 2,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 4,
+        "maximum_self_carrier_block_length": 2,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 1,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 2
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 0,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 2
+          }
+        ],
+        "stabilizing_projective_dimension_m": 3,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 5,
+        "maximum_self_carrier_block_length": 3,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 2,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 3
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 1,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 3
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 0,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 3
+          }
+        ],
+        "stabilizing_projective_dimension_m": 4,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 6,
+        "maximum_self_carrier_block_length": 4,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 3,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 4
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 2,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 4
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 1,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 4
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 0,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 4
+          }
+        ],
+        "stabilizing_projective_dimension_m": 5,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 7,
+        "maximum_self_carrier_block_length": 5,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 4,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 5
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 3,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 5
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 2,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 5
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 1,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 5
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 0,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 5
+          }
+        ],
+        "stabilizing_projective_dimension_m": 6,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 8,
+        "maximum_self_carrier_block_length": 6,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 5,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 6
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 4,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 6
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 3,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 6
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 2,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 6
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 1,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 6
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 0,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 6
+          }
+        ],
+        "stabilizing_projective_dimension_m": 7,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 9,
+        "maximum_self_carrier_block_length": 7,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 6,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 5,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 4,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 3,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 2,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 1,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 7
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 0,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 7
+          }
+        ],
+        "stabilizing_projective_dimension_m": 8,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 10,
+        "maximum_self_carrier_block_length": 8,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 7,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 6,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 5,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 4,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 3,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 2,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 1,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 8
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 0,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 8
+          }
+        ],
+        "stabilizing_projective_dimension_m": 9,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 11,
+        "maximum_self_carrier_block_length": 9,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 8,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 7,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 6,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 5,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 4,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 3,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 2,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 1,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 9
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 0,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 9
+          }
+        ],
+        "stabilizing_projective_dimension_m": 10,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 12,
+        "maximum_self_carrier_block_length": 10,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 9,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 8,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 7,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 6,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 5,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 4,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 3,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 2,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 1,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 10
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 0,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 10
+          }
+        ],
+        "stabilizing_projective_dimension_m": 11,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 13,
+        "maximum_self_carrier_block_length": 11,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 10,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 9,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 8,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 7,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 6,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 5,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 4,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 3,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 2,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 1,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 11
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 0,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 11
+          }
+        ],
+        "stabilizing_projective_dimension_m": 12,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 14,
+        "maximum_self_carrier_block_length": 12,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 11,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 10,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 9,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 8,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 7,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 6,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 5,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 4,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 3,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 2,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 1,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 12
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 0,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 12
+          }
+        ],
+        "stabilizing_projective_dimension_m": 13,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 15,
+        "maximum_self_carrier_block_length": 13,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 12,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 11,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 10,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 9,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 8,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 7,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 6,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 5,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 4,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 3,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 2,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 1,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 13
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 0,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 13
+          }
+        ],
+        "stabilizing_projective_dimension_m": 14,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 16,
+        "maximum_self_carrier_block_length": 14,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 13,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 12,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 11,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 10,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 9,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 8,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 7,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 6,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 5,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 4,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 3,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 2,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 1,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 14
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 0,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 14
+          }
+        ],
+        "stabilizing_projective_dimension_m": 15,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 17,
+        "maximum_self_carrier_block_length": 15,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 14,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 13,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 12,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 11,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 10,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 9,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 8,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 7,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 6,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 5,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 4,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 3,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 2,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 1,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 15
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 0,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 15
+          }
+        ],
+        "stabilizing_projective_dimension_m": 16,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 18,
+        "maximum_self_carrier_block_length": 16,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 15,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 14,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 13,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 12,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 11,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 10,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 9,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 8,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 7,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 6,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 5,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 4,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 3,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 2,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 1,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 16
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 0,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 16
+          }
+        ],
+        "stabilizing_projective_dimension_m": 17,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 19,
+        "maximum_self_carrier_block_length": 17,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 16,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 15,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 14,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 13,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 12,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 11,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 10,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 9,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 8,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 7,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 6,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 5,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 4,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 3,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 2,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 1,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 17
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 0,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 17
+          }
+        ],
+        "stabilizing_projective_dimension_m": 18,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 20,
+        "maximum_self_carrier_block_length": 18,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 17,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 16,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 15,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 14,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 13,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 12,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 11,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 10,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 9,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 8,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 7,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 6,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 5,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 4,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 3,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 2,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 1,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 18
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 0,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 18
+          }
+        ],
+        "stabilizing_projective_dimension_m": 19,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 21,
+        "maximum_self_carrier_block_length": 19,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 18,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 17,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 16,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 15,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 14,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 13,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 12,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 11,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 10,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 9,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 8,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 7,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 6,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 5,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 4,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 3,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 2,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 1,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 19
+          },
+          {
+            "center_projective_dimension": 18,
+            "exceptional_projective_dimension": 0,
+            "t": 19,
+            "tensor_logarithm_nilpotence_index": 19
+          }
+        ],
+        "stabilizing_projective_dimension_m": 20,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 22,
+        "maximum_self_carrier_block_length": 20,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 19,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 18,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 17,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 16,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 15,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 14,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 13,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 12,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 11,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 10,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 9,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 8,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 7,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 6,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 5,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 4,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 3,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 2,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 18,
+            "exceptional_projective_dimension": 1,
+            "t": 19,
+            "tensor_logarithm_nilpotence_index": 20
+          },
+          {
+            "center_projective_dimension": 19,
+            "exceptional_projective_dimension": 0,
+            "t": 20,
+            "tensor_logarithm_nilpotence_index": 20
+          }
+        ],
+        "stabilizing_projective_dimension_m": 21,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 23,
+        "maximum_self_carrier_block_length": 21,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 20,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 19,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 18,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 17,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 16,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 15,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 14,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 13,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 12,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 11,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 10,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 9,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 8,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 7,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 6,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 5,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 4,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 3,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 18,
+            "exceptional_projective_dimension": 2,
+            "t": 19,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 19,
+            "exceptional_projective_dimension": 1,
+            "t": 20,
+            "tensor_logarithm_nilpotence_index": 21
+          },
+          {
+            "center_projective_dimension": 20,
+            "exceptional_projective_dimension": 0,
+            "t": 21,
+            "tensor_logarithm_nilpotence_index": 21
+          }
+        ],
+        "stabilizing_projective_dimension_m": 22,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 24,
+        "maximum_self_carrier_block_length": 22,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 21,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 20,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 19,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 18,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 17,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 16,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 15,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 14,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 13,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 12,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 11,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 10,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 9,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 8,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 7,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 6,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 5,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 4,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 18,
+            "exceptional_projective_dimension": 3,
+            "t": 19,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 19,
+            "exceptional_projective_dimension": 2,
+            "t": 20,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 20,
+            "exceptional_projective_dimension": 1,
+            "t": 21,
+            "tensor_logarithm_nilpotence_index": 22
+          },
+          {
+            "center_projective_dimension": 21,
+            "exceptional_projective_dimension": 0,
+            "t": 22,
+            "tensor_logarithm_nilpotence_index": 22
+          }
+        ],
+        "stabilizing_projective_dimension_m": 23,
+        "uniform_block_length_gap": 2
+      },
+      {
+        "endpoint_serre_block_length": 25,
+        "maximum_self_carrier_block_length": 23,
+        "self_carriers": [
+          {
+            "center_projective_dimension": 0,
+            "exceptional_projective_dimension": 22,
+            "t": 1,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 1,
+            "exceptional_projective_dimension": 21,
+            "t": 2,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 2,
+            "exceptional_projective_dimension": 20,
+            "t": 3,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 3,
+            "exceptional_projective_dimension": 19,
+            "t": 4,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 4,
+            "exceptional_projective_dimension": 18,
+            "t": 5,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 5,
+            "exceptional_projective_dimension": 17,
+            "t": 6,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 6,
+            "exceptional_projective_dimension": 16,
+            "t": 7,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 7,
+            "exceptional_projective_dimension": 15,
+            "t": 8,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 8,
+            "exceptional_projective_dimension": 14,
+            "t": 9,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 9,
+            "exceptional_projective_dimension": 13,
+            "t": 10,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 10,
+            "exceptional_projective_dimension": 12,
+            "t": 11,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 11,
+            "exceptional_projective_dimension": 11,
+            "t": 12,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 12,
+            "exceptional_projective_dimension": 10,
+            "t": 13,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 13,
+            "exceptional_projective_dimension": 9,
+            "t": 14,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 14,
+            "exceptional_projective_dimension": 8,
+            "t": 15,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 15,
+            "exceptional_projective_dimension": 7,
+            "t": 16,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 16,
+            "exceptional_projective_dimension": 6,
+            "t": 17,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 17,
+            "exceptional_projective_dimension": 5,
+            "t": 18,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 18,
+            "exceptional_projective_dimension": 4,
+            "t": 19,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 19,
+            "exceptional_projective_dimension": 3,
+            "t": 20,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 20,
+            "exceptional_projective_dimension": 2,
+            "t": 21,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 21,
+            "exceptional_projective_dimension": 1,
+            "t": 22,
+            "tensor_logarithm_nilpotence_index": 23
+          },
+          {
+            "center_projective_dimension": 22,
+            "exceptional_projective_dimension": 0,
+            "t": 23,
+            "tensor_logarithm_nilpotence_index": 23
+          }
+        ],
+        "stabilizing_projective_dimension_m": 24,
+        "uniform_block_length_gap": 2
+      }
+    ],
+    "self_carrier_checks_range": [
+      2,
+      24
+    ],
+    "status": "Exact rational/integral-lattice avatar of the Tate extreme-term gap, but not yet a birational invariant. The missing theorem is a Gamma-integral, Stokes-filtered blowup decomposition that retains the alpha-isotypic Serre block rather than splitting it into unlabelled local copies."
+  },
   "candidate_spectral_cycle_refinement": {
     "checked_m_range": [
       2,
@@ -9438,7 +11595,7 @@
     "general_statement": "The P^m factor has m+1 semisimple formal solutions with power exponent 0; tensoring therefore gives m+1 copies of the cubic rank-two block with unchanged residues."
   },
   "sage_version": "10.7",
-  "schema": "c907-quantum-monodromy-stabilization-v4",
+  "schema": "c907-quantum-monodromy-stabilization-v5",
   "source": {
     "arxiv": "2608.01577v1",
     "cached_pdf_sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",

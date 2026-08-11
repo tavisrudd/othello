@@ -40,6 +40,10 @@ irrationality.
 
 The exact surviving refinement is Tate/integer graded: its endpoint polynomial
 has nonzero extreme terms that no lower-dimensional self-carrier center has.
+It now also has a basis-independent integral-lattice avatar: the Beilinson
+Euler form gives the endpoint one unipotent Serre block of length `m+1`, while
+every projective self-carrier contribution has length `m-1`.  This uniform gap
+of two is exact, but its functorial blow-up compatibility is not yet available.
 The present formal category explicitly permits integer-power gauge changes and
 therefore forgets precisely this grading.  The next theorem needed is a
 birationally functorial filtered or integral-exponent enhancement of the
@@ -231,6 +235,83 @@ Every `B_{m,t}` has zero constant coefficient and zero `L^m` coefficient.
 No signed integer combination of these self-carrier center polynomials can
 equal `P_m`.  The certificate verifies the full coefficient arrays through
 `m=24`, while the two extreme coefficients prove the statement generally.
+
+### 5.1 Integral Euler/Serre-width avatar
+
+The same separation can be expressed without choosing individual Tate labels.
+For the Beilinson basis
+
+\[
+(\mathcal O,\mathcal O(1),\ldots,\mathcal O(d))
+\]
+
+of `K_num(P^d)`, the Euler matrix is
+
+\[
+(E_d)_{ij}=
+\begin{cases}
+\binom{d+j-i}{d},&j\ge i,\\
+0,&j<i.
+\end{cases}
+\]
+
+It is integral and unimodular.  Its Serre matrix
+
+\[
+C_d=E_d^{-1}E_d^{\mathsf T}
+\]
+
+has characteristic polynomial
+
+\[
+(\lambda-(-1)^d)^{d+1},
+\]
+
+and `(-1)^d C_d` is a single unipotent Jordan block of length `d+1`.
+Equivalently, its logarithm has nilpotence index `d+1`.  The Sage certificate
+and independent SymPy replay verify the exact Euler, characteristic-polynomial,
+and nilpotence identities for `0<=d<=24`; the general statement is the standard
+Beilinson/Serre calculation.
+
+Tensor products add logarithmic width.  If unipotent factors have logarithms
+`L_a,L_b`, then
+
+\[
+\log(U_a\otimes U_b)=L_a\otimes I+I\otimes L_b,
+\]
+
+whose nilpotence index is `a+b+1`: the top term is
+`binom(a+b,a)L_a^a tensor L_b^b`, which is nonzero in characteristic zero.
+Therefore the endpoint `X x P^m` carries a cubic block tensored with one Serre
+block of length `m+1`, whereas the self-carrier `Z_t=X x P^(t-1)` and its
+`m-t` exceptional copies contribute the projective tensor
+
+\[
+\mathbf P^{t-1}\times\mathbf P^{m-t-1},
+\]
+
+of logarithmic width `m-2` and block length `m-1`.  The gap is uniformly two,
+including `m=2`.
+
+This also gives the exact arbitrary-center theorem that would suffice.  In
+ambient dimension `D=m+3`, suppose an `s`-dimensional carrier of the cubic atom
+has intrinsic Tate width at most `s-3`.  A codimension-`D-s` blow-up adds the
+exceptional width `D-s-2`, so every center contribution has width at most
+
+\[
+(s-3)+(D-s-2)=D-5=m-2,
+\]
+
+again two below the endpoint width `m`.  Direct sums cannot create a longer
+Jordan block.  Thus a Γ-integral, Stokes-filtered blow-up theorem preserving
+this cubic-isotypic Serre width would prove full stable irrationality.
+
+The qualification is essential.  The ordinary derived blow-up decomposition
+is semiorthogonal rather than Serre-block diagonal; off-diagonal extensions can
+join Jordan blocks.  KKPYY's local analytic-germ atom forgets the absolute
+Tate filtration, and its Section 6.4 explicitly defers Γ-integral compatibility
+to forthcoming work.  Hence the block gap is an exact candidate invariant, not
+an established birational invariant.
 
 This is not yet a stable birational invariant.  Cai's obstruction deliberately
 uses exponents modulo integers because the formal isomorphisms in the blow-up
@@ -456,9 +537,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 20,082 bytes;
-- independent replay: 8,657 bytes;
-- JSON certificate: 188,133 bytes.
+- Sage generator: 23,811 bytes;
+- independent replay: 10,161 bytes;
+- JSON certificate: 264,123 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -504,10 +585,13 @@ any weak factorization.
   `X x P^1` is irrational for every smooth cubic threefold.
 - **Open:** whether the integer/Tate grading has a canonical filtered quantum
   refinement respected by the blow-up and projective-bundle isomorphisms.
-  Evidence gap: current formal gauges allow integer powers of `z`, the atom
-  formalism quotients them out, projective Novikov monodromy cyclically
-  permutes every candidate label, and Γ-integral blow-up compatibility is not
-  yet available in the cited theory.
+  The exact target is now basis-independent: preserve the cubic-isotypic
+  unipotent Serre block.  Its endpoint length is `m+1`, while every
+  self-carrier length is `m-1`; the conditional arbitrary-center width formula
+  has the same gap two.  Evidence gap: current formal gauges allow integer
+  powers of `z`, the atom formalism quotients them out, projective Novikov
+  monodromy cyclically permutes every candidate label, and Γ-integral/Stokes
+  blow-up compatibility is not yet available in the cited theory.
 - **Open:** whether geometric constraints on centers forbid the formal
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.

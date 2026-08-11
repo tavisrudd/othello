@@ -20,7 +20,12 @@ The recursive gate has a sharp conditional numerical form: Serre dimension
 decomposition splits this into `m+1` distributable copies.  Exploiting the gap
 requires both a gluing-sensitive enhanced atom and a restricted fractional-CY
 carrier theorem; general Serre-dimension monotonicity is false.  These are the
-remaining live gates together with the integer/Tate-filtered atom.
+remaining live gates together with the integer/Tate-filtered atom.  The latter
+now has a basis-independent exact form: the endpoint Beilinson Euler lattice
+has one unipotent Serre block of length `m+1`, while every projective
+self-carrier has length `m-1`.  A Γ-integral, Stokes-filtered blow-up theorem
+preserving cubic-isotypic Serre width would turn this uniform gap two into the
+full stable obstruction.
 
 ## Goal
 

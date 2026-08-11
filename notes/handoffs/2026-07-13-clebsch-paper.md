@@ -69,7 +69,11 @@ distributable copies.  The categorical route therefore needs both a
 gluing-sensitive enhanced atom and a restricted fractional-CY carrier
 inequality; general Serre-dimension monotonicity is false.  These and the
 integer/Tate-filtered atom are the live gates; no Paper V or Lean promotion is
-authorized.
+authorized.  The Tate gate now has a basis-independent exact target: the
+Beilinson Euler lattice gives the endpoint a unipotent Serre block of length
+`m+1`, while every projective self-carrier has length `m-1`.  Turning this
+uniform gap two into the full obstruction requires the unavailable
+Γ-integral, Stokes-filtered compatibility of the blow-up decomposition.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

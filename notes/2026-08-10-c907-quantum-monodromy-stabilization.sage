@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v4"
+SCHEMA = "c907-quantum-monodromy-stabilization-v5"
 
 
 def matrix_strings(M):
@@ -282,6 +282,75 @@ def serre_dimension_candidate_check(m):
     }
 
 
+def beilinson_serre_width_check(d):
+    """Exact Euler/Coxeter calculation for the Beilinson lattice of P^d."""
+    n = d + 1
+    euler = matrix(
+        QQ,
+        n,
+        n,
+        lambda i, j: binomial(d + j - i, d) if j >= i else 0,
+    )
+    assert euler.det() == 1
+    serre = euler.inverse() * euler.transpose()
+    sign = (-1) ** d
+    polynomial_ring = PolynomialRing(QQ, "lambda")
+    lam = polynomial_ring.gen()
+    assert serre.charpoly(lam) == (lam - sign) ** n
+    unipotent = sign * serre
+    nilpotent = unipotent - identity_matrix(QQ, n)
+    assert nilpotent ** n == 0
+    if d > 0:
+        assert nilpotent ** d != 0
+    logarithm = sum(
+        (((-1) ** (j + 1)) * nilpotent**j / QQ(j) for j in range(1, n)),
+        matrix(QQ, n, n),
+    )
+    assert logarithm ** n == 0
+    if d > 0:
+        assert logarithm ** d != 0
+    return {
+        "projective_dimension": d,
+        "rank": n,
+        "euler_matrix_formula": "E[i,j]=binomial(d+j-i,d) for j>=i, else 0",
+        "euler_determinant": 1,
+        "serre_matrix_formula": "C=E^(-1)E^T",
+        "serre_characteristic_polynomial": str((lam - sign) ** n),
+        "semisimple_sign": sign,
+        "unipotent_nilpotence_index": n,
+        "logarithm_nilpotence_index": n,
+        "single_jordan_block": True,
+    }
+
+
+def self_carrier_serre_width_check(m):
+    assert m >= 2
+    endpoint_block_length = m + 1
+    centers = []
+    for t in range(1, m):
+        center_projective_dimension = t - 1
+        exceptional_projective_dimension = m - t - 1
+        product_logarithm_index = (
+            center_projective_dimension + exceptional_projective_dimension + 1
+        )
+        assert product_logarithm_index == m - 1
+        centers.append(
+            {
+                "t": t,
+                "center_projective_dimension": center_projective_dimension,
+                "exceptional_projective_dimension": exceptional_projective_dimension,
+                "tensor_logarithm_nilpotence_index": product_logarithm_index,
+            }
+        )
+    return {
+        "stabilizing_projective_dimension_m": m,
+        "endpoint_serre_block_length": endpoint_block_length,
+        "self_carriers": centers,
+        "maximum_self_carrier_block_length": m - 1,
+        "uniform_block_length_gap": 2,
+    }
+
+
 def spectral_cycle_self_carrier_check(m):
     endpoint_cycle = m + 1
     reproducing_t = [
@@ -440,6 +509,28 @@ def build_certificate(bound):
                 "Construct a birationally functorial filtered or integral-exponent enhancement of "
                 "the quantum atom that retains these Tate degrees through the cyclic branch monodromy, "
                 "or prove that no such enhancement exists."
+            ),
+        },
+        "candidate_integral_serre_width_refinement": {
+            "status": (
+                "Exact rational/integral-lattice avatar of the Tate extreme-term gap, but not yet a "
+                "birational invariant. The missing theorem is a Gamma-integral, Stokes-filtered blowup "
+                "decomposition that retains the alpha-isotypic Serre block rather than splitting it into "
+                "unlabelled local copies."
+            ),
+            "beilinson_checks_range": [0, bound],
+            "beilinson_checks": [beilinson_serre_width_check(d) for d in range(bound + 1)],
+            "self_carrier_checks_range": [2, bound],
+            "self_carrier_checks": [self_carrier_serre_width_check(m) for m in range(2, bound + 1)],
+            "general_formula": (
+                "The Beilinson Euler lattice of P^m has one unipotent Serre block of length m+1. "
+                "For Z_t=X x P^(t-1), the exceptional cubic carrier is tensored with P^(m-t-1), "
+                "so the logarithmic Serre index is (t-1)+(m-t-1)+1=m-1: a uniform gap of two."
+            ),
+            "conditional_arbitrary_center_bound": (
+                "If an alpha-carrier on an s-fold has Tate width at most s-3, then in ambient dimension "
+                "D=m+3 its exceptional contribution has width at most (s-3)+(D-s-2)=m-2, hence Serre "
+                "block length at most m-1, versus endpoint length m+1."
             ),
         },
         "candidate_spectral_cycle_refinement": {
