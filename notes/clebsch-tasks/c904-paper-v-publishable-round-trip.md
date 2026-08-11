@@ -321,6 +321,26 @@ fibrewise, and C907 owns the second.  This is a strong separation between
 universal `CH_0`-triviality and one-step stable rationality.  Do **not**
 upgrade it to full stable irrationality without a separate C907 theorem.
 
+### Thirteenth-pass compression of the live charge-three gate
+
+The midnight closeout does not prove odd index, but it replaces the last
+unstructured curve by a finite determinantal packet.  For a general
+charge-three bundle (E), the normalization of the generic curve
+(D_{3,3,E}\) is birational to a projective-line bundle over the finite
+scheme (R_{3,3}(E)) of factorable quadrics in the Pluecker wedge system
+
+\[
+ \bigwedge^2H^0(X,E)\longrightarrow H^0(X,{\cal O}_X(2)).
+\]
+
+Their zero-cycle indices are equal.  Thus the live computation is now the
+length, residue-degree gcd, and exotic deck action of the Artin scheme cut
+out by the Pluecker equation and the (3\times3) minors of the universal
+symmetric (5\times5) wedge matrix.  An odd packet closes the relative
+lifting gate; an even length alone is not a no-go.  The repeated integer 21
+is quarantined as a clue only.  See
+`notes/2026-08-11-c904-d33-factorable-quadric-index-reduction.md`.
+
 ### Current dead-path ledger
 
 The following routes are closed and must not be revived without genuinely new

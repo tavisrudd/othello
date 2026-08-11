@@ -658,6 +658,19 @@ the direct conic--Prym cylinder are all proved even or otherwise dead.  The
 live exit is therefore an intrinsic relative cycle, an odd-degree complete
 half relation, or the exact even descent index.
 
+The 2026-08-11 midnight pass compresses the charge-three version of that
+exit further.  The normalization of the generic curve
+`D_{3,3} -> M_9` is birational to a projective-line bundle over a finite
+factorable-quadric scheme `R_{3,3}(E)` inside the Pluecker wedge system of a
+general charge-three bundle, and the two zero-cycle indices are equal.  The
+next exact calculation is therefore finite: form the symmetric `5x5` matrix
+of the six wedge quadrics, impose the Pluecker equation and all `3x3` minors,
+saturate away from other splitting strata, and compute the length,
+residue-degree gcd, and exotic deck action.  No parity verdict or packet
+length is claimed yet; in particular, the repeated integer 21 remains only
+a quarantined clue.  See
+`notes/2026-08-11-c904-d33-factorable-quadric-index-reduction.md`.
+
 Three successor theorems are now quarantined from the frozen paper.  First,
 the five marked principal halves form the exact
 `P^1(F4)` Hecke packet; its degree-`2^10` isogenies extend canonically as
