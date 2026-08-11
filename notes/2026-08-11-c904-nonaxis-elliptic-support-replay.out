@@ -1,0 +1,7 @@
+C904 independent non-axis elliptic-support replay
+  omega has no F2 eigenline: PASS
+  121 short elliptic lines: rank=15, Smith=[1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2], index=64
+  minimal adjoining index=32; twice-minimal index=64
+  plane-area denominators=[1, 3]; theta degrees <=8=[3, 4, 5, 7, 8]
+  six degree-5 axes sum to six times the minimal class: PASS
+PASS
