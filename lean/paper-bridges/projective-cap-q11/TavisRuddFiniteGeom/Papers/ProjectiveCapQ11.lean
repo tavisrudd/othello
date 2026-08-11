@@ -226,11 +226,11 @@ private theorem collinear_axisAffine_iff {K : Type*} [Field K]
   unfold ProjectiveCap.Collinear ProjectiveCap.ConicLocalization.axisAffine
   constructor
   · intro h
-    ring_nf at h ⊢
-    exact mul_left_cancel₀ (mul_ne_zero hrow hcol) h
+    apply mul_left_cancel₀ (mul_ne_zero hrow hcol)
+    convert h using 1 <;> ring
   · intro h
-    ring_nf at h ⊢
-    exact congrArg (fun t => rowScale * colScale * t) h
+    have hscaled := congrArg (fun t => rowScale * colScale * t) h
+    convert hscaled using 1 <;> ring
 
 private theorem gridCap_image_axisAffine_iff {K : Type*}
     [Field K] [Fintype K] [DecidableEq K]
@@ -405,7 +405,7 @@ private noncomputable def transportWitness (S : Finset P) (hcard : S.card = 3)
   Classical.choice (exists_transportWitness S hcard hcap)
 
 /-- The sealed Q11 reply books prove the residual odd-escape game statement. -/
-theorem oddEscapeGameStatement : ProjectiveCap.Almost.OddEscapeGameStatement (K := K) := by
+theorem oddEscapeGameStatement : ProjectiveCap.GridGame.OddEscapeStatement (K := K) := by
   intro S hcard hcap
   let witness := transportWitness S hcard hcap
   exact escape_at_preimage_of_gridSymmetry witness.gridSymmetry witness.valid
