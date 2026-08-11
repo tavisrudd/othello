@@ -48,6 +48,10 @@ source functor print:
 The general language is useful only as compression around these exact
 calculations.
 
+The complete intrinsic axiom scheme, inverse proof, and forgetful-fibre table
+specification are recorded in
+`2026-08-11-c904-paper-v-intrinsic-ad-classification-blueprint.md`.
+
 ### 2. The current interface conflated two lattices
 
 The rank-five augmentation lattice

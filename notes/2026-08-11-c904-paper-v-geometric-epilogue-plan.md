@@ -243,13 +243,51 @@ not silently quotiented.
 
 #### Theorem V.A: equivalence of marked companion groupoids
 
-Define the exact groupoids of marked conference, chordal, and incidence
-packages, including their permitted switching and coordinated relabelling.
-The three reconstruction functors factor through the groupoid of marked
-carriers \(\mathscr G\) and induce equivalences onto their declared image
-subgroupoids. Characterize those essential images by intrinsic equations and
-stabilizer conditions rather than defining them to be the images of the
-functors.
+Define the common carrier without mentioning Papers I--III and without
+including a conference matrix among its input data. Over \(K/\mathbf F_{11}\)
+an intrinsic carrier consists of a five-dimensional absolutely irreducible
+\(K A_5\)-module, its two-dimensional invariant cubic pencil, an involution
+\(q\) normalizing \(A_5\) through the nontrivial outer class, an actual
+oriented nodal generator, and a selected actual chordal generator. Require the
+following intrinsic axioms:
+
+1. the nodal generator has exactly six reduced ordinary nodes in
+   projective-frame position;
+2. the two chordal lines are exactly the pencil members singular along
+   rational normal quartics, and the outer involution exchanges them;
+3. the exact-\(C_5\) divisor on a selected singular quartic is
+   \(A_5/C_5\), and equal-stabilizer pairing recovers the same
+   \(A_5/D_5\) six-set as the nodal scheme;
+4. after intrinsic singular-frame and pivot normalization, the outer
+   difference sends the selected chordal generator to the oriented nodal
+   generator;
+5. writing \(c_{ijk}\) for the normalized triangle coefficients, they satisfy
+   the explicit equations
+   \[
+   c_{ijk}^2=1,
+   \qquad
+   c_{ijk}c_{ij\ell}c_{ik\ell}c_{jk\ell}=1,
+   \qquad
+   \sum_{k\notin\{i,j\}}c_{ijk}=0.
+   \]
+   The first two equations reconstruct a unique switching class, while the
+   last gives \(B^2=5I\). The Pfaffian/norm identity is a derived mechanism
+   corollary, not an admissibility axiom.
+
+Morphisms are induced by equivariant axis bijections and preserve the actual
+generators and selected line; arbitrary scalar intertwiners are not admitted.
+Define the marked conference, chordal, and incidence groupoids independently,
+including exactly their permitted switching and coordinated relabelling. Then
+prove that their transport functors are fully faithful and essentially
+surjective onto this intrinsically axiomatized carrier groupoid. The inverse
+formulas must recover the retained paper-specific output, including the
+Paper-II pivot normalization and Paper-III carried bridge datum, but not a
+chart lift or global cover that was supplied only as an input.
+
+State the theorem uniformly on \(K\)-points for every extension
+\(K/\mathbf F_{11}\). This is scalar-extension functoriality of the same
+classification, not a new integral model or a theorem in arbitrary
+characteristic.
 
 #### Theorem V.B: structural bridge
 
@@ -270,11 +308,34 @@ selected chordal line, marked cubic generator, and orientation character.
 
 #### Theorem V.D: load-bearing marking boundary
 
-Forgetting the selected chordal line or the orientation/sheet sign produces
-the corresponding genuine ambiguity, so neither can be omitted from the
-equivalence. The remaining switching and coordinated-relabeling quotients are
-recorded by their exact stabilizer groups. No unproved claim of logical
-independence among every auxiliary marking is required.
+Form the complete poset of carrier groupoids obtained by forgetting, one at a
+time, the actual generator, its sign, the selected chordal line, the six-set
+embedding, and the declared outer labels. For every forgetful functor print a
+single table containing:
+
+- the automorphism stabilizer before and after forgetting;
+- the homotopy fibre as an explicit transitive group action;
+- whether another retained marking canonically supplies a section;
+- a concrete symmetry witnessing nontriviality when no section exists.
+
+Use the exact pencil action, including
+\[
+[q]=\begin{pmatrix}-1&8\\0&1\end{pmatrix}
+\]
+in the normalized basis, rather than counting two
+objects. In particular, the outer involution exchanges the two chordal lines,
+whereas scalar sheet reversal negates the generator on one fixed line; the
+table must determine whether combined forgetful fibres split as products or
+form a nontrivial action. The normalized \(q-1\) bridge is an equivariant
+isomorphism between the sheet-sign and conference-orientation torsors after a
+chordal line is selected.
+
+Sharpness means that a missing marking is moved by an automorphism of the
+unmarked object but cannot be changed by a morphism in the more rigid
+groupoid. Do not assert independent necessity of two markings merely because
+each has two possible values. Switching and coordinated relabelling remain
+quotient symmetries; source-local pivots, chart lifts, and global covers remain
+declared inputs rather than allegedly reconstructed markings.
 
 #### Theorem V.E: coordinate-free lattice tower
 
