@@ -710,21 +710,22 @@ The epilogue should close with:
 5. The \(q-1\) bridge has a human nonvanishing and normalization proof.
 6. Both composites carry natural isomorphisms satisfying the triangle
    identities.
-7. The finite output interface recovers only the oriented six-set,
-   augmentation lattice, and golden plane.
-8. No theorem depends on a computation or certificate.
-9. Paper IV is not assigned an unproved geometric carrier bridge; its imported
+7. The finite output interface recovers the oriented six-set, augmentation
+   lattice, golden plane, and canonical \(D_6^\vee\) normalization--residue
+   extension, but no rank-ten Hodge or PEL object.
+8. The Ext line is proved structurally from the \((2,3,5)\)-presentation, and
+   the theorem distinguishes the canonical nonsplit middle module from a
+   noncanonical scalar generator of Ext.
+9. No theorem depends on a computation or certificate.
+10. Paper IV is not assigned an unproved geometric carrier bridge; its imported
    residual-torsor statement is precisely identified.
 
 ### Geometric epilogue
 
-1. The canonical integral-envelope theorem makes the finite-to-integral
-   series connection causal.
-2. The maximal-order saturation theorem identifies the golden and exotic free
-   \(C_2\)-torsors pointwise and functorially: the commutator heart of
-   \(L^{\max}/2\) carries \(\omega\), and golden reversal carries
-   \(\omega\) to \(\omega^2\). It does not identify the nonmaximal quotient
-   \(\mathbf Z[\sqrt5]/2\) with \(\mathbf F_4\).
+1. The canonical rank-ten symplectic-envelope theorem makes the imported
+   Paper V residue heart causal in the cubic geometry.
+2. The maximal-order theorem is restated accurately and cited to Paper V; its
+   \(D_6^\vee\), Ext, and normalization proof is not duplicated.
 3. Every later construction is deck-equivariant, so changing the torsor
    isomorphism changes only the representative of the same exotic conjugacy
    class.
@@ -759,10 +760,11 @@ The epilogue should close with:
 1. Freeze the exact marked object and structural theorem packet for Paper V.
 2. Rewrite every Paper V transport as a functor through the carrier groupoid.
 3. Prove the natural triangle identities and finite output interface.
-4. Freeze Paper V at 17--22 pages with no computational proof dependency.
-5. In the epilogue, prove the canonical integral-envelope theorem.
-6. Prove Frobenius--Schur descent and the maximal-order commutator-heart
-   theorem, then prove deck-equivariance of every downstream construction.
+4. Freeze Paper V at 20--26 pages with no computational proof dependency.
+5. In the epilogue, import V.G and prove the canonical rank-ten symplectic-
+   envelope theorem.
+6. Prove deck-equivariance of every downstream geometric construction; cite
+   V.F--V.G for Frobenius--Schur descent and the maximal-order heart.
 7. Freeze the exact period-image normalization and generic-degree theorem.
 8. Replace the minimal-class certificate by the primewise structural proof and
    its geometric local-chart application.
@@ -781,7 +783,7 @@ The epilogue should close with:
 
 The successor is genuinely Annals-shaped only if all of the following land:
 
-1. the canonical finite-to-integral envelope, the maximal-order pointwise
+1. the canonical rank-ten symplectic envelope consuming Paper V's pointwise
    golden/exotic torsor bridge, and deck-equivariance of the realization;
 2. the strong period-image normalization and generic-degree theorem;
 3. the geometric application of the primewise minimal-class theorem;
@@ -793,7 +795,7 @@ Without the first two, the cycle and quantum halves remain an excellent
 Inventiones/JAMS-shaped conjunction but are too easily described as
 juxtaposed. Apply these kill criteria:
 
-- if no exact finite-to-integral handoff is proved, do not say the cubic
+- if no exact residue-to-rank-ten handoff is proved, do not say the cubic
   theorem is what the reconstructed carrier “forces”;
 - if family-level deck-equivariance is not proved, retain the intrinsic marked
   sheet supplied by maximal-order saturation and state its conjugate
@@ -806,8 +808,9 @@ juxtaposed. Apply these kill criteria:
 - if the recent quantum stack cannot be made sufficiently self-contained,
   publish the cubic minimal-class theorem separately and remove the epilogue
   promise from Papers I--V;
-- if Paper V exceeds 22 pages, move every integral construction back to the
-  epilogue rather than weakening the structural-only rule.
+- if Paper V exceeds 26 pages, compress functorial preliminaries or move
+  rank-ten material back to the epilogue; do not remove the six-dimensional
+  normalization--residue theorem that gives the orientation causal force.
 
 ## Final publication shape
 
@@ -816,9 +819,9 @@ juxtaposed. Apply these kill criteria:
   degree-three residual-marking model without a geometric cubic arrow.
 - Paper V is a short structural synthesis, not a repository for later research.
 - The geometric epilogue is the independent high-venue punchline.
-- The epilogue itself proves the exact finite-to-integral handoff, so its
-  series provenance is causal without making it dependent on unreproduced
-  arguments from V.
+- The epilogue proves the residue-to-rank-ten symplectic handoff and restates
+  V.G, so it remains independently readable without duplicating Paper V's
+  structural proof.
 
 This is the smallest architecture in which the successor reads simultaneously
 as a genuine payoff of the series and as a serious standalone theorem.
