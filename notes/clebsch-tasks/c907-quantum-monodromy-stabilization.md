@@ -2,16 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete 2026-08-10; exact stabilization law and the sharp
-multiplicity-only ceiling certified; no Paper V or Lean promotion
-
-**Result:** `notes/2026-08-10-c907-quantum-monodromy-stabilization.md`
-reconstructs Cai's `+/-1/6` rank-two block over the generic parameter field,
-proves that `X x P^m` carries `m+1` unchanged copies, and proves that coarse
-blow-up atom multiplicities admit universal two-sided self-carrier balances
-for every `m>=2`.  The surviving candidate is an integer/Tate-filtered atom;
-the present formal category discards exactly that grading through
-integer-power gauge transformations.
+**Status:** active; exploratory research only; no Paper V or Lean promotion
 
 ## Goal
 
