@@ -640,6 +640,22 @@ projector, or prove their exact two-primary obstruction.  See
 `notes/2026-08-11-c904-canonical-p15-tautological-parity.md`.  No manuscript
 or Lean source changed.
 
+The integral-Fourier and full mixed-divisor follow-up closes the rest of the
+divisor-generated `(1,5)` flank.  Beckmann--de Gaay Fortman's canonical
+class `P^3/3!` is pure Kunneth type `(3,3)`, not `(1,5)`; on the theta
+resolution its half anti-graph has degree `-80`, and the natural integral
+pushdown has degree `-160`.  More decisively, the complete rank-55
+Neron--Severi lattice of `J x J`, including all twenty-five graph and
+endomorphism directions, gives 3,000 mixed divisor cubes whose `(5,1)` image
+has full rank twenty-five but equals exactly `2 End(J)`.  The quotient is
+`(Z/2)^25`, and the normalized identity has exact order two.  Thus neither
+the canonical integral Fourier class nor any integral graph-dressed divisor
+cube can produce the odd projector.  The surviving correspondence must be
+genuinely non-divisor and non-split.  See
+`notes/2026-08-11-c904-bdgf-symmetric-theta-descent.md` and the exact
+certificate `notes/2026-08-11-c904-full-ns-cube-p15-lattice.sage`.  No
+manuscript or Lean source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

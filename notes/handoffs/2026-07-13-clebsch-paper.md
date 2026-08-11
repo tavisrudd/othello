@@ -677,7 +677,12 @@ invariant spaces have dimensions 50 and 776 and contain odd contractions.
 The rational `(1,5)` inverse-Lefschetz class is algebraic, but its integral
 or two-local lift remains open; every canonical decomposable candidate is
 now even, with scalar coefficient ideal `6Z` universally and `12Z` on the
-actual invariant divisor-product lattice.  The general ample support
+actual invariant divisor-product lattice.  The canonical integral-Fourier
+class `P^3/3!` is pure `(3,3)` and has quotient degree 80, not five.  The
+entire rank-55 `NS(J x J)` mixed-cube calculation is stronger: its `(5,1)`
+image is exactly `2 End(J)`, with quotient `(Z/2)^25` and identity order two.
+Hence every graph- or endomorphism-dressed divisor cube is dead as well; a
+successful projector must be genuinely non-divisor.  The general ample support
 surfaces sharpen the inherited degree-five channel in the opposite
 direction: Lefschetz connectedness preserves the ordered-pair residue on
 every support curve, so the fixed-line/Hecke/type-`(5,1)` conic has exact
@@ -696,7 +701,9 @@ shows why geometric RC alone is insufficient.  See
 `notes/2026-08-11-c904-c3-kunneth-descent-boundary.md`,
 `notes/2026-08-11-c904-relative-invariant-cycle-franchetta-audit.md`,
 `notes/2026-08-11-c904-ample-cut-charge-two-index.md`, and
-`notes/2026-08-11-c904-canonical-p15-tautological-parity.md`.
+`notes/2026-08-11-c904-canonical-p15-tautological-parity.md`,
+`notes/2026-08-11-c904-bdgf-symmetric-theta-descent.md`, and
+`notes/2026-08-11-c904-full-ns-cube-p15-lattice.sage`.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
