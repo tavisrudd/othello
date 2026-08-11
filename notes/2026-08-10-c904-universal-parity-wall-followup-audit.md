@@ -264,8 +264,8 @@ New divisor-lattice certificate:
 ```bash
 cd /home/tavis/src/othello
 diff -u notes/2026-08-10-c904-universal-determinant-divisor-invariants.out \
-  <(nix shell nixpkgs#sage -c sage \
-    notes/2026-08-10-c904-universal-determinant-divisor-invariants.sage)
+  <(nix shell nixpkgs#sage -c sage -c \
+    'exec(preparse(open("notes/2026-08-10-c904-universal-determinant-divisor-invariants.sage").read()))')
 ```
 
 It reconstructs the full exotic principal lattice, proves both

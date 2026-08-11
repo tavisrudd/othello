@@ -261,8 +261,8 @@ Run:
 ```bash
 cd /home/tavis/src/othello
 diff -u notes/2026-08-10-c904-c3-descent-scope.out \
-  <(nix shell nixpkgs#sage -c sage \
-    notes/2026-08-10-c904-c3-descent-scope.sage)
+  <(nix shell nixpkgs#sage -c sage -c \
+    'exec(preparse(open("notes/2026-08-10-c904-c3-descent-scope.sage").read()))')
 ```
 
 The certificate imports the exact principal-lattice construction, rebuilds
