@@ -264,6 +264,49 @@ every such curve class have even theta degree.  In particular the normalized
 rank-one class `c_3+c_1c_2` is `Sq^2c_2` modulo two and cannot represent the
 minimal curve.  Independent Python and Nix-Sage replays agree.
 
+The twelfth pass closes the remaining ambient versions of that route and
+extracts two separate successor theorems.  The exact integral Hodge-lattice
+calculation in
+`notes/2026-08-10-c904-relative-shen-half-construction-attack.md` gives
+
+\[
+ \{m:mc\in\Theta\,\operatorname{Hdg}^6_{\mathbf Z}\}=2\mathbf Z,
+ \qquad
+ \{m:mc\in[D_+]\,\operatorname{Hdg}^6_{\mathbf Z}\}=6\mathbf Z.
+\]
+
+Thus no ambient divisor/Hodge class can produce the required odd horizontal
+curve on \(D_+\); only a genuinely intrinsic relative Chow class can close the
+original gate.  Independently,
+`notes/2026-08-10-c904-adjacent-annals-uniform-theorems.md` proves an
+all-prime **Jordan-scalar minimal-class theorem**: for every principally
+polarized elliptic-power quotient whose self-dual gluing is scalar on each
+local Jordan block, the primitive class
+\(\Theta^{g-1}/(g-1)!\) lies in the integral divisor-product lattice.  The
+mixed-adjugate proof is primitive at \(p=2\), has no hidden factorial or
+off-diagonal factor two, and globalizes by lattice localization.  It includes
+every scalar type-\(A\) root--weight gluing \(G_N=NI-J\), for all \(N\ge3\).
+The bounded priority audit
+`notes/2026-08-10-c904-jordan-scalar-minimal-class-priority-audit.md` finds
+that the Weyl ppavs, \(X_0(N)\), elliptic-product decomposition, IHC, and
+minimal-class algebraicity are prior art; the likely new crown is the
+**primitive integral divisor-product saturation**, not those consequences.
+The exotic \(\mathbf F_4\) cubic gluing is non-scalar and remains a genuine
+exception rather than an instance of the theorem.
+
+The same pass packages the five marked principal halves as a complete Hecke
+packet.  Its discriminant geometry is
+\(\mathbf P^1(\mathbf F_4)\): three classical \(S_6\) sheets and the two exotic
+\(A_5\) sheets, with every edge a primitive multiplier-four neighbor and
+Smith kernel \((\mathbf Z/2)^2\oplus(\mathbf Z/4)^4\).  On the common marking
+cover the four cusp widths are \(2,2,6,6\); the isogeny extends canonically as
+a polarized log one-motive of degree \(2^{10}\), while the ordinary Neron
+special kernel jumps from \(1024\) to \(64\), proving that no global ordinary
+finite-flat kernel exists.  The direct conic--Prym cylinder is closed
+negatively: principal Prym polarization contributes an unavoidable factor
+two, so it yields \(2\Phi\), not primitive \(\Phi\).  These results are
+quarantined upgrades and do not alter the frozen manuscript.
+
 ### C904+C907 successor statement
 
 The two tasks now give the exact contrast
@@ -350,6 +393,18 @@ input.
   generated modulo two by divisor products and Steenrod squares, and the
   Wu identity on `Bl_0 Theta` makes both families have even theta degree.
   A successful moduli-space class must be genuinely non-tautological.
+
+- **Ambient classes supported on \(D_+=3\Theta\):** dead at the odd gate.
+  The exact integral image has minimal-class multiplier ideal \(6\mathbf Z\)
+  (and the ambient theta image has ideal \(2\mathbf Z\)).  Ample twists,
+  \(A_5\)-averaging, and component-moving inside the ambient Hodge lattice
+  cannot produce an odd horizontal Shen half.
+
+- **Direct conic--Prym cylinder:** dead at the primitive gate.  The integral
+  reverse cylinder composes with the anti-invariant projector as \(2\Phi\),
+  not \(\Phi\).  Bezout would require a separately constructed integral
+  \(3\Phi\), and the six-axis calculation does not supply such a Chow
+  correspondence.
 
 The fixed-fibre \(D_{3,3}/\operatorname{Sym}^2\Theta\) index-one carrier is now
 closed by the unordered Fano lift and the `2/5` B\'ezout argument.  The sole

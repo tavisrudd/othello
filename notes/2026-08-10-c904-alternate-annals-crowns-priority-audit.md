@@ -39,14 +39,19 @@ stabilization,” not “\(X\) is stably irrational.”
 
 | Rank | Candidate crown | Readiness | Ceiling if completed | Priority verdict |
 |---|---|---:|---|---|
-| 1 | Positive-dimensional universally \(\mathrm{CH}_0\)-trivial \(A_5\)-cubic family with \(X\times\mathbf P^1\) irrational | 75–80% | Annals | No predecessor for this conjunction located; C907 needs the hardest review |
-| 2 | Cubic–Winger–quartic packet: \(X_0(6)\), exotic \(\mathbf F_4\) gluing, common \(6I-J\) boundary lattice | 65–75% | Annals after correspondence/cusp closure; Inventiones at ppav level | Classical components are owned, but the exact synthesis appears new |
-| 3 | Six \(D_5\) axes: exact Gram form, polarization/kernel, minimal-class saturation | 90–95% | Inventiones/JEMS alone; Annals-adjacent with the Chow family | Most proof-ready substantial theorem |
-| 4 | Exact two-primary Chow descent/minimal base change over complex curve fields | 20–30% | Annals as a general theorem; Inventiones in the special cubic case | Highest speculative generality, but its essential index is still open |
-| 5 | Uniform Steenrod–Wu parity on resolved theta divisors | 95% for the lemma | Strong structural lemma/short paper, not an Annals crown alone | Likely new in form, but too narrow to carry the paper |
+| 1 | Positive-dimensional universally \(\mathrm{CH}_0\)-trivial \(A_5\)-cubic family with \(X\times\mathbf P^1\) irrational | about 70% now; 85% after the atom bridge is printed and independently reviewed | Annals | No predecessor for the conjunction located; hostile source review is MINOR |
+| 2 | Prime-by-prime classification of arbitrary elliptic-power gluings by primitive integral Lefschetz saturation | 45–55% | Annals | Jordan-scalar positive half is proved; the exotic \(\mathbf F_4\) obstruction is the unexplained negative boundary |
+| 3 | Five-sheet Hecke packet with exotic saturation and canonical log-boundary extension | 85–90% | Inventiones/JAMS; Annals with the full geometric synthesis | Exact \(\mathbf P^1(\mathbf F_4)\) packet and all cusp kernels are proved; ordinary finite-flat extension is impossible |
+| 4 | Jordan-scalar minimal-class theorem for all principal elliptic-power quotients | proved; priority audit bounded | Inventiones/JAMS, Annals-adjacent | IHC and minimal-class algebraicity are preempted; primitive integral divisor-product saturation appears new |
+| 5 | Six \(D_5\) axes: exact Gram form, polarization/kernel, minimal-class saturation | 90–95% | Inventiones/JEMS alone | Most proof-ready paper-specific theorem |
+| 6 | Exact two-primary Chow descent/minimal base change over complex curve fields | 20–30% | Annals as a general theorem | Essential relative Chow index remains open; ambient and tautological routes are dead |
+| 7 | Uniform Steenrod–Wu parity on resolved theta divisors | proved | Structural theorem/short paper | Useful obstruction compiler, too narrow for the crown alone |
 
-By readiness, the six-axis theorem is first. By surprise and venue ceiling, the
-C904+C907 conjunction is first.
+By readiness, the Hecke packet, Jordan-scalar theorem, and six-axis theorem are
+the strongest self-contained C904 mathematics.  By surprise and venue ceiling,
+the C904+C907 conjunction remains first.  The highest-EV new theorem is the
+arbitrary-gluing classification: it would explain both the uniform scalar
+success and the exceptional \(\mathbf F_4\) mechanism.
 
 **Subsequent hostile audit.**  A source-level reread of all five C907 gates
 returned `MINOR`, not `MAJOR`: Cai's sixth-root block, projective-bundle

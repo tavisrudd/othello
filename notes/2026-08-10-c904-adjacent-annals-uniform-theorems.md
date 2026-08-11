@@ -1,7 +1,7 @@
 # C904 adjacent-Annals uniform theorem hunt
 
 Date: 2026-08-10
-Status: proved-theorem dossier; novelty unaudited; no manuscript or Lean edits
+Status: proved-theorem dossier; Jordan-scalar priority audited separately; no manuscript or Lean edits
 Scope: uniform consequences of the resolved-theta, modular-gluing, divisor,
 and deck-norm calculations
 
@@ -62,18 +62,19 @@ a finite normalization check, not the basis of the theorem.
 
 This is the strongest infinite-family result in the note.  The exotic
 `F_4` cubic gluing is not Jordan-scalar, so its separate `7/17` saturation
-certificate is not subsumed.  This theorem is not yet a
-novelty claim: the precise statement must be audited against the literature
-on elliptic-power isogenies, root/weight constructions, and integral minimal
-classes.
+certificate is not subsumed.  The bounded primary-source audit in
+`notes/2026-08-10-c904-jordan-scalar-minimal-class-priority-audit.md`
+pre-empts the Weyl ppav, modular-curve, elliptic-product, IHC, and
+minimal-class-algebraicity consequences, but locates no predecessor for the
+primitive integral divisor-product saturation theorem.
 
-An immediate priority boundary is already known: Beckmann--de Gaay Fortman
+The exact priority boundary is: Beckmann--de Gaay Fortman
 prove minimal-class algebraicity when the underlying abelian variety is
 isomorphic to a product of elliptic curves.  The possible new content here is
 the explicit integral divisor-product saturation, the Jordan-scalar quotient
 scope beyond that product statement, and the contrast with the non-scalar
-exotic cubic gluing.  The source audit must determine exactly how much of that
-survives.
+exotic cubic gluing.  Before a public priority sentence, MathSciNet,
+monographs, and forward citations still need closure.
 
 ### Candidate C: exact deck-norm tower bounds
 

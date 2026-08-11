@@ -644,24 +644,39 @@ block that theorem.
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C577's manuscript, human-proof, exposition, and local-export stream is complete at warning-free 45-page authority `9af3eb45` and clean unpushed mirror `2245993`; C892 separately owns full remediation of the formal/trust **MAJOR / NO-GO** audit | [C892](../clebsch-tasks/c892-paper-ii-lean-trust-boundary-review.md) for formal/trust closure before any public forward release |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and the rank-14 weighted Jacobian is proved structurally; all four operator rows of gap class B are closed and its remaining work is the arithmetic, orientation and harmonic rows before C823.  C897's first sealed human-proof batch was **MAJOR** for a missing proof, not a demonstrated false theorem.  C897 repaired the reduced branch/complete-fibre argument and exact rational `J_0` scale, corrected Table (5.1), expanded the local proofs and rejecting checks, and obtained fresh Hitchin, Greaves, Snowden, and Si Kaddour `PASS` regrades.  Its final style-guide pass layered the complete source--shadow--return route and preserved every theorem by stable semantic ID; a post-read correction then made branch-sextic irreducibility paper-local and repaired the Haemers--Parsaei Majd metadata.  Final authority `74a73b97` synchronizes to standalone `6989cf8` with an identical warning-free 32-page PDF; C897 is complete, while Lean follow-up remains separately queued by author direction | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md); [C897 dossier](../clebsch-tasks/c897-paper-iii-reviewer-dossier.md); `notes/2026-08-09-c897-paper-iii-layered-exposition-plan.md` |
 | Paper IV — *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the minimum words of a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release; C901 separately owns an isolated human-proof/exposition review programme and keeps its persona material outside ordinary Paper IV context | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md); [C901](../clebsch-tasks/c901-paper-iv-reviewer-dossier.md) |
-| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  Post-freeze work proves the twin-simplex polarizations, exotic $\mathbf F_4$ gluing, corrected $X_0(6)\to X_0(3)$ map, multiplier-four quartic--cubic Hecke neighbor, and fibrewise algebraicity of $\Theta^4/4!$ for every smooth $A_5$ cubic.  The smooth-family Picard gate is closed: Fano incidence gives an integral relative `[2]` cycle and rational identity cycle, while residual fixed-point-free $C_3$ monodromy rigidifies the primitive relative minimal class.  The final relative Abel--Jacobi gate is an odd multiplier on the generic charge-three fibre.  Charge-two Brauer inheritance, the scalar-four Poincare/Fano bypass, the Pascal-parity intermediate carriers, natural Fano/genus-two/divisor theta carriers, type-$(5,1)$, the Winger $A_4$ frame, and matching-halving are closed negatively.  The former fixed-fibre $D_{3,3}/\operatorname{Sym}^2\Theta$ ambiguity is now closed positively: common-line normalization gives $F\subset\Theta$, $\operatorname{Sym}^2F\to F+F$ is birational, and the degree-two Shen lift plus Beauville's exceptional plane-quintic degree-five lift give an integral unordered lift by $3\cdot2-5=1$.  The plane quintic does not autonomously yield a relative `[5]`; descending its $F\times X$ correspondence is the missing universal-cycle problem.  The sole live odd architecture is therefore relative horizontality of the minimal curve on $\mathcal D_+$ (or the exact two-primary descent obstruction/minimal base change).  Exotic-deck descent, semiabelian Chow extension, and full priority closure remain.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
+| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one exact Chow-halving problem on $\mathcal D_+$; fixed-fibre lifting is solved, while ambient, tautological, six-axis, Fano/Prym, and conic--Prym routes are dead.  Proved successors are the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet with canonical degree-$2^{10}$ log-boundary extension, the exotic cubic saturation, and the all-prime Jordan-scalar theorem placing primitive minimal classes in the integral divisor-product lattice.  IHC and minimal-class algebraicity on the classical Weyl locus are prior art; primitive divisor-product saturation appears new.  The highest-EV successor is an arbitrary-gluing obstruction classification explaining the non-scalar $\mathbf F_4$ exception.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
-C904's current Annals-upgrade frontier is the relative Shen-cycle descent
-gate.  The fixed-complex-fibre minimal carrier and its unordered
-`2/5` lift are closed, but Shen's cycle is existential rather than
-canonical.  The exact obstruction lies in the geometric kernel of
-`CH_1(D_+)/2`, not in `J[2]`; residual `C3` closes Picard descent only.
-Six-axis norm combinations and all formal universal-sheaf
-`c_3`/lambda expressions are now proved even and are closed routes.  The
-live exit is an explicit relative cycle or an odd-degree complete half
-relation; otherwise compute the exact even descent index.  See
-`notes/2026-08-10-c904-shen-voisin-function-field-descent-audit.md`,
-`notes/2026-08-10-c904-relative-chow-halving-descent-obstruction.md`, and
-`notes/2026-08-10-c904-universal-sheaf-tautological-parity-wall.md`.
-Together with C907 this also yields the successor contrast
-`X` universally `CH_0`-trivial but `X times P^1` irrational for every smooth
-`A5` cubic; no full stable-irrationality claim is licensed.
+C904's original Annals-upgrade frontier remains the relative Shen-cycle
+descent gate.  Fixed-fibre lifting is closed by the unordered `2/5`
+construction, but Shen's cycle is existential rather than horizontal.  The
+exact obstruction lies in the geometric kernel of `CH_1(D_+)/2`, not in
+`J[2]`; residual `C3` closes Picard descent only.  The ambient image on
+`D_+=3 Theta` has exact minimal-class multiplier ideal `6Z`, while
+six-axis norms, formal universal-sheaf expressions, Fano/Prym carriers, and
+the direct conic--Prym cylinder are all proved even or otherwise dead.  The
+live exit is therefore an intrinsic relative cycle, an odd-degree complete
+half relation, or the exact even descent index.
+
+Three successor theorems are now quarantined from the frozen paper.  First,
+the five marked principal halves form the exact
+`P^1(F4)` Hecke packet; its degree-`2^10` isogenies extend canonically as
+polarized log one-motives across cusp widths `2,2,6,6`, whereas their
+ordinary special kernels jump and cannot form a global finite-flat Neron
+kernel.  Second, every Jordan-scalar principal elliptic-power quotient has
+primitive minimal class in the integral divisor-product lattice, uniformly
+at all primes and all type-A root--weight sizes.  Classical Weyl ppavs,
+`X_0(N)`, elliptic-product decomposition, IHC, and minimal-class
+algebraicity are preempted; the likely new content is primitive integral
+Lefschetz saturation.  The non-scalar exotic `F4` gluing is the unexplained
+negative boundary and makes an arbitrary-gluing obstruction classification
+the highest-EV next theorem.  Third, C904+C907 yields the successor contrast
+`X` universally `CH_0`-trivial but `X times P^1` irrational for every
+smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
+`notes/2026-08-10-c904-relative-shen-half-construction-attack.md`,
+`notes/2026-08-10-c904-hecke-pentad-log-boundary.md`,
+`notes/2026-08-10-c904-adjacent-annals-uniform-theorems.md`, and
+`notes/2026-08-10-c904-jordan-scalar-minimal-class-priority-audit.md`.
 
 C898 is complete. Its sealed reviewer dossier, five independent cold reads,
 synthesis, and adopted remediation produced Paper I authority commit `c8438909`
