@@ -1,0 +1,11 @@
+C904 residual C3 action on dyadic Lefschetz cokernels
+L5->L7 Smith nonunits: 2^10
+L4->L6 Smith nonunits: 2^43, 6^1
+Q57: dim=10, fixed=0, irreducible-C3 blocks=5
+Q46(2-primary mod 2): dim=44, fixed=24, irreducible-C3 blocks=10
+residual pairings: ranks=(10,44)
+diagonal invariant tensor dims: p15=50, p24=776
+odd invariant contractions exist: p15=1, p24=1
+actual NS/2: dim=15, L-image=14, pairing with Q46^C3 rank=14
+polarization H2 factor: L(theta)=0 mod 2; it does not detect Q46
+PASS

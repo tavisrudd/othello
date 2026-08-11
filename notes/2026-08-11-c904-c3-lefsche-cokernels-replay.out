@@ -1,0 +1,6 @@
+C904 independent bit-mask replay
+Q57(dim,fixed)=(10, 0)
+Q46(dim,fixed)=(44, 24)
+actual NS(dim,L-image)=(15,14)
+C3 invariant tensor dims=(50,776)
+PASS
