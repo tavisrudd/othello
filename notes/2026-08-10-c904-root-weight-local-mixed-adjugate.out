@@ -1,0 +1,8 @@
+root-weight local mixed-adjugate normalization
+d=1: det=1 diagonal=primitive offdiag_signs=none PASS
+d=2: det=1 diagonal=primitive offdiag_signs=-1 PASS
+d=3: det=1 diagonal=primitive offdiag_signs=-1 PASS
+d=4: det=1 diagonal=primitive offdiag_signs=-1 PASS
+d=5: det=1 diagonal=primitive offdiag_signs=-1 PASS
+d=6: det=1 diagonal=primitive offdiag_signs=-1 PASS
+OVERALL PASS

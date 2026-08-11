@@ -1,0 +1,4 @@
+C904 independent dynamic root-weight replay
+records=[(3, ((3, 0),), (3,), 1), (4, ((2, 0),), (6, 6), 1), (4, ((2, 1),), (6, 6), 1), (5, ((5, 0),), (10, 20, 10), 1), (6, ((2, 0), (3, 0)), (15, 50, 50, 15), 1)]
+all replayed minimal orders are one
+PASS

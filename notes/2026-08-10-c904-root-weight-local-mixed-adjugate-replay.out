@@ -1,0 +1,8 @@
+independent polynomial replay
+d=1: determinant and symmetric-unit identities PASS
+d=2: determinant and symmetric-unit identities PASS
+d=3: determinant and symmetric-unit identities PASS
+d=4: determinant and symmetric-unit identities PASS
+d=5: determinant and symmetric-unit identities PASS
+d=6: determinant and symmetric-unit identities PASS
+OVERALL PASS
