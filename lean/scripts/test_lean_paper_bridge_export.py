@@ -226,6 +226,36 @@ class PaperBridgeExportTests(unittest.TestCase):
                 "",
             )
 
+    def test_pending_sync_accepts_only_exact_prior_export(self) -> None:
+        commit = str(MODULE.git("rev-parse", "HEAD")).strip()
+        with (MODULE.REPO / MODULE.CONFIG_PATH).open("rb") as handle:
+            bridge = MODULE.select_bridge(
+                tomllib.load(handle), "projective-cap-q11"
+            )
+        bridge["status"] = "authority-pending-export"
+        bridge.pop("bridge_commit", None)
+        bridge.pop("export_source_commit", None)
+        files = MODULE.materialized_files(commit, bridge)
+        with tempfile.TemporaryDirectory(dir=Path.home()) as directory:
+            root = Path(directory)
+            destination, initial = MODULE.adopt(commit, bridge, files, root)
+            synced_destination, updated = MODULE.sync(commit, bridge, files, root)
+            self.assertEqual((synced_destination, updated), (destination, initial))
+            (destination / "README.md").write_text("not an export\n", encoding="utf-8")
+            subprocess.run(
+                ["git", "-C", str(destination), "add", "--", "README.md"], check=True
+            )
+            subprocess.run(
+                [
+                    "git", "-C", str(destination), "-c", "commit.gpgsign=false",
+                    "commit", "-m", "Tamper with export",
+                ],
+                check=True,
+                capture_output=True,
+            )
+            with self.assertRaisesRegex(ValueError, "exact prior exporter output"):
+                MODULE.sync(commit, bridge, files, root)
+
 
 if __name__ == "__main__":
     unittest.main()

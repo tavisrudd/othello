@@ -371,9 +371,45 @@ def sync(
         capture_output=True,
         text=True,
     ).stdout.strip()
-    if head != bridge["bridge_commit"]:
+    expected_head = bridge.get("bridge_commit")
+    if expected_head is None and bridge.get("status") == "authority-pending-export":
+        manifest = json.loads(
+            subprocess.run(
+                ["git", "-C", str(destination), "show", f"{head}:MANIFEST.json"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout
+        )
+        previous_source = manifest.get("source_commit")
+        if not isinstance(previous_source, str):
+            raise ValueError("pending bridge manifest has no source commit")
+        previous_bridge = select_bridge(config_at(previous_source), bridge["name"])
+        previous_files = materialized_files(previous_source, previous_bridge)
+        tracked_at_head = set(
+            subprocess.run(
+                ["git", "-C", str(destination), "ls-tree", "-r", "--name-only", head],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.splitlines()
+        )
+        if tracked_at_head != set(previous_files):
+            raise ValueError("pending bridge is not an exact prior exporter output")
+        for relative, expected in previous_files.items():
+            actual = subprocess.run(
+                ["git", "-C", str(destination), "show", f"{head}:{relative}"],
+                check=True,
+                capture_output=True,
+            ).stdout
+            if actual != expected:
+                raise ValueError("pending bridge is not an exact prior exporter output")
+        expected_head = head
+    if expected_head is None:
+        raise ValueError("active bridge has no recorded bridge commit")
+    if head != expected_head:
         raise ValueError(
-            f"bridge HEAD is {head}, expected {bridge['bridge_commit']}"
+            f"bridge HEAD is {head}, expected {expected_head}"
         )
     status = subprocess.run(
         ["git", "-C", str(destination), "status", "--short"],
