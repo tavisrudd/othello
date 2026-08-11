@@ -721,7 +721,7 @@ maximal-isotropic gluing has defect supported only at `p`, of order dividing
 `p^v_p((g-1)!)`, and is always primitive for `p>=g`.  Exact defects two and
 three occur already at `(p,g)=(2,3)` and `(3,4)`; the non-scalar exotic `F4`
 gluing is instead a positive stratum.  The highest-EV next theorem is the
-intrinsic divided-power Bockstein classification, not a universal positive
+intrinsic carry-sensitive Tor-boundary classification, not a universal positive
 extension.  Third, C904+C907 yields the successor contrast
 `X` universally `CH_0`-trivial but `X times P^1` irrational for every
 smooth `A5` cubic; no full stable-irrationality claim is licensed.  See

@@ -307,11 +307,11 @@ Small-prime defects genuinely occur: an explicit dyadic graph gluing in
 dimension three has exact defect two, and an explicit ternary graph gluing in
 dimension four has exact defect three.  Complete bounded censuses give
 `72/63` primitive/defective dyadic gluings in dimension three and `963/1332`
-in dimension four.  The obstruction is the internal divided-power Bockstein
-of the integral Lefschetz subring, not an Arf invariant or ordinary ambient
+in dimension four.  The obstruction is the Tor boundary of the fully lifted
+integral divisor-product lattice, not an Arf invariant or ordinary ambient
 Steenrod square.  Thus “all arbitrary gluings are primitive” is dead; the
-live Annals-scale successor is the prime-by-prime classification of this
-Bockstein and its higher-power layers.  See
+live Annals-scale successor is a prime-by-prime, carry-sensitive intrinsic
+classification and a realization theorem for its higher-power layers.  See
 `notes/2026-08-11-c904-prime-gluing-divided-power-obstruction.md` and
 `notes/2026-08-11-c904-integral-lefsche-gluing-defects.md`.
 
