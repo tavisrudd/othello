@@ -30,7 +30,9 @@ MDS--CSS Codes* is an unnumbered companion. The first three released versions on
 earlier title-page identity *The Clebsch cubic: recovering, orienting, and realizing*; Papers IV and
 V now have clean standalone manuscript packages. The golden conference operator material is **not**
 a sixth numbered paper — it is a source-development body feeding future forward versions of the
-passages paper.
+passages paper. Downstream of Paper V sits a quarantined **geometric epilogue** programme on
+`A₅`-invariant cubic threefolds (§3), planned as an unnumbered companion rather than a sixth
+number, and in no manuscript yet.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -341,14 +343,14 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   `q=3`, slack one factors into `q = 5,9,27` (all removed by the finite classification), so
   `C(k−1,2) ≥ q+2` always; at slack two the first surviving boundary is `(q,k) = (53,12)`.
 
-  The finite boundary has since moved substantially. Exact searches close the complete `k=12` and
-  `k=13` layers over every finite field. At `k=14`, `q=61` and `q=67` are completely impossible:
-  the former has 96 exact twelve-line mixed stars and no extension, while the latter has no mixed
-  survivor after 946,250,059 recursion states and none of its 92 all-passant stars passes the first
-  necessary identity. At `q=71`, all 36 normalized all-passant seed classes are closed after
-  22,579,655 states. The live finite cases are therefore the mixed branch at `q=71` and both
-  branches at `q=73`; none of these finite closures substitutes for the missing uniform masked
-  Rédei theorem or the saturated-internal global-coherence argument.
+  **The finite boundary is now closed three layers deep.** No conic-filling arc of size `k=12`,
+  `13`, or `14` exists over any finite field. At `k=14`, `q=61` has 96 exact twelve-line mixed
+  stars and no extension; `q=67` has no mixed survivor after 946,250,059 recursion states and none
+  of its 92 all-passant stars passes the first necessary identity; `q=71` closes both ways, its
+  all-passant branch after 22,579,655 states and all 39 mixed stars failing `E₈ = 0`; and at
+  `q=73` neither branch has a geometric star. No `k=15` census is planned: these finite closures
+  do not substitute for the missing uniform masked Rédei theorem, and the leverage has moved to
+  the structural gates below.
 
   **The saturated-internal branch is now a pure clique bound, and half of it is closed.** Dropping
   the arc condition and keeping only chord externality makes such an arc a clique of size `(q+3)/2`
@@ -363,10 +365,32 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   containment is settled unconditionally for every odd prime power by an exact coboundary identity
   `χ(c−c′) = δλ(c)λ(c′)` on the norm-one circle, which confines the system to one `λ`-coset of size
   `(q+1)/2 < (q+3)/2`; with the affine-line case, containment in any Baer subline forces `q = 5`.
-  Coverage by exhaustion is `q ≤ 43` in general and `q ≤ 151` within `q ≡ 3 (mod 4)`. The two
-  surviving gates — the general clique bound, and Baer-subline *stability* for `±1`-valued
-  Frobenius-odd `λ_min`-eigenfunctions of support `≤ q+3` — are both direction theorems for point
-  sets with character-restricted differences, so one Rédei–Szőnyi-strength tool could close both.
+  Coverage by exhaustion is `q ≤ 43` in general and `q ≤ 151` within `q ≡ 3 (mod 4)`.
+
+  **Every prime field is now closed outright, by a different and stronger route.** Coherence of a
+  saturated-internal support has a standard incidence model: the support, its Frobenius conjugate,
+  and the character-opposite directions together with the trace-zero direction form a **dual 3-net
+  of order `(q+3)/2`**. For prime `q`, Blokhuis–Korchmáros–Mazzocca's net classification forces the
+  two affine components onto a conic, and the two-line subgroup classification then leaves only
+  `q = 5`. No clique bound, no Paley eigenfunction, no conjecture — those earlier statements survive
+  as independent checks rather than as the frontier. Only proper prime powers remain, where the net
+  order exceeds the characteristic.
+
+  **The extension-field gate is algebraic, and its search space is now three fields wide.** Over
+  every odd prime power the two affine components have the complementary-factor form `(x, ±S(x))`
+  on the nonroots of `S`, where `RS = X^q − X`, `deg R = (q+3)/2`, `deg S = (q−3)/2`; with `H₂` the
+  remainder of `S²` mod `R`, conic containment is exactly `deg H₂ ≤ 2`, equivalently the vanishing
+  of one coefficient band of `S³`. The Frobenius-semilinear digit tower untwists in canonical
+  ghost-tail coordinates into one ordinary stacked **Cartier–Toeplitz matrix `𝕄_R`** with
+  denominator-free entries in the coefficients of `R`, so a surviving ghost is an exact
+  determinantal condition. Row counting forces a nonzero kernel only at `q = 25, 27, 81`; elsewhere
+  it is a rank-drop stratum whose properness is the thing to prove. The first non-shadow equation
+  descends to a pure homogeneous quadratic map on `ker 𝕄_R` for `p ≥ 7`, and stays genuinely mixed
+  quadratic/cubic only in characteristics three and five — precisely the three forced fields. A
+  top-rung no-wrap bound gives the uniform gap `deg H₂ ≤ 2` or `deg H₂ ≥ (p+1)/2`. Equivalently the
+  whole hierarchy is the division-free syndrome law `Σᵢ wᵢ^(2j+1) xᵢ^m = 0` on the roots of `R` with
+  `wᵢ = 1/R′(xᵢ)`, where the conic conclusion says exactly that `(wᵢ²)` is a quadratic evaluation.
+
   Closed, do not retry: density and spectral-stability arguments (Paley sits at edge density exactly
   `1/2`, interlacing is already tight), valuation-versus-Parseval counting, and the coupled
   cross-ratio invariant `g_ij`, whose pigeonhole runs one short in the unhelpful direction.
@@ -1124,12 +1148,24 @@ The remaining headline Clebsch-facing results and censuses are:
   forgetting it destroys canonical reversibility. The theorem records this image and base-change
   boundary instead of claiming that an arbitrary cubic in the pencil comes from the construction.
 
+- **The normalization–residue theorem, now the paper's closing structural result.** Adjoining the
+  half-sum to `Z⁶` gives the `D₆` weight lattice `D₆^∨`, the minimal over-lattice preserved by
+  `φ = (I+B)/2`; since `φ² − φ − 1 = 0` it carries the **maximal** golden order `Z[φ]`, while the
+  equivariant endomorphism ring of `Z⁶` itself is the index-two order `Z[√5]`. Reducing mod 2 gives
+  a 3-dimensional `F₄`-space whose commutator submodule is its unique nonzero proper submodule,
+  the quotient is the trivial line, the extension is nonsplit and unique (the Ext group is a single
+  `F₄`-line), and that submodule is canonically the six-point heart `Aug(F₂⁶)/⟨1⟩` on which `φ̄`
+  acts as one of the two primitive endomorphisms `ω, ω²`. Reversing the golden orientation swaps
+  them, exactly as the outer coset of `N_{S₆}(A₅)/A₅` does. **So the golden orientation torsor the
+  series reconstructs is canonically the exotic `F₄`-gluing torsor** — the bridge the geometric
+  epilogue below is built on.
+
 - **A common theorem, with typed fibres.** The five papers do not share one shadow functor on one
   category. They do share a reconstruction-profile calculus: each sparse shadow recovers its
   carrier up to a stated projective orbit, orientation involution, homogeneous fibre, or marking
   torsor, and every minimality claim carries its own collision or lower-bound witness. A calibrated
   odd datum kills the recurring orientation `C₂`; Paper V adds the chordal marking necessary and
-  sufficient for exact oriented return. The strongest honest series sentence is: sparse shadows
+  sufficient for exact oriented return. The strongest series sentence available is: sparse shadows
   recover carriers, and their exact fibres measure what was forgotten.
 
 - **Classical tower, nonclassical marked entry.** The unmarked quadratic
@@ -1147,6 +1183,78 @@ The remaining headline Clebsch-facing results and censuses are:
   function. The stronger relative theorem over a localization of `Z[√5]` remains open at integral
   good reduction and unit control, and the proved census stays outside the manuscript until its
   classical attribution and larger certificate close.
+
+### The geometric epilogue: the exotic cubic realization
+
+**Quarantined; in no manuscript.** Built after Paper V froze, aimed at an unnumbered epilogue
+(working title *Irrationality after one stabilization of universally `CH₀`-trivial cubic
+threefolds*) that would import the marked structural bridge and realize the golden carrier
+geometrically. Deliberately not a sixth numbered paper. Priority closure is open for most of it.
+
+- **The carrier, and why the exotic sheet is forced.** Roulleau's pencil of `A₅`-invariant cubic
+  threefolds. Its six `D₅` axes have Gram `6I − J` and Winger's five `A₄` quotient axes have Gram
+  `3(5I − J)`; the two discriminants meet exactly in the unique `(Z/3)⁴` heart, forcing the generic
+  three-primary gluing. The five marked principal halves of `(E⁵, 6I−J)` form one Hecke packet with
+  discriminant geometry `P¹(F₄)` — three classical `S₆` sheets, two exotic `A₅` sheets, every edge a
+  primitive multiplier-four neighbour with Smith kernel `(Z/2)² ⊕ (Z/4)⁴`. The `F₂` gluings preserve
+  `S₆` while each `F₄` gluing has stabilizer exactly `A₅`, so **strong Torelli puts the cubic family
+  on the exotic pair** — the same two-element torsor Paper V's golden orientation supplies. On the
+  quartic side, unimodular standard-type `S₆` lattice rigidity forces the `A₅` root–weight lattice
+  with stabilizer `Γ₀(6)`, so the quartic period closes up on `X₀(6)` with cusp widths `1,2,3,6`.
+- **Proved fibrewise.** For all twenty `A₅`-stable principal gluings of `(E⁵, 6I−J)`, the rank-15
+  fourfold-divisor-intersection lattice is saturated in its rational span; on the exotic gluing a
+  15-term identity plus coprime Smith types `(1¹⁴,7)`, `(1¹⁴,17)` force `Θ⁴/4!` into it. Hence
+  **every smooth `A₅` cubic in the pencil is universally `CH₀`-trivial** (Voisin) and **its
+  intermediate Jacobian satisfies the integral Hodge conjecture for one-cycles**
+  (Beckmann–de Gaay Fortman). On the smooth family the Picard gate also closes: the exotic marking
+  cuts mod-2 elliptic monodromy `S₃ → C₃`, the order-three generator satisfies `M²+M+I ≡ 0 (mod 2)`
+  and fixes no vector of `J[2]`, so every symmetric-line-bundle torsor has a unique invariant
+  quadratic refinement and the primitive relative class exists with no extra cover (cusp widths
+  become `2,2,6,6`).
+- **One crown left, and every cheap route to it closed.** The open question is whether the relative
+  rationally connected Abel–Jacobi lift has odd index — an exact 1-vs-2 dichotomy, since a Hecke
+  conic already gives a degree-two closed point on a proper compactified generic fibre. Closed
+  negatively by exact calculation: the charge-two universal-sheaf gerbe has period and generic index
+  two (cyclic algebra with nonzero residue on Druel's Luna slice, surviving the marked base change),
+  both type-`(5,1)` carriers reduce to it, the twisted-cubic route dies because all 680 degree-three
+  divisor products span a saturated rank-50 lattice — the full rational codimension-three Hodge
+  space by skew Howe duality — with `Θ²` pairing ideal exactly `2Z`, and the universal-sheaf `c₃`
+  escape dies on a mod-2 invariant census through Wu's formula. A degree-15 factorable-quadric
+  packet (prime over `Q`, two independent CAS replays) makes the generic charge-three and
+  unordered-theta fibres 2-equivalent but is an odd multisection, not a zero-cycle. Shen's centered
+  cycle is existential rather than canonical, and its halving obstruction is a higher-Chow class
+  whose geometric halves form a torsor under `CH₁` 2-torsion of the theta sum divisor, **not** under
+  `J[2]`; the exact positive residue is an odd-degree descent theorem.
+- **Two uniform theorems extracted.** (i) *Jordan-scalar minimal class:* for every principally
+  polarized elliptic-power quotient whose self-dual gluing is scalar on each local Jordan block,
+  `Θ^(g−1)/(g−1)!` lies in the integral divisor-product lattice — mixed-adjugate proof, primitive at
+  `p=2`, covering every scalar type-`A` gluing `G_N = NI − J`, `N ≥ 3`; the exotic cubic gluing is
+  non-scalar and a genuine exception. A bounded priority audit puts the likely new crown in the
+  primitive integral divisor-product saturation, since Weyl ppavs, `X₀(N)`, elliptic-product
+  decomposition, IHC and minimal-class algebraicity are prior art. (ii) *The defect boundary:* a
+  literal power `E^g` is always primitive; a quotient of `pI_g` by any maximal isotropic subgroup has
+  defect dividing `p^{v_p((g−1)!)}`, so primitive for `p ≥ g`; an arbitrary degree-`D` isogeny has
+  defect only at primes dividing both `D` and `(g−1)!`. Defects genuinely occur — exact index 2 in
+  every `g ≥ 3`, 3 in every `g ≥ 4`, 4 in every `g ≥ 5`, by a spectral stabilization theorem — so
+  "all gluings are primitive" is dead and the obstruction is a Tor boundary, not an Arf invariant or
+  Steenrod square. Squarefree symmetric slope ⇒ primitive at every prime; the converse is false at
+  odd primes, so the live classification is by `p`-typical nilpotent height.
+- **The irrationality half (one-step stabilization).** "Quantum" means quantum cohomology; the
+  computations are classical and exact. Cai's formal-monodromy block has exponents `±1/6`; a
+  nef-canonical surface block admits fractional exponents only `0` or `1/2`, and every
+  weak-factorization centre in a fourfold has dimension `≤ 2`, so the block cannot cancel: **`X × P¹`
+  is irrational for every smooth cubic threefold.** The bridge invariant is the additive multiplicity
+  `ν₆` of primitive sixth-root formal-monodromy eigenvalues (cubic atom `ν₆ = 2`, every admissible
+  centre `ν₆ = 0`), not a Boolean flag. Full stable irrationality is **not** proved and the argument
+  first fails at `m = 2`, where cubic self-carrier centres enter. Source-level audit fixed the
+  ambient object: the reduced cubic quantum module is the irreducible hypergeometric
+  `H(0,0,0,0;1/3,2/3)` with local formal ranks `1,1,2`, killing the old plan of globalizing the
+  rank-two block as a proper subobject, while the local sectorial Stokes lift has ordered ranks
+  `1,2,1` and isolates the zero-exponential atom canonically. The remaining gates are analytic — a
+  `Γ`-integral, Stokes-filtered blow-up theorem composable through weak factorization.
+- **The separation.** For every smooth member: `X` universally `CH₀`-trivial while `X × P¹` is
+  irrational. That is a strong separation between universal `CH₀`-triviality and one-step stable
+  rationality, and explicitly **not** a claim of stable irrationality.
 
 ### The golden conference operator source programme
 
@@ -1903,19 +2011,19 @@ infinite family, no asymptotic statement, and no transferable technique — and 
 papers reach the top tier only when the exceptional object closes a general question. The general
 question here is open at `k = 9`. The theorem would be a **new** headline paper (rigidity + all-k
 classification + golden operator), not a retrofit. Current state: proved for every `k` over every
-odd `q ≤ 43`, saturated-external branch uniformly closed, saturated-internal branch reduced to a pure
-clique bound in the external-join graph on internal points — settled for `q ≡ 1 (mod 4)` as far as it
-has been measured, and provably not settleable that way for `q ≡ 3 (mod 4)` — and nonsaturated branch
-reduced to slack `≥ 2`. The complete `k=12` and `k=13` layers are now impossible over every finite
-field; at `k=14`, `q=61` and `q=67` are closed completely and the `q=71` all-passant branch is
-closed, leaving the mixed `q=71` case and both `q=73` branches as the first finite frontier. The exact remaining
-obstruction is a clique bound
+odd `q ≤ 43`; saturated-external branch uniformly closed; **saturated-internal branch now empty over
+every prime field**, via the dual 3-net model and a classical net classification, with only proper
+extension fields left; nonsaturated branch reduced to slack `≥ 2`, and the complete `k=12`, `k=13`
+and `k=14` layers impossible over every finite field, so no `k=15` census is planned. The exact
+remaining obstruction is a clique bound
 `m(q) < √(2q) + O(1)` for a Paley-type graph on the points off the conic, measured to be tight
 rather than generous — so it may be false for some `q`, and that possibility is itself the finding.
-The two live gates — the invariant-half clique bound `ω(Γ_q) ≤ (q+1)/2`, and Baer-subline stability
-for `±1`-valued Frobenius-odd minimum eigenfunctions — are both direction theorems for point sets
-with character-restricted differences; a Rédei–Szőnyi-strength tool serving both is the highest
--leverage single target in the lane.
+The two live gates are now structural rather than combinatorial: prove that the stacked
+Cartier–Toeplitz kernel locus `ker 𝕄_R` is a proper rank-drop stratum outside the three
+row-count-forced fields `q = 25, 27, 81`, and rule out disjoint zeros of the first non-shadow
+map on it — a pure quadratic for `p ≥ 7`, mixed quadratic/cubic only in characteristics three and
+five. The older clique bound `ω(Γ_q) ≤ (q+1)/2` and Baer-subline stability remain valid targets but
+are no longer the frontier.
 
 **Clebsch publication:** the three released papers have cleared their mathematical gates and what
 remains is external. The rigidity paper carries the golden orientation as well as the
@@ -1936,6 +2044,17 @@ absorbing the five literature pre-emptions into whatever forward version consume
 modular sequel separate: its proved centre is the
 Modular Gateway Theorem and its `q=7,11,23` realizations/boundary, not the refuted universal
 metaplectic/theta roof.
+
+**The geometric epilogue is the lane's highest-ceiling open target, and it is one parity question.**
+Paper V is frozen at eleven warning-free pages with three independent cold reads green, and its
+closing normalization–residue theorem identifies the golden orientation torsor with the exotic
+`F₄`-gluing torsor. Downstream of that, every smooth `A₅` cubic in Roulleau's pencil is proved
+universally `CH₀`-trivial with the integral Hodge conjecture for one-cycles, and `X × P¹` is proved
+irrational for every smooth cubic threefold. What is missing for the epilogue's headline is the odd
+index of the relative rationally connected Abel–Jacobi lift — an exact 1-vs-2 dichotomy — plus
+relative rigidification, deck descent, boundary control, and a full priority audit. The plan is one
+unnumbered epilogue, not a sixth numbered paper, and nothing from this programme may enter the
+frozen manuscripts before those gates close.
 
 **Adjacent problems, opened deliberately and bounded.** For Hadamard order 668, 25 of the 30
 mod-3-compatible fixed common multiplier subgroups are impossible — a published 21-subgroup
@@ -2317,7 +2436,10 @@ code is a worked application. **The golden conference operator is no longer a ma
 a source-development body feeding forward versions of the passages paper, and its first integration
 took only the source-operator-cubics-harmonic core plus the determinant-versus-permanent boundary.
 Its exchange-statistics material sits in a separate lane-local companion, written as a design-limit
-and theory note rather than an experimental proposal. The Paper-I computational companion stays
+and theory note rather than an experimental proposal. **The geometric epilogue is likewise not a
+numbered paper and not yet a manuscript** — the plan is one unnumbered, independently readable
+companion downstream of Paper V, whose mathematics is proved fibrewise but whose relative,
+descent, boundary, and priority gates are open. The Paper-I computational companion stays
 unnumbered and becomes a forward-pointing evidence companion once the q13 paper is public. The
 37-page integrated manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon
 code* is preserved only as a fallback. The rigidity paper has itself split — a human

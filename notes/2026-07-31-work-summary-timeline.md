@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-10**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-11**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1007,6 +1007,76 @@ marking rather than absolute.
   only the marked judo theorem: a sparse Clebsch entry into a residue-flagged reversible tower, with
   exact bottom fibres 432/864/1728. Both are research reports; neither was promoted to a manuscript
   or Lean source.
+
+## Week 12 — Aug 10–11 · A post-freeze Annals push, a cubic-threefold separation, and three finite layers closed
+
+- **Aug 10 onward — C904 opens a quarantined Annals-ceiling programme behind the frozen Paper V.**
+  With the eleven-page manuscript sealed, the task kept running as a long chain of dated gate
+  passes, each with its own report, exact Sage generator, and an independent SymPy, Fraction, or
+  Macaulay2 replay; none of it was imported into the manuscript, and no Lean source moved. The
+  positive spine: the six-`D₅`-axis polarization matrix `6I−J` and the twenty-dimensional
+  cubic–Winger correspondence carrier; the twin-simplex theorem pairing Winger's `3(5I−J)` against
+  the cubic's `6I−J` and forcing the generic three-primary gluing; the exotic-`F₄` gluing result,
+  where the three `F₂` gluings preserve `S₆` while each exotic gluing has stabilizer exactly `A₅`,
+  so strong Torelli puts the cubic family on the exotic pair; the `X₀(6)`/`Γ₀(6)` integral rigidity
+  theorem for the quartic period; and the six-axis minimal-class saturation, which put `Θ⁴/4!` in
+  the fourfold-divisor-intersection lattice and so proved every smooth `A₅` cubic in Roulleau's
+  pencil universally `CH₀`-trivial with the integral Hodge conjecture for one-cycles. Theta
+  rigidification on the marked base then closed the smooth-family Picard gate positively.
+
+- **Aug 10–11 — the same chain closed every cheap route to the remaining parity crown.** Successive
+  passes killed the charge-two universal-sheaf gerbe (Druel Luna slice, cyclic algebra with nonzero
+  residue, generic index two), both type-`(5,1)` divisor carriers, the twisted-cubic shortcut (680
+  degree-three divisor products spanning a saturated rank-50 lattice with `Θ²` pairing ideal `2Z`),
+  the universal-sheaf `c₃` escape (mod-2 invariant census through Wu's formula), and — by reading
+  the primary sources rather than the computation — the Shen function-field descent shortcut, whose
+  halving obstruction turned out to live in a higher-Chow kernel and to be a torsor under `CH₁`
+  two-torsion, not `J[2]`. A degree-fifteen factorable-quadric packet made the charge-three and
+  unordered-theta fibres 2-equivalent without producing a zero-cycle. Two uniform theorems were
+  extracted en route — the Jordan-scalar minimal-class theorem and the prime-by-prime gluing-defect
+  boundary with its spectral stabilization towers — each with its own bounded priority audit, which
+  placed the likely new crown in primitive integral divisor-product saturation rather than in the
+  consequences. The surviving crown is a single 1-vs-2 index question, and the task now carries an
+  explicit dead-path ledger so the closed routes are not revived.
+
+- **Aug 10 — C907 allocated as a separate exploratory task, and it produced the other half.** The
+  quantum-monodromy stabilization test reconstructed Cai's `±1/6` cubic block from source formulas
+  and proved that `X × P¹` is irrational for every smooth cubic threefold, using the nef-canonical
+  surface-block exponent restriction against the dimension-at-most-two centres of fourfold weak
+  factorization. Source-level audits then demoted two attractive ideas: the prime-power
+  spectral-cycle idea, and globalizing the rank-two block as a proper subobject — the ambient
+  module is the irreducible hypergeometric `H(0,0,0,0;1/3,2/3)`, whose local sectorial Stokes lift
+  has ordered ranks `1,2,1`. Full stable irrationality stays open from `m = 2`. The C904/C907
+  bridge went GO only after one invariant correction: a Boolean exponent flag was replaced by the
+  additive multiplicity `ν₆` of primitive sixth-root formal-monodromy eigenvalues.
+
+- **Aug 11 — C756 closes the `k=14` layer and converts the saturated-internal branch.** The mixed
+  `q=71` branch fell (all 39 mixed stars fail `E₈ = 0`) and neither `q=73` branch has a geometric
+  star, so `k=12`, `k=13` and `k=14` are all impossible over every finite field and no `k=15`
+  census is planned. More consequentially, the saturated-internal branch acquired a standard
+  incidence model — a dual 3-net of order `(q+3)/2` — and with it Blokhuis–Korchmáros–Mazzocca's
+  classification closes **every prime field**, retiring the clique-bound route from the frontier.
+  The extension-field remainder untwisted into one stacked Cartier–Toeplitz matrix whose kernel is
+  forced by row count only at `q = 25, 27, 81`. The live card was retitled around those structural
+  gates.
+
+- **Aug 11 — C904 proves the golden-orientation/exotic-sheet calibration and re-plans the series
+  architecture.** The maximal-order bridge on `D₆^∨` identifies the golden orientation torsor with
+  the exotic `F₄`-gluing torsor through the unique nonsplit `F₄A₅`-extension; a follow-up Ext
+  computation showed that extension is one-dimensional over `F₄`, and the theorem was assigned as
+  Paper V's closing structural result rather than left as adjacent research. Four red-team rounds
+  on the epilogue plan settled the publication architecture: five numbered papers, then one
+  unnumbered geometric epilogue, with Paper IV entering the diagram through its hidden `F₈`
+  commutant as the degree-three model of the same residual cyclic-marking principle — not through
+  a fabricated cubic or `A₅` arrow.
+
+- **Aug 10–11 — build-sys carries the serialized Q13 certificate build and the separated Paper I
+  boundary.** Projective-cap Q13 advanced through Classes 0–99 with Class100 current, one class per
+  target under the one-worker, cache-required `q13-serialized` profile; its admission reserve was
+  raised to 12 GiB to stop retries in low-headroom conditions, and a restart checkpoint seals the
+  latest sentinels. Paper I moved onto the separated three-repository boundary, with its
+  regeneration split from verification, its release certificate recorded, and the sealed Q11 bridge
+  pin refreshed.
 
 ---
 
