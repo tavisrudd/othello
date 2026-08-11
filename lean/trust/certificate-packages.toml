@@ -60,6 +60,23 @@ allowed_import_path_prefixes = [
 ]
 forbidden_artifact_basenames = []
 
+[[package]]
+name = "finitegeom-projective-cap-q13-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-projective-cap-q13-certificates"
+commit = "99156ddf6ed13719f2153bd733aa3fe448a2c0a2"
+manifest_sha256 = "0a4d00a6cd4d907214141829a3d36facc6aee5a1ca9edb7633984c8fa58fa5ce"
+gate = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13"
+terminal = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.classForThird_valid"
+trust_fact = "external/finitegeom-projective-cap-q13-certificates.json"
+trust_fact_sha256 = "937dcfd3888a31d67630fe29805f8fb2a5ba93ad95a8f98022fe7cc8f0885a1c"
+owned_module_prefixes = [
+  "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13",
+]
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/projective-cap-q13/",
+]
+forbidden_artifact_basenames = []
+
 # Generated families still resident in the monorepo, each named with the official package
 # that will own it.  A generated source outside both the owned prefixes above and these
 # prefixes is a family that was never declared, and is rejected.  These declarations are
