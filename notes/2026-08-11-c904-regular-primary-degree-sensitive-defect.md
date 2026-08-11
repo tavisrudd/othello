@@ -125,6 +125,34 @@ defect calculations agree.
 
 ## 3. Consequences for the Annals-scale program
 
+There is a free uniform recurrence which explains why the new factor can
+appear precisely at the top step.  If
+
+\[
+ d_k=\operatorname {ord}\!\left(\Theta^k/k!\bmod P^k\right),
+\]
+
+then multiplication by the integral divisor \(\Theta\) gives
+
+\[
+ \Theta\,\frac{\Theta^k}{k!}
+   =(k+1)\frac{\Theta^{k+1}}{(k+1)!},
+ \qquad d_{k+1}\mid(k+1)d_k.                         \tag{3.1}
+\]
+
+Hence a (p)-primary defect can rise by at most
+\(v_p(k+1)\) in one degree.  In the present example
+
+\[
+ v_2(d_5)=2,
+ \qquad v_2(d_6)=3=v_2(d_5)+v_2(6),
+\]
+
+so the last multiplication realizes the largest new dyadic layer allowed by
+(3.1).  This does not prove a general recurrence equality, but it gives a
+conceptual location for the extra factor and a mandatory compatibility check
+for every proposed graded formula.
+
 The additive necklace/ghost cokernel has exponent
 \(\operatorname {lcm}(1,\ldots,h)\), whose (p)-part is exactly
 \(p^{\lfloor\log_p h\rfloor}\).  This remains the correct classical skeleton
@@ -178,7 +206,10 @@ full graded quotient in dimension six.
 
 - **Settled:** curve and point defects can differ on one indecomposable ppav.
 - **Settled:** the regular height-six curve still has exact order four.
-- **Open:** the conceptual source of the extra top factor two.
+- **Settled:** the extra top factor occurs at the unique dyadic allowance in
+  the universal recurrence \(d_{k+1}\mid(k+1)d_k\), and is sharp here.
+- **Open:** a structural criterion for when the recurrence inequality is an
+  equality rather than a strict divisibility.
 - **Open:** the full degree-by-degree elementary divisors and their modular
   exterior-power recursion.
 - **Open:** whether the curve order always equals the truncated ghost exponent
