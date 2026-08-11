@@ -58,11 +58,15 @@ pushforward, and Thom--Sebastiani convolution in its own category.  The full
 ambient cubic quantum module is now proved to lie in that category through its
 hypergeometric mirror.  It is globally irreducible, however, so Cai's local
 rank-two Levelt--Turrittin block cannot be a global irregular-Hodge subobject.
-The correct target is therefore a strict **local Stokes-graded** filtration of
-the full object, not a direct-sum lift of the formal block.  Iritani's quantum
-blow-up map is not known to carry such a filtration.  That semiorthogonal
-Stokes lift, rather than a new polynomial identity, is now the highest-EV
-theorem gate.
+The local object itself is nevertheless exact: for every admissible phase, the
+unique sectorial lift has ordered formal ranks `1,2,1`, with Cai's
+zero-exponential rank-two atom in the middle and fixed by root monodromy; phase
+`pi/2` is the certified representative.  The missing theorem is therefore not
+existence of the cubic Stokes grading.  It is identification of
+Iritani's residual blow-up sectors with the centers' own Stokes/irregular-Hodge
+structures, followed by strict composition through weak factorization.  That
+residual-center mutation-system comparison, rather than a new polynomial
+identity, is now the highest-EV theorem gate.
 
 A second proposed refinement, the `p`-primary length of a global spectral
 cycle, does not survive audit in the published formalism.  The blow-up and
@@ -605,7 +609,9 @@ proper global rank-two subobject would contradict irreducibility of the rank-fou
 hypergeometric module.  The earlier target “make Cai's block a global IrrMHM
 object” is therefore impossible.  The surviving object must be the rank-two
 graded piece of a local Stokes filtration on the full irreducible quantum
-module.
+module.  The next subsection after the compactification comparison certifies
+that this sectorial graded piece exists and is canonically singled out by its
+zero exponential factor.
 
 ### 5.6 Compactification independence is an exact near-miss
 
@@ -628,20 +634,66 @@ monodromic mixed-Hodge input existed; it does not construct the input.  Iritani'
 2025 survey still states the Γ-integral/semiorthogonal Stokes comparison as
 anticipated rather than proved.
 
-The corrected sufficient theorem is consequently:
+### 5.7 The cubic sectorial atom exists; residual-center transport is open
+
+Write `u>0`, `q=u^2`, and
+
+\[
+A=6\sqrt3\,u.
+\]
+
+Cai's formal exponential factors, in Jordan-block order, are `+A`, `-A`, and
+`0`, with ranks `1,1,2`.  For an admissible phase `phi`, their Stokes heights
+are `-A sin(phi)`, `A sin(phi)`, and `0`.  Hence the zero-exponential block is
+the middle block for **every** admissible phase.  At the representative phase
+`phi=pi/2`, the increasing-height order is
+
+\[
+(+A,\ 0,\ -A), \qquad (1,\ 2,\ 1).
+\]
+
+Hukuhara--Turrittin therefore gives a unique analytic lift on every sufficiently
+small sector of opening greater than `pi`.  The square-root monodromy
+`u -> -u` exchanges the two outer rank-one factors and fixes the middle
+zero-exponential rank-two factor.  Thus the local Stokes-graded cubic atom is
+not conjectural; the certificate and independent replay verify its exact phase
+ordering.
+
+Iritani's 2020 Theorem 1.3 supplies the closest blow-up model.  For weak-Fano
+toric weighted blow-ups along toric centers, the formal decomposition has a
+sectorial analytic lift and its Gamma-integral lattice gives the Orlov-type
+semiorthogonal decomposition of topological `K`-groups.  But Remark 1.4(3)
+states the exact surviving defect: each residual sector has the same **formal**
+structure as the center quantum module, while equality of their Stokes
+structures is unknown.  In the general framework, Conjecture 8.3 and
+Proposition 8.5 identify the necessary datum as the center summand of the full
+mutation system—equivalently its Stokes-filtered local system with pairing and
+Gamma-integral `K`-embedding.  Given that datum, the Riemann--Hilbert problem
+recovers the retained quantum module.
+
+Hinault--Yu--Zhang--Zhang prove uniqueness of the projective-bundle and blow-up
+decomposition maps in the formal/non-archimedean `F`-bundle category.  This
+removes ambiguity from Iritani's **formal** map, but does not provide the
+missing mutation system: their introduction explicitly leaves the nc-Hodge
+upgrade of general Gromov--Witten theory conjectural because of convergence,
+Gamma, and opposedness problems.
+
+The old demand that the master-space Fourier projections themselves become
+global IrrMHM morphisms was therefore stronger than necessary.  The corrected
+sufficient theorem is:
 
 1. realize the full quantum modules of every weak-factorization variety and
-   center as irregular-Hodge/Stokes objects;
-2. realize Iritani's formal decomposition as a sectorial Stokes filtration
-   whose associated graded is the `X` module plus the `r-1` center modules,
-   rather than as a global direct sum;
+   center as analytic exponential-type irregular-Hodge/Stokes objects;
+2. identify each residual mutation-system summand of Iritani's sectorial
+   decomposition with the Stokes-filtered quantum module of the corresponding
+   center, compatibly with the Gamma-integral `K`-embedding;
 3. prove strict compatibility of its irregular Hodge filtration with that
    Stokes filtration, identify the graded shifts with Section 5.1's elementary
    divisors, and compose it through the exchanges of Section 5.2.
 
-No theorem in the audited literature supplies this package.  The first endpoint
-existence problem is closed; the functorial center and Stokes-extension problems
-remain.
+No theorem in the audited literature supplies this package.  The cubic
+endpoint and its local sectorial atom are closed; residual-center Stokes
+identification and functorial composition remain.
 
 ## 6. Spectral-cycle alternate attack: negative audit
 
@@ -853,6 +905,21 @@ not for Iritani's additive quantum blow-up map.  The exact frontier is therefore
 a semiorthogonal Stokes filtration compatible with irregular Hodge theory, not
 a direct-sum IrrMHM morphism.
 
+The present master-space `ej`+`tt` pass closes the local sectorial-existence
+question as well.  The zero-exponential rank-two atom is the middle term of the
+unique `1,2,1` sectorial lift for every admissible phase, not only for the
+certified representative `pi/2`; root monodromy merely exchanges the outer
+lines.  Iritani's toric theorem then shows that sectorial blow-up decompositions
+themselves are not the missing technology.  His explicit residual-center
+caveat and Riemann--Hilbert formulation move the exact gate one level deeper:
+identify the residual mutation system with the center's mutation system and
+make that identification strict for irregular Hodge filtrations.  The full
+identification is sufficient but stronger than logically necessary: a
+composable strict identification of only the cubic-isotypic zero-exponential
+graded piece and its relative Rees lattice would already carry the obstruction.
+Formal `F`-bundle uniqueness and fixed-Landau--Ginzburg compactification
+independence do not determine even this restricted analytic Stokes datum.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -886,19 +953,20 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 40,013 bytes;
-- independent replay: 16,439 bytes;
-- JSON certificate: 307,698 bytes.
+- Sage generator: 43,336 bytes;
+- independent replay: 17,574 bytes;
+- JSON certificate: 309,760 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
 of the source matrices, the cubic period with its hypergeometric quantum
 module, the hypotheses of the cited irregular-Hodge theorems, Iritani's
-asymptotic formulae, the quantum Kunneth/projective-bundle formula, and the
-geometric identification of the two standard blow-up order exchanges is
-human-audited.  The bounded checks do not assert existence or nonexistence of
-any weak factorization or the missing global irregular-Hodge/Rees/Stokes
-compatibility.
+asymptotic formulae, the identification of the exponential factors with
+Stokes heights, the quantum Kunneth/projective-bundle formula, and the geometric
+identification of the two standard blow-up order exchanges is human-audited.
+The bounded checks do not assert existence or nonexistence of any weak
+factorization or the missing residual-center mutation-system and global
+irregular-Hodge/Rees/Stokes compatibility.
 
 ## 10. Sources
 
@@ -926,6 +994,18 @@ compatibility.
   Γ-integral/Stokes comparison with semiorthogonal decompositions as an
   anticipated relationship.  Shared-cache PDF SHA-256:
   `7a949edc17fe87f2af306dc663a95056e4636e8c312df09303c6f6f702afdc39`.
+- Hiroshi Iritani, *Global Mirrors and Discrepant Transformations for Toric
+  Deligne--Mumford Stacks*, arXiv:1906.00801, especially Theorem 1.3 on the
+  toric sectorial lift, Remark 1.4(3) on the unknown residual-center Stokes
+  comparison, and Conjecture 8.3 with Proposition 8.5 on the mutation-system
+  Riemann--Hilbert gate.  Shared-cache PDF SHA-256:
+  `dc25e5cbd849ee5daa7643d69ae2e77936d5cd343ceb66ce8bbd8e03fbf874c7`.
+- Thorgal Hinault, Tony Yue Yu, Chi Zhang, and Shaowu Zhang, *Decomposition and
+  framing of F-bundles and applications to quantum cohomology*,
+  arXiv:2411.02266, especially Theorems 1.1, 1.2, 5.22, and 5.24.  These prove
+  formal/non-archimedean decomposition and uniqueness, not the analytic Stokes
+  or nc-Hodge comparison.  Shared-cache PDF SHA-256:
+  `a11a093f790890804c7d4f7559b30ed2a6da87811de46f2aa0d29026e343e6bd`.
 - Franziska Bittner, *The universal Euler characteristic for varieties of
   characteristic zero*, arXiv:math/0111062, especially Theorem 3.1's
   presentation of `K_0(Var_k)` by smooth complete varieties and blow-up
@@ -1005,19 +1085,22 @@ compatibility.
   filtered quantum realization of that ledger.  The `P^1` mutation calculation
   simultaneously proves that Euler and Serre data do not select the exceptional
   flag; its canonical monodromy-weight line is a third line.
-- **Settled globally and corrected locally:** the full reduced ambient cubic
+- **Settled globally and sectorially:** the full reduced ambient cubic
   quantum module is the irreducible hypergeometric module
   `H(0,0,0,0;1/3,2/3)` and underlies an irregular mixed Hodge module.  Cai's
   local formal ranks are `1,1,2`; irreducibility therefore rules out the
-  rank-two block as a proper global subobject.  The corrected target is its
-  sectorial Stokes-graded realization inside the full rank-four object.
-- **Open, with an exact near-miss:** Wang proves filtered compactification
-  independence through boundary-admissible blow-ups for one fixed
-  Landau--Ginzburg pair.  An A-model target blow-up instead adds center modules.
-  No audited theorem identifies Iritani's master-space Fourier projections
-  with a Stokes filtration, gives arbitrary centers a functorial
-  exponential-Hodge realization, or proves strict compatibility with the
-  irregular Hodge filtration.
+  rank-two block as a proper global subobject.  For every admissible phase its
+  unique sectorial realization has ordered ranks `1,2,1`; the zero-exponential
+  rank-two middle block is fixed by root monodromy.
+- **Open, with two exact near-misses:** Iritani proves the sectorial
+  Gamma-integral/Orlov decomposition for weak-Fano toric blow-ups, but
+  explicitly leaves equality between each residual Stokes structure and the
+  center quantum module open.  Hinault--Yu--Zhang--Zhang make the formal map
+  unique but do not add this analytic datum.  Wang proves filtered
+  compactification independence for one fixed Landau--Ginzburg pair, not an
+  A-model target blow-up adding centers.  The exact missing object is the
+  residual-center mutation-system identification, strict for the irregular
+  Hodge filtration and composable through weak factorization.
 - **Open target:** preserve the cubic-isotypic
   unipotent Serre block.  Its endpoint length is `m+1`, while every
   self-carrier length is `m-1`; the conditional arbitrary-center width formula

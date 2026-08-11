@@ -89,14 +89,17 @@ enough: Euler and Serre data remain unchanged while the exceptional flag
 changes, and the canonical monodromy-weight line is a third line.  The full
 reduced ambient cubic quantum module is now identified as the irreducible
 irregular-Hodge hypergeometric module `H(0,0,0,0;1/3,2/3)`.  This rules out
-globalizing Cai's local rank-two block as a proper subobject: it must instead
-be a sectorial Stokes-graded piece of the full rank-four object.  Wang's
-compactification-independence theorem gives the desired filtered blow-up
-coherence for compactifications of one fixed Landau--Ginzburg pair, but not
-for an A-model target blow-up that adds center modules.  The highest-EV
-remaining theorem is therefore a strict irregular-Hodge-compatible Stokes
-filtration realizing Iritani's master-space Fourier projections and composing
-through weak factorization.
+globalizing Cai's local rank-two block as a proper subobject.  Its local
+sectorial realization is now exact: every admissible phase gives the unique
+ordered Stokes ranks `1,2,1`, with the zero-exponential rank-two middle block
+fixed by root monodromy; `pi/2` is the certified representative.  Iritani
+proves the sectorial Gamma-integral/Orlov comparison for toric weak-Fano
+blow-ups, but explicitly leaves identification of the
+residual Stokes structures with the center quantum modules open; formal
+`F`-bundle uniqueness and fixed-Landau--Ginzburg compactification independence
+do not add that analytic datum.  The highest-EV remaining theorem is therefore
+the residual-center mutation-system identification, strict for irregular
+Hodge filtrations and composable through weak factorization.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

@@ -45,12 +45,18 @@ The full reduced ambient cubic quantum module now has an irregular-Hodge
 origin: it is the irreducible hypergeometric module
 `H(0,0,0,0;1/3,2/3)`.  Its local formal ranks are `1,1,2`, so irreducibility
 rules out the old target of globalizing Cai's rank-two block as a proper
-IrrMHM subobject.  The corrected highest-EV gate is a local sectorial
-Stokes filtration on the full rank-four object whose associated graded
-realizes Iritani's additive center pieces and is strict for the irregular
-Hodge filtration.  Wang proves the corresponding filtered coherence for
-boundary blow-ups between compactifications of one fixed Landau--Ginzburg
-pair, but not for an A-model target blow-up that adds center modules.
+IrrMHM subobject.  The local sectorial atom is now exact: at every admissible
+phase the unique Stokes lift has ordered ranks `1,2,1`, with the
+zero-exponential rank-two atom in the middle and fixed by root monodromy;
+`pi/2` is the certified representative.  Iritani's toric
+weak-Fano theorem likewise proves that a sectorial blow-up decomposition can
+exist and match the Orlov `K`-group decomposition, but explicitly leaves the
+residual sectors' Stokes identification with the center quantum modules open.
+Hinault--Yu--Zhang--Zhang prove only formal/non-archimedean uniqueness, while
+Wang treats compactifications of one fixed Landau--Ginzburg pair.  The
+corrected highest-EV gate is therefore the residual-center mutation-system
+identification, strict for the irregular Hodge filtration and composable
+through weak factorization.
 
 ## Goal
 

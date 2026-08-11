@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v8"
+SCHEMA = "c907-quantum-monodromy-stabilization-v9"
 
 
 def matrix_strings(M):
@@ -172,6 +172,56 @@ def cubic_hypergeometric_irregular_hodge_check(bound):
         ),
         "checked_period_degree_range": [0, bound],
         "period_checks": period_checks,
+    }
+
+
+def cubic_sectorial_stokes_atom_check():
+    """Certify the phase ordering of Cai's three formal exponential blocks."""
+    quadratic_field = QuadraticField(3, "sqrt3")
+    sqrt3 = quadratic_field.gen()
+    amplitude = 6 * sqrt3
+    assert amplitude**2 == 108
+
+    # Original Jordan-block order is (+A), (-A), (0 of rank two).  For
+    # phi=pi/2, Im(exp(-i*phi)*u)=-u on the real exponential axis.
+    exponential_coefficients = [6, -6, 0]
+    block_ranks = [1, 1, 2]
+    stokes_height_coefficients = [-value for value in exponential_coefficients]
+    ordered_indices = sorted(
+        range(len(stokes_height_coefficients)),
+        key=lambda index: stokes_height_coefficients[index],
+    )
+    assert ordered_indices == [0, 2, 1]
+    assert [block_ranks[index] for index in ordered_indices] == [1, 2, 1]
+
+    root_monodromy = [1, 0, 2]
+    assert root_monodromy[root_monodromy[0]] == 0
+    assert root_monodromy[root_monodromy[1]] == 1
+    assert root_monodromy[2] == 2
+
+    return {
+        "positive_real_branch": "u>0, A=6*sqrt(3)*u",
+        "amplitude_squared_over_u_squared": 108,
+        "formal_exponential_labels_in_jordan_order": ["+A", "-A", "0"],
+        "formal_block_ranks_in_jordan_order": block_ranks,
+        "admissible_phase": "phi=pi/2",
+        "phase_rotation": "exp(-i*phi)=-i",
+        "stokes_height_coefficients_in_units_sqrt3_u": stokes_height_coefficients,
+        "increasing_height_block_indices": ordered_indices,
+        "increasing_height_labels": ["+A", "0", "-A"],
+        "increasing_height_ranks": [block_ranks[index] for index in ordered_indices],
+        "zero_exponential_rank_two_block_is_middle": True,
+        "all_admissible_phase_orders": {
+            "sin(phi)>0": ["+A", "0", "-A"],
+            "sin(phi)<0": ["-A", "0", "+A"],
+        },
+        "zero_exponential_rank_two_block_is_middle_for_every_admissible_phase": True,
+        "root_monodromy_block_permutation": root_monodromy,
+        "root_monodromy_fixes_zero_exponential_block": True,
+        "sector_opening": ">pi",
+        "sectorial_lift_status": (
+            "unique by Hukuhara-Turrittin once the analytic exponential-type germ exists"
+        ),
     }
 
 
@@ -763,6 +813,30 @@ def build_certificate(bound):
             },
             {
                 "paper": (
+                    "Hiroshi Iritani, Global Mirrors and Discrepant Transformations "
+                    "for Toric Deligne-Mumford Stacks"
+                ),
+                "arxiv": "1906.00801",
+                "cached_pdf_sha256": "dc25e5cbd849ee5daa7643d69ae2e77936d5cd343ceb66ce8bbd8e03fbf874c7",
+                "results": [
+                    "Theorem 1.3",
+                    "Remark 1.4(3)",
+                    "Conjecture 8.3",
+                    "Proposition 8.5",
+                ],
+            },
+            {
+                "paper": (
+                    "Thorgal Hinault, Tony Yue Yu, Chi Zhang, and Shaowu Zhang, "
+                    "Decomposition and framing of F-bundles and applications to "
+                    "quantum cohomology"
+                ),
+                "arxiv": "2411.02266",
+                "cached_pdf_sha256": "a11a093f790890804c7d4f7559b30ed2a6da87811de46f2aa0d29026e343e6bd",
+                "results": ["Theorem 1.1", "Theorem 1.2", "Theorem 5.22", "Theorem 5.24"],
+            },
+            {
+                "paper": (
                     "Takahiro Saito, The Hodge filtration of a monodromic mixed "
                     "Hodge module and the irregular Hodge filtration"
                 ),
@@ -784,6 +858,7 @@ def build_certificate(bound):
         "cubic_hypergeometric_irregular_hodge_bridge": (
             cubic_hypergeometric_irregular_hodge_check(bound)
         ),
+        "cubic_sectorial_stokes_atom": cubic_sectorial_stokes_atom_check(),
         "projective_stabilization": {
             "general_statement": (
                 "The P^m factor has m+1 semisimple formal solutions with power exponent 0; "

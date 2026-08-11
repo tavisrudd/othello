@@ -90,6 +90,28 @@ def main():
         "one fixed Landau-Ginzburg pair"
     )
 
+    stokes_atom = certificate["cubic_sectorial_stokes_atom"]
+    assert stokes_atom["amplitude_squared_over_u_squared"] == 108
+    exponential_coefficients = [6, -6, 0]
+    ranks = [1, 1, 2]
+    heights = [-value for value in exponential_coefficients]
+    order = sorted(range(3), key=heights.__getitem__)
+    assert order == stokes_atom["increasing_height_block_indices"] == [0, 2, 1]
+    assert [ranks[index] for index in order] == stokes_atom["increasing_height_ranks"]
+    assert stokes_atom["increasing_height_labels"] == ["+A", "0", "-A"]
+    assert stokes_atom["zero_exponential_rank_two_block_is_middle"]
+    assert stokes_atom["all_admissible_phase_orders"] == {
+        "sin(phi)>0": ["+A", "0", "-A"],
+        "sin(phi)<0": ["-A", "0", "+A"],
+    }
+    assert stokes_atom[
+        "zero_exponential_rank_two_block_is_middle_for_every_admissible_phase"
+    ]
+    permutation = stokes_atom["root_monodromy_block_permutation"]
+    assert permutation == [1, 0, 2]
+    assert [permutation[index] for index in permutation] == [0, 1, 2]
+    assert stokes_atom["root_monodromy_fixes_zero_exponential_block"]
+
     projective_checks = certificate["projective_stabilization"]["checks"]
     for check in projective_checks:
         m = check["m"]
@@ -354,7 +376,7 @@ def main():
 
     print(
         "independent replay passed: indicial polynomial, cubic hypergeometric IrrMHM bridge, "
-        "projective checks "
+        "sectorial Stokes atom, projective checks "
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
         f"Iritani q-adic lattice checks through r={len(q_adic['checks'])+1}, "
