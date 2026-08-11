@@ -5,6 +5,14 @@ Date: 2026-08-11
 Status: bounded claim-specific primary-source audit; no manuscript or Lean
 change
 
+**Correction (2026-08-11):** the charge-three polarization proposal in the
+original Section 5 failed its exact identification audit. Voisin's `M9` is not
+a primitive LLPZ moduli space: its projected class is `-3 alpha`, every twist
+remains three-divisible, and the LLPZ moduli/fibre dimensions are `10/5`
+rather than `9/4`. Section 5 below is replaced by the correction and exact
+source audit in
+`2026-08-11-c904-charge-three-fibre-polarization-source-audit.md`.
+
 Read depth: zero sources were newly read cover-to-cover. Ten primary sources
 were read at the claim-specific partial depths recorded in Section 8. The
 negative conclusion is bounded: MathSciNet and zbMATH were not covered, and no
@@ -54,24 +62,14 @@ restriction--corestriction. Thus one odd-degree field carrying the complete half
 relation closes the gate; a geometric half, an invariant cohomology class, or a
 fibrewise complex construction does not.
 
-The most promising source-backed bypass is now on the charge-three side. Li--
-Lin--Pertusi--Zhao prove that the relevant primitive Bridgeland moduli spaces are
-fine, that the Abel--Jacobi relative Neron--Severi group has rank one, and that a
-general fibre is Fano with primitive canonical class. They do **not** compute
-the top self-intersection of that primitive class; indeed their Question 8.10
-explicitly leaves the fibre Picard group, cohomology, and a Verlinde formula
-open. After identifying the classical `M9` open with the appropriate primitive
-Bridgeland component, a GRR computation of
-
-\[
-                    (-K_{V})^4,
- \qquad V=(M_9\to J)_\eta,
-\]
-
-is the highest-EV next move. An odd value gives an odd `K`-zero-cycle and hence
-index one immediately. An even value closes the entire globally restricted
-determinant-line route, though not hidden fibrewise Picard classes or arbitrary
-zero-cycles.
+The originally proposed direct charge-three bypass does not survive exact
+source matching. Li--Lin--Pertusi--Zhao's primitive theorems do not apply to
+Voisin's `M9`: the projected charge-three class is nonprimitive and has the
+wrong dimension. No audited source computes `Pic(V)`, `-K_V`, determinant
+classes, or a fourth intersection on a proper model of the classical
+fourfold. An odd fourth intersection would imply index one here only after
+combining it with C904's independent `ind(V)|2` bound. Full correction:
+`2026-08-11-c904-charge-three-fibre-polarization-source-audit.md`.
 
 The rational-simple-connectedness route does not presently bypass this
 calculation. De Jong--He--Starr require much more than rational connectedness,
@@ -223,51 +221,14 @@ alternatives are therefore:
 
 ## 5. Charge-three Picard and top-intersection bypass
 
-Let `V` be the smooth general fourfold fibre of the charge-three Abel--Jacobi
-map. Voisin constructs the nine-dimensional stable-bundle component `M9` and a
-dominant rational map from elliptic sextics, but computes neither `Pic(V)` nor a
-top divisor intersection.
-
-Li--Lin--Pertusi--Zhao provide the strongest current theorem-level input for a
-compactified categorical model:
-
-- Corollary 3.9: for a primitive numerical class, the Bridgeland moduli space is
-  smooth, irreducible, projective, and fine;
-- Proposition 7.6 and Corollary 7.7: in the positive-dimensional-fibre range,
-  the total moduli space has `b_1=10`, `b_2=46`, and the Abel--Jacobi relative
-  Neron--Severi group has rank one;
-- Theorem 7.10: a general fibre is a smooth Fano variety with primitive
-  canonical class.
-
-These results do not yet identify every fibrewise line bundle as the
-restriction of a global determinant line. In fact Question 8.10 asks whether
-the general fibre has Picard rank one, asks for a Verlinde formula, and asks for
-its cohomology. Neither the paper nor the older `M9` sources print
-`(-K_V)^4`, a determinant-line fourth self-intersection, or an odd-degree
-zero-cycle.
-
-Accordingly the proposed immediate implication is valid but presently
-unproved:
-
-> If a `K`-defined determinant/anticanonical line bundle `L` on `V` has
-> `L^4` odd, then `L^4` is an odd zero-cycle and
-> `ind(V)=1`.
-
-The source-backed calculation to attempt is GRR for the universal family on
-the fine Bridgeland moduli space, followed by pushforward along Abel--Jacobi.
-One needs first to identify the twist `E(-1)` of Voisin's classical charge-three
-bundles with the relevant primitive numerical class and verify that the chosen
-Bridgeland compactification has the same generic fibre. Then compute the
-integer coefficient in
-
-\[
-       \Phi_*\bigl(c_1(-K_{M/J})^4\bigr)=[n]\,[J].
-\]
-
-Parity of `n` is enough. Rank-one relative Neron--Severi plus primitivity makes
-this one calculation decisive for all line bundles restricted from the global
-fine moduli space. It does not control line bundles existing only on the
-geometric generic fibre, which is exactly the gap retained in Question 8.10.
+**Superseded.** The exact correction is
+`2026-08-11-c904-charge-three-fibre-polarization-source-audit.md`. In brief,
+`pr(E)=-3 alpha`; every `pr(E(t))` is divisible by three; the corresponding
+LLPZ moduli is ten-dimensional with five-dimensional Abel--Jacobi fibre; and
+the primitive fineness, relative-Neron--Severi, and Fano theorems do not apply.
+The direct route now requires a new proper charge-three compactification and
+canonical/determinant calculation, not a GRR calculation on an already
+identified fine primitive moduli space.
 
 ## 6. Rational simple connectedness does not globalize this lift
 
@@ -455,8 +416,10 @@ forward-citation count was claimed.
   fourth self-intersection; the latest source explicitly leaves the needed
   Picard/cohomology/Verlinde data open.
 - **Open:** compute `o_K(z)`, or find an odd-degree complete half relation.
-- **Open:** identify Voisin's `M9` generic fibre with the relevant fine
-  Bridgeland compactification and compute `(-K_V)^4` by GRR.
+- **Closed negatively:** Voisin's `M9` is not a primitive LLPZ moduli space;
+  the projected class is three-divisible and the dimensions disagree.
+- **Open:** construct a proper charge-three generic-fibre model and compute a
+  canonical/determinant fourth intersection directly.
 - **Dead as stated:** replace ordinary Chow by etale Chow after inverting a
   factorial; this discards the two-primary obstruction.
 - **Dead as stated:** use ambient minimal-class algebraicity or a direct
