@@ -458,6 +458,30 @@ input.
   \(3\Phi\), and the six-axis calculation does not supply such a Chow
   correspondence.
 
+- **Very-general EFS parity as an unordered-theta index calculation:** dead.
+  Engel--de Gaay Fortman--Schreieder imply the sharp cohomological image
+  \(\operatorname{cl}(i_*CH_1(\Theta))=2\mathbf Zc\) for a very general
+  cubic, but an odd multisection of
+  \(\operatorname{Sym}^2\Theta\to J\) can use mixed or primitive Kunneth
+  components.  Their full smoothing monodromy also does not restrict to the
+  special one-dimensional \(A_5\) locus.
+
+- **Base-field Brauer obstruction on the unordered-theta fibre:** dead.  Over
+  the universal field \(K=k(J)\), the invariant Picard lattice of the generic
+  quotient has only the doubled Neron--Severi part and the cover character,
+  and both descend.  Hochschild--Serre therefore makes
+  \(\operatorname{Br}(K)\to\operatorname{Br}(K(Y))\) injective.  In
+  particular the charge-two class cannot decide \(\operatorname{ind}(Y)\).
+
+- **Cusp component groups or log-isogeny kernels alone:** dead as a parity
+  test.  At the marked widths the exact component groups have one residual
+  binary class, but inversion-stable generating supports realize both odd and
+  even unordered-pair parity.  The missing input is the actual Delaunay theta
+  initial equation and a flat, stratum-compatible closure of the addition
+  graph in the stable semiabelic model.  Even a special or henselian index-one
+  point would not lift to the global surface field without a horizontal cycle
+  or a local--global theorem for the identified two-obstruction.
+
 The fixed-fibre \(D_{3,3}/\operatorname{Sym}^2\Theta\) index-one carrier is now
 closed by the unordered Fano lift and the `2/5` B\'ezout argument.  The sole
 live odd-carrier architecture is its **relative horizontality**, now with an

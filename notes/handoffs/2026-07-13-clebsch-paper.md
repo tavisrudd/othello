@@ -658,6 +658,20 @@ the direct conic--Prym cylinder are all proved even or otherwise dead.  The
 live exit is therefore an intrinsic relative cycle, an odd-degree complete
 half relation, or the exact even descent index.
 
+Three further cohomological shortcuts are now closed.  EFS gives the sharp
+very-general image `2Z c` for curves on `Theta`, but mixed and primitive
+Kunneth classes prevent that from computing the unordered-theta index, and
+its full smoothing monodromy does not restrict to the special `A5` pencil.
+On the generic unordered-theta quotient the invariant Picard lattice descends
+completely, so `Br(K) -> Br(K(Y))` is injective and no base Brauer class can
+detect the residual index.  Finally, the marked cusp component groups and log
+isogeny kernels permit both parities until the actual Delaunay theta equations
+and flat addition-graph closure are supplied.  These are dead paths at their
+present information level, not unfinished cheap fixes.  See
+`notes/2026-08-11-c904-efs-shen-symmetric-theta-index-audit.md`,
+`notes/2026-08-11-c904-symmetric-theta-equivalence-specialization-picard.md`,
+and `notes/2026-08-11-c904-cusp-tropical-theta-parity-audit.md`.
+
 The 2026-08-11 midnight pass compresses the charge-three version of that
 exit further.  The normalization of the generic curve
 `D_{3,3} -> M_9` is birational to a projective-line bundle over a finite

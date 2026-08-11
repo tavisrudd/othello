@@ -1,0 +1,7 @@
+marked width 2: order=162 coker(2)=2 kernel(2)=2
+marked width 2: nondivisible alpha count=81 free unordered full-support pairs=81 odd
+marked width 6: order=6 coker(2)=2 kernel(2)=2
+marked width 6: nondivisible alpha count=3 free unordered full-support pairs=3 odd
+Z/6 symmetric generating support [0, 1, 5] unordered alpha=1 pairs= 1 parity= 1
+Z/6 symmetric generating support [0, 1, 2, 4, 5] unordered alpha=1 pairs= 2 parity= 0
+PASS: log component group alone does not determine theta-pair parity
