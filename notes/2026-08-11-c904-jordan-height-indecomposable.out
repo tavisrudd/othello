@@ -1,0 +1,13 @@
+label=regular-height5
+  charpoly=x^5 minpoly=x^5 height=5
+  predicted_exponent=2 curve_order=4 top_order=4
+  curve_saturation_index=4096 curve_elementary=[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4]
+  subspaces_checked=372 invariant=4 nondegenerate_invariant=0
+  independent_curve_order=4 independent_product_rank=15 independent_monomials=3060
+label=height4-single-primary
+  charpoly=x^5 minpoly=x^4 height=4
+  predicted_exponent=2 curve_order=4 top_order=4
+  curve_saturation_index=1024 curve_elementary=[2, 2, 2, 2, 2, 2, 2, 2, 4]
+  subspaces_checked=372 invariant=12 nondegenerate_invariant=4
+  independent_curve_order=4 independent_product_rank=15 independent_monomials=3060
+PASS
