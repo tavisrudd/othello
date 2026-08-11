@@ -1,0 +1,284 @@
+# C904 charge-three `M9` determinant/GRR audit
+
+Date: 2026-08-11
+
+Status: exact numerical calculation; Paper V research only; no manuscript or
+Lean edit
+
+## Verdict
+
+The proposed anticanonical-volume shortcut does **not** apply to Voisin's
+classical charge-three space `M9`.
+
+For a normalized charge-three bundle (F) on a cubic threefold,
+
+\[
+ c_1(F)=0,\qquad c_2(F)=3[\ell]=H^2,\qquad c_3(F)=0,
+\]
+
+one has
+
+\[
+ \chi(F(t))=t^3+3t^2+t-1.
+\]
+
+Thus `M9` is fine because (chi(F)=-1).  Nevertheless it is an open
+nine-dimensional stable-bundle moduli space with only a rational
+Abel--Jacobi/MRC map.  It is not the primitive projective Bridgeland moduli
+space to which Li--Lin--Pertusi--Zhao's Fano-fibre theorem applies.
+
+The mismatch is exact.  Since
+(R\operatorname {Hom}(\mathcal O(H),F)=0) and
+(R\operatorname {Hom}(\mathcal O,F)=\mathbf C[-1]), projection to the
+Kuznetsov component has numerical class
+
+\[
+ [\operatorname {pr}_{\mathrm{Ku}}F]=[F]+[\mathcal O]
+ =3(1-[\mathcal O_\ell])=3\beta.
+\]
+
+It is nonprimitive, and
+
+\[
+ \chi(3\beta,3\beta)=-9.
+\]
+
+The stable (3\beta) moduli has expected dimension (10), whereas `M9` has
+dimension (9).  Hence even where projection is stable, `M9` can only map to
+a Brill--Noether-type locus; it cannot be identified with the full
+categorical moduli.  In particular the primitive-canonical conclusion of
+Li--Lin--Pertusi--Zhao Theorem 7.10 cannot be transferred to `M9`.
+
+Direct GRR gives a stronger correction.  The canonical line of the open
+stable-bundle moduli is numerically pulled back from the Abel--Jacobi base.
+Its degree on every complete test curve contained in one Abel--Jacobi fibre
+is zero.  Thus (-K) is not a polarization on the open generic fourfold.
+An anticanonical top degree exists only after choosing a proper boundary
+compactification, and then depends on that choice.
+
+There is, however, a canonical determinant candidate.  If (L\subset X) is
+a line and (p\in X) a point, then
+
+\[
+ h=c_1\lambda_{\mathcal O_L-\mathcal O_p}
+\]
+
+is independent of the normalization of the universal bundle.  On a test
+curve its degree is the negative of the (H\otimes H^2(C)) coefficient of
+the universal (c_2).  This is the smallest possible determinant slope: no
+factor (2) or (3) remains.  The still-live numerical target on a
+specified proper model is therefore (h^4), not ((-K)^4).
+
+The exact residual gate is
+
+\[
+ \deg(h^4)
+ =\frac1{5!}\int_{\overline M_9}h^4 f^*\Theta^5,
+\]
+
+for a specified proper Abel--Jacobi model (f:\overline M_9\to J) and a
+specified extension of (h).  This is a Donaldson-type intersection number;
+neither numerical (K(X)) nor GRR determines it.  An odd value would close
+the index-one gate, but no value is justified by the audited inputs.
+
+## 1. Exact numerical (K)-theory
+
+Write (H^2=3L), (HL=P), and (int_XP=1).  For a cubic threefold,
+
+\[
+ \operatorname {td}(X)=1+H+2L+P
+ =1+H+\frac23H^2+\frac13H^3.
+\]
+
+For (\operatorname {ch}(F)=2-H^2), Riemann--Roch gives
+
+\[
+ \chi(F(t))
+ =\int_X(2-H^2)e^{tH}\operatorname {td}(X)
+ =t^3+3t^2+t-1.
+\]
+
+The instanton vanishing and stability give
+(R\Gamma(F(-1))=0).  Serre duality together with (chi(F)=-1) gives
+(R\Gamma(F)=\mathbf C[-1]).  Since
+
+\[
+ \mathrm{Ku}(X)=\langle\mathcal O,\mathcal O(H)\rangle^\perp,
+\]
+
+the numerical projection is (F+\mathcal O=3\beta), where
+(\operatorname {ch}(\beta)=1-L).  Direct RR gives
+(chi(\beta,\beta)=-1).
+
+This also explains the classical/categorical dimension discrepancy.  For a
+general (F), (chi(F,F)=-8), so unobstructed stable bundles have tangent
+dimension (1-\chi(F,F)=9).  A stable object of class (3\beta) instead has
+dimension (1-\chi(3\beta,3\beta)=10).
+
+## 2. Determinant-line calculation
+
+Let (C) be a smooth complete test curve in one Abel--Jacobi fibre and let
+(\mathcal U) be the restricted universal rank-two bundle on (X\times C).
+Modulo terms which vanish on a curve, write
+
+\[
+ c_1(\mathcal U)=\delta[C],\qquad
+ c_2(\mathcal U)=H^2+\eta H[C].
+\]
+
+The (H^3(X)\otimes H^1(C)) Kunneth component vanishes because the
+Abel--Jacobi map on (C) is constant.  Changing the universal bundle by a
+line bundle from (C) sends (delta\mapsto\delta+2s) and leaves (eta)
+unchanged.
+
+Put
+
+\[
+ \lambda_t=\det Rp_{C*}(\mathcal U(t)).
+\]
+
+Exact GRR gives
+
+\[
+ \deg\lambda_t
+ =\frac12\left(\delta\,\chi(F(t))
+       -3\eta(t+1)^2\right).
+\]
+
+On the integral numerical basis
+
+\[
+ [\mathcal O_X],\ [\mathcal O_H],\ [\mathcal O_L],\ [\mathcal O_p],
+\]
+
+the Euler weights and determinant degrees are
+
+| class | (chi(F\otimes u)) | (deg\lambda_u) |
+|---|---:|---:|
+| (mathcal O_X) | (-1) | (-(delta+3\eta)/2) |
+| (mathcal O_H) | (-1) | (-(delta+3\eta)/2) |
+| (mathcal O_L) | (2) | (delta-\eta) |
+| (mathcal O_p) | (2) | (delta) |
+
+The difference (u=\mathcal O_L-\mathcal O_p) has Euler weight zero, so its
+determinant line is unchanged by every universal twist, and
+
+\[
+                       \deg\lambda_u=-\eta.
+\]
+
+This corrects the apparent factor-three obtained if one uses only the
+index sublattice generated by (mathcal O(t)): the primitive line and point
+classes remove it.
+
+## 3. Canonical GRR and the compactification trap
+
+If (x_1,x_2) are the Chern roots of (\mathcal U), put
+(D=x_1-x_2).  Then
+
+\[
+ \operatorname {ch}R\mathcal Hom(\mathcal U,\mathcal U)
+ =2+e^D+e^{-D}=4+D^2+\frac1{12}D^4+\cdots,
+\]
+
+with (D^2=c_1(\mathcal U)^2-4c_2(\mathcal U)).  On the fibre curve,
+
+\[
+ D^2=-4H^2-4\eta H[C],\qquad
+ \frac1{12}D^4=\frac83\eta H^3[C].
+\]
+
+The only other contribution to codimension four in GRR is
+
+\[
+ (D^2)\operatorname {td}_2(X)
+ \supset-4\eta H[C]\cdot\frac23H^2
+ =-\frac83\eta H^3[C].
+\]
+
+The two terms cancel.  Since on the unobstructed stable locus
+
+\[
+ K_{M_9}=\det Rp_*R\mathcal Hom(\mathcal U,\mathcal U),
+\]
+
+this proves (deg K_{M_9}|_C=0).  Before restricting to an Abel--Jacobi
+fibre, the omitted (H^3(X)\otimes H^1(C)) term contributes a quadratic
+class pulled back from (J); it does not change the fibre calculation.
+
+The open fibre therefore carries no intrinsic anticanonical volume.  If
+(\overline V) is one proper compactification, blowing up a boundary centre
+does not alter the open fibre but changes its canonical divisor.  Likewise,
+extensions of (h) differ by boundary classes.  Consequently a value for
+((-K_{\overline V})^4), or even for (h^4), must name the proper model and
+the extension used.  Numerical (K(X)) fixes the divisor slope but not its
+fourfold intersection form.
+
+## 4. Reproducibility
+
+The exact script is
+`notes/2026-08-11-c904-m9-determinant-grr.py`; its frozen output is
+`notes/2026-08-11-c904-m9-determinant-grr.out`.
+
+Replay from the repository root:
+
+```bash
+tmp_c904=$(mktemp -d)
+uv run --with sympy python \
+  notes/2026-08-11-c904-m9-determinant-grr.py > "$tmp_c904/replay.out"
+cmp -s "$tmp_c904/replay.out" \
+  notes/2026-08-11-c904-m9-determinant-grr.out
+```
+
+The script performs two independent checks of the Hilbert polynomial (GRR
+and the cubic-hypersurface binomial formula), checks the determinant formula
+on the integral numerical basis, and checks the projection Euler square.
+
+| file | bytes | SHA-256 |
+|---|---:|---|
+| `2026-08-11-c904-m9-determinant-grr.py` | 4,221 | `95d133c9bd4d8c19b9b34ec0137789daa33fe85a90f50f4ada0c5bb3433aa711` |
+| `2026-08-11-c904-m9-determinant-grr.out` | 484 | `ebcaf479d1c7f227209a8f703b3dba5efa6aee80b1d6702a03aa32904ed06f2a` |
+
+Trusted boundary: SymPy checks exact rational polynomial algebra and the
+displayed lattice calculation.  The geometric inputs are Voisin's
+dimension-nine classical moduli construction and the standard deformation
+complex; the script does not construct a compactification or evaluate a
+Donaldson invariant.
+
+## 5. Sources and correction to the earlier route
+
+- Claire Voisin, *Abel--Jacobi map, integral Hodge classes and decomposition
+  of the diagonal*, arXiv:1005.5621, Theorem 2.1 and the construction of
+  `M9` on pp. 9--10.  Cached text SHA-256
+  `ca7103f6529128a24425dbfc1c87589402b17b12719329239fccdb590f74b547`.
+- Chunyi Li, Yinbang Lin, Laura Pertusi, Xiaolei Zhao, *Higher dimensional
+  moduli spaces on Kuznetsov components of Fano threefolds*,
+  arXiv:2406.09124, Notation 5.2, Section 5.2, Corollary 6.4, Theorem 7.10,
+  and the degree-six row of the table in Remark 8.9.  Cached text SHA-256
+  `c1aa5d752c9c081827d0aa2cec4ab6408e3868449ef3f7e7ba11a7f936bbdb25`.
+
+The claim in
+`2026-08-11-c904-relative-shen-descent-and-m9-polarization-audit.md`
+that one should first identify classical `M9` with an appropriate
+**primitive** Bridgeland component is therefore not a live route: its premise
+fails numerically.  LLPZ's degree-six projection classes are (-3\alpha) or
+(-3\beta), again nonprimitive.  Their primitive Fano theorem neither gives
+a compactification nor a canonical volume for `M9`.
+
+## Mystery ledger
+
+- **Settled:** the LLPZ primitive-moduli identification is impossible by the
+  exact class (3\beta) and the (9\) versus (10) dimension mismatch.
+- **Settled:** (-K) is not a fibre polarization on the open `M9`; fibrewise
+  canonical degree cancels in GRR.
+- **Settled:** the determinant slope itself has no hidden factor (2) or
+  (3); (\mathcal O_L-\mathcal O_p) gives slope one.
+- **Open:** compute (h^4) on a named proper Abel--Jacobi compactification,
+  equivalently the indicated Donaldson-type invariant.  Neither the present
+  numerical calculation nor the audited sources determine it.
+- **Open:** determine whether a natural compactification canonically extends
+  (h).  Without that datum, a top degree is not well posed.
+
+Vibe check: the attractive Fano-volume shortcut is dead, but the failure is
+clean and leaves one exact determinant class rather than a vague Picard
+search.

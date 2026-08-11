@@ -1,0 +1,13 @@
+schema=c904-m9-determinant-grr-v1
+hilbert=t**3 + 3*t**2 + t - 1
+determinant_degree_Ot=(t + 1)*(delta*t**2 + 2*delta*t - delta - 3*eta*t - 3*eta)/2
+canonical_degree_on_AJ_curve=0
+basis=O_X; weight=-1; degree=-(delta + 3*eta)/2
+basis=O_H; weight=-1; degree=-(delta + 3*eta)/2
+basis=O_L; weight=2; degree=delta - eta
+basis=O_p; weight=2; degree=delta
+intrinsic=O_L-O_p; weight=0; degree=-eta
+beta_euler_square=-1
+projected_3beta_euler_square=-9
+basis_euler_det=1
+independent_checks=PASS
