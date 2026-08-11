@@ -244,7 +244,41 @@ have to recover an absolute filtration through this cyclic monodromy.  KKPYY
 explicitly identify integral enhanced atoms and their blow-up compatibility as
 future work rather than an available theorem.
 
-## 6. Alternate-attack checkpoint
+## 6. Spectral-cycle alternate attack
+
+The cycle itself survives relabelling even though its individual branches do
+not.  In the self-carrier model of Section 4, the center
+`X x P^(t-1)` has a `t`-cycle and the exceptional cluster has an `(m-t)`-cycle.
+Along a diagonal one-parameter loop, every orbit length divides
+
+\[
+\operatorname{lcm}(t,m-t).
+\]
+
+If `m+1=p^k` is a prime power, neither `t` nor `m-t` is divisible by `p^k`,
+so their least common multiple cannot contain the endpoint `p^k`-cycle.  The
+certificate verifies the exact reproducing `t` lists for `2<=m<=24` and the
+prime-power exclusion; the valuation argument proves it for every prime power.
+
+This is potentially cofinal.  If `X x P^m` is rational for one `m`, then
+`X x P^M` is rational for every larger `M`, because products of projective
+spaces are rational of the corresponding dimension.  Thus an obstruction for
+all
+
+\[
+M=p^k-1
+\]
+
+would prove full stable irrationality.
+
+The present calculation is not that obstruction.  The published atom
+formalism does not yet provide a functorial `p`-primary spectral-cycle object
+through a complete weak factorization.  An arbitrary center may carry its own
+cover monodromy, and the blow-up summands may assemble wreath-product rather
+than diagonal-product cycles.  The exact next theorem is to control those two
+effects; until then the prime-power result is a self-carrier exclusion only.
+
+## 7. Alternate-attack checkpoint
 
 The earlier `ej` pass upgraded the bounded search twice: it replaced the
 observed gcd pattern by the all-`m` formulas in Section 3, and extracted the
@@ -262,7 +296,7 @@ does not by itself exclude an unrelated surface carrying the same atom.  The
 present `aa` pass closes exactly that gap by the surface lemma, while leaving
 the `m>=2` self-carrier ceiling intact.
 
-## 7. Reproduction
+## 8. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
 
@@ -295,9 +329,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 12,505 bytes;
-- independent replay: 5,736 bytes;
-- JSON certificate: 159,779 bytes.
+- Sage generator: 14,559 bytes;
+- independent replay: 6,676 bytes;
+- JSON certificate: 168,441 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -305,7 +339,7 @@ of the source matrices and the quantum Kunneth/projective-bundle formula is
 human-audited.  The bounded checks do not assert existence or nonexistence of
 any weak factorization.
 
-## 8. Sources
+## 9. Sources
 
 - Jiaji Cai, *The cubic threefold is symplectically irrational*,
   arXiv:2608.01577v1, especially Proposition 6 and Sections 2--3.  Cached PDF
@@ -344,3 +378,6 @@ any weak factorization.
 - **Open:** whether the surface argument can be promoted to a recursive
   minimum-carrier theorem in higher dimensions.  Evidence gap: starting at
   `m=2`, a three-dimensional center can carry the cubic atom itself.
+- **Open:** whether `p`-primary spectral-cycle length is functorial through
+  blow-ups.  The prime-power self-carrier obstruction is exact and cofinal,
+  but arbitrary-center monodromy and wreath mixing are uncontrolled.

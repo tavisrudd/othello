@@ -4,7 +4,7 @@
 import argparse
 import json
 from functools import reduce
-from math import gcd
+from math import gcd, lcm
 from pathlib import Path
 
 import sympy as sp
@@ -128,10 +128,29 @@ def main():
             assert coefficients[0] == coefficients[-1] == 0
         assert check["endpoint_outside_center_integer_span_by_extreme_degrees"]
 
+    spectral_checks = certificate["candidate_spectral_cycle_refinement"]["checks"]
+    for check in spectral_checks:
+        m = check["stabilizing_projective_dimension_m"]
+        n = m + 1
+        hits = [t for t in range(1, m) if lcm(t, m - t) % n == 0]
+        assert check["endpoint_cycle_length"] == n
+        assert check["self_carrier_t_with_endpoint_cycle_dividing_lcm"] == hits
+        factors = sp.factorint(n)
+        is_prime_power = len(factors) == 1
+        assert check["endpoint_cycle_is_prime_power"] == is_prime_power
+        if is_prime_power:
+            prime, exponent = next(iter(factors.items()))
+            assert check["prime_power_data"] == {"prime": prime, "exponent": exponent}
+            assert hits == []
+            assert check["prime_power_self_carrier_exclusion"]
+        else:
+            assert check["prime_power_data"] is None
+
     print(
         "independent replay passed: indicial polynomial, projective checks "
         f"m=0..{len(projective_checks)-1}, surface exclusion, "
-        f"cancellation and Tate checks m=1..{len(cancellation_checks)}"
+        f"cancellation and Tate checks m=1..{len(cancellation_checks)}, "
+        f"spectral-cycle checks m=2..{len(spectral_checks)+1}"
     )
 
 

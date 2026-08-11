@@ -10,7 +10,7 @@ multiplicity model for stabilization dimensions 1 <= m <= the bound.
 import argparse
 import json
 from functools import reduce
-from math import gcd
+from math import gcd, lcm
 from pathlib import Path
 
 import sage.version
@@ -264,6 +264,35 @@ def surface_carrier_exclusion():
     }
 
 
+def spectral_cycle_self_carrier_check(m):
+    endpoint_cycle = m + 1
+    reproducing_t = [
+        t for t in range(1, m) if lcm(t, m - t) % endpoint_cycle == 0
+    ]
+    prime_divisors = ZZ(endpoint_cycle).prime_divisors()
+    is_prime_power = len(prime_divisors) == 1
+    if is_prime_power:
+        prime = int(prime_divisors[0])
+        exponent = 0
+        remainder = endpoint_cycle
+        while remainder % prime == 0:
+            exponent += 1
+            remainder //= prime
+        assert remainder == 1
+        assert reproducing_t == []
+        prime_power_data = {"prime": prime, "exponent": exponent}
+    else:
+        prime_power_data = None
+    return {
+        "stabilizing_projective_dimension_m": m,
+        "endpoint_cycle_length": endpoint_cycle,
+        "self_carrier_t_with_endpoint_cycle_dividing_lcm": reproducing_t,
+        "endpoint_cycle_is_prime_power": is_prime_power,
+        "prime_power_data": prime_power_data,
+        "prime_power_self_carrier_exclusion": is_prime_power and not reproducing_t,
+    }
+
+
 def build_certificate(bound):
     assert bound >= 3
     return {
@@ -314,6 +343,23 @@ def build_certificate(bound):
                 "Construct a birationally functorial filtered or integral-exponent enhancement of "
                 "the quantum atom that retains these Tate degrees through the cyclic branch monodromy, "
                 "or prove that no such enhancement exists."
+            ),
+        },
+        "candidate_spectral_cycle_refinement": {
+            "status": (
+                "Prime-power endpoint cycles exclude every projective self-carrier in the diagonal-loop "
+                "model, but no functorial theorem currently controls arbitrary-center or wreath-product "
+                "monodromy through a complete weak factorization."
+            ),
+            "checked_m_range": [2, bound],
+            "checks": [spectral_cycle_self_carrier_check(m) for m in range(2, bound + 1)],
+            "cofinal_reduction": (
+                "If X x P^m is rational for one m, then it is rational for every larger m. "
+                "Therefore an obstruction for all m=p^k-1 would prove stable irrationality."
+            ),
+            "missing_theorem": (
+                "Define a p-primary spectral-cycle invariant preserved by Iritani blow-up maps and prove "
+                "that a p^k endpoint cycle cannot be assembled through arbitrary lower-dimensional centers."
             ),
         },
     }
