@@ -8,6 +8,13 @@
 finite representation-theoretic golden-orientation/exotic-sheet calibration.
 It does not by itself prove the cubic period-realization theorem.
 
+**Forward closeout:** the residual Ext, priority, and placement questions are
+settled in `2026-08-11-c904-golden-extension-priority-placement.md`. The Ext
+group is one-dimensional over \(\mathbf F_4\), this sequence is the unique
+nonsplit middle module up to isomorphism, and the theorem now belongs as the
+last structural theorem of Paper V. Any contrary provisional placement below
+is superseded by that closeout.
+
 ## Theorem
 
 Let \(B\) be the oriented symmetric conference matrix of Paper I,
@@ -78,8 +85,8 @@ Then:
 
 Consequently the golden-orientation torsor reconstructed by Paper V is
 canonically isomorphic to the exotic-gluing torsor
-\(\{\omega,\omega^2\}\). This is the optional marked strengthening left open
-in the publication plan.
+\(\{\omega,\omega^2\}\). This is the marked normalization--residue theorem
+now assigned to the close of Paper V.
 
 ## Structural proof
 
@@ -151,9 +158,9 @@ involutions therefore agree on the exotic gluing pair.
 - The full golden orientation is now genuinely causal: the bare six-set does
   not choose \(B\), whereas the oriented continuation operator chooses
   \(\varphi\) and hence one primitive element of the exotic \(\mathbf F_4\).
-- Paper V can remain structural: it outputs the orientation torsor. The
-  epilogue proves the saturation theorem and consumes the resulting
-  \(\mathbf F_4\)-sheet.
+- Paper V remains structural while proving the saturation and Ext theorem as
+  its final normalization--residue bridge. The epilogue imports the resulting
+  \(\mathbf F_4\)-sheet and begins with the rank-ten symplectic envelope.
 
 ## What remains open
 
@@ -163,7 +170,9 @@ involutions therefore agree on the exotic gluing pair.
   separate family-level geometry.
 - This calculation does not prove that every piece of the period family is
   deck-equivariant; deck-equivariance remains useful for the unmarked fallback.
-- Priority for this exact saturation/heart bridge has not yet been audited.
+- The bounded priority audit is complete: the conference-order and modular
+  extension ingredients are classical separately; the exact symmetric
+  \(D_6^\vee\)-heart synthesis was not located.
 
 ## Second-order corollaries
 
@@ -294,10 +303,9 @@ needs only the \(D_6\) root--weight lemma, the commutator-submodule lemma, and
 multiplicity one for the four-dimensional heart. The exhaustive finite
 enumeration remains a replay, not proof architecture.
 
-One publication choice remains: the result is purely structural enough to be
-the last theorem of Paper V, but leaving it in the epilogue preserves V's
-finite-only boundary. The current plan leaves it in the epilogue; moving it is
-an architecture decision rather than a mathematical gate.
+The publication choice is closed: this is the last structural theorem of
+Paper V. The epilogue restates it for readability but does not duplicate its
+proof.
 
 ## Mystery ledger
 
@@ -311,10 +319,12 @@ an architecture decision rather than a mathematical gate.
 3. **Settled:** the saturation is the classical \(D_6\) root--weight passage,
    and it proves that Paper V's orientation, rather than merely its abstract
    six-set, selects the exotic scalar.
-4. **Open:** identify the nonsplit extension class intrinsically---for example
-   as the unique nonzero class in an appropriate
-   \(\operatorname{Ext}^1_{\mathbf F_4A_5}(\mathbf F_4,H)\). This is
-   explanatory, not needed for the calibration theorem.
-5. **Open:** audit whether the exact maximal-order/commutator bridge is already
-   implicit in the modular representation literature or in the classical
-   conference-matrix construction.
+4. **Settled:**
+   \(\operatorname{Ext}^1_{\mathbf F_4A_5}(\mathbf F_4,H)\simeq\mathbf F_4\).
+   The golden sequence is nonzero and hence spans. Intrinsically it is the
+   unique nonsplit middle-module isomorphism class; no scalar-rigidified
+   nonzero Ext vector is canonical.
+5. **Settled at bounded source depth:** Chapman preempts the broad
+   conference/maximal-order mechanism in the skew/imaginary setting, and
+   Bleher records the relevant characteristic-two uniserial \(A_5\)-modules.
+   No exact symmetric order-six root--weight/commutator synthesis was located.

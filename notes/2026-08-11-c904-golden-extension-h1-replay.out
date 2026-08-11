@@ -1,0 +1,8 @@
+C904 golden extension H1 independent Sage replay
+  group order=60
+  presentation orders=(2, 3, 5)
+  dim_F4 Z1=3
+  dim_F4 B1=2
+  dim_F4 H1=1
+  invariant complements zero/nonzero=(1, 0, 0, 0)
+PASS

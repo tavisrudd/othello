@@ -1,0 +1,12 @@
+C904 golden extension H1 calculation
+  coefficient module: natural H=F4^2 for SL2(F4)=A5
+  presentation generators orders=(2, 3, 5)
+  generated group order=60
+  relation-norm ranks over F4=(1,0,0)
+  |Z1|=64=4^3
+  |B1|=16=4^2
+  |H1|=4=4; dim_F4 H1=1
+  invariant complements for zero/nonzero classes=(1, 0, 0, 0)
+  F4^x is transitive on the three nonzero extension classes
+  unique nonsplit middle module up to F4A5-isomorphism
+PASS
