@@ -660,13 +660,20 @@ surface lattice: modulo two its Rosati norms generate a codimension-one
 two-sided ideal, separated from the identity by a multiplicative residue
 character.  No nonscalar, adjugate, or endomorphism-dressed repair escapes.
 The live exit is therefore an intrinsic relative cycle, an odd-degree complete
-half relation, or the exact even descent index.  The highest-EV source-backed
-direct calculation is an integral GRR computation of a determinant or
-anticanonical fourth self-intersection on the fine Bridgeland model of the
-charge-three fibre: odd parity would force index one.  No source computes it.
+half relation, or the exact even descent index.  The proposed charge-three
+Bridgeland/anticanonical shortcut is dead: classical `M9` has nonprimitive
+Kuznetsov class, cannot be a primitive nine-dimensional stable-object moduli
+space, and its open-fibre canonical class is trivial by integral GRR.  The
+full `Sym^2(Bl_0 Theta)` Kunneth audit instead isolates two direct two-local
+targets.  The `(1,5)` channel has an odd integral Hodge coset after the
+symmetric quotient, but its algebraicity is unknown; `(2,4)` is exactly the
+existing integral algebraic-projector gate, while `(3,3)` is forced even.
 Rational simple connectedness is dead as a direct shortcut because the
 generic field has transcendence degree five and the available theorem's
-surface-base and very-twisting hypotheses are absent.
+surface-base and very-twisting hypotheses are absent.  See
+`notes/2026-08-11-c904-m9-bridgeland-anticanonical-obstruction.md`,
+`notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
+`notes/2026-08-11-c904-sym2m-kunneth-parity-audit.md`.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive

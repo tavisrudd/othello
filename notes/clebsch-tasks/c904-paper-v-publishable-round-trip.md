@@ -561,20 +561,31 @@ input.
   `notes/2026-08-11-c904-nonaxis-elliptic-support-audit.md`.
 
 The fixed-fibre \(D_{3,3}/\operatorname{Sym}^2\Theta\) index-one carrier is now
-closed by the unordered Fano lift and the `2/5` B\'ezout argument.  The sole
-live odd-carrier architecture is its **relative horizontality**, now with an
-exact gate: construct an explicit relative Shen/diagonal cycle or an
-odd-degree complete half relation on \(\mathcal D_+\).  The obstruction is a
-class in the geometric kernel of `CH_1/2`; neither residual `C3`, Picard
-descent, nor universal-sheaf tautological classes see it.  Otherwise compute
-its finite Chow-orbit module, invariant-class descent, and relation-descent
-class, thereby determining the minimal even base change.  No manuscript or
-Lean source changed.  The highest-EV source-backed direct calculation is now
-the fine Bridgeland model of the charge-three fibre: compute an intrinsic
-determinant/anticanonical fourth self-intersection by integral GRR.  An odd
-value would force index one; no published computation of this top
-polarization was found, and standard Chern-character extraction must retain
-the already identified two-primary denominators.
+closed by the unordered Fano lift and the `2/5` B\'ezout argument.  The live
+odd-carrier architecture is its **relative horizontality**, now with an exact
+gate: construct an explicit relative Shen/diagonal cycle or an odd-degree
+complete half relation on \(\mathcal D_+\).  The obstruction is a class in the
+geometric kernel of `CH_1/2`; neither residual `C3`, Picard descent, nor
+universal-sheaf tautological classes see it.  Otherwise compute its finite
+Chow-orbit module, invariant-class descent, and relation-descent class,
+thereby determining the minimal even base change.
+
+The proposed charge-three anticanonical shortcut is **dead**.  Classical
+`M9` projects to the nonprimitive class `3 alpha`; no primitive Kuznetsov
+class has a nine-dimensional stable-object moduli space, and integral GRR
+shows that the canonical class of the fine classical locus pulls back from
+the Abel--Jacobi base and restricts trivially to its open fourfold fibre.
+Any nonzero compactified anticanonical volume is therefore model-dependent.
+The full Kunneth audit on
+`Sym^2(Bl_0 Theta)` leaves two precise two-local targets: the `(1,5)` channel
+has a genuine odd integral Hodge coset whose algebraicity is unknown, while
+the `(2,4)` channel is the existing integral algebraic-projector gate; the
+entire `(3,3)` channel is even.  These, or the original intrinsic relative
+Chow half, are the direct frontier.  See
+`notes/2026-08-11-c904-m9-bridgeland-anticanonical-obstruction.md`,
+`notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
+`notes/2026-08-11-c904-sym2m-kunneth-parity-audit.md`.  No manuscript or Lean
+source changed.
 
 ## Goal
 
