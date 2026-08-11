@@ -269,9 +269,13 @@ Lean source, package, mirror, or remote changed.  Full report:
    `/home/tavis/.cache/othello-worktrees/c879-q25-d23c221`. Guarded regeneration installed exactly
    7,547 allowlisted sources, committed at `c0a142e5`; the 9,511-module manifest is resealed at
    `fcef0f3`. The handwritten preflight is green through `Normalization`; `LineMaskChecker` needed
-   only removal of a tactic after an already closed goal. Resume the same `q25-two-witness`
-   profile at `LineMaskChecker` when its memory-admission floor is available, then run the single
-   aggregate build, seal its fact/pack, and add the external registry entry.
+   only removal of a tactic after an already closed goal and is now green. `ResidualAction` is the
+   active preflight target: commit `ce40232` contains the latest standalone determinant-scaling and
+   orbit-pair proof repair, but its guarded check has not started because host memory is just below
+   the one-thread profile's 11,824 MiB admission floor. Do not weaken that floor or reseal the stale
+   manifest before the proof is green. Then finish `ResidualFast`, `ResidualComposition`, and
+   `ResidualGroup`, run the single aggregate build, seal its fact/pack, and add the external registry
+   entry.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
