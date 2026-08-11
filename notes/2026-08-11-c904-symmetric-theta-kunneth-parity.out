@@ -1,0 +1,5 @@
+L: exterior^5 -> exterior^7: Smith 1^110 2^10
+mod-2 residual pairing: rank(im L_1)=10, corank(im L_5)=10
+L: exterior^4 -> exterior^6: Smith 1^166 2^43 6^1
+mod-2 residual pairing: rank(im L_2)=44, corank(im L_4)=44
+p=3/3: both Gysin factors contain theta, so theta^2 forces even degree
