@@ -47,9 +47,11 @@ What it does require is exactly the old missing two-local projector.  The
 diagonal gives the identity in codimension four.  To realize the odd
 degree-five class in codimension three one must apply an integral inverse to
 cup product by theta.  That inverse has ten elementary divisors two in the
-$H^1/H^5$ sector.  Rationally it exists and the Hodge tensor is algebraic;
-integrally its algebraicity is precisely what is not known.  The
-$H^2/H^4$ sector has forty-four analogous dyadic directions.
+$H^1/H^5$ sector.  Rationally the required linear Hodge projector exists,
+but no audited theorem algebraizes it as a codimension-three correspondence
+on $M\times M$.  The $H^2/H^4$ sector has forty-four analogous dyadic
+directions.  Rational cohomology generation by universal-family Chern
+components does not by itself prove this algebraicity statement.
 
 Equivalently, every proposed odd multisection produces an integral Hodge
 curve class $\lambda$ on $M$ with odd theta degree and with $2\lambda$
@@ -266,10 +268,13 @@ multisection has exactly two possibilities:
 
 The second possibility is precisely an integral-at-two Chow projector
 phenomenon.  In motivic language, one must lower the algebraic diagonal by
-one theta Lefschetz operator.  Rational inverse Lefschetz and rational
-algebraicity are classical; the Smith forms (2.2)--(2.4) show exactly where
-the integral inverse needs division by two.  This is the same obstruction
-encountered in the universal-Ext diagonal approach.
+one theta Lefschetz operator.  Rational inverse Lefschetz is available at
+the level of Hodge structures (and the Lefschetz standard conjecture is
+classical on the ambient abelian variety), but passage to a
+codimension-three algebraic correspondence on the theta resolution is an
+additional, currently unsupported step.  The Smith forms (2.2)--(2.4) show
+exactly where an integral inverse needs division by two.  This is the same
+obstruction encountered in the universal-Ext diagonal approach.
 
 Thus:
 
@@ -309,7 +314,59 @@ degree-fifteen/$\operatorname {Sym}^2(E_3)$ relays then give index one for
 the charge-three fibre and the relative identity by Bezout with the existing
 multiplier two.
 
-## 5. Source and replay boundary
+## 5. Uniform EJ + TT upgrade
+
+The half anti-graph construction is dimension-free.  Let $(A,\Theta)$ be a
+principally polarized abelian variety of dimension $g\geq3$, let
+$b:M\to\Theta$ resolve a symmetric theta divisor compatibly with inversion,
+and let
+
+\[
+       s:\operatorname {Sym}^2M\longrightarrow A
+\]
+
+be addition.  A multisection has codimension $g-2$.  For every
+$Z\in CH^{g-2}(\operatorname {Sym}^2M)$, put
+
+\[
+ \lambda_g(Z)=\frac12(1,\iota)^*q^*\operatorname {cl}(Z)
+       \in H^{2g-4}(M,\mathbf Z).
+\]
+
+Every Nakaoka transfer restricts to twice an integral class on the
+anti-graph; the repeated-even generator already contains its factor two.
+The diagonal has codimension $g-1$, one larger than the cycle under study,
+so it supplies no branch correction.  Cartier excess gives
+
+\[
+        \deg(s|_Z)=\int_M b^*\Theta\,\lambda_g(Z).
+\]
+
+Thus an odd multisection of any symmetric-theta addition map canonically
+produces an odd integral Hodge **curve** class on the theta resolution whose
+double is algebraic.  The arithmetic index problem is uniformly a
+two-primary integral Hodge/Chow-halving problem; the cubic fivefold is the
+first case here in which the exact middle residual lattices have also been
+computed.
+
+### Mystery ledger
+
+- **Settled:** the half anti-graph and degree formula are uniform in the
+  dimension and isolate a curve class, not an uncontrolled higher cycle.
+- **Settled:** in dimension five the $(3,3)$ channel is even, while the live
+  residual lattices have exact dyadic dimensions ten and forty-four.
+- **Open:** whether the odd $(1,5)$ Hodge coset is algebraic.  This is an
+  integral inverse-Lefschetz correspondence at two, not a rational Hodge
+  question.
+- **Open:** whether a non-split $(2,4)$ algebraic correspondence realizes one
+  of its forty-four dyadic directions.  Decomposable tensors merely recover
+  the already known odd-theta-curve gate.
+- **Owning successor:** classify the two-local algebraic Kunneth projector on
+  $M=\operatorname {Bl}_0\Theta$, or compute the exact nonzero obstruction;
+  no further ambient-divisor or numerical symmetric-square census can decide
+  it.
+
+## 6. Source and replay boundary
 
 The only external input newly used here is the already audited integral
 symmetric-product pullback theorem:
