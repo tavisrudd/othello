@@ -1,7 +1,10 @@
+C904 exotic deck on dyadic Kunneth residuals
 deck relations: s^2=1 and s*g*s=g^-1 on every residual module
-p15 pairing rank 10
-p15 tensor fixed dimensions C3/full-S3 50 25
-p15 odd degree exists C3/full-S3 True False
-p24 pairing rank 44
-p24 tensor fixed dimensions C3/full-S3 776 396
-p24 odd degree exists C3/full-S3 True True
+Q15: dim=10 deck-fixed=5 full-S3-fixed=0
+Q24: dim=44 deck-fixed=24 full-S3-fixed=14
+p15 pairing rank=10 tensor fixed dimensions C3/full-S3=50/25
+p15 ordered mod2 contraction odd C3/full-S3=True/False
+p15 divided coefficient-trace space dim=25 odd-exists=True identity-degree=1
+p24 pairing rank=44 tensor fixed dimensions C3/full-S3=776/396
+p24 quotient contraction odd C3/full-S3=True/True
+PASS

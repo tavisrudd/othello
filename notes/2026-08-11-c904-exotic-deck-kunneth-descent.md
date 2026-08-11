@@ -7,8 +7,8 @@ boundary; Paper V research only; no manuscript or Lean change
 
 ## Verdict
 
-The exotic deck involution has genuinely different effects on the two live
-mixed Kunneth channels.
+The exotic deck involution does **not** supply the hoped-for parity
+obstruction in either live mixed Kunneth channel.
 
 Let \(g\) be the residual order-three monodromy and \(s\) the exotic deck.
 On \(H^1(-,\mathbf F_2)\),
@@ -18,34 +18,34 @@ On \(H^1(-,\mathbf F_2)\),
 \]
 
 so together they generate \(S_3\).  Inducing this exact action through the
-two Lefschetz cokernels and testing the actual top-wedge degree pairings
-gives
+two Lefschetz cokernels gives
 
 \[
 \begin{array}{c|c|c|c}
 \text{channel}&\dim(-)^{C_3}&\dim(-)^{S_3}
  &\text{odd degree in }(-)^{S_3}\?\\ \hline
-p_{15}&50&25&\textbf{no}\\
+p_{15}&50&25&\textbf{yes}\\
 p_{24}&776&396&\textbf{yes}.
 \end{array}                                                \tag{0.1}
 \]
 
 Consequently:
 
-1. a horizontal class descending through the unmarked exotic deck cannot
-   have odd degree coming solely from the \((1,5)\) residual;
-2. the deck does **not** prove relative index two, because invariant odd
-   \((2,4)\) residual cohomology survives;
+1. the polarization-canonical coefficient identity is fixed by the full
+   deck group and has odd unordered \((1,5)\) degree;
+2. invariant odd \((2,4)\) residual cohomology also survives;
 3. invariant cohomology is only a necessary condition for algebraic or Chow
-   descent, so the surviving \((2,4)\) classes are not constructed cycles;
+   descent, so neither survivor is a constructed integral algebraic cycle;
    and
 4. the exotic quadratic cover is parity-minimal only conditionally: one
    still needs an actual odd cycle upstairs and an even-index theorem
    downstairs.
 
-This supersedes the provisional statement that the exotic deck can only be
-located abstractly in a Chow Tate quotient.  It gives a real cohomological
-obstruction in \(p_{15}\), but no obstruction in \(p_{24}\).
+The raw mod-two top-wedge contraction vanishes on the full-deck
+\(p_{15}\) fixed space, but that is the **ordered** trace.  Symmetric-square
+descent divides the integral ordered trace by two, and its parity is the
+five-dimensional coefficient trace.  Confusing these functionals produces
+a false \(p_{15}\) no-go.
 
 ## 1. The exact deck module
 
@@ -112,7 +112,7 @@ The exact degree pairings are
 They are well-defined because \(L^2=0\) modulo two, have ranks ten and
 forty-four, and are invariant under both generators.
 
-## 2. The p15 obstruction
+## 2. The p15 survivor and the divided-trace correction
 
 For \(C_3\) alone, the two factors are each five copies of the irreducible
 two-dimensional module.  Their invariant tensor space has dimension fifty,
@@ -120,40 +120,50 @@ and \(P_{15}\) is nonzero there.  This recovers the earlier result that the
 residual cubic monodromy alone does not force evenness.
 
 Adding the exotic deck cuts the invariant tensor space to dimension
-twenty-five.  More importantly,
+twenty-five.  The raw mod-two top-wedge contraction does vanish there:
 
 \[
- P_{15}\bigm|
+ \overline P_{15}^{\rm ord}\bigm|
  (\Lambda_2\otimes Q_{15})^{S_3}=0.                       \tag{2.1}
 \]
 
-There is a conceptual explanation.  Over \(\mathbf F_4\), the
-\(C_3\)-invariant tensor space is an \(\mathbf F_2\)-form of
-\(M_5(\mathbf F_4)\), and the deck is the Frobenius real structure, up to
-the possibly different semilinear changes of basis on the two paired
-factors.  Its fixed form has dimension twenty-five over \(\mathbf F_2\).
-The degree functional is the Frobenius-invariant absolute-trace functional.
-It vanishes on that fixed form.  Equivalently, every odd sheetwise class is
-exchanged with a second odd class and their invariant sum has even degree.
+Equation (2.1) is not the unordered degree.  Via the perfect pairing, a
+full-deck invariant tensor is an endomorphism of
+\(V^5\), where \(V\) is the natural two-dimensional \(S_3\)-module.  Hence
 
-This also resolves a terminology trap in the earlier \(C_3\) note.  The
-sheetwise odd witness was called the coefficient identity after choosing
-one exotic \(\mathbf F_4\) orientation.  That label is not compatible with
-the integral identification of the conjugate sheet.  The rational
-inverse-Lefschetz operator is canonical, but its unresolved integral
-dyadic lift is exactly what changes under the deck.  There is therefore no
-contradiction between rational deck invariance and (2.1).
+\[
+ (\Lambda_2\otimes Q_{15})^{S_3}
+       \simeq \operatorname {End}_{S_3}(V^5)
+       \simeq M_5(\mathbf F_2).                           \tag{2.2}
+\]
+
+The ordered trace on the rank-ten lattice is twice the coefficient trace.
+After passage to the symmetric quotient the actual degree is therefore
+
+\[
+ \delta_{15}^{\rm sym}(A)=\operatorname {tr}_{5}(A)\pmod2. \tag{2.3}
+\]
+
+In particular the identity is fixed by every semilinear deck
+normalization and
+
+\[
+                 \delta_{15}^{\rm sym}(I_5)=5=1\pmod2.    \tag{2.4}
+\]
+
+This is also the basis-free check on the computation: the rational
+inverse-Lefschetz identity is polarization-canonical, so a purported deck
+calculation that removes it has reduced the ordered trace before dividing
+by two.
 
 ### Relative consequence
 
 A cycle defined over the unmarked base gives a flat integral class fixed by
-both the residual monodromy and the deck.  Its \(p_{15}\) residue belongs to
-the left side of (2.1), hence has even addition degree.  This is an actual
-cohomological no-go for a horizontal odd \(p_{15}\) escape.
-
-It does not forbid a fixed-fibre algebraic \(p_{15}\) class on one marked
-sheet.  Such a class, if it exists, cannot descend with odd \(p_{15}\)
-degree through the exotic deck.
+both the residual monodromy and the deck, but the full fixed space already
+contains the odd identity (2.4).  Deck invariance therefore gives no
+cohomological parity obstruction in \(p_{15}\).  The unresolved question is
+whether this residual coset has a deck-compatible integral algebraic lift;
+the calculation neither constructs nor obstructs one.
 
 ## 3. The p24 survivor
 
@@ -240,8 +250,8 @@ Cycle-class realization gives only necessary tests:
   representative; and
 - even an invariant Chow class need not lie in \(R\).
 
-Therefore (2.1) is decisive for the \(p_{15}\) contribution, while (3.2)
-leaves both algebraization and class descent open.
+Thus both (2.4) and (3.2) are necessary-condition survivors only.  They
+leave algebraization and class descent open.
 
 ## 5. What “minimal quadratic base change” honestly means
 
@@ -265,10 +275,9 @@ prove that the exotic cover is exactly minimal one needs both:
    and
 2. a proof that no odd-degree zero-cycle exists over \(K\).
 
-The present deck theorem supplies neither globally.  It supplies item 2
-only for the isolated \(p_{15}\) contribution.  The invariant odd
-\(p_{24}\) classes in (3.2), as well as the axis/Chow channels, prevent an
-index conclusion.
+The present deck theorem supplies neither.  The invariant odd \(p_{15}\)
+identity, the odd \(p_{24}\) classes in (3.2), and the axis/Chow channels
+all prevent an index conclusion.
 
 ## 6. Exact certificate
 
@@ -280,8 +289,8 @@ The deterministic Sage script
 3. the quotient actions on \(Q_{15}\) and \(Q_{24}\);
 4. the subspace action on \(U_{24}\);
 5. both perfect top-wedge pairings; and
-6. the simultaneous fixed spaces and restrictions of the degree
-   functionals.
+6. the simultaneous fixed spaces, the raw ordered contractions, and the
+   divided \(p_{15}\) coefficient-trace functional.
 
 Replay from the repository root without preparsed debris:
 
@@ -295,12 +304,17 @@ nix shell nixpkgs#sage -c sh -lc \
 ```
 
 The script checks equivariance and perfection before computing invariants.
-It uses no random choices.
+It uses no random choices.  The independent conceptual check is the
+polarization-canonical identity: it is fixed by semilinear conjugation (or
+conjugate transpose), while its divided coefficient trace is
+\(\operatorname {tr}(I_5)=5\).  This check is recorded separately in
+`notes/2026-08-11-c904-exotic-deck-final-move-red-team.md` and detects the
+ordered-before-dividing normalization error.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `2026-08-11-c904-exotic-deck-kunneth-residuals.sage` | 6685 | `6962cb3c1c75494a380b7b61372429dcfa05e836047862c56a4ea13a05984f73` |
-| `2026-08-11-c904-exotic-deck-kunneth-residuals.out` | 281 | `d0953067a91ab7f425c0e44feb4e1d5fd9f4bd9e0b4b01c161f09e0100456c9f` |
+| `2026-08-11-c904-exotic-deck-kunneth-residuals.sage` | 10945 | `c609897ccd3ee693f4096f6286d3c11a3f3e22fe315dd223891c136541c1a8ea` |
+| `2026-08-11-c904-exotic-deck-kunneth-residuals.out` | 502 | `ebba140ff87d9340024c08c66b4fbdb4e719882f5a9ad0ba660a51e386bc3580` |
 
 The sizes were measured before this report was written.  The source hashes
 are the load-bearing identifiers.
@@ -321,7 +335,9 @@ combined deck action and descent consequences from those exact inputs.
 
 ## Mystery ledger
 
-- **Settled:** full exotic monodromy kills odd \(p_{15}\) residual degree.
+- **Settled:** full exotic monodromy preserves the odd divided-degree
+  \(p_{15}\) identity; the vanishing raw contraction is the wrong
+  ordered-trace functional.
 - **Settled:** full exotic monodromy does not kill odd \(p_{24}\) residual
   degree.
 - **Settled:** norm Tate cohomology surjects onto, but need not equal, the
