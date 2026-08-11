@@ -197,6 +197,23 @@ entire charge-two and one-line boundary route negatively, but it still does
 not decide an odd zero-cycle intrinsic to the complement in Voisin's
 charge-three \(M_9\) fourfold.  No manuscript or Lean source changed.
 
+The ninth pass in
+`notes/2026-08-10-c904-liaison-conic-brauer-class.md` closes Voisin's
+distinct locally free type-\((5,1)\) divisor.  Over the line-marked base
+\(J_2\times F\), the reducible-sextic rank-four quadric is stably birational
+to the charge-two conic.  The symmetric liaison incidence uses honest
+quadric-choice and residual elliptic-pencil projective bundles, and the
+charge-three determinant weight \(-1\) makes the later section
+\(\mathbf P^3\) honest.  The resulting genus-zero curve therefore splits
+the nonzero charge-two class; the Brauer kernel of a conic forces it to
+represent that class and have degree image \(2\mathbf Z\).  The line-marked
+form avoids assuming uniqueness of the trisecant line.  Both visible
+type-\((5,1)\) carriers are now closed negatively.  The surviving odd route
+is \(D_{3,3}\): decide the integral descent lattice for
+\(\operatorname{Sym}^2\Theta\to J\), where quotienting by factor exchange
+may or may not halve the sharp ordered degree two.  No manuscript or Lean
+source changed.
+
 ## Goal
 
 Bring Paper V of *Clebsch: Rigidity from Sparse Shadows* to a publishable

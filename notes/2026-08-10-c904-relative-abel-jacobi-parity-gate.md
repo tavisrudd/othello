@@ -52,10 +52,14 @@ Their projective-three-space section family resolves a rank-four determinant
 quadric of degree two; the boundary normal on a geometric Hecke fibre is
 \(\mathcal O_{\mathbf P^1}(-2)\).  Moreover every
 universal-normalization-independent determinant line has even Hecke degree.
-Thus an odd carrier must be intrinsic to the generic fourfold, not inherited
-from the one-line boundary.  The boundary nevertheless gives a degree-two
-closed point, so a smooth proper compactified generic fibre has index dividing
-two.  The final index problem is exactly the dichotomy \(1\) versus \(2\).
+The distinct locally free liaison divisor \(D'_{5,1}\) does not escape:
+over the line-marked base its generic genus-zero curve is stably linked to
+that quadric, while the charge-three section \(\mathbf P^3\) is honest.
+The conic-kernel theorem therefore identifies its class with the same
+nonzero charge-two class.  Thus the entire type-\((5,1)\) architecture is
+even.  The boundary nevertheless gives a degree-two closed point, so a
+smooth proper compactified generic fibre has index dividing two.  The final
+index problem is exactly the dichotomy \(1\) versus \(2\).
 
 One attractive odd workaround is now ruled out exactly.  The two
 twisted-cubic families lie over theta divisors.  Cutting
@@ -268,6 +272,24 @@ The detailed proof and the necessary distinction from Voisin's different
 \(D_{5,1}\) and \(D'_{5,1}\) loci are recorded in
 `2026-08-10-c904-m9-common-line-hecke-parity.md`.
 
+The locally free \(D'_{5,1}\) flank is now closed as well.  Over
+\(K=k(J_2\times F)\), the reducible divisor has generic fibre the rank-four
+twisted quadric and is stably birational to the charge-two conic.  Voisin's
+liaison incidence is a symmetric tower of honest quadric-choice and residual
+elliptic-pencil projective bundles.  On the charge-three side, determinant
+weight \(-1\) neutralizes the moduli gerbe, so the later \(\mathbf P^3\) of
+sections is an honest projective bundle over a genus-zero curve \(C'/K\).
+The charge-two class dies over \(K(C')\), and the Brauer kernel of a conic
+then forces
+
+\[
+                         [C']=\alpha_K\ne0.
+\]
+
+Hence \(\deg CH_0(C')=2\mathbf Z\).  The line-marked formulation avoids an
+unproved uniqueness assertion for the trisecant line.  Full details are in
+`2026-08-10-c904-liaison-conic-brauer-class.md`.
+
 The next high-EV question is therefore sharper:
 
 > Does the generic fourfold fibre of \(M_9\to J\) carry an odd zero-cycle
@@ -472,7 +494,7 @@ algebraic theta cut escapes.
 
 ### Overconstraint
 
-Five independent parity detectors now agree:
+Six independent parity detectors now agree:
 
 1. charge-two determinant weights generate \(2\mathbf Z\);
 2. the common-line pencil and the distinct Hecke conic both have exact index
@@ -481,7 +503,9 @@ Five independent parity detectors now agree:
    \(2\mathbf Z\);
 4. the common-line section incidence is a rank-four quadric of degree two;
 5. the Hecke-boundary normal and every intrinsic determinant polarization
-   have even degree on the charge-three conic.
+   have even degree on the charge-three conic;
+6. the distinct locally free \(D'_{5,1}\) liaison curve has the same nonzero
+   conic class.
 
 Odd charge removes the ambient moduli gerbe, but not the inherited one-line
 geometry.  Any successful odd degree must come from the interior geometry of
@@ -503,5 +527,8 @@ the generic fourfold.
 - **Can the one-common-line Hecke boundary close it?**  No on the present
   base.  Its conic is nonsplit of index two, and all intrinsic determinant
   and boundary cuts remain even.
+- **Can the locally free type-\((5,1)\) liaison divisor close it?**  No.  Its
+  line-marked generic curve represents the same charge-two conic class.
 - **Could a carrier intrinsic to the interior of \(M_9\) be odd?**  Open.  It
-  is the sole surviving smooth-family flank.
+  is now localized to Voisin's type-\((3,3)\) route and the descent lattice
+  for \(\operatorname{Sym}^2\Theta\to J\).
