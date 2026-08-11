@@ -648,13 +648,17 @@ pushdown has degree `-160`.  More decisively, the complete rank-55
 Neron--Severi lattice of `J x J`, including all twenty-five graph and
 endomorphism directions, gives 3,000 mixed divisor cubes whose `(5,1)` image
 has full rank twenty-five but equals exactly `2 End(J)`.  The quotient is
-`(Z/2)^25`, and the normalized identity has exact order two.  Thus neither
-the canonical integral Fourier class nor any integral graph-dressed divisor
-cube can produce the odd projector.  The surviving correspondence must be
-genuinely non-divisor and non-split.  See
+`(Z/2)^25`, and the normalized identity has exact order two.  BdGF
+intersection divided powers add 375 integral mixed-square generators
+`D^2p_T/2`; their image is still exactly `2 End(J)`, with the same identity
+order.  Thus neither the canonical integral Fourier class, any integral
+graph-dressed divisor cube, nor any BdGF divided-square lift can produce the
+odd projector.  The surviving correspondence must be genuinely non-divisor
+and non-split.  See
 `notes/2026-08-11-c904-bdgf-symmetric-theta-descent.md` and the exact
-certificate `notes/2026-08-11-c904-full-ns-cube-p15-lattice.sage`.  No
-manuscript or Lean source changed.
+certificate bundle
+`notes/2026-08-11-c904-bdgf-theta-and-full-ns-p15-audit.md`.  No manuscript
+or Lean source changed.
 
 ## Goal
 

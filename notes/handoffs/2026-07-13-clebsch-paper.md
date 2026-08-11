@@ -681,8 +681,10 @@ actual invariant divisor-product lattice.  The canonical integral-Fourier
 class `P^3/3!` is pure `(3,3)` and has quotient degree 80, not five.  The
 entire rank-55 `NS(J x J)` mixed-cube calculation is stronger: its `(5,1)`
 image is exactly `2 End(J)`, with quotient `(Z/2)^25` and identity order two.
-Hence every graph- or endomorphism-dressed divisor cube is dead as well; a
-successful projector must be genuinely non-divisor.  The general ample support
+The same remains true after adding all 375 BdGF integral divided-square
+generators `D^2p_T/2`.  Hence every graph- or endomorphism-dressed divisor
+cube and every available divisor divided power is dead; a successful
+projector must be genuinely non-divisor.  The general ample support
 surfaces sharpen the inherited degree-five channel in the opposite
 direction: Lefschetz connectedness preserves the ordered-pair residue on
 every support curve, so the fixed-line/Hecke/type-`(5,1)` conic has exact
@@ -703,7 +705,7 @@ shows why geometric RC alone is insufficient.  See
 `notes/2026-08-11-c904-ample-cut-charge-two-index.md`, and
 `notes/2026-08-11-c904-canonical-p15-tautological-parity.md`,
 `notes/2026-08-11-c904-bdgf-symmetric-theta-descent.md`, and
-`notes/2026-08-11-c904-full-ns-cube-p15-lattice.sage`.
+`notes/2026-08-11-c904-bdgf-theta-and-full-ns-p15-audit.md`.
 
 Three further cohomological shortcuts are now closed.  EFS gives the sharp
 very-general image `2Z c` for curves on `Theta`, but mixed and primitive
