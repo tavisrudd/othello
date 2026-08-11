@@ -1,0 +1,6 @@
+C904 BdGF/Fano Poincare-cube pairing
+dimension=5
+[F]=theta^3/3!
+kernel=poincare^3/3!
+pairing matrix=4 times the standard symplectic form
+PASS

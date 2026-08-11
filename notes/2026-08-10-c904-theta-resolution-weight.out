@@ -1,0 +1,6 @@
+C904 theta-resolution determinant weights
+weights k=-2,-1,0,1,2: -3,0,0,6,27
+line-bundle Euler-weight gcd: 3
+point/line weights: 3,2
+full displayed Euler-weight gcd: 1
+moduli problem is fine: universal-sheaf weight one

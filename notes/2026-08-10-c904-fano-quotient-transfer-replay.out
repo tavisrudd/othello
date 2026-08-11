@@ -1,0 +1,8 @@
+C904 Fano quotient and transfer audit
+sum pullback theta-volume=30; degree 2 * Dplus-volume 15
+difference pullback theta-volume=30; degree 6 * theta-volume 5
+swap quotient: F^2 -> Sym^2(F) has degree 2; q_*q^*=2
+A5 orbit degrees for stabilizers V4,C2,1=(15, 30, 60)
+restriction-corestriction multipliers mod2=(1, 0, 0)
+only the V4-stabilized degree-15 extension is injective on 2-torsion
+PASS

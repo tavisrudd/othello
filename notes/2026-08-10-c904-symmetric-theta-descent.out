@@ -1,0 +1,9 @@
+C904 symmetric-theta descent audit
+Lambda^6 rank=210; Nakaoka transfers checked=38760 (nonzero=13440)
+degree-6 pullback restriction lattice=2*Lambda^6 H1
+repeated-even Nakaoka/branch generator in degree 6=NONE
+theta-square gcd: ordered=2, descended-upstairs=4
+algebraic witness D(0, 1, 2): ordered=-2, upstairs=-4, downstairs=-2
+ambient symmetric-theta carrier degree gcd downstairs=2
+odd ambient D3,3 theta-cut=IMPOSSIBLE
+PASS

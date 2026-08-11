@@ -1,0 +1,22 @@
+C904 ordered-pair numerical audit on 16 sparse components
+  D(0, 1, 1, 1): coeff=-787 theta-degree=+0 Dplus-degree=+0 mod2=0
+  D(0, 1, 1, 2): coeff=+3253 theta-degree=-12 Dplus-degree=-36 mod2=0
+  D(0, 1, 1, 4): coeff=+2167 theta-degree=+12 Dplus-degree=+36 mod2=0
+  D(0, 1, 1, 6): coeff=-219 theta-degree=+4 Dplus-degree=+12 mod2=0
+  D(0, 1, 1, 7): coeff=+3095 theta-degree=-4 Dplus-degree=-12 mod2=0
+  D(0, 1, 1, 12): coeff=+1043 theta-degree=+4 Dplus-degree=+12 mod2=0
+  D(0, 1, 2, 3): coeff=+861 theta-degree=+2 Dplus-degree=+6 mod2=0
+  D(0, 1, 2, 6): coeff=-2285 theta-degree=-4 Dplus-degree=-12 mod2=0
+  D(0, 1, 12, 13): coeff=-749 theta-degree=-10 Dplus-degree=-30 mod2=0
+  D(0, 2, 12, 13): coeff=+1245 theta-degree=+0 Dplus-degree=+0 mod2=0
+  D(1, 1, 1, 2): coeff=-428 theta-degree=-6 Dplus-degree=-18 mod2=0
+  D(1, 1, 1, 3): coeff=+114 theta-degree=-18 Dplus-degree=-54 mod2=0
+  D(1, 1, 2, 3): coeff=-599 theta-degree=-10 Dplus-degree=-30 mod2=0
+  D(1, 1, 2, 5): coeff=-599 theta-degree=+6 Dplus-degree=+18 mod2=0
+  D(1, 2, 3, 5): coeff=-1027 theta-degree=-2 Dplus-degree=-6 mod2=0
+  D(1, 2, 12, 13): coeff=-171 theta-degree=+7 Dplus-degree=+21 mod2=1
+odd-Dplus-degree components=1/16: [(1, 2, 12, 13)]
+weighted theta-degree=5; weighted Dplus-degree=15
+etale-cover numerical invariants: push degree=2, branch/discriminant degree=0
+norm of pulled divisor has degree doubled; all intersection pullbacks are even
+PASS

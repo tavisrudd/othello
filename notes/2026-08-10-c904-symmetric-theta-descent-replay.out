@@ -1,0 +1,6 @@
+independent symmetric-theta descent replay
+Nakaoka transfers=38760; nonzero restrictions=13440
+degree-6 restriction lattice contains 2*standard basis and is contained in it
+theta-square degree gcd: ordered=2, descended-upstairs=4, downstairs=2
+algebraic witness D(0,1,2): ordered=-2, upstairs=-4, downstairs=-2
+PASS
