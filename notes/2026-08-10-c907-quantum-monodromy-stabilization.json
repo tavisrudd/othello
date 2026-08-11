@@ -10529,6 +10529,168 @@
     "paper": "Franziska Bittner, The universal Euler characteristic for varieties of characteristic zero",
     "result": "Theorem 3.1, blow-up presentation of K_0(Var_k)"
   },
+  "cubic_hypergeometric_irregular_hodge_bridge": {
+    "ambient_toric_variety": "P^4",
+    "anticanonical_minus_bundle": "O(2)",
+    "anticanonical_minus_bundle_is_nef": true,
+    "beta_parameters_mod_Z": [
+      "1/3",
+      "2/3"
+    ],
+    "bundle_is_ample": true,
+    "cai_local_formal_block_ranks": [
+      1,
+      1,
+      2
+    ],
+    "checked_period_degree_range": [
+      0,
+      24
+    ],
+    "circle_arc_separation": true,
+    "complete_intersection_bundle": "O(3)",
+    "corrected_rank_two_target": "local sectorial Stokes-graded piece of the full irreducible module",
+    "cross_differences_mod_Z_nonzero": true,
+    "global_ambient_quantum_module_underlies_irregular_mixed_hodge_module": true,
+    "global_hypergeometric_module_irreducible": true,
+    "literal_alpha_parameters": [
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "literal_beta_parameters": [
+      "-1/3",
+      "-2/3"
+    ],
+    "normalized_hypergeometric_operator": "D^4-x(D+1/3)(D+2/3)",
+    "period_checks": [
+      {
+        "degree": 1,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "2/9"
+      },
+      {
+        "degree": 2,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "5/162"
+      },
+      {
+        "degree": 3,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "140/59049"
+      },
+      {
+        "degree": 4,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "1925/17006112"
+      },
+      {
+        "degree": 5,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "7007/1913187600"
+      },
+      {
+        "degree": 6,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "119119/1394713760400"
+      },
+      {
+        "degree": 7,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "46189/30753438416820"
+      },
+      {
+        "degree": 8,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "11685817/566847376898826240"
+      },
+      {
+        "degree": 9,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "759578105/3347177075849879064576"
+      },
+      {
+        "degree": 10,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "4405553009/2151756691617779398656000"
+      },
+      {
+        "degree": 11,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "1128695399/73226969911617555160512000"
+      },
+      {
+        "degree": 12,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "19187821783/195227286182653065918219878400"
+      },
+      {
+        "degree": 13,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "79816797121/148470351141907656630806217523200"
+      },
+      {
+        "degree": 14,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "3272488681961/1283318327130193020854036621783531520"
+      },
+      {
+        "degree": 15,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "140717013324323/13288907109061231707423191722730035200000"
+      },
+      {
+        "degree": 16,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "152115091403593163/3919058173347465965299588317333760140902400000"
+      },
+      {
+        "degree": 17,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "526349797244267/4160600126072146520711930291177595969994752000"
+      },
+      {
+        "degree": 18,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "27896539253946151/75593623644441286123544237465767958286836957184000"
+      },
+      {
+        "degree": 19,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "77275732005391/79741455591165499550452995950090940413614699315200"
+      },
+      {
+        "degree": 20,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "132218777461224001/57413848025639159676326157084065477097802583506944000000"
+      },
+      {
+        "degree": 21,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "250025708179174585891/50246561600434482358552143101397621231559849093562892288000000"
+      },
+      {
+        "degree": 22,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "250025708179174585891/25465150675106351176554066708954089046390037520037264438067200000"
+      },
+      {
+        "degree": 23,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "31666772113430429593/1782935034767372616934910464725447322792102479895550235141734400000"
+      },
+      {
+        "degree": 24,
+        "operator_recurrence_verified": true,
+        "rescaled_period_coefficient": "2248340820053560501103/76054506955068833660082452701467858552857904733263352476135095009280000"
+      }
+    ],
+    "rank_two_formal_block_can_be_proper_global_subobject": false,
+    "regularized_quantum_period": "sum_d (3d)!/(d!)^5 t^d",
+    "rescaled_variable": "x=27t",
+    "wang_compactification_scope": "boundary-admissible blow-ups between compactifications of one fixed Landau-Ginzburg pair"
+  },
   "filtration_sources": [
     {
       "arxiv": "1511.00176v5",
@@ -10556,6 +10718,50 @@
       "results": [
         "Theorem 1.1.1",
         "Theorem 1.3.1"
+      ]
+    },
+    {
+      "arxiv": "1503.01004",
+      "cached_pdf_sha256": "1bb0f17b52203927e8bd536c706f2f871b7bee59fd35196d987d2ef6284541e8",
+      "paper": "Thomas Reichelt and Christian Sevenheck, Hypergeometric Hodge modules",
+      "results": [
+        "Theorem 6.6"
+      ]
+    },
+    {
+      "arxiv": "1803.04886",
+      "cached_pdf_sha256": "134b742e3d698d1ecd6d9b6eca4dafd6f59fe264ae8e21aa0e46fb6f7fa991f5",
+      "paper": "Alberto Castano Dominguez, Thomas Reichelt, and Christian Sevenheck, Examples of hypergeometric twistor D-modules",
+      "results": [
+        "Proposition 5.2",
+        "Theorem 5.7"
+      ]
+    },
+    {
+      "arxiv": "2501.18849",
+      "cached_pdf_sha256": "7a949edc17fe87f2af306dc663a95056e4636e8c312df09303c6f6f702afdc39",
+      "paper": "Hiroshi Iritani, Fourier analysis of equivariant quantum cohomology",
+      "results": [
+        "Remark 57"
+      ]
+    },
+    {
+      "arxiv": "2204.13381",
+      "cached_pdf_sha256": "59e2c7e55867f6abc0e3ce54f2ac9cfdf2b02225d43e4a492a54ad04070ad65e",
+      "paper": "Takahiro Saito, The Hodge filtration of a monodromic mixed Hodge module and the irregular Hodge filtration",
+      "results": [
+        "Theorem 1.1",
+        "Theorem 1.4",
+        "Theorem 1.5"
+      ]
+    },
+    {
+      "arxiv": "2608.06234",
+      "cached_pdf_sha256": "6a3343410d2f4e9867d19fde778dd541867b579187393f4922d3202a84bd34fa",
+      "paper": "Haoxu Wang, Compactification Independence of the Irregular Hodge Filtration on Deligne-Mumford Stacks",
+      "results": [
+        "Theorem 1.1",
+        "Theorem 4.11"
       ]
     }
   ],
@@ -12987,7 +13193,7 @@
     "general_statement": "The P^m factor has m+1 semisimple formal solutions with power exponent 0; tensoring therefore gives m+1 copies of the cubic rank-two block with unchanged residues."
   },
   "sage_version": "10.7",
-  "schema": "c907-quantum-monodromy-stabilization-v7",
+  "schema": "c907-quantum-monodromy-stabilization-v8",
   "source": {
     "arxiv": "2608.01577v1",
     "cached_pdf_sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",

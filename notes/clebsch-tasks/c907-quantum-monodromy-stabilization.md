@@ -41,11 +41,16 @@ first composition audit is positive: the Tate polynomials agree identically
 under transverse and nested two-step blow-up order exchanges.  A `P^1`
 mutation audit proves that unchanged Euler/Serre data still allow different
 exceptional flags, while the canonical monodromy-weight line is neither flag.
-Irregular mixed Hodge modules now give the exact conditional repair—strict
-projective pushforward, canonical-up-to-shift filtration in the rigid locally
-formally unitary case, and Thom--Sebastiani—but neither Cai's local rank-two
-block nor Iritani's blow-up map is known to lift functorially to that category.
-That filtered quantum lift is the highest-EV live gate.
+The full reduced ambient cubic quantum module now has an irregular-Hodge
+origin: it is the irreducible hypergeometric module
+`H(0,0,0,0;1/3,2/3)`.  Its local formal ranks are `1,1,2`, so irreducibility
+rules out the old target of globalizing Cai's rank-two block as a proper
+IrrMHM subobject.  The corrected highest-EV gate is a local sectorial
+Stokes filtration on the full rank-four object whose associated graded
+realizes Iritani's additive center pieces and is strict for the irregular
+Hodge filtration.  Wang proves the corresponding filtered coherence for
+boundary blow-ups between compactifications of one fixed Landau--Ginzburg
+pair, but not for an A-model target blow-up that adds center modules.
 
 ## Goal
 

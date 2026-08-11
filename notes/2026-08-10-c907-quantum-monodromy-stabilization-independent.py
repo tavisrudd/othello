@@ -4,7 +4,7 @@
 import argparse
 import json
 from functools import reduce
-from math import gcd, lcm
+from math import factorial, gcd, lcm
 from pathlib import Path
 
 import sympy as sp
@@ -60,6 +60,35 @@ def main():
     )
     assert sp.simplify(indicial - (rho**2 + rho + sp.Rational(5, 36))) == 0
     assert sp.solve(indicial, rho) == [sp.Rational(-5, 6), sp.Rational(-1, 6)]
+
+    hypergeometric = certificate["cubic_hypergeometric_irregular_hodge_bridge"]
+    alpha = [sp.Rational(0)] * 4
+    beta = [sp.Rational(1, 3), sp.Rational(2, 3)]
+    assert all(a - b not in sp.Integers for a in alpha for b in beta)
+    assert max(alpha) < min(beta)
+    previous = sp.Rational(1)
+    for check in hypergeometric["period_checks"]:
+        degree = check["degree"]
+        coefficient = sp.Rational(factorial(3 * degree), factorial(degree) ** 5 * 27**degree)
+        assert degree**4 * coefficient == (
+            (degree - sp.Rational(2, 3))
+            * (degree - sp.Rational(1, 3))
+            * previous
+        )
+        assert sp.Rational(check["rescaled_period_coefficient"]) == coefficient
+        assert check["operator_recurrence_verified"]
+        previous = coefficient
+    assert hypergeometric["normalized_hypergeometric_operator"] == "D^4-x(D+1/3)(D+2/3)"
+    assert hypergeometric["cross_differences_mod_Z_nonzero"]
+    assert hypergeometric["circle_arc_separation"]
+    assert hypergeometric["global_hypergeometric_module_irreducible"]
+    assert hypergeometric["global_ambient_quantum_module_underlies_irregular_mixed_hodge_module"]
+    assert hypergeometric["cai_local_formal_block_ranks"] == [1, 1, 2]
+    assert not hypergeometric["rank_two_formal_block_can_be_proper_global_subobject"]
+    assert hypergeometric["corrected_rank_two_target"].startswith("local sectorial Stokes")
+    assert hypergeometric["wang_compactification_scope"].endswith(
+        "one fixed Landau-Ginzburg pair"
+    )
 
     projective_checks = certificate["projective_stabilization"]["checks"]
     for check in projective_checks:
@@ -324,7 +353,8 @@ def main():
         assert pattern["odometer_cycle_length"] == n
 
     print(
-        "independent replay passed: indicial polynomial, projective checks "
+        "independent replay passed: indicial polynomial, cubic hypergeometric IrrMHM bridge, "
+        "projective checks "
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
         f"Iritani q-adic lattice checks through r={len(q_adic['checks'])+1}, "

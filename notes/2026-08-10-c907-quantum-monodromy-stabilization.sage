@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v7"
+SCHEMA = "c907-quantum-monodromy-stabilization-v8"
 
 
 def matrix_strings(M):
@@ -114,6 +114,64 @@ def cai_certificate():
         "indicial_polynomial": str(indicial),
         "roots": ["-5/6", "-1/6"],
         "fractional_residues_mod_Z": ["-1/6", "1/6"],
+    }
+
+
+def cubic_hypergeometric_irregular_hodge_check(bound):
+    """Certify the hypergeometric presentation used in the IrrMHM audit."""
+    alpha = [QQ(0)] * 4
+    literal_beta = [QQ(-1) / 3, QQ(-2) / 3]
+    beta_mod_Z = [QQ(1) / 3, QQ(2) / 3]
+    cross_differences = [a - b for a in alpha for b in beta_mod_Z]
+    assert all(value not in ZZ for value in cross_differences)
+    assert max(alpha) < min(beta_mod_Z)
+
+    period_checks = []
+    previous = QQ(1)
+    for degree in range(1, bound + 1):
+        coefficient = QQ(factorial(3 * degree)) / (factorial(degree) ** 5 * 27**degree)
+        recurrence_right = (
+            (QQ(degree) - QQ(2) / 3)
+            * (QQ(degree) - QQ(1) / 3)
+            * previous
+        )
+        assert degree**4 * coefficient == recurrence_right
+        period_checks.append(
+            {
+                "degree": degree,
+                "rescaled_period_coefficient": str(coefficient),
+                "operator_recurrence_verified": True,
+            }
+        )
+        previous = coefficient
+
+    return {
+        "ambient_toric_variety": "P^4",
+        "complete_intersection_bundle": "O(3)",
+        "anticanonical_minus_bundle": "O(2)",
+        "bundle_is_ample": True,
+        "anticanonical_minus_bundle_is_nef": True,
+        "regularized_quantum_period": "sum_d (3d)!/(d!)^5 t^d",
+        "rescaled_variable": "x=27t",
+        "normalized_hypergeometric_operator": "D^4-x(D+1/3)(D+2/3)",
+        "literal_alpha_parameters": [str(value) for value in alpha],
+        "literal_beta_parameters": [str(value) for value in literal_beta],
+        "beta_parameters_mod_Z": [str(value) for value in beta_mod_Z],
+        "cross_differences_mod_Z_nonzero": True,
+        "circle_arc_separation": True,
+        "global_hypergeometric_module_irreducible": True,
+        "global_ambient_quantum_module_underlies_irregular_mixed_hodge_module": True,
+        "cai_local_formal_block_ranks": [1, 1, 2],
+        "rank_two_formal_block_can_be_proper_global_subobject": False,
+        "corrected_rank_two_target": (
+            "local sectorial Stokes-graded piece of the full irreducible module"
+        ),
+        "wang_compactification_scope": (
+            "boundary-admissible blow-ups between compactifications of one fixed "
+            "Landau-Ginzburg pair"
+        ),
+        "checked_period_degree_range": [0, bound],
+        "period_checks": period_checks,
     }
 
 
@@ -682,8 +740,50 @@ def build_certificate(bound):
                 "cached_pdf_sha256": "95b699eb50c830dea8b5b6241bcc4450e1be8c72b50f20350741101b9efed6f5",
                 "results": ["Theorem 1.1.1", "Theorem 1.3.1"],
             },
+            {
+                "paper": "Thomas Reichelt and Christian Sevenheck, Hypergeometric Hodge modules",
+                "arxiv": "1503.01004",
+                "cached_pdf_sha256": "1bb0f17b52203927e8bd536c706f2f871b7bee59fd35196d987d2ef6284541e8",
+                "results": ["Theorem 6.6"],
+            },
+            {
+                "paper": (
+                    "Alberto Castano Dominguez, Thomas Reichelt, and Christian Sevenheck, "
+                    "Examples of hypergeometric twistor D-modules"
+                ),
+                "arxiv": "1803.04886",
+                "cached_pdf_sha256": "134b742e3d698d1ecd6d9b6eca4dafd6f59fe264ae8e21aa0e46fb6f7fa991f5",
+                "results": ["Proposition 5.2", "Theorem 5.7"],
+            },
+            {
+                "paper": "Hiroshi Iritani, Fourier analysis of equivariant quantum cohomology",
+                "arxiv": "2501.18849",
+                "cached_pdf_sha256": "7a949edc17fe87f2af306dc663a95056e4636e8c312df09303c6f6f702afdc39",
+                "results": ["Remark 57"],
+            },
+            {
+                "paper": (
+                    "Takahiro Saito, The Hodge filtration of a monodromic mixed "
+                    "Hodge module and the irregular Hodge filtration"
+                ),
+                "arxiv": "2204.13381",
+                "cached_pdf_sha256": "59e2c7e55867f6abc0e3ce54f2ac9cfdf2b02225d43e4a492a54ad04070ad65e",
+                "results": ["Theorem 1.1", "Theorem 1.4", "Theorem 1.5"],
+            },
+            {
+                "paper": (
+                    "Haoxu Wang, Compactification Independence of the Irregular Hodge "
+                    "Filtration on Deligne-Mumford Stacks"
+                ),
+                "arxiv": "2608.06234",
+                "cached_pdf_sha256": "6a3343410d2f4e9867d19fde778dd541867b579187393f4922d3202a84bd34fa",
+                "results": ["Theorem 1.1", "Theorem 4.11"],
+            },
         ],
         "cai_rank_two_certificate": cai_certificate(),
+        "cubic_hypergeometric_irregular_hodge_bridge": (
+            cubic_hypergeometric_irregular_hodge_check(bound)
+        ),
         "projective_stabilization": {
             "general_statement": (
                 "The P^m factor has m+1 semisimple formal solutions with power exponent 0; "

@@ -54,9 +54,15 @@ polynomial is coherent under both transverse and nested two-step blow-up
 exchanges.  It also exposes the next obstruction sharply: mutations preserve
 Euler and Serre data while changing the exceptional flag.  Irregular-Hodge
 theory supplies a canonical-up-to-shift filtration, strict projective
-pushforward, and Thom--Sebastiani convolution in its own category, but the
-quantum blow-up isomorphism is not known to lift to that category.  That lift,
-rather than a new polynomial identity, is now the highest-EV theorem gate.
+pushforward, and Thom--Sebastiani convolution in its own category.  The full
+ambient cubic quantum module is now proved to lie in that category through its
+hypergeometric mirror.  It is globally irreducible, however, so Cai's local
+rank-two Levelt--Turrittin block cannot be a global irregular-Hodge subobject.
+The correct target is therefore a strict **local Stokes-graded** filtration of
+the full object, not a direct-sum lift of the formal block.  Iritani's quantum
+blow-up map is not known to carry such a filtration.  That semiorthogonal
+Stokes lift, rather than a new polynomial identity, is now the highest-EV
+theorem gate.
 
 A second proposed refinement, the `p`-primary length of a global spectral
 cycle, does not survive audit in the published formalism.  The blow-up and
@@ -550,22 +556,92 @@ irregular Hodge numbers with limiting Hodge numbers and proves deformation
 invariance for non-degenerate regular functions.  These results make the route
 structurally credible, but they do **not** prove the needed quantum statement.
 
-Three bridges remain absent:
+The source audit below shows that the full cubic connection already has this
+origin, but also that the local atom cannot globalize as a subobject.  Thus
+Sabbah's strictness theorem cannot be applied to Iritani's formal direct sum in
+the naive way.
 
-1. Cai's rank-two object is a local Levelt--Turrittin block of the cubic quantum
-   connection; it has not been identified here as a global object of irregular
-   mixed-Hodge origin carrying the induced canonical filtration.
-2. Quantum connections of arbitrary centers occurring in weak factorization
-   are not known to arise functorially from exponential mixed Hodge modules.
-3. Iritani's formal blow-up isomorphism has not been lifted to a morphism in
-   that filtered category, so Sabbah's strictness theorem cannot simply be
-   applied to it.
+### 5.5 The cubic is irregular-Hodge, but its atom cannot globalize
 
-Consequently irregular Hodge theory is now the best-specified candidate, not a
-proof of stable irrationality.  A sufficient theorem would lift Iritani's
-blow-up decomposition to irregular mixed Hodge modules, identify its local
-filtration shifts with Section 5.1's elementary divisors, and make the lift
-compatible with the two-step exchanges of Section 5.2.
+The cubic threefold is the complete intersection of `O(3)` in the toric
+variety `P^4`, with
+
+\[
+-K_{\mathbf P^4}-\mathcal O(3)=\mathcal O(2).
+\]
+
+Therefore Reichelt--Sevenheck Theorem 6.6 applies: the reduced ambient quantum
+`D`-module, after the mirror map, underlies a variation of pure polarized
+noncommutative Hodge structures.  Its regularized quantum period is
+
+\[
+\sum_{d\ge0}\frac{(3d)!}{(d!)^5}t^d.
+\]
+
+After `x=27t`, its scalar operator is
+
+\[
+D^4-x(D+1/3)(D+2/3).
+\]
+
+This is the hypergeometric module
+
+\[
+H(0,0,0,0;1/3,2/3)
+\]
+
+up to the integral parameter shifts licensed by Castaño
+Domínguez--Reichelt--Sevenheck Proposition 5.2.  Every cross-difference between
+an alpha and a beta parameter is nonintegral, and the two parameter sets occupy
+complementary arcs of the unit circle.  Proposition 5.2 therefore makes the
+module irreducible, while Theorem 5.7 gives its unique irregular mixed-Hodge
+upgrade and extension.  The certificate verifies the period recurrence and all
+parameter conditions through degree `24`; the displayed recurrence proves it
+for every degree.
+
+This is simultaneously a positive result and an exact no-go.  Cai's ranks
+`1,1,2` are the **local formal** exponential blocks at the irregular point.  A
+proper global rank-two subobject would contradict irreducibility of the rank-four
+hypergeometric module.  The earlier target “make Cai's block a global IrrMHM
+object” is therefore impossible.  The surviving object must be the rank-two
+graded piece of a local Stokes filtration on the full irreducible quantum
+module.
+
+### 5.6 Compactification independence is an exact near-miss
+
+Wang's 2026 Theorems 1.1 and 4.11 prove precisely the kind of filtered weak-
+factorization consistency one would want on the mirror side.  For a **fixed**
+Landau--Ginzburg pair `(U,w)`, the irregular Hodge filtration is independent of
+its normal-crossing rational compactification.  Pullback across every
+boundary-admissible blow-up gives levelwise filtered quasi-isomorphisms,
+including the integer-slice quotients and their spectral sequences from `E_1`.
+
+This does not yet apply to Iritani's theorem.  An A-model blow-up changes the
+target and adds `r-1` center modules; it is not merely a new compactification of
+one fixed `(U,w)`.  Iritani constructs his map by Fourier analysis of the
+equivariant quantum module of a master space.  No theorem in the audited sources
+makes that master-space quantum module a monodromic mixed Hodge module for an
+arbitrary center, identifies the Fourier projections with Wang's pullbacks, or
+turns the formal direct sum into a Stokes filtration.  Saito's Fourier--Laplace
+theorem would preserve and compute the relevant Hodge filtration **if** that
+monodromic mixed-Hodge input existed; it does not construct the input.  Iritani's
+2025 survey still states the Γ-integral/semiorthogonal Stokes comparison as
+anticipated rather than proved.
+
+The corrected sufficient theorem is consequently:
+
+1. realize the full quantum modules of every weak-factorization variety and
+   center as irregular-Hodge/Stokes objects;
+2. realize Iritani's formal decomposition as a sectorial Stokes filtration
+   whose associated graded is the `X` module plus the `r-1` center modules,
+   rather than as a global direct sum;
+3. prove strict compatibility of its irregular Hodge filtration with that
+   Stokes filtration, identify the graded shifts with Section 5.1's elementary
+   divisors, and compose it through the exchanges of Section 5.2.
+
+No theorem in the audited literature supplies this package.  The first endpoint
+existence problem is closed; the functorial center and Stokes-extension problems
+remain.
 
 ## 6. Spectral-cycle alternate attack: negative audit
 
@@ -767,6 +843,16 @@ assignment nor the comparison of its multivariable `q`-lattices exists.  It
 also keeps separate Cai's local Levelt--Turrittin block from a global object of
 irregular mixed-Hodge origin.  Those two seams are the exact surviving gate.
 
+The present hypergeometric `ej` pass closes one of those seams and corrects the
+other.  The full cubic ambient quantum module already has a canonical
+irregular-Hodge upgrade, but global irreducibility proves that the local
+rank-two atom cannot itself be the upgraded object.  The `tt` challenge then
+finds Wang's compactification-independence theorem: it supplies strict filtered
+blow-up comparison for compactifications of one fixed Landau--Ginzburg model,
+not for Iritani's additive quantum blow-up map.  The exact frontier is therefore
+a semiorthogonal Stokes filtration compatible with irregular Hodge theory, not
+a direct-sum IrrMHM morphism.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -800,17 +886,19 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 35,543 bytes;
-- independent replay: 14,849 bytes;
-- JSON certificate: 300,682 bytes.
+- Sage generator: 40,013 bytes;
+- independent replay: 16,439 bytes;
+- JSON certificate: 307,698 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
-of the source matrices, Iritani's asymptotic formulae, the quantum
-Kunneth/projective-bundle formula, and the geometric identification of the two
-standard blow-up order exchanges is human-audited.  The bounded checks do not
-assert existence or nonexistence of any weak factorization or the missing
-global irregular-Hodge/Rees/Stokes compatibility.
+of the source matrices, the cubic period with its hypergeometric quantum
+module, the hypotheses of the cited irregular-Hodge theorems, Iritani's
+asymptotic formulae, the quantum Kunneth/projective-bundle formula, and the
+geometric identification of the two standard blow-up order exchanges is
+human-audited.  The bounded checks do not assert existence or nonexistence of
+any weak factorization or the missing global irregular-Hodge/Rees/Stokes
+compatibility.
 
 ## 10. Sources
 
@@ -833,6 +921,11 @@ global irregular-Hodge/Rees/Stokes compatibility.
   remark locates the missing Γ-integral/Stokes semiorthogonal compatibility.
   Shared-cache PDF SHA-256:
   `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
+- Hiroshi Iritani, *Fourier analysis of equivariant quantum cohomology*,
+  arXiv:2501.18849, especially Remark 57, which still presents the
+  Γ-integral/Stokes comparison with semiorthogonal decompositions as an
+  anticipated relationship.  Shared-cache PDF SHA-256:
+  `7a949edc17fe87f2af306dc663a95056e4636e8c312df09303c6f6f702afdc39`.
 - Franziska Bittner, *The universal Euler characteristic for varieties of
   characteristic zero*, arXiv:math/0111062, especially Theorem 3.1's
   presentation of `K_0(Var_k)` by smooth complete varieties and blow-up
@@ -855,6 +948,28 @@ global irregular-Hodge/Rees/Stokes compatibility.
   deformation invariance for non-degenerate functions; they do not establish
   filtered quantum blow-up compatibility.  Shared-cache PDF SHA-256:
   `95b699eb50c830dea8b5b6241bcc4450e1be8c72b50f20350741101b9efed6f5`.
+- Thomas Reichelt and Christian Sevenheck, *Hypergeometric Hodge modules*,
+  arXiv:1503.01004, especially Theorem 6.6 on the reduced quantum `D`-module
+  of a nef complete intersection in a toric variety.  It applies to
+  `(P^4,O(3))`.  Shared-cache PDF SHA-256:
+  `1bb0f17b52203927e8bd536c706f2f871b7bee59fd35196d987d2ef6284541e8`.
+- Alberto Castaño Domínguez, Thomas Reichelt, and Christian Sevenheck,
+  *Examples of hypergeometric twistor D-modules*, arXiv:1803.04886,
+  especially Proposition 5.2 and Theorem 5.7 on irreducibility, parameter
+  shifts, and the IrrMHM upgrade.  Shared-cache PDF SHA-256:
+  `134b742e3d698d1ecd6d9b6eca4dafd6f59fe264ae8e21aa0e46fb6f7fa991f5`.
+- Takahiro Saito, *The Hodge filtration of a monodromic mixed Hodge module and
+  the irregular Hodge filtration*, arXiv:2204.13381, especially Theorems
+  1.1, 1.4, and 1.5.  These control Fourier--Laplace transforms once a
+  monodromic mixed-Hodge input is given; they do not construct the arbitrary
+  master-space quantum input.  Shared-cache PDF SHA-256:
+  `59e2c7e55867f6abc0e3ce54f2ac9cfdf2b02225d43e4a492a54ad04070ad65e`.
+- Haoxu Wang, *Compactification Independence of the Irregular Hodge Filtration
+  on Deligne--Mumford Stacks*, arXiv:2608.06234, especially Theorems 1.1 and
+  4.11.  These give filtered comparison under boundary blow-ups of a fixed
+  Landau--Ginzburg model, not Iritani's additive A-model blow-up formula.
+  Shared-cache PDF SHA-256:
+  `6a3343410d2f4e9867d19fde778dd541867b579187393f4922d3202a84bd34fa`.
 - Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
   Nicolas Perrin, *An atomic criterion for irrationality without quantum
   computations*, arXiv:2607.26718v1, especially Section 2 on atoms of
@@ -890,13 +1005,19 @@ global irregular-Hodge/Rees/Stokes compatibility.
   filtered quantum realization of that ledger.  The `P^1` mutation calculation
   simultaneously proves that Euler and Serre data do not select the exceptional
   flag; its canonical monodromy-weight line is a third line.
-- **Open, with a named candidate category:** irregular mixed Hodge modules have
-  canonical-up-to-shift filtrations in the rigid locally formally unitary case,
-  strict projective pushforward, and Thom--Sebastiani.  Evidence gap: the local
-  cubic Levelt--Turrittin block and Iritani blow-up map have not been lifted to
-  this category, and arbitrary weak-factorization centers have no functorial
-  exponential-Hodge realization.  Qin--Zhang's numerical theorem does not
-  supply that lift.
+- **Settled globally and corrected locally:** the full reduced ambient cubic
+  quantum module is the irreducible hypergeometric module
+  `H(0,0,0,0;1/3,2/3)` and underlies an irregular mixed Hodge module.  Cai's
+  local formal ranks are `1,1,2`; irreducibility therefore rules out the
+  rank-two block as a proper global subobject.  The corrected target is its
+  sectorial Stokes-graded realization inside the full rank-four object.
+- **Open, with an exact near-miss:** Wang proves filtered compactification
+  independence through boundary-admissible blow-ups for one fixed
+  Landau--Ginzburg pair.  An A-model target blow-up instead adds center modules.
+  No audited theorem identifies Iritani's master-space Fourier projections
+  with a Stokes filtration, gives arbitrary centers a functorial
+  exponential-Hodge realization, or proves strict compatibility with the
+  irregular Hodge filtration.
 - **Open target:** preserve the cubic-isotypic
   unipotent Serre block.  Its endpoint length is `m+1`, while every
   self-carrier length is `m-1`; the conditional arbitrary-center width formula

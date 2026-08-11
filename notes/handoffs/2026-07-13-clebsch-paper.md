@@ -86,11 +86,17 @@ lattices through weak factorization, together with the analytic Stokes gluing.
 The associated-graded composition itself now passes the transverse and nested
 two-step blow-up exchanges.  Mutation on `D^b(P^1)` shows why that is not
 enough: Euler and Serre data remain unchanged while the exceptional flag
-changes, and the canonical monodromy-weight line is a third line.  Irregular
-mixed Hodge modules supply strict projective pushforward,
-canonical-up-to-shift filtrations in the rigid locally formally unitary case,
-and Thom--Sebastiani; the highest-EV remaining theorem is to lift Cai's local
-block and Iritani's blow-up map functorially into that filtered category.
+changes, and the canonical monodromy-weight line is a third line.  The full
+reduced ambient cubic quantum module is now identified as the irreducible
+irregular-Hodge hypergeometric module `H(0,0,0,0;1/3,2/3)`.  This rules out
+globalizing Cai's local rank-two block as a proper subobject: it must instead
+be a sectorial Stokes-graded piece of the full rank-four object.  Wang's
+compactification-independence theorem gives the desired filtered blow-up
+coherence for compactifications of one fixed Landau--Ginzburg pair, but not
+for an A-model target blow-up that adds center modules.  The highest-EV
+remaining theorem is therefore a strict irregular-Hodge-compatible Stokes
+filtration realizing Iritani's master-space Fourier projections and composing
+through weak factorization.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
