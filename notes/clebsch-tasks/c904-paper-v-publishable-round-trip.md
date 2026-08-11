@@ -546,13 +546,18 @@ input.
   or a local--global theorem for the identified two-obstruction.
 
 - **Rational simple connectedness of the charge-three fibre as a direct
-  section theorem:** dead.  The generic Abel--Jacobi fibre is over the
-  five-variable field `k(J)`, whereas the available de Jong--He--Starr
-  theorem is a surface-base result and additionally requires a relative
-  ample line, rationally connected evaluation fibres for fixed-length chains,
-  and a very twisting surface.  Voisin and the Bridgeland-moduli results prove
-  rational connectedness/Fano, not those hypotheses.  Surface slices cannot
-  produce a point over `k(J)`.
+  section theorem:** not dimensionally dead, but not presently licensed.
+  After expanding the relative minimal cycle, each required lift is over a
+  surface field `C(S_i)`, so the de Jong--He--Starr surface theorem would be
+  applicable if one proved a relative ample line, rationally connected
+  evaluation fibres for fixed-length free-line chains, and a very twisting
+  surface.  Voisin and the available moduli results prove geometric rational
+  connectedness or unirationality, not those uniform arithmetic hypotheses.
+  HRS's geometric unirationality proof starts by choosing a curve in the
+  fibre and is circular for a `C(S_i)`-point.  Moreover the charge-two
+  degree-five channel on every general support is now proved to have exact
+  index two, so any successful RSC resurrection must use genuinely new
+  charge-three geometry rather than that inherited conic.
 
 - **Axis or non-axis elliptic supports for the primitive minimal class:**
   dead exactly on the generic non-CM exotic fivefold.  The subgroup generated
@@ -596,6 +601,44 @@ direct frontier.  See
 `notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
 `notes/2026-08-11-c904-symmetric-theta-full-kunneth-parity.md`.  No
 manuscript or Lean source changed.
+
+The residual-monodromy and first componentwise arithmetic tests are now
+closed as well.  The individual `(1,5)` Lefschetz cokernel has no `C3` fixed
+vectors, but the load-bearing mixed tensor has a fifty-dimensional invariant
+space and contains the odd identity contraction; the `(2,4)` invariant space
+has dimension 776 and also contains odd contractions.  Thus the residual
+`C3`, invariant-cycle, and Franchetta routes are **dead** as parity
+obstructions.  The rational `(1,5)` inverse-Lefschetz correspondence is
+algebraic by the standard abelian inverse-Lefschetz cycle; only its integral
+or two-local lift is missing.  The bare integral symplectic Lefschetz
+cokernel is prior art, so the new question begins with the theta resolution
+and its integral Chow lift.  See
+`notes/2026-08-11-c904-c3-kunneth-descent-boundary.md` and
+`notes/2026-08-11-c904-relative-invariant-cycle-franchetta-audit.md`.
+
+For the existing signed divisor presentation of the relative minimal cycle,
+one may choose all four-divisor support surfaces simultaneously general.
+After normalizing `D_+` in the ordered-pair quadratic field, their ample cuts
+remain ample; iterated Lefschetz connectedness therefore keeps the ordering
+double cover connected on every boundary curve.  The inherited charge-two
+Brauer residue is nonzero on every support field, so every fixed-line,
+Hecke, or type-`(5,1)` liaison conic there has exact index two.  This makes
+that **componentwise degree-five lift dead**, not merely unproved.  It does
+not decide the intrinsic charge-three fibre, a coupled correspondence, or
+all possible presentations.  See
+`notes/2026-08-11-c904-ample-cut-charge-two-index.md`.
+
+Finally, every canonical decomposable `(1,5)` candidate is now dead.  For a
+class of the form `P(S_1+S_2)`, an integral `A5`-horizontal scalar surface
+has coefficient divisible by six; on the actual invariant divisor-product
+lattice the coefficient ideal is `12 Z`.  In particular `c_2(T_M)` has
+coefficient 24 and even its hypothetical half has degree `-120`; `h^2/2`
+has coefficient 12, and exceptional surfaces contribute zero.  Hence the
+surviving direct gate is genuinely non-split: construct an integral
+inverse-Lefschetz `(1,5)` correspondence or a nonsplit `(2,4)` Chow
+projector, or prove their exact two-primary obstruction.  See
+`notes/2026-08-11-c904-canonical-p15-tautological-parity.md`.  No manuscript
+or Lean source changed.
 
 ## Goal
 
