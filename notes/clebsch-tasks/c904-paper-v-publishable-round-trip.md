@@ -175,8 +175,10 @@ Python replay and a three-database bounded literature closure accompany the
 claim.  Uniformly, for `v_m=r[O]-m[O_L]`, the moduli similitude is
 `d_m=gcd(r,m)` and intrinsic one-line Hecke degrees are divisible by
 `e_m=r/d_m`, so `d_m e_m=r`.  The sole smooth-family crown is now an odd
-carrier intrinsic to the generic fourfold itself.  No manuscript or Lean
-source changed.
+carrier intrinsic to the generic fourfold itself.  The Hecke conic already
+gives a degree-two closed point on a proper compactified generic fibre, so
+its index divides two: the exact final dichotomy is `1` versus `2`.  No
+manuscript or Lean source changed.
 
 ## Goal
 

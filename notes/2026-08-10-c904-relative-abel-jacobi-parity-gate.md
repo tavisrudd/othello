@@ -53,7 +53,9 @@ quadric of degree two; the boundary normal on a geometric Hecke fibre is
 \(\mathcal O_{\mathbf P^1}(-2)\).  Moreover every
 universal-normalization-independent determinant line has even Hecke degree.
 Thus an odd carrier must be intrinsic to the generic fourfold, not inherited
-from the one-line boundary.
+from the one-line boundary.  The boundary nevertheless gives a degree-two
+closed point, so a smooth proper compactified generic fibre has index dividing
+two.  The final index problem is exactly the dichotomy \(1\) versus \(2\).
 
 One attractive odd workaround is now ruled out exactly.  The two
 twisted-cubic families lie over theta divisors.  Cutting
@@ -262,7 +264,9 @@ The next high-EV question is therefore sharper:
 
 An affirmative answer combines with the relative \([2]\) Fano-incidence
 cycle by Bezout.  The one-line construction itself can answer affirmatively
-only if the old charge-two Brauer class already splits.
+only if the old charge-two Brauer class already splits.  In every case it
+supplies a degree-two point on the compactified generic fibre, proving that
+the remaining lifting index divides two.
 
 ## 5. Exact no-go for all algebraic theta cuts
 

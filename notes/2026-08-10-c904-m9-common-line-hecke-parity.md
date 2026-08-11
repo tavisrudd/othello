@@ -101,6 +101,21 @@ Therefore
              =\operatorname{ind}(\alpha)\in\{1,2\}.
 \]
 
+In particular, once the Abel--Jacobi map is extended to the stable-sheaf
+compactification, any smooth proper model \(V/\mathbf C(J)\) of the generic
+charge-three fibre satisfies
+
+\[
+                         \operatorname{ind}(V)\mid2.
+\]
+
+Indeed a degree-two closed point of the Hecke conic is already a closed point
+of the compactified generic fibre; equivalently, after that quadratic field
+splits the conic, one quotient and one section give a reducible \((5,1)\)
+sextic.  Thus the relative lifting index has only two possibilities, one or
+two.  Determining which occurs still requires either splitting \(\alpha\) or
+finding a point away from the Hecke boundary.
+
 It follows that:
 
 - if \(\alpha=0\), a rational quotient \(q\in B_L(K)\), followed by three
@@ -491,6 +506,9 @@ another formulation of the universal-cycle gate, not a bypass.
 - Over a splitting field, one quotient ruling fibre has odd top degree one.
 - Over the generic field, the Hecke carrier has the same index as the
   charge-two Brauer class.
+- Subject to the standard compactified Abel--Jacobi extension, the generic
+  charge-three fourfold has index dividing two; the only possibilities are
+  one and two.
 - The same factor two holds for every elliptic one-line Serre carrier,
   regardless of charge.
 - Every universal-twist-independent determinant line on the odd-charge
