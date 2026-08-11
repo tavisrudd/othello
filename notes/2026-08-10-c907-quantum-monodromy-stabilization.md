@@ -68,6 +68,24 @@ structures, followed by strict composition through weak factorization.  That
 residual-center mutation-system comparison, rather than a new polynomial
 identity, is now the highest-EV theorem gate.
 
+The subsequent `T1/T2/T3` scoping pass sharpens this verdict.  Iritani's
+formula (5.28) gives a positive formal pilot: at `Q=theta=0`, its comparison is
+strict after taking the `t`-adic associated graded and then the
+exceptional-first dominance graded.  The point- and curve-center cases in a
+fivefold pass exactly.  But the Gamma lattice lives in analytic flat sections,
+and its exponential summands are obtained only after choosing a sector and an
+admissible phase; formal Levelt--Turrittin uniqueness does not make that
+analytic projection canonical.  The proposed Krull--Schmidt ledger also needs
+one repair: a plain free `C[[t]]`-module forgets block length.  Keeping the
+unipotent Serre operator makes a single Jordan block indecomposable, with local
+endomorphism order `C[[t]][N]/(N^ell)`.  Finally, arbitrary threefold blow-up
+centers are not exhausted by Fanos, conic bundles, and del Pezzo fibrations:
+smooth quintic and sextic threefolds in a hyperplane of `P^5` already give
+Calabi--Yau and general-type codimension-two centers.  Thus a Fano database
+sweep is useful reconnaissance but cannot prove `X x P^2` irrational.  The
+full program survives only with a formal **and** analytic/integral `T1`, the
+enriched `T2`, and `T3` for arbitrary smooth projective carriers.
+
 A second proposed refinement, the `p`-primary length of a global spectral
 cycle, does not survive audit in the published formalism.  The blow-up and
 projective-bundle theorems identify analytic germs with disjoint unions of
@@ -695,6 +713,112 @@ No theorem in the audited literature supplies this package.  The cubic
 endpoint and its local sectorial atom are closed; residual-center Stokes
 identification and functorial composition remain.
 
+### 5.8 `T1/T2/T3` scoping: one pilot passes, two shortcuts fail
+
+The proposed canonical invariant was the image of the Gamma lattice in the
+exponent-`+/-1/6` constituent, together with its Serre operator and `q`-adic
+bigrading.  This is not yet presentation-free.  Iritani defines the
+Gamma-integral structure as a lattice in the space of multivalued analytic
+flat sections.  The formal exponential decomposition has regular-singular
+pieces unique up to isomorphism, but its lift to flat sections uses an
+admissible direction and a sector.  The resulting semiorthogonal decomposition
+changes by Stokes mutations as the phase changes.  Therefore there is no
+intrinsic operation in the cited theory that simply takes the image of the
+Gamma lattice in one formal exponential factor.  Passing to `C[[q]]` removes
+convergence from a formal calculation; it does not identify that formal
+lattice with the analytic Gamma/Stokes lattice.
+
+There is, however, a genuine positive `T1` pilot.  At `Q=theta=0`, Iritani's
+equation (5.28) writes the comparison matrix as
+
+\[
+A+B,\qquad
+A=\begin{pmatrix}I&0\\ \iota^*&F\end{pmatrix},
+\qquad \operatorname{ord}_t(B)>0,
+\]
+
+where `F` is the invertible exceptional Fourier matrix.  Taking the `t`-adic
+associated graded kills `B`.  If the exceptional module is the first step of
+a two-step dominance filtration, the lower-left restriction block also dies
+on the associated graded.  What remains is exactly
+
+\[
+(F\otimes I_Z)\oplus I_X.
+\]
+
+The certificate checks this for every codimension `2 <= r <= 25`.  In the
+fivefold cases relevant to the proposed `m=2` pilot, a point center has `r=5`
+and raw `t`-valuations
+
+\[
+3,1,-1,-3,
+\]
+
+while a curve center has `r=4` and valuations
+
+\[
+1,0,-1.
+\]
+
+Thus the basepoint formal comparison is dominance-triangular and strict on its
+double associated graded.  This does not yet cover nonzero Novikov/big-quantum
+variables, composition, or the Gamma/Stokes lift.
+
+The proposed `T2` statement is false for plain modules.  Over
+`R=C[[t]]`, the module `R^ell` splits into `ell` rank-one modules, so its
+Krull--Schmidt multiset does not remember that one intended a length-`ell`
+Jordan block.  The correct object retains the unipotent Serre operator
+
+\[
+U_\ell=I+N_\ell.
+\]
+
+Its commutant is
+
+\[
+R[N_\ell]/(N_\ell^\ell),
+\]
+
+a local ring with unique maximal ideal `(t,N_ell)`.  Hence the enriched single
+block is indecomposable.  The certificate reconstructs the centralizer exactly
+through length `25`; the independent replay recomputes the full commutant in a
+representative bounded range.  A global telescoping ledger would follow only
+after `T1` supplies honest strict direct sums in a finite enriched category.
+It is not a consequence of Krull--Schmidt for plain `C[[t]]`-modules.
+
+The proposed `T3` silver reduction fails before any database sweep.  A smooth
+degree-`d` hypersurface
+
+\[
+V_d\subset\mathbf P^4\subset\mathbf P^5
+\]
+
+is a smooth codimension-two threefold blow-up center and has
+
+\[
+K_{V_d}=\mathcal O_{V_d}(d-5).
+\]
+
+Thus `V_5` is Calabi--Yau and `V_d` is of general type for `d>=6`.  Weak
+factorization does not restrict all centers to rationally connected Mori
+fibre spaces, and no audited minimal-factorization theorem removes these
+examples.  The Coates--Corti--Galkin--Kasprzyk Fano database may reveal or
+exclude Fano carriers, but it does not classify the possible threefold
+centers and cannot by itself yield the claimed theorem for `X x P^2`.
+
+The repaired gold architecture is consequently:
+
+1. prove the formal strict comparison suggested by (5.28) in general, and
+   separately lift it to the sectorial Gamma/Stokes category;
+2. apply Krull--Schmidt to the enriched filtered objects, not their underlying
+   free modules;
+3. prove the `+/-1/6` carrier-length bound for **every** smooth projective
+   carrier, beginning with Calabi--Yau and general-type threefolds.
+
+The third item remains the deep theorem.  Its sharp conjectural form, length at
+most `n-2` on an `n`-fold, is still consistent with every certificate in this
+report and is tight on `X x P^(n-3)`.
+
 ## 6. Spectral-cycle alternate attack: negative audit
 
 Along the particular diagonal Novikov loop used in the certificate, the cycle
@@ -920,6 +1044,21 @@ graded piece and its relative Rees lattice would already carry the obstruction.
 Formal `F`-bundle uniqueness and fixed-Landau--Ginzburg compactification
 independence do not determine even this restricted analytic Stokes datum.
 
+The current `T1/T2/T3` `ej`+`tt` closeout extracts the cheap generalization and
+tests the hidden hypotheses.  The point/curve strictness calculation does not
+use their dimensions: equation (5.28) gives the same double-graded result in
+every codimension, so the certificate now checks `2 <= r <= 25`.  Retaining
+`U=I+N` is the minimum extra structure that makes the endpoint length visible;
+discarding it makes the claimed Krull--Schmidt argument false.  The `tt`
+challenge asks what forces a threefold center to be a Mori fibre space.  Weak
+factorization supplies no such hypothesis, and the hyperplane hypersurface
+examples refute the proposed exhaustion immediately.  The Fano sweep is
+therefore not queued as a proof task.  The unexplained quantity is now cleaner:
+the maximal `+/-1/6`-isotypic enriched Jordan length on arbitrary Calabi--Yau
+and general-type threefolds.  This remains owned by active C907 rather than a
+new discovery-track item until the arbitrary-center bound acquires a viable
+mechanism or a counterexample.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -953,9 +1092,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 43,336 bytes;
-- independent replay: 17,574 bytes;
-- JSON certificate: 309,760 bytes.
+- Sage generator: 51,030 bytes;
+- independent replay: 21,303 bytes;
+- JSON certificate: 353,156 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -983,12 +1122,19 @@ irregular-Hodge/Rees/Stokes compatibility.
   PDF SHA-256:
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
 - Hiroshi Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555,
-  especially (5.11), (5.19), (5.27), Theorem 5.18, and Remark 1.5.  The
+  especially (5.11), (5.19), (5.27), (5.28), Theorem 5.18, and Remark 1.5.  The
   formulae give the exact local `q`-adic elementary divisors; the theorem
   preserves the connection and Poincaré pairing in the formal direct sum; the
   remark locates the missing Γ-integral/Stokes semiorthogonal compatibility.
   Shared-cache PDF SHA-256:
   `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
+- Hiroshi Iritani, *Gamma classes and quantum cohomology*, arXiv:2307.15938,
+  especially Sections 1.3, 2.4, and 3.3 and Conjecture 2.13.  The Gamma lattice
+  is defined in analytic flat sections; the exponential decomposition lifts
+  sectorially and yields a phase-dependent mutation system.  Birational
+  functoriality and the blow-up Riemann--Hilbert reconstruction are
+  conjectural at this level.  Shared-cache PDF SHA-256:
+  `462f2e0d6eff6315d9fcc2e0db78f95f14558d532d118e31b74f2270c2e0ab8a`.
 - Hiroshi Iritani, *Fourier analysis of equivariant quantum cohomology*,
   arXiv:2501.18849, especially Remark 57, which still presents the
   Γ-integral/Stokes comparison with semiorthogonal decompositions as an
@@ -1078,6 +1224,16 @@ irregular-Hodge/Rees/Stokes compatibility.
   preserves it.  What is open is whether these relative lattices descend to a
   presentation-independent filtered quantum object respected by composed
   blow-up and projective-bundle isomorphisms.
+- **New positive `T1` pilot:** Iritani (5.28) is strict at `Q=theta=0` after
+  the `t`-adic and exceptional-first dominance associated gradeds.  The
+  fivefold point and curve cases pass exactly, and the certificate extends the
+  same block argument through codimension 25.  Mystery: whether this persists
+  over the full parameter space and lifts to the analytic Gamma/Stokes lattice.
+- **New `T2` correction:** plain `C[[t]]`-modules do not remember block length.
+  The enriched pair `(R^ell,I+N_ell)` is indecomposable because its endomorphism
+  order `R[N]/(N^ell)` is local.  Mystery: whether the full filtered
+  Gamma/Stokes category produced by `T1` has the finite, strict direct-sum
+  structure needed for a global Krull--Schmidt telescope.
 - **Settled for the first composition relations:** the associated-graded Tate
   polynomial is identical under transverse and nested two-step blow-up order
   exchanges, and Bittner's presentation makes the abstract motivic blow-up
@@ -1119,6 +1275,12 @@ irregular-Hodge/Rees/Stokes compatibility.
   enhancement that prevents the `m+1` projective summands from being
   distributed among centers and a restricted fractional-Calabi--Yau carrier
   inequality.  General Serre-dimension monotonicity is false.
+- **Settled negatively for the proposed silver shortcut:** arbitrary
+  threefold centers are not exhausted by Fano, conic-bundle, and del Pezzo
+  cases.  Quintic and sextic threefolds inside `P^4` inside `P^5` give
+  Calabi--Yau and general-type smooth centers.  A Fano database sweep remains
+  useful reconnaissance but cannot prove `X x P^2` irrational.  Mystery: the
+  `+/-1/6` carrier length for Calabi--Yau and general-type threefolds.
 - **Settled negatively at the present formal level:** `p`-primary
   spectral-cycle length is not part of the local analytic-germ invariant used
   by the cited blow-up and projective-bundle theorems.  Prime-power

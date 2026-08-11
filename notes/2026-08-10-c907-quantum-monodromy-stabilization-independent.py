@@ -261,6 +261,78 @@ def main():
         assert check["sector_monodromy_permutation"] == list(range(1, n)) + [0]
         assert check["monodromy_preserves_elementary_divisor_multiset"]
 
+    strictness = certificate["iritani_basepoint_dominance_strictness_pilot"]
+    for check in strictness["checks"]:
+        codimension = check["center_codimension_r"]
+        n = codimension - 1
+        s = n if codimension % 2 == 0 else 2 * n
+        raw = [
+            sp.Rational(s * (codimension - 2 * column - 2), 2 * n)
+            for column in range(n)
+        ]
+        assert check["exceptional_copy_count"] == n
+        assert check["raw_t_valuations_by_exceptional_column"] == [
+            int(value) for value in raw
+        ]
+        assert check["fourier_matrix_invertible"]
+        assert check["leading_matrix_invertible"]
+        assert check["exceptional_first_filtration_preserved"]
+        assert check["restriction_block_dies_on_associated_graded"]
+        assert check["positive_t_order_error_dies_on_t_associated_graded"]
+        assert check["scope"].startswith("formal basepoint")
+    assert strictness["fivefold_point_center"]["center_codimension_r"] == 5
+    assert strictness["fivefold_point_center"][
+        "raw_t_valuations_by_exceptional_column"
+    ] == [3, 1, -1, -3]
+    assert strictness["fivefold_curve_center"]["center_codimension_r"] == 4
+    assert strictness["fivefold_curve_center"][
+        "raw_t_valuations_by_exceptional_column"
+    ] == [1, 0, -1]
+
+    enriched = certificate["repaired_enriched_krull_schmidt_pilot"]
+    for check in enriched["checks"]:
+        length = check["block_length"]
+        nilpotent = sp.zeros(length)
+        for index in range(length - 1):
+            nilpotent[index, index + 1] = 1
+        powers = [nilpotent**power for power in range(length)]
+        assert nilpotent**length == sp.zeros(length)
+        assert all(power * nilpotent == nilpotent * power for power in powers)
+        flattened = sp.Matrix.hstack(
+            *[sp.Matrix(power).reshape(length**2, 1) for power in powers]
+        )
+        assert flattened.rank() == length
+        # Independently recompute the full commutant in a representative bounded
+        # range; the general Jordan-centralizer recurrence is recorded in the report.
+        if length <= 6:
+            columns = []
+            for row in range(length):
+                for column in range(length):
+                    elementary = sp.zeros(length)
+                    elementary[row, column] = 1
+                    commutator = elementary * nilpotent - nilpotent * elementary
+                    columns.append(commutator.reshape(length**2, 1))
+            operator = sp.Matrix.hstack(*columns)
+            assert length**2 - operator.rank() == length
+        assert check["centralizer_dimension_over_fraction_field"] == length
+        assert check["plain_module_indecomposable"] == (length == 1)
+        assert check["endomorphism_order_is_local"]
+        assert check["enriched_object_indecomposable"]
+
+    silver = certificate["threefold_carrier_silver_audit"]
+    assert silver["ambient_dimension_for_m2"] == 5
+    assert silver["weak_factorization_center_dimension_bound"] == 3
+    quintic, sextic = silver["examples"]
+    assert quintic["dimension"] == sextic["dimension"] == 3
+    assert quintic["codimension_in_P5"] == sextic["codimension_in_P5"] == 2
+    assert quintic["canonical_bundle"] == "O_V(0)"
+    assert quintic["birational_type"] == "Calabi-Yau"
+    assert sextic["canonical_bundle"] == "O_V(1)"
+    assert sextic["birational_type"] == "general type"
+    assert not quintic["is_fano"] and not sextic["is_fano"]
+    assert quintic["is_legitimate_smooth_blowup_center"]
+    assert sextic["is_legitimate_smooth_blowup_center"]
+
     composition = certificate["two_step_tate_composition"]
 
     def blowup_polynomial(codimension):
@@ -380,6 +452,8 @@ def main():
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
         f"Iritani q-adic lattice checks through r={len(q_adic['checks'])+1}, "
+        f"basepoint strictness checks through r={len(strictness['checks'])+1}, "
+        f"enriched Jordan checks through length={len(enriched['checks'])}, "
         f"two-step Tate checks ({nested_count} nested, {transverse_count} transverse), "
         f"spectral-cycle checks m=2..{len(spectral_checks)+1}, "
         f"prime-power tower checks through n={len(projective_checks)}"

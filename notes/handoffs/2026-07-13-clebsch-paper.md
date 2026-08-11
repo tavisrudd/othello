@@ -100,6 +100,21 @@ residual Stokes structures with the center quantum modules open; formal
 do not add that analytic datum.  The highest-EV remaining theorem is therefore
 the residual-center mutation-system identification, strict for irregular
 Hodge filtrations and composable through weak factorization.
+The subsequent `T1/T2/T3` scoping pass proves a narrower positive result and
+removes two shortcuts.  Iritani (5.28) is formally strict at `Q=theta=0` on the
+double associated graded: the positive-`t` error and lower-left restriction
+block die, leaving `(F tensor I_Z) direct_sum I_X`; the fivefold point and curve
+pilots pass exactly.  This does not canonically project the Gamma lattice,
+which lives in analytic flat sections and has a sectorial, phase-dependent
+Stokes splitting.  A plain `C[[t]]` Krull--Schmidt ledger also forgets block
+length; the repaired enriched block retains `U=I+N` and is indecomposable
+because its endomorphism order `C[[t]][N]/(N^ell)` is local.  Finally, the
+proposed Fano-threefold database route cannot prove the `m=2` case: arbitrary
+threefold centers include Calabi--Yau quintics and general-type sextics inside
+`P^4` inside `P^5`.  The database is reconnaissance only.  The live gold
+architecture now requires both the analytic/integral `T1` lift and an
+arbitrary-center `+/-1/6` length bound; the next bounded target is the latter
+for Calabi--Yau and general-type threefold carriers.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

@@ -58,6 +58,22 @@ corrected highest-EV gate is therefore the residual-center mutation-system
 identification, strict for the irregular Hodge filtration and composable
 through weak factorization.
 
+The `T1/T2/T3` scoping pass now gives a calibrated split.  `T1` passes at the
+formal basepoint: Iritani (5.28) becomes `(F tensor I_Z) direct_sum I_X` after
+the `t`-adic and exceptional-first dominance associated gradeds, including the
+fivefold point- and curve-center pilots.  It does not remove the analytic wall:
+the Gamma lattice is a lattice in flat sections and its exponential splitting
+is sectorial and phase-dependent.  `T2` is false for plain `C[[t]]`-modules,
+which split into rank-one summands and forget block length; retaining the
+unipotent Serre operator repairs the local ledger because
+`C[[t]][N]/(N^ell)` is local.  `T3` remains the deep arbitrary-center theorem.
+The proposed Fano-database proof of the `m=2` silver target is invalid as an
+exhaustion: smooth quintic and sextic threefolds in `P^4` inside `P^5` are
+legitimate Calabi--Yau and general-type codimension-two centers.  Database work
+is reconnaissance only.  The next high-EV pass is to prove or refute the
+`+/-1/6` length bound for Calabi--Yau and general-type threefold carriers while
+keeping the analytic Gamma/Stokes lift as a separate `T1` gate.
+
 ## Goal
 
 Test whether Cai's formal-monodromy obstruction for cubic threefolds can be

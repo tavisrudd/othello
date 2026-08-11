@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v9"
+SCHEMA = "c907-quantum-monodromy-stabilization-v10"
 
 
 def matrix_strings(M):
@@ -662,6 +662,149 @@ def iritani_q_adic_lattice_check(r):
     }
 
 
+def iritani_dominance_strictness_pilot(r):
+    """Leading double-graded form of Iritani's comparison at Q=theta=0.
+
+    Formula (5.28) has a block-lower-triangular leading matrix A and an error
+    B of positive t-order.  We use a rank-two test module for both X and Z;
+    the ranks do not affect the Fourier or filtration argument.
+    """
+    assert r >= 2
+    n = r - 1
+    x_rank = 2
+    z_rank = 2
+    if n == 1:
+        field = QQ
+        zeta = field(1)
+    else:
+        field = CyclotomicField(n)
+        zeta = field.gen()
+    fourier = matrix(
+        field,
+        n,
+        n,
+        lambda j, l: zeta ** (-j * (l + 1)),
+    )
+    assert fourier.is_invertible()
+    exceptional = fourier.tensor_product(identity_matrix(field, z_rank))
+
+    # A harmless exact representative of the restriction block iota^*.  Its
+    # value disappears from both pieces of the dominance associated graded.
+    restriction = matrix(
+        field,
+        n * z_rank,
+        x_rank,
+        lambda i, j: (i + 1) * (j + 1),
+    )
+    leading = block_matrix(
+        field,
+        [
+            [identity_matrix(field, x_rank), matrix(field, x_rank, n * z_rank)],
+            [restriction, exceptional],
+        ],
+    )
+    assert leading.is_invertible()
+    assert leading.det() == exceptional.det()
+
+    # Put the exceptional submodule first in a two-step filtration.  It maps
+    # into the residual submodule by F tensor I; on the quotient, A is I.
+    assert leading[:x_rank, x_rank:] == 0
+    assert leading[:x_rank, :x_rank] == identity_matrix(field, x_rank)
+    assert leading[x_rank:, x_rank:] == exceptional
+
+    s = n if r % 2 == 0 else 2 * n
+    raw_valuations = [
+        QQ(s * (r - 2 * l - 2)) / (2 * (r - 1))
+        for l in range(n)
+    ]
+    return {
+        "center_codimension_r": r,
+        "exceptional_copy_count": n,
+        "test_ranks": {"X": x_rank, "Z": z_rank},
+        "source_formula": "Iritani (5.28): comparison=A+B with ord_t(B)>0",
+        "leading_block_form": "[[I,0],[iota^*,F tensor I_Z]]",
+        "fourier_matrix_invertible": True,
+        "leading_matrix_invertible": True,
+        "exceptional_first_filtration_preserved": True,
+        "dominance_associated_graded": "(F tensor I_Z) direct_sum I_X",
+        "restriction_block_dies_on_associated_graded": True,
+        "positive_t_order_error_dies_on_t_associated_graded": True,
+        "raw_t_valuations_by_exceptional_column": [int(value) for value in raw_valuations],
+        "scope": "formal basepoint Q=theta=0; no Gamma/Stokes or composition claim",
+    }
+
+
+def enriched_jordan_indecomposability_check(length):
+    """Exact linear algebra behind the repaired Krull--Schmidt ledger."""
+    assert length >= 1
+    nilpotent = matrix(QQ, length, length)
+    for i in range(length - 1):
+        nilpotent[i, i + 1] = 1
+    assert nilpotent**length == 0
+    if length > 1:
+        assert nilpotent ** (length - 1) != 0
+
+    matrix_space = MatrixSpace(QQ, length)
+    basis = matrix_space.basis()
+    commutator_columns = [
+        vector(QQ, (E * nilpotent - nilpotent * E).list())
+        for E in basis
+    ]
+    commutator = matrix(QQ, commutator_columns).transpose()
+    centralizer_dimension = commutator.right_kernel().dimension()
+    powers = [nilpotent**j for j in range(length)]
+    power_matrix = matrix(QQ, [vector(QQ, power.list()) for power in powers])
+    assert power_matrix.rank() == length
+    assert all(power * nilpotent == nilpotent * power for power in powers)
+    assert centralizer_dimension == length
+
+    return {
+        "block_length": length,
+        "plain_C_power_series_module": f"C[[t]]^{length}",
+        "plain_module_indecomposable": length == 1,
+        "plain_module_warning": (
+            "For length>1 the free module splits into rank-one modules and forgets block length."
+        ),
+        "enrichment": "U=I+N with N one nilpotent Jordan block",
+        "nilpotence_index": length,
+        "centralizer_dimension_over_fraction_field": centralizer_dimension,
+        "centralizer_basis": "I,N,...,N^(length-1)",
+        "endomorphism_order": "C[[t]][N]/(N^length)",
+        "unique_maximal_ideal": "(t,N)",
+        "endomorphism_order_is_local": True,
+        "enriched_object_indecomposable": True,
+    }
+
+
+def threefold_center_classification_countercheck():
+    """Refute a Fano/conic/del-Pezzo exhaustion of possible 5-fold centers."""
+    examples = []
+    for degree in [5, 6]:
+        canonical_coefficient = degree - 5
+        examples.append(
+            {
+                "model": f"smooth V_{degree} in P^4 in P^5",
+                "dimension": 3,
+                "codimension_in_P5": 2,
+                "canonical_bundle": f"O_V({canonical_coefficient})",
+                "birational_type": "Calabi-Yau" if degree == 5 else "general type",
+                "is_fano": False,
+                "is_legitimate_smooth_blowup_center": True,
+            }
+        )
+    assert examples[0]["canonical_bundle"] == "O_V(0)"
+    assert examples[1]["canonical_bundle"] == "O_V(1)"
+    return {
+        "ambient_dimension_for_m2": 5,
+        "weak_factorization_center_dimension_bound": 3,
+        "examples": examples,
+        "conclusion": (
+            "Threefold centers are not exhausted by Fanos, conic bundles, or del Pezzo fibrations; "
+            "a Fano quantum-period database sweep is reconnaissance, not a proof of X x P^2 irrationality."
+        ),
+    }
+
+
 def spectral_cycle_self_carrier_check(m):
     endpoint_cycle = m + 1
     reproducing_t = [
@@ -757,7 +900,24 @@ def build_certificate(bound):
             "paper": "Hiroshi Iritani, Quantum cohomology of blowups",
             "arxiv": "2307.13555",
             "cached_pdf_sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
-            "formulae": ["(5.11)", "(5.19)", "(5.27)", "Theorem 5.18", "Remark 1.5"],
+            "formulae": [
+                "(5.11)",
+                "(5.19)",
+                "(5.27)",
+                "(5.28)",
+                "Theorem 5.18",
+                "Remark 1.5",
+            ],
+        },
+        "gamma_structure_source": {
+            "paper": "Hiroshi Iritani, Gamma classes and quantum cohomology",
+            "arxiv": "2307.15938",
+            "cached_pdf_sha256": "462f2e0d6eff6315d9fcc2e0db78f95f14558d532d118e31b74f2270c2e0ab8a",
+            "results": ["Section 1.3", "Section 2.4", "Conjecture 2.13", "Section 3.3"],
+            "audit_boundary": (
+                "The Gamma lattice lives in analytic flat sections; projecting it to exponential "
+                "pieces uses a sectorial lift depending on an admissible phase."
+            ),
         },
         "composition_source": {
             "paper": (
@@ -978,6 +1138,31 @@ def build_certificate(bound):
                 "Remark 1.5 separately leaves the general analytic Stokes/Gamma compatibility conjectural."
             ),
         },
+        "iritani_basepoint_dominance_strictness_pilot": {
+            "status": (
+                "Positive formal pilot. At Q=theta=0, Iritani (5.28) is strict after first "
+                "taking the t-associated graded and then the exceptional-first dominance graded. "
+                "This is not the analytic Gamma/Stokes comparison."
+            ),
+            "checked_center_codimension_range": [2, bound + 1],
+            "checks": [iritani_dominance_strictness_pilot(r) for r in range(2, bound + 2)],
+            "fivefold_point_center": iritani_dominance_strictness_pilot(5),
+            "fivefold_curve_center": iritani_dominance_strictness_pilot(4),
+        },
+        "repaired_enriched_krull_schmidt_pilot": {
+            "status": (
+                "The proposed plain C[[t]]-module ledger is false: a free module forgets Jordan "
+                "block length. Retaining U=I+N repairs the local indecomposable. Its endomorphism "
+                "order is the local ring C[[t]][N]/(N^ell), so the single block is indecomposable."
+            ),
+            "checked_block_length_range": [1, bound + 1],
+            "checks": [enriched_jordan_indecomposability_check(length) for length in range(1, bound + 2)],
+            "remaining_global_requirement": (
+                "T1 must produce strict direct sums and finite endomorphism orders in the full "
+                "filtered Gamma/Stokes category before a telescoping Krull-Schmidt ledger follows."
+            ),
+        },
+        "threefold_carrier_silver_audit": threefold_center_classification_countercheck(),
         "two_step_tate_composition": two_step_tate_composition_certificate(bound),
         "candidate_spectral_cycle_refinement": {
             "status": (
