@@ -1,0 +1,4 @@
+C904 graph-gluing minimal-class defect replay
+p=2 g=3 ns_rank=6 product_rank=6 monomials=21 minimal_order=2
+p=3 g=4 ns_rank=10 product_rank=10 monomials=220 minimal_order=3
+PASS

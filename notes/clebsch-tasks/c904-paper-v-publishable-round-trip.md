@@ -127,7 +127,7 @@ elliptic monodromy $S_3$ to $C_3$; on the actual principal homology lattice
 the order-three generator satisfies $M^2+M+I=0$ modulo two and hence has no
 fixed vector on $J[2]$.  Every symmetric-line-bundle torsor therefore has a
 unique invariant quadratic refinement.  Exact Sage and independent
-Fraction/SymPy certificates verify this for all fifteen Neron--Severi
+Fraction/SymPy certificates verify this for all fifteen Néron--Severi
 generators and all $2^{10}$ points.  Thus the primitive relative class
 $\Theta^4/4!$ exists on the present smooth exotic marked base without any
 additional cover.  The four cusp widths become $2,2,6,6$ on this cover, so
@@ -292,7 +292,28 @@ that the Weyl ppavs, \(X_0(N)\), elliptic-product decomposition, IHC, and
 minimal-class algebraicity are prior art; the likely new crown is the
 **primitive integral divisor-product saturation**, not those consequences.
 The exotic \(\mathbf F_4\) cubic gluing is non-scalar and remains a genuine
-exception rather than an instance of the theorem.
+positive exception rather than an instance of the theorem.
+
+The subsequent arbitrary-gluing pass now gives the positive/negative boundary
+exactly.  A literal power \(E^g\) has primitive divisor-product saturation for
+every principal polarization.  For a quotient of the source polarization
+\(pI_g\) by an arbitrary maximal isotropic subgroup, the minimal-class defect
+has no prime-to-\(p\) part and divides
+\(p^{v_p((g-1)!)}\); hence every such gluing is primitive for \(p\ge g\).
+More generally, an arbitrary isogeny of degree \(D\) has defect supported only
+at primes dividing both \(D\) and \((g-1)!\), so coprime-degree isogenies
+preserve primitive saturation.
+Small-prime defects genuinely occur: an explicit dyadic graph gluing in
+dimension three has exact defect two, and an explicit ternary graph gluing in
+dimension four has exact defect three.  Complete bounded censuses give
+`72/63` primitive/defective dyadic gluings in dimension three and `963/1332`
+in dimension four.  The obstruction is the internal divided-power Bockstein
+of the integral Lefschetz subring, not an Arf invariant or ordinary ambient
+Steenrod square.  Thus “all arbitrary gluings are primitive” is dead; the
+live Annals-scale successor is the prime-by-prime classification of this
+Bockstein and its higher-power layers.  See
+`notes/2026-08-11-c904-prime-gluing-divided-power-obstruction.md` and
+`notes/2026-08-11-c904-integral-lefsche-gluing-defects.md`.
 
 The same pass packages the five marked principal halves as a complete Hecke
 packet.  Its discriminant geometry is
@@ -300,7 +321,7 @@ packet.  Its discriminant geometry is
 \(A_5\) sheets, with every edge a primitive multiplier-four neighbor and
 Smith kernel \((\mathbf Z/2)^2\oplus(\mathbf Z/4)^4\).  On the common marking
 cover the four cusp widths are \(2,2,6,6\); the isogeny extends canonically as
-a polarized log one-motive of degree \(2^{10}\), while the ordinary Neron
+a polarized log one-motive of degree \(2^{10}\), while the ordinary Néron
 special kernel jumps from \(1024\) to \(64\), proving that no global ordinary
 finite-flat kernel exists.  The direct conic--Prym cylinder is closed
 negatively: principal Prym polarization contributes an unavoidable factor
@@ -327,7 +348,7 @@ The midnight closeout replaces the last unstructured charge-three curve by
 an exact finite packet.  For a general charge-three bundle \(E\), the
 normalization of the generic curve \(D_{3,3,E}\) is birational to a
 projective-line bundle over the finite scheme \(R_{3,3}(E)\) of factorable
-quadrics in the Pluecker wedge system
+quadrics in the Plücker wedge system
 
 \[
  \bigwedge^2H^0(X,E)\longrightarrow H^0(X,{\cal O}_X(2)).
@@ -391,7 +412,7 @@ input.
   \(g\)-fold gives scalar \(\binom{g-1}{d-1}\); in dimension five every
   proper intermediate carrier is even.  This is the Pascal-parity wall.
 - **Natural Fano, genus-two, and divisor-generated theta carriers:** dead at
-  the odd gate.  Saturating the full natural Neron--Severi lattices does not
+  the odd gate.  Saturating the full natural Néron--Severi lattices does not
   break parity; the genus-two surfaces have restricted polarization type
   \((2,2)\), and the exact theta-resolution relation is \(2a=z+\ell\).
 - **Numerical ordered-pair tests:** insufficient in principle.  The unique odd
@@ -468,7 +489,7 @@ input.
 
 - **Base-field Brauer obstruction on the unordered-theta fibre:** dead.  Over
   the universal field \(K=k(J)\), the invariant Picard lattice of the generic
-  quotient has only the doubled Neron--Severi part and the cover character,
+  quotient has only the doubled Néron--Severi part and the cover character,
   and both descend.  Hochschild--Serre therefore makes
   \(\operatorname{Br}(K)\to\operatorname{Br}(K(Y))\) injective.  In
   particular the charge-two class cannot decide \(\operatorname{ind}(Y)\).
@@ -481,6 +502,18 @@ input.
   graph in the stable semiabelic model.  Even a special or henselian index-one
   point would not lift to the global surface field without a horizontal cycle
   or a local--global theorem for the identified two-obstruction.
+
+- **Axis or non-axis elliptic supports for the primitive minimal class:**
+  dead exactly on the generic non-CM exotic fivefold.  The subgroup generated
+  by every elliptic curve has quotient \((\mathbf Z/2)^6\) in the integral
+  Hodge one-cycle lattice, and \(c=\Theta^4/4!\) has exact order two in that
+  quotient.  The 121 short rational coefficient lines already generate the
+  full two-integral sublattice, while the no-eigenline theorem covers every
+  remaining rational line.  Even perfect `M9` or unordered-theta lifts of all
+  elliptic supports cannot repair the missing class.  The sharp residue is an
+  explicit nineteen-term elliptic expression for \(2c\); only exceptional CM
+  fibres remain outside the theorem.  See
+  `notes/2026-08-11-c904-nonaxis-elliptic-support-audit.md`.
 
 The fixed-fibre \(D_{3,3}/\operatorname{Sym}^2\Theta\) index-one carrier is now
 closed by the unordered Fano lift and the `2/5` B\'ezout argument.  The sole

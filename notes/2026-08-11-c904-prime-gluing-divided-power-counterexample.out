@@ -1,0 +1,7 @@
+C904 p=3 g=4 divided-power counterexample
+commutator_rank_mod_3=5
+ns_congruence_index=3^5
+triple_products_checked=220
+functional_on_products=0
+functional_on_minimal_class=1
+minimal_class_not_in_integral_divisor_product_lattice=PASS

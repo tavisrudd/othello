@@ -1,0 +1,32 @@
+C904 arbitrary Lagrangian minimal-class bounded census
+case p=2 g=2 lagrangians=15
+  ns_rank=3 product_rank=3 monomials=3 minimal_order=1 count=15
+case p=2 g=3 lagrangians=135
+  ns_rank=6 product_rank=6 monomials=21 minimal_order=1 count=72
+  ns_rank=6 product_rank=6 monomials=21 minimal_order=2 count=63
+  ns_smith_histogram
+    smith=(1, 2, 2, 2, 4, 4) minimal_order=1 count=9
+    smith=(2, 2, 2, 2, 2, 2) minimal_order=1 count=3
+    smith=(2, 2, 2, 2, 4, 4) minimal_order=1 count=24
+    smith=(2, 2, 2, 2, 4, 4) minimal_order=2 count=9
+    smith=(2, 2, 2, 4, 4, 4) minimal_order=1 count=36
+    smith=(2, 2, 2, 4, 4, 4) minimal_order=2 count=54
+  ns_mod2_signatures=4 mixed_order_signatures=1
+  diagonal_S3_times_GL2_orbits=11 order_orbit_histogram={'1': 7, '2': 4}
+  elementary_relative_position_types=42
+case p=3 g=2 lagrangians=40
+  ns_rank=3 product_rank=3 monomials=3 minimal_order=1 count=40
+case p=3 g=3 lagrangians=1120
+  ns_rank=6 product_rank=6 monomials=21 minimal_order=1 count=1120
+case p=2 g=4 lagrangians=2295 source_symmetry_orbits=57
+  weighted_minimal_order_histogram={'1': 963, '2': 1332}
+  order_orbit_histogram={'1': 24, '2': 33}
+symmetric_regular_nilpotents_F2 rank=3 count=6
+  representative=((0, 0, 1), (0, 0, 1), (1, 1, 0))
+  graph_minimal_order=2 product_rank=6 monomials=21
+symmetric_regular_nilpotents_F2 rank=4 count=36
+  representative=((0, 0, 0, 1), (0, 0, 0, 1), (0, 0, 1, 1), (1, 1, 1, 1))
+  graph_minimal_order=2 product_rank=10 monomials=220
+graph_counterexample p=3 g=4 minimal_order=3 ns_rank=10 product_rank=10 monomials=220
+bounded_domain=full_lagrangians:(2,2),(2,3),(3,2),(3,3); source_orbits:(2,4); explicit_graph:(3,4)
+PASS

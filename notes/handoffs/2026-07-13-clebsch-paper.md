@@ -644,7 +644,7 @@ block that theorem.
 | Paper II — *Quadratic trade rigidity and cubic orientation in conic matching quotients* | `papers/clebsch-factorization/` | GitHub/DOI v1 and v2 released; C577's manuscript, human-proof, exposition, and local-export stream is complete at warning-free 45-page authority `9af3eb45` and clean unpushed mirror `2245993`; C892 separately owns full remediation of the formal/trust **MAJOR / NO-GO** audit | [C892](../clebsch-tasks/c892-paper-ii-lean-trust-boundary-review.md) for formal/trust closure before any public forward release |
 | Paper III (`passages`) — *Golden descent and operator realizations of the Clebsch cubic* | `papers/clebsch-passages/` | GitHub/DOI v1 and v2 released unchanged; C792's B-plus integration and C799's normalized aligned-design API are complete; C815's three gates are green with no compiled-evaluation axiom at any terminal, aligned-design faithfulness is formalized at the manuscript's quantifier range, and the rank-14 weighted Jacobian is proved structurally; all four operator rows of gap class B are closed and its remaining work is the arithmetic, orientation and harmonic rows before C823.  C897's first sealed human-proof batch was **MAJOR** for a missing proof, not a demonstrated false theorem.  C897 repaired the reduced branch/complete-fibre argument and exact rational `J_0` scale, corrected Table (5.1), expanded the local proofs and rejecting checks, and obtained fresh Hitchin, Greaves, Snowden, and Si Kaddour `PASS` regrades.  Its final style-guide pass layered the complete source--shadow--return route and preserved every theorem by stable semantic ID; a post-read correction then made branch-sextic irreducibility paper-local and repaired the Haemers--Parsaei Majd metadata.  Final authority `74a73b97` synchronizes to standalone `6989cf8` with an identical warning-free 32-page PDF; C897 is complete, while Lean follow-up remains separately queued by author direction | [C815](../clebsch-tasks/c815-four-shadow-lean-formalization.md); [C897 dossier](../clebsch-tasks/c897-paper-iii-reviewer-dossier.md); `notes/2026-08-09-c897-paper-iii-layered-exposition-plan.md` |
 | Paper IV — *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the minimum words of a binary conic code* | `papers/q13-passant-code/` | C831/C832 structural version complete; a manuscript-only standalone pre-release was published 2026-08-03 at DOI `10.5281/zenodo.21783971`, with the Lean companion excluded and due as a forward version; C834 must still complete the proof-producing formal closure and then C857 the exhaustive Lean standards checklist before the full release; C901 separately owns an isolated human-proof/exposition review programme and keeps its persona material outside ordinary Paper IV context | [C834](../clebsch-tasks/c834-paper-iv-full-lean-release-closure.md), then [C857](../clebsch-tasks/c857-paper-iv-lean-standards-closure.md); [C901](../clebsch-tasks/c901-paper-iv-reviewer-dossier.md) |
-| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one exact Chow-halving problem on $\mathcal D_+$; fixed-fibre lifting is solved, while ambient, tautological, six-axis, Fano/Prym, and conic--Prym routes are dead.  Proved successors are the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet with canonical degree-$2^{10}$ log-boundary extension, the exotic cubic saturation, and the all-prime Jordan-scalar theorem placing primitive minimal classes in the integral divisor-product lattice.  IHC and minimal-class algebraicity on the classical Weyl locus are prior art; primitive divisor-product saturation appears new.  The highest-EV successor is an arbitrary-gluing obstruction classification explaining the non-scalar $\mathbf F_4$ exception.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
+| Paper V — marked golden round trip | publishable freeze closed; Annals-upgrade research quarantined | exact marked paper remains frozen.  The original relative crown is one exact Chow-halving problem on $\mathcal D_+$; fixed-fibre lifting is solved, while ambient, tautological, six-axis, elliptic-support, Fano/Prym, and conic--Prym routes are dead.  Proved successors are the five-sheet $\mathbf P^1(\mathbf F_4)$ Hecke packet with canonical degree-$2^{10}$ log-boundary extension, the exotic cubic saturation, the all-prime Jordan-scalar theorem, and the prime-support/factorial bound for arbitrary maximal-isotropic gluings.  Exact defects already occur at $(p,g)=(2,3)$ and $(3,4)$, while the exotic $\mathbf F_4$ gluing is a non-scalar positive stratum.  The highest-EV successor is the divided-power obstruction classification for arbitrary gluings.  No upgrade is imported and Lean remains deferred | [C904](../clebsch-tasks/c904-paper-v-publishable-round-trip.md) |
 | 37-page mega-paper | `papers/clebsch-code/` | preserved unchanged as fallback only | C552 if explicitly reactivated |
 
 C904's original Annals-upgrade frontier remains the relative Shen-cycle
@@ -672,10 +672,21 @@ present information level, not unfinished cheap fixes.  See
 `notes/2026-08-11-c904-symmetric-theta-equivalence-specialization-picard.md`,
 and `notes/2026-08-11-c904-cusp-tropical-theta-parity-audit.md`.
 
+The genus-one support route is also closed exactly.  On the generic non-CM
+exotic fivefold, the subgroup generated by every axis and non-axis elliptic
+curve has quotient `(Z/2)^6` in the integral Hodge one-cycle lattice, and the
+primitive minimal class has exact order two in that quotient.  The
+no-eigenline theorem for the exotic `F4` graph covers every rational
+coefficient line, not merely the enumerated short vectors; `2c` nevertheless
+has an explicit nineteen-term elliptic expression.  Thus even perfect lifts
+of all elliptic supports through `M9` or `Sym^2 Theta` cannot close the
+primitive gate.  Only exceptional CM fibres remain outside this no-go.  See
+`notes/2026-08-11-c904-nonaxis-elliptic-support-audit.md`.
+
 The 2026-08-11 midnight pass compresses the charge-three version of that
 exit further.  The normalization of the generic curve
 `D_{3,3} -> M_9` is birational to a projective-line bundle over a finite
-factorable-quadric scheme `R_{3,3}(E)` inside the Pluecker wedge system of a
+factorable-quadric scheme `R_{3,3}(E)` inside the Plücker wedge system of a
 general charge-three bundle, and the two zero-cycle indices are equal.  The
 exact model calculation now gives a reduced, prime degree-15 packet over
 `QQ` (fifteen reduced geometric points).  A transverse good mod-5 point,
@@ -699,15 +710,19 @@ Three successor theorems are now quarantined from the frozen paper.  First,
 the five marked principal halves form the exact
 `P^1(F4)` Hecke packet; its degree-`2^10` isogenies extend canonically as
 polarized log one-motives across cusp widths `2,2,6,6`, whereas their
-ordinary special kernels jump and cannot form a global finite-flat Neron
+ordinary special kernels jump and cannot form a global finite-flat Néron
 kernel.  Second, every Jordan-scalar principal elliptic-power quotient has
 primitive minimal class in the integral divisor-product lattice, uniformly
 at all primes and all type-A root--weight sizes.  Classical Weyl ppavs,
 `X_0(N)`, elliptic-product decomposition, IHC, and minimal-class
 algebraicity are preempted; the likely new content is primitive integral
-Lefschetz saturation.  The non-scalar exotic `F4` gluing is the unexplained
-negative boundary and makes an arbitrary-gluing obstruction classification
-the highest-EV next theorem.  Third, C904+C907 yields the successor contrast
+Lefschetz saturation.  The arbitrary-gluing pass now proves that a prime-`p`
+maximal-isotropic gluing has defect supported only at `p`, of order dividing
+`p^v_p((g-1)!)`, and is always primitive for `p>=g`.  Exact defects two and
+three occur already at `(p,g)=(2,3)` and `(3,4)`; the non-scalar exotic `F4`
+gluing is instead a positive stratum.  The highest-EV next theorem is the
+intrinsic divided-power Bockstein classification, not a universal positive
+extension.  Third, C904+C907 yields the successor contrast
 `X` universally `CH_0`-trivial but `X times P^1` irrational for every
 smooth `A5` cubic; no full stable-irrationality claim is licensed.  See
 `notes/2026-08-10-c904-relative-shen-half-construction-attack.md`,
