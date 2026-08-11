@@ -16,14 +16,16 @@ name = "finitegeom-projective-cap-q11-certificates"
 checkout = "finitegeom-projective-cap-q11-certificates"
 heavy = true
 allowed_direct_dependencies = ["mathlib"]
-source_root = "lean"
+source_root = "TavisRuddFiniteGeom/Certificates/ProjectiveCap/Q11"
+module_prefix = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
 
 [[certificate]]
 name = "finitegeom-projective-cap-q13-certificates"
 checkout = "finitegeom-projective-cap-q13-certificates"
 heavy = true
 allowed_direct_dependencies = ["mathlib"]
-source_root = "lean"
+source_root = "TavisRuddFiniteGeom/Certificates/ProjectiveCap/Q13"
+module_prefix = "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13"
 
 [[certificate]]
 name = "finitegeom-q16-certificates"
@@ -38,4 +40,5 @@ name = "finitegeom-q25-certificates"
 checkout = "finitegeom-q25-certificates"
 heavy = true
 allowed_direct_dependencies = ["mathlib"]
-source_root = "lean"
+source_root = "TavisRuddFiniteGeom/Certificates/Q25"
+module_prefix = "TavisRuddFiniteGeom.Certificates.Q25"
