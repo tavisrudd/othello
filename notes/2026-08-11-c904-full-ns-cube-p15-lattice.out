@@ -1,0 +1,9 @@
+C904 full NS(JxJ) divisor-cube p15 lattice
+NS(A) rank=15; End(A) rank=25; NS(AxA) rank=55
+p51 generators=120*25=3000; image rank=25
+canonical P*(theta^2/2) scalar=-12
+End(A)/p15-image Smith nonunits=(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+normalized identity order in p15 image=2
+divided-square generators=375; End(A)/divided-p15 Smith nonunits=(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+normalized identity order in divided-p15 image=2
+PASS

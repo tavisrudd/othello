@@ -1,0 +1,9 @@
+C904 BdGF theta pullback / p15 bidegree audit
+P^[3] bidegrees=[(3, 3)]
+Lambda3 kernel: shape=120x120, rank=120, det-absolute=1, nonzeros=120
+swap/Koszul test: integral skew Nakaoka transfer PASS
+correspondence action on M: H^5->H^3; required p15=(5,1) is absent
+anti-graph restriction: j*P^[3]=-8 h^[3]
+half anti-graph=-4 h^[3]; int(h^4/3!)=20; addition degree=-80
+identity coefficient target degree=5 is not met
+PASS
