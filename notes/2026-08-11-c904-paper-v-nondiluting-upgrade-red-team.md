@@ -7,6 +7,14 @@
 **Scope:** theorem architecture for Paper V only. No manuscript, Lean,
 rank-ten symplectic, cubic, Chow, or quantum changes are authorized here.
 
+**Forward correction:** the subsequent hostile audit found \(\mu_3\) scalar
+inertia and circular expanded axioms in V.A--V.D. The repaired plan is
+`2026-08-11-c904-paper-v-intrinsic-ad-classification-blueprint.md`: use a
+normalized metric chordal shadow \((A,Q,h)\), classify the neutral package
+over \(\mathbf F_{11}\) with functorial base change, derive the outer action
+from the recovered six-set, and treat the marking object as a dependency
+lattice. The V.E--V.H conclusions below remain valid.
+
 ## Verdict
 
 Paper V can be strengthened without becoming a holding pen for the geometric

@@ -229,8 +229,9 @@ Define the common object with exactly the necessary data:
 
 \[
 \mathscr G=
-(\text{six-axis carrier},\ \text{golden orientation},\
-\text{invariant pencil},\ \text{selected chordal line},\
+(\text{metric chordal shadow }(A,Q,h),\
+\text{derived six-axis carrier},\
+\text{derived golden orientation},\
 \text{declared outer labels}).
 \]
 
@@ -244,115 +245,126 @@ not silently quotiented.
 #### Theorem V.A: equivalence of marked companion groupoids
 
 Define the common carrier without mentioning Papers I--III and without
-including a conference matrix among its input data. Over \(K/\mathbf F_{11}\)
-an intrinsic carrier consists of a five-dimensional absolutely irreducible
-\(K A_5\)-module, its two-dimensional invariant cubic pencil, an involution
-\(q\) normalizing \(A_5\) through the nontrivial outer class, an actual
-oriented nodal generator, and a selected actual chordal generator. Require the
-following intrinsic axioms:
+including a conference matrix among its input data. Its minimal object is a
+metric chordal shadow
 
-1. the nodal generator has exactly six reduced ordinary nodes in
-   projective-frame position;
-2. the two chordal lines are exactly the pencil members singular along
-   rational normal quartics, and the outer involution exchanges them;
-3. the exact-\(C_5\) divisor on a selected singular quartic is
-   \(A_5/C_5\), and equal-stabilizer pairing recovers the same
-   \(A_5/D_5\) six-set as the nodal scheme;
-4. after intrinsic singular-frame and pivot normalization, the outer
-   difference sends the selected chordal generator to the oriented nodal
-   generator;
-5. writing \(c_{ijk}\) for the normalized triangle coefficients, they satisfy
-   the explicit equations
-   \[
-   c_{ijk}^2=1,
-   \qquad
-   c_{ijk}c_{ij\ell}c_{ik\ell}c_{jk\ell}=1,
-   \qquad
-   \sum_{k\notin\{i,j\}}c_{ijk}=0.
-   \]
-   The first two equations reconstruct a unique switching class, while the
-   last gives \(B^2=5I\). The Pfaffian/norm identity is a derived mechanism
-   corollary, not an admissibility axiom.
+\[
+(A,Q,h),
+\]
 
-Morphisms are induced by equivariant axis bijections and preserve the actual
-generators and selected line; arbitrary scalar intertwiners are not admitted.
-Define the marked conference, chordal, and incidence groupoids independently,
-including exactly their permitted switching and coordinated relabelling. Then
-prove that their transport functors are fully faithful and essentially
-surjective onto this intrinsically axiomatized carrier groupoid. The inverse
-formulas must recover the retained paper-specific output, including the
-Paper-II pivot normalization and Paper-III carried bridge datum, but not a
-chart lift or global cover that was supplied only as an input.
+where \(A\) is the five-dimensional absolutely irreducible
+\(\mathbf F_{11}A_5\)-module, \(Q\) is an actual normalized invariant
+quadratic form, and \(h\) is an actual normalized invariant cubic whose
+saturated Jacobian scheme is a rational normal quartic. Morphisms are
+equivariant isometries preserving \(h\), together with the coordinated
+relabelings allowed by the sources.
 
-State the theorem uniformly on \(K\)-points for every extension
-\(K/\mathbf F_{11}\). This is scalar-extension functoriality of the same
-classification, not a new integral model or a theorem in arbitrary
-characteristic.
+The form \(Q\) removes the hidden scalar inertia: over an extension containing
+\(\mu_3\), a scalar cube root fixes \(h\), but an isometry preserving both
+\(Q\) and \(h\) has scalar satisfying \(\lambda^2=\lambda^3=1\).
+
+The theorem derives, rather than assumes:
+
+1. the split special divisor \(Z_5=A_5/C_5\) on the singular quartic;
+2. its normalizer quotient \(\Omega=A_5/D_5\);
+3. the literal outer action \(q_\Pi\) on the invariant pencil;
+4. the six-nodal companion \(c=8^{-1}(q_\Pi-1)h\);
+5. the equality of its node set with \(\Omega\);
+6. the triangle cocycle, pair balance, and the conference switching class.
+
+Define the marked conference, metric-chordal, and retained-incidence
+groupoids independently. Prove their equivalence over \(\mathbf F_{11}\).
+For each extension \(K/\mathbf F_{11}\), prove equivalence of their fixed
+neutral scalar extensions. Do not claim classification of arbitrary twisted
+\(K\)-forms without a separate descent theorem.
+
+The inverse formulas recover the retained paper-specific output, including
+the Paper-II pivot normalization and Paper-III carried bridge datum, but not a
+chart lift or global cover supplied only as input.
 
 #### Theorem V.B: minimal carrier and structural bridge
 
-Prove that the expanded intrinsic carrier of V.A is equivalent to a minimal
-carrier consisting only of the recovered five-dimensional \(A_5\)-module and
-one normalized actual chordal generator \(h\). The invariant pencil is
-\(\Pi=\operatorname{Sym}^3(A^*)^{A_5}\); the action of the nontrivial
-normalizer coset on \(\Pi\) is independent of its representative because
-\(A_5\) fixes \(\Pi\) pointwise. Hence
+Prove that the expanded carrier is the functorial output of \((A,Q,h)\).
+From the saturated Jacobian quartic form
 
 \[
-L=Kh,
-\qquad
-c=8^{-1}(q-1)h
+Z_5=\coprod_{P\in\operatorname{Syl}_5(A_5)}R_h^P
+\longrightarrow \Omega=A_5/D_5.
 \]
 
-recover the selected chordal line and oriented conference generator. The
-singular quartic of \(h\) recovers the axes by the canonical
-\(A_5/C_5\to A_5/D_5\) normalizer quotient, while the nodes and triangle
-coefficients of \(c\) recover the same axes and conference switching class.
-
-Thus the causal chain is
+Identify \(A\) isometrically with the literal quadratic augmentation of
+\(\Omega\). A representative of the nontrivial permutation-normalizer coset
+then induces a canonical operator \(q_\Pi\) on
 
 \[
-h\Longrightarrow R_h\Longrightarrow\Omega
-\Longrightarrow q\Longrightarrow c
+\Pi=\operatorname{Sym}^3(A^*)^{A_5}.
+\]
+
+Intertwiner scalars cancel in conjugation, and changing the representative by
+\(A_5\) acts trivially on \(\Pi\). Therefore \(q_\Pi\) is derived data, not a
+new marking. The causal chain is
+
+\[
+(A,Q,h)\Longrightarrow R_h\Longrightarrow Z_5\Longrightarrow\Omega
+\Longrightarrow q_\Pi\Longrightarrow c
 \Longrightarrow(c_{ijk})\Longrightarrow[B].
 \]
 
-The general involution lemma explains the only nonformal step: on either
-nonfixed chordal line, \(q-1\) is an isomorphism onto the anti-invariant
-conference line and identifies sheet sign with conference orientation. The
-numbers \(8\) and the Paper-II pivot \(3\) are normalization constants checked
-once, not structural content.
+The numbers \(8\) and the Paper-II pivot \(3\) are the two printed
+normalizations. Character theory and multiplicity one do not determine them.
 
 #### Theorem V.C: natural round trip
 
-The two composites carry natural isomorphisms to the identity functors on the
-declared image subgroupoids, and those isomorphisms satisfy the triangle
-identities. On chosen normalized representatives they fix the six axes,
-selected chordal line, marked cubic generator, and orientation character.
+Prove strict rigidity for ambient equivariant isometries: the recovered
+projective frame determines the projective map, while \(Q\) and \(h\) remove
+its scalar ambiguity. The two composites then carry natural isomorphisms to
+the identities, and the triangle identities follow formally from uniqueness.
+Do not define morphisms to be maps induced by six-axis bijections; that would
+assume full faithfulness.
 
 #### Theorem V.D: load-bearing marking boundary
 
-Form the complete poset of carrier groupoids obtained by forgetting, one at a
-time, the actual generator, its sign, the selected chordal line, the six-set
-embedding, and the declared outer labels. For every forgetful functor print a
-single table containing:
+Form the closure of the actual marking dependencies, not the Boolean poset on
+a list of names. In particular,
+
+\[
+h\Rightarrow L=Kh,\qquad
+(q_\Pi,h)\Rightarrow c,\qquad
+c\Rightarrow\operatorname{Sing}(c)=\Omega.
+\]
+
+Before scalar normalization, forgetting a generator while retaining its line
+has fibre \(K^\times\), not \(C_2\). After the square-one normalization, the
+fibre is the two sheet signs. For every forgetful functor print a single table
+containing:
 
 - the automorphism stabilizer before and after forgetting;
 - the homotopy fibre as an explicit transitive group action;
 - whether another retained marking canonically supplies a section;
 - a concrete symmetry witnessing nontriviality when no section exists.
 
-Use the exact pencil action, including
+With \(Q\) fixed, sheet reversal is the actual isometry \(u=-I\). Use the
+exact pencil action, including
 \[
 [q]=\begin{pmatrix}-1&8\\0&1\end{pmatrix}
 \]
-in the normalized basis, rather than counting two
-objects. In particular, the outer involution exchanges the two chordal lines,
-whereas scalar sheet reversal negates the generator on one fixed line; the
-table must determine whether combined forgetful fibres split as products or
-form a nontrivial action. The normalized \(q-1\) bridge is an equivariant
-isomorphism between the sheet-sign and conference-orientation torsors after a
-chordal line is selected.
+in the normalized basis. The actions are
+
+\[
+u:(L,h,c)\mapsto(L,-h,-c),
+\]
+
+\[
+q:(L,h,c)\mapsto(qL,qh,-c),
+\]
+
+\[
+uq:(L,h,c)\mapsto(qL,-qh,c).
+\]
+
+They form a Klein four action on the fully unmarked line/sign fibre. After a
+line is fixed, the normalized \(q_\Pi-1\) bridge identifies sheet sign with
+conference orientation, so those two torsors are dependent.
 
 Sharpness means that a missing marking is moved by an automorphism of the
 unmarked object but cannot be changed by a morphism in the more rigid
@@ -492,49 +504,26 @@ this as an absolute canonical identification independent of that action.
 
 ### Structural proof compression
 
-All of Paper V should reduce to ten reusable arguments:
+All of Paper V should reduce to five reusable arguments:
 
-1. **Character-theoretic pencil lemma.** Compute
-   \(\dim\operatorname{Sym}^3(A^*)^{A_5}=2\) and the normalizer action from
-   the character table. Multiplicity one then reduces every equivariant tensor
-   placement to nonvanishing plus one scalar normalization.
-2. **Determinantal chordal lemma.** Identify the selected cubic with the
-   Hankel determinant and prove scheme-theoretically that its Jacobian ideal
-   is the ideal of the rank-one Hankel locus, hence a rational normal quartic.
-3. **Normalizer-quotient axis lemma.** Replace the twelve-point census by the
-   canonical subgroup map \(A_5/C_5\to A_5/D_5\), using
-   \(N_{A_5}(C_5)=D_5\), and prove that it recovers the nodal six-set.
-4. **Simplicial switching lemma.** Interpret the tetrahedral identity as the
-   cocycle condition on the complete simplex. Its vanishing cohomology gives
-   an edge signing unique modulo vertex switching; pair balance then gives
+1. **Metric chordal normal form.** Compute the two-dimensional invariant
+   pencil, identify the Hankel determinant and its saturated singular quartic,
+   and place the Paper-II projection by multiplicity one plus one geometric
+   discriminator. Print pivot \(3\) once.
+2. **Special orbit and outer companion.** Construct
+   \(A_5/C_5\to A_5/D_5\), derive \(q_\Pi\) from the literal permutation
+   normalizer, prove equality with the nodal six-set, and print scalar \(8\).
+3. **Simplicial conference recognition.** Prove the triangle sign, cocycle,
+   and balance identities; reconstruct the switching class and derive
    \(B^2=5I\).
-5. **Involution difference lemma.** On a line exchanged by an involution,
-   \(q-1\) identifies the anti-invariant line with the conference orientation
-   line once nonvanishing is proved.
-6. **Carrier rigidity and groupoid lemma.** A morphism is determined by the
-   recovered projective frame. Package choices, stabilizers, units, counits,
-   and triangle identities once; carrier rigidity makes the latter formal.
-7. **Lattice-tower lemma.** Recover \(A_{\mathrm{aug}}(\Omega)\),
-   \(D(\Omega)\), and \(D(\Omega)^\vee\) functorially and identify their
-   common six-point heart. Keep the rank-five augmentation lattice distinct
-   from the rank-six \(D\)-type lattice.
-8. **Rigidification-cover lemma.** Package the upper marked groupoid as one
-   principal \(C_2\)-cover of the unrigidified carrier groupoid and express all
-   upper equivalences as pullbacks of it. Paper V should cite Paper IV's
-   degree-three torsor as a parallel reconstruction profile rather than
-   reproduce its code or orbit census. A one-paragraph Frobenius-orbit
-   commutant lemma
-   supplies the common formal mechanism.
-9. **Conference root--weight lemma.** From the common column class of
-   \((I+B)/2\), prove the general \(D_n^\vee\) saturation law and its
-   mod-eight split/inert residue dichotomy. Specialize only afterward to the
-   maximal golden order, where normalization changes the dual-number residue
-   of \(\mathbf Z[B]\) into \(\mathbf F_4\).
-10. **Triangle-presentation Ext lemma.** On the natural module for
-   \(A_5\simeq\operatorname{SL}_2(4)\), the \((2,3,5)\)-relation norms have
-   ranks \((1,0,0)\). Hence \(\dim Z^1=3\), \(\dim B^1=2\), and the Ext line
-   is one-dimensional. This replaces a block-table citation in the proof;
-   the modular literature is cited only for context.
+4. **Strict rigidity and marking fibres.** Use the metric carrier to prove
+   full faithfulness, source return, the dependency lattice, and the actual
+   sheet/outer actions. Units, counits, and triangle identities are then
+   formal.
+5. **Root--weight normalization and residue.** Recover the lattice tower,
+   prove the general \(D_n^\vee\) theorem and mod-eight dichotomy, and
+   specialize to the order-six \(\mathbf F_4\)-heart, Ext line, and Frobenius
+   torsor.
 
 One hand normalization may be printed for each scalar or sign. There should be
 no exhaustive matrix table and no phrase of the form "a computer calculation
