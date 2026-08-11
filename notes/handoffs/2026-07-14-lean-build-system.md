@@ -244,10 +244,9 @@ Lean source, package, mirror, or remote changed.  Full report:
    `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`. Q11 and Q16 are branded,
    Mathlib-only, sealed, and cached; their bridges hash the frozen aggregate artifacts and never
    invoke a certificate build target. The live mapping covers seventeen paper records, fifteen
-   standalone repositories, twelve export areas, and all AME--LU modules. Next remove the remaining
-   finitegeom reverse edges from the projective-cap Q11, Q13, and Q25 certificate packages using
-   package-local statement models plus proved downstream adapters; do not touch those source trees
-   until their tracked `.gitignore` modifications are owned or cleared.
+   standalone repositories, twelve export areas, and all AME--LU modules. Projective-cap Q11 now
+   follows that boundary; Q13 and Q25 are the remaining certificate separations, each using a
+   package-local statement model plus a cheap downstream adapter.
    Paper I is current on the separated three-repository boundary at monorepo commit `0b322c1d` and
    exporter-produced standalone commit `1e3cce4`; its final verifier is green, and
    `clebsch_rigidity.pdf` has SHA-256
