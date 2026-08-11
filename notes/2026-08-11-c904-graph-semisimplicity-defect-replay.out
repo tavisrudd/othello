@@ -1,0 +1,8 @@
+C904 independent dyadic graph semisimplicity census
+g=3 total=64
+  squarefree=False order=2 count=30
+  squarefree=True order=1 count=34
+g=4 total=1024
+  squarefree=False order=2 count=526
+  squarefree=True order=1 count=498
+PASS

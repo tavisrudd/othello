@@ -1,0 +1,28 @@
+C904 dyadic graph semisimplicity census
+g=3 total=64
+  squarefree=False order=2 count=30
+  squarefree=True order=1 count=34
+  minpoly=x order=1 count=1
+  minpoly=x + 1 order=1 count=1
+  minpoly=x^2 order=2 count=3
+  minpoly=x^2 + 1 order=2 count=3
+  minpoly=x^2 + x order=1 count=8
+  minpoly=x^3 order=2 count=6
+  minpoly=x^3 + 1 order=1 count=6
+  minpoly=x^3 + x order=2 count=6
+  minpoly=x^3 + x + 1 order=1 count=6
+  minpoly=x^3 + x^2 order=2 count=6
+  minpoly=x^3 + x^2 + 1 order=1 count=6
+  minpoly=x^3 + x^2 + x order=1 count=6
+  minpoly=x^3 + x^2 + x + 1 order=2 count=6
+g=4 total=1024
+  squarefree=False order=2 count=526
+  squarefree=True order=1 count=498
+p=2 g=5 deterministic_sample_per_class=8
+  squarefree=False order=2 count=8
+  squarefree=True order=1 count=8
+p=3 g=4 deterministic_sample_per_class=8
+  squarefree=False order=1 count=4
+  squarefree=False order=3 count=4
+  squarefree=True order=1 count=8
+PASS

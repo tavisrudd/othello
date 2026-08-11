@@ -1,7 +1,8 @@
 # C904: semisimple graph slopes have primitive minimal class
 
-Date: 2026-08-11  
-Status: proved local-to-global theorem; no manuscript or Lean edit  
+Date: 2026-08-11
+Status: proved local-to-global theorem with exact primary and independent
+replay certificates; no manuscript or Lean edit
 Scope: the positive half of the semisimple/nilpotent graph-slope dichotomy
 
 ## Verdict
@@ -132,7 +133,63 @@ At every prime (q\ne p), the quotient isogeny identifies the integral
 homology and divisor lattices.  Local membership at all primes therefore
 gives the asserted global integral membership.
 
-## 4. Exact scope and remaining theorem
+## 4. Exact bounded evidence and replay
+
+The primary certificate constructs every graph overlattice, recovers its
+complete integral Neron--Severi lattice through an ambient integrality kernel,
+and computes the Smith order of the minimal class in the divisor-product
+lattice.  It exhausts all symmetric dyadic slopes in ranks three and four:
+
+| rank | slopes | squarefree | nonsquarefree |
+|---:|---:|---:|---:|
+| 3 | 64 | 34, all order 1 | 30, all order 2 |
+| 4 | 1,024 | 498, all order 1 | 526, all order 2 |
+
+It also tests eight deterministic slopes in each semisimplicity class at
+`p=2,g=5` and `p=3,g=4`.  The dyadic sample splits as order one versus order
+two.  At the odd prime, all sampled semisimple slopes are primitive, while
+the nonsquarefree sample splits four primitive and four of order three.
+Thus nonsquarefree is not a converse at odd primes.
+
+The independent replay starts instead from the graph centralizer congruence
+and rebuilds the divisor forms directly.  It independently reproduces the
+complete dyadic rank-three and rank-four census.
+
+From the repository root:
+
+```bash
+diff -u notes/2026-08-11-c904-graph-semisimplicity-defect.out \
+  <(nix shell nixpkgs#sage -c sage \
+    notes/2026-08-11-c904-graph-semisimplicity-defect.sage)
+
+diff -u notes/2026-08-11-c904-graph-semisimplicity-defect-replay.out \
+  <(nix shell nixpkgs#sage -c sage \
+    notes/2026-08-11-c904-graph-semisimplicity-defect-replay.sage)
+```
+
+| file | bytes | SHA-256 |
+|---|---:|---|
+| `2026-08-11-c904-graph-semisimplicity-defect.sage` | 3,548 | `22911dc9d0d7fc4071347725cd5aedd32711239affdf751dfc03e41402683468` |
+| `2026-08-11-c904-graph-semisimplicity-defect.out` | 926 | `31a65e86893520d0e4313f24a8812441699d0505442640ec6ac20d5bd71bc7ed` |
+| `2026-08-11-c904-graph-semisimplicity-defect-replay.sage` | 1,460 | `ed193be74fe033e3f11d26c6ce956a2d74329481b2255ae918fdf8cccd27a97f` |
+| `2026-08-11-c904-graph-semisimplicity-defect-replay.out` | 229 | `b4c4f73d52ad82b62ef898007e7679f2597bd31529477d08c750ffd4ebdf50ce` |
+
+## 5. Priority boundary
+
+The bounded audit in
+`2026-08-11-c904-semisimple-slope-priority-audit.md` found no exact
+predecessor for semisimple-slope primitivity or for the bridge from modular
+Jordan type to the ordinary integral divisor-product Smith index.  Classical
+modular representation theory analyzes exterior powers of cyclic
+`p`-group modules and is likely the right engine for the nilpotent case.  It
+does not contain the graph-gluing Neron--Severi carry or this distinguished
+minimal-class index.
+
+The theorem is a strong structural component, not by itself an Annals crown.
+The higher target is a coordinate-free classification for arbitrary
+Lagrangian gluings and an exact `p`-typical Jordan-height formula.
+
+## 6. Exact scope and remaining theorem
 
 This proves the positive semisimple half suggested by the exhaustive dyadic
 ranks-three-and-four census and the bounded rank-five tests.  It does not
@@ -143,6 +200,18 @@ successive divided-power Bocksteins.
 The argument also stays inside a graph chart.  Extending its converse or its
 nilpotent filtration to arbitrary maximal isotropic gluings remains a
 separate finite-geometric problem.
+
+The exact data suggest, but do not prove,
+
+\[
+ v_p(\operatorname{ord}\gamma_T)
+ \stackrel{?}{=}
+ \min\!\left(v_p((g-1)!),\lfloor\log_p h(T)\rfloor\right),
+\]
+
+where `h(T)` is the largest primary Jordan exponent.  In particular, a
+length-two Jordan block at an odd prime need not be visible; the first
+expected odd-primary layer occurs at height `p`.
 
 ## Red-team checklist
 
@@ -160,3 +229,18 @@ separate finite-geometric problem.
   never claims that the diagonalizing matrix is a geometric endomorphism.
 - **Descent:** safe; finite faithful flatness descends membership in the image
   of the integral product map without trace or residue-degree multiplication.
+
+## EJ / TT closeout and mystery ledger
+
+- **Settled:** every semisimple graph slope is primitive, including at two.
+- **Settled:** the full dyadic rank-three and rank-four graph charts obey the
+  exact squarefree/order-one versus nonsquarefree/order-two dichotomy.
+- **Explained:** the known order-two, order-three, and order-four examples all
+  require nilpotent slope data; the factorial wall bounds the possible layers.
+- **Open:** nonsquarefree is not sufficient at odd primes.  The exact invariant
+  inside the nilpotent filtration remains unidentified.
+- **Open:** the `p`-typical Jordan-height law and its extension from graph
+  charts to the full finite Lagrangian Grassmannian are the natural successor.
+- **Paper-V boundary:** this strengthens the arbitrary-gluing side of the
+  project but does not decide the relative Chow-half, equivalently the generic
+  unordered-theta index-one versus index-two gate for the `A_5` family.
