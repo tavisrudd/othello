@@ -174,6 +174,42 @@ def main():
             assert center["exceptional_projective_dimension"] == m - t - 1
             assert center["tensor_logarithm_nilpotence_index"] == m - 1
 
+    q_adic = certificate["iritani_local_q_adic_tate_spacing"]
+    for check in q_adic["checks"]:
+        codimension = check["center_codimension_r"]
+        n = codimension - 1
+        s = n if codimension % 2 == 0 else 2 * n
+        raw = [
+            sp.Rational(s * (codimension - 2 * l - 2), 2 * n)
+            for l in range(n)
+        ]
+        assert all(value.q == 1 for value in raw)
+        step = sp.Rational(s, n)
+        normalized = [(raw[0] - value) / step for value in raw]
+        assert normalized == list(range(n))
+        assert check["exceptional_copy_count"] == n
+        assert check["iritani_s"] == s
+        assert check["raw_t_valuations_by_l"] == [int(value) for value in raw]
+        assert check["valuation_step_magnitude"] == int(step)
+        assert check["affine_normalized_levels_by_l"] == list(range(n))
+        assert check["normalized_width"] == n - 1
+
+        z = sp.Symbol("z")
+        cyclotomic = sp.Poly(sp.cyclotomic_poly(n, z), z) if n > 1 else None
+        for left in range(n):
+            for right in range(n):
+                if n == 1:
+                    character_sum = sp.Integer(1)
+                else:
+                    character_sum = sum(
+                        z ** ((right - left) * j % n) for j in range(n)
+                    )
+                    character_sum = sp.rem(sp.Poly(character_sum, z), cyclotomic).as_expr()
+                assert sp.expand(character_sum) == (n if left == right else 0)
+        assert check["fourier_matrix_invertible"]
+        assert check["sector_monodromy_permutation"] == list(range(1, n)) + [0]
+        assert check["monodromy_preserves_elementary_divisor_multiset"]
+
     spectral_checks = certificate["candidate_spectral_cycle_refinement"]["checks"]
     for check in spectral_checks:
         m = check["stabilizing_projective_dimension_m"]
@@ -221,6 +257,7 @@ def main():
         "independent replay passed: indicial polynomial, projective checks "
         f"m=0..{len(projective_checks)-1}, surface exclusion, Serre-dimension conditional, "
         f"cancellation, Tate, and integral Serre-width checks through m={len(cancellation_checks)}, "
+        f"Iritani q-adic lattice checks through r={len(q_adic['checks'])+1}, "
         f"spectral-cycle checks m=2..{len(spectral_checks)+1}, "
         f"prime-power tower checks through n={len(projective_checks)}"
     )

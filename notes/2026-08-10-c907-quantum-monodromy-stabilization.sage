@@ -16,7 +16,7 @@ from pathlib import Path
 import sage.version
 
 
-SCHEMA = "c907-quantum-monodromy-stabilization-v5"
+SCHEMA = "c907-quantum-monodromy-stabilization-v6"
 
 
 def matrix_strings(M):
@@ -351,6 +351,60 @@ def self_carrier_serre_width_check(m):
     }
 
 
+def iritani_q_adic_lattice_check(r):
+    """Elementary divisors of Iritani's leading exceptional Fourier block.
+
+    Here r is the codimension of the blow-up center and t=q^(-1/s) is the
+    uniformizer used in Iritani (5.11).  Formulae (5.19) and (5.27) give the
+    l-th exceptional column, up to units and lower q-order terms, as
+    q_Z q^((l+1)/(r-1)) times a Fourier character.
+    """
+    assert r >= 2
+    n = r - 1
+    s = n if r % 2 == 0 else 2 * n
+    if n == 1:
+        field = QQ
+        zeta = field(1)
+    else:
+        field = CyclotomicField(n)
+        zeta = field.gen()
+    fourier = matrix(
+        field,
+        n,
+        n,
+        lambda j, l: zeta ** (-j * (l + 1)),
+    )
+    assert fourier.is_invertible()
+
+    raw_valuations = [
+        QQ(s * (r - 2 * l - 2)) / (2 * (r - 1))
+        for l in range(n)
+    ]
+    assert all(value in ZZ for value in raw_valuations)
+    step = QQ(s) / (r - 1)
+    normalized = [(raw_valuations[0] - value) / step for value in raw_valuations]
+    assert normalized == list(range(n))
+
+    return {
+        "center_codimension_r": r,
+        "exceptional_copy_count": n,
+        "uniformizer": f"t=q^(-1/{s})",
+        "iritani_s": s,
+        "q_Z_exponent_in_q": f"-{r}/(2*{r - 1})",
+        "leading_exceptional_column_formula": (
+            "unit_l * q_Z * q^((l+1)/(r-1)) * "
+            "(zeta^(-j(l+1)))_j, modulo lower q-order terms"
+        ),
+        "fourier_matrix_invertible": True,
+        "raw_t_valuations_by_l": [int(value) for value in raw_valuations],
+        "valuation_step_magnitude": int(step),
+        "affine_normalized_levels_by_l": [int(value) for value in normalized],
+        "normalized_width": n - 1,
+        "sector_monodromy_permutation": list(range(1, n)) + [0],
+        "monodromy_preserves_elementary_divisor_multiset": True,
+    }
+
+
 def spectral_cycle_self_carrier_check(m):
     endpoint_cycle = m + 1
     reproducing_t = [
@@ -441,6 +495,12 @@ def build_certificate(bound):
             "arxiv": "2608.01577v1",
             "cached_pdf_sha256": "06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e",
             "equation_convention": "z^2 dS/dz = (K + zG)S",
+        },
+        "blowup_source": {
+            "paper": "Hiroshi Iritani, Quantum cohomology of blowups",
+            "arxiv": "2307.13555",
+            "cached_pdf_sha256": "c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b",
+            "formulae": ["(5.11)", "(5.19)", "(5.27)", "Theorem 5.18", "Remark 1.5"],
         },
         "cai_rank_two_certificate": cai_certificate(),
         "projective_stabilization": {
@@ -538,6 +598,28 @@ def build_certificate(bound):
                 "make the blowup map strict, with associated-graded identity [Bl_Z Y]_alpha=[Y]_alpha+"
                 "(T+...+T^(r-1))[Z]_alpha. Block length is a basis-independent diagnostic of this "
                 "filtration, not a substitute for filtered additivity."
+            ),
+        },
+        "iritani_local_q_adic_tate_spacing": {
+            "status": (
+                "Exact local positive result, not a stable-birational invariant. At the chosen "
+                "large-radius blow-up boundary, the leading exceptional Fourier block has consecutive "
+                "q-adic elementary divisors, up to affine normalization. Root monodromy changes Fourier "
+                "units and permutes sectors, so it preserves the elementary-divisor multiset and its width."
+            ),
+            "checked_center_codimension_range": [2, bound + 1],
+            "checks": [iritani_q_adic_lattice_check(r) for r in range(2, bound + 2)],
+            "source_derivation": (
+                "Iritani (5.19) gives q_Z=unit*q^(-r/(2(r-1))). Equation (5.27) says that after "
+                "multiplying the l-th exceptional column by unit*q^(-(l+1)/(r-1)), its leading "
+                "exceptional-sector matrix is Fourier. For t=q^(-1/s), the unscaled column valuations "
+                "are s(r-2l-2)/(2(r-1)); their consecutive spacing is s/(r-1)."
+            ),
+            "surviving_gate": (
+                "The q-adic lattice is relative to a selected blow-up Novikov coordinate and boundary. "
+                "Iritani proves an isomorphism only after Laurent base change and does not construct a "
+                "presentation-independent Rees lattice compatible with composition in weak factorization. "
+                "Remark 1.5 separately leaves the general analytic Stokes/Gamma compatibility conjectural."
             ),
         },
         "candidate_spectral_cycle_refinement": {

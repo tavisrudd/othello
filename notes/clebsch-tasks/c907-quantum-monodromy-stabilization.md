@@ -30,7 +30,13 @@ obstruction.  Serre-block preservation alone is insufficient because
 semiorthogonal extensions can join blocks.  Iritani Theorem 1.1 preserves the formal connection
 and Poincaré pairing, but Remark 1.5 explicitly places the non-orthogonal
 Stokes/Γ gluing beyond that formal direct sum; the missing theorem is therefore
-confirmed at source rather than inferred from the computation.
+confirmed at source rather than inferred from the computation.  A sharper
+source-level calculation is positive locally: Iritani (5.19), (5.27) give
+consecutive `q`-adic elementary divisors for the exceptional Fourier block,
+affinely normalized to `0,...,r-2`, and cyclic root monodromy preserves their
+multiset.  The live gate is therefore presentation-independent strict
+composition of these relative Rees lattices through weak factorization, plus
+the analytic Stokes gluing—not recovery of the local Tate width itself.
 
 ## Goal
 

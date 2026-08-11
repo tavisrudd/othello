@@ -43,11 +43,14 @@ has nonzero extreme terms that no lower-dimensional self-carrier center has.
 It now also has a basis-independent integral-lattice avatar: the Beilinson
 Euler form gives the endpoint one unipotent Serre block of length `m+1`, while
 every projective self-carrier contribution has length `m-1`.  This uniform gap
-of two is exact, but its functorial blow-up compatibility is not yet available.
-The present formal category explicitly permits integer-power gauge changes and
-therefore forgets precisely this grading.  The next theorem needed is a
-birationally functorial filtered or integral-exponent enhancement of the
-quantum atom, or a proof that such an enhancement cannot exist.
+of two is exact.  Iritani's leading blow-up Fourier matrix supplies a further
+positive result: at a chosen large-radius blow-up boundary, its `q`-adic
+elementary divisors are consecutive and recover exactly the unordered Tate
+width.  Cyclic root monodromy preserves this multiset.  What remains missing is
+not the local filtration but its presentation-independent, functorial
+compatibility across composed weak factorizations and with analytic Stokes
+data.  The next theorem needed is a strict birational Rees/Stokes enhancement,
+or a proof that such an enhancement cannot exist.
 
 A second proposed refinement, the `p`-primary length of a global spectral
 cycle, does not survive audit in the published formalism.  The blow-up and
@@ -352,6 +355,61 @@ presented there as expected, not proved.  Thus the formal direct sum preserves
 exactly the data that split the copies and discards exactly the Stokes extension
 data in which the length-`m+1` Serre block would live.
 
+### 5.1 The formal `q`-adic lattice does recover local Tate spacing
+
+There is nevertheless more integral information in Iritani's initial matrix
+than in the Laurent-field direct sum alone.  Let `r` be the codimension of the
+blow-up center and set `t=q^{-1/s}`, where `s=r-1` for even `r` and
+`s=2(r-1)` for odd `r`, as in Iritani (5.11).  Equations
+(5.19) and (5.27) give, up to nonzero constants and higher `t`-order terms, the
+`l`-th exceptional column as
+
+\[
+ q_{Z,j}q^{(l+1)/(r-1)}
+ \bigl(\zeta^{-j(l+1)}\bigr)_{j=0}^{r-2},
+ \qquad 0\leq l\leq r-2,
+\]
+
+where
+
+\[
+ q_{Z,j}=u_jq^{-r/(2(r-1))},\qquad u_j\in\mathbf C^\times.
+\]
+
+The character matrix
+`(zeta^(-j(l+1)))` is an invertible discrete Fourier matrix.  Therefore the
+exceptional block has `t`-adic elementary-divisor valuations
+
+\[
+ v_l=\frac{s(r-2l-2)}{2(r-1)}.
+\]
+
+These are integers by the parity-dependent definition of `s`, and consecutive
+values differ by `s/(r-1)`.  After translation and rescaling, their levels are
+exactly
+
+\[
+ 0,1,\ldots,r-2.
+\]
+
+Thus the formal boundary lattice recovers the **unordered Tate spacing** of the
+`r-1` exceptional copies.  A loop in `q` permutes the Fourier sectors and
+multiplies rows and columns by roots of unity; both operations are units over
+the valuation ring, so the elementary-divisor multiset and its width survive.
+The certificate verifies the Fourier invertibility and valuation formula
+independently for `2 <= r <= 25`; the displayed calculation proves the general
+formula.
+
+This removes cyclic root monodromy as the local obstruction.  It does not yet
+produce a stable-birational invariant.  The parameter `q`, the valuation ring,
+and the lattice are attached to a selected blow-up direction and large-radius
+boundary.  Theorem 5.18 gives an isomorphism only after Laurent base change;
+it does not identify one intrinsic Rees lattice of a variety across different
+blow-up presentations or prove strict compatibility under composition in weak
+factorization.  Nor does it supply the analytic Stokes extensions whose
+semiorthogonal gluing is singled out in Remark 1.5.  That
+presentation-independence plus strict composition law is now the precise gate.
+
 This is not yet a stable birational invariant.  Cai's obstruction deliberately
 uses exponents modulo integers because the formal isomorphisms in the blow-up
 theorem may contain integer powers of `z`.  Katzarkov--Kontsevich--Pantev--Yu's
@@ -366,9 +424,11 @@ q^{1/(m+1)}\zeta^{j+1},
 
 and hence cyclically permutes all `m+1` eigenbranches.  No branch is globally
 distinguished when `m>0`; the certificate checks these cycles through `m=24`.
-The polynomial separation therefore identifies the missing structure rather
-than proving stable irrationality.  A Γ-integral or Stokes enhancement would
-have to recover an absolute filtration through this cyclic monodromy.  KKPYY
+The polynomial separation therefore cannot be interpreted as a canonical
+labelling of branches.  Section 5.1 shows, however, that monodromy still
+preserves the unordered local valuation width.  A Γ-integral or Stokes
+enhancement would have to make that width intrinsic and strictly composable
+across blow-up presentations, not choose one branch globally.  KKPYY
 explicitly identify integral enhanced atoms and their blow-up compatibility as
 future work rather than an available theorem.
 
@@ -550,6 +610,13 @@ Serre-block preservation alone would suffice: semiorthogonal extensions can
 join blocks.  The surviving exact gate is strict filtered additivity of the
 cubic-isotypic Stokes/Rees object.
 
+The present source-level `q` pass computes the integral content of Iritani's
+initial Fourier matrix.  It confirms that consecutive Tate width is already
+visible as a monodromy-invariant multiset of local `q`-adic elementary
+divisors, but rejects the inference that this relative boundary lattice is an
+intrinsic invariant of the variety.  The gate is narrowed to
+presentation-independent strict composition and analytic Stokes gluing.
+
 ## 9. Reproduction
 
 Working directory: repository root `/home/tavis/src/othello`.
@@ -583,15 +650,16 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 24,345 bytes;
-- independent replay: 10,161 bytes;
-- JSON certificate: 264,541 bytes.
+- Sage generator: 28,069 bytes;
+- independent replay: 11,907 bytes;
+- JSON certificate: 293,817 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
-of the source matrices and the quantum Kunneth/projective-bundle formula is
-human-audited.  The bounded checks do not assert existence or nonexistence of
-any weak factorization.
+of the source matrices, Iritani's asymptotic formulae, and the quantum
+Kunneth/projective-bundle formula is human-audited.  The bounded checks do not
+assert existence or nonexistence of any weak factorization or the missing
+global Rees/Stokes compatibility.
 
 ## 10. Sources
 
@@ -608,9 +676,11 @@ any weak factorization.
   PDF SHA-256:
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
 - Hiroshi Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555,
-  especially Theorem 1.1 and Remark 1.5.  The former preserves the connection
-  and Poincaré pairing in the formal direct sum; the latter locates the missing
-  Γ-integral/Stokes semiorthogonal compatibility.  Shared-cache PDF SHA-256:
+  especially (5.11), (5.19), (5.27), Theorem 5.18, and Remark 1.5.  The
+  formulae give the exact local `q`-adic elementary divisors; the theorem
+  preserves the connection and Poincaré pairing in the formal direct sum; the
+  remark locates the missing Γ-integral/Stokes semiorthogonal compatibility.
+  Shared-cache PDF SHA-256:
   `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
 - Vladimiro Benedetti, Aideen Fay, Jérémy Guéré, Laurent Manivel, and
   Nicolas Perrin, *An atomic criterion for irrationality without quantum
@@ -634,15 +704,19 @@ any weak factorization.
   obstruction from `m>=2`; the explicit self-carrier balances explain why.
 - **Settled:** no surface carries the cubic fractional block; consequently
   `X x P^1` is irrational for every smooth cubic threefold.
-- **Open:** whether the integer/Tate grading has a canonical filtered quantum
-  refinement respected by the blow-up and projective-bundle isomorphisms.
+- **Settled locally, open globally:** Iritani's initial exceptional Fourier
+  matrix has consecutive `q`-adic elementary divisors, so the chosen blow-up
+  boundary already recovers the unordered Tate width and cyclic root monodromy
+  preserves it.  What is open is whether these relative lattices descend to a
+  presentation-independent filtered quantum object respected by composed
+  blow-up and projective-bundle isomorphisms.
   The exact target is now basis-independent: preserve the cubic-isotypic
   unipotent Serre block.  Its endpoint length is `m+1`, while every
   self-carrier length is `m-1`; the conditional arbitrary-center width formula
   has the same gap two.  Evidence gap: current formal gauges allow integer
-  powers of `z`, the atom formalism quotients them out, projective Novikov
-  monodromy cyclically permutes every candidate label, and Γ-integral/Stokes
-  blow-up compatibility is not yet available in the cited theory.  The theorem
+  powers of `z`, the atom formalism quotients them out, and Γ-integral/Stokes
+  blow-up compatibility and factorization-independent Rees lattices are not
+  yet available in the cited theory.  The theorem
   must be strict on the filtration and additive on its associated graded;
   preservation of the Euler pairing or Serre operator alone is insufficient.
 - **Open:** whether geometric constraints on centers forbid the formal

@@ -78,7 +78,11 @@ formula; preserving the Serre block alone is insufficient because
 semiorthogonal extensions can join blocks.  The expected Γ-integral mechanism
 is unavailable in general;
 Iritani Theorem 1.1 and Remark 1.5 confirm this exact formal-versus-Stokes
-boundary.
+boundary.  Iritani's explicit initial matrix sharpens the positive side:
+its exceptional Fourier block has consecutive `q`-adic elementary divisors,
+affinely `0,...,r-2`, and root monodromy preserves the multiset.  The unresolved
+step is now presentation-independent strict composition of these local Rees
+lattices through weak factorization, together with the analytic Stokes gluing.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
