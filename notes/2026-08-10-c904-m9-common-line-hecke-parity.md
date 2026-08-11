@@ -380,6 +380,49 @@ forces \(\chi(\mathcal O_L,a)\) to be even. This proves:
 > universal-twist-independent determinant line has even degree on a
 > one-line elementary-Hecke curve.
 
+The exact rank-\(r\) form is cleaner.  Suppose the numerical class is
+
+\[
+             v_m=r[\mathcal O_X]-m[\mathcal O_L].
+\]
+
+Every determinant weight is \(rA-mB\), and the structure-sheaf and point
+tests produce \(r-m\) and \(r\).  Hence the complete determinant-weight
+ideal is
+
+\[
+                      d_m\mathbf Z,
+              \qquad d_m=\gcd(r,m).
+\]
+
+Along a one-line elementary-Hecke family with target class \(v_m\), an
+intrinsic determinant class \(a\) satisfies
+
+\[
+ r\chi(\mathcal O_X,a)=m\chi(\mathcal O_L,a).
+\]
+
+Writing \(r=d_m r'\), \(m=d_m m'\) with \((r',m')=1\) shows that its Hecke
+degree is divisible by
+
+\[
+                      e_m=\frac r{d_m}.
+\]
+
+Thus one has the **similitude--Hecke conservation law**
+
+\[
+ \boxed{
+   \text{moduli similitude }d_m=\gcd(r,m),\qquad
+   \text{intrinsic Hecke divisibility }e_m=\frac r{d_m},\qquad
+   d_me_m=r.}
+\]
+
+For rank two, even charge carries the order-two moduli gerbe and odd charge
+has even intrinsic Hecke degree.  Passing to the adjacent fine charge moves
+the factor two from the ambient gerbe to the boundary polarization; it does
+not remove it.
+
 This exposes an alternating two-primary trap. At even charge, the
 determinant-weight ideal can retain the order-two moduli gerbe. At odd
 charge the gerbe disappears, but all orthogonal determinant polarizations

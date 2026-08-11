@@ -147,6 +147,19 @@ the same construction for charge two stops exactly at similitude two.
 This parity theorem is elementary and should be regarded as a uniform
 compression of the gate, not as a novelty claim.
 
+The common-line audit gives the rank-\(r\) completion.  For
+\(v_m=r[\mathcal O_X]-m[\mathcal O_L]\), the determinant similitude is
+\(d_m=\gcd(r,m)\), while every universal-twist-independent determinant line
+has degree divisible by \(e_m=r/d_m\) on a one-line Hecke family.  Hence
+
+\[
+                         d_me_m=r.
+\]
+
+In rank two, the factor two alternates between the ambient gerbe at even
+charge and the intrinsic Hecke polarization at odd charge.  Passing to a
+fine adjacent moduli problem moves the obstruction; it does not remove it.
+
 ## 2. Why Xu's shortcut cannot be used
 
 Xu claimed that the charge-two moduli space is fine by combining the weights
