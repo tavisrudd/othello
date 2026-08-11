@@ -832,13 +832,16 @@ the distinguished ghost exponent.  See
 
 The open-chain quotient is not literally the Hochschild or cyclic complex.
 Its exact standard part is the Connes `B=d` edge of the two-periodic diagonal
-resolution, with diagonal Euler element `h u^(h-1)`.  The remaining new step
-is descent of the cyclic readout through signed square-switch/three-term
-Pluecker relations, including arbitrary Frobenius labels, closed-loop
-contractions, and primitive unramified descent.  The full mixed-cofactor
-quotient is strictly larger, so ordinary cyclic-homology identification is a
-dead path.  See
-`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md`.
+resolution, with diagonal Euler element `h u^(h-1)`.  A direct local-Pluecker
+descent is also false: the unit-labelled four-leg switch has readouts
+`(h^2,h,h)`, so its terms are genuine determinant contributions, not
+relations killed separately.  Frobenius-unit invariance holds for the
+diagonal/Connes/closed-loop sector, but any cyclic obstruction for the
+principal class must be constructed only after the full determinant
+antisymmetrizer.  Both literal cyclic-homology identification and termwise
+switch cancellation are dead paths.  See
+`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md` and
+`notes/2026-08-11-c904-local-switch-cyclic-readout-counterexample.md`.
 
 C898 is complete. Its sealed reviewer dossier, five independent cold reads,
 synthesis, and adopted remediation produced Paper I authority commit `c8438909`

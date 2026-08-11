@@ -707,13 +707,17 @@ two-periodic diagonal resolution of the truncated Frobenius algebra: under
 the Frobenius identification the commutator is multiplication by `y-x`, its
 companion is `(y^h-x^h)/(y-x)`, and diagonal restriction gives the Euler
 element `h u^(h-1)`.  The actual cofactor lattice is much larger than this
-cyclic quotient.  The first unresolved theorem is precisely that the cyclic
-readout descends through every signed square-switch/three-term Pluecker
-relation with arbitrary Frobenius labels and closed-loop contractions, and
-then remains primitive after unramified descent.  Thus “identify the whole
-quotient with cyclic homology” is a dead route; proving this Pluecker descent
-is the sharpened crown gate.  See
-`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md`.
+cyclic quotient.  A direct local-Pluecker descent is false: the three
+four-leg unit-labelled pairings have readouts `(h^2,h,h)`, so square switches
+are nonzero determinant contributions rather than relations for arbitrary
+mixed divisor forms.  Frobenius-unit invariance is exact for the diagonal,
+Connes, and closed-loop sector, but the principal obstruction can only be
+constructed globally after the full determinant antisymmetrizer.  Thus both
+“identify the whole quotient with cyclic homology” and “kill switches
+termwise” are dead routes; the sharpened crown gate is a global
+antisymmetrizer filtration/comparison theorem.  See
+`notes/2026-08-11-c904-open-chain-cyclic-complex-audit.md` and
+`notes/2026-08-11-c904-local-switch-cyclic-readout-counterexample.md`.
 
 ## Goal
 
