@@ -25,7 +25,13 @@ also impossible over every finite field, and no \(k=15\) census is planned.
 In the saturated-internal branch, coherence canonically produces a dual
 3-net of order \((q+3)/2\); the collinear-component conic theorem and subgroup
 arithmetic now exclude every prime \(q>5\).  Extension fields remain at a
-precise characteristic-threshold version of that theorem.
+precise characteristic-threshold version of that theorem, but every odd prime
+power \(7\le q\le127\), together with \(q=169\), is now closed by exhaustive
+oriented-coherence census — including all three forced tower-kernel seams
+\(q=25,27,81\).  The census graph is a Cayley graph on \(\mathrm{AGL}(1,q)\) of
+proved degree \((q^2-1)/4\), and its Delsarte--Hoffman clique bound is
+\(4/3\) of the required size in the limit, so no ratio-bound argument closes
+the branch.
 The character-weighted
 all-center residual sum is the difference of the \(\pm1\) root
 multiplicities of an exact
@@ -123,6 +129,25 @@ Authorities:
 `notes/2026-08-08-c756-consolidated-proof-cold-referee-read.md`.
 
 ### Saturated-internal — prime fields closed; extension conic gate open
+
+Field-by-field state.  An exhaustive census of oriented coherent sets closes
+every odd prime power \(7\le q\le127\) and \(q=169\); \(q=5\) returns exactly
+the two known four-frame supports.  This closes the three forced tower-kernel
+seams \(q=25,27,81\) as fields, so the digit-tower argument below no longer has
+to survive a dimension-forced kernel: outside those three parameters every
+tower kernel is a rank-drop stratum, and inside them the field is finished.
+The census graph on \(\mathbb F_{q^2}\setminus\mathbb F_q\) is a Cayley graph
+on \(\mathrm{AGL}(1,q)\), regular of proved degree \((q^2-1)/4\); its largest
+nontrivial eigenvalue is \((q+1)/2\) and its least is at most \(-(q-1)/2\) in
+every computed case, so the Delsarte--Hoffman clique bound
+\(2q(q-1)(q+3)/(3q^2-2q+3)\) exceeds the required \((q+3)/2\) by a factor
+tending to \(4/3\).  A \(25\%\) improvement of that bound, in the style of the
+polynomial-method improvements to Paley clique numbers, would close the branch
+over every field at once.  Maximum coherent sets grow like \(\log q\)
+(\(\omega=8,9,10,10,12,12\) at \(q=25,27,49,81,121,125\)); the only proved
+unconditional bound is \(\omega\le q-1\) for \(q\equiv1\pmod4\), from
+clique--coclique with the independent vertical line.  Authority:
+`notes/2026-08-11-c756-coherence-census-and-spectral-bound.md`.
 
 Put \(q=2m-1\).  Polarity turns a hypothetical example into \(m+1\) passants
 in dual-arc position whose pairwise intersections form an internal star
@@ -787,7 +812,7 @@ over every finite field.  Authorities:
 
 | branch | completed uniformly | terminal open gates |
 |---|---|---|
-| saturated internal | complementary split-factor model; Cartier ghost quotient; stacked Cartier--Toeplitz matrix; exact forced seams; nonshadow Gram pencil; support bounds | control every rank-drop stratum of \(\mathbb M_R\); prove quadratic/cubic nonshadow rigidity on its kernel |
+| saturated internal | complementary split-factor model; Cartier ghost quotient; stacked Cartier--Toeplitz matrix; forced seams closed by census; nonshadow Gram pencil; support bounds; \(\mathrm{AGL}(1,q)\) Cayley model with proved degree \((q^2-1)/4\); exhaustive closure for \(q\le127\) and \(q=169\) | control every rank-drop stratum of \(\mathbb M_R\); prove quadratic/cubic nonshadow rigidity on its kernel; or beat the coherence-graph clique ratio bound by \(4/3\) |
 | nonsaturated | excess-module filtration; collision Hilbert law; bounded zero/parity resultants; complementary trace and norm; mirror/sign-norm factorization; predescent ordinary-factor extraction; tangent/general/overlap support split; torus and bi-character zero models | derive endpoint-coherent zero-trace exclusion; evaluate the nonzero trace product on \(K_{\rm odd}\) |
 
 These are theorem dependencies, not a claim that the all-\(k\) theorem is
@@ -798,7 +823,17 @@ terminal statements; neither terminal obstruction is yet closed.
 
 1. Do not open a \(k=15\) census.  Treat q=67,71,73 only as theorem-design
    data for the all-\(q\) branches.
-2. For saturated-internal configurations, prove the special-direction conic
+2. For saturated-internal configurations there are now two routes, and the
+   coherence-graph route is the shorter one.  Compute the
+   \(\mathrm{AGL}(1,q)\) spectrum of the oriented coherence graph in closed
+   form — the \(q-1\) linear-character eigenvalues as Jacobi sums and the
+   \((q-1)\)-dimensional block separately — turning \(\lambda_2=(q+1)/2\) and
+   \(\lambda_{\min}\le-(q-1)/2\) into theorems and the \(4/3\) shortfall of the
+   clique ratio bound into an exact statement; then attack that shortfall with
+   a polynomial-method argument of the kind used to improve Paley clique
+   bounds.  Success closes the branch for every \(q\) at once.  Do not extend
+   the census.
+2b. The original route remains available: prove the special-direction conic
    lemma over proper extension fields by analyzing the nonlinear Cartier
    system \(\operatorname{pr}_{<0}(R^{j-1}F^j)\).  Classify the common
    kernel of the semilinear digit tower \(j=p^a\), then analyze the mixed
@@ -864,6 +899,12 @@ Do not:
   untyped low moments stalled;
 - cross the degree-16 mask boundary blindly.  A targeted degree-16
   cross-center identity is allowed if its lost-information role is explicit;
+- extend the oriented-coherence census past \(q=169\), or recensus a field
+  already in its certificate; the census is finished as an instrument;
+- use \(\omega\le1-\deg/\lambda_{\min}\) as a clique bound.  It is false for
+  regular graphs — the prism over \(K_5\) refutes it — and on this graph it
+  would spuriously return exactly \((q+3)/2\).  The valid ratio bound is the
+  complement form \(n(1+\lambda_2)/(n-\deg+\lambda_2)\);
 - edit a manuscript under C756.
 
 ## Evidence boundaries
@@ -872,6 +913,10 @@ Do not:
   independent uncovered-set replay extends only through \(q\le19\).
 - The saturated-external human proof has a successful cold read; C894 owns its
   remaining external-specialist safeguard.
+- The saturated-internal coherence census has two independent implementations
+  (different field models and different searches) plus agreement with the older
+  2026-08-01 audit on all fifteen fields it covers.  Its spectral rows are
+  double-precision eigenvalues, and only the degree formula is proved.
 - The \(q=53\) all-passant aligned certificate has independent formula-level
   invariant checks, not a second independent exhaustive search implementation.
 - Exact all-type searches cover \(k=12\) at \(q=47,49,53\), with independent
@@ -900,13 +945,19 @@ Do not:
 - Saturated-internal: coherent supports are dual 3-nets; all prime fields
   \(q>5\) are excluded structurally.  Proper extension fields remain at the
   special-direction conic lemma, now reduced to the affine-stable
-  \(r\equiv0,-1\pmod p\) Laurent ghosts and their higher-power coupling.
+  \(r\equiv0,-1\pmod p\) Laurent ghosts and their higher-power coupling — but
+  every field \(q\le127\) and \(q=169\) is closed by census, the three forced
+  seams with it, and the branch has a second route through the clique number
+  of the \(\mathrm{AGL}(1,q)\) coherence graph.
 - Near-term full all-\(k\) proof odds remain below the former 20--25% estimate:
   the higher-size and saturated-internal gates remain; a counterexample
   remains live.
 
 ## Durable pointers
 
+- Saturated-internal coherence census, \(\mathrm{AGL}(1,q)\) model, and the
+  spectral barrier:
+  `notes/2026-08-11-c756-coherence-census-and-spectral-bound.md`.
 - Current audit:
   `notes/2026-08-09-c756-all-k-status-assumption-audit.md`.
 - Character-weighted all-center trace/norm identity:
