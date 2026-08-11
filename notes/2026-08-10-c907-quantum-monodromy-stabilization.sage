@@ -152,6 +152,9 @@ def projective_space_check(m):
         "cyclic_power_identity": True,
         "semisimple_eigenbasis_verified": True,
         "formal_power_exponents": ["0"] * n,
+        "novikov_loop_branch_permutation": list(range(1, n)) + [0],
+        "novikov_loop_cycle_length": n,
+        "has_monodromy_fixed_branch": n == 1,
         "cubic_rank_two_copies_after_product": n,
         "cubic_fractional_residues_after_product": ["-1/6", "1/6"],
     }
@@ -298,7 +301,8 @@ def build_certificate(bound):
         "candidate_tate_graded_refinement": {
             "status": (
                 "Exact polynomial separation, but not an invariant in the present formal category: "
-                "integer powers of z are removable by allowed gauge transformations."
+                "integer powers of z are removable by allowed gauge transformations, and a Novikov "
+                "loop cyclically permutes all projective-space eigenbranches."
             ),
             "model": (
                 "The endpoint coefficient is 1+L+...+L^m. A self-carrier center indexed by t "
@@ -308,7 +312,8 @@ def build_certificate(bound):
             "checks": [tate_graded_candidate_check(m) for m in range(1, bound + 1)],
             "missing_theorem": (
                 "Construct a birationally functorial filtered or integral-exponent enhancement of "
-                "the quantum atom that retains these Tate degrees, or prove that no such enhancement exists."
+                "the quantum atom that retains these Tate degrees through the cyclic branch monodromy, "
+                "or prove that no such enhancement exists."
             ),
         },
     }

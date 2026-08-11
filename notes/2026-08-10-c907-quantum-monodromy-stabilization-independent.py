@@ -73,6 +73,9 @@ def main():
         H[0, n - 1] = 1
         assert H**n == sp.eye(n)
         assert check["formal_power_exponents"] == ["0"] * n
+        assert check["novikov_loop_branch_permutation"] == list(range(1, n)) + [0]
+        assert check["novikov_loop_cycle_length"] == n
+        assert check["has_monodromy_fixed_branch"] == (n == 1)
 
     surface = certificate["surface_carrier_exclusion_and_one_step_irrationality"]
     table = surface["nef_canonical_surface_grading_table"]

@@ -228,8 +228,21 @@ This is not yet a stable birational invariant.  Cai's obstruction deliberately
 uses exponents modulo integers because the formal isomorphisms in the blow-up
 theorem may contain integer powers of `z`.  Katzarkov--Kontsevich--Pantev--Yu's
 Hodge atoms likewise fold the Hodge grading so that Tate twists are invisible.
+There is also an exact local obstruction to simply restoring labels: a loop of
+the projective-space Novikov parameter sends
+
+\[
+q^{1/(m+1)}\zeta^j\longmapsto
+q^{1/(m+1)}\zeta^{j+1},
+\]
+
+and hence cyclically permutes all `m+1` eigenbranches.  No branch is globally
+distinguished when `m>0`; the certificate checks these cycles through `m=24`.
 The polynomial separation therefore identifies the missing structure rather
-than proving stable irrationality.
+than proving stable irrationality.  A Γ-integral or Stokes enhancement would
+have to recover an absolute filtration through this cyclic monodromy.  KKPYY
+explicitly identify integral enhanced atoms and their blow-up compatibility as
+future work rather than an available theorem.
 
 ## 6. Alternate-attack checkpoint
 
@@ -282,9 +295,9 @@ nix shell nixpkgs#uv --command uv run --with sympy==1.14.0 python \
 The certificate is canonical JSON with no timestamps or host paths.  The
 tracked `SHA256SUMS` file records:
 
-- Sage generator: 12,202 bytes;
-- independent replay: 5,535 bytes;
-- JSON certificate: 151,808 bytes.
+- Sage generator: 12,505 bytes;
+- independent replay: 5,736 bytes;
+- JSON certificate: 159,779 bytes.
 
 Trusted boundary: Sage exact matrix arithmetic, Jordan form, cyclotomic-field
 arithmetic, and SymPy symbolic simplification; the mathematical identification
@@ -321,8 +334,10 @@ any weak factorization.
   `X x P^1` is irrational for every smooth cubic threefold.
 - **Open:** whether the integer/Tate grading has a canonical filtered quantum
   refinement respected by the blow-up and projective-bundle isomorphisms.
-  Evidence gap: current formal gauges allow integer powers of `z` and the atom
-  formalism quotients them out.
+  Evidence gap: current formal gauges allow integer powers of `z`, the atom
+  formalism quotients them out, projective Novikov monodromy cyclically
+  permutes every candidate label, and Γ-integral blow-up compatibility is not
+  yet available in the cited theory.
 - **Open:** whether geometric constraints on centers forbid the formal
   self-carrier balances in a minimal weak factorization.  Evidence gap: no
   common resolution or non-realizability theorem is known.
