@@ -187,6 +187,16 @@ At the purely polarized-abelian level, layer 4 holds on the entire
 $5\times4$ two-prime packet, not only on the geometrically selected cubic
 vertex.
 
+There is now a conceptual classical/exotic separation.  The general
+Jordan-scalar minimal-class theorem proves integral divisor-product
+saturation for every principal elliptic-power quotient whose gluing is
+scalar on each local Jordan block.  It covers the full-Weyl/root--weight
+branches in every rank.  The two exotic $\mathbf F_4$ cubic gluings are not
+Jordan-scalar, so their separate $7/17$ saturation theorem is genuine extra
+content.  Thus all five vertices of the present Hecke pentad carry primitive
+minimal cycles, but the classical triple and exotic pair reach them by
+different integral mechanisms.
+
 The optional external successor is even sharper: combine layer 4 with the
 C907 one-stabilization theorem to obtain a non-isotrivial family for which
 
@@ -318,7 +328,8 @@ audits are recorded in:
 - `2026-08-10-c904-exotic-f4-gluing.md`;
 - `2026-08-10-c904-quartic-x06-shadow-sister.md`;
 - `2026-08-10-c904-quartic-cubic-hecke-correspondence.md`;
-- `2026-08-10-c904-six-axis-minimal-class-saturation.md`; and
+- `2026-08-10-c904-six-axis-minimal-class-saturation.md`;
+- `2026-08-10-c904-adjacent-annals-uniform-theorems.md`; and
 - `2026-08-10-c904-alternate-annals-crowns-priority-audit.md`.
 
 The pentad formulation is a synthesis of those proved local statements.  Its
