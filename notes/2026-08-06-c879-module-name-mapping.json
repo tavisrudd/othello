@@ -32,13 +32,14 @@
       "repository": "finitegeom-q16-certificates",
       "namespace": "TavisRuddFiniteGeom.Certificates.Q16",
       "reason": "separately versioned Mathlib-only certificate source; downstream bridges own compatibility"
+    },
+    {
+      "repository": "finitegeom-projective-cap-q11-certificates",
+      "namespace": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11",
+      "reason": "separately versioned Mathlib-only certificate source; downstream bridges own compatibility"
     }
   ],
   "pending_certificate_namespaces": [
-    {
-      "repository": "finitegeom-projective-cap-q11-certificates",
-      "namespace": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11"
-    },
     {
       "repository": "finitegeom-projective-cap-q13-certificates",
       "namespace": "TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13"
