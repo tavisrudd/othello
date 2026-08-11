@@ -7,6 +7,14 @@
   n=6: min|A|=0  spectral bound=0  minimisers=12  of which conference=12
   n=7: min|A|=5  spectral bound=2.1875  minimisers=3024  of which conference=0
   n=8: min|A|=10  spectral bound=7  minimisers=4200  of which conference=0
+== (V) signed split of the aligned family, exhaustive ==
+  n=6: signed-split mismatches=0
+  n=7: signed-split mismatches=0
+== (VI) integrality bound off the residue n = 2 mod 4 ==
+  n=7: plain bound=2.19  integrality bound=3.50
+  n=8: plain bound=7.00  integrality bound=7.25
+  n=9: plain bound=15.75  integrality bound=18.00
 == (IV) Paley conference two-graph on ten points ==
   S^2 = (n-1)I: True
   |A|=30  spectral prediction=30  lambda_3 values=[1]
+  five-set profile (aligned 4-subsets per 5-set): {0: 72, 1: 180}

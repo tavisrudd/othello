@@ -32,28 +32,38 @@ currently spend.
    points the two-graphs without one are precisely the conference two-graphs
    (Corollary 5). The six-point witness enumeration is explained, not merely
    reproduced.
-4. In spectral form \(\lvert A\rvert\) is an affine function of
-   \(\operatorname{tr}(S^4)\) (Corollary 6), so a uniformly random alignment test
-   is an unbiased estimator of the fourth spectral moment of the Seidel matrix —
-   which is all that a "no" answer carries in aggregate.
-5. The aligned family of a regular two-graph is a 3-design exactly when the
-   two-graph is a conference two-graph; otherwise \(\lambda_3\) takes two values
-   and separates coherent from incoherent triples (Corollary 7). This proves the
-   design fact the task card quoted and pins its exact hypothesis.
-6. A decoder may assume the design law for free, but the law is inert: it cannot
+4. Splitting the aligned family by sign, \(\lvert A_\pm\rvert=\tfrac12\lvert A\rvert
+   \pm\tfrac{n-3}{24}\sum_p m(p)\) (Corollary 6). So **every** four-point statistic
+   of a two-graph is a function of the defect vector \(m\) alone; and on the
+   conference class \(m\equiv0\), so every four-point statistic is constant
+   across the entire class. No counting argument at the four-point level can
+   distinguish two conference two-graphs — a decoder must use positions.
+5. Attainment of the bound in Theorem 4 is an arithmetic condition: it needs a
+   symmetric conference matrix of order \(n\), hence \(n\equiv2\pmod4\) **and**
+   \(n-1\) a sum of two squares. The first failure of the second condition is
+   \(n=22\). Integrality of \(m\) sharpens the bound at every other residue
+   (Corollary 8).
+6. The aligned family of a regular two-graph has the conference parameter
+   \(\lambda_3=(n-6)/4\) exactly when the two-graph is conference.  If both
+   coherent and incoherent triples occur, every other regular two-graph has two
+   distinct values of \(\lambda_3\) (Corollary 9).  This pins the exact scope of
+   the design fact quoted by the task card.
+7. A decoder may assume the design law for free, but the law is inert: it cannot
    inflate a decoder's known set by more than a factor \(1+O(1/n)\)
-   (Proposition 12). This answers item 5's second question negatively.
-7. The promised-anchor variant is worth exactly two bits and therefore changes
+   (Proposition 14). This answers item 5's second question negatively.
+8. The promised-anchor variant is worth exactly two bits and therefore changes
    no bound beyond the \(O(1)\) tests the general decoder spends locating an
-   anchor (Theorem 8, Corollary 9). That half of item 5 is closed.
-8. Every local lower-bound mechanism dies under the conference promise — no
-   elementary pair flip stays in the class (Theorem 10) — and the rigidity that
-   replaces it certifies only \(O(n)\) of savings (Theorem 11).
-9. What survives is a clean reduction: from below, the conference-promised query
-   complexity **is** the enumeration problem for symmetric conference matrices,
-   \(\log_2 N_n - 1\), which is \(\ge n\log_2 n - O(n)\) unconditionally and
-   drops below the unpromised \(\Theta(n^2)\) exactly when \(\log_2 N_n =
-   o(n^2)\) — open (§7).
+   anchor (Theorem 10, Corollary 11). That half of item 5 is closed.
+9. Every local lower-bound mechanism dies under the conference promise — no
+   elementary pair flip stays in the class (Theorem 12) — and the rigidity that
+   replaces it certifies only \(O(n)\) of savings (Theorem 13).
+10. From below, the conference-promised query complexity **is** the enumeration
+    problem for symmetric conference matrices, \(\log_2 N_n - 1\), at least
+    \(n\log_2 n - O(n)\) unconditionally. From above there is one route that
+    does beat the general decoder: learning \(\Theta(n/\log n)\) full rows and
+    solving the resulting \(\pm1\) orthogonality system gives \(O(n^2/\log n)\)
+    tests, conditional on a non-degeneracy property of conference matrices that
+    is an inverse Littlewood–Offord statement (§6).
 
 ## 1. Setup
 
@@ -125,7 +135,7 @@ the sum running over all \(\binom n2\) pairs.
 summation in the second term: each pair \(p\) contributes
 \(m(p)\sum_{t\supset p}\sigma(t)=m(p)^2\), by the definition of \(m(p)\). ∎
 
-**Theorem 4 (conference two-graphs are the exact minimisers).** For every
+**Theorem 4 (the defect bound and its equality case).** For every
 two-graph on \(n\) points,
 
 \[ \lvert A(\Delta)\rvert \;\ge\; \frac{(n-6)\binom n3}{16}\;=\;\frac{n(n-1)(n-2)(n-6)}{96}, \]
@@ -140,6 +150,10 @@ every defect vanishes. The equivalence \(m\equiv0\iff S^2=(n-1)I\) is the
 definition of \(m\) together with \((S^2)_{xx}=n-1\), and the congruence is the
 classical existence condition for symmetric conference matrices. ∎
 
+Thus, whenever a conference two-graph of order \(n\) exists, the conference
+two-graphs are exactly the minimisers.  At orders where none exists, the finite
+minimum lies strictly above the displayed bound.
+
 This is the structural content of item 5's first question, and it points the
 opposite way from the one the task card anticipated. The conference promise does
 not hand the decoder extra local statistics to exploit; it pins the instance to
@@ -153,7 +167,7 @@ condition that kills it.
 least seven points has an aligned four-set. At \(n=6\) the bound reads
 \(\lvert A\rvert\ge0\) with equality exactly at the conference two-graphs, so the
 six-point two-graphs invisible to alignment tests are precisely the conference
-ones. For \(n\le5\) the bound is negative and says nothing.
+ones. For \(4\le n\le5\) the bound is negative and says nothing.
 
 The six-point half matches the enumeration in
 `notes/2026-08-07-c880-alignment-separation.md` exactly: twelve labelled
@@ -163,7 +177,33 @@ there. The \(n\ge7\) half is a two-line proof of anchor existence, currently
 obtained in the development by a different route
 (`exists_distinct_alignedAnchor`); see §8 for the handoff.
 
-**Corollary 6 (spectral form).** Since
+**Corollary 6 (the complete four-point statistics).** Let \(A_+\) and \(A_-\) be
+the aligned four-sets on which \(\sigma\equiv+1\) and \(\sigma\equiv-1\). Then
+
+\[ \lvert A_\pm\rvert \;=\; \tfrac12\lvert A\rvert \;\pm\; \frac{n-3}{24}\sum_p m(p). \]
+
+*Proof.* Put \(s(Q)=\sum_{t\subset Q}\sigma(t)\), which by Lemma 1 lies in
+\(\{4,0,-4\}\) and is \(\pm4\) exactly on \(A_\pm\). Then
+\(4(\lvert A_+\rvert-\lvert A_-\rvert)=\sum_Q s(Q)=(n-3)\sum_t\sigma(t)
+=\frac{n-3}3\sum_p m(p)\), the last step because each triple has three pairs. ∎
+
+Every four-point statistic of a two-graph is therefore a function of the defect
+vector \(m\) alone: the two counts \(\lvert A_\pm\rvert\) exhaust the four-point
+patterns, \(\lvert A\rvert\) is quadratic in \(m\) and \(\lvert A_+\rvert-\lvert
+A_-\rvert\) is linear in it. On the conference class \(m\equiv0\), so **every
+four-point statistic is constant across the entire class** — the aligned family
+always has \(n(n-1)(n-2)(n-6)/96\) members, split evenly by sign, and is always a
+\(3\)-\((n,4,\frac{n-6}4)\) design. No counting argument at the four-point level
+can separate two conference two-graphs. A decoder must use which four-sets answer
+yes, and the first statistic that can vary lives on five points.
+
+Read in reverse, Theorem 4 and Corollary 6 are the equality case of a
+quasirandomness statement: \(\sum_p m(p)^2\) is a discrepancy, and the conference
+two-graphs are the exactly quasirandom two-graphs, the ones whose four-point
+counts hit the random values on the nose. The alignment oracle measures
+quasirandomness deficiency and nothing else.
+
+**Corollary 7 (spectral form).** Since
 \(\sum_p m(p)^2=\frac12\bigl(\operatorname{tr}(S^4)-n(n-1)^2\bigr)\),
 
 \[ \lvert A(\Delta)\rvert \;=\; \frac14\binom n4 \;+\;
@@ -182,9 +222,34 @@ answers to random tests carry the fourth moment and nothing else. Any decoder
 beating the counting bound must exploit *which* four-sets answer yes, never how
 many.
 
+**Corollary 8 (integrality, and the arithmetic obstruction to attainment).** Every
+defect satisfies \(m(p)\equiv n\pmod 2\). Hence the bound of Theorem 4 sharpens
+off the residue \(n\equiv2\pmod4\):
+
+- \(n\) odd: every \(\lvert m(p)\rvert\ge1\), so
+  \(\lvert A\rvert\ge\frac1{16}\bigl((n-6)\binom n3+\binom n2\bigr)\);
+- \(n\equiv0\pmod4\): \(m\equiv0\) would exhibit a symmetric conference matrix of
+  order \(n\), which cannot exist, so some \(\lvert m(p)\rvert\ge2\) and
+  \(\lvert A\rvert\ge\frac1{16}\bigl((n-6)\binom n3+4\bigr)\).
+
+At \(n=7\) this raises the bound from \(2.19\) to \(3.5\), so \(\lvert A\rvert\ge4\)
+against a true minimum of \(5\); at \(n=8\), from \(7\) to \(7.25\), so
+\(\lvert A\rvert\ge8\) against a true minimum of \(10\); at \(n=9\), from
+\(15.75\) to \(18\).
+
+Even on the residue \(n\equiv2\pmod4\) the bound is attained only when a
+symmetric conference matrix of order \(n\) exists, and by the classical necessary
+condition of Belevitch and of van Lint and Seidel that requires \(n-1\) to be a
+sum of two squares. The first \(n\equiv2\pmod4\) failing it is \(n=22\), where
+\(21=3\cdot7\) is not a sum of two squares; the next are \(n=34,58,70\). So the
+minimum number of aligned four-sets on \(n\) points is controlled by a
+number-theoretic condition on \(n-1\), and at those sizes every two-graph carries
+a forced quasirandomness deficiency. What that minimum is at \(n=22\) is not
+known here.
+
 ## 3. The design law and exactly where it fails
 
-**Corollary 7.** Let \(\Delta\) be a regular two-graph, so that
+**Corollary 9.** Let \(\Delta\) be a regular two-graph, so that
 \(S^2=\varsigma S+(n-1)I\) with \(\varsigma=\rho_1+\rho_2\); equivalently
 \(m\equiv\varsigma\). Then
 
@@ -193,9 +258,11 @@ many.
    \lvert A\rvert=\frac{n(n-1)\bigl(n^2-8n+12+3\varsigma^2\bigr)}{96}. \]
 
 Consequently \(A(\Delta)\) is a \(3\)-\((n,4,\tfrac{n-6}4)\) design **iff**
-\(\varsigma=0\), i.e. iff \(\Delta\) is a conference two-graph. For every other
-regular two-graph the aligned family is a 2-design only, and \(\lambda_3\)
-separates coherent triples from incoherent ones.
+\(\varsigma=0\), i.e. iff \(\Delta\) is a conference two-graph.  If both
+coherent and incoherent triples occur and \(\varsigma\ne0\), the two displayed
+values of \(\lambda_3\) are distinct, so the aligned family is not a
+3-design.  The constant two-graphs are the degenerate exception to that last
+sentence: their aligned family is complete.
 
 *Proof.* Theorem 2 and Corollary 3 with \(m\equiv\varsigma\); the constant
 \(\varsigma\) is the two-graph's eigenvalue sum because \((S-\rho_1I)(S-\rho_2I)=0\)
@@ -208,7 +275,7 @@ regular two-graphs the aligned count is again minimised at \(\varsigma=0\).
 
 ## 4. The promised anchor is worth exactly two bits
 
-**Theorem 8.** For any four-set \(Q_0\), the set of two-graphs in which \(Q_0\) is
+**Theorem 10.** For any four-set \(Q_0\), the set of two-graphs in which \(Q_0\) is
 aligned is a subgroup of \(\mathcal T_n\) of index exactly \(4\).
 
 *Proof.* Restriction \(\rho_{Q_0}\colon\mathcal T_n\to\mathcal T(Q_0)\cong\mathbf F_2^3\)
@@ -217,7 +284,7 @@ by taking the descendant graph to be supported inside \(Q_0\). Alignment of
 \(Q_0\) says \(\rho_{Q_0}(\Delta)\) lies in the two-element subgroup of constant
 functions, which has index \(4\) in \(\mathbf F_2^3\). ∎
 
-**Corollary 9.** The anchor promise multiplies the candidate count by \(1/4\) and
+**Corollary 11.** The anchor promise multiplies the candidate count by \(1/4\) and
 so lowers every counting bound by exactly two: the promised-anchor counting
 bound is \(\binom{n-1}2-3\). The entropy bound is likewise unchanged to leading
 order. For any four-set \(Q\) with \(\lvert Q\cap Q_0\rvert\le2\) the joint
@@ -239,7 +306,7 @@ paper's decoder solves the easier promised problem, and even that one needs
 
 ## 5. The class is rigid, and the rigidity is worth \(O(n)\)
 
-**Theorem 10 (no local move stays in the class).** Let \(S\) be a symmetric
+**Theorem 12 (no local move stays in the class).** Let \(S\) be a symmetric
 conference matrix of order \(n\ge4\) and let \(S'\) negate the single pair
 \(\{x,y\}\). Then for every \(z\neq x,y\),
 \((S'^2)_{xz}=(S^2)_{xz}-2S_{xy}S_{yz}=-2S_{xy}S_{yz}\neq0\), so \(S'\) is not a
@@ -251,7 +318,7 @@ and it never survives the promise. Any lower bound for the promised problem must
 therefore come from pairs of genuine conference two-graphs, not from
 perturbations.
 
-**Theorem 11 (support rigidity).** Let \(S,S'\) be symmetric conference matrices
+**Theorem 13 (support rigidity).** Let \(S,S'\) be symmetric conference matrices
 of order \(n\) and let \(H\) be the graph of pairs on which they differ, with
 support size \(s\). If \(H\neq\emptyset\) then (i) whenever \(s<n\), every
 \(H\)-degree on the support is even and positive; and (ii) \(s\ge\sqrt n\).
@@ -279,7 +346,7 @@ and recover them, worth fewer than \(n/2\) tests against a budget of
 **Item 5(b) — may the decoder assume the design property?** Yes, and it gains
 nothing by doing so.
 
-**Proposition 12 (the design law is inert).** Suppose a decoder knows the design
+**Proposition 14 (the design law is inert).** Suppose a decoder knows the design
 law \(\lambda_3\equiv(n-6)/4\) and uses it to infer unasked answers: whenever
 \(n-4\) of the \(n-3\) four-sets through some triple are known, the last is
 determined. Let \(K\) be the asked set, \(\lvert K\rvert=k\), and \(\bar K\) its
@@ -314,20 +381,49 @@ unconditionally.
 
 *The reduction.* Whether the promise actually lowers the \(\Theta(n^2)\)
 requirement is exactly the question whether \(\log_2 N_n=o(n^2)\) — the
-enumeration problem for symmetric conference matrices, which is open. Every
-known construction gives \(2^{\Theta(n\log n)}\) labelled objects, in which case
-the promise is worth a factor \(\Theta(n/\log n)\) in the lower bound, but no
-proof is available in either direction. This is the cleanest statement of what
+enumeration problem for symmetric conference matrices, which is open. If the
+count is \(2^{\Theta(n\log n)}\) then the promise is worth a factor
+\(\Theta(n/\log n)\) in the lower bound, but no proof is available in either
+direction, and the constructions were not audited: the C880 literature audit did
+not search conference-matrix enumeration, so nothing here should be read as a
+claim about what is known. This is the cleanest statement of what
 item 5(a) is: **from below, the conference-promised query complexity is the
 conference-matrix counting problem.**
 
-*From above.* Nothing improves. Theorem 4 places the promised instance at the
-minimum of yes-answers; Corollary 6 says the aggregate answer count carries only
-one spectral moment, which the promise pins in advance; Theorem 10 removes every
-local mechanism; Theorem 11 certifies \(O(n)\) of savings; Proposition 12 makes
-the design law inert. The best known upper bound under the conference promise is
-still the general adaptive decoder's \(\binom n2+n-4\), leaving a gap from
-\(\Omega(n\log n)\) to \(O(n^2)\).
+*From above, the mechanisms that do not work.* Theorem 4 places the promised
+instance at the minimum of yes-answers; Corollary 6 says every four-point
+statistic is constant across the class, so the promise pins in advance
+everything a counting decoder could learn; Theorem 12 removes every local
+mechanism; Theorem 13 certifies \(O(n)\) of savings; Proposition 14 makes the
+design law inert.
+
+*From above, the one mechanism that does work.* The promise is a system of
+\(\binom n2\) orthogonality relations, and a decoder can spend tests on part of
+the matrix and solve for the rest. Suppose it learns \(k\) full rows of \(S\), at
+one test per pair by the attachment mechanism, so \(\approx kn\) tests. For each
+remaining point \(y\), orthogonality of row \(y\) against those \(k\) rows gives
+\(k\) linear equations over \(\mathbf Z\) whose unknown is the \(\pm1\) vector of
+the still-unknown part of the row. Each such equation cuts the number of
+surviving \(\pm1\) vectors by a factor of order \(\sqrt n\), by the local central
+limit theorem, so \(k=\Theta(n/\log n)\) equations should determine the row
+outright and the decoder pays
+
+\[ \Theta(n^2/\log n) \]
+
+tests in total — the first bound under the promise that beats the general
+decoder's \(\binom n2+n-4\). What makes this a conjecture rather than a theorem
+is the worst case: the \(\sqrt n\) factor is the generic behaviour, and a
+conference matrix whose rows carry arithmetic structure could admit many
+spurious \(\pm1\) solutions. Ruling that out is exactly an inverse
+Littlewood–Offord statement in the sense of Tao and Vu — few solutions unless the
+coefficient vector has additive structure — applied to the rows of a conference
+matrix. Theorem 13 is the \(k=0\) case of the same mechanism: there the vanishing
+of \(Su\) outside the difference support is precisely the orthogonality system,
+and the crude \(\ell_2\) count gives \(\sqrt n\) where the Littlewood–Offord
+count should give \(\Theta(n/\log n)\).
+
+So the gap is from \(\Omega(n\log n)\) to \(O(n^2/\log n)\) conditionally, and to
+\(O(n^2)\) unconditionally.
 
 *The one route that could close it.* If the promise is narrowed from "some
 conference two-graph" to "some labelled copy of a fixed quasirandom conference
@@ -353,7 +449,7 @@ genuine separation between the promised and unpromised problems.
 - Theorem 4 and Corollary 5 also supply the missing "why" for the six-point
   witness the manuscript already quotes, which is a stronger sentence than the
   present enumeration-only one.
-- Corollary 7 corrects the scope of the design fact as the task card stated it:
+- Corollary 9 corrects the scope of the design fact as the task card stated it:
   the 3-design property holds for conference two-graphs, not for regular
   two-graphs generally.
 
@@ -371,17 +467,20 @@ uv run --with numpy python notes/2026-08-11-c880-item5-structure-check.py
 
 | Artifact                                         | SHA-256                                                            |
 | ------------------------------------------------ | ------------------------------------------------------------------ |
-| `notes/2026-08-11-c880-item5-structure-check.py`  | `aaa82d30426c42438f0d535ce4a829eec1092b6f1a637db785eacf8a272dbfc4` |
-| `notes/2026-08-11-c880-item5-structure-check.out` | `2c9dc6e595004e76f6c256405345a957b9efc5093abdd9734c30342e422dc33d` |
+| `notes/2026-08-11-c880-item5-structure-check.py`  | `e73552411b8d1f8fd2beeb05df5f0b9ec5a2b1843abccbde6561724ef6689eaa` |
+| `notes/2026-08-11-c880-item5-structure-check.out` | `0d1cc520edafcdc3ddd89310c4c2a215aed763d6aef79a07a3cdc8971931c129` |
 
-Results: the pair-degree law of Corollary 3 and the spectral form of
-Corollary 6 both hold for all \(2^{\binom{n-1}2}\) two-graphs at \(n=5,6,7\)
-with no mismatch; the minimisers of \(\lvert A\rvert\) at \(n=6\) are twelve in
+Results: the pair-degree law of Corollary 3, the spectral form of Corollary 7 and
+the signed split of Corollary 6 all hold for every one of the
+\(2^{\binom{n-1}2}\) two-graphs at the sizes tested, with no mismatch; the
+minimisers of \(\lvert A\rvert\) at \(n=6\) are twelve in
 number and all twelve satisfy \(S^2=5I\), while at \(n=5,7,8\) — where
 \(n\not\equiv2\pmod4\) — none do and the minimum sits strictly above the bound
-(\(5>2.19\) at \(n=7\), \(10>7\) at \(n=8\)); and the Paley conference two-graph
-on ten points has \(\lvert A\rvert=30\) as predicted, with \(\lambda_3\equiv1\),
-a \(3\)-\((10,4,1)\) design.
+(\(5>4\) at \(n=7\), \(10>8\) at \(n=8\) against the sharpened bounds of
+Corollary 8); and the Paley conference two-graph on ten points has
+\(\lvert A\rvert=30\) as predicted, with \(\lambda_3\equiv1\), a
+\(3\)-\((10,4,1)\) design whose five-set profile is the degenerate one — 72
+five-sets carry no aligned four-set and 180 carry exactly one.
 
 No independent replay exists. None is owed: the script checks proved identities
 rather than establishing them, and a disagreement would falsify the arithmetic
@@ -390,27 +489,34 @@ in §2–§3 directly.
 ## Mystery ledger
 
 - **Settled — why six points fail.** Previously an enumeration result with no
-  mechanism. Theorem 4 identifies the failures as the exact minimisers of a
+  mechanism. Theorem 4 identifies the failures as the equality cases of a
   sum of squares of pair defects, and the count of twelve labelled exceptions is
   forced.
 - **Settled — the design property's scope.** It was carried as a fact about
-  regular two-graphs; Corollary 7 shows it is a fact about conference two-graphs
-  specifically, and computes the two-valued \(\lambda_3\) in the other cases.
-- **Settled — what a "no" answer carries in aggregate.** The task card flagged
-  the asymmetry between yes and no answers as the place a stronger lower bound
-  should come from. Corollary 6 says the aggregate count of yes answers carries
-  exactly one number, the fourth spectral moment; so no counting argument over
-  answer totals can beat the counting bound, and any improvement must use the
-  positions of the yes answers.
+  regular two-graphs; Corollary 9 gives the conference parameter exactly in the
+  conference case and computes the two-valued \(\lambda_3\) whenever both
+  triple signs occur in a nonconference regular two-graph.
+- **Settled — what the answers carry in aggregate.** The task card flagged the
+  asymmetry between yes and no answers as the place a stronger lower bound should
+  come from. Corollary 6 closes that off completely: every four-point statistic
+  is a function of the defect vector, and on the conference class the defect
+  vector is zero, so all of them are constant across the whole class. No counting
+  argument at the four-point level can separate two conference two-graphs, and
+  the first statistic that can vary lives on five points.
+- **Settled — what kind of statement Theorem 4 is.** It is the equality case of a
+  quasirandomness theorem. \(\sum_p m(p)^2\) is a discrepancy, conference
+  two-graphs are the exactly quasirandom two-graphs, and the alignment oracle
+  measures quasirandomness deficiency and nothing else. The usual Chung–Graham–
+  Wilson equivalences are asymptotic; this one is exact, which is the surprise.
 - **Settled — whether the promises help.** The anchor promise is worth two bits
-  (Theorem 8); the design law is worth a factor \(1+O(1/n)\) (Proposition 12);
-  the rigidity is worth \(O(n)\) tests (Theorem 11). None changes a leading term.
+  (Theorem 10); the design law is worth a factor \(1+O(1/n)\) (Proposition 14);
+  the rigidity is worth \(O(n)\) tests (Theorem 13). None changes a leading term.
 - **Open — is \(\log_2 N_n=o(n^2)\)?** The whole lower-bound content of the
   conference promise reduces to this count of symmetric conference matrices. No
   gate inside this lane can settle it; it is a question about conference
   matrices, and the literature audit in
   `notes/2026-08-07-c880-literature-audit.md` did not search it.
-- **Open — is the \(\sqrt n\) of Theorem 11 tight?** The proof balances
+- **Open — is the \(\sqrt n\) of Theorem 13 tight?** The proof balances
   \(\lVert v\rVert^2=(n-1)t\) against \(s+1\) coordinates of size at most \(t\),
   which is tight only if the difference vector is flat. No example approaching
   \(\sqrt n\) is known, and the parity constraint (i) already rules out the
@@ -419,8 +525,27 @@ in §2–§3 directly.
   savings at all.
 - **Open — the extremal structures when \(n\not\equiv2\pmod4\).** At \(n=7\)
   there are 3024 minimisers with \(\lvert A\rvert=5\) and at \(n=8\) there are
-  4200 with \(\lvert A\rvert=10\), against bounds of \(2.19\) and \(7\). By
-  Corollary 3 these are the two-graphs minimising \(\sum_p m(p)^2\), the
-  two-graphs as close to regular as the congruence permits. Their classification
-  is not needed for C880 and is logged to the discovery track rather than
-  pursued.
+  4200 with \(\lvert A\rvert=10\), against the sharpened bounds \(4\) and \(8\)
+  of Corollary 8. By Corollary 3 these are the two-graphs minimising
+  \(\sum_p m(p)^2\), the two-graphs as close to regular as the congruence
+  permits. Their classification is not needed for C880 and is logged to the
+  discovery track rather than pursued.
+- **Open — the minimum at the arithmetically obstructed sizes.** Corollary 8
+  shows the bound of Theorem 4 is attained only when \(n-1\) is a sum of two
+  squares, so at \(n=22,34,58,70\) every two-graph carries a forced
+  quasirandomness deficiency. How large it is at \(n=22\) — the smallest such
+  size — is not known here, and neither is whether the minimisers there are the
+  regular two-graphs with the smallest \(\lvert\varsigma\rvert\). This is a
+  genuinely arithmetic constraint on a purely combinatorial reconstruction
+  quantity, and it is the one place where item 5 touches the lane's own subject.
+- **Open — does the five-point profile carry the labelling?** Corollary 6 says
+  the signal starts at five points. At \(n=10\) it is degenerate: every five-set
+  contains \(0\) or \(1\) aligned four-sets (72 and 180 of them), forced by
+  \(\lambda_3=1\) rather than informative. The first size where the profile can
+  vary is \(n=14\), where \(\lambda_3=2\). Whether it separates labelled copies
+  is untested and is the cheapest experiment left in item 5.
+- **Open — the conditional \(O(n^2/\log n)\) decoder.** The row-solving route in
+  §6 needs an inverse Littlewood–Offord bound for the rows of a conference
+  matrix. If it holds, the promise buys a \(\log n\) factor and Theorem 13's
+  \(\sqrt n\) is far from tight; if some conference matrix is degenerate enough
+  to defeat it, that matrix is itself an interesting object.

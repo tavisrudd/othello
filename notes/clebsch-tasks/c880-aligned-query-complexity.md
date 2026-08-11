@@ -127,9 +127,13 @@ the number of coherent triples through a pair and \(m(p)=n-2-2a(p)\) for its
 defect, the number of aligned four-sets is a function of the pair degrees alone:
 \(\lvert A\rvert=\tfrac1{16}\bigl((n-6)\binom n3+\sum_p m(p)^2\bigr)\), with
 spectral form \(\tfrac14\binom n4+\tfrac1{32}(\operatorname{tr}S^4-n(n-1)(2n-3))\).
-The sum of squares makes the conference two-graphs the **exact minimisers**:
+The sum of squares gives the sharp conference bound:
 \(\lvert A\rvert\ge n(n-1)(n-2)(n-6)/96\) with equality iff every defect
-vanishes, iff \(S^2=(n-1)I\). That single inequality proves both halves of
+vanishes, iff \(S^2=(n-1)I\).  Thus conference two-graphs are the exact
+minimisers whenever they exist, and the bound is the equality case of a
+quasirandomness statement; attainment needs \(n\equiv2\pmod4\) and \(n-1\) a sum
+of two squares, so an arithmetic condition controls a purely combinatorial
+minimum, first failing at \(n=22\).  That single inequality proves both halves of
 the point threshold — every two-graph on at least seven points has an aligned
 four-set, and the six-point exceptions are precisely the conference two-graphs,
 twelve labelled, matching the enumeration exactly. The promise therefore pins
@@ -227,6 +231,14 @@ labelled conference two-graphs on \(n\) points? This is the entire lower-bound
 content of the conference promise, and it is a counting problem about symmetric
 conference matrices rather than about alignment tests. The 2026-08-07 literature
 audit did not search it. Nothing else in C880 depends on the answer.
+
+**The one upper-bound route that beats the general decoder.** Learn
+\(\Theta(n/\log n)\) full rows of the Seidel matrix at one test per pair, then
+solve for every remaining row from its orthogonality against them: each equation
+cuts the \(\pm1\) solution count by about \(\sqrt n\), so the decoder should
+finish in \(O(n^2/\log n)\) tests. Worst-case correctness is exactly an inverse
+Littlewood--Offord statement for the rows of a conference matrix, and the
+support-rigidity theorem is the \(k=0\) case of the same mechanism.
 
 **The route that would produce a separation.** Narrow the promise from "some
 conference two-graph" to "some labelled copy of the Paley conference two-graph".

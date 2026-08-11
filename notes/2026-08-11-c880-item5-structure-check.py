@@ -110,6 +110,32 @@ for n in (5, 6, 7, 8):
     print(f"  n={n}: min|A|={best}  spectral bound={bound:g}  minimisers={count}"
           f"  of which conference={conference}")
 
+print("== (V) signed split of the aligned family, exhaustive ==")
+for n in (6, 7):
+    bad = 0
+    for mask in range(1 << comb(n - 1, 2)):
+        S = seidel_from_descendant(n, mask)
+        defect_sum = sum(
+            sum(S[x, y] * S[y, w] * S[w, x] for w in range(n) if w not in (x, y))
+            for x, y in itertools.combinations(range(n), 2)
+        )
+        plus = minus = 0
+        for Q in itertools.combinations(range(n), 4):
+            s = sum(S[a, b] * S[b, c] * S[a, c]
+                    for a, b, c in itertools.combinations(Q, 3))
+            plus += s == 4
+            minus += s == -4
+        half = aligned_count_by_pair_degrees(S, n) / 2
+        skew = (n - 3) * defect_sum / 24
+        bad += (plus, minus) != (round(half + skew), round(half - skew))
+    print(f"  n={n}: signed-split mismatches={bad}")
+
+print("== (VI) integrality bound off the residue n = 2 mod 4 ==")
+for n in (7, 8, 9):
+    extra = comb(n, 2) if n % 2 else 4
+    print(f"  n={n}: plain bound={n * (n - 1) * (n - 2) * (n - 6) / 96:.2f}"
+          f"  integrality bound={((n - 6) * comb(n, 3) + extra) / 16:.2f}")
+
 print("== (IV) Paley conference two-graph on ten points ==")
 S, n = paley_conference_two_graph()
 A = aligned_sets(S, n)
@@ -120,3 +146,8 @@ for Q in A:
 print(f"  S^2 = (n-1)I: {np.array_equal(S @ S, (n - 1) * np.eye(n, dtype=np.int64))}")
 print(f"  |A|={len(A)}  spectral prediction={n * (n - 1) * (n - 2) * (n - 6) // 96}"
       f"  lambda_3 values={sorted(set(lam3.values()))}")
+profile = {}
+for F in itertools.combinations(range(n), 5):
+    k = sum(1 for Q in itertools.combinations(F, 4) if Q in set(A))
+    profile[k] = profile.get(k, 0) + 1
+print(f"  five-set profile (aligned 4-subsets per 5-set): {dict(sorted(profile.items()))}")
