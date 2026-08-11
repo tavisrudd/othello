@@ -1,0 +1,9 @@
+C904 exceptional-quintic residue ideal
+endomorphism_order_mod2_dimension=25
+fano_norm_span_mod2_dimension=14
+two_sided_norm_ideal_mod2_dimension=24
+residue_quotient_dimension=1
+epsilon_identity=1
+epsilon_kills_all_norm_generators=True
+epsilon_multiplicative_on_order_basis=True
+PASS
