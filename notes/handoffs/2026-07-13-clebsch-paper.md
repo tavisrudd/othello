@@ -674,6 +674,12 @@ The theta resolution has no local dyadic topological defect, but no
 integral/two-local algebraic Kunneth projector is known.
 The residual `C3` no longer offers a parity obstruction: the full mixed
 invariant spaces have dimensions 50 and 776 and contain odd contractions.
+Nor does the exotic deck: with the full `S3` monodromy the fixed mixed spaces
+have dimensions 25 and 396 and both still have odd **unordered** degree.  In
+the `(1,5)` channel the ordered rank-ten trace is even, but the symmetric
+quotient divides it by two and the fixed coefficient identity has degree
+five.  This closes the finite-monodromy route; it neither algebraizes an odd
+class nor proves a quadratic splitting field.
 The rational `(1,5)` inverse-Lefschetz class is algebraic, but its integral
 or two-local lift remains open; every canonical decomposable candidate is
 now even, with scalar coefficient ideal `6Z` universally and `12Z` on the
@@ -701,6 +707,7 @@ shows why geometric RC alone is insufficient.  See
 `notes/2026-08-11-c904-m9-determinant-grr-audit.md`, and
 `notes/2026-08-11-c904-symmetric-theta-full-kunneth-parity.md`, together with
 `notes/2026-08-11-c904-c3-kunneth-descent-boundary.md`,
+`notes/2026-08-11-c904-exotic-deck-kunneth-descent.md`,
 `notes/2026-08-11-c904-relative-invariant-cycle-franchetta-audit.md`,
 `notes/2026-08-11-c904-ample-cut-charge-two-index.md`, and
 `notes/2026-08-11-c904-canonical-p15-tautological-parity.md`,

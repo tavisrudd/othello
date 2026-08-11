@@ -628,6 +628,20 @@ and its integral Chow lift.  See
 `notes/2026-08-11-c904-c3-kunneth-descent-boundary.md` and
 `notes/2026-08-11-c904-relative-invariant-cycle-franchetta-audit.md`.
 
+The exotic deck does not repair that failure.  Together with the residual
+`C3` it gives the full `S3` action on the exact Lefschetz residuals.  The
+full-monodromy fixed tensor spaces have dimensions 25 in `(1,5)` and 396 in
+`(2,4)`.  Both retain odd **unordered** degree: in `(1,5)` the raw ordered
+rank-ten trace is even, but symmetric-square descent divides it by two and
+the fixed coefficient identity has degree five; `(2,4)` has a direct odd
+quotient contraction.  Thus neither the cubic nor quadratic monodromy gives
+a parity obstruction.  This calculation supplies no algebraic cycle: the
+remaining gate is the intersection of these invariant integral Hodge
+classes with horizontal Chow, together with actual class descent.  The
+quadratic cover is only parity-minimal conditionally, not a proved splitting
+field.  See `notes/2026-08-11-c904-exotic-deck-kunneth-descent.md` and its
+hostile normalization audit.
+
 For the existing signed divisor presentation of the relative minimal cycle,
 one may choose all four-divisor support surfaces simultaneously general.
 After normalizing `D_+` in the ordered-pair quadratic field, their ample cuts
