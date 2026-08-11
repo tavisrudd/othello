@@ -1,0 +1,7 @@
+C3 on Q15: dim=10 fixed=0; effective first factor: dim=10 fixed=0
+diagonal p15 transfer invariants: dim=50 (=dim M5(F4))
+p15 odd invariant Hodge witness: coefficient identity has degree 5
+C3 on Q24: dim=44 fixed=24; effective first factor: dim=44 fixed=24
+diagonal p24 transfer invariants: dim=776
+p24 invariant cohomology contains odd pairings on its trivial summands
+C3 order is odd: restriction-corestriction preserves mod-2 obstruction
