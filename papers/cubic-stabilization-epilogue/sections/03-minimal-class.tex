@@ -135,14 +135,17 @@ If \(c vv^{\mathsf t}\in L\), the two diagonal conditions imply
 Hence rank-one forms cannot generate a shallower cross ideal.
 
 Conversely, fix a generator \(p^e(uv^{\mathsf t}+vu^{\mathsf t})\) of a
-cross block.  Since \(e\geq a_i,a_j\), all three terms in
+cross block.  Choose \(x\geq a_i\) with \(y=2e-x\geq a_j\).  The integers
+\(x,y\) have the same parity.  If \(t=\min(x,y)\), write
+\(x=t+2r\) and \(y=t+2s\).  Then
 \[
- p^e(u+v)(u+v)^{\mathsf t}-p^euu^{\mathsf t}-p^evv^{\mathsf t}
+ p^t(p^ru+p^sv)(p^ru+p^sv)^{\mathsf t}
+ -p^xuu^{\mathsf t}-p^yvv^{\mathsf t}
  =p^e(uv^{\mathsf t}+vu^{\mathsf t}).
  \tag{3.8}
 \]
-lie in \(L\).  Together with the diagonal rank-one forms, these identities
-generate \(L\), without division by two.
+All three rank-one terms lie in \(L\).  Together with the diagonal rank-one
+forms, these identities generate \(L\), without division by two.
 \end{proof}
 
 \begin{theorem}[All-degree graph saturation]
