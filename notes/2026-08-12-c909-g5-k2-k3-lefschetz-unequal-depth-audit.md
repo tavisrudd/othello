@@ -4,6 +4,34 @@ Date: 2026-08-12
 Status: bounded hostile audit; no manuscript, PDF, mirror, Lean, or commit
 change
 
+## Correction to the previous handoff
+
+The actual (A_5) six-axis polarization is **not** the illustrative
+equal-depth rank-five graph used in the first version of this note.  Its
+coefficient form is
+\[
+ 6I_5-J_5=1\ \text{on }U_0\ \perp\ 6I_4\ \text{on }U_1,
+ \qquad U_0=\mathbf Z\mathbf 1,quad U_1=\{\textstyle\sum x_i=0\}.
+ \tag{0}
+\]
+Because (5) is a unit at (2) and (3), this is an integral direct sum.
+Thus the actual local depth profile is (0\oplus1^4), after absorbing the
+unit factors (3) at (2) and (2) at (3).  The equal-depth rank-five
+formula below remains a comparison theorem, not the (A_5) calculation.
+
+For the actual packet, the direct four-slot calculation gives
+\[
+ Q^2_{(2)}=Q^2_{(3)}=0,
+ \qquad Q^3_{(2)}=Q^3_{(3)}=0.
+ \tag{0'}
+\]
+At (2), the depth-one (U_1) block splits over the unramified quadratic
+extension into two rank-two root blocks with distinct roots in (mathbf F_4);
+at (3), the rank-four depth-one block is scalar.  Every four-slot support
+contains a same-root pair whose matching product already has the minimal
+integral scale, so the equal-depth Plücker cancellation has no leftover
+quotient.  Details are in §5 below.
+
 ## Verdict
 
 For a marked one-depth finite-etale graph presentation of a five-dimensional
@@ -173,10 +201,64 @@ separate integral Hodge saturation calculation.  Thus “four-slot midpoint
 ideal” is a correct description of the NS divided-power gate, but not a
 complete description of the ambient Hodge/product defect for unequal depths.
 
+## 5. Actual (6I-J) packet at (p=2,3)
+
+Use five one-dimensional coefficient slots after unramified splitting, while
+retaining repeated roots when a root block has rank greater than one.  The
+matrix-of-ideals formula gives (a_0=0), (a_i=1) on (U_1), and
+\[
+ e_{ij}=\begin{cases}
+ 1,&\text{if one slot is }U_0,\\
+ 1,&\text{if the two depth-one slots have the same root},\\
+ 2,&\text{if the two depth-one slots have distinct roots at }p=2.
+ \end{cases}
+ \tag{13}
+\]
+At (p=3) the depth-one root is scalar, so only the first two cases occur.
+The formula is independent of the chosen lift of the unit-root slope.
+
+For a four-slot support, write (r_{ij|kl}=\Omega_{ij}\Omega_{kl}).  The
+graph expansion is
+\[
+ \Omega_{ij}=p^{-a_i-a_j}(t_j-t_i)X_iX_j
+       +p^{-a_i}X_iY_j+p^{-a_j}X_jY_i .
+ \tag{14}
+\]
+
+At (p=2), there are two support types.
+
+* On (U_1\) itself, the support is two slots from each of the two
+  (mathbf F_4)-roots.  The matching (r_{AA|BB}) uses two same-root
+  edges, so its all-(X) term vanishes and its Hodge and product scales are
+  both (p^2).  The other matching direction has a nonzero all-(X) term
+  of denominator (p^4), and its Hodge scale is exactly the product scale
+  (p^4).
+* On a support (U_0\cup A\cup B\cup B), the matching
+  (r_{0A|BB}) has no all-(X) term on the (BB) edge; its Hodge and
+  product scales are both (p^2).  The complementary matching direction
+  has all-(X) denominator (p^3), exactly its product scale
+  (p^{e_{0B}+e_{AB}}=p^3).  The symmetric (U_0\cup B\cup A\cup A)
+  case is identical.
+
+At (p=3), a four-set in (U_1) has only same-root edges, so every matching
+has Hodge/product scale (p^2).  A support (U_0\cup) three (U_1)-slots
+always contains a same-root depth-one edge; every matching has Hodge scale
+at most (p^2), and (13) gives product scale (p^2).  If the unit-root
+lift happens to coincide with the depth-one scalar lift, some all-(X)
+terms disappear and the conclusion only becomes stronger.
+
+The Plücker relation leaves no independent lower-scale combination in these
+cases: the same-root matching is already a primitive product direction, and
+the complementary matching is pinned by its nonzero all-(X) coefficient.
+Therefore every four-slot summand is product-saturated at both (2) and
+(3).  Since (g=5) has no six-slot residual summand, the established
+multidegree reduction gives (0').  At all other primes (6I-J) is unimodular,
+so the local quotient is also zero.  This calculation concerns the actual
+six-axis packet; it must not be replaced by the equal-depth rank-five model.
+
 ## Strongest safe dimension-five statement
 
-For the A5 intermediate Jacobian application, where the relevant marked
-presentation is one equal-depth finite-etale block of rank five, state
+For the illustrative one-depth rank-five presentation, state
 \[
  \operatorname{Hdg}^{4}/P^2
  \xrightarrow[\sim]{\,\Theta\wedge-\,}
@@ -184,8 +266,7 @@ presentation is one equal-depth finite-etale block of rank five, state
  \simeq (\mathbf Z/p^a)^5 .
  \tag{12}
 \]
-Call this a canonical marked Lefschetz/complement identification.  Do not
-derive it from Poincare duality by itself, and do not extend the displayed
-`(Z/p^a)^5` to unequal-depth packets without retaining the weighted
-four-slot Smith data (8)--(10).
-
+Call this a canonical marked Lefschetz/complement identification.  It is not
+the actual (6I-J) (A_5) packet.  For the latter, the safe local conclusion
+is the vanishing (0') at (2) and (3), with the block calculation in §5;
+do not import the displayed ((\mathbf Z/p^a)^5) into the cubic application.
