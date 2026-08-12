@@ -173,6 +173,18 @@ theorem sixAxisGram_integralSmithReduction :
     GraphLattices.sixAxisSmithRight_mul_inverse,
     GraphLattices.sixAxisSmithRight_inverse_mul⟩
 
+/-- Arithmetic part of the local chart: after the integral Smith reduction,
+there is one unit entry and four entries of exact depth one at both two and
+three. -/
+theorem sixAxisSmith_unit_line_and_depth_one_at_two_three :
+    (GraphLattices.sixAxisSmithDiagonal 0 0 = 1 ∧
+      ∀ index : Fin 5, index ≠ 0 →
+        GraphLattices.sixAxisSmithDiagonal index index = 6) ∧
+      (((2 : ℤ) ∣ 6 ∧ ¬ (4 : ℤ) ∣ 6) ∧
+        ((3 : ℤ) ∣ 6 ∧ ¬ (9 : ℤ) ∣ 6)) :=
+  ⟨GraphLattices.sixAxisSmithDiagonal_entries,
+    GraphLattices.sixAxisSmith_depth_one_at_two_and_three⟩
+
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator
 from the small even quantum connection remains outside this definition. -/

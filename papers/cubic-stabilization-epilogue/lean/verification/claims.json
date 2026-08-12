@@ -90,12 +90,14 @@
     },
     {
       "manuscript_label": "lem:six-axis-local-chart",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The lattice with Gram matrix 6I5-J5 at primes two and three and the principal quotient graph slope.",
-      "hypotheses": "The actual six-axis geometric kernels selected by the gluing packet.",
-      "conclusion": "A unit line plus a depth-one rank-four block, with quadratic finite-etale slope at two and scalar slope at three.",
-      "cautions": "Persistence through the connected smooth component and identification of the actual kernel are essential."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSmith_unit_line_and_depth_one_at_two_three"
+      ],
+      "objects": "The explicit integral Smith diagonal diag(1,6,6,6,6) obtained from the abstract matrix 6I-J.",
+      "hypotheses": "No geometric hypotheses are represented; the calculation is purely integral arithmetic.",
+      "conclusion": "There is one unit diagonal entry and four entries equal to six, each divisible by two but not four and by three but not nine, hence of exact depth one at both primes.",
+      "cautions": "The actual six-axis geometric kernels, principal quotient graph, quadratic finite-etale slope at two, scalar slope at three, and persistence through the connected smooth component are absent."
     },
     {
       "manuscript_label": "thm:six-axis-divided-powers",

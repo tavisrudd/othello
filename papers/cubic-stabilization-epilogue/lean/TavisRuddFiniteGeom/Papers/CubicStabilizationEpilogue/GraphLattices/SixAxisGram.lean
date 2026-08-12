@@ -130,6 +130,23 @@ theorem sixAxisGram_smith_reduction :
     norm_num [sixAxisSmithLeft, sixAxisGram, sixAxisSmithRight,
       sixAxisSmithDiagonal, Matrix.mul_apply, Fin.sum_univ_succ] <;> decide
 
+/-- The four non-unit Smith entries have exact valuation one at both two and
+three: they are divisible by the prime but not by its square. -/
+theorem sixAxisSmith_depth_one_at_two_and_three :
+    ((2 : ℤ) ∣ 6 ∧ ¬ (4 : ℤ) ∣ 6) ∧
+      ((3 : ℤ) ∣ 6 ∧ ¬ (9 : ℤ) ∣ 6) := by
+  norm_num
+
+/-- Every nonzero-index diagonal entry in the Smith form is six, whereas the
+zero-index entry is the unit one. -/
+theorem sixAxisSmithDiagonal_entries :
+    sixAxisSmithDiagonal 0 0 = 1 ∧
+      ∀ index : Fin 5, index ≠ 0 → sixAxisSmithDiagonal index index = 6 := by
+  constructor
+  · simp [sixAxisSmithDiagonal]
+  · intro index nonzero
+    simp [sixAxisSmithDiagonal, nonzero]
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
