@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -122,6 +123,17 @@ theorem rankOne_weightedPair_decomposition_of_midpoint
                   GraphLattices.SymmetricPair.secondSquare))) :=
   GraphLattices.SymmetricPair.weightedPair_decomposition_of_midpoint
     π diagonalFirst diagonalSecond cross midpoint form member
+
+/-- Public division-free form of the square-zero divided-power expansion.  It
+models a labelled list of square-zero ring elements and does not assert that
+any particular geometric divisor classes satisfy these hypotheses. -/
+theorem squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum
+    {R : Type*} [CommRing R]
+    (terms : List R) (squareZero : ∀ term ∈ terms, term * term = 0) (k : ℕ) :
+    terms.sum ^ k =
+      (k.factorial : R) * GraphLattices.squarefreeProductSum terms k :=
+  GraphLattices.sum_pow_eq_factorial_mul_squarefreeProductSum
+    terms squareZero k
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/

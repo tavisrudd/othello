@@ -33,6 +33,7 @@ FORBIDDEN = {
     "unsafe": re.compile(r"\bunsafe\b"),
     "native_decide": re.compile(r"\bnative_decide\b"),
     "implemented_by": re.compile(r"\bimplemented_by\b"),
+    "opaque declaration": re.compile(r"(?m)^\s*opaque\s+"),
     "kernel skipping": re.compile(r"\bdebug\.skipKernelTC\b"),
     "task identifier": re.compile(r"\bC[0-9]{2,}\b"),
 }
@@ -69,6 +70,36 @@ def manuscript_labels() -> set[str]:
                 fail(f"duplicate manuscript label {label}")
             labels.add(label)
     return labels
+
+
+def check_public_docstrings(source: Path, text: str) -> None:
+    lines = text.splitlines()
+    declaration = re.compile(
+        r"^(?:theorem|lemma|def|structure|inductive|class)\s+([A-Za-z0-9_'.]+)"
+    )
+    for index, line in enumerate(lines):
+        match = declaration.match(line)
+        if match is None:
+            continue
+        previous = index - 1
+        while previous >= 0 and (
+            not lines[previous].strip()
+            or lines[previous].lstrip().startswith("@[")
+        ):
+            previous -= 1
+        if previous < 0 or not lines[previous].rstrip().endswith("-/"):
+            fail(
+                f"{source.relative_to(ROOT)}:{index + 1} public declaration "
+                f"{match.group(1)} has no immediately preceding docstring"
+            )
+        opening = previous
+        while opening >= 0 and "/--" not in lines[opening]:
+            opening -= 1
+        if opening < 0:
+            fail(
+                f"{source.relative_to(ROOT)}:{index + 1} public declaration "
+                f"{match.group(1)} has a non-doc comment"
+            )
 
 
 def expected_axioms() -> dict[str, tuple[str, ...]]:
@@ -123,6 +154,7 @@ def main() -> None:
         for label, pattern in FORBIDDEN.items():
             if pattern.search(text):
                 fail(f"{source.relative_to(ROOT)} contains forbidden {label}")
+        check_public_docstrings(source, text)
 
     interface_text = PAPER_INTERFACE.read_text(encoding="utf-8")
     terminals = {
@@ -195,9 +227,13 @@ def main() -> None:
                 f"expected={expected} observed={observed}"
             )
     mode_name = "axiom-log" if args.axiom_log is not None else "source-only"
+    coverage_counts = {
+        coverage: sum(claim["coverage"] == coverage for claim in claims)
+        for coverage in sorted(ALLOWED_COVERAGE)
+    }
     print(
         f"PASS mode={mode_name} sources={len(sources)} terminals={len(terminals)} "
-        f"manuscript_claims={len(claims)}"
+        f"manuscript_claims={len(claims)} coverage={coverage_counts}"
     )
 
 

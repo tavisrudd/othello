@@ -76,12 +76,14 @@
     },
     {
       "manuscript_label": "thm:all-degree-graph-saturation",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The prescribed graph divisor lattice and its divided-power and ordinary product images.",
-      "hypotheses": "A marked finite-etale graph presentation over the localized coefficient ring.",
-      "conclusion": "Equality of the divided-power envelope and ordinary divisor-product image in every degree.",
-      "cautions": "The result is cohomological, concerns only the prescribed graph lattice, and does not assert a Chow divided-power statement."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum"
+      ],
+      "objects": "Lean represents a labelled finite list of elements of an arbitrary commutative ring and a recursively defined squarefree product sum; it does not represent graph divisors or cohomology.",
+      "hypotheses": "Each listed ring element has square zero.",
+      "conclusion": "The kth power of the list sum equals k-factorial times the degree-k squarefree product sum, without division.",
+      "cautions": "Identification of rank-one graph divisors, membership in the prescribed graph lattice, comparison with the ordinary divisor-product image, localization, and faithfully flat descent are all absent; no Chow statement is made."
     },
     {
       "manuscript_label": "lem:six-axis-local-chart",
