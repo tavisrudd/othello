@@ -130,12 +130,15 @@
     },
     {
       "manuscript_label": "def:pro-laurent-monodromy",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A compatible system of differential modules over finite quotients of a complete filtered coefficient algebra.",
-      "hypotheses": "Agreement of the finite-level characteristic polynomials and gauges using only integral powers of z.",
-      "conclusion": "A well-defined pro-Laurent framed-monodromy characteristic polynomial.",
-      "cautions": "The pro-Laurent gauge group may be larger than matrices with one uniform Laurent lower bound."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem"
+      ],
+      "objects": "Lean represents coefficient rings at every natural-number level, invertible matrices over ordinary integer-exponent Laurent series, entrywise reduction homomorphisms, and characteristic polynomials over the level coefficient rings.",
+      "hypotheses": "Both displayed matrix inverses hold at every level, gauges and inverses agree entrywise under reduction, and characteristic polynomials map to the preceding level under coefficient reduction.",
+      "conclusion": "Typed pro-Laurent gauge and compatible characteristic-polynomial inverse systems; each finite level uses only integral powers of z and no uniform Laurent lower bound is assumed across levels.",
+      "cautions": "The filtered algebra quotients and compatible differential modules are not constructed, nor is the characteristic polynomial proved to arise from framed monodromy or to be invariant under the represented gauges."
     },
     {
       "manuscript_label": "lem:pv-base-change",

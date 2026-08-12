@@ -4,6 +4,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -200,6 +201,18 @@ def strictNovikovAdmissibleData
     [UniformSpace Target] [CompleteSpace Target] [T2Space Target]
     [IsTopologicalRing Target] : Type _ :=
   Quantum.StrictNovikovAdmissible (Curve := Curve) (Target := Target)
+
+/-- Reviewer-facing type of compatible invertible finite-level Laurent gauge
+systems.  Every loop exponent is integral by the `LaurentSeries` coefficient
+type, while no uniform lower bound across levels is imposed. -/
+def proLaurentGaugeSystem
+    (Index : Type*) [Fintype Index] [DecidableEq Index] : Type _ :=
+  Quantum.ProLaurentGaugeSystem Index
+
+/-- Reviewer-facing type of finite-level characteristic polynomials compatible
+under all coefficient reductions. -/
+def proLaurentCharacteristicPolynomialSystem : Type _ :=
+  Quantum.CompatibleCharacteristicPolynomialSystem
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
