@@ -134,20 +134,32 @@ replayed; its residual critical values converge after affine rescaling to the
 Picard--Lefschetz/Stokes comparison, not another critical-value calculation.
 See `2026-08-11-c907-toric-r2-pilot.md`.
 
-Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU` and proves
-bounded-value logarithmic tameness.  Direct endpoint transport is false, but
-the pole obstruction is now locally resolved: a finite weighted graph atlas
-covers the continuum of bounded pole weights and makes every finite-value
-boundary chart submersive.  The remaining analytic gates are a saturated
-common refinement, product-pair excision including the residual interface, and
-the directed central-connection marking.  The correct rank-four object is the
-localized group over a bounded value disk; the global rapid-decay group has
-six additional ambient critical contributions.
+Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU` and proves an
+open-torus bounded-value logarithmic gradient gap.  Direct endpoint transport
+is false.  Principal ratio charts cover all bounded pole weights with `y` in
+the residual core, but a cold referee found that neither those charts nor a
+multi-Rees principalization of the individual derivatives proves boundary
+submersivity after cancellations.  The next finite problem is the joint
+saturated graph and **tangent logarithmic Jacobian** on every mixed
+`y,B,C` cone.  Each initial system must be certified as `L`-free, residual,
+or empty; only then may one form a common product-pair collar cover and glue
+the exterior ratio charts to, rather than through, the `c=1` residual core.
+The correct rank-four object is localized over a bounded value disk; the
+global rapid-decay group has six additional ambient critical contributions.
 Iritani identifies the residual Gamma lattice with the Orlov subgroup, not the
 individual Beilinson thimbles.  See
 `2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`,
 `2026-08-11-c907-pole-channel-normal-crossing-excision.md`, and
 `2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
+
+Wave-2C status: ordinary cohomological grading and duality do not bound the
+length—an explicit self-dual formal length-two model survives.  The first
+geometric regression sweep is nevertheless decisive for ordinary smooth Fano
+complete intersections: their small-even framed formal monodromy always has
+`nu_6<=2`, with equality only for the cubic and `(2,3)` cases.  Hence none can
+realize the required length-two carrier, which needs `nu_6>=4`.  The search now
+starts at weighted or non-complete-intersection Fanos and Mori-fibre spaces;
+the theorem must still cover arbitrary threefold centers.
 
 Wave-2C status: the direct dimension-three grading route is closed negatively.
 An explicit self-dual formal model satisfies hard Lefschetz, Poincare duality,

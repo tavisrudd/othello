@@ -73,11 +73,12 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 - A second exact rescaling gives the local residual potential `W_(P^3)+ZU`.
   Its four local Morse sections match `P^3`, and the fixed-torus model has a
   bounded-value logarithmic gradient gap.  A finite weighted graph atlas covers
-  every bounded pole valuation and makes every finite-value boundary chart
-  submersive.  A saturated common refinement and product-pair excision,
-  including its interface with the residual core, remain under audit.  The
-  correct rank-four system is value-localized; the global group has ten
-  critical contributions.
+  every bounded pole valuation with `y` in the residual core.  A cold referee
+  rejects the global closure: one must resolve the full saturated graph and
+  its tangent logarithmic Jacobian on every mixed `y,B,C` cone, while gluing
+  the exterior ratio charts to—rather than blowing them up through—the
+  residual core.  The correct rank-four system is value-localized; the global
+  group has ten critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
   subgroup, but not its individual directed Beilinson basis.  The remaining
   marking is one monodromy-normalized central-connection seed.
@@ -85,6 +86,13 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   self-dual formal model has hard Lefschetz and length two.  The geometric gate
   is vanishing of its sectorial Rees extension class on every non-nef
   threefold.
+- The first toric residual Kodaira--Spencer jet is `-H^2` modulo local
+  coordinate gauge.  Internal Stokes rigidity is conditional on the filtered
+  analytic mirror identification; the off-diagonal ambient extension remains.
+- A quartic double solid has empty primitive-sixth small-even support.  The
+  `(2,3)` Fano complete intersection is the first non-cubic positive candidate
+  with one primitive pair; a direct grading-operator calculation proves that
+  every ordinary Fano complete-intersection threefold has `nu_6<=2`.
 
 ## Active frontier: `m=2`
 
@@ -112,14 +120,15 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5`: prove that the finite
-linear pole atlas is the saturated common graph closure, excise its product
-pairs on every overlap and residual-core interface, and identify the resulting
-four value-localized thimbles with the `P^3` Stokes system.  Then fix the
+Complete the toric order-zero theorem for `Bl_(P^3)P^5`: construct the full
+saturated graph plus tangent logarithmic-Jacobian fan, prove the three-way
+alternative `L`-free / residual core / empty initial system on every mixed
+cone, and build the finite product-pair cover on all overlaps.  Then identify
+the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
-parallel, compute the self-dual Rees extension on explicit non-nef threefold
-mirrors.  Do not differentiate in Novikov directions before the marked
-order-zero comparison passes.
+parallel, search weighted or non-complete-intersection Fanos for `nu_6>=4`.
+Do not differentiate in
+Novikov directions before the marked order-zero comparison passes.
 
 A Fano-threefold database is reconnaissance only; weak factorization permits
 arbitrary Calabi--Yau and general-type threefold centers.
@@ -136,6 +145,12 @@ Toric assembly:
 `../2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
 Threefold grading boundary:
 `../2026-08-11-c907-threefold-grading-boundary.md`.
+First residual jet:
+`../2026-08-12-c907-toric-residual-first-jet.md`.
+Carrier regressions:
+`../2026-08-12-c907-quartic-double-solid-carrier-regression.md`,
+`../2026-08-12-c907-23-fano-positive-carrier-regression.md`, and
+`../2026-08-12-c907-fano-complete-intersection-support-bound.md`.
 
 ## Gold architecture after `m=2`
 

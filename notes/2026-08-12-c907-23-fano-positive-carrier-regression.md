@@ -2,9 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** candidate pending convention and rigidity cold audit.  It is the
-first explicit non-cubic threefold with one primitive-sixth pair, hence a
-length-one calibration rather than a length-two counterexample.
+**Status:** theorem-grade small-even calculation; birational placement remains
+outside the proof.  It is the first explicit non-cubic threefold with one
+primitive-sixth pair, hence a length-one calibration rather than a length-two
+counterexample.
 
 Let
 
@@ -43,8 +44,9 @@ and the fourth branch is
  e^{108s}s^{-3/2}(1+\cdots).
 \]
 
-After the standard threefold scalar-to-framed `z^(1/2)` calibration, the
-framed residues are
+The ambient cyclic companion has components
+`z^(j-3/2) theta_s^j Phi`.  Thus a scalar branch `s^(-a)` has framed residue
+`a-3/2` modulo integers.  The framed residues are
 
 \[
  0,\quad0,\quad\frac16,\quad\frac56
@@ -64,21 +66,21 @@ This supplies one primitive pair, exactly the amount compatible with
 `nu_6>=4`.  Therefore `V` is the right first strictness/Gamma calibration for
 the proposed carrier object but cannot by itself falsify the universal bound.
 
-A general member is expected to be outside the cubic birational class by
-birational rigidity of general index-one Fano complete intersections.  This
-scope and the framed convention in (2) remain to be checked against the
-primary sources before promotion from candidate to regression.
+No birational-rigidity assertion is used here.  The exact birational placement
+of a general `(2,3)` member remains a separate primary-source audit.
 
 ## Source spine
 
 - Coates--Corti--Iritani--Tseng, arXiv:1310.4163, Theorem 31.
 - Coates--Givental, arXiv:math/0110142, Theorem 2.
+- Cai, arXiv:2608.01577, Section 3: framed cubic convention.
 - Pukhlikov, *Birationally rigid Fano complete intersections*, J. Reine
   Angew. Math. 541 (2001), 55--79.
 
 ## Mystery ledger
 
-- **Candidate:** a genuine non-cubic primitive-sixth length-one calibration.
-- **Open audit:** framed shift, full even-module rank, and exact rigidity scope.
+- **Settled:** a genuine non-cubic primitive-sixth length-one calibration in
+  the full small-even connection.
+- **Open audit:** exact birational-rigidity scope; non-load-bearing here.
 - **Open search:** an explicit smooth threefold with `nu_6>=4` on which the
   self-dual length-two Rees extension can be tested.
