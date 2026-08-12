@@ -91,12 +91,44 @@ polarization has Smith type \((1,6,6,6,6)\).
 \end{proposition}
 
 \begin{proof}
-Roulleau's intersection table gives self-intersection zero for the six fibre
-classes and pair intersection \(24\).  Two-transitivity makes the Rosati
-matrix have diagonal \(d\) and off-diagonal \(m\).  The missing trivial
+We recall the numerical passage from Roulleau's genus-two configuration to
+the six elliptic fibres.  Let \(D_g\subset S\) be the curve indexed by an
+involution \(g\in A_5\), put \(D_{\mathrm{tot}}=\sum_gD_g\), and, for a
+dihedral subgroup \(H\) of order ten, put
+\[
+ F_H=\sum_{g\in H,\;g^2=1}D_g.
+\]
+Roulleau proves that \(F_H\) is a fibre of \(S\to E_H\)
+\cite[Theorem~11]{Roulleau}, so \(F_H^2=0\).  His intersection table has
+\(D_g^2=-4\), and distinct curves meet with multiplicity two or one when
+the product of their labels has order three or five, respectively.  Among
+the \(105\) unordered pairs of involutions, the product orders two, three,
+and five occur \(15,30,60\) times.  Hence
+\[
+ D_{\mathrm{tot}}^2
+ =15(-4)+2(30\cdot2+60\cdot1)=180.
+\]
+Every involution belongs to two of the six dihedral subgroups, and therefore
+\(\sum_HF_H=2D_{\mathrm{tot}}\).  Two-transitivity on the six subgroups now
+gives
+\[
+ 30(F_H\cdot F_{H'})=(2D_{\mathrm{tot}})^2=720,
+ \qquad F_H\cdot F_{H'}=24\quad(H\ne H').
+\]
+
+After coherent identification of the generic non-CM elliptic quotients,
+two-transitivity makes the Rosati matrix have diagonal \(d\) and
+off-diagonal \(m\).  The missing trivial
 constituent gives \(d+5m=0\).  The minimal-class identity
-\([S]=\Theta^3/3!\), together with the polarized Riemann--Roch trace formula,
-turns the pair intersection into \(d^2-m^2=24\).  The positive solution is
+\([S]=\Theta^3/3!\), together with the polarized Riemann--Roch trace formula
+\[
+ \frac{\alpha\beta\Theta^{g-2}}{(g-2)!}
+ =\operatorname{tr}(N_\alpha)\operatorname{tr}(N_\beta)
+  -\operatorname{tr}(N_\alpha N_\beta),
+\]
+obtained by polarizing the reduced-norm Riemann--Roch polynomial
+\cite[Theorem~4.1]{Grieve},
+turns the last intersection into \(d^2-m^2=24\).  The positive solution is
 \((d,m)=(5,-1)\), hence \(G_6=6I-J\).  A five-by-five minor has Smith form
 \((1,6,6,6,6)\).
 \end{proof}

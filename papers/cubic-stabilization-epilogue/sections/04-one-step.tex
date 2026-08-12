@@ -7,6 +7,17 @@ its values lie in the free abelian group on atom-equivalence classes, it is
 additive under blowups, and a rank-\(r\) projective bundle contributes \(r\)
 copies of the base.
 
+Concretely, the reduced unramified spectral cover of the Euler operator
+decomposes the maximal big-quantum \(F\)-bundle into connected local atoms
+\cite[Theorem~4.1 and Definition~5.10]{KKPYY}.  If \(\mathscr A\) denotes the
+set of geometric atom classes, its chemical formula has the form
+\[
+ \CFF(Z)=\sum_{\alpha\in\mathscr A}m_\alpha(Z)[\alpha]
+ \in\Z^{(\mathscr A)},\qquad m_\alpha(Z)\ge0.
+\]
+The free group, rather than a quotient of a signed block ledger, is the
+target used below.
+
 \begin{definition}
 For a geometric atom \(\alpha\), let \(\FM(\alpha)\) be the multiset of
 formal-monodromy eigenvalues on its Levelt--Turrittin regular-singular
@@ -50,42 +61,58 @@ blocks.
 \label{prop:atom-values}
 Let \(X\) be a smooth cubic threefold.
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The cubic atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)>0\).
+\item The cubic zero atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)=2\).
 \item Every atom represented by a point, a curve, or a smooth projective
 surface has \(\nu_6=0\).
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Cai's Proposition~6 gives formal residue classes \(\pm1/6\) in the
-rank-two zero-eigenvalue block of the big cubic quantum connection
-\cite{Cai}.  The same block is the unsplit cubic zero atom in the maximal
-big-quantum \(F\)-bundle of \cite[Example~6.21]{KKPYY}; scalar extension does
-not change its formal monodromy.  This proves (i).
+Cai's Proposition~6 gives the indicial polynomial
+\[
+ \rho^2+\rho+\frac5{36},
+\]
+whose roots are \(-1/6\) and \(-5/6\), in the rank-two zero-eigenvalue block
+of the big cubic quantum connection \cite{Cai}.  Its bulk-variable gauges
+use integral powers of the loop variable, so these two fractional residues
+persist.  The same block is the unsplit cubic zero atom in the maximal
+big-quantum \(F\)-bundle of \cite[Example~6.21]{KKPYY}; this is the same big
+connection after scalar extension, with the loop coordinate unchanged.
+The two monodromy eigenvalues are therefore \(e^{-\pi i/3}\) and
+\(e^{\pi i/3}\), proving (i).
 
-For a minimal surface with nef canonical class, the parity-corrected
-connection has nilpotent residue by \cite[Claim~6.15]{KKPYY}.  Undoing the
-parity correction permits only eigenvalues \(1\) and \(-1\).  Ruled surfaces
-reduce by the projective-bundle formula to curves, and nonminimal surfaces
-reduce by point blowups to their minimal models.  Points and curves likewise
-have only integral or half-integral residues.  The classification of smooth
-projective surfaces exhausts the possibilities and proves (ii).
+A point has exponent zero.  For curves, the even part has integral exponents
+and the odd part has exponent \(1/2\) \cite[Proposition~7]{Cai}.  For a
+minimal surface with nef canonical class, the parity-corrected connection has
+nilpotent residue by \cite[Claim~6.15]{KKPYY}; undoing the integral grading
+and half-parity correction permits only monodromy eigenvalues \(1\) and
+\(-1\).  A minimal surface of Kodaira dimension \(-\infty\) is
+\(\PP^2\) or ruled.  Projective space reduces to a point atom, and a ruled
+surface reduces by the projective-bundle formula to curve atoms.  Finally,
+every nonminimal surface is obtained from a minimal one by point blowups,
+whose blowup formula adds only point atoms \cite[Theorem~4.5]{KKPYY}.  The
+classification of smooth projective surfaces exhausts the possibilities and
+proves (ii).
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
 Let \(Y=X\times\PP^1\).  The projective-bundle formula gives
 \[
- \CFF(Y)=2\CFF(X),
+ \CFF(Y)=2\CFF(X)
+ \qquad\text{\cite[Theorem~4.11 and Proposition~5.22(3)]{KKPYY}},
 \]
 so Proposition~\ref{prop:atom-values} gives \(\nu_6(Y)>0\).
 
 Suppose that \(Y\) were rational.  Weak factorization of a birational map
-\(Y\dashrightarrow\PP^4\) gives, in the free abelian atom group,
+\(Y\dashrightarrow\PP^4\), together with the blowup chemical formula
+\cite[Proposition~5.17]{KKPYY}, gives in the free abelian atom group
 \[
  \CFF(Y)+\sum_i(r_i-1)\CFF(Z_i)
  =\CFF(\PP^4)+\sum_j(s_j-1)\CFF(W_j),
 \]
-where every smooth center \(Z_i,W_j\) has dimension at most two.  Apply
+where \(r_i,s_j\) are the corresponding codimensions.  Divisorial blowups
+are trivial, so every effective center has codimension at least two and hence
+dimension at most two.  Apply
 \(\nu_6\).  Proposition~\ref{prop:atom-values}(ii) kills every center term,
 and the projective-bundle formula over a point gives
 \(\nu_6(\PP^4)=0\).  The left-hand side retains \(\nu_6(Y)>0\), a
