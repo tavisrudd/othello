@@ -150,6 +150,20 @@ there a center-valued first-Novikov derivative to compute.
 
 ## 4. Wave-0 algebra and its limit
 
+KKPYY's rationality criterion is stated for abstract `G`-atoms, after the
+elementary disjoint-union, blow-up, and projective-bundle equivalences.  The
+primitive-sixth-root and Stokes/Rees data live first on geometric atomic
+`F`-bundles.  Proposition 5.22 gives a map from abstract `G`-atoms to those
+geometric classes, not an identification or injectivity theorem.  Therefore
+C907 must define the enrichment geometrically, pull it back along that map,
+and verify invariance under every elementary equivalence before using it in a
+weak-factorization argument.
+
+The ordinary carrier-height invariant cannot reach `X x P^2`: its cubic
+abstract atom is already carried by the allowed threefold `X`.  Thus ordinary
+atom multiplicity and carrier height are closed branches, not weakened
+versions of the desired length.
+
 The smallest abstract endpoint category is the category of finite-dimensional
 nilpotent `C[N]`-modules.  Its indecomposables are
 

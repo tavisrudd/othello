@@ -123,6 +123,14 @@ zero; compute that toric cocycle before any first-Novikov derivative.  Report:
 `../2026-08-11-c907-wave-zero-nef-exclusion-and-r2-audit.md`.  Plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  Exact toric pilot and
 independent replay: `../2026-08-11-c907-toric-r2-pilot.md`.
+The same variety's projective-bundle collection mutates explicitly to its
+`P^3` residual plus `P^5` ambient Orlov blocks, eliminating a finite
+Euler-lattice obstruction but not the escaping-thimble comparison.  Audit:
+`../2026-08-11-c907-double-presentation-mutation-audit.md`.
+The ordinary KKPYY carrier-height branch is closed by C909: the cubic abstract
+`G`-atom is already carried by the allowed threefold `X`.  C907 must define
+the enrichment on geometric atomic `F`-bundles, pull it through Proposition
+5.22, and verify the elementary equivalences explicitly.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

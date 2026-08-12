@@ -147,7 +147,10 @@ See `2026-08-11-c907-toric-r2-pilot.md`.
    Rees shift.
 4. Prove that the enriched length-three endpoint differs from three
    length-one summands.
-5. Use mutation on `D^b(P^1)` as the compulsory rejection test: Euler and
+5. Define the enrichment first on KKPYY geometric atomic `F`-bundles, pull it
+   back along Proposition 5.22 to abstract `G`-atoms, and prove invariance
+   under the disjoint-union, blow-up, and projective-bundle equivalences.
+6. Use mutation on `D^b(P^1)` as the compulsory rejection test: Euler and
    Serre data alone must fail the definition.
 
 **Stop D:** if phase-independent width cannot be defined, retain all later
@@ -167,6 +170,11 @@ Fourier block is one-dimensional.  Prove without machine dependence that the
 \]
 
 This fixes conventions; it is not the analytic theorem.
+
+The ordinary carrier-height branch is closed: for `X x P^2`, the cubic
+abstract atom is already carried by the allowed threefold `X`.  No refinement
+of its ordinary multiplicity can prove the endpoint.  The bridge above and
+the enriched Tate/Stokes placement are essential, not optional packaging.
 
 ### A2. First-order obstruction
 

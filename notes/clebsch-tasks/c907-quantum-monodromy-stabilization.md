@@ -55,8 +55,18 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   critical values; after affine rescaling, the latter are the `P^3` mirror
   spectrum.  This closes the formal spectrum check, not the residual
   four-thimble Stokes cocycle.
+- Its projective-bundle exceptional collection mutates explicitly into the
+  `P^3` residual plus `P^5` ambient Orlov blocks.  Hence no finite Euler-lattice
+  obstruction remains; the escaping-thimble identification is still open.
 
 ## Active frontier: `m=2`
+
+The ordinary KKPYY carrier-height route is exhausted: the abstract cubic
+`G`-atom already has the threefold carrier `X`, exactly the maximum center
+dimension for a fivefold factorization.  The enriched length must first be
+defined on geometric atomic `F`-bundles, pulled back along KKPYY Proposition
+5.22 to abstract `G`-atoms, and proved invariant under the elementary
+equivalences.  Ordinary atom multiplicity cannot distinguish the endpoint.
 
 For the fivefold `X x P^2`, prove both:
 
@@ -86,6 +96,8 @@ arbitrary Calabi--Yau and general-type threefold centers.
 
 Exact pilot and replay:
 `../2026-08-11-c907-toric-r2-pilot.md`.
+Finite mutation audit:
+`../2026-08-11-c907-double-presentation-mutation-audit.md`.
 
 ## Gold architecture after `m=2`
 
