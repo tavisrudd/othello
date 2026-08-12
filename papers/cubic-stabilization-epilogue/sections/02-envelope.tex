@@ -112,7 +112,7 @@ dihedral subgroup \(H\) of order ten, put
  F_H=\sum_{g\in H,\;g^2=1}D_g.
 \]
 Roulleau proves that \(F_H\) is a fibre of \(S\to E_H\)
-\cite[Theorem~11]{Roulleau}, so \(F_H^2=0\).  His intersection table has
+\cite[Theorem~11(D)]{Roulleau}, so \(F_H^2=0\).  His intersection table has
 \(D_g^2=-4\), and distinct curves meet with multiplicity two or one when
 the product of their labels has order three or five, respectively.  Among
 the \(105\) unordered pairs of involutions, the product orders two, three,
@@ -131,8 +131,15 @@ gives
 
 After coherent identification of the generic non-CM elliptic quotients,
 two-transitivity makes the Rosati matrix have diagonal \(d\) and
-off-diagonal \(m\).  The missing trivial
-constituent gives \(d+5m=0\).  The minimal-class identity
+off-diagonal \(m\).  Put
+\[
+ D_H=q_H^*[0]\in\NS(J),\qquad N_H=i_Hq_H\in\End(J).
+\]
+Then \(D_H|_S=F_H\), and \(N_H\) is the Rosati endomorphism attached to
+\(D_H\).  Coherent identification gives \(q_Hi_H=[d]\) and
+\(q_Hi_{H'}=[m]\) for \(H\ne H'\).  The invariant sum of the six axis maps
+vanishes because the five-dimensional constituent has no trivial summand;
+composing with \(q_H\) gives \(d+5m=0\).  The minimal-class identity
 \([S]=\Theta^3/3!\), together with the polarized Riemann--Roch trace formula
 \[
  \frac{\alpha\beta\Theta^{g-2}}{(g-2)!}
@@ -141,7 +148,13 @@ constituent gives \(d+5m=0\).  The minimal-class identity
 \]
 obtained by polarizing the reduced-norm Riemann--Roch polynomial
 \cite[Theorem~4.1]{Grieve},
-turns the last intersection into \(d^2-m^2=24\).  The positive solution is
+gives
+\[
+ \operatorname{tr}(N_H)=d,
+ \qquad \operatorname{tr}(N_HN_{H'})=m^2,
+ \qquad F_HF_{H'}=d^2-m^2.
+\]
+Thus \(d^2-m^2=24\).  The positive solution is
 \((d,m)=(5,-1)\), hence \(G_6=6I-J\).  A five-by-five minor has Smith form
 \((1,6,6,6,6)\).
 \end{proof}
@@ -201,9 +214,14 @@ that order and lies in the stabilizer, proving equality.  The odd coset in
 its order-\(120\) normalizer is semilinear and applies field Frobenius, so it
 exchanges \(\omega\) and \(\omega^2\).  Were the generic cubic kernel
 \(\F_2\)-rational, its principal polarization would inherit the faithful
-\(S_6\)-action.  Strong Torelli would then give an \(S_6\)-action on the
-generic cubic, contrary to the automorphism group of the nonstandard
-component \cite[Section~5]{Hartlieb}.  Thus the generic kernel is exotic.
+\(S_6\)-action.  Strong Torelli identifies
+\(\operatorname{Aut}(J,\Theta)\) with
+\(\operatorname{Aut}(X)\times\langle-1\rangle\).  Projection of this
+\(S_6\) to \(\operatorname{Aut}(X)\) remains faithful: its kernel would be a
+normal subgroup of \(S_6\) of order at most two, and no such nontrivial
+subgroup exists.  This contradicts the generic automorphism group \(A_5\) on
+the nonstandard component \cite[Section~5]{Hartlieb}.  Thus the generic
+kernel is exotic.
 The kernel is a finite
 sub-local-system, so the same pair persists throughout the connected smooth
 locus.

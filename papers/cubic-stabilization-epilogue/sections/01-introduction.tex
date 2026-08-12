@@ -5,10 +5,10 @@ A smooth projective variety is universally \(CH_0\)-trivial if the degree map
   \deg:\CH_0(Y_L)\longrightarrow\Z
 \]
 is an isomorphism for every field extension \(L/\C\).  This condition is a
-central consequence of a decomposition of the diagonal and obstructs stable
-rationality.  Its vanishing, however, need not provide a rational
-parametrization.  We ask how far the failure can persist after one explicit
-stabilization.
+central consequence of stable rationality, and its failure is a standard
+stable-rationality obstruction.  Its validity, however, need not provide a
+rational parametrization.  We ask how far that gap can persist after one
+explicit stabilization.
 
 Our examples are fourfolds of the form \(Y=X\times\PP^1\), where \(X\) is a
 smooth cubic threefold in the nonstandard \(A_5\)-invariant pencil.  Two
@@ -27,21 +27,22 @@ Here ``nonstandard'' has a precise representation-theoretic meaning.  Let
 \]
 Thus \(\PP((\operatorname{Sym}^3W_5^*)^{A_5})\cong\PP^1\) is a pencil of cubic
 hypersurfaces in \(\PP(W_5)\).  We denote its smooth locus by \(B^\circ\).
+It is the complement of the discriminant in the pencil and is connected.
 This is Hartlieb's irreducible-character component \(M_{H_1}\), as opposed
 to the component coming from the reducible permutation representation
 \(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.
 
 \begin{theorem}[Separation after one stabilization]
 \label{thm:separation-family}
-Let \(X\to B^\circ\) be the smooth locus of the nonstandard
+Let \(\mathcal X\to B^\circ\) be the smooth family in the nonstandard
 \(A_5\)-invariant pencil of cubic threefolds.  For every
-\(b\in B^\circ(\C)\),
+ \(b\in B^\circ(\C)\),
 \[
- X_b\text{ is universally }CH_0\text{-trivial},
+ \mathcal X_b\text{ is universally }CH_0\text{-trivial},
  \qquad
- X_b\times\PP^1\text{ is universally }CH_0\text{-trivial and irrational}.
+ \mathcal X_b\times\PP^1\text{ is universally }CH_0\text{-trivial and irrational}.
 \]
-The family is non-isotrivial.
+The family is non-isotrivial in coarse moduli.
 \end{theorem}
 
 The irrationality statement does not depend on the symmetry of the pencil.
@@ -63,8 +64,8 @@ surface.  Their Rosati Gram matrix is \(6I-J\), so any five axes give an
 isogeny \(E^5\to J(X)\) of polarization type \((1,6,6,6,6)\).  The
 two-primary principal kernels form \(\PP^1(\F_4)\).  Three retain the full
 simplex symmetry; the other two are exchanged by Frobenius and have
-stabilizer \(A_5\).  The golden orientation reconstructed by the companion
-cubic selects one member of this exotic pair.  At two its graph slope has
+stabilizer \(A_5\).  The cycle argument needs only this unordered exotic
+pair.  At two its graph slope has
 minimal polynomial \(t^2+t+1\); at three every \(A_5\)-stable graph is
 scalar.  Both local forms admit primitive mixed-adjugate formulas, which produce
 \(\Theta^4/4!\) as an integral product of divisor classes.
@@ -76,15 +77,6 @@ projective-bundle formula doubles it on \(X\times\PP^1\).  If this fourfold
 were rational, weak factorization would express that count using centers of
 dimension at most two.  Surface classification and the low-dimensional atom
 formula show that every such center has count zero.
-
-\subsection*{Relation with the reconstruction series}
-
-The finite six-axis carrier first arose as the common output of distinct
-sparse-shadow reconstructions.  The present paper is logically standalone:
-Section~\ref{sec:envelope} defines its integral envelope and proves the
-geometric realization needed here.  The series provenance explains why the
-exotic sheet comes with a preferred golden orientation; it is not a premise
-for the cycle or quantum calculations.
 
 \subsection*{Relation with earlier rationality results}
 

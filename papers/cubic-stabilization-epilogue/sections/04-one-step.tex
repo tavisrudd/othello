@@ -19,9 +19,13 @@ The free group, rather than a quotient of a signed block ledger, is the
 target used below.
 
 \begin{definition}
-For a geometric atom \(\alpha\), let \(\FM(\alpha)\) be the multiset of
-formal-monodromy eigenvalues on its Levelt--Turrittin regular-singular
-factors, after the exponential parts have been separated.  Define
+For a geometric atom \(\alpha\), restrict its connection to the original
+formal punctured \(u\)-disc.  Let \(M_{\mathrm f}(\alpha)\) be its intrinsic
+formal-monodromy operator.  Equivalently, after a minimal
+Levelt--Turrittin ramification, combine the regular-singular monodromies with
+the deck permutation of the exponential factors and descend to the original
+\(u\)-disc.  Let \(\FM(\alpha)\) be the eigenvalue multiset of this descended
+operator, and define
 \[
  \nu_6(\alpha)=
  \operatorname{mult}_{e^{\pi i/3}}\FM(\alpha)
@@ -30,9 +34,12 @@ factors, after the exponential parts have been separated.  Define
 Extend \(\nu_6\) additively to the free atom group.
 \end{definition}
 
-The definition uses eigenvalues in \(\C^\times\), not chosen logarithms.
-Integral powers of the loop coordinate shift residue exponents by integers
-and leave \(\nu_6\) unchanged.
+This definition uses eigenvalues in \(\C^\times\), not chosen logarithms.
+It is independent of a further ramified refinement: the refined deck cycle
+and the refined regular monodromy compose to the same descended operator on
+the original differential module.  Integral gauge powers shift residue
+exponents by integers and leave the operator unchanged up to conjugacy; see
+\cite[Chapter~3]{vdPS} for the formal differential-module classification.
 
 \begin{lemma}[Formal isomonodromy]
 \label{lem:formal-isomonodromy}
@@ -41,20 +48,49 @@ formal-monodromy eigenvalue multiset of an atom is constant.
 \end{lemma}
 
 \begin{proof}
-After finite formal ramification and separation of exponential factors, one
-block has the form
+We use flatness in all bulk directions, rather than only the Witt-leaf
+statement of \cite[Remark~3.14]{KKPYY}.  Work locally on the analytic base
+and choose coordinates \(t_i\).  The big quantum connection has commuting
+operators
 \[
- \nabla=d-d\Phi(s,u)+R(s)\frac{du}{u}
-       +\sum_i\Gamma_i(s,u)\,ds_i,
+ \nabla_{t_i}=\partial_{t_i}+u^{-1}P_i,
+ \qquad
+ \nabla_u=\partial_u+L.
 \]
-where \(\Gamma_i\) is formal-regular after the exponential term is removed.
-The coefficient of \(du/u\wedge ds_i\) in \(\nabla^2=0\) is
+Solve
 \[
- \partial_{s_i}R=[\Gamma_i(s,0),R].
+ \partial_{t_i}M=-u^{-1}P_iM,
+ \qquad M|_{t=t_0}=I.
 \]
-Hence the characteristic polynomial of \(R\), and therefore that of
-\(\exp(2\pi iR)\), is locally constant.  Descent only permutes the separated
-blocks.
+The compatibility equations are precisely the flatness equations for the
+\(t_i\)-directions, so the solution exists in the enlarged \(t\)-adic ring
+used by Cai, locally of the form
+\(\operatorname{GL}(H\otimes\mathscr K((u))[[t-t_0]])\), where
+\(\mathscr K\) contains the
+Novikov coefficients.  This is not an ordinary Laurent gauge over the
+analytic base: its \((t-t_0)\)-coefficients may have negative \(u\)-orders
+unbounded below.  Each coefficient nevertheless involves only integral
+powers of \(u\).  Consequently
+\[
+ M^{-1}\nabla_{t_i}M=\partial_{t_i}.
+\]
+Commutation with \(M^{-1}\nabla_uM=\partial_u+\widetilde L\) now gives
+\(\partial_{t_i}\widetilde L=0\) for every \(i\).  This is the bulk-gauge
+argument used by Cai immediately before \cite[Proposition~6]{Cai}.
+
+After this scalar extension, the resulting gauge identifies the formal
+solution spaces without changing their fractional \(u\)-exponents:
+coefficientwise formal monodromy fixes every integral power of \(u\).
+Equivalently, it preserves the eigenvalue multiset of descended formal
+monodromy.  On the reduced unramified spectral cover the unique local
+spectral projector of \cite[Theorem~4.1]{KKPYY} tracks one chosen atomic
+factor; on overlaps the resulting identifications differ only by conjugacy.
+Hence its
+formal-monodromy characteristic polynomial is locally constant on each
+component and therefore constant because the component is connected.
+Combining the factors with their deck action gives the same statement on the
+original \(u\)-disc, independently of the chosen Levelt--Turrittin
+refinement.
 \end{proof}
 
 \begin{corollary}[The sixth-root multiplicity is atomic]
@@ -75,7 +111,9 @@ points of one connected unramified spectral component.  The blowup and
 projective-bundle identifications used to pass from abstract atoms to
 geometric atoms are likewise \(F\)-bundle isomorphisms over that same loop
 coordinate \cite[Proposition~5.22]{KKPYY}; no ramified substitution
-\(u\mapsto u^m\) is among the equivalences.  Thus \(\nu_6\) is constant on
+\(u\mapsto u^m\) is among the equivalences.  Definition~3.1 of
+\cite{KKPYY} fixes the disc and its coordinate; base change acts on the base
+factor and leaves \(u\) fixed.  Thus \(\nu_6\) is constant on
 each class, and additivity on the free group is unique.
 \end{proof}
 
@@ -86,29 +124,36 @@ For a smooth projective variety \(Z\), we abbreviate
 \label{prop:atom-values}
 Let \(X\) be a smooth cubic threefold.
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The cubic zero atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)=2\).
+\item The cubic zero atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)\ge2\).
 \item Every atom represented by a point, a curve, or a smooth projective
 surface has \(\nu_6=0\).
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Cai's Proposition~6 gives the indicial polynomial
+Cai's calculation preceding Proposition~6 gives the indicial polynomial
 \[
  \rho^2+\rho+\frac5{36},
 \]
 whose roots are \(-1/6\) and \(-5/6\), in the rank-two zero-eigenvalue block
-of the big cubic quantum connection \cite{Cai}.  Its bulk-variable gauges
-use integral powers of the loop variable, so these two fractional residues
-persist.  The same block is the unsplit cubic zero atom in the maximal
-big-quantum \(F\)-bundle of \cite[Example~6.21]{KKPYY}; this is the same big
-connection after scalar extension, with the loop coordinate unchanged.
-The two monodromy eigenvalues are therefore \(e^{-\pi i/3}\) and
-\(e^{\pi i/3}\), proving (i).
+of the even big cubic quantum connection \cite{Cai}.  Its bulk-variable
+gauges use integral powers of the loop variable.  Parity preservation places
+this rank-two block inside the unsplit zero atom of the full maximal
+big-quantum \(F\)-bundle in \cite[Example~6.21]{KKPYY}; passage to that
+bundle is scalar extension with the same loop coordinate.  Hence the two
+monodromy eigenvalues \(e^{-\pi i/3}\) and \(e^{\pi i/3}\) occur in
+\(\FM(\alpha_X)\).  We make no assertion about additional eigenvalues from
+the odd summand, and obtain the stated lower bound.
 
-A point has exponent zero.  For curves, the even part has integral exponents
-and the odd part has exponent \(1/2\) \cite[Proposition~7]{Cai}.  For a
-minimal surface with nef canonical class, the parity-corrected connection has
+A point has exponent zero, and \(\PP^1\) reduces to two point atoms by the
+projective-bundle formula.  For a curve of genus \(g>0\), the explicit curve
+connection has formal monodromy eigenvalues only in \(\{1,-1\}\): this
+follows directly from Cai's Proposition~7 on the even block and the classical
+odd block, and is also the curve-atom comparison used in
+\cite[Example~6.21]{KKPYY}.  Thus no curve atom has a primitive sixth-root
+eigenvalue.  For a minimal surface with nef canonical
+class, at an even base point with vanishing \(H^0\)-coordinate the
+parity-corrected connection has
 nilpotent residue by \cite[Claim~6.15]{KKPYY}; undoing the integral grading
 and half-parity correction permits only monodromy eigenvalues \(1\) and
 \(-1\).  A minimal surface of Kodaira dimension \(-\infty\) is
@@ -130,7 +175,7 @@ so Proposition~\ref{prop:atom-values} gives \(\nu_6(Y)>0\).
 
 Suppose that \(Y\) were rational.  Weak factorization of a birational map
 \(Y\dashrightarrow\PP^4\), together with the blowup chemical formula
-\cite[Proposition~5.17]{KKPYY}, gives in the free abelian atom group
+\cite[Proposition~5.22(2)]{KKPYY}, gives in the free abelian atom group
 \[
  \CFF(Y)+\sum_i(r_i-1)\CFF(Z_i)
  =\CFF(\PP^4)+\sum_j(s_j-1)\CFF(W_j),
