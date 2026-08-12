@@ -93,8 +93,9 @@ authorized.
 
 The strict cycle-side C909 crown is now substantially stronger than the
 epilogue's cofactor lemma.  Projective finite-etale spectral packets give
-full ordinary cohomological `PD(NS)` saturation in every degree, intrinsically
-on the marked self-dual elliptic-power gluing presentation.  For every fixed
+full ordinary cohomological saturation of the prescribed graph divisor
+lattice in every degree, intrinsically on the marked self-dual elliptic-power
+gluing presentation; this is full `PD(NS)` at non-CM points.  For every fixed
 dimension and odd prime there are compatible unbounded-level, pairwise
 nonisomorphic, polarized-indecomposable modular Hecke towers with this
 property.  Their ambient integral Hodge lattice is nevertheless larger:
@@ -108,6 +109,14 @@ through squarefree semilength six support a Dyck-height Smith formula, but it
 is quarantined behind an original nested-unit-minor theorem for the filtered
 web jet matrix; first-return and ordinary confluent-Vandermonde shortcuts do
 not prove it.  Current card: `../clebsch-tasks/c909-epilogue-math-level-ups.md`.
+The cubic unity gate is now closed on the smooth `A_5` line: subgroup norms
+construct the actual relative six-axis isogeny, and the general Prym-axis
+index formula forces the degree-five VGY quotient Prym to equal the primitive
+`D_5` axis.  Functoriality of the exotic `P^1(F4)` packet identifies
+`r^2=T`, `r=+/-9t` with the actual two-primary kernel marking.  Thus the
+signed pencil is a presentation curve in the minimal sign-marked fixed-data
+modular stack.  The next geometric frontier is classification of other
+shared modular/cubic presentation curves; horizontal Chow remains C908.
 No C907, C908, Chow, manuscript, PDF, mirror, or Lean promotion follows
 automatically.
 
