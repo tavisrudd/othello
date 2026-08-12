@@ -330,6 +330,34 @@ application or an exact obstruction to necessity.
     signed smooth pencil is a genuine presentation curve in the minimal
     sign-marked fixed-data modular stack.  Full two-torsion or ordered-axis
     labels add finite covers and are not this minimal curve.
+18. **Dimension-five ambient crown.** In the one-depth rank-five
+    finite-etale tower, the entire ambient integral Hodge/product quotient is
+    now structurally classified in every degree:
+
+    ```text
+    Hdg^(2k)/P^k = (Z/p^a)^5  for k=2,3,
+                   0          for k=0,1,4,5.
+    ```
+
+    The degree-two and degree-three quotients are canonically identified by
+    multiplication by the principal theta class, via complement of the
+    four-slot supports; this is stronger and more precise than an appeal to
+    Poincare duality. The theorem is a direct exterior-algebra consequence of
+    the four-slot Pluecker class and needs no certificate. It is a sharp
+    neighboring theorem for cubic intermediate Jacobians, not the numerical
+    quotient of the actual six-axis packet, whose local lattice is a unit
+    line plus a depth-one rank-four block.
+19. **Moving conformal-block identification, and exact remaining higher-rank
+    gate.** Over characteristic zero, the C909 order-`r` web-jet filtration
+    is exactly the moving genus-zero `sl_2` conformal block at level `n-r`
+    (Rimanyi--Varchenko). Integrally it is the full Hasse divided-power tail;
+    over a mixed-characteristic DVR the source filtration and successive
+    quotients are saturated and have the Dyck ranks. This removes the
+    conceptual/rank mystery. It does **not** alone prove primitive leading
+    jets, so the arbitrary-rank Smith formula still requires the ambient
+    filtered-dilation identification or the nested unit-minor theorem.
+    Exhaustive `F_16` testing of all 8008 ten-point subsets found no rank
+    jump, but computation is not promoted as proof.
 
 ## Highest-EV next moves
 
@@ -342,7 +370,14 @@ application or an exact obstruction to necessity.
    hence to full cohomological `PD(NS)` saturation.  This task explicitly
    excludes C907 higher stabilization, C908 Chow descent, and C908's
    non-etale/p-typical classification.
-2. **Exact higher Hodge-product defect.** Generalize the proved
+2. **Exact actual six-axis ambient quotient.** Compute the full local
+   four-slot quotient for the unit-line plus rank-four defect packet at two
+   and three. At two the defect splits over an unramified ring into two
+   repeated scalar eigenspaces; at three it is scalar. Repeated roots change
+   the divisor ideals, so the one-depth distinct-root formula may not be
+   specialized. A structural vanishing or exact packet formula would turn
+   the rank-five ambient theorem into a direct geometric strengthening.
+3. **Exact higher Hodge-product defect (successor, not epilogue gate).** Generalize the proved
    codimension-two formula from four-slot Pluecker cancellation to every
    codimension, preferably as a closed standard-monomial/partition formula
    for the full graded quotient.  This is now the highest-EV strict-C909
@@ -351,23 +386,23 @@ application or an exact obstruction to necessity.
    The naive single-layer extrapolation is false.  The candidate closed form
    is the Dyck-height formula above; finish its arbitrary-root filtered-web
    proof and hostile audit before any manuscript integration.
-3. Recast the tropical ideal condition and its exact defect under every
+4. Recast the tropical ideal condition and its exact defect under every
    allowed transverse-ruling change, and decide whether the defect modules
    glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
    do not, prove that their vanishing does.
-4. **Classify shared presentation curves.** The relative Fano/Albanese
+5. **Classify shared presentation curves.** The relative Fano/Albanese
    isogeny, actual graph packet, VGY Prym comparison, and minimal sign-marked
    normalization are closed for the `A_5` pencil. Classify fixed graph data
    whose modular curves share a positive-dimensional cubic period component.
    Separately audit relative coefficient line bundles only if a horizontal
    minimal cycle is pursued; do not claim unmarked Chow descent.
-5. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
+6. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
-6. Integrate the all-degree finite-etale theorem into the epilogue only after
+7. Integrate the all-degree finite-etale theorem into the epilogue only after
    the current prose cost is compared against the headline cycle proof; keep
    the orbit classification and indecomposable families as successor material
    unless they materially improve the narrative.
-7. Treat the uniform graded-support theorem as C907's exact algebraic
+8. Treat the uniform graded-support theorem as C907's exact algebraic
    acceptance surface; do not restart ordinary atom or multiplicity searches.
 
 ## Acceptance and stopping conditions

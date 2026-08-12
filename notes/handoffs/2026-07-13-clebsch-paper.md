@@ -131,6 +131,23 @@ shared modular/cubic presentation curves; horizontal Chow remains C908.
 No C907, C908, Chow, manuscript, PDF, mirror, or Lean promotion follows
 automatically.
 
+The 2026-08-12 crown-compression pass adds two exact structural conclusions.
+First, in dimension five the full one-depth finite-etale ambient
+Hodge/product quotient is certificate-free and complete in every degree:
+`(Z/p^a)^5` in codimensions two and three and zero otherwise; multiplication
+by theta gives the canonical complement isomorphism between the two nonzero
+quotients. This is the finite-dimensional crown naturally matched to cubic
+intermediate Jacobians, but it is a neighboring tower theorem rather than the
+numerical quotient of the actual six-axis packet, whose local lattice is
+`unit line + rank-four depth-one block`. Second, over characteristic zero the
+arbitrary-width web-jet filtration is exactly the moving `sl_2` conformal-
+block level filtration of Rimanyi--Varchenko; over the mixed-characteristic
+DVR it is the full Hasse tail and has saturated source gradeds of the Dyck
+ranks. This closes the conceptual/rank mystery but not yet the primitive
+leading-jet/ambient-dilation seam needed for the all-rank Smith formula.
+The immediate C909 frontier is therefore the actual six-axis four-slot
+quotient; the higher-rank Dyck formula is a successor, not an epilogue gate.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.
