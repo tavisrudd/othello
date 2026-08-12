@@ -9,8 +9,8 @@ no manuscript, PDF, mirror, Lean, or commit
 Nonsplit finite-etale root-weight slopes exist in the factorial-active
 prime-power range.  The right bilinear condition is exact: a self-adjoint
 embedding of an unramified coefficient extension is equivalent to expressing
-the coefficient form as a trace transfer.  This yields a pure unramified
-field algebra `R[T]`, rather than a split product, for every odd prime-power
+the coefficient form as a trace transfer. This yields a nonsplit unramified
+local etale algebra `R[T]`, rather than a split product, for every odd prime-power
 root-weight block and for every dyadic block of exponent at least three.
 
 For non-CM `E`, the resulting principally polarized graph quotients are
@@ -56,9 +56,11 @@ In bases the determinant relation is
  \tag{2}
 \]
 
-up to the usual square of a change-of-basis determinant.  Thus rank,
-trace-form class, and discriminant/norm are the exact bilinear data; a
-minimal polynomial alone is not.
+up to the usual square of a change-of-basis determinant. The exact condition
+is the trace-transfer isometry class in (1). Rank and determinant/norm are
+useful necessary invariants, but at two they do not classify unimodular
+symmetric forms: parity and Arf-type data must also be retained. A minimal
+polynomial alone is not enough at any prime.
 
 At `p=2` there is a useful parity obstruction.  If `B mod 2` is alternating,
 then `h mod 2` must be alternating: otherwise for a vector with
@@ -139,9 +141,8 @@ For `d=6 mod 8`, the elementary binomial Gauss sum is
  \sum_x(-1)^{q_B(x)}=2^{d/2},
 \]
 
-so its Arf invariant is zero.  The standard classification of even
-unimodular two-adic forms (or successive hyperbolic splitting from this
-Arf-zero form) gives
+so its Arf invariant is zero. The standard classification of even unimodular
+two-adic forms, together with this Arf-zero reduction, gives
 
 \[
  (S,B)\simeq H^q,
@@ -164,10 +165,20 @@ generator `theta` on both O-coordinates is self-adjoint and satisfies
  R[m_\theta]=O.
 \]
 
-This produces a nonsplit field-valued finite-etale dyadic slope for every
+This produces a nonsplit unramified finite-etale dyadic slope for every
 `a>=3`.  The parity observation in Section 1 explains why degree two on an
 O-rank-one module could not have worked: here the extension degree is odd
 and the O-rank is the required even value two.
+
+For publication, this dyadic classification step requires either a pinpoint
+citation with the even-unimodular hypotheses or an explicit integral
+hyperbolic-splitting induction. A constructive entry is the primitive
+isotropic vector `v=(1,1,1,z,0,...)`, where
+`z^2+3z+6=0 mod 2^(a-1)`: its derivative is odd, so Hensel produces `z`, and
+pairing `v` with the fourth coordinate is a unit. This splits one hyperbolic
+plane. The independent audit verifies the type-II classification in this
+rank and determinant class and checks the first case `N=8`; see
+`2026-08-11-c909-nonsplit-etale-root-weight-slopes-audit.md`.
 
 ## 4. Polarized indecomposability
 
@@ -187,9 +198,12 @@ If `U` is a coefficient endomorphism of a non-CM elliptic power, then
  \tag{4}
 \]
 
-Thus an integral quotient endomorphism has `U` integral and centralizes `T`
-modulo `p^a`.  A polarized product decomposition would supply a nontrivial
-Rosati-self-adjoint integral idempotent of this form.
+Every rational quotient endomorphism lifts through the isogeny to such a
+coefficient matrix because `End^0(E)=Q`; an idempotent lifts as an actual
+rational idempotent since a map from a connected abelian variety to the finite
+isogeny kernel is zero. Thus an integral quotient endomorphism has `U`
+integral and centralizes `T` modulo `p^a`. A polarized product decomposition
+would supply a nontrivial Rosati-self-adjoint integral idempotent of this form.
 
 In the odd construction, the centralizer modulo `p^a` is `O`, whose only
 idempotents are zero and one.  In the dyadic construction it is
@@ -206,13 +220,18 @@ nonsymmetric endomorphisms.
 
 ## Consequences and audit boundary
 
-Both constructions have `R[T]` an unramified field rather than `R times R`.
+Both constructions have `R[T]` a nonsplit unramified local etale algebra
+rather than `R times R`.
 By the finite-etale block theorem, their primitive minimal class is an
 ordinary integral divisor product.  They are new examples in which the
 prime divides the factorial ceiling, so this conclusion is not supplied by
 the easy prime-support argument.
 
-The theorem should not be widened without additional work:
+The standard maximal-isotropic graph construction globalizes the local form:
+the root polarization has discriminant supported at `p`, the self-adjoint
+graph is maximal isotropic in its `p^a`-kernel, and quotienting gives the
+descended principal polarization. The theorem should not be widened without
+additional work:
 
 1. If the root block has a different `N` with several primary factors, the
    trace-form test must be applied separately at every prime and CRT then
@@ -227,13 +246,13 @@ The theorem should not be widened without additional work:
 
 - **Settled:** finite-etale self-adjointness has a complete trace-form
   criterion, with no hidden trace denominator.
-- **Settled:** the root-weight family has pure nonsplit field slopes in every
+- **Settled:** the root-weight family has pure nonsplit unramified slopes in every
   factorial-active odd prime-power case and every dyadic exponent at least
   three.
 - **Settled:** these examples are polarized-indecomposable, not merely
   nonscalar graph presentations.
-- **EJ:** the scalar and split-etale CRT families now have a genuinely local
-  field-valued, indecomposable counterpart.
+- **EJ:** the scalar and split-etale CRT families now have a genuinely
+  nonsplit local-etale, indecomposable counterpart.
 - **TT check:** the construction exposes a concrete dyadic obstruction
   (alternating form versus O-rank one) rather than hiding it in an attempted
   diagonalization.
