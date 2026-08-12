@@ -2,6 +2,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankO
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -143,6 +144,31 @@ from the small even quantum connection remains outside this definition. -/
 noncomputable def framedSixthMultiplicity
     (monodromy : Quantum.FramedMonodromyMatrix) : ℕ :=
   monodromy.sixthMultiplicity
+
+/-- Reviewer-facing type of strict Novikov-admissibility certificates for an
+effective numerical monoid and a complete separated topological domain. -/
+def strictNovikovAdmissibleData
+    (Curve Target : Type*)
+    [AddCommMonoid Curve] [CommRing Target] [IsDomain Target]
+    [UniformSpace Target] [CompleteSpace Target] [T2Space Target]
+    [IsTopologicalRing Target] : Type _ :=
+  Quantum.StrictNovikovAdmissible (Curve := Curve) (Target := Target)
+
+/-- The divisor-tag separation fragment: an injective integral tag makes the
+pair of specialized monomial and tag injective even if the specialized
+monomial map alone is not injective. -/
+theorem strictNovikov_injective_taggedMonomial
+    {Curve Target : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [IsDomain Target]
+    [UniformSpace Target] [CompleteSpace Target] [T2Space Target]
+    [IsTopologicalRing Target]
+    (specialization : Quantum.StrictNovikovAdmissible
+      (Curve := Curve) (Target := Target))
+    {Tag : Type*} (divisorTag : Curve → Tag)
+    (separates : Function.Injective divisorTag) :
+    Function.Injective (fun degree ↦
+      (specialization.monomialImage degree, divisorTag degree)) :=
+  specialization.injective_taggedMonomial divisorTag separates
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/

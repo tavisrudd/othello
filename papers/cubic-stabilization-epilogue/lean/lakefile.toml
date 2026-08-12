@@ -13,6 +13,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",

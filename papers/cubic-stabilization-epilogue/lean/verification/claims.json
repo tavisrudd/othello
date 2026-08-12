@@ -170,21 +170,25 @@
     },
     {
       "manuscript_label": "def:strict-novikov-admissible",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A monomial map from a numerical Novikov ring to a complete separated valued domain.",
-      "hypotheses": "Nonzero monomial images, a positive proper valuation law, and domain associated graded.",
-      "conclusion": "The predicate of strict Novikov admissibility.",
-      "cautions": "Properness and the domain hypothesis are used to prevent cancellation in the divisor-tagging argument."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData"
+      ],
+      "objects": "Lean represents an effective additive monoid, a complete separated topological commutative domain, a multiplicative monomial-image function, a natural-valued length, and a natural-valued valuation.",
+      "hypotheses": "The monomial image preserves zero and addition, every monomial image is nonzero, valuation equals length on monomials, length is positive off zero and proper on bounded sets, and valuation is additive on products of nonzero target elements.",
+      "conclusion": "A typed certificate for the algebraic and topological core of strict Novikov admissibility.",
+      "cautions": "Lean does not construct the numerical Novikov completion or the associated graded ring; global valuation multiplicativity records the no-product-cancellation input but is not yet proved equivalent to the manuscript's domain associated-graded condition."
     },
     {
       "manuscript_label": "lem:divisor-tagging",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The intrinsic and specialized small even quantum connections under a strictly admissible monomial map.",
-      "hypotheses": "Intrinsic absence of primitive-sixth framed monodromy and strict Novikov admissibility.",
-      "conclusion": "Absence persists after specialization.",
-      "cautions": "Generic vanishing alone is insufficient without divisor tags because the center map may be noninjective."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikov_injective_taggedMonomial"
+      ],
+      "objects": "A strict-Novikov certificate together with a tag function on effective numerical classes and the paired specialized-monomial/tag map.",
+      "hypotheses": "The tag function separates numerical curve classes.",
+      "conclusion": "The paired specialized monomial and divisor tag is injective even when the specialized monomial component alone collides.",
+      "cautions": "The exponential-character/Vandermonde argument for completed series, the formal bulk gauge, scalar extension of quantum connections, and preservation of primitive-sixth vanishing are absent."
     },
     {
       "manuscript_label": "prop:low-dimensional-vanishing",
