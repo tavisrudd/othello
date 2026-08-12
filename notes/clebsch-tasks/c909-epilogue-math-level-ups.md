@@ -181,6 +181,12 @@ application or an exact obstruction to necessity.
    equivalent to `2e_ij >= a_i+a_j`, or intrinsically
    `I_ij^2 subset I_ii I_jj`. This tropical Cauchy--Schwarz condition also
    passes an independent dyadic/cancellation audit.
+   The exact rank-one hull replaces each cross depth by the maximum of its
+   actual depth and the midpoint ceiling, so its cokernel is an explicit
+   direct sum of DVR intervals. At `p=2` every failed midpoint inequality
+   yields a canonical degree-two divided-square class of exact order two;
+   hence the tropical criterion is also necessary for full divided-power
+   saturation in the marked elliptic coefficient realization.
    For arbitrary block-respecting graph data finite-etale separately at every
    Jordan depth, no cross-depth compatibility hypothesis is needed. After
    splitting, a cross slot has exact depth
