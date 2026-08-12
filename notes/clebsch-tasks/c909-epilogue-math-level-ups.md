@@ -196,11 +196,11 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Put mixed unit/primary and unequal-depth graph Neron--Severi congruences
-   into a compatible matrix-of-ideals form and test the exact tropical
-   condition `I_ij^2 subset I_ii I_jj`, or find the first coupled-slot
-   counterexample. This is the only remaining gate to a full marked
-   finite-etale `PD(NS)` theorem.
+1. Derive the complete unequal-depth graph Neron--Severi lattice in one fixed
+   polarization convention, especially same-eigenvalue cross ideals.
+   Distinct residual eigenvalues already satisfy the stronger bound
+   `e_ij >= a_i+a_j`; only the same-eigenvalue normalization remains before
+   the tropical test can settle the full marked finite-etale `PD(NS)` theorem.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after
