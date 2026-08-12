@@ -131,6 +131,21 @@ shared modular/cubic presentation curves; horizontal Chow remains C908.
 No C907, C908, Chow, manuscript, PDF, mirror, or Lean promotion follows
 automatically.
 
+C910 owns the referee-facing Lean companion for the epilogue.  Its sole source
+authority is the Mathlib-only package
+`papers/cubic-stabilization-epilogue/lean/`, exported with the paper repository
+under the C879 paper-facing public namespace
+`TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue`, with reviewer entry
+point `PaperInterface` and machine audit `Verification/AxiomAudit`; there is no
+duplicate in the shared `lean/TavisRuddFiniteGeom/` tree and no second Lean
+repository.  The task requires
+the same source-prose, no-sorry/no-project-axiom, semantic-gate, exact-terminal,
+axiom-audit, deterministic-build, stale-artifact, and manuscript-claim coverage
+checks as the existing referee artifacts.  External geometry and quantum inputs
+must remain visible in theorem types until proved, and conditional deductions
+must not be reported as unconditional manuscript coverage.  Current card:
+`../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
+
 The 2026-08-12 crown-compression pass adds two exact structural conclusions.
 First, in dimension five the full one-depth finite-etale ambient
 Hodge/product quotient is certificate-free and complete in every degree:
