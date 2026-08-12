@@ -51,6 +51,85 @@ theorem sixAxisGram_mulVec_of_sum_zero
   funext row
   rw [sixAxisGram_mulVec, sumZero, sub_zero]
 
+/-- The integral row operation fixing row zero and subtracting it from every
+other row. -/
+def sixAxisSmithLeft : Matrix (Fin 5) (Fin 5) ℤ :=
+  fun row column ↦
+    if row = 0 then
+      if row = column then 1 else 0
+    else
+      (if row = column then 1 else 0) - (if column = 0 then 1 else 0)
+
+/-- The inverse integral row operation, adding row zero to every other row. -/
+def sixAxisSmithLeftInverse : Matrix (Fin 5) (Fin 5) ℤ :=
+  fun row column ↦
+    if row = 0 then
+      if row = column then 1 else 0
+    else
+      (if row = column then 1 else 0) + (if column = 0 then 1 else 0)
+
+/-- The integral column operation that first replaces column zero by the sum
+of all columns and then adds that new column zero to every other column. -/
+def sixAxisSmithRight : Matrix (Fin 5) (Fin 5) ℤ :=
+  fun row column ↦
+    if column = 0 then 1 else (if row = column then 1 else 0) + 1
+
+/-- The inverse of `sixAxisSmithRight`. -/
+def sixAxisSmithRightInverse : Matrix (Fin 5) (Fin 5) ℤ :=
+  fun row column ↦
+    if row = 0 then
+      if column = 0 then 5 else -1
+    else if column = 0 then
+      -1
+    else if row = column then 1 else 0
+
+/-- The diagonal matrix with Smith entries `(1,6,6,6,6)`. -/
+def sixAxisSmithDiagonal : Matrix (Fin 5) (Fin 5) ℤ :=
+  fun row column ↦
+    if row = column then if row = 0 then 1 else 6 else 0
+
+/-- The displayed left row operation has the displayed integral inverse. -/
+theorem sixAxisSmithLeft_mul_inverse :
+    sixAxisSmithLeft * sixAxisSmithLeftInverse = 1 := by
+  ext row column
+  fin_cases row <;> fin_cases column <;>
+    norm_num [sixAxisSmithLeft, sixAxisSmithLeftInverse, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;> decide
+
+/-- The inverse left operation is also a left inverse. -/
+theorem sixAxisSmithLeft_inverse_mul :
+    sixAxisSmithLeftInverse * sixAxisSmithLeft = 1 := by
+  ext row column
+  fin_cases row <;> fin_cases column <;>
+    norm_num [sixAxisSmithLeft, sixAxisSmithLeftInverse, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;> decide
+
+/-- The displayed right column operation has the displayed integral inverse. -/
+theorem sixAxisSmithRight_mul_inverse :
+    sixAxisSmithRight * sixAxisSmithRightInverse = 1 := by
+  ext row column
+  fin_cases row <;> fin_cases column <;>
+    norm_num [sixAxisSmithRight, sixAxisSmithRightInverse, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;> decide
+
+/-- The inverse right operation is also a left inverse. -/
+theorem sixAxisSmithRight_inverse_mul :
+    sixAxisSmithRightInverse * sixAxisSmithRight = 1 := by
+  ext row column
+  fin_cases row <;> fin_cases column <;>
+    norm_num [sixAxisSmithRight, sixAxisSmithRightInverse, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;> decide
+
+/-- Explicit integral Smith reduction of `6I-J` to
+`diag(1,6,6,6,6)`. -/
+theorem sixAxisGram_smith_reduction :
+    sixAxisSmithLeft * sixAxisGram ℤ * sixAxisSmithRight =
+      sixAxisSmithDiagonal := by
+  ext row column
+  fin_cases row <;> fin_cases column <;>
+    norm_num [sixAxisSmithLeft, sixAxisGram, sixAxisSmithRight,
+      sixAxisSmithDiagonal, Matrix.mul_apply, Fin.sum_univ_succ] <;> decide
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

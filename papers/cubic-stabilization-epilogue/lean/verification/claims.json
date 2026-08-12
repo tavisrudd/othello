@@ -28,12 +28,13 @@
       "manuscript_label": "prop:six-axis-polarization",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_unit_and_augmentation_eigenvalues"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_unit_and_augmentation_eigenvalues",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_integralSmithReduction"
       ],
       "objects": "Lean represents the explicit five-by-five matrix 6I-J over an arbitrary commutative ring and vectors on five labelled coordinates.",
       "hypotheses": "For the augmentation assertion, the coordinate sum of the vector is zero; the constant-line assertion has no additional hypothesis.",
-      "conclusion": "The constant vector has eigenvalue one and every coordinate-sum-zero vector has eigenvalue six.",
-      "cautions": "The elliptic quotient axes, coherent identifications, Rosati pairing, proof that this is the geometric Gram matrix, Smith type (1,6,6,6,6), and non-CM generic-fibre passage are absent."
+      "conclusion": "The constant vector has eigenvalue one, every coordinate-sum-zero vector has eigenvalue six, and explicit mutually inverse integral row and column operations reduce the matrix to diag(1,6,6,6,6).",
+      "cautions": "The elliptic quotient axes, coherent identifications, Rosati pairing, proof that this explicit matrix is the geometric Gram matrix, and non-CM generic-fibre passage are absent."
     },
     {
       "manuscript_label": "lem:relative-six-axis",

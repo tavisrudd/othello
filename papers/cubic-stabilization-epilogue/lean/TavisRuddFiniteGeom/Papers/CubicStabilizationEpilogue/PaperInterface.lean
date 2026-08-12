@@ -153,6 +153,26 @@ theorem sixAxisGram_unit_and_augmentation_eigenvalues
   · exact GraphLattices.sixAxisGram_mulVec_one
   · exact GraphLattices.sixAxisGram_mulVec_of_sum_zero
 
+/-- An explicit integral Smith witness: the displayed integral row and column
+matrices are invertible over the integers and reduce `6I-J` to
+`diag(1,6,6,6,6)`. -/
+theorem sixAxisGram_integralSmithReduction :
+    GraphLattices.sixAxisSmithLeft * GraphLattices.sixAxisGram ℤ *
+        GraphLattices.sixAxisSmithRight = GraphLattices.sixAxisSmithDiagonal ∧
+      GraphLattices.sixAxisSmithLeft *
+          GraphLattices.sixAxisSmithLeftInverse = 1 ∧
+      GraphLattices.sixAxisSmithLeftInverse *
+          GraphLattices.sixAxisSmithLeft = 1 ∧
+      GraphLattices.sixAxisSmithRight *
+          GraphLattices.sixAxisSmithRightInverse = 1 ∧
+      GraphLattices.sixAxisSmithRightInverse *
+          GraphLattices.sixAxisSmithRight = 1 := by
+  exact ⟨GraphLattices.sixAxisGram_smith_reduction,
+    GraphLattices.sixAxisSmithLeft_mul_inverse,
+    GraphLattices.sixAxisSmithLeft_inverse_mul,
+    GraphLattices.sixAxisSmithRight_mul_inverse,
+    GraphLattices.sixAxisSmithRight_inverse_mul⟩
+
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator
 from the small even quantum connection remains outside this definition. -/
