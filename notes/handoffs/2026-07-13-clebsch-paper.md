@@ -113,8 +113,11 @@ proposed Fano-threefold database route cannot prove the `m=2` case: arbitrary
 threefold centers include Calabi--Yau quintics and general-type sextics inside
 `P^4` inside `P^5`.  The database is reconnaissance only.  The live gold
 architecture now requires both the analytic/integral `T1` lift and an
-arbitrary-center `+/-1/6` length bound; the next bounded target is the latter
-for Calabi--Yau and general-type threefold carriers.
+arbitrary-center `+/-1/6` length bound.  Execution first freezes a
+phase/mutation-invariant enriched cubic length, then runs the codimension-two
+first-Novikov obstruction calculation in parallel with the nef-canonical
+carrier exclusion and quintic/sextic hostile tests.  Plan:
+`../2026-08-11-c907-moonshot-attack-plan.md`.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

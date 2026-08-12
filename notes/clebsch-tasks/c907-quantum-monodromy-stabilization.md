@@ -8,6 +8,8 @@ Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
+**Execution plan:** `../2026-08-11-c907-moonshot-attack-plan.md`.
+
 **Detailed closed work:**
 `../2026-08-10-c907-quantum-monodromy-stabilization.md`.
 Historical task-card state:
@@ -62,11 +64,11 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Prove or refute the carrier bound first for nef-canonical threefolds, with the
-quintic Calabi--Yau and sextic general-type hypersurfaces as hostile tests.
-Separately, specialize Iritani (5.28) to codimension two, extend the strict
-basepoint comparison to first Novikov order, and identify its obstruction as
-an explicit Stokes/mutation-system extension class.
+Freeze the phase/mutation-invariant enriched cubic length.  Then run in
+parallel: prove the nef-canonical exclusion with quintic/sextic hostile tests;
+and specialize Iritani (5.28) to codimension two, extend the strict basepoint
+comparison to first Novikov order, and compute the explicit
+Stokes/mutation-system obstruction class.
 
 A Fano-threefold database is reconnaissance only; weak factorization permits
 arbitrary Calabi--Yau and general-type threefold centers.
