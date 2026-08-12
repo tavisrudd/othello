@@ -154,9 +154,12 @@ as a basis; the third matching is eliminated by the Pluecker relation.
 For \(c_1,c_2\in\operatorname{Frac}(S)\), expand
 \(c_1M_1+c_2M_2\) with (7).
 
-The monomial \(X_1Y_2X_3X_4\) occurs only in \(M_1\)'s
-\(\pi^{-3}\)-part, and a corresponding monomial occurs only in \(M_2\)'s
-\(\pi^{-3}\)-part.  Therefore integrality first forces
+The two independent \(\pi^{-3}\)-coefficient rows in the expansions of
+\(M_1,M_2\) have unit determinant after the top
+\(X_1X_2X_3X_4\) row is removed.  Equivalently, the relevant minor is a
+unit multiple of
+\(\delta_{13}\delta_{34}(\delta_{12}+\delta_{24})
+=\delta_{13}\delta_{34}\delta_{14}\).  Therefore integrality first forces
 
 \[
  c_1,c_2\in\pi^3S.
