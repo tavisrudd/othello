@@ -65,10 +65,12 @@ Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
 grading: the endpoint has `1+L+L^2`, while a threefold center must have width
 one.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
-`W_(P^3)+ZU`; principal charts cover every bounded pole face with `y` in the
-residual core.  A cold referee rejected the attempted global closure: the live
-analytic gate is a joint saturated-graph/tangent-log-Jacobian fan, collar
-gluing that does not blow up through the `c=1` residual core, and the
+`W_(P^3)+ZU`.  Saturated tangent-Jacobian certificates cover the residual
+chart, a mixed-cone family, and the compact-`y` pole continuum through one
+semistable incidence node; an exact exterior transition stops before the
+residual Morse core, and a hashed Singular pilot replays the key ideals.  The
+live analytic gate is the resulting finite comprehensive Gröbner/Fitting fan,
+then proper collar topology and the
 hyperplane-equivariant Orlov/Gamma marking.  The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
 direct threefold grading argument is closed negatively by an explicit

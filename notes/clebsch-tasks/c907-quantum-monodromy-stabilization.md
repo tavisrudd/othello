@@ -72,13 +72,15 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   obstruction remains; the escaping-thimble identification is still open.
 - A second exact rescaling gives the local residual potential `W_(P^3)+ZU`.
   Its four local Morse sections match `P^3`, and the fixed-torus model has a
-  bounded-value logarithmic gradient gap.  A finite weighted graph atlas covers
-  every bounded pole valuation with `y` in the residual core.  A cold referee
-  rejects the global closure: one must resolve the full saturated graph and
-  its tangent logarithmic Jacobian on every mixed `y,B,C` cone, while gluing
-  the exterior ratio charts to—rather than blowing them up through—the
-  residual core.  The correct rank-four system is value-localized; the global
-  group has ten critical contributions.
+  bounded-value logarithmic gradient gap.  Exact saturated tangent-Jacobian
+  certificates now cover the compact residual chart, a family of mixed
+  `y,B,C` cones, and the whole compact-`y` finite-pole continuum through one
+  semistable node.  The latter glues exactly to the imbalanced residual chart
+  away from—not through—the Morse core.  A hashed Singular pilot replays the
+  saturations and residual endpoint.  The remaining algebra is one finite
+  comprehensive Gröbner/Fitting fan; the proper collar topology is separate.
+  The correct rank-four system is value-localized; the global group has ten
+  critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
   subgroup, but not its individual directed Beilinson basis.  The remaining
   marking is one monodromy-normalized central-connection seed.
@@ -155,6 +157,12 @@ Toric assembly:
 `../2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
 Tangent-Jacobian replay specification:
 `../2026-08-12-c907-tangent-jacobian-fan-certificate-spec.md`.
+First cone and continuum certificates:
+`../2026-08-12-c907-first-tangent-jacobian-cone-certificates.md` and
+`../2026-08-12-c907-finite-pole-continuum-certificate.md`.
+Critical-fan pivot and replay:
+`../2026-08-12-c907-tropical-critical-fan-pivot.md` and
+`../2026-08-12-c907-critical-fan-pilot.md`.
 Threefold grading boundary:
 `../2026-08-11-c907-threefold-grading-boundary.md`.
 First residual jet:
