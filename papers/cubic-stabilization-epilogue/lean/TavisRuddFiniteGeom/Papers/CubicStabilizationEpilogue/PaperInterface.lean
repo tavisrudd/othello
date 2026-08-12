@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -137,6 +138,20 @@ theorem squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum
       (k.factorial : R) * GraphLattices.squarefreeProductSum terms k :=
   GraphLattices.sum_pow_eq_factorial_mul_squarefreeProductSum
     terms squareZero k
+
+/-- The abstract `6I-J` calculation: the constant line has eigenvalue one and
+the coordinate-sum-zero hyperplane has eigenvalue six.  No geometric Rosati
+identification is asserted. -/
+theorem sixAxisGram_unit_and_augmentation_eigenvalues
+    {R : Type*} [CommRing R] :
+    Matrix.mulVec (GraphLattices.sixAxisGram R)
+        (fun _ : Fin 5 ↦ (1 : R)) = (fun _ ↦ 1) ∧
+      ∀ vector : Fin 5 → R, (∑ column, vector column) = 0 →
+        Matrix.mulVec (GraphLattices.sixAxisGram R) vector =
+          (fun row ↦ 6 * vector row) := by
+  constructor
+  · exact GraphLattices.sixAxisGram_mulVec_one
+  · exact GraphLattices.sixAxisGram_mulVec_of_sum_zero
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

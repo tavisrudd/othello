@@ -26,12 +26,14 @@
     },
     {
       "manuscript_label": "prop:six-axis-polarization",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The six elliptic quotient axes of the intermediate Jacobian and their Rosati pairing.",
-      "hypotheses": "A smooth member of the nonstandard A5-pencil with coherent elliptic-factor identifications.",
-      "conclusion": "Rosati Gram matrix 6I-J and five-axis Smith type (1,6,6,6,6).",
-      "cautions": "The coherent identification and non-CM generic-fibre passage are part of the human proof."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_unit_and_augmentation_eigenvalues"
+      ],
+      "objects": "Lean represents the explicit five-by-five matrix 6I-J over an arbitrary commutative ring and vectors on five labelled coordinates.",
+      "hypotheses": "For the augmentation assertion, the coordinate sum of the vector is zero; the constant-line assertion has no additional hypothesis.",
+      "conclusion": "The constant vector has eigenvalue one and every coordinate-sum-zero vector has eigenvalue six.",
+      "cautions": "The elliptic quotient axes, coherent identifications, Rosati pairing, proof that this is the geometric Gram matrix, Smith type (1,6,6,6,6), and non-CM generic-fibre passage are absent."
     },
     {
       "manuscript_label": "lem:relative-six-axis",
