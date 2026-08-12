@@ -1,0 +1,51 @@
+C908 pass-10: compression of the corrected H^3(M,Z) test lattice
+pass-7 shared machinery re-certifies: True (93 lines, ending PASS)
+
+K1  F_2-span of the ten classes [Theta^[2] ^ z_k] in Sat/L_3(^3 Lambda): dimension 10 of 10
+K1  Sat = L_3(^3 Lambda) + span_Z{Theta^[2] ^ z_k}: True
+K2  distinct mod-two variants: {identity}; {S, S_transpose}; {S_inverse}
+K2  mismatched generators per variant: S/S_transpose: 0; S_inverse: 626; identity: 626
+K2  matching variant: S  (rho = HalfClasses . M w)
+K3  canonical generating subset: 138 of 940 generators
+K3  lambda-test transfer supports: 10,10,10,10,10,14,14,14,14,18
+K3  escape-probe transfer supports: 2,2,2,2,2,2,2,2,2,2
+K3  all twenty pure transfers live in the twenty beta generators: True; (0 ; 2 e_k) = beta_k (x) 1 + 1 (x) beta_k: True; lambda tests antisymmetric: True
+K4  L_5 divisors {'1': 110, '2': 10}; coker exponent 2
+K4  Theta^[3] ^ z_k in L_5(^5 Lambda) for all ten k: True
+K5  [Sat : L_3(^3 Lambda)] = 1024 = 2^10; rho matches pass-9: True
+
+checks:
+  [PASS] K0 pass-7 shared machinery re-certifies (controls end PASS)  (93 lines of pass-7 output)
+  [PASS] K1a Theta^[2] ^ z_k is an integral 5-form for every k
+  [PASS] K1b 2 (Theta^[2] ^ z_k) = L_3(Theta ^ z_k) identically as forms
+  [PASS] K1c Theta^[2] ^ z_k lies in Sat for every k (integral Sat-coordinates)
+  [PASS] K1d the ten classes [Theta^[2] ^ z_k] are measured in Sat / L_3(^3 Lambda) = (Z/2)^10  (F_2-span dimension 10)
+  [PASS] K1e Sat = L_3(^3 Lambda) + span_Z{Theta^[2] ^ z_k} exactly (equal Hermite normal forms)
+  [PASS] K2a psi_* T lies in Sat for all 940 generators (recomputed here from the pass-7 machinery, not reloaded)
+  [PASS] K2b rho is invertible and sigma(T) = rho(gamma(T)) mod L_3(^3 Lambda) for all 940 generators
+  [PASS] K2c the top-wedge pairing w : ^9 Lambda -> Lambda is unimodular  (det 1)
+  [PASS] K2d the four variants collapse to the recorded number of distinct mod-two composites M w  ({identity}; {S, S_transpose}; {S_inverse})
+  [PASS] K2e a single fixed variant M realises rho(gamma) = [Theta^[2] ^ M w(gamma)] on all 940 generators  (matching variants ['S', 'S_transpose']; best mismatch count 0)
+  [PASS] K3a the transfer image col(A) has rank 130  (130)
+  [PASS] K3b a canonical prefix-greedy subset of the 940 generators already generates the whole transfer image  (138 generators, last canonical index 449)
+  [PASS] K3c every pure lambda-test transfer (L_3(Theta ^ u_k) ; 0) is realised exactly by an integral combination of the 940 generators  (supports 10,10,10,10,10,14,14,14,14,18)
+  [PASS] K3d every pure escape probe (0 ; 2 e_k) is realised exactly by an integral combination of the 940 generators  (supports 2,2,2,2,2,2,2,2,2,2)
+  [PASS] K3e the pure lambda-test transfers really have vanishing second block, and the pure escape probes really have vanishing first block
+  [PASS] K3f all twenty pure transfers are supported inside the twenty generators beta_m (x) 1 and 1 (x) beta_m
+  [PASS] K3g the pure escape probe in direction k is exactly the symmetric pair S_k = beta_k (x) 1 + 1 (x) beta_k
+  [PASS] K3h every pure lambda-test transfer is antisymmetric in the two beta blocks, hence an integral combination of the D_m
+  [PASS] K3i (L_3(Theta ^ u_k) ; 0) = sum_m c[k,m] D_m for the recorded integer matrix c, re-verified against A directly  (det c = 1, invariant factors {'1': 10})
+  [PASS] K4a L_5 : ^5 Lambda -> ^7 Lambda has full rank 120; its Smith form is recorded  ({'1': 110, '2': 10})
+  [PASS] K4b the exponent of coker(L_5) is measured and recorded  (exponent 2)
+  [PASS] K4c 3 (Theta^[3] ^ z_k) = L_5(Theta^[2] ^ z_k) identically as forms, so three times each class lies in the image
+  [PASS] K4d the image lattice L_5(^5 Lambda) has rank 120
+  [PASS] K4e 2 (Theta^[3] ^ z_k) lies in L_5(^5 Lambda) for every k (cokernel exponent two)
+  [PASS] K4f 3 (Theta^[3] ^ z_k) lies in L_5(^5 Lambda) for every k (the divided-power identity)
+  [PASS] K4g Theta^[3] ^ z_k lies in L_5(^5 Lambda) integrally for every k, as exponent-two arithmetic predicts  (all ten directions)
+  [PASS] K5a [Sat : L_3(^3 Lambda)] = 2^10 and the quotient is (Z/2)^10  (index 1024, divisors {'1': 110, '2': 10})
+  [PASS] K5b the recomputed rho agrees entry for entry with the pass-9 record
+  [PASS] K5c the pass-9 record certifies Im = H^ exactly, which is why the K3 solves are guaranteed to exist
+  [PASS] K5d the pass-9 record and this certificate agree on the 940 generator labels
+
+wall seconds: 19.87
+PASS

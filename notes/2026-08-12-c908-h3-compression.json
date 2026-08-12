@@ -1,0 +1,2675 @@
+{
+ "K1_saturation_closed_form": {
+  "F2_span_dimension_of_the_ten_classes": 10,
+  "all_ten_lie_in_Sat": true,
+  "class_matrix_columns_are_classes_of_Theta2_wedge_zk": [
+   [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0
+   ]
+  ],
+  "doubling_identity_2_half_equals_L3_Theta_wedge_z": true,
+  "half_lefschetz_classes_are_integral": true,
+  "lattice_equality_with_Sat_by_HNF": true,
+  "statement": "Sat = L_3(^3 Lambda) + span_Z{Theta^[2] ^ z_k}",
+  "vanishing_combinations_mod_two": []
+ },
+ "K2_rho_closed_form": {
+  "distinct_mod_two_variant_groups": [
+   [
+    "identity"
+   ],
+   [
+    "S",
+    "S_transpose"
+   ],
+   [
+    "S_inverse"
+   ]
+  ],
+  "generators_tested": 940,
+  "matching_variant": "S",
+  "matching_variants": [
+   "S",
+   "S_transpose"
+  ],
+  "pairing_convention": "w(g)_j = < g ^ z_j > in ^10 Lambda, with the pass-7 wedge and the lexicographic ^9 Lambda basis; no extra complement or reindex twist was needed",
+  "pairing_determinant": 1,
+  "pairing_matrix_rows": [
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "per_variant": [
+   {
+    "first_mismatched_generator_labels": [],
+    "matches_all_940": true,
+    "mismatched_generators": 0,
+    "rho_equals_HalfClasses_times_M_w": true,
+    "variants": [
+     "S",
+     "S_transpose"
+    ]
+   },
+   {
+    "first_mismatched_generator_labels": [
+     "beta0(x)1",
+     "beta1(x)1",
+     "beta2(x)1",
+     "beta3(x)1",
+     "beta4(x)1"
+    ],
+    "matches_all_940": false,
+    "mismatched_generators": 626,
+    "rho_equals_HalfClasses_times_M_w": false,
+    "variants": [
+     "S_inverse"
+    ]
+   },
+   {
+    "first_mismatched_generator_labels": [
+     "beta0(x)1",
+     "beta1(x)1",
+     "beta2(x)1",
+     "beta3(x)1",
+     "beta4(x)1"
+    ],
+    "matches_all_940": false,
+    "mismatched_generators": 626,
+    "rho_equals_HalfClasses_times_M_w": false,
+    "variants": [
+     "identity"
+    ]
+   }
+  ],
+  "prediction_holds": true,
+  "statement": "rho(gamma) = [Theta^[2] ^ y(gamma)],  y = M w(gamma)"
+ },
+ "K3_pure_transfers": {
+  "escape_probe_transfers": [
+   {
+    "coefficients": [
+     [
+      0,
+      1
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "direction": 0,
+    "prefix_width": 11,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      1,
+      1
+     ],
+     [
+      11,
+      1
+     ]
+    ],
+    "direction": 1,
+    "prefix_width": 12,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      2,
+      1
+     ],
+     [
+      12,
+      1
+     ]
+    ],
+    "direction": 2,
+    "prefix_width": 13,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      3,
+      1
+     ],
+     [
+      13,
+      1
+     ]
+    ],
+    "direction": 3,
+    "prefix_width": 14,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      4,
+      1
+     ],
+     [
+      14,
+      1
+     ]
+    ],
+    "direction": 4,
+    "prefix_width": 15,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      5,
+      1
+     ],
+     [
+      15,
+      1
+     ]
+    ],
+    "direction": 5,
+    "prefix_width": 16,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      6,
+      1
+     ],
+     [
+      16,
+      1
+     ]
+    ],
+    "direction": 6,
+    "prefix_width": 17,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      7,
+      1
+     ],
+     [
+      17,
+      1
+     ]
+    ],
+    "direction": 7,
+    "prefix_width": 18,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      8,
+      1
+     ],
+     [
+      18,
+      1
+     ]
+    ],
+    "direction": 8,
+    "prefix_width": 19,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   },
+   {
+    "coefficients": [
+     [
+      9,
+      1
+     ],
+     [
+      19,
+      1
+     ]
+    ],
+    "direction": 9,
+    "prefix_width": 20,
+    "support": 2,
+    "target": "(0 ; 2 e_k)"
+   }
+  ],
+  "generating_subset_indices": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   55,
+   56,
+   57,
+   58,
+   59,
+   66,
+   67,
+   68,
+   69,
+   77,
+   78,
+   79,
+   88,
+   89,
+   99,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119,
+   124,
+   125,
+   126,
+   127,
+   128,
+   129,
+   135,
+   136,
+   137,
+   138,
+   139,
+   146,
+   147,
+   148,
+   149,
+   157,
+   158,
+   159,
+   168,
+   169,
+   179,
+   194,
+   195,
+   196,
+   197,
+   198,
+   199,
+   205,
+   206,
+   207,
+   208,
+   209,
+   216,
+   217,
+   218,
+   219,
+   227,
+   228,
+   229,
+   238,
+   239,
+   249,
+   265,
+   266,
+   267,
+   268,
+   276,
+   277,
+   278,
+   279,
+   287,
+   288,
+   289,
+   298,
+   299,
+   309,
+   326,
+   327,
+   328,
+   329,
+   337,
+   338,
+   339,
+   348,
+   349,
+   377,
+   378,
+   379,
+   388,
+   389,
+   399,
+   418,
+   419,
+   429,
+   449
+  ],
+  "generating_subset_size": 138,
+  "lambda_test_transfers": [
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      -1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      -2
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      -1
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      -1
+     ],
+     [
+      14,
+      2
+     ]
+    ],
+    "direction": 0,
+    "prefix_width": 15,
+    "support": 10,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      -1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      -1
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      -1
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      -2
+     ],
+     [
+      14,
+      1
+     ]
+    ],
+    "direction": 1,
+    "prefix_width": 15,
+    "support": 10,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      -2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      -1
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      -1
+     ],
+     [
+      12,
+      2
+     ],
+     [
+      13,
+      -1
+     ],
+     [
+      14,
+      1
+     ]
+    ],
+    "direction": 2,
+    "prefix_width": 15,
+    "support": 10,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      -1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      -1
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      11,
+      -2
+     ],
+     [
+      12,
+      1
+     ],
+     [
+      13,
+      -1
+     ],
+     [
+      14,
+      1
+     ]
+    ],
+    "direction": 3,
+    "prefix_width": 15,
+    "support": 10,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      -4
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      -4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      10,
+      -3
+     ],
+     [
+      11,
+      4
+     ],
+     [
+      12,
+      -4
+     ],
+     [
+      13,
+      4
+     ],
+     [
+      14,
+      -4
+     ]
+    ],
+    "direction": 4,
+    "prefix_width": 15,
+    "support": 10,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      -1
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      -2
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      12,
+      -1
+     ],
+     [
+      15,
+      -4
+     ],
+     [
+      16,
+      -1
+     ],
+     [
+      17,
+      1
+     ],
+     [
+      18,
+      -1
+     ],
+     [
+      19,
+      2
+     ]
+    ],
+    "direction": 5,
+    "prefix_width": 20,
+    "support": 14,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      -1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      9,
+      -1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      11,
+      -1
+     ],
+     [
+      15,
+      -4
+     ],
+     [
+      16,
+      -1
+     ],
+     [
+      17,
+      1
+     ],
+     [
+      18,
+      -2
+     ],
+     [
+      19,
+      1
+     ]
+    ],
+    "direction": 6,
+    "prefix_width": 20,
+    "support": 14,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -2
+     ],
+     [
+      4,
+      -1
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      -2
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      -1
+     ],
+     [
+      10,
+      2
+     ],
+     [
+      14,
+      1
+     ],
+     [
+      15,
+      -4
+     ],
+     [
+      16,
+      -1
+     ],
+     [
+      17,
+      2
+     ],
+     [
+      18,
+      -1
+     ],
+     [
+      19,
+      1
+     ]
+    ],
+    "direction": 7,
+    "prefix_width": 20,
+    "support": 14,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      0,
+      -1
+     ],
+     [
+      3,
+      -1
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      -1
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      -1
+     ],
+     [
+      10,
+      1
+     ],
+     [
+      13,
+      1
+     ],
+     [
+      15,
+      -4
+     ],
+     [
+      16,
+      -2
+     ],
+     [
+      17,
+      1
+     ],
+     [
+      18,
+      -1
+     ],
+     [
+      19,
+      1
+     ]
+    ],
+    "direction": 8,
+    "prefix_width": 20,
+    "support": 14,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   },
+   {
+    "coefficients": [
+     [
+      1,
+      -1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      -2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      -1
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      -1
+     ],
+     [
+      11,
+      1
+     ],
+     [
+      12,
+      -2
+     ],
+     [
+      13,
+      2
+     ],
+     [
+      14,
+      -1
+     ],
+     [
+      15,
+      -3
+     ],
+     [
+      16,
+      -1
+     ],
+     [
+      17,
+      1
+     ],
+     [
+      18,
+      -1
+     ],
+     [
+      19,
+      1
+     ]
+    ],
+    "direction": 9,
+    "prefix_width": 20,
+    "support": 18,
+    "target": "(L_3(Theta ^ u_k) ; 0)"
+   }
+  ],
+  "smallness_method": "canonical prefix-greedy generating subset, minimal prefix per target by binary search on the nested prefix lattices, then a deterministic greedy reduction against an LLL-reduced basis of that prefix's kernel; best effort, no optimality claim",
+  "sparse_encoding": "list of [generator_index, coefficient]"
+ },
+ "K3_pure_transfers_closed_form": {
+  "all_twenty_transfers_inside_the_beta_block": true,
+  "beta_block": "generators 0..9 are beta_m (x) 1, generators 10..19 are 1 (x) beta_m",
+  "escape_probe_equals_symmetric_pair": true,
+  "escape_probe_formula": "(0 ; 2 e_k) = beta_k (x) 1 + 1 (x) beta_k",
+  "lambda_coefficient_determinant": 1,
+  "lambda_coefficient_invariant_factors": {
+   "1": 10
+  },
+  "lambda_coefficient_matrix_rows": [
+   [
+    -1,
+    1,
+    -1,
+    1,
+    -2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    -1,
+    1,
+    -1,
+    2,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    -1,
+    1,
+    -2,
+    1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    -1,
+    2,
+    -1,
+    1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    3,
+    -4,
+    4,
+    -4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    -1,
+    0,
+    1,
+    0,
+    0,
+    4,
+    1,
+    -1,
+    1,
+    -2
+   ],
+   [
+    -2,
+    1,
+    0,
+    0,
+    0,
+    4,
+    1,
+    -1,
+    2,
+    -1
+   ],
+   [
+    -2,
+    0,
+    0,
+    0,
+    -1,
+    4,
+    1,
+    -2,
+    1,
+    -1
+   ],
+   [
+    -1,
+    0,
+    0,
+    -1,
+    0,
+    4,
+    2,
+    -1,
+    1,
+    -1
+   ],
+   [
+    0,
+    -1,
+    2,
+    -2,
+    1,
+    3,
+    1,
+    -1,
+    1,
+    -1
+   ]
+  ],
+  "lambda_transfer_formula": "(L_3(Theta ^ u_k) ; 0) = sum_m c[k,m] (beta_m (x) 1 - 1 (x) beta_m)",
+  "lambda_transfers_are_antisymmetric": true,
+  "re_verified_against_A": true
+ },
+ "K4_theta3_in_L5_image": {
+  "L_5_elementary_divisors": {
+   "1": 110,
+   "2": 10
+  },
+  "all_directions_in_the_image": true,
+  "cokernel_exponent": 2,
+  "identity_3_Theta3_wedge_z_equals_L5_of_Theta2_wedge_z": true,
+  "per_direction_verdict": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "structural_argument": "coker(L_5) has exponent two, so 2 x lies in the image; 3 x lies in the image by the divided-power identity; hence x = 3x - 2x does",
+  "three_times_class_in_image_per_direction": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "two_times_class_in_image_per_direction": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ]
+ },
+ "K5_consistency": {
+  "pass9_json": "notes/2026-08-12-c908-h3-lattice-adjudication.json",
+  "pass9_sha256": "3c9519fbb1a6f2fdc1ddb8dc5332d691915ea36332f91b505bd2b2bcb80efaf6",
+  "rho_matches_pass9": true,
+  "rho_matrix_rows": [
+   [
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1
+   ],
+   [
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ]
+  ],
+  "saturation_index": 1024,
+  "saturation_quotient_divisors": {
+   "1": 110,
+   "2": 10
+  }
+ },
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "K0 pass-7 shared machinery re-certifies (controls end PASS)",
+   "detail": "93 lines of pass-7 output",
+   "pass": true
+  },
+  {
+   "check": "K1a Theta^[2] ^ z_k is an integral 5-form for every k",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K1b 2 (Theta^[2] ^ z_k) = L_3(Theta ^ z_k) identically as forms",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K1c Theta^[2] ^ z_k lies in Sat for every k (integral Sat-coordinates)",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K1d the ten classes [Theta^[2] ^ z_k] are measured in Sat / L_3(^3 Lambda) = (Z/2)^10",
+   "detail": "F_2-span dimension 10",
+   "pass": true
+  },
+  {
+   "check": "K1e Sat = L_3(^3 Lambda) + span_Z{Theta^[2] ^ z_k} exactly (equal Hermite normal forms)",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K2a psi_* T lies in Sat for all 940 generators (recomputed here from the pass-7 machinery, not reloaded)",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K2b rho is invertible and sigma(T) = rho(gamma(T)) mod L_3(^3 Lambda) for all 940 generators",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K2c the top-wedge pairing w : ^9 Lambda -> Lambda is unimodular",
+   "detail": "det 1",
+   "pass": true
+  },
+  {
+   "check": "K2d the four variants collapse to the recorded number of distinct mod-two composites M w",
+   "detail": "{identity}; {S, S_transpose}; {S_inverse}",
+   "pass": true
+  },
+  {
+   "check": "K2e a single fixed variant M realises rho(gamma) = [Theta^[2] ^ M w(gamma)] on all 940 generators",
+   "detail": "matching variants ['S', 'S_transpose']; best mismatch count 0",
+   "pass": true
+  },
+  {
+   "check": "K3a the transfer image col(A) has rank 130",
+   "detail": "130",
+   "pass": true
+  },
+  {
+   "check": "K3b a canonical prefix-greedy subset of the 940 generators already generates the whole transfer image",
+   "detail": "138 generators, last canonical index 449",
+   "pass": true
+  },
+  {
+   "check": "K3c every pure lambda-test transfer (L_3(Theta ^ u_k) ; 0) is realised exactly by an integral combination of the 940 generators",
+   "detail": "supports 10,10,10,10,10,14,14,14,14,18",
+   "pass": true
+  },
+  {
+   "check": "K3d every pure escape probe (0 ; 2 e_k) is realised exactly by an integral combination of the 940 generators",
+   "detail": "supports 2,2,2,2,2,2,2,2,2,2",
+   "pass": true
+  },
+  {
+   "check": "K3e the pure lambda-test transfers really have vanishing second block, and the pure escape probes really have vanishing first block",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K3f all twenty pure transfers are supported inside the twenty generators beta_m (x) 1 and 1 (x) beta_m",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K3g the pure escape probe in direction k is exactly the symmetric pair S_k = beta_k (x) 1 + 1 (x) beta_k",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K3h every pure lambda-test transfer is antisymmetric in the two beta blocks, hence an integral combination of the D_m",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K3i (L_3(Theta ^ u_k) ; 0) = sum_m c[k,m] D_m for the recorded integer matrix c, re-verified against A directly",
+   "detail": "det c = 1, invariant factors {'1': 10}",
+   "pass": true
+  },
+  {
+   "check": "K4a L_5 : ^5 Lambda -> ^7 Lambda has full rank 120; its Smith form is recorded",
+   "detail": "{'1': 110, '2': 10}",
+   "pass": true
+  },
+  {
+   "check": "K4b the exponent of coker(L_5) is measured and recorded",
+   "detail": "exponent 2",
+   "pass": true
+  },
+  {
+   "check": "K4c 3 (Theta^[3] ^ z_k) = L_5(Theta^[2] ^ z_k) identically as forms, so three times each class lies in the image",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K4d the image lattice L_5(^5 Lambda) has rank 120",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K4e 2 (Theta^[3] ^ z_k) lies in L_5(^5 Lambda) for every k (cokernel exponent two)",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K4f 3 (Theta^[3] ^ z_k) lies in L_5(^5 Lambda) for every k (the divided-power identity)",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K4g Theta^[3] ^ z_k lies in L_5(^5 Lambda) integrally for every k, as exponent-two arithmetic predicts",
+   "detail": "all ten directions",
+   "pass": true
+  },
+  {
+   "check": "K5a [Sat : L_3(^3 Lambda)] = 2^10 and the quotient is (Z/2)^10",
+   "detail": "index 1024, divisors {'1': 110, '2': 10}",
+   "pass": true
+  },
+  {
+   "check": "K5b the recomputed rho agrees entry for entry with the pass-9 record",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K5c the pass-9 record certifies Im = H^ exactly, which is why the K3 solves are guaranteed to exist",
+   "detail": null,
+   "pass": true
+  },
+  {
+   "check": "K5d the pass-9 record and this certificate agree on the 940 generator labels",
+   "detail": null,
+   "pass": true
+  }
+ ],
+ "generator_dictionary": {
+  "blocks": [
+   {
+    "name": "H3(x)H0 (beta_m (x) 1)",
+    "range": [
+     0,
+     10
+    ]
+   },
+   {
+    "name": "H0(x)H3 (1 (x) beta_m)",
+    "range": [
+     10,
+     20
+    ]
+   },
+   {
+    "name": "H2(x)H1 (a_* u (x) a_* z)",
+    "range": [
+     20,
+     470
+    ]
+   },
+   {
+    "name": "H2(x)H1 (C_s (x) a_* z)",
+    "range": [
+     470,
+     480
+    ]
+   },
+   {
+    "name": "H1(x)H2 (a_* z (x) a_* u)",
+    "range": [
+     480,
+     930
+    ]
+   },
+   {
+    "name": "H1(x)H2 (a_* z (x) C_s)",
+    "range": [
+     930,
+     940
+    ]
+   }
+  ],
+  "encoding": "index -> canonical label, in enumeration order",
+  "labels": [
+   "beta0(x)1",
+   "beta1(x)1",
+   "beta2(x)1",
+   "beta3(x)1",
+   "beta4(x)1",
+   "beta5(x)1",
+   "beta6(x)1",
+   "beta7(x)1",
+   "beta8(x)1",
+   "beta9(x)1",
+   "1(x)beta0",
+   "1(x)beta1",
+   "1(x)beta2",
+   "1(x)beta3",
+   "1(x)beta4",
+   "1(x)beta5",
+   "1(x)beta6",
+   "1(x)beta7",
+   "1(x)beta8",
+   "1(x)beta9",
+   "a*e01(x)a*e0",
+   "a*e01(x)a*e1",
+   "a*e01(x)a*e2",
+   "a*e01(x)a*e3",
+   "a*e01(x)a*e4",
+   "a*e01(x)a*e5",
+   "a*e01(x)a*e6",
+   "a*e01(x)a*e7",
+   "a*e01(x)a*e8",
+   "a*e01(x)a*e9",
+   "a*e02(x)a*e0",
+   "a*e02(x)a*e1",
+   "a*e02(x)a*e2",
+   "a*e02(x)a*e3",
+   "a*e02(x)a*e4",
+   "a*e02(x)a*e5",
+   "a*e02(x)a*e6",
+   "a*e02(x)a*e7",
+   "a*e02(x)a*e8",
+   "a*e02(x)a*e9",
+   "a*e03(x)a*e0",
+   "a*e03(x)a*e1",
+   "a*e03(x)a*e2",
+   "a*e03(x)a*e3",
+   "a*e03(x)a*e4",
+   "a*e03(x)a*e5",
+   "a*e03(x)a*e6",
+   "a*e03(x)a*e7",
+   "a*e03(x)a*e8",
+   "a*e03(x)a*e9",
+   "a*e04(x)a*e0",
+   "a*e04(x)a*e1",
+   "a*e04(x)a*e2",
+   "a*e04(x)a*e3",
+   "a*e04(x)a*e4",
+   "a*e04(x)a*e5",
+   "a*e04(x)a*e6",
+   "a*e04(x)a*e7",
+   "a*e04(x)a*e8",
+   "a*e04(x)a*e9",
+   "a*e05(x)a*e0",
+   "a*e05(x)a*e1",
+   "a*e05(x)a*e2",
+   "a*e05(x)a*e3",
+   "a*e05(x)a*e4",
+   "a*e05(x)a*e5",
+   "a*e05(x)a*e6",
+   "a*e05(x)a*e7",
+   "a*e05(x)a*e8",
+   "a*e05(x)a*e9",
+   "a*e06(x)a*e0",
+   "a*e06(x)a*e1",
+   "a*e06(x)a*e2",
+   "a*e06(x)a*e3",
+   "a*e06(x)a*e4",
+   "a*e06(x)a*e5",
+   "a*e06(x)a*e6",
+   "a*e06(x)a*e7",
+   "a*e06(x)a*e8",
+   "a*e06(x)a*e9",
+   "a*e07(x)a*e0",
+   "a*e07(x)a*e1",
+   "a*e07(x)a*e2",
+   "a*e07(x)a*e3",
+   "a*e07(x)a*e4",
+   "a*e07(x)a*e5",
+   "a*e07(x)a*e6",
+   "a*e07(x)a*e7",
+   "a*e07(x)a*e8",
+   "a*e07(x)a*e9",
+   "a*e08(x)a*e0",
+   "a*e08(x)a*e1",
+   "a*e08(x)a*e2",
+   "a*e08(x)a*e3",
+   "a*e08(x)a*e4",
+   "a*e08(x)a*e5",
+   "a*e08(x)a*e6",
+   "a*e08(x)a*e7",
+   "a*e08(x)a*e8",
+   "a*e08(x)a*e9",
+   "a*e09(x)a*e0",
+   "a*e09(x)a*e1",
+   "a*e09(x)a*e2",
+   "a*e09(x)a*e3",
+   "a*e09(x)a*e4",
+   "a*e09(x)a*e5",
+   "a*e09(x)a*e6",
+   "a*e09(x)a*e7",
+   "a*e09(x)a*e8",
+   "a*e09(x)a*e9",
+   "a*e12(x)a*e0",
+   "a*e12(x)a*e1",
+   "a*e12(x)a*e2",
+   "a*e12(x)a*e3",
+   "a*e12(x)a*e4",
+   "a*e12(x)a*e5",
+   "a*e12(x)a*e6",
+   "a*e12(x)a*e7",
+   "a*e12(x)a*e8",
+   "a*e12(x)a*e9",
+   "a*e13(x)a*e0",
+   "a*e13(x)a*e1",
+   "a*e13(x)a*e2",
+   "a*e13(x)a*e3",
+   "a*e13(x)a*e4",
+   "a*e13(x)a*e5",
+   "a*e13(x)a*e6",
+   "a*e13(x)a*e7",
+   "a*e13(x)a*e8",
+   "a*e13(x)a*e9",
+   "a*e14(x)a*e0",
+   "a*e14(x)a*e1",
+   "a*e14(x)a*e2",
+   "a*e14(x)a*e3",
+   "a*e14(x)a*e4",
+   "a*e14(x)a*e5",
+   "a*e14(x)a*e6",
+   "a*e14(x)a*e7",
+   "a*e14(x)a*e8",
+   "a*e14(x)a*e9",
+   "a*e15(x)a*e0",
+   "a*e15(x)a*e1",
+   "a*e15(x)a*e2",
+   "a*e15(x)a*e3",
+   "a*e15(x)a*e4",
+   "a*e15(x)a*e5",
+   "a*e15(x)a*e6",
+   "a*e15(x)a*e7",
+   "a*e15(x)a*e8",
+   "a*e15(x)a*e9",
+   "a*e16(x)a*e0",
+   "a*e16(x)a*e1",
+   "a*e16(x)a*e2",
+   "a*e16(x)a*e3",
+   "a*e16(x)a*e4",
+   "a*e16(x)a*e5",
+   "a*e16(x)a*e6",
+   "a*e16(x)a*e7",
+   "a*e16(x)a*e8",
+   "a*e16(x)a*e9",
+   "a*e17(x)a*e0",
+   "a*e17(x)a*e1",
+   "a*e17(x)a*e2",
+   "a*e17(x)a*e3",
+   "a*e17(x)a*e4",
+   "a*e17(x)a*e5",
+   "a*e17(x)a*e6",
+   "a*e17(x)a*e7",
+   "a*e17(x)a*e8",
+   "a*e17(x)a*e9",
+   "a*e18(x)a*e0",
+   "a*e18(x)a*e1",
+   "a*e18(x)a*e2",
+   "a*e18(x)a*e3",
+   "a*e18(x)a*e4",
+   "a*e18(x)a*e5",
+   "a*e18(x)a*e6",
+   "a*e18(x)a*e7",
+   "a*e18(x)a*e8",
+   "a*e18(x)a*e9",
+   "a*e19(x)a*e0",
+   "a*e19(x)a*e1",
+   "a*e19(x)a*e2",
+   "a*e19(x)a*e3",
+   "a*e19(x)a*e4",
+   "a*e19(x)a*e5",
+   "a*e19(x)a*e6",
+   "a*e19(x)a*e7",
+   "a*e19(x)a*e8",
+   "a*e19(x)a*e9",
+   "a*e23(x)a*e0",
+   "a*e23(x)a*e1",
+   "a*e23(x)a*e2",
+   "a*e23(x)a*e3",
+   "a*e23(x)a*e4",
+   "a*e23(x)a*e5",
+   "a*e23(x)a*e6",
+   "a*e23(x)a*e7",
+   "a*e23(x)a*e8",
+   "a*e23(x)a*e9",
+   "a*e24(x)a*e0",
+   "a*e24(x)a*e1",
+   "a*e24(x)a*e2",
+   "a*e24(x)a*e3",
+   "a*e24(x)a*e4",
+   "a*e24(x)a*e5",
+   "a*e24(x)a*e6",
+   "a*e24(x)a*e7",
+   "a*e24(x)a*e8",
+   "a*e24(x)a*e9",
+   "a*e25(x)a*e0",
+   "a*e25(x)a*e1",
+   "a*e25(x)a*e2",
+   "a*e25(x)a*e3",
+   "a*e25(x)a*e4",
+   "a*e25(x)a*e5",
+   "a*e25(x)a*e6",
+   "a*e25(x)a*e7",
+   "a*e25(x)a*e8",
+   "a*e25(x)a*e9",
+   "a*e26(x)a*e0",
+   "a*e26(x)a*e1",
+   "a*e26(x)a*e2",
+   "a*e26(x)a*e3",
+   "a*e26(x)a*e4",
+   "a*e26(x)a*e5",
+   "a*e26(x)a*e6",
+   "a*e26(x)a*e7",
+   "a*e26(x)a*e8",
+   "a*e26(x)a*e9",
+   "a*e27(x)a*e0",
+   "a*e27(x)a*e1",
+   "a*e27(x)a*e2",
+   "a*e27(x)a*e3",
+   "a*e27(x)a*e4",
+   "a*e27(x)a*e5",
+   "a*e27(x)a*e6",
+   "a*e27(x)a*e7",
+   "a*e27(x)a*e8",
+   "a*e27(x)a*e9",
+   "a*e28(x)a*e0",
+   "a*e28(x)a*e1",
+   "a*e28(x)a*e2",
+   "a*e28(x)a*e3",
+   "a*e28(x)a*e4",
+   "a*e28(x)a*e5",
+   "a*e28(x)a*e6",
+   "a*e28(x)a*e7",
+   "a*e28(x)a*e8",
+   "a*e28(x)a*e9",
+   "a*e29(x)a*e0",
+   "a*e29(x)a*e1",
+   "a*e29(x)a*e2",
+   "a*e29(x)a*e3",
+   "a*e29(x)a*e4",
+   "a*e29(x)a*e5",
+   "a*e29(x)a*e6",
+   "a*e29(x)a*e7",
+   "a*e29(x)a*e8",
+   "a*e29(x)a*e9",
+   "a*e34(x)a*e0",
+   "a*e34(x)a*e1",
+   "a*e34(x)a*e2",
+   "a*e34(x)a*e3",
+   "a*e34(x)a*e4",
+   "a*e34(x)a*e5",
+   "a*e34(x)a*e6",
+   "a*e34(x)a*e7",
+   "a*e34(x)a*e8",
+   "a*e34(x)a*e9",
+   "a*e35(x)a*e0",
+   "a*e35(x)a*e1",
+   "a*e35(x)a*e2",
+   "a*e35(x)a*e3",
+   "a*e35(x)a*e4",
+   "a*e35(x)a*e5",
+   "a*e35(x)a*e6",
+   "a*e35(x)a*e7",
+   "a*e35(x)a*e8",
+   "a*e35(x)a*e9",
+   "a*e36(x)a*e0",
+   "a*e36(x)a*e1",
+   "a*e36(x)a*e2",
+   "a*e36(x)a*e3",
+   "a*e36(x)a*e4",
+   "a*e36(x)a*e5",
+   "a*e36(x)a*e6",
+   "a*e36(x)a*e7",
+   "a*e36(x)a*e8",
+   "a*e36(x)a*e9",
+   "a*e37(x)a*e0",
+   "a*e37(x)a*e1",
+   "a*e37(x)a*e2",
+   "a*e37(x)a*e3",
+   "a*e37(x)a*e4",
+   "a*e37(x)a*e5",
+   "a*e37(x)a*e6",
+   "a*e37(x)a*e7",
+   "a*e37(x)a*e8",
+   "a*e37(x)a*e9",
+   "a*e38(x)a*e0",
+   "a*e38(x)a*e1",
+   "a*e38(x)a*e2",
+   "a*e38(x)a*e3",
+   "a*e38(x)a*e4",
+   "a*e38(x)a*e5",
+   "a*e38(x)a*e6",
+   "a*e38(x)a*e7",
+   "a*e38(x)a*e8",
+   "a*e38(x)a*e9",
+   "a*e39(x)a*e0",
+   "a*e39(x)a*e1",
+   "a*e39(x)a*e2",
+   "a*e39(x)a*e3",
+   "a*e39(x)a*e4",
+   "a*e39(x)a*e5",
+   "a*e39(x)a*e6",
+   "a*e39(x)a*e7",
+   "a*e39(x)a*e8",
+   "a*e39(x)a*e9",
+   "a*e45(x)a*e0",
+   "a*e45(x)a*e1",
+   "a*e45(x)a*e2",
+   "a*e45(x)a*e3",
+   "a*e45(x)a*e4",
+   "a*e45(x)a*e5",
+   "a*e45(x)a*e6",
+   "a*e45(x)a*e7",
+   "a*e45(x)a*e8",
+   "a*e45(x)a*e9",
+   "a*e46(x)a*e0",
+   "a*e46(x)a*e1",
+   "a*e46(x)a*e2",
+   "a*e46(x)a*e3",
+   "a*e46(x)a*e4",
+   "a*e46(x)a*e5",
+   "a*e46(x)a*e6",
+   "a*e46(x)a*e7",
+   "a*e46(x)a*e8",
+   "a*e46(x)a*e9",
+   "a*e47(x)a*e0",
+   "a*e47(x)a*e1",
+   "a*e47(x)a*e2",
+   "a*e47(x)a*e3",
+   "a*e47(x)a*e4",
+   "a*e47(x)a*e5",
+   "a*e47(x)a*e6",
+   "a*e47(x)a*e7",
+   "a*e47(x)a*e8",
+   "a*e47(x)a*e9",
+   "a*e48(x)a*e0",
+   "a*e48(x)a*e1",
+   "a*e48(x)a*e2",
+   "a*e48(x)a*e3",
+   "a*e48(x)a*e4",
+   "a*e48(x)a*e5",
+   "a*e48(x)a*e6",
+   "a*e48(x)a*e7",
+   "a*e48(x)a*e8",
+   "a*e48(x)a*e9",
+   "a*e49(x)a*e0",
+   "a*e49(x)a*e1",
+   "a*e49(x)a*e2",
+   "a*e49(x)a*e3",
+   "a*e49(x)a*e4",
+   "a*e49(x)a*e5",
+   "a*e49(x)a*e6",
+   "a*e49(x)a*e7",
+   "a*e49(x)a*e8",
+   "a*e49(x)a*e9",
+   "a*e56(x)a*e0",
+   "a*e56(x)a*e1",
+   "a*e56(x)a*e2",
+   "a*e56(x)a*e3",
+   "a*e56(x)a*e4",
+   "a*e56(x)a*e5",
+   "a*e56(x)a*e6",
+   "a*e56(x)a*e7",
+   "a*e56(x)a*e8",
+   "a*e56(x)a*e9",
+   "a*e57(x)a*e0",
+   "a*e57(x)a*e1",
+   "a*e57(x)a*e2",
+   "a*e57(x)a*e3",
+   "a*e57(x)a*e4",
+   "a*e57(x)a*e5",
+   "a*e57(x)a*e6",
+   "a*e57(x)a*e7",
+   "a*e57(x)a*e8",
+   "a*e57(x)a*e9",
+   "a*e58(x)a*e0",
+   "a*e58(x)a*e1",
+   "a*e58(x)a*e2",
+   "a*e58(x)a*e3",
+   "a*e58(x)a*e4",
+   "a*e58(x)a*e5",
+   "a*e58(x)a*e6",
+   "a*e58(x)a*e7",
+   "a*e58(x)a*e8",
+   "a*e58(x)a*e9",
+   "a*e59(x)a*e0",
+   "a*e59(x)a*e1",
+   "a*e59(x)a*e2",
+   "a*e59(x)a*e3",
+   "a*e59(x)a*e4",
+   "a*e59(x)a*e5",
+   "a*e59(x)a*e6",
+   "a*e59(x)a*e7",
+   "a*e59(x)a*e8",
+   "a*e59(x)a*e9",
+   "a*e67(x)a*e0",
+   "a*e67(x)a*e1",
+   "a*e67(x)a*e2",
+   "a*e67(x)a*e3",
+   "a*e67(x)a*e4",
+   "a*e67(x)a*e5",
+   "a*e67(x)a*e6",
+   "a*e67(x)a*e7",
+   "a*e67(x)a*e8",
+   "a*e67(x)a*e9",
+   "a*e68(x)a*e0",
+   "a*e68(x)a*e1",
+   "a*e68(x)a*e2",
+   "a*e68(x)a*e3",
+   "a*e68(x)a*e4",
+   "a*e68(x)a*e5",
+   "a*e68(x)a*e6",
+   "a*e68(x)a*e7",
+   "a*e68(x)a*e8",
+   "a*e68(x)a*e9",
+   "a*e69(x)a*e0",
+   "a*e69(x)a*e1",
+   "a*e69(x)a*e2",
+   "a*e69(x)a*e3",
+   "a*e69(x)a*e4",
+   "a*e69(x)a*e5",
+   "a*e69(x)a*e6",
+   "a*e69(x)a*e7",
+   "a*e69(x)a*e8",
+   "a*e69(x)a*e9",
+   "a*e78(x)a*e0",
+   "a*e78(x)a*e1",
+   "a*e78(x)a*e2",
+   "a*e78(x)a*e3",
+   "a*e78(x)a*e4",
+   "a*e78(x)a*e5",
+   "a*e78(x)a*e6",
+   "a*e78(x)a*e7",
+   "a*e78(x)a*e8",
+   "a*e78(x)a*e9",
+   "a*e79(x)a*e0",
+   "a*e79(x)a*e1",
+   "a*e79(x)a*e2",
+   "a*e79(x)a*e3",
+   "a*e79(x)a*e4",
+   "a*e79(x)a*e5",
+   "a*e79(x)a*e6",
+   "a*e79(x)a*e7",
+   "a*e79(x)a*e8",
+   "a*e79(x)a*e9",
+   "a*e89(x)a*e0",
+   "a*e89(x)a*e1",
+   "a*e89(x)a*e2",
+   "a*e89(x)a*e3",
+   "a*e89(x)a*e4",
+   "a*e89(x)a*e5",
+   "a*e89(x)a*e6",
+   "a*e89(x)a*e7",
+   "a*e89(x)a*e8",
+   "a*e89(x)a*e9",
+   "Cs(x)a*e0",
+   "Cs(x)a*e1",
+   "Cs(x)a*e2",
+   "Cs(x)a*e3",
+   "Cs(x)a*e4",
+   "Cs(x)a*e5",
+   "Cs(x)a*e6",
+   "Cs(x)a*e7",
+   "Cs(x)a*e8",
+   "Cs(x)a*e9",
+   "a*e0(x)a*e01",
+   "a*e0(x)a*e02",
+   "a*e0(x)a*e03",
+   "a*e0(x)a*e04",
+   "a*e0(x)a*e05",
+   "a*e0(x)a*e06",
+   "a*e0(x)a*e07",
+   "a*e0(x)a*e08",
+   "a*e0(x)a*e09",
+   "a*e0(x)a*e12",
+   "a*e0(x)a*e13",
+   "a*e0(x)a*e14",
+   "a*e0(x)a*e15",
+   "a*e0(x)a*e16",
+   "a*e0(x)a*e17",
+   "a*e0(x)a*e18",
+   "a*e0(x)a*e19",
+   "a*e0(x)a*e23",
+   "a*e0(x)a*e24",
+   "a*e0(x)a*e25",
+   "a*e0(x)a*e26",
+   "a*e0(x)a*e27",
+   "a*e0(x)a*e28",
+   "a*e0(x)a*e29",
+   "a*e0(x)a*e34",
+   "a*e0(x)a*e35",
+   "a*e0(x)a*e36",
+   "a*e0(x)a*e37",
+   "a*e0(x)a*e38",
+   "a*e0(x)a*e39",
+   "a*e0(x)a*e45",
+   "a*e0(x)a*e46",
+   "a*e0(x)a*e47",
+   "a*e0(x)a*e48",
+   "a*e0(x)a*e49",
+   "a*e0(x)a*e56",
+   "a*e0(x)a*e57",
+   "a*e0(x)a*e58",
+   "a*e0(x)a*e59",
+   "a*e0(x)a*e67",
+   "a*e0(x)a*e68",
+   "a*e0(x)a*e69",
+   "a*e0(x)a*e78",
+   "a*e0(x)a*e79",
+   "a*e0(x)a*e89",
+   "a*e1(x)a*e01",
+   "a*e1(x)a*e02",
+   "a*e1(x)a*e03",
+   "a*e1(x)a*e04",
+   "a*e1(x)a*e05",
+   "a*e1(x)a*e06",
+   "a*e1(x)a*e07",
+   "a*e1(x)a*e08",
+   "a*e1(x)a*e09",
+   "a*e1(x)a*e12",
+   "a*e1(x)a*e13",
+   "a*e1(x)a*e14",
+   "a*e1(x)a*e15",
+   "a*e1(x)a*e16",
+   "a*e1(x)a*e17",
+   "a*e1(x)a*e18",
+   "a*e1(x)a*e19",
+   "a*e1(x)a*e23",
+   "a*e1(x)a*e24",
+   "a*e1(x)a*e25",
+   "a*e1(x)a*e26",
+   "a*e1(x)a*e27",
+   "a*e1(x)a*e28",
+   "a*e1(x)a*e29",
+   "a*e1(x)a*e34",
+   "a*e1(x)a*e35",
+   "a*e1(x)a*e36",
+   "a*e1(x)a*e37",
+   "a*e1(x)a*e38",
+   "a*e1(x)a*e39",
+   "a*e1(x)a*e45",
+   "a*e1(x)a*e46",
+   "a*e1(x)a*e47",
+   "a*e1(x)a*e48",
+   "a*e1(x)a*e49",
+   "a*e1(x)a*e56",
+   "a*e1(x)a*e57",
+   "a*e1(x)a*e58",
+   "a*e1(x)a*e59",
+   "a*e1(x)a*e67",
+   "a*e1(x)a*e68",
+   "a*e1(x)a*e69",
+   "a*e1(x)a*e78",
+   "a*e1(x)a*e79",
+   "a*e1(x)a*e89",
+   "a*e2(x)a*e01",
+   "a*e2(x)a*e02",
+   "a*e2(x)a*e03",
+   "a*e2(x)a*e04",
+   "a*e2(x)a*e05",
+   "a*e2(x)a*e06",
+   "a*e2(x)a*e07",
+   "a*e2(x)a*e08",
+   "a*e2(x)a*e09",
+   "a*e2(x)a*e12",
+   "a*e2(x)a*e13",
+   "a*e2(x)a*e14",
+   "a*e2(x)a*e15",
+   "a*e2(x)a*e16",
+   "a*e2(x)a*e17",
+   "a*e2(x)a*e18",
+   "a*e2(x)a*e19",
+   "a*e2(x)a*e23",
+   "a*e2(x)a*e24",
+   "a*e2(x)a*e25",
+   "a*e2(x)a*e26",
+   "a*e2(x)a*e27",
+   "a*e2(x)a*e28",
+   "a*e2(x)a*e29",
+   "a*e2(x)a*e34",
+   "a*e2(x)a*e35",
+   "a*e2(x)a*e36",
+   "a*e2(x)a*e37",
+   "a*e2(x)a*e38",
+   "a*e2(x)a*e39",
+   "a*e2(x)a*e45",
+   "a*e2(x)a*e46",
+   "a*e2(x)a*e47",
+   "a*e2(x)a*e48",
+   "a*e2(x)a*e49",
+   "a*e2(x)a*e56",
+   "a*e2(x)a*e57",
+   "a*e2(x)a*e58",
+   "a*e2(x)a*e59",
+   "a*e2(x)a*e67",
+   "a*e2(x)a*e68",
+   "a*e2(x)a*e69",
+   "a*e2(x)a*e78",
+   "a*e2(x)a*e79",
+   "a*e2(x)a*e89",
+   "a*e3(x)a*e01",
+   "a*e3(x)a*e02",
+   "a*e3(x)a*e03",
+   "a*e3(x)a*e04",
+   "a*e3(x)a*e05",
+   "a*e3(x)a*e06",
+   "a*e3(x)a*e07",
+   "a*e3(x)a*e08",
+   "a*e3(x)a*e09",
+   "a*e3(x)a*e12",
+   "a*e3(x)a*e13",
+   "a*e3(x)a*e14",
+   "a*e3(x)a*e15",
+   "a*e3(x)a*e16",
+   "a*e3(x)a*e17",
+   "a*e3(x)a*e18",
+   "a*e3(x)a*e19",
+   "a*e3(x)a*e23",
+   "a*e3(x)a*e24",
+   "a*e3(x)a*e25",
+   "a*e3(x)a*e26",
+   "a*e3(x)a*e27",
+   "a*e3(x)a*e28",
+   "a*e3(x)a*e29",
+   "a*e3(x)a*e34",
+   "a*e3(x)a*e35",
+   "a*e3(x)a*e36",
+   "a*e3(x)a*e37",
+   "a*e3(x)a*e38",
+   "a*e3(x)a*e39",
+   "a*e3(x)a*e45",
+   "a*e3(x)a*e46",
+   "a*e3(x)a*e47",
+   "a*e3(x)a*e48",
+   "a*e3(x)a*e49",
+   "a*e3(x)a*e56",
+   "a*e3(x)a*e57",
+   "a*e3(x)a*e58",
+   "a*e3(x)a*e59",
+   "a*e3(x)a*e67",
+   "a*e3(x)a*e68",
+   "a*e3(x)a*e69",
+   "a*e3(x)a*e78",
+   "a*e3(x)a*e79",
+   "a*e3(x)a*e89",
+   "a*e4(x)a*e01",
+   "a*e4(x)a*e02",
+   "a*e4(x)a*e03",
+   "a*e4(x)a*e04",
+   "a*e4(x)a*e05",
+   "a*e4(x)a*e06",
+   "a*e4(x)a*e07",
+   "a*e4(x)a*e08",
+   "a*e4(x)a*e09",
+   "a*e4(x)a*e12",
+   "a*e4(x)a*e13",
+   "a*e4(x)a*e14",
+   "a*e4(x)a*e15",
+   "a*e4(x)a*e16",
+   "a*e4(x)a*e17",
+   "a*e4(x)a*e18",
+   "a*e4(x)a*e19",
+   "a*e4(x)a*e23",
+   "a*e4(x)a*e24",
+   "a*e4(x)a*e25",
+   "a*e4(x)a*e26",
+   "a*e4(x)a*e27",
+   "a*e4(x)a*e28",
+   "a*e4(x)a*e29",
+   "a*e4(x)a*e34",
+   "a*e4(x)a*e35",
+   "a*e4(x)a*e36",
+   "a*e4(x)a*e37",
+   "a*e4(x)a*e38",
+   "a*e4(x)a*e39",
+   "a*e4(x)a*e45",
+   "a*e4(x)a*e46",
+   "a*e4(x)a*e47",
+   "a*e4(x)a*e48",
+   "a*e4(x)a*e49",
+   "a*e4(x)a*e56",
+   "a*e4(x)a*e57",
+   "a*e4(x)a*e58",
+   "a*e4(x)a*e59",
+   "a*e4(x)a*e67",
+   "a*e4(x)a*e68",
+   "a*e4(x)a*e69",
+   "a*e4(x)a*e78",
+   "a*e4(x)a*e79",
+   "a*e4(x)a*e89",
+   "a*e5(x)a*e01",
+   "a*e5(x)a*e02",
+   "a*e5(x)a*e03",
+   "a*e5(x)a*e04",
+   "a*e5(x)a*e05",
+   "a*e5(x)a*e06",
+   "a*e5(x)a*e07",
+   "a*e5(x)a*e08",
+   "a*e5(x)a*e09",
+   "a*e5(x)a*e12",
+   "a*e5(x)a*e13",
+   "a*e5(x)a*e14",
+   "a*e5(x)a*e15",
+   "a*e5(x)a*e16",
+   "a*e5(x)a*e17",
+   "a*e5(x)a*e18",
+   "a*e5(x)a*e19",
+   "a*e5(x)a*e23",
+   "a*e5(x)a*e24",
+   "a*e5(x)a*e25",
+   "a*e5(x)a*e26",
+   "a*e5(x)a*e27",
+   "a*e5(x)a*e28",
+   "a*e5(x)a*e29",
+   "a*e5(x)a*e34",
+   "a*e5(x)a*e35",
+   "a*e5(x)a*e36",
+   "a*e5(x)a*e37",
+   "a*e5(x)a*e38",
+   "a*e5(x)a*e39",
+   "a*e5(x)a*e45",
+   "a*e5(x)a*e46",
+   "a*e5(x)a*e47",
+   "a*e5(x)a*e48",
+   "a*e5(x)a*e49",
+   "a*e5(x)a*e56",
+   "a*e5(x)a*e57",
+   "a*e5(x)a*e58",
+   "a*e5(x)a*e59",
+   "a*e5(x)a*e67",
+   "a*e5(x)a*e68",
+   "a*e5(x)a*e69",
+   "a*e5(x)a*e78",
+   "a*e5(x)a*e79",
+   "a*e5(x)a*e89",
+   "a*e6(x)a*e01",
+   "a*e6(x)a*e02",
+   "a*e6(x)a*e03",
+   "a*e6(x)a*e04",
+   "a*e6(x)a*e05",
+   "a*e6(x)a*e06",
+   "a*e6(x)a*e07",
+   "a*e6(x)a*e08",
+   "a*e6(x)a*e09",
+   "a*e6(x)a*e12",
+   "a*e6(x)a*e13",
+   "a*e6(x)a*e14",
+   "a*e6(x)a*e15",
+   "a*e6(x)a*e16",
+   "a*e6(x)a*e17",
+   "a*e6(x)a*e18",
+   "a*e6(x)a*e19",
+   "a*e6(x)a*e23",
+   "a*e6(x)a*e24",
+   "a*e6(x)a*e25",
+   "a*e6(x)a*e26",
+   "a*e6(x)a*e27",
+   "a*e6(x)a*e28",
+   "a*e6(x)a*e29",
+   "a*e6(x)a*e34",
+   "a*e6(x)a*e35",
+   "a*e6(x)a*e36",
+   "a*e6(x)a*e37",
+   "a*e6(x)a*e38",
+   "a*e6(x)a*e39",
+   "a*e6(x)a*e45",
+   "a*e6(x)a*e46",
+   "a*e6(x)a*e47",
+   "a*e6(x)a*e48",
+   "a*e6(x)a*e49",
+   "a*e6(x)a*e56",
+   "a*e6(x)a*e57",
+   "a*e6(x)a*e58",
+   "a*e6(x)a*e59",
+   "a*e6(x)a*e67",
+   "a*e6(x)a*e68",
+   "a*e6(x)a*e69",
+   "a*e6(x)a*e78",
+   "a*e6(x)a*e79",
+   "a*e6(x)a*e89",
+   "a*e7(x)a*e01",
+   "a*e7(x)a*e02",
+   "a*e7(x)a*e03",
+   "a*e7(x)a*e04",
+   "a*e7(x)a*e05",
+   "a*e7(x)a*e06",
+   "a*e7(x)a*e07",
+   "a*e7(x)a*e08",
+   "a*e7(x)a*e09",
+   "a*e7(x)a*e12",
+   "a*e7(x)a*e13",
+   "a*e7(x)a*e14",
+   "a*e7(x)a*e15",
+   "a*e7(x)a*e16",
+   "a*e7(x)a*e17",
+   "a*e7(x)a*e18",
+   "a*e7(x)a*e19",
+   "a*e7(x)a*e23",
+   "a*e7(x)a*e24",
+   "a*e7(x)a*e25",
+   "a*e7(x)a*e26",
+   "a*e7(x)a*e27",
+   "a*e7(x)a*e28",
+   "a*e7(x)a*e29",
+   "a*e7(x)a*e34",
+   "a*e7(x)a*e35",
+   "a*e7(x)a*e36",
+   "a*e7(x)a*e37",
+   "a*e7(x)a*e38",
+   "a*e7(x)a*e39",
+   "a*e7(x)a*e45",
+   "a*e7(x)a*e46",
+   "a*e7(x)a*e47",
+   "a*e7(x)a*e48",
+   "a*e7(x)a*e49",
+   "a*e7(x)a*e56",
+   "a*e7(x)a*e57",
+   "a*e7(x)a*e58",
+   "a*e7(x)a*e59",
+   "a*e7(x)a*e67",
+   "a*e7(x)a*e68",
+   "a*e7(x)a*e69",
+   "a*e7(x)a*e78",
+   "a*e7(x)a*e79",
+   "a*e7(x)a*e89",
+   "a*e8(x)a*e01",
+   "a*e8(x)a*e02",
+   "a*e8(x)a*e03",
+   "a*e8(x)a*e04",
+   "a*e8(x)a*e05",
+   "a*e8(x)a*e06",
+   "a*e8(x)a*e07",
+   "a*e8(x)a*e08",
+   "a*e8(x)a*e09",
+   "a*e8(x)a*e12",
+   "a*e8(x)a*e13",
+   "a*e8(x)a*e14",
+   "a*e8(x)a*e15",
+   "a*e8(x)a*e16",
+   "a*e8(x)a*e17",
+   "a*e8(x)a*e18",
+   "a*e8(x)a*e19",
+   "a*e8(x)a*e23",
+   "a*e8(x)a*e24",
+   "a*e8(x)a*e25",
+   "a*e8(x)a*e26",
+   "a*e8(x)a*e27",
+   "a*e8(x)a*e28",
+   "a*e8(x)a*e29",
+   "a*e8(x)a*e34",
+   "a*e8(x)a*e35",
+   "a*e8(x)a*e36",
+   "a*e8(x)a*e37",
+   "a*e8(x)a*e38",
+   "a*e8(x)a*e39",
+   "a*e8(x)a*e45",
+   "a*e8(x)a*e46",
+   "a*e8(x)a*e47",
+   "a*e8(x)a*e48",
+   "a*e8(x)a*e49",
+   "a*e8(x)a*e56",
+   "a*e8(x)a*e57",
+   "a*e8(x)a*e58",
+   "a*e8(x)a*e59",
+   "a*e8(x)a*e67",
+   "a*e8(x)a*e68",
+   "a*e8(x)a*e69",
+   "a*e8(x)a*e78",
+   "a*e8(x)a*e79",
+   "a*e8(x)a*e89",
+   "a*e9(x)a*e01",
+   "a*e9(x)a*e02",
+   "a*e9(x)a*e03",
+   "a*e9(x)a*e04",
+   "a*e9(x)a*e05",
+   "a*e9(x)a*e06",
+   "a*e9(x)a*e07",
+   "a*e9(x)a*e08",
+   "a*e9(x)a*e09",
+   "a*e9(x)a*e12",
+   "a*e9(x)a*e13",
+   "a*e9(x)a*e14",
+   "a*e9(x)a*e15",
+   "a*e9(x)a*e16",
+   "a*e9(x)a*e17",
+   "a*e9(x)a*e18",
+   "a*e9(x)a*e19",
+   "a*e9(x)a*e23",
+   "a*e9(x)a*e24",
+   "a*e9(x)a*e25",
+   "a*e9(x)a*e26",
+   "a*e9(x)a*e27",
+   "a*e9(x)a*e28",
+   "a*e9(x)a*e29",
+   "a*e9(x)a*e34",
+   "a*e9(x)a*e35",
+   "a*e9(x)a*e36",
+   "a*e9(x)a*e37",
+   "a*e9(x)a*e38",
+   "a*e9(x)a*e39",
+   "a*e9(x)a*e45",
+   "a*e9(x)a*e46",
+   "a*e9(x)a*e47",
+   "a*e9(x)a*e48",
+   "a*e9(x)a*e49",
+   "a*e9(x)a*e56",
+   "a*e9(x)a*e57",
+   "a*e9(x)a*e58",
+   "a*e9(x)a*e59",
+   "a*e9(x)a*e67",
+   "a*e9(x)a*e68",
+   "a*e9(x)a*e69",
+   "a*e9(x)a*e78",
+   "a*e9(x)a*e79",
+   "a*e9(x)a*e89",
+   "a*e0(x)Cs",
+   "a*e1(x)Cs",
+   "a*e2(x)Cs",
+   "a*e3(x)Cs",
+   "a*e4(x)Cs",
+   "a*e5(x)Cs",
+   "a*e6(x)Cs",
+   "a*e7(x)Cs",
+   "a*e8(x)Cs",
+   "a*e9(x)Cs"
+  ]
+ },
+ "inputs": {
+  "notes/2026-08-10-c904-minimal-class-divisor-lattice.sage": "d77752dcf242cdd3e8ecf15d34785eba583aa4c4c7770b79decd2f43e260f734",
+  "notes/2026-08-11-c908-span-incidence-residues.sage": "6f7f015c864884059d21f75c790aa382f8ca353fe4a21d617560588baddb323d",
+  "notes/2026-08-12-c908-h3-lattice-adjudication.json": "3c9519fbb1a6f2fdc1ddb8dc5332d691915ea36332f91b505bd2b2bcb80efaf6",
+  "notes/2026-08-12-c908-h3-lattice-adjudication.sage": "d7ae4202b893b582d1fab2e9f412628be2c421501b0e607ce50481d6d702e19b"
+ },
+ "replay_command": "cd /home/tavis/src/othello && nix shell nixpkgs#sage -c sage notes/2026-08-12-c908-h3-compression.sage --json notes/2026-08-12-c908-h3-compression.json --out notes/2026-08-12-c908-h3-compression.out",
+ "schema": "c908-h3-compression/1",
+ "wall_seconds": 19
+}
