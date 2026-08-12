@@ -65,12 +65,16 @@ Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
 grading: the endpoint has `1+L+L^2`, while a threefold center must have width
 one.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
-`W_(P^3)+ZU`; a finite weighted graph atlas now makes every bounded pole face
-locally directed-acyclic.  The live analytic gate is the proper common
-compactification, collar gluing, and Orlov/Gamma marking.  The direct
-threefold grading argument is closed negatively by an explicit self-dual
-length-two model; the carrier gate is the geometric vanishing of its
-sectorial Rees extension class for arbitrary non-nef threefolds.  Current
+`W_(P^3)+ZU`; a finite weighted graph atlas covers every bounded pole face
+with `y` in the residual core.  A cold referee rejected the attempted global
+closure: the live analytic gate is a joint mixed-valuation fan, collar gluing
+that does not blow up through the `c=1` residual core, and the
+hyperplane-equivariant Orlov/Gamma marking.  The first residual jet is
+`-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
+direct threefold grading argument is closed negatively by an explicit
+self-dual length-two model; the carrier gate is the geometric vanishing of
+its sectorial Rees extension class for arbitrary non-nef threefolds.  A
+quartic-double-solid stress test has empty primitive-sixth support.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
 authorized.
