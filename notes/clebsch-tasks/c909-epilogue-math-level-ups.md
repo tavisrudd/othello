@@ -243,11 +243,16 @@ application or an exact obstruction to necessity.
 
     where `H(l,h)` counts Dyck paths of semilength `l` and exact height `h`.
     It matches independent exact computations through squarefree `k=6`,
-    yields the proved codimension-two theorem, and predicts unbounded
+    exhaustive distinct-root tuples for `k=3` over `F_7,F_8,F_9,F_11`, and
+    all normalized `k=4` tuples over `F_8`.  It yields the proved
+    codimension-two theorem and predicts unbounded
     exponent `p^(a(k-1))`.  Its only load-bearing gate is now a fully printed
-    arbitrary-root unitriangular proof of the filtered matching lemma; until
-    that hostile audit passes, treat the all-degree formula as a candidate,
-    not as a promoted theorem.
+    arbitrary-root proof that every filtered graded quotient is saturated,
+    equivalently explicit nested unit minors for the jet matrix.  A naive
+    first-return induction fails because the filtration mixes cap sectors and
+    later pivots are Schur-complement sums.  Until a confluent-Vandermonde or
+    nonintersecting-path proof supplies those minors, treat the all-degree
+    formula as a candidate, not as a promoted theorem.
 
 ## Highest-EV next moves
 
