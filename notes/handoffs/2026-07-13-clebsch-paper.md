@@ -131,6 +131,15 @@ The ordinary KKPYY carrier-height branch is closed by C909: the cubic abstract
 `G`-atom is already carried by the allowed threefold `X`.  C907 must define
 the enrichment on geometric atomic `F`-bundles, pull it through Proposition
 5.22, and verify the elementary equivalences explicitly.
+C909 also isolates the minimal algebraic target: a strict graded measure over
+`Z[L]/(L^3)` with endpoint `1+L+L^2`, codimension-two center shift `L`, and
+width one on every threefold formally proves `X x P^2` irrational.  Thus C907
+does not need a full enriched-atom classification, but it must construct this
+three-level quotient presentation-independently and prove strict Gamma/Rees/
+Stokes compatibility.  On the cycle side, C909 proves finite-etale graph
+cofactor saturation through arbitrary `p^a` blocks, with factorial-active
+nonscalar root-weight families; nonsplit trace-transfer examples are pending
+one independent dyadic quadratic-form audit before manuscript promotion.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

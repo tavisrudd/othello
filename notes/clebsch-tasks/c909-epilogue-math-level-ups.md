@@ -2,7 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** active, open-ended mathematics task. This task extracts and proves
+**Status:** active. The elementary and prime-power finite-etale cofactor
+theorems are proved, including factorial-active nonscalar root-weight
+families. A nonsplit trace-transfer construction now gives candidate
+polarized-indecomposable families; its two-adic form classification is the
+next independent hostile-audit gate. The ordinary atom route is exhausted at
+one stabilization, while a minimal conditional graded measure isolates the
+exact C907 input for two stabilizations. This task extracts and proves
 the strongest general theorems suggested by the epilogue. It does not edit a
 manuscript, PDF, mirror, Lean source, or reviewer dossier until a result has a
 human proof, a hostile audit, and a closed predecessor boundary.
@@ -134,6 +140,49 @@ The first pass attacks the intrinsic version of cofactor saturation:
 The pass must decide which parts of that sentence are canonical, prove the
 unramified descent without trace denominators, and produce either a second
 application or an exact obstruction to necessity.
+
+## Current theorem package
+
+1. **Etale graph saturation.** For an elementary prime graph whose
+   self-adjoint slope algebra is finite etale, the primitive minimal class is
+   in the ordinary divisor-product lattice. The condition is intrinsic to the
+   marked elliptic-power presentation under transverse ruling changes, not to
+   a bare ppav. Squarefree slope is sufficient but not necessary.
+2. **Prime-power extension.** For a block-respecting graph over
+   `Z/p^a`, literal finite etaleness of `(Z/p^a)[T]` supplies exact orthogonal
+   idempotent blocks after unramified splitting. The full weighted divisor
+   blocks descend, mixed cofactors give the primitive class, and faithful
+   flatness removes every trace multiplier.
+3. **Nontrivial families.** Root-weight forms with `N=p^a` admit nonscalar
+   split-etale slopes beyond the factorial wall. Nonsplit unramified-field
+   slopes are constructed by trace transfer and appear polarized-
+   indecomposable; the odd-prime proof is structurally clean, while the
+   dyadic even-hyperbolic classification awaits one independent hostile read
+   before promotion.
+4. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
+   `P^1` stabilization and is silent at `P^2`. Every additive refinement of
+   the ordinary chemical formula is merely an atom weight and cannot recover
+   lost Tate positions.
+5. **Minimal C907 bridge.** A graded measure over
+   `Z[L]/(L^3)` satisfying strict blowup/projective-bundle formulas, surface
+   exclusion, and a width-one threefold bound formally proves
+   `X x P^2` irrational. The algebraic deduction is closed; constructing the
+   measure is C907's Gamma/Rees/Stokes gate.
+6. **Second-family boundary.** `V_4` is rational and hence impossible;
+   currently sourced special cubic-fourfold loci are rational or lack the
+   stabilized carrier theorem. No second separation family is claimed.
+
+## Highest-EV next moves
+
+1. Hostile-audit the nonsplit trace-transfer and polarized-
+   indecomposability theorem, especially the dyadic Arf/Hasse classification.
+2. Close a bounded priority audit for finite-etale cofactor saturation and
+   trace-transfer root-weight families before manuscript use.
+3. If both pass, integrate only the theorem-grade local cofactor theorem into
+   the epilogue; keep the broader indecomposable family as a corollary or
+   successor theorem according to exposition cost.
+4. Hand the minimal graded-measure theorem to C907 as its exact algebraic
+   acceptance surface; do not restart ordinary atom or multiplicity searches.
 
 ## Acceptance and stopping conditions
 
