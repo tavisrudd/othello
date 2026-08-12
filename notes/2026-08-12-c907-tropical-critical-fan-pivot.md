@@ -35,6 +35,47 @@ Adjoin the normalized Rees model of the residual ideal
 its strict transform lies in this marked Rees model and its transition to the
 `Z,U` chart identifies its Hessian with `f_Q+ZU`.
 
+There is an exact open-torus regression before compactification.  The
+relative critical ideal of `F_delta` is generated, up to torus units, by
+
+\[
+ P,quad Q-YBCy_i\ (i=1,2,3),quad
+ \delta^2Q+YB^2C(1-C),quad
+ \delta^2Q+YBC^2(1-B).
+ \tag{2}
+\]
+
+Its solutions satisfy
+
+\[
+ y_1=y_2=y_3=a,quad B=C=b,quad
+ a^4b^2=Q,quad b(1-b)=-\delta^2a,
+ \tag{3}
+\]
+
+and
+
+\[
+ L=4a+\delta^2a^2/b^2.
+ \tag{4}
+\]
+
+With `v(delta)=1`, (3) has exactly two valuation types.  The bounded branch is
+
+\[
+ v(a)=v(b)=0,qquad v(1-b)=2,
+\]
+
+which is residual.  The other has
+
+\[
+ v(a)=-2/3,qquad v(b)=4/3,qquad v(L)=-2,
+\]
+
+and escapes the bounded value window.  Thus every actual bounded torus
+critical arc is residual.  The fan computation is needed only for tangential
+critical schemes created on boundary strata.
+
 Compute a relative comprehensive Gröbner fan in the
 `(y_1,y_2,y_3,B,C,delta)` weights with `w_delta>0` and `w_L=0`, including
 parameter-special `L` strata.  For each cone `sigma` and toric orbit
@@ -45,7 +86,7 @@ parameter-special `L` strata.  For each cone `sigma` and toric orbit
  \left(k[L][O_\sigma]/\sqrt{
  (\operatorname{in}_\sigma I^\circ+I_{O_\sigma}):
  \chi_{O_\sigma}^{\infty}}\right)_{red}.
- \tag{2}
+ \tag{5}
 \]
 
 Resolve any non-schön or nonsmooth initial scheme before testing criticality.
@@ -57,7 +98,7 @@ Let `T_sigma` be the kernel of the full tangent Jacobian of (2) at fixed
  \mathfrak c_\sigma=
  \operatorname{Fitt}_0\operatorname{coker}
  (dL:T_\sigma\to A_\sigma).
- \tag{3}
+ \tag{6}
 \]
 
 Equivalently, compute tangent-Jacobian syzygies and take their `L` components.
@@ -80,6 +121,50 @@ Its normalized slice `w_delta=1,w_L=0` therefore supplies the finite algebraic
 fan that the hand atlas lacked.  This statement requires the graph, residual
 Rees marking, comprehensive `L` strata, and log resolutions together;
 `Trop(I^circ)` by itself is insufficient.
+
+One finite pre-fan is explicit.  Write
+
+\[
+ p_i=v(y_i),\quad \beta=v(B),\quad\bar\beta=v(1-B),\quad
+ \gamma=v(C),\quad\bar\gamma=v(1-C),\quad \ell=v(L)\ge0.
+\]
+
+The two marked-`P^1` tropical relations require the minimum of
+`{beta,bar beta,0}` and of `{gamma,bar gamma,0}` to occur at least twice.  The
+bounded graph relation requires the minimum of
+
+\[
+ \{\ell,p_1,p_2,p_3,-\sum p_i-\beta-\gamma,
+   -2+\bar\beta+\bar\gamma\}
+ \tag{7}
+\]
+
+to occur at least twice.  These are finitely many rational linear chambers.
+On each one, use the homogenized graph
+
+\[
+ P^h=\delta^2YBC(L_0-SL_\infty)-\delta^2QL_\infty
+     -YBC(1-B)(1-C)L_\infty,
+ \tag{8}
+\]
+
+restrict to `L_infty!=0`, and refine by the Gröbner fans of the finitely many
+`B,C` translated charts and `y` toric charts.  The residual `B=C=1` blow-up
+remains a separate marked chart.
+
+Do not replace the reduced-stratum Fitting calculation by
+`in_w` of the open critical ideal.  Initial ideals and saturation need not
+commute, and a special-fibre tangent critical locus need not be the limit of
+generic critical sections.
+
+Weights outside the first hand range are genuinely present but benign in
+sample chambers.  For example, if `p_1=P>2`, `p_2=p_3=0`, and
+`beta=gamma=(2-P)/4<0`, the leading graph is
+`Q/(Xbc)+bc=0`; its logarithmic `b`-derivative is `2bc`, a unit on the graph,
+so `L` is free.  If `p_1=-P<0`, suitable positive `beta=gamma` similarly gives
+leading graphs `x_1+Q/(Xbc)=0` or `Q/(Xbc)+1=0`, again logarithmically smooth.
+Thus valuation bounds alone do not make the remaining cones empty; the finite
+Fitting fan is the correct compression.
 
 ## What this does not prove
 
