@@ -93,7 +93,11 @@ polarization scalar decide the relative lattice.
 
 1. **Relative integral graph lift:** prove the rational `A_5` multiplicity
    comparison, choose one of the two `Gamma_0(3)` integral endpoints at one
-   fibre, and fix the polarization scalar.  Owner: C909 if pursued as proof
+   fibre, and fix the polarization scalar.  A new orbit-axis route may close
+   this without periods: integral subgroup norms construct the relative
+   elliptic image schemes and canonical conjugacy transports; the remaining
+   check is that Roulleau's primitive Albanese-dual inclusions globalize on
+   those images with Gram `(5,-1)`.  Owner: C909 if pursued as proof
    compression; it does not require C908 Chow descent.
 2. **Horizontal minimal cycle:** after the integral lift, construct the
    finite list of kernel-linearized relative coefficient line bundles.

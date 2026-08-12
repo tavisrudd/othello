@@ -60,6 +60,12 @@ The identity component of the scheme-theoretic image of a homomorphism of
 abelian schemes of constant rank is an abelian subscheme and commutes with
 base change; this gives `E_H`.
 
+The image inclusion is primitive: the quotient `A/E_H` is an abelian scheme,
+so `H_1(A,Z)/H_1(E_H,Z)` is torsion-free fibrewise.  The raw norm need not be
+the primitive Rosati projector; in the cubic specialization it is twice the
+primitive endomorphism.  Only the connected image and transporter
+identifications are taken from the norm.
+
 Conjugation sends `n_H` to `n_{gHg^-1}`.  If `g'=gh` gives the same coset,
 then `h n_H=n_H`, so `h` is the identity on the image and the induced
 transport is unchanged.  Thus the orbit supplies canonical identifications
@@ -92,6 +98,10 @@ elliptic inclusions' Gram matrix as `6I-J`.  The theorem therefore constructs
 relatively over the smooth cubic pencil.  Its kernel is the actual geometric
 finite subgroup scheme to which the exotic/scalar graph classification
 applies.
+
+The last sentence is conditional on identifying the Rosati adjoint quotient
+of the norm-image inclusion with Roulleau's relative `D_5` elliptic fibration;
+that lemma fixes the primitive scalar and makes `D_H|_S=F_H` applicable.
 
 ## Exact normalization issue
 

@@ -37,6 +37,17 @@ constant-rank image theorem for a homomorphism of abelian schemes.  A
 pinpoint source or printed proof that the identity component commutes with
 base change is required before promotion.
 
+For the primitive inclusion `i_H:E_H-->J` and its Rosati adjoint `q_H`, the
+Roulleau normalization gives `q_H i_H=[5]`.  Hence, on rational homology,
+
+```text
+ n_H=10 P_H,       i_H q_H=5 P_H,       n_H=2 i_H q_H.
+```
+
+The factor two does not change the connected image, but it must be printed:
+the norm constructs the axis, while the Albanese-dual quotient supplies its
+primitive polarization normalization.
+
 The subgroup `H` acts trivially on `E_H`: it acts trivially on `n_H(J)` by
 left multiplication of the norm.  For `g in G`, conjugation sends `n_H` to
 `n_{gHg^-1}` and restricts to an isomorphism
@@ -66,9 +77,10 @@ coefficient axes form a basis of the augmentation representation, hence
 `f` is an isogeny on every fibre and therefore a finite flat isogeny over
 the connected base.
 
-The Rosati matrix is constant and `G`-invariant.  Conditional on the
-primitive norm-image inclusion agreeing relatively with Roulleau's
-Albanese-dual elliptic inclusion, the Roulleau intersection calculation,
+The Rosati matrix is constant and `G`-invariant.  Conditional on proving that
+the Rosati adjoint of the primitive norm-image inclusion agrees, through the
+unique quotient isomorphism, with Roulleau's `D_5` fibration quotient, the
+identity `D_H|_S=F_H` and Roulleau intersection calculation
 applied on one (equivalently every) fibre, gives diagonal `5`
 and off-diagonal `-1`.  Hence as a relative polarization homomorphism
 
