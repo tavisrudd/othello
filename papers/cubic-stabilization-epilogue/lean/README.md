@@ -27,5 +27,23 @@ lean/scripts/lean-build-queue.py build \
   --lean-root papers/cubic-stabilization-epilogue/lean --cores 20-23
 ```
 
-The paper-level verifier additionally checks the public terminal list, source
-hygiene, forbidden proof mechanisms, axiom output, and manuscript claim map.
+The source-only correspondence check is
+
+```text
+nix shell nixpkgs#python3 --command python3 \
+  verification/check_formal_artifact.py --source-only
+```
+
+It requires one claim-map row for every theorem-like manuscript environment,
+an exact partition of the reviewer terminals among those rows, and an exact
+expected-axiom row for every terminal.  After the guarded build of the axiom
+audit, pass its captured standard output back to the same checker:
+
+```text
+nix shell nixpkgs#python3 --command python3 \
+  verification/check_formal_artifact.py --axiom-log AXIOM_AUDIT_STDOUT
+```
+
+The second mode parses the kernel-reported dependencies and rejects any
+difference from `verification/expected_axioms.txt`.  A source-only pass does
+not claim that Lean was built or that the observed axiom output was checked.

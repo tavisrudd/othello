@@ -1,43 +1,226 @@
 {
-  "schema": "cubic-stabilization-lean-claims-v1",
+  "schema": "cubic-stabilization-lean-claims-v2",
   "reviewer_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
   "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
   "claims": [
     {
-      "manuscript_label": "lem:rank-one-generation",
-      "status": "partial",
+      "manuscript_label": "thm:separation-family",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The smooth nonstandard A5-invariant pencil of cubic threefolds and its projective-line stabilization.",
+      "hypotheses": "A complex point of the connected smooth locus of the pencil.",
+      "conclusion": "Universal CH0-triviality of the fibre and its stabilization, irrationality of the stabilization, and non-isotriviality of the family.",
+      "cautions": "The cycle argument is fibrewise and the irrationality argument applies more broadly than the A5-family."
+    },
+    {
+      "manuscript_label": "thm:every-cubic",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
+      ],
+      "objects": "An abstract carrier called a cubic, an abstract stabilization, an abstract comparison object, and a natural-valued packet multiplicity.",
+      "hypotheses": "The cubic packet equals two, the stabilization formula and dimension bound hold, the comparison packet vanishes, and the chosen rationality predicate supplies a birational relation to the comparison object.",
+      "conclusion": "The chosen rationality predicate fails for the abstract stabilization.",
+      "cautions": "Lean does not yet identify these carriers with a smooth complex cubic threefold, its product with projective one-space, or projective four-space."
+    },
+    {
+      "manuscript_label": "prop:six-axis-polarization",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The six elliptic quotient axes of the intermediate Jacobian and their Rosati pairing.",
+      "hypotheses": "A smooth member of the nonstandard A5-pencil with coherent elliptic-factor identifications.",
+      "conclusion": "Rosati Gram matrix 6I-J and five-axis Smith type (1,6,6,6,6).",
+      "cautions": "The coherent identification and non-CM generic-fibre passage are part of the human proof."
+    },
+    {
+      "manuscript_label": "lem:relative-six-axis",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The relative elliptic scheme, augmentation-lattice source, intermediate-Jacobian family, and relative isogeny.",
+      "hypotheses": "The connected smooth locus of the nonstandard A5-pencil.",
+      "conclusion": "An A5-equivariant polarized relative isogeny and its two-primary symplectic discriminant description.",
+      "cautions": "Primitivity, finite flatness, and generic-to-relative transport must be represented explicitly."
+    },
+    {
+      "manuscript_label": "prop:principal-gluing-packet",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A5-stable maximal isotropic kernels in the two- and three-primary discriminant modules.",
+      "hypotheses": "The relative six-axis source and its polarized A5-action.",
+      "conclusion": "The P1(F4) packet, stabilizers and outer exchange at two, exotic geometric selection, and scalar graphs at three.",
+      "cautions": "The family-level exotic selection uses Torelli, connectedness, and the generic automorphism group."
+    },
+    {
+      "manuscript_label": "lem:graph-coefficient-lattice",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A marked finite-etale graph presentation over a complete unramified DVR and its descended symmetric coefficient lattice.",
+      "hypotheses": "Depth decomposition, dual-form adjointness, and finite-etale slope algebra on every positive-depth summand.",
+      "conclusion": "The exact diagonal and cross-ideal depths and the midpoint inequality.",
+      "cautions": "No etaleness is imposed on the unit block and scalar lifts must not affect the depth formula."
+    },
+    {
+      "manuscript_label": "lem:dvr-rank-one",
+      "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity"
       ],
-      "scope": "The division-free coefficient identity is kernel checked; the full weighted-lattice generation theorem is not yet included."
+      "objects": "Lean currently represents only three coefficients of a symmetric form over a commutative ring.",
+      "hypotheses": "Three arbitrary ring elements; no DVR, valuation, ideals, or lattice-membership hypotheses are formalized.",
+      "conclusion": "The division-free three-term coefficient identity underlying the constructive direction.",
+      "cautions": "The midpoint equivalence, exponent choices, membership proof, necessity, and rank-one generation conclusion are absent."
     },
     {
-      "manuscript_label": "thm:birational-nu6",
-      "status": "partial",
+      "manuscript_label": "thm:all-degree-graph-saturation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The prescribed graph divisor lattice and its divided-power and ordinary product images.",
+      "hypotheses": "A marked finite-etale graph presentation over the localized coefficient ring.",
+      "conclusion": "Equality of the divided-power envelope and ordinary divisor-product image in every degree.",
+      "cautions": "The result is cohomological, concerns only the prescribed graph lattice, and does not assert a Chow divided-power statement."
+    },
+    {
+      "manuscript_label": "lem:six-axis-local-chart",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The lattice with Gram matrix 6I5-J5 at primes two and three and the principal quotient graph slope.",
+      "hypotheses": "The actual six-axis geometric kernels selected by the gluing packet.",
+      "conclusion": "A unit line plus a depth-one rank-four block, with quadratic finite-etale slope at two and scalar slope at three.",
+      "cautions": "Persistence through the connected smooth component and identification of the actual kernel are essential."
+    },
+    {
+      "manuscript_label": "thm:six-axis-divided-powers",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The six-axis graph divisor lattice on the intermediate Jacobian of each smooth A5-pencil member.",
+      "hypotheses": "The local charts at two and three, trivial integral comparison elsewhere, and finite generation of the cokernels.",
+      "conclusion": "All integral divided powers lie in the ordinary product image, in particular Theta^4/4!.",
+      "cautions": "Extra Neron-Severi classes at special fibres only enlarge the target product image."
+    },
+    {
+      "manuscript_label": "cor:universal-ch0",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A smooth cubic threefold in the nonstandard A5-pencil and its intermediate Jacobian.",
+      "hypotheses": "Algebraicity of the primitive minimal class and the exact Voisin criterion.",
+      "conclusion": "Universal CH0-triviality of the cubic threefold.",
+      "cautions": "The proof is fibrewise and constructs neither a horizontal cycle nor a relative decomposition of the diagonal."
+    },
+    {
+      "manuscript_label": "def:framed-sixth-multiplicity",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Framed formal monodromy of the numerical small even quantum connection.",
+      "hypotheses": "A smooth projective complex variety and the original unramified loop coordinate z.",
+      "conclusion": "The sum of the algebraic multiplicities of the two primitive sixth-root eigenvalues.",
+      "cautions": "Adjoining roots of z is forbidden because it changes the frame and may erase deck monodromy."
+    },
+    {
+      "manuscript_label": "def:pro-laurent-monodromy",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A compatible system of differential modules over finite quotients of a complete filtered coefficient algebra.",
+      "hypotheses": "Agreement of the finite-level characteristic polynomials and gauges using only integral powers of z.",
+      "conclusion": "A well-defined pro-Laurent framed-monodromy characteristic polynomial.",
+      "cautions": "The pro-Laurent gauge group may be larger than matrices with one uniform Laurent lower bound."
+    },
+    {
+      "manuscript_label": "lem:pv-base-change",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A formal differential module and coefficientwise extension to a complete separated adic algebra.",
+      "hypotheses": "The coefficient algebra is constant for d/dz; any gauge uses integral powers of z.",
+      "conclusion": "Preservation of the framed-monodromy characteristic polynomial.",
+      "cautions": "The assertion is coefficientwise and does not authorize ramification of the loop coordinate."
+    },
+    {
+      "manuscript_label": "lem:formal-base-shift",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A bulk pullback of the even quantum connection over a complete multiplicatively filtered ring.",
+      "hypotheses": "The unit and fixed divisor components are constant in positive filtration and the remainder is filtration-positive.",
+      "conclusion": "Equality with the small-connection characteristic polynomial after the stated divisor substitution.",
+      "cautions": "Only finite-quotient integral-z gauges are used; no analytic specialization or enlarged Levelt-Turrittin field is asserted."
+    },
+    {
+      "manuscript_label": "lem:numerical-base-change",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Completed effective homology and numerical Novikov monoid rings and the relevant quantum connections.",
+      "hypotheses": "Degree filtrations with finite bounded pieces and comparison maps defined over the homological rings.",
+      "conclusion": "Continuous numerical quotient and base change of the quantum connection and comparison theorems.",
+      "cautions": "Continuity and inverse-limit compatibility are part of the claim."
+    },
+    {
+      "manuscript_label": "prop:framed-operations",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Projective bundles and blowups of smooth projective varieties together with framed packet multiplicities.",
+      "hypotheses": "Rank and codimension bounds, Iritani comparison coordinates, and the displayed numerical specializations.",
+      "conclusion": "The rank-multiplication projective-bundle formula and additive blowup formula.",
+      "cautions": "Center terms are specialized invariants; endpoint terms remain intrinsic and loop-coordinate roots are not adjoined."
+    },
+    {
+      "manuscript_label": "def:strict-novikov-admissible",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A monomial map from a numerical Novikov ring to a complete separated valued domain.",
+      "hypotheses": "Nonzero monomial images, a positive proper valuation law, and domain associated graded.",
+      "conclusion": "The predicate of strict Novikov admissibility.",
+      "cautions": "Properness and the domain hypothesis are used to prevent cancellation in the divisor-tagging argument."
+    },
+    {
+      "manuscript_label": "lem:divisor-tagging",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The intrinsic and specialized small even quantum connections under a strictly admissible monomial map.",
+      "hypotheses": "Intrinsic absence of primitive-sixth framed monodromy and strict Novikov admissibility.",
+      "conclusion": "Absence persists after specialization.",
+      "cautions": "Generic vanishing alone is insufficient without divisor tags because the center map may be noninjective."
+    },
+    {
+      "manuscript_label": "prop:low-dimensional-vanishing",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Points, smooth projective curves, and smooth projective surfaces with specialized framed multiplicity.",
+      "hypotheses": "Every strictly Novikov-admissible specialization.",
+      "conclusion": "Vanishing of the primitive-sixth multiplicity.",
+      "cautions": "The proof separates nef-canonical minimal models, projective and ruled cases, and point blowups."
+    },
+    {
+      "manuscript_label": "thm:nu6-birational-invariance",
+      "coverage": "conditional_deduction",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
       ],
-      "scope": "The factorization telescope is kernel checked; the quantum operation formulas, center vanishing, and weak-factorization input remain cited mathematical premises."
+      "objects": "An arbitrary carrier type with a natural-valued multiplicity, dimension function, arbitrary birational relation, and preserving chains.",
+      "hypotheses": "A dimension bound and a bundled premise producing a preserving chain for the chosen relation.",
+      "conclusion": "Equality of multiplicities at the endpoints of that abstract chain.",
+      "cautions": "Smoothness, projectivity, complex structure, equal dimension, blowups, centers, operation formulas, and weak factorization are not formalized."
+    },
+    {
+      "manuscript_label": "prop:cubic-packet",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The numerical small even quantum connection of a smooth complex cubic threefold.",
+      "hypotheses": "Cai's integral-z block diagonalization and the numerical-Novikov convention.",
+      "conclusion": "Primitive-sixth framed multiplicity exactly two.",
+      "cautions": "The two rank-one blocks and the rank-two indicial polynomial must both be accounted for."
     },
     {
       "manuscript_label": "cor:v14-one-step",
-      "status": "partial",
+      "coverage": "conditional_deduction",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_packet_eq_two_of_flop_inputs",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_oneStep_irrational_of_flop_inputs"
       ],
-      "scope": "The rank-two cancellation, packet transport, and irrationality deduction are kernel checked; Kuznetsov's projective-bundle flop, the cubic packet, the quantum bundle formulas, and the rational comparison remain typed mathematical premises."
-    },
-    {
-      "manuscript_label": "thm:every-cubic",
-      "status": "partial",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
-      ],
-      "scope": "The projective-line multiplication, nonvanishing, and irrationality contradiction are kernel checked; Cai's cubic packet, the projective-bundle formula, weak factorization, and the rational comparison remain typed mathematical premises."
+      "objects": "Abstract carriers called a Fano threefold, cubic, two bundles, stabilization, and comparison object.",
+      "hypotheses": "Two rank-two multiplicity formulas, a bundled birational relation between the bundle carriers, cubic multiplicity two, the stabilization formula, dimension bounds, and a rational comparison.",
+      "conclusion": "The abstract Fano carrier has multiplicity two and its abstract stabilization fails the chosen rationality predicate.",
+      "cautions": "Lean does not yet encode genus eight, primeness, Pfaffian association, vector bundles, projectivizations, the flop, products with projective space, or geometric rationality."
     }
   ]
 }
