@@ -9376,6 +9376,292 @@
       "trust_area": "relconic"
     },
     {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeEigenvalues",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeHalfCut",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeHalfCut",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeHalfCut",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeHalfCut",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
+      "declaration_module": "RelativeConicArcs.BalancedExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
       "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.Certificate.check_sound",
       "declaration_module": null,
@@ -9446,6 +9732,58 @@
     },
     {
       "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary",
+      "declaration_module": "RelativeConicArcs.ClebschAffineContractionCohomology",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq",
+      "declaration_module": "RelativeConicArcs.ClebschAffineExtensionContraction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
       "declaration": "RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit",
       "declaration_module": "RelativeConicArcs.ClebschArithmeticGluingData",
       "expected_axioms": [
@@ -9457,10 +9795,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit",
       "observed_axioms": [
@@ -9483,10 +9826,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.a3_matching_is_fused",
       "observed_axioms": [
@@ -9509,10 +9857,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.a3_two_has_no_root",
       "observed_axioms": [
@@ -9535,10 +9888,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.b3_reductions_induce_split_matchings",
       "observed_axioms": [
@@ -9561,10 +9919,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.b3_split_stabilizers_and_orbits",
       "observed_axioms": [
@@ -9587,10 +9950,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.b3_two_roots",
       "observed_axioms": [
@@ -9613,10 +9981,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orbits",
       "observed_axioms": [
@@ -9639,10 +10012,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.coxeterSquare_orders_and_square_determinants",
       "observed_axioms": [
@@ -9665,10 +10043,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.frozen_matching_mates_are_fixedPointFree_involutions",
       "observed_axioms": [
@@ -9691,10 +10074,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.goldenTransporter_swaps_matchings",
       "observed_axioms": [
@@ -9717,10 +10105,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.h3_certificate_literal_checks",
       "observed_axioms": [
@@ -9743,10 +10136,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.h3_five_roots",
       "observed_axioms": [
@@ -9769,10 +10167,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.h3_golden_roots",
       "observed_axioms": [
@@ -9795,10 +10198,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.h3_stabilizer_generation_word_data",
       "observed_axioms": [
@@ -9821,10 +10229,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.matchingEdgeLists_encode_frozen_matchings",
       "observed_axioms": [
@@ -9847,10 +10260,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.projective_group_orders",
       "observed_axioms": [
@@ -9873,10 +10291,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.rankThree_split_fused_trichotomy",
       "observed_axioms": [
@@ -9899,10 +10322,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.reduced_vertex_polynomials_split",
       "observed_axioms": [
@@ -9925,10 +10353,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.sheetCharacter_eq_of_kernel_eq",
       "observed_axioms": [
@@ -9951,10 +10384,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.silverTransporter_swaps_matchings",
       "observed_axioms": [
@@ -9977,10 +10415,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.stabilizer_eq_character_kernel",
       "observed_axioms": [
@@ -10003,10 +10446,15 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.transporters_are_outer",
       "observed_axioms": [
@@ -10027,13 +10475,44 @@
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschArithmeticGluing.json",
           "sha256": "ae5c70d74ab627d2fc62bad70db036ccd5cfbb18e08f70f5b8a81a282f9954b8"
+        },
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
         }
       ],
       "gates": [
-        "RelativeConicArcs.Gates.ClebschArithmeticGluing"
+        "RelativeConicArcs.Gates.ClebschArithmeticGluing",
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective",
       "observed_axioms": [
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff",
+      "declaration_module": "RelativeConicArcs.ClebschBalancedOrbitEndgame",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
         "propext"
       ],
       "trust_area": "relconic"
@@ -10050,7 +10529,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10074,7 +10553,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10098,13 +10577,141 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations",
+      "declaration_module": "RelativeConicArcs.ClebschDetectingIntertwiners",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero",
+      "declaration_module": "RelativeConicArcs.ClebschDetectingModuleVanishings",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling",
+      "declaration_module": "RelativeConicArcs.ClebschDetectingModuleVanishings",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd",
+      "declaration_module": "RelativeConicArcs.ClebschDihedralReflectionParity",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero",
+      "declaration_module": "RelativeConicArcs.ClebschDividedPowerTopSlices",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -10124,7 +10731,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10150,7 +10757,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10176,7 +10783,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10202,7 +10809,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10228,7 +10835,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10254,7 +10861,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10280,7 +10887,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10292,6 +10899,254 @@
         "Quot.sound",
         "propext"
       ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence",
+      "declaration_module": "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial",
+      "declaration_module": "RelativeConicArcs.ClebschFiniteRootWeightSlice",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B",
+      "declaration_module": "RelativeConicArcs.ClebschFirstFrobeniusSection",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub",
+      "observed_axioms": [
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant",
+      "declaration_module": "RelativeConicArcs.ClebschFixedLineRadialTranslation",
+      "expected_axioms": [],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant",
+      "observed_axioms": [],
       "trust_area": "relconic"
     },
     {
@@ -10413,6 +11268,106 @@
         "RelativeConicArcs.Gates.ClebschPassages"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient",
+      "declaration_module": "RelativeConicArcs.ClebschLucasCoefficientBasis",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue",
+      "declaration_module": "RelativeConicArcs.ClebschLucasPolynomialFactorization",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference",
+      "declaration_module": "RelativeConicArcs.ClebschOuterParityInjection",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q",
+      "declaration_module": "RelativeConicArcs.ClebschOuterParityWeights",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -10596,6 +11551,160 @@
     },
     {
       "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one",
+      "declaration_module": "RelativeConicArcs.ClebschPolyhedralInvariantAverages",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero",
+      "declaration_module": "RelativeConicArcs.ClebschPolynomialTopSliceDetection",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback",
+      "declaration_module": "RelativeConicArcs.ClebschProjectiveTradeReduction",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner",
+      "declaration_module": "RelativeConicArcs.ClebschRankThreeBalancedEndgame",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff",
+      "declaration_module": "RelativeConicArcs.ClebschRegularMatching",
+      "expected_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff",
+      "observed_axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization",
+      "declaration_module": "RelativeConicArcs.ClebschRootDefect",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
       "declaration": "RelativeConicArcs.CliquePacking.exists_decomposition_of_card_leave_eq_choose",
       "declaration_module": "RelativeConicArcs.CliquePackingCompletion",
       "expected_axioms": [
@@ -10632,7 +11741,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10658,7 +11767,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10684,13 +11793,117 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.GoldenQuantumStatistics"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.crossGram_eq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeCompression",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeCompression",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -10710,7 +11923,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10736,7 +11949,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10762,7 +11975,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10788,7 +12001,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
@@ -10814,13 +12027,65 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.GoldenQuantumStatistics"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeSpectrum",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.ConferenceExchange.transferBlock_gram",
+      "declaration_module": "RelativeConicArcs.ConferenceExchangeCompression",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
+          "sha256": "3b5cc34cd070cb7317f4526b50e335549ce76b82e63bfdbb256e7e6c548d4692"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.transferBlock_gram",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -10961,7 +12226,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -10987,7 +12252,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -11013,13 +12278,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary",
+      "declaration_module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -11039,13 +12330,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
+      "declaration_module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -11065,13 +12382,39 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
         "RelativeConicArcs.Gates.ClebschRigidityTrust"
       ],
       "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
+      "declaration_module": "RelativeConicArcs.Q11DecodingSynthesis",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschRigidityTrust"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange",
       "observed_axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -11091,7 +12434,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -11117,7 +12460,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -11143,7 +12486,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -11826,94 +13169,6 @@
       "trust_area": "relconic"
     },
     {
-      "axiom_status": "extracted-and-matched",
-      "declaration": "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
-      "declaration_module": "RelativeConicArcs.GoldenBalancedCut",
-      "expected_axioms": [
-        "propext"
-      ],
-      "facts_artifacts": [
-        {
-          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
-        }
-      ],
-      "gates": [
-        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
-      ],
-      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen",
-      "observed_axioms": [
-        "propext"
-      ],
-      "trust_area": "relconic"
-    },
-    {
-      "axiom_status": "extracted-and-matched",
-      "declaration": "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
-      "declaration_module": "RelativeConicArcs.GoldenBalancedCut",
-      "expected_axioms": [
-        "propext"
-      ],
-      "facts_artifacts": [
-        {
-          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
-        }
-      ],
-      "gates": [
-        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
-      ],
-      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula",
-      "observed_axioms": [
-        "propext"
-      ],
-      "trust_area": "relconic"
-    },
-    {
-      "axiom_status": "extracted-and-matched",
-      "declaration": "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
-      "declaration_module": "RelativeConicArcs.GoldenBalancedCut",
-      "expected_axioms": [
-        "propext"
-      ],
-      "facts_artifacts": [
-        {
-          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
-        }
-      ],
-      "gates": [
-        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
-      ],
-      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries",
-      "observed_axioms": [
-        "propext"
-      ],
-      "trust_area": "relconic"
-    },
-    {
-      "axiom_status": "extracted-and-matched",
-      "declaration": "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve",
-      "declaration_module": "RelativeConicArcs.GoldenBalancedCut",
-      "expected_axioms": [
-        "propext"
-      ],
-      "facts_artifacts": [
-        {
-          "path": "trust/facts/RelativeConicArcs.Gates.GoldenQuantumStatistics.json",
-          "sha256": "9c724f089392140de6df2d92acf30de4e49af5de3ed2fa6db5fd1216bdc50502"
-        }
-      ],
-      "gates": [
-        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
-      ],
-      "id": "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve",
-      "observed_axioms": [
-        "propext"
-      ],
-      "trust_area": "relconic"
-    },
-    {
       "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose",
       "declaration_module": null,
@@ -12504,6 +13759,339 @@
     },
     {
       "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.coordinatewiseEndpointDominated_of_convexOnCube",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.coordinatewiseEndpointDominated_of_convexOnCube",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_neg_gram",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_neg_gram",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.re_trace_hermitianTransferBlock_gram_le_nine_fifths",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.re_trace_hermitianTransferBlock_gram_le_nine_fifths",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.trace_realDiagonalControl_projections_fin_six",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_realDiagonalControl_projections_fin_six",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
+      "declaration": "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge",
+      "declaration_module": null,
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [],
+      "gates": [
+        "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge",
+      "observed_axioms": null,
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three",
+      "declaration_module": "RelativeConicArcs.ClebschHilbertSymmetry",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.HilbertSymmetry.value_three_eq_one",
+      "declaration_module": "RelativeConicArcs.ClebschHilbertSymmetry",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HilbertSymmetry.value_three_eq_one",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "extracted-and-matched",
+      "declaration": "RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero",
+      "declaration_module": "RelativeConicArcs.ClebschHyperplaneSquare",
+      "expected_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "facts_artifacts": [
+        {
+          "path": "trust/facts/RelativeConicArcs.Gates.ClebschFactorizationBoundary.json",
+          "sha256": "e12ccd2bee1bcfaa12a4ac75eca3603334c68de83250013ecda30b26c81719d7"
+        }
+      ],
+      "gates": [
+        "RelativeConicArcs.Gates.ClebschFactorizationBoundary"
+      ],
+      "id": "trust-spine:relconic:terminal:RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero",
+      "observed_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "trust_area": "relconic"
+    },
+    {
+      "axiom_status": "declared-unextracted",
       "declaration": "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart",
       "declaration_module": null,
       "expected_axioms": [
@@ -12919,7 +14507,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -16389,7 +17977,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -16745,7 +18333,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -16771,7 +18359,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -16797,7 +18385,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -16823,7 +18411,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17289,7 +18877,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17315,7 +18903,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17341,7 +18929,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17367,7 +18955,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17393,7 +18981,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17419,7 +19007,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17445,7 +19033,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17471,7 +19059,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17497,7 +19085,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17523,7 +19111,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17549,7 +19137,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17574,7 +19162,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17599,7 +19187,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17625,7 +19213,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17651,7 +19239,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17677,7 +19265,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17703,7 +19291,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17729,7 +19317,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17755,7 +19343,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17781,7 +19369,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17807,7 +19395,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17833,7 +19421,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17859,7 +19447,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [
@@ -17885,7 +19473,7 @@
       "facts_artifacts": [
         {
           "path": "trust/facts/RelativeConicArcs.Gates.ClebschRigidityTrust.json",
-          "sha256": "1e7ad4f82adf2a7754b2cbcbb761ac3115ad4dceb873498c683bbb599d700317"
+          "sha256": "a55a6f209a901f836d212d5f63edfe18b776e57757f9f6bcd94d9d932624848e"
         }
       ],
       "gates": [

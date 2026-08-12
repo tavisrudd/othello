@@ -39,6 +39,14 @@ sources:
     license: "not recorded in paper-facts"
     author_contacted: "n/a"
     prior_work: ""
+  - title: "Chordal and Conference Cubics:\\\\ Reconstruction and a Residual \\(C_2\\)-Torsor"
+    authors:
+      - "Tavis Rudd"
+    id: "paper-facts:chordal_conference_reconstruction"
+    type: "repository manuscript"
+    license: "not recorded in paper-facts"
+    author_contacted: "n/a"
+    prior_work: ""
   - title: "Quadratic trade rigidity and cubic orientation\\\\ in conic matching quotients"
     authors:
       - "Tavis Rudd"
@@ -87,6 +95,14 @@ sources:
     license: "not recorded in paper-facts"
     author_contacted: "n/a"
     prior_work: ""
+  - title: "Irrationality after One Stabilization of Universally \\(CH_0\\)-Trivial Cubic Threefolds"
+    authors:
+      - "Tavis Rudd"
+    id: "paper-facts:cubic_stabilization_epilogue"
+    type: "repository manuscript"
+    license: "not recorded in paper-facts"
+    author_contacted: "n/a"
+    prior_work: ""
   - title: "Node Kayles on Conic Schreier Graphs:\\\\ Dihedral and Polyhedral Templates"
     authors:
       - "Tavis Rudd"
@@ -127,7 +143,7 @@ sources:
     license: "not recorded in paper-facts"
     author_contacted: "n/a"
     prior_work: ""
-  - title: "Minimum-word reconstruction of $\\PG(2,13)$\\\\ from a binary conic code"
+  - title: "Reconstructing $\\PG(2,13)$, its conic, and polarity\\\\ from the minimum words of a binary conic code"
     authors:
       - "Tavis Rudd"
     id: "paper-facts:passant_code_q13"
@@ -2364,6 +2380,83 @@ status:
         - "Classical.choice"
         - "Quot.sound"
         - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod"
+      file: "RelativeConicArcs/BalancedExchangeEigenvalues.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half"
+      file: "RelativeConicArcs/BalancedExchangeHalfCut.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three"
+      file: "RelativeConicArcs/BalancedExchangeHalfCut.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half"
+      file: "RelativeConicArcs/BalancedExchangeHalfCut.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq"
+      file: "RelativeConicArcs/BalancedExchangeHalfCut.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four"
+      file: "RelativeConicArcs/BalancedExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
     - declaration: "RelativeConicArcs.Certificate.check_sound"
       file: "RelativeConicArcs/Certificate.lean"
       sorry_count: 0
@@ -2373,6 +2466,20 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.Certificate.rawArc_iff_projectiveCap"
       file: "RelativeConicArcs/Certificate.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary"
+      file: "RelativeConicArcs/ClebschAffineContractionCohomology.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq"
+      file: "RelativeConicArcs/ClebschAffineExtensionContraction.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -2537,6 +2644,13 @@ status:
       sorry_count: 0
       axioms:
         - "propext"
+    - declaration: "RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff"
+      file: "RelativeConicArcs/ClebschBalancedOrbitEndgame.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
     - declaration: "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
       file: "RelativeConicArcs/ClebschChordDefect.lean"
       sorry_count: 0
@@ -2551,6 +2665,40 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card"
       file: "RelativeConicArcs/ClebschChordDefect.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations"
+      file: "RelativeConicArcs/ClebschDetectingIntertwiners.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero"
+      file: "RelativeConicArcs/ClebschDetectingModuleVanishings.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling"
+      file: "RelativeConicArcs/ClebschDetectingModuleVanishings.lean"
+      sorry_count: 0
+      axioms:
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd"
+      file: "RelativeConicArcs/ClebschDihedralReflectionParity.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero"
+      file: "RelativeConicArcs/ClebschDividedPowerTopSlices.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -2605,6 +2753,71 @@ status:
         - "Classical.choice"
         - "Quot.sound"
         - "propext"
+    - declaration: "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence"
+      file: "RelativeConicArcs/ClebschFiniteRootRecurrenceBridge.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial"
+      file: "RelativeConicArcs/ClebschFiniteRootWeightSlice.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B"
+      file: "RelativeConicArcs/ClebschFirstFrobeniusSection.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant"
+      file: "RelativeConicArcs/ClebschFixedLineRadialTranslation.lean"
+      sorry_count: 0
+      axioms: []
     - declaration: "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq"
       file: "RelativeConicArcs/ClebschGoldenConference.lean"
       sorry_count: 0
@@ -2633,6 +2846,32 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization"
       file: "RelativeConicArcs/ClebschInvariantCubic.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient"
+      file: "RelativeConicArcs/ClebschLucasCoefficientBasis.lean"
+      sorry_count: 0
+      axioms:
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue"
+      file: "RelativeConicArcs/ClebschLucasPolynomialFactorization.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference"
+      file: "RelativeConicArcs/ClebschOuterParityInjection.lean"
+      sorry_count: 0
+      axioms:
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q"
+      file: "RelativeConicArcs/ClebschOuterParityWeights.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -2683,6 +2922,47 @@ status:
         - "Classical.choice"
         - "Quot.sound"
         - "propext"
+    - declaration: "RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one"
+      file: "RelativeConicArcs/ClebschPolyhedralInvariantAverages.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero"
+      file: "RelativeConicArcs/ClebschPolynomialTopSliceDetection.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback"
+      file: "RelativeConicArcs/ClebschProjectiveTradeReduction.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner"
+      file: "RelativeConicArcs/ClebschRankThreeBalancedEndgame.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff"
+      file: "RelativeConicArcs/ClebschRegularMatching.lean"
+      sorry_count: 0
+      axioms:
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization"
+      file: "RelativeConicArcs/ClebschRootDefect.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
     - declaration: "RelativeConicArcs.CliquePacking.exists_decomposition_of_card_leave_eq_choose"
       file: "RelativeConicArcs/CliquePackingCompletion.lean"
       sorry_count: 0
@@ -2705,6 +2985,34 @@ status:
         - "Quot.sound"
         - "propext"
     - declaration: "RelativeConicArcs.ConferenceExchange.crossGram_eq"
+      file: "RelativeConicArcs/ConferenceExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq"
+      file: "RelativeConicArcs/ConferenceExchangeCompression.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen"
+      file: "RelativeConicArcs/ConferenceExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram"
+      file: "RelativeConicArcs/ConferenceExchangeCompression.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction"
       file: "RelativeConicArcs/ConferenceExchangeSpectrum.lean"
       sorry_count: 0
       axioms:
@@ -2741,6 +3049,20 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange"
       file: "RelativeConicArcs/ConferenceExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve"
+      file: "RelativeConicArcs/ConferenceExchangeSpectrum.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.ConferenceExchange.transferBlock_gram"
+      file: "RelativeConicArcs/ConferenceExchangeCompression.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -2795,7 +3117,21 @@ status:
         - "Classical.choice"
         - "Quot.sound"
         - "propext"
+    - declaration: "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
+      file: "RelativeConicArcs/Q11DecodingSynthesis.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
     - declaration: "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
+      file: "RelativeConicArcs/Q11DecodingSynthesis.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets"
       file: "RelativeConicArcs/Q11DecodingSynthesis.lean"
       sorry_count: 0
       axioms:
@@ -2804,6 +3140,13 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic"
       file: "RelativeConicArcs/Q11Coding.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange"
+      file: "RelativeConicArcs/Q11DecodingSynthesis.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -2865,26 +3208,6 @@ status:
         - "Classical.choice"
         - "Quot.sound"
         - "propext"
-    - declaration: "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen"
-      file: "RelativeConicArcs/GoldenBalancedCut.lean"
-      sorry_count: 0
-      axioms:
-        - "propext"
-    - declaration: "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula"
-      file: "RelativeConicArcs/GoldenBalancedCut.lean"
-      sorry_count: 0
-      axioms:
-        - "propext"
-    - declaration: "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries"
-      file: "RelativeConicArcs/GoldenBalancedCut.lean"
-      sorry_count: 0
-      axioms:
-        - "propext"
-    - declaration: "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
-      file: "RelativeConicArcs/GoldenBalancedCut.lean"
-      sorry_count: 0
-      axioms:
-        - "propext"
     - declaration: "RelativeConicArcs.GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings"
       file: "RelativeConicArcs/GoldenHexagonNormalForm.lean"
       sorry_count: 0
@@ -2915,6 +3238,27 @@ status:
         - "propext"
     - declaration: "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11"
       file: "RelativeConicArcs/GoldenQuadraticCharacters.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three"
+      file: "RelativeConicArcs/ClebschHilbertSymmetry.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.HilbertSymmetry.value_three_eq_one"
+      file: "RelativeConicArcs/ClebschHilbertSymmetry.lean"
+      sorry_count: 0
+      axioms:
+        - "Classical.choice"
+        - "Quot.sound"
+        - "propext"
+    - declaration: "RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero"
+      file: "RelativeConicArcs/ClebschHyperplaneSquare.lean"
       sorry_count: 0
       axioms:
         - "Classical.choice"
@@ -6313,6 +6657,50 @@ alignment:
       lean: "RelativeConicArcs.Averaging.rhoC_le_t2"
       module: "RelativeConicArcs.Averaging"
       status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod"
+      lean: "RelativeConicArcs.BalancedExchangeEigenvalues.charpoly_one_sub_smul_mul_self_eq_prod"
+      module: "RelativeConicArcs.BalancedExchangeEigenvalues"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half"
+      lean: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half"
+      module: "RelativeConicArcs.BalancedExchangeHalfCut"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three"
+      lean: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_charpoly_exchangeCompression_half_card_three"
+      module: "RelativeConicArcs.BalancedExchangeHalfCut"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half"
+      lean: "RelativeConicArcs.BalancedExchangeHalfCut.exists_isometry_trace_pow_two_exchangeCompression_half"
+      module: "RelativeConicArcs.BalancedExchangeHalfCut"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq"
+      lean: "RelativeConicArcs.BalancedExchangeHalfCut.not_forall_trace_pow_two_exchangeCompression_half_eq"
+      module: "RelativeConicArcs.BalancedExchangeHalfCut"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_exchangeCompression_cut"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_one"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_three"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.charpoly_one_sub_smul_mul_self_of_card_two"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.cutBlock_eq"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four"
+      lean: "RelativeConicArcs.BalancedExchangeSpectrum.ne_smul_one_of_card_four"
+      module: "RelativeConicArcs.BalancedExchangeSpectrum"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Certificate.check_sound"
       lean: "RelativeConicArcs.Certificate.check_sound"
       module: "RelativeConicArcs.Gates.Relconic"
@@ -6324,6 +6712,14 @@ alignment:
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Certificate.rawArc_iff_projectiveCap"
       lean: "RelativeConicArcs.Certificate.rawArc_iff_projectiveCap"
       module: "RelativeConicArcs.Certificate"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary"
+      lean: "RelativeConicArcs.ClebschAffineContractionCohomology.contraction_maps_coboundary"
+      module: "RelativeConicArcs.ClebschAffineContractionCohomology"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq"
+      lean: "RelativeConicArcs.ClebschAffineExtensionContraction.contractedCochain_eq"
+      module: "RelativeConicArcs.ClebschAffineExtensionContraction"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit"
       lean: "RelativeConicArcs.ClebschArithmeticGluing.a3_fused_stabilizer_and_orbit"
@@ -6417,6 +6813,10 @@ alignment:
       lean: "RelativeConicArcs.ClebschArithmeticGluing.vertexReductions_are_bijective"
       module: "RelativeConicArcs.ClebschArithmeticGluingData"
       status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff"
+      lean: "RelativeConicArcs.ClebschBalancedOrbitEndgame.exceptionalSplit_regularMatching_iff"
+      module: "RelativeConicArcs.ClebschBalancedOrbitEndgame"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
       lean: "RelativeConicArcs.ClebschChordDefect.chordDefect_identity_of_moments"
       module: "RelativeConicArcs.ClebschChordDefect"
@@ -6428,6 +6828,26 @@ alignment:
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card"
       lean: "RelativeConicArcs.ClebschChordDefect.orders_of_clebsch_uncovered_conic_card"
       module: "RelativeConicArcs.ClebschChordDefect"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations"
+      lean: "RelativeConicArcs.ClebschDetectingIntertwiners.eq_zero_of_two_generator_relations"
+      module: "RelativeConicArcs.ClebschDetectingIntertwiners"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero"
+      lean: "RelativeConicArcs.ClebschDetectingModuleVanishings.characteristic_three_scalar_eq_zero"
+      module: "RelativeConicArcs.ClebschDetectingModuleVanishings"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling"
+      lean: "RelativeConicArcs.ClebschDetectingModuleVanishings.steinberg_head_above_quadratic_ceiling"
+      module: "RelativeConicArcs.ClebschDetectingModuleVanishings"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd"
+      lean: "RelativeConicArcs.ClebschDihedralReflectionParity.exists_two_mul_add_one_dvd_iff_odd"
+      module: "RelativeConicArcs.ClebschDihedralReflectionParity"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero"
+      lean: "RelativeConicArcs.ClebschDividedPowerTopSlices.twoLeafCoefficient_ne_zero"
+      module: "RelativeConicArcs.ClebschDividedPowerTopSlices"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
       lean: "RelativeConicArcs.ClebschDye.deepHoleLocus_rigidifies_witnessCode"
@@ -6457,6 +6877,46 @@ alignment:
       lean: "RelativeConicArcs.ClebschDye.sixArc_uncovered_card_le_twelve_of_subset_planeQuadraticLocus"
       module: "RelativeConicArcs.SixArcDegenerateConicExclusion"
       status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence"
+      lean: "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge.finiteRootInvariant_iff_satisfiesOneDigitRecurrence"
+      module: "RelativeConicArcs.ClebschFiniteRootRecurrenceBridge"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial"
+      lean: "RelativeConicArcs.ClebschFiniteRootWeightSlice.finiteRootInvariant_iff_exists_scalar_alternatingBinomial"
+      module: "RelativeConicArcs.ClebschFiniteRootWeightSlice"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B"
+      lean: "RelativeConicArcs.ClebschFirstFrobeniusSection.upper_C_sub_B"
+      module: "RelativeConicArcs.ClebschFirstFrobeniusSection"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.RadialEvaluationFamily.evaluationSpace_eq_reference"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.annihilates_hadamardSquare_iff_eq_sheetSignLine_of_noncoalescent"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.card_nonmatchingNoncoalescentParameters"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.hadamardSquare_eq_equalSheetSum_of_noncoalescent"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.nonmatchingNoncoalescentParameters_tradeLine_and_card"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.outerRadialConstantAt_sub"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant"
+      lean: "RelativeConicArcs.ClebschFixedLineRadialTranslation.topConfigurations_first_secondMoments_invariant"
+      module: "RelativeConicArcs.ClebschFixedLineRadialTranslation"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq"
       lean: "RelativeConicArcs.ClebschGoldenConference.conferenceMatrixOver_sq"
       module: "RelativeConicArcs.ClebschGoldenConference"
@@ -6476,6 +6936,22 @@ alignment:
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization"
       lean: "RelativeConicArcs.ClebschInvariantCubic.gauntCoefficient_factorization"
       module: "RelativeConicArcs.ClebschInvariantCubic"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient"
+      lean: "RelativeConicArcs.ClebschLucasCoefficientBasis.satisfiesDigitRecurrences_iff_exists_scalar_digitTensorCoefficient"
+      module: "RelativeConicArcs.ClebschLucasCoefficientBasis"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue"
+      lean: "RelativeConicArcs.ClebschLucasPolynomialFactorization.coeff_expandedProduct_digitValue"
+      module: "RelativeConicArcs.ClebschLucasPolynomialFactorization"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference"
+      lean: "RelativeConicArcs.ClebschOuterParityInjection.fourWeightConstruction_injective_of_middleDifference"
+      module: "RelativeConicArcs.ClebschOuterParityInjection"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q"
+      lean: "RelativeConicArcs.ClebschOuterParityWeights.odd_weight_eq_q_sub_one_or_one_sub_q"
+      module: "RelativeConicArcs.ClebschOuterParityWeights"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square"
       lean: "RelativeConicArcs.ClebschPassagesCorrespondence.chartBranch_square"
@@ -6505,6 +6981,30 @@ alignment:
       lean: "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar"
       module: "RelativeConicArcs.ClebschPassagesCorrespondence"
       status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one"
+      lean: "RelativeConicArcs.ClebschPolyhedralInvariantAverages.icosahedral_average_eq_one"
+      module: "RelativeConicArcs.ClebschPolyhedralInvariantAverages"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero"
+      lean: "RelativeConicArcs.ClebschPolynomialTopSliceDetection.general_top_slice_map_eq_zero"
+      module: "RelativeConicArcs.ClebschPolynomialTopSliceDetection"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback"
+      lean: "RelativeConicArcs.ClebschProjectiveTradeReduction.kernel_or_split_pullback"
+      module: "RelativeConicArcs.ClebschProjectiveTradeReduction"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner"
+      lean: "RelativeConicArcs.ClebschRankThreeBalancedEndgame.certifiedBalancedSheets_endpoint_and_uniquePartner"
+      module: "RelativeConicArcs.ClebschRankThreeBalancedEndgame"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff"
+      lean: "RelativeConicArcs.ClebschRegularMatching.leftRegularEquivariant_perfectMatching_iff"
+      module: "RelativeConicArcs.ClebschRegularMatching"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization"
+      lean: "RelativeConicArcs.ClebschRootDefect.finiteCoordinate_vanishing_factorization"
+      module: "RelativeConicArcs.ClebschRootDefect"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.CliquePacking.exists_decomposition_of_card_leave_eq_choose"
       lean: "RelativeConicArcs.CliquePacking.exists_decomposition_of_card_leave_eq_choose"
       module: "RelativeConicArcs.CliquePackingCompletion"
@@ -6519,6 +7019,22 @@ alignment:
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.crossGram_eq"
       lean: "RelativeConicArcs.ConferenceExchange.crossGram_eq"
+      module: "RelativeConicArcs.ConferenceExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq"
+      lean: "RelativeConicArcs.ConferenceExchange.cutInvolution_commutator_sq"
+      module: "RelativeConicArcs.ConferenceExchangeCompression"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen"
+      lean: "RelativeConicArcs.ConferenceExchange.det_crossGram_eq_sixteen"
+      module: "RelativeConicArcs.ConferenceExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram"
+      lean: "RelativeConicArcs.ConferenceExchange.four_smul_transferBlock_gram"
+      module: "RelativeConicArcs.ConferenceExchangeCompression"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction"
+      lean: "RelativeConicArcs.ConferenceExchange.fourthWordTrace_from_matrix_contraction"
       module: "RelativeConicArcs.ConferenceExchangeSpectrum"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.principal_sq_add_crossGram"
@@ -6540,6 +7056,14 @@ alignment:
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange"
       lean: "RelativeConicArcs.ConferenceExchange.spectrum_normalizedExchange"
       module: "RelativeConicArcs.ConferenceExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve"
+      lean: "RelativeConicArcs.ConferenceExchange.trace_triangleSq_mul_crossGram_eq_twelve"
+      module: "RelativeConicArcs.ConferenceExchangeSpectrum"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.ConferenceExchange.transferBlock_gram"
+      lean: "RelativeConicArcs.ConferenceExchange.transferBlock_gram"
+      module: "RelativeConicArcs.ConferenceExchangeCompression"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Conic.NonsingularConic.finite_lower_bound"
       lean: "RelativeConicArcs.Conic.NonsingularConic.finite_lower_bound"
@@ -6573,13 +7097,25 @@ alignment:
       lean: "RelativeConicArcs.Examples.Q11Coding.brianchonDirectionIndices_eq_indexThree"
       module: "RelativeConicArcs.Q11DecodingSynthesis"
       status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
+      lean: "RelativeConicArcs.Examples.Q11Coding.brianchon_decoder_matching_dictionary"
+      module: "RelativeConicArcs.Q11DecodingSynthesis"
+      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
       lean: "RelativeConicArcs.Examples.Q11Coding.brianchon_weightTwo_leaderSupports"
+      module: "RelativeConicArcs.Q11DecodingSynthesis"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets"
+      lean: "RelativeConicArcs.Examples.Q11Coding.distanceThree_leaderSupports_eq_chiralitySheets"
       module: "RelativeConicArcs.Q11DecodingSynthesis"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic"
       lean: "RelativeConicArcs.Examples.Q11Coding.projective_distanceThreeDirections_eq_standardConic"
       module: "RelativeConicArcs.Q11Coding"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange"
+      lean: "RelativeConicArcs.Examples.Q11Coding.supportChirality_generatorOrbits_and_exchange"
+      module: "RelativeConicArcs.Q11DecodingSynthesis"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact"
       lean: "RelativeConicArcs.Examples.Q11Coding.totalSyndromeDistance_exact"
@@ -6741,22 +7277,6 @@ alignment:
       lean: "RelativeConicArcs.Examples.rho_points_ZMod5"
       module: "RelativeConicArcs.ExampleChecks.Q5"
       status: "proved"
-    - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen"
-      lean: "RelativeConicArcs.GoldenBalancedCut.crossGramDet_eq_sixteen"
-      module: "RelativeConicArcs.GoldenBalancedCut"
-      status: "proved"
-    - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula"
-      lean: "RelativeConicArcs.GoldenBalancedCut.fourthWordTrace_from_block_formula"
-      module: "RelativeConicArcs.GoldenBalancedCut"
-      status: "proved"
-    - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries"
-      lean: "RelativeConicArcs.GoldenBalancedCut.signedTriangle_sq_entries"
-      module: "RelativeConicArcs.GoldenBalancedCut"
-      status: "proved"
-    - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
-      lean: "RelativeConicArcs.GoldenBalancedCut.traceContraction_eq_twelve"
-      module: "RelativeConicArcs.GoldenBalancedCut"
-      status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose"
       lean: "RelativeConicArcs.GoldenCommutatorPfaffian.bracketMatrix_transpose"
       module: "RelativeConicArcs.Gates.GoldenProofSpine"
@@ -6884,6 +7404,78 @@ alignment:
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11"
       lean: "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11"
       module: "RelativeConicArcs.GoldenQuadraticCharacters"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.coordinatewiseEndpointDominated_of_convexOnCube"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.coordinatewiseEndpointDominated_of_convexOnCube"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.exists_booleanControl_ge"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianExchange_landscape"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_endpoint_equalities"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_exterior_endpoint"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianFrontier_mixed_endpoint"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_gram"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_neg_gram"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.hermitianTransferBlock_neg_gram"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.le_of_coordinatewiseConvexOnCube_of_booleanControl_le"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.maximalIn_iff_mem_hermitianFrontier"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.mixedSector_le_eight_fifths"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.re_trace_hermitianTransferBlock_gram_le_nine_fifths"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.re_trace_hermitianTransferBlock_gram_le_nine_fifths"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_realDiagonalControl_projections_fin_six"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.trace_realDiagonalControl_projections_fin_six"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_fin_one"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge"
+      lean: "RelativeConicArcs.HermitianConferenceExchange.trace_sq_fixedSixComplement_hermitianEdge"
+      module: "RelativeConicArcs.Gates.GoldenQuantumStatistics"
+      status: "declared; extraction pending"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three"
+      lean: "RelativeConicArcs.HilbertSymmetry.socleDegree_eq_three"
+      module: "RelativeConicArcs.ClebschHilbertSymmetry"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HilbertSymmetry.value_three_eq_one"
+      lean: "RelativeConicArcs.HilbertSymmetry.value_three_eq_one"
+      module: "RelativeConicArcs.ClebschHilbertSymmetry"
+      status: "proved"
+    - source: "trust-spine:relconic:terminal:RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero"
+      lean: "RelativeConicArcs.HyperplaneSquare.cubicAnnihilator_eq_zero"
+      module: "RelativeConicArcs.ClebschHyperplaneSquare"
       status: "proved"
     - source: "trust-spine:relconic:terminal:RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart"
       lean: "RelativeConicArcs.InvolutiveOddUnit.evenPart_add_oddPart"
@@ -7978,7 +8570,7 @@ othello_trust:
   lean_toolchain: "leanprover/lean4:v4.32.0-rc1"
   graph_manifest:
     path: "trust/graph-manifest.json"
-    canonical_sha256: "8cc2c0b62b77c7995d704cf5f14d8002737c3673e96e30df6b47070508aaa57d"
+    canonical_sha256: "7b58bb0e56fd7731a29c4a853ea8e42c950c53949ad99905153a17e964f2bafa"
     replay: "lean/scripts/lean-trust-spine.py graph --out <path>"
   inputs:
     - path: "lean-toolchain"
@@ -7988,11 +8580,11 @@ othello_trust:
     - path: "trust/areas/finitegeom_first_tag.toml"
       sha256: "e1b24b40f326f3c872846602de159b45bd2964368ca9c7d60b90af2bbfc6256b"
     - path: "trust/areas/relconic.toml"
-      sha256: "567e0a867d3133be4519d0693383eb7017bd35c8c2e2e1a89de26cd89148816d"
+      sha256: "7a2c2d1e3c27418c7145eddc7573cec416bfc57a2709c550dc54ee7179d56821"
     - path: "trust/graph-manifest.json"
-      sha256: "76748a82345d1c694ca6678f0134537082140c65589d5dcf8e5db29ff9b19e68"
+      sha256: "ab22f81444d1596c82b85131897bf10c78aad81340d42e65d90ae3bbd9aef761"
     - path: "trust/papers.toml"
-      sha256: "425708671b56fda38b8dba3daaf10945ad37c8647dabf4dd5041d7b37205497d"
+      sha256: "ed23242de831e55e8145a3bb7d308d606ab2c66a99723232ba75f71380210b2c"
     - path: "trust/portfolio.toml"
       sha256: "ad7eb7414e87aa3a801f3ac3eb5fea6ebdd6dd6a6455ddf3901f1ce8d7a5dfe4"
   papers:
@@ -8020,9 +8612,9 @@ othello_trust:
         - path: "papers/ame_lu/sections/05-quantitative-rounding.tex"
           sha256: "c22962e9391e5504ef65ef247a8a66594597a6498310c640bcab36df01cc5131"
         - path: "papers/ame_lu/sections/08-verification-boundary.tex"
-          sha256: "ca3ca136d69cff537e877a8af991c7b2d1daa0c250ce306b7e33fea276d6146c"
+          sha256: "95d8708d5b00f0bf10d033474ec7ae916f1b366b5fc8b0428cf2fe057c9eec45"
         - path: "papers/ame_lu/sections/07-conclusion.tex"
-          sha256: "a6f0c1454e181dce559ffa499390cc54a29679dc807b2c752abfdf7a67163d84"
+          sha256: "72bed1da38637a92f5090153291740a090a81f6d8ed2e4558f665a89e6524c0a"
         - path: "papers/ame_lu/sections/A-partial-weyl-recognition.tex"
           sha256: "6575b473197e63d1bfb535a6807f10cc07405baa09e7a2889f0bbefee824e71b"
         - path: "papers/ame_lu/sections/B-secondary-quantitative.tex"
@@ -8033,7 +8625,7 @@ othello_trust:
       main: "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
       source_hashes:
         - path: "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
-          sha256: "36d6aa8fe6d905e8b6d155f3f84b6677d530050a70c7a60530e856b283bd3b64"
+          sha256: "087e211929a3864cb71905fb3330d543fd598a7956c7f4d5fe1d4be052c31081"
       facts_artifact: "trust/paper-facts/arcs_complete_outside_conic.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:beyond4_prs"
@@ -8118,52 +8710,59 @@ othello_trust:
           sha256: "28e036f013148288137835febf3af069eb5a4349a39cde5ad29cf30d840b6cae"
       facts_artifact: "trust/paper-facts/beyond4_prs_submission.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
+    - id: "paper-facts:chordal_conference_reconstruction"
+      main: "papers/chordal-conference-reconstruction/chordal_conference_reconstruction.tex"
+      source_hashes:
+        - path: "papers/chordal-conference-reconstruction/chordal_conference_reconstruction.tex"
+          sha256: "0a42e0e6f987dc8ae6685f1e3300cd357603d992ff502f49b33f3ec2bfda9c60"
+      facts_artifact: "trust/paper-facts/chordal_conference_reconstruction.json"
+      fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:clebsch_factorization"
       main: "papers/clebsch-factorization/clebsch_factorization.tex"
       source_hashes:
         - path: "papers/clebsch-factorization/clebsch_factorization.tex"
-          sha256: "120cf9ae4fd926130c34305dca6dfc36682989dae5ed2aa00992707abd27e7e6"
+          sha256: "384fd1fdcb42558a91b95ec7fa57bff1e235c3d03fc2830db1393a34869ef839"
       facts_artifact: "trust/paper-facts/clebsch_factorization.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:clebsch_passages"
       main: "papers/clebsch-passages/clebsch_passages.tex"
       source_hashes:
         - path: "papers/clebsch-passages/clebsch_passages.tex"
-          sha256: "d601e4281f6fedb9b9c105650ea80bfa74071fea65ac8e23b149a15f7228b331"
+          sha256: "a3b5b537564aff74f12484a44f9bade544d3866dd10c1b462cd3fee7452ac294"
         - path: "papers/clebsch-passages/sections/01-introduction.tex"
-          sha256: "dbf16a7bf40f3ca9bc1a5475452d215e6f24f20a054506f3a85056c54a5efadc"
+          sha256: "2315187fd08ac9364da03fd2cee33de6d6f48a05c2735dd73bf559d9367d3617"
         - path: "papers/clebsch-passages/sections/02-orientation-cover.tex"
-          sha256: "b2a8989dbee1d36ef25f9ab9596388b01b92229d6f50b6675e82aac680e88d5b"
+          sha256: "5154a0ac90c3ac29669cd0feae32e79b536334280555ba81811f6a4c04c970d6"
         - path: "papers/clebsch-passages/sections/03-orientation-source.tex"
-          sha256: "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822"
+          sha256: "6a30ad14b641ac74212cc28bd88a999595929bb01d74be60717641e191a06ee2"
         - path: "papers/clebsch-passages/sections/04-arithmetic-specialization.tex"
-          sha256: "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455"
+          sha256: "815b609cc5354707dad08e015952ddcc5592e78c5a81347def79bbc5a89357a0"
         - path: "papers/clebsch-passages/sections/05-golden-operator.tex"
-          sha256: "2ba23f2c0633221504a187886771049429316c1ebd15d19ff7e2b279d798f5f0"
+          sha256: "24a23bcf5ce7e831461232107ebbe39d747595d74ba9f4546652a1074fcf8186"
         - path: "papers/clebsch-passages/sections/05-harmonic-realization.tex"
           sha256: "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1"
         - path: "papers/clebsch-passages/sections/09-conclusion.tex"
-          sha256: "2ce7f1b81acfb72ae20dfa3afede006e09e268c410d4796ec940acb6a2533146"
+          sha256: "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff"
         - path: "papers/clebsch-passages/sections/07-marking-ambiguities.tex"
           sha256: "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0"
         - path: "papers/clebsch-passages/sections/08-verification.tex"
-          sha256: "5747e125e757cd1a468b1186723b8d507c7e3dce96d5dab3020dea79adeb403d"
+          sha256: "b2f6fc428f10c7ba34c5ac78cf8b0498cfdd838a089f237c3cd9c18b1e11e3de"
         - path: "papers/clebsch-passages/sections/10-references.tex"
-          sha256: "467115d7514f6ef0c4c0b20432824d135c1f3e4fc3a0f1804bc5ff36ea45364b"
+          sha256: "95ceac3c1c52084415bd8fa1db6f689a4d2f679f65fb57c8e3bec75dfe06e85d"
       facts_artifact: "trust/paper-facts/clebsch_passages.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:clebsch_rigidity"
       main: "papers/clebsch-rigidity/clebsch_rigidity.tex"
       source_hashes:
         - path: "papers/clebsch-rigidity/clebsch_rigidity.tex"
-          sha256: "b9999274be726a92e5ad1a1d5619028c505b84b89d5e241232e0d743248c4cf9"
+          sha256: "37313976491efedc2139471d70ae4ed09e5fe93d3e84aceb92d2af4e35197dae"
       facts_artifact: "trust/paper-facts/clebsch_rigidity.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:clebsch_rigidity_companion"
       main: "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
       source_hashes:
         - path: "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex"
-          sha256: "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128"
+          sha256: "15fe20f9bc830c9ba3d2620d8caadc4a1f1632dbce2c11bbfb18f23bc2a04e30"
       facts_artifact: "trust/paper-facts/clebsch_rigidity_companion.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:complete_repair_ports"
@@ -8180,6 +8779,23 @@ othello_trust:
           sha256: "22f76cda4e986d719e95cad36fbe02efaa54e0c349dc689b232e6e2ae368e902"
       facts_artifact: "trust/paper-facts/continuation_graph_rigidity.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
+    - id: "paper-facts:cubic_stabilization_epilogue"
+      main: "papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex"
+      source_hashes:
+        - path: "papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex"
+          sha256: "d5f8d69dfee2377d641e8dffa9f559e45466afe6a5f7acda7ddfe9182de88e4e"
+        - path: "papers/cubic-stabilization-epilogue/sections/01-introduction.tex"
+          sha256: "a54d06088e99b77dce90227746ac840c2ac5513162cfee8eebe61172dd5589d9"
+        - path: "papers/cubic-stabilization-epilogue/sections/02-envelope.tex"
+          sha256: "d021113946a3a4d902979e7a793792fd5aff6623d254f081d56642c7ef3e4374"
+        - path: "papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex"
+          sha256: "96c8ff5942b2a156d843e968969125792f7d0ecc55a309bc694dcf530843cd93"
+        - path: "papers/cubic-stabilization-epilogue/sections/04-one-step.tex"
+          sha256: "32f6a6be6e5a27e15d5d5378d72de4b96693c44fff1873284465867b98f951f1"
+        - path: "papers/cubic-stabilization-epilogue/sections/05-synthesis.tex"
+          sha256: "687f482b7ea15e289e2d8aa113620ff79dc99c6231216e44125bfa89754fef68"
+      facts_artifact: "trust/paper-facts/cubic_stabilization_epilogue.json"
+      fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:dihedral_schreier_node_kayles"
       main: "papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex"
       source_hashes:
@@ -8191,7 +8807,7 @@ othello_trust:
       main: "papers/equivariant-robust-completion/frobenius_pair_extension.tex"
       source_hashes:
         - path: "papers/equivariant-robust-completion/frobenius_pair_extension.tex"
-          sha256: "ce68b302d3ff9cb8d1804517458dce5791bf2449fffffefe3457a96d8e362340"
+          sha256: "348af99b92e982ae034c308df4d9c21a731a555ff76ecb225d5495ced4b16521"
       facts_artifact: "trust/paper-facts/equivariant_robust_completion.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
     - id: "paper-facts:golden_operator"
@@ -8247,7 +8863,7 @@ othello_trust:
       main: "papers/q13-passant-code/passant_code_q13.tex"
       source_hashes:
         - path: "papers/q13-passant-code/passant_code_q13.tex"
-          sha256: "12e19dd0c2f4a83e25f2a023ebd23b35bdb8415649cbac993853a0488a2ec033"
+          sha256: "999222615906ba1174d6df61f569eb54556d63447584e4871a62ece761e0e5f7"
       facts_artifact: "trust/paper-facts/passant_code_q13.json"
       fresh_extraction: "lean/scripts/paper-facts.py extract"
   areas:
@@ -8273,80 +8889,8 @@ othello_trust:
       area: "relconic"
       manifest: "RelativeConicArcs/TRUST.md"
       spine: "trust/areas/relconic.toml"
-      terminals: 730
-      axioms_extracted: 654
-      review_status: "76 terminal axiom sets await extraction"
+      terminals: 792
+      axioms_extracted: 701
+      review_status: "91 terminal axiom sets await extraction"
       replay: "lean/scripts/lean-trust-extract.py run --area relconic"
-      data_trees:
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25CarrierLineData"
-          path: "RelativeConicArcs/Q25CarrierLineData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ClassBoundData"
-          path: "RelativeConicArcs/Q25ClassBoundData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ExactMinimumRows"
-          path: "RelativeConicArcs/Q25ExactMinimumRows"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25LineMaskData"
-          path: "RelativeConicArcs/Q25LineMaskData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25PairData"
-          path: "RelativeConicArcs/Q25PairData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25PairRows"
-          path: "RelativeConicArcs/Q25PairRows"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ResidualClassLinkData"
-          path: "RelativeConicArcs/Q25ResidualClassLinkData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ResidualConclusionData"
-          path: "RelativeConicArcs/Q25ResidualConclusionData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ResidualCoverData"
-          path: "RelativeConicArcs/Q25ResidualCoverData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ResidualDispatchData"
-          path: "RelativeConicArcs/Q25ResidualDispatchData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25ResidualTransportData"
-          path: "RelativeConicArcs/Q25ResidualTransportData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
-        - id: "trust-spine:relconic:data-tree:RelativeConicArcs/Q25RowCompositionData"
-          path: "RelativeConicArcs/Q25RowCompositionData"
-          provenance: "legacy-unverified"
-          generator: null
-          generator_sha256: null
-          input_hashes: []
+      data_trees: []
