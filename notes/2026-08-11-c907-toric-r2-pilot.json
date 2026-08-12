@@ -1,0 +1,142 @@
+{
+  "asymptotics": {
+    "ambient": {
+      "count": 6,
+      "critical_value": "6*c+c^2*t+O(t^2)",
+      "root_relation": "c^6=Q",
+      "u": "1+c*t-(2/3)*c^2*t^2+O(t^3)"
+    },
+    "residual": {
+      "affine_rescaled_spectrum": "{-4*Q^(1/4)*zeta_4}",
+      "count": 4,
+      "critical_value": "-t^(-1)-4*c*t^(1/2)-c^2*t^2+O(t^(7/2))",
+      "root_relation": "c^4=Q",
+      "u": "c*t^(3/2)+(3/2)*c^2*t^3+O(t^(9/2))"
+    }
+  },
+  "boundary": {
+    "certifies": [
+      "fan relation lattice and Fano anticanonical degrees",
+      "critical-point reduction and exact degree-ten equation",
+      "generic 6+4 critical-value splitting",
+      "residual affine-rescaled leading spectrum equals the P3 spectrum up to sign"
+    ],
+    "does_not_certify": [
+      "residual-center Stokes-filtered identification",
+      "Gamma/Rees strict blow-up functoriality",
+      "vanishing of the limiting four-thimble Stokes cocycle"
+    ]
+  },
+  "fan": {
+    "anticanonical_degrees": [
+      5,
+      1
+    ],
+    "mori_generators": [
+      [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1
+      ]
+    ],
+    "rays": [
+      [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    ],
+    "relation_basis": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        -1
+      ]
+    ],
+    "smooth_fano": true
+  },
+  "mirror": {
+    "cohomology_rank": 10,
+    "critical_reduction": [
+      "x1=x2=x3=a",
+      "x4=x5=b",
+      "a=b+t*b^2",
+      "Q=a^4*b^2"
+    ],
+    "critical_value": "(5*u^2-4*u-1)/t",
+    "generic_critical_point_count": 10,
+    "potential": "x1+x2+x3+x4+x5+Q/(x1*x2*x3*x4*x5)+t*x4*x5",
+    "u_equation": "u^4*(u-1)^6=Q*t^6"
+  },
+  "schema": "c907-toric-r2-pilot-v1"
+}

@@ -114,10 +114,15 @@ threefold centers include Calabi--Yau quintics and general-type sextics inside
 `P^4` inside `P^5`.  The database is reconnaissance only.  The live gold
 architecture now requires both the analytic/integral `T1` lift and an
 arbitrary-center `+/-1/6` length bound.  Execution first freezes a
-phase/mutation-invariant enriched cubic length, then runs the codimension-two
-first-Novikov obstruction calculation in parallel with the nef-canonical
-carrier exclusion and quintic/sextic hostile tests.  Plan:
-`../2026-08-11-c907-moonshot-attack-plan.md`.
+phase/mutation-compatible Gamma/Rees cubic length.  The formal nef-canonical
+carrier exclusion is now closed in every dimension by KKPYY Claim 6.15, so
+quintic and sextic centers have no formal cubic packet.  The remaining carrier
+gate is non-nef threefolds.  Analytically, the codimension-two basepoint graded
+map passes, but residual-center Stokes equality is unknown already at order
+zero; compute that toric cocycle before any first-Novikov derivative.  Report:
+`../2026-08-11-c907-wave-zero-nef-exclusion-and-r2-audit.md`.  Plan:
+`../2026-08-11-c907-moonshot-attack-plan.md`.  Exact toric pilot and
+independent replay: `../2026-08-11-c907-toric-r2-pilot.md`.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

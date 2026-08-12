@@ -44,6 +44,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 - The full cubic hypergeometric module is irregular-Hodge and irreducible.
   Cai's rank-two atom is its local middle zero-exponential Stokes graded piece,
   not a global subobject.
+- KKPYY Claim 6.15 is dimension-free: every smooth nef-canonical projective
+  variety has formal residue classes only `0` and `1/2`.  Thus every smooth
+  nef-canonical threefold, including quintic and sextic hypersurfaces, has
+  empty formal cubic packet; its identification with the enriched carrier
+  invariant remains part of the analytic realization gate.
+- For codimension two, Iritani (5.28) gives an exact basepoint matrix whose
+  `t`-adic then exceptional-first associated graded is `I_Y \oplus I_Z`.
+- The exact toric pilot `Bl_(P^3)P^5` has six ambient and four escaping
+  critical values; after affine rescaling, the latter are the `P^3` mirror
+  spectrum.  This closes the formal spectrum check, not the residual
+  four-thimble Stokes cocycle.
 
 ## Active frontier: `m=2`
 
@@ -64,14 +75,17 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Freeze the phase/mutation-invariant enriched cubic length.  Then run in
-parallel: prove the nef-canonical exclusion with quintic/sextic hostile tests;
-and specialize Iritani (5.28) to codimension two, extend the strict basepoint
-comparison to first Novikov order, and compute the explicit
-Stokes/mutation-system obstruction class.
+Freeze the phase/mutation-compatible Gamma/Rees realization of the cubic
+length.  In parallel, compute the order-zero residual-center Stokes cocycle
+for `Bl_(P^3)P^5` in the Orlov Gamma basis, and attack the non-nef threefold
+carrier bound.  First-Novikov differentiation follows only after the
+order-zero residual-center identification passes.
 
 A Fano-threefold database is reconnaissance only; weak factorization permits
 arbitrary Calabi--Yau and general-type threefold centers.
+
+Exact pilot and replay:
+`../2026-08-11-c907-toric-r2-pilot.md`.
 
 ## Gold architecture after `m=2`
 

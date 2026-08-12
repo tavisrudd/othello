@@ -95,12 +95,16 @@ must give a positive biproduct identity
 
 \[
 \mathscr A_\alpha(Y_0)\oplus
-\bigoplus_{i,j}T^j\mathscr A_\alpha(Z_i^+)
+\bigoplus_{i,j}T^j\mathscr A_\alpha(Z_i^-)
 \simeq
 \mathscr A_\alpha(Y_N)\oplus
-\bigoplus_{i,j}T^j\mathscr A_\alpha(Z_i^-).
+\bigoplus_{i,j}T^j\mathscr A_\alpha(Z_i^+).
 \tag{W}
 \]
+
+Here the common model at step `i` is the blow-up of `Y_(i-1)` along
+`Z_i^-` and of `Y_i` along `Z_i^+`.  The signs in `(W)` follow by equating
+those two blow-up decompositions.
 
 No subtraction in `K_0` is allowed.  For `Y_0=X x P^2` and `Y_N=P^5`, every
 nonzero center term comes from a codimension-two threefold and has length at
@@ -112,8 +116,8 @@ decomposition contradicts `(W)`.
 | Wave | Work | Depends on | Exit gate |
 | --- | --- | --- | --- |
 | 0 | Freeze the enriched category, cubic packet, phase action, and `ell_alpha` | closed C907 computations | `D` is a literal definition with endpoint and mutation tests |
-| 1A | Formal codimension-two normalization and first-order obstruction | Wave 0 | normalized obstruction class is defined and computed |
-| 1C | Nef-canonical exclusion and hostile examples | Wave 0 | formal exclusion theorem plus exact regressions |
+| 1A | Formal codimension-two normalization and order-zero residual-center cocycle | Wave 0 | normalized Stokes cocycle is defined and computed |
+| 1C | Nef-canonical exclusion | Wave 0 | formal exclusion theorem; closed dimension-free by KKPYY Claim 6.15 |
 | 2A | Toric then non-toric residual-center identification | 1A | Stokes/Gamma/Rees comparison or exact counter-obstruction |
 | 2C | Universal threefold bound or counterexample | 1C | theorem `(C)` or certified length-two carrier |
 | 3 | Composition and weak-factorization telescope | 2A and 2C | `(A)` and `(W)` pass hostile review |
@@ -123,6 +127,12 @@ decomposition contradicts `(W)`.
 Tracks A and C run concurrently after Wave 0.  Within C, the direct
 dimension-three grading attack and counterexample search run before an MMP
 transport programme.
+
+Wave-1 status: the exact toric pilot has been built and independently
+replayed; its residual critical values converge after affine rescaling to the
+`P^3` spectrum.  The surviving task is the framed four-thimble
+Picard--Lefschetz/Stokes comparison, not another critical-value calculation.
+See `2026-08-11-c907-toric-r2-pilot.md`.
 
 ## Wave 0 — freeze the invariant
 
@@ -159,6 +169,11 @@ Fourier block is one-dimensional.  Prove without machine dependence that the
 This fixes conventions; it is not the analytic theorem.
 
 ### A2. First-order obstruction
+
+This step is gated by the order-zero residual-center identification.  Iritani's
+toric theorem supplies residual sectorial pieces but explicitly leaves their
+Stokes identification with the center open.  First compute that mismatch as a
+Stokes cocycle in the toric pilot.  Only if it is trivial proceed below.
 
 Work over
 
@@ -215,6 +230,13 @@ weaken the acceptance gate while retaining the claimed telescope.
    `1/2`, hence no cubic packet.
 3. Prove that the Wave-0 realization detects this formal absence.
 4. State separately what is formal and what uses the analytic enhancement.
+
+The formal exclusion theorem is now closed in every dimension: the parity
+gauge leaves only residue classes `0` and `1/2`.  Promotion from empty formal
+support to `ell_alpha=0` remains conditional on the Wave-0 realization.  See
+`2026-08-11-c907-wave-zero-nef-exclusion-and-r2-audit.md`.  Quintic and sextic
+hypersurfaces are immediate cases; computations are convention regressions
+only.
 
 ### C2. Hostile exact regressions
 
