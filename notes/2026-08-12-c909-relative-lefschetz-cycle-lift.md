@@ -2,8 +2,8 @@
 
 Date: 2026-08-12
 
-Status: structural lemma; intentionally stops before relative diagonal or
-Chow-descent questions owned by C908
+Status: conditional structural lemma after hostile audit; intentionally stops
+before relative diagonal or Chow-descent questions owned by C908
 
 ## Statement
 
@@ -16,7 +16,8 @@ an elliptic scheme, and let
 
 be a fixed-data polarized quotient by a finite flat marked self-adjoint graph
 kernel.  Assume its local positive-depth spectral packets are finite etale.
-After a further finite etale cover `S'-->S` there are relative line bundles
+Assume that, after a further finite etale cover `S'-->S`, there are
+kernel-linearized rigidified relative line bundles
 `L_1,...,L_N` on `A_{S'}` and integers `n_I` such that the relative cycle
 
 ```text
@@ -47,12 +48,11 @@ Picard scheme fits into
 ```
 
 For a finite list of constant Neron--Severi sections, the inverse images are
-torsors under the dual abelian scheme.  The particular classes here are
-obtained from homomorphisms of the universal elliptic power and from descent
-forms integral on the marked kernel.  Their descent linearizations have
-finite theta-group ambiguity.  A single finite etale level refinement kills
-that ambiguity simultaneously, producing actual relative line bundles
-`L_i`.
+torsors under the dual abelian scheme.  Such torsors need not become trivial
+after finite etale base change.  Finite theta-group ambiguity controls a
+linearization only after the line bundle exists.  Thus existence of the
+`L_i` is a genuine hypothesis until an explicit relative
+correspondence/theta-group descent calculation is printed.
 
 The local saturation proof is an identity in the fixed integral coefficient
 lattice.  It is independent of the elliptic modulus, so the same finite
@@ -92,8 +92,8 @@ for the relative line bundles:
 
 * an explicit theta-group linearization of the coefficient line bundles on
   `E^g` trivial on the marked kernel; or
-* a precise representability/descent lemma for the required finite list of
-  Neron--Severi sections after finite etale base change.
+* explicit relative divisor correspondences whose associated line bundles
+  represent the required Neron--Severi sections.
 
 Without that lemma, the relative statement is structurally compelling but
 not yet publication-grade.  The fibrewise saturation theorem does not need
