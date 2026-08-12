@@ -13,7 +13,9 @@ compression pass (`notes/2026-08-12-c908-h3-compression.md`).
 `B = F×F`, `A = X×B` (`dim A = 7`), `𝒮 ⊂ A` the universal span divisor with
 class `S = H + G` (`H = p_X^*H`, `G = p_B^*ψ^*Θ`), `ι : 𝒮 → A`,
 `ℒ = O_𝒮(Z' − Z + t·ι^*G)` the divisorial (rank-one reflexive, non-Cartier
-along the node section `T`) span-model sheaf, `𝒢 = ι_*ℒ`,
+along the node section `T_I` over `I∖Δ` and a priori also along the
+Δ-cylinder `T_Δ = {(x,ℓ,ℓ) : x ∈ ℓ}`; `Z∩Z' = T_I ∪ T_Δ`, both of dim 3)
+span-model sheaf, `𝒢 = ι_*ℒ`,
 `D := c_1(ℒ) = [Z']_𝒮 − [Z]_𝒮 + t·ι^*G`. `σ` is the factor swap on `B`,
 acting on `A` fixing `X`. The λ-bit reads
 `N(x,a) = ∫ p_X^*x · (\text{test}) · c_4` mod 2 with `S(x,a)` odd
@@ -32,15 +34,28 @@ even:
    against `x⊗μ^*T` resp. `x⊗T`: for `j_{Δ*}γ` supported on `X×Δ`,
    `∫ j_{Δ*}γ·(x⊗T) = ∫ γ·(x⊗i_Δ^*T) = 0`, and on `X×E` the restriction is
    `(μ^*T)|_E = π_E^*(i_Δ^*T) = 0`;
-2. hence `N(x,a)` computed with the honest family on `X×Y`, with its
+2. hence `N(x,a)` computed with the actual family on `X×Y`, with its
    `(1×q)`-comparison to `X×M`, and with the μ-pushed span model on `X×B`
    all agree **integrally**: the pass-8 §3.1 derivation obligation is
    discharged exactly, and the downstairs readout equals
    `N = ∫_{A} c_4(𝒢)·(x⊗T_a)`.
 
 *Proof.* (1) is the displayed projection-formula computation plus
-`μ∘e_E = i_Δ∘π_E`; (2) because each comparison differs by classes supported
-on the loci of (1) (where `q` and `μ` fail to be isomorphisms). ∎
+`μ∘e_E = i_Δ∘π_E`; no integrality is needed — supported classes of any
+coefficients pair to zero on the nose. (2), μ-leg: the family on `X×Y` and
+the `(1×μ)`-pull of the span model (resp. the `(1×μ)`-push and the model on
+`X×B`) are canonically isomorphic off `X×E` (resp. `X×Δ`), both being the
+span construction over `B∖Δ ≅ Y∖E`; hence their ch's differ by classes
+supported on those loci, and since `c_4` is a polynomial in `ch_{1..4}`,
+every term of the `c_4`-difference carries a supported factor
+(`j_*u·v = j_*(u·j^*v)`), so the `c_4`-difference is itself supported there
+and pairs to zero by (1). The `X×M`-comparison is test-side, not sheaf-side
+(`q` is generically 6:1 and `𝒢` does not descend along it): for any family
+pulled back from `X×M`, the projection formula gives
+`∫ c_4((1×q)^*𝒰)·(x⊗μ^*T) = ∫ c_4(𝒰)·(x⊗q_*μ^*T) = ∫ c_4(𝒰)·(x⊗b^*(Θ∧a))`,
+and for the span-model family the downstairs readout is defined through this
+transfer. Details: `notes/2026-08-12-c908-lambda-reduction-audit.md`,
+Finding G3. ∎
 
 ## 2. The reduction theorem: `−6·ch_4` kills every deep defect
 
@@ -64,22 +79,43 @@ reflexive-hull discrepancies over the deep stratum `R`, and every other
 sheaf-theoretic defect of the span model are **invisible in the λ-readout**:
 the pass-8 §3.4 frontier is dissolved for the mod-2 computation.
 
-*Proof.* The non-Cartier locus of `ℒ` (the node section `T`, `dim 3`, and
-deeper strata over `R`) has codimension `≥ 4` in the sevenfold `A`. Off
-that locus GRR for the divisor embedding holds, so
-`δ_k := ch_k(𝒢) − m_k` is represented by classes supported in codimension
-`≥ 4`: `δ_2 = δ_3 = 0`, and `δ_4` is a **Z-linear combination of
-codimension-4 cycle classes** (the leading ch-term of a K-theory class
-supported in codimension four is its support cycle with integer generic
-lengths). By the Newton expression, replacing `h_k` by `m_k` changes
-`c_4(𝒢)` by `−6·δ_4`, an even integral class; hence
-`N − M = −6∫δ_4·(x⊗T_a) ∈ 2\mathbf Z`. Lemma 1 removes every other
-discrepancy exactly. ∎
+*Proof.* Let `W` be the union of the non-Cartier locus of `ℒ` and the locus
+where the ambient surrogate rules for `ι_*(D^k)` fail to restrict to the
+intrinsic classes: `W ⊆ T_I ∪ T_Δ ∪ (\text{deep strata over } R)`, whose
+dim-3 components are `T_I` and `T_Δ` only (the deep `R`-strata have
+dim ≤ 2). On `U = A∖W` the embedding is lci with `ℒ|_U` a line bundle, so
+Riemann–Roch sans dénominateurs gives `c_4(𝒢)|_U = c_4^{main}|_U` and GRR
+gives `δ_k|_U = 0`; since `H^{2k}_W(A,\mathbf Q) ≅ H^{BM}_{14−2k}(W,\mathbf Q)
+= 0` for `2k < 8`, `δ_1 = δ_2 = δ_3 = 0` exactly (`δ_1 = 0` also directly:
+`ch_1(𝒢) = S = m_1`). By the Newton expression the substitution `h_k → m_k`
+therefore changes `c_4(𝒢)` by exactly `−6·δ_4`, with no cross terms.
+
+Integrality enters through the difference of Chern classes, not through
+`δ_4` itself (whose own integrality remains open):
+`δc := c_4(𝒢) − c_4^{main} = −6δ_4` is a difference of two **integral**
+classes (`c_4` of a coherent sheaf; the certified-integral main term)
+vanishing on `U`, hence lies in the image of
+`H^8_W(A,\mathbf Z) ≅ H^{BM}_6(W,\mathbf Z) = \mathbf Z[T_I] ⊕ \mathbf Z[T_Δ]`
+— free on the dim-3 components (`T_I` irreducible via the irreducibility of
+the incidence divisor `I`). So `δc = n_I[T_I] + n_Δ[T_Δ]` with
+`n_I, n_Δ ∈ \mathbf Z`. Against a pure test, `[T_Δ] ⊂ X×Δ` pairs to zero
+exactly (Lemma 1(1)); and `∫[T_I]·(x⊗T_a) ∈ 2\mathbf Z`: the `(3,5)`-part
+of `[Z]·[Z'] = [T_I] + (X×Δ\text{-supported})` (multiplicity one along
+`T_I` by pass-8 §3b's generic transversality) consists solely of
+`Ξ`-times-(X-degree-0) terms with coefficient 6 — the X-degrees available
+in `[P]` are `4,3,2,0`, so X-degree 3 forces exactly one `Ξ` — and the
+`Δ`-part pairs to zero. Hence
+`N − M = ∫δc·(x⊗T_a) = n_I·(\text{even}) + 0 ∈ 2\mathbf Z`. Lemma 1
+removes every other discrepancy exactly. ∎ Full derivation and audit trail:
+`notes/2026-08-12-c908-lambda-reduction-audit.md`, Finding G1.
 
 The mechanism is general and worth stating once: **`c_4` mod 2 of any
 coherent class on a smooth variety is insensitive to integral
-`ch_4`-perturbations**, so mod-two `c_4`-readouts never see codimension-4
-sheaf corrections. (The original swap-duality attack plan conjectured a
+`ch_4`-perturbations**. For naive-model comparisons, where the perturbation
+is not a priori a K-class, the mod-two readout is still blind to
+codimension-4 corrections whenever the main term is integral and the
+support cycles pair evenly against the tests — the two hypotheses the proof
+above verifies; corpus reuse of this slogan must carry them. (The original swap-duality attack plan conjectured a
 collapse of the swap-antisymmetric part of `c_4`; the true mechanism is
 this even multiplier, found while executing that plan. The swap-duality
 relation itself survives as a control — §3.)
@@ -106,9 +142,11 @@ pure test (using `∫c_4(σ^*𝒢)·(x⊗T) = −N` by the change of variables
 
 The left side is an explicit main-term contraction; the right side is six
 times an integer. **Control:** the certificate must find the left side
-divisible by six after substituting `h_k → m_k` up to the even ambiguity of
-`δ_4`-terms — a global integrality check on the entire class inventory that
-also *measures* the duality-defect pairing instead of assuming it.
+divisible by six after substituting `h_k → m_k`, exactly — the left side is
+`h_4`-free and `δ_2 = δ_3 = 0`, so the substitution is lossless, and the
+identity binds at `t = 0` — a global integrality check on the entire class
+inventory that also *measures* the duality-defect pairing instead of
+assuming it.
 
 ## 4. What remains to compute: the main-term contraction
 
@@ -139,7 +177,7 @@ passing: fiberwise `ch`, rigidity (`N ≡ λ·S` with `λ = 0`), the ablation
 (`Ξ → 0` gives zero identically), the duality-pairing divisibility by six,
 `ψ`-sanity, and both sign-discriminating self-intersection controls
 (`[Z]² = c_2(N_{Z/A})·[Z]` with Künneth value `6C_s⊗[pt]_X + 27[pt]_F⊗[line]`,
-compared in honest cohomology through slotwise `a_*`). `N` is t-dependent
+compared in true cohomology through slotwise `a_*`). `N` is t-dependent
 integrally but t-independent mod two, as the twist lemma requires.
 
 Scope of the negative, unchanged from the pass-8 spec §0: this settles the
@@ -196,14 +234,23 @@ review (clean).
   comparison (extraction item F) is the last named candidate; after it, the
   informed conjecture is that the channel obstruction is real and `E`-depth
   parity is the invariant blocking it.
-- **Open (audit debt, §7):** the reduction theorem's hostile audit.
+- **Settled (audit debt):** the reduction theorem's hostile audit is done
+  (§7); its one major finding (the `δ_4`-integrality step) is repaired in
+  the §2 proof above, and the §3 control identity was verified clean.
 
 ## 7. Audit status
 
-The reduction theorem (§2) and the control identity (§3) have NOT yet had a
-Fable-grade hostile proof audit (deferred for session-quota reasons; a
-light consistency review only). The audit obligations for the successor:
-the integrality of `δ_4` for K-classes supported in codim ≥ 4; the
-localization step (GRR off the non-Cartier locus); the K-theory sign in the
-duality identity; Lemma 1's support claims. Until that audit, treat the
-verdict as certificate-conditional AND reduction-audit-pending.
+Done: the Fable-grade hostile audit is recorded in
+`notes/2026-08-12-c908-lambda-reduction-audit.md` (2026-08-12). Findings:
+0 FATAL, 3 GAP (one major — the original `δ_4`-integrality step invoked a
+K-theory principle whose hypothesis was never established; two minor — the
+`T_Δ` support component and Lemma 1(2)'s support wording), 3 NIT. All
+repairs are incorporated above: the §2 proof now runs through the integral
+`c_4`-difference in `H^{BM}_6(W,\mathbf Z)` with per-component even
+pairing, the support locus includes `T_Δ`, and Lemma 1's proof states its
+sheaf-agreement input, the cross-term support argument, and the test-side
+`(1×q)`-mechanism. The §3 control identity was verified clean (all signs,
+the GRR/duality shape, and the `37/12, 6, 1, 10` coefficients independently
+re-derived; the `K_4`-integrality is sound there since the duality defect
+is an authentic K-class). The reduction theorem and the control identity
+stand; the λ = 0 verdict is now **certificate-conditional only**.
