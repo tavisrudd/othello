@@ -126,18 +126,19 @@ every prime gives the global integral statement.
 
 ## 4. Exact scope and comparison
 
-The theorem applies to a single equal-depth `p^aB` graph block, including any
-number of finite-etale eigenblocks after splitting and including `p=2`.  Unit
-orthogonal factors cause no difficulty: their ordinary symmetric coefficient
-lattice is rank-one generated and tensoring the two square-zero expansions
-preserves (4).
+The theorem applies to a quotient whose whole local coefficient module is one
+equal-depth `p^aB` graph block, including any number of finite-etale
+eigenblocks after splitting and including `p=2`.  A separate unit orthogonal
+factor is harmless for the divided powers of the distinguished block-diagonal
+polarization, but the present full-`NS` theorem does not assert rank-one
+generation for mixed unit/primary divisor terms.
 
-The proof does **not** yet treat cross terms between two nonunit primary
-Jordan blocks of unequal exponents.  Their graph lattice has asymmetric
-valuation constraints before one passes to symmetric-form coordinates; a
-single formula such as (3) must be replaced by a valuation-compatible
-straightening theorem.  That is the exact next gate, not divided-power
-formalism.
+The proof does **not** yet treat mixed unit/primary terms or cross terms
+between two nonunit primary blocks of unequal exponents.  Their graph lattice
+has asymmetric valuation constraints before one passes to symmetric-form
+coordinates; a single formula such as (3) must be replaced by a
+valuation-compatible straightening theorem.  That is the exact next gate,
+not divided-power formalism.
 
 For the equal-depth finite-etale stratum, the earlier mixed-adjugate proof is
 now unnecessary.  Its minimal-class case is simply (1) with `D=Theta` and
@@ -154,6 +155,6 @@ extra cost.
   degree-specific determinant/adjugate argument.
 * **Boundary:** the result is integral cohomology, not Chow and not generation
   of arbitrary Hodge classes.
-* **Open:** unequal-depth primary cross terms require a separate valuation
-  straightening theorem.  This belongs to the intrinsic cofactor branch of
-  C909; nilpotent carry classification remains C908.
+* **Open:** mixed unit/primary and unequal-depth primary cross terms require a
+  separate valuation straightening theorem.  This belongs to the intrinsic
+  cofactor branch of C909; nilpotent carry classification remains C908.
