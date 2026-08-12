@@ -153,6 +153,11 @@ individual Beilinson thimbles.  See
 `2026-08-11-c907-toric-order-zero-stokes-assembly.md`.  The exact finite
 proof object is specified in
 `2026-08-12-c907-tangent-jacobian-fan-certificate-spec.md`.
+The first two cone certificates are explicit: the compact residual chart has
+exactly four Morse points, while the balanced mixed ray
+`y_i~delta^-2, B,C~delta^4` is tangent-free because `L` becomes a genuine
+coordinate on the saturated central graph.  See
+`2026-08-12-c907-first-tangent-jacobian-cone-certificates.md`.
 
 Wave-2C status: ordinary cohomological grading and duality do not bound the
 length—an explicit self-dual formal length-two model survives.  The first

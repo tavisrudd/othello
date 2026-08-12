@@ -94,7 +94,8 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   with one primitive pair; a direct grading-operator calculation proves that
   every ordinary Fano complete-intersection threefold has `nu_6<=2`.  The same
   bound holds for every smooth Fano cyclic cover of `P^3`, with the cubic the
-  only positive cyclic-cover case.
+  only positive cyclic-cover case.  The weighted degree-one del Pezzo
+  threefold is a genuine non-CI positive calibration, but again has `nu_6=2`.
 
 ## Active frontier: `m=2`
 
@@ -157,6 +158,8 @@ Carrier regressions:
 `../2026-08-12-c907-fano-complete-intersection-support-bound.md`;
 cyclic-cover bound:
 `../2026-08-12-c907-cyclic-cover-support-bound.md`.
+Weighted non-CI calibration:
+`../2026-08-12-c907-b1-weighted-del-pezzo-support.md`.
 
 ## Gold architecture after `m=2`
 

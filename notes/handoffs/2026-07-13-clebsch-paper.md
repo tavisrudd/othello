@@ -75,8 +75,9 @@ direct threefold grading argument is closed negatively by an explicit
 self-dual length-two model; the carrier gate is the geometric vanishing of
 its sectorial Rees extension class for arbitrary non-nef threefolds.  Every
 ordinary Fano complete-intersection threefold has small-even `nu_6<=2`, so
-none can realize the required length-two carrier; the search moves to weighted
-and non-complete-intersection Fanos and Mori-fibre spaces.  Current
+none can realize the required length-two carrier.  Fano cyclic covers of
+`P^3` also have `nu_6<=2`; the weighted degree-one del Pezzo is a non-CI
+positive calibration with `nu_6=2`, not a length-two carrier.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
 authorized.
