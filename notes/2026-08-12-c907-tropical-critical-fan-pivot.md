@@ -11,6 +11,11 @@ Gröbner fan for the saturated graph together with its residual marking and
 tangent-critical module.  The local charts already proved become regression
 cases for that computation.
 
+The first machine replay is green: it checks the two compact-`y` semistable
+incidence saturations and the residual endpoint ideal exactly in Singular.
+See `2026-08-12-c907-critical-fan-pilot.md` and its adjacent `.sing`, `.out`,
+and `.sha256` bundle.
+
 ## Algebraic package
 
 Over `k=C(Q)`, put
@@ -40,8 +45,8 @@ compactification.  After restricting to `delta!=0`, its ideal is generated,
 up to torus units, by
 
 \[
- P,quad Q-YBCy_i\ (i=1,2,3),quad
- \delta^2Q+YB^2C(1-C),quad
+ P,\quad Q-YBCy_i\ (i=1,2,3),\quad
+ \delta^2Q+YB^2C(1-C),\quad
  \delta^2Q+YBC^2(1-B).
  \tag{2}
 \]
@@ -49,8 +54,8 @@ up to torus units, by
 Its solutions satisfy
 
 \[
- y_1=y_2=y_3=a,quad B=C=b,quad
- a^4b^2=Q,quad b(1-b)=-\delta^2a,
+ y_1=y_2=y_3=a,\quad B=C=b,\quad
+ a^4b^2=Q,\quad b(1-b)=-\delta^2a,
  \tag{3}
 \]
 
@@ -112,8 +117,9 @@ In particular, the fan produces `rad(sat(in_w I))`, not its normalization.
 Every chart must compute its finite normalization (or integral generators)
 before the reduced-stratum cotangent/Fitting calculation.
 
-Let `T_sigma` be the kernel of the full tangent Jacobian of (2) at fixed
-`delta`, with `L` included among the tangent variables.  Define
+Let `G_sigma` be the full transformed defining ideal of `A_sigma`.  On a
+resolved lci chart, let `T_sigma` be the kernel of its full tangent Jacobian
+at fixed `delta`, with `L` included among the tangent variables.  Define
 
 \[
  \mathfrak c_\sigma=
@@ -132,16 +138,19 @@ Every cone must carry one exact certificate:
 
 1. **empty:** `A_sigma=0`;
 2. **exterior:** `c_sigma=(1)`, or the critical-value elimination ideal has no
-   root in the fixed disk `Omega`, certified by exact root isolation; or
+   root in the fixed disk `Omega`.  Fix `Q` algebraic and specify `Omega` by
+   algebraic boundary data for exact complex root isolation, or give a
+   symbolic semialgebraic partition in `Q`; or
 3. **residual:** the radical critical scheme lies in the strict residual Rees
    transform and an explicit transition identifies its scheme and Hessian
    with the four Morse points of `f_Q+ZU`.
 
-The Gröbner fan of this finite ideal package is finite rational polyhedral.
-Its normalized slice `w_delta=1,w_L=0` therefore supplies the finite algebraic
-fan that the hand atlas lacked.  This statement requires the graph, residual
-Rees marking, comprehensive `L` strata, and log resolutions together;
-`Trop(I^circ)` by itself is insufficient.
+After fixing a projective toric/Rees compactification and its finite translated
+chart package, its relative Gröbner fans are finite rational polyhedral.  A
+finite comprehensive decomposition in `L` then exists by Noetherianity, and a
+finite characteristic-zero log resolution handles non-schön initials.  Their
+normalized slice `w_delta=1,w_L=0` supplies the finite algebraic fan that the
+hand atlas lacked.  `Trop(I^circ)` by itself is insufficient.
 
 One finite pre-fan is explicit.  Write
 
@@ -182,10 +191,8 @@ Weights outside the first hand range are genuinely present but benign in
 sample chambers.  For example, if `p_1=P>2`, `p_2=p_3=0`, and
 `beta=gamma=(2-P)/4<0`, the leading graph is
 `Q/(Xbc)+bc=0`; its logarithmic `b`-derivative is `2bc`, a unit on the graph,
-so `L` is free.  If `p_1=-P<0`, suitable positive `beta=gamma` similarly gives
-leading graphs `x_1+Q/(Xbc)=0` or `Q/(Xbc)+1=0`, again logarithmically smooth.
-Thus valuation bounds alone do not make the remaining cones empty; the finite
-Fitting fan is the correct compression.
+so `L` is free.  Thus valuation bounds alone do not make all remaining cones
+empty; the finite Fitting fan is the correct compression.
 
 ## What this does not prove
 

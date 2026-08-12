@@ -32,7 +32,7 @@ Then the framed small-even connection has
  \nu_6(X)\le2.
 \]
 
-This applies precisely to a smooth weighted complete intersection whose
+This applies to any smooth weighted complete intersection whose
 *full small-even* QDM has the rank-four ambient hypergeometric presentation
 (1).  It is not a claim about a raw stacky `I`-series of larger order.
 
@@ -71,6 +71,12 @@ residue by `-3/2`.  Since `t^alpha=q^(alpha/r)z^(-alpha)`, the scalar
 zero.  All primitive-sixth support consequently lies among the
 `p=4-r<=3` zero-exponential branches.  (For a zero branch `s^(-a)`, the
 framed residue is `ra-3/2`.)
+
+More explicitly, the cyclic companion lift has components
+`z^(j-3/2) theta^j Phi`, up to constant basis rescaling, so a zero branch
+`s^(-a)` has framed residue `ra-3/2`.  In index one the mirror coordinate
+replaces `h` by `h+cq`; this adds `cq Id` to `K`, altering an irregular
+exponential but not the framed residues.
 
 The involution in (2) pairs the framed residues of `a` and `1-a`: their sum
 is `r-3`, hence their formal-monodromy eigenvalues are inverse.  The only

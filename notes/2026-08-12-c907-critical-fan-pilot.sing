@@ -1,0 +1,97 @@
+// C907 first critical-fan pilot.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-critical-fan-pilot.sing
+
+LIB "elim.lib";
+
+ring r = 0,(d,e,f,c,L,S,A),dp;
+ideal node = e*f-d^2;
+poly g00 = d^2*c*(L-S)-A-c*(1-e)*(1-f*c);
+poly g01 = e*(1-f*c)*(L-S)-A-c*(1-e)*(1-f*c);
+
+ideal i00 = node,g00;
+ideal i01 = node,g01;
+ideal dIdeal = d;
+ideal eIdeal0 = e;
+ideal fIdeal = f;
+ideal cIdeal = c;
+ideal CIdeal = 1-f*c;
+
+ideal s00 = sat(i00,dIdeal);
+s00 = sat(s00,eIdeal0);
+s00 = sat(s00,fIdeal);
+s00 = sat(s00,cIdeal);
+ideal s01 = sat(i01,dIdeal);
+s01 = sat(s01,eIdeal0);
+s01 = sat(s01,CIdeal);
+
+ideal check00 = reduce(std(s00),std(i00));
+ideal check00r = reduce(std(i00),std(s00));
+ideal check01 = reduce(std(s01),std(i01));
+ideal check01r = reduce(std(i01),std(s01));
+
+if (check00[1]==0 && check00[2]==0 && check00r[1]==0 && check00r[2]==0)
+{
+  "SAT00=PASS";
+}
+else
+{
+  "SAT00=FAIL";
+}
+
+if (check01[1]==0 && check01[2]==0 && check01r[1]==0 && check01r[2]==0)
+{
+  "SAT01=PASS";
+}
+else
+{
+  "SAT01=FAIL";
+}
+
+// f=0, e invertible: L=S-c+(A+c)/e.
+// Its tangent critical ideal should reduce to the residual Morse scheme.
+ring t = 0,(e,c,y1,y2,y3,A,L,S,Q),dp;
+poly Y = y1*y2*y3;
+poly graph = e*(L-S)-A-c*(1-e);
+poly de = -A-c;
+poly dc = -(1-e);
+
+// Clear the e denominators; e is forced to one by dc.
+ideal crit = graph,de,dc,e*y1-A,e*y2-A,e*y3-A,A*y1*y2*y3-Q;
+ideal residual = e-1,c+A,y1-A,y2-A,y3-A,L-S-A,A^4-Q;
+
+ideal eIdeal = e;
+ideal critSat = sat(crit,eIdeal);
+ideal c1 = reduce(std(critSat),std(residual));
+ideal c2 = reduce(std(residual),std(critSat));
+
+if (c1[1]==0 && c1[2]==0 && c1[3]==0 && c1[4]==0 && c1[5]==0 && c1[6]==0 && c1[7]==0
+    && c2[1]==0 && c2[2]==0 && c2[3]==0 && c2[4]==0 && c2[5]==0 && c2[6]==0 && c2[7]==0)
+{
+  "RESIDUAL01=PASS";
+}
+else
+{
+  "RESIDUAL01=FAIL";
+}
+
+// The generic B,C critical equations force B=C; there is no off-diagonal
+// branch.  Work after dividing by the torus units B,C.
+ring u = 0,(d,a,B,C),dp;
+poly eB = d^2*a*C+1-C;
+poly eC = d^2*a*B+1-B;
+ideal bcCrit = eB,eC;
+ideal bcDiag = B-C,eB;
+ideal b1 = reduce(std(bcCrit),std(bcDiag));
+ideal b2 = reduce(std(bcDiag),std(bcCrit));
+if (b1[1]==0 && b1[2]==0 && b2[1]==0 && b2[2]==0)
+{
+  "GENERIC_BC_DIAGONAL=PASS";
+}
+else
+{
+  "GENERIC_BC_DIAGONAL=FAIL";
+}
+
+quit;
