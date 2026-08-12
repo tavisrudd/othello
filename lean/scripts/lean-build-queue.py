@@ -981,7 +981,9 @@ def command_regenerate(args: argparse.Namespace) -> int:
     run_dir = getattr(args, "run_dir", None)
     if run_dir is not None:
         run_dir = run_dir.expanduser().resolve()
-        run_dir.mkdir(parents=True, exist_ok=False)
+        if run_dir.exists() and not (run_dir / "detached.json").is_file():
+            fail(f"refusing to reuse non-detached regeneration state {run_dir}")
+        run_dir.mkdir(parents=True, exist_ok=True)
         atomic_write_json(
             run_dir / "status.json",
             {"format": 1, "run_id": run_id, "state": "running", "app": app,
