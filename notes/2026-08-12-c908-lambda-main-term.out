@@ -1,0 +1,66 @@
+C908 lambda main-term certificate
+schema c908-lambda-main-term/1
+
+controls:
+  a_fiberwise_ch_is_0_H_minus_half_H2_minus_sixth_H3             True
+  b_N_is_t_independent_integrally                                False
+  b_N_is_t_independent_mod_two                                   True
+  c_rigidity_N_equals_lambda_times_S_mod_two                     True
+  d_ablation_Xi_zero_gives_identically_zero_N                    True
+  e_duality_pairing_is_divisible_by_six                          True
+  e_duality_pairing_is_integral                                  True
+  f_Cs_square_is_five_points                                     True
+  f_a_star_theta_equals_two_Cs_under_pushforward                 True
+  f_int_F_Cs_square_is_five_and_a_star_theta_square_is_twenty    True
+  f_int_F_of_point_class_is_one                                  True
+  f_psi_cross_matrix_is_minus_symplectic                         True
+  f_psi_pullback_pure_parts_are_a_star_theta                     True
+  f_psi_push_of_unit_is_six_theta                                True
+  g_every_entry_of_N_is_an_integer                               True
+  g_m1_is_S                                                      True
+  g_m2_shape                                                     True
+  g_m3_shape                                                     True
+  g_m4_shape                                                     True
+  g_push_of_D_is_Zp_minus_Z_plus_tGS                             True
+  g_push_of_D_squared_shape                                      True
+  g_push_of_one_is_S                                             True
+  g_td_inverse_coefficients                                      True
+  n_c4_matches_the_displayed_newton_expression                   True
+  n_newton_e4_in_power_sums                                      True
+  r_beta_pairing_is_unimodular                                   True
+  r_lambda_coefficient_matrix_is_unimodular                      True
+  r_sparse_lambda_transfers_agree_with_the_coefficient_matrix    True
+  z_c1_normal_bundle_is_three_Cs                                 True
+  z_incidence_cylinder_readout_is_even                           True
+  z_self_intersection_kunneth_value_is_6CsptX_plus_27ptFline     True
+  z_self_intersection_matches_c2_of_the_normal_bundle            True
+
+lambda = 0
+N integrally t-independent: False; mod two: True
+N (integral):
+     120      0      0      0      0      0      0      0      0      0
+       0    120      0      0      0      0      0      0      0      0
+       0      0    120      0      0      0      0      0      0      0
+       0      0      0    120      0      0      0      0      0      0
+       0      0      0      0    120      0      0      0      0      0
+       0      0      0      0      0    120      0      0      0      0
+       0      0      0      0      0      0    120      0      0      0
+       0      0      0      0      0      0      0    120      0      0
+       0      0      0      0      0      0      0      0    120      0
+       0      0      0      0      0      0      0      0      0    120
+N mod 2 == S_pol mod 2: False
+L/6:
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+         0        0        0        0        0        0        0        0        0        0
+
+failures: []
+wall seconds: 4.61
+PASS

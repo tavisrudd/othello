@@ -132,12 +132,78 @@ By §§1–2, λ is decided by finite explicit intersection theory on `A`:
    (unit cylinder tensor `Ξ → 0` must force all-even); `ψ_*(1⊗1) = 6Θ`;
    and the §3 divisibility identity.
 
-**Verdict: VERDICT_TBD.**
+**Verdict: λ = 0 for the span-model family — an informed negative.** The
+certificate computes the full 10×10 readout matrix `N = 120·I` integrally
+(`120 ≡ 0 mod 2` in every entry against every pure test), with all controls
+passing: fiberwise `ch`, rigidity (`N ≡ λ·S` with `λ = 0`), the ablation
+(`Ξ → 0` gives zero identically), the duality-pairing divisibility by six,
+`ψ`-sanity, and both sign-discriminating self-intersection controls
+(`[Z]² = c_2(N_{Z/A})·[Z]` with Künneth value `6C_s⊗[pt]_X + 27[pt]_F⊗[line]`,
+compared in honest cohomology through slotwise `a_*`). `N` is t-dependent
+integrally but t-independent mod two, as the twist lemma requires.
+
+Scope of the negative, unchanged from the pass-8 spec §0: this settles the
+λ-bit for the **span-model family `𝒢`**. Transferring the negative to the
+`ℰ`-model universal family needs the mutation comparison (extraction item
+F, deferred). The channel-population question for `c_4(𝒢)` is closed
+negative; the `(1,5)` channel itself remains open only through
+non-span-model sources.
 
 ## 5. Certificate bundle
 
-BUNDLE_TBD
+Replay from the repository root:
 
-## 6. Mystery ledger
+```sh
+nix shell nixpkgs#sage -c sage \
+  notes/2026-08-12-c908-lambda-main-term.sage \
+  --json notes/2026-08-12-c908-lambda-main-term.json \
+  --out notes/2026-08-12-c908-lambda-main-term.out
+```
 
-LEDGER_TBD
+| artifact | SHA-256 |
+|---|---|
+| `notes/2026-08-12-c908-lambda-main-term.sage` | `70ce714cd626265f1f15fbc06d58e4bdbf5f9a08a3501b6d9e121b3bf2dea553` |
+| `notes/2026-08-12-c908-lambda-main-term.out`  | `a51c980b4baca0199182e83977e860e932a0c5c42c22bad032d56d0eb7835236` |
+| `notes/2026-08-12-c908-lambda-main-term.json` | `edbecaf4dc96e27ebbf40147a8b9223d79c5aa0b1b4be9021c71b9e209817d54` |
+
+Development provenance: the certificate was implemented by a sub-agent
+whose session terminated at the two sign-validation controls; its own
+diagnosis (free-slot-model artifact — raw key equality is finer than
+equality of classes since `a^*Θ = 2C_s` is not imposed) was verified and
+the two controls repaired to compare through the script's `normalize`
+(slotwise `a_*`), plus the integral-t-independence control demoted to
+report-only per the spec. The derivation log is preserved in the session
+scratchpad report. The Newton coefficients, GRR shapes, and the degree-two
+duality identity were independently re-derived by hand in a separate
+review (clean).
+
+## 6. Mystery ledger (interim; quota-shortened session)
+
+- **Settled: λ = 0 for the span model**, by an integral computation with the
+  scalar-identity shape `N = 120·I` — the deformation-rigidity pattern
+  (`c·I` with even `c`) extends from the pass-7 product dictionary to the
+  universal-family Chern route. `v_2(120) = 3`: the 2-adic depth is again
+  strictly positive, consistent with the pass-7 "`v_2 ≥ 2` on every
+  deformation-canonical class" lead (here through a non-product source).
+- **Settled (methodological):** codimension-four sheaf defects can never
+  affect a mod-two `c_4`-readout (§2). This retroactively dissolves the
+  pass-8 R-stratum frontier and should be reusable wherever the corpus
+  reads `c_4` mod 2.
+- **Open (the standing crown-adjacent question, sharpened):** with the span
+  model dead, an odd `(1,5)` class must come from outside every source now
+  excluded: pullbacks, exceptional transforms, the span/incidence product
+  dictionary, and `c_4` of the span-model family. The `ℰ`-model mutation
+  comparison (extraction item F) is the last named candidate; after it, the
+  informed conjecture is that the channel obstruction is real and `E`-depth
+  parity is the invariant blocking it.
+- **Open (audit debt, §7):** the reduction theorem's hostile audit.
+
+## 7. Audit status
+
+The reduction theorem (§2) and the control identity (§3) have NOT yet had a
+Fable-grade hostile proof audit (deferred for session-quota reasons; a
+light consistency review only). The audit obligations for the successor:
+the integrality of `δ_4` for K-classes supported in codim ≥ 4; the
+localization step (GRR off the non-Cartier locus); the K-theory sign in the
+duality identity; Lemma 1's support claims. Until that audit, treat the
+verdict as certificate-conditional AND reduction-audit-pending.
