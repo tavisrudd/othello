@@ -64,12 +64,14 @@
       "manuscript_label": "lem:dvr-rank-one",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition"
       ],
       "objects": "Lean currently represents only three coefficients of a symmetric form over a commutative ring.",
       "hypotheses": "Three arbitrary ring elements; no DVR, valuation, ideals, or lattice-membership hypotheses are formalized.",
-      "conclusion": "The division-free three-term coefficient identity underlying the constructive direction.",
-      "cautions": "The midpoint equivalence, exponent choices, membership proof, necessity, and rank-one generation conclusion are absent."
+      "conclusion": "The midpoint inequality supplies parity-compatible exponents, and every multiple of the cross generator has the division-free three-rank-one coefficient decomposition.",
+      "cautions": "The DVR lattice-membership proof, necessity, assembly over all matrix entries, and rank-one generation conclusion are absent."
     },
     {
       "manuscript_label": "thm:all-degree-graph-saturation",

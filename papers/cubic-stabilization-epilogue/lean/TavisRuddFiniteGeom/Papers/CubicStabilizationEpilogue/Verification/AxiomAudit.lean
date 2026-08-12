@@ -8,6 +8,8 @@ currently exported by the reviewer interface.
 -/
 
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport

@@ -28,6 +28,41 @@ theorem rankOne_mixed_coefficient_identity
       { diagonalFirst := 0, mixed := c * a * b, diagonalSecond := 0 } :=
   GraphLattices.SymmetricPair.scaled_rankOne_sub_diagonals c a b
 
+/-- The midpoint inequality produces the parity-compatible exponents used in
+the integral rank-one decomposition. -/
+theorem rankOne_midpoint_exponents
+    (diagonalFirst diagonalSecond cross : ℕ)
+    (midpoint : diagonalFirst + diagonalSecond ≤ 2 * cross) :
+    ∃ t r s : ℕ,
+      diagonalFirst ≤ t + 2 * r ∧
+      diagonalSecond ≤ t + 2 * s ∧
+      cross = t + r + s :=
+  GraphLattices.exists_midpoint_exponents
+    diagonalFirst diagonalSecond cross midpoint
+
+/-- Every multiple of a cross-ideal generator has the explicit division-free
+three-rank-one decomposition supplied by the midpoint inequality. -/
+theorem rankOne_cross_coefficient_decomposition
+    {R : Type*} [CommRing R]
+    (π z : R) (diagonalFirst diagonalSecond cross : ℕ)
+    (midpoint : diagonalFirst + diagonalSecond ≤ 2 * cross) :
+    ∃ t r s : ℕ,
+      diagonalFirst ≤ t + 2 * r ∧
+      diagonalSecond ≤ t + 2 * s ∧
+      GraphLattices.SymmetricPair.sub
+          (GraphLattices.SymmetricPair.sub
+            (GraphLattices.SymmetricPair.scale (z * π ^ t)
+              (GraphLattices.SymmetricPair.rankOne (π ^ r) (π ^ s)))
+            (GraphLattices.SymmetricPair.scale
+              ((z * π ^ t) * π ^ r * π ^ r)
+              GraphLattices.SymmetricPair.firstSquare))
+          (GraphLattices.SymmetricPair.scale
+            ((z * π ^ t) * π ^ s * π ^ s)
+            GraphLattices.SymmetricPair.secondSquare) =
+        { diagonalFirst := 0, mixed := z * π ^ cross, diagonalSecond := 0 } :=
+  GraphLattices.SymmetricPair.cross_coefficient_rankOne_decomposition
+    π z diagonalFirst diagonalSecond cross midpoint
+
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/
 theorem packet_multiplicity_eq_of_preserving_chain
