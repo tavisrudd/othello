@@ -1,0 +1,73 @@
+// C907 B=C=infinity mixed-star initial-form certificate.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-binf-cinf-star-fan.sing
+//
+// Leading support bits are x1,x2,x3,P=1/(x1*x2*x3*b*c),R=b*c.
+// All x_i,b,c are torus units.  Q=1 is a harmless coefficient unit.
+// The graph is saturated before its reduced-stratum tangent-logarithmic
+// critical ideal is tested.
+
+LIB "elim.lib";
+
+ring r = 0,(x1,x2,x3,b,c),dp;
+poly D = x1*x2*x3*b*c;
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+poly H;
+string label;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  label = "";
+  if (mask%2 != 0) { H = H + D*x1; label = label + "x1,"; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; label = label + "x2,"; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; label = label + "x3,"; }
+  if ((mask div 8)%2 != 0) { H = H + 1; label = label + "P,"; }
+  if ((mask div 16)%2 != 0) { H = H + D*b*c; label = label + "R,"; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+    print("mask=" + string(mask) + " support=" + label + " EMPTY");
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      b*diff(H,b),c*diff(H,c);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " FREE");
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " HOLD");
+    }
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("SUMMARY masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("SUMMARY masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+quit;
