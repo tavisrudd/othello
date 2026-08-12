@@ -31,7 +31,10 @@ mechanism, while hostile audits prevented two attractive overclaims.
 7. Integral subgroup norms give a general orbit-axis construction of
    relative elliptic image schemes and canonical transports.  In the cubic
    normalization `n_H=2 i_Hq_H`; the norm constructs the image but not the
-   primitive Gram scalar.
+   primitive Gram scalar.  Roulleau's `H`-stable tangent-space quotient,
+   connected fibres, and the `D_5` character calculation identify its
+   primitive Albanese quotient with the norm image.  This closes the
+   relative Gram `6I-J` and constructs the actual kernel.
 
 ### Rejected overclaims
 
@@ -46,12 +49,12 @@ mechanism, while hostile audits prevented two attractive overclaims.
 
 ## Strongest next theorem
 
-Print the connected-degree-one comparison between Roulleau's relative
-`D_5` elliptic quotient and the primitive norm-image inclusion.  It would
-fix the relative Rosati Gram as `6I-J`, construct the actual finite graph
-kernel over the pencil, and turn the abstract separation locus into a shared
-modular cubic component.  Then compare the norm elliptic two-torsion with the
-explicit Tate/Prym model to transfer the name `r^2=T` to the actual kernel.
+Compare the norm elliptic two-torsion with the explicit Tate/Prym model to
+transfer the name `r^2=T` to the actual kernel.  It is enough to exhibit an
+odd-degree elliptic isogeny: odd isogenies induce isomorphisms on two-torsion,
+and quadratic twists are invisible there.  The cached source presently says
+only “isogenous,” so the parity of its Prym correspondence remains the exact
+source/computation gate.
 
 ## Editorial verdict
 
@@ -70,7 +73,8 @@ cycle--quantum torsor comparison.
 * Settled: the signed cubic coordinate exactly trivializes the elliptic sign
   cover.
 * Settled: fixed modular intersections are finite or shared curves.
-* Open: primitive norm-image/Roulleau comparison and relative Gram.
+* Settled: primitive norm-image/Roulleau comparison, relative Gram, and
+  actual finite kernel.
 * Open: actual-kernel two-torsion comparison with the Tate/Prym model.
 * Open: kernel-linearized relative divisor line bundles.
 * Open: a second moving cubic component; bounded audit found none.
@@ -78,5 +82,5 @@ cycle--quantum torsor comparison.
   alone does not supply one.
 
 **Vibe:** strong, coherent upgrade; the cycle mechanism now feels inevitable.
-The final bridge to a literal shared modular component is one precise
-integral-geometric lemma, not a cloud of lattice computations.
+The relative integral kernel is closed.  Only the explicit modular name of
+its exotic marking remains behind one parity-controlled elliptic comparison.
