@@ -213,17 +213,31 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Recast the tropical ideal condition and arbitrary-depth theorem without a
-   chosen coefficient-line decomposition, or prove that the marked
-   elliptic-power presentation is the optimal intrinsic scope. The
-   block-respecting finite-etale graph case is now fully classified.
-2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
+1. **Top-tier finite-etale crown (active).** Recast the arbitrary-depth
+   theorem in terms of the projective spectral packet of the polarized
+   Lagrangian kernel.  A transverse elliptic ruling should identify this
+   packet with `Spec R[T]`; fractional-linear chart changes should preserve
+   the packet.  Prove that finite etaleness of this intrinsic packet is
+   equivalent to the existence of local orthogonal idempotent blocks and
+   hence to full cohomological `PD(NS)` saturation.  This task explicitly
+   excludes C907 higher stabilization, C908 Chow descent, and C908's
+   non-etale/p-typical classification.
+2. Prove an open/moduli statement for the finite-etale kernel locus in the
+   polarized Hecke correspondence and construct broad polarized-
+   indecomposable families on it.  Seek an integral Lefschetz-line or Hodge
+   consequence beyond the existing cubic minimal class without claiming a
+   Chow identity.
+3. Recast the tropical ideal condition and its exact defect under every
+   allowed transverse-ruling change, and decide whether the defect modules
+   glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
+   do not, prove that their vanishing does.
+4. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
-3. Integrate the all-degree finite-etale theorem into the epilogue only after
+5. Integrate the all-degree finite-etale theorem into the epilogue only after
    the current prose cost is compared against the headline cycle proof; keep
    the orbit classification and indecomposable families as successor material
    unless they materially improve the narrative.
-4. Treat the uniform graded-support theorem as C907's exact algebraic
+6. Treat the uniform graded-support theorem as C907's exact algebraic
    acceptance surface; do not restart ordinary atom or multiplicity searches.
 
 ## Acceptance and stopping conditions
