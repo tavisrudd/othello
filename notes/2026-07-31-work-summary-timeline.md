@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-11**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-12**, with quiet stretches Jun 28–30 and Jul 27.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1077,6 +1077,17 @@ marking rather than absolute.
   latest sentinels. Paper I moved onto the separated three-repository boundary, with its
   regeneration split from verification, its release certificate recorded, and the sealed Q11 bridge
   pin refreshed.
+
+- **Aug 12 — C909 tightens the cubic quantum boundary before any epilogue integration.** A direct
+  small-quantum calculation shows that the odd `H³` summand has formal monodromy one, so together
+  with Cai's even blocks the cubic sixth-root multiplicity is exactly `ν₆ = 2` at that point. Its
+  continuation requires a parity-equivariant formal-isomonodromy theorem on the connected reduced
+  unramified spectral component; it is not licensed by small-slice vanishing alone. The hostile
+  editorial audit therefore retained the proposed dimension-`≤4` birational-invariance and trivial
+  `P¹`-stabilization route only with its KKPYY and low-dimensional-centre hypotheses explicit, and
+  demoted the proposed `V₁₄` equality to conditional nonvanishing pending comparison-locus,
+  atom-transport, and full-atom upper-bound closure. No manuscript, Lean, mirror, or export edit was
+  made.
 
 ---
 

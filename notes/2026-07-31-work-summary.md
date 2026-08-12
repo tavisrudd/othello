@@ -1240,13 +1240,16 @@ geometrically. Deliberately not a sixth numbered paper. Priority closure is open
   Steenrod square. Squarefree symmetric slope ⇒ primitive at every prime; the converse is false at
   odd primes, so the live classification is by `p`-typical nilpotent height.
 - **The irrationality half (one-step stabilization).** "Quantum" means quantum cohomology; the
-  computations are classical and exact. Cai's formal-monodromy block has exponents `±1/6`; a
-  nef-canonical surface block admits fractional exponents only `0` or `1/2`, and every
+  computations are classical and exact. At the small quantum point the odd `H³` summand is
+  quantum-trivial, and Cai's even calculation gives `ν₆ = 2`; equality on a connected reduced
+  unramified parity-fixed spectral component needs the stated formal-isomonodromy and atom-comparison
+  transport. With the KKPYY blow-up/projective-bundle identities and low-dimensional spectral lemma,
+  a nef-canonical surface block admits fractional exponents only `0` or `1/2`, and every
   weak-factorization centre in a fourfold has dimension `≤ 2`, so the block cannot cancel: **`X × P¹`
-  is irrational for every smooth cubic threefold.** The bridge invariant is the additive multiplicity
-  `ν₆` of primitive sixth-root formal-monodromy eigenvalues (cubic atom `ν₆ = 2`, every admissible
-  centre `ν₆ = 0`), not a Boolean flag. Full stable irrationality is **not** proved and the argument
-  first fails at `m = 2`, where cubic self-carrier centres enter. Source-level audit fixed the
+  is irrational for every smooth cubic threefold under that quantum package.** The bridge invariant
+  is the additive multiplicity `ν₆` of primitive sixth-root formal-monodromy eigenvalues (every
+  admissible centre `ν₆ = 0`), not a Boolean flag. Full stable irrationality is **not** proved and the
+  argument first fails at `m = 2`, where cubic self-carrier centres enter. Source-level audit fixed the
   ambient object: the reduced cubic quantum module is the irreducible hypergeometric
   `H(0,0,0,0;1/3,2/3)` with local formal ranks `1,1,2`, killing the old plan of globalizing the
   rank-two block as a proper subobject, while the local sectorial Stokes lift has ordered ranks
@@ -2052,9 +2055,13 @@ closing normalization–residue theorem identifies the golden orientation torsor
 universally `CH₀`-trivial with the integral Hodge conjecture for one-cycles, and `X × P¹` is proved
 irrational for every smooth cubic threefold. What is missing for the epilogue's headline is the odd
 index of the relative rationally connected Abel–Jacobi lift — an exact 1-vs-2 dichotomy — plus
-relative rigidification, deck descent, boundary control, and a full priority audit. The plan is one
-unnumbered epilogue, not a sixth numbered paper, and nothing from this programme may enter the
-frozen manuscripts before those gates close.
+relative rigidification, deck descent, boundary control, and a full priority audit. The Aug 12
+integration blueprint additionally proposes a dimension-\(\le4\) birational `ν₆` lemma and a
+genus-eight `V₁₄` application. They are not current theorem claims: the safe `V₁₄` outcome is
+conditional nonvanishing until the all-smooth comparison locus, atom transport, and full-atom upper
+bound close; its proposed equality `ν₆(V₁₄)=2` is not yet available. The plan is one unnumbered
+epilogue, not a sixth numbered paper, and nothing from this programme may enter the frozen manuscripts
+before those gates close.
 
 **Adjacent problems, opened deliberately and bounded.** For Hadamard order 668, 25 of the 30
 mod-3-compatible fixed common multiplier subgroups are impossible — a published 21-subgroup

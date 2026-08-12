@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-11
+**Date:** 2026-08-12
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -1209,15 +1209,19 @@ odd primes, so the live classification is by \(p\)-typical nilpotent height.
 
 The companion half concerns the quantum-monodromy atom of a cubic threefold,
 where "quantum" refers to quantum cohomology and the computations are classical
-and exact. Cai's formal-monodromy block has exponents \(\pm1/6\); a
-nef-canonical surface block can only have fractional exponents \(0\) or \(1/2\),
-and every weak-factorization centre in a fourfold has dimension at most two, so
-the cubic block cannot be cancelled. Hence **\(X\times\mathbf P^1\) is
-irrational for every smooth cubic threefold**. The bridge invariant is the
-additive multiplicity \(\nu_6\) of primitive sixth-root formal-monodromy
-eigenvalues, not a Boolean flag: the cubic zero atom has \(\nu_6=2\), the
-projective-bundle formula carries it into the product with coefficient two, and
-every admissible centre has \(\nu_6=0\).
+and exact. At the small quantum point, the odd \(H^3\)-summand is
+quantum-trivial and Cai's even calculation gives exactly \(\nu_6=2\). The
+equality persists on a connected reduced unramified parity-fixed spectral
+component once the required formal-isomonodromy and atom-comparison transport is
+supplied. With the KKPYY blow-up/projective-bundle identities and the
+low-dimensional spectral lemma in force, a nef-canonical surface block can only
+have fractional exponents \(0\) or \(1/2\), and every weak-factorization centre
+in a fourfold has dimension at most two, so the cubic block cannot be cancelled.
+Thus **\(X\times\mathbf P^1\) is irrational for every smooth cubic threefold**
+under that stated quantum package. The bridge invariant is the additive
+multiplicity \(\nu_6\) of primitive sixth-root formal-monodromy eigenvalues,
+not a Boolean flag; the projective-bundle formula carries it into the product
+with coefficient two, and every admissible centre has \(\nu_6=0\).
 
 Full stable irrationality is **not** proved and starts to fail this argument at
 \(m=2\), where cubic self-carrier centres enter. A source-level audit also
@@ -3278,6 +3282,11 @@ are vacuous because a natural number can encode the whole residual.
   route to it is closed by an exact calculation. Two uniform theorems were
   extracted — the Jordan-scalar minimal-class theorem and the prime-by-prime
   boundary on gluing defects — and priority closure is still open for most of it.
+  A new integration blueprint proposes a low-dimensional birational
+  \(\nu_6\)-invariance lemma and a genus-eight \(V_{14}\) application, but neither
+  is yet an epilogue claim: the latter is only conditionally nonvanishing until
+  its all-smooth comparison locus, atom transport, and full-atom upper bound
+  are source-closed.
 - **The golden conference operator source programme:** mathematics proved and
   frozen across the cubic, polar, determinantal, pure-spinor, Boolean,
   measurement, fermionic, anomaly, Clifford, and lattice shadows, with the
