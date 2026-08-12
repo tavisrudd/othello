@@ -286,6 +286,29 @@ application or an exact obstruction to necessity.
     integral Hodge/product quotient is now classified for every tower of
     dimension `g<=7`.  Dimension eight, middle codimension four, is the first
     place where the unresolved eight-slot filtered-web minor appears.
+13. **Modular separation-locus synthesis.** Fixed finite-etale graph data
+    define finite-level modular presentation stacks and constructible Hecke
+    images. Pullback along the cubic period map gives a marked separation
+    locus: every point has saturated Lefschetz divided powers, hence an
+    algebraic cubic minimal class and universal `CH_0`; independently its
+    product with `P^1` is irrational by the all-cubic theorem. For fixed data
+    the intersection is finite unless the entire modular graph curve is a
+    shared cubic component, in which case Torelli rigidifies its normalized
+    cubic period curve.
+14. **Complementary modular resolvents.** The six-axis five-packet is the
+    smallest Borel/nonsplit-Cartan packet:
+    `P^1(F4)=P^1(F2) + {omega,omega^2}`. Over `X_0(3)`, the rational triple is
+    the `X_0(6)` root cover and the exotic pair is the congruence sign cover
+    `r^2=T`; their fibre product is the full mod-two splitting curve. For the
+    signed cubic parameter `T=81t^2`, so `r=9t`: its outer marking is exactly
+    the pulled-back exotic graph marking. The odd-prime orbit theorem is
+    general, but integral saturation still requires an independently supplied
+    self-adjoint finite-etale lift at every block.
+15. **Unity boundary.** The cycle and quantum packets share an Eisenstein
+    quadratic polynomial after sign normalization, but no common geometric
+    action or torsor comparison is proved. The clean unity theorem is a
+    modular intersection/separation theorem, not a common invariant. No
+    second moving cubic component was found in the bounded source audit.
 
 ## Highest-EV next moves
 
@@ -311,13 +334,19 @@ application or an exact obstruction to necessity.
    allowed transverse-ruling change, and decide whether the defect modules
    glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
    do not, prove that their vanishing does.
-4. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
+4. **Close the modular component theorem.** Print the relative Fano/Albanese
+   six-axis quotient, finite graph subgroup, and algebraic lift of the signed
+   `A_5` pencil to one fixed-data presentation stack. Then combine
+   `T=81t^2`, `r=9t`, and Torelli to identify its normalized period component.
+   Separately audit relative coefficient line bundles and a horizontal
+   minimal cycle after finite level; do not claim unmarked Chow descent.
+5. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
-5. Integrate the all-degree finite-etale theorem into the epilogue only after
+6. Integrate the all-degree finite-etale theorem into the epilogue only after
    the current prose cost is compared against the headline cycle proof; keep
    the orbit classification and indecomposable families as successor material
    unless they materially improve the narrative.
-6. Treat the uniform graded-support theorem as C907's exact algebraic
+7. Treat the uniform graded-support theorem as C907's exact algebraic
    acceptance surface; do not restart ordinary atom or multiplicity searches.
 
 ## Acceptance and stopping conditions
