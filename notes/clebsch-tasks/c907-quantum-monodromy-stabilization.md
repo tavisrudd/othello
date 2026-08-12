@@ -134,3 +134,38 @@ search stop condition under `notes/research-reproducibility-conventions.md`.
 - Do not start Lean work without a separately authorized formalization task.
 - Literature and formulas are read from the shared cache first; any newly
   fetched source is added to that cache.
+
+## Queued follow-on: atomic one-step abstraction and bounded Fano scan
+
+Author-approved 2026-08-11 as part of C907, from an external reviewer
+suggestion on the cubic-stabilization epilogue.  Two halves, in order.
+
+1. **Abstraction theorem.**  State and prove the general form of the closed
+   one-step result: for a smooth projective threefold `X`, if the atomic
+   formal-monodromy spectrum of `X` contains a class not realizable by atoms
+   of varieties of dimension at most two, then `X x P^1` is irrational.  The
+   existing bridge proof already has the required architecture — the additive
+   primitive-sixth-root multiplicity `nu_6`, projective-bundle persistence
+   with coefficient two, and vanishing on all fourfold weak-factorization
+   centers, which have dimension at most two.  The only cubic-specific input
+   is that the available fractional exponents in dimension at most two are
+   `0` and `1/2`; the general statement must name the exact
+   dimension-two-unrealizability hypothesis that replaces it.  The cubic
+   theorem becomes an application.
+2. **Bounded Fano scan.**  Scan Fano threefolds (complete quantum-period
+   data exists in dimension three) for atoms satisfying the hypothesis, to
+   obtain one-step irrationality results beyond cubics.  Gate, named at
+   queue time: a regularized quantum period alone does not produce the
+   requisite big-quantum atom; the scan needs the same
+   local-quantum-D-module-to-geometric-atom theorem as C907's live
+   residual-center mutation-system identification gate.  Scan results below
+   that gate are reconnaissance, not theorems.
+
+Scope notes fixed at queue time: the recorded closure of the Fano-threefold
+database route applies only to the `m = 2` full-stability gate on cubics,
+where arbitrary threefold centers arise; it does not close this one-step
+(`m = 1`) use, where centers stay at dimension at most two.  All existing
+C907 boundaries apply unchanged.  This follow-on is not started until the
+current gold-architecture targets (analytic/integral `T1` lift and the
+arbitrary-center `+/-1/6` length bound) reach their next bounded verdicts,
+unless the author reorders.
