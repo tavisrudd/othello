@@ -71,12 +71,12 @@ gives
 
 so this class has exact order two in the divided-square/product quotient.
 
-Other coefficient coordinates cannot repair the defect. Restrict the
-cohomology class and every divisor product to the abelian subtorus determined
-by the two coefficient axes: all terms involving another axis vanish, while
-the displayed two-plane calculation remains. Hence failure of a single
-dyadic midpoint inequality produces an actual global degree-two
-divided-power defect.
+This proves an actual defect in the local two-axis coefficient quotient. It
+also proves the corresponding global cohomological defect whenever the marked
+coefficient two-plane descends to an abelian subtorus of the graph quotient,
+or whenever an algebraic cohomological projector onto that plane is supplied.
+Such a subtorus need not descend for a mixed or unequal-depth graph, so no
+unconditional global restriction argument is asserted here.
 
 At odd primes, the cross-by-cross coefficient `2` is a unit; (4) contains
 `p^{2e_ij}`, so this degree-two argument gives no obstruction. Failure of
@@ -85,10 +85,10 @@ requires a higher-degree or different functional.
 
 ## Consequence
 
-For dyadic symmetric ideal coefficient lattices, tropical midpoint convexity
-is equivalent not only to rank-one generation but to the absence of these
-pairwise degree-two divided-square defects. Every failed inequality has a
-canonical order-two witness supported on its coordinate plane.
+For dyadic symmetric ideal coefficient lattices, every failed tropical
+midpoint inequality has a canonical order-two divided-square witness in its
+local two-axis coefficient quotient. It is a global defect under the stated
+subtorus/projector hypothesis.
 
 This is a local cohomological statement. It assumes the coefficient-plane
 restriction is realized in the marked elliptic-power presentation and makes
@@ -98,7 +98,9 @@ no Chow assertion.
 
 * **Settled:** the exact rank-one cokernel is the direct sum (2).
 * **Settled:** every dyadic tropical failure produces an actual order-two
-  divided-square defect.
+  divided-square defect in the local two-axis coefficient quotient.
+* **Open:** descend that witness globally without assuming a coefficient
+  subtorus or an algebraic projector.
 * **Open:** at odd primes, identify the first degree detecting a failed
   midpoint inequality and compute its exact order.
 * **Open:** package the pairwise dyadic witnesses without a chosen coefficient
