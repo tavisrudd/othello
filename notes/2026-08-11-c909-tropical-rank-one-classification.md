@@ -55,6 +55,24 @@ chosen coefficient-line decomposition is still part of the datum; (3') does
 not assert invariance under arbitrary changes that destroy the
 matrix-of-ideals presentation.
 
+It is, however, intrinsic to the **filtered spectral packet**. Rescaling the
+`i`-th spectral line by `p^{r_i}` changes the valuation data by
+
+\[
+ a_i\longmapsto a_i+2r_i,
+ \qquad
+ e_{ij}\longmapsto e_{ij}+r_i+r_j.
+ \tag{3''}
+\]
+
+Both sides of (3) change by `2r_i+2r_j`, so the inequality and every defect
+length `m_ij-e_ij` are invariant. Galois descent merely permutes the spectral
+lines. Thus the tropical PSD cone and its interval-valued defect descend from
+a chosen split eigenbasis to a finite-etale spectral packet equipped with its
+valuation filtration. What remains presentation-dependent is the choice of
+the elliptic tensor structure and graph packet itself, not the normalization
+of its spectral lines.
+
 ## Sufficiency
 
 Diagonal generators `p^{a_i}e_ie_i^t` are rank one. Fix `i!=j` and put
@@ -173,8 +191,9 @@ even when the whole lattice is not rank-one generated.
   obstruction.
 * **EJ:** the graph problem becomes a tropical valuation test rather than a
   degree-by-degree determinant calculation.
-* **Open:** compute the exact valuation matrices of arbitrary-depth
-  finite-etale graph packets and decide whether midpoint convexity is
-  automatic.
+* **Settled:** the criterion and defect lengths descend under spectral-line
+  rescaling and Galois permutation, giving a filtered-packet formulation.
+* **Settled elsewhere in C909:** arbitrary-depth block-respecting
+  finite-etale graph packets satisfy midpoint convexity automatically.
 * **Open:** determine whether failure of midpoint convexity yields an actual
   divided-power defect class, not merely failure of rank-one generation.
