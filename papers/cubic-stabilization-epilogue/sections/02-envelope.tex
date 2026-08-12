@@ -1,94 +1,14 @@
-\section{The integral envelope and the exotic cubic sheet}
+\section{The six-axis polarization and the exotic packet}
 \label{sec:envelope}
 
 Let \(\Omega\) be the six conjugate \(D_5\)-subgroups of \(A_5\), equivalently
-the six Sylow-\(5\) subgroups with their normalizers.  Put
-\[
- A(\Omega)=\ker\bigl(\Z^\Omega\xrightarrow{\sum}\Z\bigr),
- \qquad A(\Omega)^\vee=\Hom(A(\Omega),\Z).
-\]
-The perfect evaluation pairing defines a unimodular alternating form on
-\[
- \mathcal H_{\mathrm{ref}}(\Omega)
-   =A(\Omega)^\vee e\oplus A(\Omega)f,
- \qquad
- \langle xe,yf\rangle=y(x).
-\]
-This is the hyperbolic symplectic envelope of the oriented six-set.
-
-\begin{proposition}[Universal envelope]
-\label{prop:universal-envelope}
-The construction \(\Omega\mapsto\mathcal H_{\mathrm{ref}}(\Omega)\) is
-functorial for permutations of \(\Omega\).  Rationally it is the unique
-rank-ten symplectic \(A_5\)-module whose two Lagrangians are copies of the
-standard five-dimensional constituent and whose pairing restricts to the
-root--weight evaluation pairing.
-\end{proposition}
-
-\begin{proof}
-The permutation lattice and its augmentation kernel are functorial.  The
-evaluation pairing between \(A(\Omega)\) and its dual is perfect, so the
-displayed alternating form is unimodular.  Over \(\Q\), the augmentation
-module is absolutely irreducible and its invariant symmetric form is unique
-up to scale.  Once the two specified Lagrangians are identified with the
-root constituent and its dual, Schur's lemma writes the rational symplectic
-module as \(A(\Omega)_\Q\otimes U\), where \(U\) is a symplectic plane.  The
-hypothesis that these retained integral Lagrangians pair perfectly then
-identifies them with \(A(\Omega)\) and \(A(\Omega)^\vee\); it is this
-hypothesis, not Schur's lemma alone, that fixes the root--weight lattice.
-\end{proof}
-
-The finite golden orientation enters at the prime two.  Let
+the six Sylow-\(5\) subgroups with their normalizers, and put
 \[
  H_2=\operatorname{Aug}(\F_2^\Omega)/\langle\mathbf1\rangle.
 \]
-Then \(H_2\) is simple and \(\End_{A_5}(H_2)=\F_4\).  A normalized conference
-operator acts integrally on \(\Z^\Omega\).  After labeling \(\Omega\), one
-switching representative is
-\[
-B=\begin{pmatrix}
-0&1&1&1&1&1\\
-1&0&1&1&-1&-1\\
-1&1&0&-1&1&-1\\
-1&1&-1&0&-1&1\\
-1&-1&1&-1&0&1\\
-1&-1&-1&1&1&0
-\end{pmatrix},
-\qquad B^2=5I.
-\]
-Passing to
-the canonical saturation
-\[
- D_6^\vee=\Z^\Omega+\Z\frac{\mathbf1}{2},
- \qquad \varphi=\frac{I+B}{2},
-\]
-gives \(\varphi^2-\varphi-1=0\).  Its reduction on the commutator heart is
-one of the two primitive scalars \(\omega,\omega^2\in\F_4\), and replacing
-\(B\) by \(-B\) applies Frobenius.
+The module \(H_2\) is simple and \(\End_{A_5}(H_2)=\F_4\).
 
-\begin{proposition}[Golden selection of the exotic pair]
-\label{prop:golden-exotic}
-The two orientations of the conference class determine the two primitive
-scalars in \(\End_{A_5}(H_2)=\F_4\).  Under orientation reversal,
-\[
- B\longmapsto-B,
- \qquad \omega\longmapsto\omega^2.
-\]
-Thus the golden-orientation torsor is canonically the Frobenius torsor of
-the exotic two-primary principal gluings.
-\end{proposition}
-
-\begin{proof}
-Every column of \((I+B)/2\) has the same half-integral class modulo
-\(\Z^\Omega\), so \(D_6^\vee\) is the least stable over-lattice.  The
-commutator submodule of \(D_6^\vee/2D_6^\vee\) is the four-dimensional
-six-point heart and its quotient is a trivial \(\F_4\)-line.  The extension
-has no invariant \(\F_4\)-line, so the restriction of \(\bar\varphi\) to the
-heart is primitive.  Finally \((I-B)/2=1-\varphi\), and in characteristic
-two \(1-\omega=\omega^2\).
-\end{proof}
-
-We now recall the geometric source of the same lattice.  Let \(S\) be the
+The six axes arise from the Fano surface.  Let \(S\) be the
 Fano surface of a smooth member of the \(A_5\)-pencil and
 \((J,\Theta)=\Alb(S)\) its intermediate Jacobian.  Each of the six
 \(D_5\)-subgroups gives an elliptic quotient \(q_H:J\to E_H\) and its Rosati
@@ -346,14 +266,10 @@ At three the coefficient heart \(H_3\) is simple and
 parametrized by \(\PP^1(\F_3)\), all scalar in a suitable graph chart.
 \end{proof}
 
-Proposition~\ref{prop:golden-exotic} labels the two exotic members by the
-finite golden orientation.
-
 For the cycle-theoretic argument, the unordered pair is enough.  Both members
 act on the heart with the same squarefree minimal polynomial
-\(t^2+t+1\).  The golden orientation supplies the finer marked identification
-with one member of the pair, but Theorem~\ref{thm:six-axis-divided-powers} uses
-only the conclusion that the geometric kernel is not one of the three
+\(t^2+t+1\).  Theorem~\ref{thm:six-axis-divided-powers} uses only the
+conclusion that the geometric kernel is not one of the three
 \(\F_2\)-rational gluings.  At three it uses only scalarity of the possible
 \(A_5\)-stable graphs, not the finer monodromy selection.
 

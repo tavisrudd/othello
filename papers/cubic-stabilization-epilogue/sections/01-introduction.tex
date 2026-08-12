@@ -18,24 +18,14 @@ independent mechanisms act on the same \(Y\).  The intermediate Jacobian of
 has primitive-sixth framed formal monodromy; Iritani's quantum blowup formula
 shows that its multiplicity survives one stabilization.
 
-Here ``nonstandard'' has a precise representation-theoretic meaning.  Let
-\(W_5\) be the irreducible five-dimensional complex representation of
-\(A_5\), with character \((5,1,-1,0,0)\) on the classes
-\((1,2A,3A,5A,5B)\).  The symmetric-cube character formula gives
-\[
- \dim \bigl(\operatorname{Sym}^3W_5^*\bigr)^{A_5}=2.
-\]
-Thus \(\PP((\operatorname{Sym}^3W_5^*)^{A_5})\cong\PP^1\) is a pencil of cubic
-hypersurfaces in \(\PP(W_5)\).  We denote its smooth locus by \(B^\circ\).
-It is the complement of the discriminant in the pencil and is connected.
-This is Hartlieb's irreducible-character component \(M_{H_1}\), as opposed
-to the component coming from the reducible permutation representation
-\(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.
-
 \begin{theorem}[Separation after one stabilization]
 \label{thm:separation-family}
-Let \(\mathcal X\to B^\circ\) be the smooth family in the nonstandard
-\(A_5\)-invariant pencil of cubic threefolds.  For every
+Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module.  Inside
+\[
+ \PP\bigl((\operatorname{Sym}^3W_5^*)^{A_5}\bigr).
+\]
+let \(B^\circ\) be the smooth locus.  For the resulting family
+\(\mathcal X\to B^\circ\) and every
  \(b\in B^\circ(\C)\),
 \[
  \mathcal X_b\text{ is universally }CH_0\text{-trivial},
@@ -53,40 +43,41 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
+The same invariant also gives one-step irrationality for every smooth prime
+Fano threefold of genus eight; see Corollary~\ref{cor:v14-one-step}.
+
+The invariant cubic space in Theorem~\ref{thm:separation-family} is
+two-dimensional.  Indeed, the character of \(W_5\) is
+\((5,1,-1,0,0)\) on the classes \(1,2A,3A,5A,5B\).  The symmetric-cube
+character formula gives
+\[
+ \dim \bigl(\operatorname{Sym}^3W_5^*\bigr)^{A_5}=2.
+\]
+Thus its projectivization is a pencil with connected smooth locus
+\(B^\circ\).  Hartlieb denotes it by \(M_{H_1}\); it is not the component
+associated with \(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.
+
 We do not claim that \(X\) is stably irrational.  From the second
 stabilization onward, weak-factorization centers can themselves have cubic
 dimension, and the low-dimensional exclusion used here no longer applies.
 
 \subsection*{How the two proofs meet}
 
-The cycle-theoretic half starts from six elliptic quotients of the Fano
-surface.  Their Rosati Gram matrix is \(6I-J\), so any five axes give an
-isogeny \(E^5\to J(X)\) of polarization type \((1,6,6,6,6)\).  The
-two-primary principal kernels form \(\PP^1(\F_4)\).  Three retain the full
-simplex symmetry; the other two are exchanged by Frobenius and have
-stabilizer \(A_5\).  The cycle argument needs only this unordered exotic
-pair.  At two its graph slope has minimal polynomial \(t^2+t+1\); at three
-every \(A_5\)-stable graph is scalar.  The graph equations turn both local
-divisor lattices into rank-one-generated matrix-of-ideals lattices.  Because
-the corresponding rank-one divisors have square zero, every divided power
-expands as an ordinary product, including \(\Theta^4/4!\).
+The cycle argument starts from six elliptic quotients of the Fano surface.
+Their Rosati Gram matrix is \(6I-J\), and the geometric kernel lies in the
+exotic two-point complement of \(\PP^1(\F_2)\subset\PP^1(\F_4)\).  Its local
+graph slopes are finite etale at two and three.  The graph equations then
+make the descended divisor lattices rank-one generated.  Since rank-one
+coefficient divisors have square zero, \(\Theta^4/4!\) is an ordinary
+integral divisor product.
 
-The quantum half uses a different invariant.  We count primitive sixth-root
-eigenvalues of framed formal monodromy on the numerical small even quantum
-connection.  Cai's cubic calculation gives a nonzero count, and the
-projective-bundle formula doubles it on \(X\times\PP^1\).  Iritani's blowup
-comparison is additive for this count.  Its center Novikov map can be
-noninjective; formal divisor tags restore injectivity and the divisor equation
-returns to the original specialization.  Surface classification then shows
-that every center of dimension at most two contributes zero.
-
-Finite-etale graph saturation controls every divided power of the marked
-divisor lattice.  For the actual six-axis packet, a separate four-slot
-calculation shows that the ambient integral Hodge lattice is also
-divisor-generated at non-CM fibres.  The second argument is a direct
-weak-factorization calculation with the framed quantum invariant.  The
-special \(A_5\)-geometry enters only in the first argument; the second applies
-to every smooth cubic threefold.
+The quantum argument counts primitive sixth-root eigenvalues of framed formal
+monodromy on the numerical small even quantum connection.  Iritani's
+operation formulas make this count additive through weak factorization;
+divisor tags repair a potentially noninjective center specialization.
+Cai's cubic calculation is nonzero, while every center of dimension at most
+two contributes zero.  The special \(A_5\)-geometry enters only in the cycle
+argument; the quantum theorem applies to every smooth cubic threefold.
 
 \subsection*{Relation with earlier rationality results}
 
@@ -116,14 +107,12 @@ inside that union.  Here the six elliptic
 quotients supplied by Roulleau and the special period locus isolated by
 Hartlieb make the class explicit: here it belongs to the
 ordinary integral divisor-product lattice for every smooth member of the
-nonstandard \(A_5\)-pencil.  The stronger equality of the integral Hodge and
-divisor-product lattices at non-CM fibres is proved by the same local graph
-calculation; the special CM fibres are not included in that stronger claim.
+nonstandard \(A_5\)-pencil.
 
 \subsection*{Proof map}
 
-Section~\ref{sec:envelope} constructs the rank-ten symplectic envelope and
-identifies the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves
+Section~\ref{sec:envelope} computes the six-axis polarization and identifies
+the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves
 the local divisor-product theorem and applies it to the primitive minimal
 class.  Section~\ref{sec:one-step} proves Theorem~\ref{thm:every-cubic} from
 formal monodromy and weak factorization.  The final section combines the two
