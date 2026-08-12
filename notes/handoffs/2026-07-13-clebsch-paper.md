@@ -142,10 +142,18 @@ C909 also isolates the minimal algebraic target: a strict graded measure over
 width one on every threefold formally proves `X x P^2` irrational.  Thus C907
 does not need a full enriched-atom classification, but it must construct this
 three-level quotient presentation-independently and prove strict Gamma/Rees/
-Stokes compatibility.  On the cycle side, C909 proves finite-etale graph
-cofactor saturation through arbitrary `p^a` blocks, with factorial-active
-nonscalar root-weight families; nonsplit trace-transfer examples are pending
-one independent dyadic quadratic-form audit before manuscript promotion.
+Stokes compatibility.  C909 has since made the algebraic target uniform in
+`m`: absolute support degrees `0,...,s-3` on every `s`-dimensional cubic
+carrier force all endpoint terms of `X x P^m` outside the weak-factorization
+center span.  On the cycle side, C909 proves finite-etale graph cofactor
+saturation through arbitrary `p^a` blocks and, more strongly, full
+divided-power saturation of the Neron--Severi lattice on pure equal-depth
+blocks.  The mechanism is a general matrix-of-ideals theorem:
+`I_ij subset I_ii intersect I_jj` forces integral rank-one square-zero
+generation.  Factorial-active nonsplit trace-transfer root-weight families
+are now independently audited and polarized-indecomposable.  The live
+extension gate is compatible slotwise splitting across unequal graph depths;
+nilpotent carry remains C908.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
