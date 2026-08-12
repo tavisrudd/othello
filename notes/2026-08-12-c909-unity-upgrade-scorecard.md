@@ -31,6 +31,13 @@ Status: interim editorial mathematics assessment; no manuscript edit
    `Hdg^4/P^2=Hdg^6/P^3=(Z/p^a)^5` and zero codimension-four defect.  The
    theorem is about the entire Lefschetz algebra, not a hidden claim of full
    integral Hodge generation.
+7. **Orbit-axis family bridge (conditional on one normalization lemma).**
+   Integral subgroup norms construct the relative elliptic image schemes and
+   canonical transports among the six axes.  Five primitive inclusions then
+   give the relative isogeny.  In the cubic normalization the raw `D_5` norm
+   is twice the primitive Rosati endomorphism; proving that its image inclusion
+   and adjoint agree with Roulleau's relative elliptic fibration fixes the
+   `(5,-1)` Gram and closes the actual-kernel lift.
 
 ## Strength assessment
 
@@ -96,6 +103,8 @@ Putting them all in the epilogue would dilute the cubic theorem.
    projective monodromy and stack inertia at odd primes;
 2. print the relative six-axis isogeny/graph lift before calling the `A_5`
    curve a component of a fixed-data stack;
+   the orbit-axis theorem reduces this to the primitive Roulleau
+   quotient/norm-image comparison and the Tate/Prym two-torsion comparison;
 3. either prove the relative line-bundle descent lemma or retain pointwise
    saturation only;
 4. bounded priority audit for the combined Cartan-level integral saturation
