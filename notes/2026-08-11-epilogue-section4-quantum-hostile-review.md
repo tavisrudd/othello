@@ -133,3 +133,58 @@ argument no longer closes.  The text states exactly this boundary.
   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
 
 Cache verification on 2026-08-11 reported 687 entries and zero hash problems.
+
+## Closure re-review — 2026-08-11
+
+**Verdict: MAJOR.** The repaired local calculations and the final
+weak-factorization argument close, but `lem:formal-isomonodromy` still does not
+prove that `nu_6` descends through the connected-component clause of KKPYY
+Definition 5.21.
+
+The remaining defect is exact.  Current lines 50--54 correctly quote KKPYY
+Remark 3.14 only **on the unique Witt integral manifold `W` through a rigid
+even point**, whose tangent space is spanned by the Frobenius powers of the
+Euler field.  Definition 5.21(2), however, declares two geometric atomic
+F-bundles equivalent whenever their lifts lie anywhere in the same connected
+component of the reduced unramified spectral cover over `U_X`.  KKPYY do not
+identify that component with the pullback of `W`, and `W` can have strictly
+smaller dimension than the ambient fixed base.  Thus line 55 (“Pulling this
+statement to a connected component ... gives the same conclusion along that
+component”) does not follow from Remark 3.14.  The citation proves constancy
+along a Witt leaf, not in directions transverse to it.  Lines 64--83 therefore
+still do not establish a well-defined homomorphism on the free group of
+Definition 5.21 atom classes.
+
+**Required repair:** prove, or cite a parameterized formal-isomonodromy theorem
+proving, constancy of the *descended* formal-monodromy conjugacy class in every
+direction of each connected component used by Definition 5.21.  The proof must
+verify simultaneous good formal decomposition/constant ramification and
+descent across that full component, not merely along `W`.  Alternatively, show
+that the relevant component is covered by overlapping Witt integral manifolds;
+Remark 3.14 itself does not say this.  This is load-bearing because every later
+application of `nu_6` to the atom group uses the corollary.
+
+The other requested gates now pass:
+
+- **Intrinsic definition, conditional pass:** lines 21--41 repair the former
+  ramification ambiguity by using the descended formal-monodromy operator on
+  the original `u`-disc.  Ordinary KKPYY F-bundle isomorphisms fix `u`, as
+  lines 71--83 now state.
+- **Cubic pass:** lines 99--112 accurately use Cai's even rank-two block only
+  as a parity-preserved submodule of the full KKPYY zero atom and claim the
+  sufficient lower bound `nu_6(alpha_X) >= 2`; they no longer claim that Cai
+  computes the odd summand.
+- **Curves pass:** lines 114--120 separate `P^1`, use Cai Proposition 7 only
+  for the positive-genus even block, and account for the classical odd block.
+  The resulting eigenvalue set `{1,-1}` is correct.
+- **Surfaces pass, conditional on atomic descent:** lines 120--131 state the
+  normalized base-point hypothesis of KKPYY Claim 6.15, undo the integral and
+  half-parity corrections, and exhaust the `K`-nef, ruled/`P^2`, and point-
+  blowup cases.
+- **Weak factorization pass:** lines 134--160 have the correct factor `2`,
+  center dimensions, and no-cancellation argument.  For exact source hygiene,
+  line 144 should cite KKPYY Proposition 5.22(2) for the displayed blowup
+  chemical formula; Proposition 5.17 is the derived nonrationality criterion.
+  This citation correction is minor and does not affect the argument.
+
+No manuscript changes were made in either review.
