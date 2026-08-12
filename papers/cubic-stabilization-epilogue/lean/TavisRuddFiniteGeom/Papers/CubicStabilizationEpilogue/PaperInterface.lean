@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -151,6 +152,26 @@ theorem packet_multiplicity_eq_of_preserving_chain
     (chain : Quantum.PreservingChain packet source target) :
     packet.multiplicity source = packet.multiplicity target :=
   chain.multiplicity_eq packet
+
+/-- Reviewer-facing weak-factorization telescope with the blowup bookkeeping
+exposed: smooth endpoints and centers, codimension, dimensions, specialized
+center contributions, and the operation formula all occur in the typed input.
+The smoothness assumptions are stated explicitly even though the arithmetic
+telescope itself consumes them through each blowup step. -/
+theorem packet_multiplicity_eq_of_typed_weak_factorization
+    {Variety Center : Type*} (packet : Quantum.PacketData Variety)
+    (geometry : Quantum.BlowupGeometry packet Center)
+    {source target : Variety}
+    (sourceSmooth : geometry.smoothProjectiveComplex source)
+    (targetSmooth : geometry.smoothProjectiveComplex target)
+    (sourceDimension : packet.dimension source ≤ 4)
+    (chain : Quantum.WeakFactorizationChain packet geometry source target)
+    (vanishing :
+      Quantum.CenterContributionsVanishThroughDimensionTwo geometry) :
+    packet.multiplicity source = packet.multiplicity target := by
+  have _ := sourceSmooth
+  have _ := targetSmooth
+  exact chain.multiplicity_eq_of_center_vanishing sourceDimension vanishing
 
 /-- Reviewer-facing birational-invariance deduction.  Its typed input records
 the geometric weak-factorization and operation-formula premise explicitly. -/

@@ -200,12 +200,13 @@
       "coverage": "conditional_deduction",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
       ],
-      "objects": "An arbitrary carrier type with a natural-valued multiplicity, dimension function, arbitrary birational relation, and preserving chains.",
-      "hypotheses": "A dimension bound and a bundled premise producing a preserving chain for the chosen relation.",
-      "conclusion": "Equality of multiplicities at the endpoints of that abstract chain.",
-      "cautions": "Smoothness, projectivity, complex structure, equal dimension, blowups, centers, operation formulas, and weak factorization are not formalized."
+      "objects": "An arbitrary carrier type with natural-valued multiplicity and dimension, explicit smooth-projective-complex and smooth-center predicates, typed blowup steps in either orientation, and specialized center contributions.",
+      "hypotheses": "Smooth endpoints; source dimension at most four; every blowup step has codimension at least two, the center-plus-codimension dimension identity, preserved ambient dimension, and the displayed additive operation formula; every specialized contribution of a smooth center of dimension at most two vanishes; and a composable typed weak-factorization chain is supplied.",
+      "conclusion": "Equality of multiplicities at the endpoints, obtained by proving each typed blowup or blowdown link preserves multiplicity and telescoping the chain.",
+      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope."
     },
     {
       "manuscript_label": "prop:cubic-packet",
