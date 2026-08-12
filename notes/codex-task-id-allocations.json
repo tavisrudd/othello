@@ -3059,8 +3059,26 @@
       "last": 907,
       "purpose": "Quantum-monodromy stabilization test for stable irrationality of cubic threefolds",
       "sequence": 340
+    },
+    {
+      "count": 1,
+      "first": 908,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 908,
+      "purpose": "Open-ended epilogue mathematics level-ups: intrinsic obstruction classifications, higher stabilization, and new separation families",
+      "sequence": 341
+    },
+    {
+      "count": 1,
+      "first": 909,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 909,
+      "purpose": "Collision repair: retire duplicate reservation because C908 is already active; reserve next ID for open-ended epilogue level-ups",
+      "sequence": 342
     }
   ],
-  "next_id": 908,
+  "next_id": 910,
   "schema": "codex-task-id-allocations-v1"
 }
