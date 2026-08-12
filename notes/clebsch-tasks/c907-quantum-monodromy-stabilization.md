@@ -58,15 +58,19 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 - Its projective-bundle exceptional collection mutates explicitly into the
   `P^3` residual plus `P^5` ambient Orlov blocks.  Hence no finite Euler-lattice
   obstruction remains; the escaping-thimble identification is still open.
+- A second exact rescaling gives the local residual potential `W_(P^3)+ZU`.
+  Its four local Morse sections match `P^3`, and the fixed-torus model has a
+  bounded-value logarithmic gradient gap.  Mixed pole channels prevent
+  promoting this to global residual-thimble transport.
 
 ## Active frontier: `m=2`
 
 The ordinary KKPYY carrier-height route is exhausted: the abstract cubic
 `G`-atom already has the threefold carrier `X`, exactly the maximum center
-dimension for a fivefold factorization.  The enriched length must first be
-defined on geometric atomic `F`-bundles, pulled back along KKPYY Proposition
-5.22 to abstract `G`-atoms, and proved invariant under the elementary
-equivalences.  Ordinary atom multiplicity cannot distinguish the endpoint.
+dimension for a fivefold factorization.  An atomwise enrichment is also too
+coarse: projective-bundle additivity gives `J_1^(direct sum 3)`, not the
+endpoint string `J_3`.  The new object must enhance the entire atomic
+composition together with its projective-bundle/blow-up operation frame.
 
 For the fivefold `X x P^2`, prove both:
 
@@ -85,11 +89,12 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Freeze the phase/mutation-compatible Gamma/Rees realization of the cubic
-length.  In parallel, compute the order-zero residual-center Stokes cocycle
-for `Bl_(P^3)P^5` in the Orlov Gamma basis, and attack the non-nef threefold
-carrier bound.  First-Novikov differentiation follows only after the
-order-zero residual-center identification passes.
+Prove the framed relative double-suspension theorem for `Bl_(P^3)P^5`: excise
+or calculate the two mixed pole channels, identify the remaining four
+directed thimbles with the `P^3` Orlov/Gamma basis, and compute the order-zero
+Stokes cocycle.  In parallel, freeze the operation-framed enrichment and
+prove HLT support descent on KKPYY connected atom components.  First-Novikov
+differentiation follows only after the order-zero comparison passes.
 
 A Fano-threefold database is reconnaissance only; weak factorization permits
 arbitrary Calabi--Yau and general-type threefold centers.
@@ -98,6 +103,8 @@ Exact pilot and replay:
 `../2026-08-11-c907-toric-r2-pilot.md`.
 Finite mutation audit:
 `../2026-08-11-c907-double-presentation-mutation-audit.md`.
+Double suspension and pole obstruction:
+`../2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
 
 ## Gold architecture after `m=2`
 

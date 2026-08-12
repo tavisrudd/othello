@@ -129,8 +129,14 @@ Euler-lattice obstruction but not the escaping-thimble comparison.  Audit:
 `../2026-08-11-c907-double-presentation-mutation-audit.md`.
 The ordinary KKPYY carrier-height branch is closed by C909: the cubic abstract
 `G`-atom is already carried by the allowed threefold `X`.  C907 must define
-the enrichment on geometric atomic `F`-bundles, pull it through Proposition
-5.22, and verify the elementary equivalences explicitly.
+an operation-framed enrichment of the entire atomic composition; an atomwise
+pullback through Proposition 5.22 produces copies of `J_1`, not the endpoint
+Tate string.  The toric residual chart is now exactly `W_(P^3)+ZU`, and its
+bounded-value logarithmic tail is tame.  Direct transport to the limit is
+false because two explicit mixed pole channels have nonintegrable parameter
+drift.  The next theorem is their excision in directed rapid-decay homology
+and the resulting Orlov/Gamma marking.  Report:
+`../2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
 C909 also isolates the minimal algebraic target: a strict graded measure over
 `Z[L]/(L^3)` with endpoint `1+L+L^2`, codimension-two center shift `L`, and
 width one on every threefold formally proves `X x P^2` irrational.  Thus C907

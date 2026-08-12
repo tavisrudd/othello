@@ -154,10 +154,12 @@ KKPYY's rationality criterion is stated for abstract `G`-atoms, after the
 elementary disjoint-union, blow-up, and projective-bundle equivalences.  The
 primitive-sixth-root and Stokes/Rees data live first on geometric atomic
 `F`-bundles.  Proposition 5.22 gives a map from abstract `G`-atoms to those
-geometric classes, not an identification or injectivity theorem.  Therefore
-C907 must define the enrichment geometrically, pull it back along that map,
-and verify invariance under every elementary equivalence before using it in a
-weak-factorization argument.
+geometric classes, not an identification or injectivity theorem.  A statistic
+already defined on Definition 5.21 geometric equivalence classes pulls back
+without a new elementary-equivalence proof.  But such an atomwise statistic
+is too weak for C907: projective-bundle additivity gives copies of `J_1`, not
+the operation-framed Tate string `J_r`.  The needed enrichment belongs to the
+whole atomic composition with its specified projective-bundle/blow-up frame.
 
 The ordinary carrier-height invariant cannot reach `X x P^2`: its cubic
 abstract atom is already carried by the allowed threefold `X`.  Thus ordinary

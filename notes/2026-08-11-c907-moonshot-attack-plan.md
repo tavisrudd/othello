@@ -134,6 +134,13 @@ replayed; its residual critical values converge after affine rescaling to the
 Picard--Lefschetz/Stokes comparison, not another critical-value calculation.
 See `2026-08-11-c907-toric-r2-pilot.md`.
 
+Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU` and proves
+bounded-value logarithmic tameness.  Direct endpoint transport is false: two
+explicit mixed pole channels have bounded potential and nonintegrable
+parameter drift.  Replace the global-flow step by a framed relative
+double-suspension theorem that excises or computes those channels.  See
+`2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
+
 ## Wave 0 — freeze the invariant
 
 1. Define a fixed-phase object
@@ -147,9 +154,9 @@ See `2026-08-11-c907-toric-r2-pilot.md`.
    Rees shift.
 4. Prove that the enriched length-three endpoint differs from three
    length-one summands.
-5. Define the enrichment first on KKPYY geometric atomic `F`-bundles, pull it
-   back along Proposition 5.22 to abstract `G`-atoms, and prove invariance
-   under the disjoint-union, blow-up, and projective-bundle equivalences.
+5. Enhance the whole atomic composition together with its operation frame.
+   Proposition 5.22 permits pullback of a bare geometric-atom statistic, but
+   such an atomwise statistic cannot distinguish `J_r` from `J_1^r`.
 6. Use mutation on `D^b(P^1)` as the compulsory rejection test: Euler and
    Serre data alone must fail the definition.
 

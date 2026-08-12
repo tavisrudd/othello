@@ -48,21 +48,17 @@ threefold-birational input.
 
 ## Attack order
 
-1. Define `ell_(1/6)` on the full rank-four cubic hypergeometric module as
-   phase-invariant width of its zero-exponential Stokes graded piece.  Match it
-   with the Rees valuations and enriched Serre block only in proved pilots.
-2. **Current first pass:** prove or refute `ell_(1/6)(Z) <= 1` for
-   nef-canonical threefolds.  Quintic Calabi--Yau and sextic general-type
-   hypersurfaces are mandatory tests.  Derive a structural bound before any
-   database scan.
-3. Specialize Iritani's comparison to codimension two.  Extend the strict
-   `Q=theta=0` double-associated-graded pilot to first Novikov order.  Express
-   failure as an explicit extension class of Stokes-filtered local systems or
-   mutation systems.
-4. Transport that class through topological Laplace transform.  Test a toric
-   center and one non-toric complete-intersection center.  Prove vanishing or
-   identify the minimum correction datum.
-5. If both gates pass, telescope the strict associated-graded formula through
+1. Define an operation-framed atomic composition; an enrichment of individual
+   abstract atoms is too coarse to distinguish `J_3` from three `J_1`s.
+2. Prove the framed relative double-suspension theorem for the toric pilot.
+   The exact local model is `W_(P^3)+ZU`; the remaining issue is excision of
+   two explicit mixed pole channels and the Orlov/Gamma marking.
+3. Prove HLT support constant on KKPYY Definition 5.21 connected components.
+   Nef-canonical support exclusion is already closed; it does not imply the
+   enriched bound for a nonempty packet.
+4. Only after the order-zero residual Stokes cocycle vanishes, compute the
+   first-Novikov extension and test the first non-toric cubic center.
+5. If both analytic and operation-framed carrier gates pass, telescope through
    weak factorization and audit explicitly that extensions cannot join center
    blocks into the endpoint length-three block.
 
