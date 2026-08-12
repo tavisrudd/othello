@@ -41,7 +41,20 @@ The finite golden orientation enters at the prime two.  Let
  H_2=\operatorname{Aug}(\F_2^\Omega)/\langle\mathbf1\rangle.
 \]
 Then \(H_2\) is simple and \(\End_{A_5}(H_2)=\F_4\).  A normalized conference
-operator \(B\) with \(B^2=5I\) acts integrally on \(\Z^\Omega\).  Passing to
+operator acts integrally on \(\Z^\Omega\).  After labeling \(\Omega\), one
+switching representative is
+\[
+B=\begin{pmatrix}
+0&1&1&1&1&1\\
+1&0&1&1&-1&-1\\
+1&1&0&-1&1&-1\\
+1&1&-1&0&-1&1\\
+1&-1&1&-1&0&1\\
+1&-1&-1&1&1&0
+\end{pmatrix},
+\qquad B^2=5I.
+\]
+Passing to
 the canonical saturation
 \[
  D_6^\vee=\Z^\Omega+\Z\frac{\mathbf1}{2},
@@ -175,8 +188,14 @@ The simplex group acts on both multiplicity copies of the coefficient heart
 over \(\F_2\).  Hence the three lines defined over \(\F_2\) retain \(S_6\).
 The stabilizer of an exotic graph is equally intrinsic.  A permutation that
 fixes \(\Gamma_\omega\) commutes with \(\omega\), hence is \(\F_4\)-linear on
-the two-dimensional \(\F_4\)-space \(H_2\).  It also preserves \(b\), so its
-\(\F_4\)-determinant is one; it therefore lies in
+the two-dimensional \(\F_4\)-space \(H_2\).  If its determinant is
+\(d\in\F_4^\times\), preservation of \(b\) says
+\[
+ \operatorname{Tr}_{\F_4/\F_2}(dz)
+ =\operatorname{Tr}_{\F_4/\F_2}(z)
+ \qquad(z\in\F_4).
+\]
+The trace pairing is nondegenerate, so \(d=1\).  It therefore lies in
 \(\operatorname{SL}_2(4)\), of order \(60\).  The given \(A_5\) already has
 that order and lies in the stabilizer, proving equality.  The odd coset in
 its order-\(120\) normalizer is semilinear and applies field Frobenius, so it
