@@ -67,10 +67,15 @@ grading: the endpoint has `1+L+L^2`, while a threefold center must have width
 one.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
 `W_(P^3)+ZU`.  Saturated tangent-Jacobian certificates cover the residual
 chart, a mixed-cone family, and the compact-`y` pole continuum through one
-semistable incidence node; an exact exterior transition stops before the
-residual Morse core, and a hashed Singular pilot replays the key ideals.  The
-live analytic gate is the resulting finite comprehensive Gröbner/Fitting fan,
-then proper collar topology and the
+semistable incidence node.  Six hashed 31-mask replays plus two Laurent
+circuit lemmas now close ten boundary-star types for arbitrary toric `y`
+valuations; the translated seam incidence closure retains the four marked
+residual points.  Positive pole order by itself is only a prefilter: total
+normalization can recreate `L`-critical points.  The bounded `1/1` Rees chart
+is closed separately: its noncompact `y` faces are empty/free and its compact
+face is exactly the four residual Morse points.  The live analytic gate is the
+joint `y`/Rees-infinity and translated/infinity remainder of the normalized
+comprehensive Gröbner/Fitting fan, then proper collar topology and the
 hyperplane-equivariant Orlov/Gamma marking.  The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
 direct threefold grading argument is closed negatively by an explicit
@@ -82,11 +87,15 @@ none can realize the required length-two carrier.  Fano cyclic covers of
 positive calibration with `nu_6=2`, not a length-two carrier.  The natural
 weighted `(3,3)` candidate never gives two independent pairs: its smooth Fano
 members reduce to the cubic or `P^3`.  The first raw four-packet `(3,6)` model
-is non-quasismooth.  A structural theorem now gives `nu_6<=2` for every
-reduced rank-four self-dual hypergeometric small-even threefold QDM, and every
-smooth well-formed weighted Fano hypersurface with primitive `O_X(1)` is
-proved to have exactly that reduced presentation.  The open weighted gate is
-weighted complete intersections and non-well-formed quotient mechanisms.  Current
+is non-quasismooth.  More generally, smooth coarse geometry forces the
+inertia--cyclotomic inequalities for every strongly well-formed weighted
+complete intersection; these cancel its factorial operator to self-dual rank
+four.  Wang's published all-CI nonconvex mirror theorem supplies the full
+ordinary small-even QDM bridge even for non-Cartier degrees.  Thus every such
+rank-one weighted Fano CI has `nu_6<=2`.  The first non-WCI test $V_5$ is
+stronger: its exact small-even framed support has `nu_6=0`.  Remaining carrier candidates lie
+outside weighted CIs or outside the strong-WF ordinary sector, and weak
+factorization still permits arbitrary non-Fano/non-nef centers.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
 authorized.

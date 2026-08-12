@@ -134,54 +134,43 @@ replayed; its residual critical values converge after affine rescaling to the
 Picard--Lefschetz/Stokes comparison, not another critical-value calculation.
 See `2026-08-11-c907-toric-r2-pilot.md`.
 
-Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU` and proves an
-open-torus bounded-value logarithmic gradient gap.  Direct endpoint transport
-is false.  Principal ratio charts cover all bounded pole weights with `y` in
-the residual core, but a cold referee found that neither those charts nor a
-multi-Rees principalization of the individual derivatives proves boundary
-submersivity after cancellations.  The next finite problem is the joint
-saturated graph and **tangent logarithmic Jacobian** on every mixed
-`y,B,C` cone.  Each initial system must be certified as `L`-free, residual,
-or empty; only then may one form a common product-pair collar cover and glue
-the exterior ratio charts to, rather than through, the `c=1` residual core.
-The correct rank-four object is localized over a bounded value disk; the
-global rapid-decay group has six additional ambient critical contributions.
-Iritani identifies the residual Gamma lattice with the Orlov subgroup, not the
-individual Beilinson thimbles.  See
-`2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`,
-`2026-08-11-c907-pole-channel-normal-crossing-excision.md`, and
-`2026-08-11-c907-toric-order-zero-stokes-assembly.md`.  The exact finite
-proof object is specified in
-`2026-08-12-c907-tangent-jacobian-fan-certificate-spec.md`.
-The first two cone certificates are explicit: the compact residual chart has
-exactly four Morse points, while the balanced mixed ray
-`y_i~delta^-2, B,C~delta^4` is tangent-free because `L` becomes a genuine
-coordinate on the saturated central graph.  See
-`2026-08-12-c907-first-tangent-jacobian-cone-certificates.md`.
-The compact-`y` continuum `B~delta^alpha`, `0<=alpha<=2`, is now compressed by
-the single semistable incidence model `ef=delta^2`; all `0/0`, `0/1`, and
-symmetric central strata are `L`-submersive.  See
-`2026-08-12-c907-finite-pole-continuum-certificate.md`.
-The next analytic move is no longer another ray chart: compute the relative
-comprehensive Gröbner fan of the saturated graph, residual Rees marking, and
-tangent-critical module.  This produces a finite cone list whose only allowed
-outcomes are empty, exterior, or the marked residual Morse scheme.  See
-`2026-08-12-c907-tropical-critical-fan-pivot.md`.
+Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU`; the correct
+rank-four system is localized over a bounded value disk, since the global
+rapid-decay group also has six ambient contributions.  The normalized
+saturated graph with recomputed tangent Fitting ideals is the finite proof
+object.  Ten boundary-star types are now empty/free for arbitrary toric
+`y` valuations: `00`, the two generic zero-stars, the two generic infinity
+stars, the two-infinity corner, the two generic translated-one stars, and the
+two translated `1/0` seams.  Six hashed 31-mask replays compress to a simplex
+lemma and one reciprocal--linear circuit lemma, with separate order-zero
+Fitting tests; the seam incidence closure retains the four residual points.
+Positive pole order is only a prefilter: `delta^2L=x^2` shows that total
+normalization can recreate a critical special fibre.  The bounded `1/1` Rees
+chart is now closed separately: its noncompact `y` faces are empty/free and
+its compact face is exactly `W_(P^3)+ZU` with four residual Morse points.
+Finish the joint `y`/Rees-infinity and translated/infinity seams, then assemble
+the common normalized fan and a product-pair collar cover.  The latter remains
+a separate topological theorem.  Iritani identifies the residual Gamma lattice
+with the Orlov subgroup, not the individual Beilinson thimbles.  See
+`2026-08-12-c907-tropical-critical-fan-pivot.md` and
+`2026-08-12-c907-five-support-star-compression.md`.
 
-Wave-2C status: ordinary cohomological grading and duality do not bound the
-length—an explicit self-dual formal length-two model survives.  The first
-geometric regression sweep is nevertheless decisive for ordinary smooth Fano
-complete intersections: their small-even framed formal monodromy always has
-`nu_6<=2`, with equality only for the cubic and `(2,3)` cases.  Hence none can
-realize the required length-two carrier, which needs `nu_6>=4`.  The search now
-starts at weighted or non-complete-intersection Fanos and Mori-fibre spaces;
-the theorem must still cover arbitrary threefold centers.
-
-Wave-2C status: the direct dimension-three grading route is closed negatively.
-An explicit self-dual formal model satisfies hard Lefschetz, Poincare duality,
-and the primitive-sixth HLT support conditions while carrying length two.  The
-carrier theorem must kill one geometric sectorial Rees extension class; it is
-not a consequence of ordinary grading.  See
+Wave-2C status: ordinary grading and duality do not bound length—an explicit
+self-dual formal length-two model survives.  Geometry nevertheless closes the
+entire smooth strongly well-formed rank-one weighted Fano-CI class.  Inertia
+avoidance gives the cyclotomic dominance
+`#{w_i:m|w_i}<=#{d_j:m|d_j}`; Wang's all-CI nonconvex mirror theorem then
+identifies the resulting order-four self-dual factorial operator with the
+full ordinary small-even QDM, so `nu_6<=2`.  The exact positive cases are
+read from `R=prod Q_d/prod Q_w`: index one requires `Phi_2 Phi_3`, index two
+requires `Phi_3` or `Phi_6`, and indices three/four are zero.  The first
+non-WCI test is also closed: the exact $V_5$ operator has four unramified
+irregular branches of framed residue zero, hence `nu_6(V_5)=0`.  Search next
+in the remaining prime Fanos, but remember that the universal theorem must
+cover arbitrary non-Fano/non-nef centers and must kill a sectorial Rees
+extension, not merely its formal support.  See
+`2026-08-12-c907-inertia-cyclotomic-compression.md`,
+`2026-08-12-c907-v5-framed-support.md`, and
 `2026-08-11-c907-threefold-grading-boundary.md`.
 
 ## Wave 0 — freeze the invariant

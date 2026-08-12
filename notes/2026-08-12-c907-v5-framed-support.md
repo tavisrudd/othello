@@ -57,18 +57,14 @@ companion shift subtracts $3/2$.  Hence every framed residue is zero and
 \tag{2}
 \]
 
-CCGK's H-valued abelian/nonabelian $I/J$ theorem F.1 identifies this scalar
-series as the unit component of the relevant small $J$-solution, rather than
-as a bare numerical period.  The unit is cyclic formally: the determinant of
-
-\[
- 1,\quad H\star1,\quad (H\star)^2 1,\quad (H\star)^3 1
-\]
-
-specializes at $q=0$ to the nonzero classical determinant of
-$1,H,H^2,H^3$.  Since $H^{\mathrm{even}}(V_5)$ has rank four, the order-four
-cyclic equation (1) is therefore the full small-even QDM, not a proper scalar
-submodule.  No claim is made about odd or big quantum sectors.
+The full-QDM bridge is independent of the numerical-period inference.  Van
+der Put, *SIGMA* 11 (2015), 036, Sections 4.1--4.2, first defines the quantum
+differential equation as the vector system for quantum multiplication, states
+that a cyclic vector produces its scalar equation of full cohomological order,
+and then lists (1) explicitly as the quantum differential equation of $V_5$.
+Since $H^{\mathrm{even}}(V_5)$ has rank four, this directly identifies (1)
+with the full small-even QDM, not a proper scalar submodule.  No claim is made
+about odd or big quantum sectors.
 
 ## Implication
 
@@ -83,6 +79,10 @@ non-nef weak-factorization centers remain untouched.
 - Coates--Corti--Galkin--Kasprzyk, *Quantum Periods for 3-Dimensional Fano
   Manifolds*, arXiv:1303.3288, Section 7 ``The Fano manifold B5'', Theorem
   F.1, and the definition of the quantum period as the unit component of $J$.
+- Marius van der Put, *The Stokes Phenomenon and Some Applications*, SIGMA
+  11 (2015), 036, Sections 4.1--4.2: vector-QDM definition, cyclic scalarization,
+  and the exact $V_5$ operator (1); arXiv:1501.05205, cached SHA-256
+  `a60119e4088ccf4625a113b7cc0584a302d731e56d61ae91401f1242ce5646ec`.
 - Cached source-tarball SHA-256:
   `fe01aedde30aec17ad6da442b82d9c15ff2c2fc5cdef0c7a6d15e87fa0573143`.
 

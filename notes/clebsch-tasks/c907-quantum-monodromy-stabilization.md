@@ -76,9 +76,22 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   certificates now cover the compact residual chart, a family of mixed
   `y,B,C` cones, and the whole compact-`y` finite-pole continuum through one
   semistable node.  The latter glues exactly to the imbalanced residual chart
-  away from—not through—the Morse core.  A hashed Singular pilot replays the
-  saturations and residual endpoint.  The remaining algebra is one finite
-  comprehensive Gröbner/Fitting fan; the proper collar topology is separate.
+  away from—not through—the Morse core.  Exact five-support certificates now
+  close ten boundary-star types for arbitrary toric `y` valuations: the
+  two-pole star, two generic one-pole stars, two generic infinity stars, the
+  two-infinity corner, two generic translated-one stars, and the two
+  translated `1/0` seams.  Two Laurent circuit lemmas compress their six
+  31-mask replays; the translated stars' order-zero faces pass separate exact
+  Fitting tests, and the seam incidence closure retains exactly the four
+  marked residual endpoints.  Positive pole order
+  alone is only a prefilter:
+  `delta^2 L=x^2` shows that total normalization can recreate an `L`-critical
+  special fibre.  The bounded `1/1` Rees chart is closed separately:
+  noncompact `y` weights give four empty and ten free support faces, while
+  the compact face is exactly `W_(P^3)+ZU` with the four marked Morse points.
+  The remaining algebra is the joint `y`/Rees-infinity and
+  translated/infinity portion of one finite comprehensive Gröbner/Fitting
+  fan; the proper collar topology is separate.
   The correct rank-four system is value-localized; the global group has ten
   critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
@@ -103,12 +116,20 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   cubic or `P^3`; its apparent second primitive pair is geometrically canceled.
   The first raw four-packet, `X_(3,6) subset P(1,1,1,1,2,4)`, is never
   quasismooth.  More generally, every reduced rank-four self-dual
-  hypergeometric small-even Fano-threefold connection has `nu_6<=2`; the
-  presentation is now forced for every smooth well-formed quasismooth weighted
-  hypersurface with primitive `O_X(1)`: smoothness itself forces the weights
-  to be pairwise coprime.  Thus no such weighted hypersurface supplies
-  `nu_6>=4`; the remaining weighted gate is complete intersections and
-  non-well-formed quotient mechanisms.
+  hypergeometric small-even Fano-threefold connection has `nu_6<=2`.
+  More strongly, inertia avoidance gives
+  `#{w_i:m|w_i}<=#{d_j:m|d_j}` for every smooth strongly well-formed weighted
+  complete intersection.  It cancels every fractional denominator and forces
+  an order-four self-dual factorial operator.  Wang's published nonconvex
+  toric-CI mirror theorem identifies its identity-sector series with the full
+  ordinary small-even QDM even for non-Cartier degrees.  Hence every such
+  rank-one Fano WCI has `nu_6<=2`: the entire smooth strong-WF weighted-CI
+  carrier class is closed.  The first non-WCI index-two test is stronger:
+  the exact $V_5$ scalar equation has four unramified irregular branches of
+  framed residue zero, so `nu_6(V_5)=0`.  Remaining loci are the other
+  non-WCI prime Fanos,
+  non-WF/quotient mechanisms if admissible, and arbitrary non-Fano or non-nef
+  threefolds.
 
 ## Active frontier: `m=2`
 
@@ -136,13 +157,14 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5`: construct the full
-saturated graph plus tangent logarithmic-Jacobian fan, prove the three-way
-alternative `L`-free / residual core / empty initial system on every mixed
-cone, and build the finite product-pair cover on all overlaps.  Then identify
+Complete the toric order-zero theorem for `Bl_(P^3)P^5`: finish the joint
+`y`/Rees-infinity and translated/infinity seams in the normalized saturated
+graph, assemble them with the ten closed types and the finite residual chart into the
+common tangent-Fitting fan, and build the finite product-pair cover on all
+overlaps.  Then identify
 the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
-parallel, search weighted or non-complete-intersection Fanos for `nu_6>=4`.
+parallel, continue the remaining non-WCI prime Fano scan for `nu_6>=4`.
 Do not differentiate in
 Novikov directions before the marked order-zero comparison passes.
 
@@ -186,6 +208,17 @@ Four-packet false positive and rank-four bound:
 `../2026-08-12-c907-rank-four-hypergeometric-support-bound.md`.
 Smooth weighted-hypersurface theorem:
 `../2026-08-12-c907-isolated-stacky-hypersurface-rank-four.md`.
+Class-wide WCI compression and QDM theorem:
+`../2026-08-12-c907-inertia-cyclotomic-compression.md` and
+`../2026-08-12-c907-smooth-wci-rank-four.md`.
+Exterior-star compression and exact replays:
+`../2026-08-12-c907-five-support-star-compression.md`,
+`../2026-08-12-c907-bc00-star-fan.md`,
+`../2026-08-12-c907-b0-cunit-star-fan.md`,
+`../2026-08-12-c907-binf-cunit-star-fan.md`,
+`../2026-08-12-c907-binf-cinf-star-fan.md`, and
+`../2026-08-12-c907-b1-cunit-star-fan.md`, and
+`../2026-08-12-c907-b1-c0-seam-star-fan.md`.
 
 ## Gold architecture after `m=2`
 
