@@ -231,6 +231,23 @@ application or an exact obstruction to necessity.
    divisors.  Thus finite etaleness simultaneously kills all factorial
    divided-power defects and exposes a distinct, explicitly growing
    integral invariant-lattice defect.
+10. **Candidate full graded formula.** In codimension `k`, a multidegree has
+    type `(2^(k-l),1^(2l))`.  After removing its doubled-slot volume factors,
+    the residual integral Hodge/product quotient is governed by a filtered
+    noncrossing-matching module.  The proposed exact formula is
+
+    ```text
+    direct sum over l=2..min(k,g-k), h=1..l-1 of
+      (Z/p^(a(l-h))) ^ [ C(g,k+l) C(k+l,k-l) H(l,h) ],
+    ```
+
+    where `H(l,h)` counts Dyck paths of semilength `l` and exact height `h`.
+    It matches independent exact computations through squarefree `k=6`,
+    yields the proved codimension-two theorem, and predicts unbounded
+    exponent `p^(a(k-1))`.  Its only load-bearing gate is now a fully printed
+    arbitrary-root unitriangular proof of the filtered matching lemma; until
+    that hostile audit passes, treat the all-degree formula as a candidate,
+    not as a promoted theorem.
 
 ## Highest-EV next moves
 
@@ -249,6 +266,9 @@ application or an exact obstruction to necessity.
    for the full graded quotient.  This is now the highest-EV strict-C909
    crown: it would classify two independent integral obstructions on the
    same finite-etale Hecke towers without entering C908's non-etale branch.
+   The naive single-layer extrapolation is false.  The candidate closed form
+   is the Dyck-height formula above; finish its arbitrary-root filtered-web
+   proof and hostile audit before any manuscript integration.
 3. Recast the tropical ideal condition and its exact defect under every
    allowed transverse-ruling change, and decide whether the defect modules
    glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
