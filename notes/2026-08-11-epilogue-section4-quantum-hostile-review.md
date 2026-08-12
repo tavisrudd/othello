@@ -263,3 +263,56 @@ for the projective-bundle multiplicity.  No mathematical or citation defect
 remains in the reviewed Section 4 proof.
 
 No manuscript changes were made in this review.
+
+## TT/EJ filtered-criterion review — 2026-08-11
+
+**Verdict: MAJOR (local repair).** The all-cubic application remains correct,
+but the new general projective-bundle criterion is false as stated and its
+proof crosses from geometric atoms to KKPYY's abstract `G`-atoms without
+marking the bridge.
+
+1. **Missing total-dimension hypothesis.** KKPYY Proposition 5.17 assumes the
+   variety has dimension at least two.  Current `prop:atomic-stabilization`
+   allows `d=0,r=1`: take `Z=pt` and `V=O^2`.  The point atom is not represented
+   in dimension at most `d+r-2=-1`, so the printed hypothesis holds, but the
+   conclusion says `P(V)=P^1` is irrational.  Add `d+r>=2` to the proposition.
+   Add the corresponding “of total dimension at least two” qualification to
+   the abstract, introduction, and the formal filtered-invariant paragraph if
+   those surfaces retain the general statement.  The cubic use
+   `(d,r)=(3,1)` is unaffected.
+
+2. **Atom-interface mismatch.** Section 4 defines `CFF` in the free group on
+   *geometric atomic F-bundle* classes (`Atoms^{K,F}_G`, via KKPYY Definitions
+   5.21 and Proposition 5.22), while KKPYY Proposition 5.17 is stated for the
+   underlying abstract `G`-atoms (`Atoms^K_G`).  The conclusion is still true,
+   but “the atomic nonrationality criterion would require every one of its
+   atoms ...” is not literally the cited statement for the manuscript's
+   `CFF`.  The cleanest edit is to prove the criterion directly in the
+   geometric free atom group: if `P(V)` were rational, weak factorization and
+   Proposition 5.22(2) would express its chemical formula using the point atoms
+   of projective space and atoms of smooth centers of dimension at most
+   `d+r-2`; Proposition 5.22(3) gives the positive coefficient `(r+1)` of the
+   chosen atom, contradiction.  Alternatively, explicitly lift the geometric
+   atom through Proposition 5.22 to an abstract `G`-atom and verify that
+   occurrence and filtration pull back as required before invoking
+   Proposition 5.17.
+
+3. **Filtered-invariant framing needs positivity/free-target hypotheses.** The
+   new paragraph says “any additive invariant” with the same formulas and a
+   generator filtration gives the conclusion.  Additivity and a filtration
+   alone do not prevent relations or cancellation.  Replace this by, for
+   example: “Any invariant valued in the free abelian group on dimension-
+   filtered generators, whose smooth-projective values are effective and which
+   satisfies the same blowup and projective-bundle formulas, gives the same
+   conclusion.”  Projective space must also have only filtration-zero
+   generators; here that follows from the projective-bundle formula over a
+   point.  Apply the same qualification to the abstract phrase “formal at this
+   level” if retained.
+
+4. **The compressed cubic proof passes after those repairs.** From
+   `nu_6(alpha_X)>=2` and vanishing for every geometric atom represented in
+   dimension at most two, `alpha_X` lies outside that filtration.  The rank-two
+   trivial bundle has projectivization `X x P^1`, positive multiplicity two,
+   and total dimension four.  No hypothesis or cancellation issue remains.
+
+No manuscript changes were made in this review.
