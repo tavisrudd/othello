@@ -7,14 +7,17 @@ LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
 SOURCE := cubic_stabilization_epilogue.tex
 
-.PHONY: all check lint manuscript warnings clean distclean
+.PHONY: all check lint formal-static manuscript warnings clean distclean
 
 all: lint manuscript
 
-check: lint manuscript warnings
+check: lint formal-static manuscript warnings
 
 lint:
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+
+formal-static:
+	$(PYTHON) lean/verification/check_formal_artifact.py
 
 manuscript: $(SOURCE) sections/*.tex
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex

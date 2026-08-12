@@ -227,6 +227,10 @@ id = "cubic_stabilization_epilogue"
 dir = "papers/cubic-stabilization-epilogue"
 main = "cubic_stabilization_epilogue.tex"
 lane = "clebsch"
+lean_terminals = [
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+]
 
 [[paper]]
 id = "dihedral_schreier_node_kayles"
