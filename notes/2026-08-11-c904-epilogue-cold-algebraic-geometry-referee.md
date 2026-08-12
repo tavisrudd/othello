@@ -131,3 +131,71 @@ The likely repairs are local and additive. The paper does not need a new organiz
 ## Vibe check
 
 Excellent theorem shape and unusually good scope discipline; blocked for submission by two concentrated, repairable proof-interface gaps rather than by diffuse exposition or an implausible main argument.
+
+---
+
+# Second-round cold generalist reread
+
+**Date:** 2026-08-11
+**Repaired artifact read:** `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.pdf`
+**PDF SHA-256:** `f488b00aa125e19400d05ac3e0158c5be03b61f0af7eae30df62478569a967ba`
+**Length:** 13 A4 pages
+**Verdict:** **MINOR REVISION**
+
+## Protocol
+
+I reread the repaired PDF from beginning to end and inspected the rendered title page, opening theorem page, load-bearing pages 5, 8, 10, and 11, conclusion, and final reference page before rereading the first-round report. I did not inspect the source diff and did not edit the manuscript.
+
+## Bottom line
+
+The major editorial objections are repaired. A generalist reader can now recover the four answers in the previous acceptance gate from the paper itself:
+
+1. Definition 4.1 puts formal monodromy on the original `u`-disc and describes descent from a minimal Levelt--Turrittin ramification; refinement and fixed-coordinate invariance are then addressed explicitly.
+2. Lemma 4.2 exhibits the bulk gauge, records its integral `u`-powers, tracks the spectral projector, and Proposition 4.4 places Cai's rank-two even block inside the unsplit zero atom without overclaiming equality; the weakened conclusion `nu_6(alpha_X) >= 2` is exactly what the proof needs.
+3. Proposition 4.4 now gives a complete low-dimensional case split and makes the `+/-1` monodromy bound visible before applying the free atom-group identity.
+4. Propositions 2.3--2.4 now expose the trace/intersection calculation and the strong-Torelli argument, while Corollary 3.4 states the unimodular-coefficient generality actually used and Theorem 3.3 supplies faithful-flat and local--global descent.
+
+The main proofs no longer rest on an unexplained interface sentence. My verdict therefore moves from **MAJOR** to **MINOR**, not merely provisionally but because the paper has crossed the prior acceptance gate.
+
+## Remaining exact repairs
+
+### M1. Remove or source the unused `Gamma_0(3)` monodromy assertion
+
+Proposition 2.4 still states that `Gamma_0(3)` multiplicity monodromy selects one scalar graph, and its proof states that reduction modulo three is the upper-triangular Borel. The next paragraph and Theorem 3.6 explicitly say that only scalarity is used. The first-round request was to prove/cite this finer statement or delete it. It remains unsupported by a citation and is unnecessary. The clean repair is deletion from the proposition and proof; otherwise give a precise source or a short derivation of the family monodromy.
+
+### M2. Make the fibrewise persistence sentence one notch more explicit
+
+After proving that the generic two-primary kernel is exotic, Proposition 2.4 says that the kernel is a finite sub-local-system, "so the same pair persists" on the connected smooth locus. This is now credible and sufficient in context, but one extra clause would close the special-fibre point completely: the rational three-set and exotic two-set are distinct monodromy-stable orbits in the discrete five-element packet, so a locally constant kernel cannot cross between them. This would also make clear that extra endomorphisms at a special fibre do not change the inherited kernel class.
+
+### M3. Replace the chapter-wide formal-classification citation by a pinpoint
+
+Definition 4.1 cites van der Put--Singer, Chapter 3, for the intrinsic descended formal-monodromy construction and invariance under ramified refinement. Because this definition creates the paper's new numerical detector, cite the exact theorem/section establishing the formal solution-space/deck-action construction, or add one sentence specifying the canonical conjugacy class being invoked. The written argument is now mathematically intelligible; this is a verification and citation repair, not a structural gap.
+
+No other P0/P1 item remains open at generalist-editor resolution. A quantum-connections specialist should still check the claims imported from Cai and KKP-Yu against those recent sources before submission, especially the parity-preserving inclusion of Cai's block in the unsplit zero atom and the scope of Claim 6.15. That is ordinary expert source validation, not a reason to retain a major-revision verdict.
+
+## Title, abstract, and opening
+
+The title should be retained. The abstract is substantially improved: the isogeny type, local gluing behavior, mixed-adjugate consequence, and quantum obstruction now appear at the right level of compression. The opening logical reversal has been corrected. Theorems 1.1 and 1.2 are cleanly visible on page 2; the family notation, connectedness of `B^circ`, and coarse-moduli meaning of non-isotriviality are now explicit. The stable-irrationality boundary remains exemplary.
+
+The introduction is dense but well ordered. The short proof map is slightly redundant after "How the two proofs meet," yet it costs only four lines and is not a revision condition.
+
+## Thirteen-page density
+
+The added page is justified by proof content. The paper remains acceptably dense for a specialist research note:
+
+- pages 1--2 provide a complete first-pass route;
+- pages 5 and 8 are algebraically dense but typographically legible;
+- pages 10--11 are the hardest spread, appropriately so because they now expose the quantum trust boundary;
+- no inspected page has an overfull line, broken display, orphaned heading, or unreadable matrix.
+
+Page 13 contains only the final reference and is visually wasteful, but this is a harmless pagination artifact rather than excessive mathematical density. It can be recovered during venue typesetting or by a tiny bibliography-layout adjustment; do not compress the new interface proofs merely to return to 12 pages.
+
+## Venue ceiling
+
+**Current realistic ceiling:** **IMRN** or **Algebraic Geometry**, after the three minor repairs and a specialist source check of Section 4. The theorem shape and now-visible interfaces justify that level.
+
+**Stretch ceiling:** **Compositio Mathematica** if an independent quantum-connections referee validates the Cai/KKP-Yu bridge and the author sharpens the paper's independent conceptual contribution beyond the combination of recent inputs. The 13-page length is not an obstacle. Without that specialist validation, Compositio would be an unnecessarily high-risk first submission.
+
+## Second-round vibe check
+
+The repair succeeded: compact, ambitious, and now referee-legible. What remains is citation hygiene and one discrete-family sentence, not reconstruction of either proof spine.
