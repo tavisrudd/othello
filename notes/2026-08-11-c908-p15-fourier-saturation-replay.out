@@ -1,0 +1,11 @@
+C908 p15 Fourier saturation: independent replay
+theta^2 all coefficients even: True
+theta^k/k! integral for k<=5: True
+theta^[5] equals the positive top class (principal): True
+readout pairing A[I,i] everywhere even: True
+halved pairing row space is all of Z^10: True
+det(Gram) = +/- 1: True
+F(theta^[k]) = +/- theta^[5-k] for all k: True
+quintic index count=252; halved pivots=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1); det(Gram)=1
+consequence: rho_15(full integral (5,1) Kunneth lattice) = 2 Z^100, hence its intersection with the saturated rank-25 End(J) is exactly 2 End(J)
+PASS

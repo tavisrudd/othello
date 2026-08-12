@@ -1,0 +1,13 @@
+C908 p15 Fourier saturation on B = J x J
+sanity gate reproduces (0.2): True; cube Smith nonunits=(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2); identity order=2
+abstract (5,1) extension agrees on all 3000 committed generators: True
+theta^2 all coefficients even: True
+ambient (5,1) generators=2520; image rank=100; all even=True; image and End(J) meet in 2End(J)=True
+cube image equals ambient image meet End(J): True
+Fourier |det| on Lambda^5 and Lambda^9: 1, 1
+F(theta^[k]) = +/- theta^[5-k] for all k: True
+F((5,9) lattice) image equals ambient (5,1) image: True
+type-(2,1,4) generators=18750; all even=True
+L: Lambda^5 -> Lambda^7 elementary divisors {'1': 110, '2': 10}
+stabilized rho_15 image=2 End(J); odd element=False; identity coset=False; iterations=1
+PASS
