@@ -24,17 +24,20 @@
       "manuscript_label": "cor:v14-one-step",
       "status": "partial",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_packet_eq_two_of_flop_inputs",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_oneStep_irrational_of_flop_inputs"
       ],
-      "scope": "The rank-two cancellation and transport are kernel checked; Kuznetsov's projective-bundle flop and the quantum bundle formulas remain cited mathematical premises."
+      "scope": "The rank-two cancellation, packet transport, and irrationality deduction are kernel checked; Kuznetsov's projective-bundle flop, the cubic packet, the quantum bundle formulas, and the rational comparison remain typed mathematical premises."
     },
     {
       "manuscript_label": "thm:every-cubic",
       "status": "partial",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
       ],
-      "scope": "The obstruction-from-nonvanishing deduction is kernel checked; Cai's cubic packet, projective stabilization, and comparison formulas remain cited mathematical premises."
+      "scope": "The projective-line multiplication, nonvanishing, and irrationality contradiction are kernel checked; Cai's cubic packet, the projective-bundle formula, weak factorization, and the rational comparison remain typed mathematical premises."
     }
   ]
 }

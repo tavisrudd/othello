@@ -1,5 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -76,5 +76,41 @@ theorem irrational_of_nonzero_packet
     ¬ Rational object :=
   Quantum.not_rational_of_nonzero_multiplicity packet input Rational objectDimension
     objectNonzero comparisonZero rationalComparison
+
+/-- Reviewer-facing form of the cubic-threefold one-step irrationality
+deduction.  The input structure exposes every external quantum and geometric
+premise used by the proof. -/
+theorem cubicThreefold_oneStep_irrational_of_packet_inputs
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (birationalInput : Quantum.DimensionFourBirationalInput packet)
+    {cubic : Variety}
+    (input : Applications.CubicThreefoldOneStepInput packet birationalInput cubic) :
+    ¬ input.Rational input.stabilized :=
+  Applications.cubicThreefold_oneStepStabilization_not_rational
+    packet birationalInput input
+
+/-- Reviewer-facing packet transport from an associated cubic threefold to a
+genus-eight Fano threefold, conditional on the typed projective-bundle and flop
+premises. -/
+theorem genusEight_packet_eq_two_of_flop_inputs
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (birationalInput : Quantum.DimensionFourBirationalInput packet)
+    {fano cubic : Variety}
+    (input : Applications.GenusEightOneStepInput packet birationalInput fano cubic) :
+    packet.multiplicity fano = 2 :=
+  Applications.genusEight_packet_eq_two_of_projectiveBundle_flop
+    packet birationalInput input
+
+/-- Reviewer-facing one-step irrationality deduction for a genus-eight Fano
+threefold.  Its typed input keeps the cubic packet, projective-bundle flop, and
+rational comparison visible. -/
+theorem genusEight_oneStep_irrational_of_flop_inputs
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (birationalInput : Quantum.DimensionFourBirationalInput packet)
+    {fano cubic : Variety}
+    (input : Applications.GenusEightOneStepInput packet birationalInput fano cubic) :
+    ¬ input.Rational input.stabilizedFano :=
+  Applications.genusEight_oneStepStabilization_not_rational
+    packet birationalInput input
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

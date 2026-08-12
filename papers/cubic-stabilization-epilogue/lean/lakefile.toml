@@ -8,7 +8,14 @@ rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 
 [[lean_lib]]
 name = "CubicStabilizationEpilogue"
-roots = ["TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface"]
+roots = [
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
+]
 
 [[lean_lib]]
 name = "CubicStabilizationEpilogueVerification"

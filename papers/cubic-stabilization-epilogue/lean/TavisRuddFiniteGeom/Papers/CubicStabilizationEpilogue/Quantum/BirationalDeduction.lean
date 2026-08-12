@@ -1,5 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant
-import Mathlib.Tactic.Omega
+import Mathlib.Tactic
 
 /-!
 # Birational deductions from operation formulas
@@ -102,6 +102,28 @@ theorem not_rational_of_nonzero_multiplicity
     packet.multiplicity object = packet.multiplicity comparison :=
       input.multiplicity_eq packet objectDimension (rationalComparison rational)
     _ = 0 := comparisonZero
+
+/-- A rank-two projective stabilization of an object with nonzero packet
+multiplicity is irrational when rationality would identify the stabilization
+birationally with a zero-packet comparison object.  All geometric and quantum
+comparison statements occur as hypotheses. -/
+theorem rankTwoStabilization_not_rational
+    (packet : PacketData Variety)
+    (input : DimensionFourBirationalInput packet)
+    (Rational : Variety → Prop)
+    {base stabilized comparison : Variety}
+    (stabilizationFormula : packet.multiplicity stabilized =
+      2 * packet.multiplicity base)
+    (stabilizedDimension : packet.dimension stabilized ≤ 4)
+    (baseNonzero : packet.multiplicity base ≠ 0)
+    (comparisonZero : packet.multiplicity comparison = 0)
+    (rationalComparison : Rational stabilized → input.birational stabilized comparison) :
+    ¬ Rational stabilized := by
+  apply not_rational_of_nonzero_multiplicity packet input Rational stabilizedDimension
+  · rw [stabilizationFormula]
+    exact Nat.mul_ne_zero (by omega) baseNonzero
+  · exact comparisonZero
+  · exact rationalComparison
 
 end Quantum
 

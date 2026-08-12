@@ -23,7 +23,7 @@ From the monorepo root, build only through the guarded queue:
 
 ```text
 lean/scripts/lean-build-queue.py build \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface \
+  CubicStabilizationEpilogue \
   --lean-root papers/cubic-stabilization-epilogue/lean --cores 20-23
 ```
 
