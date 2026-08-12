@@ -400,6 +400,12 @@ Novikov order.
   group has rank ten.
 - **Settled negatively:** the exterior ratio blow-up cannot be extended
   through `c=1`; it creates a spurious critical exceptional family.
+- **Settled negatively:** principalizing the individual logarithmic
+  derivatives does not close the joint fan.  Leading polar derivatives can
+  cancel after graph saturation, leaving the transformed boundary value
+  constant even when an individual derivative is a unit.  The full saturated
+  graph equation and its tangent logarithmic Jacobian must be resolved
+  together.
 - **Open:** a joint mixed-valuation fan, exterior/core collar gluing, and
   product-pair structure on every exceptional overlap.
 - **Open:** the one point-class integer in the Gamma marking.
