@@ -184,7 +184,7 @@ Weighted two-cubic obstruction:
 Four-packet false positive and rank-four bound:
 `../2026-08-12-c907-36-weighted-ci-false-positive.md` and
 `../2026-08-12-c907-rank-four-hypergeometric-support-bound.md`.
-Isolated-stacky weighted-hypersurface theorem:
+Smooth weighted-hypersurface theorem:
 `../2026-08-12-c907-isolated-stacky-hypersurface-rank-four.md`.
 
 ## Gold architecture after `m=2`
