@@ -13,6 +13,7 @@ The manuscript is `cubic_stabilization_epilogue.tex`.  Build and check it with:
     make check
 
 The paper is proof-first.  Exact computations used during discovery are not
-part of its proof surface.  The current draft freezes the theorem hierarchy and
-prints the complete one-step irrationality argument; the period-realization and
-local-chart portions are being expanded into standalone human proofs.
+part of its proof surface.  The current draft gives standalone human proofs of
+the period realization, the integral local chart and mixed-adjugate theorem,
+and the one-step irrationality argument.  The built review copy is
+[`cubic_stabilization_epilogue.pdf`](cubic_stabilization_epilogue.pdf).
