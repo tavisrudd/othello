@@ -188,3 +188,56 @@ The other requested gates now pass:
   This citation correction is minor and does not affect the argument.
 
 No manuscript changes were made in either review.
+
+## Replacement-proof re-review — 2026-08-11
+
+**Verdict: MINOR.** The new full-bulk flatness proof closes the previous
+Witt-leaf objection.  One formal-ring sentence should still be corrected, but
+the intended formal-monodromy conclusion and the theorem now follow.
+
+The argument at current lines 51--73 is the right replacement.  In a formal
+neighborhood of any even base point, flatness of the base-direction operators
+is precisely the compatibility condition for
+`partial_i M = -u^(-1) P_i M`; conjugating all base directions to ordinary
+derivatives and commuting them with the conjugated `u`-operator forces every
+coefficient of `L-tilde` to be base-independent.  This treats directions
+transverse to KKPYY's Witt integral manifold and therefore resolves the defect
+recorded in the preceding closure review.  For Kähler/Novikov directions the
+same calculation is made in a local coordinate for the logarithmic vector
+field `q partial_q`; the atom base is purely even, so no super-coordinate issue
+arises.
+
+The remaining precision issue is at lines 66--78.  The solution `M` generally
+does **not** lie in the ordinary Laurent gauge group over the analytic base:
+already `partial_t M=-u^(-1)M` gives `M=exp(-t/u)`, whose coefficients have
+unbounded negative `u`-order.  The exact ring is the `t-t_0`-adic differential
+ring
+
+`C((u))[[t-t_0]]`
+
+(with the corresponding coefficient field/base ring in the KKPYY setting),
+not `O[[t-t_0]]((u))`; equivalently one can work in Cai's enlarged formal
+solution ring.  Its coefficients use only integral powers of `u`, so the
+formal-monodromy automorphism fixes `M` coefficientwise.  Thus it conjugates
+the descended formal-monodromy operator and introduces neither fractional
+powers nor a deck action.  **Repair:** state this ring explicitly and replace
+“the formal differential module ... is locally constant up to a gauge” by
+“after scalar extension to this `t`-adic solution ring, the modules are
+identified by a single-valued integral-power gauge.”  Without that
+qualification the displayed claim is literally false in the usual
+`C((u))`-differential-module category, although the monodromy inference is
+correct.
+
+The atom restriction at lines 79--85 passes.  The spectral decomposition is
+canonical on the unramified locus; uniqueness makes parallel transport carry
+the selected local projector to the continuously tracked projector.  On an
+overlap the two choices therefore differ by an automorphism of that factor,
+so the descended formal-monodromy operators are conjugate.  Local constancy
+then propagates over the connected component.  A short phrase invoking
+uniqueness of KKPYY Theorem 4.1 would make the stated projector bridge fully
+transparent, but no additional hypothesis is missing.
+
+Finally, the weak-factorization citation is now exact: current line 170 cites
+KKPYY Proposition 5.22(2) for the blowup chemical formula.  The rank-two
+projective formula continues to cite Proposition 5.22(3).  No manuscript
+changes were made in this review.
