@@ -49,15 +49,19 @@ product.  Equations (1) and (2) show that this conclusion is sharp in a new
 sense: the minimal class is product-generated even though the ambient
 integral Hodge lattice has an exact nonzero defect in the two middle degrees.
 
-For a cubic threefold \(X\) with such a marked intermediate Jacobian,
+For a cubic threefold \(X\) in the marked finite-etale Hecke locus, the
+separate full-PD theorem gives
 \[
  \Theta_{J(X)}^{[4]}\in P^4
  \Longrightarrow X\text{ is universally }CH_0\text{-trivial}
 \]
 by Voisin, while the independent atom theorem gives
 \(X\times\mathbf P^1\) irrational.  This is the clean two-certificate
-separation theorem.  The rank-five quotient (1) explains the integral
-geometry around the certificate rather than merely supplying it.
+separation theorem. The rank-five quotient (1) is a sharp neighboring
+theorem: it explains the integral geometry around the certificate rather
+than merely supplying it. It is **not** the numerical quotient of the actual
+six-axis packet, whose local source lattice is a unit line plus a depth-one
+rank-four block at both bad primes.
 
 ## Strongest paper architecture
 
@@ -66,10 +70,11 @@ The epilogue should therefore have three structural layers.
 1. **Marked finite-etale PD theorem, arbitrary dimension.**  Rank-one
    generation of the permitted graph divisor lattice gives all divided
    powers as ordinary products.
-2. **Complete rank-five ambient theorem.**  The full Hodge/product Smith
-   quotient is (1); this is the dimension selected by cubic intermediate
-   Jacobians and is entirely certificate-free.
-3. **Two geometric outputs.**  The explicit six-axis pencil lands in the
+2. **Complete rank-five ambient theorem.** On the one-depth finite-etale
+   rank-five locus, the full Hodge/product Smith quotient is (1); this is the
+   dimension selected by cubic intermediate Jacobians and is entirely
+   certificate-free.
+3. **Two geometric outputs.** Independently, the explicit six-axis pencil lands in the
    marked Hecke condition and hence is universally \(CH_0\)-trivial; every
    smooth cubic has irrational one-step stabilization by the atom theorem.
 
