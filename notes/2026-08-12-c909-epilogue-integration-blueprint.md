@@ -62,7 +62,7 @@ The family is non-isotrivial.
 For every smooth cubic threefold \(X\),
 \(X\times\mathbf P^1\) is irrational.
 
-### C. Integral cycle-side classification — new structural theorem
+### C. Integral cycle-side classification — planned structural theorem
 
 State a compact two-part theorem.
 
@@ -90,7 +90,7 @@ say that the illustrative distinct-root tower is the cubic packet.  It must
 also distinguish the prescribed graph NS lattice from the enlarged full NS
 lattice at CM fibres.
 
-### D. Low-dimensional birational invariance and \(V_{14}\) — new quantum corollary
+### D. Low-dimensional birational invariance and \(V_{14}\) — planned quantum corollary
 
 State in a short subsection after the cubic quantum proof:
 
@@ -375,7 +375,9 @@ either structurally explanatory or immediately geometric.
 
 ## 7. Claim-ledger additions
 
-Add four rows to the paper-local claim/proof/novelty ledger:
+The owning paper ledger is the sole home for every novelty or priority
+sentence.  Before changing the manuscript, replace the old ``Semisimple
+graph-slope primitivity'' row and add the following controlled rows:
 
 1. all-degree finite-etale PD saturation;
 2. actual six-axis full integral Hodge/product saturation at non-CM fibres;
@@ -388,6 +390,21 @@ tropical PSD midpoint skeleton, and the existing integral-Fourier sources for
 their actual ranges.  The claimed contribution is the signed integral DVR
 lift, exact graph lattice, faithful-flat descent, and weighted Smith
 classification.
+
+The cycle-side bounded negative is owned by
+`notes/2026-08-12-c909-epilogue-cycle-priority-audit.md`: two sources were
+read at full text and six partially; its exact query batches screened
+16, 3, and 15 rendered results.  It found no exact predecessor for the three
+planned integral claims but did not cover MathSciNet or Google Scholar and
+did not run a triple-service forward-citation closure.  Consequently the
+ledger may say only ``no exact predecessor located in the bounded audit'';
+neither the manuscript nor the README may independently say ``first'' or
+``to our knowledge.''
+
+The quantum rows require the corresponding convention-compliant priority
+report before they receive any absence language.  Kuznetsov's flop and the
+KKPYY/Cai machinery are positive source attributions, not themselves evidence
+that the formal corollaries were previously unstated.
 
 ## 8. Acceptance test for the integrated draft
 
