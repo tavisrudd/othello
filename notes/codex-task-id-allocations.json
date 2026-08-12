@@ -3077,8 +3077,17 @@
       "last": 909,
       "purpose": "Collision repair: retire duplicate reservation because C908 is already active; reserve next ID for open-ended epilogue level-ups",
       "sequence": 342
+    },
+    {
+      "count": 1,
+      "first": 910,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 910,
+      "purpose": "standalone Lean formal companion for cubic stabilization epilogue",
+      "sequence": 343
     }
   ],
-  "next_id": 910,
+  "next_id": 911,
   "schema": "codex-task-id-allocations-v1"
 }
