@@ -350,3 +350,50 @@ combined deck action and descent consequences from those exact inputs.
   from the unmarked base.
 - **Open:** an actual odd cycle upstairs; the deck calculation alone
   constructs none.
+
+## Correction (2026-08-11, C908 normalization adjudication)
+
+The body above is left as written as a dated record.  Its divided-degree
+normalization is **superseded**, and the reversal upgrades this note's own
+computation into an obstruction.
+
+- **§2, equations (2.3)--(2.4)**, "The ordered trace on the rank-ten lattice is
+  twice the coefficient trace.  After passage to the symmetric quotient the
+  actual degree is therefore \(\delta_{15}^{\rm
+  sym}(A)=\operatorname {tr}_5(A)\pmod 2\)", and hence
+  \(\delta_{15}^{\rm sym}(I_5)=5=1\).  The divided interpretation is the
+  defect.  The \(\tfrac12\) of \(\lambda(Z)=\tfrac12(1,\iota)^*\Gamma\) is
+  consumed exactly once, cancelling the transfer generator's factor two, and
+  the anti-graph factor is \(\pm2\) in every channel; no second halving exists.
+  The **raw \(\mathbf F_2\)-linear contraction is the unordered degree**, so
+  \(\delta_{15}^{\rm sym}=\operatorname {tr}_{\mathbf F_2}
+  =\operatorname {Tr}_{\mathbf F_4/\mathbf F_2}\circ\operatorname {tr}_{\mathbf F_4}\),
+  which vanishes identically on \(\operatorname {End}_{S_3}(V^5)\cong
+  M_5(\mathbf F_2)\).  The identity is **even**.
+- **Mystery ledger**, "full exotic monodromy preserves the odd divided-degree
+  \(p_{15}\) identity; the vanishing raw contraction is the wrong ordered-trace
+  functional".  Reversed.  The vanishing raw contraction is the **right**
+  functional, and the full-\(S_3\)-fixed \(p_{15}\) space of dimension 25
+  contains **no** odd contraction.
+- **§2 "Relative consequence"** is therefore the load-bearing sentence, with its
+  conclusion flipped.  Its hypothesis stands verbatim — "a cycle defined over
+  the unmarked base gives a flat integral class fixed by both the residual
+  monodromy and the deck" — but the fixed space does **not** contain an odd
+  class, so deck invariance **does** give a cohomological parity obstruction in
+  \(p_{15}\): no class defined over the unmarked base can carry odd \((1,5)\)
+  degree.  The basis-free check quoted after (2.4) fails with it: the rational
+  inverse-Lefschetz identity is polarization-canonical but its unordered degree
+  is even, so its presence in the fixed space is not evidence of odd degree.
+- **Scope.**  \(p_{24}\) is unchanged (odd \(S_3\)-fixed contractions exist, by
+  this note's own (3.2)), and the residual \(C_3\)-only \((1,5)\) conclusions
+  are unchanged.  The obstruction binds only over the unmarked base; the marked
+  exotic base forces \(C_3\) alone, where odd residues survive as the
+  \(w\)-twisted cosets with \(\mathbf F_4\)-coefficient trace outside
+  \(\mathbf F_2\).
+
+Adjudicating bundle:
+`notes/2026-08-11-c908-unordered-degree-normalization.md` (§2 invariants equal
+transfers with index one in bidegree \((1,5)\); §3 the uniform \(\pm2\)
+anti-graph factor; §4 the independent \((0,6)\) calibration
+\(\int_J\Theta\cdot\Theta^4/4!=5\); §§5--7 the ruling, its per-channel
+consequences, and the flag list this correction discharges).

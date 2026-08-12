@@ -388,3 +388,22 @@ The validated environment was SageMath 10.7.  Artifact ledger:
 - **Open:** whether the exotic quadratic cover kills the Chow norm class
   (4.4).  It is parity-minimal, but no splitting cycle or nonvanishing
   theorem is known.
+
+## Scope note (2026-08-11)
+
+No correction is needed here.  The C908 normalization adjudication,
+`notes/2026-08-11-c908-unordered-degree-normalization.md`, rules that the raw
+\(\mathbf F_2\)-linear contraction *is* the unordered \((1,5)\) degree — there is
+no second halving on passage to the symmetric quotient — and under that ruling
+this note's verdict is **confirmed** for the residual \(C_3\): §5 item 1 and the
+ledger line "residual \(C_3\) does not force evenness" stand, because
+\(\operatorname {End}_{C_3}(V^5)\cong M_5(\mathbf F_4)\) does carry odd
+contractions, namely the \(w\)-twisted cosets whose \(\mathbf F_4\)-coefficient
+trace lies outside \(\mathbf F_2\); the recorded invariant dimensions 50 and 776
+are untouched.  What flips is only the extension of the statement to the full
+\(S_3=C_3\rtimes C_2\) obtained by adjoining the exotic deck, treated in
+`notes/2026-08-11-c904-exotic-deck-kunneth-descent.md` and its correction: there
+the fixed subalgebra is \(M_5(\mathbf F_2)\), on which the degree vanishes
+identically, so the deck vanishing is a genuine parity obstruction for classes
+defined over the unmarked base.  That obstruction does not reach the marked base
+this note works over.

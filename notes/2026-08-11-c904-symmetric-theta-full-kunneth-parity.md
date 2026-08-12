@@ -411,3 +411,51 @@ nix shell nixpkgs#sage -c sage -c 'exec(preparse(open("notes/2026-08-11-c904-sym
 Expected output is frozen in
 notes/2026-08-11-c904-symmetric-theta-kunneth-parity.out.  The replay creates
 no preparsed side file.
+
+## Correction (2026-08-11, C908 normalization adjudication)
+
+The body above is left as written: it is a dated historical record.  The
+following statements in it are **superseded**, by locus.
+
+- **§2.3**, "Its unordered degree is the coefficient trace.  The identity
+  therefore has degree five, not ten."  The step from the pairing (2.3) to
+  "the coefficient trace" applies a second halving that does not exist.  The
+  raw $\mathbf F_2$-linear contraction
+  $d_{(1,5)}=-\sum_i c_i\int_J\Theta\cdot\alpha'_i\cdot b_*\beta_i$ **is** the
+  unordered degree.  The identity residue therefore has **even** degree, not
+  degree five.  The defect is internal to this note: §1 already spends the
+  $\tfrac12$ of $\lambda(Z)=\tfrac12(1,\iota)^*\Gamma$ cancelling the transfer
+  generator's factor two, and §2.3 spends it again.
+- **§4**, "**Invalid obstruction:** even rank-ten trace or square
+  characteristic polynomial.  Symmetric descent halves that trace."  The
+  premise is false.  Symmetric descent does not halve the trace a second time,
+  so an even $\mathbf F_2$-linear trace *is* an even unordered degree and is a
+  valid obstruction.
+- **§4**, "**Sharp construction target:** an integral codimension-three
+  correspondence on $M\times M$ whose mod-two Lefschetz residue is the
+  identity on the coefficient lattice".  Target misidentified: that class has
+  even degree.  The corrected target is a residue with **odd
+  $\mathbf F_2$-linear trace** — equivalently, for an $\mathbf F_4$-linear residue, one
+  whose $\mathbf F_4$-coefficient trace lies **outside** $\mathbf F_2$.  Such a residue
+  is not $S_3$-invariant, so any construction realizing it must be genuinely
+  marked-base and deck-asymmetric.
+- **§5 and the Mystery ledger**, "whether the odd $(1,5)$ Hodge coset is
+  integrally algebraic".  The coset named odd there is the identity, which is
+  even.  The open algebraicity question survives but **transfers to the
+  $w$-twisted cosets**: those whose $\mathbf F_4$-coefficient trace lies outside
+  $\mathbf F_2$, i.e. $\operatorname {tr}_{\mathbf F_4}\in\{w,w^2\}$.
+
+Corrected normalization in one line: with $\operatorname {End}_{C_3}(V^5)\cong
+M_5(\mathbf F_4)$, the degree is $\operatorname {tr}_{\mathbf F_2}(\varphi)
+=\operatorname {Tr}_{\mathbf F_4/\mathbf F_2}(\operatorname {tr}_{\mathbf F_4}(\varphi))$, which
+vanishes identically on the $S_3$-fixed subalgebra $M_5(\mathbf F_2)$ and is odd
+exactly on the $w$-twisted cosets.  Since $\operatorname {tr}_{\mathbf F_4}(I_5)=5=1$,
+the identity is even.
+
+Adjudicating bundle:
+`notes/2026-08-11-c908-unordered-degree-normalization.md` (§§2--5 for the
+integral lattice verdict — invariants equal transfers with index one in
+bidegree $(1,5)$, so $q^*$ admits no second factor of two — and the
+independent $(0,6)$ axis calibration $\int_J\Theta\cdot\Theta^4/4!=5$, which is
+odd and hence not twice anything; §§6--7 for the consequences and the flag list
+this correction discharges).

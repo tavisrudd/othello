@@ -704,14 +704,25 @@ the ppav dimension, the half anti-graph of an odd symmetric-theta
 multisection is an odd integral Hodge curve class whose double is algebraic.
 The theta resolution has no local dyadic topological defect, but no
 integral/two-local algebraic Kunneth projector is known.
-The residual `C3` no longer offers a parity obstruction: the full mixed
-invariant spaces have dimensions 50 and 776 and contain odd contractions.
-Nor does the exotic deck: with the full `S3` monodromy the fixed mixed spaces
-have dimensions 25 and 396 and both still have odd **unordered** degree.  In
-the `(1,5)` channel the ordered rank-ten trace is even, but the symmetric
-quotient divides it by two and the fixed coefficient identity has degree
-five.  This closes the finite-monodromy route; it neither algebraizes an odd
-class nor proves a quadratic splitting field.
+The residual `C3` alone offers no parity obstruction: the full mixed invariant
+spaces have dimensions 50 and 776 and do contain odd contractions.  The exotic
+deck is different.  Under the 2026-08-11 C908 normalization adjudication — the
+raw `F_2`-linear contraction *is* the unordered degree, invariants equal
+transfers with index one in bidegree `(1,5)`, and the `1/2` of the half
+anti-graph is spent exactly once — the full `S3` deck **is** a parity
+obstruction in `(1,5)`: the `S3`-fixed subalgebra is `M_5(F_2)`, of dimension
+25, on which the degree vanishes identically, so it contains **no** odd
+contraction and no class defined over the **unmarked** base can carry odd
+`(1,5)` degree.  The marked base forces only `C3`, where odd residues survive
+as the `w`-twisted cosets with `F_4`-coefficient trace outside `F_2`; that is
+now the construction target, and the former fixed-"coefficient identity" target
+is retired as even.  The `(2,4)` channel is unchanged: the `S3`-fixed space has
+dimension 396 and odd contractions exist there.  So the finite-monodromy route
+is not closed but split — dead over the marked base, obstructing over the
+unmarked one — and it still neither algebraizes an odd class nor proves a
+quadratic splitting field.  See `notes/2026-08-11-c908-unordered-degree-normalization.md`
+for the adjudication and `notes/2026-08-11-c908-unmarked-closure-and-w-twist.md`
+for the closure theorem (Theorem C) and the `w`-twist scoping.
 The rational `(1,5)` inverse-Lefschetz class is algebraic, but its integral
 or two-local lift remains open; every canonical decomposable candidate is
 now even, with scalar coefficient ideal `6Z` universally and `12Z` on the
