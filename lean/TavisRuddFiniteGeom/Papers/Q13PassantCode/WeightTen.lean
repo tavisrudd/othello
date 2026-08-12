@@ -106,10 +106,10 @@ private theorem zmodTwo_eq_zero_or_one (value : ZMod 2) : value = 0 ∨ value = 
   decide
 
 private theorem word_eq_one_of_mem_support (word : InternalPoint → ZMod 2)
-    {point : InternalPoint} (point_mem : point ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
+    {point : InternalPoint} (point_mem : point ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) :
     word point = 1 := by
   exact (zmodTwo_eq_zero_or_one (word point)).resolve_left
-    (RelativeConicArcs.CodingBridge.mem_hammingSupport.mp point_mem)
+    (TavisRuddFiniteGeom.Foundation.Coding.mem_hammingSupport.mp point_mem)
 
 private theorem fibreSize_eq_incident_card
     (support : Finset InternalPoint) (base : InternalPoint)
@@ -156,11 +156,11 @@ private theorem fibreSize_eq_incident_card
 set_option maxRecDepth 4096 in
 private theorem fibreSize_odd
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word)
+    (base : InternalPoint) (base_mem : base ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word)
     (line : {line : PassantLine // line ∈ passantPencil base}) :
-    Odd (fibreSize (RelativeConicArcs.CodingBridge.hammingSupport word) base line) := by
+    Odd (fibreSize (TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) base line) := by
   classical
-  let support := RelativeConicArcs.CodingBridge.hammingSupport word
+  let support := TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word
   let incidentSupport := support.filter fun point => Incident line.1 point
   have row_zero := (mem_passantCode_iff_row_sums word).mp word_mem line.1
   have row_as_card :
@@ -173,7 +173,7 @@ private theorem fibreSize_odd
       · simp [point_mem, word_eq_one_of_mem_support word point_mem]
       · have point_zero : word point = 0 := by
           apply not_ne_iff.mp
-          simpa [support, RelativeConicArcs.CodingBridge.mem_hammingSupport] using point_mem
+          simpa [support, TavisRuddFiniteGeom.Foundation.Coding.mem_hammingSupport] using point_mem
         simp [point_mem, point_zero]
     let term : InternalPoint → ZMod 2 := fun point =>
       word point * IncidenceCode.incidenceBit Incident line.1 point
@@ -269,11 +269,11 @@ def WeightTenPencilProfile (support : Finset InternalPoint) (base : InternalPoin
 profiles: `(3,1,1,1,1,1,1;0)` or `(1,1,1,1,1,1,1;2)`. -/
 theorem arbitrary_weightTen_word_has_pencil_profile
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 10)
-    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
-    WeightTenPencilProfile (RelativeConicArcs.CodingBridge.hammingSupport word) base := by
+    (weight : TavisRuddFiniteGeom.Foundation.Coding.hammingWeight word = 10)
+    (base : InternalPoint) (base_mem : base ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) :
+    WeightTenPencilProfile (TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) base := by
   classical
-  let support := RelativeConicArcs.CodingBridge.hammingSupport word
+  let support := TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word
   let pencil := {line : PassantLine // line ∈ passantPencil base}
   have pencil_card : Fintype.card pencil = 7 := by
     dsimp [pencil]

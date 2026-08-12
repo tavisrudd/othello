@@ -1,4 +1,4 @@
-import RelativeConicArcs.CodingBridge
+import TavisRuddFiniteGeom.Foundation.Coding
 import Mathlib.Data.ZMod.Basic
 
 /-!
@@ -18,6 +18,8 @@ namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.IncidenceCode
 
 open Finset
 
+private instance : Fact (Nat.Prime 2) := ⟨by decide⟩
+
 variable {Line Point : Type*} [Fintype Line] [DecidableEq Line]
   [Fintype Point] [DecidableEq Point]
 
@@ -34,7 +36,7 @@ def incidenceColumn (incident : Line → Point → Prop) [DecidableRel incident]
 /-- The binary code checked by the rows of a finite incidence relation. -/
 def code (incident : Line → Point → Prop) [DecidableRel incident] :
     Submodule (ZMod 2) (Point → ZMod 2) :=
-  RelativeConicArcs.CodingBridge.parityCheckCode (incidenceColumn incident)
+  TavisRuddFiniteGeom.Foundation.Coding.parityCheckCode (incidenceColumn incident)
 
 /-- The support of one incidence row on the point set. -/
 def rowSupport (incident : Line → Point → Prop) [DecidableRel incident]
@@ -49,7 +51,7 @@ def rowSupports (incident : Line → Point → Prop) [DecidableRel incident] :
 /-- The supports of all codewords of Hamming weight `d`. -/
 noncomputable def supportsOfWeight (incident : Line → Point → Prop) [DecidableRel incident]
     (d : ℕ) : Finset (Finset Point) :=
-  RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight
+  TavisRuddFiniteGeom.Foundation.Coding.syndromeLeaderSupportsOfWeight
     (K := ZMod 2) (W := Line → ZMod 2) (ι := Point)
     (incidenceColumn incident) 0 d
 
@@ -81,7 +83,7 @@ theorem mem_code_iff_row_sums (incident : Line → Point → Prop) [DecidableRel
     (word : Point → ZMod 2) :
     word ∈ code incident ↔
       ∀ line : Line, ∑ point : Point, word point * incidenceBit incident line point = 0 := by
-  rw [code, RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff]
+  rw [code, TavisRuddFiniteGeom.Foundation.Coding.mem_parityCheckCode_iff]
   constructor
   · intro h line
     have hline := congrFun h line
@@ -101,10 +103,10 @@ omit [DecidableEq Line] in
     [DecidableRel incident] (d : ℕ) (support : Finset Point) :
     support ∈ supportsOfWeight incident d ↔
       ∃ word : Point → ZMod 2,
-        word ∈ code incident ∧ RelativeConicArcs.CodingBridge.hammingWeight word = d ∧
-          RelativeConicArcs.CodingBridge.hammingSupport word = support := by
+        word ∈ code incident ∧ TavisRuddFiniteGeom.Foundation.Coding.hammingWeight word = d ∧
+          TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word = support := by
   classical
-  simp [supportsOfWeight, code, RelativeConicArcs.CodingBridge.parityCheckCode,
+  simp [supportsOfWeight, code, TavisRuddFiniteGeom.Foundation.Coding.parityCheckCode,
     LinearMap.mem_ker, and_left_comm]
 
 omit [Fintype Point] in

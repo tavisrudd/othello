@@ -52,8 +52,9 @@ theorem seven_positive_fibres_sum_seven
   intro index
   have other_fibres : 6 ≤ ∑ other ∈ Finset.univ.erase index, fibreSize other := by
     have erased_card : (Finset.univ.erase index : Finset (Fin 7)).card = 6 := by simp
-    rw [← erased_card]
-    exact card_le_sum_of_one_le _ _ fun other _ => positive other
+    have lower_bound := card_le_sum_of_one_le (Finset.univ.erase index) fibreSize
+      fun other _ => positive other
+    omega
   have decomposition :
       (∑ other ∈ Finset.univ.erase index, fibreSize other) + fibreSize index = 7 := by
     rw [Finset.sum_erase_add _ _ (Finset.mem_univ index), total]
@@ -75,8 +76,9 @@ theorem seven_positive_odd_fibres_sum_nine
     intro index
     have other_fibres : 6 ≤ ∑ other ∈ Finset.univ.erase index, fibreSize other := by
       have erased_card : (Finset.univ.erase index : Finset (Fin 7)).card = 6 := by simp
-      rw [← erased_card]
-      exact card_le_sum_of_one_le _ _ fun other _ => positive other
+      have lower_bound := card_le_sum_of_one_le (Finset.univ.erase index) fibreSize
+        fun other _ => positive other
+      omega
     have decomposition :
         (∑ other ∈ Finset.univ.erase index, fibreSize other) + fibreSize index = 9 := by
       rw [Finset.sum_erase_add _ _ (Finset.mem_univ index), total]

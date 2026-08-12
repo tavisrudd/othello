@@ -17,7 +17,7 @@ namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 /-- The concrete binary passant-incidence linear map. -/
 def incidenceMap :
     (InternalPoint → ZMod 2) →ₗ[ZMod 2] (PassantLine → ZMod 2) :=
-  RelativeConicArcs.CodingBridge.parityCheckMap (IncidenceCode.incidenceColumn Incident)
+  TavisRuddFiniteGeom.Foundation.Coding.parityCheckMap (IncidenceCode.incidenceColumn Incident)
 
 /-- The exact rank statement required from a q=13 incidence-matrix certificate. -/
 def IncidenceMapHasRankFortyTwo : Prop :=

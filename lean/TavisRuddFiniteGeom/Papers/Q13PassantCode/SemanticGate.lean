@@ -54,11 +54,11 @@ holonomy one on the other seven support points, the semantic cyclic-graph identi
 five-clique bound give a contradiction. -/
 theorem weightEight_semantic_transport
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 8)
-    (base_mem : WeightEight.basePoint ∈ RelativeConicArcs.CodingBridge.hammingSupport word)
-    (tangent_identity : ∀ first ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
+    (weight : TavisRuddFiniteGeom.Foundation.Coding.hammingWeight word = 8)
+    (base_mem : WeightEight.basePoint ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word)
+    (tangent_identity : ∀ first ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word,
       first ≠ WeightEight.basePoint →
-      ∀ second ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
+      ∀ second ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word,
         second ≠ WeightEight.basePoint → first ≠ second →
           WeightEight.PassantJoin first second ∧
             WeightEight.TangentHolonomyOne WeightEight.basePoint first second) : False :=
@@ -95,9 +95,9 @@ theorem weightTen_cycle_fibre_profile
 passant-pencil profiles used by the isolated and cycle certificate leaves. -/
 theorem arbitrary_weightTen_profile_transport
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 10)
-    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
-    WeightTen.WeightTenPencilProfile (RelativeConicArcs.CodingBridge.hammingSupport word) base :=
+    (weight : TavisRuddFiniteGeom.Foundation.Coding.hammingWeight word = 10)
+    (base : InternalPoint) (base_mem : base ∈ TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) :
+    WeightTen.WeightTenPencilProfile (TavisRuddFiniteGeom.Foundation.Coding.hammingSupport word) base :=
   WeightTen.arbitrary_weightTen_word_has_pencil_profile word word_mem weight base base_mem
 
 end TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate
