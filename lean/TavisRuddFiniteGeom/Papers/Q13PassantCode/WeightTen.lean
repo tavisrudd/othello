@@ -106,10 +106,10 @@ private theorem zmodTwo_eq_zero_or_one (value : ZMod 2) : value = 0 ∨ value = 
   decide
 
 private theorem word_eq_one_of_mem_support (word : InternalPoint → ZMod 2)
-    {point : InternalPoint} (point_mem : point ∈ CodingBridge.hammingSupport word) :
+    {point : InternalPoint} (point_mem : point ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
     word point = 1 := by
   exact (zmodTwo_eq_zero_or_one (word point)).resolve_left
-    (CodingBridge.mem_hammingSupport.mp point_mem)
+    (RelativeConicArcs.CodingBridge.mem_hammingSupport.mp point_mem)
 
 private theorem fibreSize_eq_incident_card
     (support : Finset InternalPoint) (base : InternalPoint)
@@ -156,16 +156,16 @@ private theorem fibreSize_eq_incident_card
 set_option maxRecDepth 4096 in
 private theorem fibreSize_odd
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (base : InternalPoint) (base_mem : base ∈ CodingBridge.hammingSupport word)
+    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word)
     (line : {line : PassantLine // line ∈ passantPencil base}) :
-    Odd (fibreSize (CodingBridge.hammingSupport word) base line) := by
+    Odd (fibreSize (RelativeConicArcs.CodingBridge.hammingSupport word) base line) := by
   classical
-  let support := CodingBridge.hammingSupport word
+  let support := RelativeConicArcs.CodingBridge.hammingSupport word
   let incidentSupport := support.filter fun point => Incident line.1 point
   have row_zero := (mem_passantCode_iff_row_sums word).mp word_mem line.1
   have row_as_card :
       (∑ point : InternalPoint,
-        word point * ConicPassantCode.incidenceBit Incident line.1 point) =
+        word point * IncidenceCode.incidenceBit Incident line.1 point) =
         (incidentSupport.card : ZMod 2) := by
     have word_indicator : ∀ point, word point = if point ∈ support then 1 else 0 := by
       intro point
@@ -173,10 +173,10 @@ private theorem fibreSize_odd
       · simp [point_mem, word_eq_one_of_mem_support word point_mem]
       · have point_zero : word point = 0 := by
           apply not_ne_iff.mp
-          simpa [support, CodingBridge.mem_hammingSupport] using point_mem
+          simpa [support, RelativeConicArcs.CodingBridge.mem_hammingSupport] using point_mem
         simp [point_mem, point_zero]
     let term : InternalPoint → ZMod 2 := fun point =>
-      word point * ConicPassantCode.incidenceBit Incident line.1 point
+      word point * IncidenceCode.incidenceBit Incident line.1 point
     have restrict_to_incidentSupport :
         (∑ point ∈ incidentSupport, term point) = ∑ point : InternalPoint, term point := by
       apply Finset.sum_subset (Finset.subset_univ incidentSupport)
@@ -185,7 +185,7 @@ private theorem fibreSize_odd
       · have not_incident : ¬Incident line.1 point := by
           intro incident
           exact point_not_mem (Finset.mem_filter.mpr ⟨point_mem, incident⟩)
-        simp [term, word_indicator, ConicPassantCode.incidenceBit, not_incident]
+        simp [term, word_indicator, IncidenceCode.incidenceBit, not_incident]
       · simp [term, word_indicator, point_mem]
     rw [← restrict_to_incidentSupport]
     rw [show (incidentSupport.card : ZMod 2) =
@@ -193,7 +193,7 @@ private theorem fibreSize_odd
     apply Finset.sum_congr rfl
     intro point point_mem
     have point_data := Finset.mem_filter.mp point_mem
-    simp [term, ConicPassantCode.incidenceBit, point_data.2,
+    simp [term, IncidenceCode.incidenceBit, point_data.2,
       word_eq_one_of_mem_support word point_data.1]
   have incidentSupport_even : Even incidentSupport.card := by
     rw [row_as_card] at row_zero
@@ -269,11 +269,11 @@ def WeightTenPencilProfile (support : Finset InternalPoint) (base : InternalPoin
 profiles: `(3,1,1,1,1,1,1;0)` or `(1,1,1,1,1,1,1;2)`. -/
 theorem arbitrary_weightTen_word_has_pencil_profile
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : CodingBridge.hammingWeight word = 10)
-    (base : InternalPoint) (base_mem : base ∈ CodingBridge.hammingSupport word) :
-    WeightTenPencilProfile (CodingBridge.hammingSupport word) base := by
+    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 10)
+    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
+    WeightTenPencilProfile (RelativeConicArcs.CodingBridge.hammingSupport word) base := by
   classical
-  let support := CodingBridge.hammingSupport word
+  let support := RelativeConicArcs.CodingBridge.hammingSupport word
   let pencil := {line : PassantLine // line ∈ passantPencil base}
   have pencil_card : Fintype.card pencil = 7 := by
     dsimp [pencil]

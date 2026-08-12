@@ -4,17 +4,17 @@ import Mathlib.Data.ZMod.Basic
 /-!
 # Binary incidence codes from passant lines
 
-This module gives the reusable finite semantics for a binary code whose coordinates are points and
-whose parity checks are incidence rows.  The geometric input is an arbitrary decidable incidence
-relation; later specializations may take the points to be internal points of a nonsingular conic
-and the rows to be its passant lines.
+This module gives the finite semantics for the binary code of the q=13 passant
+configuration.  Coordinates are points and parity checks are incidence rows.
+The definitions apply to an arbitrary decidable incidence relation, while
+`Geometry` supplies the concrete conic specialization.
 
-The code is the kernel of the incidence-column linear map over `ZMod 2`.  Minimum supports and
-pair/triple concurrence are defined intrinsically on the coordinate set.  No finite classification,
-minimum-distance value, conic normalization, or external certificate is asserted here.
+Minimum supports and pair/triple concurrence are defined intrinsically on the
+coordinate set.  No finite classification, minimum-distance value, conic
+normalization, or certificate assertion occurs in this module.
 -/
 
-namespace RelativeConicArcs.ConicPassantCode
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.IncidenceCode
 
 open Finset
 
@@ -34,7 +34,7 @@ def incidenceColumn (incident : Line → Point → Prop) [DecidableRel incident]
 /-- The binary code checked by the rows of a finite incidence relation. -/
 def code (incident : Line → Point → Prop) [DecidableRel incident] :
     Submodule (ZMod 2) (Point → ZMod 2) :=
-  CodingBridge.parityCheckCode (incidenceColumn incident)
+  RelativeConicArcs.CodingBridge.parityCheckCode (incidenceColumn incident)
 
 /-- The support of one incidence row on the point set. -/
 def rowSupport (incident : Line → Point → Prop) [DecidableRel incident]
@@ -49,7 +49,7 @@ def rowSupports (incident : Line → Point → Prop) [DecidableRel incident] :
 /-- The supports of all codewords of Hamming weight `d`. -/
 noncomputable def supportsOfWeight (incident : Line → Point → Prop) [DecidableRel incident]
     (d : ℕ) : Finset (Finset Point) :=
-  CodingBridge.syndromeLeaderSupportsOfWeight
+  RelativeConicArcs.CodingBridge.syndromeLeaderSupportsOfWeight
     (K := ZMod 2) (W := Line → ZMod 2) (ι := Point)
     (incidenceColumn incident) 0 d
 
@@ -81,7 +81,7 @@ theorem mem_code_iff_row_sums (incident : Line → Point → Prop) [DecidableRel
     (word : Point → ZMod 2) :
     word ∈ code incident ↔
       ∀ line : Line, ∑ point : Point, word point * incidenceBit incident line point = 0 := by
-  rw [code, CodingBridge.mem_parityCheckCode_iff]
+  rw [code, RelativeConicArcs.CodingBridge.mem_parityCheckCode_iff]
   constructor
   · intro h line
     have hline := congrFun h line
@@ -101,13 +101,14 @@ omit [DecidableEq Line] in
     [DecidableRel incident] (d : ℕ) (support : Finset Point) :
     support ∈ supportsOfWeight incident d ↔
       ∃ word : Point → ZMod 2,
-        word ∈ code incident ∧ CodingBridge.hammingWeight word = d ∧
-          CodingBridge.hammingSupport word = support := by
+        word ∈ code incident ∧ RelativeConicArcs.CodingBridge.hammingWeight word = d ∧
+          RelativeConicArcs.CodingBridge.hammingSupport word = support := by
   classical
-  simp [supportsOfWeight, code, CodingBridge.parityCheckCode,
+  simp [supportsOfWeight, code, RelativeConicArcs.CodingBridge.parityCheckCode,
     LinearMap.mem_ker, and_left_comm]
 
 omit [Fintype Point] in
+/-- Pair concurrence is invariant under exchanging its two coordinates. -/
 theorem pairConcurrence_comm (supports : Finset (Finset Point))
     (first second : Point) :
     pairConcurrence supports first second = pairConcurrence supports second first := by
@@ -126,4 +127,4 @@ theorem tripleConcurrence_swap_first_second (supports : Finset (Finset Point))
   by_cases hsupport : support ∈ supports <;>
     simp [hsupport, and_left_comm]
 
-end RelativeConicArcs.ConicPassantCode
+end TavisRuddFiniteGeom.Papers.Q13PassantCode.IncidenceCode

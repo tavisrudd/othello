@@ -1,4 +1,4 @@
-import RelativeConicArcs.ConicPassantCode
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.IncidenceCode
 
 /-!
 # The passant incidence code of the standard conic over `ZMod 13`
@@ -112,7 +112,7 @@ instance : DecidableRel Incident := fun line point =>
 
 /-- The binary incidence code checked by all passant rows of the standard conic over `ZMod 13`. -/
 def passantCode : Submodule (ZMod 2) (InternalPoint → ZMod 2) :=
-  ConicPassantCode.code Incident
+  IncidenceCode.code Incident
 
 /-- The normalized coordinate model contains all 183 projective points of `PG(2,13)`. -/
 theorem projectiveTriples_card : projectiveTriples.card = 183 := by
@@ -189,7 +189,7 @@ theorem mem_passantCode_iff_row_sums (word : InternalPoint → ZMod 2) :
     word ∈ passantCode ↔
       ∀ line : PassantLine,
         ∑ point : InternalPoint,
-          word point * ConicPassantCode.incidenceBit Incident line point = 0 :=
-  ConicPassantCode.mem_code_iff_row_sums Incident word
+          word point * IncidenceCode.incidenceBit Incident line point = 0 :=
+  IncidenceCode.mem_code_iff_row_sums Incident word
 
 end TavisRuddFiniteGeom.Papers.Q13PassantCode

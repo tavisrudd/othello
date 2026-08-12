@@ -76,21 +76,21 @@ structure ConcurrenceRecoversRelations (minimumSupports : Finset (Finset Interna
   color : EllipticRelation → ℕ × (Finset (ℕ × ℕ))
   color_injective : Function.Injective color
   forward : ∀ relation first second, HasRelation relation first second →
-    (ConicPassantCode.pairConcurrence minimumSupports first second,
+    (IncidenceCode.pairConcurrence minimumSupports first second,
       (Finset.univ.erase first |>.erase second |>.image fun third =>
-        (ConicPassantCode.tripleConcurrence minimumSupports first second third,
+        (IncidenceCode.tripleConcurrence minimumSupports first second third,
           (Finset.univ.erase first |>.erase second |>.filter fun fourth =>
-            ConicPassantCode.tripleConcurrence minimumSupports first second fourth =
-              ConicPassantCode.tripleConcurrence minimumSupports first second third).card))) =
+            IncidenceCode.tripleConcurrence minimumSupports first second fourth =
+              IncidenceCode.tripleConcurrence minimumSupports first second third).card))) =
       color relation
   reverse : ∀ relation first second,
     first ≠ second →
-    (ConicPassantCode.pairConcurrence minimumSupports first second,
+    (IncidenceCode.pairConcurrence minimumSupports first second,
       (Finset.univ.erase first |>.erase second |>.image fun third =>
-        (ConicPassantCode.tripleConcurrence minimumSupports first second third,
+        (IncidenceCode.tripleConcurrence minimumSupports first second third,
           (Finset.univ.erase first |>.erase second |>.filter fun fourth =>
-            ConicPassantCode.tripleConcurrence minimumSupports first second fourth =
-              ConicPassantCode.tripleConcurrence minimumSupports first second third).card))) =
+            IncidenceCode.tripleConcurrence minimumSupports first second fourth =
+              IncidenceCode.tripleConcurrence minimumSupports first second third).card))) =
       color relation → HasRelation relation first second
 
 end TavisRuddFiniteGeom.Papers.Q13PassantCode

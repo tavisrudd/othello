@@ -54,11 +54,11 @@ holonomy one on the other seven support points, the semantic cyclic-graph identi
 five-clique bound give a contradiction. -/
 theorem weightEight_semantic_transport
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : CodingBridge.hammingWeight word = 8)
-    (base_mem : WeightEight.basePoint ∈ CodingBridge.hammingSupport word)
-    (tangent_identity : ∀ first ∈ CodingBridge.hammingSupport word,
+    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 8)
+    (base_mem : WeightEight.basePoint ∈ RelativeConicArcs.CodingBridge.hammingSupport word)
+    (tangent_identity : ∀ first ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
       first ≠ WeightEight.basePoint →
-      ∀ second ∈ CodingBridge.hammingSupport word,
+      ∀ second ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
         second ≠ WeightEight.basePoint → first ≠ second →
           WeightEight.PassantJoin first second ∧
             WeightEight.TangentHolonomyOne WeightEight.basePoint first second) : False :=
@@ -95,9 +95,9 @@ theorem weightTen_cycle_fibre_profile
 passant-pencil profiles used by the isolated and cycle certificate leaves. -/
 theorem arbitrary_weightTen_profile_transport
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : CodingBridge.hammingWeight word = 10)
-    (base : InternalPoint) (base_mem : base ∈ CodingBridge.hammingSupport word) :
-    WeightTen.WeightTenPencilProfile (CodingBridge.hammingSupport word) base :=
+    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 10)
+    (base : InternalPoint) (base_mem : base ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
+    WeightTen.WeightTenPencilProfile (RelativeConicArcs.CodingBridge.hammingSupport word) base :=
   WeightTen.arbitrary_weightTen_word_has_pencil_profile word word_mem weight base base_mem
 
 end TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate

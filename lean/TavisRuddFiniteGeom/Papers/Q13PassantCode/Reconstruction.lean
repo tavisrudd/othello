@@ -49,7 +49,7 @@ noncomputable def reconstructedRows (minimumSupports : Finset (Finset InternalPo
         ∀ triple ∈ vertices.powersetCard 3,
           ∀ first ∈ triple, ∀ second ∈ triple, ∀ third ∈ triple,
             first ≠ second → first ≠ third → second ≠ third →
-              ConicPassantCode.tripleConcurrence minimumSupports first second third = 0
+              IncidenceCode.tripleConcurrence minimumSupports first second third = 0
 
 /-- Coordinate permutations preserving a finite support hypergraph. -/
 def PreservesSupportHypergraph (minimumSupports : Finset (Finset InternalPoint))
@@ -72,29 +72,29 @@ structure CoordinateAutomorphismIdentification
 /-- Exact semantic interface for a complete minimum-layer and reconstruction certificate. -/
 structure MinimumLayerCertificate
     (minimumSupports : Finset (Finset InternalPoint)) where
-  exact_weight_layer : minimumSupports = ConicPassantCode.supportsOfWeight Incident 12
+  exact_weight_layer : minimumSupports = IncidenceCode.supportsOfWeight Incident 12
   support_count : minimumSupports.card = 364
   support_sizes : ∀ support ∈ minimumSupports, support.card = 12
   concurrence_recovers_relations : ConcurrenceRecoversRelations minimumSupports
-  rows_recovered : reconstructedRows minimumSupports = ConicPassantCode.rowSupports Incident
+  rows_recovered : reconstructedRows minimumSupports = IncidenceCode.rowSupports Incident
 
 /-- A complete certificate recovers exactly the geometric passant-row family. -/
 theorem reconstructedRows_eq_passantRows
     {minimumSupports : Finset (Finset InternalPoint)}
     (certificate : MinimumLayerCertificate minimumSupports) :
-    reconstructedRows minimumSupports = ConicPassantCode.rowSupports Incident :=
+    reconstructedRows minimumSupports = IncidenceCode.rowSupports Incident :=
   certificate.rows_recovered
 
 /-- A complete certificate identifies its listed supports with all weight-twelve code supports. -/
 theorem minimumSupports_eq_weightTwelveLayer
     {minimumSupports : Finset (Finset InternalPoint)}
     (certificate : MinimumLayerCertificate minimumSupports) :
-    minimumSupports = ConicPassantCode.supportsOfWeight Incident 12 :=
+    minimumSupports = IncidenceCode.supportsOfWeight Incident 12 :=
   certificate.exact_weight_layer
 
 /-- Every passant row in the normalized `q = 13` model contains seven internal points. -/
 theorem passantRow_card (line : PassantLine) :
-    (ConicPassantCode.rowSupport Incident line).card = 7 :=
+    (IncidenceCode.rowSupport Incident line).card = 7 :=
   card_internalPoints_on line
 
 /-- A complete transport for admissible seven-sets identifies the reconstructed row family.
@@ -108,15 +108,15 @@ theorem reconstructedRows_eq_passantRows_of_sevenSet_transport
       ∀ first second third : InternalPoint,
         Incident line first → Incident line second → Incident line third →
           first ≠ second → first ≠ third → second ≠ third →
-          ConicPassantCode.tripleConcurrence minimumSupports first second third = 0)
+          IncidenceCode.tripleConcurrence minimumSupports first second third = 0)
     (admissible_seven_set_is_row : ∀ vertices : Finset InternalPoint,
       vertices.card = 7 → IsPassantClique vertices →
       (∀ triple ∈ vertices.powersetCard 3,
         ∀ first ∈ triple, ∀ second ∈ triple, ∀ third ∈ triple,
           first ≠ second → first ≠ third → second ≠ third →
-            ConicPassantCode.tripleConcurrence minimumSupports first second third = 0) →
-        vertices ∈ ConicPassantCode.rowSupports Incident) :
-    reconstructedRows minimumSupports = ConicPassantCode.rowSupports Incident := by
+            IncidenceCode.tripleConcurrence minimumSupports first second third = 0) →
+        vertices ∈ IncidenceCode.rowSupports Incident) :
+    reconstructedRows minimumSupports = IncidenceCode.rowSupports Incident := by
   classical
   ext vertices
   constructor
@@ -131,16 +131,16 @@ theorem reconstructedRows_eq_passantRows_of_sevenSet_transport
     simp only [reconstructedRows, mem_filter, mem_powersetCard]
     refine ⟨⟨subset_univ _, passantRow_card line⟩, ?_, ?_⟩
     · intro first first_mem second second_mem first_ne_second
-      exact ⟨line, (ConicPassantCode.mem_rowSupport Incident line first).mp first_mem,
-        (ConicPassantCode.mem_rowSupport Incident line second).mp second_mem⟩
+      exact ⟨line, (IncidenceCode.mem_rowSupport Incident line first).mp first_mem,
+        (IncidenceCode.mem_rowSupport Incident line second).mp second_mem⟩
     · intro triple triple_mem first first_mem second second_mem third third_mem
         first_ne_second first_ne_third second_ne_third
       exact geometric_triples_zero line first second third
-        ((ConicPassantCode.mem_rowSupport Incident line first).mp
+        ((IncidenceCode.mem_rowSupport Incident line first).mp
           (triple_mem.1 first_mem))
-        ((ConicPassantCode.mem_rowSupport Incident line second).mp
+        ((IncidenceCode.mem_rowSupport Incident line second).mp
           (triple_mem.1 second_mem))
-        ((ConicPassantCode.mem_rowSupport Incident line third).mp
+        ((IncidenceCode.mem_rowSupport Incident line third).mp
           (triple_mem.1 third_mem)) first_ne_second first_ne_third second_ne_third
 
 end TavisRuddFiniteGeom.Papers.Q13PassantCode

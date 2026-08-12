@@ -19,7 +19,7 @@ def pairNeighborhood (minimumSupports : Finset (Finset InternalPoint))
     (color : ℕ) (point : InternalPoint) : Finset InternalPoint :=
   Finset.univ.filter fun other =>
     other ≠ point ∧
-      ConicPassantCode.pairConcurrence minimumSupports point other = color
+      IncidenceCode.pairConcurrence minimumSupports point other = color
 
 /-- The row family selected directly by one pair-concurrence color. -/
 def pairRecoveredRows (minimumSupports : Finset (Finset InternalPoint))
@@ -46,13 +46,13 @@ structure PairOnlyReconstructionCertificate
     (minimumSupports.filter fun support => point ∈ support).card = unaryDegree
   fusedColorSplit : ∀ first second : InternalPoint,
     first ≠ second →
-    ConicPassantCode.pairConcurrence minimumSupports first second = 6 →
+    IncidenceCode.pairConcurrence minimumSupports first second = 6 →
     (Finset.univ.filter fun middle =>
-      ConicPassantCode.pairConcurrence minimumSupports first middle = 7 ∧
-      ConicPassantCode.pairConcurrence minimumSupports middle second = 7).card = 2 ∨
+      IncidenceCode.pairConcurrence minimumSupports first middle = 7 ∧
+      IncidenceCode.pairConcurrence minimumSupports middle second = 7).card = 2 ∨
     (Finset.univ.filter fun middle =>
-      ConicPassantCode.pairConcurrence minimumSupports first middle = 7 ∧
-      ConicPassantCode.pairConcurrence minimumSupports middle second = 7).card = 4
+      IncidenceCode.pairConcurrence minimumSupports first middle = 7 ∧
+      IncidenceCode.pairConcurrence minimumSupports middle second = 7).card = 4
 
 /-- A pair-only certificate recovers the internal--internal polarity rows directly. -/
 theorem pairRecoveredRows_eq_polarRows

@@ -44,3 +44,8 @@ name = "DihedralSchreier"
 # Relative conic-arc geometry and its finite classification interfaces.
 [[lean_lib]]
 name = "RelativeConicArcs"
+
+# Paper-specific semantic layers.  Heavy finite certificates are external packages and are not
+# dependencies of this library.
+[[lean_lib]]
+name = "TavisRuddFiniteGeom"

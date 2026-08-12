@@ -481,22 +481,22 @@ theorem row_parity_forces_companion (word : InternalPoint → ZMod 2)
     (line : PassantLine) (point : InternalPoint) (incident : Incident line point)
     (point_nonzero : word point ≠ 0)
     (row_sum : ∑ other : InternalPoint,
-      word other * ConicPassantCode.incidenceBit Incident line other = 0) :
+      word other * IncidenceCode.incidenceBit Incident line other = 0) :
     ∃ other : InternalPoint,
       other ≠ point ∧ word other ≠ 0 ∧ Incident line other := by
   by_contra no_companion
   push Not at no_companion
   have sum_is_point :
       (∑ other : InternalPoint,
-        word other * ConicPassantCode.incidenceBit Incident line other) = word point := by
+        word other * IncidenceCode.incidenceBit Incident line other) = word point := by
     rw [Finset.sum_eq_single point]
-    · simp [ConicPassantCode.incidenceBit, incident]
+    · simp [IncidenceCode.incidenceBit, incident]
     · intro other _ distinct
       by_cases other_zero : word other = 0
       · simp [other_zero]
       · have not_incident : ¬Incident line other :=
           fun other_incident => no_companion other distinct other_zero other_incident
-        simp [ConicPassantCode.incidenceBit, not_incident]
+        simp [IncidenceCode.incidenceBit, not_incident]
     · simp
   rw [row_sum] at sum_is_point
   exact point_nonzero sum_is_point.symm
@@ -505,14 +505,14 @@ theorem row_parity_forces_companion (word : InternalPoint → ZMod 2)
 point.  This is the saturation step preceding the lemma of tangents. -/
 theorem weightEight_base_joins
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : CodingBridge.hammingWeight word = 8)
-    (base_mem : basePoint ∈ CodingBridge.hammingSupport word) :
-    ∀ point ∈ CodingBridge.hammingSupport word,
+    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 8)
+    (base_mem : basePoint ∈ RelativeConicArcs.CodingBridge.hammingSupport word) :
+    ∀ point ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
       point ≠ basePoint → PassantJoin basePoint point := by
   classical
-  let support := CodingBridge.hammingSupport word
+  let support := RelativeConicArcs.CodingBridge.hammingSupport word
   have support_card : support.card = 8 := weight
-  have base_nonzero : word basePoint ≠ 0 := CodingBridge.mem_hammingSupport.mp base_mem
+  have base_nonzero : word basePoint ≠ 0 := RelativeConicArcs.CodingBridge.mem_hammingSupport.mp base_mem
   have row_sums := (mem_passantCode_iff_row_sums word).mp word_mem
   have companion_exists : ∀ line : {line // line ∈ basePassantLines},
       ∃ point : InternalPoint,
@@ -524,7 +524,7 @@ theorem weightEight_base_joins
       row_parity_forces_companion word line.1 basePoint line_incident base_nonzero
         (row_sums line.1)
     exact ⟨point, Finset.mem_erase.mpr
-      ⟨distinct, CodingBridge.mem_hammingSupport.mpr point_nonzero⟩, point_incident⟩
+      ⟨distinct, RelativeConicArcs.CodingBridge.mem_hammingSupport.mpr point_nonzero⟩, point_incident⟩
   let companion : {line // line ∈ basePassantLines} →
       {point // point ∈ support.erase basePoint} := fun line =>
     ⟨Classical.choose (companion_exists line), (Classical.choose_spec (companion_exists line)).1⟩
@@ -614,15 +614,15 @@ theorem no_eight_point_tangent_configuration_at_base
 joins and tangent holonomy one for every pair of nonbase support points. -/
 theorem no_normalized_weightEight_codeword_of_tangent_holonomy
     (word : InternalPoint → ZMod 2) (word_mem : word ∈ passantCode)
-    (weight : CodingBridge.hammingWeight word = 8)
-    (base_mem : basePoint ∈ CodingBridge.hammingSupport word)
-    (tangent_identity : ∀ first ∈ CodingBridge.hammingSupport word,
+    (weight : RelativeConicArcs.CodingBridge.hammingWeight word = 8)
+    (base_mem : basePoint ∈ RelativeConicArcs.CodingBridge.hammingSupport word)
+    (tangent_identity : ∀ first ∈ RelativeConicArcs.CodingBridge.hammingSupport word,
       first ≠ basePoint →
-      ∀ second ∈ CodingBridge.hammingSupport word, second ≠ basePoint →
+      ∀ second ∈ RelativeConicArcs.CodingBridge.hammingSupport word, second ≠ basePoint →
         first ≠ second →
           PassantJoin first second ∧ TangentHolonomyOne basePoint first second) : False := by
   apply no_eight_point_tangent_configuration_at_base
-    (CodingBridge.hammingSupport word) weight base_mem
+    (RelativeConicArcs.CodingBridge.hammingSupport word) weight base_mem
     (weightEight_base_joins word word_mem weight base_mem)
   intro first first_mem first_ne_base second second_mem second_ne_base distinct
   exact ⟨distinct, tangent_identity first first_mem first_ne_base
