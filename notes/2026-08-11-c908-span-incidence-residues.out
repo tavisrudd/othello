@@ -1,0 +1,93 @@
+C908 span-incidence (1,5) residue certificate
+parameters: k1=3 k11=27 use_expected_I=True
+control psi_*(1 (x) 1) = 6 Theta: True
+control psi^*Theta pullback parts = a^*Theta (coefficient one): True; cross matrix = -Theta: True
+control a^*Theta = 2 C_s under a_*: True
+control G_1 = psi^*Theta exactly (k1=3, gamma_I = -cross): True
+control dead pass-6 subfamilies: content(Theta ^ Theta^[3])=4 (=4: True); 3(Theta^[3] ^ e_i) in L_5(^5 Lambda) over Z for every i: True
+control H^2(F) lattice: rank 45, relation in radical True, Gram det 1, unimodular True
+control W_A = Zsp(G=12,third=3).I(24) is ZERO: True
+control Theorem E pin: violations=0 over 72 candidates
+aggregate: integrally nonzero=44/72; all of full integral rank ten=True; content gcds=[48, 156, 216, 288, 324, 432, 468, 756, 828, 900]; every content divisible by four=True; two-adic valuations=[2, 3, 4, 5]
+aggregate: every nonzero residue is a scalar multiple of the identity=True; scalars=[-900, -828, -756, -468, -432, -324, -288, -216, -156, -48, 48, 156, 216, 288, 324, 432, 468, 756, 828, 900]
+Q_15: dim_F2=10; pairing perfect=True; L(1->3) saturated=True
+unsolvable first legs: 0
+positive control (synthetic live-shape family): F_2 rank=1; a single synthetic term is already nonzero mod two: False
+channel liveness: first-leg alpha' F_2 rank=10; second-leg pairing-row F_2 rank=10; both live=True
+
+label                              terms   (1,5)  live  rank  Zrank  gcd  verdict
+Zsp(G=12,third=3).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=3).I(13)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=3).I(14)                55     54    54     0     10  324  ZERO
+Zsp(G=12,third=3).I(23)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=3).I(24)                55     54    54     0     10  324  ZERO
+Zsp(G=12,third=3).I(34)                 1      0     0     0      0    0  ZERO
+Zsp(G=12,third=4).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=4).I(13)                55     54    54     0     10  324  ZERO
+Zsp(G=12,third=4).I(14)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=4).I(23)                55     54    54     0     10  324  ZERO
+Zsp(G=12,third=4).I(24)                 0      0     0     0      0    0  ZERO
+Zsp(G=12,third=4).I(34)                 1      0     0     0      0    0  ZERO
+Zsp(G=13,third=2).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=13,third=2).I(13)                 0      0     0     0      0    0  ZERO
+Zsp(G=13,third=2).I(14)               109    108   108     0     10  432  ZERO
+Zsp(G=13,third=2).I(23)                 0      0     0     0      0    0  ZERO
+Zsp(G=13,third=2).I(24)               109    108   108     0     10   48  ZERO
+Zsp(G=13,third=2).I(34)              1949   1948  1344     0     10  288  ZERO
+Zsp(G=13,third=4).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=13,third=4).I(13)               110    108   108     0     10  468  ZERO
+Zsp(G=13,third=4).I(14)               218    216   216     0     10  900  ZERO
+Zsp(G=13,third=4).I(23)               164    162   162     0     10  756  ZERO
+Zsp(G=13,third=4).I(24)               218    216   216     0     10  156  ZERO
+Zsp(G=13,third=4).I(34)              3952   3896  3212     0     10  828  ZERO
+Zsp(G=14,third=2).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=14,third=2).I(13)               109    108   108     0     10  432  ZERO
+Zsp(G=14,third=2).I(14)                 0      0     0     0      0    0  ZERO
+Zsp(G=14,third=2).I(23)               109    108   108     0     10   48  ZERO
+Zsp(G=14,third=2).I(24)                 0      0     0     0      0    0  ZERO
+Zsp(G=14,third=2).I(34)              1949   1948  1344     0     10  288  ZERO
+Zsp(G=14,third=3).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=14,third=3).I(13)               218    216   216     0     10  900  ZERO
+Zsp(G=14,third=3).I(14)               110    108   108     0     10  468  ZERO
+Zsp(G=14,third=3).I(23)               218    216   216     0     10  156  ZERO
+Zsp(G=14,third=3).I(24)               164    162   162     0     10  756  ZERO
+Zsp(G=14,third=3).I(34)              3952   3896  3212     0     10  828  ZERO
+Zsp(G=23,third=1).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=23,third=1).I(13)                 0      0     0     0      0    0  ZERO
+Zsp(G=23,third=1).I(14)               109    108   108     0     10   48  ZERO
+Zsp(G=23,third=1).I(23)                 0      0     0     0      0    0  ZERO
+Zsp(G=23,third=1).I(24)               109    108   108     0     10  432  ZERO
+Zsp(G=23,third=1).I(34)              1949   1948  1344     0     10  288  ZERO
+Zsp(G=23,third=4).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=23,third=4).I(13)               164    162   162     0     10  756  ZERO
+Zsp(G=23,third=4).I(14)               218    216   216     0     10  156  ZERO
+Zsp(G=23,third=4).I(23)               110    108   108     0     10  468  ZERO
+Zsp(G=23,third=4).I(24)               218    216   216     0     10  900  ZERO
+Zsp(G=23,third=4).I(34)              3952   3896  3212     0     10  828  ZERO
+Zsp(G=24,third=1).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=24,third=1).I(13)               109    108   108     0     10   48  ZERO
+Zsp(G=24,third=1).I(14)                 0      0     0     0      0    0  ZERO
+Zsp(G=24,third=1).I(23)               109    108   108     0     10  432  ZERO
+Zsp(G=24,third=1).I(24)                 0      0     0     0      0    0  ZERO
+Zsp(G=24,third=1).I(34)              1949   1948  1344     0     10  288  ZERO
+Zsp(G=24,third=3).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=24,third=3).I(13)               218    216   216     0     10  156  ZERO
+Zsp(G=24,third=3).I(14)               164    162   162     0     10  756  ZERO
+Zsp(G=24,third=3).I(23)               218    216   216     0     10  900  ZERO
+Zsp(G=24,third=3).I(24)               110    108   108     0     10  468  ZERO
+Zsp(G=24,third=3).I(34)              3952   3896  3212     0     10  828  ZERO
+Zsp(G=34,third=1).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=34,third=1).I(13)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=1).I(14)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=1).I(23)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=1).I(24)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=1).I(34)              7888      0     0     0      0    0  ZERO
+Zsp(G=34,third=2).I(12)                 0      0     0     0      0    0  ZERO
+Zsp(G=34,third=2).I(13)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=2).I(14)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=2).I(23)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=2).I(24)             22875  21872 18827     0     10  216  ZERO
+Zsp(G=34,third=2).I(34)              7888      0     0     0      0    0  ZERO
+
+wall seconds: 10.38
+PASS

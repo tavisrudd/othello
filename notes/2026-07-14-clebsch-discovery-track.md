@@ -1674,3 +1674,26 @@ characterization itself is PROVED.
 
 **Status:** open, unpromoted. Not needed by C880, whose question is answered by
 the `n = 2 mod 4` case. Would need its own row to pursue.
+
+## 2026-08-11 (C908 pass 7): the incidence-cup cokernel is the escape group
+
+**Observation.** On the Fano surface of a smooth cubic threefold,
+`C_s ∪ (−) : H^1(F,Z) → H^3(F,Z)` has cokernel `(Z/2)^10`: Clemens–Griffiths
+(13.2) exhibit the cup matrix as `2E` with `E` the unimodular polarization
+(extraction locus: `notes/2026-08-11-c908-fano-schubert-restriction-extraction.md`
+§A5). This is the same abstract group as the C908 escape quotient
+`Q_15 = coker(L_5 : ∧^5Λ → ∧^7Λ) = (Z/2)^10` measuring
+`H^5(M,Z)/(b^*H^5(J,Z)+tors)`.
+
+**Why it may matter.** If the two `(Z/2)^10`s are canonically identified
+under `a_*`/Poincaré duality, the escape group acquires a divisor-theoretic
+description internal to `F` (failure of the half-polarization `C_s` to
+generate hard-Lefschetz integrally), which could convert the
+channel-population question into a statement about the incidence divisor
+alone.
+
+**Evidence:** both cokernels COMPUTED/certified separately; the comparison
+map is not yet written down.
+
+**Status:** open, unpromoted. Incidental find of the pass-7 literature
+extraction; not needed by the pass-7 no-go.

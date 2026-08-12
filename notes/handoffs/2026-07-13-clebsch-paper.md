@@ -749,6 +749,21 @@ unmarked one — and it still neither algebraizes an odd class nor proves a
 quadratic splitting field.  See `notes/2026-08-11-c908-unordered-degree-normalization.md`
 for the adjudication and `notes/2026-08-11-c908-unmarked-closure-and-w-twist.md`
 for the closure theorem (Theorem C) and the `w`-twist scoping.
+The `(1,5)` channel-population state after C908 passes 5–7: the
+universal-family source is even and every deformation-canonical residue is
+pinned to `{0, I}` (Theorem E); the ψ-transfer from the Fano surface reaches
+the whole escape lattice topologically; but the entire span-incidence
+product library — the span map is classically the Gauss map of `Θ` composed
+with the difference map, `g^*O(1) = ψ^*Θ` — realizes only integral scalar
+identities `c·I_10` with `4 | c`, hence residue zero mod two, certified over
+all 72 arrangements with an exact five-mechanism proof.  The unique standing
+population route is the non-product `c_4(ℰ)` bit `λ` (pass-5 §6 plan).  The
+pass-6 bimodal histogram mystery is closed: the invariant is the parity of
+the Pfaffian-complement functional `u∧Θ^{[4]}`.  See
+`notes/2026-08-11-c908-universal-family-even-rigidity.md`,
+`notes/2026-08-11-c908-transfer-liveness-and-span-incidence.md`,
+`notes/2026-08-11-c908-span-incidence-parity-no-go.md`, and
+`notes/2026-08-11-c908-fano-schubert-restriction-extraction.md`.
 The rational `(1,5)` inverse-Lefschetz class is algebraic, but its integral
 or two-local lift remains open; every canonical decomposable candidate is
 now even, with scalar coefficient ideal `6Z` universally and `12Z` on the

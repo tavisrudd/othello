@@ -1,0 +1,8 @@
+symplectic pairing convention: split
+histogram of dim span_z [E(u,z)] over the 45 symplectic bivectors: {2: 40, 8: 5}
+the 5 symplectic-pair bivectors: [((0, 5), 8), ((1, 6), 8), ((2, 7), 8), ((3, 8), 8), ((4, 9), 8)]
+histogram over the other 40: {2: 40}
+cross-tab (dim, ell-parity) in standard basis: [((2, 0), 24), ((8, 1), 21)]
+cross-tab (dim, ell-parity) in symplectic basis: [((2, 0), 40), ((8, 1), 5)]
+dichotomy 'dim 8 <=> ell odd' holds in both bases: True
+PASS

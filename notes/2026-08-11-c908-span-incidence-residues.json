@@ -1,0 +1,2135 @@
+{
+  "aggregate": {
+    "all_nonzero_are_scalar_multiples_of_the_identity": true,
+    "all_nonzero_have_full_integral_rank": true,
+    "candidates": 72,
+    "content_gcd_values": [
+      48,
+      156,
+      216,
+      288,
+      324,
+      432,
+      468,
+      756,
+      828,
+      900
+    ],
+    "every_content_divisible_by_four": true,
+    "integral_scalars": [
+      -900,
+      -828,
+      -756,
+      -468,
+      -432,
+      -324,
+      -288,
+      -216,
+      -156,
+      -48,
+      48,
+      156,
+      216,
+      288,
+      324,
+      432,
+      468,
+      756,
+      828,
+      900
+    ],
+    "integrally_nonzero": 44,
+    "integrally_zero": 28,
+    "reading": "the (1,5) residue of a live span-incidence candidate is a full-rank integral endomorphism of Lambda whose content is divisible by four; the channel is populated over Z and dies exactly on reduction mod two",
+    "two_adic_valuations_of_content": [
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "candidates": [
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=3).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=3).I(13)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 54,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 324,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -324,
+      "integral_trace": -3240,
+      "label": "Zsp(G=12,third=3).I(14)",
+      "live_one_five_terms": 54,
+      "terms_after_expansion": 55,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=3).I(23)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 54,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 324,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 324,
+      "integral_trace": 3240,
+      "label": "Zsp(G=12,third=3).I(24)",
+      "live_one_five_terms": 54,
+      "terms_after_expansion": 55,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=3).I(34)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 1,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=4).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 54,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 324,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 324,
+      "integral_trace": 3240,
+      "label": "Zsp(G=12,third=4).I(13)",
+      "live_one_five_terms": 54,
+      "terms_after_expansion": 55,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=4).I(14)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 54,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 324,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -324,
+      "integral_trace": -3240,
+      "label": "Zsp(G=12,third=4).I(23)",
+      "live_one_five_terms": 54,
+      "terms_after_expansion": 55,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=4).I(24)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        2
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=12,third=4).I(34)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 1,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=13,third=2).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=13,third=2).I(13)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 432,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -432,
+      "integral_trace": -4320,
+      "label": "Zsp(G=13,third=2).I(14)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=13,third=2).I(23)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 48,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 48,
+      "integral_trace": 480,
+      "label": "Zsp(G=13,third=2).I(24)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 1948,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 288,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -288,
+      "integral_trace": -2880,
+      "label": "Zsp(G=13,third=2).I(34)",
+      "live_one_five_terms": 1344,
+      "terms_after_expansion": 1949,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=13,third=4).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 468,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 468,
+      "integral_trace": 4680,
+      "label": "Zsp(G=13,third=4).I(13)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 110,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 900,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -900,
+      "integral_trace": -9000,
+      "label": "Zsp(G=13,third=4).I(14)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 162,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 756,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -756,
+      "integral_trace": -7560,
+      "label": "Zsp(G=13,third=4).I(23)",
+      "live_one_five_terms": 162,
+      "terms_after_expansion": 164,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 156,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 156,
+      "integral_trace": 1560,
+      "label": "Zsp(G=13,third=4).I(24)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 3896,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        3
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 828,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -828,
+      "integral_trace": -8280,
+      "label": "Zsp(G=13,third=4).I(34)",
+      "live_one_five_terms": 3212,
+      "terms_after_expansion": 3952,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=14,third=2).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 432,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 432,
+      "integral_trace": 4320,
+      "label": "Zsp(G=14,third=2).I(13)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=14,third=2).I(14)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 48,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -48,
+      "integral_trace": -480,
+      "label": "Zsp(G=14,third=2).I(23)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=14,third=2).I(24)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 1948,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 288,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 288,
+      "integral_trace": 2880,
+      "label": "Zsp(G=14,third=2).I(34)",
+      "live_one_five_terms": 1344,
+      "terms_after_expansion": 1949,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=14,third=3).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 900,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 900,
+      "integral_trace": 9000,
+      "label": "Zsp(G=14,third=3).I(13)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 468,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -468,
+      "integral_trace": -4680,
+      "label": "Zsp(G=14,third=3).I(14)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 110,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 156,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -156,
+      "integral_trace": -1560,
+      "label": "Zsp(G=14,third=3).I(23)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 162,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 756,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 756,
+      "integral_trace": 7560,
+      "label": "Zsp(G=14,third=3).I(24)",
+      "live_one_five_terms": 162,
+      "terms_after_expansion": 164,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 3896,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        1,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 828,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 828,
+      "integral_trace": 8280,
+      "label": "Zsp(G=14,third=3).I(34)",
+      "live_one_five_terms": 3212,
+      "terms_after_expansion": 3952,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=23,third=1).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=23,third=1).I(13)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 48,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -48,
+      "integral_trace": -480,
+      "label": "Zsp(G=23,third=1).I(14)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=23,third=1).I(23)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 432,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 432,
+      "integral_trace": 4320,
+      "label": "Zsp(G=23,third=1).I(24)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 1948,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 288,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 288,
+      "integral_trace": 2880,
+      "label": "Zsp(G=23,third=1).I(34)",
+      "live_one_five_terms": 1344,
+      "terms_after_expansion": 1949,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=23,third=4).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 162,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 756,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 756,
+      "integral_trace": 7560,
+      "label": "Zsp(G=23,third=4).I(13)",
+      "live_one_five_terms": 162,
+      "terms_after_expansion": 164,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 156,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -156,
+      "integral_trace": -1560,
+      "label": "Zsp(G=23,third=4).I(14)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 468,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -468,
+      "integral_trace": -4680,
+      "label": "Zsp(G=23,third=4).I(23)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 110,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 900,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 900,
+      "integral_trace": 9000,
+      "label": "Zsp(G=23,third=4).I(24)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 3896,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        3
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 828,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 828,
+      "integral_trace": 8280,
+      "label": "Zsp(G=23,third=4).I(34)",
+      "live_one_five_terms": 3212,
+      "terms_after_expansion": 3952,
+      "third_slot": 4,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=24,third=1).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 48,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 48,
+      "integral_trace": 480,
+      "label": "Zsp(G=24,third=1).I(13)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=24,third=1).I(14)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 432,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -432,
+      "integral_trace": -4320,
+      "label": "Zsp(G=24,third=1).I(23)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 109,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=24,third=1).I(24)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 1948,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 288,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -288,
+      "integral_trace": -2880,
+      "label": "Zsp(G=24,third=1).I(34)",
+      "live_one_five_terms": 1344,
+      "terms_after_expansion": 1949,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=24,third=3).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 156,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 156,
+      "integral_trace": 1560,
+      "label": "Zsp(G=24,third=3).I(13)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 162,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 756,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -756,
+      "integral_trace": -7560,
+      "label": "Zsp(G=24,third=3).I(14)",
+      "live_one_five_terms": 162,
+      "terms_after_expansion": 164,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 216,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 900,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -900,
+      "integral_trace": -9000,
+      "label": "Zsp(G=24,third=3).I(23)",
+      "live_one_five_terms": 216,
+      "terms_after_expansion": 218,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 108,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 468,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 468,
+      "integral_trace": 4680,
+      "label": "Zsp(G=24,third=3).I(24)",
+      "live_one_five_terms": 108,
+      "terms_after_expansion": 110,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 3896,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        2,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 828,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -828,
+      "integral_trace": -8280,
+      "label": "Zsp(G=24,third=3).I(34)",
+      "live_one_five_terms": 3212,
+      "terms_after_expansion": 3952,
+      "third_slot": 3,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=34,third=1).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 216,
+      "integral_trace": 2160,
+      "label": "Zsp(G=34,third=1).I(13)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -216,
+      "integral_trace": -2160,
+      "label": "Zsp(G=34,third=1).I(14)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -216,
+      "integral_trace": -2160,
+      "label": "Zsp(G=34,third=1).I(23)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 216,
+      "integral_trace": 2160,
+      "label": "Zsp(G=34,third=1).I(24)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=34,third=1).I(34)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 7888,
+      "third_slot": 1,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        2
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=34,third=2).I(12)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 0,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        3
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 216,
+      "integral_trace": 2160,
+      "label": "Zsp(G=34,third=2).I(13)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        1,
+        4
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -216,
+      "integral_trace": -2160,
+      "label": "Zsp(G=34,third=2).I(14)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        2,
+        3
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": -216,
+      "integral_trace": -2160,
+      "label": "Zsp(G=34,third=2).I(23)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 21872,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        2,
+        4
+      ],
+      "integral_content_gcd": 216,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": false,
+      "integral_rank": 10,
+      "integral_scalar": 216,
+      "integral_trace": 2160,
+      "label": "Zsp(G=34,third=2).I(24)",
+      "live_one_five_terms": 18827,
+      "terms_after_expansion": 22875,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    },
+    {
+      "distinct_one_five_terms": 0,
+      "equals_symplectic_mod_two": false,
+      "f2_rank": 0,
+      "f2_trace": 0,
+      "g_pair": [
+        3,
+        4
+      ],
+      "i_pair": [
+        3,
+        4
+      ],
+      "integral_content_gcd": 0,
+      "integral_is_scalar_times_identity": true,
+      "integral_is_scalar_times_symplectic_gram": false,
+      "integral_matrix_is_zero": true,
+      "integral_rank": 0,
+      "integral_scalar": 0,
+      "integral_trace": 0,
+      "label": "Zsp(G=34,third=2).I(34)",
+      "live_one_five_terms": 0,
+      "terms_after_expansion": 7888,
+      "third_slot": 2,
+      "verdict": "ZERO"
+    }
+  ],
+  "controls": {
+    "G1_equals_psi_pullback_theta": true,
+    "G1_equals_psi_pullback_theta_note": "holds iff k1 = 3 and gamma_I = -cross(psi^*Theta); with k1 = 3 and gamma_I sign -1",
+    "W_A_is_zero": true,
+    "W_A_note": "its only (1,5) route has second leg 27 (y' ^ Theta^[3]), the H^1 (x) H^4 channel, dead because Q_15 has exponent two and 3(Theta^[3] ^ y') lies in L_5(^5 Lambda) over Z",
+    "a_star_theta_equals_two_Cs_under_pushforward": true,
+    "channel_liveness": {
+      "both_channels_are_live": true,
+      "first_leg_alpha_prime_f2_rank": 10,
+      "first_legs_without_integral_alpha_prime": [],
+      "meaning": "both readout legs surject onto their mod-two targets, so a zero verdict is a cancellation inside the candidate, not a dead pipeline",
+      "second_leg_pairing_row_f2_rank": 10
+    },
+    "content_of_theta_wedge_theta3": 4,
+    "gamma_psi_cross_matrix_is_minus_theta": true,
+    "geometric_G2_remark": "the honest span class is g~^*O(1) = mu^*psi^*Theta - 2E on the diagonal blow-up, so G_2^geom = (psi^*Theta)^2 - 4[Delta_F]; since G_1 = psi^*Theta exactly (control above) the representative used here is (psi^*Theta)^2, and the correction -4[Delta_F] has every Kunneth coefficient divisible by four, hence contributes an even integral matrix and cannot change any mod-two verdict",
+    "h2_lattice": {
+      "generators": 46,
+      "gram_determinant": 1,
+      "rank_of_quotient": 45,
+      "relation_is_in_the_radical": true,
+      "unimodular": true
+    },
+    "positive_control": {
+      "meaning": "the contraction pipeline does produce nonzero mod-two residues on classes of the live shape, so the candidate verdicts below are genuine cancellations",
+      "single_synthetic_term_f2_matrix_is_nonzero": false,
+      "single_synthetic_term_f2_rank": 0,
+      "synthetic_family_f2_rank": 1,
+      "synthetic_family_live_terms": 4868,
+      "synthetic_family_terms": 5400
+    },
+    "psi_pullback_theta_pullback_parts_are_a_star_theta": true,
+    "psi_push_of_unit_is_six_theta": true,
+    "theta_wedge_theta3_equals_four_theta4": true,
+    "three_times_theta3_wedge_e_i_in_L5_image_over_Z": true,
+    "u_equals_theta_line_is_dead_content_four": true
+  },
+  "divided_powers": {
+    "int_J_theta5": 1,
+    "integral_for_k": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "inputs": {
+    "notes/2026-08-10-c904-minimal-class-divisor-lattice.sage": "d77752dcf242cdd3e8ecf15d34785eba583aa4c4c7770b79decd2f43e260f734"
+  },
+  "parameters": {
+    "k1": 3,
+    "k11": 27,
+    "use_expected_I": true
+  },
+  "pin": {
+    "all_candidates_satisfy_zero_or_identity": true,
+    "violations": 0
+  },
+  "priority_candidates": {
+    "Zsp(G=12,third=3).I(24)": "ZERO",
+    "Zsp(G=34,third=1).I(23)": "ZERO",
+    "Zsp(G=34,third=1).I(24)": "ZERO"
+  },
+  "psi_pullback_theta": {
+    "cross_coefficient_matrix_equals_minus_symplectic_gram": true,
+    "derivation": "psi^* e_i = -a^*e_i on the first slot + a^*e_i on the second; wedging gives (+1)a^*Theta on each slot and cross = -sum_{i,j} Theta_{ij} e_i (x) e_j",
+    "pullback_parts_are_a_star_theta_with_coefficient_one": true
+  },
+  "readout_infrastructure": {
+    "L_1_to_3_image_saturated": true,
+    "Q15_is_Z2_to_the_ten": true,
+    "dim_F2_Q15": 10,
+    "elementary_divisors_L_1_to_3": {
+      "1": 10
+    },
+    "elementary_divisors_L_5_to_7": {
+      "1": 110,
+      "2": 10
+    },
+    "pairing_is_perfect": true,
+    "pairing_kills_image_of_L5": true,
+    "pairing_rank_mod_two": 10
+  },
+  "replay_command": "cd /home/tavis/src/othello && nix shell nixpkgs#sage -c sage notes/2026-08-11-c908-span-incidence-residues.sage --json notes/2026-08-11-c908-span-incidence-residues.json --out notes/2026-08-11-c908-span-incidence-residues.out",
+  "schema": "c908-span-incidence-residues/1",
+  "symplectic_gram": [
+    [
+      0,
+      2,
+      3,
+      0,
+      0,
+      0,
+      -1,
+      -1,
+      -1,
+      4
+    ],
+    [
+      -2,
+      0,
+      0,
+      -3,
+      -3,
+      -1,
+      0,
+      -1,
+      -1,
+      4
+    ],
+    [
+      -3,
+      0,
+      0,
+      -2,
+      -3,
+      -1,
+      -1,
+      0,
+      -1,
+      4
+    ],
+    [
+      0,
+      3,
+      2,
+      0,
+      0,
+      -1,
+      -1,
+      -1,
+      0,
+      4
+    ],
+    [
+      0,
+      3,
+      3,
+      0,
+      0,
+      -1,
+      -1,
+      -1,
+      -1,
+      5
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      -4,
+      -4,
+      -4,
+      -4,
+      -5,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "unsolvable_first_legs": [],
+  "wall_seconds": 10
+}
