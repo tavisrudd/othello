@@ -1,0 +1,97 @@
+\section{The primitive-sixth-root atom}
+\label{sec:one-step}
+
+We use the geometric atomic \(F\)-bundle invariant of
+Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY}.  Only three features enter:
+its values lie in the free abelian group on atom-equivalence classes, it is
+additive under blowups, and a rank-\(r\) projective bundle contributes \(r\)
+copies of the base.
+
+\begin{definition}
+For a geometric atom \(\alpha\), let \(\FM(\alpha)\) be the multiset of
+formal-monodromy eigenvalues on its Levelt--Turrittin regular-singular
+factors, after the exponential parts have been separated.  Define
+\[
+ \nu_6(\alpha)=
+ \operatorname{mult}_{e^{\pi i/3}}\FM(\alpha)
+ +\operatorname{mult}_{e^{-\pi i/3}}\FM(\alpha).
+\]
+Extend \(\nu_6\) additively to the free atom group.
+\end{definition}
+
+The definition uses eigenvalues in \(\C^\times\), not chosen logarithms.
+Integral powers of the loop coordinate shift residue exponents by integers
+and leave \(\nu_6\) unchanged.
+
+\begin{lemma}[Formal isomonodromy]
+\label{lem:formal-isomonodromy}
+Along a connected component of the reduced unramified spectral cover, the
+formal-monodromy eigenvalue multiset of an atom is constant.
+\end{lemma}
+
+\begin{proof}
+After finite formal ramification and separation of exponential factors, one
+block has the form
+\[
+ \nabla=d-d\Phi(s,u)+R(s)\frac{du}{u}
+       +\sum_i\Gamma_i(s,u)\,ds_i,
+\]
+where \(\Gamma_i\) is formal-regular after the exponential term is removed.
+The coefficient of \(du/u\wedge ds_i\) in \(\nabla^2=0\) is
+\[
+ \partial_{s_i}R=[\Gamma_i(s,0),R].
+\]
+Hence the characteristic polynomial of \(R\), and therefore that of
+\(\exp(2\pi iR)\), is locally constant.  Descent only permutes the separated
+blocks.
+\end{proof}
+
+\begin{proposition}[Cubic and low-dimensional atoms]
+\label{prop:atom-values}
+Let \(X\) be a smooth cubic threefold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The cubic atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)>0\).
+\item Every atom represented by a point, a curve, or a smooth projective
+surface has \(\nu_6=0\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Cai's Proposition~6 gives formal residue classes \(\pm1/6\) in the
+rank-two zero-eigenvalue block of the big cubic quantum connection
+\cite{Cai}.  The same block is the unsplit cubic zero atom in the maximal
+big-quantum \(F\)-bundle of \cite[Example~6.21]{KKPYY}; scalar extension does
+not change its formal monodromy.  This proves (i).
+
+For a minimal surface with nef canonical class, the parity-corrected
+connection has nilpotent residue by \cite[Claim~6.15]{KKPYY}.  Undoing the
+parity correction permits only eigenvalues \(1\) and \(-1\).  Ruled surfaces
+reduce by the projective-bundle formula to curves, and nonminimal surfaces
+reduce by point blowups to their minimal models.  Points and curves likewise
+have only integral or half-integral residues.  The classification of smooth
+projective surfaces exhausts the possibilities and proves (ii).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
+Let \(Y=X\times\PP^1\).  The projective-bundle formula gives
+\[
+ \CFF(Y)=2\CFF(X),
+\]
+so Proposition~\ref{prop:atom-values} gives \(\nu_6(Y)>0\).
+
+Suppose that \(Y\) were rational.  Weak factorization of a birational map
+\(Y\dashrightarrow\PP^4\) gives, in the free abelian atom group,
+\[
+ \CFF(Y)+\sum_i(r_i-1)\CFF(Z_i)
+ =\CFF(\PP^4)+\sum_j(s_j-1)\CFF(W_j),
+\]
+where every smooth center \(Z_i,W_j\) has dimension at most two.  Apply
+\(\nu_6\).  Proposition~\ref{prop:atom-values}(ii) kills every center term,
+and the projective-bundle formula over a point gives
+\(\nu_6(\PP^4)=0\).  The left-hand side retains \(\nu_6(Y)>0\), a
+contradiction.
+\end{proof}
+
+The proof uses the free atom group, not a signed informal block ledger.  In
+particular the two copies supplied by \(\PP^1\) are positive multiplicities
+and cannot cancel one another.

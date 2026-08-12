@@ -1,0 +1,117 @@
+\section{The integral envelope and the exotic cubic sheet}
+\label{sec:envelope}
+
+Let \(\Omega\) be the six conjugate \(D_5\)-subgroups of \(A_5\), equivalently
+the six Sylow-\(5\) subgroups with their normalizers.  Put
+\[
+ A(\Omega)=\ker\bigl(\Z^\Omega\xrightarrow{\sum}\Z\bigr),
+ \qquad A(\Omega)^\vee=\Hom(A(\Omega),\Z).
+\]
+The perfect evaluation pairing defines a unimodular alternating form on
+\[
+ \mathcal H_{\mathrm{ref}}(\Omega)
+   =A(\Omega)^\vee e\oplus A(\Omega)f,
+ \qquad
+ \langle xe,yf\rangle=y(x).
+\]
+This is the hyperbolic symplectic envelope of the oriented six-set.
+
+\begin{proposition}[Universal envelope]
+\label{prop:universal-envelope}
+The construction \(\Omega\mapsto\mathcal H_{\mathrm{ref}}(\Omega)\) is
+functorial for permutations of \(\Omega\).  Rationally it is the unique
+rank-ten symplectic \(A_5\)-module whose two Lagrangians are copies of the
+standard five-dimensional constituent and whose pairing restricts to the
+root--weight evaluation pairing.
+\end{proposition}
+
+\begin{proof}
+The permutation lattice and its augmentation kernel are functorial.  The
+evaluation pairing between \(A(\Omega)\) and its dual is perfect, so the
+displayed alternating form is unimodular.  Over \(\Q\), the augmentation
+module is absolutely irreducible and its invariant symmetric form is unique
+up to scale.  Schur's lemma therefore writes every symplectic module with
+two such constituents as \(A(\Omega)_\Q\otimes U\), where \(U\) is a
+symplectic plane.  Requiring the two integral Lagrangians to pair perfectly
+fixes the root--weight lattice above.
+\end{proof}
+
+The finite golden orientation enters at the prime two.  Let
+\[
+ H_2=\operatorname{Aug}(\F_2^\Omega)/\langle\mathbf1\rangle.
+\]
+Then \(H_2\) is simple and \(\End_{A_5}(H_2)=\F_4\).  A normalized conference
+operator \(B\) with \(B^2=5I\) acts integrally on \(\Z^\Omega\).  Passing to
+the canonical saturation
+\[
+ D_6^\vee=\Z^\Omega+\Z\frac{\mathbf1}{2},
+ \qquad \varphi=\frac{I+B}{2},
+\]
+gives \(\varphi^2-\varphi-1=0\).  Its reduction on the commutator heart is
+one of the two primitive scalars \(\omega,\omega^2\in\F_4\), and replacing
+\(B\) by \(-B\) applies Frobenius.
+
+\begin{proposition}[Golden selection of the exotic pair]
+\label{prop:golden-exotic}
+The two orientations of the conference class determine the two primitive
+scalars in \(\End_{A_5}(H_2)=\F_4\).  Under orientation reversal,
+\[
+ B\longmapsto-B,
+ \qquad \omega\longmapsto\omega^2.
+\]
+Thus the golden-orientation torsor is canonically the Frobenius torsor of
+the exotic two-primary principal gluings.
+\end{proposition}
+
+\begin{proof}
+Every column of \((I+B)/2\) has the same half-integral class modulo
+\(\Z^\Omega\), so \(D_6^\vee\) is the least stable over-lattice.  The
+commutator submodule of \(D_6^\vee/2D_6^\vee\) is the four-dimensional
+six-point heart and its quotient is a trivial \(\F_4\)-line.  The extension
+has no invariant \(\F_4\)-line, so the restriction of \(\bar\varphi\) to the
+heart is primitive.  Finally \((I-B)/2=1-\varphi\), and in characteristic
+two \(1-\omega=\omega^2\).
+\end{proof}
+
+We now recall the geometric source of the same lattice.  Let \(S\) be the
+Fano surface of a smooth member of the \(A_5\)-pencil and
+\((J,\Theta)=\Alb(S)\) its intermediate Jacobian.  Each of the six
+\(D_5\)-subgroups gives an elliptic quotient \(q_H:J\to E_H\) and its Rosati
+dual \(i_H:E_H\to J\).
+
+\begin{proposition}[Six-axis polarization]
+\label{prop:six-axis-polarization}
+After coherent identification of the elliptic factors, the Rosati Gram
+matrix of the six maps is
+\[
+ G_6=6I_6-J_6.
+\]
+Any five axes therefore give an isogeny \(E^5\to J\) whose pulled-back
+polarization has Smith type \((1,6,6,6,6)\).
+\end{proposition}
+
+\begin{proof}
+Roulleau's intersection table gives self-intersection zero for the six fibre
+classes and pair intersection \(24\).  Two-transitivity makes the Rosati
+matrix have diagonal \(d\) and off-diagonal \(m\).  The missing trivial
+constituent gives \(d+5m=0\).  The minimal-class identity
+\([S]=\Theta^3/3!\), together with the polarized Riemann--Roch trace formula,
+turns the pair intersection into \(d^2-m^2=24\).  The positive solution is
+\((d,m)=(5,-1)\), hence \(G_6=6I-J\).  A five-by-five minor has Smith form
+\((1,6,6,6,6)\).
+\end{proof}
+
+The two-primary maximal isotropic kernels are the five points of
+\(\PP^1(\F_4)\).  The three \(\F_2\)-rational points retain the full simplex
+group \(S_6\); each remaining point has stabilizer exactly \(A_5\), and the
+outer normalizer exchanges them.  Strong Torelli and the automorphism group
+on the nonstandard cubic component therefore select the exotic pair.  At
+three, the unique monodromy-invariant line in elliptic three-torsion selects
+the scalar gluing.  Proposition~\ref{prop:golden-exotic} labels the two
+members of the exotic pair by the finite golden orientation.
+
+Hartlieb's period map for this component is nonconstant
+\cite{Hartlieb}.  Consequently the resulting smooth cubic family is
+non-isotrivial.  Only this landing and nonconstancy are used below; no
+identification of compactified parameter curves is needed for the separation
+theorem.

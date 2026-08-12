@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{array,booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbf A}
+\newcommand{\C}{\mathbf C}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Alb}{\operatorname{Alb}}
+\newcommand{\CFF}{\operatorname{CFF}}
+\newcommand{\FM}{\operatorname{FM}}
+
+\title{Irrationality after One Stabilization of Universally
+  \(CH_0\)-Trivial Cubic Threefolds}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does universal \(CH_0\)-triviality force rationality after stabilization?
+We construct a non-isotrivial one-parameter family of smooth cubic
+threefolds \(X_b\) for which \(X_b\) is universally \(CH_0\)-trivial but
+\(X_b\times\PP^1\) is irrational.  More generally, we prove that
+\(X\times\PP^1\) is irrational for every smooth cubic threefold \(X\).
+
+The examples arise from the nonstandard \(A_5\)-invariant cubic pencil.
+Its six elliptic axes have polarization matrix \(6I-J\).  Their oriented
+six-set determines a rank-ten symplectic envelope with five principal
+two-primary gluings; the golden orientation selects the Frobenius-conjugate
+exotic pair.  The exotic slope is semisimple at two, while the three-primary
+gluing is scalar.  A local mixed-adjugate argument therefore puts the
+primitive class \(\Theta^4/4!\) of the intermediate Jacobian in the integral
+divisor-product lattice.  Voisin's criterion gives universal
+\(CH_0\)-triviality fibre by fibre.
+
+For irrationality, we use the formal-monodromy atom of the big quantum
+connection.  The cubic atom has primitive sixth-root eigenvalues.  The
+projective-bundle formula gives two copies on \(X\times\PP^1\), whereas the
+atoms of every point, curve, or surface have only integral or half-integral
+formal exponents.  Additivity and weak factorization prevent cancellation.
+Thus the cycle-theoretic and quantum detectors diverge on the same smooth
+fourfolds.
+\end{abstract}
+
+\noindent\textbf{Keywords.} cubic threefold; universal \(CH_0\)-triviality;
+irrationality; intermediate Jacobian; quantum connection; weak factorization.
+
+\input{sections/01-introduction}
+\input{sections/02-envelope}
+\input{sections/03-minimal-class}
+\input{sections/04-one-step}
+\input{sections/05-synthesis}
+
+\begin{thebibliography}{99}
+
+\bibitem{BdGF}
+T.~Beckmann and O.~de Gaay Fortman,
+\emph{Integral Fourier transforms and the integral Hodge conjecture for
+one-cycles on abelian varieties}, Compositio Math. (2023).
+
+\bibitem{Cai}
+J.~Cai,
+\emph{The cubic threefold is symplectically irrational},
+arXiv:2608.01577 (2026).
+
+\bibitem{Hartlieb}
+M.~Hartlieb,
+\emph{Special subvarieties in the locus of intermediate Jacobians of cubic
+threefolds}, Math. Z. (2025), arXiv:2304.03214.
+
+\bibitem{KKPYY}
+L.~Katzarkov, M.~Kontsevich, T.~Pantev, and T.~Y.~Yu,
+\emph{Birational invariants from Hodge structures and quantum
+multiplication}, arXiv:2508.05105 (2026).
+
+\bibitem{Roulleau}
+X.~Roulleau,
+\emph{Genus 2 curve configurations on Fano surfaces},
+arXiv:1002.4467.
+
+\bibitem{Voisin}
+C.~Voisin,
+\emph{On the universal \(CH_0\) group of cubic hypersurfaces},
+J. Eur. Math. Soc. 19 (2017), 1619--1653; arXiv:1407.7261.
+
+\end{thebibliography}
+
+\end{document}

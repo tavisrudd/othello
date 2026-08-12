@@ -1,0 +1,83 @@
+\section{Introduction}
+
+A smooth projective variety is universally \(CH_0\)-trivial if the degree map
+\[
+  \deg:\CH_0(Y_L)\longrightarrow\Z
+\]
+is an isomorphism for every field extension \(L/\C\).  This condition is a
+central consequence of a decomposition of the diagonal and obstructs stable
+rationality.  Its vanishing, however, need not provide a rational
+parametrization.  We ask how far the failure can persist after one explicit
+stabilization.
+
+Our examples are fourfolds of the form \(Y=X\times\PP^1\), where \(X\) is a
+smooth cubic threefold in the nonstandard \(A_5\)-invariant pencil.  Two
+independent mechanisms act on the same \(Y\).  The intermediate Jacobian of
+\(X\) has an algebraic primitive minimal class; this gives universal
+\(CH_0\)-triviality.  The big quantum connection of every smooth cubic
+contains a formal-monodromy atom with primitive sixth roots; weak
+factorization shows that this atom survives the product with \(\PP^1\).
+
+\begin{theorem}[Separation after one stabilization]
+\label{thm:separation-family}
+Let \(X\to B^\circ\) be the smooth locus of the nonstandard
+\(A_5\)-invariant pencil of cubic threefolds.  For every
+\(b\in B^\circ(\C)\),
+\[
+ X_b\text{ is universally }CH_0\text{-trivial},
+ \qquad
+ X_b\times\PP^1\text{ is universally }CH_0\text{-trivial and irrational}.
+\]
+The family is non-isotrivial.
+\end{theorem}
+
+The irrationality statement does not depend on the symmetry of the pencil.
+
+\begin{theorem}[One-step irrationality]
+\label{thm:every-cubic}
+For every smooth complex cubic threefold \(X\), the fourfold
+\(X\times\PP^1\) is irrational.
+\end{theorem}
+
+We do not claim that \(X\) is stably irrational.  From the second
+stabilization onward, weak-factorization centers can themselves have cubic
+dimension, and the low-dimensional exclusion used here no longer applies.
+
+\subsection*{How the two proofs meet}
+
+The cycle-theoretic half starts from six elliptic quotients of the Fano
+surface.  Their Rosati Gram matrix is \(6I-J\), so any five axes give an
+isogeny \(E^5\to J(X)\) of polarization type \((1,6,6,6,6)\).  The
+two-primary principal kernels form \(\PP^1(\F_4)\).  Three retain the full
+simplex symmetry; the other two are exchanged by Frobenius and have
+stabilizer \(A_5\).  The golden orientation reconstructed by the companion
+cubic selects one member of this exotic pair.  At two its graph slope has
+minimal polynomial \(t^2+t+1\); at three the gluing is scalar.  Both local
+forms admit primitive mixed-adjugate formulas, which produce
+\(\Theta^4/4!\) as an integral product of divisor classes.
+
+The quantum half uses a different invariant.  We count primitive sixth-root
+eigenvalues of formal monodromy on the atoms of the maximal big-quantum
+\(F\)-bundle.  Cai's cubic calculation gives a nonzero count.  The
+projective-bundle formula doubles it on \(X\times\PP^1\).  If this fourfold
+were rational, weak factorization would express that count using centers of
+dimension at most two.  Surface classification and the low-dimensional atom
+formula show that every such center has count zero.
+
+\subsection*{Relation with the reconstruction series}
+
+The finite six-axis carrier first arose as the common output of distinct
+sparse-shadow reconstructions.  The present paper is logically standalone:
+Section~\ref{sec:envelope} defines its integral envelope and proves the
+geometric realization needed here.  The series provenance explains why the
+exotic sheet comes with a preferred golden orientation; it is not a premise
+for the cycle or quantum calculations.
+
+\subsection*{Proof map}
+
+Section~\ref{sec:envelope} constructs the rank-ten symplectic envelope and
+identifies the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves
+the local divisor-product theorem and applies it to the primitive minimal
+class.  Section~\ref{sec:one-step} proves Theorem~\ref{thm:every-cubic} from
+formal monodromy and weak factorization.  The final section combines the two
+detectors and records the exact scope boundary.

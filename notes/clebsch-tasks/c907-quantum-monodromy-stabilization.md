@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** active; exploratory research only; no Paper V or Lean promotion
+**Status:** one-step irrationality theorem closed and imported, by author
+instruction, into the C904 geometric epilogue; full stable irrationality
+remains active research.  No Paper V or Lean promotion.
 
 **AA checkpoint:** the low-dimensional-carrier branch is positive.  KKPYY
 Claim 6.15 forces every nef-canonical surface block to have fractional
@@ -126,7 +128,8 @@ search stop condition under `notes/research-reproducibility-conventions.md`.
 
 ## Boundaries
 
-- Do not edit the frozen Paper V manuscript.
+- Do not edit the frozen Paper V manuscript.  The geometric epilogue may use
+  the closed one-step theorem, but not the open higher-stabilization program.
 - Do not claim stable irrationality from finite computation.
 - Do not start Lean work without a separately authorized formalization task.
 - Literature and formulas are read from the shared cache first; any newly

@@ -2,10 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** complete at the manuscript-first gate; 18-page structural
-authority, deterministic paper check, visual review, claim ledger, and
-unapplied predecessor back-patch packet closed. Lean and mirror publication
-remain deferred by user instruction.
+**Status:** Paper V is complete and exported as a warning-free 22-page
+structural authority.  By author instruction, C904 now owns the unnumbered
+geometric epilogue at `papers/cubic-stabilization-epilogue/`.  Its initial
+theorem-first draft states the separation family, proves the local
+minimal-class and one-step irrationality mechanisms, and passes `make check`.
+Lean remains deferred.
 
 **Research checkpoint:** the literal-cubic target failed, but the replacement
 Paper-II chordal-axis bridge is proved exactly and independently replayed.
@@ -15,8 +17,8 @@ conference line and identifies sheet sign with conference orientation.  The
 marked oriented round trip is therefore proved.  The selected chordal line is
 load-bearing and must be declared in transports from Papers I and III.
 
-**Current surface:** *The Golden Companion Correspondence*, eighteen pages,
-warning-free. The revised paper proves the intrinsic selected-line
+**Paper V surface:** *Chordal and Conference Cubics: Reconstruction and a
+Residual \(C_2\)-Torsor*, twenty-two pages, warning-free. The revised paper proves the intrinsic selected-line
 classification, the residual \(uq\)-quotient, the exact source returns, the
 rank-five/rank-six common-heart theorem, uniform symmetric-conference
 root--weight saturation, the order-six nonsplit \(\mathbf F_4A_5\)-extension,
@@ -25,8 +27,14 @@ a human proof; the checker replays only the Paper-II normalization leaf.
 Sequential theorem, paragraph-job, proof, category, literature, trust, and
 rendered-page reads are GO. Closeout:
 notes/2026-08-11-c904-paper-v-structural-draft-closeout.md.
-Exact Papers I--IV patches are prepared but unapplied in
-notes/2026-08-11-c904-paper-v-unapplied-backpatch-packet.md.
+The reconstruction framing is applied across Papers I--V and the computational
+companion; all five standalone mirrors are synchronized locally and unpushed.
+
+**Epilogue surface:** *Irrationality after One Stabilization of Universally
+\(CH_0\)-Trivial Cubic Threefolds*, rooted at
+`papers/cubic-stabilization-epilogue/`.  The baseline theorem and optional
+period upgrades are frozen in
+`notes/2026-08-11-c904-geometric-epilogue-theorem-freeze.md`.
 
 **Post-freeze Annals-upgrade checkpoint:**
 `notes/2026-08-10-c904-annals-ceiling-dossier.md` now isolates a stronger,
