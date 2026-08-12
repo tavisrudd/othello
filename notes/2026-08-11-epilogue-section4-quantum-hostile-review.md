@@ -241,3 +241,25 @@ Finally, the weak-factorization citation is now exact: current line 170 cites
 KKPYY Proposition 5.22(2) for the blowup chemical formula.  The rank-two
 projective formula continues to cite Proposition 5.22(3).  No manuscript
 changes were made in this review.
+
+## Final narrow closure — 2026-08-11
+
+**Verdict: GO.** Current lines 66--92 discharge the last formal-ring defect.
+They place the parallel-transport matrix in the enlarged `t`-adic ring
+`GL(H tensor K((u))[[t-t_0]])`, explicitly distinguish it from an analytic
+Laurent gauge, and allow the negative `u`-orders to be unbounded across
+`t`-coefficients.  Because every individual coefficient uses only integral
+powers of `u`, coefficientwise formal monodromy fixes the matrix; conjugation
+therefore preserves the descended formal-monodromy eigenvalue multiset after
+the stated scalar extension.
+
+The citation to KKPYY Theorem 4.1 now identifies the unique local spectral
+projector on the unramified cover.  It tracks the selected atomic factor, makes
+the overlap identifications conjugate, and turns local constancy into
+constancy on each connected component.  This fully closes the earlier
+Witt-leaf objection.  KKPYY Proposition 5.22(2) remains the correct citation
+for the blowup chemical formula, and Proposition 5.22(3) the correct citation
+for the projective-bundle multiplicity.  No mathematical or citation defect
+remains in the reviewed Section 4 proof.
+
+No manuscript changes were made in this review.
