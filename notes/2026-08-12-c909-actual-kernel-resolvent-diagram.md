@@ -62,6 +62,29 @@ the Tate two-division system:
                               r^2=T.                         (5)
 ```
 
+Here is the basis-free bridge implicit in that sentence.  Let
+
+```text
+ H_2=Aug(F_2^6)/<1>,       End_A5(H_2)=F_4,
+ M_2(V)=H_2 tensor_F2 V
+```
+
+for a rank-two symplectic `F_2` local system `V`.  The `A_5`-stable
+maximal-isotropic subgroups of `M_2(V)` form the functorial packet
+
+```text
+ P(V)=P^1(F_4)=P^1(F_2) disjoint_union P_ex(V).
+```
+
+A symplectic isomorphism `eta:V-->V'` induces `1 tensor eta` on the
+discriminant module and hence an isomorphism
+`P_ex(V)-->P_ex(V')`.  This construction is independent of a basis: changing
+a coefficient basis acts through `GL_2(F_2)` by its usual fractional-linear
+action on the packet.  Applying it to (4) identifies the Tate discriminant
+two-set with the exotic two-set which contains the actual `K_2`.  Thus (4)
+does not directly identify one subgroup; it naturally identifies the exact
+two-object packet, and the signed cover selects an object.
+
 The three ingredients have distinct roles:
 
 ```text
@@ -98,4 +121,3 @@ The source-backed statements alone do not contain this theorem; it is a new
 deduction from the internally proved norm-axis kernel, graph classification,
 Torelli exclusion, and Prym-axis comparison.  Safe attribution must preserve
 that distinction.
-
