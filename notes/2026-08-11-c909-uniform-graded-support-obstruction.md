@@ -23,6 +23,14 @@ not a ring to be evaluated at \(L=1\).  A full \(\mathbf Z[L]\)- or Rees-valued
 object gives all \(m\) simultaneously; \(\mathsf T_m\) is the finite quotient
 needed for one chosen stabilization.
 
+The word ``minimal'' is in the graded-support sense: starting with a degree-zero
+carrier \(e_\alpha\), strict multiplication by \(L\) and a nonzero endpoint
+\(L^m e_\alpha\) force the chain
+\(e_\alpha,Le_\alpha,\ldots,L^m e_\alpha\).  The universal torsion-free
+\(L^{m+1}\)-nilpotent target for that chain is exactly \(\mathsf T_m\); any
+smaller target must either identify support degrees or kill the endpoint, and
+therefore cannot justify the interior-versus-endpoint argument below.
+
 The exact center-placement condition for an \(s\)-dimensional carrier is
 \[
 S_\alpha(Z)\subseteq\{0,1,\ldots,s-3\}
