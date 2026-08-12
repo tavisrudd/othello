@@ -31,11 +31,13 @@
 \maketitle
 
 \begin{abstract}
-For a projective arc $A\subset\PG(2,q)$, let $\cU(A)$ be the points on no
-chord of $A$.  The geometric paper proves, without an exhaustive
-classification of six-arcs over $\F_{11}$, that a six-arc in $\PG(2,11)$
-whose uncovered locus lies on a conic is the Clebsch hexagon.  Here exact
-finite computation sharpens and extends that result.
+This companion maps the finite boundary of the structural reconstruction
+theorem for Clebsch syndrome rigidity.  For a projective arc
+$A\subset\PG(2,q)$, let $\cU(A)$ be the points on no chord of $A$.  The
+geometric paper proves, without an exhaustive classification, that a six-arc
+in $\PG(2,11)$ whose uncovered locus lies on a conic is the Clebsch hexagon.
+Here exact finite computation sharpens that result and closes its remaining
+bounded parameter ranges.
 There are fifteen projective classes of six-arcs over $\F_{11}$; the
 Clebsch class is the unique one whose uncovered locus is contained in a
 cubic, and it is separated from every other class by a four-point gap in
@@ -45,10 +47,11 @@ searches then classify all conic-filling arcs through eight points: only
 the projective four-frame over $\F_5$ and the Clebsch six-arc over
 $\F_{11}$ occur.
 The companion also preserves the original $q=13$ computations underlying
-forthcoming Paper~IV, which gives the passant-code reconstruction theorem a
+Paper~IV, which gives the passant-code reconstruction theorem a
 standalone structural and reproducible account~\cite{RuddPassant2026}.
 The finite claims are accompanied by exact replay routes and a
-claim-by-claim trust ledger.
+claim-by-claim trust ledger separating human proofs, published inputs, Lean
+theorems, finite certificates, and trusted executions.
 \end{abstract}
 
 \noindent\textbf{Keywords.} finite projective plane; arc; conic; MDS code;
@@ -59,6 +62,17 @@ deep hole; exhaustive classification.
 51E22, 05B25.
 
 \section{Setup and relation to the geometric paper}
+
+The companion separates three tasks suited to exact finite computation:
+sharp strengthening at $q=11$, exclusion of the field orders and small arc
+sizes left by the structural bounds, and reproducible preservation of the
+historical $q=13$ incidence-code data.  Enumeration does not replace the
+geometric rigidity proof.  It either sharpens a theorem already proved
+structurally or closes a finite terminal whose domain and coverage are stated
+explicitly.
+The certified fifteen-class census at \(q=11\) is part of that finite
+boundary map; this companion does not claim priority for the bare number of
+projective classes.
 
 A \emph{$k$-arc} is a set $A$ of $k$ points of $\PG(2,q)$ with no three
 collinear.  Its chords are the joins of pairs of vertices, and
@@ -137,6 +151,14 @@ so
 $|\cU(A)|\in\{18,19,20,22\}$. The replay is
 \path{check_rigidity_degenerate_conic.py}.
 
+\begin{proposition}[Projective six-arc census]
+\label{prop:fifteen-class-census}
+There are exactly fifteen projective classes of six-arcs in \(\PG(2,11)\).
+Their stabilizer orders, uncovered-set sizes, and least degrees of containing
+forms are those in Table~\ref{tab:fifteen-classes}.
+\end{proposition}
+
+\begin{proof}[Proof by finite certificate]
 Table~\ref{tab:fifteen-classes} records the complete census needed below.
 Every representative
 contains the standard frame
@@ -212,6 +234,7 @@ nine.  This is corroboration at $q=11$, not a second proof of the
 proposition.  Regenerating all $1548$ normalized
 arcs remains an independent audit rather than the reader-facing
 classification proof.
+\end{proof}
 
 The same census supports a strengthening in which a cubic, rather than a
 conic, is allowed.
@@ -405,16 +428,6 @@ an algebraic closure of $\F_2$ they give both its dimension $(q-1)^2/4$,
 which is $36$ at $q=13$, and its exact decomposition into pairwise
 nonisomorphic simple modules for
 $\operatorname{PSL}(2,q)$~\cite[Theorem~6.1, Corollary~6.3]{MadisonWu2012}.
-A descent refinement of that decomposition is recorded in the project's
-research notes: over $\F_2$ itself, and for the full
-$\operatorname{PGL}(2,13)$-action, $K=\ker M$ is irreducible with
-endomorphism field $\F_8$; equivalently $K$ carries a canonical
-twelve-dimensional $\F_8$-structure whose base change to the closure
-returns Madison and Wu's three summands as Galois conjugates.  Its proof is
-not reproduced here and its formalization is pending, so it is outside the
-claim surface of this artifact and nothing below rests on it: the spanning
-conclusion of Theorem~\ref{thm:q13-tangent-code} is proved from the mod-two
-intersection algebra instead.
 Hollmann and Xiang construct the
 elliptic association scheme afforded by the
 $\operatorname{PGL}(2,q)$-action on the passant carrier
@@ -423,7 +436,7 @@ scheme used below are known.  The assertions here are the exact minimum
 distance and the intrinsic reconstruction of the incidence matrix and
 scheme from the minimum words.  They are retained as the historical
 computational source.  Their current paper-level development belongs to
-forthcoming Paper~IV~\cite{RuddPassant2026}, which supplies a standalone
+Paper~IV~\cite{RuddPassant2026}, which supplies a standalone
 proof and evidence surface.
 
 One numerical coincidence drives both the weight-eight exclusion below and
@@ -564,10 +577,11 @@ twelve internal points do have zero syndrome:
 \]
 Their stabilizer is dihedral of order $24$.  This proves $d(K)=12$.
 
-The classification of the minimum layer is an exhaustive exact execution.
-The replay
-generates four projective orbits from explicit representatives and verifies
-all $364$ supports against $M$.  It then forms all pair and triple concurrence
+The exhaustive minimum-layer classification is proved structurally in
+Paper~IV~\cite{RuddPassant2026}.  The independent replay retained here starts
+from its four explicit representatives, generates four orbits of size $91$,
+and verifies all $364$ resulting supports against $M$; it does not replace the
+exhaustiveness proof.  It then forms all pair and triple concurrence
 profiles.  Pair concurrences are $7,9,12$ on passant joins and $6,8$ on
 secant joins; the six triple histograms are distinct.  Exactly $78$ of the
 resulting passant seven-cliques have zero triple concurrence, and direct
@@ -824,10 +838,16 @@ conic filling; the classification is complete through eight points.
 \section{Trust and exact replay}
 \label{sec:verification}
 
+The verification architecture is a boundary map for the mathematics.  Where
+a conceptual proof is available, computation is retained only as corroboration
+or strengthening.  Where a genuinely finite terminal remains, the exact
+domain, coverage argument, certificate type, and replay route are stated
+explicitly.  The proof modes below are not interchangeable.
+
 Every claim is assigned one of exactly five proof modes.  A \emph{human
-structural proof} is a complete argument in this paper or the geometric
-paper.  A \emph{published theorem} is an external result used with its
-hypotheses matched.  A \emph{Lean theorem} is an exact named declaration in
+structural proof} is a complete argument in this paper or in a cited
+structural paper of the same release.  A \emph{published theorem} is an
+external result used with its hypotheses matched.  A \emph{Lean theorem} is an exact named declaration in
 the pinned formal checkout.  A \emph{finite certificate} is a finite proof
 object checked by a small verifier, including a coverage or mass identity.
 A \emph{trusted execution} reconstructs and exhausts its stated domain by an
@@ -876,7 +896,8 @@ $q=13$ weight-eight exclusion
 $q=13$ weight-ten exclusions
 & finite certificate & Both exhaustive XOR-disjointness domains \\
 $q=13$ minimum-word classification and reconstruction
-& trusted execution & All four generated orbits and every pair/triple profile \\
+& human structural proof & Paper~IV's complete proof; the local replay
+  regenerates all four orbits and every pair/triple profile \\
 $q=13$ orbit spans and automorphism group
 & human structural proof & The mod-two elliptic intersection algebra and
   the four resolving anchors \\
@@ -958,7 +979,7 @@ Its tracked axiom audit reports only the ordinary foundational logical axioms;
 the rigidity implication uses no declared Dye or other project axiom.  None of these
 declarations asserts the q11 census, q13 distance or minimum-word
 classification, or the q13/q17/q19 terminal DAG theorem.  Those retain the
-finite modes stated in Table~\ref{tab:claim-modes}.
+proof modes stated in Table~\ref{tab:claim-modes}.
 
 \section{Conclusion}
 

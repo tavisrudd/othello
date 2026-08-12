@@ -40,7 +40,7 @@ from pathlib import Path
 PAPER = Path(__file__).resolve().parents[1]
 SOURCE = "clebsch_factorization.tex"
 TRACKED_PDF = PAPER / "clebsch_factorization.pdf"
-EXPECTED_PAGES = 46
+EXPECTED_PAGES = 45
 # 2026-01-01T00:00:00Z. Fixed so that independent builds of one source agree.
 DETERMINISTIC_EPOCH = "1767225600"
 

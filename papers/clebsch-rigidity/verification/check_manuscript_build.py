@@ -39,7 +39,7 @@ WARNING_RE = re.compile(
 PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
 EXPECTED_PAGES = {
     "clebsch_rigidity.tex": 29,
-    "clebsch_rigidity_computational_companion.tex": 13,
+    "clebsch_rigidity_computational_companion.tex": 14,
 }
 # 2026-01-01T00:00:00Z. Fixed so that independent builds of one source agree.
 DETERMINISTIC_EPOCH = "1767225600"

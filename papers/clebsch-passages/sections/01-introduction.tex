@@ -12,61 +12,28 @@ normalized by
  \langle p,(\,a\mathbin{\cdot}x\,)^3\rangle=p(a);
 \]
 its restriction to \(H\) is nondegenerate.  Hitchin associated to a
-general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations:
-equivalently, two Mukai--Umemura isotropic three-planes \(U\subset H\) with
-\(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  The incidence
-variety of pairs \(([f],U)\) is therefore generically a degree-two cover of
-\(\mathbf P(H)\).  We determine its rational square class and, after fixing
-the marked bridge datum below, compare its chosen sign with two further
-realizations.  On the six-axis carrier the marked sign determines a
-conference operator whose Pfaffian,
-determinant, and middle-exterior shadows give the classical Joubert, Segre,
-Igusa, and diagonal Clebsch models.  On the ten face axes it returns as the
-degree-six Gaunt cubic.  Figure~\ref{fig:source-shadow-return} records this
-architecture and the role of the marking.
+general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations,
+equivalently two Mukai--Umemura isotropic three-planes \(U\subset H\) with
+\(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  Their incidence
+variety is generically a degree-two cover of \(\mathbf P(H)\).  We determine
+its rational square class and, after fixing the marked bridge datum below,
+transport a chosen sign through conference, operator, and harmonic
+realizations.  The same conference carrier later yields two standalone
+structural theorems.  Figure~\ref{fig:source-shadow-return} records the main
+source--shadow--return route and the role of the marking.
 
 \Needspace{27\baselineskip}
 \medskip
-\noindent\textbf{Series perspective.}
-\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
-determine the structures that produced them.  The present paper follows an
-arithmetic incidence cover through its conference source and operator shadows
-to a harmonic return.  Papers~I and III reconstruct marked conference
-companions, whereas Paper~II reconstructs a signed chordal companion.
-Paper~V proves that they share one invariant pencil and six-axis carrier and,
-after marking a chordal line, recover each other with orientation
-\cite{RuddCompanion2026}.  Paper~IV is the parallel lower branch: minimum-word pairs
-reconstruct a marked conic plane and polarity, with no cubic identification
-asserted.  Figure~\ref{fig:series-map} records this division.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-  x=1cm,y=1cm,>=Latex,
-  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
-    align=center,font=\footnotesize,minimum height=8mm,text width=29mm,
-    inner sep=2.5pt},
-  active/.style={paper,very thick,fill=black!12},
-  package/.style={paper,text width=38mm}
-]
-\node[paper]   (p1) at (0,1.45) {\textbf{I}\\conference companion};
-\node[paper]   (p2) at (0,0.35) {\textbf{II}\\chordal companion};
-\node[active]  (p3) at (0,-0.75) {\textbf{III}\\conference companion};
-\node[paper]   (p5) at (5.25,0.35) {\textbf{V}\\marked companion correspondence};
-\node[package] (gold) at (10.5,0.35) {one six-axis carrier\\conference \(+\) chordal};
-\node[paper]   (p4) at (0,-2.05) {\textbf{IV}\\minimum-word pairs};
-\node[package] (plane) at (5.25,-2.05) {marked conic plane\\and polarity};
-\draw[<->] (p1.east) -- ([yshift=3mm]p5.west);
-\draw[<->] (p2.east) -- (p5.west);
-\draw[<->] (p3.east) -- ([yshift=-3mm]p5.west);
-\draw[->,thick] (p5.east) -- (gold.west);
-\draw[->,thick] (p4.east) -- (plane.west);
-\end{tikzpicture}
-\caption{Series map.  Upper double arrows are the marked transports and
-returns proved in Paper~V; its right arrow is the common-carrier theorem.
-The lower solid arrow is Paper~IV's independent reconstruction.}
-\label{fig:series-map}
-\end{figure}
+\noindent\textbf{Reconstruction perspective.}
+The first inverse question is arithmetic: what is lost when Hitchin's
+two-sheeted incidence construction is remembered only through its branch
+sextic?  The second is marked: once a sheet is chosen, how much of that choice
+survives in the conference and harmonic shadows?  The third is independent of
+Hitchin's cover: what can low-order spectral or four-set data reconstruct for
+a general conference matrix or two-graph?  The Clebsch and icosahedral models
+are the meeting point of the first two questions.  Paper~V later compares the
+conference shadow with a chordal companion after an additional marking
+\cite{RuddCompanion2026}; it supplies no hypothesis here.
 
 \begin{figure}[H]
 \centering
@@ -277,14 +244,15 @@ operator formulas, and Theorem~\ref{thm:harmonic-main} identifies the Petersen
 coefficient module and computes the invariant cubic by one exact
 spherical-moment evaluation.
 
-Two later subsections of Section~\ref{sec:golden-operator} use the same
-conference carrier but supply no hypothesis to this route.
-Theorem~\ref{thm:balanced-exchange-rigidity} characterizes order six by
-cut-independent balanced exchange spectrum.  Independently,
+The next two results are standalone structural consequences.  They use the
+conference carrier but neither assume Hitchin's cover nor supply a hypothesis
+to the source--shadow--return argument.
+Theorem~\ref{thm:balanced-exchange-rigidity} characterizes order six among
+symmetric conference matrices by cut-independent balanced exchange spectrum.
 Theorem~\ref{thm:aligned-faithfulness} proves that aligned four-sets reconstruct
-two-graphs from seven vertices onward, with seven sharp.  For conference
-matrices the latter recovers the signing from order ten onward, up to switching
-and global negation.
+every two-graph from seven vertices onward, with seven sharp; for conference
+matrices this recovers the signing from order ten onward, up to switching and
+global negation.
 
 Hitchin proves the generic degree, identifies the branch sextic, constructs
 the Clebsch chart, computes its restriction, and classifies the fibre over
@@ -296,8 +264,9 @@ explicit specialization.  The Mukai--Umemura threefold supplies the
 original threefold \cite{MukaiUmemura}; Hitchin supplies the incidence
 construction and every formula used here.  Dye's finite theorem gives the
 complementary square-\(5\) criterion for Clebsch hexagons
-\cite{DyeClebsch}.  The abstract
-equation \(z^2=5J_{\mathbf Z}\) is etale on \(D(10J_{\mathbf Z})\), but its
+\cite{DyeClebsch}.  For an integral square rescaling \(J_{\mathbf Z}\) of
+\(J_0\), the abstract equation \(z^2=5J_{\mathbf Z}\) is etale on
+\(D(10J_{\mathbf Z})\), but its
 comparison with the geometric incidence variety is proved only after
 inverting an unspecified integer.
 

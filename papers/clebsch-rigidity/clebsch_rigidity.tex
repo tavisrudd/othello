@@ -64,7 +64,9 @@ monomial equivalence: the projective deep-hole locus is a recognition
 invariant whose metric boundary data recover the parity-check geometry.
 The reconstructed conic then determines its polarity,
 and Dye's theorem identifies the stabilizer as $A_5$; none of this geometry
-is assumed.
+is assumed.  Decoder multiplicities further recover the Brianchon points,
+self-polar triangles, and an intrinsic bipartition of the three-coordinate
+supports.
 
 Nearest-codeword ambiguity then reconstructs an unordered orientation torsor
 on six axes.  Its signed orbital operator satisfies $B^2=5I$, and triangle
@@ -93,29 +95,26 @@ conic; monomial equivalence; two-graph; golden ratio.
 \section{Introduction}
 \label{sec:intro}
 
-The complete nearest-codeword structure of a code can retain geometry that
-is absent from its definition.  The example here is a non-GRS
-$[6,3,4]_{11}$ MDS code.  Its maximum-distance syndrome directions form a
-conic, and that coarse locus already determines the projective code: its six
-parity-check columns are projectively equivalent to the Clebsch hexagon,
-with the associated polarity and $A_5$ symmetry.  No conic, polarity, group
-action, or classical hexagon structure is assumed.  Thus the problem is an
-inverse one: when does the projective deep-hole locus determine an MDS code,
-and how much of its geometry can nearest-codeword data recover?
+A recurring inverse problem in coding theory and finite geometry is to
+determine how much of a projective system can be reconstructed from coarse
+metric data.  Here the retained datum is the projective locus of
+maximum-distance syndromes of a redundancy-three MDS code.  For a six-arc in
+$\PG(2,11)$, containment of that locus in an arbitrary conic forces the
+Clebsch hexagon; decoder data then recover its polarity, symmetry, and golden
+orientation.  The exceptional configuration is therefore the output of a
+recognition theorem, not part of its input.
 
 \Needspace{27\baselineskip}
 \medskip
-\noindent\textbf{Series perspective.}
-\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
-determine the structures that produced them.  The present paper begins with
-deep-hole syndrome data and reconstructs the code, conic geometry, and golden
-orientation.  Papers~I and III reconstruct marked conference companions,
-whereas Paper~II reconstructs a signed chordal companion.  Paper~V proves
-that they share one invariant pencil and six-axis carrier and, after marking
-a chordal line, recover each other with orientation
-\cite{RuddCompanion2026}.  Paper~IV is the parallel lower branch: minimum-word pairs
-reconstruct a marked conic plane and polarity, with no cubic identification
-asserted.  Figure~\ref{fig:series-map} records this division.
+\noindent\textbf{Reconstruction perspective.}
+The motivating question is not specific to the Clebsch configuration: when
+can a sparse invariant determine the object that produced it?  Here the
+invariant is the maximum-distance syndrome locus and the source is a
+projective MDS code.  The order-eleven Clebsch code is the rigid exceptional
+answer, while the chord-defect identity and conic-filling bounds are
+field-uniform.  The later papers study other shadows of related sources;
+none is used in the proofs here.  Figure~\ref{fig:series-map} records the
+programme and the independent lower branch.
 
 \begin{figure}[H]
 \centering
@@ -184,6 +183,11 @@ $\F_q$-rational point set of a nonsingular conic.
 Here and in Theorem~\ref{thm:rigidity}, a \emph{conic} is the projective
 zero set of a nonzero homogeneous quadratic form; it may be degenerate
 unless stated otherwise.
+
+The theorem is an inverse statement.  Its hypothesis sees only the locus
+missed by the secants of an unknown six-arc; it assumes neither a Clebsch
+model, a conic polarity, nor an $A_5$-action.  These structures appear only
+after rigidity has forced the projective class.
 
 \begin{theorem}[Rigidity theorem]
 \label{thm:rigidity}
@@ -274,13 +278,9 @@ and the original computational form of an exact $q=13$ binary incidence-code
 theorem.  Paper~IV gives the structural and reproducible account of that
 $q=13$ consequence~\cite{RuddPassant2026}.
 
-Paper~II studies what the conic matching quotient remembers
-\cite{RuddFactorization2026}; Paper~III supplies the characteristic-zero
-golden source~\cite{RuddPassages2026}; and Paper~IV gives the independent
-minimum-word reconstruction~\cite{RuddPassant2026}.  The
-reconstructed operator also has uses beyond this inverse problem: the
-unnumbered Golden quantum-statistics companion studies its
-exchange-statistical interpretation~\cite{RuddGoldenQuantum2026}.
+The remaining cross-paper architecture is recorded in
+Figure~\ref{fig:series-map}; none of those companion constructions is used in
+the present proof.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -483,9 +483,9 @@ vertices lie on no conic in characteristic $11$
 \cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem's
 Propositions~11--12 identify this as the two-transitive $A_5$-arc $K_2$;
 their Proposition~13 classifies the complete two-transitive arcs and omits
-this order-eleven six-arc~\cite[Props.~11--13]{SVM1995}. It is therefore
-incomplete, so the associated redundancy-three code has covering radius
-three.
+this order-eleven six-arc~\cite[Props.~11--13]{SVM1995}. The order-eleven
+six-arc is therefore incomplete, so the associated redundancy-three code has
+covering radius three.
 
 \section{A universal chord-defect identity}
 \label{sec:chord-defect}
@@ -2188,32 +2188,6 @@ S.-L.~Ng and P.~R.~Wild,
 T.~Rudd,
 \newblock Computational strengthenings of Clebsch syndrome rigidity,
 \newblock companion manuscript, 2026.
-
-\bibitem{RuddCompanion2026}
-T.~Rudd,
-\newblock \emph{The Golden Companion Correspondence},
-\newblock Paper~V, companion manuscript, 2026.
-
-\bibitem{RuddFactorization2026}
-T.~Rudd,
-\newblock Quadratic trade rigidity and cubic orientation in conic matching
-quotients,
-\newblock Paper~II, released manuscript, version 2, 2026,
-\newblock \href{https://doi.org/10.5281/zenodo.21682217}
-{doi:10.5281/zenodo.21682217}.
-
-\bibitem{RuddGoldenQuantum2026}
-T.~Rudd,
-\newblock Exchange landscapes, orientation, and rigidity in the Golden
-six-mode conference interferometer,
-\newblock companion manuscript, 2026.
-
-\bibitem{RuddPassages2026}
-T.~Rudd,
-\newblock Golden descent and operator realizations of the Clebsch cubic,
-\newblock Paper~III (\emph{passages}), released manuscript, version 2, 2026,
-\newblock \href{https://doi.org/10.5281/zenodo.21682515}
-{doi:10.5281/zenodo.21682515}.
 
 \bibitem{RuddPassant2026}
 T.~Rudd,

@@ -41,13 +41,6 @@ in conic matching quotients}
 \maketitle
 \endgroup
 
-\begin{center}
-\small\itshape
-From deep holes, a cubic takes shape; its companion \textbf{finds its bearings},\\
-the carrier stands fixed while their shadows move; from minimum words, the plane returns,\\
-and the scattered shadows gather home.
-\end{center}
-
 \begin{abstract}
 Restriction to a conic forgets how its marked points were paired into
 secants.  Among full \(\operatorname{PGL}_2(q)\)-orbits of perfect matchings
@@ -62,7 +55,8 @@ The restriction to perfect matchings is sharp.  For either surviving stabilizer,
 locus in the ambient conic-product fiber is an affine line of \(q\) pairwise
 nonconjugate rational points.  Only the matching point splits completely
 into linear factors, although \(q-2\) nonmatching orbits have the same
-one-dimensional two-valued strength-two trade condition.  Thus complete
+one-dimensional two-valued strength-two trade condition; the remaining
+rational point is the coalescence parameter.  Thus complete
 splitting selects the matching orbit from the fixed line.  The exceptional
 one-factorizations are classical; the new boundary is the fixed line and its
 unique completely split point.
@@ -90,57 +84,25 @@ arithmetically Gorenstein; cubic inverse system.
 
 \section{Introduction}
 
-We begin with marked secant geometry and ask a complementary reconstruction
-question: what does common restriction to a conic forget, and what does the
-conic-ideal quotient remember?
+A perfect matching of marked conic points determines a product of secant
+lines.  Restriction to the conic deliberately forgets the pairing, and we ask
+when low-degree algebra in the resulting quotient recovers it.  Over all odd
+finite fields, a one-dimensional two-valued quadratic trade is rigid enough:
+within the full matching carrier it forces exactly the $B_3/\F_7$ and
+$H_3/\F_{11}$ orbits, and the first surviving odd tensor restores the
+orientation of the recovered sheets.
 
 \Needspace{27\baselineskip}
 \medskip
-\noindent\textbf{Series perspective.}
-\emph{Clebsch: Rigidity from Sparse Shadows} asks when incomplete invariants
-determine the structures that produced them.  The present paper starts from a
-quadratic trade and reconstructs the surviving matching sheets and their cubic
-orientation.  Papers~I and III reconstruct marked conference companions,
-whereas the present paper reconstructs a signed chordal companion.  Paper~V
-proves that they share one invariant pencil and six-axis carrier and, after
-marking a chordal line, recover each other with orientation
-\cite{RuddCompanion2026}.  Paper~IV is the parallel lower branch: minimum-word pairs
-reconstruct a marked conic plane and polarity, with no cubic identification
-asserted.  Figure~\ref{fig:series-map} records this division.
+\noindent\textbf{Reconstruction perspective.}
+The classification ranges over every odd prime power.  It determines when the
+affine quotient configuration recovers the missing pairing and when its first
+odd tensor orients the recovered sheets.  The Clebsch-related
+$H_3/\F_{11}$ case is one exceptional output, not an input.  The classification
+and reconstruction are standalone; no companion construction is used here.
 
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-  x=1cm,y=1cm,>=Latex,
-  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
-    align=center,font=\footnotesize,minimum height=8mm,text width=29mm,
-    inner sep=2.5pt},
-  active/.style={paper,very thick,fill=black!12},
-  package/.style={paper,text width=38mm}
-]
-\node[paper]   (p1) at (0,1.45) {\textbf{I}\\conference companion};
-\node[active]  (p2) at (0,0.35) {\textbf{II}\\chordal companion};
-\node[paper]   (p3) at (0,-0.75) {\textbf{III}\\conference companion};
-\node[paper]   (p5) at (5.25,0.35) {\textbf{V}\\marked companion correspondence};
-\node[package] (gold) at (10.5,0.35) {one six-axis carrier\\conference \(+\) chordal};
-\node[paper]   (p4) at (0,-2.05) {\textbf{IV}\\minimum-word pairs};
-\node[package] (plane) at (5.25,-2.05) {marked conic plane\\and polarity};
-\draw[<->] (p1.east) -- ([yshift=3mm]p5.west);
-\draw[<->] (p2.east) -- (p5.west);
-\draw[<->] (p3.east) -- ([yshift=-3mm]p5.west);
-\draw[->,thick] (p5.east) -- (gold.west);
-\draw[->,thick] (p4.east) -- (plane.west);
-\end{tikzpicture}
-\caption{Series map.  Upper double arrows are the marked transports and
-returns proved in Paper~V; its right arrow is the common-carrier theorem.
-The lower solid arrow is Paper~IV's independent reconstruction.}
-\label{fig:series-map}
-\end{figure}
-
-The main point is completeness: the intrinsic quadratic-trade condition
-selects exactly two full projective matching orbits over all odd finite
-fields.  A four-endpoint switch shows that competing secant products differ
-by the conic equation, so their quotients form an affine configuration.
+A four-endpoint switch shows that competing secant products differ by the
+conic equation, so their quotients form an affine configuration.
 For the two surviving orbits, quadratic products recover an unordered
 bipartition of that configuration.  The first surviving signed tensor is
 cubic and orients its two parts.  Thus quadratic data recover the
@@ -152,20 +114,10 @@ within the full matching carrier, the quadratic relation forces one of two
 exceptional geometries without assuming its group type, self-association, or
 Gorenstein coordinate ring.
 
-Rodr\'iguez-Pajares, Ruano, and Salizzoni characterize the Gorenstein
-defect of a self-dual code by its indecomposable blocks, equivalently by
-the defect of its Schur square
-\cite[Theorem~3.11 and Corollaries~3.12--3.13]{RodriguezPajaresEtAl2025}.
-Accordingly, the general self-associated/Schur-square/Gorenstein mechanism
-is background here, not a priority claim.  Our theorem starts from different
-input.  With no self-duality or Gorenstein premise, it classifies
-the full matching orbits from the two-valued quadratic-trade condition alone,
-reconstructs their sheets, and identifies the orbit-specific cubic that
-orients them.  The matching carrier is sharp:
-outside it, a stabilizer-fixed affine line contains \(q-2\) nonmatching
-orbits with the same one-dimensional two-valued strength-two trade condition,
-while its unique point that splits completely into linear factors is the
-matching orbit.
+The general implication from self-dual codes and their Schur squares to
+Gorenstein coordinate rings is background here.  The theorem instead starts
+from the weaker quadratic-trade condition, with no self-duality or Gorenstein
+premise.
 
 \begin{center}
 \small
@@ -215,6 +167,14 @@ matching point, while \(q-2\) nonmatching orbits on that line still have
 one-dimensional two-valued quadratic-trade space.
 \end{enumerate}
 \end{theorem}
+
+Rodr\'iguez-Pajares, Ruano, and Salizzoni characterize the Gorenstein defect
+of a self-dual code by its indecomposable blocks, equivalently by the defect of
+its Schur square
+\cite[Theorem~3.11 and Corollaries~3.12--3.13]{RodriguezPajaresEtAl2025}.
+That general mechanism is not a priority claim here.  The new input and
+outputs are the all-field trade classification, sheet reconstruction, sharp
+matching boundary, and orbit-specific cubic orientation in the theorem above.
 
 \Needspace{24\baselineskip}
 \medskip
@@ -2388,9 +2348,10 @@ We verify the right side is zero source by source.  For
 canonical tilting factorization give
 \[
  \operatorname{St}\otimes L(1)\simeq T(q),\qquad
- \operatorname{St}\otimes Y_1\simeq T(2q)
- \cite[Lemmas~1.3--1.4]{DotyHenke2002}.
+ \operatorname{St}\otimes Y_1\simeq T(2q).
 \]
+These are the bottom-alcove tensor identities of
+\cite[Lemmas~1.3--1.4]{DotyHenke2002}.
 The canonical tilting digits of \(2q\) are
 \((p,p-1,\ldots,p-1,1)\).  The module \(T(p)\) has the two Weyl sections
 \(\Delta(p)\) and \(\Delta(p-2)\)
@@ -3676,16 +3637,12 @@ T.~Rudd,
 deep-hole syndrome locus},
 \newblock working paper, 2026.
 
-\bibitem{RuddCompanion2026}
-T.~Rudd,
-\newblock \emph{The Golden Companion Correspondence},
-\newblock Paper~V, companion manuscript, 2026.
-
 \bibitem{BraunNebe2025}
 T.~Braun and G.~Nebe,
 \newblock Orthogonal representations of \(\operatorname{SL}_2(q)\) in
 defining characteristic,
-\newblock \emph{Beitr\"age zur Algebra und Geometrie} (2025).
+\newblock \emph{Beitr\"age zur Algebra und Geometrie} \textbf{66}(3)
+(2025), 717--725.
 \newblock doi:10.1007/s13366-024-00763-w.
 
 \end{thebibliography}

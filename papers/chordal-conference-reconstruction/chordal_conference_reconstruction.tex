@@ -53,14 +53,10 @@ Reconstruction and a Residual \(C_2\)-Torsor}
 \maketitle
 \endgroup
 
-\begin{center}
-\small\itshape
-From deep holes, a cubic takes shape; its companion finds its bearings,\\
-the carrier stands fixed while their shadows move; from minimum words, the plane returns,\\
-and \textbf{the scattered shadows gather home}.
-\end{center}
-
 \begin{abstract}
+Different lossy invariants of the same source need not have the same
+geometry.  We ask when two such cubic shadows nevertheless reconstruct one
+another and their common six-axis data.
 Let \(\Omega\) be the six Sylow-\(5\) subgroups of \(A_5\), and let \(V\) be
 the five-dimensional augmentation module of \(\F_{11}^{\Omega}\), with its
 standard quadratic form.  The \(A_5\)-invariant cubic pencil in \(\PP(V)\)
@@ -73,7 +69,8 @@ marked carrier.  The singular quartic recovers the constant double cover
 where \(L\) is a one-dimensional subspace of the invariant pencil, the outer
 involution \(q\) of that pencil gives mutually inverse reconstruction functors
 between a normalized chordal generator \(h\in L\) and an oriented conference
-generator \(c\), over every field extension of \(\F_{11}\).  Forgetting \(L\)
+generator \(c\), for neutral scalar extensions over every field extension of
+\(\F_{11}\).  Forgetting \(L\)
 quotients by the free involution
 \((L,h,c)\mapsto(qL,-qh,c)\), which fixes \(c\); this is distinct from the
 conference-orientation torsor below.
@@ -179,17 +176,11 @@ attribution boundary.
 \Needspace{18\baselineskip}
 \medskip
 \noindent\textbf{Reconstruction perspective.}
-This paper asks when two different shadows encode the same source
-information.  One is chordal, the other conference-type, and their projective
-geometries are not isomorphic.  After a chordal line is selected, the theorem
-constructs intrinsic reconstruction functors in both directions; without that
-selection, the correspondence is exactly a residual \(C_2\)-quotient.
 Papers~I--III supply concrete sources realizing the two shadow types, but the
-classification itself is formulated on the fixed metric carrier.  A separate
-integral theorem identifies the upper residual marking with Frobenius on the
-common binary heart.  Paper~IV supplies an independent \(C_3\)-Frobenius
-instance on an \(\F_8\)-commutant, with no common geometric carrier asserted.
-Figure~\ref{fig:series-map} records this division.
+classification itself is formulated on the fixed metric carrier.  Paper~IV
+supplies an independent \(C_3\)-Frobenius instance on an \(\F_8\)-commutant,
+with no common geometric carrier asserted.  Figure~\ref{fig:series-map}
+records this division.
 
 \begin{figure}[ht]
 \centering
@@ -949,13 +940,16 @@ For an extension \(K/k\), let:
   \[
   (A_0,Q_0,\Pi,R_h,Z_5,\Omega_0,q_\Pi,L,h,c,[B]);
   \]
-  every entry after \(h\) is required to be the construction of
-  Sections~\ref{sec:singular} and \ref{sec:outer-companion}, not an
+  every derived entry \(R_h,Z_5,\Omega_0,q_\Pi,L,c,[B]\) is required to be
+  the construction of Sections~\ref{sec:singular} and
+  \ref{sec:outer-companion}, not an
   independent recognition axiom, and morphisms are metric normalizer
   morphisms carrying every displayed entry;
 \item \(\cC_{\mathrm{conf}}^L(K)\) be the groupoid of oriented order-six
-  conference packages \((\Omega_0,[B],c)\), where \(c\) is one of the two
-  coefficient-normalized actual generators, together with a selected member
+  conference packages \((\Omega_0,[B],c)\), where \(c=c_B\) is the
+  coefficient-normalized actual triangle cubic attached to the oriented
+  switching class \([B]\); replacing \([B]\) by \([-B]\) replaces \(c\) by
+  \(-c\).  The package also includes a selected member
   \(L\) of the two-point chordal scheme of
   Lemma~\ref{lem:two-chordal-lines}.  Its morphisms are the metric normalizer
   morphisms above that carry \([B],c,L\) to \([B'],c',L'\).
@@ -1016,11 +1010,12 @@ augmentation carrier.  Therefore the two Hom maps are bijective.
 
 Proposition~\ref{prop:strict-rigidity} proves the selected-line equivalences
 in Theorem~\ref{thm:intrinsic-companion-classification}.  The unselected
-statement uses the action groupoid for the fixed-point-free autoequivalence
+statement uses the action groupoid for the autoequivalence
 \[
-                         uq:(L,h,c)\longmapsto(qL,-qh,c),
+             uq:(L,h,c,[B])\longmapsto(qL,-qh,c,[B]),
 \]
-which is fixed-point free and preserves the conference package.  Since
+which is fixed-point free on objects and preserves the conference package.
+On morphisms it retains the same metric normalizer map and relabeling.  Since
 \[
                   (q_\Pi-1)(-q_\Pi h)=(q_\Pi-1)h,
 \]
@@ -1173,8 +1168,7 @@ produces two different integral lattices:
  \qquad
  D(\Omega)=\{x\in P:\textstyle\sum_\omega x_\omega\equiv0\pmod2\}.
 \]
-The first has rank five and is the integral source for the later symplectic
-envelope in the series.  The second has rank six.  For the standard
+The first has rank five and the second has rank six.  For the standard
 permutation pairing,
 \[
                   D(\Omega)^\vee=P+\Z\frac{\mathbf1_\Omega}{2}.
@@ -1206,7 +1200,7 @@ are therefore functorial in \(\Omega\).
 \end{proof}
 
 The rank-five and rank-six outputs meet at \(H_\Omega\); they do not become
-the same lattice.  This is the entire integral interface exported by Paper~V.
+the same lattice.
 
 \section{Conference saturation}
 \label{sec:conference-saturation}
