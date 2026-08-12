@@ -123,6 +123,26 @@ certificate currently imports the monorepo `NodeKayles` library. Its extraction 
 classify the minimal semantic model and checker needed for its published finite terminals;
 the existing projective-cap Q13 package is not an interchangeable substitute.
 
+### Q13 passant-code execution boundary
+
+The paper-local package contains 214 Lean modules. Fifty-four mention the human
+`RelativeConicArcs` model, and eight import a human semantic module or gate directly.
+The package therefore cannot be externalized by a namespace rewrite. Its target is a new
+Mathlib-only `finitegeom-q13-passant-code-certificates` package with a local finite model
+for the 78 indexed internal points, 78 passant rows, binary incidence vectors, the relation
+matrices, and the fixed finite transport data. The package retains only finite checker/data
+theorems and its strongest finite terminals. The human q13 geometry, code semantics,
+projective-action theorems, and every theorem that translates indexed data into those
+objects remain in finitegeom under `TavisRuddFiniteGeom.Papers.Q13PassantCode`.
+
+Execution is deliberately one-way: first freeze and hash the current 214-module input;
+then mechanically rebase the finite-only closure on the local model and make all residual
+human references a hard failure. Next prove a cheap bridge from the local indexed model to
+the human q13 semantics and transport the finite terminals. Only after the bridge is green
+may the paper release verifier replace its direct `lean-certificates/` dependency. The
+heavy package then builds once, seals its fact and pack, and is not rebuilt for later paper,
+finitegeom, or bridge changes.
+
 Their final certificate namespaces are
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.*`. The local statement models live
