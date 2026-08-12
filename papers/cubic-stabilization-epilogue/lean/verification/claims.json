@@ -114,12 +114,14 @@
     },
     {
       "manuscript_label": "def:framed-sixth-multiplicity",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Framed formal monodromy of the numerical small even quantum connection.",
-      "hypotheses": "A smooth projective complex variety and the original unramified loop coordinate z.",
-      "conclusion": "The sum of the algebraic multiplicities of the two primitive sixth-root eigenvalues.",
-      "cautions": "Adjoining roots of z is forbidden because it changes the frame and may erase deck monodromy."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity"
+      ],
+      "objects": "Lean represents a supplied finite complex matrix declared to be the framed formal-monodromy operator; it does not construct the small even quantum connection or its Levelt--Turrittin monodromy.",
+      "hypotheses": "The matrix is already the operator for one turn of the original unramified z-disc, on a labelled finite-dimensional complex vector space.",
+      "conclusion": "The invariant is the sum of the characteristic-polynomial root multiplicities at exp(pi*i/3) and exp(-pi*i/3).",
+      "cautions": "The type records the framed operator only after construction; it neither permits nor models adjoining roots of z, and it does not prove independence of the algebraic closure."
     },
     {
       "manuscript_label": "def:pro-laurent-monodromy",

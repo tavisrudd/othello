@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -134,6 +135,13 @@ theorem squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum
       (k.factorial : R) * GraphLattices.squarefreeProductSum terms k :=
   GraphLattices.sum_pow_eq_factorial_mul_squarefreeProductSum
     terms squareZero k
+
+/-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
+to a supplied finite framed-monodromy matrix.  Construction of that operator
+from the small even quantum connection remains outside this definition. -/
+noncomputable def framedSixthMultiplicity
+    (monodromy : Quantum.FramedMonodromyMatrix) : ℕ :=
+  monodromy.sixthMultiplicity
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/

@@ -75,7 +75,8 @@ def manuscript_labels() -> set[str]:
 def check_public_docstrings(source: Path, text: str) -> None:
     lines = text.splitlines()
     declaration = re.compile(
-        r"^(?:theorem|lemma|def|structure|inductive|class)\s+([A-Za-z0-9_'.]+)"
+        r"^(?:noncomputable\s+)?(?:theorem|lemma|def|structure|inductive|class)\s+"
+        r"([A-Za-z0-9_'.]+)"
     )
     for index, line in enumerate(lines):
         match = declaration.match(line)
@@ -160,7 +161,8 @@ def main() -> None:
     terminals = {
         f"{namespace}.{match.group(1)}"
         for match in re.finditer(
-            r"(?m)^theorem\s+([A-Za-z0-9_']+)", interface_text
+            r"(?m)^(?:noncomputable\s+)?(?:theorem|def)\s+([A-Za-z0-9_']+)",
+            interface_text,
         )
     }
     audited = set(
