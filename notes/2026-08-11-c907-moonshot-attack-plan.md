@@ -162,6 +162,11 @@ The compact-`y` continuum `B~delta^alpha`, `0<=alpha<=2`, is now compressed by
 the single semistable incidence model `ef=delta^2`; all `0/0`, `0/1`, and
 symmetric central strata are `L`-submersive.  See
 `2026-08-12-c907-finite-pole-continuum-certificate.md`.
+The next analytic move is no longer another ray chart: compute the relative
+comprehensive Gröbner fan of the saturated graph, residual Rees marking, and
+tangent-critical module.  This produces a finite cone list whose only allowed
+outcomes are empty, exterior, or the marked residual Morse scheme.  See
+`2026-08-12-c907-tropical-critical-fan-pivot.md`.
 
 Wave-2C status: ordinary cohomological grading and duality do not bound the
 length—an explicit self-dual formal length-two model survives.  The first

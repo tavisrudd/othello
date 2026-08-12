@@ -45,8 +45,9 @@ The pullback of the cleared torus graph, divided by the unit `Y`, is
  \tag{2}
 \]
 
-In the localized incidence ring `R=(ef-delta^2)` one has the exact main-
-transform identity
+After localizing the stated chart units, saturation by the exact pullback of
+`delta YBC` is equivalent to the displayed colon, and in the localized
+incidence ring `R=(ef-delta^2)` one has the exact main-transform identity
 
 \[
  (G_{00}):(\delta efc)^\infty=(G_{00}).
@@ -123,6 +124,66 @@ endpoint.  Interchanging `B` and `C` supplies the `1/0` analogue.  The `1/1`
 face is the separate residual blow-up chart, not a symmetric copy of this
 incidence model.
 
+## Exact transition to the imbalanced residual chart
+
+The `0/1` exterior must be glued to, not blown up through, its residual
+endpoint.  On the overlap where
+
+\[
+ k:=1-e+\delta^2A
+\]
+
+is a unit, define
+
+\[
+ \rho=\frac\delta k,qquad
+ v=k\left(A+\frac ce\right).
+ \tag{5}
+\]
+
+Then `delta=rho k`, and the `Z^(-1)` imbalanced residual chart has
+
+\[
+ B=1-k+\rho^2k^2A=e,
+\]
+
+and
+
+\[
+ C=1-\rho^2kv+\rho^2k^2A
+  =1-\frac{\delta^2c}{e}=1-fc.
+\]
+
+Conversely,
+
+\[
+ e=1-k+\rho^2k^2A,qquad
+ c=e\left(\frac vk-A\right),qquad
+ f=\frac{\rho^2k^2}{e}.
+ \tag{6}
+\]
+
+Thus (5)--(6) are inverse isomorphisms on the overlap `ek!=0`.  On its
+central face `rho=0`, one has `k=1-e` and
+
+\[
+ v=(1-e)(A+c/e).
+\]
+
+Substitution in the imbalanced potential
+
+\[
+ L=S+\frac A{BC}+v-kA+O(\rho^2)
+\]
+
+gives exactly `L=S-c+(A+c)/e`, the `f=0` incidence formula.  Since `v` is a
+free coordinate on this imbalanced face, the exterior part `k!=0` is
+submersive.  The overlap stops at `k=0`, which is precisely `e=1` and contains
+the four residual Morse points.  They remain in the compact `Z,U` core; no
+blow-up through that core is used.
+
+Interchanging `B,C` supplies the symmetric transition for the `1/0` branch.
+
 ## Consequence and scope
 
 For compact `y`, boundedness forces `c` to be a leading unit on these
@@ -135,8 +196,8 @@ bounded-value critical stratum.
 This is a local algebraic certificate, not yet the exterior pair theorem.
 Still required:
 
-- transitions from the endpoint `e=1,c=-A` to the residual `Z,U` and
-  imbalanced charts;
+- the collar-level gluing at `k=0` between the compact residual core and the
+  exact imbalanced overlap above;
 - the faces with noncompact `y` not covered by the mixed cone family already
   certified; and
 - one finite common fan, all overlaps, and product collars.
@@ -149,5 +210,6 @@ Still required:
   Proving only the `e=f=0` face would miss the endpoint charts.
 - **Settled:** compact-`y` finite-pole `0/0`, `0/1`, and `1/0` branches; the
   only endpoint critical locus is the known residual one.
-- **Open:** residual-seam transitions, noncompact `y`, and global collar
-  compatibility.
+- **Settled:** exact exterior transition to the imbalanced residual chart away
+  from `k=0`; the construction does not blow up through the residual core.
+- **Open:** collar gluing at `k=0`, noncompact `y`, and global compatibility.

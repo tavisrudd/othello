@@ -99,6 +99,10 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   The natural weighted two-cubic candidate
   `X_(3,3) subset P(1^(6-l),3^l)` collapses in every smooth Fano case to the
   cubic or `P^3`; its apparent second primitive pair is geometrically canceled.
+  The first raw four-packet, `X_(3,6) subset P(1,1,1,1,2,4)`, is never
+  quasismooth.  More generally, every reduced rank-four self-dual
+  hypergeometric small-even Fano-threefold connection has `nu_6<=2`; the
+  remaining weighted gate is whether smoothness forces that presentation.
 
 ## Active frontier: `m=2`
 
@@ -165,6 +169,9 @@ Weighted non-CI calibration:
 `../2026-08-12-c907-b1-weighted-del-pezzo-support.md`.
 Weighted two-cubic obstruction:
 `../2026-08-12-c907-33-weighted-ci-obstruction.md`.
+Four-packet false positive and rank-four bound:
+`../2026-08-12-c907-36-weighted-ci-false-positive.md` and
+`../2026-08-12-c907-rank-four-hypergeometric-support-bound.md`.
 
 ## Gold architecture after `m=2`
 
