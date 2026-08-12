@@ -279,6 +279,10 @@ disposition = "active"
 path = "claim-proof-novelty-ledger.md"
 reason = "private claim-development and priority ledger, superseded publicly by the manuscript"
 
+[[repository.exclude_path]]
+path = "lean"
+reason = "the formal companion is under active development and is not part of this paper export"
+
 [[repository.rewrite]]
 path = "Makefile"
 old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
@@ -288,17 +292,17 @@ reason = "the standalone repository carries its own pinned manuscript flake"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = ".PHONY: all check lint manuscript warnings clean distclean"
+old = ".PHONY: all check lint formal-static manuscript warnings clean distclean"
 new = ".PHONY: all check manuscript warnings clean distclean"
 expected_count = 1
-reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+reason = "the monorepo-wide TeX lint helper and in-development Lean companion are outside this standalone export"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+old = "all: lint manuscript\n\ncheck: lint formal-static manuscript warnings"
 new = "all: manuscript\n\ncheck: manuscript warnings"
 expected_count = 1
-reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+reason = "the monorepo-wide TeX lint helper and in-development Lean companion are outside this standalone export"
 
 [[repository.rewrite]]
 path = "Makefile"
@@ -306,6 +310,13 @@ old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.te
 new = ""
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "formal-static:\n\t$(PYTHON) lean/verification/check_formal_artifact.py\n\n"
+new = ""
+expected_count = 1
+reason = "the in-development Lean companion is intentionally excluded from this standalone export"
 
 [[repository.rewrite]]
 path = "Makefile"

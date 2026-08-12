@@ -15,7 +15,7 @@ The manuscript is `cubic_stabilization_epilogue.tex`.  Build and check it with:
 
 The paper is proof-first.  Exact computations used during discovery are not
 part of its proof surface.  The current draft gives standalone human proofs of
-the period realization, all-degree finite-etale graph saturation, the
-six-axis integral Hodge calculation, and the one-step irrationality argument.
+the six-axis realization, all-degree finite-etale graph saturation, and the
+one-step irrationality argument.
 The built review copy is
 [`cubic_stabilization_epilogue.pdf`](cubic_stabilization_epilogue.pdf).
