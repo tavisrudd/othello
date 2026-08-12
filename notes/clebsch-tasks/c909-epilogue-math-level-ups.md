@@ -267,6 +267,25 @@ application or an exact obstruction to necessity.
     minors and Smith vector `(0,a,a,a,2a)`.  Thus the exact ambient defect is
     classified through codimension three even though the all-degree Dyck
     formula remains behind the nested-unit-minor gate.
+12. **Full graded classification through dimension seven.** More generally,
+    whenever `m=min(k,g-k)<=3`, put
+
+    ```text
+    N2 = C(g,4) C(g-4,k-2),
+    N3 = C(g,6) C(g-6,k-3).
+    ```
+
+    Then the exact degree-`k` quotient is
+
+    ```text
+    (Z/p^a)^(N2+3N3) + (Z/p^(2a))^N3.
+    ```
+
+    The proof uses primitive doubled-slot volume embeddings and the exact
+    four- and six-slot theorems, not Poincare duality.  Hence every graded
+    integral Hodge/product quotient is now classified for every tower of
+    dimension `g<=7`.  Dimension eight, middle codimension four, is the first
+    place where the unresolved eight-slot filtered-web minor appears.
 
 ## Highest-EV next moves
 
