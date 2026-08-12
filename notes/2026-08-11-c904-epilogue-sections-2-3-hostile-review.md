@@ -315,3 +315,92 @@ application could cite only the new corollary rather than both the theorem and
 corollary.  These are editorial improvements, not acceptance conditions.
 
 Final closure verdict: **GO**.
+
+## TT/EJ upgrade review: cofactor-saturation package
+
+Date: 2026-08-11
+Scope: current uncommitted abstract, introduction, and Section 3 additions only
+Verdict: **MINOR**
+
+### Mathematical value
+
+The local theorem is genuinely useful and is not a tautological restatement of
+the desired conclusion.  Its hypothesis is degree-one saturation of each
+orthogonal Jordan block in the pulled-back divisor lattice.  Its conclusion is
+membership of the distinguished degree-((g-1)) cofactor.  The primitive mixed
+determinant and mixed-adjugate identities are exactly the nontrivial integral
+bridge between those degrees; in particular, they prevent factorial and
+off-diagonal factor-two losses.
+
+The global corollary also adds a reusable statement: it separates the local
+squarefree graph calculation at primes dividing the isogeny degree from the
+formal local--global passage.  It remains honestly limited to elliptic-power
+coefficient isogenies and to the `U_0` plus `pB` graph charts; it does not claim
+an intrinsic classification of arbitrary Lagrangian gluings.
+
+The six-axis application remains valid.  Its Smith type supplies precisely the
+unit-line plus `pB` local forms at two and three; the exotic dyadic slope is
+squarefree, the three-primary slope is scalar and therefore squarefree, and no
+other prime divides the isogeny degree.
+
+### Exact repairs
+
+1. **Make the coefficient extraction in the local proof explicit.**  The
+   phrase “fill ... with its primitive mixed determinant” produces coefficient
+   one, not automatically `det(B_b)`; likewise the primitive mixed adjugates
+   produce matrix units, not automatically `adj(B_a)`.  The claimed displayed
+   block is nevertheless in the image because the determinant image is all of
+   `Z_p` and the mixed-adjugate entries span `Sym_d(Z_p)`.
+
+   Exact replacement after the first sentence of the proof:
+
+   > By Lemma `lem:primitive-mixed` and `Z_p`-linearity, the mixed determinants
+   > on block `b` realize the scalar `det(B_b)`, while the mixed adjugates on
+   > block `a` realize every entry of `adj(B_a)`.  Scaling the available
+   > coefficient divisors by `p^b` and `p^a` therefore gives ...
+
+   Then retain the displayed formula.  Without this sentence, the formula is
+   asserted rather than derived from the cited primitive identities.
+
+2. **State the base-ring variant used by the next theorem.**  Local cofactor
+   saturation is stated over `Z_p`, but the semisimple-slope proof invokes it
+   only after passing to a finite unramified extension `O`.  The proof is
+   unchanged over `O`, but this needs to be licensed in print.
+
+   Exact edit: state the theorem over `R = Z_p` or the ring of integers of a
+   finite unramified extension, replacing `Z_p` by `R` in its hypothesis; or
+   add immediately after the theorem statement:
+
+   > The same statement and proof hold after finite unramified extension of
+   > `Z_p`.
+
+3. **Do not advertise scalar slopes as a second mechanism independent of
+   semisimplicity.**  A scalar slope is a special squarefree semisimple slope,
+   while “scalar Jordan gluing” can be misread as a nonsemisimple Jordan slope.
+   The manuscript proves one slope mechanism and uses its scalar special case
+   at three.
+
+   Exact abstract/introduction edit:
+
+   > squarefree graph slopes, including scalar slopes on the relevant Jordan
+   > blocks, force this saturation.
+
+   Replace both occurrences of “semisimple graph slopes and scalar Jordan
+   gluings are two sufficient mechanisms” by that formulation.
+
+### Quantifier and dictionary audit
+
+* The polarization dictionary occurs before the new local theorem, so the
+  order of explanation is correct.
+* The local theorem constructs the completed local product image, not actual
+  individually descended global divisors; the later faithfully-flat and
+  finitely-generated-cokernel arguments use exactly that quantifier.
+* The global corollary quantifies only over primes dividing `deg(f)` and
+  correctly treats all other primes by the isogeny-induced lattice
+  identification.
+* “Coefficient isogeny from an elliptic power” keeps the scope visible.  No
+  arbitrary-ppav or arbitrary-maximal-isotropic claim has slipped in.
+* The abstract's fibrewise Voisin conclusion remains justified.
+
+Final TT/EJ verdict: **MINOR** pending the three exact prose/proof repairs.
+No theorem statement, application, or headline conclusion needs withdrawal.
