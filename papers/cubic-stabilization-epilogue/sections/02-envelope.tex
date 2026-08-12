@@ -124,10 +124,31 @@ such half is maximal isotropic for the tensor product of the coefficient
 form with the alternating multiplicity form.  This gives
 \(\PP^1(\F_4)\).
 
-The simplex group acts on the coefficient heart over \(\F_2\).  Hence the
-three lines defined over \(\F_2\) retain \(S_6\).  A primitive scalar in
-\(\F_4\) breaks this action to the exceptional subgroup \(A_5\); its two
-values are exchanged by the outer normalizer.  Were the generic cubic kernel
+Here is the polarization check explicitly.  Identify the coefficient heart
+with \(\F_4^2\) and put
+\[
+ b(x,y)=\operatorname{Tr}_{\F_4/\F_2}\det(x,y).
+\]
+On two multiplicity copies use
+\[
+ \Omega((x,y),(x',y'))=b(x,y')+b(y,x').
+\]
+Every scalar \(a\in\F_4\) is self-adjoint for \(b\), since
+\(b(ax,y)=b(x,ay)\).  Thus the vertical line and all four graphs
+\(\Gamma_a\) are isotropic of half dimension.  The five module-theoretic
+possibilities are exactly the five polarized gluings; no further quadratic
+condition removes the exotic pair.
+
+The simplex group acts on both multiplicity copies of the coefficient heart
+over \(\F_2\).  Hence the three lines defined over \(\F_2\) retain \(S_6\).
+The stabilizer of an exotic graph is equally intrinsic.  A permutation that
+fixes \(\Gamma_\omega\) commutes with \(\omega\), hence is \(\F_4\)-linear on
+the two-dimensional \(\F_4\)-space \(H_2\).  It also preserves \(b\), so its
+\(\F_4\)-determinant is one; it therefore lies in
+\(\operatorname{SL}_2(4)\), of order \(60\).  The given \(A_5\) already has
+that order and lies in the stabilizer, proving equality.  The odd coset in
+its order-\(120\) normalizer is semilinear and applies field Frobenius, so it
+exchanges \(\omega\) and \(\omega^2\).  Were the generic cubic kernel
 \(\F_2\)-rational, its principal polarization would inherit the faithful
 \(S_6\)-action.  Strong Torelli would then give an \(S_6\)-action on the
 generic cubic, contrary to the automorphism group of the nonstandard
@@ -136,10 +157,13 @@ The kernel is a finite
 sub-local-system, so the same pair persists throughout the connected smooth
 locus.
 
-At three the coefficient heart is simple with scalar commutant.  The
-\(\Gamma_0(3)\) multiplicity monodromy has one invariant line in elliptic
-three-torsion.  Tensoring that line with the coefficient heart is therefore
-the unique \(A_5\)- and monodromy-stable maximal isotropic half.
+At three the coefficient heart \(H_3\) is simple and
+\(\End_{A_5}(H_3)=\F_3\).  Hence its \(A_5\)-stable halves are the four graphs
+parametrized by \(\PP^1(\F_3)\).  Reduction of
+\(\Gamma_0(3)\) modulo three is the upper-triangular Borel in
+\(\operatorname{SL}_2(\F_3)\); it fixes exactly the line spanned by the first
+basis vector.  Tensoring this unique invariant multiplicity line with
+\(H_3\) gives the unique \(A_5\)- and monodromy-stable maximal isotropic half.
 \end{proof}
 
 Proposition~\ref{prop:golden-exotic} labels the two exotic members by the
