@@ -223,6 +223,12 @@ main = "continuation_graph_rigidity.tex"
 lane = "continuation"
 
 [[paper]]
+id = "cubic_stabilization_epilogue"
+dir = "papers/cubic-stabilization-epilogue"
+main = "cubic_stabilization_epilogue.tex"
+lane = "clebsch"
+
+[[paper]]
 id = "dihedral_schreier_node_kayles"
 dir = "papers/dihedral-schreier-node-kayles"
 main = "dihedral_schreier_node_kayles.tex"
