@@ -1,195 +1,396 @@
-\section{The primitive-sixth-root atom}
+\section{Framed formal monodromy}
 \label{sec:one-step}
 
-We use the geometric atomic \(F\)-bundle invariant of
-Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY}.  Only three features enter:
-its values lie in the free abelian group on atom-equivalence classes, it is
-additive under blowups, and a rank-\(r\) projective bundle contributes \(r\)
-copies of the base.
+The obstruction used here belongs to the small even quantum connection itself.
+We follow it through each blowup in a weak factorization, without passing to
+equivalence classes of quantum atoms.  This avoids a subtlety: a formal bulk
+gauge is coefficientwise Laurent in the loop coordinate, but need not
+specialize to a meromorphic gauge at a nearby analytic point.
 
-Concretely, the reduced unramified spectral cover of the Euler operator
-decomposes the maximal big-quantum \(F\)-bundle into connected local atoms
-\cite[Theorem~4.1 and Definition~5.10]{KKPYY}.  If \(\mathscr A\) denotes the
-set of geometric atom classes, its chemical formula has the form
+Let \(T\) be a smooth projective variety.  Write
 \[
- \CFF(Z)=\sum_{\alpha\in\mathscr A}m_\alpha(Z)[\alpha]
- \in\Z^{(\mathscr A)},\qquad m_\alpha(Z)\ge0.
+ \Lambda_T=\C[[\operatorname{NE}^{\mathbf Z}_{\rm num}(T)]]
 \]
-The free group, rather than a quotient of a signed block ledger, is the
-target used below.
+for the completed monoid ring of the image of effective homology classes in
+the numerical curve lattice
+\[
+ N_1(T)=\operatorname{im}\!\left(
+ H_2(T,\mathbf Z)\longrightarrow
+ \operatorname{Hom}(\operatorname{NS}(T)/\mathrm{tors},\mathbf Z)\right).
+\]
+Thus \(N_1(T)\) is torsion-free and is separated by integral divisors.  Let
+\(\mathcal K_T\) be an algebraic closure of its fraction field.  The loop coordinate
+\(z\) remains independent: in particular, \(\mathcal K_T\) contains no chosen root of
+\(z\).  Apply the Levelt--Turrittin construction to the small even quantum
+connection over \(\mathcal K_T((z))\).  Its formal monodromy is the action of one turn on
+the original \(z\)-disc.  Thus it includes both regular-singular monodromy and
+the deck permutation of ramified exponential factors.
 
 \begin{definition}
-For a geometric atom \(\alpha\), restrict its connection to the original
-formal punctured \(u\)-disc.  Let \(M_{\mathrm f}(\alpha)\) be its intrinsic
-formal-monodromy operator.  Equivalently, after a minimal
-Levelt--Turrittin ramification, combine the regular-singular monodromies with
-the deck permutation of the exponential factors and descend to the original
-\(u\)-disc.  Let \(\FM(\alpha)\) be the eigenvalue multiset of this descended
-operator, and define
+Let \(M_{\rm f}(T)\) be this framed formal-monodromy operator, and put
 \[
- \nu_6(\alpha)=
- \operatorname{mult}_{e^{\pi i/3}}\FM(\alpha)
- +\operatorname{mult}_{e^{-\pi i/3}}\FM(\alpha).
+ \nu_6(T)=
+ \operatorname{mult}_{e^{\pi i/3}}M_{\rm f}(T)+
+ \operatorname{mult}_{e^{-\pi i/3}}M_{\rm f}(T).
 \]
-Extend \(\nu_6\) additively to the free atom group.
+The multiplicities are algebraic multiplicities in the characteristic
+polynomial.
 \end{definition}
 
-This definition uses eigenvalues in \(\C^\times\), not chosen logarithms.
-It is independent of a further ramified refinement: the refined deck cycle
-and the refined regular monodromy compose to the same descended operator on
-the original differential module.  Integral gauge powers shift residue
-exponents by integers and leave the operator unchanged up to conjugacy; see
-\cite[Section~3.2]{vdPS} and \cite[Remark~5]{Cai} for the universal formal
-solution ring and formal differential-module classification.
+The frame matters.  Adjoining roots of Novikov monomials is harmless, but
+adjoining a root of \(z\) would replace the original loop and could erase the
+deck part of the operator.
 
-\begin{lemma}[Formal isomonodromy]
-\label{lem:formal-isomonodromy}
-Along a connected component of the reduced unramified spectral cover, the
-formal-monodromy eigenvalue multiset of an atom is constant.
+We first record two formal facts used in the comparison theorems.  They also
+fix the completion convention in the proof.
+
+\begin{lemma}[Coefficientwise base change]
+\label{lem:pv-base-change}
+Let \(D\) be a formal differential module over \(k((z))\), and let \(B\) be a
+complete separated \(I\)-adic \(k\)-algebra on which \(d/dz\) is zero.  Scalar
+extension in the coefficient direction preserves the characteristic polynomial
+of framed formal monodromy.  The same holds after a connection gauge whose
+entries use only integral powers of \(z\).
 \end{lemma}
 
 \begin{proof}
-We use flatness in all bulk directions, rather than only the Witt-leaf
-statement of \cite[Remark~3.14]{KKPYY}.  Work locally on the analytic base
-and choose coordinates \(t_i\).  The big quantum connection has commuting
-operators
+Choose a Levelt--Turrittin solution algebra \(R\) for \(D\) with differential
+constants \(k\).  At every finite level, the constants of
+\(R\otimes_k B/I^N\) are \(B/I^N\): expansion in a \(k\)-basis reduces this to
+\(R^{d/dz}=k\).  A fundamental solution matrix then identifies the horizontal
+module with
 \[
- \nabla_{t_i}=\partial_{t_i}+u^{-1}P_i,
- \qquad
- \nabla_u=\partial_u+L.
+ \operatorname{Sol}(D)\otimes_k B/I^N.
 \]
-Solve
-\[
- \partial_{t_i}M=-u^{-1}P_iM,
- \qquad M|_{t=t_0}=I.
-\]
-The compatibility equations are precisely the flatness equations for the
-\(t_i\)-directions, so the solution exists in the enlarged \(t\)-adic ring
-used by Cai, locally of the form
-\(\operatorname{GL}(H\otimes\mathscr K((u))[[t-t_0]])\), where
-\(\mathscr K\) contains the
-Novikov coefficients.  This is not an ordinary Laurent gauge over the
-analytic base: its \((t-t_0)\)-coefficients may have negative \(u\)-orders
-unbounded below.  Each coefficient nevertheless involves only integral
-powers of \(u\).  Consequently
-\[
- M^{-1}\nabla_{t_i}M=\partial_{t_i}.
-\]
-Commutation with \(M^{-1}\nabla_uM=\partial_u+\widetilde L\) now gives
-\(\partial_{t_i}\widetilde L=0\) for every \(i\).  This is the bulk-gauge
-argument used by Cai immediately before \cite[Proposition~6]{Cai}.
-
-After this scalar extension, the resulting gauge identifies the formal
-solution spaces without changing their fractional \(u\)-exponents:
-coefficientwise formal monodromy fixes every integral power of \(u\).
-Equivalently, it preserves the eigenvalue multiset of descended formal
-monodromy.  On the reduced unramified spectral cover the unique local
-spectral projector of \cite[Theorem~4.1]{KKPYY} tracks one chosen atomic
-factor; on overlaps the resulting identifications differ only by conjugacy.
-Hence its
-formal-monodromy characteristic polynomial is locally constant on each
-component and therefore constant because the component is connected.
-Combining the factors with their deck action gives the same statement on the
-original \(u\)-disc, independently of the chosen Levelt--Turrittin
-refinement.
+Passing to the inverse limit gives
+\(\operatorname{Sol}(D)\widehat\otimes_k B\), with monodromy
+\(M_{\rm f}(D)\otimes1\).  An integral-\(z\) gauge is single-valued on the
+original disc and conjugates this action.
 \end{proof}
 
-\begin{corollary}[The sixth-root multiplicity is atomic]
-\label{cor:nu6-atomic}
-The function \(\nu_6\) is well defined on geometric atom-equivalence classes
-and extends uniquely to a homomorphism
+\begin{lemma}[Formal base shift]
+\label{lem:formal-base-shift}
+Suppose a pullback of the even quantum connection of \(T\) is defined over a
+complete filtered coefficient ring \(B\), and its bulk coordinate has the form
 \[
- \nu_6:\Z^{(\mathscr A)}\longrightarrow\Z.
+ a_0\mathbf1+a_2^\circ+\eta,
+ \qquad a_2^\circ\in H^2(T)\otimes F^0B,
+ \qquad \eta\in F^1B\widehat\otimes H^{\rm ev}(T).
 \]
-\end{corollary}
+Assume that \(a_0\) and \(a_2^\circ\) are constant in the positive filtration.
+Its
+framed formal-monodromy characteristic polynomial equals that of the small
+connection after the divisor substitution
+\[
+ Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d.
+ \tag{4.1}
+\]
+\end{lemma}
 
 \begin{proof}
-An isomorphism of geometric \(F\)-bundles in
-\cite[Definition~5.21]{KKPYY} is an isomorphism over the same formal
-\(u\)-disc, so it conjugates formal monodromy without changing its
-eigenvalues.  Lemma~\ref{lem:formal-isomonodromy} handles movement between
-points of one connected unramified spectral component.  The blowup and
-projective-bundle identifications used to pass from abstract atoms to
-geometric atoms are likewise \(F\)-bundle isomorphisms over that same loop
-coordinate \cite[Proposition~5.22]{KKPYY}; no ramified substitution
-\(u\mapsto u^m\) is among the equivalences.  Definition~3.1 of
-\cite{KKPYY} fixes the disc and its coordinate; base change acts on the base
-factor and leaves \(u\) fixed.  Thus \(\nu_6\) is constant on
-each class, and additivity on the free group is unique.
+The string equation removes \(a_0\mathbf1\) by a scalar exponential in
+\(z^{-1}\); this is single-valued and has trivial framed monodromy.  The divisor
+equation gives (4.1).  It remains to remove \(\eta\), including its component
+in \(H^2(T)\).
+
+Modulo \(F^N B\), the flat bulk equations
+\[
+ \partial_{\eta_i}G=-z^{-1}(\phi_i\star_\eta)G,
+ \qquad G|_{\eta=0}=1,
+\]
+have an invertible solution with bounded Laurent order in \(z\).  These
+solutions are compatible in \(N\).  Their inverse limit may have negative
+\(z\)-orders unbounded with the filtration degree, but every coefficient uses
+only integral powers of \(z\).  Lemma~\ref{lem:pv-base-change}, applied at each
+finite level and then in the inverse limit, proves the assertion.  No
+evaluation of this gauge at a nonnilpotent analytic bulk point is used.
 \end{proof}
 
-For a smooth projective variety \(Z\), we abbreviate
-\(\nu_6(Z)=\nu_6(\CFF(Z))\).
+We now apply Iritani's quantum blowup theorem and the Iritani--Koto
+projective-bundle theorem.  Both are stated over completed homological Novikov
+rings.
 
-\begin{proposition}[Cubic and low-dimensional atoms]
-\label{prop:atom-values}
-Let \(X\) be a smooth cubic threefold.
-\begin{enumerate}[label=\textup{(\roman*)}]
-\item The cubic zero atom \(\alpha_X\) satisfies \(\nu_6(\alpha_X)\ge2\).
-\item Every atom represented by a point, a curve, or a smooth projective
-surface has \(\nu_6=0\).
-\end{enumerate}
+\begin{lemma}[Numerical Novikov base change]
+\label{lem:numerical-base-change}
+The quotient from the effective homology monoid to its image in \(N_1(T)\)
+extends continuously to completed monoid rings, and the quantum connection
+and the two comparison theorems base-change along it.
+\end{lemma}
+
+\begin{proof}
+Filter both monoids by intersection with an ample divisor.  Effective homology
+classes below a fixed cutoff form a finite set, as follows from the finite-type
+Chow varieties of cycles of bounded degree.  The quotient is therefore defined
+on every truncated monoid ring and passes to the inverse limit.  The quantum
+products descend by finite sums of coefficients with the same numerical class.
+Pushforward of curves, pairing with \(c_1(N_{C/T})\), and the derivations
+\(Q\partial_Q\) depend only on numerical classes.  Since the comparison
+theorems provide both a map and its inverse, they remain inverse after this
+base change.
+\end{proof}
+
+\begin{proposition}[Framed operation formulas]
+\label{prop:framed-operations}
+Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
+\[
+ \nu_6(\PP_T(V))=r\nu_6(T).
+ \tag{4.2}
+\]
+Let \(\widetilde T=\operatorname{Bl}_C T\), where \(C\subset T\) is smooth of
+codimension \(c\ge2\).  In Iritani's comparison field one has
+\[
+ \nu_6(\widetilde T)=\nu_6(T)+
+ \sum_{j=0}^{c-2}\nu_6(C;\chi_j),
+ \tag{4.3}
+\]
+where \(\chi_j\) is the numerical Novikov specialization of the \(j\)-th
+center summand.  The endpoint terms in (4.3) are the intrinsic small
+invariants; the center terms are computed after the displayed specializations.
 \end{proposition}
 
 \begin{proof}
-Cai's calculation preceding Proposition~6 gives the indicial polynomial
+Iritani's Theorem~5.18 gives a formal coordinate isomorphism and a
+quantum-\(D\)-module isomorphism
+\[
+ \operatorname{QDM}(\widetilde T)\cong
+ \operatorname{QDM}(T)\oplus
+ \operatorname{QDM}(C)^{\oplus(c-1)}
+\]
+over a Laurent extension in the exceptional Novikov variable
+\cite[Theorem~5.18]{IritaniBlowup}.  The isomorphism and its inverse use only
+integral powers of \(z\), and the mirror coordinates are independent of \(z\).
+The center base shift is controlled before passage to the final Laurent
+chart.  Put \(u=q^{-1/(c-1)}\) and use the reconstruction coordinates of
+\cite[Section~5.8.2]{IritaniBlowup}:
+\[
+ \varsigma_j=\varsigma_j^\circ+s_j,
+ \qquad
+ \varsigma_j^\circ=-(c-1)\lambda_j+h_{C,j}+O(u).
+ \tag{4.4}
+\]
+For the \(j\)-th target summand, let \(R_j\) be the image of
+\(Q_C^d\mapsto Q^{i_*d}u^{\rho_C\cdot d}\), together with \(u\) and \(s_j\),
+and set
+\[
+ J_j=\bigl(u,\{Q^{i_*d}u^{\rho_C\cdot d}:d\ne0\},
+            \text{components of }s_j\bigr)\subset R_j,
+ \qquad B_j=\varprojlim_N R_j/J_j^N.
+\]
+The center connection is defined over this image ring by
+\cite[Remark~5.6]{IritaniBlowup}.  Formula (4.4),
+together with (5.45), (5.47), and the initial asymptotics (5.27)--(5.30),
+shows that after the unit term \(-(c-1)\lambda_j\) and fixed divisor
+\(h_{C,j}\) are removed, its target bulk coordinate lies in
+\(J_jH^*(C)\).  The noninjective center monomial map merely replaces the
+source ring by its image.
+
+First normalize the target connection over \(\C((u))\) by the single-valued
+string scalar for \(-(c-1)\lambda_j\) and by the fixed divisor shift.  The
+normalized connection descends to \(B_j\).  Apply
+Lemma~\ref{lem:formal-base-shift} modulo every \(J_j^N\), take the compatible
+inverse limit, and only then extend scalars to Iritani's Laurent comparison
+field and apply \(\Psi\).  The fixed-divisor substitution is a \(z\)-constant
+coefficient automorphism, so it does not change \(\nu_6\); it is well defined
+on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus each center target summand has the
+framed monodromy of its specialized small connection.  The ambient target
+uses \(\tau=\tau^\circ+t\), with \(\tau^\circ=O(q^{-1})\), and the same
+finite-quotient argument.  Direct-sum additivity gives (4.3).
+
+The endpoint map is faithful: on numerical curve lattices
+\[
+ \bar\beta\longmapsto
+ \bigl(\phi_*\bar\beta,-E\cdot\bar\beta\bigr)
+\]
+is injective because
+\(N^1(\widetilde T)=\phi^*N^1(T)\oplus\mathbf Z[E]\).  Hence the Laurent
+extension preserves the intrinsic endpoint characteristic polynomials.
+
+The projective-bundle proof is parallel, again in reconstruction coordinates.
+Put \(u=q^{-1/r}\).  For its \(j\)-th target summand let \(R_j\) be the image
+of \(Q_T^d\mapsto Q^d u^{c_1(V)\cdot d}\), together with \(u\) and \(s_j\),
+and set
+\[
+ J_j=\bigl(u,\{Q^d u^{c_1(V)\cdot d}:d\ne0\},
+            \text{components of }s_j\bigr)\subset R_j,
+ \qquad B_j=\varprojlim_N R_j/J_j^N.
+\]
+Proposition~5.6 and Section~5.8 of Iritani--Koto give
+\[
+ \varsigma_j=\varsigma_j^\circ+s_j,
+ \qquad
+ \varsigma_j^\circ=r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u)
+ \cite[Proposition~5.6 and Section~5.8]{IritaniKoto}.
+\]
+Normalize the Laurent unit and fixed divisor terms first.  The normalized
+connection descends to \(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
+finite quotients, and then extend scalars to the Laurent comparison field.
+Again the divisor substitution is a \(z\)-constant coefficient automorphism;
+it factors through the displayed \(u\)-exponent.
+This gives \(r\)
+copies of the intrinsic base module and proves (4.2).  The base Novikov map is the
+embedding in \cite[(1.1) and Remark~5.2]{IritaniKoto}.  The theorem assumes
+\(V^\vee\) globally generated.  Tensoring \(V\) by a sufficiently negative
+line bundle achieves this without changing \(\PP_T(V)\)
+\cite[Remark~1.2]{IritaniKoto}; the resulting divisor shift preserves framed
+monodromy by Lemma~\ref{lem:formal-base-shift}.  All other Novikov extensions
+are in the coefficient direction.  After the odd bulk variables vanish,
+pullback, pushforward, Fourier transformation, and multiplication by the
+characteristic-class factors all preserve cohomological parity.  Hence both
+decompositions restrict to the even quantum connections used here.  Formula
+(4.2) is tautological when \(r=1\).
+\end{proof}
+
+The center map in (4.3) is not necessarily injective
+\cite[(5.15)]{IritaniBlowup}.  Thus generic vanishing for \(C\) does not by
+itself imply that its specialized term vanishes.  The next lemma supplies the
+missing implication.
+
+\begin{definition}
+A monomial map \(\chi:\Lambda_T\to A\) is \emph{strictly
+Novikov-admissible} if \(A\) is a complete separated valued domain with domain
+associated graded, every monomial has nonzero image, and
+\[
+ v(\chi(Q^d))=\ell(d),
+ \tag{4.5}
+\]
+where \(\ell\) is positive and proper on the effective numerical monoid.
+\end{definition}
+
+The center maps in (4.3) are strictly admissible.  Give the exceptional
+Laurent variable valuation zero and use an ample divisor \(H\) on \(T\).  Then
+\[
+ v_H\!\left(Q^{i_*d}q^{-\rho_C\cdot d/(c-1)}\right)
+ =(H|_C)\cdot d.
+\]
+The restriction \(H|_C\) is ample, which gives positivity and properness; the
+associated graded Laurent monoid ring is a domain.
+
+\begin{lemma}[Divisor tagging]
+\label{lem:divisor-tagging}
+Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
+small even quantum connection of \(T\) has no primitive-sixth framed
+monodromy, neither does its specialization along \(\chi\).
+\end{lemma}
+
+\begin{proof}
+Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
+\(N_1(T)\), and introduce formal variables
+\(\boldsymbol t=(t_1,\ldots,t_\rho)\).  Define
+\[
+ \chi_{\boldsymbol t}(Q^d)=\chi(Q^d)
+ \exp\!\left(\sum_i t_i(D_i\cdot d)\right).
+ \tag{4.6}
+\]
+This map from \(\Lambda_T\) to \(A[[\boldsymbol t]]\) is injective.  To prove
+this, take a nonzero series.  Properness in (4.5) makes its lowest-valuation
+support finite.  Its initial image is a finite combination of distinct
+exponential characters.  After a generic substitution \(t_i=a_i s\), their
+exponents are distinct; their derivatives at \(s=0\) form a Vandermonde
+matrix.  The characters are therefore linearly independent.  The domain
+hypothesis on the associated graded prevents cancellation of the initial
+terms.
+
+Let \(k_\chi=\overline{\operatorname{Frac}A}\).  After embedding the two
+fraction fields in a common algebraic closure, injectivity makes the
+\(\chi_{\boldsymbol t}\)-module a scalar extension of the intrinsic module.
+On the other hand, the divisor equation
+identifies (4.6) with the degree-two formal bulk pullback of the \(\chi\)-module
+over \(B=k_\chi[[\boldsymbol t]]\).  Apply the finite-quotient argument in
+Lemma~\ref{lem:formal-base-shift} with
+\(\eta=\sum_i t_iD_i\): its integral-\(z\) bulk gauge removes the positive
+divisor component.  Hence vanishing over the intrinsic field implies
+vanishing after \(\chi\).
+\end{proof}
+
+\begin{proposition}[Low-dimensional vanishing]
+\label{prop:low-dimensional-vanishing}
+Let \(T\) be a point, a smooth projective curve, or a smooth projective
+surface.  For every strictly Novikov-admissible specialization \(\chi\),
+\[
+ \nu_6(T;\chi)=0.
+ \tag{4.7}
+\]
+\end{proposition}
+
+\begin{proof}
+We first prove the intrinsic generic statement.  If \(K_T\) is nef, the proof
+of \cite[Claim~6.15]{KKPYY} applies coefficient by coefficient over the small
+numerical Novikov ring.  Set
+\[
+ \operatorname{Gr}=\frac{\operatorname{Deg}-\dim T}{2},
+ \qquad g=\operatorname{Gr}+\frac12E,
+\]
+where \(E\) is the identity in cohomological degrees of parity opposite to
+\(\dim T\) and is zero in the other degrees.  The operator \(g\) has integral
+eigenvalues.  Coefficientwise in \(Q^\beta\), multiplication by \(c_1(T)\)
+sends
+\[
+ H^i(T)\longrightarrow H^{i+2-2c_1(T)\cdot\beta}(T).
+\]
+If \(K_T\) is nef, then \(c_1(T)\cdot\beta\le0\), so the
+\(\operatorname{Gr}\)-weight rises by
+\(1-c_1(T)\cdot\beta\ge1\).
+Conjugation by \(z^g\) therefore turns
+\(
+ \nabla+\frac12E\,dz/z
+\)
+into a regular-singular connection with nilpotent residue.  Undoing the
+half-parity correction permits only the monodromy eigenvalues \(1\) and
+\(-1\), never a primitive sixth root.
+
+This treats curves of positive genus and minimal surfaces with nef canonical
+class.  A point is immediate.  The remaining minimal varieties are
+\(\PP^1\), \(\PP^2\), and ruled surfaces; (4.2) reduces them to a point or a
+curve.  Every nonminimal surface is obtained from a minimal surface by point
+blowups, and (4.3) adds only point summands.  Hence the intrinsic generic
+invariant vanishes in every case.  Lemma~\ref{lem:divisor-tagging} gives (4.7).
+\end{proof}
+
+\begin{proposition}[The cubic packet]
+\label{prop:cubic-packet}
+For every smooth cubic threefold \(X\),
+\[
+ \nu_6(X)\ge2.
+ \tag{4.8}
+\]
+\end{proposition}
+
+\begin{proof}
+In the basis \(1,P,P^2,P^3\), Cai explicitly block-diagonalizes the small even
+quantum connection.  The rank-two zero-exponential block has indicial
+polynomial
 \[
  \rho^2+\rho+\frac5{36},
 \]
-whose roots are \(-1/6\) and \(-5/6\), in the rank-two zero-eigenvalue block
-of the even big cubic quantum connection \cite{Cai}.  Its bulk-variable
-gauges use integral powers of the loop variable.  Parity preservation places
-this rank-two block inside the unsplit zero atom of the full maximal
-big-quantum \(F\)-bundle in \cite[Example~6.21]{KKPYY}; passage to that
-bundle is scalar extension with the same loop coordinate.  Hence the two
-monodromy eigenvalues \(e^{-\pi i/3}\) and \(e^{\pi i/3}\) occur in
-\(\FM(\alpha_X)\).  We make no assertion about additional eigenvalues from
-the odd summand, and obtain the stated lower bound.
-
-A point has exponent zero, and \(\PP^1\) reduces to two point atoms by the
-projective-bundle formula.  For a curve of genus \(g>0\), the explicit curve
-connection has formal monodromy eigenvalues only in \(\{1,-1\}\): this
-follows directly from Cai's Proposition~7 on the even block and the classical
-odd block, and is also the curve-atom comparison used in
-\cite[Example~6.21]{KKPYY}.  Thus no curve atom has a primitive sixth-root
-eigenvalue.  For a minimal surface with nef canonical
-class, at an even base point with vanishing \(H^0\)-coordinate the
-parity-corrected connection has
-nilpotent residue by \cite[Claim~6.15]{KKPYY}; undoing the integral grading
-and half-parity correction permits only monodromy eigenvalues \(1\) and
-\(-1\).  A minimal surface of Kodaira dimension \(-\infty\) is
-\(\PP^2\) or ruled.  Projective space reduces to a point atom, and a ruled
-surface reduces by the projective-bundle formula to curve atoms.  Finally,
-every nonminimal surface is obtained from a minimal one by point blowups,
-whose blowup formula adds only point atoms \cite[Theorem~4.5]{KKPYY}.  The
-classification of smooth projective surfaces exhausts the possibilities and
-proves (ii).
+with roots \(-1/6\) and \(-5/6\) \cite[Section~3 and Proposition~6]{Cai}.  His gauge uses only
+integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
+are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The numerical curve lattice of a
+cubic threefold has rank one, so the numerical-Novikov convention does not
+change the calculation.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
-Let \(Y=X\times\PP^1\).  The projective-bundle formula gives
+The projective-bundle formula and Proposition~\ref{prop:cubic-packet} give
 \[
- \CFF(Y)=2\CFF(X)
- \qquad\text{\cite[Theorem~4.11 and Proposition~5.22(3)]{KKPYY}},
+ \nu_6(X\times\PP^1)=2\nu_6(X)>0.
+ \tag{4.9}
 \]
-so Proposition~\ref{prop:atom-values} gives \(\nu_6(Y)>0\).
-
-Suppose that \(Y\) were rational.  Weak factorization of a birational map
-\(Y\dashrightarrow\PP^4\), together with the blowup chemical formula
-\cite[Proposition~5.22(2)]{KKPYY}, gives in the free abelian atom group
+Suppose that \(X\times\PP^1\) were rational.  Weak factorization of a
+birational map to \(\PP^4\) expresses it as a sequence of blowups and blowdowns
+with smooth centers \cite{AKMW}.  A nontrivial center in a smooth fourfold has
+dimension at most two.  For each step, (4.3) and
+Proposition~\ref{prop:low-dimensional-vanishing} show that the two endpoint
+values of \(\nu_6\) are equal.  This integer equality is reversible, so it
+telescopes through either orientation of the factorization; each step may use
+its own comparison field.  We obtain
 \[
- \CFF(Y)+\sum_i(r_i-1)\CFF(Z_i)
- =\CFF(\PP^4)+\sum_j(s_j-1)\CFF(W_j),
+ \nu_6(X\times\PP^1)=\nu_6(\PP^4)=0,
 \]
-where \(r_i,s_j\) are the corresponding codimensions.  Divisorial blowups
-are trivial, so every effective center has codimension at least two and hence
-dimension at most two.  Apply
-\(\nu_6\).  Proposition~\ref{prop:atom-values}(ii) kills every center term,
-and the projective-bundle formula over a point gives
-\(\nu_6(\PP^4)=0\).  The left-hand side retains \(\nu_6(Y)>0\), a
-contradiction.
+where the last equality follows from (4.2) over a point.  This contradicts
+(4.9).
 \end{proof}
 
-The proof uses the free atom group, not a signed informal block ledger.  In
-particular the two copies supplied by \(\PP^1\) are positive multiplicities
-and cannot cancel one another.
+The argument is sharp for this invariant.  In a factorization of the fivefold
+\(X\times\PP^2\), a center may have dimension three and may itself carry the
+cubic packet.  The next stabilization therefore requires information about
+the packet's Stokes or Rees placement, not only its multiplicity.

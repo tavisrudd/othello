@@ -14,9 +14,9 @@ Our examples are fourfolds of the form \(Y=X\times\PP^1\), where \(X\) is a
 smooth cubic threefold in the nonstandard \(A_5\)-invariant pencil.  Two
 independent mechanisms act on the same \(Y\).  The intermediate Jacobian of
 \(X\) has an algebraic primitive minimal class; this gives universal
-\(CH_0\)-triviality.  The big quantum connection of every smooth cubic
-contains a formal-monodromy atom with primitive sixth roots; weak
-factorization shows that this atom survives the product with \(\PP^1\).
+\(CH_0\)-triviality.  The small even quantum connection of every smooth cubic
+has primitive-sixth framed formal monodromy; Iritani's quantum blowup formula
+shows that its multiplicity survives one stabilization.
 
 Here ``nonstandard'' has a precise representation-theoretic meaning.  Let
 \(W_5\) be the irreducible five-dimensional complex representation of
@@ -71,12 +71,19 @@ scalar.  Both local forms admit primitive mixed-adjugate formulas, which produce
 \(\Theta^4/4!\) as an integral product of divisor classes.
 
 The quantum half uses a different invariant.  We count primitive sixth-root
-eigenvalues of formal monodromy on the atoms of the maximal big-quantum
-\(F\)-bundle.  Cai's cubic calculation gives a nonzero count.  The
-projective-bundle formula doubles it on \(X\times\PP^1\).  If this fourfold
-were rational, weak factorization would express that count using centers of
-dimension at most two.  Surface classification and the low-dimensional atom
-formula show that every such center has count zero.
+eigenvalues of framed formal monodromy on the numerical small even quantum
+connection.  Cai's cubic calculation gives a nonzero count, and the
+projective-bundle formula doubles it on \(X\times\PP^1\).  Iritani's blowup
+comparison is additive for this count.  Its center Novikov map can be
+noninjective; formal divisor tags restore injectivity and the divisor equation
+returns to the original specialization.  Surface classification then shows
+that every center of dimension at most two contributes zero.
+
+Local cofactor saturation forces the primitive minimal class into the integral
+divisor-product lattice; semisimple graph slopes give a sufficient mechanism.
+The second argument is a direct weak-factorization calculation with the
+framed quantum invariant.  The special \(A_5\)-geometry enters only in the
+first argument; the second applies to every smooth cubic threefold.
 
 \subsection*{Relation with earlier rationality results}
 
@@ -85,16 +92,24 @@ irrational by means of its intermediate Jacobian \cite{CG}.  That obstruction
 does not by itself control a product with projective space, and stable
 rationality of smooth cubic threefolds remains open.  Cai recently recovered
 irrationality from the primitive-sixth-root formal monodromy of the cubic
-quantum connection \cite{Cai}.  Katzarkov--Kontsevich--Pantev--Yu supply the
-atom formalism, blowup and projective-bundle formulas, and the resulting
-nonrationality criterion \cite{KKPYY}.  Theorem~\ref{thm:every-cubic} combines
-these inputs at the next dimension: after one projective stabilization, the
-cubic atom still cannot be contributed by any weak-factorization center.
+quantum connection \cite{Cai}.  Iritani and Iritani--Koto prove the quantum
+\(D\)-module decompositions for blowups and projective bundles
+\cite{IritaniBlowup,IritaniKoto}; Katzarkov--Kontsevich--Pantev--Yu identify
+the nef-canonical normal form used for low-dimensional centers
+\cite{KKPYY}.  Theorem~\ref{thm:every-cubic} combines these inputs at the next
+dimension.
 
 On the cycle side, Voisin reduces universal \(CH_0\)-triviality of a cubic
 threefold to algebraicity of the primitive minimal class of its intermediate
 Jacobian \cite{Voisin}.  Beckmann--de Gaay Fortman place such minimal classes
-in a general integral-Fourier framework \cite{BdGF}.  Here the six elliptic
+in a general integral-Fourier framework \cite{BdGF}.  For the very general
+cubic threefold the minimal class is not algebraic: every curve class on the
+intermediate Jacobian is an even multiple of it, so a very general cubic
+threefold admits no decomposition of the diagonal
+\cite[Theorem~1.3 and Corollary~1.4]{EdGFS}.  What Voisin's criterion leaves is
+the countable union of moduli subvarieties on which the class is algebraic;
+Theorem~\ref{thm:exotic-minimal-class} places an explicit exceptional family
+inside that union.  Here the six elliptic
 quotients supplied by Roulleau and the special period locus isolated by
 Hartlieb make the class explicit: the new point is its membership in the
 ordinary integral divisor-product lattice for every smooth member of the

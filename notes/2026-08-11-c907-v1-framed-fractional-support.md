@@ -201,8 +201,8 @@ polynomial, and in particular `nu_6`, is unchanged.
 
 The filtered formulation is necessary because the final `tilde tau` Laurent
 chart mixes positive and negative powers of
-`u=q^{-1/(r-1)}` with bulk variables.  We avoid that chart by using the
-reconstruction coordinates in Iritani Section 5.8.2.  Write
+`u=q^{-1/(r-1)}` with bulk variables.  Work instead on the target summands in
+Iritani Section 5.8.2, before scalar extension to that chart.  Write
 
 \[
  \tau=\tau^\circ+t,
@@ -210,37 +210,41 @@ reconstruction coordinates in Iritani Section 5.8.2.  Write
 \]
 
 Iritani proves that `(t,s_0,...,s_(r-2))` are formal invertible coordinates
-over the Laurent coefficient field and, crucially, writes the fundamental
-solution in these coordinates over
-`C[z^{-1}]((u))[[Q,t,s]]`; see (5.47)--(5.48) and the displayed matrix `M`
-in Section 5.8.2.  The initial conditions satisfy
+over the Laurent coefficient field and writes the target direct sum in these
+coordinates; see (5.47)--(5.48).  The initial conditions satisfy
 
 \[
  \tau^\circ=O(u^{r-1}),\qquad
  \varsigma_j^\circ+(r-1)\lambda_j=h_{Z,j}+O(u).
 \]
 
-Remove the identity term `-(r-1)lambda_j` by the string equation and the
-divisor term `h_(Z,j)` by the divisor equation.  Before extending
-coefficients to `C((u))`, the remaining shifts and the independent variables
-belong to the honest complete ideal
+For the `j`th center target, let `R_j` be the image subring, set
 
 \[
- I=(u,Q,t,s_0,\ldots,s_{r-2})
+ J_j=(u,\{Q^{i_*d}u^{\rho_Z\cdot d}:d\ne0\},
+       \text{components of }s_j)\subset R_j,
+ \qquad B_j=\varprojlim_N R_j/J_j^N,
 \]
 
-in the corresponding power-series subring.  Apply the lemma there, and only
-then extend scalars in the `z`-constant coefficient direction to the Laurent
-field where `Psi` and `Psi^{-1}` live.  The mixed terms
-`u^{-(l+1)}tilde tau_(l,m)` never enter this argument.
+and use this complete separated topology.  Remark 5.6 defines the center
+connection over this image ring.  First normalize over `C((u))` by the
+single-valued string scalar for `-(r-1)lambda_j` and by the fixed divisor
+substitution.  The normalized connection descends to `B_j`, and its remaining
+target coordinate `O(u)+s_j` lies in `J_j`.  Apply the lemma modulo every
+`J_j^N`, take the inverse limit, and only then extend scalars in the
+`z`-constant coefficient direction to the Laurent field where `Psi` and
+`Psi^{-1}` live.  The mixed terms
+`u^{-(l+1)}tilde tau_(l,m)` never enter this argument.  The ambient target uses
+`tau=tau^circ+t` with `tau^circ=O(q^-1)` and is handled in the same way.
 
-This lemma applies to Iritani's pullbacks even when pullback of the full
-fundamental solution as a function is ill-defined.  Equations (5.16)--(5.19)
-reduce the connection to the admissible ring; the constant term
+This lemma applies to Iritani's target connection even when pullback of the
+full fundamental solution as a function is ill-defined.  Remark 5.6 reduces
+the center connection to the image ring; the constant term
 `h_{Z,j}=(j+1/2)rho_Z/(r-1)` is a divisor shift, and the identity shift
 `-(r-1)lambda_j` is handled by the string equation.  The remaining mirror
-coordinate is positive-filtered in the reconstruction coordinates.  Thus no specialization of
-`exp(t/z)` at a nonnilpotent `t` is used.
+coordinate is positive-filtered in the reconstruction target.  Thus no
+specialization of `exp(t/z)` at a nonnilpotent `t` is used, and no continuity
+of the full mirror map in a weighted source chart is asserted.
 
 ### Blow-up lemma
 
@@ -256,21 +260,21 @@ isomorphism
 The map and its inverse are defined over
 `C[z]((q^{-1/s}))[[Q,t]]`; the mirror variables are independent of `z`.
 Thus the comparison commutes with formal monodromy.  Composing it with the bulk
-lemma on every summand gives
+lemma on every target summand gives
 
 \[
  \nu_6(\operatorname{Bl}_C Y)
- =\nu_6(Y)+(r-1)\nu_6(C).
+ =\nu_6(Y)+\sum_{j=0}^{r-2}\nu_6(C;\chi_j).
  \tag{3.1}
 \]
 
-The equality is between the intrinsic small invariants: every pulled-back
-summand is returned to its own small module by the bulk lemma.  The
-completions and coefficient fields may therefore be enlarged separately at
-each factorization step by roots of Novikov monomials.  Such extensions are
-unramified in `z` and preserve formal monodromy.  No solution or
-certificate is transported from one exceptional Laurent cusp to the next,
-and no global comparison field is required.
+Here the endpoint invariants are intrinsic, while `chi_j` is the numerical
+Novikov specialization of the `j`th center target.  The completions and
+coefficient fields may be enlarged separately at each factorization step by
+roots of Novikov monomials.  Such extensions are unramified in `z` and preserve
+formal monodromy.  No solution or certificate is transported from one
+exceptional Laurent cusp to the next, and no global comparison field is
+required.
 
 There is one asymmetry in the coefficient maps which must be recorded.  The
 ambient map used in Iritani Section 5.5.1 is an inclusion, but the center map
@@ -280,7 +284,7 @@ ambient map used in Iritani Section 5.5.1 is an inclusion, but the center map
  \tag{3.1a}
 \]
 
-in (5.15) need not be injective.  Accordingly, the center term in (3.1) is
+in (5.15) need not be injective.  Accordingly, a center term in (3.1) is
 not interpreted as a scalar extension of the generic coefficient field of
 `C`.  What the one-step proof uses is the stronger uniform statement
 
@@ -296,20 +300,10 @@ filtration is valid curve-class by curve-class and therefore survives
 quotients and monomial identifications.  Projective-bundle and point-blowup
 reductions are likewise identities after the same specialization.
 
-Thus the operation statement needed later is more precisely
-
-\[
- \nu_6(\operatorname{Bl}_C Y)
- =\nu_6(Y)+(r-1)\nu_6(C;\chi),
- \tag{3.1c}
-\]
-
-where the ambient term is transported through the injective map and the
-center term is specialized by (3.1a).  In dimensions at most two the second
-term is zero for every `chi`, so a blow-up or blow-down preserves the ambient
-primitive-sixth multiplicity.  This stepwise zero-center statement, rather
-than an equality of generic center invariants across unrelated fields, is
-what is iterated along weak factorization.
+In dimensions at most two every term in the sum (3.1) is zero, so a blow-up or
+blow-down preserves the ambient primitive-sixth multiplicity.  This stepwise
+zero-center statement, rather than an equality of generic center invariants
+across unrelated fields, is what is iterated along weak factorization.
 
 Here and below `chi` is **strictly Novikov-admissible**.  More precisely, its
 target is a complete separated valued domain `A` with domain associated
@@ -411,20 +405,24 @@ Again the map commutes with formal monodromy, so
  \tag{3.2}
 \]
 
-Here too use the reconstruction coordinates of Iritani--Koto Section 5.8:
-`s_j=varsigma_j-varsigma_j^circ`.  Their equation (5.13) makes the `s_j`
-independent formal variables, and the following displayed matrix gives the
-block fundamental solution
+Here too use the target reconstruction coordinates of Iritani--Koto Section
+5.8: `s_j=varsigma_j-varsigma_j^circ`.  For the `j`th target, let `R_j` be the
+image subring and complete it in
 
 \[
- \bigoplus_j e^{-\varsigma_j^\circ/z}
- M_Y(\varsigma_j^\circ+s_j).
+ J_j=(u,\{Q^d u^{c_1(V)\cdot d}:d\ne0\},
+       \text{components of }s_j),\qquad u=q^{-1/r}.
 \]
 
-The initial condition in (5.11) has leading identity term `r lambda_j`, a
-divisor term, and `O(q^{-1/r})`.  String/divisor normalization and the
-`(q^{-1/r},Q,s)`-adic base-shift lemma therefore identify each block with
-the intrinsic small module before scalar extension to the Laurent field.
+Proposition 5.6 and the initial condition in Section 5.8 give the leading
+identity term `r lambda_j`, the fixed divisor term
+`-(2 pi i j/r)c_1(V)`, and `O(u)`.  Normalize the Laurent unit and fixed divisor
+terms first; the normalized target descends to the `J_j`-adic completion.
+The finite-quotient base-shift lemma then identifies it with the intrinsic
+small module before scalar extension to the Laurent field.  The theorem
+assumes `V^vee` globally generated.  Tensoring `V` by a sufficiently negative
+line bundle achieves this without changing `P_Y(V)`; the resulting divisor
+shift does not alter framed formal monodromy.  Rank one is tautological.
 
 ### Parity restriction
 
