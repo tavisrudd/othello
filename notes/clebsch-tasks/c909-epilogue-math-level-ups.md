@@ -368,8 +368,8 @@ application or an exact obstruction to necessity.
     family, every integral Hodge class is an ordinary divisor product in
     every degree. The minimal-class theorem remains valid at special fibres
     with extra Hodge tensors, but full Hodge generation is not asserted
-    there. One hostile audit passes; an independent second audit is required
-    before manuscript promotion.
+    there. Two independent hostile/priority audits pass; manuscript promotion
+    remains a separate authorized task.
 
 ## Highest-EV next moves
 
@@ -382,15 +382,14 @@ application or an exact obstruction to necessity.
    hence to full cohomological `PD(NS)` saturation.  This task explicitly
    excludes C907 higher stabilization, C908 Chow descent, and C908's
    non-etale/p-typical classification.
-2. **Promote the exact actual six-axis ambient quotient after a second
-   hostile audit.** The full local
+2. **Promote the exact actual six-axis ambient quotient.** The full local
    four-slot quotient for the unit-line plus rank-four defect packet at two
    and three. At two the defect splits over an unramified ring into two
    repeated scalar eigenspaces; at three it is scalar. Repeated roots change
    the divisor ideals, so the one-depth distinct-root formula may not be
    specialized. The direct calculation gives structural vanishing; freeze
-   it only after an independent audit of every support type and the
-   generic-non-CM scope.
+   it with the repeated-root support classification and the generic-non-CM
+   scope explicit.
 3. **Exact higher Hodge-product defect (successor, not epilogue gate).** Generalize the proved
    codimension-two formula from four-slot Pluecker cancellation to every
    codimension, preferably as a closed standard-monomial/partition formula

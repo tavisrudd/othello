@@ -155,9 +155,9 @@ splitting; at three it is scalar.  In each four-slot support a same-root
 matching already realizes the minimal integral scale, so the Pluecker defect
 vanishes.  Hence the generic non-CM six-axis intermediate Jacobian has
 `Hdg^(2k)=P^k` in every degree at both bad primes (and trivially elsewhere).
-This is awaiting one independent hostile audit before manuscript promotion;
-special fibres with extra Hodge tensors retain only the established
-minimal-class conclusion.
+Two independent hostile/priority audits now pass. Manuscript promotion is a
+separate task; special fibres with extra Hodge tensors retain only the
+established minimal-class conclusion.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward

@@ -3,8 +3,8 @@
 Date: 2026-08-12
 
 Status: structural synthesis of proved low-width theorems; the actual
-six-axis specialization has a positive first hostile audit and awaits an
-independent second audit. No manuscript, PDF, mirror, or Lean edit.
+six-axis specialization has passed two independent hostile/priority audits.
+No manuscript, PDF, mirror, or Lean edit.
 
 ## Crown choice
 
@@ -104,7 +104,7 @@ it.
   rank-five one-depth quotient (1).
 * **Settled:** the cubic implication through Voisin and the independent
   one-step atom obstruction.
-* **First audit passed:** the exact multi-prime quotient for the actual
+* **Two audits passed:** the exact multi-prime quotient for the actual
   six-axis polarization vanishes in every degree at generic non-CM fibres.
 * **Successor, not epilogue gate:** arbitrary-rank Dyck-height Smith formula.
 
@@ -128,5 +128,5 @@ on the six-axis family. Special fibres with extra Hodge tensors retain the
 safe minimal-class conclusion, but equality with the enlarged full Hodge
 lattice is not asserted there. This result is not a specialization of the
 equal-depth formula: the repeated-root matrix-of-ideals calculation is
-load-bearing. An independent hostile audit is still required before
-manuscript promotion.
+load-bearing. Two independent audits now pass; manuscript integration remains
+a separate authorized task.

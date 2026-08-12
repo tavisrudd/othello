@@ -155,8 +155,8 @@ separation theorem.
   complement isomorphism.
 * **Closed conceptually:** conformal-block meaning and Dyck ranks of the
   higher web filtration.
-* **First audit passed, awaiting independent confirmation:** actual six-axis
-  repeated-root four-slot quotient vanishes.
+* **Two independent audits passed:** actual six-axis repeated-root four-slot
+  quotient vanishes at generic non-CM fibres.
 * **Open, successor:** primitive ambient filtered-dilation theorem for all
   web widths.
 * **Explicit boundary:** no Chow-ring equality, no horizontal minimal cycle,
