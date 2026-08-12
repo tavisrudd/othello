@@ -346,12 +346,41 @@ blowups, and (4.3) adds only point summands.  Hence the intrinsic generic
 invariant vanishes in every case.  Lemma~\ref{lem:divisor-tagging} gives (4.7).
 \end{proof}
 
+\begin{theorem}[Birational invariance through dimension four]
+\label{thm:nu6-birational-invariance}
+If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
+the same dimension at most four, then
+\[
+ \nu_6(Y)=\nu_6(Y').
+ \tag{4.8}
+\]
+Consequently \(\nu_6\) is invariant under one \(\PP^1\)-stabilization of
+smooth projective threefolds.
+\end{theorem}
+
+\begin{proof}
+Weak factorization decomposes a birational map between smooth varieties into
+blowups and blowdowns with smooth centers of codimension at least two
+\cite{AKMW}.  In dimension at most four every nontrivial center has dimension
+at most two.  Proposition~\ref{prop:low-dimensional-vanishing} makes every
+center term in (4.3) zero, so the endpoint values agree at each step.
+
+If \(Y,Y'\) are smooth threefolds and
+\(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
+dimension four and (4.2):
+\[
+ 2\nu_6(Y)=\nu_6(Y\times\PP^1)
+ =\nu_6(Y'\times\PP^1)=2\nu_6(Y').
+\]
+Cancelling two in \(\Z\) proves the stabilization assertion.
+\end{proof}
+
 \begin{proposition}[The cubic packet]
 \label{prop:cubic-packet}
 For every smooth cubic threefold \(X\),
 \[
- \nu_6(X)\ge2.
- \tag{4.8}
+ \nu_6(X)=2.
+ \tag{4.9}
 \]
 \end{proposition}
 
@@ -364,30 +393,58 @@ polynomial
 \]
 with roots \(-1/6\) and \(-5/6\) \cite[Section~3 and Proposition~6]{Cai}.  His gauge uses only
 integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
-are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The numerical curve lattice of a
-cubic threefold has rank one, so the numerical-Novikov convention does not
-change the calculation.
+are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
+blocks have integral residues, hence contribute no primitive sixth root.
+Thus the multiplicity is exactly two.  The numerical curve lattice of a cubic
+threefold has rank one, so the numerical-Novikov convention does not change
+the calculation.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
 The projective-bundle formula and Proposition~\ref{prop:cubic-packet} give
 \[
  \nu_6(X\times\PP^1)=2\nu_6(X)>0.
- \tag{4.9}
+ \tag{4.10}
 \]
-Suppose that \(X\times\PP^1\) were rational.  Weak factorization of a
-birational map to \(\PP^4\) expresses it as a sequence of blowups and blowdowns
-with smooth centers \cite{AKMW}.  A nontrivial center in a smooth fourfold has
-dimension at most two.  For each step, (4.3) and
-Proposition~\ref{prop:low-dimensional-vanishing} show that the two endpoint
-values of \(\nu_6\) are equal.  This integer equality is reversible, so it
-telescopes through either orientation of the factorization; each step may use
-its own comparison field.  We obtain
+Suppose that \(X\times\PP^1\) were rational.  By
+Theorem~\ref{thm:nu6-birational-invariance},
 \[
  \nu_6(X\times\PP^1)=\nu_6(\PP^4)=0,
 \]
 where the last equality follows from (4.2) over a point.  This contradicts
-(4.9).
+(4.10).
+\end{proof}
+
+\subsection{A genus-eight Fano consequence}
+
+Kuznetsov associates to every smooth prime Fano threefold \(V\) of genus
+eight a smooth Pfaffian cubic threefold \(X\), together with rank-two vector
+bundles \(U\) on \(V\) and \(E^*\) on \(X\), whose projectivizations are
+related by a flop \cite[Theorems~2.17--2.18]{KuznetsovV14}.
+
+\begin{corollary}[One stabilization of \(V_{14}\)]
+\label{cor:v14-one-step}
+For every smooth prime Fano threefold \(V\) of genus eight,
+\[
+ \nu_6(V)=2,
+ \qquad
+ V\times\PP^1\ \text{is irrational}.
+ \tag{4.11}
+\]
+\end{corollary}
+
+\begin{proof}
+The flop gives a birational map between the smooth projective fourfolds
+\(\PP_V(U)\) and \(\PP_X(E^*)\).  By
+Theorem~\ref{thm:nu6-birational-invariance}, Proposition
+\ref{prop:framed-operations}, and Proposition~\ref{prop:cubic-packet},
+\[
+ 2\nu_6(V)=\nu_6(\PP_V(U))
+ =\nu_6(\PP_X(E^*))=2\nu_6(X)=4.
+\]
+Hence \(\nu_6(V)=2\).  Formula (4.2) now gives
+\(\nu_6(V\times\PP^1)=4\), whereas every rational smooth fourfold has
+\(\nu_6=0\) by Theorem~\ref{thm:nu6-birational-invariance}.
 \end{proof}
 
 The argument is sharp for this invariant.  In a factorization of the fivefold
