@@ -37,4 +37,44 @@ theorem packet_multiplicity_eq_of_preserving_chain
     packet.multiplicity source = packet.multiplicity target :=
   chain.multiplicity_eq packet
 
+/-- Reviewer-facing birational-invariance deduction.  Its typed input records
+the geometric weak-factorization and operation-formula premise explicitly. -/
+theorem packet_multiplicity_birational_in_dimension_four
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (input : Quantum.DimensionFourBirationalInput packet)
+    {source target : Variety} (sourceDimension : packet.dimension source ≤ 4)
+    (birational : input.birational source target) :
+    packet.multiplicity source = packet.multiplicity target :=
+  input.multiplicity_eq packet sourceDimension birational
+
+/-- Reviewer-facing transport across two birational rank-two projective
+bundles, the formal deduction used for the genus-eight Fano application. -/
+theorem rankTwoProjectiveBundle_packet_transport
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (input : Quantum.DimensionFourBirationalInput packet)
+    {leftBase rightBase leftBundle rightBundle : Variety}
+    (leftFormula : packet.multiplicity leftBundle =
+      2 * packet.multiplicity leftBase)
+    (rightFormula : packet.multiplicity rightBundle =
+      2 * packet.multiplicity rightBase)
+    (bundleDimension : packet.dimension leftBundle ≤ 4)
+    (bundlesBirational : input.birational leftBundle rightBundle) :
+    packet.multiplicity leftBase = packet.multiplicity rightBase :=
+  Quantum.rankTwoProjectiveBundle_transport packet input leftFormula rightFormula
+    bundleDimension bundlesBirational
+
+/-- Reviewer-facing irrationality deduction from a nonzero packet invariant. -/
+theorem irrational_of_nonzero_packet
+    {Variety : Type*} (packet : Quantum.PacketData Variety)
+    (input : Quantum.DimensionFourBirationalInput packet)
+    (Rational : Variety → Prop)
+    {object comparison : Variety}
+    (objectDimension : packet.dimension object ≤ 4)
+    (objectNonzero : packet.multiplicity object ≠ 0)
+    (comparisonZero : packet.multiplicity comparison = 0)
+    (rationalComparison : Rational object → input.birational object comparison) :
+    ¬ Rational object :=
+  Quantum.not_rational_of_nonzero_multiplicity packet input Rational objectDimension
+    objectNonzero comparisonZero rationalComparison
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

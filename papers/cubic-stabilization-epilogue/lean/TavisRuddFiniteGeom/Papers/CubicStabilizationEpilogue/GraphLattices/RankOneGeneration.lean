@@ -56,9 +56,7 @@ theorem scaled_rankOne_sub_diagonals
     sub (sub (scale c (rankOne a b)) (scale (c * a * a) firstSquare))
         (scale (c * b * b) secondSquare) =
       { diagonalFirst := 0, mixed := c * a * b, diagonalSecond := 0 } := by
-  cases Subsingleton.or_nontrivial R
-  · exact Subsingleton.elim _ _
-  · ext <;> simp [sub, scale, rankOne, firstSquare, secondSquare] <;> ring
+  ext <;> simp [sub, scale, rankOne, firstSquare, secondSquare] <;> ring
 
 end SymmetricPair
 

@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant
+import Mathlib.Tactic.Omega
 
 /-!
 # Birational deductions from operation formulas
@@ -33,6 +34,74 @@ theorem PreservingChain.multiplicity_eq
   induction chain with
   | refl => rfl
   | step preserves _ inductionHypothesis => exact preserves.trans inductionHypothesis
+
+/-- The external geometric data needed to turn a packet multiplicity into a
+birational invariant through dimension four.  The `factorization` field is an
+explicit premise: it packages weak factorization, operation formulas, and
+vanishing of every permitted center contribution. -/
+structure DimensionFourBirationalInput (packet : PacketData Variety) where
+  birational : Variety → Variety → Prop
+  factorization : ∀ {source target}, packet.dimension source ≤ 4 →
+    birational source target → PreservingChain packet source target
+
+/-- Weak factorization through packet-preserving steps makes the packet
+multiplicity birationally invariant in dimension at most four. -/
+theorem DimensionFourBirationalInput.multiplicity_eq
+    (packet : PacketData Variety)
+    (input : DimensionFourBirationalInput packet)
+    {source target : Variety} (sourceDimension : packet.dimension source ≤ 4)
+    (birational : input.birational source target) :
+    packet.multiplicity source = packet.multiplicity target :=
+  (input.factorization sourceDimension birational).multiplicity_eq packet
+
+/-- Equality after multiplying two natural numbers by two permits cancellation.
+This is the arithmetic step in transporting a packet across two rank-two
+projective-bundle presentations. -/
+theorem eq_of_two_mul_eq_two_mul {left right : ℕ}
+    (equality : 2 * left = 2 * right) : left = right := by
+  omega
+
+/-- If two rank-two projective bundles are birational and the packet obeys the
+rank-two projective-bundle formula on both, then their bases have the same
+packet multiplicity.  The geometric identification of the bundles is an
+explicit premise. -/
+theorem rankTwoProjectiveBundle_transport
+    (packet : PacketData Variety)
+    (input : DimensionFourBirationalInput packet)
+    {leftBase rightBase leftBundle rightBundle : Variety}
+    (leftFormula : packet.multiplicity leftBundle =
+      2 * packet.multiplicity leftBase)
+    (rightFormula : packet.multiplicity rightBundle =
+      2 * packet.multiplicity rightBase)
+    (bundleDimension : packet.dimension leftBundle ≤ 4)
+    (bundlesBirational : input.birational leftBundle rightBundle) :
+    packet.multiplicity leftBase = packet.multiplicity rightBase := by
+  apply eq_of_two_mul_eq_two_mul
+  calc
+    2 * packet.multiplicity leftBase = packet.multiplicity leftBundle := leftFormula.symm
+    _ = packet.multiplicity rightBundle :=
+      input.multiplicity_eq packet bundleDimension bundlesBirational
+    _ = 2 * packet.multiplicity rightBase := rightFormula
+
+/-- A nonzero birational invariant obstructs a rationality predicate whenever
+rationality supplies a birational map to a comparison object on which the
+invariant vanishes. -/
+theorem not_rational_of_nonzero_multiplicity
+    (packet : PacketData Variety)
+    (input : DimensionFourBirationalInput packet)
+    (Rational : Variety → Prop)
+    {object comparison : Variety}
+    (objectDimension : packet.dimension object ≤ 4)
+    (objectNonzero : packet.multiplicity object ≠ 0)
+    (comparisonZero : packet.multiplicity comparison = 0)
+    (rationalComparison : Rational object → input.birational object comparison) :
+    ¬ Rational object := by
+  intro rational
+  apply objectNonzero
+  calc
+    packet.multiplicity object = packet.multiplicity comparison :=
+      input.multiplicity_eq packet objectDimension (rationalComparison rational)
+    _ = 0 := comparisonZero
 
 end Quantum
 

@@ -230,6 +230,9 @@ lane = "clebsch"
 lean_terminals = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
 ]
 
 [[paper]]

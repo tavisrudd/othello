@@ -15,9 +15,26 @@
       "manuscript_label": "thm:birational-nu6",
       "status": "partial",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
       ],
       "scope": "The factorization telescope is kernel checked; the quantum operation formulas, center vanishing, and weak-factorization input remain cited mathematical premises."
+    },
+    {
+      "manuscript_label": "cor:v14-one-step",
+      "status": "partial",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport"
+      ],
+      "scope": "The rank-two cancellation and transport are kernel checked; Kuznetsov's projective-bundle flop and the quantum bundle formulas remain cited mathematical premises."
+    },
+    {
+      "manuscript_label": "thm:every-cubic",
+      "status": "partial",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet"
+      ],
+      "scope": "The obstruction-from-nonvanishing deduction is kernel checked; Cai's cubic packet, projective stabilization, and comparison formulas remain cited mathematical premises."
     }
   ]
 }
