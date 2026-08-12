@@ -156,7 +156,7 @@ Poincare duality do not imply (4) by themselves.
 Let the split source have five depth-one slots, all with pairwise-distinct
 residual roots, and let the graph depth be (p^a).  In codimension two,
 each four-subset has the two-matching calculation of §2, giving one
-(R/p^a) quotient.  There are (inom54=5) supports, hence
+(R/p^a) quotient. There are \(\binom54=5\) supports, hence
 
 [
   \operatorname{Hdg}^{4}/P^2\cong(R/p^a)^5.
