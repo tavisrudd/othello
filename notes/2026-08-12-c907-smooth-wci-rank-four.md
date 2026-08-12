@@ -14,7 +14,8 @@ Let
 \]
 
 be a quasismooth weighted complete-intersection threefold with smooth coarse
-space, strongly well-formed in the sense that
+space.  Assume the ambient weighted projective space `W` is well formed and
+that the intersection is strongly well formed in the sense that
 `codim_X(X intersect Sing(W_coarse))>=2`.  Suppose `Pic(X)=Z[H]`, with
 `H=O_X(1)` primitive, and suppose `X` is Fano of index
 
@@ -96,32 +97,40 @@ ordinary Givental cone of `X`, with no Cartier or convexity hypothesis.
 
 The term of degree `beta` in that formula lies in the sector labelled by
 `g_beta^(-1)`.  Since `X` has trivial inertia it vanishes unless
-`g_beta=1`.  For `W=P(w)`, primitivity of `H=O_X(1)` says exactly that this
-means `beta=n` is an integer.  Then every `n d_j` is nonnegative integral,
-so Wang Lemma 3.2 and Corollary 3.3(1) identify the localized class with the
-fundamental class.  Formula (1.1) is consequently the cohomology-valued
-hypergeometric lift of (3), not merely a raw stacky series.
+`g_beta=1`.  For the standard `C^*` presentation of `W=P(w)`, this is
+equivalent to `beta(O_W(1)) in Z`; restriction to `H` and its primitivity
+identify this with the primitive ordinary `H`-Novikov degree `n>=0`.  For
+`n>0`, every `n d_j` is positive integral, so the coordinate-divisor product
+in Wang Corollary 3.3(1) is empty and the localized class is `1`; the `n=0`
+coefficient is `1` by `I`-normalization.  Formula (1.1) is consequently the
+cohomology-valued hypergeometric lift of (3), not merely a raw stacky series.
 
 This is the sector argument that removes the Cartesian-degree hypothesis:
 the nonintegral ambient degrees are excluded by *target* inertia rather than
 by convexity.  It also gives the required Birkhoff equality
 `I=J(q,mu,z)` as part of Wang Theorem 1.1.
 
-The Fano degree estimate gives a small, not big, normalization: the degree
-`n` principal term begins in `z^(1-rn)`.  Thus for `r>=2` the principal
+The Fano degree estimate gives a small, not big, normalization: the degree-
+`n` coefficient of `I` begins in `z^(-rn)`, so that of `zI` begins in
+`z^(1-rn)`.  Thus for `r>=2` the principal
 series is the small `J`-slice; for `r=1` its sole extra nonnegative
-positive-degree term is a scalar unit `q`-term.  The string gauge removes
-that scalar, changing the irregular exponential but not formal residues.
+positive-degree term is a scalar `Cq/z` term, removed by the string factor
+`exp(-Cq/z)`.  This changes the irregular exponential but not formal
+residues.
 
 Finally `Pic(X)=Z[H]` and Poincare duality give
 `H^even(X)=span(1,H,H^2,H^3)`.  The cohomology-valued lift and its three
-cyclic derivatives have these classical leading terms, so (1) is the full
-small-even QDM.  The rank-four hypergeometric support bound then gives
+cyclic derivatives generate the full module: at `q=0`,
+`z nabla_(q partial_q)` is cup product by `H`, and
+`1,H,H^2,H^3` is a basis.  The normalized scalar `I/J` solution has the
+exact recurrence (1), so its cyclic rank-four relation is (1) and this is the
+full small-even QDM.  The rank-four hypergeometric support bound then gives
 `nu_6<=2`.
 
 ## Exact boundary
 
-The conclusion does not cover a non-strongly-well-formed WCI, a singular
+The conclusion does not cover a non-well-formed ambient stack, a
+non-strongly-well-formed WCI, a singular
 coarse target, nonprimitive `O_X(1)`, higher Picard rank, odd quantum sectors,
 or the operation-framed carrier length.  It does cover non-Cartier degrees:
   their source bridge is Wang's nonconvex big-`I` theorem, not convex orbifold
@@ -131,7 +140,7 @@ or the operation-framed carrier length.  It does cover non-Cartier degrees:
 ## Sources
 
 - J. Wang, *A mirror theorem for Gromov--Witten theory without convexity*,
-  arXiv:1910.14440v2 / Forum Math. Sigma 13 (2025), e72, formula (1.1),
+  arXiv:1910.14440 / Forum Math. Sigma 13 (2025), e72, formula (1.1),
   Theorem 1.1, Lemma 3.2, and Corollary 3.3: an all-complete-intersection
   big `I`-slice and its integral-sector localized class.  Cached SHA-256:
   `24c2f43948000a0f3839a347e5f98128e713803237d67944a19f46d8be4fb3af`.
