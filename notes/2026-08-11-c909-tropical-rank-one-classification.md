@@ -17,8 +17,11 @@ integers `e_ij=e_ji>=0`.  Consider the symmetric coefficient lattice
  \tag{1}
 \]
 
-Let `mathcal R` be the integral span inside `mathcal N(a,e)` of the rank-one
-forms `c vv^t` that themselves belong to `mathcal N(a,e)`.
+Let `K=Frac(O)`. Let `mathcal R` be the integral span inside
+`mathcal N(a,e)` of the rank-one forms `c vv^t`, with `c in K` and
+`v in K^n`, whose resulting matrix belongs to `mathcal N(a,e)`. Only the
+integral matrix matters; the separate valuations of `c` and `v` may be
+negative.
 
 > **Tropical rank-one classification.** One has
 > 
@@ -93,7 +96,8 @@ the principal `2 by 2` coefficient submatrix on `{i,j}`.  For each summand set
  t=v_p(c_r),\quad r_i=v_p((v_r)_i),\quad r_j=v_p((v_r)_j).
 \]
 
-Admissibility of its two diagonal entries gives
+These valuations may be negative. Admissibility of its two diagonal entries
+gives
 
 \[
              t+2r_i\ge a_i,
