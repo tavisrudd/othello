@@ -7,7 +7,7 @@ manuscript, PDF, mirror, or Lean edit
 
 ## Fixed datum
 
-Fix first the minimal coarse presentation datum `tau_0`:
+Fix first the minimal sign-marked presentation datum `tau_0`:
 
 * the elliptic `X_0(3)` source with its cyclic subgroup of order three;
 * the coefficient polarization `6I_5-J_5` on its fifth power;
@@ -15,11 +15,11 @@ Fix first the minimal coarse presentation datum `tau_0`:
 * the unordered six-axis augmentation frame with its monodromy-selected
   scalar three-primary orbit.
 
-Let `M_tau0` be the resulting coarse fixed-data modular presentation curve.  An
+Let `M_tau0` be the resulting sign-marked fixed-data modular presentation curve.  An
 object over a scheme is the elliptic source with this level structure and
 the quotient ppav determined by the fixed finite graph kernel.  After
-rigidifying the central `+/-1` inertia, `M_tau0` is a normal finite cover of
-the appropriate open of `X_0(3)`.  Its two-primary sign quotient has
+rigidifying the central `+/-1` inertia, `M_tau0` is the index-two
+`Gamma_ex` cover of the appropriate open of `X_0(3)`.  Its
 function field
 
 ```text
@@ -76,7 +76,9 @@ four cubic boundary values are exactly those in (4).  Strong Torelli rules
 out any additional generic identification on the cubic side; the generic
 projective normalizer quotient is already the sign involution `t |-> -t`.
 
-If one orders the axes, chooses a full symplectic basis of two-torsion, or
+Full `E[2]` level is the degree-six
+`Gamma_0(3) intersect Gamma(2)` cover, hence adds a degree-three extension
+over `M_tau0`.  If one orders the axes, chooses a full symplectic basis of two-torsion, or
 adds full level at three, the resulting fine presentation curve is a finite
 cover of `M_tau0`; its function field need not equal `C(t)`.  The cubic
 family lifts only after the corresponding finite base change.  Stack
@@ -101,7 +103,7 @@ fixed level-labelled statement hold after the common finite cover.
 
 ## Scope warning
 
-The function-field equality concerns the minimal coarse datum `tau_0`, not
+The function-field equality concerns the minimal sign-marked datum `tau_0`, not
 arbitrary full level.  Fine labels introduce finite covers rather than new
 geometric content.  The theorem does not assert that every point of the compactified
 modular curve comes from a smooth cubic, and it does not classify other
