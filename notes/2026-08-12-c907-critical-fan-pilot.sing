@@ -58,16 +58,16 @@ poly de = -A-c;
 poly dc = -(1-e);
 
 // Clear the e denominators; e is forced to one by dc.
-ideal crit = graph,de,dc,e*y1-A,e*y2-A,e*y3-A,A*y1*y2*y3-Q;
-ideal residual = e-1,c+A,y1-A,y2-A,y3-A,L-S-A,A^4-Q;
+ideal crit = graph,de,dc,e*y1-A,e*y2-A,e*y3-A,A*y1*y2*y3-Q,S-y1-y2-y3;
+ideal residual = e-1,c+A,y1-A,y2-A,y3-A,L-S-A,A^4-Q,S-y1-y2-y3;
 
 ideal eIdeal = e;
 ideal critSat = sat(crit,eIdeal);
 ideal c1 = reduce(std(critSat),std(residual));
 ideal c2 = reduce(std(residual),std(critSat));
 
-if (c1[1]==0 && c1[2]==0 && c1[3]==0 && c1[4]==0 && c1[5]==0 && c1[6]==0 && c1[7]==0
-    && c2[1]==0 && c2[2]==0 && c2[3]==0 && c2[4]==0 && c2[5]==0 && c2[6]==0 && c2[7]==0)
+if (c1[1]==0 && c1[2]==0 && c1[3]==0 && c1[4]==0 && c1[5]==0 && c1[6]==0 && c1[7]==0 && c1[8]==0
+    && c2[1]==0 && c2[2]==0 && c2[3]==0 && c2[4]==0 && c2[5]==0 && c2[6]==0 && c2[7]==0 && c2[8]==0)
 {
   "RESIDUAL01=PASS";
 }
@@ -77,10 +77,11 @@ else
 }
 
 // The generic B,C critical equations force B=C; there is no off-diagonal
-// branch.  Work after dividing by the torus units B,C.
-ring u = 0,(d,a,B,C),dp;
-poly eB = d^2*a*C+1-C;
-poly eC = d^2*a*B+1-B;
+// branch.  Work after dividing by the torus units B,C and putting
+// tau=A/(B*C).
+ring u = 0,(d,tau,B,C),dp;
+poly eB = d^2*tau*C+1-C;
+poly eC = d^2*tau*B+1-B;
 ideal bcCrit = eB,eC;
 ideal bcDiag = B-C,eB;
 ideal b1 = reduce(std(bcCrit),std(bcDiag));

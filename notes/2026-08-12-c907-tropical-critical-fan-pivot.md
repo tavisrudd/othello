@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** exact finite algebraic reduction; topology remains open.
+**Status:** finite algebraic certificate specification; topology remains open.
 
 ## Decision
 

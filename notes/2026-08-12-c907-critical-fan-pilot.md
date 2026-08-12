@@ -4,7 +4,7 @@
 
 **Status:** exact local computational certificate; not a global fan.
 
-The Singular replay verifies three ideal identities used by
+The Singular replay verifies four ideal identities used by
 `2026-08-12-c907-finite-pole-continuum-certificate.md`:
 
 1. the `0/0` semistable incidence graph is unchanged by saturation with the
@@ -26,7 +26,7 @@ nix shell nixpkgs#singular -c Singular -q \
 The canonical output is
 `notes/2026-08-12-c907-critical-fan-pilot.out`.  Singular version 4.4.1 was
 used.  The replay is deterministic and contains no random choices.
-The script and output contain 2,279 and 63 bytes respectively; their SHA-256
+The script and output contain 2,358 and 63 bytes respectively; their SHA-256
 hashes are recorded in the adjacent `.sha256` manifest.
 
 The independent check is the direct substitution, colon, and tangent-
