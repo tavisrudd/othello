@@ -181,6 +181,11 @@ application or an exact obstruction to necessity.
    equivalent to `2e_ij >= a_i+a_j`, or intrinsically
    `I_ij^2 subset I_ii I_jj`. This tropical Cauchy--Schwarz condition also
    passes an independent dyadic/cancellation audit.
+   Priority boundary: these inequalities and tropical rank-one convex-hull
+   description are Yu's tropical PSD cone. The new layer is the integral DVR
+   lift, exact cokernel/dyadic defect, and finite-etale Neron--Severi/
+   divided-power application; any promotion must credit that classical
+   tropical skeleton explicitly.
    The exact rank-one hull replaces each cross depth by the maximum of its
    actual depth and the midpoint ceiling, so its cokernel is an explicit
    direct sum of DVR intervals. At `p=2` every failed midpoint inequality
