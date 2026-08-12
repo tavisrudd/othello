@@ -148,9 +148,11 @@ The former human and gate namespaces have now been moved to
 `RelativeConicArcs.PassantCodeQ13`.  The extracted candidate freezes 224 input modules
 (the 214 paper modules and ten finite-semantic modules), adds a local code kernel, and
 renders 223 certificate modules under `TavisRuddFiniteGeom.Certificates.Q13PassantCode`.
-Its static source-lock and forbidden-import checks pass.  Finish the local code-kernel
-preflight, then add the compatibility bridge and switch the paper before the one
-certificate aggregate build; no new Paper-IV theorem packet belongs ahead of those steps.
+Its static source-lock and forbidden-import checks pass.  The package aggregate has been
+guardedly built, sealed, and packed at package commit `c808d7fca5fba9c17ac1f502d7d14115a9b10791`.
+The certificate source boundary is now frozen.  The next operation is to export the remapped
+human namespace into finitegeom, prove the downstream compatibility bridge, and switch the paper
+to the bridge; none of those operations rebuilds the certificate package.
 
 Their final certificate namespaces are
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
