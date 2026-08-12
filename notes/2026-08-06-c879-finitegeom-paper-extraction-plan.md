@@ -143,6 +143,15 @@ may the paper release verifier replace its direct `lean-certificates/` dependenc
 heavy package then builds once, seals its fact and pack, and is not rebuilt for later paper,
 finitegeom, or bridge changes.
 
+The former human and gate namespaces have now been moved to
+`TavisRuddFiniteGeom.Papers.Q13PassantCode`; no Lean source remains under
+`RelativeConicArcs.PassantCodeQ13`.  The extracted candidate freezes 224 input modules
+(the 214 paper modules and ten finite-semantic modules), adds a local code kernel, and
+renders 223 certificate modules under `TavisRuddFiniteGeom.Certificates.Q13PassantCode`.
+Its static source-lock and forbidden-import checks pass.  Finish the local code-kernel
+preflight, then add the compatibility bridge and switch the paper before the one
+certificate aggregate build; no new Paper-IV theorem packet belongs ahead of those steps.
+
 Their final certificate namespaces are
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.*`. The local statement models live
