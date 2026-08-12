@@ -182,6 +182,16 @@ class AreaExportTests(unittest.TestCase):
         self.assertEqual(summary["candidate_module_count"], 3)
         self.assertEqual(summary["external_imports"], ["Mathlib.Tactic.Ring"])
 
+    def test_new_library_is_declared_with_its_exported_roots(self) -> None:
+        text = EXPORTER.insert_lakefile_roots(
+            'name = "example"\n',
+            ("Fresh.Gates.Main", "Fresh.Geometry"),
+            ("Fresh",),
+        )
+        self.assertIn('[[lean_lib]]\nname = "Fresh"\nroots = [', text)
+        self.assertIn('  "Fresh.Gates.Main",\n', text)
+        self.assertIn('  "Fresh.Geometry",\n', text)
+
     def test_materialization_is_deterministic_and_verifies(self) -> None:
         plan = self.build()
         first = self.work / "candidate"

@@ -533,8 +533,12 @@ def updated_target_manifest(source: SourceUnit, base: BaseState) -> dict[str, An
     }
 
 
-def insert_lakefile_roots(lakefile: str, modules: tuple[str, ...]) -> str:
+def insert_lakefile_roots(
+    lakefile: str, modules: tuple[str, ...], new_libraries: tuple[str, ...] = ()
+) -> str:
     text = lakefile
+    permitted_new = set(new_libraries)
+    missing_by_library: dict[str, list[str]] = {}
     for module in sorted(modules):
         library = module.split(".", 1)[0]
         quoted = f'"{module}"'
@@ -552,7 +556,10 @@ def insert_lakefile_roots(lakefile: str, modules: tuple[str, ...]) -> str:
         )
         match = pattern.search(text)
         if match is None:
-            raise Refused(f"lakefile declares no roots list for library {library}")
+            if library not in permitted_new:
+                raise Refused(f"lakefile declares no roots list for library {library}")
+            missing_by_library.setdefault(library, []).append(module)
+            continue
         block = match.group(2)
         lines = block.splitlines(keepends=True)
         indent = re.match(r"\s*", lines[0]).group(0)
@@ -564,6 +571,14 @@ def insert_lakefile_roots(lakefile: str, modules: tuple[str, ...]) -> str:
                 break
         lines.insert(position, f'{indent}{quoted},\n')
         text = text[: match.start(2)] + "".join(lines) + text[match.end(2) :]
+    for library, roots in sorted(missing_by_library.items()):
+        if re.search(rf'^\s*name = "{re.escape(library)}"\s*$', text, re.MULTILINE):
+            raise Refused(f"lakefile library {library} has no editable roots list")
+        text += (
+            f'\n[[lean_lib]]\nname = "{library}"\nroots = [\n'
+            + "".join(f'  "{root}",\n' for root in roots)
+            + "]\n"
+        )
     return text
 
 
@@ -756,8 +771,9 @@ def build_plan(
     files.update(cited_apparatus(source_repo, source_commit, files))
     manifest = updated_target_manifest(source, base)
     files["TARGET_MANIFEST.json"] = canonical_json(manifest).encode("utf-8")
+    new_libraries = tuple(config.get("new_libraries", ()))
     files["lakefile.toml"] = insert_lakefile_roots(
-        base.lakefile, tuple(module.module for module in source.modules)
+        base.lakefile, tuple(module.module for module in source.modules), new_libraries
     ).encode("utf-8")
     files[str(config["trust_statement"])] = render_trust_statement(source, config).encode("utf-8")
     files[str(config["axiom_audit"])] = render_axiom_audit(source, config).encode("utf-8")

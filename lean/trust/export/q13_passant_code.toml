@@ -7,6 +7,7 @@ trust_statement = "trust/Q13_PASSANT_CODE.md"
 axiom_audit = "trust/Q13PassantCodeAxiomAudit.lean"
 readme_template = "lean/public/README.md"
 flake_template = "lean/public/flake.nix"
+new_libraries = ["TavisRuddFiniteGeom"]
 
 statement_title = "The q=13 passant-incidence code: formal boundary"
 overview = "The human-scale geometry and coding theory of the passant-incidence code over the field with thirteen elements."
