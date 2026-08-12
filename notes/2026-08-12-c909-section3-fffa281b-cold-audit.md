@@ -259,6 +259,22 @@ the all-degree marked graph theorem is close but ambiguously normalized, and
 the claimed six-axis Hodge equality is not yet supported by a complete
 printed proof.
 
+## EJ + TT closeout: the cheap proof compression
+
+The useful surprise is that the six-axis repair has no dependency on the
+unresolved arbitrary-rank filtered-web/jet Smith program.  In dimension five,
+the direct multidegree decomposition has only \(\ell\leq2\): the only
+nontrivial squarefree invariant component is four-slot.  Thus the proposed
+literal invariant lemma plus the table in §3 is both a complete proof route
+and shorter than any general web theorem.  This is the highest-value next
+move: replace the present five-line assertion by that self-contained
+two-page argument, rather than attempting a general all-rank formula.
+
+There is no new structural theorem to extract from this audit.  The exact
+remaining gate is purely presentational: display the two matching bases,
+their weights, and their decisive leading/minor coefficients so that the
+claimed local Smith equality is reproducible by hand.
+
 ## Mystery ledger
 
 * **Settled:** the signed rank-one identity is valid over a DVR at (p=2)
