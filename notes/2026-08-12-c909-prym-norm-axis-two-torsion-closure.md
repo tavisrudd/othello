@@ -90,11 +90,37 @@ isomorphism of symplectic finite-etale local systems
                        E''[2] ~= E_axis[2].                 (1)
 ```
 
-This proves more than the word *isogenous* printed in Van
-Geemen--Yamauchi Proposition 3.2, but only in the direction needed here: the
-kernel is 5-primary.  It does not assert that `phi` has degree one.  That
-stronger statement would require comparing the primitive Prym and norm-axis
-polarizations; it is unnecessary for (1).
+There is in fact a stronger conclusion once the primitive norm-axis
+calculation is included.  Let `i:E_axis-->J` be the primitive inclusion and
+write `phi=i phibar`.  For an etale double cover, the ambient Jacobian theta
+restricts to twice the principal Prym polarization.  Therefore the factors
+of two cancel in the adjoint calculation and the norm--pullback identity is
+
+```text
+                         phi^dagger phi=[5].
+```
+
+The independent Roulleau/Rosati calculation gives
+
+```text
+                           i^dagger i=[5].
+```
+
+Consequently
+
+```text
+ [5]=phibar^dagger i^dagger i phibar
+    =[5] phibar^dagger phibar.
+```
+
+For an elliptic isogeny, `phibar^dagger phibar=[deg phibar]`; hence
+`deg phibar=1`.  Thus the explicit elliptic Prym is not merely odd-isogenous
+to the norm axis: the displayed pullback identifies it with the primitive
+norm axis as an elliptic scheme.  Van Geemen--Yamauchi state only
+*isogenous* because they do not make the independent primitive
+Roulleau-polarization comparison.  The weaker 5-primary argument remains a
+useful robust route to (1), and the degree-one refinement should be stated
+only together with both polarization normalizations.
 
 ## The actual exotic kernel cover
 
@@ -161,4 +187,3 @@ The load-bearing source loci are Propositions 1.5, 2.1, 3.1, and 3.2.  The
 odd-kernel statement is a formal consequence of their displayed quotient
 diagram and the standard norm--pullback identity; it is not stated as such
 in their proposition.
-
