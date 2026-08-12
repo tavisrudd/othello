@@ -35,8 +35,9 @@ Adjoin the normalized Rees model of the residual ideal
 its strict transform lies in this marked Rees model and its transition to the
 `Z,U` chart identifies its Hessian with `f_Q+ZU`.
 
-There is an exact open-torus regression before compactification.  The
-relative critical ideal of `F_delta` is generated, up to torus units, by
+There is an exact **generic-torus critical-arc regression** before
+compactification.  After restricting to `delta!=0`, its ideal is generated,
+up to torus units, by
 
 \[
  P,quad Q-YBCy_i\ (i=1,2,3),quad
@@ -86,6 +87,12 @@ presentation whose entries are
 Thus its `Fitt_4` is exactly the five-derivative ideal yielding (2).  This is
 only an open-torus regression: Fitting ideals do not in general commute with
 initial degeneration or base change.
+
+Do not saturate the total relative Fitting ideal by `delta`.  That would take
+the closure of generic critical points and can delete precisely the
+special-fibre failures of submersivity being tested.  On every boundary
+stratum, first form and reduce the induced saturated graph, then recompute its
+relative Fitting ideal from scratch.
 
 Compute a relative comprehensive Gröbner fan in the
 `(y_1,y_2,y_3,B,C,delta)` weights with `w_delta>0` and `w_L=0`, including
