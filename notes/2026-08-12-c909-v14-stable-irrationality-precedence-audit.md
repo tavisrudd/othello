@@ -44,18 +44,30 @@ the following exact strings:
 * 'degree 14 Fano stable rationality'
 * 'cubic threefold times P1 irrational'
 
-For the Kuznetsov seed, I screened both available forward-citation graphs:
-OpenAlex returned 36 citing works for W1765317977; Semantic Scholar returned
-62 citing works for ARXIV:math/0303037. The larger 62-item set was screened
-by title, abstract, year, and external identifiers, with the mechanical
-discriminator
+For the Kuznetsov seed, I screened both available forward-citation graphs.
+The pinned OpenAlex seed is W1765317977, and the exact forward query was
+https://api.openalex.org/works?filter=cites:W1765317977&per-page=200&select=id,title,publication_year,doi,authorships,abstract_inverted_index;
+it returned 36 citing works. The pinned Semantic Scholar record is paper ID
+746bb9c0d98d4924baef8c5ab0fbd9299bfdd5cc, with external ID
+ARXIV:math/0303037 (also MAG 1765317977 and CorpusId 119594581); its forward
+query was
+https://api.semanticscholar.org/graph/v1/paper/746bb9c0d98d4924baef8c5ab0fbd9299bfdd5cc/citations?fields=title,year,externalIds,abstract&limit=100.
+It returned 62 citing works. The larger 62-item Semantic Scholar set was
+screened in full, so the verdict below rests on the largest available
+forward-citation set; the OpenAlex 36-item set was an independent cross-check.
+Both were screened by title, abstract, year, and external identifiers, with
+the mechanical discriminator
 'irrational|stable rational|stably|birational|cubic threefold|V14|degree 14|quantum|monodromy|projective bundle|blow-up'.
 The hits were adjacent derived-category/rationality or cubic papers, not a
-theorem on \(V_{14}\times\mathbb P^1\) irrationality or on \(\nu_6\). The
-OpenAlex 36-item set was screened by the same rule. Crossref returned no exact
-record for the arXiv-issued DOIs of the Kuznetsov, Cai, KKPYY, or
-Tschinkel--Zhang preprints; the published Hassett--Tschinkel DOI
-10.1515/crelle-2016-0058 reported 17 Crossref cited-by works. MathSciNet and
+theorem on \(V_{14}\times\mathbb P^1\) irrationality or on \(\nu_6\).
+
+Crossref was queried by pinned DOI. The published Hassett--Tschinkel DOI
+10.1515/crelle-2016-0058 resolved successfully and reported 17 cited-by works.
+The arXiv-issued DOI lookups
+10.48550/arxiv.math/0303037, 10.48550/arxiv.2608.01577,
+10.48550/arxiv.2508.05105, and 10.48550/arxiv.2409.08392 returned HTTP 404/no
+record. Those are resolution failures/no-record outcomes, not Crossref
+cited-by zeros, and no Crossref graph was inferred from them. MathSciNet and
 Google Scholar were not accessible in this environment. No global novelty or
 absence claim is made beyond this bounded coverage.
 
@@ -96,10 +108,10 @@ known \(V_{14}\times\mathbb P^1\) irrationality theorem.
 ### MathOverflow (secondary only)
 
 Question “Is the product of a cubic threefold and the projective line
-irrational?”, asked 2020-12-18, and its only/accepted answer dated
-2020-12-19, <https://mathoverflow.net/questions/378882>. The answer is “No, it
-is not known.” This is useful as a later historical checkpoint, not as a
-primary-source priority proof.
+irrational?”, asked 2020-12-18, and its only visible answer dated 2020-12-19,
+<https://mathoverflow.net/questions/379287/is-the-product-of-a-cubic-threefold-and-the-projective-line-irrational>.
+The answer is “No, it is not known.” This is useful as a later historical
+checkpoint, not as a primary-source priority proof.
 
 ### Cai (primary, full text)
 
@@ -201,4 +213,3 @@ screen.”
 Do not claim an exhaustive global absence, and do not attribute the
 \(\nu_6\)-equality or irrationality conclusion to Kuznetsov, Hassett--Tschinkel,
 Cai, KKPYY, Iritani, or Tschinkel--Zhang individually.
-
