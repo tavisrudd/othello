@@ -92,7 +92,9 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 - A quartic double solid has empty primitive-sixth small-even support.  The
   `(2,3)` Fano complete intersection is the first non-cubic positive candidate
   with one primitive pair; a direct grading-operator calculation proves that
-  every ordinary Fano complete-intersection threefold has `nu_6<=2`.
+  every ordinary Fano complete-intersection threefold has `nu_6<=2`.  The same
+  bound holds for every smooth Fano cyclic cover of `P^3`, with the cubic the
+  only positive cyclic-cover case.
 
 ## Active frontier: `m=2`
 
@@ -150,7 +152,9 @@ First residual jet:
 Carrier regressions:
 `../2026-08-12-c907-quartic-double-solid-carrier-regression.md`,
 `../2026-08-12-c907-23-fano-positive-carrier-regression.md`, and
-`../2026-08-12-c907-fano-complete-intersection-support-bound.md`.
+`../2026-08-12-c907-fano-complete-intersection-support-bound.md`;
+cyclic-cover bound:
+`../2026-08-12-c907-cyclic-cover-support-bound.md`.
 
 ## Gold architecture after `m=2`
 

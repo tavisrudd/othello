@@ -40,10 +40,11 @@ to the framed threefold connection shifts all residues by `-3/2`, hence by
 `-1/2` modulo integers.  Concretely, in Cai-compatible notation
 
 \[
- z^2\partial_zS=(K+zG)S,\qquad G|_{H^{2j}}=j-\frac32,
+ z^2\partial_zS=(K+zG)S,\qquad G|_{H^{2j}}=\frac32-j,
 \]
 
-whereas Cai's coefficient `mu` has the opposite sign.  The cyclic companion
+whereas Cai's connection grading `mu` has eigenvalue `j-3/2`, so `G=-mu`.
+The cyclic companion
 lift of a scalar solution is, up to constant basis rescaling,
 `z^(j-3/2) theta^j Phi`; therefore a branch `Phi~s^(-a)` has framed residue
 `ra-3/2`.  This reproduces Cai's cubic residues and fixes the convention
@@ -53,6 +54,10 @@ therefore occur only when
 \[
  \frac{rm}{d_j}-\frac12=\pm\frac16\pmod{\mathbf Z}.
 \]
+
+For index one, the mirror coordinate replaces `h` by `h+cq` (with
+`c=product_j d_j!`).  This changes `K` only by the scalar `cq Id`, hence changes
+an irregular exponential but not these framed residues.
 
 The remaining `r` branches are irregular.  The ansatz
 `e^(lambda t)t^alpha` gives the universal scalar power
@@ -108,6 +113,7 @@ the definition gate.
 ## Source boundary
 
 - Coates--Givental, arXiv:math/0110142, Theorem 2: quantum Lefschetz.
+- Hu, arXiv:1501.03683, Theorem 2.1 and (33): index-one mirror coordinate.
 - Cai, arXiv:2608.01577, Section 3: cubic framed-connection convention and
   primitive-sixth calibration.
 

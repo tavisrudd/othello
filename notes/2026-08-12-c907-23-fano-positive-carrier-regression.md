@@ -53,6 +53,10 @@ The ambient cyclic companion has components
  \pmod{\mathbf Z}.
 \]
 
+The index-one mirror coordinate replaces `h` by `h+12q`.  This adds a scalar
+term to `K`, changing only the irregular exponential and not the framed
+residues above.
+
 Thus the predicted framed characteristic polynomial is
 
 \[
@@ -74,6 +78,7 @@ of a general `(2,3)` member remains a separate primary-source audit.
 - Coates--Corti--Iritani--Tseng, arXiv:1310.4163, Theorem 31.
 - Coates--Givental, arXiv:math/0110142, Theorem 2.
 - Cai, arXiv:2608.01577, Section 3: framed cubic convention.
+- Hu, arXiv:1501.03683, Theorem 2.1 and (33): index-one mirror coordinate.
 - Pukhlikov, *Birationally rigid Fano complete intersections*, J. Reine
   Angew. Math. 541 (2001), 55--79.
 
