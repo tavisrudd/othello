@@ -309,6 +309,17 @@ application or an exact obstruction to necessity.
     action or torsor comparison is proved. The clean unity theorem is a
     modular intersection/separation theorem, not a common invariant. No
     second moving cubic component was found in the bounded source audit.
+16. **Orbit-axis relative bridge (conditional).** For a finite group acting
+    on an abelian scheme, integral subgroup norms construct constant-rank
+    elliptic image schemes and canonical conjugacy transports whenever the
+    subgroup-fixed coefficient lines are one-dimensional. A basis of axes
+    gives a relative elliptic-power isogeny before any level trivialization.
+    In the cubic case the raw `D_5` norm is `10P_H`, while the primitive
+    Rosati endomorphism is `5P_H`; the factor two does not alter the image.
+    The exact remaining lemma is to identify the primitive norm-image
+    inclusion/adjoint with Roulleau's relative elliptic fibration, fixing the
+    `(5,-1)` Gram and the actual finite kernel. The sign/Tate comparison then
+    identifies its exotic graph marking.
 
 ## Highest-EV next moves
 
