@@ -487,34 +487,32 @@ table has a free linear coordinate and hence vanishes by (6).
 
 ### Allowing `y` to escape
 
-The `y`-boundary has a direct relative-Newton check.  The four nonconstant
-`y` exponents are
+The tempting separate `y`-circuit check is insufficient.  The four
+nonconstant `y` exponents are
 
 \[
  e_1,\quad e_2,\quad e_3,\quad -e_1-e_2-e_3.
  \tag{23}
 \]
 
-They form one circuit: every proper subset is linearly independent.  Use the
-toric compactification associated with their tetrahedron.  On a `y`-boundary
-stratum, the initial polynomial retains a proper subset `I` of (23).  If its
-logarithmic `y` derivatives vanished, the nonzero surviving monomial values
-`z_m` would satisfy
+They form one circuit: every proper subset is linearly independent.  On a pure
+`y`-boundary stratum, an initial polynomial retaining a proper subset `I`
+cannot be logarithmically critical, because the nonzero surviving monomial
+values `z_m` would satisfy
 
 \[
  \sum_{m\in I}z_m m=0.
 \]
 
 Linear independence forces every `z_m=0`, impossible on the stratum torus.
-Terms constant in `y`, including the graph value and the `(B,C)` pole term,
-do not enter these equations.  A joint refinement with a `(B,C)` face can
-only delete further `y` monomials, so the same argument applies.  If all four
-exponents survive, the `y` weight is zero and the point lies on the dense
-`y`-orbit; it is then covered by the `(B,C)` atlas rather than a `y`-boundary
-stratum.
-
-Thus every genuine toric `y`-boundary stratum is noncharacteristic.  This is
-stronger for the compactification than the full-gradient estimate below.
+But a joint `(y,B,C,delta)` valuation can rescale the coefficient `1/(BC)`
+and retain all four exponents while `y` escapes.  For example,
+`y_i=-delta^(-2)/4`, `B,C=O(delta^4)` with the matching product makes all
+four `y` terms and the pole term survive at the same order.  Its `B`
+derivative is nonzero, so it is not a boundary critical point, but the circuit
+argument does not prove that.  A valid global compactification needs a joint
+valuation/fan lemma checking the full logarithmic initial system on every
+mixed cone.
 
 An asymptotic critical point at a remaining toric face must satisfy the exact
 logarithmic equations
