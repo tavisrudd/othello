@@ -176,6 +176,11 @@ application or an exact obstruction to necessity.
    has full divided-power saturation. An independent hostile read passes this
    theorem. Applying it at arbitrary graph depths still needs compatible
    slotwise etale splitting.
+   TT sharpens the sufficient containment to an exact iff classification:
+   for diagonal depths `a_i` and cross depths `e_ij`, rank-one generation is
+   equivalent to `2e_ij >= a_i+a_j`, or intrinsically
+   `I_ij^2 subset I_ii I_jj`. This tropical Cauchy--Schwarz condition also
+   passes an independent dyadic/cancellation audit.
 5. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
    `P^1` stabilization and is silent at `P^2`. Every additive refinement of
    the ordinary chemical formula is merely an atom weight and cannot recover
@@ -191,10 +196,11 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Prove compatible slotwise etale splitting for mixed unit/primary and
-   unequal-depth graph blocks, or find the first coupled-slot counterexample.
-   The matrix-ideal theorem shows that this is the only remaining gate to a
-   full marked finite-etale `PD(NS)` theorem.
+1. Put mixed unit/primary and unequal-depth graph Neron--Severi congruences
+   into a compatible matrix-of-ideals form and test the exact tropical
+   condition `I_ij^2 subset I_ii I_jj`, or find the first coupled-slot
+   counterexample. This is the only remaining gate to a full marked
+   finite-etale `PD(NS)` theorem.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after

@@ -42,6 +42,19 @@ Thus rank-one generation is exactly the midpoint-convexity of the cross-slot
 valuation relative to its two diagonal valuations.  The statement holds over
 dyadic DVRs without change.
 
+Equivalently, because larger valuation means smaller ideal, (3) is the
+coordinate-free-looking ideal inequality
+
+\[
+                         I_{ij}^{,2}\subset I_{ii}I_{jj}.
+ \tag{3'}
+\]
+
+It is an integral Cauchy--Schwarz condition on the coefficient ideals.  The
+chosen coefficient-line decomposition is still part of the datum; (3') does
+not assert invariance under arbitrary changes that destroy the
+matrix-of-ideals presentation.
+
 ## Sufficiency
 
 Diagonal generators `p^{a_i}e_ie_i^t` are rank one. Fix `i!=j` and put
