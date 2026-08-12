@@ -35,12 +35,18 @@ mechanism, while hostile audits prevented two attractive overclaims.
    connected fibres, and the `D_5` character calculation identify its
    primitive Albanese quotient with the norm image.  This closes the
    relative Gram `6I-J` and constructs the actual kernel.
+8. The degree-five quotient Prym maps to the primitive norm axis.  Norm--
+   pullback and the primitive axis inclusion both have Rosati exponent five,
+   forcing degree one.  Thus `r^2=T` labels the actual two-primary kernel.
+9. In general, an `m`-fold quotient Prym landing in a primitive fixed axis
+   of exponent `e` satisfies `e|m` and has intervening isogeny degree
+   `(m/e)^r`.  The cubic is the extremal case `m=e=5`.
 
 ### Rejected overclaims
 
-1. `T=81t^2` and strong Torelli do not construct the integral relative
-   isogeny or graph kernel.  They identify the normalized period parameter
-   and elliptic marking cover only.
+1. `T=81t^2` and strong Torelli alone do not construct the integral relative
+   isogeny or graph kernel.  That construction now comes separately from
+   subgroup norms and the primitive Roulleau quotient.
 2. Finite level does not automatically lift relative Neron--Severi sections
    to line bundles; a Picard torsor may remain nontrivial.  Hence no
    horizontal minimal cycle was claimed.
@@ -49,20 +55,21 @@ mechanism, while hostile audits prevented two attractive overclaims.
 
 ## Strongest next theorem
 
-Compare the norm elliptic two-torsion with the explicit Tate/Prym model to
-transfer the name `r^2=T` to the actual kernel.  It is enough to exhibit an
-odd-degree elliptic isogeny: odd isogenies induce isomorphisms on two-torsion,
-and quadratic twists are invisible there.  The cached source presently says
-only “isogenous,” so the parity of its Prym correspondence remains the exact
-source/computation gate.
+The relative modular component is now closed on the smooth locus.  The next
+strict-C909 theorem is a classification of fixed graph data whose modular
+presentation curves share a positive-dimensional component with the cubic
+period locus.  A second example would materially strengthen reach; the
+bounded source audit found none.  Cusp extension is a log/semiabelian
+refinement, not needed for the smooth theorem.
 
 ## Editorial verdict
 
 The upgrade materially changes the epilogue's cycle side from a special
 cofactor calculation into a modular saturation theory.  It improves proof
 compression and unity more than headline theorem reach.  A top-tier first
-shot is more defensible, but an Annals-level upgrade still wants the relative
-norm/Roulleau comparison, a second shared cubic component, or a genuine
+shot is more defensible.  The former norm/Prym gap is closed; an upgrade
+beyond this package would still benefit from a second shared cubic component,
+a classification of all such components, or a genuine
 cycle--quantum torsor comparison.
 
 ## Mystery ledger
@@ -75,12 +82,14 @@ cycle--quantum torsor comparison.
 * Settled: fixed modular intersections are finite or shared curves.
 * Settled: primitive norm-image/Roulleau comparison, relative Gram, and
   actual finite kernel.
-* Open: actual-kernel two-torsion comparison with the Tate/Prym model.
+* Settled: the quotient Prym is the primitive norm axis, so `r^2=T` is the
+  actual-kernel marking torsor.
 * Open: kernel-linearized relative divisor line bundles.
 * Open: a second moving cubic component; bounded audit found none.
 * Open: a common cycle--quantum orientation torsor; the Eisenstein packet
   alone does not supply one.
 
 **Vibe:** strong, coherent upgrade; the cycle mechanism now feels inevitable.
-The relative integral kernel is closed.  Only the explicit modular name of
-its exotic marking remains behind one parity-controlled elliptic comparison.
+The relative integral kernel and its explicit modular marking are both
+closed.  The remaining gaps are broader classification or Chow questions,
+not normalization debris.
