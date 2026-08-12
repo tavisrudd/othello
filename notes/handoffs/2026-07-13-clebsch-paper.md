@@ -77,7 +77,9 @@ its sectorial Rees extension class for arbitrary non-nef threefolds.  Every
 ordinary Fano complete-intersection threefold has small-even `nu_6<=2`, so
 none can realize the required length-two carrier.  Fano cyclic covers of
 `P^3` also have `nu_6<=2`; the weighted degree-one del Pezzo is a non-CI
-positive calibration with `nu_6=2`, not a length-two carrier.  Current
+positive calibration with `nu_6=2`, not a length-two carrier.  The natural
+weighted `(3,3)` candidate never gives two independent pairs: its smooth Fano
+members reduce to the cubic or `P^3`.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
 authorized.

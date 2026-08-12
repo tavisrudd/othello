@@ -158,6 +158,10 @@ exactly four Morse points, while the balanced mixed ray
 `y_i~delta^-2, B,C~delta^4` is tangent-free because `L` becomes a genuine
 coordinate on the saturated central graph.  See
 `2026-08-12-c907-first-tangent-jacobian-cone-certificates.md`.
+The compact-`y` continuum `B~delta^alpha`, `0<=alpha<=2`, is now compressed by
+the single semistable incidence model `ef=delta^2`; all `0/0`, `0/1`, and
+symmetric central strata are `L`-submersive.  See
+`2026-08-12-c907-finite-pole-continuum-certificate.md`.
 
 Wave-2C status: ordinary cohomological grading and duality do not bound the
 length—an explicit self-dual formal length-two model survives.  The first

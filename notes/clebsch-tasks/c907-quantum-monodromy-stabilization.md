@@ -96,6 +96,9 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   bound holds for every smooth Fano cyclic cover of `P^3`, with the cubic the
   only positive cyclic-cover case.  The weighted degree-one del Pezzo
   threefold is a genuine non-CI positive calibration, but again has `nu_6=2`.
+  The natural weighted two-cubic candidate
+  `X_(3,3) subset P(1^(6-l),3^l)` collapses in every smooth Fano case to the
+  cubic or `P^3`; its apparent second primitive pair is geometrically canceled.
 
 ## Active frontier: `m=2`
 
@@ -160,6 +163,8 @@ cyclic-cover bound:
 `../2026-08-12-c907-cyclic-cover-support-bound.md`.
 Weighted non-CI calibration:
 `../2026-08-12-c907-b1-weighted-del-pezzo-support.md`.
+Weighted two-cubic obstruction:
+`../2026-08-12-c907-33-weighted-ci-obstruction.md`.
 
 ## Gold architecture after `m=2`
 
