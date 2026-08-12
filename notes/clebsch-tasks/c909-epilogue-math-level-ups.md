@@ -181,12 +181,12 @@ application or an exact obstruction to necessity.
    equivalent to `2e_ij >= a_i+a_j`, or intrinsically
    `I_ij^2 subset I_ii I_jj`. This tropical Cauchy--Schwarz condition also
    passes an independent dyadic/cancellation audit.
-   For a compatible block-respecting finite-etale action across arbitrary
-   Jordan depths, the complete graph lattice has cross depth `max(a,b)` on a
-   common eigenblock and `a+b` on distinct eigenblocks. Hence the tropical
+   For arbitrary block-respecting graph data finite-etale separately at every
+   Jordan depth, no cross-depth compatibility hypothesis is needed. After
+   splitting, a cross slot has exact depth
+   `max(a,b,a+b-v_p(t_j-t_i))`, always at least `max(a,b)`. Hence the tropical
    criterion holds automatically and gives full cohomological `PD(NS)`
-   saturation in every degree. Compatibility of the truncated actions with
-   one finite-etale `Z_p` action is explicit and load-bearing.
+   saturation in every degree.
 5. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
    `P^1` stabilization and is silent at `P^2`. Every additive refinement of
    the ordinary chemical formula is merely an atom weight and cannot recover
@@ -202,10 +202,10 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Decide whether separately finite-etale truncated graph actions always lift
-   to the compatible `Z_p` action required by the arbitrary-depth theorem, or
-   construct the first obstruction. This is now the only finite-etale graph
-   gate; the compatible case is fully classified.
+1. Recast the tropical ideal condition and arbitrary-depth theorem without a
+   chosen coefficient-line decomposition, or prove that the marked
+   elliptic-power presentation is the optimal intrinsic scope. The
+   block-respecting finite-etale graph case is now fully classified.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after
