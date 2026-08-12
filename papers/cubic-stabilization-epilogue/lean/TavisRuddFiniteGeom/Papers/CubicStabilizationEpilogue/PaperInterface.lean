@@ -63,6 +63,66 @@ theorem rankOne_cross_coefficient_decomposition
   GraphLattices.SymmetricPair.cross_coefficient_rankOne_decomposition
     π z diagonalFirst diagonalSecond cross midpoint
 
+/-- Every member of a two-coordinate matrix-of-ideals lattice satisfying the
+midpoint inequality is assembled from five explicitly displayed rank-one forms
+that all remain in that same lattice. -/
+theorem rankOne_weightedPair_decomposition_of_midpoint
+    {R : Type*} [CommRing R]
+    (π : R) (diagonalFirst diagonalSecond cross : ℕ)
+    (midpoint : diagonalFirst + diagonalSecond ≤ 2 * cross)
+    (form : GraphLattices.SymmetricPair R)
+    (member : GraphLattices.SymmetricPair.MemWeightedPair
+      π diagonalFirst diagonalSecond cross form) :
+    ∃ firstCoefficient mixedCoefficient secondCoefficient : R,
+      ∃ t r s : ℕ,
+        diagonalFirst ≤ t + 2 * r ∧
+        diagonalSecond ≤ t + 2 * s ∧
+        GraphLattices.SymmetricPair.MemWeightedPair
+          π diagonalFirst diagonalSecond cross
+          (GraphLattices.SymmetricPair.scale
+            (π ^ diagonalFirst * firstCoefficient)
+            GraphLattices.SymmetricPair.firstSquare) ∧
+        GraphLattices.SymmetricPair.MemWeightedPair
+          π diagonalFirst diagonalSecond cross
+          (GraphLattices.SymmetricPair.scale
+            (π ^ diagonalSecond * secondCoefficient)
+            GraphLattices.SymmetricPair.secondSquare) ∧
+        GraphLattices.SymmetricPair.MemWeightedPair
+          π diagonalFirst diagonalSecond cross
+          (GraphLattices.SymmetricPair.scale (mixedCoefficient * π ^ t)
+            (GraphLattices.SymmetricPair.rankOne (π ^ r) (π ^ s))) ∧
+        GraphLattices.SymmetricPair.MemWeightedPair
+          π diagonalFirst diagonalSecond cross
+          (GraphLattices.SymmetricPair.scale
+            ((mixedCoefficient * π ^ t) * π ^ r * π ^ r)
+            GraphLattices.SymmetricPair.firstSquare) ∧
+        GraphLattices.SymmetricPair.MemWeightedPair
+          π diagonalFirst diagonalSecond cross
+          (GraphLattices.SymmetricPair.scale
+            ((mixedCoefficient * π ^ t) * π ^ s * π ^ s)
+            GraphLattices.SymmetricPair.secondSquare) ∧
+        form =
+          GraphLattices.SymmetricPair.add
+            (GraphLattices.SymmetricPair.scale
+              (π ^ diagonalFirst * firstCoefficient)
+              GraphLattices.SymmetricPair.firstSquare)
+            (GraphLattices.SymmetricPair.add
+              (GraphLattices.SymmetricPair.scale
+                (π ^ diagonalSecond * secondCoefficient)
+                GraphLattices.SymmetricPair.secondSquare)
+              (GraphLattices.SymmetricPair.sub
+                (GraphLattices.SymmetricPair.sub
+                  (GraphLattices.SymmetricPair.scale (mixedCoefficient * π ^ t)
+                    (GraphLattices.SymmetricPair.rankOne (π ^ r) (π ^ s)))
+                  (GraphLattices.SymmetricPair.scale
+                    ((mixedCoefficient * π ^ t) * π ^ r * π ^ r)
+                    GraphLattices.SymmetricPair.firstSquare))
+                (GraphLattices.SymmetricPair.scale
+                  ((mixedCoefficient * π ^ t) * π ^ s * π ^ s)
+                  GraphLattices.SymmetricPair.secondSquare))) :=
+  GraphLattices.SymmetricPair.weightedPair_decomposition_of_midpoint
+    π diagonalFirst diagonalSecond cross midpoint form member
+
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/
 theorem packet_multiplicity_eq_of_preserving_chain
