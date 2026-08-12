@@ -1,0 +1,9 @@
+C908 unordered-degree normalization adjudication
+bidegree (1,5): ambient rank=2400; invariants rank=1200; transfers rank=1200; elementary divisors={'1': 1200}; invariants = transfers: True
+control, repeated-even bidegree: elementary divisors={'1': 15, '2': 6}; invariants = transfers: False
+anti-graph factor is +/-2 in every non-(3,3) channel: True; (1,5) factor=-2; (0,6) factor=2
+axis calibration: int_J Theta . Theta^4/4! = 5 (audit value 5: True)
+identity readouts: F_2-linear=0; F_4-coefficient=1; disagree=True
+F_2-linear trace vanishes on all of M_5(F_2): True
+RULING: F_2-linear readout (A) wins; the losing chain double-counts the anti-graph halving
+PASS

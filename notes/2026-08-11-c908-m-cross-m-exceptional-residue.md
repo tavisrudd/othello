@@ -48,7 +48,7 @@ mod-two pairing (2.3) `(a,[B]) -> int_J Theta . a . B`.
 
 ### 1.2 Well-definedness over Z, and the fixed dual pair of bases
 
-Two integrality facts make the readout an honest integral bilinear form rather
+Two integrality facts make the readout a genuine integral bilinear form rather
 than a rational one.
 
 - `L : Lambda -> ∧^3 Lambda` has **all elementary divisors 1** (certified), so

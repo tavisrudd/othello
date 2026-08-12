@@ -1,0 +1,210 @@
+{
+  "anti_graph_factors": {
+    "consequence": "the 1/2 in lambda(Z) = (1/2)(1,iota)^* Gamma is consumed exactly once, in every channel; no further halving is available",
+    "every_non_33_channel_gives_exactly_twice_an_integral_class": true,
+    "per_channel": {
+      "0_6": {
+        "anti_graph_factor": 2,
+        "transfer_generator_koszul_sign": 1
+      },
+      "1_5": {
+        "anti_graph_factor": -2,
+        "transfer_generator_koszul_sign": -1
+      },
+      "2_4": {
+        "anti_graph_factor": 2,
+        "transfer_generator_koszul_sign": 1
+      },
+      "3_3": {
+        "anti_graph_factor": -2,
+        "transfer_generator_koszul_sign": -1
+      },
+      "4_2": {
+        "anti_graph_factor": 2,
+        "transfer_generator_koszul_sign": 1
+      },
+      "5_1": {
+        "anti_graph_factor": -2,
+        "transfer_generator_koszul_sign": -1
+      },
+      "6_0": {
+        "anti_graph_factor": 2,
+        "transfer_generator_koszul_sign": 1
+      }
+    }
+  },
+  "axis_channel_calibration": {
+    "a_second_halving_would_give": "5/2, not an integer",
+    "anti_graph_factor": 2,
+    "channel": "(0,6)",
+    "degree_formula": "d = int_M h . y = int_J Theta . b_* y",
+    "independence": "the value 5 = int_J Theta . Theta^4/4! is a property of the principal polarization alone; it is also stated independently in section 2.1 of the Kunneth parity audit as 'the usual degree-five multisection', and it does not use either disputed normalization",
+    "int_J_theta_times_minimal_class": 5,
+    "lambda_equals": "y (the 1/2 cancels the factor two exactly once)",
+    "matches_the_audit_degree_five": true,
+    "theta_divided_power_five_top_coefficient": 1
+  },
+  "bidegree_1_5_lattice": {
+    "full_H1_rank_10_times_H5_rank_120": {
+      "ambient_rank": 2400,
+      "basis_orbit_size_counts": {
+        "2": 2400
+      },
+      "block_count": 1200,
+      "certification": "blockwise",
+      "fixed_basis_vectors": 0,
+      "inclusion_elementary_divisor_counts": {
+        "1": 1200
+      },
+      "invariant_rank": 1200,
+      "invariants_equal_transfers": true,
+      "involution_is_signed_permutation": true,
+      "transfer_rank": 1200
+    },
+    "koszul_sign": -1,
+    "moderate_full_lattice_H1_10_times_H5_12": {
+      "ambient_rank": 240,
+      "inclusion_elementary_divisor_counts": {
+        "1": 120
+      },
+      "invariant_rank": 120,
+      "invariants_equal_transfers": true,
+      "transfer_rank": 120
+    },
+    "no_second_factor_two_available": true,
+    "q_star_image_equals_transfers": true,
+    "reason": "s^* q^* = q^* puts the image of q^* inside the invariants, and q^* q_* = 1 + s^* puts the transfers inside the image; since invariants = transfers the image is exactly the transfer lattice",
+    "single_block": {
+      "ambient_rank": 2,
+      "inclusion_elementary_divisor_counts": {
+        "1": 1
+      },
+      "invariant_rank": 1,
+      "invariants_equal_transfers": true,
+      "transfer_rank": 1
+    }
+  },
+  "controls": {
+    "note": "the repeated-even control has a nontrivial invariants/transfers quotient coming from the fixed diagonal basis vectors, so the same code detects a factor two when one is genuinely present",
+    "repeated_even_bidegree_p_p_koszul_plus_one": {
+      "ambient_rank": 36,
+      "inclusion_elementary_divisor_counts": {
+        "1": 15,
+        "2": 6
+      },
+      "invariant_rank": 21,
+      "invariants_equal_transfers": false,
+      "transfer_rank": 21
+    },
+    "repeated_odd_bidegree_p_p_koszul_minus_one": {
+      "ambient_rank": 36,
+      "inclusion_elementary_divisor_counts": {
+        "1": 15
+      },
+      "invariant_rank": 15,
+      "invariants_equal_transfers": true,
+      "transfer_rank": 15
+    }
+  },
+  "inputs": {
+    "notes/2026-08-10-c904-minimal-class-divisor-lattice.sage": "d77752dcf242cdd3e8ecf15d34785eba583aa4c4c7770b79decd2f43e260f734"
+  },
+  "readout_comparison": {
+    "absolute_trace_Tr_F4_F2": {
+      "0": 0,
+      "1": 0,
+      "w": 1,
+      "w + 1": 1
+    },
+    "absolute_trace_identity_verified": true,
+    "consequence": "under readout (A) the degree vanishes on the full-S_3 invariants M_5(F_2) -- reproducing equation (2.1) of the exotic-deck note as a genuine parity statement -- while on the C_3 invariants M_5(F_4) it is odd exactly when the F_4-coefficient trace lies outside F_2",
+    "f2_linear_trace_of_identity": 0,
+    "f2_linear_trace_on_all_elementary_F2_matrices": [
+      0
+    ],
+    "f2_linear_trace_vanishes_on_M5_F2": true,
+    "f4_coefficient_trace_of_identity": 1,
+    "identity_readouts_disagree": true,
+    "samples": [
+      {
+        "Tr_F4_F2_of_coefficient_trace": 0,
+        "agree": true,
+        "f2_linear_trace": 0,
+        "f4_coefficient_trace": "0",
+        "family": "scalar_times_identity",
+        "scalar": "0"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 0,
+        "agree": true,
+        "f2_linear_trace": 0,
+        "f4_coefficient_trace": "0",
+        "family": "single_diagonal_entry",
+        "scalar": "0"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 0,
+        "agree": true,
+        "f2_linear_trace": 0,
+        "f4_coefficient_trace": "1",
+        "family": "scalar_times_identity",
+        "scalar": "1"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 0,
+        "agree": true,
+        "f2_linear_trace": 0,
+        "f4_coefficient_trace": "1",
+        "family": "single_diagonal_entry",
+        "scalar": "1"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 1,
+        "agree": true,
+        "f2_linear_trace": 1,
+        "f4_coefficient_trace": "w",
+        "family": "scalar_times_identity",
+        "scalar": "w"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 1,
+        "agree": true,
+        "f2_linear_trace": 1,
+        "f4_coefficient_trace": "w",
+        "family": "single_diagonal_entry",
+        "scalar": "w"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 1,
+        "agree": true,
+        "f2_linear_trace": 1,
+        "f4_coefficient_trace": "w + 1",
+        "family": "scalar_times_identity",
+        "scalar": "w + 1"
+      },
+      {
+        "Tr_F4_F2_of_coefficient_trace": 1,
+        "agree": true,
+        "f2_linear_trace": 1,
+        "f4_coefficient_trace": "w + 1",
+        "family": "single_diagonal_entry",
+        "scalar": "w + 1"
+      }
+    ]
+  },
+  "replay_command": "nix shell nixpkgs#sage -c sage notes/2026-08-11-c908-unordered-degree-normalization.sage --json notes/2026-08-11-c908-unordered-degree-normalization.json --out notes/2026-08-11-c908-unordered-degree-normalization.out",
+  "ruling": {
+    "both_tests_agree": true,
+    "calibration_verdict": "the (0,6) axis channel returns the independently known odd value 5",
+    "defect_in_the_losing_chain": "a second halving, applied when passing from the raw contraction to the 'coefficient trace'; it contradicts section 1 of the same note, which uses the 1/2 exactly once to cancel the transfer generator's factor two",
+    "lattice_verdict": "in bidegree (1,5)+(5,1) the image of q^* equals the transfer lattice, which equals the invariant lattice; index 1, no factor two",
+    "not_claimed": [
+      "any channel-closure theorem",
+      "that S_3-invariance is forced for classes over the marked base",
+      "anything about algebraicity, Hodge-ness, or Chow descent"
+    ],
+    "winner": "F_2-linear readout (A): the raw contraction is the unordered degree"
+  },
+  "schema": "c908-unordered-degree-normalization/1",
+  "swap_convention": "s^*(x (x) y) = (-1)^{|x||y|} y (x) x; transfer generator x (x) y + (-1)^{pq} y (x) x; iota^* = (-1)^k on the inherited H^k"
+}
