@@ -318,9 +318,18 @@ application or an exact obstruction to necessity.
     Rosati endomorphism is `5P_H`; the factor two does not alter the image.
     Roulleau's stable tangent-space quotient, connected fibres, and the `D_5`
     character calculation identify the primitive norm-image inclusion and
-    adjoint, fixing the `(5,-1)` Gram and the actual finite kernel. The sole
-    remaining modular label gate is to compare its two-torsion with the
-    explicit Tate/Prym elliptic system; an odd-degree isogeny would suffice.
+    adjoint, fixing the `(5,-1)` Gram and the actual finite kernel.
+17. **Prym-axis index theorem and cubic closure.** For a degree-`m` cyclic
+    quotient Prym landing in an intrinsic orbit axis of scalar polarization
+    exponent `e`, one has `e|m`, polarization multiplier `m/e`, and isogeny
+    degree `(m/e)^r`; without scalar type the exact degree is
+    `m^r/sqrt(deg Lambda_A)`.  In the cubic case `m=e=5`, so the explicit
+    VGY elliptic Prym is polarized-isomorphic to the primitive `D_5` norm
+    axis.  Functoriality of the `P^1(F4)` packet transports the exotic pair
+    to the actual kernel, and `r^2=T`, `r=+/-9t` is its marking torsor.  The
+    signed smooth pencil is a genuine presentation curve in the minimal
+    sign-marked fixed-data modular stack.  Full two-torsion or ordered-axis
+    labels add finite covers and are not this minimal curve.
 
 ## Highest-EV next moves
 
@@ -346,12 +355,12 @@ application or an exact obstruction to necessity.
    allowed transverse-ruling change, and decide whether the defect modules
    glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
    do not, prove that their vanishing does.
-4. **Close the modular component theorem.** Print the relative Fano/Albanese
-   six-axis quotient, finite graph subgroup, and algebraic lift of the signed
-   `A_5` pencil to one fixed-data presentation stack. Then combine
-   `T=81t^2`, `r=9t`, and Torelli to identify its normalized period component.
-   Separately audit relative coefficient line bundles and a horizontal
-   minimal cycle after finite level; do not claim unmarked Chow descent.
+4. **Classify shared presentation curves.** The relative Fano/Albanese
+   isogeny, actual graph packet, VGY Prym comparison, and minimal sign-marked
+   normalization are closed for the `A_5` pencil. Classify fixed graph data
+   whose modular curves share a positive-dimensional cubic period component.
+   Separately audit relative coefficient line bundles only if a horizontal
+   minimal cycle is pursued; do not claim unmarked Chow descent.
 5. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 6. Integrate the all-degree finite-etale theorem into the epilogue only after
