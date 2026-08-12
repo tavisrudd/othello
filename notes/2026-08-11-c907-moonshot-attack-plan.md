@@ -166,7 +166,9 @@ read from `R=prod Q_d/prod Q_w`: index one requires `Phi_2 Phi_3`, index two
 requires `Phi_3` or `Phi_6`, and indices three/four are zero.  The first
 non-WCI test is also closed: the exact $V_5$ operator has four unramified
 irregular branches of framed residue zero, hence `nu_6(V_5)=0`.  Search next
-in the remaining prime Fanos, but remember that the universal theorem must
+in the remaining prime Fanos.  A provisional calculation for the genus-six
+prime (V_{10}) also gives zero, but needs a tracked recurrence certificate
+and direct full-QDM scalarization before promotion.  Remember that the universal theorem must
 cover arbitrary non-Fano/non-nef centers and must kill a sectorial Rees
 extension, not merely its formal support.  See
 `2026-08-12-c907-inertia-cyclotomic-compression.md`,

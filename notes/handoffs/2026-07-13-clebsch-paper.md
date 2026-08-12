@@ -93,7 +93,9 @@ complete intersection; these cancel its factorial operator to self-dual rank
 four.  Wang's published all-CI nonconvex mirror theorem supplies the full
 ordinary small-even QDM bridge even for non-Cartier degrees.  Thus every such
 rank-one weighted Fano CI has `nu_6<=2`.  The first non-WCI test $V_5$ is
-stronger: its exact small-even framed support has `nu_6=0`.  Remaining carrier candidates lie
+stronger: its exact small-even framed support has `nu_6=0`; a provisional
+genus-six (V_{10}) calculation also gives zero but is not yet promoted.
+Remaining carrier candidates lie
 outside weighted CIs or outside the strong-WF ordinary sector, and weak
 factorization still permits arbitrary non-Fano/non-nef centers.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:

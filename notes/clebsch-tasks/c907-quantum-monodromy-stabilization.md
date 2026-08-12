@@ -127,7 +127,9 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   carrier class is closed.  The first non-WCI index-two test is stronger:
   the exact $V_5$ scalar equation has four unramified irregular branches of
   framed residue zero, so `nu_6(V_5)=0`.  Remaining loci are the other
-  non-WCI prime Fanos,
+  non-WCI prime Fanos.  Genus-six (V_{10}) provisionally also has zero
+  support, pending a tracked recurrence certificate and direct full-QDM
+  scalarization;
   non-WF/quotient mechanisms if admissible, and arbitrary non-Fano or non-nef
   threefolds.
 

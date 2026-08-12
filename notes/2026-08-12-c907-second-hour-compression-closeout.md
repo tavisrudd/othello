@@ -151,8 +151,11 @@ integral, so
 
 1. The weighted-CI carrier search is finished under the exact hypotheses,
    and the first non-WCI Picard-one test $V_5$ is negative in the stronger
-   form ν₆ equal to zero.  Continue with the remaining prime families of
-   genera `6,7,8,9,10,12`.
+   form ν₆ equal to zero.  A reconnaissance calculation for the genus-six
+   prime (V_{10}) also gives zero, but remains conditional on a tracked
+   creative-telescoping certificate and a direct full-QDM scalarization.
+   Continue with the remaining prime families of genera `7,8,9,10,12` while
+   certifying (V_{10}) separately.
 2. Rank four plus self-duality is not enough: it permits four primitive-sixth
    ranks.  The decisive abstraction is an eligible primitive-support
    subquotient of rank at most three, paired by duality.
@@ -191,3 +194,7 @@ integral, so
 - **Open carrier:** the remaining non-WCI prime Fanos, then arbitrary
   threefolds; formal support must still be upgraded to operation-framed
   enriched length.
+- **Conditional clue:** both certified (V_5) and provisional (V_{10}) have
+  zero primitive-sixth support.  This suggests first testing whether the
+  non-WCI prime-Fano scan has a stronger all-integral framed-residue law; no
+  such theorem is yet licensed.
