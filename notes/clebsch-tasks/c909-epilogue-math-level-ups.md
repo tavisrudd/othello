@@ -181,6 +181,12 @@ application or an exact obstruction to necessity.
    equivalent to `2e_ij >= a_i+a_j`, or intrinsically
    `I_ij^2 subset I_ii I_jj`. This tropical Cauchy--Schwarz condition also
    passes an independent dyadic/cancellation audit.
+   For a compatible block-respecting finite-etale action across arbitrary
+   Jordan depths, the complete graph lattice has cross depth `max(a,b)` on a
+   common eigenblock and `a+b` on distinct eigenblocks. Hence the tropical
+   criterion holds automatically and gives full cohomological `PD(NS)`
+   saturation in every degree. Compatibility of the truncated actions with
+   one finite-etale `Z_p` action is explicit and load-bearing.
 5. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
    `P^1` stabilization and is silent at `P^2`. Every additive refinement of
    the ordinary chemical formula is merely an atom weight and cannot recover
@@ -196,11 +202,10 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Derive the complete unequal-depth graph Neron--Severi lattice in one fixed
-   polarization convention, especially same-eigenvalue cross ideals.
-   Distinct residual eigenvalues already satisfy the stronger bound
-   `e_ij >= a_i+a_j`; only the same-eigenvalue normalization remains before
-   the tropical test can settle the full marked finite-etale `PD(NS)` theorem.
+1. Decide whether separately finite-etale truncated graph actions always lift
+   to the compatible `Z_p` action required by the arbitrary-depth theorem, or
+   construct the first obstruction. This is now the only finite-etale graph
+   gate; the compatible case is fully classified.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after
