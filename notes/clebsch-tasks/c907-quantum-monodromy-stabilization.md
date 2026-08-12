@@ -2,9 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active research.  `X x P^1` irrational is closed and imported into
-C904's geometric epilogue.  Full stable irrationality is open.  No Paper V or
-Lean promotion.
+**Status:** v1 closed: `X x P^1` is irrational for every smooth cubic
+threefold, proved directly from framed formal monodromy of the numerical small
+quantum connection.  The `m=2` research programme is active.  Full stable
+irrationality is open.  No Paper V or Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -26,13 +27,24 @@ X\times\mathbf P^m
 is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 `m` would settle stable irrationality.
 
-## Closed inputs
+## Closed v1
 
 - The cubic quantum connection has a rank-two formal block with exponents
   `+/-1/6` modulo integers.
-- `X x P^m` has exactly `m+1` copies with unchanged fractional exponents.
-- Points, curves, and surfaces have fractional exponents only `0` or `1/2`;
-  hence `X x P^1` is irrational.
+- Framed formal-monodromy multiplicity `nu_6` is defined over the numerical
+  small quantum connection.  Iritani's blow-up and Iritani--Koto's
+  projective-bundle comparisons preserve it after reconstruction-target
+  normalization; divisor tagging handles noninjective center Novikov maps.
+- Every point, curve, and surface has `nu_6=0` after every center
+  specialization.  Weak factorization therefore proves `X x P^1`
+  irrational, since the product has `2 nu_6(X)>0` while `P^4` has zero.
+- The proof is in `../2026-08-11-c907-v1-framed-fractional-support.md`; the
+  warning-free v1 manuscript is `papers/cubic-stabilization-epilogue/`.
+
+## Closed moonshot inputs
+
+- `X x P^m` has exactly `m+1` cubic packets with unchanged fractional
+  exponents.
 - Coarse atom multiplicity cannot work from `m=2`: explicit self-carrier
   balances reproduce the endpoint count.
 - The surviving Tate polynomial is `1+T+...+T^m`.  Equivalently, the endpoint
@@ -60,8 +72,19 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   obstruction remains; the escaping-thimble identification is still open.
 - A second exact rescaling gives the local residual potential `W_(P^3)+ZU`.
   Its four local Morse sections match `P^3`, and the fixed-torus model has a
-  bounded-value logarithmic gradient gap.  Mixed pole channels prevent
-  promoting this to global residual-thimble transport.
+  bounded-value logarithmic gradient gap.  A finite weighted graph atlas covers
+  every bounded pole valuation and makes every finite-value boundary chart
+  submersive.  A saturated common refinement and product-pair excision,
+  including its interface with the residual core, remain under audit.  The
+  correct rank-four system is value-localized; the global group has ten
+  critical contributions.
+- Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
+  subgroup, but not its individual directed Beilinson basis.  The remaining
+  marking is one monodromy-normalized central-connection seed.
+- Ordinary dimension-three grading does not prove the carrier bound: an exact
+  self-dual formal model has hard Lefschetz and length two.  The geometric gate
+  is vanishing of its sectorial Rees extension class on every non-nef
+  threefold.
 
 ## Active frontier: `m=2`
 
@@ -89,12 +112,14 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Prove the framed relative double-suspension theorem for `Bl_(P^3)P^5`: excise
-or calculate the two mixed pole channels, identify the remaining four
-directed thimbles with the `P^3` Orlov/Gamma basis, and compute the order-zero
-Stokes cocycle.  In parallel, freeze the operation-framed enrichment and
-prove HLT support descent on KKPYY connected atom components.  First-Novikov
-differentiation follows only after the order-zero comparison passes.
+Complete the toric order-zero theorem for `Bl_(P^3)P^5`: prove that the finite
+linear pole atlas is the saturated common graph closure, excise its product
+pairs on every overlap and residual-core interface, and identify the resulting
+four value-localized thimbles with the `P^3` Stokes system.  Then fix the
+monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
+parallel, compute the self-dual Rees extension on explicit non-nef threefold
+mirrors.  Do not differentiate in Novikov directions before the marked
+order-zero comparison passes.
 
 A Fano-threefold database is reconnaissance only; weak factorization permits
 arbitrary Calabi--Yau and general-type threefold centers.
@@ -105,6 +130,12 @@ Finite mutation audit:
 `../2026-08-11-c907-double-presentation-mutation-audit.md`.
 Double suspension and pole obstruction:
 `../2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
+Local pole-channel model:
+`../2026-08-11-c907-pole-channel-normal-crossing-excision.md`.
+Toric assembly:
+`../2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
+Threefold grading boundary:
+`../2026-08-11-c907-threefold-grading-boundary.md`.
 
 ## Gold architecture after `m=2`
 

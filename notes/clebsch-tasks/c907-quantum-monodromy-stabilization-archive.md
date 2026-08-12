@@ -56,3 +56,27 @@ An author-approved follow-on remains queued behind the active frontier:
 2. scan Fano threefolds for candidates, with results below the required
    local-quantum-module-to-geometric-atom bridge treated only as
    reconnaissance.
+
+## 2026-08-11 correction — atomwise v1 proof retired
+
+The first bullet above saying that the surface-carrier atom argument proved
+`X x P^1` was too strong.  The published KKPYY theory supplies unenhanced
+geometric `F`-bundle decompositions, but not the parameterized HLT/formal-
+monodromy descent needed to make primitive-sixth support constant on a
+connected abstract atom.  A coefficientwise formal bulk gauge can have
+unbounded negative loop order and need not specialize to neighboring analytic
+fibres.  KKPYY Proposition 5.23 controls the `u=0` representation, not the HLT
+type; the enhanced Serre alternative is explicitly deferred in that source.
+
+The unconditional v1 theorem was recovered without atoms.  It uses framed
+formal monodromy of the numerical small quantum connection, follows it through
+each Iritani blow-up comparison separately, and proves specialized
+low-dimensional vanishing by divisor tagging.  The noninjective center Novikov
+map is handled in the reconstruction target before Laurent scalar extension.
+The proof and source audit are in
+`../2026-08-11-c907-v1-framed-fractional-support.md`; the superseded failed
+routes are in `../2026-08-11-c907-v1-direct-qdm-proof-audit.md`.
+
+This correction does not change the `m=2` frontier.  Ordinary atoms remain too
+coarse there, and the active problem is still the operation-framed
+Stokes/Rees/Gamma length.

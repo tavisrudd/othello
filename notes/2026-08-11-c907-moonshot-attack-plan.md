@@ -135,11 +135,26 @@ Picard--Lefschetz/Stokes comparison, not another critical-value calculation.
 See `2026-08-11-c907-toric-r2-pilot.md`.
 
 Wave-2 status: a second exact rescaling gives `W_(P^3)+ZU` and proves
-bounded-value logarithmic tameness.  Direct endpoint transport is false: two
-explicit mixed pole channels have bounded potential and nonintegrable
-parameter drift.  Replace the global-flow step by a framed relative
-double-suspension theorem that excises or computes those channels.  See
-`2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
+bounded-value logarithmic tameness.  Direct endpoint transport is false, but
+the pole obstruction is now locally resolved: a finite weighted graph atlas
+covers the continuum of bounded pole weights and makes every finite-value
+boundary chart submersive.  The remaining analytic gates are a saturated
+common refinement, product-pair excision including the residual interface, and
+the directed central-connection marking.  The correct rank-four object is the
+localized group over a bounded value disk; the global rapid-decay group has
+six additional ambient critical contributions.
+Iritani identifies the residual Gamma lattice with the Orlov subgroup, not the
+individual Beilinson thimbles.  See
+`2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`,
+`2026-08-11-c907-pole-channel-normal-crossing-excision.md`, and
+`2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
+
+Wave-2C status: the direct dimension-three grading route is closed negatively.
+An explicit self-dual formal model satisfies hard Lefschetz, Poincare duality,
+and the primitive-sixth HLT support conditions while carrying length two.  The
+carrier theorem must kill one geometric sectorial Rees extension class; it is
+not a consequence of ordinary grading.  See
+`2026-08-11-c907-threefold-grading-boundary.md`.
 
 ## Wave 0 — freeze the invariant
 
@@ -273,9 +288,10 @@ For hypersurfaces, derive exact jets through quantum Lefschetz/twisted
 
 Try these routes in order.
 
-1. **Direct grading theorem:** prove on any threefold that a cubic packet has
-   at most one consecutive Rees level.  This avoids singular MMP models and is
-   highest EV.
+1. **Direct grading theorem:** closed negatively at the stated inputs.  Hard
+   Lefschetz, duality, and formal HLT exponents admit a self-dual length-two
+   model.  Any repair must use the sectorial Rees extension, not ordinary
+   cohomological grading.
 2. **Smooth birational transport:** prove point/curve blow-ups cannot increase
    cubic length; calibrate on blow-ups of a cubic threefold.
 3. **Pseudo-effective case:** only if needed, extend the object to terminal
@@ -286,8 +302,9 @@ Try these routes in order.
 5. Use Fano tables only to hunt a counterexample or test a structural lemma.
 
 The likely counterexample locus is non-nef gluing through a fibration or flip,
-not the nef-canonical hypersurfaces.  One exact length-two smooth threefold
-kills `(C)` and identifies the necessary correction.
+not the nef-canonical hypersurfaces.  The exact candidate is the nonzero
+self-dual extension in `2026-08-11-c907-threefold-grading-boundary.md`.  One
+smooth realization kills `(C)`; uniform geometric vanishing proves it.
 
 ### C4. Carrier acceptance
 
