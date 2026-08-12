@@ -170,6 +170,12 @@ application or an exact obstruction to necessity.
    envelope equals the ordinary divisor-product image in every degree. This
    is cohomological, not a Chow identity; mixed unit/primary and unequal-depth
    blocks remain gated by a valuation-compatible straightening theorem.
+   The underlying chart-free algebra has now been isolated: any symmetric
+   matrix-of-ideals divisor lattice with
+   `I_ij subset I_ii intersect I_jj` is rank-one square-zero generated and
+   has full divided-power saturation. An independent hostile read passes this
+   theorem. Applying it at arbitrary graph depths still needs compatible
+   slotwise etale splitting.
 5. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
    `P^1` stabilization and is silent at `P^2`. Every additive refinement of
    the ordinary chemical formula is merely an atom weight and cannot recover
@@ -185,10 +191,10 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Extend the equal-depth rank-one straightening theorem to mixed
-   unit/primary and unequal-depth primary blocks, or find the first exact
-   valuation obstruction. This is the remaining gate to a full marked
-   finite-etale `PD(NS)` theorem.
+1. Prove compatible slotwise etale splitting for mixed unit/primary and
+   unequal-depth graph blocks, or find the first coupled-slot counterexample.
+   The matrix-ideal theorem shows that this is the only remaining gate to a
+   full marked finite-etale `PD(NS)` theorem.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after
