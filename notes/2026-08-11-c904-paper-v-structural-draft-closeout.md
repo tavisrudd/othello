@@ -123,7 +123,9 @@ warning remains.
 
 notes/2026-08-11-c904-paper-v-unapplied-backpatch-packet.md contains exact,
 paper-specific forward patches for Papers I–IV. It changes no predecessor
-file. The packet:
+file in its frozen form.  Those proposals were subsequently superseded by the
+broader reconstruction-framing pass and applied after full-paper rereads,
+copy editing, and independent cold/A--B review.  The packet originally:
 
 - sharpens the shared series paragraph to the selected-line equivalence and
   residual quotient;
@@ -169,6 +171,7 @@ irrationality programs remain separate research tracks.
   non-pre-emption audit but no absolute priority claim.
 - Lean formalization is deferred by explicit user instruction; no Lean source,
   generator, build, or trust contract was touched.
-- Papers I–IV back patches are prepared but unapplied.
+- The Papers I–IV patches and companion framing are applied and exported by
+  forward commits; no public push has been made.
 
 No manuscript-critical mathematical mystery remains.

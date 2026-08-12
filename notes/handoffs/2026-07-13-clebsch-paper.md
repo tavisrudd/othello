@@ -654,10 +654,14 @@ authority at `papers/chordal-conference-reconstruction/`.
 It proves the intrinsic selected-line equivalence, exact residual
 \(uq\)-quotient, source returns, common binary heart, uniform symmetric
 conference saturation, unique nonsplit order-six \(\mathbf F_4A_5\)
-extension, and the geometric/residue Frobenius identification. The exact
-Papers I--IV back patches are prepared but unapplied. Lean and mirror
-publication remain deferred by user instruction. Current report:
-notes/2026-08-11-c904-paper-v-structural-draft-closeout.md.
+extension, and the geometric/residue Frobenius identification. The
+reconstruction framing is now applied across Papers I--V and the computational
+companion, with six independent cold/A--B reads all passing.  The five
+standalone mirrors are synchronized by forward commits and their local
+manuscript gates pass; nothing has been pushed.  Lean remains deferred by user
+instruction.  Current reports:
+notes/2026-08-11-c904-paper-v-structural-draft-closeout.md and
+notes/2026-08-11-c904-series-reconstruction-framing-closeout.md.
 
 C904's original Annals-upgrade frontier remains the relative Shen-cycle
 descent gate.  Fixed-fibre lifting is closed by the unordered `2/5`
