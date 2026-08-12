@@ -34,11 +34,3 @@ heavy = true
 allowed_direct_dependencies = ["mathlib"]
 source_root = "TavisRuddFiniteGeom/Certificates/Q16"
 module_prefix = "TavisRuddFiniteGeom.Certificates.Q16"
-
-[[certificate]]
-name = "finitegeom-q25-certificates"
-checkout = "finitegeom-q25-certificates"
-heavy = true
-allowed_direct_dependencies = ["mathlib"]
-source_root = "TavisRuddFiniteGeom/Certificates/Q25"
-module_prefix = "TavisRuddFiniteGeom.Certificates.Q25"

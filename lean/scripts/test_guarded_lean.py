@@ -32,14 +32,14 @@ class GuardedLeanSessionTests(unittest.TestCase):
             )
             self.assertEqual(first.returncode, 0, first.stderr)
             second = self.run_guard(
-                "--session-set", "LEAN_GUARD_PROFILE=q25-two-witness", env=env
+                "--session-set", "LEAN_GUARD_PROFILE=two-witness", env=env
             )
             self.assertEqual(second.returncode, 0, second.stderr)
             shown = self.run_guard("--session-show", env=env)
             self.assertEqual(shown.returncode, 0, shown.stderr)
             self.assertIn("LEAN_GUARD_CPUSET=20-21", shown.stdout)
             self.assertIn("LEAN_GUARD_THREADS=2", shown.stdout)
-            self.assertIn("LEAN_GUARD_PROFILE=q25-two-witness", shown.stdout)
+            self.assertIn("LEAN_GUARD_PROFILE=two-witness", shown.stdout)
             cleared = self.run_guard("--session-clear", env=env)
             self.assertEqual(cleared.returncode, 0, cleared.stderr)
             self.assertFalse(path.exists())

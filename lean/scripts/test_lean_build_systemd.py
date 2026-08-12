@@ -1143,7 +1143,7 @@ class ManagedCliTests(unittest.TestCase):
             "--threads",
             "2",
             "--profile",
-            "q25-two-witness",
+            "two-witness",
             "--wait-quiet-seconds",
             "30",
         )
@@ -1188,7 +1188,7 @@ class ManagedCliTests(unittest.TestCase):
         self.assertIn("--aggregate", argv)
         self.assertIn("Gate.Final", argv)
         self.assertIn("--threads", argv)
-        self.assertIn("q25-two-witness", argv)
+        self.assertIn("two-witness", argv)
         expected_lock = (
             MODULE.LEGACY_STATE_ROOT_DEFAULT
             / "locks"

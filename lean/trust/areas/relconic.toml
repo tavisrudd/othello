@@ -4830,39 +4830,12 @@ reason = "compatibility and dedicated component gates superseded by the combined
 [[unreached]]
 modules = [
   "RelativeConicArcs.Baer**",
-  "RelativeConicArcs.Q25**",
   "RelativeConicArcs.Gates.Baer",
-  "RelativeConicArcs.Gates.AlternateOrbitRepair**",
 ]
 severity = "info"
 reason = """\
-Unpublished Baer and alternate-orbit Q25 work.  No adopted standalone-paper manifest names these \
-gates or their `Q25AllProfiles` terminal, so they are outside the paper-facing extraction surface."""
-
-[[unreached]]
-modules = [
-  "RelativeConicArcs.Q25ResidualClassLinkData.**",
-  "RelativeConicArcs.Q25ResidualConclusionData.**",
-  "RelativeConicArcs.Q25ResidualCoverData.**",
-  "RelativeConicArcs.Q25ResidualCoverPrototype.**",
-  "RelativeConicArcs.Q25ResidualDispatchData.**",
-  "RelativeConicArcs.Q25ResidualTransportData.**",
-  "RelativeConicArcs.Q25RowCompositionData.**",
-  "RelativeConicArcs.Q25ClassBoundData.**",
-  "RelativeConicArcs.Q25LineMaskData.**",
-  "RelativeConicArcs.Q25CarrierLineData.**",
-  "RelativeConicArcs.Q25ExactMinimumRows.**",
-  "RelativeConicArcs.Q25Residual**",
-  "RelativeConicArcs.Q25Minimum**",
-  "RelativeConicArcs.Q25Row**",
-  "RelativeConicArcs.Q25Line**",
-  "RelativeConicArcs.Q25Exactness**",
-]
-severity = "info"
-reason = """\
-In-flight Q25 residual-orbit work owned by the relconic lane; no gate imports it yet, so it is \
-outside every audited closure.  This exclusion is a status report, not an exemption: it must be \
-removed and the trees brought under a gate when that work lands."""
+Unpublished Baer work. No adopted standalone-paper manifest names this gate, so it is outside the \
+paper-facing extraction surface."""
 
 [[unreached]]
 modules = [
@@ -4908,128 +4881,6 @@ entry_mode = "consistency-check"
 entry_declarations = ["RelativeConicArcs.Q16Classification.rejection_profile"]
 entry_package = "finitegeom-q16-certificates"
 anchor = "RelativeConicArcs/TRUST.md#exact-q16-classification-provenance"
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25CarrierLineData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "All.lean", role = "aggregate" },
-  { glob = "Dispatch.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ClassBoundData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "C_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "All.lean", role = "aggregate" },
-  { glob = "Bridge.lean", role = "handwritten" },
-  { glob = "Index.lean", role = "index" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ExactMinimumRows"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "C_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25LineMaskData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "L_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25PairData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "L_[0-9][0-9][0-9].lean", role = "leaf" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25PairRows"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_P_[0-9][0-9].lean", role = "leaf" },
-  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "R_[0-9][0-9][0-9].lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ResidualClassLinkData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "L_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_V_[0-9][0-9].lean", role = "leaf" },
-  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ResidualConclusionData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "C_R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ResidualCoverData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "K_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "All.lean", role = "aggregate" },
-  { glob = "Rows.lean", role = "aggregate" },
-  { glob = "Classes.lean", role = "handwritten" },
-  { glob = "Schema.lean", role = "schema" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ResidualDispatchData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "D_R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25ResidualTransportData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "T_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_V_[0-9][0-9].lean", role = "leaf" },
-  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
-  { glob = "All.lean", role = "aggregate" },
-  { glob = "Prototype.lean", role = "handwritten" },
-]
-
-[[data_tree]]
-path = "RelativeConicArcs/Q25RowCompositionData"
-provenance = "legacy-unverified"
-reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
-members = [
-  { glob = "C_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
-  { glob = "All.lean", role = "aggregate" },
-]
-
-# Paper-facing companion terminals used through redundancy ten.
 
 [[terminal]]
 declaration = "RelativeConicArcs.PRSFoundation.GeometricWitnessInput.exceptional_has_kernel_member"

@@ -64,30 +64,10 @@ import tomllib
 from pathlib import Path
 
 
-# A package may normalize generated comments at extraction time: internal task
-# identifiers and development paths have no meaning to a reader of the public
-# artifact.  The transformation is admissible only when it is declared, so each one
-# is named here and the package's PROVENANCE.md cites the name.  Declaring it is what
-# lets this audit separate an intended rewrite from corruption; an undeclared
-# difference stays a defect.
-#
-# Each rule is a literal or regular-expression substitution applied to the AUTHORITY
-# bytes before comparison.  A rule may not touch a declaration, a proof, or a numeral.
-DECLARED_TRANSFORMATIONS: dict[str, list[tuple[str, str]]] = {
-    # finitegeom-q25-certificates: heading identifiers, generator repathing, the
-    # source-generator hash relabelling, and the remaining prose identifiers.
-    "q25-banner-normalization-v1": [
-        (r"# Generated C151 ", "# Generated q=25 certificate "),
-        (r"`notes/\d{4}-\d{2}-\d{2}-[cC]151-([A-Za-z0-9._-]+)`", r"`scripts/\1`"),
-        (r"generator SHA256:", "source-generator SHA256:"),
-        (r"lexicographic C150 internal-orbit", "lexicographic normalized-row internal-orbit"),
-        (r"# C331 semantic", "# semantic-exhaustion bridge semantic"),
-        # Only a free-standing identifier in prose.  `C151` also occurs inside
-        # declaration names as a column index — `residualCoverRow050C151_200` — and
-        # rewriting one of those would change mathematics, not a comment.
-        (r"(?<![A-Za-z0-9_])C151(?![A-Za-z0-9_])", "q=25 certificate"),
-    ],
-}
+# A package may normalize generated comments at extraction time. Each declared
+# transformation is a literal or regular-expression substitution applied to authority
+# bytes before comparison; it may not touch a declaration, proof, or numeral.
+DECLARED_TRANSFORMATIONS: dict[str, list[tuple[str, str]]] = {}
 
 
 def apply_transformation(text: str, rules: list[tuple[str, str]]) -> str:

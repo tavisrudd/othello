@@ -828,28 +828,8 @@ Source module & Paper-facing declaration or role \\
 \path{RelativeConicArcs/Parameterized}\newline
 \path{AlternateOrbitRepair.lean} &
   \path{card_alternateLegalPairs_ge_of_phase} \\
-\path{RelativeConicArcs/Q25AlternateOrbitRepair.lean} &
-  \path{two_le_card_globalLegalPairs_q25},
-  \path{one_le_alternateLegalPairs_q25}, and the four profile bounds \\
 \path{RelativeConicArcs/QuadraticInvisible.lean} &
   aggregate equality/excess and fixed-center criteria \\
-\path{RelativeConicArcs/Q25ProfileZero.lean} &
-  \path{five_le_sum_card_legal_profile_zero} \\
-\path{RelativeConicArcs/Q25ProfileFour.lean} &
-  \path{four_le_sum_card_legal_profile_four} \\
-\path{RelativeConicArcs/Q25PairResult.lean} &
-  \path{f2_two_pair_extension} \\
-\path{RelativeConicArcs/Q25ResidualMinimumOrbits.lean} &
-  five orbit sizes, disjointness, and union size $1600$ \\
-\path{RelativeConicArcs/Q25Exhaustion.lean} &
-  \path{mem_minimumOrbitUnion_of_normalized_card_eq_32} \\
-\path{RelativeConicArcs/Q25SemanticExhaustion.lean} &
-  semantic lower bound and equality-orbit exhaustion \\
-\path{RelativeConicArcs/Gates/}\newline
-\path{AlternateOrbitRepairQ25Minimum.lean} &
-  paper-facing exact-minimum and equality-classification gate \\
-\path{RelativeConicArcs/Q25AllProfiles.lean} &
-  \path{pair_extension} \\
 \path{FiniteGeom/BaerCompletion/OrbitSaturation.lean} &
   \path{orbitSaturation_quadratic_bound_of_split} \\
 \bottomrule
@@ -866,12 +846,9 @@ checkpoint will be recorded from the final submission commit.  From the
 \begin{verbatim}
 LEAN_NUM_THREADS=6 nix develop --command lake build \
   RelativeConicArcs.QuadraticGlobalCount \
-  RelativeConicArcs.Q25AllProfiles \
   RelativeConicArcs.AlternateOrbitRepair \
-  RelativeConicArcs.Q25AlternateOrbitRepair \
   RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult \
   RelativeConicArcs.ParameterizedAlternateOrbitRepair \
-  RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum
 \end{verbatim}
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}

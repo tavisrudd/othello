@@ -25,9 +25,9 @@
       "verified_max_threads": 1,
       "worker_peak_mib": 7000
     },
-    "q25-two-witness": {
+    "two-witness": {
       "concurrent_sibling_peak_mib": 1330,
-      "description": "C143 Q25 two-witness leaves with the heavy shared checker serialized first.",
+      "description": "Two-witness certificate leaves with the heavy shared checker serialized first.",
       "reserve_mib": 8192,
       "shared_checker_peak_mib": 10800,
       "verified_max_threads": 2,
