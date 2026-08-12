@@ -244,9 +244,9 @@ Lean source, package, mirror, or remote changed.  Full report:
    `../2026-08-06-c879-finitegeom-paper-extraction-plan.md`. Q11 and Q16 are branded,
    Mathlib-only, sealed, and cached; their bridges hash the frozen aggregate artifacts and never
    invoke a certificate build target. The live mapping covers seventeen paper records, fifteen
-   standalone repositories, twelve export areas, and all AME--LU modules. Projective-cap Q11 now
-   follows that boundary; Q13 and Q25 are the remaining certificate separations, each using a
-   package-local statement model plus a cheap downstream adapter.
+   standalone repositories, twelve export areas, and all AME--LU modules. Projective-cap Q11 and
+   Q13 follow the certificate boundary with package-local statement models; Q25 was retired because
+   no adopted paper or formal companion consumes it.
    Paper I is current on the separated three-repository boundary at monorepo commit `0b322c1d` and
    exporter-produced standalone commit `1e3cce4`; its final verifier is green, and
    `clebsch_rigidity.pdf` has SHA-256
@@ -255,7 +255,7 @@ Lean source, package, mirror, or remote changed.  Full report:
    guarded run `run-20260810-171214-7ce5ea23` built its final aggregate in 47m30s at
    5.43 GB peak, and its Lake pack has SHA-256
    `24860c9e950cca12ff17b4875257bbe8b56860c6ac2353c9ef8ee3eebfd7ff32`.
-   Its exporter-created downstream bridge is at standalone commit `0be8925c`; the guarded bridge
+   Its exporter-created downstream bridge is at standalone commit `37e0db4a`; the sealed-pack
    verifier and static audit are green against finitegeom `b871c10b`, certificate `54fb4f83`, and
    the sealed pack. The registry entry is active. The legacy monorepo family stays pending until
    its consumers move.
@@ -264,18 +264,7 @@ Lean source, package, mirror, or remote changed.  Full report:
    refresh rebuilt only the cheap aggregate root. The package is sealed at `99156ddf`, and its Lake
    pack has SHA-256 `50a155b477534b7ee6ad78bade6a6ea7b310d819a9c1843beca80dce9fbaf7e1`.
    The package fact is registered and pinned; adoption at the official checkout waits for its
-   pre-existing dirty legacy tree to be reconciled without overwriting it. Q25 is independently
-   Mathlib-only in the clean disk worktree
-   `/home/tavis/.cache/othello-worktrees/c879-q25-d23c221`. Guarded regeneration installed exactly
-   7,547 allowlisted sources, committed at `c0a142e5`; the 9,511-module manifest is resealed at
-   `fcef0f3`. The handwritten preflight is green through `Normalization`; `LineMaskChecker` needed
-   only removal of a tactic after an already closed goal and is now green. `ResidualAction` is the
-   active preflight target: commit `ce40232` contains the latest standalone determinant-scaling and
-   orbit-pair proof repair, but its guarded check has not started because host memory is just below
-   the one-thread profile's 11,824 MiB admission floor. Do not weaken that floor or reseal the stale
-   manifest before the proof is green. Then finish `ResidualFast`, `ResidualComposition`, and
-   `ResidualGroup`, run the single aggregate build, seal its fact/pack, and add the external registry
-   entry.
+   pre-existing dirty legacy tree to be reconciled without overwriting it.
 3. **Real lightweight gate.** In a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior. The restart guard needs the same
    window for one real checkpoint→restart→audit→verify cycle on disposable state.
