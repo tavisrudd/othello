@@ -142,12 +142,14 @@
     },
     {
       "manuscript_label": "lem:pv-base-change",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A formal differential module and coefficientwise extension to a complete separated adic algebra.",
-      "hypotheses": "The coefficient algebra is constant for d/dz; any gauge uses integral powers of z.",
-      "conclusion": "Preservation of the framed-monodromy characteristic polynomial.",
-      "cautions": "The assertion is coefficientwise and does not authorize ramification of the loop coordinate."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedMonodromy_characteristicPolynomial_baseChange_and_gauge"
+      ],
+      "objects": "A finite square monodromy matrix over a commutative ring, a coefficient ring homomorphism, and an invertible matrix over the target ring.",
+      "hypotheses": "The framed-monodromy operator has already been constructed and the supplied target matrix acts by conjugacy after coefficient extension.",
+      "conclusion": "The conjugated coefficient-extended matrix has characteristic polynomial equal to the coefficientwise image of the original characteristic polynomial.",
+      "cautions": "The formal differential module, Levelt--Turrittin solution algebra, differential-constant calculation, adic inverse limit, and proof that an integral-z gauge induces the stated conjugacy are absent; no ramified loop coordinate is represented."
     },
     {
       "manuscript_label": "lem:formal-base-shift",

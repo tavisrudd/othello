@@ -11,6 +11,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity: p
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedMonodromy_characteristicPolynomial_baseChange_and_gauge: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikov_injective_taggedMonomial: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain: none
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization: propext, Classical.choice, Quot.sound

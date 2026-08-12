@@ -5,6 +5,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMulti
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -213,6 +214,19 @@ def proLaurentGaugeSystem
 under all coefficient reductions. -/
 def proLaurentCharacteristicPolynomialSystem : Type _ :=
   Quantum.CompatibleCharacteristicPolynomialSystem
+
+/-- Finite-matrix coefficientwise base change followed by conjugacy: the
+resulting characteristic polynomial is exactly the coefficientwise image of
+the original one. -/
+theorem framedMonodromy_characteristicPolynomial_baseChange_and_gauge
+    {Index R S : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [CommRing S]
+    (monodromy : Matrix Index Index R) (extension : R →+* S)
+    (gauge : (Matrix Index Index S)ˣ) :
+    (gauge.val * monodromy.map extension * gauge.val⁻¹).charpoly =
+      monodromy.charpoly.map extension :=
+  Quantum.framedCharacteristicPolynomial_map_and_conjugate
+    monodromy extension gauge
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
