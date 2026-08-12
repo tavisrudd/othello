@@ -123,10 +123,9 @@ def flake(bridge: dict) -> str:
                 ln -s "$finitegeom_source" "$finitegeom_root"
                 rm -rf "$certificate_root"
                 ln -s "$certificate_source" "$certificate_root"
-              else
-                (cd "$certificate_root" && lake unpack "$certificate_pack")
               fi
               test -d "$certificate_root"
+              (cd "$certificate_root" && lake unpack "$certificate_pack")
               printf '%s  %s\n' \
                 '{bridge["certificate_olean_sha256"]}' \
                 "$certificate_root/.lake/build/lib/lean/{gate_path}.olean" \
