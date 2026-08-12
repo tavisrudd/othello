@@ -185,9 +185,14 @@ two-endpoint theorem redundant:
   with the explicit Tate/Prym factor.  Equality of \(j\)-maps or
   Picard--Fuchs equations is insufficient.
 * Once that comparison is constructed, Theorem B says that the norm-axis
-  lattice has only the two \(3\)-adic endpoint possibilities.  One primitive
-  pairing (equivalently, the saturation index of the comparison on one fibre)
-  then chooses the endpoint and fixes the scalar.  The norm formula
+  lattice has only the two \(3\)-adic endpoint possibilities.  The exact
+  one-fibre datum is an explicitly normalized primitive **symplectic pair**
+  of vanishing cycles in \(H_1(E_H,\mathbf Z)\), expressed in the Tate/Prym
+  rational basis: its intersection fixes the rational polarization scale and
+  its reduction modulo \(3\) decides whether the image is \(L_0\) or
+  \(L_1\).  Equivalently, compute the saturation index together with one
+  primitive polarization pairing for the comparison on one smooth fibre.
+  The norm formula
   \(n_H=2i_Hq_H\) and (6) are the natural geometric normalizations against
   which that datum must be measured.
 
