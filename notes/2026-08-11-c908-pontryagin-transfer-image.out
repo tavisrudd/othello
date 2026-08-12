@@ -1,0 +1,13 @@
+Sub-B2 Pontryagin transfer into the (1,5) escape group Q_15
+divided powers: integral for k=[1, 2, 3, 4, 5]; k! * Theta^[k] = Theta^k verified; symplectic-pair build={'available': True, 'number_of_symplectic_pairs': 5, 'theta_equals_sum_of_pair_products': True, 'divided_power_2_matches': True, 'divided_power_3_matches': True, 'divided_power_4_matches': True}
+Q_15: septic rank=120; L_5 divisors={'1': 110, '2': 10}; dim_F2 Q_15=10
+(d) Theta ^ Theta^[2] = 3 Theta^[3]: True; after wedging with every basis vector: True; Theta ^ Theta^[3] = 4 Theta^[4]: True
+(a) 3*(Theta^[3] ^ a) in L_5(^5) over Z for every a: True; dim_F2 span in Q_15=0
+(b) E(u,z) over 450 pairs: dim_F2 span in Q_15=10; is all of Q_15=True; integral rank of the E lattice=120
+(b-iii) u = Theta subfamily: Theta ^ Theta^[3] = 4 Theta^[4]=True; content gcd=4; dim_F2 span=0
+(c) combined transfer lattice: generators=712 rank=120 divisors={'1': 120}; equals ^7 Lambda=True; unhit escape dimension=0
+(e) dim span_u [E(u,z)] for each z=[9, 9, 9, 9, 9, 9, 9, 9, 9, 9]
+(e) histogram of dim span_z [E(u,z)] over the 45 u={'2': 24, '8': 21}
+(e) per-u dimension vs vanishing of S_ij={"('dim2', 'S_ij nonzero')": 10, "('dim2', 'S_ij zero')": 14, "('dim8', 'S_ij nonzero')": 17, "('dim8', 'S_ij zero')": 4}; vs parity of S_ij={"('dim2', 'S_ij mod 2 = 0')": 16, "('dim2', 'S_ij mod 2 = 1')": 8, "('dim8', 'S_ij mod 2 = 1')": 13, "('dim8', 'S_ij mod 2 = 0')": 8}
+(e) the ten per-z hyperplanes are distinct and their annihilators have rank 10: True
+PASS

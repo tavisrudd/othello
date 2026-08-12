@@ -1,0 +1,263 @@
+{
+  "a_theta3_wedge_lambda": {
+    "class_itself_in_image_over_Z": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "f2_dimension_of_the_span_in_Q15": 0,
+    "individual_membership": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "reason": "Theta ^ Theta^[2] = 3 Theta^[3], so 3 Theta^[3] ^ a = L_5(Theta^[2] ^ a); since Q_15 has exponent two, 3[x] = [x] = 0",
+    "three_times_class_lies_in_image_of_L5_over_Z_for_every_a": true
+  },
+  "b_h2_h3_channel": {
+    "f2_dimension_of_the_span_in_Q15": 10,
+    "integral_rank_of_the_E_lattice": 120,
+    "number_of_pairs": 450,
+    "span_basis_in_Q15_coordinates": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "span_is_all_of_Q15": true,
+    "u_equals_theta_subfamily": {
+      "content_gcd_of_theta_wedge_theta3": 4,
+      "f2_dimension_of_the_span_in_Q15": 0,
+      "reading": "Theta ^ Theta^[3] = 4 Theta^[4] is divisible by four, so the whole u = Theta subfamily is even and dies in Q_15",
+      "theta_wedge_theta3_equals_four_theta4": true
+    },
+    "u_ranges_over": "all 45 basis bivectors e_i ^ e_j",
+    "z_ranges_over": "all 10 basis vectors, via zeta with PD(zeta)=z"
+  },
+  "c_combined_transfer_lattice": {
+    "elementary_divisor_counts": {
+      "1": 120
+    },
+    "escape_dimension_still_unhit": 0,
+    "generator_count": 712,
+    "index_in_wedge7": "1",
+    "is_all_of_wedge7": true,
+    "rank": 120
+  },
+  "d_control_identity": {
+    "identity_holds_after_wedging_with_every_basis_vector": true,
+    "theta_wedge_theta2_equals_three_theta3": true,
+    "theta_wedge_theta3_equals_four_theta4": true
+  },
+  "divided_powers": {
+    "check_k_factorial_times_divided_equals_power": true,
+    "content_gcd_of_theta_power_k": {
+      "1": 1,
+      "2": 2,
+      "3": 6,
+      "4": 24,
+      "5": 120
+    },
+    "integrality_verified_for_k": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "support_sizes": {
+      "1": 27,
+      "2": 109,
+      "3": 113,
+      "4": 31,
+      "5": 1
+    },
+    "symplectic_pair_construction": {
+      "available": true,
+      "divided_power_2_matches": true,
+      "divided_power_3_matches": true,
+      "divided_power_4_matches": true,
+      "number_of_symplectic_pairs": 5,
+      "theta_equals_sum_of_pair_products": true
+    },
+    "top_divided_power_is_the_orientation": true
+  },
+  "e_rank_profile": {
+    "dimension_of_span_over_u_for_each_z": [
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9,
+      9
+    ],
+    "histogram_of_dimension_of_span_over_z_for_each_u": {
+      "2": 24,
+      "8": 21
+    },
+    "max_single_u_dimension": 8,
+    "max_single_z_dimension": 9,
+    "number_of_annihilator_vectors_of_the_per_z_spans": 10,
+    "per_u_dimension_versus_parity_of_S_ij": {
+      "('dim2', 'S_ij mod 2 = 0')": 16,
+      "('dim2', 'S_ij mod 2 = 1')": 8,
+      "('dim8', 'S_ij mod 2 = 0')": 8,
+      "('dim8', 'S_ij mod 2 = 1')": 13
+    },
+    "per_u_dimension_versus_vanishing_of_S_ij": {
+      "('dim2', 'S_ij nonzero')": 10,
+      "('dim2', 'S_ij zero')": 14,
+      "('dim8', 'S_ij nonzero')": 17,
+      "('dim8', 'S_ij zero')": 4
+    },
+    "rank_of_those_annihilators": 10,
+    "the_ten_per_z_hyperplanes_are_distinct": true
+  },
+  "escape_group": {
+    "elementary_divisors_of_L5": {
+      "1": 110,
+      "2": 10
+    },
+    "f2_dimension_of_Q15": 10,
+    "image_rank_over_Z": 120,
+    "septic_rank": 120
+  },
+  "inputs": {
+    "notes/2026-08-10-c904-minimal-class-divisor-lattice.sage": "d77752dcf242cdd3e8ecf15d34785eba583aa4c4c7770b79decd2f43e260f734"
+  },
+  "schema": "subB2-pontryagin-transfer/1"
+}
