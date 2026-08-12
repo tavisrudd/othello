@@ -37,6 +37,10 @@ The multiplicities are algebraic multiplicities in the characteristic
 polynomial.
 \end{definition}
 
+The characteristic polynomial is unchanged by extending one algebraic
+closure of the numerical Novikov fraction field to a common overfield.
+Thus \(\nu_6(T)\) is independent of that choice.
+
 The frame matters.  Adjoining roots of Novikov monomials is harmless, but
 adjoining a root of \(z\) would replace the original loop and could erase the
 deck part of the operator.
@@ -99,16 +103,28 @@ Modulo \(F^N B\), the flat bulk equations
  \qquad G|_{\eta=0}=1,
 \]
 have an invertible solution with bounded Laurent order in \(z\).  These
-solutions are compatible in \(N\).  Their inverse limit may have negative
-\(z\)-orders unbounded with the filtration degree, but every coefficient uses
-only integral powers of \(z\).  Lemma~\ref{lem:pv-base-change}, applied at each
-finite level and then in the inverse limit, proves the assertion.  No
-evaluation of this gauge at a nonnilpotent analytic bulk point is used.
+solutions are compatible in \(N\).  Their inverse limit belongs to the
+pro-Laurent gauge group
+\[
+ \varprojlim_N\operatorname{GL}
+ \bigl(H^{\rm ev}(T)\otimes (B/F^NB)((z))\bigr).
+ \tag{4.1a}
+\]
+This ring is deliberately larger than \(B((z))\): the lower Laurent bound may
+decrease with \(N\).  Formal monodromy is defined on this pro-system, and at
+each finite quotient the gauge uses only integral powers of \(z\), hence is
+single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes the
+characteristic polynomial constant at every quotient; compatibility makes
+the same polynomial the inverse-limit invariant.  No Levelt--Turrittin
+decomposition over a larger analytic field, and no evaluation at a
+nonnilpotent analytic bulk point, is used.
 \end{proof}
 
 We now apply Iritani's quantum blowup theorem and the Iritani--Koto
 projective-bundle theorem.  Both are stated over completed homological Novikov
-rings.
+rings.  Iritani's subsequent notes record explicitly that the blowup change
+of variables and decomposition preserve cohomological parity
+\cite[Section~2]{IritaniNotes}.
 
 \begin{lemma}[Numerical Novikov base change]
 \label{lem:numerical-base-change}
@@ -294,9 +310,13 @@ Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
 This map from \(\Lambda_T\) to \(A[[\boldsymbol t]]\) is injective.  To prove
 this, take a nonzero series.  Properness in (4.5) makes its lowest-valuation
 support finite.  Its initial image is a finite combination of distinct
-exponential characters.  After a generic substitution \(t_i=a_i s\), their
-exponents are distinct; their derivatives at \(s=0\) form a Vandermonde
-matrix.  The characters are therefore linearly independent.  The domain
+exponential characters.  The finitely many exponent vectors are distinct
+integral vectors.  Choose \(a=(a_i)\in\Z^\rho\) outside the finitely many
+integral hyperplanes on which two dot products agree, and substitute
+\(t_i=a_i s\).  The resulting exponents are distinct integers.  Their
+derivatives at \(s=0\) form a Vandermonde matrix with nonzero integer
+determinant, which remains invertible in the characteristic-zero fraction
+field.  The characters are therefore linearly independent.  The domain
 hypothesis on the associated graded prevents cancellation of the initial
 terms.
 
