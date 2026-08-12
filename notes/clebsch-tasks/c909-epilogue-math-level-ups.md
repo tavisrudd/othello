@@ -210,10 +210,31 @@ application or an exact obstruction to necessity.
 7. **Second-family boundary.** `V_4` is rational and hence impossible;
    currently sourced special cubic-fourfold loci are rational or lack the
    stabilized carrier theorem. No second separation family is claimed.
+8. **Fixed-dimension finite-etale towers.** For every `g>=2`, odd prime `p`,
+   and non-CM elliptic curve, one unramified degree-`g` slope produces a
+   compatible tower of pairwise nonisomorphic, polarized-indecomposable
+   principal quotients at every level `p^a`.  The kernels are nested, the
+   transition isogenies have degree `p^g`, the complete local endomorphism
+   order is `O+p^aM_g(Z_p)`, and full cohomological `PD(NS)` saturation holds
+   in every degree.  Each level spreads to a non-isotrivial modular family.
+9. **Exact integral-Hodge boundary.** Full `PD(NS)` saturation is not full
+   integral Hodge generation.  In the one-depth irreducible finite-etale
+   tower,
+
+   ```text
+   Hdg^4(A,Z) / im(Sym^2 NS(A)) = (Z/p^a)^(binom(g,4)).
+   ```
+
+   The defect is zero exactly below the first four-slot range.  Every
+   four-subset contributes one Pluecker-cancellation direction: its leading
+   denominator cancels one level earlier than any product of two integral
+   divisors.  Thus finite etaleness simultaneously kills all factorial
+   divided-power defects and exposes a distinct, explicitly growing
+   integral invariant-lattice defect.
 
 ## Highest-EV next moves
 
-1. **Top-tier finite-etale crown (active).** Recast the arbitrary-depth
+1. **Top-tier finite-etale crown (substantially closed).** Recast the arbitrary-depth
    theorem in terms of the projective spectral packet of the polarized
    Lagrangian kernel.  A transverse elliptic ruling should identify this
    packet with `Spec R[T]`; fractional-linear chart changes should preserve
@@ -222,11 +243,12 @@ application or an exact obstruction to necessity.
    hence to full cohomological `PD(NS)` saturation.  This task explicitly
    excludes C907 higher stabilization, C908 Chow descent, and C908's
    non-etale/p-typical classification.
-2. Prove an open/moduli statement for the finite-etale kernel locus in the
-   polarized Hecke correspondence and construct broad polarized-
-   indecomposable families on it.  Seek an integral Lefschetz-line or Hodge
-   consequence beyond the existing cubic minimal class without claiming a
-   Chow identity.
+2. **Exact higher Hodge-product defect.** Generalize the proved
+   codimension-two formula from four-slot Pluecker cancellation to every
+   codimension, preferably as a closed standard-monomial/partition formula
+   for the full graded quotient.  This is now the highest-EV strict-C909
+   crown: it would classify two independent integral obstructions on the
+   same finite-etale Hecke towers without entering C908's non-etale branch.
 3. Recast the tropical ideal condition and its exact defect under every
    allowed transverse-ruling change, and decide whether the defect modules
    glue as an intrinsic sheaf on the finite-etale spectral packet.  If they
