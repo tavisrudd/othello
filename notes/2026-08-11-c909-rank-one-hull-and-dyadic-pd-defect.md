@@ -1,107 +1,201 @@
 # C909 — rank-one hull and the first dyadic divided-power defect
 
-Date: 2026-08-11  
-Status: exact local consequence of the tropical criterion; human proof; no
+Date: 2026-08-11
+
+Status: exact local theorem for symmetric DVR coefficient lattices; no
 manuscript, PDF, mirror, Lean, or certificate change
 
 ## 1. Exact rank-one hull
 
-For the symmetric DVR ideal lattice `L(a,e)` of
-`2026-08-11-c909-tropical-rank-one-classification.md`, put
+Let `O` be a DVR with uniformizer `pi`.  For `a_i>=0` and symmetric
+cross-depths `e_ij=e_ji>=0`, write
+
+\[
+ L(a,e)=\{A=A^t:A_{ii}\in\pi^{a_i}O,\quad
+                    A_{ij}\in\pi^{e_{ij}}O\ (i<j)\}.
+\tag{1}
+\]
+
+Let `R_1(L)` be the `O`-span of all rank-one matrices `c vv^t` in `L`, where
+`c` and `v` may be taken in `Frac(O)` provided that the resulting matrix lies
+in `L`.  Put
 
 \[
  m_{ij}=\left\lceil\frac{a_i+a_j}{2}\right\rceil,
- \qquad e'_{ij}=\max(e_{ij},m_{ij}).
+ \qquad e'_{ij}=\max\{e_{ij},m_{ij}\}.
+\tag{2}
 \]
 
-Then the integral span of all admissible rank-one forms is exactly
+> **Rank-one hull theorem.**
+>
+> \[
+> R_1(L(a,e))=L(a,e').
+> \tag{3}
+> \]
+>
+> Hence there is a canonical coordinate-slot decomposition
+>
+> \[
+> L(a,e)/R_1(L(a,e))
+> \cong\bigoplus_{i<j}
+>       \pi^{e_{ij}}O/\pi^{e'_{ij}}O
+> \cong\bigoplus_{e_{ij}<m_{ij}}
+>       O/\pi^{m_{ij}-e_{ij}}O .
+> \tag{4}
+> \]
+
+This is a statement about the displayed matrix-of-ideals presentation; it
+does not assert invariance under a change of basis that does not preserve it.
+
+### Proof
+
+For a rank-one matrix `Q=c vv^t` in `L`, the two diagonal conditions imply
 
 \[
-                    L(a,e')\subset L(a,e).
- \tag{1}
+ \nu(c)+2\nu(v_i)\geq a_i,\qquad
+ \nu(c)+2\nu(v_j)\geq a_j.
+\tag{5}
 \]
 
-Necessity is the pairwise valuation bound for every rank-one form. Sufficiency
-is the explicit rank-one straightening at depth `e'_ij`, together with the
-diagonal generators. Consequently
+Adding gives `2 nu(Q_ij)>=a_i+a_j`, so every cross entry of `Q` has valuation
+at least `m_ij`.  It also has valuation at least `e_ij` because `Q` lies in
+`L`.  This proves `R_1(L)\subseteq L(a,e')`.  The argument uses only the two
+displayed coordinates; extra nonzero coordinates of `v` cannot lower this
+bound, nor can a sum of such matrices.
+
+Conversely, diagonal generators `pi^{a_i}E_ii` are rank one.  Fix `i<j` and
+put `E=e'_ij`.  Choose integers `x>=a_i` and `y>=a_j` with `x+y=2E`; for
+example take `x=a_i`, `y=2E-a_i`.  Write
 
 \[
- L(a,e)/\langle\text{rank-one forms}\rangle
-  \cong\bigoplus_{i<j:e_{ij}<m_{ij}}
-       p^{e_{ij}}O/p^{m_{ij}}O.
- \tag{2}
+ t=\min(x,y),\qquad r=(x-t)/2,\qquad s=(y-t)/2.
+\tag{6}
 \]
 
-Thus the tropical inequalities compute the whole rank-one defect, not only
-its vanishing.
-
-## 2. Dyadic degree-two converse
-
-Let `p=2` and suppose one pair fails midpoint convexity:
+The parities agree because `x+y` is even.  For every unit `u`, the rank-one
+matrix
 
 \[
-                       2e_{ij}<a_i+a_j.
- \tag{3}
+ R=\pi^t(\pi^r e_i+u\pi^s e_j)
+        (\pi^r e_i+u\pi^s e_j)^t
+\tag{7}
 \]
 
-On the corresponding coefficient two-plane take the integral divisor
+lies in `L(a,e)`, has diagonal entries `pi^x` and `u^2 pi^y`, and has cross
+entry `u pi^E`.  Subtracting those two allowed rank-one diagonal forms gives
 
 \[
-                   D=2^{e_{ij}}(E_{ij}+E_{ji}).
+ u\pi^E(E_{ij}+E_{ji})\in R_1(L).
+\tag{8}
 \]
 
-Its divided square is integral and its top coefficient on that two-plane has
-valuation `2e_ij` (up to sign). The ordinary products of two allowed divisor
-classes have top-coefficient ideal
+Together with the diagonal generators this proves the reverse inclusion in
+(3), and the direct coordinate decomposition (4) follows.
+
+## 2. Exact dyadic degree-two obstruction
+
+Now assume `O` is an unramified dyadic DVR, so `pi=2`.  Suppose that for a
+pair `i<j`
 
 \[
-       (,2^{a_i+a_j},\ 2^{,2e_{ij}+1},).
- \tag{4}
-
-Indeed, a diagonal-by-diagonal product contributes depth `a_i+a_j`; a
-cross-by-cross product carries the two orderings and hence the additional
-factor `2`; diagonal-by-cross terms have the wrong bidegree. Therefore (3)
-gives
-
-\[
- \operatorname{ord}\left(rac{D^2}{2}mod P^2\right)ge2,
- \qquad
- 2\frac{D^2}{2}=D^2\in P^2,
+                        2e_{ij}<a_i+a_j.
+\tag{9}
 \]
 
-so this class has exact order two in the divided-square/product quotient.
+The cross-only matrix
 
-This proves an actual defect in the local two-axis coefficient quotient. It
-also proves the corresponding global cohomological defect whenever the marked
-coefficient two-plane descends to an abelian subtorus of the graph quotient,
-or whenever an algebraic cohomological projector onto that plane is supplied.
-Such a subtorus need not descend for a mixed or unequal-depth graph, so no
-unconditional global restriction argument is asserted here.
+\[
+ D=2^{e_{ij}}(E_{ij}+E_{ji})
+\tag{10}
+\]
 
-At odd primes, the cross-by-cross coefficient `2` is a unit; (4) contains
-`p^{2e_ij}`, so this degree-two argument gives no obstruction. Failure of
-rank-one generation can still occur there, but an actual divided-power defect
-requires a higher-degree or different functional.
+is an allowed divisor coefficient.  On its coefficient two-plane, write a
+symmetric divisor coefficient as
 
-## Consequence
+\[
+ A=\begin{pmatrix}a&b\\b&c\end{pmatrix}.
+\]
 
-For dyadic symmetric ideal coefficient lattices, every failed tropical
-midpoint inequality has a canonical order-two divided-square witness in its
-local two-axis coefficient quotient. It is a global defect under the stated
-subtorus/projector hypothesis.
+With the standard elliptic-power divisor-form normalization, the coefficient
+of the oriented top class in a product is
 
-This is a local cohomological statement. It assumes the coefficient-plane
-restriction is realized in the marked elliptic-power presentation and makes
-no Chow assertion.
+\[
+ [AB]_{ij}=a c'+c a'-2bb'
+ \quad\text{for}\quad
+ B=\begin{pmatrix}a'&b'\\b'&c'\end{pmatrix}.
+\tag{11}
+\]
+
+For completeness, this follows by writing the corresponding two-form as
+`a alpha_i+c alpha_j+b(beta_ij+beta_ji)`: the two cross summands wedge to
+minus the top class, while a diagonal summand wedged with a cross summand
+vanishes.  Consequently the ideal of top coefficients of ordinary products
+of two allowed divisors is exactly
+
+\[
+ (2^{a_i+a_j},\;2^{2e_{ij}+1}).
+\tag{12}
+\]
+
+Both generators occur: use the two diagonal coordinate divisors for the
+first and two copies of (10) for the second.  The divided square has top
+coefficient
+
+\[
+ [D^{[2]}]_{ij}=[D^2/2]_{ij}=-2^{2e_{ij}}.
+\tag{13}
+\]
+
+Under (9), (12) is the ideal `2^{2e_ij+1}O`.  Thus (13) is not an ordinary
+two-divisor product and has exact additive order two modulo that product
+image: it is nonzero modulo `2^{2e_ij+1}` and twice it is `D^2`, an ordinary
+product.
+
+This pairwise calculation remains a global obstruction.  After pullback to
+the marked elliptic-power coefficient algebra, project the exterior algebra
+to the two chosen coefficient lines.  This is literal restriction to the
+coordinate abelian surface when those lines are product coordinates; after
+unramified coefficient splitting it is the corresponding coefficient-plane
+algebra map.  It sends every global divisor product to a two-plane divisor
+product, while all terms involving another coordinate vanish.  Therefore a
+global product expression for `D^{[2]}` would contradict (12)--(13).
+
+## 3. Exact scope of the converse
+
+In an elliptic-power coefficient realization where every admissible rank-one
+matrix is an actual divisor whose square is zero, the following are
+equivalent at `p=2`:
+
+1. `e_ij>=ceil((a_i+a_j)/2)` for every pair;
+2. `L(a,e)` is rank-one generated;
+3. every divided power generated by the divisor lattice lies in the ordinary
+   divisor-product image in every degree;
+4. already every divided square lies in the ordinary two-divisor product
+   image.
+
+The forward implication from (1) uses the signed square-zero decomposition
+in (7)--(8); no division by two is used.  The reverse implication from (4)
+uses the explicit order-two witness (10)--(13).  Thus, dyadically, the
+tropical rank-one condition is not merely sufficient: failure has a
+canonical degree-two cohomological witness.
+
+At an odd prime, `2` is a unit.  Formula (12) then contains
+`p^{2e_ij}`, and in fact `D^{[2]}=(1/2)D^2` is automatically an ordinary
+product.  Thus this degree-two test gives no odd-prime obstruction.  It does
+not rule out a higher-degree obstruction, nor does it assert that failure of
+rank-one generation has no other geometric consequence.
+
+## Boundary
+
+This is cohomological and local to a marked coefficient presentation.  The
+square-zero realization and coefficient-plane projection are required for
+the geometric divided-power assertions.  It is not a Chow statement and does
+not cover non-matrix-of-ideals lattices.
 
 ## Mystery ledger
 
-* **Settled:** the exact rank-one cokernel is the direct sum (2).
-* **Settled:** every dyadic tropical failure produces an actual order-two
-  divided-square defect in the local two-axis coefficient quotient.
-* **Open:** descend that witness globally without assuming a coefficient
-  subtorus or an algebraic projector.
-* **Open:** at odd primes, identify the first degree detecting a failed
-  midpoint inequality and compute its exact order.
-* **Open:** package the pairwise dyadic witnesses without a chosen coefficient
-  basis.
+* **Settled:** the full rank-one cokernel is the direct sum (4).
+* **Settled:** every dyadic failure of the midpoint inequality gives an
+  explicit order-two divided-square defect.
+* **Open:** at odd primes, determine the first divided power that detects a
+  failed midpoint inequality, if any.
