@@ -1,0 +1,101 @@
+// C907 B=1, C generic translated-star initial-form certificate.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-b1-cunit-star-fan.sing
+//
+// Leading support bits are x1,x2,x3,P=1/(x1*x2*x3*c),R=b*(1-c).
+// All x_i,b,c,1-c are chart units.  Q=1 is a harmless coefficient unit.
+// The graph is saturated before its reduced-stratum tangent-logarithmic
+// critical ideal is tested.  The m=0 block separately tests the two cases
+// where L survives on the central graph.
+
+LIB "elim.lib";
+
+ring r = 0,(L,x1,x2,x3,b,c),dp;
+poly D = x1*x2*x3*b*c*(1-c);
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+poly H;
+string label;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  label = "";
+  if (mask%2 != 0) { H = H + D*x1; label = label + "x1,"; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; label = label + "x2,"; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; label = label + "x3,"; }
+  if ((mask div 8)%2 != 0) { H = H + b*(1-c); label = label + "P,"; }
+  if ((mask div 16)%2 != 0) { H = H + D*b*(1-c); label = label + "R,"; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+    print("mask=" + string(mask) + " support=" + label + " EMPTY");
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      b*diff(H,b),c*diff(H,c);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " FREE");
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " HOLD");
+    }
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("SUMMARY masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("SUMMARY masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+// The only m=0 valuation is p1=p2=p3=0, beta>=2.
+// For beta>2, H=x1+x2+x3+P; for beta=2, also add R.
+poly Egt2 = D*L-D*x1-D*x2-D*x3-b*(1-c);
+poly Eeq2 = Egt2-D*b*(1-c);
+ideal critGt2 = Egt2,
+  x1*diff(Egt2,x1),x2*diff(Egt2,x2),x3*diff(Egt2,x3),
+  b*diff(Egt2,b),c*diff(Egt2,c);
+ideal critEq2 = Eeq2,
+  x1*diff(Eeq2,x1),x2*diff(Eeq2,x2),x3*diff(Eeq2,x3),
+  b*diff(Eeq2,b),c*diff(Eeq2,c);
+if (reduce(1,std(sat(critGt2,dIdeal))) == 0)
+{
+  print("m=0 beta>2 FREE");
+}
+else
+{
+  print("m=0 beta>2 HOLD");
+}
+if (reduce(1,std(sat(critEq2,dIdeal))) == 0)
+{
+  print("m=0 beta=2 FREE");
+}
+else
+{
+  print("m=0 beta=2 HOLD");
+}
+
+quit;
