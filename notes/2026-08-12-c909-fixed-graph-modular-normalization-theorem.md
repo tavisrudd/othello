@@ -7,20 +7,18 @@ manuscript, PDF, mirror, or Lean edit
 
 ## Fixed datum
 
-Fix the following finite presentation datum `tau`:
+Fix first the minimal coarse presentation datum `tau_0`:
 
-* an elliptic curve with the level needed to label its nonzero two-torsion
-  and the selected three-primary line;
+* the elliptic `X_0(3)` source with its cyclic subgroup of order three;
 * the coefficient polarization `6I_5-J_5` on its fifth power;
-* one of the two exotic self-dual two-primary graph coordinates, together
-  with the monodromy-selected scalar three-primary coordinate; and
-* the five ordered axes obtained by deleting one member of the six-axis
-  augmentation frame.
+* one of the two exotic self-dual two-primary graph coordinates; and
+* the unordered six-axis augmentation frame with its monodromy-selected
+  scalar three-primary orbit.
 
-Let `M_tau` be the resulting fixed-data modular presentation curve.  An
+Let `M_tau0` be the resulting coarse fixed-data modular presentation curve.  An
 object over a scheme is the elliptic source with this level structure and
 the quotient ppav determined by the fixed finite graph kernel.  After
-rigidifying the central `+/-1` inertia, `M_tau` is a normal finite cover of
+rigidifying the central `+/-1` inertia, `M_tau0` is a normal finite cover of
 the appropriate open of `X_0(3)`.  Its two-primary sign quotient has
 function field
 
@@ -35,15 +33,15 @@ same finite level refinement as above, the relative norm-axis construction
 defines a morphism
 
 ```text
-                         U_A5^sign --> M_tau.                (2)
+                         U_A5^sign --> M_tau0.               (2)
 ```
 
 The morphism is an open immersion onto the complement of the cubic boundary
-inside the normalization of `M_tau`'s image.  On coarse normal curves its
+inside the normalization of `M_tau0`'s image.  On coarse normal curves its
 function-field map is the identity
 
 ```text
- C(M_tau)=C(T,r)=C(t),       T=81t^2,       r=9t.            (3)
+ C(M_tau0)=C(T,r)=C(t),       T=81t^2,       r=9t.           (3)
 ```
 
 After forgetting the sign, the normalized reduced period image is
@@ -78,7 +76,11 @@ four cubic boundary values are exactly those in (4).  Strong Torelli rules
 out any additional generic identification on the cubic side; the generic
 projective normalizer quotient is already the sign involution `t |-> -t`.
 
-Stack inertia does not alter the conclusion.  Before rigidification the
+If one orders the axes, chooses a full symplectic basis of two-torsion, or
+adds full level at three, the resulting fine presentation curve is a finite
+cover of `M_tau0`; its function field need not equal `C(t)`.  The cubic
+family lifts only after the corresponding finite base change.  Stack
+inertia does not alter the coarse conclusion.  Before rigidification the
 central elliptic `[-1]` acts trivially on two-torsion and gives the standard
 generic automorphism gerbe; the equality of coarse function fields and the
 fixed level-labelled statement hold after the common finite cover.
@@ -99,9 +101,8 @@ fixed level-labelled statement hold after the common finite cover.
 
 ## Scope warning
 
-The phrase *fixed-data modular curve* includes the finite level labels in
-`tau`.  Without them, several stack quotients and automorphism identifications
-remain.  The theorem does not assert that every point of the compactified
+The function-field equality concerns the minimal coarse datum `tau_0`, not
+arbitrary full level.  Fine labels introduce finite covers rather than new
+geometric content.  The theorem does not assert that every point of the compactified
 modular curve comes from a smooth cubic, and it does not classify other
 fixed graph data whose modular curves meet the cubic period locus.
-
