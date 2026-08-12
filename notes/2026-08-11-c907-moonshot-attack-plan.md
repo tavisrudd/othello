@@ -175,6 +175,16 @@ extension, not merely its formal support.  See
 `2026-08-12-c907-v5-framed-support.md`, and
 `2026-08-11-c907-threefold-grading-boundary.md`.
 
+The v1 theorem also makes `nu_6` birationally invariant in dimensions at most
+four.  Hence the prime-Fano reconnaissance is now organized by
+stable-birational class.  The genus-twelve `V_22` row is zero via its landed
+Sarkisov links to `V_5` and `Q^3`; the cubic--`V_14` rank-two-bundle flop makes
+genus eight the same positive `nu_6` class as the cubic and proves
+`V_14 x P^1` irrational.  Direct operator work remains only for certification
+of genus six `V_10` and genera seven, nine, and ten.  See
+`2026-08-12-c907-low-dimensional-stable-birational-compression.md` and
+`2026-08-12-c907-portfolio-combination-leaves.md`.
+
 ## Wave 0 — freeze the invariant
 
 1. Define a fixed-phase object

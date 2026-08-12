@@ -132,6 +132,14 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   scalarization;
   non-WF/quotient mechanisms if admissible, and arbitrary non-Fano or non-nef
   threefolds.
+- The v1 blow-up formula also makes `nu_6` birationally invariant for smooth
+  projective varieties of dimension at most four, hence invariant under one
+  `P^1` stabilization of smooth threefolds.  The landed Sarkisov links give
+  `nu_6(V_22)=0`; Kuznetsov's rank-two-projectivization flop gives the cubic
+  `nu_6` multiplicity on every smooth genus-eight `V_14` and proves
+  `V_14 x P^1` irrational.  Thus direct non-WCI prime-Fano work remains only
+  for genus six `V_10` (certificate pending) and genera seven, nine, and ten.
+  See `../2026-08-12-c907-low-dimensional-stable-birational-compression.md`.
 
 ## Active frontier: `m=2`
 
@@ -167,6 +175,10 @@ overlaps.  Then identify
 the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
 parallel, continue the remaining non-WCI prime Fano scan for `nu_6>=4`.
+Use stable-birational compression before computing another scalar operator:
+genus eight and twelve are already closed.  The ranked portfolio leaves and
+the exact non-combinations are in
+`../2026-08-12-c907-portfolio-combination-leaves.md`.
 Do not differentiate in
 Novikov directions before the marked order-zero comparison passes.
 
