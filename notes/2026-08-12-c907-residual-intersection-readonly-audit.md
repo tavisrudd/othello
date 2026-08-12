@@ -100,6 +100,13 @@ simplex-free and the unique compact four-term circuit is exactly
 `f_Q+ZU`.  The remaining algebraic frontier is therefore Rees infinity, not
 the finite residual intersection.
 
+The exclusion is dimension-independent.  With `n` torus variables, simultaneous
+survival of all `x_i` and the reciprocal product term would require
+`p_i=m` for every `i` and `-sum p_i=m`, hence `(n+1)m=0`.  Thus for every
+positive normalization order the full simplex circuit is automatically absent;
+it can reappear only on the compact order-zero face.  This is the residual-chart
+counterpart of the two exterior Laurent support lemmas.
+
 ## Mystery ledger
 
 - **Settled:** all finite-Rees `B=C=1` faces for arbitrary `y` valuations.
