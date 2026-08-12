@@ -75,6 +75,26 @@ card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
 `../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
 authorized.
 
+The strict cycle-side C909 crown is now substantially stronger than the
+epilogue's cofactor lemma.  Projective finite-etale spectral packets give
+full ordinary cohomological `PD(NS)` saturation in every degree, intrinsically
+on the marked self-dual elliptic-power gluing presentation.  For every fixed
+dimension and odd prime there are compatible unbounded-level, pairwise
+nonisomorphic, polarized-indecomposable modular Hecke towers with this
+property.  Their ambient integral Hodge lattice is nevertheless larger:
+the exact codimension-two quotient is
+`(Z/p^a)^(C(g,4))`, and codimension three is
+`(Z/p^a)^(5C(g,5)+3C(g,6)) + (Z/p^(2a))^(C(g,6))`.
+Primitive doubled-slot embeddings extend these formulas to every degree with
+`min(k,g-k)<=3`, hence give the full graded classification through dimension
+seven.  Dimension eight in middle degree is the first open case.  Exact data
+through squarefree semilength six support a Dyck-height Smith formula, but it
+is quarantined behind an original nested-unit-minor theorem for the filtered
+web jet matrix; first-return and ordinary confluent-Vandermonde shortcuts do
+not prove it.  Current card: `../clebsch-tasks/c909-epilogue-math-level-ups.md`.
+No C907, C908, Chow, manuscript, PDF, mirror, or Lean promotion follows
+automatically.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.
