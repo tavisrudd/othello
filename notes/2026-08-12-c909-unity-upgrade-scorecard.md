@@ -31,13 +31,18 @@ Status: interim editorial mathematics assessment; no manuscript edit
    `Hdg^4/P^2=Hdg^6/P^3=(Z/p^a)^5` and zero codimension-four defect.  The
    theorem is about the entire Lefschetz algebra, not a hidden claim of full
    integral Hodge generation.
-7. **Orbit-axis family bridge (conditional on one normalization lemma).**
+7. **Orbit-axis family bridge (closed).**
    Integral subgroup norms construct the relative elliptic image schemes and
    canonical transports among the six axes.  Five primitive inclusions then
    give the relative isogeny.  In the cubic normalization the raw `D_5` norm
-   is twice the primitive Rosati endomorphism; proving that its image inclusion
-   and adjoint agree with Roulleau's relative elliptic fibration fixes the
-   `(5,-1)` Gram and closes the actual-kernel lift.
+   is twice the primitive Rosati endomorphism.  Connected fibres and the
+   `D_5` character calculation identify it with Roulleau's primitive
+   quotient, fixing the `(5,-1)` Gram and the actual kernel.
+8. **Prym-axis recognition (closed).**  The degree-five quotient Prym maps
+   to the primitive norm axis.  Norm--pullback and the independent axis
+   polarization both have exponent five, forcing the map to have degree
+   one.  Hence the explicit `r^2=T` resolvent marks the actual two-primary
+   kernel, not an auxiliary elliptic local system.
 
 ## Strength assessment
 
@@ -48,14 +53,15 @@ As mathematics added to the epilogue:
  generality of the cycle mechanism         91/100
  conceptual unity of the cycle branch      94/100
  unity of cycle and quantum branches        77/100
- new geometric consequences for cubics     72/100
+ new geometric consequences for cubics     79/100
  standalone novelty of modular group theory 35/100
  novelty of its integral saturation use     84/100
 ```
 
 The upgrade is substantial because it changes the special calculation into
-a general theorem and reveals the `A_5` pencil as a modular Cartan-level
-realization.  It does not yet supply a second cubic family or a common
+a general theorem, constructs the relative marked isogeny rather than
+postulating it, and reveals the `A_5` pencil as a modular Cartan-level
+realization.  It does not supply a second cubic family or a common
 cycle--quantum invariant.  Accordingly it raises the epilogue's coherence
 and referee confidence more than its headline theorem reach.
 
@@ -101,10 +107,8 @@ Putting them all in the epilogue would dilute the cubic theorem.
 
 1. hostile audit of the general Borel/Cartan packet theorem, especially
    projective monodromy and stack inertia at odd primes;
-2. print the relative six-axis isogeny/graph lift before calling the `A_5`
-   curve a component of a fixed-data stack;
-   the orbit-axis theorem reduces this to the primitive Roulleau
-   quotient/norm-image comparison and the Tate/Prym two-torsion comparison;
+2. phrase the `A_5` result as a presentation curve in one fixed-data marked
+   stack, not as a connected component of the full Hecke union;
 3. either prove the relative line-bundle descent lemma or retain pointwise
    saturation only;
 4. bounded priority audit for the combined Cartan-level integral saturation
@@ -119,6 +123,8 @@ Putting them all in the epilogue would dilute the cubic theorem.
   divided-power algebra, not all Hodge classes.
 * **Settled:** a fixed modular datum either meets cubic periods finitely or
   supports a whole shared curve.
+* **Settled:** the quotient Prym is the primitive norm axis, so `r^2=T`
+  marks the actual two-primary kernel.
 * **Open:** classify the fixed data which support shared cubic curves.
 * **Open:** find a second moving cubic component; bounded source audit found
   none.
