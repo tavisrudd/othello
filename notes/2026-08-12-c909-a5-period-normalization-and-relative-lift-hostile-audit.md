@@ -76,11 +76,11 @@ It is conditional only on the recorded generic-automorphism/normalizer
 calculation; it is not supplied by the \(j\)-formula alone.
 
 Under this lemma, strong Torelli makes the map
-\(U_{\rm cub}\to\mathcal A_5\) generically injective.  Since (U_{\rm cub})
+\(U_{\rm cub}\to\mathcal A_5\) generically injective.  Since \(U_{\rm cub}\)
 is normal, it is the normalization of its *reduced period-image curve* after
 the usual removal of finitely many points needed to make the map finite onto
 its image.  This proves an abstract normalization assertion.  It neither
-proves that the ppav variation is the universal (X_0(3)) graph family nor
+proves that the ppav variation is the universal \(X_0(3)\) graph family nor
 constructs a graph presentation.
 
 ## 2. What the quadratic equality does and does not prove
@@ -137,9 +137,9 @@ half \(K\).  In particular:
   fibrewise kernel with the desired graph.
 
 Equivalently, the first missing lemma is an integral polarized
-(A_5)-multiplicity comparison of the relative (H^3) lattice with the
+\(A_5\)-multiplicity comparison of the relative \(H^3\) lattice with the
 elliptic rank-two system, including one primitive lattice/polarization test.
-Only after it supplies (f) can one compute and globalize (K).  This is
+Only after it supplies \(f\) can one compute and globalize \(K\).  This is
 the exact C904 integral-lattice gate, rather than a routine relative
 Albanese lemma.
 
@@ -152,10 +152,10 @@ over which the asserted algebraic lift is automatically defined.
 ## 4. Consequence for relative divisor cycles
 
 There is a correct conditional horizontal-cycle theorem.  Suppose the
-previous paragraph has produced (f) and (K), and suppose moreover that
+previous paragraph has produced \(f\) and \(K\), and suppose moreover that
 each finite list of rank-one coefficient divisor forms used in the C909
-divided-power identity is represented by a **(K)-linearized rigidified
-line bundle** on (\mathcal E^5).  Then those bundles descend to
+divided-power identity is represented by a **\(K\)-linearized rigidified
+line bundle** on \(\mathcal E^5\).  Then those bundles descend to
 \(\mathcal J\); the fixed integral rank-one identity gives a relative cycle
 
 \[
@@ -182,11 +182,11 @@ required.  The fibrewise C909 PD-saturation theorem is unaffected.
 The publishable current statement is therefore:
 
 > The unmarked A5 cubic parameter curve has coarse coordinate
-> (T=81t^2) and is, at the elliptic multiplicity-system level, (X_0(3)).
+> \(T=81t^2\) and is, at the elliptic multiplicity-system level, \(X_0(3)\).
 > Assuming the generic normalizer calculation, strong Torelli identifies
 > the normalization of its reduced period image with the corresponding
-> smooth open (U_{\rm cub}).  Its signed cover is the elliptic exotic
-> discriminant torsor (r^2=T).  A lift to the fixed-data finite-etale graph
+> smooth open \(U_{\rm cub}\).  Its signed cover is the elliptic exotic
+> discriminant torsor \(r^2=T\).  A lift to the fixed-data finite-etale graph
 > stack, and hence a relative horizontal minimal-class cycle, is conditional
 > on the integral polarized relative isogeny/kernel and the requisite
 > theta-group linearizations.
@@ -198,7 +198,7 @@ until those two explicit constructions are printed.
 ## Pointers
 
 * `notes/2026-08-12-c904-a5-period-and-exotic-cover-audit.md` separates the
-  elliptic (X_0(3)) calculation from the full ppav assertion and records
+  elliptic \(X_0(3)\) calculation from the full ppav assertion and records
   the four cubic boundary values.
 * `notes/2026-08-10-c904-integral-multiplicity-lattice-ceiling.md` isolates
   the rational comparison, primitive integral test, and polarization scalar
