@@ -164,9 +164,12 @@ application or an exact obstruction to necessity.
    the distinguished principal polarization as an integral signed sum of
    square-zero divisor classes. Hence `Theta^k/k!` lies in the ordinary
    `k`-fold divisor-product image for every `0 <= k <= g`, with faithful-flat
-   descent and no factorial. This is cohomological, not a Chow identity. A
-   full divided-power theorem for every Neron--Severi class remains gated by
-   higher-depth cross-block terms.
+   descent and no factorial. More strongly, on a pure equal-depth `p^a` block
+   the complete graph Neron--Severi lattice is rank-one generated, including
+   its exact `p^(2a)` cross-eigenblock terms. Thus its full divided-power
+   envelope equals the ordinary divisor-product image in every degree. This
+   is cohomological, not a Chow identity; mixed unit/primary and unequal-depth
+   blocks remain gated by a valuation-compatible straightening theorem.
 5. **Atomic boundary.** Ordinary abstract carrier height proves exactly the
    `P^1` stabilization and is silent at `P^2`. Every additive refinement of
    the ordinary chemical formula is merely an atom weight and cannot recover
@@ -182,9 +185,10 @@ application or an exact obstruction to necessity.
 
 ## Highest-EV next moves
 
-1. Decide whether the higher-depth cross-block graph divisor terms also admit
-   rank-one square-zero generation; this is the exact gate from the proved
-   polarization theorem to a full divided-power theorem for `NS`.
+1. Extend the equal-depth rank-one straightening theorem to mixed
+   unit/primary and unequal-depth primary blocks, or find the first exact
+   valuation obstruction. This is the remaining gate to a full marked
+   finite-etale `PD(NS)` theorem.
 2. Give the dyadic root isometry `I+J ~= H^q` a printed constructive induction
    or a pinpoint primary citation before manuscript promotion.
 3. Integrate the all-degree finite-etale theorem into the epilogue only after
