@@ -159,6 +159,10 @@ quantum-\(D\)-module isomorphism
 over a Laurent extension in the exceptional Novikov variable
 \cite[Theorem~5.18]{IritaniBlowup}.  The isomorphism and its inverse use only
 integral powers of \(z\), and the mirror coordinates are independent of \(z\).
+The comparison field adjoins \(q^{-1/s_c}\), where
+\(s_c=c-1\) for even \(c\) and \(s_c=2(c-1)\) for odd \(c\); this is only a
+coefficient extension.  The reconstruction coordinate below is
+\(u=q^{-1/(c-1)}\).
 The center base shift is controlled before passage to the final Laurent
 chart.  Put \(u=q^{-1/(c-1)}\) and use the reconstruction coordinates of
 \cite[Section~5.8.2]{IritaniBlowup}:
@@ -206,6 +210,9 @@ is injective because
 extension preserves the intrinsic endpoint characteristic polynomials.
 
 The projective-bundle proof is parallel, again in reconstruction coordinates.
+Its comparison field adjoins \(q^{-1/r'}\), with \(r'=r\) when \(r-1\) is
+even and \(r'=2r\) when \(r-1\) is odd; the reconstruction coordinate remains
+\(u=q^{-1/r}\).  The extra root is again a coefficient extension.
 Put \(u=q^{-1/r}\).  For its \(j\)-th target summand let \(R_j\) be the image
 of \(Q_T^d\mapsto Q^d u^{c_1(V)\cdot d}\), together with \(u\) and \(s_j\),
 and set
@@ -255,6 +262,9 @@ associated graded, every monomial has nonzero image, and
 \]
 where \(\ell\) is positive and proper on the effective numerical monoid.
 \end{definition}
+
+We write \(\nu_6(T;\chi)\) for the framed small-even invariant after scalar
+extension along such a map.
 
 The center maps in (4.3) are strictly admissible.  Give the exceptional
 Laurent variable valuation zero and use an ample divisor \(H\) on \(T\).  Then
@@ -354,8 +364,11 @@ the same dimension at most four, then
  \nu_6(Y)=\nu_6(Y').
  \tag{4.8}
 \]
-Consequently \(\nu_6\) is invariant under one \(\PP^1\)-stabilization of
-smooth projective threefolds.
+Consequently, for smooth projective threefolds,
+\[
+ Y\times\PP^1\dashrightarrow Y'\times\PP^1
+ \quad\Longrightarrow\quad \nu_6(Y)=\nu_6(Y').
+\]
 \end{theorem}
 
 \begin{proof}
@@ -394,7 +407,7 @@ polynomial
 with roots \(-1/6\) and \(-5/6\) \cite[Section~3 and Proposition~6]{Cai}.  His gauge uses only
 integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
 are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
-blocks have integral residues, hence contribute no primitive sixth root.
+blocks have formal-monodromy factor \(1\), hence contribute no primitive sixth root.
 Thus the multiplicity is exactly two.  The numerical curve lattice of a cubic
 threefold has rank one, so the numerical-Novikov convention does not change
 the calculation.
