@@ -150,7 +150,9 @@ Iritani identifies the residual Gamma lattice with the Orlov subgroup, not the
 individual Beilinson thimbles.  See
 `2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`,
 `2026-08-11-c907-pole-channel-normal-crossing-excision.md`, and
-`2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
+`2026-08-11-c907-toric-order-zero-stokes-assembly.md`.  The exact finite
+proof object is specified in
+`2026-08-12-c907-tangent-jacobian-fan-certificate-spec.md`.
 
 Wave-2C status: ordinary cohomological grading and duality do not bound the
 length—an explicit self-dual formal length-two model survives.  The first

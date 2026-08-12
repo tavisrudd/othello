@@ -145,6 +145,8 @@ Local pole-channel model:
 `../2026-08-11-c907-pole-channel-normal-crossing-excision.md`.
 Toric assembly:
 `../2026-08-11-c907-toric-order-zero-stokes-assembly.md`.
+Tangent-Jacobian replay specification:
+`../2026-08-12-c907-tangent-jacobian-fan-certificate-spec.md`.
 Threefold grading boundary:
 `../2026-08-11-c907-threefold-grading-boundary.md`.
 First residual jet:
