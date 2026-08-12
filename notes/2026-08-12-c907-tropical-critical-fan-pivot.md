@@ -76,6 +76,17 @@ and escapes the bounded value window.  Thus every actual bounded torus
 critical arc is residual.  The fan computation is needed only for tangential
 critical schemes created on boundary strata.
 
+On this open graph, the relative cotangent quotient has the one-row
+presentation whose entries are
+
+\[
+ D_{y_1}P,D_{y_2}P,D_{y_3}P,D_BP,D_CP.
+\]
+
+Thus its `Fitt_4` is exactly the five-derivative ideal yielding (2).  This is
+only an open-torus regression: Fitting ideals do not in general commute with
+initial degeneration or base change.
+
 Compute a relative comprehensive Gröbner fan in the
 `(y_1,y_2,y_3,B,C,delta)` weights with `w_delta>0` and `w_L=0`, including
 parameter-special `L` strata.  For each cone `sigma` and toric orbit
@@ -90,6 +101,9 @@ parameter-special `L` strata.  For each cone `sigma` and toric orbit
 \]
 
 Resolve any non-schön or nonsmooth initial scheme before testing criticality.
+In particular, the fan produces `rad(sat(in_w I))`, not its normalization.
+Every chart must compute its finite normalization (or integral generators)
+before the reduced-stratum cotangent/Fitting calculation.
 
 Let `T_sigma` be the kernel of the full tangent Jacobian of (2) at fixed
 `delta`, with `L` included among the tangent variables.  Define
