@@ -1,32 +1,32 @@
-import RelativeConicArcs.Gates.PassantCodeQ13
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate
 
 /-!
 # Axiom audit for the shared q=13 passant-code semantics
 
 The commands print the axiom dependencies of the cardinality, rank transport, tangent-graph, and
-reconstruction-interface terminals exported by `RelativeConicArcs.Gates.PassantCodeQ13`.
+reconstruction-interface terminals exported by `TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate`.
 -/
 
-#print axioms RelativeConicArcs.PassantCodeQ13.internalPoint_card
-#print axioms RelativeConicArcs.PassantCodeQ13.passantLine_card
-#print axioms RelativeConicArcs.PassantCodeQ13.passantCode_finrank_eq_thirtySix
-#print axioms RelativeConicArcs.PassantCodeQ13.WeightEight.fourCliques_length
-#print axioms RelativeConicArcs.PassantCodeQ13.WeightEight.fourClique_unique_extension_check
-#print axioms RelativeConicArcs.PassantCodeQ13.WeightEight.fiveCliqueCodes_length
-#print axioms RelativeConicArcs.PassantCodeQ13.WeightEight.fiveClique_maximality_check
-#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightEight_semantic_transport
-#print axioms RelativeConicArcs.PassantCodeQ13.reconstructedRows_eq_passantRows
-#print axioms RelativeConicArcs.PassantCodeQ13.passantRow_card
-#print axioms RelativeConicArcs.PassantCodeQ13.reconstructedRows_eq_passantRows_of_sevenSet_transport
-#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_profile_reduction
-#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_isolated_fibre_profile
-#print axioms RelativeConicArcs.Gates.PassantCodeQ13.weightTen_cycle_fibre_profile
-#print axioms RelativeConicArcs.PassantCodeQ13.WeightTen.not_passantJoin_iff_secantJoin
-#print axioms RelativeConicArcs.Gates.PassantCodeQ13.arbitrary_weightTen_profile_transport
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.seven_positive_fibres_sum_seven
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.seven_positive_odd_fibres_sum_nine
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.association_kernel_rigidity
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relationOnKernel_surjective
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.relation_range_eq_kernel
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.factorization_forces_orbit_span
-#print axioms RelativeConicArcs.PassantCodeQ13.LogicalSpine.four_anchor_rigidity
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.internalPoint_card
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.passantLine_card
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.passantCode_finrank_eq_thirtySix
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight.fourCliques_length
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight.fourClique_unique_extension_check
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight.fiveCliqueCodes_length
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight.fiveClique_maximality_check
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.reconstructedRows_eq_passantRows
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.passantRow_card
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.reconstructedRows_eq_passantRows_of_sevenSet_transport
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_cycle_fibre_profile
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightTen.not_passantJoin_iff_secantJoin
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.arbitrary_weightTen_profile_transport
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.seven_positive_fibres_sum_seven
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.seven_positive_odd_fibres_sum_nine
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.association_kernel_rigidity
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.relationOnKernel_surjective
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.relation_range_eq_kernel
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.factorization_forces_orbit_span
+#print axioms TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine.four_anchor_rigidity

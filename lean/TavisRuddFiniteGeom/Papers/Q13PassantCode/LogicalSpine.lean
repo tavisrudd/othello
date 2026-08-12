@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.AssociationAlgebra
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.AssociationAlgebra
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-!
@@ -11,7 +11,7 @@ relation operator invertible on the code kernel, and the four-anchor argument re
 classification to three geometric rigidity inputs.  No theorem here runs a finite computation.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13.LogicalSpine
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine
 
 open Finset
 
@@ -286,4 +286,4 @@ theorem four_anchor_transport_rigidity
 
 end AnchorTransports
 
-end RelativeConicArcs.PassantCodeQ13.LogicalSpine
+end TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine

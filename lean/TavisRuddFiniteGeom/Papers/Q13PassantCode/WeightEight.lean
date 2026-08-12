@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.PencilJoins
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilJoins
 import Mathlib.Data.Fintype.EquivFin
 
 /-!
@@ -25,7 +25,7 @@ four-clique sets with the four-element clique subsets of the ambient powerset is
 computed, since materializing that powerset is not feasible for the kernel.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13.WeightEight
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight
 
 open Finset
 
@@ -628,4 +628,4 @@ theorem no_normalized_weightEight_codeword_of_tangent_holonomy
   exact ⟨distinct, tangent_identity first first_mem first_ne_base
     second second_mem second_ne_base distinct⟩
 
-end RelativeConicArcs.PassantCodeQ13.WeightEight
+end TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight

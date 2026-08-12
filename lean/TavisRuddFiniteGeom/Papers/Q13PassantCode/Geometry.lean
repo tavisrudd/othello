@@ -15,7 +15,7 @@ normalized projective triples; they do not classify codewords or establish the r
 distance of the code.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 open Finset
 
@@ -192,4 +192,4 @@ theorem mem_passantCode_iff_row_sums (word : InternalPoint → ZMod 2) :
           word point * ConicPassantCode.incidenceBit Incident line point = 0 :=
   ConicPassantCode.mem_code_iff_row_sums Incident word
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

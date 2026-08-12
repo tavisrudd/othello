@@ -1,9 +1,9 @@
-import RelativeConicArcs.PassantCodeQ13.PencilIncidence
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilIncidence
 
 /-!
 # Passant and secant joins of internal points, on the subtype model
 
-The finite pencil facts of `RelativeConicArcs.PassantCodeQ13.PencilIncidence` are stated on the
+The finite pencil facts of `TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilIncidence` are stated on the
 displayed coordinate lists of the normalized `q = 13` model.  This module transports them to the
 subtypes `InternalPoint`, `PassantLine`, and `SecantLine` used by the geometric
 arguments: the passant pencil of an internal point has exactly seven members, the row of a passant
@@ -14,7 +14,7 @@ Nothing here performs a finite computation; every step is either a membership tr
 displayed list and its coordinate finset, or a rearrangement of the corresponding list statement.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 open Finset
 
@@ -275,4 +275,4 @@ theorem no_common_passantLine_iff_common_secantLine {base point : InternalPoint}
     rw [passant_flag, secant_flag] at dichotomy
     simp at dichotomy
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

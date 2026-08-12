@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.Reconstruction
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Reconstruction
 import Mathlib.Tactic
 
 /-!
@@ -10,7 +10,7 @@ the pencil-conic discriminant identity, and the irreducible-cubic operator reduc
 q=13 matrices and orbit tables belong to the paper-owned certificate package.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 open Finset
 
@@ -138,4 +138,4 @@ structure RecoveredConicPlane where
 
 attribute [instance] RecoveredConicPlane.pointFintype RecoveredConicPlane.lineFintype
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

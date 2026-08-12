@@ -1,8 +1,8 @@
-import RelativeConicArcs.PassantCodeQ13.Rank
-import RelativeConicArcs.PassantCodeQ13.WeightEight
-import RelativeConicArcs.PassantCodeQ13.WeightTen
-import RelativeConicArcs.PassantCodeQ13.Reconstruction
-import RelativeConicArcs.PassantCodeQ13.LogicalSpine
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Rank
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightTen
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Reconstruction
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine
 
 /-!
 # Semantic gate for the passant incidence code over `ZMod 13`
@@ -20,9 +20,9 @@ association-kernel, and four-anchor deductions without native evaluation; certif
 reserved for their bounded geometric inputs.
 -/
 
-namespace RelativeConicArcs.Gates.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate
 
-open RelativeConicArcs.PassantCodeQ13
+open TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 /-- The shared q=13 geometry fixes 78 code coordinates and 78 passant checks. -/
 theorem incidence_shape :
@@ -100,4 +100,4 @@ theorem arbitrary_weightTen_profile_transport
     WeightTen.WeightTenPencilProfile (CodingBridge.hammingSupport word) base :=
   WeightTen.arbitrary_weightTen_word_has_pencil_profile word word_mem weight base base_mem
 
-end RelativeConicArcs.Gates.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate

@@ -1,5 +1,5 @@
-import RelativeConicArcs.PassantCodeQ13.AssociationAlgebra
-import RelativeConicArcs.PassantCodeQ13.PencilJoins
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.AssociationAlgebra
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilJoins
 
 /-!
 # Reconstruction from the minimum-support hypergraph
@@ -14,7 +14,7 @@ relations, and equality of the reconstructed and geometric row families.  Conseq
 cannot obtain a reconstruction theorem from hashes or from a sampled list alone.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 open Finset
 
@@ -143,4 +143,4 @@ theorem reconstructedRows_eq_passantRows_of_sevenSet_transport
         ((ConicPassantCode.mem_rowSupport Incident line third).mp
           (triple_mem.1 third_mem)) first_ne_second first_ne_third second_ne_third
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.Geometry
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Geometry
 
 /-!
 # Rank semantics for the q=13 passant incidence code
@@ -12,7 +12,7 @@ No rank value is assumed or asserted in this module.  A finite certificate packa
 `IncidenceMapHasRankFortyTwo` by checking row operations against the concrete incidence relation.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 /-- The concrete binary passant-incidence linear map. -/
 def incidenceMap :
@@ -35,4 +35,4 @@ theorem passantCode_finrank_eq_thirtySix
   change Module.finrank (ZMod 2) (LinearMap.ker incidenceMap) = 36
   omega
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

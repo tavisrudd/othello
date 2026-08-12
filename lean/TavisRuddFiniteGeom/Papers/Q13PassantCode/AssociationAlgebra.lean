@@ -1,4 +1,4 @@
-import RelativeConicArcs.PassantCodeQ13.Geometry
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Geometry
 
 /-!
 # Elliptic relations and concurrence colors over `ZMod 13`
@@ -16,7 +16,7 @@ q=13 intersection table or identify concurrence colors; those bounded leaves are
 certificate package and transported through `ConcurrenceRecoversRelations`.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 open Finset
 
@@ -93,4 +93,4 @@ structure ConcurrenceRecoversRelations (minimumSupports : Finset (Finset Interna
               ConicPassantCode.tripleConcurrence minimumSupports first second third).card))) =
       color relation → HasRelation relation first second
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

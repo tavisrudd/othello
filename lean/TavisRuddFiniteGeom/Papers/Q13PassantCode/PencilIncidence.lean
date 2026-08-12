@@ -1,9 +1,9 @@
-import RelativeConicArcs.PassantCodeQ13.Geometry
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.Geometry
 
 /-!
 # Pencils of passant and secant lines through the internal points of the standard conic
 
-Fix the normalized coordinate model of `RelativeConicArcs.PassantCodeQ13.Geometry` for the conic
+Fix the normalized coordinate model of `TavisRuddFiniteGeom.Papers.Q13PassantCode.Geometry` for the conic
 `XZ - Y^2 = 0` over `ZMod 13`: internal points are the normalized projective triples on which
 `Y^2 - XZ` is a nonsquare, passant lines are the normalized dual triples on which `Y^2 - 4XZ` is a
 nonsquare, secant lines are the normalized dual triples on which `Y^2 - 4XZ` is a nonzero square,
@@ -25,10 +25,10 @@ pencil table over the 78 internal points and a row table over the 78 passant lin
 statements then range over the ordered pairs of pencil-table entries.  No step uses native evaluation, an external certificate, or a
 search over the ambient projective plane.  The transport of these statements to the subtypes
 `InternalPoint` and `PassantLine` is carried out in
-`RelativeConicArcs.PassantCodeQ13.PencilJoins`.
+`TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilJoins`.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode
 
 set_option maxRecDepth 20000
 
@@ -104,4 +104,4 @@ theorem pencilTable_passant_secant_dichotomy :
           !(commonPencilLines first.2.2 second.2.2).isEmpty)) = true := by
   decide +kernel
 
-end RelativeConicArcs.PassantCodeQ13
+end TavisRuddFiniteGeom.Papers.Q13PassantCode

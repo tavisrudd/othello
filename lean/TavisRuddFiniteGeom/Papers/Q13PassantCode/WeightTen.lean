@@ -1,5 +1,5 @@
-import RelativeConicArcs.PassantCodeQ13.LogicalSpine
-import RelativeConicArcs.PassantCodeQ13.WeightEight
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight
 
 /-!
 # Pencil profiles of weight-ten words in the q=13 passant code
@@ -16,11 +16,11 @@ finite certificates: one fibre of size three and six singleton fibres with no se
 seven singleton fibres with two secant neighbors.  Its finite geometric inputs are the seven
 passant lines through an internal point, uniqueness of the joining passant line, and the
 identification of the complementary joins with conic secants.  All three are supplied by
-`RelativeConicArcs.PassantCodeQ13.PencilJoins` and are checked by kernel reduction on the fixed
+`TavisRuddFiniteGeom.Papers.Q13PassantCode.PencilJoins` and are checked by kernel reduction on the fixed
 78-point normalized model.
 -/
 
-namespace RelativeConicArcs.PassantCodeQ13.WeightTen
+namespace TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightTen
 
 open Finset
 
@@ -346,4 +346,4 @@ theorem arbitrary_weightTen_word_has_pencil_profile
     obtain ⟨position, rfl⟩ := index.surjective line
     exact all_one position
 
-end RelativeConicArcs.PassantCodeQ13.WeightTen
+end TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightTen
