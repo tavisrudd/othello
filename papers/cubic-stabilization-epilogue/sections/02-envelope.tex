@@ -118,10 +118,14 @@ For \(H\in\Omega\), the integral norm
 \(n_H=\sum_{h\in H}h\) is a relative endomorphism of \(\mathcal J\).  Its
 image has constant dimension one: on rational homology it is ten times the
 projector onto the one-dimensional \(H\)-fixed line in the five-dimensional
-coefficient representation.  Thus its connected image is an elliptic
-subscheme \(\mathcal E_H\subset\mathcal J\): the scheme-theoretic image of
-a constant-rank homomorphism of abelian schemes is an abelian subscheme.  The
-subgroup \(H\) acts trivially on this image.  Moreover
+coefficient representation.  More concretely,
+\(n_H^2=10n_H\).  Since \(10\) is invertible on the complex base, the
+differential of \(n_H\) is a projector up to an invertible scalar.  Its
+kernel has constant dimension, its identity component is an abelian
+subscheme, and the induced finite-kernel quotient map has an elliptic abelian
+scheme as its image.  Denote this connected image by
+\(\mathcal E_H\subset\mathcal J\).  The subgroup \(H\) acts trivially on
+this image.  Moreover
 \(N_{A_5}(H)=H\), so transport by an element carrying \(H\) to \(H'\) is
 independent of the chosen transporter.  The six elliptic schemes are
 therefore coherently isomorphic; fix one of them as \(\mathcal E\).
@@ -231,9 +235,12 @@ To pass from the generic fibre to the family, put
 By Lemma~\ref{lem:relative-six-axis}, this is the five-sheet local system of
 \(A_5\)-stable principal halves.  It has the degree-three sub-local system
 \(\mathscr P_{\rm rat}=\PP_{\F_2}(\mathscr V)\) and the degree-two
-complement \(\mathscr P_{\rm ex}\): monodromy acts through
-\(\operatorname{GL}_2(\F_2)\), so it preserves both subsets.  The relative
-kernel \(\mathscr K_2\) gives a section of \(\mathscr P\).
+complement \(\mathscr P_{\rm ex}\).  Here \(H_2\), together with its
+commutant \(\F_4\), is constant, while monodromy acts only on
+\(\mathscr V\).  Its action is therefore \(\F_4\)-linear, not semilinear,
+and factors through \(\operatorname{GL}_2(\F_2)\); in particular it
+preserves both subsets.  The relative kernel \(\mathscr K_2\) gives a
+section of \(\mathscr P\).
 
 At the geometric generic point this section cannot be rational.  Otherwise
 the natural faithful \(S_6\)-action on
