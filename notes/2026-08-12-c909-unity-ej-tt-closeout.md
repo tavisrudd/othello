@@ -57,21 +57,28 @@ why another cubic family cannot be expected by generic intersection: a fixed
 modular curve meets cubic periods only finitely unless a whole modular
 coincidence is present.
 
+A third gain closes the former relative gate.  Subgroup norms construct the
+actual relative six-axis isogeny; the quotient-Prym map lands in its primitive
+fixed axis.  The general Prym-axis index formula says that quotient degree
+`m` and scalar axis exponent `e` force isogeny degree `(m/e)^r`.  Here
+`m=e=5`, so the explicit Prym is the primitive axis.  Packet naturality then
+identifies `r^2=T` with the actual exotic kernel-marking torsor.
+
 ## TT pass
 
-The hostile correction is decisive.  The exact `j`-map and Torelli identify
-the normalization of the reduced cubic period-image curve, and `r=9t`
-identifies the elliptic marking cover.  They do **not** construct a relative
-integral polarized isogeny `E^5-->J` or its graph kernel.  Full level can
-trivialize an existing subgroup, not create the integral lattice.  Likewise,
+The hostile correction remains decisive as proof organization: the exact
+`j`-map and Torelli do **not** construct a relative integral polarized
+isogeny or graph kernel.  That arrow is now supplied independently by
+subgroup norms, Roulleau's connected quotient, and the primitive Prym-axis
+formula.  Full level only labels the resulting subgroup.  Likewise,
 relative Neron--Severi sections need not lift to line bundles after finite
 etale base change; a Picard torsor can remain nontrivial.
 
-Therefore the shared fixed-stack component and horizontal minimal-cycle
-statements remain conditional.  The precise integral gate is much smaller
-than a global census: `Gamma_0(3)` rigidity leaves only two 3-adic endpoints,
-so one rational VHS/motive comparison, one primitive fibre test, and one
-polarization scalar decide the relative lattice.
+Therefore the smooth fixed-data presentation curve is now unconditional,
+while a horizontal minimal-cycle statement remains conditional.  The
+minimal sign-marked curve has function field `C(T,r)=C(t)`; full two-torsion
+or ordered-axis level introduces further finite covers and must not be
+silently identified with it.
 
 ## Mystery ledger
 
@@ -88,26 +95,20 @@ polarization scalar decide the relative lattice.
    shared curve.
 6. The common Eisenstein order is real coefficient arithmetic, but not a
    common geometric invariant.
+7. The quotient Prym equals the primitive norm axis; the actual relative
+   graph kernel and its `r^2=T` marking are constructed.
 
 ### Open with exact gate
 
-1. **Relative integral graph lift:** prove the rational `A_5` multiplicity
-   comparison, choose one of the two `Gamma_0(3)` integral endpoints at one
-   fibre, and fix the polarization scalar.  A new orbit-axis route may close
-   this without periods: integral subgroup norms construct the relative
-   elliptic image schemes and canonical conjugacy transports; the remaining
-   check is that Roulleau's primitive Albanese-dual inclusions globalize on
-   those images with Gram `(5,-1)`.  Owner: C909 if pursued as proof
-   compression; it does not require C908 Chow descent.
-2. **Horizontal minimal cycle:** after the integral lift, construct the
+1. **Horizontal minimal cycle:** construct the
    finite list of kernel-linearized relative coefficient line bundles.
    Unmarked descent and relative diagonal remain C908 territory.
-3. **Shared Cartan/quantum torsor:** construct a nontrivial quantum
+2. **Shared Cartan/quantum torsor:** construct a nontrivial quantum
    `Z[zeta_3]` orientation torsor and compare its `H^1(C_2)` class with the
    exotic selector.  No current evidence makes this likely.
-4. **Second cubic component:** bounded source audit found none.  The cyclic
+3. **Second cubic component:** bounded source audit found none.  The cyclic
    and `A_4` loci are candidates only; Klein is a point on the known curve.
-5. **All-degree ambient Hodge defect:** dimension eight middle degree remains
+4. **All-degree ambient Hodge defect:** dimension eight middle degree remains
    behind the nested unit-minor theorem.  This is a successor-paper crown,
    not epilogue unity.
 
@@ -118,11 +119,12 @@ Promote to the epilogue, after theorem-local reproof and priority audit:
 * the full finite-etale Lefschetz saturation theorem;
 * the fixed-data separation-locus corollary;
 * the `p=2` complementary modular resolvent diagram and `r=9t` identity;
+* the orbit-axis Prym formula and actual `A_5` presentation curve;
 * the finite-or-shared-component proposition, if the moduli language is used.
 
 Keep out of the epilogue body:
 
-* the unproved relative integral graph lift and horizontal cycle;
+* the horizontal cycle and any boundary/log extension;
 * the odd-prime conditional Cartan generalization beyond one brief remark;
 * the full Hodge-defect formulas and Dyck conjecture;
 * any claim of a common cycle--quantum torsor.
