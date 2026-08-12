@@ -1,0 +1,23 @@
+{
+  "schema": "cubic-stabilization-lean-claims-v1",
+  "reviewer_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
+  "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
+  "claims": [
+    {
+      "manuscript_label": "lem:rank-one-generation",
+      "status": "partial",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity"
+      ],
+      "scope": "The division-free coefficient identity is kernel checked; the full weighted-lattice generation theorem is not yet included."
+    },
+    {
+      "manuscript_label": "thm:birational-nu6",
+      "status": "partial",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain"
+      ],
+      "scope": "The factorization telescope is kernel checked; the quantum operation formulas, center vanishing, and weak-factorization input remain cited mathematical premises."
+    }
+  ]
+}

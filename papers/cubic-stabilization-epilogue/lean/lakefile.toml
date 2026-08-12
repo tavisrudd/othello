@@ -1,0 +1,15 @@
+name = "CubicStabilizationEpilogue"
+defaultTargets = ["CubicStabilizationEpilogue"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
+
+[[lean_lib]]
+name = "CubicStabilizationEpilogue"
+roots = ["TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface"]
+
+[[lean_lib]]
+name = "CubicStabilizationEpilogueVerification"
+roots = ["TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit"]
