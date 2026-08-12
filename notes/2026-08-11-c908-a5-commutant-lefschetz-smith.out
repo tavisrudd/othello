@@ -7,6 +7,8 @@ group: matrix order=60; source is A_5=True; traces={'order1': {'10': 1}, 'order5
 (a) gluing scan over all 20 principal gluings: commutant dims=[4, 5]; noncommutative cases=20
 (b) twisted intertwiners dim=4; invertible=12; involutions s with s w s = w^2=30; all symplectic mod 2=True
 (b) commutant fixed by w: 4 of 16; fixed by s: 4 (F_2-dim 2); distinct fixed subalgebras=3; F_4-part fixed by s = {0,1}: True
+(b) joint S_3-invariants (fixed by both w and s): sizes=[2]; equal {0,1} = F_2 for every s: True
+(a) gluing detail: [('infinity', '0', 5), ('infinity', '1', 5), ('infinity', '2', 5), ('infinity', 'infinity', 5), ('omega', '0', 4), ('omega', '1', 4), ('omega', '2', 4), ('omega', 'infinity', 4), ('omega2', '0', 4), ('omega2', '1', 4), ('omega2', '2', 4), ('omega2', 'infinity', 4), ('one', '0', 5), ('one', '1', 5), ('one', '2', 5), ('one', 'infinity', 5), ('zero', '0', 5), ('zero', '1', 5), ('zero', '2', 5), ('zero', 'infinity', 5)]
 (c) L_3: Lambda^3 -> Lambda^5 shape=[120, 252] rank=120 divisors={'1': 110, '2': 10}
 (d) L_5: Lambda^5 -> Lambda^7 shape=[252, 120] rank=120 divisors={'1': 110, '2': 10}
 control L_1: Lambda^1 -> Lambda^3 divisors={'1': 10}

@@ -735,6 +735,7 @@
     "F4_fixed_part_is_exactly_zero_and_identity": true,
     "F4_subalgebra_elements_fixed_by_s": 2,
     "all_such_s_are_symplectic_mod_two": true,
+    "centralizer_of_w_in_the_commutant": 4,
     "commutant_elements_fixed_by_conjugation_by_s": 4,
     "commutant_elements_fixed_by_conjugation_by_w": 4,
     "f2_dimension_of_the_s_fixed_part_of_the_commutant": 2,
@@ -742,10 +743,14 @@
       4
     ],
     "invertible_twisted_intertwiners": 12,
+    "joint_S3_invariant_element_counts_over_all_such_s": [
+      2
+    ],
+    "joint_S3_invariants_are_exactly_zero_and_identity_for_every_s": true,
     "number_of_distinct_fixed_subalgebras": 3,
     "number_of_involutions_s_with_s_w_s_equal_w_squared": 30,
     "outer_automorphism_used": "conjugation by x -> 2x on P^1(F_5), the outer class PGL_2(F_5) \\ PSL_2(F_5)",
-    "reading": "conjugation by w is trivial on the whole commutant (w is central in it only up to the radical twist: the count below is the measured one); conjugation by s is the Frobenius w -> w^2, so it cuts F_4 = F_2[w] down to F_2 exactly as conjectured, but the full S_3-invariant subalgebra is F_2[e] = F_2[x]/(x^2) of F_2-dimension two, not F_2",
+    "reading": "conjugation by w is NOT trivial on the commutant, because the commutant is noncommutative: its w-centralizer is exactly F_4 = F_2[w] (four elements), the radical being Frobenius-twisted. Conjugation by s is the Frobenius w -> w^2 and fixes a different two-dimensional subalgebra F_2[e] = F_2[x]/(x^2).  The joint S_3-invariants are the intersection F_4 cap F_2[e] = {0,1} = F_2, which is the conjectured answer, reached by a different route than the one conjectured",
     "s_fixed_part_contains_w": false,
     "s_fixed_part_nilpotent_count": 2,
     "s_matrix": [
