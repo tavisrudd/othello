@@ -1,0 +1,7 @@
+C908 M x M exceptional-residue: finite lattice steps
+L: Lambda^5 -> Lambda^7 elementary divisors {'1': 110, '2': 10}; coker = (Z/2)^10: True
+L: Lambda^1 -> Lambda^3 elementary divisors {'1': 10}; image saturated: True
+mod-2 readout pairing: quotient dim=10; rank=10; kills im(L)=True; perfect=True
+identity readouts: F_2-linear trace=0; F_4-coefficient trace=1; disagree=True
+absolute-trace identity tr_F2 = Tr_{F4/F2} o tr_F4 verified on all 8 canonical samples: True
+PASS
