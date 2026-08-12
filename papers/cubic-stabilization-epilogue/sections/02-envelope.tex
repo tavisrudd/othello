@@ -101,14 +101,48 @@ turns the pair intersection into \(d^2-m^2=24\).  The positive solution is
 \((1,6,6,6,6)\).
 \end{proof}
 
-The two-primary maximal isotropic kernels are the five points of
-\(\PP^1(\F_4)\).  The three \(\F_2\)-rational points retain the full simplex
-group \(S_6\); each remaining point has stabilizer exactly \(A_5\), and the
-outer normalizer exchanges them.  Strong Torelli and the automorphism group
-on the nonstandard cubic component therefore select the exotic pair.  At
-three, the unique monodromy-invariant line in elliptic three-torsion selects
-the scalar gluing.  Proposition~\ref{prop:golden-exotic} labels the two
-members of the exotic pair by the finite golden orientation.
+\begin{proposition}[Principal gluing packet]
+\label{prop:principal-gluing-packet}
+The \(A_5\)-stable two-primary principal kernels of the six-axis source are
+parametrized by
+\[
+ \PP^1(\F_4)=\PP^1(\F_2)\sqcup\{\omega,\omega^2\}.
+\]
+The three \(\F_2\)-rational kernels are \(S_6\)-stable.  Each of the other
+two has stabilizer exactly \(A_5\), and the outer normalizer exchanges them.
+The intermediate Jacobian of the nonstandard \(A_5\)-cubic component uses
+the latter pair.  Its three-primary kernel is the scalar graph over the
+unique monodromy-invariant line in elliptic three-torsion.
+\end{proposition}
+
+\begin{proof}
+At two the coefficient discriminant is the simple four-dimensional
+\(\F_2A_5\)-module \(H_2\), whose commutant is \(\F_4\).  The full
+discriminant is \(H_2\otimes_{\F_2}\F_2^2\).  An \(A_5\)-stable simple half
+is therefore a one-dimensional \(\F_4\)-subspace of \(\F_4^2\), and every
+such half is maximal isotropic for the tensor product of the coefficient
+form with the alternating multiplicity form.  This gives
+\(\PP^1(\F_4)\).
+
+The simplex group acts on the coefficient heart over \(\F_2\).  Hence the
+three lines defined over \(\F_2\) retain \(S_6\).  A primitive scalar in
+\(\F_4\) breaks this action to the exceptional subgroup \(A_5\); its two
+values are exchanged by the outer normalizer.  Were the generic cubic kernel
+\(\F_2\)-rational, its principal polarization would inherit the faithful
+\(S_6\)-action.  Strong Torelli would then give an \(S_6\)-action on the
+generic cubic, contrary to the automorphism group of the nonstandard
+component.  Thus the generic kernel is exotic.  The kernel is a finite
+sub-local-system, so the same pair persists throughout the connected smooth
+locus.
+
+At three the coefficient heart is simple with scalar commutant.  The
+\(\Gamma_0(3)\) multiplicity monodromy has one invariant line in elliptic
+three-torsion.  Tensoring that line with the coefficient heart is therefore
+the unique \(A_5\)- and monodromy-stable maximal isotropic half.
+\end{proof}
+
+Proposition~\ref{prop:golden-exotic} labels the two exotic members by the
+finite golden orientation.
 
 Hartlieb's period map for this component is nonconstant
 \cite{Hartlieb}.  Consequently the resulting smooth cubic family is
