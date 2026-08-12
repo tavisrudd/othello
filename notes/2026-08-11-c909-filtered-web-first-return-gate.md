@@ -190,3 +190,67 @@ conditional.  Neither finite-etale splitting nor the fact that all root
 differences are units repairs this gap.  No failure of the numerical Dyck
 profile is asserted here; the conclusion is only that the present
 first-return argument is insufficient for a theorem.
+
+## 6. Specht--Vandermonde route: exact input and its boundary
+
+There is a useful reformulation, but it does not close the gate.  Under the
+standard tableau/noncrossing matching bijection, `W_n` is the integral
+two-row Specht lattice `S^{(n,n)}`.  For a tableau `T` with two-element
+columns `{i,j}`, its Specht polynomial is exactly
+
+\[
+ \operatorname{sp}_T(u)=\prod_{\{i,j\}\text{ a column of }T}(u_j-u_i).
+\tag{14}
+\]
+
+The standard-polytabloid theorem gives an integral basis indexed by standard
+tableaux, and the two-row instance of (14) is the matching basis used above.
+This is the classical polynomial realization of a Specht module; it is also
+the `2\times2`-minor case of integral Grassmannian standard monomial theory.
+
+The relevant classical **confluent Vandermonde identity** is likewise fully
+integral if one uses Hasse derivatives.  For distinct `c_1,\ldots,c_s` and
+positive multiplicities `m_i`, the map
+
+\[
+ R[u]_{<N}\longrightarrow\bigoplus_{i=1}^sR^{m_i},\qquad
+ f\longmapsto\bigl(D^{(q)}f(c_i)\bigr)_{0\leq q<m_i},
+ \quad N=\sum_i m_i,
+\tag{15}
+\]
+
+has determinant, up to sign,
+
+\[
+ \prod_{i<j}(c_j-c_i)^{m_i m_j}.
+\tag{16}
+\]
+
+Here `D^{(q)}u^d=\binom dq u^{d-q}`.  Thus (16) has neither trace nor
+factorial denominators and is a unit over `R` whenever the differences are
+units.  It follows either by the usual alternating-polynomial argument or
+by the Hermite interpolation proof; in the latter normalization the Hasse
+derivatives are exactly what removes the familiar factorial factors.
+
+This identity is **not** yet an answer to the web problem.  The source of
+(15) is a one-variable polynomial lattice of rank `N`, whereas (4) is the
+restriction of a multiaffine two-row Specht lattice of rank `C_n`, with
+coordinatewise jets.  An LGV determinant would close the gap only after one
+constructs a network whose path matrix is this *specific* nested jet minor
+and whose unique nonintersecting family has weight (16), or its product over
+the relevant pairs.  No such network/matrix identification has been
+constructed here.  Invoking LGV before that construction merely rewrites a
+determinant with possible cancellation.
+
+The closest checked sources provide only these two inputs:
+
+* De Concini--Eisenbud--Procesi, *Hodge algebras*, Astérisque 91 (1982),
+  §11, Theorem 11.1: integral standard-monomial/Pluecker straightening.
+* The classical confluent-Vandermonde/Hermite-interpolation determinant
+  (15)--(16), with Hasse derivatives for its characteristic-free form.
+
+Neither statement proves the osculating rank profile (7) for
+`S^{(n,n)}`.  In particular, a recent paper about *confluent Vandermonde
+forms* is not a substitute: its displayed realizations use ordinary
+derivatives and factorial normalizations, and it treats the full symmetric
+group harmonic space rather than this two-row, coordinatewise-jet lattice.
