@@ -19,10 +19,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
       ],
-      "objects": "An abstract carrier called a cubic, an abstract stabilization, an abstract comparison object, and a natural-valued packet multiplicity.",
-      "hypotheses": "The cubic packet equals two, the stabilization formula and dimension bound hold, the comparison packet vanishes, and the chosen rationality predicate supplies a birational relation to the comparison object.",
-      "conclusion": "The chosen rationality predicate fails for the abstract stabilization.",
-      "cautions": "Lean does not yet identify these carriers with a smooth complex cubic threefold, its product with projective one-space, or projective four-space."
+      "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued packet multiplicity.",
+      "hypotheses": "The carrier satisfies the smooth-cubic predicate, its packet equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero packet, and rationality supplies the required birational relation.",
+      "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
+      "cautions": "The geometric signature and every quantum, weak-factorization, and rational-comparison fact remain typed premises rather than foundational constructions."
     },
     {
       "manuscript_label": "prop:six-axis-polarization",
@@ -217,10 +217,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_packet_eq_two_of_flop_inputs",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_oneStep_irrational_of_flop_inputs"
       ],
-      "objects": "Abstract carriers called a Fano threefold, cubic, two bundles, stabilization, and comparison object.",
-      "hypotheses": "Two rank-two multiplicity formulas, a bundled birational relation between the bundle carriers, cubic multiplicity two, the stabilization formula, dimension bounds, and a rational comparison.",
-      "conclusion": "The abstract Fano carrier has multiplicity two and its abstract stabilization fails the chosen rationality predicate.",
-      "cautions": "Lean does not yet encode genus eight, primeness, Pfaffian association, vector bundles, projectivizations, the flop, products with projective space, or geometric rationality."
+      "objects": "An abstract geometric signature naming smooth prime genus-eight Fano threefolds, their associated Pfaffian cubics, both rank-two projective-bundle total spaces, product with projective one-space, projective four-space, and rationality.",
+      "hypotheses": "The specified carrier satisfies the genus-eight predicate, its associated cubic satisfies the smooth-cubic predicate, both named total spaces obey the rank-two formulas and are birational, the cubic packet is two, and the named stabilization and rational comparison have the stated properties.",
+      "conclusion": "The specified Fano carrier has packet multiplicity two and its named product with projective one-space is irrational.",
+      "cautions": "The geometric signature and the Kuznetsov, quantum, weak-factorization, and rational-comparison facts remain typed premises rather than foundational constructions."
     }
   ]
 }

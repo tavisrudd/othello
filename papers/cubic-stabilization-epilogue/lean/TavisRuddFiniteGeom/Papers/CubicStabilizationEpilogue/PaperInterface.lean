@@ -83,11 +83,13 @@ premise used by the proof. -/
 theorem cubicThreefold_oneStep_irrational_of_packet_inputs
     {Variety : Type*} (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
+    (geometry : Applications.CubicThreefoldGeometry Variety)
     {cubic : Variety}
-    (input : Applications.CubicThreefoldOneStepInput packet birationalInput cubic) :
-    ¬ input.Rational input.stabilized :=
+    (input : Applications.CubicThreefoldOneStepInput
+      packet birationalInput geometry cubic) :
+    ¬ geometry.Rational (geometry.productWithProjectiveLine cubic) :=
   Applications.cubicThreefold_oneStepStabilization_not_rational
-    packet birationalInput input
+    packet birationalInput geometry input
 
 /-- Reviewer-facing packet transport from an associated cubic threefold to a
 genus-eight Fano threefold, conditional on the typed projective-bundle and flop
@@ -95,11 +97,13 @@ premises. -/
 theorem genusEight_packet_eq_two_of_flop_inputs
     {Variety : Type*} (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
-    {fano cubic : Variety}
-    (input : Applications.GenusEightOneStepInput packet birationalInput fano cubic) :
+    (geometry : Applications.GenusEightGeometry Variety)
+    {fano : Variety}
+    (input : Applications.GenusEightOneStepInput
+      packet birationalInput geometry fano) :
     packet.multiplicity fano = 2 :=
   Applications.genusEight_packet_eq_two_of_projectiveBundle_flop
-    packet birationalInput input
+    packet birationalInput geometry input
 
 /-- Reviewer-facing one-step irrationality deduction for a genus-eight Fano
 threefold.  Its typed input keeps the cubic packet, projective-bundle flop, and
@@ -107,10 +111,12 @@ rational comparison visible. -/
 theorem genusEight_oneStep_irrational_of_flop_inputs
     {Variety : Type*} (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
-    {fano cubic : Variety}
-    (input : Applications.GenusEightOneStepInput packet birationalInput fano cubic) :
-    ¬ input.Rational input.stabilizedFano :=
+    (geometry : Applications.GenusEightGeometry Variety)
+    {fano : Variety}
+    (input : Applications.GenusEightOneStepInput
+      packet birationalInput geometry fano) :
+    ¬ geometry.Rational (geometry.productWithProjectiveLine fano) :=
   Applications.genusEight_oneStepStabilization_not_rational
-    packet birationalInput input
+    packet birationalInput geometry input
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

@@ -7,6 +7,13 @@ import Mathlib.Tactic
 Weak factorization reduces a birational map to blow-ups and blow-downs.  If the
 packet contribution of every allowed center vanishes, each step preserves the
 packet multiplicity.  The theorem below formalizes the resulting telescope.
+
+The external factorization premise corresponds to Dan Abramovich, Kalle Karu,
+Kenji Matsuki, and Jaroslaw Wlodarczyk, *Torification and factorization of
+birational maps* (2002), Journal of the American Mathematical Society 15,
+Theorem 0.1, together with the separately stated packet operation and
+low-dimensional vanishing premises.  This module proves only the implication
+from a preserving chain and imports none of those results as axioms.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
