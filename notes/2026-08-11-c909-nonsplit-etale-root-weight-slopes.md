@@ -107,7 +107,8 @@ Choose a monogenic unramified generator `theta` of `O/R` and set
  R[T]=O,
 \]
 
-which is a nonsplit unramified field algebra, and `T` is self-adjoint.  Its
+which is a nonsplit unramified finite-etale local algebra, and `T` is
+self-adjoint.  Its
 graph is a maximal isotropic subgroup of the scaled root-weight block.  The
 prime-power finite-etale cofactor theorem therefore gives primitive ordinary
 divisor-product saturation.  This is factorial-active, since
