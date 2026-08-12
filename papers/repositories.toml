@@ -236,14 +236,14 @@ reason = "the monorepo-wide TeX lint helper is outside the standalone repository
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "lint:\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
 new = ""
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "manuscript: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+old = "manuscript: $(SOURCE)\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
 new = "manuscript: $(SOURCE)\n"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
