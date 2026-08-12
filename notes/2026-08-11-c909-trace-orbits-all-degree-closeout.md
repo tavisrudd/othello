@@ -118,9 +118,16 @@ orbit.  Its stabilizer is
 \]
 
 For the unlabelled subalgebra, every Frobenius automorphism is realized by a
-semilinear isometry: `sigma(c)/c` is a square by (4).  Thus the normalizer is
-`{±1}\rtimes Gal(O/R)` (up to the harmless choice of the square roots), of
-order `2m`.
+semilinear isometry: `sigma(c)/c` is a square by (4).  Thus its normalizer fits
+into
+
+\[
+ 1\longrightarrow\{\pm1\}\longrightarrow N
+ \longrightarrow\operatorname{Gal}(O/R)\longrightarrow1
+\]
+
+and has order `2m`.  The extension need not split for an arbitrary even `m`;
+it does split in the odd-degree root application used here.
 
 For the odd prime-power root block this applies to `C=B^{-1}`, not merely to
 `B`.  Since `B` and `B^{-1}` have the same rank and determinant squareclass
@@ -129,7 +136,7 @@ repaired by making that identification explicit.
 
 ### Hyperbolic dyadic root case
 
-Let `p=2`, let `O/R` be unramified of **odd** degree `m`, and suppose
+Let `p=2`, let `O/R` be unramified of degree `m`, and suppose
 
 \[
                     (M,C)\simeq H^m,
@@ -151,8 +158,9 @@ For uniqueness, first `Tr h` even implies `h` even modulo two: if
 `hbar(v,v) != 0`, choose a residue scalar `alpha` with
 `Tr(alpha^2 hbar(v,v)) != 0`, contradicting evenness of the transfer.  The
 mod-two quadratic refinement `h(x,x)/2` has the same Arf sign after trace
-transfer: restriction of scalars takes its Arf invariant to the residue trace,
-which is the identity on `F_2` because `m` is odd.  Since `H^m` has Arf zero,
+transfer.  Indeed, the absolute trace induces an isomorphism from the residue
+field's Artin--Schreier quotient to `F_2`; its kernel is exactly the
+Artin--Schreier image.  Since `H^m` has Arf zero,
 the residual binary `O`-quadratic form has Arf zero.  A primitive residual
 isotropic vector Hensel-lifts (its polar pairing with a suitable vector is a
 unit); completing it to an isotropic hyperbolic pair proves `h≃H`.
@@ -178,10 +186,7 @@ order `2(Q-1)Q^{a+1}`: the diagonal and anti-diagonal components each have
 `(Q-1)Q^{a+1}` elements.  Coordinatewise Frobenius preserves (7), so the
 unlabelled normalizer is `O(H)(O/2^a)\rtimes Gal(O/R)`.
 
-The odd-degree hypothesis is essential to this uniqueness argument; an
-even-degree trace can erase the nonzero Arf invariant.  The dyadic root
-application has `m=2^(a-1)-1`, so it lies in the stated range.  It still has
-one external input: the explicit
+The dyadic root application still has one external input: the explicit
 root-weight residual form must be proved isometric to `H^m`.  Once that
 isometry is supplied, (6)--(9) are a complete classification of its
 trace-transfer slopes.  They do not claim a classification of arbitrary
