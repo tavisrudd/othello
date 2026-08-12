@@ -78,7 +78,18 @@ def check_public_docstrings(source: Path, text: str) -> None:
         r"^(?:noncomputable\s+)?(?:theorem|lemma|def|structure|inductive|class)\s+"
         r"([A-Za-z0-9_'.]+)"
     )
+    comment_depth = 0
     for index, line in enumerate(lines):
+        if comment_depth:
+            comment_depth += line.count("/-") - line.count("-/")
+            continue
+        if line.lstrip().startswith("--"):
+            continue
+        opening_comments = line.count("/-")
+        closing_comments = line.count("-/")
+        if opening_comments > closing_comments:
+            comment_depth += opening_comments - closing_comments
+            continue
         match = declaration.match(line)
         if match is None:
             continue

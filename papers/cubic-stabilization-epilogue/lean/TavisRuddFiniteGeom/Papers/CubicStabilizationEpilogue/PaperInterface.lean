@@ -6,6 +6,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactori
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -227,6 +228,31 @@ theorem framedMonodromy_characteristicPolynomial_baseChange_and_gauge
       monodromy.charpoly.map extension :=
   Quantum.framedCharacteristicPolynomial_map_and_conjugate
     monodromy extension gauge
+
+/-- Bounded-degree finiteness makes the homological fiber over each numerical
+class a finite set, with no extra cutoff condition in its membership theorem.
+-/
+theorem numericalNovikov_finiteFiber_exact
+    {Homology Numerical : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical]
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    (homological : Homology) (numerical : Numerical) :
+    homological ∈ data.fiber numerical ↔
+      data.quotient homological = numerical :=
+  data.mem_fiber_iff homological numerical
+
+/-- The coefficient of the numerical pushforward is the finite sum of the
+homological coefficients in the exact numerical fiber. -/
+theorem numericalNovikov_coefficientPushforward_apply
+    {Homology Numerical R : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [AddCommMonoid R]
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    (series : Homology → R) (numerical : Numerical) :
+    data.coefficientPushforward series numerical =
+      ∑ degree ∈ data.fiber numerical, series degree :=
+  data.coefficientPushforward_apply series numerical
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

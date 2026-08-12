@@ -162,12 +162,15 @@
     },
     {
       "manuscript_label": "lem:numerical-base-change",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Completed effective homology and numerical Novikov monoid rings and the relevant quantum connections.",
-      "hypotheses": "Degree filtrations with finite bounded pieces and comparison maps defined over the homological rings.",
-      "conclusion": "Continuous numerical quotient and base change of the quantum connection and comparison theorems.",
-      "cautions": "Continuity and inverse-limit compatibility are part of the claim."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteFiber_exact",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_coefficientPushforward_apply"
+      ],
+      "objects": "Effective homological and numerical additive monoids, their quotient homomorphism, compatible natural-valued degree functions, finite bounded homological pieces, and coefficient functions into an additive commutative monoid.",
+      "hypotheses": "Numerical degree after quotient equals homological degree, and every bounded homological degree set is finite.",
+      "conclusion": "Every numerical fiber is represented by an exact finite set and numerical coefficients are well-defined finite sums over those fibers, forming an additive coefficient pushforward.",
+      "cautions": "Completed monoid-ring multiplication, continuity and inverse-limit compatibility, Gromov--Witten coefficient descent, quantum derivations, and base change of the quantum comparison isomorphisms are absent."
     },
     {
       "manuscript_label": "prop:framed-operations",
