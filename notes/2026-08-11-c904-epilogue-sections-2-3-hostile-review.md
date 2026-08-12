@@ -1,6 +1,6 @@
 # C904 epilogue Sections 2--3 hostile cold review
 
-Date: 2026-08-11  
+Date: 2026-08-11
 Scope: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex` and
 `03-minimal-class.tex`; no manuscript edits  
 Verdict: **MINOR**
@@ -261,3 +261,57 @@ Mystery ledger:
 **MINOR.** Accept the mathematics and the universal-(CH_0) conclusion.
 Before freezing, apply the three proof-compression repairs above.  None changes
 a theorem statement, numerical constant, prime range, or fibre quantifier.
+
+## Fresh re-review after printed repairs
+
+Date: 2026-08-11
+Regrade: **GO**
+
+I re-read the current Sections 2--3 after the four requested repairs.  Each
+now closes the corresponding objection without changing a normalization,
+prime range, or fibre quantifier.
+
+1. **Rosati passage closed.**  The proof now defines
+   `D_H = q_H^*[0]` and `N_H = i_H q_H`, identifies `D_H|_S = F_H`,
+   and derives `tr(N_H) = d` and `tr(N_H N_H') = m^2`.  The invariant
+   axis sum supplies `d + 5m = 0`.  Together with `F_H F_H' = 24`, this
+   gives exactly `(d,m) = (5,-1)`; no sign or trace-degree ambiguity
+   remains.
+
+2. **Torelli selection closed.**  The text now uses
+   `Aut(J,Theta) = Aut(X) x <-1>` and proves that projection of the
+   descended `S_6` remains faithful, because its kernel would be a normal
+   subgroup of `S_6` of order at most
+   two.  This handles the polarization involution and makes the contradiction
+   with generic automorphism group `A_5` valid as printed.
+
+3. **Unimodular `pB` form closed, including `p=2`.**  The new corollary
+   states the exact local form used by the six-axis lattice: a unit block plus
+   `pB`, a `B`-self-adjoint squarefree slope, and trivial kernel on the
+   unit block.  Its invariant graph congruence is the correct one for
+   coefficient forms.  On residual scalar eigenspaces it contains every
+   block-supported `pD`.  Unimodular orthogonal complements require no
+   division by two, and the mixed-adjugate construction therefore still has
+   coefficient one on dyadic off-diagonal units.
+
+4. **Descent and local--global closed.**  The proof now names the local image
+   `P`, tensors the quotient `H/P` with the finite unramified faithfully
+   flat ring, and records the resulting injection.  It then uses finite
+   generation of the global cokernel to test membership over every
+   `Z_q`.  This is the needed module argument; it does not pretend
+   that individual eigenspace divisors descend geometrically.
+
+5. **Application and Voisin quantifier unchanged and valid.**  The local
+   chart remains the actual six-axis coefficient lattice, the exotic dyadic
+   polynomial remains squarefree, and the three-primary graph remains scalar
+   after a suitable chart choice.  The finite kernel sub-local-system carries
+   this presentation across the connected smooth locus.  Voisin's
+   Corollary 4.4 then applies fibrewise, so the conclusion is still every
+   smooth complex member universally `CH_0`-trivial.
+
+Residuals: **none load-bearing**.  The citation to Hartlieb's Section 5 could
+optionally be narrowed to the exact family/classification statement, and the
+application could cite only the new corollary rather than both the theorem and
+corollary.  These are editorial improvements, not acceptance conditions.
+
+Final closure verdict: **GO**.
