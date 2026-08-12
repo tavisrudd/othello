@@ -1,5 +1,5 @@
 name = "NodeKayles"
-defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "RepairPorts", "DihedralSchreier", "RelativeConicArcs"]
+defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "RepairPorts", "DihedralSchreier", "RelativeConicArcs", "TavisRuddFiniteGeom"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
@@ -49,3 +49,6 @@ name = "RelativeConicArcs"
 # dependencies of this library.
 [[lean_lib]]
 name = "TavisRuddFiniteGeom"
+roots = [
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
+]
