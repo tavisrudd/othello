@@ -253,6 +253,20 @@ application or an exact obstruction to necessity.
     later pivots are Schur-complement sums.  Until a confluent-Vandermonde or
     nonintersecting-path proof supplies those minors, treat the all-degree
     formula as a candidate, not as a promoted theorem.
+11. **Exact codimension-three theorem.** The next complete degree is now
+    proved, including dyadic primes and unramified descent:
+
+    ```text
+    Hdg^6(A,Z) / im(Sym^3 NS(A))
+      = (Z/p^a)^[5 C(g,5) + 3 C(g,6)]
+        + (Z/p^(2a))^[C(g,6)].
+    ```
+
+    The five-slot sectors are primitive volume factors times the four-slot
+    theorem.  The six-slot sector has explicit symbolic Vandermonde unit
+    minors and Smith vector `(0,a,a,a,2a)`.  Thus the exact ambient defect is
+    classified through codimension three even though the all-degree Dyck
+    formula remains behind the nested-unit-minor gate.
 
 ## Highest-EV next moves
 
