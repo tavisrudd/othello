@@ -279,8 +279,8 @@ disposition = "active"
 path = "claim-proof-novelty-ledger.md"
 reason = "private claim-development and priority ledger, superseded publicly by the manuscript"
 
-[[repository.exclude_path]]
-path = "lean"
+[[repository.exclude_glob]]
+pattern = "lean/**"
 reason = "the formal companion is under active development and is not part of this paper export"
 
 [[repository.rewrite]]
