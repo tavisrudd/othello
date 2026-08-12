@@ -211,10 +211,17 @@ traces `10, 2, −2, 0` on orders `1, 2, 3, 5`), the commutant
 `End_{F_2[A_5]}(Λ_2)` has `F_2`-dimension **4** — the local noncommutative
 algebra `F_4⟨e⟩` with `e² = 0` and `e·λ = λ²·e`, residue field `F_4`,
 square-zero radical of dimension two — and `Λ_2` has **zero** `A_5`-fixed
-vectors, so it is indecomposable rather than `1 ⊕ 4`. The joint
-`A_5`-and-deck invariants are the four elements `{0, 1, e', 1+e'}` with `e'`
-nilpotent, whose `F_2`-traces all vanish — so even pencil-only rigidity gives
-evenness, though only full monodromy collapses the residue to `{0, I}`.
+vectors, so it has composition series `4,1,4,1` with a unique minimal
+submodule rather than splitting as `1 ⊕ 4`. Deck conjugation fixes the
+four-element subalgebra `F_2[e']/(e'^2)`; adding the residual `C_3`
+(conjugation by `w`, whose centralizer in the noncommutative commutant is
+exactly `F_4`) cuts the joint `A_5`-and-`S_3` invariants to `{0, 1}` — the
+last intersection is an inference from the two measured centralizers, flagged
+as such in the certificate report, not a separately run computation. All
+these candidate residues have vanishing `F_2`-trace, so pencil-only rigidity
+already gives evenness, and (modulo that flagged inference plus an
+`Aut`-equivariance argument at the symmetric member that this note does not
+develop) even the `{0, I}` pinning; the full-monodromy proof needs neither.
 
 ### 4.3 Theorem E — evenness of the universal source
 
@@ -326,11 +333,16 @@ computed on any single smooth cubic threefold. Plan, in order:
   `F_2`-dimension 2 with `F_4`-part `{0,1}`; (c) `L_3 : ∧^3Λ → ∧^5Λ` has
   Smith form `1^110 2^10`, confirming the adjointness prediction; (d) the
   `L_5` cross-check reproduces `1^110 2^10`, and the `L_1` control is fully
-  saturated, matching pass-2. **Provisional bundle**: the session that ran it
-  was cut by a quota limit after producing the output; the committed
-  `…-provisional.sage` is its working script, and a cleaned single-file
-  generator with pinned replay command and hashes is owed before any claim
-  in §4 that leans on (a)/(b) is promoted beyond this note. Nothing in
+  saturated, matching pass-2. Generator and narrative report:
+  `notes/2026-08-11-c908-a5-commutant-lefschetz-smith.sage` and
+  `notes/2026-08-11-c908-a5-commutant-certificate-report.md`. The `A_5` used
+  is genuine (order 60, complex character `5 ⊕ 5`, integral and symplectic on
+  `Λ`, built from the corpus's `mobius_generators()`); the outer `x ↦ 2x` is
+  not integral on `Λ`. **Replay caveat, still owed**: the committed
+  `.out`/`.json` were produced by the script revision immediately before a
+  final edit that appended the (unrun) joint-invariant lines, so the script
+  hash does not match its output; one reconciling re-run is required before
+  any claim leaning on (a)/(b) is promoted beyond this note. Nothing in
   Theorems D/E depends on (a)/(b); they are cross-checks. (c) has an
   independent human proof by adjointness to the certified `L_5`.
 
