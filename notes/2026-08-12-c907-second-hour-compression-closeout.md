@@ -152,10 +152,13 @@ integral, so
 1. The weighted-CI carrier search is finished under the exact hypotheses,
    and the first non-WCI Picard-one test $V_5$ is negative in the stronger
    form ν₆ equal to zero.  A reconnaissance calculation for the genus-six
-   prime (V_{10}) also gives zero, but remains conditional on a tracked
-   creative-telescoping certificate and a direct full-QDM scalarization.
+   prime $V_{10}$ also gives zero, but remains conditional on a tracked
+   creative-telescoping certificate and a direct full-QDM scalarization.  Its
+   double HLT root is resonant with exponent difference one, so no
+   diagonalizability or no-logarithm claim is made; this does not affect the
+   primitive-sixth exclusion.
    Continue with the remaining prime families of genera `7,8,9,10,12` while
-   certifying (V_{10}) separately.
+   certifying $V_{10}$ separately.
 2. Rank four plus self-duality is not enough: it permits four primitive-sixth
    ranks.  The decisive abstraction is an eligible primitive-support
    subquotient of rank at most three, paired by duality.
@@ -175,6 +178,9 @@ integral, so
   the shared cache verifies with zero problems.
 - The CCGK $V_5$ source tarball has SHA-256
   `fe01aedde30aec17ad6da442b82d9c15ff2c2fc5cdef0c7a6d15e87fa0573143`.
+- Van der Put's direct vector-QDM/cyclic-scalar $V_5$ source is cached as
+  `arxiv:1501.05205`, SHA-256
+  `a60119e4088ccf4625a113b7cc0584a302d731e56d61ae91401f1242ce5646ec`.
 - Every tracked C907 star `.sha256` bundle verifies.
 - Each of the six Singular generators reproduces its tracked canonical
   output byte-for-byte.
