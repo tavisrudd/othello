@@ -6,7 +6,8 @@
 
 ## Verdict
 
-The weakest useful target is a truncated graded atom module
+Among graded polynomial targets that retain distinct position degrees, the
+weakest useful target is a truncated graded atom module
 
 \[
  R_2[\mathcal A],
@@ -17,7 +18,7 @@ The weakest useful target is a truncated graded atom module
 
 with one new shift \(L\) recording an integral/Rees position.  It need not
 retain all Tate degrees, Euler branches, or a full Serre operator.  For the
-the \(m=2\) endpoint it must retain only the first three positions and preserve
+\(m=2\) endpoint it must retain only the first three positions and preserve
 the nonzero extreme class
 
 \[
@@ -156,38 +157,46 @@ weak factorization, the strict graded identities, and the support gap.  It
 does not use a Stokes decomposition, a Gamma integral structure, or an
 analytic continuation argument.
 
-## Why (R_2) is the minimal universal test target
+## Why \(R_2\) is the minimal universal graded test target
 
-The ordinary chemical formula is recovered by the specialization (L=1):
+The ordinary chemical formula is recovered by the specialization \(L=1\):
 
 \[
  \mathbf Z[L]/(L^3)\longrightarrow\mathbf Z,
  \qquad L\longmapsto1.
 \]
 
-At (L=1), the endpoint polynomial and a center contribution both become
-the same copy count.  At (R_2), the endpoint is (1+L+L^2), while every
-threefold codimension-two center contribution is in (L\mathbf Z).  Thus the
+At \(L=1\), the endpoint polynomial and a center contribution both become
+the same copy count.  At \(R_2\), the endpoint is \(1+L+L^2\), while every
+threefold codimension-two center contribution is in \(L\mathbf Z\).  Thus the
 first three graded positions are exactly what the P2 contradiction tests.
 
-More formally, let (M) be any (\mathbf Z[L])-module receiving an enriched
-measure and let (v=e_\alpha\).  If
+More formally, let \(M\) be any \(\mathbf Z[L]\)-module receiving an enriched
+measure and let \(v=e_\alpha\).  If
 
 \[
  (1+L^2)v\ne0,
  \tag{C909.21}
 \]
 
-then the same proof works after mapping (R_2e_\alpha\) to (Mv), provided
+then the same proof works after mapping \(R_2e_\alpha\) to \(Mv\), provided
 the image of the degree-one subgroup remains the designated center subgroup.
-Conversely, if ((1+L^2)v=0), the endpoint and the center level are identified
-by this test and no (P^2) extreme-term contradiction can be read from that
-target.  Therefore (R_2) is the universal finite truncation for this
-particular obstruction; a full Rees or Stokes target is stronger but not
-algebraically necessary once (G1)--(G4) are known.
+Conversely, if \((1+L^2)v=0\), the endpoint and the center level are identified
+by this test and no \(\mathbf P^2\) extreme-term contradiction can be read from that
+target.  Therefore \(R_2\) is the universal free finite truncation for this
+particular obstruction among degree-faithful graded targets; a full Rees or
+Stokes target is stronger but not algebraically necessary once (G1)--(G4) are
+known.
+
+If one permits arbitrary non-graded quotients, smaller targets can collapse
+the shift (for example, a module on which \(L\) acts by zero).  Such a target
+does not retain a carrier position and would make the analytic realization
+strictly stronger: it would kill every exceptional shift while still having
+to satisfy all blowup identities.  It is therefore not an enriched graded
+carrier invariant in the sense needed here.
 
 The target need not be a free module on every atom if only the cubic summand is
-being tested.  The one-dimensional (R_2e_\alpha) quotient is enough.  A
+being tested.  The one-dimensional \(R_2e_\alpha\) quotient is enough.  A
 global invariant should nevertheless retain all atom summands until the
 projection to the cubic component is proved functorial.
 
@@ -198,17 +207,17 @@ not additional algebraic steps in the proof above.
 
 1. **Construction.**  Produce a presentation-independent cubic-isotypic
    graded/Rees object whose associated graded gives
-   (\widetilde{\operatorname{CF}}(Y)\).  A local (q)-adic lattice at one
+   \(\widetilde{\operatorname{CF}}(Y)\).  A local \(q\)-adic lattice at one
    blowup boundary is evidence for this object but is not yet an invariant of
-   (Y).
+   \(Y\).
 2. **Strict formulas.**  Lift Iritani/KKPYY's formal direct-sum formulas to
-   the graded object, with the exceptional powers (L,\ldots,L^{c-1}), and
+   the graded object, with the exceptional powers \(L,\ldots,L^{c-1}\), and
    prove compatibility under composed weak-factorization moves.  Equality only
-   after forgetting (L) gives the old atom formula and cannot prove the
+   after forgetting \(L\) gives the old atom formula and cannot prove the
    theorem.
 3. **Carrier bound.**  Prove the arbitrary smooth threefold statement (G4),
    equivalently the cubic-isotypic enriched length bound
-   (\ell_{1/6}(W)\le1).  This includes Calabi--Yau and general-type centers;
+   \(\ell_{1/6}(W)\le1\).  This includes Calabi--Yau and general-type centers;
    a Fano-only census is insufficient.
 4. **Strictness against extensions.**  Ensure that semiorthogonal/Stokes
    extensions cannot join several degree-one center pieces into the endpoint
@@ -221,23 +230,23 @@ not additional algebraic steps in the proof above.
 
 The algebraic theorem therefore lowers the target: C907 does not need a full
 classification of all enriched atoms to obtain the P2 contradiction.  It needs
-only the three-level quotient (R_2e_\alpha), strict formulas on that quotient,
+only the three-level quotient \(R_2e_\alpha\), strict formulas on that quotient,
 and the threefold width-zero carrier bound.  Constructing even this quotient
 canonically is the unresolved analytic task.
 
 ## `ej` + `tt` closeout / mystery ledger
 
-The cheap upgrade is the explicit finite target (R_2=\mathbf Z[L]/(L^3)),
+The cheap upgrade is the explicit finite target \(R_2=\mathbf Z[L]/(L^3)\),
 which separates the endpoint extremes without committing to a full Stokes
 category.  The hostile checks were:
 
-* codimension-two threefold centers contribute exactly (L) times their
+* codimension-two threefold centers contribute exactly \(L\) times their
   intrinsic degree-zero class;
 * centers of dimension at most two vanish in the cubic component, so no hidden
-  (L^0) or (L^2) contribution enters the weak-factorization ledger;
-* signed blowdown terms remain in (L\mathbf Z e_\alpha); positivity is not
+  \(L^0\) or \(L^2\) contribution enters the weak-factorization ledger;
+* signed blowdown terms remain in \(L\mathbf Z e_\alpha\); positivity is not
   being assumed;
-* (R_2) is only a universal test quotient.  The existence and strictness of
+* \(R_2\) is only a universal test quotient.  The existence and strictness of
   the measure remain analytic questions.
 
 Settled: a minimal conditional algebraic obstruction and the exact four
