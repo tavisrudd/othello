@@ -148,6 +148,17 @@ leading-jet/ambient-dilation seam needed for the all-rank Smith formula.
 The immediate C909 frontier is therefore the actual six-axis four-slot
 quotient; the higher-rank Dyck formula is a successor, not an epilogue gate.
 
+The first direct audit of that quotient is now positive and sharper than
+expected.  The actual local profile is a unit line plus a depth-one rank-four
+block.  At two the latter has two repeated rank-two roots after unramified
+splitting; at three it is scalar.  In each four-slot support a same-root
+matching already realizes the minimal integral scale, so the Pluecker defect
+vanishes.  Hence the generic non-CM six-axis intermediate Jacobian has
+`Hdg^(2k)=P^k` in every degree at both bad primes (and trivially elsewhere).
+This is awaiting one independent hostile audit before manuscript promotion;
+special fibres with extra Hodge tensors retain only the established
+minimal-class conclusion.
+
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
 version. Paper IV is the active new-paper build under C761.

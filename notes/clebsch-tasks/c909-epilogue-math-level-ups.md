@@ -358,6 +358,18 @@ application or an exact obstruction to necessity.
     filtered-dilation identification or the nested unit-minor theorem.
     Exhaustive `F_16` testing of all 8008 ten-point subsets found no rank
     jump, but computation is not promoted as proof.
+20. **Actual six-axis ambient saturation.** The cubic packet is not the
+    equal-depth rank-five tower. Locally its coefficient form is a unit line
+    orthogonal to a depth-one rank-four block. At two that block splits
+    unramified into two repeated rank-two roots; at three it is scalar. The
+    direct weighted four-slot calculation gives zero ambient quotient in
+    codimensions two and three at both bad primes; dimension five has no
+    higher residual support. Thus, at generic non-CM fibres of the six-axis
+    family, every integral Hodge class is an ordinary divisor product in
+    every degree. The minimal-class theorem remains valid at special fibres
+    with extra Hodge tensors, but full Hodge generation is not asserted
+    there. One hostile audit passes; an independent second audit is required
+    before manuscript promotion.
 
 ## Highest-EV next moves
 
@@ -370,13 +382,15 @@ application or an exact obstruction to necessity.
    hence to full cohomological `PD(NS)` saturation.  This task explicitly
    excludes C907 higher stabilization, C908 Chow descent, and C908's
    non-etale/p-typical classification.
-2. **Exact actual six-axis ambient quotient.** Compute the full local
+2. **Promote the exact actual six-axis ambient quotient after a second
+   hostile audit.** The full local
    four-slot quotient for the unit-line plus rank-four defect packet at two
    and three. At two the defect splits over an unramified ring into two
    repeated scalar eigenspaces; at three it is scalar. Repeated roots change
    the divisor ideals, so the one-depth distinct-root formula may not be
-   specialized. A structural vanishing or exact packet formula would turn
-   the rank-five ambient theorem into a direct geometric strengthening.
+   specialized. The direct calculation gives structural vanishing; freeze
+   it only after an independent audit of every support type and the
+   generic-non-CM scope.
 3. **Exact higher Hodge-product defect (successor, not epilogue gate).** Generalize the proved
    codimension-two formula from four-slot Pluecker cancellation to every
    codimension, preferably as a closed standard-monomial/partition formula

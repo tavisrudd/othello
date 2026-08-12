@@ -2,9 +2,9 @@
 
 Date: 2026-08-12
 
-Status: structural synthesis of proved low-width theorems; hostile audit and
-actual six-axis specialization in progress. No manuscript, PDF, mirror, or
-Lean edit.
+Status: structural synthesis of proved low-width theorems; the actual
+six-axis specialization has a positive first hostile audit and awaits an
+independent second audit. No manuscript, PDF, mirror, or Lean edit.
 
 ## Crown choice
 
@@ -104,27 +104,29 @@ it.
   rank-five one-depth quotient (1).
 * **Settled:** the cubic implication through Voisin and the independent
   one-step atom obstruction.
-* **In progress:** exact multi-prime quotient for the actual six-axis
-  polarization.
+* **First audit passed:** the exact multi-prime quotient for the actual
+  six-axis polarization vanishes in every degree at generic non-CM fibres.
 * **Successor, not epilogue gate:** arbitrary-rank Dyck-height Smith formula.
 
-## Candidate sharpening for the actual packet
+## Sharpening for the actual packet
 
 The actual local slopes are less generic than the one-depth rank-five model.
 At three the whole rank-four defect block is scalar.  At two, after
 unramified splitting, it is the orthogonal sum of two scalar rank-two
-eigenspaces, together with the unit line.  This may force the *ambient*
-Hodge/product quotient to vanish: on the only four-defect support, the cheap
+eigenspaces, together with the unit line. The direct weighted four-slot
+calculation forces the *ambient* Hodge/product quotient to vanish: on the only four-defect support, the cheap
 within-eigenspace matching already absorbs the Pluecker cancellation which
-creates the \(R/p\) class for four distinct slope roots.  Supports containing
-the unit line have the same cheap matching.  If the pending block calculation
-confirms this, the geometric theorem strengthens from minimal-class
-saturation to
+creates the \(R/p\) class for four distinct slope roots. Supports containing
+the unit line have the same cheap matching. Thus, at every non-CM fibre where
+the rational Hodge lattice is the diagonal invariant lattice, the geometric
+theorem strengthens from minimal-class saturation to
 \[
  \operatorname{Hdg}^{2k}(J_b,\mathbf Z)=P_{J_b}^k
  \quad\text{for every }k
 \]
-on the generic non-CM six-axis family, while special fibres retain the safe
-minimal-class conclusion.  This is not yet promoted: repeated-root blocks
-change the divisor depth ideals, so the equal-depth distinct-root formula
-cannot simply be specialized.
+on the six-axis family. Special fibres with extra Hodge tensors retain the
+safe minimal-class conclusion, but equality with the enlarged full Hodge
+lattice is not asserted there. This result is not a specialization of the
+equal-depth formula: the repeated-root matrix-of-ideals calculation is
+load-bearing. An independent hostile audit is still required before
+manuscript promotion.
