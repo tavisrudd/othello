@@ -1,4 +1,4 @@
-# C909 — the cubic modular component theorem
+# C909 — the cubic modular presentation-curve theorem
 
 Date: 2026-08-12
 
@@ -118,7 +118,7 @@ and the scalar block at three meet these hypotheses.
 For cubic threefolds, algebraicity of the minimal intermediate-Jacobian
 class is exactly the input to Voisin's universal-`CH_0` criterion.  The
 irrationality of `X times P^1` comes from the independent quantum atom
-theorem for every smooth cubic.  The modular component tells us where the
+theorem for every smooth cubic.  The modular presentation curve tells us where the
 cycle detector fires; it supplies no premise to the quantum theorem.
 
 ## What this compresses

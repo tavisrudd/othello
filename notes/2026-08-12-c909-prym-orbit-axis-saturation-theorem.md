@@ -2,7 +2,7 @@
 
 Date: 2026-08-12
 
-Status: general structural theorem extracted from the cubic modular component;
+Status: general structural theorem extracted from the cubic modular presentation curve;
 no manuscript, PDF, mirror, or Lean edit
 
 ## Setup
