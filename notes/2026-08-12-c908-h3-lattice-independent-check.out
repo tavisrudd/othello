@@ -1,0 +1,28 @@
+C908 pass-9 independent lattice check (PARI backend)
+source: notes/2026-08-12-c908-h3-lattice-adjudication.json
+
+  [PASS] 0 schema of the source record  (c908-h3-lattice-adjudication/1)
+  [PASS] 0b matrix shapes  (A is 262 x 940, L_3 is 252 x 120)
+  [PASS] 1 PARI matsnf(L_3) = 1^110 2^10  ({1: 110, 2: 10})
+  [PASS] 2a the left kernel of L_3 has rank 132  (132)
+  [PASS] 2b Sat has rank 120  (120)
+  [PASS] 2c both Gram determinants are nonzero
+  [PASS] 2d gram determinants divide exactly
+  [PASS] 2e [Sat : L_3(^3 Lambda)]^2 = (2^10)^2  (1048576)
+  [PASS] 2f L_3(^3 Lambda) + Z<psi_* T> = Sat (equal PARI Hermite forms)  (120 basis columns)
+  [PASS] 3a PARI returns U L_3 V = D
+  [PASS] 3b each Smith column of D carries exactly one entry
+  [PASS] 3c the elementary divisors of D are 1^110 2^10  (10 torsion positions)
+  [PASS] 3c-bis psi_* T has vanishing free Smith coordinates, i.e. lies in Sat  (132 free rows)
+  [PASS] 3d the first ten generators carry gamma = the standard basis
+  [PASS] 3e rho is invertible over F_2
+  [PASS] 3f sigma(T) = rho(gamma(T)) mod L_3(^3 Lambda) for all 940 columns  (0 mismatches)
+  [PASS] 4a H^ has rank 130  (130)
+  [PASS] 4b ImTheta has 120 elementary divisors, all one  ({1: 120})
+  [PASS] 4c E = Z^130 / ImTheta is free of rank 10
+  [PASS] 5a Z^130 / (ImTheta + <g_z>) = (Z/2)^10  ({1: 120, 2: 10})
+  [PASS] 5b the exceptional image has index 2^10 in E  (1024)
+  [PASS] 6 the transfer image col(A) equals H^ (equal PARI Hermite forms)  (130 basis columns)
+
+checks: 22 of 22
+PASS

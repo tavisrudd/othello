@@ -1,0 +1,83 @@
+C908 pass-9: adjudication of the corrected H^3(M,Z) test lattice
+pass-7 shared machinery re-certifies: True (93 lines, ending PASS)
+
+L_3 : ^3 Lambda -> ^5 Lambda   Smith {'1': 110, '2': 10}   rank 120
+[Sat : L_3(^3 Lambda)] = 1024 = 2^10; quotient {'1': 110, '2': 10} = (Z/2)^10
+generators escaping L_3(^3 Lambda) = 626 = generators with odd gamma = 626
+L_3(^3 Lambda) + Z<psi_* T> = Sat: True
+rho : F_2^10 -> Sat/L_3(^3 Lambda) invertible: True; verified on all 940: True
+
+H^ rank 130; [Sat + Z^10 : H^] = 1024; divisors {'1': 120, '2': 10}
+Im = col(A) inside H^: True; rank 130; H^/Im divisors {'1': 130}; free rank 0
+d2 = dim_F2 Im in H^/2H^ = 130 (of 130)
+
+ImTheta rank 120 divisors {'1': 120} -> E = Z^130/ImTheta free of rank 10
+ImTheta + <g_z> rank 130 divisors {'1': 120, '2': 10} -> E/(exceptional image) = (Z/2)^10, index 1024
+
+V_0 mod two: dim 120 (exact) / 120 (even) / 120 (gamma = 0 mod 4), of 120
+re-issued gate (L_3(Theta ^ a), 0) in Im + 2H^: [True, True, True, True, True, True, True, True, True, True]
+exceptional (0, 2 e_k) in Im + 2H^: [True, True, True, True, True, True, True, True, True, True]
+exceptional coset meets Im + 2H^: [True, True, True, True, True, True, True, True, True, True]; fully covered: [True, True, True, True, True, True, True, True, True, True]
+conservative old-style gate (gamma = 0 mod 4): [True, True, True, True, True, True, True, True, True, True]
+Theta ^ a inside V_0 mod two (exact / even): [True, True, True, True, True, True, True, True, True, True] / [True, True, True, True, True, True, True, True, True, True]
+gamma-projection of Im is Z^10 (ten new directions): True
+rank psi_* = 120; rank A = 130; rank gamma = 10
+
+checks:
+  [PASS] 1 pass-7 shared machinery re-certifies (controls end PASS)  (93 lines of pass-7 output)
+  [PASS] 2a Smith form of L_3 is 1^110 2^10  ({'1': 110, '2': 10})
+  [PASS] 2b L_3 has full column rank 120
+  [PASS] 2c Sat has rank 120
+  [PASS] 2d [Sat : L_3(^3 Lambda)] = 2^10  (1024)
+  [PASS] 2e Sat / L_3(^3 Lambda) = (Z/2)^10  ({'1': 110, '2': 10})
+  [PASS] 3a psi_* T lies in the rational image of L_3 for all 940
+  [PASS] 3b every L_3-preimage denominator is one or two  ([1, 2])
+  [PASS] 3c 2 psi_* T lies in L_3(^3 Lambda) for all 940
+  [PASS] 3d psi_* T lies in Sat for all 940
+  [PASS] 3e psi_* T escapes L_3(^3 Lambda) exactly when gamma(T) is odd  (626 escaping, 626 odd)
+  [PASS] 3f the escaping/odd count is 626  (626)
+  [PASS] 4 L_3(^3 Lambda) + Z<psi_* T> = Sat exactly (equal HNF)
+  [PASS] 5a rho is invertible over F_2
+  [PASS] 5b sigma(T) = rho(gamma(T)) mod L_3(^3 Lambda) for all 940 generators
+  [PASS] 5c rho is an isomorphism F_2^10 -> Sat / L_3(^3 Lambda)
+  [PASS] 5d ker(2 v mod 2) = ker(gamma mod 2) as subspaces of F_2^940  (930)
+  [PASS] 6a H^ has rank 130
+  [PASS] 6b H^ is contained in Sat + Z^10
+  [PASS] 6c [Sat + Z^10 : H^] = 2^10  (1024)
+  [PASS] 6d (Sat + Z^10) / H^ = (Z/2)^10  ({'1': 120, '2': 10})
+  [PASS] 6e projection of H^ to the first block is onto Sat
+  [PASS] 6f projection of H^ to the second block is onto Z^10
+  [PASS] 6g the defining F_2 condition on Sat + Z^10 has rank 10  (10)
+  [PASS] 6h the three generating blocks generate H^ exactly, matching the intrinsic kernel description  (index of the generated lattice in the intrinsic one: 1, invariant factors {'1': 130})
+  [PASS] 7a the transfer image Im = col(A) is contained in H^
+  [PASS] 7b Im has full rank 130 inside H^  (130)
+  [PASS] 7c H^ / Im is finite  (0)
+  [PASS] 8a top-wedge pairing agrees with the pass-7 wedge on canonical samples  (4536 pairings verified directly)
+  [PASS] 8b ImTheta has rank 120
+  [PASS] 8c every elementary divisor of ImTheta is one  ({'1': 120})
+  [PASS] 8d E := Z^130 / ImTheta is free of rank 10
+  [PASS] 9a ImTheta + <g_z> has full rank 130  (130)
+  [PASS] 9b (ImTheta + <g_z>) / ImTheta is free of rank 10
+  [PASS] 9c Z^130 / (ImTheta + <g_z>) = (Z/2)^10 exactly  ({'1': 120, '2': 10})
+  [PASS] 9d the exceptional classes generate exactly 2E, i.e. E / (exceptional image) = (Z/2)^10
+  [PASS] 10a-i the exactly-even part of Im is integrally L_3-solvable  (exact gamma-kernel rank 930)
+  [PASS] 10a-ii the mod-two-even part of Im is integrally L_3-solvable  (mod-two gamma-kernel dimension 930)
+  [PASS] 10b-i (L_3(Theta ^ a), 0) lies in H^ for each of the ten directions
+  [PASS] 10b-ii the re-issued gate verdict for the ten a-directions is measured and recorded (no value assumed)  ([True, True, True, True, True, True, True, True, True, True])
+  [PASS] 10c-i (0, 2 e_k) lies in H^ for each k
+  [PASS] 10c-ii the exceptional-direction verdicts are measured and recorded  ([True, True, True, True, True, True, True, True, True, True])
+  [PASS] 10c-iii the gamma-projection of Im is all of Z^10 (the ten new directions are hit integrally)
+  [PASS] 10d-i the selected sublattice really has gamma = 0 mod four
+  [PASS] 10d-ii that sublattice is integrally L_3-solvable in the first block
+  [PASS] 10d-iii the conservative old-style gate verdict is measured and recorded  ([True, True, True, True, True, True, True, True, True, True])
+  [PASS] 11 rank(psi_*) on the 940 generators is recorded  (120)
+  [PASS] 12a gate-A generator count agrees
+  [PASS] 12b gate-A denominator-two count is 626 and agrees with CHECK 3
+  [PASS] 12c gate-A integral-preimage count agrees  (314)
+  [PASS] 12d gate-A odd-diagonal count agrees
+  [PASS] 12e gate-A records the two sets coincide, as re-derived here
+  [PASS] 12f the per-block denominator profile agrees generator by generator  ({'H3(x)H0': {'2': 10}, 'H0(x)H3': {'2': 10}, 'H2(x)H1 (a*u (x) a*z)': {'1': 147, '2': 303}, 'H2(x)H1 (C_s (x) a*z)': {'1': 10}, 'H1(x)H2 (a*z (x) a*u)': {'1': 147, '2': 303}, 'H1(x)H2 (a*z (x) C_s)': {'1': 10}})
+  [PASS] 12g gate-A L_3 Smith form agrees
+
+wall seconds: 45.88
+PASS
