@@ -103,9 +103,10 @@ matching cache archives, and no finitegeom-to-certificate dependency.
 
 `lean/scripts/lean-certificate-dependency-firewall.py` is the executable package
 edge policy. Its Q11/Q16 checks are green after the self-contained rewrites. The
-projective-cap Q11 certificate is likewise Mathlib-only and sealed; Q13 is Mathlib-only
-with its frozen payload under guarded compilation; Q25 is statically separated and
-awaits materialization and compilation. The portfolio scan stays red only for a package
+projective-cap Q11 and Q13 certificates are Mathlib-only and sealed. The separate q13
+passant-code certificate remains paper-resident and imports the monorepo; it requires a
+distinct Mathlib-only extraction and paper bridge. Q25 was retired because no adopted
+paper or formal companion consumed it. The portfolio scan stays red only for a package
 whose external fact, downstream adapter, or legacy-family removal is incomplete.
 
 The Q16 seam is now established. The generated level, step-kernel, leaf, and rejection
@@ -117,20 +118,15 @@ into that layer without a finitegeom-to-certificate edge.
 The migrated reverse edges were bounded. The projective-cap Q11 and Q13 migration inputs
 reached only `ProjectiveCap.CertCheck` and `ProjectiveCap.PlaneOutcome`; their generated
 checks now use duplicated Mathlib-only local models, and outcome transport is downstream.
-Q25 has 9,531 migration-input modules and reaches ten human
-modules: `Certificate`, `FiniteFields`, `Moments`, `Nucleus`, `ProjectiveBridge`,
-`PlaneTransitivity`, and the four Baer-completion modules `BaerPlane`,
-`CollisionProfile`, `OrbitCounting`, and `PairExtension`. Its generated payload must
-be separated from all ten human modules and moved directly to its final namespace
-before one final leaf build; no intermediate compatibility build is permitted. Its final
-tree has 9,511 Lean modules: 1,945 frozen transformed modules, 7,547 regenerated modules,
-and 19 handwritten modules.
+The q13 passant-code package has a different boundary: its paper-local `PassantCodeQ13`
+certificate currently imports the monorepo `NodeKayles` library. Its extraction must first
+classify the minimal semantic model and checker needed for its published finite terminals;
+the existing projective-cap Q13 package is not an interchangeable substitute.
 
 Their final certificate namespaces are
 `TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q11.*`,
-`TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.*`, and
-`TavisRuddFiniteGeom.Certificates.Q25.*`. The local statement models live under the
-same branded certificate families. The downstream adapters prove type equivalences
+`TavisRuddFiniteGeom.Certificates.ProjectiveCap.Q13.*`. The local statement models live
+under the same branded certificate families. The downstream adapters prove type equivalences
 and theorem transport into `TavisRuddFiniteGeom.Shared.Projective.*` or the owning
 paper interface; the certificate packages import neither those shared modules nor a
 separate project foundation. Legacy `ProjectiveCap.*`, `RelativeConicArcs.*`, and
@@ -159,17 +155,6 @@ A hash-guarded transformer therefore performs this namespace-only migration; nei
 package claims regeneration from the unavailable historical certificate input. Every
 high-memory Q13 class is a separate guarded queue target: `LEAN_NUM_THREADS` and CPU
 affinity do not themselves prevent Lake from overlapping sibling module processes.
-
-For Q25 the certificate-local model is limited to the concrete `GF(25)` encoding,
-raw projective coordinates and cap checker, conjugation/fixed indices, and the pair,
-line-mask, residual, exhaustion, and minimum checker families. Generic moments,
-incidence, collision/orbit counting, pair extension, normalization, and projective
-transport remain downstream. `RelativeConicArcs.Nucleus` has no declaration-level use
-and is removed rather than copied. The 7,547 regenerated modules and 1,945 authenticated
-frozen modules move mechanically under `TavisRuddFiniteGeom.Certificates.Q25`; the two
-canonical data artifacts, seventeen script/support inputs, transactional generation
-plan, manifest, provenance hashes, declaration-surface audit, and import-only aggregates
-must agree before its single final build.
 
 Use explicit paper and shared source roots under the ecosystem namespace:
 
