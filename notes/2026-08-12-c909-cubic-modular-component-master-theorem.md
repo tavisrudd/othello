@@ -41,13 +41,16 @@ properties.
 
    and the signed parameter selects `r=9t` (the opposite convention selects
    `r=-9t`).  At three, the graph is the monodromy-selected scalar packet.
-4. Every divided power of every divisor class on `J(X_t)` belongs to the
-   ordinary integral divisor-product lattice:
+4. Every divided power of every class in the prescribed graph
+   Neron--Severi lattice belongs to the ordinary integral divisor-product
+   lattice:
 
    ```text
-        PD<NS(J(X_t))>^k = P_J^k,          0<=k<=5.
+        PD<N_graph^1(J(X_t))>^k = P_graph^k,       0<=k<=5.
    ```
 
+   At every non-CM fibre the graph lattice is the full Neron--Severi lattice;
+   no equality is asserted for extra CM divisor classes.
 5. In particular `Theta^4/4!` is algebraic.  Voisin's cubic criterion makes
    every `X_t` universally `CH_0`-trivial.
 6. Independently, the all-smooth-cubic quantum theorem makes
@@ -60,8 +63,8 @@ After forgetting the sign, the reduced cubic period curve is normalized by
 ```
 
 and the marking cover above is its index-two congruence cover
-`Gamma_ex=rho_2^{-1}(A_3)`.  Hence the family is a nonisotrivial modular
-component of the marked separation locus
+`Gamma_ex=rho_2^{-1}(A_3)`.  Hence the family is a nonisotrivial presentation
+curve in one fixed-data marked separation stack
 
 ```text
  {X smooth cubic : J(X) has finite-etale elliptic-Hecke presentation}.
@@ -140,14 +143,17 @@ census, or choice of a fibrewise isogeny is load-bearing.
 
 ## Exact scope
 
-The theorem concerns the marked elliptic-power presentation.  It does not
+The theorem concerns one fixed graph datum `tau` and its finite-level marked
+elliptic-power presentation stack.  It does not
 say that the total finite-etale Hecke locus is closed or finite type, nor
 that the presentation is recoverable from the unmarked ppav.  It proves
 cohomological divisor-product saturation, not a relative Chow divided-power
 identity.  It neither produces a universal decomposition of the diagonal
 nor proves irrationality after two stabilizations.
 
-The equality with `X_0(3)` is a normalization statement for the reduced
+The presentation curve is not claimed to be a connected component of the
+full Hecke stack or of the countable union over all graph data.  The equality
+with `X_0(3)` is a normalization statement for the reduced
 period image, not a compactified equality of cubic and modular families.
 The four removed cubic boundary values include two interior modular points.
 The sign cover labels the exotic pair only after a one-fibre symplectic
@@ -190,4 +196,3 @@ referee-resistant.
   family was found in the bounded source audit.  Fixed modular data meet the
   cubic period locus finitely unless they share a component, but classifying
   all shared components remains open.
-
