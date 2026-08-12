@@ -2,15 +2,17 @@
 
 Date: 2026-08-11
 
-Status: local theorem with unramified descent; a strict finite-etale C909
-result.  No manuscript, PDF, mirror, Lean, or commit change.
+Status: candidate all-degree formula with exact low-degree checks and a major
+open integral-saturation lemma.  The codimension-two specialization is
+proved; the general formula is not yet a theorem.  No manuscript, PDF,
+mirror, Lean, or commit change.
 
 ## Verdict
 
 The finite-etale graph theorem gives full divided-power saturation of the
-Neron--Severi lattice, but its full ambient integral-Hodge defect is not only
-nonzero: in the one-depth split regime it has an exact formula in every
-codimension.
+Neron--Severi lattice, while exact calculations show a nonzero ambient
+integral-Hodge defect.  The formula below is the strongly supported
+all-degree candidate; its integral filtered-matching lemma remains open.
 
 Let `R` be a DVR with uniformizer `p`, let the graph have depth `a>0`, and
 suppose that, after finite unramified extension, its self-adjoint slope is
@@ -40,7 +42,7 @@ For `1<=h<=ell`, let `H(ell,h)` be the number of Dyck paths of semilength
 \tag{3}
 \]
 
-Then the full local quotient is
+The candidate full local quotient is
 
 \[
  \boxed{\displaystyle
@@ -55,11 +57,11 @@ Then the full local quotient is
 \tag{4}
 \]
 
-The direct sum is an isomorphism of finite `R`-modules; its individual
-summands are not canonically labelled before splitting.  Formula (4) descends
-unchanged through a finite unramified splitting extension.  Away from the
-graph prime the quotient is zero, so (4) is the global integral defect at the
-unique bad prime of a one-depth tower.
+Conditional on the saturated filtered-matching lemma in Section 3, the
+direct sum is an isomorphism of finite `R`-modules; its individual summands
+are not canonically labelled before splitting.  Formula (4) would then
+descend unchanged through a finite unramified splitting extension.  Away
+from the graph prime the quotient is zero.
 
 In particular, the squarefree `2k`-slot component is
 
@@ -163,7 +165,7 @@ Define `F^rM_ell` to be the submodule whose expansion in (9) has no monomial
 with fewer than `r` letters among the `Y_i`.  The following is the integral
 standard-monomial fact used here.
 
-> **Filtered matching lemma.**  If all `delta_ij` are units, there is an
+> **Filtered matching conjecture / proof gate.**  If all `delta_ij` are units, there is an
 > `R`-basis `e_gamma` of `M_ell`, indexed by the Dyck paths `gamma` of
 > semilength `ell`, for which
 > 
@@ -180,8 +182,8 @@ standard-monomial fact used here.
 > \tag{14}
 > \]
 
-Here is a structural proof, included to make clear that no census is hiding
-in the assertion.  Factor `p^{-2a}X_1\cdots X_{2ell}` from a matching product
+Here is the proposed structural route.  It does not yet prove saturation or
+unit pivots.  Formally factor `p^{-2a}X_1\cdots X_{2ell}` from a matching product
 in (9), and set formally `z_i=Y_i/X_i`.  Each edge becomes
 
 \[
@@ -197,10 +199,12 @@ noncrossing web from left to right, the open-arc count is the height of its
 Dyck path.  The elimination that kills all terms of degree below `r` retains
 exactly the webs whose path never rises above `ell-r`.  At every elimination
 step the pivot is a product of differences `delta_ij`; it is a unit by (1).
-Thus the resulting transition matrix is unitriangular over `R`, not merely
-over its fraction field.  Its surviving pivots are one per Dyck path of each
-exact height, giving (13)--(14).  This is the standard web/Pluecker
-straightening proof with the osculating `z`-degree filtration.
+To conclude, one must exhibit an integral transition matrix whose relevant
+minors are monomials in the unit differences `delta_ij`.  The formal symbols
+`z_i=Y_i/X_i` are only mnemonic because exterior variables are not
+invertible.  Moreover, a nonzero associated-graded vector need not be
+primitive over a DVR.  Saturated graded quotients with unit pivots—including
+after reduction at `p=2`—are the exact missing lemma.
 
 For a numerical description that does not choose webs, let `B(ell,h)` be the
 number of Dyck paths of semilength `ell` of height at most `h`.  Then
@@ -236,12 +240,16 @@ The `h=ell` paths produce unit elementary divisors and hence no quotient.
 For `ell=2`, (17) is exactly the four-slot Pluecker class of the earlier
 codimension-two theorem.
 
-## 4. Proof of the full formula and descent
+## 4. Conditional deduction of the full formula and descent
 
-Multiplying (17) by the `k-ell` volume factors from (11) changes both scales
+Assuming the saturated filtered-matching lemma, multiplying (17) by the
+`k-ell` volume factors from (11) changes both scales
 by the same `p^{a(k-ell)}`.  Therefore it leaves the quotient (17) unchanged.
 There are exactly (12) independent multidegree components of that type.
-Summing over `ell` proves (4) after splitting.
+Summing over `ell` would prove (4) after splitting.  A complete proof must
+also show integrally that multiplication by the doubled-slot volume factors
+identifies a primitive direct summand; rational multidegree factorization
+alone is insufficient.
 
 For an unsplit finite-etale slope, take a finite unramified faithfully flat
 splitting extension `O/R`.  Both `I_A^k` and `P_A^k` commute with this finite
@@ -288,11 +296,13 @@ exactly to make every `delta_ij` a unit in the web straightening.
 
 ## Mystery ledger
 
-* **Settled:** the whole one-depth finite-etale Hodge/product defect is a
-  Dyck-height Smith filtration, not an isolated four-slot class.
-* **Settled:** the individual four-slot quotient is only the `ell=2` layer;
-  higher codimension has elementary divisors of orders through
-  `p^{a(k-1)}`.
+* **Strongly supported, not settled:** the whole one-depth finite-etale
+  Hodge/product defect appears to be a Dyck-height Smith filtration.  Exact
+  checks through squarefree semilength six support (4), but the integral
+  unit-pivot lemma remains open.
+* **Settled at `ell=2`; predicted generally:** the individual four-slot
+  quotient is the first layer.  Higher exact computations exhibit elementary
+  divisors through `p^{a(k-1)}`.
 * **Settled:** finite-etale `PDDef^*=0` and the nonzero ambient Hodge defect
   coexist without tension, because their ambient lattices are different.
 * **Boundary:** arbitrary-depth filtered graph data requires a weighted web
