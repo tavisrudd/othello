@@ -57,6 +57,31 @@ Hence the characteristic polynomial of \(R\), and therefore that of
 blocks.
 \end{proof}
 
+\begin{corollary}[The sixth-root multiplicity is atomic]
+\label{cor:nu6-atomic}
+The function \(\nu_6\) is well defined on geometric atom-equivalence classes
+and extends uniquely to a homomorphism
+\[
+ \nu_6:\Z^{(\mathscr A)}\longrightarrow\Z.
+\]
+\end{corollary}
+
+\begin{proof}
+An isomorphism of geometric \(F\)-bundles in
+\cite[Definition~5.21]{KKPYY} is an isomorphism over the same formal
+\(u\)-disc, so it conjugates formal monodromy without changing its
+eigenvalues.  Lemma~\ref{lem:formal-isomonodromy} handles movement between
+points of one connected unramified spectral component.  The blowup and
+projective-bundle identifications used to pass from abstract atoms to
+geometric atoms are likewise \(F\)-bundle isomorphisms over that same loop
+coordinate \cite[Proposition~5.22]{KKPYY}; no ramified substitution
+\(u\mapsto u^m\) is among the equivalences.  Thus \(\nu_6\) is constant on
+each class, and additivity on the free group is unique.
+\end{proof}
+
+For a smooth projective variety \(Z\), we abbreviate
+\(\nu_6(Z)=\nu_6(\CFF(Z))\).
+
 \begin{proposition}[Cubic and low-dimensional atoms]
 \label{prop:atom-values}
 Let \(X\) be a smooth cubic threefold.

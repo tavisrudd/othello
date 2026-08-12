@@ -127,6 +127,11 @@ flatness.  Away from \(p\), the quotient isogeny identifies the integral
 divisor and cohomology lattices, so local membership globalizes.
 \end{proof}
 
+The proof used only that each defect block of the coefficient form is
+\(p\) times a unimodular symmetric form.  It therefore applies verbatim with
+\(pI_g\) replaced by \(pB\) for any unimodular symmetric \(B\).  This is the
+form needed for the six-axis lattice.
+
 The scalar version of the same mixed-adjugate construction applies to the
 three-primary block of the six-axis polarization.  We can therefore use the
 two local forms isolated in Section~\ref{sec:envelope}.
@@ -186,11 +191,16 @@ The five-axis source has polarization type \((1,6,6,6,6)\), so only the
 primes two and three can contribute an integral defect.  At two the exotic
 graph slope acts on the simple heart through \(\omega\in\F_4\); its minimal
 polynomial \(t^2+t+1\) is squarefree.  Theorem~\ref{thm:semisimple-slope}
-therefore gives the primitive local class.  At three the monodromy line makes
-the gluing scalar on the simple coefficient block, and the scalar
-mixed-adjugate formula gives the same conclusion.  Away from two and three
-the source and quotient lattices are unimodular.  Local membership at every
-prime is equivalent to integral membership in the divisor-product lattice.
+therefore gives the primitive cofactor on the rank-four defect block.  The
+rank-one unit block has trivial kernel, so its primitive coefficient divisor
+descends.  Filling the unit block by its determinant when the defect block is
+the adjugate target, and filling the defect block by its determinant when the
+unit block is the target, constructs the cofactor of the full
+five-dimensional form.  At three the monodromy line makes the gluing scalar
+on the simple coefficient block, and the same blockwise construction
+applies.  Away from two and three the source and quotient lattices are
+unimodular.  Local membership at every prime is equivalent to integral
+membership in the divisor-product lattice.
 
 Lemma~\ref{lem:six-axis-local-chart} identifies the actual geometric lattice,
 not merely an abstract gluing with the same Smith form.  The graph kernel is a
