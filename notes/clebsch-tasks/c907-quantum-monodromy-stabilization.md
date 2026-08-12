@@ -104,7 +104,11 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   The first raw four-packet, `X_(3,6) subset P(1,1,1,1,2,4)`, is never
   quasismooth.  More generally, every reduced rank-four self-dual
   hypergeometric small-even Fano-threefold connection has `nu_6<=2`; the
-  remaining weighted gate is whether smoothness forces that presentation.
+  presentation is now forced for every smooth quasismooth weighted
+  hypersurface in pairwise-coprime weights with primitive `O_X(1)`.  Thus no
+  isolated-stacky weighted hypersurface supplies `nu_6>=4`; the remaining
+  weighted gate is positive-dimensional stacky strata and complete
+  intersections.
 
 ## Active frontier: `m=2`
 
@@ -180,6 +184,8 @@ Weighted two-cubic obstruction:
 Four-packet false positive and rank-four bound:
 `../2026-08-12-c907-36-weighted-ci-false-positive.md` and
 `../2026-08-12-c907-rank-four-hypergeometric-support-bound.md`.
+Isolated-stacky weighted-hypersurface theorem:
+`../2026-08-12-c907-isolated-stacky-hypersurface-rank-four.md`.
 
 ## Gold architecture after `m=2`
 
