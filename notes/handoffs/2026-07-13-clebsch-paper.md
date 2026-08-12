@@ -53,110 +53,27 @@ the `E_6` carrier, reversible only with a residue flag, with bottom fibres
 arithmetic-lift frontier remain literature-gated and were not promoted to any
 manuscript or Lean source.
 
-The research-only C907 quantum route is active.  Its exact generic-parameter
-certificate proves that `X x P^m` carries `m+1` copies of Cai's cubic
-`+/-1/6` block.  The alternate surface-carrier attack now proves
-`X x P^1` irrational for every smooth cubic threefold: all point, curve, and
-surface blocks have fractional exponents only `0` or `1/2`.  Coarse atom
-multiplicity cannot settle full stability from `m=2`, where universal
-self-carrier balances begin.  The prime-power global-cycle refinement has now
-failed its source-level functoriality audit: the published decompositions are
-local on analytic germs, and iterated projective bundles give admissible
-local-copy/wreath counterpatterns.  The recursive gate has sharpened to a
-conditional Serre-dimension gap: `m+5/3` exceeds the center bound `m+1`, but
-the ordinary projective-bundle decomposition splits it into `m+1`
-distributable copies.  The categorical route therefore needs both a
-gluing-sensitive enhanced atom and a restricted fractional-CY carrier
-inequality; general Serre-dimension monotonicity is false.  These and the
-integer/Tate-filtered atom are the live gates; no Paper V or Lean promotion is
-authorized.  The Tate gate now has a basis-independent exact target: the
-Beilinson Euler lattice gives the endpoint a unipotent Serre block of length
-`m+1`, while every projective self-carrier has length `m-1`.  Turning this
-uniform gap two into the full obstruction requires a strict cubic-isotypic
-Stokes/Rees filtration whose associated graded obeys the additive blow-up
-formula; preserving the Serre block alone is insufficient because
-semiorthogonal extensions can join blocks.  The expected Γ-integral mechanism
-is unavailable in general;
-Iritani Theorem 1.1 and Remark 1.5 confirm this exact formal-versus-Stokes
-boundary.  Iritani's explicit initial matrix sharpens the positive side:
-its exceptional Fourier block has consecutive `q`-adic elementary divisors,
-affinely `0,...,r-2`, and root monodromy preserves the multiset.  The unresolved
-step is now presentation-independent strict composition of these local Rees
-lattices through weak factorization, together with the analytic Stokes gluing.
-The associated-graded composition itself now passes the transverse and nested
-two-step blow-up exchanges.  Mutation on `D^b(P^1)` shows why that is not
-enough: Euler and Serre data remain unchanged while the exceptional flag
-changes, and the canonical monodromy-weight line is a third line.  The full
-reduced ambient cubic quantum module is now identified as the irreducible
-irregular-Hodge hypergeometric module `H(0,0,0,0;1/3,2/3)`.  This rules out
-globalizing Cai's local rank-two block as a proper subobject.  Its local
-sectorial realization is now exact: every admissible phase gives the unique
-ordered Stokes ranks `1,2,1`, with the zero-exponential rank-two middle block
-fixed by root monodromy; `pi/2` is the certified representative.  Iritani
-proves the sectorial Gamma-integral/Orlov comparison for toric weak-Fano
-blow-ups, but explicitly leaves identification of the
-residual Stokes structures with the center quantum modules open; formal
-`F`-bundle uniqueness and fixed-Landau--Ginzburg compactification independence
-do not add that analytic datum.  The highest-EV remaining theorem is therefore
-the residual-center mutation-system identification, strict for irregular
-Hodge filtrations and composable through weak factorization.
-The subsequent `T1/T2/T3` scoping pass proves a narrower positive result and
-removes two shortcuts.  Iritani (5.28) is formally strict at `Q=theta=0` on the
-double associated graded: the positive-`t` error and lower-left restriction
-block die, leaving `(F tensor I_Z) direct_sum I_X`; the fivefold point and curve
-pilots pass exactly.  This does not canonically project the Gamma lattice,
-which lives in analytic flat sections and has a sectorial, phase-dependent
-Stokes splitting.  A plain `C[[t]]` Krull--Schmidt ledger also forgets block
-length; the repaired enriched block retains `U=I+N` and is indecomposable
-because its endomorphism order `C[[t]][N]/(N^ell)` is local.  Finally, the
-proposed Fano-threefold database route cannot prove the `m=2` case: arbitrary
-threefold centers include Calabi--Yau quintics and general-type sextics inside
-`P^4` inside `P^5`.  The database is reconnaissance only.  The live gold
-architecture now requires both the analytic/integral `T1` lift and an
-arbitrary-center `+/-1/6` length bound.  Execution first freezes a
-phase/mutation-compatible Gamma/Rees cubic length.  The formal nef-canonical
-carrier exclusion is now closed in every dimension by KKPYY Claim 6.15, so
-quintic and sextic centers have no formal cubic packet.  The remaining carrier
-gate is non-nef threefolds.  Analytically, the codimension-two basepoint graded
-map passes, but residual-center Stokes equality is unknown already at order
-zero; compute that toric cocycle before any first-Novikov derivative.  Report:
-`../2026-08-11-c907-wave-zero-nef-exclusion-and-r2-audit.md`.  Plan:
-`../2026-08-11-c907-moonshot-attack-plan.md`.  Exact toric pilot and
-independent replay: `../2026-08-11-c907-toric-r2-pilot.md`.
-The same variety's projective-bundle collection mutates explicitly to its
-`P^3` residual plus `P^5` ambient Orlov blocks, eliminating a finite
-Euler-lattice obstruction but not the escaping-thimble comparison.  Audit:
-`../2026-08-11-c907-double-presentation-mutation-audit.md`.
-The ordinary KKPYY carrier-height branch is closed by C909: the cubic abstract
-`G`-atom is already carried by the allowed threefold `X`.  C907 must define
-an operation-framed enrichment of the entire atomic composition; an atomwise
-pullback through Proposition 5.22 produces copies of `J_1`, not the endpoint
-Tate string.  The toric residual chart is now exactly `W_(P^3)+ZU`, and its
-bounded-value logarithmic tail is tame.  Direct transport to the limit is
-false because two explicit mixed pole channels have nonintegrable parameter
-drift.  The next theorem is their excision in directed rapid-decay homology
-and the resulting Orlov/Gamma marking.  Report:
-`../2026-08-11-c907-wave-two-double-suspension-and-pole-escape.md`.
-C909 also isolates the minimal algebraic target: a strict graded measure over
-`Z[L]/(L^3)` with endpoint `1+L+L^2`, codimension-two center shift `L`, and
-width one on every threefold formally proves `X x P^2` irrational.  Thus C907
-does not need a full enriched-atom classification, but it must construct this
-three-level quotient presentation-independently and prove strict Gamma/Rees/
-Stokes compatibility.  C909 has since made the algebraic target uniform in
-`m`: absolute support degrees `0,...,s-3` on every `s`-dimensional cubic
-carrier force all endpoint terms of `X x P^m` outside the weak-factorization
-center span.  On the cycle side, C909 proves finite-etale graph cofactor
-saturation through arbitrary `p^a` blocks and, more strongly, full
-divided-power saturation of the complete Neron--Severi lattice for every
-block-respecting graph finite-etale at each primary depth.  Its exact local
-cross depth is `max(a,b,a+b-v_p(t_j-t_i))`.  The conceptual mechanism is an
-iff tropical theorem: a symmetric ideal lattice is rank-one generated exactly
-when `I_ij^2 subset I_ii I_jj`; its rank-one cokernel is explicit, and every
-dyadic failure has an order-two divided-square witness in the coefficient
-quotient.  This replaces mixed cofactors by square-zero generation in every
-degree.  Factorial-active nonsplit trace-transfer root-weight families are
-independently audited and polarized-indecomposable.  A basis-free packet
-formulation and nilpotent carry remain open; the latter belongs to C908.
+The research-only C907 quantum route is active.  Its v1 theorem is now
+unconditional: framed formal monodromy of the numerical small quantum
+connection, followed stepwise through Iritani's blow-up comparison, proves
+that `X x P^1` is irrational for every smooth cubic threefold.  The proof
+does not use the retired atomwise HLT-descent claim.  The warning-free
+manuscript is `papers/cubic-stabilization-epilogue/`; exact proof and source
+audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
+
+Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
+coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
+grading: the endpoint has `1+L+L^2`, while a threefold center must have width
+one.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
+`W_(P^3)+ZU`; a finite weighted graph atlas now makes every bounded pole face
+locally directed-acyclic.  The live analytic gate is the proper common
+compactification, collar gluing, and Orlov/Gamma marking.  The direct
+threefold grading argument is closed negatively by an explicit self-dual
+length-two model; the carrier gate is the geometric vanishing of its
+sectorial Rees extension class for arbitrary non-nef threefolds.  Current
+card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:
+`../2026-08-11-c907-moonshot-attack-plan.md`.  No Paper V or Lean promotion is
+authorized.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
@@ -759,7 +676,14 @@ identities `c·I_10` with `4 | c`, hence residue zero mod two, certified over
 all 72 arrangements with an exact five-mechanism proof.  The unique standing
 population route is the non-product `c_4(ℰ)` bit `λ` (pass-5 §6 plan).  The
 pass-6 bimodal histogram mystery is closed: the invariant is the parity of
-the Pfaffian-complement functional `u∧Θ^{[4]}`.  See
+the Pfaffian-complement functional `u∧Θ^{[4]}`.  Pass 8 then **refuted the
+degree-three half of pass-2 Theorem 1 by certificate**: the triple point's
+link (H³ = Z^10 of the exceptional cubic) enlarges `H^3(M,Z)` beyond
+`b^*H^3(J,Z)`, detected by diagonal parity and verified independently; all
+pass-6/7 verdicts survive (J-level readouts), but pass-2 Theorem 2 and the
+exact escape-group identification need re-derivation on the corrected
+lattice before the λ-bit computation can resume; correction of record:
+`notes/2026-08-11-c908-h3-resolution-lattice-correction.md`.  See
 `notes/2026-08-11-c908-universal-family-even-rigidity.md`,
 `notes/2026-08-11-c908-transfer-liveness-and-span-incidence.md`,
 `notes/2026-08-11-c908-span-incidence-parity-no-go.md`, and

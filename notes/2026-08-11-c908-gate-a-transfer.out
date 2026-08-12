@@ -1,0 +1,51 @@
+C908 pass-8 gate A: the lambda-bit transfer certificate
+shared pass-7 machinery re-certifies: True (93 lines of pass-7 output, ending PASS)
+L_1 : Lambda -> ^3 Lambda divisors={'1': 10} saturated=True
+L_3 : ^3 Lambda -> ^5 Lambda rank=120 divisors={'1': 110, '2': 10} matches corpus=True
+L_3-preimage rational for all 940 generators: True; INTEGRAL for all: False (314 integral, 626 with denominator two)
+denominator profile by block: {'H3(x)H0': {'2': 10}, 'H0(x)H3': {'2': 10}, 'H2(x)H1 (a*u (x) a*z)': {'1': 147, '2': 303}, 'H2(x)H1 (C_s (x) a*z)': {'1': 10}, 'H1(x)H2 (a*z (x) a*u)': {'1': 147, '2': 303}, 'H1(x)H2 (a*z (x) C_s)': {'1': 10}}
+H^3(x)H^0 generator denominators: [2]
+denominator-two set equals the odd-i_Delta set: True (626 generators with odd diagonal restriction)
+LOUD FLAG: psi_* of the integral generating set of H^3(F x F) lands in the SATURATION of im L_3 but not in im L_3 itself: 626-of-940 generators have L_3-preimage with denominator exactly two, and that set is EXACTLY the set of generators with odd diagonal restriction (see anomaly_equals_condition_ii).
+
+(1) dim_F2 V mod two = 120 inside ^3 Lambda (x) F_2 of dimension 120
+(1) rank of i_Delta^* mod two = 10; dim of the joint (integrality + Delta) kernel = 930; dim v(joint kernel) = 120
+
+(2) per basis direction: Theta ^ e_i reachable?
+     direction  unconstrained  gate-A-constrained
+     e0         True           True
+     e1         True           True
+     e2         True           True
+     e3         True           True
+     e4         True           True
+     e5         True           True
+     e6         True           True
+     e7         True           True
+     e8         True           True
+     e9         True           True
+
+(3) reachable a-directions: unconstrained dim=10/10; under gate A dim=10/10
+(3) gate A reaches all of Lambda_2: True
+
+(4) block profile (generators / dim v-image / dim i_Delta-image / dim v(ker i_Delta) / dim reachable a / dim reachable a under gate):
+     H3(x)H0      10   10   10   10   10   10
+     H0(x)H3      10   10   10   10   10   10
+     H2(x)H1     460  110   10  110   10   10
+     H1(x)H2     460  110   10  110   10   10
+
+(5) as-intended variant, restricted to the 314 generators with integral L_3-preimage:
+     dim V mod two=29; dim v(ker i_Delta)=29; reachable a unconstrained=10/10; reachable a under gate A=10/10
+     direction  unconstrained  gate-A-constrained
+     e0         True           True
+     e1         True           True
+     e2         True           True
+     e3         True           True
+     e4         True           True
+     e5         True           True
+     e6         True           True
+     e7         True           True
+     e8         True           True
+     e9         True           True
+
+wall seconds: 17.45
+PASS

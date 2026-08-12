@@ -1,0 +1,8 @@
+L_3 elementary divisors summary: rank=120 divisors=[1, 2]
+hat_e0 * Theta^[3]: solvable over Q, denominator = 2
+hat_e1 * Theta^[3]: solvable over Q, denominator = 2
+hat_e5 * Theta^[3]: solvable over Q, denominator = 2
+hat_e9 * Theta^[3]: solvable over Q, denominator = 2
+(e01^th3) * (e2^th3): solvable over Q, denominator = 1
+i_Delta^* of (beta (x) 1) = beta itself: odd (unit ^9 coordinate) by construction
+PASS

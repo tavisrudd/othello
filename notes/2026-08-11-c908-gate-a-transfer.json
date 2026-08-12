@@ -1,0 +1,609 @@
+{
+  "L3_preimage": {
+    "LOUD_FLAG": "psi_* of the integral generating set of H^3(F x F) lands in the SATURATION of im L_3 but not in im L_3 itself: 626-of-940 generators have L_3-preimage with denominator exactly two, and that set is EXACTLY the set of generators with odd diagonal restriction (see anomaly_equals_condition_ii). So the blanket assertion 'v is integral for every generator' is too strong, but gate A is internally consistent: its condition (ii) is precisely the well-definedness of v. What remains genuinely open is the geometry. Since b_* kills torsion and b_* b^* = L_3, an odd-diagonal T'' with psi_* T'' outside im L_3 contradicts b^* : H^3(J,Z) -> H^3(M,Z) being SURJECTIVE. The pass-2 Theorem 1 proof of that surjectivity uses H^k(Theta \\ 0) = H^k(Theta) for k <= 6, which is the manifold statement; Theta has an ordinary triple point, so the local cohomology H^3_{0}(Theta) need not vanish and the step has a gap exactly where a two-torsion cokernel would sit. The numerology lines up on three sides: coker(L_3) = (Z/2)^10, the observed escape has exponent two, and H^3(X,Z) = Z^10 for the exceptional cubic threefold X. Concrete lead: b_* H^3(M,Z) / L_3(^3 Lambda) is (Z/2)^10 detected by the diagonal restriction mod two. NOT adjudicated here.",
+    "denominator_profile_by_block": {
+      "H0(x)H3": {
+        "2": 10
+      },
+      "H1(x)H2 (a*z (x) C_s)": {
+        "1": 10
+      },
+      "H1(x)H2 (a*z (x) a*u)": {
+        "1": 147,
+        "2": 303
+      },
+      "H2(x)H1 (C_s (x) a*z)": {
+        "1": 10
+      },
+      "H2(x)H1 (a*u (x) a*z)": {
+        "1": 147,
+        "2": 303
+      },
+      "H3(x)H0": {
+        "2": 10
+      }
+    },
+    "every_psi_pushforward_lies_in_im_L3_over_Q": true,
+    "every_psi_pushforward_lies_in_im_L3_over_Z": false,
+    "generators": 940,
+    "generators_with_denominator_two": 626,
+    "generators_with_integral_preimage": 314,
+    "h3_tensor_h0_denominators": [
+      2
+    ]
+  },
+  "anomaly_equals_condition_ii": {
+    "generators_with_denominator_two": 626,
+    "generators_with_odd_i_Delta_restriction": 626,
+    "meaning": "gate condition (ii) is not an extra constraint layered on a well-defined v: on this generating set it is EXACTLY the condition that makes v integral. A generator fails the L_3-preimage integrality precisely when its diagonal restriction is odd.",
+    "the_two_sets_coincide": true
+  },
+  "block_profile": {
+    "H0(x)H3": {
+      "dim_i_Delta_image": 10,
+      "dim_reachable_a": 10,
+      "dim_reachable_a_under_gate": 10,
+      "dim_v_image": 10,
+      "dim_v_image_of_delta_kernel": 10,
+      "generators": 10
+    },
+    "H1(x)H2": {
+      "dim_i_Delta_image": 10,
+      "dim_reachable_a": 10,
+      "dim_reachable_a_under_gate": 10,
+      "dim_v_image": 110,
+      "dim_v_image_of_delta_kernel": 110,
+      "generators": 460
+    },
+    "H2(x)H1": {
+      "dim_i_Delta_image": 10,
+      "dim_reachable_a": 10,
+      "dim_reachable_a_under_gate": 10,
+      "dim_v_image": 110,
+      "dim_v_image_of_delta_kernel": 110,
+      "generators": 460
+    },
+    "H3(x)H0": {
+      "dim_i_Delta_image": 10,
+      "dim_reachable_a": 10,
+      "dim_reachable_a_under_gate": 10,
+      "dim_v_image": 10,
+      "dim_v_image_of_delta_kernel": 10,
+      "generators": 10
+    }
+  },
+  "controls": {
+    "L_1_mod_two_injective": true,
+    "L_3_smith_form_matches_corpus": true,
+    "L_3_solvability_over_Q_for_every_generator": true,
+    "L_3_solvability_over_Z_for_every_generator": false,
+    "h3_tensor_h0_denominators": [
+      2
+    ],
+    "pass7_output_lines": 93,
+    "pass7_shared_machinery_certifies": true,
+    "psi_of_H3_tensor_H0_lands_in_im_L3_over_Z": false
+  },
+  "inputs": {
+    "notes/2026-08-10-c904-minimal-class-divisor-lattice.sage": "d77752dcf242cdd3e8ecf15d34785eba583aa4c4c7770b79decd2f43e260f734",
+    "notes/2026-08-11-c908-span-incidence-residues.sage": "6f7f015c864884059d21f75c790aa382f8ca353fe4a21d617560588baddb323d"
+  },
+  "item_1_dimensions": {
+    "ambient_dim_of_cubics": 120,
+    "dim_F2_of_V_mod_two": 120,
+    "dim_F2_of_delta_constrained_image": 120,
+    "dim_F2_of_the_integrality_kernel": 930,
+    "dim_F2_of_the_joint_kernel": 930,
+    "generators": 940,
+    "note": "V is the image of the integrality-constrained coefficient lattice under v = (1/2) c.W mod two; it is NOT the naive rowspace of v, which does not exist over Z",
+    "rank_of_i_Delta_mod_two": 10
+  },
+  "item_2_per_basis_direction": [
+    {
+      "direction": "e0",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e1",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e2",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e3",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e4",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e5",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e6",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e7",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e8",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    },
+    {
+      "direction": "e9",
+      "theta_wedge_e_in_delta_constrained_image": true,
+      "theta_wedge_e_in_unconstrained_image": true
+    }
+  ],
+  "item_3_reachable_a": {
+    "basis_of_reachable_a_unconstrained": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "basis_of_reachable_a_under_gate_A": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "dim_of_reachable_a_unconstrained": 10,
+    "dim_of_reachable_a_under_gate_A": 10,
+    "reachable_a_unconstrained_is_all_of_Lambda_2": true,
+    "reachable_a_under_gate_A_is_all_of_Lambda_2": true
+  },
+  "item_5_as_intended_variant": {
+    "basis_of_reachable_a_under_gate_A": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "caveat": "this restricts to the 314 generators whose L_3-preimage is integral; it is NOT the answer for the full integral H^3(F x F), which is item 3",
+    "dim_F2_of_V_mod_two": 29,
+    "dim_F2_of_delta_constrained_image": 29,
+    "dim_F2_of_ker_i_Delta": 314,
+    "dim_of_reachable_a_unconstrained": 10,
+    "dim_of_reachable_a_under_gate_A": 10,
+    "generators_used": 314,
+    "per_basis_direction": [
+      {
+        "direction": "e0",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e1",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e2",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e3",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e4",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e5",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e6",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e7",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e8",
+        "gate_A": true,
+        "unconstrained": true
+      },
+      {
+        "direction": "e9",
+        "gate_A": true,
+        "unconstrained": true
+      }
+    ]
+  },
+  "lefschetz": {
+    "L_1_to_3_divisors": {
+      "1": 10
+    },
+    "L_1_to_3_saturated": true,
+    "L_1_to_3_shape": [
+      10,
+      120
+    ],
+    "L_3_to_5_divisors": {
+      "1": 110,
+      "2": 10
+    },
+    "L_3_to_5_matches_corpus_smith_form": true,
+    "L_3_to_5_rank": 120,
+    "L_3_to_5_shape": [
+      120,
+      252
+    ]
+  },
+  "replay_command": "cd /home/tavis/src/othello && nix shell nixpkgs#sage -c sage notes/2026-08-11-c908-gate-a-transfer.sage --json notes/2026-08-11-c908-gate-a-transfer.json --out notes/2026-08-11-c908-gate-a-transfer.out",
+  "schema": "c908-gate-a-transfer/1",
+  "wall_seconds": 17
+}
