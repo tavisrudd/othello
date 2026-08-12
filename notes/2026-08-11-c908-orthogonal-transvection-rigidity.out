@@ -1,0 +1,3 @@
+q_plus: anisotropic=496 transvections=496 commutant_dim=1 invariant_bilinear_forms_dim=1
+q_minus: anisotropic=528 transvections=528 commutant_dim=1 invariant_bilinear_forms_dim=1
+PASS
