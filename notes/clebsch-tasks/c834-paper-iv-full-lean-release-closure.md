@@ -926,7 +926,13 @@ release proof endpoint.
 
 ## Engineering constraints
 
-- Reuse the shared semantic geometry; do not create a second coordinate model.
+- Keep the human semantic geometry in `TavisRuddFiniteGeom.Papers.Q13PassantCode`.
+  The heavyweight finite certificate is instead a Mathlib-only package under
+  `TavisRuddFiniteGeom.Certificates.Q13PassantCode`, with its own deliberately
+  small finite coordinate/index model.  The downstream paper bridge must prove
+  the model compatibility and transport the finite terminals into the semantic
+  geometry.  This duplication is intentional: changes to human geometry,
+  theorem assembly, or paper prose must never invalidate certificate oleans.
 - Match the other numbered papers' release machinery: tracked statement
   identity, claim-by-claim trust manifest, formal theorem map, frozen axiom
   transcript, generated-artifact provenance, public release allowlist,
