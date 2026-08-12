@@ -243,9 +243,9 @@ saturated graph and its tangent Jacobian:
 - the cone family (5), including the mixed escape ray that defeated the
   separate circuit argument, is free.
 
-The next useful cones have some `p_i` outside `[0,2]`, or lie in the finite
-pole continuum `B=delta^alpha b` where the bounded-value branch forces a
-coupled valuation for `C`.  Each requires its own saturated initial graph.
+The next useful cones have some `p_i` outside `[0,2]`.  The compact-`y` finite
+pole continuum is now handled separately by the incidence certificate
+`2026-08-12-c907-finite-pole-continuum-certificate.md`.
 
 ## EJ/TT and mystery ledger
 
@@ -255,5 +255,4 @@ coupled valuation for `C`.  Each requires its own saturated initial graph.
   this is a positive mechanism, not automatically a spurious vertical
   component, provided torus saturation and smoothness are checked.
 - **Settled:** compact residual and the mixed cone family (5).
-- **Open:** remaining mixed rays, finite-pole continuum, overlaps, and global
-  fan completeness.
+- **Open:** remaining mixed rays, overlaps, and global fan completeness.
