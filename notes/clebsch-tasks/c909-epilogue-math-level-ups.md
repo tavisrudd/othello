@@ -306,9 +306,16 @@ application or an exact obstruction to necessity.
     self-adjoint finite-etale lift at every block.
 15. **Unity boundary.** The cycle and quantum packets share an Eisenstein
     quadratic polynomial after sign normalization, but no common geometric
-    action or torsor comparison is proved. The clean unity theorem is a
-    modular intersection/separation theorem, not a common invariant. No
-    second moving cubic component was found in the bounded source audit.
+    action or torsor comparison is proved.  The usual Gamma-hat integral
+    structure does not supply one: the small quantum packet lies in
+    `K^0/H^even`, whereas the intermediate Jacobian lies in `K^1/H^3`, and
+    Gamma-hat acts trivially on the middle cohomology of a cubic threefold.
+    The clean unity theorem is therefore a separation theorem, not a common
+    invariant.  On smooth projective threefolds the pairs
+    `(universal CH0,nu6)` realized by `P3`, a smooth special `A5` cubic, and a
+    very general cubic are respectively `(1,0),(1,2),(0,2)`; neither detector
+    factors through the other. No second moving cubic component was found in
+    the bounded source audit.
 16. **Orbit-axis relative bridge.** For a finite group acting
     on an abelian scheme, integral subgroup norms construct constant-rank
     elliptic image schemes and canonical conjugacy transports whenever the
