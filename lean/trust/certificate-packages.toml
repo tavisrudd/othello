@@ -87,11 +87,22 @@ forbidden_artifact_basenames = []
 # determined.  Neither may survive closeout.  Generated data that a determination keeps
 # here permanently belongs in `resident_family` below instead.
 
-[[pending_family]]
-name = "order-13 passant-code certificates"
-owner = "finitegeom-projective-cap-q13-certificates"
-disposition = "external-pending"
-path_prefixes = ["papers/q13-passant-code/lean-certificates/"]
+[[package]]
+name = "finitegeom-q13-passant-code-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-q13-passant-code-certificates"
+commit = "c808d7fca5fba9c17ac1f502d7d14115a9b10791"
+manifest_sha256 = "c9fd8d683fefa97c9e07436b224626a8e3db3b33a5df7bb77a06a6a3f46dae77"
+gate = "TavisRuddFiniteGeom.Certificates.Q13PassantCode"
+terminal = "TavisRuddFiniteGeom.Certificates.Q13PassantCode.SemanticTransports.incidenceMap_has_rank_fortyTwo"
+trust_fact = "external/finitegeom-q13-passant-code-certificates.json"
+trust_fact_sha256 = "229138d4e4ccd5e00c8689dcaa214e411b3ffc1549fed786e9afa07743d0df68"
+owned_module_prefixes = [
+  "TavisRuddFiniteGeom.Certificates.Q13PassantCode",
+]
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/q13-passant-code/",
+]
+forbidden_artifact_basenames = []
 
 # Generated data that a written determination keeps in the monorepo, because it is
 # human-scale semantic source rather than certificate payload: a frozen finite table

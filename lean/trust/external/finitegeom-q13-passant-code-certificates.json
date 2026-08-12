@@ -1,0 +1,103 @@
+{
+  "declarations": {
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.SemanticTransports.incidenceMap_has_rank_fortyTwo": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.CycleExclusion.obstructed_of_base_pair_and_fibres": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre0.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre1.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre2.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre3.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre4.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre5.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.Fibre6.no_equal_cartesian_syndromes": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.all_profiles_excluded": {
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.WeightTen.IsolatedReachability.AxiomAudit",
+      "origin": "package"
+    }
+  },
+  "dependency": {
+    "commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+    "repository": "https://github.com/leanprover-community/mathlib4"
+  },
+  "evidence": {
+    "axiom_log": "evidence/gate-axioms.log",
+    "axiom_log_sha256": "66a55a0b2ccf185397225f22b637b0af79d903449af8c6fae06b479b9c041f76",
+    "replay": "lake build --no-build TavisRuddFiniteGeom.Certificates.Q13PassantCode"
+  },
+  "gate": "TavisRuddFiniteGeom.Certificates.Q13PassantCode",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "manifest_sha256": "c9fd8d683fefa97c9e07436b224626a8e3db3b33a5df7bb77a06a6a3f46dae77",
+  "package": "finitegeom-q13-passant-code-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-q13-passant-code-certificates",
+  "schema_version": 1,
+  "source_commit": "988537aa83966b17594576d0ff6568ea9b6d3603",
+  "terminal": "TavisRuddFiniteGeom.Certificates.Q13PassantCode.SemanticTransports.incidenceMap_has_rank_fortyTwo"
+}
