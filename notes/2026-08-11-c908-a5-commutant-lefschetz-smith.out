@@ -1,0 +1,13 @@
+Sub-B lattice rigidity: A_5-commutant of Lambda_2 and Lefschetz Smith forms
+group: matrix order=60; source is A_5=True; traces={'order1': {'10': 1}, 'order5': {'0': 24}, 'order2': {'2': 15}, 'order3': {'-2': 20}}; outer x->2x integral on Lambda=False
+(a) dim_F2 End_F2[A_5](Lambda_2)=4; equals F_4=False; commutative=False; units=12; idempotents=2; nilpotents=4; solutions of x^2+x+1=8
+(a) radical dim=2; square-zero ideal=True; Frobenius-twisted over F_4=True; radical element ranks=[4]; w symplectic=True
+(a) presentation: F_4<e>/(e^2, e*lambda - lambda^2 * e): local, residue field F_4 = F_2[w], square-zero radical F_4.e of F_2-dimension two, with e*lambda = Frobenius(lambda)*e; hence noncommutative and strictly larger than F_4
+(a) module: A_5-fixed subspace dim=0; cyclic submodule dims (vector counts)={'4': 15, '5': 48, '10': 960}
+(a) gluing scan over all 20 principal gluings: commutant dims=[4, 5]; noncommutative cases=20
+(b) twisted intertwiners dim=4; invertible=12; involutions s with s w s = w^2=30; all symplectic mod 2=True
+(b) commutant fixed by w: 4 of 16; fixed by s: 4 (F_2-dim 2); distinct fixed subalgebras=3; F_4-part fixed by s = {0,1}: True
+(c) L_3: Lambda^3 -> Lambda^5 shape=[120, 252] rank=120 divisors={'1': 110, '2': 10}
+(d) L_5: Lambda^5 -> Lambda^7 shape=[252, 120] rank=120 divisors={'1': 110, '2': 10}
+control L_1: Lambda^1 -> Lambda^3 divisors={'1': 10}
+PASS
