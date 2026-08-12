@@ -29,7 +29,7 @@ action, or instead uses the intrinsic formal monodromy of the original
 `C((u))` differential module.  KKPYY do not define this `nu_6`; their use of
 monodromy in Section 6 is confined to regular-singular connections.
 
-The proof of Lemma 4.1 also assumes, without a cited formal-classification
+The proof of `lem:formal-isomonodromy` also assumes, without a cited formal-classification
 result, a simultaneous Levelt--Turrittin form compatible with the parameter
 connection.  The displayed Lax equation does prove constancy once such a form
 exists (and it remains valid with a Laurent parameter term), but existence and
@@ -60,7 +60,7 @@ Consequently lines 103--105 (“The same block is the unsplit cubic zero atom”
 are false, and the exact assertion `nu_6(alpha_X)=2` is not established unless
 the odd part is separately shown to contain no primitive sixth roots.
 
-The theorem needs only positivity.  **Repair:** change Proposition 4.3(i) to
+The theorem needs only positivity.  **Repair:** change `prop:atom-values`(i) to
 `nu_6(alpha_X) >= 2`.  Say that parity preservation places Cai's rank-two even
 block inside the full zero atom, so its two eigenvalues occur in the atom's
 formal-monodromy multiset; make no assertion about the remaining odd summand.
@@ -73,7 +73,7 @@ rank-two Jordan block.
 ### 3. Lines 109--110: the curve parity statement is reversed and the citation
 does not cover all curves
 
-**MAJOR within Proposition 4.3(ii), though the desired vanishing remains
+**MAJOR within `prop:atom-values`(ii), though the desired vanishing remains
 true.** Cai's standing convention excludes odd cohomology, and Proposition 7
 assumes genus `g>0`.  Its displayed solutions `z^(1/2)` and `z^(-1/2)` belong
 to the **even** part, so raw monodromy there is `-1`; the odd `H^1` summand has

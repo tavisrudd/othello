@@ -232,9 +232,32 @@ checked directly and against the exact argument and independent-certificate
 boundary recorded in
 `notes/2026-08-11-c904-semisimple-graph-slope-primitivity.md`.
 
+## EJ + TT closeout and mystery ledger
+
+The cheap extra-strength check is positive: the local theorem does not use a
+diagonal coefficient polarization and is naturally a theorem for every
+unimodular symmetric (B), including dyadic (B).  Printing that form both
+closes the application and makes the main integral mechanism easier to reuse.
+The Tao-style stress question is where geometry actually enters.  The answer
+is now sharp: geometry selects the exotic finite kernel; after that, the
+minimal-class proof is a lattice theorem, and Voisin converts its conclusion
+back to geometry fibre by fibre.
+
+Mystery ledger:
+
+* **Settled:** why no factor two appears in the off-diagonal mixed adjugate.
+* **Settled:** why unramified splitting is safe at two and why the lifted
+  summands need not be invariant under an integral slope lift.
+* **Settled:** why an (S_6)-stable kernel contradicts generic (A_5), even
+  though every intermediate Jacobian also has the central involution (-1).
+* **Settled:** algebraicity of the divisor-product class is exactly Voisin's
+  hypothesis, with no effectiveness, horizontality, or odd-multiple condition.
+* **No genuine mathematical mystery remains inside Sections 2--3.**  The three
+  open items are exposition obligations listed above, not evidence gaps or
+  successor research problems.
+
 ## Acceptance gate
 
 **MINOR.** Accept the mathematics and the universal-(CH_0) conclusion.
 Before freezing, apply the three proof-compression repairs above.  None changes
 a theorem statement, numerical constant, prime range, or fibre quantifier.
-
