@@ -277,3 +277,18 @@ four-slot calculation.
 * **Open successor:** determine the Smith form of the filtered Schur module
   (19) in higher codimension.  This is a finite-etale Hodge-lattice problem,
   distinct from the C908 non-etale/carry programme.
+
+## EJ/TT closeout
+
+The cheap upgrade was not another example but the exact separation of two
+integral lattices on the same tower: finite etaleness forces
+`PDDef^*=0`, yet the ambient Hodge/product quotient is already
+`(R/pi^a)^(binom(g,4))`.  TT's higher-degree question led to the candidate
+Dyck-height Smith filtration and exposed the precise missing theorem: nested
+unit minors for the multiaffine web-jet matrix.  Exhaustive distinct-root
+tests in ranks six and eight, including characteristic two, found no extra
+discriminant beyond etaleness.  The first-return and ordinary confluent-
+Vandermonde shortcuts were both audited and do not presently prove those
+minors.  Thus no genuine mystery remains in codimension two; the only live
+higher-degree mystery is the filtered-web saturation theorem, owned by the
+strict-C909 successor recorded in the task card.
