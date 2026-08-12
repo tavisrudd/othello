@@ -45,6 +45,25 @@ The frame matters.  Adjoining roots of Novikov monomials is harmless, but
 adjoining a root of \(z\) would replace the original loop and could erase the
 deck part of the operator.
 
+\begin{definition}[Pro-Laurent framed monodromy]
+\label{def:pro-laurent-monodromy}
+Let (B) be a complete separated multiplicatively filtered (k)-algebra,
+and let (V) be a finite-dimensional (k)-vector space.  The
+pro-Laurent gauge group is
+\[
+ \mathcal G^{\rm pro}_{B,F}(V)=
+ \varprojlim_N\operatorname{GL}
+ \bigl(V\otimes(B/F^NB)((z))\bigr).
+\]
+It is generally larger than
+\(\operatorname{GL}(V\otimes B((z)))\), because the lower Laurent bound may
+decrease with \(N\).  For a compatible differential-module system over the
+quotients \(B/F^NB\), its framed-monodromy characteristic polynomial is the
+common finite-level polynomial, when these polynomials agree under
+reduction.  A pro-Laurent gauge preserves it if every finite-level gauge
+uses only integral powers of \(z\).
+\end{definition}
+
 We first record two formal facts used in the comparison theorems.  They also
 fix the completion convention in the proof.
 
@@ -75,7 +94,8 @@ original disc and conjugates this action.
 \begin{lemma}[Formal base shift]
 \label{lem:formal-base-shift}
 Suppose a pullback of the even quantum connection of \(T\) is defined over a
-complete filtered coefficient ring \(B\), and its bulk coordinate has the form
+complete separated multiplicatively filtered coefficient ring \(B\), and its
+bulk coordinate has the form
 \[
  a_0\mathbf1+a_2^\circ+\eta,
  \qquad a_2^\circ\in H^2(T)\otimes F^0B,
@@ -103,21 +123,17 @@ Modulo \(F^N B\), the flat bulk equations
  \qquad G|_{\eta=0}=1,
 \]
 have an invertible solution with bounded Laurent order in \(z\).  These
-solutions are compatible in \(N\).  Their inverse limit belongs to the
-pro-Laurent gauge group
+solutions are compatible in \(N\).  Their inverse limit belongs to
 \[
- \varprojlim_N\operatorname{GL}
- \bigl(H^{\rm ev}(T)\otimes (B/F^NB)((z))\bigr).
+ \mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T)).
  \tag{4.1a}
 \]
-This ring is deliberately larger than \(B((z))\): the lower Laurent bound may
-decrease with \(N\).  Formal monodromy is defined on this pro-system, and at
-each finite quotient the gauge uses only integral powers of \(z\), hence is
-single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes the
-characteristic polynomial constant at every quotient; compatibility makes
-the same polynomial the inverse-limit invariant.  No Levelt--Turrittin
-decomposition over a larger analytic field, and no evaluation at a
-nonnilpotent analytic bulk point, is used.
+At each finite quotient the gauge uses only integral powers of \(z\), hence
+is single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes
+the characteristic polynomial constant there; compatibility gives the
+pro-system invariant of Definition~\ref{def:pro-laurent-monodromy}.  No
+Levelt--Turrittin decomposition over a larger analytic field, and no
+evaluation at a nonnilpotent analytic bulk point, is used.
 \end{proof}
 
 We now apply Iritani's quantum blowup theorem and the Iritani--Koto
@@ -241,9 +257,10 @@ Proposition~5.6 and Section~5.8 of Iritani--Koto give
 \[
  \varsigma_j=\varsigma_j^\circ+s_j,
  \qquad
- \varsigma_j^\circ=r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u)
- \cite[Proposition~5.6 and Section~5.8]{IritaniKoto}.
+ \varsigma_j^\circ=r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u).
 \]
+This is Proposition~5.6 and Section~5.8, especially (5.11),
+of~\cite{IritaniKoto}.
 Normalize the Laurent unit and fixed divisor terms first.  The normalized
 connection descends to \(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
 finite quotients, and then extend scalars to the Laurent comparison field.

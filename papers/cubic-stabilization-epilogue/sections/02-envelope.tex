@@ -161,6 +161,95 @@ Thus \(d^2-m^2=24\).  The positive solution is
 \((1,6,6,6,6)\).
 \end{proof}
 
+Let \(B^\circ\) be the connected smooth locus of the nonstandard
+\(A_5\)-pencil, and let \(\mathcal J\to B^\circ\) be its relative
+intermediate Jacobian.
+
+\begin{lemma}[Relative six-axis source]
+\label{lem:relative-six-axis}
+There are an elliptic scheme \(\mathcal E\to B^\circ\) and a relative
+isogeny
+\[
+ f:\mathcal A:=
+ \mathcal E\otimes_{\mathbf Z}(\mathbf Z^\Omega/\mathbf Z\mathbf1)
+ \longrightarrow\mathcal J
+\]
+which is \(A_5\)-equivariant.  The quotient lattice carries the form induced
+by \(6I_6-J_6\); both the source and this form carry their natural
+\(S_6\)-action.  Moreover,
+\[
+ f^*\lambda_\Theta=\lambda_{\mathcal A}.
+ \tag{2.1}
+\]
+After omitting one axis, \(\mathcal A\simeq\mathcal E^5\) and this form has
+matrix \(6I_5-J_5\).
+If \(\mathscr V=\mathcal E[2]\), the two-primary kernel of the polarization
+on the source has a natural \(A_5\)-equivariant symplectic description
+\[
+ \mathscr D_2\simeq H_2\otimes_{\F_2}\mathscr V.
+ \tag{2.2}
+\]
+The two-primary part \(\mathscr K_2\) of \(\ker f\) is an
+\(A_5\)-stable relative maximal isotropic subgroup of \(\mathscr D_2\).
+\end{lemma}
+
+\begin{proof}
+For \(H\in\Omega\), the integral norm
+\(n_H=\sum_{h\in H}h\) is a relative endomorphism of \(\mathcal J\).  Its
+image has constant dimension one: on rational homology it is ten times the
+projector onto the one-dimensional \(H\)-fixed line in the five-dimensional
+coefficient representation.  Thus its connected image is an elliptic
+subscheme \(\mathcal E_H\subset\mathcal J\): the scheme-theoretic image of
+a constant-rank homomorphism of abelian schemes is an abelian subscheme.  The
+subgroup \(H\) acts trivially on this image.  Moreover
+\(N_{A_5}(H)=H\), so transport by an element carrying \(H\) to \(H'\) is
+independent of the chosen transporter.  The six elliptic schemes are
+therefore coherently isomorphic; fix one of them as \(\mathcal E\).
+
+Write \(i_H:\mathcal E\to\mathcal J\) for the transported primitive
+inclusions.  On the geometric generic fibre these maps are the six vectors
+of the standard five-dimensional coefficient representation, whose sum is
+zero.  Homomorphisms of abelian schemes are determined on the generic fibre,
+so \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
+\((i_H)_{H\in\Omega}\) descends from
+\(\mathcal E^\Omega\) to the displayed map
+\(f:\mathcal A\to\mathcal J\), and the construction is
+\(A_5\)-equivariant.
+
+The connected \(D_5\)-quotient used by Roulleau has Rosati-dual image equal
+to the unique \(H\)-fixed elliptic subvariety.  Its connected kernel makes
+that dual inclusion primitive, so the quotient is, up to a target
+automorphism, the Rosati adjoint of
+\(\mathcal E_H\hookrightarrow\mathcal J\).  Consequently the fibre classes
+in Proposition~\ref{prop:six-axis-polarization} compute these relative
+homomorphisms, rather than merely isogenous quotients.  On the
+generic non-CM fibre they give diagonal entry \(5\) and off-diagonal entry
+\(-1\).  Homomorphisms of abelian schemes are determined on the generic
+fibre, so the same identities hold over \(B^\circ\).  They give (2.1).
+Choosing any five coordinate classes identifies the quotient lattice with
+\(\mathbf Z^5\), where its matrix is \(6I_5-J_5\).  Since this has Smith type
+\((1,6,6,6,6)\), \(f\) is a finite flat isogeny and its kernel is maximal
+isotropic in the source polarization kernel.
+
+The two-primary discriminant local system is
+\[
+ \mathscr D_2=
+ \ker\bigl(6I_6-J_6:\mathcal A[2]\longrightarrow\mathcal A^\vee[2]\bigr).
+\]
+Modulo two, the radical of the induced coefficient form on
+\((\mathbf F_2^\Omega)/\langle\mathbf1\rangle\) is canonically
+\[
+ \operatorname{Aug}(\mathbf F_2^\Omega)/\langle\mathbf1\rangle=H_2.
+\]
+Tensoring this constant coefficient module with the finite etale local
+system \(\mathscr V=\mathcal E[2]\) gives (2.2) as an isomorphism of local
+systems.  The discriminant commutator pairing is the tensor product of the
+coefficient form with the Weil pairing on \(\mathscr V\), so the
+isomorphism is symplectic.  Since \(f\) is \(A_5\)-equivariant,
+\(\mathscr K_2\) is \(A_5\)-stable; its fibrewise order is \(2^4\), so it is
+a relative maximal isotropic subgroup of this rank-eight local system.
+\end{proof}
+
 \begin{proposition}[Principal gluing packet]
 \label{prop:principal-gluing-packet}
 The \(A_5\)-stable two-primary principal kernels of the six-axis source are
@@ -213,22 +302,44 @@ The trace pairing is nondegenerate, so \(d=1\).  It therefore lies in
 \(\operatorname{SL}_2(4)\), of order \(60\).  The given \(A_5\) already has
 that order and lies in the stabilizer, proving equality.  The odd coset in
 its order-\(120\) normalizer is semilinear and applies field Frobenius, so it
-exchanges \(\omega\) and \(\omega^2\).  Were the generic cubic kernel
-\(\F_2\)-rational, its principal polarization would inherit the faithful
-\(S_6\)-action.  Strong Torelli identifies
-\(\operatorname{Aut}(J,\Theta)\) with
-\(\operatorname{Aut}(X)\times\langle-1\rangle\).  Projection of this
-\(S_6\) to \(\operatorname{Aut}(X)\) remains faithful: its kernel would be a
-normal subgroup of \(S_6\) of order at most two, and no such nontrivial
-subgroup exists.  This contradicts the generic automorphism group \(A_5\) on
-the nonstandard component \cite[Section~5]{Hartlieb}.  Thus the generic
-kernel is exotic.
-The three rational kernels and the two exotic kernels are distinguished by
-their stabilizers under the fibrewise \(A_5\)-action; they are therefore
-distinct monodromy-stable subsets of the five-element gluing packet.  The
-geometric kernel is a finite sub-local-system, so generic exoticity and the
-connectedness of the smooth locus force it to remain in the exotic pair on
-every fibre.
+exchanges \(\omega\) and \(\omega^2\).
+
+To pass from the generic fibre to the family, put
+\[
+ \mathscr P=\PP_{\F_4}(\F_4\otimes_{\F_2}\mathscr V).
+\]
+By Lemma~\ref{lem:relative-six-axis}, this is the five-sheet local system of
+\(A_5\)-stable principal halves.  It has the degree-three sub-local system
+\(\mathscr P_{\rm rat}=\PP_{\F_2}(\mathscr V)\) and the degree-two
+complement \(\mathscr P_{\rm ex}\): monodromy acts through
+\(\operatorname{GL}_2(\F_2)\), so it preserves both subsets.  The relative
+kernel \(\mathscr K_2\) gives a section of \(\mathscr P\).
+
+At the geometric generic point this section cannot be rational.  Otherwise
+the natural faithful \(S_6\)-action on
+\(\mathcal A=\mathcal E\otimes(\mathbf Z^\Omega/\mathbf Z\mathbf1)\), which
+is the identity on \(\mathcal E\) tensored with the faithful permutation
+action on the quotient lattice, would preserve the rational kernel: under
+(2.2) it acts on \(H_2\) and trivially on \(\mathscr V\), so every member of
+\(\mathscr P_{\rm rat}\) is \(S_6\)-stable.  Since this action preserves
+\(6I_6-J_6\), it would descend
+through the principally polarized quotient.  It would act faithfully: if a
+source automorphism acts
+trivially on the quotient, the image of its difference from the identity is
+both connected and contained in the finite isogeny kernel, hence zero.
+Strong Torelli gives an exact sequence
+\[
+ 1\longrightarrow\{\pm1\}\longrightarrow
+ \operatorname{Aut}(J,\Theta)\longrightarrow
+ \operatorname{Aut}(X)\longrightarrow1.
+\]
+The kernel of the resulting map from \(S_6\) to
+\(\operatorname{Aut}(X)\) would be a normal subgroup of order at most two;
+it is trivial.  This would inject \(S_6\) into the generic automorphism group
+\(A_5\), a contradiction \cite[Section~5]{Hartlieb}.  The section is
+therefore generically in \(\mathscr P_{\rm ex}\).  Its inverse image is open
+and closed in the connected base \(B^\circ\), so every smooth fibre has
+exotic two-primary kernel.
 
 At three the coefficient heart \(H_3\) is simple and
 \(\End_{A_5}(H_3)=\F_3\).  Hence its \(A_5\)-stable halves are the four graphs
