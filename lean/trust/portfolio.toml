@@ -26,6 +26,7 @@ libraries = [
   "RepairCodes",
   "RepairPorts",
   "Sumfree",
+  "TavisRuddFiniteGeom",
 ]
 
 # Directories under `lean/` that hold no Lean library source.  Used only to bound the untracked-file
@@ -46,6 +47,10 @@ spine = "areas/finitegeom_first_tag.toml"
 [[area]]
 name = "complete_ports"
 spine = "areas/complete_ports.toml"
+
+[[area]]
+name = "q13_passant_code"
+spine = "areas/q13_passant_code.toml"
 
 # ---------------------------------------------------------------------------------------------
 # Libraries that are built but have no trust spine yet.

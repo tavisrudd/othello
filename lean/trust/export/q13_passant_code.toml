@@ -1,0 +1,18 @@
+# Area-export configuration for the human q=13 passant-incidence-code library.
+
+schema_version = 1
+area = "q13_passant_code"
+gate = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+trust_statement = "trust/Q13_PASSANT_CODE.md"
+axiom_audit = "trust/Q13PassantCodeAxiomAudit.lean"
+readme_template = "lean/public/README.md"
+flake_template = "lean/public/flake.nix"
+
+statement_title = "The q=13 passant-incidence code: formal boundary"
+overview = "The human-scale geometry and coding theory of the passant-incidence code over the field with thirteen elements."
+correspondence = "The closure fixes a normalized conic model, relates a checked rank statement to the code dimension, and proves symbolic low-weight reductions. Exhaustive finite rank and minimum-word families are supplied only by a separate certificate package and compared through a compatibility bridge."
+boundary = "Every terminal is a kernel proof. The closure contains no user axiom, unsafe declaration, admitted proof, native evaluation, or imported certificate data."
+axiom_audit_title = "Axiom audit for the q=13 passant-incidence code"
+axiom_audit_description = "This audit prints the axioms of the cardinality and rank interface, tangent-graph reduction, and weight-eight and weight-ten symbolic transports."
+readme_anchor = "  axiom audit."
+readme_bullet = "- `trust/manifests/q13_passant_code.json` content-addresses normalized projective coordinates, binary incidence semantics, rank transport, and low-weight geometric reductions."

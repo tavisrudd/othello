@@ -3,6 +3,7 @@ import TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightEight
 import TavisRuddFiniteGeom.Papers.Q13PassantCode.WeightTen
 import TavisRuddFiniteGeom.Papers.Q13PassantCode.Reconstruction
 import TavisRuddFiniteGeom.Papers.Q13PassantCode.LogicalSpine
+import TavisRuddFiniteGeom.Papers.Q13PassantCode.StructuralUpgrade
 
 /-!
 # Semantic gate for the passant incidence code over `ZMod 13`

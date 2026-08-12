@@ -1,0 +1,71 @@
+# Trust spine for the q=13 passant-incidence code.
+
+schema_version = 1
+area = "q13_passant_code"
+manifest = "TavisRuddFiniteGeom/TRUST.md"
+
+owns = [
+  "TavisRuddFiniteGeom.Foundation.Coding",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.**",
+]
+
+permitted_axioms = []
+
+[[gate]]
+module = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"
+terminals = [
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.incidence_shape",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.dimension_from_rank_certificate",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.tangent_graph_certificate",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_cycle_fibre_profile",
+  "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.arbitrary_weightTen_profile_transport",
+]
+coverage_rule = "closure"
+
+[[gate]]
+module = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticAxiomAudit"
+terminals = []
+coverage_rule = "closure"
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.incidence_shape"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.dimension_from_rank_certificate"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.tangent_graph_certificate"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_cycle_fibre_profile"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.arbitrary_weightTen_profile_transport"
+gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
