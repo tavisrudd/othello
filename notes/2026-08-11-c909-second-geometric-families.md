@@ -139,25 +139,58 @@ second-family candidate, not an open atom-computation gate.
 
 ## Candidate B: special cubic fourfolds
 
-Voisin proves that a special smooth cubic fourfold with discriminant not
-divisible by (4) has universally trivial (CH_0) (Theorem 1.4 and the
-discussion in the introduction).  This is a genuine integral diagonal
-criterion, but it is not an intermediate-Jacobian divisor-product statement.
+### Detector A: exact universal-(CH_0) locus
 
-KKPYY’s Theorem 6.8 proves non-rationality of a very general cubic fourfold
-using the (24)-dimensional zero-eigenvalue Hodge atom, and Example 6.17 gives
-an enhanced twisted-K3 atom for a very general cubic fourfold containing a
-plane.  Their enhanced-atom paragraph explicitly says that integral
-structures and blowup compatibility are forthcoming.  Even granting that
-enhancement, their criterion excludes carriers of dimension at most
-(dim X-2=2); it does not exclude all threefold carriers for
-(X\times\mathbf P^1).  Therefore no one-step irrationality statement for
-the Voisin (D\not\equiv0\pmod4) family is currently sourced here.
+Voisin’s Theorem 5.6 proves that every special smooth cubic fourfold with
+discriminant (D) not divisible by (4) has universally trivial (CH_0).  The
+proof is integral and explicit: represent the extra Hodge class by a smooth
+surface (Sigma), use the secant map (Phi') restricted to (Sigma^2), and use
+the congruence deg(Phi'|_{Sigma^2}) ≡ D (mod 4) to obtain universal
+surjectivity of (CH_0(Sigma)) -> (CH_0(X)) when (D) is not divisible by (4).
+This is an integral diagonal criterion, not an intermediate-Jacobian
+divisor-product criterion.
 
-**Verdict:** strong universal-(CH_0) side and strong zero-stabilization atom
-side in nearby cubic-fourfold loci, but no matched one-step theorem.  The
-containing-plane locus (D=8) should not be silently identified with Voisin’s
-(D\not\equiv0\pmod4) family.
+The known rational overlap is substantial.  Russo--Staglianò give explicit
+birational maps for a general cubic in (C_14), (C_26), and (C_38); all three
+discriminants are 2 modulo 4, so Voisin’s theorem also gives universal
+(CH_0) there.  These are rational control loci, not separation families.
+The same warning applies to any other locus where rationality has actually
+been constructed: universal (CH_0) then carries no irrationality information.
+
+### Detector B: what is and is not proved
+
+KKPYY’s Theorem 6.8 proves non-rationality of a very general
+Noether--Lefschetz-general cubic fourfold using a 24-dimensional zero
+Hodge atom.  This theorem does not apply to a special divisor, where extra
+Hodge classes change the atomic bookkeeping.  Their Example 6.17 treats a
+very general cubic containing a plane, (D=8), via an enhanced twisted-K3
+atom.  The source itself says that the required integral structures and
+blowup compatibility are forthcoming; this is therefore an announced or
+conditional non-rationality mechanism, not a completed one-step theorem.
+
+Even granting the enhanced atom, the stated carrier criterion for a cubic
+fourfold excludes only carriers of dimension at most (4-2=2).  After one
+stabilization, (X\times\mathbf P^1) has dimension 5 and the relevant cutoff is
+3, so the source does not exclude threefold carriers.  No primary source in
+this bounded audit proves a one-step atom obstruction for any special cubic
+fourfold.
+
+The containing-plane locus must also be separated from the Voisin locus:
+(D=8) is divisible by (4), so Voisin’s theorem does not give universal
+(CH_0) there.  Hassett--Pirutka--Tschinkel prove that very general
+(2,2)-hypersurfaces in (P^2 times P^3) are not stably rational and that
+rational fibers are dense; their introduction explicitly says this yields a
+dense rational family of cubic fourfolds containing a plane, while no cubic
+fourfold had then been shown not stably rational.  This nearby quadric-bundle
+result cannot be transferred to the cubic-containing-plane locus as a stable
+irrationality theorem.
+
+**Verdict:** the only source-verified overlaps of universal (CH_0) with a
+special cubic fourfold are currently rational control loci (for example
+(C_14), (C_26), (C_38)).  The most tempting irrational locus, very general
+(C_8), lacks Voisin’s (CH_0) input and lacks a proved one-step atom carrier
+exclusion.  The remaining (D\not\equiv0\pmod4) special divisors have the
+universal-(CH_0) input, but this audit found no matched one-step atom theorem.
 
 ## Candidate C: quartic threefolds
 
@@ -202,7 +235,7 @@ exact gates.
 
 ## Source ledger and coverage
 
-Opening summary: 0 sources were read at full text in this bounded pass; 7
+Opening summary: 0 sources were read at full text in this bounded pass; 9
 primary sources were read partially at the sections listed below.  The cache
 keys and hashes identify the exact fetched bytes.  This is a source-positioning
 note, not a literature-wide novelty or priority verdict; MathSciNet and a
@@ -239,6 +272,14 @@ full citation-graph audit were not attempted.
   arXiv:1903.08979v2, partial: Proposition 2, Theorem 9, and the line/torsor
   discussion in §5.  Cache SHA-256
   `a70ca9d0bcade131590c2a0f19c87333671c6e9d06967c33f78673f0117c2274`.
+* Hassett--Pirutka--Tschinkel, *Stable rationality of quadric surface bundles
+  over surfaces*, arXiv:1603.09262, partial: Theorem 1 and the introduction's
+  cubic-fourfold-containing-a-plane comparison.  Cache SHA-256
+  `f7fbf2e195f881335a5f19c6c0f383f172ac623f07644f3c133f771d91a2ad23`.
+* Russo--Staglianò, *Explicit rationality of some cubic fourfolds*,
+  arXiv:1811.03502, partial: introduction and Theorems 2--4 (general
+  rationality in (C_14), (C_26), (C_38)).  Cache SHA-256
+  `e42c67e01098f4886b49434d87b300f4b6058297ab927b9718ce22c7b46a6f1c`.
 
 The cubic (pm1/6) input and the one-step theorem are additionally recorded
 in the local C904/C907 reports; those reports cite Cai’s cubic source and the
@@ -261,8 +302,15 @@ not a duplicate C907 proof.
   the genus-two-curve component, so its carrier height is harmless.
 * **Settled:** cubic-fourfold (D\not\equiv0\pmod4) and containing-plane
   examples are different source loci; no overlap is assumed.
+* **Settled:** the general (C_14), (C_26), and (C_38) loci are rational and
+  also satisfy Voisin's universal-(CH_0) criterion, so they are control loci.
+* **Settled:** (C_8) is divisible by 4, hence outside Voisin's theorem; the
+  source audit finds dense rational subfamilies and only a conditional atom
+  non-rationality discussion, not stable irrationality.
 * **Open evidence gap:** a second family with both detectors proved after one
-  stabilization.  Owning successor: special cubic-fourfold carrier audit.
+  stabilization.  The remaining possible gate is an actual carrier-height
+  theorem for a special (D\not\equiv0\pmod4) cubic, but no such theorem was
+  found in this bounded audit.
 
-Vibe check: V4 is decisively closed (rational, with carrier-compatible atoms);
-the control mechanism is real, but a second geometry remains unverified.
+Vibe check: every matched special-cubic locus found here is either rational or
+missing the one-step carrier theorem; the second geometry remains unverified.

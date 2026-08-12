@@ -86,7 +86,7 @@ carrier is \(e_\alpha\) in degree zero:
 The notation \([\alpha]\) means projection to the \(\alpha\)-summand of the
 free atom module; it is not a new abstract atom class.
 
-**(G3) Low-carrier exclusion.**  For every smooth projective variety (W) of
+**(G3) Low-carrier exclusion.**  For every smooth projective variety \(W\) of
 dimension at most two,
 
 \[
@@ -98,7 +98,7 @@ For the cubic primitive-sixth-root atom this is the already established
 point/curve/surface exclusion.  A weaker statement involving support bounds
 would be possible, but (C909.17) is the clean hypothesis available from C907.
 
-**(G4) Threefold carrier width.**  For every smooth projective threefold (W),
+**(G4) Threefold carrier width.**  For every smooth projective threefold \(W\),
 
 \[
  [\alpha]\widetilde{\operatorname{CF}}(W)\in\mathbf Z e_\alpha
@@ -107,21 +107,21 @@ would be possible, but (C909.17) is the clean hypothesis available from C907.
 \]
 
 Thus a threefold can carry the cubic atom, but only in one intrinsic level.
-This is the minimal (m=2) form of C907's enriched length bound
-(\ell_{1/6}(W)\le1).  It does not assert that (W) is Fano or that its
+This is the minimal \(m=2\) form of C907's enriched length bound
+\(\ell_{1/6}(W)\le1\).  It does not assert that \(W\) is Fano or that its
 quantum module is a rank-two global subobject.
 
 No positivity of coefficients is needed in (G4): weak factorization reverses
 some blowups, so the formal ledger is a signed sum.  Torsion-freeness of the
-degree-zero coefficient in (R_2) is enough.
+degree-zero coefficient in \(R_2\) is enough.
 
 ## Formal obstruction theorem
 
 **Theorem (conditional graded-measure obstruction).**  Assume (G1)--(G4).
-Then (X\times\mathbf P^2) is not birational to (mathbf P^5_K).
+Then \(X\times\mathbf P^2\) is not birational to \(\mathbf P^5_K\).
 
 **Proof.**  Apply the projective-bundle formula to the trivial rank-three
-bundle over (X).  By (G2), the cubic-isotypic endpoint is
+bundle over \(X\).  By (G2), the cubic-isotypic endpoint is
 
 \[
  [\alpha]\widetilde{\operatorname{CF}}(X\times\mathbf P^2)
@@ -129,10 +129,10 @@ bundle over (X).  By (G2), the cubic-isotypic endpoint is
  \tag{C909.19}
 \]
 
-Suppose instead that (X\times\mathbf P^2) is rational.  Weak factorization
-of a birational map from (mathbf P^5_K) to (X\times\mathbf P^2) uses smooth
+Suppose instead that \(X\times\mathbf P^2\) is rational.  Weak factorization
+of a birational map from \(\mathbf P^5_K\) to \(X\times\mathbf P^2\) uses smooth
 centers of dimension at most three.  The projective-space starting term has no
-(\alpha)-component: it is built from the point atom, which is excluded by
+\(\alpha\)-component: it is built from the point atom, which is excluded by
 (G3).
 
 For a center of dimension at most two, (G3) makes its contribution zero.  A
@@ -147,8 +147,8 @@ so (C909.15) and (G4) make its contribution
 
 The same support statement holds with a minus sign when the factorization
 step is read as a blowdown.  Telescoping the factorization therefore forces
-the final cubic component to lie in (L\mathbf Z e_\alpha).  But (C909.19)
-has nonzero constant and (L^2) coefficients, and (C909.14) says it is not in
+the final cubic component to lie in \(L\mathbf Z e_\alpha\).  But (C909.19)
+has nonzero constant and \(L^2\) coefficients, and (C909.14) says it is not in
 that subgroup.  This contradiction proves the theorem. \(\square\)
 
 The proof is entirely algebraic after (G1)--(G4) are granted.  It uses only
