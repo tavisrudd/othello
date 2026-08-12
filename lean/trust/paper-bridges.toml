@@ -51,8 +51,8 @@ forbid_source_fallback = true
 [[bridge]]
 name = "projective-cap-q11"
 repository = "finitegeom-projective-cap-q11-bridge"
-bridge_commit = "0be8925c4e5d7e76fb69bd542ade770990fea6b8"
-export_source_commit = "622147b382581f37a8f671b54ae37f2627918444"
+bridge_commit = "37e0db4aabef7827db7b042f6f0a2c5ccb08937a"
+export_source_commit = "9202b6c50f69bbf0fae437842a9d96976c516218"
 lean_library = "ProjectiveCapQ11Bridge"
 source = "paper-bridges/projective-cap-q11/TavisRuddFiniteGeom/Papers/ProjectiveCapQ11.lean"
 license_source = "papers/arcs_complete_outside_conic/LICENSE"
