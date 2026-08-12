@@ -147,13 +147,16 @@ Stokes compatibility.  C909 has since made the algebraic target uniform in
 carrier force all endpoint terms of `X x P^m` outside the weak-factorization
 center span.  On the cycle side, C909 proves finite-etale graph cofactor
 saturation through arbitrary `p^a` blocks and, more strongly, full
-divided-power saturation of the Neron--Severi lattice on pure equal-depth
-blocks.  The mechanism is a general matrix-of-ideals theorem:
-`I_ij subset I_ii intersect I_jj` forces integral rank-one square-zero
-generation.  Factorial-active nonsplit trace-transfer root-weight families
-are now independently audited and polarized-indecomposable.  The live
-extension gate is compatible slotwise splitting across unequal graph depths;
-nilpotent carry remains C908.
+divided-power saturation of the complete Neron--Severi lattice for every
+block-respecting graph finite-etale at each primary depth.  Its exact local
+cross depth is `max(a,b,a+b-v_p(t_j-t_i))`.  The conceptual mechanism is an
+iff tropical theorem: a symmetric ideal lattice is rank-one generated exactly
+when `I_ij^2 subset I_ii I_jj`; its rank-one cokernel is explicit, and every
+dyadic failure has an order-two divided-square witness in the coefficient
+quotient.  This replaces mixed cofactors by square-zero generation in every
+degree.  Factorial-active nonsplit trace-transfer root-weight families are
+independently audited and polarized-indecomposable.  A basis-free packet
+formulation and nilpotent carry remain open; the latter belongs to C908.
 
 Papers I--III have GitHub and DOI releases at versions 1 and 2. Those public
 versions are immutable predecessors; later strengthening is by forward
