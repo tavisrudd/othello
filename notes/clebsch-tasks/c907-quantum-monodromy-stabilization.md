@@ -104,11 +104,11 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   The first raw four-packet, `X_(3,6) subset P(1,1,1,1,2,4)`, is never
   quasismooth.  More generally, every reduced rank-four self-dual
   hypergeometric small-even Fano-threefold connection has `nu_6<=2`; the
-  presentation is now forced for every smooth quasismooth weighted
-  hypersurface in pairwise-coprime weights with primitive `O_X(1)`.  Thus no
-  isolated-stacky weighted hypersurface supplies `nu_6>=4`; the remaining
-  weighted gate is positive-dimensional stacky strata and complete
-  intersections.
+  presentation is now forced for every smooth well-formed quasismooth weighted
+  hypersurface with primitive `O_X(1)`: smoothness itself forces the weights
+  to be pairwise coprime.  Thus no such weighted hypersurface supplies
+  `nu_6>=4`; the remaining weighted gate is complete intersections and
+  non-well-formed quotient mechanisms.
 
 ## Active frontier: `m=2`
 
