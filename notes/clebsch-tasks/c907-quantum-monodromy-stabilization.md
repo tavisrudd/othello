@@ -1,171 +1,105 @@
-# C907 — Quantum-monodromy stabilization test
+# C907 — Quantum-monodromy stabilization
 
 **Lane:** `clebsch`
 
-**Status:** one-step irrationality theorem closed and imported, by author
-instruction, into the C904 geometric epilogue; full stable irrationality
-remains active research.  No Paper V or Lean promotion.
+**Status:** active research.  `X x P^1` irrational is closed and imported into
+C904's geometric epilogue.  Full stable irrationality is open.  No Paper V or
+Lean promotion.
 
-**AA checkpoint:** the low-dimensional-carrier branch is positive.  KKPYY
-Claim 6.15 forces every nef-canonical surface block to have fractional
-exponents only `0` or `1/2`; ruled/rational surfaces reduce through
-projective bundles and point blow-ups to curves and points with the same
-restriction.  Since fourfold weak-factorization centers have dimension at
-most two, the cubic `+/-1/6` block proves that `X x P^1` is irrational for
-every smooth cubic threefold.  Full stable irrationality remains open from
-`m=2`, where cubic self-carrier centers enter.  A source-level audit also
-demotes the prime-power spectral-cycle idea: KKPYY's decomposition is local on
-analytic germs and does not retain the global loop, while iterated rank-`p`
-projective bundles give dimension-admissible local-copy/wreath counterpatterns.
-The recursive gate has a sharp conditional numerical form: Serre dimension
-`m+5/3` exceeds the center bound `m+1`, but the ordinary projective-bundle
-decomposition splits this into `m+1` distributable copies.  Exploiting the gap
-requires both a gluing-sensitive enhanced atom and a restricted fractional-CY
-carrier theorem; general Serre-dimension monotonicity is false.  These are the
-remaining live gates together with the integer/Tate-filtered atom.  The latter
-now has a basis-independent exact form: the endpoint Beilinson Euler lattice
-has one unipotent Serre block of length `m+1`, while every projective
-self-carrier has length `m-1`.  A Γ-integral, Stokes-filtered blow-up theorem
-with a strict cubic-isotypic filtration and the additive associated-graded
-blow-up formula would turn this uniform gap two into the full stable
-obstruction.  Serre-block preservation alone is insufficient because
-semiorthogonal extensions can join blocks.  Iritani Theorem 1.1 preserves the formal connection
-and Poincaré pairing, but Remark 1.5 explicitly places the non-orthogonal
-Stokes/Γ gluing beyond that formal direct sum; the missing theorem is therefore
-confirmed at source rather than inferred from the computation.  A sharper
-source-level calculation is positive locally: Iritani (5.19), (5.27) give
-consecutive `q`-adic elementary divisors for the exceptional Fourier block,
-affinely normalized to `0,...,r-2`, and cyclic root monodromy preserves their
-multiset.  The live gate is therefore presentation-independent strict
-composition of these relative Rees lattices through weak factorization, plus
-the analytic Stokes gluing—not recovery of the local Tate width itself.  The
-first composition audit is positive: the Tate polynomials agree identically
-under transverse and nested two-step blow-up order exchanges.  A `P^1`
-mutation audit proves that unchanged Euler/Serre data still allow different
-exceptional flags, while the canonical monodromy-weight line is neither flag.
-The full reduced ambient cubic quantum module now has an irregular-Hodge
-origin: it is the irreducible hypergeometric module
-`H(0,0,0,0;1/3,2/3)`.  Its local formal ranks are `1,1,2`, so irreducibility
-rules out the old target of globalizing Cai's rank-two block as a proper
-IrrMHM subobject.  The local sectorial atom is now exact: at every admissible
-phase the unique Stokes lift has ordered ranks `1,2,1`, with the
-zero-exponential rank-two atom in the middle and fixed by root monodromy;
-`pi/2` is the certified representative.  Iritani's toric
-weak-Fano theorem likewise proves that a sectorial blow-up decomposition can
-exist and match the Orlov `K`-group decomposition, but explicitly leaves the
-residual sectors' Stokes identification with the center quantum modules open.
-Hinault--Yu--Zhang--Zhang prove only formal/non-archimedean uniqueness, while
-Wang treats compactifications of one fixed Landau--Ginzburg pair.  The
-corrected highest-EV gate is therefore the residual-center mutation-system
-identification, strict for the irregular Hodge filtration and composable
-through weak factorization.
+**Load next:** `c907-solver-dossier.md`.
 
-The `T1/T2/T3` scoping pass now gives a calibrated split.  `T1` passes at the
-formal basepoint: Iritani (5.28) becomes `(F tensor I_Z) direct_sum I_X` after
-the `t`-adic and exceptional-first dominance associated gradeds, including the
-fivefold point- and curve-center pilots.  It does not remove the analytic wall:
-the Gamma lattice is a lattice in flat sections and its exponential splitting
-is sectorial and phase-dependent.  `T2` is false for plain `C[[t]]`-modules,
-which split into rank-one summands and forget block length; retaining the
-unipotent Serre operator repairs the local ledger because
-`C[[t]][N]/(N^ell)` is local.  `T3` remains the deep arbitrary-center theorem.
-The proposed Fano-database proof of the `m=2` silver target is invalid as an
-exhaustion: smooth quintic and sextic threefolds in `P^4` inside `P^5` are
-legitimate Calabi--Yau and general-type codimension-two centers.  Database work
-is reconnaissance only.  The next high-EV pass is to prove or refute the
-`+/-1/6` length bound for Calabi--Yau and general-type threefold carriers while
-keeping the analytic Gamma/Stokes lift as a separate `T1` gate.
+**Detailed closed work:**
+`../2026-08-10-c907-quantum-monodromy-stabilization.md`.
+Historical task-card state:
+`c907-quantum-monodromy-stabilization-archive.md`.
 
 ## Goal
 
-Test whether Cai's formal-monodromy obstruction for cubic threefolds can be
-made stable under products with projective spaces and therefore developed into
-a stable-irrationality obstruction.  The computational work is classical and
-exact; "quantum" refers to quantum cohomology.
+Prove, beginning with `m=2`, that
 
-## Scope
+\[
+X\times\mathbf P^m
+\]
 
-1. Reconstruct the cubic-threefold small quantum connection from the published
-   formulas and certify its rank-two formal block and exponents
-   `+1/6, -1/6` modulo integers.
-2. Derive and certify the product connection for `X x P^m`, first for bounded
-   `m` and then symbolically where the tensor/product formula permits it.
-3. Encode the projective-bundle and blow-up decompositions used by the
-   Hodge/quantum-atom formalism and search exact bounded instances for
-   cancellation or reproduction of the cubic atom by admissible centers.
-4. State the strongest surviving general cancellation lemma, or exhibit the
-   first exact counterpattern.  A bounded search is evidence only on its stated
-   range and is never promoted to a universal theorem.
+is irrational for every smooth cubic threefold `X`.  The full endpoint for all
+`m` would settle stable irrationality.
 
-## Evidence bundle
+## Closed inputs
 
-The first durable bundle will use the common stem
-`notes/2026-08-10-c907-quantum-monodromy-stabilization` and contain:
+- The cubic quantum connection has a rank-two formal block with exponents
+  `+/-1/6` modulo integers.
+- `X x P^m` has exactly `m+1` copies with unchanged fractional exponents.
+- Points, curves, and surfaces have fractional exponents only `0` or `1/2`;
+  hence `X x P^1` is irrational.
+- Coarse atom multiplicity cannot work from `m=2`: explicit self-carrier
+  balances reproduce the endpoint count.
+- The surviving Tate polynomial is `1+T+...+T^m`.  Equivalently, the endpoint
+  has enriched unipotent length `m+1`, while projective self-carriers have
+  length at most `m-1`.
+- Iritani's local Fourier lattice recovers the consecutive Tate levels, and
+  the associated-graded formula passes transverse and nested two-blow-up
+  exchanges.
+- The full cubic hypergeometric module is irregular-Hodge and irreducible.
+  Cai's rank-two atom is its local middle zero-exponential Stokes graded piece,
+  not a global subobject.
 
-- a dated mathematical report;
-- an exact Sage generator/checker;
-- a compact canonical JSON certificate;
-- checksums and byte counts;
-- an independent symbolic replay when feasible.
+## Active frontier: `m=2`
 
-Every claim backed by computation must record its replay command, exact input
-formulas and conventions, dependency versions, trusted boundary, and negative
-search stop condition under `notes/research-reproducibility-conventions.md`.
+For the fivefold `X x P^2`, prove both:
 
-## Acceptance gates
+1. **Analytic gate.**  The codimension-two blow-up comparison is strict on the
+   cubic-isotypic Stokes/Rees filtration and compatible with the Gamma lattice
+   and composition:
+   \[
+   gr_{1/6}A(Bl_ZY)=gr_{1/6}A(Y)\oplus T\,gr_{1/6}A(Z).
+   \]
+2. **Carrier gate.**  Every smooth projective threefold `Z` has
+   cubic-isotypic enriched length `ell_(1/6)(Z) <= 1`.
 
-- The `+/-1/6` certificate is reproduced exactly from source formulas, not
-  copied as an asserted input.
-- Stabilization is checked in at least two independent ways on a nontrivial
-  bounded range and reduced to an explicit general formula if possible.
-- Blow-up-center cancellation tests distinguish formal identities from
-  geometric realizability and state all dimension bounds.
-- The closeout gives a precise verdict: stable obstruction proved, a named
-  missing theorem isolated, or the proposed invariant refuted by a certified
-  counterpattern.
-- Run the required `ej` and `tt` closeout and maintain a Mystery ledger before
-  completing the task.
+The endpoint has length three; lower-dimensional centers have no cubic atom;
+threefold centers have codimension two and contribute one shift.  These gates
+therefore imply `X x P^2` irrational.
+
+## Next bounded pass
+
+Prove or refute the carrier bound first for nef-canonical threefolds, with the
+quintic Calabi--Yau and sextic general-type hypersurfaces as hostile tests.
+Separately, specialize Iritani (5.28) to codimension two, extend the strict
+basepoint comparison to first Novikov order, and identify its obstruction as
+an explicit Stokes/mutation-system extension class.
+
+A Fano-threefold database is reconnaissance only; weak factorization permits
+arbitrary Calabi--Yau and general-type threefold centers.
+
+## Gold architecture after `m=2`
+
+To reach every `m`, prove:
+
+- an intrinsic cubic-isotypic Stokes/Gamma Rees object;
+- strict additive blow-up composition in every codimension;
+- product compatibility by Thom--Sebastiani; and
+- the universal carrier bound `width <= dim-3`.
+
+The exact polynomial identities are already closed.  The remaining work is
+analytic functoriality and the carrier theorem, not further finite
+bookkeeping.
+
+## Acceptance
+
+- **Silver:** both `m=2` gates above, followed by a complete weak-factorization
+  proof of `X x P^2` irrational.
+- **Gold:** the all-codimension strict theory and universal carrier bound,
+  proving irrationality for every `m`.
+- **Negative progress:** an exact counterexample to either gate, with the
+  minimum missing datum or corrected invariant identified.
 
 ## Boundaries
 
-- Do not edit the frozen Paper V manuscript.  The geometric epilogue may use
-  the closed one-step theorem, but not the open higher-stabilization program.
-- Do not claim stable irrationality from finite computation.
-- Do not start Lean work without a separately authorized formalization task.
-- Literature and formulas are read from the shared cache first; any newly
-  fetched source is added to that cache.
-
-## Queued follow-on: atomic one-step abstraction and bounded Fano scan
-
-Author-approved 2026-08-11 as part of C907, from an external reviewer
-suggestion on the cubic-stabilization epilogue.  Two halves, in order.
-
-1. **Abstraction theorem.**  State and prove the general form of the closed
-   one-step result: for a smooth projective threefold `X`, if the atomic
-   formal-monodromy spectrum of `X` contains a class not realizable by atoms
-   of varieties of dimension at most two, then `X x P^1` is irrational.  The
-   existing bridge proof already has the required architecture — the additive
-   primitive-sixth-root multiplicity `nu_6`, projective-bundle persistence
-   with coefficient two, and vanishing on all fourfold weak-factorization
-   centers, which have dimension at most two.  The only cubic-specific input
-   is that the available fractional exponents in dimension at most two are
-   `0` and `1/2`; the general statement must name the exact
-   dimension-two-unrealizability hypothesis that replaces it.  The cubic
-   theorem becomes an application.
-2. **Bounded Fano scan.**  Scan Fano threefolds (complete quantum-period
-   data exists in dimension three) for atoms satisfying the hypothesis, to
-   obtain one-step irrationality results beyond cubics.  Gate, named at
-   queue time: a regularized quantum period alone does not produce the
-   requisite big-quantum atom; the scan needs the same
-   local-quantum-D-module-to-geometric-atom theorem as C907's live
-   residual-center mutation-system identification gate.  Scan results below
-   that gate are reconnaissance, not theorems.
-
-Scope notes fixed at queue time: the recorded closure of the Fano-threefold
-database route applies only to the `m = 2` full-stability gate on cubics,
-where arbitrary threefold centers arise; it does not close this one-step
-(`m = 1`) use, where centers stay at dimension at most two.  All existing
-C907 boundaries apply unchanged.  This follow-on is not started until the
-current gold-architecture targets (analytic/integral `T1` lift and the
-arbitrary-center `+/-1/6` length bound) reach their next bounded verdicts,
-unless the author reorders.
+- Do not edit the frozen Paper V manuscript.  Only the closed `m=1` theorem
+  belongs in its epilogue.
+- Do not infer a universal theorem from finite computation.
+- Do not start Lean work without separate authorization.
+- Follow the literature-cache and reproducibility conventions for new source
+  or computational claims.
+- The queued one-step abstraction/Fano reconnaissance remains behind the
+  active gold-architecture pass unless the author reorders it.

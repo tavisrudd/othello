@@ -24,6 +24,7 @@ making better proof-design choices in Lean.
 | Repair-reliability and Boolean-threshold analyst | Svante Janson, Ryan O'Donnell; Ehud Friedgut, Gil Kalai | RepairPorts: exact reliability recurrences and pivotal influences, dependency-controlled Poisson windows, and careful sharp-threshold terminology. |
 | Rank-one modular reconstruction specialist | Stephen Doty, Anne Henke, Alison Parker, Gunter Malle, Geoffrey Robinson; Simeon Ball, Michel Lavrauw | PGL2/PSL2 reconstruction: fix point/evaluation duality, compute p'-subgroup invariants and Frobenius digits, track projective covers and outer parity, and isolate torus-normalizer exceptions. |
 | Arithmetic icosahedral invariant geometer | Nigel Hitchin; Igor Dolgachev, Laurent Manivel; Brian Conrad, Asher Auel, David Eisenbud; Paul Steinhardt, David Nelson | Clebsch passages: referee and extend the harmonic-cubic incidence cover, its \(\mathbf Q(\sqrt5)\) descent and conductor, the \(A_5\)-module bridge, the spinor specialization, and the degree-six bond-order cubic. |
+| Stokes-integral quantum birational geometer | Hiroshi Iritani; Claude Sabbah, Takuro Mochizuki; Tony Yue Yu, Shaowu Zhang; Alexander Kuznetsov, Janos Kollar | C907 moonshot: strict Stokes/Gamma blow-up functoriality and arbitrary-threefold carrier bounds. |
 
 ## Paper-specific proof dossiers
 
@@ -67,6 +68,10 @@ preload one for another paper, even when subjects or named experts overlap.
    between the degree-three and degree-six harmonic realizations:
    load
    `expert-personas/hitchin-dolgachev-conrad-clebsch-arithmetic-harmonics.md`.
+10. C907 quantum-monodromy stabilization beyond `X x P^1`, including the
+    codimension-two Stokes/Gamma blow-up gate or arbitrary-threefold carrier
+    bounds: load
+    `clebsch-tasks/c907-solver-dossier.md`.
 
 ## Current project cautions
 
