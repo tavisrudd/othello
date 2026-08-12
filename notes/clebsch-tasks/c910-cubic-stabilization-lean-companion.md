@@ -78,6 +78,26 @@ geometric correspondence remain separately named external mathematical inputs
 until formalized from foundations.  The artifact must make this boundary
 visible in theorem types and in the claim map.
 
+## Current state
+
+The package has a pinned standalone Nix and Mathlib environment.  Its seven
+Lean sources build in dependency order through the guarded queue, including the
+reviewer interface and eight-terminal axiom audit.  The audit reports only
+`propext` and `Quot.sound` where the kernel closure is nonempty.
+
+The abstract packet telescope, dimension-four birational invariance,
+rank-two projective-bundle transport, cubic-threefold one-step obstruction,
+and genus-eight transport and obstruction are kernel checked.  The application
+structures retain the cubic packet calculation, projective-bundle formulas,
+weak-factorization input, Kuznetsov flop, and rational comparison as typed
+premises.  The static verifier now requires exact equality among the reviewer
+terminals, axiom-audit commands, and claim-map declarations.
+
+The integral side currently contains only the division-free mixed-coefficient
+identity.  The next proof gate is the full valuation/midpoint equivalence for
+symmetric matrix-of-ideals lattices, followed by square-zero divided powers and
+faithfully flat membership descent.
+
 ## Package shape
 
 ```text

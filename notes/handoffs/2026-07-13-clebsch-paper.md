@@ -145,6 +145,13 @@ checks as the existing referee artifacts.  External geometry and quantum inputs
 must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
+The pinned package environment and first application layer are green: seven
+sources build individually through the guarded queue, the eight reviewer
+terminals have an exact claim-map and axiom-audit match, and the cubic and
+genus-eight one-step conclusions expose every external quantum and geometric
+input in their theorem types.  The next formal gate is the full
+matrix-of-ideals rank-one generation criterion; the current integral module
+proves only its division-free coefficient identity.
 
 The 2026-08-12 crown-compression pass adds two exact structural conclusions.
 First, in dimension five the full one-depth finite-etale ambient
