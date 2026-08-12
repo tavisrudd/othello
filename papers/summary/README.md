@@ -2,42 +2,43 @@
 
 This repository summarizes a collection of papers in algebraic and finite
 geometry, coding theory, algebraic combinatorics, and quantum information.
-They ask related inverse and persistence questions: how much structure can be
-recovered after most of the original information has been discarded, and
-which obstructions survive operations designed to erase them?
+They ask two related questions: how much structure can be recovered after most
+of the original information has been discarded, and which obstructions persist
+under operations, such as stabilization, that might be expected to weaken them?
 
 The broadest geometric theorem is immediate to state:
 
 > **For every smooth complex cubic threefold `X`, the fourfold `X × P¹` is
 > irrational.**
 
-The same paper constructs an explicit non-isotrivial family for which `X` is
-universally `CH₀`-trivial.  Thus a standard stable-rationality obstruction can
-vanish while irrationality still survives an actual stabilization.
+*Irrationality after one stabilization* also constructs an explicit
+non-isotrivial family whose cubic-threefold fibres are universally
+`CH₀`-trivial. Failure of universal `CH₀`-triviality is a standard obstruction
+to stable rationality; this family shows that the obstruction can vanish while
+irrationality survives one stabilization.
 
-The remaining data may be the errors farthest from a code, minimum-weight
-words, local symmetries of an entangled state, low-order determinants,
-measurements that hide an optical device's orientation, or birational
-invariants tested after stabilization. Across the collection, sparse data
-repeatedly force rich algebraic or geometric structure. The recurring
-mechanism is rigidity: identify an invariant that survives the loss of
-information, then prove that few possibilities remain.
+Elsewhere in the collection, the retained information may consist of the
+errors farthest from a code, minimum-weight words, local symmetries of an
+entangled state, low-order determinants, or measurements that hide an optical
+device's orientation. Across both the reconstruction and persistence
+questions, sparse data repeatedly force rich algebraic or geometric structure.
+The recurring mechanism is rigidity: identify an invariant that survives the
+loss of information, then prove that few possibilities remain.
 
-The numbered five-paper series *Clebsch: Rigidity from Sparse Shadows* asks:
-how much of a structured object can be reconstructed from its sparse shadows?
-Papers I and III recover marked conference companions, while Paper II
-recovers a signed chordal companion. Paper V proves that these distinct
-cubics lie in one invariant pencil, recover the same six-axis carrier, and
-admit exact marked return maps. Paper IV is the parallel minimum-word branch,
-reconstructing a marked conic plane and polarity without asserting a cubic
-identification.
+The numbered five-paper series *Clebsch: Rigidity from Sparse Shadows* asks how
+much of a structured object can be reconstructed from sparse code, matching,
+incidence, and cubic-form data. Papers I--III reconstruct two geometrically
+different `A₅`-invariant cubic forms attached to the same six axes: one
+conference-type and one chordal. Paper V proves that each form recovers the
+common carrier and computes the precise ambiguity in passing between them.
+Paper IV develops a separate code reconstruction: pair data from
+minimum-weight words recover a marked conic plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
-Golden interferometer paper are related unnumbered companions. A separate
-geometric epilogue carries the recovered six-axis structure into birational
-geometry: it constructs universally `CH₀`-trivial cubic threefolds whose
-products with a projective line remain irrational, and proves the irrationality
-statement for every smooth cubic threefold. Every paper is intended to stand
-on its own mathematically.
+Golden interferometer paper are related unnumbered companions.
+*Irrationality after one stabilization* uses the recovered six-axis structure
+to construct its explicit universally `CH₀`-trivial family; its theorem for all
+smooth cubic threefolds is independent of that special construction. Every
+paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
@@ -153,9 +154,9 @@ selected infinite-family statements from the major papers.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Cubic-stabilization epilogue | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
-| Cubic-stabilization epilogue | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
-| Cubic-stabilization epilogue | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
+| Irrationality after one stabilization | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
+| Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
+| Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
 | Clebsch I | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
 | Clebsch I companion | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
 | Clebsch II | The strength-two trade space is one-dimensional and generated by a two-valued vector if and only if the orbit is `B₃/F₇` or `H₃/F₁₁`. | Full `PGL₂(q)`-orbits of perfect matchings, for every odd prime power `q`. |
