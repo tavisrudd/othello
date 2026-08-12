@@ -67,12 +67,13 @@ For every smooth cubic threefold \(X\),
 State a compact two-part theorem.
 
 1. **Finite-etale PD saturation.**  For a marked polarized elliptic-power
-   quotient whose local graph spectral packet is block-respecting,
-   self-adjoint, and finite etale at every bad prime, the divided-power
-   envelope of its prescribed graph Neron--Severi lattice equals the ordinary
-   divisor-product image in every degree.  Consequently every divided power
-   \(\Theta^{[k]}\) of the descended principal polarization is an ordinary
-   divisor product.
+   graph presentation with its elliptic ruling and self-dual kernel retained,
+   assume an orthogonal depth decomposition, block-respecting
+   \(B\)-self-adjoint slopes, and a finite-etale slope algebra on every
+   positive-depth block.  Then the divided-power envelope of its prescribed
+   graph Neron--Severi lattice equals the ordinary divisor-product image in
+   every degree.  Consequently every divided power \(\Theta^{[k]}\) of the
+   descended principal polarization is an ordinary divisor product.
 2. **Dimension-five ambient sharpness.**  For non-CM rank-five packets:
    * the actual six-axis packet has
      \(\operatorname{Hdg}^{2k}=P^k\) in every degree;
@@ -99,7 +100,7 @@ State in a short subsection after the cubic quantum proof:
    smooth projective threefolds; equivalently, if
    \(Y\times\mathbf P^1\dashrightarrow Z\times\mathbf P^1\), then
    \(\nu_6(Y)=\nu_6(Z)\).
-3. After the exact Kuznetsov theorem-locus and normalization verifications,
+3. With the exact Kuznetsov theorem locus and the cubic atom normalization,
    \[
       \nu_6(V_{14})=2,\qquad
       V_{14}\times\mathbf P^1\text{ is irrational}
@@ -108,6 +109,9 @@ State in a short subsection after the cubic quantum proof:
 
 This is the only noncubic quantum application added.  It shows that the
 method is stable-birational rather than a cubic-specific operator trick.
+Kuznetsov's comparison is geometric: honest rank-two projective bundles over
+the \(V_{14}\) and its associated smooth Pfaffian cubic are related by a
+flop.  No transport of quantum atoms through a derived equivalence is used.
 
 ## 3. Exact manuscript surgery
 
@@ -264,10 +268,15 @@ Its proof should occupy about one page.
    equivalence alone is not enough.
 4. Audit the numerical equality separately.  The current cubic proposition
    proves \(\nu_6(X)\ge2\), not by itself \(\nu_6(X)=2\).  Printing
-   \(\nu_6(V_{14})=2\) requires either an exact computation of the full cubic
-   atom or a cited upper bound whose hypotheses cover every smooth target.
-   Irrationality needs only nonvanishing, but the requested equality may not
-   be inferred from the lower bound.
+   \(\nu_6(V_{14})=2\) requires the following additional printed lemma.  The
+   odd \(H^3\)-summand of a cubic is killed by small quantum multiplication by
+   \(H\) for degree reasons and has grading residue zero, hence monodromy one;
+   Cai's remaining two one-dimensional even blocks also have integral
+   residue.  Together with his rank-two block this gives exactly two sixth
+   roots.  The parity-equivariant formal-isomonodromy bridge already used in
+   the section must then be invoked to preserve this exact count on the
+   connected reduced unramified atom component.  No weighted-complete-
+   intersection classification is needed.
 
 ### Section 5 — synthesis
 
@@ -328,13 +337,16 @@ No arrow is asserted between the cycle and quantum diagrams.
 Before implementation, require:
 
 1. two independent audits of the actual six-axis four-slot calculation
-   — already passed;
+   — passed;
 2. the bounded priority audit separating Milne's rational Lefschetz theorem
-   from the new integral weighted quotient — already passed;
+   from the new integral weighted quotient — passed;
 3. exact theorem/page verification of Kuznetsov's \(V_{14}\)--cubic
-   projectivization correspondence — in progress;
+   projectivization correspondence — passed: Theorems 2.17--2.18 give the
+   flop of honest rank-two projective bundles for every smooth \(V_{14}\);
 4. an independent exact justification of \(\nu_6(X)=2\), rather than the
-   currently printed lower bound \(\nu_6(X)\ge2\) — in progress;
+   currently printed lower bound \(\nu_6(X)\ge2\) — passed at the small
+   point by the odd-\(H^3\) grading calculation, with the existing formal-
+   isomonodromy bridge to be cited explicitly for atomwise continuation;
 5. a cold reread of the revised Section 3 by an abelian-variety specialist;
 6. a cold reread of the new Section 4 subsection by a quantum/birational
    specialist;
@@ -403,7 +415,54 @@ If any answer requires the series backstory, the integration has failed.
 7. Build, run TeX/log/diff checks, then conduct three independent cold reads.
 8. Revise once, rebuild, and export only after all theorem surfaces agree.
 
-## 10. Expected mathematical and editorial effect
+## 10. Hostile-audit disposition
+
+The committed blueprint received independent cycle and quantum audits after
+the complete-paper reread.
+
+### Cycle audit: GO with seven mandatory repairs
+
+The audit independently recomputed the two- and three-primary four-slot
+quotients and found no hidden Pluecker cancellation.  It confirmed full
+\(\operatorname{Hdg}^{2k}=P^k\) for the actual non-CM six-axis packet and
+the exact \((\mathbf Z/p^a)^5\) comparison quotient.  Implementation must:
+
+1. state the general theorem on the marked graph presentation, not a bare
+   ppav;
+2. use the \(B\)-self-adjoint convention and exact cross-ideal formula;
+3. keep divided-power saturation distinct from ambient Hodge saturation;
+4. print the weighted two-matching/four-support table;
+5. print the literal-power integral invariant-generation lemma;
+6. call the three-primary scalar block a one-point etale block, not a Jordan
+   mechanism; and
+7. retain the non-CM, fibrewise, and nonrelative boundaries.
+
+### Quantum audit: GO after source and normalization closure
+
+The dimension-four birational-invariance argument and \(\mathbf P^1\)
+stabilization passed.  Cancellation occurs in \(\mathbf Z\), not in the atom
+group.  Kuznetsov's exact geometric theorem applies to every smooth
+\(V_{14}\) and supplies the required flop of honest projective bundles.  The
+initial audit correctly rejected deriving the result from categorical
+equivalence; the primary-source audit removes that concern.
+
+The audit also identified the missing upper bound in the current manuscript.
+It closes internally: \(H*H^3=0\), the odd grading residue is zero, and Cai's
+full even calculation leaves exactly one primitive-sixth pair.  The revised
+proof must state the parity-equivariant formal-isomonodromy continuation.
+Until that sentence and lemma are printed, retain \(\nu_6\ge2\) in the old
+manuscript; after the repair, \(\nu_6=2\) and the \(V_{14}\) corollary are
+licensed.
+
+### Final planning verdict
+
+**GO for implementation, subject to the listed printed proof obligations.**
+The red teams rejected no proposed theorem after the scope repairs.  They did
+reject three tempting shortcuts: an unmarked-ppav formulation, an inference
+from PD saturation to full Hodge saturation, and transport of quantum data by
+derived equivalence alone.
+
+## 11. Expected mathematical and editorial effect
 
 The integrated paper ceases to be merely a striking conjunction.  It becomes
 a paper with two reusable structural mechanisms and two sharp external
