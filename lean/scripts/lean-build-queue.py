@@ -1034,7 +1034,8 @@ def command_detached_regenerate(args: argparse.Namespace) -> int:
         fail(f"regeneration state must be disk-backed under {home}, not {run_dir}")
     run_dir.mkdir(parents=True)
     child_args = [argument for argument in sys.argv[1:] if argument != "--detach"]
-    child_args += ["--run-dir", str(run_dir)]
+    separator = child_args.index("--") if "--" in child_args else len(child_args)
+    child_args[separator:separator] = ["--run-dir", str(run_dir)]
     launcher_log = run_dir / "launcher.log"
     with launcher_log.open("wb") as log:
         child = subprocess.Popen(
