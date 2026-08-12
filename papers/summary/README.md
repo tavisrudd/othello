@@ -1,9 +1,10 @@
-# Reconstruction and Rigidity in Finite Geometry, Coding, and Quantum Information
+# Reconstruction, Rigidity, and Rationality in Geometry, Coding, and Quantum Information
 
-This repository summarizes a collection of papers in finite geometry, coding
-theory, algebraic combinatorics, and quantum information. They ask a common
-inverse question: how much structure can be recovered after most of the
-original information has been discarded?
+This repository summarizes a collection of papers in algebraic and finite
+geometry, coding theory, algebraic combinatorics, and quantum information.
+They ask related inverse and persistence questions: how much structure can be
+recovered after most of the original information has been discarded, and
+which obstructions survive operations designed to erase them?
 
 The remaining data may be the errors farthest from a code, minimum-weight
 words, local symmetries of an entangled state, low-order determinants,
