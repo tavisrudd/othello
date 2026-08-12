@@ -105,3 +105,37 @@ detectors fire.
   realization or only a canonical arithmetic analogy.
 * **Open:** whether the intersection contains further positive-dimensional
   cubic families.
+
+## 2026-08-12 modular refinement
+
+The finite-etale locus is best handled one integral datum at a time.  A fixed
+datum gives a finite-level modular presentation curve; its pullback along the
+cubic period map is finite unless the whole modular curve is a shared cubic
+component.  In the shared case strong Torelli rigidifies the normalized cubic
+period curve.
+
+For the six-axis datum, the five two-primary kernels admit an exact modular
+interpretation.  They are the smallest Borel/nonsplit-Cartan packet
+
+```text
+ P^1(F4)=P^1(F2) disjoint_union {omega,omega^2}.
+```
+
+Over `X_0(3)`, the Borel quotient is the degree-three root cover `X_0(6)`;
+the nonsplit-Cartan quotient is the degree-two congruence sign cover
+`r^2=T`; their fibre product is the full projective mod-two splitting cover.
+The signed cubic coordinate satisfies `T=81t^2`, hence `r=9t`.  Therefore the
+outer marking of the cubic pencil is exactly the pullback of the exotic
+graph marking.  This closes the arithmetic/modular unity of the cycle branch.
+
+The remaining family-level gate is to print the relative Fano/Albanese
+six-axis isogeny and finite graph subgroup before identifying the whole
+principally polarized period family with one fixed marked stack component.
+The same relative construction may give one horizontal minimal cohomology
+cycle after finite level, but line-bundle descent must be stated explicitly;
+no unmarked Chow descent or relative diagonal follows.
+
+The odd-prime Borel/Cartan orbit theorem is general.  Its saturation
+consequence is conditional on an independently exhibited integral
+self-adjoint unramified lift and the full blockwise divisor-lattice
+hypotheses; Cartan membership alone does not imply them.
