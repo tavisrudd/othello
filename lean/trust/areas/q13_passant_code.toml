@@ -43,7 +43,7 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.tangent_graph_certificate"
 gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+expected_axioms = ["Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightEight_semantic_transport"
@@ -53,7 +53,7 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_profile_reduction"
 gates = ["TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+expected_axioms = ["Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate.weightTen_isolated_fibre_profile"
