@@ -978,6 +978,15 @@ def command_regenerate(args: argparse.Namespace) -> int:
         f"{app}-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-"
         f"{uuid.uuid4().hex[:8]}"
     )
+    run_dir = getattr(args, "run_dir", None)
+    if run_dir is not None:
+        run_dir = run_dir.expanduser().resolve()
+        run_dir.mkdir(parents=True, exist_ok=False)
+        atomic_write_json(
+            run_dir / "status.json",
+            {"format": 1, "run_id": run_id, "state": "running", "app": app,
+             "started_utc": utc_now(), "lean_root": str(lean_root)},
+        )
     lock = acquire_lock(lock_file, run_id, [f"<nix run .#{app}>"])
     try:
         wait_for_quiet(pgrep, 0, 60)
@@ -1000,9 +1009,46 @@ def command_regenerate(args: argparse.Namespace) -> int:
             print(result.stdout, end="")
         if result.stderr:
             print(result.stderr, end="", file=sys.stderr)
-        return EXIT_OK if result.returncode == 0 else EXIT_BUILD_FAILED
+        exit_code = EXIT_OK if result.returncode == 0 else EXIT_BUILD_FAILED
+        if run_dir is not None:
+            atomic_write_json(
+                run_dir / "status.json",
+                {"format": 1, "run_id": run_id,
+                 "state": "success" if exit_code == EXIT_OK else "failed", "app": app,
+                 "started_utc": utc_now(), "finished_utc": utc_now(),
+                 "lean_root": str(lean_root), "exit_code": exit_code},
+            )
+        return exit_code
     finally:
         lock.close()
+
+
+def command_detached_regenerate(args: argparse.Namespace) -> int:
+    """Launch a guarded source transaction in a durable detached session."""
+    lean_root = args.lean_root.expanduser().resolve()
+    home = Path.home().resolve()
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    run_dir = (STATE_ROOT_DEFAULT / "regenerations" /
+        f"{args.app}-{stamp}-{uuid.uuid4().hex[:8]}").resolve()
+    if not run_dir.is_relative_to(home):
+        fail(f"regeneration state must be disk-backed under {home}, not {run_dir}")
+    run_dir.mkdir(parents=True)
+    child_args = [argument for argument in sys.argv[1:] if argument != "--detach"]
+    child_args += ["--run-dir", str(run_dir)]
+    launcher_log = run_dir / "launcher.log"
+    with launcher_log.open("wb") as log:
+        child = subprocess.Popen(
+            [sys.executable, str(Path(__file__).resolve()), *child_args], cwd=lean_root,
+            env={**os.environ, "PWD": str(lean_root)}, stdin=subprocess.DEVNULL,
+            stdout=log, stderr=subprocess.STDOUT, start_new_session=True,
+        )
+    atomic_write_json(run_dir / "detached.json", {
+        "format": 1, "launcher_pid": child.pid, "launched_utc": utc_now(),
+        "lean_root": str(lean_root), "run_dir": str(run_dir), "launcher_log": str(launcher_log),
+    })
+    print(f"detached pid: {child.pid}")
+    print(f"run dir:      {run_dir}")
+    return EXIT_OK
 
 
 def command_verify(args: argparse.Namespace) -> int:
@@ -1698,11 +1744,18 @@ def parser() -> argparse.ArgumentParser:
         help="flake app to run; source-producing apps remain separate from verification",
     )
     regenerate.add_argument(
+        "--detach", action="store_true",
+        help="run the guarded source transaction in a durable detached session",
+    )
+    regenerate.add_argument("--run-dir", type=Path, default=None, help=argparse.SUPPRESS)
+    regenerate.add_argument(
         "app_args",
         nargs=argparse.REMAINDER,
         help="arguments after -- are passed to the selected flake app",
     )
-    regenerate.set_defaults(function=command_regenerate)
+    regenerate.set_defaults(
+        function=lambda args: command_detached_regenerate(args) if args.detach else command_regenerate(args)
+    )
 
     verify = subparsers.add_parser(
         "verify", help="run the package verification app under the owner guard"
