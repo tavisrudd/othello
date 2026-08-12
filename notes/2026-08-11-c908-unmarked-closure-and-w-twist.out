@@ -1,0 +1,6 @@
+C908 unmarked-base closure inputs and w-twist scoping
+robust vanishing: 61 of 61 samples are Frobenius-fixed; all have zero F_2-trace: True; distinct F_2-traces=[0]
+control (coefficient trace w, outside F_2): F_2-traces=[1, 1]; sharp=True
+End(J) generators=25; all traces even=True; all pairwise product traces even=True; identity trace=10
+F_2-dimension of image of End(J) in End(Lambda_2)=25 (M_5(F_4) needs 50, M_5(F_2) has 25)
+PASS
