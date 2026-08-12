@@ -82,6 +82,5 @@ published_declarations = [
 ]
 forbidden_source_tokens = [
   "namespace ProjectiveCap.Certificate.CertData",
-  "ProjectiveCap.CertData.Q11",
   "RelativeConicArcs",
 ]

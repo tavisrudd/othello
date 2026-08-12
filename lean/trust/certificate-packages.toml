@@ -88,17 +88,6 @@ forbidden_artifact_basenames = []
 # here permanently belongs in `resident_family` below instead.
 
 [[pending_family]]
-name = "order-11 projective-cap reply-book certificates"
-owner = "finitegeom-projective-cap-q11-certificates"
-disposition = "external-pending"
-path_prefixes = [
-  "lean/ProjectiveCap/CertData/Q11.lean",
-  "lean/ProjectiveCap/CertData/Q11Assembly.lean",
-  "notes/2026-07-07-anchored-cert-to-lean.py",
-  "notes/2026-07-08-q11-assembly-to-lean.py",
-]
-
-[[pending_family]]
 name = "order-13 passant-code certificates"
 owner = "finitegeom-projective-cap-q13-certificates"
 disposition = "external-pending"
