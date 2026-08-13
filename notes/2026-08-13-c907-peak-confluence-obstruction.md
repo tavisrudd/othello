@@ -2,11 +2,16 @@
 
 Date: 2026-08-13
 
-Status: exact obstruction to the valley/radial-leg composition proposal.  The
-proposal correctly localizes the coherence problem to weak-factorization
+Status: exact obstruction to comparison **inside the extremal closed fibre**
+and to scalar-only banking.  The proposal correctly localizes coherence to
 peaks, but neither scalar germ-faithfulness nor the standard
-coalescing-eigenvalue isomonodromy theorem identifies the primitive-sixth
-packets emerging from the two extremal axes.
+coalescing-eigenvalue theorem identifies the primitive-sixth packets on the
+two branches of `B=0`.  A later positive theorem bypasses, rather than
+contradicts, this obstruction: when the rays span an exposed K-positive
+carrier face, it turns on `B=xx'` together with every packet-carrying
+variable and connects the two punctured axes inside the intrinsic peak
+connection.  See
+`2026-08-13-c907-k-positive-carrier-face-peak-theorem.md`.
 
 ## 1. The two extremal axes are different branches
 
@@ -52,12 +57,19 @@ Contract `e=E_1` on one side and `e'=H-E_1-E_2` on the other.  Since
 
 The two extremal specializations are the two branches of `B=0`: one retains
 `x` and kills `x'`, the other retains `x'` and kills `x`.  They meet only at
-the confluent origin.  Products with a smooth projective threefold give the
-same peak-chart obstruction in dimension five.
+the confluent origin **inside that closed fibre**.  Products with a smooth
+projective threefold give the same chamber-chart obstruction in dimension
+five.  This does not rule out leaving `B=0` and using the intrinsic
+multi-parameter peak connection; that later repair requires an exposed
+K-positive face containing every primitive-sixth carrier direction.  The
+two blowdown variables alone are not sufficient.
 
 Thus the two radial legs avoid the old-exceptional infinite-tail regression,
-but they do not produce a common punctured parameter fibre.  Any comparison
-must cross the confluence at the origin.
+but they do not produce a common punctured parameter fibre **while the base
+monomial `B` remains specialized to zero**.  A comparison confined to the
+two chamber completions must cross the confluence at the origin.  The
+K-positive carrier-face theorem instead restores `B` and every atom variable,
+then travels through `B ne 0`.
 
 ## 2. Extending the covector does not extend the selected line
 

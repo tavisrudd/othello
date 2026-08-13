@@ -46,6 +46,21 @@ class: rank is preserved on the pullback K-summand and vanishes on every
 exceptional K-summand for a nonstacky point off the centre.  It still does
 not cover the locally toroidal flips in a general cobordism.
 
+A second general peak class is closed in
+`../2026-08-13-c907-k-positive-carrier-face-peak-theorem.md`.  Hostile audit
+rejected the first two-face formulation: the two blowdown variables can omit
+the ambient cubic carrier, leaving `P6` confluent at every Artin level.  The
+correct hypothesis is an exposed rational-polyhedral face containing both
+blowdown rays **and every endpoint packet-carrying Novikov direction**, with
+`c_1` strictly positive on the whole face.  The dimension axiom then makes
+the complete carrier connection polynomial, so the two endpoint receivers
+lie in one honest analytic sectorial family whenever their admissible
+sectors are joined by a nonturning lifted path.  This covers Fano peaks and
+other peaks with a `P6`-faithful K-positive carrier face; it deliberately
+excludes K-trivial directions and faces which lose the atom.  The sharpened
+Gold question is whether smooth AKMW subdivision peaks refine into this
+class and ordinary split flops.
+
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
 Engel--de Gaay Fortman--Schreieder proves stable irrationality for very
@@ -55,6 +70,15 @@ fibration `X x P2 -> P2` violates the available `K`/`K^2` and twisting
 hypotheses and already has a line-centred relative conic-bundle Sarkisov link.
 Thus a direct rigidity proof would require a new relative pliability
 classification; it is not a cheaper Gold closure.
+
+The C908 blown-up-theta integral lattice is audited in
+`../2026-08-13-c907-c908-theta-lattice-relevance-audit.md`.  Its canonical
+nonsplit extension, `2^10` saturation defect, and rank-ten escape quotient
+are real assets, but they are uniform for smooth cubics and therefore do not
+by themselves detect the special loci where the minimal-theta obstruction
+can fail.  A C907 application would need a new theorem forcing an integral
+splitting or depth reduction from stable rationality; universal-`CH_0`
+special cubics are the first falsifier for any weaker bridge.
 
 The first explicit peak regression is banked in
 `../2026-08-13-c907-geiser-peak-descendant-intertwiner.md`.  For the
@@ -544,7 +568,7 @@ reverse blow-down implication, conditional weak-factorization telescope, and
 `../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
 `../2026-08-13-c907-rank-telescope-and-product.md`.
 
-The next bounded pass returns to coherence.  The exact ambient point
+The next bounded pass returns to coverage.  The exact ambient point
 coordinate and wall-local rank identity are proved for every
 smooth-projective simple VGIT wall in
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`, and the valid minimal toric
@@ -553,8 +577,13 @@ blowups until the two incident receivers at a peak are compared.  In
 parallel, determine whether the peaks needed for a fivefold factorization
 can all be replaced directly by such walls.  Otherwise
 extend the ambient-coordinate theorem to the finite-quotient or toroidal wall spaces
-produced by birational cobordism/destacking.  The older two-radial-leg
-nearby-cycle comparison remains the fallback for peaks outside that coverage.
+produced by birational cobordism/destacking.  The K-positive carrier-face
+theorem handles peaks for which all atom variables, not merely the two
+contraction rays, lie on one exposed rational-polyhedral `c_1`-positive
+face.  Audit whether AKMW's regular subdivisions can be chosen so that every
+remaining elementary peak is an ordinary split flop;
+the older two-radial-leg nearby-cycle comparison remains the fallback for
+any peak outside those two classes.
 The all-codimension and product audits need not be repeated.  Exact failed
 repairs and AA split:
 `../2026-08-13-c907-simple-wall-coverage-obstruction.md`,
