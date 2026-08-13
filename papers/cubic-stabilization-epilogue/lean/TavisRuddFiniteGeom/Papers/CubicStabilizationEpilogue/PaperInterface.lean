@@ -2129,6 +2129,41 @@ theorem filteredCoefficientQuotient_adicFiltration_mul_mem_add
       (Quantum.adicFiltration ideal).ideal (leftOrder + rightOrder) :=
   Quantum.adicFiltration_mul_mem_add ideal hleft hright
 
+/-- A ring endomorphism preserving one ideal preserves all powers of that
+ideal, descends to every adic quotient, and its quotient endomorphisms commute
+with adjacent reduction.  No particular ideal or endomorphism from the
+manuscript is constructed. -/
+theorem filteredCoefficientQuotient_adicEndomorphism_compatible
+    {R : Type*} [CommRing R] (ideal : Ideal R) (endomorphism : R →+* R)
+    (preserves : ∀ value, value ∈ ideal → endomorphism value ∈ ideal)
+    (level : ℕ)
+    (coefficient : (Quantum.adicFiltration ideal).QuotientRing (level + 1)) :
+    let induced :=
+      Quantum.DecreasingIdealFiltration.adicPreservingEndomorphism
+        ideal endomorphism preserves
+    (∀ order value,
+      value ∈ (Quantum.adicFiltration ideal).ideal order →
+        induced.toRingHom value ∈
+          (Quantum.adicFiltration ideal).ideal order) ∧
+      (∀ value : R,
+        induced.quotientEndomorphism level
+            (Ideal.Quotient.mk
+              ((Quantum.adicFiltration ideal).ideal level) value) =
+          Ideal.Quotient.mk
+            ((Quantum.adicFiltration ideal).ideal level)
+            (endomorphism value)) ∧
+      ((Quantum.adicFiltration ideal).reduction level
+          (induced.quotientEndomorphism (level + 1) coefficient) =
+        induced.quotientEndomorphism level
+            ((Quantum.adicFiltration ideal).reduction level coefficient)) :=
+  ⟨(Quantum.DecreasingIdealFiltration.adicPreservingEndomorphism
+      ideal endomorphism preserves).maps_mem,
+    (Quantum.DecreasingIdealFiltration.adicPreservingEndomorphism
+      ideal endomorphism preserves).quotientEndomorphism_mk level,
+    (Quantum.DecreasingIdealFiltration.adicPreservingEndomorphism
+      ideal endomorphism preserves).reduction_quotientEndomorphism
+        level coefficient⟩
+
 /-- Compatible finite-level small matrices, divisor substitutions, and
 two-sided-invertible gauges determine compatible bulk matrices whose
 characteristic polynomials are the substituted small characteristic

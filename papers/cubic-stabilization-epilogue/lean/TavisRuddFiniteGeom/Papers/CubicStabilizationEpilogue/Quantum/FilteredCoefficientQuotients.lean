@@ -1,5 +1,6 @@
 import Mathlib.Algebra.Ring.Pi
 import Mathlib.RingTheory.Ideal.Lattice
+import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.Ideal.Quotient.Defs
 
@@ -23,7 +24,10 @@ predicate used here.
 For any supplied ideal `I`, Lean also constructs the power filtration `I^n`
 and proves the precise multiplicative lower bound: if `x ∈ I^m` and
 `y ∈ I^n`, then `x * y ∈ I^(m+n)`.  This separate adic model is not identified
-with the manuscript's filtration.
+with the manuscript's filtration.  Any supplied endomorphism preserving `I`
+then preserves every power, descends to all adic quotients, and commutes with
+their adjacent reductions.  Neither this arbitrary ideal nor this endomorphism
+is identified with the manuscript's filtration or divisor substitution.
 
 This module does not construct the manuscript's coefficient ring or its
 filtration, prove that the supplied filtration is complete or separated,
@@ -92,6 +96,21 @@ structure PreservingEndomorphism {R : Type u} [CommRing R]
   toRingHom : R →+* R
   maps_mem : ∀ level value, value ∈ filtration.ideal level →
     toRingHom value ∈ filtration.ideal level
+
+/-- An endomorphism preserving one ideal preserves every level of its adic
+filtration. -/
+def adicPreservingEndomorphism {R : Type u} [CommRing R]
+    (ideal : Ideal R) (endomorphism : R →+* R)
+    (preserves : ∀ value, value ∈ ideal → endomorphism value ∈ ideal) :
+    (adicFiltration ideal).PreservingEndomorphism where
+  toRingHom := endomorphism
+  maps_mem level value hvalue := by
+    have hmap : Ideal.map endomorphism ideal ≤ ideal :=
+      Ideal.map_le_iff_le_comap.mpr preserves
+    have hmapPow : Ideal.map endomorphism (ideal ^ level) ≤ ideal ^ level := by
+      rw [Ideal.map_pow]
+      exact Ideal.pow_right_mono hmap level
+    exact hmapPow (Ideal.mem_map_of_mem endomorphism hvalue)
 
 namespace PreservingEndomorphism
 
