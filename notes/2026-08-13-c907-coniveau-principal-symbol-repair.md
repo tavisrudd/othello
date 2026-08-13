@@ -309,6 +309,33 @@ center, so the rank-framed theorem predicts that every one of its sectorial
 Gamma lifts has ambient rank exactly zero.  One nonzero rank kills the
 theorem.
 
+That first regression now passes exactly.  The blow-up is the incidence
+hypersurface in
+\(\mathbf P_{\mathbf P^5}(\mathcal O(-1)\oplus\mathcal O(-3))\).  Quantum
+Lefschetz gives point-period coefficients
+
+\[
+ \frac{(k+3d)!}{(d!)^6k!(k+2d)!},
+\]
+
+and each fixed-\(d\) exceptional slice is
+
+\[
+ \frac{(3d)!}{(d!)^6(2d)!}
+ e^R{}_1F_1(-d;2d+1;-R).
+\]
+
+The second factor is a degree-\(d\) polynomial.  Thus the algebraic center
+connection coefficient is exactly \(1/\Gamma(-d)=0\) in every degree, so the
+cubic exceptional packet has zero point pairing and ambient rank.  The same
+Kummer zero holds for every smooth codimension-two complete intersection
+\((a,b)\subset\mathbf P^n\), with coefficient \(1/\Gamma(-ad)\).  See
+`2026-08-13-c907-ci-blowup-point-purity.md`.
+
+This does not close arbitrary centers: weak factorization provides smooth
+centers normally crossing a boundary, not necessarily boundary strata with
+split normal bundle.
+
 ## AA / EJ / TT and mystery ledger
 
 - **AA:** support annihilation is closed as inconsistent with Gamma tensor
@@ -324,12 +351,13 @@ theorem.
   normalized eigenvector.  The toric \(\mathbf P^3\)-center pilot is
   primitive-sixth-vacuous; the cubic-center blow-up is the first honest test.
 - **Settled:** analytic nonzero rank of both cubic branches, categorical norm
-  \(27\) as a calibration target, source and center dimension counts, and
-  logical sufficiency of the rank-framed theorem.
+  \(27\) as a calibration target, source and center dimension counts,
+  logical sufficiency of the rank-framed theorem, and exact point purity for
+  the first nonvacuous cubic-center blow-up and all split
+  complete-intersection pilots.
 - **Open:** fixed-phase rank compatibility of the general blow-up comparison
-  and product naturality.  The
-  \(\operatorname{Bl}_X\mathbf P^5\) central-connection matrix is the exact
-  first nonvacuous regression; the toric pilot only rehearses its framing.
+  and product naturality for arbitrary centers with nonsplit normal bundle.
+  Standard weak factorization does not force the split case.
 
 ## Sources
 

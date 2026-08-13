@@ -362,6 +362,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   decomposition does not yet supply this: outside toric cases, its analytic
   Stokes/Orlov compatibility is explicitly expected rather than proved.
   See `../2026-08-13-c907-coniveau-principal-symbol-repair.md`.
+- The first nonvacuous rank regression passes.  Realize `Bl_X P^5` as the
+  incidence hypersurface in
+  `P_(P^5)(O(-1) direct-sum O(-3))`.  Its point-period exceptional slice in
+  degree `d` is a nonzero scalar times
+  `e^R 1F1(-d;2d+1;-R)`, hence exponential times a polynomial; the forbidden
+  algebraic coefficient is exactly `1/Gamma(-d)=0`.  The same Kummer zero
+  holds for every codimension-two complete intersection `(a,b)` in
+  projective space, with `1/Gamma(-ad)`.  Weak factorization does not reduce
+  arbitrary centers to this case because normal-crossing centers need not be
+  boundary strata or have split normal bundle.  See
+  `../2026-08-13-c907-ci-blowup-point-purity.md`.
 
 ## Active frontier: `m=2`
 
@@ -400,13 +411,14 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, test the rank-framed comparison on `Bl_X P^5` for the
-codimension-two cubic center.  Its primitive-sixth packet is entirely
-exceptional, so every Gamma lift must have ambient rank exactly zero; one
-nonzero rank kills the theorem.  The exact toric `Bl_(P^3)P^5` matrix is only
-a phase/Orlov-normalization rehearsal because both of its primitive-sixth
-packets are empty.  Then formulate the minimum fixed-phase rank statement
-for a general blow-up.
+For Silver, extend the landed Kummer point-purity theorem from split
+codimension-two complete intersections to an arbitrary smooth center.  Work
+directly on the point component of Iritani's master-space Fourier transform:
+identify whether normal-bundle Chern-root and curve corrections preserve the
+reciprocal-Gamma zero, or exhibit the first nonzero exceptional point-pairing
+coefficient.  The exact toric `Bl_(P^3)P^5` matrix is only a
+phase/Orlov-normalization rehearsal because both primitive-sixth packets are
+empty.
 Do not return to a support-annihilating `Phi_6`: the Gamma point calculation
 proves that target inconsistent with ordinary Gamma pushforward.  See
 `../2026-08-13-c907-coniveau-principal-symbol-repair.md` and
