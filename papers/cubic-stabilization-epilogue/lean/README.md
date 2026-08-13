@@ -85,7 +85,8 @@ The 140 reviewer-facing terminals currently verify:
   conjugate roots each repeated twice; the concrete root-adjoining extension
   is proved finite etale of degree two over `F2`, identified algebraically
   with the concrete `F4` used in the gluing packet, and carries that marked
-  explicit
+  root to one of the two non-prime-field elements exchanged by Frobenius,
+  together with the explicit
   diagonalization; and a scalar block over `F3`,
   without identifying
   those models with the geometric principal kernel;

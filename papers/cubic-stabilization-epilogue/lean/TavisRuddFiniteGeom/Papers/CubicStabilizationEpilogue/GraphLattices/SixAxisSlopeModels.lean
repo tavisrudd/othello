@@ -1,5 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import Mathlib.Algebra.Polynomial.SpecificDegree
 import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
@@ -156,6 +156,52 @@ noncomputable def sixAxisQuadraticSplittingFieldAlgEquivF4 :
         exact sixAxisQuadraticSlopePolynomial_natDegree
       rw [dim]
       norm_num
+
+/-- The image of the marked quadratic root under the chosen algebra
+equivalence to the concrete gluing field. -/
+noncomputable def sixAxisQuadraticSlopeRootInF4 : F4 :=
+  sixAxisQuadraticSplittingFieldAlgEquivF4 sixAxisQuadraticSlopeRoot
+
+/-- The transported marked root is one of the two exotic gluing scalars: it
+satisfies `x²+x+1=0` and hence is neither `0` nor `1`. -/
+theorem sixAxisQuadraticSlopeRootInF4_equation_and_exotic :
+    sixAxisQuadraticSlopeRootInF4 ^ 2 +
+          sixAxisQuadraticSlopeRootInF4 + 1 = 0 ∧
+      sixAxisQuadraticSlopeRootInF4 ≠ 0 ∧
+      sixAxisQuadraticSlopeRootInF4 ≠ 1 := by
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  letI : CharP F4 2 := charP_of_injective_algebraMap' (ZMod 2) 2
+  have equation := congrArg sixAxisQuadraticSplittingFieldAlgEquivF4
+    sixAxisQuadraticSlopeRoot_equation
+  have mappedEquation : sixAxisQuadraticSlopeRootInF4 ^ 2 +
+      sixAxisQuadraticSlopeRootInF4 + 1 = 0 := by
+    simpa [sixAxisQuadraticSlopeRootInF4] using equation
+  refine ⟨mappedEquation, ?_, ?_⟩
+  · intro zero
+    rw [zero] at mappedEquation
+    simpa using mappedEquation
+  · intro one
+    rw [one] at mappedEquation
+    have two : (2 : F4) = 0 := CharP.cast_eq_zero F4 2
+    have three : (3 : F4) = 1 := by
+      calc
+        (3 : F4) = 2 + 1 := by norm_num
+        _ = 0 + 1 := congrArg (fun value : F4 ↦ value + 1) two
+        _ = 1 := zero_add 1
+    norm_num only [one_pow, one_add_one_eq_two] at mappedEquation
+    rw [three] at mappedEquation
+    exact one_ne_zero mappedEquation
+
+/-- Frobenius exchanges the two exotic roots of the quadratic polynomial. -/
+theorem sixAxisQuadraticSlopeRootInF4_frobenius_conjugate :
+    f4Frobenius sixAxisQuadraticSlopeRootInF4 ≠
+        sixAxisQuadraticSlopeRootInF4 ∧
+      f4Frobenius (f4Frobenius sixAxisQuadraticSlopeRootInF4) =
+        sixAxisQuadraticSlopeRootInF4 :=
+  f4Frobenius_exchanges_nonPrimeElement sixAxisQuadraticSlopeRootInF4
+    sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.1
+    sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.2
 
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/

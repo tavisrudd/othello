@@ -401,7 +401,8 @@ compatible quotient families in that same packet.
 The explicit two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
 with the concrete `F4` gluing field is proved as an `F2`-algebra equivalence,
-while identification with the
+and its marked root is proved to lie in the non-prime Frobenius pair, while
+identification with the
 geometric marked extension and principal kernel remains open.
 Lean also proves that a continuous map from a connected base into a finite
 discrete gluing packet is constant and propagates a distinguished kernel type
