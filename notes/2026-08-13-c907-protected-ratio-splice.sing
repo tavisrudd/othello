@@ -1,0 +1,37 @@
+// C907 protected ratio splice: local Cartier and forced-blowup regression.
+// Replay from repository root:
+//   nix shell nixpkgs#singular --command Singular -q \
+//     notes/2026-08-13-c907-protected-ratio-splice.sing
+//
+// This is the exact local seam calculation.  It does not claim a global
+// collar attachment to the exterior regular model.
+
+ring ratio=(0,Q),(r,h,v,A,Y,L,S,q),dp;
+poly B=1-h+r2*h2*A;
+poly C=1-r2*h*v+r2*h2*A;
+poly Pbar=(r*h)^2*Y*B*C*(L-S)-(r*h)^2*Q-Y*B*C*(1-B)*(1-C);
+poly E=B*C*(L-S-v+h*A+r2*h*A*v-r2*h2*A2)-A;
+ideal AY=A*Y-Q;
+if (reduce(Pbar-r2*h2*Y*E,std(AY))==0)
+{ print("RATIO Cartier pullback Pbar=r^2*h^2*Y*E modulo AY=Q PASS"); }
+else { print("RATIO Cartier pullback FAIL"); }
+
+poly Er0=subst(E,r,0);
+poly Eh0=subst(E,h,0);
+if (reduce(diff(Er0,v)+(1-h),std(AY))==0 && diff(Eh0,v)==-1)
+{ print("RATIO genuine central components d_vE=-(1-h),-1 PASS"); }
+else { print("RATIO genuine central derivatives FAIL"); }
+
+poly Erh1=subst(Er0,h,1);
+if (reduce(Erh1+A,std(AY))==0)
+{ print("RATIO apparent r=0,h=1 has E=-A and is empty PASS"); }
+else { print("RATIO apparent-empty regression FAIL"); }
+
+poly Eblow=subst(E,v,h*q);
+// Here h is the exceptional coordinate and v=h*q.  Its h=0 reduction is
+// L-S-A, independent of q.
+poly Eexc=subst(Eblow,h,0);
+if (reduce(Eexc-(L-S-A),std(AY))==0 && diff(Eexc,q)==0)
+{ print("FORCED Bl_(h,v) exceptional E=L-S-A independent_q PASS"); }
+else { print("FORCED blowup regression FAIL"); }
+quit;

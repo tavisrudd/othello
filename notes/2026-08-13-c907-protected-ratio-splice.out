@@ -1,0 +1,4 @@
+RATIO Cartier pullback Pbar=r^2*h^2*Y*E modulo AY=Q PASS
+RATIO genuine central components d_vE=-(1-h),-1 PASS
+RATIO apparent r=0,h=1 has E=-A and is empty PASS
+FORCED Bl_(h,v) exceptional E=L-S-A independent_q PASS
