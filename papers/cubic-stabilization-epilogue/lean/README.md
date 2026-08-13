@@ -107,10 +107,12 @@ The 113 reviewer-facing terminals currently verify:
   construction of every quotient coefficient ring and canonical adjacent
   reduction; a supplied filtration-preserving endomorphism descends to
   compatible quotient endomorphisms, with their actions on classes and the
-  reduction-substitution square proved; the canonical function from the
-  original ring to the explicit compatible quotient-family model is injective
-  exactly when the intersection of the ideals is zero; completeness,
-  multiplicative filtration laws, and
+  reduction-substitution square proved; compatible families form a pointwise
+  commutative ring, and the canonical ring homomorphism from the original ring
+  is injective exactly when the intersection of the ideals is zero and
+  bijective exactly when the filtration is also complete in the sense that
+  every compatible family has a preimage; Lean does not prove these conditions
+  for the supplied filtration; multiplicative filtration laws and
   identification with the manuscript's geometric coefficient quotients are
   not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
