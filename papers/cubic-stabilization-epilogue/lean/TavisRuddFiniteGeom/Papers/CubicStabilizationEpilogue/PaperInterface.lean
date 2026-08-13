@@ -206,6 +206,21 @@ theorem graphCoefficient_crossDepth_intersection_and_midpoint
     GraphLattices.graphCrossDepth_midpoint
       firstDepth secondDepth slopeDifferenceValuation⟩
 
+/-- Arithmetic lift-independence statement: the cross depth depends only on
+the slope-difference valuation truncated at the smaller diagonal depth. -/
+theorem graphCoefficient_crossDepth_eq_of_effectiveSlopeDifference_eq
+    (firstDepth secondDepth : ℕ)
+    {firstValuation secondValuation : WithTop ℕ}
+    (effectiveEqual :
+      GraphLattices.effectiveSlopeDifferenceValuation
+          firstDepth secondDepth firstValuation =
+        GraphLattices.effectiveSlopeDifferenceValuation
+          firstDepth secondDepth secondValuation) :
+    GraphLattices.graphCrossDepth firstDepth secondDepth firstValuation =
+      GraphLattices.graphCrossDepth firstDepth secondDepth secondValuation :=
+  GraphLattices.graphCrossDepth_eq_of_effectiveSlopeDifference_eq
+    firstDepth secondDepth effectiveEqual
+
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that
 any particular geometric divisor classes satisfy these hypotheses. -/

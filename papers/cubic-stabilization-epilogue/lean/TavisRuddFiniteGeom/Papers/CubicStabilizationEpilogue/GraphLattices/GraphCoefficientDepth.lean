@@ -71,6 +71,29 @@ def graphCrossDepth
       (truncatedDepthDifference (firstDepth + secondDepth)
         slopeDifferenceValuation))
 
+/-- The part of the slope-difference valuation visible to the cross-depth
+formula: values at or above the smaller diagonal depth are indistinguishable. -/
+def effectiveSlopeDifferenceValuation
+    (firstDepth secondDepth : ℕ) (slopeDifferenceValuation : WithTop ℕ) : ℕ :=
+  slopeDifferenceValuation.recTopCoe (min firstDepth secondDepth)
+    (fun finiteValue ↦ min finiteValue (min firstDepth secondDepth))
+
+/-- Infinite slope-difference valuation truncates to the smaller depth. -/
+theorem effectiveSlopeDifferenceValuation_top
+    (firstDepth secondDepth : ℕ) :
+    effectiveSlopeDifferenceValuation firstDepth secondDepth ⊤ =
+      min firstDepth secondDepth :=
+  rfl
+
+/-- A finite slope-difference valuation truncates by taking the minimum with
+the smaller depth. -/
+theorem effectiveSlopeDifferenceValuation_coe
+    (firstDepth secondDepth finiteValue : ℕ) :
+    effectiveSlopeDifferenceValuation firstDepth secondDepth
+        (finiteValue : WithTop ℕ) =
+      min finiteValue (min firstDepth secondDepth) :=
+  rfl
+
 /-- Divisibility by the maximum of two powers is equivalent to simultaneous
 divisibility by both powers. -/
 theorem pow_max_dvd_iff
@@ -112,6 +135,61 @@ theorem graphCrossDepth_coe
     graphCrossDepth firstDepth secondDepth (finiteValue : WithTop ℕ) =
       max firstDepth (max secondDepth (firstDepth + secondDepth - finiteValue)) := by
   rfl
+
+/-- The depth formula depends only on the slope-difference valuation truncated
+at the smaller diagonal depth.  This is the arithmetic content behind
+independence from the choice of scalar lifts. -/
+theorem graphCrossDepth_eq_effectiveSlopeDifference
+    (firstDepth secondDepth : ℕ) (slopeDifferenceValuation : WithTop ℕ) :
+    graphCrossDepth firstDepth secondDepth slopeDifferenceValuation =
+      max firstDepth
+        (max secondDepth
+          (firstDepth + secondDepth -
+            effectiveSlopeDifferenceValuation
+              firstDepth secondDepth slopeDifferenceValuation)) := by
+  induction slopeDifferenceValuation using WithTop.recTopCoe with
+  | top =>
+      calc
+        graphCrossDepth firstDepth secondDepth ⊤ =
+            max firstDepth secondDepth := graphCrossDepth_top _ _
+        _ = max firstDepth
+            (max secondDepth
+              (firstDepth + secondDepth - min firstDepth secondDepth)) := by omega
+        _ = max firstDepth
+            (max secondDepth
+              (firstDepth + secondDepth -
+                effectiveSlopeDifferenceValuation firstDepth secondDepth ⊤)) := by
+          rw [effectiveSlopeDifferenceValuation_top]
+  | coe finiteValue =>
+      calc
+        graphCrossDepth firstDepth secondDepth (finiteValue : WithTop ℕ) =
+            max firstDepth
+              (max secondDepth
+                (firstDepth + secondDepth - finiteValue)) :=
+          graphCrossDepth_coe _ _ _
+        _ = max firstDepth
+            (max secondDepth
+              (firstDepth + secondDepth -
+                min finiteValue (min firstDepth secondDepth))) := by omega
+        _ = max firstDepth
+            (max secondDepth
+              (firstDepth + secondDepth -
+                effectiveSlopeDifferenceValuation firstDepth secondDepth
+                  (finiteValue : WithTop ℕ))) := by
+          rw [effectiveSlopeDifferenceValuation_coe]
+
+/-- Equal effective slope valuations give equal cross depths, even when the
+chosen scalar lifts have different untruncated valuations. -/
+theorem graphCrossDepth_eq_of_effectiveSlopeDifference_eq
+    (firstDepth secondDepth : ℕ)
+    {firstValuation secondValuation : WithTop ℕ}
+    (effectiveEqual :
+      effectiveSlopeDifferenceValuation firstDepth secondDepth firstValuation =
+        effectiveSlopeDifferenceValuation firstDepth secondDepth secondValuation) :
+    graphCrossDepth firstDepth secondDepth firstValuation =
+      graphCrossDepth firstDepth secondDepth secondValuation := by
+  rw [graphCrossDepth_eq_effectiveSlopeDifference,
+    graphCrossDepth_eq_effectiveSlopeDifference, effectiveEqual]
 
 /-- Every graph cross depth dominates both diagonal depths and therefore
 satisfies the midpoint inequality. -/

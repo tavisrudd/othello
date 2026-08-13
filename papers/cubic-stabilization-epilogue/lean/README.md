@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 6 absent; 13 fragmentary; 3 conditional;
-1 complete; 33 reviewer terminals.
+1 complete; 34 reviewer terminals.
 
-The 33 reviewer-facing terminals currently verify:
+The 34 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
