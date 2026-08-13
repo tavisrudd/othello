@@ -1592,6 +1592,32 @@ theorem principalGluingPacket_connectedFamily_persistence
     GraphLattices.connectedBase_finiteDiscretePacket_membership_persists
       packetClass continuous distinguished basePoint atBasePoint⟩
 
+/-- Specialization of connected-packet persistence to the marked quadratic
+pair in the affine chart of the concrete five-point `F4` projective packet.
+If a supplied continuous classifier takes one base point to either transported
+marked root, then it is constant and every base point remains in that same
+two-element pair.  No geometric kernel local system or classifier is
+constructed. -/
+theorem principalGluingPacket_markedF4Pair_connectedFamily_persistence
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace (Option GraphLattices.F4)]
+    [DiscreteTopology (Option GraphLattices.F4)]
+    (packetClass : Base → Option GraphLattices.F4)
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (atBasePoint :
+      packetClass basePoint =
+          some GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+        packetClass basePoint =
+          some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point,
+        packetClass point =
+            some GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+          packetClass point =
+            some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1) := by
+  exact GraphLattices.connectedBase_f4MarkedProjectivePair_constant_and_persists
+    packetClass continuous basePoint atBasePoint
+
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
 four-dimensional depth-one block.  It is literally a scalar-algebra image and

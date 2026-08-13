@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 75 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 140 audited terminals.  The rejecting manuscript inventory covers all
+exports 141 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -234,7 +234,8 @@ orbit and realizes that orbit as a distinct affine-chart two-cycle in the
 five-point projective packet.  Its identification with the manuscript's geometric marked
 extension and principal kernel remains open.  Lean now proves the exact
 connected-family persistence step for any supplied continuous map into a
-finite discrete kernel packet; construction of that geometric packet and
+finite discrete kernel packet and specializes it to the transported marked
+quadratic pair in the affine `F4` chart; construction of that geometric packet and
 classifying map remains open.  All other geometric
 identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
