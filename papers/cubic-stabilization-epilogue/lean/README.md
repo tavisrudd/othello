@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 103 reviewer terminals.
+1 complete; 106 reviewer terminals.
 
-The 103 reviewer-facing terminals currently verify:
+The 106 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -129,6 +129,14 @@ The 103 reviewer-facing terminals currently verify:
   additive-monoid-algebra truncations; for a
   surjective degree-compatible numerical quotient, finite-fiber pushforward is
   a unital ring homomorphism commuting exactly with all finite truncations;
+- finite coefficient packets constant on numerical fibers descend termwise,
+  with each exact fiber sum equal to the descended coefficient times the fiber
+  cardinality; this does not prove numerical invariance of Gromov--Witten
+  coefficients or identify the abstract packet with them;
+- the Leibniz rule for coefficientwise logarithmic Novikov operators defined by
+  additive scalar weights, and compatibility of completed numerical pushforward
+  with these operators whenever their weights factor through the quotient; the
+  geometric curve-pairing weights and quantum connection are not constructed;
 - the algebraic core of strict Novikov admissibility and individual-class divisor-tag
   separation; for every finite injective family of divisor-pairing vectors
   over an infinite characteristic-zero field, a kernel-checked choice of one

@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 53 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 54 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 103 audited terminals.  The rejecting manuscript inventory covers all
+exports 106 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -154,8 +154,13 @@ additive monoid-algebra multiplication through each cutoff.  For a surjective
 degree-compatible numerical quotient, finite-fiber pushforward is a unital ring
 homomorphism and commutes with every finite truncation.  The formal objects
 carry no topology or explicit inverse-limit presentation; Gromov--Witten
-descent, quantum derivations, and base change of comparison maps remain outside
-the result.
+descent and base change of comparison maps remain outside the result.  For
+finite coefficient packets, numerical invariance now gives exact descent and a
+fiber-cardinality formula.  Additive scalar weights satisfy the Leibniz rule
+for completed convolution, and numerical pushforward commutes with the
+operator when the weight factors through the quotient.  The geometric
+Gromov--Witten coefficients, curve-pairing weights, and quantum connection are
+not constructed.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -189,6 +194,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/ExponentialDivisorTags.lean
     Quantum/CompletedNovikovSupport.lean
     Quantum/CompletedNovikovConvolution.lean
+    Quantum/NumericalCoefficientDescent.lean
     Quantum/AssociatedGradedTagging.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
@@ -268,10 +274,12 @@ are current, and the committed paper export verifies byte-for-byte in
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
 - **Numerical completion:** the completed convolution ring, finite truncation
-  compatibility, and numerical pushforward ring homomorphism are settled for
-  the finite-below support model.  Topology and the explicit inverse limit are
-  not represented; the substantive missing bridges are Gromov--Witten
-  coefficient descent, derivations, and the comparison maps.
+  compatibility, numerical pushforward ring homomorphism, finite invariant
+  packet descent, additive-weight Leibniz identity, and quotient-compatible
+  weighted-operator commutation are settled for the finite-below support model.
+  Topology and the explicit inverse limit are not represented; the substantive
+  missing bridges are geometric Gromov--Witten invariance, construction of the
+  additive pairing weights and quantum connection, and the comparison maps.
 - **Relative geometry:** unsettled.  The six-axis local-system argument and
   Voisin implication are mathematically human proofs but sit beyond Mathlib's
   present abelian-scheme and decomposition-of-diagonal APIs.

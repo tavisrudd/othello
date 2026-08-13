@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-53 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 103 reviewer terminals, audit
+54 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 106 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -238,7 +238,13 @@ monoid-algebra multiplication through every degree cutoff.  For a surjective
 degree-compatible numerical quotient, finite-fiber pushforward is a unital ring
 homomorphism and commutes exactly with finite truncation.  No topology or
 explicit inverse-limit object is represented, and Gromov--Witten descent,
-quantum derivations, and comparison-map base change remain open.
+quantum derivations, and comparison-map base change remain open.  The next
+coefficient layer is now formalized as well: numerically invariant finite
+packets descend with an exact fiber-cardinality formula; additive scalar weights
+satisfy the completed-convolution Leibniz rule; and numerical pushforward
+commutes when the weight factors through the quotient.  The corresponding
+geometric Gromov--Witten invariance, curve-pairing weights, and quantum
+connection remain open.
 The aggregate build, source correspondence, and 103-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent

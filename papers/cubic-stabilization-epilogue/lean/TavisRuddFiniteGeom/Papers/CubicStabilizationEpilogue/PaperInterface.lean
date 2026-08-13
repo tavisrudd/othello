@@ -27,6 +27,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
@@ -1872,6 +1873,70 @@ theorem numericalNovikov_completedPushforward_ringHom_and_truncation
         AddMonoidAlgebra.mapDomain data.quotient
           (data.homologicalGrading.truncation series cutoff) :=
   ⟨rfl, data.truncation_completedPushforward series cutoff⟩
+
+/-- A finite homological coefficient packet that is constant on numerical
+fibers factors termwise through the numerical quotient; summation over one
+fiber is its descended coefficient multiplied by the fiber cardinality.  This
+is an algebraic descent criterion, not a construction or invariance proof for
+Gromov--Witten coefficients. -/
+theorem numericalNovikov_finiteCoefficientPacket_descends
+    {Homology Numerical Coefficient : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical]
+    [AddCommMonoid Coefficient]
+    (data : Quantum.CompletedNumericalQuotient Homology Numerical)
+    (packet : Finset Homology) (coefficient : Homology → Coefficient)
+    (invariant : data.NumericallyInvariant coefficient)
+    (numerical : Numerical) :
+    (∑ homological ∈ packet, coefficient homological =
+      ∑ homological ∈ packet,
+        data.descendedCoefficient coefficient (data.quotient homological)) ∧
+    (∑ homological ∈ data.coefficientData.fiber numerical,
+        coefficient homological =
+      (data.coefficientData.fiber numerical).card •
+        data.descendedCoefficient coefficient numerical) :=
+  ⟨data.finite_sum_descends packet coefficient invariant,
+    data.fiber_sum_eq_card_nsmul_descendedCoefficient
+      coefficient invariant numerical⟩
+
+/-- Completed numerical pushforward commutes with every logarithmic Novikov
+operator whose additive scalar weight factors through the numerical quotient.
+Lean does not construct the geometric curve-pairing weight or the quantum
+connection in which the operator occurs. -/
+theorem numericalNovikov_logarithmicOperator_commutes_with_pushforward
+    {Homology Numerical Coefficient : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical]
+    [CommRing Coefficient]
+    (data : Quantum.CompletedNumericalQuotient Homology Numerical)
+    (numericalWeight : Numerical →+ Coefficient)
+    (series : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      data.homologicalGrading Coefficient) :
+    data.completedPushforward
+        (Quantum.CompletedNumericalQuotient.logarithmicOperator data.homologicalGrading
+          (numericalWeight.comp data.quotient) series) =
+      Quantum.CompletedNumericalQuotient.logarithmicOperator
+        data.numericalGrading numericalWeight
+        (data.completedPushforward series) :=
+  data.completedPushforward_logarithmicOperator numericalWeight series
+
+/-- The coefficientwise logarithmic operator associated to an additive scalar
+weight satisfies the Leibniz rule for completed Novikov convolution. -/
+theorem numericalNovikov_logarithmicOperator_leibniz
+    {Curve Coefficient : Type*}
+    [AddCommMonoid Curve] [CommRing Coefficient]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve)
+    (weight : Curve →+ Coefficient)
+    (left right : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      grading Coefficient) :
+    Quantum.CompletedNumericalQuotient.logarithmicOperator grading weight
+        (grading.convolution left right) =
+      grading.convolution
+          (Quantum.CompletedNumericalQuotient.logarithmicOperator
+            grading weight left) right +
+        grading.convolution left
+          (Quantum.CompletedNumericalQuotient.logarithmicOperator
+            grading weight right) :=
+  Quantum.CompletedNumericalQuotient.logarithmicOperator_convolution
+    grading weight left right
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
