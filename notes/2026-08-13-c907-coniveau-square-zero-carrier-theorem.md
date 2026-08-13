@@ -10,9 +10,8 @@ they identify exactly the two strictness maps that still have to be proved.
 
 ## Filtered support setting
 
-Let `K=Q(zeta_6)` and let `M` be a finite-dimensional object in an
-idempotent-complete `K`-linear category equipped with a finite decreasing
-support filtration
+Let `K=Q(zeta_6)` and let `M` be a finite-dimensional `K`-vector space
+equipped with a finite decreasing support filtration
 
 \[
  M=F^0M\supset F^1M\supset\cdots\supset F^{d+1}M=0,
@@ -20,8 +19,11 @@ support filtration
  \tag{1}
 \]
 
-Think of `F^c` as the part supported in codimension at least `c` on the base
-of a Mori fibration.  Let `N:M->M` satisfy the **strict coniveau condition**
+Equivalently one may work in an exact or stable category, provided the
+successive quotients below are genuine exact quotients/cofibres and zero
+cofibre is conservative.  Think of `F^c` as the part supported in codimension
+at least `c` on the base of a Mori fibration.  Let `N:M->M` satisfy the
+**strict coniveau condition**
 
 \[
  N(F^cM)\subset F^{c+1}M.
@@ -63,35 +65,43 @@ More generally, it is enough that the image of `N^2:M->F^2M` factor through
 an exact point-supported primitive-sixth realization functor which vanishes;
 literal equality `F^2M=0` is a convenient formulation, not a necessary one.
 
-In the minimal Jordan category, (4) says every indecomposable has length at
-most two.  Thus the theorem supplies the exact universal center input needed
-by the conditional Silver theorem whenever the MMP carrier is realized over
-a curve or surface with strict coniveau.
+Provided the packet is a finite-dimensional nilpotent `K[N]`-module and
+`J_3` is measured by this same operator `N`, (4) says every Jordan
+indecomposable has length at most two.  Thus the theorem supplies the exact
+universal center input needed by the conditional Silver theorem whenever the
+MMP carrier is realized over a curve or surface with strict coniveau.
 
 ## Conic bundles over surfaces
 
-For a conic bundle, the generic primitive sector lives on the discriminant
-double cover.  The first Rees arrow is branch-supported; a product of two
-distinct branch arrows can land at a discriminant intersection point.  The
-local even Clifford algebra at a double-line node exhibits precisely this
-possibility:
+For a conic bundle, the geometric primitive direct image lives on the
+discriminant double cover.  The needed strict realization would make the
+first Rees arrow branch-supported; a product of two distinct branch arrows
+could then land at a discriminant intersection point.  The local even
+Clifford algebra at a double-line node calibrates precisely this possibility:
 
 \[
  i^2=j^2=0,qquad ij\ne0.
  \tag{6}
 \]
 
-Formula (6) is compatible with (2): the ordered product has codimension two.
-It violates (4) only if its node socle survives the point realization.  The
-landed clean primitive-sheaf calculation gives zero stalk and costalk at the
-node after inverting six.  Therefore the exact remaining conic input is:
+Formula (6) calibrates a possible codimension-two support product.  It is not
+the square of a single Rees operator—every element of the radical has square
+zero—and becomes relevant to (4) only under a strict bridge identifying it
+with the successive composite `N_1N_0`.  The landed clean primitive-sheaf
+calculation gives zero stalk and costalk at the node after inverting six.
+Therefore the exact remaining conic input is:
 
 > identify the strict value-localized image of `ij` with the
 > point-supported clean primitive object.
 
-Once this support-local factorization is proved, (3) holds and every conic
-bundle packet is `J_3`-free.  Raw Clifford Loewy length is irrelevant because
-it precedes this excision.
+For standard smooth-total-space conic local forms, combine this
+support-local factorization with the independently checked
+smooth-discriminant and rank-two-cross square-zero models.  Under the three
+strict comparison hypotheses—factorization through `P_pi`, support-local
+multiplication, and Gamma/Rees compatibility—(3) then holds and the packet is
+`J_3`-free.  Raw Clifford Loewy length is irrelevant because it precedes this
+excision.  Arbitrary terminal conic bundles without the standard local-form
+and strict comparison hypotheses remain outside the theorem.
 
 ## Del Pezzo fibrations over curves
 
@@ -103,13 +113,22 @@ counterexample to the theorem.  It shows that monodromy support alone does
 not imply (2): the second arrow may remain in codimension one instead of
 raising support again.
 
-The exact remaining del Pezzo input is therefore:
+A factorization through `F^2=0` would force zero stationary projection.
+Conversely, vanishing of that projection is sufficient only under clean-root
+targeting, support-local multiplication, no horizontal escape sector, and an
+exhaustive decomposition of the local primitive targets.  Under those
+hypotheses the exact remaining del Pezzo input is:
 
 > prove that the strict second Rees composite has zero stationary-primitive
-> projection, equivalently that it factors through nonexistent
-> codimension-two support on the base curve.
+> projection; the other target channels are then absent, so the composite
+> factors through nonexistent codimension-two support on the base curve.
 
-The landed `S_6` calculation reduces this locally to
+Without them, zero stationary projection is merely the smallest missing local
+test, not strict coniveau: the composite could escape to a different
+horizontal sector.
+
+Conditional on equisingular `S_6` descent and the actual endpoint-module
+identification, the landed calculation reduces this locally to
 
 \[
  \operatorname{Hom}_{S_6}
@@ -132,11 +151,15 @@ model, a presentation-independent support filtration satisfying:
 3. the construction survives the terminal-model/resolution comparison.
 
 Then every such Mori-fibre threefold has no `J_3`.  Together with the
-`nu_6<6` admission theorem for the rank-small Fano leaves and empty packets
-on `K`-nef models, this reduces the universal carrier theorem to:
+`nu_6<6` admission theorem for the rank-small Fano leaves and empty **formal**
+primitive-sixth support on smooth `K`-nef models, this reduces the universal
+carrier theorem—conditional also on faithful realization of that formal
+emptiness—to:
 
 - rank-six-or-larger `rho=1` Fano models not already classified;
-- terminal resolution/flip transport; and
+- terminal resolution/flip transport for Fano and Mori-fibre models;
+- terminal minimal-model transport and enriched emptiness on the `K`-nef
+  branch; and
 - verification of the two local strictness statements above.
 
 This is a conditional structural theorem, not a claim that MMP currently
