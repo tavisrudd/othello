@@ -148,15 +148,16 @@ Positive pole order is only a prefilter: `delta^2L=x^2` shows that total
 normalization can recreate a critical special fibre.  The bounded `1/1` Rees
 chart is now closed separately: its noncompact `y` faces are empty/free and
 its compact face is exactly `W_(P^3)+ZU` with four residual Morse points.
-The joint `y`/Rees-infinity and translated/infinity seams are now closed:
-every local face is empty/free or is exactly one of the four marked residual
-Morse points.  Assemble the locally complete atlas into one finite common
+The zero/infinity, joint `y`/Rees-infinity, and translated/infinity seams are
+now closed: every local face is empty/free or is exactly one of the four
+marked residual Morse points.  Assemble the locally complete atlas into one finite common
 normalized fan, prove all overlap identities and completeness, then construct
 a product-pair collar cover.  The latter remains a separate topological
 theorem.  Iritani identifies the residual Gamma lattice with the Orlov
 subgroup, not the individual Beilinson thimbles.  See
 `2026-08-12-c907-tropical-critical-fan-pivot.md` and
 `2026-08-12-c907-five-support-star-compression.md`, together with
+`2026-08-12-c907-b0-cinf-seam-star-fan.md`,
 `2026-08-12-c907-b1-cinf-seam-star-fan.md` and
 `2026-08-12-c907-joint-y-rees-infinity-fan.md`.
 

@@ -89,7 +89,8 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   special fibre.  The bounded `1/1` Rees chart is closed separately:
   noncompact `y` weights give four empty and ten free support faces, while
   the compact face is exactly `W_(P^3)+ZU` with the four marked Morse points.
-  The translated/infinity seams are now empty/free for arbitrary `y` weights;
+  The zero/infinity and translated/infinity seams are now empty/free for
+  arbitrary `y` weights;
   their only apparent hold is the constant face `L=0`, removed by choosing the
   residual path disk in `C*`.  The full double-translated `B=C=1` chart also
   closes every joint `y`/Rees-infinity valuation: positive-order faces are
@@ -239,6 +240,7 @@ Exterior-star compression and exact replays:
 `../2026-08-12-c907-binf-cinf-star-fan.md`,
 `../2026-08-12-c907-b1-cunit-star-fan.md`,
 `../2026-08-12-c907-b1-c0-seam-star-fan.md`,
+`../2026-08-12-c907-b0-cinf-seam-star-fan.md`,
 `../2026-08-12-c907-b1-cinf-seam-star-fan.md`, and
 `../2026-08-12-c907-joint-y-rees-infinity-fan.md`.
 

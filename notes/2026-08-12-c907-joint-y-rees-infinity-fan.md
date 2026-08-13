@@ -185,13 +185,14 @@ their SHA-256 values are recorded in the adjacent
 
 ## Consequence and boundary
 
-Together with the ten exterior stars and the translated/infinity certificate,
-this removes the last unclassified local tangent circuit of the normalized
-$(y,B,C)$ boundary atlas.  What remains algebraically is global rather than a
-new local star: choose one finite common fan, prove that these chart ideals
-agree on every nonempty overlap, and verify fan completeness.  The proper
-product-pair collar theorem remains separate, followed by the directed
-thimble and Gamma/Orlov marking.
+Together with the ten previously named exterior stars, the separately sealed
+zero/infinity corners, and the translated/infinity certificate, this removes
+the last unclassified local tangent circuit of the normalized $(y,B,C)$
+boundary atlas.  What remains algebraically is global rather than a new local
+star: choose one finite common fan, prove that these chart ideals agree on
+every nonempty overlap, and verify fan completeness.  The proper product-pair
+collar theorem remains separate, followed by the directed thimble and
+Gamma/Orlov marking.
 
 This report does not yet claim that the individually certified charts form
 one proper modification, nor that their collars have trivial relative
