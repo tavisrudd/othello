@@ -126,6 +126,39 @@ therefore collapses the entire tensor theory.  The support quotient must be
 formed relative to each ambient \(Y\), as in item 5, before the framed quantum
 coefficient is extracted.
 
+## Universal support host
+
+Define the ambient-relative Verdier quotient
+
+\[
+ \mathsf Q_{\ge3}(Y)
+ =\operatorname{Perf}(Y)ig/
+   \operatorname{Perf}_{\dim\operatorname{Supp}\le2}(Y).
+ \tag{6}
+\]
+
+The denominator is a thick \(\operatorname{Perf}(Y)\)-module, so tensor by
+perfect kernels on \(Y\) descends to (6).  By the universal property of the
+Verdier quotient, every exact supported packet assignment vanishing on all
+dimension-at-most-two supports factors uniquely through
+‎\(\mathsf Q_{\ge3}(Y)\).  Thus the divisorial theorem does not require an
+unspecified universe of support functors: its minimum categorical source is
+the family of framed quotients
+‎\((\mathsf Q_{\ge3}(Y),\tau_L)\).
+
+This host separates the two tasks cleanly:
+
+1. localization, point-kernel action, and low-support vanishing are built into
+   the relative quotient; but
+2. the \(\Phi _6\) coefficient and its Orlov/projective compatibility remain
+   external quantum data.
+
+Indeed, on \(\mathbf P^5\), rational \(K_0\) of the quotient is
+‎\(\mathbf Q[x]/(x^3)\), not zero.  The desired coefficient functor must
+annihilate this raw host while retaining the isomorphic-length hyperplane
+string after tensoring with the cubic \(\Phi _6\)-line.  This is the sharp
+algebraic I/O specification for the missing framed quantum projector.
+
 ## Minimum construction theorem
 
 A construction of \(\mathcal C_6\) satisfying:
@@ -138,6 +171,11 @@ A construction of \(\mathcal C_6\) satisfying:
 
 would, by the divisorial support-square theorem and relative positive
 Krull--Schmidt telescope, prove \(X\times\mathbf P^2\) irrational.
+
+Equivalently, construct a natural quantum coefficient functor from the
+framed hosts \((\mathsf Q_{\ge3}(Y),\tau_L)\) to generalized
+\(\Phi _6\)-complexes, zero on the \(\mathbf P^5\) host and normalized by
+(4)--(5) on the cubic endpoint.
 
 No directed Stokes marking or integral pairing is required at this stage.
 The difficult step is (3): promoting the numerical formal-monodromy sector
