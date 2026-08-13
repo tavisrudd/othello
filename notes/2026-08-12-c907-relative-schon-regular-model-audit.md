@@ -247,7 +247,8 @@ can be constructed as follows.
    in the `(1,1)` cone.  This is finite, integral, and still supported in
    the original lattice.
 3. Apply toric desingularization by stellar subdivisions along primitive
-   lattice points, relative to this common refinement.  Each subdivision is
+   lattice points, **relative to the three open Rees cones**, not merely
+   relative to their common ray.  Each subdivision is
    in `N`, so no ramification `delta=r^e` occurs.  Standard determinant
    descent terminates: in a nonunimodular simplicial cone choose a nonzero
    lattice point in its half-open fundamental parallelepiped and star
@@ -257,10 +258,24 @@ can be constructed as follows.
 
 The Rees star is already regular: each of its three cones has determinant
 one in `Z<e_delta,e_U,e_V>`.  Relative toric resolution therefore preserves
-it as a target subfan.  The resulting regular fan may subdivide its charts,
-but the final model factors through the chosen `Bl_(delta,U,V)` and retains
-the three named Rees maps.  No Kummer cover is needed for regularity; only a
+their interiors and their actual-boundary faces; all further centers lie in
+the complement or in product directions of the already-audited `y` boundary.
+The final model factors through the chosen `Bl_(delta,U,V)` and retains the
+three named Rees maps without introducing `v=0` or `w=0` as boundary faces.
+No Kummer cover is needed for regularity; only a
 reduced semistable central fibre would require a ramified/Kummer alteration.
+
+This relative choice is the protected-star coverage statement.  Every point
+over the double-marked closure lies in exactly one of the three ordinary Rees
+charts: the bounded `delta` chart, the `U`-imbalanced chart, or the
+`V`-imbalanced chart, including their genuine central intersections.  The
+bounded-chart audit proves that all noncompact `y` faces are empty/free and
+that its compact critical scheme is the four-section Morse family.  On the
+two imbalanced charts the exact identities give `partial_v L=1` or
+`partial_w L=1` on every genuine central component and intersection.  Since
+`v,w` remain interior, the artificial `v=0,w=0` packets are absent.  Product
+subdivisions in `y` directions retain these unit derivatives.  Thus no fourth
+kind of `(1,1)` closure face exists.
 
 The fan used for the tropical pair is supported **exactly** on
 `Sigma_trop`; its multiplication map is smooth and surjective over precisely
