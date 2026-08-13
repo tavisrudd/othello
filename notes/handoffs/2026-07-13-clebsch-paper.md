@@ -271,7 +271,8 @@ manuscript's filtration or divisor substitution.
 The constant-coefficient flat equation now has a kernel-checked coefficient
 recursion `G_0=1`, `(n+1)G_{n+1}=-AG_n` over any commutative rational algebra;
 the coefficients are natural under arbitrary rational-algebra homomorphisms;
-varying quantum products, formal series, filtered solutions, and analytic
+they now assemble into an entrywise formal power-series matrix satisfying
+`dG/dt=-AG`; varying quantum products, filtered solutions, and analytic
 gauges remain outside that fragment.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
