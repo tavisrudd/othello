@@ -66,10 +66,18 @@ $L_\delta$ fibre.
 For each $\delta$, one must then construct an $L_\delta$-adapted Whitney
 stratification of the pair $(P_\delta,I_\delta)$ compatible with
 
-- every log-boundary and exceptional stratum;
-- the reduced graph strata used in the Fitting audit;
+- the actual infinity boundary and exceptional complement of the original
+  graph domain;
+- the central-fibre strata and graph singular locus;
 - all $\rho$-levels and path-tube end faces; and
 - the reference fibre $L_\delta^{-1}(u_0)$.
+
+It must not automatically refine the auxiliary pair-of-pants markings
+$B=1,C=1$.  Those divisors lie in the original graph domain and the control
+flow may cross them.  In the imbalanced charts, forgetting those markings and
+keeping the residue coordinate $v$ interior retains the unit derivative
+$\partial_vL=1$ and gives the explicit local lift from
+`2026-08-12-c907-log-control-coarsening-lemma.md`.
 
 The missing hypothesis is Thom $a_{L_\delta}$, not merely stratumwise
 surjectivity of $dL_\delta$.  Once properness, $a_{L_\delta}$, and (4) are
@@ -146,9 +154,12 @@ hypotheses remain unproved.
 ## Checklist before promotion
 
 1. Passing serialized log refinement and saturated graph-overlap replay.
-2. All-stratum reduced Fitting audit and finite excluded-value list.
+2. Actual-boundary/control-stratum Fitting audit and finite excluded-value
+   list, after forgetting auxiliary translated markings.
 3. Proper graph over a closed parameter disk and fixed path neighborhood.
-4. Fibrewise Whitney--Thom $a_L$ certificate compatible with every boundary.
+4. Fibrewise Whitney--Thom $a_L$ certificate compatible with the actual
+   topological boundary, using the coarser control rather than the full
+   auxiliary log partition.
 5. Controlled interface function with $(L,\rho)$ submersive.
 6. Excisive open triad and pairing-preserving isotopy/excision lemma.
 7. Local parameterized Morse transport in $R$, separate from the exterior.

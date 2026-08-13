@@ -2,10 +2,11 @@
 
 **Lane:** `clebsch`
 
-**Status:** exact normalized tangent-Fitting theorem for every toric $y$ and
-Rees valuation over the full double-translated $B=C=1$ corner; the only
-nonfree faces are exactly the four marked residual Morse points.  Common-fan
-overlaps and collars remain open.
+**Status:** exact support theorem for every toric $y$ and translated valuation
+over the double-one corner, with a corrected residue-face audit.  The
+product-vanishing restriction is four torus families, not four points, and
+must not be made a global stratum.  The bounded residual chart contains the
+four genuine Morse points.  Common-refinement strata and collars remain open.
 
 ## One chart covering the full corner
 
@@ -113,16 +114,20 @@ L=f_Q(x).
 \tag{8}
 \]
 
-Its exact critical scheme is
+Its exact restricted tangent scheme is
 
 \[
 x_1=x_2=x_3=a,qquad a^4=Q,qquad L=4a,
 \tag{9}
 \]
 
-the four reduced $\mathbf P^3$ Morse points and nothing else.
+with $b,c\in\mathbf G_m$ free.  It is four copies of $(\mathbf G_m)^2$, not
+four isolated points.  The earlier replay already computed this ideal, but
+its output label suppressed the two free variables; the corrected replay
+checks dimension two explicitly.
 
-These are precisely residual, including the Rees-infinity directions.  With
+These families are artifacts if both translated residue directions are
+declared boundary strata.  With
 
 \[
 Z=\frac{1+\delta^2A-B}{\delta},\qquad
@@ -131,11 +136,15 @@ U=\frac{1+\delta^2A-C}{\delta},\qquad A=Q/Y,
 \]
 
 the compact case uses the bounded $Z,U$ chart.  If, say, $Z\to\infty$, use
-$r=Z^{-1}$, $v=ZU$, and $\delta=rh$; its exact central potential is
-$f_Q+v$.  Equation (7) is the $v\ne0$ free stratum, while (8)--(9) is the
-$v=0$ marked residual attachment.  The $Z,U$ swap covers the other
-imbalanced direction.  Thus no Rees-infinity point is discarded or mislabeled
-as exterior.
+$r=Z^{-1}$, $v=ZU$, and $\delta=rh$.  The exact imbalanced potential has
+$\partial_vF=1$ on both central components, so the whole chart is free when
+$v$ remains interior.  Setting $v=0$ manufactures restricted critical loci
+and is not a valid stratum choice.  The $Z,U$ swap gives the same conclusion.
+
+The true four residual points occur only in the bounded $(Z,U)$ chart, where
+the central potential is $f_Q+ZU$ and the tangent equations set $Z=U=0$.
+A global refinement must join that core to the imbalanced free charts without
+marking $v=0$.
 
 ## Strict residual-wedge cross-check
 
@@ -155,18 +164,19 @@ M=\max\{0,p_1,p_2,p_3,\lambda+\mu,-p\},
 \]
 
 the central support is again exactly
-$\{x_1,x_2,x_3,Q/X,zu\}$.  At $M=0$, compact $y$ is forced; $\lambda+\mu=0$
-is the free product-unit face and $\lambda+\mu<0$ is the same product-zero
-residual face (9).  This independently recovers the bounded/imbalanced
-transition from the Rees coordinates rather than the translated coordinates.
+$\{x_1,x_2,x_3,Q/X,zu\}$.  At $M=0$, compact $y$ is forced;
+$\lambda+\mu=0$ is the free product-unit restriction and
+$\lambda+\mu<0$ is the same artificial product-zero restriction (9).  This
+independently checks support, not genuine-stratum criticality.
 
 ## Exact replay
 
 The Singular replay enumerates all 31 nonempty supports in (5), after
 clearing denominators and saturating by $x_1x_2x_3bc$.  It reports five empty,
-26 free, and zero hold masks.  It then checks the two forced order-zero faces:
-the product-vanishing critical ideal is exactly (9), and the product-unit
-face is free.  The replay sets $Q=1$, which preserves every outcome because
+26 free, and zero hold masks.  It then checks the two forced order-zero
+restrictions: the product-vanishing ideal is exactly four copies of
+$(\mathbf G_m)^2$, and the product-unit restriction is free.  The replay sets
+$Q=1$, which preserves every outcome because
 $Q$ is a nonzero coefficient unit.
 
 From repository root:
@@ -179,20 +189,18 @@ nix shell nixpkgs#singular -c Singular -q \
 
 The translated-weight proof and the independent strict-Rees weight check are
 separate derivations of the same finite support theorem.  The replay uses
-Singular 4.4.1.  The script and canonical output are 2,628 and 113 bytes;
+Singular 4.4.1.  The script and canonical output are 2,691 and 119 bytes;
 their SHA-256 values are recorded in the adjacent
 `2026-08-12-c907-joint-y-rees-infinity-fan.sha256` manifest.
 
 ## Consequence and boundary
 
-Together with the ten previously named exterior stars, the separately sealed
-zero/infinity corners, and the translated/infinity certificate, this removes
-the last unclassified local tangent circuit of the normalized $(y,B,C)$
-boundary atlas.  What remains algebraically is global rather than a new local
-star: choose one finite common fan, prove that these chart ideals agree on
-every nonempty overlap, and verify fan completeness.  The proper product-pair
-collar theorem remains separate, followed by the directed thimble and
-Gamma/Orlov marking.
+Together with the exterior stars, this closes the support classification but
+not a tangent-stratum atlas.  A global refinement must distinguish genuine
+boundary divisors from residue coordinates: in particular it must keep $v$
+interior in each imbalanced chart and retain the isolated residual scheme only
+in the bounded core.  Then one must verify chart ideals, genuine-stratum
+Fitting schemes, and completeness.  Proper fibrewise collars remain separate.
 
 This report does not yet claim that the individually certified charts form
 one proper modification, nor that their collars have trivial relative
@@ -203,9 +211,11 @@ homology.
 - **EJ:** the entire Rees-infinity problem at $B=C=1$ is already visible in
   the two translated orders $\beta,\gamma$; no unbounded Rees ray census is
   needed.
-- **TT:** order zero is much more rigid than it first appears: the relation
-  $p=\sum p_i$ forces compact $y$, leaving exactly $f_Q$ or $f_Q+bc$.
-- **Settled:** all local joint $y$/Rees-infinity faces at the double-one
-  corner, including their exact residual attachment.
-- **Open:** common-fan overlap/completeness, proper collars, and the
-  hyperplane-equivariant Gamma/Orlov seed.
+- **TT:** order-zero support rigidity does not imply an isolated critical
+  scheme.  When $bc$ drops, both residue variables remain free; the old
+  replay contained this fact but its label hid it.
+- **Settled:** all support restrictions at the double-one corner; exact
+  four-torus-family correction; full imbalanced-chart freeness; bounded-core
+  location of the four true Morse points.
+- **Open:** genuine-stratum refinement/overlap completeness, proper collars,
+  and the hyperplane-equivariant Gamma/Orlov seed.

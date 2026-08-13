@@ -148,18 +148,20 @@ Positive pole order is only a prefilter: `delta^2L=x^2` shows that total
 normalization can recreate a critical special fibre.  The bounded `1/1` Rees
 chart is now closed separately: its noncompact `y` faces are empty/free and
 its compact face is exactly `W_(P^3)+ZU` with four residual Morse points.
-The zero/infinity, joint `y`/Rees-infinity, and translated/infinity seams are
-now closed: every local face is empty/free or is exactly one of the four
-marked residual Morse points, and an exhaustive table covers all ten unordered
-coordinate-orbit types at the support level.  Their finite common support complex is the product of
+The zero/infinity and translated/infinity seams are empty/free, and the joint
+$y$/Rees-infinity support is complete.  At order zero its product-vanishing
+restriction is four residue-torus families, not four points; the bounded core
+alone has the four marked Morse points.  An exhaustive table covers all ten
+unordered coordinate-orbit types at the support level.  Their finite common support complex is the product of
 the two marked-line tropical tripods refined by the six universal graph
 weights; no ordinary fan in the original `(B,C)` torus can see `B=1,C=1`.
-The first global gluing shortcut failed: on the deeper imbalanced stratum
-`r=v=0`, one finds both the residual `h=0`, `a^4=Q` points and an additional
-`h=2`, `b^4=-3Q` branch.  Serialize the actual refinement, audit reduced
-strata independently, and choose one value neighborhood excluding the full
-finite endpoint list.  Only then prove normalized graph/Fitting overlap
-identities and completeness and construct
+The global graph is now an explicit multihomogeneous Cartier closure, and its
+strict transforms on a regular modification glue up to units.  A second audit
+corrected the first hostile diagnosis: the imbalanced chart is free by
+`partial_v F=1`; the apparent `h=0,2` packets occur only after artificially
+marking the smooth coordinate `v=0`.  Serialize the actual refinement while
+keeping `v` interior, then audit the coarser actual-boundary/control strata and
+identify every local saturated graph with the global strict transform.  Only then construct
 a product-pair collar cover.  The latter remains a separate topological
 theorem.  Iritani identifies the residual Gamma lattice with the Orlov
 subgroup, not the individual Beilinson thimbles.  See
@@ -171,8 +173,8 @@ subgroup, not the individual Beilinson thimbles.  See
 `2026-08-12-c907-joint-y-rees-infinity-fan.md`; orbit-level closeout is
 `2026-08-12-c907-local-boundary-orbit-atlas-closeout.md`.
 The common support theorem is
-`2026-08-12-c907-tripod-common-prefan.md`; the failed gluing theorem and exact
-repair boundary are in
+`2026-08-12-c907-tripod-common-prefan.md`; the global graph lemma and exact
+remaining gate are in
 `2026-08-12-c907-pair-of-pants-log-gluing-theorem.md`.
 
 Wave-2C status: ordinary grading and duality do not bound length—an explicit

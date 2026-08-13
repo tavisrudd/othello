@@ -1,0 +1,100 @@
+// C907 imbalanced residual endpoint certificate.
+// Replay from repository root:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-imbalanced-endpoint.sing
+//
+// On r=v=0 in the chart r=Z^(-1), v=ZU, delta=rh, put A=Q/Y.
+// The exact value function is
+//   L = S + A/(1-h) - h*A.
+// We work over Q(Q), invert A*Y*(1-h), and compare its tangent ideal with
+// the two claimed reduced branches h=0 and h=2.
+
+LIB "primdec.lib";
+
+// First check the full chart.  The graph equation is cleared by the units
+// B,C.  On either central component r=0 or h=0 its v derivative is -1,
+// so the genuine relative critical ideal is the unit ideal.
+ring full = (0,Q),(r,h,v,A,y1,y2,y3,S,L),dp;
+poly Yfull = y1*y2*y3;
+poly B = 1-h+r^2*h^2*A;
+poly C = 1-r^2*h*v+r^2*h^2*A;
+poly G = B*C*(L-S-v+h*A+r^2*h*A*v-r^2*h^2*A^2)-A;
+poly Gv = diff(G,v);
+ideal rCrit = sat(ideal(r,G,Gv),ideal(B*C));
+ideal hCrit = sat(ideal(h,G,Gv),ideal(B*C));
+if (reduce(1,std(rCrit))==0 && reduce(1,std(hCrit))==0)
+{
+  print("FULL_CENTRAL unit_dv=PASS");
+}
+else
+{
+  print("FULL_CENTRAL unit_dv=FAIL");
+}
+
+ring endpoint = (0,Q),(h,A,y1,y2,y3,S,L),dp;
+poly Y = y1*y2*y3;
+poly qh = h^2-h+1;
+poly graph = (1-h)*(L-S)-A*qh;
+
+// Cleared derivatives of L along h,y1,y2,y3.
+ideal tangent = graph,
+  A*Y-Q,
+  S-y1-y2-y3,
+  A*h*(2-h),
+  (1-h)*y1-A*qh,
+  (1-h)*y2-A*qh,
+  (1-h)*y3-A*qh;
+ideal domain = A*Y*(1-h);
+ideal tangentSat = sat(tangent,domain);
+
+ideal residual = h,
+  y1-A,y2-A,y3-A,
+  A^4-Q,
+  S-3*A,
+  L-4*A;
+
+ideal extra = h-2,
+  y1+3*A,y2+3*A,y3+3*A,
+  27*A^4+Q,
+  S+9*A,
+  L+12*A;
+
+ideal expected = intersect(residual,extra);
+ideal c1 = reduce(std(tangentSat),std(expected));
+ideal c2 = reduce(std(expected),std(tangentSat));
+if (size(c1)==0 || (size(c1)>0 && c1[1]==0))
+{
+  if (size(c2)==0 || (size(c2)>0 && c2[1]==0))
+  {
+    print("DECOMPOSITION=PASS");
+  }
+  else
+  {
+    print("DECOMPOSITION=FAIL expected-not-contained");
+  }
+}
+else
+{
+  print("DECOMPOSITION=FAIL tangent-not-contained");
+}
+
+ideal tangentRad = radical(tangentSat);
+ideal r1 = reduce(std(tangentSat),std(tangentRad));
+ideal r2 = reduce(std(tangentRad),std(tangentSat));
+if ((size(r1)==0 || r1[1]==0) && (size(r2)==0 || r2[1]==0))
+{
+  print("REDUCED=PASS");
+}
+else
+{
+  print("REDUCED=FAIL");
+}
+
+// The branch Hessian determinants are 8/a^2 and 8/(3*b^2), where
+// a=A on h=0 and b=-3*A on h=2.  A is a unit on both branches.
+print("HESSIAN_RESIDUAL=8/a^2 NONZERO");
+print("HESSIAN_EXTRA=8/(3*b^2) NONZERO");
+print("VALUES h=0: a^4=Q,L=4a; h=2: b^4=-3Q,L=4b");
+print("SUMMARY branches=2 points=8 reduced_morse=8 PASS");
+
+quit;

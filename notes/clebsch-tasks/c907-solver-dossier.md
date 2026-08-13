@@ -40,16 +40,18 @@ strictness, Yu/Zhang for topology, Kuznetsov plus Kollar for the carrier bound.
 ## Active gates
 
 1. **Toric order zero.**  For `Bl_(P^3)P^5`, the local saturated finite-value
-   atlas has no unclassified support orbit: the zero/infinity,
-   translated/infinity, and joint `y`/Rees-infinity sectors close empty/free
-   or at the four marked residual points; all ten unordered coordinate-orbit
-   types are explicit.  The common support object is the product of two
+   atlas has no unclassified support orbit; all ten unordered coordinate
+   types are explicit.  The bounded residual core has four marked points,
+   while the joint translated product-zero restriction is four residue-torus
+   families and must not be a control stratum.  The common support object is the product of two
    pair-of-pants tripods refined by six universal graph weights; an ordinary
    fan in the original `(B,C)` torus is impossible.  Realize its log
-   modification and serialize every reduced stratum.  The first global
-   shortcut is refuted by an imbalanced `h=2`, `b^4=-3Q` endpoint branch;
-   verify every normalized graph/Fitting overlap and the complete excluded
-   value list, prove fibrewise Whitney--Thom excision, and transport the residual
+   modification and serialize its algebraic charts separately from the
+   coarser actual-boundary/control strata.  The global
+   multihomogeneous graph and Cartier strict-transform mechanism are exact;
+   keep the imbalanced residue coordinate `v` interior, where its unit
+   derivative proves freeness.  Verify every normalized graph/Fitting overlap,
+   prove fibrewise Whitney--Thom excision, and transport the residual
    `P^3+ZU` system.  Then fix the hyperplane-equivariant Gamma/Orlov seed.  The
    remaining point-class shear cannot change the Stokes matrix, only individual
    labels.

@@ -83,9 +83,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   translated `1/0` seams.  Two Laurent circuit lemmas compress their six
   31-mask replays; the translated stars' order-zero faces pass separate exact
   Fitting tests, and the seam incidence closure retains the four marked
-  residual endpoints in its advertised chart.  A later overlap audit shows
-  that this is not globally complete: the deeper imbalanced stratum
-  `r=v=0` also has `h=2`, `b^4=-3Q`, `L=4b`.  Positive pole order
+  residual endpoints in its advertised chart.  Positive pole order
   alone is only a prefilter:
   `delta^2 L=x^2` shows that total normalization can recreate an `L`-critical
   special fibre.  The bounded `1/1` Rees chart is closed separately:
@@ -94,21 +92,25 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   The zero/infinity and translated/infinity seams are now empty/free for
   arbitrary `y` weights;
   their only apparent hold is the constant face `L=0`, removed by choosing the
-  residual path disk in `C*`.  The full double-translated `B=C=1` chart also
-  closes every joint `y`/Rees-infinity valuation: positive-order faces are
-  empty/free, while order zero forces compact `y` and gives either the free
-  `f_Q+bc` face or exactly the four marked residual Morse points.  Thus no
+  residual path disk in `C*`.  The full double-translated `B=C=1` chart closes
+  every joint support valuation: positive-order restrictions are empty/free,
+  while order zero forces compact `y`.  If the product drops, the restricted
+  critical scheme is four residue-torus families, not four points; these are
+  avoided by keeping the imbalanced residue coordinate interior.  Thus no
   support type remains outside the exhaustive ten-unordered-type atlas;
   the formerly implicit `(0,infinity)` and `(g,g)` types are now explicit.
-  This does not close deeper reduced-stratum tangent circuits.  An ordinary
+  This does not serialize the control strata of one global model.  An ordinary
   fan in the original `(B,C)` torus is impossible because
   `B=1,C=1` are interior translated divisors.  The finite support complex is
   instead the product of the two marked-line tropical tripods, refined by six
   universal graph weights.  Its exact replay is support-only.  Serialize a
-  regular pair-of-pants/log refinement, verify the saturated multihomogeneous
-  graph and every reduced-stratum Fitting overlap, and exclude the full finite
-  endpoint-value list before proving the separate fibrewise Whitney--Thom
-  collar topology.
+  regular pair-of-pants/log refinement and verify every local saturated graph
+  against the explicit global Cartier strict transform.  Keep the imbalanced
+  residue coordinate `v` interior: `partial_v F=1` makes that full chart free,
+  whereas artificially marking `v=0` manufactures false `h=0,2` packets.
+  Then forget the auxiliary translated markings and audit every
+  actual-boundary/control stratum before proving the separate
+  fibrewise Whitney--Thom collar topology.
   The correct rank-four system is value-localized; the global group has ten
   critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
@@ -189,8 +191,9 @@ therefore imply `X x P^2` irrational.
 
 Complete the toric order-zero theorem for `Bl_(P^3)P^5`: serialize a regular
 refinement of the finite pair-of-pants/log support complex, realize the
-multihomogeneous dense-graph closure, and verify every reduced-stratum Fitting
-overlap and endpoint value.  Then build proper fibrewise Whitney--Thom
+multihomogeneous dense-graph closure, and verify every actual-boundary/control
+Fitting overlap and endpoint value after forgetting auxiliary translated
+markings.  Then build proper fibrewise Whitney--Thom
 excision pairs and identify
 the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In

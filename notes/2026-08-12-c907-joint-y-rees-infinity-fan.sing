@@ -67,7 +67,8 @@ else
 }
 
 // At normalization order zero all four y terms are forced.  If R drops,
-// the critical scheme must be exactly the four residual P3 Morse points.
+// the restricted support face is four copies of the (z,u)-torus, not four
+// isolated points.
 H = D*x1+D*x2+D*x3+z*u;
 E = D*L-H;
 crit = E,
@@ -79,13 +80,14 @@ ideal residual1 = reduce(std(critTorus),std(residual));
 ideal residual2 = reduce(std(residual),std(critTorus));
 if (residual1[1]==0 && residual1[2]==0 && residual1[3]==0
     && residual1[4]==0 && residual2[1]==0 && residual2[2]==0
-    && residual2[3]==0 && residual2[4]==0)
+    && residual2[3]==0 && residual2[4]==0
+    && dim(std(critTorus))==2)
 {
-  print("ZERO product-vanishing residual=4 PASS");
+  print("ZERO product-vanishing artificial=4xGm2 PASS");
 }
 else
 {
-  print("ZERO product-vanishing residual=4 FAIL");
+  print("ZERO product-vanishing artificial=4xGm2 FAIL");
 }
 
 // If R survives, its logarithmic z derivative is a unit on the torus.

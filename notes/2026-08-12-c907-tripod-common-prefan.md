@@ -149,20 +149,20 @@ show exactly where a purely toric overlap argument fails.
 ## Remaining normalized-overlap certificate
 
 The replay proves that every printed local maximum list is the restriction of
-the same six weights.  It does not prove the tangent-Fitting outcome on every
-cone of $\Sigma_{\rm supp}$: reduction to a deeper log stratum discards normal
-cotangent directions and can reveal critical points invisible on its parent
-stratum.  To turn this support complex into the common algebraic model, one
-must still use (2), the marked residual Rees construction, and a stratumwise
-graph/Fitting log resolution to verify:
+the same six weights.  It does not determine a control stratification.
+Auxiliary log faces may discard unit normal directions and manufacture
+restricted critical loci, while actual infinity-boundary strata must be
+audited after reduction.  To turn this support complex into the common
+algebraic model, one must still use (2), the marked residual Rees construction,
+and separate algebraic-chart and control-stratum ledgers to verify:
 
 1. equality of the reduced saturated graph closures on all twelve adjacency
    overlaps;
 2. equality of their normalized reduced-stratum tangent-Fitting ideals;
-3. the two incidence-to-imbalanced residual closures at every endpoint,
-   including the imbalanced $h=2$ branch;
-4. compatibility with one fixed value neighborhood excluding the full finite
-   list of nonresidual endpoint values, not merely $L=0$; and
+3. the two incidence-to-imbalanced transitions while keeping their smooth
+   residue coordinate $v$ interior;
+4. compatibility with one fixed value neighborhood after auditing the genuine
+   nonresidual critical values, not merely $L=0$; and
 5. finite completeness after any extra exceptional overlap charts are added.
 
 The correct next proof object is therefore a pair-of-pants/log modification,

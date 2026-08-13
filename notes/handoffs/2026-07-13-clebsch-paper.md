@@ -76,19 +76,23 @@ is closed separately: its noncompact `y` faces are empty/free and its compact
 face is exactly the four residual Morse points.  The zero/infinity and two
 translated/infinity seams are now empty/free (the latter over a residual
 value disk in `C*`), and the full
-double-translated `B=C=1` chart closes every joint `y`/Rees-infinity valuation:
-positive-order faces are empty/free, while order zero is either free or exactly
-the four marked residual points.  The formerly implicit zero/infinity and
+double-translated `B=C=1` chart closes every joint support valuation:
+positive-order restrictions are empty/free, while the product-zero order-zero
+restriction is four residue-torus families and must not be a control stratum.
+The bounded core alone contains the four marked residual points.  The formerly implicit zero/infinity and
 generic/generic types are also closed, giving an exhaustive table of all ten
 unordered coordinate-orbit types.  This makes the support atlas complete, not
-the reduced-stratum tangent atlas: the first hostile overlap audit finds an
-additional imbalanced endpoint branch `h=2`, `b^4=-3Q`, `L=4b`.  An ordinary
+the control-stratum ledger.  The global graph is now an explicit
+multihomogeneous Cartier closure; on a regular modification its strict
+transforms glue up to units.  The imbalanced coordinate `v` must stay interior,
+where its unit derivative proves freeness.  An ordinary
 fan in the original `(B,C)` torus cannot include the
 translated divisors `B=1,C=1`; the common finite support object is instead the
 product of two marked-line tropical tripods refined by six universal graph
 weights.  The live analytic gate is the corresponding pair-of-pants/log
-modification with a serialized all-stratum graph/Fitting audit and full finite
-excluded-value list, then fibrewise Whitney--Thom collar topology and the
+modification with separate algebraic-chart and coarser actual-boundary/control
+Fitting ledgers, then
+fibrewise Whitney--Thom collar topology and the
 hyperplane-equivariant Orlov/Gamma marking.
 The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
