@@ -1,7 +1,10 @@
 \section{\texorpdfstring{\(J\)}{J}-normalization at discrepancy one}
 \label{sec:normalization}
 
-Write
+By the splitting principle of \cite[Corollary~4.3]{SS}, we may pull back
+injectively to a common flag bundle over \(Z\) on which both \(V\) and \(V'\)
+have filtrations by line bundles.  The classes \(\rho_i\) and \(\sigma_j\)
+then exist individually; we retain the same notation after pullback.  Write
 \[
   A=H^{*}(\PP(V))
    \cong H^{*}(Z)[H]\big/\left\langle
@@ -17,7 +20,9 @@ form \(mz+a\) with \(m\ge1\) and \(a=\rho_{i}+H\in A\), so
 \]
 is a finite sum, and \eqref{eq:ss35} is an element of \(zA[z^{-1}][[q]]\).
 By the \emph{\(z\)-order} of such an element we mean the largest \(n\) with a
-nonzero \(z^{n}\) coefficient.
+nonzero \(z^{n}\) coefficient.  Since the pullback is injective
+coefficientwise, the resulting order bound descends to the original
+cohomology ring; its symmetric expression is independent of the splitting.
 
 \begin{lemma}
   \label{lem:order}
@@ -66,16 +71,16 @@ else.
 \begin{remark}
   \label{rem:boundary}
   Both hypotheses are sharp.  For \(\nu=1\) and \(s=0\), so \((r,s)=(1,0)\),
-  the bound of Lemma~\ref{lem:order} is \(1-d\) and it is attained: the
-  \(d=1\) summand of \eqref{eq:ss35} is
+  the bound of Lemma~\ref{lem:order} is \(1-d\) and is attained by the formal
+  \(d=1\) term of the hypergeometric expression:
   \[
     z\cdot\frac{q}{\rho_{1}+H+z}
     =q\one-\frac{q(\rho_{1}+H)}{z}+\cdots,
   \]
-  whose \(z^{0}\) coefficient \(q\one\) is a genuine curve-induced
-  correction.  The series is then an \(I\)-function with mirror map
-  \(\bar{\mathbf t}\mapsto\bar{\mathbf t}+q\one\), exactly as
-  \cite[Remark~4.5(3)]{SS} describes.  For \(\nu=0\) the bound is the
+  Its \(z^{0}\) coefficient is \(q\one\), so this formal expression is not
+  \(J\)-normalized.  Geometrically \(\PP(V)=Z\) has point fibres and no line
+  class \([L]\), so \((1,0)\) is a degenerate endpoint of the extremal-line
+  setup, not a further standard-flip case repaired here.  For \(\nu=0\) the bound is the
   \(d\)-independent value \(1-s\) and the sum is not \(q\)-adically
   convergent, which is why \(r>s\) is assumed throughout \cite{SS}.
 \end{remark}

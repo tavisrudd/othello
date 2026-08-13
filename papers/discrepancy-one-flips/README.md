@@ -30,8 +30,10 @@ identifies the series with the extremal `J`-function.  At `nu = r - s = 1`
 the correct Meijer sector comes from Barnes' expansion with `epsilon = 1/2`
 rather than from specializing the printed sector, and the corrected sector
 still meets the ambient one in an open sector of opening `2 pi` containing
-both the eigenvalue ray and the tame ray.  The rank-one projective bundle
-`(r, s) = (1, 0)` is excluded, and is shown to be genuinely excluded.
+both the eigenvalue ray and the tame ray.  The rank-one projective-bundle
+endpoint `(r, s) = (1, 0)`, whose fibres contain no extremal line, is
+excluded; its formal hypergeometric expression already fails the required
+normalization.
 
 ## Build
 
