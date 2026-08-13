@@ -164,9 +164,11 @@ regular coordinate cone and can be fixed as a regular subfan while all other
 cones are desingularized relatively.  The symmetric statement fixes the
 `w` cone.
 
-Under this local relative resolution, the coarse strata retain (7), and
-the exact 70 tangent-unit records, two `L=0` exclusions, free-`L` masks, and
-(3) give the whole coarse Fitting ledger.  Existence of a regular common
+Under this local relative resolution, the coarse strata retain (7), giving
+the protected carrier's coarse Fitting contribution.  Together with the
+still-conditional exterior records—the 70 tangent units, two `L=0`
+exclusions, and free-`L` masks—this is the complete local outcome table.
+Existence of a regular common
 refinement gluing these protected subfans to every exterior attachment is not
 yet proved; noncompact mixed cones are Fitting-safe because `L` is free but
 still need their strict graph/overlap attachment.
