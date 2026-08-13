@@ -789,28 +789,122 @@ unmarked one — and it still neither algebraizes an odd class nor proves a
 quadratic splitting field.  See `notes/2026-08-11-c908-unordered-degree-normalization.md`
 for the adjudication and `notes/2026-08-11-c908-unmarked-closure-and-w-twist.md`
 for the closure theorem (Theorem C) and the `w`-twist scoping.
-The `(1,5)` channel-population state after C908 passes 5–7: the
-universal-family source is even and every deformation-canonical residue is
-pinned to `{0, I}` (Theorem E); the ψ-transfer from the Fano surface reaches
-the whole escape lattice topologically; but the entire span-incidence
-product library — the span map is classically the Gauss map of `Θ` composed
-with the difference map, `g^*O(1) = ψ^*Θ` — realizes only integral scalar
-identities `c·I_10` with `4 | c`, hence residue zero mod two, certified over
-all 72 arrangements with an exact five-mechanism proof.  The unique standing
-population route is the non-product `c_4(ℰ)` bit `λ` (pass-5 §6 plan).  The
-pass-6 bimodal histogram mystery is closed: the invariant is the parity of
-the Pfaffian-complement functional `u∧Θ^{[4]}`.  Pass 8 then **refuted the
-degree-three half of pass-2 Theorem 1 by certificate**: the triple point's
-link (H³ = Z^10 of the exceptional cubic) enlarges `H^3(M,Z)` beyond
-`b^*H^3(J,Z)`, detected by diagonal parity and verified independently; all
-pass-6/7 verdicts survive (J-level readouts), but pass-2 Theorem 2 and the
-exact escape-group identification need re-derivation on the corrected
-lattice before the λ-bit computation can resume; correction of record:
-`notes/2026-08-11-c908-h3-resolution-lattice-correction.md`.  See
+The `(1,5)` channel-population question is **closed negative**.  The earlier
+passes had already made every product source even — the deformation-canonical
+residues are pinned to `{0, I}` (pass-5 Theorem E), the ψ-transfer from the
+Fano surface reaches the whole escape lattice only topologically, and the
+entire span-incidence product library (the span map is classically the Gauss
+map of `Θ` composed with the difference map, `g^*O(1) = ψ^*Θ`) realizes only
+integral scalar identities `c·I_10` with `4 | c`, certified over all 72
+arrangements — leaving the non-product `c_4` bit `λ` as the unique standing
+route.  That bit is now zero on both models: the span-model readout matrix is
+`N = 120·I` against the ten pure antisymmetric tests, so `λ_𝒢 = 0`, and the
+negative transfers to the `ℰ`-model universal family of `M_X(v) ≅ Bl_0Θ`, so
+`λ_ℰ = 0`.  The mechanism is that the `(3,5)` block of `c_4` is linear in the
+odd `X`-legs of the Chern character, on which the Serre-functor mutation
+carrying the span model to the universal family acts by `∓1` and nothing
+else; the three residual even-block terms then die because `G^2 ≡ 0` (a
+`Θ`-pullback square, `Θ^2/2` being integral), because `c_1(V) ≡ G` is killed
+by the certificate's mod-two `t`-independence control, and because `c_2(V)`
+is `σ`-symmetric mod two while the tests are `σ`-antisymmetric.  Rank three
+is exactly the rank at which the universal family's base-twist ambiguity is
+identically invisible to this readout, which is why the transfer is clean.
+So no universal-family Chern class populates the channel, and with it every
+source named in the C908 corpus — pullbacks from `J×J`, exceptional-divisor
+cycles, the span/incidence dictionary, and `c_4` of either model — is
+excluded.  A reusable by-product: codimension-four sheaf defects can never
+affect a mod-two `c_4` readout, which dissolved the deep-stratum frontier
+the pass-8 spec had carried.  Reports:
+`notes/2026-08-12-c908-lambda-reduction-and-verdict.md` and
+`notes/2026-08-12-c908-e-model-mutation-comparison.md` (extraction item F,
+discharged).  Earlier passes:
 `notes/2026-08-11-c908-universal-family-even-rigidity.md`,
 `notes/2026-08-11-c908-transfer-liveness-and-span-incidence.md`,
 `notes/2026-08-11-c908-span-incidence-parity-no-go.md`, and
 `notes/2026-08-11-c908-fano-schubert-restriction-extraction.md`.
+
+The substantive positive result is an integral lattice theorem for the odd
+cohomology of the blown-up theta divisor `M = Bl_0Θ`, forced by pass 8's
+certificate refutation of the degree-three half of pass-2 Theorem 1 (the
+triple point's link enlarges `H^3(M,Z)` beyond `b^*H^3(J,Z)`) and then proved
+outright.  `H^3(M,Z)` is torsion-free of rank 130 and a nonsplit extension of
+`H^3(X,Z)` by `∧³Λ`, glued by an isomorphism
+`ρ : H^3(X,Z)⊗F_2 → Sat/L_3∧³Λ` with the closed form
+`ρ(γ) = [Θ^{[2]}∧S·w(γ)]`; `b_*H^3(M,Z)` is exactly the saturation `Sat` of
+`Θ∧∧³Λ` in `∧⁵Λ`, of index `2^10`; the transfer `q_*μ^*` from `H^3(F×F,Z)`
+is integrally surjective, so the entire lattice comes from the Fano surface
+through the degree-six model with nothing left over; and the escape group
+`E = H^5(M,Z)/(b^*H^5(J,Z)+tors)` is **free** of rank ten — pass-2's
+`(Z/2)^10` identification was wrong — with the exceptional classes
+`e_{X*}H^3(X,Z)` at exactly depth two, so `E/2E ≅ (Z/2)^10`.  All four
+`(Z/2)^10` coincidences of the corpus are now proved natural shadows of the
+single object `H^3(X,Z)⊗F_2`, under the deck action, under `Sp(Λ,S)`
+monodromy, and under the `L_3`/`L_5` adjointness that makes `Q_15`
+canonically dual to `Sat/L_3∧³Λ`.  A hostile proof audit ran (its one FATAL
+finding, a gate congruence, had been caught and corrected before it landed;
+all GAP repairs are folded in), and a bounded priority audit returned **no
+prior art**: no source computes the singular, integral or intersection
+cohomology of `Θ` or `Bl_0Θ` for a cubic threefold in any degree, the closest
+work (Bayer–Beentjes–Feyzbakhsh–Hein–Martinelli–Rezaee–Schmidt,
+arXiv:2011.12240 Theorem 7.1) supplying the object as a moduli space but no
+cohomology.  **This theorem is a candidate for its own paper; that scoping
+decision is pending with the user and is not taken here.**  Reports:
+`notes/2026-08-12-c908-h3-lattice-adjudication.md`,
+`notes/2026-08-12-c908-h3-compression.md` and
+`notes/2026-08-12-c908-z2-naturality-checks.md`, with audits
+`notes/2026-08-12-c908-h3-lattice-proof-audit.md` and
+`notes/2026-08-12-c908-h3-lattice-priority-audit.md`; the pass-8 correction of
+record is `notes/2026-08-11-c908-h3-resolution-lattice-correction.md`.
+
+Two corrections to previously banked C908 work are live debts.  First, the
+pass-5 twist lemma's rank-three branch is false on the corrected lattice: it
+assumed `H^3(M,Z) = b^*∧³Λ`, and an explicit odd-capable witness
+`3∫_JΘ^{[3]}∧u∧z∧τ = ±1` refutes it.  The item-F argument no longer needs
+that branch — at rank three twist-invariance of the readout is an exact
+identity requiring no cohomology of `M` at all — but the same lemma's other
+use, the relative Ext object
+`E = RHom_{π_{12}}(π_{13}^*ℰ, π_{23}^*ℰ)[1]` on `M×M`, has rank other than
+three, is **not repaired**, and still rests on the refuted step; this weakens
+the `{0, I}` pinning for that object, though pass-5 Theorem E itself survives
+because its conclusion also follows from Theorem C for pencil-defined
+classes.  Gate: an analogue of the rank-three twist lemma at the relevant
+rank, or a direct check that the correction legs pair evenly through
+`Sat/L_3∧³Λ`.  Second, the λ-reduction note's parenthetical that the
+span-model sheaf does not descend along the degree-six map `q` is **false**:
+the six points of a general `q`-fibre carry the same `E_6` root `ℓ'−ℓ` on the
+same cubic surface, hence isomorphic sheaves, and the factor swap is not a
+deck transformation of `q` (it covers `(−1)_J`).  Correcting it strengthens
+the verdict chain rather than weakening it, but the wrong statement still
+stands in `notes/2026-08-12-c908-lambda-reduction-and-verdict.md` §1 and its
+audit.
+
+What remains open, each with its gate.  Both λ verdicts are
+**certificate-conditional to the same degree**: the kill of `G·c_3^{(3,3)}`
+is the `t^1`-coefficient of the main-term certificate's verified mod-two
+`t`-independence rather than a structural proof, and the onto half of `ρ`
+(hence the exact image description of the lattice theorem) rests on the
+adjudication certificate's finite integer checks, independently replayed in
+PARI.  Gate: a structural proof that `∫(x⊗T_a)·G·c_3^{(3,3)}` is even.  The
+values `c_1(V) = 3[I] − 12C_2` and `c_2(V) ≡ G(C_1+C_2)` are derived but not
+certified; gate: a bounded extension of the main-term certificate — nothing
+in the item-F verdict depends on them.  The `(1,5)` channel itself can now be
+populated only by a non-deformation-canonical, deck-asymmetric cycle special
+to the exotic member, or over the marked base by the `w`-twisted `C3` cosets
+above; the `(2,4)` channel is untouched by all of this.
+
+Against its own card
+(`notes/clebsch-tasks/c908-annals-math-upgrades.md`), C908 has not yet
+reached an acceptance criterion.  The priority-A relative Chow index
+(`ind(Y) = 1` versus `2`) is undecided: no odd horizontal multisection was
+constructed, and the accumulated negatives exclude named sources without
+defining a canonical two-primary obstruction class and computing it on the
+exotic marked base, which is what the card's negative-Chow crown requires.
+Priority B, the intrinsic `p`-typical divisor-product classification, is
+untouched by these passes.  The lattice theorem lands in the card's third
+band of non-diluting crowns rather than in A or B, and is the strongest
+result C908 currently holds.  The card's genuine-block clause has not
+triggered — every pass produced theorem-level progress — but the `(1,5)`
+population leg of priority A is now exhausted for every named source.
 The rational `(1,5)` inverse-Lefschetz class is algebraic, but its integral
 or two-local lift remains open; every canonical decomposable candidate is
 now even, with scalar coefficient ideal `6Z` universally and `12Z` on the
