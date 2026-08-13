@@ -7,7 +7,10 @@ smooth cubic threefold has nonzero connection coefficient in both
 primitive-sixth formal lines.  Therefore ambient primitive-sixth projection
 does not annihilate point-supported Gamma classes.  Any Silver
 support-square construction must use an intrinsic support packet and a Gysin
-map different from ambient Gamma projection.
+map different from ambient Gamma projection.  Dually, the two sectorial
+primitive-sixth Gamma lifts have nonzero rank; this supplies the endpoint of
+the rank-framed obstruction in
+`2026-08-13-c907-coniveau-principal-symbol-repair.md`.
 
 ## The point central charge
 
@@ -94,6 +97,31 @@ This upgrades the leading-matrix warning in
 2026-08-13-c907-cubic-point-primary-collision.md to the actual
 large-radius-to-formal connection statement.
 
+### Dual rank corollary
+
+The scalar equation is cyclic for the rank-four connection, so (4) gives the
+vector connection coefficients up to nonzero branch normalizations.  The
+flat pairing pairs the two inverse primitive-sixth lines nondegenerately and
+pairs them with no exponential formal component.  If a sectorial algebraic
+branch is written as \(B_a=s(E_a)\) through the complexified Gamma-integral
+isomorphism, pairing (5) against the dual branch yields
+
+\[
+ [s(\mathcal O_p),B_a)\ne0.
+\]
+
+Iritani's pairing identifies the left side with
+\(\chi(\mathcal O_p,E_a)\).  Since derived duality gives
+\([\mathcal O_p]^\vee=-[\mathcal O_p]\) on a threefold,
+
+\[
+ \chi(\mathcal O_p,E_a)=-\operatorname{rk}(E_a).
+\]
+
+Thus both sectorial primitive-sixth branch lifts have nonzero rank.  The
+Barnes coefficients alone do not determine their integral normalization;
+their nonvanishing determines exactly the rank fact used by C907.
+
 ## Consequences
 
 ### Ambient support annihilation is false
@@ -167,13 +195,14 @@ Silver.
   closed negatively as support-local realizations.  A corrected intrinsic
   Gysin map or a route avoiding support annihilation remains.
 - **EJ:** the two nonzero Gamma quotients in (4) are exact central-connection
-  data.  They turn a categorical warning into an A-model theorem and give a
-  mandatory regression value for every future construction.
+  data.  By pairing duality they also prove nonzero rank of both algebraic
+  branch lifts, giving the endpoint for a much smaller rank-framed blow-up
+  obstruction.
 - **TT:** compute one skyscraper before postulating a localizing quantum
   motive.  The point already occupies both fractional lines.
 - **Settled:** nonvanishing of the Gamma-framed point in both
-  primitive-sixth formal branches; failure of ambient support annihilation.
+  primitive-sixth formal branches, nonzero rank of both dual sectorial
+  branch lifts, and failure of ambient support annihilation.
 - **Open:** whether a corrected Gysin transformation can subtract these
   point coefficients functorially while retaining blowup and product
   compatibility; otherwise a different Silver invariant is required.
-

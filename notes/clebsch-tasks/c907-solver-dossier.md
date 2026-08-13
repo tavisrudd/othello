@@ -72,9 +72,9 @@ primitive-sixth formal sector on a non-turning parameter locus: the parameter
 loop commutes with formal monodromy, and Iritani's Gamma formula identifies it
 with tensor by the line bundle.  Product naturality supplies the endpoint
 `J_3`.  Do not spend work reconstructing that commutation from directed
-Stokes data.  The remaining bridge is supported Gamma/Gysin annihilation in
-absolute dimension at most two and base-loop equivariance of the general
-blowup comparison.  See
+Stokes data.  The earlier proposed bridge was supported Gamma/Gysin
+annihilation in absolute dimension at most two; the exact Gamma point period
+shows that annihilation is incompatible with ordinary Gamma pushforward.  See
 `../2026-08-13-c907-formal-primary-galois-stability.md`.
 
 Do not model the supported bridge by residual projection of ambient objects.
@@ -119,6 +119,23 @@ fixed curves as a stable-linearization obstruction here.  The no-name lemma
 also shows that adjoining the two representation variables merely appends
 two free invariants to the original quotient conic.  See
 `../2026-08-13-c907-fermat-tangent-involution.md`.
+
+The point-safe obstruction is the rank functional on a fixed-phase
+primitive-sixth Gamma sector.  The two cubic algebraic branches have nonzero
+rank by the nonzero Barnes point coefficients, formal-pairing duality, and
+`chi(O_p,E)=-rank(E)`.  The coniveau-two Koszul symbol is exactly
+`rank(E)[fibre]`; every exceptional Orlov image has ambient rank zero.
+Therefore a rank-framed Stokes/Gamma/Orlov blow-up comparison would prove
+irrationality of `X x P^m` for every `m`.  The remaining theorem is only that
+the general fixed-phase comparison preserves this rank functional modulo
+rank-zero exceptional terms, naturally under products.  Iritani's formal
+decomposition and pairing do not imply it; the analytic Stokes/Orlov lift is
+proved in toric cases and stated as expected in general.  See
+`../2026-08-13-c907-coniveau-principal-symbol-repair.md`.
+The first nonvacuous regression is `Bl_X P^5`: its primitive-sixth packet is
+entirely exceptional and must have ambient rank zero.  The toric
+`Bl_(P^3)P^5` pilot has empty primitive-sixth base and center packets, so it
+tests framing only, not the invariant.
 
 ## Rejection tests
 

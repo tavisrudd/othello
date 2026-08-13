@@ -85,6 +85,40 @@ displayed conic. Consequently stable linearization of this cover is not a
 shortcut: it is a sufficient positive construction for stable rationality,
 but no longer an easier invariant-field problem.
 
+The nonsplitting assertion has an exact Brauer residue.  Over
+\(K=\mathbf C(\rho,y)\), put
+
+\[
+ A_\rho=4+(1-\rho^3)y^3.
+\]
+
+The conic (2) has class
+
+\[
+ \beta=\left(\rho,\frac{4\rho A_\rho}{3y}\right)
+       =\left(\rho,\frac{A_\rho}{y}\right)
+       \in\operatorname{Br}K[2].
+ \tag{2a}
+\]
+
+Here \((\rho,\rho)=(\rho,-1)=0\) over \(\mathbf C\), and constants are
+squares.  The divisor \(A_\rho=0\) is integral: over \(\mathbf C(y)\), the
+element \(1+4/y^3\) is not a cube, so its cubic equation for \(\rho\) is
+irreducible.  The residue of (2a) at this divisor is the class of \(\rho\).
+It is nonsquare in the divisor function field, since \(\rho\) has a simple
+zero at each smooth point
+
+\[
+ \rho=0,\qquad y^3=-4.
+\]
+
+Thus \(\beta\ne0\), and (2) has no \(K\)-point.  The injection
+\(\operatorname{Br}K\hookrightarrow\operatorname{Br}K(t_1,t_2)\) shows that
+adjoining two independent variables still does not give a rational section.
+This is a base-relative obstruction only: \(\beta\) dies in the conic's own
+function field, so it does not by itself prove that the total quotient
+threefold is nonrational or stably irrational.
+
 ## Two elliptic residues
 
 The involution on the parameter line is \(r\mapsto-r\), with fixed base
@@ -172,13 +206,16 @@ linear Fermat change are likewise separate checks of the fixed-curve claim.
 - **EJ:** formula (1) is an exact Cremona involution attached to the Fermat
   cubic. Formula (2) compresses its quotient to one conic, while the two
   \(j=0\) fixed curves explain how the split Fermat discriminant is retained
-  after contracting the rational fixed divisor.
+  after contracting the rational fixed divisor.  Formula (2a) gives a
+  nonzero residue proof that even two free stabilization variables do not
+  produce a section of this fibration.
 - **TT:** rational quotient does not imply linearizable action; conversely,
   a fixed elliptic curve in codimension two contributes the zero ordinary
   Burnside symbol when both normals are sign. Neither shortcut settles
   stable rationality.
-- **Settled:** exact involution, fixed field, two elliptic residues, their
-  normal characters, and failure of the elementary Burnside test.
+- **Settled:** exact involution, fixed field, nonsplitting of its generic
+  conic after two independent variables, two elliptic residues, their normal
+  characters, and failure of the elementary Burnside test.
 - **Open:** a finer stabilized equivariant invariant of (1), or a mixed
   two-variable transformation of (2). The standard no-name, fixed-divisor,
   and ordinary Burnside data are exhausted.

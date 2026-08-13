@@ -351,6 +351,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   refinement is exactly blind, and stable linearization is not an easier
   route to Fermat stable rationality.  See
   `../2026-08-13-c907-fermat-tangent-involution.md` and its exact replay.
+- Support annihilation has a point-safe replacement.  For a fixed-phase
+  Gamma lift, the codimension-two symbol of the base Koszul square is simply
+  `rank(E)[fibre]`; exceptional Orlov images have ambient rank zero.  The two
+  cubic algebraic branches have nonzero rank: their exact nonzero Barnes
+  coefficients pair with the inverse formal branch, and Iritani's Euler
+  pairing gives `chi(O_p,E)=-rank(E)`.  Consequently a rank-framed
+  Stokes/Gamma/Orlov blow-up theorem would prove irrationality of
+  `X x P^m` for every `m`, not only `m=2`.  The general formal blow-up
+  decomposition does not yet supply this: outside toric cases, its analytic
+  Stokes/Orlov compatibility is explicitly expected rather than proved.
+  See `../2026-08-13-c907-coniveau-principal-symbol-repair.md`.
 
 ## Active frontier: `m=2`
 
@@ -360,6 +371,15 @@ dimension for a fivefold factorization.  An atomwise enrichment is also too
 coarse: projective-bundle additivity gives `J_1^(direct sum 3)`, not the
 endpoint string `J_3`.  The new object must enhance the entire atomic
 composition together with its projective-bundle/blow-up operation frame.
+
+The highest-EV route now bypasses both the Jordan carrier and support
+annihilation.  Define the fixed-phase primitive-sector rank functional via
+the Gamma lattice.  Its endpoint is nonzero, while pullback preserves rank
+and every genuine exceptional Orlov summand has ambient rank zero.  It is
+enough to prove that the general blow-up comparison preserves this one
+functional modulo rank-zero center terms, naturally under products.  Full
+analytic Stokes/Gamma/Orlov compatibility implies the statement, but is
+strictly stronger.
 
 For the fivefold `X x P^2`, prove both:
 
@@ -380,17 +400,17 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, attack one exact localizing projector theorem.  Construct a
-`Phi_6` packet assignment on supported perfect objects which commutes with
-formal monodromy and tensor by the base hyperplane, is `K_0`-linear or
-derived-Gysin compatible for the point-support square, preserves Orlov
-component maps and projective Kunneth products, and vanishes on every possibly
-singular or nonreduced support of dimension at most two.  The divisorial
-support-square theorem then kills every base-ideal extension at once, while
-relative factorization preserves the endpoint `J_3`.  Linear projection's
-raw `K_0` `J_3` is the regression showing why formal-space or ordinary
-`K_0` projectors are insufficient.  See
-`../2026-08-13-c907-base-ideal-framing-obstruction.md`.
+For Silver, test the rank-framed comparison on `Bl_X P^5` for the
+codimension-two cubic center.  Its primitive-sixth packet is entirely
+exceptional, so every Gamma lift must have ambient rank exactly zero; one
+nonzero rank kills the theorem.  The exact toric `Bl_(P^3)P^5` matrix is only
+a phase/Orlov-normalization rehearsal because both of its primitive-sixth
+packets are empty.  Then formulate the minimum fixed-phase rank statement
+for a general blow-up.
+Do not return to a support-annihilating `Phi_6`: the Gamma point calculation
+proves that target inconsistent with ordinary Gamma pushforward.  See
+`../2026-08-13-c907-coniveau-principal-symbol-repair.md` and
+`../2026-08-13-c907-point-gamma-primary-nonvanishing.md`.
 Relative weak factorization over `P^2` then makes every later arrow strict and
 every threefold center square-zero.  Use `Bl_(X x p)(X x P^2)` as the first
 ungraded extension regression and the twisted relative `P^2`-bundle section
