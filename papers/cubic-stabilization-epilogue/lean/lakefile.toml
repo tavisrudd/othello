@@ -20,6 +20,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SquareZeroTransport",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.EllipticSourceRealization",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProducts",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket",

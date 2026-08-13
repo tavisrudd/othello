@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 4 absent, 15 fragmentary, 3 conditional deductions, and 1 complete.
-There are 62 reviewer-facing Lean terminals.  These counts summarize the
+There are 65 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 62 reviewer terminals.
+1 complete; 65 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -30,3 +30,32 @@ statements are discovery evidence rather than premises.  Formal coverage of
 those statements requires kernel-checked structural proofs matching the
 objects, hypotheses, conclusions, and cautions recorded in
 `lean/verification/claims.json`.
+
+## Remaining formalization checklist
+
+- Construct the marked finite-etale graph presentation from the geometric
+  quotient and identify divisor descent with the formal coefficient lattice
+  (`lem:graph-coefficient-lattice`).
+- Formalize scalar extension from the base DVR to the unramified splitting
+  ring, perform rank-one generation there, identify the extended ordinary
+  product image, and faithfully-flat descend the resulting equality
+  (`thm:all-degree-graph-saturation`).
+- Construct the actual cohomology realizations and the isogeny pullback, prove
+  its required injectivity on the torsion-free integral lattice, and match the
+  geometric graph classes with the canonical elliptic-source exterior model
+  (`thm:all-degree-graph-saturation`).
+- Identify the actual six-axis kernel, its slopes at two and three, and
+  persistence over each connected smooth component
+  (`lem:six-axis-local-chart`).
+- Supply the away-from-six comparison and local-to-global integral membership
+  that specializes the graph theorem to `Theta^4/4!`
+  (`thm:six-axis-divided-powers`).
+- Formalize the cited Voisin criterion and its application to every smooth
+  fibre (`cor:universal-ch0`), then the relative family statement
+  (`lem:relative-six-axis`, currently absent).
+- Formalize the remaining quantum inputs: the separation family, divisor
+  tagging geometry, formal and numerical base-change comparisons, strict
+  Novikov operations, cubic packet comparison, and low-dimensional
+  vanishing.  The headline deductions remain explicitly conditional until
+  those premises are proved (`thm:every-cubic`,
+  `thm:nu6-birational-invariance`, and `cor:v14-one-step`).
