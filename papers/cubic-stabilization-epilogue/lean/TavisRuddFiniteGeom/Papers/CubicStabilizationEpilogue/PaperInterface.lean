@@ -42,6 +42,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleC
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableFlatGaugeUniqueness
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2621,6 +2622,39 @@ theorem multivariableFormalFlatGauge_existsUnique_of_zeroCurvature
       connection curvature,
     fun _ _ _ homomorphism ↦
       Quantum.multivariableFlatGaugeSeries_map homomorphism connection curvature⟩
+
+/-- Let a multivariate matrix connection over a commutative rational algebra
+with a decreasing ideal filtration satisfy the exact coefficientwise
+zero-curvature equations.  Lean constructs its image and the unique normalized
+invertible formal gauge over every actual quotient `R/F^n`.  Both the
+connection and gauge commute with canonical adjacent reductions, and the
+normalization, unit property, coordinate equations, and uniqueness hold at
+every level.  The supplied filtration and connection are not identified with
+the manuscript's geometric coefficient tower or quantum connection; no
+uniform Laurent-order bound, inverse-limit Laurent gauge, or analytic
+specialization is represented. -/
+theorem filteredMultivariableFormalFlatGauge_quotient_compatible
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (input : Quantum.FilteredMultivariableFlatGaugeInput Coordinate Index R)
+    (level : ℕ) :
+    (∀ coordinate,
+      (input.connectionAt (level + 1) coordinate).map
+          (MvPowerSeries.map (input.filtration.reduction level)) =
+        input.connectionAt level coordinate) ∧
+      (input.gaugeAt (level + 1)).map
+          (MvPowerSeries.map (input.filtration.reduction level)) =
+        input.gaugeAt level ∧
+      (∃! solution : Matrix Index Index
+          (MvPowerSeries Coordinate (input.filtration.QuotientRing level)),
+        solution.map (MvPowerSeries.coeff 0) = 1 ∧
+        IsUnit solution ∧
+        ∀ coordinate,
+          solution.map (Quantum.multivariablePartialDerivative coordinate) =
+            -(input.connectionAt level coordinate) * solution) := by
+  exact ⟨(input.connectionAt_gaugeAt_compatible level).1,
+    (input.connectionAt_gaugeAt_compatible level).2,
+    input.gaugeAt_existsUnique level⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

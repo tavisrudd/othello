@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 68 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 69 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 127 audited terminals.  The rejecting manuscript inventory covers all
+exports 129 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -172,9 +172,12 @@ forces zero curvature, and zero curvature yields a recursively constructed
 unique normalized invertible gauge, naturally under rational-algebra
 coefficient homomorphisms.  This applies to ordinary Laurent-series
 coefficients, but identification of the manuscript's connection and curvature
-premise, construction and packaging of the manuscript's quotient tower and
-level connections, and a Laurent lower bound uniform in bulk monomials and
-levels remain unproved.
+premise and a Laurent lower bound uniform in bulk monomials and levels remain
+unproved.  From a supplied rational algebra, ideal filtration, base
+multivariable connection, and its exact curvature proof, Lean now constructs
+the connection and unique normalized invertible gauge over every actual
+quotient and proves canonical adjacent-reduction compatibility.  This abstract
+quotient tower is not identified with the manuscript's geometric one.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

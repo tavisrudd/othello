@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 128 reviewer terminals.
+1 complete; 129 reviewer terminals.
 
-The 128 reviewer-facing terminals currently verify:
+The 129 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -171,10 +171,13 @@ The 128 reviewer-facing terminals currently verify:
   yield a recursively constructed unique normalized invertible multivariable
   formal gauge, naturally under every rational-algebra coefficient
   homomorphism; the same necessary result holds for arbitrary commuting
-  derivations; Lean does not construct or package the manuscript's compatible
-  quotient tower or identify its level connections, establish a Laurent lower
-  bound uniform in the bulk monomial or level, or identify these data with the
-  manuscript's quantum connection;
+  derivations; from a supplied rational algebra, decreasing ideal filtration,
+  base multivariable connection, and its zero-curvature proof, Lean maps the
+  connection into every actual quotient `R/F^n`, constructs the unique
+  normalized invertible gauge there, and proves canonical adjacent-reduction
+  compatibility; it does not identify that tower or its level connections
+  with the manuscript's geometric objects or establish a Laurent lower bound
+  uniform in the bulk monomial or level;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

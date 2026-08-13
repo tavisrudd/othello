@@ -53,24 +53,15 @@ the `E_6` carrier, reversible only with a residue flag, with bottom fibres
 arithmetic-lift frontier remain literature-gated and were not promoted to any
 manuscript or Lean source.
 
-The research-only C907 quantum route is closed at Gold.  For every smooth
-cubic threefold `X` and every `m>=0`, `X x P^m` is irrational.  The invariant
-is the canonical point covector on the primitive-sixth formal-monodromy
-sector.  Iritani's explicit blow-up Fourier map sends the point flat section
-to the ambient point plus zero on every center summand because the top class
-restricts to zero on a proper center.  Pairing preservation makes the
-covector invariant under arbitrary smooth blow-ups; the exact cubic Barnes
-coefficients make it nonzero; projective Kunneth preserves it; projective
-space has empty primitive-sixth sector.  Weak factorization proves stable
-irrationality with no carrier or analytic Gamma/Orlov premise.  Exact proof
-and hostile audit:
-`../2026-08-13-c907-formal-point-covector-theorem.md`.  The warning-free
-existing manuscript `papers/cubic-stabilization-epilogue/` contains only the
-earlier `m=1` theorem; Gold manuscript promotion remains a separate next
-task.
+The research-only C907 quantum route is active.  Its v1 theorem is now
+unconditional: framed formal monodromy of the numerical small quantum
+connection, followed stepwise through Iritani's blow-up comparison, proves
+that `X x P^1` is irrational for every smooth cubic threefold.  The proof
+does not use the retired atomwise HLT-descent claim.  The warning-free
+manuscript is `papers/cubic-stabilization-epilogue/`; exact proof and source
+audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
 
-The following C907 construction portfolio is superseded audit history, not
-an active gate.  C909 proves that ordinary atoms are too
+Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
 grading.  The endpoint has `1+L+L^2`; the exact positive
 Krull--Schmidt telescope only needs to exclude that endpoint `J_3` from all
@@ -192,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-68 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 127 reviewer terminals, audit
+69 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 129 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -298,22 +289,23 @@ commutative rational algebra, Lean proves that two normalized solutions of the
 same coordinate equations are equal.  For the coefficientwise commuting formal
 partial derivatives, an invertible supplied solution forces the exact
 zero-curvature identity; conversely, the exact zero-curvature identity yields a
-recursively constructed unique normalized invertible formal gauge.  This
-applies to ordinary Laurent-series coefficients.  The manuscript's geometric
-connection and its curvature premise remain unidentified, and quotient
-compatibility, uniform Laurent-order bounds, convergence, and the analytic
-gauge remain outside this fragment.
-The supplied filtration and connection remain unidentified with the
-manuscript's geometric coefficient ring and quantum product; construction of
-the multivariable Laurent bulk gauge, bounded order, convergence, and the
-analytic gauge remain outside this fragment.
+recursively constructed unique normalized invertible formal gauge, naturally
+under rational-algebra coefficient homomorphisms.  From a supplied commutative
+rational algebra, decreasing ideal filtration, base multivariable connection,
+and exact zero-curvature proof, Lean maps the connection to every quotient,
+constructs the unique normalized invertible gauge at every level, and proves
+canonical adjacent-reduction compatibility.  This applies to ordinary
+Laurent-series coefficients, but the tower and its level connections are not
+identified with the manuscript's geometric coefficient tower or quantum
+connection; no uniform Laurent-order bound, packaged inverse-limit Laurent
+gauge, convergence, or analytic specialization is obtained.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 126-terminal axiom transcript
+The aggregate build, source correspondence, and 129-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
