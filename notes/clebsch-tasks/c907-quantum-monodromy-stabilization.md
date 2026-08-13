@@ -210,6 +210,39 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   Stokes flags.  It is gauge only for a telescope deliberately defined in
   that coarsened category; the full Stokes/Gamma programme still needs `r=0`
   or a separate flag-invariance theorem.
+- Silver admits a much smaller target category than the full marked
+  Stokes/Gamma object.  After extending to `K=Q(zeta_6)`, retain only the
+  whole generalized `zeta_6` eigenspace and one intrinsic nilpotent operation
+  `N`.  Finite nilpotent `K[N]`-modules are Krull--Schmidt with
+  indecomposables `J_r`; strict blowup biproducts, an endpoint `J_3`, and
+  absence of `J_3` in every threefold center imply `m=2` irrationality.
+  Gamma markings, Euler pairings, and directed flags are not used by this
+  final cancellation theorem, though they may be needed to construct `N`.
+- Cyclotomic rank sharpens the carrier admission screen: every nonzero
+  `T`-stable Rees grade has even rank, or equivalently one generalized
+  `zeta_6` eigenspace has dimension `nu_6/2`.  Therefore an endpoint `J_3`
+  requires `nu_6>=6`.  All computed `nu_6<=2` classes—and any future
+  `nu_6<=4` class—are conditionally excluded under the strict all-shifts
+  realization.  A rank-six `rho=2` hard-Lefschetz/self-dual formal
+  countermodel shows the bound is exact: unit/top classes do not reserve a
+  non-cyclotomic pair.
+- Formal QDM direct sums and Tate-indexed associated grades cannot select the
+  nilpotent operator: the same three copies admit `J_1^3` and `J_3`.
+  Finite exceptional-root monodromy is semisimple and cannot supply it.  The
+  plausible source is unipotent base-hyperplane/Serre continuation, but it
+  must be transported as a strict blowup operator.  With fixed formal
+  component maps, the two-block obstruction is an explicit class in
+  `Ext^1_(K[N])(W,V)`; multi-block splitting is recursive.
+- Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
+  toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
+  geometry but projects to zero in the minimal Silver category.  The first
+  nonzero strictness pilot is `Bl_X P^5` for a cubic center; a genuine
+  ambient--center extension test needs both blocks nonzero.
+- The Mori-fibre carrier branches share one conditional mechanism.  If `N`
+  raises base coniveau, then `N^2=0` over a curve, and over a surface its
+  square lands in a point packet which clean primitive excision must kill.
+  The nodal Clifford socle and stationary `A_5` square are exactly the two
+  local strictness tests; they are not established counterexamples.
 
 ## Active frontier: `m=2`
 
@@ -222,9 +255,10 @@ composition together with its projective-bundle/blow-up operation frame.
 
 For the fivefold `X x P^2`, prove both:
 
-1. **Analytic gate.**  The codimension-two blow-up comparison is strict on the
-   cubic-isotypic Stokes/Rees filtration and compatible with the Gamma lattice
-   and composition:
+1. **Minimal analytic gate.**  Construct a presentation-independent
+   nilpotent `N` on the generalized `zeta_6` formal packet, calibrate the
+   projective-bundle endpoint as `J_3`, and make every codimension-two blow-up
+   comparison a strict `K[N]`-module biproduct:
    \[
    gr_{1/6}A(Bl_ZY)=gr_{1/6}A(Y)\oplus T\,gr_{1/6}A(Z).
    \]
@@ -238,16 +272,15 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Serialize the direct proper exterior strict model in the fixed ambient and
-the proper nearby-cycle/direct-image comparison used by the rank-four
-localization theorem.  Then transport relative duality, `can/var`, local
-orientations, and the nonbraiding path star to identify the four nearby
-thimbles with the directed `P^3` Seifert system.  Prove the integral residual
-Orlov/Rees biproduct; decide whether its birational telescope can live in the
-coarsened `N`-adic Rees category or must fix the full directed flag.  In
-parallel, test the exact weakened carrier target on the two surviving second
-composites: the nodal Clifford socle and the stationary `A_5` projection in a
-cubic-surface Lefschetz fibration.  The prime-Fano scan is closed and should
+For Silver, move directly to the first nonzero operation test:
+`Bl_X P^5` with cubic center.  Define the unipotent operation operator on its
+generalized primitive-sixth packet and compute the recursive `K[N]` extension
+class of the blowup filtration.  The toric `P^3` residual theorem remains a
+separate high-value Stokes leaf: finish it only through the pushed-down
+self-dual pairing-excision zigzag and full tame residual-pair identification,
+not as evidence for the cyclotomic Jordan biproduct.  In parallel, construct
+the coniveau filtration whose strictness kills the nodal Clifford and
+stationary `A_5` second composites.  The prime-Fano scan is closed and should
 not be repeated.  The ranked portfolio leaves and exact non-combinations are in
 `../2026-08-12-c907-portfolio-combination-leaves.md`.
 Do not differentiate in
