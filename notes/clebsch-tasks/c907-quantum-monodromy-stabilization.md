@@ -28,6 +28,15 @@ invariant across every smooth-projective simple VGIT wall.
 Gold and Platinum remain open at a smaller geometric coverage gate: general
 birational cobordisms can have singular/toroidal quotients.  No Paper V or
 Lean promotion.
+The coverage audit is negative: a smooth projective master gives projective
+locally toric chamber quotients, generally with cyclic singularities, and
+regular subdivision inserts genuine blowups/down rather than smooth simple
+walls.  Exact boundary:
+`../2026-08-13-c907-simple-wall-coverage-obstruction.md`.
+The nearest extension is toric-DM: Iritani proves a formal discrepant QDM
+split generally in that class and a Gamma/Stokes comparison only for
+weak-Fano toric weighted blowups.  No general finite-stabilizer/toroidal GYY
+package was found.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -495,6 +504,7 @@ produced by birational cobordism/destacking.  The older two-radial-leg
 nearby-cycle comparison remains the fallback for peaks outside that coverage.
 The all-codimension and product audits need not be repeated.  Exact failed
 repairs and AA split:
+`../2026-08-13-c907-simple-wall-coverage-obstruction.md`,
 `../2026-08-13-c907-formal-constant-banking.md` and
 `../2026-08-13-c907-peak-confluence-obstruction.md`.
 
