@@ -247,8 +247,7 @@ can be constructed as follows.
    in the `(1,1)` cone.  This is finite, integral, and still supported in
    the original lattice.
 3. Apply toric desingularization by stellar subdivisions along primitive
-   lattice points, **relative to the three open Rees cones**, not merely
-   relative to their common ray.  Each subdivision is
+   lattice points to this common refinement.  Each subdivision is
    in `N`, so no ramification `delta=r^e` occurs.  Standard determinant
    descent terminates: in a nonunimodular simplicial cone choose a nonzero
    lattice point in its half-open fundamental parallelepiped and star
@@ -257,25 +256,27 @@ can be constructed as follows.
    finitely many cones and the determinant multiset decreases lexicographically.
 
 The Rees star is already regular: each of its three cones has determinant
-one in `Z<e_delta,e_U,e_V>`.  Relative toric resolution therefore preserves
-their interiors and their actual-boundary faces; all further centers lie in
-the complement or in product directions of the already-audited `y` boundary.
-The final model factors through the chosen `Bl_(delta,U,V)` and retains the
-three named Rees maps without introducing `v=0` or `w=0` as boundary faces.
-No Kummer cover is needed for regularity; only a
+one in `Z<e_delta,e_U,e_V>`.  Graph and `y` walls may and generally do
+subdivide their interiors.  What is preserved is the toric morphism from the
+final refinement to `Bl_(delta,U,V)`: every final cone is contained in at
+least one Rees cone.  Thus its inverse-image opens retain the three named Rees
+coordinate systems.  No Kummer cover is needed for regularity; only a
 reduced semistable central fibre would require a ramified/Kummer alteration.
 
-This relative choice is the protected-star coverage statement.  Every point
-over the double-marked closure lies in exactly one of the three ordinary Rees
-charts: the bounded `delta` chart, the `U`-imbalanced chart, or the
-`V`-imbalanced chart, including their genuine central intersections.  The
-bounded-chart audit proves that all noncompact `y` faces are empty/free and
-that its compact critical scheme is the four-section Morse family.  On the
-two imbalanced charts the exact identities give `partial_v L=1` or
-`partial_w L=1` on every genuine central component and intersection.  Since
-`v,w` remain interior, the artificial `v=0,w=0` packets are absent.  Product
-subdivisions in `y` directions retain these unit derivatives.  Thus no fourth
-kind of `(1,1)` closure face exists.
+This factorization is the precise protected-star coverage statement.  The
+three Rees opens cover and overlap; they are not a partition.  On the bounded
+`delta` open, the existing joint-`y` audit proves that noncompact `y` faces
+are empty/free and that the compact critical scheme is the four-section Morse
+family.  On an imbalanced open, compact-`y` faces have the exact unit
+`partial_v L=1` or `partial_w L=1` on every genuine actual-boundary component
+and intersection.  Noncompact joint `y`/Rees faces need not be product cones;
+they are covered instead by the positive-normalization theorem, where `L` is
+free.  The algebraic faces `v=0,w=0` may occur in a fine toric chart, but are
+excluded from the **actual/control** boundary, so their artificial packets
+are never used.  If `beta=0` or `gamma=0`, the closure maps to the adjacent
+`(g,1)`, `(1,g)`, or `(g,g)` exterior types already covered by the tangent
+certificate.  These cases exhaust the Rees cover without asserting that its
+opens are disjoint or unsplit.
 
 The fan used for the tropical pair is supported **exactly** on
 `Sigma_trop`; its multiplication map is smooth and surjective over precisely
