@@ -177,8 +177,10 @@ the first is the unique `L` term, the next three have distinct `x` exponents,
 the fifth is constant, and the last has exponent `X`.  Their coefficients
 are nonzero residue units (with `Q in k^*`).  Hence **every nonempty mask**
 in (6), including one first appearing on a horizontal face, is nonzero in the
-pair-of-pants domain.  This is the conceptual content underlying the 552
-normal-form replay.
+pair-of-pants domain.  More precisely, a singleton mask is a Laurent unit
+and its initial hypersurface is empty, whereas every mask with at least two
+terms is a nonunit Laurent polynomial and has a geometric torus zero.  This
+is the conceptual content underlying the 552 normal-form replay.
 
 The circuit lemma is likewise independent of `t>0`.  Its sole generic/generic
 five-term risk without `L` has equal `x_i` and reciprocal weights; with
@@ -197,8 +199,10 @@ does not silently omit horizontal boundary smoothness.
 ## 4. Integral fan over the original DVR
 
 Let `Sigma_trop` be the rational nonconstant-coefficient tropical complex of
-the graph with `v(L)=0`.  It is obtained by retaining the smooth, nonempty
-cells of the exact six-weight complex.  A regular fan in the **same** lattice
+the graph with `v(L)=0`.  It is obtained by retaining exactly the cells whose
+tie masks have cardinality at least two: the 57 non-singleton masks.  The
+extended replay records this nonemptiness bit for every realized
+ordered-type/mask pair.  A regular fan in the **same** lattice
 
 \[
  N=\mathbb Z\langle t,p_1,p_2,p_3,\beta,\gamma\rangle

@@ -21,6 +21,14 @@ VARS = ("L", "x1", "x2", "x3", "b", "c", "Q")
 INDEX = {name: i for i, name in enumerate(VARS)}
 ZERO = tuple(0 for _ in VARS)
 Poly = dict[tuple[int, ...], int]
+FREE_EXPONENTS = {
+    "0": (1, 1, 1, 1),
+    "1": (0, 2, 1, 1),
+    "2": (0, 1, 2, 1),
+    "3": (0, 1, 1, 2),
+    "4": (0, 0, 0, 0),
+    "5": (0, 1, 1, 1),
+}
 
 
 def clean(poly: Poly) -> Poly:
@@ -135,6 +143,8 @@ def render(poly: Poly) -> str:
 
 
 def encode() -> dict:
+    if len(set(FREE_EXPONENTS.values())) != 6:
+        raise RuntimeError("graph terms lost distinct free Laurent exponents")
     data = json.loads(INPUT.read_text())
     records = []
     total_cells = 0
@@ -164,7 +174,11 @@ def encode() -> dict:
                 raise RuntimeError(f"Q-specialization ambiguity at {a},{b}, mask {mask}")
             if len(q_terms) > 1:
                 raise RuntimeError(f"unexpected Q cancellation at {a},{b}, mask {mask}")
-            checked.append({"mask": mask, "cleared_normal_form": render(normal)})
+            checked.append({
+                "mask": mask,
+                "cleared_normal_form": render(normal),
+                "geometric_initial_nonempty": len(mask) >= 2,
+            })
         B, U, relB = state_forms(a, "b")
         C, V, relC = state_forms(b, "c")
         assert B and U and C and V
@@ -198,6 +212,7 @@ def encode() -> dict:
         "input": {"file": INPUT.name, "sha256": hashlib.sha256(INPUT.read_bytes()).hexdigest()},
         "ring": "Z[Q,L,x1,x2,x3,b,c]; Q is an indeterminate and the residue coordinates are subsequently localized",
         "graph_convention": "clear X*B*C in L-(x1+x2+x3)-Q/(XBC)-UV",
+        "nonempty_criterion": "after base localization the six coefficients are units and their (L,x1,x2,x3) exponents are distinct; over an algebraically closed residue field an initial has a torus zero iff its mask has at least two terms",
         "base_convention": "g uses B+U-1; 0 uses U-1; 1 uses B-1; infinity uses B+U, followed by the displayed elimination",
         "checks": {
             "all_81367_serialized_cells_recompute_their_stored_upper_envelope_mask": True,
@@ -206,6 +221,7 @@ def encode() -> dict:
             "base_initial_fibres_are_linear_integral_domains_before_residue_localization": True,
             "generic_generic_five_term_mask_without_L_is_infeasible": True,
             "all_L_masks_have_the_seven_certified_order_zero_types": True,
+            "initial_is_geometrically_nonempty_exactly_when_mask_has_at_least_two_terms": True,
         },
         "records": records,
     }

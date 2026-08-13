@@ -103,6 +103,14 @@ the unique term linear in the formal parameter `Q`; hence the result remains
 nonzero after every specialization `Q in k^*`, rather than merely for a
 generic parameter.
 
+The replay also records the exact geometric nonemptiness criterion.  After
+base localization the six graph coefficients are units and their exponents
+in `(L,x1,x2,x3)` are pairwise distinct.  A singleton mask is therefore a
+Laurent unit and cuts out the empty initial graph; every mask with at least
+two terms is a nonunit Laurent polynomial and has a geometric torus zero.
+Thus the tropical support is exactly the 57 masks of cardinality at least
+two, rather than all 63 nonempty support masks.
+
 Replay from the repository root:
 
 ```sh
@@ -110,7 +118,7 @@ nix shell nixpkgs#python3 --command python3 \
   notes/2026-08-12-c907-pair-of-pants-initial-nonvanishing.py --check
 ```
 
-The tracked checksum manifest covers the generator and its 46,558-byte JSON
+The tracked checksum manifest covers the generator and its 65,845-byte JSON
 certificate.  The input refinement's SHA-256 is also recorded inside the
 JSON, so a certificate for a different support subdivision cannot be reused.
 The direct domain proof above is independent of the enumeration: it explains
