@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FaithfullyFlatMembership
 import Mathlib.Tactic
 
 /-!
@@ -159,6 +160,48 @@ theorem allDegree_integralProductMember_of_primeDenominators
       squarefreeProductSum (forms.map realization) degree ∈ integralProducts :=
     mem_of_primeDenominatorMember_all integralProducts _
       (localProducts forms internal sumEquality)
+  exact ⟨forms, internal, sumEquality, globalMember, powerEquality⟩
+
+/-- Exact algebraic composition of rank-one assembly and faithfully flat
+descent through the quotient by the integral product submodule.  This is the
+module-theoretic descent step used after passage to an unramified splitting
+ring in the manuscript. -/
+theorem allDegree_integralProductMember_of_faithfullyFlatQuotient
+    {S Target : Type*} [CommRing S] [Algebra R S]
+    [CommRing Target] [Module R Target] [Module.FaithfullyFlat R S]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : WeightedMatrixRankOneGenerated uniformizer diagonal cross)
+    (realization : Matrix Index Index R →+ Target)
+    (rankOneSquareZero : ∀ candidate,
+      candidate ∈ weightedRankOneSet uniformizer diagonal cross →
+        realization candidate * realization candidate = 0)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (squarefreeProductSum (forms.map realization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) ∧
+      forms.sum = form ∧
+      squarefreeProductSum (forms.map realization) degree ∈ integralProducts ∧
+      realization form ^ degree =
+        (degree.factorial : Target) *
+          squarefreeProductSum (forms.map realization) degree := by
+  obtain ⟨forms, internal, sumEquality, powerEquality⟩ :=
+    allDegree_squareZeroAssembly_of_rankOneGenerated
+      uniformizer diagonal cross generated realization rankOneSquareZero
+      form member degree
+  have globalMember :
+      squarefreeProductSum (forms.map realization) degree ∈ integralProducts :=
+    mem_submodule_of_faithfullyFlat_tensor_quotient_zero integralProducts _
+      (extendedProducts forms internal sumEquality)
   exact ⟨forms, internal, sumEquality, globalMember, powerEquality⟩
 
 end GraphLattices

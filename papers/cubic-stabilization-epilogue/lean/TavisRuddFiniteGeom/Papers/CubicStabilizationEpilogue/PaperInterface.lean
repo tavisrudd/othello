@@ -465,6 +465,57 @@ theorem rankOne_allDegree_squareZeroAssembly
   GraphLattices.allDegree_squareZeroAssembly_of_rankOneGenerated
     π diagonal cross generated realization rankOneSquareZero form member degree
 
+/-- Faithfully flat reflection of submodule membership in the quotient form
+used by the manuscript's splitting-ring descent. -/
+theorem faithfullyFlat_tensorQuotient_zero_implies_mem
+    {R S M : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    [AddCommGroup M] [Module R M] [Module.FaithfullyFlat R S]
+    (submodule : Submodule R M) (element : M)
+    (extendedQuotientZero :
+      TensorProduct.mk R S (M ⧸ submodule) 1
+          (Submodule.Quotient.mk element) = 0) :
+    element ∈ submodule :=
+  GraphLattices.mem_submodule_of_faithfullyFlat_tensor_quotient_zero
+    submodule element extendedQuotientZero
+
+/-- All-degree square-zero assembly followed by exact faithfully flat descent
+of the resulting squarefree product through the quotient by the prescribed
+integral product submodule. -/
+theorem rankOne_allDegree_integralProductMember_of_faithfullyFlatQuotient
+    {Index R S Target : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    [CommRing Target] [Module R Target] [Module.FaithfullyFlat R S]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
+    (realization : Matrix Index Index R →+ Target)
+    (rankOneSquareZero : ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        realization candidate * realization candidate = 0)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (GraphLattices.squarefreeProductSum
+            (forms.map realization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) ∧
+      forms.sum = form ∧
+      GraphLattices.squarefreeProductSum
+          (forms.map realization) degree ∈ integralProducts ∧
+      realization form ^ degree =
+        (degree.factorial : Target) *
+          GraphLattices.squarefreeProductSum
+            (forms.map realization) degree :=
+  GraphLattices.allDegree_integralProductMember_of_faithfullyFlatQuotient
+    π diagonal cross generated realization rankOneSquareZero integralProducts
+    form member degree extendedProducts
+
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`
 into the subgroup, then `x` already belongs to the subgroup.  Unlike the

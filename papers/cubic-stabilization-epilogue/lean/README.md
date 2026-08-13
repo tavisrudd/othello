@@ -32,15 +32,16 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 55 reviewer terminals.
+1 complete; 57 reviewer terminals.
 
-The 55 reviewer-facing terminals currently verify:
+The 57 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
 - the square-zero divided-power expansion;
 - finite internal rank-one list extraction and its all-degree square-zero
-  realization consequence;
+  realization consequence, together with exact reflection of integral-product
+  membership from a faithfully flat tensor extension via the quotient module;
 - elementwise local-to-global subgroup membership from prime-to-prime
   denominator witnesses, including its composition with all-degree rank-one
   assembly into an abstract integral product subgroup;
