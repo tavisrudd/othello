@@ -25,22 +25,25 @@ This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
-- 6 absent from Lean;
-- 13 represented by exact but strictly weaker fragments;
+- 5 absent from Lean;
+- 14 represented by exact but strictly weaker fragments;
 - 3 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 6 absent; 13 fragmentary; 3 conditional;
-1 complete; 37 reviewer terminals.
+Checked coverage snapshot: 23 claims; 5 absent; 14 fragmentary; 3 conditional;
+1 complete; 39 reviewer terminals.
 
-The 37 reviewer-facing terminals currently verify:
+The 39 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
 - the square-zero divided-power expansion;
 - finite internal rank-one list extraction and its all-degree square-zero
   realization consequence;
+- elementwise local-to-global subgroup membership from prime-to-prime
+  denominator witnesses, including its composition with all-degree rank-one
+  assembly into an abstract integral product subgroup;
 - the graph-coordinate block multiplication and cross-depth intersection
   arithmetic underlying the coefficient-lattice calculation;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to

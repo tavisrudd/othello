@@ -3,6 +3,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Matri
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AllDegreeAssembly
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.GraphCoefficientDepth
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
@@ -302,6 +303,55 @@ theorem rankOne_allDegree_squareZeroAssembly
           GraphLattices.squarefreeProductSum (forms.map realization) degree :=
   GraphLattices.allDegree_squareZeroAssembly_of_rankOneGenerated
     π diagonal cross generated realization rankOneSquareZero form member degree
+
+/-- Elementwise local-to-global membership in denominator-witness form.  If,
+at every prime, a natural-number multiple prime to that prime carries `x`
+into the subgroup, then `x` already belongs to the subgroup.  Unlike the
+paper's sufficient finite-generation argument, this sharper algebraic lemma
+needs no finiteness assumption. -/
+theorem primeDenominatorMember_all_implies_mem
+    {A : Type*} [AddCommGroup A]
+    (P : AddSubgroup A) (x : A)
+    (localMember : ∀ p : ℕ, p.Prime →
+      GraphLattices.PrimeDenominatorMember P x p) :
+    x ∈ P :=
+  GraphLattices.mem_of_primeDenominatorMember_all P x localMember
+
+/-- Abstract all-degree saturation conclusion after local inputs are supplied.
+Exact rank-one generation and square-zero realization produce a finite
+squarefree representative; prime-to-prime denominator witnesses place that
+representative in the chosen integral product subgroup globally. -/
+theorem rankOne_allDegree_integralProductMember_of_primeDenominators
+    {Index R Target : Type*} [CommRing R] [CommRing Target]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
+    (realization : Matrix Index Index R →+ Target)
+    (rankOneSquareZero : ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        realization candidate * realization candidate = 0)
+    (integralProducts : AddSubgroup Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (degree : ℕ)
+    (localProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) →
+      forms.sum = form →
+      ∀ p : ℕ, p.Prime →
+        GraphLattices.PrimeDenominatorMember integralProducts
+          (GraphLattices.squarefreeProductSum (forms.map realization) degree) p) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) ∧
+      forms.sum = form ∧
+      GraphLattices.squarefreeProductSum
+          (forms.map realization) degree ∈ integralProducts ∧
+      realization form ^ degree =
+        (degree.factorial : Target) *
+          GraphLattices.squarefreeProductSum (forms.map realization) degree :=
+  GraphLattices.allDegree_integralProductMember_of_primeDenominators
+    π diagonal cross generated realization rankOneSquareZero integralProducts
+    form member degree localProducts
 
 /-- The abstract `6I-J` calculation: the constant line has eigenvalue one and
 the coordinate-sum-zero hyperplane has eigenvalue six.  No geometric Rosati

@@ -111,12 +111,15 @@
     },
     {
       "manuscript_label": "thm:six-axis-divided-powers",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The six-axis graph divisor lattice on the intermediate Jacobian of each smooth A5-pencil member.",
-      "hypotheses": "The local charts at two and three, trivial integral comparison elsewhere, and finite generation of the cokernels.",
-      "conclusion": "All integral divided powers lie in the ordinary product image, in particular Theta^4/4!.",
-      "cautions": "Extra Neron-Severi classes at special fibres only enlarge the target product image."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.primeDenominatorMember_all_implies_mem",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_allDegree_integralProductMember_of_primeDenominators"
+      ],
+      "objects": "Lean represents a weighted matrix-of-ideals lattice, its internal rank-one span, a square-zero additive realization in a commutative ring, an abstract integral product subgroup, and explicit natural-number denominator witnesses for the resulting squarefree product representative.",
+      "hypotheses": "The lattice is exactly rank-one generated; every internal rank-one realization squares to zero; and for every prime p and every relevant finite internal presentation, some multiplier not divisible by p carries its squarefree degree-k product into the integral product subgroup. This is the elementwise denominator condition needed by the manuscript's local-to-global step; finite generation is unnecessary once these witnesses are supplied.",
+      "conclusion": "A finite internal rank-one presentation exists whose degree-k squarefree product belongs to the integral product subgroup globally and whose factorial multiple equals the kth power of the realized lattice element.",
+      "cautions": "The six-axis graph divisor lattice, its realization in cohomology, the local charts at two and three, the comparison away from six, production of the denominator witnesses from localization, and identification of divided powers with ordinary divisor products are not formalized here. In particular Lean does not yet prove membership of Theta^4/4! or any geometric divided-power claim, and the special-fibre Neron-Severi caution remains geometric."
     },
     {
       "manuscript_label": "cor:universal-ch0",

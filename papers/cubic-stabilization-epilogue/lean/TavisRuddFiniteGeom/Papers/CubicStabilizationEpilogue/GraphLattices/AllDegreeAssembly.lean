@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import Mathlib.Tactic
 
 /-!
@@ -117,6 +118,48 @@ theorem allDegree_squareZeroAssembly_of_rankOneGenerated
   rw [← realizedSum]
   exact sum_pow_eq_factorial_mul_squarefreeProductSum
     (forms.map realization) squareZero degree
+
+/-- Exact algebraic composition of rank-one assembly and prime-denominator
+descent.  If every internal rank-one presentation of `form` supplies local
+denominator witnesses for its squarefree degree-`degree` product, then one
+such product belongs to the prescribed integral product subgroup globally,
+and its factorial multiple is the realized power. -/
+theorem allDegree_integralProductMember_of_primeDenominators
+    {Target : Type*} [CommRing Target]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : WeightedMatrixRankOneGenerated uniformizer diagonal cross)
+    (realization : Matrix Index Index R →+ Target)
+    (rankOneSquareZero : ∀ candidate,
+      candidate ∈ weightedRankOneSet uniformizer diagonal cross →
+        realization candidate * realization candidate = 0)
+    (integralProducts : AddSubgroup Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (degree : ℕ)
+    (localProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) →
+      forms.sum = form →
+      ∀ p : ℕ, p.Prime →
+        PrimeDenominatorMember integralProducts
+          (squarefreeProductSum (forms.map realization) degree) p) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) ∧
+      forms.sum = form ∧
+      squarefreeProductSum (forms.map realization) degree ∈ integralProducts ∧
+      realization form ^ degree =
+        (degree.factorial : Target) *
+          squarefreeProductSum (forms.map realization) degree := by
+  obtain ⟨forms, internal, sumEquality, powerEquality⟩ :=
+    allDegree_squareZeroAssembly_of_rankOneGenerated
+      uniformizer diagonal cross generated realization rankOneSquareZero
+      form member degree
+  have globalMember :
+      squarefreeProductSum (forms.map realization) degree ∈ integralProducts :=
+    mem_of_primeDenominatorMember_all integralProducts _
+      (localProducts forms internal sumEquality)
+  exact ⟨forms, internal, sumEquality, globalMember, powerEquality⟩
 
 end GraphLattices
 
