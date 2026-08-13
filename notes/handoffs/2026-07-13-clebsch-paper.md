@@ -166,18 +166,20 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-41 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 81 reviewer terminals, audit
-commands, and expected axiom rows.  Coverage is explicitly 3 absent, 16
-fragmentary, 3 conditional deductions, and 1 complete.  The DVR rank-one
+42 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 82 reviewer terminals, audit
+commands, and expected axiom rows.  Coverage is explicitly 2 absent, 16
+fragmentary, 4 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
 graph lattices, invertible extension-ring basis transport between distinct
 base and split axes, derivation of weighted membership from base symmetry and
 formal graph-descent blocks, faithful-flat ordinary-product descent, the six-axis Smith and
 local-block arithmetic, the characteristic-two slope model through scalar
 extension and repeated-root diagonalization, and the exact implication from a
-`{1,-1}` monodromy spectrum to primitive-sixth vanishing.  The aggregate build,
-source correspondence, and 81-terminal axiom transcript are green, and the
+`{1,-1}` monodromy spectrum to primitive-sixth vanishing.  The exact fibrewise
+deduction from supplied primitive-minimal-class algebraicity and Voisin's
+supplied criterion to universal `CH₀`-triviality is now conditional Lean.  The aggregate build,
+source correspondence, and 82-terminal axiom transcript are green, and the
 committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 41 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 42 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 81 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 3 absent, 16 fragmentary, 3 conditional
+exports 82 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 2 absent, 16 fragmentary, 4 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -100,7 +100,9 @@ formal-base-shift and block-formula deductions, numerical coefficient
 pushforward, strict-Novikov data, divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial
 polynomial, and the exact implication from a `{1,-1}` characteristic-root
-spectrum to low-dimensional sixth-root vanishing.
+spectrum to low-dimensional sixth-root vanishing.  The cycle side now also
+contains the exact fibrewise deduction from supplied primitive-minimal-class
+algebraicity and Voisin's supplied equivalence to universal `CH₀`-triviality.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
