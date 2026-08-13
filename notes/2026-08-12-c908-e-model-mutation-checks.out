@@ -1,0 +1,39 @@
+C908 item F: mutation-comparison symbolic checks
+
+[N1] Newton expression for c_4
+  PASS  c_4 = h1^4/24 - h1^2h2/2 + h2^2/2 + 2h1h3 - 6h4 (rank-free)
+
+[N2] Lemma N: the (3,5) block of c_4
+  PASS  c_4^{(3,5)} = (g2-g1^2/2) h2^{31} + 2 g1 h3^{33} - 6 h4^{35}
+
+[N3] integrality shims
+  PASS  h2^{31} = -c2^{31}
+  PASS  2 h3^{33} = c3^{33} - g1 c2^{31}
+
+[T1-T3] Lemma T: base twist
+  PASS  twist difference matches Lemma T
+  PASS  r = 3: difference vanishes identically
+  PASS  r = 0: difference == n c3^{33} + n^2 c2^{31} (mod 2)
+
+[X1] Lemma X: X-twist invisibility
+  PASS  g1, g2 and the odd parts are unchanged by an X-twist
+
+[F1] Theorem F1 via total Chern classes
+  PASS  c_4(E')^{35} + c_4(A)^{35} == c1(V)c3 + (c2(V)+G^2)c2 (mod 2)
+
+[G1] rank of V from GRR on the cubic-surface fibration
+  PASS  rk V = 1/2 + 3/2 + (K^2 + chi_top)/12 = 3
+
+[G2] c_1(V) from the degree-one GRR term
+  PASS  c_1(V) = -6 dC - 3 G
+  PASS  c_1(V) = G (mod 2) since -6 dC is even and -3 G = G
+
+[E1] cubic-surface / E_6 numerology
+  PASS  27 lines, each skew to 16: 27*16 = 432 ordered skew pairs
+  PASS  E_6 has 72 roots and 432 = 6 * 72
+  PASS  D^2 = 1, D.K = -3, chi(O(D)) = 3
+
+[E2] primitivity of [I]
+  PASS  C_s^2 = 5 is odd, so C_s (hence [I]) is not divisible
+
+ALL CHECKS PASSED

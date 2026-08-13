@@ -207,22 +207,24 @@ both because `c_1(L)` has positive `X`-degree. Now apply Lemma N. ∎
 not).** For `𝒜` of rank `r` on `X×B` and `N ∈ Pic(B)`, `n := p_B^*c_1(N)`,
 
 \[ c_4(𝒜⊗p_B^*N)^{(3,5)} − c_4(𝒜)^{(3,5)}
- \;=\; (2r−6)\,n\,h_3^{(3,3)} \;+\;\bigl[(3−r)ng_1 − (\tbinom r2+3)n^2\bigr]h_2^{(3,1)} . \]
+ \;=\; (2r−6)\,n\,h_3^{(3,3)} \;+\;\bigl[(3−r)ng_1 + (2r−3−\tbinom r2)n^2\bigr]h_2^{(3,1)} . \]
 
 Consequently:
 
-* `r = 3`: the difference is `−6n^2h_2^{(3,1)} = 6n^2c_2^{(3,1)}`, an
-  **even integral class**. So `c_4(ℰ⊗p_M^*N)^{(3,5)} ≡ c_4(ℰ)^{(3,5)} (mod 2)`
-  unconditionally — the universal family's twist ambiguity is invisible to the
-  λ-readout with no lattice input at all.
+* `r = 3`: **both coefficients vanish identically** (`2r−6 = 0` and
+  `2r−3−\binom r2 = 6−3−3 = 0`), so
+  `c_4(ℰ⊗p_M^*N)^{(3,5)} = c_4(ℰ)^{(3,5)}` **exactly**, not merely mod two —
+  the universal family's twist ambiguity is invisible to the λ-readout with no
+  lattice input at all. (Rank three is the unique rank at which this happens.)
 * `r = 0`: the difference is `≡ n\,c_3^{(3,3)} + n^2c_2^{(3,1)} (mod 2)`,
   which is **not** identically even. The span model is genuinely twist-sensitive.
 
-*Proof.* `g_1 ↦ g_1 + rn`, `g_2 ↦ g_2 + ng_1 + \tfrac r2n^2`, so
-`c_2^{(0,4)} ↦ c_2^{(0,4)} + (r−1)ng_1 + \binom r2 n^2`; on the odd side
+*Proof.* `g_1 ↦ g_1 + rn`, `g_2 ↦ g_2 + ng_1 + \tfrac r2n^2`; on the odd side
 `h_2^{(3,1)} ↦ h_2^{(3,1)}`, `h_3^{(3,3)} ↦ h_3^{(3,3)} + nh_2^{(3,1)}`,
 `h_4^{(3,5)} ↦ h_4^{(3,5)} + nh_3^{(3,3)} + \tfrac12n^2h_2^{(3,1)}`. Substitute
-into Lemma N and collect. For `r=0` use
+into Lemma N and collect (note the `2g_1h_3^{(3,3)}` term must be expanded
+with the **twisted** `g_1`, which is where the `2r` in the `n^2`-coefficient
+comes from). For `r=0` use
 `−6nh_3^{(3,3)} = −3n(c_3^{(3,3)} − g_1c_2^{(3,1)})` and
 `3n(g_1−n)h_2^{(3,1)} = −3n(g_1−n)c_2^{(3,1)}`; adding and reducing mod 2
 gives `nc_3^{(3,3)} + n^2c_2^{(3,1)}`. ∎
@@ -563,3 +565,74 @@ in particular every sextant translate of the universal family under the Serre
 functor and its inverse, every shift, and every line-bundle normalization.
 It does **not** claim anything about non-mutation-related families, nor about
 the `(2,4)` channel.
+
+## 8. Hostile self-audit
+
+Attacked in order of load.
+
+**A1. "`V` is a bundle" is used twice, and is only true on the open locus.**
+`V = Rp_{B*}(𝒢(H))` is a priori a K-class; `h^0` could jump where the fibre
+degenerates. The Segre identities `π_*(D^3) = c_1(V)`, `π_*(D^4) = c_1^2−c_2`
+and the blow-down relation `κ = 3D + π^*c_1(V) − Exc` all presuppose the
+relative `P^2`-bundle `P(V^∨)` and the morphism `f`. *Repair:* neither
+conclusion needs the value. (i) For `c_2(V)` §6.3 uses only that
+`c_2(V) ≡ π_*(D^4) ≡ π_*(d^4)` is **`σ`-symmetric mod two**, which follows from
+`σ^*d = −d` and the `σ`-invariance of the degeneration loci `I` and `Δ` — no
+smoothness, no bundle, no multiplicity. (ii) For `c_1(V)` the defect between
+the open-locus computation and the true class restricts to zero on
+`B∖(I∪Δ)`, hence lies in the image of `H^2_{I∪Δ}(B,\mathbf Z)`; `Δ` has complex
+codimension two so `H^2_Δ(B,\mathbf Z) ≅ H^{BM}_6(Δ) = 0`, leaving
+`\mathbf Z·[I]`, and `[I]` is primitive (a slice restriction gives `C_s` with
+`C_s^2 = 5` odd, so `C_s` — hence `[I]` — is not divisible). Since
+`[I] ≡ G (mod 2)`, every outcome is `c_1(V) ≡ mG` with `m ∈ \{0,1\}` and
+Lemma C kills the term in both cases. **Finding: repaired, conclusion
+unaffected.**
+
+**A2. The descent of `𝒢` along `q` contradicts the committed corpus.** The
+reduction note and its audit assert `𝒢` does not descend. §5.1 shows it does
+(the `W(E_6)`-equivariant map from the 432 ordered skew pairs onto the 72 roots
+has constant fibre size six, and the sheaf depends only on the root), and
+identifies the corpus's error: the factor swap `σ` covers `(−1)_J`, so it is
+**not** a deck transformation of `q`. **Finding: the corpus statement is
+wrong; correcting it strengthens rather than weakens the chain**, because
+Theorem F2 then only needs the base change of the mutation plus Lemma T at
+rank three (exactly invisible). Recorded as a correction owed to
+`notes/2026-08-12-c908-lambda-reduction-and-verdict.md` §1 and its audit
+Finding G3 item 3.
+
+**A3. Lemma C leans on a certificate control, not on a proof.** The kill of
+`G c_3^{(3,3)}` is the `t^1`-coefficient of the committed certificate's
+verified mod-two `t`-independence. That is genuine certified evidence, but it
+is *computational*, so Theorem F2 is certificate-conditional to exactly the
+same degree as the span-model verdict it transfers — no more. It would be
+better to have a structural proof that `∫(x⊗T_a)Gc_3^{(3,3)}` is even; none is
+offered here. **Finding: honest dependency, stated.**
+
+**A4. `c_2^{(3,1)} ≡ Ξ_1+Ξ_2` — does the sign convention matter?** No: mod two
+`Ξ_2−Ξ_1 ≡ Ξ_1+Ξ_2`, and Lemma S consumes exactly the symmetric shape. The
+Clemens–Griffiths anti-isometry sign (extraction E.4) is likewise invisible.
+
+**A5. Lemma S needs `σ` orientation-preserving and `θ` integral.** `σ` is a
+holomorphic automorphism of `F×F`, so `∫σ^*α = ∫α`; `θ` need only be
+`σ`-symmetric **mod two**, which is all §6.3 supplies. The tests are exactly
+the compression note's pure antisymmetric basis, whose defining shape
+`pr_1^*b − pr_2^*b` is what the proof uses.
+
+**A6. Does the mutation really send the span model to the universal family, or
+only to something with the same numerical class?** BBFHMRS Proposition 8.5 and
+(12) classify the `σ(α)`-semistable objects of class `2[I_ℓ]−[S(I_ℓ)]` and
+compute `S(O_Y(D−H)) = E_D[2]` on the nose, and `E_D` is Gieseker-stable of
+class `v` (their Theorem 6.1). The Chern-character check of §1.1 confirms the
+dictionary independently. **Finding: sound.**
+
+**A7. `G^2 ≡ 0` uses `Θ^{[2]}` integral.** Standard for a principally
+polarized abelian variety (`Θ^k/k!` is integral); the corpus uses the same fact
+throughout (compression note K1). Sound.
+
+**A8. The claimed pass-5 twist-lemma gap.** Re-checked: the pass-5 proof's
+`r = 3` branch asserts the odd leg lies in `b^*(\text{odd})`, which requires
+`H^3(M,\mathbf Z) = b^*∧³Λ` — refuted by pass-9 Theorem A. The concrete
+odd-capable witness `3∫_JΘ^{[3]}∧u∧z∧τ = ±1` is exhibited in §2.3. Lemma T at
+rank three supersedes it for the family `ℰ`. The pass-5 lemma's use for the
+relative Ext object `E` on `M×M` (rank of `E` is not three) is **not** repaired
+here and remains an open audit item.
