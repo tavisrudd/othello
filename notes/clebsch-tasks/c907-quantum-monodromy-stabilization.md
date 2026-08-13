@@ -99,9 +99,13 @@ Gu--Yu--Yu Section 6.5 further shrinks the curve `(1,2)` frontier.  Their
 Lemma 6.9 and Corollary 6.12 cover every global `D`-flip whose wall section
 algebra is generated in primitive degrees `+/-1`, whose nonzero-degree ideal
 is prime, and whose negative wall polarization is `O_{P2}(1)`.  The
-remaining curve flips are precisely the failures of those Cartier/primitive
-generation conditions—the weighted/finite-stabilizer boundary already seen
-in toroidal cobordism.
+in dimension five discrepancy one makes those conditions automatic for every
+smooth standard `(1,2)` flip; see
+`../2026-08-13-c907-discrepancy-one-standard-flip-is-vgit.md`.  Adjunction
+gives `K_X-|P2=O(-1)` and `K_X+|P1=O(1)`, so `D=K_X-` is the primitive global
+polarization.  Fibrewise normal generation gives the degree-`+/-1` algebra,
+and the common blowup makes its nonzero-degree ideal the prime wall ideal.
+Gu--Yu--Yu Corollary 6.12 therefore closes the curve row.
 
 The full crepant Gamma/K theorem has an exact publishable specification in
 `../2026-08-13-c907-surface-ordinary-flop-extension-spec.md`.  LLW ancestor
@@ -120,6 +124,13 @@ common contraction gives an invertible minimal-degree recursion and kills
 the transverse tail.  The same regular gauge transports `P6` and the
 pairing.  This removes the surface-family `P1` flop and all other crepant
 ordinary peaks from Gold without claiming descendant invariance.
+
+Consequently every smooth semi-free **standard** peak type in dimension five
+is closed.  Gold's remaining geometric question has narrowed to one source
+statement: whether AKMW's pi-nonsingular elementary cobordism pieces are
+globally standard unit-coefficient walls (possibly with finite disconnected
+middle strata), rather than merely smooth-boundary toroidal blowup/down
+diagrams.
 
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
