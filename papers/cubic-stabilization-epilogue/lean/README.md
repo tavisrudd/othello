@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 43 reviewer terminals.
+1 complete; 44 reviewer terminals.
 
-The 43 reviewer-facing terminals currently verify:
+The 44 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -52,6 +52,9 @@ The 43 reviewer-facing terminals currently verify:
 - the projective-line classification into scalar graphs and the vertical
   line, the five- and four-member finite-field packet counts, and the
   isotropic half-dimension calculation for self-adjoint graph slopes;
+- the fixed points and exchanged non-prime-field pair for squaring Frobenius
+  on the concrete four-element field, without identifying any geometric
+  normalizer action with that field map;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;

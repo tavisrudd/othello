@@ -22,6 +22,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisPolarization_parame
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_orthogonal_block: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_projectiveLine_packets: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_selfAdjointGraph_isotropic_halfDimension: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4Frobenius_fixed_and_exchanged: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod: propext, Classical.choice, Quot.sound

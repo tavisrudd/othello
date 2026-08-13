@@ -8,6 +8,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Divid
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -481,6 +482,25 @@ theorem principalGluing_selfAdjointGraph_isotropic_halfDimension
       coefficientPairing slope selfAdjoint,
     GraphLattices.finrank_graphEmbedding_range slope,
     GraphLattices.finrank_multiplicity_pair⟩
+
+/-- Finite-field Frobenius core for the exotic pair: squaring on the chosen
+`F4` fixes exactly `0` and `1`, is involutive, and exchanges every other
+element with a distinct conjugate.  This statement does not identify a
+normalizer action with Frobenius. -/
+theorem principalGluing_f4Frobenius_fixed_and_exchanged :
+    (∀ a : GraphLattices.F4,
+      GraphLattices.f4Frobenius a = a ↔ a = 0 ∨ a = 1) ∧
+    Function.Involutive GraphLattices.f4Frobenius ∧
+    (∀ a : GraphLattices.F4, a ≠ 0 → a ≠ 1 →
+      GraphLattices.f4Frobenius a ≠ a ∧
+        GraphLattices.f4Frobenius (GraphLattices.f4Frobenius a) = a) ∧
+    (∀ point : Option GraphLattices.F4,
+      GraphLattices.f4ProjectiveFrobenius point = point ↔
+        point = none ∨ point = some 0 ∨ point = some 1) := by
+  exact ⟨GraphLattices.f4Frobenius_fixed_iff,
+    GraphLattices.f4Frobenius_involutive,
+    GraphLattices.f4Frobenius_exchanges_nonPrimeElement,
+    GraphLattices.f4ProjectiveFrobenius_fixed_iff⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

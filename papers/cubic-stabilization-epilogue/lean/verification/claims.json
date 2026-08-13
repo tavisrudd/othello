@@ -51,12 +51,13 @@
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_projectiveLine_packets",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_selfAdjointGraph_isotropic_halfDimension"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_selfAdjointGraph_isotropic_halfDimension",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4Frobenius_fixed_and_exchanged"
       ],
-      "objects": "Lean represents projective lines over a concrete field F4 and over F3 as the vertical point plus scalar graph points, as well as an arbitrary finite-dimensional coefficient module, a bilinear coefficient pairing, a linear graph slope, and the induced alternating pairing on two multiplicity copies.",
+      "objects": "Lean represents projective lines over a concrete field F4 and over F3 as the vertical point plus scalar graph points, an arbitrary finite-dimensional coefficient module with a bilinear pairing and linear graph slope, the induced alternating pairing on two multiplicity copies, and Frobenius on the concrete F4 as the squaring map.",
       "hypotheses": "The projective classification uses only finiteness and the field axioms. The polarization theorem assumes exactly that the supplied slope is self-adjoint for the supplied coefficient pairing; finite-dimensionality is used for the half-dimension statement.",
-      "conclusion": "Every projective-line point is uniquely vertical or a scalar graph; P1(F4) has five members and P1(F3) has four. Every self-adjoint graph is isotropic for the alternating multiplicity pairing and has half the ambient two-copy dimension.",
-      "cautions": "Lean does not yet identify the A5 coefficient heart or its commutant with F4, prove that all A5-stable simple halves arise from these projective points, establish nondegeneracy needed to upgrade isotropic half-dimension to the named maximal-isotropic structure, classify the S6 and A5 stabilizers, prove Frobenius exchange of the exotic pair, or perform the Torelli/connected-family selection of the geometric kernel. Thus the finite-field enumeration and polarization algebra are checked, but the representation-theoretic and geometric assertions remain absent."
+      "conclusion": "Every projective-line point is uniquely vertical or a scalar graph; P1(F4) has five members and P1(F3) has four. Every self-adjoint graph is isotropic for the alternating multiplicity pairing and has half the ambient two-copy dimension. Squaring on F4 fixes exactly 0 and 1, is involutive, and exchanges every other scalar with a distinct conjugate; on the affine projective chart its fixed points are exactly the vertical point and the graphs of 0 and 1.",
+      "cautions": "Lean does not yet identify the A5 coefficient heart or its commutant with F4, prove that all A5-stable simple halves arise from these projective points, establish nondegeneracy needed to upgrade isotropic half-dimension to the named maximal-isotropic structure, classify the S6 and A5 stabilizers, identify an odd normalizer element with the formalized Frobenius map, or perform the Torelli/connected-family selection of the geometric kernel. Thus the finite-field enumeration, Frobenius calculation, and polarization algebra are checked, but the representation-theoretic and geometric assertions remain absent."
     },
     {
       "manuscript_label": "lem:graph-coefficient-lattice",
