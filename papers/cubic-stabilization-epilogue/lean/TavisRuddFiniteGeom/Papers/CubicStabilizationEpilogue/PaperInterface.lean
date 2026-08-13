@@ -35,6 +35,8 @@ comparison theorems that have not been formalized from foundations.
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
+open scoped MatrixGroups
+
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/
 theorem rankOne_mixed_coefficient_identity
@@ -190,9 +192,22 @@ theorem graphCoefficient_graphCoordinate_block_identity
         GraphLattices.graphAlternatingMatrix coefficient *
         GraphLattices.graphTransposePartner inverseDepth adjointSlope =
       GraphLattices.graphDescentBlockMatrix
-        inverseDepth slope adjointSlope coefficient :=
-  GraphLattices.graphChange_mul_alternating_mul_transposePartner
-    inverseDepth slope adjointSlope coefficient
+        inverseDepth slope adjointSlope coefficient ∧
+      ∀ (integral : S → Prop), integral 0 →
+        ((∀ row column,
+          integral ((GraphLattices.graphChangeMatrix inverseDepth slope *
+              GraphLattices.graphAlternatingMatrix coefficient *
+              GraphLattices.graphTransposePartner inverseDepth adjointSlope)
+            row column)) ↔
+          integral (inverseDepth *
+              (coefficient * adjointSlope - slope * coefficient) *
+            inverseDepth) ∧
+            integral (inverseDepth * coefficient) ∧
+            integral (-coefficient * inverseDepth)) := by
+  exact ⟨GraphLattices.graphChange_mul_alternating_mul_transposePartner
+      inverseDepth slope adjointSlope coefficient,
+    GraphLattices.graphChange_product_entrywise_iff_three_blocks
+      inverseDepth slope adjointSlope coefficient⟩
 
 /-- Expansion isolating the scalar slope-difference term from the two
 depth-divisible error terms in a pair of positive-depth slope blocks. -/
@@ -493,6 +508,12 @@ element with a distinct conjugate.  This statement does not identify a
 normalizer action with Frobenius. -/
 theorem principalGluing_f4Frobenius_fixed_and_exchanged :
     (∀ a : GraphLattices.F4,
+      GraphLattices.f4FrobeniusRingEquiv a =
+        GraphLattices.f4Frobenius a) ∧
+    (∀ point : Option GraphLattices.F4,
+      GraphLattices.f4ProjectiveFrobenius point =
+        point.map GraphLattices.f4FrobeniusRingEquiv) ∧
+    (∀ a : GraphLattices.F4,
       GraphLattices.f4Frobenius a = a ↔ a = 0 ∨ a = 1) ∧
     Function.Involutive GraphLattices.f4Frobenius ∧
     (∀ a : GraphLattices.F4, a ≠ 0 → a ≠ 1 →
@@ -501,7 +522,9 @@ theorem principalGluing_f4Frobenius_fixed_and_exchanged :
     (∀ point : Option GraphLattices.F4,
       GraphLattices.f4ProjectiveFrobenius point = point ↔
         point = none ∨ point = some 0 ∨ point = some 1) := by
-  exact ⟨GraphLattices.f4Frobenius_fixed_iff,
+  exact ⟨GraphLattices.f4FrobeniusRingEquiv_apply,
+    GraphLattices.f4ProjectiveFrobenius_eq_option_map,
+    GraphLattices.f4Frobenius_fixed_iff,
     GraphLattices.f4Frobenius_involutive,
     GraphLattices.f4Frobenius_exchanges_nonPrimeElement,
     GraphLattices.f4ProjectiveFrobenius_fixed_iff⟩
@@ -563,15 +586,35 @@ Arithmetic Frobenius is a transposition, hence odd, and its conjugation
 preserves the transported alternating subgroup.  This does not identify the
 permutation with a geometric normalizer element of the six-axis family. -/
 theorem principalGluing_f4Frobenius_oddNormalizer :
-    GraphLattices.f4FrobeniusPermutation.IsSwap ∧
+    Nat.card (Equiv.Perm (Fin 5)) = 120 ∧
+      (alternatingGroup (Fin 5)).index = 2 ∧
+      Subgroup.normalizer
+          (alternatingGroup (Fin 5) : Set (Equiv.Perm (Fin 5))) = ⊤ ∧
+      GraphLattices.f4FrobeniusPermutation ∈
+        Subgroup.normalizer
+          (alternatingGroup (Fin 5) : Set (Equiv.Perm (Fin 5))) ∧
+      GraphLattices.f4FrobeniusPermutation ∉ alternatingGroup (Fin 5) ∧
+      GraphLattices.f4FrobeniusPermutation.IsSwap ∧
       Equiv.Perm.sign GraphLattices.f4FrobeniusPermutation = -1 ∧
-      ∀ permutation : alternatingGroup (Fin 5),
+      (∀ permutation : alternatingGroup (Fin 5),
         GraphLattices.f4FrobeniusPermutation * permutation *
             GraphLattices.f4FrobeniusPermutation⁻¹ ∈
-          alternatingGroup (Fin 5) := by
-  exact ⟨GraphLattices.f4FrobeniusPermutation_isSwap,
+          alternatingGroup (Fin 5)) ∧
+      ∀ matrix : PSL(2, GraphLattices.F4),
+        ∃ conjugate : PSL(2, GraphLattices.F4),
+          GraphLattices.psl2F4ProjectiveAction conjugate =
+            GraphLattices.f4FrobeniusPermutation *
+                GraphLattices.psl2F4ProjectiveAction matrix *
+              GraphLattices.f4FrobeniusPermutation⁻¹ := by
+  exact ⟨GraphLattices.symmetricGroup_fin_five_card,
+    GraphLattices.alternatingGroup_fin_five_index,
+    GraphLattices.alternatingGroup_fin_five_normalizer_eq_top,
+    GraphLattices.f4FrobeniusPermutation_mem_normalizer,
+    GraphLattices.f4FrobeniusPermutation_not_mem_alternating,
+    GraphLattices.f4FrobeniusPermutation_isSwap,
     GraphLattices.f4FrobeniusPermutation_sign,
-    GraphLattices.f4FrobeniusPermutation_conjugate_mem_alternating⟩
+    GraphLattices.f4FrobeniusPermutation_conjugate_mem_alternating,
+    GraphLattices.exists_psl2F4_projectiveAction_eq_frobenius_conjugate⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

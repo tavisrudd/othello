@@ -18,6 +18,8 @@ namespace GraphLattices
 
 noncomputable section
 
+open scoped MatrixGroups
+
 local instance : Fintype F4 := Fintype.ofFinite F4
 local instance : DecidableEq F4 := Classical.decEq F4
 
@@ -87,6 +89,40 @@ theorem f4FrobeniusPermutation_sign :
     Equiv.Perm.sign f4FrobeniusPermutation = -1 :=
   f4FrobeniusPermutation_isSwap.sign_eq
 
+/-- The full symmetric group on the five-point packet has order `120`. -/
+theorem symmetricGroup_fin_five_card :
+    Nat.card (Equiv.Perm (Fin 5)) = 120 := by
+  rw [Nat.card_perm, Nat.card_fin]
+  norm_num
+
+/-- The alternating subgroup has index two in the five-point symmetric
+group. -/
+theorem alternatingGroup_fin_five_index :
+    (alternatingGroup (Fin 5)).index = 2 :=
+  alternatingGroup.index_eq_two
+
+/-- The normalizer of the alternating subgroup in the five-point symmetric
+group is the entire symmetric group. -/
+theorem alternatingGroup_fin_five_normalizer_eq_top :
+    Subgroup.normalizer (alternatingGroup (Fin 5) : Set (Equiv.Perm (Fin 5))) =
+      ⊤ :=
+  Subgroup.normalizer_eq_top (alternatingGroup (Fin 5))
+
+/-- Frobenius belongs to the full normalizer. -/
+theorem f4FrobeniusPermutation_mem_normalizer :
+    f4FrobeniusPermutation ∈
+      Subgroup.normalizer
+        (alternatingGroup (Fin 5) : Set (Equiv.Perm (Fin 5))) := by
+  rw [alternatingGroup_fin_five_normalizer_eq_top]
+  exact Subgroup.mem_top _
+
+/-- Frobenius represents the nontrivial coset of the index-two alternating
+subgroup. -/
+theorem f4FrobeniusPermutation_not_mem_alternating :
+    f4FrobeniusPermutation ∉ alternatingGroup (Fin 5) := by
+  rw [Equiv.Perm.mem_alternatingGroup, f4FrobeniusPermutation_sign]
+  norm_num
+
 /-- Conjugation by Frobenius preserves the exceptional alternating subgroup. -/
 theorem f4FrobeniusPermutation_conjugate_mem_alternating
     (permutation : alternatingGroup (Fin 5)) :
@@ -96,6 +132,29 @@ theorem f4FrobeniusPermutation_conjugate_mem_alternating
   rw [map_mul, map_mul, map_inv, f4FrobeniusPermutation_sign,
     Equiv.Perm.mem_alternatingGroup.mp permutation.property]
   norm_num
+
+/-- Conjugation by Frobenius preserves the concrete five-point projective
+image of `PSL₂(F4)`. -/
+theorem f4FrobeniusPermutation_conjugate_mem_psl2_range
+    (matrix : PSL(2, F4)) :
+    f4FrobeniusPermutation * psl2F4ProjectiveAction matrix *
+        f4FrobeniusPermutation⁻¹ ∈ psl2F4ProjectiveAction.range := by
+  rw [psl2F4ProjectiveAction_range_eq_alternating]
+  exact f4FrobeniusPermutation_conjugate_mem_alternating
+    ⟨psl2F4ProjectiveAction matrix,
+      psl2F4ProjectiveAction_range_le_alternating ⟨matrix, rfl⟩⟩
+
+/-- Equivalently, every conjugated projective transformation is represented
+by another element of `PSL₂(F4)`. -/
+theorem exists_psl2F4_projectiveAction_eq_frobenius_conjugate
+    (matrix : PSL(2, F4)) :
+    ∃ conjugate : PSL(2, F4),
+      psl2F4ProjectiveAction conjugate =
+        f4FrobeniusPermutation * psl2F4ProjectiveAction matrix *
+          f4FrobeniusPermutation⁻¹ := by
+  rcases f4FrobeniusPermutation_conjugate_mem_psl2_range matrix with
+    ⟨conjugate, equality⟩
+  exact ⟨conjugate, equality⟩
 
 end
 

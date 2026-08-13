@@ -44,8 +44,9 @@ The 48 reviewer-facing terminals currently verify:
 - elementwise local-to-global subgroup membership from prime-to-prime
   denominator witnesses, including its composition with all-degree rank-one
   assembly into an abstract integral product subgroup;
-- the graph-coordinate block multiplication and cross-depth intersection
-  arithmetic underlying the coefficient-lattice calculation;
+- the graph-coordinate block multiplication, equivalence of entrywise
+  integrality with the three displayed block conditions, and cross-depth
+  intersection arithmetic underlying the coefficient-lattice calculation;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
   orthogonal local block, and its exact depth-one arithmetic at two and three;
@@ -64,8 +65,9 @@ The 48 reviewer-facing terminals currently verify:
   center in characteristic two, evenness of the projective image, and the
   resulting abstract exceptional isomorphism `SL₂(F4) ≃ A5`, without
   identifying the manuscript's geometric action with this abstract model;
-- the affine-chart Frobenius as an odd transposition normalizing that abstract
-  alternating subgroup, without identifying it with a geometric normalizer;
+- the order-120 full symmetric normalizer, its index-two alternating subgroup,
+  and affine-chart Frobenius as an odd transposition in the nontrivial coset,
+  without identifying it with a geometric normalizer;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;

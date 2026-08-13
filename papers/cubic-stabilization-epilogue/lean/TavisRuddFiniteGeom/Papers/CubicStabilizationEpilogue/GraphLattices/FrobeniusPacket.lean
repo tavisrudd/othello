@@ -14,8 +14,22 @@ namespace GraphLattices
 
 noncomputable section
 
+local instance : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+
 /-- Frobenius on the chosen model of `F4` is the squaring map. -/
 def f4Frobenius (a : F4) : F4 := a ^ 2
+
+/-- The squaring map is the canonical Frobenius field automorphism. -/
+noncomputable def f4FrobeniusRingEquiv : F4 ≃+* F4 :=
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  (FiniteField.Extension.frob (ZMod 2) 2 2).toRingEquiv
+
+/-- The canonical field automorphism acts by squaring. -/
+@[simp]
+theorem f4FrobeniusRingEquiv_apply (a : F4) :
+    f4FrobeniusRingEquiv a = f4Frobenius a := by
+  simp [f4FrobeniusRingEquiv, f4Frobenius]
 
 /-- The elements fixed by Frobenius are exactly the prime-field elements
 `0` and `1`. -/
@@ -54,6 +68,12 @@ packet, fixing the vertical point. -/
 def f4ProjectiveFrobenius : Option F4 → Option F4
   | none => none
   | some a => some (f4Frobenius a)
+
+/-- In the affine chart, projective Frobenius is coefficientwise application
+of the canonical Frobenius field automorphism, with the vertical point fixed. -/
+theorem f4ProjectiveFrobenius_eq_option_map (point : Option F4) :
+    f4ProjectiveFrobenius point = point.map f4FrobeniusRingEquiv := by
+  cases point <;> simp [f4ProjectiveFrobenius]
 
 /-- In affine-chart coordinates, the fixed projective points are precisely
 the vertical point and the scalar graphs of `0` and `1`. -/

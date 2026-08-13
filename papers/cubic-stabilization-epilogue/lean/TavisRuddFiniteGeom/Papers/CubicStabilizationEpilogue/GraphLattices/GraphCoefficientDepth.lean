@@ -58,6 +58,34 @@ theorem graphChange_mul_alternating_mul_transposePartner
       graphDescentBlockMatrix, Matrix.mul_apply, Fin.sum_univ_two]
     try noncomm_ring
 
+/-- Entrywise integrality of the graph-coordinate product is equivalent to
+integrality of its three displayed nonzero blocks.  The predicate is kept
+abstract so the statement applies equally to a subring, an order, or a
+lattice-valued block model; only integrality of zero is used. -/
+theorem graphChange_product_entrywise_iff_three_blocks
+    {S : Type*} [Ring S]
+    (inverseDepth slope adjointSlope coefficient : S)
+    (integral : S → Prop) (integralZero : integral 0) :
+    (∀ row column,
+      integral ((graphChangeMatrix inverseDepth slope *
+          graphAlternatingMatrix coefficient *
+          graphTransposePartner inverseDepth adjointSlope) row column)) ↔
+      integral
+          (inverseDepth * (coefficient * adjointSlope - slope * coefficient) *
+            inverseDepth) ∧
+        integral (inverseDepth * coefficient) ∧
+        integral (-coefficient * inverseDepth) := by
+  rw [graphChange_mul_alternating_mul_transposePartner]
+  constructor
+  · intro allEntries
+    exact ⟨allEntries 0 0, allEntries 0 1, allEntries 1 0⟩
+  · rintro ⟨upperLeft, upperRight, lowerLeft⟩ row column
+    fin_cases row <;> fin_cases column
+    · exact upperLeft
+    · exact upperRight
+    · exact lowerLeft
+    · simpa [graphDescentBlockMatrix] using integralZero
+
 /-- Expansion of the slope commutator after writing each slope as a scalar
 part plus a depth-divisible error.  Centrality hypotheses express that the
 displayed scalar parts are scalar matrices on their blocks. -/
