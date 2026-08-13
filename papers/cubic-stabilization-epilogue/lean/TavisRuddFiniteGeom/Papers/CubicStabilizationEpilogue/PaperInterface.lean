@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -501,6 +502,26 @@ theorem principalGluing_f4Frobenius_fixed_and_exchanged :
     GraphLattices.f4Frobenius_involutive,
     GraphLattices.f4Frobenius_exchanges_nonPrimeElement,
     GraphLattices.f4ProjectiveFrobenius_fixed_iff⟩
+
+/-- Concrete polarization calculation from the principal-gluing proof.  The
+trace of the determinant on `F4²` is nondegenerate over `F2`; the induced
+form on two multiplicity copies is nondegenerate; and every scalar graph is
+self-orthogonal, hence maximal isotropic. -/
+theorem principalGluing_f4TraceDeterminant_maximalIsotropic :
+    GraphLattices.f4TraceDeterminantPairing.Nondegenerate ∧
+    GraphLattices.f4MultiplicityAlternatingForm.Nondegenerate ∧
+    ∀ a : GraphLattices.F4,
+      LinearMap.BilinForm.orthogonal
+          GraphLattices.f4MultiplicityAlternatingForm
+          (LinearMap.range
+            (GraphLattices.graphEmbedding
+              (GraphLattices.f4ScalarSlope a))) =
+        LinearMap.range
+          (GraphLattices.graphEmbedding
+            (GraphLattices.f4ScalarSlope a)) := by
+  exact ⟨GraphLattices.f4TraceDeterminantPairing_nondegenerate,
+    GraphLattices.f4MultiplicityAlternatingForm_nondegenerate,
+    GraphLattices.f4ScalarGraph_orthogonal_eq⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator
