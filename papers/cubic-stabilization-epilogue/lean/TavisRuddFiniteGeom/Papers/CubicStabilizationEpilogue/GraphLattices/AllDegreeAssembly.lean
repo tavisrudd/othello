@@ -7,6 +7,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Ellip
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProducts
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.CoefficientExtension
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProductBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MarkedSplitPresentation
 import Mathlib.Tactic
 
 /-!
@@ -535,6 +536,72 @@ theorem allDegree_dividedPowerMember_of_faithfullyFlatCoefficientExtension
         simp
   exact ⟨dividedPowerMember,
     tensorProduct_includeRight_injective_of_faithfullyFlat extendedPower⟩
+
+/-- The splitting-ring packet specialized to the weighted lattice attached
+to supplied block-basis, depth, and scalar data over a DVR.  The midpoint
+inequalities and rank-one generation hypothesis are discharged internally
+from the graph depth formula.  This theorem does not construct a geometric
+graph presentation or its slope errors and descent conditions. -/
+theorem allDegree_dividedPowerMember_of_splitGraphDVR
+    {R S Target BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S]
+    [CommRing Target] [Algebra R Target]
+    (Block : BlockIndex → Type*) [Fintype (SplitGraphAxis Block)]
+    [DecidableEq (SplitGraphAxis Block)] [LinearOrder (SplitGraphAxis Block)]
+    (uniformizer : R)
+    (extendedUniformizerIrreducible : Irreducible (algebraMap R S uniformizer))
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (extendedRealization : Matrix (SplitGraphAxis Block)
+        (SplitGraphAxis Block) S →+ TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S (EllipticSourceHOne S (SplitGraphAxis Block)))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ weightedMatrixSubmodule (algebraMap R S uniformizer)
+          (fun axis ↦ depth axis.1)
+          (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+            depth scalar) →
+        extendedRealization candidate ∈
+          scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix (SplitGraphAxis Block) (SplitGraphAxis Block) R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer
+      (fun axis ↦ depth axis.1)
+      (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+        depth scalar))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization (matrixCoefficientExtension form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix (SplitGraphAxis Block)
+          (SplitGraphAxis Block) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet (algebraMap R S uniformizer)
+          (fun axis ↦ depth axis.1)
+          (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+            depth scalar)) →
+      forms.sum = matrixCoefficientExtension form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        squarefreeProductSum (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower := by
+  apply allDegree_dividedPowerMember_of_faithfullyFlatCoefficientExtension
+    uniformizer (fun axis ↦ depth axis.1)
+    (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+      depth scalar)
+    (splitGraph_weightedMatrix_rankOneGenerated_of_dvr Block
+      (algebraMap R S uniformizer) extendedUniformizerIrreducible depth scalar)
+    extendedRealization pullback pullbackInjective sourceCompatible divisors
+    extendedRealizationMember form member baseClass dividedPower
+    baseClassCompatible degree dividedPowerCompatible
 
 end GraphLattices
 

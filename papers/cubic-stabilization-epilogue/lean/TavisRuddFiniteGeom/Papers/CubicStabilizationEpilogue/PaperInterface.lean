@@ -428,6 +428,45 @@ theorem graphCoefficient_unitCrossDepth
   GraphLattices.graphCrossDepth_unit_positive
     positiveDepth slopeDifferenceValuation
 
+/-- Literal matrix-level form of the graph coefficient lemma on the disjoint
+union of all split block bases: weighted matrix-lattice membership is exactly
+block symmetry plus the three graph-coordinate descent conditions. -/
+theorem graphCoefficient_flattenedSplitPresentation_iff_descent
+    {R BlockIndex : Type*} [CommRing R]
+    (Block : BlockIndex → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    {π : R} (data : GraphLattices.NormalizedDVRValuation π)
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → R)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) :
+    GraphLattices.MemWeightedMatrix π (fun axis ↦ depth axis.1)
+        (GraphLattices.splitGraphCrossDepth Block data.valuation depth scalar)
+        (GraphLattices.flattenBlockCoefficient Block coefficient) ↔
+      GraphLattices.GraphBlockSymmetric Block coefficient ∧
+        GraphLattices.GraphBlockDescentCondition Block π depth scalar
+          slopeError coefficient :=
+  GraphLattices.memWeightedMatrix_flattenBlockCoefficient_iff_graphDescent
+    Block data depth scalar slopeError coefficient
+
+/-- For an actual DVR, the split graph cross-depth lattice on the disjoint
+union of block bases is rank-one generated. -/
+theorem graphCoefficient_splitPresentation_rankOneGenerated
+    {R BlockIndex : Type*} [CommRing R] [IsDomain R]
+    [IsDiscreteValuationRing R]
+    (Block : BlockIndex → Type*)
+    [Fintype (GraphLattices.SplitGraphAxis Block)]
+    [DecidableEq (GraphLattices.SplitGraphAxis Block)]
+    [LinearOrder (GraphLattices.SplitGraphAxis Block)]
+    (π : R) (πIrreducible : Irreducible π)
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → R) :
+    GraphLattices.WeightedMatrixRankOneGenerated π
+      (fun axis ↦ depth axis.1)
+      (GraphLattices.splitGraphCrossDepth Block
+        (IsDiscreteValuationRing.addVal R) depth scalar) :=
+  GraphLattices.splitGraph_weightedMatrix_rankOneGenerated_of_dvr
+    Block π πIrreducible depth scalar
+
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that
 any particular geometric divisor classes satisfy these hypotheses. -/
@@ -797,6 +836,71 @@ theorem rankOne_allDegree_dividedPower_of_faithfullyFlatCoefficientExtension
       baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
   GraphLattices.allDegree_dividedPowerMember_of_faithfullyFlatCoefficientExtension
     π diagonal cross extendedGenerated extendedRealization pullback
+    pullbackInjective sourceCompatible divisors extendedRealizationMember
+    form member baseClass dividedPower baseClassCompatible degree
+    dividedPowerCompatible
+
+/-- The preceding coefficient-extension/descent packet with rank-one
+generation discharged internally by the split graph depth formula over the
+splitting DVR. -/
+theorem rankOne_allDegree_dividedPower_of_splitGraphDVR
+    {R S Target BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S]
+    [CommRing Target] [Algebra R Target]
+    (Block : BlockIndex → Type*)
+    [Fintype (GraphLattices.SplitGraphAxis Block)]
+    [DecidableEq (GraphLattices.SplitGraphAxis Block)]
+    [LinearOrder (GraphLattices.SplitGraphAxis Block)]
+    (π : R) (extendedπIrreducible : Irreducible (algebraMap R S π))
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (extendedRealization : Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S →+ TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S
+        (GraphLattices.EllipticSourceHOne S
+          (GraphLattices.SplitGraphAxis Block)))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ GraphLattices.weightedMatrixSubmodule (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar) →
+        extendedRealization candidate ∈
+          GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix (GraphLattices.SplitGraphAxis Block)
+      (GraphLattices.SplitGraphAxis Block) R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π
+      (fun axis ↦ depth axis.1)
+      (GraphLattices.splitGraphCrossDepth Block
+        (IsDiscreteValuationRing.addVal S) depth scalar))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization (GraphLattices.matrixCoefficientExtension form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar)) →
+      forms.sum = GraphLattices.matrixCoefficientExtension form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        GraphLattices.squarefreeProductSum
+          (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryDivisorProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
+  GraphLattices.allDegree_dividedPowerMember_of_splitGraphDVR
+    Block π extendedπIrreducible depth scalar extendedRealization pullback
     pullbackInjective sourceCompatible divisors extendedRealizationMember
     form member baseClass dividedPower baseClassCompatible degree
     dividedPowerCompatible

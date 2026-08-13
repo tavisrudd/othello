@@ -79,7 +79,7 @@ def rectangularSplitSlopeCommutator
     Matrix I J R :=
   coefficient *
       (Matrix.scalar J secondScalar +
-        (uniformizer ^ secondDepth) • secondError) -
+        (uniformizer ^ secondDepth) • secondError.transpose) -
     (Matrix.scalar I firstScalar +
         (uniformizer ^ firstDepth) • firstError) * coefficient
 
@@ -94,7 +94,7 @@ theorem rectangularSplitSlopeCommutator_expansion
     rectangularSplitSlopeCommutator uniformizer firstDepth secondDepth
         coefficient firstScalar secondScalar firstError secondError =
       (secondScalar - firstScalar) • coefficient +
-        (uniformizer ^ secondDepth) • (coefficient * secondError) -
+        (uniformizer ^ secondDepth) • (coefficient * secondError.transpose) -
         (uniformizer ^ firstDepth) • (firstError * coefficient) := by
   unfold rectangularSplitSlopeCommutator
   rw [Matrix.mul_add, Matrix.add_mul]
@@ -125,9 +125,10 @@ theorem rectangularSplitSlopeCommutator_totalDepth_iff
   rw [rectangularSplitSlopeCommutator_expansion]
   have secondErrorDivides :
       MatrixEntriesDivisibleBy (uniformizer ^ (firstDepth + secondDepth))
-        ((uniformizer ^ secondDepth) • (coefficient * secondError)) :=
+        ((uniformizer ^ secondDepth) • (coefficient * secondError.transpose)) :=
     MatrixEntriesDivisibleBy.pow_add_smul uniformizer firstDepth secondDepth
-      (MatrixEntriesDivisibleBy.mul_right firstCoefficientDivides secondError)
+      (MatrixEntriesDivisibleBy.mul_right firstCoefficientDivides
+        secondError.transpose)
   have firstErrorDivides :
       MatrixEntriesDivisibleBy (uniformizer ^ (firstDepth + secondDepth))
         ((uniformizer ^ firstDepth) • (firstError * coefficient)) := by
@@ -262,7 +263,8 @@ def GraphBlockDepthCondition
       (coefficient first second)
 
 /-- The three actual graph-descent block conditions for every ordered pair in
-a finite split graph family. -/
+a finite split graph family.  The right slope error is transposed, matching
+the `A Tᵗ - T A` block in the graph-coordinate identity. -/
 def GraphBlockDescentCondition
     {R Index : Type*} [CommRing R]
     (Block : Index → Type*) [∀ index, Fintype (Block index)]
@@ -290,7 +292,8 @@ def GraphBlockSymmetric
   ∀ first second,
     (coefficient second first).transpose = coefficient first second
 
-/-- Finite-family assembly of the graph coefficient calculation.  The
+/-- Dependent-family assembly of the graph coefficient calculation, with a
+finite basis in every block.  The
 matrix-of-ideals depth prescription for every rectangular block is exactly
 equivalent to all three graph-descent block conditions for every ordered
 pair, including depth-zero blocks. -/
@@ -317,7 +320,7 @@ theorem graphBlockDepthCondition_iff_descentCondition
       (scalar first) (scalar second) (slopeError first) (slopeError second)).mpr
         (condition first second)
 
-/-- Symmetric matrix-of-ideals form of the finite-family assembly theorem. -/
+/-- Symmetric matrix-of-ideals form of the dependent-family assembly theorem. -/
 theorem symmetricGraphBlockDepthCondition_iff_descentCondition
     {R Index : Type*} [CommRing R]
     (Block : Index → Type*) [∀ index, Fintype (Block index)]
