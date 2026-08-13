@@ -28,6 +28,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusE
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -96,6 +97,24 @@ theorem relativeSixAxis_of_supplied_relative_geometry
     (geometry : Applications.RelativeSixAxisGeometricInput objects) :
     Applications.RelativeSixAxisConclusion objects :=
   Applications.relativeSixAxis_of_geometricInputs objects geometry
+
+/-- Exact conditional assembly of low-dimensional primitive-sixth vanishing.
+The classification into nef seeds, a point, projective bundles, and point
+blowups is supplied, as are the regular-singular root restriction, operation
+formulas, and divisor-tagging comparison.  Lean proves the induction through
+the classification and the transfer to every strictly Novikov-admissible
+specialization. -/
+theorem lowDimensionalVanishing_of_classification_and_specialization_inputs
+    {Object : Type*}
+    (geometry : Applications.LowDimensionalVanishingGeometry Object)
+    (input : Applications.LowDimensionalVanishingInput geometry) :
+    ∀ object, geometry.isPointCurveOrSurface object →
+      ∀ specialization : geometry.Specialization object,
+        geometry.isStrictlyNovikovAdmissible object specialization →
+          (geometry.specializedMonodromy object
+            specialization).sixthMultiplicity = 0 :=
+  Applications.lowDimensionalMultiplicity_eq_zero_of_classification_and_tagging
+    geometry input
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

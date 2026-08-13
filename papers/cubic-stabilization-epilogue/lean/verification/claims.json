@@ -270,15 +270,16 @@
     },
     {
       "manuscript_label": "prop:low-dimensional-vanishing",
-      "coverage": "fragment",
+      "coverage": "conditional_deduction",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_classification_and_specialization_inputs",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_characteristicRoots_sq_eq_one",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy"
       ],
-      "objects": "A supplied finite-dimensional complex framed-monodromy matrix and the sum of the characteristic-polynomial multiplicities of the two primitive sixth roots.",
-      "hypotheses": "For the exact spectral endpoint, every characteristic-polynomial root of the supplied framed-monodromy matrix has square one, equivalently lies in the set {1,-1}. A separate sufficient corollary instead assumes the entire matrix squares to the identity.",
-      "conclusion": "Lean proves the two chosen primitive sixth roots do not have square one, so the manuscript's plus-or-minus-one characteristic-root restriction forces their multiplicities and hence the primitive-sixth multiplicity to vanish. Lean also proves that matrix involutivity is one sufficient condition for that root restriction.",
-      "cautions": "This is the exact terminal spectral implication in the human proof, not the geometric proposition. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary. Lean does not construct the quantum connection, formal monodromy, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; classify minimal curves and surfaces; establish projective-bundle or blowup comparison formulas; or transfer intrinsic vanishing through divisor tagging to every strictly Novikov-admissible specialization."
+      "objects": "A supplied type of geometric objects with a predicate for points, smooth projective curves, and smooth projective surfaces; a nef-seed predicate; a named point and projective-bundle and point-blowup relations; dependent strictly Novikov-admissible specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
+      "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each strictly Novikov-admissible specialization.",
+      "conclusion": "For every supplied point, smooth projective curve, or smooth projective surface and every strictly Novikov-admissible specialization, the specialized framed monodromy has primitive-sixth multiplicity zero. Lean proves the classification induction, including the exact root-square-one spectral endpoint, and the final specialization transfer. A separate corollary proves that matrix involutivity is a stronger sufficient condition for the spectral restriction.",
+      "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary."
     },
     {
       "manuscript_label": "thm:nu6-birational-invariance",

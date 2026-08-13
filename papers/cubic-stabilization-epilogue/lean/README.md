@@ -26,15 +26,15 @@ formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
 - 0 absent from Lean;
-- 17 represented by exact but strictly weaker fragments;
-- 5 represented by conditional deductions with every external premise exposed
+- 16 represented by exact but strictly weaker fragments;
+- 6 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 0 absent; 17 fragmentary; 5 conditional;
-1 complete; 84 reviewer terminals.
+Checked coverage snapshot: 23 claims; 0 absent; 16 fragmentary; 6 conditional;
+1 complete; 85 reviewer terminals.
 
-The 84 reviewer-facing terminals currently verify:
+The 85 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -106,11 +106,11 @@ The 84 reviewer-facing terminals currently verify:
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;
-- the exact terminal low-dimensional spectral implication that a framed
-  monodromy whose characteristic roots lie in `{1,-1}` has zero
-  primitive-sixth multiplicity, plus involutivity as a separately marked
-  sufficient special case, without deriving the spectral restriction from
-  geometry;
+- the conditional low-dimensional classification induction from nef seeds,
+  points, projective bundles, and point blowups, followed by transfer to every
+  strictly Novikov-admissible specialization; the geometric classification,
+  operation formulas, divisor-tagging comparison, and nef spectral input are
+  explicit premises;
 - finite-fiber numerical Novikov coefficient pushforward and the algebraic
   core of strict Novikov admissibility and divisor-tag separation;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
@@ -132,7 +132,7 @@ of the marked finite-etale splitting extension and its geometric coefficient
 lattice, or the geometric
 cohomology realization and isogeny pullback, the geometric inputs to the
 universal `CH_0` argument,
-quantum comparison theorems,
+quantum comparison theorems, the geometric and comparison inputs to
 low-dimensional vanishing, or Cai's block diagonalization.
 
 From this package directory, build the pinned Lean library with:
