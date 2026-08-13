@@ -636,3 +636,136 @@ odd-capable witness `3∫_JΘ^{[3]}∧u∧z∧τ = ±1` is exhibited in §2.3. L
 rank three supersedes it for the family `ℰ`. The pass-5 lemma's use for the
 relative Ext object `E` on `M×M` (rank of `E` is not three) is **not** repaired
 here and remains an open audit item.
+
+## 9. Certificate bundle and replay
+
+This pass is a human proof. Its computational content is (a) the symbolic
+identities of §§2–3 and §6, verified by a new independent script, and (b) two
+**already committed** certificates it consumes.
+
+New artifact, replay from the repository root:
+
+```sh
+uv run --with sympy python3 notes/2026-08-12-c908-e-model-mutation-checks.py \
+  --out notes/2026-08-12-c908-e-model-mutation-checks.out \
+  --json notes/2026-08-12-c908-e-model-mutation-checks.json
+```
+
+| artifact | SHA-256 |
+|---|---|
+| `notes/2026-08-12-c908-e-model-mutation-checks.py`   | `2088d386f35b1cfb430f8bfdf02933cce21038b50149a82312fb44541129b366` |
+| `notes/2026-08-12-c908-e-model-mutation-checks.out`  | `75a30beda40cee33faddd167ec3a85df916ee33d642874255ac1b5dbea1ed759` |
+| `notes/2026-08-12-c908-e-model-mutation-checks.json` | `00b094f6dc808f5776f02dcf312a8823b6c86aed7dbf95489fafbe4790321a64` |
+
+Checks: Newton's `c_4`; Lemma N's `(3,5)` block; the two integrality shims;
+Lemma T for symbolic rank (including the identical vanishing at `r = 3` and
+the mod-two reduction at `r = 0`); Lemma X; Theorem F1's mod-two reduction;
+`\mathrm{rk}\,V = 3`; the `c_1(V)` solve; the `432 = 6·72` and `D^2 = 1`,
+`D·K = −3`, `χ = 3` numerology; and the parity of `C_s^2 = 5` used for
+primitivity of `[I]`.
+
+Consumed (unchanged, already committed with their own replay commands):
+
+| consumed artifact | SHA-256 | what this pass uses |
+|---|---|---|
+| `notes/2026-08-12-c908-lambda-main-term.sage` | `70ce714cd626265f1f15fbc06d58e4bdbf5f9a08a3501b6d9e121b3bf2dea553` | `N_𝒢 = 120·I`; mod-two `t`-independence (Lemma C) |
+| `notes/2026-08-12-c908-lambda-main-term.json` | `edbecaf4dc96e27ebbf40147a8b9223d79c5aa0b1b4be9021c71b9e209817d54` | same |
+| `notes/2026-08-12-c908-h3-compression.sage`   | `ae28a8025858b8a738660ba17b3fc58b6f0d649b6ba33773a378c8b8c0601378` | the pure antisymmetric tests `T_{a_k}` |
+| `notes/2026-08-12-c908-h3-compression.json`   | `5409ce0528f82327232827d1ee10695efcf12e8d1bc9cb72699e24ace7a391c2` | same |
+
+Independent replay of the new script: it is itself an independent
+re-derivation of the coefficient identities that §§2–3 and §6 assert by hand,
+and it caught one hand error (the `2r` term in Lemma T's `n^2`-coefficient,
+which turned the rank-three case from "even" into "identically zero"). No
+second backend is claimed for the two consumed certificates beyond the
+independent checks recorded in their own notes.
+
+Negative stated precisely: the search for an odd `(3,5)`-leg was carried out
+over the exact family class displayed at the end of §7, using the ten pure
+antisymmetric tests, which by pass-9 §4 span the readout; the stop condition is
+that every term of the mutation difference is provably even.
+
+## 10. `ej` + `tt` closeout
+
+**Free upgrades taken in this pass.**
+
+1. *Lemma T at rank three is an identity, not a congruence* (found by the
+   check script, §2.3). That is a strictly stronger normalization lemma than
+   the pass-5 twist lemma and it needs no cohomology of `M` at all. It should
+   replace pass-5 §3.2 wherever the family has rank three.
+2. *`G = b^*Θ − 2[X]` on `M`, and `G^2 ≡ 0 (mod 2)` on every base.* The span
+   divisor's base component is the resolved Gauss/theta class; its square is
+   twice the divided power. This removes one of the three terms of the
+   mutation difference for free and is reusable anywhere the corpus multiplies
+   two copies of a `Θ`-pullback.
+3. *Lemma S.* Against the pure antisymmetric tests, **any** `σ`-symmetric
+   degree-four coefficient dies mod two. This is a general kill rule for the
+   `c_2^{(3,1)}` channel and is much cheaper than evaluating coefficients; it
+   is the reason the deep-stratum corrections never had to be computed.
+4. *The corpus's "`𝒢` does not descend" is corrected* (§5.1), with the
+   `W(E_6)`-root mechanism as the explanation of the number six.
+
+**What Terence Tao would ask, and the answers.**
+
+- *"Why is rank three special?"* Because `c_4` is a degree-four symmetric
+  function and the twist derivative of its `(3,5)` block has coefficients
+  `2r−6` and `2r−3−\binom r2`, whose common root is `r = 3`. The universal
+  family's rank is `3` because `v = [I_ℓ]+[S(I_ℓ)]` has rank three — i.e. the
+  moduli problem hands us exactly the rank at which the normalization
+  ambiguity is invisible. That is a genuine coincidence of the problem, and it
+  is what makes the transfer clean.
+- *"You never computed the hard object; is the proof really finished?"* The
+  proof deliberately replaces evaluation by two invariance principles
+  (`σ`-symmetry, and the `Θ`-pullback square). The one place where a value is
+  used, `c_1(V) mod 2`, is protected by a support argument that makes both
+  possible values work. This is the structural-mechanism-over-certificate
+  preference, honoured.
+- *"What is the right general statement?"* Lemmas N, X, T are statements about
+  any smooth `X` with `H^1 = H^5 = 0` and any smooth base. They say: the
+  `(3,5)` block of `c_4` is linear in the odd Chern-character legs with
+  coefficients read off the slice restriction, and mutation along an
+  exceptional object acts on those legs by `∓1`. That is the reusable content.
+- *"Where would a counterexample live?"* Only in a family whose K-class is not
+  of the displayed mutation shape — i.e. not obtained from the `β+γ` model by
+  exceptional-object mutation, `X`-twist, shift and base twist. Non-canonical,
+  deck-asymmetric cycles special to the exotic member remain untouched (pass-5
+  §5).
+
+## 11. Mystery ledger
+
+- **Settled: the λ-bit for the universal family.** `λ_ℰ = 0` (Theorem F2).
+  Extraction item F, which the literature audit reported as a clean negative
+  ("no source states the induced map on the `H^3(X)`-legs"), is discharged by
+  derivation: the mutation acts on those legs by `∓1` and by nothing else
+  (§2.1), and the residual even-block change is fully accounted for.
+- **Settled: why the mutation is harmless.** Not because the Serre functor is
+  `±1` on `J` — that remains unproved and unneeded — but because the readout
+  only sees the odd `X`-legs linearly, and the mutation's three moves are an
+  `X`-twist (exactly invisible), a base pullback (no odd legs at all) and a
+  shift (a sign).
+- **Settled: rank three is the invisibility rank** for the base-twist
+  ambiguity, identically. Surprising and now explained (§10).
+- **Settled: a real defect in the pass-5 twist lemma** (its `r = 3` branch
+  assumed `H^3(M,\mathbf Z) = b^*∧³Λ`, false on the corrected lattice), with an
+  explicit odd-capable witness and a replacement.
+- **Settled: the corpus's descent claim was wrong**; the six-fold cover's deck
+  group is not generated by the factor swap, and the span sheaf depends only on
+  the `E_6` root `ℓ'−ℓ`.
+- **Open (owned by the pass-5 relative-Ext line):** the twist lemma for the
+  relative Ext object `E = R\mathcal Hom_{π_{12}}(π_{13}^*ℰ,π_{23}^*ℰ)[1]` on
+  `M×M` is **not** repaired by Lemma T (its rank is not three) and still rests
+  on the refuted `H^3(M,\mathbf Z) = b^*∧³Λ` step. Evidence gap: either an
+  analogue of Lemma T at the relevant rank, or a direct check that the
+  correction legs pair evenly through `Sat/L_3∧³Λ`. This does not affect
+  Theorem E of pass 5 (whose conclusion also follows from Theorem C for
+  pencil-defined classes), but it does affect the `{0, I}` pinning for `E`.
+- **Open (small, cheap):** the exact value `c_2(V) ≡ G(C_1+C_2)` and
+  `c_1(V) = 3[I] − 12C_2` are computed here but not certified; a bounded
+  extension of the main-term certificate (`ι_*(d^4)` plus a `p_{B*}`) would
+  confirm them. Nothing in Theorem F2 depends on the values.
+- **Open (inherited, unchanged):** the `(1,5)` channel can still only be
+  populated by a **non-deformation-canonical, deck-asymmetric** cycle special
+  to the exotic member (pass-5 §5). Every named construction is now closed.
+- No manufactured mysteries: the surprising items this pass produced (the
+  rank-three identity, the `Θ`-pullback square, the descent correction) are all
+  explained above.
