@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 96 reviewer-facing Lean terminals.  These counts summarize the
+There are 98 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 96 reviewer terminals.
+1 complete; 98 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -61,7 +61,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   identifying the initial form of a geometric specialized series with its
   finite lowest-support exponential combination in divisor tagging, the
   common-field and bulk
-  gauge comparisons, formal and numerical base-change comparisons, strict
+  gauge comparisons, formal base-change comparisons, completed numerical
+  convolution/topology/continuity and the geometric numerical base-change
+  comparison, strict
   Novikov operations, cubic packet comparison, and the geometric/connection
   inputs that restrict monodromy eigenvalues to `{1,-1}` in dimensions at
   most two.  The exact terminal spectral vanishing implication is now

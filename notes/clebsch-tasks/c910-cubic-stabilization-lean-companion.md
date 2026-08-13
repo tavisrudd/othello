@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 51 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 52 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 96 audited terminals.  The rejecting manuscript inventory covers all
+exports 98 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -148,6 +148,12 @@ the finite exponential combination imply nonvanishing, zero reflection, and
 full injectivity of the additive tagged map.  The actual filtration,
 associated graded ring, valuation, geometric specialization, and proof that
 they induce these proxy data are not represented.
+Finite-fiber numerical pushforward now extends to coefficient-level completed
+families with finite nonzero support below each degree cutoff.  Lean proves the
+exact fiber-sum formula, preservation of this support condition, and additivity.
+The formal objects carry no topology or convolution multiplication, so
+continuity, inverse-limit compatibility, Gromov--Witten descent, quantum
+derivations, and base change of the comparison maps remain outside the result.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -175,6 +181,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/ProLaurent.lean
     Quantum/MonodromyBaseChange.lean
     Quantum/NumericalNovikov.lean
+    Quantum/NumericalNovikovCompletion.lean
     Quantum/FormalBaseShift.lean
     Quantum/NovikovAdmissibility.lean
     Quantum/ExponentialDivisorTags.lean
@@ -257,6 +264,10 @@ are current, and the committed paper export verifies byte-for-byte in
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
+- **Numerical completion:** additive coefficient pushforward is settled for the
+  finite-below support model.  The missing mathematical structure is precisely
+  completed convolution/topology and its compatibility with Gromov--Witten
+  coefficients, derivations, and comparison maps.
 - **Relative geometry:** unsettled.  The six-axis local-system argument and
   Voisin implication are mathematically human proofs but sit beyond Mathlib's
   present abelian-scheme and decomposition-of-diagonal APIs.

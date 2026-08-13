@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 96 reviewer terminals.
+1 complete; 98 reviewer terminals.
 
-The 96 reviewer-facing terminals currently verify:
+The 98 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -114,8 +114,11 @@ The 96 reviewer-facing terminals currently verify:
   strictly Novikov-admissible specialization; the geometric classification,
   operation formulas, divisor-tagging comparison, and nef spectral input are
   explicit premises;
-- finite-fiber numerical Novikov coefficient pushforward and the algebraic
-  core of strict Novikov admissibility and individual-class divisor-tag
+- finite-fiber numerical Novikov coefficient pushforward on ordinary functions
+  and on completed coefficient families with finite support below every degree
+  cutoff, including the exact coefficient formula and additivity; no topology,
+  continuity, convolution product, or inverse-limit object is represented;
+- the algebraic core of strict Novikov admissibility and individual-class divisor-tag
   separation; for every finite injective family of divisor-pairing vectors
   over an infinite characteristic-zero field, a kernel-checked choice of one
   abstract separating `K`-linear functional and Vandermonde proof that the

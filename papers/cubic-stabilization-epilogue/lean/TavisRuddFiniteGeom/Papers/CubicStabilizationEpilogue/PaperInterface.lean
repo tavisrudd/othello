@@ -25,6 +25,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedG
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
@@ -1739,6 +1740,43 @@ theorem numericalNovikov_coefficientPushforward_apply
     data.coefficientPushforward series numerical =
       ∑ degree ∈ data.fiber numerical, series degree :=
   data.coefficientPushforward_apply series numerical
+
+/-- Finite-fiber pushforward sends a completed homological coefficient family
+to a completed numerical coefficient family.  Its coefficient is the exact
+finite-fiber sum, and its nonzero coefficients below every numerical degree
+cutoff form a finite set.  This is a coefficient-level support statement; no
+topology, multiplication, or continuity structure is represented. -/
+theorem numericalNovikov_completedCoefficientPushforward_apply_and_finiteBelow
+    {Homology Numerical R : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [AddCommGroup R]
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    (series : Quantum.CompletedNovikovSeries
+      Homology R data.homologicalDegree)
+    (numerical : Numerical) (cutoff : ℕ) :
+    (data.completedCoefficientPushforward series).coefficient numerical =
+        ∑ homological ∈ data.fiber numerical,
+          series.coefficient homological ∧
+      Set.Finite {degree |
+        (data.completedCoefficientPushforward series).coefficient degree ≠ 0 ∧
+          data.numericalDegree degree ≤ cutoff} :=
+  ⟨data.completedCoefficientPushforward_apply series numerical,
+    (data.completedCoefficientPushforward series).finite_below cutoff⟩
+
+/-- Completed numerical coefficient pushforward is additive.  The statement
+uses only pointwise addition and the finite-below support condition; it does
+not assert compatibility with a convolution product. -/
+theorem numericalNovikov_completedCoefficientPushforward_add
+    {Homology Numerical R : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [AddCommGroup R]
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    (left right : Quantum.CompletedNovikovSeries
+      Homology R data.homologicalDegree) :
+    data.completedCoefficientPushforward (left + right) =
+      data.completedCoefficientPushforward left +
+        data.completedCoefficientPushforward right :=
+  data.completedCoefficientPushforward_add left right
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
