@@ -1,4 +1,5 @@
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Mathlib.RingTheory.PowerSeries.Derivative
 
 /-!
 # Constant-coefficient formal flat gauges
@@ -8,10 +9,10 @@ coefficients
 
 `Gₙ = (-1)ⁿ / n! · Aⁿ`
 
-are the standard coefficients for the normalized formal solution of
-`dG/dt = -A G`.  Lean proves exactly that the constant term is the identity and
-that `(n+1)Gₙ₊₁ = -A Gₙ`.  No formal power series, truncation, derivative, or
-uniqueness statement is represented.  This is the algebraic constant-
+are the coefficients of an entrywise formal power-series matrix.  Lean proves
+that the constant term is the identity, that `(n+1)Gₙ₊₁ = -A Gₙ`, and that
+entrywise formal differentiation gives `dG/dt = -A G`.  No truncation,
+uniqueness, or invertibility statement is represented.  This is the algebraic constant-
 coefficient case of the recursive finite-level gauge construction; no quantum
 product, varying bulk connection, filtered coefficient quotient, Laurent loop
 coordinate, convergence, or analytic gauge is represented.  Each coefficient
@@ -35,6 +36,26 @@ noncomputable def constantFlatGaugeCoefficient
     Matrix Index Index R :=
   algebraMap ℚ R (((-1 : ℚ) ^ degree) / degree.factorial) •
     connection ^ degree
+
+/-- The entrywise formal power-series matrix with the normalized constant flat
+gauge coefficients. -/
+noncomputable def constantFlatGaugeSeries
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) : Matrix Index Index (PowerSeries R) :=
+  fun row column => PowerSeries.mk fun degree =>
+    constantFlatGaugeCoefficient connection degree row column
+
+/-- Coefficient extraction from the formal gauge series recovers the
+normalized coefficient matrix. -/
+theorem constantFlatGaugeSeries_coefficient
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) (degree : ℕ) :
+    (constantFlatGaugeSeries connection).map (PowerSeries.coeff degree) =
+      constantFlatGaugeCoefficient connection degree := by
+  ext row column
+  simp [constantFlatGaugeSeries]
 
 /-- The constant term of the normalized flat gauge is the identity matrix. -/
 @[simp]
@@ -88,6 +109,25 @@ theorem constantFlatGaugeCoefficient_map
   rw [hscalar]
   congr 1
   exact Matrix.map_pow connection homomorphism.toRingHom degree
+
+/-- Entrywise formal differentiation of the constant flat gauge series equals
+left multiplication by the negative constant connection matrix. -/
+theorem constantFlatGaugeSeries_derivative
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) :
+    (constantFlatGaugeSeries connection).map PowerSeries.derivativeFun =
+      connection.map (fun value => PowerSeries.C (-value)) *
+        constantFlatGaugeSeries connection := by
+  ext row column degree
+  rw [Matrix.map_apply, PowerSeries.coeff_derivativeFun]
+  rw [Matrix.mul_apply]
+  simp only [Matrix.map_apply, map_sum,
+    constantFlatGaugeSeries, PowerSeries.coeff_mk,
+    PowerSeries.coeff_C_mul]
+  simpa [Matrix.mul_apply, Matrix.smul_apply, mul_comm] using
+    congrArg (fun matrix => matrix row column)
+    (constantFlatGaugeCoefficient_succ connection degree)
 
 end Quantum
 

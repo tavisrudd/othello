@@ -137,6 +137,8 @@ The 120 reviewer-facing terminals currently verify:
   shift, and block multiplicity formulas; for a constant matrix over a
   commutative rational algebra, the normalized exponential coefficients are
   constructed, proved to satisfy the formal flat recursion in every degree,
+  assembled into an entrywise formal power-series matrix satisfying the exact
+  constant-coefficient differential equation,
   and proved compatible with arbitrary rational-algebra homomorphisms,
   without claiming a varying quantum product or filtered analytic gauge;
 - the exact projective-bundle and blowup multiplicity formulas from supplied

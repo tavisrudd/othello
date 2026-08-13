@@ -2300,11 +2300,13 @@ theorem adicFormalBaseShift_bulkSystem_compatible_and_charpoly
 
 /-- For a constant finite square connection matrix over a commutative
 `ℚ`-algebra, Lean constructs the normalized exponential coefficients and
-proves `G₀=1`, the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree, and
-coefficient compatibility under every rational-algebra homomorphism.  No varying
+proves `G₀=1`, the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree,
+assembles the entrywise formal power-series matrix and proves its exact
+constant-coefficient differential equation, and proves coefficient compatibility
+under every rational-algebra homomorphism.  No varying
 quantum product, filtered quotient, Laurent loop
-coordinate, formal power series, truncation, derivative, uniqueness,
-convergence, or analytic gauge is constructed. -/
+coordinate, truncation, uniqueness, invertibility, convergence, or analytic
+gauge is constructed. -/
 theorem constantFlatGauge_normalized_and_recursion
     {Index R : Type*} [Fintype Index] [DecidableEq Index]
     [CommRing R] [Algebra ℚ R]
@@ -2314,6 +2316,14 @@ theorem constantFlatGauge_normalized_and_recursion
         (degree + 1 : R) •
             Quantum.constantFlatGaugeCoefficient connection (degree + 1) =
           -connection * Quantum.constantFlatGaugeCoefficient connection degree) ∧
+      (∀ degree : ℕ,
+        (Quantum.constantFlatGaugeSeries connection).map
+            (PowerSeries.coeff degree) =
+          Quantum.constantFlatGaugeCoefficient connection degree) ∧
+      (Quantum.constantFlatGaugeSeries connection).map
+          PowerSeries.derivativeFun =
+        connection.map (fun value => PowerSeries.C (-value)) *
+          Quantum.constantFlatGaugeSeries connection ∧
       ∀ (S : Type*) [CommRing S] [Algebra ℚ S]
           (homomorphism : R →ₐ[ℚ] S) (degree : ℕ),
         (Quantum.constantFlatGaugeCoefficient connection degree).map
@@ -2322,6 +2332,8 @@ theorem constantFlatGauge_normalized_and_recursion
             (connection.map homomorphism.toRingHom) degree :=
   ⟨Quantum.constantFlatGaugeCoefficient_zero connection,
     Quantum.constantFlatGaugeCoefficient_succ connection,
+    Quantum.constantFlatGaugeSeries_coefficient connection,
+    Quantum.constantFlatGaugeSeries_derivative connection,
     fun _ _ _ homomorphism mappedDegree =>
       Quantum.constantFlatGaugeCoefficient_map
         homomorphism connection mappedDegree⟩
