@@ -1,0 +1,54 @@
+// C907 one-tripod pair-of-pants and residual-Rees transition replay.
+// Replay:
+// nix shell nixpkgs#singular -c Singular -q \
+//   notes/2026-08-12-c907-one-tripod-log-atlas.sing
+
+// The simultaneous 0/1 incidence bridge.  Here s=delta^a and t=delta^b
+// are monomials after finite ramification, not extra boundary coordinates.
+ring r0=0,(s,t,b0,b1,binf),dp;
+ideal incidence=s*b0+t*b1-1,binf-s*t*b0;
+poly secondInfinity=binf-t+t^2*b1;
+if (reduce(secondInfinity,std(incidence))==0)
+{ print("TRIPOD incidence bridge b_infinity=s*t*b0=t-t^2*b1 PASS"); }
+else { print("TRIPOD incidence bridge FAIL"); }
+
+// At the zero-ray faces s=1 or t=1, the bridge recovers the generic
+// pair-of-pants equation B+U=1, rather than a strict 0 or 1 initial.
+ideal zero0=subst(incidence,s,1);
+poly g0=b0+t*b1-1;
+ideal zero1=subst(incidence,t,1);
+poly g1=s*b0+b1-1;
+if (reduce(g0,std(zero0))==0 && reduce(g1,std(zero1))==0)
+{ print("TRIPOD zero-ray faces specialize to generic pair-of-pants PASS"); }
+else { print("TRIPOD zero-ray specialization FAIL"); }
+
+// The three affine charts of Bl_(delta,U,V).  On the delta/U overlap,
+// Z=U/delta, W=V/delta, r=delta/U, v=V/U, hence Z*r=1 and W=Z*v.
+ring r1=0,(Z,W,r,v),dp;
+ideal reesDU=Z*r-1,W-Z*v;
+poly inverseDU=Z*v-W;
+if (reduce(inverseDU,std(reesDU))==0)
+{ print("REES delta-U transition Z*r=1 W=Z*v PASS"); }
+else { print("REES delta-U transition FAIL"); }
+
+// The U/V overlap: s=delta/V=r/v and w=U/V=1/v.
+ring r2=0,(r,v,s,w),dp;
+ideal reesUV=s*v-r,w*v-1;
+if (reduce(s*v-r,std(reesUV))==0 && reduce(w*v-1,std(reesUV))==0)
+{ print("REES U-V transition s=r/v w=1/v PASS"); }
+else { print("REES U-V transition FAIL"); }
+
+// Four projective graph generators are related by the displayed chart units.
+ring r3=0,(d,Y,B,C,A,D,L,S,Q),dp;
+poly PBC=d^2*Y*B*C*(L-S)-d^2*Q-Y*B*C*(1-B)*(1-C);
+poly PAC=d^2*Y*A*C*(L-S)-d^2*Q*A^2-Y*C*(A-1)*(1-C);
+poly PBD=d^2*Y*B*D*(L-S)-d^2*Q*D^2-Y*B*(1-B)*(D-1);
+poly PAD=d^2*Y*A*D*(L-S)-d^2*Q*A^2*D^2-Y*(A-1)*(D-1);
+ideal inverses=A*B-1,D*C-1;
+poly AB=PAC-A^2*PBC;
+poly CD=PBD-D^2*PBC;
+poly ABD=PAD-A^2*D^2*PBC;
+if (reduce(AB,std(inverses))==0 && reduce(CD,std(inverses))==0 && reduce(ABD,std(inverses))==0)
+{ print("GRAPH projective-chart generators differ by inverse-chart units PASS"); }
+else { print("GRAPH projective-chart transition FAIL"); }
+quit;

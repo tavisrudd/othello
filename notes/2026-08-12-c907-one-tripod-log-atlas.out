@@ -1,0 +1,5 @@
+TRIPOD incidence bridge b_infinity=s*t*b0=t-t^2*b1 PASS
+TRIPOD zero-ray faces specialize to generic pair-of-pants PASS
+REES delta-U transition Z*r=1 W=Z*v PASS
+REES U-V transition s=r/v w=1/v PASS
+GRAPH projective-chart generators differ by inverse-chart units PASS

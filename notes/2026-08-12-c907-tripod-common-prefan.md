@@ -140,7 +140,7 @@ equality of saturated graph closures.  The nonmonomial dense transitions
 \[
 \delta^a b_0+\delta^b b_1=1,qquad
 b_\infty=\delta^{a+b}b_0,qquad
-b_\infty=\delta^b-\delta^{a+b}b_1
+b_\infty=\delta^b-\delta^{2b}b_1
 \tag{10}
 \]
 
