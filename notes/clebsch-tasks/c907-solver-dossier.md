@@ -85,11 +85,28 @@ map; proving that such a map is consistent with Gamma/Orlov comparison is now
 a compulsory regression.  See
 `../2026-08-13-c907-cubic-point-primary-collision.md`.
 
+This is not a leading-order artifact.  The exact Gamma-framed point solution
+is hypergeometric and has nonzero connection coefficients on both
+primitive-sixth zero-exponential branches.  Any supported realization must
+therefore correct ordinary ambient Gamma pushforward, rather than merely
+refine its formal projector.  See
+`../2026-08-13-c907-point-gamma-primary-nonvanishing.md`.
+
 The support-local construction must retain the full absolute coniveau
 filtration.  Quotienting by objects whose relative fibres have dimension at
 most two is impossible: horizontal divisors then trivialize the pulled-back
 base hyperplane, so the endpoint operator is zero rather than `J_3`.  See
 `../2026-08-13-c907-relative-fibre-cutoff-no-go.md`.
+
+The opposite rationality attack is now compressed to one descent problem.
+Projection from a line becomes a norm conic
+`U^2-delta V^2=16 A Delta/delta`; the rational double cover defined by
+`sqrt(delta)` chooses a point, while the quintic `Delta` remains in the
+descent coefficient.  Appending independent variables changes neither the
+Brauer class nor the quadratic cover.  If pursuing the positive route, test
+two-variable stable linearization of this explicit involution or the exact
+codimension-three Cayley rank jump; do not repeat raw secant parametrization.
+See `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
 
 ## Rejection tests
 

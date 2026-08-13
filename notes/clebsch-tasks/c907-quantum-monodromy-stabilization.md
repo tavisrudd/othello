@@ -254,6 +254,16 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   its pushed-forward object.  Compatibility of that distinction with
   Gamma/Orlov Gysin maps is the exact consistency gate.  See
   `../2026-08-13-c907-cubic-point-primary-collision.md`.
+- The collision persists in the actual Gamma-framed central solution, not
+  only in numerical leading projection.  The point solution is
+  `z^(-3/2) 2F3(1/3,2/3;1,1,1;27q/z^2)`.  Its two algebraic asymptotic
+  coefficients on the zero-exponential primitive-sixth branches are
+  `Gamma(1/3)/Gamma(2/3)^4` and
+  `Gamma(-1/3)/Gamma(1/3)^4`, both nonzero.  Therefore ordinary ambient
+  Gamma pushforward cannot be the support-annihilating map required by the
+  support square; the corrected bivariant Gysin map must contain an explicit
+  defect term.  See
+  `../2026-08-13-c907-point-gamma-primary-nonvanishing.md`.
 - A concrete conditional source is now isolated.  For a model
   `f:Y -> P^2`, tensor by `L=f^*O(1)` gives `N_L=1-tau_L`: projection formula
   makes it exactly block diagonal under Orlov blowups, its endpoint on
@@ -316,6 +326,19 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   square lands in a point packet which clean primitive excision must kill.
   The nodal Clifford socle and stationary `A_5` square are exactly the two
   local strictness tests; they are not established counterexamples.
+- The adversarial opposite theorem has an exact positive normal form but no
+  proof.  Projection from a line writes the cubic as a conic over
+  `K=C(P^2)` with norm equation
+  `U^2-delta V^2=16 A Delta/delta`, where `delta` is the conic branch of a
+  rational quadratic cover and `Delta` is the plane-quintic discriminant.
+  The cover chooses a point and rationalizes the conic; the quintic remains
+  entirely in the descent coefficient.  Independent `P^2` variables cannot
+  split the Brauer or quadratic class.  The remaining positive route is
+  two-variable stable linearization of the resulting rational-cover
+  involution, or a codimension-three Cayley rank-jump trade.  This can only
+  target special universally `CH_0`-trivial cubics, since very general cubic
+  threefolds are now known stably irrational.  See
+  `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
 
 ## Active frontier: `m=2`
 
