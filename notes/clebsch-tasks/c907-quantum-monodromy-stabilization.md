@@ -244,6 +244,16 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   `P^2`-map, where the hyperplane is only a movable system and arbitrary
   threefold centers can reappear.  See
   `../2026-08-13-c907-line-bundle-framed-jordan-strictness.md`.
+- The base-ideal extension problem has a sharper support-local solution.  On
+  a graph resolution `W -> P^5` of the rational `P^2`-map, `N_L^2` tensors
+  every exceptional-divisor generator with a general base-point fibre, whose
+  support has dimension at most two.  Hence a localizing, Orlov-additive,
+  `K_0`-linear/derived-Gysin `Phi_6` packet functor which vanishes on all such
+  supports forces `N_L^2=0` on the entire resolved packet, including all
+  extension mixing.  Relative factorization retains the endpoint `J_3`, so
+  this one projector theorem implies `m=2`.  An idempotent only on the formal
+  solution space is insufficient because it cannot see support.  See
+  `../2026-08-13-c907-divisorial-support-square-theorem.md`.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
   geometry but projects to zero in the minimal Silver category.
@@ -297,16 +307,17 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, attack the new line-bundle-framed localization through one
-three-section base-ideal theorem.  Construct the exact Gamma/cyclotomic
-projector compatible with formal monodromy, Orlov component maps, projective
-Kunneth, and Gysin support; extend it through the Rees resolution of the
-rational `P^5 dashrightarrow P^2` map; and prove the successive moving-frame
-Orlov extensions split as ungraded `K[N]`-modules with no cross-stage joining
-and no `J_3` from threefold base centers.  Linear projection already creates
-a raw `K_0` `J_3`, and a three-section ideal can contain repeated cubic
-threefold centers, so this is a genuine theorem rather than a dimension
-corollary.  See `../2026-08-13-c907-base-ideal-framing-obstruction.md`.
+For Silver, attack one exact localizing projector theorem.  Construct a
+`Phi_6` packet assignment on supported perfect objects which commutes with
+formal monodromy and tensor by the base hyperplane, is `K_0`-linear or
+derived-Gysin compatible for the point-support square, preserves Orlov
+component maps and projective Kunneth products, and vanishes on every possibly
+singular or nonreduced support of dimension at most two.  The divisorial
+support-square theorem then kills every base-ideal extension at once, while
+relative factorization preserves the endpoint `J_3`.  Linear projection's
+raw `K_0` `J_3` is the regression showing why formal-space or ordinary
+`K_0` projectors are insufficient.  See
+`../2026-08-13-c907-base-ideal-framing-obstruction.md`.
 Relative weak factorization over `P^2` then makes every later arrow strict and
 every threefold center square-zero.  Use `Bl_(X x p)(X x P^2)` as the first
 ungraded extension regression and the twisted relative `P^2`-bundle section

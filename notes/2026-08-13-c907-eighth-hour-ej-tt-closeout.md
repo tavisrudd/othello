@@ -68,6 +68,15 @@ final cancellation.
    projector compatible with Orlov maps, products, and Gysin support would
    close strictness and carrier exclusion simultaneously on every relative
    arrow.
+7. **Divisorial support-square theorem.**  On any graph resolution
+   \(W\to\mathbf P^5\) of the rational \(\mathbf P^2\)-map,
+   \(N_L^2\) tensors an exceptional-divisor generator with a general point
+   fibre.  Its support has dimension at most two.  Therefore a localizing,
+   Orlov-additive, \(K_0\)-linear/derived-Gysin cyclotomic projector whose
+   point-support square vanishes on all lower-dimensional supports forces
+   \(N_L^2=0\) on the entire resolved
+   packet, including all cross-stage extensions.  Relative factorization
+   preserves the endpoint \(J_3\), giving the conditional m=2 contradiction.
 
 ## EJ: what became newly reachable
 
@@ -111,10 +120,11 @@ final cancellation.
   admission; exact extension obstruction; meaningful pilot hierarchy;
   codimension-two algebraic exchange; higher-codimension no-go; exact
   \(K_0\) line-bundle strictness and curve-supported square.
-- **Open, owning next pass:** exact Gamma/cyclotomic projector compatible with
-  Orlov and Gysin maps; projective/Kunneth endpoint compatibility; transport
-  of the movable hyperplane through the base-ideal Rees resolution; universal
-  threefold support-local square vanishing; presentation independence.
+- **Open, owning next pass:** construct a cyclotomic projector localizing on
+  supported perfect objects, commuting with tensor by the base hyperplane and
+  preserving Orlov component maps; prove projective/Kunneth and relative
+  factorization compatibility.  A projector only on formal solution spaces
+  is too weak.
 - **Separate high-value leaf:** oriented tame residual-pair identification for
   the toric \(\mathbf P^3\) theorem.
 - **No finite bookkeeping mystery remains:** further mask enumeration, Fano
@@ -123,11 +133,12 @@ final cancellation.
 
 ## Highest-EV next theorem
 
-Construct an exact cyclotomic moving-frame packet for principalizations of
-three-section linear systems.  Prove its successive codimension-two Orlov
-extensions split as ungraded \(K[N]\)-modules with no cross-stage joining,
-and that every threefold base-center term is \(J_3\)-free.  Combined with
-relative weak factorization and the line-bundle lemma, this is the shortest
-visible route to the actual `m=2` theorem.  The cubic base-ideal example shows
-that the theorem genuinely contains the universal carrier problem: it is a
-precise localization, not a shortcut.
+Construct an exact localizing \(\Phi_6\)-packet assignment on supported
+perfect categories which vanishes on all supports of dimension at most two,
+is \(K_0\)-linear or derived-Gysin compatible so \(N^2\) factors through the
+point fibre, and preserves Orlov component maps and projective products.  The
+divisorial support-square theorem then
+kills every base-ideal extension simultaneously and, with relative weak
+factorization, proves the actual `m=2` theorem.  This is stronger than a
+formal generalized-eigenspace projector but narrower and cleaner than a
+classification of arbitrary threefold carriers.
