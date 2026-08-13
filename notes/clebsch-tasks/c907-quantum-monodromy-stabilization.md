@@ -473,12 +473,15 @@ failure occurs after two arrows: the first exceptional parameter is nonzero
 in the first fixed-`q` receiver but becomes a formal ambient variable in the
 second, and an arbitrary formal series cannot be evaluated at that nonzero
 value.  Scalar horizontal pairings are constant, but constants forget which
-Stokes embedding of `P_6` was measured.  Highest EV is to prove that the
-actual Stokes mutation word between incident receivers preserves the rank
-restriction; alternatives are an iterated Laurent/Hahn receiver, a
-simultaneous master-space comparison, or a direct microlocal natural
-transformation `P_6 -> 1`.  The all-codimension and product audits need not be
-repeated.  Exact failed repair and AA split:
+Stokes embedding of `P_6` was measured.  A valley/peak audit localizes this:
+valleys use the same all-formal ambient functor, while a peak admits two
+one-analytic-variable radial legs.  The remaining peak lemma must compare the
+incoming and outgoing formal-primary subspaces through their confluence
+corner; scalar germ-faithfulness alone is insufficient.  Highest EV is this
+radial confluence/nearby-cycle rank comparison.  Alternatives are an iterated
+Laurent/Hahn receiver, simultaneous master space, or a direct microlocal
+natural transformation `P_6 -> 1`.  The all-codimension and product audits
+need not be repeated.  Exact failed repairs and AA split:
 `../2026-08-13-c907-formal-constant-banking.md`.
 
 The older point-purity degeneration and normal-splitting program remains

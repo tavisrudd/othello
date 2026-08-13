@@ -309,6 +309,51 @@ Therefore `q`-rotation solves the finite global-phase bookkeeping but not the
 composition gate.  It becomes useful only after a common parameter receiver
 or a parameter-functorial `P_6 -> 1` morphism is constructed.
 
+### Valley banking and radial peak legs
+
+A sharper proposal separates a weak-factorization zigzag into valleys and
+peaks.  At a valley, both incident arrows use the variety as their ambient
+base with all of its Novikov variables formal.  Per Artin quotient the
+nilpotent exponential corrections terminate, and the same normalized
+regular-singular ambient fiber functor is used on both sides.  The one-arrow
+whole-block covector identity therefore appears sufficient at valleys; no
+primitive packet is specialized at the all-formal origin.
+
+At a peak, the two blow-up structures have exceptional parameters `q` and
+`q'`.  The proposal connects the receivers by a radial `q`-leg with `q'`
+formal, followed by a radial `q'`-leg with `q` formal.  This is a genuine
+improvement over a two-analytic-variable receiver.  On each punctured leg the
+new exceptional exponential has fixed argument, nilpotent Artin corrections
+do not rotate its rays, and the other exceptional direction remains in the
+formal filtration.  In particular the `(-2)`-curve regression above does not
+by itself kill this construction.
+
+The proposed peak lemma—commutation of parameterized summation with Taylor
+truncation **at the level of scalar pairings**—is nevertheless insufficient.
+At the common formal corner the scalar rank covector can extend uniquely
+while the incoming `q`-primary subspace and outgoing `q'`-primary subspace
+confluence.  A nontrivial confluence/Stokes matrix can relate them.  The rank
+two shear (9) is compatible with constant scalar values on both punctured
+legs; concentrating the shear at the turning corner changes the restriction
+Boolean without changing the extended covector.
+
+Thus valley banking localizes the global gate to the peaks, but the correct
+peak statement must include the subspace:
+
+\[
+ \mathfrak r|_{P_6^{(q)}}\ne0
+ \quad\Longleftrightarrow\quad
+ \mathfrak r|_{P_6^{(q')}}\ne0,
+ \tag{12}
+\]
+
+or, more structurally, a confluence nearby-cycle map intertwining the two
+radial formal-primary packets and the rank covector.  Scalar
+summation--truncation faithfulness is one input to (12), not a proof of it.
+One further coefficient check is required as well: the two blow-up monomial
+charts must meet at a common completed numerical-Novikov corner; this cannot
+be inferred solely from the existence of the two contractions.
+
 ## Sources
 
 - H. Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555v3,

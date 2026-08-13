@@ -72,9 +72,12 @@ nevertheless remain open at the same global gate: after two arrows, the first
 nonzero exceptional parameter becomes formal and adjacent receivers may
 embed the intermediate `z=0` packet differently by Stokes shears.  Horizontal
 scalar pairings are constant, but this does not construct the functorial
-rank morphism `P_6 -> 1` needed to telescope.  The next attack is the actual
-Stokes mutation word; alternatives are an iterated Laurent/Hahn receiver,
-simultaneous master space, or direct microlocal rank morphism.  Current card:
+rank morphism `P_6 -> 1` needed to telescope.  A valley/peak audit now makes
+valleys canonical and reduces every peak to two one-variable radial legs;
+the exact residue is the confluence nearby-cycle comparison of their two
+formal-primary subspaces, not scalar germ-faithfulness alone.  Alternatives
+are an iterated Laurent/Hahn receiver, simultaneous master space, or direct
+microlocal rank morphism.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
 
