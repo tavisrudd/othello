@@ -297,12 +297,18 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, attack the new line-bundle-framed localization.  Construct the
-exact Gamma/cyclotomic projector compatible with Orlov component maps,
-projective Kunneth, and Gysin support.  Then extend it through the Rees
-resolution of the three-section linear system defining the rational
-`P^2`-map; this is the only segment where `L` does not already descend and the
-strictness/carrier proof is not formal.  Use `Bl_(X x p)(X x P^2)` as the first
+For Silver, attack the new line-bundle-framed localization through one
+three-section base-ideal theorem.  Construct the exact Gamma/cyclotomic
+projector compatible with formal monodromy, Orlov component maps, projective
+Kunneth, and Gysin support; extend it through the Rees resolution of the
+rational `P^5 dashrightarrow P^2` map; and prove the successive moving-frame
+Orlov extensions split as ungraded `K[N]`-modules with no cross-stage joining
+and no `J_3` from threefold base centers.  Linear projection already creates
+a raw `K_0` `J_3`, and a three-section ideal can contain repeated cubic
+threefold centers, so this is a genuine theorem rather than a dimension
+corollary.  See `../2026-08-13-c907-base-ideal-framing-obstruction.md`.
+Relative weak factorization over `P^2` then makes every later arrow strict and
+every threefold center square-zero.  Use `Bl_(X x p)(X x P^2)` as the first
 ungraded extension regression and the twisted relative `P^2`-bundle section
 only after its formal packet is recalibrated.  The toric `P^3` residual
 theorem remains a separate high-value

@@ -118,17 +118,20 @@ needs all of:
    Orlov idempotents and component maps in (1)--(2); a bare stable subquotient
    can mix the blocks and is insufficient;
 2. a Gamma/formal comparison supplying that functorial selection;
-3. Tate shifts preserving the chosen cyclotomic sector;
-4. projective/Kunneth compatibility identifying the cubic
+3. \(\tau_L\), hence \(N_L\), commuting with formal monodromy and the
+   identification of the generalized eigenspace being \(N_L\)-equivariant;
+4. Tate shifts preserving the chosen cyclotomic sector;
+5. projective/Kunneth compatibility identifying the cubic
    \(\zeta_6\)-line tensored with \(K_0(\mathbf P^2)\) with the entire
    endpoint packet;
-5. presentation independence on the operation-framed category used by weak
+6. presentation independence on the operation-framed category used by weak
    factorization; and
-6. for the carrier conclusion, support-local compatibility with
+7. for the carrier conclusion, functorial restriction and pushforward through
+   curve packets, giving support-local compatibility with
    \(i_*\mathbb Li^*\) in (5).
 
 Under these hypotheses, (2) supplies the strict \(K[N]\)-biproduct directly,
-and item 6 makes (5) supply the no-\(J_3\) center theorem on relative arrows.
+and item 7 makes (5) supply the no-\(J_3\) center theorem on relative arrows.
 
 ## Where the difficulty localizes
 
@@ -139,6 +142,16 @@ the hyperplane framing becomes a line bundle and the exact lemma applies to
 all subsequent arrows over \(\mathbf P^2\). It does not automatically apply
 to the resolution steps creating that line bundle: on the unresolved model
 the datum is a movable linear system or Cartier \(b\)-divisor.
+
+This failure is concrete.  Linear projection
+\(\mathbf P^5\dashrightarrow\mathbf P^2\) from a plane resolves on
+\(R=\operatorname{Bl}_{\mathbf P^2}\mathbf P^5\), where
+\(L=\mu^*\mathcal O(1)(-E)\).  The resulting \(\mathbf P^3\)-bundle has
+\(N_L^2=[\mathcal O_{\mathbf P^3\text{-fibre}}]\ne0\).  Tensoring by
+\(\mathcal O(-E)\) moves the exceptional Orlov \(j=-1\) block into the
+\(j=0\) term, so block-diagonality from (1) does not survive backward through
+the base-ideal blowup.  See
+`2026-08-13-c907-base-ideal-framing-obstruction.md`.
 
 This localizes, but does not by itself shrink, the analytic gate:
 
@@ -157,9 +170,9 @@ the object.
 - **EJ:** tensor by a framed hyperplane already has the endpoint \(J_3\) and
   is exactly block diagonal under Orlov blowups; the full Stokes matrix is
   not logically needed after the cyclotomic projector exists.
-- **TT:** ask where the line bundle ceases to exist. Descended arrows are
-  formally strict; new information is concentrated in the base ideal of the
-  rational \(\mathbf P^2\)-map.
+- **TT:** ask where the line bundle ceases to descend. Descended arrows are
+  formally strict; the exceptional correction at a base-ideal blowup mixes
+  Orlov blocks and can already create a raw \(J_3\).
 - **Settled:** strict \(K_0\) component-map compatibility, the endpoint
   calculation, the curve-support factorization of its square, and the exact
   hypotheses needed to descend them to the cyclotomic packet.
