@@ -80,15 +80,17 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 40 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 41 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 79 audited terminals.  The rejecting manuscript inventory covers all
+exports 81 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 3 absent, 16 fragmentary, 3 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
 extension-ring basis-change transport between distinct base and split axes,
+derivation of transported weighted-lattice membership from base symmetry and
+the three formal graph-coordinate descent conditions,
 faithful-flat ordinary-product descent, square-zero divided powers, the `6I-J` Smith and local-block
 calculations, and exact characteristic-two slope-model minimal polynomial,
 scalar extension, and repeated-root diagonalization.  The quantum algebra
@@ -103,7 +105,7 @@ spectrum to low-dimensional sixth-root vanishing.
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
 are construction of the geometric marked finite-etale splitting and eigenbasis,
-identification of the transported geometric coefficient lattice, actual six-axis
+proof that geometric divisor descent supplies the formal block conditions, actual six-axis
 kernel identification and persistence, cohomological realization, and the
 Voisin/relative-family bridge.  The next quantum gates are the
 differential-module base-change proofs, completed divisor tagging, operation
