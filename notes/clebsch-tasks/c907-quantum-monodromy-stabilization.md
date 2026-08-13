@@ -342,6 +342,15 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   sign normal character, and a canonical genus-four determinant cover; this is
   the first plausible finer equivariant obstruction.  See
   `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
+- On the chosen Fermat line the tangent-cover involution is now explicit:
+  `(r,y,z) -> (-r,y,-(4+(1-r^6)y^3)/(3yz))`.  Its fixed field is one conic
+  relation, and two representation variables add only two free invariants.
+  The split branch degeneration leaves two fixed Fermat elliptic curves of
+  `j=0`, but both normal characters are sign, so their ordinary Burnside
+  symbols vanish by the `C_2` B1 relation.  Thus the first fixed-locus
+  refinement is exactly blind, and stable linearization is not an easier
+  route to Fermat stable rationality.  See
+  `../2026-08-13-c907-fermat-tangent-involution.md` and its exact replay.
 
 ## Active frontier: `m=2`
 

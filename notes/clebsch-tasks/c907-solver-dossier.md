@@ -112,6 +112,14 @@ that marked cover survives equivariant stabilization before concluding that
 fixed-divisor rationality favors linearization.
 See `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
 
+The Fermat tangent-cover involution and quotient field are now exact.  Its
+two fixed `j=0` elliptic curves have two sign normals, so the ordinary
+equivariant Burnside contribution is zero by B1.  Do not use positive-genus
+fixed curves as a stable-linearization obstruction here.  The no-name lemma
+also shows that adjoining the two representation variables merely appends
+two free invariants to the original quotient conic.  See
+`../2026-08-13-c907-fermat-tangent-involution.md`.
+
 ## Rejection tests
 
 - ordinary atom multiplicity;

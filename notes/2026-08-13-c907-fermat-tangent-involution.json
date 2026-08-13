@@ -1,0 +1,38 @@
+{
+  "checks": {
+    "fixed_cubic_fermat": true,
+    "fixed_cubic_smooth": true,
+    "fixed_field_relation": true,
+    "involution_squared": true,
+    "polar_factorization": true,
+    "residual_map_invariant": true
+  },
+  "field": "QQ (identities valid in characteristic not 2 or 3)",
+  "fixed_curves": {
+    "base_points": [
+      "r=0",
+      "r=infinity"
+    ],
+    "fermat_change": "(X0,X1,X2)=(Y+Z,Y-Z,2W)",
+    "j_invariant": 0,
+    "normal_characters": [
+      "sign",
+      "sign"
+    ],
+    "ordinary_burnside_symbol": "(C2,k(E),(chi,chi))=0 by B1",
+    "plane_model": "Y^3+3*Y*Z^2+4*W^3=0"
+  },
+  "fixed_field": {
+    "relation": "v^2=rho*(u^2+4*(4+(1-rho^3)*y^3)/(3*y))",
+    "rho": "r^2",
+    "u": "z-(4+(1-r^6)*y^3)/(3*y*z)",
+    "v": "r*(z+(4+(1-r^6)*y^3)/(3*y*z))"
+  },
+  "involution": {
+    "r": "-r",
+    "y": "y",
+    "z": "-(4+(1-r^6)*y^3)/(3*y*z)"
+  },
+  "polar_identity": "4F(p+t*v)=t^2*(12*r*y*z+t*(4+(1-r^6)*y^3+3*y*z^2))",
+  "schema": "c907-fermat-tangent-involution-v1"
+}
