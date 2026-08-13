@@ -26,15 +26,15 @@ formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
 - 0 absent from Lean;
-- 16 represented by exact but strictly weaker fragments;
-- 6 represented by conditional deductions with every external premise exposed
+- 15 represented by exact but strictly weaker fragments;
+- 7 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 0 absent; 16 fragmentary; 6 conditional;
-1 complete; 85 reviewer terminals.
+Checked coverage snapshot: 23 claims; 0 absent; 15 fragmentary; 7 conditional;
+1 complete; 87 reviewer terminals.
 
-The 85 reviewer-facing terminals currently verify:
+The 87 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -106,6 +106,9 @@ The 85 reviewer-facing terminals currently verify:
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;
+- the exact projective-bundle and blowup multiplicity formulas from supplied
+  geometric relations and characteristic-polynomial block comparisons, with
+  every comparison-theorem input exposed;
 - the conditional low-dimensional classification induction from nef seeds,
   points, projective bundles, and point blowups, followed by transfer to every
   strictly Novikov-admissible specialization; the geometric classification,

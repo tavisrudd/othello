@@ -51,6 +51,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedOperationFormulas",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]

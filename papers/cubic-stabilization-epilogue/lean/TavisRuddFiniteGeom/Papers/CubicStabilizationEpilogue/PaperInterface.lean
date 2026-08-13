@@ -29,6 +29,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Univer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedOperationFormulas
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -115,6 +116,38 @@ theorem lowDimensionalVanishing_of_classification_and_specialization_inputs
             specialization).sixthMultiplicity = 0 :=
   Applications.lowDimensionalMultiplicity_eq_zero_of_classification_and_tagging
     geometry input
+
+/-- Conditional rank-`r` framed projective-bundle formula.  The geometric
+bundle relation and the characteristic-polynomial comparison are supplied;
+Lean derives the primitive-sixth multiplicity formula. -/
+theorem framedProjectiveBundle_sixthMultiplicity
+    {Object : Type*} (geometry : Applications.FramedOperationGeometry Object)
+    (input : Applications.FramedOperationComparisonInput geometry)
+    (rank : ℕ) (rankAtLeastTwo : 2 ≤ rank) (base total : Object)
+    (bundle : geometry.IsProjectiveBundle rank base total) :
+    (geometry.intrinsicMonodromy total).sixthMultiplicity =
+      rank * (geometry.intrinsicMonodromy base).sixthMultiplicity :=
+  Applications.projectiveBundle_sixthMultiplicity geometry input rank
+    rankAtLeastTwo base total bundle
+
+/-- Conditional framed blowup formula in codimension `c ≥ 2`.  The geometric
+blowup relation, its `c - 1` numerical center specializations, and the
+characteristic-polynomial block comparison are supplied; Lean derives the
+ambient-plus-center primitive-sixth multiplicity identity. -/
+theorem framedBlowup_sixthMultiplicity
+    {Object : Type*} (geometry : Applications.FramedOperationGeometry Object)
+    (input : Applications.FramedOperationComparisonInput geometry)
+    (codim : ℕ) (codimAtLeastTwo : 2 ≤ codim)
+    (center ambient total : Object)
+    (blowup : geometry.IsBlowup codim center ambient total) :
+    (geometry.intrinsicMonodromy total).sixthMultiplicity =
+      (geometry.intrinsicMonodromy ambient).sixthMultiplicity +
+        ∑ index : Fin (codim - 1),
+          (geometry.specializedMonodromy center
+            (input.centerSpecialization codim codimAtLeastTwo center ambient
+              total blowup index)).sixthMultiplicity :=
+  Applications.blowup_sixthMultiplicity geometry input codim codimAtLeastTwo
+    center ambient total blowup
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

@@ -236,15 +236,17 @@
     },
     {
       "manuscript_label": "prop:framed-operations",
-      "coverage": "fragment",
+      "coverage": "conditional_deduction",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedProjectiveBundle_sixthMultiplicity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedBlowup_sixthMultiplicity",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod"
       ],
-      "objects": "Nonzero complex characteristic polynomials representing framed-monodromy blocks and their finite products or repeated powers.",
-      "hypotheses": "Every block characteristic polynomial is nonzero; no geometric comparison is assumed inside these algebraic identities.",
-      "conclusion": "Primitive-sixth multiplicity scales by rank for a repeated block and is additive across a finite product of block characteristic polynomials.",
-      "cautions": "Projective bundles, blowups, endpoint and specialized-center quantum connections, Iritani comparison coordinates, parity restriction, numerical specializations, and proof that their monodromy characteristic polynomials have the stated block products are absent; no loop-coordinate root is represented."
+      "objects": "A supplied type of geometric objects with relations for a rank-r projective bundle and a codimension-c smooth-center blowup; dependent numerical Novikov specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
+      "hypotheses": "For r at least two, the projective-bundle relation is supplied together with equality of its intrinsic characteristic polynomial to the r-th power of the base polynomial. For c at least two, the blowup relation is supplied together with c-1 center specializations and equality of the total characteristic polynomial to the ambient polynomial times the finite product of the specialized center polynomials.",
+      "conclusion": "Lean proves the exact framed operation formulas: projective-bundle primitive-sixth multiplicity is r times the base multiplicity, and blowup multiplicity is the ambient multiplicity plus the sum of the c-1 specialized center multiplicities.",
+      "cautions": "The result is conditional on the geometric and characteristic-polynomial comparison inputs. Lean does not construct varieties, vector bundles, projective bundles, smooth centers, blowups, endpoint or specialized-center quantum connections, Iritani comparison coordinates, parity restrictions, numerical Novikov specializations, or the characteristic-polynomial block identities. No loop-coordinate root is represented."
     },
     {
       "manuscript_label": "def:strict-novikov-admissible",
