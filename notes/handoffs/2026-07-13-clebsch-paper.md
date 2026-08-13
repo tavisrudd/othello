@@ -184,7 +184,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 62 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 114 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 116 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -262,7 +262,12 @@ separatedness condition.  The quotient tower now feeds directly into the full
 finite-level formal-base-shift matrix packet.  Identification with the manuscript's complete separated
 multiplicative filtration, string and divisor equations, bulk flat solutions,
 and analytic integral-`z` gauge remain the exact formal-base-shift gap.
-The aggregate build, source correspondence, and 114-terminal axiom transcript
+For an arbitrary ideal, its adic powers now give a decreasing multiplicative
+filtration; an endomorphism preserving the generating ideal is proved to
+preserve every power, act on every quotient, and commute with adjacent
+reductions.  Neither the ideal nor the endomorphism is identified with the
+manuscript's filtration or divisor substitution.
+The aggregate build, source correspondence, and 116-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
