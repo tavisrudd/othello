@@ -56,6 +56,9 @@ The current fragments establish:
 ## Acceptance evidence
 
 - All 17 declared Lean roots passed as separate guarded build targets.
+- A detached clean worktree at commit `a3c726bf` built the aggregate library
+  and axiom-audit target from an empty package build directory; both source and
+  transcript checks then passed, and the worktree remained clean.
 - The public source-only gate passed with the exact counts above.
 - The captured `#print axioms` transcript passed exact comparison against all
   28 expected rows.
@@ -110,7 +113,10 @@ from differential modules.
   bulk gauges, completed divisor tagging, operation comparisons,
   low-dimensional vanishing, and Cai's full block decomposition remain owned by
   C910.  The present finite-matrix theorems do not discharge these inputs.
-- **Open — clean external replay and public locator.** The final C910 completion
-  gate still requires a clean-checkout replay and byte-for-byte paper-repository
-  export.  This partial checkpoint is prepared for a monorepo GitHub push, not a
-  claim that the final mirror gate has closed.
+- **Settled for the monorepo checkpoint — clean replay.** A detached worktree
+  replay built the library and audit and passed both exact check modes without
+  changing the checkout.
+- **Open — public locator and paper mirror.** This partial checkpoint is
+  prepared for a monorepo GitHub push, but the push and byte-for-byte
+  paper-repository export have not occurred.  Those remain release actions,
+  not mathematical proof gaps, and the final C910 mirror gate is still open.

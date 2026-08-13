@@ -154,7 +154,9 @@ two-coordinate midpoint assembly, square-zero divided powers, integral Smith
 reduction and local depths for `6I-J`, finite-matrix framed-monodromy algebra,
 pro-Laurent and numerical-Novikov data, typed weak factorization, and Cai's
 rank-two indicial arithmetic.  Public README counts are checked against the
-claim map to prevent release drift.  The next formal gates remain the DVR
+claim map to prevent release drift.  A detached clean worktree replay of the
+aggregate library, axiom audit, source gate, and exact transcript gate is green.
+The next formal gates remain the DVR
 necessity/arbitrary-size theorem, graph-lattice descent and geometric six-axis
 instantiation, then the quantum comparison, tagging, vanishing, and full cubic
 packet inputs.  Interim release report:
