@@ -3053,8 +3053,102 @@ theorem positiveEvaluatedFilteredFormalBaseShift_substitution_and_bulkSystem
           system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
             (input.smallMonodromy level).charpoly.map
               (input.divisorSubstitution level)) := by
-  exact ⟨fun _ ↦ rfl, input.divisorSubstitution_compatible,
-    input.bulkSystemConclusion⟩
+  refine ⟨fun _ ↦ rfl, input.divisorSubstitution_compatible, ?_, ?_⟩
+  · exact ⟨input.bulkSystemConclusion.1,
+      input.bulkSystemConclusion.2.1,
+      input.bulkSystemConclusion.2.2.1⟩
+  · exact input.bulkSystemConclusion.2.2.2
+
+/-- In the strongest algebraic branch, supply one base-ring Laurent small-
+monodromy matrix as well as one filtration-preserving divisor endomorphism.
+Lean constructs their compatible quotient-level small matrices and divisor
+substitutions, constructs the compatible evaluated gauges from the
+zero-curvature connection and positive parameters, and derives the bulk matrix
+and characteristic-polynomial system.  The base small matrix, endomorphism,
+connection, curvature, filtration, positive parameters, and their
+filtration-one witnesses remain supplied abstract data and are not identified
+with the manuscript's geometric quantum objects. -/
+theorem positiveEvaluatedBaseFormalBaseShift_smallMonodromy_and_bulkSystem
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : Quantum.PositiveEvaluatedBaseFormalBaseShiftInput
+      Coordinate Index B) :
+    (∀ level,
+      input.smallMonodromyAt level =
+        input.baseSmallMonodromy.map
+          (Quantum.laurentSeriesMap
+            (Ideal.Quotient.mk (input.filtration.ideal level)))) ∧
+    (∀ level,
+      (input.smallMonodromyAt (level + 1)).map
+          (input.filtration.positiveLaurentReduction level) =
+        input.smallMonodromyAt level) ∧
+    (∀ level,
+      input.filteredInput.divisorSubstitution level =
+        Quantum.laurentSeriesMap
+          (input.divisorEndomorphism.quotientEndomorphism level)) ∧
+    (∀ level coefficient,
+      input.filtration.positiveLaurentReduction level
+          (input.filteredInput.divisorSubstitution (level + 1) coefficient) =
+        input.filteredInput.divisorSubstitution level
+          (input.filtration.positiveLaurentReduction level coefficient)) ∧
+    (∀ coordinate,
+      (Quantum.multivariableFlatGaugeSeries input.connection).map
+          (Quantum.multivariablePartialDerivative coordinate) =
+        -(input.connection coordinate) *
+          Quantum.multivariableFlatGaugeSeries input.connection) ∧
+    (let system := input.filteredInput.evaluatedInput.formalBaseShiftSystem;
+      ∀ level,
+        system.gauge level =
+            input.filtration.positiveEvaluatedFlatGaugeAtLevel
+              input.parameter level input.connection ∧
+          system.inverse level =
+            input.filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+              input.parameter input.positive level input.connection) ∧
+    (let system := input.filteredInput.evaluatedInput.formalBaseShiftSystem;
+      (∀ level,
+        (system.gauge (level + 1)).map
+            (input.filtration.positiveLaurentReduction level) =
+          system.gauge level) ∧
+      ∀ level,
+        (system.inverse (level + 1)).map
+            (input.filtration.positiveLaurentReduction level) =
+          system.inverse level) ∧
+    (let system := input.filteredInput.evaluatedInput.formalBaseShiftSystem;
+      (∀ level,
+        letI := system.coefficientRing level
+        letI := system.coefficientRing (level + 1)
+        (system.bulkMonodromy (level + 1)).map
+            (input.filtration.positiveLaurentReduction level) =
+          system.bulkMonodromy level) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        (system.bulkMonodromy level).charpoly =
+          (input.smallMonodromyAt level).charpoly.map
+            (input.filteredInput.divisorSubstitution level)) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        letI := system.coefficientRing (level + 1)
+        (system.bulkMonodromy (level + 1)).charpoly.map
+            (input.filtration.positiveLaurentReduction level) =
+          (system.bulkMonodromy level).charpoly) ∧
+      ∀ level,
+        letI := system.coefficientRing level
+        system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (system.bulkMonodromy level).charpoly ∧
+          system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (input.smallMonodromyAt level).charpoly.map
+              (input.filteredInput.divisorSubstitution level)) := by
+  refine ⟨fun _ ↦ rfl, input.smallMonodromyAt_compatible, fun _ ↦ rfl,
+    input.filteredInput.divisorSubstitution_compatible,
+    Quantum.multivariableFlatGaugeSeries_equation_of_curvature
+      input.connection input.curvature,
+    input.filteredInput.evaluatedInput.formalBaseShiftSystem_gauge_inverse, ?_,
+    input.bulkSystemConclusion.2⟩
+  exact ⟨fun level ↦ input.filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
+      input.parameter input.positive level input.connection,
+    fun level ↦ input.filtration.positiveEvaluatedFlatGaugeInverseAtLevel_compatible
+      input.parameter input.positive level input.connection⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

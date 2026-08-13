@@ -17,7 +17,9 @@ base-shift matrix packet.  In the first branch, compatible small monodromy
 matrices and quotient divisor substitutions remain supplied data.  A stronger
 filtered branch constructs every quotient divisor substitution from one
 supplied filtration-preserving base-ring endomorphism; compatible small
-monodromy matrices remain supplied.  Lean derives the compatible bulk matrices,
+monodromy matrices remain supplied.  A third branch constructs that compatible
+small family as the coefficientwise quotient image of one supplied base-ring
+Laurent matrix.  Lean derives the compatible bulk matrices,
 their characteristic-polynomial substitution identity, and the compatible
 bulk characteristic-polynomial system.  No geometric quantum connection,
 string or divisor equation, analytic monodromy, or geometric comparison theorem is
@@ -274,6 +276,120 @@ theorem bulkSystemConclusion
     input.evaluatedInput.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem_level⟩
 
 end PositiveEvaluatedFilteredFormalBaseShiftInput
+
+/-- Positive evaluated formal-base-shift data in which both the divisor
+substitutions and the small-monodromy family descend from base-ring data. -/
+structure PositiveEvaluatedBaseFormalBaseShiftInput
+    (Coordinate : Type u) (Index : Type v) (B : Type w)
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B] where
+  filtration : MultiplicativeIdealFiltration B
+  parameter : Coordinate → B
+  positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1
+  connection : Coordinate → Matrix Index Index
+    (MvPowerSeries Coordinate (LaurentSeries B))
+  curvature : ∀ first second,
+    (connection second).map (multivariablePartialDerivative first) -
+        (connection first).map (multivariablePartialDerivative second) +
+        connection first * connection second -
+        connection second * connection first = 0
+  divisorEndomorphism :
+    filtration.toDecreasingIdealFiltration.PreservingEndomorphism
+  baseSmallMonodromy : Matrix Index Index (LaurentSeries B)
+
+namespace PositiveEvaluatedBaseFormalBaseShiftInput
+
+/-- The small monodromy at one quotient level is obtained by coefficientwise
+reduction of the supplied base-ring Laurent matrix. -/
+noncomputable def smallMonodromyAt
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedBaseFormalBaseShiftInput Coordinate Index B)
+    (level : ℕ) : Matrix Index Index
+      (LaurentSeries (input.filtration.toDecreasingIdealFiltration.QuotientRing level)) :=
+  input.baseSmallMonodromy.map
+    (laurentSeriesMap (Ideal.Quotient.mk (input.filtration.ideal level)))
+
+/-- The quotient reductions of the base small monodromy form a compatible
+matrix family. -/
+theorem smallMonodromyAt_compatible
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedBaseFormalBaseShiftInput Coordinate Index B)
+    (level : ℕ) :
+    (input.smallMonodromyAt (level + 1)).map
+        (input.filtration.positiveLaurentReduction level) =
+      input.smallMonodromyAt level := by
+  ext row column exponent
+  simp [PositiveEvaluatedBaseFormalBaseShiftInput.smallMonodromyAt,
+    MultiplicativeIdealFiltration.positiveLaurentReduction,
+    laurentSeriesMap_coeff]
+
+/-- The filtered positive-evaluated input obtained by descending the base
+small monodromy and the preserving divisor endomorphism. -/
+noncomputable def filteredInput
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedBaseFormalBaseShiftInput Coordinate Index B) :
+    PositiveEvaluatedFilteredFormalBaseShiftInput Coordinate Index B where
+  filtration := input.filtration
+  parameter := input.parameter
+  positive := input.positive
+  connection := input.connection
+  curvature := input.curvature
+  divisorEndomorphism := input.divisorEndomorphism
+  smallMonodromy := input.smallMonodromyAt
+  small_compatible level row column := by
+    have compatibility := input.smallMonodromyAt_compatible level
+    exact congrArg (fun matrix ↦ matrix row column) compatibility
+
+/-- Base-ring small monodromy and a preserving divisor endomorphism, together
+with the constructed evaluated gauges, yield the full finite-level formal-
+base-shift packet. -/
+theorem bulkSystemConclusion
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedBaseFormalBaseShiftInput Coordinate Index B) :
+    let system := input.filteredInput.evaluatedInput.formalBaseShiftSystem
+    (∀ level,
+      input.filteredInput.smallMonodromy level = input.smallMonodromyAt level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      (system.bulkMonodromy (level + 1)).map
+          (input.filtration.positiveLaurentReduction level) =
+        system.bulkMonodromy level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      (system.bulkMonodromy level).charpoly =
+        (input.smallMonodromyAt level).charpoly.map
+          (input.filteredInput.divisorSubstitution level)) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      (system.bulkMonodromy (level + 1)).charpoly.map
+          (input.filtration.positiveLaurentReduction level) =
+        (system.bulkMonodromy level).charpoly) ∧
+    ∀ level,
+      letI := system.coefficientRing level
+      system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (system.bulkMonodromy level).charpoly ∧
+        system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (input.smallMonodromyAt level).charpoly.map
+            (input.filteredInput.divisorSubstitution level) := by
+  exact ⟨fun _ ↦ rfl,
+    input.filteredInput.evaluatedInput.formalBaseShiftSystem.bulkMonodromy_compatible,
+    input.filteredInput.evaluatedInput.formalBaseShiftSystem.bulkMonodromy_charpoly,
+    input.filteredInput.evaluatedInput.formalBaseShiftSystem
+      |>.bulkCharacteristicPolynomial_compatible,
+    input.filteredInput.evaluatedInput.formalBaseShiftSystem
+      |>.bulkCharacteristicPolynomialSystem_level⟩
+
+end PositiveEvaluatedBaseFormalBaseShiftInput
 
 end Quantum
 

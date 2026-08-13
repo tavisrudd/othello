@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 137 reviewer-facing Lean terminals.  These counts summarize the
+There are 138 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 137 reviewer terminals.
+1 complete; 138 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -116,6 +116,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   endomorphism induces every compatible Laurent quotient divisor substitution;
   only compatible small monodromy matrices remain as finite-level matrix data.
   The endomorphism's geometric divisor-equation origin is not proved.
+  In the strongest base-data version, one supplied Laurent small-monodromy
+  matrix over the base ring is reduced coefficientwise to construct its whole
+  compatible quotient family.  Its geometric monodromy origin is not proved.
   Their identification with the manuscript's geometric tower and quantum
   connection is not formalized; neither finite bulk support from the
   manuscript's positive filtration nor either required Laurent lower bound

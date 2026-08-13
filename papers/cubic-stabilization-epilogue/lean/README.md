@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 137 reviewer terminals.
+1 complete; 138 reviewer terminals.
 
-The 137 reviewer-facing terminals currently verify:
+The 138 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -216,6 +216,10 @@ The 137 reviewer-facing terminals currently verify:
   substitution, so only the compatible small monodromy matrices remain as
   finite-level matrix inputs; the base endomorphism's geometric divisor origin
   remains unformalized;
+- in the strongest base-data composite, one supplied Laurent small-monodromy
+  matrix over the base ring is reduced coefficientwise to construct its entire
+  compatible quotient family; its geometric monodromy origin remains
+  unformalized;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 74 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 137 audited terminals.  The rejecting manuscript inventory covers all
+exports 138 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -222,6 +222,9 @@ divisor substitution from one filtration-preserving base endomorphism.  Thus
 only compatible small monodromy matrices remain as finite-level matrix data;
 the base endomorphism is supplied, and its geometric divisor-equation origin
 remains unproved.
+The strongest base-data composite now also reduces one supplied Laurent
+small-monodromy matrix over the base ring to construct every compatible
+quotient small matrix.  Its geometric monodromy origin remains unproved.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
