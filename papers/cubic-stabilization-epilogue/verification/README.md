@@ -3,8 +3,8 @@
 The manuscript is intended to have a wholly human proof spine.  No certificate,
 enumeration, or symbolic program is invoked as a premise.
 
-`make check` performs source linting, the source-only Lean correspondence
-check, deterministic PDF construction, and warning rejection.  The
+`make check` performs the source-only Lean correspondence check, deterministic
+PDF construction, and warning rejection.  The
 correspondence check inventories every theorem-like manuscript environment and
 records whether its current Lean coverage is absent, fragmentary, a conditional
 deduction, or complete.  It does not build Lean.
@@ -19,10 +19,11 @@ their exact correspondence.
 Checked coverage snapshot: 23 claims; 7 absent; 13 fragmentary; 3 conditional;
 0 complete; 29 reviewer terminals.
 
-The Lean modules and axiom audit are built through the guarded queue documented
-in `lean/README.md`.  Passing the captured audit output to `make formal-audit`
-checks every reviewer terminal against the tracked exact axiom list.  Neither a
-source-only pass nor a successful build substitutes for that transcript check.
+The Lean modules and axiom audit can be built with the pinned package command
+documented in `lean/README.md`.  Passing the captured audit output to
+`make formal-audit` checks every reviewer terminal against the tracked exact
+axiom list.  Neither a source-only pass nor a successful build substitutes for
+that transcript check.
 
 The research calculations that led to the integral gluing and divisor-product
 statements are discovery evidence rather than premises.  Formal coverage of
