@@ -61,6 +61,40 @@ excludes K-trivial directions and faces which lose the atom.  The sharpened
 Gold question is whether smooth AKMW subdivision peaks refine into this
 class and ordinary split flops.
 
+That coverage implication is now disproved as a formal consequence of AKMW.
+The contact-budget lemma in
+`../2026-08-13-c907-carrier-face-contact-budget.md` says that a carrier curve
+`C` meeting a codimension-`c` center with multiplicity `m` has strict-transform
+degree `c_1(C)-(c-1)m`, and faciality forces that strict transform into every
+face containing the carrier and exceptional rays.  AKMW controls neither
+this number nor the oriented sector path.  For a cubic line, one transverse
+contact is K-trivial in codimension three and K-negative in codimensions four
+and five.  Thus the remaining peaks split into positive-contact carrier
+peaks, zero-budget crepant/Geiser-type peaks, and genuinely negative-budget
+discrepant peaks; the last class is the new exact Gold frontier.
+
+The first negative-budget Gold model is now closed in
+`../2026-08-13-c907-disconnected-standard-wall-and-point-flip.md`.  Blowing
+up a general point of `X x P2` turns the six cubic lines through its `X`
+coordinate into disjoint `P1`'s with normal `O(-1)^4`; projection by
+`O(1,2)-E` contracts exactly them, and the split standard flip replaces them
+by six `P3`'s with normal `O(-1)^2`.  Gu--Yu--Yu's proof extends
+componentwise from a connected wall to this finite disjoint union with equal
+normal ranks and one extremal variable.  The resulting two point packets per
+component are rank-zero, so the wall preserves the primitive-sixth rank
+Boolean.  The next frontier is a nonsplit connected standard flip or a
+weighted toroidal wall, not the isolated-point model.
+
+For semi-free smooth standard peaks, the remaining Gold geometry is now a
+finite list; see
+`../2026-08-13-c907-fivefold-standard-peak-portfolio.md`.  The dimension
+identity `5=dim(S)+r_++r_--1` leaves only a surface-family `P1` flop, a
+curve-family `(1,2)` flip, the closed point `(1,3)` flip, and Chen--Tseng's
+point `P2` flop, besides blowups.  Thus only the first two require new
+standard-wall globalization.  This does not remove the separate AKMW
+question of whether every inserted smooth toroidal peak is actually
+semi-free standard.
+
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
 Engel--de Gaay Fortman--Schreieder proves stable irrationality for very
@@ -581,7 +615,9 @@ produced by birational cobordism/destacking.  The K-positive carrier-face
 theorem handles peaks for which all atom variables, not merely the two
 contraction rays, lie on one exposed rational-polyhedral `c_1`-positive
 face.  Audit whether AKMW's regular subdivisions can be chosen so that every
-remaining elementary peak is an ordinary split flop;
+remaining zero-budget elementary peak is an ordinary split flop, and attack
+the first negative-contact-budget peak by a discrepant Sarkisov/VGIT
+intertwiner;
 the older two-radial-leg nearby-cycle comparison remains the fallback for
 any peak outside those two classes.
 The all-codimension and product audits need not be repeated.  Exact failed

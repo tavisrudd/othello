@@ -180,6 +180,14 @@ flop peak or admits a `P6`-faithful K-positive carrier face with the oriented
 path property?  AKMW's theorem states neither the cone property nor the
 sector-path property, so coverage remains open.
 
+The necessary numerical test is in
+`2026-08-13-c907-carrier-face-contact-budget.md`.  If a carrier curve of class
+`beta` meets a codimension-`c` blowup center with multiplicity `m`, faciality
+forces its strict transform into every carrier face and positivity requires
+`c_1 beta>(c-1)m`.  AKMW imposes no such inequality.  The equality case for a
+cubic line and a codimension-three center is the Geiser K-trivial ray; higher
+codimension gives a negative ray.
+
 ## EJ / TT / AA
 
 - **EJ:** `B=xx'` obstructs comparison only while one insists on `B=0`.
