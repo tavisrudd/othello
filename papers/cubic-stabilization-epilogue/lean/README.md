@@ -19,6 +19,40 @@ theorems imported from the literature occur as explicit hypotheses of
 conditional interfaces; they are not declared as Lean axioms and are not
 reported as independently formalized.
 
+## Interim coverage status
+
+This is a publishable partial companion, not a claim of complete
+formalization.  The machine-checked claim inventory currently contains all 23
+labelled theorem-like environments in the manuscript and classifies them as:
+
+- 7 absent from Lean;
+- 13 represented by exact but strictly weaker fragments;
+- 3 represented by conditional deductions with every external premise exposed
+  in the theorem type;
+- 0 completely formalized from the manuscript's stated hypotheses.
+
+The 28 reviewer-facing terminals currently verify:
+
+- constructive two-coordinate rank-one assembly under the midpoint inequality;
+- the square-zero divided-power expansion;
+- the `6I-J` eigenspaces, an explicit integral Smith reduction to
+  `diag(1,6,6,6,6)`, and its exact depth-one arithmetic at two and three;
+- finite-matrix definitions and deductions for primitive-sixth multiplicity,
+  coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
+  shift, and block multiplicity formulas;
+- finite-fiber numerical Novikov coefficient pushforward and the algebraic
+  core of strict Novikov admissibility and divisor-tag separation;
+- typed blowup/blowdown telescoping in dimension four and the conditional cubic
+  and genus-eight irrationality deductions;
+- the factorization and framed eigenvalues of Cai's displayed rank-two
+  indicial polynomial.
+
+The authoritative per-claim account is
+[`verification/claims.json`](verification/claims.json).  In particular, the
+companion does not yet formalize the relative six-axis geometry, graph-lattice
+descent, universal `CH_0` argument, quantum comparison theorems,
+low-dimensional vanishing, or Cai's block diagonalization.
+
 From the monorepo root, build only through the guarded queue:
 
 ```text

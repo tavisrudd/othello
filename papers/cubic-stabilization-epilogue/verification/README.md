@@ -9,6 +9,13 @@ correspondence check inventories every theorem-like manuscript environment and
 records whether its current Lean coverage is absent, fragmentary, a conditional
 deduction, or complete.  It does not build Lean.
 
+At the current interim checkpoint the exact inventory is 23 manuscript claims,
+with 7 absent, 13 fragmentary, 3 conditional deductions, and none complete.
+There are 28 reviewer-facing Lean terminals.  These counts summarize the
+current checked map; any change to manuscript labels, claim-map declarations,
+public terminals, axiom-audit commands, or expected axiom rows must preserve
+their exact correspondence.
+
 The Lean modules and axiom audit are built through the guarded queue documented
 in `lean/README.md`.  Passing the captured audit output to `make formal-audit`
 checks every reviewer terminal against the tracked exact axiom list.  Neither a

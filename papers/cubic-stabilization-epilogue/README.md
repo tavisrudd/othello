@@ -19,3 +19,10 @@ the six-axis realization, all-degree finite-etale graph saturation, and the
 one-step irrationality argument.
 The built review copy is
 [`cubic_stabilization_epilogue.pdf`](cubic_stabilization_epilogue.pdf).
+
+The Mathlib-only formal companion is in [`lean/`](lean/).  It is an explicitly
+partial reviewer artifact: its rejecting claim inventory covers every labelled
+theorem-like environment and distinguishes proved fragments and conditional
+deductions from claims that remain absent.  See
+[`lean/README.md`](lean/README.md) for the exact interim coverage and replay
+commands.

@@ -80,23 +80,29 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its seven
-Lean sources build in dependency order through the guarded queue, including the
-reviewer interface and eight-terminal axiom audit.  The audit reports only
-`propext` and `Quot.sound` where the kernel closure is nonempty.
+The package has a pinned standalone Nix and Mathlib environment.  Its 17 Lean
+sources build in dependency order through the guarded queue.  The reviewer
+interface currently exports 28 audited terminals.  The rejecting manuscript
+inventory covers all 23 labelled theorem-like environments: 7 absent, 13
+fragmentary, 3 conditional deductions, and 0 complete.
 
-The abstract packet telescope, dimension-four birational invariance,
-rank-two projective-bundle transport, cubic-threefold one-step obstruction,
-and genus-eight transport and obstruction are kernel checked.  The application
-structures retain the cubic packet calculation, projective-bundle formulas,
-weak-factorization input, Kuznetsov flop, and rational comparison as typed
-premises.  The static verifier now requires exact equality among the reviewer
-terminals, axiom-audit commands, and claim-map declarations.
+The integral algebra now includes constructive two-coordinate midpoint
+assembly, square-zero divided powers, the `6I-J` eigenspaces, an explicit
+integral Smith reduction, and exact local depths at two and three.  The quantum
+algebra includes framed-sixth multiplicity for supplied monodromy matrices,
+pro-Laurent inverse-system types, coefficient-extension and conjugacy,
+formal-base-shift and block-formula deductions, numerical coefficient
+pushforward, strict-Novikov data, divisor-tag separation, typed
+weak-factorization telescoping, and the arithmetic core of Cai's rank-two
+indicial polynomial.
 
-The integral side currently contains only the division-free mixed-coefficient
-identity.  The next proof gate is the full valuation/midpoint equivalence for
-symmetric matrix-of-ideals lattices, followed by square-zero divided powers and
-faithfully flat membership descent.
+All geometric identifications and comparison theorems remain honestly outside
+those fragments unless present as explicit typed premises.  The next integral
+gates are the DVR necessity and arbitrary-size matrix-of-ideals theorem,
+graph-lattice descent, and geometric six-axis instantiation.  The next quantum
+gates are the differential-module base-change proofs, completed divisor
+tagging, operation comparisons, low-dimensional vanishing, and Cai's actual
+integral-`z` block diagonalization.
 
 ## Package shape
 
