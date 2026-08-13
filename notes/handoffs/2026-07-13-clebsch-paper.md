@@ -85,16 +85,16 @@ Boolean depends.  Exact peak audit:
 `../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
-Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives the first unconditional
-positive peak class.  A common-point lift with zero wall restriction, Lemma
+Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
+positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
-the exact ambient Gamma point coordinate; possible center coordinates are
-rank-invisible by oriented Gamma/Euler orthogonality.  The valid minimal
-toric discrepancy-one model confirms the ambient vanishing term by term.
-Thus the rank Boolean is invariant
-across every smooth-projective simple VGIT wall.  Gold remains open because
-general cobordism peaks can have singular/toroidal quotients and are not yet
-covered by that theorem.  Exact audit:
+the exact ambient QDM point coordinate; possible center coordinates are
+rank-invisible by oriented Gamma/Euler orthogonality in the same one-wall
+receiver.  The valid minimal toric discrepancy-one model confirms the
+ambient vanishing term by term.  This does not identify adjacent
+large-radius-to-sector frames, so the smooth weak-factorization peak gate
+remains.  The direct-cobordism alternative has a second obstruction because
+general chamber quotients can be singular/toroidal.  Exact audit:
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`.  The coverage obstruction
 is exact: smooth projective cobordisms give projective locally toric chamber
 quotients with cyclic singularities, while resolving them inserts the very

@@ -23,11 +23,12 @@ required specialized completed source, so Fourier--Novikov intertwining and
 regular-singular uniqueness kill the entire ambient tail.  Possible center
 coordinates need not vanish, but oriented Gamma/Euler orthogonality makes
 them rank-invisible; the valid minimal toric model confirms the ambient
-identity term by term.  Hence the Gamma-rank Boolean is unconditionally
-invariant across every smooth-projective simple VGIT wall.
-Gold and Platinum remain open at a smaller geometric coverage gate: general
-birational cobordisms can have singular/toroidal quotients.  No Paper V or
-Lean promotion.
+identity term by term.  This gives a wall-local rank identity in the same
+fixed-sector receiver, not an intrinsic large-radius Boolean: the exact QDM
+coordinate does not algebraize the large-radius-to-sector connection row.
+Gold and Platinum therefore retain the adjacent-receiver peak-coherence gate.
+The alternative direct-cobordism route has a second gate because its chamber
+quotients can be singular/toroidal.  No Paper V or Lean promotion.
 The coverage audit is negative: a smooth projective master gives projective
 locally toric chamber quotients, generally with cyclic singularities, and
 regular subdivision inserts genuine blowups/down rather than smooth simple
@@ -37,6 +38,10 @@ The nearest extension is toric-DM: Iritani proves a formal discrepant QDM
 split generally in that class and a Gamma/Stokes comparison only for
 weak-Fano toric weighted blowups.  No general finite-stabilizer/toroidal GYY
 package was found.
+The latter comparison already gives an additional unconditional positive
+class: rank is preserved on the pullback K-summand and vanishes on every
+exceptional K-summand for a nonstacky point off the centre.  It still does
+not cover the locally toroidal flips in a general cobordism.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -494,11 +499,14 @@ reverse blow-down implication, conditional weak-factorization telescope, and
 `../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
 `../2026-08-13-c907-rank-telescope-and-product.md`.
 
-The next bounded pass is geometric.  The exact ambient point coordinate and rank Boolean
-are proved for every smooth-projective simple VGIT wall in
+The next bounded pass returns to coherence.  The exact ambient point
+coordinate and wall-local rank identity are proved for every
+smooth-projective simple VGIT wall in
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`, and the valid minimal toric
-discrepancy-one model passes term by term.  Determine whether the peaks needed
-for a fivefold factorization can all be replaced by such walls.  Otherwise
+discrepancy-one model passes term by term.  This does not compose even for
+blowups until the two incident receivers at a peak are compared.  In
+parallel, determine whether the peaks needed for a fivefold factorization
+can all be replaced directly by such walls.  Otherwise
 extend the ambient-coordinate theorem to the finite-quotient or toroidal wall spaces
 produced by birational cobordism/destacking.  The older two-radial-leg
 nearby-cycle comparison remains the fallback for peaks outside that coverage.
@@ -612,15 +620,15 @@ a separate possible construction, not a premise of this Platinum route.
 ## Acceptance
 
 - **Silver:** closed by the unconditional `X x P^1` theorem.
-- **Gold:** the rank Boolean is coherent across every smooth-projective
-  simple VGIT peak.  Show that the fivefold factorization can be chosen with
-  only those peaks, or extend the point-column theorem to its remaining
-  singular/toroidal peaks; the one-arrow theorem and `P^2` endpoint are
-  closed.
+- **Gold:** the exact ambient point coordinate is closed wall by wall, but
+  the Gamma rank Boolean still needs coherent realization across adjacent
+  smooth-wall receivers.  The direct-cobordism alternative additionally
+  needs singular/toroidal wall coverage; the one-arrow theorem and `P^2`
+  endpoint are closed.
 - **Platinum:** the all-codimension source audit is clean and the nonzero-`k`
   exceptional twists and uniform projective-product step are rank-theoretically
-  harmless; it rises or falls with the same smooth-wall coverage/extension
-  gate as Gold.
+  harmless; it rises or falls with the same coherence gate as Gold, plus
+  coverage if the direct-cobordism route is used.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
 

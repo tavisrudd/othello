@@ -78,9 +78,9 @@ automatic smoothness theorem that could rescue Gold.
 ## 4. Consequence for C907
 
 The theorem in `2026-08-13-c907-simple-vgit-rank-theorem.md` is a genuine
-positive peak class and a publishable stepping stone, but it does not close
-Gold by formal appeal to birational cobordism.  The remaining alternatives
-are now exact:
+wall-local positive class and a publishable stepping stone, but it does not
+close Gold by formal appeal to birational cobordism.  The remaining
+alternatives are now exact:
 
 1. extend the ambient point-coordinate and oriented-rank theorem to smooth
    DM/toroidal simple walls and prove compatibility with coarse endpoints;
@@ -105,6 +105,25 @@ decomposition.  General GIT wall-crossing formulas for smooth proper DM
 quotients give potentials, not a pairing-preserving QDM direct sum or Stokes
 packet control.  No 2024--2026 primary source located in the audit combines
 all four ingredients needed here.
+
+There is nevertheless a second unconditional positive wall class.  Under
+Iritani's weak-Fano compact toric weighted-blowup hypotheses, the analytic
+Gamma decomposition induces
+
+\[
+ K(X_+)=K(Z)_{-J}\oplus\cdots\oplus K(Z)_{-1}
+        \oplus\phi^*K(X_-).
+\]
+
+For a nonstacky point `p` away from the centre,
+`phi^*[O_p]=[O_p]`; every `K(Z)_j` class is supported on the exceptional
+divisor.  The Gamma/Euler point functional therefore restricts to rank on
+the pullback summand and vanishes on all residual summands.  Hence the C907
+rank Boolean is invariant across these weighted blowups in Iritani's
+sectorial realization.  This is a direct corollary of the cited analytic
+K-decomposition, not a new general toroidal theorem.  The paper explicitly
+warns that the residual pieces' Stokes structures are not known to be those
+of the centre, but the rank-row corollary does not need that identification.
 
 ## 5. AA / EJ / TT
 
@@ -137,3 +156,7 @@ all four ingredients needed here.
   Deligne--Mumford stacks*, arXiv:1906.00801, Theorem 5.16 and Theorems
   7.25, 7.31, 7.33.  The first is the formal toric-DM decomposition; the
   latter are the narrower weak-Fano weighted-blowup Gamma/Stokes results.
+  Cached PDF SHA-256
+  `dc25e5cbd849ee5daa7643d69ae2e77936d5cd343ceb66ce8bbd8e03fbf874c7`;
+  source archive SHA-256
+  `e463b5cebf24cb95efde5c4ab17cc5dea4c83efcc4d688cb0a4f68cdb2ef3519`.

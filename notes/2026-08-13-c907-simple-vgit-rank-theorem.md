@@ -2,17 +2,20 @@
 
 Date: 2026-08-13
 
-Status: unconditional Gamma-rank theorem for one smooth-projective simple
-VGIT wall.  The distinguished ambient point coordinate is exact.  Gu--Yu--Yu Lemma 3.27
+Status: exact ambient-QDM theorem and wall-local Gamma-rank identity for one
+smooth-projective simple VGIT wall.  The distinguished ambient point
+coordinate is exact.  Gu--Yu--Yu Lemma 3.27
 gives a common-point lift with zero wall restriction; Lemma 5.10 and
 Proposition 5.9 kill both that lift's negative-chamber correction and its
 wall-frequency derivative after extremal specialization; the positive
 Fourier--Novikov equation and regular-singular uniqueness then kill the
 entire positive-chamber tail.  Possible center coordinates are not claimed
 to vanish; oriented Gamma/Euler orthogonality makes them invisible to the
-rank row.  The smallest valid toric local model confirms the ambient result
-term by term.  Gold still needs geometric coverage of the singular/toroidal
-peaks outside these hypotheses.
+rank row in the same fixed-sector receiver.  The smallest valid toric local
+model confirms the ambient result term by term.  This does not identify the
+intrinsic large-radius Gamma point section across the wall coordinate, so it
+does not remove adjacent-receiver coherence.  Gold also needs coverage of
+the singular/toroidal walls on the direct-cobordism route.
 
 ## 1. Source theorem
 
@@ -193,7 +196,7 @@ Gamma, grading, and Chern-class factors act identically on the top class,
 pairing preservation gives ordinary rank on the ambient copy; the preceding
 oriented orthogonality independently kills every wall copy.
 
-## 4. Rank-Boolean theorem
+## 4. Wall-local rank-Boolean theorem
 
 Let `P_6` denote the whole generalized primitive-sixth formal-monodromy
 packet in the chosen receiver, and let
@@ -212,7 +215,7 @@ they have been established gives
  \tag{12}
 \]
 
-A single smooth-projective simple VGIT wall crossing satisfies
+In the common fixed-parameter, fixed-sector receiver of this wall, one has
 
 \[
  \boxed{
@@ -222,14 +225,42 @@ A single smooth-projective simple VGIT wall crossing satisfies
  \tag{13}
 \]
 
-This is the desired peak lemma for the smooth
+This is the desired **wall-local** peak identity for the smooth
 simple-VGIT/standard-flip class.  The formal input is stronger than
 Shen--Shoemaker alone, because (1) restores the full ambient QDM rather than
 leaving the ambient atom confluent at the extremal fibre.  The exact ambient
 coordinate plus oriented center orthogonality supplies the only Gamma row
-used.
+used inside this receiver.
+
+Equation (13) is not yet an intrinsic statement over the chamber's full
+large-radius Novikov base.  Gu--Yu--Yu's map is an exact positive-`z` QDM
+comparison over an exceptional Laurent completion; the large-radius Gamma
+point section used to measure `P_6` belongs to a different solution frame.
+The Artin receiver compares those frames after fixing this wall parameter at
+a nonzero value.  Nothing here evaluates the resulting large-radius central
+connection row back into the wall-adic formal completion.
+
+This boundary is forced by a regression: every smooth blowup is itself a
+simple VGIT wall (Gu--Yu--Yu Example 1.6).  If (13) were already an intrinsic
+phase/parameter-independent Boolean, weak factorization would compose it and
+Gold would be closed.  The surviving peak obstruction proves that such a
+reading would merely reintroduce the illegal frame change from the false
+Gold argument.
 
 ## 5. Why this is not yet Gold
+
+There are two distinct globalization routes and two distinct gates.
+
+First, smooth weak factorization uses only blowups/down, hence only simple
+VGIT walls.  But two incident arrows realize the intermediate variety in
+different one-wall receivers.  The exact ambient coordinate in (10) does not
+construct the transition between their large-radius-to-sector connection
+matrices.  This is the peak-coherence obstruction of
+`2026-08-13-c907-peak-confluence-obstruction.md`.
+
+Second, one can try to replace peaks directly by elementary cobordism walls.
+That avoids the blowup telescope only where the wall itself is covered by
+this theorem.  General cobordism walls have the singularity problem below.
 
 Wlodarczyk's birational cobordism expresses birational geometry through
 `C^*` wall crossings, but the quotients occurring in a general cobordism can
@@ -238,12 +269,11 @@ simple VGIT quotients are smooth projective.  Resolving/destacking a singular
 wall reintroduces blowup receivers, and no cited theorem says that the
 Gamma-rank realization is coherent through the resulting chain.
 
-Thus the exact ambient-coordinate theorem and the discrepancy-one repair form a
-paper-shaped stepping stone regardless of Gold.  The remaining Gold gate is
-geometric coverage: prove that the fivefold factorization can use only
-smooth-projective simple walls, extend the theorem to its finite-quotient or
-toroidal walls, or prove the peak lemma directly for the exchanges left by
-resolution.
+Thus the exact ambient-coordinate theorem and the discrepancy-one repair form
+a paper-shaped stepping stone regardless of Gold.  Gold closes only after
+either (i) a coherent comparison at every smooth-factorization peak, or (ii)
+a direct wall chain with both smooth/stacky coverage and a common realization
+through successive walls.
 
 ## 6. Minimal toric regression
 
@@ -305,8 +335,9 @@ the exact minimal regression.
   relation `AK^3=0` kills every positive point coefficient uniformly in
   degree.
 - **TT:** raw equivariant nonvanishing is irrelevant after completed-base
-  specialization.  The inverse Fourier map, not the raw cohomology ring,
-  decides which vectors survive the extremal receiver.
+  specialization, but completed-QDM exactness is still not large-radius
+  Gamma-frame exactness.  The first distinction repairs the false toric
+  counterexample; the second prevents a false Gold theorem.
 
 ## Mystery ledger
 
@@ -316,11 +347,13 @@ the exact minimal regression.
   Shen--Shoemaker/Gamma orthogonality makes every center block rank-invisible.
 - **Not claimed:** the center coordinates of the transported point section
   themselves may contain positive wall-parameter terms.
-- **Settled:** full Gamma-integral compatibility is stronger than required;
-  the distinguished rank row is proved directly.
-- **Open:** smooth-projective simple-wall coverage of the peaks needed for
-  Gold, or an orbifold/toroidal extension.  This is the sole remaining gate
-  in this route.
+- **Settled:** in one common receiver, full Gamma-integral compatibility is
+  stronger than required; the distinguished wall-local rank row is proved
+  directly.
+- **Open:** coherence of the wall-local row through adjacent receivers in a
+  smooth weak factorization.
+- **Open:** alternatively, smooth/stacky coverage and common realization for
+  the locally toroidal walls of a direct cobordism chain.
 
 ## Sources and reading boundary
 
