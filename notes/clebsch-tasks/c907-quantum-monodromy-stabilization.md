@@ -53,6 +53,22 @@ hypotheses and already has a line-centred relative conic-bundle Sarkisov link.
 Thus a direct rigidity proof would require a new relative pliability
 classification; it is not a cheaper Gold closure.
 
+The first explicit peak regression is banked in
+`../2026-08-13-c907-geiser-peak-descendant-intertwiner.md`.  For the
+point-centred Geiser link, the two blowdown charts satisfy
+`u'=u^2/q`, `q'=u^3/q^2`, making the deleted-corner obstruction concrete.
+Chen--Tseng (April 2026) prove the exact descendant/Gamma/Fourier--Mukai
+intertwiner for one simple flop.  Their deformation proof extends
+componentwise to the six disjoint Atiyah curves in the Geiser middle flop,
+and small-QDM product naturality carries it to `x P2`.  Hence the intrinsic
+Gamma point row is exactly preserved across the middle flop.  This does not
+yet close the complete peak: the two point-blowup identities still live in
+their own wall-local receivers, and their attachment to the intrinsic flop
+frame is the remaining mixed two-parameter problem.  This isolates a
+publishable stepping stone (finite-disjoint simple-flop Gamma compatibility)
+and a smaller next falsifier (one point-blowup attachment with a transverse
+flop parameter).
+
 **Load next:** `c907-solver-dossier.md`.
 
 **Execution plan:** `../2026-08-11-c907-moonshot-attack-plan.md`.
