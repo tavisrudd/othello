@@ -104,9 +104,12 @@ controlled transport.
 Suppose the coarse exterior Fitting ledger has made `L` a proper controlled
 submersion on a compact collar neighborhood over the contractible disk
 `Omega`.  In the reference fibre over `u_0`, choose a labelled residual
-boundary `I_{u_0}` which is transverse to every fibre stratum.  Use Mather's
-controlled lifts of the coordinate vector fields on `Omega` and their proper
-flows to transport `I_{u_0}` over the disk.  Their union is a labelled closed
+boundary `I_{u_0}` which is a controlled stratified hypersurface, transverse
+to every positive-dimensional fibre stratum (and empty on zero-dimensional
+ones when necessary).  Choose one ordered/radial controlled product
+trivialization from Mather's horizontal lifts; the individual coordinate
+flows need not commute.  Transport `I_{u_0}` by this fixed trivialization.
+Its union is a labelled closed
 interface `I`, and the transported fibrewise defining function `rho` satisfies
 
 \[
@@ -115,9 +118,12 @@ interface `I`, and the transported fibrewise defining function `rho` satisfies
 
 on every stratum: `dL` has rank two on the horizontal lift directions, while
 `d rho` is nonzero on the transported vertical normal.  The same flow keeps
-the path-tube end labels separate.  Thus no second coefficient-sensitive
+the path-tube end labels separate.  Refine the Whitney partition by the
+normally nonsingular transported hypersurface and use the transported control
+data, so `I` is a union of labelled strata.  Thus no second coefficient-sensitive
 polar fan is required **after** proper controlled submersivity on a collar has
-been supplied.
+been supplied.  Existence of the initial controlled stratified hypersurface
+is part of the collar-control hypothesis, not a consequence of `dL` alone.
 
 This is not circular with the pair theorem: controlled submersivity is first
 used only on a compact collar neighborhood without a prescribed interface;
