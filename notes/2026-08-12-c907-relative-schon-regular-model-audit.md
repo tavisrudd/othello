@@ -263,20 +263,31 @@ least one Rees cone.  Thus its inverse-image opens retain the three named Rees
 coordinate systems.  No Kummer cover is needed for regularity; only a
 reduced semistable central fibre would require a ramified/Kummer alteration.
 
-This factorization is the precise protected-star coverage statement.  The
-three Rees opens cover and overlap; they are not a partition.  On the bounded
-`delta` open, the existing joint-`y` audit proves that noncompact `y` faces
-are empty/free and that the compact critical scheme is the four-section Morse
-family.  On an imbalanced open, compact-`y` faces have the exact unit
-`partial_v L=1` or `partial_w L=1` on every genuine actual-boundary component
-and intersection.  Noncompact joint `y`/Rees faces need not be product cones;
-they are covered instead by the positive-normalization theorem, where `L` is
-free.  The algebraic faces `v=0,w=0` may occur in a fine toric chart, but are
-excluded from the **actual/control** boundary, so their artificial packets
-are never used.  If `beta=0` or `gamma=0`, the closure maps to the adjacent
-`(g,1)`, `(1,g)`, or `(g,g)` exterior types already covered by the tangent
-certificate.  These cases exhaust the Rees cover without asserting that its
-opens are disjoint or unsplit.
+This factorization is only the first half of protected-star coverage.  The
+three ordinary Rees opens cover and overlap; they are not a partition.  The
+exact unit coordinates at their unbounded ends arise only after the further
+specified residual modifications
+
+\[
+ r=Z^{-1},\quad v=ZW,\quad\delta=rh
+\]
+
+and its symmetric copy; they are not the elementary coordinates
+`delta=Ur,V=Uv_0` of the `U`-Rees open.  Thus factorization through the blowup
+does not by itself import `partial_vL=1` to every refined cone.
+
+The remaining coverage target is now exact.  Attach the bounded `delta` chart
+to those two imbalanced refinement charts over its `Z/W`-infinity ends.  The
+bounded audit handles all compact `y` points and makes noncompact `y` faces
+empty/free; the imbalanced audits give the unit derivative on their genuine
+actual-boundary components.  Other noncompact joint `y`/Rees faces are covered
+by the positive-normalization theorem, where `L` is free.  Algebraic
+`v=0,w=0` faces may occur but must be forgotten in the actual/control
+partition.  Finally `beta=0` or `gamma=0` maps to adjacent exterior types.
+What remains unproved is that one regular refinement plus the two additional
+residual modifications realizes exactly this cover and its overlaps.  No
+global coarse Fitting conclusion is claimed before that attachment record is
+supplied.
 
 The fan used for the tropical pair is supported **exactly** on
 `Sigma_trop`; its multiplication map is smooth and surjective over precisely
