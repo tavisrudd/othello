@@ -95,9 +95,11 @@ Only then may localization be used to identify Fitting ideals on overlaps.
 
 There are exactly two legitimate transfers from the ten auxiliary reports.
 
-1. A fine certificate displaying a unit derivative tangent to the fine
-   stratum also proves coarse freeness: that derivative remains tangent after
-   coarsening.
+1. A fine report transfers to coarse freeness only when it exhibits a
+   derivation $\xi$ tangent to the reduced coarse stratum $T$, with
+   $\xi L\in\mathcal O_T^\times$.  Being a unit only after quotienting by
+   the finer-stratum ideal is insufficient.  In particular, a literal
+   identity $\partial_vL=1$ transfers when $v$ remains tangent.
 2. A fine restricted Fitting calculation does not transfer automatically.
    It must be recomputed on the induced reduced coarse stratum.
 
