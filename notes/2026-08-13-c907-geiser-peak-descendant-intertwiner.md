@@ -4,13 +4,17 @@ Date: 2026-08-13
 
 Status: exact geometric regression and a proof extension of Chen--Tseng from
 one simple flop to a finite disjoint union of simple flops.  This constructs
-the missing intrinsic Gamma/descendant frame transition for the **middle
-flop** of the point-centred Geiser Sarkisov peak, including after product with
-`P^2`.  The two wall-local point-blowup receivers are attached in the
-successor `2026-08-13-c907-geiser-attachment-line-bundle-reduction.md` using
-the quotient-Novikov line, LLW analyticity, and Dreyfus parameterized Stokes
-theory.  Thus the complete Geiser peak is now closed; Gold is not, because
-peak coverage remains open.
+the missing Gamma/descendant frame transition for the **middle flop** of the
+point-centred Geiser Sarkisov peak, including after product with `P^2`.
+Lee--Lin--Qu--Wang's separate regular graph gauge transports the `z=0`
+formal packet; Chen--Tseng's large-`z` `U` transports the Gamma point row.
+The two wall-local point-blowup receivers are attached in the successor
+`2026-08-13-c907-geiser-attachment-line-bundle-reduction.md` using the
+quotient-Novikov line and local parameterized Stokes theory.  The distinction
+between the two maps is audited in
+`2026-08-13-c907-geiser-parameterized-continuation-hostile-audit.md`.
+Thus the complete Geiser peak is now closed; Gold is not, because peak
+coverage remains open.
 
 ## 1. Why this is the right first peak
 
@@ -230,8 +234,13 @@ Equation (7) gives the exact identity
 In dimension three the Gamma and `z^rho` factors have no higher action on a
 top point class, so this is literally preservation of the normalized point
 column.  The symplectic/Euler pairing therefore transports the rank row.
-Because `U` intertwines the descendant quantum differential systems, it also
-transports the whole primitive-sixth formal-monodromy packet.  Consequently
+The last sentence must be split between two comparison maps.  LLW's
+cohomological graph correspondence identifies the analytically continued
+quantum rings and hence gives a `z`-independent, regular-at-`z=0` gauge of the
+quantum connections; it transports the primitive-sixth formal-monodromy
+packet.  Chen--Tseng's `U` is the matrix of the same horizontal continuation
+in the large-`z` descendant frames and equation (8) transports the Gamma point
+row.  Pairing compatibility of the common horizontal map therefore gives
 
 \[
  \mathfrak r_Y|_{P_6(Y)}\ne0
@@ -244,8 +253,10 @@ in the two incident analytic receivers.
 
 This is the datum the earlier formal proposals could not manufacture for the
 middle crepant wall.  The Laurent relation (5) causes no problem **inside
-that wall**: `U` is precisely analytic continuation across its deleted
-overlap and is independent of the remaining Novikov variables.
+that wall**: LLW provide the regular quantum-connection comparison and `U`
+is its large-`z` descendant-frame matrix, independent of the remaining
+Novikov variables.  The audit does not assert that `U` itself is regular at
+`z=0`.
 
 It is not yet enough to compose the complete peak.  The two point blowups in
 (1) are controlled by
@@ -355,7 +366,7 @@ the point-blowup packet is two copies of `K_0(P^2)`, not six independent
 flop packets.
 
 For the **small** quantum D-module used by C907, product/Kunneth naturality
-gives
+gives the corresponding horizontal transformation
 
 \[
  U_{Y\times\mathbf P^2}=U_Y\otimes\mathrm{id}_{\mathbf P^2},
@@ -365,12 +376,13 @@ gives
 \]
 
 The Fourier--Mukai kernel also external-products with the diagonal of
-`P^2`.  Therefore (8)--(9) tensor with every projective-space Gamma factor.
-The aggregate primitive-sixth packet and the rank covector are preserved
-across the middle fivefold flop.  Equation (10) remains conditional on the
-two point-blowup attachments, now after external product with `P^2`;
-relation (12) is unchanged and the projective-space Novikov variable is
-passive.
+`P^2`.  The regular LLW gauge and the large-`z` Gamma/FM transformation both
+external-product.  Therefore (8)--(9) tensor with every projective-space
+Gamma factor: the former gauge preserves the aggregate primitive-sixth
+packet and the latter identity preserves the rank covector.  Equation (10)
+remains conditional on the two point-blowup attachments, now after external
+product with `P^2`; relation (12) is unchanged and the projective-space
+Novikov variable is passive.
 
 This product argument is deliberately used instead of citing Chen--Tseng for
 the ordinary flop over `P^2`: their Remark 3.1 says that the split ordinary

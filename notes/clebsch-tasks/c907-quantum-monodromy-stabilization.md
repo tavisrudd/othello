@@ -75,17 +75,18 @@ relation `q'=q s^3` says that `q,q'` are local frames of one quotient-Novikov
 line over the compactified flop coordinate.  LLW's series by curve class
 modulo the extremal ray already implement this Laurent reindexing, and the
 dimension axiom makes every fibre degree locally finite.  This removes the
-formal-evaluation obstruction.  A convergent spectral projector separates
-the whole ambient cluster from the nonzero point-exceptional clusters near
-each endpoint.  Dreyfus's parameterized Hukuhara--Turrittin/Stokes theorems
-give the parameter-holomorphic sectorial realizations; a generic path avoids
-the proper turning locus; and Chen--Tseng identifies the patched continuation
-with Gamma/Fourier--Mukai transport.  Cubic-atom confluence is avoided by
-restricting to `P6` only after transporting the whole block.  Therefore the
-complete Geiser peak and its product with `P2` preserve the Gamma rank
-Boolean.  This is a publishable peak theorem, not Gold: the remaining global
-gate is coverage/classification of all peak types in a smooth fivefold
-factorization.
+formal-evaluation obstruction.  Hostile audit removed two overstatements:
+spectral separation gives a formal projector with sectorial sums, not a
+convergent exact block gauge, and Chen--Tseng's Givental `U` is not itself the
+regular `z=0` comparison.  The repaired proof uses LLW's regular graph gauge
+to transport `P6`, Chen--Tseng's Gamma/FM square to transport the point/rank
+row, and Dreyfus only on nonturning endpoint polydiscs.  A generic path avoids
+the proper turning, level-changing, singular, and resonance loci.  Therefore
+the complete Geiser peak and its product with `P2` preserve the Gamma rank
+Boolean.  Exact audit:
+`../2026-08-13-c907-geiser-parameterized-continuation-hostile-audit.md`.
+This is a publishable peak theorem, not Gold: the remaining global gate is
+coverage/classification of all peak types in a smooth fivefold factorization.
 
 **Load next:** `c907-solver-dossier.md`.
 

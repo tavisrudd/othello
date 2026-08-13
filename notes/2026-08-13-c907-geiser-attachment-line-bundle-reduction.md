@@ -2,16 +2,17 @@
 
 Date: 2026-08-13
 
-Status: Geiser peak theorem.  The two point-blowup receivers and the
-Chen--Tseng middle-flop intertwiner lie on one analytic path after the
-nonextremal Novikov degree is treated as a line bundle over the extremal
-Kahler coordinate.  Local finiteness comes from the dimension axiom,
-analyticity in the extremal series from Lee--Lin--Qu--Wang, and the required
-parameter-uniform sectorial realization from Dreyfus's parameterized
-Hukuhara--Turrittin/Stokes theorems after separating the ambient cluster by a
-convergent spectral projector.  The complete point-centred Geiser peak, and
-its product with `P^2`, preserve the Gamma rank Boolean.  This closes one
-peak class, not Gold.
+Status: Geiser peak theorem, hostile-audited and repaired.  The two
+point-blowup receivers and the middle-flop comparison lie on one analytic
+path after the nonextremal Novikov degree is treated as a line bundle over
+the extremal Kahler coordinate.  LLW's graph correspondence is the
+regular-at-`z=0` gauge transporting the primitive-sixth packet;
+Chen--Tseng identify the same horizontal continuation in the large-`z`
+Gamma framing and therefore transport the point/rank row.  Dreyfus is used
+only on nonturning endpoint polydiscs to identify the sectorial receivers.
+The complete point-centred Geiser peak, and its product with `P^2`, preserve
+the Gamma rank Boolean.  This closes one peak class, not Gold.  Exact hostile
+audit: `2026-08-13-c907-geiser-parameterized-continuation-hostile-audit.md`.
 
 ## 1. The apparent incompatibility
 
@@ -126,7 +127,7 @@ already (4).  On a positive-real continuation path, (2) preserves the phase
 of the two local frames `q,q'`; the same `z`-sector can be used at both ends.
 Thus neither sector width nor the pairing flip is the obstruction.
 
-## 5. The separated-cluster lemma
+## 5. The endpoint formal-primary lemma
 
 Let `A_L` be the whole ambient block in the left point-blowup comparison and
 `A_R` the whole ambient block on the right.  At the respective endpoint
@@ -138,40 +139,42 @@ nonzero.
 
 The needed statement is:
 
-> **Separated-cluster continuation lemma.**  For the Geiser two-parameter
-> quantum connection, the formal ambient projector supplied by the
-> point-blowup comparison has a canonical sectorial realization on (4),
-> holomorphic in the quotient-Novikov line near the endpoint and compatible
-> with LLW analytic continuation in `s`.  Its realization is jointly flat in
-> the parameter directions.  Under Chen--Tseng's descendant transformation
-> it becomes the corresponding right ambient realization.
+> **Endpoint formal-primary lemma.**  On a nonturning endpoint polydisc, the
+> formal ambient projector supplied by the point-blowup comparison has a
+> canonical sectorial realization on (4), holomorphic in the
+> quotient-Novikov-line parameter and jointly flat.  Along a path avoiding
+> the level-changing, turning, singular, and primitive-sixth resonance loci,
+> the intrinsic formal-primary packet and Gamma point section transport to
+> the corresponding right endpoint objects.
 
 Only whole clusters occur in this statement.  The cubic primitive-sixth atom
 is allowed to confluence at the endpoint and is restricted only after the
 whole-block identity has been transported to a nonzero interior parameter.
 This avoids the false deconfluence move.
 
-This lemma follows from standard parameterized irregular-connection theory
-in the present setting.
+This lemma follows from parameterized irregular-connection theory together
+with the distinction between the regular LLW gauge and the large-`z`
+Chen--Tseng transformation.
 
 **Proof.**  Work first near the left endpoint with `q ne 0`.  At `s=0`, the
 two point-exceptional exponential values are nonzero multiples of `q`, while
 the entire ambient cluster has exponential value zero.  A small contour in
-the spectral plane therefore gives a holomorphic Riesz projector onto the
-ambient generalized eigenspace.  The usual recursive block diagonalization
-has denominators given by ambient--center eigenvalue differences, which are
-units on a sufficiently small parameter neighbourhood.  It yields a
-convergent parameter-holomorphic separation of the **whole** ambient cluster;
-no decomposition inside that cluster is made at `s=0`.
+the spectral plane gives a holomorphic Riesz projector for the leading Euler
+quantum product.  The recursive **formal** block diagonalization has
+Sylvester denominators given by ambient--center eigenvalue differences,
+which are units after shrinking.  It yields a unique parameter-holomorphic
+formal projector with this leading term.  It does not give a convergent
+analytic block gauge; the possible off-diagonal Stokes extension is retained.
 
-For the separated ambient and center connections, apply Dreyfus Proposition
-1.3 to obtain a parameterized Hukuhara--Turrittin form after shrinking the
-parameter polydisc.  Proposition 1.13 and Lemma 1.14 give sectorial sums
-meromorphic in `(z,t)` and commuting with parameter derivatives whenever the
-chosen `z` direction is nonsingular.  The balanced sector (4) supplies such
-a direction at the endpoint.  Thus the formal ambient projector used in the
-blowup receiver has a unique parameter-holomorphic sectorial realization and
-is jointly flat.  This proves the asserted endpoint identification.
+Apply Dreyfus Proposition 1.3 after shrinking to a polydisc on which the
+levels are constant.  As required before his Proposition 1.13, also remove
+collisions of singular directions and points where the specialized formal
+type differs from the parameterized one.  Proposition 1.13 and Lemma 1.14
+then give the sectorial sum in a continuously nonsingular direction and
+commutation with parameter derivatives.  Integrability supplies the remaining
+joint-flatness statement: a parameter-covariant derivative of the summed
+projector has zero formal germ, hence vanishes by sectorial uniqueness.  The
+balanced sector (4) supplies the endpoint direction.
 
 The same argument applies at the right endpoint.  Between the endpoints,
 LLW prove that every fixed quotient-degree series is analytic in the
@@ -180,27 +183,28 @@ shows that, for the small connection used here, each matrix coefficient is
 actually locally finite in that degree, so the quotient parameter can be
 evaluated along the correlated path.
 
-Remove from the total space of the quotient-Novikov line the turning locus
-where an ambient eigenvalue meets a point-exceptional eigenvalue and the
-ordinary singular locus of the quantum connection.  These form a proper
-complex analytic subset.  The complement of a proper complex hypersurface
-in this connected complex parameter surface is path-connected; after an
-arbitrarily small perturbation, choose a path joining the two endpoint
-neighbourhoods.  Refine the excluded locus by the proper collision loci for
-the formal factors entering `P6`.  Cover the path's compact image by finitely
-many Dreyfus polydiscs.
-On overlaps, uniqueness of sectorial sums identifies the local realizations;
-choose a continuous lifted `z` direction avoiding the finitely many moving
-singular directions on each member of the cover.  If the cover is changed
-across a Stokes wall, the change is the ordinary Stokes transition of the
-same analytic connection, not a new fibre functor.
+Remove from the nonzero total space of the quotient-Novikov line the ordinary
+singular, level-changing, turning, and primitive-sixth resonance loci.  They
+are proper analytic loci by the endpoint separation.  Their complement is
+path-connected; choose a path joining the two endpoint neighbourhoods and
+cover its compact image by finitely many Dreyfus polydiscs.  Choose a
+continuous lifted nonsingular `z` direction.  The normalized formal-primary
+projector is unique on overlaps, so its sectorial sums agree; no Stokes wall
+is crossed by this lifted direction.  Equivalently, continue at one fixed
+`z ne 0` and use Dreyfus only to identify the endpoint asymptotics, avoiding
+any need for a uniform lower bound on Dreyfus's radius `epsilon(t)`.
 
-Chen--Tseng define their variable-independent `U` by exactly this analytic
-continuation of descendant fundamental solutions, and their Theorem 0.2
-identifies it with Fourier--Mukai transport in the Gamma framing.  Therefore
-the patched continuation is the Chen--Tseng transformation and carries the
-left ambient realization, its tracked `P6` formal factors, and the Gamma
-point row to their right counterparts.  This proves the lemma. `square`
+There are now two comparison maps.  LLW identify the analytically continued
+quantum differential equations by the cohomological graph correspondence.
+This gauge is independent of `z`, hence regular at `z=0`, and transports the
+formal `P6` packet.  Chen--Tseng's `U` is the matrix of the same horizontal
+continuation in the two large-`z` descendant frames; it lives in the
+multivalued Givental space and is not being asserted regular at `z=0`.
+Their Theorem 0.2 identifies that horizontal map with Fourier--Mukai transport
+on the Gamma lattice, so it sends the off-exceptional Gamma point section to
+the corresponding right point section.  Thus the regular gauge transports
+the packet and the Gamma/FM square transports the covector.  This proves the
+lemma. `square`
 
 The possible change of formal level at `s=0` in Dreyfus's Example 1.5 is not
 a counterexample: the proof first separates the whole ambient cluster from
@@ -213,10 +217,10 @@ cubic exponential splitting through its confluence point.
 1. The left Gu--Yu--Yu/Shen--Shoemaker receiver identifies the endpoint
    cubic rank Boolean with the restriction of the intrinsic Gamma rank row
    to `P_6(Y)` inside `A_L`.
-2. Continue `A_L` along the quotient-Novikov line and the extremal coordinate.
+2. Continue along the quotient-Novikov line and the extremal coordinate.
+   LLW's regular graph gauge transports the formal-monodromy packet;
    Chen--Tseng's Gamma/Fourier--Mukai square fixes the off-exceptional point
-   class and transports the complete formal-monodromy packet across the
-   middle flop.
+   class and transports the rank row across the middle flop.
 3. The lemma identifies the result with `A_R` in the right balanced receiver.
    The right point-blowup theorem then identifies its Boolean with that of
    the target cubic.
@@ -250,11 +254,9 @@ algebraic and angular hypotheses explicit.
 3. Product with `P^2` is obtained by small-QDM Kunneth naturality.  It is not
    an invocation of the unproved general ordinary-flop extension in
    Chen--Tseng Remark 3.1.
-4. The path may wind around turning divisors and accumulate a Stokes
-   mutation.  This does not affect the conclusion because the patched
-   analytic continuation is the same `U` whose Gamma/FM compatibility is
-   Chen--Tseng's theorem.  It would matter if one tried to identify
-   individual exponential lines rather than the whole packet and rank row.
+4. The path is chosen in the nonturning locus with one continuously lifted
+   nonsingular direction.  A proof that crosses a Stokes wall would require
+   an extra invariance argument and is not used here.
 5. Nothing here says that every peak in a smooth fivefold factorization is a
    Geiser peak.  Global Gold retains the peak-coverage/classification gate.
 
@@ -285,9 +287,9 @@ algebraic and angular hypotheses explicit.
   reindexing.  The fixed-parameter contradiction disappears without ever
   evaluating a formal series at an unauthorized point.
 - **TT:** line-bundle reindexing does not itself compare sectorial fibre
-  functors.  The comparison uses Dreyfus only after a convergent whole-cluster
-  separation and uses Chen--Tseng to identify the patched global transition;
-  omitting either step reopens the original frame gap.
+  functors.  The comparison uses a formal/sectorial endpoint projector,
+  LLW's regular gauge for `P6`, and Chen--Tseng's large-`z` Gamma/FM square
+  for the point row.  Conflating the last two maps reopens the frame gap.
 - **AA:** this closes one peak, not a globalization theorem.  The next C907
   question is peak coverage in dimension five, not another Geiser
   continuation calculation.
