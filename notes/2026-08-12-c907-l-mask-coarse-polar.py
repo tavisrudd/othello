@@ -3,9 +3,10 @@
 
 This is the symbolic reduction layer only.  It recomputes all L-containing
 support masks from the exact tripod refinement and gives, for every exterior
-ordered type, a tangent derivative that is a residue unit (or the excluded
-value L=0).  The (1,1) residue torus is recorded separately: its closure is
-the protected bounded residual Rees star and is never discharged as exterior.
+ordered type, a logarithmic residue-character derivative that is a residue
+unit (or the excluded value L=0).  The (1,1) residue torus is recorded
+separately: its closure is the protected bounded residual Rees star and is
+never discharged as exterior.
 """
 from __future__ import annotations
 
@@ -78,8 +79,9 @@ def witness(kind: tuple[str, str], mask: str) -> dict:
     """Return an exact polar witness in the stated localized normal model.
 
     The type `1` is an *auxiliary* pair-of-pants face.  Witnesses are chosen
-    tangent to the genuine coarse boundary; in particular the infinity
-    residue, not a nonregular derivative normal to B=1 or C=1, handles the
+    tangent to the genuine coarse boundary.  Every exterior unit pivot is a
+    logarithmic field in an inverted residue character.  In particular the
+    infinity residue, not a derivative normal to B=1 or C=1, handles the
     full reciprocal-linear mask.
     """
     terms = frozenset(mask)
@@ -87,22 +89,22 @@ def witness(kind: tuple[str, str], mask: str) -> dict:
         if terms == frozenset("01234"):
             return {"outcome": "unit", "pivot": "dlog_b H=-P", "unit": "P"}
         if terms == frozenset("012345"):
-            return {"outcome": "unit", "pivot": "partial_c H=U", "unit": "U=1-b"}
+            return {"outcome": "unit", "pivot": "dlog_c H=cU", "unit": "cU"}
     if kind == ("0", "1"):
         if terms == frozenset("01234"):
             return {"outcome": "unit", "pivot": "dlog_b H=-P", "unit": "P"}
         if terms == frozenset("012345"):
-            return {"outcome": "unit", "pivot": "partial_c H=1", "unit": "1"}
+            return {"outcome": "unit", "pivot": "dlog_c H=c", "unit": "c"}
     if kind == ("1", "g"):
         if terms == frozenset("01234"):
             return {"outcome": "unit", "pivot": "dlog_c H=-P", "unit": "P"}
         if terms == frozenset("012345"):
-            return {"outcome": "unit", "pivot": "partial_b H=V", "unit": "V=1-c"}
+            return {"outcome": "unit", "pivot": "dlog_b H=bV", "unit": "bV"}
     if kind == ("1", "0"):
         if terms == frozenset("01234"):
             return {"outcome": "unit", "pivot": "dlog_c H=-P", "unit": "P"}
         if terms == frozenset("012345"):
-            return {"outcome": "unit", "pivot": "partial_b H=1", "unit": "1"}
+            return {"outcome": "unit", "pivot": "dlog_b H=b", "unit": "b"}
     if kind in {("1", "infinity"), ("infinity", "1")}:
         marked = "b" if kind == ("1", "infinity") else "c"
         other = "c" if marked == "b" else "b"
@@ -111,8 +113,8 @@ def witness(kind: tuple[str, str], mask: str) -> dict:
         if "5" in terms:
             return {
                 "outcome": "unit",
-                "pivot": f"partial_{marked} H=-{other}",
-                "unit": other,
+                "pivot": f"dlog_{marked} H=-{marked}{other}",
+                "unit": f"-{marked}{other}",
             }
         if "4" not in terms:
             # Some x_i occurs because the L-only case was separated above.
@@ -168,6 +170,13 @@ def encode() -> dict:
         raise RuntimeError(f"unexpected L-mask totals: {len(records)}, {exterior}, {protected}")
     if any(record["outcome"] not in {"unit", "L=0"} for record in records if record["ordered_type"] != ["1", "1"]):
         raise RuntimeError("an exterior L mask was not discharged")
+    exterior_unit_pivots = [
+        record["pivot"]
+        for record in records
+        if record["ordered_type"] != ["1", "1"] and record["outcome"] == "unit"
+    ]
+    if len(exterior_unit_pivots) != 70 or any(not pivot.startswith("dlog_") for pivot in exterior_unit_pivots):
+        raise RuntimeError("an exterior unit pivot is not logarithmic")
     return {
         "schema_version": 1,
         "input": {"file": INPUT.name, "sha256": hashlib.sha256(INPUT.read_bytes()).hexdigest()},
@@ -178,6 +187,7 @@ def encode() -> dict:
             "all_81367_cells_recompute_upper_envelope_masks": True,
             "seven_order_zero_L_types_and_exact_masks": True,
             "72_exterior_L_mask_records_have_unit_or_L_zero_witness": True,
+            "all_70_exterior_unit_pivots_are_logarithmic_residue_fields": True,
             "two_11_records_are_protected_not_exterior": True,
             "no_claim_about_11_residue_closure_or_bounded_residual_Rees_star": True,
         },

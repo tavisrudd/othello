@@ -6,7 +6,8 @@
 reduces coarse polar strictness to a regular tangent-vector lift and applies
 to all 70 exterior unit records.  The initially proposed
 `coarse_unmark d_B/d_C` lifts were nonregular; the exact repair uses the
-independent infinity-residue logarithmic derivative.  The lemma does not
+independent infinity-residue logarithmic derivative.  All 70 exterior unit
+witnesses are now logarithmic residue-character fields.  The lemma does not
 prove chart coverage or alter the protected `(1,1)` residual star.
 
 ## The filtered tangent lemma
@@ -62,17 +63,27 @@ derivations have regular tangent lifts on the corresponding coarse stratum:
 
 - `dlog_xi` lifts as `x_i partial_xi`;
 - a generic residue `dlog_b` or `dlog_c` lifts while all `z_F` are held fixed;
-- the type-`1` derivatives in the marked residue coordinate lift as
-  `partial_b` or `partial_c` when the witness is already expressed in that
-  residue coordinate.
+- every type-`1` witness is multiplied by its inverted residue coordinate,
+  so it too is `dlog_b` or `dlog_c`.
 
 The logarithmic residue derivations are invariant on the Kummer cover and
-descend; ordinary residue derivatives are used only on a genuine unimodular
-scheme chart after chartwise descent is checked.  This descent is part of the
-explicit fan-coverage hypothesis below, not an output of the Kummer digest.
-Conditional on it, for all 70 `unit` records in
+descend.  On a direct unimodular scheme chart, the residue-torus splitting
+also makes them regular vector fields tangent to every toric boundary
+component.  Conditional on chart coverage, for all 70 `unit` records in
 `2026-08-12-c907-l-mask-coarse-polar.json`, the displayed residue unit is the
 reduction (1) of a regular tangent derivative.
+
+The six formerly ordinary cases are, exactly,
+
+\[
+ c\partial_cH=cU,\quad c\partial_cH=c,\quad
+ b\partial_bH=bV,\quad b\partial_bH=b,\quad
+ b\partial_bH=-bc,\quad c\partial_cH=-bc.
+\]
+
+Their displayed factors are all inverted in their named residue tori.  The
+certificate now checks mechanically that every exterior unit pivot begins
+with `dlog_`.
 
 Two records require a corrected witness:
 
