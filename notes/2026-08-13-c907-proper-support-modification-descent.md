@@ -89,23 +89,23 @@ divisor, and only its proper pushforward is intrinsic.
 ## 2. Modification-local acyclicity criterion
 
 Let `x` be a point of the boundary of one coarse proper compactification
-`bar G`.  Suppose there is a proper modification (4), an open neighborhood
-`V` of `x`, and a Whitney stratification of `pi^{-1}(V)` compatible with the
-actual boundary such that:
+`bar G`.  Suppose there is a proper modification (4), a closed proper
+controlled-product neighborhood `N` of the whole fibre `pi^{-1}(x)`, and a
+Whitney stratification of `N` compatible with the actual boundary such that:
 
-1. the actual-boundary pair is a proper controlled `L`-submersion over
-   `Omega` (equivalently, one supplies the needed
+1. the labelled actual-boundary pair on `N` is a proper controlled
+   `L`-submersion over `Omega` (equivalently, one supplies the needed
    `SS(tilde j_!A)`-noncharacteristic certificate; a bare Fitting unit on a
    chosen stratum is not enough);
-2. `tilde j_!A` is constructible for this stratification; and
+2. `tilde j_!A|_N` is constructible for this stratification; and
 3. no protected Morse section lies over `V`.
 
-Assume these conditions hold on the **entire** proper inverse image
-`pi^{-1}(V)`, not merely on one chart or on one point of each fibre.  Then
-Thom--Mather local triviality gives
+These conditions hold on a neighborhood of the **entire** proper fibre, not
+merely on one chart or on one point of it.  Thom--Mather local triviality then
+gives
 
 \[
- \phi_{L-u}(\widetilde j_!A)|_{\pi^{-1}(V)}=0
+ \phi_{L-u}(\widetilde j_!A)|_{N}=0
  \quad(u\in\Omega).
  \tag{7}
 \]
