@@ -1,0 +1,67 @@
+// C907 zero/infinity seam B=0, C=infinity certificate.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-b0-cinf-seam-star-fan.sing
+//
+// The five central Laurent terms are x1,x2,x3,
+// P=1/(x1*x2*x3*b*c), and K=c.  All x_i,b,c are torus units.
+
+LIB "elim.lib";
+
+ring r = 0,(x1,x2,x3,b,c),dp;
+poly D = x1*x2*x3*b*c;
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+poly H;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  if (mask%2 != 0) { H = H + D*x1; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; }
+  if ((mask div 8)%2 != 0) { H = H + 1; }
+  if ((mask div 16)%2 != 0) { H = H - D*c; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      b*diff(H,b),c*diff(H,c);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+    }
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("SUMMARY masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("SUMMARY masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+quit;
