@@ -2,6 +2,7 @@ import Mathlib.Data.ENat.Lattice
 import Mathlib.Data.Matrix.Auto
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.Tactic
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 
 /-!
 # Graph-coordinate block calculation and coefficient depths
@@ -148,6 +149,39 @@ theorem slopeCommutator_expansion
 contributing no additional depth. -/
 def truncatedDepthDifference (total : ℕ) (valuation : ℕ∞) : ℕ :=
   valuation.recTopCoe 0 (fun finiteValue ↦ total - finiteValue)
+
+/-- Truncated valuation subtraction is the residual lower bound needed after
+adding the valuation of a scalar factor. -/
+theorem coe_truncatedDepthDifference_le_iff
+    (total : ℕ) (scalarValuation coefficientValuation : ℕ∞) :
+    (truncatedDepthDifference total scalarValuation : ℕ∞) ≤
+        coefficientValuation ↔
+      (total : ℕ∞) ≤ scalarValuation + coefficientValuation := by
+  induction scalarValuation using ENat.recTopCoe with
+  | top => simp [truncatedDepthDifference]
+  | coe scalarFinite =>
+      induction coefficientValuation using ENat.recTopCoe with
+      | top => simp [truncatedDepthDifference]
+      | coe coefficientFinite =>
+          simp only [truncatedDepthDifference, ENat.recTopCoe_coe,
+            ENat.coe_le_coe]
+          rw [← ENat.coe_add, ENat.coe_le_coe]
+          omega
+
+/-- In a normalized DVR, the truncated valuation deficit is exactly the
+power-divisibility condition imposed by multiplying by the scalar
+difference.  This is the arithmetic bridge from the commutator block to the
+cross-depth formula. -/
+theorem pow_truncatedDepthDifference_dvd_iff_pow_dvd_mul
+    {R : Type*} [CommRing R] {uniformizer : R}
+    (data : NormalizedDVRValuation uniformizer)
+    (total : ℕ) (scalarDifference coefficient : R) :
+    uniformizer ^ truncatedDepthDifference total
+          (data.valuation scalarDifference) ∣ coefficient ↔
+      uniformizer ^ total ∣ scalarDifference * coefficient := by
+  rw [data.power_dvd_iff, data.power_dvd_iff, data.valuation_mul]
+  exact coe_truncatedDepthDifference_le_iff total
+    (data.valuation scalarDifference) (data.valuation coefficient)
 
 /-- The cross depth obtained by intersecting the two off-diagonal
 integrality conditions with the slope-difference condition. -/

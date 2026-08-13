@@ -240,6 +240,20 @@ theorem graphCoefficient_slopeCommutator_expansion
     coefficient firstScalar secondScalar firstPower secondPower
     firstError secondError firstScalarCentral secondScalarCentral secondPowerCentral
 
+/-- DVR arithmetic bridge from the scalar-difference commutator term to its
+truncated residual coefficient depth. -/
+theorem graphCoefficient_scalarDifference_divisibility
+    {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    {π : R} (πIrreducible : Irreducible π)
+    (totalDepth : ℕ) (scalarDifference coefficient : R) :
+    π ^ GraphLattices.truncatedDepthDifference totalDepth
+          (IsDiscreteValuationRing.addVal R scalarDifference) ∣ coefficient ↔
+      π ^ totalDepth ∣ scalarDifference * coefficient :=
+  GraphLattices.pow_truncatedDepthDifference_dvd_iff_pow_dvd_mul
+    (GraphLattices.NormalizedDVRValuation.ofIsDiscreteValuationRing
+      πIrreducible)
+    totalDepth scalarDifference coefficient
+
 /-- Arithmetic core of the graph coefficient depth formula: the maximum
 depth is exactly the intersection of the three power-divisibility conditions,
 and it always satisfies the midpoint inequality. -/
