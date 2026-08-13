@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 129 reviewer-facing Lean terminals.  These counts summarize the
+There are 130 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 129 reviewer terminals.
+1 complete; 130 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -79,6 +79,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   Each entrywise monomial gauge coefficient is also packaged as an explicit
   compatible quotient family and identified with the compatible family
   represented by its corresponding base-gauge coefficient.
+  A Laurent-coefficient specialization constructs the same system over
+  `LaurentSeries (R/F^n)` at every level.  Thus each finite-level bulk
+  coefficient has integral loop exponents and its own Laurent lower bound;
+  no lower bound uniform in bulk monomials or levels and no Laurent-valued
+  inverse-limit gauge are constructed.
   Their identification with the manuscript's geometric tower and quantum
   connection, and uniform Laurent-order bounds, are not formalized.
   The ordinary one-variable varying

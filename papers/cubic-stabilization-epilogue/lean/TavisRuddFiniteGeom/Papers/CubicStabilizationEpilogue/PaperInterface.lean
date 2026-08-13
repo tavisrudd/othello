@@ -43,6 +43,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleV
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableFlatGaugeUniqueness
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableLaurentFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2665,6 +2666,40 @@ theorem filteredMultivariableFormalFlatGauge_quotient_compatible
     (input.connectionAt_gaugeAt_compatible level).2,
     input.gaugeAt_existsUnique level,
     input.gaugeCoefficientFamily_eq_ofRingElement⟩
+
+/-- Let the bulk coefficients of a zero-curvature multivariable connection be
+ordinary Laurent series over a filtered commutative rational algebra.  Lean
+maps the Laurent coefficients into every actual quotient, constructs the
+unique normalized invertible gauge there, and proves canonical adjacent
+compatibility of both connection and gauge.  At every level and bulk monomial,
+the matrix entries are ordinary Laurent series and hence use integral loop
+exponents with an individual lower bound.  No lower bound uniform in bulk
+monomials or levels, Laurent-valued inverse-limit gauge, geometric
+identification, or analytic specialization is asserted. -/
+theorem filteredMultivariableLaurentFlatGauge_quotient_compatible
+    {Coordinate Index B : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : Quantum.FilteredMultivariableLaurentFlatGaugeInput
+      Coordinate Index B)
+    (level : ℕ) :
+    (∀ coordinate,
+      (input.connectionAt (level + 1) coordinate).map
+          (MvPowerSeries.map (input.laurentReduction level).toRingHom) =
+        input.connectionAt level coordinate) ∧
+      (input.gaugeAt (level + 1)).map
+          (MvPowerSeries.map (input.laurentReduction level).toRingHom) =
+        input.gaugeAt level ∧
+      (∃! solution : Matrix Index Index
+          (MvPowerSeries Coordinate
+            (LaurentSeries (input.filtration.QuotientRing level))),
+        solution.map (MvPowerSeries.coeff 0) = 1 ∧
+        IsUnit solution ∧
+        ∀ coordinate,
+          solution.map (Quantum.multivariablePartialDerivative coordinate) =
+            -(input.connectionAt level coordinate) * solution) := by
+  exact ⟨(input.connectionAt_gaugeAt_compatible level).1,
+    (input.connectionAt_gaugeAt_compatible level).2,
+    input.gaugeAt_existsUnique level⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 69 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 70 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 129 audited terminals.  The rejecting manuscript inventory covers all
+exports 130 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -181,6 +181,12 @@ entrywise monomial gauge coefficient is packaged as a compatible quotient
 family and identified with the compatible family represented by its
 corresponding base-gauge coefficient.  This abstract
 quotient tower is not identified with the manuscript's geometric one.
+With ordinary Laurent-series coefficients over the base ring, Lean now maps
+the connection into `LaurentSeries (R/F^n)` and constructs the compatible
+normalized invertible gauges.  Each finite-level bulk coefficient therefore
+has integral loop exponents and an individual Laurent lower bound.  No bound
+uniform in bulk monomials or levels and no Laurent-valued inverse-limit gauge
+is constructed.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
