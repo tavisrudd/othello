@@ -1,0 +1,684 @@
+{
+  "checks": {
+    "all_local_max_lists_match_up_to_recorded_dominated_forms": true,
+    "all_six_weights_restricted_on_every_ordered_type": true,
+    "ordered_type_count": 16,
+    "unordered_hasse_edge_count": 12,
+    "unordered_orbit_type_count": 10
+  },
+  "schema_version": 1,
+  "scope": "finite support subdivision only; normalized graph/Fitting overlaps and collars are excluded",
+  "tripod": {
+    "ordered_strata": [
+      {
+        "local_max_forms": [
+          "2",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3"
+        ],
+        "local_report": "2026-08-12-c907-bunit-cunit-generic-star.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "g",
+          "g"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "g"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+gamma"
+        ],
+        "local_report": "2026-08-12-c907-b0-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "g",
+          "0"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "0"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3",
+          "2-gamma"
+        ],
+        "local_report": "2026-08-12-c907-b1-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "g",
+          "1"
+        ],
+        "redundancy_certificate": "max(p1,p2,p3,-p1-p2-p3) >= 0",
+        "restricted_universal_weights": {
+          "constant": "2-gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "1"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2+gamma",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-gamma"
+        ],
+        "local_report": "2026-08-12-c907-binf-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "g",
+          "infinity"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2+gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+beta"
+        ],
+        "local_report": "2026-08-12-c907-b0-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "0",
+          "g"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+beta",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "0"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+beta+gamma"
+        ],
+        "local_report": "2026-08-12-c907-bc00-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "0",
+          "0"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+beta+gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+beta",
+          "2-gamma"
+        ],
+        "local_report": "2026-08-12-c907-b1-c0-seam-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "0",
+          "1"
+        ],
+        "redundancy_certificate": "if all p_i < 0 then the positive translated ray parameter minus p is > 0; otherwise some p_i >= 0",
+        "restricted_universal_weights": {
+          "constant": "2-gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+beta",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2+gamma",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+beta-gamma"
+        ],
+        "local_report": "2026-08-12-c907-b0-cinf-seam-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "0",
+          "infinity"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2+gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+beta-gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "0",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3",
+          "2-beta"
+        ],
+        "local_report": "2026-08-12-c907-b1-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "1",
+          "g"
+        ],
+        "redundancy_certificate": "max(p1,p2,p3,-p1-p2-p3) >= 0",
+        "restricted_universal_weights": {
+          "constant": "2-beta",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "1"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3+gamma",
+          "2-beta"
+        ],
+        "local_report": "2026-08-12-c907-b1-c0-seam-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "1",
+          "0"
+        ],
+        "redundancy_certificate": "if all p_i < 0 then the positive translated ray parameter minus p is > 0; otherwise some p_i >= 0",
+        "restricted_universal_weights": {
+          "constant": "2-beta",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3+gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "0",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3",
+          "2-beta-gamma"
+        ],
+        "local_report": "2026-08-12-c907-joint-y-rees-infinity-fan.md",
+        "omitted_redundant_weights": [],
+        "ordered_type": [
+          "1",
+          "1"
+        ],
+        "redundancy_certificate": "zero is retained in the reported max list",
+        "restricted_universal_weights": {
+          "constant": "2-beta-gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "1",
+          "1"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "0",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-gamma",
+          "2-beta+gamma"
+        ],
+        "local_report": "2026-08-12-c907-b1-cinf-seam-star-fan.md",
+        "omitted_redundant_weights": [],
+        "ordered_type": [
+          "1",
+          "infinity"
+        ],
+        "redundancy_certificate": "zero is retained in the reported max list",
+        "restricted_universal_weights": {
+          "constant": "2-beta+gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "1",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2+beta",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-beta"
+        ],
+        "local_report": "2026-08-12-c907-binf-cunit-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "infinity",
+          "g"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2+beta",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-beta",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "g",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2+beta",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-beta+gamma"
+        ],
+        "local_report": "2026-08-12-c907-b0-cinf-seam-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "infinity",
+          "0"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2+beta",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-beta+gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "0",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "0",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-beta",
+          "2+beta-gamma"
+        ],
+        "local_report": "2026-08-12-c907-b1-cinf-seam-star-fan.md",
+        "omitted_redundant_weights": [],
+        "ordered_type": [
+          "infinity",
+          "1"
+        ],
+        "redundancy_certificate": "zero is retained in the reported max list",
+        "restricted_universal_weights": {
+          "constant": "2+beta-gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-beta",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "1",
+          "infinity"
+        ]
+      },
+      {
+        "local_max_forms": [
+          "2+beta+gamma",
+          "p1",
+          "p2",
+          "p3",
+          "-p1-p2-p3-beta-gamma"
+        ],
+        "local_report": "2026-08-12-c907-binf-cinf-star-fan.md",
+        "omitted_redundant_weights": [
+          "zero"
+        ],
+        "ordered_type": [
+          "infinity",
+          "infinity"
+        ],
+        "redundancy_certificate": "constant >= 2 because beta,gamma > 0 on their selected rays",
+        "restricted_universal_weights": {
+          "constant": "2+beta+gamma",
+          "p1": "p1",
+          "p2": "p2",
+          "p3": "p3",
+          "polar": "-p1-p2-p3-beta-gamma",
+          "zero": "0"
+        },
+        "unordered_orbit": [
+          "infinity",
+          "infinity"
+        ]
+      }
+    ],
+    "rays": {
+      "0": [
+        1,
+        0
+      ],
+      "1": [
+        0,
+        1
+      ],
+      "infinity": [
+        -1,
+        -1
+      ]
+    },
+    "unordered_hasse_edges": [
+      {
+        "from": [
+          "g",
+          "g"
+        ],
+        "to": [
+          "g",
+          "0"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "g"
+        ],
+        "to": [
+          "g",
+          "1"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "g"
+        ],
+        "to": [
+          "g",
+          "infinity"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "0"
+        ],
+        "to": [
+          "0",
+          "0"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "0"
+        ],
+        "to": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "0"
+        ],
+        "to": [
+          "0",
+          "infinity"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "1"
+        ],
+        "to": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "1"
+        ],
+        "to": [
+          "1",
+          "1"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "1"
+        ],
+        "to": [
+          "1",
+          "infinity"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "infinity"
+        ],
+        "to": [
+          "0",
+          "infinity"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "infinity"
+        ],
+        "to": [
+          "1",
+          "infinity"
+        ]
+      },
+      {
+        "from": [
+          "g",
+          "infinity"
+        ],
+        "to": [
+          "infinity",
+          "infinity"
+        ]
+      }
+    ],
+    "unordered_orbit_types": [
+      [
+        "g",
+        "g"
+      ],
+      [
+        "g",
+        "0"
+      ],
+      [
+        "g",
+        "1"
+      ],
+      [
+        "g",
+        "infinity"
+      ],
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "infinity"
+      ],
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "infinity"
+      ],
+      [
+        "infinity",
+        "infinity"
+      ]
+    ],
+    "vertices": [
+      "g",
+      "0",
+      "1",
+      "infinity"
+    ]
+  },
+  "universal_support_weights": {
+    "constant": "2",
+    "p1": "p1",
+    "p2": "p2",
+    "p3": "p3",
+    "polar": "-p1-p2-p3",
+    "zero": "0"
+  }
+}
