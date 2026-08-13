@@ -96,13 +96,20 @@ Item 3 is stronger than strictness on an associated graded.  Item 4 concerns
 the operator, not only the polynomial shifts.  Together they are exactly the
 minimal Jordan-packet realization hypotheses in the Silver theorem.
 
-Exceptional/base Novikov monodromy is a plausible source of (5): on the
-Orlov `P^d` block, `1-H` has the desired single Jordan string.  But the landed
-sources identify this operator only on the candidate residual block.  They
-do not transport it to the localized formal packet or make the full blowup
-comparison block diagonal for it.  Declaring (5) to be `1-H` before that
-transport is presentation-dependent: the ambient variety need not have a
-distinguished relative hyperplane, and two blowup presentations supply
+The finite exceptional-root monodromy is **not** a source of (5).  It
+permutes the Fourier branches/valuation levels.  Over characteristic zero its
+finite group algebra is semisimple, so this permutation representation has
+no canonical nonzero nilpotent logarithm.  A transitive unframed cyclic
+permutation also does not select the kernel line and ordered endpoints of a
+`J_3` chain.
+
+The distinct base-hyperplane/Serre continuation remains a plausible source:
+on the Orlov `P^d` block, `1-H` has the desired single Jordan string.  But the
+landed sources identify this operator only on the candidate residual block.
+They do not transport it to the localized formal packet or make the full
+blowup comparison block diagonal for it.  Declaring (5) to be `1-H` before
+that transport is presentation-dependent: the ambient variety need not have
+a distinguished relative hyperplane, and two blowup presentations supply
 different exceptional directions.
 
 ## Consequence for attack order
@@ -111,7 +118,7 @@ The internal directed `P^3` Seifert theorem and the marked Gamma seed are no
 longer Silver prerequisites.  The highest-value toric pilot is instead the
 following smaller question:
 
-> does exceptional Novikov continuation on
+> does unipotent base-hyperplane/Serre continuation on
 > `Bl_(P^3)P^5`, after projection to the generalized primitive-sixth packet,
 > define a nilpotent `N` which is `J_1` on the center contribution and for
 > which the formal blowup comparison is an actual `K[N]`-module biproduct?
@@ -129,6 +136,7 @@ Stokes Gram or associated-grade mask has zero expected value for this target.
   `J_1^3` and `J_3` have identical grades and opposite Silver behavior.
 - **Settled:** formal QDM direct sums, Tate indices, and exchange-polynomial
   coherence cannot construct the operation-compatible `N`.
-- **Open:** define `N` from exceptional/base continuation, prove its strict
+- **Open:** define `N` from unipotent base-hyperplane/Serre continuation,
+  not finite exceptional-root permutation; prove its strict
   block-diagonal blowup transport, and test the operator-level exchange
   diagrams.
