@@ -3,9 +3,10 @@
 **Lane:** `clebsch`
 
 **Status:** candidate construction target extracted from the divisorial
-support-square theorem.  Ordinary coniveau provides every required support
-operation; the single nonformal datum is a quantum \(\Phi _6\) coefficient
-system compatible with that coniveau module.
+support-square theorem.  Ordinary coniveau provides the support skeleton and
+rational \(K_0\) identities, but not the exact packet complex, categorified
+virtual tensor action, or quantum \(\Phi _6\) coefficient system required
+below.
 
 ## Required object
 
@@ -66,9 +67,10 @@ in coniveau zero.  Projective compatibility then gives
  \tag{5}
 \]
 
-and \(1-\tau_{\mathcal O(1)}\) is the endpoint \(J_3\).  For any support of
-dimension at most two, require \(\mathcal C_6=0\), matching the closed formal
-vanishing theorem.
+and \(1-\tau_{\mathcal O(1)}\) is the endpoint \(J_3\).  For any possibly
+singular or nonreduced support of dimension at most two, require
+\(\mathcal C_6=0\).  This extends the closed smooth-variety formal vanishing
+theorem and is a genuinely stronger localization axiom.
 
 ## Why ordinary candidates do not yet work
 
@@ -81,9 +83,10 @@ vanishing theorem.
 3. **The cubic Kuznetsov component** detects the correct residual geometry,
    but its Serre/cyclotomic projector is mutation-dependent and is not known
    to commute with arbitrary Orlov component maps or supported localization.
-4. **A birational motive alone** kills lower support, but forgetting the
-   coniveau filtration makes tensor by a line bundle trivial at the generic
-   point and loses the endpoint \(J_3\).
+4. **A birational motive alone** kills positive Lefschetz/Tate summands and
+   therefore loses the endpoint \(J_3\).  It does not kill arbitrary curve or
+   surface motives, whose birational/unramified information can survive, so
+   it also lacks the required low-support vanishing.
 5. **The relative support quotient**
    \(\operatorname{Perf}(Y)/\operatorname{Perf}_{\dim\le2}(Y)\) is the
    closest honest categorical host: it is localizing, kernel-linear, and
@@ -142,9 +145,9 @@ to a support-local coefficient system rather than merely an eigenspace.
 
 ## EJ/TT and mystery ledger
 
-- **EJ:** all geometric operations needed by Silver already exist in
-  coniveau-filtered \(K\)-theory; only the \(\Phi _6\) coefficient extraction
-  is absent.
+- **EJ:** coniveau-filtered \(K\)-theory supplies the geometric support
+  skeleton and point-kernel identity; the missing functor must categorify
+  these together with the \(\Phi _6\) coefficient extraction.
 - **TT:** neither a generic-point birational motive nor a finite-dimensional
   QDM projector is enough.  The endpoint uses three coniveau levels and the
   proof uses localization between them.
