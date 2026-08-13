@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-52 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 99 reviewer terminals, audit
+53 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 103 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -232,15 +232,14 @@ injectivity of the additive tagged map from proxy detectors, nonzero monomial
 initial coefficients, and the compatibility equality.  The actual filtered
 target, associated graded ring, valuation, specialization, and proof that they
 produce those proxy inputs remain unrepresented.
-Finite-fiber numerical pushforward now extends from ordinary coefficient
-functions to completed coefficient families with finite support below every
-degree cutoff; Lean proves the exact fiber formula, preservation of that support
-condition, and additivity.  No topology, continuity, convolution product,
-inverse-limit object, Gromov--Witten descent, derivation, or comparison-map base
-change is represented.  Lean also proves that agreement through a homological
-degree cutoff implies agreement through the numerical cutoff, isolating the
-finite-level input to the unformalized continuity argument.
-The aggregate build, source correspondence, and 99-terminal axiom transcript
+Finite-below completed coefficient families now carry the full convolution
+commutative-ring structure, with exact agreement with ordinary additive
+monoid-algebra multiplication through every degree cutoff.  For a surjective
+degree-compatible numerical quotient, finite-fiber pushforward is a unital ring
+homomorphism and commutes exactly with finite truncation.  No topology or
+explicit inverse-limit object is represented, and Gromov--Witten descent,
+quantum derivations, and comparison-map base change remain open.
+The aggregate build, source correspondence, and 103-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

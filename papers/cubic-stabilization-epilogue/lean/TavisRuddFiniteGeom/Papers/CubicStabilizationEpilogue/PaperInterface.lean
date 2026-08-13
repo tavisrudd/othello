@@ -21,6 +21,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactori
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovConvolution
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
@@ -1799,6 +1800,78 @@ theorem numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below
         (data.completedCoefficientPushforward right).coefficient numerical :=
   data.completedCoefficientPushforward_eq_below_of_eq_below
     left right cutoff equal_below
+
+/-- In a finite-degree effective additive monoid, the finite decomposition set
+contains exactly the ordered pairs whose sum is the prescribed class. -/
+theorem completedNovikov_decompositions_exact
+    {Curve : Type*} [AddCommMonoid Curve]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve)
+    (pair : Curve × Curve) (total : Curve) :
+    pair ∈ grading.decompositions total ↔ pair.1 + pair.2 = total :=
+  grading.mem_decompositions_iff pair total
+
+/-- Finite decomposition sums define a completed coefficient family: the
+coefficient is the displayed convolution sum, and the nonzero convolution
+coefficients below every cutoff form a finite set.  This terminal does not
+assert convolution ring laws or compatibility with numerical pushforward. -/
+theorem completedNovikov_convolution_coefficient_and_finiteBelow
+    {Curve Coefficient : Type*} [AddCommMonoid Curve] [CommRing Coefficient]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve)
+    (left right : Quantum.CompletedNovikovSeries
+      Curve Coefficient grading.degree)
+    (total : Curve) (cutoff : ℕ) :
+    (grading.convolution left right).coefficient total =
+        ∑ pair ∈ grading.decompositions total,
+          left.coefficient pair.1 * right.coefficient pair.2 ∧
+      Set.Finite {curve |
+        (grading.convolution left right).coefficient curve ≠ 0 ∧
+          grading.degree curve ≤ cutoff} :=
+  ⟨grading.convolution_coefficient left right total,
+    (grading.convolution left right).finite_below cutoff⟩
+
+/-- Finite-below completed coefficient families form a commutative ring under
+finite-decomposition convolution, and finite truncation agrees coefficientwise
+with ordinary additive-monoid-algebra multiplication through its cutoff. -/
+theorem completedNovikov_commRing_and_truncation_mul
+    {Curve Coefficient : Type*} [AddCommMonoid Curve] [CommRing Coefficient]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve)
+    (left right : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      grading Coefficient)
+    (third : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      grading Coefficient)
+    (cutoff : ℕ) (total : Curve) (degree_le : grading.degree total ≤ cutoff) :
+    left * right = grading.convolution left right ∧
+      (left * right) * third = left * (right * third) ∧
+      (1 : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+        grading Coefficient) * left = left ∧
+      left * (1 : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+        grading Coefficient) = left ∧
+      left * right = right * left ∧
+      left * (right + third) = left * right + left * third ∧
+      (left + right) * third = left * third + right * third ∧
+      grading.truncation (left * right) cutoff total =
+        (grading.truncation left cutoff * grading.truncation right cutoff) total :=
+  ⟨rfl, mul_assoc _ _ _, one_mul _, mul_one _, mul_comm _ _,
+    mul_add _ _ _, add_mul _ _ _,
+    grading.truncation_convolution_apply_of_degree_le
+      left right cutoff total degree_le⟩
+
+/-- For a surjective finite-degree numerical quotient, the completed
+finite-fiber pushforward commutes with every finite truncation and is a unital
+ring homomorphism.  This theorem constructs neither a topology nor quantum or
+comparison-theorem data. -/
+theorem numericalNovikov_completedPushforward_ringHom_and_truncation
+    {Homology Numerical R : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [CommRing R]
+    (data : Quantum.CompletedNumericalQuotient Homology Numerical)
+    (series : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      data.homologicalGrading R) (cutoff : ℕ) :
+    data.completedPushforwardRingHom series = data.completedPushforward series ∧
+      data.numericalGrading.truncation
+          (data.completedPushforward series) cutoff =
+        AddMonoidAlgebra.mapDomain data.quotient
+          (data.homologicalGrading.truncation series cutoff) :=
+  ⟨rfl, data.truncation_completedPushforward series cutoff⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
