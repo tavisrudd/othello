@@ -384,3 +384,107 @@ with `A_i ∈ H^*(B)`:
 So `c_1(V)` and `c_2(V)` are determined by the `B`-degree-2 and -4 parts of
 the same `ι_*(D^k)` inventory the committed main-term certificate already
 builds. This is a bounded extension of that certificate, not new geometry.
+
+## 6. Evaluating the two unknowns
+
+Throughout this section the base is `B = F×F` with the μ-pushed span model, the
+notation of the pass-8 spec (`P_k := ι_*(d^k)`, `d := Z'−Z`,
+`D = d + ι^*H` since `−K_{S}= H|_S`), and
+
+\[ C_i := pr_i^*C_s,\qquad G = ψ^*Θ = 2C_1+2C_2−[I]\ \ (\text{extraction B1/C2}),
+   \qquad σ = \text{factor swap},\ σ^*d = −d,\ σ^*G = G. \]
+
+### 6.0 `G` is a `Θ`-pullback, so `G^2 ≡ 0`
+
+`Θ^{[2]} = Θ^2/2` is integral on the ppav `J`, hence
+`G^2 = ψ^*(Θ^2) = 2ψ^*Θ^{[2]}` is **divisible by two in `H^4(B,Z)`**:
+
+\[ G^2 \equiv 0 \pmod 2 . \tag{6.0} \]
+
+(The same holds downstairs, `G_M = b^*Θ − 2[X]` on `M`, and upstairs on `Y`.)
+
+### 6.1 The Künneth pieces of the span model that the readout sees
+
+From `[P] = 1⊗[\ell] + Ξ + C_s⊗H + 6[pt]_F⊗1` (extraction item E) the two
+cylinders are `Z = [\ell]·1 + Ξ_1 + H\,C_1 + 6\,pr_1^*[pt]_F` and likewise for
+`Z'`; the `[\ell]`-terms cancel in `d`, so
+
+\[ P_1 = d\text{-push} = ΔΞ + H\,ΔC + 6\,Δpt,\qquad ΔΞ = Ξ_2−Ξ_1,\ ΔC = C_2−C_1 . \]
+
+Hence, with `ι_*(D) = P_1 + H(H+G)` and `ι_*(D^2) = P_2 + 2HP_1 + H^2(H+G)`,
+
+\[ c_2^{(3,1)} = −h_2^{(3,1)} = −ΔΞ \equiv Ξ_1+Ξ_2, \qquad
+   c_3^{(3,3)} = P_2^{(3,3)} − 2G\,ΔΞ \equiv P_2^{(3,3)} \pmod 2 . \]
+
+Both are **`σ`-symmetric mod two** (`σ^*d = −d`, so `d^2` and hence `P_2` are
+`σ`-invariant, and `Ξ_1+Ξ_2` is manifestly symmetric).
+
+### 6.2 `c_1(V) ≡ G (mod 2)`
+
+Over the locus of smooth fibres, `|D|` is the blow-down `f : 𝒮 → P := P(V^∨)`
+(Fulton convention: lines in `V^∨`, `π^P_*O(1) = V`, `f^*O_P(1) = O_𝒮(D)`), a
+blow-up along a relative-dimension-zero centre `Z_6` of degree six. Then
+`f_*[Exc] = 0`, so `π_*(D\,Exc) = π_*(D^2Exc) = 0`, and the Segre formulas give
+`π_*(D^2) = 1`, `π_*(D^3) = s_1(V^∨) = c_1(V)`. The relative Euler sequence
+gives `−K_{P/B} = 3ξ + π^*c_1(V)`, hence
+
+\[ κ := −K_{𝒮/B} = ι^*(H−G) = 3D + π^*c_1(V) − Exc,\qquad
+   π_*(D^2κ) = 3c_1(V) + c_1(V) = 4c_1(V). \]
+
+The virtual relative tangent is `T_π = ι^*T_X − O(S)|_𝒮`, so with
+`c(T_X) = 1+2H+4H^2−2H^3` and `S = H+G`,
+
+\[ c_1(T_π) = κ,\qquad c_2(T_π) = ι^*\bigl(3H^2 + G^2\bigr). \]
+
+*Rank control.* `\mathrm{rk}\,V = π_*[e^D\mathrm{td}(T_π)]_2
+= \tfrac12π_*(D^2) + \tfrac12π_*(Dκ) + \tfrac1{12}π_*(κ^2+c_2(T_π))
+= \tfrac12 + \tfrac32 + \tfrac{3+9}{12} = 3` ✓ (`π_*κ^2 = K_S^2 = 3`,
+`π_*c_2(T_π) = χ_{top}(S) = 9`).
+
+*Degree one.* Ambient computation of the two remaining pushforwards, using
+`p_{B*}(H^3β) = 3β` and the Künneth degrees above:
+
+\[ π_*(κ\,c_2(T_π)) = p_{B*}\bigl[(H−G)(3H^2+G^2)(H+G)\bigr] = 0
+   \quad(\text{no }X\text{-degree-3 term}), \]
+\[ π_*\bigl(D(κ^2+c_2(T_π))\bigr) = p_{B*}\bigl[(P_1+H^2+HG)(4H^2−2HG+2G^2)\bigr]
+   = 12\,ΔC + 6\,G . \]
+
+Then `ch_1(V) = \tfrac16π_*(D^3) + \tfrac14π_*(D^2κ) + \tfrac1{12}π_*(D(κ^2+c_2)) + \tfrac1{24}π_*(κc_2)`
+becomes `c_1(V) = \tfrac16c_1(V) + c_1(V) + ΔC + \tfrac12G`, i.e.
+
+\[ \boxed{\;c_1(V) \;=\; −6\,ΔC − 3\,G \;=\; 3[I] − 12\,C_2 ,\qquad
+   c_1(V) \equiv [I] \equiv G \pmod 2 .\;} \tag{6.2} \]
+
+*Robustness.* The blow-down relations hold over the open locus of smooth
+fibres; a defect concentrated on the degenerate locus is a multiple of the
+divisor `[I]` (the diagonal `Δ` has codimension two and cannot contribute to
+`H^2`). Since `[I] ≡ G (mod 2)`, **every** possible outcome is
+`c_1(V) ≡ m\,G` with `m ∈ \{0,1\}` — the conclusion used below survives the
+defect either way.
+
+### 6.3 `c_2(V) ≡ π_*(d^4)`, and it is `σ`-symmetric
+
+`π_*(D^4) = s_2(V^∨) = c_1(V)^2 − c_2(V)`, so by (6.0) and (6.2)
+
+\[ c_2(V) = c_1(V)^2 − π_*(D^4) \equiv π_*(D^4) \pmod 2 . \]
+
+Expanding `D = d + ι^*H` and pushing (`H^4 = 0`):
+`π_*(D^4) = π_*(d^4) + 4p_{B*}(HP_3) + 6p_{B*}(H^2P_2) + 4p_{B*}(H^3P_1)`.
+Each correction is even: `p_{B*}(H^3P_1) = 3·6Δpt = 18Δpt` (times 4),
+`p_{B*}(H^2P_2) = 3·P_2^{(2,\cdot)\text{-coeff}}` (times 6), and
+`p_{B*}(HP_3)` (times 4). Hence
+
+\[ c_2(V) \;\equiv\; π_*(d^4) \pmod 2 , \]
+
+and since `σ^*d = −d` and `d^4` is an even power, **`c_2(V) mod 2` is
+`σ`-symmetric** — a conclusion that needs no evaluation of `π_*(d^4)` and is
+therefore immune to every non-Cartier / degenerate-fibre correction (those
+loci, `I` and `Δ`, are `σ`-invariant, and the defect class of a `σ`-invariant
+cycle computation is `σ`-invariant).
+
+*For the record, the value.* Mod two, `d^4 ≡ Z^4 + Z'^4`. With
+`ν := c_1(N_{Z/𝒮}) = c_1(N_{Z/A}) − S|_Z = 2H − 2ζ − 3C_1 − (H+G) ≡ H + C_1 + G`
+and `π_{Z*}(1)=0`, `π_{Z*}(H|_Z)=1`, `π_{Z*}(H^2|_Z) = 3C_1`,
+`π_{Z*}(H^3|_Z) = 18\,pr_1^*[pt]_F`, one gets
+`π_*(Z^4) = π_{Z*}(ν^3) ≡ G\,C_1` and `π_*(Z'^4) ≡ G\,C_2`, i.e.
+`c_2(V) ≡ G(C_1+C_2) (mod 2)` — visibly `σ`-symmetric, as required.
