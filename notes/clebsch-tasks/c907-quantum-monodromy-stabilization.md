@@ -75,6 +75,20 @@ attachment genuinely requires the correlated two-variable path
 balanced codimension-three blowup sector has opening `2pi`, so aperture is
 not the obstruction.
 
+The quotient-class repair is now isolated in
+`../2026-08-13-c907-geiser-attachment-line-bundle-reduction.md`.  The
+relation `q'=q s^3` says that `q,q'` are local frames of one quotient-Novikov
+line over the compactified flop coordinate.  LLW's series by curve class
+modulo the extremal ray already implement this Laurent reindexing, and the
+dimension axiom makes every fibre degree locally finite.  This removes the
+formal-evaluation obstruction without removing the analytic one.  The exact
+Geiser residue is a parameter-uniform separated-cluster realization lemma:
+continue the whole point-blowup ambient block along the Novikov line and
+identify its two endpoint sectorial realizations through Chen--Tseng's
+Gamma/FM map.  Cubic-atom confluence is avoided by restricting to `P6` only
+after transporting the whole block.  The first falsifier is the turning
+divisor of the small QDM of `Bl_p X` along the correlated path.
+
 **Load next:** `c907-solver-dossier.md`.
 
 **Execution plan:** `../2026-08-11-c907-moonshot-attack-plan.md`.
