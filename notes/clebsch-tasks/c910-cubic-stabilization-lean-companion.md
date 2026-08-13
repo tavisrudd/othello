@@ -112,22 +112,27 @@ papers/cubic-stabilization-epilogue/lean/
   lean-toolchain
   README.md
   TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/
-    GraphLattices/MatrixOfIdeals.lean
     GraphLattices/RankOneGeneration.lean
     GraphLattices/DividedPowers.lean
-    GraphLattices/SixAxis.lean
+    GraphLattices/SixAxisGram.lean
+    Quantum/FramedMultiplicity.lean
+    Quantum/ProLaurent.lean
+    Quantum/MonodromyBaseChange.lean
+    Quantum/NumericalNovikov.lean
+    Quantum/FormalBaseShift.lean
+    Quantum/NovikovAdmissibility.lean
+    Quantum/WeakFactorization.lean
+    Quantum/CubicPacket.lean
     Quantum/PacketInvariant.lean
     Quantum/BirationalDeduction.lean
     Applications/CubicThreefold.lean
     Applications/GenusEightThreefold.lean
-    Applications/DetectorSeparation.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/
     claims.json
     check_formal_artifact.py
     expected_axioms.txt
-    expected_output.txt
 ```
 
 The exact split may be compressed if a smaller module graph improves review and

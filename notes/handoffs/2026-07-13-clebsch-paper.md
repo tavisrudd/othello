@@ -145,13 +145,20 @@ checks as the existing referee artifacts.  External geometry and quantum inputs
 must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
-The pinned package environment and first application layer are green: seven
-sources build individually through the guarded queue, the eight reviewer
-terminals have an exact claim-map and axiom-audit match, and the cubic and
-genus-eight one-step conclusions expose every external quantum and geometric
-input in their theorem types.  The next formal gate is the full
-matrix-of-ideals rank-one generation criterion; the current integral module
-proves only its division-free coefficient identity.
+The pinned package has reached a publishable partial checkpoint: all 17 roots
+pass as separate guarded targets, and the rejecting audit gives an exact
+bijection among all 23 manuscript claims, 28 reviewer terminals, audit commands,
+and expected axiom rows.  Coverage is explicitly 7 absent, 13 fragmentary, 3
+conditional deductions, and 0 complete.  Proved fragments now include
+two-coordinate midpoint assembly, square-zero divided powers, integral Smith
+reduction and local depths for `6I-J`, finite-matrix framed-monodromy algebra,
+pro-Laurent and numerical-Novikov data, typed weak factorization, and Cai's
+rank-two indicial arithmetic.  Public README counts are checked against the
+claim map to prevent release drift.  The next formal gates remain the DVR
+necessity/arbitrary-size theorem, graph-lattice descent and geometric six-axis
+instantiation, then the quantum comparison, tagging, vanishing, and full cubic
+packet inputs.  Interim release report:
+`../2026-08-12-c910-partial-lean-release.md`.
 
 The 2026-08-12 crown-compression pass adds two exact structural conclusions.
 First, in dimension five the full one-depth finite-etale ambient
