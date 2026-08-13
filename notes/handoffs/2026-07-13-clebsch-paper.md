@@ -88,8 +88,10 @@ Boolean depends.  Exact peak audit:
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives the first unconditional
 positive peak class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
-the exact Gamma point row; the valid minimal toric discrepancy-one model
-confirms the vanishing term by term.  Thus the rank Boolean is invariant
+the exact ambient Gamma point coordinate; possible center coordinates are
+rank-invisible by oriented Gamma/Euler orthogonality.  The valid minimal
+toric discrepancy-one model confirms the ambient vanishing term by term.
+Thus the rank Boolean is invariant
 across every smooth-projective simple VGIT wall.  Gold remains open because
 general cobordism peaks can have singular/toroidal quotients and are not yet
 covered by that theorem.  Exact audit:

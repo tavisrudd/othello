@@ -17,14 +17,17 @@ formal exponential decomposition does not supply the analytic Stokes/central
 connection datum measured by the rank Boolean.  The all-codimension source
 audit is clean.  Gu--Yu--Yu provide a full pairing-compatible formal QDM
 decomposition across a smooth simple VGIT wall, retaining the opposite
-chamber's ambient atoms.  The proposed direct point-row closure fails
-exactly: in the smallest toric discrepancy-one flip, the equivariant point
-lift has zero wall restriction but nonzero `lambda` multiple, and Fourier
-intertwining plus injectivity force a nonzero positive-`S` ambient tail.  The
-rank-Boolean theorem remains open at the weaker question whether that
-homogeneous positive-`z` tail is invisible on the primitive-sixth packet.
-General birational cobordisms can also have singular/toroidal quotients.  No
-Paper V or Lean promotion.
+chamber's ambient atoms.  The exact distinguished ambient point coordinate is now proved:
+the common-point lift and its wall-frequency derivative vanish in the
+required specialized completed source, so Fourier--Novikov intertwining and
+regular-singular uniqueness kill the entire ambient tail.  Possible center
+coordinates need not vanish, but oriented Gamma/Euler orthogonality makes
+them rank-invisible; the valid minimal toric model confirms the ambient
+identity term by term.  Hence the Gamma-rank Boolean is unconditionally
+invariant across every smooth-projective simple VGIT wall.
+Gold and Platinum remain open at a smaller geometric coverage gate: general
+birational cobordisms can have singular/toroidal quotients.  No Paper V or
+Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -482,17 +485,16 @@ reverse blow-down implication, conditional weak-factorization telescope, and
 `../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
 `../2026-08-13-c907-rank-telescope-and-product.md`.
 
-The next bounded pass is the forced Fourier-tail test in
-`../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Compute its first nonzero
-`S` coefficient in the smallest toric discrepancy-one flip.  Homogeneity
-forces compensating positive `z`-degree; determine whether this makes the
-tail invisible on the `z=0` primitive-sixth rank Boolean.  The decisive
-regression is the product of that flip with a cubic threefold, where an actual
-primitive-sixth packet is present.  A positive result closes the simple-VGIT
-peak class; a nonzero pairing kills this rank route at its smallest model.
-Only after that test should the geometric coverage of singular/toroidal
-cobordism walls be pursued.  The all-codimension and product audits need not
-be repeated.  Exact failed repairs and AA split:
+The next bounded pass is geometric.  The exact ambient point coordinate and rank Boolean
+are proved for every smooth-projective simple VGIT wall in
+`../2026-08-13-c907-simple-vgit-rank-theorem.md`, and the valid minimal toric
+discrepancy-one model passes term by term.  Determine whether the peaks needed
+for a fivefold factorization can all be replaced by such walls.  Otherwise
+extend the ambient-coordinate theorem to the finite-quotient or toroidal wall spaces
+produced by birational cobordism/destacking.  The older two-radial-leg
+nearby-cycle comparison remains the fallback for peaks outside that coverage.
+The all-codimension and product audits need not be repeated.  Exact failed
+repairs and AA split:
 `../2026-08-13-c907-formal-constant-banking.md` and
 `../2026-08-13-c907-peak-confluence-obstruction.md`.
 
@@ -600,13 +602,15 @@ a separate possible construction, not a premise of this Platinum route.
 ## Acceptance
 
 - **Silver:** closed by the unconditional `X x P^1` theorem.
-- **Gold:** prove the forced positive-`z` Fourier tail is rank-invisible on
-  `P_6`, then cover the singular/toroidal peaks outside smooth simple VGIT;
-  the one-arrow theorem and `P^2` endpoint are closed.
+- **Gold:** the rank Boolean is coherent across every smooth-projective
+  simple VGIT peak.  Show that the fivefold factorization can be chosen with
+  only those peaks, or extend the point-column theorem to its remaining
+  singular/toroidal peaks; the one-arrow theorem and `P^2` endpoint are
+  closed.
 - **Platinum:** the all-codimension source audit is clean and the nonzero-`k`
   exceptional twists and uniform projective-product step are rank-theoretically
-  harmless; it rises or falls with the same Fourier-tail and wall-coverage
-  gates as Gold.
+  harmless; it rises or falls with the same smooth-wall coverage/extension
+  gate as Gold.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
 

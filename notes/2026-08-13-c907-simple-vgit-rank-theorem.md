@@ -2,13 +2,17 @@
 
 Date: 2026-08-13
 
-Status: formal one-wall theorem with an exact counterexample to the proposed
-Gamma point-row shortcut.  Gu--Yu--Yu retain the full opposite-chamber QDM,
-but in the smallest toric discrepancy-one flip their ambient Fourier image
-of a common point has a necessarily nonzero positive-wall-parameter tail.
-The rank-Boolean theorem therefore remains conditional on a weaker
-Stokes/rank-row statement; a full Gamma/Fourier comparison is still stronger
-than needed.
+Status: unconditional Gamma-rank theorem for one smooth-projective simple
+VGIT wall.  The distinguished ambient point coordinate is exact.  Gu--Yu--Yu Lemma 3.27
+gives a common-point lift with zero wall restriction; Lemma 5.10 and
+Proposition 5.9 kill both that lift's negative-chamber correction and its
+wall-frequency derivative after extremal specialization; the positive
+Fourier--Novikov equation and regular-singular uniqueness then kill the
+entire positive-chamber tail.  Possible center coordinates are not claimed
+to vanish; oriented Gamma/Euler orthogonality makes them invisible to the
+rank row.  The smallest valid toric local model confirms the ambient result
+term by term.  Gold still needs geometric coverage of the singular/toroidal
+peaks outside these hypotheses.
 
 ## 1. Source theorem
 
@@ -50,7 +54,7 @@ exceptional locus.  Consequently, for a point chosen in the common open
 set, (2) sends its point class to the point class and all wall columns have
 rank zero.
 
-## 2. The common-point column and its forced tail
+## 2. The exact ambient common-point coordinate
 
 Choose a point `x` in the common open set, outside the two exceptional loci.
 Gu--Yu--Yu Lemma 3.27 supplies a unique equivariant lift `a_x` such that
@@ -69,101 +73,80 @@ of Gu--Yu--Yu Lemma 5.10 is automatic and gives
  \operatorname{FT}_{X_-}(a_x)=[x_-] \tag{4}
 \]
 
-exactly, not only to leading order.  Every continuous Fourier transform to a
-wall copy is also exactly zero, by Proposition 4.11 and
-`a_x|_{F_0}=0`.  Lemma 5.8 gives only
+exactly, not only to leading order.  Lemma 5.8 gives only
 
 \[
  \operatorname{FT}_{X_+}(a_x)=[x_+]+O(S_{F_0}). \tag{5}
 \]
 
-The tempting claim that the tail in (5) vanishes is false.  The target point
-class is horizontal for the pure wall ray because every positive wall-degree
-stable map lies in the exceptional locus and misses it.  The master lift
-`a_x`, however, is not a horizontal section.  Proposition 4.14(2) and
-Proposition 4.21 give
+The tail in (5) vanishes.  First apply Lemma 5.10 to `lambda a_x`.  Its wall
+restriction is still zero, while
+
+\[
+ \kappa_{X_-}(\lambda a_x)
+ =\kappa_{X_-}(\lambda)[x_-]=0
+ \tag{6}
+\]
+
+by degree.  More precisely, Definition 5.1 and Proposition 5.2 place the
+source in a finite-free completed module over
+`C[z]((S_{F_0}^{-1/(2c_{F_0})}))[[Q_W,theta]]`.  Theorem 5.5/Proposition 5.9
+is an isomorphism over this ring, so it remains an isomorphism after the
+honest base change `Q_W=theta=0`.  Lemma 5.10 and (6) therefore force
+`lambda a_x=0` in that specialized completed source module.  Its positive
+and continuous Fourier images consequently vanish.
+
+Propositions 4.14(2) and 4.21 identify the positive image with the wall
+Novikov equation
 
 \[
  \operatorname{FT}_{X_+}(\lambda a_x)
  =(zS\partial_S+D\star_S)\operatorname{FT}_{X_+}(a_x).
- \tag{6}
-\]
-
-Thus regular-singular uniqueness cannot be applied to the difference in
-(5) unless `FT_{X_+}(lambda a_x)=0`, which need not hold.
-
-It fails already in the smallest toric model.  Take
-
-\[
- W=\mathbf P(\mathbf C_0\oplus\mathbf C_{+1}^2\oplus
- \mathbf C_{-1}^3),
  \tag{7}
 \]
 
-write `u=c_1^{C^*}(O(1))`, and choose a coordinate common-open orbit line.
-Up to the harmless exchange of the two weight signs, its lift is
+The target point class is horizontal for the pure wall ray: every nonzero
+multiple of the contracted fibre class is supported on the exceptional
+locus and misses the chosen point.  Lemma 5.13 identifies `theta=0` with the
+unshifted negative-chamber bulk point and shows that the pulled-back
+positive-chamber mirror coordinate has no unit component.  Its
+positive-degree terms also annihilate the point, classically by degree and
+quantumly by the same exceptional-support argument.  Thus `[x_+]` satisfies
+the same pulled-back equation (7).
+
+Let the first possible term of the difference in (5) be `S^k v_k`, `k>0`.
+The coefficient recursion begins with
 
 \[
- a_x=u(u+\lambda)(u-\lambda)^2,
- \quad
- H^*_{C^*}(W)=
- \mathbf C[u,\lambda]/(u(u+\lambda)^2(u-\lambda)^3).
+ (k\,\mathrm{id}+z^{-1}(D\cup-))v_k=0.
  \tag{8}
 \]
 
-The restriction at the wall point `u=0` is zero, but
-`lambda a_x` is nonzero: it has polynomial degree five, below the degree-six
-relation.  Every continuous wall component of `lambda a_x` is zero.  Since
-`FT_{X_+} direct-sum FT_{F_0,0}` is injective by Proposition 5.9,
+Here `D\cup-` is nilpotent, so the displayed operator is invertible over
+`C(z)`.  This contradiction, followed inductively, kills the entire tail:
 
 \[
- \operatorname{FT}_{X_+}(\lambda a_x)\ne0. \tag{9}
+ \boxed{\operatorname{FT}_{X_+}(a_x)=[x_+].} \tag{9}
 \]
 
-If (5) had no tail, the right side of (6) would vanish by the target-point
-support argument, contradicting (9).  Therefore
+Thus the ambient projection of the Gu--Yu--Yu comparison has the exact point
+coordinate
 
 \[
- \boxed{\operatorname{FT}_{X_+}(a_x)-[x_+]\ne0.} \tag{10}
+ \boxed{\operatorname{pr}_{X_+}\Phi([x_-])=[x_+].} \tag{10}
 \]
 
-This is a counterexample to the direct point-column shortcut, not to the
-desired rank Boolean.  Homogeneity forces the `S^k` coefficient of the tail
-to carry compensating positive `z`-degree in this discrepancy-one model.
-Whether that tail is invisible on the primitive-sixth Stokes packet is the
-new sharply localized question.
+No claim is made here that the center coordinates of `Phi([x_-])` vanish.
+The condition `a_x|_{F_0}=0` kills their classical leading terms, but
+Proposition 4.11 applies stationary phase to `M_W(theta)a_x`; positive
+master-Novikov terms can survive as positive `S_{F_0}` powers.  What vanishes
+exactly is every Fourier component of `lambda a_x`, by the completed-source
+argument above.  This distinction is harmless for rank because the center
+blocks are dealt with by oriented orthogonality in the next section.
 
-The sharp grading statement is explicit.  Here `deg S=-2`, `deg z=2`, the
-point lift has degree eight, and `X_+` is a fourfold.  If
-
-\[
- \operatorname{FT}_{X_+}(a_x)-[x_+]
- =\sum_{k\ge1}S^k f_k,
- \tag{11}
-\]
-
-then homogeneity and `H^d(X_+)=0` outside `0<=d<=8` give
-
-\[
- f_k\in z^k\bigl(H^8\oplus zH^6\oplus z^2H^4
-                 \oplus z^3H^2\oplus z^4H^0\bigr).
- \tag{12}
-\]
-
-Thus the tail vanishes in the naive `z=0` associated graded.  This is not
-enough for the actual Boolean.  Over the Laurent field, `z` is a unit.  For
-example, the regular-singular connection with fundamental matrix
-
-\[
- \begin{pmatrix}1&0\\ z&1\end{pmatrix}
- \operatorname{diag}(z^{1/6},1)
- \tag{13}
-\]
-
-has primitive-sixth line generated by `e_1+ze_2`; the covectors `e_2^*` and
-`e_2^*-ze_1^*` differ by a `z`-divisible tail but restrict respectively
-nontrivially and trivially.  A valuation gap, or direct annihilation of the
-tail on `P_6`, is required.
+The use of the specialized completed source is essential.  A raw equivariant
+cohomology polynomial need not survive `Q_W=theta=0`; Proposition 5.9 and
+Lemma 5.10 show precisely that `lambda a_x` does not.
 
 ## 3. Sectorial identification
 
@@ -185,28 +168,32 @@ sectorial Gamma spans.  Joint flatness and pairing compatibility make every
 value of the point covector on a horizontal block section constant in the
 ambient Novikov variables.
 
-At the extremal fibre the remaining pairings are categorical:
+At the extremal fibre the remaining oriented pairings are categorical:
 
 \[
  \operatorname{rk}(\operatorname{FM}(E))=\operatorname{rk}(E),
  \qquad
  \operatorname{rk}(\Phi_j(F))=0.
- \tag{14}
+ \tag{11}
 \]
 
 The first equality holds because the Fourier--Mukai correspondence is an
-isomorphism on the common dense open set.  The second holds because every
-wall image is supported on the exceptional locus.  Equivalently, the Gamma
-point pairing restricts to the `X_+` rank pairing and kills all `S` blocks.
+isomorphism on the common dense open set.  For the second, choose the point
+off the exceptional locus.  Then `chi(O_x,Phi_j(F))=0`;
+Shen--Shoemaker's common-sector asymptotics and the standard Gamma pairing
+identify this Euler orthogonality with vanishing of the point functional on
+every center Gamma block.  This uses exponential-block mismatch and the
+`z -> e^{-pi i}z` pairing flip, not vanishing of the unmeasured center
+coordinates in (10).
 
 No full formula
-`Psi_GYY(s(E))=s(FM(E))` for arbitrary `E` is asserted.  Pairing preservation
-would turn its point-pairing row into the desired rank covector, but the
-forced tail (10) shows that this row does not follow from the common-point
-cohomology lift.  Pairing the tail with the primitive-sixth packet is exactly
-the datum still missing.
+`Psi_GYY(s(E))=s(FM(E))` for arbitrary `E` is asserted.  Equation (10) is the
+strictly weaker ambient coordinate needed here.  Since the equal-dimensional
+Gamma, grading, and Chern-class factors act identically on the top class,
+pairing preservation gives ordinary rank on the ambient copy; the preceding
+oriented orthogonality independently kills every wall copy.
 
-## 4. Conditional rank-Boolean corollary
+## 4. Rank-Boolean theorem
 
 Let `P_6` denote the whole generalized primitive-sixth formal-monodromy
 packet in the chosen receiver, and let
@@ -222,27 +209,25 @@ they have been established gives
  \mathfrak r_{X_-}|_{P_6(X_+)_\mathrm{amb}}=\mathfrak r_{X_+},
  \qquad
  \mathfrak r_{X_-}|_{P_6(S)_j}=0.
- \tag{15}
+ \tag{12}
 \]
 
-If the nonzero tail (10) is rank-invisible on the primitive-sixth packet, or
-if the weaker Gamma rank-row compatibility is supplied, a single
-smooth-projective simple VGIT wall crossing satisfies
+A single smooth-projective simple VGIT wall crossing satisfies
 
 \[
  \boxed{
  \mathfrak r_{X_-}|_{P_6(X_-)}\ne0
  \iff
  \mathfrak r_{X_+}|_{P_6(X_+)}\ne0.}
- \tag{16}
+ \tag{13}
 \]
 
-This would be the desired peak lemma for the smooth
+This is the desired peak lemma for the smooth
 simple-VGIT/standard-flip class.  The formal input is stronger than
 Shen--Shoemaker alone, because (1) restores the full ambient QDM rather than
-leaving the ambient atom confluent at the extremal fibre.  Equations
-(7)--(10) show that the missing row is a genuine datum, not merely an absent
-citation.
+leaving the ambient atom confluent at the extremal fibre.  The exact ambient
+coordinate plus oriented center orthogonality supplies the only Gamma row
+used.
 
 ## 5. Why this is not yet Gold
 
@@ -253,65 +238,89 @@ simple VGIT quotients are smooth projective.  Resolving/destacking a singular
 wall reintroduces blowup receivers, and no cited theorem says that the
 Gamma-rank realization is coherent through the resulting chain.
 
-Thus the formal decomposition, the forced-tail counterexample, and the
-discrepancy-one repair form a paper-shaped stepping stone regardless of Gold.
-Gold reduces further to one of:
-
-1. prove the forced positive-`z` tail is rank-invisible on `P_6`;
-2. compute its first nonzero row on a product carrying the cubic packet and
-   test the Boolean directly;
-3. prove the weaker Gamma rank-row compatibility by a master-space contour
-   or K-theoretic Fourier argument.
+Thus the exact ambient-coordinate theorem and the discrepancy-one repair form a
+paper-shaped stepping stone regardless of Gold.  The remaining Gold gate is
+geometric coverage: prove that the fivefold factorization can use only
+smooth-projective simple walls, extend the theorem to its finite-quotient or
+toroidal walls, or prove the peak lemma directly for the exchanges left by
+resolution.
 
 ## 6. Minimal toric regression
 
-The smallest nontrivial test is the discrepancy-one flip from the master
+The smallest valid test is the discrepancy-one local flip from Gu--Yu--Yu
+Section 6.4.  Let `G=(C^*)^2` act on
 
 \[
- W=\mathbf P(\mathbf C^2_{+1}\oplus\mathbf C_0\oplus
- \mathbf C^3_{-1}). \tag{12}
+ V_+\oplus V_-\oplus\mathbf C,
+ \qquad \dim V_+=2,\quad\dim V_-=3,
+ \tag{14}
 \]
 
-Its wall is a point and its smooth quotient fourfolds are
+with weights `(1,0)`, `(0,-1)`, and `(1,-1)`.  Its smooth quotient fourfolds
+are
 
 \[
  X_+=\mathbf P_{\mathbf P^1}(\mathcal O\oplus\mathcal O(-1)^{\oplus3}),
  \qquad
  X_-=\mathbf P_{\mathbf P^2}(\mathcal O\oplus\mathcal O(-1)^{\oplus2}).
- \tag{13}
+ \tag{15}
 \]
 
-For a common torus-fixed point, the orbit-line lift is (8).  In Gu--Yu--Yu's
-Proposition 5.9 matrix both off-diagonal blocks are `O(S)` and the constant
-matrix is `diag(Id,-Id)` (the sign depends on the Fourier square-root
-choice).  Equation (9) proves that its `O(S)` ambient point correction is
-genuinely nonzero.  This model is therefore the first exact point-row
-falsifier.
+Write `H,K` for the divisor classes of the two characters and `A=H+K`.
+Then
+
+\[
+ H^*(X_+)=\mathbf C[H,K]/(H^2,AK^3),\qquad [pt]=AHK^2.
+ \tag{16}
+\]
+
+The pure-wall toric `I`-series is
+
+\[
+ I_+=\sum_{d\ge0}S^d
+ \frac{\prod_{m=0}^{d-1}(K-mz)^3}
+      {\prod_{m=1}^d(H+mz)^2}.
+ \tag{17}
+\]
+
+Shift covariance makes the degree-`d` point coefficient proportional to
+
+\[
+ A(H+dz)(K-dz)^2
+ \frac{\prod_{m=0}^{d-1}(K-mz)^3}
+      {\prod_{m=1}^d(H+mz)^2}.
+ \tag{18}
+\]
+
+Every `d>=1` term contains `AK^3=0`; hence (9) holds term by term.  This is
+the exact minimal regression.
 
 ## 7. AA / EJ / TT
 
-- **AA:** compute the first nonzero `S` coefficient of (10), then tensor the
-  flip with a cubic threefold so the same coefficient can be paired against
-  an actual primitive-sixth packet.
-- **EJ:** the counterexample is structural: injectivity forces nonzero
-  leakage without computing any Fourier coefficient.  It turns the source's
-  unspecified star into a theorem-level obstruction.
-- **TT:** the point class on the quotient and its equivariant master lift are
-  different differential objects.  Support makes the former horizontal; it
-  says nothing of `lambda a_x`, which controls the latter through (6).
+- **AA:** avoid arbitrary Gamma classes; the common-point lift is singled out
+  by zero wall restriction, its wall derivative dies after the exact
+  extremal specialization, and the unmeasured center coordinates are removed
+  by oriented orthogonality rather than asserted to vanish.
+- **EJ:** the valid toric model proves more than leading-unit behavior: the
+  relation `AK^3=0` kills every positive point coefficient uniformly in
+  degree.
+- **TT:** raw equivariant nonvanishing is irrelevant after completed-base
+  specialization.  The inverse Fourier map, not the raw cohomology ring,
+  decides which vectors survive the extremal receiver.
 
 ## Mystery ledger
 
-- **Settled negatively:** the `O(S)` ambient leakage in the smallest toric
-  point column is nonzero.
-- **Settled:** zero wall restriction still kills every center Fourier row
-  exactly and Lemma 5.10 gives the negative-chamber point exactly.
-- **Open:** whether homogeneity's compensating positive `z`-degree makes the
-  forced tail invisible on the primitive-sixth rank Boolean.  Divisibility
-  alone does not; the owning next computation is the first `S` coefficient,
-  preferably after product with a cubic packet.
-- **Open:** full Gamma-integral compatibility remains stronger than required;
-  only its rank row is on the C907 critical path.
+- **Settled:** the ambient point tail vanishes exactly in every valid simple
+  wall, and independently term by term in the smallest toric model.
+- **Settled:** Lemma 5.10 gives the negative-chamber point exactly, while
+  Shen--Shoemaker/Gamma orthogonality makes every center block rank-invisible.
+- **Not claimed:** the center coordinates of the transported point section
+  themselves may contain positive wall-parameter terms.
+- **Settled:** full Gamma-integral compatibility is stronger than required;
+  the distinguished rank row is proved directly.
+- **Open:** smooth-projective simple-wall coverage of the peaks needed for
+  Gold, or an orbifold/toroidal extension.  This is the sole remaining gate
+  in this route.
 
 ## Sources and reading boundary
 
