@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 121 reviewer terminals.
+1 complete; 123 reviewer terminals.
 
-The 121 reviewer-facing terminals currently verify:
+The 123 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -146,6 +146,16 @@ The 121 reviewer-facing terminals currently verify:
   coefficient reductions; the compatible negated-connection series are
   two-sided inverses, and the differential equation holds at each level,
   without claiming a varying quantum product or filtered analytic gauge;
+  for an arbitrary one-variable matrix connection `A(t)` over a commutative
+  rational algebra, Lean now constructs the unique normalized formal solution
+  of `dG/dt=-A(t)G(t)`, proves its coefficient recursion and invertibility, and
+  proves naturality under rational-algebra homomorphisms; for a supplied tower
+  of compatible varying connection coefficients, every coefficient, the
+  connection series, and the whole gauge series commute with adjacent
+  reductions, while uniqueness and invertibility hold at every level; this
+  tower remains abstract and is not identified with the manuscript's filtered
+  quotient tower or quantum connection, and no multivariable, Laurent,
+  convergent, or analytic gauge is represented;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

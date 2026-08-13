@@ -39,6 +39,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseS
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleConstantFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2399,6 +2400,123 @@ theorem compatibleConstantFlatGauge_reduction_and_derivative
     system.inverseSeries_compatible,
     system.gaugeSeries_inverse,
     system.gaugeSeries_derivative⟩
+
+/-- For a supplied one-variable matrix connection `A(t)` over a commutative
+`ℚ`-algebra, Lean constructs the normalized series `G(t)`, proves its exact
+coefficient recursion and the formal equation `dG/dt=-A(t)G(t)`, proves
+uniqueness among normalized solutions, and proves that `G(t)` is an invertible
+matrix over the formal power-series ring.  Both the connection series and its
+normalized solution commute with rational-algebra homomorphisms.  This is a
+one-variable formal result; no multivariable quantum product, filtered quotient
+tower, Laurent loop coordinate, convergence, or analytic gauge is represented. -/
+theorem varyingFlatGauge_normalized_unique_and_invertible
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connectionCoefficient : ℕ → Matrix Index Index R) :
+    Quantum.varyingFlatGaugeCoefficient connectionCoefficient 0 = 1 ∧
+      (∀ degree : ℕ,
+        (degree + 1 : R) • Quantum.varyingFlatGaugeCoefficient
+            connectionCoefficient (degree + 1) =
+          -∑ k ∈ Finset.range (degree + 1),
+            connectionCoefficient k *
+              Quantum.varyingFlatGaugeCoefficient
+                connectionCoefficient (degree - k)) ∧
+      (Quantum.varyingFlatGaugeSeries connectionCoefficient).map
+          PowerSeries.derivativeFun =
+        -(Quantum.varyingConnectionSeries connectionCoefficient) *
+          Quantum.varyingFlatGaugeSeries connectionCoefficient ∧
+      (∀ candidate : Matrix Index Index (PowerSeries R),
+        candidate.map (PowerSeries.coeff 0) = 1 →
+        candidate.map PowerSeries.derivativeFun =
+          -(Quantum.varyingConnectionSeries connectionCoefficient) * candidate →
+        candidate = Quantum.varyingFlatGaugeSeries connectionCoefficient) ∧
+      IsUnit (Quantum.varyingFlatGaugeSeries connectionCoefficient) ∧
+      ∀ (S : Type*) [CommRing S] [Algebra ℚ S]
+          (homomorphism : R →ₐ[ℚ] S),
+        (Quantum.varyingConnectionSeries connectionCoefficient).map
+            (PowerSeries.map homomorphism.toRingHom) =
+          Quantum.varyingConnectionSeries
+            (fun degree ↦ (connectionCoefficient degree).map
+              homomorphism.toRingHom) ∧
+        (Quantum.varyingFlatGaugeSeries connectionCoefficient).map
+            (PowerSeries.map homomorphism.toRingHom) =
+          Quantum.varyingFlatGaugeSeries
+            (fun degree ↦ (connectionCoefficient degree).map
+              homomorphism.toRingHom) :=
+  ⟨Quantum.varyingFlatGaugeCoefficient_zero connectionCoefficient,
+    Quantum.varyingFlatGaugeCoefficient_succ connectionCoefficient,
+    Quantum.varyingFlatGaugeSeries_derivative connectionCoefficient,
+    fun candidate normalized flatEquation ↦
+      Quantum.varyingFlatGaugeSeries_unique connectionCoefficient candidate
+        normalized flatEquation,
+    Quantum.varyingFlatGaugeSeries_isUnit connectionCoefficient,
+    fun _ _ _ homomorphism ↦
+      ⟨Quantum.varyingConnectionSeries_map homomorphism.toRingHom
+          connectionCoefficient,
+        Quantum.varyingFlatGaugeSeries_map homomorphism
+          connectionCoefficient⟩⟩
+
+/-- For a supplied tower of compatible one-variable connection coefficients
+over commutative `ℚ`-algebras, Lean proves adjacent compatibility of every
+normalized coefficient, the whole connection series, and the whole gauge
+series.  At each level the gauge is the unique normalized formal solution of
+`dG/dt=-A(t)G(t)` and is an invertible power-series matrix.  The tower and its
+connections are supplied abstractly and are not identified with the
+manuscript's filtered quotient tower or quantum connection; no multivariable,
+Laurent, convergent, or analytic gauge is represented. -/
+theorem compatibleVaryingFlatGauge_reduction_unique_and_invertible
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : Quantum.CompatibleVaryingConnectionSystem Index) :
+    (∀ level degree,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.gaugeCoefficient (level + 1) degree).map
+          (system.reduction level).toRingHom =
+        system.gaugeCoefficient level degree) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.connectionSeries (level + 1)).map
+          (PowerSeries.map (system.reduction level).toRingHom) =
+        system.connectionSeries level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.gaugeSeries (level + 1)).map
+          (PowerSeries.map (system.reduction level).toRingHom) =
+        system.gaugeSeries level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientAlgebra level
+      (system.gaugeSeries level).map PowerSeries.derivativeFun =
+        -(system.connectionSeries level) * system.gaugeSeries level) ∧
+    (∀ level
+        (candidate :
+          letI := system.coefficientRing level
+          Matrix Index Index (PowerSeries (system.Coefficient level))),
+      letI := system.coefficientRing level
+      letI := system.coefficientAlgebra level
+      candidate.map (PowerSeries.coeff 0) = 1 →
+      candidate.map PowerSeries.derivativeFun =
+        -(system.connectionSeries level) * candidate →
+      candidate = system.gaugeSeries level) ∧
+    ∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientAlgebra level
+      IsUnit (system.gaugeSeries level) :=
+  ⟨system.gaugeCoefficient_compatible,
+    system.connectionSeries_compatible,
+    system.gaugeSeries_compatible,
+    system.gaugeSeries_derivative,
+    fun level candidate normalized flatEquation ↦
+      system.gaugeSeries_unique level candidate normalized flatEquation,
+    system.gaugeSeries_isUnit⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
