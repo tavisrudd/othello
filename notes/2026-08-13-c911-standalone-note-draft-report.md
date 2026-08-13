@@ -3,7 +3,8 @@
 Date: 2026-08-13
 Lane: `clebsch`
 
-Status: IN PROGRESS (written incrementally).
+Status: COMPLETE.  Manuscript committed in the monorepo, standalone
+repository materialized and its build gate replayed.
 
 ## Scope
 
@@ -112,14 +113,111 @@ Computations performed here and used in the note:
   this is `-q` and the exponential factor `exp(-lambda_0/z) = exp(q/z)`,
   matching the C907 source.
 
+## Manuscript
+
+`papers/discrepancy-one-flips/`, main source `discrepancy_one_flips.tex`,
+sections `01-introduction`, `02-hypotheses`, `03-normalization`,
+`04-aperture`, `05-scope`.  Title: *Standard flips of discrepancy one:
+extremal `J`-normalization and the Meijer aperture at `nu = 1`*.  Nine pages.
+
+Structure: the introduction states the setup, inventories the three places
+where `[SS]` constrains `nu`, and states the two theorems and the corollary;
+Section 2 records the extremal specialization and a three-row table of the
+constrained statements and what depends on each; Section 3 proves the
+`z`-order lemma, the normalization corollary, the sharpness remark, and the
+`I = J` proposition, then transports it to the presentation and the spectrum;
+Section 4 corrects the aperture and computes the common sector; Section 5
+assembles the repaired statements and states the three boundaries.
+
+Deliberate omissions: no novelty or priority sentence, no acknowledgements,
+no Lean, no verification directory, no computational artifact, and no C907
+programme material.
+
 ## Build
 
-- (pending)
+- `make manuscript` and `make check` in `papers/discrepancy-one-flips`,
+  through `nix develop ..#manuscript --command latexmk -xelatex`, with
+  `SOURCE_DATE_EPOCH` pinned as in the neighbouring paper.  Exit 0.
+- `make warnings` passes: the log carries no Overfull, Underfull, LaTeX
+  warning, package warning, undefined reference, or undefined citation.  Two
+  issues found on the first build were fixed: an overfull line in the opening
+  sentence, and hyperref bookmark warnings from math in three section titles
+  (now wrapped in `\texorpdfstring`).
+- Pages 2, 3, 8 were rendered to PNG and read to confirm the displays,
+  absolute-value bars, and sector inequalities typeset correctly.
 
 ## Export
 
-- (pending)
+Followed `notes/export-and-mirror-conventions.md`.  Registry rows were
+required first, since the exporter refuses any repository it does not know:
+
+- `lean/trust/papers.toml`: new `[[paper]]` row, id `discrepancy_one_flips`,
+  dir `papers/discrepancy-one-flips`, main `discrepancy_one_flips.tex`,
+  lane `clebsch`.
+- `papers/repositories.toml`: new `[[repository]]` row
+  `discrepancy-one-flips`, `include_release_pdfs = true`, disposition
+  `active`, with five `Makefile` rewrite rules copied from the
+  `cubic-stabilization-epilogue` pattern: repoint `TEXSHELL` from
+  `nix develop ..#manuscript` to `.#manuscript`, and drop the `lint` target
+  and its two call sites, since `papers/scripts/lint_tex_spacing.py` is
+  outside the standalone boundary.
+
+Commands run from `~/src/othello`, all exit 0:
+
+```text
+python3 papers/scripts/export-paper-repos.py plan  --source-ref HEAD --repository discrepancy-one-flips
+python3 papers/scripts/export-paper-repos.py audit --source-ref HEAD --repository discrepancy-one-flips
+python3 papers/scripts/export-paper-repos.py materialize --source-ref HEAD \
+  --repository discrepancy-one-flips --out ~/src/math-papers/discrepancy-one-flips
+python3 papers/scripts/export-paper-repos.py verify --root ~/src/math-papers/discrepancy-one-flips
+```
+
+- `plan`: `files=12 bytes=163120 excluded_symlinks=0 reference_findings=0`.
+- `audit`: `findings=0` — no task or lane identifier, internal process file,
+  or private path in any exported blob.
+- `materialize`: 15 files, adding the generated `PROVENANCE.md`,
+  `export-manifest.json` and `.gitignore`.  `materialize` writes the tree
+  only; it does not create the repository, so the standalone repository was
+  initialized on `main` and committed as `Initial standalone paper export`,
+  matching the sibling repositories' first-commit wording.  No remote was
+  added and nothing was pushed.
+- Release gate replayed inside the standalone repository: `make check`
+  passes there through its own flake, and the rebuilt PDF is byte-identical
+  to the exported one, SHA-256
+  `cbb1bb08f75639046bef9d5a80974a96b92fed0d34632820c38b8a2d7d62d5ac`, with
+  `git status` clean afterwards.
+- `verify`: `tracked_files=15`, agreement with the export manifest.
 
 ## Open items
 
-- (pending)
+- The standalone repository has no remote and has never been pushed;
+  publishing is the author's decision.
+- Its first commit is unsigned.  Sibling repositories under
+  `~/src/math-papers` have `commit.gpgsign = true` in effect, so this one
+  differs; the no-signing rule in the workspace instructions was followed.
+- No `.zenodo.json` and no DOI badge.  The neighbouring paper carries both;
+  they belong to a publication decision that has not been made here.
+- Registry edits touched two shared files, `papers/repositories.toml` and
+  `lean/trust/papers.toml`, which are outside the writable scope stated in
+  the task brief but are required by the export procedure.  Both were clean
+  before the edit, both were staged and committed alone, and neither
+  contains any other session's work.
+- The export manifest records source commit `d8ac2889`, which is a
+  concurrent Lean commit from another session that advanced `HEAD` between
+  the registry commit and `materialize`.  The exported paper bytes are those
+  of the manuscript commit `422a0068`; the intervening commit touched only
+  `lean/`.
+- Task-brief discrepancy, resolved in favour of the PDF: the brief gives
+  `-3pi/2 < arg(z/q) < pi/2` as the `k = 0`, `m = 0` center sector.  That is
+  the intersection with the ambient sector, matching display (8) of the C907
+  source; the Appendix A center sector itself is
+  `-5pi/2 < arg(z/q) < pi/2`.  The note prints both, and derives the general
+  `s` form.
+- Noted but not asserted in the manuscript: the proof of
+  \cite{SS} Proposition 9.2 cites "Corollary 7.8" for the statement printed
+  as Proposition 7.8.  A numbering slip in the source with no mathematical
+  content; the note refers to it by its printed kind.
+- Not addressed, and out of scope by the task boundaries: the note claims
+  only the source-local repair on the extremal slice.  No statement about
+  the unrestricted quantum product, the full Novikov comparison, or any
+  C907 programme object.
