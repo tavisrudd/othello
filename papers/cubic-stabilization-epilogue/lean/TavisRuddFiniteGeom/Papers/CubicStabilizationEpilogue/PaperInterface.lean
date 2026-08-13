@@ -2,6 +2,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankO
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MatrixOfIdeals
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AllDegreeAssembly
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.GraphCoefficientDepth
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
@@ -170,6 +171,40 @@ theorem rankOne_finiteMatrix_generated_iff_pairwise_midpoint_of_dvr
         diagonal first + diagonal second ≤ 2 * cross first second :=
   GraphLattices.weightedMatrixRankOneGenerated_iff_pairwise_midpoint_of_dvr
     πIrreducible diagonal cross crossSymmetric
+
+/-- Direct block-ring verification of the graph-coordinate multiplication
+identity used to read off the three descent integrality conditions.  The
+coefficient ring may be noncommutative, as it is for matrix blocks. -/
+theorem graphCoefficient_graphCoordinate_block_identity
+    {S : Type*} [Ring S]
+    (inverseDepth slope adjointSlope coefficient : S) :
+    GraphLattices.graphChangeMatrix inverseDepth slope *
+        GraphLattices.graphAlternatingMatrix coefficient *
+        GraphLattices.graphTransposePartner inverseDepth adjointSlope =
+      GraphLattices.graphDescentBlockMatrix
+        inverseDepth slope adjointSlope coefficient :=
+  GraphLattices.graphChange_mul_alternating_mul_transposePartner
+    inverseDepth slope adjointSlope coefficient
+
+/-- Arithmetic core of the graph coefficient depth formula: the maximum
+depth is exactly the intersection of the three power-divisibility conditions,
+and it always satisfies the midpoint inequality. -/
+theorem graphCoefficient_crossDepth_intersection_and_midpoint
+    {R : Type*} [CommRing R] (π value : R)
+    (firstDepth secondDepth : ℕ) (slopeDifferenceValuation : WithTop ℕ) :
+    (π ^ GraphLattices.graphCrossDepth
+          firstDepth secondDepth slopeDifferenceValuation ∣ value ↔
+        π ^ firstDepth ∣ value ∧
+        π ^ secondDepth ∣ value ∧
+        π ^ GraphLattices.truncatedDepthDifference
+          (firstDepth + secondDepth) slopeDifferenceValuation ∣ value) ∧
+      firstDepth + secondDepth ≤
+        2 * GraphLattices.graphCrossDepth
+          firstDepth secondDepth slopeDifferenceValuation :=
+  ⟨GraphLattices.pow_graphCrossDepth_dvd_iff
+      π value firstDepth secondDepth slopeDifferenceValuation,
+    GraphLattices.graphCrossDepth_midpoint
+      firstDepth secondDepth slopeDifferenceValuation⟩
 
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that

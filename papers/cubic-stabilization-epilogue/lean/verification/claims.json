@@ -56,12 +56,15 @@
     },
     {
       "manuscript_label": "lem:graph-coefficient-lattice",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A marked finite-etale graph presentation over a complete unramified DVR and its descended symmetric coefficient lattice.",
-      "hypotheses": "Depth decomposition, dual-form adjointness, and finite-etale slope algebra on every positive-depth summand.",
-      "conclusion": "The exact diagonal and cross-ideal depths and the midpoint inequality.",
-      "cautions": "No etaleness is imposed on the unit block and scalar lifts must not affect the depth formula."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_graphCoordinate_block_identity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_crossDepth_intersection_and_midpoint"
+      ],
+      "objects": "Lean represents the two-by-two graph-coordinate block matrices over an arbitrary possibly noncommutative ring, and the arithmetic cross-depth obtained by intersecting three uniformizer-power divisibility conditions with an extended slope-difference valuation.",
+      "hypotheses": "The block identity is purely ring-theoretic. The depth theorem assumes only a commutative coefficient ring and takes the two diagonal depths and extended slope-difference valuation as inputs.",
+      "conclusion": "The displayed graph-coordinate product has exactly the manuscript's three nonzero blocks; the maximum cross depth is exactly equivalent to simultaneous satisfaction of the three power-divisibility conditions and obeys the midpoint inequality.",
+      "cautions": "The marked finite-etale graph presentation, splitting into slope blocks, dual-form adjointness, derivation of the three integrality conditions from geometric descent, the unit-block calculation, and scalar-lift invariance are not yet formalized. Thus Lean checks the block algebra and depth arithmetic, not the full geometric coefficient-lattice lemma."
     },
     {
       "manuscript_label": "lem:dvr-rank-one",
