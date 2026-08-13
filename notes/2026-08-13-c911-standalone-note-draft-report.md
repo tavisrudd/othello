@@ -213,8 +213,8 @@ python3 papers/scripts/export-paper-repos.py verify --root ~/src/math-papers/dis
   source; the Appendix A center sector itself is
   `-5pi/2 < arg(z/q) < pi/2`.  The note prints both, and derives the general
   `s` form.
-- Noted but not asserted in the manuscript: the proof of
-  \cite{SS} Proposition 9.2 cites "Corollary 7.8" for the statement printed
+- Noted but not asserted in the manuscript: the proof of Proposition 9.2 in
+  arXiv:2502.08762v2 cites "Corollary 7.8" for the statement printed
   as Proposition 7.8.  A numbering slip in the source with no mathematical
   content; the note refers to it by its printed kind.
 - Not addressed, and out of scope by the task boundaries: the note claims
