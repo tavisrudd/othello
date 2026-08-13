@@ -17,9 +17,11 @@ proves that two normalized matrix series satisfying
 for every coordinate are equal.  The argument is induction on total monomial
 degree: a nonconstant coefficient is recovered from any coordinate in its
 support, and positive integers are units over a commutative `ℚ`-algebra.  For
-an arbitrary commutative coefficient algebra with commuting derivations, Lean
-also proves that an invertible supplied solution forces the zero-curvature
-identity.
+the multivariate formal power-series ring, Lean proves the coefficientwise
+partial derivatives satisfy the Leibniz rule, packages them as commuting
+derivations, and specializes the zero-curvature identity to those actual
+partials.  The same necessary identity is also proved for an arbitrary
+commutative coefficient algebra with commuting derivations.
 
 The module does not construct a multivariable solution or prove the converse
 existence theorem from zero curvature.  It does not identify the coefficient
@@ -117,6 +119,272 @@ theorem multivariablePartialDerivative_comm
     rw [indexEquality]
     ring
 
+/-- Coefficientwise partial differentiation satisfies the product rule on
+multivariate formal power series. -/
+theorem multivariablePartialDerivative_mul
+    {Coordinate R : Type*} [CommRing R] [DecidableEq Coordinate]
+    (coordinate : Coordinate) (left right : MvPowerSeries Coordinate R) :
+    multivariablePartialDerivative coordinate (left * right) =
+      multivariablePartialDerivative coordinate left * right +
+        left * multivariablePartialDerivative coordinate right := by
+  classical
+  apply MvPowerSeries.ext
+  intro degree
+  let basisMonomial : Coordinate →₀ ℕ := Finsupp.single coordinate 1
+  let firstTerm : (Coordinate →₀ ℕ) × (Coordinate →₀ ℕ) → R := fun pair ↦
+    (pair.1 coordinate : R) * MvPowerSeries.coeff pair.1 left *
+      MvPowerSeries.coeff pair.2 right
+  let secondTerm : (Coordinate →₀ ℕ) × (Coordinate →₀ ℕ) → R := fun pair ↦
+    (pair.2 coordinate : R) * MvPowerSeries.coeff pair.1 left *
+      MvPowerSeries.coeff pair.2 right
+  let firstLowerTerm : (Coordinate →₀ ℕ) × (Coordinate →₀ ℕ) → R := fun pair ↦
+    (pair.1 coordinate + 1 : R) *
+      MvPowerSeries.coeff (pair.1 + basisMonomial) left *
+      MvPowerSeries.coeff pair.2 right
+  let secondLowerTerm : (Coordinate →₀ ℕ) × (Coordinate →₀ ℕ) → R := fun pair ↦
+    (pair.2 coordinate + 1 : R) *
+      MvPowerSeries.coeff pair.1 left *
+      MvPowerSeries.coeff (pair.2 + basisMonomial) right
+  have firstReindex :
+      (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal
+          (degree + basisMonomial), firstTerm pair) =
+        ∑ pair ∈ Finset.HasAntidiagonal.antidiagonal degree,
+          firstLowerTerm pair := by
+    refine Finset.sum_bij_ne_zero
+      (fun pair _ _ ↦ (pair.1 - basisMonomial, pair.2)) ?_ ?_ ?_ ?_
+    · intro pair pairMem termNonzero
+      have pairSum : pair.1 + pair.2 = degree + basisMonomial := by
+        simpa using pairMem
+      have firstPresent : pair.1 coordinate ≠ 0 := by
+        intro firstZero
+        apply termNonzero
+        simp [firstTerm, firstZero]
+      have recover : pair.1 - basisMonomial + basisMonomial = pair.1 := by
+        exact Finsupp.sub_add_single_one_cancel firstPresent
+      have targetSum : pair.1 - basisMonomial + pair.2 = degree := by
+        exact add_right_cancel (by
+          calc
+            (pair.1 - basisMonomial + pair.2) + basisMonomial =
+                (pair.1 - basisMonomial + basisMonomial) + pair.2 := by ac_rfl
+            _ = pair.1 + pair.2 := by rw [recover]
+            _ = degree + basisMonomial := pairSum)
+      simpa using targetSum
+    · intro leftPair leftMem leftNonzero rightPair rightMem rightNonzero equality
+      have firstPresent : leftPair.1 coordinate ≠ 0 := by
+        intro firstZero
+        apply leftNonzero
+        simp [firstTerm, firstZero]
+      have secondPresent : rightPair.1 coordinate ≠ 0 := by
+        intro secondZero
+        apply rightNonzero
+        simp [firstTerm, secondZero]
+      apply Prod.ext
+      · have reducedEquality :
+            leftPair.1 - basisMonomial = rightPair.1 - basisMonomial := by
+          simpa only using congrArg Prod.fst equality
+        calc
+          leftPair.1 = (leftPair.1 - basisMonomial) + basisMonomial :=
+            (Finsupp.sub_add_single_one_cancel firstPresent).symm
+          _ = (rightPair.1 - basisMonomial) + basisMonomial := by
+            rw [reducedEquality]
+          _ = rightPair.1 := Finsupp.sub_add_single_one_cancel secondPresent
+      · simpa only using congrArg Prod.snd equality
+    · intro pair pairMem termNonzero
+      refine ⟨(pair.1 + basisMonomial, pair.2), ?_, ?_, ?_⟩
+      · have pairSum : pair.1 + pair.2 = degree := by simpa using pairMem
+        have targetSum : pair.1 + basisMonomial + pair.2 = degree + basisMonomial := by
+          calc
+            pair.1 + basisMonomial + pair.2 =
+                (pair.1 + pair.2) + basisMonomial := by ac_rfl
+            _ = degree + basisMonomial := by rw [pairSum]
+        simpa using targetSum
+      · simpa [firstTerm, firstLowerTerm, basisMonomial] using termNonzero
+      · apply Prod.ext
+        · exact add_tsub_cancel_right pair.1 basisMonomial
+        · rfl
+    · intro pair pairMem termNonzero
+      have firstPresent : pair.1 coordinate ≠ 0 := by
+        intro firstZero
+        apply termNonzero
+        simp [firstTerm, firstZero]
+      have recover : pair.1 - basisMonomial + basisMonomial = pair.1 :=
+        Finsupp.sub_add_single_one_cancel firstPresent
+      have coordinateRecover :
+          (pair.1 - basisMonomial) coordinate + 1 = pair.1 coordinate := by
+        simpa [basisMonomial] using
+          congrArg (fun monomial ↦ monomial coordinate) recover
+      have coordinateRecoverCast :
+          ((pair.1 - basisMonomial) coordinate : R) + 1 =
+            (pair.1 coordinate : R) := by
+        simpa using congrArg (fun exponent : ℕ ↦ (exponent : R)) coordinateRecover
+      simp only [firstTerm, firstLowerTerm]
+      rw [recover, coordinateRecoverCast]
+  have secondReindex :
+      (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal
+          (degree + basisMonomial), secondTerm pair) =
+        ∑ pair ∈ Finset.HasAntidiagonal.antidiagonal degree,
+          secondLowerTerm pair := by
+    refine Finset.sum_bij_ne_zero
+      (fun pair _ _ ↦ (pair.1, pair.2 - basisMonomial)) ?_ ?_ ?_ ?_
+    · intro pair pairMem termNonzero
+      have pairSum : pair.1 + pair.2 = degree + basisMonomial := by
+        simpa using pairMem
+      have secondPresent : pair.2 coordinate ≠ 0 := by
+        intro secondZero
+        apply termNonzero
+        simp [secondTerm, secondZero]
+      have recover : pair.2 - basisMonomial + basisMonomial = pair.2 := by
+        exact Finsupp.sub_add_single_one_cancel secondPresent
+      have targetSum : pair.1 + (pair.2 - basisMonomial) = degree := by
+        exact add_right_cancel (by
+          calc
+            (pair.1 + (pair.2 - basisMonomial)) + basisMonomial =
+                pair.1 + ((pair.2 - basisMonomial) + basisMonomial) := by ac_rfl
+            _ = pair.1 + pair.2 := by rw [recover]
+            _ = degree + basisMonomial := pairSum)
+      simpa using targetSum
+    · intro leftPair leftMem leftNonzero rightPair rightMem rightNonzero equality
+      have firstPresent : leftPair.2 coordinate ≠ 0 := by
+        intro firstZero
+        apply leftNonzero
+        simp [secondTerm, firstZero]
+      have secondPresent : rightPair.2 coordinate ≠ 0 := by
+        intro secondZero
+        apply rightNonzero
+        simp [secondTerm, secondZero]
+      apply Prod.ext
+      · simpa only using congrArg Prod.fst equality
+      · have reducedEquality :
+            leftPair.2 - basisMonomial = rightPair.2 - basisMonomial := by
+          simpa only using congrArg Prod.snd equality
+        calc
+          leftPair.2 = (leftPair.2 - basisMonomial) + basisMonomial :=
+            (Finsupp.sub_add_single_one_cancel firstPresent).symm
+          _ = (rightPair.2 - basisMonomial) + basisMonomial := by
+            rw [reducedEquality]
+          _ = rightPair.2 := Finsupp.sub_add_single_one_cancel secondPresent
+    · intro pair pairMem termNonzero
+      refine ⟨(pair.1, pair.2 + basisMonomial), ?_, ?_, ?_⟩
+      · have pairSum : pair.1 + pair.2 = degree := by simpa using pairMem
+        have targetSum : pair.1 + (pair.2 + basisMonomial) =
+            degree + basisMonomial := by
+          calc
+            pair.1 + (pair.2 + basisMonomial) =
+                (pair.1 + pair.2) + basisMonomial := by ac_rfl
+            _ = degree + basisMonomial := by rw [pairSum]
+        simpa using targetSum
+      · simpa [secondTerm, secondLowerTerm, basisMonomial] using termNonzero
+      · apply Prod.ext
+        · rfl
+        · exact add_tsub_cancel_right pair.2 basisMonomial
+    · intro pair pairMem termNonzero
+      have secondPresent : pair.2 coordinate ≠ 0 := by
+        intro secondZero
+        apply termNonzero
+        simp [secondTerm, secondZero]
+      have recover : pair.2 - basisMonomial + basisMonomial = pair.2 :=
+        Finsupp.sub_add_single_one_cancel secondPresent
+      have coordinateRecover :
+          (pair.2 - basisMonomial) coordinate + 1 = pair.2 coordinate := by
+        simpa [basisMonomial] using
+          congrArg (fun monomial ↦ monomial coordinate) recover
+      have coordinateRecoverCast :
+          ((pair.2 - basisMonomial) coordinate : R) + 1 =
+            (pair.2 coordinate : R) := by
+        simpa using congrArg (fun exponent : ℕ ↦ (exponent : R)) coordinateRecover
+      simp only [secondTerm, secondLowerTerm]
+      rw [recover, coordinateRecoverCast]
+  rw [multivariablePartialDerivative_coefficient, MvPowerSeries.coeff_mul]
+  rw [Finset.mul_sum]
+  calc
+    (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal (degree + basisMonomial),
+        (degree coordinate + 1 : R) *
+          (MvPowerSeries.coeff pair.1 left *
+            MvPowerSeries.coeff pair.2 right)) =
+        ∑ pair ∈ Finset.HasAntidiagonal.antidiagonal (degree + basisMonomial),
+          (firstTerm pair + secondTerm pair) := by
+      apply Finset.sum_congr rfl
+      intro pair pairMem
+      have pairSum : pair.1 + pair.2 = degree + basisMonomial := by
+        simpa using pairMem
+      have coordinateSum :
+          pair.1 coordinate + pair.2 coordinate = degree coordinate + 1 := by
+        simpa [basisMonomial] using
+          congrArg (fun monomial ↦ monomial coordinate) pairSum
+      have coordinateSumCast :
+          (pair.1 coordinate : R) + (pair.2 coordinate : R) =
+            (degree coordinate : R) + 1 := by
+        simpa using congrArg (fun exponent : ℕ ↦ (exponent : R)) coordinateSum
+      simp only [firstTerm, secondTerm]
+      rw [← coordinateSumCast]
+      ring
+    _ = (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal
+          (degree + basisMonomial), firstTerm pair) +
+        ∑ pair ∈ Finset.HasAntidiagonal.antidiagonal
+          (degree + basisMonomial), secondTerm pair := by
+      rw [Finset.sum_add_distrib]
+    _ = (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal degree,
+          firstLowerTerm pair) +
+        ∑ pair ∈ Finset.HasAntidiagonal.antidiagonal degree,
+          secondLowerTerm pair := by
+      rw [firstReindex, secondReindex]
+    _ = MvPowerSeries.coeff degree
+        (multivariablePartialDerivative coordinate left * right +
+          left * multivariablePartialDerivative coordinate right) := by
+      change _ = MvPowerSeries.coeff degree
+        (multivariablePartialDerivative coordinate left * right) +
+          MvPowerSeries.coeff degree
+            (left * multivariablePartialDerivative coordinate right)
+      rw [MvPowerSeries.coeff_mul, MvPowerSeries.coeff_mul]
+      simp only [multivariablePartialDerivative_coefficient, firstLowerTerm,
+        secondLowerTerm, basisMonomial]
+      congr 1
+      apply Finset.sum_congr rfl
+      intro pair _
+      ring
+
+/-- Partial differentiation as a linear map over the coefficient ring. -/
+noncomputable def multivariablePartialDerivativeLinearMap
+    {Coordinate R : Type*} [CommRing R] [DecidableEq Coordinate]
+    (coordinate : Coordinate) :
+    MvPowerSeries Coordinate R →ₗ[R] MvPowerSeries Coordinate R where
+  toFun := multivariablePartialDerivative coordinate
+  map_add' := by
+    intro left right
+    apply MvPowerSeries.ext
+    intro degree
+    simp [multivariablePartialDerivative_coefficient, mul_add]
+  map_smul' := by
+    intro scalar series
+    apply MvPowerSeries.ext
+    intro degree
+    simp [multivariablePartialDerivative_coefficient]
+    ring
+
+/-- Partial differentiation as a derivation of the multivariate formal power
+series ring over its coefficient ring. -/
+noncomputable def multivariablePartialDerivation
+    {Coordinate R : Type*} [CommRing R] [DecidableEq Coordinate]
+    (coordinate : Coordinate) :
+    Derivation R (MvPowerSeries Coordinate R) (MvPowerSeries Coordinate R) where
+  toLinearMap := multivariablePartialDerivativeLinearMap coordinate
+  map_one_eq_zero' := by
+    apply MvPowerSeries.ext
+    intro degree
+    have shiftedNonzero :
+        degree + Finsupp.single coordinate 1 ≠ (0 : Coordinate →₀ ℕ) := by
+      intro equality
+      have coordinateEquality :=
+        congrArg (fun monomial ↦ monomial coordinate) equality
+      simp at coordinateEquality
+    simp [multivariablePartialDerivativeLinearMap,
+      multivariablePartialDerivative_coefficient, MvPowerSeries.coeff_one,
+      shiftedNonzero]
+  leibniz' := by
+    intro left right
+    simpa [multivariablePartialDerivativeLinearMap, smul_eq_mul, add_comm,
+      mul_comm] using multivariablePartialDerivative_mul coordinate left right
+
 /-- Any matrix series satisfying all coordinate flat equations satisfies the
 corresponding mixed-derivative compatibility identity.  This identity does
 not assert the expanded zero-curvature equation for the connection. -/
@@ -170,6 +438,15 @@ structure CommutingCoordinateDerivations
   commute : ∀ first second coefficient,
     derivation first (derivation second coefficient) =
       derivation second (derivation first coefficient)
+
+/-- The coefficientwise partial derivatives form a commuting coordinate
+system of derivations. -/
+noncomputable def multivariablePartialDerivationSystem
+    {Coordinate R : Type*} [CommRing R] [DecidableEq Coordinate] :
+    CommutingCoordinateDerivations Coordinate R
+      (MvPowerSeries Coordinate R) where
+  derivation := multivariablePartialDerivation
+  commute := multivariablePartialDerivative_comm
 
 /-- An invertible solution of all coordinate equations forces the standard
 zero-curvature identity for the supplied connection.  This theorem proves a
@@ -267,6 +544,30 @@ theorem multivariableFlatGauge_curvature_eq_zero
         (-(connection first).map (directions.derivation second) +
           connection first * connection second) := by noncomm_ring
     _ = 0 := by rw [factorsEqual]; abel
+
+/-- For the coefficientwise partial derivatives on multivariate formal power
+series, an invertible solution of every coordinate equation forces the
+corresponding zero-curvature identity.  This specializes the abstract
+commuting-derivation theorem; it still proves only necessity, not existence of
+a solution from the curvature equations. -/
+theorem multivariableFlatGaugeSeries_curvature_eq_zero
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (solution : Matrix Index Index (MvPowerSeries Coordinate R))
+    (solutionUnit : IsUnit solution)
+    (flatEquation : ∀ coordinate,
+      solution.map (multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * solution)
+    (first second : Coordinate) :
+    (connection second).map (multivariablePartialDerivative first) -
+        (connection first).map (multivariablePartialDerivative second) +
+        connection first * connection second -
+        connection second * connection first = 0 := by
+  exact multivariableFlatGauge_curvature_eq_zero
+    (multivariablePartialDerivationSystem (Coordinate := Coordinate) (R := R))
+    connection solution solutionUnit flatEquation first second
 
 /-- Two normalized matrix-valued multivariate series satisfying the same
 coordinatewise formal flat equation are equal.  Existence and integrability

@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 60 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 68 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 112 audited terminals.  The rejecting manuscript inventory covers all
+exports 127 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -164,6 +164,12 @@ fiber-cardinality formula.  Additive scalar weights give additive operators
   quotient.  The geometric
 Gromov--Witten coefficients, curve-pairing weights, and quantum connection are
 not constructed.
+
+For multivariate formal power series, the coefficientwise partial derivatives
+now satisfy the Leibniz rule, are packaged as commuting derivations, and
+specialize the necessary zero-curvature theorem.  The Laurent-coefficient
+normalized-solution theorem remains uniqueness-only: construction from zero
+curvature, quotient compatibility, and uniform Laurent order are not proved.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

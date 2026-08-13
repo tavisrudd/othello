@@ -2608,6 +2608,44 @@ theorem multivariableFlatGauge_invertibleSolution_curvature
   Quantum.multivariableFlatGauge_curvature_eq_zero directions connection
     solution solutionUnit flatEquation first second
 
+/-- On the actual multivariate formal power-series ring, the coefficientwise
+partial derivatives satisfy the Leibniz rule and commute.  Consequently, an
+invertible matrix solution of `partial_i G=-A_iG` forces the displayed
+zero-curvature identity for those partial derivatives.  This theorem proves
+necessity only; it does not construct a solution from zero curvature. -/
+theorem multivariableFormalPartialDerivations_and_curvature
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (solution : Matrix Index Index (MvPowerSeries Coordinate R))
+    (solutionUnit : IsUnit solution)
+    (flatEquation : ∀ coordinate,
+      solution.map (Quantum.multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * solution)
+    (first second : Coordinate) :
+    (∀ (coordinate : Coordinate)
+        (left right : MvPowerSeries Coordinate R),
+        Quantum.multivariablePartialDerivative coordinate (left * right) =
+          Quantum.multivariablePartialDerivative coordinate left * right +
+            left * Quantum.multivariablePartialDerivative coordinate right) ∧
+      (∀ (first second : Coordinate)
+          (series : MvPowerSeries Coordinate R),
+        Quantum.multivariablePartialDerivative first
+            (Quantum.multivariablePartialDerivative second series) =
+          Quantum.multivariablePartialDerivative second
+            (Quantum.multivariablePartialDerivative first series)) ∧
+      ((connection second).map
+            (Quantum.multivariablePartialDerivative first) -
+          (connection first).map
+            (Quantum.multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0) :=
+  ⟨Quantum.multivariablePartialDerivative_mul,
+    Quantum.multivariablePartialDerivative_comm,
+    Quantum.multivariableFlatGaugeSeries_curvature_eq_zero connection solution
+      solutionUnit flatEquation first second⟩
+
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
 monomial map alone is not injective. -/

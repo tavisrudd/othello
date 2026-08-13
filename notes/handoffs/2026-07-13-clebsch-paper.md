@@ -184,7 +184,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 68 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 126 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 127 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -291,7 +291,9 @@ degree.  This is uniqueness only: existence, integrability, quotient
 compatibility, and uniform Laurent-order bounds remain unformalized.  For
 arbitrary commuting derivations, an invertible supplied solution is now proved
 to force the exact zero-curvature identity; the converse construction remains
-open.
+open.  The coefficientwise multivariate formal partial derivatives now satisfy
+the Leibniz rule, are packaged as commuting derivations, and instantiate that
+curvature theorem directly.
 The supplied filtration and connection remain unidentified with the
 manuscript's geometric coefficient ring and quantum product; construction of
 the multivariable Laurent bulk gauge, bounded order, convergence, and the

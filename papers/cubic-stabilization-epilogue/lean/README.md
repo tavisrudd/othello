@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 126 reviewer terminals.
+1 complete; 127 reviewer terminals.
 
-The 126 reviewer-facing terminals currently verify:
+The 127 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -167,9 +167,11 @@ The 126 reviewer-facing terminals currently verify:
   induction; it does not construct such a gauge, prove integrability or
   quotient compatibility, establish a Laurent lower bound uniform in the bulk
   monomial or level, or identify the data with the manuscript's quantum
-  connection; more generally, for commuting derivations an invertible supplied
-  solution of all coordinate equations is proved to force the exact
-  zero-curvature identity, without proving the converse existence theorem;
+  connection; the coefficientwise multivariate formal partial derivatives are
+  proved to satisfy the Leibniz rule and commute, and an invertible supplied
+  solution is proved to force their exact zero-curvature identity; the same
+  necessary result holds for arbitrary commuting derivations, without proving
+  the converse existence theorem;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;
