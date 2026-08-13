@@ -10,14 +10,14 @@ records whether its current Lean coverage is absent, fragmentary, a conditional
 deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
-with 4 absent, 15 fragmentary, 3 conditional deductions, and 1 complete.
-There are 75 reviewer-facing Lean terminals.  These counts summarize the
+with 3 absent, 16 fragmentary, 3 conditional deductions, and 1 complete.
+There are 77 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
-Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 75 reviewer terminals.
+Checked coverage snapshot: 23 claims; 3 absent; 16 fragmentary; 3 conditional;
+1 complete; 77 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -58,7 +58,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   (`lem:relative-six-axis`, currently absent).
 - Formalize the remaining quantum inputs: the separation family, divisor
   tagging geometry, formal and numerical base-change comparisons, strict
-  Novikov operations, cubic packet comparison, and low-dimensional
-  vanishing.  The headline deductions remain explicitly conditional until
+  Novikov operations, cubic packet comparison, and the geometric/connection
+  inputs that restrict monodromy eigenvalues to `{1,-1}` in dimensions at
+  most two.  The exact terminal spectral vanishing implication is now
+  formalized; matrix involutivity is recorded only as a stronger sufficient
+  special case.  The
+  headline deductions remain explicitly conditional until
   those premises are proved (`thm:every-cubic`,
   `thm:nu6-birational-invariance`, and `cor:v14-one-step`).

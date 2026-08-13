@@ -57,6 +57,8 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4Frobeniu
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_characteristicRoots_sq_eq_one: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem: propext, Classical.choice, Quot.sound

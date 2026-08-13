@@ -34,6 +34,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusNormalizer",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent",

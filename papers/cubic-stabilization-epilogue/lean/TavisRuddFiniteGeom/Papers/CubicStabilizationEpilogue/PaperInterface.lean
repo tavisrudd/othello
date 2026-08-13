@@ -16,6 +16,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Exoti
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusNormalizer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
@@ -1285,6 +1286,27 @@ theorem framedSixthMultiplicity_polynomial_list_prod
     Quantum.sixthMultiplicityPolynomial polynomials.prod =
       (polynomials.map Quantum.sixthMultiplicityPolynomial).sum :=
   Quantum.sixthMultiplicityPolynomial_list_prod polynomials nonzero
+
+/-- Exact terminal spectral step of low-dimensional vanishing: if every
+characteristic root of the supplied framed monodromy has square one, then its
+primitive-sixth multiplicity vanishes.  This theorem does not derive the root
+restriction from a quantum connection or from low-dimensional geometry. -/
+theorem lowDimensionalVanishing_of_characteristicRoots_sq_eq_one
+    (monodromy : Quantum.FramedMonodromyMatrix)
+    (rootSquare : ∀ value : ℂ, monodromy.operator.charpoly.IsRoot value →
+      value ^ 2 = 1) :
+    monodromy.sixthMultiplicity = 0 :=
+  monodromy.sixthMultiplicity_eq_zero_of_roots_sq_eq_one rootSquare
+
+/-- A sufficient finite-matrix special case of low-dimensional vanishing:
+involutivity implies the exact characteristic-root restriction and hence zero
+primitive-sixth multiplicity.  The manuscript's regular-singular argument
+asserts the root restriction, not involutivity of the full monodromy matrix. -/
+theorem lowDimensionalVanishing_of_involutiveFramedMonodromy
+    (monodromy : Quantum.FramedMonodromyMatrix)
+    (involutive : monodromy.operator * monodromy.operator = 1) :
+    monodromy.sixthMultiplicity = 0 :=
+  monodromy.sixthMultiplicity_eq_zero_of_sq_eq_one involutive
 
 /-- Arithmetic core of Cai's cubic rank-two block: the displayed indicial
 polynomial factors with exponents `-1/6` and `-5/6`, whose one-turn framed

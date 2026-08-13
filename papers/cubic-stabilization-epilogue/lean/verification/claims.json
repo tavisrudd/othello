@@ -260,12 +260,15 @@
     },
     {
       "manuscript_label": "prop:low-dimensional-vanishing",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Points, smooth projective curves, and smooth projective surfaces with specialized framed multiplicity.",
-      "hypotheses": "Every strictly Novikov-admissible specialization.",
-      "conclusion": "Vanishing of the primitive-sixth multiplicity.",
-      "cautions": "The proof separates nef-canonical minimal models, projective and ruled cases, and point blowups."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_characteristicRoots_sq_eq_one",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy"
+      ],
+      "objects": "A supplied finite-dimensional complex framed-monodromy matrix and the sum of the characteristic-polynomial multiplicities of the two primitive sixth roots.",
+      "hypotheses": "For the exact spectral endpoint, every characteristic-polynomial root of the supplied framed-monodromy matrix has square one, equivalently lies in the set {1,-1}. A separate sufficient corollary instead assumes the entire matrix squares to the identity.",
+      "conclusion": "Lean proves the two chosen primitive sixth roots do not have square one, so the manuscript's plus-or-minus-one characteristic-root restriction forces their multiplicities and hence the primitive-sixth multiplicity to vanish. Lean also proves that matrix involutivity is one sufficient condition for that root restriction.",
+      "cautions": "This is the exact terminal spectral implication in the human proof, not the geometric proposition. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary. Lean does not construct the quantum connection, formal monodromy, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; classify minimal curves and surfaces; establish projective-bundle or blowup comparison formulas; or transfer intrinsic vanishing through divisor tagging to every strictly Novikov-admissible specialization."
     },
     {
       "manuscript_label": "thm:nu6-birational-invariance",

@@ -25,16 +25,16 @@ This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
-- 4 absent from Lean;
-- 15 represented by exact but strictly weaker fragments;
+- 3 absent from Lean;
+- 16 represented by exact but strictly weaker fragments;
 - 3 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 75 reviewer terminals.
+Checked coverage snapshot: 23 claims; 3 absent; 16 fragmentary; 3 conditional;
+1 complete; 77 reviewer terminals.
 
-The 75 reviewer-facing terminals currently verify:
+The 77 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -101,6 +101,11 @@ The 75 reviewer-facing terminals currently verify:
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;
+- the exact terminal low-dimensional spectral implication that a framed
+  monodromy whose characteristic roots lie in `{1,-1}` has zero
+  primitive-sixth multiplicity, plus involutivity as a separately marked
+  sufficient special case, without deriving the spectral restriction from
+  geometry;
 - finite-fiber numerical Novikov coefficient pushforward and the algebraic
   core of strict Novikov admissibility and divisor-tag separation;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
