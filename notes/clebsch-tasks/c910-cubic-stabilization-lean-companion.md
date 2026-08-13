@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 49 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 50 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 91 audited terminals.  The rejecting manuscript inventory covers all
+exports 93 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -124,7 +124,7 @@ four-factor framed-monodromy characteristic polynomial, Lean proves that the
 two primitive-sixth roots occur once each, the two unit blocks contribute
 nothing, and the multiplicity is exactly two for every smooth cubic threefold.
 Divisor-tagging vanishing is now an exact conditional endpoint deduction: two
-supplied final characteristic-polynomial equalities over `ℚ` imply equality
+supplied final characteristic-polynomial equalities over `ℂ` imply equality
 of intrinsic, tagged, and specialized primitive-sixth multiplicities and hence
 transfer vanishing to every strictly admissible specialization.  The formal
 signature deliberately does not model the source coefficient fields, a common
@@ -135,8 +135,13 @@ kernel checked: for any finite injective family of integral pairing vectors,
 Lean constructs an integral direction `(1,t,t²,...)` by avoiding the finite
 root sets of the pairwise difference polynomials and proves linear
 independence of the resulting formal exponentials from their first
-coefficients via Vandermonde.  It does not yet produce the finite initial
-support of a completed Novikov series.
+coefficients via Vandermonde.  The support step is also kernel checked at
+coefficient level: a nonzero
+series with finite support below each length cutoff has a nonempty finite
+lowest-length support with exact membership, and every assignment of nonzero
+leading coefficients there gives a nonzero tagged exponential combination.
+The remaining seam is the filtered/associated-graded identification of a
+geometric specialized initial form with that combination.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -167,6 +172,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/FormalBaseShift.lean
     Quantum/NovikovAdmissibility.lean
     Quantum/ExponentialDivisorTags.lean
+    Quantum/CompletedNovikovSupport.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
     Quantum/PacketInvariant.lean
@@ -233,10 +239,11 @@ are current, and the committed paper export verifies byte-for-byte in
   curve lattice, and numerical-Novikov passage remain explicit missing inputs.
 - **Divisor-tagging deduction:** settled at the conditional endpoint.  Lean
   transports primitive-sixth multiplicity and vanishing through two supplied
-  final polynomial equalities over `ℚ`.  Its finite exponential-character
-  independence step and the integral separating direction are now proved by
-  finite root avoidance and Vandermonde; the completed-series
-  lowest-support/associated-graded passage, coefficient-field embeddings,
+  final polynomial equalities over `ℂ`.  Its finite exponential-character
+  independence step, integral separating direction, finite lowest support,
+  and noncancellation for supplied leading coefficients are now proved.  The
+  associated-graded identification of the geometric specialized initial form,
+  coefficient-field embeddings,
   common-closure comparison, and bulk-gauge construction remain the exact
   open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the

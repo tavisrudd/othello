@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 91 reviewer terminals.
+1 complete; 93 reviewer terminals.
 
-The 91 reviewer-facing terminals currently verify:
+The 93 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -125,6 +125,13 @@ The 91 reviewer-facing terminals currently verify:
   difference polynomials, matching the manuscript's integral one-parameter
   requirement, with character independence over every characteristic-zero
   coefficient field;
+- the completed Novikov support condition at coefficient level: every nonzero
+  series has a nonempty finite lowest-length support with exact membership;
+  for an injective integral divisor-pairing vector, an integral direction
+  separates that support and every assignment of nonzero leading coefficients
+  gives a nonzero exponential-character combination; the associated-graded
+  identification of a specialized initial form with this combination remains
+  outside the theorem;
 - the conditional common-field endpoint of divisor-tagging vanishing from
   supplied final intrinsic, tagged, and specialized characteristic-polynomial
   equalities, without formal coefficient embeddings or a gauge witness;

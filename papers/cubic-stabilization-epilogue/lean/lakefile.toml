@@ -40,6 +40,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov",

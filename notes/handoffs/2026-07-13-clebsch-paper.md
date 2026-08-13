@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-49 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 91 reviewer terminals, audit
+50 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 93 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -214,7 +214,7 @@ four-factor framed characteristic polynomial: Lean proves both primitive roots
 have multiplicity one and the two unit factors contribute zero.  Cai's geometric
 block comparison and the numerical-Novikov bridge remain explicit inputs.
 Divisor-tagging vanishing is now an exact conditional endpoint deduction from
-two supplied final characteristic-polynomial equalities over `ℚ`; Lean
+two supplied final characteristic-polynomial equalities over `ℂ`; Lean
 derives equality of primitive-sixth multiplicities and transfers intrinsic
 vanishing to every strictly admissible specialization.  The source coefficient
 fields, scalar-extension maps, common comparison field, completed-series
@@ -223,8 +223,11 @@ The finite exponential-character substep is now independently proved: finite
 root avoidance constructs the manuscript's integral one-parameter direction,
 and the first `m` coefficients give the Vandermonde independence of `m` tagged
 characters.  The completed-series lowest-support/associated-graded passage
-remains outside the formal result.
-The aggregate build, source correspondence, and 91-terminal axiom transcript
+was the next seam; Lean now proves existence, finiteness, and exact membership
+of the lowest support and noncancellation for arbitrary nonzero leading
+coefficients.  Identification of the geometric specialized initial form with
+that combination remains outside the formal result.
+The aggregate build, source correspondence, and 93-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

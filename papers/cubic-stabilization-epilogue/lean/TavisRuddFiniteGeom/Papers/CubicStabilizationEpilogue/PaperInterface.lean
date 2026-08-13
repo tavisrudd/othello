@@ -20,6 +20,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensio
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
@@ -1810,6 +1811,46 @@ theorem integralDivisorPairing_exponentialCharacters_independent
         coefficient = 0 :=
   Quantum.exists_integralDirection_separating_formalExponentialCharacters
     vector vector_injective
+
+/-- A nonzero coefficient family satisfying the completed Novikov support
+condition has a nonempty finite lowest-length support.  Membership in that
+support means exactly nonzero coefficient at the least occupied length. -/
+theorem completedNovikov_lowestSupport_nonempty
+    {Curve Coefficient : Type*} [Zero Coefficient] {length : Curve → ℕ}
+    (series : Quantum.CompletedNovikovSeries Curve Coefficient length)
+    (series_nonzero : series.coefficient ≠ 0) :
+    series.lowestSupport.Nonempty ∧
+      ∀ degree, degree ∈ series.lowestSupport ↔
+        series.coefficient degree ≠ 0 ∧
+          length degree = series.lowestLength :=
+  ⟨series.lowestSupport_nonempty series_nonzero,
+    series.mem_lowestSupport_iff⟩
+
+/-- Completed-series finite-support noncancellation used in divisor tagging.
+For a nonzero completed coefficient family with an injective integral
+divisor-pairing vector, Lean constructs an integral direction separating the
+finite lowest support.  Every assignment of nonzero leading coefficients then
+gives a nonzero finite exponential-character combination over any
+characteristic-zero field.  The theorem does not identify this combination
+with the initial form of a geometric specialization. -/
+theorem completedNovikov_lowestSupport_exponentialSum_ne_zero
+    {Curve Coefficient K : Type*} [Zero Coefficient]
+    [Field K] [CharZero K] {length : Curve → ℕ}
+    (series : Quantum.CompletedNovikovSeries Curve Coefficient length)
+    (series_nonzero : series.coefficient ≠ 0)
+    {rank : ℕ} (pairingVector : Curve → Fin rank → ℤ)
+    (pairingVector_injective : Function.Injective pairingVector) :
+    ∃ direction : Fin rank → ℤ,
+      Function.Injective (fun degree : series.lowestSupport ↦
+        ∑ coordinate, direction coordinate * pairingVector degree coordinate) ∧
+      ∀ leadingCoefficient : series.lowestSupport → K,
+        (∀ degree, leadingCoefficient degree ≠ 0) →
+        ∑ degree, leadingCoefficient degree •
+          Quantum.formalExponentialCharacter
+            ((∑ coordinate, direction coordinate *
+              pairingVector degree coordinate : ℤ) : K) ≠ 0 :=
+  series.exists_integralDirection_lowestSupport_exponentialSum_ne_zero
+    series_nonzero pairingVector pairingVector_injective
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/
