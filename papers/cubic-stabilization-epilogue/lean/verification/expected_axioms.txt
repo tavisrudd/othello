@@ -1,5 +1,6 @@
 # Fully qualified terminal: exact kernel-reported axiom list
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity: propext
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.universalCH0_of_sixAxisMinimalClass_and_Voisin: none
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents: propext, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition: propext, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_weightedPair_decomposition_of_midpoint: propext, Quot.sound

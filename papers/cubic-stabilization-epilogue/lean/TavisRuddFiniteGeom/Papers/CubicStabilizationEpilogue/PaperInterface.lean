@@ -25,6 +25,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -39,6 +40,23 @@ comparison theorems that have not been formalized from foundations.
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 open scoped MatrixGroups
+
+/-- Exact conditional form of the manuscript's universal `CH₀` corollary.
+The six-axis input supplies smoothness and algebraicity of the primitive
+minimal class fibrewise; the cited Voisin equivalence is a separate explicit
+premise.  Lean performs only the universal logical deduction and constructs
+none of the geometric objects or premises. -/
+theorem universalCH0_of_sixAxisMinimalClass_and_Voisin
+    {Base CubicObject JacobianObject : Type*}
+    (geometry : Applications.CubicCycleTrivialityGeometry
+      CubicObject JacobianObject)
+    (fibre : Base → CubicObject)
+    (familyInput : Applications.SixAxisMinimalClassFamilyInput geometry fibre)
+    (voisinCriterion :
+      Applications.VoisinPrimitiveMinimalClassCriterion geometry) :
+    ∀ parameter, geometry.universallyCH0Trivial (fibre parameter) :=
+  Applications.universalCH0Triviality_of_primitiveMinimalClassFamily
+    geometry fibre familyInput voisinCriterion
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

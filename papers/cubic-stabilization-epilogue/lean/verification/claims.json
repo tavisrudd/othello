@@ -164,12 +164,14 @@
     },
     {
       "manuscript_label": "cor:universal-ch0",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A smooth cubic threefold in the nonstandard A5-pencil and its intermediate Jacobian.",
-      "hypotheses": "Algebraicity of the primitive minimal class and the exact Voisin criterion.",
-      "conclusion": "Universal CH0-triviality of the cubic threefold.",
-      "cautions": "The proof is fibrewise and constructs neither a horizontal cycle nor a relative decomposition of the diagonal."
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.universalCH0_of_sixAxisMinimalClass_and_Voisin"
+      ],
+      "objects": "A parameter type, a typed family of cubic-threefold objects, a separate type of intermediate-Jacobian objects, the intermediate-Jacobian assignment, predicates for smooth complex cubic status, algebraicity of the primitive minimal class, and universal CH0-triviality.",
+      "hypotheses": "Every indexed fibre is a smooth complex cubic threefold; the primitive minimal class of every fibre's intermediate Jacobian is algebraic; and for every smooth cubic under consideration Voisin's criterion identifies primitive-minimal-class algebraicity with universal CH0-triviality.",
+      "conclusion": "Every indexed fibre is universally CH0-trivial.",
+      "cautions": "Lean proves only the universally quantified logical deduction. The cubic pencil, smooth fibres, intermediate Jacobians, primitive minimal classes, their algebraicity from the six-axis divided-power theorem, Chow groups, universal base change in the CH0 predicate, and Voisin's geometric equivalence are represented by supplied types, functions, predicates, and premises rather than constructed. The argument is fibrewise and asserts neither a horizontal cycle nor a relative decomposition of the diagonal."
     },
     {
       "manuscript_label": "def:framed-sixth-multiplicity",

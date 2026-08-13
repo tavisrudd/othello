@@ -8,6 +8,7 @@ currently exported by the reviewer interface.
 -/
 
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.universalCH0_of_sixAxisMinimalClass_and_Voisin
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_weightedPair_decomposition_of_midpoint

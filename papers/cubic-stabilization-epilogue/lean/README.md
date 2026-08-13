@@ -25,16 +25,16 @@ This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
-- 3 absent from Lean;
+- 2 absent from Lean;
 - 16 represented by exact but strictly weaker fragments;
-- 3 represented by conditional deductions with every external premise exposed
+- 4 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 3 absent; 16 fragmentary; 3 conditional;
-1 complete; 81 reviewer terminals.
+Checked coverage snapshot: 23 claims; 2 absent; 16 fragmentary; 4 conditional;
+1 complete; 82 reviewer terminals.
 
-The 81 reviewer-facing terminals currently verify:
+The 82 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -115,6 +115,8 @@ The 81 reviewer-facing terminals currently verify:
   core of strict Novikov admissibility and divisor-tag separation;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
   and genus-eight irrationality deductions;
+- the exact fibrewise deduction from supplied primitive-minimal-class
+  algebraicity and Voisin's supplied equivalence to universal `CH₀`-triviality;
 - the factorization and framed eigenvalues of Cai's displayed rank-two
   indicial polynomial.
 
@@ -123,7 +125,8 @@ The authoritative per-claim account is
 companion does not yet formalize the relative six-axis geometry, construction
 of the marked finite-etale splitting extension and its geometric coefficient
 lattice, or the geometric
-cohomology realization and isogeny pullback, universal `CH_0` argument,
+cohomology realization and isogeny pullback, the geometric inputs to the
+universal `CH_0` argument,
 quantum comparison theorems,
 low-dimensional vanishing, or Cai's block diagonalization.
 
