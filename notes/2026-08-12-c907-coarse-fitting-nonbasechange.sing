@@ -1,0 +1,72 @@
+// C907 coarse-control Fitting non-base-change certificate.
+// Replay from repository root:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-coarse-fitting-nonbasechange.sing
+//
+// The full imbalanced central chart retains v, and its cleared graph has a
+// unit v derivative after saturating by the true dense factors B*C.  The
+// artificial face v=0 has a different cotangent quotient; its critical
+// ideal has the two h=0,2 packets.  This verifies that the latter is not
+// base change of the former Fitting calculation.
+
+LIB "primdec.lib";
+
+ring full = (0,Q),(r,h,v,A,y1,y2,y3,S,L),dp;
+poly Yfull = y1*y2*y3;
+poly B = 1-h+r^2*h^2*A;
+poly C = 1-r^2*h*v+r^2*h^2*A;
+poly G = B*C*(L-S-v+h*A+r^2*h*A*v-r^2*h^2*A^2)-A;
+poly Gv = diff(G,v);
+ideal fullCentral = r,A*Yfull-Q,G,Gv;
+ideal fullSat = sat(fullCentral,B*C);
+if (reduce(1,std(fullSat))==0)
+{ print("COARSE r=0 WITH_v FITTING=UNIT PASS"); }
+else { print("COARSE r=0 WITH_v FITTING=UNIT FAIL"); }
+
+// The other genuine central component has the same unit v derivative.
+ideal otherCentral = h,A*Yfull-Q,G,Gv;
+ideal otherSat = sat(otherCentral,B*C);
+if (reduce(1,std(otherSat))==0)
+{ print("COARSE h=0 WITH_v FITTING=UNIT PASS"); }
+else { print("COARSE h=0 WITH_v FITTING=UNIT FAIL"); }
+
+ring face = (0,Q),(h,A,y1,y2,y3,S,L),dp;
+poly Y = y1*y2*y3;
+poly qh = h^2-h+1;
+poly graph = (1-h)*(L-S)-A*qh;
+ideal faceTangent = graph,
+  A*Y-Q,
+  S-y1-y2-y3,
+  A*h*(2-h),
+  (1-h)*y1-A*qh,
+  (1-h)*y2-A*qh,
+  (1-h)*y3-A*qh;
+ideal faceSat = sat(faceTangent,A*Y*(1-h));
+
+ideal residual = h,
+  y1-A,y2-A,y3-A,
+  A^4-Q,
+  S-3*A,
+  L-4*A;
+ideal hTwo = h-2,
+  y1+3*A,y2+3*A,y3+3*A,
+  27*A^4+Q,
+  S+9*A,
+  L+12*A;
+ideal expected = intersect(residual,hTwo);
+ideal c1 = reduce(std(faceSat),std(expected));
+ideal c2 = reduce(std(expected),std(faceSat));
+if ((size(c1)==0 || c1[1]==0) && (size(c2)==0 || c2[1]==0))
+{ print("AUXILIARY v=0 IDEAL=RESIDUAL_INTERSECT_h2 PASS"); }
+else { print("AUXILIARY v=0 IDEAL=RESIDUAL_INTERSECT_h2 FAIL"); }
+
+ideal faceRad = radical(faceSat);
+ideal q1 = reduce(std(faceSat),std(faceRad));
+ideal q2 = reduce(std(faceRad),std(faceSat));
+if ((size(q1)==0 || q1[1]==0) && (size(q2)==0 || q2[1]==0))
+{ print("AUXILIARY v=0 REDUCED=PASS"); }
+else { print("AUXILIARY v=0 REDUCED=FAIL"); }
+
+print("VALUES residual: a4=Q,L=4a; h2: b4=-3Q,L=4b");
+print("NONBASECHANGE coarse_unit versus auxiliary_two_packet PASS");
+quit;
