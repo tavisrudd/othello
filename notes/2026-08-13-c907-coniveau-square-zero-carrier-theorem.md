@@ -151,10 +151,10 @@ model, a presentation-independent support filtration satisfying:
 3. the construction survives the terminal-model/resolution comparison.
 
 Then every such Mori-fibre threefold has no `J_3`.  Together with the
-`nu_6<6` admission theorem for the rank-small Fano leaves and empty **formal**
-primitive-sixth support on smooth `K`-nef models, this reduces the universal
-carrier theorem—conditional also on faithful realization of that formal
-emptiness—to:
+admission theorem for the already computed `nu_6<6` Fano leaves, under the
+strict all-shifts cyclotomic realization, and empty **formal** primitive-sixth
+support on smooth `K`-nef models, this reduces the universal carrier
+theorem—conditional also on faithful realization of that formal emptiness—to:
 
 - rank-six-or-larger `rho=1` Fano models not already classified;
 - terminal resolution/flip transport for Fano and Mori-fibre models;
