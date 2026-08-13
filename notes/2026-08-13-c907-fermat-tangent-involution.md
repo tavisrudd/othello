@@ -154,6 +154,67 @@ also outside the genus-at-least-two hypothesis of the available
 intermediate-Jacobian/Burnside count. The elliptic curves therefore expose
 structure but do not prove non-linearizability or stable irrationality.
 
+## The clean graph-resolution Picard obstruction also vanishes
+
+There is a second exact regression against stable non-linearizability.  Let
+`S` be a smooth rational surface with an involution `sigma` acting trivially
+on `Pic(S)`, and consider the fibre inversion on a trivial `P^1`-bundle
+
+\[
+ (s,[Z:W])\longmapsto
+ (\sigma(s),[f(s)W:g(s)Z]),
+ \tag{4}
+\]
+
+where `f,g` are `sigma`-invariant sections of the same line bundle `L`.
+Assume for this calculation that the graph centers
+
+\[
+ C_f=\{f=0,Z=0\},\qquad C_g=\{g=0,W=0\}
+\]
+
+are smooth and disjoint.  Blowing them up resolves (4).  Write `H` for the
+relative hyperplane class and `E_f,E_g` for the exceptional divisors.  The
+lifted involution exchanges each exceptional divisor with the strict
+transform of the corresponding vertical divisor.  Hence
+
+\[
+ E_f\mapsto L-E_f,\qquad E_g\mapsto L-E_g,
+ \qquad H\mapsto H+L-E_f-E_g,
+ \tag{5}
+\]
+
+and it fixes `Pic(S)`.  The last formula also follows because the strict
+transforms of the coordinate sections, of classes `H-E_f` and `H-E_g`, are
+exchanged.
+
+Put `u=E_f-E_g` and `v=E_f+E_g-L`.  The anti-invariant lattice is generated
+by `u,v`, while
+
+\[
+ (\iota-1)H=-v,
+ \qquad
+ (\iota-1)E_f=-(u+v),
+ \qquad
+ (\iota-1)E_g=u-v.
+\]
+
+It follows that
+
+\[
+ H^1(C_2,\operatorname{Pic}(\widetilde{S\times\mathbf P^1}))=0.
+ \tag{6}
+\]
+
+This is the clean local shape of the Fermat formula: `f/g` is
+`-[4+(1-r^6)y^3]/(3y)` and `sigma(r,y)=(-r,y)`.  It shows that the core
+elementary transformation contributes no `H^1(C_2,Pic)` obstruction.  It is
+not yet the Picard computation of a complete smooth projective equivariant
+resolution of (1): the compactified zero/pole divisor is reducible and has
+boundary multiplicities, so its crossings and the additional equivariant
+blowups must be audited.  Equation (6) is a regression and a compression of
+that remaining calculation, not the final answer.
+
 ## Mechanism and scope correction
 
 For a general line, the point-choosing double cover has a smooth branch
@@ -202,7 +263,9 @@ linear Fermat change are likewise separate checks of the fixed-curve claim.
 - **AA:** raw line projection, independent-variable Brauer splitting, and
   stable linearization as a supposedly easier quotient problem are closed.
   The surviving opposite attacks must change the fibration or construct a
-  genuinely mixed birational map.
+  genuinely mixed birational map.  The clean graph-resolution
+  `H^1(C_2,Pic)` test also vanishes; only the compactification-boundary
+  correction to that lattice remains.
 - **EJ:** formula (1) is an exact Cremona involution attached to the Fermat
   cubic. Formula (2) compresses its quotient to one conic, while the two
   \(j=0\) fixed curves explain how the split Fermat discriminant is retained
@@ -215,7 +278,8 @@ linear Fermat change are likewise separate checks of the fixed-curve claim.
   stable rationality.
 - **Settled:** exact involution, fixed field, nonsplitting of its generic
   conic after two independent variables, two elliptic residues, their normal
-  characters, and failure of the elementary Burnside test.
+  characters, failure of the elementary Burnside test, and vanishing of the
+  clean two-center graph-resolution Picard obstruction.
 - **Open:** a finer stabilized equivariant invariant of (1), or a mixed
   two-variable transformation of (2). The standard no-name, fixed-divisor,
   and ordinary Burnside data are exhausted.

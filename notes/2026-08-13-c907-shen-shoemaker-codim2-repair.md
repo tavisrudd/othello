@@ -3,11 +3,12 @@
 Date: 2026-08-13
 
 Status: source-local lemma.  The printed proof of the Gamma/Orlov asymptotic
-theorem for standard flips has an `r-s=1` omission.  For a codimension-two
-blow-up, the omitted `I`-to-`J` normalization follows directly from their
-formula (35) and their stated cone membership.  Appendix A then supplies the
-correct Meijer aperture.  No claim about the full ambient-Novikov comparison
-is made here.
+theorem for standard flips has an `r-s=1` omission.  For every genuine
+discrepancy-one standard flip (`r=s+1`, `s>=1`), not only for a
+codimension-two blow-up, the omitted `I`-to-`J` normalization follows directly
+from formula (35) and the authors' stated cone membership.  Appendix A then
+supplies the correct Meijer aperture.  No claim about the full
+ambient-Novikov comparison is made here.
 
 ## 1. Source boundary
 
@@ -71,26 +72,43 @@ Consequently
 
 There is no curve-induced `z^0` term and hence no mirror-map correction.
 
+The same calculation is uniform in the second rank.  In formula (35), the
+`d>=1` numerator has `s` factors with `m=0`, hence no `z`, and at most
+`s(d-1)` powers of `z` from the remaining factors.  The denominator has
+`rd` powers.  Including the leading `z`, the maximal order is
+
+\[
+ 1+s(d-1)-rd=1-s-(r-s)d.
+ \tag{4a}
+\]
+
+If `r-s=1` and `s>=1`, then (4a) is `1-s-d<=-1`.  Thus the whole
+discrepancy-one standard-flip range has the same exact `J`-normalization and
+no mirror term.  The exceptional `s=0,r=1` projective-bundle degeneration is
+different: its `d=1` term can have order zero, so it is not included in this
+repair.
+
 ## 3. Identification with the `J`-function
 
-Remark 4.5(3) asserts that (2) lies on Givental's overruled Lagrangian cone.
-The standard `J`-slice is the unique point of that cone with the asymptotic
-normalization (5).  Therefore
+Remark 4.5(3) asserts that formula (35) lies on Givental's overruled
+Lagrangian cone throughout `r-s<=1`.  The standard `J`-slice is the unique
+point of that cone with the asymptotic normalization above.  Therefore, for
+`r=s+1` and `s>=1`,
 
 \[
  \boxed{I^T(q,\mathbf t,z)=J^T(q,\mathbf t,z)}
  \tag{6}
 \]
 
-for `(r,s)=(2,1)` in the same formal variables and cohomological completion as
-formula (35).  The blanket normalization warning in Remark 4.5(3) does not
-apply to this specialization.
+in the same formal variables and cohomological completion as formula (35).
+The blanket normalization warning in Remark 4.5(3) does not apply to any
+genuine discrepancy-one standard flip.
 
 The proof of Theorem 4.6 uses formula (35), divisor derivatives, and the
 finite-rank comparison.  With (6), the same proof gives the extremal quantum
-ring presentation (37) for `(2,1)`.  The downstream tame argument in Section
-8 and Proposition 9.1 may therefore use the actual `J`-normalized fundamental
-solution in codimension two.
+ring presentation (37) for `r=s+1`, `s>=1`.  The downstream tame argument in
+Section 8 and Proposition 9.1 may therefore use the actual `J`-normalized
+fundamental solution throughout the discrepancy-one flip range.
 
 ## 4. Correct `nu=1` aperture
 
@@ -130,8 +148,9 @@ level-one sectorial uniqueness.
 ## 5. Exact consequence and non-consequence
 
 Combining (6), Appendix A's `nu=1` expansion, and the unchanged reductions in
-Sections 9.1--9.4 repairs the codimension-two extremal Gamma/Orlov asymptotic
-statement claimed by Theorems 1.4 and 9.14.
+Sections 9.1--9.4 repairs the discrepancy-one extremal Gamma/Orlov asymptotic
+statement claimed by Theorems 1.4 and 9.14.  Codimension-two blowups are the
+case `(r,s)=(2,1)`.
 
 This repair remains on the extremal slice: every non-exceptional Novikov
 variable is zero.  It does not construct the common sectorial/formal receiver

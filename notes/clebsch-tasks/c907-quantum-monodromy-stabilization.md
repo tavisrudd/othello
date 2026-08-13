@@ -15,8 +15,14 @@ two primitive-sixth subspaces.  A two-variable good-formal-structure theorem
 does not repair this: simultaneous Laurent inversion deletes `B=0`, and a
 formal exponential decomposition does not supply the analytic Stokes/central
 connection datum measured by the rank Boolean.  The all-codimension source
-audit is clean, so Gold and Platinum (all `m`) rise or fall with this same
-peak Stokes/coherent-realization gate.  No Paper V or Lean promotion.
+audit is clean.  Gu--Yu--Yu now provide a full pairing-compatible formal QDM
+decomposition across a smooth simple VGIT wall, retaining the opposite
+chamber's ambient atoms.  This sharpens the first positive peak class to one
+missing row: Gamma-integral compatibility of their equivariant Fourier map.
+They do not prove that compatibility, and general birational cobordisms can
+have singular/toroidal quotients.  Gold and Platinum (all `m`) therefore still
+rise or fall with the peak Stokes/coherent-realization gate.  No Paper V or
+Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 

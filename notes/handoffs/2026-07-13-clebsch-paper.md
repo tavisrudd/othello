@@ -85,6 +85,15 @@ Boolean depends.  Exact peak audit:
 `../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
+Gu--Yu--Yu's August 2025 simple-VGIT theorem is the first genuine positive
+peak input: it gives the full pairing-compatible QDM decomposition and keeps
+the opposite chamber's ambient variables.  It does not identify its
+equivariant Fourier map with the Fourier--Mukai map on the Gamma lattice, so
+the rank theorem is conditional on that single row; general cobordism walls
+also need not have smooth projective quotients.  Exact audit:
+`../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Independently, the printed
+`r-s=1` Shen--Shoemaker omission is repaired for every genuine
+discrepancy-one standard flip, not only codimension-two blowups.
 
 Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
@@ -209,7 +218,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 73 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 134 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 135 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -349,13 +358,18 @@ inverses are compatible, and together they form a pro-Laurent gauge system;
 their loop coefficients are packaged entrywise as compatible quotient
 families.  Neither are the parameters identified with manuscript bulk coordinates
 nor is the finite evaluated matrix identified with the manuscript gauge.
+With separately supplied coefficientwise completeness, separatedness, and
+uniform Laurent lower bounds for both the gauges and inverses, Lean now lifts
+the compatible coefficient families to a two-sided-invertible Laurent matrix
+over the base ring and proves that it reduces to every finite evaluation.  It
+does not derive the uniform bounds or identify the lift geometrically.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 134-terminal axiom transcript
+The aggregate build, source correspondence, and 135-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
