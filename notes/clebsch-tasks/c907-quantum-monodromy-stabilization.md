@@ -95,6 +95,14 @@ standard-wall globalization.  This does not remove the separate AKMW
 question of whether every inserted smooth toroidal peak is actually
 semi-free standard.
 
+Gu--Yu--Yu Section 6.5 further shrinks the curve `(1,2)` frontier.  Their
+Lemma 6.9 and Corollary 6.12 cover every global `D`-flip whose wall section
+algebra is generated in primitive degrees `+/-1`, whose nonzero-degree ideal
+is prime, and whose negative wall polarization is `O_{P2}(1)`.  The
+remaining curve flips are precisely the failures of those Cartier/primitive
+generation conditions—the weighted/finite-stabilizer boundary already seen
+in toroidal cobordism.
+
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
 Engel--de Gaay Fortman--Schreieder proves stable irrationality for very
