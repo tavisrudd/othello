@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 133 reviewer terminals.
+1 complete; 134 reviewer terminals.
 
-The 133 reviewer-facing terminals currently verify:
+The 134 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -190,9 +190,14 @@ The 133 reviewer-facing terminals currently verify:
   their total-degree filtration levels and map to zero in every quotient by a
   filtration level not exceeding their total degree; the same holds for every
   coefficient-times-monomial term of a formal series, without defining an
-  infinite evaluation sum; the parameters and this termwise coefficient model
-  are not identified with the manuscript bulk coordinates or gauge, no bound
-  uniform across levels is proved, and no Laurent-valued
+  infinite evaluation sum; for a zero-curvature Laurent-valued connection and
+  finitely many level-one parameters, Lean now constructs the normalized
+  invertible formal gauge, defines its actual finite evaluation in one cutoff
+  quotient, proves every omitted high-degree term zero, and obtains one common
+  Laurent lower bound for the evaluated matrix; this finite sum is not proved
+  multiplicative, invertible, or compatible across quotient levels; the
+  parameters and evaluated matrix are not identified with the manuscript bulk
+  coordinates or gauge, no bound uniform across levels is proved, and no Laurent-valued
   inverse-limit gauge is packaged;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with

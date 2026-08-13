@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 133 reviewer-facing Lean terminals.  These counts summarize the
+There are 134 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 133 reviewer terminals.
+1 complete; 134 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -90,9 +90,14 @@ objects, hypotheses, conclusions, and cautions recorded in
   in every quotient by a filtration level not exceeding their total degree.
   The same coefficientwise conclusion holds after multiplying each formal
   series coefficient by its parameter monomial; no infinite evaluation sum is
-  defined.  Lean does not identify those parameters with manuscript bulk
-  coordinates or this termwise coefficient model with the manuscript gauge,
-  prove one bound across levels, or
+  defined.  For a zero-curvature Laurent-valued connection with finitely many
+  such parameters, Lean additionally constructs its normalized invertible
+  formal gauge and an actual finite evaluation at one quotient cutoff, proves
+  all higher terms vanish there, and bounds every entry of the finite evaluated
+  matrix by one Laurent order.  This finite evaluation is not proved to
+  preserve multiplication or inversion or commute across quotient levels.
+  Lean does not identify those parameters with manuscript bulk coordinates or
+  the finite evaluated matrix with the manuscript gauge, prove one bound across levels, or
   construct a Laurent-valued inverse-limit gauge.
   Their identification with the manuscript's geometric tower and quantum
   connection is not formalized; neither finite bulk support from the

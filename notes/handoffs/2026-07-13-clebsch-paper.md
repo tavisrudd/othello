@@ -61,6 +61,21 @@ does not use the retired atomwise HLT-descent claim.  The warning-free
 manuscript is `papers/cubic-stabilization-epilogue/`; exact proof and source
 audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
 
+The current C907 frontier is the Gamma-rank route.  For one arbitrary smooth
+blow-up, a fixed-nonzero-exceptional-parameter Artin-quotient sectorial
+receiver now proves that the primitive-sixth Gamma rank functional restricts
+to the base rank functional and vanishes on every exceptional Orlov block.
+The codimension-two omission in Shen--Shoemaker is repaired by an exact
+`z`-order calculation, and the projective-product endpoint is uniform in
+`m`.  Their all-codimension hypotheses also audit clean.  Gold (`m=2`) and
+Platinum (all `m`) nevertheless remain open at the same global gate: after two
+weak-factorization arrows, the first nonzero exceptional parameter becomes a
+formal ambient variable in the second receiver and cannot be evaluated there.
+The next attack is an iterated Laurent/Hahn or simultaneous master-space
+receiver for the whole finite zigzag.  Current card:
+`../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
+`../2026-08-13-c907-gold-relative-cap-attack.md`.
+
 Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
 grading.  The endpoint has `1+L+L^2`; the exact positive
@@ -183,8 +198,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-72 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 133 reviewer terminals, audit
+73 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 134 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -313,16 +328,21 @@ Monomials in supplied level-one parameters are proved to lie in their
 total-degree filtration levels and map to zero in every quotient by a
 filtration level not exceeding their total degree; the same holds
 coefficientwise after multiplying a formal-series coefficient by its parameter
-monomial, without defining an infinite evaluation sum.  Neither are the
-parameters identified with manuscript bulk coordinates nor is the termwise
-coefficient model identified with the manuscript gauge.
+monomial, without defining an infinite evaluation sum.  For a zero-curvature
+Laurent-valued connection with finitely many such parameters, Lean now
+constructs its normalized invertible formal gauge and an actual finite
+evaluation at one quotient cutoff, proves every omitted high-degree term zero,
+and gives one Laurent lower bound for the finite evaluated matrix.  This finite
+evaluation is not proved multiplicative, invertible, or compatible across
+levels.  Neither are the parameters identified with manuscript bulk coordinates
+nor is the finite evaluated matrix identified with the manuscript gauge.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 133-terminal axiom transcript
+The aggregate build, source correspondence, and 134-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

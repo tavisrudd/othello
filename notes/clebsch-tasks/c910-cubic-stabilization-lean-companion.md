@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 72 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 73 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 133 audited terminals.  The rejecting manuscript inventory covers all
+exports 134 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -195,7 +195,14 @@ proved to map to zero in every quotient by a filtration level not exceeding
 their total degree, including every coefficient-times-monomial term of a
 formal series; no infinite evaluation sum is defined, and identifying those
 parameters with manuscript bulk coordinates or this termwise coefficient
-model with the manuscript gauge remains outside the fragment.
+model with the manuscript gauge remains outside the fragment.  For a supplied
+zero-curvature Laurent-valued connection and finitely many level-one
+parameters, Lean now also constructs the normalized invertible formal gauge
+and an actual finite sum in one cutoff quotient, proves every omitted
+high-degree term zero, and gives the resulting finite evaluated matrix one
+Laurent lower bound.  Multiplicativity, preservation of the gauge inverse,
+cross-level compatibility, and identification with the manuscript gauge remain
+outside the fragment.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

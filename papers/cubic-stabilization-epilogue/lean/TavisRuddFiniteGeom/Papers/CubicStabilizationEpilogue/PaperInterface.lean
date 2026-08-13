@@ -46,6 +46,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMul
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableLaurentFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableLaurentBounds
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationBulkTruncation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationLaurentEvaluation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2775,6 +2776,59 @@ theorem multiplicativeFiltration_positiveBulkMonomial_vanishes_in_quotient
     fun series ↦
       filtration.coeff_positiveSubstitutionTermsAtLevel_eq_zero
         parameter positive cutoff series degree cutoff_le⟩
+
+/-- Let a zero-curvature multivariable connection have ordinary Laurent-series
+coefficients over a commutative rational algebra with a normalized
+multiplicative ideal filtration.  For finitely many filtration-positive bulk
+parameters and one quotient cutoff, Lean constructs the normalized invertible
+formal flat gauge and an actual finite quotient-level evaluation of it.  Every
+term at or above the cutoff vanishes, and one integer bounds the loop exponents
+of every entry of the evaluated matrix.  This finite sum is not an evaluation
+of an infinite series in a modeled topology; its multiplicativity,
+compatibility across quotient levels, identification with the manuscript's
+bulk gauge, and analytic specialization are not proved. -/
+theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : Quantum.MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (curvature : ∀ first second,
+      (connection second).map
+          (Quantum.multivariablePartialDerivative first) -
+          (connection first).map
+            (Quantum.multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0) :
+    (Quantum.multivariableFlatGaugeSeries connection).map
+        (MvPowerSeries.coeff 0) = 1 ∧
+    IsUnit (Quantum.multivariableFlatGaugeSeries connection) ∧
+    (∀ coordinate,
+      (Quantum.multivariableFlatGaugeSeries connection).map
+          (Quantum.multivariablePartialDerivative coordinate) =
+        -(connection coordinate) *
+          Quantum.multivariableFlatGaugeSeries connection) ∧
+    (∀ row column degree,
+      cutoff ≤ Quantum.multivariableTotalDegree degree →
+        filtration.positiveLaurentEvaluationTermAtLevel parameter cutoff
+          ((Quantum.multivariableFlatGaugeSeries connection) row column)
+          degree = 0) ∧
+    ∃ lowerBound : ℤ, ∀ row column exponent,
+      exponent < lowerBound →
+        (filtration.positiveEvaluatedFlatGaugeAtLevel
+          parameter cutoff connection row column).coeff exponent = 0 := by
+  exact ⟨Quantum.multivariableFlatGaugeSeries_normalized connection,
+    Quantum.multivariableFlatGaugeSeries_isUnit connection,
+    Quantum.multivariableFlatGaugeSeries_equation_of_curvature
+      connection curvature,
+    fun row column degree cutoff_le ↦
+      filtration.positiveEvaluatedFlatGaugeAtLevel_term_eq_zero
+        parameter positive cutoff connection row column degree cutoff_le,
+    filtration.positiveEvaluatedFlatGaugeAtLevel_hasUniformLowerBound
+      parameter cutoff connection⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
