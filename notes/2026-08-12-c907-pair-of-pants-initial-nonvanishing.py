@@ -139,6 +139,8 @@ def encode() -> dict:
     records = []
     total_cells = 0
     total_masks = 0
+    generic_generic_masks: set[str] = set()
+    l_masks_by_type: dict[tuple[str, str], set[str]] = {}
     for cone in data["cones"]:
         a, b = cone["ordered_type"]
         observed: dict[str, int] = {}
@@ -149,6 +151,9 @@ def encode() -> dict:
         stated = cone["upper_envelope"]["maximal_weight_tie_masks"]
         if observed != stated:
             raise RuntimeError(f"upper-envelope drift at {a},{b}")
+        if (a, b) == ("g", "g"):
+            generic_generic_masks = set(observed)
+        l_masks_by_type[(a, b)] = {mask for mask in observed if "0" in mask}
         checked = []
         for mask in sorted(observed, key=lambda value: (len(value), value)):
             normal = graph_normal_form(a, b, mask)
@@ -175,6 +180,19 @@ def encode() -> dict:
         total_masks += len(checked)
     if total_cells != 81367 or total_masks != 552:
         raise RuntimeError(f"unexpected refinement totals: cells={total_cells}, masks={total_masks}")
+    if any(set("12345") <= set(mask) and "0" not in mask for mask in generic_generic_masks):
+        raise RuntimeError("generic/generic five-term mask occurs without the L term")
+    full_pair = {"01234", "012345"}
+    full_power = {"0" + "".join(str(i) for i in range(1, 6) if bits & (1 << (i - 1)))
+                  for bits in range(32)}
+    expected_l_masks = {
+        ("g", "1"): full_pair, ("1", "g"): full_pair,
+        ("0", "1"): full_pair, ("1", "0"): full_pair,
+        ("1", "1"): full_pair,
+        ("1", "infinity"): full_power, ("infinity", "1"): full_power,
+    }
+    if {key: value for key, value in l_masks_by_type.items() if value} != expected_l_masks:
+        raise RuntimeError("order-zero/L-mask classification drift")
     return {
         "schema_version": 1,
         "input": {"file": INPUT.name, "sha256": hashlib.sha256(INPUT.read_bytes()).hexdigest()},
@@ -186,6 +204,8 @@ def encode() -> dict:
             "all_552_realized_type_mask_pairs_have_nonzero_cleared_base_initial": True,
             "every_Q_term_is_the_unique_linear_term_-Q_so_nonvanishing_survives_Q_in_k_star": True,
             "base_initial_fibres_are_linear_integral_domains_before_residue_localization": True,
+            "generic_generic_five_term_mask_without_L_is_infeasible": True,
+            "all_L_masks_have_the_seven_certified_order_zero_types": True,
         },
         "records": records,
     }

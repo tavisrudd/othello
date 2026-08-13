@@ -4,9 +4,11 @@
 
 **Status:** exact finite reduction for the base-flatness portion of the
 full-initial problem.  It covers every cell and face already serialized by
-the tripod hyperplane refinement.  It does not construct the required regular
-log modification, calculate exceptional multiplicities, or identify every
-strict transform; those are now the explicit remaining records rather than a
+the tripod hyperplane refinement.  The regular Kummer support/Rees atlas and
+its chart-to-tripod records are now supplied by
+`2026-08-12-c907-kummer-pair-of-pants-refinement.md`.  It still does not
+calculate Cartier-section exceptional multiplicities or identify every strict
+graph transform; those are the explicit remaining records rather than a
 552-case smoothness calculation.
 
 ## Statement
@@ -89,7 +91,14 @@ Polymake/PPL refinement certificate and recomputes the upper-envelope mask of
 every one of its 81,367 cells from its fifteen-sign vector.  It then reduces
 (4) using (2) for every realized ordered type/mask pair.  There are exactly
 552 such pairs.  Each resulting cleared polynomial is stored in canonical
-form in the JSON certificate and is nonzero.  The `Q` term, when present, is
+form in the JSON certificate and is nonzero.  The replay also checks that
+the generic/generic five-term mask `12345` never occurs without the `L` term;
+this is the sole feasibility input in the uniform pair-of-pants circuit
+lemma.  It also classifies every mask containing `L`: only the seven ordered
+types `(g,1),(1,g),(0,1),(1,0),(1,1),(1,infinity),(infinity,1)` occur; the
+first five have exactly `01234` and `012345`, while the last two allow `L`
+with an arbitrary subset of the other five terms.  This is the complete
+order-zero input for the coarse value-map audit.  The `Q` term, when present, is
 the unique term linear in the formal parameter `Q`; hence the result remains
 nonzero after every specialization `Q in k^*`, rather than merely for a
 generic parameter.
