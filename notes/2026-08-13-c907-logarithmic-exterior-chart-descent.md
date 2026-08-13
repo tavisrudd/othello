@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Verdict:** the direct supported regular tropical model closes the exterior
+**Verdict:** conditional on the direct proper strict tropical model described
+below, the supported regular refinement closes the exterior
 scheme-chart/control descent.  The prior ordinary `partial_b` and
 `partial_c` pivots can all be replaced by logarithmic residue-character
 fields.  Together with filtered-Koszul full-initial equality, this gives a
@@ -124,9 +125,13 @@ There are three disjoint cases.
 Subdividing a supported cone does not create an unlisted case: the new cone
 lies in one certified support cell, and a new face is a face of its full
 initial.  The filtered-Koszul theorem supplies the exact scheme initial for
-that cell, while the certificate includes all realized faces.  Therefore the
-direct exterior bad-image lemma in
-`2026-08-13-c907-proper-support-fibrewise-table.md` is now unconditional:
+that cell, while the certificate includes all realized faces.  Assume that
+the supported fan maps to the fixed marked projective/`y` ambient, its relative
+regularization gives a direct subdivision map `E -> X_0`, and `E` is the
+strict closure of the original graph and is proper over the bounded
+parameter/value base.  Under these direct-model hypotheses, the direct
+exterior bad-image lemma in
+`2026-08-13-c907-proper-support-fibrewise-table.md` follows:
 
 \[
  \pi_{\rm ext}(B_{\rm ext})\subset
@@ -172,7 +177,8 @@ table.
 ## 5. Exact scope after this repair
 
 The exterior branch no longer needs an ordinary-derivative/Kummer-descent
-claim or an unenumerated strict-transform attachment.  The protected `(1,1)`
+claim or an unenumerated strict-transform attachment.  Subject to the explicit
+direct proper-model hypotheses, its bad-image inclusion is closed.  The protected `(1,1)`
 proper ratio fibre is separately covered by its bounded and imbalanced charts,
 leaving exactly the four Morse sections.  Combining that whole-fibre theorem
 with (2) gives

@@ -2,9 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** positive conditional completion of the whole-fibre quantifier for
-the protected ratio model, and a finite structural table reducing the full
-proper-support audit to the already-isolated exterior chart descent.  The
+**Status:** positive completion of the whole-fibre quantifier for the
+protected ratio model.  Conditional on the direct proper exterior strict
+tropical model, the logarithmic exterior descent closes the second row and
+the finite structural table proves the full bad-image separation.  The
 residual ratios do *not* have unique limits at the double-marked central
 locus.  Nevertheless every limiting direction in the full proper ratio fibre
 is controlled, except precisely at the four residual Morse sections.  This
@@ -71,16 +72,16 @@ following structural meaning:
 | `E` | horizontal faces, all nonprotected vertical exterior masks, and noncompact-`y` double-marked faces | (T_{11}) |
 | `R` | bounded chart and both finite ratio charts, with actual boundary `r=0` or `h=0` and `v`/`w` retained | (mathscr C), over (T_{11}) |
 
-The first row is conditional on the existing regular exterior-chart descent:
-the 70 lifted unit derivations, two `L=0` exclusions, and free-`L` masks
-must be realized on the indicated scheme charts.  The second row is proved
-below without a common fan.
+The first row uses the direct proper exterior-model hypotheses and the
+logarithmic exterior descent: 70 lifted logarithmic unit derivations, two
+`L=0` exclusions, and the free-`L` masks are realized on the indicated scheme
+charts.  The second row is proved below without a common fan.
 
 ## Exterior bad-image lemma
 
 Let `B_ext` be the closed complement in `E` of the certified exterior
-controlled charts.  Conditional only on the same scheme-chart descent used
-by the unit-initial tangent lemma,
+controlled charts.  Conditional on the direct proper strict tropical model
+used by the logarithmic exterior tangent lemma,
 
 \[
  \pi_{\rm ext}(B_{\rm ext})\subset T_{11}.
@@ -197,8 +198,8 @@ the statement is that all of them lie in one of three controlled charts.
 ## Finite bad-image avoidance table
 
 Let `B_ext` and `B_rat` be the closed complements of the controlled loci in
-the two proper models.  With the exterior descent hypothesis in the first
-row, the preceding theorem gives the exact inclusions
+the two proper models.  With the direct exterior model and its logarithmic
+descent, the preceding theorem gives the exact inclusions
 
 \[
  \pi_{\rm ext}(B_{\rm ext})\subset T_{11},
@@ -232,23 +233,18 @@ neighborhood of every noncore coarse boundary point on which the selected
 model is controlled on its **entire** inverse image.  This is precisely the
 whole-fibre condition missing from the earlier arc-image cover.  Proper
 pushforward descent then proves the corresponding noncore vanishing-cycle
-stalk is zero, subject to the exterior scheme-chart descent stated above.
+stalk is zero, subject to the direct proper exterior-model hypotheses stated
+above.
 
-## Scope and remaining certificate
+## Scope and remaining analytic transport
 
-This table removes the bad-quantifier obstruction for the protected row.
-It does not silently promote the exterior row: its only remaining data are
-finite and explicit.
+This table removes the bad-quantifier obstruction.  The exterior row is closed
+once the direct proper strict tropical model is taken as part of the theorem,
+as in `2026-08-13-c907-logarithmic-exterior-chart-descent.md`.
 
-1. Serialize the actual scheme charts on the direct exterior strict closure
-   that realize the 70 tangent lifts, the two `L=0` exclusions, and the
-   free-`L` fields, together with their extension-by-zero product structure.
-2. Check that these charts cover every compact vertical exterior type other
-   than `(1,1)`.  Formula (4a) then gives the first bad-image inclusion;
-   components over `T_11` need not be controlled by the exterior model,
-   because the ratio theorem controls that entire coarse locus away from
-   `mathscr C`.
-3. Apply proper pushforward to `phi_(L-u)` and then the labelled iterated
+The remaining analytic step is:
+
+1. Apply proper pushforward to `phi_(L-u)` and then the labelled iterated
    `psi_delta` comparison.  The latter is still needed for thimbles,
    directions, and pairing.
 
@@ -269,6 +265,5 @@ whole-fibre calculation.
   argument supplies exactly that missing quantifier.
 - **Settled:** ratio indeterminacy locus; whole-fibre protected coverage;
   protected bad-image inclusion; and the two-row finite bad-image table.
-- **Open:** exterior scheme-chart descent (which turns (4a) into the first
-  certified bad-image inclusion), then iterated labelled vanishing cycles and
-  the Gamma/Orlov seed.
+- **Open:** iterated labelled vanishing cycles, relative duality and
+  `can/var` pairing transport, and the Gamma/Orlov comparison.
