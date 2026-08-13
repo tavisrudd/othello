@@ -244,6 +244,16 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   annihilate Gamma-framed classes supported in absolute dimension at most
   two, and the general blowup comparison must be equivariant for the base
   loop.  See `../2026-08-13-c907-formal-primary-galois-stability.md`.
+- The supported bridge cannot be ambient residual projection.  For a cubic
+  threefold, the numerical Kuznetsov lattice has Euler matrix
+  `[[-9,-36],[-45,-189]]`; its Serre operator has characteristic polynomial
+  `t^2-t+1`, and the projected point class is explicitly nonzero.  Cai's
+  leading zero-block projector likewise has nonzero image on the `H^3`
+  direction.  Thus every proposed `Phi_6` construction must distinguish an
+  intrinsic zero packet on the terminal support from ambient projection of
+  its pushed-forward object.  Compatibility of that distinction with
+  Gamma/Orlov Gysin maps is the exact consistency gate.  See
+  `../2026-08-13-c907-cubic-point-primary-collision.md`.
 - A concrete conditional source is now isolated.  For a model
   `f:Y -> P^2`, tensor by `L=f^*O(1)` gives `N_L=1-tau_L`: projection formula
   makes it exactly block diagonal under Orlov blowups, its endpoint on

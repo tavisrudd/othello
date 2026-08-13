@@ -5,13 +5,14 @@
 **Status:** exact negative theorem.  Replacing the absolute support mechanism
 by a quotient that kills objects of relative fibre dimension at most two
 cannot construct Silver's packet: it trivializes the base hyperplane and
-therefore kills the endpoint (J_3) itself.
+therefore kills the endpoint \(J_3\) itself.
 
 ## The general theorem
 
-Let (S=\mathbf P^2), let (X) be a smooth connected projective (d)-fold, and suppose
-that a line bundle (H) on (X) has three linearly independent sections
-(s_0,s_1,s_2).  Put (Y=X\times S), with projection (f:Y\to S), and let
+Let \(S=\mathbf P^2\), let \(X\) be a smooth connected projective \(d\)-fold,
+and suppose that a line bundle \(H\) on \(X\) has three linearly independent
+sections \(s_0,s_1,s_2\).  Put \(Y=X\times S\), with projection
+\(f:Y\to S\), and let
 
 \[
  \mathcal A_{<d}(Y/S)
@@ -27,8 +28,8 @@ This is a thick tensor ideal.  In the monoidal Verdier quotient
  \tag{1}
 \]
 
-the pullback (f^*\mathcal O_S(1)) is isomorphic to the tensor unit.
-Consequently tensor by (f^*\mathcal O_S(1)) is naturally equivalent to the
+the pullback \(f^*\mathcal O_S(1)\) is isomorphic to the tensor unit.
+Consequently tensor by \(f^*\mathcal O_S(1)\) is naturally equivalent to the
 identity and
 
 \[
@@ -40,8 +41,8 @@ in every additive realization of (1).
 
 ## Proof
 
-Choose a nonzero section (s_0\in H^0(X,H)).  Its pullback cuts a divisor
-(D_0\subset Y) whose fibres have dimension at most (d-1).  Hence the cone
+Choose a nonzero section \(s_0\in H^0(X,H)\).  Its pullback cuts a divisor
+\(D_0\subset Y\) whose fibres have dimension at most \(d-1\).  Hence the cone
 of
 
 \[
@@ -56,7 +57,7 @@ belongs to \(\mathcal A_{<d}(Y/S)\), and therefore
  \tag{3}
 \]
 
-With homogeneous coordinates (q_0,q_1,q_2) on (S), the section
+With homogeneous coordinates \(q_0,q_1,q_2\) on \(S\), the section
 
 \[
  s=q_0s_0+q_1s_1+q_2s_2
@@ -64,8 +65,8 @@ With homogeneous coordinates (q_0,q_1,q_2) on (S), the section
 \]
 
 is nonzero on every fibre: otherwise a nonzero linear combination of the
-three (s_i) would be the zero global section.  Its zero scheme (D_1) thus
-also has fibre dimension at most (d-1).  The same cone argument gives
+three \(s_i\) would be the zero global section.  Its zero scheme \(D_1\) thus
+also has fibre dimension at most \(d-1\).  The same cone argument gives
 
 \[
  \mathcal O_Y(-H,-1)\simeq\mathcal O_Y.
@@ -81,12 +82,12 @@ Tensoring (4) with the inverse of (3) yields
 which proves (2).
 
 The argument is object-level.  It is stronger than observing a collapse in
-rational (K_0): the two divisor cones make the base line bundle itself
+rational \(K_0\): the two divisor cones make the base line bundle itself
 isomorphic to the unit in the quotient.
 
 ## Silver consequence
 
-Take (X) to be a smooth cubic threefold and (H=\mathcal O_X(1)).  The
+Take \(X\) to be a smooth cubic threefold and \(H=\mathcal O_X(1)\).  The
 endpoint operator required by Silver is
 
 \[
@@ -94,26 +95,26 @@ endpoint operator required by Silver is
 \]
 
 on the primitive-sixth cubic line tensored with the three Tate levels of
-(\mathbf P^2); it must be one block (J_3).  The quotient (1) instead makes
+\(\mathbf P^2\); it must be one block \(J_3\).  The quotient (1) instead makes
 this operator zero.  Therefore no packet functor factoring through the
 relative-fibre cutoff can satisfy the endpoint normalization, regardless of
 which cyclotomic coefficient is applied afterward.
 
-For the calibration (X=\mathbf P^3), write
-(u=[\mathcal O(-1,0)]), (v=[\mathcal O(0,-1)]).  The same two divisors give
-(1-u) and (1-uv) in the killed subgroup; tensor closure then also gives
-(1-v).  In fact the image on (K_0) is the full rank-zero ideal and the
-quotient (K_0) is only \(\mathbf Z\).  The object
-(\mathcal O_{\mathbf P^3\times\{q\}}) survives the Verdier quotient but its
-(K_0)-class ((1-v)^2) is zero.  This distinction is another reason not to
-infer the required nilpotent from quotient (K_0).
+For the calibration \(X=\mathbf P^3\), write
+\(u=[\mathcal O(-1,0)]\), \(v=[\mathcal O(0,-1)]\).  The same two divisors
+give \(1-u\) and \(1-uv\) in the killed subgroup; tensor closure then also
+gives \(1-v\).  In fact the image on \(K_0\) is the full rank-zero ideal and
+the quotient \(K_0\) is only \(\mathbf Z\).  The object
+\(\mathcal O_{\mathbf P^3\times\{q\}}\) survives the Verdier quotient but its
+\(K_0\)-class \((1-v)^2\) is zero.  This distinction is another reason not to
+infer the required nilpotent from quotient \(K_0\).
 
 ## Correct design boundary
 
 The absolute support-square theorem does not make this mistake.  It retains
 horizontal divisors and the three endpoint Tate levels.  Only after applying
-(N_L^2) does it ask the resulting exceptional support
-(E\cap f^{-1}(q)) to vanish, now by its **absolute** dimension at most two.
+\(N_L^2\) does it ask the resulting exceptional support
+\(E\cap f^{-1}(q)\) to vanish, now by its **absolute** dimension at most two.
 
 Thus the positive construction must keep the full coniveau filtration and
 its extension data.  It may kill the primitive-sixth coefficient of an

@@ -11,21 +11,21 @@ line-bundle construction, but not supported Gysin locality.
 
 ## Abstract parameter-monodromy theorem
 
-Let ((\mathcal E,\nabla)) be an integrable meromorphic connection on
-(S\times\Delta_z), with poles along (z=0), and restrict to a connected
+Let \((\mathcal E,\nabla)\) be an integrable meromorphic connection on
+\(S\times\Delta_z\), with poles along \(z=0\), and restrict to a connected
 non-turning locus on which it has a good relative formal decomposition after
-one fixed ramification.  Let (T_f) denote formal monodromy on the direct sum
+one fixed ramification.  Let \(T_f\) denote formal monodromy on the direct sum
 of all regular-singular formal factors.
 
-Parallel transport along (S) preserves the generalized
-(\lambda)-primary formal sector
+Parallel transport along \(S\) preserves the generalized
+\(\lambda\)-primary formal sector
 
 \[
  \mathcal E_{(\lambda)}=\ker(T_f-\lambda)^M
  \tag{1}
 \]
 
-for (M\gg0).  In particular every parameter-loop monodromy (G) satisfies
+for \(M\gg0\).  In particular every parameter-loop monodromy \(G\) satisfies
 
 \[
  GT_f=T_fG,
@@ -36,14 +36,14 @@ for (M\gg0).  In particular every parameter-loop monodromy (G) satisfies
 
 ### Proof
 
-Horizontal transport in (S) is an isomorphism of formal meromorphic
-(z)-connections.  The good formal decomposition is unique up to permutation
+Horizontal transport in \(S\) is an isomorphism of formal meromorphic
+\(z\)-connections.  The good formal decomposition is unique up to permutation
 of equal formal types, so this transport carries formal exponential factors
 and their regular-singular parts to the corresponding factors.  On each
-regular-singular part it intertwines the angular (z)-monodromy.  Summing over
+regular-singular part it intertwines the angular \(z\)-monodromy.  Summing over
 all formal exponential factors removes the possible permutation, and a loop
-in (S) therefore commutes with the total formal monodromy.  Equation (1) is
-the kernel of a polynomial in (T_f), so (2) follows.
+in \(S\) therefore commutes with the total formal monodromy.  Equation (1) is
+the kernel of a polynomial in \(T_f\), so (2) follows.
 
 Equivalently, after passing to the product cover of the parameter loop and
 the formal angular circle, their two deck transformations commute.  The
@@ -59,10 +59,10 @@ For the quantum connection, Iritani's Gamma-integral framing satisfies
  \tag{3}
 \]
 
-Thus the parameter-loop monodromy (G_L) is tensor by (L) on the framed
-topological (K)-group.  Apply (2) with
-(\lambda=\zeta_6), after extension to (K=\mathbf Q(\zeta_6)).  The whole
-generalized (\zeta_6)-primary formal sector is (G_L)-stable, and
+Thus the parameter-loop monodromy \(G_L\) is tensor by \(L\) on the framed
+topological \(K\)-group.  Apply (2) with
+\(\lambda=\zeta_6\), after extension to \(K=\mathbf Q(\zeta_6)\).  The whole
+generalized \(\zeta_6\)-primary formal sector is \(G_L\)-stable, and
 
 \[
  N_L=1-G_L
@@ -70,7 +70,7 @@ generalized (\zeta_6)-primary formal sector is (G_L)-stable, and
 \]
 
 is an intrinsic endomorphism of that sector.  Since tensor by a line bundle
-is unipotent under the Chern character, (N_L) is nilpotent.
+is unipotent under the Chern character, \(N_L\) is nilpotent.
 
 This uses the whole generalized primary sector.  A single exponential block
 can be permuted by parameter monodromy and need not be invariant.  That is
@@ -79,15 +79,15 @@ zero-exponential formulation.
 
 Iritani also records that the Gamma framing including odd classes is natural
 for Cartesian products.  Hence on the product endpoint
-(X\times\mathbf P^2), with (L=\operatorname{pr}_2^*\mathcal O(1)), the
-one-dimensional cubic (\zeta_6)-line is tensored with
+\(X\times\mathbf P^2\), with \(L=\operatorname{pr}_2^*\mathcal O(1)\), the
+one-dimensional cubic \(\zeta_6\)-line is tensored with
 
 \[
  K_0(\mathbf P^2)_K\cong K[x]/(x^3),
  \qquad x=1-[\mathcal O(1)].
 \]
 
-Multiplication by (x) is one (J_3).  Therefore (4) gives the endpoint
+Multiplication by \(x\) is one \(J_3\).  Therefore (4) gives the endpoint
 operator required by Silver without choosing directed thimbles, a Beilinson
 basis, or a Gamma marking inside the three-dimensional block.
 
@@ -96,27 +96,27 @@ basis, or a Gamma marking inside the three-dimensional block.
 1. Tensor by the base hyperplane does preserve the whole formal
    primitive-sixth packet; this is not an additional conjectural projector
    axiom.
-2. The operator (N_L=1-\tau_L) is presentation-independent once the
+2. The operator \(N_L=1-\tau_L\) is presentation-independent once the
    line-bundle parameter loop is part of the framed model.
-3. Product/Gamma compatibility calibrates the endpoint as (J_3).
+3. Product/Gamma compatibility calibrates the endpoint as \(J_3\).
 4. Any formal QDM comparison equivariant for the corresponding parameter
-   deck transformations automatically intertwines (N_L).  Thus the
+   deck transformations automatically intertwines \(N_L\).  Thus the
    remaining blowup question is the equivariance of the actual comparison
    maps, not the existence of the primary-sector operator.
 
 ## What remains open
 
 Formal-primary stability is not support locality.  If
-(i:T\hookrightarrow Y) is a surface support, (3) identifies tensor actions
+\(i:T\hookrightarrow Y\) is a surface support, (3) identifies tensor actions
 on the ambient Gamma lattice, but it does not construct a quantum map
 
 \[
  QDM(T)\longrightarrow QDM(Y)
 \]
 
-intertwining their formal monodromies.  Therefore the fact that (T) has
+intertwining their formal monodromies.  Therefore the fact that \(T\) has
 empty intrinsic primitive-sixth packet does not yet imply that the ambient
-primary projection of (s(i_*V)) is zero.  This is exactly the missing
+primary projection of \(s(i_*V)\) is zero.  This is exactly the missing
 point-kernel/Gysin clause of the divisorial support-square theorem.
 
 Likewise, Iritani's general blowup theorem proves a formal QDM
@@ -125,14 +125,21 @@ decomposition through the Gamma lattice is stated as the expected analytic
 picture outside the proved toric setting.  The theorem above must not be
 reported as that stronger functoriality.
 
-The remaining Silver bridge can now be stated more narrowly:
+The remaining Silver bridge can now be stated more narrowly, but not as
+ambient projection of supported Gamma classes:
 
-> prove that ambient primitive-sixth projection annihilates Gamma-framed
-> classes supported in absolute dimension at most two, and that the formal
-> blowup comparison is equivariant for the descended base-hyperplane loop.
+> construct the intrinsic primitive-sixth packet of an absolute
+> dimension-at-most-two support and a Gysin map to the ambient packet whose
+> image controls the point-kernel square, and prove that the formal blowup
+> comparison is equivariant for the descended base-hyperplane loop.
 
-The first clause is the genuinely new supported realization; primary-sector
-commutation and the endpoint no longer belong to the mystery.
+The distinction is load-bearing.  On a cubic threefold, a point has nonzero
+projection to the numerical Kuznetsov component, whose entire Serre spectrum
+is primitive sixth.  Hence residual projection cannot be the desired
+low-support Gysin map.  See
+`2026-08-13-c907-cubic-point-primary-collision.md`.  The first clause above is
+the genuinely new supported realization; primary-sector commutation and the
+endpoint no longer belong to the mystery.
 
 ## Source audit
 
@@ -159,9 +166,9 @@ commutation and the endpoint no longer belong to the mystery.
   parameter loop already supplies the desired nilpotent; the hard theorem is
   whether low-dimensional support has zero ambient primitive-sixth
   projection.
-- **Settled:** primary-sector stability, intrinsic (N_L), and endpoint
-  (J_3) calibration on the non-turning locus.
-- **Open:** supported Gamma/Gysin annihilation, equivariance of the general
+- **Settled:** primary-sector stability, intrinsic \(N_L\), and endpoint
+  \(J_3\) calibration on the non-turning locus.
+- **Open:** an intrinsic-support Gamma/Gysin map consistent with the cubic
+  point collision, equivariance of the general
   blowup comparison for the base loop, and transport across turning walls if
   a chosen factorization meets them.
-

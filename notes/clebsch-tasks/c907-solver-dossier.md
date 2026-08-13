@@ -77,6 +77,14 @@ absolute dimension at most two and base-loop equivariance of the general
 blowup comparison.  See
 `../2026-08-13-c907-formal-primary-galois-stability.md`.
 
+Do not model the supported bridge by residual projection of ambient objects.
+The numerical Kuznetsov component of a cubic has pure primitive-sixth Serre
+spectrum and contains the projected class of a point nontrivially.  The
+support-square theorem needs an intrinsic support packet and a distinct Gysin
+map; proving that such a map is consistent with Gamma/Orlov comparison is now
+a compulsory regression.  See
+`../2026-08-13-c907-cubic-point-primary-collision.md`.
+
 The support-local construction must retain the full absolute coniveau
 filtration.  Quotienting by objects whose relative fibres have dimension at
 most two is impossible: horizontal divisors then trivialize the pulled-back
