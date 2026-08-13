@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 109 reviewer terminals.
+1 complete; 110 reviewer terminals.
 
-The 109 reviewer-facing terminals currently verify:
+The 110 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -139,6 +139,11 @@ The 109 reviewer-facing terminals currently verify:
 - identity-modulus cutoff continuity for addition, convolution, and numerical
   pushforward, expressed as coefficient agreement through each degree cutoff;
   no topology or Mathlib `Continuous` theorem is asserted;
+- derivation of a compatible characteristic-polynomial inverse system from
+  entrywise compatible finite-level square matrices; the differential modules
+  and analytic monodromy operators producing those matrices are not constructed,
+  and no theorem relates them to the represented pro-Laurent gauges or proves
+  pro-system gauge invariance;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten

@@ -27,6 +27,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalIn
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovFiltrationContinuity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
@@ -2018,6 +2019,29 @@ theorem numericalNovikov_logarithmicOperator_leibniz
   ⟨map_add _ _ _,
     Quantum.CompletedNumericalQuotient.logarithmicOperator_convolution
       grading weight left right⟩
+
+/-- Entrywise compatible finite-level monodromy matrices produce a compatible
+inverse system of characteristic polynomials, and each derived level is the
+literal characteristic polynomial of its monodromy matrix.  The differential
+modules and analytic monodromy operators themselves remain supplied data.  The
+formal results neither relate this matrix system to the represented pro-Laurent
+gauges nor prove gauge invariance of the polynomial system. -/
+theorem proLaurent_characteristicPolynomial_of_compatibleMonodromy
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : Quantum.CompatibleMonodromyMatrixSystem Index) :
+    (∀ level,
+      letI := system.coefficientRing level
+      system.characteristicPolynomialSystem.characteristicPolynomial level =
+        (system.monodromy level).charpoly) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        letI := system.coefficientRing (level + 1)
+        (system.characteristicPolynomialSystem.characteristicPolynomial
+          (level + 1)).map (system.reduction level) =
+            system.characteristicPolynomialSystem.characteristicPolynomial
+              level) :=
+  ⟨system.characteristicPolynomialSystem_level,
+    system.characteristicPolynomialSystem.compatible⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the

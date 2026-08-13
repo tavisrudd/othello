@@ -193,12 +193,13 @@
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurent_characteristicPolynomial_of_compatibleMonodromy"
       ],
-      "objects": "Lean represents coefficient rings at every natural-number level, invertible matrices over ordinary integer-exponent Laurent series, entrywise reduction homomorphisms, and characteristic polynomials over the level coefficient rings.",
-      "hypotheses": "Both displayed matrix inverses hold at every level, gauges and inverses agree entrywise under reduction, and characteristic polynomials map to the preceding level under coefficient reduction.",
-      "conclusion": "Typed pro-Laurent gauge and compatible characteristic-polynomial inverse systems; each finite level uses only integral powers of z and no uniform Laurent lower bound is assumed across levels.",
-      "cautions": "The filtered algebra quotients and compatible differential modules are not constructed, nor is the characteristic polynomial proved to arise from framed monodromy or to be invariant under the represented gauges."
+      "objects": "Lean represents coefficient rings at every natural-number level, invertible matrices over ordinary integer-exponent Laurent series, entrywise reduction homomorphisms, compatible finite-level square matrices, and characteristic polynomials over the level coefficient rings.",
+      "hypotheses": "Both displayed Laurent-matrix inverses hold at every level, gauges and inverses agree entrywise under reduction, and the supplied finite-level monodromy matrices agree entrywise under coefficient reduction. A separately supplied characteristic-polynomial system may also state compatibility directly.",
+      "conclusion": "Typed pro-Laurent gauge and compatible characteristic-polynomial inverse systems; each finite level uses only integral powers of z and no uniform Laurent lower bound is assumed across levels. For entrywise compatible monodromy matrices, Lean derives the compatible characteristic-polynomial system and proves every level is the literal matrix characteristic polynomial.",
+      "cautions": "The filtered algebra quotients, compatible differential modules, horizontal solutions, and analytic monodromy construction are not represented. The matrices are named monodromy data but supplied abstractly, and Lean does not prove gauge invariance for the pro-system from the represented Laurent gauges."
     },
     {
       "manuscript_label": "lem:pv-base-change",
