@@ -2244,6 +2244,20 @@ theorem filteredFormalBaseShift_bulkSystem_compatible_and_charpoly
               (endomorphism.quotientEndomorphism level)) :=
   input.bulkSystem_compatible_and_characteristicPolynomial
 
+/-- For the adic filtration of one ideal, preservation of the generating ideal
+is enough to construct compatible quotient substitutions.  Together with
+supplied compatible small matrices and invertible gauges, Lean proves the
+adic multiplicative lower bound, preservation of every ideal power, and the
+stated finite-level bulk matrix and characteristic-polynomial packet.  The
+ideal, endomorphism, matrices, and gauges are supplied and are not identified
+with the manuscript's geometric coefficient filtration or divisor shift. -/
+theorem adicFormalBaseShift_bulkSystem_compatible_and_charpoly
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommRing R]
+    {ideal : Ideal R} {endomorphism : R →+* R}
+    (input : Quantum.AdicFormalBaseShiftInput Index R ideal endomorphism) :
+    Quantum.AdicFormalBaseShiftInput.BulkSystemConclusion input :=
+  input.bulkSystem_compatible_and_characteristicPolynomial
+
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
 monomial map alone is not injective. -/

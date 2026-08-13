@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 116 reviewer terminals.
+1 complete; 117 reviewer terminals.
 
-The 116 reviewer-facing terminals currently verify:
+The 117 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -116,6 +116,9 @@ The 116 reviewer-facing terminals currently verify:
   decreasing adic filtration in which multiplication sends levels `m` and `n`
   into level `m+n`; a supplied ring endomorphism preserving the generating
   ideal preserves every adic level and descends compatibly to all quotients;
+  when compatible small matrices and invertible gauges over those power-ideal
+  quotients are supplied, the same construction yields the compatible
+  bulk matrix and characteristic-polynomial packet;
   neither that ideal nor that endomorphism is identified with the manuscript's
   filtration or divisor substitution;
   Lean does not identify the supplied filtration with this adic model, and
