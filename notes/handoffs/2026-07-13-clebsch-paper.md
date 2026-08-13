@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-64 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 121 reviewer terminals, audit
+67 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 124 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -276,16 +276,25 @@ they now assemble into an entrywise formal power-series matrix satisfying
 every coefficient and the whole formal series now commute with adjacent
 rational-algebra reductions and satisfy the equation at every level.  The
 series for the negated constant connection is a compatible two-sided inverse;
-the tower is not yet identified with the filtered quotient construction.
-Varying quantum products, Laurent dependence, and analytic gauges remain outside
-that fragment.
+the abstract constant tower is not identified with the filtered quotient
+construction.  The one-variable varying equation is now formalized as well:
+for arbitrary coefficients `A_n`, Lean constructs the unique normalized
+invertible formal solution of `dG/dt=-A(t)G(t)`, proves its recursion and
+naturality, and transports it through compatible rational-algebra towers.  A
+further composite maps base connection coefficients into every actual quotient
+of a supplied ideal filtration and proves canonical adjacent compatibility,
+normalization, the equation, uniqueness, and invertibility at every level.
+The supplied filtration and connection remain unidentified with the
+manuscript's geometric coefficient ring and quantum product; multivariable
+bulk coordinates, Laurent dependence and bounded order, convergence, and the
+analytic gauge remain outside this fragment.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 121-terminal axiom transcript
+The aggregate build, source correspondence, and 124-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
