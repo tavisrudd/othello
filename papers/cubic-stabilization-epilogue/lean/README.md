@@ -57,12 +57,10 @@ companion does not yet formalize the relative six-axis geometry, graph-lattice
 descent, universal `CH_0` argument, quantum comparison theorems,
 low-dimensional vanishing, or Cai's block diagonalization.
 
-From the monorepo root, build only through the guarded queue:
+From this package directory, build the pinned Lean library with:
 
 ```text
-lean/scripts/lean-build-queue.py build \
-  CubicStabilizationEpilogue \
-  --lean-root papers/cubic-stabilization-epilogue/lean --cores 20-23
+lake build CubicStabilizationEpilogue
 ```
 
 The source-only correspondence check is
