@@ -26,18 +26,18 @@ formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
 - 7 absent from Lean;
-- 13 represented by exact but strictly weaker fragments;
+- 12 represented by exact but strictly weaker fragments;
 - 3 represented by conditional deductions with every external premise exposed
   in the theorem type;
-- 0 completely formalized from the manuscript's stated hypotheses.
+- 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 7 absent; 13 fragmentary; 3 conditional;
-0 complete; 29 reviewer terminals.
+Checked coverage snapshot: 23 claims; 7 absent; 12 fragmentary; 3 conditional;
+1 complete; 30 reviewer terminals.
 
-The 29 reviewer-facing terminals currently verify:
+The 30 reviewer-facing terminals currently verify:
 
-- constructive rank-one assembly for arbitrary finite symmetric
-  matrix-of-ideals lattices under all pairwise midpoint inequalities;
+- the exact DVR rank-one generation equivalence for arbitrary finite symmetric
+  matrix-of-ideals lattices;
 - the square-zero divided-power expansion;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, and its exact depth-one arithmetic at two and three;

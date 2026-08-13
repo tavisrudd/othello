@@ -65,18 +65,19 @@
     },
     {
       "manuscript_label": "lem:dvr-rank-one",
-      "coverage": "fragment",
+      "coverage": "complete",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_weightedPair_decomposition_of_midpoint",
-    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_finiteMatrix_generation_of_pairwise_midpoint"
-  ],
-  "objects": "Lean represents a symmetric matrix on an arbitrary finite linearly ordered index type over a commutative ring, with entrywise diagonal and cross divisibility depths and the span of rank-one matrices internal to that weighted lattice.",
-  "hypotheses": "The cross-depth function is symmetric and every distinct pair satisfies the midpoint inequality; no DVR or valuation structure is assumed for the constructive direction.",
-  "conclusion": "Every member of the finite weighted symmetric lattice lies in its internal rank-one span; the proof assembles diagonal atoms and division-free pairwise cross decompositions.",
-  "cautions": "Only sufficiency is proved. The valuation-theoretic necessity direction and hence the manuscript's full DVR equivalence remain absent; this declaration also does not construct the depth data from a geometric graph lattice."
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_finiteMatrix_generation_of_pairwise_midpoint",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_finiteMatrix_generated_iff_pairwise_midpoint_of_dvr"
+      ],
+      "objects": "A symmetric matrix-of-ideals submodule on an arbitrary finite index type over a Mathlib discrete valuation ring, with diagonal depths, symmetric cross depths, a chosen irreducible uniformizer, and the span of rank-one matrices internal to that same submodule.",
+      "hypotheses": "The coefficient ring is a domain and discrete valuation ring, the chosen uniformizer is irreducible, and the cross-depth function is symmetric. The manuscript's completeness and unramifiedness assumptions are stronger than needed and do not enter this algebraic lemma.",
+      "conclusion": "The weighted lattice equals its internal rank-one span if and only if every distinct pair satisfies twice the cross depth greater than or equal to the sum of the diagonal depths.",
+      "cautions": "The LinearOrder instance is finite-sum bookkeeping and adds no mathematical restriction. This theorem takes the matrix-of-ideals depth data as input, exactly as the lemma does; construction of those depths from the preceding geometric graph-coefficient lemma is audited separately under lem:graph-coefficient-lattice."
     },
     {
       "manuscript_label": "thm:all-degree-graph-saturation",

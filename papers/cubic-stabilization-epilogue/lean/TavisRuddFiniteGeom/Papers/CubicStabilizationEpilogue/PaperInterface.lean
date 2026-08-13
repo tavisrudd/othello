@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MatrixOfIdeals
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
@@ -151,6 +152,23 @@ theorem rankOne_finiteMatrix_generation_of_pairwise_midpoint
     form ∈ GraphLattices.weightedRankOneSpan π diagonal cross :=
   GraphLattices.mem_weightedRankOneSpan_of_pairwise_midpoint
     π diagonal cross crossSymmetric midpoint form member
+
+/-- Exact finite-matrix form of the manuscript's DVR rank-one criterion.
+For a discrete valuation ring and an irreducible uniformizer, the weighted
+symmetric lattice equals the span of its internal rank-one matrices if and
+only if every distinct pair satisfies the midpoint inequality.  Completeness
+and unramifiedness are unnecessary for this algebraic equivalence. -/
+theorem rankOne_finiteMatrix_generated_iff_pairwise_midpoint_of_dvr
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [LinearOrder Index]
+    [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    {π : R} (πIrreducible : Irreducible π)
+    (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (crossSymmetric : ∀ row column, cross row column = cross column row) :
+    GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross ↔
+      ∀ first second, first ≠ second →
+        diagonal first + diagonal second ≤ 2 * cross first second :=
+  GraphLattices.weightedMatrixRankOneGenerated_iff_pairwise_midpoint_of_dvr
+    πIrreducible diagonal cross crossSymmetric
 
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that

@@ -35,6 +35,51 @@ def MemWeightedMatrix
     ∀ row column, row ≠ column →
       uniformizer ^ cross row column ∣ form row column
 
+/-- The symmetric matrix-of-ideals lattice as an actual submodule of the
+ambient matrix module. -/
+def weightedMatrixSubmodule
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ) :
+    Submodule R (Matrix Index Index R) where
+  carrier := {form | MemWeightedMatrix uniformizer diagonal cross form}
+  zero_mem' := by
+    constructor
+    · ext row column
+      simp [Matrix.transpose_apply]
+    constructor
+    · intro index
+      exact dvd_zero _
+    · intro row column _
+      exact dvd_zero _
+  add_mem' := by
+    intro left right leftMember rightMember
+    rcases leftMember with ⟨leftSymmetric, leftDiagonal, leftCross⟩
+    rcases rightMember with ⟨rightSymmetric, rightDiagonal, rightCross⟩
+    constructor
+    · ext row column
+      simpa [Matrix.transpose_apply] using
+        congrArg (fun matrix ↦ matrix row column)
+          (congrArg₂ (· + ·) leftSymmetric rightSymmetric)
+    constructor
+    · intro index
+      simpa using (leftDiagonal index).add (rightDiagonal index)
+    · intro row column distinct
+      simpa using (leftCross row column distinct).add
+        (rightCross row column distinct)
+  smul_mem' := by
+    intro scalar form member
+    rcases member with ⟨symmetric, diagonalDivisible, crossDivisible⟩
+    constructor
+    · ext row column
+      simp only [Matrix.transpose_apply, Matrix.smul_apply]
+      rw [show form column row = form row column by
+        simpa [Matrix.IsSymm, Matrix.transpose_apply] using
+          congrFun (congrFun symmetric row) column]
+    constructor
+    · intro index
+      exact (diagonalDivisible index).mul_left scalar
+    · intro row column distinct
+      exact (crossDivisible row column distinct).mul_left scalar
+
 /-- Rank-one matrices that themselves belong to the weighted lattice. -/
 def weightedRankOneSet
     (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ) :
@@ -50,6 +95,25 @@ def weightedRankOneSpan
     Submodule R (Matrix Index Index R) :=
   Submodule.span R (weightedRankOneSet uniformizer diagonal cross)
 
+omit [DecidableEq Index] in
+/-- The span of internal rank-one matrices remains inside the weighted
+matrix-of-ideals lattice. -/
+theorem weightedRankOneSpan_le_weightedMatrixSubmodule
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ) :
+    weightedRankOneSpan uniformizer diagonal cross ≤
+      weightedMatrixSubmodule uniformizer diagonal cross := by
+  apply Submodule.span_le.mpr
+  intro form generator
+  rcases generator with ⟨_, _, _, member⟩
+  exact member
+
+/-- Exact rank-one generation means equality between the weighted lattice and
+the span of the rank-one matrices that already belong to it. -/
+def WeightedMatrixRankOneGenerated
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ) : Prop :=
+  weightedMatrixSubmodule uniformizer diagonal cross =
+    weightedRankOneSpan uniformizer diagonal cross
+
 /-- The coordinate vector supported at one index. -/
 def coordinateVector (index : Index) : Index → R :=
   fun position ↦ if position = index then 1 else 0
@@ -64,6 +128,33 @@ def crossAtom (first second : Index) (coefficient : R) : Matrix Index Index R :=
   fun row column ↦
     if (row = first ∧ column = second) ∨
         (row = second ∧ column = first) then coefficient else 0
+
+/-- The cross atom at the prescribed cross depth belongs to the weighted
+lattice when the cross-depth function is symmetric. -/
+theorem crossAtom_uniformizerPower_mem_weightedMatrix
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (crossSymmetric : ∀ row column, cross row column = cross column row)
+    {first second : Index} (distinct : first ≠ second) :
+    MemWeightedMatrix uniformizer diagonal cross
+      (crossAtom first second (uniformizer ^ cross first second)) := by
+  constructor
+  · ext row column
+    simp only [Matrix.transpose_apply, crossAtom]
+    aesop
+  constructor
+  · intro index
+    by_cases index = first <;> by_cases index = second <;>
+      simp_all [crossAtom, dvd_zero]
+  · intro row column rowNeColumn
+    by_cases forward : row = first ∧ column = second
+    · rcases forward with ⟨rfl, rfl⟩
+      simp [crossAtom]
+    · by_cases reverse : row = second ∧ column = first
+      · have depthEquality := crossSymmetric second first
+        rcases reverse with ⟨rfl, rfl⟩
+        rw [depthEquality]
+        simp [crossAtom, distinct]
+      · simp [crossAtom, forward, reverse, dvd_zero]
 
 /-- A one-coordinate rank-one matrix is exactly the corresponding diagonal
 atom. -/
@@ -343,6 +434,21 @@ theorem mem_weightedRankOneSpan_of_pairwise_midpoint
       uniformizer scalar diagonal cross crossSymmetric distinct
       (midpoint first second distinct)
     simpa [coefficientEquality, mul_comm] using crossSpan
+
+/-- Pairwise midpoint inequalities imply exact equality between the finite
+weighted lattice and its internal rank-one span. -/
+theorem weightedMatrixRankOneGenerated_of_pairwise_midpoint
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (crossSymmetric : ∀ row column, cross row column = cross column row)
+    (midpoint : ∀ first second, first ≠ second →
+      diagonal first + diagonal second ≤ 2 * cross first second) :
+    WeightedMatrixRankOneGenerated uniformizer diagonal cross := by
+  apply le_antisymm
+  · intro form member
+    exact mem_weightedRankOneSpan_of_pairwise_midpoint
+      uniformizer diagonal cross crossSymmetric midpoint form member
+  · exact weightedRankOneSpan_le_weightedMatrixSubmodule
+      uniformizer diagonal cross
 
 end FiniteAssembly
 
