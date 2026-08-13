@@ -138,7 +138,12 @@ coefficient.
    birational splitting of a rank-two normal bundle and prove that only the
    point-column center coefficient is invariant under deformation to the
    split normal cone.  The split endpoint is already zero by the Kummer
-   calculation.  This avoids constructing a full analytic blow-up map.
+   calculation.  This avoids constructing a full analytic blow-up map.  It
+   closes the fivefold/`m=2` problem only; it does not control the larger
+   centers and correction packets appearing for higher stabilizations.
+   Termwise reciprocal-Gamma zeros would still need a uniform
+   continuation/resummation argument before they determine a Stokes
+   coefficient; the scalar degeneration formula alone does not supply it.
 2. **Partial Gamma/second-structure theorem for \(\mathcal O_p\).**  Prove
    only that the central-connection image of the point object respects the
    Orlov ambient summand.  The categorical orthogonality
@@ -150,6 +155,11 @@ coefficient.
    Exact zero of its formal center columns would then survive summation.
    This is much weaker than analytifying the entire decomposition, but the
    paper's general non-analyticity warning makes the estimates substantive.
+   A bare dominance argument is insufficient: the exceptional exponential
+   phases surround the origin, so there is generally no single sector on
+   which all center exponentials dominate the ambient zero-exponential
+   branch.  Each branch would need its own sector plus compatible Stokes
+   control.
 4. **Relative oscillatory-cycle construction.**  Realize the point functional
    by a rapid-decay cycle supported away from the center and prove that it has
    zero projection to exceptional critical points.  This could construct the
