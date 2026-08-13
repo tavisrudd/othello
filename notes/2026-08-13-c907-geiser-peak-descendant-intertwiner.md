@@ -6,9 +6,11 @@ Status: exact geometric regression and a proof extension of Chen--Tseng from
 one simple flop to a finite disjoint union of simple flops.  This constructs
 the missing intrinsic Gamma/descendant frame transition for the **middle
 flop** of the point-centred Geiser Sarkisov peak, including after product with
-`P^2`.  It does not yet attach the two wall-local point-blowup receivers to
-that intrinsic flop frame, does not close the complete Geiser peak, and does
-not prove Gold.
+`P^2`.  The two wall-local point-blowup receivers are attached in the
+successor `2026-08-13-c907-geiser-attachment-line-bundle-reduction.md` using
+the quotient-Novikov line, LLW analyticity, and Dreyfus parameterized Stokes
+theory.  Thus the complete Geiser peak is now closed; Gold is not, because
+peak coverage remains open.
 
 ## 1. Why this is the right first peak
 

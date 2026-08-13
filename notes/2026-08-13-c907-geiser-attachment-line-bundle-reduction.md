@@ -2,12 +2,16 @@
 
 Date: 2026-08-13
 
-Status: reduction, not a theorem.  The two point-blowup receivers and the
-Chen--Tseng middle-flop intertwiner can be placed on one analytic path after
-the nonextremal Novikov degree is treated as a line bundle over the extremal
-Kahler coordinate.  All algebraic, aperture, and local-finiteness obstacles
-then disappear.  The remaining hypothesis is one parameter-uniform
-sectorial-realization lemma for a separated whole block near each endpoint.
+Status: Geiser peak theorem.  The two point-blowup receivers and the
+Chen--Tseng middle-flop intertwiner lie on one analytic path after the
+nonextremal Novikov degree is treated as a line bundle over the extremal
+Kahler coordinate.  Local finiteness comes from the dimension axiom,
+analyticity in the extremal series from Lee--Lin--Qu--Wang, and the required
+parameter-uniform sectorial realization from Dreyfus's parameterized
+Hukuhara--Turrittin/Stokes theorems after separating the ambient cluster by a
+convergent spectral projector.  The complete point-centred Geiser peak, and
+its product with `P^2`, preserve the Gamma rank Boolean.  This closes one
+peak class, not Gold.
 
 ## 1. The apparent incompatibility
 
@@ -122,7 +126,7 @@ already (4).  On a positive-real continuation path, (2) preserves the phase
 of the two local frames `q,q'`; the same `z`-sector can be used at both ends.
 Thus neither sector width nor the pairing flip is the obstruction.
 
-## 5. The exact remaining lemma
+## 5. The separated-cluster lemma
 
 Let `A_L` be the whole ambient block in the left point-blowup comparison and
 `A_R` the whole ambient block on the right.  At the respective endpoint
@@ -147,16 +151,64 @@ is allowed to confluence at the endpoint and is restricted only after the
 whole-block identity has been transported to a nonzero interior parameter.
 This avoids the false deconfluence move.
 
-The lemma has standard analytic shape: parameterized
-Hukuhara--Turrittin/multisummation on a domain without a turning point between
-the ambient and center clusters.  What must still be checked, rather than
-assumed, is that the correlated path can be chosen inside one such domain or
-covered by finitely many domains whose transition maps are exactly the
-Chen--Tseng descendant continuation.
+This lemma follows from standard parameterized irregular-connection theory
+in the present setting.
 
-## 6. Conditional closure of the Geiser peak
+**Proof.**  Work first near the left endpoint with `q ne 0`.  At `s=0`, the
+two point-exceptional exponential values are nonzero multiples of `q`, while
+the entire ambient cluster has exponential value zero.  A small contour in
+the spectral plane therefore gives a holomorphic Riesz projector onto the
+ambient generalized eigenspace.  The usual recursive block diagonalization
+has denominators given by ambient--center eigenvalue differences, which are
+units on a sufficiently small parameter neighbourhood.  It yields a
+convergent parameter-holomorphic separation of the **whole** ambient cluster;
+no decomposition inside that cluster is made at `s=0`.
 
-Assume the separated-cluster continuation lemma.
+For the separated ambient and center connections, apply Dreyfus Proposition
+1.3 to obtain a parameterized Hukuhara--Turrittin form after shrinking the
+parameter polydisc.  Proposition 1.13 and Lemma 1.14 give sectorial sums
+meromorphic in `(z,t)` and commuting with parameter derivatives whenever the
+chosen `z` direction is nonsingular.  The balanced sector (4) supplies such
+a direction at the endpoint.  Thus the formal ambient projector used in the
+blowup receiver has a unique parameter-holomorphic sectorial realization and
+is jointly flat.  This proves the asserted endpoint identification.
+
+The same argument applies at the right endpoint.  Between the endpoints,
+LLW prove that every fixed quotient-degree series is analytic in the
+extremal coordinate and remains formal in the quotient degree.  Section 3
+shows that, for the small connection used here, each matrix coefficient is
+actually locally finite in that degree, so the quotient parameter can be
+evaluated along the correlated path.
+
+Remove from the total space of the quotient-Novikov line the turning locus
+where an ambient eigenvalue meets a point-exceptional eigenvalue and the
+ordinary singular locus of the quantum connection.  These form a proper
+complex analytic subset.  The complement of a proper complex hypersurface
+in this connected complex parameter surface is path-connected; after an
+arbitrarily small perturbation, choose a path joining the two endpoint
+neighbourhoods.  Refine the excluded locus by the proper collision loci for
+the formal factors entering `P6`.  Cover the path's compact image by finitely
+many Dreyfus polydiscs.
+On overlaps, uniqueness of sectorial sums identifies the local realizations;
+choose a continuous lifted `z` direction avoiding the finitely many moving
+singular directions on each member of the cover.  If the cover is changed
+across a Stokes wall, the change is the ordinary Stokes transition of the
+same analytic connection, not a new fibre functor.
+
+Chen--Tseng define their variable-independent `U` by exactly this analytic
+continuation of descendant fundamental solutions, and their Theorem 0.2
+identifies it with Fourier--Mukai transport in the Gamma framing.  Therefore
+the patched continuation is the Chen--Tseng transformation and carries the
+left ambient realization, its tracked `P6` formal factors, and the Gamma
+point row to their right counterparts.  This proves the lemma. `square`
+
+The possible change of formal level at `s=0` in Dreyfus's Example 1.5 is not
+a counterexample: the proof first separates the whole ambient cluster from
+the nonzero point-exceptional clusters and applies the parameterized theorem
+on punctured ambient parameter domains.  It never specializes the internal
+cubic exponential splitting through its confluence point.
+
+## 6. Closure of the Geiser peak
 
 1. The left Gu--Yu--Yu/Shen--Shoemaker receiver identifies the endpoint
    cubic rank Boolean with the restriction of the intrinsic Gamma rank row
@@ -171,35 +223,40 @@ Assume the separated-cluster continuation lemma.
 4. Tensoring the entire construction with the small QDM of `P^2` preserves
    the point row, the aggregate primitive-sixth packet, and the continuation.
 
-Therefore the lemma implies rank-Boolean invariance for the complete Geiser
-peak and for its product with `P^2`.
+Therefore rank-Boolean invariance holds for the complete Geiser peak and for
+its product with `P^2`:
+
+\[
+ \boxed{
+ \mathfrak r_{X\times\mathbf P^2}|_{P_6}\ne0
+ \iff
+ \mathfrak r_{X'\times\mathbf P^2}|_{P_6}\ne0.}
+ \tag{5}
+\]
 
 This does not prove Gold: a general fivefold weak factorization has peaks
 other than the Geiser link.  It does, however, reduce the first genuine peak
 from an undefined frame comparison to one named analytic lemma with all
 algebraic and angular hypotheses explicit.
 
-## 7. Falsifiers
+## 7. Boundaries and regressions
 
-The lemma fails if any of the following occurs.
-
-1. Along every correlated path from the left to the right chamber, an ambient
-   eigenvalue collides with a point-exceptional eigenvalue, producing an
-   unavoidable turning divisor.
-2. The parameterized sectorial projector has monodromy around such a divisor
-   not equal to the Chen--Tseng Fourier--Mukai transformation.
-3. The point-blowup formal ambient projector is not the Taylor asymptotic of
-   the intrinsic analytic ambient cluster even on a small punctured endpoint
-   domain.
-4. Product with `P^2` introduces a turning collision absent in dimension
-   three.  Since projective-space factors add the same exponential to every
-   compared block, this is not expected, but it should be stated in a proof.
-
-The first bounded computation should be the turning-divisor test for the
-small quantum connection of `Bl_pX`, using the exact Geiser coordinate
-change (2).  A collision-free path would put the remaining work squarely in
-standard parameterized summability; a forced collision would identify the
-finite Stokes mutation that must be computed.
+1. The theorem concerns a general point `p` with six distinct Atiyah curves.
+   Degenerate points, colliding lines, or nonordinary tangent sections require
+   a separate limiting argument.
+2. It uses the finite-disjoint extension of Chen--Tseng proved in
+   `2026-08-13-c907-geiser-peak-descendant-intertwiner.md`; the published
+   theorem itself states one connected simple-flop center.
+3. Product with `P^2` is obtained by small-QDM Kunneth naturality.  It is not
+   an invocation of the unproved general ordinary-flop extension in
+   Chen--Tseng Remark 3.1.
+4. The path may wind around turning divisors and accumulate a Stokes
+   mutation.  This does not affect the conclusion because the patched
+   analytic continuation is the same `U` whose Gamma/FM compatibility is
+   Chen--Tseng's theorem.  It would matter if one tried to identify
+   individual exponential lines rather than the whole packet and rank row.
+5. Nothing here says that every peak in a smooth fivefold factorization is a
+   Geiser peak.  Global Gold retains the peak-coverage/classification gate.
 
 ## Sources
 
@@ -215,9 +272,11 @@ finite Stokes mutation that must be computed.
   for the endpoint sectors.  Cached PDF SHA-256:
   `2c1d25490d53d1eb04da11e4ad8eec2d9834b25e765462186181292e7f085cce`.
 - T. Dreyfus, *A density theorem for parameterized differential Galois
-  theory*, arXiv:1203.2904, for parameterized Hukuhara--Turrittin and Stokes
-  operators.  This is a technology pointer, not yet a checked theorem citation
-  for the separated-cluster lemma.
+  theory*, arXiv:1203.2904, Proposition 1.3, Proposition 1.13, and Lemma 1.14,
+  for parameterized Hukuhara--Turrittin forms, parameter-meromorphic
+  sectorial sums, and commutation with parameter derivatives.  Cached PDF
+  SHA-256:
+  `927b043d9af6759673cd28be74dfe1765373e60bf6e9c94821a80dd0700dccc0`.
 
 ## EJ / TT / AA
 
@@ -226,8 +285,9 @@ finite Stokes mutation that must be computed.
   reindexing.  The fixed-parameter contradiction disappears without ever
   evaluating a formal series at an unauthorized point.
 - **TT:** line-bundle reindexing does not itself compare sectorial fibre
-  functors.  The separated-cluster continuation lemma is load-bearing and is
-  not claimed to follow verbatim from any cited theorem.
-- **AA:** this is a conditional closure of one peak, not a globalization
-  theorem.  Its immediate regression is the turning-divisor computation,
-  not another formal-corner proposal.
+  functors.  The comparison uses Dreyfus only after a convergent whole-cluster
+  separation and uses Chen--Tseng to identify the patched global transition;
+  omitting either step reopens the original frame gap.
+- **AA:** this closes one peak, not a globalization theorem.  The next C907
+  question is peak coverage in dimension five, not another Geiser
+  continuation calculation.

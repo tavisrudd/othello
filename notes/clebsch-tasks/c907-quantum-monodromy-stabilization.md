@@ -27,6 +27,9 @@ identity term by term.  This gives a wall-local rank identity in the same
 fixed-sector receiver, not an intrinsic large-radius Boolean: the exact QDM
 coordinate does not algebraize the large-radius-to-sector connection row.
 Gold and Platinum therefore retain the adjacent-receiver peak-coherence gate.
+The gate is no longer completely unlanded: the point-centred Geiser peak is
+closed below by an analytic Novikov-line continuation theorem.  What remains
+is coverage by, or extension to, the other peak types.
 The alternative direct-cobordism route has a second gate because its chamber
 quotients can be singular/toroidal.  No Paper V or Lean promotion.
 The coverage audit is negative: a smooth projective master gives projective
@@ -62,18 +65,9 @@ intertwiner for one simple flop.  Their deformation proof extends
 componentwise to the six disjoint Atiyah curves in the Geiser middle flop,
 and small-QDM product naturality carries it to `x P2`.  Hence the intrinsic
 Gamma point row is exactly preserved across the middle flop.  This does not
-yet close the complete peak: the two point-blowup identities still live in
-their own wall-local receivers, and their attachment to the intrinsic flop
-frame is the remaining mixed two-parameter problem.  This isolates a
-publishable stepping stone (finite-disjoint simple-flop Gamma compatibility)
-and a smaller next falsifier (one point-blowup attachment with a transverse
-flop parameter).  The exact parameter relation is `s'=s^-1`, `q'=q s^3`.
-The dimension axiom makes fixed-`q` specialization coefficientwise legal,
-but fixed `q` sends `q'` to infinity along the flop continuation.  Hence the
-attachment genuinely requires the correlated two-variable path
-`q=q's^-3`; it is not another formal-banking or convergence gap.  The
-balanced codimension-three blowup sector has opening `2pi`, so aperture is
-not the obstruction.
+by itself close the complete peak: the exact parameter relation is
+`s'=s^-1`, `q'=q s^3`, so its two point-blowup receivers initially occupy
+different local frames of the quotient-Novikov degree.
 
 The quotient-class repair is now isolated in
 `../2026-08-13-c907-geiser-attachment-line-bundle-reduction.md`.  The
@@ -81,13 +75,17 @@ relation `q'=q s^3` says that `q,q'` are local frames of one quotient-Novikov
 line over the compactified flop coordinate.  LLW's series by curve class
 modulo the extremal ray already implement this Laurent reindexing, and the
 dimension axiom makes every fibre degree locally finite.  This removes the
-formal-evaluation obstruction without removing the analytic one.  The exact
-Geiser residue is a parameter-uniform separated-cluster realization lemma:
-continue the whole point-blowup ambient block along the Novikov line and
-identify its two endpoint sectorial realizations through Chen--Tseng's
-Gamma/FM map.  Cubic-atom confluence is avoided by restricting to `P6` only
-after transporting the whole block.  The first falsifier is the turning
-divisor of the small QDM of `Bl_p X` along the correlated path.
+formal-evaluation obstruction.  A convergent spectral projector separates
+the whole ambient cluster from the nonzero point-exceptional clusters near
+each endpoint.  Dreyfus's parameterized Hukuhara--Turrittin/Stokes theorems
+give the parameter-holomorphic sectorial realizations; a generic path avoids
+the proper turning locus; and Chen--Tseng identifies the patched continuation
+with Gamma/Fourier--Mukai transport.  Cubic-atom confluence is avoided by
+restricting to `P6` only after transporting the whole block.  Therefore the
+complete Geiser peak and its product with `P2` preserve the Gamma rank
+Boolean.  This is a publishable peak theorem, not Gold: the remaining global
+gate is coverage/classification of all peak types in a smooth fivefold
+factorization.
 
 **Load next:** `c907-solver-dossier.md`.
 
