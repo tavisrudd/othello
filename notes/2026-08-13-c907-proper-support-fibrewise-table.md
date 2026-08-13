@@ -25,8 +25,9 @@ on the same original graph `G^circ`.
    can add exceptional points over a controlled exterior chart; it is not a
    replacement for this direct map in the fibrewise table unless those points
    are separately audited.
-2. `pi_rat:R -> X_0` is the strict closure of the rational residual graph
-   in a product of projective ratio lines.  Locally on compact `y` it records
+2. `pi_rat:R -> X_0` is the reduced strict closure of the **same** open graph
+   `G^circ` in a product of projective ratio lines, so
+   `pi_rat^{-1}(G^circ)=G^circ`.  Locally on compact `y` it records
    
    \[
     Z=\frac{1-B+\delta^2Q/Y}{\delta},\quad
@@ -144,13 +145,16 @@ one, its `y` limit remains in `T_y`, and its `L` limit lies in
 If `Z` or `W` has a pole, the exact ratio valuative trichotomy says that the
 arc has a center in the relevant finite imbalanced ratio chart, has unbounded
 `L`, or exits through an actual exterior marked-line type.  The latter two
-alternatives are impossible over (5): `L` is bounded and the coarse image has
-`B=C=1`.  If neither ratio has a pole, the arc is in the bounded residual
+alternatives are impossible over (5): a pole of `L` conflicts with
+`L in overline Omega`, while an exterior marked-line limit conflicts with the
+fixed coarse equalities `B=C=1`.  If neither ratio has a pole, the arc is in the bounded residual
 chart.  Double residual infinity is included in the pole alternative and
 cannot occur over bounded `L`.  Thus the three displayed charts cover every
 point of the whole fibre, not merely one selected lift.
 
-In the finite `Z` ratio chart, with
+Near this fibre the original open has no `y`, `B`, or `C` boundary: `y` is a
+torus point and `B=C=1` are retained translated divisors.  In the finite `Z`
+ratio chart, with
 
 \[
  Z=r^{-1},\quad W=rv,\quad\delta=rh,
@@ -167,12 +171,16 @@ cleared strict equation has the unit derivative
 \]
 
 The apparent `r=0,h=1` locus is empty.  The symmetric chart has the same
-`w` unit.  The local control-coarsening lemma therefore supplies an
-`L`-product for `j_!A` on every such actual-boundary germ.
+`w` unit.  The only local extension-by-zero boundary is the actual divisor
+`rh=0`; `v=0` (or `w=0`) is interior.  The regular `v` or `w` field is tangent
+to this labelled pair and has unit `L` derivative, so its local flow supplies
+an `L`-product of the pair and proves `phi_(L-u)(j_!A)=0`, not merely a
+Fitting statement.
 
 In the bounded chart the central potential is `f_Q+ZW`.  Its full critical
 scheme, with `Z,W` retained as tangent coordinates, is exactly (4).  Hence
-there is no remaining critical germ over (5).  These local acyclicity
+there is no remaining critical germ over (5); a tangent derivative gives the
+same pair-product statement there.  These local acyclicity
 neighborhoods cover the compact proper fibre, proving (6).  More explicitly,
 the needed local-product input is the usual regular-coordinate lemma: the
 fields `partial_v`, `partial_w`, and the bounded-chart noncritical field are
