@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 118 reviewer terminals.
+1 complete; 119 reviewer terminals.
 
-The 118 reviewer-facing terminals currently verify:
+The 119 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -121,6 +121,10 @@ The 118 reviewer-facing terminals currently verify:
   bulk matrix and characteristic-polynomial packet;
   neither that ideal nor that endomorphism is identified with the manuscript's
   filtration or divisor substitution;
+  more generally, a supplied normalized multiplicative ideal filtration keeps
+  its `F^0` and product-inclusion laws while its quotient tower feeds the same
+  finite-level matrix packet; Lean does not prove that the manuscript's
+  filtration supplies this structure;
   Lean does not identify the supplied filtration with this adic model, and
   identification with the manuscript's geometric coefficient quotients is
   not formalized;

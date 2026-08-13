@@ -2245,6 +2245,22 @@ theorem filteredFormalBaseShift_bulkSystem_compatible_and_charpoly
               (endomorphism.quotientEndomorphism level)) :=
   input.bulkSystem_compatible_and_characteristicPolynomial
 
+/-- A supplied normalized multiplicative ideal filtration retains `F⁰R=R`
+and `FᵐR·FⁿR⊆Fᵐ⁺ⁿR` while its actual quotient tower and a supplied preserving
+endomorphism feed the compatible finite-level base-shift packet.  Small
+matrices, gauges, inverses, and their compatibility laws remain supplied; no
+particular geometric filtration or flat equation is constructed. -/
+theorem multiplicativeFilteredFormalBaseShift_conclusion
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommRing R]
+    (filtration : Quantum.MultiplicativeIdealFiltration R)
+    {endomorphism :
+      filtration.toDecreasingIdealFiltration.PreservingEndomorphism}
+    (input : Quantum.FilteredFormalBaseShiftInput Index R
+      filtration.toDecreasingIdealFiltration endomorphism) :
+    Quantum.MultiplicativeIdealFiltration.FormalBaseShiftConclusion
+      filtration input :=
+  filtration.formalBaseShiftConclusion input
+
 /-- For the adic filtration of one ideal, preservation of the generating ideal
 is enough to construct compatible quotient substitutions.  Together with
 supplied compatible small matrices and invertible gauges, Lean proves the

@@ -14,6 +14,10 @@ descended endomorphisms commute with reduction.  Thus the coefficient rings,
 reductions, and compatible substitutions used by a finite-level formal base
 shift can be constructed from explicit filtered-ring data.
 
+A normalized multiplicative ideal filtration is represented by the additional
+premises `F⁰R = R` and `FᵐR · FⁿR ⊆ Fᵐ⁺ⁿR`.  These laws are data for a general
+filtration; the module does not infer them from mere antitonicity.
+
 Compatible quotient families form a pointwise commutative ring.  The canonical
 ring homomorphism from the original ring is injective exactly when the
 intersection of the filtration ideals is zero, and it is bijective exactly
@@ -48,6 +52,17 @@ structure DecreasingIdealFiltration (R : Type u) [CommRing R] where
   ideal : ℕ → Ideal R
   antitone : Antitone ideal
 
+/-- A decreasing ideal filtration normalized by `F⁰R = R` and satisfying the
+multiplicative lower-bound law `FᵐR · FⁿR ⊆ Fᵐ⁺ⁿR`. -/
+structure MultiplicativeIdealFiltration (R : Type u) [CommRing R]
+    extends DecreasingIdealFiltration R where
+  ideal_zero : toDecreasingIdealFiltration.ideal 0 = ⊤
+  mul_mem : ∀ {left right : R} {leftOrder rightOrder : ℕ},
+    left ∈ toDecreasingIdealFiltration.ideal leftOrder →
+    right ∈ toDecreasingIdealFiltration.ideal rightOrder →
+    left * right ∈
+      toDecreasingIdealFiltration.ideal (leftOrder + rightOrder)
+
 /-- The adic filtration by the powers of one ideal. -/
 def adicFiltration {R : Type u} [CommRing R] (ideal : Ideal R) :
     DecreasingIdealFiltration R where
@@ -64,6 +79,13 @@ theorem adicFiltration_mul_mem_add {R : Type u} [CommRing R]
   change left * right ∈ ideal ^ (leftOrder + rightOrder)
   rw [pow_add]
   exact Ideal.mul_mem_mul hleft hright
+
+/-- Powers of one ideal form a normalized multiplicative ideal filtration. -/
+def adicMultiplicativeFiltration {R : Type u} [CommRing R]
+    (ideal : Ideal R) : MultiplicativeIdealFiltration R where
+  toDecreasingIdealFiltration := adicFiltration ideal
+  ideal_zero := by simp [adicFiltration]
+  mul_mem := adicFiltration_mul_mem_add ideal
 
 namespace DecreasingIdealFiltration
 

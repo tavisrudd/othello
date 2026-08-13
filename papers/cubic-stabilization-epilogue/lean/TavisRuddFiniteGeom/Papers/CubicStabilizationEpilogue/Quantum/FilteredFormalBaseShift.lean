@@ -12,6 +12,11 @@ divisor substitution is induced by one filtration-preserving endomorphism of
 quotients then produce the compatible bulk matrix and characteristic-polynomial
 systems.
 
+When the supplied filtration is normalized and multiplicative, the same
+finite-level construction retains the premises `F⁰R = R` and
+`FᵐR · FⁿR ⊆ Fᵐ⁺ⁿR` in its stated conclusion.  Lean does not prove that a
+particular geometric coefficient filtration has this structure.
+
 For the adic filtration of one ideal, it is enough to supply a ring
 endomorphism preserving that ideal.  Lean proves preservation of every ideal
 power, constructs the induced quotient substitutions, and combines these with
@@ -124,6 +129,68 @@ theorem bulkSystem_compatible_and_characteristicPolynomial
     input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem_level⟩
 
 end FilteredFormalBaseShiftInput
+
+namespace MultiplicativeIdealFiltration
+
+/-- The algebraic conclusion obtained from a normalized multiplicative ideal
+filtration and compatible finite-level matrix and gauge data. -/
+def FormalBaseShiftConclusion
+    {Index : Type v} [Fintype Index] [DecidableEq Index]
+    {R : Type u} [CommRing R]
+    (filtration : MultiplicativeIdealFiltration R)
+    {endomorphism : filtration.toDecreasingIdealFiltration.PreservingEndomorphism}
+    (input : FilteredFormalBaseShiftInput Index R
+      filtration.toDecreasingIdealFiltration endomorphism) : Prop :=
+    filtration.toDecreasingIdealFiltration.ideal 0 = ⊤ ∧
+      (∀ left right leftOrder rightOrder,
+        left ∈ filtration.toDecreasingIdealFiltration.ideal leftOrder →
+        right ∈ filtration.toDecreasingIdealFiltration.ideal rightOrder →
+        left * right ∈
+          filtration.toDecreasingIdealFiltration.ideal
+            (leftOrder + rightOrder)) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+        ((input.formalBaseShiftSystem.bulkMonodromy (level + 1)).map
+          (filtration.toDecreasingIdealFiltration.reduction level)) =
+            input.formalBaseShiftSystem.bulkMonodromy level) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        (input.formalBaseShiftSystem.bulkMonodromy level).charpoly =
+          (input.smallMonodromy level).charpoly.map
+            (endomorphism.quotientEndomorphism level)) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+        ((input.formalBaseShiftSystem.bulkMonodromy (level + 1)).charpoly).map
+            (filtration.toDecreasingIdealFiltration.reduction level) =
+          (input.formalBaseShiftSystem.bulkMonodromy level).charpoly) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        (input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem).characteristicPolynomial
+              level =
+            (input.formalBaseShiftSystem.bulkMonodromy level).charpoly ∧
+          (input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem).characteristicPolynomial
+              level =
+            (input.smallMonodromy level).charpoly.map
+              (endomorphism.quotientEndomorphism level))
+
+/-- A supplied normalized multiplicative ideal filtration retains its unit and
+product laws while its quotient tower and compatible matrix/gauge data produce
+the stated bulk matrix and characteristic-polynomial system. -/
+theorem formalBaseShiftConclusion
+    {Index : Type v} [Fintype Index] [DecidableEq Index]
+    {R : Type u} [CommRing R]
+    (filtration : MultiplicativeIdealFiltration R)
+    {endomorphism : filtration.toDecreasingIdealFiltration.PreservingEndomorphism}
+    (input : FilteredFormalBaseShiftInput Index R
+      filtration.toDecreasingIdealFiltration endomorphism) :
+    FormalBaseShiftConclusion filtration input :=
+  ⟨filtration.ideal_zero,
+    fun _ _ _ _ hleft hright => filtration.mul_mem hleft hright,
+    input.bulkSystem_compatible_and_characteristicPolynomial⟩
+
+end MultiplicativeIdealFiltration
 
 /-- Matrix and gauge data over the adic quotient tower of one ideal.  The
 endomorphism is required to preserve only the generating ideal; preservation
