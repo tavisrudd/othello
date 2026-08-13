@@ -1,5 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationBulkTruncation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableLaurentFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
+import Mathlib.RingTheory.MvPowerSeries.Substitution
 
 /-!
 # Finite Laurent evaluation at filtration-positive bulk parameters
@@ -14,16 +16,83 @@ series has one common lower bound on its loop exponents.
 
 This is a finite quotient-level evaluation, not an infinite summation or a
 topological evaluation theorem.  Lean does not identify the supplied formal
-series or parameters with the manuscript's gauge and bulk coordinates, prove
-that evaluation preserves products or inverses, construct an inverse-limit
-Laurent gauge, or identify the coefficient filtration geometrically.  The
-proofs are symbolic and kernel checked, with no external computation or
-oracle.
+series or parameters with the manuscript's gauge and bulk coordinates.  The
+finite evaluation is a ring homomorphism, so it preserves invertibility, and
+the compatible evaluated gauges and chosen inverses form a pro-Laurent gauge
+system.  No Laurent lower bound uniform across quotient levels, geometric
+identification of the filtration, or analytic specialization is proved.  The
+proofs are symbolic and kernel checked, with no external computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 namespace Quantum
+
+/-- The constant power series representing one filtration-positive parameter
+inside the Laurent-series quotient coefficient ring. -/
+noncomputable def MultiplicativeIdealFiltration.positiveLaurentSubstitutionParameterAtLevel
+    {Coordinate B : Type*} [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B) (cutoff : ℕ)
+    (coordinate : Coordinate) : MvPowerSeries (Fin 0)
+      (LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) :=
+  MvPowerSeries.C (HahnSeries.C
+    (Ideal.Quotient.mk (filtration.ideal cutoff) (parameter coordinate)))
+
+/-- Level-one parameters are nilpotent in every filtration quotient, so their
+constant Laurent power series satisfy Mathlib's finite substitution
+criterion. -/
+theorem MultiplicativeIdealFiltration.positiveLaurentSubstitutionParameterAtLevel_hasSubst
+    {Coordinate B : Type*} [Fintype Coordinate] [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) :
+    MvPowerSeries.HasSubst
+      (filtration.positiveLaurentSubstitutionParameterAtLevel
+        parameter cutoff) := by
+  apply MvPowerSeries.hasSubst_of_constantCoeff_nilpotent
+  intro coordinate
+  simp only [MultiplicativeIdealFiltration.positiveLaurentSubstitutionParameterAtLevel,
+    MvPowerSeries.constantCoeff_C]
+  have quotientNilpotent : IsNilpotent
+      (Ideal.Quotient.mk (filtration.ideal cutoff) (parameter coordinate)) := by
+    refine ⟨cutoff, ?_⟩
+    rw [← map_pow, Ideal.Quotient.eq_zero_iff_mem]
+    exact filtration.pow_mem_level (positive coordinate) cutoff
+  exact quotientNilpotent.map HahnSeries.C
+
+/-- The genuine ring homomorphism obtained by substituting the nilpotent
+quotient classes of filtration-positive parameters.  The temporary
+`PEmpty`-variable power-series ring is canonically collapsed by its constant
+coefficient map. -/
+noncomputable def MultiplicativeIdealFiltration.positiveLaurentEvaluationRingHomAtLevel
+    {Coordinate B : Type*} [Fintype Coordinate] [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) :
+    MvPowerSeries Coordinate (LaurentSeries B) →+*
+      LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) := by
+  let coefficientMap : LaurentSeries B →+*
+      LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) :=
+    laurentSeriesMap (Ideal.Quotient.mk (filtration.ideal cutoff))
+  letI : Algebra (LaurentSeries B)
+      (LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) :=
+    coefficientMap.toAlgebra
+  exact (MvPowerSeries.constantCoeff :
+      MvPowerSeries (Fin 0)
+          (LaurentSeries
+            (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) →+*
+        LaurentSeries
+          (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)).comp
+    (MvPowerSeries.substAlgHom
+      (filtration.positiveLaurentSubstitutionParameterAtLevel_hasSubst
+        parameter positive cutoff)).toRingHom
 
 /-- One Laurent-valued bulk term after mapping coefficients and a positive
 parameter monomial to the quotient by filtration level `cutoff`. -/
@@ -67,6 +136,74 @@ noncomputable def MultiplicativeIdealFiltration.positiveLaurentEvaluationAtLevel
   ∑ degree ∈ bulkMonomialBoxBelow Coordinate cutoff,
     filtration.positiveLaurentEvaluationTermAtLevel parameter cutoff series degree
 
+/-- The explicit finite sum agrees with the nilpotent-substitution ring
+homomorphism. -/
+theorem MultiplicativeIdealFiltration.positiveLaurentEvaluationRingHomAtLevel_apply
+    {Coordinate B : Type*} [Fintype Coordinate] [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) (series : MvPowerSeries Coordinate (LaurentSeries B)) :
+    filtration.positiveLaurentEvaluationRingHomAtLevel
+        parameter positive cutoff series =
+      filtration.positiveLaurentEvaluationAtLevel
+        parameter cutoff series := by
+  classical
+  let coefficientMap : LaurentSeries B →+*
+      LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) :=
+    laurentSeriesMap (Ideal.Quotient.mk (filtration.ideal cutoff))
+  letI : Algebra (LaurentSeries B)
+      (LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) :=
+    coefficientMap.toAlgebra
+  rw [MultiplicativeIdealFiltration.positiveLaurentEvaluationRingHomAtLevel]
+  rw [RingHom.comp_apply]
+  change MvPowerSeries.constantCoeff
+      (MvPowerSeries.substAlgHom
+        (filtration.positiveLaurentSubstitutionParameterAtLevel_hasSubst
+          parameter positive cutoff) series) = _
+  rw [show MvPowerSeries.substAlgHom
+      (filtration.positiveLaurentSubstitutionParameterAtLevel_hasSubst
+        parameter positive cutoff) series =
+      MvPowerSeries.subst
+        (filtration.positiveLaurentSubstitutionParameterAtLevel
+          parameter cutoff) series by
+    exact congrFun (MvPowerSeries.coe_substAlgHom _) series]
+  rw [MvPowerSeries.constantCoeff_subst
+    (filtration.positiveLaurentSubstitutionParameterAtLevel_hasSubst
+      parameter positive cutoff)]
+  rw [MultiplicativeIdealFiltration.positiveLaurentEvaluationAtLevel]
+  have summand_eq : ∀ degree : Coordinate →₀ ℕ,
+      MvPowerSeries.coeff degree series •
+          MvPowerSeries.constantCoeff
+            (degree.prod fun coordinate exponent ↦
+              filtration.positiveLaurentSubstitutionParameterAtLevel
+                parameter cutoff coordinate ^ exponent) =
+        filtration.positiveLaurentEvaluationTermAtLevel
+          parameter cutoff series degree := by
+    intro degree
+    rw [Algebra.smul_def]
+    rw [show algebraMap (LaurentSeries B)
+        (LaurentSeries
+          (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) =
+        coefficientMap from rfl]
+    simp [MultiplicativeIdealFiltration.positiveLaurentSubstitutionParameterAtLevel,
+      MultiplicativeIdealFiltration.positiveLaurentEvaluationTermAtLevel,
+      bulkMonomialValue, coefficientMap]
+  simp_rw [summand_eq]
+  apply finsum_eq_sum_of_support_subset
+  intro degree degree_mem
+  by_contra outside
+  have cutoff_le : cutoff ≤ multivariableTotalDegree degree := by
+    by_contra not_le
+    exact outside (mem_bulkMonomialBoxBelow_of_totalDegree_lt cutoff degree
+      (Nat.lt_of_not_ge not_le))
+  have term_zero := filtration.positiveLaurentEvaluationTermAtLevel_eq_zero
+    parameter positive cutoff series degree cutoff_le
+  exact degree_mem (by
+    exact term_zero)
+
 /-- Entrywise finite positive-parameter evaluation of a matrix-valued
 multivariate Laurent series at one filtration quotient. -/
 noncomputable def MultiplicativeIdealFiltration.positiveLaurentMatrixEvaluationAtLevel
@@ -82,6 +219,26 @@ noncomputable def MultiplicativeIdealFiltration.positiveLaurentMatrixEvaluationA
   fun row column ↦
     filtration.positiveLaurentEvaluationAtLevel parameter cutoff
       (series row column)
+
+/-- Entrywise finite evaluation is exactly matrix mapping by the
+nilpotent-substitution ring homomorphism. -/
+theorem MultiplicativeIdealFiltration.positiveLaurentMatrixEvaluationAtLevel_eq_mapMatrix
+    {Coordinate Index B : Type*} [Fintype Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (series : Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    filtration.positiveLaurentMatrixEvaluationAtLevel
+        parameter cutoff series =
+      (filtration.positiveLaurentEvaluationRingHomAtLevel
+        parameter positive cutoff).mapMatrix series := by
+  apply Matrix.ext
+  intro row column
+  exact (filtration.positiveLaurentEvaluationRingHomAtLevel_apply
+    parameter positive cutoff (series row column)).symm
 
 /-- A finite quotient-level positive-parameter evaluation has one Laurent
 lower bound common to every entry of a finite matrix. -/
@@ -267,6 +424,90 @@ theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_hasUnifo
     filtration.positiveLaurentMatrixEvaluationAtLevel_hasUniformLowerBound
       parameter cutoff (multivariableFlatGaugeSeries connection)
 
+/-- Nilpotent positive-parameter evaluation preserves invertibility of the
+normalized formal flat gauge. -/
+theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_isUnit
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    IsUnit (filtration.positiveEvaluatedFlatGaugeAtLevel
+      parameter cutoff connection) := by
+  have sourceUnit := multivariableFlatGaugeSeries_isUnit connection
+  have mappedUnit := sourceUnit.map
+    (filtration.positiveLaurentEvaluationRingHomAtLevel
+      parameter positive cutoff).mapMatrix
+  rw [MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel,
+    filtration.positiveLaurentMatrixEvaluationAtLevel_eq_mapMatrix
+      parameter positive cutoff]
+  exact mappedUnit
+
+/-- A chosen two-sided inverse of the finite evaluated flat gauge. -/
+noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseAtLevel
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    Matrix Index Index
+      (LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)) :=
+  ↑(filtration.positiveEvaluatedFlatGaugeAtLevel_isUnit
+    parameter positive cutoff connection).unit⁻¹
+
+/-- The chosen finite-level inverse is a two-sided matrix inverse. -/
+theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_inverse
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter cutoff connection *
+        filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive cutoff connection = 1 ∧
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive cutoff connection *
+        filtration.positiveEvaluatedFlatGaugeAtLevel
+          parameter cutoff connection = 1 := by
+  let unit := (filtration.positiveEvaluatedFlatGaugeAtLevel_isUnit
+    parameter positive cutoff connection).unit
+  have unit_spec : (↑unit : Matrix Index Index
+      (LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))) =
+      filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter cutoff connection :=
+    IsUnit.unit_spec _
+  constructor
+  · rw [← unit_spec]
+    change
+      (↑unit : Matrix Index Index
+          (LaurentSeries
+            (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))) *
+        (↑(unit⁻¹) : Matrix Index Index
+          (LaurentSeries
+            (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))) = 1
+    simp
+  · rw [← unit_spec]
+    change
+      (↑(unit⁻¹) : Matrix Index Index
+          (LaurentSeries
+            (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))) *
+        (↑unit : Matrix Index Index
+          (LaurentSeries
+            (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))) = 1
+    simp
+
 /-- The finite evaluated flat-gauge matrices commute with canonical adjacent
 quotient reductions. -/
 theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_compatible
@@ -288,6 +529,86 @@ theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_compatib
   exact filtration.positiveLaurentEvaluationAtLevel_compatible
     parameter positive cutoff
     ((multivariableFlatGaugeSeries connection) row column)
+
+/-- The chosen inverses of the finite evaluated gauges commute with canonical
+adjacent quotient reductions. -/
+theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseAtLevel_compatible
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    (filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+        parameter positive (cutoff + 1) connection).map
+        (filtration.positiveLaurentReduction cutoff) =
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+        parameter positive cutoff connection := by
+  let reduction := filtration.positiveLaurentReduction cutoff
+  let highInverse := filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+    parameter positive (cutoff + 1) connection
+  let lowInverse := filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+    parameter positive cutoff connection
+  let lowGauge := filtration.positiveEvaluatedFlatGaugeAtLevel
+    parameter cutoff connection
+  have highIdentities :=
+    filtration.positiveEvaluatedFlatGaugeAtLevel_inverse
+      parameter positive (cutoff + 1) connection
+  have lowIdentities :=
+    filtration.positiveEvaluatedFlatGaugeAtLevel_inverse
+      parameter positive cutoff connection
+  have gaugeCompatibility :=
+    filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
+      parameter positive cutoff connection
+  have mappedRight : highInverse.map reduction * lowGauge = 1 := by
+    have mapped := congrArg (fun matrix ↦ matrix.map reduction) highIdentities.2
+    simpa [highInverse, lowGauge, reduction, Matrix.map_mul,
+      gaugeCompatibility] using mapped
+  calc
+    highInverse.map reduction = highInverse.map reduction * 1 := by simp
+    _ = highInverse.map reduction * (lowGauge * lowInverse) := by
+      rw [lowIdentities.1]
+    _ = (highInverse.map reduction * lowGauge) * lowInverse := by
+      rw [mul_assoc]
+    _ = lowInverse := by rw [mappedRight, one_mul]
+
+/-- The finite evaluations of the normalized formal gauge, together with
+their chosen compatible inverses, form a pro-Laurent gauge system over the
+actual filtration quotients. -/
+noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeSystem
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    ProLaurentGaugeSystem Index where
+  Coefficient level := filtration.toDecreasingIdealFiltration.QuotientRing level
+  coefficientRing level := inferInstance
+  gauge level := filtration.positiveEvaluatedFlatGaugeAtLevel
+    parameter level connection
+  inverse level := filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+    parameter positive level connection
+  reduction level := filtration.positiveLaurentReduction level
+  leftInverse level :=
+    (filtration.positiveEvaluatedFlatGaugeAtLevel_inverse
+      parameter positive level connection).1
+  rightInverse level :=
+    (filtration.positiveEvaluatedFlatGaugeAtLevel_inverse
+      parameter positive level connection).2
+  gauge_compatible level row column := by
+    have compatibility :=
+      filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
+        parameter positive level connection
+    exact congrArg (fun matrix ↦ matrix row column) compatibility
+  inverse_compatible level row column := by
+    have compatibility :=
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel_compatible
+        parameter positive level connection
+    exact congrArg (fun matrix ↦ matrix row column) compatibility
 
 /-- For one matrix entry and loop exponent, the coefficients of the finite
 evaluated gauges form an explicit compatible quotient family. -/

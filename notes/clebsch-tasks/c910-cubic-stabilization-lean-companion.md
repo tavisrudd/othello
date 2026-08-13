@@ -201,9 +201,11 @@ parameters, Lean now also constructs the normalized invertible formal gauge
 and an actual finite sum in one cutoff quotient, proves every omitted
 high-degree term zero, and gives the resulting finite evaluated matrix one
 Laurent lower bound.  The finite evaluations commute with canonical adjacent
-quotient reductions, and every entrywise loop coefficient is packaged as a
-compatible quotient family.  Multiplicativity, preservation of the gauge inverse, and
-identification with the manuscript gauge remain outside the fragment.
+quotient reductions.  Evaluation is a ring homomorphism, so the matrices are
+invertible; compatible chosen two-sided inverses package them as a pro-Laurent
+gauge system.  Every entrywise loop coefficient is also packaged as a
+compatible quotient family.  Identification with the manuscript gauge remains
+outside the fragment.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

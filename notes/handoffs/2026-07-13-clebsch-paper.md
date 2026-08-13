@@ -339,8 +339,10 @@ constructs its normalized invertible formal gauge and an actual finite
 evaluation at one quotient cutoff, proves every omitted high-degree term zero,
 and gives one Laurent lower bound for the finite evaluated matrix.  These finite
 evaluations commute with canonical adjacent quotient reductions and are
-packaged entrywise as compatible quotient families; they are not proved
-multiplicative or invertible.  Neither are the parameters identified with manuscript bulk coordinates
+obtained from a ring homomorphism.  They are invertible, their chosen two-sided
+inverses are compatible, and together they form a pro-Laurent gauge system;
+their loop coefficients are packaged entrywise as compatible quotient
+families.  Neither are the parameters identified with manuscript bulk coordinates
 nor is the finite evaluated matrix identified with the manuscript gauge.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level

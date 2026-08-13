@@ -2784,11 +2784,13 @@ parameters and one quotient cutoff, Lean constructs the normalized invertible
 formal flat gauge and an actual finite quotient-level evaluation of it.  Every
 term at or above the cutoff vanishes, and one integer bounds the loop exponents
 of every entry of the evaluated matrix.  The finite evaluations commute with
-canonical adjacent quotient reductions, and every entrywise loop coefficient
-is packaged as an explicit compatible quotient family.  This finite sum is not an evaluation
-of an infinite series in a modeled topology; its multiplicativity, inverse
-preservation, identification with the manuscript's bulk gauge, and analytic
-specialization are not proved. -/
+canonical adjacent quotient reductions.  Evaluation is a ring homomorphism,
+so the evaluated gauges are invertible; chosen two-sided inverses also commute
+with reduction, giving an explicit pro-Laurent gauge system.  Every entrywise
+loop coefficient is packaged as an explicit compatible quotient family.  This
+finite sum is not an evaluation of an infinite series in a modeled topology,
+and no Laurent bound uniform across levels, identification with the
+manuscript's bulk gauge, or analytic specialization is proved. -/
 theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
     {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
     [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
@@ -2813,6 +2815,11 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
           (Quantum.multivariablePartialDerivative coordinate) =
         -(connection coordinate) *
           Quantum.multivariableFlatGaugeSeries connection) ∧
+    (∀ series : MvPowerSeries Coordinate (LaurentSeries B),
+      filtration.positiveLaurentEvaluationRingHomAtLevel
+          parameter positive cutoff series =
+        filtration.positiveLaurentEvaluationAtLevel
+          parameter cutoff series) ∧
     (∀ row column degree,
       cutoff ≤ Quantum.multivariableTotalDegree degree →
         filtration.positiveLaurentEvaluationTermAtLevel parameter cutoff
@@ -2827,6 +2834,29 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
         (filtration.positiveLaurentReduction cutoff) =
       filtration.positiveEvaluatedFlatGaugeAtLevel
         parameter cutoff connection ∧
+    IsUnit (filtration.positiveEvaluatedFlatGaugeAtLevel
+      parameter cutoff connection) ∧
+    (filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter cutoff connection *
+          filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+            parameter positive cutoff connection = 1 ∧
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive cutoff connection *
+        filtration.positiveEvaluatedFlatGaugeAtLevel
+          parameter cutoff connection = 1) ∧
+    (filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+        parameter positive (cutoff + 1) connection).map
+        (filtration.positiveLaurentReduction cutoff) =
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+        parameter positive cutoff connection ∧
+    (let system := filtration.positiveEvaluatedFlatGaugeSystem
+        parameter positive connection;
+      (∀ level, system.gauge level =
+          filtration.positiveEvaluatedFlatGaugeAtLevel
+            parameter level connection) ∧
+        ∀ level, system.inverse level =
+          filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+            parameter positive level connection) ∧
     ∀ row column exponent level,
       (filtration.positiveEvaluatedFlatGaugeCoefficientFamily
         parameter positive connection row column exponent).value level =
@@ -2836,6 +2866,8 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
     Quantum.multivariableFlatGaugeSeries_isUnit connection,
     Quantum.multivariableFlatGaugeSeries_equation_of_curvature
       connection curvature,
+    filtration.positiveLaurentEvaluationRingHomAtLevel_apply
+      parameter positive cutoff,
     fun row column degree cutoff_le ↦
       filtration.positiveEvaluatedFlatGaugeAtLevel_term_eq_zero
         parameter positive cutoff connection row column degree cutoff_le,
@@ -2843,6 +2875,13 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
       parameter cutoff connection,
     filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
       parameter positive cutoff connection,
+    filtration.positiveEvaluatedFlatGaugeAtLevel_isUnit
+      parameter positive cutoff connection,
+    filtration.positiveEvaluatedFlatGaugeAtLevel_inverse
+      parameter positive cutoff connection,
+    filtration.positiveEvaluatedFlatGaugeInverseAtLevel_compatible
+      parameter positive cutoff connection,
+    ⟨fun _ ↦ rfl, fun _ ↦ rfl⟩,
     fun _ _ _ _ ↦ rfl⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient

@@ -195,9 +195,10 @@ The 134 reviewer-facing terminals currently verify:
   invertible formal gauge, defines its actual finite evaluation in one cutoff
   quotient, proves every omitted high-degree term zero, and obtains one common
   Laurent lower bound for the evaluated matrix; these finite evaluations
-  commute with canonical adjacent quotient reductions; every entrywise loop
-  coefficient is packaged as a compatible quotient family.  The finite
-  evaluations are not proved multiplicative or invertible; the
+  arise from a ring homomorphism, are invertible, and commute with canonical
+  adjacent quotient reductions together with chosen two-sided inverses, thus
+  forming a pro-Laurent gauge system; every entrywise loop coefficient is
+  packaged as a compatible quotient family.  The
   parameters and evaluated matrix are not identified with the manuscript bulk
   coordinates or gauge, no bound uniform across levels is proved, and no Laurent-valued
   inverse-limit gauge is packaged;
