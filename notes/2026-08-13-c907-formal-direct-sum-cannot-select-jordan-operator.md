@@ -88,13 +88,18 @@ on the whole generalized `zeta_6` formal packet, satisfying:
 2. on a projective bundle, `N` is the consecutive relative-hyperplane
    operator joining the Tate summands, so `X x P^2` contains (3);
 3. on a blowup, the formal comparison intertwines `N` with an actual
-   block-diagonal biproduct of the ambient and shifted center operators; and
+   block-diagonal biproduct of the ambient operator and the center's own
+   possibly nontrivial operators `T^jN_Z`; and
 4. these intertwiners obey the transverse/nested exchange diagrams, or at
-   least give the same object after composing any chosen weak factorization.
+   least their two exchange composites agree up to `N`-linear isomorphism.
 
-Item 3 is stronger than strictness on an associated graded.  Item 4 concerns
-the operator, not only the polynomial shifts.  Together they are exactly the
-minimal Jordan-packet realization hypotheses in the Silver theorem.
+Item 3 is stronger than strictness on an associated graded; it does not
+require a center contribution to be `J_1`.  Item 4 concerns the operator, not
+only the polynomial shifts, and is needed for a presentation-independent
+assignment.  For the final Silver contradiction along one fixed weak
+factorization, fixed object assignments and composable `N`-linear blowup
+biproducts already suffice; full exchange coherence is stronger than that
+single proof needs.
 
 The finite exceptional-root monodromy is **not** a source of (5).  It
 permutes the Fourier branches/valuation levels.  Over characteristic zero its
@@ -120,8 +125,8 @@ following smaller question:
 
 > does unipotent base-hyperplane/Serre continuation on
 > `Bl_(P^3)P^5`, after projection to the generalized primitive-sixth packet,
-> define a nilpotent `N` which is `J_1` on the center contribution and for
-> which the formal blowup comparison is an actual `K[N]`-module biproduct?
+> transport the center's nilpotent `N_(P^3)` so that the formal blowup
+> comparison is an actual `K[N]`-module biproduct?
 
 A positive answer calibrates item 3 in the smallest codimension-two example;
 a nonzero off-diagonal `N` term is the exact obstruction.  Computing another
