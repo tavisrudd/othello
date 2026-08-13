@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 130 reviewer-facing Lean terminals.  These counts summarize the
+There are 131 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 130 reviewer terminals.
+1 complete; 131 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -82,10 +82,14 @@ objects, hypotheses, conclusions, and cautions recorded in
   A Laurent-coefficient specialization constructs the same system over
   `LaurentSeries (R/F^n)` at every level.  Thus each finite-level bulk
   coefficient has integral loop exponents and its own Laurent lower bound;
-  no lower bound uniform in bulk monomials or levels and no Laurent-valued
-  inverse-limit gauge are constructed.
+  finite bulk support at one level is proved to give a single lower bound for
+  the entire matrix-valued bulk series.  Lean does not derive that finite
+  support from the positive filtration, prove one bound across levels, or
+  construct a Laurent-valued inverse-limit gauge.
   Their identification with the manuscript's geometric tower and quantum
-  connection, and uniform Laurent-order bounds, are not formalized.
+  connection is not formalized; neither finite bulk support from the
+  manuscript's positive filtration nor a Laurent lower bound uniform across
+  quotient levels is proved.
   The ordinary one-variable varying
   formal solution, its compatible
   abstract coefficient tower, and its realization over every quotient of an

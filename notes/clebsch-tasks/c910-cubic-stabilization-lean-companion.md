@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 70 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 71 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 130 audited terminals.  The rejecting manuscript inventory covers all
+exports 131 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -186,7 +186,9 @@ the connection into `LaurentSeries (R/F^n)` and constructs the compatible
 normalized invertible gauges.  Each finite-level bulk coefficient therefore
 has integral loop exponents and an individual Laurent lower bound.  No bound
 uniform in bulk monomials or levels and no Laurent-valued inverse-limit gauge
-is constructed.
+is constructed.  Lean separately proves that finite bulk support at one level
+gives one lower bound for the entire matrix-valued series, but does not derive
+that finite support from the positive filtration.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

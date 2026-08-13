@@ -44,6 +44,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVar
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableFlatGaugeUniqueness
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableLaurentFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableLaurentBounds
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2700,6 +2701,26 @@ theorem filteredMultivariableLaurentFlatGauge_quotient_compatible
   exact ⟨(input.connectionAt_gaugeAt_compatible level).1,
     (input.connectionAt_gaugeAt_compatible level).2,
     input.gaugeAt_existsUnique level⟩
+
+/-- At one quotient level, suppose the constructed Laurent-valued gauge has
+only finitely many nonzero bulk-monomial coefficient matrices.  Lean chooses
+one integer below every loop exponent occurring in every matrix entry and
+bulk monomial of that gauge.  This proves the algebraic finite-support bridge
+to bounded Laurent order; it does not derive finite support from the
+manuscript's positive filtration or produce a bound uniform across quotient
+levels. -/
+theorem filteredMultivariableLaurentFlatGauge_uniformBound_of_finiteBulkSupport
+    {Coordinate Index B : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : Quantum.FilteredMultivariableLaurentFlatGaugeInput
+      Coordinate Index B)
+    (level : ℕ)
+    (finiteSupport : Quantum.HasFiniteBulkSupport Coordinate Index
+      (input.filtration.QuotientRing level) (input.gaugeAt level)) :
+    Quantum.HasMatrixBulkUniformLaurentLowerBound Coordinate Index
+      (input.filtration.QuotientRing level) (input.gaugeAt level) :=
+  Quantum.hasUniformLaurentLowerBound_of_finiteBulkSupport
+    (input.gaugeAt level) finiteSupport
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

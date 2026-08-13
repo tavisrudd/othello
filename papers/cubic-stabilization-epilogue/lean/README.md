@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 130 reviewer terminals.
+1 complete; 131 reviewer terminals.
 
-The 130 reviewer-facing terminals currently verify:
+The 131 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -182,8 +182,11 @@ The 130 reviewer-facing terminals currently verify:
   ordinary Laurent-series bulk coefficients maps them into every actual
   quotient and produces compatible normalized invertible gauges whose
   finite-level coefficients have integral loop exponents and individual lower
-  bounds; it does not establish a lower bound uniform in the bulk monomial or
-  level or package a Laurent-valued inverse-limit gauge;
+  bounds; if a level gauge has finite bulk support, Lean proves one Laurent
+  lower bound works for every matrix entry and bulk monomial at that level;
+  finite bulk support is not derived from the positive filtration, no bound
+  uniform across levels is proved, and no Laurent-valued inverse-limit gauge is
+  packaged;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;
