@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MatrixOfIdeals
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AllDegreeAssembly
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
@@ -180,6 +181,32 @@ theorem squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum
       (k.factorial : R) * GraphLattices.squarefreeProductSum terms k :=
   GraphLattices.sum_pow_eq_factorial_mul_squarefreeProductSum
     terms squareZero k
+
+/-- Algebraic all-degree consequence of exact rank-one generation.  Given an
+additive realization whose internal rank-one images square to zero, each
+realized lattice member admits a finite internal rank-one list and the
+division-free factorial expansion in every degree.  No geometric realization
+or descent assertion is built into this theorem. -/
+theorem rankOne_allDegree_squareZeroAssembly
+    {Index R Target : Type*} [CommRing R] [CommRing Target]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
+    (realization : Matrix Index Index R →+ Target)
+    (rankOneSquareZero : ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        realization candidate * realization candidate = 0)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (degree : ℕ) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) ∧
+      forms.sum = form ∧
+      realization form ^ degree =
+        (degree.factorial : Target) *
+          GraphLattices.squarefreeProductSum (forms.map realization) degree :=
+  GraphLattices.allDegree_squareZeroAssembly_of_rankOneGenerated
+    π diagonal cross generated realization rankOneSquareZero form member degree
 
 /-- The abstract `6I-J` calculation: the constant line has eigenvalue one and
 the coordinate-sum-zero hyperplane has eigenvalue six.  No geometric Rosati

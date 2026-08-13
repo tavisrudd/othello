@@ -32,13 +32,15 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 7 absent; 12 fragmentary; 3 conditional;
-1 complete; 30 reviewer terminals.
+1 complete; 31 reviewer terminals.
 
-The 30 reviewer-facing terminals currently verify:
+The 31 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
 - the square-zero divided-power expansion;
+- finite internal rank-one list extraction and its all-degree square-zero
+  realization consequence;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, and its exact depth-one arithmetic at two and three;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,

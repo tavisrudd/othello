@@ -83,12 +83,13 @@
       "manuscript_label": "thm:all-degree-graph-saturation",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_allDegree_squareZeroAssembly"
       ],
-      "objects": "Lean represents a labelled finite list of elements of an arbitrary commutative ring and a recursively defined squarefree product sum; it does not represent graph divisors or cohomology.",
-      "hypotheses": "Each listed ring element has square zero.",
-      "conclusion": "The kth power of the list sum equals k-factorial times the degree-k squarefree product sum, without division.",
-      "cautions": "Identification of rank-one graph divisors, membership in the prescribed graph lattice, comparison with the ordinary divisor-product image, localization, and faithfully flat descent are all absent; no Chow statement is made."
+      "objects": "A weighted matrix-of-ideals submodule, its internal rank-one set and span, an arbitrary commutative target ring, an additive realization of coefficient matrices, and the recursively defined squarefree product sum.",
+      "hypotheses": "The weighted lattice equals its internal rank-one span, and the realization of every internal rank-one matrix has square zero in the target ring.",
+      "conclusion": "Every realized lattice member is represented by a finite list of internal rank-one matrices and, in every degree, its power equals the factorial times the corresponding squarefree product sum, without division.",
+      "cautions": "The theorem exposes rather than proves the geometric realization and rank-two square-zero input. Identification with graph divisor classes, injectivity under the isogeny, comparison with the ordinary divisor-product image, localization, and faithfully flat descent remain absent; no Chow statement is made."
     },
     {
       "manuscript_label": "lem:six-axis-local-chart",

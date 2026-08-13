@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 7 absent, 12 fragmentary, 3 conditional deductions, and 1 complete.
-There are 30 reviewer-facing Lean terminals.  These counts summarize the
+There are 31 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 7 absent; 12 fragmentary; 3 conditional;
-1 complete; 30 reviewer terminals.
+1 complete; 31 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
