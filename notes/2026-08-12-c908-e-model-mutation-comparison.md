@@ -242,3 +242,145 @@ integral argument that never touches `H^3(M,Z)`. The pass-5 lemma's *other*
 use (the relative-Ext object `E` on `M×M`) is not covered by Lemma T and is
 recorded as an open audit item in §6.
 
+
+## 3. The mutation difference, in closed form
+
+Apply Lemma M with `𝒜 := 𝒢_M` the rank-zero (β+γ) family, so
+`[ℰ'] = [p_B^*V] − [𝒢_M(H)]` with `V = Rp_{B*}(𝒢_M(H))` of rank three.
+Total Chern classes multiply: `c(ℰ') = c(p_B^*V)·c(𝒢_M(H))^{-1}`. Write
+`c_k := c_k(𝒢_M(H))`, `G := c_1^{(0,2)}`, and `s := c(𝒢_M(H))^{-1}`, so
+
+\[ s_1 = −c_1,\quad s_2 = c_1^2−c_2,\quad s_3 = −c_1^3+2c_1c_2−c_3,\quad
+   s_4 = c_1^4−3c_1^2c_2+c_2^2+2c_1c_3−c_4 . \]
+
+Because `c_i(V)` is pulled back from `B` (Künneth type `(0,2i)`) and
+`s_1^{(3,·)} = 0`,
+
+\[ c_4(ℰ')^{(3,5)} \;=\; s_4^{(3,5)} \;+\; c_1(V)\,s_3^{(3,3)}
+   \;+\; c_2(V)\,s_2^{(3,1)} , \]
+
+and, extracting blocks exactly as in Lemma N (one odd factor, all other
+factors of `X`-degree zero),
+
+\[ s_2^{(3,1)} = −c_2^{(3,1)},\qquad s_3^{(3,3)} = 2G\,c_2^{(3,1)} − c_3^{(3,3)}, \]
+\[ s_4^{(3,5)} = −3G^2c_2^{(3,1)} + 2c_2^{(0,4)}c_2^{(3,1)} + 2G\,c_3^{(3,3)} − c_4^{(3,5)} . \]
+
+**Theorem F1 (the mutation difference).** With all Chern classes taken of the
+rank-zero model `𝒢_M` (legitimate by Lemma X, which makes every block above
+insensitive to the `⊗p_X^*O(H)`),
+
+\[ \boxed{\;c_4(ℰ')^{(3,5)} \;\equiv\; c_4(𝒢_M)^{(3,5)}
+  \;+\; c_1(V)\,c_3^{(3,3)} \;+\;\bigl(c_2(V) + G^2\bigr)c_2^{(3,1)}
+  \pmod 2 .\;} \]
+
+*Proof.* Substitute the three displays; the `−c_4^{(3,5)}` in `s_4` supplies
+`c_4(𝒢_M(H))^{(3,5)}` with a sign that is invisible mod 2, and the remaining
+integral terms reduce as written (`−3 ≡ 1`, `2·(\text{integral}) ≡ 0`; note
+`2c_2^{(0,4)}c_2^{(3,1)}` and `2Gc_3^{(3,3)}` are even integral classes, and
+`c_1(V)·2Gc_2^{(3,1)}` likewise). Lemma X gives
+`c_4(𝒢_M(H))^{(3,5)} = c_4(𝒢_M)^{(3,5)}`,
+`c_2^{(3,1)}(𝒢_M(H)) = c_2^{(3,1)}(𝒢_M)`,
+`c_3^{(3,3)}(𝒢_M(H)) = c_3^{(3,3)}(𝒢_M)` and `G(𝒢_M(H)) = G(𝒢_M)`. ∎
+
+**Self-consistency check (twist covariance).** Replace `𝒢_M` by
+`𝒢_M ⊗ p_B^*N`. Then `V ↦ V⊗N`, so `c_1(V) ↦ c_1(V)+3n ≡ c_1(V)+n` and
+`c_2(V) ↦ c_2(V)+2c_1(V)n+3n^2 ≡ c_2(V)+n^2`, while `G ↦ G` (rank zero!),
+`c_2^{(3,1)} ↦ c_2^{(3,1)}`, `c_3^{(3,3)} ↦ c_3^{(3,3)} − 2nc_2^{(3,1)} ≡ c_3^{(3,3)}`.
+The right-hand side therefore changes by `n c_3^{(3,3)} + n^2c_2^{(3,1)}`,
+which is exactly the change of `c_4(𝒢_M)^{(3,5)}` predicted by Lemma T at
+`r = 0` — and the left-hand side is unchanged, as Lemma T at `r = 3` requires.
+The formula is covariant under the whole twist torsor. ✓
+
+**Reduction achieved.** The entire ℰ-versus-span comparison is now the single
+mod-two class
+
+\[ Δ \;:=\; c_1(V)\,c_3^{(3,3)}(𝒢_M) \;+\;\bigl(c_2(V)+G^2\bigr)c_2^{(3,1)}(𝒢_M)
+   \;\in\; H^8(X×M,\mathbf F_2), \]
+
+paired against `x ⊗ b^*(Θ∧a)`. Everything else — the shift, the `X`-twist,
+the base-twist ambiguity on both sides, and all of `ch_4` — has cancelled.
+
+## 4. The `t`-independence control already computed half of `Δ`
+
+The span-model certificate carries the twist parameter `t` symbolically:
+`ℒ = O_𝒮(Z'−Z+t·ι^*G)`, i.e.
+
+\[ 𝒢^{(t)} \;=\; 𝒢^{(0)} ⊗ p_B^*O(tG),\qquad n = tG . \]
+
+By Lemma T at `r = 0`, the readout class changes by
+`tG\,c_3^{(3,3)} + t^2G^2c_2^{(3,1)} \pmod 2`. The certificate **verified**
+that the readout `N` is integrally `t`-dependent but **`t`-independent mod
+two** (`notes/2026-08-12-c908-lambda-reduction-and-verdict.md` §4, controls).
+Taking `t` odd, that verified control is precisely
+
+\[ \int_{X×M} (x⊗b^*(Θ∧a))\cdot\bigl[\,G\,c_3^{(3,3)} + G^2c_2^{(3,1)}\,\bigr]
+   \;\equiv\; 0 \pmod 2 \qquad\text{for every tested pair.} \tag{4.1} \]
+
+So if `c_1(V) ≡ G` and `c_2(V) ≡ 0 (mod 2)`, then `Δ` is exactly the class of
+(4.1) and the ℰ-model readout is **congruent to the span-model readout**,
+giving `λ_ℰ = λ_𝒢 = 0`. The comparison has been reduced to the mod-two Chern
+classes of one rank-three bundle on the base.
+
+## 5. What `V` is, and the descent question
+
+### 5.1 `V` is the relative blow-down bundle; `𝒢` really does descend
+
+Fibrewise `V_m = H^0(S_m, O_{S_m}(D_m))` with `S_m = X ∩ P_{ℓ,ℓ'}` a cubic
+surface and `D_m = (ℓ'−ℓ) − K_{S_m}`. On a smooth cubic surface,
+`(ℓ'−ℓ)^2 = −2`, `(ℓ'−ℓ)·K = 0`, `K^2 = 3`, so
+
+\[ D^2 = 1,\qquad D·K = −3,\qquad χ(O_S(D)) = 1 + \tfrac{D^2−D·K}{2} = 3, \]
+
+and `h^{>0} = 0`. A class with `D^2 = 1`, `D·K = −3` on a cubic surface is
+exactly a **blow-down class** (the pullback of a line under one of the 72
+morphisms `S → P^2`), and `|D|` realizes that blow-down. So `P(V^∨)` is the
+relative `P^2` and `𝒮 → P(V^∨)` the relative blow-down at six sections.
+
+This also settles a live inconsistency in the corpus. The classes
+`δ = ℓ'−ℓ` for ordered skew pairs are the `72` roots of the `E_6` lattice
+`K^⊥ ⊂ \mathrm{Pic}(S)`, and there are `27·16 = 432` ordered skew pairs, so
+`(ℓ,ℓ') ↦ ℓ'−ℓ` is exactly `6:1` onto the roots. That is the same `6` as the
+degree of `ẽ_{β,γ} : Bl_Δ(F×F) → M_σ^s(β+γ)` and it factors the span map's
+degree as `432 = 6 × 72` (LLPZ's 72), so:
+
+> **the six points of a general `q`-fibre carry the *same* divisor class on
+> the *same* cubic surface, hence isomorphic sheaves.** The span-model family
+> therefore **does** descend: `(1×q)^*𝒢_M ≅ 𝒢 ⊗ p_Y^*N` for a line bundle
+> `N` on `Y`, `𝒢_M` the universal family of `M_σ^s(β+γ)`.
+
+This contradicts the parenthetical in
+`notes/2026-08-12-c908-lambda-reduction-and-verdict.md` §1 / audit Finding G3
+item 3 ("`𝒢` does not descend along `q`", justified by "`ℒ` is
+swap-antisymmetric while the deck action swaps `Z ↔ Z'`"). The factor swap
+`σ` is **not** a deck transformation of `q`: `ψ∘σ = −ψ`, so `σ` covers
+`(−1)_J`, not the identity. The correct statement is that `σ` descends to the
+involution of `M` induced by `(−1)_J`, under which `𝒢_M ↦ 𝒢_M^{[-1]}`. The
+consequence is favourable: the span-model integral
+`∫_{X×Y}c_4(𝒢)(x⊗μ^*T_a)` differs from the honest downstairs readout
+`∫_{X×M}c_4(𝒢_M)(x⊗b^*(Θ∧a))` only by the `p_Y^*N`-twist correction of
+Lemma T at `r = 0` — the same shape as `Δ`, and again controlled by (4.1)
+whenever `c_1(N) ≡ G` or `≡ 0`.
+
+### 5.2 The one remaining unknown
+
+Both open items are the same two mod-two classes:
+
+\[ c_1(V) \bmod 2 \in H^2(M,\mathbf F_2), \qquad c_2(V) \bmod 2 \in H^4(M,\mathbf F_2), \]
+
+together with the analogous `c_1(N)` for the descent twist. By
+Grothendieck–Riemann–Roch for `p_B : X×B → B`, with
+`\mathrm{td}(T_X) = 1 + H + \tfrac23H^2 + \tfrac13H^3` and
+`e^{H}\mathrm{td}(T_X) = 1 + 2H + \tfrac{13}{2}[\ell] + 5[\mathrm{pt}]`
+(using `H^2 = 3[\ell]`, `H^3 = 3[\mathrm{pt}]`), writing
+`ch(𝒢) = A_0 + A_1H + A_2[\ell] + A_3[\mathrm{pt}] + (\text{odd-}X\text{ terms})`
+with `A_i ∈ H^*(B)`:
+
+\[ ch(V) \;=\; 5A_0 + \tfrac{13}{2}A_1 + 2A_2 + A_3 . \]
+
+*Rank check.* In `B`-degree zero `A_0 = 0`, `A_1 = 1`, `A_2 = −\tfrac32`,
+`A_3 = −\tfrac12` (from the fibrewise `ch(𝒢_m) = (0,H,−H^2/2,−H^3/6)`), giving
+`\mathrm{rk}\,V = \tfrac{13}{2} − 3 − \tfrac12 = 3` ✓.
+
+So `c_1(V)` and `c_2(V)` are determined by the `B`-degree-2 and -4 parts of
+the same `ι_*(D^k)` inventory the committed main-term certificate already
+builds. This is a bounded extension of that certificate, not new geometry.
