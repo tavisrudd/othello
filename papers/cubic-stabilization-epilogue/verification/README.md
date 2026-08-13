@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 4 absent, 15 fragmentary, 3 conditional deductions, and 1 complete.
-There are 71 reviewer-facing Lean terminals.  These counts summarize the
+There are 73 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 71 reviewer terminals.
+1 complete; 73 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -47,9 +47,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   its required injectivity on the torsion-free integral lattice, and match the
   geometric graph classes with the canonical elliptic-source exterior model
   (`thm:all-degree-graph-saturation`).
-- Identify the actual six-axis kernel, its slopes at two and three, and
-  persistence over each connected smooth component
-  (`lem:six-axis-local-chart`).
+- Identify the actual six-axis kernel with the now-formalized explicit
+  quadratic and scalar residue-field slope models, and prove persistence over
+  each connected smooth component (`lem:six-axis-local-chart`).
 - Supply the away-from-six comparison and local-to-global integral membership
   that specializes the graph theorem to `Theta^4/4!`
   (`thm:six-axis-divided-powers`).

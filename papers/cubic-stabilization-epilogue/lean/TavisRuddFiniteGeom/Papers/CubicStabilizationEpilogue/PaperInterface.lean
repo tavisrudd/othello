@@ -8,6 +8,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Local
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1039,6 +1040,38 @@ theorem sixAxisLocalChart_orthogonal_block
     GraphLattices.sixAxisComplementVector_pairing inverseFive inverse,
     GraphLattices.sixAxisComplementUnitMatrix_det,
     GraphLattices.sixAxisComplementUnitMatrix_det_prime_to_two_three⟩
+
+/-- Explicit model of the characteristic-two residue-field slope type
+appearing in the manuscript: two quadratic companion blocks on a
+set of four coordinates, modeling the four-dimensional depth-one block.  The
+matrix is annihilated by `t²+t+1`, is not scalar, and that polynomial has no
+root in `F₂`.  This is a
+residue-field model, not an identification with the geometric kernel. -/
+theorem sixAxisLocalChart_twoPrimary_quadraticSlopeModel :
+    (GraphLattices.sixAxisTwoQuadraticSlope *
+          GraphLattices.sixAxisTwoQuadraticSlope +
+        GraphLattices.sixAxisTwoQuadraticSlope + 1 = 0) ∧
+      (∀ value : ZMod 2,
+        GraphLattices.sixAxisTwoQuadraticSlope ≠
+          Matrix.scalar (Fin 4) value) ∧
+      (∀ value : ZMod 2, value ^ 2 + value + 1 ≠ 0) := by
+  exact ⟨GraphLattices.sixAxisTwoQuadraticSlope_polynomial,
+    GraphLattices.sixAxisTwoQuadraticSlope_not_scalar,
+    GraphLattices.zmodTwo_quadraticSlopePolynomial_no_root⟩
+
+/-- Explicit model of the characteristic-three residue-field slope type
+appearing in the manuscript, represented on four coordinates modeling the
+four-dimensional depth-one block.  It is literally a scalar-algebra image and
+therefore commutes with every coefficient block.  This is a
+residue-field model, not an identification with the geometric kernel. -/
+theorem sixAxisLocalChart_threePrimary_scalarSlopeModel (value : ZMod 3) :
+    GraphLattices.sixAxisThreeScalarSlope value =
+        algebraMap (ZMod 3) (Matrix (Fin 4) (Fin 4) (ZMod 3)) value ∧
+      ∀ coefficient : Matrix (Fin 4) (Fin 4) (ZMod 3),
+        coefficient * GraphLattices.sixAxisThreeScalarSlope value =
+          GraphLattices.sixAxisThreeScalarSlope value * coefficient := by
+  exact ⟨GraphLattices.sixAxisThreeScalarSlope_eq_algebraMap value,
+    GraphLattices.sixAxisThreeScalarSlope_commutes value⟩
 
 /-- Exact projective-line classification and counts behind the finite-field
 gluing packets.  Every point is uniquely the vertical line or a scalar graph;

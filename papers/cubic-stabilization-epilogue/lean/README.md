@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 71 reviewer terminals.
+1 complete; 73 reviewer terminals.
 
-The 71 reviewer-facing terminals currently verify:
+The 73 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -70,7 +70,11 @@ The 71 reviewer-facing terminals currently verify:
   lattice over a DVR;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
-  orthogonal local block, and its exact depth-one arithmetic at two and three;
+  orthogonal local block, its exact depth-one arithmetic at two and three, and
+  explicit residue-field slope models: the block-diagonal matrix formed from
+  two copies of the companion matrix of the irreducible polynomial
+  `t^2+t+1` over `F2`, and a scalar block over `F3`, without identifying
+  those models with the geometric principal kernel;
 - the projective-line classification into scalar graphs and the vertical
   line, the five- and four-member finite-field packet counts, and the
   isotropic half-dimension calculation for self-adjoint graph slopes;

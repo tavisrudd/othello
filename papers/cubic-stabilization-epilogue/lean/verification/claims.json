@@ -135,12 +135,14 @@
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSmith_unit_line_and_depth_one_at_two_three",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_orthogonal_block"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_orthogonal_block",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_twoPrimary_quadraticSlopeModel",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_threePrimary_scalarSlopeModel"
       ],
-      "objects": "The explicit five-axis Gram matrix 6I-J, the first coordinate vector, the four displayed complement vectors e_j+(1/5)e_1, their four-dimensional integral unit block 5I-J, and the integral Smith diagonal diag(1,6,6,6,6).",
-      "hypotheses": "The orthogonal calculation is over an arbitrary commutative ring with an explicitly supplied inverse of five. The depth calculation is integral arithmetic and uses no geometric hypothesis.",
-      "conclusion": "Lean proves the first line has norm five, the four complement vectors are orthogonal to it, their Gram matrix is exactly (6/5)(5I-J), det(5I-J)=125 is prime to two and three, and the four non-unit Smith entries have exact depth one at both primes.",
-      "cautions": "This proves the complete coefficient-lattice decomposition calculation but not the actual six-axis geometric kernel, the principal quotient graph, its quadratic finite-etale slope at two, its scalar slope at three, or persistence through the connected smooth component. The passage from determinant prime-to-p to the formal Z_p notion of a unimodular lattice is represented arithmetically rather than through a dedicated p-adic lattice structure."
+      "objects": "The explicit five-axis Gram matrix 6I-J, the first coordinate vector, the four displayed complement vectors e_j+(1/5)e_1, their four-dimensional integral unit block 5I-J, the integral Smith diagonal diag(1,6,6,6,6), a four-by-four matrix over F2 consisting of two companion blocks for t^2+t+1, and a four-by-four scalar matrix over F3.",
+      "hypotheses": "The orthogonal calculation is over an arbitrary commutative ring with an explicitly supplied inverse of five. The depth calculation and the F2 slope-model calculation use no geometric hypothesis. The F3 slope-model terminal is parameterized by an arbitrary scalar value in F3.",
+      "conclusion": "Lean proves the first line has norm five, the four complement vectors are orthogonal to it, their Gram matrix is exactly (6/5)(5I-J), det(5I-J)=125 is prime to two and three, and the four non-unit Smith entries have exact depth one at both primes. It also verifies that the displayed F2 slope model is annihilated by t^2+t+1, is non-scalar, and that this polynomial has no F2 root; the displayed F3 model is literally scalar and commutes with every coefficient matrix.",
+      "cautions": "The two residue-field matrices are explicit algebraic models only. Lean does not prove that the actual six-axis geometric principal kernel or quotient graph has either model as its slope, does not construct the quadratic finite-etale algebra at two or identify the actual three-primary slope with a one-point finite-etale block, and does not prove persistence through the connected smooth component. Thus the geometric assertions about the actual kernels and slopes remain unformalized. The two finite F2 checks use ordinary kernel reduction via decide, with no native-code decision procedure, external certificate, or oracle; the F3 claims are symbolic. The passage from determinant prime-to-p to the formal Z_p notion of a unimodular lattice is represented arithmetically rather than through a dedicated p-adic lattice structure."
     },
     {
       "manuscript_label": "thm:six-axis-divided-powers",
