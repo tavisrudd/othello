@@ -68,7 +68,9 @@ derivations have regular tangent lifts on the corresponding coarse stratum:
 
 The logarithmic residue derivations are invariant on the Kummer cover and
 descend; ordinary residue derivatives are used only on a genuine unimodular
-scheme chart or after invariance is checked.  For all 70 `unit` records in
+scheme chart after chartwise descent is checked.  This descent is part of the
+explicit fan-coverage hypothesis below, not an output of the Kummer digest.
+Conditional on it, for all 70 `unit` records in
 `2026-08-12-c907-l-mask-coarse-polar.json`, the displayed residue unit is the
 reduction (1) of a regular tangent derivative.
 

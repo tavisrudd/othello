@@ -4,9 +4,10 @@
 
 **Verdict:** the bounded-value absolute-schön route eliminates the need for an
 explicit 97,709-chart *scheme* construction to obtain a proper regular model
-of the smaller very-affine graph over the original `delta` DVR.  It must be
-stated with two qualifications: attachment across the retained translated
-divisors `U=0,V=0` to the original graph is separate, and
+of the marked graph over the original `delta` DVR.  The intrinsic theorem is
+first proved on the smaller very-affine graph; the common-ambient strict-
+transform lemma below restores `U=0,V=0`.  It must still be stated with the
+qualification that
 the certified initials are smooth as schemes with `L` allowed to vary.  This
 proves regularity of the total graph by the full torus action; it does not
 prove smoothness over the fixed value torus `S=G_m,L`.  The latter is exactly
@@ -34,19 +35,25 @@ The circuit argument then proves that the resulting initial scheme in
 `T_7 x S` is smooth or empty.
 
 Here `T_7` inverts the auxiliary coordinates `U,V`, so this very-affine open
-omits the retained translated divisors `B=1` and `C=1`.  This does not discard
-them set-theoretically from a common marked closure.  On the generic fibre,
-eliminate `U=1-B` and
-`V=1-C`; the graph ring is a localization of an integral Laurent polynomial
-ring, and `UV` is a non-zero-divisor.  Hence the locus `UV!=0` is
-schematically dense in the graph with `U,V` allowed to vanish.  Consequently,
-**once a common marked ambient and morphism from the original graph have been
-supplied**, both generic graphs have the same schematic closure there.  The
-intrinsic tropical construction alone does not supply that comparison; the
-existing Kummer atlas records the needed marked charts but has not yet proved
-their strict Cartier-generator attachment.  Thus this note does not claim
-that its regular compactification is already the desired original graph model
-through `U=0,V=0`.
+omits the retained translated divisors `B=1` and `C=1`.  The common ambient
+comparison is nevertheless canonical.  The fan `Sigma_trop` refines the
+product of the two tripod fans and the chosen `y` fan.  Its toric scheme
+therefore maps to the product of the two standard pair-of-pants
+compactifications and the `y` compactification.  The closure of
+`B+U=1` in its toric pair-of-pants surface is the marked projective line;
+its three toric points are exactly `B=0`, `U=0` (that is `B=1`), and
+`B=infinity`, and similarly for `C`.
+
+On the generic graph, eliminate `U=1-B` and `V=1-C`.  Its ring is a
+localization of an integral Laurent polynomial ring, and `UV` is a
+non-zero-divisor.  Thus the `UV!=0` graph is schematically dense in the
+original graph which retains `U=0,V=0`.  Strict transform under the preceding
+toric morphism is, by definition, closure of the inverse image of this common
+dense open.  It is consequently the same scheme whether one starts from the
+very-affine graph or from the original marked Cartier graph.  The translated
+divisors reappear in this closure; they are not saturated away.  They are
+toric boundary for construction purposes but are forgotten in the later
+**actual** control partition.
 
 The filtered-regular-sequence step is legitimate here directly on the
 original very-affine graph.  It is not using a strict-transform chart: the
@@ -277,7 +284,7 @@ tripod rays.
 
 ## 5. What this closes and what it cannot close
 
-The corrected theorem supplies for the smaller very-affine graph:
+The corrected theorem and common-ambient lemma supply for the marked graph:
 
 - a proper regular compactification over `R x S`;
 - SNC total boundary support;
@@ -287,8 +294,6 @@ The corrected theorem supplies for the smaller very-affine graph:
 
 It does not supply:
 
-- the common-ambient strict-closure attachment across `U=0,V=0` needed to
-  identify this directly with the original graph model;
 - strict `L`-submersivity on actual boundary strata;
 - a finite list of those *coarse* strata after auxiliary translated divisors
   are forgotten;
