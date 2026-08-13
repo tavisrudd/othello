@@ -1,0 +1,62 @@
+// C907 dense-torus bounded-value critical-scheme replay.
+//
+// It works over Q(delta,Q), where delta and Q are coefficient units, and
+// saturates only by the dense torus y1*y2*y3*B*C.  The six equations use P as
+// an auxiliary variable for Q/(YBC), so no denominator has been discarded.
+//
+// Replay:
+// nix shell nixpkgs#singular -c Singular -q \
+//   notes/2026-08-12-c907-bounded-value-interior-replay.sing
+
+LIB "elim.lib";
+
+ring r = (0,d,q),(y1,y2,y3,B,C,P),dp;
+poly D = y1*y2*y3*B*C;
+ideal dense = D;
+
+ideal I =
+  y1-P,
+  y2-P,
+  y3-P,
+  P*y1*y2*y3*B*C-q,
+  d^2*P+B*(1-C),
+  d^2*P+C*(1-B);
+ideal J = sat(I,dense);
+
+// The exact eliminated torus scheme: b=B=C, y_i=P, P=-d^(-2)b(1-b),
+// b^6(1-b)^4=q d^8.  The last generator is written polynomially.
+ideal K =
+  y1-P,
+  y2-P,
+  y3-P,
+  C-B,
+  d^2*P+B*(1-B),
+  B^6*(1-B)^4-q*d^8;
+ideal KT = sat(K,dense);
+
+ideal JK = reduce(std(J),std(KT));
+ideal KJ = reduce(std(KT),std(J));
+
+if (JK[1]==0 && JK[2]==0 && JK[3]==0 && JK[4]==0 && JK[5]==0 && JK[6]==0
+ && KJ[1]==0 && KJ[2]==0 && KJ[3]==0 && KJ[4]==0 && KJ[5]==0 && KJ[6]==0)
+{
+  print("SCHEME saturated dense-torus critical ideal equals univariate model PASS");
+}
+else { print("SCHEME FAIL"); }
+
+// The 6-by-6 Jacobian determinant is a unit times the derivative of the
+// univariate equation; its reduced factor makes the discriminant condition
+// explicit.  It is nonzero away from B=3/5.
+matrix MK = jacob(K);
+poly detK = det(MK);
+print("UNIVARIATE_JACOBIAN=" + string(detK));
+poly hprime = 2*B^5*(1-B)^3*(3-5*B);
+if (detK-d^2*hprime==0)
+{ print("NONDEGENERACY univariate Jacobian=d^2*hprime PASS"); }
+else { print("NONDEGENERACY FAIL"); }
+
+// At B=3/5 the univariate equation forces this unique exceptional parameter.
+// Thus every sufficiently small nonzero delta has ten simple torus points.
+poly discrValue = (3^6)*(2^4);
+print("EXCEPTIONAL_RELATION=5^10*q*d^8-" + string(discrValue));
+quit;
