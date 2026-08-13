@@ -49,13 +49,40 @@ span construction over `B∖Δ ≅ Y∖E`; hence their ch's differ by classes
 supported on those loci, and since `c_4` is a polynomial in `ch_{1..4}`,
 every term of the `c_4`-difference carries a supported factor
 (`j_*u·v = j_*(u·j^*v)`), so the `c_4`-difference is itself supported there
-and pairs to zero by (1). The `X×M`-comparison is test-side, not sheaf-side
-(`q` is generically 6:1 and `𝒢` does not descend along it): for any family
-pulled back from `X×M`, the projection formula gives
+and pairs to zero by (1). The `X×M`-comparison is the projection-formula
+transfer: for any family pulled back from `X×M`,
 `∫ c_4((1×q)^*𝒰)·(x⊗μ^*T) = ∫ c_4(𝒰)·(x⊗q_*μ^*T) = ∫ c_4(𝒰)·(x⊗b^*(Θ∧a))`,
-and for the span-model family the downstairs readout is defined through this
-transfer. Details: `notes/2026-08-12-c908-lambda-reduction-audit.md`,
-Finding G3. ∎
+and the span model **is** such a pullback up to a base twist, by §1.1. Support
+details: `notes/2026-08-12-c908-lambda-reduction-audit.md`, Finding G3. ∎
+
+## 1.1 The span model descends along `q`
+
+**Lemma D.** `𝒢` descends along the degree-six map `q : Y → M`: writing `𝒢_M`
+for the universal family of `M_σ^s(β+γ) ≅ M`, there is a line bundle
+`N ∈ Pic(Y)` with `(1×q)^*𝒢_M ≅ 𝒢 ⊗ p_Y^*N`.
+
+*Proof.* Over a general point of `M` the fibre of the span construction is
+`ι_*O_{S_{ℓ,ℓ'}}(ℓ'−ℓ)`, so it is enough that the six points of a `q`-fibre
+carry the same cubic surface and the same divisor class on it. The span map
+factors through `M`: `deg(g : F×F ⇢ (P^4)^∨) = 27·16 = 432` (ordered pairs of
+skew lines on a smooth cubic surface — each of the 27 lines meets 10 others,
+hence is skew to 16) and `deg(M_σ^s(β+γ) ⇢ (P^4)^∨) = 72` (LLPZ Example 5.7),
+so the surface `S_{ℓ,ℓ'}` is constant on `q`-fibres. On `S`, adjunction gives
+`ℓ·K_S = −1` for every line, so `δ = ℓ'−ℓ` satisfies `δ·K_S = 0` and, for
+skew lines, `δ^2 = −2`: `δ` is a **root of the `E_6` lattice `K_S^⊥`**, of
+which there are exactly 72. The map `(ℓ,ℓ') ↦ δ` from the 432 ordered skew
+pairs to the 72 roots is `W(E_6)`-equivariant, and `W(E_6)` is transitive on
+both sets, so it is surjective with all fibres of size `432/72 = 6`. Those six
+pairs are exactly a `q`-fibre, and they give the same divisor class, hence the
+same sheaf. Universality of `𝒢_M` then yields the stated isomorphism up to a
+twist by a line bundle from the base. ∎
+
+Consequently the readout computed below is the honest downstairs readout of
+`𝒢_M`, up to the rank-zero base-twist correction recorded in §4. The factor
+swap `σ` is **not** a deck transformation of `q` — it covers `(−1)_J`, since
+`ψ∘σ = −ψ` — which is why the swap-antisymmetry of `ℒ` is no obstruction to
+descent. Derivation, and the superseded reasoning it replaces:
+`notes/2026-08-12-c908-e-model-mutation-comparison.md` §5.1.
 
 ## 2. The reduction theorem: `−6·ch_4` kills every deep defect
 
@@ -180,12 +207,25 @@ passing: fiberwise `ch`, rigidity (`N ≡ λ·S` with `λ = 0`), the ablation
 compared in true cohomology through slotwise `a_*`). `N` is t-dependent
 integrally but t-independent mod two, as the twist lemma requires.
 
-Scope of the negative, unchanged from the pass-8 spec §0: this settles the
-λ-bit for the **span-model family `𝒢`**. Transferring the negative to the
-`ℰ`-model universal family needs the mutation comparison (extraction item
-F, deferred). The channel-population question for `c_4(𝒢)` is closed
-negative; the `(1,5)` channel itself remains open only through
-non-span-model sources.
+Scope of the negative. This settles the λ-bit for the **span-model family
+`𝒢`** in the normalization used here, i.e. for the descended family `𝒢_M` up
+to the base twist of Lemma D. That twist is not free for a rank-zero family:
+by `notes/2026-08-12-c908-e-model-mutation-comparison.md` Lemma T, twisting by
+`N` changes the `(3,5)` readout class by `n c_3^{(3,3)} + n^2 c_2^{(3,1)}` mod
+two, `n = p_Y^*c_1(N)`. The `t`-control above is exactly the `n = tG` case of
+that formula, and it is verified even — which is what makes the transfer to
+the universal family go through.
+
+**Transfer (extraction item F, discharged 2026-08-12).** The mutation
+comparison is carried out in
+`notes/2026-08-12-c908-e-model-mutation-comparison.md`: the Serre functor
+relating `M_σ^s(β+γ)` to `M_X(v)` acts on the odd `X`-legs of `ch` by `∓1`,
+the residual even-block change is `c_1(V)c_3^{(3,3)} + (c_2(V)+G^2)c_2^{(3,1)}`
+mod two for the rank-three relative blow-down bundle `V = Rp_*(𝒢_M(H))`, and
+every term is even. Hence `λ_ℰ = λ_𝒢 = 0`: the channel-population question is
+closed negative for the `ℰ`-model universal family as well, and the `(1,5)`
+channel remains open only through non-deformation-canonical, deck-asymmetric
+sources.
 
 ## 5. Certificate bundle
 
@@ -227,13 +267,19 @@ review (clean).
   affect a mod-two `c_4`-readout (§2). This retroactively dissolves the
   pass-8 R-stratum frontier and should be reusable wherever the corpus
   reads `c_4` mod 2.
-- **Open (the standing crown-adjacent question, sharpened):** with the span
-  model dead, an odd `(1,5)` class must come from outside every source now
-  excluded: pullbacks, exceptional transforms, the span/incidence product
-  dictionary, and `c_4` of the span-model family. The `ℰ`-model mutation
-  comparison (extraction item F) is the last named candidate; after it, the
-  informed conjecture is that the channel obstruction is real and `E`-depth
-  parity is the invariant blocking it.
+- **Settled: the span model descends** along the degree-six map (Lemma D,
+  §1.1), the number six being the size of the fibres of
+  `(ℓ,ℓ') ↦ ℓ'−ℓ` from the 432 ordered skew pairs onto the 72 roots of `E_6`.
+  The factor swap covers `(−1)_J` and is not a deck transformation, so
+  swap-antisymmetry never obstructed descent.
+- **Settled (successor, 2026-08-12): the `ℰ`-model transfer.** Extraction item
+  F is discharged and `λ_ℰ = 0`
+  (`notes/2026-08-12-c908-e-model-mutation-comparison.md`, Theorem F2). With
+  the span model dead and the universal family dead, an odd `(1,5)` class must
+  come from outside every named source: pullbacks, exceptional transforms, the
+  span/incidence product dictionary, `c_4` of the span model, and `c_4` of the
+  `ℰ`-model. The informed conjecture stands that the channel obstruction is
+  real and `E`-depth parity is the invariant blocking it.
 - **Settled (audit debt):** the reduction theorem's hostile audit is done
   (§7); its one major finding (the `δ_4`-integrality step) is repaired in
   the §2 proof above, and the §3 control identity was verified clean.

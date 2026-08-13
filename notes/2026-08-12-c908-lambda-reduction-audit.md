@@ -14,6 +14,17 @@ Status: COMPLETE. Follow-up 2026-08-12: the G1–G3 repairs and NITs N1–N3
 were applied to the target note in place (its §1–§3 proofs, §6 ledger, §7
 audit status); the target's reduction-audit-pending flag is cleared.
 
+Second follow-up 2026-08-12 (correction to this audit): **Finding G3 item 3's
+premise is false.** The span model *does* descend along `q` — the factor swap
+covers `(−1)_J` (`ψ∘σ = −ψ`) and is therefore not a deck transformation, and
+the sheaf `ι_*O_{S_{ℓ,ℓ'}}(ℓ'−ℓ)` depends only on the `E_6` root `ℓ'−ℓ`, onto
+which the 432 ordered skew pairs map 6:1. See Lemma D of the target note §1.1
+and `notes/2026-08-12-c908-e-model-mutation-comparison.md` §5.1. G3 item 3's
+*conclusion* — that the `X×M` step is the projection-formula transfer, not a
+supported-difference comparison — is unaffected and still correct; only the
+"no descent" justification is withdrawn, and the corrected picture makes the
+transfer to the universal family available (extraction item F, discharged).
+
 ## Verdict (up front)
 
 - **The reduction theorem (§2) STANDS, but not by the proof as written.** The
