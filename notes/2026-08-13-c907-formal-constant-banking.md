@@ -204,6 +204,33 @@ Once such a morphism exists, Section 1 proves that all its horizontal scalar
 values lie in `C`, and the intended telescope becomes valid without any
 Laurent-coordinate descent.
 
+### Minimal Stokes countermodel
+
+The logical gap is already visible in rank two.  Let the formal primary line
+be `P=Ce_1`, let a second exponential factor be `Ce_2`, and let the two
+sectorial fiber functors differ by the Stokes shear
+
+\[
+ S(e_1)=e_1+a e_2,
+ \qquad S(e_2)=e_2,
+ \qquad a\ne0.
+ \tag{9}
+\]
+
+For the constant covector `ell(e_1)=0`, `ell(e_2)=1`, the restriction is zero
+in the first sector and nonzero in the second:
+
+\[
+ \ell(e_1)=0,
+ \qquad \ell(S(e_1))=a.
+ \tag{10}
+\]
+
+All displayed values are horizontal complex constants.  Hence neither the
+constant-field lemma nor constancy in parameters prevents the Boolean from
+changing.  What excludes (9) geometrically must be an actual Stokes-filtration
+or rank-morphism theorem.
+
 ## 5. Failure modes excluded
 
 1. **Nonzero formal evaluation.**  No old Novikov variable is assigned a
@@ -238,6 +265,49 @@ Laurent-coordinate descent.
 - **TT:** constants do not remember their domain.  The missing datum is the
   natural transformation that says which moving formal-primary subspace the
   constant covector is restricted to.
+
+### Regression against AA2
+
+The one-arrow dimension bound is not iterable by inspection.  Blow up
+`P^2` at a point and then blow up a point on the first exceptional curve.  In
+the resulting surface the strict transform `C=E_1-E_2` is a `(-2)`-curve and
+
+\[
+ -K\mathbin\cdot C=0.
+ \tag{11}
+\]
+
+Every multiple `dC` is an effective stable-map class with the same
+anticanonical degree.  Hence the genus-zero dimension axiom does not bound the
+old exceptional degree after the second arrow.  Taking the product with
+`P^3` gives the same obstruction in dimension five, realized by two
+codimension-two blow-ups with centers `point x P^3`.  Therefore a common
+multi-analytic receiver cannot be justified by repeating the single-arrow
+polynomiality argument; it needs actual convergence/resummation or a different
+coefficient category.
+
+### Audit of phase globalization by rotating `q`
+
+A proposed repair fixes one global `z`-phase `theta_0` and rotates each
+arrow's new exceptional value `q_0` so that its certified aperture contains
+`theta_0`.  This does align the **angular** fiber functors: the source bounds
+are conditions on `arg(z/q)`, and level-one uniqueness identifies two sums of
+the same formal system on the same aperture.
+
+It does not align the **parameter** fiber functors.  A sectorial fiber functor
+is specified by the `z` direction together with a quantum-parameter basepoint
+and continuation path.  At arrow one, the intermediate variety is realized
+with its new exceptional variable `q_1=q_1^0 in C*`.  At arrow two, that same
+`q_1` is an old ambient formal variable.  Multisummation uniqueness does not
+compare systems over these two noncomparable coefficient settings.  To make
+the basepoints agree one would have to evaluate the old formal `q_1` at
+`q_1^0`, the illegal map the proposal was meant to avoid.  The `(-2)`-curve
+regression above shows that the required old-exceptional tails need not even
+truncate.
+
+Therefore `q`-rotation solves the finite global-phase bookkeeping but not the
+composition gate.  It becomes useful only after a common parameter receiver
+or a parameter-functorial `P_6 -> 1` morphism is constructed.
 
 ## Sources
 

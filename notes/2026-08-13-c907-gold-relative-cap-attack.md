@@ -386,6 +386,10 @@ packet differently by a Stokes shear.  The exact gate is a functorial
 morphism `P_6 -> 1`, a proof that the relevant Stokes transitions preserve
 the Gamma rank restriction, or one coherent two-arrow/whole-zigzag receiver.
 See `2026-08-13-c907-formal-constant-banking.md`.
+The latter is not obtained by iterating the one-arrow dimension bound: two
+successive point blow-ups of `P^2` create an effective `(-2)`-curve of
+anticanonical degree zero, hence unbounded old-exceptional stable-map tails;
+crossing with `P^3` gives the fivefold regression.
 
 Quantum Kunneth and product naturality of the extended Gamma integral
 structure give \(m+1\) copies of the cubic packet on
