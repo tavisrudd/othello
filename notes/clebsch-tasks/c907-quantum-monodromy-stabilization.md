@@ -233,6 +233,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   must be transported as a strict blowup operator.  With fixed formal
   component maps, the two-block obstruction is an explicit class in
   `Ext^1_(K[N])(W,V)`; multi-block splitting is recursive.
+- On every connected non-turning parameter locus, the whole generalized
+  `zeta_6` formal-primary sector is preserved by line-bundle Galois
+  monodromy: parameter transport commutes with formal angular monodromy by
+  uniqueness of the relative formal decomposition.  Iritani's Gamma formula
+  identifies that parameter loop with tensor by the line bundle, so
+  `N_L=1-tau_L` is already an intrinsic nilpotent on the minimal Silver
+  packet.  Product naturality calibrates the endpoint as `J_3`.  The
+  remaining new bridge is narrower: ambient primitive-sixth projection must
+  annihilate Gamma-framed classes supported in absolute dimension at most
+  two, and the general blowup comparison must be equivariant for the base
+  loop.  See `../2026-08-13-c907-formal-primary-galois-stability.md`.
 - A concrete conditional source is now isolated.  For a model
   `f:Y -> P^2`, tensor by `L=f^*O(1)` gives `N_L=1-tau_L`: projection formula
   makes it exactly block diagonal under Orlov blowups, its endpoint on

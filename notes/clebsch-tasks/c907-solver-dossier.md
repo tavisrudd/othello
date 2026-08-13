@@ -67,6 +67,16 @@ strictness, Yu/Zhang for topology, Kuznetsov plus Kollar for the carrier bound.
 4. **Assembly.**  Only after 1--3: operation-framed Krull--Schmidt object,
    composition coherence, and positive weak-factorization telescope.
 
+Line-bundle tensor now acts intrinsically on the whole generalized
+primitive-sixth formal sector on a non-turning parameter locus: the parameter
+loop commutes with formal monodromy, and Iritani's Gamma formula identifies it
+with tensor by the line bundle.  Product naturality supplies the endpoint
+`J_3`.  Do not spend work reconstructing that commutation from directed
+Stokes data.  The remaining bridge is supported Gamma/Gysin annihilation in
+absolute dimension at most two and base-loop equivariance of the general
+blowup comparison.  See
+`../2026-08-13-c907-formal-primary-galois-stability.md`.
+
 The support-local construction must retain the full absolute coniveau
 filtration.  Quotienting by objects whose relative fibres have dimension at
 most two is impossible: horizontal divisors then trivialize the pulled-back
