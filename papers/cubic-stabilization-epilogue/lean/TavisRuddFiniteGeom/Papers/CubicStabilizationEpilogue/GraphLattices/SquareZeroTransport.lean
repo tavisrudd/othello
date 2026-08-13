@@ -53,7 +53,7 @@ source square-zero for every internal rank-one class supplies the target
 square-zero hypothesis needed by all-degree assembly. -/
 theorem rankOneSquareZero_of_injectivePullback
     {Index R Target Source : Type*} [CommRing R]
-    [CommRing Target] [CommRing Source]
+    [CommRing Target] [Ring Source]
     (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
     (targetRealization : Matrix Index Index R →+ Target)
     (sourceRealization : Matrix Index Index R →+ Source)

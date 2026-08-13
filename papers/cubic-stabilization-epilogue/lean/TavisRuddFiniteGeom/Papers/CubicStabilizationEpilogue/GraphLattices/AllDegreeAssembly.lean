@@ -3,6 +3,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Divid
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FaithfullyFlatMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SquareZeroTransport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.EllipticSourceRealization
 import Mathlib.Tactic
 
 /-!
@@ -210,7 +211,7 @@ injective pullback, followed by faithfully flat quotient descent of product
 membership. -/
 theorem allDegree_integralProductMember_of_injectivePullback_and_faithfullyFlat
     {S Target Source : Type*} [CommRing S] [Algebra R S]
-    [CommRing Target] [Module R Target] [CommRing Source]
+    [CommRing Target] [Module R Target] [Ring Source]
     [Module.FaithfullyFlat R S]
     (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
     (generated : WeightedMatrixRankOneGenerated uniformizer diagonal cross)
@@ -243,9 +244,56 @@ theorem allDegree_integralProductMember_of_injectivePullback_and_faithfullyFlat
           squarefreeProductSum (forms.map targetRealization) degree := by
   apply allDegree_integralProductMember_of_faithfullyFlatQuotient
     uniformizer diagonal cross generated targetRealization
-    (rankOneSquareZero_of_injectivePullback uniformizer diagonal cross
+    (rankOneSquareZero_of_injectivePullback (Source := Source)
+      uniformizer diagonal cross
       targetRealization sourceRealization pullback pullbackInjective
       realizationCompatible sourceRankOneSquareZero)
+    integralProducts form member degree extendedProducts
+
+/-- All-degree assembly using the canonical elliptic-power exterior
+realization.  Rank-one source square-zero is now a theorem, so the remaining
+inputs are the target realization, its injective compatible pullback to the
+source model, and the splitting-ring product identity. -/
+theorem allDegree_integralProductMember_of_ellipticSourcePullback
+    {S Target : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing S] [Algebra R S] [CommRing Target] [Module R Target]
+    [Module.FaithfullyFlat R S]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : WeightedMatrixRankOneGenerated uniformizer diagonal cross)
+    (targetRealization : Matrix Index Index R →+ Target)
+    (pullback : Target →+*
+      ExteriorAlgebra R (EllipticSourceHOne R Index))
+    (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (targetRealization candidate) =
+        ellipticSourceCoefficientRealization candidate)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (squarefreeProductSum (forms.map targetRealization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) ∧
+      forms.sum = form ∧
+      squarefreeProductSum (forms.map targetRealization) degree ∈ integralProducts ∧
+      targetRealization form ^ degree =
+        (degree.factorial : Target) *
+          squarefreeProductSum (forms.map targetRealization) degree := by
+  exact allDegree_integralProductMember_of_injectivePullback_and_faithfullyFlat
+    (Source := ExteriorAlgebra R (EllipticSourceHOne R Index))
+    uniformizer diagonal cross generated targetRealization
+    (ellipticSourceCoefficientRealization (R := R) (Index := Index))
+    pullback pullbackInjective
+    realizationCompatible
+    (ellipticSourceCoefficientRealization_internalRankOne_sq_zero
+      uniformizer diagonal cross)
     integralProducts form member degree extendedProducts
 
 end GraphLattices

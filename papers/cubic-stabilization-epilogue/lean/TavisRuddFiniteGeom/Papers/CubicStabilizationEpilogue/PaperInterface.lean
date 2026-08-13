@@ -447,11 +447,31 @@ theorem decomposableTwoForm_squareZero
     (ExteriorAlgebra.ι R first * ExteriorAlgebra.ι R second) ^ 2 = 0 :=
   GraphLattices.exterior_decomposableTwoForm_sq_zero first second
 
+/-- In the canonical exterior-algebra model for the first cohomology of an
+elliptic power, a rank-one coefficient matrix is literally a decomposable
+two-form and therefore has square zero. -/
+theorem ellipticSource_rankOne_decomposable_and_squareZero
+    {Index R : Type*} [CommRing R] [Fintype Index] [DecidableEq Index]
+    (coefficient : R) (vector : Index → R) :
+    (GraphLattices.ellipticSourceCoefficientRealization
+        (GraphLattices.matrixRankOne coefficient vector) =
+      ExteriorAlgebra.ι R
+          (GraphLattices.ellipticSourceX (coefficient • vector)) *
+        ExteriorAlgebra.ι R (GraphLattices.ellipticSourceY vector)) ∧
+    GraphLattices.ellipticSourceCoefficientRealization
+          (GraphLattices.matrixRankOne coefficient vector) *
+        GraphLattices.ellipticSourceCoefficientRealization
+          (GraphLattices.matrixRankOne coefficient vector) = 0 :=
+  ⟨GraphLattices.ellipticSourceCoefficientRealization_matrixRankOne
+      coefficient vector,
+    GraphLattices.ellipticSourceCoefficientRealization_rankOne_sq_zero
+      coefficient vector⟩
+
 /-- Injective cohomological pullback transports the source square-zero
 identity for internal rank-one classes back to the target realization. -/
 theorem rankOne_squareZero_of_injectivePullback
     {Index R Target Source : Type*} [CommRing R]
-    [CommRing Target] [CommRing Source]
+    [CommRing Target] [Ring Source]
     (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
     (targetRealization : Matrix Index Index R →+ Target)
     (sourceRealization : Matrix Index Index R →+ Source)
@@ -550,7 +570,7 @@ generation, source square-zero, injective pullback, squarefree expansion, and
 faithfully flat quotient descent. -/
 theorem rankOne_allDegree_of_injectivePullback_and_faithfullyFlatDescent
     {Index R S Target Source : Type*} [CommRing R] [CommRing S] [Algebra R S]
-    [CommRing Target] [Module R Target] [CommRing Source]
+    [CommRing Target] [Module R Target] [Ring Source]
     [Module.FaithfullyFlat R S]
     (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
     (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
@@ -588,6 +608,49 @@ theorem rankOne_allDegree_of_injectivePullback_and_faithfullyFlatDescent
     π diagonal cross generated targetRealization sourceRealization pullback
     pullbackInjective realizationCompatible sourceRankOneSquareZero
     integralProducts form member degree extendedProducts
+
+/-- The all-degree chain with its source realization fixed to the canonical
+elliptic-power exterior algebra.  Thus rank-one source square-zero is proved,
+not supplied as a hypothesis; the geometric target realization, compatible
+injective pullback, and extended product identity remain explicit inputs. -/
+theorem rankOne_allDegree_of_canonicalEllipticSourcePullback_and_faithfullyFlatDescent
+    {Index R S Target : Type*} [CommRing R] [Fintype Index]
+    [DecidableEq Index] [CommRing S] [Algebra R S]
+    [CommRing Target] [Module R Target] [Module.FaithfullyFlat R S]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
+    (targetRealization : Matrix Index Index R →+ Target)
+    (pullback : Target →+*
+      ExteriorAlgebra R (GraphLattices.EllipticSourceHOne R Index))
+    (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (targetRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (GraphLattices.squarefreeProductSum
+            (forms.map targetRealization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) ∧
+      forms.sum = form ∧
+      GraphLattices.squarefreeProductSum
+          (forms.map targetRealization) degree ∈ integralProducts ∧
+      targetRealization form ^ degree =
+        (degree.factorial : Target) *
+          GraphLattices.squarefreeProductSum
+            (forms.map targetRealization) degree :=
+  GraphLattices.allDegree_integralProductMember_of_ellipticSourcePullback
+    π diagonal cross generated targetRealization pullback pullbackInjective
+    realizationCompatible integralProducts form member degree extendedProducts
 
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`
