@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 47 reviewer terminals.
+1 complete; 48 reviewer terminals.
 
-The 47 reviewer-facing terminals currently verify:
+The 48 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -64,6 +64,8 @@ The 47 reviewer-facing terminals currently verify:
   center in characteristic two, evenness of the projective image, and the
   resulting abstract exceptional isomorphism `SL₂(F4) ≃ A5`, without
   identifying the manuscript's geometric action with this abstract model;
+- the affine-chart Frobenius as an odd transposition normalizing that abstract
+  alternating subgroup, without identifying it with a geometric normalizer;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;

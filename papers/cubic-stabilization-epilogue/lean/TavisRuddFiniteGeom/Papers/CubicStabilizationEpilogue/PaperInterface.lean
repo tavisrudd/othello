@@ -12,6 +12,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Frobe
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ExoticStabilizerCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusNormalizer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -556,6 +557,21 @@ theorem principalGluing_abstractExceptionalGroup :
           alternatingGroup (Fin 5)) := by
   exact ⟨GraphLattices.alternatingGroup_fin_five_card,
     ⟨GraphLattices.specialLinearGroupF4EquivAlternatingFive⟩⟩
+
+/-- Abstract outer-normalizer calculation on the five-point packet.
+Arithmetic Frobenius is a transposition, hence odd, and its conjugation
+preserves the transported alternating subgroup.  This does not identify the
+permutation with a geometric normalizer element of the six-axis family. -/
+theorem principalGluing_f4Frobenius_oddNormalizer :
+    GraphLattices.f4FrobeniusPermutation.IsSwap ∧
+      Equiv.Perm.sign GraphLattices.f4FrobeniusPermutation = -1 ∧
+      ∀ permutation : alternatingGroup (Fin 5),
+        GraphLattices.f4FrobeniusPermutation * permutation *
+            GraphLattices.f4FrobeniusPermutation⁻¹ ∈
+          alternatingGroup (Fin 5) := by
+  exact ⟨GraphLattices.f4FrobeniusPermutation_isSwap,
+    GraphLattices.f4FrobeniusPermutation_sign,
+    GraphLattices.f4FrobeniusPermutation_conjugate_mem_alternating⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

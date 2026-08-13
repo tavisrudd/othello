@@ -26,6 +26,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4Frobeniu
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4TraceDeterminant_maximalIsotropic: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_exoticStabilizer_algebraicCore: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_abstractExceptionalGroup: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_f4Frobenius_oddNormalizer: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod: propext, Classical.choice, Quot.sound

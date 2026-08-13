@@ -37,11 +37,52 @@ theorem f4_projectivization_fin_two_card :
     norm_num
   rw [functionCard, natCard_F4]
 
+/-- A linear equivalence induces an equivalence of projectivizations. -/
+def projectivizationLinearEquiv
+    {K V W : Type*} [Field K]
+    [AddCommGroup V] [Module K V] [AddCommGroup W] [Module K W]
+    (equivalence : V ≃ₗ[K] W) :
+    Projectivization K V ≃ Projectivization K W where
+  toFun := Projectivization.map equivalence.toLinearMap equivalence.injective
+  invFun :=
+    Projectivization.map equivalence.symm.toLinearMap equivalence.symm.injective
+  left_inv point := by
+    induction point using Projectivization.ind with
+    | h vector nonzero =>
+        simp only [Projectivization.map_mk]
+        change Projectivization.mk K (equivalence.symm (equivalence vector)) _ = _
+        apply (Projectivization.mk_eq_mk_iff' K _ _ _ _).2
+        exact ⟨1, by simp⟩
+  right_inv point := by
+    induction point using Projectivization.ind with
+    | h vector nonzero =>
+        simp only [Projectivization.map_mk]
+        change Projectivization.mk K (equivalence (equivalence.symm vector)) _ = _
+        apply (Projectivization.mk_eq_mk_iff' K _ _ _ _).2
+        exact ⟨1, by simp⟩
+
+/-- The natural projective line, expressed in the manuscript's affine chart:
+`none` is the vertical point and `some a` is the graph of `a`. -/
+def f4ProjectivizationEquivOption :
+    Projectivization F4 (Fin 2 → F4) ≃ Option F4 :=
+  (projectivizationLinearEquiv (LinearEquiv.finTwoArrow F4 F4)).trans
+    (optionEquivProjectiveLine F4).symm
+
+/-- The affine-chart packet has five elements. -/
+theorem f4_option_card : Nat.card (Option F4) = 5 := by
+  rw [← Nat.card_congr f4ProjectivizationEquivOption]
+  exact f4_projectivization_fin_two_card
+
+/-- A fixed labelling of the manuscript's affine-chart packet by five
+letters. -/
+def f4OptionEquivFinFive : Option F4 ≃ Fin 5 :=
+  (Finite.equivFin _).trans (finCongr f4_option_card)
+
 /-- A fixed labelling of the five projective points.  The construction of the
 exceptional isomorphism is independent of which labelling is chosen. -/
 def f4ProjectivizationEquivFinFive :
     Projectivization F4 (Fin 2 → F4) ≃ Fin 5 :=
-  (Finite.equivFin _).trans (finCongr f4_projectivization_fin_two_card)
+  f4ProjectivizationEquivOption.trans f4OptionEquivFinFive
 
 /-- The faithful projective action, transported to five labelled points. -/
 def psl2F4ProjectiveAction :
