@@ -2541,7 +2541,8 @@ theorem filteredVaryingFlatGauge_quotient_reduction_unique_and_invertible
           (PowerSeries.map (input.filtration.reduction level)) =
         input.gaugeSeries level) ∧
     ∀ level,
-      (input.gaugeSeries level).map PowerSeries.derivativeFun =
+      (input.gaugeSeries level).map (PowerSeries.coeff 0) = 1 ∧
+        (input.gaugeSeries level).map PowerSeries.derivativeFun =
           -(input.connectionSeries level) * input.gaugeSeries level ∧
         (∀ candidate : Matrix Index Index
             (PowerSeries (input.filtration.QuotientRing level)),

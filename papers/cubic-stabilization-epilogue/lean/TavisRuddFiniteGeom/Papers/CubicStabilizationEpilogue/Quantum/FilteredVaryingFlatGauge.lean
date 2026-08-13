@@ -101,7 +101,8 @@ theorem gaugeSeries_unique_and_isUnit
     {Index : Type*} [Fintype Index] [DecidableEq Index]
     {R : Type*} [CommRing R] [Algebra ℚ R]
     (input : FilteredVaryingFlatGaugeInput Index R) (level : ℕ) :
-    (input.gaugeSeries level).map PowerSeries.derivativeFun =
+    (input.gaugeSeries level).map (PowerSeries.coeff 0) = 1 ∧
+      (input.gaugeSeries level).map PowerSeries.derivativeFun =
         -(input.connectionSeries level) * input.gaugeSeries level ∧
       (∀ candidate : Matrix Index Index
           (PowerSeries (input.filtration.QuotientRing level)),
@@ -110,7 +111,17 @@ theorem gaugeSeries_unique_and_isUnit
           -(input.connectionSeries level) * candidate →
         candidate = input.gaugeSeries level) ∧
       IsUnit (input.gaugeSeries level) := by
-  exact ⟨input.compatibleSystem.gaugeSeries_derivative level,
+  have normalization :
+      (input.gaugeSeries level).map (PowerSeries.coeff 0) = 1 := by
+    letI := input.compatibleSystem.coefficientRing level
+    letI := input.compatibleSystem.coefficientAlgebra level
+    change (varyingFlatGaugeSeries
+      (input.compatibleSystem.connectionCoefficient level)).map
+        (PowerSeries.coeff 0) = 1
+    rw [varyingFlatGaugeSeries_coefficient,
+      varyingFlatGaugeCoefficient_zero]
+  exact ⟨normalization,
+    input.compatibleSystem.gaugeSeries_derivative level,
     fun candidate normalized flatEquation ↦
       input.compatibleSystem.gaugeSeries_unique level candidate
         normalized flatEquation,
