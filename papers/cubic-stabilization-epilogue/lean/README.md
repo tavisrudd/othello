@@ -98,9 +98,11 @@ The 144 reviewer-facing terminals currently verify:
   quotient by its constant line, the translation and inversion matrices in
   those coordinates, an invariant one-factorization identifying their
   generated action faithfully with the alternating group `A5`, simplicity of
-  the induced heart, and its exact four-element quadratic matrix commutant,
-  without yet identifying the six labels with the manuscript's conjugate
-  `D5` subgroups or this concrete action with the geometric one;
+  the induced heart, and its exact four-element quadratic matrix commutant;
+  six pairwise distinct order-five subgroups of that concrete `A5` are
+  constructed and their conjugation action is exactly the original six-point
+  action, without yet proving Sylow exhaustion or identifying their dihedral
+  normalizers with the manuscript's geometric `D5` subgroups and axes;
 - the
   exact persistence of any continuously classified finite discrete packet on
   a connected base, including the explicit transported marked-root pair both

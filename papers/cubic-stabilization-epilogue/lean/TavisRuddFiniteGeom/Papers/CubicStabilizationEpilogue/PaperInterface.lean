@@ -10,7 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAlternatingAction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointSylowFiveAction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1727,9 +1727,11 @@ common matrix commutant is exactly the four-element quadratic algebra
 is zero or the whole heart.  The generators preserve an explicit
 one-factorization; their faithful factor action exhausts the alternating group
 on five letters, thereby identifying the abstract generated action with a
-concrete `A5`.  This terminal does not identify the six labels with the
-manuscript's six conjugate `D5` subgroups, and hence does not identify this
-concrete action or heart with the geometric ones. -/
+concrete `A5`.  It also constructs six pairwise distinct order-five subgroups
+of that `A5` and proves that conjugation by the two generators permutes them by
+exactly the original six-point action.  This is the concrete group-theoretic
+six-label packet, but the terminal does not identify it with the manuscript's
+six geometrically defined `D5` normalizers, elliptic quotients, or axes. -/
 theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     (∀ heart : Fin 4 → GraphLattices.F2,
       (∑ point, GraphLattices.sixPointHeartRepresentative heart point) = 0 ∧
@@ -1761,6 +1763,18 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
             GraphLattices.sixPointFactorWord right ↔
           GraphLattices.sixPointPermutationWord left =
             GraphLattices.sixPointPermutationWord right)) ∧
+    (∀ label : Fin 6,
+      Nat.card (GraphLattices.sixPointFiveSubgroup label) = 5) ∧
+    Function.Injective GraphLattices.sixPointFiveSubgroup ∧
+    (∀ label : Fin 6,
+      (GraphLattices.sixPointFiveSubgroup label).map
+          (MulAut.conj GraphLattices.sixPointFactorTranslationA5) =
+        GraphLattices.sixPointFiveSubgroup
+          (GraphLattices.sixPointTranslationPermutation label) ∧
+      (GraphLattices.sixPointFiveSubgroup label).map
+          (MulAut.conj GraphLattices.sixPointFactorInversionA5) =
+        GraphLattices.sixPointFiveSubgroup
+          (GraphLattices.sixPointInversionPermutation label)) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1779,6 +1793,10 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     GraphLattices.sixPointHeartCoordinates_eq_zero_iff_constant,
     GraphLattices.sixPointHeartGeneratorStable_simple,
     GraphLattices.sixPointGeneratedAction_realizes_alternatingGroup,
+    GraphLattices.sixPointFiveSubgroup_card,
+    GraphLattices.sixPointFiveSubgroup_injective,
+    fun label => ⟨GraphLattices.sixPointFiveSubgroup_translation_conjugation label,
+      GraphLattices.sixPointFiveSubgroup_inversion_conjugation label⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 
