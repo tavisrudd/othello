@@ -235,9 +235,23 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   `Ext^1_(K[N])(W,V)`; multi-block splitting is recursive.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
-  geometry but projects to zero in the minimal Silver category.  The first
-  nonzero strictness pilot is `Bl_X P^5` for a cubic center; a genuine
-  ambient--center extension test needs both blocks nonzero.
+  geometry but projects to zero in the minimal Silver category.
+  `Bl_X P^5` for a cubic center is nonzero but only one-dimensional, so its
+  nilpotent operator is forced to vanish and it tests normalization rather
+  than splitting.  The first possible extension test is
+  `Bl_(X x p)(X x P^2)=X x F_1`: its conditional Kronecker-sum model gives
+  `J_2 tensor J_2=J_3 direct-sum T J_1`, while the actual tensor rule and
+  geometric component-map intertwiner remain open.  See
+  `../2026-08-13-c907-silver-jordan-pilot-ladder.md`.
+- The same projective rule cannot coexist with a naive ungraded strict
+  all-codimension blowup sum: for `m>=3`, the two presentations of
+  `X x Bl_p P^m` give respectively
+  `J_(m+1) direct-sum J_1^(m-1)` and
+  `J_m tensor J_2=J_(m+1) direct-sum J_(m-1)`.  Silver avoids the conflict
+  because its only nonzero fivefold center has codimension two; Gold needs a
+  non-split graded exceptional-string functor or a different projective
+  operator.  See
+  `../2026-08-13-c907-higher-codimension-jordan-exchange-obstruction.md`.
 - The Mori-fibre carrier branches share one conditional mechanism.  If `N`
   raises base coniveau, then `N^2=0` over a curve, and over a surface its
   square lands in a point packet which clean primitive excision must kill.
@@ -272,11 +286,14 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, move directly to the first nonzero operation test:
-`Bl_X P^5` with cubic center.  Define the unipotent operation operator on its
-generalized primitive-sixth packet and compute the recursive `K[N]` extension
-class of the blowup filtration.  The toric `P^3` residual theorem remains a
-separate high-value Stokes leaf: finish it only through the pushed-down
+For Silver, bypass the rigid one-dimensional `Bl_X P^5` normalization and
+move to the first nonvacuous extension test.  Define the intrinsic operator on
+`Bl_(X x p)(X x P^2)`, identify its formal center map, and compute the class in
+`Ext^1_(K[N])(T J_1,J_3)`.  Then remove product symmetry by blowing up the
+canonical cubic section of
+`P_X(O direct-sum L_1 direct-sum L_2)` and test whether Chern twisting changes
+that class.  The toric `P^3` residual theorem remains a separate high-value
+Stokes leaf: finish it only through the pushed-down
 self-dual pairing-excision zigzag and full tame residual-pair identification,
 not as evidence for the cyclotomic Jordan biproduct.  In parallel, construct
 the coniveau filtration whose strictness kills the nodal Clifford and
@@ -354,13 +371,15 @@ Hostile gluing/collar boundary:
 To reach every `m`, prove:
 
 - an intrinsic cubic-isotypic Stokes/Gamma Rees object;
-- strict additive blow-up composition in every codimension;
+- a graded non-split exceptional-string blow-up law in every codimension,
+  reducing to the strict biproduct on Silver's codimension-two nonzero sector;
 - product compatibility by Thom--Sebastiani; and
 - the universal carrier bound `width <= dim-3`.
 
-The exact polynomial identities are already closed.  The remaining work is
-analytic functoriality and the carrier theorem, not further finite
-bookkeeping.
+The higher-codimension Jordan exchange proves that a naive ungraded additive
+law is incompatible with the candidate relative-projective operator.  The
+remaining work is analytic functoriality, construction of the exceptional
+string, and the carrier theorem, not further finite bookkeeping.
 
 ## Acceptance
 
