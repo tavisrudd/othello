@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-63 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 120 reviewer terminals, audit
+64 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 121 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -272,15 +272,19 @@ The constant-coefficient flat equation now has a kernel-checked coefficient
 recursion `G_0=1`, `(n+1)G_{n+1}=-AG_n` over any commutative rational algebra;
 the coefficients are natural under arbitrary rational-algebra homomorphisms;
 they now assemble into an entrywise formal power-series matrix satisfying
-`dG/dt=-AG`; varying quantum products, filtered solutions, and analytic
-gauges remain outside that fragment.
+`dG/dt=-AG`.  For a supplied tower of compatible constant connection matrices,
+every coefficient and the whole formal series now commute with adjacent
+rational-algebra reductions and satisfy the equation at every level; the tower
+is not yet identified with the filtered quotient construction.  Varying quantum
+products, invertibility, Laurent dependence, and analytic gauges remain outside
+that fragment.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 120-terminal axiom transcript
+The aggregate build, source correspondence, and 121-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
