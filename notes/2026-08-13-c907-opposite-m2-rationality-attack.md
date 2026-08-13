@@ -194,6 +194,38 @@ the branch conic of \(S\to\mathbf P^2\). It is a conic bundle over
 Thus the most elementary stable-linearization obstruction—the birational type
 of a divisorial fixed component—does not fire.
 
+For a general line, the branch conic \(B\) meets the plane-quintic
+discriminant \(\Delta\) transversely in ten points. The fixed divisor \(D\)
+is therefore a smooth rational conic-bundle surface with ten reducible
+fibres. Its exact calibration is
+
+\[
+ K_D^2=8-10=-2,
+ \qquad
+ N_{D/R}\cong \pi_D^*\mathcal O_{\mathbf P^1}(2),
+\]
+
+and \(\tau\) acts by \(-1\) on this normal line. The square of the normal
+bundle is the pullback of
+\(N_{B/\mathbf P^2}=\mathcal O_{\mathbf P^1}(4)\), as required for a double
+cover ramified along \(D\).
+
+Although \(D\) is rational, its conic-bundle marking retains the quintic.
+The restricted determinant is a section of
+\(\mathcal O_B(5)\cong\mathcal O_{\mathbf P^1}(10)\). Taking its square root
+defines the discriminant double cover
+
+\[
+ C_B\longrightarrow B\cong\mathbf P^1
+\]
+
+branched at the ten points \(B\cap\Delta\); hence \(g(C_B)=4\). This is not
+the relative component scheme of the singular conics, which exists only over
+the ten-point discriminant. It is the hyperelliptic orientation cover of the
+marked determinant. It is the first plausible finer equivariant marker missed
+by the bare birational type of the fixed divisor, but is not yet proved to
+survive equivariant stabilization.
+
 The positive problem is therefore sharpened to
 
 \[
@@ -275,6 +307,9 @@ birationally extract \(X\times\mathbf P^2\).
   rational involution with rational divisorial fixed locus which is provably
   not stably linearizable. This is an equivariant reformulation of the new
   stable-irrationality theorem and a calibrated target for a finer invariant.
+- **EJ marker:** the rational fixed divisor has ten marked singular fibres
+  and a canonical genus-four determinant cover. The quintic therefore survives
+  fixed-divisor rationality as marked descent data.
 - **TT:** a degree-two parametrization is not a birational parametrization;
   a rational fixed divisor is not stable linearizability; an incidence
   fivefold containing \(X\times\mathbf P^2\)-shaped fibres is not a
@@ -303,11 +338,16 @@ two-variable cancellation could be proved or decisively fail.
   remain degree two.
 - **Settled by EJ:** the point-choosing cover is a rational quadric surface,
   its ramification surface is rational, and the very-general involution is
-  nevertheless not stably linearizable. The Fermat norm equation and both
-  discriminant factorizations are explicit.
+  nevertheless not stably linearizable. For a general line the fixed surface
+  has \(K^2=-2\), sign normal character, ten singular fibres, and a genus-four
+  determinant cover. The Fermat norm equation and both discriminant
+  factorizations are explicit.
 - **Open:** whether the Fermat descent cocycle becomes linear after two
   representation variables. The evidence gap is an explicit equivariant
   resolution and its normal-character symbols.
+- **Open:** whether the genus-four determinant cover is invariant under the
+  allowed equivariant stabilizations. Bare fixed-field and fixed-divisor
+  birational invariants forget it.
 - **Open:** whether the Cayley rank-jump exceptional divisor admits a second
   contraction whose generic fibre trades the complete-intersection curve for
   the cubic product. The present incidence model alone does not.

@@ -337,7 +337,10 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   two-variable stable linearization of the resulting rational-cover
   involution, or a codimension-three Cayley rank-jump trade.  This can only
   target special universally `CH_0`-trivial cubics, since very general cubic
-  threefolds are now known stably irrational.  See
+  threefolds are now known stably irrational.  For a general line the
+  involution's fixed divisor is rational but has ten reducible conic fibres,
+  sign normal character, and a canonical genus-four determinant cover; this is
+  the first plausible finer equivariant obstruction.  See
   `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
 
 ## Active frontier: `m=2`

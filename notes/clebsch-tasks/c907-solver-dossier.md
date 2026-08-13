@@ -106,6 +106,10 @@ descent coefficient.  Appending independent variables changes neither the
 Brauer class nor the quadratic cover.  If pursuing the positive route, test
 two-variable stable linearization of this explicit involution or the exact
 codimension-three Cayley rank jump; do not repeat raw secant parametrization.
+For a general line the fixed divisor is rational but retains ten marked
+reducible conic fibres and their genus-four determinant cover.  Test whether
+that marked cover survives equivariant stabilization before concluding that
+fixed-divisor rationality favors linearization.
 See `../2026-08-13-c907-opposite-m2-rationality-attack.md`.
 
 ## Rejection tests
