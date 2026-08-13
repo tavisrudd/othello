@@ -34,6 +34,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
@@ -2075,6 +2076,34 @@ theorem formalBaseShift_characteristicPolynomial_of_matrixInput
     input.bulkMonodromy.charpoly =
       input.smallMonodromy.charpoly.map input.divisorSubstitution :=
   input.characteristicPolynomial_eq
+
+/-- A decreasing ideal filtration and an endomorphism preserving every ideal
+construct the finite-level quotient coefficient rings, their adjacent reductions,
+and compatible quotient endomorphisms.  The three conclusions state their
+action on ring classes and the reduction-substitution commuting square.  No
+completeness, separatedness, geometric coefficient ring, monodromy matrix, or
+gauge is constructed. -/
+theorem filteredCoefficientQuotient_reduction_and_substitution
+    {R : Type*} [CommRing R]
+    (filtration : Quantum.DecreasingIdealFiltration R)
+    (endomorphism : filtration.PreservingEndomorphism) (level : ℕ) :
+    (∀ value : R,
+      filtration.reduction level
+          (Ideal.Quotient.mk (filtration.ideal (level + 1)) value) =
+        Ideal.Quotient.mk (filtration.ideal level) value) ∧
+      (∀ value : R,
+        endomorphism.quotientEndomorphism level
+            (Ideal.Quotient.mk (filtration.ideal level) value) =
+          Ideal.Quotient.mk (filtration.ideal level)
+            (endomorphism.toRingHom value)) ∧
+      (∀ coefficient : filtration.QuotientRing (level + 1),
+        filtration.reduction level
+            (endomorphism.quotientEndomorphism (level + 1) coefficient) =
+          endomorphism.quotientEndomorphism level
+            (filtration.reduction level coefficient)) :=
+  ⟨filtration.reduction_mk level,
+    endomorphism.quotientEndomorphism_mk level,
+    endomorphism.reduction_quotientEndomorphism level⟩
 
 /-- Compatible finite-level small matrices, divisor substitutions, and
 two-sided-invertible gauges determine compatible bulk matrices whose

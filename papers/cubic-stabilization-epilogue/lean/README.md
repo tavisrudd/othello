@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 112 reviewer terminals.
+1 complete; 113 reviewer terminals.
 
-The 112 reviewer-facing terminals currently verify:
+The 113 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -103,6 +103,13 @@ The 112 reviewer-facing terminals currently verify:
 - the order-120 full symmetric normalizer, its index-two alternating subgroup,
   and affine-chart Frobenius as an odd transposition in the nontrivial coset,
   without identifying it with a geometric normalizer;
+- from a supplied commutative ring with a decreasing ideal filtration,
+  construction of every quotient coefficient ring and canonical adjacent
+  reduction; a supplied filtration-preserving endomorphism descends to
+  compatible quotient endomorphisms, with their actions on classes and the
+  reduction-substitution square proved; completeness, separatedness,
+  multiplicative filtration laws, and identification with the manuscript's
+  geometric coefficient quotients are not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;
@@ -151,8 +158,9 @@ The 112 reviewer-facing terminals currently verify:
   matrices and the substituted characteristic-polynomial identity at every
   level, including compatibility of those bulk characteristic polynomials under
   reduction and their explicit packaging as a compatible polynomial system;
-  the filtered ring and bulk flat equations producing the inputs are not
-  constructed;
+  the manuscript's complete separated filtered coefficient ring, its geometric
+  identification, and the bulk flat equations producing the matrix and gauge
+  inputs are not constructed;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten
