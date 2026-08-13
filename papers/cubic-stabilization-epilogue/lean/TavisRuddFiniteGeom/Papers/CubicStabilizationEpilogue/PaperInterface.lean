@@ -38,6 +38,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoe
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2337,6 +2338,44 @@ theorem constantFlatGauge_normalized_and_recursion
     fun _ _ _ homomorphism mappedDegree =>
       Quantum.constantFlatGaugeCoefficient_map
         homomorphism connection mappedDegree⟩
+
+/-- For a supplied natural-number-indexed family of constant connection
+matrices over commutative `ℚ`-algebras, compatible under adjacent
+`ℚ`-algebra reductions, Lean proves compatibility of every normalized
+exponential coefficient and of the assembled formal power-series matrices.
+At each level the series satisfies `dG/dt = -AG`.  The coefficient system and
+connection matrices are supplied abstractly; no ideal filtration, varying or
+multivariable quantum connection, Laurent coordinate, invertibility,
+convergence, or analytic gauge is constructed. -/
+theorem compatibleConstantFlatGauge_reduction_and_derivative
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : Quantum.CompatibleConstantConnectionSystem Index) :
+    (∀ level degree,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.gaugeCoefficient (level + 1) degree).map
+          (system.reduction level).toRingHom =
+        system.gaugeCoefficient level degree) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.gaugeSeries (level + 1)).map
+          (PowerSeries.map (system.reduction level).toRingHom) =
+        system.gaugeSeries level) ∧
+    ∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientAlgebra level
+      (system.gaugeSeries level).map PowerSeries.derivativeFun =
+        (system.connection level).map
+            (fun value ↦ PowerSeries.C (-value)) *
+          system.gaugeSeries level :=
+  ⟨system.gaugeCoefficient_compatible,
+    system.gaugeSeries_compatible,
+    system.gaugeSeries_derivative⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

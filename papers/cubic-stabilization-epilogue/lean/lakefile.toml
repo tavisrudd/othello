@@ -58,6 +58,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFormalBaseShift",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFlatGauge",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleConstantFlatGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",

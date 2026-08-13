@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 120 reviewer terminals.
+1 complete; 121 reviewer terminals.
 
-The 120 reviewer-facing terminals currently verify:
+The 121 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -139,7 +139,10 @@ The 120 reviewer-facing terminals currently verify:
   constructed, proved to satisfy the formal flat recursion in every degree,
   assembled into an entrywise formal power-series matrix satisfying the exact
   constant-coefficient differential equation,
-  and proved compatible with arbitrary rational-algebra homomorphisms,
+  and proved compatible with arbitrary rational-algebra homomorphisms;
+  for a supplied compatible system of constant connection matrices, every
+  coefficient and the assembled formal series commute with adjacent
+  coefficient reductions and satisfy the differential equation at each level,
   without claiming a varying quantum product or filtered analytic gauge;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
