@@ -155,10 +155,12 @@ coefficient.
    Exact zero of its formal center columns would then survive summation.
    This is much weaker than analytifying the entire decomposition, but the
    paper's general non-analyticity warning makes the estimates substantive.
-   A bare dominance argument is insufficient: the exceptional exponential
-   phases surround the origin, so there is generally no single sector on
-   which all center exponentials dominate the ambient zero-exponential
-   branch.  Each branch would need its own sector plus compatible Stokes
+   For the Silver codimension-two arrow there is only one leading exceptional
+   Fourier shift, so a favorable dominance sector can exist; the hard input
+   is then a uniform growth bound for the analytically continued point column
+   and control across its bounding Stokes rays.  In higher codimension the
+   exceptional phases surround the origin, so no single sector generally
+   makes them all dominate; each branch then needs compatible sectorwise
    control.
 4. **Relative oscillatory-cycle construction.**  Realize the point functional
    by a rapid-decay cycle supported away from the center and prove that it has
