@@ -8,6 +8,8 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_unit_and_augme
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_integralSmithReduction: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSmith_unit_line_and_depth_one_at_two_three: propext, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem: propext, Classical.choice, Quot.sound

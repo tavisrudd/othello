@@ -39,6 +39,61 @@ noncomputable def FramedMonodromyMatrix.sixthMultiplicity
   monodromy.operator.charpoly.rootMultiplicity primitiveSixthRootPositive +
     monodromy.operator.charpoly.rootMultiplicity primitiveSixthRootNegative
 
+/-- Primitive-sixth multiplicity directly for a nonzero characteristic
+polynomial. -/
+noncomputable def sixthMultiplicityPolynomial (polynomial : Polynomial ℂ) : ℕ :=
+  polynomial.rootMultiplicity primitiveSixthRootPositive +
+    polynomial.rootMultiplicity primitiveSixthRootNegative
+
+/-- Primitive-sixth multiplicity is additive under multiplication of nonzero
+characteristic polynomials, as it is under direct sums of monodromy blocks. -/
+theorem sixthMultiplicityPolynomial_mul
+    {left right : Polynomial ℂ} (leftNonzero : left ≠ 0) (rightNonzero : right ≠ 0) :
+    sixthMultiplicityPolynomial (left * right) =
+      sixthMultiplicityPolynomial left + sixthMultiplicityPolynomial right := by
+  have productNonzero : left * right ≠ 0 := mul_ne_zero leftNonzero rightNonzero
+  simp only [sixthMultiplicityPolynomial]
+  rw [Polynomial.rootMultiplicity_mul productNonzero,
+    Polynomial.rootMultiplicity_mul productNonzero]
+  omega
+
+/-- An `r`-fold repeated nonzero block has `r` times the primitive-sixth
+multiplicity of one block. -/
+theorem sixthMultiplicityPolynomial_pow
+    (polynomial : Polynomial ℂ) (nonzero : polynomial ≠ 0) (rank : ℕ) :
+    sixthMultiplicityPolynomial (polynomial ^ rank) =
+      rank * sixthMultiplicityPolynomial polynomial := by
+  induction rank with
+  | zero => simp [sixthMultiplicityPolynomial]
+  | succ rank inductionHypothesis =>
+      rw [pow_succ,
+        sixthMultiplicityPolynomial_mul (pow_ne_zero rank nonzero) nonzero,
+        inductionHypothesis]
+      simp [Nat.add_mul, Nat.add_comm]
+
+/-- Primitive-sixth multiplicity of a finite product of nonzero block
+characteristic polynomials is the sum of the block multiplicities. -/
+theorem sixthMultiplicityPolynomial_list_prod
+    (polynomials : List (Polynomial ℂ))
+    (nonzero : ∀ polynomial ∈ polynomials, polynomial ≠ 0) :
+    sixthMultiplicityPolynomial polynomials.prod =
+      (polynomials.map sixthMultiplicityPolynomial).sum := by
+  induction polynomials with
+  | nil => simp [sixthMultiplicityPolynomial]
+  | cons head tail inductionHypothesis =>
+      have headNonzero : head ≠ 0 := nonzero head (by simp)
+      have tailNonzero : ∀ polynomial ∈ tail, polynomial ≠ 0 := by
+        intro polynomial membership
+        exact nonzero polynomial (by simp [membership])
+      have tailProductNonzero : tail.prod ≠ 0 := by
+        apply List.prod_ne_zero
+        intro zeroMembership
+        exact (tailNonzero 0 zeroMembership) rfl
+      rw [List.prod_cons,
+        sixthMultiplicityPolynomial_mul headNonzero tailProductNonzero,
+        inductionHypothesis tailNonzero]
+      rfl
+
 end Quantum
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

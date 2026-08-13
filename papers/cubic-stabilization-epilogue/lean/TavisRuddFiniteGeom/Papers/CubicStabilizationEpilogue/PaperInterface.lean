@@ -196,6 +196,24 @@ noncomputable def framedSixthMultiplicity
     (monodromy : Quantum.FramedMonodromyMatrix) : ℕ :=
   monodromy.sixthMultiplicity
 
+/-- Algebraic projective-bundle pattern: an `r`-fold power of a nonzero block
+characteristic polynomial has `r` times its primitive-sixth multiplicity. -/
+theorem framedSixthMultiplicity_polynomial_pow
+    (polynomial : Polynomial ℂ) (nonzero : polynomial ≠ 0) (rank : ℕ) :
+    Quantum.sixthMultiplicityPolynomial (polynomial ^ rank) =
+      rank * Quantum.sixthMultiplicityPolynomial polynomial :=
+  Quantum.sixthMultiplicityPolynomial_pow polynomial nonzero rank
+
+/-- Algebraic blowup/direct-sum pattern: the primitive-sixth multiplicity of
+a product of nonzero block characteristic polynomials is the sum of their
+multiplicities. -/
+theorem framedSixthMultiplicity_polynomial_list_prod
+    (polynomials : List (Polynomial ℂ))
+    (nonzero : ∀ polynomial ∈ polynomials, polynomial ≠ 0) :
+    Quantum.sixthMultiplicityPolynomial polynomials.prod =
+      (polynomials.map Quantum.sixthMultiplicityPolynomial).sum :=
+  Quantum.sixthMultiplicityPolynomial_list_prod polynomials nonzero
+
 /-- Reviewer-facing type of strict Novikov-admissibility certificates for an
 effective numerical monoid and a complete separated topological domain. -/
 def strictNovikovAdmissibleData
