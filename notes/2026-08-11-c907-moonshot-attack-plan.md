@@ -151,8 +151,15 @@ its compact face is exactly `W_(P^3)+ZU` with four residual Morse points.
 The zero/infinity, joint `y`/Rees-infinity, and translated/infinity seams are
 now closed: every local face is empty/free or is exactly one of the four
 marked residual Morse points, and an exhaustive table covers all ten unordered
-coordinate-orbit types.  Assemble the locally complete atlas into one finite common
-normalized fan, prove all overlap identities and completeness, then construct
+coordinate-orbit types at the support level.  Their finite common support complex is the product of
+the two marked-line tropical tripods refined by the six universal graph
+weights; no ordinary fan in the original `(B,C)` torus can see `B=1,C=1`.
+The first global gluing shortcut failed: on the deeper imbalanced stratum
+`r=v=0`, one finds both the residual `h=0`, `a^4=Q` points and an additional
+`h=2`, `b^4=-3Q` branch.  Serialize the actual refinement, audit reduced
+strata independently, and choose one value neighborhood excluding the full
+finite endpoint list.  Only then prove normalized graph/Fitting overlap
+identities and completeness and construct
 a product-pair collar cover.  The latter remains a separate topological
 theorem.  Iritani identifies the residual Gamma lattice with the Orlov
 subgroup, not the individual Beilinson thimbles.  See
@@ -163,6 +170,10 @@ subgroup, not the individual Beilinson thimbles.  See
 `2026-08-12-c907-b1-cinf-seam-star-fan.md` and
 `2026-08-12-c907-joint-y-rees-infinity-fan.md`; orbit-level closeout is
 `2026-08-12-c907-local-boundary-orbit-atlas-closeout.md`.
+The common support theorem is
+`2026-08-12-c907-tripod-common-prefan.md`; the failed gluing theorem and exact
+repair boundary are in
+`2026-08-12-c907-pair-of-pants-log-gluing-theorem.md`.
 
 Wave-2C status: ordinary grading and duality do not bound length—an explicit
 self-dual formal length-two model survives.  Geometry nevertheless closes the
@@ -174,9 +185,11 @@ full ordinary small-even QDM, so `nu_6<=2`.  The exact positive cases are
 read from `R=prod Q_d/prod Q_w`: index one requires `Phi_2 Phi_3`, index two
 requires `Phi_3` or `Phi_6`, and indices three/four are zero.  The first
 non-WCI test is also closed: the exact $V_5$ operator has four unramified
-irregular branches of framed residue zero, hence `nu_6(V_5)=0`.  Search next
-in the remaining prime Fanos.  A provisional calculation for the genus-six
-prime (V_{10}) also gives zero, but needs a tracked recurrence certificate
+irregular branches of framed residue zero, hence `nu_6(V_5)=0`.
+Kuznetsov--Prokhorov's rationality theorems give `nu_6=0` for every smooth
+complex prime Fano of genera seven, nine, and ten.  A provisional calculation
+for the sole remaining direct prime-Fano row, genus six (V_{10}), also gives
+zero, but needs a tracked recurrence certificate
 and direct full-QDM scalarization before promotion.  Remember that the universal theorem must
 cover arbitrary non-Fano/non-nef centers and must kill a sectorial Rees
 extension, not merely its formal support.  See
@@ -189,10 +202,10 @@ four.  Hence the prime-Fano reconnaissance is now organized by
 stable-birational class.  The genus-twelve `V_22` row is zero via its landed
 Sarkisov links to `V_5` and `Q^3`; the cubic--`V_14` rank-two-bundle flop makes
 genus eight the same positive `nu_6` class as the cubic and proves
-`V_14 x P^1` irrational.  Direct operator work remains only for certification
-of genus six `V_10` and genera seven, nine, and ten.  See
+`V_14 x P^1` irrational.  Rationality closes genera seven, nine, and ten, so
+direct operator work remains only for certification of genus six `V_10`.  See
 `2026-08-12-c907-low-dimensional-stable-birational-compression.md` and
-`2026-08-12-c907-portfolio-combination-leaves.md`.
+`2026-08-12-c907-prime-fano-rationality-compression.md`.
 
 ## Wave 0 — freeze the invariant
 

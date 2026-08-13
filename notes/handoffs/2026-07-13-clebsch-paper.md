@@ -80,10 +80,16 @@ double-translated `B=C=1` chart closes every joint `y`/Rees-infinity valuation:
 positive-order faces are empty/free, while order zero is either free or exactly
 the four marked residual points.  The formerly implicit zero/infinity and
 generic/generic types are also closed, giving an exhaustive table of all ten
-unordered coordinate-orbit types.  The local tangent atlas is therefore
-complete.  The live analytic gate is its assembly into one finite common
-normalized fan with verified transitions, overlap ideals, and completeness,
-then proper collar topology and the hyperplane-equivariant Orlov/Gamma marking.
+unordered coordinate-orbit types.  This makes the support atlas complete, not
+the reduced-stratum tangent atlas: the first hostile overlap audit finds an
+additional imbalanced endpoint branch `h=2`, `b^4=-3Q`, `L=4b`.  An ordinary
+fan in the original `(B,C)` torus cannot include the
+translated divisors `B=1,C=1`; the common finite support object is instead the
+product of two marked-line tropical tripods refined by six universal graph
+weights.  The live analytic gate is the corresponding pair-of-pants/log
+modification with a serialized all-stratum graph/Fitting audit and full finite
+excluded-value list, then fibrewise Whitney--Thom collar topology and the
+hyperplane-equivariant Orlov/Gamma marking.
 The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
 direct threefold grading argument is closed negatively by an explicit
@@ -103,7 +109,9 @@ ordinary small-even QDM bridge even for non-Cartier degrees.  Thus every such
 rank-one weighted Fano CI has `nu_6<=2`.  The first non-WCI test $V_5$ is
 stronger: its exact small-even framed support has `nu_6=0`; a provisional
 genus-six (V_{10}) calculation also gives zero but is not yet promoted.
-Remaining carrier candidates lie
+Prime Fanos of genera seven, nine, and ten are rational over `C` and hence
+also have `nu_6=0`; genus six is the sole remaining direct prime-Fano operator
+row.  Remaining universal carrier candidates lie
 outside weighted CIs or outside the strong-WF ordinary sector, and weak
 factorization still permits arbitrary non-Fano/non-nef centers.  Current
 card: `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; plan:

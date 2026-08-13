@@ -82,8 +82,10 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   two-infinity corner, two generic translated-one stars, and the two
   translated `1/0` seams.  Two Laurent circuit lemmas compress their six
   31-mask replays; the translated stars' order-zero faces pass separate exact
-  Fitting tests, and the seam incidence closure retains exactly the four
-  marked residual endpoints.  Positive pole order
+  Fitting tests, and the seam incidence closure retains the four marked
+  residual endpoints in its advertised chart.  A later overlap audit shows
+  that this is not globally complete: the deeper imbalanced stratum
+  `r=v=0` also has `h=2`, `b^4=-3Q`, `L=4b`.  Positive pole order
   alone is only a prefilter:
   `delta^2 L=x^2` shows that total normalization can recreate an `L`-critical
   special fibre.  The bounded `1/1` Rees chart is closed separately:
@@ -96,12 +98,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   closes every joint `y`/Rees-infinity valuation: positive-order faces are
   empty/free, while order zero forces compact `y` and gives either the free
   `f_Q+bc` face or exactly the four marked residual Morse points.  Thus no
-  local tangent circuit remains in the exhaustive ten-unordered-type atlas;
+  support type remains outside the exhaustive ten-unordered-type atlas;
   the formerly implicit `(0,infinity)` and `(g,g)` types are now explicit.
-  The remaining algebra is
-  global: assemble one finite common normalized fan, verify all transition and
-  overlap ideals and fan completeness, then prove the separate proper collar
-  topology.
+  This does not close deeper reduced-stratum tangent circuits.  An ordinary
+  fan in the original `(B,C)` torus is impossible because
+  `B=1,C=1` are interior translated divisors.  The finite support complex is
+  instead the product of the two marked-line tropical tripods, refined by six
+  universal graph weights.  Its exact replay is support-only.  Serialize a
+  regular pair-of-pants/log refinement, verify the saturated multihomogeneous
+  graph and every reduced-stratum Fitting overlap, and exclude the full finite
+  endpoint-value list before proving the separate fibrewise Whitney--Thom
+  collar topology.
   The correct rank-four system is value-localized; the global group has ten
   critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
@@ -147,9 +154,12 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   `P^1` stabilization of smooth threefolds.  The landed Sarkisov links give
   `nu_6(V_22)=0`; Kuznetsov's rank-two-projectivization flop gives the cubic
   `nu_6` multiplicity on every smooth genus-eight `V_14` and proves
-  `V_14 x P^1` irrational.  Thus direct non-WCI prime-Fano work remains only
-  for genus six `V_10` (certificate pending) and genera seven, nine, and ten.
-  See `../2026-08-12-c907-low-dimensional-stable-birational-compression.md`.
+  `V_14 x P^1` irrational.  Kuznetsov--Prokhorov's rationality theorems close
+  genera seven, nine, and ten over `C`, hence give `nu_6=0` there.  Thus direct
+  non-WCI prime-Fano work remains only for genus six `V_10`, whose provisional
+  zero needs a tracked recurrence certificate and full-QDM scalarization.
+  See `../2026-08-12-c907-low-dimensional-stable-birational-compression.md`
+  and `../2026-08-12-c907-prime-fano-rationality-compression.md`.
 
 ## Active frontier: `m=2`
 
@@ -177,10 +187,11 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5`: assemble the now
-locally complete normalized saturated graph atlas into one finite common
-tangent-Fitting fan, verify every transition and overlap ideal plus fan
-completeness, and build the finite product-pair cover on all overlaps.  Then identify
+Complete the toric order-zero theorem for `Bl_(P^3)P^5`: serialize a regular
+refinement of the finite pair-of-pants/log support complex, realize the
+multihomogeneous dense-graph closure, and verify every reduced-stratum Fitting
+overlap and endpoint value.  Then build proper fibrewise Whitney--Thom
+excision pairs and identify
 the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
 parallel, continue the remaining non-WCI prime Fano scan for `nu_6>=4`.
@@ -248,6 +259,11 @@ Exterior-star compression and exact replays:
 `../2026-08-12-c907-joint-y-rees-infinity-fan.md`.
 Orbit-level completeness:
 `../2026-08-12-c907-local-boundary-orbit-atlas-closeout.md`.
+Common support mechanism:
+`../2026-08-12-c907-tripod-common-prefan.md`.
+Hostile gluing/collar boundary:
+`../2026-08-12-c907-pair-of-pants-log-gluing-theorem.md` and
+`../2026-08-12-c907-proper-collar-excision-theorem.md`.
 
 ## Gold architecture after `m=2`
 
