@@ -219,6 +219,26 @@ theorem sixAxisQuadraticSlopeRootInF4_frobenius_eq_add_one :
       linear_combination equation
     _ = sixAxisQuadraticSlopeRootInF4 + 1 := CharTwo.neg_eq _
 
+/-- In the affine chart of the five-point projective gluing packet, the
+transported marked root and `root+1` are distinct points exchanged by
+projective Frobenius. -/
+theorem sixAxisQuadraticSlope_markedProjectivePair :
+    f4ProjectiveFrobenius (some sixAxisQuadraticSlopeRootInF4) =
+        some (sixAxisQuadraticSlopeRootInF4 + 1) ∧
+      f4ProjectiveFrobenius
+          (some (sixAxisQuadraticSlopeRootInF4 + 1)) =
+        some sixAxisQuadraticSlopeRootInF4 ∧
+      (some sixAxisQuadraticSlopeRootInF4 : Option F4) ≠
+        some (sixAxisQuadraticSlopeRootInF4 + 1) := by
+  have first := sixAxisQuadraticSlopeRootInF4_frobenius_eq_add_one
+  have second := f4Frobenius_involutive sixAxisQuadraticSlopeRootInF4
+  rw [first] at second
+  refine ⟨congrArg some first, congrArg some second, ?_⟩
+  intro equality
+  apply sixAxisQuadraticSlopeRootInF4_frobenius_conjugate.1
+  rw [first]
+  exact Option.some.inj equality.symm
+
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/
 theorem sixAxisQuadraticSlopePolynomial_aeval :

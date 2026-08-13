@@ -86,6 +86,7 @@ The 140 reviewer-facing terminals currently verify:
   is proved finite etale of degree two over `F2`, identified algebraically
   with the concrete `F4` used in the gluing packet, and carries that marked
   root to one of the two non-prime-field elements exchanged by Frobenius,
+  whose two affine-chart points form an explicit projective-Frobenius two-cycle,
   together with the explicit diagonalization both in the root-adjoining field
   and directly over that concrete `F4`; and a scalar block over `F3`,
   without identifying
