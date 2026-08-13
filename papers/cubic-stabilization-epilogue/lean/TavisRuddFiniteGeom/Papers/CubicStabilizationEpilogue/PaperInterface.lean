@@ -7,6 +7,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Local
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -439,6 +440,47 @@ theorem sixAxisLocalChart_orthogonal_block
     GraphLattices.sixAxisComplementVector_pairing inverseFive inverse,
     GraphLattices.sixAxisComplementUnitMatrix_det,
     GraphLattices.sixAxisComplementUnitMatrix_det_prime_to_two_three⟩
+
+/-- Exact projective-line classification and counts behind the finite-field
+gluing packets.  Every point is uniquely the vertical line or a scalar graph;
+there are five points over `F4` and four over `F3`. -/
+theorem principalGluing_projectiveLine_packets :
+    Nonempty (Option GraphLattices.F4 ≃
+      Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4)) ∧
+      Nat.card (Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4)) = 5 ∧
+      Nonempty (Option (ZMod 3) ≃
+        Projectivization (ZMod 3) (ZMod 3 × ZMod 3)) ∧
+      Nat.card (Projectivization (ZMod 3) (ZMod 3 × ZMod 3)) = 4 :=
+  ⟨⟨GraphLattices.optionEquivProjectiveLine GraphLattices.F4⟩,
+    GraphLattices.f4_projectiveLine_card,
+    ⟨GraphLattices.optionEquivProjectiveLine (ZMod 3)⟩,
+    GraphLattices.f3_projectiveLine_card⟩
+
+/-- Polarization core for the gluing packet: a self-adjoint linear slope has
+isotropic graph for the alternating two-copy pairing; its graph range has
+the dimension of one coefficient copy while the ambient pair has twice that
+dimension. -/
+theorem principalGluing_selfAdjointGraph_isotropic_halfDimension
+    {K H : Type*} [Field K] [AddCommGroup H] [Module K H] [Module.Finite K H]
+    (coefficientPairing : H →ₗ[K] H →ₗ[K] K)
+    (slope : H →ₗ[K] H)
+    (selfAdjoint : ∀ left right,
+      coefficientPairing left (slope right) =
+        coefficientPairing (slope left) right) :
+    (∀ left right : H,
+      GraphLattices.multiplicityAlternatingPairing coefficientPairing
+        (GraphLattices.graphEmbedding (K := K) slope left)
+        (GraphLattices.graphEmbedding (K := K) slope right) = 0) ∧
+      Module.finrank K
+          (LinearMap.range (GraphLattices.graphEmbedding (K := K) slope)) =
+        Module.finrank K H ∧
+      Module.finrank K (H × H) = 2 * Module.finrank K H := by
+  exact ⟨GraphLattices.graphEmbedding_isotropic_of_selfAdjoint
+      coefficientPairing slope selfAdjoint,
+    GraphLattices.finrank_graphEmbedding_range slope,
+    GraphLattices.finrank_multiplicity_pair⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

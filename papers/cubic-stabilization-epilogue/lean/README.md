@@ -25,16 +25,16 @@ This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
-- 5 absent from Lean;
-- 14 represented by exact but strictly weaker fragments;
+- 4 absent from Lean;
+- 15 represented by exact but strictly weaker fragments;
 - 3 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 5 absent; 14 fragmentary; 3 conditional;
-1 complete; 41 reviewer terminals.
+Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
+1 complete; 43 reviewer terminals.
 
-The 41 reviewer-facing terminals currently verify:
+The 43 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -49,6 +49,9 @@ The 41 reviewer-facing terminals currently verify:
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
   orthogonal local block, and its exact depth-one arithmetic at two and three;
+- the projective-line classification into scalar graphs and the vertical
+  line, the five- and four-member finite-field packet counts, and the
+  isotropic half-dimension calculation for self-adjoint graph slopes;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;

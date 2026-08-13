@@ -48,12 +48,15 @@
     },
     {
       "manuscript_label": "prop:principal-gluing-packet",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A5-stable maximal isotropic kernels in the two- and three-primary discriminant modules.",
-      "hypotheses": "The relative six-axis source and its polarized A5-action.",
-      "conclusion": "The P1(F4) packet, stabilizers and outer exchange at two, exotic geometric selection, and scalar graphs at three.",
-      "cautions": "The family-level exotic selection uses Torelli, connectedness, and the generic automorphism group."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_projectiveLine_packets",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.principalGluing_selfAdjointGraph_isotropic_halfDimension"
+      ],
+      "objects": "Lean represents projective lines over a concrete field F4 and over F3 as the vertical point plus scalar graph points, as well as an arbitrary finite-dimensional coefficient module, a bilinear coefficient pairing, a linear graph slope, and the induced alternating pairing on two multiplicity copies.",
+      "hypotheses": "The projective classification uses only finiteness and the field axioms. The polarization theorem assumes exactly that the supplied slope is self-adjoint for the supplied coefficient pairing; finite-dimensionality is used for the half-dimension statement.",
+      "conclusion": "Every projective-line point is uniquely vertical or a scalar graph; P1(F4) has five members and P1(F3) has four. Every self-adjoint graph is isotropic for the alternating multiplicity pairing and has half the ambient two-copy dimension.",
+      "cautions": "Lean does not yet identify the A5 coefficient heart or its commutant with F4, prove that all A5-stable simple halves arise from these projective points, establish nondegeneracy needed to upgrade isotropic half-dimension to the named maximal-isotropic structure, classify the S6 and A5 stabilizers, prove Frobenius exchange of the exotic pair, or perform the Torelli/connected-family selection of the geometric kernel. Thus the finite-field enumeration and polarization algebra are checked, but the representation-theoretic and geometric assertions remain absent."
     },
     {
       "manuscript_label": "lem:graph-coefficient-lattice",
