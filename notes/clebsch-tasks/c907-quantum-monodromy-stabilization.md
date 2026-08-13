@@ -2,10 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** v1 closed: `X x P^1` is irrational for every smooth cubic
+**Status:** Silver closed: `X x P^1` is irrational for every smooth cubic
 threefold, proved directly from framed formal monodromy of the numerical small
-quantum connection.  The `m=2` research programme is active.  Full stable
-irrationality is open.  No Paper V or Lean promotion.
+quantum connection.  Gold (`m=2`) is active.  Platinum (all `m`, hence full
+stable irrationality) is open.  No Paper V or Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -26,6 +26,12 @@ X\times\mathbf P^m
 
 is irrational for every smooth cubic threefold `X`.  The full endpoint for all
 `m` would settle stable irrationality.
+
+**Value ladder:** Silver is the closed `m=1` theorem; Gold is the fivefold
+`m=2` theorem; Platinum is irrationality for every stabilization.  Older
+dated C907 notes use the legacy names “Silver” for `m=2` and “Gold” for all
+`m`; filenames and historical records are retained, but this live card uses
+the corrected ladder.
 
 ## Closed v1
 
@@ -210,7 +216,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   Stokes flags.  It is gauge only for a telescope deliberately defined in
   that coarsened category; the full Stokes/Gamma programme still needs `r=0`
   or a separate flag-invariance theorem.
-- Silver admits a much smaller target category than the full marked
+- Gold admits a much smaller target category than the full marked
   Stokes/Gamma object.  After extending to `K=Q(zeta_6)`, retain only the
   whole generalized `zeta_6` eigenspace and one intrinsic nilpotent operation
   `N`.  Finite nilpotent `K[N]`-modules are Krull--Schmidt with
@@ -238,7 +244,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   monodromy: parameter transport commutes with formal angular monodromy by
   uniqueness of the relative formal decomposition.  Iritani's Gamma formula
   identifies that parameter loop with tensor by the line bundle, so
-  `N_L=1-tau_L` is already an intrinsic nilpotent on the minimal Silver
+  `N_L=1-tau_L` is already an intrinsic nilpotent on the minimal Gold
   packet.  Product naturality calibrates the endpoint as `J_3`.  The
   remaining new bridge is narrower: ambient primitive-sixth projection must
   annihilate Gamma-framed classes supported in absolute dimension at most
@@ -270,7 +276,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   `X x P^2` is `J_3`, and its square on a threefold center factors through a
   generic curve fibre (or vanishes when the image has dimension at most one).
   Hence an exact Gamma/cyclotomic projector compatible with Orlov maps,
-  products, and Gysin support would close both Silver gates for arrows over
+  products, and Gysin support would close both Gold gates for arrows over
   `P^2`.  The unresolved locus is the Rees resolution of the rational
   `P^2`-map, where the hyperplane is only a movable system and arbitrary
   threefold centers can reappear.  See
@@ -304,7 +310,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   `../2026-08-13-c907-relative-fibre-cutoff-no-go.md`.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
-  geometry but projects to zero in the minimal Silver category.
+  geometry but projects to zero in the minimal Gold category.
   `Bl_X P^5` for a cubic center is nonzero but only one-dimensional, so its
   nilpotent operator is forced to vanish and it tests normalization rather
   than splitting.  The first possible extension test is
@@ -316,8 +322,8 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   all-codimension blowup sum: for `m>=3`, the two presentations of
   `X x Bl_p P^m` give respectively
   `J_(m+1) direct-sum J_1^(m-1)` and
-  `J_m tensor J_2=J_(m+1) direct-sum J_(m-1)`.  Silver avoids the conflict
-  because its only nonzero fivefold center has codimension two; Gold needs a
+  `J_m tensor J_2=J_(m+1) direct-sum J_(m-1)`.  Gold avoids the conflict
+  because its only nonzero fivefold center has codimension two; Platinum needs a
   non-split graded exceptional-string functor or a different projective
   operator.  See
   `../2026-08-13-c907-higher-codimension-jordan-exchange-obstruction.md`.
@@ -431,7 +437,7 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, prove the point-purity degeneration lemma isolated by the
+For Gold, prove the point-purity degeneration lemma isolated by the
 birational normal-splitting reduction.  Track the large-radius Gamma point
 section through deformation to the normal cone and the relative degeneration
 formula, and show every gluing term has zero residual-center Stokes pairing;
@@ -521,13 +527,13 @@ Hostile gluing/collar boundary:
 `../2026-08-12-c907-pair-of-pants-log-gluing-theorem.md` and
 `../2026-08-12-c907-proper-collar-excision-theorem.md`.
 
-## Gold architecture after `m=2`
+## Platinum architecture after `m=2`
 
 To reach every `m`, prove:
 
 - an intrinsic cubic-isotypic Stokes/Gamma Rees object;
 - a graded non-split exceptional-string blow-up law in every codimension,
-  reducing to the strict biproduct on Silver's codimension-two nonzero sector;
+  reducing to the strict biproduct on Gold's codimension-two nonzero sector;
 - product compatibility by Thom--Sebastiani; and
 - the universal carrier bound `width <= dim-3`.
 
@@ -538,9 +544,10 @@ string, and the carrier theorem, not further finite bookkeeping.
 
 ## Acceptance
 
-- **Silver:** both `m=2` gates above, followed by a complete weak-factorization
+- **Silver:** closed by the unconditional `X x P^1` theorem.
+- **Gold:** both `m=2` gates above, followed by a complete weak-factorization
   proof of `X x P^2` irrational.
-- **Gold:** the all-codimension strict theory and universal carrier bound,
+- **Platinum:** the all-codimension strict theory and universal carrier bound,
   proving irrationality for every `m`.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
@@ -554,4 +561,4 @@ string, and the carrier theorem, not further finite bookkeeping.
 - Follow the literature-cache and reproducibility conventions for new source
   or computational claims.
 - The queued one-step abstraction/Fano reconnaissance remains behind the
-  active gold-architecture pass unless the author reorders it.
+  active Platinum-architecture pass unless the author reorders it.

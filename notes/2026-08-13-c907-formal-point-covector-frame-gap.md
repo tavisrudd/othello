@@ -155,7 +155,7 @@ coefficient.
    Exact zero of its formal center columns would then survive summation.
    This is much weaker than analytifying the entire decomposition, but the
    paper's general non-analyticity warning makes the estimates substantive.
-   For the Silver codimension-two arrow there is only one leading exceptional
+   For the Gold codimension-two arrow there is only one leading exceptional
    Fourier shift, so a favorable dominance sector can exist; the hard input
    is then a uniform growth bound for the analytically continued point column
    and control across its bounding Stokes rays.  In higher codimension the
@@ -179,7 +179,7 @@ coefficient.
 
 ## Mystery ledger
 
-- **Settled by AA/EJ/TT:** the apparent Gold proof did not fail in weak
+- **Settled by AA/EJ/TT:** the apparent Platinum proof did not fail in weak
   factorization, Kunneth, or the cohomological point calculation.  It failed
   at the unnamed change from the large-radius Gamma frame to the exceptional
   Laurent-cusp frame.

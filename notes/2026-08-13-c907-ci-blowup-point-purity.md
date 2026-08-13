@@ -205,7 +205,7 @@ zero locus of two nef line-bundle sections.  For a general center, Iritani's
 formal stationary-phase coefficient has the same leading Gamma zero, but
 curve corrections in the master space need not reorganize into the Kummer
 polynomial (3).  Extending point purity from split complete intersections to
-arbitrary centers remains the exact Silver/Gold gate.
+arbitrary centers remains the exact Gold/Platinum gate.
 
 Weak factorization does not remove this gate.  Its centers may be chosen
 smooth and normally crossing the running boundary, but the theorem does not
