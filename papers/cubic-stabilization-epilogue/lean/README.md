@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 73 reviewer terminals.
+1 complete; 75 reviewer terminals.
 
-The 73 reviewer-facing terminals currently verify:
+The 75 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -73,7 +73,12 @@ The 73 reviewer-facing terminals currently verify:
   orthogonal local block, its exact depth-one arithmetic at two and three, and
   explicit residue-field slope models: the block-diagonal matrix formed from
   two copies of the companion matrix of the irreducible polynomial
-  `t^2+t+1` over `F2`, and a scalar block over `F3`, without identifying
+  `t^2+t+1` over `F2`, whose matrix minimal polynomial is proved to be that
+  quadratic; its entrywise scalar extension to any characteristic-two
+  commutative ring containing a supplied root is identified with the
+  same-pattern matrix and diagonalized by an explicit basis, with the two
+  conjugate roots each repeated twice; and a scalar block over `F3`,
+  without identifying
   those models with the geometric principal kernel;
 - the projective-line classification into scalar graphs and the vertical
   line, the five- and four-member finite-field packet counts, and the

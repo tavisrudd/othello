@@ -1059,6 +1059,39 @@ theorem sixAxisLocalChart_twoPrimary_quadraticSlopeModel :
     GraphLattices.sixAxisTwoQuadraticSlope_not_scalar,
     GraphLattices.zmodTwo_quadraticSlopePolynomial_no_root⟩
 
+/-- Exact minimal-polynomial statement for the characteristic-two
+residue-field model.  The matrix has minimal polynomial `t²+t+1` over `F₂`.
+This identifies the algebraic type of the displayed model only, not the slope
+of the geometric principal kernel. -/
+theorem sixAxisLocalChart_twoPrimary_minimalPolynomialModel :
+    minpoly (ZMod 2) GraphLattices.sixAxisTwoQuadraticSlope =
+      GraphLattices.sixAxisQuadraticSlopePolynomial :=
+  GraphLattices.sixAxisTwoQuadraticSlope_minpoly
+
+/-- Explicit spectral splitting of the characteristic-two model.  Over any
+commutative characteristic-two ring containing a root `ω` of `t²+t+1`, the
+displayed change of basis is invertible and diagonalizes the two companion
+blocks with diagonal `(ω,ω+1,ω,ω+1)`.  No existence or geometric
+identification of such a splitting ring is asserted. -/
+theorem sixAxisLocalChart_twoPrimary_splitsOverQuadraticRoot
+    {K : Type*} [CommRing K] [CharP K 2] (ω : K)
+    (root : ω ^ 2 + ω + 1 = 0) :
+    GraphLattices.sixAxisTwoQuadraticSlope.map
+          (ZMod.castHom dvd_rfl K) =
+        GraphLattices.sixAxisTwoQuadraticSlopeOver K ∧
+      GraphLattices.sixAxisTwoQuadraticEigenbasis K ω *
+          GraphLattices.sixAxisTwoQuadraticEigenbasisInverse K ω = 1 ∧
+      GraphLattices.sixAxisTwoQuadraticEigenbasisInverse K ω *
+          GraphLattices.sixAxisTwoQuadraticEigenbasis K ω = 1 ∧
+      GraphLattices.sixAxisTwoQuadraticSlopeOver K *
+          GraphLattices.sixAxisTwoQuadraticEigenbasis K ω =
+        GraphLattices.sixAxisTwoQuadraticEigenbasis K ω *
+          GraphLattices.sixAxisTwoQuadraticDiagonal K ω := by
+  exact ⟨GraphLattices.sixAxisTwoQuadraticSlope_map_castHom K,
+    GraphLattices.sixAxisTwoQuadraticEigenbasis_mul_inverse K ω,
+    GraphLattices.sixAxisTwoQuadraticEigenbasis_inverse_mul K ω,
+    GraphLattices.sixAxisTwoQuadraticSlopeOver_mul_eigenbasis K ω root⟩
+
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
 four-dimensional depth-one block.  It is literally a scalar-algebra image and
