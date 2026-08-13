@@ -2300,7 +2300,8 @@ theorem adicFormalBaseShift_bulkSystem_compatible_and_charpoly
 
 /-- For a constant finite square connection matrix over a commutative
 `ℚ`-algebra, Lean constructs the normalized exponential coefficients and
-proves `G₀=1` and the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree.  No varying
+proves `G₀=1`, the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree, and
+coefficient compatibility under every rational-algebra homomorphism.  No varying
 quantum product, filtered quotient, Laurent loop
 coordinate, formal power series, truncation, derivative, uniqueness,
 convergence, or analytic gauge is constructed. -/
@@ -2309,12 +2310,21 @@ theorem constantFlatGauge_normalized_and_recursion
     [CommRing R] [Algebra ℚ R]
     (connection : Matrix Index Index R) :
     Quantum.constantFlatGaugeCoefficient connection 0 = 1 ∧
-      ∀ degree : ℕ,
+      (∀ degree : ℕ,
         (degree + 1 : R) •
             Quantum.constantFlatGaugeCoefficient connection (degree + 1) =
-          -connection * Quantum.constantFlatGaugeCoefficient connection degree :=
+          -connection * Quantum.constantFlatGaugeCoefficient connection degree) ∧
+      ∀ (S : Type*) [CommRing S] [Algebra ℚ S]
+          (homomorphism : R →ₐ[ℚ] S) (degree : ℕ),
+        (Quantum.constantFlatGaugeCoefficient connection degree).map
+            homomorphism.toRingHom =
+          Quantum.constantFlatGaugeCoefficient
+            (connection.map homomorphism.toRingHom) degree :=
   ⟨Quantum.constantFlatGaugeCoefficient_zero connection,
-    Quantum.constantFlatGaugeCoefficient_succ connection⟩
+    Quantum.constantFlatGaugeCoefficient_succ connection,
+    fun _ _ _ homomorphism mappedDegree =>
+      Quantum.constantFlatGaugeCoefficient_map
+        homomorphism connection mappedDegree⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

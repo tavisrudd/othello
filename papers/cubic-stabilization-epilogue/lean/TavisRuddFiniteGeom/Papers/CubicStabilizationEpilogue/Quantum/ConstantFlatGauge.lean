@@ -14,7 +14,9 @@ that `(n+1)Gₙ₊₁ = -A Gₙ`.  No formal power series, truncation, derivativ
 uniqueness statement is represented.  This is the algebraic constant-
 coefficient case of the recursive finite-level gauge construction; no quantum
 product, varying bulk connection, filtered coefficient quotient, Laurent loop
-coordinate, convergence, or analytic gauge is represented.
+coordinate, convergence, or analytic gauge is represented.  Each coefficient
+is proved compatible with arbitrary homomorphisms of commutative rational
+algebras.
 
 The proof is symbolic and kernel checked, with no external computation or
 oracle.
@@ -63,6 +65,29 @@ theorem constantFlatGaugeCoefficient_succ
   push_cast
   field_simp
   ring
+
+/-- Rational-algebra homomorphisms between commutative rational algebras carry the
+normalized coefficient of a constant connection matrix to the corresponding
+coefficient of the mapped matrix. -/
+theorem constantFlatGaugeCoefficient_map
+    {Index R S : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R] [CommRing S] [Algebra ℚ S]
+    (homomorphism : R →ₐ[ℚ] S) (connection : Matrix Index Index R)
+    (degree : ℕ) :
+    (constantFlatGaugeCoefficient connection degree).map homomorphism.toRingHom =
+      constantFlatGaugeCoefficient
+        (connection.map homomorphism.toRingHom) degree := by
+  have hscalar :
+      homomorphism.toRingHom
+          (algebraMap ℚ R (((-1 : ℚ) ^ degree) / degree.factorial)) =
+        algebraMap ℚ S (((-1 : ℚ) ^ degree) / degree.factorial) := by
+    exact homomorphism.commutes _
+  rw [constantFlatGaugeCoefficient, constantFlatGaugeCoefficient]
+  rw [Matrix.map_smul' homomorphism.toRingHom _ _
+    (fun _ _ => homomorphism.map_mul _ _)]
+  rw [hscalar]
+  congr 1
+  exact Matrix.map_pow connection homomorphism.toRingHom degree
 
 end Quantum
 

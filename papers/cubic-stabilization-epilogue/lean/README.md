@@ -136,7 +136,8 @@ The 120 reviewer-facing terminals currently verify:
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas; for a constant matrix over a
   commutative rational algebra, the normalized exponential coefficients are
-  constructed and proved to satisfy the formal flat recursion in every degree,
+  constructed, proved to satisfy the formal flat recursion in every degree,
+  and proved compatible with arbitrary rational-algebra homomorphisms,
   without claiming a varying quantum product or filtered analytic gauge;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
