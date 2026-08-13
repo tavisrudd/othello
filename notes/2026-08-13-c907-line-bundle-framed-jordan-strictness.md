@@ -81,22 +81,27 @@ carries exactly \(J_3\) on \(X\times\mathbf P^2\).
 
 Every blowup of a model already mapping to \(\mathbf P^2\) inherits \(L\),
 and (1)--(3) make its \(K_0\)-operator comparison strictly split. On a smooth
-threefold center \(Z\), choose a general point \(q\in\mathbf P^2\) with
-smooth curve fibre \(i:F=f^{-1}(q)\hookrightarrow Z\). The Koszul resolution
-of \(q\) gives, up to a line-bundle unit acting trivially on the point class,
+threefold center \(Z\), the Koszul resolution of a point
+\(q\in\mathbf P^2\) gives exactly
 
 \[
- (1-[\mathcal O(1)])^2=[\mathcal O_q].
+ (1-[\mathcal O(1)])^2=[\mathcal O_q],
 \]
 
-Hence
+because \([\mathcal O_q]=(1-[\mathcal O(-1)])^2\) and tensoring a point
+class by \(\mathcal O(2)\) fixes it.  If \(f(Z)\) has dimension at most one,
+choose \(q\notin f(Z)\); the pulled-back Koszul complex is exact and
+\(N_L^2=0\) already on \(K_0(Z)\).  If \(f\) is dominant, choose a general
+\(q\) with smooth lci curve fibre \(i:F=f^{-1}(q)\hookrightarrow Z\). Then
 
 \[
- N_L^2(x)=x\cdot f^*[\mathcal O_q]=i_*Li^*(x).
+ N_L^2(x)=x\cdot \mathbb Lf^*[\mathcal O_q]
+ =i_*\mathbb Li^*(x).
  \tag{5}
 \]
 
-If the cyclotomic realization respects this support factorization and every
+If the cyclotomic realization respects this derived Gysin/restriction
+factorization \(i_*\mathbb Li^*\) and every
 curve has zero primitive-sixth packet, (5) forces \(N_L^2=0\) on the center
 packet. Thus the same bridge would prove both strictness and the no-\(J_3\)
 carrier theorem for centers already mapping to \(\mathbf P^2\).
@@ -120,7 +125,7 @@ needs all of:
 5. presentation independence on the operation-framed category used by weak
    factorization; and
 6. for the carrier conclusion, support-local compatibility with
-   \(i_*Li^*\) in (5).
+   \(i_*\mathbb Li^*\) in (5).
 
 Under these hypotheses, (2) supplies the strict \(K[N]\)-biproduct directly,
 and item 6 makes (5) supply the no-\(J_3\) center theorem on relative arrows.
