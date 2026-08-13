@@ -187,6 +187,29 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   count cannot prove it.  See
   `../2026-08-12-c907-conic-primitive-sheaf-node-vanishing.md` and
   `../2026-08-13-c907-del-pezzo-primitive-monodromy-obstruction.md`.
+- Proper-support localization is now compressed to two direct proper models.
+  Conditional on the stated direct exterior strict-model hypotheses, 70
+  logarithmic residue-character fields plus two `L=0` exclusions give
+  `p_ext(B_ext) subset T_11`, while the simultaneous ratio graph controls its
+  entire proper fibre over `T_11 minus C_Morse`.  Proper pushforward therefore
+  supports `psi_delta phi_(L-u)(j_!A)` only on the four residual Morse
+  sections.  With proper nearby-cycle/direct-image comparison, the intrinsic
+  nearby value-disk cone has one free rank-four group in thimble degree five.
+  This is a support/rank theorem: relative duality, `can/var`, orientations,
+  and nonbraiding path transport are still required for the directed `P^3`
+  Seifert form.  See
+  `../2026-08-13-c907-order-zero-proper-support-localization.md`.
+- The exact numerical carrier threshold for the positive `m=2`
+  Krull--Schmidt telescope is `ell<=2`, not `ell<=1`.  More weakly, it suffices
+  that no Tate shift of the endpoint `J_3` occur in any threefold-center
+  packet.  Hence the landed square-zero/length-two countermodel is harmless;
+  the first real threats are the nodal Clifford and stationary `D_5` second
+  composites.  See `../2026-08-13-c907-sharp-m2-carrier-threshold.md`.
+- The point-class shear acts trivially on the associated graded of the
+  coarsened `N`-adic Rees object, but it does not preserve ordinary directed
+  Stokes flags.  It is gauge only for a telescope deliberately defined in
+  that coarsened category; the full Stokes/Gamma programme still needs `r=0`
+  or a separate flag-invariance theorem.
 
 ## Active frontier: `m=2`
 
@@ -205,8 +228,9 @@ For the fivefold `X x P^2`, prove both:
    \[
    gr_{1/6}A(Bl_ZY)=gr_{1/6}A(Y)\oplus T\,gr_{1/6}A(Z).
    \]
-2. **Carrier gate.**  Every smooth projective threefold `Z` has
-   cubic-isotypic enriched length `ell_(1/6)(Z) <= 1`.
+2. **Carrier gate.**  No smooth projective threefold center contains a Tate
+   shift of the endpoint length-three indecomposable.  The clean numerical
+   sufficient condition is `ell_(1/6)(Z) <= 2`.
 
 The endpoint has length three; lower-dimensional centers have no cubic atom;
 threefold centers have codimension two and contribute one shift.  These gates
@@ -214,18 +238,17 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5` by choosing, for each
-coarse bounded-value boundary neighborhood, one proper modification whose
-**entire** fibre is covered by the certified protected/exterior controlled
-charts; equivalently serialize a proper hypercover and its intersections.
-Apply proper-support descent to kill the exterior value cycles, prove the
-tame compact-support-to-rapid-decay comparison, and identify the remaining
-four labelled thimbles with the `P^3` Stokes system.  Then fix the
-monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
-parallel, test the universal carrier on the exact two local targets: the
-conic point composite and the stationary `D_5` projection in a cubic-surface
-Lefschetz fibration.  The prime-Fano scan is closed and should not be
-repeated.  The ranked portfolio leaves and exact non-combinations are in
+Serialize the direct proper exterior strict model in the fixed ambient and
+the proper nearby-cycle/direct-image comparison used by the rank-four
+localization theorem.  Then transport relative duality, `can/var`, local
+orientations, and the nonbraiding path star to identify the four nearby
+thimbles with the directed `P^3` Seifert system.  Prove the integral residual
+Orlov/Rees biproduct; decide whether its birational telescope can live in the
+coarsened `N`-adic Rees category or must fix the full directed flag.  In
+parallel, test the exact weakened carrier target on the two surviving second
+composites: the nodal Clifford socle and the stationary `D_5` projection in a
+cubic-surface Lefschetz fibration.  The prime-Fano scan is closed and should
+not be repeated.  The ranked portfolio leaves and exact non-combinations are in
 `../2026-08-12-c907-portfolio-combination-leaves.md`.
 Do not differentiate in
 Novikov directions before the marked order-zero comparison passes.
