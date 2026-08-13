@@ -3,8 +3,10 @@
 **Lane:** `clebsch`
 
 **Verdict:** the bounded-value absolute-schön route eliminates the need for an
-explicit 97,709-chart *scheme* construction to obtain a proper regular graph
-model over the original `delta` DVR.  It must be stated with one correction:
+explicit 97,709-chart *scheme* construction to obtain a proper regular model
+of the smaller very-affine graph over the original `delta` DVR.  It must be
+stated with two qualifications: attachment across the retained translated
+divisors `U=0,V=0` to the original graph is separate, and
 the certified initials are smooth as schemes with `L` allowed to vary.  This
 proves regularity of the total graph by the full torus action; it does not
 prove smoothness over the fixed value torus `S=G_m,L`.  The latter is exactly
@@ -33,15 +35,18 @@ The circuit argument then proves that the resulting initial scheme in
 
 Here `T_7` inverts the auxiliary coordinates `U,V`, so this very-affine open
 omits the retained translated divisors `B=1` and `C=1`.  This does not discard
-them from the graph model.  On the generic fibre, eliminate `U=1-B` and
+them set-theoretically from a common marked closure.  On the generic fibre,
+eliminate `U=1-B` and
 `V=1-C`; the graph ring is a localization of an integral Laurent polynomial
 ring, and `UV` is a non-zero-divisor.  Hence the locus `UV!=0` is
-schematically dense in the graph with `U,V` allowed to vanish.  Its closure
-in any marked toric ambient is therefore the same schematic closure as the
-original generic graph.  Over the DVR we always take that strict generic
-closure, so no vertical component and no translated divisor is saturated
-away.  This density comparison attaches the intrinsic tropical
-compactification back to the original Cartier graph.
+schematically dense in the graph with `U,V` allowed to vanish.  Consequently,
+**once a common marked ambient and morphism from the original graph have been
+supplied**, both generic graphs have the same schematic closure there.  The
+intrinsic tropical construction alone does not supply that comparison; the
+existing Kummer atlas records the needed marked charts but has not yet proved
+their strict Cartier-generator attachment.  Thus this note does not claim
+that its regular compactification is already the desired original graph model
+through `U=0,V=0`.
 
 The filtered-regular-sequence step is legitimate here directly on the
 original very-affine graph.  It is not using a strict-transform chart: the
@@ -106,7 +111,9 @@ bounded-value schönness of the **very-affine graph**; no strict-transform chart
 attachment is needed for that conclusion.
 
 Fix a rational weight `w` and multiply the graph equation by the Laurent
-unit `XBC`.  Scale `w` to an integral filtration and write
+unit `XBC`.  Scale `w` to an integral filtration and give the valued Laurent
+ring the good separated exhaustive weight filtration combining character
+weight with the `delta`-adic coefficient valuation.  Write
 
 \[
  A=K[y_1^{\pm1},y_2^{\pm1},y_3^{\pm1},B^{\pm1},U^{\pm1},
@@ -142,8 +149,10 @@ weight, not merely over the stored representatives.
 The filtered Koszul complex on `f_B,f_C,H` has associated graded the Koszul
 complex on (4).  The latter is exact in positive degrees.  The elementary
 filtered-complex lifting argument (take the highest surviving filtration
-symbol of a cycle and lift a Koszul preimage) makes the original Koszul
-complex strict.  In degree zero this gives the exact equality
+symbol of a cycle and lift a Koszul preimage), equivalently the standard-basis
+lemma for a regular sequence of symbols, makes the original Koszul complex
+strict.  This uses goodness, separatedness, and exhaustiveness of the weight
+filtration, not adic completeness.  In degree zero it gives the exact equality
 
 \[
  \operatorname{in}_w(f_B,f_C,H)
@@ -202,7 +211,9 @@ Let `Sigma_trop` be the rational nonconstant-coefficient tropical complex of
 the graph with `v(L)=0`.  It is obtained by retaining exactly the cells whose
 tie masks have cardinality at least two: the 57 non-singleton masks.  The
 extended replay records this nonemptiness bit for every realized
-ordered-type/mask pair.  A regular fan in the **same** lattice
+ordered-type/mask pair.  We use this explicitly constructed supported
+complex, so no separate rigidity-based existence theorem is invoked.  A
+regular fan in the **same** lattice
 
 \[
  N=\mathbb Z\langle t,p_1,p_2,p_3,\beta,\gamma\rangle
@@ -244,6 +255,14 @@ but the final model factors through the chosen `Bl_(delta,U,V)` and retains
 the three named Rees maps.  No Kummer cover is needed for regularity; only a
 reduced semistable central fibre would require a ramified/Kummer alteration.
 
+The fan used for the tropical pair is supported **exactly** on
+`Sigma_trop`; its multiplication map is smooth and surjective over precisely
+those toric orbits.  If a complete ambient toric scheme is desired, embed
+this supported regular fan in a regular completion afterwards.  The already
+proper tropical closure remains closed in that completion.  Extra completion
+orbits are not declared part of the tropical pair and no surjectivity claim is
+made over them.
+
 The incidence transition agrees with this geometry.  The equation
 
 \[
@@ -258,9 +277,9 @@ tripod rays.
 
 ## 5. What this closes and what it cannot close
 
-The corrected theorem supplies:
+The corrected theorem supplies for the smaller very-affine graph:
 
-- a proper regular graph compactification over `R x S`;
+- a proper regular compactification over `R x S`;
 - SNC total boundary support;
 - preservation under any further integral regular subdivision; and
 - a model factoring through the fixed residual Rees blow-up with no change to
@@ -268,6 +287,8 @@ The corrected theorem supplies:
 
 It does not supply:
 
+- the common-ambient strict-closure attachment across `U=0,V=0` needed to
+  identify this directly with the original graph model;
 - strict `L`-submersivity on actual boundary strata;
 - a finite list of those *coarse* strata after auxiliary translated divisors
   are forgotten;
