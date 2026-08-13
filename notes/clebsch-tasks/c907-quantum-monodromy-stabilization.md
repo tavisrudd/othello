@@ -254,6 +254,14 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   this one projector theorem implies `m=2`.  An idempotent only on the formal
   solution space is insufficient because it cannot see support.  See
   `../2026-08-13-c907-divisorial-support-square-theorem.md`.
+- Standard motivic candidates do not furnish this projector.  The relative
+  quotient `Perf(Y)/Perf_(dim<=2)(Y)` is the correct localizing host but
+  retains `Q[x]/(x^3)` on `P^5`; full categorical Serre has only `+/-1`
+  spectrum; and the cubic residual Serre projector is mutation-framed and
+  does not kill point support.  A global tensor-ideal quotient is impossible
+  because killing `Perf(point)` kills the monoidal unit.  The exact missing
+  construction is a **relative framed localizing quantum motive**.  See
+  `../2026-08-13-c907-coniveau-cyclotomic-packet-spec.md`.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
   geometry but projects to zero in the minimal Silver category.

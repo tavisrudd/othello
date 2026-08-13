@@ -130,6 +130,13 @@ final cancellation.
 - **No finite bookkeeping mystery remains:** further mask enumeration, Fano
   tables, formal rank counts, Euler Grams, or root permutations cannot supply
   the missing projector or Rees transport.
+- **Construction boundary:** ordinary coniveau/support quotients provide the
+  correct localizing host but retain a raw \(J_3\) on \(\mathbf P^5\) and no
+  \(\Phi _6\) action.  Full categorical Serre has only \(\pm1\) spectrum;
+  the cubic residual Serre projector is mutation-framed and fails
+  low-support localization.  The missing object is genuinely new: a relative
+  framed localizing quantum motive, not a standard numerical or
+  noncommutative-motive projector.
 
 ## Highest-EV next theorem
 
