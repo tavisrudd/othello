@@ -488,3 +488,78 @@ and `π_{Z*}(1)=0`, `π_{Z*}(H|_Z)=1`, `π_{Z*}(H^2|_Z) = 3C_1`,
 `π_{Z*}(H^3|_Z) = 18\,pr_1^*[pt]_F`, one gets
 `π_*(Z^4) = π_{Z*}(ν^3) ≡ G\,C_1` and `π_*(Z'^4) ≡ G\,C_2`, i.e.
 `c_2(V) ≡ G(C_1+C_2) (mod 2)` — visibly `σ`-symmetric, as required.
+
+## 7. Theorem F2: the negative transfers — `λ_ℰ = 0`
+
+Two kill lemmas close the two surviving terms of `Δ`.
+
+**Lemma S (symmetric coefficients die against pure tests).** Let
+`θ ∈ H^4(F×F,\mathbf Z)` be `σ`-symmetric and let `T` be one of the pure
+antisymmetric tests, i.e. an integral combination of `pr_1^*b − pr_2^*b` with
+`b ∈ H^3(F,\mathbf Z)` (compression note §2). Then for every
+`γ ∈ H^1(F,\mathbf Z)`
+
+\[ \int_{F×F} T·θ·\bigl(pr_1^*γ + pr_2^*γ\bigr) \;\equiv\; 0 \pmod 2 . \]
+
+*Proof.* Mod two `T ≡ Σ_k c_k(b_{k,1}+b_{k,2})`, so it suffices to treat
+`(b_1+b_2)(γ_1+γ_2)θ = [b_1γ_1 + b_2γ_2]θ + [b_1γ_2 + b_2γ_1]θ`. The second
+bracket is exchanged by `σ`, which is a holomorphic automorphism, so
+`∫b_1γ_2θ = ∫σ^*(b_1γ_2θ) = ∫b_2γ_1θ` (using `σ^*θ = θ`) and the two terms sum
+to an even integer. For the first bracket, `b_iγ_i = pr_i^*(bγ) = n\,[pt]_i`
+with `n = ∫_F bγ`, and again by `σ`-symmetry of `θ`
+`∫[pt]_1θ = ∫[pt]_2θ`, so the first bracket contributes `2n∫[pt]_1θ`. ∎
+
+**Lemma C (the `G`-coefficient dies by the certified `t`-control).** For every
+tested pair, `∫_{X×B}(x⊗T_a)·G·c_3^{(3,3)} ≡ 0 (mod 2)`.
+
+*Proof.* Lemma T at `r = 0` says the `t`-twist `𝒢^{(t)} = 𝒢^{(0)}⊗p_B^*O(tG)`
+changes the readout class by `tG\,c_3^{(3,3)} + t^2G^2c_2^{(3,1)}` mod 2. The
+committed main-term certificate verifies that the readout matrix is
+`t`-independent mod two. Taking `t` odd gives
+`∫(x⊗T_a)[G c_3^{(3,3)} + G^2c_2^{(3,1)}] ≡ 0`. The second summand is itself
+even: `G^2` is `σ`-symmetric (indeed `≡ 0` by (6.0)) and
+`c_2^{(3,1)} ≡ Ξ_1+Ξ_2`, so Lemma S applies slotwise. ∎
+
+**Theorem F2 (the ℰ-model verdict).** Let `ℰ` be the universal family of
+`M = M_X(v) ≅ Bl_0Θ` on `X×M`. Then for every pure antisymmetric test and
+every `x ∈ H^3(X,\mathbf Z)`,
+
+\[ N_ℰ(x,a) \;=\; \int_{X×M}p_X^*x·p_M^*\bigl(b^*(Θ∧a)\bigr)·c_4(ℰ)
+   \;\equiv\; N_𝒢(x,a) \;\equiv\; 0 \pmod 2 , \]
+
+i.e. **`λ_ℰ = λ_𝒢 = 0`**: the `(3,5)`-legs of `c_4(ℰ)` all lie in
+`b^*H^5(J,\mathbf Z) + \mathrm{tors}`, and the `(1,5)` escape channel is **not**
+populated by the universal family.
+
+*Proof.* Work on `X×Y`, `Y = Bl_Δ(F×F)`, where the honest transfer identity
+`∫_{X×Y}c_4((1×q)^*𝒰)(x⊗μ^*T_a) = ∫_{X×M}c_4(𝒰)(x⊗q_*μ^*T_a)
+= ∫_{X×M}c_4(𝒰)(x⊗b^*(Θ∧u_k))` holds for any family `𝒰` on `X×M`
+(projection formula plus the compression note's exact pure tests). Set
+`ℰ_Y := L_{O_X}(𝒢(H))[−1]` with `𝒢` the span model itself. By fineness of
+`M` and the classifying property of `q`, `(1×q)^*ℰ ≅ ℰ_Y ⊗ p_Y^*N` for a line
+bundle `N` on `Y`, and by **Lemma T at rank three** that twist is invisible
+mod two. So `N_ℰ ≡ ∫_{X×Y}c_4(ℰ_Y)^{(3,5)}(x⊗μ^*T_a)`.
+
+Theorem F1 evaluates that class as
+`c_4(𝒢)^{(3,5)} + c_1(V)c_3^{(3,3)} + (c_2(V)+G^2)c_2^{(3,1)}` mod two. The
+first summand pairs to `N_𝒢 = 0` (committed certificate). The second pairs to
+zero by (6.2) plus Lemma C (in the defect case `c_1(V) ≡ 0` it is zero
+outright). The third pairs to zero by (6.0), §6.3 and Lemma S: `c_2(V)+G^2` is
+`σ`-symmetric mod two and `c_2^{(3,1)} ≡ Ξ_1+Ξ_2` splits slotwise into the
+`γ_1+γ_2` shape Lemma S consumes. ∎
+
+**Corollary (channel closure).** Combining with pass-5 Theorem E, pass-1
+Theorem B, pass-2 Theorems 1–3 and the span/incidence product dictionary: the
+`(1,5)` Hodge channel on `M` is unpopulated by *every* candidate source named
+in the C908 corpus — pullbacks from `J×J`, exceptional-divisor cycles, the
+span/incidence dictionary, `c_4` of the span model, and now `c_4` of the
+`ℰ`-model universal family and all of its Chern polynomials with `(3,5)`
+readout. Extraction item F is discharged.
+
+**Exact family class covered.** The statement covers: every family on `X×M`
+whose K-class is `ε([p_M^*W] − [𝒢_M ⊗ p_X^*L])⊗[p_M^*N]` for `W ∈ K^0(M)`,
+`L ∈ Pic(X)`, `N ∈ Pic(M)`, `ε = ±1`, with `𝒢_M` the `β+γ` universal family —
+in particular every sextant translate of the universal family under the Serre
+functor and its inverse, every shift, and every line-bundle normalization.
+It does **not** claim anything about non-mutation-related families, nor about
+the `(2,4)` channel.
