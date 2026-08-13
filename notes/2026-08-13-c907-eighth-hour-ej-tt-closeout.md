@@ -136,7 +136,9 @@ final cancellation.
   the cubic residual Serre projector is mutation-framed and fails
   low-support localization.  The missing object is genuinely new: a relative
   framed localizing quantum motive, not a standard numerical or
-  noncommutative-motive projector.
+  noncommutative-motive projector.  A fixed-fivefold cutoff quotient is only
+  the support receiver; products and pullbacks require the entire bivariant
+  coniveau filtration.
 
 ## Highest-EV next theorem
 
