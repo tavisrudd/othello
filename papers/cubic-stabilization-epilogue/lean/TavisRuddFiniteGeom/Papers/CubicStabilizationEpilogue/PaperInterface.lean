@@ -186,6 +186,24 @@ theorem graphCoefficient_graphCoordinate_block_identity
   GraphLattices.graphChange_mul_alternating_mul_transposePartner
     inverseDepth slope adjointSlope coefficient
 
+/-- Expansion isolating the scalar slope-difference term from the two
+depth-divisible error terms in a pair of positive-depth slope blocks. -/
+theorem graphCoefficient_slopeCommutator_expansion
+    {S : Type*} [Ring S]
+    (coefficient firstScalar secondScalar firstPower secondPower
+      firstError secondError : S)
+    (firstScalarCentral : firstScalar * coefficient = coefficient * firstScalar)
+    (secondScalarCentral : coefficient * secondScalar = secondScalar * coefficient)
+    (secondPowerCentral : coefficient * secondPower = secondPower * coefficient) :
+    coefficient * (secondScalar + secondPower * secondError) -
+        (firstScalar + firstPower * firstError) * coefficient =
+      (secondScalar - firstScalar) * coefficient +
+        secondPower * (coefficient * secondError) -
+        firstPower * (firstError * coefficient) :=
+  GraphLattices.slopeCommutator_expansion
+    coefficient firstScalar secondScalar firstPower secondPower
+    firstError secondError firstScalarCentral secondScalarCentral secondPowerCentral
+
 /-- Arithmetic core of the graph coefficient depth formula: the maximum
 depth is exactly the intersection of the three power-divisibility conditions,
 and it always satisfies the midpoint inequality. -/
@@ -238,6 +256,15 @@ theorem graphCoefficient_crossDepth_eq_of_dvr_scalar_lifts
   GraphLattices.graphCrossDepth_eq_of_dvr_scalar_lifts
     πIrreducible firstDepth secondDepth
     firstSlope secondSlope firstLift secondLift firstCongruent secondCongruent
+
+/-- Arithmetic unit-block clause: depth zero paired with a positive-depth
+block has exactly that positive cross depth, for every slope valuation. -/
+theorem graphCoefficient_unitCrossDepth
+    (positiveDepth : ℕ) (slopeDifferenceValuation : ℕ∞) :
+    GraphLattices.graphCrossDepth 0 positiveDepth slopeDifferenceValuation =
+      positiveDepth :=
+  GraphLattices.graphCrossDepth_unit_positive
+    positiveDepth slopeDifferenceValuation
 
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that

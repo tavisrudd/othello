@@ -58,6 +58,26 @@ theorem graphChange_mul_alternating_mul_transposePartner
       graphDescentBlockMatrix, Matrix.mul_apply, Fin.sum_univ_two]
     try noncomm_ring
 
+/-- Expansion of the slope commutator after writing each slope as a scalar
+part plus a depth-divisible error.  Centrality hypotheses express that the
+displayed scalar parts are scalar matrices on their blocks. -/
+theorem slopeCommutator_expansion
+    {S : Type*} [Ring S]
+    (coefficient firstScalar secondScalar firstPower secondPower
+      firstError secondError : S)
+    (firstScalarCentral : firstScalar * coefficient = coefficient * firstScalar)
+    (secondScalarCentral : coefficient * secondScalar = secondScalar * coefficient)
+    (secondPowerCentral : coefficient * secondPower = secondPower * coefficient) :
+    coefficient * (secondScalar + secondPower * secondError) -
+        (firstScalar + firstPower * firstError) * coefficient =
+      (secondScalar - firstScalar) * coefficient +
+        secondPower * (coefficient * secondError) -
+        firstPower * (firstError * coefficient) := by
+  rw [mul_add, add_mul]
+  rw [← mul_assoc coefficient secondPower secondError, secondPowerCentral,
+    mul_assoc secondPower coefficient secondError]
+  noncomm_ring [firstScalarCentral, secondScalarCentral]
+
 /-- Truncated subtraction by an extended valuation, with infinite valuation
 contributing no additional depth. -/
 def truncatedDepthDifference (total : ℕ) (valuation : ℕ∞) : ℕ :=
@@ -296,6 +316,17 @@ the same midpoint inequality with unit depth zero. -/
 theorem unitCrossDepth_midpoint (positiveDepth : ℕ) :
     0 + positiveDepth ≤ 2 * positiveDepth := by
   omega
+
+/-- Pairing a depth-zero unit block with a positive-depth block gives exactly
+the positive depth, independently of the slope-difference valuation. -/
+theorem graphCrossDepth_unit_positive
+    (positiveDepth : ℕ) (slopeDifferenceValuation : ℕ∞) :
+    graphCrossDepth 0 positiveDepth slopeDifferenceValuation = positiveDepth := by
+  induction slopeDifferenceValuation using ENat.recTopCoe with
+  | top => simp [graphCrossDepth_top]
+  | coe finiteValue =>
+      rw [graphCrossDepth_coe]
+      omega
 
 end GraphLattices
 
