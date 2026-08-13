@@ -3,6 +3,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Matri
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AllDegreeAssembly
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.GraphCoefficientDepth
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.GraphCoefficientBlocks
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
@@ -300,6 +301,47 @@ theorem graphCoefficient_crossDepth_iff_splitSlopeCommutator
       πIrreducible)
     firstDepth secondDepth coefficient firstScalar secondScalar
     firstError secondError
+
+/-- The positive-positive graph coefficient formula for actual rectangular
+matrix blocks of arbitrary finite ranks. -/
+theorem graphCoefficient_rectangular_crossDepth_iff_splitSlopeCommutator
+    {R I J : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    [Fintype I] [Fintype J] [DecidableEq I] [DecidableEq J]
+    {π : R} (πIrreducible : Irreducible π)
+    (firstDepth secondDepth : ℕ)
+    (coefficient : Matrix I J R) (firstScalar secondScalar : R)
+    (firstError : Matrix I I R) (secondError : Matrix J J R) :
+    GraphLattices.MatrixEntriesDivisibleBy
+        (π ^ GraphLattices.graphCrossDepth firstDepth secondDepth
+          (IsDiscreteValuationRing.addVal R
+            (secondScalar - firstScalar))) coefficient ↔
+      GraphLattices.MatrixEntriesDivisibleBy
+          (π ^ firstDepth) coefficient ∧
+      GraphLattices.MatrixEntriesDivisibleBy
+          (π ^ secondDepth) coefficient ∧
+      GraphLattices.MatrixEntriesDivisibleBy
+          (π ^ (firstDepth + secondDepth))
+        (GraphLattices.rectangularSplitSlopeCommutator π
+          firstDepth secondDepth coefficient firstScalar secondScalar
+          firstError secondError) :=
+  GraphLattices.matrixEntries_graphCrossDepth_iff_splitSlopeCommutator
+    (GraphLattices.NormalizedDVRValuation.ofIsDiscreteValuationRing
+      πIrreducible)
+    firstDepth secondDepth coefficient firstScalar secondScalar
+    firstError secondError
+
+/-- The unit-to-positive rectangular block introduces no condition beyond
+the positive diagonal coefficient depth, for arbitrary integral slopes. -/
+theorem graphCoefficient_rectangular_unitPositive_commutator
+    {R I J : Type*} [CommRing R] [Fintype I] [Fintype J]
+    (π : R) (positiveDepth : ℕ) (coefficient : Matrix I J R)
+    (unitSlope : Matrix I I R) (positiveSlope : Matrix J J R)
+    (coefficientDivides : GraphLattices.MatrixEntriesDivisibleBy
+      (π ^ positiveDepth) coefficient) :
+    GraphLattices.MatrixEntriesDivisibleBy (π ^ positiveDepth)
+      (coefficient * positiveSlope - unitSlope * coefficient) :=
+  GraphLattices.unitPositive_commutator_divisible π positiveDepth coefficient
+    unitSlope positiveSlope coefficientDivides
 
 /-- Arithmetic core of the graph coefficient depth formula: the maximum
 depth is exactly the intersection of the three power-divisibility conditions,
