@@ -138,11 +138,38 @@ exceptional divisor.
 The sufficient admissibility condition is explicit: resolve the common model
 relative to the smooth `v`- and `w`-lines, using no center whose ideal contains
 an interior translated-residue coordinate and no exceptional divisor defined
-from such a center.  Under this condition, the coarse strata retain (7), and
+from such a center.  This condition is locally achievable over the compact
+protected locus.  Indeed, for an arc in (5) put
+
+\[
+ \alpha=\operatorname{ord}r,qquad
+ k=\operatorname{ord}h,qquad
+ \ell=\operatorname{ord}v,qquad p_i=0. \tag{10}
+\]
+
+When the marked limit remains `(1,1)`, equations (6) give generically
+
+\[
+ t=\alpha+k,quad \beta=k,quad
+ \gamma=2\alpha+k+\min(\ell,k),quad
+ 2t-\beta-\gamma=-\min(\ell,k)\le0. \tag{11}
+\]
+
+The other five graph weights are zero.  Thus the product term either ties on
+the coordinate faces `ell=0` or `k=0`, or drops; there is no interior support
+wall, including at `ell=k`, that forces a center involving `v`.  If leading
+coefficients cancel at `ell=k`, `gamma` increases and the product term drops
+further, so no wall is created.  The compact finite-ratio cone is already a
+regular coordinate cone and can be fixed as a regular subfan while all other
+cones are desingularized relatively.  The symmetric statement fixes the
+`w` cone.
+
+Under this local relative resolution, the coarse strata retain (7), and
 the exact 70 tangent-unit records, two `L=0` exclusions, free-`L` masks, and
 (3) give the whole coarse Fitting ledger.  Existence of a regular common
-refinement satisfying this restriction is not yet proved; alternatively each
-forced mixed center would need a new tangent-pivot audit.
+refinement gluing these protected subfans to every exterior attachment is not
+yet proved; noncompact mixed cones are Fitting-safe because `L` is free but
+still need their strict graph/overlap attachment.
 
 The remaining topological input is no longer an algebraic boundary search:
 choose a generic residual interface and apply the controlled fibrewise-pair
@@ -162,7 +189,7 @@ parameterized Morse step.
   compact-`y`,
   bounded-value arc; compatibility with the noncompact-`y` free-`L` theorem;
   exact finite-ratio Fitting freeness.
-- **Open:** construct an admissible regular common refinement without
-  `(r,v)`/`(r,w)`-type centers, or audit every forced mixed exceptional;
-  then the controlled-topology step.  No additional residual valuation type
-  remains unexplained.
+- **Open:** glue the locally admissible protected subfans to the exterior
+  regular refinement with strict graph/overlap records; then the
+  controlled-topology step.  No additional residual valuation type remains
+  unexplained.
