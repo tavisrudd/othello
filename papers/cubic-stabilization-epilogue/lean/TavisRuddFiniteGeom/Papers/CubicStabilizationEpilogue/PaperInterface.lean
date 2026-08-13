@@ -40,6 +40,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFor
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleVaryingFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2459,8 +2460,9 @@ theorem varyingFlatGauge_normalized_unique_and_invertible
 /-- For a supplied tower of compatible one-variable connection coefficients
 over commutative `ℚ`-algebras, Lean proves adjacent compatibility of every
 normalized coefficient, the whole connection series, and the whole gauge
-series.  At each level the gauge is the unique normalized formal solution of
-`dG/dt=-A(t)G(t)` and is an invertible power-series matrix.  The tower and its
+series.  At each level the constructed gauge satisfies `dG/dt=-A(t)G(t)`,
+every normalized solution equals it, and it is an invertible power-series
+matrix.  The tower and its
 connections are supplied abstractly and are not identified with the
 manuscript's filtered quotient tower or quantum connection; no multivariable,
 Laurent, convergent, or analytic gauge is represented. -/
@@ -2517,6 +2519,38 @@ theorem compatibleVaryingFlatGauge_reduction_unique_and_invertible
     fun level candidate normalized flatEquation ↦
       system.gaugeSeries_unique level candidate normalized flatEquation,
     system.gaugeSeries_isUnit⟩
+
+/-- From a supplied commutative `ℚ`-algebra, decreasing ideal filtration, and
+one-variable matrix connection over the base ring, Lean constructs the
+connection and normalized gauge series over every actual quotient `R/F^n`.
+Both series commute with the canonical adjacent quotient reductions; at every
+level the gauge satisfies `dG/dt=-A(t)G(t)`, every normalized solution equals
+it, and it is an invertible power-series matrix.  The supplied filtration and
+connection are not identified with the manuscript's geometric coefficient
+filtration or quantum product, and no multivariable, Laurent, convergent, or
+analytic gauge is represented. -/
+theorem filteredVaryingFlatGauge_quotient_reduction_unique_and_invertible
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (input : Quantum.FilteredVaryingFlatGaugeInput Index R) :
+    (∀ level,
+      (input.connectionSeries (level + 1)).map
+          (PowerSeries.map (input.filtration.reduction level)) =
+        input.connectionSeries level ∧
+      (input.gaugeSeries (level + 1)).map
+          (PowerSeries.map (input.filtration.reduction level)) =
+        input.gaugeSeries level) ∧
+    ∀ level,
+      (input.gaugeSeries level).map PowerSeries.derivativeFun =
+          -(input.connectionSeries level) * input.gaugeSeries level ∧
+        (∀ candidate : Matrix Index Index
+            (PowerSeries (input.filtration.QuotientRing level)),
+          candidate.map (PowerSeries.coeff 0) = 1 →
+          candidate.map PowerSeries.derivativeFun =
+            -(input.connectionSeries level) * candidate →
+          candidate = input.gaugeSeries level) ∧
+        IsUnit (input.gaugeSeries level) :=
+  ⟨input.series_compatible, input.gaugeSeries_unique_and_isUnit⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
