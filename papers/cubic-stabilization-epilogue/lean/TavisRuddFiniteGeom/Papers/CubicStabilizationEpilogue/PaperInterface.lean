@@ -28,6 +28,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovFilt
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurentGaugeConjugacy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
@@ -2042,6 +2043,26 @@ theorem proLaurent_characteristicPolynomial_of_compatibleMonodromy
               level) :=
   ⟨system.characteristicPolynomialSystem_level,
     system.characteristicPolynomialSystem.compatible⟩
+
+/-- For supplied compatible Laurent-series monodromy matrices and supplied
+compatible two-sided-invertible gauges, the conjugated matrices remain
+compatible under reduction and have the same characteristic polynomial at
+every level.  No differential or analytic origin for either family is proved. -/
+theorem proLaurent_conjugatedMonodromy_compatible_and_charpoly
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : Quantum.ProLaurentMonodromyGaugeSystem Index) :
+    (∀ level,
+      letI := system.gaugeSystem.coefficientRing level
+      letI := system.gaugeSystem.coefficientRing (level + 1)
+      (system.conjugatedMonodromy (level + 1)).map
+          (system.gaugeSystem.reduction level) =
+        system.conjugatedMonodromy level) ∧
+      (∀ level,
+        letI := system.gaugeSystem.coefficientRing level
+        (system.conjugatedMonodromy level).charpoly =
+          (system.monodromy level).charpoly) :=
+  ⟨system.conjugatedMonodromy_compatible,
+    system.conjugatedMonodromy_charpoly⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
