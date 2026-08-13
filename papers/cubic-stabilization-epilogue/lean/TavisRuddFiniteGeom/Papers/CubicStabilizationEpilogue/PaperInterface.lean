@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Divid
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1512,6 +1513,24 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
     GraphLattices.sixAxisQuadraticSplittingField_etale,
     GraphLattices.sixAxisQuadraticSlopeRoot_equation,
     GraphLattices.sixAxisTwoQuadraticSlope_concreteFiniteEtale_split⟩
+
+/-- A finite gluing type persists on a connected smooth component once its
+classifying map into the discrete packet is continuous.  Lean proves both
+constancy of that map and propagation of membership in a distinguished packet
+subset from one fibre to every fibre.  The geometric local system, its packet,
+and continuity of the classifying map remain supplied rather than constructed. -/
+theorem principalGluingPacket_connectedFamily_persistence
+    {Base Packet : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace Packet] [DiscreteTopology Packet] [Finite Packet]
+    (packetClass : Base → Packet) (continuous : Continuous packetClass)
+    (distinguished : Set Packet) (basePoint : Base)
+    (atBasePoint : packetClass basePoint ∈ distinguished) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point, packetClass point ∈ distinguished := by
+  exact ⟨GraphLattices.connectedBase_finiteDiscretePacket_constant
+      packetClass continuous,
+    GraphLattices.connectedBase_finiteDiscretePacket_membership_persists
+      packetClass continuous distinguished basePoint atBasePoint⟩
 
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the

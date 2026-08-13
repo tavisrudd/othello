@@ -85,14 +85,14 @@ Boolean depends.  Exact peak audit:
 `../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
-Gu--Yu--Yu's August 2025 simple-VGIT theorem gives the first genuine positive
-formal peak class, but its direct Gamma point-row shortcut fails exactly in
-the smallest toric discrepancy-one flip.  The common point lift has zero wall
-restriction, so all center Fourier rows vanish, but its `lambda` multiple is
-nonzero; Fourier intertwining and injectivity force a nonzero positive-`S`
-ambient tail.  Homogeneity forces compensating positive `z`-degree, so the
-remaining sharp question is whether that tail is invisible on the
-primitive-sixth rank Boolean.  Exact audit and counterexample:
+Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives the first unconditional
+positive peak class.  A common-point lift with zero wall restriction, Lemma
+5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
+the exact Gamma point row; the valid minimal toric discrepancy-one model
+confirms the vanishing term by term.  Thus the rank Boolean is invariant
+across every smooth-projective simple VGIT wall.  Gold remains open because
+general cobordism peaks can have singular/toroidal quotients and are not yet
+covered by that theorem.  Exact audit:
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
@@ -226,7 +226,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 74 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 139 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 140 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -395,7 +395,11 @@ compatible quotient families in that same packet.
 The explicit two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
 with the geometric marked extension and principal kernel remains open.
-The aggregate build, source correspondence, and 139-terminal axiom transcript
+Lean also proves that a continuous map from a connected base into a finite
+discrete gluing packet is constant and propagates a distinguished kernel type
+from one fibre to all fibres.  Constructing the manuscript's geometric packet
+and continuous classifying map remains open.
+The aggregate build, source correspondence, and 140-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent

@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 74 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 139 audited terminals.  The rejecting manuscript inventory covers all
+exports 140 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -229,13 +229,17 @@ quotient small matrix.  Its geometric monodromy origin remains unproved.
 The explicit characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis.  Its identification with the manuscript's geometric marked
-extension and principal kernel remains open.  All other geometric
+extension and principal kernel remains open.  Lean now proves the exact
+connected-family persistence step for any supplied continuous map into a
+finite discrete kernel packet; construction of that geometric packet and
+classifying map remains open.  All other geometric
 identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
 are identification of the constructed finite-etale splitting and eigenbasis
 with the geometric marked extension,
-proof that geometric divisor descent supplies the formal block conditions, actual six-axis
-kernel identification and persistence, cohomological realization, and the
+proof that geometric divisor descent supplies the formal block conditions,
+actual six-axis kernel identification and its continuous packet classifier,
+cohomological realization, and the
 Voisin/relative-family bridge.  The next quantum gates are the
 differential-module base-change proofs, the completed-series and comparison
 semantics producing the supplied divisor-tagging equalities, operation
