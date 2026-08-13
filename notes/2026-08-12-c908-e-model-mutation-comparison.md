@@ -2,8 +2,10 @@
 
 Date: 2026-08-12
 
-Status: **in progress (pass 10).** C908 mathematics only; no manuscript, PDF,
-mirror, Lean, or C904-surface edit.
+Status: **pass 10 complete — the negative transfers.** `λ_ℰ = 0`
+(Theorem F2, §7), so the `(1,5)` escape channel is unpopulated by the
+universal family as well as by the span model. C908 mathematics only; no
+manuscript, PDF, mirror, Lean, or C904-surface edit.
 
 ## 0. What this pass sets out to prove
 
@@ -28,7 +30,14 @@ Li–Lin–Pertusi–Zhao, arXiv:2406.09124 Corollary 3.9). It is the family who
 hence `λ_ℰ = λ_𝒢 = 0`, hence *no* universal-family Chern class populates the
 `(1,5)` escape channel.
 
-The rest of this note is written as the work lands.
+**Result.** The target theorem holds (Theorem F2, §7). The mechanism is
+Theorem F1 (§3): the mutation changes the `(3,5)` block of `c_4` by exactly
+`c_1(V)c_3^{(3,3)} + (c_2(V)+G^2)c_2^{(3,1)}` mod two, where
+`V = Rp_{M*}(𝒢_M(H))` is the rank-three relative blow-down bundle of the
+cubic-surface fibration; all three pieces are then killed — `G^2` because `G`
+is a `Θ`-pullback, `c_1(V)` because it is `≡ G` and the certificate's
+`t`-independence control makes `Gc_3^{(3,3)}` even, and `c_2(V)` because it is
+`σ`-symmetric mod two and the pure tests are `σ`-antisymmetric.
 
 ## 1. The mutation, stated exactly
 
@@ -100,23 +109,19 @@ changes the family by exactly three operations:
 3. a shift (sign in K-theory) and the residual **twist ambiguity**
    `ℰ ≅ ℰ' ⊗ p_B^*N` of the universal family (pass-5 §2).
 
-## 2. Theorem F: the λ-readout is invariant under all three
+## 2. The three moves, one at a time
 
-**Theorem F (mutation invariance of the λ-readout).** Let `B` be smooth
-projective, `t ∈ H^3(B,Z)` any class, `x ∈ H^3(X,Z)`, and let `𝒜, 𝒜'` be two
-classes in `K^0(X×B)` related by
+The comparison target is the readout
 
-\[ [𝒜'] \;=\; ε\Bigl([p_B^*V] \;−\; [𝒜 ⊗ p_X^*O_X(H)]\Bigr) ⊗ [p_B^*N], \qquad ε = ±1, \]
+\[ \int_{X×B} p_X^*x·p_B^*T·c_4(𝒜') \;\text{ versus }\;
+   \int_{X×B} p_X^*x·p_B^*T·c_4(𝒜), \qquad
+   [𝒜'] = ε\bigl([p_B^*V] − [𝒜 ⊗ p_X^*O_X(H)]\bigr)⊗[p_B^*N] , \]
 
-for any `V ∈ K^0(B)` and any line bundle `N` on `B` (the `⊗[p_B^*N]` being
-the twist ambiguity). Then
-
-\[ \int_{X×B} p_X^*x·p_B^*t·c_4(𝒜') \;\equiv\;
-   \int_{X×B} p_X^*x·p_B^*t·c_4(𝒜) \pmod 2 . \]
-
-In fact the two integrals agree **integrally up to an explicit even
-correction** computed in §2.3; only the `(3,\,·)` Künneth block matters and it
-is *invariant on the nose* at the level of `ch`.
+for `B` smooth projective, `T ∈ H^3(B,Z)`, `x ∈ H^3(X,Z)`, `ε = ±1`. This
+section isolates what each of the three moves does; §3 assembles them into the
+exact difference (Theorem F1), and §§6–7 kill it for the tests at hand. The
+`(3,\,·)` Künneth block is invariant on the nose at the level of `ch` (§2.1);
+all the content is in the passage from `ch` to `c_4`.
 
 ### 2.1 Step 1 — the `(3,·)` block of `ch` is untouched by all three moves
 
@@ -137,8 +142,7 @@ only, so `ch^{(3,j)}(p_B^*V) = 0`.
 
 (c) *The base twist.* `ch(𝒜⊗p_B^*N) = e^{n}·ch(𝒜)`, `n = p_B^*c_1(N)`, whose
 `(3,j)` part is `Σ_k (n^k/k!)·ch^{(3,\,j−2k)}(𝒜)` — this one does **not**
-preserve the block; it is handled in §2.3 by the pass-5 twist lemma, which is
-exactly the statement that its contribution dies in the readout.
+preserve the block; it is handled by Lemma T in §2.3.
 
 (d) *The shift.* `ch(𝒜[1]) = −ch(𝒜)`, so `ch^{(3,j)}` changes sign.
 
