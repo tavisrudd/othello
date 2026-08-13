@@ -298,14 +298,15 @@
     },
     {
       "manuscript_label": "prop:cubic-packet",
-      "coverage": "fragment",
+      "coverage": "conditional_deduction",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_charpoly",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues"
       ],
-      "objects": "Cai's displayed rational indicial polynomial rho^2+rho+5/36 and complex exponentials for one turn of the original loop coordinate.",
-      "hypotheses": "No geometric or quantum hypothesis occurs in the checked arithmetic statement; the displayed polynomial is taken as the rank-two block polynomial to be analyzed.",
-      "conclusion": "The polynomial factors with roots -1/6 and -5/6, and their one-turn exponentials are respectively the negative and positive primitive sixth roots.",
-      "cautions": "The smooth cubic threefold, its numerical small even quantum connection, Cai's integral-z block diagonalization, proof that this polynomial is its rank-two zero-exponential block, and proof that the remaining two rank-one blocks contribute only eigenvalue one are absent; therefore multiplicity exactly two is not yet proved."
+      "objects": "A supplied type of cubic objects with a smooth-complex-cubic-threefold predicate and a finite-dimensional complex framed-monodromy matrix; Cai's rank-two indicial polynomial and the displayed characteristic polynomial with one factor for each primitive sixth root and two unit factors.",
+      "hypotheses": "For every supplied smooth cubic threefold, the framed-monodromy characteristic polynomial is supplied to equal the displayed four-factor polynomial arising from Cai's integral-loop-power block description.",
+      "conclusion": "Lean proves the indicial roots -1/6 and -5/6 give the negative and positive primitive sixth roots, proves those roots are distinct and each has algebraic multiplicity one while the two unit factors contribute nothing, and concludes that every supplied smooth cubic threefold has primitive-sixth multiplicity exactly two.",
+      "cautions": "The result is conditional on the characteristic-polynomial comparison. Lean does not construct a smooth cubic threefold, its numerical small even quantum connection, Cai's integral-loop-power block diagonalization, the rank-two zero-exponential block, the two remaining rank-one unit blocks, or the identification of their direct-sum characteristic polynomial with the supplied framed monodromy. Lean also does not prove that the cubic threefold's numerical curve lattice has rank one or that the manuscript's numerical-Novikov convention leaves Cai's calculation unchanged."
     },
     {
       "manuscript_label": "cor:v14-one-step",

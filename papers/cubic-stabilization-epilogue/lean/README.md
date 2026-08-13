@@ -26,15 +26,15 @@ formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
 - 0 absent from Lean;
-- 15 represented by exact but strictly weaker fragments;
-- 7 represented by conditional deductions with every external premise exposed
+- 14 represented by exact but strictly weaker fragments;
+- 8 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 0 absent; 15 fragmentary; 7 conditional;
-1 complete; 87 reviewer terminals.
+Checked coverage snapshot: 23 claims; 0 absent; 14 fragmentary; 8 conditional;
+1 complete; 88 reviewer terminals.
 
-The 87 reviewer-facing terminals currently verify:
+The 88 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -125,8 +125,9 @@ The 87 reviewer-facing terminals currently verify:
   family non-isotriviality;
 - an opaque organizational relative-six-axis signature, with the full
   five-axis integral Smith witness independently discharged by Lean;
-- the factorization and framed eigenvalues of Cai's displayed rank-two
-  indicial polynomial.
+- the conditional cubic packet formula: from Cai's supplied four-block
+  characteristic polynomial, the two primitive-sixth roots have multiplicity
+  one each and the unit blocks contribute zero, giving multiplicity two.
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the
@@ -136,7 +137,9 @@ lattice, or the geometric
 cohomology realization and isogeny pullback, the geometric inputs to the
 universal `CH_0` argument,
 quantum comparison theorems, the geometric and comparison inputs to
-low-dimensional vanishing, or Cai's block diagonalization.
+low-dimensional vanishing, or Cai's geometric block diagonalization and its
+identification with the framed-monodromy polynomial, including the rank-one
+numerical-curve-lattice comparison.
 
 From this package directory, build the pinned Lean library with:
 

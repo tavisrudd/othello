@@ -30,6 +30,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Separa
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedOperationFormulas
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFormula
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -148,6 +149,21 @@ theorem framedBlowup_sixthMultiplicity
               total blowup index)).sixthMultiplicity :=
   Applications.blowup_sixthMultiplicity geometry input codim codimAtLeastTwo
     center ambient total blowup
+
+/-- Conditional cubic packet theorem.  A supplied characteristic-polynomial
+comparison identifies the framed monodromy of every smooth cubic threefold
+with the two primitive-sixth factors and two unit factors of Cai's block
+description; Lean proves that its primitive-sixth multiplicity is exactly two. -/
+theorem cubicPacket_sixthMultiplicity_eq_two_of_charpoly
+    {Cubic : Type*} (geometry : Applications.CubicPacketGeometry Cubic)
+    (charpolyComparison : ∀ cubic,
+      geometry.isSmoothCubicThreefold cubic →
+        (geometry.framedMonodromy cubic).operator.charpoly =
+          Applications.cubicPacketCharacteristicPolynomial) :
+    ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      (geometry.framedMonodromy cubic).sixthMultiplicity = 2 :=
+  Applications.cubicThreefold_sixthMultiplicity_eq_two_of_charpoly
+    geometry charpolyComparison
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/
