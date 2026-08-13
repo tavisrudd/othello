@@ -36,10 +36,7 @@ noncomputable def MultiplicativeIdealFiltration.positiveLaurentEvaluationTermAtL
     LaurentSeries (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) :=
   laurentSeriesMap (Ideal.Quotient.mk (filtration.ideal cutoff))
       (MvPowerSeries.coeff degree series) *
-    algebraMap
-      (filtration.toDecreasingIdealFiltration.QuotientRing cutoff)
-      (LaurentSeries
-        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff))
+    HahnSeries.C
       (Ideal.Quotient.mk (filtration.ideal cutoff)
         (bulkMonomialValue parameter degree))
 
@@ -109,6 +106,116 @@ theorem MultiplicativeIdealFiltration.positiveLaurentMatrixEvaluationAtLevel_has
   exact ⟨lowerBound, fun row column exponent below ↦
     bounded (row, column) exponent below⟩
 
+/-- Canonical Laurent-series reduction between adjacent quotients of a
+normalized multiplicative filtration. -/
+noncomputable def MultiplicativeIdealFiltration.positiveLaurentReduction
+    {B : Type*} [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B) (cutoff : ℕ) :
+    LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing (cutoff + 1)) →+*
+      LaurentSeries
+        (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) :=
+  laurentSeriesMap
+    (filtration.toDecreasingIdealFiltration.reduction cutoff)
+
+/-- The exponent box for `cutoff` is contained in the box for the next
+cutoff. -/
+theorem bulkMonomialBoxBelow_mono_succ
+    (Coordinate : Type*) [Fintype Coordinate] (cutoff : ℕ) :
+    bulkMonomialBoxBelow Coordinate cutoff ⊆
+      bulkMonomialBoxBelow Coordinate (cutoff + 1) := by
+  classical
+  intro degree degree_mem
+  rw [bulkMonomialBoxBelow] at degree_mem ⊢
+  obtain ⟨exponent, _, rfl⟩ := Finset.mem_image.mp degree_mem
+  let nextExponent : Coordinate → Fin (cutoff + 1) := fun coordinate ↦
+    ⟨exponent coordinate, Nat.lt_succ_of_lt (exponent coordinate).isLt⟩
+  refine Finset.mem_image.mpr ⟨nextExponent, Finset.mem_univ _, ?_⟩
+  apply Finsupp.ext
+  intro coordinate
+  simp [nextExponent]
+
+/-- One evaluated Laurent term commutes with canonical adjacent reduction. -/
+theorem MultiplicativeIdealFiltration.positiveLaurentEvaluationTermAtLevel_compatible
+    {Coordinate B : Type*} [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B) (cutoff : ℕ)
+    (series : MvPowerSeries Coordinate (LaurentSeries B))
+    (degree : Coordinate →₀ ℕ) :
+    filtration.positiveLaurentReduction cutoff
+        (filtration.positiveLaurentEvaluationTermAtLevel
+          parameter (cutoff + 1) series degree) =
+      filtration.positiveLaurentEvaluationTermAtLevel
+        parameter cutoff series degree := by
+  rw [MultiplicativeIdealFiltration.positiveLaurentEvaluationTermAtLevel,
+    map_mul]
+  apply congrArg₂ (fun left right ↦ left * right)
+  · ext exponent
+    by_cases exponent = 0
+    · subst exponent
+      simp [MultiplicativeIdealFiltration.positiveLaurentReduction,
+        laurentSeriesMap]
+    · simp [MultiplicativeIdealFiltration.positiveLaurentReduction,
+        laurentSeriesMap, *]
+  · ext exponent
+    by_cases exponent = 0
+    · subst exponent
+      simp [MultiplicativeIdealFiltration.positiveLaurentReduction,
+        laurentSeriesMap]
+    · simp [MultiplicativeIdealFiltration.positiveLaurentReduction,
+        laurentSeriesMap, *]
+
+/-- Finite quotient-level evaluation at filtration-positive parameters
+commutes with canonical adjacent reductions. -/
+theorem MultiplicativeIdealFiltration.positiveLaurentEvaluationAtLevel_compatible
+    {Coordinate B : Type*} [Fintype Coordinate] [CommRing B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) (series : MvPowerSeries Coordinate (LaurentSeries B)) :
+    filtration.positiveLaurentReduction cutoff
+        (filtration.positiveLaurentEvaluationAtLevel
+          parameter (cutoff + 1) series) =
+      filtration.positiveLaurentEvaluationAtLevel
+        parameter cutoff series := by
+  classical
+  let lowBox := bulkMonomialBoxBelow Coordinate cutoff
+  let highBox := bulkMonomialBoxBelow Coordinate (cutoff + 1)
+  have subset : lowBox ⊆ highBox :=
+    bulkMonomialBoxBelow_mono_succ Coordinate cutoff
+  have extra_zero : ∀ degree ∈ highBox, degree ∉ lowBox →
+      filtration.positiveLaurentReduction cutoff
+          (filtration.positiveLaurentEvaluationTermAtLevel
+            parameter (cutoff + 1) series degree) = 0 := by
+    intro degree _ outside
+    rw [filtration.positiveLaurentEvaluationTermAtLevel_compatible
+      parameter cutoff series degree]
+    apply filtration.positiveLaurentEvaluationTermAtLevel_eq_zero
+      parameter positive cutoff series degree
+    by_contra not_le
+    exact outside (mem_bulkMonomialBoxBelow_of_totalDegree_lt cutoff degree
+      (Nat.lt_of_not_ge not_le))
+  rw [MultiplicativeIdealFiltration.positiveLaurentEvaluationAtLevel,
+    map_sum]
+  calc
+    ∑ degree ∈ highBox,
+        filtration.positiveLaurentReduction cutoff
+          (filtration.positiveLaurentEvaluationTermAtLevel
+            parameter (cutoff + 1) series degree) =
+        ∑ degree ∈ lowBox,
+          filtration.positiveLaurentReduction cutoff
+            (filtration.positiveLaurentEvaluationTermAtLevel
+              parameter (cutoff + 1) series degree) := by
+          symm
+          exact Finset.sum_subset subset extra_zero
+    _ = ∑ degree ∈ lowBox,
+          filtration.positiveLaurentEvaluationTermAtLevel
+            parameter cutoff series degree := by
+          apply Finset.sum_congr rfl
+          intro degree _
+          exact filtration.positiveLaurentEvaluationTermAtLevel_compatible
+            parameter cutoff series degree
+
 /-- Evaluate the recursively constructed normalized multivariable flat gauge
 at filtration-positive parameters in one quotient. -/
 noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel
@@ -159,6 +266,28 @@ theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_hasUnifo
   simpa [MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel] using
     filtration.positiveLaurentMatrixEvaluationAtLevel_hasUniformLowerBound
       parameter cutoff (multivariableFlatGaugeSeries connection)
+
+/-- The finite evaluated flat-gauge matrices commute with canonical adjacent
+quotient reductions. -/
+theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_compatible
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B))) :
+    (filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter (cutoff + 1) connection).map
+        (filtration.positiveLaurentReduction cutoff) =
+      filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter cutoff connection := by
+  apply Matrix.ext
+  intro row column
+  exact filtration.positiveLaurentEvaluationAtLevel_compatible
+    parameter positive cutoff
+    ((multivariableFlatGaugeSeries connection) row column)
 
 end Quantum
 

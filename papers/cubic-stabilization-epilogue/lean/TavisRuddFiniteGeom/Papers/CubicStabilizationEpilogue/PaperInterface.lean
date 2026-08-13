@@ -2783,10 +2783,11 @@ multiplicative ideal filtration.  For finitely many filtration-positive bulk
 parameters and one quotient cutoff, Lean constructs the normalized invertible
 formal flat gauge and an actual finite quotient-level evaluation of it.  Every
 term at or above the cutoff vanishes, and one integer bounds the loop exponents
-of every entry of the evaluated matrix.  This finite sum is not an evaluation
-of an infinite series in a modeled topology; its multiplicativity,
-compatibility across quotient levels, identification with the manuscript's
-bulk gauge, and analytic specialization are not proved. -/
+of every entry of the evaluated matrix.  The finite evaluations commute with
+canonical adjacent quotient reductions.  This finite sum is not an evaluation
+of an infinite series in a modeled topology; its multiplicativity, inverse
+preservation, identification with the manuscript's bulk gauge, and analytic
+specialization are not proved. -/
 theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
     {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
     [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
@@ -2816,10 +2817,15 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
         filtration.positiveLaurentEvaluationTermAtLevel parameter cutoff
           ((Quantum.multivariableFlatGaugeSeries connection) row column)
           degree = 0) ∧
-    ∃ lowerBound : ℤ, ∀ row column exponent,
+    (∃ lowerBound : ℤ, ∀ row column exponent,
       exponent < lowerBound →
         (filtration.positiveEvaluatedFlatGaugeAtLevel
-          parameter cutoff connection row column).coeff exponent = 0 := by
+          parameter cutoff connection row column).coeff exponent = 0) ∧
+    (filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter (cutoff + 1) connection).map
+        (filtration.positiveLaurentReduction cutoff) =
+      filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter cutoff connection := by
   exact ⟨Quantum.multivariableFlatGaugeSeries_normalized connection,
     Quantum.multivariableFlatGaugeSeries_isUnit connection,
     Quantum.multivariableFlatGaugeSeries_equation_of_curvature
@@ -2828,7 +2834,9 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
       filtration.positiveEvaluatedFlatGaugeAtLevel_term_eq_zero
         parameter positive cutoff connection row column degree cutoff_le,
     filtration.positiveEvaluatedFlatGaugeAtLevel_hasUniformLowerBound
-      parameter cutoff connection⟩
+      parameter cutoff connection,
+    filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
+      parameter positive cutoff connection⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

@@ -200,9 +200,9 @@ zero-curvature Laurent-valued connection and finitely many level-one
 parameters, Lean now also constructs the normalized invertible formal gauge
 and an actual finite sum in one cutoff quotient, proves every omitted
 high-degree term zero, and gives the resulting finite evaluated matrix one
-Laurent lower bound.  Multiplicativity, preservation of the gauge inverse,
-cross-level compatibility, and identification with the manuscript gauge remain
-outside the fragment.
+Laurent lower bound.  The finite evaluations commute with canonical adjacent
+quotient reductions.  Multiplicativity, preservation of the gauge inverse, and
+identification with the manuscript gauge remain outside the fragment.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

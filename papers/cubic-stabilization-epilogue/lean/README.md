@@ -194,8 +194,9 @@ The 134 reviewer-facing terminals currently verify:
   finitely many level-one parameters, Lean now constructs the normalized
   invertible formal gauge, defines its actual finite evaluation in one cutoff
   quotient, proves every omitted high-degree term zero, and obtains one common
-  Laurent lower bound for the evaluated matrix; this finite sum is not proved
-  multiplicative, invertible, or compatible across quotient levels; the
+  Laurent lower bound for the evaluated matrix; these finite evaluations
+  commute with canonical adjacent quotient reductions but are not proved
+  multiplicative or invertible; the
   parameters and evaluated matrix are not identified with the manuscript bulk
   coordinates or gauge, no bound uniform across levels is proved, and no Laurent-valued
   inverse-limit gauge is packaged;
