@@ -24,6 +24,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovConvolution
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovInverseLimit
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalInverseLimitPushforward
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovFiltrationContinuity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
@@ -1900,6 +1901,35 @@ theorem numericalNovikov_truncationFamily_pushforward
           data.numericalGrading (data.completedPushforward series) :=
   ⟨data.pushforwardTruncationFamily_level family cutoff,
     data.pushforwardTruncationFamily_ofCompleted series⟩
+
+/-- Addition, convolution, and numerical pushforward preserve agreement through
+the same degree cutoff.  Consequently numerical pushforward satisfies the
+explicit cutoff-continuity predicate with identity modulus.  This terminal does
+not assert Mathlib topological continuity. -/
+theorem numericalNovikov_cutoffContinuity
+    {Homology Numerical Coefficient : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [CommRing Coefficient]
+    (data : Quantum.CompletedNumericalQuotient Homology Numerical)
+    {cutoff : ℕ}
+    {left₁ left₂ right₁ right₂ :
+      Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+        data.homologicalGrading Coefficient}
+    (left_agree : data.homologicalGrading.AgreeThrough cutoff left₁ left₂)
+    (right_agree : data.homologicalGrading.AgreeThrough cutoff right₁ right₂) :
+    data.homologicalGrading.AgreeThrough cutoff
+        (left₁ + right₁) (left₂ + right₂) ∧
+      data.homologicalGrading.AgreeThrough cutoff
+        (data.homologicalGrading.convolution left₁ right₁)
+        (data.homologicalGrading.convolution left₂ right₂) ∧
+      data.numericalGrading.AgreeThrough cutoff
+        (data.completedPushforward left₁) (data.completedPushforward left₂) ∧
+      Quantum.FiniteDegreeAddCommMonoid.CutoffContinuous
+        data.homologicalGrading data.numericalGrading
+          (data.completedPushforward (R := Coefficient)) :=
+  ⟨data.homologicalGrading.agreeThrough_add left_agree right_agree,
+    data.homologicalGrading.agreeThrough_convolution left_agree right_agree,
+    data.completedPushforward_agreeThrough left_agree,
+    data.completedPushforward_cutoffContinuous⟩
 
 /-- For a surjective finite-degree numerical quotient, the completed
 finite-fiber pushforward commutes with every finite truncation and is a unital

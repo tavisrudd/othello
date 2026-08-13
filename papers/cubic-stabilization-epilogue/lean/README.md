@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 108 reviewer terminals.
+1 complete; 109 reviewer terminals.
 
-The 108 reviewer-facing terminals currently verify:
+The 109 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -136,6 +136,9 @@ The 108 reviewer-facing terminals currently verify:
 - numerical pushforward on that compatible-family model, with every finite
   level exactly the ordinary `mapDomain` quotient map and an exact commuting
   square with completed pushforward;
+- identity-modulus cutoff continuity for addition, convolution, and numerical
+  pushforward, expressed as coefficient agreement through each degree cutoff;
+  no topology or Mathlib `Continuous` theorem is asserted;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten
