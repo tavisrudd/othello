@@ -41,9 +41,9 @@ objects, hypotheses, conclusions, and cautions recorded in
 - Identify the two explicit six-point permutations in the formal
   characteristic-two augmentation quotient with the manuscript's `A5` action
   on its six conjugate `D5` subgroups.  Lean now proves that the displayed
-  induced matrices have exactly the quadratic four-element common commutant;
-  the group-action identification and simplicity of the geometric coefficient
-  heart remain open (`prop:principal-gluing-packet`).
+  induced matrices act simply and have exactly the quadratic four-element
+  common commutant; the group-action and geometric coefficient-heart
+  identifications remain open (`prop:principal-gluing-packet`).
 - Identify the explicitly constructed quadratic finite-etale splitting field
   and eigenbasis of the residue model with the manuscript's marked geometric
   splitting extension, and prove that scalar extension of the geometric graph

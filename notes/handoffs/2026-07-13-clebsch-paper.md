@@ -400,9 +400,9 @@ separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
 The six-point characteristic-two augmentation quotient is now represented in
 explicit four coordinates modulo its constant line.  Two displayed
-projective-line permutations induce matrices whose common commutant is exactly
-the four-element quadratic algebra; identification with the manuscript's
-specific `A5` action and proof of simplicity remain open.  The explicit
+projective-line permutations induce a simple action whose common commutant is
+exactly the four-element quadratic algebra; identification with the
+manuscript's specific `A5` action remains open.  The explicit
 two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
 with the concrete `F4` gluing field is proved as an `F2`-algebra equivalence,

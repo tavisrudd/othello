@@ -1723,10 +1723,11 @@ Lean gives canonical four coordinates on the augmentation hyperplane modulo
 the constant line, derives the matrices induced by translation and inversion
 on the six-point projective-line labelling over `F5`, and proves that their
 common matrix commutant is exactly the four-element quadratic algebra
-`{0,1,W,W+1}` with `W²+W+1=0`.  This is the modular algebra appearing in the
-manuscript's coefficient-heart argument, but this terminal does not identify
-the generated permutation group with the manuscript's particular `A5` action
-on its six conjugate `D5` subgroups. -/
+`{0,1,W,W+1}` with `W²+W+1=0`.  Every subspace stable under both generators
+is zero or the whole heart.  These are the simplicity and commutant statements
+appearing in the manuscript's coefficient-heart argument, but this terminal
+does not identify the generated permutation group with the manuscript's
+particular `A5` action on its six conjugate `D5` subgroups. -/
 theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     (∀ heart : Fin 4 → GraphLattices.F2,
       (∑ point, GraphLattices.sixPointHeartRepresentative heart point) = 0 ∧
@@ -1744,6 +1745,9 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       (∑ point, vector point) = 0 →
         (GraphLattices.sixPointHeartCoordinates vector = 0 ↔
           ∀ point, vector point = vector 5)) ∧
+    (∀ subspace : Submodule GraphLattices.F2 (Fin 4 → GraphLattices.F2),
+      GraphLattices.SixPointHeartGeneratorStable subspace →
+        subspace = ⊥ ∨ subspace = ⊤) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1760,6 +1764,7 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
         GraphLattices.sixPointHeartCoordinates_translation heart,
         GraphLattices.sixPointHeartCoordinates_inversion heart⟩,
     GraphLattices.sixPointHeartCoordinates_eq_zero_iff_constant,
+    GraphLattices.sixPointHeartGeneratorStable_simple,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 

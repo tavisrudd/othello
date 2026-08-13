@@ -96,9 +96,10 @@ The 144 reviewer-facing terminals currently verify:
   isotropic half-dimension calculation for self-adjoint graph slopes;
 - explicit coordinates for the six-point characteristic-two augmentation
   quotient by its constant line, the translation and inversion matrices in
-  those coordinates, and their exact four-element quadratic matrix
-  commutant, without yet identifying those permutations with the manuscript's
-  `A5` action on the conjugate `D5` subgroups;
+  those coordinates, simplicity under the generated action, and its exact
+  four-element quadratic matrix commutant, without yet identifying those
+  permutations with the manuscript's `A5` action on the conjugate `D5`
+  subgroups;
 - the
   exact persistence of any continuously classified finite discrete packet on
   a connected base, including the explicit transported marked-root pair both

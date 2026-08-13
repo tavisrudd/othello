@@ -229,9 +229,9 @@ quotient small matrix.  Its geometric monodromy origin remains unproved.
 The concrete six-point characteristic-two augmentation quotient now has
 explicit four coordinates modulo its constant line; translation and inversion
 on the six-point projective-line labelling induce displayed matrices whose
-common commutant is exactly the quadratic four-element algebra.  Identifying
-those permutations with the manuscript's `A5` action on its six conjugate
-`D5` subgroups and proving simplicity remain open.  The explicit
+generated action is simple and whose common commutant is exactly the quadratic
+four-element algebra.  Identifying those permutations with the manuscript's
+`A5` action on its six conjugate `D5` subgroups remains open.  The explicit
 characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing
