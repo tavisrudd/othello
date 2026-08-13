@@ -25,6 +25,10 @@ when this separatedness condition is joined by surjectivity onto compatible
 families.  The latter surjectivity is the coefficientwise completeness
 predicate used here.
 
+The combined complete-separated-multiplicative structure merely packages
+these explicit premises.  From them Lean derives bijectivity of the canonical
+ring homomorphism; it does not prove the premises for a particular filtration.
+
 For any supplied ideal `I`, Lean also constructs the power filtration `I^n`
 and proves the precise multiplicative lower bound: if `x ∈ I^m` and
 `y ∈ I^n`, then `x * y ∈ I^(m+n)`.  This separate adic model is not identified
@@ -417,6 +421,32 @@ theorem quotientFamilyRingHom_bijective_iff_complete_and_iInf_eq_bot
     exact filtration.ofRingElement_injective_iff_iInf_eq_bot.mpr hseparated
 
 end DecreasingIdealFiltration
+
+/-- A normalized multiplicative filtration for which the canonical ring map
+to compatible quotient families is assumed surjective and whose ideal
+intersection is zero.  These are the coefficientwise completeness and
+separatedness notions used in this development. -/
+structure CompleteSeparatedMultiplicativeIdealFiltration
+    (R : Type u) [CommRing R] extends MultiplicativeIdealFiltration R where
+  complete :
+    toMultiplicativeIdealFiltration.toDecreasingIdealFiltration.IsComplete
+  separated :
+    iInf toMultiplicativeIdealFiltration.toDecreasingIdealFiltration.ideal = ⊥
+
+namespace CompleteSeparatedMultiplicativeIdealFiltration
+
+/-- The canonical ring homomorphism to compatible quotient families is
+bijective for a complete separated multiplicative filtration. -/
+theorem quotientFamilyRingHom_bijective
+    {R : Type u} [CommRing R]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration R) :
+    Function.Bijective
+      filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration.quotientFamilyRingHom :=
+  filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+    |>.quotientFamilyRingHom_bijective_iff_complete_and_iInf_eq_bot.mpr
+      ⟨filtration.complete, filtration.separated⟩
+
+end CompleteSeparatedMultiplicativeIdealFiltration
 
 end Quantum
 

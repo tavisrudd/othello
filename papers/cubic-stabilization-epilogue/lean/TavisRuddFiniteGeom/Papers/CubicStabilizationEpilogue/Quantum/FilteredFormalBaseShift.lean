@@ -16,6 +16,9 @@ When the supplied filtration is normalized and multiplicative, the same
 finite-level construction retains the premises `F⁰R = R` and
 `FᵐR · FⁿR ⊆ Fᵐ⁺ⁿR` in its stated conclusion.  Lean does not prove that a
 particular geometric coefficient filtration has this structure.
+If coefficientwise completeness and zero-intersection separatedness are also
+supplied, Lean derives bijectivity of the canonical ring homomorphism to
+compatible quotient families and retains the same finite-level packet.
 
 For the adic filtration of one ideal, it is enough to supply a ring
 endomorphism preserving that ideal.  Lean proves preservation of every ideal
@@ -191,6 +194,31 @@ theorem formalBaseShiftConclusion
     input.bulkSystem_compatible_and_characteristicPolynomial⟩
 
 end MultiplicativeIdealFiltration
+
+namespace CompleteSeparatedMultiplicativeIdealFiltration
+
+/-- A complete separated multiplicative filtration identifies its base ring
+bijectively with compatible quotient families, while compatible matrix and
+gauge data over that tower produce the multiplicative formal-base-shift
+conclusion. -/
+theorem formalBaseShiftConclusion
+    {Index : Type v} [Fintype Index] [DecidableEq Index]
+    {R : Type u} [CommRing R]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration R)
+    {endomorphism : DecreasingIdealFiltration.PreservingEndomorphism
+      filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration}
+    (input : FilteredFormalBaseShiftInput Index R
+      filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+      endomorphism) :
+    Function.Bijective
+        (DecreasingIdealFiltration.quotientFamilyRingHom
+          filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration) ∧
+      MultiplicativeIdealFiltration.FormalBaseShiftConclusion
+        filtration.toMultiplicativeIdealFiltration input :=
+  ⟨filtration.quotientFamilyRingHom_bijective,
+    filtration.toMultiplicativeIdealFiltration.formalBaseShiftConclusion input⟩
+
+end CompleteSeparatedMultiplicativeIdealFiltration
 
 /-- Matrix and gauge data over the adic quotient tower of one ideal.  The
 endomorphism is required to preserve only the generating ideal; preservation

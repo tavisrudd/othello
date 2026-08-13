@@ -2261,6 +2261,29 @@ theorem multiplicativeFilteredFormalBaseShift_conclusion
       filtration input :=
   filtration.formalBaseShiftConclusion input
 
+/-- For a supplied normalized multiplicative filtration that is complete and
+separated in the explicit compatible-quotient-family sense, the canonical ring
+homomorphism to compatible families is bijective.  The same quotient tower and
+supplied preserving endomorphism, matrices, and gauges yield the multiplicative
+finite-level base-shift conclusion.  This does not prove completeness,
+separatedness, multiplicativity, or geometric identification for the
+manuscript's coefficient ring. -/
+theorem completeSeparatedMultiplicativeFormalBaseShift_conclusion
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommRing R]
+    (filtration :
+      Quantum.CompleteSeparatedMultiplicativeIdealFiltration R)
+    {endomorphism : Quantum.DecreasingIdealFiltration.PreservingEndomorphism
+      filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration}
+    (input : Quantum.FilteredFormalBaseShiftInput Index R
+      filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+      endomorphism) :
+    Function.Bijective
+        (Quantum.DecreasingIdealFiltration.quotientFamilyRingHom
+          filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration) ∧
+      Quantum.MultiplicativeIdealFiltration.FormalBaseShiftConclusion
+        filtration.toMultiplicativeIdealFiltration input :=
+  filtration.formalBaseShiftConclusion input
+
 /-- For the adic filtration of one ideal, preservation of the generating ideal
 is enough to construct compatible quotient substitutions.  Together with
 supplied compatible small matrices and invertible gauges, Lean proves the
