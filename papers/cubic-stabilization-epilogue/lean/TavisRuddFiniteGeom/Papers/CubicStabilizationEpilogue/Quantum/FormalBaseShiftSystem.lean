@@ -8,7 +8,8 @@ monodromy matrix, a divisor-substitution endomorphism, an invertible gauge, and
 the conjugate bulk matrix.  This module records compatibility of the small
 matrices, substitutions, gauges, and inverse gauges under reduction.  Lean
 then derives compatibility of the bulk matrices and the substituted
-characteristic-polynomial identity at every level.
+characteristic-polynomial identity at every level, together with compatibility
+of the bulk characteristic polynomials under reduction.
 
 The filtered coefficient quotients, string and divisor equations, bulk flat
 equations, and construction of the finite-level gauges are not represented.
@@ -131,6 +132,37 @@ theorem bulkMonodromy_charpoly
     _ = (system.smallMonodromy level).charpoly.map
           (system.divisorSubstitution level) :=
       framedCharacteristicPolynomial_map _ _
+
+/-- The derived bulk matrices, with the supplied coefficient reductions, form
+a compatible matrix system. -/
+noncomputable def bulkMatrixSystem
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : FormalBaseShiftSystem Index) :
+    CompatibleMonodromyMatrixSystem Index where
+  Coefficient := system.Coefficient
+  coefficientRing := system.coefficientRing
+  reduction := system.reduction
+  monodromy := system.bulkMonodromy
+  compatible level row column := by
+    letI := system.coefficientRing level
+    letI := system.coefficientRing (level + 1)
+    exact congrFun (congrFun
+      (system.bulkMonodromy_compatible level) row) column
+
+/-- The derived bulk characteristic polynomials are compatible under every
+adjacent coefficient reduction. -/
+theorem bulkCharacteristicPolynomial_compatible
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : FormalBaseShiftSystem Index) (level : ℕ) :
+    letI := system.coefficientRing level
+    letI := system.coefficientRing (level + 1)
+    ((system.bulkMonodromy (level + 1)).charpoly).map
+        (system.reduction level) =
+      (system.bulkMonodromy level).charpoly := by
+  letI := system.coefficientRing level
+  letI := system.coefficientRing (level + 1)
+  rw [← framedCharacteristicPolynomial_map,
+    system.bulkMonodromy_compatible level]
 
 end FormalBaseShiftSystem
 

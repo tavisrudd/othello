@@ -248,6 +248,13 @@ numerical pushforward
 commutes when the weight factors through the quotient.  The corresponding
 geometric Gromov--Witten invariance, curve-pairing weights, and quantum
 connection remain open.
+Compatible finite-level monodromy matrices now derive their characteristic-
+polynomial inverse system; compatible pro-Laurent gauges preserve it under
+conjugacy; and compatible coefficient reductions, divisor substitutions, small
+matrices, and gauges derive the bulk matrices and levelwise substituted
+characteristic polynomials.  The filtered coefficient quotients, string and
+divisor equations, bulk flat solutions, and analytic integral-`z` gauge remain
+the exact formal-base-shift gap.
 The aggregate build, source correspondence, and 103-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent

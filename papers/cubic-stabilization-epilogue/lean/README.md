@@ -146,11 +146,12 @@ The 112 reviewer-facing terminals currently verify:
   supplied pro-Laurent gauge, compatible levelwise conjugation and exact
   characteristic-polynomial invariance; Lean does not prove that the bulk
   differential equations produce either supplied family;
-- for compatible finite coefficient rings, small matrices, divisor
+- for compatible coefficient rings at finite levels, small matrices, divisor
   substitutions, and two-sided-invertible gauges, derivation of compatible bulk
   matrices and the substituted characteristic-polynomial identity at every
-  level; the filtered ring and bulk flat equations producing the inputs are not
-  constructed;
+  level, including compatibility of those bulk characteristic polynomials under
+  reduction; the filtered ring and bulk flat equations producing the inputs are
+  not constructed;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten

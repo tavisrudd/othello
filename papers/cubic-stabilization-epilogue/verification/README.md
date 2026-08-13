@@ -60,8 +60,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   filtered target/associated graded and prove the now-explicit compatibility
   identifying the initial form of a geometric specialized series with its
   finite lowest-support exponential combination in divisor tagging, the
-  common-field and bulk
-  gauge comparisons, formal base-change comparisons, topological continuity
+  source/common coefficient fields and embeddings for the comparison maps,
+  construction of the actual finite coefficient quotients, small and bulk
+  monodromy matrices, divisor substitutions, and integral-`z` gauges from the
+  string/divisor/bulk flat equations, topological continuity
   and a categorical/topological universal property for the now-explicit
   coefficientwise inverse-limit presentation of numerical completion, and the
   geometric numerical base-change comparison, numerical invariance and

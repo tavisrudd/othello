@@ -281,7 +281,19 @@ are current, and the committed paper export verifies byte-for-byte in
   open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
-  than retained as explicit premises.
+  than retained as explicit premises.  The finite-level algebra is now sharper:
+  compatible matrices derive their polynomial inverse system, compatible
+  pro-Laurent gauges preserve it under conjugacy, and compatible divisor
+  substitutions and gauges derive the bulk system.  The remaining base-shift
+  gap is construction of those rings, reductions, matrices, substitutions, and
+  gauges from the filtered differential equations.
+- **Closeout `ej`+`tt` pass:** settled the cheap algebraic opportunity.  The
+  finite-level formal-base-shift packet now derives not only compatible bulk
+  matrices and the substituted polynomial identity, but also compatibility of
+  the bulk characteristic polynomials themselves.  No further low-cost
+  consequence closes a manuscript row: the remaining obstructions require
+  constructing geometric or differential objects rather than composing
+  already formalized algebra.
 - **Numerical completion:** the completed convolution ring, finite truncation
   compatibility, numerical pushforward ring homomorphism, finite invariant
   packet descent, additive-operator packaging, additive-weight Leibniz identity,
