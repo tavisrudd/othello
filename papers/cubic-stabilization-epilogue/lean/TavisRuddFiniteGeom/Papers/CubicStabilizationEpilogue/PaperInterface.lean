@@ -2586,11 +2586,12 @@ theorem multivariableLaurentFlatGauge_normalizedSolution_unique
 coefficientwise multivariate formal partial derivatives.  Lean recursively
 constructs the unique matrix-valued multivariate formal series with identity
 constant coefficient satisfying every equation `partial_i G=-A_iG`, and proves
-that this matrix is a unit.  This applies in particular to ordinary
+that this matrix is a unit.  The construction commutes with every
+rational-algebra coefficient homomorphism.  This applies in particular to ordinary
 Laurent-series coefficients.  It does not identify the connection with the
-manuscript's filtered quantum connection, prove compatibility across quotient
-levels, or establish a Laurent lower bound uniform in all bulk monomials and
-levels. -/
+manuscript's filtered quantum connection, construct or identify the manuscript's
+quotient tower and its level connections, or establish a Laurent lower bound
+uniform in all bulk monomials and levels. -/
 theorem multivariableFormalFlatGauge_existsUnique_of_zeroCurvature
     {Coordinate Index R : Type*} [DecidableEq Coordinate]
     [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
@@ -2603,14 +2604,23 @@ theorem multivariableFormalFlatGauge_existsUnique_of_zeroCurvature
             (Quantum.multivariablePartialDerivative second) +
           connection first * connection second -
           connection second * connection first = 0) :
-    ∃! solution : Matrix Index Index (MvPowerSeries Coordinate R),
-      solution.map (MvPowerSeries.coeff 0) = 1 ∧
-      IsUnit solution ∧
-      ∀ coordinate,
-        solution.map (Quantum.multivariablePartialDerivative coordinate) =
-          -(connection coordinate) * solution :=
-  Quantum.multivariableFlatGaugeSeries_existsUnique_of_curvature
-    connection curvature
+    (∃! solution : Matrix Index Index (MvPowerSeries Coordinate R),
+        solution.map (MvPowerSeries.coeff 0) = 1 ∧
+        IsUnit solution ∧
+        ∀ coordinate,
+          solution.map (Quantum.multivariablePartialDerivative coordinate) =
+            -(connection coordinate) * solution) ∧
+      ∀ (S : Type*) [CommRing S] [Algebra ℚ S]
+        (homomorphism : R →ₐ[ℚ] S),
+        (Quantum.multivariableFlatGaugeSeries connection).map
+            (MvPowerSeries.map homomorphism.toRingHom) =
+          Quantum.multivariableFlatGaugeSeries
+            (fun coordinate ↦ (connection coordinate).map
+              (MvPowerSeries.map homomorphism.toRingHom)) :=
+  ⟨Quantum.multivariableFlatGaugeSeries_existsUnique_of_curvature
+      connection curvature,
+    fun _ _ _ homomorphism ↦
+      Quantum.multivariableFlatGaugeSeries_map homomorphism connection curvature⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

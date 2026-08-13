@@ -169,10 +169,12 @@ For multivariate formal power series over a commutative rational algebra, the
 coefficientwise partial derivatives satisfy the Leibniz rule and commute.  Lean
 proves both directions at the formal level: an invertible supplied solution
 forces zero curvature, and zero curvature yields a recursively constructed
-unique normalized invertible gauge.  This applies to ordinary Laurent-series
+unique normalized invertible gauge, naturally under rational-algebra
+coefficient homomorphisms.  This applies to ordinary Laurent-series
 coefficients, but identification of the manuscript's connection and curvature
-premise, quotient compatibility, and a Laurent lower bound uniform in bulk
-monomials and levels remain unproved.
+premise, construction and packaging of the manuscript's quotient tower and
+level connections, and a Laurent lower bound uniform in bulk monomials and
+levels remain unproved.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

@@ -70,9 +70,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   are commuting derivations, derives their necessary zero-curvature identity
   from an invertible supplied solution, and conversely constructs the unique
   normalized invertible multivariable formal gauge from zero curvature over any
-  commutative rational algebra.  It also proves the necessary result for
+  commutative rational algebra, naturally under rational-algebra coefficient
+  homomorphisms.  It also proves the necessary result for
   arbitrary commuting derivations.  The manuscript's geometric connection,
-  its zero-curvature input, quotient compatibility, and uniform Laurent-order
+  its zero-curvature input, the manuscript's quotient tower and level
+  connections and their geometric identification, and uniform Laurent-order
   bounds are not formalized.
   The ordinary one-variable varying
   formal solution, its compatible

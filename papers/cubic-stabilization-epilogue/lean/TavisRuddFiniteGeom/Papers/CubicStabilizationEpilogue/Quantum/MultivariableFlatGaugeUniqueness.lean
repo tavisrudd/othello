@@ -28,9 +28,11 @@ commutative coefficient algebra with commuting derivations.
 For a zero-curvature connection over a commutative `\mathbb{Q}`-algebra, Lean
 also constructs the coefficients recursively in one chosen support coordinate,
 proves that curvature propagates the selected equation to every coordinate,
-and obtains the unique normalized invertible formal gauge.  The module does not
+and obtains the unique normalized invertible formal gauge, naturally under
+rational-algebra coefficient homomorphisms.  The module does not
 identify the coefficient ring with a filtered quantum coefficient ring or
-supply quotient compatibility, a Laurent-order bound uniform in all bulk
+construct or package the manuscript's quotient tower and its level connections,
+a Laurent-order bound uniform in all bulk
 monomials and levels, convergence, or analytic gauge data.  The proofs are
 symbolic and kernel checked, with no external computation or oracle.
 -/
@@ -98,6 +100,37 @@ theorem multivariablePartialDerivative_coefficient
       (degree coordinate + 1 : R) *
         MvPowerSeries.coeff (degree + Finsupp.single coordinate 1) series := by
   rfl
+
+/-- Coefficient extension along a rational-algebra homomorphism commutes with
+coefficientwise multivariable partial differentiation. -/
+theorem multivariablePartialDerivative_map
+    {Coordinate R S : Type*} [DecidableEq Coordinate]
+    [CommRing R] [CommRing S] [Algebra ℚ R] [Algebra ℚ S]
+    (homomorphism : R →ₐ[ℚ] S) (coordinate : Coordinate)
+    (series : MvPowerSeries Coordinate R) :
+    multivariablePartialDerivative coordinate
+        (MvPowerSeries.map homomorphism.toRingHom series) =
+      MvPowerSeries.map homomorphism.toRingHom
+        (multivariablePartialDerivative coordinate series) := by
+  apply MvPowerSeries.ext
+  intro degree
+  simp [multivariablePartialDerivative_coefficient]
+
+/-- Entrywise coefficient extension commutes with entrywise multivariable
+partial differentiation of a matrix. -/
+theorem matrix_multivariablePartialDerivative_map
+    {Coordinate Index R S : Type*} [DecidableEq Coordinate]
+    [CommRing R] [CommRing S] [Algebra ℚ R] [Algebra ℚ S]
+    (homomorphism : R →ₐ[ℚ] S) (coordinate : Coordinate)
+    (matrix : Matrix Index Index (MvPowerSeries Coordinate R)) :
+    (matrix.map (MvPowerSeries.map homomorphism.toRingHom)).map
+        (multivariablePartialDerivative coordinate) =
+      (matrix.map (multivariablePartialDerivative coordinate)).map
+        (MvPowerSeries.map homomorphism.toRingHom) := by
+  apply Matrix.ext
+  intro row column
+  exact multivariablePartialDerivative_map homomorphism coordinate
+    (matrix row column)
 
 /-- Coefficientwise partial derivatives in two coordinates commute. -/
 theorem multivariablePartialDerivative_comm
@@ -1370,6 +1403,33 @@ theorem multivariableFlatGaugeSeries_unique
   intro degree
   exact congrArg (fun matrix ↦ matrix row column) (coefficientsEqual degree)
 
+/-- Under zero curvature, the recursively assembled gauge satisfies every
+coordinate flat equation. -/
+theorem multivariableFlatGaugeSeries_equation_of_curvature
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (curvature : ∀ first second,
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0) :
+    ∀ coordinate,
+      (multivariableFlatGaugeSeries connection).map
+          (multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * multivariableFlatGaugeSeries connection := by
+  have allDefects : ∀ coordinate,
+      multivariableFlatGaugeDefect connection
+        (multivariableFlatGaugeSeries connection) coordinate = 0 := by
+    apply multivariableFlatGaugeDefect_eq_zero_of_pivot
+      connection (multivariableFlatGaugeSeries connection) curvature
+    exact multivariableFlatGaugeSeries_pivot_defect connection
+  intro coordinate
+  rw [neg_mul]
+  exact eq_neg_iff_add_eq_zero.mpr (by
+    simpa only [multivariableFlatGaugeDefect] using allDefects coordinate)
+
 /-- A zero-curvature multivariate formal connection over a commutative
 `\mathbb{Q}`-algebra has a unique normalized flat-gauge series.  The constructed
 solution is an invertible square matrix over the multivariate power-series
@@ -1391,19 +1451,10 @@ theorem multivariableFlatGaugeSeries_existsUnique_of_curvature
         solution.map (multivariablePartialDerivative coordinate) =
           -(connection coordinate) * solution := by
   let solution := multivariableFlatGaugeSeries connection
-  have allDefects : ∀ coordinate,
-      multivariableFlatGaugeDefect connection solution coordinate = 0 := by
-    apply multivariableFlatGaugeDefect_eq_zero_of_pivot connection solution curvature
-    intro degree nonzero
-    simpa [solution] using
-      multivariableFlatGaugeSeries_pivot_defect connection degree nonzero
   have equations : ∀ coordinate,
       solution.map (multivariablePartialDerivative coordinate) =
-        -(connection coordinate) * solution := by
-    intro coordinate
-    rw [neg_mul]
-    exact eq_neg_iff_add_eq_zero.mpr (by
-      simpa only [multivariableFlatGaugeDefect] using allDefects coordinate)
+        -(connection coordinate) * solution :=
+    multivariableFlatGaugeSeries_equation_of_curvature connection curvature
   refine ⟨solution, ?_, ?_⟩
   · exact ⟨multivariableFlatGaugeSeries_normalized connection,
       multivariableFlatGaugeSeries_isUnit connection, equations⟩
@@ -1412,6 +1463,78 @@ theorem multivariableFlatGaugeSeries_existsUnique_of_curvature
       candidateProperties.1
       (multivariableFlatGaugeSeries_normalized connection)
       candidateProperties.2.2 equations
+
+/-- The normalized flat gauge constructed from zero curvature is natural under
+coefficient extension along rational-algebra homomorphisms. -/
+theorem multivariableFlatGaugeSeries_map
+    {Coordinate Index R S : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index]
+    [CommRing R] [CommRing S] [Algebra ℚ R] [Algebra ℚ S]
+    (homomorphism : R →ₐ[ℚ] S)
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (curvature : ∀ first second,
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0) :
+    (multivariableFlatGaugeSeries connection).map
+        (MvPowerSeries.map homomorphism.toRingHom) =
+      multivariableFlatGaugeSeries
+        (fun coordinate ↦ (connection coordinate).map
+          (MvPowerSeries.map homomorphism.toRingHom)) := by
+  let mappedConnection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate S) := fun coordinate ↦
+    (connection coordinate).map (MvPowerSeries.map homomorphism.toRingHom)
+  let mappedGauge : Matrix Index Index (MvPowerSeries Coordinate S) :=
+    (multivariableFlatGaugeSeries connection).map
+      (MvPowerSeries.map homomorphism.toRingHom)
+  have mappedCurvature : ∀ first second,
+      (mappedConnection second).map (multivariablePartialDerivative first) -
+          (mappedConnection first).map (multivariablePartialDerivative second) +
+          mappedConnection first * mappedConnection second -
+          mappedConnection second * mappedConnection first = 0 := by
+    intro first second
+    apply Matrix.ext
+    intro row column
+    apply MvPowerSeries.ext
+    intro degree
+    have sourceEntry := congrArg
+      (fun matrix ↦ MvPowerSeries.coeff degree (matrix row column))
+      (curvature first second)
+    have mappedEntry := congrArg homomorphism.toRingHom sourceEntry
+    simpa [mappedConnection, Matrix.mul_apply, MvPowerSeries.coeff_mul,
+      multivariablePartialDerivative_coefficient] using mappedEntry
+  have mappedNormalized : mappedGauge.map (MvPowerSeries.coeff 0) = 1 := by
+    apply Matrix.ext
+    intro row column
+    have sourceEntry := congrArg (fun matrix ↦ matrix row column)
+      (multivariableFlatGaugeSeries_normalized connection)
+    have mappedEntry := congrArg homomorphism.toRingHom sourceEntry
+    simpa [mappedGauge, Matrix.one_apply] using mappedEntry
+  have mappedEquation : ∀ coordinate,
+      mappedGauge.map (multivariablePartialDerivative coordinate) =
+        -(mappedConnection coordinate) * mappedGauge := by
+    intro coordinate
+    apply Matrix.ext
+    intro row column
+    apply MvPowerSeries.ext
+    intro degree
+    have sourceEquation :=
+      multivariableFlatGaugeSeries_equation_of_curvature
+        connection curvature coordinate
+    have sourceEntry := congrArg
+      (fun matrix ↦ MvPowerSeries.coeff degree (matrix row column))
+      sourceEquation
+    have mappedEntry := congrArg homomorphism.toRingHom sourceEntry
+    simpa [mappedGauge, mappedConnection, Matrix.mul_apply,
+      MvPowerSeries.coeff_mul, multivariablePartialDerivative_coefficient]
+      using mappedEntry
+  exact multivariableFlatGaugeSeries_unique mappedConnection mappedGauge
+    (multivariableFlatGaugeSeries mappedConnection) mappedNormalized
+    (multivariableFlatGaugeSeries_normalized mappedConnection) mappedEquation
+    (multivariableFlatGaugeSeries_equation_of_curvature
+      mappedConnection mappedCurvature)
 
 /-- Over Laurent-series coefficients, two normalized multivariable formal
 gauges satisfying the same coordinate equations are equal.  Ordinary Laurent

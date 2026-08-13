@@ -169,10 +169,12 @@ The 128 reviewer-facing terminals currently verify:
   solution is proved to force their exact zero-curvature identity, and,
   conversely, zero curvature over any commutative rational algebra is proved to
   yield a recursively constructed unique normalized invertible multivariable
-  formal gauge; the same necessary result holds for arbitrary commuting
-  derivations; Lean does not prove quotient compatibility, establish a Laurent
-  lower bound uniform in the bulk monomial or level, or identify these data
-  with the manuscript's quantum connection;
+  formal gauge, naturally under every rational-algebra coefficient
+  homomorphism; the same necessary result holds for arbitrary commuting
+  derivations; Lean does not construct or package the manuscript's compatible
+  quotient tower or identify its level connections, establish a Laurent lower
+  bound uniform in the bulk monomial or level, or identify these data with the
+  manuscript's quantum connection;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;
