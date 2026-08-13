@@ -158,6 +158,47 @@ theorem gaugeAt_existsUnique
   multivariableFlatGaugeSeries_existsUnique_of_curvature
     (input.connectionAt level) (input.curvatureAt level)
 
+/-- The coefficient of one matrix entry and one bulk monomial across all
+quotient gauges, packaged as an adjacent-compatible quotient family. -/
+noncomputable def gaugeCoefficientFamily
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (input : FilteredMultivariableFlatGaugeInput Coordinate Index R)
+    (row column : Index) (degree : Coordinate →₀ ℕ) :
+    input.filtration.CompatibleQuotientFamily where
+  value level := MvPowerSeries.coeff degree (input.gaugeAt level row column)
+  compatible level := by
+    have compatibility := congrArg
+      (fun matrix ↦ MvPowerSeries.coeff degree (matrix row column))
+      (input.connectionAt_gaugeAt_compatible level).2
+    simpa using compatibility
+
+/-- Every packaged quotient-gauge coefficient is exactly the compatible family
+represented by the corresponding coefficient of the base-ring gauge. -/
+theorem gaugeCoefficientFamily_eq_ofRingElement
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (input : FilteredMultivariableFlatGaugeInput Coordinate Index R)
+    (row column : Index) (degree : Coordinate →₀ ℕ) :
+    input.gaugeCoefficientFamily row column degree =
+      input.filtration.ofRingElement
+        (MvPowerSeries.coeff degree
+          (multivariableFlatGaugeSeries input.connection row column)) := by
+  ext level
+  have naturality := multivariableFlatGaugeSeries_map
+    (input.quotientMap level) input.connection input.curvature
+  have levelEquality :
+      (multivariableFlatGaugeSeries input.connection).map
+          (MvPowerSeries.map (input.quotientMap level).toRingHom) =
+        input.gaugeAt level := by
+    change _ = multivariableFlatGaugeSeries (fun coordinate ↦
+      (input.connection coordinate).map
+        (MvPowerSeries.map (input.quotientMap level).toRingHom))
+    exact naturality
+  have coefficientEquality := congrArg
+    (fun matrix ↦ MvPowerSeries.coeff degree (matrix row column)) levelEquality
+  simpa [gaugeCoefficientFamily, quotientMap] using coefficientEquality.symm
+
 end FilteredMultivariableFlatGaugeInput
 
 end Quantum

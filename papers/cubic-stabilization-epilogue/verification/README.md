@@ -76,6 +76,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   decreasing ideal filtration, base multivariable connection, and exact
   zero-curvature proof, Lean constructs the actual quotient-level connections
   and normalized invertible gauges and proves adjacent-reduction compatibility.
+  Each entrywise monomial gauge coefficient is also packaged as an explicit
+  compatible quotient family and identified with the compatible family
+  represented by its corresponding base-gauge coefficient.
   Their identification with the manuscript's geometric tower and quantum
   connection, and uniform Laurent-order bounds, are not formalized.
   The ordinary one-variable varying

@@ -294,7 +294,10 @@ under rational-algebra coefficient homomorphisms.  From a supplied commutative
 rational algebra, decreasing ideal filtration, base multivariable connection,
 and exact zero-curvature proof, Lean maps the connection to every quotient,
 constructs the unique normalized invertible gauge at every level, and proves
-canonical adjacent-reduction compatibility.  This applies to ordinary
+canonical adjacent-reduction compatibility.  Every entrywise monomial gauge
+coefficient is packaged as a compatible quotient family and identified with
+the compatible family represented by its corresponding base-gauge coefficient.
+This applies to ordinary
 Laurent-series coefficients, but the tower and its level connections are not
 identified with the manuscript's geometric coefficient tower or quantum
 connection; no uniform Laurent-order bound, packaged inverse-limit Laurent

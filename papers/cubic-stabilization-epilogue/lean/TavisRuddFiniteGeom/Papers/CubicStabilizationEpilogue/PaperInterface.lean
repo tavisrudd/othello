@@ -2629,7 +2629,10 @@ zero-curvature equations.  Lean constructs its image and the unique normalized
 invertible formal gauge over every actual quotient `R/F^n`.  Both the
 connection and gauge commute with canonical adjacent reductions, and the
 normalization, unit property, coordinate equations, and uniqueness hold at
-every level.  The supplied filtration and connection are not identified with
+every level.  Every matrix-entry and bulk-monomial gauge coefficient is also
+packaged as an adjacent-compatible quotient family and identified with the
+family represented by the corresponding base-gauge coefficient.  The supplied
+filtration and connection are not identified with
 the manuscript's geometric coefficient tower or quantum connection; no
 uniform Laurent-order bound, inverse-limit Laurent gauge, or analytic
 specialization is represented. -/
@@ -2651,10 +2654,17 @@ theorem filteredMultivariableFormalFlatGauge_quotient_compatible
         IsUnit solution ∧
         ∀ coordinate,
           solution.map (Quantum.multivariablePartialDerivative coordinate) =
-            -(input.connectionAt level coordinate) * solution) := by
+            -(input.connectionAt level coordinate) * solution) ∧
+      ∀ row column degree,
+        input.gaugeCoefficientFamily row column degree =
+          input.filtration.ofRingElement
+            (MvPowerSeries.coeff degree
+              (Quantum.multivariableFlatGaugeSeries
+                input.connection row column)) := by
   exact ⟨(input.connectionAt_gaugeAt_compatible level).1,
     (input.connectionAt_gaugeAt_compatible level).2,
-    input.gaugeAt_existsUnique level⟩
+    input.gaugeAt_existsUnique level,
+    input.gaugeCoefficientFamily_eq_ofRingElement⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

@@ -175,7 +175,9 @@ The 129 reviewer-facing terminals currently verify:
   base multivariable connection, and its zero-curvature proof, Lean maps the
   connection into every actual quotient `R/F^n`, constructs the unique
   normalized invertible gauge there, and proves canonical adjacent-reduction
-  compatibility; it does not identify that tower or its level connections
+  compatibility; every entrywise monomial coefficient is packaged as a
+  compatible quotient family and identified with the family represented by
+  its base-gauge coefficient; Lean does not identify that tower or its level connections
   with the manuscript's geometric objects or establish a Laurent lower bound
   uniform in the bulk monomial or level;
 - the exact projective-bundle and blowup multiplicity formulas from supplied

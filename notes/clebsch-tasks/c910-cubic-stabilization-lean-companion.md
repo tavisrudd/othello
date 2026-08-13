@@ -176,7 +176,10 @@ premise and a Laurent lower bound uniform in bulk monomials and levels remain
 unproved.  From a supplied rational algebra, ideal filtration, base
 multivariable connection, and its exact curvature proof, Lean now constructs
 the connection and unique normalized invertible gauge over every actual
-quotient and proves canonical adjacent-reduction compatibility.  This abstract
+quotient and proves canonical adjacent-reduction compatibility.  Every
+entrywise monomial gauge coefficient is packaged as a compatible quotient
+family and identified with the compatible family represented by its
+corresponding base-gauge coefficient.  This abstract
 quotient tower is not identified with the manuscript's geometric one.
 
 All geometric identifications and comparison theorems remain outside those
