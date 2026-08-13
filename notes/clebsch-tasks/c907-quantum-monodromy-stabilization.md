@@ -67,7 +67,13 @@ their own wall-local receivers, and their attachment to the intrinsic flop
 frame is the remaining mixed two-parameter problem.  This isolates a
 publishable stepping stone (finite-disjoint simple-flop Gamma compatibility)
 and a smaller next falsifier (one point-blowup attachment with a transverse
-flop parameter).
+flop parameter).  The exact parameter relation is `s'=s^-1`, `q'=q s^3`.
+The dimension axiom makes fixed-`q` specialization coefficientwise legal,
+but fixed `q` sends `q'` to infinity along the flop continuation.  Hence the
+attachment genuinely requires the correlated two-variable path
+`q=q's^-3`; it is not another formal-banking or convergence gap.  The
+balanced codimension-three blowup sector has opening `2pi`, so aperture is
+not the obstruction.
 
 **Load next:** `c907-solver-dossier.md`.
 

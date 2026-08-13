@@ -271,6 +271,73 @@ Thus the complete Geiser conclusion remains the conditional statement
 This is a smaller residue than the original peak problem: its crepant middle
 transition is now exact, and only two discrepant attachment maps remain.
 
+### 5.1 The one-variable attachment shortcut fails exactly
+
+It is tempting to fix the first point-exceptional parameter while applying
+Chen--Tseng continuation in the flop parameter.  The curve correspondence
+shows that this does not reach the second point-blowup frame.
+
+Let `c'` be the effective flopped curve.  In the common numerical lattice
+
+\[
+ c'=-c,\qquad e'=e+3c,
+\]
+
+so the strict transform of a source exceptional line has class
+
+\[
+ e=e'+3c'.
+\]
+
+Consequently the literal monomials satisfy
+
+\[
+ s'=s^{-1},\qquad q'=qs^3.
+ \tag{11}
+\]
+
+Lee--Lin--Qu--Wang organize the ordinary-flop series by curve classes modulo
+the extremal ray.  One may choose the shifted source lift `e+3c`, whose
+monomial `q s^3` maps directly to `q'`; this is only a reindexing of the
+extremal series, not an identification `q=q'`.
+
+The virtual-dimension calculation makes the distinction exact rather than
+convergence-dependent.  On `Y`,
+
+\[
+ c_1(Y)\cdot e=2,\qquad c_1(Y)\cdot c=0.
+\]
+
+For a fixed homogeneous genus-zero coefficient, the dimension axiom fixes
+the exponent of `q=Q^e`, while the infinite sum is entirely in the
+K-trivial variable `s`.  Thus setting `q=q_0\ne0` is a legal coefficientwise
+operation.  But along the continuation `s:0\to\infty`, (11) gives
+`q'\to\infty`, not the right-hand large-radius point `q'=0`.  Conversely,
+holding `q'` finite requires the correlated path `q=q's^{-3}`.
+
+Therefore neither scalar constancy nor coefficientwise specialization closes
+the attachment.  The precise missing object is a two-variable sectorial
+comparison on a path with
+
+\[
+ s'=s^{-1},\qquad q=q's^{-3},
+ \tag{12}
+\]
+
+and with the point row normalized at the two ends.  This is the smallest
+honest form of the Geiser attachment theorem.
+
+There is no angular-aperture obstruction.  For a codimension-three point
+blowup, Shen--Shoemaker has `nu=2`; the balanced normalization `k=1` puts the
+whole decomposition on
+
+\[
+ |\arg(z/q)|<\pi.
+\]
+
+The two ends can use sectors of this same width.  What their theorem does not
+supply is transport of those sectors along the correlated path (12).
+
 ## 6. Product with `P^2`
 
 Taking (1) times `P^2` blows up `{p} x P^2`, flops the six disjoint families
@@ -299,7 +366,9 @@ The Fourier--Mukai kernel also external-products with the diagonal of
 `P^2`.  Therefore (8)--(9) tensor with every projective-space Gamma factor.
 The aggregate primitive-sixth packet and the rank covector are preserved
 across the middle fivefold flop.  Equation (10) remains conditional on the
-two point-blowup attachments, now after external product with `P^2`.
+two point-blowup attachments, now after external product with `P^2`;
+relation (12) is unchanged and the projective-space Novikov variable is
+passive.
 
 This product argument is deliberately used instead of citing Chen--Tseng for
 the ordinary flop over `P^2`: their Remark 3.1 says that the split ordinary
@@ -324,9 +393,11 @@ input worth seeking.
    products of simple flops and a much larger class of Sarkisov peaks.
 5. The immediate Geiser residue is a **mixed two-parameter attachment
    theorem**: identify the point-blowup wall-local rank row with the intrinsic
-   Gamma frame on `Y`, uniformly while the transverse flop parameter remains
-   available for continuation.  This is narrower and more testable than a
-   general peak theorem.
+   Gamma frame on `Y` along the explicit path (12).  The virtual-dimension
+   axiom makes the transverse point-exceptional specialization
+   coefficientwise finite, and the balanced sector has enough aperture.  The
+   missing content is joint sectorial transport, not convergence or formal
+   algebra.  This is narrower and more testable than a general peak theorem.
 6. Gold still requires either enough complete peak intertwiners to cover the
    peaks in a smooth fivefold factorization or a theorem reducing those peaks
    to a controlled library.  The Geiser calculation is a positive regression,
