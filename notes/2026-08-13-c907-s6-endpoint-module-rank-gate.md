@@ -7,7 +7,7 @@
 give a stronger conditional conclusion for the specific root-marked
 cubic-surface Lefschetz pencil: any strict, rank-preserving Rees refinement
 of its primitive-sixth solution module has total rank two, so it cannot carry
-a length-three string at all.  Under that necessary refinement hypothesis,
+a length-three string at all.  If it is also \(S_6\)-linearized, then
 
 \[
  \operatorname{Hom}_{S_6}
@@ -155,6 +155,18 @@ the proposed stationary \(A_5\) coefficient.  If item 1 fails, the proposed
 object is not yet a Rees refinement of the current QDM invariant, and its
 endpoint modules must be supplied as genuinely new analytic data before an
 \(S_6\) calculation has a defined target.
+
+## Inputs and boundary
+
+The exact rank-two input is the framed blow-up comparison and cubic
+\(\nu_6=2\) calculation recorded in
+2026-08-12-c907-mori-fibre-carrier-regression.md and
+2026-08-12-c907-low-dimensional-stable-birational-compression.md.  The
+absence of a relative Stokes/Gamma realization is stated explicitly in the
+former report and in
+2026-08-13-c907-del-pezzo-primitive-monodromy-obstruction.md.  No new
+external source, quantum computation, or categorical comparison is claimed
+here.
 
 ## EJ/TT and mystery ledger
 
