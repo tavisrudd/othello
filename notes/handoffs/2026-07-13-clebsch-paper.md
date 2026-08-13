@@ -270,6 +270,7 @@ packet from that single ideal-preservation premise.  Neither the ideal nor the e
 manuscript's filtration or divisor substitution.
 The constant-coefficient flat equation now has a kernel-checked coefficient
 recursion `G_0=1`, `(n+1)G_{n+1}=-AG_n` over any commutative rational algebra;
+the coefficients are natural under arbitrary rational-algebra homomorphisms;
 varying quantum products, formal series, filtered solutions, and analytic
 gauges remain outside that fragment.
 A normalized multiplicative ideal filtration is now an explicit formal object
