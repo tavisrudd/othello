@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 134 reviewer-facing Lean terminals.  These counts summarize the
+There are 135 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 134 reviewer terminals.
+1 complete; 135 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -100,12 +100,16 @@ objects, hypotheses, conclusions, and cautions recorded in
   a pro-Laurent gauge system.  Every entrywise loop coefficient is also packaged
   as an explicit compatible quotient family.
   Lean does not identify those parameters with manuscript bulk coordinates or
-  the finite evaluated matrix with the manuscript gauge, prove one bound across levels, or
-  construct a Laurent-valued inverse-limit gauge.
+  the finite evaluated matrix with the manuscript gauge.  Given the separately
+  supplied coefficientwise completeness, separatedness, and uniform Laurent
+  lower bounds for both gauges and inverses, Lean does assemble a two-sided-
+  invertible Laurent matrix over the base ring whose reductions are the finite
+  evaluations; it does not derive those bounds or identify the matrix with the
+  manuscript's gauge.
   Their identification with the manuscript's geometric tower and quantum
   connection is not formalized; neither finite bulk support from the
-  manuscript's positive filtration nor a Laurent lower bound uniform across
-  quotient levels is proved.
+  manuscript's positive filtration nor either required Laurent lower bound
+  uniform across quotient levels is proved.
   The ordinary one-variable varying
   formal solution, its compatible
   abstract coefficient tower, and its realization over every quotient of an

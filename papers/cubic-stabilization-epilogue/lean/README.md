@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 134 reviewer terminals.
+1 complete; 135 reviewer terminals.
 
-The 134 reviewer-facing terminals currently verify:
+The 135 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -200,8 +200,11 @@ The 134 reviewer-facing terminals currently verify:
   forming a pro-Laurent gauge system; every entrywise loop coefficient is
   packaged as a compatible quotient family.  The
   parameters and evaluated matrix are not identified with the manuscript bulk
-  coordinates or gauge, no bound uniform across levels is proved, and no Laurent-valued
-  inverse-limit gauge is packaged;
+  coordinates or gauge.  If coefficientwise completeness, separatedness, and
+  uniform Laurent lower bounds for both gauges and inverses are additionally
+  supplied, Lean lifts the compatible families to a two-sided-invertible
+  Laurent matrix over the base ring whose reductions are the finite evaluations;
+  it does not prove those bounds or identify this matrix geometrically;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 73 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 134 audited terminals.  The rejecting manuscript inventory covers all
+exports 135 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -185,8 +185,10 @@ With ordinary Laurent-series coefficients over the base ring, Lean now maps
 the connection into `LaurentSeries (R/F^n)` and constructs the compatible
 normalized invertible gauges.  Each finite-level bulk coefficient therefore
 has integral loop exponents and an individual Laurent lower bound.  No bound
-uniform in bulk monomials or levels and no Laurent-valued inverse-limit gauge
-is constructed.  Lean separately proves that finite bulk support at one level
+uniform in bulk monomials or levels follows from this quotient-level
+construction alone; the conditional base-ring lift described below requires
+separate uniform lower bounds for the gauges and their chosen inverses.  Lean
+separately proves that finite bulk support at one level
 gives one lower bound for the entire matrix-valued series, but does not derive
 that finite support from the positive filtration.  For finitely many bulk
 coordinates, explicit vanishing at or above one total-degree cutoff now
@@ -205,7 +207,11 @@ quotient reductions.  Evaluation is a ring homomorphism, so the matrices are
 invertible; compatible chosen two-sided inverses package them as a pro-Laurent
 gauge system.  Every entrywise loop coefficient is also packaged as a
 compatible quotient family.  Identification with the manuscript gauge remains
-outside the fragment.
+outside the fragment.  Under separately supplied coefficientwise completeness,
+separatedness, and uniform Laurent lower bounds for gauges and inverses, Lean
+also assembles a two-sided-invertible Laurent matrix over the base ring whose
+reductions are exactly the finite evaluations; the uniform bounds and geometric
+identification are not derived.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

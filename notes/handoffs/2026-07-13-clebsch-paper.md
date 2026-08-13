@@ -340,9 +340,10 @@ coefficients have integral loop exponents and individual Laurent lower bounds;
 finite bulk support at one level gives one lower bound for the whole
 matrix-valued series.  With finitely many coordinates, explicit vanishing at
 or above one total-degree cutoff is now proved to give that finite support.
-Lean does not derive the cutoff vanishing from the positive filtration or
-obtain a bound uniform across levels, a packaged
-inverse-limit Laurent gauge, convergence, or analytic specialization.
+From these hypotheses alone, Lean does not derive the cutoff vanishing from
+the positive filtration or a bound uniform across levels, convergence, or
+analytic specialization; the conditional base-ring lift below separately
+assumes completeness, separatedness, and two uniform bounds.
 Monomials in supplied level-one parameters are proved to lie in their
 total-degree filtration levels and map to zero in every quotient by a
 filtration level not exceeding their total degree; the same holds

@@ -19,9 +19,12 @@ topological evaluation theorem.  Lean does not identify the supplied formal
 series or parameters with the manuscript's gauge and bulk coordinates.  The
 finite evaluation is a ring homomorphism, so it preserves invertibility, and
 the compatible evaluated gauges and chosen inverses form a pro-Laurent gauge
-system.  No Laurent lower bound uniform across quotient levels, geometric
-identification of the filtration, or analytic specialization is proved.  The
-proofs are symbolic and kernel checked, with no external computation or oracle.
+system.  If the filtration is coefficientwise complete and separated and
+uniform Laurent lower bounds are supplied for both systems, Lean assembles a
+two-sided-invertible Laurent matrix over the base ring that reduces to every
+finite evaluation.  The uniform bounds, geometric identification of the
+filtration, and analytic specialization are not proved.  The proofs are
+symbolic and kernel checked, with no external computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -635,6 +638,319 @@ noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeCoeffi
       matrixCompatibility
     simpa [MultiplicativeIdealFiltration.positiveLaurentReduction,
       laurentSeriesMap] using coefficientCompatibility
+
+/-- For one matrix entry and loop exponent, the coefficients of the chosen
+finite-level inverses form an explicit compatible quotient family. -/
+noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseCoefficientFamily
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (row column : Index) (exponent : ℤ) :
+    DecreasingIdealFiltration.CompatibleQuotientFamily
+      filtration.toDecreasingIdealFiltration where
+  value level :=
+    (filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+      parameter positive level connection row column).coeff exponent
+  compatible level := by
+    have matrixCompatibility :=
+      filtration.positiveEvaluatedFlatGaugeInverseAtLevel_compatible
+        parameter positive level connection
+    have coefficientCompatibility := congrArg
+      (fun matrix ↦ (matrix row column).coeff exponent)
+      matrixCompatibility
+    simpa [MultiplicativeIdealFiltration.positiveLaurentReduction,
+      laurentSeriesMap] using coefficientCompatibility
+
+/-- A compatible quotient family has a chosen representative in a coefficientwise
+complete filtered ring. -/
+noncomputable def CompleteSeparatedMultiplicativeIdealFiltration.liftCompatibleFamily
+    {B : Type*} [CommRing B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (family : filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+      |>.CompatibleQuotientFamily) : B :=
+  Classical.choose (filtration.complete family)
+
+/-- The chosen representative maps back to its original compatible quotient
+family. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.ofRingElement_liftCompatibleFamily
+    {B : Type*} [CommRing B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (family : filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+      |>.CompatibleQuotientFamily) :
+    filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration.ofRingElement
+        (filtration.liftCompatibleFamily family) = family :=
+  Classical.choose_spec (filtration.complete family)
+
+/-- Elements of a separated filtered ring are equal when their images agree
+in every filtration quotient. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.eq_of_quotient_mk_eq
+    {B : Type*} [CommRing B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    {left right : B}
+    (equal : ∀ level,
+      Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level) left =
+        Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level) right) :
+    left = right := by
+  apply (filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+    |>.ofRingElement_injective_iff_iInf_eq_bot.mpr filtration.separated)
+  ext level
+  exact equal level
+
+/-- Under a Laurent lower bound uniform across quotient levels, lift the
+coefficient families of the evaluated gauges to a Laurent-series matrix over
+the complete separated base ring. -/
+noncomputable def CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeLimit
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (lowerBound : ℤ)
+    (bounded : ∀ level row column exponent, exponent < lowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeAtLevel
+          parameter level connection row column).coeff exponent = 0) :
+    Matrix Index Index (LaurentSeries B) :=
+  fun row column ↦ HahnSeries.ofSuppBddBelow
+    (fun exponent ↦ filtration.liftCompatibleFamily
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeCoefficientFamily
+          parameter positive connection row column exponent)) (by
+      refine ⟨lowerBound, ?_⟩
+      intro exponent hsupport
+      by_contra hbound
+      have hexponent : exponent < lowerBound := lt_of_not_ge hbound
+      have familyZero :
+          (filtration.toMultiplicativeIdealFiltration
+            |>.positiveEvaluatedFlatGaugeCoefficientFamily
+              parameter positive connection row column exponent) = 0 := by
+        ext level
+        exact bounded level row column exponent hexponent
+      apply hsupport
+      apply (filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+        |>.ofRingElement_injective_iff_iInf_eq_bot.mpr filtration.separated)
+      rw [filtration.ofRingElement_liftCompatibleFamily, familyZero]
+      rfl)
+
+/-- Every coefficient of the lifted Laurent matrix reduces to the corresponding
+coefficient of the finite evaluated gauge. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeLimit_coeff
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (lowerBound : ℤ)
+    (bounded : ∀ level row column exponent, exponent < lowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeAtLevel
+          parameter level connection row column).coeff exponent = 0)
+    (level : ℕ) (row column : Index) (exponent : ℤ) :
+    Ideal.Quotient.mk
+        (filtration.toMultiplicativeIdealFiltration.ideal level)
+        ((filtration.positiveEvaluatedFlatGaugeLimit
+          parameter positive connection lowerBound bounded row column).coeff exponent) =
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeAtLevel
+          parameter level connection row column).coeff exponent := by
+  have representation := congrArg
+    (fun family ↦ family.value level)
+    (filtration.ofRingElement_liftCompatibleFamily
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeCoefficientFamily
+          parameter positive connection row column exponent))
+  simpa [CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeLimit,
+    DecreasingIdealFiltration.ofRingElement_value,
+    MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeCoefficientFamily]
+    using representation
+
+/-- The lifted Laurent matrix reduces entrywise to the finite evaluated gauge
+at every quotient level. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeLimit_map
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (lowerBound : ℤ)
+    (bounded : ∀ level row column exponent, exponent < lowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeAtLevel
+          parameter level connection row column).coeff exponent = 0)
+    (level : ℕ) :
+    (filtration.positiveEvaluatedFlatGaugeLimit
+        parameter positive connection lowerBound bounded).map
+        (laurentSeriesMap (Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level))) =
+      filtration.toMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel
+        parameter level connection := by
+  ext row column exponent
+  exact filtration.positiveEvaluatedFlatGaugeLimit_coeff
+    parameter positive connection lowerBound bounded level row column exponent
+
+/-- Under a Laurent lower bound uniform across quotient levels, lift the
+coefficient families of the chosen finite-level inverses to a Laurent-series
+matrix over the complete separated base ring. -/
+noncomputable def CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseLimit
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (lowerBound : ℤ)
+    (bounded : ∀ level row column exponent, exponent < lowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive level connection row column).coeff exponent = 0) :
+    Matrix Index Index (LaurentSeries B) :=
+  fun row column ↦ HahnSeries.ofSuppBddBelow
+    (fun exponent ↦ filtration.liftCompatibleFamily
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeInverseCoefficientFamily
+          parameter positive connection row column exponent)) (by
+      refine ⟨lowerBound, ?_⟩
+      intro exponent hsupport
+      by_contra hbound
+      have hexponent : exponent < lowerBound := lt_of_not_ge hbound
+      have familyZero :
+          (filtration.toMultiplicativeIdealFiltration
+            |>.positiveEvaluatedFlatGaugeInverseCoefficientFamily
+              parameter positive connection row column exponent) = 0 := by
+        ext level
+        exact bounded level row column exponent hexponent
+      apply hsupport
+      apply (filtration.toMultiplicativeIdealFiltration.toDecreasingIdealFiltration
+        |>.ofRingElement_injective_iff_iInf_eq_bot.mpr filtration.separated)
+      rw [filtration.ofRingElement_liftCompatibleFamily, familyZero]
+      rfl)
+
+/-- The lifted inverse Laurent matrix reduces to the chosen inverse at every
+quotient level. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseLimit_map
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (lowerBound : ℤ)
+    (bounded : ∀ level row column exponent, exponent < lowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive level connection row column).coeff exponent = 0)
+    (level : ℕ) :
+    (filtration.positiveEvaluatedFlatGaugeInverseLimit
+        parameter positive connection lowerBound bounded).map
+        (laurentSeriesMap (Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level))) =
+      filtration.toMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseAtLevel
+        parameter positive level connection := by
+  ext row column exponent
+  have representation := congrArg
+    (fun family ↦ family.value level)
+    (filtration.ofRingElement_liftCompatibleFamily
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeInverseCoefficientFamily
+          parameter positive connection row column exponent))
+  simpa [CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseLimit,
+    DecreasingIdealFiltration.ofRingElement_value,
+    MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseCoefficientFamily]
+    using representation
+
+/-- Uniform Laurent lower bounds for both the evaluated gauges and their
+finite-level inverses assemble them into a two-sided-invertible Laurent matrix
+over the complete separated base ring. -/
+theorem CompleteSeparatedMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeLimit_inverse
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈ filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (gaugeLowerBound inverseLowerBound : ℤ)
+    (gaugeBounded : ∀ level row column exponent, exponent < gaugeLowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeAtLevel
+          parameter level connection row column).coeff exponent = 0)
+    (inverseBounded : ∀ level row column exponent, exponent < inverseLowerBound →
+      (filtration.toMultiplicativeIdealFiltration
+        |>.positiveEvaluatedFlatGaugeInverseAtLevel
+          parameter positive level connection row column).coeff exponent = 0) :
+    filtration.positiveEvaluatedFlatGaugeLimit
+        parameter positive connection gaugeLowerBound gaugeBounded *
+          filtration.positiveEvaluatedFlatGaugeInverseLimit
+            parameter positive connection inverseLowerBound inverseBounded = 1 ∧
+      filtration.positiveEvaluatedFlatGaugeInverseLimit
+          parameter positive connection inverseLowerBound inverseBounded *
+        filtration.positiveEvaluatedFlatGaugeLimit
+          parameter positive connection gaugeLowerBound gaugeBounded = 1 := by
+  let gauge := filtration.positiveEvaluatedFlatGaugeLimit
+    parameter positive connection gaugeLowerBound gaugeBounded
+  let inverse := filtration.positiveEvaluatedFlatGaugeInverseLimit
+    parameter positive connection inverseLowerBound inverseBounded
+  have proveIdentity (left right : Matrix Index Index (LaurentSeries B))
+      (finiteIdentity : ∀ level,
+        left.map (laurentSeriesMap (Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level))) *
+          right.map (laurentSeriesMap (Ideal.Quotient.mk
+            (filtration.toMultiplicativeIdealFiltration.ideal level))) = 1) :
+      left * right = 1 := by
+    ext row column exponent
+    apply filtration.eq_of_quotient_mk_eq
+    intro level
+    have mappedMatrix :
+        (left * right).map (laurentSeriesMap (Ideal.Quotient.mk
+            (filtration.toMultiplicativeIdealFiltration.ideal level))) =
+          (1 : Matrix Index Index (LaurentSeries B)).map
+            (laurentSeriesMap (Ideal.Quotient.mk
+              (filtration.toMultiplicativeIdealFiltration.ideal level))) := by
+      rw [Matrix.map_mul, Matrix.map_one]
+      exact finiteIdentity level
+      exact (laurentSeriesMap (Ideal.Quotient.mk
+        (filtration.toMultiplicativeIdealFiltration.ideal level))).map_zero
+      exact (laurentSeriesMap (Ideal.Quotient.mk
+        (filtration.toMultiplicativeIdealFiltration.ideal level))).map_one
+    have mapped := congrArg
+      (fun matrix ↦ (matrix row column).coeff exponent)
+      mappedMatrix
+    simpa [Matrix.map_mul, laurentSeriesMap_coeff] using mapped
+  constructor
+  · apply proveIdentity
+    intro level
+    rw [filtration.positiveEvaluatedFlatGaugeLimit_map,
+      filtration.positiveEvaluatedFlatGaugeInverseLimit_map]
+    exact (filtration.toMultiplicativeIdealFiltration
+      |>.positiveEvaluatedFlatGaugeAtLevel_inverse
+        parameter positive level connection).1
+  · apply proveIdentity
+    intro level
+    rw [filtration.positiveEvaluatedFlatGaugeInverseLimit_map,
+      filtration.positiveEvaluatedFlatGaugeLimit_map]
+    exact (filtration.toMultiplicativeIdealFiltration
+      |>.positiveEvaluatedFlatGaugeAtLevel_inverse
+        parameter positive level connection).2
 
 end Quantum
 

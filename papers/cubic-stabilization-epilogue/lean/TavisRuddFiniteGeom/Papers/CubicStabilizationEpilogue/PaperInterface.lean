@@ -2884,6 +2884,71 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
     ⟨fun _ ↦ rfl, fun _ ↦ rfl⟩,
     fun _ _ _ _ ↦ rfl⟩
 
+/-- Let an ordinary-Laurent-series-valued multivariable connection satisfy the
+exact coefficientwise zero-curvature equations, and let its normalized
+multiplicative filtration additionally be complete and separated in the
+explicit compatible-quotient-family sense.  If one Laurent
+lower bound works at every level for the evaluated gauges and another works
+at every level for their chosen inverses, Lean assembles both coefficientwise
+families into Laurent-series matrices over the base ring.  They are two-sided
+inverses, and their reductions are exactly the finite evaluated gauges and
+chosen inverses.  The two uniform bounds are premises; Lean does not derive
+them from the manuscript's filtration, identify this base ring or connection
+geometrically, or prove convergence or analytic specialization. -/
+theorem completeSeparatedFiltration_positiveLaurentFlatGauge_limit
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : Quantum.CompleteSeparatedMultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate,
+      parameter coordinate ∈
+        filtration.toMultiplicativeIdealFiltration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (_curvature : ∀ first second,
+      (connection second).map
+          (Quantum.multivariablePartialDerivative first) -
+          (connection first).map
+            (Quantum.multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0)
+    (gaugeLowerBound inverseLowerBound : ℤ)
+    (gaugeBounded : ∀ level row column exponent,
+      exponent < gaugeLowerBound →
+        (filtration.toMultiplicativeIdealFiltration
+          |>.positiveEvaluatedFlatGaugeAtLevel
+            parameter level connection row column).coeff exponent = 0)
+    (inverseBounded : ∀ level row column exponent,
+      exponent < inverseLowerBound →
+        (filtration.toMultiplicativeIdealFiltration
+          |>.positiveEvaluatedFlatGaugeInverseAtLevel
+            parameter positive level connection row column).coeff exponent = 0) :
+    let gauge := filtration.positiveEvaluatedFlatGaugeLimit
+      parameter positive connection gaugeLowerBound gaugeBounded
+    let inverse := filtration.positiveEvaluatedFlatGaugeInverseLimit
+      parameter positive connection inverseLowerBound inverseBounded
+    gauge * inverse = 1 ∧ inverse * gauge = 1 ∧
+      (∀ level,
+        gauge.map (Quantum.laurentSeriesMap (Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level))) =
+          filtration.toMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel
+            parameter level connection) ∧
+      ∀ level,
+        inverse.map (Quantum.laurentSeriesMap (Ideal.Quotient.mk
+          (filtration.toMultiplicativeIdealFiltration.ideal level))) =
+          filtration.toMultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeInverseAtLevel
+            parameter positive level connection := by
+  refine ⟨(filtration.positiveEvaluatedFlatGaugeLimit_inverse
+      parameter positive connection gaugeLowerBound inverseLowerBound
+      gaugeBounded inverseBounded).1,
+    (filtration.positiveEvaluatedFlatGaugeLimit_inverse
+      parameter positive connection gaugeLowerBound inverseLowerBound
+      gaugeBounded inverseBounded).2, ?_, ?_⟩
+  · exact filtration.positiveEvaluatedFlatGaugeLimit_map
+      parameter positive connection gaugeLowerBound gaugeBounded
+  · exact filtration.positiveEvaluatedFlatGaugeInverseLimit_map
+      parameter positive connection inverseLowerBound inverseBounded
+
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
 forces
