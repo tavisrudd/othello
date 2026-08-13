@@ -184,7 +184,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 68 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 125 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 126 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -288,7 +288,10 @@ For arbitrary coordinate sets and ordinary Laurent-series coefficients, Lean
 now proves that two supplied normalized multivariable formal gauges satisfying
 the same coordinate equations are equal, by induction on total monomial
 degree.  This is uniqueness only: existence, integrability, quotient
-compatibility, and uniform Laurent-order bounds remain unformalized.
+compatibility, and uniform Laurent-order bounds remain unformalized.  For
+arbitrary commuting derivations, an invertible supplied solution is now proved
+to force the exact zero-curvature identity; the converse construction remains
+open.
 The supplied filtration and connection remain unidentified with the
 manuscript's geometric coefficient ring and quantum product; construction of
 the multivariable Laurent bulk gauge, bounded order, convergence, and the
@@ -299,7 +302,7 @@ base-shift packet, while the manuscript's actual filtration remains unidentified
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 125-terminal axiom transcript
+The aggregate build, source correspondence, and 126-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

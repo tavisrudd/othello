@@ -2581,6 +2581,33 @@ theorem multivariableLaurentFlatGauge_normalizedSolution_unique
   Quantum.laurentMultivariableFlatGaugeSeries_unique connection left right
     leftNormalized rightNormalized leftEquation rightEquation
 
+/-- For commuting coordinate derivations on a commutative coefficient
+algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
+forces
+`partial_i A_j-partial_j A_i+A_iA_j-A_jA_i=0`.
+This is a necessary integrability theorem for a supplied solution.  It neither
+constructs a solution from the curvature identity nor identifies the
+derivations and connection with multivariate Laurent quantum data. -/
+theorem multivariableFlatGauge_invertibleSolution_curvature
+    {Coordinate Index Base Coefficient : Type*}
+    [Fintype Index] [DecidableEq Index]
+    [CommRing Base] [CommRing Coefficient] [Algebra Base Coefficient]
+    (directions : Quantum.CommutingCoordinateDerivations
+      Coordinate Base Coefficient)
+    (connection : Coordinate → Matrix Index Index Coefficient)
+    (solution : Matrix Index Index Coefficient)
+    (solutionUnit : IsUnit solution)
+    (flatEquation : ∀ coordinate,
+      solution.map (directions.derivation coordinate) =
+        -(connection coordinate) * solution)
+    (first second : Coordinate) :
+    (connection second).map (directions.derivation first) -
+        (connection first).map (directions.derivation second) +
+        connection first * connection second -
+        connection second * connection first = 0 :=
+  Quantum.multivariableFlatGauge_curvature_eq_zero directions connection
+    solution solutionUnit flatEquation first second
+
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
 monomial map alone is not injective. -/
