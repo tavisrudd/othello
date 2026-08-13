@@ -25,6 +25,8 @@ AXIOM_AUDIT = (
     / "Verification"
     / "AxiomAudit.lean"
 )
+LEAN_README = ROOT / "README.md"
+VERIFICATION_README = ROOT.parent / "verification" / "README.md"
 
 FORBIDDEN = {
     "sorry": re.compile(r"\bsorry\b"),
@@ -244,6 +246,20 @@ def main() -> None:
         coverage: sum(claim["coverage"] == coverage for claim in claims)
         for coverage in sorted(ALLOWED_COVERAGE)
     }
+    coverage_snapshot = (
+        f"Checked coverage snapshot: {len(claims)} claims; "
+        f"{coverage_counts['absent']} absent; "
+        f"{coverage_counts['fragment']} fragmentary; "
+        f"{coverage_counts['conditional_deduction']} conditional; "
+        f"{coverage_counts['complete']} complete; {len(terminals)} reviewer terminals."
+    )
+    for readme in (LEAN_README, VERIFICATION_README):
+        normalized = " ".join(readme.read_text(encoding="utf-8").split())
+        if coverage_snapshot not in normalized:
+            fail(
+                f"{readme.relative_to(ROOT.parent)} has a stale or missing "
+                "checked coverage snapshot"
+            )
     print(
         f"PASS mode={mode_name} sources={len(sources)} terminals={len(terminals)} "
         f"manuscript_claims={len(claims)} coverage={coverage_counts}"

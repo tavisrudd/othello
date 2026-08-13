@@ -31,6 +31,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
   in the theorem type;
 - 0 completely formalized from the manuscript's stated hypotheses.
 
+Checked coverage snapshot: 23 claims; 7 absent; 13 fragmentary; 3 conditional;
+0 complete; 28 reviewer terminals.
+
 The 28 reviewer-facing terminals currently verify:
 
 - constructive two-coordinate rank-one assembly under the midpoint inequality;

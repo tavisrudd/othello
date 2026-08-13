@@ -16,6 +16,9 @@ current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
+Checked coverage snapshot: 23 claims; 7 absent; 13 fragmentary; 3 conditional;
+0 complete; 28 reviewer terminals.
+
 The Lean modules and axiom audit are built through the guarded queue documented
 in `lean/README.md`.  Passing the captured audit output to `make formal-audit`
 checks every reviewer terminal against the tracked exact axiom list.  Neither a
