@@ -2,8 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** theorem-grade repair of the open-set issue in the proper-support
-route.  The intrinsic tropical construction begins from the smaller Laurent
+**Status:** theorem-grade conditional repair of the open-set issue in the
+proper-support route.  Assume the supported fan maps to the fixed marked
+projective/`y` ambient, its relative regularization gives the direct strict
+closure `E -> X_0`, and `E` is proper over the bounded base.  The intrinsic tropical construction begins from the smaller Laurent
 graph with `U,V` invertible, whereas the C907 open graph retains the translated
 divisors `U=0` and `V=0`.  The supported fan has no wall on the compact-
 `y`, generic-parameter `g/1` subfan, and that subfan is already regular.
@@ -66,8 +68,8 @@ preserved cones remain preserved.  This is the standard relative form of
 toric desingularization; termination uses the same decreasing determinant
 multiset as the absolute construction.
 
-Let `E -> X_0` be the strict tropical closure mapped to the coarse marked
-Cartier closure.  Over the smaller Laurent graph it is an isomorphism by
+Let `E -> X_0` be that direct proper strict tropical closure mapped to the
+coarse marked Cartier closure.  Over the smaller Laurent graph it is an isomorphism by
 construction.  Along `U=0` or `V=0` with (3), its toric ambient map is also an
 isomorphism because the corresponding cones of `Sigma_open` were not
 subdivided.  The pair-of-pants closure itself is the marked projective line,
@@ -107,7 +109,8 @@ analysis is allowed to use the exterior model.
 - **TT:** equality of strict closures is weaker than equality of opens for
   `j_!`.  Preserve the regular `g/1` subfan so the proper model is genuinely
   an isomorphism over the sheaf's open support.
-- **Settled:** actual-open preservation for an appropriate regular supported
-  fan and hence the first proper-support identity for the exterior model.
+- **Settled:** conditional on the direct proper-model hypotheses, actual-open
+  preservation for an appropriate regular supported fan and hence the first
+  proper-support identity for the exterior model.
 - **Open:** fixed-value local acyclicity on its actual exterior boundary, then
   the two-model bad-image descent and labelled thimble comparison.
