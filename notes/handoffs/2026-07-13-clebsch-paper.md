@@ -166,10 +166,10 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-46 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 87 reviewer terminals, audit
-commands, and expected axiom rows.  Coverage is explicitly 0 absent, 15
-fragmentary, 7 conditional deductions, and 1 complete.  The DVR rank-one
+47 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 88 reviewer terminals, audit
+commands, and expected axiom rows.  Coverage is explicitly 0 absent, 14
+fragmentary, 8 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
 graph lattices, invertible extension-ring basis transport between distinct
 base and split axes, derivation of weighted membership from base symmetry and
@@ -192,7 +192,11 @@ specialization.  The full geometric and quantum inputs remain explicit.
 The framed projective-bundle and blowup formulas are now exact conditional
 deductions from supplied characteristic-polynomial block comparisons, including
 the precise intrinsic endpoints and `c-1` specialized center summands.
-The aggregate build, source correspondence, and 87-terminal axiom transcript
+The cubic packet is now an exact conditional deduction from Cai's supplied
+four-factor framed characteristic polynomial: Lean proves both primitive roots
+have multiplicity one and the two unit factors contribute zero.  Cai's geometric
+block comparison and the numerical-Novikov bridge remain explicit inputs.
+The aggregate build, source correspondence, and 88-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

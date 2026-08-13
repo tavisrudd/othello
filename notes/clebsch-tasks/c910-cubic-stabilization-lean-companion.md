@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 46 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 47 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 87 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 0 absent, 15 fragmentary, 7 conditional
+exports 88 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 0 absent, 14 fragmentary, 8 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -119,6 +119,10 @@ The framed projective-bundle and blowup formulas are also exact conditional
 deductions: supplied characteristic-polynomial block comparisons now imply
 the rank-scaled projective-bundle multiplicity and the ambient-plus-`c-1`
 specialized-center blowup multiplicity inside Lean.
+The cubic packet is now an exact conditional deduction: from the supplied
+four-factor framed-monodromy characteristic polynomial, Lean proves that the
+two primitive-sixth roots occur once each, the two unit blocks contribute
+nothing, and the multiplicity is exactly two for every smooth cubic threefold.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -156,6 +160,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/RelativeSixAxis.lean
     Applications/LowDimensionalVanishing.lean
     Applications/FramedOperationFormulas.lean
+    Applications/CubicPacketFormula.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/
@@ -205,6 +210,10 @@ are current, and the committed paper export verifies byte-for-byte in
   derives both multiplicity formulas from the exact characteristic-polynomial
   block identities; constructing the geometry and proving Iritani's comparison
   identities in the paper's numerical coordinates remain the open inputs.
+- **Cubic packet deduction:** settled at the conditional level.  Lean proves
+  exact multiplicity two from Cai's supplied framed characteristic polynomial;
+  the geometric connection, integral-loop block comparison, rank-one numerical
+  curve lattice, and numerical-Novikov passage remain explicit missing inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
