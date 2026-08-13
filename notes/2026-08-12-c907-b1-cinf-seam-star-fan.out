@@ -1,0 +1,3 @@
+POSITIVE masks=31 empty=5 free=26 hold=0 PASS
+ZERO masks=31 free=31 hold=0 PASS
+ORIGIN critical=(L) PASS

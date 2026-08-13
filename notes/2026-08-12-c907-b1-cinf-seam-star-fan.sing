@@ -1,0 +1,118 @@
+// C907 translated/infinity seam B=1, C=infinity certificate.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-b1-cinf-seam-star-fan.sing
+//
+// The five central Laurent terms are x1,x2,x3,
+// P=1/(x1*x2*x3*c), and R=b*c.  All x_i,b,c are torus units.
+// Q=1 is a harmless coefficient unit.  Positive normalization order drops L;
+// normalization order zero retains L and is checked separately.
+
+LIB "elim.lib";
+
+ring r = 0,(x1,x2,x3,b,c,L),dp;
+poly D = x1*x2*x3*b*c;
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+int zeroFreeCount = 0;
+int zeroHoldCount = 0;
+poly H;
+poly E;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  if (mask%2 != 0) { H = H + D*x1; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; }
+  if ((mask div 8)%2 != 0) { H = H + b; }
+  if ((mask div 16)%2 != 0) { H = H - D*b*c; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      b*diff(H,b),c*diff(H,c);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+    }
+  }
+
+  // At normalization order zero the same nonempty support occurs with L.
+  // The projection-critical ideal differentiates only source coordinates.
+  E = D*L-H;
+  crit = E,
+    x1*diff(E,x1),x2*diff(E,x2),x3*diff(E,x3),
+    b*diff(E,b),c*diff(E,c);
+  critTorus = sat(crit,dIdeal);
+  if (reduce(1,std(critTorus)) == 0)
+  {
+    zeroFreeCount = zeroFreeCount + 1;
+  }
+  else
+  {
+    zeroHoldCount = zeroHoldCount + 1;
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("POSITIVE masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("POSITIVE masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+if (zeroFreeCount==31 && zeroHoldCount==0)
+{
+  print("ZERO masks=31 free=31 hold=0 PASS");
+}
+else
+{
+  print("ZERO masks=31 free=" + string(zeroFreeCount) +
+    " hold=" + string(zeroHoldCount) + " FAIL");
+}
+
+// If every source term has positive order, the order-zero face is L=0.
+// Its critical scheme is exactly the origin value divisor, so it disappears
+// after restricting to a value disk Omega with 0 outside Omega.
+E = D*L;
+crit = E,
+  x1*diff(E,x1),x2*diff(E,x2),x3*diff(E,x3),
+  b*diff(E,b),c*diff(E,c);
+critTorus = sat(crit,dIdeal);
+ideal origin = L;
+ideal origin1 = reduce(std(critTorus),std(origin));
+ideal origin2 = reduce(std(origin),std(critTorus));
+if (origin1[1]==0 && origin2[1]==0)
+{
+  print("ORIGIN critical=(L) PASS");
+}
+else
+{
+  print("ORIGIN critical=(L) FAIL");
+}
+
+quit;
