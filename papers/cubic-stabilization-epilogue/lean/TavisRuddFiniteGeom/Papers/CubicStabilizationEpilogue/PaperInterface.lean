@@ -36,6 +36,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2151,6 +2152,49 @@ theorem formalBaseShift_bulkSystem_compatible_and_charpoly
   ⟨system.bulkMonodromy_compatible, system.bulkMonodromy_charpoly,
     system.bulkCharacteristicPolynomial_compatible,
     system.bulkCharacteristicPolynomialSystem_level⟩
+
+/-- A decreasing ideal filtration and one filtration-preserving ring
+endomorphism construct the coefficient rings, reductions, and divisor
+substitutions of the formal base-shift packet.  Given compatible small matrices
+and two-sided-invertible gauges over these actual quotients, Lean derives the
+compatible bulk matrices and the compatible bulk characteristic-polynomial
+system, with its substituted-small description at every level.  The filtered
+base ring, endomorphism, matrices, gauges, and their compatibility identities
+remain supplied; no differential equation or analytic specialization is
+constructed. -/
+theorem filteredFormalBaseShift_bulkSystem_compatible_and_charpoly
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommRing R]
+    {filtration : Quantum.DecreasingIdealFiltration R}
+    {endomorphism : filtration.PreservingEndomorphism}
+    (input : Quantum.FilteredFormalBaseShiftInput
+      Index R filtration endomorphism) :
+    (∀ level,
+      letI := input.formalBaseShiftSystem.coefficientRing level
+      letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+      ((input.formalBaseShiftSystem.bulkMonodromy (level + 1)).map
+        (filtration.reduction level)) =
+          input.formalBaseShiftSystem.bulkMonodromy level) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        (input.formalBaseShiftSystem.bulkMonodromy level).charpoly =
+          (input.smallMonodromy level).charpoly.map
+            (endomorphism.quotientEndomorphism level)) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+        ((input.formalBaseShiftSystem.bulkMonodromy (level + 1)).charpoly).map
+            (filtration.reduction level) =
+          (input.formalBaseShiftSystem.bulkMonodromy level).charpoly) ∧
+      (∀ level,
+        letI := input.formalBaseShiftSystem.coefficientRing level
+        (input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem).characteristicPolynomial
+              level =
+            (input.formalBaseShiftSystem.bulkMonodromy level).charpoly ∧
+          (input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem).characteristicPolynomial
+              level =
+            (input.smallMonodromy level).charpoly.map
+              (endomorphism.quotientEndomorphism level)) :=
+  input.bulkSystem_compatible_and_characteristicPolynomial
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 113 reviewer terminals.
+1 complete; 114 reviewer terminals.
 
-The 113 reviewer-facing terminals currently verify:
+The 114 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -166,6 +166,12 @@ The 113 reviewer-facing terminals currently verify:
   the manuscript's complete separated filtered coefficient ring, its geometric
   identification, and the bulk flat equations producing the matrix and gauge
   inputs are not constructed;
+- the same bulk-matrix and characteristic-polynomial packet with its coefficient
+  rings, reductions, and substitutions constructed directly from a supplied
+  commutative base ring, decreasing ideal filtration, and
+  filtration-preserving endomorphism; the remaining supplied finite-level
+  fields are compatible small matrices, gauges and inverse gauges, together
+  with their entrywise compatibility and two-sided inverse proofs;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten
