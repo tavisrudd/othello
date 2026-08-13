@@ -107,9 +107,12 @@ The 113 reviewer-facing terminals currently verify:
   construction of every quotient coefficient ring and canonical adjacent
   reduction; a supplied filtration-preserving endomorphism descends to
   compatible quotient endomorphisms, with their actions on classes and the
-  reduction-substitution square proved; completeness, separatedness,
-  multiplicative filtration laws, and identification with the manuscript's
-  geometric coefficient quotients are not formalized;
+  reduction-substitution square proved; the canonical function from the
+  original ring to the explicit compatible quotient-family model is injective
+  exactly when the intersection of the ideals is zero; completeness,
+  multiplicative filtration laws, and
+  identification with the manuscript's geometric coefficient quotients are
+  not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;

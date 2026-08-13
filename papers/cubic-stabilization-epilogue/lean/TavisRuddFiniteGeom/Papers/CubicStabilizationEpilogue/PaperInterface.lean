@@ -2080,9 +2080,10 @@ theorem formalBaseShift_characteristicPolynomial_of_matrixInput
 /-- A decreasing ideal filtration and an endomorphism preserving every ideal
 construct the finite-level quotient coefficient rings, their adjacent reductions,
 and compatible quotient endomorphisms.  The three conclusions state their
-action on ring classes and the reduction-substitution commuting square.  No
-completeness, separatedness, geometric coefficient ring, monodromy matrix, or
-gauge is constructed. -/
+action on ring classes and the reduction-substitution commuting square.  The
+fourth identifies separatedness with injectivity of the map from the original
+ring into the explicit compatible quotient-family model.  No completeness,
+geometric coefficient ring, monodromy matrix, or gauge is constructed. -/
 theorem filteredCoefficientQuotient_reduction_and_substitution
     {R : Type*} [CommRing R]
     (filtration : Quantum.DecreasingIdealFiltration R)
@@ -2100,10 +2101,13 @@ theorem filteredCoefficientQuotient_reduction_and_substitution
         filtration.reduction level
             (endomorphism.quotientEndomorphism (level + 1) coefficient) =
           endomorphism.quotientEndomorphism level
-            (filtration.reduction level coefficient)) :=
+            (filtration.reduction level coefficient)) ∧
+      (Function.Injective filtration.ofRingElement ↔
+        iInf filtration.ideal = ⊥) :=
   ⟨filtration.reduction_mk level,
     endomorphism.quotientEndomorphism_mk level,
-    endomorphism.reduction_quotientEndomorphism level⟩
+    endomorphism.reduction_quotientEndomorphism level,
+    filtration.ofRingElement_injective_iff_iInf_eq_bot⟩
 
 /-- Compatible finite-level small matrices, divisor substitutions, and
 two-sided-invertible gauges determine compatible bulk matrices whose
