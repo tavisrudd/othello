@@ -231,7 +231,7 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-76 sources build through the guarded queue, and the rejecting audit gives an
+77 sources build through the guarded queue, and the rejecting audit gives an
 exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
@@ -400,9 +400,12 @@ separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
 The six-point characteristic-two augmentation quotient is now represented in
 explicit four coordinates modulo its constant line.  Two displayed
-projective-line permutations induce a simple action whose common commutant is
-exactly the four-element quadratic algebra; identification with the
-manuscript's specific `A5` action remains open.  The explicit
+projective-line permutations preserve a one-factorization and induce a
+faithful factor action exhausting the alternating group `A5`; their heart
+action is simple and its common commutant is exactly the four-element
+quadratic algebra.  Identification of the six labels with the manuscript's
+conjugate `D5` subgroups, and thus of this concrete action with its geometric
+action, remains open.  The explicit
 two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
 with the concrete `F4` gluing field is proved as an `F2`-algebra equivalence,

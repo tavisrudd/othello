@@ -80,7 +80,7 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 76 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 77 Lean
 sources build through the guarded queue.  The reviewer interface currently
 exports 144 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
@@ -228,10 +228,12 @@ quotient small matrix.  Its geometric monodromy origin remains unproved.
 
 The concrete six-point characteristic-two augmentation quotient now has
 explicit four coordinates modulo its constant line; translation and inversion
-on the six-point projective-line labelling induce displayed matrices whose
-generated action is simple and whose common commutant is exactly the quadratic
-four-element algebra.  Identifying those permutations with the manuscript's
-`A5` action on its six conjugate `D5` subgroups remains open.  The explicit
+on the six-point projective-line labelling preserve a displayed
+one-factorization whose faithful factor action exhausts the alternating group
+`A5`; the induced heart is simple and its common commutant is exactly the
+quadratic four-element algebra.  Identifying the six labels with the
+manuscript's conjugate `D5` subgroups, and hence this concrete action with the
+geometric one, remains open.  The explicit
 characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing

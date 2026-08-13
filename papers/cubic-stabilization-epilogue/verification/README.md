@@ -38,12 +38,13 @@ objects, hypotheses, conclusions, and cautions recorded in
   of its graph-coordinate product.  From supplied split blocks onward, Lean
   now proves the exact flattened coefficient lattice and its rank-one
   generation (`lem:graph-coefficient-lattice`).
-- Identify the two explicit six-point permutations in the formal
-  characteristic-two augmentation quotient with the manuscript's `A5` action
-  on its six conjugate `D5` subgroups.  Lean now proves that the displayed
-  induced matrices act simply and have exactly the quadratic four-element
-  common commutant; the group-action and geometric coefficient-heart
-  identifications remain open (`prop:principal-gluing-packet`).
+- Identify the six labels in the formal characteristic-two augmentation
+  quotient with the manuscript's six conjugate `D5` subgroups.  Lean now
+  proves that the two displayed permutations preserve a one-factorization,
+  faithfully generate the alternating group `A5`, act simply on the heart,
+  and have exactly the quadratic four-element common commutant; identifying
+  this concrete action and heart with the geometric ones remains open
+  (`prop:principal-gluing-packet`).
 - Identify the explicitly constructed quadratic finite-etale splitting field
   and eigenbasis of the residue model with the manuscript's marked geometric
   splitting extension, and prove that scalar extension of the geometric graph
