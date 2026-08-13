@@ -19,6 +19,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMulti
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
@@ -1763,6 +1764,29 @@ theorem strictNovikov_injective_taggedMonomial
     Function.Injective (fun degree ↦
       (specialization.monomialImage degree, divisorTag degree)) :=
   specialization.injective_taggedMonomial divisorTag separates
+
+/-- Finite-support exponential-character step in divisor tagging.  For an
+injective finite family of divisor-pairing vectors over an infinite
+characteristic-zero field, Lean chooses one abstract `K`-linear dual
+functional with distinct
+scalar pairings and proves by the first `m` coefficients and a Vandermonde
+determinant that the resulting `m` formal exponential characters are linearly
+independent.  The functional need not be induced by the manuscript's integral
+one-parameter vector.  This does not construct the lowest-valuation support of
+a completed Novikov series or prove that passage to initial terms is injective. -/
+theorem finiteDivisorPairing_exponentialCharacters_independent
+    {K V : Type*} [Field K] [CharZero K] [Infinite K]
+    [AddCommGroup V] [Module K V] {m : ℕ}
+    (vector : Fin m → V) (vector_injective : Function.Injective vector) :
+    ∃ functional : Module.Dual K V,
+      Function.Injective (fun index ↦ functional (vector index)) ∧
+      ∀ coefficient : Fin m → K,
+        (∑ index, coefficient index •
+          Quantum.formalExponentialCharacter
+            (functional (vector index)) = 0) →
+        coefficient = 0 :=
+  Quantum.exists_dual_separating_formalExponentialCharacters
+    vector vector_injective
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/

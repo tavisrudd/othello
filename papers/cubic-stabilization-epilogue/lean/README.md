@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 89 reviewer terminals.
+1 complete; 90 reviewer terminals.
 
-The 89 reviewer-facing terminals currently verify:
+The 90 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -116,7 +116,11 @@ The 89 reviewer-facing terminals currently verify:
   explicit premises;
 - finite-fiber numerical Novikov coefficient pushforward and the algebraic
   core of strict Novikov admissibility and individual-class divisor-tag
-  separation;
+  separation; for every finite injective family of divisor-pairing vectors
+  over an infinite characteristic-zero field, a kernel-checked choice of one
+  abstract separating `K`-linear functional and Vandermonde proof that the
+  resulting formal exponential characters are linearly independent;
+  integrality of the manuscript's one-parameter direction is not formalized;
 - the conditional common-field endpoint of divisor-tagging vanishing from
   supplied final intrinsic, tagged, and specialized characteristic-polynomial
   equalities, without formal coefficient embeddings or a gauge witness;
