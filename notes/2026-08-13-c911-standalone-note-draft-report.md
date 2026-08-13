@@ -6,6 +6,44 @@ Lane: `clebsch`
 Status: COMPLETE.  Manuscript committed in the monorepo, standalone
 repository materialized and its build gate replayed.
 
+## Post-draft review and publication metadata
+
+The 2026-08-13 referee pass found no defect in the central `z`-order or
+Meijer-sector arguments, and three minor issues were repaired before final
+export:
+
+- the coefficient-ring paragraph now invokes the injective flag-bundle
+  splitting principle before treating individual Chern roots as classes;
+- the `(r,s)=(1,0)` endpoint is described as a formal boundary, not as a
+  curve correction, because its point fibres contain no extremal line;
+- an unsupported claim that Theorem A.1 gives no larger sector was removed,
+  and two display-punctuation defects were corrected.
+
+The independent cold reader then returned final `GO`: the normalization,
+aperture, sector intersection, and downstream dependency claims agree with
+the cached v2 preprint.  The authoritative `make check` and the standalone
+`make check` both pass on the resulting ten-page manuscript.
+
+DOI `10.5281/zenodo.21924799`, its standard badge, the paper-owned
+`.zenodo.json`, and the standard AI-assistance disclosure are now present.
+The portfolio authority `papers/summary/README.md` carries both a table row
+and a full abstract/guide entry.  The paper mirror is clean at `2ce2208`; the
+summary mirror is clean at `674d6ab`.  Export verification reports 16 tracked
+files and source commit `78cf3dd0` (a concurrent repository HEAD containing
+the reviewed paper commits through `7fadb91a`).  Nothing was pushed.
+
+## EJ + TT closeout and mystery ledger
+
+The closeout pass found two cheap upgrades and applied both: it made the
+nonsplit splitting-principle descent explicit, and separated the formal
+rank-one endpoint from genuine extremal-line geometry.  The current arXiv
+record was checked on 2026-08-13 and v2 remains the latest version.
+
+No genuine mathematical mystery remains within C911's source-local scope.
+Whether Shen and Shoemaker incorporate the correction, and any unrestricted
+Novikov or C907 receiver comparison, require external action or belong to
+their existing owners rather than to this note.
+
 ## Scope
 
 Produce a short standalone note from `notes/2026-08-13-c907-shen-shoemaker-codim2-repair.md`
@@ -195,8 +233,8 @@ python3 papers/scripts/export-paper-repos.py verify --root ~/src/math-papers/dis
 - Its first commit is unsigned.  Sibling repositories under
   `~/src/math-papers` have `commit.gpgsign = true` in effect, so this one
   differs; the no-signing rule in the workspace instructions was followed.
-- No `.zenodo.json` and no DOI badge.  The neighbouring paper carries both;
-  they belong to a publication decision that has not been made here.
+- DOI badge and `.zenodo.json` were added after DOI
+  `10.5281/zenodo.21924799` was supplied by the author.
 - Registry edits touched two shared files, `papers/repositories.toml` and
   `lean/trust/papers.toml`, which are outside the writable scope stated in
   the task brief but are required by the export procedure.  Both were clean

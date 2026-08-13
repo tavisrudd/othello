@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** ACTIVE — drafting delegated (Opus sub-agent, started 2026-08-13).
+**Status:** COMPLETE — reviewed manuscript, DOI metadata, AI disclosure,
+standalone export, and portfolio entry are green (2026-08-13).
 
 ## Goal
 
@@ -41,3 +42,11 @@ with the `s=0, r=1` projective-bundle degeneration explicitly excluded.
   as a completion/correction of the cited preprint's stated generality.
 - No Lean work.
 - Read `papers/style-guide.md` completely before drafting prose.
+
+## Closeout
+
+Authority: `papers/discrepancy-one-flips/`.  An independent cold read returned
+final `GO` after the splitting-principle and formal-endpoint repairs.  Both
+authority and standalone `make check` pass; paper mirror `2ce2208` and summary
+mirror `674d6ab` are clean.  DOI: `10.5281/zenodo.21924799`.  Full report:
+`../2026-08-13-c911-standalone-note-draft-report.md`.

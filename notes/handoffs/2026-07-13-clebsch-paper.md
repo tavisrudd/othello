@@ -96,6 +96,12 @@ primitive-sixth rank Boolean.  Exact audit and counterexample:
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
+That repair is now a reviewed standalone ten-page correction note at
+`papers/discrepancy-one-flips/`, DOI `10.5281/zenodo.21924799`.  Its exact
+`z`-order, nonsplit descent, corrected `nu=1` aperture, and source-local
+dependency chain passed an independent cold read; authority and clean
+standalone gates pass, and the portfolio summary is synchronized.  C911 is
+closed in `../2026-08-13-c911-standalone-note-draft-report.md`.
 
 Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
@@ -220,7 +226,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 74 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 138 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 139 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -386,9 +392,13 @@ base-shift packet, while the manuscript's actual filtration remains unidentified
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 138-terminal axiom transcript
+The explicit two-primary companion model now has a concrete quadratic
+finite-etale splitting field and marked explicit eigenbasis; its identification
+with the geometric marked extension and principal kernel remains open.
+The aggregate build, source correspondence, and 139-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
-the finite-etale splitting/eigenbasis and proof that geometric divisor descent
+the geometric identification of that finite-etale splitting/eigenbasis and
+proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
 bridge, cohomological realization and Voisin/relative geometry, then the
 analytic and geometric construction of the supplied tagging comparisons,
