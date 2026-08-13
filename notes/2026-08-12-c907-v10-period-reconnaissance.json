@@ -1,0 +1,55 @@
+{
+  "bound": 48,
+  "checked_indices": [
+    4,
+    48
+  ],
+  "coefficient_recurrence": "n^4 g_n - 10(n-1)n(2n-1)g_(n-1) -16(37n^2-74n+39)g_(n-2) -2040(2n-3)g_(n-3)-8784g_(n-4)=0",
+  "formal_infinity": {
+    "double_exponential": "-6",
+    "double_indicial_factor": "-4*(2*alpha+1)*(2*alpha+3)",
+    "double_power_exponents": [
+      "-1/2",
+      "-3/2"
+    ],
+    "factorization": "(lambda+6)^2*(lambda^2-32lambda-244)",
+    "leading_polynomial": "lambda^4-20lambda^3-592lambda^2-4080lambda-8784",
+    "simple_exponentials": [
+      "16+10*sqrt(5)",
+      "16-10*sqrt(5)"
+    ],
+    "simple_power_exponents": [
+      "-3/2",
+      "-3/2"
+    ],
+    "warning": "the double block is resonant; this does not certify splitting or absence of logarithms"
+  },
+  "input": "CCGK Section 12 V_10 period double sum with e^(-6t) factor",
+  "missing_for_theorem": [
+    "an all-n creative-telescoping/WZ certificate for the recurrence, or a source proving this exact operator",
+    "a direct theorem that this order-four scalar equation is cyclically equivalent to the full ordinary small-even QDM of V_10",
+    "normalization and threefold framing comparison between the period variable and the numerical small-QDM convention"
+  ],
+  "operator": {
+    "theta_0": "theta^4",
+    "theta_1": "-10*theta*(theta+1)*(2*theta+1)",
+    "theta_2": "-16*(37*theta^2+74*theta+39)",
+    "theta_3": "-2040*(2*theta+3)",
+    "theta_4": "-8784"
+  },
+  "regularized_prefix_0_through_9": [
+    "1",
+    "0",
+    "78",
+    "1320",
+    "37746",
+    "1051920",
+    "31464780",
+    "971757360",
+    "30859805970",
+    "1000739433120"
+  ],
+  "schema": "c907-v10-period-reconnaissance-v1",
+  "scope": "finite exact check only; not a telescoping proof or full-QDM scalarization",
+  "sha256_without_self_hash": "30ecdecb63f03dd5997c0b1a66e27e653a91d3dbf14da97cdf2516ab4e92c2c5"
+}

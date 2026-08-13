@@ -1,0 +1,56 @@
+{
+  "counting_matrix": [
+    [
+      "0",
+      "156",
+      "3600",
+      "33120"
+    ],
+    [
+      "1",
+      "10",
+      "380",
+      "3600"
+    ],
+    [
+      "0",
+      "1",
+      "10",
+      "156"
+    ],
+    [
+      "0",
+      "0",
+      "1",
+      "0"
+    ]
+  ],
+  "formal_data": {
+    "double_exponential": "-6",
+    "double_indicial_polynomial": "-4*(2*alpha+1)*(2*alpha+3)",
+    "double_power_exponents": [
+      "-1/2",
+      "-3/2"
+    ],
+    "resonance_warning": "difference one; logarithms are not excluded",
+    "simple_exponentials": [
+      "16+10*sqrt(5)",
+      "16-10*sqrt(5)"
+    ],
+    "simple_power_exponents": [
+      "-3/2",
+      "-3/2"
+    ]
+  },
+  "formal_exponential_polynomial": "lam^4 - 20*lam^3 - 592*lam^2 - 4080*lam - 8784",
+  "schema": "c907-v10-full-small-even-qdm-v1",
+  "scope": "ordinary small-even QDM only; no big or odd-QDM claim",
+  "sha256_without_self_hash": "f3dfdba4d6c100004012957b4848cea541976dd48349b4c34b83c72acc9f107a",
+  "unregularized_scalar_operator": {
+    "0": "D^4",
+    "1": "-20*D^3 - 30*D^2 - 10*D",
+    "2": "-592*D^2 - 1184*D - 624",
+    "3": "-4080*D - 6120",
+    "4": "-8784"
+  }
+}
