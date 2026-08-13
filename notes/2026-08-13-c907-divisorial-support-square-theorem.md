@@ -16,7 +16,9 @@ Let
 \]
 
 be a smooth projective graph resolution of a dominant rational map
-\(\mathbf P^5\dashrightarrow\mathbf P^2\). Put
+\(\mathbf P^5\dashrightarrow\mathbf P^2\), chosen by a specified sequence of
+smooth-center principalization blowups (and, when used below, further smooth
+blowups resolving the endpoint map). Put
 \(L=f^*\mathcal O(1)\) and \(N=1-\tau_L\).
 
 Assume an exact cyclotomic localizing invariant \(\mathcal P_6\) of supported
@@ -57,8 +59,8 @@ K-theory is
  \tag{2}
 \]
 
-Assume \(r\) is presented as an iterated smooth blowup.  Its composite Orlov
-filtration has the ambient \(\operatorname{Perf}(\mathbf P^5)\) piece and
+The specified iterated-blowup presentation gives a composite Orlov filtration
+with the ambient \(\operatorname{Perf}(\mathbf P^5)\) piece and
 pieces supported on finite unions of components of the total exceptional
 divisor \(E\subset W\).
 
