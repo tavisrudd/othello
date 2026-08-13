@@ -92,6 +92,39 @@ theorem f4ProjectiveFrobenius_involutive :
   | none => rfl
   | some a => simp [f4ProjectiveFrobenius, f4Frobenius_involutive a]
 
+/-- Frobenius transported from affine-chart coordinates to the actual
+projective line over `F4`. -/
+def f4ProjectiveLineFrobenius
+    (point : Projectivization F4 (F4 × F4)) :
+    Projectivization F4 (F4 × F4) :=
+  optionEquivProjectiveLine F4
+    (f4ProjectiveFrobenius ((optionEquivProjectiveLine F4).symm point))
+
+/-- On every affine-chart coordinate, the transported action is exactly
+coefficientwise Frobenius on the corresponding projective point. -/
+theorem f4ProjectiveLineFrobenius_chart (point : Option F4) :
+    f4ProjectiveLineFrobenius (projectiveLineChart F4 point) =
+      projectiveLineChart F4 (f4ProjectiveFrobenius point) := by
+  change optionEquivProjectiveLine F4
+      (f4ProjectiveFrobenius
+        ((optionEquivProjectiveLine F4).symm
+          (optionEquivProjectiveLine F4 point))) =
+    optionEquivProjectiveLine F4 (f4ProjectiveFrobenius point)
+  rw [Equiv.symm_apply_apply]
+
+/-- Frobenius on the actual five-point projective line is involutive. -/
+theorem f4ProjectiveLineFrobenius_involutive :
+    Function.Involutive f4ProjectiveLineFrobenius := by
+  intro point
+  change optionEquivProjectiveLine F4
+      (f4ProjectiveFrobenius
+        ((optionEquivProjectiveLine F4).symm
+          (optionEquivProjectiveLine F4
+            (f4ProjectiveFrobenius
+              ((optionEquivProjectiveLine F4).symm point))))) = point
+  rw [Equiv.symm_apply_apply, f4ProjectiveFrobenius_involutive]
+  exact Equiv.apply_symm_apply (optionEquivProjectiveLine F4) point
+
 end
 
 end GraphLattices

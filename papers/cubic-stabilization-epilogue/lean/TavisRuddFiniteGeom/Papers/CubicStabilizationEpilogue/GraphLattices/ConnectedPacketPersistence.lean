@@ -70,6 +70,34 @@ theorem connectedBase_f4MarkedProjectivePair_constant_and_persists
     point basePoint]
   exact atBasePoint
 
+/-- A continuous classifier into the actual projective line over `F4`
+preserves the two scalar graphs of the transported marked quadratic pair
+throughout a connected base.  The classifier and its topology remain supplied
+data. -/
+theorem connectedBase_f4MarkedProjectiveLinePair_constant_and_persists
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace (Projectivization F4 (F4 × F4))]
+    [DiscreteTopology (Projectivization F4 (F4 × F4))]
+    (packetClass : Base → Projectivization F4 (F4 × F4))
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (atBasePoint :
+      packetClass basePoint =
+          scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 ∨
+        packetClass basePoint = scalarGraphPoint F4
+          (sixAxisQuadraticSlopeRootInF4 + 1)) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point,
+        packetClass point =
+            scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 ∨
+          packetClass point = scalarGraphPoint F4
+            (sixAxisQuadraticSlopeRootInF4 + 1) := by
+  refine ⟨connectedBase_finiteDiscretePacket_constant packetClass continuous,
+    ?_⟩
+  intro point
+  rw [connectedBase_finiteDiscretePacket_constant packetClass continuous
+    point basePoint]
+  exact atBasePoint
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

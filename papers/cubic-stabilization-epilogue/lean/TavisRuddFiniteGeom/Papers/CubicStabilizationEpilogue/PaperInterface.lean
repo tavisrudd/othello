@@ -1618,6 +1618,41 @@ theorem principalGluingPacket_markedF4Pair_connectedFamily_persistence
   exact GraphLattices.connectedBase_f4MarkedProjectivePair_constant_and_persists
     packetClass continuous basePoint atBasePoint
 
+/-- Connected-family persistence stated directly on the actual projective line
+over `F4`, rather than on its affine-chart coordinate type.  If a supplied
+continuous classifier takes one base point to either scalar graph defined by
+the transported marked quadratic root, then the classifier is constant and
+every fibre remains in that exact two-point subset.  No geometric kernel local
+system or classifier is constructed. -/
+theorem principalGluingPacket_markedProjectiveLine_connectedFamily_persistence
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace
+      (Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))]
+    [DiscreteTopology
+      (Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))]
+    (packetClass : Base →
+      Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (atBasePoint :
+      packetClass basePoint = GraphLattices.scalarGraphPoint GraphLattices.F4
+          GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+        packetClass basePoint =
+          GraphLattices.scalarGraphPoint GraphLattices.F4
+            (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point,
+        packetClass point = GraphLattices.scalarGraphPoint GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+          packetClass point =
+            GraphLattices.scalarGraphPoint GraphLattices.F4
+              (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1) := by
+  exact
+    GraphLattices.connectedBase_f4MarkedProjectiveLinePair_constant_and_persists
+      packetClass continuous basePoint atBasePoint
+
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
 four-dimensional depth-one block.  It is literally a scalar-algebra image and
@@ -1675,8 +1710,9 @@ theorem principalGluing_selfAdjointGraph_isotropic_halfDimension
 
 /-- Finite-field Frobenius core for the exotic pair: squaring on the chosen
 `F4` fixes exactly `0` and `1`, is involutive, and exchanges every other
-element with a distinct conjugate.  The two nonfixed affine-chart points are
-identified exactly as the transported marked quadratic root and `root+1`.
+element with a distinct conjugate.  On both the affine chart and the actual
+projective line, the two nonfixed points are identified exactly as the scalar
+graphs of the transported marked quadratic root and `root+1`.
 This statement does not identify a
 normalizer action with Frobenius. -/
 theorem principalGluing_f4Frobenius_fixed_and_exchanged :
@@ -1699,14 +1735,24 @@ theorem principalGluing_f4Frobenius_fixed_and_exchanged :
       GraphLattices.f4ProjectiveFrobenius point ≠ point ↔
         point = some GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
           point =
-            some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) := by
+            some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) ∧
+    Function.Involutive GraphLattices.f4ProjectiveLineFrobenius ∧
+    (∀ point : Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4),
+      GraphLattices.f4ProjectiveLineFrobenius point ≠ point ↔
+        point = GraphLattices.scalarGraphPoint GraphLattices.F4
+          GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+        point = GraphLattices.scalarGraphPoint GraphLattices.F4
+          (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) := by
   exact ⟨GraphLattices.f4FrobeniusRingEquiv_apply,
     GraphLattices.f4ProjectiveFrobenius_eq_option_map,
     GraphLattices.f4Frobenius_fixed_iff,
     GraphLattices.f4Frobenius_involutive,
     GraphLattices.f4Frobenius_exchanges_nonPrimeElement,
     GraphLattices.f4ProjectiveFrobenius_fixed_iff,
-    GraphLattices.f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair⟩
+    GraphLattices.f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair,
+    GraphLattices.f4ProjectiveLineFrobenius_involutive,
+    GraphLattices.f4ProjectiveLineFrobenius_nonfixed_iff_markedGraphPair⟩
 
 /-- Concrete polarization calculation from the principal-gluing proof.  The
 trace of the determinant on `F4²` is nondegenerate over `F2`; the induced

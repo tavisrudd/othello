@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 141 reviewer terminals.
+1 complete; 142 reviewer terminals.
 
-The 141 reviewer-facing terminals currently verify:
+The 142 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -95,11 +95,13 @@ The 141 reviewer-facing terminals currently verify:
   line, the five- and four-member finite-field packet counts, and the
   isotropic half-dimension calculation for self-adjoint graph slopes; and the
   exact persistence of any continuously classified finite discrete packet on
-  a connected base, including the explicit transported marked-root pair in
-  the affine `F4` chart, conditional on the geometric classifying map;
+  a connected base, including the explicit transported marked-root pair both
+  in the affine `F4` chart and directly in the actual projective line,
+  conditional on the geometric classifying map;
 - the fixed points for squaring Frobenius on the concrete four-element field
-  and the exact nonfixed affine-chart locus given by the transported marked
-  root and `root+1`, without identifying any geometric
+  and the exact nonfixed loci in both affine-chart coordinates and the actual
+  projective line, given by the scalar graphs of the transported marked root
+  and `root+1`, without identifying any geometric
   normalizer action with that field map;
 - the manuscript's concrete trace-determinant form on `F4²`, its
   nondegeneracy, the nondegeneracy of the induced two-copy alternating form,

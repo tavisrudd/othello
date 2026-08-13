@@ -321,6 +321,58 @@ theorem f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair
           sixAxisQuadraticSlope_markedProjectivePair.2.1.symm
         _ = some (sixAxisQuadraticSlopeRootInF4 + 1) := fixed
 
+/-- On the actual projective line over `F4`, the nonfixed locus of
+coefficientwise Frobenius is exactly the two scalar graphs defined by the
+transported marked quadratic root and its conjugate. -/
+theorem f4ProjectiveLineFrobenius_nonfixed_iff_markedGraphPair
+    (point : Projectivization F4 (F4 × F4)) :
+    f4ProjectiveLineFrobenius point ≠ point ↔
+      point = scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 ∨
+        point = scalarGraphPoint F4
+          (sixAxisQuadraticSlopeRootInF4 + 1) := by
+  let coordinate := (optionEquivProjectiveLine F4).symm point
+  constructor
+  · intro moved
+    have coordinateMoved : f4ProjectiveFrobenius coordinate ≠ coordinate := by
+      intro fixed
+      apply moved
+      change optionEquivProjectiveLine F4
+          (f4ProjectiveFrobenius coordinate) = point
+      rw [fixed]
+      exact Equiv.apply_symm_apply (optionEquivProjectiveLine F4) point
+    rcases (f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair
+      coordinate).mp coordinateMoved with root | conjugate
+    · left
+      calc
+        point = optionEquivProjectiveLine F4 coordinate :=
+          (Equiv.apply_symm_apply (optionEquivProjectiveLine F4) point).symm
+        _ = scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 := by
+          simp [root, optionEquivProjectiveLine, projectiveLineChart]
+    · right
+      calc
+        point = optionEquivProjectiveLine F4 coordinate :=
+          (Equiv.apply_symm_apply (optionEquivProjectiveLine F4) point).symm
+        _ = scalarGraphPoint F4
+            (sixAxisQuadraticSlopeRootInF4 + 1) := by
+          simp [conjugate, optionEquivProjectiveLine, projectiveLineChart]
+  · rintro (rfl | rfl)
+    · rw [← show projectiveLineChart F4
+          (some sixAxisQuadraticSlopeRootInF4) =
+          scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 by rfl,
+        f4ProjectiveLineFrobenius_chart]
+      intro fixed
+      exact (f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair
+        (some sixAxisQuadraticSlopeRootInF4)).mpr (Or.inl rfl)
+        (projectiveLineChart_injective F4 fixed)
+    · rw [← show projectiveLineChart F4
+          (some (sixAxisQuadraticSlopeRootInF4 + 1)) =
+          scalarGraphPoint F4 (sixAxisQuadraticSlopeRootInF4 + 1) by rfl,
+        f4ProjectiveLineFrobenius_chart]
+      intro fixed
+      exact (f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair
+        (some (sixAxisQuadraticSlopeRootInF4 + 1))).mpr (Or.inr rfl)
+        (projectiveLineChart_injective F4 fixed)
+
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/
 theorem sixAxisQuadraticSlopePolynomial_aeval :

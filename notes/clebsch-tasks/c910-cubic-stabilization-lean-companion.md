@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 75 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 141 audited terminals.  The rejecting manuscript inventory covers all
+exports 142 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -230,13 +230,14 @@ The explicit characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing
 field that carries the marked root into the two-element exotic Frobenius
-orbit and realizes that orbit as a distinct affine-chart two-cycle in the
-five-point projective packet; Lean also proves that these are exactly the two
-nonfixed affine-chart points.  Its identification with the manuscript's geometric marked
+orbit and realizes that orbit as a distinct two-cycle in both affine-chart
+coordinates and the actual five-point projective line; Lean also proves that
+these are exactly the two nonfixed projective points.  Its identification with the manuscript's geometric marked
 extension and principal kernel remains open.  Lean now proves the exact
 connected-family persistence step for any supplied continuous map into a
 finite discrete kernel packet and specializes it to the transported marked
-quadratic pair in the affine `F4` chart; construction of that geometric packet and
+quadratic pair both in affine-chart coordinates and directly in the actual
+projective line over `F4`; construction of that geometric packet and
 classifying map remains open.  All other geometric
 identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
