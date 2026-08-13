@@ -27,6 +27,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -80,6 +81,21 @@ theorem separationFamily_of_sixAxis_packet_and_period_inputs
       isNonIsotrivial fibre :=
   Applications.separationFamily_of_cycle_packet_and_period_inputs packet
     birationalInput cycleGeometry rationalGeometry isNonIsotrivial fibre input
+
+/-- Organizational interface for the relative six-axis source, accepting supplied
+types, functions, and proposition fields with opaque scheme-theoretic semantics for the
+packet: elliptic/source/Jacobian families, relative
+isogeny, finite-flatness, `A₅`/`S₆` actions, polarization identity,
+two-primary symplectic discriminant description, and `A₅`-stable maximal-isotropic
+kernel.  Lean contributes the integral Smith reduction of the identified
+five-axis Gram matrix.  The named proposition fields do not define
+scheme-theoretic semantics, and Lean constructs none of the relative
+geometry. -/
+theorem relativeSixAxis_of_supplied_relative_geometry
+    {Base : Type*} (objects : Applications.RelativeSixAxisObjects Base)
+    (geometry : Applications.RelativeSixAxisGeometricInput objects) :
+    Applications.RelativeSixAxisConclusion objects :=
+  Applications.relativeSixAxis_of_geometricInputs objects geometry
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

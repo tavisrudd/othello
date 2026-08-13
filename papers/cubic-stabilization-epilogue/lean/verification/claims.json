@@ -41,12 +41,14 @@
     },
     {
       "manuscript_label": "lem:relative-six-axis",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The relative elliptic scheme, augmentation-lattice source, intermediate-Jacobian family, and relative isogeny.",
-      "hypotheses": "The connected smooth locus of the nonstandard A5-pencil.",
-      "conclusion": "An A5-equivariant polarized relative isogeny and its two-primary symplectic discriminant description.",
-      "cautions": "Primitivity, finite flatness, and generic-to-relative transport must be represented explicitly."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.relativeSixAxis_of_supplied_relative_geometry"
+      ],
+      "objects": "An opaque organizational signature with a base type and dependent fibre types named for the relative elliptic scheme, augmentation-lattice source, intermediate Jacobian, two-primary discriminant, H2 tensor two-torsion model, and isogeny kernel; a fibrewise function, discriminant equivalences, kernel inclusions, and the explicit integral matrix 6I5-J5.",
+      "hypotheses": "Opaque propositions are supplied for every conclusion of the relative lemma: connected smooth-locus and elliptic-scheme status, augmentation-tensor source, isogeny and finite-flatness, A5-equivariance, natural S6-actions, the quotient form induced by 6I6-J6, polarization pullback, five-axis Gram identification, identification of the discriminant with the source-polarization kernel and of the tensor model with H2 tensor E[2], A5-equivariant symplectic discriminant equivalence, identification of the named kernel type with the two-primary kernel of the relative map, injectivity of its discriminant inclusion, and A5-stability and maximal isotropy of that kernel.",
+      "conclusion": "The supplied opaque geometric packet is packaged with a kernel-checked integral Smith witness for the five-axis Gram matrix, including explicit two-sided inverse row and column matrices and diagonal diag(1,6,6,6,6).",
+      "cautions": "Coverage is fragmentary, not a conditional proof of the manuscript lemma: the theorem merely repackages opaque supplied geometric propositions and independently proves the arithmetic Smith witness. The named types, functions, and propositions do not define schemes, relative morphisms, group actions, pairings, polarization kernels, tensor products, or maximal isotropy. Lean does not formalize the proof ingredients, including elliptic images, coherent identifications, primitivity, generic-to-relative transport, abelian-scheme homomorphism rigidity, relative isogenies, finite flatness, torsion local systems, Weil and commutator pairings, or fibrewise order arguments."
     },
     {
       "manuscript_label": "prop:principal-gluing-packet",

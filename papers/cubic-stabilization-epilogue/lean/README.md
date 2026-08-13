@@ -25,16 +25,16 @@ This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
-- 1 absent from Lean;
-- 16 represented by exact but strictly weaker fragments;
+- 0 absent from Lean;
+- 17 represented by exact but strictly weaker fragments;
 - 5 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 1 absent; 16 fragmentary; 5 conditional;
-1 complete; 83 reviewer terminals.
+Checked coverage snapshot: 23 claims; 0 absent; 17 fragmentary; 5 conditional;
+1 complete; 84 reviewer terminals.
 
-The 83 reviewer-facing terminals currently verify:
+The 84 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -120,6 +120,8 @@ The 83 reviewer-facing terminals currently verify:
 - the final conditional separation-family composition, including fibre and
   stabilization `CH₀`-triviality, stabilization irrationality, and supplied
   family non-isotriviality;
+- an opaque organizational relative-six-axis signature, with the full
+  five-axis integral Smith witness independently discharged by Lean;
 - the factorization and framed eigenvalues of Cai's displayed rank-two
   indicial polynomial.
 
