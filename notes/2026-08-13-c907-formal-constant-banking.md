@@ -354,6 +354,17 @@ One further coefficient check is required as well: the two blow-up monomial
 charts must meet at a common completed numerical-Novikov corner; this cannot
 be inferred solely from the existence of the two contractions.
 
+That check and the confluence falsifier are now complete.  A common
+**intrinsic** large-radius corner exists, but the two blowdown charts need not
+have a common punctured overlap: on `Bl_{p_1,p_2} P^2` the relevant monomials
+satisfy `B=qq'`, so the two extremal axes are different branches of `B=0`.
+The standard coalescing-eigenvalue theorem presupposes holomorphic extension
+of the labeled formal normal form, whereas the primitive-sixth packet here
+disappears at the corner.  Simultaneously inverting `q,q'` forces `B` to be a
+unit, and good formal structure does not supply the missing Stokes/central
+connection datum.  See
+`2026-08-13-c907-peak-confluence-obstruction.md`.
+
 ## Sources
 
 - H. Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555v3,

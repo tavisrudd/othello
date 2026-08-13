@@ -6,11 +6,17 @@
 product but remains open at a multi-arrow coherence gate.  The Gamma point
 solution is correctly constructed in each Artin-quotient sectorial receiver;
 hostile audit found that independently fixed exceptional parameters cannot be
-composed through weak factorization.  A proposed formal-constant banking
-repair also fails because it does not construct a functorial morphism from the
-`z=0` primitive-sixth packet to the Gamma rank line.  The all-codimension
-source audit is clean, so Gold and Platinum (all `m`) rise or fall with this
-same Stokes/coherent-realization gate.  No Paper V or Lean promotion.
+composed through weak factorization.  Formal-constant banking and a global
+phase do not identify the incident Stokes embeddings.  Valley banking does
+localize the residue to peaks, but the two extremal axes are different
+branches of the intrinsic Novikov corner (already `B=qq'` in a toric surface
+peak), and scalar extension through their confluent origin does not carry the
+two primitive-sixth subspaces.  A two-variable good-formal-structure theorem
+does not repair this: simultaneous Laurent inversion deletes `B=0`, and a
+formal exponential decomposition does not supply the analytic Stokes/central
+connection datum measured by the rank Boolean.  The all-codimension source
+audit is clean, so Gold and Platinum (all `m`) rise or fall with this same
+peak Stokes/coherent-realization gate.  No Paper V or Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 

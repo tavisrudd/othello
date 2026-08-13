@@ -76,8 +76,13 @@ rank morphism `P_6 -> 1` needed to telescope.  A valley/peak audit now makes
 valleys canonical and reduces every peak to two one-variable radial legs;
 the exact residue is the confluence nearby-cycle comparison of their two
 formal-primary subspaces, not scalar germ-faithfulness alone.  Alternatives
-are an iterated Laurent/Hahn receiver, simultaneous master space, or direct
-microlocal rank morphism.  Current card:
+are a simultaneous master space or direct microlocal rank morphism.  The
+naive iterated-Laurent/good-formal-structure repair is now excluded: in the
+smallest toric peak `B=qq'`, inverting both exceptional variables deletes the
+extremal corner, while good formal structure carries exponential factors but
+not the Stokes/central-connection coefficient on which the Gamma rank
+Boolean depends.  Exact peak audit:
+`../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
 
