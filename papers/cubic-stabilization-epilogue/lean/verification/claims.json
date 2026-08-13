@@ -153,12 +153,14 @@
     },
     {
       "manuscript_label": "lem:formal-base-shift",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A bulk pullback of the even quantum connection over a complete multiplicatively filtered ring.",
-      "hypotheses": "The unit and fixed divisor components are constant in positive filtration and the remainder is filtration-positive.",
-      "conclusion": "Equality with the small-connection characteristic polynomial after the stated divisor substitution.",
-      "cautions": "Only finite-quotient integral-z gauges are used; no analytic specialization or enlarged Levelt-Turrittin field is asserted."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_characteristicPolynomial_of_matrixInput"
+      ],
+      "objects": "Finite small and bulk monodromy matrices over one commutative coefficient ring, a fixed-divisor coefficient endomorphism, and an invertible comparison matrix.",
+      "hypotheses": "The bulk monodromy matrix is explicitly equal to the conjugate of the coefficient-substituted small monodromy matrix by the supplied integral-frame gauge.",
+      "conclusion": "The bulk characteristic polynomial equals the coefficientwise divisor substitution in the small characteristic polynomial.",
+      "cautions": "The filtered coefficient ring, unit and divisor decomposition, filtration-positive remainder, string and divisor equations, compatible finite-quotient bulk gauges, and their inverse limit are absent; the matrix comparison is supplied rather than constructed, and no analytic specialization is represented."
     },
     {
       "manuscript_label": "lem:numerical-base-change",

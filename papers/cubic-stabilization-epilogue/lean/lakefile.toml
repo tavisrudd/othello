@@ -18,6 +18,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",

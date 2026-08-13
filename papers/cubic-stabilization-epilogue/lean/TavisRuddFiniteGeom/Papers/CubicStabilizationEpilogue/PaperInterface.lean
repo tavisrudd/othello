@@ -7,6 +7,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmi
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -253,6 +254,17 @@ theorem numericalNovikov_coefficientPushforward_apply
     data.coefficientPushforward series numerical =
       ∑ degree ∈ data.fiber numerical, series degree :=
   data.coefficientPushforward_apply series numerical
+
+/-- Once the finite-level string/divisor/bulk analysis supplies an explicit
+integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
+small characteristic polynomial after the fixed divisor substitution. -/
+theorem formalBaseShift_characteristicPolynomial_of_matrixInput
+    {Index Coefficient : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing Coefficient]
+    (input : Quantum.FormalBaseShiftMatrixInput Index Coefficient) :
+    input.bulkMonodromy.charpoly =
+      input.smallMonodromy.charpoly.map input.divisorSubstitution :=
+  input.characteristicPolynomial_eq
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
