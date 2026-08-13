@@ -5,6 +5,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Faith
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SquareZeroTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.EllipticSourceRealization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProducts
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.CoefficientExtension
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProductBaseChange
 import Mathlib.Tactic
 
 /-!
@@ -380,6 +382,159 @@ theorem allDegree_ordinaryProductMember_of_ellipticSourcePullback
       (ellipticSourceCoefficientRealization_internalRankOne_sq_zero
         uniformizer diagonal cross))
     divisors realizationMember form member degree
+
+/-- The rank-one and ordinary-product calculation after an actual coefficient
+extension.  A base weighted-lattice member is mapped entrywise to `S`, where
+rank-one generation is assumed and the canonical elliptic-source square-zero
+argument is applied.  The conclusion deliberately remains over `S`; descent
+back to `R` is a separate step. -/
+theorem allDegree_ordinaryProductMember_afterCoefficientExtension
+    {S Target : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing S] [Algebra R S] [CommRing Target] [Algebra S Target]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (extendedGenerated : WeightedMatrixRankOneGenerated
+      (algebraMap R S uniformizer) diagonal cross)
+    (extendedRealization : Matrix Index Index S →+ Target)
+    (pullback : Target →+*
+      ExteriorAlgebra S (EllipticSourceHOne S Index))
+    (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        ellipticSourceCoefficientRealization candidate)
+    (extendedDivisors : Submodule S Target)
+    (realizationMember : ∀ candidate,
+      candidate ∈ weightedMatrixSubmodule
+          (algebraMap R S uniformizer) diagonal cross →
+        extendedRealization candidate ∈ extendedDivisors)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (degree : ℕ) :
+    ∃ forms : List (Matrix Index Index S),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet
+          (algebraMap R S uniformizer) diagonal cross) ∧
+      forms.sum = matrixCoefficientExtension form ∧
+      squarefreeProductSum (forms.map extendedRealization) degree ∈
+        ordinaryProductSubmodule extendedDivisors degree ∧
+      extendedRealization (matrixCoefficientExtension form) ^ degree =
+        (degree.factorial : Target) *
+          squarefreeProductSum (forms.map extendedRealization) degree := by
+  exact allDegree_ordinaryProductMember_of_ellipticSourcePullback
+    (R := S) (Index := Index)
+    (algebraMap R S uniformizer) diagonal cross extendedGenerated
+    extendedRealization pullback pullbackInjective realizationCompatible
+    extendedDivisors realizationMember (matrixCoefficientExtension form)
+    (matrixCoefficientExtension_mem_weightedMatrixSubmodule
+      uniformizer diagonal cross form member)
+    degree
+
+/-- Full coefficient-extension/product/descent packet for a specified base
+divided-power class.  Rank-one generation is used over the faithfully flat
+extension `S`; ordinary products there are compared with the scalar extension
+of the base ordinary-product submodule and membership is reflected to the
+base.  The compatibility identifying the specified base divided power with
+the squarefree representative is explicit, since it is geometric rather than
+a consequence of factorial multiplication in a ring with possible torsion. -/
+theorem allDegree_dividedPowerMember_of_faithfullyFlatCoefficientExtension
+    {S Target : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S]
+    [CommRing Target] [Algebra R Target]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (extendedGenerated : WeightedMatrixRankOneGenerated
+      (algebraMap R S uniformizer) diagonal cross)
+    (extendedRealization : Matrix Index Index S →+
+      TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S (EllipticSourceHOne S Index))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ weightedMatrixSubmodule
+          (algebraMap R S uniformizer) diagonal cross →
+        extendedRealization candidate ∈
+          scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization (matrixCoefficientExtension form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible : ∀ forms : List (Matrix Index Index S),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet
+          (algebraMap R S uniformizer) diagonal cross) →
+      forms.sum = matrixCoefficientExtension form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        squarefreeProductSum (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower := by
+  obtain ⟨forms, internal, sumEquality, extendedProductMember,
+      extendedPowerEquality⟩ :=
+    allDegree_ordinaryProductMember_afterCoefficientExtension
+      uniformizer diagonal cross extendedGenerated extendedRealization
+      pullback pullbackInjective sourceCompatible
+      (scalarExtendedSubmodule S
+        (Algebra.TensorProduct.includeRight
+          (R := R) (A := S) (B := Target)) divisors)
+      extendedRealizationMember form member degree
+  have productInScalarExtension :
+      squarefreeProductSum (forms.map extendedRealization) degree ∈
+        scalarExtendedSubmodule S
+          (Algebra.TensorProduct.includeRight
+            (R := R) (A := S) (B := Target))
+          (ordinaryProductSubmodule divisors degree) :=
+    ordinaryProductSubmodule_scalarExtension_le
+      (S := S)
+      (Algebra.TensorProduct.includeRight
+        (R := R) (A := S) (B := Target)) divisors degree
+      extendedProductMember
+  have dividedPowerExtendedMember :
+      Algebra.TensorProduct.includeRight dividedPower ∈
+        scalarExtendedSubmodule S
+          (Algebra.TensorProduct.includeRight
+            (R := R) (A := S) (B := Target))
+          (ordinaryProductSubmodule divisors degree) := by
+    rw [dividedPowerCompatible forms internal sumEquality]
+    exact productInScalarExtension
+  have dividedPowerMember :
+      dividedPower ∈ ordinaryProductSubmodule divisors degree :=
+    mem_submodule_of_mem_scalarExtendedSubmodule
+      (ordinaryProductSubmodule divisors degree) dividedPower
+      dividedPowerExtendedMember
+  have extendedPower :
+      Algebra.TensorProduct.includeRight
+          (R := R) (A := S) (B := Target) (baseClass ^ degree) =
+        Algebra.TensorProduct.includeRight
+          (R := R) (A := S) (B := Target)
+          ((degree.factorial : Target) * dividedPower) := by
+    calc
+      Algebra.TensorProduct.includeRight
+          (R := R) (A := S) (B := Target) (baseClass ^ degree) =
+          (Algebra.TensorProduct.includeRight
+            (R := R) (A := S) (B := Target) baseClass) ^ degree := by simp
+      _ = extendedRealization (matrixCoefficientExtension form) ^ degree := by
+        rw [baseClassCompatible]
+      _ = (degree.factorial : TensorProduct R S Target) *
+          squarefreeProductSum (forms.map extendedRealization) degree :=
+        extendedPowerEquality
+      _ = (degree.factorial : TensorProduct R S Target) *
+          Algebra.TensorProduct.includeRight
+            (R := R) (A := S) (B := Target) dividedPower := by
+        rw [dividedPowerCompatible forms internal sumEquality]
+      _ = Algebra.TensorProduct.includeRight
+          (R := R) (A := S) (B := Target)
+          ((degree.factorial : Target) * dividedPower) := by
+        rw [map_mul]
+        congr 1
+        simp
+  exact ⟨dividedPowerMember,
+    tensorProduct_includeRight_injective_of_faithfullyFlat extendedPower⟩
 
 end GraphLattices
 

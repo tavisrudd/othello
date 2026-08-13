@@ -708,6 +708,99 @@ theorem rankOne_allDegree_ordinaryProduct_of_canonicalEllipticSourcePullback
     π diagonal cross generated targetRealization pullback pullbackInjective
     realizationCompatible divisors realizationMember form member degree
 
+/-- Entrywise coefficient extension preserves the weighted graph lattice and
+maps rank-one coefficient matrices to the corresponding rank-one matrices. -/
+theorem graphLattice_coefficientExtension_preserves_member_and_rankOne
+    {Index R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (form : Matrix Index Index R)
+    (latticeMember : form ∈
+      GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (rankOneMember : form ∈
+      GraphLattices.weightedRankOneSet π diagonal cross) :
+    GraphLattices.matrixCoefficientExtension form ∈
+        GraphLattices.weightedMatrixSubmodule
+          (algebraMap R S π) diagonal cross ∧
+      GraphLattices.matrixCoefficientExtension form ∈
+        GraphLattices.weightedRankOneSet
+          (algebraMap R S π) diagonal cross :=
+  ⟨GraphLattices.matrixCoefficientExtension_mem_weightedMatrixSubmodule
+      π diagonal cross form latticeMember,
+    GraphLattices.matrixCoefficientExtension_mem_weightedRankOneSet
+      π diagonal cross form rankOneMember⟩
+
+/-- Ordinary product images commute with coefficient extension in the needed
+direction, and faithfully flatness reflects membership from the resulting
+scalar-extended submodule. -/
+theorem ordinaryDivisorProducts_baseChange_and_faithfullyFlatReflection
+    {R S T : Type*} [CommRing R] [CommRing S] [CommRing T]
+    [Algebra R S] [Algebra R T] [Module.FaithfullyFlat R S]
+    (divisors : Submodule R T) (degree : ℕ) (element : T)
+    (extendedMember :
+      Algebra.TensorProduct.includeRight element ∈
+        GraphLattices.ordinaryProductSubmodule
+          (GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := T)) divisors) degree) :
+    element ∈ ordinaryDivisorProductSubmodule divisors degree := by
+  apply GraphLattices.mem_submodule_of_mem_scalarExtendedSubmodule
+    (S := S)
+  exact GraphLattices.ordinaryProductSubmodule_scalarExtension_le
+    (S := S)
+    (Algebra.TensorProduct.includeRight
+      (R := R) (A := S) (B := T)) divisors degree extendedMember
+
+/-- Exact algebraic skeleton of the manuscript's splitting-ring proof.
+Rank-one generation occurs after faithfully flat coefficient extension;
+ordinary product membership and the factorial identity descend to the base.
+The geometric realization compatibilities, including identification of the
+chosen divided-power class after extension, remain explicit hypotheses. -/
+theorem rankOne_allDegree_dividedPower_of_faithfullyFlatCoefficientExtension
+    {Index R S Target : Type*} [CommRing R] [Fintype Index]
+    [DecidableEq Index] [CommRing S] [Algebra R S]
+    [Module.FaithfullyFlat R S] [CommRing Target] [Algebra R Target]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (extendedGenerated : GraphLattices.WeightedMatrixRankOneGenerated
+      (algebraMap R S π) diagonal cross)
+    (extendedRealization : Matrix Index Index S →+
+      TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S (GraphLattices.EllipticSourceHOne S Index))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ GraphLattices.weightedMatrixSubmodule
+          (algebraMap R S π) diagonal cross →
+        extendedRealization candidate ∈
+          GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization (GraphLattices.matrixCoefficientExtension form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible : ∀ forms : List (Matrix Index Index S),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet
+          (algebraMap R S π) diagonal cross) →
+      forms.sum = GraphLattices.matrixCoefficientExtension form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        GraphLattices.squarefreeProductSum
+          (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryDivisorProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
+  GraphLattices.allDegree_dividedPowerMember_of_faithfullyFlatCoefficientExtension
+    π diagonal cross extendedGenerated extendedRealization pullback
+    pullbackInjective sourceCompatible divisors extendedRealizationMember
+    form member baseClass dividedPower baseClassCompatible degree
+    dividedPowerCompatible
+
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`
 into the subgroup, then `x` already belongs to the subgroup.  Unlike the

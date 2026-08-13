@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 4 absent, 15 fragmentary, 3 conditional deductions, and 1 complete.
-There are 65 reviewer-facing Lean terminals.  These counts summarize the
+There are 68 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 65 reviewer terminals.
+1 complete; 68 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -36,10 +36,11 @@ objects, hypotheses, conclusions, and cautions recorded in
 - Construct the marked finite-etale graph presentation from the geometric
   quotient and identify divisor descent with the formal coefficient lattice
   (`lem:graph-coefficient-lattice`).
-- Formalize scalar extension from the base DVR to the unramified splitting
-  ring, perform rank-one generation there, identify the extended ordinary
-  product image, and faithfully-flat descend the resulting equality
-  (`thm:all-degree-graph-saturation`).
+- Construct the actual unramified splitting ring and prove that its scalar
+  extension of the geometric graph lattice is the formal weighted lattice.
+  The abstract coefficient extension, extended rank-one assembly,
+  ordinary-product base-change containment, and faithfully-flat reflection
+  are now formalized (`thm:all-degree-graph-saturation`).
 - Construct the actual cohomology realizations and the isogeny pullback, prove
   its required injectivity on the torsion-free integral lattice, and match the
   geometric graph classes with the canonical elliptic-source exterior model
