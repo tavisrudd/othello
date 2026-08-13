@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 45 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 46 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 85 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 0 absent, 16 fragmentary, 6 conditional
+exports 87 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 0 absent, 15 fragmentary, 7 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -115,6 +115,10 @@ arbitrary positive-rank projective-bundle presentations, and iterated point
 blowups, then applies the supplied divisor-tagging transfer to every strictly
 Novikov-admissible specialization.  The classification, spectral input,
 operation formulas, and specialization comparison remain explicit premises.
+The framed projective-bundle and blowup formulas are also exact conditional
+deductions: supplied characteristic-polynomial block comparisons now imply
+the rank-scaled projective-bundle multiplicity and the ambient-plus-`c-1`
+specialized-center blowup multiplicity inside Lean.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -151,6 +155,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/GenusEightThreefold.lean
     Applications/RelativeSixAxis.lean
     Applications/LowDimensionalVanishing.lean
+    Applications/FramedOperationFormulas.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/
@@ -196,6 +201,10 @@ are current, and the committed paper export verifies byte-for-byte in
   formulas, and divisor-tagging comparison are supplied, Lean now proves the
   full quantified proposition.  The remaining gap is exactly those geometric
   and quantum premises, not the induction joining them.
+- **Framed operation deduction:** settled at the conditional level.  Lean now
+  derives both multiplicity formulas from the exact characteristic-polynomial
+  block identities; constructing the geometry and proving Iritani's comparison
+  identities in the paper's numerical coordinates remain the open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
