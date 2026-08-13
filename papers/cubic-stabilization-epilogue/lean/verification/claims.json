@@ -68,14 +68,15 @@
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_weightedPair_decomposition_of_midpoint"
-      ],
-      "objects": "Lean currently represents only three coefficients of a symmetric form over a commutative ring.",
-      "hypotheses": "Three arbitrary ring elements; no DVR, valuation, ideals, or lattice-membership hypotheses are formalized.",
-      "conclusion": "The midpoint inequality supplies parity-compatible exponents, every multiple of the cross generator has the division-free three-rank-one decomposition, and every weighted two-coordinate form is assembled from five rank-one forms that remain in the same lattice.",
-      "cautions": "The necessity direction, assembly over arbitrary matrix size, and the final full-lattice rank-one generation equivalence are absent."
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_midpoint_exponents",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_cross_coefficient_decomposition",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_weightedPair_decomposition_of_midpoint",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_finiteMatrix_generation_of_pairwise_midpoint"
+  ],
+  "objects": "Lean represents a symmetric matrix on an arbitrary finite linearly ordered index type over a commutative ring, with entrywise diagonal and cross divisibility depths and the span of rank-one matrices internal to that weighted lattice.",
+  "hypotheses": "The cross-depth function is symmetric and every distinct pair satisfies the midpoint inequality; no DVR or valuation structure is assumed for the constructive direction.",
+  "conclusion": "Every member of the finite weighted symmetric lattice lies in its internal rank-one span; the proof assembles diagonal atoms and division-free pairwise cross decompositions.",
+  "cautions": "Only sufficiency is proved. The valuation-theoretic necessity direction and hence the manuscript's full DVR equivalence remain absent; this declaration also does not construct the depth data from a geometric graph lattice."
     },
     {
       "manuscript_label": "thm:all-degree-graph-saturation",

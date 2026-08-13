@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.RankOneGeneration
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MatrixOfIdeals
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
@@ -132,6 +133,24 @@ theorem rankOne_weightedPair_decomposition_of_midpoint
                   GraphLattices.SymmetricPair.secondSquare))) :=
   GraphLattices.SymmetricPair.weightedPair_decomposition_of_midpoint
     π diagonalFirst diagonalSecond cross midpoint form member
+
+/-- Constructive sufficiency for an arbitrary finite symmetric
+matrix-of-ideals lattice: pairwise midpoint inequalities imply that every
+lattice member lies in the span of rank-one forms internal to the lattice.
+This statement is ring-theoretic and does not assert the valuation-theoretic
+necessity direction of the manuscript's DVR equivalence. -/
+theorem rankOne_finiteMatrix_generation_of_pairwise_midpoint
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [LinearOrder Index]
+    [CommRing R]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (crossSymmetric : ∀ row column, cross row column = cross column row)
+    (midpoint : ∀ first second, first ≠ second →
+      diagonal first + diagonal second ≤ 2 * cross first second)
+    (form : Matrix Index Index R)
+    (member : GraphLattices.MemWeightedMatrix π diagonal cross form) :
+    form ∈ GraphLattices.weightedRankOneSpan π diagonal cross :=
+  GraphLattices.mem_weightedRankOneSpan_of_pairwise_midpoint
+    π diagonal cross crossSymmetric midpoint form member
 
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that

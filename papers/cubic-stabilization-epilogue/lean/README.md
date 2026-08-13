@@ -32,11 +32,12 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 0 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 7 absent; 13 fragmentary; 3 conditional;
-0 complete; 28 reviewer terminals.
+0 complete; 29 reviewer terminals.
 
-The 28 reviewer-facing terminals currently verify:
+The 29 reviewer-facing terminals currently verify:
 
-- constructive two-coordinate rank-one assembly under the midpoint inequality;
+- constructive rank-one assembly for arbitrary finite symmetric
+  matrix-of-ideals lattices under all pairwise midpoint inequalities;
 - the square-zero divided-power expansion;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, and its exact depth-one arithmetic at two and three;
