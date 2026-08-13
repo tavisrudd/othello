@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 44 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 45 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 84 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 0 absent, 17 fragmentary, 5 conditional
+exports 85 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 0 absent, 16 fragmentary, 6 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -109,6 +109,12 @@ The relative-six-axis row now has an opaque organizational signature for all
 named geometric assertions and an independently proved full integral Smith
 witness; this is explicitly a fragment, not a conditional proof of the
 scheme-theoretic lemma.
+Low-dimensional primitive-sixth vanishing is now an exact conditional
+deduction: Lean performs the induction through nef seeds, the point,
+arbitrary positive-rank projective-bundle presentations, and iterated point
+blowups, then applies the supplied divisor-tagging transfer to every strictly
+Novikov-admissible specialization.  The classification, spectral input,
+operation formulas, and specialization comparison remain explicit premises.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -144,6 +150,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/CubicThreefold.lean
     Applications/GenusEightThreefold.lean
     Applications/RelativeSixAxis.lean
+    Applications/LowDimensionalVanishing.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/

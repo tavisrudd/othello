@@ -166,10 +166,10 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-44 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 84 reviewer terminals, audit
-commands, and expected axiom rows.  Coverage is explicitly 0 absent, 17
-fragmentary, 5 conditional deductions, and 1 complete.  The DVR rank-one
+45 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 85 reviewer terminals, audit
+commands, and expected axiom rows.  Coverage is explicitly 0 absent, 16
+fragmentary, 6 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
 graph lattices, invertible extension-ring basis transport between distinct
 base and split axes, derivation of weighted membership from base symmetry and
@@ -184,7 +184,12 @@ composition with its projective-bundle, packet, and period-map inputs exposed.
 The relative-six-axis row is now an explicit fragment: an opaque organizational
 signature records all named geometric assertions, while Lean independently
 proves the complete integral Smith witness with two-sided inverse operations.
-The aggregate build, source correspondence, and 84-terminal axiom transcript
+Low-dimensional primitive-sixth vanishing is now an exact conditional
+deduction: Lean performs the classification induction through nef seeds,
+points, arbitrary projective-bundle presentations, and point blowups, then
+transfers intrinsic vanishing to every supplied strictly Novikov-admissible
+specialization.  The full geometric and quantum inputs remain explicit.
+The aggregate build, source correspondence, and 85-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
