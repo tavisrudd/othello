@@ -94,41 +94,37 @@ to fixed-fibre stratumwise submersivity, including the interface, on a common
 Whitney control partition.  This corrects the useful-but-too-strong wording
 that `$a_L$ is the missing hypothesis' in the earlier checklist.
 
-### Generic-interface existence lemma
+### Transported-interface lemma
 
-Once the coarse exterior Fitting ledger is known, the interface rank condition
-does not require a second algebraic fan enumeration.  Let `K` be a compact
-subset of a smooth coarse stratum on which `dL` is nowhere zero, and let
-`rho_0` be any smooth proper exhaustion near the residual core.  In the space
-of sufficiently small smooth perturbations `rho=rho_0+eta` supported away
-from the Morse sections, jet transversality makes
+Generic perturbation of `rho` is **not** enough: on an `n`-dimensional real
+stratum the rank-defect locus of `(L,rho):S->R^3` has expected dimension two,
+so it can meet every nearby `rho`-level.  The useful existence mechanism is
+controlled transport.
 
-\[
- j^1(L,\rho):K\longrightarrow J^1(K,\mathbb C\times\mathbb R)
-\]
-
-transverse to the rank-defect locus.  Because `dL` already has real rank two,
-failure of `d(L,rho)` to have rank three is the single condition that `d rho`
-lie in the real span of `d Re L,d Im L`; its jet locus has positive
-codimension.  A generic `rho`, followed by a generic sufficiently small
-regular value `epsilon`, therefore has
+Suppose the coarse exterior Fitting ledger has made `L` a proper controlled
+submersion on a compact collar neighborhood over the contractible disk
+`Omega`.  In the reference fibre over `u_0`, choose a labelled residual
+boundary `I_{u_0}` which is transverse to every fibre stratum.  Use Mather's
+controlled lifts of the coordinate vector fields on `Omega` and their proper
+flows to transport `I_{u_0}` over the disk.  Their union is a labelled closed
+interface `I`, and the transported fibrewise defining function `rho` satisfies
 
 \[
- d(L,\rho)|_{TK}\text{ surjective on }\rho^{-1}(\epsilon). \tag{5a}
+ d(L,\rho)|_{TS}\text{ is surjective along }I\cap S \tag{5a}
 \]
 
-For finitely many strata and labelled end faces, intersect the corresponding
-open dense choices.  Relative transversality fixes `rho` on a prescribed
-smaller residual tube and on neighborhoods where an existing product
-coordinate already proves (5).  Compactness then gives one `epsilon` and one
-interface for all strata.  Thus the remaining interface gate is an existence
-choice after coarse `L`-submersivity, not a new coefficient-sensitive polar
-calculation.  Uniformity over a closed annulus in `D^*` follows by applying
-the same argument to the total strata and the map `(p,L,rho)`.
+on every stratum: `dL` has rank two on the horizontal lift directions, while
+`d rho` is nonzero on the transported vertical normal.  The same flow keeps
+the path-tube end labels separate.  Thus no second coefficient-sensitive
+polar fan is required **after** proper controlled submersivity on a collar has
+been supplied.
 
-This lemma does not cross `d=0` and does not manufacture coarse
-submersivity.  Its role is only to turn the completed exterior Fitting ledger
-into a usable controlled tube boundary.
+This is not circular with the pair theorem: controlled submersivity is first
+used only on a compact collar neighborhood without a prescribed interface;
+the transported boundary then defines the closed pair to which the global
+product theorem is applied.  The lemma does not cross `d=0` and does not
+manufacture coarse `L`-submersivity or compatible control data.  Uniformity
+over a closed annulus in `D^*` follows by using controlled lifts for `(p,L)`.
 
 ## What can be uniform in the parameter
 
@@ -174,7 +170,7 @@ The following are separate gates:
 | --- | --- |
 | Value map | `L_d` submersive on every **coarse actual-boundary** stratum, not merely on fine log initials |
 | Control | common Whitney/controlled stratification of the closed labelled pair; `a_L` is a convenient sufficient audit |
-| Polar/interface | after coarse `L`-submersivity, the generic-interface lemma supplies (5); uniformly (6) requires relative transversality for `(p,L,rho)` |
+| Polar/interface | after proper controlled `L`-submersivity on a collar, the transported-interface lemma supplies (5); uniformly (6) uses controlled lifts for `(p,L)` |
 | Pairing | choose the controlled flow from the identity and preserve the complex orientation, labels, distinguished paths, and their sector ordering |
 | Central comparison | parameterized Morse transport in `R`, not log-smooth isotopy through the semistable fibre |
 
@@ -215,9 +211,9 @@ DOI `10.1090/S0002-9904-1969-12138-5`.
 - **EJ:** replace a proposed finite collar-Cech construction by one labelled
   proper controlled-submersion certificate for the closed exterior/interface
   pair.
-- **EJ2:** once the exterior Fitting ledger is closed, choose the interface
-  generically by relative jet transversality; do not enumerate a second polar
-  fan.
+- **EJ2:** once a compact collar has proper controlled `L`-submersivity,
+  transport one reference interface by horizontal lifts; do not enumerate a
+  second polar fan.
 - **TT:** log-smoothness controls the degeneration of the domain, not the
   value map, the polar interface, or marked thimble data.  It cannot be used
   to trivialize a semistable family across the central parameter.
