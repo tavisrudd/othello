@@ -42,6 +42,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovConvolution",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovInverseLimit",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange",

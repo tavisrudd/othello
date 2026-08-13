@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 106 reviewer terminals.
+1 complete; 107 reviewer terminals.
 
-The 106 reviewer-facing terminals currently verify:
+The 107 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -116,8 +116,8 @@ The 106 reviewer-facing terminals currently verify:
   explicit premises;
 - finite-fiber numerical Novikov coefficient pushforward on ordinary functions
   and on completed coefficient families with finite support below every degree
-  cutoff, including the exact coefficient formula and additivity; no topology,
-  continuity, or inverse-limit object is represented;
+  cutoff, including the exact coefficient formula and additivity; no topology
+  or continuity theorem is represented;
   agreement through a homological degree cutoff is proved to imply agreement
   through the corresponding numerical cutoff, the exact finite-level
   compatibility used by the unformalized continuity argument;
@@ -129,6 +129,10 @@ The 106 reviewer-facing terminals currently verify:
   additive-monoid-algebra truncations; for a
   surjective degree-compatible numerical quotient, finite-fiber pushforward is
   a unital ring homomorphism commuting exactly with all finite truncations;
+- an explicit compatible finite-truncation family and mutually inverse
+  reconstruction equivalence with completed coefficient families; this is a
+  coefficientwise inverse-limit model, not a topology or categorical universal
+  property;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten

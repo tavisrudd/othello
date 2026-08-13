@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 54 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 55 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 106 audited terminals.  The rejecting manuscript inventory covers all
+exports 107 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -153,10 +153,12 @@ commutative-ring structure, with exact coefficientwise agreement with ordinary
 additive monoid-algebra multiplication through each cutoff.  For a surjective
 degree-compatible numerical quotient, finite-fiber pushforward is a unital ring
 homomorphism and commutes with every finite truncation.  The formal objects
-carry no topology or explicit inverse-limit presentation; Gromov--Witten
-descent and base change of comparison maps remain outside the result.  For
+carry no topology; an explicit coefficientwise compatible-truncation family is
+now proved equivalent to them, without a categorical/topological universal
+property.  Gromov--Witten descent and base change of comparison maps remain
+outside the result.  For
 finite coefficient packets, numerical invariance now gives exact descent and a
-  fiber-cardinality formula.  Additive scalar weights give additive operators
+fiber-cardinality formula.  Additive scalar weights give additive operators
   satisfying the Leibniz rule for completed convolution, and numerical
   pushforward commutes with the operator when the weight factors through the
   quotient.  The geometric
@@ -196,6 +198,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/CompletedNovikovSupport.lean
     Quantum/CompletedNovikovConvolution.lean
     Quantum/NumericalCoefficientDescent.lean
+    Quantum/CompletedNovikovInverseLimit.lean
     Quantum/AssociatedGradedTagging.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
@@ -279,7 +282,9 @@ are current, and the committed paper export verifies byte-for-byte in
   packet descent, additive-operator packaging, additive-weight Leibniz identity,
   and quotient-compatible weighted-operator commutation are settled for the
   finite-below support model.
-  Topology and the explicit inverse limit are not represented; the substantive
+  The coefficientwise inverse limit is explicit and equivalent to the
+  completed-family model.  Topology and a categorical/topological universal
+  property are not represented; the substantive
   missing bridges are geometric Gromov--Witten invariance, construction of the
   additive pairing weights and quantum connection, and the comparison maps.
 - **Relative geometry:** unsettled.  The six-axis local-system argument and

@@ -22,6 +22,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmi
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovConvolution
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovInverseLimit
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
@@ -1856,6 +1857,26 @@ theorem completedNovikov_commRing_and_truncation_mul
     mul_add _ _ _, add_mul _ _ _,
     grading.truncation_convolution_apply_of_degree_le
       left right cutoff total degree_le⟩
+
+/-- Completed coefficient families are exactly compatible systems of finite
+degree truncations: reconstructing from every finite level and truncating a
+reconstruction are mutually inverse.  This is a coefficientwise inverse-limit
+description, not a topological or categorical completion theorem. -/
+theorem completedNovikov_truncationFamily_roundTrips
+    {Curve Coefficient : Type*} [AddCommMonoid Curve] [CommRing Coefficient]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve) :
+    (∀ series : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+        grading Coefficient,
+      (Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted
+        grading series).toCompleted = series) ∧
+    (∀ family : Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily
+        grading Coefficient,
+      Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted
+        grading family.toCompleted = family) :=
+  ⟨Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.toCompleted_ofCompleted
+      grading,
+    Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted_toCompleted
+      grading⟩
 
 /-- For a surjective finite-degree numerical quotient, the completed
 finite-fiber pushforward commutes with every finite truncation and is a unital
