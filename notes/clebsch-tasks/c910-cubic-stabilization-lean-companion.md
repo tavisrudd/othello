@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 59 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 60 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 111 audited terminals.  The rejecting manuscript inventory covers all
+exports 112 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -195,6 +195,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/NumericalNovikov.lean
     Quantum/NumericalNovikovCompletion.lean
     Quantum/FormalBaseShift.lean
+    Quantum/FormalBaseShiftSystem.lean
     Quantum/NovikovAdmissibility.lean
     Quantum/ExponentialDivisorTags.lean
     Quantum/CompletedNovikovSupport.lean

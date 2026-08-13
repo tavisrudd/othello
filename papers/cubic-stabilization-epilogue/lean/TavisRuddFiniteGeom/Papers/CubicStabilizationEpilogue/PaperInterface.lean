@@ -34,6 +34,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2074,6 +2075,26 @@ theorem formalBaseShift_characteristicPolynomial_of_matrixInput
     input.bulkMonodromy.charpoly =
       input.smallMonodromy.charpoly.map input.divisorSubstitution :=
   input.characteristicPolynomial_eq
+
+/-- Compatible finite-level small matrices, divisor substitutions, and
+two-sided-invertible gauges determine compatible bulk matrices whose
+characteristic polynomials are the substituted small characteristic
+polynomials at every level.  The filtered rings and bulk differential equations
+that should produce these inputs remain unformalized. -/
+theorem formalBaseShift_bulkSystem_compatible_and_charpoly
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : Quantum.FormalBaseShiftSystem Index) :
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      (system.bulkMonodromy (level + 1)).map (system.reduction level) =
+        system.bulkMonodromy level) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        (system.bulkMonodromy level).charpoly =
+          (system.smallMonodromy level).charpoly.map
+            (system.divisorSubstitution level)) :=
+  ⟨system.bulkMonodromy_compatible, system.bulkMonodromy_charpoly⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 111 reviewer terminals.
+1 complete; 112 reviewer terminals.
 
-The 111 reviewer-facing terminals currently verify:
+The 112 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -146,6 +146,11 @@ The 111 reviewer-facing terminals currently verify:
   supplied pro-Laurent gauge, compatible levelwise conjugation and exact
   characteristic-polynomial invariance; Lean does not prove that the bulk
   differential equations produce either supplied family;
+- for compatible finite coefficient rings, small matrices, divisor
+  substitutions, and two-sided-invertible gauges, derivation of compatible bulk
+  matrices and the substituted characteristic-polynomial identity at every
+  level; the filtered ring and bulk flat equations producing the inputs are not
+  constructed;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten

@@ -217,12 +217,13 @@
       "manuscript_label": "lem:formal-base-shift",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_characteristicPolynomial_of_matrixInput"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_characteristicPolynomial_of_matrixInput",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_bulkSystem_compatible_and_charpoly"
       ],
-      "objects": "Finite small and bulk monodromy matrices over one commutative coefficient ring, a fixed-divisor coefficient endomorphism, and an invertible comparison matrix.",
-      "hypotheses": "The bulk monodromy matrix is explicitly equal to the conjugate of the coefficient-substituted small monodromy matrix by the supplied integral-frame gauge.",
-      "conclusion": "The bulk characteristic polynomial equals the coefficientwise divisor substitution in the small characteristic polynomial.",
-      "cautions": "The filtered coefficient ring, unit and divisor decomposition, filtration-positive remainder, string and divisor equations, compatible finite-quotient bulk gauges, and their inverse limit are absent; the matrix comparison is supplied rather than constructed, and no analytic specialization is represented."
+      "objects": "At one level, finite small and bulk monodromy matrices over a commutative coefficient ring, a fixed-divisor coefficient endomorphism, and an invertible comparison matrix. At all finite levels, coefficient rings and reductions, compatible small matrices, compatible divisor-substitution endomorphisms, and compatible two-sided-invertible gauge matrices.",
+      "hypotheses": "At one level the bulk matrix is explicitly the conjugate of the coefficient-substituted small matrix. In the finite-level system, reductions commute with the substitutions and carry the small matrix, gauge, and inverse gauge to the preceding level; the two displayed inverse equations hold at every level.",
+      "conclusion": "At one level, the bulk characteristic polynomial equals the coefficientwise divisor substitution in the small characteristic polynomial. Across the finite-level system, Lean derives compatibility of the bulk matrices and proves this characteristic-polynomial identity at every level.",
+      "cautions": "The complete separated filtered coefficient ring, identification of its finite quotients with the supplied coefficient rings, unit and divisor decomposition, filtration-positive remainder, string and divisor equations, compatible solutions of the bulk flat equations, inverse-limit gauge, and analytic specialization are not represented. The finite-level matrix, substitution, and gauge inputs are supplied rather than constructed."
     },
     {
       "manuscript_label": "lem:numerical-base-change",
