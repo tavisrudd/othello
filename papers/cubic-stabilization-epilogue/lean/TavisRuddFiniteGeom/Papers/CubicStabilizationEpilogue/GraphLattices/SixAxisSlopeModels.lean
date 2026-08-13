@@ -364,6 +364,31 @@ theorem sixAxisTwoQuadraticSlope_concreteFiniteEtale_split :
     sixAxisTwoQuadraticSlopeOver_mul_eigenbasis _ _
       sixAxisQuadraticSlopeRoot_equation⟩
 
+/-- The same marked diagonalization written directly over the concrete `F4`
+used for the principal gluing packet. -/
+theorem sixAxisTwoQuadraticSlope_f4Marked_split :
+    sixAxisTwoQuadraticEigenbasis F4 sixAxisQuadraticSlopeRootInF4 *
+        sixAxisTwoQuadraticEigenbasisInverse F4
+          sixAxisQuadraticSlopeRootInF4 = 1 ∧
+      sixAxisTwoQuadraticEigenbasisInverse F4
+          sixAxisQuadraticSlopeRootInF4 *
+        sixAxisTwoQuadraticEigenbasis F4
+          sixAxisQuadraticSlopeRootInF4 = 1 ∧
+      sixAxisTwoQuadraticSlopeOver F4 *
+          sixAxisTwoQuadraticEigenbasis F4
+            sixAxisQuadraticSlopeRootInF4 =
+        sixAxisTwoQuadraticEigenbasis F4
+            sixAxisQuadraticSlopeRootInF4 *
+          sixAxisTwoQuadraticDiagonal F4
+            sixAxisQuadraticSlopeRootInF4 := by
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  letI : CharP F4 2 := charP_of_injective_algebraMap' (ZMod 2) 2
+  exact ⟨sixAxisTwoQuadraticEigenbasis_mul_inverse _ _,
+    sixAxisTwoQuadraticEigenbasis_inverse_mul _ _,
+    sixAxisTwoQuadraticSlopeOver_mul_eigenbasis _ _
+      sixAxisQuadraticSlopeRootInF4_equation_and_exotic.1⟩
+
 /-- The characteristic-three one-point model is a scalar slope on the full
 four-dimensional depth-one block. -/
 def sixAxisThreeScalarSlope (value : ZMod 3) :

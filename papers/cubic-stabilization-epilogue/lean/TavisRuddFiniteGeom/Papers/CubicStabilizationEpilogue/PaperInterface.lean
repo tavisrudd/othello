@@ -1480,9 +1480,10 @@ Lean adjoins a marked root of `t²+t+1` to `F₂`, proves that the resulting fie
 is a finite etale algebra of degree two, constructs an `F₂`-algebra equivalence
 with the concrete four-element field used for the gluing packet.  For the
 chosen equivalence, Lean proves that the transported marked root is neither
-`0` nor `1` and is exchanged with its distinct conjugate by Frobenius.  It also exhibits
-mutually inverse eigenbasis matrices that diagonalize the two companion
-blocks.  No prior naming distinguishes the two exotic gluing scalars, so this
+`0` nor `1` and is exchanged with its distinct conjugate by Frobenius.  It also
+exhibits mutually inverse eigenbasis matrices that diagonalize the two
+companion blocks both in the root-adjoining field and directly over the
+concrete four-element field.  No prior naming distinguishes the two exotic gluing scalars, so this
 identifies the transported root only as one member of their Frobenius pair.
 This constructs the algebraic splitting
 object for the displayed residue model, but does not identify it or the
@@ -1510,6 +1511,21 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
       GraphLattices.f4Frobenius
           GraphLattices.sixAxisQuadraticSlopeRootInF4 =
         GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1 ∧
+      (GraphLattices.sixAxisTwoQuadraticEigenbasis GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 *
+          GraphLattices.sixAxisTwoQuadraticEigenbasisInverse GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 = 1 ∧
+        GraphLattices.sixAxisTwoQuadraticEigenbasisInverse GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 *
+          GraphLattices.sixAxisTwoQuadraticEigenbasis GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 = 1 ∧
+        GraphLattices.sixAxisTwoQuadraticSlopeOver GraphLattices.F4 *
+            GraphLattices.sixAxisTwoQuadraticEigenbasis GraphLattices.F4
+              GraphLattices.sixAxisQuadraticSlopeRootInF4 =
+          GraphLattices.sixAxisTwoQuadraticEigenbasis GraphLattices.F4
+              GraphLattices.sixAxisQuadraticSlopeRootInF4 *
+            GraphLattices.sixAxisTwoQuadraticDiagonal GraphLattices.F4
+              GraphLattices.sixAxisQuadraticSlopeRootInF4) ∧
       GraphLattices.sixAxisQuadraticSlopeRoot ^ 2 +
           GraphLattices.sixAxisQuadraticSlopeRoot + 1 = 0 ∧
       GraphLattices.sixAxisTwoQuadraticEigenbasis
@@ -1543,6 +1559,7 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
     GraphLattices.sixAxisQuadraticSlopeRootInF4_equation_and_exotic,
     GraphLattices.sixAxisQuadraticSlopeRootInF4_frobenius_conjugate,
     GraphLattices.sixAxisQuadraticSlopeRootInF4_frobenius_eq_add_one,
+    GraphLattices.sixAxisTwoQuadraticSlope_f4Marked_split,
     GraphLattices.sixAxisQuadraticSlopeRoot_equation,
     GraphLattices.sixAxisTwoQuadraticSlope_concreteFiniteEtale_split⟩
 
