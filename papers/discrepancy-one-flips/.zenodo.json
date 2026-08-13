@@ -1,0 +1,28 @@
+{
+  "title": "Standard flips of discrepancy one: extremal J-normalization and the Meijer aperture at nu = 1",
+  "description": "This note completes the discrepancy-one range r = s + 1, s >= 1, in Shen and Shoemaker's extremal quantum-spectrum and Gamma-class argument for standard flips. An exact z-order count shows that their hypergeometric I-function is already J-normalized throughout this range, including every codimension-two blow-up. The note also applies the epsilon = 1/2 branch of their Barnes asymptotic theorem at nu = 1 and proves that the corrected Meijer sector still has the common aperture required for the nonzero-eigenvalue and tame asymptotic classes. The rank-one projective-bundle degeneration is excluded exactly.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "standard flips",
+    "blow-ups",
+    "quantum cohomology",
+    "quantum spectrum",
+    "Gamma classes",
+    "semiorthogonal decompositions",
+    "Givental cone",
+    "J-functions",
+    "Meijer G-functions",
+    "asymptotic classes"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}

@@ -183,6 +183,7 @@ boundary, and reproducible entry points.
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -371,6 +372,32 @@ public mirror.
 ---
 
 ### Other papers
+
+#### Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1
+
+[PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [Repository](https://github.com/tavisrudd/discrepancy-one-flips) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924799-blue.svg)](https://doi.org/10.5281/zenodo.21924799)
+
+**Standout result.** Shen and Shoemaker's extremal quantum-spectrum and
+Gamma-class argument extends through the omitted discrepancy-one range
+`r = s + 1`, `s ≥ 1`, including every codimension-two blow-up.
+
+> *Abstract* Shen and Shoemaker compute the extremal quantum spectrum of a standard flip `X ⇢ X'` with exceptional locus `P(V) ⊂ X`, `rank V = r`, `rank V' = s`, and show that the Gamma-class decomposition of `H*(X)` attached to the Belmans--Fu--Raedschelders semiorthogonal decomposition is a decomposition into asymptotic classes. Their Theorem 4.4, which identifies an explicit hypergeometric series with the extremal `J`-function of the local model, assumes `r-s>1`; their Remark 4.5(3) asserts that for `r-s≤1` the series is not `J`-normalized; and the Barnes asymptotic expansion of their Section 7 is applied under the same inequality. The printed dependency chain of their Theorems 1.2, 1.4 and 9.14 therefore does not reach the discrepancy-one range `r=s+1`, `s≥1`, which contains every codimension-two blow-up.
+>
+> We supply the two missing steps. First, the degree-`d` summand of their formula (35) has `z`-order at most `1-s-(r-s)d`; for `r=s+1` and `s≥1` this is at most `-1` for every `d≥1`, so the series is `z1+t̄+O(z⁻¹)`, no mirror-map correction arises, and the cone membership recorded in Remark 4.5(3) identifies the series with the extremal `J`-function. The negative assertion of Remark 4.5(3) is accurate only in the degenerate case `s=0`. Second, at `ν:=r-s=1` the sector printed after their Lemma 7.4 is unavailable, being the `ε=1` case of their own Theorem A.1; the correct `ε=1/2` sector still meets the sector of their Proposition 8.2 in an open sector of opening `2π` that contains both the nonzero-eigenvalue ray and the tame ray. With the reductions of their Sections 9.1--9.4 unchanged, this extends Theorems 1.2, 1.4, 9.14 and Corollary 1.5 to every standard flip with `r=s+1` and `s≥1`.
+
+**Delivers.** A source-local correction: the missing `I`-to-`J`
+normalization, the correct Meijer aperture at `ν=1`, and the exact exclusion
+of the rank-one projective-bundle degeneration.
+
+**Who cares.** Algebraic geometers working on quantum cohomology, standard
+flips and blow-ups, Gamma classes, semiorthogonal decompositions, or Meijer
+asymptotics.
+
+**Why it matters.** The omitted range is geometrically basic: it includes
+every codimension-two blow-up. The repair uses the source's own cone
+membership and Appendix A, and changes no higher-discrepancy statement.
+
+---
 
 #### Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds
 

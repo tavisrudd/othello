@@ -1,5 +1,7 @@
 # Standard flips of discrepancy one
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924799-blue.svg)](https://doi.org/10.5281/zenodo.21924799)
+
 ## Read the paper
 
 [**Open the paper (PDF) →**](discrepancy_one_flips.pdf)
