@@ -239,6 +239,88 @@ theorem sixAxisQuadraticSlope_markedProjectivePair :
   rw [first]
   exact Option.some.inj equality.symm
 
+/-- Every element of the concrete four-element field is `0`, `1`, the
+transported marked root, or its conjugate `root+1`. -/
+theorem f4_eq_zero_or_one_or_markedRoot_or_conjugate (value : F4) :
+    value = 0 ∨ value = 1 ∨
+      value = sixAxisQuadraticSlopeRootInF4 ∨
+      value = sixAxisQuadraticSlopeRootInF4 + 1 := by
+  by_cases isZero : value = 0
+  · exact Or.inl isZero
+  by_cases isOne : value = 1
+  · exact Or.inr (Or.inl isOne)
+  right
+  right
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  letI : CharP F4 2 := charP_of_injective_algebraMap' (ZMod 2) 2
+  letI : Fintype F4 := Fintype.ofFinite F4
+  have cardinality : Fintype.card F4 = 4 := by
+    simpa [Nat.card_eq_fintype_card] using natCard_F4
+  have fourthPower : value ^ 4 = value := by
+    simpa [cardinality] using (FiniteField.pow_card value)
+  have polynomial : value ^ 2 + value + 1 = 0 := by
+    have factored :
+        value * (value - 1) * (value ^ 2 + value + 1) = 0 := by
+      calc
+        value * (value - 1) * (value ^ 2 + value + 1) =
+            value ^ 4 - value := by ring
+        _ = 0 := sub_eq_zero.mpr fourthPower
+    rcases mul_eq_zero.mp factored with firstFactor | result
+    · rcases mul_eq_zero.mp firstFactor with zero | one
+      · exact (isZero zero).elim
+      · exact (isOne (sub_eq_zero.mp one)).elim
+    · exact result
+  have two : (2 : F4) = 0 := CharP.cast_eq_zero F4 2
+  have product :
+      (value - sixAxisQuadraticSlopeRootInF4) *
+        (value - (sixAxisQuadraticSlopeRootInF4 + 1)) = 0 := by
+    rw [sub_eq_add_neg, sub_eq_add_neg, CharTwo.neg_eq, CharTwo.neg_eq]
+    linear_combination polynomial +
+      sixAxisQuadraticSlopeRootInF4_equation_and_exotic.1 +
+      two * (value * sixAxisQuadraticSlopeRootInF4 - 1)
+  rcases mul_eq_zero.mp product with root | conjugate
+  · exact Or.inl (sub_eq_zero.mp root)
+  · exact Or.inr (sub_eq_zero.mp conjugate)
+
+/-- The nonfixed affine-chart points of projective Frobenius are exactly the
+transported marked quadratic root and its conjugate. -/
+theorem f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair
+    (point : Option F4) :
+    f4ProjectiveFrobenius point ≠ point ↔
+      point = some sixAxisQuadraticSlopeRootInF4 ∨
+        point = some (sixAxisQuadraticSlopeRootInF4 + 1) := by
+  constructor
+  · intro moved
+    cases point with
+    | none => exact (moved rfl).elim
+    | some value =>
+        rcases f4_eq_zero_or_one_or_markedRoot_or_conjugate value with
+          zero | one | root | conjugate
+        · subst value
+          exact (moved (by simp [f4ProjectiveFrobenius, f4Frobenius])).elim
+        · subst value
+          exact (moved (by simp [f4ProjectiveFrobenius, f4Frobenius])).elim
+        · exact Or.inl (congrArg some root)
+        · exact Or.inr (congrArg some conjugate)
+  · rintro (rfl | rfl)
+    · intro fixed
+      apply sixAxisQuadraticSlope_markedProjectivePair.2.2
+      calc
+        some sixAxisQuadraticSlopeRootInF4 =
+            f4ProjectiveFrobenius
+              (some sixAxisQuadraticSlopeRootInF4) := fixed.symm
+        _ = some (sixAxisQuadraticSlopeRootInF4 + 1) :=
+          sixAxisQuadraticSlope_markedProjectivePair.1
+    · intro fixed
+      apply sixAxisQuadraticSlope_markedProjectivePair.2.2
+      calc
+        some sixAxisQuadraticSlopeRootInF4 =
+            f4ProjectiveFrobenius
+              (some (sixAxisQuadraticSlopeRootInF4 + 1)) :=
+          sixAxisQuadraticSlope_markedProjectivePair.2.1.symm
+        _ = some (sixAxisQuadraticSlopeRootInF4 + 1) := fixed
+
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/
 theorem sixAxisQuadraticSlopePolynomial_aeval :

@@ -231,7 +231,8 @@ quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing
 field that carries the marked root into the two-element exotic Frobenius
 orbit and realizes that orbit as a distinct affine-chart two-cycle in the
-five-point projective packet.  Its identification with the manuscript's geometric marked
+five-point projective packet; Lean also proves that these are exactly the two
+nonfixed affine-chart points.  Its identification with the manuscript's geometric marked
 extension and principal kernel remains open.  Lean now proves the exact
 connected-family persistence step for any supplied continuous map into a
 finite discrete kernel packet and specializes it to the transported marked

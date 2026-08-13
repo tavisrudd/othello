@@ -1675,7 +1675,9 @@ theorem principalGluing_selfAdjointGraph_isotropic_halfDimension
 
 /-- Finite-field Frobenius core for the exotic pair: squaring on the chosen
 `F4` fixes exactly `0` and `1`, is involutive, and exchanges every other
-element with a distinct conjugate.  This statement does not identify a
+element with a distinct conjugate.  The two nonfixed affine-chart points are
+identified exactly as the transported marked quadratic root and `root+1`.
+This statement does not identify a
 normalizer action with Frobenius. -/
 theorem principalGluing_f4Frobenius_fixed_and_exchanged :
     (∀ a : GraphLattices.F4,
@@ -1692,13 +1694,19 @@ theorem principalGluing_f4Frobenius_fixed_and_exchanged :
         GraphLattices.f4Frobenius (GraphLattices.f4Frobenius a) = a) ∧
     (∀ point : Option GraphLattices.F4,
       GraphLattices.f4ProjectiveFrobenius point = point ↔
-        point = none ∨ point = some 0 ∨ point = some 1) := by
+        point = none ∨ point = some 0 ∨ point = some 1) ∧
+    (∀ point : Option GraphLattices.F4,
+      GraphLattices.f4ProjectiveFrobenius point ≠ point ↔
+        point = some GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+          point =
+            some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)) := by
   exact ⟨GraphLattices.f4FrobeniusRingEquiv_apply,
     GraphLattices.f4ProjectiveFrobenius_eq_option_map,
     GraphLattices.f4Frobenius_fixed_iff,
     GraphLattices.f4Frobenius_involutive,
     GraphLattices.f4Frobenius_exchanges_nonPrimeElement,
-    GraphLattices.f4ProjectiveFrobenius_fixed_iff⟩
+    GraphLattices.f4ProjectiveFrobenius_fixed_iff,
+    GraphLattices.f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair⟩
 
 /-- Concrete polarization calculation from the principal-gluing proof.  The
 trace of the determinant on `F4²` is nondegenerate over `F2`; the induced

@@ -97,8 +97,9 @@ The 141 reviewer-facing terminals currently verify:
   exact persistence of any continuously classified finite discrete packet on
   a connected base, including the explicit transported marked-root pair in
   the affine `F4` chart, conditional on the geometric classifying map;
-- the fixed points and exchanged non-prime-field pair for squaring Frobenius
-  on the concrete four-element field, without identifying any geometric
+- the fixed points for squaring Frobenius on the concrete four-element field
+  and the exact nonfixed affine-chart locus given by the transported marked
+  root and `root+1`, without identifying any geometric
   normalizer action with that field map;
 - the manuscript's concrete trace-determinant form on `F4²`, its
   nondegeneracy, the nondegeneracy of the induced two-copy alternating form,
