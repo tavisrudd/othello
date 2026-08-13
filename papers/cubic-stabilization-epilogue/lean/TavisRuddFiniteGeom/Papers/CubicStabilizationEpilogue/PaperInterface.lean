@@ -26,6 +26,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseS
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -57,6 +58,28 @@ theorem universalCH0_of_sixAxisMinimalClass_and_Voisin
     ∀ parameter, geometry.universallyCH0Trivial (fibre parameter) :=
   Applications.universalCH0Triviality_of_primitiveMinimalClassFamily
     geometry fibre familyInput voisinCriterion
+
+/-- Exact conditional assembly of the manuscript's separation theorem for one
+typed family.  Primitive-minimal-class algebraicity and Voisin's criterion
+give fibrewise universal `CH₀`-triviality; a supplied projective-bundle formula
+transports it to the stabilization; the typed packet input gives irrationality;
+and a supplied period-map conclusion gives non-isotriviality.  Every
+geometric, Chow-theoretic, quantum, and moduli premise remains visible. -/
+theorem separationFamily_of_sixAxis_packet_and_period_inputs
+    {Base Variety Jacobian : Type*}
+    (packet : Quantum.PacketData Variety)
+    (birationalInput : Quantum.DimensionFourBirationalInput packet)
+    (cycleGeometry : Applications.CubicCycleTrivialityGeometry
+      Variety Jacobian)
+    (rationalGeometry : Applications.CubicThreefoldGeometry Variety)
+    (isNonIsotrivial : (Base → Variety) → Prop)
+    (fibre : Base → Variety)
+    (input : Applications.SeparationFamilyInput packet birationalInput
+      cycleGeometry rationalGeometry isNonIsotrivial fibre) :
+    Applications.SeparationFamilyConclusion cycleGeometry rationalGeometry
+      isNonIsotrivial fibre :=
+  Applications.separationFamily_of_cycle_packet_and_period_inputs packet
+    birationalInput cycleGeometry rationalGeometry isNonIsotrivial fibre input
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

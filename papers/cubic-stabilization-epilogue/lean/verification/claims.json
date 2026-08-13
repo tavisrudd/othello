@@ -5,12 +5,14 @@
   "claims": [
     {
       "manuscript_label": "thm:separation-family",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The smooth nonstandard A5-invariant pencil of cubic threefolds and its projective-line stabilization.",
-      "hypotheses": "A complex point of the connected smooth locus of the pencil.",
-      "conclusion": "Universal CH0-triviality of the fibre and its stabilization, irrationality of the stabilization, and non-isotriviality of the family.",
-      "cautions": "The cycle argument is fibrewise and the irrationality argument applies more broadly than the A5-family."
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separationFamily_of_sixAxis_packet_and_period_inputs"
+      ],
+      "objects": "A parameter type; one typed family of variety objects used simultaneously by cycle and rationality signatures; a separate intermediate-Jacobian type; a named projective-line product operation; predicates for smooth cubic status, universal CH0-triviality, rationality, and family non-isotriviality; and a natural-valued packet multiplicity.",
+      "hypotheses": "For every parameter, the fibre is a smooth complex cubic threefold with algebraic primitive minimal class, and the complete one-step packet/birational input holds. Voisin's primitive-minimal-class equivalence, preservation of universal CH0-triviality under the named projective-line product, and non-isotriviality of the supplied family are explicit premises.",
+      "conclusion": "Every fibre is universally CH0-trivial; every named projective-line stabilization is universally CH0-trivial and irrational; and the family satisfies the supplied non-isotriviality predicate.",
+      "cautions": "Lean checks only the final composition. It does not construct the nonstandard A5-invariant pencil, its connected smooth locus, the invariant cubic space, its fibres, intermediate Jacobians, Chow groups, projective-bundle formula, primitive minimal classes or their algebraicity, Voisin's criterion, the framed quantum packet and operation formulas, weak-factorization comparison, coarse moduli, or the nonconstant period map. The cycle conclusion is fibrewise, and no relative universal cycle is asserted. The typed irrationality input is the broader every-cubic input and does not use the A5 symmetry."
     },
     {
       "manuscript_label": "thm:every-cubic",
