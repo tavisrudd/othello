@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 138 reviewer terminals.
+1 complete; 139 reviewer terminals.
 
-The 138 reviewer-facing terminals currently verify:
+The 139 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -82,7 +82,9 @@ The 138 reviewer-facing terminals currently verify:
   quadratic; its entrywise scalar extension to any characteristic-two
   commutative ring containing a supplied root is identified with the
   same-pattern matrix and diagonalized by an explicit basis, with the two
-  conjugate roots each repeated twice; and a scalar block over `F3`,
+  conjugate roots each repeated twice; the concrete root-adjoining extension
+  is proved finite etale over `F2` and carries that marked explicit
+  diagonalization; and a scalar block over `F3`,
   without identifying
   those models with the geometric principal kernel;
 - the projective-line classification into scalar graphs and the vertical

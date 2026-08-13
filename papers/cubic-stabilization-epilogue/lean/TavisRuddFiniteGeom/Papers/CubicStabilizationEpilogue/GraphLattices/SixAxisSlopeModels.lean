@@ -2,6 +2,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import Mathlib.Algebra.Polynomial.SpecificDegree
 import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
+import Mathlib.RingTheory.Etale.Field
 
 /-!
 # Explicit residue-field slope models for the six-axis chart
@@ -16,9 +17,9 @@ The two finite characteristic-two checks below are evaluated by ordinary
 kernel reduction with `decide`: one equality of explicit `4 × 4` matrices and
 one exhaustive check over the two elements of `ZMod 2`.  No native-code
 decision procedure, external certificate, or oracle is used.  The
-minimal-polynomial derivation, scalar-extension identity, inverse and
-splitting identities, and characteristic-three scalar claims are symbolic
-kernel-checked proofs.
+minimal-polynomial derivation, construction of its quadratic finite-etale
+splitting field, scalar-extension identity, inverse and splitting identities,
+and characteristic-three scalar claims are symbolic kernel-checked proofs.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -75,6 +76,55 @@ theorem sixAxisQuadraticSlopePolynomial_irreducible :
   · intro value root
     apply zmodTwo_quadraticSlopePolynomial_no_root value
     simpa [sixAxisQuadraticSlopePolynomial, Polynomial.IsRoot] using root
+
+/-- The concrete quadratic splitting field obtained by adjoining a root of
+`t²+t+1` to `F₂`. -/
+abbrev SixAxisQuadraticSplittingField :=
+  AdjoinRoot sixAxisQuadraticSlopePolynomial
+
+noncomputable instance sixAxisQuadraticSlopePolynomial_irreducibleFact :
+    Fact (Irreducible sixAxisQuadraticSlopePolynomial) :=
+  ⟨sixAxisQuadraticSlopePolynomial_irreducible⟩
+
+/-- The marked root in the concrete quadratic splitting field. -/
+def sixAxisQuadraticSlopeRoot : SixAxisQuadraticSplittingField :=
+  AdjoinRoot.root sixAxisQuadraticSlopePolynomial
+
+/-- The marked root satisfies the defining quadratic equation. -/
+theorem sixAxisQuadraticSlopeRoot_equation :
+    sixAxisQuadraticSlopeRoot ^ 2 + sixAxisQuadraticSlopeRoot + 1 = 0 := by
+  change AdjoinRoot.root sixAxisQuadraticSlopePolynomial ^ 2 +
+      AdjoinRoot.root sixAxisQuadraticSlopePolynomial + 1 = 0
+  have equation := AdjoinRoot.eval₂_root sixAxisQuadraticSlopePolynomial
+  simp [sixAxisQuadraticSlopePolynomial] at equation
+  exact equation
+
+noncomputable instance sixAxisQuadraticSplittingField_moduleFiniteInstance :
+    Module.Finite (ZMod 2) SixAxisQuadraticSplittingField :=
+  sixAxisQuadraticSlopePolynomial_monic.finite_adjoinRoot
+
+noncomputable instance sixAxisQuadraticSplittingField_charP :
+    CharP SixAxisQuadraticSplittingField 2 :=
+  charP_of_injective_algebraMap
+    (algebraMap (ZMod 2) SixAxisQuadraticSplittingField).injective 2
+
+noncomputable instance sixAxisQuadraticSplittingField_formallyEtale :
+    Algebra.FormallyEtale (ZMod 2) SixAxisQuadraticSplittingField :=
+  Algebra.FormallyEtale.of_isSeparable (ZMod 2)
+    SixAxisQuadraticSplittingField
+
+noncomputable instance sixAxisQuadraticSplittingField_etaleInstance :
+    Algebra.Etale (ZMod 2) SixAxisQuadraticSplittingField where
+
+/-- The concrete quadratic splitting field is finite over `F₂`. -/
+theorem sixAxisQuadraticSplittingField_moduleFinite :
+    Module.Finite (ZMod 2) SixAxisQuadraticSplittingField := by
+  infer_instance
+
+/-- The concrete quadratic splitting field is etale over `F₂`. -/
+theorem sixAxisQuadraticSplittingField_etale :
+    Algebra.Etale (ZMod 2) SixAxisQuadraticSplittingField := by
+  infer_instance
 
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/
@@ -196,6 +246,30 @@ theorem sixAxisTwoQuadraticSlopeOver_mul_eigenbasis (ω : K)
   all_goals linear_combination two
 
 end QuadraticSplitting
+
+/-- Over the explicitly constructed finite-etale quadratic extension, the
+displayed four-dimensional slope matrix has the marked invertible eigenbasis
+and diagonal form with the two conjugate roots, each repeated twice. -/
+theorem sixAxisTwoQuadraticSlope_concreteFiniteEtale_split :
+    sixAxisTwoQuadraticEigenbasis SixAxisQuadraticSplittingField
+          sixAxisQuadraticSlopeRoot *
+        sixAxisTwoQuadraticEigenbasisInverse SixAxisQuadraticSplittingField
+          sixAxisQuadraticSlopeRoot = 1 ∧
+      sixAxisTwoQuadraticEigenbasisInverse SixAxisQuadraticSplittingField
+          sixAxisQuadraticSlopeRoot *
+        sixAxisTwoQuadraticEigenbasis SixAxisQuadraticSplittingField
+          sixAxisQuadraticSlopeRoot = 1 ∧
+      sixAxisTwoQuadraticSlopeOver SixAxisQuadraticSplittingField *
+          sixAxisTwoQuadraticEigenbasis SixAxisQuadraticSplittingField
+            sixAxisQuadraticSlopeRoot =
+        sixAxisTwoQuadraticEigenbasis SixAxisQuadraticSplittingField
+            sixAxisQuadraticSlopeRoot *
+          sixAxisTwoQuadraticDiagonal SixAxisQuadraticSplittingField
+            sixAxisQuadraticSlopeRoot := by
+  exact ⟨sixAxisTwoQuadraticEigenbasis_mul_inverse _ _,
+    sixAxisTwoQuadraticEigenbasis_inverse_mul _ _,
+    sixAxisTwoQuadraticSlopeOver_mul_eigenbasis _ _
+      sixAxisQuadraticSlopeRoot_equation⟩
 
 /-- The characteristic-three one-point model is a scalar slope on the full
 four-dimensional depth-one block. -/

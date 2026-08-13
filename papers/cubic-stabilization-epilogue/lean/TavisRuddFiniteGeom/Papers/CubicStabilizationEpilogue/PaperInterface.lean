@@ -1452,8 +1452,9 @@ theorem sixAxisLocalChart_twoPrimary_minimalPolynomialModel :
 /-- Explicit spectral splitting of the characteristic-two model.  Over any
 commutative characteristic-two ring containing a root `ω` of `t²+t+1`, the
 displayed change of basis is invertible and diagonalizes the two companion
-blocks with diagonal `(ω,ω+1,ω,ω+1)`.  No existence or geometric
-identification of such a splitting ring is asserted. -/
+blocks with diagonal `(ω,ω+1,ω,ω+1)`.  This terminal does not construct such
+a ring or identify it geometrically; the next terminal constructs the
+specific quadratic finite-etale extension of `F₂` needed by this model. -/
 theorem sixAxisLocalChart_twoPrimary_splitsOverQuadraticRoot
     {K : Type*} [CommRing K] [CharP K 2] (ω : K)
     (root : ω ^ 2 + ω + 1 = 0) :
@@ -1472,6 +1473,45 @@ theorem sixAxisLocalChart_twoPrimary_splitsOverQuadraticRoot
     GraphLattices.sixAxisTwoQuadraticEigenbasis_mul_inverse K ω,
     GraphLattices.sixAxisTwoQuadraticEigenbasis_inverse_mul K ω,
     GraphLattices.sixAxisTwoQuadraticSlopeOver_mul_eigenbasis K ω root⟩
+
+/-- Concrete finite-etale spectral splitting of the characteristic-two model.
+Lean adjoins a marked root of `t²+t+1` to `F₂`, proves that the resulting field
+is a finite etale algebra, and exhibits mutually inverse eigenbasis matrices
+that diagonalize the two companion blocks.  This constructs the algebraic
+splitting object for the displayed residue model, but does not identify it or
+the displayed matrix with the manuscript's geometric principal kernel. -/
+theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
+    Module.Finite (ZMod 2) GraphLattices.SixAxisQuadraticSplittingField ∧
+      Algebra.Etale (ZMod 2) GraphLattices.SixAxisQuadraticSplittingField ∧
+      GraphLattices.sixAxisQuadraticSlopeRoot ^ 2 +
+          GraphLattices.sixAxisQuadraticSlopeRoot + 1 = 0 ∧
+      GraphLattices.sixAxisTwoQuadraticEigenbasis
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot *
+          GraphLattices.sixAxisTwoQuadraticEigenbasisInverse
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot = 1 ∧
+      GraphLattices.sixAxisTwoQuadraticEigenbasisInverse
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot *
+          GraphLattices.sixAxisTwoQuadraticEigenbasis
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot = 1 ∧
+      GraphLattices.sixAxisTwoQuadraticSlopeOver
+            GraphLattices.SixAxisQuadraticSplittingField *
+          GraphLattices.sixAxisTwoQuadraticEigenbasis
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot =
+        GraphLattices.sixAxisTwoQuadraticEigenbasis
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot *
+          GraphLattices.sixAxisTwoQuadraticDiagonal
+            GraphLattices.SixAxisQuadraticSplittingField
+            GraphLattices.sixAxisQuadraticSlopeRoot := by
+  exact ⟨GraphLattices.sixAxisQuadraticSplittingField_moduleFinite,
+    GraphLattices.sixAxisQuadraticSplittingField_etale,
+    GraphLattices.sixAxisQuadraticSlopeRoot_equation,
+    GraphLattices.sixAxisTwoQuadraticSlope_concreteFiniteEtale_split⟩
 
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
