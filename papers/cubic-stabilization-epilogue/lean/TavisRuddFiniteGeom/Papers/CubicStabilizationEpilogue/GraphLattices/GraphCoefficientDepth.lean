@@ -86,6 +86,44 @@ theorem graphChange_product_entrywise_iff_three_blocks
     · exact lowerLeft
     · simpa [graphDescentBlockMatrix] using integralZero
 
+/-- Adjointness for an invertible coefficient form may be written either in
+the dual-form convention `Tᵃ B⁻¹ = B⁻¹ T` or, equivalently, as
+`B Tᵃ = T B`.  The statement is noncommutative and therefore applies
+directly to matrix blocks. -/
+theorem dualForm_adjoint_iff_coefficient_adjoint
+    {S : Type*} [Ring S]
+    (coefficientForm inverseCoefficientForm slope adjointSlope : S)
+    (leftInverse : inverseCoefficientForm * coefficientForm = 1)
+    (rightInverse : coefficientForm * inverseCoefficientForm = 1) :
+    adjointSlope * inverseCoefficientForm = inverseCoefficientForm * slope ↔
+      coefficientForm * adjointSlope = slope * coefficientForm := by
+  constructor <;> intro adjoint
+  · calc
+      coefficientForm * adjointSlope =
+          (coefficientForm * adjointSlope) *
+            (inverseCoefficientForm * coefficientForm) := by
+              rw [leftInverse, mul_one]
+      _ = coefficientForm *
+          (adjointSlope * inverseCoefficientForm) * coefficientForm := by
+            simp only [mul_assoc]
+      _ = coefficientForm *
+          (inverseCoefficientForm * slope) * coefficientForm := by rw [adjoint]
+      _ = (coefficientForm * inverseCoefficientForm) * slope *
+          coefficientForm := by simp only [mul_assoc]
+      _ = slope * coefficientForm := by rw [rightInverse, one_mul]
+  · calc
+      adjointSlope * inverseCoefficientForm =
+          (inverseCoefficientForm * coefficientForm) *
+            (adjointSlope * inverseCoefficientForm) := by
+              rw [leftInverse, one_mul]
+      _ = inverseCoefficientForm * (coefficientForm * adjointSlope) *
+          inverseCoefficientForm := by simp only [mul_assoc]
+      _ = inverseCoefficientForm * (slope * coefficientForm) *
+          inverseCoefficientForm := by rw [adjoint]
+      _ = inverseCoefficientForm * slope *
+          (coefficientForm * inverseCoefficientForm) := by simp only [mul_assoc]
+      _ = inverseCoefficientForm * slope := by rw [rightInverse, mul_one]
+
 /-- Expansion of the slope commutator after writing each slope as a scalar
 part plus a depth-divisible error.  Centrality hypotheses express that the
 displayed scalar parts are scalar matrices on their blocks. -/

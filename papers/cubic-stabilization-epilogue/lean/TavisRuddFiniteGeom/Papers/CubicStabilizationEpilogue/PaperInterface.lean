@@ -209,6 +209,19 @@ theorem graphCoefficient_graphCoordinate_block_identity
     GraphLattices.graphChange_product_entrywise_iff_three_blocks
       inverseDepth slope adjointSlope coefficient⟩
 
+/-- Exact equivalence between the dual-form and coefficient-form adjoint
+conventions used in the marked graph theorem. -/
+theorem graphCoefficient_dualForm_adjoint_iff
+    {S : Type*} [Ring S]
+    (coefficientForm inverseCoefficientForm slope adjointSlope : S)
+    (leftInverse : inverseCoefficientForm * coefficientForm = 1)
+    (rightInverse : coefficientForm * inverseCoefficientForm = 1) :
+    adjointSlope * inverseCoefficientForm = inverseCoefficientForm * slope ↔
+      coefficientForm * adjointSlope = slope * coefficientForm :=
+  GraphLattices.dualForm_adjoint_iff_coefficient_adjoint
+    coefficientForm inverseCoefficientForm slope adjointSlope
+    leftInverse rightInverse
+
 /-- Expansion isolating the scalar slope-difference term from the two
 depth-divisible error terms in a pair of positive-depth slope blocks. -/
 theorem graphCoefficient_slopeCommutator_expansion
