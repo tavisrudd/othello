@@ -10,6 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1716,6 +1717,51 @@ theorem principalGluing_projectiveLine_packets :
     GraphLattices.f4_projectiveLine_card,
     ⟨GraphLattices.optionEquivProjectiveLine (ZMod 3)⟩,
     GraphLattices.f3_projectiveLine_card⟩
+
+/-- Explicit six-point characteristic-two coefficient-heart calculation.
+Lean gives canonical four coordinates on the augmentation hyperplane modulo
+the constant line, derives the matrices induced by translation and inversion
+on the six-point projective-line labelling over `F5`, and proves that their
+common matrix commutant is exactly the four-element quadratic algebra
+`{0,1,W,W+1}` with `W²+W+1=0`.  This is the modular algebra appearing in the
+manuscript's coefficient-heart argument, but this terminal does not identify
+the generated permutation group with the manuscript's particular `A5` action
+on its six conjugate `D5` subgroups. -/
+theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
+    (∀ heart : Fin 4 → GraphLattices.F2,
+      (∑ point, GraphLattices.sixPointHeartRepresentative heart point) = 0 ∧
+      GraphLattices.sixPointHeartCoordinates
+          (GraphLattices.sixPointHeartRepresentative heart) = heart ∧
+      GraphLattices.sixPointHeartCoordinates
+          (GraphLattices.sixPointHeartRepresentative heart ∘
+            GraphLattices.sixPointTranslationPreimage) =
+        Matrix.mulVec GraphLattices.sixPointHeartTranslation heart ∧
+      GraphLattices.sixPointHeartCoordinates
+          (GraphLattices.sixPointHeartRepresentative heart ∘
+            GraphLattices.sixPointInversionPreimage) =
+        Matrix.mulVec GraphLattices.sixPointHeartInversion heart) ∧
+    (∀ (vector : Fin 6 → GraphLattices.F2),
+      (∑ point, vector point) = 0 →
+        (GraphLattices.sixPointHeartCoordinates vector = 0 ↔
+          ∀ point, vector point = vector 5)) ∧
+    GraphLattices.sixPointHeartCommutantRoot ^ 2 +
+        GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
+    (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+      (matrix * GraphLattices.sixPointHeartTranslation =
+          GraphLattices.sixPointHeartTranslation * matrix ∧
+        matrix * GraphLattices.sixPointHeartInversion =
+          GraphLattices.sixPointHeartInversion * matrix) ↔
+        matrix = 0 ∨ matrix = 1 ∨
+          matrix = GraphLattices.sixPointHeartCommutantRoot ∨
+          matrix = GraphLattices.sixPointHeartCommutantRoot + 1) := by
+  exact ⟨fun heart ↦
+      ⟨GraphLattices.sixPointHeartRepresentative_sum_zero heart,
+        GraphLattices.sixPointHeartCoordinates_representative heart,
+        GraphLattices.sixPointHeartCoordinates_translation heart,
+        GraphLattices.sixPointHeartCoordinates_inversion heart⟩,
+    GraphLattices.sixPointHeartCoordinates_eq_zero_iff_constant,
+    GraphLattices.sixPointHeartCommutantRoot_quadratic,
+    GraphLattices.sixPointHeart_commonCommutant_classification⟩
 
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has

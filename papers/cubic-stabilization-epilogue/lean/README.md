@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 143 reviewer terminals.
+1 complete; 144 reviewer terminals.
 
-The 143 reviewer-facing terminals currently verify:
+The 144 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -93,7 +93,13 @@ The 143 reviewer-facing terminals currently verify:
   those models with the geometric principal kernel;
 - the projective-line classification into scalar graphs and the vertical
   line, the five- and four-member finite-field packet counts, and the
-  isotropic half-dimension calculation for self-adjoint graph slopes; and the
+  isotropic half-dimension calculation for self-adjoint graph slopes;
+- explicit coordinates for the six-point characteristic-two augmentation
+  quotient by its constant line, the translation and inversion matrices in
+  those coordinates, and their exact four-element quadratic matrix
+  commutant, without yet identifying those permutations with the manuscript's
+  `A5` action on the conjugate `D5` subgroups;
+- the
   exact persistence of any continuously classified finite discrete packet on
   a connected base, including the explicit transported marked-root pair both
   in the affine `F4` chart and directly in the actual projective line,

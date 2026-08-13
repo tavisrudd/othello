@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 75 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 76 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 143 audited terminals.  The rejecting manuscript inventory covers all
+exports 144 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -226,7 +226,13 @@ The strongest base-data composite now also reduces one supplied Laurent
 small-monodromy matrix over the base ring to construct every compatible
 quotient small matrix.  Its geometric monodromy origin remains unproved.
 
-The explicit characteristic-two companion model now has a constructed
+The concrete six-point characteristic-two augmentation quotient now has
+explicit four coordinates modulo its constant line; translation and inversion
+on the six-point projective-line labelling induce displayed matrices whose
+common commutant is exactly the quadratic four-element algebra.  Identifying
+those permutations with the manuscript's `A5` action on its six conjugate
+`D5` subgroups and proving simplicity remain open.  The explicit
+characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing
 field that carries the marked root into the two-element exotic Frobenius

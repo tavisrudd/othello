@@ -231,8 +231,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-75 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 143 reviewer terminals, audit
+76 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -398,7 +398,12 @@ base-shift packet, while the manuscript's actual filtration remains unidentified
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The explicit two-primary companion model now has a concrete quadratic
+The six-point characteristic-two augmentation quotient is now represented in
+explicit four coordinates modulo its constant line.  Two displayed
+projective-line permutations induce matrices whose common commutant is exactly
+the four-element quadratic algebra; identification with the manuscript's
+specific `A5` action and proof of simplicity remain open.  The explicit
+two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
 with the concrete `F4` gluing field is proved as an `F2`-algebra equivalence,
 and its marked root and `root+1` are proved to be exactly the two nonfixed
@@ -412,7 +417,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 143-terminal axiom transcript
+The aggregate build, source correspondence, and 144-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent
