@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 47 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 48 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 88 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 0 absent, 14 fragmentary, 8 conditional
+exports 89 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -123,6 +123,13 @@ The cubic packet is now an exact conditional deduction: from the supplied
 four-factor framed-monodromy characteristic polynomial, Lean proves that the
 two primitive-sixth roots occur once each, the two unit blocks contribute
 nothing, and the multiplicity is exactly two for every smooth cubic threefold.
+Divisor-tagging vanishing is now an exact conditional endpoint deduction: two
+supplied final characteristic-polynomial equalities over `ℚ` imply equality
+of intrinsic, tagged, and specialized primitive-sixth multiplicities and hence
+transfer vanishing to every strictly admissible specialization.  The formal
+signature deliberately does not model the source coefficient fields, a common
+comparison field, scalar-extension maps, completed-series injection, or the
+bulk-gauge witness producing those equalities.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -130,7 +137,8 @@ are construction of the geometric marked finite-etale splitting and eigenbasis,
 proof that geometric divisor descent supplies the formal block conditions, actual six-axis
 kernel identification and persistence, cohomological realization, and the
 Voisin/relative-family bridge.  The next quantum gates are the
-differential-module base-change proofs, completed divisor tagging, operation
+differential-module base-change proofs, the completed-series and comparison
+semantics producing the supplied divisor-tagging equalities, operation
 comparisons, the geometric argument producing the `{1,-1}` spectrum in low
 dimensions, and Cai's actual integral-`z` block diagonalization.
 
@@ -161,6 +169,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/LowDimensionalVanishing.lean
     Applications/FramedOperationFormulas.lean
     Applications/CubicPacketFormula.lean
+    Applications/DivisorTaggingVanishing.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/
@@ -214,6 +223,11 @@ are current, and the committed paper export verifies byte-for-byte in
   exact multiplicity two from Cai's supplied framed characteristic polynomial;
   the geometric connection, integral-loop block comparison, rank-one numerical
   curve lattice, and numerical-Novikov passage remain explicit missing inputs.
+- **Divisor-tagging deduction:** settled at the conditional endpoint.  Lean
+  transports primitive-sixth multiplicity and vanishing through two supplied
+  final polynomial equalities over `ℚ`; the completed-series separation,
+  coefficient-field embeddings, common-closure comparison, and bulk-gauge
+  construction producing those equalities remain the exact open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
