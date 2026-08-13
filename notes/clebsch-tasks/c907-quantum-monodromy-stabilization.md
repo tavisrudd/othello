@@ -385,6 +385,14 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   residual lemma is that exceptional point purity holds on the inserted
   arrows and survives the deformation-to-normal-cone/relative-gluing step.  See
   `../2026-08-13-c907-birational-normal-splitting-reduction.md`.
+- The stronger formal point-covector shortcut fails at a precise frame
+  boundary.  Iritani (5.44) makes the cohomological point pure in the
+  exceptional `q^{-1/s}` Laurent-cusp initial matrix, but Section 5.8.2's
+  reconstructed fundamental solution is normalized at that cusp and is not
+  identified with the intrinsic large-radius Gamma point section at `q=0`.
+  The missing center coefficient is again an analytic-continuation/Stokes
+  datum, not a consequence of formal flatness.  See
+  `../2026-08-13-c907-formal-point-covector-frame-gap.md`.
 
 ## Active frontier: `m=2`
 
