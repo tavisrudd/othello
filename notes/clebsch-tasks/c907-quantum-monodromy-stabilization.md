@@ -43,6 +43,16 @@ class: rank is preserved on the pullback K-summand and vanishes on every
 exceptional K-summand for a nonstacky point off the centre.  It still does
 not cover the locally toroidal flips in a general cobordism.
 
+The opposite/rigidity red team is closed in
+`../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
+Engel--de Gaay Fortman--Schreieder proves stable irrationality for very
+general cubic threefolds by minimal-class parity.  It does not specialize to
+the special universal-`CH0` loci.  For every smooth cubic, the constant
+fibration `X x P2 -> P2` violates the available `K`/`K^2` and twisting
+hypotheses and already has a line-centred relative conic-bundle Sarkisov link.
+Thus a direct rigidity proof would require a new relative pliability
+classification; it is not a cheaper Gold closure.
+
 **Load next:** `c907-solver-dossier.md`.
 
 **Execution plan:** `../2026-08-11-c907-moonshot-attack-plan.md`.
