@@ -42,7 +42,8 @@ strictness, Yu/Zhang for topology, Kuznetsov plus Kollar for the carrier bound.
 1. **Toric order zero.**  For `Bl_(P^3)P^5`, the local saturated finite-value
    atlas has no unclassified tangent circuit: the zero/infinity,
    translated/infinity, and joint `y`/Rees-infinity sectors close empty/free
-   or at the four marked residual points.  Assemble one finite common fan,
+   or at the four marked residual points; all ten unordered coordinate-orbit
+   types are explicit.  Assemble one finite common fan,
    verify every overlap and
    completeness, prove product-pair excision, and transport the residual
    `P^3+ZU` system.  Then fix the hyperplane-equivariant Gamma/Orlov seed.  The

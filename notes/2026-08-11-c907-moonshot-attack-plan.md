@@ -150,7 +150,8 @@ chart is now closed separately: its noncompact `y` faces are empty/free and
 its compact face is exactly `W_(P^3)+ZU` with four residual Morse points.
 The zero/infinity, joint `y`/Rees-infinity, and translated/infinity seams are
 now closed: every local face is empty/free or is exactly one of the four
-marked residual Morse points.  Assemble the locally complete atlas into one finite common
+marked residual Morse points, and an exhaustive table covers all ten unordered
+coordinate-orbit types.  Assemble the locally complete atlas into one finite common
 normalized fan, prove all overlap identities and completeness, then construct
 a product-pair collar cover.  The latter remains a separate topological
 theorem.  Iritani identifies the residual Gamma lattice with the Orlov
@@ -158,8 +159,10 @@ subgroup, not the individual Beilinson thimbles.  See
 `2026-08-12-c907-tropical-critical-fan-pivot.md` and
 `2026-08-12-c907-five-support-star-compression.md`, together with
 `2026-08-12-c907-b0-cinf-seam-star-fan.md`,
+`2026-08-12-c907-bunit-cunit-generic-star.md`,
 `2026-08-12-c907-b1-cinf-seam-star-fan.md` and
-`2026-08-12-c907-joint-y-rees-infinity-fan.md`.
+`2026-08-12-c907-joint-y-rees-infinity-fan.md`; orbit-level closeout is
+`2026-08-12-c907-local-boundary-orbit-atlas-closeout.md`.
 
 Wave-2C status: ordinary grading and duality do not bound length—an explicit
 self-dual formal length-two model survives.  Geometry nevertheless closes the

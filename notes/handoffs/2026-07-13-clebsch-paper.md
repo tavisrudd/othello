@@ -78,7 +78,9 @@ translated/infinity seams are now empty/free (the latter over a residual
 value disk in `C*`), and the full
 double-translated `B=C=1` chart closes every joint `y`/Rees-infinity valuation:
 positive-order faces are empty/free, while order zero is either free or exactly
-the four marked residual points.  The local tangent atlas is therefore
+the four marked residual points.  The formerly implicit zero/infinity and
+generic/generic types are also closed, giving an exhaustive table of all ten
+unordered coordinate-orbit types.  The local tangent atlas is therefore
 complete.  The live analytic gate is its assembly into one finite common
 normalized fan with verified transitions, overlap ideals, and completeness,
 then proper collar topology and the hyperplane-equivariant Orlov/Gamma marking.

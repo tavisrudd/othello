@@ -96,7 +96,9 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   closes every joint `y`/Rees-infinity valuation: positive-order faces are
   empty/free, while order zero forces compact `y` and gives either the free
   `f_Q+bc` face or exactly the four marked residual Morse points.  Thus no
-  local tangent circuit remains in the named atlas.  The remaining algebra is
+  local tangent circuit remains in the exhaustive ten-unordered-type atlas;
+  the formerly implicit `(0,infinity)` and `(g,g)` types are now explicit.
+  The remaining algebra is
   global: assemble one finite common normalized fan, verify all transition and
   overlap ideals and fan completeness, then prove the separate proper collar
   topology.
@@ -241,8 +243,11 @@ Exterior-star compression and exact replays:
 `../2026-08-12-c907-b1-cunit-star-fan.md`,
 `../2026-08-12-c907-b1-c0-seam-star-fan.md`,
 `../2026-08-12-c907-b0-cinf-seam-star-fan.md`,
+`../2026-08-12-c907-bunit-cunit-generic-star.md`,
 `../2026-08-12-c907-b1-cinf-seam-star-fan.md`, and
 `../2026-08-12-c907-joint-y-rees-infinity-fan.md`.
+Orbit-level completeness:
+`../2026-08-12-c907-local-boundary-orbit-atlas-closeout.md`.
 
 ## Gold architecture after `m=2`
 
