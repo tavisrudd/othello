@@ -2,9 +2,11 @@
 
 **Lane:** `clebsch`
 
-**Status:** theorem-grade structural assembly, conditional on the direct
-proper exterior strict-model and nearby-cycle/direct-image comparison
-hypotheses stated below.  The value vanishing
+**Status:** theorem-grade structural assembly.  The direct proper exterior
+strict model is now constructed, and standard proper pushforward for
+nearby/vanishing cycles carries its two-model bad-image calculation to the
+intrinsic nearby value object.  Conditional only on the stated local `j_!`
+Morse identification, the value vanishing
 cycles of the toric codimension-two pilot are supported on the four residual
 Morse sections.  Consequently its intrinsic value-localized
 compact-support thimble group has rank four.  The directed `P^3` Seifert form
@@ -23,8 +25,8 @@ and put
 \]
 
 Choose a proper compactification over the parameter/value base and write
-`R\bar a_*j_!` for the resulting intrinsic `!`-pushforward complex.  Assume
-the proper-pushforward/nearby-cycle comparison and define the nearby value
+`R\bar a_*j_!` for the resulting intrinsic `!`-pushforward complex.  By
+proper-pushforward/nearby-cycle comparison, define the nearby value
 object
 
 \[
@@ -38,8 +40,8 @@ Here `L_0` is the value map on the central nearby-cycle space inside the
 chosen compactification; the right side is independent of that choice by
 proper modification descent.
 
-Assume that the supported pair-of-pants fan maps to the fixed marked
-projective/`y` ambient, that its relative regularization gives a direct proper
+The supported pair-of-pants fan maps to the fixed marked projective/`y`
+ambient, and its relative regularization gives the constructed direct proper
 strict closure
 
 \[
@@ -154,11 +156,12 @@ graded, but it changes ordinary directed Stokes flags.
 - **TT:** support and rank are one theorem; directed pairing is a second.
   Keeping the relative cone and `can/var` package explicit prevents those
   logically different claims from being conflated.
-- **Settled:** exact exterior bad image, whole protected ratio fibre,
+- **Settled:** the direct proper exterior model, exact exterior bad image,
+  whole protected ratio fibre,
   two-model bad-image separation, four-section support, and the resulting
-  rank-four nearby thimble group, subject to the direct proper
-  exterior-model and nearby-cycle/direct-image hypotheses.
-- **Open:** serialize those direct proper-model inputs in the fixed ambient;
-  transport relative duality, `can/var`, orientations, and labels; then prove
+  rank-four nearby thimble group, conditional only on identifying the actual
+  local `j_!` value cycles with the normalized residual Morse groups.
+- **Open:** transport relative duality, `can/var`, orientations, and labels;
+  then prove
   the integral residual Orlov/Rees comparison.  No additional support-mask or
   common-collar enumeration is called for.
