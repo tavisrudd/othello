@@ -1,5 +1,6 @@
 import Mathlib.Algebra.Ring.Pi
 import Mathlib.RingTheory.Ideal.Lattice
+import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
@@ -19,6 +20,11 @@ when this separatedness condition is joined by surjectivity onto compatible
 families.  The latter surjectivity is the coefficientwise completeness
 predicate used here.
 
+For any supplied ideal `I`, Lean also constructs the power filtration `I^n`
+and proves the precise multiplicative lower bound: if `x ∈ I^m` and
+`y ∈ I^n`, then `x * y ∈ I^(m+n)`.  This separate adic model is not identified
+with the manuscript's filtration.
+
 This module does not construct the manuscript's coefficient ring or its
 filtration, prove that the supplied filtration is complete or separated,
 identify the quotients with geometric coefficient rings, or construct
@@ -37,6 +43,23 @@ ring. -/
 structure DecreasingIdealFiltration (R : Type u) [CommRing R] where
   ideal : ℕ → Ideal R
   antitone : Antitone ideal
+
+/-- The adic filtration by the powers of one ideal. -/
+def adicFiltration {R : Type u} [CommRing R] (ideal : Ideal R) :
+    DecreasingIdealFiltration R where
+  ideal level := ideal ^ level
+  antitone _ _ h := Ideal.pow_le_pow_right h
+
+/-- Adic filtration lower bounds add under multiplication. -/
+theorem adicFiltration_mul_mem_add {R : Type u} [CommRing R]
+    (ideal : Ideal R) {left right : R} {leftOrder rightOrder : ℕ}
+    (hleft : left ∈ (adicFiltration ideal).ideal leftOrder)
+    (hright : right ∈ (adicFiltration ideal).ideal rightOrder) :
+    left * right ∈
+      (adicFiltration ideal).ideal (leftOrder + rightOrder) := by
+  change left * right ∈ ideal ^ (leftOrder + rightOrder)
+  rw [pow_add]
+  exact Ideal.mul_mem_mul hleft hright
 
 namespace DecreasingIdealFiltration
 

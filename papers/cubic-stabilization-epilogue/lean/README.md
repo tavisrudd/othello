@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 114 reviewer terminals.
+1 complete; 115 reviewer terminals.
 
-The 114 reviewer-facing terminals currently verify:
+The 115 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -112,8 +112,11 @@ The 114 reviewer-facing terminals currently verify:
   is injective exactly when the intersection of the ideals is zero and
   bijective exactly when the filtration is also complete in the sense that
   every compatible family has a preimage; Lean does not prove these conditions
-  for the supplied filtration; multiplicative filtration laws and
-  identification with the manuscript's geometric coefficient quotients are
+  for the supplied filtration; powers of any ideal separately give a
+  decreasing adic filtration in which multiplication sends levels `m` and `n`
+  into level `m+n`;
+  Lean does not identify the supplied filtration with this adic model, and
+  identification with the manuscript's geometric coefficient quotients is
   not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base

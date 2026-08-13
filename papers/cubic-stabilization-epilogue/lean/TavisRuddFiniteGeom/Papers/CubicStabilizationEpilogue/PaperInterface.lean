@@ -2116,6 +2116,19 @@ theorem filteredCoefficientQuotient_reduction_and_substitution
     filtration.ofRingElement_injective_iff_iInf_eq_bot,
     filtration.quotientFamilyRingHom_bijective_iff_complete_and_iInf_eq_bot⟩
 
+/-- Powers of any ideal form a decreasing filtration, and the product of an
+element of order at least `m` with one of order at least `n` has order at least
+`m + n`.  This constructs a multiplicative adic model; it does not identify
+the manuscript's coefficient filtration with powers of a particular ideal. -/
+theorem filteredCoefficientQuotient_adicFiltration_mul_mem_add
+    {R : Type*} [CommRing R] (ideal : Ideal R)
+    {left right : R} {leftOrder rightOrder : ℕ}
+    (hleft : left ∈ (Quantum.adicFiltration ideal).ideal leftOrder)
+    (hright : right ∈ (Quantum.adicFiltration ideal).ideal rightOrder) :
+    left * right ∈
+      (Quantum.adicFiltration ideal).ideal (leftOrder + rightOrder) :=
+  Quantum.adicFiltration_mul_mem_add ideal hleft hright
+
 /-- Compatible finite-level small matrices, divisor substitutions, and
 two-sided-invertible gauges determine compatible bulk matrices whose
 characteristic polynomials are the substituted small characteristic
