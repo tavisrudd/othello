@@ -218,7 +218,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 74 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 136 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 137 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -370,13 +370,17 @@ supplying compatible small monodromy matrices and divisor substitutions yields
 the compatible bulk matrices and
 their substituted characteristic-polynomial system; the geometric small
 connection and string/divisor inputs remain unconstructed.
+In the stronger filtered composite, one filtration-preserving base
+endomorphism constructs all compatible Laurent quotient divisor substitutions,
+leaving compatible small monodromy matrices as the only finite-level matrix
+input.  Its geometric divisor-equation origin remains unproved.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 136-terminal axiom transcript
+The aggregate build, source correspondence, and 137-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

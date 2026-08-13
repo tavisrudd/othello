@@ -3004,6 +3004,58 @@ theorem positiveEvaluatedFormalBaseShift_bulkSystem
       input.connection input.curvature, ?_, input.bulkSystemConclusion⟩
   exact input.formalBaseShiftSystem_gauge_inverse
 
+/-- Strengthen the positive-evaluated formal-base-shift packet by supplying
+one filtration-preserving endomorphism of the base coefficient ring instead of
+separate divisor substitutions at every quotient level.  Lean constructs the
+Laurent quotient substitutions, proves their canonical adjacent compatibility,
+and derives the compatible bulk matrices and characteristic-polynomial
+identities from the constructed evaluated gauges.  Compatible small monodromy
+matrices remain supplied; no geometric identification of the endomorphism or
+small monodromy is proved. -/
+theorem positiveEvaluatedFilteredFormalBaseShift_substitution_and_bulkSystem
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : Quantum.PositiveEvaluatedFilteredFormalBaseShiftInput
+      Coordinate Index B) :
+    (∀ level,
+      input.divisorSubstitution level =
+        Quantum.laurentSeriesMap
+          (input.divisorEndomorphism.quotientEndomorphism level)) ∧
+    (∀ level coefficient,
+      input.filtration.positiveLaurentReduction level
+          (input.divisorSubstitution (level + 1) coefficient) =
+        input.divisorSubstitution level
+          (input.filtration.positiveLaurentReduction level coefficient)) ∧
+    (let system := input.evaluatedInput.formalBaseShiftSystem;
+      (∀ level,
+        letI := system.coefficientRing level
+        letI := system.coefficientRing (level + 1)
+        (system.bulkMonodromy (level + 1)).map
+            (input.filtration.positiveLaurentReduction level) =
+          system.bulkMonodromy level) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        (system.bulkMonodromy level).charpoly =
+          (input.smallMonodromy level).charpoly.map
+            (input.divisorSubstitution level)) ∧
+      ∀ level,
+        letI := system.coefficientRing level
+        letI := system.coefficientRing (level + 1)
+        (system.bulkMonodromy (level + 1)).charpoly.map
+            (input.filtration.positiveLaurentReduction level) =
+          (system.bulkMonodromy level).charpoly) ∧
+    (let system := input.evaluatedInput.formalBaseShiftSystem;
+      ∀ level,
+        letI := system.coefficientRing level
+        system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (system.bulkMonodromy level).charpoly ∧
+          system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (input.smallMonodromy level).charpoly.map
+              (input.divisorSubstitution level)) := by
+  exact ⟨fun _ ↦ rfl, input.divisorSubstitution_compatible,
+    input.bulkSystemConclusion⟩
+
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
 forces

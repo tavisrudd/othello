@@ -13,8 +13,11 @@ The resulting matrices and their chosen inverses are compatible under
 reduction.
 
 This module inserts those constructed gauges into the finite-level formal
-base-shift matrix packet.  The compatible small monodromy matrices and divisor
-substitutions remain supplied data.  Lean derives the compatible bulk matrices,
+base-shift matrix packet.  In the first branch, compatible small monodromy
+matrices and quotient divisor substitutions remain supplied data.  A stronger
+filtered branch constructs every quotient divisor substitution from one
+supplied filtration-preserving base-ring endomorphism; compatible small
+monodromy matrices remain supplied.  Lean derives the compatible bulk matrices,
 their characteristic-polynomial substitution identity, and the compatible
 bulk characteristic-polynomial system.  No geometric quantum connection,
 string or divisor equation, analytic monodromy, or geometric comparison theorem is
@@ -151,6 +154,126 @@ theorem bulkSystemConclusion
     input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem_level⟩
 
 end PositiveEvaluatedFormalBaseShiftInput
+
+/-- Positive evaluated flat-gauge data in which the compatible divisor
+substitutions are induced from one filtration-preserving base-ring
+endomorphism.  Only the compatible small-monodromy matrices remain supplied at
+the finite levels. -/
+structure PositiveEvaluatedFilteredFormalBaseShiftInput
+    (Coordinate : Type u) (Index : Type v) (B : Type w)
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B] where
+  filtration : MultiplicativeIdealFiltration B
+  parameter : Coordinate → B
+  positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1
+  connection : Coordinate → Matrix Index Index
+    (MvPowerSeries Coordinate (LaurentSeries B))
+  curvature : ∀ first second,
+    (connection second).map (multivariablePartialDerivative first) -
+        (connection first).map (multivariablePartialDerivative second) +
+        connection first * connection second -
+        connection second * connection first = 0
+  divisorEndomorphism :
+    filtration.toDecreasingIdealFiltration.PreservingEndomorphism
+  smallMonodromy : ∀ level, Matrix Index Index
+    (LaurentSeries (filtration.toDecreasingIdealFiltration.QuotientRing level))
+  small_compatible : ∀ level row column,
+    filtration.positiveLaurentReduction level
+        (smallMonodromy (level + 1) row column) =
+      smallMonodromy level row column
+
+namespace PositiveEvaluatedFilteredFormalBaseShiftInput
+
+/-- The divisor substitution on one Laurent quotient induced by the supplied
+filtration-preserving base-ring endomorphism. -/
+noncomputable def divisorSubstitution
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedFilteredFormalBaseShiftInput Coordinate Index B)
+    (level : ℕ) :
+    LaurentSeries (input.filtration.toDecreasingIdealFiltration.QuotientRing level) →+*
+      LaurentSeries (input.filtration.toDecreasingIdealFiltration.QuotientRing level) :=
+  laurentSeriesMap (input.divisorEndomorphism.quotientEndomorphism level)
+
+/-- The induced Laurent divisor substitutions commute with canonical adjacent
+quotient reduction. -/
+theorem divisorSubstitution_compatible
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedFilteredFormalBaseShiftInput Coordinate Index B)
+    (level : ℕ)
+    (coefficient : LaurentSeries
+      (input.filtration.toDecreasingIdealFiltration.QuotientRing (level + 1))) :
+    input.filtration.positiveLaurentReduction level
+        (input.divisorSubstitution (level + 1) coefficient) =
+      input.divisorSubstitution level
+        (input.filtration.positiveLaurentReduction level coefficient) := by
+  ext exponent
+  simp only [MultiplicativeIdealFiltration.positiveLaurentReduction,
+    PositiveEvaluatedFilteredFormalBaseShiftInput.divisorSubstitution,
+    laurentSeriesMap_coeff]
+  exact input.divisorEndomorphism.reduction_quotientEndomorphism
+    level (coefficient.coeff exponent)
+
+/-- The positive-evaluated formal-base-shift input whose divisor substitutions
+are constructed from the preserving base endomorphism. -/
+noncomputable def evaluatedInput
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedFilteredFormalBaseShiftInput Coordinate Index B) :
+    PositiveEvaluatedFormalBaseShiftInput Coordinate Index B where
+  filtration := input.filtration
+  parameter := input.parameter
+  positive := input.positive
+  connection := input.connection
+  curvature := input.curvature
+  divisorSubstitution := input.divisorSubstitution
+  substitution_compatible := input.divisorSubstitution_compatible
+  smallMonodromy := input.smallMonodromy
+  small_compatible := input.small_compatible
+
+/-- From one preserving base endomorphism and compatible small monodromy
+matrices, the constructed evaluated gauges yield the full bulk matrix and
+characteristic-polynomial packet. -/
+theorem bulkSystemConclusion
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : PositiveEvaluatedFilteredFormalBaseShiftInput Coordinate Index B) :
+    let system := input.evaluatedInput.formalBaseShiftSystem
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      (system.bulkMonodromy (level + 1)).map
+          (input.filtration.positiveLaurentReduction level) =
+        system.bulkMonodromy level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      (system.bulkMonodromy level).charpoly =
+        (input.smallMonodromy level).charpoly.map
+          (input.divisorSubstitution level)) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      (system.bulkMonodromy (level + 1)).charpoly.map
+          (input.filtration.positiveLaurentReduction level) =
+        (system.bulkMonodromy level).charpoly) ∧
+    ∀ level,
+      letI := system.coefficientRing level
+      system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (system.bulkMonodromy level).charpoly ∧
+        system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (input.smallMonodromy level).charpoly.map
+            (input.divisorSubstitution level) := by
+  exact ⟨input.evaluatedInput.formalBaseShiftSystem.bulkMonodromy_compatible,
+    input.evaluatedInput.formalBaseShiftSystem.bulkMonodromy_charpoly,
+    input.evaluatedInput.formalBaseShiftSystem.bulkCharacteristicPolynomial_compatible,
+    input.evaluatedInput.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem_level⟩
+
+end PositiveEvaluatedFilteredFormalBaseShiftInput
 
 end Quantum
 
