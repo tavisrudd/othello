@@ -62,11 +62,10 @@ calculation.  Both pin the same input refinement by SHA-256.
 
 At a marked type `1`, write the pair-of-pants relation as `B+U=1` or
 `C+V=1`.  Its equation `B=1` or `C=1` is an auxiliary algebraic face, not an
-actual control boundary.  Thus a polar derivative called
-`coarse_unmark d_B` (respectively `d_C`) is taken in the partial Rees chart
-**before** imposing that auxiliary equation.  This is precisely the
-coarse-log-polar convention of
-`2026-08-12-c907-relative-log-polar-control.md`.
+actual control boundary.  Exterior witnesses are nevertheless required to
+be regular tangent derivations on the genuine coarse boundary.  A formal
+`d_B` normal to a type-`1` face is not such a derivation; the exhaustive
+table below instead uses the independent infinity residue.
 
 All residue factors named below are inverted in the associated residue
 torus.  A unit witness is therefore a literal row/column minor of the coarse
@@ -118,12 +117,13 @@ falls into exactly one of these cases:
 3. `5` is absent and `4` is absent: some `x_i` occurs, and
    `dlog_xi H=x_i` is a unit.
 4. `4` occurs but an `x_j` is absent: `dlog_xj H=-P` is a unit.
-5. exactly `01234`: before the auxiliary `B=1` (respectively `C=1`)
-   equation is imposed, `d_BH=-P` (respectively `d_CH=-P`) is a unit.
+5. exactly `01234`: `dlog_c H=-P` for `(1,infinity)`, and symmetrically
+   `dlog_b H=-P` for `(infinity,1)`; the infinity residue is a genuine tangent
+   unit coordinate.
 
-This exhaustive partition proves the other 64 records.  It also exposes why
-the calculation must be coarse: case 5 is invisible after taking the fine
-`B=1` face first.
+This exhaustive partition proves the other 64 records using regular tangent
+derivations.  No derivative normal to the auxiliary `B=1` or `C=1` face is
+used.
 
 Every order-zero support mask *without* `L` is automatic once the partial
 Rees/Fitting strictness is attached: its graph initial is independent of the

@@ -2,12 +2,12 @@
 
 **Lane:** `clebsch`
 
-**Status:** conditional structural lemma and hostile-audited partial
-application.  It reduces coarse polar strictness to a regular tangent-vector
-lift and applies to 68 of the 70 exterior unit records.  The two
-`coarse_unmark d_B/d_C` records do not have regular lifts along their type-`1`
-exceptional faces and remain in the transition/Fitting gate.  The lemma does
-not prove chart coverage or alter the protected `(1,1)` residual star.
+**Status:** conditional structural lemma and hostile-audited application.  It
+reduces coarse polar strictness to a regular tangent-vector lift and applies
+to all 70 exterior unit records.  The initially proposed
+`coarse_unmark d_B/d_C` lifts were nonregular; the exact repair uses the
+independent infinity-residue logarithmic derivative.  The lemma does not
+prove chart coverage or alter the protected `(1,1)` residual star.
 
 ## The filtered tangent lemma
 
@@ -68,23 +68,24 @@ derivations have regular tangent lifts on the corresponding coarse stratum:
 
 The logarithmic residue derivations are invariant on the Kummer cover and
 descend; ordinary residue derivatives are used only on a genuine unimodular
-scheme chart or after invariance is checked.  For 68 `unit` records in
+scheme chart or after invariance is checked.  For all 70 `unit` records in
 `2026-08-12-c907-l-mask-coarse-polar.json`, the displayed residue unit is the
 reduction (1) of a regular tangent derivative.
 
-There are exactly two exceptions:
+Two records require a corrected witness:
 
 \[
  ((1,\infty),01234),\qquad ((\infty,1),01234). \tag{3a}
 \]
 
-Their certificate witness is `coarse_unmark d_B` or `d_C`.  In a type-`1`
+The rejected witness was `coarse_unmark d_B` or `d_C`.  In a type-`1`
 chart `B=1-\epsilon_Bb`, so
 `partial_B=-\epsilon_B^{-1}partial_b`; this is not regular on
-`\epsilon_B=0` and does not give a tangent field on the boundary.  Keeping
-the auxiliary face unimposed does not change that identity.  These two
-records require a genuine imbalanced-coordinate or intrinsic coarse Fitting
-calculation and are not claimed here.
+`\epsilon_B=0` and does not give a tangent field on the boundary.  But in
+`(1,infinity)` the reciprocal term is `P=Q/(Xc)`, so the genuine infinity
+residue field `dlog_c` gives `dlog_c H=-P`; symmetrically `(infinity,1)` uses
+`dlog_b H=-P`.  These are regular tangent logarithmic derivations and close
+both records without coarse unmarking.
 
 This statement concerns the intrinsic tropical closure of the very-affine
 graph.  Filtered Koszul strictness identifies its chart special fibre with the
@@ -101,8 +102,8 @@ strict boundary equation is `L=0`.  They have no point over
 `S=G_m,L`, hence no point over any bounded `Omega` contained in `C^*`.
 
 Masks without `L` leave `L` as a literal product coordinate and are likewise
-submersive.  Consequently, apart from the two transition records (3a), the
-81,367-cell exterior value-control problem has the following structural form:
+submersive.  Consequently the 81,367-cell exterior value-control problem has
+the following structural form:
 
 \[
  \boxed{\text{free }L}\quad\text{or}\quad
@@ -110,8 +111,7 @@ submersive.  Consequently, apart from the two transition records (3a), the
  \boxed{L=0}. \tag{4}
 \]
 
-No Fitting-minor Gröbner replay remains for these cases.  The two records
-(3a) remain explicit exceptions.
+No Fitting-minor Gröbner replay remains for these cases.
 
 ## Exact remaining geometric gate
 
@@ -132,8 +132,8 @@ one coverage statement:
 > the bounded chart (5), in one of its two imbalanced unit-derivative charts,
 > or in an exterior chart covered by (4).
 
-Besides this fan/star compatibility theorem, one must close the two transition
-records (3a).  Once both are supplied, the existing residual and imbalanced
+This is a fan/star compatibility theorem, not a differential strictness
+calculation.  Once supplied, the existing residual and imbalanced
 calculations plus the tangent lemma prove the global exterior Fitting ledger.
 
 ## EJ/TT and mystery ledger
@@ -144,8 +144,7 @@ calculations plus the tangent lemma prove the global exterior Fitting ledger.
 - **TT:** lift vector fields, not Fitting ideals.  The coarse-unmark convention
   is exactly the condition ensuring that the vector field remains tangent to
   the true stratum.
-- **Settled:** differential lifting for 68 unit records; exclusion of the
+- **Settled:** differential lifting for all 70 unit records; exclusion of the
   two `L=0` records; automaticity of every `L`-free mask.
-- **Open:** the two nonregular coarse-unmark transition witnesses;
-  protected-star coverage for the chosen regular fan; then the polar
-  interface/collar theorem.
+- **Open:** protected-star coverage for the chosen regular fan; then the
+  polar interface/collar theorem.

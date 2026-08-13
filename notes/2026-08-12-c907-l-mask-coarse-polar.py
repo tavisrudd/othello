@@ -77,9 +77,10 @@ def support_l_masks(data: dict) -> tuple[dict[tuple[str, str], set[str]], int]:
 def witness(kind: tuple[str, str], mask: str) -> dict:
     """Return an exact polar witness in the stated localized normal model.
 
-    The type `1` is an *auxiliary* pair-of-pants face.  Where a P pivot is
-    labelled `coarse_unmark`, the witness differentiates before imposing the
-    auxiliary equation B=1 or C=1; this is precisely the partial-Rees rule.
+    The type `1` is an *auxiliary* pair-of-pants face.  Witnesses are chosen
+    tangent to the genuine coarse boundary; in particular the infinity
+    residue, not a nonregular derivative normal to B=1 or C=1, handles the
+    full reciprocal-linear mask.
     """
     terms = frozenset(mask)
     if kind == ("g", "1"):
@@ -122,10 +123,10 @@ def witness(kind: tuple[str, str], mask: str) -> dict:
             index = missing[0]
             return {"outcome": "unit", "pivot": f"dlog_x{index} H=-P", "unit": "P"}
         if terms == frozenset("01234"):
-            coordinate = "B" if marked == "b" else "C"
+            infinity_residue = other
             return {
                 "outcome": "unit",
-                "pivot": f"coarse_unmark d_{coordinate} H=-P",
+                "pivot": f"dlog_{infinity_residue} H=-P",
                 "unit": "P",
             }
     if kind == ("1", "1"):
@@ -171,7 +172,7 @@ def encode() -> dict:
         "schema_version": 1,
         "input": {"file": INPUT.name, "sha256": hashlib.sha256(INPUT.read_bytes()).hexdigest()},
         "support_convention": "0=L, 1..3=x_i, 4=P=Q/(x1*x2*x3*B*C), 5=R=U*V",
-        "coarse_convention": "the type-1 pair-of-pants equation is auxiliary; coarse_unmark differentiates before B=1 or C=1 is imposed",
+        "coarse_convention": "the type-1 pair-of-pants equation is auxiliary; exterior witnesses use only derivations tangent to the genuine coarse boundary",
         "localization": "all displayed x_i, P, and residue factors named unit are inverted in the relevant partial initial",
         "checks": {
             "all_81367_cells_recompute_upper_envelope_masks": True,
