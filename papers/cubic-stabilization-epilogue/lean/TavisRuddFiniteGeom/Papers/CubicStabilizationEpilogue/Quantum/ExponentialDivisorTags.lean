@@ -1,4 +1,6 @@
 import Mathlib.Algebra.Module.Submodule.Union
+import Mathlib.Algebra.Polynomial.OfFn
+import Mathlib.Algebra.Polynomial.Roots
 import Mathlib.LinearAlgebra.Vandermonde
 import Mathlib.RingTheory.PowerSeries.Basic
 
@@ -12,12 +14,14 @@ pairwise distinct exponents are linearly independent.  The proof reads the
 first `m` coefficients of a relation among `m` characters, clears the nonzero
 factorials, and applies the Vandermonde determinant criterion.
 
-This is the finite-character step used in divisor tagging.  It does not choose
-an integral one-parameter direction separating a finite collection of divisor
-pairing vectors, construct a completed Novikov ring, identify its
-lowest-valuation support, or prove that an associated graded domain prevents
-cancellation of initial terms.  The proof is symbolic and kernel checked; it
-uses no external computation or oracle.
+This is the finite-character step used in divisor tagging.  For an injective
+finite family of integral pairing vectors, the module also constructs an
+integral separating direction of the form `(1,t,t²,...)` by avoiding the
+finitely many integral roots of the pairwise difference polynomials.  It does
+not construct a completed Novikov ring, identify its lowest-valuation support,
+or prove that an associated graded domain prevents cancellation of initial
+terms.  The proofs are symbolic and kernel checked; they use no external
+computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -120,6 +124,77 @@ theorem exists_dual_separating_formalExponentialCharacters
     coefficients_eq_zero_of_sum_formalExponentialCharacter_eq_zero
       (fun index ↦ functional (vector index)) coefficient
       functional_injective relation⟩
+
+/-- A finite injective family of integral divisor-pairing vectors admits the
+integral one-parameter direction used in divisor tagging.  One may choose a
+direction of the form `(1, t, t², ...)`: every pairwise collision excludes a
+root of a nonzero integral polynomial, and finitely many such polynomials
+exclude only finitely many integers.  After casting into any
+characteristic-zero field `K`, the resulting scalar pairings give linearly
+independent formal exponential characters over `K`.
+
+This proves both the integral-direction and finite Vandermonde parts of the
+manuscript's tagging argument.  It does not construct the finite family as the
+lowest-valuation support of a completed Novikov series or justify passage to
+that support through an associated graded domain. -/
+theorem exists_integralDirection_separating_formalExponentialCharacters
+    {K : Type*} [Field K] [CharZero K]
+    {m rank : ℕ} (vector : Fin m → Fin rank → ℤ)
+    (vector_injective : Function.Injective vector) :
+    ∃ direction : Fin rank → ℤ,
+      Function.Injective
+        (fun index ↦ ∑ coordinate, direction coordinate * vector index coordinate) ∧
+      ∀ coefficient : Fin m → K,
+        (∑ index, coefficient index • formalExponentialCharacter
+          ((∑ coordinate, direction coordinate * vector index coordinate : ℤ) : K) = 0) →
+        coefficient = 0 := by
+  classical
+  let Pair := {pair : Fin m × Fin m // pair.1 ≠ pair.2}
+  let differencePolynomial : Pair → Polynomial ℤ := fun pair ↦
+    Polynomial.ofFn rank
+      (fun coordinate ↦ vector pair.1.1 coordinate - vector pair.1.2 coordinate)
+  have differencePolynomial_ne_zero : ∀ pair, differencePolynomial pair ≠ 0 := by
+    intro pair polynomial_zero
+    have difference_zero :
+        (fun coordinate ↦ vector pair.1.1 coordinate -
+          vector pair.1.2 coordinate) = 0 := by
+      apply Polynomial.injective_ofFn rank
+      simpa [differencePolynomial, Polynomial.ofFn_zero] using polynomial_zero
+    apply pair.2
+    apply vector_injective
+    funext coordinate
+    have := congrFun difference_zero coordinate
+    simpa using sub_eq_zero.mp this
+  let forbidden : Finset ℤ := Finset.univ.biUnion fun pair : Pair ↦
+    (differencePolynomial pair).roots.toFinset
+  obtain ⟨parameter, parameter_not_forbidden⟩ := forbidden.exists_notMem
+  let direction : Fin rank → ℤ := fun coordinate ↦ parameter ^ (coordinate : ℕ)
+  have scalarPairing_injective : Function.Injective
+      (fun index ↦ ∑ coordinate, direction coordinate * vector index coordinate) := by
+    intro left right equal_pairings
+    by_contra distinct_indices
+    let pair : Pair := ⟨(left, right), distinct_indices⟩
+    have root_membership : parameter ∈ (differencePolynomial pair).roots := by
+      rw [Polynomial.mem_roots (differencePolynomial_ne_zero pair)]
+      change (differencePolynomial pair).eval parameter = 0
+      rw [show differencePolynomial pair = Polynomial.ofFn rank
+        (fun coordinate ↦ vector left coordinate - vector right coordinate) by rfl]
+      simp only [Polynomial.ofFn_eq_sum_monomial, Polynomial.eval_finsetSum,
+        Polynomial.eval_monomial]
+      simp only [sub_mul, Finset.sum_sub_distrib]
+      apply sub_eq_zero.mpr
+      simpa [direction, mul_comm] using equal_pairings
+    apply parameter_not_forbidden
+    exact Finset.mem_biUnion.mpr ⟨pair, Finset.mem_univ pair,
+      Multiset.mem_toFinset.mpr root_membership⟩
+  refine ⟨direction, scalarPairing_injective, ?_⟩
+  intro coefficient relation
+  exact coefficients_eq_zero_of_sum_formalExponentialCharacter_eq_zero
+    (fun index ↦
+      ((∑ coordinate, direction coordinate * vector index coordinate : ℤ) : K))
+    coefficient (fun left right equality ↦ scalarPairing_injective <|
+      Int.cast_injective equality)
+    relation
 
 end Quantum
 

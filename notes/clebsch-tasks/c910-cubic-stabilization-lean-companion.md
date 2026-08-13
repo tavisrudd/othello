@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 48 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 49 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 89 audited terminals.  The rejecting manuscript inventory covers all
+exports 91 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -130,6 +130,13 @@ transfer vanishing to every strictly admissible specialization.  The formal
 signature deliberately does not model the source coefficient fields, a common
 comparison field, scalar-extension maps, completed-series injection, or the
 bulk-gauge witness producing those equalities.
+The finite exponential-character step in its human proof is independently
+kernel checked: for any finite injective family of integral pairing vectors,
+Lean constructs an integral direction `(1,t,t²,...)` by avoiding the finite
+root sets of the pairwise difference polynomials and proves linear
+independence of the resulting formal exponentials from their first
+coefficients via Vandermonde.  It does not yet produce the finite initial
+support of a completed Novikov series.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -159,6 +166,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/NumericalNovikov.lean
     Quantum/FormalBaseShift.lean
     Quantum/NovikovAdmissibility.lean
+    Quantum/ExponentialDivisorTags.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
     Quantum/PacketInvariant.lean
@@ -225,9 +233,12 @@ are current, and the committed paper export verifies byte-for-byte in
   curve lattice, and numerical-Novikov passage remain explicit missing inputs.
 - **Divisor-tagging deduction:** settled at the conditional endpoint.  Lean
   transports primitive-sixth multiplicity and vanishing through two supplied
-  final polynomial equalities over `ℚ`; the completed-series separation,
-  coefficient-field embeddings, common-closure comparison, and bulk-gauge
-  construction producing those equalities remain the exact open inputs.
+  final polynomial equalities over `ℚ`.  Its finite exponential-character
+  independence step and the integral separating direction are now proved by
+  finite root avoidance and Vandermonde; the completed-series
+  lowest-support/associated-graded passage, coefficient-field embeddings,
+  common-closure comparison, and bulk-gauge construction remain the exact
+  open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.

@@ -1788,6 +1788,29 @@ theorem finiteDivisorPairing_exponentialCharacters_independent
   Quantum.exists_dual_separating_formalExponentialCharacters
     vector vector_injective
 
+/-- Integral-direction form of the finite divisor-tagging step.  For an
+injective finite family of integral pairing vectors, Lean constructs an
+integral direction `(1,t,t²,...)` with pairwise distinct dot products by
+avoiding the finitely many integral roots of the pairwise difference
+polynomials.  After casting the exponents into any characteristic-zero field,
+the associated formal exponential characters are then linearly independent
+by the Vandermonde theorem.  This does not construct
+the finite family as the lowest-valuation support of a completed Novikov
+series or prove associated-graded noncancellation. -/
+theorem integralDivisorPairing_exponentialCharacters_independent
+    {K : Type*} [Field K] [CharZero K]
+    {m rank : ℕ} (vector : Fin m → Fin rank → ℤ)
+    (vector_injective : Function.Injective vector) :
+    ∃ direction : Fin rank → ℤ,
+      Function.Injective
+        (fun index ↦ ∑ coordinate, direction coordinate * vector index coordinate) ∧
+      ∀ coefficient : Fin m → K,
+        (∑ index, coefficient index • Quantum.formalExponentialCharacter
+          ((∑ coordinate, direction coordinate * vector index coordinate : ℤ) : K) = 0) →
+        coefficient = 0 :=
+  Quantum.exists_integralDirection_separating_formalExponentialCharacters
+    vector vector_injective
+
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/
 theorem packet_multiplicity_eq_of_preserving_chain
