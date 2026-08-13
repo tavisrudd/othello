@@ -10,6 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ExoticStabilizerCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -522,6 +523,25 @@ theorem principalGluing_f4TraceDeterminant_maximalIsotropic :
   exact ⟨GraphLattices.f4TraceDeterminantPairing_nondegenerate,
     GraphLattices.f4MultiplicityAlternatingForm_nondegenerate,
     GraphLattices.f4ScalarGraph_orthogonal_eq⟩
+
+/-- Algebraic core of the manuscript's exotic-stabilizer order calculation.
+Nondegeneracy of the field trace makes any trace-preserving determinant scalar
+equal to one, and the resulting concrete special linear group has order `60`.
+This statement does not identify a permutation stabilizer with that group or
+with `A5`. -/
+theorem principalGluing_exoticStabilizer_algebraicCore :
+    (∀ d : GraphLattices.F4ˣ,
+      (∀ z : GraphLattices.F4,
+        Algebra.trace (ZMod 2) GraphLattices.F4 ((d : GraphLattices.F4) * z) =
+          Algebra.trace (ZMod 2) GraphLattices.F4 z) →
+      d = 1) ∧
+    Nat.card
+      (Matrix.SpecialLinearGroup (Fin 2) GraphLattices.F4) = 60 := by
+  constructor
+  · intro d tracePreserved
+    apply Units.ext
+    exact GraphLattices.f4_eq_one_of_trace_mul_eq_trace d tracePreserved
+  · exact GraphLattices.f4_specialLinearGroup_two_card
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

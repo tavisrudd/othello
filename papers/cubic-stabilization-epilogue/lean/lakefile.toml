@@ -21,6 +21,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ExoticStabilizerCore",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility",
