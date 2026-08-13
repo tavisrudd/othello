@@ -1653,6 +1653,39 @@ theorem principalGluingPacket_markedProjectiveLine_connectedFamily_persistence
     GraphLattices.connectedBase_f4MarkedProjectiveLinePair_constant_and_persists
       packetClass continuous basePoint atBasePoint
 
+/-- Exact exotic-to-marked persistence on the actual projective line.  A
+supplied continuous classifier from a connected base is assumed only to be
+nonfixed by coefficientwise Frobenius at one base point.  Lean identifies that
+nonfixed point with one of the two scalar graphs defined by the transported
+marked quadratic root, proves the classifier constant, and propagates the
+exact marked-pair classification to every fibre.  Construction of the
+geometric principal-kernel classifier and proof that its chosen fibre is
+nonfixed remain outside this theorem. -/
+theorem principalGluingPacket_projectiveLine_nonfixed_persists_as_markedPair
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace
+      (Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))]
+    [DiscreteTopology
+      (Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))]
+    (packetClass : Base →
+      Projectivization GraphLattices.F4
+        (GraphLattices.F4 × GraphLattices.F4))
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (nonfixed : GraphLattices.f4ProjectiveLineFrobenius
+        (packetClass basePoint) ≠ packetClass basePoint) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point,
+        packetClass point = GraphLattices.scalarGraphPoint GraphLattices.F4
+            GraphLattices.sixAxisQuadraticSlopeRootInF4 ∨
+          packetClass point =
+            GraphLattices.scalarGraphPoint GraphLattices.F4
+              (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1) := by
+  exact
+    GraphLattices.connectedBase_f4ProjectiveLine_nonfixed_persists_as_markedPair
+      packetClass continuous basePoint nonfixed
+
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
 four-dimensional depth-one block.  It is literally a scalar-algebra image and

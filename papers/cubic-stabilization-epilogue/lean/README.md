@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 142 reviewer terminals.
+1 complete; 143 reviewer terminals.
 
-The 142 reviewer-facing terminals currently verify:
+The 143 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -97,7 +97,8 @@ The 142 reviewer-facing terminals currently verify:
   exact persistence of any continuously classified finite discrete packet on
   a connected base, including the explicit transported marked-root pair both
   in the affine `F4` chart and directly in the actual projective line,
-  conditional on the geometric classifying map;
+  conditional on the geometric classifying map; nonfixity under projective
+  Frobenius at one fibre already identifies the marked pair and propagates it;
 - the fixed points for squaring Frobenius on the concrete four-element field
   and the exact nonfixed loci in both affine-chart coordinates and the actual
   projective line, given by the scalar graphs of the transported marked root

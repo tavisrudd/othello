@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 75 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 142 audited terminals.  The rejecting manuscript inventory covers all
+exports 143 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -238,7 +238,8 @@ connected-family persistence step for any supplied continuous map into a
 finite discrete kernel packet and specializes it to the transported marked
 quadratic pair both in affine-chart coordinates and directly in the actual
 projective line over `F4`; construction of that geometric packet and
-classifying map remains open.  All other geometric
+classifying map remains open.  A nonfixed Frobenius value at one fibre now
+suffices to identify and propagate the exact marked pair.  All other geometric
 identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
 are identification of the constructed finite-etale splitting and eigenbasis

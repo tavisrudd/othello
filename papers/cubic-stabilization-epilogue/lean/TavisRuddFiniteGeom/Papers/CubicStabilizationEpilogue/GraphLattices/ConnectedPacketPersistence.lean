@@ -98,6 +98,30 @@ theorem connectedBase_f4MarkedProjectiveLinePair_constant_and_persists
     point basePoint]
   exact atBasePoint
 
+/-- It is enough to know that one classified projective point is not fixed by
+Frobenius: the exact nonfixed-locus classification identifies it with the
+marked pair, and connectedness propagates that classification to every base
+point. -/
+theorem connectedBase_f4ProjectiveLine_nonfixed_persists_as_markedPair
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace (Projectivization F4 (F4 × F4))]
+    [DiscreteTopology (Projectivization F4 (F4 × F4))]
+    (packetClass : Base → Projectivization F4 (F4 × F4))
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (nonfixed :
+      f4ProjectiveLineFrobenius (packetClass basePoint) ≠
+        packetClass basePoint) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point,
+        packetClass point =
+            scalarGraphPoint F4 sixAxisQuadraticSlopeRootInF4 ∨
+          packetClass point = scalarGraphPoint F4
+            (sixAxisQuadraticSlopeRootInF4 + 1) := by
+  apply connectedBase_f4MarkedProjectiveLinePair_constant_and_persists
+    packetClass continuous basePoint
+  exact (f4ProjectiveLineFrobenius_nonfixed_iff_markedGraphPair
+    (packetClass basePoint)).mp nonfixed
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

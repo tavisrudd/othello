@@ -232,7 +232,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 75 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 142 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 143 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -408,9 +408,11 @@ identification with the
 geometric marked extension and principal kernel remains open.
 Lean also proves that a continuous map from a connected base into a finite
 discrete gluing packet is constant and propagates a distinguished kernel type
-from one fibre to all fibres.  Constructing the manuscript's geometric packet
-and continuous classifying map remains open.
-The aggregate build, source correspondence, and 142-terminal axiom transcript
+from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
+under Frobenius at one fibre already identifies and propagates the exact marked
+pair.  Constructing the manuscript's geometric packet and continuous
+classifying map remains open.
+The aggregate build, source correspondence, and 143-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent
