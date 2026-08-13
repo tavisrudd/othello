@@ -21,8 +21,9 @@ smooth-center principalization blowups (and, when used below, further smooth
 blowups resolving the endpoint map). Put
 \(L=f^*\mathcal O(1)\) and \(N=1-\tau_L\).
 
-Assume an exact cyclotomic localizing invariant \(\mathcal P_6\) of supported
-perfect dg/stable categories with:
+Assume a universal exact cyclotomic localizing invariant \(\mathcal P_6\) of
+supported perfect dg/stable categories on every smooth variety over
+\(\mathbf P^2\) occurring below, with:
 
 1. **localization/devissage:** it is exact for support triangles and vanishes
    on every object supported on a possibly singular or nonreduced set of
@@ -31,11 +32,14 @@ perfect dg/stable categories with:
    maps for every blowup in a construction of \(r\) and every relative
    blowup used in the weak factorization below;
 3. **tensor equivariance:** it commutes with \(\tau_L\), hence with \(N\);
-4. **point-kernel action:** it is linear over perfect kernels and carries the
+4. **point-kernel action:** universally on every such \(Y\to\mathbf P^2\), it
+   is linear over perfect kernels and carries the
    support-action identity saying \((1-\tau_L)^2\) is induced by tensoring
-   with the derived kernel \(K_q=\mathbb Lf^*\mathcal O_q\).  Consequently
-   on a piece supported on \(D\), \(N^2\) factors through
-   \(\operatorname{Perf}_{D\cap f^{-1}(q)}(W)\);
+   with the derived kernel \(K_q=\mathbb Lf^*\mathcal O_q\).  For
+   \(A\in\operatorname{Perf}_D(Y)\), the \(N^2\)-action factors through
+   \(\mathcal P_6(A\otimes^{\mathbb L}K_q)\), with
+   \(A\otimes^{\mathbb L}K_q\in
+   \operatorname{Perf}_{D\cap f^{-1}(q)}(Y)\);
 5. **formal identification:** its realization is the whole generalized
    \(\zeta_6\) packet, compatibly with formal monodromy and Tate shifts; and
 6. **ambient-category vanishing:** the invariant is zero on the entire
