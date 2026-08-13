@@ -1,0 +1,3 @@
+POSITIVE masks=31 empty=5 free=26 hold=0 PASS
+ZERO product-vanishing residual=4 PASS
+ZERO product-unit free PASS

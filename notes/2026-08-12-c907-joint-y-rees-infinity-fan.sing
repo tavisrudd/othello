@@ -1,0 +1,107 @@
+// C907 joint y/Rees-infinity certificate in the full B=C=1 translated chart.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-joint-y-rees-infinity-fan.sing
+//
+// The central Laurent support is x1,x2,x3,P=1/(x1*x2*x3),R=z*u,
+// where z,u represent the two translated torus pivots.  All x_i,z,u are
+// units and Q=1 is a harmless coefficient unit.
+
+LIB "elim.lib";
+
+ring r = 0,(x1,x2,x3,z,u,L),dp;
+poly D = x1*x2*x3*z*u;
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+poly H;
+poly E;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  if (mask%2 != 0) { H = H + D*x1; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; }
+  if ((mask div 8)%2 != 0) { H = H + z*u; }
+  if ((mask div 16)%2 != 0) { H = H + D*z*u; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      z*diff(H,z),u*diff(H,u);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+    }
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("POSITIVE masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("POSITIVE masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+// At normalization order zero all four y terms are forced.  If R drops,
+// the critical scheme must be exactly the four residual P3 Morse points.
+H = D*x1+D*x2+D*x3+z*u;
+E = D*L-H;
+crit = E,
+  x1*diff(E,x1),x2*diff(E,x2),x3*diff(E,x3),
+  z*diff(E,z),u*diff(E,u);
+critTorus = sat(crit,dIdeal);
+ideal residual = x2-x1,x3-x1,x1^4-1,L-4*x1;
+ideal residual1 = reduce(std(critTorus),std(residual));
+ideal residual2 = reduce(std(residual),std(critTorus));
+if (residual1[1]==0 && residual1[2]==0 && residual1[3]==0
+    && residual1[4]==0 && residual2[1]==0 && residual2[2]==0
+    && residual2[3]==0 && residual2[4]==0)
+{
+  print("ZERO product-vanishing residual=4 PASS");
+}
+else
+{
+  print("ZERO product-vanishing residual=4 FAIL");
+}
+
+// If R survives, its logarithmic z derivative is a unit on the torus.
+H = H+D*z*u;
+E = D*L-H;
+crit = E,
+  x1*diff(E,x1),x2*diff(E,x2),x3*diff(E,x3),
+  z*diff(E,z),u*diff(E,u);
+critTorus = sat(crit,dIdeal);
+if (reduce(1,std(critTorus)) == 0)
+{
+  print("ZERO product-unit free PASS");
+}
+else
+{
+  print("ZERO product-unit free FAIL");
+}
+
+quit;
