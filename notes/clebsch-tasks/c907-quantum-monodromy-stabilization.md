@@ -15,14 +15,16 @@ two primitive-sixth subspaces.  A two-variable good-formal-structure theorem
 does not repair this: simultaneous Laurent inversion deletes `B=0`, and a
 formal exponential decomposition does not supply the analytic Stokes/central
 connection datum measured by the rank Boolean.  The all-codimension source
-audit is clean.  Gu--Yu--Yu now provide a full pairing-compatible formal QDM
+audit is clean.  Gu--Yu--Yu provide a full pairing-compatible formal QDM
 decomposition across a smooth simple VGIT wall, retaining the opposite
-chamber's ambient atoms.  This sharpens the first positive peak class to one
-missing row: Gamma-integral compatibility of their equivariant Fourier map.
-They do not prove that compatibility, and general birational cobordisms can
-have singular/toroidal quotients.  Gold and Platinum (all `m`) therefore still
-rise or fall with the peak Stokes/coherent-realization gate.  No Paper V or
-Lean promotion.
+chamber's ambient atoms.  The proposed direct point-row closure fails
+exactly: in the smallest toric discrepancy-one flip, the equivariant point
+lift has zero wall restriction but nonzero `lambda` multiple, and Fourier
+intertwining plus injectivity force a nonzero positive-`S` ambient tail.  The
+rank-Boolean theorem remains open at the weaker question whether that
+homogeneous positive-`z` tail is invisible on the primitive-sixth packet.
+General birational cobordisms can also have singular/toroidal quotients.  No
+Paper V or Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -480,21 +482,19 @@ reverse blow-down implication, conditional weak-factorization telescope, and
 `../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
 `../2026-08-13-c907-rank-telescope-and-product.md`.
 
-The next bounded pass is the common-zigzag rank-morphism gate.  The exact
-failure occurs after two arrows: the first exceptional parameter is nonzero
-in the first fixed-`q` receiver but becomes a formal ambient variable in the
-second, and an arbitrary formal series cannot be evaluated at that nonzero
-value.  Scalar horizontal pairings are constant, but constants forget which
-Stokes embedding of `P_6` was measured.  A valley/peak audit localizes this:
-valleys use the same all-formal ambient functor, while a peak admits two
-one-analytic-variable radial legs.  The remaining peak lemma must compare the
-incoming and outgoing formal-primary subspaces through their confluence
-corner; scalar germ-faithfulness alone is insufficient.  Highest EV is this
-radial confluence/nearby-cycle rank comparison.  Alternatives are an iterated
-Laurent/Hahn receiver, simultaneous master space, or a direct microlocal
-natural transformation `P_6 -> 1`.  The all-codimension and product audits
-need not be repeated.  Exact failed repairs and AA split:
-`../2026-08-13-c907-formal-constant-banking.md`.
+The next bounded pass is the forced Fourier-tail test in
+`../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Compute its first nonzero
+`S` coefficient in the smallest toric discrepancy-one flip.  Homogeneity
+forces compensating positive `z`-degree; determine whether this makes the
+tail invisible on the `z=0` primitive-sixth rank Boolean.  The decisive
+regression is the product of that flip with a cubic threefold, where an actual
+primitive-sixth packet is present.  A positive result closes the simple-VGIT
+peak class; a nonzero pairing kills this rank route at its smallest model.
+Only after that test should the geometric coverage of singular/toroidal
+cobordism walls be pursued.  The all-codimension and product audits need not
+be repeated.  Exact failed repairs and AA split:
+`../2026-08-13-c907-formal-constant-banking.md` and
+`../2026-08-13-c907-peak-confluence-obstruction.md`.
 
 The older point-purity degeneration and normal-splitting program remains
 relevant only to the stronger full point-covector theorem.  It is not on the
@@ -600,13 +600,13 @@ a separate possible construction, not a premise of this Platinum route.
 ## Acceptance
 
 - **Silver:** closed by the unconditional `X x P^1` theorem.
-- **Gold:** construct a coherent `P_6 -> 1` rank morphism across incident
-  weak-factorization arrows, or an equivalent common receiver; the one-arrow
-  theorem and `P^2` endpoint are closed.
+- **Gold:** prove the forced positive-`z` Fourier tail is rank-invisible on
+  `P_6`, then cover the singular/toroidal peaks outside smooth simple VGIT;
+  the one-arrow theorem and `P^2` endpoint are closed.
 - **Platinum:** the all-codimension source audit is clean and the nonzero-`k`
   exceptional twists and uniform projective-product step are rank-theoretically
-  harmless; it rises or falls with the same coherent rank-morphism gate as
-  Gold.
+  harmless; it rises or falls with the same Fourier-tail and wall-coverage
+  gates as Gold.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
 

@@ -2,12 +2,13 @@
 
 Date: 2026-08-13
 
-Status: formal one-wall theorem and a sharply localized Gamma gate, not yet a
-Gamma-rank theorem.  Gu--Yu--Yu retain the full opposite-chamber QDM, which
-removes the ambient deconfluence problem, but neither they nor
-Shen--Shoemaker identify the Gu--Yu--Yu Fourier map with the Fourier--Mukai
-map on the Gamma integral lattice.  Equation (5) below is conditional on that
-one compatibility.
+Status: formal one-wall theorem with an exact counterexample to the proposed
+Gamma point-row shortcut.  Gu--Yu--Yu retain the full opposite-chamber QDM,
+but in the smallest toric discrepancy-one flip their ambient Fourier image
+of a common point has a necessarily nonzero positive-wall-parameter tail.
+The rank-Boolean theorem therefore remains conditional on a weaker
+Stokes/rank-row statement; a full Gamma/Fourier comparison is still stronger
+than needed.
 
 ## 1. Source theorem
 
@@ -49,7 +50,90 @@ exceptional locus.  Consequently, for a point chosen in the common open
 set, (2) sends its point class to the point class and all wall columns have
 rank zero.
 
-## 2. Sectorial identification and its exact limit
+## 2. The common-point column and its forced tail
+
+Choose a point `x` in the common open set, outside the two exceptional loci.
+Gu--Yu--Yu Lemma 3.27 supplies a unique equivariant lift `a_x` such that
+
+\[
+ \kappa_{X_+}(a_x)=[x_+],\qquad
+ \kappa_{X_-}(a_x)=[x_-],\qquad a_x|_{F_0}=0.
+ \tag{3}
+\]
+
+Set the master Novikov variables and bulk variables to zero, retaining the
+wall variable `S_{F_0}`.  Since the wall restriction is zero, the hypothesis
+of Gu--Yu--Yu Lemma 5.10 is automatic and gives
+
+\[
+ \operatorname{FT}_{X_-}(a_x)=[x_-] \tag{4}
+\]
+
+exactly, not only to leading order.  Every continuous Fourier transform to a
+wall copy is also exactly zero, by Proposition 4.11 and
+`a_x|_{F_0}=0`.  Lemma 5.8 gives only
+
+\[
+ \operatorname{FT}_{X_+}(a_x)=[x_+]+O(S_{F_0}). \tag{5}
+\]
+
+The tempting claim that the tail in (5) vanishes is false.  The target point
+class is horizontal for the pure wall ray because every positive wall-degree
+stable map lies in the exceptional locus and misses it.  The master lift
+`a_x`, however, is not a horizontal section.  Proposition 4.14(2) and
+Proposition 4.21 give
+
+\[
+ \operatorname{FT}_{X_+}(\lambda a_x)
+ =(zS\partial_S+D\star_S)\operatorname{FT}_{X_+}(a_x).
+ \tag{6}
+\]
+
+Thus regular-singular uniqueness cannot be applied to the difference in
+(5) unless `FT_{X_+}(lambda a_x)=0`, which need not hold.
+
+It fails already in the smallest toric model.  Take
+
+\[
+ W=\mathbf P(\mathbf C_0\oplus\mathbf C_{+1}^2\oplus
+ \mathbf C_{-1}^3),
+ \tag{7}
+\]
+
+write `u=c_1^{C^*}(O(1))`, and choose a coordinate common-open orbit line.
+Up to the harmless exchange of the two weight signs, its lift is
+
+\[
+ a_x=u(u+\lambda)(u-\lambda)^2,
+ \quad
+ H^*_{C^*}(W)=
+ \mathbf C[u,\lambda]/(u(u+\lambda)^2(u-\lambda)^3).
+ \tag{8}
+\]
+
+The restriction at the wall point `u=0` is zero, but
+`lambda a_x` is nonzero: it has polynomial degree five, below the degree-six
+relation.  Every continuous wall component of `lambda a_x` is zero.  Since
+`FT_{X_+} direct-sum FT_{F_0,0}` is injective by Proposition 5.9,
+
+\[
+ \operatorname{FT}_{X_+}(\lambda a_x)\ne0. \tag{9}
+\]
+
+If (5) had no tail, the right side of (6) would vanish by the target-point
+support argument, contradicting (9).  Therefore
+
+\[
+ \boxed{\operatorname{FT}_{X_+}(a_x)-[x_+]\ne0.} \tag{10}
+\]
+
+This is a counterexample to the direct point-column shortcut, not to the
+desired rank Boolean.  Homogeneity forces the `S^k` coefficient of the tail
+to carry compensating positive `z`-degree in this discrepancy-one model.
+Whether that tail is invisible on the primitive-sixth Stokes packet is the
+new sharply localized question.
+
+## 3. Sectorial identification
 
 A simple VGIT wall crossing is a standard flip.  Shen--Shoemaker's Theorem
 1.4 and Corollary 1.5 identify the Gamma classes of the Fourier--Mukai image
@@ -69,13 +153,13 @@ sectorial Gamma spans.  Joint flatness and pairing compatibility make every
 value of the point covector on a horizontal block section constant in the
 ambient Novikov variables.
 
-At the extremal fibre these constants are categorical:
+At the extremal fibre the remaining pairings are categorical:
 
 \[
  \operatorname{rk}(\operatorname{FM}(E))=\operatorname{rk}(E),
  \qquad
  \operatorname{rk}(\Phi_j(F))=0.
- \tag{3}
+ \tag{11}
 \]
 
 The first equality holds because the Fourier--Mukai correspondence is an
@@ -83,25 +167,14 @@ isomorphism on the common dense open set.  The second holds because every
 wall image is supported on the exceptional locus.  Equivalently, the Gamma
 point pairing restricts to the `X_+` rank pairing and kills all `S` blocks.
 
-There is still a map-level gap.  Gu--Yu--Yu prove that their formal Fourier
-map identifies the ambient QDM submodule; Shen--Shoemaker prove that
-Fourier--Mukai Gamma classes span its extremal tame realization.  The sources
-do **not** prove
+No full formula
+`Psi_GYY(s(E))=s(FM(E))` for arbitrary `E` is asserted.  Pairing preservation
+would turn its point-pairing row into the desired rank covector, but the
+forced tail (10) shows that this row does not follow from the common-point
+cohomology lift.  Pairing the tail with the primitive-sixth packet is exactly
+the datum still missing.
 
-\[
- \Psi_{\rm GYY}(s_{X_+}(E))=s_{X_-}(\operatorname{FM}(E)).
- \tag{3a}
-\]
-
-An automorphism of `QDM(X_+)` inside the ambient summand preserves the formal
-block and all connections but can change the pullback of the rank covector on
-its internal primitive-sixth packet.  The leading graph-correspondence term
-of the Fourier map does not prove (3a): upgrading that cusp leading term to
-the large-radius Gamma section would repeat the original two-frame error.
-Thus horizontal constancy propagates (3) only after (3a), or the weaker
-rank-covector version of (3a), is supplied.
-
-## 3. Conditional rank-Boolean corollary
+## 4. Conditional rank-Boolean corollary
 
 Let `P_6` denote the whole generalized primitive-sixth formal-monodromy
 packet in the chosen receiver, and let
@@ -117,28 +190,29 @@ they have been established gives
  \mathfrak r_{X_-}|_{P_6(X_+)_\mathrm{amb}}=\mathfrak r_{X_+},
  \qquad
  \mathfrak r_{X_-}|_{P_6(S)_j}=0.
- \tag{4}
+ \tag{12}
 \]
 
-If (3a), or just its point-pairing row, holds, a single simple VGIT wall
-crossing satisfies
+If the nonzero tail (10) is rank-invisible on the primitive-sixth packet, or
+if the weaker Gamma rank-row compatibility is supplied, a single
+smooth-projective simple VGIT wall crossing satisfies
 
 \[
  \boxed{
  \mathfrak r_{X_-}|_{P_6(X_-)}\ne0
  \iff
  \mathfrak r_{X_+}|_{P_6(X_+)}\ne0.}
- \tag{5}
+ \tag{13}
 \]
 
 This would be the desired peak lemma for the smooth
 simple-VGIT/standard-flip class.  The formal input is stronger than
 Shen--Shoemaker alone, because (1) restores the full ambient QDM rather than
-leaving the ambient atom confluent at the extremal fibre.  The remaining
-analytic input is only one equivariant-Fourier Gamma row, not a
-two-exceptional-cusp comparison.
+leaving the ambient atom confluent at the extremal fibre.  Equations
+(7)--(10) show that the missing row is a genuine datum, not merely an absent
+citation.
 
-## 4. Why this is not yet Gold
+## 5. Why this is not yet Gold
 
 Wlodarczyk's birational cobordism expresses birational geometry through
 `C^*` wall crossings, but the quotients occurring in a general cobordism can
@@ -147,42 +221,71 @@ simple VGIT quotients are smooth projective.  Resolving/destacking a singular
 wall reintroduces blowup receivers, and no cited theorem says that the
 Gamma-rank realization is coherent through the resulting chain.
 
-Even for several smooth simple walls, applying (5) through independently
-constructed one-wall receivers requires either one common equivariant
-master-space realization or the same banking theorem that failed for
-independent blowup cusps.  Gu--Yu--Yu prove formal QDM and pairing
-compatibility, not Gamma-integral, Stokes, or central-connection compatibility
-for a multiwall master space.
+Thus the formal decomposition, the forced-tail counterexample, and the
+discrepancy-one repair form a paper-shaped stepping stone regardless of Gold.
+Gold reduces further to one of:
 
-Thus the GYY decomposition is a genuine positive formal peak class and a
-publishable stepping stone, while (5) remains a focused conjectural
-corollary.  Gold reduces further to one of:
+1. prove the forced positive-`z` tail is rank-invisible on `P_6`;
+2. compute its first nonzero row on a product carrying the cubic packet and
+   test the Boolean directly;
+3. prove the weaker Gamma rank-row compatibility by a master-space contour
+   or K-theoretic Fourier argument.
 
-1. Gamma-integral/rank-row compatibility (3a) for the equivariant Fourier
-   transform, followed by a smooth-simple-VGIT factorization theorem adequate
-   for the relative fivefold problem, with one coherent master receiver;
-2. an orbifold/toroidal extension of (1), Shen--Shoemaker asymptotics, and the
-   Gamma rank receiver;
-3. a direct peak theorem for the non-VGIT exchanges left by resolution.
+## 6. Minimal toric regression
 
-## 5. AA / EJ / TT
+The smallest nontrivial test is the discrepancy-one flip from the master
 
-- **AA:** compute the point row of the equivariant Fourier transform on the
-  smallest toric standard flip.  Failure there kills (5); success isolates
-  singular/toroidal cobordism walls as the next target.
-- **EJ:** Gu--Yu--Yu supply exactly what Shen--Shoemaker lacked: the full
-  opposite-chamber QDM over the common exceptional Laurent base.  The
-  extremal Gamma calculation then determines a horizontal whole-block
-  covector rather than attempting to deconfluence an atom.
-- **TT:** identifying a formal submodule with the span of Gamma asymptotic
-  classes does not identify the two framings inside that submodule.  The
-  source itself contains no Stokes or Gamma-integral comparison theorem.
+\[
+ W=\mathbf P(\mathbf C^2_{+1}\oplus\mathbf C_0\oplus
+ \mathbf C^3_{-1}). \tag{12}
+\]
+
+Its wall is a point and its smooth quotient fourfolds are
+
+\[
+ X_+=\mathbf P_{\mathbf P^1}(\mathcal O\oplus\mathcal O(-1)^{\oplus3}),
+ \qquad
+ X_-=\mathbf P_{\mathbf P^2}(\mathcal O\oplus\mathcal O(-1)^{\oplus2}).
+ \tag{13}
+\]
+
+For a common torus-fixed point, the orbit-line lift is (8).  In Gu--Yu--Yu's
+Proposition 5.9 matrix both off-diagonal blocks are `O(S)` and the constant
+matrix is `diag(Id,-Id)` (the sign depends on the Fourier square-root
+choice).  Equation (9) proves that its `O(S)` ambient point correction is
+genuinely nonzero.  This model is therefore the first exact point-row
+falsifier.
+
+## 7. AA / EJ / TT
+
+- **AA:** compute the first nonzero `S` coefficient of (10), then tensor the
+  flip with a cubic threefold so the same coefficient can be paired against
+  an actual primitive-sixth packet.
+- **EJ:** the counterexample is structural: injectivity forces nonzero
+  leakage without computing any Fourier coefficient.  It turns the source's
+  unspecified star into a theorem-level obstruction.
+- **TT:** the point class on the quotient and its equivariant master lift are
+  different differential objects.  Support makes the former horizontal; it
+  says nothing of `lambda a_x`, which controls the latter through (6).
+
+## Mystery ledger
+
+- **Settled negatively:** the `O(S)` ambient leakage in the smallest toric
+  point column is nonzero.
+- **Settled:** zero wall restriction still kills every center Fourier row
+  exactly and Lemma 5.10 gives the negative-chamber point exactly.
+- **Open:** whether homogeneity's compensating positive `z`-degree makes the
+  forced tail invisible on the primitive-sixth rank Boolean.  The owning next
+  computation is the first `S` coefficient, preferably after product with a
+  cubic packet.
+- **Open:** full Gamma-integral compatibility remains stronger than required;
+  only its rank row is on the C907 critical path.
 
 ## Sources and reading boundary
 
 - Z. Gu, S. Yu, T. Y. Yu, *Quantum cohomology of variations of GIT quotients
   and flips*, arXiv:2508.15770, selectively read through the Introduction,
-  Sections 3.2, 5.2, and 6.1--6.2; cached SHA-256
+  Sections 3.5--3.6, 4.3--4.4, 5.2, and 6.1--6.2; cached SHA-256
   `9c00f826cb13ad243bd2ad126e74733cacf650a385160a11adc785693c01a358`.
 - Y. Shen, M. Shoemaker, *Quantum spectrum and Gamma structure for standard
   flips*, arXiv:2502.08762v2, Theorem 1.4 and Corollary 1.5; cached SHA-256

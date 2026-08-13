@@ -85,14 +85,14 @@ Boolean depends.  Exact peak audit:
 `../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
-Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives the first unconditional
-positive peak class: its full pairing-compatible QDM decomposition keeps the
-opposite chamber's ambient variables, while a common-open orbit closure,
-Lemma 5.10, and regular-singular uniqueness prove the exact Gamma point row
-without a full Fourier--Mukai/Gamma comparison.  Thus the rank Boolean is
-invariant across every smooth-projective simple VGIT wall.  Gold remains open
-because general cobordism peaks can have singular/toroidal quotients and are
-not yet covered by that theorem.  Exact audit:
+Gu--Yu--Yu's August 2025 simple-VGIT theorem gives the first genuine positive
+formal peak class, but its direct Gamma point-row shortcut fails exactly in
+the smallest toric discrepancy-one flip.  The common point lift has zero wall
+restriction, so all center Fourier rows vanish, but its `lambda` multiple is
+nonzero; Fourier intertwining and injectivity force a nonzero positive-`S`
+ambient tail.  Homogeneity forces compensating positive `z`-degree, so the
+remaining sharp question is whether that tail is invisible on the
+primitive-sixth rank Boolean.  Exact audit and counterexample:
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
