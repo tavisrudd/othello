@@ -63,8 +63,10 @@ audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
 
 Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
-grading: the endpoint has `1+L+L^2`, while a threefold center must have width
-one.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
+grading.  The endpoint has `1+L+L^2`; the exact positive
+Krull--Schmidt telescope only needs to exclude that endpoint `J_3` from all
+threefold centers, and the clean numerical sufficient bound is length at most
+two.  Thus the landed length-two formal countermodel is harmless.  In the toric pilot `Bl_(P^3)P^5`, the residual chart is exactly
 `W_(P^3)+ZU`.  Saturated tangent-Jacobian certificates cover the residual
 chart, a mixed-cone family, and the compact-`y` pole continuum through one
 semistable incidence node.  Six hashed 31-mask replays plus two Laurent
@@ -91,14 +93,29 @@ translated divisors `B=1,C=1`; the common finite support object is instead the
 product of two marked-line tropical tripods refined by six universal graph
 weights.  The live analytic gate is the corresponding pair-of-pants/log
 modification with separate algebraic-chart and coarser actual-boundary/control
-Fitting ledgers, then
-fibrewise Whitney--Thom collar topology and the
-hyperplane-equivariant Orlov/Gamma marking.
+Fitting ledgers.  That gate is now closed by a different mechanism: a direct
+proper tropical exterior model has 70 logarithmic unit fields and two empty
+`L=0` masks, the simultaneous ratio graph controls its entire fibre over the
+double-marked locus away from the four Morse sections, and multi-model proper
+pushforward localizes the intrinsic nearby value cycles to those four
+sections.  Conditional only on the actual local `j_!` Morse identification,
+the nearby compact-support thimble group is free of rank four.  A common fan
+and Whitney collar are unnecessary.  The remaining order-zero gate is the
+oriented `j_! -> Rj_*`, duality, `can/var`, and no-braid comparison that fixes
+the directed `P^3` Seifert form, followed by the hyperplane-equivariant
+integral Orlov/Rees comparison.
 The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
 direct threefold grading argument is closed negatively by an explicit
-self-dual length-two model; the carrier gate is the geometric vanishing of
-its sectorial Rees extension class for arbitrary non-nef threefolds.  Every
+self-dual length-two model, but Silver no longer needs its first extension to
+vanish.  The carrier gate is absence of an endpoint-type second composite for
+arbitrary non-nef threefolds.  At a conic node the raw Clifford socle is only
+an ordered two-branch product—every single radical action is square-zero—and
+clean primitive stalk/costalk excision kills it conditionally.  At a nodal
+cubic-surface fibre the stationary lattice is `A_5`, not `D_5`; equisingular
+Weyl symmetry reduces the dangerous second composite to one explicit
+`S_6`-module multiplicity test, but strict Stokes/Gamma descent is still open.
+Every
 ordinary Fano complete-intersection threefold has small-even `nu_6<=2`, so
 none can realize the required length-two carrier.  Fano cyclic covers of
 `P^3` also have `nu_6<=2`; the weighted degree-one del Pezzo is a non-CI
