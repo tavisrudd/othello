@@ -59,7 +59,7 @@ Choose a general point \(q\in\mathbf P^2\). The Koszul identity in rational
 K-theory is
 
 \[
- N^2(-)=(-)\otimes f^*[\mathcal O_q].
+ N^2(-)=(-)\otimes[\mathbb Lf^*\mathcal O_q].
  \tag{2}
 \]
 
@@ -105,6 +105,10 @@ therefore preserves the endpoint \(J_3\) multiplicity across the zigzag.
 Projective/Kunneth compatibility identifies that endpoint block as the cubic
 \(\zeta_6\)-line tensored with \(K_0(\mathbf P^2)\), on which \(N^2\ne0\).
 Thus \(W\) contains \(J_3\), contradicting (1).
+
+The point \(q\) may be chosen separately for each of the finitely many
+support tests: the Koszul identity and axiom 4 hold for every point, while
+only the resulting vanishing statement is used.
 
 Therefore assumptions 1--6, together with a \(\mathbf P^2\)-relative weak
 factorization carrying strict packet-level \(N\)-linear blowup biproducts,
