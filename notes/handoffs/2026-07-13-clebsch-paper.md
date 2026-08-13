@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-50 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 93 reviewer terminals, audit
+51 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 96 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -227,7 +227,12 @@ was the next seam; Lean now proves existence, finiteness, and exact membership
 of the lowest support and noncancellation for arbitrary nonzero leading
 coefficients.  Identification of the geometric specialized initial form with
 that combination remains outside the formal result.
-The aggregate build, source correspondence, and 93-terminal axiom transcript
+An exact conditional detector bridge now proves nonvanishing and full
+injectivity of the additive tagged map from proxy detectors, nonzero monomial
+initial coefficients, and the compatibility equality.  The actual filtered
+target, associated graded ring, valuation, specialization, and proof that they
+produce those proxy inputs remain unrepresented.
+The aggregate build, source correspondence, and 96-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

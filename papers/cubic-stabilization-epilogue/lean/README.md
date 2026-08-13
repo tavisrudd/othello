@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 93 reviewer terminals.
+1 complete; 96 reviewer terminals.
 
-The 93 reviewer-facing terminals currently verify:
+The 96 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -132,6 +132,13 @@ The 93 reviewer-facing terminals currently verify:
   gives a nonzero exponential-character combination; the associated-graded
   identification of a specialized initial form with this combination remains
   outside the theorem;
+- the exact associated-graded tagging deduction from explicit initial-form data:
+  a supplied additive tagged-image map, nonzero monomial initial coefficients,
+  direction-dependent initial-form detectors, and their compatibility with
+  the finite lowest-support combination imply nonvanishing on every nonzero
+  completed series and full injectivity; the target filtration, associated
+  graded ring, valuation, and geometric specialization are not represented,
+  while detector/coefficient/compatibility proxy data are supplied;
 - the conditional common-field endpoint of divisor-tagging vanishing from
   supplied final intrinsic, tagged, and specialized characteristic-polynomial
   equalities, without formal coefficient embeddings or a gauge witness;

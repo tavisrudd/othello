@@ -42,8 +42,23 @@ structure CompletedNovikovSeries (Curve Coefficient : Type*) [Zero Coefficient]
 
 namespace CompletedNovikovSeries
 
-variable {Curve Coefficient : Type*} [Zero Coefficient]
-  {length : Curve → ℕ}
+variable {Curve Coefficient : Type*} {length : Curve → ℕ}
+
+section Basic
+
+variable [Zero Coefficient]
+
+/-- The zero completed coefficient family. -/
+instance : Zero (CompletedNovikovSeries Curve Coefficient length) where
+  zero :=
+    { coefficient := 0
+      finite_below := fun _ ↦ by simp }
+
+/-- The coefficient function of the zero completed series is zero. -/
+@[simp]
+theorem coefficient_zero :
+    (0 : CompletedNovikovSeries Curve Coefficient length).coefficient = 0 :=
+  rfl
 
 /-- A completed series is zero exactly when its coefficient function is zero;
 this extensionality theorem does not use multiplication. -/
@@ -54,6 +69,133 @@ theorem ext {left right : CompletedNovikovSeries Curve Coefficient length}
   cases right
   cases equal_coefficients
   rfl
+
+end Basic
+
+section Additive
+
+variable [AddCommGroup Coefficient]
+
+/-- Pointwise addition of completed coefficient families.  The support of a
+sum is contained in the union of the two supports. -/
+instance : Add (CompletedNovikovSeries Curve Coefficient length) where
+  add left right :=
+    { coefficient := left.coefficient + right.coefficient
+      finite_below := fun cutoff ↦
+        ((left.finite_below cutoff).union (right.finite_below cutoff)).subset <| by
+          intro degree membership
+          rcases membership with ⟨sum_nonzero, length_le⟩
+          by_cases left_zero : left.coefficient degree = 0
+          · right
+            exact ⟨by
+              intro right_zero
+              exact sum_nonzero (by simp [left_zero, right_zero]), length_le⟩
+          · left
+            exact ⟨left_zero, length_le⟩ }
+
+/-- Pointwise negation of completed coefficient families. -/
+instance : Neg (CompletedNovikovSeries Curve Coefficient length) where
+  neg series :=
+    { coefficient := -series.coefficient
+      finite_below := fun cutoff ↦ (series.finite_below cutoff).subset <| by
+        intro degree membership
+        exact ⟨by simpa using membership.1, membership.2⟩ }
+
+/-- Pointwise subtraction of completed coefficient families. -/
+instance : Sub (CompletedNovikovSeries Curve Coefficient length) where
+  sub left right :=
+    { coefficient := left.coefficient - right.coefficient
+      finite_below := fun cutoff ↦
+        ((left.finite_below cutoff).union (right.finite_below cutoff)).subset <| by
+          intro degree membership
+          rcases membership with ⟨difference_nonzero, length_le⟩
+          by_cases left_zero : left.coefficient degree = 0
+          · right
+            exact ⟨by
+              intro right_zero
+              exact difference_nonzero (by simp [left_zero, right_zero]), length_le⟩
+          · left
+            exact ⟨left_zero, length_le⟩ }
+
+/-- Pointwise natural scalar multiplication. -/
+instance : SMul ℕ (CompletedNovikovSeries Curve Coefficient length) where
+  smul scalar series :=
+    { coefficient := scalar • series.coefficient
+      finite_below := fun cutoff ↦ (series.finite_below cutoff).subset <| by
+        intro degree membership
+        exact ⟨by
+          intro coefficient_zero
+          exact membership.1 (by simp [coefficient_zero]), membership.2⟩ }
+
+/-- Pointwise integral scalar multiplication. -/
+instance : SMul ℤ (CompletedNovikovSeries Curve Coefficient length) where
+  smul scalar series :=
+    { coefficient := scalar • series.coefficient
+      finite_below := fun cutoff ↦ (series.finite_below cutoff).subset <| by
+        intro degree membership
+        exact ⟨by
+          intro coefficient_zero
+          exact membership.1 (by simp [coefficient_zero]), membership.2⟩ }
+
+/-- Coefficients of a sum are pointwise sums. -/
+@[simp]
+theorem coefficient_add
+    (left right : CompletedNovikovSeries Curve Coefficient length) :
+    (left + right).coefficient = left.coefficient + right.coefficient :=
+  rfl
+
+/-- Coefficients of a negative are pointwise negatives. -/
+@[simp]
+theorem coefficient_neg
+    (series : CompletedNovikovSeries Curve Coefficient length) :
+    (-series).coefficient = -series.coefficient :=
+  rfl
+
+/-- Coefficients of a difference are pointwise differences. -/
+@[simp]
+theorem coefficient_sub
+    (left right : CompletedNovikovSeries Curve Coefficient length) :
+    (left - right).coefficient = left.coefficient - right.coefficient :=
+  rfl
+
+/-- Natural scalar multiplication acts coefficientwise. -/
+@[simp]
+theorem coefficient_nsmul (scalar : ℕ)
+    (series : CompletedNovikovSeries Curve Coefficient length) :
+    (scalar • series).coefficient = scalar • series.coefficient :=
+  rfl
+
+/-- Integral scalar multiplication acts coefficientwise. -/
+@[simp]
+theorem coefficient_zsmul (scalar : ℤ)
+    (series : CompletedNovikovSeries Curve Coefficient length) :
+    (scalar • series).coefficient = scalar • series.coefficient :=
+  rfl
+
+/-- Completed coefficient families inherit their additive commutative group
+structure pointwise. -/
+instance : AddCommGroup (CompletedNovikovSeries Curve Coefficient length) :=
+  Function.Injective.addCommGroup
+    (fun series : CompletedNovikovSeries Curve Coefficient length ↦
+      series.coefficient)
+    (fun _ _ equality ↦ ext equality)
+    rfl (fun _ _ ↦ rfl) (fun _ ↦ rfl) (fun _ _ ↦ rfl)
+    (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+
+end Additive
+
+variable [Zero Coefficient]
+
+/-- A completed coefficient family is zero exactly when all coefficients are
+zero. -/
+theorem eq_zero_iff
+    (series : CompletedNovikovSeries Curve Coefficient length) :
+    series = 0 ↔ series.coefficient = 0 := by
+  constructor
+  · rintro rfl
+    rfl
+  · intro coefficients_zero
+    exact ext coefficients_zero
 
 /-- The set of lengths at which a series has a nonzero coefficient. -/
 def supportLengths (series : CompletedNovikovSeries Curve Coefficient length) : Set ℕ :=

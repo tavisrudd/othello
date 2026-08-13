@@ -21,6 +21,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactori
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ExponentialDivisorTags
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
@@ -1851,6 +1852,46 @@ theorem completedNovikov_lowestSupport_exponentialSum_ne_zero
               pairingVector degree coordinate : ℤ) : K) ≠ 0 :=
   series.exists_integralDirection_lowestSupport_exponentialSum_ne_zero
     series_nonzero pairingVector pairingVector_injective
+
+/-- Conditional detector bridge for associated-graded tagging.  From a supplied
+initial-form detector, nonzero monomial initial coefficients, and the equality
+identifying the detected initial form with the finite lowest-support
+exponential combination, Lean proves that every nonzero completed coefficient
+family has nonzero tagged image.  Only the detector, its zero value, nonzero
+monomial coefficients, and the compatibility equality are supplied.  The
+target filtration, associated graded ring, valuation, geometric specialization,
+and the proof that they induce these inputs are not represented. -/
+theorem associatedGradedTagging_taggedImage_ne_zero
+    {Curve K Target : Type*} [Field K] [CharZero K] [AddCommGroup Target]
+    {length : Curve → ℕ} {rank : ℕ}
+    (input : Quantum.AssociatedGradedTaggingInput
+      Curve K Target length rank)
+    (series : Quantum.CompletedNovikovSeries Curve K length)
+    (series_nonzero : series ≠ 0) :
+    input.taggedImage series ≠ 0 :=
+  input.taggedImage_ne_zero series series_nonzero
+
+/-- Zero-reflection conclusion of the associated-graded tagging bridge: the
+tagged image is zero exactly for the zero completed coefficient family. -/
+theorem associatedGradedTagging_taggedImage_eq_zero_iff
+    {Curve K Target : Type*} [Field K] [CharZero K] [AddCommGroup Target]
+    {length : Curve → ℕ} {rank : ℕ}
+    (input : Quantum.AssociatedGradedTaggingInput
+      Curve K Target length rank)
+    (series : Quantum.CompletedNovikovSeries Curve K length) :
+    input.taggedImage series = 0 ↔ series = 0 :=
+  input.taggedImage_eq_zero_iff series
+
+/-- Full completed-series injectivity of the associated-graded tagging
+bridge.  Since the supplied tagged map is additive, nonvanishing on every
+nonzero series applied to a difference proves pairwise injectivity. -/
+theorem associatedGradedTagging_taggedImage_injective
+    {Curve K Target : Type*} [Field K] [CharZero K] [AddCommGroup Target]
+    {length : Curve → ℕ} {rank : ℕ}
+    (input : Quantum.AssociatedGradedTaggingInput
+      Curve K Target length rank) :
+    Function.Injective input.taggedImage :=
+  input.taggedImage_injective
 
 /-- Public form of the weak-factorization telescope: composable steps that
 preserve a packet multiplicity preserve it between their endpoints. -/

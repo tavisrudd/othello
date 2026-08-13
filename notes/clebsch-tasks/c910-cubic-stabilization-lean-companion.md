@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 50 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 51 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 93 audited terminals.  The rejecting manuscript inventory covers all
+exports 96 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -142,6 +142,12 @@ lowest-length support with exact membership, and every assignment of nonzero
 leading coefficients there gives a nonzero tagged exponential combination.
 The remaining seam is the filtered/associated-graded identification of a
 geometric specialized initial form with that combination.
+An exact conditional detector bridge now isolates that seam: supplied proxy
+detectors, nonzero monomial initial coefficients, and their compatibility with
+the finite exponential combination imply nonvanishing, zero reflection, and
+full injectivity of the additive tagged map.  The actual filtration,
+associated graded ring, valuation, geometric specialization, and proof that
+they induce these proxy data are not represented.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -173,6 +179,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/NovikovAdmissibility.lean
     Quantum/ExponentialDivisorTags.lean
     Quantum/CompletedNovikovSupport.lean
+    Quantum/AssociatedGradedTagging.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
     Quantum/PacketInvariant.lean
@@ -241,9 +248,10 @@ are current, and the committed paper export verifies byte-for-byte in
   transports primitive-sixth multiplicity and vanishing through two supplied
   final polynomial equalities over `ℂ`.  Its finite exponential-character
   independence step, integral separating direction, finite lowest support,
-  and noncancellation for supplied leading coefficients are now proved.  The
-  associated-graded identification of the geometric specialized initial form,
-  coefficient-field embeddings,
+  and noncancellation for supplied leading coefficients are now proved.  A
+  proxy detector/compatibility package now conditionally yields full tagged
+  injectivity.  Construction of the geometric filtered target and proof that
+  it supplies those proxy inputs, together with coefficient-field embeddings,
   common-closure comparison, and bulk-gauge construction remain the exact
   open inputs.
 - **External-input closure:** unsettled.  The chief question is how much of the
