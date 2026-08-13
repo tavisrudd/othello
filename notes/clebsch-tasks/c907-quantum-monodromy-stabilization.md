@@ -368,8 +368,9 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   degree `d` is a nonzero scalar times
   `e^R 1F1(-d;2d+1;-R)`, hence exponential times a polynomial; the forbidden
   algebraic coefficient is exactly `1/Gamma(-d)=0`.  The same Kummer zero
-  holds for every codimension-two complete intersection `(a,b)` in
-  projective space, with `1/Gamma(-ad)`.  Weak factorization does not reduce
+  holds for a complete intersection of two nef line bundles on any smooth
+  projective base, curve class by curve class.  Weak factorization does not
+  reduce
   arbitrary centers to this case because normal-crossing centers need not be
   boundary strata or have split normal bundle.  See
   `../2026-08-13-c907-ci-blowup-point-purity.md`.
@@ -411,8 +412,9 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, extend the landed Kummer point-purity theorem from split
-codimension-two complete intersections to an arbitrary smooth center.  Work
+For Silver, extend the landed Kummer point-purity theorem from split nef
+codimension-two complete intersections on arbitrary bases to an arbitrary
+smooth center.  Work
 directly on the point component of Iritani's master-space Fourier transform:
 identify whether normal-bundle Chern-root and curve corrections preserve the
 reciprocal-Gamma zero, or exhibit the first nonzero exceptional point-pairing

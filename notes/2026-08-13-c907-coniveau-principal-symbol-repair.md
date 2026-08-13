@@ -328,8 +328,10 @@ and each fixed-\(d\) exceptional slice is
 The second factor is a degree-\(d\) polynomial.  Thus the algebraic center
 connection coefficient is exactly \(1/\Gamma(-d)=0\) in every degree, so the
 cubic exceptional packet has zero point pairing and ambient rank.  The same
-Kummer zero holds for every smooth codimension-two complete intersection
-\((a,b)\subset\mathbf P^n\), with coefficient \(1/\Gamma(-ad)\).  See
+Kummer zero holds for every smooth codimension-two complete intersection of
+two nef line bundles on any smooth projective base: curve class \(\beta\)
+gives the reciprocal Gamma function at
+\(-\min(c_1(L_1)\cdot\beta,c_1(L_2)\cdot\beta)\).  See
 `2026-08-13-c907-ci-blowup-point-purity.md`.
 
 This does not close arbitrary centers: weak factorization provides smooth

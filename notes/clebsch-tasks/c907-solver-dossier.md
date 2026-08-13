@@ -135,8 +135,9 @@ proved in toric cases and stated as expected in general.  See
 The first nonvacuous regression `Bl_X P^5` passes exactly.  Its toric-bundle
 hypersurface point period has fixed-degree exceptional slice
 `e^R 1F1(-d;2d+1;-R)`, so the forbidden center coefficient is
-`1/Gamma(-d)=0`.  More generally every split complete-intersection center
-`(a,b)` gives `1/Gamma(-ad)=0`.  The remaining gate is arbitrary nonsplit
+`1/Gamma(-d)=0`.  More generally every center cut by two nef line bundles on
+an arbitrary smooth base gives the same reciprocal-Gamma zero curve class by
+curve class.  The remaining gate is arbitrary nonsplit
 normal bundles; standard weak factorization only makes centers normally
 crossing, not boundary strata.  See
 `../2026-08-13-c907-ci-blowup-point-purity.md`.

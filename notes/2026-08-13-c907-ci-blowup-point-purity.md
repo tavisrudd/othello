@@ -2,9 +2,10 @@
 
 Date: 2026-08-13
 
-Status: exact non-toric pilot theorem.  For the blow-up of projective space
-along a smooth codimension-two complete intersection, the Gamma point period
-has no algebraic exceptional-sector contribution.  In particular the
+Status: exact split-center theorem.  For the blow-up of a smooth projective
+base along a smooth codimension-two complete intersection of two nef line
+bundles, the Gamma point period has no algebraic exceptional-sector
+contribution.  In particular the
 primitive-sixth center packet of
 \(\operatorname{Bl}_X\mathbf P^5\), for a cubic threefold
 \(X\subset\mathbf P^4\subset\mathbf P^5\), has zero ambient rank functional.
@@ -157,12 +158,50 @@ The cubic primitive-sixth packet of
 \(\operatorname{Bl}_X\mathbf P^5\) is entirely a center packet, so (6)
 proves the exact zero-rank prediction of the rank-framed obstruction.
 
-## 4. Boundary of the theorem
+## 4. Base-independent split-center form
 
-The cancellation uses more than codimension two: the normal bundle is the
-split restriction
-\(\mathcal O_Z(a)\oplus\mathcal O_Z(b)\), and the blow-up has one global
-toric complete-intersection presentation.  For a general center, Iritani's
+The cancellation does not depend on the projective-space base.  Let \(B\) be
+a smooth projective variety and let \(Z\subset B\) be the smooth zero locus
+of a regular section of \(L_1\oplus L_2\), where the two line bundles are
+nef.  The same incidence construction realizes \(\operatorname{Bl}_ZB\) as
+one hypersurface in
+
+\[
+ \mathbf P_B(L_1^{-1}\oplus L_2^{-1}).
+\]
+
+The Elezi--Brown/Iritani--Koto projective-bundle \(I\)-function and quantum
+Lefschetz apply curve class by curve class.  Fix an effective base class
+\(\beta\), and put
+
+\[
+ a_\beta=c_1(L_1)\cdot\beta,
+ \qquad b_\beta=c_1(L_2)\cdot\beta.
+\]
+
+After interchanging the two summands for this coefficient, assume
+\(a_\beta\le b_\beta\).  The exceptional-variable part of the top-pairing
+coefficient is exactly (2) with \((a,b,d)\) replaced by
+\((a_\beta,b_\beta,1)\); the remaining factor is the corresponding base
+\(J\)-coefficient and is independent of the exceptional summation index.
+Nefness makes \(a_\beta,b_\beta\) nonnegative integers.  Hence Kummer's
+transformation again makes the slice exponential times a polynomial of
+degree \(a_\beta\), and its algebraic coefficient is
+
+\[
+ \frac1{\Gamma(-a_\beta)}=0.
+\]
+
+The zero also covers \(a_\beta=0\).  Divisor/string mirror changes multiply
+the fixed-\(\beta\) term by a monomial or a common exponential and cannot
+create an algebraic center branch.  Therefore the point-purity theorem holds
+for every smooth split nef codimension-two complete intersection in an
+arbitrary smooth projective base.
+
+## 5. Boundary of the theorem
+
+The cancellation uses more than codimension two: the center is the global
+zero locus of two nef line-bundle sections.  For a general center, Iritani's
 formal stationary-phase coefficient has the same leading Gamma zero, but
 curve corrections in the master space need not reorganize into the Kummer
 polynomial (3).  Extending point purity from split complete intersections to
@@ -181,12 +220,17 @@ every arrow without a new refinement of factorization.
   solution used in (1).  Cached PDF SHA-256:
   `b2b9a776ad8165029ec792964f357bf30ff0c80061ccead51ffac04cbda0de6b`.
 - Tom Coates and Alexander Givental, *Quantum Riemann--Roch, Lefschetz and
-  Serre*, arXiv:math/0110142, Theorem 2, for quantum Lefschetz:
-  https://arxiv.org/abs/math/0110142.
+  Serre*, arXiv:math/0110142, Theorem 2, for quantum Lefschetz.  Cached PDF
+  SHA-256:
+  `5f5ff2b0de5d23f430374f5c3f1c234f5578307131434e3d40552c72f3bfd78e`.
 - Hiroshi Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555,
   Sections 4.2.3 and 5.8, for the exceptional Fourier center summand and its
   initial conditions.  Cached PDF SHA-256:
   `c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
+- Hiroshi Iritani and Yuki Koto, *Quantum cohomology of projective bundles*,
+  arXiv:2307.03696, Theorem 1.1, for the nonsplit-base projective-bundle
+  \(I\)-function framework used in Section 4.  Cached PDF SHA-256:
+  `5139f8e0c9d46f8ccb8cb415396a0fb1fb357719b7dcfbca46234a9735b57624`.
 - Dan Abramovich, Kalle Karu, Kenji Matsuki, and Jaroslaw Wlodarczyk,
   *Torification and Factorization of Birational Maps*, arXiv:math/9904135,
   Theorem 0.3.1, for smooth centers normally crossing the boundary—not a
@@ -199,17 +243,18 @@ every arrow without a new refinement of factorization.
   only the point central solution in the first nonzero center example.  The
   toric bundle plus one hypersurface makes it a one-variable Kummer identity.
 - **EJ:** the cancellation is universal for every smooth codimension-two
-  complete intersection \((a,b)\subset\mathbf P^n\): the forbidden
-  coefficient is always \(1/\Gamma(-ad)\).  The cubic pilot is one instance
-  of a structural integrality zero, not an accident.
+  complete intersection of two nef line bundles on any smooth projective
+  base: the forbidden coefficient is always the reciprocal Gamma function
+  at a nonpositive integer.  The cubic pilot is one instance of a structural
+  integrality zero, not an accident.
 - **TT:** use the nef divisor \(A=\xi+bH\), and retain the possibility that
   \(A-(b-a)H\) has negative degree.  Those terms exist in the full
   \(I\)-function but vanish in its \(H^0\) coefficient.  The wrong
   coordinate produces a spurious \({}_2F_2\) tail and hides the exact Kummer
   cancellation.
-- **Settled:** exact point purity for all split codimension-two
-  complete-intersection blow-ups of projective space, including the first
-  nonvacuous C907 cubic-center pilot.
+- **Settled:** exact point purity for all split nef codimension-two
+  complete-intersection blow-ups of smooth projective bases, including the
+  first nonvacuous C907 cubic-center pilot.
 - **Open:** whether the Gamma zero persists under arbitrary normal-bundle
   and master-space curve corrections; composition and product naturality of
   that general point-purity statement.  Standard weak factorization does not
