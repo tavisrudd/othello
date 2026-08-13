@@ -770,6 +770,30 @@ theorem graphLattice_coefficientExtension_preserves_member_and_rankOne
     GraphLattices.matrixCoefficientExtension_mem_weightedRankOneSet
       π diagonal cross form rankOneMember⟩
 
+/-- Exact transport from base coordinates to a separately indexed basis over
+the coefficient-extension ring.  Congruence preserves scalar rank-one forms,
+and applying the supplied inverse basis change recovers every extended base
+form.  The basis equivalence itself remains data: this theorem does not
+construct a finite-etale splitting or eigenbasis. -/
+theorem graphLattice_splitCoordinateBasisChange_rankOne_and_recovery
+    {R S BaseAxis SplitAxis : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Fintype BaseAxis] [Fintype SplitAxis]
+    [DecidableEq BaseAxis] [DecidableEq SplitAxis]
+    (basis : GraphLattices.SplitCoordinateBasisEquivalence
+      S BaseAxis SplitAxis)
+    (coefficient : R) (vector : BaseAxis → R)
+    (form : Matrix BaseAxis BaseAxis S) :
+    GraphLattices.splitCoordinateCoefficientExtension basis.toSplit
+        (GraphLattices.matrixRankOne coefficient vector) =
+      GraphLattices.matrixRankOne (algebraMap R S coefficient)
+        (GraphLattices.splitCoordinateVector basis.toSplit
+          (fun index ↦ algebraMap R S (vector index))) ∧
+      GraphLattices.matrixCongruence basis.toBase
+          (GraphLattices.matrixCongruence basis.toSplit form) = form :=
+  ⟨GraphLattices.splitCoordinateCoefficientExtension_matrixRankOne
+      basis.toSplit coefficient vector,
+    GraphLattices.matrixCongruence_toBase_toSplit basis form⟩
+
 /-- Ordinary product images commute with coefficient extension in the needed
 direction, and faithfully flatness reflects membership from the resulting
 scalar-extended submodule. -/
@@ -906,6 +930,81 @@ theorem rankOne_allDegree_dividedPower_of_splitGraphDVR
     pullbackInjective sourceCompatible divisors extendedRealizationMember
     form member baseClass dividedPower baseClassCompatible degree
     dividedPowerCompatible
+
+/-- The split-graph all-degree packet with the base and split coordinate types
+kept distinct.  A supplied invertible `S`-basis change transports the
+entrywise scalar extension of the base coefficient form into the split graph
+lattice.  Lean discharges rank-one generation, square-zero expansion, and
+faithfully-flat product descent; membership after basis change and all
+cohomological identifications remain explicit hypotheses. -/
+theorem rankOne_allDegree_dividedPower_of_splitGraphDVR_afterBasisChange
+    {R S Target BaseAxis BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S]
+    [CommRing Target] [Algebra R Target]
+    [Fintype BaseAxis] [DecidableEq BaseAxis]
+    (Block : BlockIndex → Type*)
+    [Fintype (GraphLattices.SplitGraphAxis Block)]
+    [DecidableEq (GraphLattices.SplitGraphAxis Block)]
+    [LinearOrder (GraphLattices.SplitGraphAxis Block)]
+    (basis : GraphLattices.SplitCoordinateBasisEquivalence S BaseAxis
+      (GraphLattices.SplitGraphAxis Block))
+    (π : R) (extendedπIrreducible : Irreducible (algebraMap R S π))
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (extendedRealization : Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S →+ TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S
+        (GraphLattices.EllipticSourceHOne S
+          (GraphLattices.SplitGraphAxis Block)))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ GraphLattices.weightedMatrixSubmodule (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar) →
+        extendedRealization candidate ∈
+          GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix BaseAxis BaseAxis R)
+    (member : GraphLattices.splitCoordinateCoefficientExtension
+        basis.toSplit form ∈
+      GraphLattices.weightedMatrixSubmodule (algebraMap R S π)
+        (fun axis ↦ depth axis.1)
+        (GraphLattices.splitGraphCrossDepth Block
+          (IsDiscreteValuationRing.addVal S) depth scalar))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization
+          (GraphLattices.splitCoordinateCoefficientExtension
+            basis.toSplit form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar)) →
+      forms.sum = GraphLattices.splitCoordinateCoefficientExtension
+        basis.toSplit form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        GraphLattices.squarefreeProductSum
+          (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryDivisorProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
+  GraphLattices.allDegree_dividedPowerMember_of_splitGraphDVR_afterBasisChange
+    Block basis π extendedπIrreducible depth scalar extendedRealization
+    pullback pullbackInjective sourceCompatible divisors
+    extendedRealizationMember form member baseClass dividedPower
+    baseClassCompatible degree dividedPowerCompatible
 
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`
