@@ -80,10 +80,10 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 43 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 44 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 83 audited terminals.  The rejecting manuscript inventory covers all
-23 labelled theorem-like environments: 1 absent, 16 fragmentary, 5 conditional
+exports 84 audited terminals.  The rejecting manuscript inventory covers all
+23 labelled theorem-like environments: 0 absent, 17 fragmentary, 5 conditional
 deductions, and 1 complete.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -105,6 +105,10 @@ contains the exact fibrewise deduction from supplied primitive-minimal-class
 algebraicity and Voisin's supplied equivalence to universal `CH₀`-triviality.
 The four conclusions of the separation-family headline are also assembled in
 one conditional theorem with every Chow, packet, and period-map input exposed.
+The relative-six-axis row now has an opaque organizational signature for all
+named geometric assertions and an independently proved full integral Smith
+witness; this is explicitly a fragment, not a conditional proof of the
+scheme-theoretic lemma.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -139,6 +143,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/BirationalDeduction.lean
     Applications/CubicThreefold.lean
     Applications/GenusEightThreefold.lean
+    Applications/RelativeSixAxis.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
   verification/

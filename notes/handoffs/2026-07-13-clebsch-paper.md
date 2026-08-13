@@ -166,9 +166,9 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-43 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 83 reviewer terminals, audit
-commands, and expected axiom rows.  Coverage is explicitly 1 absent, 16
+44 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 84 reviewer terminals, audit
+commands, and expected axiom rows.  Coverage is explicitly 0 absent, 17
 fragmentary, 5 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
 graph lattices, invertible extension-ring basis transport between distinct
@@ -178,11 +178,14 @@ local-block arithmetic, the characteristic-two slope model through scalar
 extension and repeated-root diagonalization, and the exact implication from a
 `{1,-1}` monodromy spectrum to primitive-sixth vanishing.  The exact fibrewise
 deduction from supplied primitive-minimal-class algebraicity and Voisin's
-supplied criterion to universal `CH₀`-triviality is now conditional Lean.  The aggregate build,
+supplied criterion to universal `CH₀`-triviality is now conditional Lean.
 The separation-family headline's four conclusions are now one conditional
 composition with its projective-bundle, packet, and period-map inputs exposed.
-The aggregate build, source correspondence, and 83-terminal axiom transcript are green, and the
-committed standalone export verifies byte-for-byte.  The next formal gates are
+The relative-six-axis row is now an explicit fragment: an opaque organizational
+signature records all named geometric assertions, while Lean independently
+proves the complete integral Smith witness with two-sided inverse operations.
+The aggregate build, source correspondence, and 84-terminal axiom transcript
+are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
 bridge, cohomological realization and Voisin/relative geometry, then quantum
