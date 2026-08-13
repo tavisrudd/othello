@@ -3,11 +3,12 @@
 Date: 2026-08-13
 
 Status: exact dimension sieve.  Once a smooth peak is known to be a
-semi-free standard wall, Gold has only four non-blowup geometries.  The two
-point-base geometries are covered by existing or newly extended Gamma/QDM
-intertwiners.  The remaining standard-wall frontier is a `P^1` ordinary flop
-over a surface and a discrepant `(1,2)` flip over a curve.  Weighted or
-nonstandard toroidal AKMW peaks remain outside this sieve.
+semi-free standard wall, Gold has only four non-blowup geometries.  Ordinary
+flops have an intrinsic point-row theorem.  The curve `(1,2)` geometry is now
+covered by Gu--Yu--Yu, but its Gamma-rank conclusion remains wall-local.  The
+point `(1,3)` row is proved only for the explicit split/disconnected model,
+not every global standard wall.  Weighted or nonstandard toroidal AKMW peaks
+remain outside this sieve.
 
 ## 1. Dimension equation
 
@@ -69,7 +70,10 @@ The split local wall is Gu--Yu--Yu's standard-flip model with wall `pt` and
 discrepancy `-2`.  The isolated-point Gold regression produces six disjoint
 copies sharing one extremal ray.  The finite-disconnected extension in
 `2026-08-13-c907-disconnected-standard-wall-and-point-flip.md` treats them as
-one repeated middle block and proves the rank identity.
+one repeated middle block and proves the rank identity in its wall receiver.
+This does not prove that every arbitrary global standard `(1,3)` flip is
+simple VGIT: the canonical polarization has degree two, not the primitive
+degree one required by the current global criterion.
 
 ### Surface `P^1` flop (`2,2,2`)
 
@@ -114,10 +118,11 @@ over a connected curve is covered by Corollary 6.12.
 
 ## 3. What this does and does not buy
 
-Every **semi-free smooth standard** peak in dimension five is now closed:
-blowups by the one-arrow theorem, ordinary flops by the point-row theorem,
-curve `(1,2)` flips by the discrepancy-one VGIT theorem, and point `(1,3)`
-flips by the explicit/disconnected simple wall.
+The **geometric/QDM coverage** is now closed for ordinary flops and curve
+`(1,2)` flips, and for the explicit point `(1,3)` regression.  It is not yet
+closed for every semi-free smooth standard peak: an arbitrary global point
+`(1,3)` wall is uncovered, and the discrepant simple-VGIT conclusions are
+still wall-local rather than composable intrinsic Gamma-row identities.
 
 This finite list does not prove that AKMW's regular-subdivision peaks are
 semi-free standard walls.  AKMW supplies smooth toroidal blowups/down at the
@@ -129,7 +134,8 @@ gate.
 ## EJ / TT / AA
 
 - **EJ:** in dimension five, the apparently unbounded standard-flip problem
-  collapses to four rows, all now closed for the rank Boolean.
+  collapses to four rows; only one global geometric row and one common
+  realization issue remain.
 - **TT:** “smooth endpoints” does not imply “semi-free smooth master”; the
   finite table begins only after that additional hypothesis is verified.
 - **AA:** audit whether AKMW pi-nonsingularity gives unit-coefficient standard

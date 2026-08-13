@@ -15,8 +15,9 @@ reduction of the C908 lattice.
 For the blowup `M=Bl_0 Theta` of the theta divisor of the intermediate
 Jacobian of a smooth cubic threefold, C908 provides:
 
-- a canonical nonsplit extension of `H^3(X,Z)` by `wedge^3 Lambda` in
-  `H^3(M,Z)`;
+- a split short exact sequence of free abelian groups
+  `0 -> wedge^3 Lambda -> H^3(M,Z) -> H^3(X,Z) -> 0`, together with a
+  canonical **non-product gluing** under `(b_*,e_X^*)`;
 - the exact saturation
   `L_3 wedge^3 Lambda + Theta^[2] wedge Lambda`, of index `2^10`;
 - integral surjectivity from the Fano-surface degree-six model;
@@ -42,7 +43,7 @@ In particular, the following implications are not supplied by C908:
 
 \[
  X\times P^2\text{ rational}
- \Longrightarrow H^3(M,Z)\text{ splits},
+ \Longrightarrow \rho\text{ vanishes (or the canonical gluing becomes a product)},
 \]
 
 or
@@ -65,7 +66,7 @@ The smallest useful attack is conditional and falsifiable:
 2. push it through the Abel--Jacobi/Fano-surface realization used by C908;
 3. prove that it induces either an integral retraction of the canonical
    `H^3(X)` extension or an odd-depth lift of the rank-ten escape quotient;
-4. contradict the closed-form nonsplitting or depth-two theorem.
+4. contradict the closed-form gluing or depth-two theorem.
 
 The first hostile regression is a smooth cubic on a known special
 universal-`CH_0`-trivial locus.  If the proposed correspondence implication
@@ -81,6 +82,6 @@ minimal-class criterion.
   independent obstructions.
 - **TT:** a uniform topological lattice cannot by itself detect an
   algebraicity locus which varies in moduli.
-- **AA:** try to force an integral retraction from a stable-rational
-  correspondence; test it immediately on the special universal-`CH_0`
-  loci before investing in a general proof.
+- **AA:** try to force a retraction compatible with `(b_*,e_X^*)`, not a
+  mere abstract splitting (which already exists); test it immediately on
+  the special universal-`CH_0` loci before investing in a general proof.

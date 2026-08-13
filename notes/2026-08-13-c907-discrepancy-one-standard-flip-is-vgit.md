@@ -2,17 +2,20 @@
 
 Date: 2026-08-13
 
-Status: exact source-extension theorem.  Every smooth projective standard
+Status: exact source-extension theorem for geometric coverage.  Every smooth projective standard
 flip of type `(1,2)` over a smooth connected complex curve is a `D`-flip
 satisfying Gu--Yu--Yu Lemma 6.9.  The primitive polarization is the canonical
 bundle; fibrewise `O(1)` normal generation gives degree-`(+/-1)` generation
 of the wall algebra; and the standard common-blowup model makes the
 nonzero-degree ideal the prime ideal of the wall.  Corollary 6.12 therefore
-proves the QDM decomposition, and the C907 simple-wall argument preserves the
-primitive-sixth Gamma rank Boolean.
+proves the QDM decomposition, and the C907 simple-wall argument gives the
+primitive-sixth Gamma-rank identity in that wall's fixed-sector receiver.
 
-Together with the ordinary-flop point-row theorem and point `(1,3)` wall,
-this closes every smooth semi-free standard-wall type in dimension five.
+This closes the Gu--Yu--Yu **coverage** gap for the curve `(1,2)` row.  It
+does not turn the wall-local receiver identity into the intrinsic row needed
+to compose adjacent walls.  Nor does it cover an arbitrary global point
+`(1,3)` wall; only the explicit split/disconnected point model is presently
+proved.
 
 ## 1. Canonical divisor is the primitive polarization
 
@@ -134,7 +137,7 @@ Gu--Yu--Yu Lemma 6.9 makes the master smooth and semi-free, and Corollary
 over their reduced Laurent-Novikov base, intertwining the full connections
 and Poincare pairings.
 
-The C907 simple-VGIT point-row theorem applies.  A point in the common open
+The C907 simple-VGIT point-row theorem applies in a fixed wall receiver.  A point in the common open
 has ambient coordinate one; the curve summand is supported and has rank
 zero.  Shen--Shoemaker's oriented asymptotics and the fixed-sector receiver
 give
@@ -146,12 +149,17 @@ give
  \mathfrak r_{X_+}|_{P_6(X_+)}\ne0.}               \tag{11}
 \]
 
+Equation (11) is wall-local in exactly the sense of
+`2026-08-13-c907-simple-vgit-rank-theorem.md`: it does not identify the two
+incident large-radius/Stokes realizations at a later peak.
+
 ## 5. Boundary
 
 Discrepancy one is load-bearing.  If `r_- - r_+=nu>1`, the canonical
 polarization restricts as `O(nu)` and does not supply Lemma 6.9(iii).  The
-point `(1,3)` case is handled by an explicit simple-VGIT model.  In higher
-dimensions, nonprimitive discrepancy remains a genuine weighted/index issue.
+one point `(1,3)` case is handled by an explicit simple-VGIT model.  An
+arbitrary global standard `(1,3)` flip still has nonprimitive discrepancy and
+remains a genuine weighted/index issue.
 
 The theorem assumes the exact standard common-blowup geometry of Definition
 3.4.  An AKMW pi-nonsingular elementary piece must still be shown to
@@ -163,9 +171,9 @@ globalize to that form.
   coordinate; no auxiliary polarization or root stack is needed.
 - **TT:** relative ampleness alone gives generation only after a Veronese.
   The fibre degree-one calculation (2)--(3) is what makes the master smooth.
-- **AA:** audit the precise toric meaning of AKMW pi-nonsingularity.  If its
-  elementary circuit has unit coefficients, all smooth fivefold peaks land
-  in the now-closed standard portfolio.
+- **AA:** audit the precise toric meaning of AKMW pi-nonsingularity.  A unit
+  circuit would reduce the remaining geometric problem to the point `(1,3)`
+  wall and the separate receiver-coherence gate.
 
 ## Sources and derivations
 

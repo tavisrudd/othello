@@ -82,18 +82,20 @@ by six `P3`'s with normal `O(-1)^2`.  Gu--Yu--Yu's proof extends
 componentwise from a connected wall to this finite disjoint union with equal
 normal ranks and one extremal variable.  The resulting two point packets per
 component are rank-zero, so the wall preserves the primitive-sixth rank
-Boolean.  The next frontier is a nonsplit connected standard flip or a
-weighted toroidal wall, not the isolated-point model.
+Boolean in that wall receiver.  The next frontier is an arbitrary global
+point `(1,3)` standard flip, a nonsplit realization issue, or a weighted
+toroidal wall—not the isolated-point model.
 
 For semi-free smooth standard peaks, the remaining Gold geometry is now a
 finite list; see
 `../2026-08-13-c907-fivefold-standard-peak-portfolio.md`.  The dimension
 identity `5=dim(S)+r_++r_--1` leaves only a surface-family `P1` flop, a
-curve-family `(1,2)` flip, the closed point `(1,3)` flip, and Chen--Tseng's
-point `P2` flop, besides blowups.  Thus only the first two require new
-standard-wall globalization.  This does not remove the separate AKMW
-question of whether every inserted smooth toroidal peak is actually
-semi-free standard.
+curve-family `(1,2)` flip, a point `(1,3)` flip, and Chen--Tseng's point `P2`
+flop, besides blowups.  The ordinary rows are intrinsically closed.  The
+curve row has formal-QDM coverage but only a wall-local Gamma identity; the
+point `(1,3)` row is closed only for the explicit split/disconnected model.
+This does not remove the separate AKMW question of whether every inserted
+smooth toroidal peak is actually semi-free standard.
 
 Gu--Yu--Yu Section 6.5 further shrinks the curve `(1,2)` frontier.  Their
 Lemma 6.9 and Corollary 6.12 cover every global `D`-flip whose wall section
@@ -105,7 +107,8 @@ smooth standard `(1,2)` flip; see
 gives `K_X-|P2=O(-1)` and `K_X+|P1=O(1)`, so `D=K_X-` is the primitive global
 polarization.  Fibrewise normal generation gives the degree-`+/-1` algebra,
 and the common blowup makes its nonzero-degree ideal the prime wall ideal.
-Gu--Yu--Yu Corollary 6.12 therefore closes the curve row.
+Gu--Yu--Yu Corollary 6.12 therefore closes the curve row's geometric/QDM
+coverage.  The adjacent-receiver coherence gate remains.
 
 The full crepant Gamma/K theorem has an exact publishable specification in
 `../2026-08-13-c907-surface-ordinary-flop-extension-spec.md`.  LLW ancestor
@@ -125,12 +128,12 @@ the transverse tail.  The same regular gauge transports `P6` and the
 pairing.  This removes the surface-family `P1` flop and all other crepant
 ordinary peaks from Gold without claiming descendant invariance.
 
-Consequently every smooth semi-free **standard** peak type in dimension five
-is closed.  Gold's remaining geometric question has narrowed to one source
-statement: whether AKMW's pi-nonsingular elementary cobordism pieces are
-globally standard unit-coefficient walls (possibly with finite disconnected
-middle strata), rather than merely smooth-boundary toroidal blowup/down
-diagrams.
+Consequently the intrinsic theorem covers every ordinary standard peak, and
+the simple-VGIT theorem covers the discrepant curve row wall by wall.  Gold
+still has three coupled gates: arbitrary global point `(1,3)` coverage,
+adjacent-receiver coherence for discrepant walls, and whether AKMW's
+pi-nonsingular elementary pieces are globally standard unit-coefficient
+walls rather than merely smooth-boundary toroidal diagrams.
 
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
@@ -144,12 +147,15 @@ classification; it is not a cheaper Gold closure.
 
 The C908 blown-up-theta integral lattice is audited in
 `../2026-08-13-c907-c908-theta-lattice-relevance-audit.md`.  Its canonical
-nonsplit extension, `2^10` saturation defect, and rank-ten escape quotient
-are real assets, but they are uniform for smooth cubics and therefore do not
-by themselves detect the special loci where the minimal-theta obstruction
-can fail.  A C907 application would need a new theorem forcing an integral
-splitting or depth reduction from stable rationality; universal-`CH_0`
-special cubics are the first falsifier for any weaker bridge.
+non-product gluing, `2^10` saturation defect, and rank-ten escape quotient
+are real assets, but the underlying free short exact sequence already splits
+abstractly.  The fivefold carrier calculation in
+`../2026-08-13-c907-c908-fivefold-carrier-reduction.md` gives a sharper
+negative: for a Fano-surface center the ordinary blowup framing upgrades the
+even map `2S` to the primitive graph `(2S,id)`.  Thus neither the bare lattice
+nor ordinary Lefschetz/Gysin framing obstructs Gold.  A surviving use would
+have to transport the specific theta maps `(b_*,e_X^*)` across the
+factorization; no such functorial construction is known.
 
 The first explicit peak regression is banked in
 `../2026-08-13-c907-geiser-peak-descendant-intertwiner.md`.  For the
