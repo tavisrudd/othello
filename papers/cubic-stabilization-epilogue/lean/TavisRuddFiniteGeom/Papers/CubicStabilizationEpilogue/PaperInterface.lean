@@ -343,6 +343,29 @@ theorem graphCoefficient_rectangular_unitPositive_commutator
   GraphLattices.unitPositive_commutator_divisible π positiveDepth coefficient
     unitSlope positiveSlope coefficientDivides
 
+/-- Global finite-family assembly of the split graph coefficient formula,
+including unrestricted depth-zero blocks. -/
+theorem graphCoefficient_symmetricFiniteBlockFamily_depth_iff_descent
+    {R Index : Type*} [CommRing R] [IsDomain R]
+    [IsDiscreteValuationRing R] [Fintype Index]
+    (Block : Index → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    {π : R} (πIrreducible : Irreducible π)
+    (depth : Index → ℕ) (scalar : Index → R)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) :
+    (GraphLattices.GraphBlockSymmetric Block coefficient ∧
+      GraphLattices.GraphBlockDepthCondition Block π
+        (IsDiscreteValuationRing.addVal R) depth scalar coefficient) ↔
+      (GraphLattices.GraphBlockSymmetric Block coefficient ∧
+        GraphLattices.GraphBlockDescentCondition Block π depth scalar slopeError
+          coefficient) :=
+  GraphLattices.symmetricGraphBlockDepthCondition_iff_descentCondition Block
+    (GraphLattices.NormalizedDVRValuation.ofIsDiscreteValuationRing
+      πIrreducible)
+    depth scalar slopeError coefficient
+
 /-- Arithmetic core of the graph coefficient depth formula: the maximum
 depth is exactly the intersection of the three power-divisibility conditions,
 and it always satisfies the midpoint inequality. -/

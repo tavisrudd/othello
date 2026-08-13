@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 54 reviewer terminals.
+1 complete; 55 reviewer terminals.
 
-The 54 reviewer-facing terminals currently verify:
+The 55 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -53,7 +53,9 @@ The 54 reviewer-facing terminals currently verify:
   single cross-depth condition and all three split-slope block conditions,
   now for actual rectangular matrices of arbitrary finite block ranks; the
   unit-to-positive rectangular commutator calculation; and the remaining
-  intersection arithmetic underlying the coefficient-lattice calculation;
+  intersection arithmetic, assembled across a finite dependent family of
+  blocks including unrestricted depth-zero blocks, underlying the
+  coefficient-lattice calculation;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
   orthogonal local block, and its exact depth-one arithmetic at two and three;

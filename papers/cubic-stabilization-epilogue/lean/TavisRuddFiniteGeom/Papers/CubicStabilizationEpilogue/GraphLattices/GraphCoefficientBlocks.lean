@@ -245,6 +245,104 @@ theorem unitPositive_commutator_divisible
     (MatrixEntriesDivisibleBy.mul_right coefficientDivides positiveSlope)
     (MatrixEntriesDivisibleBy.mul_left coefficientDivides unitSlope)
 
+/-- Blockwise coefficient-depth condition for a finite split graph family.
+Depth-zero blocks are allowed: writing their slope as a scalar plus an
+arbitrary error imposes no restriction because the error is multiplied by
+the zeroth power of the uniformizer. -/
+def GraphBlockDepthCondition
+    {R Index : Type*} [CommRing R]
+    (Block : Index → Type*) (uniformizer : R)
+    (valuation : R → ℕ∞) (depth : Index → ℕ) (scalar : Index → R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) : Prop :=
+  ∀ first second,
+    MatrixEntriesDivisibleBy
+      (uniformizer ^ graphCrossDepth (depth first) (depth second)
+        (valuation (scalar second - scalar first)))
+      (coefficient first second)
+
+/-- The three actual graph-descent block conditions for every ordered pair in
+a finite split graph family. -/
+def GraphBlockDescentCondition
+    {R Index : Type*} [CommRing R]
+    (Block : Index → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    (uniformizer : R) (depth : Index → ℕ) (scalar : Index → R)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) : Prop :=
+  ∀ first second,
+    MatrixEntriesDivisibleBy (uniformizer ^ depth first)
+        (coefficient first second) ∧
+      MatrixEntriesDivisibleBy (uniformizer ^ depth second)
+        (coefficient first second) ∧
+      MatrixEntriesDivisibleBy
+        (uniformizer ^ (depth first + depth second))
+        (rectangularSplitSlopeCommutator uniformizer
+          (depth first) (depth second) (coefficient first second)
+          (scalar first) (scalar second) (slopeError first) (slopeError second))
+
+/-- Symmetry of a dependent family of rectangular coefficient blocks. -/
+def GraphBlockSymmetric
+    {R Index : Type*} [CommRing R] (Block : Index → Type*)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) : Prop :=
+  ∀ first second,
+    (coefficient second first).transpose = coefficient first second
+
+/-- Finite-family assembly of the graph coefficient calculation.  The
+matrix-of-ideals depth prescription for every rectangular block is exactly
+equivalent to all three graph-descent block conditions for every ordered
+pair, including depth-zero blocks. -/
+theorem graphBlockDepthCondition_iff_descentCondition
+    {R Index : Type*} [CommRing R]
+    (Block : Index → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    {uniformizer : R} (data : NormalizedDVRValuation uniformizer)
+    (depth : Index → ℕ) (scalar : Index → R)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) :
+    GraphBlockDepthCondition Block uniformizer data.valuation depth scalar
+        coefficient ↔
+      GraphBlockDescentCondition Block uniformizer depth scalar slopeError
+        coefficient := by
+  constructor <;> intro condition first second
+  · exact (matrixEntries_graphCrossDepth_iff_splitSlopeCommutator data
+      (depth first) (depth second) (coefficient first second)
+      (scalar first) (scalar second) (slopeError first) (slopeError second)).mp
+        (condition first second)
+  · exact (matrixEntries_graphCrossDepth_iff_splitSlopeCommutator data
+      (depth first) (depth second) (coefficient first second)
+      (scalar first) (scalar second) (slopeError first) (slopeError second)).mpr
+        (condition first second)
+
+/-- Symmetric matrix-of-ideals form of the finite-family assembly theorem. -/
+theorem symmetricGraphBlockDepthCondition_iff_descentCondition
+    {R Index : Type*} [CommRing R]
+    (Block : Index → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    {uniformizer : R} (data : NormalizedDVRValuation uniformizer)
+    (depth : Index → ℕ) (scalar : Index → R)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) R)
+    (coefficient : ∀ first second,
+      Matrix (Block first) (Block second) R) :
+    (GraphBlockSymmetric Block coefficient ∧
+      GraphBlockDepthCondition Block uniformizer data.valuation depth scalar
+        coefficient) ↔
+      (GraphBlockSymmetric Block coefficient ∧
+        GraphBlockDescentCondition Block uniformizer depth scalar slopeError
+          coefficient) := by
+  constructor
+  · rintro ⟨symmetric, depthCondition⟩
+    exact ⟨symmetric,
+      (graphBlockDepthCondition_iff_descentCondition Block data depth scalar
+        slopeError coefficient).mp depthCondition⟩
+  · rintro ⟨symmetric, descentCondition⟩
+    exact ⟨symmetric,
+      (graphBlockDepthCondition_iff_descentCondition Block data depth scalar
+        slopeError coefficient).mpr descentCondition⟩
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
