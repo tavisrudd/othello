@@ -1,8 +1,8 @@
-# C907 audit: relative schönness, regular DVR model, and the Rees subfan
+# C907 audit: bounded-value schönness, regular DVR model, and the Rees subfan
 
 **Lane:** `clebsch`
 
-**Verdict:** the new relative-schön route does eliminate the need for an
+**Verdict:** the bounded-value absolute-schön route eliminates the need for an
 explicit 97,709-chart *scheme* construction to obtain a proper regular graph
 model over the original `delta` DVR.  It must be stated with one correction:
 the certified initials are smooth as schemes with `L` allowed to vary.  This
@@ -30,6 +30,18 @@ nonvanishing records, together with the integral pair-of-pants initials,
 show that the three displayed initial equations form the full initial ideal.
 The circuit argument then proves that the resulting initial scheme in
 `T_7 x S` is smooth or empty.
+
+Here `T_7` inverts the auxiliary coordinates `U,V`, so this very-affine open
+omits the retained translated divisors `B=1` and `C=1`.  This does not discard
+them from the graph model.  On the generic fibre, eliminate `U=1-B` and
+`V=1-C`; the graph ring is a localization of an integral Laurent polynomial
+ring, and `UV` is a non-zero-divisor.  Hence the locus `UV!=0` is
+schematically dense in the graph with `U,V` allowed to vanish.  Its closure
+in any marked toric ambient is therefore the same schematic closure as the
+original generic graph.  Over the DVR we always take that strict generic
+closure, so no vertical component and no translated divisor is saturated
+away.  This density comparison attaches the intrinsic tropical
+compactification back to the original Cartier graph.
 
 The filtered-regular-sequence step is legitimate here directly on the
 original very-affine graph.  It is not using a strict-transform chart: the
@@ -90,7 +102,7 @@ compactifying the value line.
 ## 3. The filtered-Koszul shortcut is valid
 
 This supplies the missing formal bridge from the finite initial calculation to
-relative schönness of the **very-affine graph**; no strict-transform chart
+bounded-value schönness of the **very-affine graph**; no strict-transform chart
 attachment is needed for that conclusion.
 
 Fix a rational weight `w` and multiply the graph equation by the Laurent
@@ -117,6 +129,15 @@ The normal-form certificate says precisely that `bar H` has nonzero image in
 \]
 
 is a regular sequence.
+
+For coverage, every weight in the tropicalization of the two
+pair-of-pants equations lies in one of the sixteen ordered products of the
+four tripod cones.  At positive `delta` order, the fifteen pairwise graph-
+weight walls cut each such cone into exactly the cells serialized by the
+`t=1` replay; its 552 ordered-type/mask records therefore contain the record
+for this `w`.  The horizontal case is supplied separately below.  Thus the
+regular-sequence premise is quantified over every bounded-value tropical
+weight, not merely over the stored representatives.
 
 The filtered Koszul complex on `f_B,f_C,H` has associated graded the Koszul
 complex on (4).  The latter is exact in positive degrees.  The elementary
