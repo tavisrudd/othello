@@ -232,12 +232,14 @@
     },
     {
       "manuscript_label": "prop:cubic-packet",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The numerical small even quantum connection of a smooth complex cubic threefold.",
-      "hypotheses": "Cai's integral-z block diagonalization and the numerical-Novikov convention.",
-      "conclusion": "Primitive-sixth framed multiplicity exactly two.",
-      "cautions": "The two rank-one blocks and the rank-two indicial polynomial must both be accounted for."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues"
+      ],
+      "objects": "Cai's displayed rational indicial polynomial rho^2+rho+5/36 and complex exponentials for one turn of the original loop coordinate.",
+      "hypotheses": "No geometric or quantum hypothesis occurs in the checked arithmetic statement; the displayed polynomial is taken as the rank-two block polynomial to be analyzed.",
+      "conclusion": "The polynomial factors with roots -1/6 and -5/6, and their one-turn exponentials are respectively the negative and positive primitive sixth roots.",
+      "cautions": "The smooth cubic threefold, its numerical small even quantum connection, Cai's integral-z block diagonalization, proof that this polynomial is its rank-two zero-exponential block, and proof that the remaining two rank-one blocks contribute only eigenvalue one are absent; therefore multiplicity exactly two is not yet proved."
     },
     {
       "manuscript_label": "cor:v14-one-step",

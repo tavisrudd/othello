@@ -8,6 +8,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShift
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 
 /-!
@@ -213,6 +214,21 @@ theorem framedSixthMultiplicity_polynomial_list_prod
     Quantum.sixthMultiplicityPolynomial polynomials.prod =
       (polynomials.map Quantum.sixthMultiplicityPolynomial).sum :=
   Quantum.sixthMultiplicityPolynomial_list_prod polynomials nonzero
+
+/-- Arithmetic core of Cai's cubic rank-two block: the displayed indicial
+polynomial factors with exponents `-1/6` and `-5/6`, whose one-turn framed
+monodromies are the two primitive sixth roots. -/
+theorem cubicPacket_indicial_factorization_and_framed_eigenvalues :
+    Quantum.cubicIndicialPolynomial =
+        (Polynomial.X - Polynomial.C (-1 / 6)) *
+          (Polynomial.X - Polynomial.C (-5 / 6)) ∧
+      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (-1 / 6)) =
+        Quantum.primitiveSixthRootNegative ∧
+      Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (-5 / 6)) =
+        Quantum.primitiveSixthRootPositive :=
+  ⟨Quantum.cubicIndicialPolynomial_factorization,
+    Quantum.cubicExponent_neg_one_sixth,
+    Quantum.cubicExponent_neg_five_sixths⟩
 
 /-- Reviewer-facing type of strict Novikov-admissibility certificates for an
 effective numerical monoid and a complete separated topological domain. -/
