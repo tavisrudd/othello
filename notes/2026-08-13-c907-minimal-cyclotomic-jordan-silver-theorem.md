@@ -4,10 +4,10 @@
 
 **Status:** theorem-grade reduction of the `m=2` acceptance object.  Silver
 does not require an integral Gamma marking, an Euler pairing, or the full
-directed Stokes flag.  It is enough to construct a strict operation-compatible
-nilpotent operator on one rational primitive-sixth eigenspace.  The target
-category is the elementary Krull--Schmidt category of nilpotent Jordan
-modules over `Q(zeta_6)`.
+directed Stokes flag.  It is enough to construct a strict
+operation-compatible nilpotent operator on one generalized primitive-sixth
+eigenspace.  The target category is the elementary Krull--Schmidt category
+of nilpotent Jordan modules over `Q(zeta_6)`.
 
 ## The minimal category
 
@@ -34,9 +34,14 @@ Thus multiplicity of `J_3` is an isomorphism invariant.  It cannot be made
 from several `J_1` or `J_2` summands by taking a direct sum, and it cannot
 disappear under cancellation in a positive biproduct identity.
 
-A Tate-shift label may be adjoined as an integer grading or autoequivalence;
-it does not change the underlying Jordan length.  No integral
-Krull--Schmidt assertion is needed: the whole argument takes place over `K`.
+The most economical handling of Tate shifts is an upstream graded
+`K[N]`-category in which `N` has degree `+1` and Tate translation shifts the
+grading, followed by the exact additive functor forgetting the grading to
+`mathcal J`.  Equivalently one may start with a strict blowup formula already
+in `mathcal J`, provided every Tate-shift autoequivalence preserves `J_3`.
+A degree-zero labelled category would not model the operator joining
+consecutive Tate levels.  No integral Krull--Schmidt assertion is needed: the
+final cancellation argument takes place over `K`.
 
 ## Exact Silver realization hypotheses
 
@@ -50,9 +55,20 @@ enough to construct an object
 
 with the following properties.
 
-1. **Formal forgetting.**  Forgetting `N` gives one chosen primitive-sixth
-   eigenspace of the framed formal QDM after scalar extension to `K`.
-2. **Projective endpoint.**  The Kunneth/projective-bundle comparison gives
+1. **Formal forgetting.**  After scalar extension to `K`, let
+
+   \[
+    E_{\zeta}=\ker(T-\zeta_6)^M
+   \]
+
+   be the entire generalized `zeta_6` eigenspace for sufficiently large
+   `M`.  Forgetting `N` identifies the whole underlying `K`-space of
+   `mathscr J_6(Y)` with `E_zeta`, and `[N,T]=0`.  The rational form makes
+   the conjugate algebraic multiplicities equal.  Every Tate shift used in
+   (5) preserves this selected sector, or the comparison is first made in
+   both conjugate sectors and then forgotten to the same Jordan category.
+2. **Projective endpoint.**  In addition to the formal Kunneth dimension
+   calculation, the specified operation-compatible `N` satisfies
    
    \[
     \mathscr J_6(X\times\mathbf P^2)
@@ -60,9 +76,12 @@ with the following properties.
     \tag{4}
    \]
    
-   as an actual direct summand, while `mathscr J_6(P^5)=0`.
+   as an actual direct summand.  This is an independent endpoint calibration:
+   Kunneth alone gives three vector-space copies, not the arrows joining them.
+   Formal forgetting as an equality implies `mathscr J_6(P^5)=0`.
 3. **Strict blowup.**  For every smooth blowup of codimension `r`, there is an
-   actual biproduct in `mathcal J`, with its Tate labels retained if desired,
+   actual biproduct in one common additive category (or one whose exact
+   grading-forgetful image lies in `mathcal J`),
    
    \[
     \mathscr J_6(\operatorname{Bl}_Z Y)
@@ -71,9 +90,9 @@ with the following properties.
     \bigoplus_{j=1}^{r-1}T^j\mathscr J_6(Z).
     \tag{5}
    \]
-4. **Center exclusion.**  For every smooth projective threefold `Z`,
-   `mathscr J_6(Z)` contains no `J_3`; point, curve, and surface packets are
-   zero.
+4. **Center exclusion.**  For every smooth projective threefold `Z` and every
+   shift occurring in (5), the forgotten object contains no `J_3`; point,
+   curve, and surface packets are zero.
 
 These are strictly weaker data than an integral Stokes/Gamma/Rees object.
 Pairing compatibility, a marked Gamma seed, the point-class shear, and
@@ -102,14 +121,16 @@ none by item 4.  Krull--Schmidt uniqueness contradicts (6).
 
 ## Formal-rank admission inside the minimal category
 
-One chosen `K`-eigenspace has dimension
+The generalized `K`-eigenspace has dimension
 
 \[
  \dim_K\mathscr J_6(Z)=\nu_6(Z)/2
  \tag{7}
 \]
 
-under formal forgetting.  Therefore
+under the rational generalized-primary form and formal forgetting.  Ordinary
+eigenspace dimension would be wrong in the presence of a nonsemisimple
+formal-monodromy block.  Therefore
 
 \[
  J_3\subset\mathscr J_6(Z)
@@ -119,10 +140,11 @@ under formal forgetting.  Therefore
 \]
 
 This recovers the cyclotomic rank-six screen without referring to individual
-integral Rees grades.  It conditionally removes every landed `nu_6<=4`
-birational class from the center search.  The universal carrier input can be
-stated at its exact weakest level: no arbitrary smooth threefold with
-`nu_6>=6` realizes `J_3` in (3).
+integral Rees grades.  Under the repaired generalized-eigenspace and
+all-shifts hypotheses for each model, it conditionally removes every landed
+`nu_6<=4` birational class from the center search.  The universal carrier
+input can be stated at its exact weakest level: no arbitrary smooth
+threefold with `nu_6>=6` realizes `J_3` in (3).
 
 ## What remains genuinely analytic
 
@@ -135,7 +157,8 @@ only after a geometric operator joins their consecutive Tate levels.
 The revised analytic gate is therefore precisely:
 
 > construct one presentation-independent rational nilpotent operator `N`
-> on the primitive-sixth QDM eigenspace, prove the endpoint calibration (4),
+> on the generalized primitive-sixth QDM eigenspace, prove the independent
+> endpoint calibration (4),
 > and prove strict blowup additivity (5).
 
 This is smaller than the former integral hyperplane-equivariant
@@ -153,5 +176,6 @@ platinum object, but it is not a Silver prerequisite.
 - **Settled:** the minimal rational Krull--Schmidt target and the exact four
   hypotheses implying `m=2` irrationality.
 - **Open:** construct the operation-compatible `N`; exclude `J_3` for
-  arbitrary threefolds of formal multiplicity at least six.  All
-  `nu_6<=4` classes are already conditionally inadmissible.
+  arbitrary threefolds of formal multiplicity at least six.  Under the
+  generalized-eigenspace/all-shifts realization, every `nu_6<=4` class is
+  inadmissible.
