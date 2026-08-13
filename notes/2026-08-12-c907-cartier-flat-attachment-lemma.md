@@ -4,8 +4,11 @@
 
 **Status:** proved structural reduction for the full-initial gate.  It turns
 scheme-theoretic flat attachment into a fibrewise nonvanishing check for one
-normalized Cartier section.  It does not construct the regular refinement or
-verify that check on its strata.
+normalized Cartier section.  The adjacent exact replay
+`2026-08-12-c907-pair-of-pants-initial-nonvanishing.py` now verifies that
+check for all 552 realized ordered-type/mask pairs in the 81,367-cell support
+complex.  It does not construct the regular refinement or identify the
+normalized strict generator on its charts.
 
 ## Fibrewise Cartier lemma
 
@@ -139,6 +142,7 @@ map on a coarser control stratum; the stratumwise Fitting replay is unchanged.
   and face compatibility are formal; only vanishing and smoothness carry
   geometric content.
 - **Settled:** scheme-theoretic flat attachment and expected codimension from
-  fibrewise regularity of the normalized section.
+  fibrewise regularity of the normalized section; nonvanishing on every
+  currently serialized pair-of-pants base initial.
 - **Open:** construction of the regular refinement and the finite verification
   of exceptional orders, nonvanishing, and smoothness normal forms.

@@ -1,7 +1,7 @@
 # C907: Mori-fibre carrier regression and the ramified residual target
 
-**Lane:** `clebsch`  
-**Task:** C907 quantum-monodromy stabilization  
+**Lane:** `clebsch`
+**Task:** C907 quantum-monodromy stabilization
 **Status:** exact regression plus conditional target; it does **not** prove the
 threefold enriched-length bound.
 

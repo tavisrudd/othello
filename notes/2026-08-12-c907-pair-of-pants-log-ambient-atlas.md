@@ -86,15 +86,22 @@ The strict ray presentations and their zero faces are:
 Thus a zero ray coefficient attaches to the generic `g` presentation. It
 must not retain a strict-ray pair-of-pants initial equation.
 
-The simultaneous finite `0/1` incidence bridge is
+The finite `0/1` incidence transition identity is
 
 ```text
 s*b0 + t*b1 = 1,
 bInf = s*t*b0 = t - t^2*b1.
 ```
 
-These are the required nonmonomial transitions. Setting either `s=1` or
-`t=1` recovers the generic pair-of-pants equation.
+These are the required nonmonomial transition identities.  They do not by
+themselves define a simultaneous positive-order `0/1` residue chart: if both
+`s,t` have positive `delta`-order and both `b0,b1` are residue units, the
+central fibre of the first equation is empty.  A genuine chart must instead
+specify the valuation/localization in which at least one summand has order
+zero, or allow the corresponding affine coordinate to carry compensating
+order.  Setting either `s=1` or `t=1` recovers the generic pair-of-pants
+equation.  The replay below checks the transition ideal, not this missing
+feasibility/coverage datum.
 
 The second equality follows by multiplying the incidence equation by `t`.
 It exposes a defect in the old support-note display, which wrote
