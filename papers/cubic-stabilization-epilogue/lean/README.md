@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 50 reviewer terminals.
+1 complete; 51 reviewer terminals.
 
-The 50 reviewer-facing terminals currently verify:
+The 51 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -48,8 +48,9 @@ The 50 reviewer-facing terminals currently verify:
   graph-coordinate block multiplication, equivalence of entrywise integrality
   with the three displayed block conditions, the exact DVR equivalence between
   scalar-difference-product divisibility and the truncated valuation deficit,
-  and cross-depth intersection arithmetic underlying the coefficient-lattice
-  calculation;
+  the reduction of the full split-slope commutator to that deficit under the
+  two diagonal coefficient conditions, and cross-depth intersection arithmetic
+  underlying the coefficient-lattice calculation;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
   orthogonal local block, and its exact depth-one arithmetic at two and three;

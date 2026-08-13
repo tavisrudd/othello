@@ -145,6 +145,44 @@ theorem slopeCommutator_expansion
     mul_assoc secondPower coefficient secondError]
   noncomm_ring [firstScalarCentral, secondScalarCentral]
 
+/-- Once the coefficient satisfies both diagonal depth conditions, the two
+error terms in the slope-commutator expansion vanish modulo the total depth.
+Thus total-depth divisibility of the full commutator is equivalent to that of
+the scalar-difference term. -/
+theorem slopeCommutator_totalDepth_dvd_iff_scalarDifference
+    {R : Type*} [CommRing R] (uniformizer : R)
+    (firstDepth secondDepth : ℕ)
+    (coefficient firstScalar secondScalar firstError secondError : R)
+    (firstCoefficientDivides : uniformizer ^ firstDepth ∣ coefficient)
+    (secondCoefficientDivides : uniformizer ^ secondDepth ∣ coefficient) :
+    uniformizer ^ (firstDepth + secondDepth) ∣
+        coefficient * (secondScalar + uniformizer ^ secondDepth * secondError) -
+          (firstScalar + uniformizer ^ firstDepth * firstError) * coefficient ↔
+      uniformizer ^ (firstDepth + secondDepth) ∣
+        (secondScalar - firstScalar) * coefficient := by
+  rw [slopeCommutator_expansion coefficient firstScalar secondScalar
+    (uniformizer ^ firstDepth) (uniformizer ^ secondDepth)
+    firstError secondError (mul_comm _ _) (mul_comm _ _) (mul_comm _ _)]
+  have secondErrorDivides : uniformizer ^ (firstDepth + secondDepth) ∣
+      uniformizer ^ secondDepth * (coefficient * secondError) := by
+    rcases firstCoefficientDivides with ⟨firstQuotient, coefficientIdentity⟩
+    refine ⟨firstQuotient * secondError, ?_⟩
+    rw [coefficientIdentity, pow_add]
+    ring
+  have firstErrorDivides : uniformizer ^ (firstDepth + secondDepth) ∣
+      uniformizer ^ firstDepth * (firstError * coefficient) := by
+    rcases secondCoefficientDivides with ⟨secondQuotient, coefficientIdentity⟩
+    refine ⟨firstError * secondQuotient, ?_⟩
+    rw [coefficientIdentity, pow_add]
+    ring
+  constructor
+  · intro fullDivides
+    have restored := (fullDivides.add firstErrorDivides).sub secondErrorDivides
+    convert restored using 1
+    ring
+  · intro scalarDivides
+    exact (scalarDivides.add secondErrorDivides).sub firstErrorDivides
+
 /-- Truncated subtraction by an extended valuation, with infinite valuation
 contributing no additional depth. -/
 def truncatedDepthDifference (total : ℕ) (valuation : ℕ∞) : ℕ :=
