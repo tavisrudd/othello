@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 124 reviewer-facing Lean terminals.  These counts summarize the
+There are 125 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 124 reviewer terminals.
+1 complete; 125 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -66,7 +66,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   quotients, construction of the small and bulk
   monodromy matrices, divisor substitutions, and the manuscript's
   multivariable Laurent integral-`z` gauge from the string/divisor/bulk flat
-  equations.  The ordinary one-variable varying formal solution, its compatible
+  equations.  Uniqueness of a supplied normalized multivariable solution over
+  ordinary Laurent-series coefficients is formalized, but existence,
+  integrability, quotient compatibility, and uniform Laurent-order bounds are
+  not.  The ordinary one-variable varying formal solution, its compatible
   abstract coefficient tower, and its realization over every quotient of an
   arbitrary supplied ideal filtration are formalized, but that filtration and
   connection are not identified with the manuscript's geometric quotients or

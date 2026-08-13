@@ -62,6 +62,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.VaryingFlatGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleVaryingFlatGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVaryingFlatGauge",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableFlatGaugeUniqueness",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 124 reviewer terminals.
+1 complete; 125 reviewer terminals.
 
-The 124 reviewer-facing terminals currently verify:
+The 125 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -154,14 +154,20 @@ The 124 reviewer-facing terminals currently verify:
   connection series, and the whole gauge series commute with adjacent
   reductions, while uniqueness and invertibility hold at every level; this
   tower remains abstract and is not identified with the manuscript's filtered
-  quotient tower or quantum connection, and no multivariable, Laurent,
-  convergent, or analytic gauge is represented; from a supplied rational
+  quotient tower or quantum connection; from a supplied rational
   algebra, decreasing ideal filtration, and base connection coefficients,
   Lean also constructs the varying connection and gauge over every actual
   quotient `R/F^n`, proves canonical adjacent-reduction compatibility, and
   retains the equation, normalized uniqueness, and invertibility at every
   quotient level; the supplied filtration and connection are still not
-  identified with the manuscript's geometric objects;
+  identified with the manuscript's geometric objects; for an arbitrary
+  coordinate-indexed connection over ordinary Laurent-series coefficients,
+  Lean proves that any two supplied normalized multivariable formal gauges
+  satisfying all the same coordinate equations are equal by total-degree
+  induction; it does not construct such a gauge, prove integrability or
+  quotient compatibility, establish a Laurent lower bound uniform in the bulk
+  monomial or level, or identify the data with the manuscript's quantum
+  connection;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

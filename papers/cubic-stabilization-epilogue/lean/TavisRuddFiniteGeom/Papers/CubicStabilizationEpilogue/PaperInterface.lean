@@ -41,6 +41,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFla
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleVaryingFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredVaryingFlatGauge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableFlatGaugeUniqueness
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2552,6 +2553,33 @@ theorem filteredVaryingFlatGauge_quotient_reduction_unique_and_invertible
           candidate = input.gaugeSeries level) ∧
         IsUnit (input.gaugeSeries level) :=
   ⟨input.series_compatible, input.gaugeSeries_unique_and_isUnit⟩
+
+/-- Let one matrix-valued multivariate Laurent-coefficient connection be
+supplied for each coordinate.  Any two matrix series over the multivariate
+formal power-series ring that have identity constant coefficient and satisfy
+the same equations `partial_i G = -A_i G` for every coordinate are equal.
+Lean proves this by induction on total monomial degree.  The theorem does not
+construct a solution, prove integrability of the supplied connection, give a
+Laurent lower bound uniform in the monomial or a quotient level, or identify
+the data with the manuscript's filtered quantum connection. -/
+theorem multivariableLaurentFlatGauge_normalizedSolution_unique
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate (LaurentSeries R)))
+    (left right :
+      Matrix Index Index (MvPowerSeries Coordinate (LaurentSeries R)))
+    (leftNormalized : left.map (MvPowerSeries.coeff 0) = 1)
+    (rightNormalized : right.map (MvPowerSeries.coeff 0) = 1)
+    (leftEquation : ∀ coordinate,
+      left.map (Quantum.multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * left)
+    (rightEquation : ∀ coordinate,
+      right.map (Quantum.multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * right) :
+    left = right :=
+  Quantum.laurentMultivariableFlatGaugeSeries_unique connection left right
+    leftNormalized rightNormalized leftEquation rightEquation
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
