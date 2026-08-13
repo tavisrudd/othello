@@ -145,23 +145,48 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   rank-one Fano WCI has `nu_6<=2`: the entire smooth strong-WF weighted-CI
   carrier class is closed.  The first non-WCI index-two test is stronger:
   the exact $V_5$ scalar equation has four unramified irregular branches of
-  framed residue zero, so `nu_6(V_5)=0`.  Remaining loci are the other
-  non-WCI prime Fanos.  Genus-six (V_{10}) provisionally also has zero
-  support, pending a tracked recurrence certificate and direct full-QDM
-  scalarization;
-  non-WF/quotient mechanisms if admissible, and arbitrary non-Fano or non-nef
-  threefolds.
+  framed residue zero, so `nu_6(V_5)=0`.  The exact $V_{10}$ counting-matrix
+  scalarization now closes genus six at zero as well.  Together with the
+  stable-birational rows below, every smooth complex prime Fano threefold has
+  `nu_6<=2`, with equality exactly in genera four and eight.  Remaining
+  carrier loci are non-WF/quotient mechanisms if admissible, arbitrary
+  non-Fano/non-nef threefolds, and relative Mori-fibre branches.
 - The v1 blow-up formula also makes `nu_6` birationally invariant for smooth
   projective varieties of dimension at most four, hence invariant under one
   `P^1` stabilization of smooth threefolds.  The landed Sarkisov links give
   `nu_6(V_22)=0`; Kuznetsov's rank-two-projectivization flop gives the cubic
   `nu_6` multiplicity on every smooth genus-eight `V_14` and proves
   `V_14 x P^1` irrational.  Kuznetsov--Prokhorov's rationality theorems close
-  genera seven, nine, and ten over `C`, hence give `nu_6=0` there.  Thus direct
-  non-WCI prime-Fano work remains only for genus six `V_10`, whose provisional
-  zero needs a tracked recurrence certificate and full-QDM scalarization.
+  genera seven, nine, and ten over `C`, hence give `nu_6=0` there.  Thus the
+  direct prime-Fano admission scan is complete.
   See `../2026-08-12-c907-low-dimensional-stable-birational-compression.md`
-  and `../2026-08-12-c907-prime-fano-rationality-compression.md`.
+  and `../2026-08-12-c907-prime-fano-primitive-sixth-classification.md`.
+- The bounded-value Laurent graph now has an exact full-initial theorem:
+  filtered Koszul strictness upgrades the 552 pair-of-pants masks to the full
+  initial ideal, and the 57 non-singleton masks give an intrinsic proper
+  regular tropical compactification over the original DVR.  The exterior
+  fixed-value audit compresses to free `L`, 70 regular unit tangent lifts, or
+  the empty face `L=0`; the protected finite-ratio ends have exact strict
+  Cartier equations and unit derivatives.  A common marked toroidal fan is
+  impossible: its forced `(h,v)` blow-up creates an actual exceptional
+  `f_Q` divisor with four false critical families.  Proper-support descent is
+  the correct replacement mechanism in principle, since
+  `Ra_!A=R\bar a_*j_!A` is compactification-independent and cycles commute
+  with proper modification.  Its exact remaining quantifier gate is a
+  whole-proper-fibre good-chart cover (or proper hypercover); one good lift
+  per arc does not suffice.  See
+  `../2026-08-12-c907-relative-schon-regular-model-audit.md`,
+  `../2026-08-13-c907-protected-ratio-splice.md`, and
+  `../2026-08-13-c907-proper-support-modification-descent.md`.
+- On the carrier side, the conic primitive sheaf kills both stalk and costalk
+  at a double-line node after inverting six, giving an exact conditional
+  square-zero target.  The analogous finite-discriminant shortcut fails for
+  del Pezzo fibrations: a nodal cubic-surface fibre retains a stationary
+  primitive `D_5` summand in both stalk and costalk.  The strict Rees product
+  must have zero stationary-primitive projection; finite support or block
+  count cannot prove it.  See
+  `../2026-08-12-c907-conic-primitive-sheaf-node-vanishing.md` and
+  `../2026-08-13-c907-del-pezzo-primitive-monodromy-obstruction.md`.
 
 ## Active frontier: `m=2`
 
@@ -189,18 +214,18 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5`: serialize a regular
-refinement of the finite pair-of-pants/log support complex, realize the
-multihomogeneous dense-graph closure, and verify every actual-boundary/control
-Fitting overlap and endpoint value after forgetting auxiliary translated
-markings.  Then build proper fibrewise Whitney--Thom
-excision pairs and identify
-the four value-localized thimbles with the `P^3` Stokes system and fix the
+Complete the toric order-zero theorem for `Bl_(P^3)P^5` by choosing, for each
+coarse bounded-value boundary neighborhood, one proper modification whose
+**entire** fibre is covered by the certified protected/exterior controlled
+charts; equivalently serialize a proper hypercover and its intersections.
+Apply proper-support descent to kill the exterior value cycles, prove the
+tame compact-support-to-rapid-decay comparison, and identify the remaining
+four labelled thimbles with the `P^3` Stokes system.  Then fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
-parallel, continue the remaining non-WCI prime Fano scan for `nu_6>=4`.
-Use stable-birational compression before computing another scalar operator:
-genus eight and twelve are already closed.  The ranked portfolio leaves and
-the exact non-combinations are in
+parallel, test the universal carrier on the exact two local targets: the
+conic point composite and the stationary `D_5` projection in a cubic-surface
+Lefschetz fibration.  The prime-Fano scan is closed and should not be
+repeated.  The ranked portfolio leaves and exact non-combinations are in
 `../2026-08-12-c907-portfolio-combination-leaves.md`.
 Do not differentiate in
 Novikov directions before the marked order-zero comparison passes.
