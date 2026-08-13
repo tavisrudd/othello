@@ -138,8 +138,8 @@ exceptional divisor.
 The sufficient admissibility condition is explicit: resolve the common model
 relative to the smooth `v`- and `w`-lines, using no center whose ideal contains
 an interior translated-residue coordinate and no exceptional divisor defined
-from such a center.  This condition is locally achievable over the compact
-protected locus.  Indeed, for an arc in (5) put
+from such a center.  Graph support by itself does not obstruct this condition.
+Indeed, for an arc in (5) put
 
 \[
  \alpha=\operatorname{ord}r,qquad
@@ -151,7 +151,7 @@ When the marked limit remains `(1,1)`, equations (6) give generically
 
 \[
  t=\alpha+k,\qquad \beta=k,\qquad
- \gamma=2\alpha+k+\min(\ell,k),quad
+ \gamma=2\alpha+k+\min(\ell,k),\qquad
  2t-\beta-\gamma=-\min(\ell,k)\le0. \tag{11}
 \]
 
@@ -159,19 +159,23 @@ The other five graph weights are zero.  Thus the product term either ties on
 the coordinate faces `ell=0` or `k=0`, or drops; there is no interior support
 wall, including at `ell=k`, that forces a center involving `v`.  If leading
 coefficients cancel at `ell=k`, `gamma` increases and the product term drops
-further, so no wall is created.  The compact finite-ratio cone is already a
-regular coordinate cone and can be fixed as a regular subfan while all other
-cones are desingularized relatively.  The symmetric statement fixes the
-`w` cone.
+further, so no **graph** wall is created.
 
-Under this local relative resolution, the coarse strata retain (7), giving
-the protected carrier's coarse Fitting contribution.  Together with the
+However, the map to the fine marked pair-of-pants valuation cone itself bends
+at `ell=k` because of the `min` in `gamma`.  Making it a fan morphism forces
+the ray `e_h+e_v`, i.e. the blowup `(h,v)`.  Its actual vertical exceptional
+has central potential `f_Q`, independent of the new residue, and carries four
+false critical families.  Thus the compact cone cannot be fixed inside a
+single common marked toroidal refinement.  The desired admissibility is
+incompatible with that global-fan architecture.
+
+On the unmodified finite-ratio chart the coarse strata retain (7), giving the
+protected carrier's local Fitting contribution.  Together with the
 still-conditional exterior records—the 70 tangent units, two `L=0`
-exclusions, and free-`L` masks—this is the complete local outcome table.
-Existence of a regular common
-refinement gluing these protected subfans to every exterior attachment is not
-yet proved; noncompact mixed cones are Fitting-safe because `L` is free but
-still need their strict graph/overlap attachment.
+exclusions, and free-`L` masks—this is the complete local outcome table.  The
+remaining route must glue this coarse protected chart to the exterior model
+without monomializing the auxiliary translated divisor.  A single fine
+marked fan cannot do so.
 
 The remaining topological input is no longer an algebraic boundary search:
 choose a generic residual interface and apply the controlled fibrewise-pair
@@ -191,7 +195,8 @@ parameterized Morse step.
   compact-`y`,
   bounded-value arc; compatibility with the noncompact-`y` free-`L` theorem;
   exact finite-ratio Fitting freeness.
-- **Open:** glue the locally admissible protected subfans to the exterior
-  regular refinement with strict graph/overlap records; then the
+- **Open:** construct a separated proper coarse/non-toroidal gluing of the
+  protected chart to the exterior regular model, with strict overlap records;
+  then the
   controlled-topology step.  No additional residual valuation type remains
   unexplained.
