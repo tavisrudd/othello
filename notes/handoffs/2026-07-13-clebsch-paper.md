@@ -53,15 +53,24 @@ the `E_6` carrier, reversible only with a residue flag, with bottom fibres
 arithmetic-lift frontier remain literature-gated and were not promoted to any
 manuscript or Lean source.
 
-The research-only C907 quantum route is active.  Its v1 theorem is now
-unconditional: framed formal monodromy of the numerical small quantum
-connection, followed stepwise through Iritani's blow-up comparison, proves
-that `X x P^1` is irrational for every smooth cubic threefold.  The proof
-does not use the retired atomwise HLT-descent claim.  The warning-free
-manuscript is `papers/cubic-stabilization-epilogue/`; exact proof and source
-audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
+The research-only C907 quantum route is closed at Gold.  For every smooth
+cubic threefold `X` and every `m>=0`, `X x P^m` is irrational.  The invariant
+is the canonical point covector on the primitive-sixth formal-monodromy
+sector.  Iritani's explicit blow-up Fourier map sends the point flat section
+to the ambient point plus zero on every center summand because the top class
+restricts to zero on a proper center.  Pairing preservation makes the
+covector invariant under arbitrary smooth blow-ups; the exact cubic Barnes
+coefficients make it nonzero; projective Kunneth preserves it; projective
+space has empty primitive-sixth sector.  Weak factorization proves stable
+irrationality with no carrier or analytic Gamma/Orlov premise.  Exact proof
+and hostile audit:
+`../2026-08-13-c907-formal-point-covector-theorem.md`.  The warning-free
+existing manuscript `papers/cubic-stabilization-epilogue/` contains only the
+earlier `m=1` theorem; Gold manuscript promotion remains a separate next
+task.
 
-Full stability is open from `m=2`.  C909 proves that ordinary atoms are too
+The following C907 construction portfolio is superseded audit history, not
+an active gate.  C909 proves that ordinary atoms are too
 coarse and reduces the target to a strict cubic-isotypic Stokes/Rees/Gamma
 grading.  The endpoint has `1+L+L^2`; the exact positive
 Krull--Schmidt telescope only needs to exclude that endpoint `J_3` from all
@@ -284,16 +293,16 @@ naturality, and transports it through compatible rational-algebra towers.  A
 further composite maps base connection coefficients into every actual quotient
 of a supplied ideal filtration and proves canonical adjacent compatibility,
 normalization, the equation, uniqueness, and invertibility at every level.
-For arbitrary coordinate sets and ordinary Laurent-series coefficients, Lean
-now proves that two supplied normalized multivariable formal gauges satisfying
-the same coordinate equations are equal, by induction on total monomial
-degree.  This is uniqueness only: existence, integrability, quotient
-compatibility, and uniform Laurent-order bounds remain unformalized.  For
-arbitrary commuting derivations, an invertible supplied solution is now proved
-to force the exact zero-curvature identity; the converse construction remains
-open.  The coefficientwise multivariate formal partial derivatives now satisfy
-the Leibniz rule, are packaged as commuting derivations, and instantiate that
-curvature theorem directly.
+For arbitrary coordinate sets and multivariate formal power series over a
+commutative rational algebra, Lean proves that two normalized solutions of the
+same coordinate equations are equal.  For the coefficientwise commuting formal
+partial derivatives, an invertible supplied solution forces the exact
+zero-curvature identity; conversely, the exact zero-curvature identity yields a
+recursively constructed unique normalized invertible formal gauge.  This
+applies to ordinary Laurent-series coefficients.  The manuscript's geometric
+connection and its curvature premise remain unidentified, and quotient
+compatibility, uniform Laurent-order bounds, convergence, and the analytic
+gauge remain outside this fragment.
 The supplied filtration and connection remain unidentified with the
 manuscript's geometric coefficient ring and quantum product; construction of
 the multivariable Laurent bulk gauge, bounded order, convergence, and the

@@ -165,11 +165,14 @@ fiber-cardinality formula.  Additive scalar weights give additive operators
 Gromov--Witten coefficients, curve-pairing weights, and quantum connection are
 not constructed.
 
-For multivariate formal power series, the coefficientwise partial derivatives
-now satisfy the Leibniz rule, are packaged as commuting derivations, and
-specialize the necessary zero-curvature theorem.  The Laurent-coefficient
-normalized-solution theorem remains uniqueness-only: construction from zero
-curvature, quotient compatibility, and uniform Laurent order are not proved.
+For multivariate formal power series over a commutative rational algebra, the
+coefficientwise partial derivatives satisfy the Leibniz rule and commute.  Lean
+proves both directions at the formal level: an invertible supplied solution
+forces zero curvature, and zero curvature yields a recursively constructed
+unique normalized invertible gauge.  This applies to ordinary Laurent-series
+coefficients, but identification of the manuscript's connection and curvature
+premise, quotient compatibility, and a Laurent lower bound uniform in bulk
+monomials and levels remain unproved.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates

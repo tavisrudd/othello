@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 127 reviewer terminals.
+1 complete; 128 reviewer terminals.
 
-The 127 reviewer-facing terminals currently verify:
+The 128 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -164,14 +164,15 @@ The 127 reviewer-facing terminals currently verify:
   coordinate-indexed connection over ordinary Laurent-series coefficients,
   Lean proves that any two supplied normalized multivariable formal gauges
   satisfying all the same coordinate equations are equal by total-degree
-  induction; it does not construct such a gauge, prove integrability or
-  quotient compatibility, establish a Laurent lower bound uniform in the bulk
-  monomial or level, or identify the data with the manuscript's quantum
-  connection; the coefficientwise multivariate formal partial derivatives are
-  proved to satisfy the Leibniz rule and commute, and an invertible supplied
-  solution is proved to force their exact zero-curvature identity; the same
-  necessary result holds for arbitrary commuting derivations, without proving
-  the converse existence theorem;
+  induction; the coefficientwise multivariate formal partial derivatives are
+  proved to satisfy the Leibniz rule and commute, an invertible supplied
+  solution is proved to force their exact zero-curvature identity, and,
+  conversely, zero curvature over any commutative rational algebra is proved to
+  yield a recursively constructed unique normalized invertible multivariable
+  formal gauge; the same necessary result holds for arbitrary commuting
+  derivations; Lean does not prove quotient compatibility, establish a Laurent
+  lower bound uniform in the bulk monomial or level, or identify these data
+  with the manuscript's quantum connection;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

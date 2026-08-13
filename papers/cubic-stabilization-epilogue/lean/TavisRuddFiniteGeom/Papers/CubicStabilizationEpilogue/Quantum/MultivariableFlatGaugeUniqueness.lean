@@ -1,12 +1,14 @@
 import Mathlib.RingTheory.MvPowerSeries.Basic
+import Mathlib.RingTheory.MvPowerSeries.Inverse
 import Mathlib.Data.Finsupp.Order
 import Mathlib.Data.Matrix.Basic
+import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Mathlib.RingTheory.LaurentSeries
 import Mathlib.RingTheory.Derivation.Basic
 import Mathlib.Tactic
 
 /-!
-# Uniqueness for multivariable formal flat-gauge equations
+# Existence and uniqueness for multivariable formal flat-gauge equations
 
 Let `A_i(x)` be one matrix-valued multivariate formal power series for each
 coordinate `i`.  This module defines coefficientwise partial derivatives and
@@ -23,11 +25,14 @@ derivations, and specializes the zero-curvature identity to those actual
 partials.  The same necessary identity is also proved for an arbitrary
 commutative coefficient algebra with commuting derivations.
 
-The module does not construct a multivariable solution or prove the converse
-existence theorem from zero curvature.  It does not identify the coefficient
-ring with a filtered quantum coefficient ring or supply uniform Laurent-order,
-convergence, or analytic gauge data.  The proofs are symbolic and kernel
-checked, with no external computation or oracle.
+For a zero-curvature connection over a commutative `\mathbb{Q}`-algebra, Lean
+also constructs the coefficients recursively in one chosen support coordinate,
+proves that curvature propagates the selected equation to every coordinate,
+and obtains the unique normalized invertible formal gauge.  The module does not
+identify the coefficient ring with a filtered quantum coefficient ring or
+supply quotient compatibility, a Laurent-order bound uniform in all bulk
+monomials and levels, convergence, or analytic gauge data.  The proofs are
+symbolic and kernel checked, with no external computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -569,6 +574,675 @@ theorem multivariableFlatGaugeSeries_curvature_eq_zero
     (multivariablePartialDerivationSystem (Coordinate := Coordinate) (R := R))
     connection solution solutionUnit flatEquation first second
 
+/-- The defect of a matrix series in one coordinate equation
+`partial_i G=-A_iG`. -/
+noncomputable def multivariableFlatGaugeDefect
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (solution : Matrix Index Index (MvPowerSeries Coordinate R))
+    (coordinate : Coordinate) :
+    Matrix Index Index (MvPowerSeries Coordinate R) :=
+  solution.map (multivariablePartialDerivative coordinate) +
+    connection coordinate * solution
+
+/-- For a zero-curvature connection, the coordinate defects of any matrix
+series satisfy the induced compatibility equation.  This is the algebraic
+identity used to propagate a recursively imposed coordinate equation to all
+coordinates. -/
+theorem multivariableFlatGaugeDefect_compatibility
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (solution : Matrix Index Index (MvPowerSeries Coordinate R))
+    (curvature : ∀ first second,
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0)
+    (first second : Coordinate) :
+    (multivariableFlatGaugeDefect connection solution second).map
+          (multivariablePartialDerivative first) -
+        (multivariableFlatGaugeDefect connection solution first).map
+          (multivariablePartialDerivative second) =
+      connection second *
+          multivariableFlatGaugeDefect connection solution first -
+        connection first *
+          multivariableFlatGaugeDefect connection solution second := by
+  have mixedSolution :
+      (solution.map (multivariablePartialDerivative second)).map
+          (multivariablePartialDerivative first) =
+        (solution.map (multivariablePartialDerivative first)).map
+          (multivariablePartialDerivative second) := by
+    apply Matrix.ext
+    intro row column
+    exact multivariablePartialDerivative_comm first second (solution row column)
+  have firstProduct :
+      (connection second * solution).map
+          (multivariablePartialDerivative first) =
+        (connection second).map (multivariablePartialDerivative first) * solution +
+          connection second * solution.map (multivariablePartialDerivative first) := by
+    simpa [multivariablePartialDerivation,
+      multivariablePartialDerivativeLinearMap] using
+      matrixDerivation_mul (multivariablePartialDerivation first)
+        (connection second) solution
+  have secondProduct :
+      (connection first * solution).map
+          (multivariablePartialDerivative second) =
+        (connection first).map (multivariablePartialDerivative second) * solution +
+          connection first * solution.map (multivariablePartialDerivative second) := by
+    simpa [multivariablePartialDerivation,
+      multivariablePartialDerivativeLinearMap] using
+      matrixDerivation_mul (multivariablePartialDerivation second)
+        (connection first) solution
+  have curvatureRearranged :
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) =
+        -(connection first * connection second -
+          connection second * connection first) := by
+    calc
+      _ = ((connection second).map (multivariablePartialDerivative first) -
+            (connection first).map (multivariablePartialDerivative second) +
+            (connection first * connection second -
+              connection second * connection first)) -
+            (connection first * connection second -
+              connection second * connection first) := by abel
+      _ = 0 - (connection first * connection second -
+              connection second * connection first) := by
+            rw [show (connection second).map
+                    (multivariablePartialDerivative first) -
+                  (connection first).map
+                    (multivariablePartialDerivative second) +
+                  (connection first * connection second -
+                    connection second * connection first) = 0 by
+              simpa [sub_eq_add_neg, add_assoc] using curvature first second]
+      _ = _ := zero_sub _
+  have firstDefectMap :
+      (multivariableFlatGaugeDefect connection solution second).map
+          (multivariablePartialDerivative first) =
+        (solution.map (multivariablePartialDerivative second)).map
+            (multivariablePartialDerivative first) +
+          (connection second * solution).map
+            (multivariablePartialDerivative first) := by
+    apply Matrix.ext
+    intro row column
+    apply MvPowerSeries.ext
+    intro degree
+    simp [multivariableFlatGaugeDefect,
+      multivariablePartialDerivative_coefficient, mul_add]
+  have secondDefectMap :
+      (multivariableFlatGaugeDefect connection solution first).map
+          (multivariablePartialDerivative second) =
+        (solution.map (multivariablePartialDerivative first)).map
+            (multivariablePartialDerivative second) +
+          (connection first * solution).map
+            (multivariablePartialDerivative second) := by
+    apply Matrix.ext
+    intro row column
+    apply MvPowerSeries.ext
+    intro degree
+    simp [multivariableFlatGaugeDefect,
+      multivariablePartialDerivative_coefficient, mul_add]
+  calc
+    _ = ((solution.map (multivariablePartialDerivative second)).map
+            (multivariablePartialDerivative first) +
+          ((connection second).map (multivariablePartialDerivative first) * solution +
+            connection second * solution.map
+              (multivariablePartialDerivative first))) -
+        ((solution.map (multivariablePartialDerivative first)).map
+            (multivariablePartialDerivative second) +
+          ((connection first).map (multivariablePartialDerivative second) * solution +
+            connection first * solution.map
+              (multivariablePartialDerivative second))) := by
+          rw [firstDefectMap, secondDefectMap, firstProduct, secondProduct]
+    _ = (((connection second).map (multivariablePartialDerivative first) -
+            (connection first).map (multivariablePartialDerivative second)) *
+              solution +
+          connection second * solution.map
+            (multivariablePartialDerivative first) -
+          connection first * solution.map
+            (multivariablePartialDerivative second)) := by
+          rw [mixedSolution]
+          noncomm_ring
+    _ = (-(connection first * connection second -
+            connection second * connection first) * solution +
+          connection second * solution.map
+            (multivariablePartialDerivative first) -
+          connection first * solution.map
+            (multivariablePartialDerivative second)) := by
+          rw [curvatureRearranged]
+    _ = _ := by
+          simp only [multivariableFlatGaugeDefect]
+          noncomm_ring
+
+/-- A chosen coordinate in the support of a nonconstant monomial. -/
+noncomputable def multivariablePivot
+    {Coordinate : Type*} (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    Coordinate :=
+  Classical.choose (Finsupp.support_nonempty_iff.mpr nonzero)
+
+/-- The chosen pivot coordinate belongs to the monomial support. -/
+theorem multivariablePivot_mem_support
+    {Coordinate : Type*} (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    multivariablePivot degree nonzero ∈ degree.support :=
+  Classical.choose_spec (Finsupp.support_nonempty_iff.mpr nonzero)
+
+/-- The exponent at the chosen pivot coordinate is nonzero. -/
+theorem multivariablePivot_present
+    {Coordinate : Type*} (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    degree (multivariablePivot degree nonzero) ≠ 0 := by
+  simpa [Finsupp.mem_support_iff] using
+    multivariablePivot_mem_support degree nonzero
+
+/-- A nonzero natural exponent, viewed as a unit in a commutative
+`\mathbb{Q}`-algebra. -/
+noncomputable def multivariableExponentUnit
+    {R : Type*} [CommRing R] [Algebra ℚ R]
+    (exponent : ℕ) (nonzero : exponent ≠ 0) : Rˣ :=
+  Units.map (algebraMap ℚ R)
+    (Units.mk0 (exponent : ℚ) (by exact_mod_cast nonzero))
+
+/-- The value of the exponent unit in the coefficient algebra is the natural
+exponent itself. -/
+theorem multivariableExponentUnit_coe
+    {R : Type*} [CommRing R] [Algebra ℚ R]
+    (exponent : ℕ) (nonzero : exponent ≠ 0) :
+    (↑(multivariableExponentUnit (R := R) exponent nonzero) : R) = exponent := by
+  simp [multivariableExponentUnit]
+
+/-- Coefficients of the normalized multivariable gauge selected recursively in
+one support coordinate.  Zero curvature later propagates that selected
+coordinate equation to every coordinate. -/
+noncomputable def multivariableFlatGaugeCoefficient
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (degree : Coordinate →₀ ℕ) : Matrix Index Index R := by
+  classical
+  exact (measure multivariableTotalDegree).wf.fix
+    (C := fun _ ↦ Matrix Index Index R)
+    (fun current recurse ↦
+      if currentZero : current = 0 then
+        1
+      else
+        let pivot := multivariablePivot current currentZero;
+        let predecessor := current - Finsupp.single pivot 1;
+        let exponentUnit := multivariableExponentUnit (R := R)
+          (current pivot) (multivariablePivot_present current currentZero);
+        -(↑(exponentUnit⁻¹) : R) •
+          ∑ pair : {pair // pair ∈
+              Finset.HasAntidiagonal.antidiagonal predecessor},
+            (connection pivot).map (MvPowerSeries.coeff pair.1.1) *
+              recurse pair.1.2 (by
+                have pairSum : pair.1.1 + pair.1.2 = predecessor := by
+                  exact Finset.HasAntidiagonal.mem_antidiagonal.mp pair.2
+                have secondLe : pair.1.2 ≤ predecessor := by
+                  calc
+                    pair.1.2 ≤ pair.1.1 + pair.1.2 := le_add_left le_rfl
+                    _ = predecessor := pairSum
+                have secondTotalLe :
+                    multivariableTotalDegree pair.1.2 ≤
+                      multivariableTotalDegree predecessor :=
+                  multivariableTotalDegree_mono secondLe
+                have predecessorTotal :
+                    multivariableTotalDegree predecessor + 1 =
+                      multivariableTotalDegree current := by
+                  exact multivariableTotalDegree_sub_single_add_one
+                    (multivariablePivot_present current currentZero)
+                show multivariableTotalDegree pair.1.2 <
+                  multivariableTotalDegree current
+                calc
+                  multivariableTotalDegree pair.1.2 ≤
+                      multivariableTotalDegree predecessor := secondTotalLe
+                  _ < multivariableTotalDegree current := by omega))
+    degree
+
+/-- The recursively selected gauge has identity constant coefficient. -/
+@[simp]
+theorem multivariableFlatGaugeCoefficient_zero
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R)) :
+    multivariableFlatGaugeCoefficient connection 0 = 1 := by
+  classical
+  rw [multivariableFlatGaugeCoefficient, WellFounded.fix_eq]
+  simp
+
+/-- Unfolding the recursive coefficient at a nonconstant monomial. -/
+theorem multivariableFlatGaugeCoefficient_of_ne_zero
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    multivariableFlatGaugeCoefficient connection degree =
+      let pivot := multivariablePivot degree nonzero;
+      let predecessor := degree - Finsupp.single pivot 1;
+      let exponentUnit := multivariableExponentUnit (R := R)
+        (degree pivot) (multivariablePivot_present degree nonzero);
+      -(↑(exponentUnit⁻¹) : R) •
+        ∑ pair : {pair // pair ∈
+            Finset.HasAntidiagonal.antidiagonal predecessor},
+          (connection pivot).map (MvPowerSeries.coeff pair.1.1) *
+            multivariableFlatGaugeCoefficient connection pair.1.2 := by
+  classical
+  rw [multivariableFlatGaugeCoefficient, WellFounded.fix_eq]
+  simp only [nonzero]
+  rfl
+
+/-- The chosen support-coordinate coefficient satisfies the exact recursive
+flat equation. -/
+theorem multivariableFlatGaugeCoefficient_pivot_recursion
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    (degree (multivariablePivot degree nonzero) : R) •
+        multivariableFlatGaugeCoefficient connection degree =
+      -∑ pair : {pair // pair ∈
+          Finset.HasAntidiagonal.antidiagonal
+            (degree - Finsupp.single (multivariablePivot degree nonzero) 1)},
+        (connection (multivariablePivot degree nonzero)).map
+            (MvPowerSeries.coeff pair.1.1) *
+          multivariableFlatGaugeCoefficient connection pair.1.2 := by
+  classical
+  rw [multivariableFlatGaugeCoefficient_of_ne_zero connection degree nonzero]
+  dsimp only
+  rw [← multivariableExponentUnit_coe (R := R)
+    (degree (multivariablePivot degree nonzero))
+    (multivariablePivot_present degree nonzero)]
+  let exponentUnit := multivariableExponentUnit (R := R)
+    (degree (multivariablePivot degree nonzero))
+    (multivariablePivot_present degree nonzero)
+  let coefficientSum : Matrix Index Index R :=
+    ∑ pair : {pair // pair ∈
+        Finset.HasAntidiagonal.antidiagonal
+          (degree - Finsupp.single (multivariablePivot degree nonzero) 1)},
+      (connection (multivariablePivot degree nonzero)).map
+          (MvPowerSeries.coeff pair.1.1) *
+        multivariableFlatGaugeCoefficient connection pair.1.2
+  change (↑exponentUnit : R) •
+      ((-(↑(exponentUnit⁻¹) : R)) • coefficientSum) = -coefficientSum
+  rw [smul_smul, mul_neg]
+  have inverseIdentity :
+      (↑exponentUnit : R) * (↑(exponentUnit⁻¹) : R) = 1 := by
+    exact Units.mul_inv exponentUnit
+  rw [inverseIdentity, neg_one_smul]
+
+/-- The matrix-valued multivariate formal series assembled from the recursively
+selected coefficients. -/
+noncomputable def multivariableFlatGaugeSeries
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R)) :
+    Matrix Index Index (MvPowerSeries Coordinate R) :=
+  fun row column degree ↦
+    multivariableFlatGaugeCoefficient connection degree row column
+
+/-- Coefficient extraction from the recursively assembled multivariable
+gauge. -/
+theorem multivariableFlatGaugeSeries_coefficient
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (degree : Coordinate →₀ ℕ) :
+    (multivariableFlatGaugeSeries connection).map
+        (MvPowerSeries.coeff degree) =
+      multivariableFlatGaugeCoefficient connection degree := by
+  rfl
+
+/-- The recursively assembled multivariable gauge is normalized at the origin. -/
+theorem multivariableFlatGaugeSeries_normalized
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R)) :
+    (multivariableFlatGaugeSeries connection).map (MvPowerSeries.coeff 0) = 1 := by
+  rw [multivariableFlatGaugeSeries_coefficient]
+  exact multivariableFlatGaugeCoefficient_zero connection
+
+/-- The normalized recursively assembled gauge is an invertible square matrix
+over the multivariate formal power-series ring. -/
+theorem multivariableFlatGaugeSeries_isUnit
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R)) :
+    IsUnit (multivariableFlatGaugeSeries connection) := by
+  rw [Matrix.isUnit_iff_isUnit_det]
+  rw [MvPowerSeries.isUnit_iff_constantCoeff]
+  rw [RingHom.map_det]
+  have constantMatrix :
+      MvPowerSeries.constantCoeff.mapMatrix
+          (multivariableFlatGaugeSeries connection) = 1 := by
+    exact multivariableFlatGaugeSeries_normalized connection
+  rw [constantMatrix, Matrix.det_one]
+  exact isUnit_one
+
+/-- The recursively assembled gauge satisfies the selected pivot-coordinate
+equation at every nonconstant monomial. -/
+theorem multivariableFlatGaugeSeries_pivot_defect
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0) :
+    (multivariableFlatGaugeDefect connection
+        (multivariableFlatGaugeSeries connection)
+        (multivariablePivot degree nonzero)).map
+      (MvPowerSeries.coeff
+        (degree - Finsupp.single (multivariablePivot degree nonzero) 1)) = 0 := by
+  classical
+  let pivot := multivariablePivot degree nonzero
+  let predecessor := degree - Finsupp.single pivot 1
+  have pivotPresent : degree pivot ≠ 0 := by
+    exact multivariablePivot_present degree nonzero
+  have recoverDegree :
+      predecessor + Finsupp.single pivot 1 = degree :=
+    Finsupp.sub_add_single_one_cancel pivotPresent
+  have derivativeCoefficient :
+      ((multivariableFlatGaugeSeries connection).map
+          (multivariablePartialDerivative pivot)).map
+          (MvPowerSeries.coeff predecessor) =
+        (predecessor pivot + 1 : R) •
+          multivariableFlatGaugeCoefficient connection degree := by
+    apply Matrix.ext
+    intro row column
+    simp only [Matrix.map_apply,
+      multivariablePartialDerivative_coefficient, Matrix.smul_apply,
+      smul_eq_mul]
+    change (predecessor pivot + 1 : R) *
+        multivariableFlatGaugeCoefficient connection
+          (predecessor + Finsupp.single pivot 1) row column =
+      (predecessor pivot + 1 : R) *
+        multivariableFlatGaugeCoefficient connection degree row column
+    rw [recoverDegree]
+  have productCoefficient :
+      (connection pivot * multivariableFlatGaugeSeries connection).map
+          (MvPowerSeries.coeff predecessor) =
+        ∑ pair : {pair // pair ∈
+            Finset.HasAntidiagonal.antidiagonal predecessor},
+          (connection pivot).map (MvPowerSeries.coeff pair.1.1) *
+            multivariableFlatGaugeCoefficient connection pair.1.2 := by
+    apply Matrix.ext
+    intro row column
+    simp only [Matrix.map_apply, Matrix.mul_apply, Matrix.sum_apply]
+    rw [map_sum]
+    simp_rw [MvPowerSeries.coeff_mul]
+    rw [Finset.sum_comm]
+    let coefficientTerm :
+        ((Coordinate →₀ ℕ) × (Coordinate →₀ ℕ)) → R := fun pair ↦
+      ∑ index,
+        MvPowerSeries.coeff pair.1 (connection pivot row index) *
+          multivariableFlatGaugeCoefficient connection pair.2 index column
+    change (∑ pair ∈ Finset.HasAntidiagonal.antidiagonal predecessor,
+        coefficientTerm pair) =
+      ∑ pair : {pair // pair ∈
+          Finset.HasAntidiagonal.antidiagonal predecessor}, coefficientTerm pair.1
+    exact Finset.sum_subtype _ (fun _ ↦ Iff.rfl) coefficientTerm
+  have pivotExponent : predecessor pivot + 1 = degree pivot := by
+    simpa using congrArg (fun monomial ↦ monomial pivot) recoverDegree
+  have recursion := multivariableFlatGaugeCoefficient_pivot_recursion
+    connection degree nonzero
+  change
+    ((multivariableFlatGaugeSeries connection).map
+        (multivariablePartialDerivative pivot) +
+      connection pivot * multivariableFlatGaugeSeries connection).map
+        (MvPowerSeries.coeff predecessor) = 0
+  rw [show ((multivariableFlatGaugeSeries connection).map
+          (multivariablePartialDerivative pivot) +
+        connection pivot * multivariableFlatGaugeSeries connection).map
+          (MvPowerSeries.coeff predecessor) =
+      ((multivariableFlatGaugeSeries connection).map
+          (multivariablePartialDerivative pivot)).map
+          (MvPowerSeries.coeff predecessor) +
+        (connection pivot * multivariableFlatGaugeSeries connection).map
+          (MvPowerSeries.coeff predecessor) by rfl]
+  rw [derivativeCoefficient, productCoefficient,
+    show (predecessor pivot + 1 : R) = degree pivot by
+      simpa only [Nat.cast_add, Nat.cast_one] using
+        congrArg (fun exponent : ℕ ↦ (exponent : R)) pivotExponent]
+  exact eq_neg_iff_add_eq_zero.mp (by simpa [pivot] using recursion)
+
+/-- If a zero-curvature connection equation is imposed recursively in one
+chosen support coordinate for every nonconstant monomial, the equation holds
+in every coordinate.  The proof propagates the chosen equations by total
+degree using the defect compatibility identity. -/
+theorem multivariableFlatGaugeDefect_eq_zero_of_pivot
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (solution : Matrix Index Index (MvPowerSeries Coordinate R))
+    (curvature : ∀ first second,
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0)
+    (pivotEquation : ∀ (degree : Coordinate →₀ ℕ) (nonzero : degree ≠ 0),
+      (multivariableFlatGaugeDefect connection solution
+          (multivariablePivot degree nonzero)).map
+        (MvPowerSeries.coeff
+          (degree - Finsupp.single (multivariablePivot degree nonzero) 1)) = 0) :
+    ∀ coordinate, multivariableFlatGaugeDefect connection solution coordinate = 0 := by
+  have coefficientZero : ∀ total : ℕ, ∀ (degree : Coordinate →₀ ℕ),
+      multivariableTotalDegree degree = total → ∀ coordinate,
+        (multivariableFlatGaugeDefect connection solution coordinate).map
+          (MvPowerSeries.coeff degree) = 0 := by
+    intro total
+    induction total using Nat.strongRecOn with
+    | ind total previous =>
+        intro degree degreeTotal coordinate
+        let augmented := degree + Finsupp.single coordinate 1
+        have augmentedNonzero : augmented ≠ 0 := by
+          intro equality
+          have coordinateEquality :=
+            congrArg (fun monomial ↦ monomial coordinate) equality
+          simp [augmented] at coordinateEquality
+        let pivot := multivariablePivot augmented augmentedNonzero
+        have pivotPresent : augmented pivot ≠ 0 :=
+          multivariablePivot_present augmented augmentedNonzero
+        by_cases pivotIsCoordinate : pivot = coordinate
+        · have actualPivot :
+              multivariablePivot augmented augmentedNonzero = coordinate := by
+            simpa [pivot] using pivotIsCoordinate
+          have selected := pivotEquation augmented augmentedNonzero
+          rw [actualPivot] at selected
+          have predecessor :
+              augmented - Finsupp.single coordinate 1 = degree := by
+            exact add_tsub_cancel_right degree (Finsupp.single coordinate 1)
+          simpa [predecessor] using selected
+        · have degreePivotPresent : degree pivot ≠ 0 := by
+            have coordinateNePivot : coordinate ≠ pivot := Ne.symm pivotIsCoordinate
+            simpa [augmented, coordinateNePivot] using pivotPresent
+          let predecessor := degree - Finsupp.single pivot 1
+          have recoverDegree :
+              predecessor + Finsupp.single pivot 1 = degree :=
+            Finsupp.sub_add_single_one_cancel degreePivotPresent
+          have predecessorTotal :
+              multivariableTotalDegree predecessor + 1 = total := by
+            rw [← degreeTotal]
+            exact multivariableTotalDegree_sub_single_add_one degreePivotPresent
+          have predecessorTotalLt :
+              multivariableTotalDegree predecessor < total := by omega
+          have selected := pivotEquation augmented augmentedNonzero
+          have selectedIndex :
+              augmented - Finsupp.single pivot 1 =
+                predecessor + Finsupp.single coordinate 1 := by
+            exact add_right_cancel (by
+              calc
+                (augmented - Finsupp.single pivot 1) +
+                      Finsupp.single pivot 1 = augmented :=
+                  Finsupp.sub_add_single_one_cancel pivotPresent
+                _ = degree + Finsupp.single coordinate 1 := rfl
+                _ = (predecessor + Finsupp.single coordinate 1) +
+                      Finsupp.single pivot 1 := by
+                  rw [← recoverDegree]
+                  ac_rfl)
+          have selectedCoefficient :
+              (multivariableFlatGaugeDefect connection solution pivot).map
+                (MvPowerSeries.coeff
+                  (predecessor + Finsupp.single coordinate 1)) = 0 := by
+            simpa [pivot, selectedIndex] using selected
+          have compatibility := multivariableFlatGaugeDefect_compatibility
+            connection solution curvature pivot coordinate
+          have coefficientCompatibility := congrArg
+            (fun matrix ↦ matrix.map (MvPowerSeries.coeff predecessor))
+            compatibility
+          have rightSideZero :
+              (connection coordinate *
+                    multivariableFlatGaugeDefect connection solution pivot -
+                  connection pivot *
+                    multivariableFlatGaugeDefect connection solution coordinate).map
+                (MvPowerSeries.coeff predecessor) = 0 := by
+            have productZero (connectionDirection defectDirection : Coordinate) :
+                (connection connectionDirection *
+                    multivariableFlatGaugeDefect connection solution
+                      defectDirection).map
+                  (MvPowerSeries.coeff predecessor) = 0 := by
+              apply Matrix.ext
+              intro row column
+              change MvPowerSeries.coeff predecessor
+                ((connection connectionDirection *
+                  multivariableFlatGaugeDefect connection solution
+                    defectDirection) row column) = 0
+              simp only [Matrix.mul_apply, map_sum, MvPowerSeries.coeff_mul]
+              apply Finset.sum_eq_zero
+              intro index indexMem
+              apply Finset.sum_eq_zero
+              intro pair pairMem
+              have pairSum : pair.1 + pair.2 = predecessor := by
+                simpa using pairMem
+              have secondLe : pair.2 ≤ predecessor := by
+                rw [← pairSum]
+                exact le_add_left le_rfl
+              have secondTotalLe :
+                  multivariableTotalDegree pair.2 ≤
+                    multivariableTotalDegree predecessor :=
+                multivariableTotalDegree_mono secondLe
+              have secondTotalLt : multivariableTotalDegree pair.2 < total :=
+                lt_of_le_of_lt secondTotalLe predecessorTotalLt
+              have defectCoefficient := previous
+                (multivariableTotalDegree pair.2) secondTotalLt pair.2 rfl
+                  defectDirection
+              rw [show MvPowerSeries.coeff pair.2
+                    (multivariableFlatGaugeDefect connection solution
+                      defectDirection
+                      index column) = 0 by
+                exact congrArg (fun matrix ↦ matrix index column) defectCoefficient]
+              simp
+            calc
+              _ = (connection coordinate *
+                    multivariableFlatGaugeDefect connection solution pivot).map
+                      (MvPowerSeries.coeff predecessor) -
+                  (connection pivot *
+                    multivariableFlatGaugeDefect connection solution coordinate).map
+                      (MvPowerSeries.coeff predecessor) := by
+                    apply Matrix.ext
+                    intro row column
+                    change MvPowerSeries.coeff predecessor
+                        ((connection coordinate *
+                            multivariableFlatGaugeDefect connection solution pivot -
+                          connection pivot *
+                            multivariableFlatGaugeDefect connection solution coordinate)
+                          row column) = _
+                    exact map_sub (MvPowerSeries.coeff predecessor) _ _
+              _ = 0 := by
+                    rw [productZero coordinate pivot,
+                      productZero pivot coordinate, sub_zero]
+          rw [rightSideZero] at coefficientCompatibility
+          have firstPartialCoefficient :
+              ((multivariableFlatGaugeDefect connection solution coordinate).map
+                    (multivariablePartialDerivative pivot)).map
+                  (MvPowerSeries.coeff predecessor) =
+                (predecessor pivot + 1 : R) •
+                  (multivariableFlatGaugeDefect connection solution coordinate).map
+                    (MvPowerSeries.coeff degree) := by
+            apply Matrix.ext
+            intro row column
+            simp only [Matrix.map_apply,
+              multivariablePartialDerivative_coefficient, Matrix.smul_apply,
+              smul_eq_mul]
+            rw [recoverDegree]
+          have secondPartialCoefficient :
+              ((multivariableFlatGaugeDefect connection solution pivot).map
+                    (multivariablePartialDerivative coordinate)).map
+                  (MvPowerSeries.coeff predecessor) = 0 := by
+            apply Matrix.ext
+            intro row column
+            change (predecessor coordinate + 1 : R) *
+                MvPowerSeries.coeff
+                  (predecessor + Finsupp.single coordinate 1)
+                  (multivariableFlatGaugeDefect connection solution pivot
+                    row column) = 0
+            exact (show (predecessor coordinate + 1 : R) *
+                  MvPowerSeries.coeff
+                    (predecessor + Finsupp.single coordinate 1)
+                    (multivariableFlatGaugeDefect connection solution pivot
+                      row column) = 0 by
+              rw [show MvPowerSeries.coeff
+                    (predecessor + Finsupp.single coordinate 1)
+                    (multivariableFlatGaugeDefect connection solution pivot
+                      row column) = 0 by
+                exact congrArg (fun matrix ↦ matrix row column)
+                  selectedCoefficient]
+              simp)
+          have coefficientCompatibility' :
+              ((multivariableFlatGaugeDefect connection solution coordinate).map
+                    (multivariablePartialDerivative pivot)).map
+                  (MvPowerSeries.coeff predecessor) -
+                ((multivariableFlatGaugeDefect connection solution pivot).map
+                    (multivariablePartialDerivative coordinate)).map
+                  (MvPowerSeries.coeff predecessor) = 0 := by
+            calc
+              _ = (((multivariableFlatGaugeDefect connection solution coordinate).map
+                      (multivariablePartialDerivative pivot) -
+                    (multivariableFlatGaugeDefect connection solution pivot).map
+                      (multivariablePartialDerivative coordinate)).map
+                    (MvPowerSeries.coeff predecessor)) := by
+                  apply Matrix.ext
+                  intro row column
+                  rfl
+              _ = 0 := coefficientCompatibility
+          have partialPivotCoefficient :
+              (predecessor pivot + 1 : R) •
+                  (multivariableFlatGaugeDefect connection solution coordinate).map
+                    (MvPowerSeries.coeff degree) = 0 := by
+            rw [firstPartialCoefficient, secondPartialCoefficient, sub_zero]
+              at coefficientCompatibility'
+            exact coefficientCompatibility'
+          have pivotExponent : predecessor pivot + 1 = degree pivot := by
+            simpa using congrArg (fun monomial ↦ monomial pivot) recoverDegree
+          have scalarUnit : IsUnit ((predecessor pivot + 1 : R)) := by
+            rw [show (predecessor pivot + 1 : R) =
+              algebraMap ℚ R ((predecessor pivot : ℚ) + 1) by norm_num]
+            exact (isUnit_iff_ne_zero.mpr
+              (by positivity : (predecessor pivot : ℚ) + 1 ≠ 0)).map _
+          rcases scalarUnit with ⟨unit, unit_eq⟩
+          apply Matrix.ext
+          intro row column
+          have entryZero := congrArg (fun matrix ↦ matrix row column)
+            partialPivotCoefficient
+          change (predecessor pivot + 1 : R) * _ = 0 at entryZero
+          rw [← unit_eq] at entryZero
+          have cancelled := congrArg (fun value : R ↦ (↑(unit⁻¹) : R) * value)
+            entryZero
+          simpa [← mul_assoc] using cancelled
+  intro coordinate
+  apply Matrix.ext
+  intro row column
+  apply MvPowerSeries.ext
+  intro degree
+  exact congrArg (fun matrix ↦ matrix row column)
+    (coefficientZero (multivariableTotalDegree degree) degree rfl coordinate)
+
 /-- Two normalized matrix-valued multivariate series satisfying the same
 coordinatewise formal flat equation are equal.  Existence and integrability
 of such a solution are not assumptions hidden by this statement: the two
@@ -695,6 +1369,49 @@ theorem multivariableFlatGaugeSeries_unique
   apply MvPowerSeries.ext
   intro degree
   exact congrArg (fun matrix ↦ matrix row column) (coefficientsEqual degree)
+
+/-- A zero-curvature multivariate formal connection over a commutative
+`\mathbb{Q}`-algebra has a unique normalized flat-gauge series.  The constructed
+solution is an invertible square matrix over the multivariate power-series
+ring. -/
+theorem multivariableFlatGaugeSeries_existsUnique_of_curvature
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R] [Algebra ℚ R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (curvature : ∀ first second,
+      (connection second).map (multivariablePartialDerivative first) -
+          (connection first).map (multivariablePartialDerivative second) +
+          connection first * connection second -
+          connection second * connection first = 0) :
+    ∃! solution : Matrix Index Index (MvPowerSeries Coordinate R),
+      solution.map (MvPowerSeries.coeff 0) = 1 ∧
+      IsUnit solution ∧
+      ∀ coordinate,
+        solution.map (multivariablePartialDerivative coordinate) =
+          -(connection coordinate) * solution := by
+  let solution := multivariableFlatGaugeSeries connection
+  have allDefects : ∀ coordinate,
+      multivariableFlatGaugeDefect connection solution coordinate = 0 := by
+    apply multivariableFlatGaugeDefect_eq_zero_of_pivot connection solution curvature
+    intro degree nonzero
+    simpa [solution] using
+      multivariableFlatGaugeSeries_pivot_defect connection degree nonzero
+  have equations : ∀ coordinate,
+      solution.map (multivariablePartialDerivative coordinate) =
+        -(connection coordinate) * solution := by
+    intro coordinate
+    rw [neg_mul]
+    exact eq_neg_iff_add_eq_zero.mpr (by
+      simpa only [multivariableFlatGaugeDefect] using allDefects coordinate)
+  refine ⟨solution, ?_, ?_⟩
+  · exact ⟨multivariableFlatGaugeSeries_normalized connection,
+      multivariableFlatGaugeSeries_isUnit connection, equations⟩
+  · intro candidate candidateProperties
+    exact multivariableFlatGaugeSeries_unique connection candidate solution
+      candidateProperties.1
+      (multivariableFlatGaugeSeries_normalized connection)
+      candidateProperties.2.2 equations
 
 /-- Over Laurent-series coefficients, two normalized multivariable formal
 gauges satisfying the same coordinate equations are equal.  Ordinary Laurent
