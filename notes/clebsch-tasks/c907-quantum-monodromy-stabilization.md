@@ -233,6 +233,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   must be transported as a strict blowup operator.  With fixed formal
   component maps, the two-block obstruction is an explicit class in
   `Ext^1_(K[N])(W,V)`; multi-block splitting is recursive.
+- A concrete conditional source is now isolated.  For a model
+  `f:Y -> P^2`, tensor by `L=f^*O(1)` gives `N_L=1-tau_L`: projection formula
+  makes it exactly block diagonal under Orlov blowups, its endpoint on
+  `X x P^2` is `J_3`, and its square on a threefold center factors through a
+  generic curve fibre (or vanishes when the image has dimension at most one).
+  Hence an exact Gamma/cyclotomic projector compatible with Orlov maps,
+  products, and Gysin support would close both Silver gates for arrows over
+  `P^2`.  The unresolved locus is the Rees resolution of the rational
+  `P^2`-map, where the hyperplane is only a movable system and arbitrary
+  threefold centers can reappear.  See
+  `../2026-08-13-c907-line-bundle-framed-jordan-strictness.md`.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
   geometry but projects to zero in the minimal Silver category.
@@ -286,13 +297,15 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, bypass the rigid one-dimensional `Bl_X P^5` normalization and
-move to the first nonvacuous extension test.  Define the intrinsic operator on
-`Bl_(X x p)(X x P^2)`, identify its formal center map, and compute the class in
-`Ext^1_(K[N])(T J_1,J_3)`.  Then remove product symmetry by blowing up the
-canonical cubic section of
-`P_X(O direct-sum L_1 direct-sum L_2)` and test whether Chern twisting changes
-that class.  The toric `P^3` residual theorem remains a separate high-value
+For Silver, attack the new line-bundle-framed localization.  Construct the
+exact Gamma/cyclotomic projector compatible with Orlov component maps,
+projective Kunneth, and Gysin support.  Then extend it through the Rees
+resolution of the three-section linear system defining the rational
+`P^2`-map; this is the only segment where `L` does not already descend and the
+strictness/carrier proof is not formal.  Use `Bl_(X x p)(X x P^2)` as the first
+ungraded extension regression and the twisted relative `P^2`-bundle section
+only after its formal packet is recalibrated.  The toric `P^3` residual
+theorem remains a separate high-value
 Stokes leaf: finish it only through the pushed-down
 self-dual pairing-excision zigzag and full tame residual-pair identification,
 not as evidence for the cyclotomic Jordan biproduct.  In parallel, construct
