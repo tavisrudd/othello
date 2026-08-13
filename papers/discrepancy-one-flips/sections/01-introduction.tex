@@ -1,0 +1,173 @@
+\section{Introduction}
+
+A \emph{standard flip} \(X\dashrightarrow X'\), in the setting of
+Bondal--Orlov and of Belmans, Fu and Raedschelders \cite{BFR}, is built from
+the following data.  There is a birational morphism \(p\colon X\to\bar X\)
+of smooth projective varieties, an isomorphism away from \(F=p^{-1}(Z)\) for
+a smooth \(Z\subset\bar X\), and vector bundles \(V,V'\to Z\) of ranks \(r\)
+and \(s\) with
+\[
+  F\cong\PP(V),\qquad
+  N_{F|X}\cong\pi^{*}(V')\otimes\mathcal O_{\PP(V)}(-1),
+\]
+where \(\pi\colon F\to Z\).  Blowing up \(F\) and contracting the exceptional
+divisor \(E\cong\PP(V)\times_{Z}\PP(V')\) in the other direction produces
+\(X'\), which contains \(F'\cong\PP(V')\) of codimension \(r\).  Throughout,
+\(r>s\).  Since \(F\subset X\) has codimension \(s\) and \(F'\subset X'\) has
+codimension \(r\), the two blow-up formulas for the canonical class on
+\(\widehat X=\mathrm{Bl}_{F}X\) give
+\(\tau^{*}K_{X}-\tau'^{*}K_{X'}=(r-s)E\).  We call
+\[
+  \nu:=r-s
+\]
+the \emph{discrepancy} of the flip; \(s=1\) is the blow-up of \(\bar X\)
+along \(Z\), and \(s=0\) is the degenerate case \(X=F=\PP(V)\),
+\(X'=\varnothing\), of a projective bundle.
+
+Shen and Shoemaker \cite{SS} compute the spectrum of quantum multiplication
+by \(c_{1}(X)\) after restricting the Novikov parameter to the extremal ray
+contracted by \(p\), and prove that the Gamma-class decomposition of
+\(H^{*}(X)\) induced by the semiorthogonal decomposition of \(\Db(X)\) of
+\cite{BFR} is a decomposition into strong asymptotic classes in the sense of
+Galkin--Golyshev--Iritani \cite{GGI}.  This is
+\cite[Theorems~1.2, 1.4 and~9.14, Corollary~1.5]{SS}, and it is stated for
+standard flips with the explicit remark that it covers the blow-up case
+\(s=1\) and the projective-bundle case \(s=0\).
+
+The proof passes through an explicit hypergeometric series.  In the local
+model \(T=\mathrm{tot}(\pi^{*}V'\otimes\mathcal O_{\PP(V)}(-1))\), after the
+extremal specialization \cite[(33)]{SS} of Novikov and parameter variables,
+\cite[Theorem~4.4]{SS} states that the extremal \(J\)-function of \(T\) is
+\begin{equation}
+  \label{eq:ss35}
+  J^{T}(q,t,z)
+  = z\,e^{t/z}q^{c_{1}(T)/z}
+    \sum_{d\ge0}q^{(r-s)d}\,
+    \frac{\prod_{j=1}^{s}\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)}
+         {\prod_{i=1}^{r}\prod_{m=1}^{d}(\rho_{i}+H+mz)},
+\end{equation}
+which is \cite[(35)]{SS}.  Everything after Section~4 of \cite{SS} runs on
+this formula: the ring presentation \cite[(37)]{SS} is deduced from it, the
+extremal spectrum is read off from that presentation, and the modified
+\(J\)-function of \cite[(39)--(40)]{SS} used in the asymptotic analysis of
+Sections~7--9 is defined from it.
+
+Three hypotheses in the printed argument constrain \(\nu\).
+\cite[Theorem~4.4]{SS} is stated under \(r-s>1\).
+\cite[Remark~4.5(3)]{SS} asserts that for \(r-s\le1\) the right-hand side of
+\eqref{eq:ss35} is not of the form \(z\one+(\text{lower order in }z)\) and
+therefore cannot equal the \(J\)-function of \(T\), although it does lie on
+Givental's Lagrangian cone of \(T\) and so is an \(I\)-function.  Finally,
+the Barnes asymptotic expansion of the Meijer \(G\)-function of
+\cite[Lemma~7.4]{SS} is introduced by the sentence ``For \(r-s>1\)'', and the
+sector \cite[(64)]{SS} printed with it is derived under that inequality.
+Under the standing assumption \(r>s\), the range excluded by these three
+hypotheses is exactly \(\nu=1\), that is
+\[
+  r=s+1 .
+\]
+It contains every codimension-two blow-up, the case \((r,s)=(2,1)\).  So the
+dependency chain printed for \cite[Theorems~1.2, 1.4 and~9.14]{SS} does not
+literally reach the discrepancy-one range, even though the statements are
+made for standard flips and blow-ups without a restriction on \(\nu\).
+
+This note supplies the two missing steps.  Both are internal to \cite{SS}:
+the first uses only \eqref{eq:ss35} and the cone membership already recorded
+in \cite[Remark~4.5(3)]{SS}, and the second uses only
+\cite[Theorem~A.1]{SS}, in the form the authors state it.
+
+\begin{theorem}
+  \label{thm:normalization}
+  Let \(r=s+1\) with \(s\ge1\).  Then, in the extremal specialization
+  \cite[(33)]{SS} and with the same formal variables and cohomological
+  completion as in \cite[Theorem~4.4]{SS}, the degree-\(d\) summand of
+  \eqref{eq:ss35} has \(z\)-order at most \(-1\) for every \(d\ge1\).
+  Consequently \eqref{eq:ss35} equals \(z\one+\bar{\mathbf t}+O(z^{-1})\)
+  with \(\bar{\mathbf t}=t+\ln(q)c_{1}(T)\), and equals the extremal
+  \(J\)-function of \(T\).  In particular the presentation \cite[(37)]{SS}
+  of \cite[Theorem~4.6]{SS} holds for \(r=s+1\),
+  \(s\ge1\), as does \cite[Theorem~1.2]{SS}, with the single nonzero
+  eigenvalue \(\lambda_{0}(q)=(-1)^{s}q\) of multiplicity
+  \(\dim H^{*}(Z)\).
+\end{theorem}
+
+The negative assertion of \cite[Remark~4.5(3)]{SS} is therefore accurate, in
+the range \(r>s\) it addresses, only for \(s=0\), where \((r,s)=(1,0)\) and
+the degree-one summand of \eqref{eq:ss35} does contribute in \(z\)-order
+zero.
+
+\begin{theorem}
+  \label{thm:aperture}
+  Let \(r=s+1\) with \(s\ge1\), and let \(0\le k\le1\).  The asymptotic
+  expansion of \cite[Proposition~7.5]{SS} for the component indexed by
+  \(m=-k\) is valid on
+  \(\bigl|\arg(z/q)+(2m+s)\pi\bigr|<\tfrac{3\pi}{2}\), and not on the wider
+  sector obtained by setting \(r-s=1\) in \cite[(64)]{SS}.  The expansion of
+  \cite[Proposition~8.2]{SS} is valid on
+  \(\bigl|\arg(z/q)-(1-s)\pi\bigr|<\tfrac{3\pi}{2}\).  These two sectors meet
+  in an open sector of opening \(2\pi\) containing both the eigenvalue ray
+  \(\arg(z/q)=-(2m+s)\pi\) and the tame ray \(\arg(z/q)=(1-s)\pi\).
+\end{theorem}
+
+For a codimension-two blow-up, \((r,s)=(2,1)\) and \(k=m=0\), the two
+sectors are \(-\tfrac{5\pi}{2}<\arg(z/q)<\tfrac{\pi}{2}\) and
+\(|\arg(z/q)|<\tfrac{3\pi}{2}\), and they meet in
+\(-\tfrac{3\pi}{2}<\arg(z/q)<\tfrac{\pi}{2}\), which contains the tame ray
+\(0\) and the eigenvalue ray \(-\pi\).
+
+\begin{corollary}
+  \label{cor:repaired}
+  \cite[Theorems~1.2, 1.4, 9.9 and~9.14]{SS} and \cite[Corollary~1.5]{SS}
+  hold for every standard flip with \(r=s+1\) and \(s\ge1\), in particular
+  for every codimension-two blow-up.
+\end{corollary}
+
+The mechanism behind Theorem~\ref{thm:normalization} is a single count, and
+it is worth saying where the natural first count goes wrong.  The numerator
+of the degree-\(d\) summand of \eqref{eq:ss35} has \(sd\) factors and the
+denominator has \(rd\) factors.  Treating all of them as linear in \(z\)
+gives \(1+sd-rd=1-\nu d\) for the maximal \(z\)-order, which is \(0\) at
+\(d=1\) when \(\nu=1\): a curve-induced contribution in \(z\)-order zero,
+hence a nontrivial mirror map, hence exactly the failure asserted in
+\cite[Remark~4.5(3)]{SS}.  But the inner index in the numerator runs over
+\(0\le m\le d-1\), so \(s\) of its factors are \(\sigma_{j}-H\), free of
+\(z\).  The correct maximal order is \(1+s(d-1)-rd=1-s-\nu d\), and at
+\(\nu=1\) the \(s\) missing powers of \(z\) are precisely what pushes every
+\(d\ge1\) summand below \(z^{0}\) as soon as \(s\ge1\).  Once no
+\(z\)-order-zero contribution survives, the \(z^{0}\) coefficient of
+\eqref{eq:ss35} is the parameter \(\bar{\mathbf t}\) itself, the mirror map
+is the identity, and uniqueness of the \(J\)-slice of the cone converts the
+cone membership of \cite[Remark~4.5(3)]{SS} into an identification.
+
+Theorem~\ref{thm:aperture} is not a strengthening but a correction of an
+aperture.  The Meijer \(G\)-function of \cite[Lemma~7.4]{SS} has
+\(\nu=r-s\), and \cite[Theorem~A.1]{SS} --- Barnes' expansion in the form
+of Meijer \cite{Meijer} and Luke \cite{Luke} --- is valid on
+\(|\arg t|<(\nu+\epsilon)\pi\) with \(\epsilon=1\) for \(\nu>1\) but only
+\(\epsilon=\tfrac12\) for \(\nu=1\).  The sector \cite[(64)]{SS} is the
+\(\epsilon=1\) sector; substituting \(r-s=1\) into it claims an aperture
+\(\pi/2\) wider on each side than Barnes' expansion supports.  The point of
+Theorem~\ref{thm:aperture} is that the smaller, correct sector is still
+large enough: the common sector with \cite[Proposition~8.2]{SS} retains
+opening \(2\pi\), so the oriented comparison of the nonzero-eigenvalue and
+tame expansions that the argument of \cite[Section~9]{SS} performs is
+available at \(\nu=1\) as it is for \(\nu>1\).
+
+What is not covered is the single pair \((r,s)=(1,0)\), the rank-one
+projective bundle, where \(\PP(V)=Z\), \(X'=\varnothing\), and the order
+count genuinely fails.  Nothing here bears on \(\nu>1\), where the argument
+of \cite{SS} already applies, and nothing here changes any statement of
+\cite{SS} outside the two hypotheses named above.
+
+Section~\ref{sec:hypotheses} fixes notation and records the three places
+where \(\nu\) is constrained in \cite{SS}, together with what depends on
+each.  Section~\ref{sec:normalization} proves
+Theorem~\ref{thm:normalization}, Section~\ref{sec:aperture} proves
+Theorem~\ref{thm:aperture}, and Section~\ref{sec:scope} assembles
+Corollary~\ref{cor:repaired} and states the boundary of the repair.
+
+\medskip
+\noindent\emph{Convention.}  Numbered items of \cite{SS} are always cited
+explicitly, as in \cite[Theorem~4.4]{SS} or \cite[(35)]{SS}, and refer to
+the version arXiv:2502.08762v2.  Displays numbered here, such as
+\eqref{eq:ss35}, are our own.

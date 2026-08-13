@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbf C}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\Db}{D^{b}}
+\newcommand{\Ghat}{\widehat{\Gamma}}
+
+\title{Standard Flips of Discrepancy One: Extremal \(J\)-Normalization
+  and the Meijer Aperture at \(\nu=1\)}
+\author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Shen and Shoemaker compute the extremal quantum spectrum of a standard flip
+\(X\dashrightarrow X'\) with exceptional locus \(\PP(V)\subset X\),
+\(\rk V=r\), \(\rk V'=s\), and show that the Gamma-class decomposition of
+\(H^{*}(X)\) attached to the Belmans--Fu--Raedschelders semiorthogonal
+decomposition is a decomposition into asymptotic classes.  Their Theorem~4.4,
+which identifies an explicit hypergeometric series with the extremal
+\(J\)-function of the local model, assumes \(r-s>1\); their Remark~4.5(3)
+asserts that for \(r-s\le1\) the series is not \(J\)-normalized; and the
+Barnes asymptotic expansion of their Section~7 is applied under the same
+inequality.  The printed dependency chain of their Theorems~1.2, 1.4
+and~9.14 therefore does not reach the discrepancy-one range \(r=s+1\),
+\(s\ge1\), which contains every codimension-two blow-up.
+
+We supply the two missing steps.  First, the degree-\(d\) summand of their
+formula~(35) has \(z\)-order at most \(1-s-(r-s)d\); for \(r=s+1\) and
+\(s\ge1\) this is at most \(-1\) for every \(d\ge1\), so the series is
+\(z\one+\bar{\mathbf t}+O(z^{-1})\), no mirror-map correction arises, and the
+cone membership recorded in Remark~4.5(3) identifies the series with the
+extremal \(J\)-function.  The negative assertion of Remark~4.5(3) is
+accurate only in the degenerate case \(s=0\).  Second, at \(\nu:=r-s=1\) the
+sector printed after their Lemma~7.4 is unavailable, being the
+\(\epsilon=1\) case of their own Theorem~A.1; the correct \(\epsilon=1/2\)
+sector still meets the sector of their Proposition~8.2 in an open sector of
+opening \(2\pi\) that contains both the nonzero-eigenvalue ray and the tame
+ray.  With the reductions of their Sections~9.1--9.4 unchanged, this extends
+Theorems~1.2, 1.4, 9.14 and Corollary~1.5 to every standard flip with
+\(r=s+1\) and \(s\ge1\).
+\end{abstract}
+
+\noindent\textbf{Keywords.} standard flip; quantum spectrum; Gamma class;
+asymptotic class; Meijer \(G\)-function; semiorthogonal decomposition.
+
+\input{sections/01-introduction}
+\input{sections/02-hypotheses}
+\input{sections/03-normalization}
+\input{sections/04-aperture}
+\input{sections/05-scope}
+
+\begin{thebibliography}{99}
+
+\bibitem{Balser}
+W.~Balser,
+\emph{From Divergent Power Series to Analytic Functions},
+Lecture Notes in Math. 1582, Springer, Berlin, 1994.
+
+\bibitem{Barnes}
+E.~W.~Barnes,
+\emph{The asymptotic expansion of integral functions defined by generalised
+hypergeometric series},
+Proc. London Math. Soc. (2) 5 (1907), 59--116.
+
+\bibitem{BFR}
+P.~Belmans, L.~Fu, and T.~Raedschelders,
+\emph{Derived categories of flips and cubic hypersurfaces},
+Proc. London Math. Soc. (3) 125 (2022), 1452--1482.
+
+\bibitem{Brown}
+J.~Brown,
+\emph{Gromov--Witten invariants of toric fibrations},
+Int. Math. Res. Not. IMRN 2014, no. 19, 5437--5482.
+
+\bibitem{CoatesGivental}
+T.~Coates and A.~Givental,
+\emph{Quantum Riemann--Roch, Lefschetz and Serre},
+Ann. of Math. (2) 165 (2007), 15--53.
+
+\bibitem{CoxKatz}
+D.~A.~Cox and S.~Katz,
+\emph{Mirror Symmetry and Algebraic Geometry},
+Math. Surveys Monogr. 68, American Mathematical Society, Providence, RI, 1999.
+
+\bibitem{GGI}
+S.~Galkin, V.~Golyshev, and H.~Iritani,
+\emph{Gamma classes and quantum cohomology of Fano manifolds: gamma
+conjectures},
+Duke Math. J. 165 (2016), 2005--2077.
+
+\bibitem{Givental}
+A.~B.~Givental,
+\emph{Symplectic geometry of Frobenius structures},
+in: Frobenius Manifolds, Aspects Math. E36, Vieweg, Wiesbaden, 2004,
+91--112.
+
+\bibitem{Luke}
+Y.~L.~Luke,
+\emph{The Special Functions and Their Approximations}, Vol. I,
+Math. Sci. Eng. 53, Academic Press, New York--London, 1969.
+
+\bibitem{Meijer}
+C.~S.~Meijer,
+\emph{On the \(G\)-function. I--IV},
+Nederl. Akad. Wetensch. Proc. 49 (1946), 227--237, 344--356, 457--469,
+632--641.
+
+\bibitem{Orlov}
+D.~O.~Orlov,
+\emph{Projective bundles, monoidal transformations, and derived categories of
+coherent sheaves},
+Izv. Ross. Akad. Nauk Ser. Mat. 56 (1992), 852--862;
+English transl., Russian Acad. Sci. Izv. Math. 41 (1993), 133--141.
+
+\bibitem{Pandharipande}
+R.~Pandharipande,
+\emph{Rational curves on hypersurfaces (after A. Givental)},
+S\'eminaire Bourbaki, Vol. 1997/98, Ast\'erisque 252 (1998), Exp. No. 848,
+307--340.
+
+\bibitem{SS}
+Y.~Shen and M.~Shoemaker,
+\emph{Quantum spectrum and Gamma structure for standard flips},
+arXiv:2502.08762v2 [math.AG], 2025.
+
+\end{thebibliography}
+
+\end{document}

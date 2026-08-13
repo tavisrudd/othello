@@ -1,0 +1,76 @@
+\section{What is repaired, and what is not}
+\label{sec:scope}
+
+\begin{theorem}
+  \label{thm:assembled}
+  Let \(X\dashrightarrow X'\) be a standard flip with \(r=s+1\) and
+  \(s\ge1\).  Then \cite[Theorems~1.2, 1.4, 9.9 and~9.14]{SS} and
+  \cite[Corollary~1.5]{SS} hold for \(X\).  In particular they hold for the
+  blow-up of a smooth projective variety along a smooth centre of
+  codimension two, the case \((r,s)=(2,1)\).
+\end{theorem}
+
+\begin{proof}
+  Corollary~\ref{cor:presentation} gives \eqref{eq:ss37} and
+  \cite[Theorem~1.2]{SS}, and makes \cite[(39)--(40)]{SS} available, so the
+  modified extremal \(J\)-function used from \cite[Section~7]{SS} onward is
+  the one the argument assumes.  \cite[Proposition~7.5]{SS},
+  \cite[Corollary~7.6]{SS} and \cite[Proposition~7.8]{SS} then hold with
+  \eqref{eq:ss64} replaced by \eqref{eq:center}, by Lemma~\ref{lem:center};
+  \cite[Propositions~8.2 and~8.3]{SS} and \cite[Corollary~8.4]{SS} hold as
+  printed, by Lemma~\ref{lem:ambient}.
+
+  The reductions of \cite[Sections~9.1--9.4]{SS} are then unchanged.
+  \cite[Proposition~9.1]{SS} uses the presentation \eqref{eq:ss37} and the
+  extremal Dubrovin connection; \cite[Proposition~9.2]{SS} combines it with
+  \cite[Propositions~7.8 and~8.4]{SS}; \cite[Corollary~9.3]{SS} takes a
+  partial nonequivariant limit; \cite[Section~9.2]{SS} removes the splitting
+  assumption on \(V,V'\), giving \cite[Corollary~9.7]{SS};
+  \cite[Section~9.3]{SS} passes from the local model to \(X\), giving
+  \cite[Theorem~9.9]{SS}; and \cite[Section~9.4]{SS} compares the
+  Fourier--Mukai transform with the local model, giving
+  \cite[Theorem~9.14]{SS}.  None of these steps constrains \(\nu\) beyond
+  \(r>s\).  The two halves of \cite[Theorem~1.4]{SS} are
+  \cite[Theorems~9.9 and~9.14]{SS}, and \cite[Corollary~1.5]{SS} is the
+  translation of \cite[Theorem~1.4]{SS} through the functors
+  \cite[(3)]{SS}.  Proposition~\ref{prop:common} supplies the sector on
+  which both expansions used in that translation are valid.
+\end{proof}
+
+Three boundaries should be stated explicitly.
+
+First, \((r,s)=(1,0)\) is not covered, and not for lack of effort: by
+Remark~\ref{rem:boundary} the series \eqref{eq:ss35} genuinely acquires a
+curve-induced term in \(z\)-order zero there, so it is an \(I\)-function
+with a nontrivial mirror map and the identification of
+Proposition~\ref{prop:IJ} is false.  This is the rank-one projective bundle,
+where \(\PP(V)=Z\) and \(X'=\varnothing\).  Together with \(r>s\), it is the
+only case left open among the parameters \((r,s)\) once \(\nu\ge2\) is
+handled by \cite{SS} and \(\nu=1\), \(s\ge1\) by
+Theorem~\ref{thm:assembled}.
+
+Second, everything above lives on the extremal slice.  The Novikov
+parameter is restricted to multiples of the class \([L]\) of a line in a
+fibre of \(\PP(V)\), all other Novikov variables are zero, and the parameter
+is \(\bar{\mathbf t}=t+\ln(q)c_{1}(T)\) with \(t\) pulled back from
+\(H^{*}(Z)\); this is the specialization in which \cite[Theorems~1.2
+and~1.4]{SS} are stated, and no statement here concerns the unrestricted
+quantum product or a comparison across the full Novikov ring.
+
+Third, the two corrections are local to the two hypotheses named in
+Section~\ref{sec:hypotheses}.  For \(\nu>1\) nothing changes: the argument
+of \cite{SS} applies as printed, and \eqref{eq:center} agrees with
+\eqref{eq:ss64} for every \(\nu>1\) since \(\epsilon=1\) there.  Every other
+ingredient of \cite{SS} --- the ring homomorphism to the local model, the
+spectral computation in the abstract presentation, the deformation to the
+normal cone, the Fourier--Mukai comparison --- is used exactly as it stands.
+
+The count in Lemma~\ref{lem:order} is what makes the discrepancy-one range
+behave like the higher-discrepancy one.  The \(s\) numerator factors
+\(\sigma_{j}-H\) at \(m=0\), free of \(z\), are worth exactly \(s\) powers,
+and at \(\nu=1\) they are the entire margin: the maximal order
+\(1-s-\nu d\) sits at \(-1\) precisely when \(s=1\) and \(d=1\), and rises
+to \(0\) the moment \(s\) drops to zero.  So the boundary between the
+identification \(I=J\) and a nontrivial mirror map at \(\nu=1\) is not the
+codimension of the centre but the presence of at least one factor in
+\(V'\).

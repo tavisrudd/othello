@@ -1,0 +1,86 @@
+\section{The extremal setting and the three constraints on \texorpdfstring{\(\nu\)}{nu}}
+\label{sec:hypotheses}
+
+We keep the notation of \cite{SS}.  Let \(H=c_{1}(\mathcal
+O_{\PP(V)}(1))\), let \(\rho_{1},\dots,\rho_{r}\) and
+\(\sigma_{1},\dots,\sigma_{s}\) be the Chern roots of \(V\) and \(V'\)
+pulled back to \(\PP(V)\), and let
+\(T=\mathrm{tot}(\pi^{*}V'\otimes\mathcal O_{\PP(V)}(-1))\) be the local
+model, so that \(c_{1}(T)=(r-s)H+c_{1}(Z)+c_{1}(V)+c_{1}(V')\) by
+\cite[(32)]{SS}.
+
+The \(J\)-function of a smooth projective \(Y\) is
+\(J^{Y}(Q,t,z)=zS^{Y}(Q,t,z)^{-1}\one\) as in \cite[(20)]{SS}; it satisfies
+\begin{equation}
+  \label{eq:jnorm}
+  J^{Y}(Q,t,z)=z\one+t+O(z^{-1}).
+\end{equation}
+The \emph{extremal} specialization \cite[(28) and~(33)]{SS} sets \(Q^{d}=1\)
+for \(d=k[L]\) with \([L]\) the class of a line in a fibre of
+\(\PP(V)\subset T\to Z\), sets \(Q^{d}=0\) for all other \(d\), and replaces
+the parameter by
+\begin{equation}
+  \label{eq:barparam}
+  \bar{\mathbf t}=t+\ln(q)c_{1}(T),\qquad t\in H^{*}(Z).
+\end{equation}
+In the specialized variables \eqref{eq:jnorm} reads
+\(J^{T}(q,t,z)=z\one+\bar{\mathbf t}+O(z^{-1})\), and the prefactor
+\(z\,e^{t/z}q^{c_{1}(T)/z}=z\,e^{\bar{\mathbf t}/z}\) of \eqref{eq:ss35} is
+exactly the \(d=0\) summand.  Whether \eqref{eq:ss35} is the \(J\)-function
+is therefore the question of whether the summands with \(d\ge1\) contribute
+in \(z\)-order \(\ge0\).
+
+Three statements of \cite{SS} carry a hypothesis on \(\nu=r-s\), and the
+whole of Sections~5--9 depends on them through the chain recorded below.  We
+list each with the inequality it states and the statements that use it.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\hline
+Location in \cite{SS} & Hypothesis & Used by\\
+\hline
+Theorem~4.4 & \(r-s>1\) & (37); Theorem~4.6; (39)--(40)\\
+Remark~4.5(3) & \(r-s\le1\) & nothing; a negative assertion\\
+Section~7, before (64) & \(r-s>1\) & (64); Proposition~7.5 and its corollaries\\
+\hline
+\end{tabular}
+\end{center}
+
+The first row is the load-bearing one.  \cite[Theorem~4.6]{SS} deduces the
+presentation
+\begin{equation}
+  \label{eq:ss37}
+  QH^{*}_{\mathrm{ext}}(T)
+  =H^{*}(Z)[H][[q]]\Big/\Big\langle\textstyle\prod_{i=1}^{r}(\rho_{i}+H)
+    =q^{r-s}\prod_{j=1}^{s}(\sigma_{j}-H)\Big\rangle,
+\end{equation}
+which is \cite[(37)]{SS}, from \eqref{eq:ss35} by exhibiting a quantum
+differential operator annihilating \(J^{T}\) and quoting
+\cite[Theorem~10.3.1]{CoxKatz} and \cite[Lemma~2]{Pandharipande}.  That
+argument uses \(r-s>1\) only through \cite[Theorem~4.4]{SS}.  The spectral
+computations \cite[Propositions~5.1 and~5.2, Corollary~5.3]{SS} then use
+\eqref{eq:ss37} and the ring homomorphism of \cite[Theorem~3.3]{SS}, and
+carry no hypothesis on \(\nu\) of their own; the inequality in
+\cite[Theorem~1.2]{SS} is inherited from \cite[Theorem~4.4]{SS}.  Likewise,
+the modified extremal \(J\)-function \cite[(40)]{SS} used throughout
+Sections~7--9 is derived from \eqref{eq:ss35}, and \cite[Proposition~9.1]{SS}
+uses \eqref{eq:ss37} again.  Establishing \eqref{eq:ss35} at \(\nu=1\)
+therefore unblocks all of this at once.
+
+The second row asserts the opposite of what we prove, and is used nowhere:
+\cite[Remark~4.5(3)]{SS} is explicitly marked as not needed, and the same is
+true of its counterpart \cite[Remark~4.7]{SS} for \(T'\).  What we do use
+from it is its positive half, the statement that \eqref{eq:ss35} lies on
+Givental's overruled Lagrangian cone of \(T\) for \(r-s\le1\), which the
+authors obtain from \cite{Brown}, \cite{CoatesGivental} and
+\cite[Lemma~9.6]{SS}.
+
+The third row governs the aperture of the Barnes expansion only.  Nothing in
+Sections~8 and~9 of \cite{SS} constrains \(\nu\): the sector
+\cite[(78)]{SS} of \cite[Proposition~8.2]{SS} comes from
+\cite[Theorem~A.2]{SS}, whose hypothesis \(|\arg t|<(\tfrac{\nu}{2}+1)\pi\)
+carries no \(\epsilon\) and is valid at \(\nu=1\); and the reductions of
+\cite[Sections~9.1--9.4]{SS} --- weak-to-strong in the local model, the
+reduction to the split case, the cohomological reduction to the local model,
+and the comparison of the Fourier--Mukai transform with the local model ---
+are stated and proved with \(r>s\) as the only inequality.

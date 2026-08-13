@@ -1,0 +1,164 @@
+\section{\texorpdfstring{\(J\)}{J}-normalization at discrepancy one}
+\label{sec:normalization}
+
+Write \(A=H^{*}(Z)[H]\) for the coefficient ring of \eqref{eq:ss35}, a
+finite-dimensional graded \(\C\)-algebra whose elements of positive degree
+are nilpotent.  Each factor of the denominator of \eqref{eq:ss35} has the
+form \(mz+a\) with \(m\ge1\) and \(a=\rho_{i}+H\in A\), so
+\[
+  \frac1{mz+a}
+  =\frac1{mz}\sum_{l\ge0}\Bigl(\frac{-a}{mz}\Bigr)^{l}\in z^{-1}A[z^{-1}]
+\]
+is a finite sum, and \eqref{eq:ss35} is an element of \(zA[z^{-1}][[q]]\).
+By the \emph{\(z\)-order} of such an element we mean the largest \(n\) with a
+nonzero \(z^{n}\) coefficient.
+
+\begin{lemma}
+  \label{lem:order}
+  For every \(d\ge1\), the degree-\(d\) summand of \eqref{eq:ss35} has
+  \(z\)-order at most
+  \[
+    1+s(d-1)-rd=1-s-\nu d .
+  \]
+\end{lemma}
+
+\begin{proof}
+  The numerator \(\prod_{j=1}^{s}\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\) has
+  \(sd\) factors.  The \(s\) factors with \(m=0\) are \(\sigma_{j}-H\) and
+  contain no \(z\); each of the remaining \(s(d-1)\) factors is linear in
+  \(z\).  So the numerator is a polynomial in \(z\) over \(A\) of degree at
+  most \(s(d-1)\).  The denominator \(\prod_{i=1}^{r}\prod_{m=1}^{d}(\rho_{i}
+  +H+mz)\) has \(rd\) factors, all with \(m\ge1\), so by the expansion above
+  its inverse lies in \(z^{-rd}A[z^{-1}]\).  Multiplying by the leading
+  factor \(z\) of \eqref{eq:ss35} adds one.
+\end{proof}
+
+The two hypotheses of Theorem~\ref{thm:normalization} enter here and nowhere
+else.
+
+\begin{corollary}
+  \label{cor:normalized}
+  If \(\nu=1\) and \(s\ge1\), then every summand of \eqref{eq:ss35} with
+  \(d\ge1\) has \(z\)-order at most \(1-s-d\le-1\), and hence
+  \[
+    z\,e^{t/z}q^{c_{1}(T)/z}
+    \sum_{d\ge0}q^{(r-s)d}\,
+    \frac{\prod_{j=1}^{s}\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)}
+         {\prod_{i=1}^{r}\prod_{m=1}^{d}(\rho_{i}+H+mz)}
+    =z\one+\bar{\mathbf t}+O(z^{-1}),
+  \]
+  with \(\bar{\mathbf t}=t+\ln(q)c_{1}(T)\) as in \eqref{eq:barparam}.
+\end{corollary}
+
+\begin{proof}
+  The bound of Lemma~\ref{lem:order} is \(1-s-d\), which is at most \(-1\)
+  for \(d\ge1\) and \(s\ge1\).  The \(d=0\) summand is
+  \(z\,e^{t/z}q^{c_{1}(T)/z}=z\,e^{\bar{\mathbf t}/z}
+  =z\one+\bar{\mathbf t}+O(z^{-1})\).
+\end{proof}
+
+\begin{remark}
+  \label{rem:boundary}
+  Both hypotheses are sharp.  For \(\nu=1\) and \(s=0\), so \((r,s)=(1,0)\),
+  the bound of Lemma~\ref{lem:order} is \(1-d\) and it is attained: the
+  \(d=1\) summand of \eqref{eq:ss35} is
+  \[
+    z\cdot\frac{q}{\rho_{1}+H+z}
+    =q\one-\frac{q(\rho_{1}+H)}{z}+\cdots,
+  \]
+  whose \(z^{0}\) coefficient \(q\one\) is a genuine curve-induced
+  correction.  The series is then an \(I\)-function with mirror map
+  \(\bar{\mathbf t}\mapsto\bar{\mathbf t}+q\one\), exactly as
+  \cite[Remark~4.5(3)]{SS} describes.  For \(\nu=0\) the bound is the
+  \(d\)-independent value \(1-s\) and the sum is not \(q\)-adically
+  convergent, which is why \(r>s\) is assumed throughout \cite{SS}.
+\end{remark}
+
+To convert the normalization into an identification we use the standard
+characterization of the \(J\)-function as a slice of Givental's cone.  Let
+\(\mathcal L_{T}\) denote the overruled Lagrangian cone of the genus-zero
+Gromov--Witten theory of \(T\), in the extremal specialization
+\eqref{eq:barparam}.  The specialization is legitimate for the cone
+formalism because \(q\) carries positive weight: by \cite[(33)]{SS} the
+curve class \(k[L]\) contributes \(q^{(r-s)k}\), and \(r>s\), so
+\(\mathcal L_{T}\) is defined over \(\C[[q]]\) and \eqref{eq:ss35} is a
+\(q\)-adically convergent point of the ambient space.
+
+\begin{lemma}[\(J\)-slice uniqueness; {\cite{Givental}}, {\cite{CoatesGivental}}]
+  \label{lem:jslice}
+  Let \(f\in\mathcal L_{T}\) be of the form \(f=z\one+\tau+O(z^{-1})\) for
+  some \(\tau\) in the parameter space.  Then \(f=J^{T}(\tau,z)\).
+\end{lemma}
+
+This is the mechanism behind every mirror theorem of Givental type: a point
+of the cone with a prescribed \(z^{0}\) coefficient is the \(J\)-function at
+that coefficient, and the mirror map is precisely the discrepancy between
+the prescribed \(z^{0}\) coefficient and the parameter one started with.
+
+\begin{proposition}
+  \label{prop:IJ}
+  Let \(r=s+1\) with \(s\ge1\).  Then the right-hand side of
+  \eqref{eq:ss35} equals the extremal \(J\)-function \(J^{T}(q,t,z)\) of the
+  local model, in the variables and completion of \cite[Theorem~4.4]{SS}.
+\end{proposition}
+
+\begin{proof}
+  By \cite[Remark~4.5(3)]{SS} the right-hand side of \eqref{eq:ss35} lies on
+  \(\mathcal L_{T}\) whenever \(r-s\le1\); the authors deduce this from
+  \cite{Brown}, \cite{CoatesGivental} and \cite[Lemma~9.6]{SS}.  By
+  Corollary~\ref{cor:normalized} it has the form
+  \(z\one+\bar{\mathbf t}+O(z^{-1})\).  Lemma~\ref{lem:jslice} with
+  \(\tau=\bar{\mathbf t}\) gives the claim.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:presentation}
+  Let \(r=s+1\) with \(s\ge1\).  Then the presentation \eqref{eq:ss37} of
+  \cite[Theorem~4.6]{SS} holds, the modified extremal \(J\)-function
+  \cite[(39)--(40)]{SS} of \(T\) is as printed, and
+  \cite[Theorem~1.2]{SS} holds: after the extremal
+  specialization, \(c_{1}(X)\star_{q}-\) on \(QH^{*}(X)\) has eigenvalue
+  \(0\) with multiplicity \(\rk H^{*}(X')\) and the single nonzero
+  eigenvalue
+  \[
+    \lambda_{0}(q)=e^{-\pi\sqrt{-1}\,s}q=(-1)^{s}q
+  \]
+  with multiplicity \(\rk H^{*}(Z)\).
+\end{corollary}
+
+\begin{proof}
+  The proof of \cite[Theorem~4.6]{SS} specializes the parameter \(t\) of
+  \cite[Theorem~4.4]{SS}, exhibits a differential operator annihilating
+  \(J^{T}\), and concludes with \cite[Theorem~10.3.1]{CoxKatz} and
+  \cite[Lemma~2]{Pandharipande}; it uses \(r-s>1\) only to know that
+  \eqref{eq:ss35} is \(J^{T}\).  Proposition~\ref{prop:IJ} supplies that,
+  so the proof applies verbatim, and \cite[(39)--(40)]{SS} follow by the
+  same substitution as in \cite[Section~4.3]{SS}.
+
+  For the spectrum, \cite[Propositions~5.1 and~5.2]{SS} concern the abstract
+  ring \eqref{eq:ss37} and its subspaces and assume only \(r>s\), and
+  \cite[Corollary~5.3]{SS} combines them with the ring homomorphism
+  \(i^{*}\colon QH^{*}_{\mathrm{ext}}(X)\to QH^{*}_{\mathrm{ext}}(T)\) of
+  \cite[Theorem~3.3]{SS}.  Once \eqref{eq:ss37} is available at \(\nu=1\),
+  that argument is unchanged.  Its output is \(r-s\) nonzero eigenvalues
+  \(\lambda_{k}(q)=(r-s)e^{-\pi\sqrt{-1}(2k+s)/(r-s)}q\) for
+  \(0\le k<r-s\); at \(r-s=1\) only \(k=0\) occurs, and
+  \(\lambda_{0}(q)=e^{-\pi\sqrt{-1}s}q\).
+\end{proof}
+
+\begin{remark}
+  \label{rem:pbundle}
+  The companion statement \cite[(34)]{SS} for \(\PP(V)\) is the \(s=0\) case
+  of the same expression, and Lemma~\ref{lem:order} applied to it gives
+  maximal \(z\)-order \(1-rd\).  This is at most \(-1\) for every \(d\ge1\)
+  as soon as \(r\ge2\), which holds whenever \(r=s+1\) with \(s\ge1\).  So
+  \cite[(34), (36) and~(38)]{SS} are covered in the same range, by the same
+  count.
+\end{remark}
+
+Proposition~\ref{prop:IJ} and Corollary~\ref{cor:presentation} prove
+Theorem~\ref{thm:normalization}.  They also settle the status of
+\cite[Remark~4.5(3)]{SS}: under the standing assumption \(r>s\) its range
+\(r-s\le1\) is exactly \(\nu=1\), and by
+Corollary~\ref{cor:normalized} and Remark~\ref{rem:boundary} its negative
+assertion holds there only for \(s=0\).

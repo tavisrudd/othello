@@ -1,0 +1,154 @@
+\section{The Meijer aperture at \texorpdfstring{\(\nu=1\)}{nu = 1}}
+\label{sec:aperture}
+
+The asymptotic analysis of \cite[Section~7]{SS} rests on
+\cite[Lemma~7.4]{SS}, which writes the equivariant central-charge kernel
+\(\kappa_{m}\) as a cohomology-valued Meijer \(G\)-function,
+\begin{equation}
+  \label{eq:kappa}
+  \kappa_{m}
+  =e^{-\pi\sqrt{-1}c_{1}(V')}\,
+   G^{r,0}_{s,r}\!\left(
+     \begin{matrix}1-\sigma_{1},\dots,1-\sigma_{s}\\ \rho_{1},\dots,\rho_{r}\end{matrix}
+     \;\middle|\;t_{m}\right),
+  \qquad
+  t_{m}:=e^{-\pi\sqrt{-1}(2m+s)}\Bigl(\frac{q}{z}\Bigr)^{r-s}.
+\end{equation}
+In the notation of \cite[Appendix~A]{SS} the lower and upper index counts of
+this \(G\)-function are \(s\) and \(r\), so the parameter governing the
+asymptotic expansion is
+\begin{equation}
+  \label{eq:nu}
+  \nu=r-s,
+\end{equation}
+which is the discrepancy of the flip.  (The appendix of \cite{SS} names the
+index counts \(p\) and \(q\); we write \(s\) and \(r\) to keep \(q\) for the
+extremal variable.)
+
+\cite[Theorem~A.1]{SS} is Barnes' asymptotic expansion \cite{Barnes} in the
+form given by Meijer \cite{Meijer} and Luke \cite{Luke}.  Its hypothesis is
+stated there as
+\begin{equation}
+  \label{eq:A1}
+  |\arg t|<(\nu+\epsilon)\pi,
+  \qquad
+  \epsilon=1\ \text{if}\ \nu>1,
+  \qquad
+  \epsilon=\tfrac12\ \text{if}\ \nu=1 .
+\end{equation}
+The \(\epsilon\) of \eqref{eq:A1} is the whole issue.  The expansion printed
+in \cite[Section~7]{SS} after \cite[Lemma~7.4]{SS} is introduced by the
+sentence ``For \(r-s>1\)'', and the sector recorded with it,
+\begin{equation}
+  \label{eq:ss64}
+  \left|\arg\Bigl(\frac zq\Bigr)+\frac{(2m+s)\pi}{r-s}\right|
+  <\Bigl(1+\frac1{r-s}\Bigr)\pi,
+\end{equation}
+which is \cite[(64)]{SS}, is exactly \eqref{eq:A1} with \(\epsilon=1\)
+transported through \eqref{eq:kappa}.
+
+\begin{lemma}
+  \label{lem:center}
+  Let \(\nu=1\).  Applied to \eqref{eq:kappa}, \cite[Theorem~A.1]{SS} gives
+  the asymptotic expansion of \cite[Proposition~7.5]{SS} on
+  \begin{equation}
+    \label{eq:center}
+    \left|\arg\Bigl(\frac zq\Bigr)+(2m+s)\pi\right|<\frac{3\pi}{2},
+  \end{equation}
+  and on no larger sector.  The sector obtained by substituting \(r-s=1\)
+  into \eqref{eq:ss64} is
+  \(\bigl|\arg(z/q)+(2m+s)\pi\bigr|<2\pi\), wider by \(\pi/2\) on each side.
+\end{lemma}
+
+\begin{proof}
+  From \eqref{eq:kappa},
+  \(\arg t_{m}=-(2m+s)\pi-\nu\arg(z/q)\).  At \(\nu=1\) the hypothesis
+  \eqref{eq:A1} reads \(|\arg t_{m}|<(1+\tfrac12)\pi\), which is
+  \eqref{eq:center}.  Substituting \(r-s=1\) into \eqref{eq:ss64} gives
+  \((1+1)\pi=2\pi\), the value of \((\nu+\epsilon)\pi\) at \(\epsilon=1\).
+\end{proof}
+
+The correction is one-directional: \eqref{eq:center} is smaller than the
+naive specialization of \eqref{eq:ss64}, so a repair must show that what
+remains is still enough.  The other sector in play is unaffected.
+
+\begin{lemma}
+  \label{lem:ambient}
+  \cite[Proposition~8.2]{SS} and its sector
+  \begin{equation}
+    \label{eq:ss78}
+    \left|\arg\Bigl(\frac zq\Bigr)-\frac{(1-s)\pi}{r-s}\right|
+    <\frac\pi2+\frac{\pi}{r-s},
+  \end{equation}
+  which is \cite[(78)]{SS}, are valid at \(\nu=1\), where \eqref{eq:ss78}
+  reads \(\bigl|\arg(z/q)-(1-s)\pi\bigr|<\tfrac{3\pi}{2}\).
+\end{lemma}
+
+\begin{proof}
+  \cite[Proposition~8.2]{SS} is deduced from \cite[(76)]{SS}, which applies
+  \cite[Theorem~A.2]{SS} to a \(G^{r,1}_{s,r}\) function of the same
+  argument.  The hypothesis of \cite[Theorem~A.2]{SS} is
+  \(|\arg t|<(\tfrac\nu2+1)\pi\); it involves no \(\epsilon\) and no
+  restriction on \(\nu\).  Transporting it through the same substitution as
+  above gives \eqref{eq:ss78} for every \(\nu\ge1\), and the displayed form
+  at \(\nu=1\).
+\end{proof}
+
+\begin{proposition}
+  \label{prop:common}
+  Let \(r=s+1\) with \(s\ge1\) and let \(0\le k\le1\), so that the
+  semiorthogonal decomposition \cite[Theorem~1.1]{SS} has the single
+  \(Z\)-component of index \(m=-k\).  The sectors \eqref{eq:center} and
+  \eqref{eq:ss78} meet in the open sector
+  \begin{equation}
+    \label{eq:common}
+    \max\bigl((2k-s)\pi,\,(1-s)\pi\bigr)-\frac{3\pi}{2}
+    <\arg\Bigl(\frac zq\Bigr)<
+    \min\bigl((2k-s)\pi,\,(1-s)\pi\bigr)+\frac{3\pi}{2},
+  \end{equation}
+  of opening \(2\pi\).  It contains the eigenvalue ray
+  \(\arg(z/q)=(2k-s)\pi\) of \cite[Theorem~1.4(1)]{SS} and the tame ray
+  \(\arg(z/q)=(1-s)\pi\) of \cite[Theorem~1.4(2)]{SS}.
+\end{proposition}
+
+\begin{proof}
+  With \(m=-k\), sector \eqref{eq:center} is the open interval of half-width
+  \(3\pi/2\) about \((2k-s)\pi\), and sector \eqref{eq:ss78} is the open
+  interval of half-width \(3\pi/2\) about \((1-s)\pi\).  For \(k\in\{0,1\}\)
+  the two centres are at distance \(|2k-1|\pi=\pi\), so the intervals meet in
+  an interval of length \(3\pi-\pi=2\pi\), namely \eqref{eq:common}.  Since
+  \(\pi<3\pi/2\), each centre lies in the other interval, so both centres lie
+  in the intersection; they are the two rays named in the statement, because
+  at \(r-s=1\) the rays \(-(2m+s)\pi/(r-s)\) and \((1-s)\pi/(r-s)\) of
+  \cite[Theorem~1.4]{SS} are \((2k-s)\pi\) and \((1-s)\pi\).
+\end{proof}
+
+Lemmas~\ref{lem:center} and~\ref{lem:ambient} and
+Proposition~\ref{prop:common} prove Theorem~\ref{thm:aperture}.
+
+\begin{remark}
+  \label{rem:blowup}
+  For a blow-up, \(s=1\), the numbers are: \eqref{eq:center} with \(k=m=0\)
+  is \(-\tfrac{5\pi}{2}<\arg(z/q)<\tfrac\pi2\); \eqref{eq:ss78} is
+  \(|\arg(z/q)|<\tfrac{3\pi}{2}\); and \eqref{eq:common} is
+  \(-\tfrac{3\pi}{2}<\arg(z/q)<\tfrac\pi2\), containing the tame ray \(0\)
+  and the eigenvalue ray \(-\pi\).  The codimension-two blow-up is
+  \((r,s)=(2,1)\), where \(\lambda_{0}(q)=-q\) and the exponential factor of
+  the expansion of \cite[Proposition~7.5]{SS} is
+  \(\exp(-\lambda_{0}(q)/z)=\exp(q/z)\).
+\end{remark}
+
+\begin{remark}
+  \label{rem:uniqueness}
+  The opening \(2\pi\) of \eqref{eq:common} exceeds \(\pi\), the width beyond
+  which an asymptotic expansion of level one determines its flat section
+  uniquely; see \cite{Balser}.  The oriented comparison of the
+  nonzero-eigenvalue and tame expansions carried out in
+  \cite[Section~9]{SS}, which needs both expansions to be valid
+  simultaneously on a sector containing both rays, is therefore available at
+  \(\nu=1\).  In particular the common-sector condition of
+  \cite[Remark~1.6]{SS}, namely \(\tfrac14(r-s-6)<k<\tfrac34(r-s+2)\), which
+  at \(r-s=1\) reads \(-\tfrac54<k<\tfrac94\) and admits both \(k=0\) and
+  \(k=1\), holds at \(\nu=1\) for the corrected sector \eqref{eq:center} and
+  not only for \eqref{eq:ss64}.
+\end{remark}
