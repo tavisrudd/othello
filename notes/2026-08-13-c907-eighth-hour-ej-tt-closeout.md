@@ -151,3 +151,21 @@ kills every base-ideal extension simultaneously and, with relative weak
 factorization, proves the actual `m=2` theorem.  This is stronger than a
 formal generalized-eigenspace projector but narrower and cleaner than a
 classification of arbitrary threefold carriers.
+
+## Completion audit against C907
+
+| Requirement | Evidence | Verdict |
+| --- | --- | --- |
+| Unconditional irrationality of \(X\times\mathbf P^2\) | The live card and queue still mark `m=2` open; the divisorial theorem assumes the framed localizing \(\Phi _6\) motive. | **Not achieved.** |
+| Positive weak-factorization mechanism | `minimal-cyclotomic-jordan-silver-theorem.md` reduces the argument to endpoint \(J_3\), center exclusion, and strict \(K[N]\)-biproducts. | **Conditional theorem achieved.** |
+| Endpoint/carrier admission screen | `cyclotomic-j3-rank-six-admission.md` proves \(J_3\Rightarrow\nu _6\ge6\); the rank-six countermodel proves formal sharpness. | **Achieved at the stated conditional realization scope.** |
+| Strictness obstruction | `jordan-biproduct-extension-obstruction.md` identifies the successive \(\operatorname{Ext}^1_{K[N]}\) classes erased by associated grades. | **Achieved.** |
+| Unified analytic/carrier route | `divisorial-support-square-theorem.md` proves that a localizing, point-kernel-linear, Orlov-compatible packet forces square-zero on the \(\mathbf P^5\) graph side and preserves the endpoint telescope. | **Conditional theorem achieved; construction absent.** |
+| Candidate construction and no-go audit | `coniveau-cyclotomic-packet-spec.md` specifies the full coniveau-framed quantum motive and proves ordinary \(K\)-theory, full Serre, birational motives, cutoff quotients, and residual mutation projectors do not supply it. | **Specification/no-go achieved.** |
+| Gold compatibility | `higher-codimension-jordan-exchange-obstruction.md` proves the naive ungraded all-codimension rule conflicts with the candidate projective tensor rule for \(m\ge3\). | **Conditional no-go achieved.** |
+| Toric residual theorem | Proper support gives rank four, but the oriented tame compact/ordinary pairing comparison remains absent. | **Separate leaf incomplete.** |
+
+No current artifact proves the missing framed localizing quantum motive exists,
+so neither the Silver acceptance line nor the persistent goal may be marked
+complete.  The strongest honest endpoint of this pass is the conditional
+divisorial theorem plus the exact construction specification.
