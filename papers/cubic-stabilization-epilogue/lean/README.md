@@ -328,9 +328,10 @@ The 139 reviewer-facing terminals currently verify:
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the
-companion does not yet formalize the relative six-axis geometry, construction
-of the marked finite-etale splitting extension and its geometric coefficient
-lattice, or the geometric
+companion does not yet formalize the relative six-axis geometry, identification
+of the explicitly constructed quadratic finite-etale splitting field and
+eigenbasis with the manuscript's marked geometric splitting extension, or the
+construction of its geometric coefficient lattice, or the geometric
 cohomology realization and isogeny pullback, the geometric inputs to the
 universal `CH_0` argument,
 quantum comparison theorems, the geometric and comparison inputs to
