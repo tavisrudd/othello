@@ -138,11 +138,13 @@ The 121 reviewer-facing terminals currently verify:
   commutative rational algebra, the normalized exponential coefficients are
   constructed, proved to satisfy the formal flat recursion in every degree,
   assembled into an entrywise formal power-series matrix satisfying the exact
-  constant-coefficient differential equation,
+  constant-coefficient differential equation, with the negated-connection
+  series proved to be its two-sided inverse,
   and proved compatible with arbitrary rational-algebra homomorphisms;
   for a supplied compatible system of constant connection matrices, every
   coefficient and the assembled formal series commute with adjacent
-  coefficient reductions and satisfy the differential equation at each level,
+  coefficient reductions; the compatible negated-connection series are
+  two-sided inverses, and the differential equation holds at each level,
   without claiming a varying quantum product or filtered analytic gauge;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with

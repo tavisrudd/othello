@@ -11,8 +11,9 @@ coefficients
 
 are the coefficients of an entrywise formal power-series matrix.  Lean proves
 that the constant term is the identity, that `(n+1)Gₙ₊₁ = -A Gₙ`, and that
-entrywise formal differentiation gives `dG/dt = -A G`.  No truncation,
-uniqueness, or invertibility statement is represented.  This is the algebraic constant-
+entrywise formal differentiation gives `dG/dt = -A G`.  The series for `A`
+and `-A` are proved to be two-sided inverse matrices.  No truncation or
+uniqueness statement is represented.  This is the algebraic constant-
 coefficient case of the recursive finite-level gauge construction; no quantum
 product, varying bulk connection, filtered coefficient quotient, Laurent loop
 coordinate, convergence, or analytic gauge is represented.  Each coefficient
@@ -128,6 +129,125 @@ theorem constantFlatGaugeSeries_derivative
   simpa [Matrix.mul_apply, Matrix.smul_apply, mul_comm] using
     congrArg (fun matrix => matrix row column)
     (constantFlatGaugeCoefficient_succ connection degree)
+
+/-- Every normalized coefficient commutes with its constant connection
+matrix. -/
+theorem constantFlatGaugeCoefficient_commutes
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) (degree : ℕ) :
+    constantFlatGaugeCoefficient connection degree * connection =
+      connection * constantFlatGaugeCoefficient connection degree := by
+  rw [constantFlatGaugeCoefficient, Matrix.smul_mul, Matrix.mul_smul]
+  congr 1
+  rw [← pow_succ, pow_succ']
+
+/-- Entrywise differentiation satisfies the Leibniz rule for finite square
+matrices over formal power series. -/
+theorem matrixPowerSeries_derivative_mul
+    {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommRing R]
+    (left right : Matrix Index Index (PowerSeries R)) :
+    (left * right).map PowerSeries.derivativeFun =
+      left.map PowerSeries.derivativeFun * right +
+        left * right.map PowerSeries.derivativeFun := by
+  ext row column
+  have derivative_sum :
+      PowerSeries.derivativeFun
+          (∑ index, left row index * right index column) =
+        ∑ index, PowerSeries.derivativeFun
+          (left row index * right index column) := by
+    change (PowerSeries.derivative R)
+        (∑ index, left row index * right index column) = _
+    exact map_sum (PowerSeries.derivative R) _ _
+  rw [Matrix.map_apply, Matrix.mul_apply, derivative_sum]
+  simp only [PowerSeries.derivativeFun_mul, Matrix.add_apply,
+    Matrix.mul_apply, Matrix.map_apply, Finset.sum_add_distrib]
+  rw [add_comm]
+  simp only [smul_eq_mul, mul_comm]
+
+/-- The formal gauge series commutes with the constant connection matrix
+embedded as a constant power-series matrix. -/
+theorem constantFlatGaugeSeries_commutes
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) :
+    constantFlatGaugeSeries connection * connection.map PowerSeries.C =
+      connection.map PowerSeries.C * constantFlatGaugeSeries connection := by
+  ext row column degree
+  simp only [Matrix.mul_apply, Matrix.map_apply, map_sum,
+    PowerSeries.coeff_mul_C, PowerSeries.coeff_C_mul,
+    constantFlatGaugeSeries, PowerSeries.coeff_mk]
+  exact congrArg (fun matrix ↦ matrix row column)
+    (constantFlatGaugeCoefficient_commutes connection degree)
+
+/-- Over a commutative rational algebra, a formal power series with zero
+derivative is its constant series. -/
+theorem powerSeries_eq_C_constantCoeff_of_derivative_eq_zero
+    {R : Type*} [CommRing R] [Algebra ℚ R]
+    (series : PowerSeries R) (derivative_zero : series.derivativeFun = 0) :
+    series = PowerSeries.C (PowerSeries.coeff 0 series) := by
+  ext degree
+  cases degree with
+  | zero => simp
+  | succ degree =>
+      have coefficient_equation := congrArg (PowerSeries.coeff degree) derivative_zero
+      rw [PowerSeries.coeff_derivativeFun, map_zero] at coefficient_equation
+      have scalar_unit : IsUnit ((degree + 1 : ℕ) : R) := by
+        rw [show ((degree + 1 : ℕ) : R) =
+          algebraMap ℚ R (degree + 1) by norm_num]
+        exact (isUnit_iff_ne_zero.mpr (by positivity : (degree + 1 : ℚ) ≠ 0)).map _
+      simp only [PowerSeries.coeff_C, Nat.succ_ne_zero, if_false]
+      apply (scalar_unit.mul_left_eq_zero).mp
+      simpa [Nat.cast_add, Nat.cast_one] using coefficient_equation
+
+/-- The normalized formal series for `A` and `-A` are two-sided inverse
+matrices over formal power series. -/
+theorem constantFlatGaugeSeries_mul_neg_eq_one
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) :
+    constantFlatGaugeSeries connection *
+        constantFlatGaugeSeries (-connection) = 1 := by
+  let product := constantFlatGaugeSeries connection *
+    constantFlatGaugeSeries (-connection)
+  have derivative_zero : product.map PowerSeries.derivativeFun = 0 := by
+    rw [matrixPowerSeries_derivative_mul,
+      constantFlatGaugeSeries_derivative,
+      constantFlatGaugeSeries_derivative]
+    rw [show (-connection).map (fun value ↦ PowerSeries.C (-value)) =
+      connection.map PowerSeries.C by ext; simp]
+    rw [← Matrix.mul_assoc,
+      constantFlatGaugeSeries_commutes connection,
+      Matrix.mul_assoc]
+    have neg_map :
+        connection.map (fun value ↦ PowerSeries.C (-value)) =
+          -(connection.map PowerSeries.C) := by
+      ext
+      simp
+    rw [neg_map]
+    simp only [neg_mul, ← Matrix.mul_assoc]
+    simp
+  ext row column degree
+  have entry_derivative_zero :
+      (product row column).derivativeFun = 0 := by
+    exact congrArg (fun matrix ↦ matrix row column) derivative_zero
+  change PowerSeries.coeff degree (product row column) =
+    PowerSeries.coeff degree ((1 : Matrix Index Index (PowerSeries R)) row column)
+  rw [powerSeries_eq_C_constantCoeff_of_derivative_eq_zero
+    (product row column) entry_derivative_zero]
+  simp [product, Matrix.mul_apply, constantFlatGaugeSeries,
+    constantFlatGaugeCoefficient_zero, Matrix.one_apply]
+
+/-- The reverse product of the normalized series for `A` and `-A` is also the
+identity matrix. -/
+theorem constantFlatGaugeSeries_neg_mul_eq_one
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) :
+    constantFlatGaugeSeries (-connection) *
+        constantFlatGaugeSeries connection = 1 := by
+  simpa only [neg_neg] using
+    constantFlatGaugeSeries_mul_neg_eq_one (-connection)
 
 end Quantum
 

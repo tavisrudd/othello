@@ -2303,10 +2303,11 @@ theorem adicFormalBaseShift_bulkSystem_compatible_and_charpoly
 `ℚ`-algebra, Lean constructs the normalized exponential coefficients and
 proves `G₀=1`, the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree,
 assembles the entrywise formal power-series matrix and proves its exact
-constant-coefficient differential equation, and proves coefficient compatibility
+constant-coefficient differential equation, proves that the series for the
+negated matrix is its two-sided inverse, and proves coefficient compatibility
 under every rational-algebra homomorphism.  No varying
 quantum product, filtered quotient, Laurent loop
-coordinate, truncation, uniqueness, invertibility, convergence, or analytic
+coordinate, truncation, uniqueness, convergence, or analytic
 gauge is constructed. -/
 theorem constantFlatGauge_normalized_and_recursion
     {Index R : Type*} [Fintype Index] [DecidableEq Index]
@@ -2325,6 +2326,10 @@ theorem constantFlatGauge_normalized_and_recursion
           PowerSeries.derivativeFun =
         connection.map (fun value => PowerSeries.C (-value)) *
           Quantum.constantFlatGaugeSeries connection ∧
+      (Quantum.constantFlatGaugeSeries connection *
+            Quantum.constantFlatGaugeSeries (-connection) = 1 ∧
+        Quantum.constantFlatGaugeSeries (-connection) *
+            Quantum.constantFlatGaugeSeries connection = 1) ∧
       ∀ (S : Type*) [CommRing S] [Algebra ℚ S]
           (homomorphism : R →ₐ[ℚ] S) (degree : ℕ),
         (Quantum.constantFlatGaugeCoefficient connection degree).map
@@ -2335,6 +2340,8 @@ theorem constantFlatGauge_normalized_and_recursion
     Quantum.constantFlatGaugeCoefficient_succ connection,
     Quantum.constantFlatGaugeSeries_coefficient connection,
     Quantum.constantFlatGaugeSeries_derivative connection,
+    ⟨Quantum.constantFlatGaugeSeries_mul_neg_eq_one connection,
+      Quantum.constantFlatGaugeSeries_neg_mul_eq_one connection⟩,
     fun _ _ _ homomorphism mappedDegree =>
       Quantum.constantFlatGaugeCoefficient_map
         homomorphism connection mappedDegree⟩
@@ -2343,9 +2350,10 @@ theorem constantFlatGauge_normalized_and_recursion
 matrices over commutative `ℚ`-algebras, compatible under adjacent
 `ℚ`-algebra reductions, Lean proves compatibility of every normalized
 exponential coefficient and of the assembled formal power-series matrices.
-At each level the series satisfies `dG/dt = -AG`.  The coefficient system and
+The negated-connection series is a compatible two-sided inverse, and at each
+level the series satisfies `dG/dt = -AG`.  The coefficient system and
 connection matrices are supplied abstractly; no ideal filtration, varying or
-multivariable quantum connection, Laurent coordinate, invertibility,
+multivariable quantum connection, Laurent coordinate,
 convergence, or analytic gauge is constructed. -/
 theorem compatibleConstantFlatGauge_reduction_and_derivative
     {Index : Type*} [Fintype Index] [DecidableEq Index]
@@ -2366,6 +2374,19 @@ theorem compatibleConstantFlatGauge_reduction_and_derivative
       (system.gaugeSeries (level + 1)).map
           (PowerSeries.map (system.reduction level).toRingHom) =
         system.gaugeSeries level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientRing (level + 1)
+      letI := system.coefficientAlgebra level
+      letI := system.coefficientAlgebra (level + 1)
+      (system.inverseSeries (level + 1)).map
+          (PowerSeries.map (system.reduction level).toRingHom) =
+        system.inverseSeries level) ∧
+    (∀ level,
+      letI := system.coefficientRing level
+      letI := system.coefficientAlgebra level
+      system.gaugeSeries level * system.inverseSeries level = 1 ∧
+        system.inverseSeries level * system.gaugeSeries level = 1) ∧
     ∀ level,
       letI := system.coefficientRing level
       letI := system.coefficientAlgebra level
@@ -2375,6 +2396,8 @@ theorem compatibleConstantFlatGauge_reduction_and_derivative
           system.gaugeSeries level :=
   ⟨system.gaugeCoefficient_compatible,
     system.gaugeSeries_compatible,
+    system.inverseSeries_compatible,
+    system.gaugeSeries_inverse,
     system.gaugeSeries_derivative⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the

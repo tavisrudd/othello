@@ -9,11 +9,12 @@ ring be a commutative `ℚ`-algebra, let adjacent levels be related by a
 with those reductions.  Lean proves that every normalized exponential
 coefficient and the assembled entrywise formal power-series matrix are
 compatible under reduction.  At every level the series still satisfies the
-constant-coefficient equation `dG/dt = -AG`.
+constant-coefficient equation `dG/dt = -AG`; the series for the negated
+connection gives a compatible two-sided inverse.
 
 The coefficient rings, reductions, and compatible connection matrices are
 supplied abstractly.  No ideal filtration, quantum product, varying or
-multivariable connection, Laurent loop coordinate, invertibility, convergence,
+multivariable connection, Laurent loop coordinate, convergence,
 or analytic gauge is represented.  The proofs are symbolic and kernel checked,
 with no external computation or oracle.
 -/
@@ -64,6 +65,18 @@ noncomputable def gaugeSeries
   letI := system.coefficientAlgebra level
   exact constantFlatGaugeSeries (system.connection level)
 
+/-- The inverse formal series at one level, constructed from the negated
+constant connection matrix. -/
+noncomputable def inverseSeries
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : CompatibleConstantConnectionSystem Index) (level : ℕ) :
+    letI := system.coefficientRing level
+    letI := system.coefficientAlgebra level
+    Matrix Index Index (PowerSeries (system.Coefficient level)) := by
+  letI := system.coefficientRing level
+  letI := system.coefficientAlgebra level
+  exact constantFlatGaugeSeries (-(system.connection level))
+
 /-- Every normalized coefficient is compatible with adjacent coefficient
 reduction. -/
 theorem gaugeCoefficient_compatible
@@ -106,6 +119,31 @@ theorem gaugeSeries_compatible
     congrArg (fun matrix ↦ matrix row column)
       (system.gaugeCoefficient_compatible level degree)
 
+/-- The inverse series constructed from the negated connection is compatible
+with adjacent coefficient reduction. -/
+theorem inverseSeries_compatible
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : CompatibleConstantConnectionSystem Index) (level : ℕ) :
+    letI := system.coefficientRing level
+    letI := system.coefficientRing (level + 1)
+    letI := system.coefficientAlgebra level
+    letI := system.coefficientAlgebra (level + 1)
+    (system.inverseSeries (level + 1)).map
+        (PowerSeries.map (system.reduction level).toRingHom) =
+      system.inverseSeries level := by
+  letI := system.coefficientRing level
+  letI := system.coefficientRing (level + 1)
+  letI := system.coefficientAlgebra level
+  letI := system.coefficientAlgebra (level + 1)
+  ext row column degree
+  simp only [inverseSeries, constantFlatGaugeSeries,
+    Matrix.map_apply, PowerSeries.coeff_map, PowerSeries.coeff_mk]
+  have mapped := constantFlatGaugeCoefficient_map
+    (system.reduction level) (-(system.connection (level + 1))) degree
+  rw [Matrix.map_neg _ (fun value ↦ map_neg _ value),
+    system.connection_compatible level] at mapped
+  exact congrArg (fun matrix ↦ matrix row column) mapped
+
 /-- At each coefficient level, the assembled series satisfies the exact
 constant-coefficient formal differential equation. -/
 theorem gaugeSeries_derivative
@@ -119,6 +157,20 @@ theorem gaugeSeries_derivative
   letI := system.coefficientRing level
   letI := system.coefficientAlgebra level
   exact constantFlatGaugeSeries_derivative (system.connection level)
+
+/-- At every level, the negated-connection series is a two-sided inverse of
+the normalized flat-gauge series. -/
+theorem gaugeSeries_inverse
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : CompatibleConstantConnectionSystem Index) (level : ℕ) :
+    letI := system.coefficientRing level
+    letI := system.coefficientAlgebra level
+    system.gaugeSeries level * system.inverseSeries level = 1 ∧
+      system.inverseSeries level * system.gaugeSeries level = 1 := by
+  letI := system.coefficientRing level
+  letI := system.coefficientAlgebra level
+  exact ⟨constantFlatGaugeSeries_mul_neg_eq_one (system.connection level),
+    constantFlatGaugeSeries_neg_mul_eq_one (system.connection level)⟩
 
 end CompatibleConstantConnectionSystem
 
