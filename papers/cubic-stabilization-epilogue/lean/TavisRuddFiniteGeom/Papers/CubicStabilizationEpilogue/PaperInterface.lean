@@ -31,6 +31,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Relati
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedOperationFormulas
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFormula
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -164,6 +165,21 @@ theorem cubicPacket_sixthMultiplicity_eq_two_of_charpoly
       (geometry.framedMonodromy cubic).sixthMultiplicity = 2 :=
   Applications.cubicThreefold_sixthMultiplicity_eq_two_of_charpoly
     geometry charpolyComparison
+
+/-- Conditional common-field endpoint of divisor tagging.  The final
+characteristic-polynomial equalities resulting from injective tagged scalar
+extension and the formal divisor bulk gauge are supplied explicitly; neither
+comparison construction is represented.  Lean transfers intrinsic
+primitive-sixth vanishing to every strictly Novikov-admissible specialization. -/
+theorem divisorTagging_vanishing_of_comparison_inputs
+    {Object : Type*} (geometry : Applications.DivisorTaggingGeometry Object)
+    (input : Applications.DivisorTaggingComparisonInput geometry) :
+    ∀ object, (geometry.intrinsicMonodromy object).sixthMultiplicity = 0 →
+      ∀ specialization : geometry.Specialization object,
+        geometry.isStrictlyNovikovAdmissible object specialization →
+          (geometry.specializedMonodromy object
+            specialization).sixthMultiplicity = 0 :=
+  Applications.divisorTagging_vanishing geometry input
 
 /-- Public form of the division-free identity used in the rank-one generation
 argument for symmetric matrix-of-ideals lattices. -/

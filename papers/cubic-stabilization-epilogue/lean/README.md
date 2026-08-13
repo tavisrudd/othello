@@ -26,15 +26,15 @@ formalization.  The machine-checked claim inventory currently contains all 23
 labelled theorem-like environments in the manuscript and classifies them as:
 
 - 0 absent from Lean;
-- 14 represented by exact but strictly weaker fragments;
-- 8 represented by conditional deductions with every external premise exposed
+- 13 represented by exact but strictly weaker fragments;
+- 9 represented by conditional deductions with every external premise exposed
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 0 absent; 14 fragmentary; 8 conditional;
-1 complete; 88 reviewer terminals.
+Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
+1 complete; 89 reviewer terminals.
 
-The 88 reviewer-facing terminals currently verify:
+The 89 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -115,7 +115,11 @@ The 88 reviewer-facing terminals currently verify:
   operation formulas, divisor-tagging comparison, and nef spectral input are
   explicit premises;
 - finite-fiber numerical Novikov coefficient pushforward and the algebraic
-  core of strict Novikov admissibility and divisor-tag separation;
+  core of strict Novikov admissibility and individual-class divisor-tag
+  separation;
+- the conditional common-field endpoint of divisor-tagging vanishing from
+  supplied final intrinsic, tagged, and specialized characteristic-polynomial
+  equalities, without formal coefficient embeddings or a gauge witness;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
   and genus-eight irrationality deductions;
 - the exact fibrewise deduction from supplied primitive-minimal-class

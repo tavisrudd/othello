@@ -39,7 +39,8 @@ structure StrictNovikovAdmissible
 
 /-- Integral divisor tags that separate numerical curve classes make the
 tagged monomial map injective, even when the untagged target monomials collide.
-This is the finite-support separation step underlying divisor tagging. -/
+This is the individual-class separation step underlying divisor tagging; it
+does not prove separation of linear combinations or completed series. -/
 theorem StrictNovikovAdmissible.injective_taggedMonomial
     [AddCommMonoid Curve] [CommRing Target] [IsDomain Target]
     [UniformSpace Target] [CompleteSpace Target] [T2Space Target]

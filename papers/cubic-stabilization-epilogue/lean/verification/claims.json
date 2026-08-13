@@ -261,14 +261,15 @@
     },
     {
       "manuscript_label": "lem:divisor-tagging",
-      "coverage": "fragment",
+      "coverage": "conditional_deduction",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorTagging_vanishing_of_comparison_inputs",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikov_injective_taggedMonomial"
       ],
-      "objects": "A strict-Novikov certificate together with a tag function on effective numerical classes and the paired specialized-monomial/tag map.",
-      "hypotheses": "The tag function separates numerical curve classes.",
-      "conclusion": "The paired specialized monomial and divisor tag is injective even when the specialized monomial component alone collides.",
-      "cautions": "The exponential-character/Vandermonde argument for completed series, the formal bulk gauge, scalar extension of quantum connections, and preservation of primitive-sixth vanishing are absent."
+      "objects": "A supplied type of geometric objects with dependent strictly Novikov-admissible specializations and intrinsic, divisor-tagged, and specialized finite-dimensional complex framed-monodromy matrices, all over C; separately, the algebraic strict-Novikov certificate and injective individual-class tag map.",
+      "hypotheses": "For every supplied strictly Novikov-admissible specialization, the final common-field polynomial equality resulting from the unformalized coefficient extension and algebraic-closure identifications is supplied, as is the final polynomial equality resulting from the unformalized divisor-equation formal bulk gauge. The individual-class tag theorem separately assumes that the tag function separates numerical curve classes.",
+      "conclusion": "Lean proves equality of intrinsic and specialized primitive-sixth multiplicities and therefore transfers intrinsic vanishing through every strictly Novikov-admissible specialization. It also proves injectivity of the paired specialized-monomial/tag map on individual numerical classes.",
+      "cautions": "The result is conditional on two final polynomial equalities over C. No source coefficient fields, common comparison field, embeddings, Polynomial.map scalar extension, or typed gauge witness occur in the theorem; Lean does not construct the completed numerical Novikov ring, the valued specialization, separating integral divisors, the injective exponential-character/Vandermonde tag on completed series, common algebraic closures, scalar extension of quantum connections, the divisor-equation bulk pullback, or compatible integral-loop-power finite-quotient gauges. The individual-class injection theorem does not by itself establish injection on linear combinations or completed series."
     },
     {
       "manuscript_label": "prop:low-dimensional-vanishing",
