@@ -1,6 +1,6 @@
 # C907: cubic-line Clifford calibration for the Rees carrier gate
 
-**Lane:** `clebsch`  
+**Lane:** `clebsch`
 **Scope:** research-only carrier calibration for `m=2`; no analytic
 Stokes/Gamma identification is claimed.
 
