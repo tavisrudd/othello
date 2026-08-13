@@ -274,9 +274,10 @@ the coefficients are natural under arbitrary rational-algebra homomorphisms;
 they now assemble into an entrywise formal power-series matrix satisfying
 `dG/dt=-AG`.  For a supplied tower of compatible constant connection matrices,
 every coefficient and the whole formal series now commute with adjacent
-rational-algebra reductions and satisfy the equation at every level; the tower
-is not yet identified with the filtered quotient construction.  Varying quantum
-products, invertibility, Laurent dependence, and analytic gauges remain outside
+rational-algebra reductions and satisfy the equation at every level.  The
+series for the negated constant connection is a compatible two-sided inverse;
+the tower is not yet identified with the filtered quotient construction.
+Varying quantum products, Laurent dependence, and analytic gauges remain outside
 that fragment.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
