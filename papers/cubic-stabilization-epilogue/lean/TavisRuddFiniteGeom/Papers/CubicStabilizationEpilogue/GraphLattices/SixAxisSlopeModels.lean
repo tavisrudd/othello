@@ -203,6 +203,22 @@ theorem sixAxisQuadraticSlopeRootInF4_frobenius_conjugate :
     sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.1
     sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.2
 
+/-- The Frobenius conjugate of the transported marked root is exactly the
+other quadratic root `x+1`. -/
+theorem sixAxisQuadraticSlopeRootInF4_frobenius_eq_add_one :
+    f4Frobenius sixAxisQuadraticSlopeRootInF4 =
+      sixAxisQuadraticSlopeRootInF4 + 1 := by
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  letI : CharP F4 2 := charP_of_injective_algebraMap' (ZMod 2) 2
+  have equation := sixAxisQuadraticSlopeRootInF4_equation_and_exotic.1
+  rw [f4Frobenius]
+  calc
+    sixAxisQuadraticSlopeRootInF4 ^ 2 =
+        -(sixAxisQuadraticSlopeRootInF4 + 1) := by
+      linear_combination equation
+    _ = sixAxisQuadraticSlopeRootInF4 + 1 := CharTwo.neg_eq _
+
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/
 theorem sixAxisQuadraticSlopePolynomial_aeval :

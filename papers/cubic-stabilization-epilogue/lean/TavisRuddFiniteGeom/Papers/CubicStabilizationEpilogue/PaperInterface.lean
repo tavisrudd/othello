@@ -1507,6 +1507,9 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
         GraphLattices.f4Frobenius (GraphLattices.f4Frobenius
             GraphLattices.sixAxisQuadraticSlopeRootInF4) =
           GraphLattices.sixAxisQuadraticSlopeRootInF4) ∧
+      GraphLattices.f4Frobenius
+          GraphLattices.sixAxisQuadraticSlopeRootInF4 =
+        GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1 ∧
       GraphLattices.sixAxisQuadraticSlopeRoot ^ 2 +
           GraphLattices.sixAxisQuadraticSlopeRoot + 1 = 0 ∧
       GraphLattices.sixAxisTwoQuadraticEigenbasis
@@ -1539,6 +1542,7 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
     rfl,
     GraphLattices.sixAxisQuadraticSlopeRootInF4_equation_and_exotic,
     GraphLattices.sixAxisQuadraticSlopeRootInF4_frobenius_conjugate,
+    GraphLattices.sixAxisQuadraticSlopeRootInF4_frobenius_eq_add_one,
     GraphLattices.sixAxisQuadraticSlopeRoot_equation,
     GraphLattices.sixAxisTwoQuadraticSlope_concreteFiniteEtale_split⟩
 
