@@ -63,16 +63,18 @@ audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
 
 The current C907 frontier is the Gamma-rank route.  For one arbitrary smooth
 blow-up, a fixed-nonzero-exceptional-parameter Artin-quotient sectorial
-receiver now proves that the primitive-sixth Gamma rank functional restricts
-to the base rank functional and vanishes on every exceptional Orlov block.
-The codimension-two omission in Shen--Shoemaker is repaired by an exact
-`z`-order calculation, and the projective-product endpoint is uniform in
-`m`.  Their all-codimension hypotheses also audit clean.  Gold (`m=2`) and
-Platinum (all `m`) nevertheless remain open at the same global gate: after two
-weak-factorization arrows, the first nonzero exceptional parameter becomes a
-formal ambient variable in the second receiver and cannot be evaluated there.
-The next attack is an iterated Laurent/Hahn or simultaneous master-space
-receiver for the whole finite zigzag.  Current card:
+receiver proves that the primitive-sixth Gamma rank functional restricts to
+the base rank functional and vanishes on every exceptional Orlov block.  The
+codimension-two omission in Shen--Shoemaker is repaired by an exact `z`-order
+calculation, the projective-product endpoint is uniform in `m`, and their
+all-codimension hypotheses audit clean.  Gold (`m=2`) and Platinum (all `m`)
+nevertheless remain open at the same global gate: after two arrows, the first
+nonzero exceptional parameter becomes formal and adjacent receivers may
+embed the intermediate `z=0` packet differently by Stokes shears.  Horizontal
+scalar pairings are constant, but this does not construct the functorial
+rank morphism `P_6 -> 1` needed to telescope.  The next attack is the actual
+Stokes mutation word; alternatives are an iterated Laurent/Hahn receiver,
+simultaneous master space, or direct microlocal rank morphism.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
 
@@ -332,9 +334,9 @@ monomial, without defining an infinite evaluation sum.  For a zero-curvature
 Laurent-valued connection with finitely many such parameters, Lean now
 constructs its normalized invertible formal gauge and an actual finite
 evaluation at one quotient cutoff, proves every omitted high-degree term zero,
-and gives one Laurent lower bound for the finite evaluated matrix.  This finite
-evaluation is not proved multiplicative, invertible, or compatible across
-levels.  Neither are the parameters identified with manuscript bulk coordinates
+and gives one Laurent lower bound for the finite evaluated matrix.  These finite
+evaluations commute with canonical adjacent quotient reductions, but are not
+proved multiplicative or invertible.  Neither are the parameters identified with manuscript bulk coordinates
 nor is the finite evaluated matrix identified with the manuscript gauge.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level

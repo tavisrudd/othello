@@ -2,7 +2,10 @@
 
 Date: 2026-08-13
 
-Status: exact geometric reduction plus one analytic point-purity gate.  In
+Status: exact geometric reduction.  The relative-cap point-purity gate below
+has been superseded for the Gold rank-functional route by the oriented
+ambient-pairing reduction in `2026-08-13-c907-gold-relative-cap-attack.md`.
+It remains relevant to the stronger point-covector theorem.  In
 the fivefold weak-factorization problem, an arbitrary codimension-two
 threefold center can be modified until its rank-two normal bundle has a full
 line filtration, without introducing any center carrying primitive-sixth
@@ -88,11 +91,12 @@ to the inserted \(T_i\)- and \(\mathbf P(N|_{T_i})\)-center arrows.  Their
 low-dimensional/projective-bundle form makes them simpler regressions, not
 automatic ones.
 
-## 3. Exact remaining analytic step
+## 3. Analytic step for the stronger point-purity theorem
 
-The filtration (2) is not the global complete-intersection hypothesis of
-`2026-08-13-c907-ci-blowup-point-purity.md`, but it deforms to a split
-normal bundle.  Deformation to the normal cone for \(Z'\subset Y'\) replaces
+The filtration (2) is not the global **nef** complete-intersection hypothesis
+of `2026-08-13-c907-ci-blowup-point-purity.md`; it deforms only to an arbitrary
+split normal bundle.  This distinction is load-bearing.  Deformation to the
+normal cone for \(Z'\subset Y'\) replaces
 the embedding by its local model
 
 \[
@@ -105,13 +109,30 @@ normal cone, degeneration formulae, and relative ancestor invariants to
 transport ordinary-flop GW invariance from split to nonsplit bundles.  Their
 theorem does not state the needed C907 conclusion.  The missing lemma is:
 
-> **Point-purity degeneration lemma.** The vanishing of the Stokes pairing
-> between the large-radius Gamma point section and every exceptional center
-> branch is preserved under the deformation-to-normal-cone degeneration and
-> its relative gluing.
+> **Relative-cap point-purity lemma.** After deformation to the normal cone,
+> every relative gluing channel of the large-radius Gamma point section
+> reorganizes by its nonnegative contact orders into an exponential times a
+> polynomial.  Hence its forbidden exceptional-center Stokes coefficient is
+> zero, independently of the signs of the split normal-line degrees.
 
-If this lemma holds for every arrow in the splitting diagram, (1)--(6) reduce
-an arbitrary codimension-two center to the split Kummer calculation.  Combined
+The contact-order formulation is stronger than merely preserving the landed
+split-nef theorem.  A naive substitution of negative normal-line degrees into
+the Kummer slice does not terminate: for
+\((a_\beta,b_\beta)=(-1,0)\),
+
+\[
+ \sum_{k\ge0}\frac{k!}{k!(k+1)!}R^k
+ =\frac{e^R-1}{R},
+\]
+
+so multiplication by \(e^{-R}\) leaves a nonzero \(-e^{-R}/R\) branch.  Thus
+the degeneration formula must replace raw line degrees by relative contact
+orders or exhibit cancellations among its channels; ordinary bundle splitting
+alone does not reach the known Kummer zero.
+
+If the relative-cap lemma holds for every arrow in the splitting diagram,
+(1)--(6) reduce an arbitrary codimension-two center to universal terminating
+fibre kernels.  Combined
 with the rank-framed theorem and the fivefold center-dimension audit, this
 proves \(X\times\mathbf P^2\) irrational for every smooth cubic threefold.
 It does **not** prove all stabilizations: for \(m>2\), weak factorization can
@@ -161,5 +182,7 @@ through the degeneration.
 - **Settled:** arbitrary normal bundles acquire a line filtration after
   ambient modifications invisible to formal multiplicity; the filtered
   bundle deforms to split; exact nested-center dimension and packet audit.
-- **Open:** the point-purity degeneration lemma with fixed phase and relative
-  gluing.  Its proof or first counterexample is the highest-EV C907 move.
+- **Open:** the relative-cap point-purity lemma with fixed phase, ancestor-to-
+  Gamma comparison, and relative gluing.  Its proof or first counterexample is
+  the highest-EV C907 Gold move.  The arbitrary split endpoint is part of this
+  gate; it is not supplied by the split-nef theorem.

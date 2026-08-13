@@ -2,10 +2,15 @@
 
 **Lane:** `clebsch`
 
-**Status:** Silver closed: `X x P^1` is irrational for every smooth cubic
-threefold, proved directly from framed formal monodromy of the numerical small
-quantum connection.  Gold (`m=2`) is active.  Platinum (all `m`, hence full
-stable irrationality) is open.  No Paper V or Lean promotion.
+**Status:** Silver closed.  Gold has an exact one-arrow theorem and endpoint
+product but remains open at a multi-arrow coherence gate.  The Gamma point
+solution is correctly constructed in each Artin-quotient sectorial receiver;
+hostile audit found that independently fixed exceptional parameters cannot be
+composed through weak factorization.  A proposed formal-constant banking
+repair also fails because it does not construct a functorial morphism from the
+`z=0` primitive-sixth packet to the Gamma rank line.  The all-codimension
+source audit is clean, so Gold and Platinum (all `m`) rise or fall with this
+same Stokes/coherent-realization gate.  No Paper V or Lean promotion.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -418,33 +423,69 @@ functional modulo rank-zero center terms, naturally under products.  Full
 analytic Stokes/Gamma/Orlov compatibility implies the statement, but is
 strictly stronger.
 
-For the fivefold `X x P^2`, prove both:
+The candidate Gold route no longer uses the two Jordan/carrier gates.  For a
+fivefold blow-up choose Shen--Shoemaker's `k=0` order
+`<ambient, center_0, ..., center_(c-2)>`.  Its one-sided Euler orthogonality
+kills every center admixture in the rank pairing.  The per-arrow statement is
+a **constancy-and-unit-column lemma**:
 
-1. **Minimal analytic gate.**  Construct a presentation-independent
-   nilpotent `N` on the generalized `zeta_6` formal packet, calibrate the
-   projective-bundle endpoint as `J_3`, and make every codimension-two blow-up
-   comparison a strict `K[N]`-module biproduct:
-   \[
-   gr_{1/6}A(Bl_ZY)=gr_{1/6}A(Y)\oplus T\,gr_{1/6}A(Z).
-   \]
-2. **Carrier gate.**  No smooth projective threefold center contains a Tate
-   shift of the endpoint length-three indecomposable.  The clean numerical
-   sufficient condition is `ell_(1/6)(Z) <= 2`.
+1. put Iritani's full `Q`-formal, `q=infinity` decomposition and
+   Shen--Shoemaker's fixed-nonzero-`q`, `Q=0` asymptotics in one shrunken
+   sectorial receiver with coefficients formal in the ambient Novikov
+   variables;
+2. construct jointly `nabla_Q`-flat ambient/center block lifts there, so the
+   pairings extracting large-radius block coordinates are literal
+   `Q`-constants;
+3. evaluate those constants at `Q=0`, where oriented center pairings vanish
+   and the ambient point coordinate must be computed to be the unit column;
+4. never specialize the primitive-sixth atom itself: multiply afterward by
+   the base variety's intrinsic large-radius-to-atom matrix, unchanged across
+   the arrow.
 
-The endpoint has length three; lower-dimensional centers have no cubic atom;
-threefold centers have codimension two and contribute one shift.  These gates
-therefore imply `X x P^2` irrational.
+This lemma is now proved by evaluating Iritani's positive-`z` gauge at fixed
+nonzero `q`, reducing the formal Novikov ring through finite Artin quotients,
+and applying ordinary level-one multisummation compatibly through the inverse
+system.  The genus-zero dimension axiom makes every finite-level `q`
+coefficient polynomial, nilpotent parameter corrections cannot rotate Stokes
+rays, and finite-level uniqueness proves `nabla_Q`-flatness.  See
+`../2026-08-13-c907-formal-novikov-sectorial-receiver.md`.
+
+The dangerous codimension-two source omission is repaired.  Shen--Shoemaker's
+displayed local series is on Givental's cone, and at `(r,s)=(2,1)` its positive
+degree `d` term has `z`-order `-d`, hence already has `J`-normalization.  This
+one-line `I`-to-`J` repair is in
+`../2026-08-13-c907-shen-shoemaker-codim2-repair.md`.  The correct Appendix-A
+sector has width `2 pi`, not the width obtained by blindly substituting into
+their `r-s>1` formula.
 
 ## Next bounded pass
 
-For Gold, prove the point-purity degeneration lemma isolated by the
-birational normal-splitting reduction.  Track the large-radius Gamma point
-section through deformation to the normal cone and the relative degeneration
-formula, and show every gluing term has zero residual-center Stokes pairing;
-or exhibit the first nonzero term.  This now bridges an arbitrary normal
-bundle to the landed split-nef Kummer zero.  The exact toric
-`Bl_(P^3)P^5` matrix is only a phase/Orlov-normalization rehearsal because
-both primitive-sixth packets are empty.
+Gold's extremal unit column, one-arrow receiver, block-level constancy,
+reverse blow-down implication, conditional weak-factorization telescope, and
+`X x P^2` product step are in
+`../2026-08-13-c907-gold-relative-cap-attack.md`,
+`../2026-08-13-c907-extremal-point-unit-column.md`,
+`../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
+`../2026-08-13-c907-rank-telescope-and-product.md`.
+
+The next bounded pass is the common-zigzag rank-morphism gate.  The exact
+failure occurs after two arrows: the first exceptional parameter is nonzero
+in the first fixed-`q` receiver but becomes a formal ambient variable in the
+second, and an arbitrary formal series cannot be evaluated at that nonzero
+value.  Scalar horizontal pairings are constant, but constants forget which
+Stokes embedding of `P_6` was measured.  Highest EV is to prove that the
+actual Stokes mutation word between incident receivers preserves the rank
+restriction; alternatives are an iterated Laurent/Hahn receiver, a
+simultaneous master-space comparison, or a direct microlocal natural
+transformation `P_6 -> 1`.  The all-codimension and product audits need not be
+repeated.  Exact failed repair and AA split:
+`../2026-08-13-c907-formal-constant-banking.md`.
+
+The older point-purity degeneration and normal-splitting program remains
+relevant only to the stronger full point-covector theorem.  It is not on the
+rank-functional Gold critical path.  The exact toric `Bl_(P^3)P^5` matrix is
+only a phase/Orlov-normalization rehearsal because both primitive-sixth
+packets are empty.
 Do not return to a support-annihilating `Phi_6`: the Gamma point calculation
 proves that target inconsistent with ordinary Gamma pushforward.  See
 `../2026-08-13-c907-coniveau-principal-symbol-repair.md` and
@@ -527,28 +568,30 @@ Hostile gluing/collar boundary:
 `../2026-08-12-c907-pair-of-pants-log-gluing-theorem.md` and
 `../2026-08-12-c907-proper-collar-excision-theorem.md`.
 
-## Platinum architecture after `m=2`
+## Platinum architecture after Gold
 
-To reach every `m`, prove:
+The per-arrow constancy architecture and product calculation are natively
+uniform in `m` and need no carrier theorem.  The `k=0` ordering window first
+fails at `nu=6`, hence first for `m=4`, not `m=3`; `k=0` covers every arrow
+through `m=3`.  An admissible integer `k` always exists.  For nonzero `k`, the
+center blocks move to both sides of the ambient block, but their
+  `O(kE)`-twisted objects still have rank zero.  The all-codimension audit found
+no hidden dimension, Fano, nef, or additional `nu>1` hypothesis.  Platinum
+therefore has the same remaining common-zigzag receiver as Gold.
 
-- an intrinsic cubic-isotypic Stokes/Gamma Rees object;
-- a graded non-split exceptional-string blow-up law in every codimension,
-  reducing to the strict biproduct on Gold's codimension-two nonzero sector;
-- product compatibility by Thom--Sebastiani; and
-- the universal carrier bound `width <= dim-3`.
-
-The higher-codimension Jordan exchange proves that a naive ungraded additive
-law is incompatible with the candidate relative-projective operator.  The
-remaining work is analytic functoriality, construction of the exceptional
-string, and the carrier theorem, not further finite bookkeeping.
+The older graded exceptional-string and universal-carrier programme remains
+a separate possible construction, not a premise of this Platinum route.
 
 ## Acceptance
 
 - **Silver:** closed by the unconditional `X x P^1` theorem.
-- **Gold:** both `m=2` gates above, followed by a complete weak-factorization
-  proof of `X x P^2` irrational.
-- **Platinum:** the all-codimension strict theory and universal carrier bound,
-  proving irrationality for every `m`.
+- **Gold:** construct a coherent `P_6 -> 1` rank morphism across incident
+  weak-factorization arrows, or an equivalent common receiver; the one-arrow
+  theorem and `P^2` endpoint are closed.
+- **Platinum:** the all-codimension source audit is clean and the nonzero-`k`
+  exceptional twists and uniform projective-product step are rank-theoretically
+  harmless; it rises or falls with the same coherent rank-morphism gate as
+  Gold.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
 
