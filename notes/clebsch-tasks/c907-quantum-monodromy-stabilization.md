@@ -262,6 +262,15 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   because killing `Perf(point)` kills the monoidal unit.  The exact missing
   construction is a **relative framed localizing quantum motive**.  See
   `../2026-08-13-c907-coniveau-cyclotomic-packet-spec.md`.
+- A quotient by objects of relative fibre dimension at most two is also
+  impossible, even though it appears tailored to the support-square proof.
+  On `X x P^2`, one horizontal divisor and one mixed three-section divisor
+  make the pulled-back base `O(1)` isomorphic to the tensor unit in that
+  quotient.  Thus its operator is zero and the endpoint `J_3` is destroyed.
+  The positive object must retain the full absolute coniveau filtration and
+  kill only the primitive-sixth coefficient after `N_L^2` reaches an
+  absolute surface.  See
+  `../2026-08-13-c907-relative-fibre-cutoff-no-go.md`.
 - Both `P^5` and `P^3` have empty primitive-sixth packets.  Consequently the
   toric `Bl_(P^3)P^5` residual theorem is valuable ordinary Stokes/Gamma
   geometry but projects to zero in the minimal Silver category.

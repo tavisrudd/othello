@@ -13,7 +13,7 @@ Required package:
 
 \[
  \ell_{1/6}(X\times\mathbf P^2)=3,
- \qquad \ell_{1/6}(Z)\le1
+ \qquad \ell_{1/6}(Z)\le2
 \]
 
 for every smooth threefold center `Z`, plus strict codimension-two blow-up
@@ -66,6 +66,12 @@ strictness, Yu/Zhang for topology, Kuznetsov plus Kollar for the carrier bound.
    for every non-nef threefold, or realize `e != 0` and kill the programme.
 4. **Assembly.**  Only after 1--3: operation-framed Krull--Schmidt object,
    composition coherence, and positive weak-factorization telescope.
+
+The support-local construction must retain the full absolute coniveau
+filtration.  Quotienting by objects whose relative fibres have dimension at
+most two is impossible: horizontal divisors then trivialize the pulled-back
+base hyperplane, so the endpoint operator is zero rather than `J_3`.  See
+`../2026-08-13-c907-relative-fibre-cutoff-no-go.md`.
 
 ## Rejection tests
 
