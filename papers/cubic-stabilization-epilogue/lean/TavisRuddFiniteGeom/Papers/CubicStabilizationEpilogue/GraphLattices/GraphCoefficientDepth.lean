@@ -320,6 +320,40 @@ theorem pow_graphCrossDepth_dvd_iff
         slopeDifferenceValuation ∣ value := by
   rw [graphCrossDepth, pow_max_dvd_iff, pow_max_dvd_iff]
 
+/-- Over a DVR, the graph cross-depth condition is exactly the conjunction of
+the two diagonal coefficient conditions and total-depth divisibility of the
+full split-slope commutator. -/
+theorem pow_graphCrossDepth_dvd_iff_splitSlopeCommutator
+    {R : Type*} [CommRing R] {uniformizer : R}
+    (data : NormalizedDVRValuation uniformizer)
+    (firstDepth secondDepth : ℕ)
+    (coefficient firstScalar secondScalar firstError secondError : R) :
+    uniformizer ^ graphCrossDepth firstDepth secondDepth
+          (data.valuation (secondScalar - firstScalar)) ∣ coefficient ↔
+      uniformizer ^ firstDepth ∣ coefficient ∧
+      uniformizer ^ secondDepth ∣ coefficient ∧
+      uniformizer ^ (firstDepth + secondDepth) ∣
+        coefficient *
+            (secondScalar + uniformizer ^ secondDepth * secondError) -
+          (firstScalar + uniformizer ^ firstDepth * firstError) * coefficient := by
+  rw [pow_graphCrossDepth_dvd_iff]
+  constructor
+  · rintro ⟨firstDivides, secondDivides, truncatedDivides⟩
+    refine ⟨firstDivides, secondDivides, ?_⟩
+    apply (slopeCommutator_totalDepth_dvd_iff_scalarDifference
+      uniformizer firstDepth secondDepth coefficient firstScalar secondScalar
+      firstError secondError firstDivides secondDivides).mpr
+    exact (pow_truncatedDepthDifference_dvd_iff_pow_dvd_mul data
+      (firstDepth + secondDepth) (secondScalar - firstScalar) coefficient).mp
+        truncatedDivides
+  · rintro ⟨firstDivides, secondDivides, commutatorDivides⟩
+    refine ⟨firstDivides, secondDivides, ?_⟩
+    apply (pow_truncatedDepthDifference_dvd_iff_pow_dvd_mul data
+      (firstDepth + secondDepth) (secondScalar - firstScalar) coefficient).mpr
+    exact (slopeCommutator_totalDepth_dvd_iff_scalarDifference
+      uniformizer firstDepth secondDepth coefficient firstScalar secondScalar
+      firstError secondError firstDivides secondDivides).mp commutatorDivides
+
 /-- Infinite slope-difference valuation removes the additional commutator
 depth condition. -/
 theorem graphCrossDepth_top

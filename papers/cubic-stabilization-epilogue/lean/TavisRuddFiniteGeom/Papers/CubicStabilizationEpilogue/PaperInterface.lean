@@ -279,6 +279,28 @@ theorem graphCoefficient_commutatorDepth_iff_truncated
         (firstDepth + secondDepth) (secondScalar - firstScalar)
         coefficient).symm
 
+/-- Complete local DVR form of the coefficient-depth calculation: one
+cross-depth condition is equivalent to the two diagonal coefficient
+conditions together with the full split-slope commutator condition. -/
+theorem graphCoefficient_crossDepth_iff_splitSlopeCommutator
+    {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    {π : R} (πIrreducible : Irreducible π)
+    (firstDepth secondDepth : ℕ)
+    (coefficient firstScalar secondScalar firstError secondError : R) :
+    π ^ GraphLattices.graphCrossDepth firstDepth secondDepth
+          (IsDiscreteValuationRing.addVal R (secondScalar - firstScalar)) ∣
+        coefficient ↔
+      π ^ firstDepth ∣ coefficient ∧
+      π ^ secondDepth ∣ coefficient ∧
+      π ^ (firstDepth + secondDepth) ∣
+        coefficient * (secondScalar + π ^ secondDepth * secondError) -
+          (firstScalar + π ^ firstDepth * firstError) * coefficient :=
+  GraphLattices.pow_graphCrossDepth_dvd_iff_splitSlopeCommutator
+    (GraphLattices.NormalizedDVRValuation.ofIsDiscreteValuationRing
+      πIrreducible)
+    firstDepth secondDepth coefficient firstScalar secondScalar
+    firstError secondError
+
 /-- Arithmetic core of the graph coefficient depth formula: the maximum
 depth is exactly the intersection of the three power-divisibility conditions,
 and it always satisfies the midpoint inequality. -/
