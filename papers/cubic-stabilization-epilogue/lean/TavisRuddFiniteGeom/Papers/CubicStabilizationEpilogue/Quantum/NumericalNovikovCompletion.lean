@@ -85,6 +85,33 @@ theorem completedCoefficientPushforward_add
   apply CompletedNovikovSeries.ext
   exact data.coefficientPushforward.map_add left.coefficient right.coefficient
 
+/-- Coefficient-filtration compatibility: agreement of two homological
+families through a degree cutoff implies agreement of their numerical
+pushforwards through the same cutoff.  This is the exact finite-level property
+used by the inverse-limit argument, without introducing a topology or an
+inverse-limit object. -/
+theorem completedCoefficientPushforward_eq_below_of_eq_below
+    (data : NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    [AddCommGroup R]
+    (left right : CompletedNovikovSeries Homology R data.homologicalDegree)
+    (cutoff : ℕ)
+    (equal_below : ∀ homological,
+      data.homologicalDegree homological ≤ cutoff →
+        left.coefficient homological = right.coefficient homological) :
+    ∀ numerical, data.numericalDegree numerical ≤ cutoff →
+      (data.completedCoefficientPushforward left).coefficient numerical =
+        (data.completedCoefficientPushforward right).coefficient numerical := by
+  intro numerical numerical_below
+  rw [data.completedCoefficientPushforward_apply,
+    data.completedCoefficientPushforward_apply]
+  apply Finset.sum_congr rfl
+  intro homological homological_mem
+  apply equal_below homological
+  rw [← data.degree_compatible homological,
+    (data.mem_fiber_iff homological numerical).mp homological_mem]
+  exact numerical_below
+
 end NumericallyFiniteEffectiveQuotient
 
 end Quantum

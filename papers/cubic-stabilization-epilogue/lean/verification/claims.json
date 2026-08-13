@@ -229,12 +229,13 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteFiber_exact",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_coefficientPushforward_apply",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_apply_and_finiteBelow",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_add"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_add",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below"
       ],
       "objects": "Effective homological and numerical additive monoids, their quotient homomorphism, compatible natural-valued degree functions, finite bounded homological pieces, ordinary coefficient functions valued in an additive commutative monoid, and completed coefficient families valued in an additive commutative group whose nonzero support is finite below every natural-valued cutoff.",
-      "hypotheses": "Numerical degree after quotient equals homological degree, and every bounded homological degree set is finite. The ordinary pushforward needs additive commutative monoid coefficients; the completed-family construction and its additivity use additive commutative group coefficients.",
-      "conclusion": "Every numerical fiber is represented by an exact finite set; finite-fiber summation defines an additive coefficient pushforward on ordinary functions and on completed coefficient families, with the exact coefficient formula and finite-below support proved.",
-      "cautions": "The completed objects are coefficient families with a finite-below support condition, not completed monoid rings. The formal quotient homomorphism need not be surjective. Convolution multiplication, topology, continuity, inverse-limit compatibility, Gromov--Witten coefficient descent, quantum derivations, and base change of the quantum comparison isomorphisms are not represented."
+      "hypotheses": "Numerical degree after quotient equals homological degree, and every bounded homological degree set is finite. The ordinary pushforward needs additive commutative monoid coefficients; the completed-family construction and its additivity use additive commutative group coefficients. The cutoff-agreement theorem assumes coefficient equality for every homological class through the chosen cutoff.",
+      "conclusion": "Every numerical fiber is represented by an exact finite set; finite-fiber summation defines an additive coefficient pushforward on ordinary functions and on completed coefficient families, with the exact coefficient formula, finite-below support, and preservation of agreement through every degree cutoff proved.",
+      "cautions": "The completed objects are coefficient families with a finite-below support condition, not completed monoid rings. The cutoff theorem is the finite-level compatibility used by a continuity argument, but no topology, continuity theorem, or inverse-limit object is represented. The formal quotient homomorphism need not be surjective. Convolution multiplication, Gromov--Witten coefficient descent, quantum derivations, and base change of the quantum comparison isomorphisms are not represented."
     },
     {
       "manuscript_label": "prop:framed-operations",

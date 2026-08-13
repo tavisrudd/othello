@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 52 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 98 audited terminals.  The rejecting manuscript inventory covers all
+exports 99 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -151,6 +151,9 @@ they induce these proxy data are not represented.
 Finite-fiber numerical pushforward now extends to coefficient-level completed
 families with finite nonzero support below each degree cutoff.  Lean proves the
 exact fiber-sum formula, preservation of this support condition, and additivity.
+It also proves preservation of coefficient agreement through every degree
+cutoff, the precise finite-level compatibility consumed by the continuity
+argument.
 The formal objects carry no topology or convolution multiplication, so
 continuity, inverse-limit compatibility, Gromov--Witten descent, quantum
 derivations, and base change of the comparison maps remain outside the result.

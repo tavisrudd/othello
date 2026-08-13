@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 98 reviewer terminals.
+1 complete; 99 reviewer terminals.
 
-The 98 reviewer-facing terminals currently verify:
+The 99 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -118,6 +118,9 @@ The 98 reviewer-facing terminals currently verify:
   and on completed coefficient families with finite support below every degree
   cutoff, including the exact coefficient formula and additivity; no topology,
   continuity, convolution product, or inverse-limit object is represented;
+  agreement through a homological degree cutoff is proved to imply agreement
+  through the corresponding numerical cutoff, the exact finite-level
+  compatibility used by the unformalized continuity argument;
 - the algebraic core of strict Novikov admissibility and individual-class divisor-tag
   separation; for every finite injective family of divisor-pairing vectors
   over an infinite characteristic-zero field, a kernel-checked choice of one

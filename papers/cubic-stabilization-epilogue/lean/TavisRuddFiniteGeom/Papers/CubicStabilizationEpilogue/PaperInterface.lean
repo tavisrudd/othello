@@ -1778,6 +1778,28 @@ theorem numericalNovikov_completedCoefficientPushforward_add
         data.completedCoefficientPushforward right :=
   data.completedCoefficientPushforward_add left right
 
+/-- Agreement of completed homological coefficient families through a degree
+cutoff implies agreement of their numerical pushforwards through that cutoff.
+This exposes the finite-level compatibility used by a continuous inverse-limit
+extension, but neither a topology nor an inverse limit is part of the formal
+statement. -/
+theorem numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below
+    {Homology Numerical R : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [AddCommGroup R]
+    (data : Quantum.NumericallyFiniteEffectiveQuotient
+      (Homology := Homology) (Numerical := Numerical))
+    (left right : Quantum.CompletedNovikovSeries
+      Homology R data.homologicalDegree)
+    (cutoff : ℕ)
+    (equal_below : ∀ homological,
+      data.homologicalDegree homological ≤ cutoff →
+        left.coefficient homological = right.coefficient homological) :
+    ∀ numerical, data.numericalDegree numerical ≤ cutoff →
+      (data.completedCoefficientPushforward left).coefficient numerical =
+        (data.completedCoefficientPushforward right).coefficient numerical :=
+  data.completedCoefficientPushforward_eq_below_of_eq_below
+    left right cutoff equal_below
+
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the
 small characteristic polynomial after the fixed divisor substitution. -/
