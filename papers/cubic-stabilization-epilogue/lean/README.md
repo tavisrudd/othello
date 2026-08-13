@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 135 reviewer terminals.
+1 complete; 136 reviewer terminals.
 
-The 135 reviewer-facing terminals currently verify:
+The 136 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -205,6 +205,12 @@ The 135 reviewer-facing terminals currently verify:
   supplied, Lean lifts the compatible families to a two-sided-invertible
   Laurent matrix over the base ring whose reductions are the finite evaluations;
   it does not prove those bounds or identify this matrix geometrically;
+- a positive-evaluated formal-base-shift composite now constructs the
+  compatible quotient gauges and inverses from the zero-curvature Laurent
+  connection and filtration-positive parameters, then derives the full bulk
+  matrix and characteristic-polynomial packet from supplied compatible small
+  monodromy matrices and divisor substitutions; their geometric, string, and
+  divisor-equation origins remain unformalized;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

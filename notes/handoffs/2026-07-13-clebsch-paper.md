@@ -217,8 +217,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-73 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 135 reviewer terminals, audit
+74 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 136 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -364,13 +364,19 @@ uniform Laurent lower bounds for both the gauges and inverses, Lean now lifts
 the compatible coefficient families to a two-sided-invertible Laurent matrix
 over the base ring and proves that it reduces to every finite evaluation.  It
 does not derive the uniform bounds or identify the lift geometrically.
+The constructed evaluated gauges and inverses now also feed the formal-base-
+shift matrix packet directly.  Once those evaluated gauges are in place,
+supplying compatible small monodromy matrices and divisor substitutions yields
+the compatible bulk matrices and
+their substituted characteristic-polynomial system; the geometric small
+connection and string/divisor inputs remain unconstructed.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 135-terminal axiom transcript
+The aggregate build, source correspondence, and 136-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence

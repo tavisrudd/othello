@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 73 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 74 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 135 audited terminals.  The rejecting manuscript inventory covers all
+exports 136 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -212,6 +212,11 @@ separatedness, and uniform Laurent lower bounds for gauges and inverses, Lean
 also assembles a two-sided-invertible Laurent matrix over the base ring whose
 reductions are exactly the finite evaluations; the uniform bounds and geometric
 identification are not derived.
+The evaluated-gauge system now feeds the formal-base-shift matrix packet
+directly: from supplied compatible small monodromy matrices and divisor
+substitutions, Lean derives the bulk matrices and compatible substituted
+characteristic-polynomial system.  The small/divisor inputs and their geometric
+string/divisor origins remain supplied.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
@@ -333,8 +338,10 @@ are current, and the committed paper export verifies byte-for-byte in
   compatible matrices derive their polynomial inverse system, compatible
   pro-Laurent gauges preserve it under conjugacy, and compatible divisor
   substitutions and gauges derive the bulk system.  The remaining base-shift
-  gap is construction of those rings, reductions, matrices, substitutions, and
-  gauges from the filtered differential equations.
+  gap is construction and geometric identification of the manuscript's
+  coefficient rings, filtration, small monodromy, and divisor substitution,
+  together with construction of its Laurent bulk connection and verification
+  of the formal zero-curvature and positivity premises.
 - **Closeout `ej`+`tt` pass:** settled the cheap algebraic opportunity.  The
   finite-level formal-base-shift packet now derives not only compatible bulk
   matrices and the substituted polynomial identity, but also compatibility of

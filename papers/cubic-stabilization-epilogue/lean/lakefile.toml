@@ -68,6 +68,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableLaurentBounds",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationBulkTruncation",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationLaurentEvaluation",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveEvaluatedFormalBaseShift",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PacketInvariant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",

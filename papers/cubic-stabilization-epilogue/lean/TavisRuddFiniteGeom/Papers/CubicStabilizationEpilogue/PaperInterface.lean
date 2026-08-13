@@ -47,6 +47,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMul
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableLaurentBounds
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationBulkTruncation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationLaurentEvaluation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveEvaluatedFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2948,6 +2949,60 @@ theorem completeSeparatedFiltration_positiveLaurentFlatGauge_limit
       parameter positive connection gaugeLowerBound gaugeBounded
   · exact filtration.positiveEvaluatedFlatGaugeInverseLimit_map
       parameter positive connection inverseLowerBound inverseBounded
+
+/-- From a normalized multiplicative filtration, finitely many level-one bulk
+parameters, and an ordinary-Laurent-valued zero-curvature connection, Lean
+constructs the compatible quotient gauges used by the formal-base-shift
+matrix packet.  Given compatible divisor substitutions and small monodromy
+matrices, it derives the compatible bulk matrices, their levelwise substituted
+characteristic-polynomial identity, and the compatible bulk-polynomial system.
+The small monodromy and divisor substitution remain supplied.  No geometric
+quantum connection, string/divisor equation, analytic monodromy, or comparison
+result of geometric origin is constructed. -/
+theorem positiveEvaluatedFormalBaseShift_bulkSystem
+    {Coordinate Index B : Type*}
+    [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (input : Quantum.PositiveEvaluatedFormalBaseShiftInput Coordinate Index B) :
+    (∀ coordinate,
+      (Quantum.multivariableFlatGaugeSeries input.connection).map
+          (Quantum.multivariablePartialDerivative coordinate) =
+        -(input.connection coordinate) *
+          Quantum.multivariableFlatGaugeSeries input.connection) ∧
+    (∀ level,
+      input.formalBaseShiftSystem.gauge level =
+          input.filtration.positiveEvaluatedFlatGaugeAtLevel
+            input.parameter level input.connection ∧
+        input.formalBaseShiftSystem.inverse level =
+          input.filtration.positiveEvaluatedFlatGaugeInverseAtLevel
+            input.parameter input.positive level input.connection) ∧
+    (∀ level,
+      letI := input.formalBaseShiftSystem.coefficientRing level
+      letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+      (input.formalBaseShiftSystem.bulkMonodromy (level + 1)).map
+          (input.filtration.positiveLaurentReduction level) =
+        input.formalBaseShiftSystem.bulkMonodromy level) ∧
+    (∀ level,
+      letI := input.formalBaseShiftSystem.coefficientRing level
+      (input.formalBaseShiftSystem.bulkMonodromy level).charpoly =
+        (input.smallMonodromy level).charpoly.map
+          (input.divisorSubstitution level)) ∧
+    (∀ level,
+      letI := input.formalBaseShiftSystem.coefficientRing level
+      letI := input.formalBaseShiftSystem.coefficientRing (level + 1)
+      (input.formalBaseShiftSystem.bulkMonodromy (level + 1)).charpoly.map
+          (input.filtration.positiveLaurentReduction level) =
+        (input.formalBaseShiftSystem.bulkMonodromy level).charpoly) ∧
+    ∀ level,
+      letI := input.formalBaseShiftSystem.coefficientRing level
+      input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (input.formalBaseShiftSystem.bulkMonodromy level).charpoly ∧
+        input.formalBaseShiftSystem.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+          (input.smallMonodromy level).charpoly.map
+            (input.divisorSubstitution level) := by
+  refine ⟨Quantum.multivariableFlatGaugeSeries_equation_of_curvature
+      input.connection input.curvature, ?_, input.bulkSystemConclusion⟩
+  exact input.formalBaseShiftSystem_gauge_inverse
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
