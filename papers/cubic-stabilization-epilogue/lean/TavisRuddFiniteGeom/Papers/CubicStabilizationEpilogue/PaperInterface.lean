@@ -11,6 +11,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Princ
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ExoticStabilizerCore
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -542,6 +543,19 @@ theorem principalGluing_exoticStabilizer_algebraicCore :
     apply Units.ext
     exact GraphLattices.f4_eq_one_of_trace_mul_eq_trace d tracePreserved
   · exact GraphLattices.f4_specialLinearGroup_two_card
+
+/-- Abstract exceptional-group identification supporting the stabilizer
+paragraph: the ordinary alternating group on five letters has order `60`,
+and the concrete `SL₂(F4)` is isomorphic to it.  This does not identify the
+manuscript's geometric permutation action or its named `A5` subgroup with
+either side of this equivalence. -/
+theorem principalGluing_abstractExceptionalGroup :
+    Nat.card (alternatingGroup (Fin 5)) = 60 ∧
+      Nonempty
+        (Matrix.SpecialLinearGroup (Fin 2) GraphLattices.F4 ≃*
+          alternatingGroup (Fin 5)) := by
+  exact ⟨GraphLattices.alternatingGroup_fin_five_card,
+    ⟨GraphLattices.specialLinearGroupF4EquivAlternatingFive⟩⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 4 absent; 15 fragmentary; 3 conditional;
-1 complete; 46 reviewer terminals.
+1 complete; 47 reviewer terminals.
 
-The 46 reviewer-facing terminals currently verify:
+The 47 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -59,8 +59,11 @@ The 46 reviewer-facing terminals currently verify:
   nondegeneracy, the nondegeneracy of the induced two-copy alternating form,
   and self-orthogonality of every scalar graph;
 - trace rigidity for a determinant scalar and the transparent finite-field
-  cardinality calculation `|SL₂(F4)| = 60`, without identifying that abstract
-  group with the manuscript's permutation stabilizer or with `A5`;
+  cardinality calculation `|SL₂(F4)| = 60`;
+- the faithful action on the five natural projective points, triviality of the
+  center in characteristic two, evenness of the projective image, and the
+  resulting abstract exceptional isomorphism `SL₂(F4) ≃ A5`, without
+  identifying the manuscript's geometric action with this abstract model;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
   shift, and block multiplicity formulas;
