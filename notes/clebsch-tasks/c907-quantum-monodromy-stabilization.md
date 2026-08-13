@@ -103,6 +103,24 @@ remaining curve flips are precisely the failures of those Cartier/primitive
 generation conditions—the weighted/finite-stabilizer boundary already seen
 in toroidal cobordism.
 
+The full crepant Gamma/K theorem has an exact publishable specification in
+`../2026-08-13-c907-surface-ordinary-flop-extension-spec.md`.  LLW ancestor
+invariance does not identify the two-point descendant `S`-operator, so it
+cannot replace full Gamma/FM compatibility.  Chen--Tseng's advertised ordinary-
+flop extension reduces by DNC to the projective local model; CCT proves the
+split toric-bundle Gamma square.  One Gamma-calibrated version of LLW's
+rank-two bundle-splitting reduction would prove the full K-square.
+
+For the C907 point/rank row, every ordinary flop is now closed by
+`../2026-08-13-c907-ordinary-flop-point-row-theorem.md`.  At transverse
+Novikov degree zero, all nonconstant maps lie in the exceptional locus, so an
+off-exceptional point column is exactly classical for every extremal `q`.
+LLW's graph gauge maps point to point there.  A divisor pulled back from the
+common contraction gives an invertible minimal-degree recursion and kills
+the transverse tail.  The same regular gauge transports `P6` and the
+pairing.  This removes the surface-family `P1` flop and all other crepant
+ordinary peaks from Gold without claiming descendant invariance.
+
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
 Engel--de Gaay Fortman--Schreieder proves stable irrationality for very

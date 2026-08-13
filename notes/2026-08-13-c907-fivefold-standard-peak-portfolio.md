@@ -78,8 +78,13 @@ correspondence for ordinary flops.  Gamma/Fourier--Mukai compatibility is
 proved for the simple point flop and toric/split local bundle models, but the
 general projective-bundle flop needed here is only advertised, not proved, in
 Chen--Tseng's Remark 3.1.  The product Geiser middle flop is one closed split
-disconnected example.  A general surface-base standard flop remains open for
-the C907 point/rank row.
+disconnected example.  The full Gamma/FM square remains open in this
+generality, but the C907 point/rank row is closed by
+`2026-08-13-c907-ordinary-flop-point-row-theorem.md`.  At transverse degree
+zero the off-exceptional point column is exactly classical for all extremal
+`q`; a divisor pulled back from the common contraction kills every positive
+transverse coefficient.  LLW's regular graph gauge then transports both
+`P6` and the distinguished point row.
 
 ### Curve `(1,2)` flip (`2,3,1`)
 
@@ -108,17 +113,15 @@ audit.
 
 ## 3. What this does and does not buy
 
-For **semi-free smooth standard** peaks, Gold has been reduced to two
-globalization statements:
+For **semi-free smooth standard** peaks, the crepant rows are now closed.
+Gold has been reduced to one discrepant globalization statement:
 
-1. Gamma/Fourier--Mukai point-row compatibility for a `P^1` ordinary flop
-   over a smooth projective surface;
-2. the ambient point/rank row of a global `(1,2)` standard flip over a smooth
+1. the ambient point/rank row of a global `(1,2)` standard flip over a smooth
    projective curve whose wall algebra fails Gu--Yu--Yu Lemma 6.9.
 
-Both centers have dimension at most two and empty primitive-sixth formal
-packet.  Their difficulty is therefore pure frame/gluing compatibility, not
-carrier cancellation.
+The center has dimension one and empty primitive-sixth formal packet.  Its
+difficulty is therefore pure weighted/frame compatibility, not carrier
+cancellation.
 
 This finite list does not prove that AKMW's regular-subdivision peaks are
 semi-free standard walls.  AKMW supplies smooth toroidal blowups/down at the
