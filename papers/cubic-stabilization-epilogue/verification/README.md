@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 132 reviewer-facing Lean terminals.  These counts summarize the
+There are 133 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 132 reviewer terminals.
+1 complete; 133 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -85,9 +85,12 @@ objects, hypotheses, conclusions, and cautions recorded in
   finite bulk support at one level is proved to give a single lower bound for
   the entire matrix-valued bulk series.  With finitely many coordinates,
   explicit vanishing at or above one total-degree cutoff is proved to imply
-  finite bulk support.  Lean does not derive that cutoff vanishing from the
-  positive filtration, prove one bound across levels, or construct a
-  Laurent-valued inverse-limit gauge.
+  finite bulk support.  Monomials in supplied level-one parameters are proved
+  to lie in the corresponding total-degree filtration level and map to zero
+  in every quotient by a filtration level not exceeding their total degree.
+  Lean does not identify those parameters or their evaluated
+  series with the manuscript gauge, prove one bound across levels, or
+  construct a Laurent-valued inverse-limit gauge.
   Their identification with the manuscript's geometric tower and quantum
   connection is not formalized; neither finite bulk support from the
   manuscript's positive filtration nor a Laurent lower bound uniform across

@@ -2745,6 +2745,28 @@ theorem multivariableLaurentSeries_uniformBound_of_totalDegreeCutoff
     Quantum.hasUniformLaurentLowerBound_of_coefficients_eq_zero_of_cutoff_le_totalDegree
       series cutoff vanishes⟩
 
+/-- In a normalized multiplicative ideal filtration, if every supplied bulk
+parameter lies in level one, the value of every bulk monomial lies in its
+total-degree filtration level and vanishes in the quotient at any cutoff not
+exceeding that degree.  This formalizes the positive-filtration monomial
+estimate.  It does not identify the parameters with manuscript bulk
+coordinates or prove that the constructed gauge is obtained by evaluating a
+series in these parameters. -/
+theorem multiplicativeFiltration_positiveBulkMonomial_vanishes_in_quotient
+    {Coordinate R : Type*} [CommRing R]
+    (filtration : Quantum.MultiplicativeIdealFiltration R)
+    (parameter : Coordinate → R)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) (degree : Coordinate →₀ ℕ)
+    (cutoff_le : cutoff ≤ Quantum.multivariableTotalDegree degree) :
+    Quantum.bulkMonomialValue parameter degree ∈
+        filtration.ideal (Quantum.multivariableTotalDegree degree) ∧
+      Ideal.Quotient.mk (filtration.ideal cutoff)
+        (Quantum.bulkMonomialValue parameter degree) = 0 :=
+  ⟨filtration.bulkMonomialValue_mem_totalDegree parameter positive degree,
+    filtration.quotient_mk_bulkMonomialValue_eq_zero
+      parameter positive cutoff degree cutoff_le⟩
+
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
 forces

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 132 reviewer terminals.
+1 complete; 133 reviewer terminals.
 
-The 132 reviewer-facing terminals currently verify:
+The 133 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -186,8 +186,11 @@ The 132 reviewer-facing terminals currently verify:
   lower bound works for every matrix entry and bulk monomial at that level;
   for finitely many bulk coordinates, explicit coefficient vanishing at or
   above one total-degree cutoff is proved to supply that finite support and
-  bound; the cutoff vanishing is not derived from the manuscript's positive
-  filtration, no bound uniform across levels is proved, and no Laurent-valued
+  bound; separately, monomials in level-one parameters are proved to lie in
+  their total-degree filtration levels and map to zero in every quotient by a
+  filtration level not exceeding their total degree; the
+  parameters and evaluated series are not identified with the manuscript
+  gauge, no bound uniform across levels is proved, and no Laurent-valued
   inverse-limit gauge is packaged;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with

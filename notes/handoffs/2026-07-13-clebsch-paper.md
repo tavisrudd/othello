@@ -184,7 +184,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 72 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 132 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 133 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -309,13 +309,18 @@ or above one total-degree cutoff is now proved to give that finite support.
 Lean does not derive the cutoff vanishing from the positive filtration or
 obtain a bound uniform across levels, a packaged
 inverse-limit Laurent gauge, convergence, or analytic specialization.
+Monomials in supplied level-one parameters are proved to lie in their
+total-degree filtration levels and map to zero in every quotient by a
+filtration level not exceeding their total degree, but neither the
+parameters nor their evaluated series are identified with the manuscript
+gauge.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.
 Adding explicit coefficientwise completeness and zero-intersection
 separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
-The aggregate build, source correspondence, and 132-terminal axiom transcript
+The aggregate build, source correspondence, and 133-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the finite-etale splitting/eigenbasis and proof that geometric divisor descent
 supplies the formal block conditions, then the actual six-axis kernel/persistence
