@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import Mathlib.Algebra.Polynomial.SpecificDegree
 import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
@@ -125,6 +126,36 @@ theorem sixAxisQuadraticSplittingField_moduleFinite :
 theorem sixAxisQuadraticSplittingField_etale :
     Algebra.Etale (ZMod 2) SixAxisQuadraticSplittingField := by
   infer_instance
+
+/-- The concrete quadratic splitting field has degree two over `F₂`. -/
+theorem sixAxisQuadraticSplittingField_finrank :
+    Module.finrank (ZMod 2) SixAxisQuadraticSplittingField = 2 := by
+  rw [(AdjoinRoot.powerBasis
+    sixAxisQuadraticSlopePolynomial_irreducible.ne_zero).finrank]
+  exact sixAxisQuadraticSlopePolynomial_natDegree
+
+/-- A coefficient-algebra identification between the root-adjoining splitting
+field and the concrete four-element field used for the gluing packet. -/
+noncomputable def sixAxisQuadraticSplittingFieldAlgEquivF4 :
+    SixAxisQuadraticSplittingField ≃ₐ[ZMod 2] F4 := by
+  let powerBasis := AdjoinRoot.powerBasis
+    sixAxisQuadraticSlopePolynomial_irreducible.ne_zero
+  letI : Fintype SixAxisQuadraticSplittingField :=
+    Fintype.ofEquiv (Fin powerBasis.dim → ZMod 2)
+      powerBasis.basis.equivFun.symm.toEquiv
+  letI : Fintype F4 := Fintype.ofFinite F4
+  apply FiniteField.algEquivOfCardEq 2
+  rw [Fintype.card_eq_nat_card, Fintype.card_eq_nat_card, natCard_F4]
+  calc
+    Nat.card SixAxisQuadraticSplittingField =
+        Nat.card (Fin powerBasis.dim → ZMod 2) :=
+      Nat.card_congr powerBasis.basis.equivFun.toEquiv
+    _ = 4 := by
+      rw [Nat.card_fun, Nat.card_fin]
+      have dim : powerBasis.dim = 2 := by
+        exact sixAxisQuadraticSlopePolynomial_natDegree
+      rw [dim]
+      norm_num
 
 /-- The displayed characteristic-two matrix is annihilated by the quadratic
 residue-slope polynomial under matrix evaluation. -/

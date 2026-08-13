@@ -95,7 +95,11 @@ Thus the rank Boolean is invariant
 across every smooth-projective simple VGIT wall.  Gold remains open because
 general cobordism peaks can have singular/toroidal quotients and are not yet
 covered by that theorem.  Exact audit:
-`../2026-08-13-c907-simple-vgit-rank-theorem.md`.  Independently, the printed
+`../2026-08-13-c907-simple-vgit-rank-theorem.md`.  The coverage obstruction
+is exact: smooth projective cobordisms give projective locally toric chamber
+quotients with cyclic singularities, while resolving them inserts the very
+blowup/down peaks whose receiver frames are not coherent.  See
+`../2026-08-13-c907-simple-wall-coverage-obstruction.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
 That repair is now a reviewed standalone ten-page correction note at
@@ -396,7 +400,9 @@ separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
 The explicit two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification
-with the geometric marked extension and principal kernel remains open.
+with the concrete `F4` gluing field is proved as an `F2`-algebra equivalence,
+while identification with the
+geometric marked extension and principal kernel remains open.
 Lean also proves that a continuous map from a connected base into a finite
 discrete gluing packet is constant and propagates a distinguished kernel type
 from one fibre to all fibres.  Constructing the manuscript's geometric packet

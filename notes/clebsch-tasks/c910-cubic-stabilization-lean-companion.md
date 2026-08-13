@@ -228,7 +228,8 @@ quotient small matrix.  Its geometric monodromy origin remains unproved.
 
 The explicit characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
-eigenbasis.  Its identification with the manuscript's geometric marked
+eigenbasis, together with an algebra equivalence to the concrete `F4` gluing
+field.  Its identification with the manuscript's geometric marked
 extension and principal kernel remains open.  Lean now proves the exact
 connected-family persistence step for any supplied continuous map into a
 finite discrete kernel packet; construction of that geometric packet and

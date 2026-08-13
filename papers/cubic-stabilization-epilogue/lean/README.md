@@ -83,7 +83,9 @@ The 140 reviewer-facing terminals currently verify:
   commutative ring containing a supplied root is identified with the
   same-pattern matrix and diagonalized by an explicit basis, with the two
   conjugate roots each repeated twice; the concrete root-adjoining extension
-  is proved finite etale over `F2` and carries that marked explicit
+  is proved finite etale of degree two over `F2`, identified algebraically
+  with the concrete `F4` used in the gluing packet, and carries that marked
+  explicit
   diagonalization; and a scalar block over `F3`,
   without identifying
   those models with the geometric principal kernel;

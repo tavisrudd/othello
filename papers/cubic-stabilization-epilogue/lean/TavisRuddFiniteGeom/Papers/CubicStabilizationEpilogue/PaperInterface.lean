@@ -1477,13 +1477,20 @@ theorem sixAxisLocalChart_twoPrimary_splitsOverQuadraticRoot
 
 /-- Concrete finite-etale spectral splitting of the characteristic-two model.
 Lean adjoins a marked root of `t²+t+1` to `F₂`, proves that the resulting field
-is a finite etale algebra, and exhibits mutually inverse eigenbasis matrices
-that diagonalize the two companion blocks.  This constructs the algebraic
-splitting object for the displayed residue model, but does not identify it or
-the displayed matrix with the manuscript's geometric principal kernel. -/
+is a finite etale algebra of degree two, constructs an `F₂`-algebra equivalence
+with the concrete four-element field used for the gluing packet, and exhibits
+mutually inverse eigenbasis matrices that diagonalize the two companion
+blocks.  The chosen field equivalence is not asserted to carry the marked root
+to either named exotic gluing scalar.  This constructs the algebraic splitting
+object for the displayed residue model, but does not identify it or the
+displayed matrix with the manuscript's geometric principal kernel. -/
 theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
     Module.Finite (ZMod 2) GraphLattices.SixAxisQuadraticSplittingField ∧
       Algebra.Etale (ZMod 2) GraphLattices.SixAxisQuadraticSplittingField ∧
+      Module.finrank (ZMod 2)
+          GraphLattices.SixAxisQuadraticSplittingField = 2 ∧
+      Nonempty (GraphLattices.SixAxisQuadraticSplittingField ≃ₐ[ZMod 2]
+        GraphLattices.F4) ∧
       GraphLattices.sixAxisQuadraticSlopeRoot ^ 2 +
           GraphLattices.sixAxisQuadraticSlopeRoot + 1 = 0 ∧
       GraphLattices.sixAxisTwoQuadraticEigenbasis
@@ -1511,6 +1518,8 @@ theorem sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting :
             GraphLattices.sixAxisQuadraticSlopeRoot := by
   exact ⟨GraphLattices.sixAxisQuadraticSplittingField_moduleFinite,
     GraphLattices.sixAxisQuadraticSplittingField_etale,
+    GraphLattices.sixAxisQuadraticSplittingField_finrank,
+    ⟨GraphLattices.sixAxisQuadraticSplittingFieldAlgEquivF4⟩,
     GraphLattices.sixAxisQuadraticSlopeRoot_equation,
     GraphLattices.sixAxisTwoQuadraticSlope_concreteFiniteEtale_split⟩
 
