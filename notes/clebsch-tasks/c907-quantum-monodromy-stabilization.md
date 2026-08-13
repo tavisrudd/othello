@@ -89,9 +89,16 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   special fibre.  The bounded `1/1` Rees chart is closed separately:
   noncompact `y` weights give four empty and ten free support faces, while
   the compact face is exactly `W_(P^3)+ZU` with the four marked Morse points.
-  The remaining algebra is the joint `y`/Rees-infinity and
-  translated/infinity portion of one finite comprehensive Gröbner/Fitting
-  fan; the proper collar topology is separate.
+  The translated/infinity seams are now empty/free for arbitrary `y` weights;
+  their only apparent hold is the constant face `L=0`, removed by choosing the
+  residual path disk in `C*`.  The full double-translated `B=C=1` chart also
+  closes every joint `y`/Rees-infinity valuation: positive-order faces are
+  empty/free, while order zero forces compact `y` and gives either the free
+  `f_Q+bc` face or exactly the four marked residual Morse points.  Thus no
+  local tangent circuit remains in the named atlas.  The remaining algebra is
+  global: assemble one finite common normalized fan, verify all transition and
+  overlap ideals and fan completeness, then prove the separate proper collar
+  topology.
   The correct rank-four system is value-localized; the global group has ten
   critical contributions.
 - Iritani identifies the residual Gamma lattice with the exact `P^3` Orlov
@@ -167,11 +174,10 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-Complete the toric order-zero theorem for `Bl_(P^3)P^5`: finish the joint
-`y`/Rees-infinity and translated/infinity seams in the normalized saturated
-graph, assemble them with the ten closed types and the finite residual chart into the
-common tangent-Fitting fan, and build the finite product-pair cover on all
-overlaps.  Then identify
+Complete the toric order-zero theorem for `Bl_(P^3)P^5`: assemble the now
+locally complete normalized saturated graph atlas into one finite common
+tangent-Fitting fan, verify every transition and overlap ideal plus fan
+completeness, and build the finite product-pair cover on all overlaps.  Then identify
 the four value-localized thimbles with the `P^3` Stokes system and fix the
 monodromy-normalized central-connection seed in the Orlov Gamma subgroup.  In
 parallel, continue the remaining non-WCI prime Fano scan for `nu_6>=4`.
@@ -230,9 +236,11 @@ Exterior-star compression and exact replays:
 `../2026-08-12-c907-bc00-star-fan.md`,
 `../2026-08-12-c907-b0-cunit-star-fan.md`,
 `../2026-08-12-c907-binf-cunit-star-fan.md`,
-`../2026-08-12-c907-binf-cinf-star-fan.md`, and
-`../2026-08-12-c907-b1-cunit-star-fan.md`, and
-`../2026-08-12-c907-b1-c0-seam-star-fan.md`.
+`../2026-08-12-c907-binf-cinf-star-fan.md`,
+`../2026-08-12-c907-b1-cunit-star-fan.md`,
+`../2026-08-12-c907-b1-c0-seam-star-fan.md`,
+`../2026-08-12-c907-b1-cinf-seam-star-fan.md`, and
+`../2026-08-12-c907-joint-y-rees-infinity-fan.md`.
 
 ## Gold architecture after `m=2`
 

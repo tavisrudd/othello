@@ -73,10 +73,15 @@ valuations; the translated seam incidence closure retains the four marked
 residual points.  Positive pole order by itself is only a prefilter: total
 normalization can recreate `L`-critical points.  The bounded `1/1` Rees chart
 is closed separately: its noncompact `y` faces are empty/free and its compact
-face is exactly the four residual Morse points.  The live analytic gate is the
-joint `y`/Rees-infinity and translated/infinity remainder of the normalized
-comprehensive Gröbner/Fitting fan, then proper collar topology and the
-hyperplane-equivariant Orlov/Gamma marking.  The first residual jet is
+face is exactly the four residual Morse points.  The two translated/infinity
+seams are now empty/free over a residual value disk in `C*`, and the full
+double-translated `B=C=1` chart closes every joint `y`/Rees-infinity valuation:
+positive-order faces are empty/free, while order zero is either free or exactly
+the four marked residual points.  The local tangent atlas is therefore
+complete.  The live analytic gate is its assembly into one finite common
+normalized fan with verified transitions, overlap ideals, and completeness,
+then proper collar topology and the hyperplane-equivariant Orlov/Gamma marking.
+The first residual jet is
 `-H^2` modulo coordinate gauge, conditionally internally isomonodromic.  The
 direct threefold grading argument is closed negatively by an explicit
 self-dual length-two model; the carrier gate is the geometric vanishing of
