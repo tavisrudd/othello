@@ -117,10 +117,10 @@ The 109 reviewer-facing terminals currently verify:
 - finite-fiber numerical Novikov coefficient pushforward on ordinary functions
   and on completed coefficient families with finite support below every degree
   cutoff, including the exact coefficient formula and additivity; no topology
-  or continuity theorem is represented;
+  or topological continuity theorem is represented;
   agreement through a homological degree cutoff is proved to imply agreement
   through the corresponding numerical cutoff, the exact finite-level
-  compatibility used by the unformalized continuity argument;
+  compatibility used by the unformalized topological continuity argument;
 - finite and exact ordered additive decomposition sets for every class in a
   finite-degree effective monoid, and closure of completed coefficient families
   under the resulting convolution sum; the convolution, delta-function unit,
