@@ -65,6 +65,19 @@ def matrixCongruenceAddHom
     intro left right
     simp [matrixCongruence, Matrix.mul_add, Matrix.add_mul]
 
+/-- Congruence transport preserves symmetry of bilinear coefficient forms. -/
+theorem matrixCongruence_isSymm
+    {S BaseAxis SplitAxis : Type*} [CommRing S]
+    [Fintype BaseAxis]
+    (basis : Matrix BaseAxis SplitAxis S)
+    (form : Matrix BaseAxis BaseAxis S) (symmetric : form.IsSymm) :
+    (matrixCongruence basis form).IsSymm := by
+  unfold Matrix.IsSymm at symmetric ⊢
+  unfold matrixCongruence
+  rw [Matrix.transpose_mul, Matrix.transpose_mul, Matrix.transpose_transpose,
+    symmetric]
+  simp only [Matrix.mul_assoc]
+
 /-- A congruence change of coordinates sends a scalar rank-one coefficient
 form to the scalar rank-one form of the transported vector. -/
 theorem matrixCongruence_matrixRankOne
@@ -139,6 +152,21 @@ theorem splitCoordinateCoefficientExtension_matrixRankOne
   rw [splitCoordinateCoefficientExtension,
     matrixCoefficientExtension_matrixRankOne,
     matrixCongruence_matrixRankOne]
+
+/-- Scalar extension followed by congruence transport preserves symmetry of a
+base coefficient form. -/
+theorem splitCoordinateCoefficientExtension_isSymm
+    {R S BaseAxis SplitAxis : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Fintype BaseAxis]
+    (basis : Matrix BaseAxis SplitAxis S)
+    (form : Matrix BaseAxis BaseAxis R) (symmetric : form.IsSymm) :
+    (splitCoordinateCoefficientExtension basis form).IsSymm := by
+  apply matrixCongruence_isSymm
+  ext row column
+  change algebraMap R S (form column row) = algebraMap R S (form row column)
+  rw [show form column row = form row column by
+    simpa [Matrix.IsSymm, Matrix.transpose_apply] using
+      congrFun (congrFun symmetric row) column]
 
 /-- The inverse basis change recovers the original bilinear form.  This
 certifies that the congruence map attached to a supplied coordinate

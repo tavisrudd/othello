@@ -451,6 +451,42 @@ theorem graphCoefficient_flattenedSplitPresentation_iff_descent
   GraphLattices.memWeightedMatrix_flattenBlockCoefficient_iff_graphDescent
     Block data depth scalar slopeError coefficient
 
+/-- Exact coefficient-lattice criterion after scalar extension and a supplied
+invertible basis change over the extension ring.  The base and split axes may
+differ: Lean restricts the transported form to its dependent slope blocks and
+proves that weighted-lattice membership is equivalent to symmetry plus the
+three formal graph-coordinate descent conditions.  The basis, slope-block
+data, and interpretation of these algebraic conditions as geometric divisor
+descent are supplied rather than constructed. -/
+theorem graphCoefficient_afterSplitBasisChange_iff_descent
+    {R S BaseAxis BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Fintype BaseAxis] [DecidableEq BaseAxis]
+    (Block : BlockIndex → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    [Fintype (GraphLattices.SplitGraphAxis Block)]
+    [DecidableEq (GraphLattices.SplitGraphAxis Block)]
+    (basis : GraphLattices.SplitCoordinateBasisEquivalence S BaseAxis
+      (GraphLattices.SplitGraphAxis Block))
+    {π : S} (data : GraphLattices.NormalizedDVRValuation π)
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) S)
+    (form : Matrix BaseAxis BaseAxis R) :
+    GraphLattices.MemWeightedMatrix π (fun axis ↦ depth axis.1)
+        (GraphLattices.splitGraphCrossDepth Block data.valuation depth scalar)
+        (GraphLattices.splitCoordinateCoefficientExtension
+          basis.toSplit form) ↔
+      GraphLattices.GraphBlockSymmetric Block
+          (GraphLattices.blockCoefficientOfMatrix Block
+            (GraphLattices.splitCoordinateCoefficientExtension
+              basis.toSplit form)) ∧
+        GraphLattices.GraphBlockDescentCondition Block π depth scalar
+          slopeError
+          (GraphLattices.blockCoefficientOfMatrix Block
+            (GraphLattices.splitCoordinateCoefficientExtension
+              basis.toSplit form)) :=
+  GraphLattices.splitCoordinateCoefficientExtension_memWeightedMatrix_iff_graphDescent
+    Block basis data depth scalar slopeError form
+
 /-- For an actual DVR, the split graph cross-depth lattice on the disjoint
 union of block bases is rank-one generated. -/
 theorem graphCoefficient_splitPresentation_rankOneGenerated
@@ -1005,6 +1041,85 @@ theorem rankOne_allDegree_dividedPower_of_splitGraphDVR_afterBasisChange
     pullback pullbackInjective sourceCompatible divisors
     extendedRealizationMember form member baseClass dividedPower
     baseClassCompatible degree dividedPowerCompatible
+
+/-- The split-graph all-degree packet stated with the actual blockwise descent
+conditions in place of an opaque transported-lattice membership premise.
+After a supplied invertible extension-ring basis change, symmetry and the
+three graph-coordinate descent conditions—including the commutator with the
+right slope transposed in `A Tᵗ - T A`—imply the exact split weighted lattice;
+Lean then discharges rank-one generation, square-zero expansion, and
+faithful-flat product descent.  The spectral basis and
+geometric/cohomological compatibilities remain supplied. -/
+theorem rankOne_allDegree_dividedPower_of_markedGraphDescent_afterBasisChange
+    {R S Target BaseAxis BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S]
+    [CommRing Target] [Algebra R Target]
+    [Fintype BaseAxis] [DecidableEq BaseAxis]
+    (Block : BlockIndex → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    [Fintype (GraphLattices.SplitGraphAxis Block)]
+    [DecidableEq (GraphLattices.SplitGraphAxis Block)]
+    [LinearOrder (GraphLattices.SplitGraphAxis Block)]
+    (basis : GraphLattices.SplitCoordinateBasisEquivalence S BaseAxis
+      (GraphLattices.SplitGraphAxis Block))
+    (π : R) (extendedπIrreducible : Irreducible (algebraMap R S π))
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) S)
+    (extendedRealization : Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S →+ TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S
+        (GraphLattices.EllipticSourceHOne S
+          (GraphLattices.SplitGraphAxis Block)))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ GraphLattices.weightedMatrixSubmodule (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar) →
+        extendedRealization candidate ∈
+          GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix BaseAxis BaseAxis R)
+    (formSymmetric : form.IsSymm)
+    (graphDescent : GraphLattices.GraphBlockDescentCondition Block
+      (algebraMap R S π) depth scalar slopeError
+      (GraphLattices.blockCoefficientOfMatrix Block
+        (GraphLattices.splitCoordinateCoefficientExtension
+          basis.toSplit form)))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization
+          (GraphLattices.splitCoordinateCoefficientExtension
+            basis.toSplit form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix (GraphLattices.SplitGraphAxis Block)
+        (GraphLattices.SplitGraphAxis Block) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet (algebraMap R S π)
+          (fun axis ↦ depth axis.1)
+          (GraphLattices.splitGraphCrossDepth Block
+            (IsDiscreteValuationRing.addVal S) depth scalar)) →
+      forms.sum = GraphLattices.splitCoordinateCoefficientExtension
+        basis.toSplit form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        GraphLattices.squarefreeProductSum
+          (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryDivisorProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
+  GraphLattices.allDegree_dividedPowerMember_of_markedGraphDescent_afterBasisChange
+    Block basis π extendedπIrreducible depth scalar slopeError
+    extendedRealization pullback pullbackInjective sourceCompatible divisors
+    extendedRealizationMember form formSymmetric graphDescent baseClass
+    dividedPower baseClassCompatible degree dividedPowerCompatible
 
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`

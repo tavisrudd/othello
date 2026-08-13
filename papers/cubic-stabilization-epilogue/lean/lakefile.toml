@@ -13,6 +13,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MatrixOfIdeals",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.CoefficientExtension",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SplitCoordinateTransport",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MarkedGraphBasisChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRankOne",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AllDegreeAssembly",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.GraphCoefficientDepth",

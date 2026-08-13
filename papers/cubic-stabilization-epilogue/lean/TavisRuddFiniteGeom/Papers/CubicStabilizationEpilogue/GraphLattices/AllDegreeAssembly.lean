@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Coeff
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SplitCoordinateTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.OrdinaryProductBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MarkedSplitPresentation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.MarkedGraphBasisChange
 import Mathlib.Tactic
 
 /-!
@@ -787,6 +788,85 @@ theorem allDegree_dividedPowerMember_of_splitGraphDVR_afterBasisChange
     extendedRealizationMember
     (splitCoordinateCoefficientExtension basis.toSplit form) member
     baseClass dividedPower baseClassCompatible degree dividedPowerCompatible
+
+/-- Split-graph DVR saturation from the actual blockwise graph-descent
+conditions after a supplied invertible basis change over the coefficient
+extension.  The opaque weighted-lattice membership premise is discharged by
+symmetry and the three graph-coordinate block conditions, with the right slope
+transposed in `A Tᵗ - T A`.  Construction of the splitting basis and the
+geometric origin of those descent conditions remain outside this theorem. -/
+theorem allDegree_dividedPowerMember_of_markedGraphDescent_afterBasisChange
+    {R S Target BaseAxis BlockIndex : Type*} [CommRing R] [CommRing S]
+    [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S]
+    [CommRing Target] [Algebra R Target]
+    [Fintype BaseAxis] [DecidableEq BaseAxis]
+    (Block : BlockIndex → Type*) [∀ index, Fintype (Block index)]
+    [∀ index, DecidableEq (Block index)]
+    [Fintype (SplitGraphAxis Block)] [DecidableEq (SplitGraphAxis Block)]
+    [LinearOrder (SplitGraphAxis Block)]
+    (basis : SplitCoordinateBasisEquivalence S BaseAxis
+      (SplitGraphAxis Block))
+    (uniformizer : R)
+    (extendedUniformizerIrreducible : Irreducible (algebraMap R S uniformizer))
+    (depth : BlockIndex → ℕ) (scalar : BlockIndex → S)
+    (slopeError : ∀ index, Matrix (Block index) (Block index) S)
+    (extendedRealization : Matrix (SplitGraphAxis Block)
+        (SplitGraphAxis Block) S →+ TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S (EllipticSourceHOne S (SplitGraphAxis Block)))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ weightedMatrixSubmodule (algebraMap R S uniformizer)
+          (fun axis ↦ depth axis.1)
+          (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+            depth scalar) →
+        extendedRealization candidate ∈
+          scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight
+              (R := R) (A := S) (B := Target)) divisors)
+    (form : Matrix BaseAxis BaseAxis R)
+    (formSymmetric : form.IsSymm)
+    (graphDescent : GraphBlockDescentCondition Block
+      (algebraMap R S uniformizer) depth scalar slopeError
+      (blockCoefficientOfMatrix Block
+        (splitCoordinateCoefficientExtension basis.toSplit form)))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization
+          (splitCoordinateCoefficientExtension basis.toSplit form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix (SplitGraphAxis Block)
+          (SplitGraphAxis Block) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet (algebraMap R S uniformizer)
+          (fun axis ↦ depth axis.1)
+          (splitGraphCrossDepth Block (IsDiscreteValuationRing.addVal S)
+            depth scalar)) →
+      forms.sum = splitCoordinateCoefficientExtension basis.toSplit form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        squarefreeProductSum (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower := by
+  apply allDegree_dividedPowerMember_of_splitGraphDVR_afterBasisChange
+    Block basis uniformizer extendedUniformizerIrreducible depth scalar
+    extendedRealization pullback pullbackInjective sourceCompatible divisors
+    extendedRealizationMember form
+  · exact (splitCoordinateCoefficientExtension_memWeightedMatrix_iff_graphDescent
+      Block basis
+      (NormalizedDVRValuation.ofIsDiscreteValuationRing
+        extendedUniformizerIrreducible)
+      depth scalar slopeError form).mpr
+        ⟨splitCoordinateCoefficientExtension_blockSymmetric
+          Block basis form formSymmetric, graphDescent⟩
+  · exact baseClassCompatible
+  · exact dividedPowerCompatible
 
 end GraphLattices
 
