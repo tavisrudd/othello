@@ -9,7 +9,10 @@ the conjugate bulk matrix.  This module records compatibility of the small
 matrices, substitutions, gauges, and inverse gauges under reduction.  Lean
 then derives compatibility of the bulk matrices and the substituted
 characteristic-polynomial identity at every level, together with compatibility
-of the bulk characteristic polynomials under reduction.
+of the bulk characteristic polynomials under reduction.  These polynomials are
+packaged as a `CompatibleCharacteristicPolynomialSystem`; at each level its
+polynomial is both the bulk characteristic polynomial and the divisor-substituted
+small characteristic polynomial.
 
 The filtered coefficient quotients, string and divisor equations, bulk flat
 equations, and construction of the finite-level gauges are not represented.
@@ -163,6 +166,28 @@ theorem bulkCharacteristicPolynomial_compatible
   letI := system.coefficientRing (level + 1)
   rw [← framedCharacteristicPolynomial_map,
     system.bulkMonodromy_compatible level]
+
+/-- The derived bulk characteristic polynomials form the explicit compatible
+polynomial system associated to the bulk matrices. -/
+noncomputable def bulkCharacteristicPolynomialSystem
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : FormalBaseShiftSystem Index) :
+    CompatibleCharacteristicPolynomialSystem :=
+  system.bulkMatrixSystem.characteristicPolynomialSystem
+
+/-- Every level of the derived polynomial system is both the bulk matrix
+characteristic polynomial and the divisor substitution in the small matrix
+characteristic polynomial. -/
+theorem bulkCharacteristicPolynomialSystem_level
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (system : FormalBaseShiftSystem Index) (level : ℕ) :
+    letI := system.coefficientRing level
+    system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+        (system.bulkMonodromy level).charpoly ∧
+      system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+        (system.smallMonodromy level).charpoly.map
+          (system.divisorSubstitution level) := by
+  exact ⟨rfl, system.bulkMonodromy_charpoly level⟩
 
 end FormalBaseShiftSystem
 

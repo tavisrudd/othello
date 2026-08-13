@@ -2079,9 +2079,10 @@ theorem formalBaseShift_characteristicPolynomial_of_matrixInput
 /-- Compatible finite-level small matrices, divisor substitutions, and
 two-sided-invertible gauges determine compatible bulk matrices whose
 characteristic polynomials are the substituted small characteristic
-polynomials at every level and are themselves compatible under reduction.  The
-filtered rings and bulk differential equations that should produce these inputs
-remain unformalized. -/
+polynomials at every level and are themselves compatible under reduction.  Lean
+also packages them as a compatible characteristic-polynomial system whose level
+polynomial has both descriptions.  The filtered rings and bulk differential
+equations that should produce these inputs remain unformalized. -/
 theorem formalBaseShift_bulkSystem_compatible_and_charpoly
     {Index : Type*} [Fintype Index] [DecidableEq Index]
     (system : Quantum.FormalBaseShiftSystem Index) :
@@ -2100,9 +2101,17 @@ theorem formalBaseShift_bulkSystem_compatible_and_charpoly
         letI := system.coefficientRing (level + 1)
         ((system.bulkMonodromy (level + 1)).charpoly).map
             (system.reduction level) =
-          (system.bulkMonodromy level).charpoly) :=
+          (system.bulkMonodromy level).charpoly) ∧
+      (∀ level,
+        letI := system.coefficientRing level
+        system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (system.bulkMonodromy level).charpoly ∧
+          system.bulkCharacteristicPolynomialSystem.characteristicPolynomial level =
+            (system.smallMonodromy level).charpoly.map
+              (system.divisorSubstitution level)) :=
   ⟨system.bulkMonodromy_compatible, system.bulkMonodromy_charpoly,
-    system.bulkCharacteristicPolynomial_compatible⟩
+    system.bulkCharacteristicPolynomial_compatible,
+    system.bulkCharacteristicPolynomialSystem_level⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized

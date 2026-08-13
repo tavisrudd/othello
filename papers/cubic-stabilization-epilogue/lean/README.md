@@ -150,8 +150,9 @@ The 112 reviewer-facing terminals currently verify:
   substitutions, and two-sided-invertible gauges, derivation of compatible bulk
   matrices and the substituted characteristic-polynomial identity at every
   level, including compatibility of those bulk characteristic polynomials under
-  reduction; the filtered ring and bulk flat equations producing the inputs are
-  not constructed;
+  reduction and their explicit packaging as a compatible polynomial system;
+  the filtered ring and bulk flat equations producing the inputs are not
+  constructed;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten
