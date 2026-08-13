@@ -23,6 +23,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.Exponential
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovSupport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovConvolution
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedNovikovInverseLimit
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalInverseLimitPushforward
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AssociatedGradedTagging
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
@@ -1877,6 +1878,28 @@ theorem completedNovikov_truncationFamily_roundTrips
       grading,
     Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted_toCompleted
       grading⟩
+
+/-- Numerical pushforward acts on the compatible truncation model by the
+ordinary finite-level `mapDomain` map at every cutoff, and this action commutes
+exactly with passage from a completed family to its truncations.  No topology
+or categorical limit universal property is asserted. -/
+theorem numericalNovikov_truncationFamily_pushforward
+    {Homology Numerical Coefficient : Type*}
+    [AddCommMonoid Homology] [AddCommMonoid Numerical] [CommRing Coefficient]
+    (data : Quantum.CompletedNumericalQuotient Homology Numerical)
+    (family : Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily
+      data.homologicalGrading Coefficient) (cutoff : ℕ)
+    (series : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      data.homologicalGrading Coefficient) :
+    (data.pushforwardTruncationFamily family).level cutoff =
+        AddMonoidAlgebra.mapDomain data.quotient (family.level cutoff) ∧
+      data.pushforwardTruncationFamily
+          (Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted
+            data.homologicalGrading series) =
+        Quantum.FiniteDegreeAddCommMonoid.DegreeTruncationFamily.ofCompleted
+          data.numericalGrading (data.completedPushforward series) :=
+  ⟨data.pushforwardTruncationFamily_level family cutoff,
+    data.pushforwardTruncationFamily_ofCompleted series⟩
 
 /-- For a surjective finite-degree numerical quotient, the completed
 finite-fiber pushforward commutes with every finite truncation and is a unital

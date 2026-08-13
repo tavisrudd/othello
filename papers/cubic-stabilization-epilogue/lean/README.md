@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 107 reviewer terminals.
+1 complete; 108 reviewer terminals.
 
-The 107 reviewer-facing terminals currently verify:
+The 108 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -133,6 +133,9 @@ The 107 reviewer-facing terminals currently verify:
   reconstruction equivalence with completed coefficient families; this is a
   coefficientwise inverse-limit model, not a topology or categorical universal
   property;
+- numerical pushforward on that compatible-family model, with every finite
+  level exactly the ordinary `mapDomain` quotient map and an exact commuting
+  square with completed pushforward;
 - finite coefficient packets constant on numerical fibers descend termwise,
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten

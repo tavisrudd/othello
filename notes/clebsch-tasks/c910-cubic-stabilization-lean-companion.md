@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 55 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 56 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 107 audited terminals.  The rejecting manuscript inventory covers all
+exports 108 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -199,6 +199,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/CompletedNovikovConvolution.lean
     Quantum/NumericalCoefficientDescent.lean
     Quantum/CompletedNovikovInverseLimit.lean
+    Quantum/NumericalInverseLimitPushforward.lean
     Quantum/AssociatedGradedTagging.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
@@ -283,7 +284,8 @@ are current, and the committed paper export verifies byte-for-byte in
   and quotient-compatible weighted-operator commutation are settled for the
   finite-below support model.
   The coefficientwise inverse limit is explicit and equivalent to the
-  completed-family model.  Topology and a categorical/topological universal
+  completed-family model; numerical pushforward is exactly `mapDomain` at every
+  finite level and commutes with reconstruction.  Topology and a categorical/topological universal
   property are not represented; the substantive
   missing bridges are geometric Gromov--Witten invariance, construction of the
   additive pairing weights and quantum connection, and the comparison maps.

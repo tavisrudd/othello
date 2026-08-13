@@ -183,8 +183,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-55 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 107 reviewer terminals, audit
+56 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 108 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
