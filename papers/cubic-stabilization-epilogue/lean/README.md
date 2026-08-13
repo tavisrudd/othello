@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 117 reviewer terminals.
+1 complete; 118 reviewer terminals.
 
-The 117 reviewer-facing terminals currently verify:
+The 118 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -126,7 +126,10 @@ The 117 reviewer-facing terminals currently verify:
   not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
   coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
-  shift, and block multiplicity formulas;
+  shift, and block multiplicity formulas; for a constant matrix over a
+  commutative rational algebra, the normalized exponential coefficients are
+  constructed and proved to satisfy the formal flat recursion in every degree,
+  without claiming a varying quantum product or filtered analytic gauge;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with
   every comparison-theorem input exposed;

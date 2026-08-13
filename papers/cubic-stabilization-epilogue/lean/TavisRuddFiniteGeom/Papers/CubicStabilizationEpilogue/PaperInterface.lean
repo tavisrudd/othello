@@ -37,6 +37,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseS
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalBaseShiftSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredFormalBaseShift
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ConstantFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2257,6 +2258,24 @@ theorem adicFormalBaseShift_bulkSystem_compatible_and_charpoly
     (input : Quantum.AdicFormalBaseShiftInput Index R ideal endomorphism) :
     Quantum.AdicFormalBaseShiftInput.BulkSystemConclusion input :=
   input.bulkSystem_compatible_and_characteristicPolynomial
+
+/-- For a constant finite square connection matrix over a commutative
+`ℚ`-algebra, Lean constructs the normalized exponential coefficients and
+proves `G₀=1` and the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree.  No varying
+quantum product, filtered quotient, Laurent loop
+coordinate, formal power series, truncation, derivative, uniqueness,
+convergence, or analytic gauge is constructed. -/
+theorem constantFlatGauge_normalized_and_recursion
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R]
+    (connection : Matrix Index Index R) :
+    Quantum.constantFlatGaugeCoefficient connection 0 = 1 ∧
+      ∀ degree : ℕ,
+        (degree + 1 : R) •
+            Quantum.constantFlatGaugeCoefficient connection (degree + 1) =
+          -connection * Quantum.constantFlatGaugeCoefficient connection degree :=
+  ⟨Quantum.constantFlatGaugeCoefficient_zero connection,
+    Quantum.constantFlatGaugeCoefficient_succ connection⟩
 
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
