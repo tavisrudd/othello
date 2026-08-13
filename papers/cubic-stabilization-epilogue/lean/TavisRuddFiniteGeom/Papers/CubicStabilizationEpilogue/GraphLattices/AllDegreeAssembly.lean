@@ -2,6 +2,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DVRRa
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FaithfullyFlatMembership
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SquareZeroTransport
 import Mathlib.Tactic
 
 /-!
@@ -203,6 +204,49 @@ theorem allDegree_integralProductMember_of_faithfullyFlatQuotient
     mem_submodule_of_faithfullyFlat_tensor_quotient_zero integralProducts _
       (extendedProducts forms internal sumEquality)
   exact ⟨forms, internal, sumEquality, globalMember, powerEquality⟩
+
+/-- All-degree assembly with the square-zero hypothesis verified after an
+injective pullback, followed by faithfully flat quotient descent of product
+membership. -/
+theorem allDegree_integralProductMember_of_injectivePullback_and_faithfullyFlat
+    {S Target Source : Type*} [CommRing S] [Algebra R S]
+    [CommRing Target] [Module R Target] [CommRing Source]
+    [Module.FaithfullyFlat R S]
+    (uniformizer : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : WeightedMatrixRankOneGenerated uniformizer diagonal cross)
+    (targetRealization : Matrix Index Index R →+ Target)
+    (sourceRealization : Matrix Index Index R →+ Source)
+    (pullback : Target →+* Source) (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (targetRealization candidate) = sourceRealization candidate)
+    (sourceRankOneSquareZero : ∀ candidate,
+      candidate ∈ weightedRankOneSet uniformizer diagonal cross →
+        sourceRealization candidate * sourceRealization candidate = 0)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ weightedMatrixSubmodule uniformizer diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (squarefreeProductSum (forms.map targetRealization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ weightedRankOneSet uniformizer diagonal cross) ∧
+      forms.sum = form ∧
+      squarefreeProductSum (forms.map targetRealization) degree ∈ integralProducts ∧
+      targetRealization form ^ degree =
+        (degree.factorial : Target) *
+          squarefreeProductSum (forms.map targetRealization) degree := by
+  apply allDegree_integralProductMember_of_faithfullyFlatQuotient
+    uniformizer diagonal cross generated targetRealization
+    (rankOneSquareZero_of_injectivePullback uniformizer diagonal cross
+      targetRealization sourceRealization pullback pullbackInjective
+      realizationCompatible sourceRankOneSquareZero)
+    integralProducts form member degree extendedProducts
 
 end GraphLattices
 

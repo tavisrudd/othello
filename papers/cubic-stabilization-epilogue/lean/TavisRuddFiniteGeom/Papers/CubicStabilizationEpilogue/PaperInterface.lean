@@ -439,6 +439,35 @@ theorem squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum
   GraphLattices.sum_pow_eq_factorial_mul_squarefreeProductSum
     terms squareZero k
 
+/-- Exterior-algebra source of the square-zero identity: every decomposable
+alternating two-form squares to zero. -/
+theorem decomposableTwoForm_squareZero
+    {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+    (first second : M) :
+    (ExteriorAlgebra.ι R first * ExteriorAlgebra.ι R second) ^ 2 = 0 :=
+  GraphLattices.exterior_decomposableTwoForm_sq_zero first second
+
+/-- Injective cohomological pullback transports the source square-zero
+identity for internal rank-one classes back to the target realization. -/
+theorem rankOne_squareZero_of_injectivePullback
+    {Index R Target Source : Type*} [CommRing R]
+    [CommRing Target] [CommRing Source]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (targetRealization : Matrix Index Index R →+ Target)
+    (sourceRealization : Matrix Index Index R →+ Source)
+    (pullback : Target →+* Source) (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (targetRealization candidate) = sourceRealization candidate)
+    (sourceRankOneSquareZero : ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        sourceRealization candidate * sourceRealization candidate = 0) :
+    ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        targetRealization candidate * targetRealization candidate = 0 :=
+  GraphLattices.rankOneSquareZero_of_injectivePullback π diagonal cross
+    targetRealization sourceRealization pullback pullbackInjective
+    realizationCompatible sourceRankOneSquareZero
+
 /-- Algebraic all-degree consequence of exact rank-one generation.  Given an
 additive realization whose internal rank-one images square to zero, each
 realized lattice member admits a finite internal rank-one list and the
@@ -515,6 +544,50 @@ theorem rankOne_allDegree_integralProductMember_of_faithfullyFlatQuotient
   GraphLattices.allDegree_integralProductMember_of_faithfullyFlatQuotient
     π diagonal cross generated realization rankOneSquareZero integralProducts
     form member degree extendedProducts
+
+/-- The manuscript's algebraic all-degree chain in one theorem: rank-one
+generation, source square-zero, injective pullback, squarefree expansion, and
+faithfully flat quotient descent. -/
+theorem rankOne_allDegree_of_injectivePullback_and_faithfullyFlatDescent
+    {Index R S Target Source : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    [CommRing Target] [Module R Target] [CommRing Source]
+    [Module.FaithfullyFlat R S]
+    (π : R) (diagonal : Index → ℕ) (cross : Index → Index → ℕ)
+    (generated : GraphLattices.WeightedMatrixRankOneGenerated π diagonal cross)
+    (targetRealization : Matrix Index Index R →+ Target)
+    (sourceRealization : Matrix Index Index R →+ Source)
+    (pullback : Target →+* Source) (pullbackInjective : Function.Injective pullback)
+    (realizationCompatible : ∀ candidate,
+      pullback (targetRealization candidate) = sourceRealization candidate)
+    (sourceRankOneSquareZero : ∀ candidate,
+      candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross →
+        sourceRealization candidate * sourceRealization candidate = 0)
+    (integralProducts : Submodule R Target)
+    (form : Matrix Index Index R)
+    (member : form ∈ GraphLattices.weightedMatrixSubmodule π diagonal cross)
+    (degree : ℕ)
+    (extendedProducts : ∀ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) →
+      forms.sum = form →
+      TensorProduct.mk R S (Target ⧸ integralProducts) 1
+        (Submodule.Quotient.mk
+          (GraphLattices.squarefreeProductSum
+            (forms.map targetRealization) degree)) = 0) :
+    ∃ forms : List (Matrix Index Index R),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet π diagonal cross) ∧
+      forms.sum = form ∧
+      GraphLattices.squarefreeProductSum
+          (forms.map targetRealization) degree ∈ integralProducts ∧
+      targetRealization form ^ degree =
+        (degree.factorial : Target) *
+          GraphLattices.squarefreeProductSum
+            (forms.map targetRealization) degree :=
+  GraphLattices.allDegree_integralProductMember_of_injectivePullback_and_faithfullyFlat
+    π diagonal cross generated targetRealization sourceRealization pullback
+    pullbackInjective realizationCompatible sourceRankOneSquareZero
+    integralProducts form member degree extendedProducts
 
 /-- Elementwise local-to-global membership in denominator-witness form.  If,
 at every prime, a natural-number multiple prime to that prime carries `x`
