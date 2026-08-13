@@ -157,51 +157,88 @@ the polarization matrix `S` or of any `S² = −I` centrality shortcut** (see th
 sibling naturality report `notes/2026-08-12-c908-z2-naturality-checks.md`,
 which shows that shortcut is invalid in this basis; nothing here touches it).
 
-### 2.2 Step 2 — from `ch` to `c_4`: the parity of the readout
+### 2.2 Step 2 — the closed form of the `(3,5)` block of `c_4`
 
-The readout uses `c_4`, not `ch_4`, and `c_4` is not additive; the rank
-changes (`0 → 3`) so the comparison needs the full Newton bookkeeping. Write
-`h_k := ch_k`. For a class of rank `r` the degree-four Chern class is the
-universal Newton polynomial in `h_0 = r, h_1, …, h_4`. What the readout needs
-is only the `(3,5)` Künneth block of `c_4`, contracted with `x⊗t`.
+Write `h_k := ch_k`, `g_1 := h_1^{(0,2)}`, `g_2 := h_2^{(0,4)}` (the
+`X`-degree-zero Künneth parts, i.e. the Chern data of the restriction
+`𝒜|_{\{x\}×B}` to a slice). Newton's identities give, **independently of the
+rank**,
 
-**Lemma N (odd-leg linearity of `c_4`).** For any `𝒜 ∈ K^0(X×B)`,
+\[ c_4 \;=\; \tfrac{1}{24}h_1^4 \;−\;\tfrac12 h_1^2h_2 \;+\;\tfrac12 h_2^2
+   \;+\;2h_1h_3\;−\;6h_4 . \]
 
-\[ c_4(𝒜)^{(3,5)} \;=\; \Bigl[\,P_3(h_0,h_1^{(0,·)},h_2^{(0,·)},h_3^{(0,·)})
-   ·\,h_1^{(3,·)} \;+\; P_2(\cdots)·h_2^{(3,·)} \;+\;
-   P_1(\cdots)·h_3^{(3,·)} \;−\;6\,h_4^{(3,5)} \,\Bigr]^{(3,5)}, \]
+**Lemma N (the `(3,5)` block).** For any `𝒜 ∈ K^0(X×B)` with `B` smooth
+projective,
 
-i.e. `c_4` is **linear** in the odd-`X`-degree part of `ch`, with coefficients
-that are universal polynomials in the even-`X`-degree parts. Reason: `c_4` is
-a polynomial in the `h_k`; a monomial contributing to the `(3,·)` block must
-contain an odd number of odd-`X`-degree factors, and two odd factors already
-give `X`-degree `6` with a further odd factor pushing past `H^6(X)` — more
-precisely, `H^3(X)·H^3(X) ⊆ H^6(X) = Z[pt]` and any third odd factor lands in
-`H^9(X) = 0`, while a monomial with exactly two odd factors has even
-`X`-degree `6`, not `3`. So exactly one factor of each contributing monomial
-is odd, and it enters linearly. ∎
+\[ c_4(𝒜)^{(3,5)} \;=\; \bigl(g_2 − \tfrac12 g_1^2\bigr)\,h_2^{(3,1)}
+   \;+\; 2\,g_1\,h_3^{(3,3)} \;−\; 6\,h_4^{(3,5)}
+   \;=\; −\,c_2^{(0,4)}\,h_2^{(3,1)} + 2c_1^{(0,2)}h_3^{(3,3)} − 6h_4^{(3,5)} . \]
 
-Consequently, from (2.1), the odd-leg data of `𝒜'` is `−ε` times that of `𝒜`,
-and the coefficient polynomials are built from the **even-`X`-degree** parts,
-which the mutation *does* change (rank `0 → 3`, and `e^H`-twisting acts
-nontrivially there). Write `Q_j(𝒜)` for the coefficient of `h_j^{(3,·)}`.
-Then
+*Proof.* `H^1(X,Z) = H^5(X,Z) = 0`, so the only odd `X`-degree present is 3,
+and `H^3(X)·H^3(X) ⊆ H^6(X)` has `X`-degree 6 ≠ 3. Hence each monomial of
+`c_4` contributing to the `(3,·)` block carries **exactly one** factor of odd
+`X`-degree, and all its other factors must have `X`-degree 0 (degrees are
+non-negative and must sum to 3). `h_1` has total degree 2 and therefore no
+`(3,·)` part. So the surviving monomials are: `−\tfrac12 h_1^2h_2` giving
+`−\tfrac12 g_1^2h_2^{(3,1)}`; `\tfrac12h_2^2` giving `g_2h_2^{(3,1)}`;
+`2h_1h_3` giving `2g_1h_3^{(3,3)}`; and `−6h_4` giving `−6h_4^{(3,5)}`. The
+`B`-degrees match (`4+1`, `2+3`, `0+5`). Finally `c_2 = \tfrac12h_1^2 − h_2`
+gives `c_2^{(0,4)} = \tfrac12g_1^2 − g_2`. ∎
 
-\[ c_4(𝒜')^{(3,5)} \;=\; −ε\sum_{j=1}^{4} Q_j(𝒜')·h_j^{(3,·)}(𝒜)\Big|^{(3,5)} , \]
+Two integrality facts used repeatedly below (both because `h_1` has no
+`(3,·)` part):
 
-and the comparison reduces to computing the four even-block coefficients
-`Q_j` for the two models. This is a **finite, fibre-independent computation**
-carried out in §3.
+\[ h_2^{(3,1)} = −c_2^{(3,1)}, \qquad 2h_3^{(3,3)} = c_3^{(3,3)} − g_1c_2^{(3,1)}, \]
 
-### 2.3 Step 3 — the base twist and the shift die in the readout
+so `h_2^{(3,1)}` and `2h_3^{(3,3)}` are **integral** classes.
 
-The twist ambiguity `ℰ ≅ ℰ' ⊗ p_M^*N` is exactly the situation of the pass-5
-**twist lemma** (`notes/2026-08-11-c908-universal-family-even-rigidity.md`
-§3.2), proved there for `c_4` on `X×M`: the class of the `(3,5)`-leg of
-`c_4(ℰ⊗p_M^*N)` in `Q_15` equals that of `c_4(ℰ)`, because every correction
-leg is `b^*(odd)` times a product of `b^*t`-classes and `[X]`, and `b_*` of
-such a product lands in `L∧⁵Λ` or in zero. That lemma is stated for the base
-`M` and uses the integral splitting `H^2(M,Z) = b^*H^2(J,Z) ⊕ Z[X]`; it
-applies verbatim here. The shift contributes only the global sign `ε`, which
-is invisible mod 2.
+### 2.3 Step 3 — the two twists
+
+**Lemma X (the `X`-twist is exactly invisible).** For any `𝒜 ∈ K^0(X×B)` and
+any `L ∈ Pic(X)`, `c_4(𝒜 ⊗ p_X^*L)^{(3,5)} = c_4(𝒜)^{(3,5)}` **exactly**.
+
+*Proof.* `ch(𝒜⊗p_X^*L) = e^{c_1(L)}ch(𝒜)` with `c_1(L)` of `X`-degree 2.
+Odd parts: `h_k^{(3,j)}` gains `Σ_{i≥1}(c_1(L)^i/i!)h_{k−i}^{(3−2i,\,j)}`,
+which vanishes since `H^1(X) = 0`. Even parts: `g_1` gains
+`(r·c_1(L))^{(0,2)} = 0` and `g_2` gains `(c_1(L)h_1 + \tfrac r2c_1(L)^2)^{(0,4)} = 0`,
+both because `c_1(L)` has positive `X`-degree. Now apply Lemma N. ∎
+
+**Lemma T (base twist; the rank-three case is even, the rank-zero case is
+not).** For `𝒜` of rank `r` on `X×B` and `N ∈ Pic(B)`, `n := p_B^*c_1(N)`,
+
+\[ c_4(𝒜⊗p_B^*N)^{(3,5)} − c_4(𝒜)^{(3,5)}
+ \;=\; (2r−6)\,n\,h_3^{(3,3)} \;+\;\bigl[(3−r)ng_1 − (\tbinom r2+3)n^2\bigr]h_2^{(3,1)} . \]
+
+Consequently:
+
+* `r = 3`: the difference is `−6n^2h_2^{(3,1)} = 6n^2c_2^{(3,1)}`, an
+  **even integral class**. So `c_4(ℰ⊗p_M^*N)^{(3,5)} ≡ c_4(ℰ)^{(3,5)} (mod 2)`
+  unconditionally — the universal family's twist ambiguity is invisible to the
+  λ-readout with no lattice input at all.
+* `r = 0`: the difference is `≡ n\,c_3^{(3,3)} + n^2c_2^{(3,1)} (mod 2)`,
+  which is **not** identically even. The span model is genuinely twist-sensitive.
+
+*Proof.* `g_1 ↦ g_1 + rn`, `g_2 ↦ g_2 + ng_1 + \tfrac r2n^2`, so
+`c_2^{(0,4)} ↦ c_2^{(0,4)} + (r−1)ng_1 + \binom r2 n^2`; on the odd side
+`h_2^{(3,1)} ↦ h_2^{(3,1)}`, `h_3^{(3,3)} ↦ h_3^{(3,3)} + nh_2^{(3,1)}`,
+`h_4^{(3,5)} ↦ h_4^{(3,5)} + nh_3^{(3,3)} + \tfrac12n^2h_2^{(3,1)}`. Substitute
+into Lemma N and collect. For `r=0` use
+`−6nh_3^{(3,3)} = −3n(c_3^{(3,3)} − g_1c_2^{(3,1)})` and
+`3n(g_1−n)h_2^{(3,1)} = −3n(g_1−n)c_2^{(3,1)}`; adding and reducing mod 2
+gives `nc_3^{(3,3)} + n^2c_2^{(3,1)}`. ∎
+
+**Audit consequence (a repair owed upstream).** The pass-5 twist lemma
+(`notes/2026-08-11-c908-universal-family-even-rigidity.md` §3.2) proved
+twist-invariance of the readout by asserting that "every such correction leg
+is a product of `b^*(odd)` with classes `b^*t` and `[X]`". For the `r = 1`
+branch (odd leg in `H^1(M,Z) = b^*Λ`) that is right; for the **`r = 3` branch
+it is false on the corrected lattice**, because `H^3(M,Z)` is a *nonsplit
+enlargement* of `b^*∧³Λ` by `H^3(X,Z)` (pass-9 Theorem A), and for a
+half-integral class `β` with `b_*β ≡ Θ^{[2]}∧z` the pass-5 kill fails: the
+readout of `b_*β∧τ` is `3∫_JΘ^{[3]}∧u_l∧z∧τ`, which is **odd-capable**
+(take `u_l = e_1, z = f_1, τ = e_2∧f_2` in a symplectic basis). Lemma T above
+repairs the conclusion for the case that matters — rank three — by a purely
+integral argument that never touches `H^3(M,Z)`. The pass-5 lemma's *other*
+use (the relative-Ext object `E` on `M×M`) is not covered by Lemma T and is
+recorded as an open audit item in §6.
 
