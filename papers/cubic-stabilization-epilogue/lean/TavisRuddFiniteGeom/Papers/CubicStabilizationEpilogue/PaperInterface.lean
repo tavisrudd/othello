@@ -2784,7 +2784,8 @@ parameters and one quotient cutoff, Lean constructs the normalized invertible
 formal flat gauge and an actual finite quotient-level evaluation of it.  Every
 term at or above the cutoff vanishes, and one integer bounds the loop exponents
 of every entry of the evaluated matrix.  The finite evaluations commute with
-canonical adjacent quotient reductions.  This finite sum is not an evaluation
+canonical adjacent quotient reductions, and every entrywise loop coefficient
+is packaged as an explicit compatible quotient family.  This finite sum is not an evaluation
 of an infinite series in a modeled topology; its multiplicativity, inverse
 preservation, identification with the manuscript's bulk gauge, and analytic
 specialization are not proved. -/
@@ -2825,7 +2826,12 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
         parameter (cutoff + 1) connection).map
         (filtration.positiveLaurentReduction cutoff) =
       filtration.positiveEvaluatedFlatGaugeAtLevel
-        parameter cutoff connection := by
+        parameter cutoff connection ∧
+    ∀ row column exponent level,
+      (filtration.positiveEvaluatedFlatGaugeCoefficientFamily
+        parameter positive connection row column exponent).value level =
+      (filtration.positiveEvaluatedFlatGaugeAtLevel
+        parameter level connection row column).coeff exponent := by
   exact ⟨Quantum.multivariableFlatGaugeSeries_normalized connection,
     Quantum.multivariableFlatGaugeSeries_isUnit connection,
     Quantum.multivariableFlatGaugeSeries_equation_of_curvature
@@ -2836,7 +2842,8 @@ theorem multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation
     filtration.positiveEvaluatedFlatGaugeAtLevel_hasUniformLowerBound
       parameter cutoff connection,
     filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
-      parameter positive cutoff connection⟩
+      parameter positive cutoff connection,
+    fun _ _ _ _ ↦ rfl⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

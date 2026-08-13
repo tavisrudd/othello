@@ -289,6 +289,32 @@ theorem MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeAtLevel_compatib
     parameter positive cutoff
     ((multivariableFlatGaugeSeries connection) row column)
 
+/-- For one matrix entry and loop exponent, the coefficients of the finite
+evaluated gauges form an explicit compatible quotient family. -/
+noncomputable def MultiplicativeIdealFiltration.positiveEvaluatedFlatGaugeCoefficientFamily
+    {Coordinate Index B : Type*} [Fintype Coordinate] [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing B] [Algebra ℚ B]
+    (filtration : MultiplicativeIdealFiltration B)
+    (parameter : Coordinate → B)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (connection : Coordinate → Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries B)))
+    (row column : Index) (exponent : ℤ) :
+    DecreasingIdealFiltration.CompatibleQuotientFamily
+      filtration.toDecreasingIdealFiltration where
+  value level :=
+    (filtration.positiveEvaluatedFlatGaugeAtLevel
+      parameter level connection row column).coeff exponent
+  compatible level := by
+    have matrixCompatibility :=
+      filtration.positiveEvaluatedFlatGaugeAtLevel_compatible
+        parameter positive level connection
+    have coefficientCompatibility := congrArg
+      (fun matrix ↦ (matrix row column).coeff exponent)
+      matrixCompatibility
+    simpa [MultiplicativeIdealFiltration.positiveLaurentReduction,
+      laurentSeriesMap] using coefficientCompatibility
+
 end Quantum
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

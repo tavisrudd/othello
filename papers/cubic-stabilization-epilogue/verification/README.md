@@ -95,8 +95,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   formal gauge and an actual finite evaluation at one quotient cutoff, proves
   all higher terms vanish there, and bounds every entry of the finite evaluated
   matrix by one Laurent order.  These finite evaluations commute with canonical
-  adjacent quotient reductions, but are not proved to preserve multiplication
-  or inversion.
+  adjacent quotient reductions; every entrywise loop coefficient is packaged
+  as an explicit compatible quotient family.  The finite evaluations are not
+  proved to preserve multiplication or inversion.
   Lean does not identify those parameters with manuscript bulk coordinates or
   the finite evaluated matrix with the manuscript gauge, prove one bound across levels, or
   construct a Laurent-valued inverse-limit gauge.
