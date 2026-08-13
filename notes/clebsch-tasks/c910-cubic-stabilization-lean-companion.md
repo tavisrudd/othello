@@ -191,6 +191,11 @@ are current, and the committed paper export verifies byte-for-byte in
 
 ## Mystery ledger
 
+- **Low-dimensional deduction:** settled at the conditional level.  Once the
+  classification, nef spectral restriction, projective-bundle and point-blowup
+  formulas, and divisor-tagging comparison are supplied, Lean now proves the
+  full quantified proposition.  The remaining gap is exactly those geometric
+  and quantum premises, not the induction joining them.
 - **External-input closure:** unsettled.  The chief question is how much of the
   recent quantum comparison package can be reduced to algebraic formalism rather
   than retained as explicit premises.
