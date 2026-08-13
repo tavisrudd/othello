@@ -45,6 +45,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.Multivariab
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredMultivariableLaurentFlatGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MultivariableLaurentBounds
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationBulkTruncation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -2721,6 +2722,28 @@ theorem filteredMultivariableLaurentFlatGauge_uniformBound_of_finiteBulkSupport
       (input.filtration.QuotientRing level) (input.gaugeAt level) :=
   Quantum.hasUniformLaurentLowerBound_of_finiteBulkSupport
     (input.gaugeAt level) finiteSupport
+
+/-- Let the coordinate type be finite.  If every coefficient matrix of a
+Laurent-valued multivariate series vanishes in total bulk degree at or above a
+fixed cutoff, Lean constructs a finite bulk support and obtains one Laurent
+lower bound for all entries and bulk monomials.  The vanishing premise is
+explicit; this terminal does not derive it from the manuscript's positive
+filtration or nilpotence argument. -/
+theorem multivariableLaurentSeries_uniformBound_of_totalDegreeCutoff
+    {Coordinate Index R : Type*} [Fintype Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (series : Matrix Index Index
+      (MvPowerSeries Coordinate (LaurentSeries R)))
+    (cutoff : ℕ)
+    (vanishes : ∀ row column degree,
+      cutoff ≤ Quantum.multivariableTotalDegree degree →
+        MvPowerSeries.coeff degree (series row column) = 0) :
+    Quantum.HasFiniteBulkSupport Coordinate Index R series ∧
+      Quantum.HasMatrixBulkUniformLaurentLowerBound Coordinate Index R series :=
+  ⟨Quantum.hasFiniteBulkSupport_of_coefficients_eq_zero_of_cutoff_le_totalDegree
+      series cutoff vanishes,
+    Quantum.hasUniformLaurentLowerBound_of_coefficients_eq_zero_of_cutoff_le_totalDegree
+      series cutoff vanishes⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`
