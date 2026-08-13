@@ -94,6 +94,13 @@ theorem and is a genuinely stronger localization axiom.
    \(K_0\) is \(K_0/F^3\cong\mathbf Q[x]/(x^3)\),
    \(x=1-[\mathcal O(1)]\).  It retains a raw \(J_3\) instead of vanishing
    and has no formal-monodromy \(\Phi _6\) operator.
+6. **A Bittner/Grothendieck motivic measure** built from the numerical
+   \(\nu _6\) blowup and projective-bundle identities can at most recover the
+   graded Tate polynomial.  On the endpoint it sees three copies indexed by
+   \(1+\mathsf T+\mathsf T^2\), but the same motivic value admits
+   \(J_1^3\), \(J_2\oplus J_1\), or \(J_3\).  The blowup relation supplies
+   no nilpotent arrow or point-kernel action, so this construction repeats the
+   formal associated-grade ambiguity rather than solving it.
 
 There is also a clean spectrum no-go for ordinary categorical Serre data.  On
 a smooth \(Y\), the full Serre action on rational numerical \(K\)-theory is
@@ -215,7 +222,8 @@ to a support-local coefficient system rather than merely an eigenspace.
   these together with the \(\Phi _6\) coefficient extraction.
 - **TT:** neither a generic-point birational motive nor a finite-dimensional
   QDM projector is enough.  The endpoint uses three coniveau levels and the
-  proof uses localization between them.
+  proof uses localization between them.  A scalar motivic measure sees only
+  their polynomial, not the extensions joining them.
 - **Settled:** the exact axioms, endpoint normalization, and failure mode of
   each obvious candidate.
 - **Open:** construct the quantum coefficient system (3), most plausibly via
