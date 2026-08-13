@@ -182,7 +182,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   at a double-line node after inverting six, giving an exact conditional
   square-zero target.  The analogous finite-discriminant shortcut fails for
   del Pezzo fibrations: a nodal cubic-surface fibre retains a stationary
-  primitive `D_5` summand in both stalk and costalk.  The strict Rees product
+  primitive `A_5` summand in both stalk and costalk.  The strict Rees product
   must have zero stationary-primitive projection; finite support or block
   count cannot prove it.  See
   `../2026-08-12-c907-conic-primitive-sheaf-node-vanishing.md` and
@@ -203,7 +203,7 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   Krull--Schmidt telescope is `ell<=2`, not `ell<=1`.  More weakly, it suffices
   that no Tate shift of the endpoint `J_3` occur in any threefold-center
   packet.  Hence the landed square-zero/length-two countermodel is harmless;
-  the first real threats are the nodal Clifford and stationary `D_5` second
+  the first real threats are the nodal Clifford and stationary `A_5` second
   composites.  See `../2026-08-13-c907-sharp-m2-carrier-threshold.md`.
 - The point-class shear acts trivially on the associated graded of the
   coarsened `N`-adic Rees object, but it does not preserve ordinary directed
@@ -246,7 +246,7 @@ thimbles with the directed `P^3` Seifert system.  Prove the integral residual
 Orlov/Rees biproduct; decide whether its birational telescope can live in the
 coarsened `N`-adic Rees category or must fix the full directed flag.  In
 parallel, test the exact weakened carrier target on the two surviving second
-composites: the nodal Clifford socle and the stationary `D_5` projection in a
+composites: the nodal Clifford socle and the stationary `A_5` projection in a
 cubic-surface Lefschetz fibration.  The prime-Fano scan is closed and should
 not be repeated.  The ranked portfolio leaves and exact non-combinations are in
 `../2026-08-12-c907-portfolio-combination-leaves.md`.

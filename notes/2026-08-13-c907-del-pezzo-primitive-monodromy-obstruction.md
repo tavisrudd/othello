@@ -81,7 +81,9 @@ monodromy decomposition
  \qquad T|_M=1,\quad T|_{A\delta}=-1.\tag{6}
 \]
 
-Here \(M\) has rank five; its root system is \(D_5\).  Topologically the
+Here \(M\) has rank five; its root system is \(A_5\).  Indeed
+`det(E_6)=3`, `delta^2=2`, and `div(delta)=1`, so the perpendicular has
+determinant six, as does `A_5` (not `D_5`).  Topologically the
 nodal surface is obtained by collapsing the vanishing two-sphere.  Hence
 specialization identifies its \(H^2\) with the invariant lattice, and after
 removing \(h\) one gets
@@ -138,7 +140,7 @@ then only implies
 
 It says nothing about \(I_p^2\).  In the actual local model above, a product
 at \(p\) can land in \(M\), which is nonzero in both senses in (9).  This is
-not merely an abstract vector-space loophole: \(D_5\subset M\) contains a
+not merely an abstract vector-space loophole: \(A_5=M\) contains a
 root \(r\), and on the nodal cubic surface its intersection product is
 
 \[
@@ -192,7 +194,7 @@ root-targeting clause for C907.
 
 Equivalently, for the nodal cubic model it would suffice to prove directly
 that the strict Rees multiplication has zero projection to the stationary
-\(D_5\) summand \(M\).  That is the smallest missing datum.
+\(A_5\) summand \(M\).  That is the smallest missing datum.
 
 ## 5. A second integral obstruction: ADE torsion
 
@@ -242,7 +244,7 @@ semiorthogonal block count supplies (16).
 
 - **EJ:** the nodal cubic model reduces the entire del Pezzo branch to one
   testable local map: the projection of the strict Stokes/Gamma product to
-  the stationary \(D_5\) lattice.  A proof that this map is zero would leave
+  the stationary \(A_5\) lattice.  A proof that this map is zero would leave
   only the clean-root argument.
 - **TT:** the useful dichotomy is not smooth versus singular fibre but
   stationary versus \(A\)-clean monodromy.  This also exposes the otherwise

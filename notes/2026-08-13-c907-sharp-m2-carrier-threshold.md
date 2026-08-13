@@ -92,7 +92,7 @@ changes the universal gate from
  \text{all twofold composites vanish (or no length-three block occurs).}
  \tag{5}
 
-The conic-node and stationary-`D_5` audits already isolate exactly those
+The conic-node and stationary-`A_5` audits already isolate exactly those
 twofold composites.
 
 ## EJ/TT and mystery ledger

@@ -1,4 +1,4 @@
-# C907 Picard--Lefschetz parity does not kill the stationary \(D_5\) Rees square
+# C907 Picard--Lefschetz parity does not kill the stationary \(A_5\) Rees square
 
 **Lane:** clebsch
 
@@ -7,13 +7,13 @@ fibre, Picard--Lefschetz equivariance has the opposite parity from the hoped
 root-targeting shortcut: the square of a sign/vanishing-root arrow is
 stationary.  Formal \(1/6\)-monodromy, a self-dual integral
 \(\mathbf Z[1/6]\)-lattice, a skew Rees arrow, and Rees weight can coexist
-with a nonzero stationary \(D_5\) square.  Therefore none of those visible
+with a nonzero stationary \(A_5\) square.  Therefore none of those visible
 data proves that the strict cubic Rees product has zero stationary projection.
 
 This is not a quantum/Stokes counterexample.  It isolates the exact missing
 analytic input: a strict, sectorially normalized selection rule which forces
 the product through the \(A\)-clean sign/root object, or directly proves that
-its \(D_5\) projection is zero.
+its \(A_5\) projection is zero.
 
 ## 1. The parity calculation
 
@@ -22,7 +22,7 @@ fibration, the primitive lattice has the Picard--Lefschetz decomposition
 
 \[
  \Lambda=E_6(-1)\otimes A=M\oplus A\delta ,
- \qquad M=\delta^\perp\cap\Lambda\cong D_5(-1)\otimes A,
+ \qquad M=\delta^\perp\cap\Lambda\cong A_5(-1)\otimes A,
  \tag{1}
 \]
 
@@ -31,6 +31,11 @@ where \(\delta^2=-2\), and the local monodromy \(\tau\) is
 \[
  \tau|_M=1,\qquad \tau(\delta)=-\delta . \tag{2}
 \]
+
+The perpendicular type is `A_5`: `det(E_6)=3`, the root has square two and
+divisibility one, so the rank-five perpendicular has determinant six.  This
+corrects the earlier `D_5` label; the sign/stationary parity argument below is
+unchanged.
 
 Here (1) is integral over \(A\): projection along \(\delta\) only divides by
 \(2\).
@@ -64,11 +69,11 @@ stationary target in \(M\).
 
 If instead an arrow is strictly \(\tau\)-invariant, it already has a
 stationary component before multiplication.  Hence neither possible local
-character supplies the desired \(D_5\)-vanishing.
+character supplies the desired \(A_5\)-vanishing.
 
 ## 2. A filtered Frobenius algebra with a stationary square
 
-Choose any nonzero \(m\in M\), for instance a \(D_5\) root, and define the
+Choose any nonzero \(m\in M\), for instance an \(A_5\) root, and define the
 graded \(A\)-algebra
 
 \[
@@ -118,7 +123,7 @@ The involution
 
 is an algebra isometry.  It is exactly the local sign/stationary
 decomposition of (1): the arrow is sign, whereas its nonzero square is
-labelled by the selected stationary \(D_5\) vector \(m\).
+labelled by the selected stationary \(A_5\) vector \(m\).
 
 ## 3. Adding the formal \(1/6\) monodromy and self-duality
 
@@ -178,7 +183,7 @@ Thus the model simultaneously has:
 - formal monodromy with the cubic \(\pm1/6\) eigenvalues;
 - a formal-monodromy-equivariant, pairing-skew Rees operator;
 - a sign-equivariant Picard--Lefschetz arrow; and
-- a nonzero stationary \(D_5\) square.
+- a nonzero stationary \(A_5\) square.
 
 The factor \(-3\) is a unit in \(A\), so localization at \(1/6\) does not
 weaken the obstruction.
@@ -228,7 +233,7 @@ statements.
    stationary summand of the full primitive direct image.
 
 The ordinary primitive sheaf proves none of these: at a nodal cubic fibre it
-contains the nonzero stationary \(D_5\) stalk and costalk described in
+contains the nonzero stationary \(A_5\) stalk and costalk described in
 the prior del Pezzo primitive-monodromy obstruction note.
 
 ## EJ/TT and mystery ledger
@@ -240,6 +245,6 @@ the prior del Pezzo primitive-monodromy obstruction note.
   parity sends its square into the stationary sector, which is precisely the
   sector the direct-image sheaf leaves alive.
 - **Settled:** monodromy equivariance, weight, formal cubic monodromy, and a
-  Gamma-like self-dual lattice leave a nonzero \(D_5\) square possible.
+  Gamma-like self-dual lattice leave a nonzero \(A_5\) square possible.
 - **Open:** construct the strict local Stokes/Gamma multiplication for the
   cubic Lefschetz pencil and compute its stationary projection.
