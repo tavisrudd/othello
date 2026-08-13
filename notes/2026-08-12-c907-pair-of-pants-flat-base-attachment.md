@@ -135,19 +135,17 @@ complete chart source.
 The support complex no longer needs a cellwise S-polynomial calculation to
 prove base flatness or to attach its graph initial *once a genuine chart has
 been supplied*.  Every new ray inside a support cell has the same mask; every
-face is already one of the replayed cells.  The surviving finite geometric
+face is already one of the replayed cells.  The regular Kummer support atlas
+now gives the refinement and base/face maps.  The surviving graph-theoretic
 records are exactly:
 
-1. choose a regular integral pair-of-pants/log refinement of the rational
-   support complex, including the residual Rees modification;
-2. for every affine chart and exceptional residue stratum, give its map to
-   one product of (2), including the face maps;
-3. pull back the multihomogeneous Cartier section, record only the
+1. pull back the multihomogeneous Cartier section, record only the
    exceptional components outside the original dense graph, and give their
    exact orders;
-4. prove its saturated strict generator is a unit times the chart lift of
+2. prove its saturated strict generator is a unit times the chart lift of
    (3), rather than merely sharing its maximum mask; and
-5. check nonmonomial overlap identities and the added exceptional charts.
+3. check nonmonomial overlap identities for those strict generators and the
+   added exceptional charts.
 
 Items 2--4 are where a coefficient can still change or a translated divisor
 can be saturated incorrectly.  The certificate proves neither them nor
