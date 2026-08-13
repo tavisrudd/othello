@@ -1,0 +1,124 @@
+// C907 translated seam B=1, C=0 initial-form certificate.
+// Replay:
+//   nix shell nixpkgs#singular -c Singular -q \
+//     notes/2026-08-12-c907-b1-c0-seam-star-fan.sing
+//
+// Leading support bits are x1,x2,x3,P=1/(x1*x2*x3*c),R=b.
+// All x_i,b,c are torus units.  Q=1 is a harmless coefficient unit.
+// The graph is saturated before its reduced-stratum tangent-logarithmic
+// critical ideal is tested.  The marked B=C=1 residual core is disjoint
+// from this toric orbit and is not saturated away.
+
+LIB "elim.lib";
+
+ring r = 0,(x1,x2,x3,b,c),dp;
+poly D = x1*x2*x3*b*c;
+ideal dIdeal = D;
+
+int mask;
+int emptyCount = 0;
+int freeCount = 0;
+int holdCount = 0;
+poly H;
+string label;
+ideal graph;
+ideal graphTorus;
+ideal crit;
+ideal critTorus;
+for (mask=1; mask<32; mask=mask+1)
+{
+  H = 0;
+  label = "";
+  if (mask%2 != 0) { H = H + D*x1; label = label + "x1,"; }
+  if ((mask div 2)%2 != 0) { H = H + D*x2; label = label + "x2,"; }
+  if ((mask div 4)%2 != 0) { H = H + D*x3; label = label + "x3,"; }
+  if ((mask div 8)%2 != 0) { H = H + b; label = label + "P,"; }
+  if ((mask div 16)%2 != 0) { H = H + D*b; label = label + "R,"; }
+
+  graph = H;
+  graphTorus = sat(graph,dIdeal);
+  if (reduce(1,std(graphTorus)) == 0)
+  {
+    emptyCount = emptyCount + 1;
+    print("mask=" + string(mask) + " support=" + label + " EMPTY");
+  }
+  else
+  {
+    crit = H,
+      x1*diff(H,x1),x2*diff(H,x2),x3*diff(H,x3),
+      b*diff(H,b),c*diff(H,c);
+    critTorus = sat(crit,dIdeal);
+    if (reduce(1,std(critTorus)) == 0)
+    {
+      freeCount = freeCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " FREE");
+    }
+    else
+    {
+      holdCount = holdCount + 1;
+      print("mask=" + string(mask) + " support=" + label + " HOLD");
+    }
+  }
+}
+
+if (emptyCount==5 && freeCount==26 && holdCount==0)
+{
+  print("SUMMARY masks=31 empty=5 free=26 hold=0 PASS");
+}
+else
+{
+  print("SUMMARY masks=31 empty=" + string(emptyCount) +
+    " free=" + string(freeCount) + " hold=" + string(holdCount) + " FAIL");
+}
+
+// Compact-y semistable attachment: C=e, B=1-f*t, e*f=d^2.
+// It is the marked 1/0 counterpart of the prior 0/1 incidence endpoint.
+ring s = 0,(d,e,f,t,L,S,A),dp;
+ideal node = e*f-d^2;
+poly g10 = e*(1-f*t)*(L-S)-A-t*(1-e)*(1-f*t);
+ideal i10 = node,g10;
+ideal dIdeal10 = d;
+ideal eIdeal10 = e;
+ideal BIdeal10 = 1-f*t;
+ideal s10 = sat(i10,dIdeal10);
+s10 = sat(s10,eIdeal10);
+s10 = sat(s10,BIdeal10);
+ideal check10 = reduce(std(s10),std(i10));
+ideal check10r = reduce(std(i10),std(s10));
+if (check10[1]==0 && check10[2]==0 && check10r[1]==0 && check10r[2]==0)
+{
+  print("SAT10=PASS");
+}
+else
+{
+  print("SAT10=FAIL");
+}
+
+// On f=0, e is a unit and L=S-t+(A+t)/e.  The tangent-Fitting ideal
+// is exactly the marked residual Morse scheme.
+ring tRing = 0,(e,t,y1,y2,y3,A,L,S,Q),dp;
+poly Y = y1*y2*y3;
+poly graph = e*(L-S)-A-t*(1-e);
+poly de = -A-t;
+poly dt = -(1-e);
+ideal crit = graph,de,dt,e*y1-A,e*y2-A,e*y3-A,
+  A*y1*y2*y3-Q,S-y1-y2-y3;
+ideal residual = e-1,t+A,y1-A,y2-A,y3-A,L-S-A,A^4-Q,
+  S-y1-y2-y3;
+ideal eIdeal = e;
+ideal critSat = sat(crit,eIdeal);
+ideal c1 = reduce(std(critSat),std(residual));
+ideal c2 = reduce(std(residual),std(critSat));
+if (c1[1]==0 && c1[2]==0 && c1[3]==0 && c1[4]==0 && c1[5]==0
+    && c1[6]==0 && c1[7]==0 && c1[8]==0 && c2[1]==0 && c2[2]==0
+    && c2[3]==0 && c2[4]==0 && c2[5]==0 && c2[6]==0 && c2[7]==0
+    && c2[8]==0)
+{
+  print("RESIDUAL10=PASS");
+}
+else
+{
+  print("RESIDUAL10=FAIL");
+}
+
+quit;

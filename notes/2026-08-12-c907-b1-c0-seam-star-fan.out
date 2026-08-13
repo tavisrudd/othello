@@ -1,0 +1,34 @@
+mask=1 support=x1, EMPTY
+mask=2 support=x2, EMPTY
+mask=3 support=x1,x2, FREE
+mask=4 support=x3, EMPTY
+mask=5 support=x1,x3, FREE
+mask=6 support=x2,x3, FREE
+mask=7 support=x1,x2,x3, FREE
+mask=8 support=P, EMPTY
+mask=9 support=x1,P, FREE
+mask=10 support=x2,P, FREE
+mask=11 support=x1,x2,P, FREE
+mask=12 support=x3,P, FREE
+mask=13 support=x1,x3,P, FREE
+mask=14 support=x2,x3,P, FREE
+mask=15 support=x1,x2,x3,P, FREE
+mask=16 support=R, EMPTY
+mask=17 support=x1,R, FREE
+mask=18 support=x2,R, FREE
+mask=19 support=x1,x2,R, FREE
+mask=20 support=x3,R, FREE
+mask=21 support=x1,x3,R, FREE
+mask=22 support=x2,x3,R, FREE
+mask=23 support=x1,x2,x3,R, FREE
+mask=24 support=P,R, FREE
+mask=25 support=x1,P,R, FREE
+mask=26 support=x2,P,R, FREE
+mask=27 support=x1,x2,P,R, FREE
+mask=28 support=x3,P,R, FREE
+mask=29 support=x1,x3,P,R, FREE
+mask=30 support=x2,x3,P,R, FREE
+mask=31 support=x1,x2,x3,P,R, FREE
+SUMMARY masks=31 empty=5 free=26 hold=0 PASS
+SAT10=PASS
+RESIDUAL10=PASS
