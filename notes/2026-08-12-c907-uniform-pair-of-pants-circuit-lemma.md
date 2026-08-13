@@ -33,7 +33,12 @@ only after the following data have already been proved chartwise:
 Thus this is not a support-mask assertion.  Its premises retain all residue
 coefficients, pair-of-pants relations, and the true saturation set.
 
-## Unit-circuit lemma
+## Earlier independent-pivot lemma
+
+The following chartwise lemma remains valid under its stated independent-
+pivot hypothesis, but it is **not** the global argument: that hypothesis is
+not automatic on a generic pair-of-pants residue locus.  The exact global
+argument is the pair-of-pants circuit lemma below.
 
 Let `k` have characteristic zero.  On a residue torus suppose the
 positive-order strict initial graph is, up to multiplication by a unit,
@@ -101,6 +106,82 @@ positive order.  This is a useful feasibility compression, independent of
 the smoothness proof above.  Every other positive-order support is discharged
 by the unit-circuit lemma or by the reciprocal--linear alternative.
 
+## Exact pair-of-pants circuit lemma
+
+Eliminate each initial pair-of-pants relation by the residue
+parametrizations
+
+\[
+\begin{array}{c|cccc}
+\alpha&g&0&1&\infty\\ \hline
+B&b&b&1&b\\
+U&1-b&1&b&-b .
+\end{array}
+\]
+
+Use the same table for `(C,V)` with coordinate `c`, and localize at all
+displayed residue factors.  Every realized graph initial is a subsum of
+
+\[
+ L,\quad x_1,x_2,x_3,\quad
+ P=\frac{Q}{x_1x_2x_3BC},\quad R=UV .
+\]
+
+Every such realized hypersurface is geometrically smooth or empty.
+
+**Proof.**  If `L` occurs, its derivative is a unit.  Suppose it does not.
+If `P` is absent, any occurring `x_i` has unit ordinary derivative; a support
+consisting only of `R` is a unit and hence empty.  If `P` occurs but some
+`x_j` is absent, the logarithmic derivative in `x_j` is `-P`, a unit.  If
+all three `x_i` and `P` occur but `R` does not, their logarithmic tangent
+equations identify each linear term with `P`, and the graph equation becomes
+`4P=0`.
+
+Only the five-term support `x_1,x_2,x_3,P,R` remains.  Multiplication of the
+whole graph equation by the cleared denominator does not alter its critical
+locus on the graph.  In the Laurent normalization (3), a hypothetical
+critical point therefore satisfies
+
+\[
+x_1=x_2=x_3=P,\qquad R=-4P.
+\]
+
+For one pair-of-pants factor put
+
+\[
+a_\alpha=D_b\log B,\qquad u_\alpha=D_b\log U.
+\]
+
+Its residue tangent equation becomes
+
+\[
+-a_\alpha P+u_\alpha R
+=-(a_\alpha+4u_\alpha)P=0.
+\]
+
+For the three boundary types, `a_alpha+4u_alpha` equals respectively
+
+\[
+1,\qquad4,\qquad5
+\quad\text{for }\alpha=0,1,\infty .
+\]
+
+Thus the five-term support is nonsingular whenever either factor is a
+boundary type.  If both factors are `g`, the support mask `12345` is not
+feasible in the six-weight refinement: the exact 81,367-cell replay contains
+no such generic/generic mask.  Equivalently, equality of the three `x_i`
+weights and the `P` weight gives `3m=-m`, hence `m=0`, when the weight-zero
+`L` term is also maximal.  The remaining support therefore contains `L` and
+was handled first.  \(\square\)
+
+This proof uses the actual pair-of-pants residue equations.  It requires no
+claim that `R` admits a logarithmic derivative independent of `P`; such a
+claim can fail on the generic residue locus.  The exact nonvanishing replay
+in `2026-08-12-c907-pair-of-pants-initial-nonvanishing.py` checks all 552
+realized ordered-type/mask pairs and the sole feasibility lookup used above.
+The earlier distinct-pivot and reciprocal--linear lemmas remain independent
+chart regressions.
+
 At order zero the strict initial graph is instead monic in `L`:
 
 \[
@@ -117,9 +198,9 @@ stratum; that requires the separate tangent-Fitting calculation.
 Let `g=P^1 minus {0,infinity}`; it includes the auxiliary marked value `1`.
 The following table is the finite attachment target for the full-initial
 replay.  Each entry is further indexed by every regular support cone, its
-faces, and its residue strata.  “Circuit” means (2)--(3) or the already
-proved reciprocal--linear alternative, after the three hypotheses above have
-identified the *full* initial complete intersection.
+faces, and its residue strata.  “Circuit” means the exact pair-of-pants
+lemma above, after the three hypotheses have identified the *full* initial
+complete intersection.
 
 | `B` / `C` | `0` | `g` (including `1`) | `infinity` |
 | --- | --- | --- | --- |
@@ -158,17 +239,17 @@ load-bearing: interior residual coordinates and the marked divisors `B=1`,
 
 ## Exact remaining replay
 
-The minimal finite proof object is one attachment record
+The flat-base lemma and 552-case nonvanishing replay remove the need to store
+a full ideal and a separate smoothness elimination for every cell.  The
+minimal remaining attachment record is
 
 \[
-(\sigma,\tau;I_{\sigma,\tau}^{\rm full},
- \text{saturation},\text{exceptional multiplicity},
- \text{normal form},\text{face maps})
+(\sigma,\tau;\text{chart map},
+ \text{true saturation},\text{exceptional multiplicity},
+ \text{strict-generator identification},\text{face maps})
 \]
 
-per cone, face, and residue stratum.  The circuit lemma can identify records
-only after a coefficient-uniform chart isomorphism proves they have the same
-full initial complete intersection.  The separate coarse-control record must
+per cone, face, and residue stratum.  The separate coarse-control record must
 then recompute
 
 \[
@@ -179,9 +260,9 @@ on each globally defined control stratum `T`.
 
 ## Mystery ledger
 
-- **Settled:** positive-order smoothness has a five-term circuit proof once
-  the full pair-of-pants initial has been identified; the four-term support
-  is infeasible at positive order.
+- **Settled:** every realized abstract pair-of-pants initial is nonzero and
+  smooth/empty by one exact five-term circuit proof; the only generic/generic
+  five-term risk is infeasible without the unit `L` derivative.
 - **Open:** the finite full-initial attachment replay, including residue
   coefficients and face maps.
 - **Open:** every coarse-control Fitting calculation and the proper collar
