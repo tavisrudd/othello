@@ -60,12 +60,13 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_graphCoordinate_block_identity",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_crossDepth_intersection_and_midpoint",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_crossDepth_eq_of_effectiveSlopeDifference_eq"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_crossDepth_eq_of_effectiveSlopeDifference_eq",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.graphCoefficient_crossDepth_eq_of_dvr_scalar_lifts"
       ],
       "objects": "Lean represents the two-by-two graph-coordinate block matrices over an arbitrary possibly noncommutative ring, and the arithmetic cross-depth obtained by intersecting three uniformizer-power divisibility conditions with an extended slope-difference valuation.",
       "hypotheses": "The block identity is purely ring-theoretic. The depth theorem assumes only a commutative coefficient ring and takes the two diagonal depths and extended slope-difference valuation as inputs.",
       "conclusion": "The displayed graph-coordinate product has exactly the manuscript's three nonzero blocks; the maximum cross depth is exactly equivalent to simultaneous satisfaction of the three power-divisibility conditions and obeys the midpoint inequality.",
-      "cautions": "The marked finite-etale graph presentation, splitting into slope blocks, dual-form adjointness, derivation of the three integrality conditions from geometric descent, and the unit-block calculation are not yet formalized. Lean proves that equal slope valuations after truncation at the smaller depth give equal cross depths, but does not yet prove that changing actual scalar lifts preserves that truncated valuation. Thus Lean checks the block algebra and depth arithmetic, not the full geometric coefficient-lattice lemma."
+      "cautions": "The marked finite-etale graph presentation, splitting into slope blocks, dual-form adjointness, derivation of the three integrality conditions from geometric descent, and the unit-block calculation are not yet formalized. Scalar-lift invariance is proved for actual DVR lifts differing by the prescribed diagonal-depth ideals. Thus Lean checks the block algebra and depth arithmetic, not the full geometric coefficient-lattice lemma."
     },
     {
       "manuscript_label": "lem:dvr-rank-one",

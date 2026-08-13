@@ -221,6 +221,24 @@ theorem graphCoefficient_crossDepth_eq_of_effectiveSlopeDifference_eq
   GraphLattices.graphCrossDepth_eq_of_effectiveSlopeDifference_eq
     firstDepth secondDepth effectiveEqual
 
+/-- DVR scalar-lift invariance in the form used by the manuscript: changing
+each lift by its prescribed diagonal-depth ideal leaves the graph cross depth
+unchanged. -/
+theorem graphCoefficient_crossDepth_eq_of_dvr_scalar_lifts
+    {R : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    {π : R} (πIrreducible : Irreducible π)
+    (firstDepth secondDepth : ℕ)
+    (firstSlope secondSlope firstLift secondLift : R)
+    (firstCongruent : π ^ firstDepth ∣ firstLift - firstSlope)
+    (secondCongruent : π ^ secondDepth ∣ secondLift - secondSlope) :
+    GraphLattices.graphCrossDepth firstDepth secondDepth
+        (IsDiscreteValuationRing.addVal R (secondSlope - firstSlope)) =
+      GraphLattices.graphCrossDepth firstDepth secondDepth
+        (IsDiscreteValuationRing.addVal R (secondLift - firstLift)) :=
+  GraphLattices.graphCrossDepth_eq_of_dvr_scalar_lifts
+    πIrreducible firstDepth secondDepth
+    firstSlope secondSlope firstLift secondLift firstCongruent secondCongruent
+
 /-- Public division-free form of the square-zero divided-power expansion.  It
 models a labelled list of square-zero ring elements and does not assert that
 any particular geometric divisor classes satisfy these hypotheses. -/
