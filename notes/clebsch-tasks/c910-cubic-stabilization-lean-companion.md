@@ -156,9 +156,10 @@ homomorphism and commutes with every finite truncation.  The formal objects
 carry no topology or explicit inverse-limit presentation; Gromov--Witten
 descent and base change of comparison maps remain outside the result.  For
 finite coefficient packets, numerical invariance now gives exact descent and a
-fiber-cardinality formula.  Additive scalar weights satisfy the Leibniz rule
-for completed convolution, and numerical pushforward commutes with the
-operator when the weight factors through the quotient.  The geometric
+  fiber-cardinality formula.  Additive scalar weights give additive operators
+  satisfying the Leibniz rule for completed convolution, and numerical
+  pushforward commutes with the operator when the weight factors through the
+  quotient.  The geometric
 Gromov--Witten coefficients, curve-pairing weights, and quantum connection are
 not constructed.
 
@@ -275,8 +276,9 @@ are current, and the committed paper export verifies byte-for-byte in
   than retained as explicit premises.
 - **Numerical completion:** the completed convolution ring, finite truncation
   compatibility, numerical pushforward ring homomorphism, finite invariant
-  packet descent, additive-weight Leibniz identity, and quotient-compatible
-  weighted-operator commutation are settled for the finite-below support model.
+  packet descent, additive-operator packaging, additive-weight Leibniz identity,
+  and quotient-compatible weighted-operator commutation are settled for the
+  finite-below support model.
   Topology and the explicit inverse limit are not represented; the substantive
   missing bridges are geometric Gromov--Witten invariance, construction of the
   additive pairing weights and quantum connection, and the comparison maps.

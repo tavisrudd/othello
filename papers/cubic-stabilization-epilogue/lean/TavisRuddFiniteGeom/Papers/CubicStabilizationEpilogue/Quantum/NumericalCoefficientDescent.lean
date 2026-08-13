@@ -14,9 +14,10 @@ cardinality.  A weighted finite packet also descends when both its coefficient
 and its weight depend only on the numerical class.
 
 Second, a logarithmic Novikov operator multiplies each coefficient by an
-additive scalar weight.  Lean proves its Leibniz rule for completed convolution.
-When the weight factors through the numerical quotient, completed numerical
-pushforward commutes with the operator.
+additive scalar weight.  Lean packages it as an additive homomorphism and
+proves its Leibniz rule for completed convolution.  When the weight factors
+through the numerical quotient, completed numerical pushforward commutes with
+the operator.
 
 These results isolate the finite-sum and derivation algebra in the manuscript.
 They do not construct Gromov--Witten invariants, prove their deformation or
@@ -142,6 +143,33 @@ theorem logarithmicOperator_coefficient
     (homological : Homology) :
     (logarithmicOperator grading weight series).coefficient homological =
       weight homological * series.coefficient homological :=
+  rfl
+
+/-- For a fixed additive weight, the coefficientwise logarithmic operator is
+an additive homomorphism on the completed coefficient ring. -/
+noncomputable def logarithmicOperatorAddHom
+    (grading : FiniteDegreeAddCommMonoid Homology) [CommRing Coefficient]
+    (weight : Homology →+ Coefficient) :
+    FiniteDegreeAddCommMonoid.CompletedNovikovRing grading Coefficient →+
+      FiniteDegreeAddCommMonoid.CompletedNovikovRing grading Coefficient where
+  toFun := logarithmicOperator grading weight
+  map_zero' := by
+    apply CompletedNovikovSeries.ext
+    funext homological
+    simp [logarithmicOperator_coefficient]
+  map_add' left right := by
+    apply CompletedNovikovSeries.ext
+    funext homological
+    simp [logarithmicOperator_coefficient, mul_add]
+
+/-- Evaluation of the additive logarithmic operator is multiplication of the
+coefficient by the supplied additive weight. -/
+theorem logarithmicOperatorAddHom_apply
+    (grading : FiniteDegreeAddCommMonoid Homology) [CommRing Coefficient]
+    (weight : Homology →+ Coefficient)
+    (series : FiniteDegreeAddCommMonoid.CompletedNovikovRing grading Coefficient) :
+    logarithmicOperatorAddHom grading weight series =
+      logarithmicOperator grading weight series :=
   rfl
 
 /-- The coefficientwise operator associated to an additive logarithmic weight

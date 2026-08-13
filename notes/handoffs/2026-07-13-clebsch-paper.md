@@ -241,7 +241,7 @@ explicit inverse-limit object is represented, and Gromov--Witten descent,
 quantum derivations, and comparison-map base change remain open.  The next
 coefficient layer is now formalized as well: numerically invariant finite
 packets descend with an exact fiber-cardinality formula; additive scalar weights
-satisfy the completed-convolution Leibniz rule; and numerical pushforward
+give additive operators satisfying the completed-convolution Leibniz rule; and numerical pushforward
 commutes when the weight factors through the quotient.  The corresponding
 geometric Gromov--Witten invariance, curve-pairing weights, and quantum
 connection remain open.

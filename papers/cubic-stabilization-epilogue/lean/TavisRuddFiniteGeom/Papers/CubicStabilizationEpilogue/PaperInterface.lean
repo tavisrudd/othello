@@ -1919,7 +1919,9 @@ theorem numericalNovikov_logarithmicOperator_commutes_with_pushforward
   data.completedPushforward_logarithmicOperator numericalWeight series
 
 /-- The coefficientwise logarithmic operator associated to an additive scalar
-weight satisfies the Leibniz rule for completed Novikov convolution. -/
+weight is additive and satisfies the Leibniz rule for completed Novikov
+convolution.  The result does not package scalar linearity over a separately
+modeled coefficient subring. -/
 theorem numericalNovikov_logarithmicOperator_leibniz
     {Curve Coefficient : Type*}
     [AddCommMonoid Curve] [CommRing Coefficient]
@@ -1927,16 +1929,21 @@ theorem numericalNovikov_logarithmicOperator_leibniz
     (weight : Curve →+ Coefficient)
     (left right : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
       grading Coefficient) :
+    Quantum.CompletedNumericalQuotient.logarithmicOperatorAddHom grading weight
+        (left + right) =
+      Quantum.CompletedNumericalQuotient.logarithmicOperatorAddHom grading weight left +
+        Quantum.CompletedNumericalQuotient.logarithmicOperatorAddHom grading weight right ∧
     Quantum.CompletedNumericalQuotient.logarithmicOperator grading weight
-        (grading.convolution left right) =
-      grading.convolution
-          (Quantum.CompletedNumericalQuotient.logarithmicOperator
-            grading weight left) right +
-        grading.convolution left
-          (Quantum.CompletedNumericalQuotient.logarithmicOperator
-            grading weight right) :=
-  Quantum.CompletedNumericalQuotient.logarithmicOperator_convolution
-    grading weight left right
+          (grading.convolution left right) =
+        grading.convolution
+            (Quantum.CompletedNumericalQuotient.logarithmicOperator
+              grading weight left) right +
+          grading.convolution left
+            (Quantum.CompletedNumericalQuotient.logarithmicOperator
+              grading weight right) :=
+  ⟨map_add _ _ _,
+    Quantum.CompletedNumericalQuotient.logarithmicOperator_convolution
+      grading weight left right⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the

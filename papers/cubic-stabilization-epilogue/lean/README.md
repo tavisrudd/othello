@@ -133,10 +133,12 @@ The 106 reviewer-facing terminals currently verify:
   with each exact fiber sum equal to the descended coefficient times the fiber
   cardinality; this does not prove numerical invariance of Gromov--Witten
   coefficients or identify the abstract packet with them;
-- the Leibniz rule for coefficientwise logarithmic Novikov operators defined by
-  additive scalar weights, and compatibility of completed numerical pushforward
-  with these operators whenever their weights factor through the quotient; the
-  geometric curve-pairing weights and quantum connection are not constructed;
+- additive-homomorphism packaging and the Leibniz rule for coefficientwise
+  logarithmic Novikov operators defined by additive scalar weights, and
+  compatibility of completed numerical pushforward with these operators
+  whenever their weights factor through the quotient; scalar-linearity over a
+  separately modeled coefficient subring, the geometric curve-pairing weights,
+  and the quantum connection are not constructed;
 - the algebraic core of strict Novikov admissibility and individual-class divisor-tag
   separation; for every finite injective family of divisor-pairing vectors
   over an infinite characteristic-zero field, a kernel-checked choice of one
