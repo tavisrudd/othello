@@ -88,8 +88,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   finite bulk support.  Monomials in supplied level-one parameters are proved
   to lie in the corresponding total-degree filtration level and map to zero
   in every quotient by a filtration level not exceeding their total degree.
-  Lean does not identify those parameters or their evaluated
-  series with the manuscript gauge, prove one bound across levels, or
+  The same coefficientwise conclusion holds after multiplying each formal
+  series coefficient by its parameter monomial; no infinite evaluation sum is
+  defined.  Lean does not identify those parameters with manuscript bulk
+  coordinates or this termwise coefficient model with the manuscript gauge,
+  prove one bound across levels, or
   construct a Laurent-valued inverse-limit gauge.
   Their identification with the manuscript's geometric tower and quantum
   connection is not formalized; neither finite bulk support from the

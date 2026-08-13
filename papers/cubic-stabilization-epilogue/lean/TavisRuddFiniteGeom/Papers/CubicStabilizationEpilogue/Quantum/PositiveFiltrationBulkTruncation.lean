@@ -84,6 +84,44 @@ theorem MultiplicativeIdealFiltration.quotient_mk_bulkMonomialValue_eq_zero
   exact filtration.antitone cutoff_le
     (filtration.bulkMonomialValue_mem_totalDegree parameter positive degree)
 
+/-- The degreewise terms obtained by multiplying each coefficient of a formal
+series by the corresponding monomial in supplied parameters and then mapping
+to one filtration quotient.  This is a coefficient model of positive-filtered
+substitution; it does not assert convergence of an infinite evaluation sum. -/
+def MultiplicativeIdealFiltration.positiveSubstitutionTermsAtLevel
+    {Coordinate R : Type*} [CommRing R]
+    (filtration : MultiplicativeIdealFiltration R)
+    (parameter : Coordinate → R) (cutoff : ℕ)
+    (series : MvPowerSeries Coordinate R) :
+    MvPowerSeries Coordinate
+      (filtration.toDecreasingIdealFiltration.QuotientRing cutoff) :=
+  fun degree ↦ Ideal.Quotient.mk (filtration.ideal cutoff)
+    (MvPowerSeries.coeff degree series * bulkMonomialValue parameter degree)
+
+/-- After coefficientwise positive-parameter substitution, every term whose
+total degree reaches the quotient cutoff is zero. -/
+theorem MultiplicativeIdealFiltration.coeff_positiveSubstitutionTermsAtLevel_eq_zero
+    {Coordinate R : Type*} [CommRing R]
+    (filtration : MultiplicativeIdealFiltration R)
+    (parameter : Coordinate → R)
+    (positive : ∀ coordinate, parameter coordinate ∈ filtration.ideal 1)
+    (cutoff : ℕ) (series : MvPowerSeries Coordinate R)
+    (degree : Coordinate →₀ ℕ)
+    (cutoff_le : cutoff ≤ multivariableTotalDegree degree) :
+    MvPowerSeries.coeff degree
+        (filtration.positiveSubstitutionTermsAtLevel parameter cutoff series) = 0 := by
+  change Ideal.Quotient.mk (filtration.ideal cutoff)
+      (MvPowerSeries.coeff degree series * bulkMonomialValue parameter degree) = 0
+  rw [Ideal.Quotient.eq_zero_iff_mem]
+  apply filtration.antitone cutoff_le
+  have coefficient_mem :
+      MvPowerSeries.coeff degree series ∈ filtration.ideal 0 := by
+    rw [filtration.ideal_zero]
+    exact Set.mem_univ _
+  simpa using filtration.mul_mem
+    coefficient_mem
+    (filtration.bulkMonomialValue_mem_totalDegree parameter positive degree)
+
 /-- The finite set of monomials obtained by allowing every coordinate exponent
 to range below `cutoff`.  It contains every monomial of total degree below the
 cutoff, although it can contain additional monomials. -/

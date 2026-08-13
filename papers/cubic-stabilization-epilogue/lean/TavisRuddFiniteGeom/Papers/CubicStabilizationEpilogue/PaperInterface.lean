@@ -2751,7 +2751,10 @@ total-degree filtration level and vanishes in the quotient at any cutoff not
 exceeding that degree.  This formalizes the positive-filtration monomial
 estimate.  It does not identify the parameters with manuscript bulk
 coordinates or prove that the constructed gauge is obtained by evaluating a
-series in these parameters. -/
+series in these parameters.  For every formal series it additionally exposes
+the coefficientwise consequence: after multiplying each coefficient by its
+parameter monomial and mapping to the cutoff quotient, this degree is zero.
+No infinite evaluation sum is defined. -/
 theorem multiplicativeFiltration_positiveBulkMonomial_vanishes_in_quotient
     {Coordinate R : Type*} [CommRing R]
     (filtration : Quantum.MultiplicativeIdealFiltration R)
@@ -2762,10 +2765,16 @@ theorem multiplicativeFiltration_positiveBulkMonomial_vanishes_in_quotient
     Quantum.bulkMonomialValue parameter degree ∈
         filtration.ideal (Quantum.multivariableTotalDegree degree) ∧
       Ideal.Quotient.mk (filtration.ideal cutoff)
-        (Quantum.bulkMonomialValue parameter degree) = 0 :=
+        (Quantum.bulkMonomialValue parameter degree) = 0 ∧
+      ∀ series : MvPowerSeries Coordinate R,
+        MvPowerSeries.coeff degree
+          (filtration.positiveSubstitutionTermsAtLevel parameter cutoff series) = 0 :=
   ⟨filtration.bulkMonomialValue_mem_totalDegree parameter positive degree,
     filtration.quotient_mk_bulkMonomialValue_eq_zero
-      parameter positive cutoff degree cutoff_le⟩
+      parameter positive cutoff degree cutoff_le,
+    fun series ↦
+      filtration.coeff_positiveSubstitutionTermsAtLevel_eq_zero
+        parameter positive cutoff series degree cutoff_le⟩
 
 /-- For commuting coordinate derivations on a commutative coefficient
 algebra, an invertible matrix solving every equation `partial_i G=-A_iG`

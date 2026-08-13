@@ -188,9 +188,11 @@ The 133 reviewer-facing terminals currently verify:
   above one total-degree cutoff is proved to supply that finite support and
   bound; separately, monomials in level-one parameters are proved to lie in
   their total-degree filtration levels and map to zero in every quotient by a
-  filtration level not exceeding their total degree; the
-  parameters and evaluated series are not identified with the manuscript
-  gauge, no bound uniform across levels is proved, and no Laurent-valued
+  filtration level not exceeding their total degree; the same holds for every
+  coefficient-times-monomial term of a formal series, without defining an
+  infinite evaluation sum; the parameters and this termwise coefficient model
+  are not identified with the manuscript bulk coordinates or gauge, no bound
+  uniform across levels is proved, and no Laurent-valued
   inverse-limit gauge is packaged;
 - the exact projective-bundle and blowup multiplicity formulas from supplied
   geometric relations and characteristic-polynomial block comparisons, with

@@ -311,9 +311,11 @@ obtain a bound uniform across levels, a packaged
 inverse-limit Laurent gauge, convergence, or analytic specialization.
 Monomials in supplied level-one parameters are proved to lie in their
 total-degree filtration levels and map to zero in every quotient by a
-filtration level not exceeding their total degree, but neither the
-parameters nor their evaluated series are identified with the manuscript
-gauge.
+filtration level not exceeding their total degree; the same holds
+coefficientwise after multiplying a formal-series coefficient by its parameter
+monomial, without defining an infinite evaluation sum.  Neither are the
+parameters identified with manuscript bulk coordinates nor is the termwise
+coefficient model identified with the manuscript gauge.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.

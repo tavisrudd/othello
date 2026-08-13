@@ -192,8 +192,10 @@ that finite support from the positive filtration.  For finitely many bulk
 coordinates, explicit vanishing at or above one total-degree cutoff now
 supplies the finite support.  Monomials in supplied level-one parameters are
 proved to map to zero in every quotient by a filtration level not exceeding
-their total degree; identifying those parameters and their
-evaluated series with the manuscript gauge remains outside the fragment.
+their total degree, including every coefficient-times-monomial term of a
+formal series; no infinite evaluation sum is defined, and identifying those
+parameters with manuscript bulk coordinates or this termwise coefficient
+model with the manuscript gauge remains outside the fragment.
 
 All geometric identifications and comparison theorems remain outside those
 fragments unless present as explicit typed premises.  The next integral gates
