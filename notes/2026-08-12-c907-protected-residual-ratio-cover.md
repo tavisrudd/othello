@@ -150,7 +150,7 @@ protected locus.  Indeed, for an arc in (5) put
 When the marked limit remains `(1,1)`, equations (6) give generically
 
 \[
- t=\alpha+k,quad \beta=k,quad
+ t=\alpha+k,\qquad \beta=k,\qquad
  \gamma=2\alpha+k+\min(\ell,k),quad
  2t-\beta-\gamma=-\min(\ell,k)\le0. \tag{11}
 \]
