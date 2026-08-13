@@ -1,0 +1,32 @@
+C908 successor: naturality checks for the (Z/2)^10 identifications
+pass-7 shared machinery re-certifies: True (93 lines, ending PASS)
+
+ITEM 1a (deck action -1 on J): trivial mod 2 on every degree used -- CONFIRMED (structural, cross-checked computationally)
+ITEM 1b (Sp(Lambda) monodromy naturality of rho): tested 4 explicit elements of Sp(Lambda,S) (transvections built from the actual, non-standard-form S; S^2 = -I: False); rho equivariant on all of them: True -- CONFIRMED
+ITEM 1c (L_3/L_5 adjointness, the mechanism for Q_15 vs Sat/L_3(^3 Lambda)): L_3^T P55 = P37 L5 exactly: True; L_5 elementary divisors match L_3's: True -- CONFIRMED (naturality of the Q_15 identification is a structural corollary of the exact adjointness, via universal coefficients)
+ITEM 2 (fourth (Z/2)^10 via C_s ^ (-)): coker(C_s^(-)) = H^3(F,Z) (x) F_2 canonically (CONFIRMED, structural); matching variants for the bridge to rho's domain: ['w_transpose_times_Sinv', 'minus_w_times_Sinv'] -- CONFIRMED
+
+checks:
+  [PASS] (computational) K0 pass-7 shared machinery re-certifies (controls end PASS)  (93 lines of pass-7 output)
+  [PASS] (computational) setup: [Sat : L_3(^3 Lambda)] = 2^10, matches pass-9/9b  (index 1024)
+  [PASS] (computational) setup: this script's Sat/class_map convention reproduces pass-10's K1 half-Lefschetz class matrix exactly (so the borrowed rho matrix is directly comparable to matrices built here)
+  [PASS] (computational+structural) ITEM 1a: the deck involution -1 in J acts as -id on ^5,^9 Lambda and hence as the identity mod 2 on every degree used here (structural: (-1)^k = -1 for odd k, and -1 = 1 mod 2)  (verified by explicit exterior-power matrix, all three identifications trivially commute with the deck action)
+  [PASS] (computational) ITEM 1b setup: whether S^2 = -I in this basis is recorded (not assumed either way)  (S^2 = -I: False)
+  [PASS] (computational) ITEM 1b: every tested element g in Sp(Lambda,S) fixes Theta exactly and L_3 . (^3 g) = (^5 g) . L_3 on the nose (structural once Theta is fixed, verified directly)
+  [PASS] (computational) ITEM 1b: Sat is (^5 g)-invariant for every tested g (consequence of L_3-equivariance plus invertibility of g, verified directly on the ten torsion representatives)
+  [PASS] (computational) ITEM 1b PAYLOAD: rho intertwines (^9 g) mod 2 with the induced action of (^5 g) on Sat/L_3(^3 Lambda), for every tested monodromy generator (transvections and a product of two)  (transvection v=[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]: True; transvection v=[0, 0, 1, 1, 0, -1, 0, 2, 0, 0]: True; transvection v=[1, -1, 0, 1, 0, 0, 1, 0, -1, 1]: True; product of two transvections: True)
+  [PASS] (structural+computational) ITEM 1c: the wedge-into-top pairings P_{3,7} and P_{5,5} are unimodular (perfect pairings ^k Lambda x ^{10-k} Lambda -> Z, available for ANY rank-10 free module, no extra structure)  (det P37=1, det P55=1)
+  [PASS] (computational) ITEM 1c PAYLOAD: L_3^T P55 = P37 L_5 exactly over Z -- L_5 is literally the adjoint of L_3 under these two canonical orientation pairings, not an independently chosen map
+  [PASS] (computational) ITEM 1c: L_5's elementary divisors match L_3's exactly (1^110 2^10), as forced by the adjointness identity (transpose relative to unimodular pairings preserves Smith invariants)  ({'1': 110, '2': 10})
+  [PASS] (computational+structural) ITEM 1c: both orientation pairings are invariant under every tested monodromy generator (det(g)=1 forces this structurally; verified directly)
+  [PASS] (structural) ITEM 2 setup: C_s ^ (-) is exactly the matrix 2S under H^1(F,Z)=Lambda (A5.b) and H^3(F,Z)=Hom(H^1(F,Z),Z) (A5.a, Poincare duality) -- this is A5.e's stated formula, not a new computation; S is the same unimodular polarization used throughout
+  [PASS] (computational) ITEM 2: coker(C_s ^ (-)) = (Z/2)^10 exactly, since S is unimodular (image(2S) = 2 . image(S) = 2 Hom(H^1(F,Z),Z) = 2 H^3(F,Z) exactly)  (elementary divisors [2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+  [PASS] (computational) ITEM 2: reproduced the certified generator formula a_*(C_s ^ e_k) = 2 Theta^[4] ^ e_k for all k=0..9 (verbatim from the compression certificate's Cs(x)a*e_k generator block)  (10 columns built)
+  [PASS] (computational) ITEM 2: 2 Theta^[4] ^ e_k is divisible by a further 2 for every k, i.e. a_*(C_s ^ e_k)/2 is an integral class of ^9 Lambda
+  [PASS] (computational) ITEM 2: recomputed the K2c top-wedge pairing w independently and confirmed it is unimodular and alternating (w^T = -w)  (det 1)
+  [PASS] (computational) ITEM 2 PAYLOAD: Theta^[4] ^ e_k, read in the ^9 Lambda basis, equals a_*(C_s ^ e_k)/2 -- test against S alone and against combinations with the K2c orientation pairing w (the same ingredient rho's own closed form needs)  (S: False; S_transpose: False; S_inverse: False; identity: False; minus_S: False; w_transpose_times_Sinv: True; minus_w_times_Sinv: True; w_times_S: False; Sinv_times_w: False; w_times_Sinv: False)
+  [PASS] (computational+structural) ITEM 2: the matched bridge a_*(C_s ^ (-)) = 2 Theta^[4] ^ (-) is Sp(Lambda,S)-equivariant on every tested monodromy generator (structural consequence of Theta, hence Theta^[4], being g-fixed; verified directly)
+  [PASS] (computational+structural) ITEM 2 CONSEQUENCE: the fourth space's cokernel identification coker(C_s^(-)) = H^3(F,Z) (x) F_2 lands on rho's domain ^9 Lambda (x) F_2 via w^T . S^{-1} (equivalently -w . S^{-1}) -- built from exactly the two canonical ingredients (the K2c orientation pairing w, and the polarization S) that rho's own closed form uses, not an independent or unexplained twist  (matching variants: ['w_transpose_times_Sinv', 'minus_w_times_Sinv'])
+
+wall seconds: 13.67
+PASS
