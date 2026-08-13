@@ -374,6 +374,17 @@ is irrational for every smooth cubic threefold `X`.  The full endpoint for all
   arbitrary centers to this case because normal-crossing centers need not be
   boundary strata or have split normal bundle.  See
   `../2026-08-13-c907-ci-blowup-point-purity.md`.
+- Arbitrary rank-two normal bundles can nevertheless be birationally reduced
+  to the split case at zero C907 carrier cost.  Resolve a rational flag by
+  blow-ups inside the threefold center; every subcenter has dimension at most
+  two.  Lifting to the ambient and swapping nested blow-up order introduces
+  only a `P^1`-bundle over that subcenter, whose primitive-sixth packet is
+  empty.  The pulled-back normal bundle has a line filtration and deforms to
+  split.  This is zero cost for formal multiplicity, not automatically for
+  the rank covector: Stokes-small center solutions can still mix.  The sole
+  residual lemma is that exceptional point purity holds on the inserted
+  arrows and survives the deformation-to-normal-cone/relative-gluing step.  See
+  `../2026-08-13-c907-birational-normal-splitting-reduction.md`.
 
 ## Active frontier: `m=2`
 
@@ -412,15 +423,14 @@ therefore imply `X x P^2` irrational.
 
 ## Next bounded pass
 
-For Silver, extend the landed Kummer point-purity theorem from split nef
-codimension-two complete intersections on arbitrary bases to an arbitrary
-smooth center.  Work
-directly on the point component of Iritani's master-space Fourier transform:
-identify whether normal-bundle Chern-root and curve corrections preserve the
-reciprocal-Gamma zero, or exhibit the first nonzero exceptional point-pairing
-coefficient.  The exact toric `Bl_(P^3)P^5` matrix is only a
-phase/Orlov-normalization rehearsal because both primitive-sixth packets are
-empty.
+For Silver, prove the point-purity degeneration lemma isolated by the
+birational normal-splitting reduction.  Track the large-radius Gamma point
+section through deformation to the normal cone and the relative degeneration
+formula, and show every gluing term has zero residual-center Stokes pairing;
+or exhibit the first nonzero term.  This now bridges an arbitrary normal
+bundle to the landed split-nef Kummer zero.  The exact toric
+`Bl_(P^3)P^5` matrix is only a phase/Orlov-normalization rehearsal because
+both primitive-sixth packets are empty.
 Do not return to a support-annihilating `Phi_6`: the Gamma point calculation
 proves that target inconsistent with ordinary Gamma pushforward.  See
 `../2026-08-13-c907-coniveau-principal-symbol-repair.md` and

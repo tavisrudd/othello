@@ -338,6 +338,19 @@ This does not close arbitrary centers: weak factorization provides smooth
 centers normally crossing a boundary, not necessarily boundary strata with
 split normal bundle.
 
+There is now an exact geometric reduction of that nonsplit gate.  Resolve a
+rational flag of the rank-two normal bundle by blowing up the threefold
+center in smooth subcenters of dimension at most two, and lift the same
+blow-ups to the ambient fivefold.  Order independence for the nested pair
+shows that the correction center on the already-blown-up side is a
+\(\mathbf P^1\)-bundle over that subcenter, hence also has empty
+primitive-sixth packet.  The modified normal bundle has a line filtration
+and deforms to split.  The only remaining bridge is preservation of the
+exceptional point-purity covector on every inserted arrow and under
+deformation-to-normal-cone gluing.  Empty formal multiplicity alone does not
+control this covector.
+See `2026-08-13-c907-birational-normal-splitting-reduction.md`.
+
 ## AA / EJ / TT and mystery ledger
 
 - **AA:** support annihilation is closed as inconsistent with Gamma tensor
@@ -358,8 +371,9 @@ split normal bundle.
   the first nonvacuous cubic-center blow-up and all split
   complete-intersection pilots.
 - **Open:** fixed-phase rank compatibility of the general blow-up comparison
-  and product naturality for arbitrary centers with nonsplit normal bundle.
-  Standard weak factorization does not force the split case.
+  and product naturality for arbitrary centers.  Birational normal splitting
+  reduces this to one fixed-phase point-purity degeneration lemma; standard
+  deformation invariance does not itself prove that lemma.
 
 ## Sources
 

@@ -141,6 +141,16 @@ curve class.  The remaining gate is arbitrary nonsplit
 normal bundles; standard weak factorization only makes centers normally
 crossing, not boundary strata.  See
 `../2026-08-13-c907-ci-blowup-point-purity.md`.
+Birational bundle splitting reduces even that gate to one degeneration
+lemma.  Blow up the threefold center until its normal bundle has a line
+filtration; nested-blowup order introduces only `P^1`-bundles over centers of
+dimension at most two, so no primitive-sixth packet is added.  The bundle
+then deforms to split.  Empty packet multiplicity does not by itself preserve
+the rank covector under Stokes mixing.  What is not yet supplied by the
+quantum splitting literature is point purity for the inserted arrows and
+preservation of the fixed-phase Gamma point-purity covector through
+deformation-to-normal-cone relative gluing.  See
+`../2026-08-13-c907-birational-normal-splitting-reduction.md`.
 
 ## Rejection tests
 
