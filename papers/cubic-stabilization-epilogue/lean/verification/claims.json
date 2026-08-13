@@ -29,11 +29,12 @@
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_unit_and_augmentation_eigenvalues",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_integralSmithReduction"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisGram_integralSmithReduction",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisPolarization_parameters_unique"
       ],
-      "objects": "Lean represents the explicit five-by-five matrix 6I-J over an arbitrary commutative ring and vectors on five labelled coordinates.",
-      "hypotheses": "For the augmentation assertion, the coordinate sum of the vector is zero; the constant-line assertion has no additional hypothesis.",
-      "conclusion": "The constant vector has eigenvalue one, every coordinate-sum-zero vector has eigenvalue six, and explicit mutually inverse integral row and column operations reduce the matrix to diag(1,6,6,6,6).",
+      "objects": "Lean represents the explicit five-by-five matrix 6I-J over an arbitrary commutative ring, vectors on five labelled coordinates, and the integral diagonal/off-diagonal parameters used in the human numerical derivation.",
+      "hypotheses": "For the augmentation assertion, the coordinate sum of the vector is zero. Parameter uniqueness assumes exactly the human proof's positivity d>0, invariant-sum equation d+5m=0, and intersection equation d^2-m^2=24.",
+      "conclusion": "The numerical hypotheses force (d,m)=(5,-1); the constant vector has eigenvalue one, every coordinate-sum-zero vector has eigenvalue six, and explicit mutually inverse integral row and column operations reduce the five-axis minor to diag(1,6,6,6,6).",
       "cautions": "The elliptic quotient axes, coherent identifications, Rosati pairing, proof that this explicit matrix is the geometric Gram matrix, and non-CM generic-fibre passage are absent."
     },
     {
@@ -102,12 +103,13 @@
       "manuscript_label": "lem:six-axis-local-chart",
       "coverage": "fragment",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSmith_unit_line_and_depth_one_at_two_three"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSmith_unit_line_and_depth_one_at_two_three",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisLocalChart_orthogonal_block"
       ],
-      "objects": "The explicit integral Smith diagonal diag(1,6,6,6,6) obtained from the abstract matrix 6I-J.",
-      "hypotheses": "No geometric hypotheses are represented; the calculation is purely integral arithmetic.",
-      "conclusion": "There is one unit diagonal entry and four entries equal to six, each divisible by two but not four and by three but not nine, hence of exact depth one at both primes.",
-      "cautions": "The actual six-axis geometric kernels, principal quotient graph, quadratic finite-etale slope at two, scalar slope at three, and persistence through the connected smooth component are absent."
+      "objects": "The explicit five-axis Gram matrix 6I-J, the first coordinate vector, the four displayed complement vectors e_j+(1/5)e_1, their four-dimensional integral unit block 5I-J, and the integral Smith diagonal diag(1,6,6,6,6).",
+      "hypotheses": "The orthogonal calculation is over an arbitrary commutative ring with an explicitly supplied inverse of five. The depth calculation is integral arithmetic and uses no geometric hypothesis.",
+      "conclusion": "Lean proves the first line has norm five, the four complement vectors are orthogonal to it, their Gram matrix is exactly (6/5)(5I-J), det(5I-J)=125 is prime to two and three, and the four non-unit Smith entries have exact depth one at both primes.",
+      "cautions": "This proves the complete coefficient-lattice decomposition calculation but not the actual six-axis geometric kernel, the principal quotient graph, its quadratic finite-etale slope at two, its scalar slope at three, or persistence through the connected smooth component. The passage from determinant prime-to-p to the formal Z_p notion of a unimodular lattice is represented arithmetically rather than through a dedicated p-adic lattice structure."
     },
     {
       "manuscript_label": "thm:six-axis-divided-powers",

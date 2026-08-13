@@ -6,6 +6,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Graph
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.LocalGlobalMembership
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -398,6 +399,46 @@ theorem sixAxisSmith_unit_line_and_depth_one_at_two_three :
         ((3 : ℤ) ∣ 6 ∧ ¬ (9 : ℤ) ∣ 6)) :=
   ⟨GraphLattices.sixAxisSmithDiagonal_entries,
     GraphLattices.sixAxisSmith_depth_one_at_two_and_three⟩
+
+/-- Exact arithmetic completion of the numerical step in the six-axis
+polarization proof: positivity, the vanishing invariant sum, and the
+intersection equation force diagonal entry five and off-diagonal entry
+minus one. -/
+theorem sixAxisPolarization_parameters_unique
+    (diagonal offDiagonal : ℤ)
+    (diagonalPositive : 0 < diagonal)
+    (invariantSum : diagonal + 5 * offDiagonal = 0)
+    (intersection : diagonal ^ 2 - offDiagonal ^ 2 = 24) :
+    diagonal = 5 ∧ offDiagonal = -1 :=
+  GraphLattices.sixAxisGram_parameters_unique diagonal offDiagonal
+    diagonalPositive invariantSum intersection
+
+/-- Exact algebraic local chart at every coefficient ring in which five has
+the displayed inverse.  The first line has norm five, the four complement
+vectors are orthogonal to it, and their Gram matrix is `(6/5)(5I-J)`; the
+integral unit block has determinant `125`, prime to two and three. -/
+theorem sixAxisLocalChart_orthogonal_block
+    {R : Type*} [CommRing R]
+    (inverseFive : R) (inverse : 5 * inverseFive = 1) :
+    GraphLattices.sixAxisGramPairing (R := R)
+        GraphLattices.sixAxisFirstVector GraphLattices.sixAxisFirstVector = 5 ∧
+      (∀ column : Fin 4,
+        GraphLattices.sixAxisGramPairing (R := R)
+          GraphLattices.sixAxisFirstVector
+          (GraphLattices.sixAxisComplementVector inverseFive column) = 0) ∧
+      (∀ row column : Fin 4,
+        GraphLattices.sixAxisGramPairing (R := R)
+          (GraphLattices.sixAxisComplementVector inverseFive row)
+          (GraphLattices.sixAxisComplementVector inverseFive column) =
+            6 * inverseFive * (if row = column then 4 else -1)) ∧
+      Matrix.det GraphLattices.sixAxisComplementUnitMatrix = 125 ∧
+      ¬(2 : ℤ) ∣ Matrix.det GraphLattices.sixAxisComplementUnitMatrix ∧
+      ¬(3 : ℤ) ∣ Matrix.det GraphLattices.sixAxisComplementUnitMatrix := by
+  exact ⟨GraphLattices.sixAxisFirstVector_pairing,
+    GraphLattices.sixAxisFirstVector_pairing_complement inverseFive inverse,
+    GraphLattices.sixAxisComplementVector_pairing inverseFive inverse,
+    GraphLattices.sixAxisComplementUnitMatrix_det,
+    GraphLattices.sixAxisComplementUnitMatrix_det_prime_to_two_three⟩
 
 /-- The manuscript's primitive-sixth algebraic-multiplicity formula, applied
 to a supplied finite framed-monodromy matrix.  Construction of that operator
