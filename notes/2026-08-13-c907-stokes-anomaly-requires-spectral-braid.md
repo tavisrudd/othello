@@ -2,8 +2,10 @@
 
 Date: 2026-08-13
 
-Status: exact reduction on every convergent nonturning parameter domain.  It
-does not compute the peak discriminant.
+Status: exact necessary reduction on every convergent nonturning parameter
+domain, but not a sufficient shadow.  The safe `dP7` carrier peak has an
+explicit ambient--wall `A1` braid; see
+`2026-08-13-c907-dp7-spectral-braid-shadow-failure.md`.
 
 The reduction is sharp in the category of meromorphic connections.  The
 incomplete-Gamma extension in
@@ -66,6 +68,8 @@ Thus the cheap regression is:
    is oriented toward a wall branch.
 
 No Mellin--Barnes coefficient is needed unless this braid shadow survives.
+It does survive in the smallest safe peak, so this sieve cannot close Gold by
+itself.
 
 ## 3. Combination with pure-neutral invisibility
 
@@ -80,6 +84,9 @@ The surviving object is therefore forced to have both:
 - nontrivial discriminant monodromy involving a rank-visible ambient root.
 
 This is substantially rarer than a nonzero neutral hypergeometric series.
+It is nevertheless not rare enough: the `dP7` potential
+`x+y+a/x+B/(xy)+a/y` has exactly such a carrier-dressed collision, while its
+Gamma/window rank row is safe.
 
 ## 4. Exact boundary
 

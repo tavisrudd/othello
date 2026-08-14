@@ -146,7 +146,10 @@ must carry a nontrivial braid of the leading spectral roots around the peak
 discriminant.  See
 `2026-08-13-c907-stokes-anomaly-requires-spectral-braid.md`.  A model whose
 ambient cluster has trivial braid satisfies the target lemma without a
-multiplier computation.
+multiplier computation.  The converse is unusable as a structural proof:
+the safe `X times Bl_(p1,p2)P2` peak has an explicit ambient--wall `A1`
+transposition.  Its calculation is
+`2026-08-13-c907-dp7-spectral-braid-shadow-failure.md`.
 
 None requires a full equality of Stokes and window matrices.
 
