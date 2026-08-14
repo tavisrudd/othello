@@ -542,6 +542,11 @@ are current, and the committed paper export verifies byte-for-byte in
   the two exotic slopes share the squarefree polynomial \(t^2+t+1\), while
   every three-primary half is a scalar graph.  It no longer appeals to an
   unspecified persistence of local presentations.
+  The global divided-power application now names the finitely generated
+  quotient in which all \(p\)-adic images vanish and identifies the principal
+  polarization with a descended graph divisor via
+  \(f_b^*\Theta_b=\lambda_{\mathcal A_b}\), rather than leaving both bridges
+  implicit.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

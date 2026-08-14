@@ -362,6 +362,10 @@ the unimodular line contributes no primary discriminant, the two exotic
 two-primary slopes have the common squarefree polynomial \(t^2+t+1\), and
 each three-primary half is already a scalar graph.  No unproved persistence
 of a chosen slope or local presentation is used.
+The ensuing local-to-global step now works in the explicit finitely generated
+quotient \(H^{2k}(J_b,\mathbf Z)/P_{J_b}^k\), and the minimal-class conclusion
+explicitly uses \(f_b^*\Theta_b=\lambda_{\mathcal A_b}\) to place the principal
+polarization in the descended graph-divisor lattice.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
