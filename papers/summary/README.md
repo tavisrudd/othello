@@ -35,9 +35,10 @@ Paper IV develops a separate code reconstruction: pair data from
 minimum-weight words recover a marked conic plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
 Golden interferometer paper are related unnumbered companions.
-*Irrationality after one stabilization* uses the recovered six-axis structure
-to construct its explicit universally `CH₀`-trivial family; its theorem for all
-smooth cubic threefolds is independent of that special construction. Every
+*Irrationality after one stabilization* uses the six-axis structure of the
+nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for its
+explicit family; its theorem for all smooth cubic threefolds is independent of
+that special construction. Every
 paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
@@ -490,8 +491,8 @@ smooth prime Fano threefold of genus eight.
 >
 > For irrationality, we count primitive-sixth eigenvalues of framed formal monodromy on the numerical small even quantum connection. Divisor tags make Iritani's blowup formula compatible with a possibly noninjective center specialization. The count is a birational invariant through dimension four and equals two for a cubic. Thus the cycle-theoretic and quantum detectors diverge on the same smooth fourfolds.
 
-**Delivers.** A one-step stable-birational obstruction for all smooth cubic
-threefolds, together with an explicit family showing that universal
+**Delivers.** A birational obstruction after one projective-line stabilization
+for every smooth cubic threefold, together with an explicit family showing that universal
 `CH₀`-triviality can hold while this obstruction remains nonzero.
 
 **Who cares.** Algebraic geometers working on rationality, stable rationality,

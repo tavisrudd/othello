@@ -113,6 +113,10 @@ bulk coordinate has the form
  \qquad \eta\in F^1B\widehat\otimes H^{\rm ev}(T).
 \]
 Assume that \(a_0\) and \(a_2^\circ\) are constant in the positive filtration.
+Assume also that the units
+\(e^{\langle a_2^\circ,d\rangle}\in B^\times\) are defined for numerical
+curve classes \(d\), form a multiplicative character, and hence define the
+displayed continuous coefficient automorphism.
 Its framed formal-monodromy characteristic polynomial equals that of the
 small connection after the divisor substitution, coefficientwise in \(B\),
 \[
@@ -261,14 +265,17 @@ For the \(j\)-th target summand, let \(R_j\) be the image of
 \(Q_C^d\mapsto Q^{i_*d}u^{\rho_C\cdot d}\), together with \(u\) and \(s_j\),
 and set
 \[
- J_j=\bigl(u,\{Q^{i_*d}u^{\rho_C\cdot d}:d\ne0\},
-            \text{components of }s_j\bigr)\subset R_j,
- \qquad B_j=\varprojlim_N R_j/J_j^N.
+ \begin{aligned}
+ J_j&=\bigl(u,\{Q^{i_*d}u^{\rho_C\cdot d}:d\ne0\},
+             \text{components of }s_j\bigr)\subset R_j,\\
+ B_j&=\varprojlim_N R_j/J_j^N,
+ &F^NB_j&=\ker(B_j\to R_j/J_j^N).
+ \end{aligned}
 \]
 Here \(R_j\) is a subring of the Laurent monoid domain occurring in the
 comparison chart, and \(B_j\) is, by construction, complete and separated
-for the multiplicative \(J_j\)-adic filtration.  Reduction
-\(B_j/J_j^{N+1}\to B_j/J_j^N\) preserves the connection formulas.
+for the multiplicative inverse-limit filtration \(F^\bullet B_j\).  Reduction
+\(B_j/F^{N+1}B_j\to B_j/F^NB_j\) preserves the connection formulas.
 The center connection is defined over this image ring by
 \cite[Remark~5.6]{IritaniBlowup}.
 Formula \eqref{eq:blowup-reconstruction-coordinate},
@@ -322,12 +329,16 @@ Put \(u=q^{-1/r}\).  For its \(j\)-th target summand let \(R_j\) be the image
 of \(Q_T^d\mapsto Q^d u^{c_1(V)\cdot d}\), together with \(u\) and \(s_j\),
 and set
 \[
- J_j=\bigl(u,\{Q^d u^{c_1(V)\cdot d}:d\ne0\},
-            \text{components of }s_j\bigr)\subset R_j,
- \qquad B_j=\varprojlim_N R_j/J_j^N.
+ \begin{aligned}
+ J_j&=\bigl(u,\{Q^d u^{c_1(V)\cdot d}:d\ne0\},
+             \text{components of }s_j\bigr)\subset R_j,\\
+ B_j&=\varprojlim_N R_j/J_j^N,
+ &F^NB_j&=\ker(B_j\to R_j/J_j^N).
+ \end{aligned}
 \]
 Again \(R_j\) is a subring of the relevant Laurent monoid domain and \(B_j\)
-is its complete separated \(J_j\)-adic inverse-limit ring.  Formula (5.11)
+is complete and separated for its multiplicative inverse-limit filtration
+\(F^\bullet B_j\).  Formula (5.11)
 places the normalized target coordinate in \(J_jH^{\rm ev}(T)\), and the
 displayed exponent shows that the fixed-divisor substitution factors through
 the image monoid.

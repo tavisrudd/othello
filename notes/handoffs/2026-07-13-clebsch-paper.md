@@ -367,6 +367,13 @@ ruling is lifted integrally through `Sp_2(Z_3) -> Sp_2(F_3)`, the generic
 non-CM argument uses a Hilbert class polynomial after the norm axis is matched
 to Hartlieb's elliptic factor up to isogeny, and the claim inventory now
 explicitly marks the new three-primary geometric content as absent from Lean.
+The final three-referee pass is GO with no fatal or major mathematical issue.
+Its accepted precision fixes use the inverse-limit kernel filtration on the
+comparison completions, make the divisor exponential character an explicit
+formal-base-shift hypothesis, place the non-CM proof before first use, and
+state the general-DVR and prime-to-six unit-block descent steps.  The summary
+README's cubic-paper abstract is verbatim current and its related table and
+headline claims have been audited; two stale scope phrases were repaired.
 The manuscript's scheme-theoretic norm-image step is now pinned to
 Achter--Casalaina-Martin--Wise, Theorem~A: in characteristic zero the image is
 an abelian subscheme and the quotient factorization is stable under base

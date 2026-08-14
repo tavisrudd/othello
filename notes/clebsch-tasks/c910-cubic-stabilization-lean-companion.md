@@ -627,6 +627,19 @@ are current, and the committed paper export verifies byte-for-byte in
   axis with Hartlieb's elliptic factor up to isogeny.  `RT3-005` is closed by
   giving the Atlas table version and exact characteristic/ring/dimension/ID
   rows.  The guarded authority gate passes after all five repairs.
+- **Fourth whole-paper referee pass (`R4-*`):** general, geometry/cycle, and
+  quantum referees all returned GO with no fatal or major mathematical issue.
+  The accepted low-cost polish now descends the general graph expansion to
+  `O` rather than prematurely to `Z_p`, states the unit-block argument away
+  from two and three, places the generic non-CM argument before its first use,
+  requires the divisor exponentials in the formal base-shift lemma to define
+  a continuous coefficient automorphism, and uses the kernel filtration
+  `F^N B_j = ker(B_j -> R_j/J_j^N)` rather than identifying it silently with
+  powers of an extended ideal.  The public summary's reproduced abstract was
+  already verbatim current; its two stale scope phrases were corrected to say
+  that six-axis structure proves universal `CH₀`-triviality for the existing
+  pencil and that the obstruction controls one projective-line stabilization,
+  not arbitrary stable rationality.
 - **Six-axis polarization inputs:** source-checked.  The manuscript now cites
   Roulleau's Theorem 11(D) for the dihedral fibre and, separately, Lemma 14
   together with table (3.1) for deformation-invariance and the exact
