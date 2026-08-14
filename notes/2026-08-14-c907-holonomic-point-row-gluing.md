@@ -229,6 +229,30 @@ strictly weaker finite-rank statements.
 > recurrences identify the actual marked cyclic row solutions selected by
 > the two endpoint completions.
 
+There is an exact one-row form of the second gate.  Let `C_j` be the local
+connection matrix on the finite state vector consisting of the point row and
+its required `z`-covariant derivatives at the `j`-th threshold.  It is enough
+to prove
+
+\[
+ r_j C_j=r_j.
+\]
+
+Equivalently, `C_j-id` may have arbitrary rank provided its image lies in a
+wall submodule annihilated by `r_j`.  This is the cheapest singular shadow
+of the desired continuation.  A Gamma/window comparison for the one common
+point object would imply (8): the window mutation is supported on the wall,
+while the skyscraper of a common-open point is unchanged and Euler-orthogonal
+to every wall-supported object.  No full categorical equivalence or full
+fundamental-solution comparison would be needed.
+
+The condition is not forced by the structures already available.  An
+isometry can move a marked isotropic row; formal exponential labels do not
+determine a Stokes connection; and the two-tail countermodel shows that
+holonomicity does not determine `C_j`.  Thus the remaining alternatives are
+either a direct virtual-localization proof of (8), or a one-object
+Gamma/window compatibility theorem for each threshold local model.
+
 Woodward Corollary 9.10 and the virtual-normal formula provide the expected
 recurrence: on each stable clutching tail the moving line degrees are
 `h_a k+s_a`, the node factors are independent of `k`, and fixed bubble
@@ -549,6 +573,10 @@ load-bearing.
   that they preserve the marked cyclic point-row solution.  Separate
   holonomicity and a zero wall term do not imply this; the `2^k/3^{-k}`
   countermodel proves the logical independence.
+- **Exact sufficient shadow:** for every threshold connection matrix `C_j`,
+  prove `r_j C_j=r_j`, or equivalently that its jump factors through a wall
+  submodule annihilated by the point row.  A one-object Gamma/window theorem
+  would supply this; pairing and formal-monodromy data alone do not.
 - **Open:** whether the manuscript's word `meromorphic` should explicitly
   allow the finite ramified/logarithmic cover naturally produced by regular
   holonomic continuation.  This is a statement-level audit after the
