@@ -43,6 +43,20 @@ with these toric mirror boundary modules.  That comparison is not proved
 here.  The result also does not prove the zero-mode nearby-cycle clause or
 show that an arbitrary Wlodarczyk completion is gauged-admissible.
 
+There is a closer linear-gauged comparison.  Woodward's Example 9.15,
+equations (63)--(65), identifies the localized gauged graph potential of a
+torus representation with Givental's toric \(I\)-function.  Iritani's global
+mirror starts from the same type of quotient \([\mathbf C^S/\!/\mathbb L]\):
+one Brieskorn module has the chamber \(I\)-functions as its large-radius
+expansions, and Theorems 7.25 and 7.33 identify its ambient Gamma lattice and
+sectorial continuation.  Thus the ordinary-threshold clause has a literal
+one-object realization for the **linear toric gauged model**.  The remaining
+comparison is geometric rather than hypergeometric: Definition 8.1 of the
+manuscript uses a smooth projective \(\mathbf G_m\)-completion, and no cited
+quantum reduction-in-stages theorem identifies its Woodward clutching tails
+with the linear-presentation tails.  This is now the exact gap between the
+positive model and a literal example of the manuscript hypothesis.
+
 ## Proof
 
 Iritani's Theorem 1.3, assembled from Theorems 7.25, 7.31, and 7.33, gives
@@ -170,12 +184,17 @@ presented as a proof for the original flip.
   `arXiv:2508.15770`; PDF SHA-256
   `9c00f826cb13ad243bd2ad126e74733cacf650a385160a11adc785693c01a358`.
 
+- Chris T. Woodward, *Quantum Kirwan morphism and Gromov--Witten invariants
+  of quotients III*, arXiv:1408.5869, especially Example 9.15 and equations
+  (63)--(65).  Cached key `arXiv:1408.5869`; PDF SHA-256
+  `5aa794f4d83dd8d127aab769d95a71a4691d7a35d220e81ca73c5b8bb360ea51`.
+
 The point-row theorem above is a direct consequence of Iritani's analytic
 Gamma/K-theoretic decomposition plus the support calculation.  Identifying
 the resulting toric mirror module with the manuscript's Woodward clutching
-tail is not part of Iritani's theorem and is not asserted here.  The final
-paragraph's Calabi--Yau completion is a proposed next route, not a proved
-descent theorem.
+tail on a projective master is not part of Iritani's or Woodward's theorem
+and is not asserted here.  The final paragraph's Calabi--Yau completion is a
+proposed next route, not a proved descent theorem.
 
 For the type-\((1,2)\) flip, the next proof attempt is therefore finite:
 
