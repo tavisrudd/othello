@@ -541,12 +541,20 @@ are current, and the committed paper export verifies byte-for-byte in
   principal-packet exclusion no longer relies on the shorthand that the
   generic cubic has automorphism group exactly \(A_5\): Strong Torelli would
   produce a faithful \(S_6\)-action, which Hartlieb's Theorem 2.1 excludes
-  because every listed ambient group has two-primary order at most \(8\).
+  because five listed ambient groups have order below \(720\), while the
+  remaining group has order \(9720\), not divisible by \(720\).  The descent
+  now treats the full kernel: the two-primary rational graphs and the
+  three-primary scalar graphs are all \(S_6\)-stable.
   The local-chart proof now also states why the unit summand has no
   \(p\)-primary kernel and invokes the packet classification fibre by fibre:
   the two exotic slopes share the squarefree polynomial \(t^2+t+1\), while
   every three-primary half is a scalar graph.  It no longer appeals to an
   unspecified persistence of local presentations.
+  The prescribed graph-divisor lattice and its product image are now defined
+  from a fixed elliptic-power quotient.  A division-free matrix correction
+  lifts each reduced isotropic slope to an integral dual-self-adjoint
+  depth-preserving endomorphism, closing the integral graph-presentation
+  hypothesis at both primes.
   The global divided-power application now names the finitely generated
   quotient in which all \(p\)-adic images vanish and identifies the principal
   polarization with a descended graph divisor via

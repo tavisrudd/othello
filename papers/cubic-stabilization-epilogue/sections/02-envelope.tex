@@ -104,6 +104,7 @@ by \(6I_6-J_6\); both the source and this form carry their natural
 \[
  f^*\lambda_\Theta=\lambda_{\mathcal A}.
  \tag{2.1}
+ \label{eq:six-axis-polarization-pullback}
 \]
 After omitting one axis, \(\mathcal A\simeq\mathcal E^5\) and this form has
 matrix \(6I_5-J_5\).
@@ -112,6 +113,7 @@ on the source has a natural \(A_5\)-equivariant symplectic description
 \[
  \mathscr D_2\simeq H_2\otimes_{\F_2}\mathscr V.
  \tag{2.2}
+ \label{eq:two-primary-discriminant}
 \]
 The two-primary part \(\mathscr K_2\) of \(\ker f\) is an
 \(A_5\)-stable relative maximal isotropic subgroup of \(\mathscr D_2\).
@@ -161,7 +163,8 @@ Proposition~\ref{prop:six-axis-polarization} compute these relative
 homomorphisms, rather than merely isogenous quotients.  On the
 generic non-CM fibre they give diagonal entry \(5\) and off-diagonal entry
 \(-1\).  Applying the same generic-density and separatedness argument to
-these homomorphisms gives the identities over \(B^\circ\), hence (2.1).
+these homomorphisms gives the identities over \(B^\circ\), hence
+\eqref{eq:six-axis-polarization-pullback}.
 Choosing any five coordinate classes identifies the quotient lattice with
 \(\mathbf Z^5\), where its matrix is \(6I_5-J_5\).  Since this has Smith type
 \((1,6,6,6,6)\), the source polarization is nondegenerate, so \(f\) is a
@@ -196,12 +199,14 @@ sums it is the normalized form
  =\frac12x^{\mathsf t}(6I_6-J_6)y\pmod2
  =\bar x\mathbin{\boldsymbol\cdot}\bar y.
  \tag{2.3}
+ \label{eq:normalized-two-primary-pairing}
 \]
 Indeed, the product of the two coordinate sums is divisible by four.  The
 formula is unchanged by adding the constant vector or twice an integral
 vector, so it descends to \(H_2\); there it is alternating and nondegenerate.
 Tensoring this constant coefficient module with the finite etale local
-system \(\mathscr V=\mathcal E[2]\) gives (2.2) as an isomorphism of local
+system \(\mathscr V=\mathcal E[2]\) gives
+\eqref{eq:two-primary-discriminant} as an isomorphism of local
 systems.  The discriminant commutator pairing is the tensor product of the
 normalized coefficient form \(b_2\) with the Weil pairing on \(\mathscr V\), so the
 isomorphism is symplectic.  Since \(f\) is \(A_5\)-equivariant,
@@ -225,7 +230,8 @@ the latter pair.  Every \(A_5\)-stable three-primary kernel is a scalar graph.
 
 \begin{proof}
 At two the coefficient discriminant is the simple four-dimensional
-\(\F_2A_5\)-module \(H_2\), whose commutant is \(\F_4\).  The full
+\(\F_2A_5\)-module \(H_2\), whose commutant is \(\F_4\)
+\cite[the \(A_5\) tables]{AtlasBrauer}.  The full
 discriminant is \(H_2\otimes_{\F_2}\F_2^2\).  An \(A_5\)-stable simple half
 is therefore a one-dimensional \(\F_4\)-subspace of \(\F_4^2\), and every
 such half is maximal isotropic for the tensor product of the coefficient
@@ -283,9 +289,16 @@ the natural faithful \(S_6\)-action on
 \(\mathcal A=\mathcal E\otimes(\mathbf Z^\Omega/\mathbf Z\mathbf1)\), which
 is the identity on \(\mathcal E\) tensored with the faithful permutation
 action on the quotient lattice, would preserve the rational kernel: under
-(2.2) it acts on \(H_2\) and trivially on \(\mathscr V\), so every member of
-\(\mathscr P_{\rm rat}\) is \(S_6\)-stable.  Since this action preserves
-\(6I_6-J_6\), it would descend
+\eqref{eq:two-primary-discriminant} it acts on \(H_2\) and trivially on
+\(\mathscr V\), so every member of
+\(\mathscr P_{\rm rat}\) is \(S_6\)-stable.  At three, the analogous
+coefficient heart \(H_3\) is simple and
+\(\End_{A_5}(H_3)=\F_3\) \cite[the \(A_5\) tables]{AtlasBrauer}.  Thus the
+actual three-primary half is a scalar graph in two multiplicity copies of
+\(H_3\).  The natural \(S_6\)-action is the same on both copies, so every
+scalar graph is \(S_6\)-stable.  Since \(|\ker f|=6^4\), its two- and
+three-primary parts exhaust the kernel.  The full kernel would therefore be
+\(S_6\)-stable.  Since this action preserves \(6I_6-J_6\), it would descend
 through the principally polarized quotient.  It would act faithfully: if a
 source automorphism acts
 trivially on the quotient, the image of its difference from the identity is
@@ -300,16 +313,15 @@ The kernel of the resulting map from \(S_6\) to
 \(\operatorname{Aut}(X)\) would be a normal subgroup of order at most two;
 it is trivial.  Thus \(S_6\) would act faithfully on a smooth cubic
 threefold.  This contradicts the classification of faithful automorphism
-groups \cite[Theorem~2.1]{Hartlieb}: the two-primary part of the order of
-each of the six listed ambient groups is at most \(8\), whereas that of
-\(S_6\) is \(16\).  The section is
+groups \cite[Theorem~2.1]{Hartlieb}.  Five of the six listed ambient groups
+have order smaller than \(|S_6|=720\).  The remaining group is
+\((\mathbf Z/3\mathbf Z)^4\rtimes S_5\), of order \(9720\), which is not
+divisible by \(720\).  None can contain \(S_6\).  The section is
 therefore generically in \(\mathscr P_{\rm ex}\).  Its inverse image is open
 and closed in the connected base \(B^\circ\), so every smooth fibre has
 exotic two-primary kernel.
-
-At three the coefficient heart \(H_3\) is simple and
-\(\End_{A_5}(H_3)=\F_3\).  Hence its \(A_5\)-stable halves are the four graphs
-parametrized by \(\PP^1(\F_3)\), all scalar in a suitable graph chart.
+The same calculation at three gives the four scalar graphs parametrized by
+\(\PP^1(\F_3)\).
 \end{proof}
 
 For the cycle-theoretic argument, the unordered pair is enough.  Both members

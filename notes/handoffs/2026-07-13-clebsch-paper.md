@@ -355,13 +355,20 @@ for its non-isotriviality conclusion.
 The principal-gluing contradiction no longer uses the broad assertion that the
 generic cubic has automorphism group exactly \(A_5\).  Strong Torelli would
 instead give a faithful \(S_6\)-action on a smooth cubic threefold, directly
-excluded by Hartlieb's Theorem 2.1 because the six classified ambient groups
-all have two-primary order at most eight.
+excluded by Hartlieb's Theorem 2.1: five classified ambient groups have order
+below \(720\), while the sixth has order \(9720\), not divisible by \(720\).
+The descent now includes the three-primary scalar graphs as well as the
+two-primary rational graphs, so it applies to the full kernel.
 The six-axis local-chart proof now makes the remaining fibrewise step exact:
 the unimodular line contributes no primary discriminant, the two exotic
 two-primary slopes have the common squarefree polynomial \(t^2+t+1\), and
 each three-primary half is already a scalar graph.  No unproved persistence
 of a chosen slope or local presentation is used.
+The prescribed graph-divisor lattice and ordinary product image are now
+defined from the fixed elliptic-power quotient.  A division-free correction
+of an arbitrary slope lift makes it exactly dual-self-adjoint while preserving
+the depth splitting, so the reduced finite-etale slopes genuinely supply the
+integral graph presentations required by the saturation theorem.
 The ensuing local-to-global step now works in the explicit finitely generated
 quotient \(H^{2k}(J_b,\mathbf Z)/P_{J_b}^k\), and the minimal-class conclusion
 explicitly uses \(f_b^*\Theta_b=\lambda_{\mathcal A_b}\) to place the principal

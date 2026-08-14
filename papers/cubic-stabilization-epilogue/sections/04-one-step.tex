@@ -118,13 +118,15 @@ small connection after the divisor substitution, coefficientwise in \(B\),
 \[
  Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d.
  \tag{4.1}
+ \label{eq:formal-base-shift-divisor}
 \]
 \end{lemma}
 
 \begin{proof}
 The string equation removes \(a_0\mathbf1\) by a scalar exponential in
 \(z^{-1}\); this is single-valued and has trivial framed monodromy.  The divisor
-equation gives (4.1).  It remains to remove \(\eta\), including its component
+equation gives \eqref{eq:formal-base-shift-divisor}.  It remains to remove
+\(\eta\), including its component
 in \(H^2(T)\).
 
 Modulo \(F^N B\), the flat bulk equations
@@ -197,9 +199,13 @@ coefficientwise pushforward a unital homomorphism for completed convolution.
 Thus the quantum products descend by grouping Gromov--Witten coefficients with
 the same numerical class.  Pushforward of curves, pairing with
 \(c_1(N_{C/T})\), and the derivations \(Q\partial_Q\) are constant on these
-fibres.  Every coefficient formula in the comparison maps therefore commutes
-with numerical pushforward.  Since the comparison theorems provide both a map
-and its inverse, the two maps remain inverse after this base change.
+fibres.  At each cutoff, apply the resulting ring homomorphism to the
+comparison map and to its stated inverse.  Scalar extension preserves their
+two inverse identities.  Grouping coefficients identifies the scalar-extended
+quantum module with the numerical quantum module, and the preceding
+fiberwise constancy identifies its connection operators and divisor
+substitutions.  Passing through the compatible cutoffs proves the asserted
+completed base change.
 \end{proof}
 
 \begin{proposition}[Framed operation formulas]
@@ -208,6 +214,7 @@ Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
 \[
  \nu_6(\PP_T(V))=r\nu_6(T).
  \tag{4.2}
+ \label{eq:projective-bundle-nu}
 \]
 Let \(\widetilde T=\operatorname{Bl}_C T\), where \(C\subset T\) is smooth of
 codimension \(c\ge2\).  In Iritani's comparison field one has
@@ -215,9 +222,10 @@ codimension \(c\ge2\).  In Iritani's comparison field one has
  \nu_6(\widetilde T)=\nu_6(T)+
  \sum_{j=0}^{c-2}\nu_6(C;\chi_j),
  \tag{4.3}
+ \label{eq:blowup-nu}
 \]
 where \(\chi_j\) is the numerical Novikov specialization of the \(j\)-th
-center summand.  The endpoint terms in (4.3) are the intrinsic small
+center summand.  The endpoint terms in \eqref{eq:blowup-nu} are the intrinsic small
 invariants; the center terms are computed after the displayed specializations.
 \end{proposition}
 
@@ -244,6 +252,7 @@ chart.  Put \(u=q^{-1/(c-1)}\) and use the reconstruction coordinates of
  \qquad
  \varsigma_j^\circ=-(c-1)\lambda_j+h_{C,j}+O(u).
  \tag{4.4}
+ \label{eq:blowup-reconstruction-coordinate}
 \]
 For the \(j\)-th target summand, let \(R_j\) be the image of
 \(Q_C^d\mapsto Q^{i_*d}u^{\rho_C\cdot d}\), together with \(u\) and \(s_j\),
@@ -254,7 +263,8 @@ and set
  \qquad B_j=\varprojlim_N R_j/J_j^N.
 \]
 The center connection is defined over this image ring by
-\cite[Remark~5.6]{IritaniBlowup}.  Formula (4.4),
+\cite[Remark~5.6]{IritaniBlowup}.
+Formula \eqref{eq:blowup-reconstruction-coordinate},
 together with (5.45), (5.47), and the initial asymptotics (5.27)--(5.30),
 shows that after the unit term \(-(c-1)\lambda_j\) and fixed divisor
 \(h_{C,j}\) are removed, its target bulk coordinate lies in
@@ -271,7 +281,8 @@ coefficient automorphism, so it does not change \(\nu_6\); it is well defined
 on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus each center target summand has the
 framed monodromy of its specialized small connection.  The ambient target
 uses \(\tau=\tau^\circ+t\), with \(\tau^\circ=O(q^{-1})\), and the same
-finite-quotient argument.  Direct-sum additivity gives (4.3).
+finite-quotient argument.  Direct-sum additivity gives
+\eqref{eq:blowup-nu}.
 
 The endpoint map is faithful: on numerical curve lattices
 \[
@@ -294,13 +305,13 @@ and set
             \text{components of }s_j\bigr)\subset R_j,
  \qquad B_j=\varprojlim_N R_j/J_j^N.
 \]
-Proposition~5.6 and Section~5.8 of Iritani--Koto give
+Theorem~5.1, Proposition~5.6, and Section~5.8 of Iritani--Koto give
 \[
  \varsigma_j=\varsigma_j^\circ+s_j,
  \qquad
  \varsigma_j^\circ=r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u).
 \]
-This is Proposition~5.6 and Section~5.8, especially (5.11),
+This is Theorem~5.1, Proposition~5.6, and Section~5.8, especially (5.11),
 of~\cite{IritaniKoto}.
 Normalize the Laurent unit and fixed divisor terms first.  The normalized
 connection descends to \(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
@@ -308,7 +319,8 @@ finite quotients, and then extend scalars to the Laurent comparison field.
 Again the divisor substitution is a \(z\)-constant coefficient automorphism;
 it factors through the displayed \(u\)-exponent.
 This gives \(r\)
-copies of the intrinsic base module and proves (4.2).  The base Novikov map is the
+copies of the intrinsic base module and proves
+\eqref{eq:projective-bundle-nu}.  The base Novikov map is the
 embedding in \cite[(1.1) and Remark~5.2]{IritaniKoto}.  The theorem assumes
 \(V^\vee\) globally generated.  Tensoring \(V\) by a sufficiently negative
 line bundle achieves this without changing \(\PP_T(V)\)
@@ -318,10 +330,10 @@ are in the coefficient direction.  After the odd bulk variables vanish,
 pullback, pushforward, Fourier transformation, and multiplication by the
 characteristic-class factors all preserve cohomological parity.  Hence both
 decompositions restrict to the even quantum connections used here.  Formula
-(4.2) is tautological when \(r=1\).
+\eqref{eq:projective-bundle-nu} is tautological when \(r=1\).
 \end{proof}
 
-The center map in (4.3) is not necessarily injective
+The center map in \eqref{eq:blowup-nu} is not necessarily injective
 \cite[(5.15)]{IritaniBlowup}.  Thus generic vanishing for \(C\) does not by
 itself imply that its specialized term vanishes.  The next lemma supplies the
 missing implication.
@@ -334,6 +346,7 @@ associated graded, every monomial has nonzero image, and
 \[
  v(\chi(Q^d))=\ell(d),
  \tag{4.5}
+ \label{eq:strict-novikov-valuation}
 \]
 where \(\ell\) is positive and proper on the effective numerical monoid.
 \end{definition}
@@ -341,7 +354,7 @@ where \(\ell\) is positive and proper on the effective numerical monoid.
 We write \(\nu_6(T;\chi)\) for the framed small-even invariant after scalar
 extension along such a map.
 
-The center maps in (4.3) are strictly admissible.  Give the exceptional
+The center maps in \eqref{eq:blowup-nu} are strictly admissible.  Give the exceptional
 Laurent variable valuation zero and use an ample divisor \(H\) on \(T\).  Then
 \[
  v_H\!\left(Q^{i_*d}q^{-\rho_C\cdot d/(c-1)}\right)
@@ -358,6 +371,9 @@ monodromy, neither does its specialization along \(\chi\).
 \end{lemma}
 
 \begin{proof}
+If \(N_1(T)=0\), then the numerical effective monoid is \(\{0\}\), so the
+coefficient map is already injective and there is nothing to tag.  Assume
+otherwise.
 Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
 \(N_1(T)\), and introduce formal variables
 \(\boldsymbol t=(t_1,\ldots,t_\rho)\).  Define
@@ -365,9 +381,11 @@ Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
  \chi_{\boldsymbol t}(Q^d)=\chi(Q^d)
  \exp\!\left(\sum_i t_i(D_i\cdot d)\right).
  \tag{4.6}
+ \label{eq:divisor-tagging-map}
 \]
 This map from \(\Lambda_T\) to \(A[[\boldsymbol t]]\) is injective.  To prove
-this, take a nonzero series.  Properness in (4.5) makes its lowest-valuation
+this, take a nonzero series.  Properness in
+\eqref{eq:strict-novikov-valuation} makes its lowest-valuation
 support finite.  Its initial image is a finite combination of distinct
 exponential characters.  The finitely many exponent vectors are distinct
 integral vectors.  Choose \(a=(a_i)\in\Z^\rho\) outside the finitely many
@@ -383,7 +401,8 @@ Let \(k_\chi=\overline{\operatorname{Frac}A}\).  After embedding the two
 fraction fields in a common algebraic closure, injectivity makes the
 \(\chi_{\boldsymbol t}\)-module a scalar extension of the intrinsic module.
 On the other hand, the divisor equation
-identifies (4.6) with the degree-two formal bulk pullback of the \(\chi\)-module
+identifies \eqref{eq:divisor-tagging-map} with the degree-two formal bulk
+pullback of the \(\chi\)-module
 over \(B=k_\chi[[\boldsymbol t]]\).  Apply the finite-quotient argument in
 Lemma~\ref{lem:formal-base-shift} with
 \(\eta=\sum_i t_iD_i\): its integral-\(z\) bulk gauge removes the positive
@@ -398,6 +417,7 @@ surface.  For every strictly Novikov-admissible specialization \(\chi\),
 \[
  \nu_6(T;\chi)=0.
  \tag{4.7}
+ \label{eq:low-dimensional-vanishing}
 \]
 \end{proposition}
 
@@ -425,14 +445,19 @@ Conjugation by \(z^g\) therefore turns
 \)
 into a regular-singular connection with nilpotent residue.  Undoing the
 half-parity correction permits only the monodromy eigenvalues \(1\) and
-\(-1\), never a primitive sixth root.
+\(-1\): quantum multiplication preserves cohomological parity, so the parity
+operator commutes with the transformed nilpotent residue.  A primitive sixth
+root cannot occur.
 
 This treats curves of positive genus and minimal surfaces with nef canonical
 class.  A point is immediate.  The remaining minimal varieties are
-\(\PP^1\), \(\PP^2\), and ruled surfaces; (4.2) reduces them to a point or a
+\(\PP^1\), \(\PP^2\), and ruled surfaces;
+\eqref{eq:projective-bundle-nu} reduces them to a point or a
 curve.  Every nonminimal surface is obtained from a minimal surface by point
-blowups, and (4.3) adds only point summands.  Hence the intrinsic generic
-invariant vanishes in every case.  Lemma~\ref{lem:divisor-tagging} gives (4.7).
+blowups, and \eqref{eq:blowup-nu} adds only point summands.  Hence the
+intrinsic generic invariant vanishes in every case.
+Lemma~\ref{lem:divisor-tagging} gives
+\eqref{eq:low-dimensional-vanishing}.
 \end{proof}
 
 \begin{theorem}[Birational invariance through dimension four]
@@ -442,6 +467,7 @@ the same dimension at most four, then
 \[
  \nu_6(Y)=\nu_6(Y').
  \tag{4.8}
+ \label{eq:nu-birational-invariance}
 \]
 Consequently, for smooth projective threefolds,
 \[
@@ -456,13 +482,13 @@ blowups and blowdowns with smooth centers of codimension at least two
 \cite{AKMW}.  In dimension at most four every nontrivial center has dimension
 at most two.  The calculation following
 Definition~\ref{def:strict-novikov-admissible} shows that every center
-specialization in (4.3) is strictly admissible.
+specialization in \eqref{eq:blowup-nu} is strictly admissible.
 Proposition~\ref{prop:low-dimensional-vanishing} therefore makes every center
 term zero, so the endpoint values agree at each step.
 
 If \(Y,Y'\) are smooth threefolds and
 \(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
-dimension four and (4.2):
+dimension four and \eqref{eq:projective-bundle-nu}:
 \[
  2\nu_6(Y)=\nu_6(Y\times\PP^1)
  =\nu_6(Y'\times\PP^1)=2\nu_6(Y').
@@ -476,6 +502,7 @@ For every smooth cubic threefold \(X\),
 \[
  \nu_6(X)=2.
  \tag{4.9}
+ \label{eq:cubic-packet-value}
 \]
 \end{proposition}
 
@@ -504,14 +531,15 @@ The projective-bundle formula and Proposition~\ref{prop:cubic-packet} give
 \[
  \nu_6(X\times\PP^1)=2\nu_6(X)>0.
  \tag{4.10}
+ \label{eq:cubic-stabilization-positive}
 \]
 Suppose that \(X\times\PP^1\) were rational.  By
 Theorem~\ref{thm:nu6-birational-invariance},
 \[
  \nu_6(X\times\PP^1)=\nu_6(\PP^4)=0,
 \]
-where the last equality follows from (4.2) over a point.  This contradicts
-(4.10).
+where the last equality follows from \eqref{eq:projective-bundle-nu} over a
+point.  This contradicts \eqref{eq:cubic-stabilization-positive}.
 \end{proof}
 
 \subsection{A genus-eight Fano consequence}
@@ -529,6 +557,7 @@ For every smooth prime Fano threefold \(V\) of genus eight,
  \qquad
  V\times\PP^1\ \text{is irrational}.
  \tag{4.11}
+ \label{eq:v14-stabilization}
 \]
 \end{corollary}
 
@@ -541,7 +570,7 @@ Theorem~\ref{thm:nu6-birational-invariance}, Proposition
  2\nu_6(V)=\nu_6(\PP_V(U))
  =\nu_6(\PP_X(E^*))=2\nu_6(X)=4.
 \]
-Hence \(\nu_6(V)=2\).  Formula (4.2) now gives
+Hence \(\nu_6(V)=2\).  Formula \eqref{eq:projective-bundle-nu} now gives
 \(\nu_6(V\times\PP^1)=4\), whereas every rational smooth fourfold has
 \(\nu_6=0\) by Theorem~\ref{thm:nu6-birational-invariance}.
 \end{proof}
