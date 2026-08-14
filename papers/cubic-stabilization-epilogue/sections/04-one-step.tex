@@ -105,7 +105,7 @@ original disc and conjugates this action.
 \begin{lemma}[Formal base shift]
 \label{lem:formal-base-shift}
 Suppose a pullback of the even quantum connection of \(T\) is defined over a
-complete separated multiplicatively filtered coefficient ring \(B\), and its
+complete separated multiplicatively filtered \(\C\)-algebra \(B\), and its
 bulk coordinate has the form
 \[
  a_0\mathbf1+a_2^\circ+\eta,
@@ -132,20 +132,31 @@ Modulo \(F^N B\), the flat bulk equations
  \partial_{\eta_i}G=-z^{-1}(\phi_i\star_\eta)G,
  \qquad G|_{\eta=0}=1,
 \]
-have an invertible solution with bounded Laurent order in \(z\).  These
-equations are compatible because the even quantum connection is flat: the
-mixed derivatives of the quantum-product matrices agree, and those matrices
-commute by commutativity and associativity.  Coefficient recursion in total
-bulk degree therefore gives the unique normalized formal solution.  After
-substituting \(\eta\), a
+are compatible because the even quantum connection is flat: the mixed
+derivatives of the quantum-product matrices agree, and those matrices commute
+by commutativity and associativity.  To derive the Laurent bound, write
+\(G=\sum_\alpha G_\alpha\eta^\alpha\).  The coefficient of
+\(\eta^\alpha\) in the \(i\)-th equation is
+\[
+ (\alpha_i+1)G_{\alpha+e_i}
+ =-z^{-1}\bigl[(\phi_i\star_\eta)G\bigr]_\alpha.
+ \tag{4.1a}
+\]
+The positive integer \(\alpha_i+1\) is invertible over \(\C\).  Strong
+induction on \(|\alpha|\), with flatness making the choices of \(i\)
+consistent, gives the unique normalized solution; \(G_\alpha\) contains no
+power of \(z\) below \(-|\alpha|\).  Full flatness also makes the
+\(G\)-gauged \(z\)-connection independent of \(\eta\); at \(\eta=0\) it is
+the small connection, so \(G\) is the required connection gauge.
+After substituting \(\eta\), a
 term of total bulk degree \(m\) lies in \(F^mB\); modulo \(F^NB\), only the
 finitely many degrees \(m<N\) survive.  The resulting finite sum is congruent
 to the identity modulo \(F^1B\), hence is invertible, and has a Laurent lower
-bound depending on \(N\).  Uniqueness makes these
+bound at least \(-(N-1)\).  Uniqueness makes these
 solutions compatible in \(N\).  Their inverse limit belongs to
 \[
  \mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T)).
- \tag{4.1a}
+ \tag{4.1b}
 \]
 At each finite quotient the gauge uses only integral powers of \(z\), hence
 is single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes

@@ -384,8 +384,8 @@ coefficient pairing explicitly:
 lifts.  This is the nondegenerate heart form tensoring with the Weil pairing,
 not the zero restriction of the Gram form modulo two.  The polarization type,
 pullback identity, and commutator pairing now also give the exact orders
-(6^8) and (6^4) and prove maximal isotropy, rather than leaving that
-conclusion implicit; the two-primary kernel consequently has order (2^4).
+\(6^8\) and \(6^4\) and prove maximal isotropy, rather than leaving that
+conclusion implicit; the two-primary kernel consequently has order \(2^4\).
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
@@ -524,6 +524,11 @@ separatedness condition.  The quotient tower now feeds directly into the full
 finite-level formal-base-shift matrix packet.  Identification with the manuscript's complete separated
 multiplicative filtration, string and divisor equations, bulk flat solutions,
 and analytic integral-`z` gauge remain the exact formal-base-shift gap.
+The manuscript's own formal-base-shift proof now derives its finite-level
+Laurent bound coefficientwise: the flat recursion gives bulk coefficient
+\(G_\alpha\) no loop power below \(-|\alpha|\), so reduction modulo \(F^N\)
+has lower bound at least \(-(N-1)\).  This removes bounded Laurent order as an
+unstated premise of that human argument.
 For an arbitrary ideal, its adic powers now give a decreasing multiplicative
 filtration; an endomorphism preserving the generating ideal is proved to
 preserve every power, act on every quotient, and commute with adjacent

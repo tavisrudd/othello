@@ -495,6 +495,11 @@ are current, and the committed paper export verifies byte-for-byte in
   states the exact Levelt--Turrittin solution-algebra and constant-field input,
   and its pro-Laurent definition records a compatible polynomial system before
   using completeness and separatedness to recover one polynomial over the base.
+  The human base-shift proof now also writes the multivariable coefficient
+  recursion explicitly and proves that \(G_\alpha\) has no loop power below
+  \(-|\alpha|\); modulo \(F^N\), the evaluated gauge therefore has Laurent
+  lower bound at least \(-(N-1)\), rather than taking finite-level boundedness
+  as an input.
 - **Closeout `ej`+`tt` pass:** settled the cheap algebraic opportunity.  The
   finite-level formal-base-shift packet now derives not only compatible bulk
   matrices and the substituted polynomial identity, but also compatibility of
@@ -573,9 +578,9 @@ are current, and the committed paper export verifies byte-for-byte in
   the commutator pairing is the tensor product of the formalized coefficient
   form with the Weil pairing.  The manuscript now also spells out the order
   calculation behind maximal isotropy: the polarization type gives kernel
-  order (6^8), the pullback identity gives isogeny degree (6^4), and
+  order \(6^8\), the pullback identity gives isogeny degree \(6^4\), and
   functoriality makes the isogeny kernel isotropic; its two-primary part
-  therefore has order (2^4) inside the rank-eight discriminant local system.
+  therefore has order \(2^4\) inside the rank-eight discriminant local system.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The
