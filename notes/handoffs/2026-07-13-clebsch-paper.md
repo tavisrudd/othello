@@ -344,6 +344,20 @@ inclusions remains open.  Integrally, Lean identifies `ℤ⁶/ℤ1` with five
 coordinates and proves that the descended six-coordinate form has matrix
 `6I₅-J₅` and is invariant under the induced full permutation action; no
 geometric polarization is inferred.
+The referee-facing manuscript proof now also spells out the corresponding
+three-primary heart `Aug(F₃⁶)/⟨1⟩`, its normalized minus-dot-product form,
+and the four stable maximal-isotropic halves in `P¹(F₃)`, including the
+vertical member via a change of complementary symplectic ruling.  It proves
+the generic elliptic factor is non-CM from Hartlieb's positive-dimensional
+period image, classifies all stable halves in the semisimple multiplicity
+modules, relates the two-primary form to the trace-determinant model, and
+derives the graph-coordinate descent matrix from the source and quotient
+lattices.  The blowup and projective-bundle base-shift paragraphs now audit the
+actual coefficient domains, filtrations, reductions, divisor substitutions,
+and integral-`z` comparison maps; removal of a nonnilpotent unit term is
+correctly described as a rank-one exponential twist rather than a pro-Laurent
+gauge.  These changes strengthen the standalone proof and do not downgrade any
+theorem or Lean coverage classification.
 The manuscript's scheme-theoretic norm-image step is now pinned to
 Achter--Casalaina-Martin--Wise, Theorem~A: in characteristic zero the image is
 an abelian subscheme and the quotient factorization is stable under base

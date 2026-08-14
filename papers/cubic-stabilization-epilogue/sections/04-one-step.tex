@@ -123,10 +123,13 @@ small connection after the divisor substitution, coefficientwise in \(B\),
 \end{lemma}
 
 \begin{proof}
-The string equation removes \(a_0\mathbf1\) by a scalar exponential in
-\(z^{-1}\); this is single-valued and has trivial framed monodromy.  The divisor
-equation gives \eqref{eq:formal-base-shift-divisor}.  It remains to remove
-\(\eta\), including its component
+The string equation separates the rank-one exponential twist
+\(\exp(-a_0/z)\).  When \(a_0\) is not filtration-nilpotent this twist need
+not belong to the pro-Laurent gauge group, but a full turn on the original
+\(z\)-disc fixes it, so its framed monodromy is trivial.  The pro-Laurent
+gauge below is used only for the positive-filtration term \(\eta\).  The
+divisor equation gives \eqref{eq:formal-base-shift-divisor}.  It remains to
+remove \(\eta\), including its component
 in \(H^2(T)\).
 
 Modulo \(F^N B\), the flat bulk equations
@@ -262,6 +265,10 @@ and set
             \text{components of }s_j\bigr)\subset R_j,
  \qquad B_j=\varprojlim_N R_j/J_j^N.
 \]
+Here \(R_j\) is a subring of the Laurent monoid domain occurring in the
+comparison chart, and \(B_j\) is, by construction, complete and separated
+for the multiplicative \(J_j\)-adic filtration.  Reduction
+\(B_j/J_j^{N+1}\to B_j/J_j^N\) preserves the connection formulas.
 The center connection is defined over this image ring by
 \cite[Remark~5.6]{IritaniBlowup}.
 Formula \eqref{eq:blowup-reconstruction-coordinate},
@@ -271,12 +278,17 @@ shows that after the unit term \(-(c-1)\lambda_j\) and fixed divisor
 \(J_jH^*(C)\).  The noninjective center monomial map merely replaces the
 source ring by its image.
 
-First normalize the target connection over \(\C((u))\) by the single-valued
-string scalar for \(-(c-1)\lambda_j\) and by the fixed divisor shift.  The
-normalized connection descends to \(B_j\).  Apply
-Lemma~\ref{lem:formal-base-shift} modulo every \(J_j^N\), take the compatible
-inverse limit, and only then extend scalars to Iritani's Laurent comparison
-field and apply \(\Psi\).  The fixed-divisor substitution is a \(z\)-constant
+First separate the single-valued rank-one exponential twist associated with
+\(-(c-1)\lambda_j\), and apply the fixed divisor shift.  The normalized
+connection descends to \(B_j\).  Apply
+Lemma~\ref{lem:formal-base-shift} modulo every \(J_j^N\).  Uniqueness of the
+normalized solution makes the gauges, and hence their characteristic
+polynomials, compatible under all reductions.  Take the inverse limit, and
+only then extend scalars to Iritani's Laurent comparison field and apply
+\(\Psi\).  Theorem~5.18 supplies both \(\Psi\) and its inverse with only
+integral powers of \(z\), so these mutually inverse maps preserve the framed
+characteristic polynomial on the original disc.  The fixed-divisor
+substitution is a \(z\)-constant
 coefficient automorphism, so it does not change \(\nu_6\); it is well defined
 on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus each center target summand has the
 framed monodromy of its specialized small connection.  The ambient target
@@ -305,6 +317,11 @@ and set
             \text{components of }s_j\bigr)\subset R_j,
  \qquad B_j=\varprojlim_N R_j/J_j^N.
 \]
+Again \(R_j\) is a subring of the relevant Laurent monoid domain and \(B_j\)
+is its complete separated \(J_j\)-adic inverse-limit ring.  Formula (5.11)
+places the normalized target coordinate in \(J_jH^{\rm ev}(T)\), and the
+displayed exponent shows that the fixed-divisor substitution factors through
+the image monoid.
 Theorem~5.1, Proposition~5.6, and Section~5.8 of Iritani--Koto give
 \[
  \varsigma_j=\varsigma_j^\circ+s_j,
@@ -313,9 +330,14 @@ Theorem~5.1, Proposition~5.6, and Section~5.8 of Iritani--Koto give
 \]
 This is Theorem~5.1, Proposition~5.6, and Section~5.8, especially (5.11),
 of~\cite{IritaniKoto}.
-Normalize the Laurent unit and fixed divisor terms first.  The normalized
-connection descends to \(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
-finite quotients, and then extend scalars to the Laurent comparison field.
+Separate the Laurent unit as a single-valued rank-one exponential twist and
+apply the fixed divisor shift first.  The normalized connection descends to
+\(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
+finite quotients.  Uniqueness makes the gauges and characteristic
+polynomials compatible under reduction.  Then extend scalars to the Laurent
+comparison field.  Theorem~5.1 and Proposition~5.6 provide mutually inverse
+comparison maps using integral powers of \(z\), so the framed characteristic
+polynomial is preserved.
 Again the divisor substitution is a \(z\)-constant coefficient automorphism;
 it factors through the displayed \(u\)-exponent.
 This gives \(r\)
@@ -513,7 +535,7 @@ polynomial
 \[
  \rho^2+\rho+\frac5{36},
 \]
-with roots \(-1/6\) and \(-5/6\) \cite[Section~3 and Proposition~6]{Cai}.  His gauge uses only
+with roots \(-1/6\) and \(-5/6\) \cite[Section~3, pp.~5--6]{Cai}.  His gauge uses only
 integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
 are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
 blocks are displayed as exponentials in \(z^{-1}\) times series in nonnegative

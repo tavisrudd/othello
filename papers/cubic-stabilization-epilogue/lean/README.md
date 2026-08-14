@@ -1,4 +1,4 @@
-# Lean companion to *Cubic threefolds: cycle triviality versus one-step irrationality*
+# Lean companion to *Irrationality after One Stabilization of Universally (CH_0)-Trivial Cubic Threefolds*
 
 This Mathlib-only package is the formal companion to the manuscript.  Its
 reviewer-facing entry point is

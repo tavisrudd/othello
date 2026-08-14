@@ -163,7 +163,12 @@ two-dimensional factor, the induced rank-eight tensor-product form is also
 alternating and nondegenerate, and every isotropic four-dimensional subspace
 is maximal.  The explicit two-heart equivalence preserves this form and
 identifies the five projective-line packet members exactly with the diagonally
-stable maximal-isotropic subspaces of the rank-eight discriminant.  From a
+stable maximal-isotropic subspaces of the rank-eight discriminant.  The
+manuscript now gives the parallel three-primary calculation explicitly:
+`H₃ = Aug(F₃⁶)/⟨1⟩`, the normalized coefficient form is minus the dot
+product, and the four stable maximal-isotropic halves are the three scalar
+graphs and the vertical line in `P¹(F₃)` (made affine by changing the marked
+symplectic ruling when necessary).  From a
 supplied fibrewise coordinate realization whose image is exactly the named
 geometric kernel, Lean constructs a kernel-to-subspace equivalence and proves
 that every fibre belongs to the five-member packet.  The coordinate
@@ -185,6 +190,16 @@ Lean identifies `ℤ⁶/ℤ1` with five coordinates and proves that the descende
 six-coordinate form has matrix `6I₅-J₅` in that chart and is invariant under
 the induced full permutation action; no geometric
 polarization is inferred.
+The referee repair also makes the generic non-CM reduction explicit from the
+positive-dimensional period image, classifies every stable half in the
+semisimple two- and three-primary multiplicity modules, identifies the
+two-primary invariant form with its trace-determinant model up to the stated
+basis normalization, and derives the local graph-coordinate matrix from the
+source and quotient lattices.  The quantum comparison audit now names the
+coefficient domains, complete separated filtrations, compatible reductions,
+divisor substitutions, and integral-`z` comparison maps in the cited blowup
+and projective-bundle theorems.  These are proof-strengthening repairs only;
+no manuscript theorem or Lean coverage status was downgraded.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,
 arbitrary positive-rank projective-bundle presentations, and iterated point
