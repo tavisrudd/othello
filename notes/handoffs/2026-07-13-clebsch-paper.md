@@ -231,7 +231,7 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-80 sources build through the guarded queue, and the rejecting audit gives an
+81 sources build through the guarded queue, and the rejecting audit gives an
 exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
@@ -248,7 +248,11 @@ The separation-family headline's four conclusions are now one conditional
 composition with its projective-bundle, packet, and period-map inputs exposed.
 The relative-six-axis row is now an explicit fragment: an opaque organizational
 signature records all named geometric assertions, while Lean independently
-proves the complete integral Smith witness with two-sided inverse operations.
+proves the complete integral Smith witness with two-sided inverse operations
+and the coefficient-module part of the two-primary discriminant.  For every
+`F₂`-module `T`, the tensor-extended coefficient kernel is explicitly four
+copies of `T`; a two-dimensional factor gives order `2⁸`, and the scalar
+coordinates agree with `Aug(F₂⁶)/⟨1⟩`.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then

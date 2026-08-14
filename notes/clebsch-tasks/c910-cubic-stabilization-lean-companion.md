@@ -80,7 +80,7 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 80 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 81 Lean
 sources build through the guarded queue.  The reviewer interface currently
 exports 144 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
@@ -106,9 +106,12 @@ algebraicity and Voisin's supplied equivalence to universal `CH₀`-triviality.
 The four conclusions of the separation-family headline are also assembled in
 one conditional theorem with every Chow, packet, and period-map input exposed.
 The relative-six-axis row now has an opaque organizational signature for all
-named geometric assertions and an independently proved full integral Smith
-witness; this is explicitly a fragment, not a conditional proof of the
-scheme-theoretic lemma.
+named geometric assertions and independently proved algebraic content: the
+full integral Smith witness and, after tensoring with any `F₂`-module `T`, an
+explicit identification of the two-primary coefficient kernel with four
+copies of `T`.  This gives order `2⁸` for a two-dimensional tensor factor and
+identifies the scalar coordinates with `Aug(F₂⁶)/⟨1⟩`.  The row remains a
+fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,
 arbitrary positive-rank projective-bundle presentations, and iterated point

@@ -80,8 +80,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   that specializes the graph theorem to `Theta^4/4!`
   (`thm:six-axis-divided-powers`).
 - Formalize the cited Voisin criterion and its application to every smooth
-  fibre (`cor:universal-ch0`), then the relative family statement
-  (`lem:relative-six-axis`, currently fragmentary).
+  fibre (`cor:universal-ch0`), then the remaining relative-family geometry in
+  `lem:relative-six-axis`.  Lean now proves its full integral Smith witness and
+  the coefficient-module identity behind `D₂ ≃ H₂ ⊗ E[2]`, including the
+  order `2⁸` calculation, but not the elliptic scheme, torsion local system,
+  symplectic pairing, relative isogeny, or maximal-isotropic kernel.
 - Formalize the remaining quantum inputs: the separation family, construct the
   filtered target/associated graded and prove the now-explicit compatibility
   identifying the initial form of a geometric specialized series with its

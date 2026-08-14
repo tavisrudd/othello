@@ -1,4 +1,4 @@
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryDiscriminant
 
 /-!
 # Opaque organizational relative six-axis packet
@@ -6,7 +6,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 The relative abelian-scheme construction in the manuscript lies beyond the
 current Mathlib API.  This module provides an opaque organizational signature
 for its supplied geometric assertions.  Lean independently proves the full
-integral Smith witness for the displayed five-axis Gram matrix.
+integral Smith witness for the displayed five-axis Gram matrix and computes
+the two-primary coefficient discriminant after tensoring with any `F₂`-module.
 
 No scheme, isogeny, torsion local system, group action, or pairing is
 constructed here.
@@ -95,7 +96,8 @@ structure RelativeSixAxisGeometricInput
   kernelMaximalIsotropic : Prop
 
 /-- Organizational relative-six-axis packet.  Its geometric component is
-supplied wholesale; the full integral Smith witness is proved by Lean. -/
+supplied wholesale; the integral Smith witness and two-primary coefficient
+discriminant are proved by Lean. -/
 structure RelativeSixAxisConclusion
     {Base : Type*} (objects : RelativeSixAxisObjects Base) : Prop where
   /-- All relative geometric assertions of the lemma. -/
@@ -114,19 +116,39 @@ structure RelativeSixAxisConclusion
           GraphLattices.sixAxisSmithRightInverse = 1 ∧
       GraphLattices.sixAxisSmithRightInverse *
           GraphLattices.sixAxisSmithRight = 1
+  /-- For every `F₂`-module `T`, the kernel of the tensor-extended
+  five-axis Gram map is explicitly equivalent to four copies of `T`. -/
+  twoPrimaryTensorKernelCoordinates :
+    ∀ (T : Type) [AddCommGroup T] [Module GraphLattices.F2 T],
+      Nonempty ((Fin 4 → T) ≃ GraphLattices.SixAxisTwoPrimaryDiscriminant T)
+  /-- For a two-dimensional `F₂` tensor factor, the discriminant has
+  `2⁸` elements. -/
+  twoPrimaryRankEightCardinality :
+    Fintype.card
+      (GraphLattices.SixAxisTwoPrimaryDiscriminant
+        (Fin 2 → GraphLattices.F2)) = 256
+  /-- The scalar discriminant coordinates are the normalized coordinates of
+  the six-point coefficient heart `Aug(F₂⁶)/⟨1⟩`. -/
+  twoPrimaryCoordinatesAgreeWithHeart :
+    ∀ (heart : Fin 4 → GraphLattices.F2) (index : Fin 5),
+      GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative heart index =
+        GraphLattices.sixPointHeartRepresentative heart ⟨index, by omega⟩
 
 /-- Package the supplied opaque relative-six-axis fields with the independently
-proved integral Smith witness. -/
+proved integral Smith witness and two-primary coefficient calculation. -/
 theorem relativeSixAxis_of_geometricInputs
     {Base : Type*} (objects : RelativeSixAxisObjects Base)
     (geometry : RelativeSixAxisGeometricInput objects) :
     RelativeSixAxisConclusion objects :=
   ⟨⟨geometry⟩,
-    GraphLattices.sixAxisGram_smith_reduction,
-    GraphLattices.sixAxisSmithLeft_mul_inverse,
-    GraphLattices.sixAxisSmithLeft_inverse_mul,
-    GraphLattices.sixAxisSmithRight_mul_inverse,
-    GraphLattices.sixAxisSmithRight_inverse_mul⟩
+    ⟨GraphLattices.sixAxisGram_smith_reduction,
+      GraphLattices.sixAxisSmithLeft_mul_inverse,
+      GraphLattices.sixAxisSmithLeft_inverse_mul,
+      GraphLattices.sixAxisSmithRight_mul_inverse,
+      GraphLattices.sixAxisSmithRight_inverse_mul⟩,
+    fun T _ _ ↦ ⟨GraphLattices.sixAxisTwoPrimaryDiscriminantEquiv T⟩,
+    GraphLattices.sixAxisTwoPrimaryDiscriminant_rankEight_card,
+    GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative_eq_heart⟩
 
 end Applications
 
