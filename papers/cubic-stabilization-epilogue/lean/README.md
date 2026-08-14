@@ -356,9 +356,10 @@ The 144 reviewer-facing terminals currently verify:
 - an opaque organizational relative-six-axis signature, with the full
   five-axis integral Smith witness and the coefficient-module part of the
   two-primary discriminant independently discharged by Lean: after tensoring
-  with any `F₂`-module `T`, the kernel is explicitly four copies of `T`, hence
+  with any `F₂`-module `T`, the kernel is linearly equivalent to four copies of `T`, hence
   has order `2⁸` for a two-dimensional factor, and its scalar coordinates
-  agree with `Aug(F₂⁶)/⟨1⟩`;
+  agree with `Aug(F₂⁶)/⟨1⟩`; the induced coefficient form is bilinear,
+  alternating, and nondegenerate;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.

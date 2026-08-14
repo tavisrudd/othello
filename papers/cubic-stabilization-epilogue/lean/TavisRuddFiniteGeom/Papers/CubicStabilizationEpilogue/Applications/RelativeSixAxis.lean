@@ -120,7 +120,8 @@ structure RelativeSixAxisConclusion
   five-axis Gram map is explicitly equivalent to four copies of `T`. -/
   twoPrimaryTensorKernelCoordinates :
     ∀ (T : Type) [AddCommGroup T] [Module GraphLattices.F2 T],
-      Nonempty ((Fin 4 → T) ≃ GraphLattices.SixAxisTwoPrimaryDiscriminant T)
+      Nonempty ((Fin 4 → T) ≃ₗ[GraphLattices.F2]
+        GraphLattices.SixAxisTwoPrimaryDiscriminant T)
   /-- For a two-dimensional `F₂` tensor factor, the discriminant has
   `2⁸` elements. -/
   twoPrimaryRankEightCardinality :
@@ -133,6 +134,10 @@ structure RelativeSixAxisConclusion
     ∀ (heart : Fin 4 → GraphLattices.F2) (index : Fin 5),
       GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative heart index =
         GraphLattices.sixPointHeartRepresentative heart ⟨index, by omega⟩
+  /-- The normalized dot product on the coefficient heart is bilinear,
+  alternating, and nondegenerate. -/
+  twoPrimaryHeartCoefficientForm :
+    GraphLattices.SixPointHeartCoefficientFormProperties
 
 /-- Package the supplied opaque relative-six-axis fields with the independently
 proved integral Smith witness and two-primary coefficient calculation. -/
@@ -146,9 +151,10 @@ theorem relativeSixAxis_of_geometricInputs
       GraphLattices.sixAxisSmithLeft_inverse_mul,
       GraphLattices.sixAxisSmithRight_mul_inverse,
       GraphLattices.sixAxisSmithRight_inverse_mul⟩,
-    fun T _ _ ↦ ⟨GraphLattices.sixAxisTwoPrimaryDiscriminantEquiv T⟩,
+    fun T _ _ ↦ ⟨GraphLattices.sixAxisTwoPrimaryDiscriminantLinearEquiv T⟩,
     GraphLattices.sixAxisTwoPrimaryDiscriminant_rankEight_card,
-    GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative_eq_heart⟩
+    GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative_eq_heart,
+    GraphLattices.sixPointHeartCoefficientForm_properties⟩
 
 end Applications
 

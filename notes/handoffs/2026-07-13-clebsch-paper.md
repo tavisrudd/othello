@@ -250,9 +250,10 @@ The relative-six-axis row is now an explicit fragment: an opaque organizational
 signature records all named geometric assertions, while Lean independently
 proves the complete integral Smith witness with two-sided inverse operations
 and the coefficient-module part of the two-primary discriminant.  For every
-`F₂`-module `T`, the tensor-extended coefficient kernel is explicitly four
+`F₂`-module `T`, the tensor-extended coefficient kernel is linearly equivalent to four
 copies of `T`; a two-dimensional factor gives order `2⁸`, and the scalar
-coordinates agree with `Aug(F₂⁶)/⟨1⟩`.
+coordinates agree with `Aug(F₂⁶)/⟨1⟩`, with a proved bilinear,
+alternating, nondegenerate coefficient form.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then

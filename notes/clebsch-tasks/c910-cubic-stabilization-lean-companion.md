@@ -108,9 +108,10 @@ one conditional theorem with every Chow, packet, and period-map input exposed.
 The relative-six-axis row now has an opaque organizational signature for all
 named geometric assertions and independently proved algebraic content: the
 full integral Smith witness and, after tensoring with any `F₂`-module `T`, an
-explicit identification of the two-primary coefficient kernel with four
+explicit linear identification of the two-primary coefficient kernel with four
 copies of `T`.  This gives order `2⁸` for a two-dimensional tensor factor and
-identifies the scalar coordinates with `Aug(F₂⁶)/⟨1⟩`.  The row remains a
+identifies the scalar coordinates with `Aug(F₂⁶)/⟨1⟩`; their normalized dot
+product is bilinear, alternating, and nondegenerate.  The row remains a
 fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,

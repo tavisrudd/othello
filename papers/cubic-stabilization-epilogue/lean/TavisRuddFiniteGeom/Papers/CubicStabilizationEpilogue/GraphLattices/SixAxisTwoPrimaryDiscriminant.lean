@@ -14,7 +14,8 @@ by the two-torsion of an elliptic curve after choosing a basis, the kernel has
 For `T = F₂`, the explicit equivalence agrees with the normalized coordinates
 for the six-point coefficient heart
 `Aug(F₂⁶)/⟨1⟩`.  Thus the calculation proves the coefficient-module
-part of the relative identification `D₂ ≃ H₂ ⊗ E[2]`.  It does not
+part of the relative identification `D₂ ≃ H₂ ⊗ E[2]`; the normalized
+heart dot product is also proved bilinear, alternating, and nondegenerate.  It does not
 construct an elliptic scheme, its two-torsion local system, the Weil pairing,
 or the relative isogeny kernel.
 -/
@@ -64,10 +65,22 @@ theorem sixAxisGramTensorMap_eq_zero_iff_sum_zero
     rw [sixAxisGramTensorMap_apply, sumZero]
     rfl
 
+/-- The tensor-extended five-axis Gram map as an `F₂`-linear map. -/
+def sixAxisGramTensorLinearMap
+    (T : Type*) [AddCommGroup T] [Module F2 T] :
+    (Fin 5 → T) →ₗ[F2] (Fin 5 → T) where
+  toFun := sixAxisGramTensorMap
+  map_add' left right := by
+    funext row
+    simp [sixAxisGramTensorMap, Finset.sum_add_distrib, smul_add]
+  map_smul' scalar vector := by
+    funext row
+    simp [sixAxisGramTensorMap, Finset.smul_sum, smul_smul, mul_comm]
+
 /-- The two-primary coefficient discriminant after tensoring with `T`. -/
 def SixAxisTwoPrimaryDiscriminant
     (T : Type*) [AddCommGroup T] [Module F2 T] :=
-  {vector : Fin 5 → T // sixAxisGramTensorMap vector = 0}
+  LinearMap.ker (sixAxisGramTensorLinearMap T)
 
 /-- Four tensor coordinates determine a discriminant vector; the fifth
 coordinate is their sum. -/
@@ -145,6 +158,27 @@ def sixAxisTwoPrimaryDiscriminantEquiv
               vector.1 4 := by abel
         _ = vector.1 4 := by rw [splitSum, zero_add]
 
+/-- The four-coordinate description is linear over `F₂`, not merely a
+bijection of the underlying finite sets. -/
+def sixAxisTwoPrimaryDiscriminantLinearEquiv
+    (T : Type*) [AddCommGroup T] [Module F2 T] :
+    (Fin 4 → T) ≃ₗ[F2] SixAxisTwoPrimaryDiscriminant T where
+  toEquiv := sixAxisTwoPrimaryDiscriminantEquiv T
+  map_add' left right := by
+    apply Subtype.ext
+    funext index
+    fin_cases index <;>
+      simp [sixAxisTwoPrimaryDiscriminantEquiv,
+        sixAxisTwoPrimaryDiscriminantRepresentative,
+        Finset.sum_add_distrib]
+  map_smul' scalar vector := by
+    apply Subtype.ext
+    funext index
+    fin_cases index <;>
+      simp [sixAxisTwoPrimaryDiscriminantEquiv,
+        sixAxisTwoPrimaryDiscriminantRepresentative,
+        Finset.smul_sum]
+
 /-- The explicit four-coordinate equivalence supplies the finite structure of
 the discriminant whenever the tensor factor is finite. -/
 noncomputable instance sixAxisTwoPrimaryDiscriminantFintype
@@ -180,6 +214,150 @@ theorem sixAxisTwoPrimaryDiscriminantRepresentative_eq_heart
       sixPointHeartRepresentative heart ⟨index, by omega⟩ := by
   fin_cases index <;>
     rfl
+
+/-- The coefficient pairing on the six-point heart, obtained by restricting
+the ordinary dot product to normalized augmentation representatives. -/
+def sixPointHeartCoefficientForm
+    (left right : Fin 4 → F2) : F2 :=
+  ∑ point : Fin 6,
+    sixPointHeartRepresentative left point *
+      sixPointHeartRepresentative right point
+
+/-- Coordinate formula for the coefficient pairing: the ordinary dot product
+on four coordinates plus the product of their coordinate sums. -/
+theorem sixPointHeartCoefficientForm_formula
+    (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm left right =
+      (∑ index, left index * right index) +
+        (∑ index, left index) * (∑ index, right index) := by
+  simp [sixPointHeartCoefficientForm, sixPointHeartRepresentative,
+    Fin.sum_univ_succ]
+  ring
+
+/-- The coefficient pairing is additive in its first argument. -/
+theorem sixPointHeartCoefficientForm_add_left
+    (left₁ left₂ right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm (left₁ + left₂) right =
+      sixPointHeartCoefficientForm left₁ right +
+        sixPointHeartCoefficientForm left₂ right := by
+  simp [sixPointHeartCoefficientForm_formula, Finset.sum_add_distrib,
+    add_mul]
+  ring
+
+/-- Normalized heart representatives respect scalar multiplication. -/
+theorem sixPointHeartRepresentative_smul
+    (scalar : F2) (heart : Fin 4 → F2) (point : Fin 6) :
+    sixPointHeartRepresentative (scalar • heart) point =
+      scalar * sixPointHeartRepresentative heart point := by
+  fin_cases point <;>
+    simp [sixPointHeartRepresentative, Finset.mul_sum]
+
+/-- The coefficient pairing respects scalar multiplication in its first
+argument. -/
+theorem sixPointHeartCoefficientForm_smul_left
+    (scalar : F2) (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm (scalar • left) right =
+      scalar * sixPointHeartCoefficientForm left right := by
+  simp only [sixPointHeartCoefficientForm]
+  simp_rw [sixPointHeartRepresentative_smul]
+  rw [Finset.mul_sum]
+  simp [mul_assoc]
+
+/-- The coefficient pairing is symmetric. -/
+theorem sixPointHeartCoefficientForm_comm
+    (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm left right =
+      sixPointHeartCoefficientForm right left := by
+  simp [sixPointHeartCoefficientForm_formula, mul_comm]
+
+/-- The coefficient pairing is additive in its second argument. -/
+theorem sixPointHeartCoefficientForm_add_right
+    (left right₁ right₂ : Fin 4 → F2) :
+    sixPointHeartCoefficientForm left (right₁ + right₂) =
+      sixPointHeartCoefficientForm left right₁ +
+        sixPointHeartCoefficientForm left right₂ := by
+  rw [sixPointHeartCoefficientForm_comm]
+  simp only [sixPointHeartCoefficientForm_add_left]
+  rw [sixPointHeartCoefficientForm_comm left right₁,
+    sixPointHeartCoefficientForm_comm left right₂]
+
+/-- The coefficient pairing respects scalar multiplication in its second
+argument. -/
+theorem sixPointHeartCoefficientForm_smul_right
+    (scalar : F2) (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm left (scalar • right) =
+      scalar * sixPointHeartCoefficientForm left right := by
+  rw [sixPointHeartCoefficientForm_comm]
+  simp only [sixPointHeartCoefficientForm_smul_left]
+  rw [sixPointHeartCoefficientForm_comm left right]
+
+/-- The coefficient pairing is alternating. -/
+theorem sixPointHeartCoefficientForm_self
+    (heart : Fin 4 → F2) :
+    sixPointHeartCoefficientForm heart heart = 0 := by
+  have square (value : F2) : value * value = value := by
+    fin_cases value <;>
+      decide
+  rw [sixPointHeartCoefficientForm_formula]
+  simp_rw [square]
+  exact sixAxisF2Module_add_self_eq_zero _
+
+/-- The alternating coefficient pairing is nondegenerate. -/
+theorem sixPointHeartCoefficientForm_nondegenerate
+    (heart : Fin 4 → F2)
+    (annihilates : ∀ test, sixPointHeartCoefficientForm heart test = 0) :
+    heart = 0 := by
+  have sumZero : ∑ index, heart index = 0 := by
+    have againstOne := annihilates (fun _ ↦ 1)
+    rw [sixPointHeartCoefficientForm_formula] at againstOne
+    simpa [show (4 : F2) = 0 by decide] using againstOne
+  funext index
+  have againstBasis := annihilates (fun test ↦ if test = index then 1 else 0)
+  rw [sixPointHeartCoefficientForm_formula] at againstBasis
+  simpa [sumZero] using againstBasis
+
+/-- The exact bilinear, alternating, and nondegenerate properties of the
+six-point heart coefficient form. -/
+structure SixPointHeartCoefficientFormProperties : Prop where
+  /-- Additivity in the first variable. -/
+  addLeft : ∀ left₁ left₂ right,
+    sixPointHeartCoefficientForm (left₁ + left₂) right =
+      sixPointHeartCoefficientForm left₁ right +
+        sixPointHeartCoefficientForm left₂ right
+  /-- Scalar compatibility in the first variable. -/
+  smulLeft : ∀ scalar left right,
+    sixPointHeartCoefficientForm (scalar • left) right =
+      scalar * sixPointHeartCoefficientForm left right
+  /-- Symmetry. -/
+  symmetric : ∀ left right,
+    sixPointHeartCoefficientForm left right =
+      sixPointHeartCoefficientForm right left
+  /-- Additivity in the second variable. -/
+  addRight : ∀ left right₁ right₂,
+    sixPointHeartCoefficientForm left (right₁ + right₂) =
+      sixPointHeartCoefficientForm left right₁ +
+        sixPointHeartCoefficientForm left right₂
+  /-- Scalar compatibility in the second variable. -/
+  smulRight : ∀ scalar left right,
+    sixPointHeartCoefficientForm left (scalar • right) =
+      scalar * sixPointHeartCoefficientForm left right
+  /-- Alternation. -/
+  alternating : ∀ heart, sixPointHeartCoefficientForm heart heart = 0
+  /-- Nondegeneracy. -/
+  nondegenerate : ∀ heart,
+    (∀ test, sixPointHeartCoefficientForm heart test = 0) → heart = 0
+
+/-- The normalized dot product gives the six-point coefficient heart a
+nondegenerate alternating bilinear form. -/
+theorem sixPointHeartCoefficientForm_properties :
+    SixPointHeartCoefficientFormProperties :=
+  ⟨sixPointHeartCoefficientForm_add_left,
+    sixPointHeartCoefficientForm_smul_left,
+    sixPointHeartCoefficientForm_comm,
+    sixPointHeartCoefficientForm_add_right,
+    sixPointHeartCoefficientForm_smul_right,
+    sixPointHeartCoefficientForm_self,
+    sixPointHeartCoefficientForm_nondegenerate⟩
 
 end GraphLattices
 

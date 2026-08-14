@@ -120,10 +120,12 @@ packet: elliptic/source/Jacobian families, relative
 isogeny, finite-flatness, `A₅`/`S₆` actions, polarization identity,
 two-primary symplectic discriminant description, and `A₅`-stable maximal-isotropic
 kernel.  Lean contributes the integral Smith reduction of the identified
-five-axis Gram matrix and, for every `F₂`-module `T`, an explicit equivalence
+five-axis Gram matrix and, for every `F₂`-module `T`, an explicit linear equivalence
 between the tensor-extended two-primary coefficient kernel and four copies of
 `T`.  In particular, a two-dimensional tensor factor gives a kernel of order
 `2⁸`, and the scalar coordinates agree with the six-point coefficient heart.
+The normalized heart dot product is proved bilinear, alternating, and
+nondegenerate.
 The named proposition fields do not define
 scheme-theoretic semantics, and Lean constructs none of the relative
 geometry. -/
