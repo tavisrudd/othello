@@ -105,7 +105,11 @@ The 144 reviewer-facing terminals currently verify:
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
-  with an explicit equivalence from `P¹(F5)` to the Sylow-five packet,
+  with an explicit equivalence from `P¹(F5)` to the Sylow-five packet.  The
+  faithful natural `PSL₂(F5)` action is constructed, its order is proved to
+  be `60`, explicit determinant-one matrices induce the displayed generators,
+  and an explicit isomorphism `PSL₂(F5) ≃ A5` intertwines the full projective
+  action with conjugation on the Sylow-five packet,
   without identifying this packet with the manuscript's geometric `D5`
   subgroups and axes;
 - the

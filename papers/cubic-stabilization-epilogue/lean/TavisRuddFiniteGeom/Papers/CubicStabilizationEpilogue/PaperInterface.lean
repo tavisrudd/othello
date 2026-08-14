@@ -11,6 +11,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveLine
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveSpecialLinearAction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1732,7 +1733,12 @@ on five letters, thereby identifying the abstract generated action with a
 concrete `A5`.  It constructs all six Sylow-five subgroups, proves that
 conjugation by the two generators permutes them by exactly the original
 six-point action, and identifies each ten-element normalizer explicitly with
-the dihedral group `D5`.  The resulting six-label equivalence intertwines both
+the dihedral group `D5`.  It also constructs the faithful natural
+`PSL₂(F5)` action on `P¹(F5)`, proves that the displayed translation and
+inversion come from explicit determinant-one matrices, computes
+`|PSL₂(F5)|=60`, and constructs an explicit isomorphism `PSL₂(F5) ≃ A5`
+intertwining that projective action with conjugation on the six Sylow-five
+subgroups.  The resulting six-label equivalence intertwines both
 displayed generators with conjugation, and each point stabilizer is its
 normalizer.  This is the concrete group-theoretic six-label packet, but the
 terminal does not identify it with the manuscript's six
@@ -1817,6 +1823,20 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       (Projectivization GraphLattices.F5
           (GraphLattices.F5 × GraphLattices.F5) ≃
         Sylow 5 (alternatingGroup (Fin 5))) ∧
+    Nat.card PSL(2, GraphLattices.F5) = 60 ∧
+    Function.Injective GraphLattices.psl2F5SixPointAction ∧
+    GraphLattices.psl2F5SixPointAction
+        (GraphLattices.f5TranslationSpecialLinear :
+          PSL(2, GraphLattices.F5)) =
+      GraphLattices.sixPointTranslationPermutation ∧
+    GraphLattices.psl2F5SixPointAction
+        (GraphLattices.f5InversionSpecialLinear :
+          PSL(2, GraphLattices.F5)) =
+      GraphLattices.sixPointInversionPermutation ∧
+    (∀ transformation : PSL(2, GraphLattices.F5),
+      GraphLattices.alternatingFiveSixPointAction
+          (GraphLattices.psl2F5EquivAlternatingFive transformation) =
+        GraphLattices.psl2F5SixPointAction transformation) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1849,6 +1869,11 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     fun label => ⟨GraphLattices.sixPointEquivProjectiveLineF5_translation label,
       GraphLattices.sixPointEquivProjectiveLineF5_inversion label⟩,
     ⟨GraphLattices.f5ProjectiveLineEquivFiveSylow⟩,
+    GraphLattices.f5_projectiveSpecialLinearGroup_two_card,
+    GraphLattices.psl2F5SixPointAction_injective,
+    GraphLattices.psl2F5SixPointAction_translation,
+    GraphLattices.psl2F5SixPointAction_inversion,
+    GraphLattices.psl2F5EquivAlternatingFive_action,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 

@@ -80,7 +80,7 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 79 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 80 Lean
 sources build through the guarded queue.  The reviewer interface currently
 exports 144 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
@@ -236,7 +236,11 @@ quadratic four-element algebra.  All six Sylow-five subgroups of this concrete
 `A5` are now constructed, and their conjugation action is exactly the original
 six-point action.  The resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to
-`D5`; identifying this concrete packet with the manuscript's geometric `D5`
+`D5`.  The faithful natural `PSL₂(F5)` action on this projective line is now
+constructed, has proved order `60`, realizes the displayed generators by
+determinant-one matrices, and is identified with the same concrete `A5` by an
+isomorphism intertwining the full six-point actions.  Identifying this concrete
+packet with the manuscript's geometric `D5`
 subgroups and axes remains open.  The explicit
 characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit

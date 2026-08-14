@@ -231,7 +231,7 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-79 sources build through the guarded queue, and the rejecting audit gives an
+80 sources build through the guarded queue, and the rejecting audit gives an
 exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
@@ -408,7 +408,10 @@ quadratic algebra.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;
-identification with the manuscript's geometric `D5` subgroups and axes remains
+the faithful natural `PSL₂(F5)` action has proved order `60`, its displayed
+generators come from explicit determinant-one matrices, and an explicit
+action-compatible isomorphism identifies it with the same concrete `A5`.
+Identification with the manuscript's geometric `D5` subgroups and axes remains
 open.  The explicit
 two-primary companion model now has a concrete quadratic
 finite-etale splitting field and marked explicit eigenbasis; its identification

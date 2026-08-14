@@ -48,7 +48,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   constructs all six Sylow-five subgroups, proves their conjugation action is
   the same six-point action, and identifies every ten-element normalizer with
   the dihedral group `D5`; the actual `P¹(F5)` is explicitly equivalent to
-  that Sylow-five packet.  Identification of those concrete subgroups,
+  that Sylow-five packet.  Lean also constructs the faithful natural
+  `PSL₂(F5)` action, proves its order is `60`, realizes the two displayed
+  generators by determinant-one matrices, and constructs an action-compatible
+  isomorphism `PSL₂(F5) ≃ A5`.  Identification of those concrete subgroups,
   action, normalizers, and heart with the geometric ones remains open
   (`prop:principal-gluing-packet`).
 - Identify the explicitly constructed quadratic finite-etale splitting field
