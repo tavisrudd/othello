@@ -480,7 +480,7 @@ irrational.
 > replacements based only on formal monodromy, pairing, integrality, or
 > localized Fourier support.
 
-**Delivers.** Exact local transport theorems, three minimal failure models,
+**Delivers.** Exact local transport theorems, three explicit failure models,
 global support collapse, coefficientwise Gamma reduction, a conditional
 tail-holonomicity reduction, an unconditional cubic endpoint calculation, and
 a conditional all-stabilizations criterion.
