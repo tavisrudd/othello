@@ -1,3 +1,5 @@
+import Mathlib.GroupTheory.Sylow
+import Mathlib.GroupTheory.SpecificGroups.Dihedral
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAlternatingAction
 
 /-!
@@ -8,7 +10,9 @@ explicit order-five subgroups of the concrete alternating group on five
 letters.  The factor translation and inversion conjugate these subgroups by
 exactly the displayed six-point projective-line permutations.  Their
 pairwise distinctness gives the concrete order-five subgroup packet behind
-the manuscript's abstract six-label action.
+the manuscript's abstract six-label action.  Lean further proves that these
+are all the Sylow-five subgroups of the concrete alternating group and that
+each normalizer has ten elements.
 
 All finite identities are checked by kernel reduction.  No native execution,
 external certificate, or oracle is used.  This is a concrete group-theoretic
@@ -19,6 +23,8 @@ quotients and axes remains a separate geometric step.
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 namespace GraphLattices
+
+private instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
 
 /-- One generator for each of the six order-five subgroups, in the labelling
 for which conjugation agrees with the projective-line translation and
@@ -292,6 +298,269 @@ theorem sixPointFiveSubgroup_injective :
   all_goals exfalso
   all_goals revert equality
   all_goals decide
+
+/-- Each displayed order-five subgroup, promoted to a Sylow-five subgroup of
+the concrete alternating group. -/
+noncomputable def sixPointFiveSylow (label : Fin 6) :
+    Sylow 5 (alternatingGroup (Fin 5)) :=
+  Sylow.ofCard (sixPointFiveSubgroup label) (by
+    rw [sixPointFiveSubgroup_card, nat_card_alternatingGroup]
+    norm_num only [Nat.card_fin, Nat.factorial]
+    rw [show 60 = ((5 * 2) * 2) * 3 by norm_num,
+      Nat.factorization_mul (by norm_num) (by norm_num),
+      Finsupp.add_apply, Nat.factorization_mul (by norm_num) (by norm_num),
+      Finsupp.add_apply, Nat.factorization_mul (by norm_num) (by norm_num),
+      Finsupp.add_apply]
+    norm_num [Nat.factorization_def])
+
+/-- Forgetting the Sylow structure recovers the displayed cyclic subgroup. -/
+@[simp]
+theorem sixPointFiveSylow_coe (label : Fin 6) :
+    (sixPointFiveSylow label : Subgroup (alternatingGroup (Fin 5))) =
+      sixPointFiveSubgroup label := by
+  simp [sixPointFiveSylow]
+
+/-- The six displayed Sylow-five subgroups remain pairwise distinct. -/
+theorem sixPointFiveSylow_injective :
+    Function.Injective sixPointFiveSylow := by
+  intro left right equality
+  apply sixPointFiveSubgroup_injective
+  simpa only [sixPointFiveSylow_coe] using
+    congrArg Sylow.toSubgroup equality
+
+/-- There are exactly six Sylow-five subgroups in the concrete alternating
+group on five letters. -/
+theorem sixPointFiveSylow_card :
+    Nat.card (Sylow 5 (alternatingGroup (Fin 5))) = 6 := by
+  let packet : Fin 6 → Sylow 5 (alternatingGroup (Fin 5)) :=
+    sixPointFiveSylow
+  have lower : 6 ≤ Nat.card (Sylow 5 (alternatingGroup (Fin 5))) := by
+    simpa only [Nat.card_fin] using
+      Nat.card_le_card_of_injective packet sixPointFiveSylow_injective
+  have subgroupIndex : (sixPointFiveSylow 0).index = 12 := by
+    have equality := (sixPointFiveSylow 0 :
+      Subgroup (alternatingGroup (Fin 5))).card_mul_index
+    rw [sixPointFiveSylow_coe, sixPointFiveSubgroup_card,
+      nat_card_alternatingGroup] at equality
+    norm_num at equality
+    exact Nat.eq_of_mul_eq_mul_left (by norm_num) equality
+  have divisor : Nat.card (Sylow 5 (alternatingGroup (Fin 5))) ∣ 12 := by
+    simpa only [subgroupIndex] using
+      Sylow.card_dvd_index (sixPointFiveSylow 0)
+  have upper : Nat.card (Sylow 5 (alternatingGroup (Fin 5))) ≤ 12 :=
+    Nat.le_of_dvd (by norm_num) divisor
+  have congruence := card_sylow_modEq_one 5 (alternatingGroup (Fin 5))
+  change Nat.card (Sylow 5 (alternatingGroup (Fin 5))) % 5 = 1 at congruence
+  have notEleven : Nat.card (Sylow 5 (alternatingGroup (Fin 5))) ≠ 11 := by
+    intro equality
+    rw [equality] at divisor
+    norm_num at divisor
+  omega
+
+/-- The six labels are exactly the six Sylow-five subgroups. -/
+noncomputable def sixPointFiveSylowEquiv :
+    Fin 6 ≃ Sylow 5 (alternatingGroup (Fin 5)) :=
+  Equiv.ofBijective sixPointFiveSylow
+    ((Nat.bijective_iff_injective_and_card sixPointFiveSylow).2
+      ⟨sixPointFiveSylow_injective, by
+        rw [Nat.card_fin, sixPointFiveSylow_card]⟩)
+
+/-- Every Sylow-five subgroup is one of the six displayed cyclic subgroups. -/
+theorem sixPointFiveSylow_surjective :
+    Function.Surjective sixPointFiveSylow :=
+  sixPointFiveSylowEquiv.surjective
+
+/-- The normalizer of each of the six displayed Sylow-five subgroups has ten
+elements. -/
+theorem sixPointFiveSubgroup_normalizer_card (label : Fin 6) :
+    Nat.card (Subgroup.normalizer
+      (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5)))) = 10 := by
+  have equality :=
+    (Subgroup.normalizer
+      (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5)))).card_mul_index
+  have normalizerIndex :
+      (Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5)))).index = 6 := by
+    have sylowIndex := Sylow.card_eq_index_normalizer (sixPointFiveSylow label)
+    rw [sixPointFiveSylow_card] at sylowIndex
+    have setEquality :
+        (sixPointFiveSylow label : Set (alternatingGroup (Fin 5))) =
+          (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) := by
+      exact congrArg SetLike.coe (sixPointFiveSylow_coe label)
+    rw [setEquality] at sylowIndex
+    exact sylowIndex.symm
+  rw [normalizerIndex, nat_card_alternatingGroup] at equality
+  norm_num at equality
+  omega
+
+/-- One reflection for each displayed order-five subgroup. -/
+def sixPointFiveReflectorTable : Fin 6 → Fin 5 → Fin 5 :=
+  !![0, 3, 4, 1, 2;
+     0, 3, 4, 1, 2;
+     0, 2, 1, 4, 3;
+     0, 4, 3, 2, 1;
+     0, 2, 1, 4, 3;
+     0, 4, 3, 2, 1]
+
+/-- The permutation represented by a row of `sixPointFiveReflectorTable`. -/
+def sixPointFiveReflectorPermutation (label : Fin 6) : Equiv.Perm (Fin 5) where
+  toFun := sixPointFiveReflectorTable label
+  invFun := sixPointFiveReflectorTable label
+  left_inv point := by fin_cases label <;> fin_cases point <;> decide
+  right_inv point := by fin_cases label <;> fin_cases point <;> decide
+
+/-- Every displayed reflector is even. -/
+theorem sixPointFiveReflectorPermutation_even (label : Fin 6) :
+    sixPointFiveReflectorPermutation label ∈ alternatingGroup (Fin 5) := by
+  rw [Equiv.Perm.mem_alternatingGroup]
+  fin_cases label <;> decide
+
+/-- The displayed reflector as an element of the concrete alternating group. -/
+def sixPointFiveReflector (label : Fin 6) : alternatingGroup (Fin 5) :=
+  ⟨sixPointFiveReflectorPermutation label,
+    sixPointFiveReflectorPermutation_even label⟩
+
+/-- The displayed reflector is an involution. -/
+theorem sixPointFiveReflector_mul_self (label : Fin 6) :
+    sixPointFiveReflector label * sixPointFiveReflector label = 1 := by
+  apply Subtype.ext
+  apply Equiv.ext
+  intro point
+  fin_cases label <;> fin_cases point <;> decide
+
+/-- The displayed reflector conjugates the cyclic generator to its inverse. -/
+theorem sixPointFiveReflector_conjugates_generator (label : Fin 6) :
+    sixPointFiveReflector label * sixPointFiveGenerator label *
+        (sixPointFiveReflector label)⁻¹ =
+      (sixPointFiveGenerator label)⁻¹ := by
+  apply Subtype.ext
+  apply Equiv.ext
+  intro point
+  fin_cases label <;> fin_cases point <;> decide
+
+set_option maxHeartbeats 8000000 in
+/-- The standard dihedral group of order ten acts inside the concrete `A5`
+through the displayed rotation and reflection. -/
+def sixPointFiveDihedralHom (label : Fin 6) :
+    DihedralGroup 5 →* alternatingGroup (Fin 5) where
+  toFun
+    | DihedralGroup.r exponent =>
+        sixPointFiveGenerator label ^ exponent.val
+    | DihedralGroup.sr exponent =>
+        sixPointFiveReflector label *
+          sixPointFiveGenerator label ^ exponent.val
+  map_one' := rfl
+  map_mul' := by
+    intro left right
+    cases left with
+    | r leftExponent =>
+        cases right with
+        | r rightExponent =>
+            fin_cases leftExponent <;> fin_cases rightExponent <;>
+              apply Subtype.ext <;> apply Equiv.ext <;> intro point <;>
+              fin_cases label <;> fin_cases point <;> decide
+        | sr rightExponent =>
+            fin_cases leftExponent <;> fin_cases rightExponent <;>
+              apply Subtype.ext <;> apply Equiv.ext <;> intro point <;>
+              fin_cases label <;> fin_cases point <;> decide
+    | sr leftExponent =>
+        cases right with
+        | r rightExponent =>
+            fin_cases leftExponent <;> fin_cases rightExponent <;>
+              apply Subtype.ext <;> apply Equiv.ext <;> intro point <;>
+              fin_cases label <;> fin_cases point <;> decide
+        | sr rightExponent =>
+            fin_cases leftExponent <;> fin_cases rightExponent <;>
+              apply Subtype.ext <;> apply Equiv.ext <;> intro point <;>
+              fin_cases label <;> fin_cases point <;> decide
+
+set_option maxHeartbeats 4000000 in
+/-- The displayed dihedral homomorphism is injective. -/
+theorem sixPointFiveDihedralHom_injective (label : Fin 6) :
+    Function.Injective (sixPointFiveDihedralHom label) := by
+  intro left right equality
+  cases left with
+  | r leftExponent =>
+      cases right with
+      | r rightExponent =>
+          fin_cases leftExponent <;> fin_cases rightExponent
+          all_goals try rfl
+          all_goals exfalso
+          all_goals fin_cases label
+          all_goals revert equality
+          all_goals decide
+      | sr rightExponent =>
+          fin_cases leftExponent <;> fin_cases rightExponent
+          all_goals exfalso
+          all_goals fin_cases label
+          all_goals revert equality
+          all_goals decide
+  | sr leftExponent =>
+      cases right with
+      | r rightExponent =>
+          fin_cases leftExponent <;> fin_cases rightExponent
+          all_goals exfalso
+          all_goals fin_cases label
+          all_goals revert equality
+          all_goals decide
+      | sr rightExponent =>
+          fin_cases leftExponent <;> fin_cases rightExponent
+          all_goals try rfl
+          all_goals exfalso
+          all_goals fin_cases label
+          all_goals revert equality
+          all_goals decide
+
+set_option maxHeartbeats 8000000 in
+set_option maxRecDepth 10000 in
+/-- The displayed dihedral image lies in the normalizer of its cyclic
+order-five subgroup. -/
+theorem sixPointFiveDihedralHom_range_le_normalizer (label : Fin 6) :
+    (sixPointFiveDihedralHom label).range ≤
+      Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) := by
+  rintro element ⟨dihedralElement, rfl⟩
+  apply Subgroup.mem_normalizer_fintype
+  intro subgroupElement membership
+  change subgroupElement ∈ sixPointFiveSubgroup label at membership
+  change (sixPointFiveDihedralHom label) dihedralElement * subgroupElement *
+      ((sixPointFiveDihedralHom label) dihedralElement)⁻¹ ∈
+    sixPointFiveSubgroup label
+  rw [mem_sixPointFiveSubgroup_iff] at membership ⊢
+  rcases membership with rfl | rfl | rfl | rfl | rfl
+  all_goals cases dihedralElement with
+    | r exponent =>
+        fin_cases exponent <;> fin_cases label <;> decide
+    | sr exponent =>
+        fin_cases exponent <;> fin_cases label <;> decide
+
+/-- The image of the displayed dihedral homomorphism is the full normalizer. -/
+theorem sixPointFiveDihedralHom_range_eq_normalizer (label : Fin 6) :
+    (sixPointFiveDihedralHom label).range =
+      Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) := by
+  apply Subgroup.eq_of_le_of_card_ge
+    (sixPointFiveDihedralHom_range_le_normalizer label)
+  rw [sixPointFiveSubgroup_normalizer_card]
+  have rangeCard :
+      10 = Nat.card (sixPointFiveDihedralHom label).range := by
+    calc
+      10 = Nat.card (DihedralGroup 5) := by
+        rw [DihedralGroup.nat_card]
+      _ = Nat.card (sixPointFiveDihedralHom label).range :=
+        Nat.card_congr
+          (MonoidHom.ofInjective
+            (sixPointFiveDihedralHom_injective label)).toEquiv
+  exact rangeCard.le
+
+/-- Each displayed normalizer is explicitly the dihedral group of order ten. -/
+noncomputable def sixPointFiveNormalizerMulEquivDihedral (label : Fin 6) :
+    DihedralGroup 5 ≃*
+      Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) :=
+  (MonoidHom.ofInjective (sixPointFiveDihedralHom_injective label)).trans
+    (MulEquiv.subgroupCongr
+      (sixPointFiveDihedralHom_range_eq_normalizer label))
 
 end GraphLattices
 

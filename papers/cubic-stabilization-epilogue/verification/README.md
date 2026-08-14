@@ -43,10 +43,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   proves that the two displayed permutations preserve a one-factorization,
   faithfully generate the alternating group `A5`, act simply on the heart,
   and have exactly the quadratic four-element common commutant.  It also
-  constructs six pairwise distinct order-five subgroups and proves their
-  conjugation action is the same six-point action.  Sylow exhaustion,
-  ten-element dihedral normalizers, and identification of those concrete
-  subgroups, action, and heart with the geometric ones remain open
+  constructs all six Sylow-five subgroups, proves their conjugation action is
+  the same six-point action, and identifies every ten-element normalizer with
+  the dihedral group `D5`.  Identification of those concrete subgroups,
+  action, normalizers, and heart with the geometric ones remains open
   (`prop:principal-gluing-packet`).
 - Identify the explicitly constructed quadratic finite-etale splitting field
   and eigenbasis of the residue model with the manuscript's marked geometric

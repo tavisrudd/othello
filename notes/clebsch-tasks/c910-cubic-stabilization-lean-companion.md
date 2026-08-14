@@ -231,11 +231,11 @@ explicit four coordinates modulo its constant line; translation and inversion
 on the six-point projective-line labelling preserve a displayed
 one-factorization whose faithful factor action exhausts the alternating group
 `A5`; the induced heart is simple and its common commutant is exactly the
-quadratic four-element algebra.  Six pairwise distinct order-five subgroups
-of this concrete `A5` are now constructed, and their conjugation action is
-exactly the original six-point action.  Proving Sylow exhaustion, computing
-their dihedral normalizers, and identifying those with the manuscript's
-geometric `D5` subgroups and axes remain open.  The explicit
+quadratic four-element algebra.  All six Sylow-five subgroups of this concrete
+`A5` are now constructed, and their conjugation action is exactly the original
+six-point action.  Each ten-element normalizer is explicitly equivalent to
+`D5`; identifying this concrete packet with the manuscript's geometric `D5`
+subgroups and axes remains open.  The explicit
 characteristic-two companion model now has a constructed
 quadratic finite-etale splitting field, marked root, and two-sided explicit
 eigenbasis, together with an algebra equivalence to the concrete `F4` gluing

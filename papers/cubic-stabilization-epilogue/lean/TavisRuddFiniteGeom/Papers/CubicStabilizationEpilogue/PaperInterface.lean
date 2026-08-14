@@ -1727,11 +1727,12 @@ common matrix commutant is exactly the four-element quadratic algebra
 is zero or the whole heart.  The generators preserve an explicit
 one-factorization; their faithful factor action exhausts the alternating group
 on five letters, thereby identifying the abstract generated action with a
-concrete `A5`.  It also constructs six pairwise distinct order-five subgroups
-of that `A5` and proves that conjugation by the two generators permutes them by
-exactly the original six-point action.  This is the concrete group-theoretic
-six-label packet, but the terminal does not identify it with the manuscript's
-six geometrically defined `D5` normalizers, elliptic quotients, or axes. -/
+concrete `A5`.  It constructs all six Sylow-five subgroups, proves that
+conjugation by the two generators permutes them by exactly the original
+six-point action, and identifies each ten-element normalizer explicitly with
+the dihedral group `D5`.  This is the concrete group-theoretic six-label
+packet, but the terminal does not identify it with the manuscript's six
+geometrically defined `D5` normalizers, elliptic quotients, or axes. -/
 theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     (∀ heart : Fin 4 → GraphLattices.F2,
       (∑ point, GraphLattices.sixPointHeartRepresentative heart point) = 0 ∧
@@ -1775,6 +1776,16 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
           (MulAut.conj GraphLattices.sixPointFactorInversionA5) =
         GraphLattices.sixPointFiveSubgroup
           (GraphLattices.sixPointInversionPermutation label)) ∧
+    Nat.card (Sylow 5 (alternatingGroup (Fin 5))) = 6 ∧
+    Function.Surjective GraphLattices.sixPointFiveSylow ∧
+    (∀ label : Fin 6,
+      Nat.card (Subgroup.normalizer
+        (GraphLattices.sixPointFiveSubgroup label :
+          Set (alternatingGroup (Fin 5)))) = 10 ∧
+      Nonempty (DihedralGroup 5 ≃*
+        Subgroup.normalizer
+          (GraphLattices.sixPointFiveSubgroup label :
+            Set (alternatingGroup (Fin 5))))) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1797,6 +1808,10 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     GraphLattices.sixPointFiveSubgroup_injective,
     fun label => ⟨GraphLattices.sixPointFiveSubgroup_translation_conjugation label,
       GraphLattices.sixPointFiveSubgroup_inversion_conjugation label⟩,
+    GraphLattices.sixPointFiveSylow_card,
+    GraphLattices.sixPointFiveSylow_surjective,
+    fun label => ⟨GraphLattices.sixPointFiveSubgroup_normalizer_card label,
+      ⟨GraphLattices.sixPointFiveNormalizerMulEquivDihedral label⟩⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 
