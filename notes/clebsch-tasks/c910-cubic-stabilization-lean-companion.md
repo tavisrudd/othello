@@ -529,6 +529,16 @@ are current, and the committed paper export verifies byte-for-byte in
   classes, so the cited implication has no missing cycle-theoretic premise.
   The source passage was checked in arXiv:1407.7261, cache SHA-256
   `514e5634d920f4b8e9c6797f3de5ad34afea65624ba23cc764d329ebcdd2c4e4`.
+- **Six-axis polarization inputs:** source-checked.  The manuscript now cites
+  Roulleau's Theorem 11(D) for the dihedral fibre and, separately, Lemma 14
+  together with table (3.1) for deformation-invariance and the exact
+  order-two/three/five intersection values.  This prevents the Klein-fibre
+  table from being used silently on the whole \(A_5\)-family.  The passage was
+  checked in arXiv:1002.4467, cache SHA-256
+  `c66706bfa8977656043a8c068d9f2cabc7e72dc0f53eac3fab680ac82172c7bd`.
+  The polarized reduced-norm formula now also states that its trace is the
+  degree-five coefficient trace, avoiding a factor-two ambiguity with rational
+  first homology.
 - **Reusable extraction:** deferred.  The matrix-of-ideals theorem may later
   deserve a separate general library, but the first authority remains the
   paper-bundled package.

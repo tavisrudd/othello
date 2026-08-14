@@ -357,6 +357,13 @@ threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
 class in the ordinary integral divisor-product image, no further
 cycle-theoretic hypothesis is hidden in the corollary's application.
+The six-axis polarization proof now also distinguishes Roulleau's fibre
+theorem from his deformation-invariance lemma and cites the latter together
+with the exact Klein intersection table.  The order-two zero intersection is
+stated explicitly, so the family-wide numerical passage no longer relies on
+an implicit transfer from the Klein fibre.  The reduced-norm polarization step
+now identifies its trace as the degree-five coefficient trace, not the
+degree-ten rational-homology trace.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then
