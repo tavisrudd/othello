@@ -42,7 +42,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   quotient with the manuscript's six conjugate `D5` subgroups.  Lean now
   proves that the two displayed permutations preserve a one-factorization,
   faithfully generate the alternating group `A5`, act simply on the heart,
-  and have exactly the quadratic four-element common commutant.  It identifies
+  and the entire generated heart action has exactly the quadratic four-element
+  matrix commutant.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

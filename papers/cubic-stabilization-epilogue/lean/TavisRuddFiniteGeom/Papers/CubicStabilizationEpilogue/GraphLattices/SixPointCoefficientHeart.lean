@@ -142,6 +142,26 @@ def sixPointHeartWordAction : List Bool → (Fin 4 → F2) → (Fin 4 → F2)
         (Matrix.mulVec (if generator then sixPointHeartInversion
           else sixPointHeartTranslation) vector)
 
+/-- The matrix of a word in the translation and inversion generators. -/
+def sixPointHeartWordMatrix : List Bool → Matrix (Fin 4) (Fin 4) F2
+  | [] => 1
+  | generator :: word =>
+      sixPointHeartWordMatrix word *
+        (if generator then sixPointHeartInversion
+          else sixPointHeartTranslation)
+
+/-- The recursively defined word action is multiplication by its word
+matrix. -/
+theorem sixPointHeartWordAction_eq_mulVec (word : List Bool)
+    (vector : Fin 4 → F2) :
+    sixPointHeartWordAction word vector =
+      Matrix.mulVec (sixPointHeartWordMatrix word) vector := by
+  induction word generalizing vector with
+  | nil => simp [sixPointHeartWordAction, sixPointHeartWordMatrix]
+  | cons generator word induction =>
+      simp only [sixPointHeartWordAction, sixPointHeartWordMatrix]
+      rw [induction, Matrix.mulVec_mulVec]
+
 /-- A finite list of words that sends every nonzero heart vector to the first
 standard basis vector. -/
 def sixPointHeartNormalizingWords : List (List Bool) :=
@@ -419,6 +439,72 @@ theorem sixPointHeart_commonCommutant_classification
   · rintro (rfl | rfl | rfl | rfl) <;>
       constructor <;> ext row column <;>
       fin_cases row <;> fin_cases column <;> decide
+
+/-- A matrix commutes with the entire generated six-point heart action exactly
+when it commutes with the two displayed generators. -/
+theorem sixPointHeart_commutes_all_words_iff
+    (matrix : Matrix (Fin 4) (Fin 4) F2) :
+    (∀ word : List Bool,
+      matrix * sixPointHeartWordMatrix word =
+        sixPointHeartWordMatrix word * matrix) ↔
+      matrix * sixPointHeartTranslation =
+          sixPointHeartTranslation * matrix ∧
+        matrix * sixPointHeartInversion =
+          sixPointHeartInversion * matrix := by
+  constructor
+  · intro commutes
+    constructor
+    · simpa [sixPointHeartWordMatrix] using commutes [false]
+    · simpa [sixPointHeartWordMatrix] using commutes [true]
+  · rintro ⟨commutesTranslation, commutesInversion⟩ word
+    induction word with
+    | nil => simp [sixPointHeartWordMatrix]
+    | cons generator word induction =>
+        simp only [sixPointHeartWordMatrix]
+        have commutesGenerator :
+            matrix *
+                (if generator then sixPointHeartInversion
+                  else sixPointHeartTranslation) =
+              (if generator then sixPointHeartInversion
+                else sixPointHeartTranslation) * matrix := by
+          by_cases inversion : generator
+          · simpa [inversion] using commutesInversion
+          · simpa [inversion] using commutesTranslation
+        calc
+          matrix *
+                (sixPointHeartWordMatrix word *
+                  (if generator then sixPointHeartInversion
+                    else sixPointHeartTranslation)) =
+              (matrix * sixPointHeartWordMatrix word) *
+                (if generator then sixPointHeartInversion
+                  else sixPointHeartTranslation) := by rw [mul_assoc]
+          _ = (sixPointHeartWordMatrix word * matrix) *
+                (if generator then sixPointHeartInversion
+                  else sixPointHeartTranslation) := by rw [induction]
+          _ = sixPointHeartWordMatrix word *
+                (matrix *
+                  (if generator then sixPointHeartInversion
+                    else sixPointHeartTranslation)) := by rw [mul_assoc]
+          _ = sixPointHeartWordMatrix word *
+                ((if generator then sixPointHeartInversion
+                    else sixPointHeartTranslation) * matrix) := by
+              rw [commutesGenerator]
+          _ = (sixPointHeartWordMatrix word *
+                (if generator then sixPointHeartInversion
+                  else sixPointHeartTranslation)) * matrix := by rw [mul_assoc]
+
+/-- The commutant of the full generated heart action is the same four-element
+quadratic algebra as the common commutant of the two generators. -/
+theorem sixPointHeart_fullActionCommutant_classification
+    (matrix : Matrix (Fin 4) (Fin 4) F2) :
+    (∀ word : List Bool,
+      matrix * sixPointHeartWordMatrix word =
+        sixPointHeartWordMatrix word * matrix) ↔
+      matrix = 0 ∨ matrix = 1 ∨
+        matrix = sixPointHeartCommutantRoot ∨
+          matrix = sixPointHeartCommutantRoot + 1 := by
+  rw [sixPointHeart_commutes_all_words_iff,
+    sixPointHeart_commonCommutant_classification]
 
 end GraphLattices
 

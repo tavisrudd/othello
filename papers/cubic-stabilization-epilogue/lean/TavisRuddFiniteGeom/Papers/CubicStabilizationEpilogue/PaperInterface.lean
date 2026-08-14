@@ -1727,7 +1727,8 @@ projective line `P¹(F5)`, and proves that the two permutations are induced by
 the linear maps `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It proves that their
 common matrix commutant is exactly the four-element quadratic algebra
 `{0,1,W,W+1}` with `W²+W+1=0`.  Every subspace stable under both generators
-is zero or the whole heart.  The generators preserve an explicit
+is zero or the whole heart, and the commutant classification is also proved
+for every matrix word in the full generated action.  The generators preserve an explicit
 one-factorization; their faithful factor action exhausts the alternating group
 on five letters, thereby identifying the abstract generated action with a
 concrete `A5`.  It constructs all six Sylow-five subgroups, proves that
@@ -1869,6 +1870,13 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
           GraphLattices.sixPointHeartInversion * matrix) ↔
         matrix = 0 ∨ matrix = 1 ∨
           matrix = GraphLattices.sixPointHeartCommutantRoot ∨
+          matrix = GraphLattices.sixPointHeartCommutantRoot + 1) ∧
+    (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+      (∀ word : List Bool,
+        matrix * GraphLattices.sixPointHeartWordMatrix word =
+          GraphLattices.sixPointHeartWordMatrix word * matrix) ↔
+        matrix = 0 ∨ matrix = 1 ∨
+          matrix = GraphLattices.sixPointHeartCommutantRoot ∨
           matrix = GraphLattices.sixPointHeartCommutantRoot + 1) := by
   exact ⟨fun heart ↦
       ⟨GraphLattices.sixPointHeartRepresentative_sum_zero heart,
@@ -1904,7 +1912,8 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       fun transformation =>
         GraphLattices.mem_psl2F5SixPointStabilizer_iff transformation label⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
-    GraphLattices.sixPointHeart_commonCommutant_classification⟩
+    GraphLattices.sixPointHeart_commonCommutant_classification,
+    GraphLattices.sixPointHeart_fullActionCommutant_classification⟩
 
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has

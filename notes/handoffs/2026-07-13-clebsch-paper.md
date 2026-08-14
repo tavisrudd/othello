@@ -404,7 +404,8 @@ permutations identify the labels with the actual `P¹(F5)`, where they come
 from `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`; they preserve a one-factorization and induce a
 faithful factor action exhausting the alternating group `A5`; their heart
 action is simple and its common commutant is exactly the four-element
-quadratic algebra.  All six Sylow-five subgroups of this concrete `A5` are
+quadratic algebra; the same classification is proved for every matrix word in
+the full generated action.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;

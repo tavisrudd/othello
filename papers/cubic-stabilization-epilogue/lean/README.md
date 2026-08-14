@@ -101,7 +101,8 @@ The 144 reviewer-facing terminals currently verify:
   `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`, and an invariant
   one-factorization identifying their
   generated action faithfully with the alternating group `A5`, simplicity of
-  the induced heart, and its exact four-element quadratic matrix commutant;
+  the induced heart, and the exact four-element quadratic matrix commutant of
+  the entire generated heart action;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
