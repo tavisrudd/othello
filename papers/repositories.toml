@@ -222,15 +222,15 @@ reason = "the standalone repository carries its own pinned manuscript flake"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = ".PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean"
-new = ".PHONY: all check evidence manuscript warnings manuscript-check manuscript-update clean distclean"
+old = ".PHONY: all check evidence lint manuscript warnings clean distclean"
+new = ".PHONY: all check evidence manuscript warnings clean distclean"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "all: evidence lint manuscript-check\n\ncheck: evidence lint manuscript-check"
-new = "all: evidence manuscript-check\n\ncheck: evidence manuscript-check"
+old = "all: lint manuscript\n\ncheck: evidence lint manuscript warnings"
+new = "all: manuscript\n\ncheck: evidence manuscript warnings"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
@@ -381,15 +381,15 @@ reason = "the standalone repository carries its own pinned manuscript flake"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = ".PHONY: all check evidence lint manuscript warnings clean distclean"
-new = ".PHONY: all check evidence manuscript warnings clean distclean"
+old = ".PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean"
+new = ".PHONY: all check evidence manuscript warnings manuscript-check manuscript-update clean distclean"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "all: lint manuscript\n\ncheck: evidence lint manuscript warnings"
-new = "all: manuscript\n\ncheck: evidence manuscript warnings"
+old = "all: evidence lint manuscript-check\n\ncheck: evidence lint manuscript-check"
+new = "all: evidence manuscript-check\n\ncheck: evidence manuscript-check"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
