@@ -159,6 +159,24 @@ component and boundary tails.  The total `c1(beta_n)` may be positive and
 fixed.  No computed regression currently exhibits a nonzero dangerous
 coefficient of this form.
 
+The failure note now identifies the first possible coupling and a shadow-
+first attack.  A pure one-legged neutral boundary tree gives a supported
+three-dimensional `J`-tail on a fivefold (a fixed affine offset changes the
+dimension but not the support), but support alone does not kill it:
+an off-boundary carrier vertex could accept that state and emit an ambient
+rank-visible state.  The first gate is therefore triangularity of this mixed
+boundary-to-ambient coupling; if it holds, the next gate is a two-legged
+rubber propagator joining two distinct carrier components.  Either object
+must cast six cheaper shadows: a mixed `ker(c1)` recession slope, the
+required boundary incidence path, a nonzero low-moment carrier-coupling
+matrix, an ambient anti-Stokes turning wall, a nontrivial numerical window
+shadow, and a nontrivial solution of the Euler/divisor-tag Stokes nullity
+system.  Same-sign two-ray faces are excluded
+immediately; in a sign-changing face the neutral slope is uniquely forced by
+the two discrepancies, so the fivefold search is finite.  This imports the
+series' reconstruction-from-sparse-shadows strategy without pretending that
+the rubber series itself is known.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
