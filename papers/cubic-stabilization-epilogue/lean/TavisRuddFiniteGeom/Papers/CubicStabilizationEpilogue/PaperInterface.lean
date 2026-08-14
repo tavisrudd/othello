@@ -2340,6 +2340,55 @@ theorem horizontalMonodromy_coefficientTower_horizontalReduction
   ⟨tower.horizontalKernelReduction_baseChange_tmul,
     tower.horizontalKernelReduction_intertwines⟩
 
+/-- For the quotient tower of a supplied decreasing ideal filtration, every
+tensor over the base coefficient algebra with an original horizontal vector
+determines a compatible family of horizontal vectors.  Pure tensors reduce by
+mapping only their coefficient, and extended horizontal monodromy acts on the
+family by the original restricted monodromy on the horizontal tensor factor.
+This constructs a map from base horizontal tensors to compatible quotient
+families; it does not prove injectivity, surjectivity, coefficientwise
+completeness, or an inverse-limit differential-module identification. -/
+theorem horizontalMonodromy_idealFiltration_horizontalFamily
+    {k V B : Type*} [Field k]
+    [AddCommGroup V] [Module k V]
+    [CommRing B] [Algebra k B]
+    (filtration : Quantum.DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    let tower :=
+      Quantum.HorizontalMonodromyCoefficientTower.ofIdealFiltration
+        filtration derivative monodromy commutes
+    let family := fun tensor : B ⊗[k] LinearMap.ker derivative =>
+      Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor
+        filtration derivative monodromy commutes tensor
+    (∀ tensor level,
+      tower.horizontalKernelReduction level ((family tensor).value (level + 1)) =
+        (family tensor).value level) ∧
+    (∀ coefficient (horizontal : LinearMap.ker derivative) level,
+      (family (coefficient ⊗ₜ[k] horizontal)).value level =
+        Quantum.horizontalBaseChangeEquivOfField derivative
+          (Ideal.Quotient.mk (filtration.ideal level) coefficient ⊗ₜ[k]
+            horizontal)) ∧
+    (∀ tensor level,
+      Quantum.extendedHorizontalEndomorphism
+          (B := filtration.QuotientRing level) derivative monodromy commutes
+          ((family tensor).value level) =
+        (family (TensorProduct.map LinearMap.id
+          (Quantum.horizontalEndomorphism derivative monodromy commutes)
+          tensor)).value level) := by
+  dsimp only
+  refine ⟨?_, ?_, ?_⟩
+  · intro tensor level
+    exact
+      (Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor
+        filtration derivative monodromy commutes tensor).compatible level
+  · exact
+      Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor_value_tmul
+        filtration derivative monodromy commutes
+  · exact
+      Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor_monodromy
+        filtration derivative monodromy commutes
+
 /-- An actual adic coefficient tower carries the horizontal-monodromy
 characteristic polynomials compatibly.  Let `B` be a commutative algebra over
 the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses

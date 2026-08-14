@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 83 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 151 audited terminals.  The rejecting manuscript inventory covers all
+exports 152 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -106,7 +106,11 @@ and conjugate restricted monodromy and coefficientwise characteristic
 polynomial, including its explicit compatible inverse system over every
 supplied coefficient-algebra tower.  Canonical adjacent maps between the
 scalar-extended horizontal kernels apply coefficient reduction on pure tensors
-and intertwine the restricted monodromies.  The same inverse system is now constructed
+and intertwine the restricted monodromies.  Every base coefficient tensor with
+an original horizontal vector also gives a compatible family over the quotient
+tower of a supplied decreasing ideal filtration, and pointwise monodromy agrees
+with the original restricted action.  Injectivity, surjectivity, and recovery
+of arbitrary compatible families remain unproved.  The same inverse system is now constructed
 on the actual adic quotients `B/I^n` of a supplied coefficient algebra and
 ideal, with canonical adjacent quotient reductions; completeness,
 separatedness, and geometric identification remain unproved.  The horizontal

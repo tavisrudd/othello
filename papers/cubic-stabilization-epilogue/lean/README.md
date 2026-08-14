@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 151 reviewer terminals.
+1 complete; 152 reviewer terminals.
 
-The 151 reviewer-facing terminals currently verify:
+The 152 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -305,7 +305,12 @@ The 151 reviewer-facing terminals currently verify:
   an explicit compatible inverse system of these horizontal characteristic
   polynomials.  The adjacent coefficient reductions canonically map the
   scalar-extended horizontal kernels and intertwine their restricted
-  monodromies.  Lean also constructs this tower from the actual adic quotients
+  monodromies.  For any supplied decreasing ideal filtration, every base
+  coefficient tensor with an original horizontal vector now determines an
+  explicit compatible family over all quotient levels; pure tensors map only
+  their coefficient, and pointwise monodromy is inherited from the original
+  restricted monodromy.  This does not prove that every compatible horizontal
+  family lifts uniquely from the base.  Lean also constructs the tower from the actual adic quotients
   `B/I^n` of a supplied coefficient algebra and ideal, with canonical adjacent
   quotient reductions.  The horizontal characteristic polynomial over `B`
   reduces exactly to the polynomial at every quotient level.  Every fixed

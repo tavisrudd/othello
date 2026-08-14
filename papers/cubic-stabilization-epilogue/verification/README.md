@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 151 reviewer-facing Lean terminals.  These counts summarize the
+There are 152 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 151 reviewer terminals.
+1 complete; 152 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -111,7 +111,12 @@ objects, hypotheses, conclusions, and cautions recorded in
   explicit compatible inverse system of these horizontal characteristic
   polynomials.  The adjacent reductions also induce canonical maps between the
   scalar-extended horizontal kernels and intertwine their restricted
-  monodromies.  Lean also constructs the tower from the actual adic quotients
+  monodromies.  For a supplied decreasing ideal filtration, every base
+  coefficient tensor with an original horizontal vector determines an explicit
+  compatible family over the quotient tower; pure tensors map only their
+  coefficient, and pointwise monodromy comes from the original restricted
+  monodromy.  No injectivity, surjectivity, or reconstruction theorem for
+  arbitrary compatible horizontal families is claimed.  Lean also constructs the tower from the actual adic quotients
   `B/I^n` of a supplied coefficient algebra and ideal and proves compatibility
   under the canonical reductions.  The horizontal characteristic polynomial
   over `B` reduces exactly to the polynomial at every quotient level.  Each

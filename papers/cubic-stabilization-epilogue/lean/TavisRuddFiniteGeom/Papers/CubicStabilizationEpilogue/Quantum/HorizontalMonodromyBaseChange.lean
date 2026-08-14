@@ -24,15 +24,21 @@ canonical adjacent reductions induce maps between the horizontal kernels that
 intertwine their monodromy operators.  The horizontal characteristic
 polynomials commute with the same reductions.  Each fixed polynomial
 coefficient is packaged as a compatible quotient family represented by its
-corresponding coefficient over the base algebra.
+corresponding coefficient over the base algebra.  More generally, every tensor
+over the base algebra with an original horizontal vector determines a
+compatible family over all quotient levels.  On pure tensors only the
+coefficient is reduced, and pointwise monodromy is induced by the original
+restricted endomorphism.
 
 This is the horizontal-module linear algebra in coefficientwise base change.
 It assumes the derivative and commuting monodromy operator; it does not
 construct a formal differential module, Levelt--Turrittin solution algebra,
 fundamental solution, inverse-limit differential module, or analytic framed
 monodromy.  The supplied coefficient algebra and ideal are not identified with
-the manuscript's geometric coefficient data.  All proofs are symbolic and
-kernel checked, with no external computation or oracle.
+the manuscript's geometric coefficient data.  The compatible-family map is
+not proved injective or surjective, and arbitrary compatible horizontal
+families are not reconstructed.  All proofs are symbolic and kernel checked,
+with no external computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -378,6 +384,142 @@ theorem horizontalKernelReduction_intertwines
             apply congrArg
             exact (horizontalKernelReduction_baseChange_tmul
               tower level coefficient horizontal).symm
+
+/-- A compatible family of horizontal vectors in a coefficient-algebra tower.
+Compatibility uses the canonical adjacent horizontal-kernel reductions. -/
+structure CompatibleHorizontalKernelFamily
+    (tower : HorizontalMonodromyCoefficientTower k V) where
+  value : ∀ level,
+    LinearMap.ker (tower.derivative.baseChange (tower.Coefficient level))
+  compatible : ∀ level,
+    tower.horizontalKernelReduction level (value (level + 1)) = value level
+
+/-- Compatible coefficient maps from one module into a coefficient-algebra
+tower send a tensor with an original horizontal vector to a compatible family
+of extended horizontal vectors. -/
+noncomputable def compatibleHorizontalKernelFamilyOfTensor
+    (tower : HorizontalMonodromyCoefficientTower k V)
+    {B : Type*} [AddCommGroup B] [Module k B]
+    (coefficientMap : ∀ level, B →ₗ[k] tower.Coefficient level)
+    (coefficientMap_compatible : ∀ level coefficient,
+      tower.reduction level (coefficientMap (level + 1) coefficient) =
+        coefficientMap level coefficient)
+    (tensor : B ⊗[k] LinearMap.ker tower.derivative) :
+    CompatibleHorizontalKernelFamily tower where
+  value level :=
+    horizontalBaseChangeEquivOfField tower.derivative
+      (TensorProduct.map (coefficientMap level) LinearMap.id tensor)
+  compatible level := by
+    induction tensor using TensorProduct.induction_on with
+    | zero => simp
+    | add left right hleft hright =>
+        simpa only [map_add] using congrArg₂ (fun x y => x + y) hleft hright
+    | tmul coefficient horizontal =>
+        rw [TensorProduct.map_tmul, TensorProduct.map_tmul,
+          horizontalKernelReduction_baseChange_tmul,
+          coefficientMap_compatible]
+
+omit [FiniteDimensional k V] in
+/-- The extended horizontal monodromy acts pointwise on the compatible family
+by applying the original restricted monodromy to the horizontal tensor factor. -/
+theorem compatibleHorizontalKernelFamilyOfTensor_monodromy
+    (tower : HorizontalMonodromyCoefficientTower k V)
+    {B : Type*} [AddCommGroup B] [Module k B]
+    (coefficientMap : ∀ level, B →ₗ[k] tower.Coefficient level)
+    (coefficientMap_compatible : ∀ level coefficient,
+      tower.reduction level (coefficientMap (level + 1) coefficient) =
+        coefficientMap level coefficient)
+    (tensor : B ⊗[k] LinearMap.ker tower.derivative) (level : ℕ) :
+    extendedHorizontalEndomorphism (B := tower.Coefficient level)
+        tower.derivative tower.monodromy tower.commutes
+        ((compatibleHorizontalKernelFamilyOfTensor tower coefficientMap
+          coefficientMap_compatible tensor).value level) =
+      (compatibleHorizontalKernelFamilyOfTensor tower coefficientMap
+        coefficientMap_compatible
+        (TensorProduct.map LinearMap.id
+          (horizontalEndomorphism tower.derivative tower.monodromy
+            tower.commutes) tensor)).value level := by
+  induction tensor using TensorProduct.induction_on with
+  | zero => simp [compatibleHorizontalKernelFamilyOfTensor]
+  | add left right hleft hright =>
+      simpa [compatibleHorizontalKernelFamilyOfTensor] using
+        congrArg₂ (fun x y => x + y) hleft hright
+  | tmul coefficient horizontal =>
+      have equality := LinearMap.congr_fun
+        (horizontalBaseChangeEquivOfField_intertwines
+          (B := tower.Coefficient level) tower.derivative tower.monodromy
+          tower.commutes)
+        (coefficientMap level coefficient ⊗ₜ[k] horizontal)
+      simpa [compatibleHorizontalKernelFamilyOfTensor] using equality
+
+/-- A horizontal tensor over the base coefficient algebra determines a
+compatible family over every quotient of a decreasing ideal filtration. -/
+noncomputable def horizontalKernelFamilyOfBaseTensor
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (tensor : B ⊗[k] LinearMap.ker derivative) :
+    CompatibleHorizontalKernelFamily
+      (ofIdealFiltration filtration derivative monodromy commutes) :=
+  compatibleHorizontalKernelFamilyOfTensor
+    (ofIdealFiltration filtration derivative monodromy commutes)
+    (fun level =>
+      (Ideal.Quotient.mkₐ k (filtration.ideal level)).toLinearMap)
+    (by
+      intro level coefficient
+      exact filtration.reduction_mk level coefficient)
+    tensor
+
+omit [FiniteDimensional k V] in
+/-- At each level, the family represented by a pure base tensor is obtained by
+mapping its coefficient to that quotient and leaving its horizontal vector
+unchanged. -/
+theorem horizontalKernelFamilyOfBaseTensor_value_tmul
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (coefficient : B) (horizontal : LinearMap.ker derivative) (level : ℕ) :
+    (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+      commutes (coefficient ⊗ₜ[k] horizontal)).value level =
+        horizontalBaseChangeEquivOfField derivative
+          (Ideal.Quotient.mk (filtration.ideal level) coefficient ⊗ₜ[k]
+            horizontal) := by
+  change horizontalBaseChangeEquivOfField derivative
+      (TensorProduct.map
+        (Ideal.Quotient.mkₐ k (filtration.ideal level)).toLinearMap
+        LinearMap.id (coefficient ⊗ₜ[k] horizontal)) = _
+  simp
+
+omit [FiniteDimensional k V] in
+/-- At each quotient level, extended horizontal monodromy on the family of a
+base tensor is the family of the tensor obtained by applying the original
+restricted horizontal monodromy to its horizontal factor. -/
+theorem horizontalKernelFamilyOfBaseTensor_monodromy
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (tensor : B ⊗[k] LinearMap.ker derivative) (level : ℕ) :
+    extendedHorizontalEndomorphism (B := filtration.QuotientRing level)
+        derivative monodromy commutes
+        ((horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+          commutes tensor).value level) =
+      (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+        commutes
+        (TensorProduct.map LinearMap.id
+          (horizontalEndomorphism derivative monodromy commutes) tensor)).value
+            level := by
+  exact compatibleHorizontalKernelFamilyOfTensor_monodromy
+    (ofIdealFiltration filtration derivative monodromy commutes)
+    (fun quotientLevel =>
+      (Ideal.Quotient.mkₐ k
+        (filtration.ideal quotientLevel)).toLinearMap)
+    (by
+      intro quotientLevel coefficient
+      exact filtration.reduction_mk quotientLevel coefficient)
+    tensor level
 
 /-- The horizontal monodromy characteristic polynomials at all coefficient
 levels form an explicit compatible polynomial system. -/
