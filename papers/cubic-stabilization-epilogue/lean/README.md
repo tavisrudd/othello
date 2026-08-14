@@ -441,7 +441,8 @@ The 168 reviewer-facing terminals currently verify:
   minus the six-coordinate dot product and is nondegenerate, and proves that
   the induced rank-eight tensor form is alternating and nondegenerate; its
   four diagonally stable halves are exactly the vertical copy and the three
-  scalar graphs, and all four are maximal isotropic.  From a supplied
+  scalar graphs, and all four are maximal isotropic.  Separately, on the
+  two-primary side, from a supplied
   fibrewise coordinate realization whose image is exactly the
   geometric kernel, Lean constructs a kernel-to-subspace equivalence and
   proves membership in that five-member packet; independently, every concrete

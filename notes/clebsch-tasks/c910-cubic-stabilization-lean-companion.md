@@ -503,6 +503,12 @@ are current, and the committed paper export verifies byte-for-byte in
 
 ## Mystery ledger
 
+- **Three-primary coefficient packet:** settled algebraically.  Lean now
+  constructs the literal quotient
+  `Aug((ZMod 3)^6)/<1>`, proves its linear equivalence with the normalized
+  four-coordinate heart, and classifies the four stable maximal-isotropic
+  halves.  The remaining issue is geometric: identifying this quotient and
+  form with the manuscript's discriminant module and its actual kernel.
 - **Low-dimensional deduction:** settled at the conditional level.  Once the
   classification, nef spectral restriction, projective-bundle and point-blowup
   formulas, and divisor-tagging comparison are supplied, Lean now proves the

@@ -20,7 +20,9 @@ all four are maximal isotropic.
 All finite identities in this module are checked by kernel reduction over the
 explicit field `ZMod 3`; no native evaluation, external certificate, or oracle
 is used.  The module does not identify this coefficient model with a geometric
-three-primary discriminant kernel or a family local system.
+three-primary discriminant kernel or a family local system, and it does not
+derive the normalized form by reducing the manuscript's integral
+`(1/3)(6I-J)` formula.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -43,6 +45,31 @@ theorem f3_mul_two (value : F3) : value * 2 = -value := by
 /-- The explicit four-coordinate model of the six-point three-primary heart. -/
 abbrev SixPointThreeHeart := Fin 4 → F3
 
+/-- Coordinate sum on the six-label permutation module over `F₃`. -/
+def sixPointThreeCoordinateSum : (Fin 6 → F3) →ₗ[F3] F3 where
+  toFun vector := ∑ point, vector point
+  map_add' left right := by simp [Finset.sum_add_distrib]
+  map_smul' scalar vector := by simp [Finset.mul_sum]
+
+/-- The augmentation hyperplane in the six-label permutation module. -/
+def SixPointThreeAugmentation : Submodule F3 (Fin 6 → F3) :=
+  LinearMap.ker sixPointThreeCoordinateSum
+
+/-- The constant augmentation vector.  It lies in the augmentation hyperplane
+because six is zero in `F₃`. -/
+def sixPointThreeConstantVector : SixPointThreeAugmentation := by
+  refine ⟨fun _ ↦ (1 : F3), ?_⟩
+  change ∑ _ : Fin 6, (1 : F3) = 0
+  decide
+
+/-- The constant line inside the three-primary augmentation hyperplane. -/
+def sixPointThreeConstantLine : Submodule F3 SixPointThreeAugmentation :=
+  F3 ∙ sixPointThreeConstantVector
+
+/-- The literal heart quotient `Aug(F₃⁶)/⟨1⟩`. -/
+abbrev SixPointThreeAugmentationQuotient :=
+  SixPointThreeAugmentation ⧸ sixPointThreeConstantLine
+
 /-- Quotient coordinates obtained by subtracting the last coordinate. -/
 def sixPointThreeHeartCoordinates (vector : Fin 6 → F3) : SixPointThreeHeart :=
   ![vector 0 - vector 5, vector 1 - vector 5,
@@ -64,6 +91,132 @@ theorem sixPointThreeHeartCoordinates_representative (heart : SixPointThreeHeart
   ext index
   fin_cases index <;>
     simp [sixPointThreeHeartCoordinates, sixPointThreeHeartRepresentative]
+
+/-- Difference coordinates as a linear map on the augmentation hyperplane. -/
+def sixPointThreeAugmentationCoordinates :
+    SixPointThreeAugmentation →ₗ[F3] SixPointThreeHeart where
+  toFun vector := sixPointThreeHeartCoordinates vector.1
+  map_add' left right := by
+    ext index
+    fin_cases index <;> simp [sixPointThreeHeartCoordinates] <;> ring
+  map_smul' scalar vector := by
+    ext index
+    fin_cases index <;> simp [sixPointThreeHeartCoordinates] <;> ring
+
+/-- The normalized representative as an augmentation-vector linear map. -/
+def sixPointThreeAugmentationRepresentative :
+    SixPointThreeHeart →ₗ[F3] SixPointThreeAugmentation where
+  toFun heart := ⟨sixPointThreeHeartRepresentative heart,
+    sixPointThreeHeartRepresentative_sum_zero heart⟩
+  map_add' left right := by
+    apply Subtype.ext
+    ext point
+    fin_cases point <;>
+      simp [sixPointThreeHeartRepresentative, Finset.sum_add_distrib] <;> ring
+  map_smul' scalar heart := by
+    apply Subtype.ext
+    ext point
+    fin_cases point <;>
+      simp [sixPointThreeHeartRepresentative, Finset.mul_sum]
+
+/-- The kernel of augmentation difference coordinates is exactly the constant
+line. -/
+theorem sixPointThreeAugmentationCoordinates_ker :
+    LinearMap.ker sixPointThreeAugmentationCoordinates =
+      sixPointThreeConstantLine := by
+  apply le_antisymm
+  · intro vector kernel
+    rw [sixPointThreeConstantLine, Submodule.mem_span_singleton]
+    refine ⟨vector.1 5, ?_⟩
+    apply Subtype.ext
+    funext point
+    have firstCoordinate (index : Fin 4) :
+        vector.1 ⟨index, by omega⟩ = vector.1 5 := by
+      have equality := congrFun
+        (show sixPointThreeAugmentationCoordinates vector = 0 from kernel)
+        index
+      fin_cases index <;>
+        simpa [sixPointThreeAugmentationCoordinates,
+          sixPointThreeHeartCoordinates, sub_eq_zero] using equality
+    have fourthCoordinate : vector.1 4 = vector.1 5 := by
+      have augmentation : ∑ point, vector.1 point = 0 := vector.2
+      simp [Fin.sum_univ_succ] at augmentation
+      have coordinateZero : vector.1 0 = vector.1 5 := by
+        simpa using firstCoordinate 0
+      have coordinateOne : vector.1 1 = vector.1 5 := by
+        simpa using firstCoordinate 1
+      have coordinateTwo : vector.1 2 = vector.1 5 := by
+        simpa using firstCoordinate 2
+      have coordinateThree : vector.1 3 = vector.1 5 := by
+        simpa using firstCoordinate 3
+      rw [coordinateZero, coordinateOne, coordinateTwo,
+        coordinateThree] at augmentation
+      calc
+        vector.1 4 = -(5 : F3) * vector.1 5 := by
+          linear_combination augmentation
+        _ = vector.1 5 := by
+          rw [show (5 : F3) = -1 by decide]
+          ring
+    fin_cases point
+    · simpa [sixPointThreeConstantVector] using (firstCoordinate 0).symm
+    · simpa [sixPointThreeConstantVector] using (firstCoordinate 1).symm
+    · simpa [sixPointThreeConstantVector] using (firstCoordinate 2).symm
+    · simpa [sixPointThreeConstantVector] using (firstCoordinate 3).symm
+    · simpa [sixPointThreeConstantVector] using fourthCoordinate.symm
+    · simp [sixPointThreeConstantVector]
+  · intro vector member
+    rw [sixPointThreeConstantLine, Submodule.mem_span_singleton] at member
+    obtain ⟨scalar, rfl⟩ := member
+    rw [LinearMap.mem_ker]
+    ext index
+    fin_cases index <;>
+      simp [sixPointThreeAugmentationCoordinates,
+        sixPointThreeHeartCoordinates, sixPointThreeConstantVector]
+
+/-- Augmentation difference coordinates are onto the four-coordinate heart. -/
+theorem sixPointThreeAugmentationCoordinates_surjective :
+    Function.Surjective sixPointThreeAugmentationCoordinates := by
+  intro heart
+  refine ⟨sixPointThreeAugmentationRepresentative heart, ?_⟩
+  exact sixPointThreeHeartCoordinates_representative heart
+
+/-- Difference coordinates descended to `Aug(F₃⁶)/⟨1⟩`. -/
+def sixPointThreeAugmentationCoordinatesDescent :
+    SixPointThreeAugmentationQuotient →ₗ[F3] SixPointThreeHeart :=
+  sixPointThreeConstantLine.liftQ
+    sixPointThreeAugmentationCoordinates (by
+      rw [← sixPointThreeAugmentationCoordinates_ker])
+
+/-- The descended difference-coordinate map is bijective. -/
+theorem sixPointThreeAugmentationCoordinatesDescent_bijective :
+    Function.Bijective sixPointThreeAugmentationCoordinatesDescent := by
+  constructor
+  · apply LinearMap.ker_eq_bot.mp
+    exact Submodule.ker_liftQ_eq_bot'
+      sixPointThreeConstantLine sixPointThreeAugmentationCoordinates
+      sixPointThreeAugmentationCoordinates_ker.symm
+  · intro heart
+    obtain ⟨representative, equality⟩ :=
+      sixPointThreeAugmentationCoordinates_surjective heart
+    refine ⟨Submodule.Quotient.mk representative, ?_⟩
+    change sixPointThreeAugmentationCoordinates representative = heart
+    exact equality
+
+/-- The literal quotient `Aug(F₃⁶)/⟨1⟩` is linearly equivalent to the explicit
+four-coordinate heart. -/
+noncomputable def sixPointThreeAugmentationQuotientEquivHeart :
+    SixPointThreeAugmentationQuotient ≃ₗ[F3] SixPointThreeHeart :=
+  LinearEquiv.ofBijective sixPointThreeAugmentationCoordinatesDescent
+    sixPointThreeAugmentationCoordinatesDescent_bijective
+
+/-- The quotient equivalence is induced by normalized difference coordinates. -/
+@[simp]
+theorem sixPointThreeAugmentationQuotientEquivHeart_mk
+    (vector : SixPointThreeAugmentation) :
+    sixPointThreeAugmentationQuotientEquivHeart
+        (Submodule.Quotient.mk vector) =
+      sixPointThreeHeartCoordinates vector.1 :=
+  rfl
 
 /-- The induced translation matrix on the three-primary heart. -/
 def sixPointThreeHeartTranslation : Matrix (Fin 4) (Fin 4) F3 :=

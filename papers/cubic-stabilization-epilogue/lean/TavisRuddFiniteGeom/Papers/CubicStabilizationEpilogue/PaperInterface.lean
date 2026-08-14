@@ -318,8 +318,13 @@ subspaces stable under the displayed translation and inversion generators are
 exactly the vertical copy and the three scalar graphs; these four subspaces
 are maximal isotropic.  This terminal does not identify the coefficient model
 or its pairing with the manuscript's geometric three-primary discriminant
-kernel. -/
+kernel, or derive the pairing from the manuscript's integral `(1/3)(6I-J)`
+formula. -/
 theorem relativeSixAxis_threePrimary_stableMaximalIsotropicPacket :
+    (∀ vector : GraphLattices.SixPointThreeAugmentation,
+      GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+          (Submodule.Quotient.mk vector) =
+        GraphLattices.sixPointThreeHeartCoordinates vector.1) ∧
     (∀ left right : GraphLattices.SixPointThreeHeart,
       GraphLattices.sixPointThreeHeartCoefficientForm left right =
         -dotProduct (GraphLattices.sixPointThreeHeartRepresentative left)
@@ -338,7 +343,8 @@ theorem relativeSixAxis_threePrimary_stableMaximalIsotropicPacket :
       subspace ∈ GraphLattices.SixPointThreeHeartStableHalfPacket →
         GraphLattices.IsMaximalIsotropic
           GraphLattices.sixPointThreeHeartPairPolarizationBilinForm subspace := by
-  refine ⟨GraphLattices.sixPointThreeHeartCoefficientForm_eq_negative_dotProduct,
+  refine ⟨GraphLattices.sixPointThreeAugmentationQuotientEquivHeart_mk,
+    GraphLattices.sixPointThreeHeartCoefficientForm_eq_negative_dotProduct,
     GraphLattices.sixPointThreeHeartCoefficientForm_nondegenerate,
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_isAlt,
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_nondegenerate,

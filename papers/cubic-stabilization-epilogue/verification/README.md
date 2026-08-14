@@ -101,8 +101,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   `H₃ = Aug(F₃⁶)/⟨1⟩`, its normalized symmetric form is minus the dot
   product, the induced rank-eight tensor form is alternating and
   nondegenerate, and its four diagonally stable halves are exactly the
-  vertical copy and three scalar graphs, all maximal isotropic.  A separate
-  conditional bridge proves that
+  vertical copy and three scalar graphs, all maximal isotropic.  Separately,
+  on the two-primary side, a conditional bridge proves that
   supplied fibre coordinates identifying the actual kernel image with one of
   these stable maximal-isotropic subspaces give a kernel-to-subspace
   equivalence and membership in the five-member packet.  Lean also proves
