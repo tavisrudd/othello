@@ -13,6 +13,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Conne
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveLine
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveSpecialLinearAction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisFixedLine
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisNorm
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
@@ -168,6 +169,29 @@ theorem relativeSixAxis_sixPointAxis_fixedLine :
   exact ⟨GraphLattices.alternatingFiveSixPointStabilizer_card label,
     GraphLattices.sixPointAxisFixedSubspace_eq_span label,
     GraphLattices.sixPointAxisFixedSubspace_finrank label⟩
+
+/-- Exact norm-projector calculation for the six axis stabilizers.  Summing
+the ten coordinate-permutation operators of a labelled stabilizer gives a
+linear norm `N` with `N² = 10N`; its range is exactly the rational axis line.
+Consequently one tenth of `N` is an idempotent projector onto that line.  This
+does not construct an endomorphism of an abelian scheme or identify the line
+with a geometric elliptic subvariety. -/
+theorem relativeSixAxis_sixPointAxis_norm :
+    ∀ label : Fin 6,
+      (∀ vector : GraphLattices.SixPointRationalAugmentation,
+        GraphLattices.sixPointAxisNorm label
+            (GraphLattices.sixPointAxisNorm label vector) =
+          (10 : ℚ) • GraphLattices.sixPointAxisNorm label vector) ∧
+      LinearMap.range (GraphLattices.sixPointAxisNorm label) =
+        ℚ ∙ GraphLattices.sixPointRationalAxisVector label ∧
+      ∀ vector : GraphLattices.SixPointRationalAugmentation,
+        ((1 / 10 : ℚ) • GraphLattices.sixPointAxisNorm label)
+            (((1 / 10 : ℚ) • GraphLattices.sixPointAxisNorm label) vector) =
+          ((1 / 10 : ℚ) • GraphLattices.sixPointAxisNorm label) vector := by
+  intro label
+  exact ⟨GraphLattices.sixPointAxisNorm_square label,
+    GraphLattices.sixPointAxisNorm_range_eq_span label,
+    GraphLattices.sixPointAxisNormalizedNorm_idempotent label⟩
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each
