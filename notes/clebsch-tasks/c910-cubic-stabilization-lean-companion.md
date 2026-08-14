@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 85 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 86 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 155 audited terminals.  The rejecting manuscript inventory covers all
+exports 156 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -138,6 +138,10 @@ deductions, including the exact unital endomorphism of a completed Novikov ring
 defined by any supplied multiplicative curve-class character and its
 coefficient formula `Q^d ↦ χ(d)Q^d`; the geometric pairing, exponential
 character, and divisor equation remain outside that result.  It also includes
+the scalar formal exponential `exp(aX)` and proves that its scalar matrix gauge
+has inverse `exp(-aX)`, conjugates every formal-power-series matrix trivially,
+and preserves its characteristic polynomial.  This does not derive the
+geometric string equation or analytic single-valuedness.  The companion further includes
 numerical coefficient pushforward, strict-Novikov data,
 divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial

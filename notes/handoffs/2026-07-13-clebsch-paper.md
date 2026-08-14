@@ -255,8 +255,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-85 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 155 reviewer terminals, audit
+86 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 156 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -380,7 +380,11 @@ multiplicative character of curve classes now defines an exact unital
 endomorphism of the completed Novikov ring with coefficient formula
 `Q^d ↦ χ(d)Q^d`, including preservation of completed convolution.  The
 geometric divisor pairing, exponential character, and divisor equation remain
-unconstructed.  Compatible coefficient
+unconstructed.  Lean also constructs the scalar formal exponential `exp(aX)`
+over rational coefficient algebras and proves that the associated scalar matrix
+gauge has inverse `exp(-aX)`, acts trivially by conjugation, and preserves the
+characteristic polynomial.  The geometric string equation and analytic
+single-valuedness remain unconstructed.  Compatible coefficient
 reductions, divisor substitutions, small matrices, and gauges derive the bulk
 matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial

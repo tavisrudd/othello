@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 155 reviewer-facing Lean terminals.  These counts summarize the
+There are 156 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 155 reviewer terminals.
+1 complete; 156 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -185,6 +185,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   multiplying each `Q^d` coefficient by its character value; Lean proves
   preservation of completed convolution.  The geometric pairing, exponential
   character, and divisor equation remain supplied or unconstructed.
+  Lean also constructs `exp(aX)` over a commutative rational algebra and proves
+  that its scalar matrix gauge has the opposite exponential as two-sided
+  inverse, acts trivially by conjugation, and preserves every characteristic
+  polynomial.  The quantum string equation, inverse-loop-coordinate
+  interpretation, and analytic single-valuedness are not represented.
   A further composite now inserts these constructed compatible evaluated
   gauges and inverses into the formal-base-shift matrix packet.  With compatible
   small monodromy matrices and divisor substitutions supplied, Lean derives the

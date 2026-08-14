@@ -61,6 +61,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HorizontalMonodromyBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalDifferentialModuleBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedDivisorSubstitution",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalStringGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent",

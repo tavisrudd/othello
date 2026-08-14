@@ -37,6 +37,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.Differentia
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HorizontalMonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalDifferentialModuleBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedDivisorSubstitution
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalStringGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
@@ -2907,6 +2908,35 @@ theorem formalBaseShift_completedDivisorSubstitution
   exact ⟨Quantum.completedDivisorSubstitution_coefficient
       grading weight series curve,
     map_zero _, map_one _, map_add _, map_mul _⟩
+
+/-- Over a commutative rational algebra, the scalar formal exponential
+`exp(aX)` has coefficients `a^n/n!`; its scalar matrix and the matrix for
+`exp(-aX)` are two-sided inverses.  The scalar gauge commutes with every square
+formal-power-series matrix, so its conjugation is literally the original
+matrix and its characteristic polynomial is unchanged.  This is the algebraic
+string-gauge step.  Lean does not derive the scalar from a quantum string
+equation, identify `X` with an inverse loop coordinate, or prove analytic
+single-valuedness. -/
+theorem formalBaseShift_formalStringGauge_trivial
+    {Index R : Type*} [Fintype Index] [DecidableEq Index]
+    [CommRing R] [Algebra ℚ R] (scalar : R) (degree : ℕ)
+    (monodromy : Matrix Index Index (PowerSeries R)) :
+    PowerSeries.coeff degree (Quantum.formalStringExponential R scalar) =
+        scalar ^ degree * algebraMap ℚ R (1 / degree.factorial) ∧
+    Quantum.formalStringGauge Index R scalar *
+        Quantum.formalStringGauge Index R (-scalar) = 1 ∧
+    Quantum.formalStringGauge Index R (-scalar) *
+        Quantum.formalStringGauge Index R scalar = 1 ∧
+    Quantum.formalStringGauge Index R scalar * monodromy *
+        Quantum.formalStringGauge Index R (-scalar) = monodromy ∧
+    (Quantum.formalStringGauge Index R scalar * monodromy *
+      Quantum.formalStringGauge Index R (-scalar)).charpoly =
+        monodromy.charpoly :=
+  ⟨Quantum.formalStringExponential_coefficient R scalar degree,
+    Quantum.formalStringGauge_mul_inverse Index R scalar,
+    Quantum.formalStringGauge_inverse_mul Index R scalar,
+    Quantum.formalStringGauge_conjugation Index R scalar monodromy,
+    Quantum.formalStringGauge_conjugation_charpoly Index R scalar monodromy⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the

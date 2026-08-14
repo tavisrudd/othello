@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 155 reviewer terminals.
+1 complete; 156 reviewer terminals.
 
-The 155 reviewer-facing terminals currently verify:
+The 156 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -144,6 +144,12 @@ The 155 reviewer-facing terminals currently verify:
   this proves preservation of completed convolution and models
   `Q^d ↦ exp(⟨a₂,d⟩)Q^d`, but does not construct the geometric pairing,
   exponential character, or divisor equation;
+- over a commutative rational algebra, construction of the scalar formal
+  exponential `exp(aX)` with coefficients `a^n/n!`; the scalar matrix gauges
+  for `a` and `-a` are two-sided inverses and their conjugation fixes every
+  formal-power-series matrix and its characteristic polynomial; no quantum
+  string equation, inverse-loop-coordinate identification, or analytic
+  single-valuedness statement is constructed;
 - from a supplied commutative ring with a decreasing ideal filtration,
   construction of every quotient coefficient ring and canonical adjacent
   reduction; a supplied filtration-preserving endomorphism descends to
