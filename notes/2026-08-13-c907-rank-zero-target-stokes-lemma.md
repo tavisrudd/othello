@@ -150,6 +150,13 @@ multiplier computation.
 
 None requires a full equality of Stokes and window matrices.
 
+The exact primary-source boundary and the final blockwise theorem are in
+`2026-08-13-c907-two-wall-residue-support-source-boundary.md`.  Crepant toric
+GKZ continuation already has `FM=AC`, hence aggregate supported residues.
+General noncrepant toric continuation has an asymptotic `I`-function map but
+no Gamma/window calibration.  The missing result is precisely the numerical
+rank-row extension across two discrepant unit circuits.
+
 ## 5. Relation to the shadow sieve
 
 The cone, incidence, primary-moment, and turning shadows are now fallback

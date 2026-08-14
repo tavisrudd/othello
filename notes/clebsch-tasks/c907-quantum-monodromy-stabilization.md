@@ -262,6 +262,19 @@ the complete residue block.  See
 must say that each unstable-stratum **residue block** has supported output,
 not that every coordinate term or arbitrarily refined shear does.
 
+The literature boundary for that blockwise statement is now exact; see
+`../2026-08-13-c907-two-wall-residue-support-source-boundary.md`.  In the
+crepant toric case, Borisov--Horja and Han identify Mellin--Barnes analytic
+continuation with Fourier--Mukai on the integral lattice, so complete
+essential residue blocks are supported.  Acosta--Shoemaker treat arbitrary
+toric discrepancy analytically, but their `I`-function asymptotic map is not
+Gamma/window calibrated.  Iritani supplies the general discrepant formal
+split and the analytic Gamma/Orlov theorem only in the weighted weak-Fano
+range; Gu--Yu--Yu supply the full formal simple-VGIT QDM split without the
+analytic lattice comparison.  Thus Gold's remaining lemma is a genuinely
+new two-wall **numerical** Fourier--window theorem, not a missed consequence
+of an existing general theorem.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
