@@ -1,0 +1,299 @@
+# C907 — holonomic gluing of the marked point row
+
+Date: 2026-08-14
+
+**Status:** candidate unconditional replacement for complete-neutral
+continuation.  The finite-dimensional cyclic-row and analytic gluing lemmas
+below are proved.  The remaining geometric gate is narrower than the
+manuscript's Hypothesis 8.2: prove finite-Artin regular holonomicity for the
+**point-marked** Woodward graph series, including its clutching tails.  No
+complete residue/graph bijection is assumed or proved here.
+
+This note supersedes the unconditional claims in
+`2026-08-14-c907-complete-neutral-localization.md` and the complete-residue
+parts of `2026-08-14-c907-neutral-slice-gamma-kernel.md` and
+`2026-08-14-c907-quantum-kirwan-common-source.md`.  The paper correctly keeps
+complete-neutral continuation as a hypothesis.
+
+## 1. Why the full continued source is stronger than necessary
+
+Let `V` be a finite-dimensional vector space over a characteristic-zero
+field, let `T` be an endomorphism, and let `r` be a row on `V`.  Define the
+dual cyclic space
+
+\[
+ C_T(r)=\operatorname{span}\{r,rT,rT^2,\ldots\}\subset V^* . \tag{1}
+\]
+
+### Lemma 1 (cyclic-row spectral support)
+
+For every eigenvalue `lambda` of `T`,
+
+\[
+ r|_{P_\lambda(V)}\ne0
+ \quad\Longleftrightarrow\quad
+ P_\lambda(T^*)C_T(r)\ne0 .                                  \tag{2}
+\]
+
+Hence the set of primary packets detected by `r` is determined by the
+isomorphism class of the marked cyclic pair `(C_T(r),r)`.
+
+### Proof
+
+Let `e_lambda(T)` be the polynomial Bezout projector onto the generalized
+`lambda`-eigenspace.  The restriction of `r` to `P_lambda(V)` is the row
+`r e_lambda(T)`.  This row belongs to `C_T(r)` and is the
+`lambda`-primary projection of `r` for the dual action.  It is zero exactly
+when the restriction is zero.  This proves (2).  \(\square\)
+
+Consequently C907 does not need a common analytic continuation of every
+undetected direction of the two endpoint quantum modules.  It is enough to
+continue the pullback of the Gamma point row and all of its **z-covariant**
+derivatives.  A scalar Novikov continuation without this joint z-structure
+would not control formal monodromy.
+Formal smooth-endpoint quantum-Kirwan surjectivity makes the pullback on dual
+cyclic modules injective, so no detected endpoint primary factor is lost.
+
+This bypasses the finite common-source quotient used in the conditional
+proof.  It also avoids the factorization ambiguity of an unmarked graph
+trace: the commuting-rotation support-collapse theorem extracts one
+oriented row before any continuation is attempted.
+
+## 2. Hypergeometric tails are holonomic
+
+Let `A` be a finite-dimensional complex Artin algebra.  Fix a congruence
+class after clearing stabilizer denominators.  Suppose an `A`-valued sequence
+`c_k` is a finite nilpotent parameter derivative of a Gamma-ratio expression
+whose arguments are affine integral functions of `k`.  Then, after adjoining
+finitely many parameter derivatives to the state vector, there are
+polynomial matrices `P(k),Q(k)` such that
+
+\[
+ P(k)c_{k+1}=Q(k)c_k .                                        \tag{3}
+\]
+
+Indeed `Gamma(x+1)=x Gamma(x)` gives a rational first-order recurrence for
+the undeformed Gamma ratio.  Differentiating finitely many times in nilpotent
+parameters gives an upper-triangular rational recurrence for the finite jet;
+clearing denominators gives (3).  A step larger than one is reduced to this
+case by splitting the sequence into finitely many congruence classes.
+
+If `theta=x d/dx` and `F(x)=sum_{k>=k0} c_k x^k`, coefficient extraction
+turns (3) into a finite system of differential equations with polynomial
+coefficients.  Thus `F` is holonomic and has analytic continuation along
+every path avoiding a finite singular set.  Under the neutral balance
+
+\[
+ \sum_a \epsilon_a h_a=0,                                    \tag{4}
+\]
+
+Stirling's formula gives, after one fixed rescaling of `x`,
+
+\[
+ \|c_k\|=O(k^N(\log k)^M)                                    \tag{5}
+\]
+
+for some `N,M`.  Hence radial boundary values exist as tempered
+`A`-valued distributions.  Polynomial insertions, input/bulk derivatives,
+finite sums, and Artin quotient maps preserve these conclusions.
+
+This argument constructs a canonical holonomic germ from the actual
+Gamma-ratio recurrence.  It does not infer an arbitrary interpolating
+function from its integer values, so the `sin(pi sigma)` ambiguity does not
+arise.
+
+## 3. Distribution-to-holomorphic gluing
+
+The following elementary lemma converts the negative shadow in
+Gonzalez--Woodward into a positive continuation statement once holonomicity
+is available.
+
+### Lemma 2 (finite-support boundary gluing)
+
+Let `F_0` and `F_infinity` be `A`-valued holonomic germs on the two sides of
+a circle, with tempered radial boundary values.  Assume their boundary
+difference is supported at finitely many points of the circle.  Then they are
+branches of one `A`-valued holonomic continuation on the complement of those
+points and their other finite singularities.  If the supported distribution
+has finite order, the only added singularities are poles of finite order
+(after the finite ramification already used for stabilizers).
+
+### Proof
+
+Work in a complex basis of the finite-dimensional algebra `A`.  A
+distribution of finite order supported at `xi` is a finite sum of derivatives
+of `delta_xi`.  Its Fourier coefficients have the form
+
+\[
+ P(n)\xi^{-n}.                                                 \tag{6}
+\]
+
+The inside and outside Laurent expansions of
+
+\[
+ P(\theta)\frac{1}{1-x/\xi}                                   \tag{7}
+\]
+
+differ by exactly (6), with the usual opposite orientation for the outside
+expansion.  Subtract the finite sum of the rational principal parts (7).
+The two remaining boundary distributions agree on the whole circle.
+Polynomial boundary growth permits distributional Morera gluing across
+every arc; equivalently, the one-variable edge-of-the-wedge theorem applies.
+The two germs therefore continue to one holomorphic function there.  Adding
+back (7) proves the assertion.  Holonomicity is preserved by analytic
+continuation and finite rational correction.  \(\square\)
+
+The zero-jump case is the one relevant to the marked common-open point row.
+No effectivity or termwise residue matching is used; cancellations in the
+complete virtual sum are allowed.
+
+## 4. Geometric application and the one remaining gate
+
+Fix a finite ample-energy/bulk Artin quotient, an ordinary equivariant curve
+class modulo a primitive affine direction `delta`, and the common-open point
+class `a_p` of Section 8 of the manuscript.  The commuting-rotation
+support-collapse theorem gives equality of the two oriented endpoint point
+rows in Woodward's extended degree-function space: every intermediate
+polarization-fixed contribution contains `a_p|_F=0` before division by its
+virtual normal Euler class.
+
+If the two marked endpoint series are holonomic and tempered in every
+neutral direction, their boundary jump is therefore zero.  Lemma 2 places
+them and their z-covariant derivatives in one continued marked cyclic
+z-module.  Lemma 1 then identifies their detected formal-monodromy primary
+spectra.  Nonneutral directions are
+Laurent-finite by the virtual-dimension equation, and the neutral Rees factor
+is independent of the affine coordinate.  Input/bulk derivatives and Artin
+quotient maps commute with the construction.
+
+Here is the exact module argument.  Choose finitely many common equivariant
+inputs whose quantum-Kirwan images span each endpoint module; take the union
+of two finite lift sets if necessary.  On each chamber, evaluation of the
+pulled-back point row on these inputs realizes the intrinsic dual cyclic
+module faithfully, because the endpoint quantum-Kirwan map is surjective.
+The row equality in the extended equivariant degree-function space becomes
+equality of tempered boundary distributions once (5) is known.  Lemma 2
+continues the resulting finite vector of functions.  Its z-connection
+equations also continue, by the identity theorem, so the module generated by
+its z-covariant derivatives is one common cyclic z-module.  Faithfulness on
+each chamber identifies it with the endpoint dual cyclic module.  Lemma 1
+then gives the Boolean equivalence.  No continuation of the complementary
+undetected directions is used.
+
+Thus the manuscript's complete-neutral hypothesis can be replaced by the
+following strictly weaker statement.
+
+> **Point-row holonomicity gate.**  At every finite Artin level and fixed
+> ordinary degree, each neutral clutching tail of the point-marked localized
+> Woodward graph series is, after a finite congruence split, a finite
+> nilpotent derivative of one fixed Gamma-ratio recurrence.
+
+Woodward Corollary 9.10 and the virtual-normal formula provide the expected
+recurrence: on each stable clutching tail the moving line degrees are
+`h_a k+s_a`, the node factors are independent of `k`, and fixed bubble
+degrees contribute adjacent Gamma ratios.  What still has to be checked is
+that the coefficient stack, its fixed obstruction theory, and its evaluation
+class are constant on each tail.  Sign changes of the clutching
+one-parameter subgroups, unstable contractions, and finite stabilizer phases
+may split a tower into finitely many tails; finite exceptional values are
+harmless Laurent polynomials.
+
+Gonzalez--Woodward Lemma 4.5 proves precisely this constancy for their
+polarization-fixed Picard orbits: twisting preserves the relative
+obstruction theory, virtual class, bubble components, and evaluation
+classes.  It is not a published theorem for Woodward's localized
+rotation-fixed graph receiver.  Extending that identification to the marked
+clutching tails is the remaining geometric proof obligation.
+
+There is a concrete candidate proof.  Corollary 9.10 writes a rotation-fixed
+component as a fibre product of two fixed stable-map bubble factors with a
+clutched principal factor.  On a tail where the signs of the two clutching
+cocharacters and the stabilizer congruence are fixed, the middle quotient,
+its evaluation maps, and both bubble factors are constant.  After the
+splitting principle, the normalization triangle for the pulled-back tangent
+complex separates:
+
+- a fixed zero-mode bundle, identified by evaluation with the tangent of
+  that constant coefficient stack;
+- moving character lines whose degrees are `h_a k+s_a`;
+- node and attaching-point terms independent of `k`.
+
+Twisting is trivial on every attached bubble, exactly as in the proof of
+Gonzalez--Woodward Lemma 4.5.  Hence the normalization triangle should give
+the required fixed-POT identification and put all unbounded dependence in
+the moving Gamma recurrence.  The unresolved checks are that no zero mode
+enters or leaves inside a declared tail and that contraction of an unstable
+principal component contributes only a finite exceptional value.  These are
+the four assertions tested in Section 6.
+
+For `G=G_m` these checks are finite in shape.  A clutching cocharacter is an
+integer, so its limit stratum depends only on its sign; a finite stabilizer
+adds only a congruence class.  Each cocharacter therefore has finitely many
+threshold values and finitely many stable tails.  On one tail, a character
+line of degree `h k+s` has a rotation-zero monomial precisely on a fixed
+interval condition.  When present, that monomial is identified by endpoint
+evaluation with the same root line on the coefficient stack; all other
+monomials form the moving Gamma factor.  The analogous `H^1` assertion
+follows by Serre duality.  This is the local calculation that must be written
+inside the normalization triangle to turn the candidate proof into a
+theorem.
+
+## 5. Why this avoids the failed complete-residue route
+
+1. No pole is assigned to an individual graph refinement.
+2. No generic deformation of coincident poles is given a geometric meaning.
+3. No graphwise opposite-chamber bijection is asserted.
+4. No full fundamental-solution or Givental-cone comparison is required.
+5. The complete sum is used only through the already proved marked
+   support-collapse identity; the continued object is the dual cyclic row.
+
+The complete-residue statement in the earlier notes was therefore stronger
+than necessary and unsupported.  Aleshkin--Liu remains a model for the
+balanced analytic estimates, but their linear GLSM wall theorem is not used
+as a black box for nonlinear graph refinement.
+
+## 6. Smallest falsifier
+
+Use a balanced rank-one projective-bundle master with central fixed base
+`B=P^1`, normal characters `+1,-1`, and one positive-degree fixed bubble in
+`B` attached at one node.  Check explicitly that twisting the principal
+bundle by `O(k)`:
+
+1. leaves the fixed coefficient stack, virtual class, and point evaluation
+   unchanged on each stable tail;
+2. changes only the moving normal index by affine line degrees;
+3. leaves the node-smoothing and graph-automorphism factors in one rational
+   recurrence;
+4. produces no extra nonholonomic dependence when an unstable component is
+   contracted.
+
+Failure of any item kills the route.  Success supplies the base case for an
+induction over bubble-tree edges; the induction step is the normalization
+exact triangle for the moving index together with the standard gluing
+formula for the fixed virtual class.
+
+## Sources
+
+- Gonzalez--Woodward, arXiv:1208.1727v7, Lemma 4.5, equations (40)--(47),
+  Remarks 1.18(b,d), 4.6, and 4.7; cached PDF SHA-256
+  `2c99203c8e1d7dd373112629bbfac0760e7a3812d348e9110a1eb2b894d9d84c`.
+- Woodward, arXiv:1408.5869v7, Corollary 9.10 and equations (54)--(59);
+  cached PDF SHA-256
+  `5aa794f4d83dd8d127aab769d95a71a4691d7a35d220e81ca73c5b8bb360ea51`.
+- Aleshkin--Liu, arXiv:2301.01266v1, Definition 5.18 and Theorem 5.21;
+  cached PDF SHA-256
+  `921af8ed2105d6a511c0cf485550a263e222983c6fcc628b44c838bb3d8de81f`.
+
+## Mystery ledger
+
+- **Settled:** interpolation uniqueness is unnecessary; the Gamma recurrence
+  defines a holonomic germ.
+- **Settled:** complete residue/graph exhaustiveness is unnecessary for the
+  Boolean; the dual cyclic point row suffices.
+- **Open:** constancy of the localized fixed coefficient stack and POT along
+  every stable clutching tail.  Owner: the projective-bundle falsifier and,
+  if it passes, the bubble-tree induction.
+- **Open:** whether the manuscript's word `meromorphic` should explicitly
+  allow the finite ramified/logarithmic cover naturally produced by regular
+  holonomic continuation.  This is a statement-level audit after the
+  geometric gate passes.

@@ -2,11 +2,12 @@
 
 Date: 2026-08-14
 
-**Status:** new theorem package, internally proved and source-audited; external
-referee check still required.  This note closes the last common-coefficient
-gate in the global-cobordism route.  It is not a theorem stated by Woodward or
-Aleshkin--Liu.  Woodward supplies the exhaustive fixed-locus and virtual-normal
-formulas; the balanced Barnes continuation below is the new synthesis.
+**Status (corrected): superseded as an unconditional theorem.**  The
+complete-residue step in Sections 3 and 6 is not implied by Woodward's
+fixed-locus classification or Aleshkin--Liu's linear GLSM theorem.  The paper
+correctly retains complete-neutral continuation as a hypothesis.  See
+`2026-08-14-c907-holonomic-point-row-gluing.md` for a weaker candidate route
+which avoids termwise residue/graph matching.
 
 ## 1. Statement
 

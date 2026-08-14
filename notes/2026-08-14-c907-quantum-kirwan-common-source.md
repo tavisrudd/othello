@@ -2,7 +2,7 @@
 
 Date: 2026-08-14
 
-**Status:** theorem-grade global-cobordism reduction.  Three pieces previously charged to a full
+**Status (corrected): conditional global-cobordism reduction.**  Three pieces previously charged to a full
 intermediate-quotient Fourier conjecture are now separated and proved.  The
 adjoint discrete Fourier formula has a chamber-independent scalar
 augmentation.  At a smooth free quotient, linearized quantum Kirwan is
@@ -25,6 +25,13 @@ is independent of that degree.  The two endpoint localized maps therefore
 coexist over one meromorphic Barnes field.  A finite common quotient, rather
 than a finite-rank presentation of the whole equivariant theory, carries the
 formal-primary decomposition.
+
+**Correction.**  The Section 6 claim that Woodward's exhaustive fixed-locus
+union proves complete-neutral localization is withdrawn.  Exhaustiveness
+does not identify the opposite chamber residues with the complete nonlinear
+graph sum.  See `2026-08-14-c907-holonomic-point-row-gluing.md` for a route
+which continues only the marked dual cyclic row and does not require that
+identification.
 
 ## 1. The adjoint augmentation lemma
 

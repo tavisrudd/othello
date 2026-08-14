@@ -2,9 +2,12 @@
 
 Date: 2026-08-14
 
-**Status:** theorem-grade local analytic reduction, now paired with the
-complete-neutral virtual-localization theorem in
-`2026-08-14-c907-quantum-kirwan-common-source.md`.  The only nonpolynomial direction left by the C907
+**Status (corrected): conditional local analytic reduction.**  The
+parameterized linear Gamma-kernel statement is useful once a common kernel
+has been constructed, but the claimed nonlinear complete-residue reduction
+is not proved.  The paper correctly keeps that continuation conditional; see
+`2026-08-14-c907-holonomic-point-row-gluing.md` for the current weaker route.
+The only nonpolynomial direction left by the C907
 peak sieve is Calabi--Yau after restriction to its primitive one-parameter
 subgroup.  For a genuine common Mellin--Barnes kernel, Aleshkin--Liu's
 Gamma-central-charge wall theorem therefore identifies the complete neutral
