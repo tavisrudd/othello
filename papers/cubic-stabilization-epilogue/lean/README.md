@@ -104,7 +104,8 @@ The 157 reviewer-facing terminals currently verify:
   the induced heart, and the exact four-element quadratic matrix commutant of
   the entire generated heart action; a subspace of two heart copies is
   four-dimensional and stable under the diagonal action exactly when it is the
-  vertical half or the graph of one of those four commutant endomorphisms;
+  vertical half or the graph of one of those four commutant endomorphisms, and
+  the resulting packet has exactly five distinct members;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,

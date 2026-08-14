@@ -114,11 +114,14 @@ The raw linearized map has a Novikov-Euler correction, so it must not be
 treated as having a constant `mu` commutator at fixed Novikov parameter.  Its
 canonical Rees homogenization has the exact uniform half-Tate shift; the
 remaining packet-side check is Euler multiplication at the curved bulk point.
-The highest-EV wall proof is even smaller: enhance quantum Kalkman localization
-by the commuting rotation of the graph `P^1` and retain the output node.  An
-off-wall point lift restricts to zero on every wall fixed locus, so all wall
-terms should vanish before Gamma summation.  The exact open lemma is that this
-equivariant enhancement has Woodward's localized `tau_-` as its endpoint term.
+The wall proof is now closed by a component-selective commuting-rotation
+argument.  Pole classes put all inputs on one side, a basis of Liouville
+characters extracts degree zero on the other, and the common-open point lift
+kills every wall term; the surviving endpoint is exactly Woodward's localized
+`tau_-` row.  Rees homogenization and Euler homogeneity close the shifted
+packet map wall-locally.  The remaining global gate is one intrinsic sectorial
+fiber functor for the intermediate variety's formal `P_6` packet over its full
+Novikov field, conservative for both incident wall comparisons.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
@@ -514,7 +517,8 @@ action is simple and its common commutant is exactly the four-element
 quadratic algebra; the same classification is proved for every matrix word in
 the full generated action.  A subspace of two heart copies is four-dimensional
 and stable under the diagonal action exactly when it is the vertical half or
-the graph of one of those four commutant endomorphisms.  All six Sylow-five subgroups of this concrete `A5` are
+the graph of one of those four commutant endomorphisms; these five subspaces are
+distinct.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;

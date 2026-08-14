@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
+import Mathlib.Data.Set.Card
 
 /-!
 # Stable halves of the six-point coefficient heart
@@ -9,7 +10,8 @@ four-dimensional subspaces of `H × H` stable under the diagonal action of both
 generators.  Lean proves that every such half is either the vertical copy of
 `H` or the graph of one of the four endomorphisms in the quadratic commutant
 `{0, 1, W, W + 1}`.  The converse is also proved: the displayed vertical copy
-and four graphs all have dimension four and are diagonally stable.
+and four graphs all have dimension four and are diagonally stable.  Their graph
+slopes and first projections distinguish them, so the packet has five members.
 
 The argument is structural.  Simplicity of `H` makes the first projection and
 the vertical kernel either zero or the whole heart.  A half with surjective
@@ -178,6 +180,131 @@ theorem sixPointHeartGraph_finrank
   simpa [SixPointHeart] using
     finrank_graphEmbedding_range (K := F2) (H := SixPointHeart)
       (Matrix.toLin' matrix)
+
+/-- The graph range determines its linear slope. -/
+theorem sixPointHeartGraphRange_injective : Function.Injective
+    (fun slope : SixPointHeart →ₗ[F2] SixPointHeart ↦
+      LinearMap.range (graphEmbedding (K := F2) slope)) := by
+  intro left right rangeEquality
+  apply LinearMap.ext
+  intro vector
+  have member : graphEmbedding (K := F2) left vector ∈
+      LinearMap.range (graphEmbedding (K := F2) right) := by
+    have sourceMember : graphEmbedding (K := F2) left vector ∈
+        LinearMap.range (graphEmbedding (K := F2) left) := ⟨vector, rfl⟩
+    simpa only [rangeEquality] using sourceMember
+  rcases member with ⟨preimage, equality⟩
+  have firstEquality := congrArg Prod.fst equality
+  have secondEquality := congrArg Prod.snd equality
+  change preimage = vector at firstEquality
+  change right preimage = left vector at secondEquality
+  rw [firstEquality] at secondEquality
+  exact secondEquality.symm
+
+/-- The vertical range differs from every graph range. -/
+theorem sixPointHeartVertical_ne_graphRange
+    (slope : SixPointHeart →ₗ[F2] SixPointHeart) :
+    LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart)) ≠
+      LinearMap.range (graphEmbedding (K := F2) slope) := by
+  intro rangeEquality
+  let vector : SixPointHeart := ![1, 0, 0, 0]
+  have member : graphEmbedding (K := F2) slope vector ∈
+      LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart)) := by
+    rw [rangeEquality]
+    exact ⟨vector, rfl⟩
+  rcases member with ⟨preimage, equality⟩
+  have firstEquality := congrArg (fun pair : SixPointHeart × SixPointHeart =>
+    pair.1 0) equality
+  norm_num [verticalEmbedding, graphEmbedding, vector] at firstEquality
+
+/-- Distinct matrices give distinct graph ranges. -/
+theorem sixPointHeartMatrixGraphRange_ne
+    {left right : Matrix (Fin 4) (Fin 4) F2} (different : left ≠ right) :
+    LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' left)) ≠
+      LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' right)) := by
+  intro rangeEquality
+  apply different
+  apply Matrix.toLin'.injective
+  exact sixPointHeartGraphRange_injective rangeEquality
+
+/-- The displayed packet contains exactly five distinct subspaces. -/
+theorem sixPointHeartStableHalfPacket_ncard :
+    SixPointHeartStableHalfPacket.ncard = 5 := by
+  classical
+  let vertical := LinearMap.range
+    (verticalEmbedding (K := F2) (H := SixPointHeart))
+  let graphZero := LinearMap.range
+    (graphEmbedding (K := F2)
+      (Matrix.toLin' (0 : Matrix (Fin 4) (Fin 4) F2)))
+  let graphOne := LinearMap.range
+    (graphEmbedding (K := F2)
+      (Matrix.toLin' (1 : Matrix (Fin 4) (Fin 4) F2)))
+  let graphRoot := LinearMap.range
+    (graphEmbedding (K := F2) (Matrix.toLin' sixPointHeartCommutantRoot))
+  let graphRootOne := LinearMap.range
+    (graphEmbedding (K := F2)
+      (Matrix.toLin' (sixPointHeartCommutantRoot + 1)))
+  have matrixZeroOne :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠ 1 := by decide
+  have matrixZeroRoot :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot := by decide
+  have matrixZeroRootOne :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  have matrixOneRoot :
+      (1 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot := by decide
+  have matrixOneRootOne :
+      (1 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  have matrixRootRootOne :
+      sixPointHeartCommutantRoot ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  have verticalNeZero : vertical ≠ graphZero := by
+    exact sixPointHeartVertical_ne_graphRange _
+  have verticalNeOne : vertical ≠ graphOne := by
+    exact sixPointHeartVertical_ne_graphRange _
+  have verticalNeRoot : vertical ≠ graphRoot := by
+    exact sixPointHeartVertical_ne_graphRange _
+  have verticalNeRootOne : vertical ≠ graphRootOne := by
+    exact sixPointHeartVertical_ne_graphRange _
+  have zeroNeOne : graphZero ≠ graphOne :=
+    sixPointHeartMatrixGraphRange_ne matrixZeroOne
+  have zeroNeRoot : graphZero ≠ graphRoot :=
+    sixPointHeartMatrixGraphRange_ne matrixZeroRoot
+  have zeroNeRootOne : graphZero ≠ graphRootOne :=
+    sixPointHeartMatrixGraphRange_ne matrixZeroRootOne
+  have oneNeRoot : graphOne ≠ graphRoot :=
+    sixPointHeartMatrixGraphRange_ne matrixOneRoot
+  have oneNeRootOne : graphOne ≠ graphRootOne :=
+    sixPointHeartMatrixGraphRange_ne matrixOneRootOne
+  have rootNeRootOne : graphRoot ≠ graphRootOne :=
+    sixPointHeartMatrixGraphRange_ne matrixRootRootOne
+  have verticalNotMem : vertical ∉
+      ({graphZero, graphOne, graphRoot, graphRootOne} :
+        Set (Submodule F2 (SixPointHeart × SixPointHeart))) := by
+    simp [verticalNeZero, verticalNeOne, verticalNeRoot, verticalNeRootOne]
+  have zeroNotMem : graphZero ∉
+      ({graphOne, graphRoot, graphRootOne} :
+        Set (Submodule F2 (SixPointHeart × SixPointHeart))) := by
+    simp [zeroNeOne, zeroNeRoot, zeroNeRootOne]
+  have oneNotMem : graphOne ∉
+      ({graphRoot, graphRootOne} :
+        Set (Submodule F2 (SixPointHeart × SixPointHeart))) := by
+    simp [oneNeRoot, oneNeRootOne]
+  have rootNotMem : graphRoot ∉
+      ({graphRootOne} :
+        Set (Submodule F2 (SixPointHeart × SixPointHeart))) := by
+    simpa using rootNeRootOne
+  change Set.ncard (insert vertical
+    ({graphZero, graphOne, graphRoot, graphRootOne} :
+      Set (Submodule F2 (SixPointHeart × SixPointHeart)))) = 5
+  rw [Set.ncard_insert_of_notMem verticalNotMem (Set.toFinite _),
+    Set.ncard_insert_of_notMem zeroNotMem (Set.toFinite _),
+    Set.ncard_insert_of_notMem oneNotMem (Set.toFinite _),
+    Set.ncard_insert_of_notMem rootNotMem (Set.toFinite _)]
+  simp
 
 /-- Every four-dimensional diagonally stable subspace of two coefficient-heart
 copies is one of the vertical half or the four quadratic-commutant graphs. -/

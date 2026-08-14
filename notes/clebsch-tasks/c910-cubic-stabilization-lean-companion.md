@@ -289,7 +289,8 @@ one-factorization whose faithful factor action exhausts the alternating group
 quadratic four-element algebra, both for the two generators and for every word
 in the full generated action.  A subspace of two heart copies is
 four-dimensional and stable under the diagonal action exactly when it is the
-vertical half or the graph of one of those four commutant endomorphisms.  All six Sylow-five subgroups of this concrete
+vertical half or the graph of one of those four commutant endomorphisms; these
+five subspaces are distinct.  All six Sylow-five subgroups of this concrete
 `A5` are now constructed, and their conjugation action is exactly the original
 six-point action.  The resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to

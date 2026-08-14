@@ -45,7 +45,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   and the entire generated heart action has exactly the quadratic four-element
   matrix commutant.  It also proves that a subspace of two heart copies is
   four-dimensional and diagonally stable exactly when it is the vertical half
-  or a graph of one of those four commutant endomorphisms.  It identifies
+  or a graph of one of those four commutant endomorphisms; the resulting packet
+  has exactly five distinct members.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

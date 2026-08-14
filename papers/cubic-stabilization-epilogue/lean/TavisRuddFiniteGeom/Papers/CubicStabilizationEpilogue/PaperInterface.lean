@@ -1937,13 +1937,14 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
 four-dimensional and stable under the diagonal translation and inversion
 actions exactly when it is the vertical copy or the graph of `0`, `1`, `W`,
 or `W+1`, where `W²+W+1=0` is the proved quadratic commutant generator.  This
-classifies the stable halves of the concrete modular model; it does not
-identify that model or any of its halves with the geometric two-primary kernel
-of a relative isogeny. -/
+packet has exactly five distinct members.  This classifies the stable halves
+of the concrete modular model; it does not identify that model or any of its
+halves with the geometric two-primary kernel of a relative isogeny. -/
 theorem principalGluing_sixPointCoefficientHeart_stableHalf_classification
     (subspace : Submodule GraphLattices.F2
       (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart)) :
-    (subspace = LinearMap.range
+    GraphLattices.SixPointHeartStableHalfPacket.ncard = 5 ∧
+    ((subspace = LinearMap.range
         (GraphLattices.graphEmbedding (K := GraphLattices.F2)
           (Matrix.toLin' (0 : Matrix (Fin 4) (Fin 4) GraphLattices.F2))) ∨
     subspace = LinearMap.range
@@ -1960,7 +1961,8 @@ theorem principalGluing_sixPointCoefficientHeart_stableHalf_classification
         (GraphLattices.verticalEmbedding
           (K := GraphLattices.F2) (H := GraphLattices.SixPointHeart))) ↔
       GraphLattices.SixPointHeartPairGeneratorStable subspace ∧
-        Module.finrank GraphLattices.F2 subspace = 4 := by
+        Module.finrank GraphLattices.F2 subspace = 4) := by
+  refine ⟨GraphLattices.sixPointHeartStableHalfPacket_ncard, ?_⟩
   simpa [GraphLattices.SixPointHeartStableHalfPacket] using
     GraphLattices.sixPointHeartStableHalfPacket_iff subspace
 
