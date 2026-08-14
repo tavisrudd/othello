@@ -56,7 +56,9 @@ The committed authority was exported from source snapshot
 `~/src/math-papers/gamma-point-row`. The exporter audit and manifest
 verification pass; the standalone `make check` reproduces the same PDF hash.
 Its initial local commit is `54f4ec8`. No remote was configured and nothing
-was pushed.
+was pushed. The public portfolio summary was synchronized separately to local
+commit `d3afe69`; that existing mirror is one commit ahead of its remote and
+was not pushed.
 
 The final title is *The Point-Class Rank Functional under Birational Wall
 Crossing: Exact One-Wall Identities toward the X × P² Problem*. The abstract
