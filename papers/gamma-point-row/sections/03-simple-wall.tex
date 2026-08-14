@@ -1,0 +1,139 @@
+\section{The exact point column at a simple VGIT wall}
+\label{sec:simple-wall}
+
+Let \(X_-\dashrightarrow X_+\) be a simple VGIT wall crossing satisfying the
+hypotheses of \cite[Definition~3.2]{GuYuYu}: the chamber quotients and wall
+quotient \(S\) are smooth and projective, and the normal weights at the wall
+are \(\pm1\).  Assume \(r_+<r_-\) and write \(\nu=r_--r_+\).
+Theorem~6.2 of \cite{GuYuYu} gives a pairing-preserving isomorphism
+\[
+ \Phi:\QDM(X_-)^{\mathrm{La,red}}
+ \longrightarrow
+ (\tau_+^{\mathrm{red}})^*\QDM(X_+)^{\mathrm{La,red}}
+ \oplus\bigoplus_{j=0}^{\nu-1}
+ (\zeta_j^{\mathrm{red}})^*\QDM(S)^{\mathrm{La,red}}.       \tag{3.1}
+\]
+Its coefficient ring is Laurent in a fractional wall variable and complete
+in the remaining Novikov and bulk variables.  We use only the extremal
+specialization of (3.1).
+
+Let \(p_\pm\) be corresponding points in the common open set.  Gu--Yu--Yu's
+Lemma~3.27 constructs a unique master-space lift \(a_p\) with
+\[
+ \kappa_+(a_p)=[p_+],\qquad
+ \kappa_-(a_p)=[p_-],\qquad
+ a_p|_{F_0}=0.                                             \tag{3.2}
+\]
+The last equality follows from the proof of that lemma: the wall restriction
+is the polynomial determined by the restriction of \([p_+]\) to the positive
+exceptional locus, which is zero.
+
+\begin{theorem}[Exact ambient point coordinate]
+\label{thm:simple-wall-point-column}
+After setting the master Novikov and bulk variables to zero while retaining
+the wall variable, the ambient coordinate of (3.1) satisfies
+\[
+ \pr_{X_+}\Phi([p_-])=[p_+].                              \tag{3.3}
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(S\) denote the wall variable and \(\lambda\) the equivariant wall
+frequency.  Lemma~5.10 of \cite{GuYuYu} applies to \(a_p\) because its wall
+restriction is zero.  It gives
+\[
+ \FT_{X_-}(a_p)=[p_-]                                     \tag{3.4}
+\]
+at the specialization under consideration.  Lemma~5.8 gives only
+\[
+ \FT_{X_+}(a_p)=[p_+]+O(S).                               \tag{3.5}
+\]
+
+Apply Lemma~5.10 again to \(\lambda a_p\).  Its wall restriction is zero and
+\[
+ \kappa_-(\lambda a_p)=\kappa_-(\lambda)[p_-]=0           \tag{3.6}
+\]
+by degree.  The completed source in Proposition~5.2 is finite free, and the
+negative Fourier map in Theorem~5.5 and Proposition~5.9 is an isomorphism
+over that completed ring.  Base change to the extremal specialization
+preserves the isomorphism.  Equations (3.6) and Lemma~5.10 therefore imply
+that \(\lambda a_p\) is zero in the specialized completed source.  In
+particular,
+\[
+ \FT_{X_+}(\lambda a_p)=0.                                 \tag{3.7}
+\]
+
+Fourier covariance, Proposition~4.21 of \cite{GuYuYu}, rewrites (3.7) as
+\[
+ (zS\partial_S+D\star_S)\FT_{X_+}(a_p)=0                   \tag{3.8}
+\]
+for the wall divisor \(D\).  The point class \([p_+]\) satisfies the same
+equation.  Every nonconstant stable map in a positive multiple of the wall
+fibre is contained in the exceptional locus and misses \(p_+\).
+The positive-degree terms of the pulled-back mirror coordinate also
+annihilate the point class; Lemma~5.13 identifies the specialization with
+the unshifted negative-chamber bulk point and supplies no unit correction.
+
+Subtract \([p_+]\) from (3.5), and suppose \(S^kv_k\), \(k>0\), is its first
+nonzero term.  The first coefficient of (3.8) is
+\[
+ (k\,\id+z^{-1}D\cup-)v_k=0.                               \tag{3.9}
+\]
+Cup product by \(D\) is nilpotent, so the operator in (3.9) is invertible
+over \(\C((z))\).  Hence \(v_k=0\), a contradiction.  Induction kills every
+positive coefficient and proves (3.3).
+\end{proof}
+
+\begin{warning}\label{warn:center-coordinates}
+Theorem~\ref{thm:simple-wall-point-column} does not assert that the centre
+coordinates of \(\Phi([p_-])\) vanish.  The continuous Fourier map applies
+stationary phase to the transformed master fundamental solution.  Positive
+master-Novikov terms can survive even though the classical restriction
+\(a_p|_{F_0}\) is zero.  The argument proves the ambient coordinate exactly
+because the wall-frequency derivative dies in the specialized completed
+source.
+\end{warning}
+
+The following consequence isolates the extra analytic premise required to
+turn (3.3) into a Gamma-row statement.
+
+\begin{hypothesis}[One-wall sectorial realization]
+\label{hyp:one-wall-sectorial}
+At a fixed nonzero wall parameter there is a pairing-preserving sectorial
+realization of (3.1) on one common admissible sector such that:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the ambient formal summand realizes the intrinsic sectorial solution
+  space of \(X_+\);
+\item the wall summands realize the Gamma spans of the wall functors in the
+  Shen--Shoemaker semiorthogonal decomposition;
+\item the realized point row has ambient coordinate (3.3).
+\end{enumerate}
+\end{hypothesis}
+
+\begin{corollary}[Conditional wall-local rank identity]
+\label{cor:simple-wall-rank}
+Under Hypothesis~\ref{hyp:one-wall-sectorial}, the point row restricts to the
+point row of \(X_+\) on the ambient packet and vanishes on every wall packet.
+In particular, for the whole generalized \(\zetaSix\) packet in this one
+receiver,
+\[
+ b(X_-,\cP_6(X_-))=b(X_+,\cP_6(X_+)).                       \tag{3.10}
+\]
+\end{corollary}
+
+\begin{proof}
+The ambient assertion is Theorem~\ref{thm:simple-wall-point-column} together
+with the pairing-preserving realization.  A wall functor has image supported
+on the exceptional locus.  Pairing its Gamma class with the point class in
+the common open gives zero Euler characteristic.  Shen--Shoemaker's oriented
+Gamma asymptotics identify these supported classes with the wall blocks on
+the chosen common sector \cite{ShenShoemaker}.  Hence the point row vanishes
+there.  Restricting the resulting whole-block identity to the generalized
+\(\zetaSix\) packet gives (3.10).
+\end{proof}
+
+The hypothesis is not a reformulation of the cited formal theorems.
+Gu--Yu--Yu work over an exceptional Laurent completion; Shen--Shoemaker's
+asymptotic theorem is extremal and sectorial.  Identifying the intrinsic
+large-radius point section with the full ambient packet across those frames
+is additional data.

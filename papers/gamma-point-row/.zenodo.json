@@ -1,0 +1,26 @@
+{
+  "title": "The Gamma Point Row at Birational Walls: Exact Wall Identities, Boundary Loss, and the Two-Wall Obstruction",
+  "description": "This paper isolates the Gamma point row in quantum birational wall crossing. It proves an exact common-open point-column identity in the Gu--Yu--Yu quantum-D-module comparison for a smooth projective simple VGIT wall and a path-local point-row theorem for projective ordinary flops. It then gives an incomplete-Gamma countermodel showing that formal monodromy, a flat pairing, an integral Stokes lattice, and a length-three nilpotent projective-space tag do not determine the point row. Localized partial Fourier--Laplace discards the constant extension datum in this model, while a punctual module at a two-coordinate Fourier corner can transform back to a full-support module. The final result is a conditional factorization criterion: a two-wall transition preserves the row whenever its complete residue corrections have boundary-supported output. The corresponding directed two-wall boundary theorem is stated explicitly as the remaining hypothesis, not as a proved consequence.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "quantum cohomology",
+    "birational wall crossing",
+    "Gamma classes",
+    "VGIT",
+    "ordinary flops",
+    "Stokes matrices",
+    "Fourier--Laplace transform",
+    "GKZ systems"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}

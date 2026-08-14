@@ -1,0 +1,100 @@
+\section{Introduction}\label{sec:introduction}
+
+Let \(Y\) be a smooth projective complex variety.  Iritani's Gamma integral
+structure associates a flat section \(s_Y(E)\) of the quantum connection to a
+topological \(K\)-class \(E\) and identifies the flat pairing with the Euler
+pairing \cite{IritaniGamma}.  If \(p\in Y\) is a point, then
+\[
+ [s_Y(E),s_Y(\OO_p))=\chi(E,\OO_p)=\rk(E).              \tag{1.1}
+\]
+The second entry in (1.1) is therefore a distinguished flat covector.  We
+call it the \emph{Gamma point row}.
+
+Birational quantum comparison theorems often split a quantum D-module into
+an ambient summand and summands associated with the wall or blow-up centre.
+For rank questions, it is unnecessary to identify every entry of the
+comparison matrix.  It is enough to know that the point row restricts to the
+point row on the ambient summand and vanishes on the supported summands.
+This paper separates the exact statements of that form from the additional
+analytic input needed to compose several discrepant walls.
+
+Our first result concerns a smooth projective simple VGIT wall
+\(X_-\dashrightarrow X_+\) in the sense of Gu--Yu--Yu
+\cite{GuYuYu}.  Their comparison is a formal, pairing-preserving
+decomposition
+\[
+ \QDM(X_-)
+ \cong \QDM(X_+)\oplus\bigoplus_j\QDM(S)_j               \tag{1.2}
+\]
+over an exceptional Laurent completion, where \(S\) is the wall quotient.
+Choose corresponding points \(p_\pm\) in the common open set.
+
+\begin{theorem}[Common-open point column]
+\label{thm:intro-simple-wall}
+At the extremal specialization used in the Gu--Yu--Yu comparison, the
+ambient coordinate of the point class is exact:
+\[
+ \pr_{X_+}\Phi([p_-])=[p_+].                              \tag{1.3}
+\]
+No assertion is made that every wall coordinate of \(\Phi([p_-])\) vanishes.
+\end{theorem}
+
+The proof uses the distinguished master-space lift of the common point.  Its
+wall restriction vanishes.  Applying the negative-chamber Fourier
+isomorphism to the lift and to its wall-frequency derivative shows that the
+derivative is zero in the specialized completed source.  Fourier covariance
+then makes the positive point image horizontal.  A regular-singular
+recursion kills its apparent positive wall-parameter tail.
+
+Our second result is analytic but crepant.  Let \(Y\dashrightarrow Y'\) be a
+projective ordinary flop covered by Lee--Lin--Qu--Wang
+\cite{LeeLinQuWang}.  Fix one of their analytic-continuation domains in the
+extremal variable.
+
+\begin{theorem}[Ordinary-flop point row]
+\label{thm:intro-flop}
+The analytically continued point section of \(Y\) equals the intrinsic point
+section of \(Y'\) on the fixed continuation domain.  Consequently the point
+row has the same zero or nonzero restriction to every formal-monodromy packet
+transported by the graph gauge.
+\end{theorem}
+
+Pure extremal curves lie in the exceptional locus and cannot meet a point in
+the common open set.  This computes the point column exactly at transverse
+Novikov degree zero.  A divisor pulled back from the common contraction then
+kills the transverse tail coefficient by coefficient.  This is a theorem
+about one distinguished column; it does not promote the ancestor comparison
+of \cite{LeeLinQuWang} to full descendant invariance.
+
+The discrepant case contains a further frame comparison.  A formal summand,
+a sectorial lift of that summand, and the intrinsic large-radius Gamma
+section are different objects.  Gu--Yu--Yu prove (1.2) in a Laurent/formal
+coefficient ring, while Shen--Shoemaker identify Gamma asymptotic classes at
+an extremal specialization \cite{ShenShoemaker}.  Passing from these results
+to an intrinsic Gamma point row requires a common pairing-preserving
+sectorial realization.  We state the corresponding one-wall consequence
+only under that explicit hypothesis.
+
+The negative results show why this distinction is necessary.  A rank-two
+incomplete-Gamma connection has a nonzero Stokes shear from a
+\(\zetaSix\)-formal line into a rank-visible ambient line.  The example admits
+a flat integral hyperbolic doubling and remains after tensoring with
+\(\Q[N]/(N^3)\).  Moreover, localized partial Fourier--Laplace transform kills
+the constant extension which records the shear.  In two Fourier variables,
+the delta module at the common origin is invisible after either localization
+but transforms back to a constant full-support module.  Boundary support in
+Fourier coordinates therefore points in the opposite direction from the
+desired rank conclusion.
+
+The surviving two-wall statement is one-sided.  Complete ray-ordered
+corrections must have rank-zero \emph{targets}; their sources and scalar
+coefficients are irrelevant.  We express this both as preservation of the
+rank kernel and as vanishing of the signed punctual coefficient of the
+complete oriented boundary complex.  Under that hypothesis, a finite
+factorization preserves the point row by elementary linear algebra.
+
+Sections~\ref{sec:point-row}--\ref{sec:ordinary-flop} prove the positive
+results.  Sections~\ref{sec:incomplete-gamma} and
+\ref{sec:fourier-boundary} give the countermodels.  Section~\ref{sec:two-wall}
+states the conditional assembly theorem, and Section~\ref{sec:scope}
+records the exact source and inference boundaries.

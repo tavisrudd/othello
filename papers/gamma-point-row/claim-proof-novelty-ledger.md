@@ -1,0 +1,38 @@
+# Claim--proof--novelty ledger
+
+Date: 2026-08-13
+
+This ledger governs the public claim surface of the manuscript. It is not
+exported to the standalone paper repository. The audit is a
+source-characterization audit, not an exhaustive priority search. The paper
+makes no negative novelty claim.
+
+| Stable id | Public claim | Status | Proof or evidence | Source boundary |
+|---|---|---|---|---|
+| `def:point-row` | The point in the second Gamma-pairing slot reads ordinary rank. | imported | Iritani Gamma framing and Euler pairing; elementary `chi(E,O_p)=rank(E)` | `IritaniGamma`, Section 1 |
+| `thm:simple-wall-point-column` | The ambient coordinate of the common-open point is exactly the target point at the Gu--Yu--Yu extremal specialization. | unconditional | Common-point lift from Lemma 3.27; Lemma 5.10 on `a_p` and `lambda a_p`; specialized completed-source injectivity; Fourier covariance; minimal-coefficient recursion | Does not assert that centre coordinates vanish; does not identify the intrinsic large-radius Gamma frame |
+| `hyp:one-wall-sectorial` | A common pairing-preserving sectorial realization identifies the formal ambient and wall summands with the stated Gamma spans. | explicit hypothesis | Not proved in the paper | Not a corollary of the formal Gu--Yu--Yu theorem or extremal Shen--Shoemaker asymptotics alone |
+| `cor:simple-wall-rank` | In one receiver, the primitive-sixth rank Boolean is preserved across a simple wall. | conditional | Exact ambient point column plus supported Euler orthogonality under `hyp:one-wall-sectorial` | Wall-local only; no adjacent-receiver coherence |
+| `thm:ordinary-flop-point-row` | The intrinsic point section is preserved on one fixed ordinary-flop continuation domain. | unconditional | Pure-extremal support vanishing and transverse divisor recursion | One column only; no full descendant or Gamma/Fourier--Mukai theorem |
+| `cor:ordinary-flop-packet` | The point-row Boolean is preserved on a graph-gauge transported formal packet. | unconditional and path-local | Flop point-row theorem plus graph-gauge preservation of connection, grading, Chern class, and pairing | No phase-independence statement outside the fixed domain |
+| `prop:incomplete-gamma` | Formal monodromy, pairing, integrality, and a length-three nilpotent tag do not determine the point row. | unconditional abstract no-go | Explicit incomplete-Gamma flat columns, continuation shear, hyperbolic double, and tensor tag | Not a smooth-projective quantum counterexample |
+| `prop:punctual-corner` | A module killed by either Fourier localization can have full-support inverse transform. | unconditional algebraic no-go | Weyl-algebra Fourier transform exchanges `O_A2` and `delta_00` | Up to conventional signs and cohomological shift |
+| `hyp:rank-zero-target` | Every complete ray-ordered correction has boundary-supported output target. | explicit hypothesis | Not proved in the paper | Bare Fourier-boundary support does not imply it |
+| `thm:rank-zero-target` | The rank-zero-target condition is sufficient for point-row invariance through a finite factorization. | unconditional implication from named hypothesis | One-line covector calculation and induction | No general factorization consequence without the hypothesis |
+
+## Novelty language
+
+The manuscript uses direct proof verbs: “we prove,” “we isolate,” and “we
+formulate.” It does not use “first,” “new,” “novel,” “previously unknown,” or
+“to our knowledge” as priority claims.
+
+The closest source-level relationship is stated positively:
+
+- Gu--Yu--Yu supply the formal pairing-preserving comparison and Fourier maps;
+- Shen--Shoemaker supply the extremal Gamma asymptotic blocks;
+- Lee--Lin--Qu--Wang supply ordinary-flop continuation;
+- Reichelt--Schulze--Sevenheck--Walther identify the localized
+  Fourier--Laplace kernel used in the methodological boundary.
+
+Any later priority sentence requires a new literature audit and a new ledger
+row before entering the manuscript, README, metadata, or portfolio summary.

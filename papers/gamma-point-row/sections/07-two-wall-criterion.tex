@@ -1,0 +1,83 @@
+\section{The two-wall criterion}
+\label{sec:two-wall}
+
+Let \(Y\) be an intermediate smooth projective variety, \(D\subset Y\) the
+union of the two incident wall boundaries, and \(p\in U:=Y\setminus D\).
+Suppose a common analytic receiver contains the two sectorial realizations
+under comparison, and let \(T\) be their transition.  Write
+\(\mathcal S_D(Y)\) for a span of Gamma sections represented by classes
+supported on \(D\).  The point row annihilates this span:
+\[
+ \rrow_{Y,p}(v)=0\qquad(v\in\mathcal S_D(Y)).                  \tag{7.1}
+\]
+
+\begin{hypothesis}[Rank-zero-target condition]
+\label{hyp:rank-zero-target}
+On the packet under consideration, the relative transition admits a
+canonical ray-ordered factorization
+\[
+ T=\prod_{a=1}^m(1+v_a\otimes\lambda_a)                       \tag{7.2}
+\]
+whose complete residue targets \(v_a\) belong to \(\mathcal S_D(Y)\).
+\end{hypothesis}
+
+The word \emph{complete} is essential.  Refining a residue block into
+coordinate terms can create nonzero ranks which cancel only after the full
+block is assembled.
+
+\begin{theorem}[One-row assembly]
+\label{thm:rank-zero-target}
+Under Hypothesis~\ref{hyp:rank-zero-target},
+\[
+ \rrow_{Y,p}T=\rrow_{Y,p}.                                    \tag{7.3}
+\]
+Consequently, any finite factorization whose ordinary-flop steps satisfy
+Theorem~\ref{thm:ordinary-flop-point-row} and whose discrepant adjacent-wall
+transitions satisfy Hypothesis~\ref{hyp:rank-zero-target} preserves the
+point-row Boolean on the transported packet.
+\end{theorem}
+
+\begin{proof}
+Equation (7.1) gives
+\[
+ \rrow_{Y,p}(1+v_a\otimes\lambda_a)=\rrow_{Y,p}
+\]
+for every factor in (7.2).  Multiplying the identities proves (7.3).  The
+factorization statement follows by induction, using
+Theorem~\ref{thm:ordinary-flop-point-row} at crepant steps.
+\end{proof}
+
+A stronger geometric condition is one-sided kernel support.  If the cone of
+the transition kernel relative to the diagonal has support
+\[
+ \Supp(K_{\mathrm{rel}})\subset Y\times D,                    \tag{7.4}
+\]
+with \(D\) in the output factor, then every correction target is supported on
+\(D\) and Theorem~\ref{thm:rank-zero-target} applies.  Support in
+\(D\times Y\) would constrain the source and would not imply (7.3).
+
+In the Fourier-boundary language, let \(B_{\mathrm{corner}}\) be the complete
+oriented correction left by the two localizations after subtracting the
+common point contribution.  Its signed punctual multiplicity is the
+alternating \(\delta_{00}\) coefficient
+\[
+ \mu_{00}(B_{\mathrm{corner}}).
+\]
+Fourier transform exchanges this coefficient with the zero-section
+multiplicity, hence with generic output rank.  The singular form of the
+rank-zero-target condition is therefore
+\[
+ \mu_{00}(B_{\mathrm{corner}})=0                              \tag{7.5}
+\]
+after applying the point-row marking.  Proposition
+\ref{prop:punctual-corner} explains why merely knowing that
+\(B_{\mathrm{corner}}\) is punctual proves nothing.
+
+\begin{remark}[What remains to be proved]
+Neither (7.2), (7.4), nor (7.5) is deduced here for a general pair of
+discrepant walls.  Existing one-wall theorems determine formal decompositions
+and, in special toric settings, Gamma/window comparisons.  The missing
+statement is directed and two-wall: it must retain which side of every
+vanishing cycle is the output and must compare that orientation with the
+Gamma point row.
+\end{remark}

@@ -1,0 +1,79 @@
+\section{A minimal ambient-target Stokes shear}
+\label{sec:incomplete-gamma}
+
+Set \(\alpha=1/6\) and consider the rank-two meromorphic connection
+\[
+ \frac{d}{dz}\binom{y_0}{y_1}=
+ \begin{pmatrix}
+ 0&z^{-2}\\
+ 0&z^{-2}+\alpha z^{-1}
+ \end{pmatrix}\binom{y_0}{y_1}.                              \tag{5.1}
+\]
+
+\begin{proposition}[Incomplete-Gamma countermodel]
+\label{prop:incomplete-gamma}
+Connection (5.1) has a formal line of monodromy \(\zetaSix\) whose sectorial
+lift undergoes a nonzero Stokes shear into a monodromy-one line.  The shear
+can be equipped with a flat integral hyperbolic pairing and can be tensored
+with \(\Q[N]/(N^3)\) without disappearing.  Hence formal monodromy, pairing,
+integrality, and a commuting length-three nilpotent tag do not determine the
+zero or nonzero restriction of a flat covector to the \(\zetaSix\) line.
+\end{proposition}
+
+\begin{proof}
+Two flat columns are
+\[
+ f_0=\binom10,
+ \qquad
+ f_\alpha(z)=
+ \binom{\Gamma(1-\alpha,1/z)}{z^\alpha e^{-1/z}}.             \tag{5.2}
+\]
+Indeed,
+\[
+ \frac d{dz}\Gamma(1-\alpha,1/z)=z^{\alpha-2}e^{-1/z},       \tag{5.3}
+\]
+and direct differentiation verifies both rows of (5.1).  The formal factors
+are the trivial line and \(e^{-1/z}z^\alpha\), whose formal monodromy is
+\(e^{2\pi i\alpha}=\zetaSix\).
+
+Analytic continuation of the incomplete Gamma function adds a nonzero
+multiple of the complete Gamma value.  After rescaling \(f_\alpha\), the
+Stokes jump has the form
+\[
+ f_\alpha^+=f_\alpha^-+f_0.                                  \tag{5.4}
+\]
+Choose a flat covector \(r\) with \(r(f_0)=1\) and
+\(r(f_\alpha^-)=0\).  Then \(r(f_\alpha^+)=1\).  Thus the Boolean restriction
+of \(r\) to the sectorial lift of the same formal line changes.
+
+Let \(A(z)\) be the matrix in (5.1) and double the system by its dual:
+\[
+ B(z)=\operatorname{diag}(A(z),-A(z)^t),\qquad
+ J=\begin{pmatrix}0&I_2\\I_2&0\end{pmatrix}.                 \tag{5.5}
+\]
+Then \(B^tJ+JB=0\).  If the jump on the first summand is
+\(S=\left(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right)\),
+the doubled jump \(\operatorname{diag}(S,S^{-t})\) preserves \(J\) and the
+obvious integral lattice after adjoining \(\zetaSix\).  Finally tensor with
+\(\Q[N]/(N^3)\) and let the jump act trivially on this factor.  It commutes
+with \(N\) and still has (5.4).  This proves the assertion.
+\end{proof}
+
+The example also occurs in a flat confluence family.  Replacing \(z\) by
+\(z/t\) gives the \(z\)-equation
+\[
+ \frac{dY}{dz}=
+ \begin{pmatrix}0&t z^{-2}\\0&t z^{-2}+\alpha z^{-1}\end{pmatrix}Y,
+                                                               \tag{5.6}
+\]
+with compatible \(t\)-equation inherited from the pullback connection.  The
+two exponential factors collide at \(t=0\), while the nonzero Stokes
+coefficient persists on the ramified punctured \(t\)-line.  Formal information
+at the confluent fibre cannot recover its target orientation.
+
+\begin{remark}
+Proposition~\ref{prop:incomplete-gamma} is an analytic no-go theorem, not a
+geometric counterexample.  We do not assert that (5.1) is the quantum
+connection of a smooth projective wall crossing.  It proves only that a
+geometric proof must use information absent from the listed formal shadows.
+\end{remark}

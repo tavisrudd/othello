@@ -1,0 +1,80 @@
+\section{A path-local theorem for ordinary flops}
+\label{sec:ordinary-flop}
+
+Let \(Y\dashrightarrow Y'\) be a projective ordinary flop covered by
+\cite{LeeLinQuWang}, and let \(\ell,\ell'\) be its effective extremal fibre
+classes.  The graph correspondence \(F\) identifies the big quantum products
+and Poincare pairings after analytic continuation
+\[
+ q'=q^{-1},\qquad F(\ell)=-\ell'.                         \tag{4.1}
+\]
+The continuation is analytic in the extremal variable and formal in the
+other Novikov variables.
+
+Choose corresponding points \(p\in Y\) and \(p'\in Y'\) outside the
+exceptional loci.  Let \(A\) be an ample divisor on the common contraction
+and write \(D,D'\) for its pullbacks.  Then
+\(D\cdot\ell=D'\cdot\ell'=0\), while \(D\) is positive on every effective
+class away from the extremal ray.  We complete the transverse Novikov ring
+by \(D\)-degree.
+
+\begin{theorem}[Point-section preservation]
+\label{thm:ordinary-flop-point-row}
+On each fixed nonsingular continuation domain of \cite{LeeLinQuWang}, the
+graph gauge satisfies
+\[
+ F(s_Y(\OO_p))=s_{Y'}(\OO_{p'}).                         \tag{4.2}
+\]
+Consequently it preserves the Gamma point row.
+\end{theorem}
+
+\begin{proof}
+At transverse degree zero, every nonconstant stable map has pure extremal
+class and lies in the exceptional locus.  It cannot meet the chosen point.
+All positive-extremal descendant invariants with the point insertion
+therefore vanish.  The point columns on both sides are their common
+classical column for every nonsingular value of \(q\), and the graph
+correspondence sends \([p]\) to \([p']\).
+
+Let
+\[
+ \delta=F(s_Y(\OO_p))-s_{Y'}(\OO_{p'}).
+\]
+It is jointly flat and has zero transverse constant term.  Suppose
+\(\delta_\beta\) is a nonzero coefficient of minimal positive \(D\)-degree.
+Horizontality for the Novikov derivation defined by \(D\) gives
+\[
+ \bigl((D\cdot\beta)\id+z^{-1}(D\star_q-)\bigr)
+ \delta_\beta=0.                                           \tag{4.3}
+\]
+At transverse degree zero, quantum corrections to \(D\star_q\) have pure
+extremal degree.  The divisor axiom multiplies them by
+\(D\cdot\ell=0\).  Thus \(D\star_q=D\cup-\) in (4.3).  Cup product by \(D\)
+is nilpotent and \(D\cdot\beta>0\), so the displayed operator is invertible
+over \(\C((z))\).  This contradiction kills the first possible coefficient.
+Induction proves (4.2).  Flatness of the pairing then preserves the row
+(2.3).
+\end{proof}
+
+\begin{corollary}[Packetwise Boolean]
+\label{cor:ordinary-flop-packet}
+Let \(\cP\subset\mathcal S(Y)\) be a formal-monodromy packet transported by
+the Lee--Lin--Qu--Wang graph gauge to
+\(\cP'\subset\mathcal S(Y')\).  On the fixed continuation domain,
+\[
+ b(Y,\cP)=b(Y',\cP').                                      \tag{4.4}
+\]
+\end{corollary}
+
+\begin{proof}
+The graph gauge preserves the quantum connection, grading, first Chern class,
+and Poincare pairing.  It therefore transports the complete \(z=0\) formal
+type.  Theorem~\ref{thm:ordinary-flop-point-row} identifies the covector on
+the transported sectorial realization, and (4.4) follows.
+\end{proof}
+
+The theorem is narrower than a Gamma/Fourier--Mukai comparison for every
+\(K\)-class.  Pure extremal curves need not miss the support of a general
+class, and the support computation in the first paragraph of the proof would
+fail.  Nor does the argument assert phase independence outside the chosen
+continuation domain.
