@@ -1,9 +1,10 @@
-# C907 — the neutral-slice Gamma kernel and the remaining common-master gate
+# C907 — the neutral-slice Gamma kernel and its global localization
 
 Date: 2026-08-14
 
-**Status:** theorem-grade local analytic reduction, followed by an exact
-application boundary.  The only nonpolynomial direction left by the C907
+**Status:** theorem-grade local analytic reduction, now paired with the
+complete-neutral virtual-localization theorem in
+`2026-08-14-c907-quantum-kirwan-common-source.md`.  The only nonpolynomial direction left by the C907
 peak sieve is Calabi--Yau after restriction to its primitive one-parameter
 subgroup.  For a genuine common Mellin--Barnes kernel, Aleshkin--Liu's
 Gamma-central-charge wall theorem therefore identifies the complete neutral
@@ -11,15 +12,15 @@ residue with the grade-restriction/Fourier--Mukai correction.  Its restriction
 to the common open is the identity, so its target has rank zero.  This proves
 the desired rank-zero-target statement for every **common-kernel** peak.
 
-It does not yet prove the stabilization theorem.  The two incident receivers
-of a general AKMW peak have not been shown to be asymptotic expansions of one
-common equivariant Fourier integral.  Gu--Yu--Yu formulate precisely the
-needed Fourier-cone statement for an arbitrary intermediate GIT quotient as
-Conjecture 1.11 and prove it only for highest/lowest quotients.  A subsequent
-common-source reduction shows that full cone preservation is stronger than
-needed: the exact remaining analytic gate can be phrased as a localized
-quantum-Kalkman theorem for the single Gamma point row.  See
-`2026-08-14-c907-quantum-kirwan-common-source.md`.
+The earlier application boundary was real for a telescope through unrelated
+intermediate quotient frames.  The global-cobordism reduction removes that
+telescope.  Woodward's exhaustive rotation-fixed-locus description and
+normal-complex formula show coefficientwise that every neutral affine gauge
+tower has this very kernel: the moving index supplies the Gamma ratios and
+the node factor is independent of gauge degree.  Thus the local lemma now
+applies to the two extreme localized gauged maps of one smooth global master,
+without proving Gu--Yu--Yu Conjecture 1.11 for arbitrary intermediate
+quotients.
 
 ## 1. The parameterized Calabi--Yau contour lemma
 
@@ -43,6 +44,18 @@ analytic continuations of one another.  Moreover, their complete contour
 residue is the grade-restriction/Fourier--Mukai correction.  In particular,
 on the numerical K-group modulo objects supported on the unstable locus,
 the transition is the identity.
+
+The same conclusion holds if `P` is multiplied by finitely many adjacent
+Gamma ratios
+
+\[
+ \frac{\Gamma(h\sigma+a)}{\Gamma(h\sigma+a+r)},\qquad r\in\mathbf Z,
+                                                                    \tag{2a}
+\]
+
+provided the complete sum of boundary graph types is taken before the
+contour is moved.  Such a ratio has zero signed slope and hence does not alter
+the balance condition or exponential estimate.
 
 ### Proof
 
@@ -69,6 +82,15 @@ many parameter derivatives give those Taylor coefficients; logarithmic
 growth from Gamma derivatives is again dominated by the same exponential
 estimate.  Finally `A` has finite complex dimension, and all contour
 estimates are componentwise; there is no parameter-convergence issue.
+
+For (2a), iterate `Gamma(x+1)=x Gamma(x)`.  The ratio is a finite product of
+linear factors or their inverses.  Its polynomial factors are already
+covered.  An inverse factor can be retained as the displayed adjacent Gamma
+pair; numerator and denominator have the same slope, so Stirling cancels
+their exponential contribution.  Its poles must not be assigned to one
+isolated localization graph: cutting/gluing can move such a pole to a
+boundary graph.  After the complete finite Artin-level graph sum, contour
+deformation collects all of them and the same residue theorem applies.
 
 The grade-restriction identification is K-theoretic.  The two window objects
 restrict to the same object on the common stable open, so the cone of their
@@ -151,7 +173,14 @@ Together with the already proved one-wall, ordinary-flop, AKMW unit-wall,
 and endpoint-product theorems, this common-kernel theorem would close the
 `X x P^2` telescope.
 
-## 4. Exact reason this is not yet the global theorem
+## 4. Earlier intermediate-quotient boundary, and its bypass
+
+The following boundary remains exact for any proof that passes successively
+through intermediate quotient QDMs.  The global-cobordism proof does not do
+that: it compares only the two extreme localized gauged maps of the smooth
+projective completion and constructs their common coefficient field directly
+from Woodward's fixed-locus formula.  Thus the discussion below records why
+the earlier telescope failed, not a remaining hypothesis of the new proof.
 
 Gu--Yu--Yu define the continuous fixed-component transform by the
 stationary-phase expansion of
@@ -198,7 +227,7 @@ curve.  The parameterized contour lemma supplies that analytification on a
 neutral Gamma kernel; what remains is the point-row/packet fragment of the
 reduction conjecture at the intermediate quotients.
 
-Thus the exact remaining theorem is:
+At that stage the exact remaining theorem was:
 
 > **Common-master rank-row theorem.**  For the smooth projective toroidal
 > cobordism used by C907, the point row and the total primitive-sixth ambient
@@ -207,7 +236,8 @@ Thus the exact remaining theorem is:
 > its analytic transform is the grade-restricted Gamma kernel of Section 1.
 
 This is strictly more concrete than a general Gamma/Orlov conjecture, but it
-is still a new theorem.
+is still a new theorem.  It is no longer needed for C907 because the global
+source has no intermediate quotient receiver.
 
 ### Smallest plausible proof decomposition
 
@@ -248,10 +278,12 @@ The wall-local analytic row is now closed as well.  A commuting graph rotation,
 pole-constrained input markings, and full divisor-lattice Liouville character
 extraction isolate one oriented localized factor.  The common-open point lift
 then kills every wall-fixed graph by Gonzalez--Woodward Proposition 3.15(c).
-The remaining application gate is one sectorial realization of the intrinsic
-`z=0` packet over the intermediate variety's full Novikov field, conservative
-for both incident wall comparisons.  Exact proof and boundary are in the
-common-source note.
+The then-remaining application gate was one sectorial realization of the
+intrinsic `z=0` packet over the intermediate variety's full Novikov field,
+conservative for both incident wall comparisons.  The complete-neutral
+theorem now replaces it with the finite common quotient of the two extreme
+gauged maps.  Exact proof and boundary are in the common-source note and
+`2026-08-14-c907-complete-neutral-localization.md`.
 
 ## 5. Stronger elimination for the fixed-curve suspect
 
@@ -315,17 +347,15 @@ candidate enumeration.
 - **Whether the fixed-curve suspect can hide a higher primary moment.**  It
   cannot: (9) kills every number of primary legs.
 
-### Still open
+### Closed in the global pass
 
-- **Common packet fiber.**  The localized point row and shifted wall packet
-  map are now exact.  What is absent is one sectorial realization of the
-  intermediate variety's intrinsic formal `P_6` packet over its full Novikov
-  field that both incident wall receivers conservatively compare to.
-- **Geometric falsifier.**  The incomplete-Gamma model is not a
-  smooth-projective peak.  No geometric unit-circuit peak is known whose
-  complete neutral residue has nonzero common-open rank.  A direct
-  `(2,3; curve)` or `(2,4; point)` computation remains the bounded
-  falsification route.
+- **Common packet fiber.**  It is the finite quotient of the common continued
+  equivariant source by the intersection of the two extreme kernels.  It
+  embeds in the direct sum of the endpoint modules, so primary decomposition
+  is available without an intermediate quotient frame.
+- **Geometric falsifier.**  The incomplete-Gamma model omits fixed graph
+  types.  Woodward's exhaustive fixed-locus union plus the degree-independent
+  node factor forces the complete residue in the geometric master.
 
 ## Sources
 

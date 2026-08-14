@@ -61,14 +61,14 @@ does not use the retired atomwise HLT-descent claim.  The warning-free
 manuscript is `papers/cubic-stabilization-epilogue/`; exact proof and source
 audit: `../2026-08-11-c907-v1-framed-fractional-support.md`.
 
-The current C907 frontier is the Gamma-rank route.  For one arbitrary smooth
+The wall-local C907 history is the Gamma-rank route.  For one arbitrary smooth
 blow-up, a fixed-nonzero-exceptional-parameter Artin-quotient sectorial
 receiver proves that the primitive-sixth Gamma rank functional restricts to
 the base rank functional and vanishes on every exceptional Orlov block.  The
 codimension-two omission in Shen--Shoemaker is repaired by an exact `z`-order
 calculation, the projective-product endpoint is uniform in `m`, and their
-all-codimension hypotheses audit clean.  Gold (`m=2`) and Platinum (all `m`)
-nevertheless remain open at the same global gate: after two arrows, the first
+all-codimension hypotheses audit clean.  At that stage `m=2` and all `m`
+nevertheless remained open at the same global gate: after two arrows, the first
 nonzero exceptional parameter becomes formal and adjacent receivers may
 embed the intermediate `z=0` packet differently by Stokes shears.  Horizontal
 scalar pairings are constant, but this does not construct the functorial
@@ -91,7 +91,7 @@ has restricted weights summing to zero.  A parameterized form of
 Aleshkin--Liu's Calabi--Yau hemisphere-contour theorem therefore identifies
 the complete neutral residue with the grade-restriction/Fourier--Mukai
 correction and makes its common-open rank zero whenever the two receiver
-expansions come from one kernel.  The sole remaining application gate is the
+expansions come from one kernel.  The then-remaining application gate was the
 **common-master rank-row theorem**: construct one equivariant Fourier object
 whose conservative images contain the point row and total primitive-sixth
 packet in both incident receivers.  Gu--Yu--Yu Conjecture 1.11 is exactly the
@@ -104,7 +104,7 @@ preservation from the critical path.  The adjoint discrete Fourier point row
 is a universal scalar shift sum; smooth-endpoint linearized quantum Kirwan is
 formally surjective; and an elementary primary-decomposition lemma transports
 the primitive-sixth rank Boolean between equally shifted quotient packets once
-their pulled-back rows agree.  The exact remaining analytic input is a
+their pulled-back rows agree.  The exact analytic input at that stage was a
 **localized quantum-Kalkman point-row theorem**.  Gonzalez--Woodward prove the
 unlocalized graph-potential wall formula and explicitly leave its
 localized/fundamental-solution extension open.  Exact theorem, proof reduction,
@@ -122,6 +122,24 @@ kills every wall term; the surviving endpoint is exactly Woodward's localized
 packet map wall-locally.  The remaining global gate is one intrinsic sectorial
 fiber functor for the intermediate variety's formal `P_6` packet over its full
 Novikov field, conservative for both incident wall comparisons.
+
+That last sentence is superseded by the 2026-08-14 global-cobordism pass.  Use
+the smooth projective equivariant completion of one Wlodarczyk cobordism and
+its common-open orbit cylinder,
+not intermediate quotient QDMs.  Woodward's rotation-fixed-locus and
+normal-complex formulas show that every unbounded neutral gauge tower is a
+complete balanced Gamma kernel: all gauge-degree dependence lies in the
+moving index, while the node-smoothing factor is degree-independent.  The two
+extreme localized gauged maps therefore coexist over one Barnes field.  The
+quotient of the source by the intersection of their kernels is finite and
+carries the common primitive-sixth primary packet.  Together with the global
+zero-wall point row, this gives the endpoint rank-Boolean equivalence and the
+`X x P^2` versus `P^5` contradiction.  The internally closed theorem package
+is `../2026-08-14-c907-complete-neutral-localization.md`; full synthesis and
+source boundaries are in
+`../2026-08-14-c907-quantum-kirwan-common-source.md`.  External referee audit
+of the new nonlinear complete-neutral step is still required; do not
+attribute that step to Woodward or Aleshkin--Liu.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove

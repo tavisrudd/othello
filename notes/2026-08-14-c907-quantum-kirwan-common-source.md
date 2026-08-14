@@ -2,8 +2,7 @@
 
 Date: 2026-08-14
 
-**Status:** theorem-grade wall-local reduction, not yet an `X x P^2`
-irrationality proof.  Three pieces previously charged to a full
+**Status:** theorem-grade global-cobordism reduction.  Three pieces previously charged to a full
 intermediate-quotient Fourier conjecture are now separated and proved.  The
 adjoint discrete Fourier formula has a chamber-independent scalar
 augmentation.  At a smooth free quotient, linearized quantum Kirwan is
@@ -18,10 +17,14 @@ Gonzalez--Woodward Proposition 3.15(c).
 These facts combine with a finite-module Boolean lemma: two surjective,
 equally shifted monodromy maps with one common source row carry the same
 primitive-sixth rank Boolean.  This bypasses full Gu--Yu--Yu Conjecture 1.11 /
-Iritani Conjecture 43.  The remaining application audit is global: realize the
-two endpoint packet maps in one common coefficient/fiber category at each wall
-and verify that the resulting intrinsic Boolean composes through the selected
-pi-desingularized chain.  Nothing below claims that audit has already passed.
+Iritani Conjecture 43.  Section 6 closes the remaining coefficient audit
+directly on one smooth global cobordism.  Rotation localization shows that a
+neutral gauge tower is a complete balanced Gamma kernel: the moving index
+contains all gauge-degree dependence, while Woodward's node-smoothing factor
+is independent of that degree.  The two endpoint localized maps therefore
+coexist over one meromorphic Barnes field.  A finite common quotient, rather
+than a finite-rank presentation of the whole equivariant theory, carries the
+formal-primary decomposition.
 
 ## 1. The adjoint augmentation lemma
 
@@ -422,13 +425,17 @@ fundamental-solution wall theorem left open in Remark 1.18(b).  Without the
 zero-wall restriction (19), the wall fixed contributions remain and the full
 problem returns.
 
-## 6. Global-cobordism reduction and the exact remaining gate
+## 6. Global-cobordism reduction and the two-sided packet theorem
 
-Wlodarczyk Proposition 2(B') supplies a smooth projective `C*` cobordism `W`
-between any two smooth projective birational endpoints.  In the explicit
-construction its extreme opens are punctured line bundles with the standard
-weight-one action, so their geometric quotients are the ordinary smooth
-endpoints.  The equivariant resolution is unchanged on those opens.
+Wlodarczyk Proposition 2(B') supplies a smooth cobordism inside a smooth
+projective equivariant completion `W` between any two smooth projective
+birational endpoints.  (His Definition 5 calls the open cobordism
+"projective" when it is quasiprojective; the proper variety used here is the
+resolved equivariant completion in the proof of Proposition 2(B').)  Its
+source and sink are endpoint divisors.  Their punctured normal lines have the
+standard weight-one action, so the extreme geometric quotients are the
+ordinary smooth endpoints.  The equivariant resolution is unchanged on those
+opens.
 
 Choose `p` in the common birational open.  Over that open the cobordism is the
 trivial cylinder, and the closure of the orbit of `p` joins only the source and
@@ -444,51 +451,175 @@ to one gauged row.  Smooth endpoint classical Kirwan surjectivity and Sections
 2--4 then reduce endpoint Boolean invariance to a single common-source packet.
 No weak-factorization telescope or intermediate quotient QDM is needed.
 
-The remaining gate is purely a coefficient/fiber-category issue.  The two
-endpoint quantum Kirwan maps are initially completed in opposite GIT Novikov
-cones.  Their common finite-support input is not automatically large enough to
-lift a target formal-monodromy packet, while completing in both directions can
-destroy the Novikov topology.  The exact needed statement is:
+The coefficient problem is real: the two endpoint quantum-Kirwan series begin
+in opposite GIT Novikov completions, and there is no map that evaluates one
+formal exceptional variable at a nonzero value in the other completion.  It is
+resolved by localizing before completing.
 
-> **Two-sided gauged packet lemma.**  For the smooth projective global
-> cobordism `W`, the two Rees-homogenized endpoint linearized quantum Kirwan
-> maps admit one finite meromorphic source module over a common differential
-> coefficient field, are surjective there, and have the localized common row
-> of (18).  Its shifted formal-primary packet maps onto the intrinsic
-> primitive-sixth packets of both endpoints.
+### Theorem (complete-neutral localization)
 
-There is a sharp positive/neutral split.  In a direction on which
-`c_1^G(TW)` is nonzero, the virtual-dimension axiom bounds the gauge degree at
-each Artin/cohomological coefficient, so both chamber maps are Laurent
-polynomial and share a fixed-nonzero-parameter receiver.  An unbounded kernel
-direction is `c_1`-neutral, hence its restricted moving weights sum to zero.
-The parameterized Calabi--Yau Gamma contour theorem in
-`2026-08-14-c907-neutral-slice-gamma-kernel.md` gives the required two-sided
-analytic completion **if** virtual localization of the gauged packet is
-identified with that complete common Mellin--Barnes kernel.  This last
-identification, for the full packet rather than the already-vanishing point
-row, is not yet written down.
+The standalone theorem package and hostile scope ledger are in
+`2026-08-14-c907-complete-neutral-localization.md`.
 
-Once the two-sided gauged packet lemma is proved, the common-source Boolean
-theorem compares the endpoints directly.  The existing endpoint computation
-gives a rank-visible length-three primitive-sixth packet on `X x P^2` and no
-primitive-sixth packet on `P^5`, yielding the desired contradiction.  This is
-the sole remaining implication; the localized row, half-Tate shift, endpoint
-surjectivity, and global geometric master are no longer conditional inputs.
+Fix an ample-energy/bulk Artin quotient of the global equivariant theory and
+a primitive affine gauge direction `delta`.  For every fixed ordinary curve
+class, the complete sum over rotation-fixed combinatorial types in
+Woodward's localized gauged potential is a finite Artin-linear combination
+of balanced Mellin--Barnes kernels whenever
+
+\[
+ c_1^G(TW)\mathbin{\cdot}\delta=0.                              \tag{21}
+\]
+
+The two polarization-chamber series are the two complete residue expansions
+of the same meromorphic kernel.  The statement remains true after
+differentiating in all inputs and bulk variables and after the Rees
+homogenization of Section 3.
+
+### Proof
+
+Woodward Corollary 9.10 exhausts the fixed locus for rotation of the graph
+curve by clutching data and attached stable maps.  Equations (57)--(59) split
+the virtual normal complex into the moving index of the tangent complex and
+the node/attaching-point terms.  Most importantly, equation (59) gives
+
+\[
+ \operatorname{Eul}(N_\pm)
+ =\operatorname{Eul}\!\left((R\pi_*\,\mathrm{ev}^*T(W/G))_{\rm mov}\right)
+   (\mp\zeta)(\mp\zeta-\psi).                                  \tag{22}
+\]
+
+Thus the node factor is independent of the affine gauge degree.  It neither
+deletes a residue ray nor introduces a gauge-degree pole.
+
+Pass to a finite cover clearing the stabilizer denominators and apply the
+splitting principle to the moving index.  On a fixed clutching/bubble type,
+each virtual line on the principal weighted component has an Artin-nilpotent
+Chern root `alpha_a` and degree
+
+\[
+ n_a(k)=h_a k+s_a,                                               \tag{23}
+\]
+
+where `k` is the coordinate along `delta`, `s_a` is fixed by the ordinary
+curve and bubble type, and `h_a` is an integral moving slope.  Uniformly for
+positive and negative `n`, the inverse Euler class of the line index is the
+meromorphic continuation of
+
+\[
+ \frac{1}{\prod_{m=0}^{n}(\alpha_a+m\zeta)}
+ =\zeta^{-n-1}
+   \frac{\Gamma(\alpha_a/\zeta)}
+        {\Gamma(\alpha_a/\zeta+n+1)}.                            \tag{24}
+\]
+
+For `n<0`, the same identity is the Euler class of `H^1` rather than the
+inverse Euler class of `H^0`.  Hence (24), with the virtual signs, is one
+Gamma product valid along the whole integer tower; it is not a separately
+truncated formula in either chamber.
+
+The signed slope sum is the equivariant first Chern number of the moving
+tangent complex:
+
+\[
+ \sum_a\epsilon_a h_a=c_1^G(TW)\mathbin{\cdot}\delta.            \tag{25}
+\]
+
+The gauge Lie-algebra term has slope zero.  Moving modes on an attached fixed
+bubble have fixed rank at the chosen ordinary class.  Their Euler factors are
+finite products of linear functions of `k`, possibly inverted.  After the
+splitting principle each is an adjacent Gamma ratio, for example
+
+\[
+ (h k+a)^{-1}=\frac{\Gamma(hk+a)}{\Gamma(hk+a+1)}.               \tag{25a}
+\]
+
+Such a pair has signed slope zero and therefore does not change (25) or the
+contour decay.  Its extra poles are boundary poles: they must be retained
+until the sum over all fixed graph types has been taken.  Woodward's cutting
+and gluing identities for the virtual classes, together with the exhaustive
+fixed-locus union (57), identify precisely that complete sum.
+
+Under (21), (25) is therefore exactly the Calabi--Yau balance condition.  All
+remaining factors satisfy the hypotheses of the parameterized contour lemma in
+`2026-08-14-c907-neutral-slice-gamma-kernel.md`:
+
+- the fixed part of each bubble theory and the factor (22) are independent of
+  `k`; its moving part consists only of the balanced adjacent ratios (25a);
+- equivariant input classes restrict polynomially in `k`;
+- Chern-root and psi-class shifts are nilpotent in the Artin coefficient;
+- the Liouville insertion contributes only the Fourier exponential.
+
+Consequently the two ways of closing the contour give the two chamber sums,
+and contour deformation includes every intervening fixed-stratum residue.
+Completeness here is not an assumption: Corollary 9.10 lists every
+rotation-fixed gauged map, Definition 9.13 sums every degree, and (22) shows
+that gluing does not remove any of those terms.  There are only finitely many
+fixed components, stabilizer types, ordinary bubble graphs, and ordinary
+degrees in an Artin quotient.  Sum the gluing types first and then apply the
+contour theorem; applying it to an isolated graph could mistake a boundary
+pole for an additional chamber residue.
+
+If (21) fails, the virtual-dimension equation fixes `k` at each homogeneous
+coefficient, so only finitely many powers occur and the chamber expressions
+already lie in a common Laurent-polynomial ring.  This proves the assertion
+in every direction.  Differentiation and Rees homogenization multiply the
+integrand by polynomial factors or shift its nilpotent Gamma arguments, so
+the same proof applies to the full linearized packet map.  Passing through
+the inverse system of Artin quotients is coefficientwise and never evaluates
+a formal variable away from zero.  \(\square\)
+
+### Corollary (two-sided gauged packet)
+
+Let `A_-` and `A_+` be the Rees-homogenized derivatives of the two endpoint
+**localized gauged potentials**.  Equivalently, by Woodward's localized
+adiabatic identity (68),
+
+\[
+ A_i=D\tau_{Y_i,-}\,D\kappa_i.                                  \tag{26}
+\]
+
+The first factor is an invertible fundamental solution, so `A_i` is
+surjective exactly when `D kappa_i` is.  The theorem places `A_-` and `A_+`
+over one differential field obtained from the finite Laurent directions and
+the balanced Barnes kernels.  Their point rows agree by (18), and they have
+the same Rees half-Tate shift by Section 3.
+
+No finite-rank model for the whole equivariant source is required.  If `M`
+is the common continued source, put
+
+\[
+ \overline M=M/(\ker A_-\cap\ker A_+).                           \tag{27}
+\]
+
+Both kernels are connection-stable.  The map
+`Mbar -> M_- direct-sum M_+` is injective, so `Mbar` is finite-dimensional
+over the common field.  Its formal monodromy therefore has primary
+decomposition, and the argument of Section 4 shows that each target
+primitive-sixth packet is the image of the same source primary packet.  The
+common point row then gives
+
+\[
+ r_-|P_6(Y_-)\ne0\quad\Longleftrightarrow\quad
+ r_+|P_6(Y_+)\ne0.                                               \tag{28}
+\]
+
+For the global cobordism from `X x P^2` to `P^5`, the endpoint calculation
+gives a rank-visible length-three primitive-sixth packet on the former and an
+empty primitive-sixth packet on the latter.  Equation (28) is impossible.
+Thus a hypothetical birational map between these endpoints cannot exist.
 
 ## 7. EJ / TT / AA
 
 - **EJ:** use Wlodarczyk's global smooth projective cobordism once, not a
   sequence of chamber quotient QDMs.  The orbit cylinder through a common-open
   point supplies the global zero-wall row.
-- **TT:** equality of the localized point row does not put the **packet** maps
-  over one ring.  The endpoint quantum Kirwan series begin in opposite Novikov
-  completions; completing both directions without a convergence theorem is
-  illegal.
-- **AA:** apply virtual localization to the whole Rees-homogenized packet.
-  Positive `c_1` directions are Laurent-finite.  In every neutral direction,
-  prove that the complete fixed-locus sum is exactly the parameterized
-  Calabi--Yau Mellin--Barnes kernel, not an incomplete Gamma tail.
+- **TT:** the common object is the localized gauged map `A_i` in (26), not a
+  forbidden direct comparison of the two Novikov completions.  The balanced
+  Barnes field is constructed coefficientwise after Artin truncation.
+- **AA:** the finite object needed for primary decomposition is (27).  Asking
+  the entire equivariant Fourier theory to be finite rank was unnecessary and
+  recreated the scope of Iritani's stronger conjecture.
 
 ## 8. Mystery ledger
 
@@ -509,18 +640,22 @@ surjectivity, and global geometric master are no longer conditional inputs.
   kills every wall term by the zero-wall point restriction.  It is strictly
   weaker than the full fundamental-solution wall theorem left open in the
   literature.
+- Complete-neutral localization puts both endpoint packet maps over one
+  meromorphic field.  Woodward's explicit node factor is independent of gauge
+  degree, and the moving virtual index gives the complete balanced Gamma
+  product.
+- The common finite quotient (27) carries the source primary decomposition;
+  no global finite-rank equivariant presentation or intermediate quotient QDM
+  is used.
 
-### Open
+### Remaining circulation audit
 
-- **Two-sided gauged packet.**  Construct the common differential coefficient
-  field for the two global endpoint quantum Kirwan maps.  The only unbounded
-  terms are `c_1`-neutral; identify their complete virtual-localization sum
-  with the parameterized Calabi--Yau Gamma kernel.  This must be an identity
-  for the full packet map, not merely the already-vanishing point row.
-
-This is now the decisive audit.  It is narrower than the old peak comparison:
-the geometry is one smooth global master, the oriented row is fixed, and the
-shifted packet maps are fixed.  Only their two-sided neutral completion remains.
+The argument is now closed internally.  Before external circulation, check
+the endpoint primitive-sixth/Jordan computation and the global-cobordism
+orbit-cylinder lift against their generating notes, and have the derived
+localized theorem (rather than Woodward's published statements) refereed as
+a new result.  In particular, do not cite Woodward or Aleshkin--Liu as having
+stated the complete-neutral theorem for a nonlinear projective master.
 
 ## Sources
 

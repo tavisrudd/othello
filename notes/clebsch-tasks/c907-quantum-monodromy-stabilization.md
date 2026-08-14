@@ -2,8 +2,11 @@
 
 **Lane:** `clebsch`
 
-**Status:** Silver closed.  Gold has an exact one-arrow theorem and endpoint
-product but remains open at a multi-arrow coherence gate.  The Gamma point
+**Status:** the `m=2` stabilization obstruction is internally closed by the
+global-cobordism complete-neutral theorem; external referee audit of that new
+nonlinear localization step is still required.  Earlier one-arrow and
+multi-arrow audits are retained below as the failure history that fixes the
+scope of the new proof.  The Gamma point
 solution is correctly constructed in each Artin-quotient sectorial receiver;
 hostile audit found that independently fixed exceptional parameters cannot be
 composed through weak factorization.  Formal-constant banking and a global
@@ -26,12 +29,13 @@ them rank-invisible; the valid minimal toric model confirms the ambient
 identity term by term.  This gives a wall-local rank identity in the same
 fixed-sector receiver, not an intrinsic large-radius Boolean: the exact QDM
 coordinate does not algebraize the large-radius-to-sector connection row.
-Gold and Platinum therefore retain the adjacent-receiver peak-coherence gate.
-The gate is no longer completely unlanded: the point-centred Geiser peak is
+Thus the **wall-by-wall telescope** retained the adjacent-receiver
+peak-coherence gate.  The global-completion proof below bypasses rather than
+repairs that telescope.  Within the earlier approach, the point-centred Geiser peak is
 closed below by an analytic Novikov-line continuation theorem.  Morelli
 pi-desingularization plus the unit-circuit theorem below now supplies the
-other geometric peak types.  What remains is the common analytic realization
-of consecutive discrepant walls.  No Paper V or Lean promotion.
+other geometric peak types.  No Paper V or Lean promotion follows from those
+wall-local results alone.
 The coverage audit is negative: a smooth projective master gives projective
 locally toric chamber quotients, generally with cyclic singularities, and
 regular subdivision inserts genuine blowups/down rather than smooth simple
@@ -135,9 +139,9 @@ geometric AKMW coverage gate is now closed by
 Morelli pi-nonsingularity makes every complementary projected circuit face
 unimodular, so the primitive circuit cofactors are all `+/-1`.  Hence every
 elementary wall after pi-desingularization is a unit-coefficient standard
-wall (or blowup/down), with smooth projective chambers.  Gold's sole
-remaining gate is adjacent-receiver coherence for consecutive discrepant
-unit walls.
+wall (or blowup/down), with smooth projective chambers.  In the wall-by-wall
+program, the sole remaining gate was adjacent-receiver coherence for
+consecutive discrepant unit walls.
 
 The exact failure certificate is
 `../2026-08-13-c907-remaining-mixed-stokes-shear-gate.md`.  A change of basis
@@ -284,8 +288,8 @@ then the restricted wall weights satisfy
 contour theorem, extended coefficientwise to polynomial/Artin amplitudes,
 therefore identifies the complete neutral residue with the
 grade-restriction/Fourier--Mukai correction, which is the identity on the
-common open and has rank-zero error.  The remaining gate is no longer the
-one-variable residue calculation: it is proving that the two incident
+common open and has rank-zero error.  At that stage the remaining gate was no
+longer the one-variable residue calculation: it was proving that the two incident
 receivers are asymptotic expansions of one common equivariant Fourier
 kernel.  Gu--Yu--Yu leave the needed cone-preservation statement for a
 general intermediate GIT quotient as Conjecture 1.11, proving it only for
@@ -935,15 +939,28 @@ Novikov-Euler defect; the canonical Rees homogenization
 star-morphism property, and Artin-level bulk transport give a genuine shifted
 `z`-connection map and the common-source Boolean theorem.
 
-The sole remaining gate is now the **common coefficient/fiber-category
-audit**.  At an intermediate variety, the intrinsic large-radius point row is
-fixed by the new theorem, but restriction to its `z=0` formal `P_6` packet
-still needs one sectorial realization over the full numerical Novikov field
-that is conservative for both incident walls.  The old fixed-nonzero-`q`
-Artin receivers use incompatible analytic/formal parameter choices.  Prove
-that both compare to one intrinsic target fiber functor, or construct the
-same functor directly from the global equivariant source.  Do not re-open
-wall residues, weighted coverage, or the half-Tate calculation.
+The common coefficient/fiber-category audit is now closed directly on one
+global cobordism.  Woodward Corollary 9.10 exhausts the rotation-fixed gauged
+maps, while equations (57)--(59) put every unbounded gauge-degree dependence
+in the moving index.  Its Euler class is one Gamma ratio along the whole
+integer tower; the node factor `(mp zeta)(mp zeta-psi)` is independent of the
+gauge degree.  In a neutral direction the signed moving slopes sum to
+`c_1^G(TW).delta=0`, so the parameterized Calabi--Yau contour lemma gives one
+common Barnes field for the two extreme localized gauged maps.  Positive
+directions are Laurent-finite.  The quotient of the common source by the
+intersection of the two kernels embeds in the direct sum of the finite
+endpoint modules, so it carries the needed formal-primary decomposition even
+though the full equivariant source need not have a finite-rank presentation.
+Combined with the global zero-wall point row, this gives the endpoint rank
+Boolean equivalence and contradicts the rank-visible `J_3` packet on
+`X x P^2` versus the empty packet on `P^5`.  Exact proof and source boundaries
+are in `../2026-08-14-c907-quantum-kirwan-common-source.md` and the standalone
+package `../2026-08-14-c907-complete-neutral-localization.md`.
+
+Before treating this as circulation-ready, run a hostile audit of the new
+complete-neutral theorem, the endpoint packet calculation, and the global
+orbit-cylinder lift.  Do not attribute the nonlinear complete-neutral theorem
+to Woodward or Aleshkin--Liu; it is the new derived step.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
