@@ -15,6 +15,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisFixedLine
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisNorm
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisTransport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
@@ -223,6 +224,40 @@ theorem relativeSixAxis_sixPointAxis_transport_independent
     left • object = right • object :=
   GraphLattices.sixPointAxis_transport_independent source target object fixed
     left right leftMaps rightMaps
+
+/-- Exact coefficient-space descent for the six rational axes.  Their sum is
+zero, and the linear map synthesizing them from six scalar coefficients has
+kernel exactly the constant line and is onto the rational augmentation
+representation.  It therefore induces a linear equivalence from the
+six-coordinate quotient by the constant line to the augmentation module, and
+the synthesis map intertwines the concrete alternating-group actions.  This
+does not construct the manuscript's elliptic scheme, its six primitive
+inclusions into the relative Jacobian, or the descended homomorphism of
+abelian schemes. -/
+theorem relativeSixAxis_sixPointAxis_coefficientDescent :
+    (∑ label, GraphLattices.sixPointRationalAxisVector label) = 0 ∧
+    LinearMap.ker GraphLattices.sixPointRationalAxisSynthesis =
+      GraphLattices.sixPointRationalConstantLine ∧
+    Function.Surjective GraphLattices.sixPointRationalAxisSynthesis ∧
+    Nonempty (GraphLattices.SixPointRationalCoefficientQuotient ≃ₗ[ℚ]
+      GraphLattices.SixPointRationalAugmentation) ∧
+    (∀ coefficient : Fin 6 → ℚ,
+      GraphLattices.sixPointRationalCoefficientQuotientEquivAugmentation
+          (Submodule.Quotient.mk coefficient) =
+        GraphLattices.sixPointRationalAxisSynthesis coefficient) ∧
+    ∀ (transformation : alternatingGroup (Fin 5))
+      (coefficient : Fin 6 → ℚ),
+      GraphLattices.sixPointRationalAxisSynthesis
+          (GraphLattices.sixPointRationalPermutationRepresentation
+            transformation coefficient) =
+        GraphLattices.sixPointRationalAugmentationRepresentation transformation
+          (GraphLattices.sixPointRationalAxisSynthesis coefficient) := by
+  exact ⟨GraphLattices.sum_sixPointRationalAxisVector,
+    GraphLattices.sixPointRationalAxisSynthesis_ker,
+    GraphLattices.sixPointRationalAxisSynthesis_surjective,
+    ⟨GraphLattices.sixPointRationalCoefficientQuotientEquivAugmentation⟩,
+    GraphLattices.sixPointRationalCoefficientQuotientEquivAugmentation_mk,
+    GraphLattices.sixPointRationalAxisSynthesis_equivariant⟩
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each
