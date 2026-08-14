@@ -51,6 +51,20 @@ Ordinary flops provide the proved path-local neutral model.  The next direct
 test of the remaining hypothesis must be a neutral threshold not already
 covered by that theorem, or a zero-mode threshold.
 
+Coates--Iritani--Jiang supply exactly such a neutral calibration in the
+linear toric category.  Their Theorem 6.3 constructs one global quantum
+connection across a crepant toric wall and a continuation gauge that
+intertwines the quantum and grading connections, preserves the Poincare
+pairing, and carries Gamma-framed flat sections by Fourier--Mukai.  A
+skyscraper at a common-open point is unchanged by the graph
+Fourier--Mukai transform.  Therefore its Gamma point row is carried exactly.
+Together with Woodward's identification of the linear toric localized graph
+potential with the toric I-function, this is a genuine neutral, ordinary
+one-object model at the intrinsic QDM/I-function level in the common toric
+Fourier coordinates.  It does not test
+the zero-mode reduced-nearby-cycle clause or identify the thresholds of an
+arbitrary projective Wlodarczyk master.
+
 There is a closer linear-gauged comparison.  Woodward's Example 9.15,
 equations (63)--(65), identifies the localized gauged graph potential of a
 torus representation with Givental's toric \(I\)-function.  Iritani's global
@@ -219,6 +233,11 @@ presented as a proof for the original flip.
   prove the unbalanced type-\((1,2)\) flip case.  Cached key
   `arXiv:2301.01266`; PDF SHA-256
   `921af8ed2105d6a511c0cf485550a263e222983c6fcc628b44c838bb3d8de81f`.
+- Tom Coates, Hiroshi Iritani, and Yunfeng Jiang, *The Crepant
+  Transformation Conjecture for Toric Complete Intersections*,
+  arXiv:1410.0024v2, especially Theorems 6.1 and 6.3.  Cached key
+  `arXiv:1410.0024`; PDF SHA-256
+  `a9f3b7222b3c85e9dcd5bd6f2c008a68a9dc18aa3682ac2ad480154f209e53cc`.
 - Zhaoxing Gu, Song Yu, and Tony Yue Yu, *Quantum cohomology of variations of
   GIT quotients and flips*, arXiv:2508.15770v1, Section 6.4.  Cached key
   `arXiv:2508.15770`; PDF SHA-256
@@ -268,9 +287,11 @@ crepant completion to the original discrepant flip.
 | Iritani's one-object toric theorem might already control the projective-master quantum Kirwan derivatives. | Still open.  Iritani controls the intrinsic endpoint Gamma/QDM connection; Woodward's common row contains the chamber quantum Kirwan derivatives.  No checked source identifies those derivatives across the rank-one master in one fixed input frame. | Same marked reduction-in-stages/direct-master test above. |
 | Zero-mode nearby-cycle loss. | Untouched by this audit.  The discrepancy-one blowup calibration is an ordinary sign/stability threshold and supplies no evidence that vanishing cycles miss the complete row-generated module. | Separate zero-mode model under `hyp:marked-threshold`. |
 | The blowup calibration tests the analytic hypothesis itself. | Settled negatively: the blowup direction has nonzero equivariant first-Chern slope and is Laurent-finite in the manuscript's argument. | Find the smallest neutral nonordinary toric threshold, or a genuine zero-mode threshold, and test the one-object marked comparison there. |
+| The ordinary neutral one-object hypothesis might have no geometric model. | Settled: Coates--Iritani--Jiang give one global toric quantum connection and Gamma/Fourier--Mukai continuation across a crepant wall; the common-open skyscraper fixes the marked row. | This is an intrinsic linear-toric QDM/I-function model, not the full inverse-system statement for every projective master. |
 
 No unexplained numerical coincidence remains in the affine point lift.  The
 remaining common-frame descent is categorical but is not itself the
-load-bearing neutral case.  The deformation-to-the-normal-cone test is still
-the cheapest check of that descent.  Closure of the manuscript hypothesis
-requires moving next to a neutral nonordinary or zero-mode model.
+load-bearing neutral case.  The ordinary neutral mechanism is now
+geometrically nonvacuous.  The deformation-to-the-normal-cone test remains
+the cheapest check of common-frame descent, while the sharp unsolved local
+frontier is the zero-mode reduced-nearby-cycle clause.

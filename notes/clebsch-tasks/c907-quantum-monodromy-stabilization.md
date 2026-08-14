@@ -16,8 +16,12 @@ reduction-in-stages comparison of its clutching tails in the fixed common
 input-and-derivative frame; merely relaxing projectivity does not supply it.
 The discrepancy-one blowup direction is nonneutral, so this is a structural
 calibration rather than a test of the load-bearing neutral hypothesis.  The
-next decisive model must be neutral beyond the already proved path-local
-ordinary-flop case, or must exhibit a zero-mode threshold.
+ordinary non-zero-mode neutral mechanism is nevertheless nonvacuous:
+Coates--Iritani--Jiang's global toric quantum connection and Gamma/Fourier--
+Mukai gauge carry the common-open point row exactly across a crepant toric
+wall.  What remains unmodeled is the inverse-system comparison for arbitrary
+projective masters and, most sharply, the zero-mode reduced-nearby-cycle
+clause.
 Earlier one-arrow and
 multi-arrow audits are retained below as the failure history that fixes the
 scope of the new proof.  The Gamma point

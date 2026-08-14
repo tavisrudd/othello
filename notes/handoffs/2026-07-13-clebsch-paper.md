@@ -172,8 +172,12 @@ to a rank-one master introduces curve classes.  Thus dropping projectivity
 alone does not remove the reduction-in-stages/common-frame gap.
 The blowup direction is nonneutral, so this remains a normalization and
 mechanism check rather than a verification of the analytic hypothesis used
-for neutral tails.  The next load-bearing test must be a neutral threshold
-beyond the path-local ordinary-flop theorem, or a zero-mode threshold.
+for neutral tails.  A genuine ordinary neutral model is now source-closed in
+the linear toric category: Coates--Iritani--Jiang's global quantum connection
+and Gamma/Fourier--Mukai gauge transport the common-open point row across a
+crepant toric wall, and Woodward identifies the boundary series with toric
+I-functions.  This does not verify the inverse-system hypothesis for every
+projective master; the sharpest remaining local test is a zero-mode threshold.
 The sharper type-(1,2) flip test also gives an exact no-go:
 adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
 necessarily makes the previously unstable spectator-plus-`O` locus semistable,
