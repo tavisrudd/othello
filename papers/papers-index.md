@@ -134,11 +134,11 @@ F13*)
 **Active unnumbered candidate — gamma-point-row** — *The Point-Class Rank
 Functional under Birational Wall Crossing: Exact One-Wall Identities toward
 the \(X\times\mathbf P^2\) Problem*
-- *Status:* warning-free 12-page review draft with exact claim and literature
+- *Status:* warning-free 13-page review draft with exact claim and literature
   ledgers, a paper-owned release checker, and an isolated referee dossier.
 - *Scope:* proves an exact ambient common-point coordinate for smooth
-  projective simple VGIT walls and a path-local point-row theorem for
-  projective ordinary flops; gives incomplete-Gamma and Fourier-boundary
+  projective simple VGIT walls oriented by \(r_+<r_-\), and a path-local
+  point-row theorem for projective ordinary flops; gives incomplete-Gamma and Fourier-boundary
   no-go theorems; and states the multi-wall assembly only under an explicit
   rank-zero-target hypothesis.
 - *Boundary:* no unconditional general factorization or stabilization theorem

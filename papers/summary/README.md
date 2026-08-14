@@ -422,8 +422,9 @@ yet compose across a discrepant peak.
 > *Abstract* The Gamma integral structure turns the class of a point into the
 > flat Euler covector which reads ordinary rank. We isolate the behavior of
 > this single row under birational quantum wall crossing. For a smooth
-> projective simple VGIT wall, the formal quantum-D-module comparison of
-> Gu--Yu--Yu sends the common-open point class to the point class in its
+> projective simple VGIT wall with positive discrepancy `r₊ < r₋`, the
+> formal quantum-D-module comparison of Gu--Yu--Yu sends the common-open
+> point class to the point class in its
 > ambient summand exactly; the assertion concerns the full wall parameter,
 > not only its leading term. For a projective ordinary flop, the
 > Lee--Lin--Qu--Wang continuation preserves the intrinsic point row on each
