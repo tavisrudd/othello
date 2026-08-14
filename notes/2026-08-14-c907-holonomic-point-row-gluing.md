@@ -537,6 +537,20 @@ finite-dimensional connection problem for one cyclic row, rather than a
 continuation theorem for the complete nonlinear source, but it is still
 load-bearing.
 
+## Referee correction
+
+The final manuscript does not use the preceding tail-identification claim as
+an unconditional lemma.  The hostile POT/VFC audit found that Woodward's
+degreewise clutching description and normal-complex splitting do not identify
+the fixed clutching stacks, universal curves, evaluations, perfect
+obstruction theories, or virtual classes across affine degrees.  The claimed
+application of Gonz\'alez--Woodward's Picard lemma also requires a trivial
+action hypothesis not established for the endpoint clutching sections.  The
+paper therefore promotes this entire comparison to the explicit tailwise
+derived identification hypothesis.  Conditional on that hypothesis, the
+Gamma-recurrence and holonomic-tempered conclusions remain valid.  The marked
+threshold comparison is a second, separately typed hypothesis.
+
 ## Sources
 
 - Gonzalez--Woodward, arXiv:1208.1727v7, Lemma 4.5, equations (40)--(47),
@@ -551,33 +565,35 @@ load-bearing.
 
 ## Mystery ledger
 
-- **Settled tailwise:** no arbitrary interpolation is needed on a stable
-  tail; its Gamma recurrence defines a canonical holonomic germ.  Selecting
-  one solution across different tails is exactly the remaining connection
-  gate.
-- **Settled:** complete residue/graph exhaustiveness is unnecessary for the
-  Boolean; the dual cyclic point row suffices.
-- **Settled in the first nonlinear model:** the balanced projective-bundle
-  master with one fixed bubble has constant coefficient stack and POT on
-  each tail; all unbounded dependence is one rational Gamma recurrence.
-- **Settled internally:** choosing the Picard generator as
-  `O(r[0])`, trivialized at infinity, makes auxiliary rotation and the
-  Liouville zero-character extraction commute with the published Picard
-  identification.  External sign/convention audit remains.
-- **Settled internally, external audit required:** Lemma 3 proves constant
-  fixed POT and Gamma recurrence on every endpoint clutching tail.  The key
-  simplification is that Corollary 9.10 packages complete bubble trees into
-  fixed stable-map factors, so no edge induction is required.
-- **Open, critical gate:** compute or structurally fix the finite connection
-  matrices across the sign, stability, and zero-mode thresholds and prove
-  that they preserve the marked cyclic point-row solution.  Separate
-  holonomicity and a zero wall term do not imply this; the `2^k/3^{-k}`
-  countermodel proves the logical independence.
-- **Exact sufficient shadow:** for every threshold connection matrix `C_j`,
-  prove `r_j C_j=r_j`, or equivalently that its jump factors through a wall
-  submodule annihilated by the point row.  A one-object Gamma/window theorem
-  would supply this; pairing and formal-monodromy data alone do not.
-- **Open:** whether the manuscript's word `meromorphic` should explicitly
-  allow the finite ramified/logarithmic cover naturally produced by regular
-  holonomic continuation.  This is a statement-level audit after the
-  geometric gate passes.
+- **Settled:** global support collapse is coefficientwise and needs no common
+  Novikov completion; rotation localization kills the intermediate strata
+  before the endpoint series are compared.
+- **Settled conditionally:** once fixed clutching data are identified along a
+  tail, the moving normal weights give a canonical Gamma recurrence, hence a
+  holonomic tail with neutral tempered growth.  No arbitrary interpolation or
+  complete residue/graph bijection is then needed.
+- **Retracted:** Woodward's formulas alone do not make the fixed clutching
+  stacks, obstruction theories, virtual classes, and evaluations constant
+  along a tail.  This is now Hypothesis 8.4 in the manuscript, not a theorem.
+- **Open derived-geometric hypothesis:** construct the tailwise fixed-stack,
+  POT, VFC, evaluation, automorphism, and inertia-gluing identifications, with
+  Artin compatibility.  A counterexample would be a tail on which any of
+  these data changes under the affine degree shift.
+- **Open marked-connection hypothesis:** construct threshold isomorphisms of
+  the finite cyclic Rees `z`-modules which intertwine formal monodromy and
+  preserve the point row, Stokes filtration, ramified deck action,
+  nearby-cycle comparisons, and Artin/Rees structure.  The `2^k/3^{-k}`
+  model proves that separate holonomicity cannot determine these maps.
+- **Settled negative shadows:** formal monodromy, pairing, integrality,
+  commuting nilpotents, localized Fourier support, and a zero total boundary
+  coefficient do not force marked point-row transport.
+- **Extra-juice closeout:** the strongest cheap upgrade was expositional and
+  has been taken: the theorem now separates the derived-geometric and marked
+  analytic hypotheses and uses only their finite cyclic output.  No further
+  unconditional conclusion follows from the audited sources.
+- **Tao-style falsifier:** test the theorem by searching first for one affine
+  tail with nonconstant fixed POT/VFC data, and independently for one genuine
+  threshold whose Stokes map changes the point-row primary support.  Either
+  example would refute a hypothesis without touching the unconditional cubic
+  endpoint calculation.  No unexplained mystery remains beyond these two
+  explicit hypotheses.
