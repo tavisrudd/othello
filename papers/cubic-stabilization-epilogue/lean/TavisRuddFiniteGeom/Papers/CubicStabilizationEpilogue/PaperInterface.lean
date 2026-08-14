@@ -34,6 +34,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleM
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurentGaugeConjugacy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.DifferentialConstantsBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HorizontalMonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
@@ -2251,6 +2252,39 @@ theorem differentialDerivation_flatCoefficientBaseChange
   simpa only [smul_eq_mul] using
     Derivation.leibniz
       (Quantum.differentialDerivationBaseChange derivative) left right
+
+/-- Horizontal-module coefficientwise base change.  A supplied linear
+derivative and commuting monodromy operator restrict to the horizontal kernel.
+For every commutative coefficient algebra over the ground field, the canonical
+flat-base-change equivalence identifies the extended horizontal kernel with the
+scalar extension of the original kernel, intertwines the two restricted
+monodromy operators, and makes them conjugate.  For finite-dimensional source
+space, the scalar-extended horizontal monodromy has the coefficientwise-mapped
+characteristic polynomial.  This does not construct the formal differential
+module, Levelt--Turrittin algebra, fundamental solution, inverse limit, or
+analytic framed-monodromy operator supplying the linear data. -/
+theorem horizontalMonodromy_flatCoefficientBaseChange
+    {k V B : Type*} [Field k]
+    [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [CommRing B] [Algebra k B]
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    (Quantum.extendedHorizontalEndomorphism derivative monodromy commutes).comp
+        (Quantum.horizontalBaseChangeEquivOfField derivative).toLinearMap =
+      (Quantum.horizontalBaseChangeEquivOfField derivative).toLinearMap.comp
+        ((Quantum.horizontalEndomorphism derivative monodromy commutes).baseChange B) ∧
+    Quantum.extendedHorizontalEndomorphism derivative monodromy commutes =
+      (Quantum.horizontalBaseChangeEquivOfField derivative).conj
+        ((Quantum.horizontalEndomorphism derivative monodromy commutes).baseChange B) ∧
+    ((Quantum.horizontalEndomorphism derivative monodromy commutes).baseChange B).charpoly =
+      (Quantum.horizontalEndomorphism derivative monodromy commutes).charpoly.map
+        (algebraMap k B) :=
+  ⟨Quantum.horizontalBaseChangeEquivOfField_intertwines
+      derivative monodromy commutes,
+    Quantum.extendedHorizontalEndomorphism_eq_conj_ofField
+      derivative monodromy commutes,
+    Quantum.horizontalEndomorphism_charpoly_baseChange
+      derivative monodromy commutes⟩
 
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.

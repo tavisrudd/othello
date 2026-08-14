@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 147 reviewer-facing Lean terminals.  These counts summarize the
+There are 148 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 147 reviewer terminals.
+1 complete; 148 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -102,9 +102,14 @@ objects, hypotheses, conclusions, and cautions recorded in
   coefficient extension is proved.  For an actual derivation of a commutative
   algebra, Lean constructs the extended derivation, proves its Leibniz rule and
   coefficient-algebra constancy, and identifies its constant subalgebra with
-  the image of the scalar-extended original kernel.  The Levelt--Turrittin
-  solution algebra, fundamental solution, horizontal-module identification,
-  and completed inverse-limit passage remain open.  Lean proves the coefficientwise
+  the image of the scalar-extended original kernel.  For a supplied
+  finite-dimensional derivative and commuting monodromy endomorphism, Lean
+  identifies the scalar-extended horizontal kernel with the kernel of the
+  extended derivative, proves that the restricted monodromies are intertwined
+  and conjugate, and maps their characteristic polynomial coefficientwise.
+  The formal differential module, Levelt--Turrittin solution algebra,
+  fundamental solution, analytic monodromy construction, and completed
+  inverse-limit passage remain open.  Lean proves the coefficientwise
   multivariate partial derivatives are commuting derivations, derives their
   necessary zero-curvature identity from an invertible supplied solution, and
   conversely constructs the unique

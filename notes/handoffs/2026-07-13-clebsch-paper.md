@@ -231,8 +231,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-82 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 147 reviewer terminals, audit
+83 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 148 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -314,8 +314,13 @@ supplied exact constants--derivative pair.  For an actual derivation of a
 commutative algebra, Lean constructs the induced derivation on the tensor-
 product algebra, proves its pure-tensor and Leibniz laws, proves that it fixes
 the coefficient algebra, and identifies its constant subalgebra with the image
-of the scalar-extended original kernel.  The Levelt--Turrittin solution algebra,
-horizontal module, and inverse-limit passage remain open.  Compatible coefficient reductions, divisor
+of the scalar-extended original kernel.  For a supplied finite-dimensional
+derivative and commuting monodromy endomorphism, Lean identifies the scalar-
+extended horizontal kernel with the kernel of the extended derivative, proves
+that the restricted monodromies are intertwined and conjugate, and maps their
+characteristic polynomial coefficientwise.  The formal differential module,
+Levelt--Turrittin solution algebra, fundamental solution, analytic monodromy
+construction, and inverse-limit passage remain open.  Compatible coefficient reductions, divisor
 substitutions, small matrices, and gauges derive the bulk matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial
 system.  A supplied decreasing ideal filtration now constructs the finite-level
@@ -448,7 +453,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 147-terminal axiom transcript
+The aggregate build, source correspondence, and 148-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent
