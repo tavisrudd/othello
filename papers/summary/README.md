@@ -469,8 +469,9 @@ threefold is irrational.
 > intermediate fixed stratum, and Woodward's clutching factorization packages
 > every remaining bubble tree into endpoint tails. The rank-one derived
 > clutching theorem proved here makes each such tail holonomic and tempered. The
-> remaining analytic input is locally finite: at each sign, stability, or
-> zero-mode threshold, an isomorphism of the cyclic Rees `z`-modules must
+> remaining analytic input is locally finite: at each sign or stability
+> threshold, and on the row-generated nearby-cycle modules at each zero-mode
+> rank change, an isomorphism of the cyclic Rees `z`-modules must
 > intertwine formal monodromy, carry the marked row, and preserve the stated
 > Stokes, deck, and nearby-cycle data. Under this hypothesis,
 > Rees homogenization makes point-row nonvanishing on a formal-monodromy

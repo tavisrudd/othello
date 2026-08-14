@@ -19,8 +19,9 @@ and a coefficientwise balanced Gamma-ratio reduction. It further proves that
 the derived fixed clutching stacks are constant along every rank-one tail
 between thresholds, so the complete neutral tails are holonomic and tempered.
 The remaining analytic input is
-locally finite: an isomorphism of cyclic Rees \(z\)-modules at each sign,
-stability, or zero-mode threshold must intertwine formal monodromy and carry
+locally finite: an isomorphism of cyclic Rees \(z\)-modules at each sign or
+stability threshold, and on row-generated nearby cycles at each zero-mode
+rank change, must intertwine formal monodromy and carry
 the marked point row while preserving the stated Stokes, deck, nearby-cycle,
 Artin, and Rees data. Under this hypothesis, the
 point-row primary Boolean is birationally invariant and
