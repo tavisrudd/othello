@@ -115,8 +115,57 @@ the punctual quotient shadow.
 
 ## Proof of the weight-zero clutching lemma
 
-The lemma follows from a splitting-free Cech description of an equivariant
-bundle on the parametrized line.
+The clean proof identifies the derived fixed object itself.  The invariant
+Cech complex then supplies an independent tangent-level check.
+
+### Derived-intersection identification
+
+For a nonzero integer `a`, let `W^a` be the attracting locus on which
+`lim_{t->0}t^a x` exists.  Evaluation at `1` identifies fixed sections on one
+parametrized affine chart with `W^a`: the section determined by `x` is
+`z mapsto z^a x`, and it extends across the origin exactly when `x` belongs
+to `W^a`.  This identification is functorial in families.  On a `k`-fold
+orbifold cover the same statement holds in the inertia component labelled by
+`phi_a(theta)`.
+
+A principal clutching section has two such extensions with the same generic
+value `x`.  Its derived moduli stack is therefore
+
+\[
+ \mathcal C_{a_-,a_+}^{\mathrm{der}}
+ = [W^{a_-}/G]\mathop{\times}^{\mathbf R}_{[W/G]}[W^{a_+}/G].       \tag{1}
+\]
+
+The two maps to the inertia quotient are induced by the two attracting limit
+maps.  Adding the fixed ordinary stable-map factors gives the full fixed
+clutching stack as their derived fibre product with (1) over those two inertia
+maps.  This is the derived version of Woodward's equations (54)--(57).
+
+For `G=G_m`, replacing either nonzero endpoint exponent by another integer of
+the same sign does not change its attracting locus or limit map.  The
+stabilizer congruence fixes the inertia component.  Thus (1), its universal
+curve, both evaluations, and the derived fibre products with the attached
+stable-map factors are literally the same derived stacks throughout one
+tail.  Derived cotangent complexes, their maps, and virtual classes are
+therefore identified automatically.
+
+The tangent complex of (1) is
+
+\[
+ \left[
+  T(W^{a_-}/G)\oplus T(W^{a_+}/G)
+  \longrightarrow T(W/G)
+ \right].                                                   \tag{2}
+\]
+
+It can have degree-one cohomology when the two attracting loci meet
+nontransversely.  Hence the derived fibre product retains exactly the fixed
+obstruction modes which an underived intersection would lose.
+
+### Invariant Cech verification
+
+The same complex follows from a splitting-free Cech description of an
+equivariant bundle on the parametrized line.
 
 Let `S` be one connected fixed clutching stack in a chosen graph type, and
 let `V` be the restriction at `z=1` of one term of the pulled-back tangent
@@ -151,7 +200,7 @@ the Cech resolution gives the canonical complex
  \left[
    F^0_{\leq0}(a)V\oplus F^\infty_{\leq0}(a)V
    \longrightarrow V
- \right].                                                   \tag{1}
+ \right].                                                   \tag{3}
 \]
 
 This description does not choose an equivariant splitting of `E_a`.
@@ -159,17 +208,17 @@ It is functorial in `S`, in equivariant maps of bundles, and in base change.
 For a general equivariant summand it is the filtration-valued form of the
 line-bundle calculation below.  Its zero steps change only when an affine
 endpoint weight is zero.  For the tangent bundle, constancy also follows
-directly from constancy of the attracting loci.  Hence (1) is literally the
+directly from constancy of the attracting loci.  Hence (3) is literally the
 same complex for every cocharacter in one remaining tail, with the
 identification induced by the identity of `V`.
 
-Apply (1) termwise to the equivariant two-term tangent complex
+Apply (3) termwise to the equivariant two-term tangent complex
 
 \[
- [\mathfrak g\longrightarrow TW].                           \tag{2}
+ [\mathfrak g\longrightarrow TW].                           \tag{4}
 \]
 
-The differential in (2) is equivariant, so the Cech identifications commute
+The differential in (4) is equivariant, so the Cech identifications commute
 with it.  The invariant derived deformation complex of the principal section
 is therefore canonically constant along the tail.  Every nonzero character
 of the same Cech complex belongs to the moving normal complex.  Its endpoint
@@ -182,7 +231,7 @@ same-sign cocharacters have the same endpoint limits, and the congruence
 condition fixes the inertia label.  Lemma 9.9 fixes the stability condition.
 Thus the universal stable curves, bubble factors, evaluation maps,
 automorphisms, and inertia gluing are unchanged.  Their intrinsic deformation
-complexes are unchanged as well.  Combining these fixed factors with (1)--(2)
+complexes are unchanged as well.  Combining these fixed factors with (3)--(4)
 identifies the full fixed deformation-obstruction complex.
 
 The fixed perfect obstruction theory is the dual of this canonical invariant
@@ -190,7 +239,7 @@ deformation complex, together with the unchanged stable-curve terms.  Its map
 to the cotangent complex is obtained by differentiating the universal
 clutching section.  Under evaluation at `z=1`, that section is the same
 universal point `x` on both tails; at the nodes its evaluations are the same
-attracting retractions.  Formula (1) is induced by restriction of this same
+attracting retractions.  Formula (3) is induced by restriction of this same
 universal section, rather than by a noncanonical quasi-isomorphism.
 Consequently the identification commutes with the maps to the cotangent
 complex and is an isomorphism of perfect obstruction theories, not merely an
@@ -209,7 +258,7 @@ unchanged bubble terms, the explicit perfect complex
   T W^{a_-}|_S
   \oplus T W^{a_+}|_S
   \longrightarrow T W|_S
- \right],                                                   \tag{3}
+ \right],                                                   \tag{5}
 \]
 
 with the two restriction maps followed by subtraction.  The corresponding
@@ -217,8 +266,9 @@ formula for `T(W/G)` is obtained by applying the same construction to
 `[\mathfrak g\to TW]`; the adjoint term is constant because `G=G_m`.
 No constructible rank refinement is needed.
 
-This proves the tailwise derived identification stated in the manuscript for
-`G=G_m`.
+This is the tangent complex of the derived intersection (1), providing a
+second derivation of (2).  It proves the tailwise derived identification
+stated in the manuscript for `G=G_m`.
 
 ## Exact line-bundle calibration
 
@@ -232,16 +282,16 @@ section in the two endpoint coordinates.  The invariant Cech complex is
  \qquad
  A=A_S,
  \quad A_0=\begin{cases}A&r_0\geq0,\\0&r_0<0,\end{cases}
- \quad A_\infty=\begin{cases}A&r_\infty\geq0,\\0&r_\infty<0.\end{cases}       \tag{4}
+ \quad A_\infty=\begin{cases}A&r_\infty\geq0,\\0&r_\infty<0.\end{cases}       \tag{6}
 \]
 
-When both endpoint sections extend, (4) has one invariant global section;
+When both endpoint sections extend, (6) has one invariant global section;
 when neither extends, it has one invariant obstruction; and when exactly one
 extends it is acyclic.  Thus its quasi-isomorphism type changes only at
 `r_0=0` or `r_infty=0`.  For an affine clutching tail the two exponents are
 affine functions of the tail coordinate.  This is exactly the finite
 zero-mode threshold set used in the manuscript.  The vector-bundle formula
-(1) is the filtration-valued version of (4).
+(3) is the filtration-valued version of (6).
 
 As a nonlinear sanity check, take the standard action on `P^1` and the fixed
 power map `u_a(z)=z^a`, `a>0`.  The induced invariant tangent deformation is
@@ -258,7 +308,8 @@ The proof uses only:
    Woodward's Lemmas 9.8--9.9 and Corollary 9.10;
 2. fixed graph type, ordinary bubble degree, stabilizer congruence, and the
    removal of finitely many zero-mode thresholds;
-3. the elementary invariant Cech complex (1).
+3. the derived intersection (1) and its elementary invariant Cech complex
+   (3).
 
 It does not use Gonz\'alez--Woodward's Picard-shift lemma, a global
 identification of different gauged-map moduli spaces, or a Mellin--Barnes
@@ -320,7 +371,7 @@ The proof has four logically separate parts.
 | obligation | result | reason |
 | --- | --- | --- |
 | fixed clutching stack and evaluations | pass | same endpoint signs give the same attracting loci and limit maps; congruence fixes inertia |
-| fixed deformation complex | pass | invariant Cech formula (1), equivalently the attracting-tangent complex (3) |
+| fixed deformation complex | pass | derived-intersection tangent complex (2), equivalently invariant Cech formula (3) and attracting-tangent complex (5) |
 | POT morphism and virtual class | pass | Woodward's Definition 7.13 constructs the POT from the dual of this derived pushforward; the comparison is induced by the universal restriction and evaluation maps |
 | bubbles, automorphisms, and Artin reduction | pass | fixed ordinary degree and graph type leave the stable-map factors unchanged; the principal component is parametrized and the residual stabilizer is fixed |
 
@@ -373,7 +424,7 @@ hypothesis.
   deformation complex, the fixed POT morphism, or the virtual class.  The
   common-open quotient shadow was weaker than necessary.
 - **Settled:** the zero-mode threshold list is the exact list on which the
-  invariant Cech complex can change; formula (4) supplies the local model.
+  invariant Cech complex can change; formula (6) supplies the local model.
 - **Open:** the elementary exact triangle at a zero-mode crossing may help
   construct the corresponding marked nearby-cycle map, but it does not by
   itself control the Stokes filtration or preserve the Gamma point row.  This
