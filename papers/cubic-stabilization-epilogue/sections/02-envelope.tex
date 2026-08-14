@@ -164,8 +164,19 @@ generic non-CM fibre they give diagonal entry \(5\) and off-diagonal entry
 these homomorphisms gives the identities over \(B^\circ\), hence (2.1).
 Choosing any five coordinate classes identifies the quotient lattice with
 \(\mathbf Z^5\), where its matrix is \(6I_5-J_5\).  Since this has Smith type
-\((1,6,6,6,6)\), \(f\) is a finite flat isogeny and its kernel is maximal
-isotropic in the source polarization kernel.
+\((1,6,6,6,6)\), the source polarization is nondegenerate, so \(f\) is a
+finite flat isogeny.  From
+\(\lambda_{\mathcal A}=f^\vee\lambda_\Theta f\) one gets
+\[
+ |\ker\lambda_{\mathcal A}|=6^8,
+ \qquad |\ker f|=\deg f=6^4.
+\]
+For \(x,y\in\ker f\), functoriality of the polarization commutator pairing
+gives
+\(e_{\lambda_{\mathcal A}}(x,y)=e_{\lambda_\Theta}(fx,fy)=1\).
+Thus \(\ker f\) is isotropic and has square-root order in
+\(\ker\lambda_{\mathcal A}\), hence is maximal isotropic.  In particular,
+its two-primary part has fibrewise order \(2^4\).
 
 The two-primary discriminant local system is
 \[
@@ -194,8 +205,9 @@ system \(\mathscr V=\mathcal E[2]\) gives (2.2) as an isomorphism of local
 systems.  The discriminant commutator pairing is the tensor product of the
 normalized coefficient form \(b_2\) with the Weil pairing on \(\mathscr V\), so the
 isomorphism is symplectic.  Since \(f\) is \(A_5\)-equivariant,
-\(\mathscr K_2\) is \(A_5\)-stable; its fibrewise order is \(2^4\), so it is
-a relative maximal isotropic subgroup of this rank-eight local system.
+\(\mathscr K_2\) is \(A_5\)-stable.  The preceding order and isotropy
+calculation makes it a relative maximal isotropic subgroup of this
+rank-eight local system.
 \end{proof}
 
 \begin{proposition}[Principal gluing packet]

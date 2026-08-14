@@ -571,7 +571,11 @@ are current, and the committed paper export verifies byte-for-byte in
   \(\frac12x^{\mathsf t}(6I_6-J_6)y=\bar x\cdot\bar y\pmod2\).
   Its well-definedness, alternation, and nondegeneracy explain precisely why
   the commutator pairing is the tensor product of the formalized coefficient
-  form with the Weil pairing.
+  form with the Weil pairing.  The manuscript now also spells out the order
+  calculation behind maximal isotropy: the polarization type gives kernel
+  order (6^8), the pullback identity gives isogeny degree (6^4), and
+  functoriality makes the isogeny kernel isotropic; its two-primary part
+  therefore has order (2^4) inside the rank-eight discriminant local system.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

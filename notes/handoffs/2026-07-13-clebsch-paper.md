@@ -382,7 +382,10 @@ The two-primary symplectic identification now states its normalized
 coefficient pairing explicitly:
 \(\frac12x^{\mathsf t}(6I_6-J_6)y=\bar x\cdot\bar y\pmod2\) on augmentation
 lifts.  This is the nondegenerate heart form tensoring with the Weil pairing,
-not the zero restriction of the Gram form modulo two.
+not the zero restriction of the Gram form modulo two.  The polarization type,
+pullback identity, and commutator pairing now also give the exact orders
+(6^8) and (6^4) and prove maximal isotropy, rather than leaving that
+conclusion implicit; the two-primary kernel consequently has order (2^4).
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
