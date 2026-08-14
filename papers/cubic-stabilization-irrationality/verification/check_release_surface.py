@@ -50,8 +50,10 @@ required_labels = {
     "thm:rank-zero-target",
     "eq:blockwise-boundary-marking",
     "prop:support-collapse",
-    "hyp:complete-neutral",
     "prop:gamma-ratio-reduction",
+    "prop:clutching-tail-holonomicity",
+    "hyp:marked-threshold",
+    "lem:cyclic-row-support",
     "rem:neutral-boundary",
     "thm:birational-point-primary",
     "prop:cubic-endpoint",
@@ -71,13 +73,13 @@ if "They are not asserted to arise from smooth projective quantum connections" n
     errors.append("analytic countermodel scope boundary missing")
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
-if "complete-neutral continuation as an open" not in scope_text:
+if "marked compatibility for nonlinear virtual fixed graphs" not in scope_text:
     errors.append("global continuation boundary is not visibly conditional")
 
 global_text = (ROOT / "sections/08-global-transport.tex").read_text(encoding="utf-8")
-if "\\begin{hypothesis}[Complete-neutral continuation]" not in global_text:
-    errors.append("complete-neutral continuation is not an explicit hypothesis")
-if "does not prove it in the generality used" not in global_text:
+if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
+    errors.append("marked threshold compatibility is not an explicit hypothesis")
+if "do not prove this marked compatibility" not in scope_text:
     errors.append("Aleshkin--Liu nonlinear source boundary is missing")
 if "the proposition does not construct the common realization" not in global_text:
     errors.append("support-collapse coefficient-field boundary is missing")
@@ -90,14 +92,14 @@ readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
-    r"Assume that complete-neutral continuation.*?We prove that",
+    r"Assume that, for every W.*?finite connection matrices.*?We prove that",
     main_text,
     flags=re.DOTALL,
 ):
     errors.append("abstract does not lead with the conditional cubic theorem")
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
-if "Hypothesis~\\ref{hyp:complete-neutral}" not in intro_text:
+if "Hypothesis~\\ref{hyp:marked-threshold}" not in intro_text:
     errors.append("headline theorem does not name the continuation hypothesis")
 if "Under that hypothesis" not in readme_text:
     errors.append("README cubic conclusion is not visibly conditional")
@@ -120,7 +122,7 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Assuming the complete-neutral continuation hypothesis" not in metadata.get(
+if "Assuming the marked threshold compatibility hypothesis" not in metadata.get(
     "description", ""
 ):
     errors.append("Zenodo description does not lead with the conditional hypothesis")

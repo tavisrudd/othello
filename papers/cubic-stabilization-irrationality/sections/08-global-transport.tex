@@ -100,36 +100,24 @@ Proposition~2(B'); the resolution is an isomorphism over the source, sink,
 and common-open cylinder.  Thus the extreme quotients and the class \(a_p\)
 are unchanged.
 
-\subsection{One coefficient field}
+\subsection{Neutral tails and the finite connection gate}
 
 The two maps in (8.1) initially belong to opposite Novikov completions.  The
-following hypothesis isolates the exact comparison still required before
-they can be put in one differential field.  Fix a finite ample-energy and
-bulk Artin quotient of the equivariant Novikov ring.  For a primitive affine
-gauge direction \(\delta\), all ordinary curve degrees and fixed graph types
-are then finite; only the integer coordinate along \(\delta\) can remain
-unbounded.
+comparison needed for the point-row Boolean is smaller than a common field
+for the complete source.  Fix a finite ample-energy and bulk Artin quotient
+of the equivariant Novikov ring.  For a primitive affine gauge direction
+\(\delta\), all ordinary curve degrees and fixed graph types are then finite;
+only the integer coordinate along \(\delta\) can remain unbounded.  We first
+control those unbounded tails.
 
-\begin{hypothesis}[Complete-neutral continuation]
-\label{hyp:complete-neutral}
-Whenever
+Call the direction neutral when
 \[
- c_1^{\Gm}(TW)\cdot\delta=0,                                 \tag{8.5}
+ c_1^{\Gm}(TW)\cdot\delta=0.                                 \tag{8.5}
 \]
-the complete sum of rotation-fixed terms at each fixed ordinary curve class
-has one Artin-valued meromorphic continuation whose two oriented residue
-expansions are the two extreme polarization series.  The continuation is
-compatible with input and bulk derivatives, quotient maps between Artin
-levels, and the Rees substitution
+We compare formal monodromy after the Rees substitution
 \[
  Q^d\longmapsto z^{c_1^{\Gm}(TW)\cdot d}Q^d.                 \tag{8.6}
 \]
-\end{hypothesis}
-
-The next proposition is the unconditional reduction which motivates the
-hypothesis.  It is deliberately weaker: balance of each fixed-graph
-coefficient does not by itself produce a common contour for the complete
-nonlinear graph sum.
 
 \begin{proposition}[Gamma-ratio reduction]
 \label{prop:gamma-ratio-reduction}
@@ -219,12 +207,8 @@ finite-dimensional linear abelian GLSM with adjacent secondary-fan chambers,
 a circuit, Calabi--Yau charges, and a grade-restriction window
 \cite[Definition~5.18 and Theorem~5.21]{AleshkinLiu}.  Proposition
 \ref{prop:gamma-ratio-reduction} does not construct those data for a nonlinear
-virtual fixed graph.  It also does not prove uniform contour separation after
-summing gluing types or compatibility of all nilpotent derivatives.  Thus
-their theorem supplies the linear model for Hypothesis
-\ref{hyp:complete-neutral}, but does not prove it in the generality used
-here.  Complete-neutral continuation is an explicit open input of the global
-argument.
+virtual fixed graph.  Their theorem therefore does not determine the marked
+connection matrices in Hypothesis~\ref{hyp:marked-threshold} below.
 
 Gonz\'alez--Woodward's crepant wall-crossing theorem gives a weaker
 distributional statement: neutral Picard shifts produce sums of derivatives
@@ -232,12 +216,126 @@ of delta distributions
 \cite[Remark~1.18(d), Remark~4.6, and equation~(47)]{GonzalezWoodward},
 and the authors explicitly do not deduce analytic continuation without an
 independent convergence input \cite[Remark~4.7]{GonzalezWoodward}.  This does not replace
-Hypothesis~\ref{hyp:complete-neutral}.  Proposition
+Hypothesis~\ref{hyp:marked-threshold}.  Proposition
 \ref{prop:punctual-corner} exhibits the underlying obstruction: information
 supported at a Fourier boundary can reappear with full support after inverse
 transform, so almost-everywhere equality does not identify the marked formal
 packet.
 \end{remark}
+
+\begin{proposition}[Clutching-tail holonomicity]
+\label{prop:clutching-tail-holonomicity}
+Fix a finite Artin level, an ordinary bubble degree, and a rotation-fixed
+graph type.  After splitting into finitely many stabilizer congruence classes
+and removing finitely many sign, stability, and zero-mode thresholds, every
+point-marked endpoint tail is a finite nilpotent derivative of one
+Gamma-ratio recurrence with affine arguments.  Its generating series is
+holonomic.  In a neutral direction its coefficients have polynomial-logarithmic
+growth after one exponential rescaling, so the tail has tempered radial
+boundary values.
+\end{proposition}
+
+\begin{proof}
+Corollary~9.10 and equations (54), (56), and (57) of
+\cite{WoodwardQKIII} express a rotation-fixed component as a fibre product of
+two clutching factors over the inertia quotient.  Each factor already
+contains the complete ordinary stable-map space attached at that end.  Thus
+arbitrary bubble trees occur in fixed proper stable-map factors once their
+ordinary degrees and markings are fixed; no induction over bubble-tree edges
+is required.
+
+For \(G=\Gm\), an affine clutching cocharacter is an integer.  Away from
+zero, its limit stratum depends only on its sign, while its inertia label
+depends only on its residue modulo the finite stabilizer order.  A finite
+sign/congruence split therefore fixes the coefficient stack and all
+evaluation maps.  The stability type of the principal component is constant
+on each resulting tail.  Stable tails retain the node and attaching factors
+in (8.7); contracted tails use the unstable irreducible convention and
+retain only the moving index.  The transition degrees form a finite set.
+
+We also need the fixed obstruction theory, not only the fixed stack.  Apply
+the normalization triangle to the pullback of the equivariant tangent
+complex of \(W/\Gm\).  The clutching line is trivial on every attached
+bubble, so the bubble complexes and node matching maps are independent of
+the affine degree.  On the principal component, apply the splitting
+principle.  A character root of weight \(h\) has degree \(hk+s\).  Roots
+with \(h=0\) are constant.  For \(h\ne0\), the weights of its
+\(H^0-H^1\) index form one consecutive affine interval.  Between consecutive
+thresholds the zero-weight summand has constant rank and evaluation at a
+generic point identifies it with the same root bundle on the coefficient
+stack.  The \(H^1\) assertion is dual by Serre duality.  Any nonzero
+clutching integer in the infinitesimal gauge map is removed by rescaling that
+summand.  Hence the fixed normalization complex, its maps, its virtual class,
+and its evaluations are constant on the tail.
+
+The complementary moving weights give (8.9), with nilpotent Chern roots on
+the fixed coefficient stack.  Only finitely many parameter derivatives are
+therefore needed.  Gamma recurrence gives a rational finite-state recurrence
+in \(k\), hence a holonomic generating series.  Under (8.5), Stirling's
+formula cancels the \(k\log k\) terms in the signed product; the remaining
+exponential is removed by one rescaling and the coefficients grow by a power
+of \(k\) and \(\log k\).  This is exactly tempered Fourier growth.  Finite
+threshold terms are Laurent polynomials and do not alter the conclusion.
+\end{proof}
+
+Tailwise holonomicity does not identify the two selected solutions.  The
+bilateral sequence
+\[
+ c_k=\begin{cases}2^k,&k\geq0,\\3^{-k},&k<0\end{cases}
+\]
+has oriented germs
+\[
+ F_0(x)=\frac1{1-2x},\qquad F_\infty(x)=\frac3{x-3}.
+\]
+Both tails are first-order hypergeometric and tempered on their natural
+boundary circles.  Away from the single threshold, the bilateral sequence
+is annihilated by \((E-2)(E-1/3)\); multiplying by a polynomial in the index
+absorbs the finite defect.  Nevertheless the two displayed rational
+functions are not branches of one meromorphic function.  Thus neither a
+zero wall term nor a polynomial recurrence determines the finite connection
+data across a threshold.
+
+\begin{hypothesis}[Marked threshold compatibility]
+\label{hyp:marked-threshold}
+At every finite Artin level and fixed ordinary degree, let \(C_j\) be the
+connection matrix between two adjacent neutral clutching-tail systems.  Take
+as state vector the pullback of the Gamma point row on finitely many common
+equivariant inputs, together with its \(z\)-covariant derivatives until the
+generated cyclic space stabilizes.  For every threshold,
+\[
+ r_jC_j=r_j,                                                  \tag{8.13}
+\]
+where \(r_j\) is this marked cyclic row.  These identifications commute with
+input and bulk derivatives, quotient maps between Artin levels, and the Rees
+substitution (8.6).
+\end{hypothesis}
+
+Condition (8.13) allows arbitrary connection on directions annihilated by
+the point row.  A one-object Gamma/window comparison would imply it: a
+window mutation is supported on the wall, whereas the skyscraper of a point
+in the common open is unchanged and Euler-orthogonal to wall-supported
+objects.  Pairing preservation and formal exponential labels alone do not
+imply (8.13), as Sections~\ref{sec:incomplete-gamma}--\ref{sec:two-wall}
+show.
+
+\begin{lemma}[Cyclic-row spectral support]
+\label{lem:cyclic-row-support}
+Let \(T\) be an endomorphism of a finite dimensional vector space \(V\), and
+let \(r\in V^*\).  Put
+\[
+ C_T(r)=\operatorname{span}\{r,rT,rT^2,\ldots\}\subset V^*.
+\]
+For every eigenvalue \(\lambda\), the restriction of \(r\) to the generalized
+\(\lambda\)-eigenspace of \(T\) is nonzero if and only if the
+\(\lambda\)-primary part of \(C_T(r)\) is nonzero.
+\end{lemma}
+
+\begin{proof}
+Let \(e_\lambda(T)\) be the polynomial B\'ezout projector onto the generalized
+\(\lambda\)-eigenspace.  The relevant primary projection of the row is
+\(re_\lambda(T)\).  It belongs to \(C_T(r)\) and vanishes exactly when the
+restriction of \(r\) does.
+\end{proof}
 
 \subsection{The finite packet}
 
@@ -253,7 +351,7 @@ are surjective as well.
 The Rees factor in (8.6) is needed to compare formal monodromy.  Homogeneity
 of \(D\kappa\) gives
 \[
- \mu_YA-A\mu_W=\frac12A-\Theta_QA,                            \tag{8.13}
+ \mu_YA-A\mu_W=\frac12A-\Theta_QA,                            \tag{8.14}
 \]
 because the acting group has dimension one and
 \(\Theta_Q(Q^d)=c_1^{\Gm}(TW)\cdot d\,Q^d\).  After (8.6), the
@@ -264,52 +362,52 @@ map homogeneous and its derivative a quantum-product morphism.  The target
 bulk point \(\kappa(0)\) has positive energy and is formally parallel to the
 large-radius point; this transport preserves the point row.
 
-Assume Hypothesis~\ref{hyp:complete-neutral} in every neutral direction and
-combine it with the Laurent-finite nonneutral directions of
-Proposition~\ref{prop:gamma-ratio-reduction}.  Let \(M\) be the resulting
-common continued source.  It need not have finite rank.  Set
-\[
- \overline M=M/(\ker A_-\cap\ker A_+).                        \tag{8.14}
-\]
-It injects into the direct sum of the two finite endpoint modules and is
-therefore finite.  Both kernels are stable under the common connection, so
-formal monodromy acts on \(\overline M\).  Primary decomposition and
-surjectivity show that each endpoint \(\lambda\)-primary packet is the image
-of the same shifted primary packet of \(\overline M\).
+Choose finitely many common equivariant inputs whose images under each
+surjection in (8.1) span the corresponding endpoint module; take the union
+of two lift sets if necessary.  Evaluation on these images embeds the dual
+endpoint module into one finite coordinate space.  After (8.6), this
+embedding intertwines the dual \(z\)-connections up to the same half-Tate
+shift.  The point row and its successive \(z\)-covariant derivatives
+therefore generate a finite cyclic submodule in that coordinate space.
+
+Proposition~\ref{prop:support-collapse} identifies the marked coefficient
+functions before either endpoint completion is taken.
+Proposition~\ref{prop:clutching-tail-holonomicity} supplies their holonomic
+tail systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the marked
+solutions across every finite threshold, while nonneutral directions are
+Laurent-finite by Proposition~\ref{prop:gamma-ratio-reduction}.  Thus the two
+intrinsic endpoint cyclic row modules are conservative realizations of one
+continued marked cyclic module.  No continuation of the complementary
+equivariant quantum source is used.
 
 \begin{theorem}[Conditional birational invariance of the point-row primary Boolean]
 \label{thm:birational-point-primary}
 Let \(Y_-\) and \(Y_+\) be smooth projective birational complex varieties.
 Suppose a W{\l}odarczyk completion for this birational map satisfies
-Hypothesis~\ref{hyp:complete-neutral} in every neutral affine gauge
+Hypothesis~\ref{hyp:marked-threshold} in every neutral affine gauge
 direction.  Then, for every formal-monodromy eigenvalue \(\lambda\),
 \[
  \rrow_{Y_-}|_{\cP_\lambda(Y_-)}\ne0
  \quad\Longleftrightarrow\quad
  \rrow_{Y_+}|_{\cP_\lambda(Y_+)}\ne0.                       \tag{8.15}
 \]
-Here the packets are realized in the common field postulated by the
-hypothesis; no chamberwise sector identification is part of the statement.
+Here the packets are realized through the marked cyclic continuation in the
+hypothesis; no continuation of the complementary source is part of the
+statement.
 \end{theorem}
 
 \begin{proof}
 Use the global W{\l}odarczyk completion and its orbit-cylinder class.  By
-Proposition~\ref{prop:support-collapse}, there is one row \(\rho\) on \(M\)
-such that
-\[
- \rrow_{Y_-}A_-=\rho=\rrow_{Y_+}A_+.                         \tag{8.16}
-\]
-Hypothesis~\ref{hyp:complete-neutral} and (8.14) place both surjections and this
-row in one finite differential module.  If a vector in the first endpoint
-\(\lambda\)-packet is detected by the point row, lift it to the corresponding
-primary packet of \(\overline M\).  Equation (8.16) shows that its image at
-the second endpoint is detected by the second point row.  The reverse
-implication is symmetric.
+the preceding construction, the two endpoint point rows generate the same
+marked cyclic module under the dual formal-monodromy action.  Apply
+Lemma~\ref{lem:cyclic-row-support}: the set of primary eigenvalues detected by
+the marked row depends only on that cyclic module.  This gives the forward
+implication, and the reverse implication is symmetric.
 \end{proof}
 
-Under Hypothesis~\ref{hyp:complete-neutral},
+Under Hypothesis~\ref{hyp:marked-threshold},
 Theorem~\ref{thm:birational-point-primary} is the global replacement for
 Hypothesis~\ref{hyp:rank-zero-target}.  Without that analytic input, the
-countermodels show why the conclusion cannot be obtained by composing the
-localized one-wall receivers or by retaining only their unmarked Fourier
-boundary.
+two-tail example above and the earlier countermodels show why the conclusion
+cannot be obtained from tailwise holonomicity, localized one-wall receivers,
+or unmarked Fourier boundary data alone.
