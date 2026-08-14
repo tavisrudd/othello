@@ -1,6 +1,7 @@
 import Mathlib.LinearAlgebra.Charpoly.BaseChange
 import Mathlib.RingTheory.Flat.Equalizer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
 
 /-!
 # Horizontal monodromy under coefficient extension
@@ -16,13 +17,19 @@ Lean proves that this equivalence intertwines the scalar extension of the
 restricted endomorphism with the restriction of `1 ⊗ m`.  Consequently the
 extended horizontal monodromy is conjugate to scalar extension of the original
 horizontal monodromy, whose characteristic polynomial is obtained by applying
-the coefficient map.
+the coefficient map.  For a commutative algebra with a decreasing ideal
+filtration, Lean also constructs the coefficient-algebra tower from the actual
+quotients.  In particular, powers of one ideal give the adic tower, and the
+horizontal characteristic polynomials commute with its canonical adjacent
+reductions.
 
 This is the horizontal-module linear algebra in coefficientwise base change.
 It assumes the derivative and commuting monodromy operator; it does not
 construct a formal differential module, Levelt--Turrittin solution algebra,
-fundamental solution, adic inverse limit, or analytic framed monodromy.  All
-proofs are symbolic and kernel checked, with no external computation or oracle.
+fundamental solution, inverse-limit differential module, or analytic framed
+monodromy.  The supplied coefficient algebra and ideal are not identified with
+the manuscript's geometric coefficient data.  All proofs are symbolic and
+kernel checked, with no external computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -209,6 +216,41 @@ namespace HorizontalMonodromyCoefficientTower
 variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
   [FiniteDimensional k V]
 
+/-- The coefficient-algebra tower obtained from the actual quotient rings of
+a decreasing ideal filtration.  Its reductions are the canonical quotient
+maps. -/
+noncomputable def ofIdealFiltration
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    HorizontalMonodromyCoefficientTower k V where
+  Coefficient level := filtration.QuotientRing level
+  coefficientCommRing _ := inferInstance
+  coefficientAlgebra _ := inferInstance
+  reduction level :=
+    { filtration.reduction level with
+      commutes' := by
+        intro scalar
+        change filtration.reduction level
+            (Ideal.Quotient.mk (filtration.ideal (level + 1))
+              (algebraMap k B scalar)) =
+          Ideal.Quotient.mk (filtration.ideal level) (algebraMap k B scalar)
+        exact filtration.reduction_mk level (algebraMap k B scalar) }
+  derivative := derivative
+  monodromy := monodromy
+  commutes := commutes
+
+/-- The horizontal-monodromy coefficient tower attached to the powers of one
+ideal.  Level `n` is the actual quotient by `I^n`. -/
+noncomputable def ofAdicIdeal
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    HorizontalMonodromyCoefficientTower k V :=
+  ofIdealFiltration (adicFiltration ideal) derivative monodromy commutes
+
 /-- The horizontal monodromy characteristic polynomials at all coefficient
 levels form an explicit compatible polynomial system. -/
 noncomputable def characteristicPolynomialSystem
@@ -236,6 +278,32 @@ theorem characteristicPolynomialSystem_level
         (algebraMap k (tower.Coefficient level)) :=
   horizontalEndomorphism_charpoly_baseChange
     tower.derivative tower.monodromy tower.commutes
+
+/-- In the adic realization, every level polynomial is the image of the
+original horizontal characteristic polynomial in `B/I^n`, and the canonical
+reduction `B/I^(n+1) → B/I^n` maps the higher polynomial to the lower one. -/
+theorem ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    let tower := ofAdicIdeal ideal derivative monodromy commutes
+    (∀ level,
+      tower.characteristicPolynomialSystem.characteristicPolynomial level =
+        (horizontalEndomorphism derivative monodromy commutes).charpoly.map
+          ((Ideal.Quotient.mk (ideal ^ level)).comp (algebraMap k B))) ∧
+    (∀ level,
+      Polynomial.map ((adicFiltration ideal).reduction level)
+          (tower.characteristicPolynomialSystem.characteristicPolynomial
+            (level + 1)) =
+        tower.characteristicPolynomialSystem.characteristicPolynomial level) := by
+  dsimp only
+  constructor
+  · intro level
+    rw [characteristicPolynomialSystem_level]
+    rfl
+  · exact
+      (ofAdicIdeal ideal derivative monodromy commutes).characteristicPolynomialSystem.compatible
 
 end HorizontalMonodromyCoefficientTower
 

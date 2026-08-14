@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 83 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 149 audited terminals.  The rejecting manuscript inventory covers all
+exports 150 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -104,7 +104,10 @@ its Leibniz and coefficient-constancy laws, and its exact constant subalgebra,
 and the canonical horizontal-kernel base-change equivalence with intertwined
 and conjugate restricted monodromy and coefficientwise characteristic
 polynomial, including its explicit compatible inverse system over every
-supplied coefficient-algebra tower,
+supplied coefficient-algebra tower.  The same inverse system is now constructed
+on the actual adic quotients `B/I^n` of a supplied coefficient algebra and
+ideal, with canonical adjacent quotient reductions; completeness,
+separatedness, and geometric identification remain unproved,
 formal-base-shift and block-formula deductions, numerical coefficient
 pushforward, strict-Novikov data, divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial
@@ -308,6 +311,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/CompatibleMonodromySystem.lean
     Quantum/ProLaurentGaugeConjugacy.lean
     Quantum/MonodromyBaseChange.lean
+    Quantum/HorizontalMonodromyBaseChange.lean
     Quantum/NumericalNovikov.lean
     Quantum/NumericalNovikovCompletion.lean
     Quantum/FormalBaseShift.lean

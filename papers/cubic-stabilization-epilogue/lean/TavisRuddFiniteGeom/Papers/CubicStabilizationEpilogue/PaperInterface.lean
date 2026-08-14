@@ -2310,6 +2310,36 @@ theorem horizontalMonodromy_characteristicPolynomialTower
   ⟨tower.characteristicPolynomialSystem_level,
     tower.characteristicPolynomialSystem.compatible⟩
 
+/-- An actual adic coefficient tower carries the horizontal-monodromy
+characteristic polynomials compatibly.  Let `B` be a commutative algebra over
+the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses
+the canonical quotient reduction from level `n+1` to level `n`, identifies
+every level polynomial with the coefficientwise image of the original
+horizontal characteristic polynomial, and proves adjacent compatibility.  The
+algebra, ideal, derivative, and commuting monodromy are supplied; no
+completeness, separatedness, formal differential module, inverse-limit
+differential module, or analytic monodromy construction is asserted. -/
+theorem horizontalMonodromy_adicCharacteristicPolynomialTower
+    {k V B : Type*} [Field k]
+    [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    let tower := Quantum.HorizontalMonodromyCoefficientTower.ofAdicIdeal
+      ideal derivative monodromy commutes
+    (∀ level,
+      tower.characteristicPolynomialSystem.characteristicPolynomial level =
+        (Quantum.horizontalEndomorphism derivative monodromy commutes).charpoly.map
+          ((Ideal.Quotient.mk (ideal ^ level)).comp (algebraMap k B))) ∧
+    (∀ level,
+      Polynomial.map ((Quantum.adicFiltration ideal).reduction level)
+          (tower.characteristicPolynomialSystem.characteristicPolynomial
+            (level + 1)) =
+        tower.characteristicPolynomialSystem.characteristicPolynomial level) :=
+  Quantum.HorizontalMonodromyCoefficientTower.ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
+    ideal derivative monodromy commutes
+
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.
 -/
