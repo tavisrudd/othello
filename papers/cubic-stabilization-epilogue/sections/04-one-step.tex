@@ -150,7 +150,7 @@ coefficient extension and is harmless by choice independence.  Adjoining a root 
 \(z\), by contrast, would replace the original loop and could erase the deck
 part of the operator.
 
-\begin{definition}[Pro-Laurent framed monodromy]
+\begin{definition}[Pro-Laurent gauge group]
 \label{def:pro-laurent-monodromy}
 Let \(B\) be a complete separated multiplicatively filtered \(k\)-algebra,
 and let \(V\) be a finite-dimensional \(k\)-vector space.  The
@@ -162,13 +162,9 @@ pro-Laurent gauge group is
 \]
 It is generally larger than
 \(\operatorname{GL}(V\otimes B((z)))\), because the lower Laurent bound may
-decrease with \(N\).  For a compatible differential-module system over the
-quotients \(B/F^NB\), its framed-monodromy characteristic polynomial is the
-compatible system \((\chi_N)_N\) of finite-level polynomials, provided
-reduction sends \(\chi_{N+1}\) to \(\chi_N\).  Since \(B\) is complete and
-separated and the matrix rank is finite, this system is equivalently one
-polynomial over \(B\).  A pro-Laurent gauge preserves it if every finite-level
-gauge uses only integral powers of \(z\).
+decrease with \(N\).  This definition packages only compatible invertible
+matrices; it does not posit Levelt--Turrittin theory or an independently
+defined monodromy operator over the nonfield quotients \(B/F^NB\).
 \end{definition}
 
 We first record two formal facts used in the comparison theorems.  They also
@@ -215,13 +211,18 @@ Assume also that the units
 \(e^{\langle a_2^\circ,d\rangle}\in B^\times\) are defined for numerical
 curve classes \(d\), form a multiplicative character, and hence define the
 displayed continuous coefficient automorphism.
-Its framed formal-monodromy characteristic polynomial equals that of the
-small connection after the divisor substitution, coefficientwise in \(B\),
+Then the positive-filtration bulk equations have unique normalized gauges
+\(G_N\) over every \(B/F^NB\), compatible under reduction.  Transporting the
+coefficient-base-changed small framed operator through \(G_N\), after the
+divisor substitution
 \[
- Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d.
+ Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d
  \tag{4.1}
  \label{eq:formal-base-shift-divisor}
 \]
+defines compatible characteristic polynomials \(\chi_N\).  They correspond
+to a unique comparison-transported polynomial \(\chi_B\in B[X]\), equal to
+the divisor-substituted small framed characteristic polynomial.
 \end{lemma}
 
 \begin{proof}
@@ -265,16 +266,23 @@ solutions compatible in \(N\).  Their inverse limit belongs to
  \mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T)).
  \tag{4.1b}
 \]
-At each finite quotient the gauge uses only integral powers of \(z\), hence
-is single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes
-the characteristic polynomial constant there.  Compatibility of the
-finite-level solutions identifies these polynomials under every reduction
-map, so the hypothesis in Definition~\ref{def:pro-laurent-monodromy} is
-satisfied.  Completeness and separatedness identify this compatible system
-with a polynomial over \(B\); its equality with the shifted small polynomial
-therefore survives every subsequent coefficient-field extension.  No
-Levelt--Turrittin decomposition over a larger analytic field, and no
-evaluation at a nonnilpotent analytic bulk point, is used.
+Write \(G_N\) for the resulting normalized gauge over \(B/F^NB\).  Only now
+define the finite-level framed operator \(M_N^{\rm bulk}\): on horizontal
+solutions it is the conjugate by \(G_N\) of the divisor-substituted,
+coefficient-base-changed small framed operator.  Put
+\(\chi_N(X)=\det(X-M_N^{\rm bulk})\).  This is a definition through the
+unique normalized comparison, not an invocation of monodromy over a nonfield
+coefficient quotient.  Since \(G_N\) uses only integral powers of \(z\), it
+is single-valued on the original disc, and
+Lemma~\ref{lem:pv-base-change} identifies \(\chi_N\) with the base-changed
+small polynomial.  Uniqueness gives
+\(G_{N+1}\bmod F^N=G_N\), so reduction carries the polynomial at level
+\(N+1\) to that at level \(N\).  Completeness and separatedness identify this
+compatible polynomial system with one polynomial over \(B\); its equality
+with the shifted small polynomial therefore survives every subsequent
+coefficient-field extension.  No Levelt--Turrittin decomposition over a
+nonfield quotient or larger analytic field, and no evaluation at a
+nonnilpotent analytic bulk point, is used.
 \end{proof}
 
 We now apply Iritani's quantum blowup theorem and the Iritani--Koto

@@ -103,12 +103,12 @@ exact bridge is formalized.
 - [x] Inspect the current recursion, uniqueness, and reduction statements.
 - [x] Verdict: **the recursion is present; the definition/proof order and the
   divisor-substitution reconciliation need repair**.
-- [ ] Define the finite-level characteristic polynomial by transporting the
+- [x] Define the finite-level characteristic polynomial by transporting the
   base-changed small framed polynomial through the unique normalized gauge.
-- [ ] State explicitly that no separate Levelt--Turrittin theory over the
+- [x] State explicitly that no separate Levelt--Turrittin theory over the
   Artinian quotients is being invoked.
-- [ ] Prove uniqueness of the normalized gauge before defining the invariant.
-- [ ] Prove adjacent reduction compatibility of the gauge and polynomial.
+- [x] Prove uniqueness of the normalized gauge before defining the invariant.
+- [x] Prove adjacent reduction compatibility of the gauge and polynomial.
 - [ ] Add the paragraph reconciling divisor substitution with positive-bulk
   gauge invariance: the former is a filtered coefficient automorphism and the
   latter supplies the normalized identification.
@@ -202,12 +202,12 @@ exact bridge is formalized.
 
 ### WP2 — normalized-gauge finite levels
 
-- [ ] Reorder the section so existence/uniqueness precedes finite-level
+- [x] Reorder the section so existence/uniqueness precedes finite-level
   invariant construction.
-- [ ] Define each finite-level polynomial by the normalized gauge comparison.
-- [ ] Prove representative/action and adjacent-reduction identities.
-- [ ] Ensure the pro-system is assembled from those proved identities.
-- [ ] Remove every sentence suggesting independent Artinian formal monodromy.
+- [x] Define each finite-level polynomial by the normalized gauge comparison.
+- [x] Prove representative/action and adjacent-reduction identities.
+- [x] Ensure the pro-system is assembled from those proved identities.
+- [x] Remove every sentence suggesting independent Artinian formal monodromy.
 - [ ] Check the Lean companion prose remains honest about its formal boundary.
 
 ### WP3 — adic continuity and frozen sources
@@ -330,6 +330,7 @@ become manuscript edits.
 | C912-M06 | resolved | The choice-independent formulation uses `K[V]`, the universal exponential with torsion preimage `Q`, and the intrinsic orbit relation `U^(e/d) = M_RS`; a focused adversarial review rejected three weaker drafts before accepting this form. | WP1; `C912-QF-001` and `C912-QF-002` closed |
 | C912-M07 | resolved | A universal exponential field built from `C[V]` does not contain the original coefficient field and cannot carry its LT matrices. | Replaced by `K[V]`; `C912-QF-001` |
 | C912-M08 | resolved | Factoring a ramified return as a scalar finite descent character times a fractional residue exponential fails in resonant multiplicity spaces. | Replaced by the intrinsic return-power argument; `C912-QF-002` |
+| C912-M09 | resolved | The formal-base-shift statement still named a pre-existing bulk monodromy polynomial after the proof had switched to a transported definition. | The theorem now constructs `G_N`, then `M_N^bulk`, `chi_N`, and `chi_B` in that order; `C912-WP2-001` closed |
 
 ## Close condition
 
