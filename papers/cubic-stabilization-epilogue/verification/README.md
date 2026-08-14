@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 167 reviewer-facing Lean terminals.  These counts summarize the
+There are 168 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 167 reviewer terminals.
+1 complete; 168 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -96,7 +96,13 @@ objects, hypotheses, conclusions, and cautions recorded in
   coefficient form, together with the standard rank-eight tensor-product
   symplectic model, its half-dimensional maximal-isotropy criterion, and the
   exact five-member diagonally stable maximal-isotropic packet under the
-  explicit two-heart equivalence.  A separate conditional bridge proves that
+  explicit two-heart equivalence.  The characteristic-three coefficient
+  model is now likewise explicit:
+  `H₃ = Aug(F₃⁶)/⟨1⟩`, its normalized symmetric form is minus the dot
+  product, the induced rank-eight tensor form is alternating and
+  nondegenerate, and its four diagonally stable halves are exactly the
+  vertical copy and three scalar graphs, all maximal isotropic.  A separate
+  conditional bridge proves that
   supplied fibre coordinates identifying the actual kernel image with one of
   these stable maximal-isotropic subspaces give a kernel-to-subspace
   equivalence and membership in the five-member packet.  Lean also proves

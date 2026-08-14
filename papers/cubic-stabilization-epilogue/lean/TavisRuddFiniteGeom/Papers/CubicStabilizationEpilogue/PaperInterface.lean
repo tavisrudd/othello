@@ -18,6 +18,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisDescent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointIntegralQuotient
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointThreePrimary
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -307,6 +308,44 @@ theorem relativeSixAxis_integralCoefficientQuotient_and_form :
       GraphLattices.sixPointIntegralQuotientPermutation_one,
       GraphLattices.sixPointIntegralQuotientPermutation_mul,
       GraphLattices.sixPointIntegralDescendedPairing_permutation⟩⟩
+
+/-- Exact three-primary coefficient packet for the six-label action.
+Normalizing the last coordinate identifies `Aug(F₃⁶)/⟨1⟩` with `F₃⁴`.
+The normalized symmetric form is minus the six-coordinate dot product and is
+nondegenerate.  Its tensor product with a two-dimensional symplectic form is
+an alternating nondegenerate form on two heart copies.  The four-dimensional
+subspaces stable under the displayed translation and inversion generators are
+exactly the vertical copy and the three scalar graphs; these four subspaces
+are maximal isotropic.  This terminal does not identify the coefficient model
+or its pairing with the manuscript's geometric three-primary discriminant
+kernel. -/
+theorem relativeSixAxis_threePrimary_stableMaximalIsotropicPacket :
+    (∀ left right : GraphLattices.SixPointThreeHeart,
+      GraphLattices.sixPointThreeHeartCoefficientForm left right =
+        -dotProduct (GraphLattices.sixPointThreeHeartRepresentative left)
+          (GraphLattices.sixPointThreeHeartRepresentative right)) ∧
+    GraphLattices.sixPointThreeHeartCoefficientForm.Nondegenerate ∧
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm.IsAlt ∧
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm.Nondegenerate ∧
+    GraphLattices.SixPointThreeHeartStableHalfPacket.ncard = 4 ∧
+    (∀ subspace : Submodule GraphLattices.F3
+        (GraphLattices.SixPointThreeHeart × GraphLattices.SixPointThreeHeart),
+      subspace ∈ GraphLattices.SixPointThreeHeartStableHalfPacket ↔
+        GraphLattices.SixPointThreeHeartPairGeneratorStable subspace ∧
+          Module.finrank GraphLattices.F3 subspace = 4) ∧
+    ∀ subspace : Submodule GraphLattices.F3
+        (GraphLattices.SixPointThreeHeart × GraphLattices.SixPointThreeHeart),
+      subspace ∈ GraphLattices.SixPointThreeHeartStableHalfPacket →
+        GraphLattices.IsMaximalIsotropic
+          GraphLattices.sixPointThreeHeartPairPolarizationBilinForm subspace := by
+  refine ⟨GraphLattices.sixPointThreeHeartCoefficientForm_eq_negative_dotProduct,
+    GraphLattices.sixPointThreeHeartCoefficientForm_nondegenerate,
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_isAlt,
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_nondegenerate,
+    GraphLattices.sixPointThreeHeartStableHalfPacket_ncard,
+    GraphLattices.sixPointThreeHeartStableHalfPacket_iff, ?_⟩
+  rintro subspace ⟨slope, rfl⟩
+  exact GraphLattices.sixPointThreeHeartStableHalf_maximalIsotropic slope
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each

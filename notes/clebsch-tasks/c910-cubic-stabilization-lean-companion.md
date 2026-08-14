@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 92 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 93 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 167 audited terminals.  The rejecting manuscript inventory covers all
+exports 168 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -163,12 +163,13 @@ two-dimensional factor, the induced rank-eight tensor-product form is also
 alternating and nondegenerate, and every isotropic four-dimensional subspace
 is maximal.  The explicit two-heart equivalence preserves this form and
 identifies the five projective-line packet members exactly with the diagonally
-stable maximal-isotropic subspaces of the rank-eight discriminant.  The
-manuscript now gives the parallel three-primary calculation explicitly:
+stable maximal-isotropic subspaces of the rank-eight discriminant.  Lean now
+also gives the parallel three-primary coefficient calculation explicitly:
 `H₃ = Aug(F₃⁶)/⟨1⟩`, the normalized coefficient form is minus the dot
 product, and the four stable maximal-isotropic halves are the three scalar
 graphs and the vertical line in `P¹(F₃)` (made affine by changing the marked
-symplectic ruling when necessary).  From a
+symplectic ruling when necessary).  Identifying this model with the geometric
+three-primary discriminant and kernel remains open.  From a
 supplied fibrewise coordinate realization whose image is exactly the named
 geometric kernel, Lean constructs a kernel-to-subspace equivalence and proves
 that every fibre belongs to the five-member packet.  The coordinate
@@ -386,28 +387,29 @@ dimensions, and Cai's actual integral-`z` block diagonalization.
 Work in this order unless a later literature or library dependency changes the
 cost materially:
 
-1. **Three-primary packet.**  Formalize `H₃`, its normalized symmetric
-   minus-dot-product form, the tensor symplectic discriminant
-   `H₃ ⊗ E[3]`, the four stable halves `P¹(F₃)`, and maximal isotropy.
-   This is the highest-EV self-contained gap created by the strengthened
-   manuscript proof.
-2. **Explicit six-axis local-chart bridge.**  Connect the concrete `6I-J`
+Completed in the current tranche: the **three-primary coefficient packet**,
+including `H₃`, its normalized symmetric minus-dot-product form, the explicit
+tensor symplectic model, the exact four-half classification `P¹(F₃)`, and
+maximal isotropy.  Its geometric discriminant identification remains part of
+priority 2 below.
+
+1. **Explicit six-axis local-chart bridge.**  Connect the concrete `6I-J`
    lattice and both primary packets to the abstract graph-coordinate and
    self-adjoint lifting theorems, reducing the supplied local-chart premises.
-3. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
+2. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
    schemes, quotient and inclusion maps, the relative isogeny, polarization
    pullback, discriminant kernels, and continuous packet classifier.
-4. **Geometric cohomology realization.**  Identify the formal graph divisor
+3. **Geometric cohomology realization.**  Identify the formal graph divisor
    lattice with the intermediate-Jacobian divisor lattice and transport the
    all-degree saturation theorem to the principal minimal class.
-5. **Quantum instantiation.**  Connect the formal completed-series,
+4. **Quantum instantiation.**  Connect the formal completed-series,
    finite-quotient gauge, numerical base-change, and divisor-tagging machinery
    to genuine Gromov--Witten quantum connections and the Iritani and
    Iritani--Koto comparison maps.
-6. **Cubic spectral endpoint.**  Formalize Cai's cubic block diagonalization
+5. **Cubic spectral endpoint.**  Formalize Cai's cubic block diagonalization
    and identify its characteristic polynomial with the framed-monodromy
    polynomial used by the multiplicity terminal.
-7. **External theorem closure.**  Only after the paper-specific bridges above,
+6. **External theorem closure.**  Only after the paper-specific bridges above,
    formalize or import the large cited inputs needed to upgrade the nine
    conditional deductions: Voisin's criterion, weak factorization, the
    Iritani comparison theorems, the low-dimensional classification inputs,
@@ -656,9 +658,11 @@ are current, and the committed paper export verifies byte-for-byte in
   `R_j/J_j^N -> S_j/(J_j S_j)^N`, then taking the inverse limit in Iritani's
   completed comparison ring; no unproved embedding of the abstract
   completion into a Laurent field is used.  `RT3-002` is closed by recording
-  explicitly in the claim inventory that the manuscript's three-primary
-  discriminant, normalized form, and geometric maximal-isotropic kernel are
-  not formalized in Lean.  `RT3-003` is closed by lifting the changed
+  explicitly in the claim inventory that the manuscript's geometric
+  three-primary discriminant and maximal-isotropic kernel were not formalized.
+  The coefficient heart, normalized form, tensor pairing, and four formal
+  maximal-isotropic halves are now formalized; their geometric identification
+  remains absent.  `RT3-003` is closed by lifting the changed
   three-primary ruling through `Sp_2(Z_3) -> Sp_2(F_3)` and retaining the
   depth-one scale `P=3I`.  `RT3-004` is closed by the Hilbert-class-polynomial
   function-field argument and by placing it after identification of the norm

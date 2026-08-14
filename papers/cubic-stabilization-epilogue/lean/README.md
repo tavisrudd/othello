@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 167 reviewer terminals.
+1 complete; 168 reviewer terminals.
 
-The 167 reviewer-facing terminals currently verify:
+The 168 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -435,8 +435,14 @@ The 167 reviewer-facing terminals currently verify:
   the induced rank-eight tensor-product form is also alternating and
   nondegenerate, every isotropic four-dimensional subspace is maximal, and
   the five projective-line packet members are exactly its diagonally stable
-  maximal-isotropic subspaces under the explicit two-heart equivalence; from
-  a supplied fibrewise coordinate realization whose image is exactly the
+  maximal-isotropic subspaces under the explicit two-heart equivalence.  The
+  parallel characteristic-three heart is also explicit: Lean identifies
+  `H₃` with `Aug(F₃⁶)/⟨1⟩`, proves that its normalized symmetric form is
+  minus the six-coordinate dot product and is nondegenerate, and proves that
+  the induced rank-eight tensor form is alternating and nondegenerate; its
+  four diagonally stable halves are exactly the vertical copy and the three
+  scalar graphs, and all four are maximal isotropic.  From a supplied
+  fibrewise coordinate realization whose image is exactly the
   geometric kernel, Lean constructs a kernel-to-subspace equivalence and
   proves membership in that five-member packet; independently, every concrete
   ten-element dihedral axis stabilizer has a one-dimensional fixed line in the

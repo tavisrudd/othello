@@ -293,8 +293,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-92 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 167 reviewer terminals, audit
+93 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 168 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -302,7 +302,9 @@ graph lattices, invertible extension-ring basis transport between distinct
 base and split axes, derivation of weighted membership from base symmetry and
 formal graph-descent blocks, faithful-flat ordinary-product descent, the six-axis Smith and
 local-block arithmetic, the characteristic-two slope model through scalar
-extension and repeated-root diagonalization, and the exact implication from a
+extension and repeated-root diagonalization, the characteristic-three
+coefficient heart with its normalized minus-dot form, exact four-half stable
+classification, and maximal-isotropy theorem, and the exact implication from a
 `{1,-1}` monodromy spectrum to primitive-sixth vanishing.  The exact fibrewise
 deduction from supplied primitive-minimal-class algebraicity and Voisin's
 supplied criterion to universal `CH₀`-triviality is now conditional Lean.
