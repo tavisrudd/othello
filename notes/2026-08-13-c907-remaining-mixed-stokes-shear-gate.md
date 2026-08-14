@@ -214,6 +214,15 @@ where the first component carries the cubic primitive-sixth atom and
 Witten effect, not a pure exceptional-class effect.  None of the currently
 computed regressions exhibits a nonzero coefficient of this kind.
 
+There is now an exact spectral reason that the carrier is compulsory.  The
+divisor equation multiplies the `gamma` coefficient of `c_1(Y) star` by
+`c_1(Y).gamma`.  Every pure class `n delta` in `ker(c_1)` therefore contributes
+zero to the irregular leading operator of the small `z`-connection.  It can
+create neither a new exponential factor nor a turning ray by itself.  For
+`beta_carrier+tau_0+n delta`, however, the divisor factor is the fixed nonzero
+number supplied by the carrier/offset.  This is
+`2026-08-13-c907-pure-neutral-spectral-invisibility.md`.
+
 ### The first unresolved coupling is a one-legged neutral tail
 
 The genus-zero virtual dimension gives a further restriction.  On a
@@ -697,6 +706,15 @@ AKMW chain because all other variables remain Artin-formal.
 
 These negatives are now useful: they certify that any proposed proof which
 does not address (7)--(9) is solving the wrong problem.
+
+There is one singular way to address all three at once.  By
+`2026-08-13-c907-rank-zero-target-stokes-lemma.md`, it is enough to factor the
+relative transition into elementary shears whose target vectors lie in the
+boundary-supported Gamma span.  The off-boundary point row annihilates every
+such target, hence every factor and their product.  This asks only for the
+**image** of each Stokes jump, not its coefficient or source.  A bare
+common-open restriction slogan is not used: until a localizing analytic
+realization exists, the precise target is the supported sectorial span.
 
 ## EJ / TT / AA
 

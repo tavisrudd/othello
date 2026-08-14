@@ -206,6 +206,23 @@ calibration shadow.  It becomes dangerous only if a relative/descendant
 gluing state can enter the small ambient connection and couple to the
 off-boundary cubic carrier with a nonzero ambient row.
 
+The shadow campaign has a single-lemma compression.  Let `T` be the relative
+Stokes transition between two incident wall receivers.  If every elementary
+factor `1+v tensor lambda` of `T` has target `v` in the boundary-supported
+Gamma span, then the off-boundary point/rank row annihilates `v` and hence
+fixes every factor.  Therefore `rT=r`, independently of every multiplier.
+This **rank-zero-target Stokes lemma** is strictly weaker than full
+Gamma/window compatibility and is now the preferred Gold gate; see
+`../2026-08-13-c907-rank-zero-target-stokes-lemma.md`.  The cone, incidence,
+moment, and turning tests become bounded ways to prove it locally.
+
+One major case is structurally closed.  The divisor equation makes the
+`gamma` coefficient of `c1 star` proportional to `c1.gamma`; hence a pure
+neutral tower `n delta` contributes nothing to the irregular leading
+operator and cannot create a new exponential or turning ray.  Only an affine
+carrier tower `beta_0+n delta` with `c1.beta_0!=0` can remain dangerous.  See
+`../2026-08-13-c907-pure-neutral-spectral-invisibility.md`.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map

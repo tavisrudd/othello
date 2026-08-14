@@ -23,6 +23,15 @@ passes every shadow below.
 The attack is conjunctive: killing any row kills the dangerous object.  A
 direct construction is unnecessary unless a candidate survives all seven.
 
+There is also a singular replacement for the whole sieve.  If the adjacent
+receiver transition factors into elementary Stokes shears whose **target
+vectors** are all boundary-supported Gamma classes, then the off-boundary
+point/rank row annihilates every target and is fixed by their product.  This
+is the rank-zero-target Stokes lemma of
+`2026-08-13-c907-rank-zero-target-stokes-lemma.md`.  It is weaker than a full
+Stokes/window comparison and, if proved, makes the seven tests fallback
+proof tools rather than separate obligations.
+
 ## 2. What the object would have to be
 
 The smallest possible geometry is not a center object by itself.  It is a
@@ -89,6 +98,14 @@ enters the small ambient quantum connection despite that dimension deficit.
 
 No known candidate passes the primary-moment, turning, and Euler/divisor-tag
 shadows simultaneously.
+
+There is an exact spectral impossibility behind this separation.  By the
+genus-zero divisor equation, a class `gamma` contributes to `c1 star` with a
+factor `c1.gamma`.  Hence every pure neutral class `n delta`, with
+`c1.delta=0`, contributes zero to the irregular leading operator of the
+small `z`-connection.  It cannot create an exponential or turning ray.  Only
+the carrier-dressed affine tower `beta_0+n delta` survives this lemma; see
+`2026-08-13-c907-pure-neutral-spectral-invisibility.md`.
 
 ## 5. Bounded attack
 
