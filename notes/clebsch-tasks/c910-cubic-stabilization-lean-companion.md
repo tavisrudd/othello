@@ -80,7 +80,7 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 78 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 79 Lean
 sources build through the guarded queue.  The reviewer interface currently
 exports 144 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
@@ -228,12 +228,14 @@ quotient small matrix.  Its geometric monodromy origin remains unproved.
 
 The concrete six-point characteristic-two augmentation quotient now has
 explicit four coordinates modulo its constant line; translation and inversion
-on the six-point projective-line labelling preserve a displayed
+identify the labels with the actual `P¹(F5)`, where they are induced by the
+linear maps `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`, and preserve a displayed
 one-factorization whose faithful factor action exhausts the alternating group
 `A5`; the induced heart is simple and its common commutant is exactly the
 quadratic four-element algebra.  All six Sylow-five subgroups of this concrete
 `A5` are now constructed, and their conjugation action is exactly the original
-six-point action.  Each ten-element normalizer is explicitly equivalent to
+six-point action.  The resulting Sylow-five packet is explicitly equivalent to
+`P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to
 `D5`; identifying this concrete packet with the manuscript's geometric `D5`
 subgroups and axes remains open.  The explicit
 characteristic-two companion model now has a constructed

@@ -96,12 +96,16 @@ The 144 reviewer-facing terminals currently verify:
   isotropic half-dimension calculation for self-adjoint graph slopes;
 - explicit coordinates for the six-point characteristic-two augmentation
   quotient by its constant line, the translation and inversion matrices in
-  those coordinates, an invariant one-factorization identifying their
+  those coordinates, an explicit identification of the labels with the actual
+  projective line `P¹(F5)` under which the permutations come from
+  `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`, and an invariant
+  one-factorization identifying their
   generated action faithfully with the alternating group `A5`, simplicity of
   the induced heart, and its exact four-element quadratic matrix commutant;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
+  with an explicit equivalence from `P¹(F5)` to the Sylow-five packet,
   without identifying this packet with the manuscript's geometric `D5`
   subgroups and axes;
 - the

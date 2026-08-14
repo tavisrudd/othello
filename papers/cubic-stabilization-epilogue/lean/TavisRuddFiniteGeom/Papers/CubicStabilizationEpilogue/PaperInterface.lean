@@ -10,7 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointSylowFiveAction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveLine
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1721,7 +1721,9 @@ theorem principalGluing_projectiveLine_packets :
 /-- Explicit six-point characteristic-two coefficient-heart calculation.
 Lean gives canonical four coordinates on the augmentation hyperplane modulo
 the constant line, derives the matrices induced by translation and inversion
-on the six-point projective-line labelling over `F5`, and proves that their
+on the six-point labelling, identifies that labelling with the actual
+projective line `P¹(F5)`, and proves that the two permutations are induced by
+the linear maps `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It proves that their
 common matrix commutant is exactly the four-element quadratic algebra
 `{0,1,W,W+1}` with `W²+W+1=0`.  Every subspace stable under both generators
 is zero or the whole heart.  The generators preserve an explicit
@@ -1802,6 +1804,19 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
         Subgroup.normalizer
           (GraphLattices.sixPointFiveSubgroup label :
             Set (alternatingGroup (Fin 5))))) ∧
+    (∀ label : Fin 6,
+      GraphLattices.sixPointEquivProjectiveLineF5
+          (GraphLattices.sixPointTranslationPermutation label) =
+        GraphLattices.f5ProjectiveTranslation
+          (GraphLattices.sixPointEquivProjectiveLineF5 label) ∧
+      GraphLattices.sixPointEquivProjectiveLineF5
+          (GraphLattices.sixPointInversionPermutation label) =
+        GraphLattices.f5ProjectiveInversion
+          (GraphLattices.sixPointEquivProjectiveLineF5 label)) ∧
+    Nonempty
+      (Projectivization GraphLattices.F5
+          (GraphLattices.F5 × GraphLattices.F5) ≃
+        Sylow 5 (alternatingGroup (Fin 5))) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1831,6 +1846,9 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       GraphLattices.sixPointFiveSylow_stabilizer_eq_normalizer label⟩,
     fun label => ⟨GraphLattices.sixPointFiveSubgroup_normalizer_card label,
       ⟨GraphLattices.sixPointFiveNormalizerMulEquivDihedral label⟩⟩,
+    fun label => ⟨GraphLattices.sixPointEquivProjectiveLineF5_translation label,
+      GraphLattices.sixPointEquivProjectiveLineF5_inversion label⟩,
+    ⟨GraphLattices.f5ProjectiveLineEquivFiveSylow⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 

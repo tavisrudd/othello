@@ -231,7 +231,7 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-78 sources build through the guarded queue, and the rejecting audit gives an
+79 sources build through the guarded queue, and the rejecting audit gives an
 exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
@@ -400,12 +400,14 @@ separatedness now yields bijectivity of the canonical ring homomorphism to
 compatible quotient families in that same packet.
 The six-point characteristic-two augmentation quotient is now represented in
 explicit four coordinates modulo its constant line.  Two displayed
-projective-line permutations preserve a one-factorization and induce a
+permutations identify the labels with the actual `P¹(F5)`, where they come
+from `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`; they preserve a one-factorization and induce a
 faithful factor action exhausting the alternating group `A5`; their heart
 action is simple and its common commutant is exactly the four-element
 quadratic algebra.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
-action.  Each ten-element normalizer is explicitly equivalent to `D5`;
+action, and the resulting Sylow-five packet is explicitly equivalent to
+`P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;
 identification with the manuscript's geometric `D5` subgroups and axes remains
 open.  The explicit
 two-primary companion model now has a concrete quadratic
