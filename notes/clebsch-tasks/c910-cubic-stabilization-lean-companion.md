@@ -114,7 +114,8 @@ identifies the scalar coordinates with `Aug(F₂⁶)/⟨1⟩`; their normalized 
 product is bilinear, alternating, nondegenerate, and preserved by the full
 generated six-point action.  After choosing a symplectic basis of the
 two-dimensional factor, the induced rank-eight tensor-product form is also
-alternating and nondegenerate.  The row remains a
+alternating and nondegenerate, and every isotropic four-dimensional subspace
+is maximal.  The row remains a
 fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,

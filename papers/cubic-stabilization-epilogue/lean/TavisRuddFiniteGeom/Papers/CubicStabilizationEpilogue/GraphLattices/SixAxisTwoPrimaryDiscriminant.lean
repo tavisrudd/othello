@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
 import Mathlib.LinearAlgebra.BilinearForm.Properties
+import Mathlib.LinearAlgebra.BilinearForm.Orthogonal
 
 /-!
 # The two-primary coefficient discriminant of the six-axis form
@@ -19,7 +20,8 @@ part of the relative identification `D₂ ≃ H₂ ⊗ E[2]`; the normalized
 heart dot product is also proved bilinear, alternating, nondegenerate, and
 invariant under every word in the generated six-point action.  After choosing
 a symplectic basis of a two-dimensional tensor factor, the resulting
-rank-eight tensor-product form is likewise alternating and nondegenerate.  It does not
+rank-eight tensor-product form is likewise alternating and nondegenerate;
+every isotropic four-dimensional subspace is therefore maximal isotropic.  It does not
 construct an elliptic scheme, its two-torsion local system, the Weil pairing,
 or the relative isogeny kernel.
 -/
@@ -636,6 +638,57 @@ theorem sixAxisStandardDiscriminantBilinForm_nondegenerate :
     intro test
     rw [sixAxisStandardDiscriminantForm_comm]
     exact annihilates test
+
+/-- Maximal isotropy among linear subspaces for a bilinear form. -/
+def IsMaximalIsotropic
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+    (form : LinearMap.BilinForm K V) (subspace : Submodule K V) : Prop :=
+  subspace ≤ form.orthogonal subspace ∧
+    ∀ larger : Submodule K V,
+      subspace ≤ larger →
+      larger ≤ form.orthogonal larger →
+      larger = subspace
+
+/-- In a finite-dimensional nondegenerate bilinear space, an isotropic
+subspace of half the ambient dimension is maximal isotropic. -/
+theorem isMaximalIsotropic_of_isotropic_of_twice_finrank_eq
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (form : LinearMap.BilinForm K V) (nondegenerate : form.Nondegenerate)
+    (subspace : Submodule K V)
+    (isotropic : subspace ≤ form.orthogonal subspace)
+    (halfDimension :
+      2 * Module.finrank K subspace = Module.finrank K V) :
+    IsMaximalIsotropic form subspace := by
+  refine ⟨isotropic, ?_⟩
+  intro larger contains largerIsotropic
+  have rankMonotone :
+      Module.finrank K subspace ≤ Module.finrank K larger :=
+    Submodule.finrank_mono contains
+  have rankOrthogonal :
+      Module.finrank K larger ≤
+        Module.finrank K (form.orthogonal larger) :=
+    Submodule.finrank_mono largerIsotropic
+  rw [form.finrank_orthogonal nondegenerate larger] at rankOrthogonal
+  have rankUpper :
+      Module.finrank K larger ≤ Module.finrank K subspace := by
+    omega
+  exact (Submodule.eq_of_le_of_finrank_le contains rankUpper).symm
+
+/-- In the explicit rank-eight six-axis discriminant, every isotropic
+four-dimensional subspace is maximal isotropic. -/
+theorem sixAxisStandardDiscriminant_maximalIsotropic_of_finrank_four
+    (subspace : Submodule F2 SixAxisStandardDiscriminantCoordinates)
+    (isotropic : subspace ≤
+      sixAxisStandardDiscriminantBilinForm.orthogonal subspace)
+    (finrankFour : Module.finrank F2 subspace = 4) :
+    IsMaximalIsotropic sixAxisStandardDiscriminantBilinForm subspace := by
+  apply isMaximalIsotropic_of_isotropic_of_twice_finrank_eq
+    sixAxisStandardDiscriminantBilinForm
+    sixAxisStandardDiscriminantBilinForm_nondegenerate subspace isotropic
+  rw [finrankFour]
+  rw [Module.finrank_pi_fintype]
+  simp
 
 /-- The exact bilinear, alternating, and nondegenerate properties of the
 six-point heart coefficient form. -/

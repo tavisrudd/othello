@@ -256,7 +256,8 @@ coordinates agree with `Aug(F₂⁶)/⟨1⟩`, with a proved bilinear,
 alternating, nondegenerate coefficient form preserved by the full generated
 six-point action.  The corresponding rank-eight tensor-product form is
 alternating and nondegenerate after choosing a symplectic basis of the
-two-dimensional factor.
+two-dimensional factor; every isotropic four-dimensional subspace is then
+maximal isotropic.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then

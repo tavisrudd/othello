@@ -85,7 +85,7 @@ objects, hypotheses, conclusions, and cautions recorded in
   the coefficient-module identity behind `D₂ ≃ H₂ ⊗ E[2]`, including the
   order `2⁸` calculation and the invariant nondegenerate alternating
   coefficient form, together with the standard rank-eight tensor-product
-  symplectic model,
+  symplectic model and its half-dimensional maximal-isotropy criterion,
   but not the elliptic scheme, torsion local system,
   symplectic pairing, relative isogeny, or maximal-isotropic kernel.
 - Formalize the remaining quantum inputs: the separation family, construct the

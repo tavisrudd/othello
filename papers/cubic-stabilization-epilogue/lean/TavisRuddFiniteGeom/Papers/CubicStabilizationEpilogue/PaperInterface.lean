@@ -128,6 +128,8 @@ The normalized heart dot product is proved bilinear, alternating, and
 nondegenerate, and every word in the generated six-point action preserves it.
 After choosing a symplectic basis of a two-dimensional tensor factor, the
 induced rank-eight tensor-product form is also alternating and nondegenerate.
+Every isotropic four-dimensional subspace of this model is proved maximal
+isotropic.
 The named proposition fields do not define
 scheme-theoretic semantics, and Lean constructs none of the relative
 geometry. -/

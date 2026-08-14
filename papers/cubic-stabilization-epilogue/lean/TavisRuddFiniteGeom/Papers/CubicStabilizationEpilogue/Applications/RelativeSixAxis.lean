@@ -157,6 +157,17 @@ structure RelativeSixAxisConclusion
   twoPrimaryStandardTensorForm :
     GraphLattices.sixAxisStandardDiscriminantBilinForm.IsAlt ∧
       GraphLattices.sixAxisStandardDiscriminantBilinForm.Nondegenerate
+  /-- Every isotropic four-dimensional subspace of the explicit rank-eight
+  discriminant is maximal isotropic. -/
+  twoPrimaryMaximalIsotropicCriterion :
+    ∀ subspace : Submodule GraphLattices.F2
+        GraphLattices.SixAxisStandardDiscriminantCoordinates,
+      subspace ≤
+          GraphLattices.sixAxisStandardDiscriminantBilinForm.orthogonal
+            subspace →
+      Module.finrank GraphLattices.F2 subspace = 4 →
+      GraphLattices.IsMaximalIsotropic
+        GraphLattices.sixAxisStandardDiscriminantBilinForm subspace
 
 /-- Package the supplied opaque relative-six-axis fields with the independently
 proved integral Smith witness and two-primary coefficient calculation. -/
@@ -178,7 +189,8 @@ theorem relativeSixAxis_of_geometricInputs
       GraphLattices.sixPointHeartCoefficientBilinForm_nondegenerate⟩,
     GraphLattices.sixPointHeartWordAction_preserves_coefficientForm,
     ⟨GraphLattices.sixAxisStandardDiscriminantBilinForm_isAlt,
-      GraphLattices.sixAxisStandardDiscriminantBilinForm_nondegenerate⟩⟩
+      GraphLattices.sixAxisStandardDiscriminantBilinForm_nondegenerate⟩,
+    GraphLattices.sixAxisStandardDiscriminant_maximalIsotropic_of_finrank_four⟩
 
 end Applications
 

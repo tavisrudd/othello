@@ -362,7 +362,7 @@ The 144 reviewer-facing terminals currently verify:
   alternating, nondegenerate, and preserved by the full generated six-point
   action; after choosing a symplectic basis of the two-dimensional factor,
   the induced rank-eight tensor-product form is also alternating and
-  nondegenerate;
+  nondegenerate, and every isotropic four-dimensional subspace is maximal;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.
