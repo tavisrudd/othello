@@ -248,9 +248,9 @@ main = "discrepancy_one_flips.tex"
 lane = "clebsch"
 
 [[paper]]
-id = "gamma_point_row"
-dir = "papers/gamma-point-row"
-main = "gamma_point_row.tex"
+id = "cubic_stabilization_irrationality"
+dir = "papers/cubic-stabilization-irrationality"
+main = "cubic_stabilization_irrationality.tex"
 lane = "clebsch"
 adopted_labels = [
   "thm:simple-wall-point-column",
