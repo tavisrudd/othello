@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 148 reviewer terminals.
+1 complete; 149 reviewer terminals.
 
-The 148 reviewer-facing terminals currently verify:
+The 149 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -300,10 +300,13 @@ The 148 reviewer-facing terminals currently verify:
   monodromy endomorphism, Lean also constructs the canonical equivalence from
   the scalar-extended horizontal kernel to the kernel of the extended
   derivative, proves that it intertwines and conjugates the restricted
-  monodromies, and maps their characteristic polynomial coefficientwise.  This
-  does not construct the formal differential module, Levelt--Turrittin
-  solution algebra, fundamental solution, adic inverse limit, or analytic
-  framed-monodromy operator;
+  monodromies, and maps their characteristic polynomial coefficientwise.  A
+  supplied tower of coefficient algebras and adjacent algebra reductions gives
+  an explicit compatible inverse system of these horizontal characteristic
+  polynomials.  This does not construct the formal differential module,
+  Levelt--Turrittin solution algebra, fundamental solution, manuscript adic
+  tower, inverse-limit differential module, or analytic framed-monodromy
+  operator;
 - derivation of a compatible characteristic-polynomial inverse system from
   entrywise compatible finite-level square matrices; the differential modules
   and analytic monodromy operators producing those matrices are not constructed;

@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 83 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 148 audited terminals.  The rejecting manuscript inventory covers all
+exports 149 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -102,7 +102,9 @@ flat linear-algebra theorem identifying differential constants after
 coefficient extension, together with the actual tensor-extended derivation,
 its Leibniz and coefficient-constancy laws, and its exact constant subalgebra,
 and the canonical horizontal-kernel base-change equivalence with intertwined
-and conjugate restricted monodromy and coefficientwise characteristic polynomial,
+and conjugate restricted monodromy and coefficientwise characteristic
+polynomial, including its explicit compatible inverse system over every
+supplied coefficient-algebra tower,
 formal-base-shift and block-formula deductions, numerical coefficient
 pushforward, strict-Novikov data, divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial

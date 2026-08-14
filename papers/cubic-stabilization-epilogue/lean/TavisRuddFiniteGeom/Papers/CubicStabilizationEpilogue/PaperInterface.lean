@@ -2286,6 +2286,30 @@ theorem horizontalMonodromy_flatCoefficientBaseChange
     Quantum.horizontalEndomorphism_charpoly_baseChange
       derivative monodromy commutes⟩
 
+/-- Compatible coefficient-algebra towers carry the horizontal-monodromy
+characteristic polynomials as an explicit inverse system.  Every level is the
+coefficientwise image of the original horizontal characteristic polynomial,
+and every adjacent algebra reduction maps the higher polynomial to the lower
+one.  The coefficient algebras, reductions, derivative, and commuting
+monodromy are supplied; no adic realization, inverse-limit differential
+module, or analytic monodromy construction is asserted. -/
+theorem horizontalMonodromy_characteristicPolynomialTower
+    {k V : Type*} [Field k]
+    [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    (tower : Quantum.HorizontalMonodromyCoefficientTower k V) :
+    (∀ level,
+      tower.characteristicPolynomialSystem.characteristicPolynomial level =
+        (Quantum.horizontalEndomorphism tower.derivative tower.monodromy
+          tower.commutes).charpoly.map
+            (algebraMap k (tower.Coefficient level))) ∧
+    (∀ level,
+      Polynomial.map (tower.reduction level).toRingHom
+          (tower.characteristicPolynomialSystem.characteristicPolynomial
+            (level + 1)) =
+        tower.characteristicPolynomialSystem.characteristicPolynomial level) :=
+  ⟨tower.characteristicPolynomialSystem_level,
+    tower.characteristicPolynomialSystem.compatible⟩
+
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.
 -/

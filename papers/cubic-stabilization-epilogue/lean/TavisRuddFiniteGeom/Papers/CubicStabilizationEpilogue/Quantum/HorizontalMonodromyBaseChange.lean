@@ -1,5 +1,6 @@
 import Mathlib.LinearAlgebra.Charpoly.BaseChange
 import Mathlib.RingTheory.Flat.Equalizer
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
 
 /-!
 # Horizontal monodromy under coefficient extension
@@ -185,6 +186,58 @@ theorem horizontalEndomorphism_charpoly_baseChange
       (horizontalEndomorphism derivative monodromy commutes).charpoly.map
         (algebraMap k B) :=
   LinearMap.charpoly_baseChange _ B
+
+/-- A tower of coefficient algebras for one finite-dimensional commuting
+derivative--monodromy pair.  The adjacent reductions preserve the ground
+field because they are algebra homomorphisms. -/
+structure HorizontalMonodromyCoefficientTower
+    (k V : Type*) [Field k] [AddCommGroup V] [Module k V] where
+  Coefficient : ℕ → Type*
+  coefficientCommRing : ∀ level, CommRing (Coefficient level)
+  coefficientAlgebra : ∀ level, Algebra k (Coefficient level)
+  reduction : ∀ level, Coefficient (level + 1) →ₐ[k] Coefficient level
+  derivative : V →ₗ[k] V
+  monodromy : V →ₗ[k] V
+  commutes : derivative.comp monodromy = monodromy.comp derivative
+
+attribute [instance]
+  HorizontalMonodromyCoefficientTower.coefficientCommRing
+  HorizontalMonodromyCoefficientTower.coefficientAlgebra
+
+namespace HorizontalMonodromyCoefficientTower
+
+variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V]
+  [FiniteDimensional k V]
+
+/-- The horizontal monodromy characteristic polynomials at all coefficient
+levels form an explicit compatible polynomial system. -/
+noncomputable def characteristicPolynomialSystem
+    (tower : HorizontalMonodromyCoefficientTower k V) :
+    CompatibleCharacteristicPolynomialSystem where
+  Coefficient := tower.Coefficient
+  coefficientRing := tower.coefficientCommRing
+  reduction level := (tower.reduction level).toRingHom
+  characteristicPolynomial level :=
+    ((horizontalEndomorphism tower.derivative tower.monodromy tower.commutes).baseChange
+      (tower.Coefficient level)).charpoly
+  compatible level := by
+    rw [horizontalEndomorphism_charpoly_baseChange,
+      horizontalEndomorphism_charpoly_baseChange, Polynomial.map_map]
+    congr 1
+    ext scalar
+    exact (tower.reduction level).commutes scalar
+
+/-- At every level, the compatible polynomial system is the coefficientwise
+image of the original horizontal-monodromy characteristic polynomial. -/
+theorem characteristicPolynomialSystem_level
+    (tower : HorizontalMonodromyCoefficientTower k V) (level : ℕ) :
+    tower.characteristicPolynomialSystem.characteristicPolynomial level =
+      (horizontalEndomorphism tower.derivative tower.monodromy tower.commutes).charpoly.map
+        (algebraMap k (tower.Coefficient level)) :=
+  horizontalEndomorphism_charpoly_baseChange
+    tower.derivative tower.monodromy tower.commutes
+
+end HorizontalMonodromyCoefficientTower
 
 end Quantum
 
