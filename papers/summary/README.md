@@ -6,16 +6,25 @@ They ask two related questions: how much structure can be recovered after most
 of the original information has been discarded, and which obstructions persist
 under operations, such as stabilization, that might be expected to weaken them?
 
-The broadest geometric theorem is immediate to state:
+The broadest geometric theorem is conditional on one explicitly isolated
+analytic-continuation hypothesis:
 
-> **For every smooth complex cubic threefold `X`, the fourfold `X × P¹` is
-> irrational.**
+> **Assuming complete-neutral continuation, every projective stabilization
+> `X × P^m` of every smooth complex cubic threefold `X` is irrational.**
 
-*Irrationality after one stabilization* also constructs an explicit
-non-isotrivial family whose cubic-threefold fibres are universally
-`CH₀`-trivial. Failure of universal `CH₀`-triviality is a standard obstruction
-to stable rationality; this family shows that the obstruction can vanish while
-irrationality survives one stabilization.
+*Conditional Irrationality of All Projective Stabilizations of Cubic
+Threefolds* obtains this dimension-independent conclusion from point-class
+rank under quantum wall crossing. Its local transport, endpoint calculation,
+support collapse, and coefficientwise Gamma reduction are proved; continuation
+of the complete neutral graph sum is the one explicit hypothesis.
+
+The strongest unconditional statement is the first stabilization:
+*Irrationality after one stabilization* proves that
+`X × P¹` is irrational for every smooth complex cubic threefold `X`. It also
+constructs an explicit non-isotrivial family whose cubic-threefold fibres are
+universally `CH₀`-trivial. Failure of universal `CH₀`-triviality is a standard
+obstruction to stable rationality; this family shows that the obstruction can
+vanish while irrationality survives one stabilization.
 
 Elsewhere in the collection, the retained information may consist of the
 errors farthest from a code, minimum-weight words, local symmetries of an
@@ -38,8 +47,10 @@ Golden interferometer paper are related unnumbered companions.
 *Irrationality after one stabilization* uses the six-axis structure of the
 nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for its
 explicit family; its theorem for all smooth cubic threefolds is independent of
-that special construction. Every
-paper is intended to stand on its own mathematically.
+that special construction. *Conditional Irrationality of All Projective
+Stabilizations of Cubic Threefolds* replaces the dimension-four center bound
+by a global point-row comparison, conditional on complete-neutral
+continuation. Every paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
@@ -106,19 +117,9 @@ complex as separate victories.
 
 ### Algebraic geometry and rationality
 
-- **Every smooth cubic threefold remains irrational after one stabilization.**
-  For every smooth complex cubic threefold `X`, the fourfold `X × P¹` is
-  irrational. On an explicit non-isotrivial `A₅`-invariant family, the cubic
-  threefolds are nevertheless universally `CH₀`-trivial, so the usual
-  decomposition-of-the-diagonal detector and the quantum obstruction separate
-  on the same stabilized varieties. The framed-monodromy multiplicity used in
-  the proof is birationally invariant through dimension four; it also proves
-  one-step irrationality for every smooth prime Fano threefold of genus eight.
-  [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
-
-- **Point-class rank admits exact local transport and a conditional global
-  cubic criterion.** A common-open point has exact ambient coordinate in the
-  Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
+- **Conditionally, every projective stabilization of a smooth cubic
+  threefold is irrational.** A common-open point has exact ambient coordinate
+  in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
   continuation preserves its intrinsic row on a fixed continuation domain.
   For a global cobordism, support collapse and coefficientwise Gamma-ratio
   reduction leave one explicitly named complete-neutral continuation
@@ -126,6 +127,17 @@ complex as separate victories.
   birationally invariant and distinguishes `X × P^m` from projective space
   for every smooth cubic threefold `X` and every `m ≥ 0`.
   [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+
+- **Unconditionally, every smooth cubic threefold remains irrational after
+  one stabilization.** For every smooth complex cubic threefold `X`, the
+  fourfold `X × P¹` is irrational. On an explicit non-isotrivial
+  `A₅`-invariant family, the cubic threefolds are nevertheless universally
+  `CH₀`-trivial, so the usual decomposition-of-the-diagonal detector and the
+  quantum obstruction separate on the same stabilized varieties. The
+  framed-monodromy multiplicity used in the proof is birationally invariant
+  through dimension four; it also proves one-step irrationality for every
+  smooth prime Fano threefold of genus eight.
+  [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
 
 ### Coding theory and quantum information
 
@@ -167,11 +179,11 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
+| Conditional cubic stabilization | Conditional on complete-neutral continuation for every Włodarczyk completion of a smooth projective birational map, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
+| Conditional cubic stabilization | Conditional on complete-neutral continuation for a Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated continuation hypothesis. |
 | Irrationality after one stabilization | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
-| Conditional cubic stabilization | Conditional on complete-neutral continuation for a Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated continuation hypothesis. |
-| Conditional cubic stabilization | Conditional on complete-neutral continuation for every Włodarczyk completion of a smooth projective birational map, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
 | Clebsch I | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
 | Clebsch I companion | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
 | Clebsch II | The strength-two trade space is one-dimensional and generated by a two-valued vector if and only if the orbit is `B₃/F₇` or `H₃/F₁₁`. | Full `PGL₂(q)`-orbits of perfect matchings, for every odd prime power `q`. |
