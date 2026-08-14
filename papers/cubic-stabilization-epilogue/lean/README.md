@@ -305,7 +305,9 @@ The 150 reviewer-facing terminals currently verify:
   an explicit compatible inverse system of these horizontal characteristic
   polynomials.  Lean also constructs this tower from the actual adic quotients
   `B/I^n` of a supplied coefficient algebra and ideal, with canonical adjacent
-  quotient reductions.  Every fixed polynomial coefficient is an explicit
+  quotient reductions.  The horizontal characteristic polynomial over `B`
+  reduces exactly to the polynomial at every quotient level.  Every fixed
+  polynomial coefficient is an explicit
   compatible quotient family represented by its corresponding base-ring
   coefficient.  Lean does not identify `B` or `I` with the manuscript's
   coefficient data, prove completeness or separatedness, or construct the

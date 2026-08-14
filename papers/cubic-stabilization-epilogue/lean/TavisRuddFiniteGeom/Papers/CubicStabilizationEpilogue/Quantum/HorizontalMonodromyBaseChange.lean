@@ -253,6 +253,16 @@ noncomputable def ofAdicIdeal
     HorizontalMonodromyCoefficientTower k V :=
   ofIdealFiltration (adicFiltration ideal) derivative monodromy commutes
 
+/-- The horizontal-monodromy characteristic polynomial after extending its
+coefficients from the ground field to a commutative coefficient algebra. -/
+noncomputable def horizontalCharacteristicPolynomialOver
+    {B : Type*} [CommRing B] [Algebra k B]
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative) :
+    Polynomial B :=
+  (horizontalEndomorphism derivative monodromy commutes).charpoly.map
+    (algebraMap k B)
+
 /-- The horizontal monodromy characteristic polynomials at all coefficient
 levels form an explicit compatible polynomial system. -/
 noncomputable def characteristicPolynomialSystem
@@ -306,6 +316,25 @@ theorem ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
     rfl
   · exact
       (ofAdicIdeal ideal derivative monodromy commutes).characteristicPolynomialSystem.compatible
+
+/-- The characteristic polynomial over the base coefficient algebra reduces
+to the horizontal characteristic polynomial at every adic quotient level. -/
+theorem horizontalCharacteristicPolynomialOver_map_adicQuotient
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (level : ℕ) :
+    let tower := ofAdicIdeal ideal derivative monodromy commutes
+    Polynomial.map (Ideal.Quotient.mk (ideal ^ level))
+        (horizontalCharacteristicPolynomialOver (B := B)
+          derivative monodromy commutes) =
+      tower.characteristicPolynomialSystem.characteristicPolynomial level := by
+  dsimp only
+  rw [horizontalCharacteristicPolynomialOver, Polynomial.map_map]
+  exact
+    ((ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
+      ideal derivative monodromy commutes).1 level).symm
 
 /-- For one polynomial degree, the coefficients of the horizontal-monodromy
 characteristic polynomials over all adic quotients form a compatible quotient

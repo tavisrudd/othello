@@ -107,7 +107,9 @@ polynomial, including its explicit compatible inverse system over every
 supplied coefficient-algebra tower.  The same inverse system is now constructed
 on the actual adic quotients `B/I^n` of a supplied coefficient algebra and
 ideal, with canonical adjacent quotient reductions; completeness,
-separatedness, and geometric identification remain unproved.  Every fixed
+separatedness, and geometric identification remain unproved.  The horizontal
+characteristic polynomial over `B` reduces exactly to the polynomial at every
+quotient level.  Every fixed
 horizontal characteristic-polynomial coefficient is now also packaged as the
 compatible quotient family represented by its corresponding base coefficient.
 The quantum algebra also includes formal-base-shift and block-formula

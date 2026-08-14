@@ -2315,10 +2315,12 @@ characteristic polynomials compatibly.  Let `B` be a commutative algebra over
 the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses
 the canonical quotient reduction from level `n+1` to level `n`, identifies
 every level polynomial with the coefficientwise image of the original
-horizontal characteristic polynomial, proves adjacent compatibility, and
-packages each fixed polynomial coefficient as the compatible quotient family
-represented by its corresponding base-ring coefficient.  The algebra, ideal,
-derivative, and commuting monodromy are supplied; no
+horizontal characteristic polynomial, constructs that polynomial over `B`
+and proves that it reduces to every level polynomial, proves adjacent
+compatibility, and packages each fixed polynomial coefficient as the
+compatible quotient family represented by its corresponding base-ring
+coefficient.  The algebra, ideal, derivative, and commuting monodromy are
+supplied; no
 completeness, separatedness, formal differential module, inverse-limit
 differential module, or analytic monodromy construction is asserted. -/
 theorem horizontalMonodromy_adicCharacteristicPolynomialTower
@@ -2334,6 +2336,11 @@ theorem horizontalMonodromy_adicCharacteristicPolynomialTower
       tower.characteristicPolynomialSystem.characteristicPolynomial level =
         (Quantum.horizontalEndomorphism derivative monodromy commutes).charpoly.map
           ((Ideal.Quotient.mk (ideal ^ level)).comp (algebraMap k B))) ∧
+    (∀ level,
+      Polynomial.map (Ideal.Quotient.mk (ideal ^ level))
+          (Quantum.HorizontalMonodromyCoefficientTower.horizontalCharacteristicPolynomialOver
+            (B := B) derivative monodromy commutes) =
+        tower.characteristicPolynomialSystem.characteristicPolynomial level) ∧
     (∀ level,
       Polynomial.map ((Quantum.adicFiltration ideal).reduction level)
           (tower.characteristicPolynomialSystem.characteristicPolynomial
@@ -2354,7 +2361,10 @@ theorem horizontalMonodromy_adicCharacteristicPolynomialTower
   have adicSystem :=
     Quantum.HorizontalMonodromyCoefficientTower.ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
       ideal derivative monodromy commutes
-  refine ⟨adicSystem.1, adicSystem.2, ?_⟩
+  refine ⟨adicSystem.1, ?_, adicSystem.2, ?_⟩
+  · exact
+      Quantum.HorizontalMonodromyCoefficientTower.horizontalCharacteristicPolynomialOver_map_adicQuotient
+        ideal derivative monodromy commutes
   intro degree
   exact ⟨Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily_eq_ofRingElement
         ideal derivative monodromy commutes degree,

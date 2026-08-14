@@ -333,7 +333,9 @@ coefficient algebras and adjacent reductions, these polynomials form an
 explicit compatible inverse system.  Lean now also constructs this inverse
 system on the actual adic quotients `B/I^n` of a supplied coefficient algebra
 and ideal, using the canonical adjacent quotient reductions.  Every fixed
-horizontal characteristic-polynomial coefficient is packaged as the compatible
+level polynomial is the reduction of the horizontal characteristic polynomial
+over `B`.  Every fixed horizontal characteristic-polynomial coefficient is
+packaged as the compatible
 quotient family represented by its corresponding base coefficient.
 Identification with the manuscript's coefficient algebra and ideal, completeness,
 separatedness, the formal differential module, Levelt--Turrittin solution
