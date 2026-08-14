@@ -148,9 +148,24 @@ map.  The bilateral sequence `2^k` for `k>=0` and `3^{-k}` for
 `k<0` proves that tailwise holonomicity alone cannot recover the threshold
 map.  Exact precursor reduction and falsifier:
 `../2026-08-14-c907-holonomic-point-row-gluing.md`; tailwise proof and audit:
-`../2026-08-14-c907-punctual-tail-shadow.md`.  The circulated manuscript still
-states both hypotheses until the new proof receives paper-level promotion and
-review.
+`../2026-08-14-c907-punctual-tail-shadow.md`.  The current manuscript promotes
+the tailwise theorem and isolates marked threshold compatibility as the one
+analytic hypothesis, with gauged-admissibility remaining a separate geometric
+input.
+Iritani's weak-Fano toric blowup theorem now supplies a genuine geometric
+calibration of the one-object marked comparison: for every common-open point,
+the Gamma point row is exactly the base row on the ambient summand and zero on
+all residual summands.  The discrepancy-one model
+`Bl_p(P^2) -> P^2` is the smallest example.  This proves the intrinsic
+Gamma/QDM mechanism, but a literal instance of the manuscript hypothesis still
+requires identifying the Woodward clutching tails with those toric mirror
+boundary modules.  The sharper type-(1,2) flip test also gives an exact no-go:
+adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
+necessarily makes the previously unstable spectator-plus-`O` locus semistable,
+since `(1,0)=(-3,4)+4(1,-1)`.  Thus the bare spectator shortcut to
+Aleshkin--Liu fails; a superpotential/critical-locus completion or a direct
+non-Calabi--Yau window theorem is needed.  Exact proof and source boundary:
+`../2026-08-14-c907-one-object-toric-threshold.md`.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
@@ -168,20 +183,21 @@ blowup/down peaks whose receiver frames are not coherent.  See
 `../2026-08-13-c907-simple-wall-coverage-obstruction.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
-The resulting 22-page manuscript at
+The resulting 27-page manuscript at
 `papers/cubic-stabilization-irrationality/` proves a conditional
 all-projective-stabilizations theorem and the unconditional cubic endpoint
 contrast, simple-wall ambient point coordinate, path-local ordinary-flop
-point-row theorem, support collapse, and Gamma-ratio reduction.  Its final
-style-reviewed surface is authority commit `505f2acdc`, PDF SHA-256
-`99a3b92348ce930f1485e47c6df37387b6855dfce2a6db95687880eda488937a`;
-the GW/POT, D-module/Stokes, and adjacent cold-reader passes all returned GO,
-and `make check` is warning-free and deterministic.  The title, abstract,
-README, Zenodo metadata, claim ledger, and portfolio summary expose both
-hypotheses.  Export source `d85a4ccbf` is synchronized to the clean local
-paper repository at `e487363` and the portfolio summary to `00011eb`; both
-remain unpushed, and the live Zenodo version still needs a deliberate release
-update.  Review records are
+point-row theorem, support collapse, tailwise derived identification and
+holonomicity, and Gamma-ratio reduction.  Its reviewed paper surface is
+authority commit `932ca381e`, PDF SHA-256
+`9ebb6630a72a9cf86b8958dae73188e6f5c8bb2901d2b0136315c35efc5b57f4`;
+the GW/POT, D-module/Stokes, birational, and adjacent cold-reader passes found
+no major defect, and `make check` is warning-free and deterministic.  The
+title, abstract, README, Zenodo metadata, claim ledger, and portfolio summary
+expose gauged-admissibility and the marked threshold hypothesis separately.
+Export source `932ca381e` is synchronized to the clean local paper repository
+at `748f903`; the portfolio summary remains at `9200ec2`.  All remain unpushed,
+and the live Zenodo version still needs a deliberate release update.  Review records are
 `../2026-08-13-c907-gamma-point-row-reviewer-dossier.md` and
 `../2026-08-13-c907-gamma-point-row-cold-read-synthesis.md`.
 That repair is now a reviewed standalone ten-page correction note at
