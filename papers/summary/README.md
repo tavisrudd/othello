@@ -418,7 +418,7 @@ membership and Appendix A, and changes no higher-discrepancy statement.
 
 #### Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing
 
-[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
+[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937491-blue.svg)](https://doi.org/10.5281/zenodo.21937491)
 
 **Standout result.** Exact simple-wall and ordinary-flop point-row identities,
 global support collapse, and a coefficientwise Gamma-ratio reduction isolate
