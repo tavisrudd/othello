@@ -463,6 +463,12 @@ are current, and the committed paper export verifies byte-for-byte in
   exact multiplicity two from Cai's supplied framed characteristic polynomial;
   the geometric connection, integral-loop block comparison, rank-one numerical
   curve lattice, and numerical-Novikov passage remain explicit missing inputs.
+  The manuscript now points to Cai's displayed scalar solutions on pp. 5--7:
+  each is an exponential in \(z^{-1}\) times an integral-power series, which
+  justifies the two unit framed factors rather than inferring them from the
+  weaker wording of Proposition 6 alone.  This passage was checked in
+  arXiv:2608.01577, cache SHA-256
+  `06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e`.
 - **Divisor-tagging deduction:** settled at the conditional endpoint.  Lean
   transports primitive-sixth multiplicity and vanishing through two supplied
   final polynomial equalities over `ℂ`.  Its finite exponential-character

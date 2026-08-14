@@ -378,6 +378,10 @@ have multiplicity one and the two unit factors contribute zero.  The manuscript
 now states explicitly that this is the small even connection, so no odd block
 is omitted from the defined invariant.  Cai's geometric
 block comparison and the numerical-Novikov bridge remain explicit inputs.
+The manuscript now cites Cai's displayed scalar solutions on pp.~5--7 for the
+two unit framed factors: both are exponentials in \(z^{-1}\) times
+nonnegative integral-power series.  The exact multiplicity-two conclusion no
+longer rests on reading more into Proposition~6 than it states.
 Divisor-tagging vanishing is now an exact conditional endpoint deduction from
 two supplied final characteristic-polynomial equalities over `ℂ`; Lean
 derives equality of primitive-sixth multiplicities and transfers intrinsic
