@@ -74,6 +74,8 @@ comparison theorems that have not been formalized from foundations.
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
+open TensorProduct
+
 open scoped MatrixGroups
 
 /-- Exact conditional form of the manuscript's universal `CH₀` corollary.
@@ -2213,6 +2215,42 @@ theorem differentialConstants_flatCoefficientBaseChange
         (constants.lTensor B) (derivative.lTensor B) :=
   ⟨Quantum.differentialConstants_baseChange derivative,
     Quantum.differentialConstants_exact_baseChange constants derivative exact⟩
+
+/-- Derivation-level coefficientwise base change.  For a derivation of a
+commutative algebra over a field, Lean constructs the coefficient-extended
+derivation on `B ⊗[k] R`.  It differentiates the right tensor factor, obeys
+the Leibniz rule, fixes the coefficient algebra `B`, and its constant
+subalgebra is exactly the set-theoretic image of the scalar-extended original
+kernel.  This is an algebraic differential-constant theorem; it does not
+construct a Levelt--Turrittin solution algebra, fundamental solution,
+horizontal module, inverse-limit differential algebra, or framed monodromy. -/
+theorem differentialDerivation_flatCoefficientBaseChange
+    {k R B : Type*} [Field k]
+    [CommRing R] [Algebra k R]
+    [CommRing B] [Algebra k B]
+    (derivative : Derivation k R R) :
+    (∀ (coefficient : B) (value : R),
+      Quantum.differentialDerivationBaseChange derivative
+          (coefficient ⊗ₜ[k] value) =
+        coefficient ⊗ₜ[k] derivative value) ∧
+    (∀ (left right : B ⊗[k] R),
+      Quantum.differentialDerivationBaseChange derivative (left * right) =
+        left * Quantum.differentialDerivationBaseChange derivative right +
+          right * Quantum.differentialDerivationBaseChange derivative left) ∧
+    (∀ coefficient : B,
+      Quantum.differentialDerivationBaseChange derivative
+          (algebraMap B (B ⊗[k] R) coefficient) = 0) ∧
+    (Quantum.differentialDerivationConstantsSubalgebra
+          (B := B) derivative : Set (B ⊗[k] R)) =
+      LinearMap.range
+        ((LinearMap.ker derivative.toLinearMap).subtype.lTensor B) := by
+  refine ⟨Quantum.differentialDerivationBaseChange_tmul derivative,
+    ?_, Quantum.differentialDerivationBaseChange_algebraMap derivative,
+    Quantum.differentialDerivationConstantsSubalgebra_coe derivative⟩
+  intro left right
+  simpa only [smul_eq_mul] using
+    Derivation.leibniz
+      (Quantum.differentialDerivationBaseChange derivative) left right
 
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.

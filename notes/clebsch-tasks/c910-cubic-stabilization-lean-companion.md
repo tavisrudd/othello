@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 82 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 146 audited terminals.  The rejecting manuscript inventory covers all
+exports 147 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -99,7 +99,8 @@ pro-Laurent inverse-system types, an actual subgroup of compatible invertible
 families over every fixed Laurent coefficient tower, coefficient-extension and
 conjugacy, and the
 flat linear-algebra theorem identifying differential constants after
-coefficient extension,
+coefficient extension, together with the actual tensor-extended derivation,
+its Leibniz and coefficient-constancy laws, and its exact constant subalgebra,
 formal-base-shift and block-formula deductions, numerical coefficient
 pushforward, strict-Novikov data, divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 146 reviewer terminals.
+1 complete; 147 reviewer terminals.
 
-The 146 reviewer-facing terminals currently verify:
+The 147 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -291,10 +291,13 @@ The 146 reviewer-facing terminals currently verify:
   pushforward, expressed as coefficient agreement through each degree cutoff;
   no topology or Mathlib `Continuous` theorem is asserted;
 - flat coefficient extension over a field preserves the kernel of a supplied
-  linear derivative and every supplied exact constants--derivative pair.  This
-  formalizes the differential-constant calculation in coefficientwise base
-  change, but not the Levelt--Turrittin solution algebra, horizontal module,
-  adic inverse limit, or framed-monodromy construction;
+  linear derivative and every supplied exact constants--derivative pair.  For
+  an actual derivation of a commutative algebra, Lean constructs the induced
+  derivation on the tensor-product algebra, proves the pure-tensor formula and
+  Leibniz rule, proves that it fixes the coefficient algebra, and identifies
+  its constant subalgebra with the image of the scalar-extended original
+  kernel.  This does not construct the Levelt--Turrittin solution algebra,
+  horizontal module, adic inverse limit, or framed-monodromy operator;
 - derivation of a compatible characteristic-polynomial inverse system from
   entrywise compatible finite-level square matrices; the differential modules
   and analytic monodromy operators producing those matrices are not constructed;
