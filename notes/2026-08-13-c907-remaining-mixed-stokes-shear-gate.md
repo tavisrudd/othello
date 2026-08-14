@@ -281,6 +281,54 @@ unbounded neutral tower together with a **mixed boundary-to-ambient coupling**.
 A multi-legged boundary propagator joining two carrier components is the
 second obstruction if the one-legged coupling vanishes.
 
+### Valence/contact-budget lemma
+
+The neutral balance cannot be assembled from two independent one-wall tails
+attached to a fixed carrier unless the boundary itself connects the two sign
+sectors.
+
+Indeed, let `B_-` be a connected boundary subcurve of class `gamma_n` with
+
+\[
+ c_1(\gamma_n)\leq -\nu n+O(1),\qquad \nu>0,
+\]
+
+and let `k_n` be the number of flags by which it meets the rest of the stable
+map.  Its genus-zero virtual dimension on a fivefold is
+
+\[
+ 2+k_n+c_1(\gamma_n).
+\]
+
+A nonzero virtual correspondence therefore requires
+
+\[
+ k_n\geq \nu n-O(1).                                               \tag{15b}
+\]
+
+On the other hand, an off-boundary carrier of fixed numerical class meets
+the toroidal boundary with uniformly bounded total contact.  Choose an
+effective Cartier divisor containing each relevant boundary stratum but no
+carrier component; the sum of the contact multiplicities is bounded by its
+intersection with the fixed carrier class.  Constant components lying in the
+boundary are absorbed into the boundary subtree and do not evade this bound.
+
+Consequently, if positive- and negative-sign boundary components belong to
+different connected components of the boundary incidence graph met by the
+carrier, the left side of (15b) is bounded and the tower is finite.  An
+unbounded neutral tower forces a connected boundary subtree which contains
+both signs, hence an actual incidence path between the exceptional strata of
+the two incident walls.  Equivalently:
+
+> **No mixed-sign boundary incidence path, no dangerous Stokes shear.**
+
+This also corrects a tempting false model: two arbitrarily long independent
+`J`-tails, one on each wall axis, cannot balance through a fixed ambient
+vertex.  The negative tail eventually has negative virtual dimension unless
+it acquires linearly many attachments, and the fixed carrier cannot supply
+them.  The only escape is internal positive/negative boundary gluing—the
+mixed rubber object already isolated above.
+
 ### Anatomy of the first possible dangerous graph
 
 The genus-zero dual graph makes this description concrete.  Let `B` be a
@@ -512,6 +560,13 @@ of the corresponding Euler mutations fixes the rank covector exactly.  Thus
 it is enough to show that the adjacent analytic Stokes transition has the
 same **numerical K-theory shadow** as a window change; equality of the full
 functors or of their central connection matrices is unnecessary.
+
+The algebraic part of this statement is proved and audited in
+`2026-08-13-c907-window-shadow-boundary.md`: weight truncation for birational
+cobordisms and the standard-wall semiorthogonal decompositions make the
+categorical window action rank-trivial modulo supported classes.  What remains
+unproved is precisely that the analytic adjacent-receiver transition casts
+this algebraic numerical shadow.
 
 This isolates a particularly small theorem target: the sectorial transition
 and the algebraic window transition induce the same map on

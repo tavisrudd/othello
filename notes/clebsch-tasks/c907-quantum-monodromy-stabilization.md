@@ -177,6 +177,19 @@ the two discrepancies, so the fivefold search is finite.  This imports the
 series' reconstruction-from-sparse-shadows strategy without pretending that
 the rubber series itself is known.
 
+Two of those shadows are now sharpened.  The valence/contact-budget lemma in
+the failure note shows that a negative-degree boundary subtree of size `n`
+needs linearly many external flags, whereas the fixed carrier has bounded
+boundary contact.  Hence an unbounded tower forces an actual connected
+incidence path inside the boundary between the positive- and negative-sign
+wall strata; two independent long tails cannot balance through one fixed
+carrier.  Separately,
+`../2026-08-13-c907-window-shadow-boundary.md` proves that the algebraic
+weight-truncation/window transition is rank-trivial modulo unstable-stratum
+classes throughout the cobordism.  This is not Gold: BFK/Yeung do not identify
+the analytic Stokes transition with that window action.  A counterexample is
+therefore forced to be categorically phantom but analytically nontrivial.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
