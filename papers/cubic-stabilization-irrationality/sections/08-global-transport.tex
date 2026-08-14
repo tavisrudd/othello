@@ -16,7 +16,9 @@ hypotheses under which Woodward's localized gauged theory is defined.  In
 particular, degree by degree, the polarization master stack is a proper
 Deligne--Mumford stack with its stated perfect obstruction theory.  We work
 coefficientwise at sufficiently large area.  Write \(\kappa_\pm\) for
-the corresponding quantum Kirwan maps and \(\tau_{Y_\pm,-}\) for Woodward's
+the corresponding quantum Kirwan maps, write
+\(\operatorname{Kir}_\pm:H^*_{\Gm}(W)\to H^*(Y_\pm)\) for the ordinary
+cohomological Kirwan maps, and write \(\tau_{Y_\pm,-}\) for Woodward's
 localized graph potentials.  The
 derivatives
 \[
@@ -27,7 +29,7 @@ identity \cite[Equation~(68)]{WoodwardQKIII}.
 
 Suppose that a class \(a_p\in H^*_{\Gm}(W)\) has the following restrictions:
 \[
- \kappa_\pm(a_p)=[p_\pm],\qquad
+ \operatorname{Kir}_\pm(a_p)=[p_\pm],\qquad
  a_p|_F=0                                                     \tag{8.2}
 \]
 for every fixed component \(F\) occurring at an intermediate polarization.
@@ -79,7 +81,10 @@ Proposition~3.18]{GonzalezWoodward}.  Its insertion therefore factors through
 one of the restrictions in (8.2) and vanishes before division by the virtual
 normal Euler class.  Only the two endpoints survive the virtual Kalkman
 identity.  Their signs and node factors agree with Woodward's localized
-adiabatic identity, giving (8.3).  Polarizing in the ordinary inputs gives
+adiabatic identity.  At either endpoint the distinguished equivariant
+insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
+\([p_\pm]\) by (8.2); the quantum Kirwan derivatives remain inside
+\(A_\pm\).  This gives (8.3).  Polarizing in the ordinary inputs gives
 the entire row rather than only the scalar potential.
 \end{proof}
 
@@ -91,7 +96,9 @@ birational open supplied as a trivialized cylinder by the construction.
 There the cobordism is a trivial orbit cylinder.  The
 equivariant Poincar\'e dual of the closure of that orbit restricts to the two
 point classes and misses every intermediate fixed component.  It is the
-class \(a_p\) in (8.2).
+class \(a_p\) in (8.2).  This assertion concerns the ordinary Kirwan
+restrictions only; no vanishing of positive-degree corrections to the quantum
+Kirwan maps is used.
 
 There is a terminology point in the source.  W{\l}odarczyk calls the open
 cobordism \emph{projective} when it is quasiprojective.  We use the resolved
@@ -236,9 +243,9 @@ For every finite Artin level, ordinary bubble degree, and rotation-fixed
 graph type, after splitting the affine degrees into stabilizer congruence
 classes and removing the finite sign, stability, and zero-mode thresholds,
 there are isomorphisms of the fixed clutching stacks and their universal
-curves which identify consecutive degrees in each remaining tail.  These
-isomorphisms identify the
-evaluation maps and the fixed relative perfect obstruction theories as
+domains which identify consecutive degrees in each remaining tail.  These
+isomorphisms identify the evaluation maps and the fixed parts of the relative
+perfect obstruction theories as
 morphisms to the corresponding cotangent complexes, hence also their virtual
 classes.  They respect stack automorphisms, gluing over the inertia quotient,
 and reduction between Artin levels.  Stable degree-zero attached bubbles are
@@ -247,38 +254,64 @@ by its separate convention.
 \end{theorem}
 
 \begin{proof}
-Write \(W^a\) for the relevant attracting stratum on which
-\(\lim_{t\to0}t^a x\) exists.  Evaluation at \(1\) identifies fixed sections
-on one parametrized affine chart with \(W^a\): the section determined by
-\(x\) is \(z\mapsto z^a x\), and it extends across the origin exactly when
-\(x\in W^a\).  This is an isomorphism on derived test schemes, since the
-section is recovered uniquely from its value at \(1\), while extension is
-exactly the attracting-locus condition.  A principal clutching section has two such extensions with
-the same generic value.  Its derived moduli stack is therefore
+Fix the generic semistable locus and the two endpoint fixed components
+specified by the graph type.  Write \(W_F^a\) for the corresponding
+Bia{\l}ynicki--Birula stratum: its points lie in that generic locus and satisfy
+\(\lim_{t\to0}t^a x\in F\).  Evaluation at \(1\) identifies fixed sections on
+one parametrized affine chart with \(W_F^a\): the section determined by
+\(x\) is \(z\mapsto z^a x\), and it extends across the origin with limit in
+\(F\) exactly when \(x\in W_F^a\).  A principal clutching section has two such
+extensions with the same generic value.  Let \(\mathfrak S_{a_-,a_+}\) denote
+the derived fixed section stack for the chosen clutching bundles, stabilizer
+lift, and graph component.  Evaluation at \(1\) is a functorial equivalence on
+derived bases
 \[
- [W^{a_-}/\Gm]\mathop{\times}^{\mathbf R}_{[W/\Gm]}
- [W^{a_+}/\Gm].
+ \mathfrak S_{a_-,a_+}\simeq
+ \mathfrak Z:=
+ [W_{F_-}^{a_-}/\Gm]\mathop{\times}^{\mathbf R}_{[W/\Gm]}
+ [W_{F_+}^{a_+}/\Gm].
 \]
+Here is an affine verification of the derived assertion.  On a
+\(\Gm\)-invariant Sumihiro chart \(\operatorname{Spec} A\), write
+\(A=\bigoplus_w A_w\).  For a derived test algebra \(R\), an equivariant map
+from the parametrized affine chart is a graded morphism
+\(A\to R[z]\); after evaluation at \(1\), a homogeneous element of weight
+\(w\) has the unique extension \(f\mapsto f(x)z^{aw}\).  Regularity at the
+origin says exactly that the coefficients with \(aw<0\) vanish.  Thus the
+functor factors through the derived base change of the attractor algebra
+\(A/(A_w:aw<0)\), with the component and semistability open imposed.  This
+calculation is valid for simplicial commutative test algebras degreewise,
+commutes with base change, and glues over the equivariant affine cover.  After
+quotienting by change of trivialization it proves the one-chart equivalence
+with \([W_F^a/\Gm]\), including stabilizers and nilpotent derived families.
+Derived descent over the two-chart cover then gives the displayed homotopy
+fibre product.  Its inverse equips a family \(x\) with the prescribed two
+clutching bundles and the sections \(z\mapsto z^{a_\pm}x\).  The chosen strata
+impose the generic stability and graph-component conditions.
 The attached stable-map factors in Woodward's equations (54)--(57) are added
 by derived fibre products over the two inertia evaluations.
 
 For \(\Gm\), replacing a nonzero endpoint exponent by another integer of the
-same sign leaves its attracting locus and limit map unchanged.  Passing to a
+same sign leaves the relevant stratum and limit map unchanged.  Passing to a
 fixed stabilizer congruence class also fixes the inertia label.  Thus the
-displayed derived intersection,
-its universal curve and evaluations, and its derived fibre products with the
-fixed ordinary stable-map factors are identical throughout one tail.
+displayed derived intersection, its universal domain and evaluations, and its
+derived fibre products with the fixed ordinary stable-map factors are
+identical throughout one tail.  The universal gauged maps
+\(z\mapsto z^a x\) themselves are not identified when \(a\) changes; it
+remains to compare the fixed deformation complexes.
 
-For completeness, the tangent complex of this derived intersection is
+All tangent and cotangent complexes in the next calculation are relative to
+the fixed moduli of marked domains, denoted \(\mathfrak M\).  The tangent
+complex of the displayed derived intersection is
 \[
  \left[
-  T(W^{a_-}/\Gm)\oplus T(W^{a_+}/\Gm)
+  T(W_{F_-}^{a_-}/\Gm)\oplus T(W_{F_+}^{a_+}/\Gm)
   \longrightarrow T(W/\Gm)
  \right].
 \]
 It retains the degree-one term when the two attracting loci meet
 nontransversely.  Equivalently, trivialize the pulled-back tangent complex on
-the open orbit by evaluation at (1).  Taking invariants in the two-chart
+the open orbit by evaluation at \(1\).  Taking invariants in the two-chart
 \v{C}ech resolution gives
 \[
  \left[
@@ -288,20 +321,47 @@ the open orbit by evaluation at (1).  Taking invariants in the two-chart
 where the two terms are the extension subbundles at the endpoints.  They are
 the tangent bundles of the two attracting loci.  Thus this invariant
 \v{C}ech complex agrees with the preceding tangent complex without choosing
-an equivariant splitting.
+an equivariant splitting.  More precisely, in perfect complexes on
+\(\mathfrak Z\), functoriality of restriction to the two charts gives
+\[
+ \left(R\pi_*u_a^*T(W/\Gm)\right)^{\mathrm{rot}}
+ \simeq
+ \left[F^0_{\leq0}V\oplus F^\infty_{\leq0}V\longrightarrow V\right]
+ \simeq T_{\mathfrak Z/\mathfrak M}.
+\]
+The composite is the differential of evaluation at \(1\): on the two-chart
+cover, both it and the tangent map of the derived fibre product are induced by
+the same restriction morphisms to the open orbit.  This identifies the
+complex together with its canonical map to the tangent complex, not only its
+class in \(K\)-theory.  Along a tail the signs of all endpoint weights are
+constant, and the zero-weight changes were removed as thresholds.  The two
+extension subbundles and the restriction morphism are therefore constant,
+even though the universal gauged map varies with \(a\).
 
 The fixed perfect obstruction theory is the dual of the derived pushforward
-of \(T(W/\Gm)\) \cite[Definition~7.13]{WoodwardQKIII}.  Since the comparison
-above identifies the derived fixed stack and its universal restriction and
-evaluation maps, it identifies the obstruction-theory morphisms to the
-cotangent complexes, hence the virtual classes.  On a \(k\)-fold orbifold
-cover, taking the residual \(\mu_k\)-invariants preserves the argument; the
-congruence class fixes the twisted-sector evaluation.  The parametrized
-principal component has no domain automorphisms, while the fixed bubble
-factors retain theirs.  All constructions commute with Artin reduction.
-The unstable irreducible type is the displayed tangent complex without
-bubble, node, or attaching
-terms.  This proves every assertion.
+of \(T(W/\Gm)\) \cite[Definition~7.13]{WoodwardQKIII}; it is the truncation of
+the intrinsic tangent complex of this derived section stack.  Woodward's
+cutting-edge compatibility identifies the obstruction theory of the glued
+fixed graph with the corresponding derived fibre-product triangle
+\cite[Proposition~7.14]{WoodwardQKIII}.  Since the comparison
+above identifies its invariant \v{C}ech model as a perfect complex and the
+differential displayed above, duality identifies the fixed
+obstruction-theory morphisms to \(L_{t_0\mathfrak Z/\mathfrak M}\), hence the virtual
+classes.  The cotangent triangle for the derived fibre products over inertia
+then glues this identification to the unchanged perfect obstruction theories
+of the fixed ordinary stable-map factors.
+
+On a \(k\)-fold orbifold cover the same affine calculation is made in
+\(R[z^{1/k}]\) with its residual \(\mu_k\)-grading.  The stabilizer congruence
+fixes that grading and the twisted-sector evaluation.  Rigidifying the inertia
+receiver quotients both sides by the same residual gerbe, so the derived
+equivalence descends.  Because it is an equivalence of stacks, stabilizer and
+graph-automorphism groups, and hence their localization multiplicities, are
+preserved.  The parametrized principal component has no domain automorphisms;
+the fixed bubble factors retain theirs.  Every construction above is by base
+change and therefore commutes with Artin reduction.  The irreducible unstable
+type is the same one-chart calculation with no bubble, node, or attaching
+factor.  This proves every assertion.
 \end{proof}
 
 \begin{proposition}[Clutching-tail holonomicity]
@@ -359,6 +419,13 @@ absorbs the finite defect.  Nevertheless the two displayed rational
 functions are not branches of one meromorphic function.  Thus neither a
 polynomial recurrence nor tailwise holonomicity determines the finite
 connection data across a threshold.
+
+In the next hypothesis, a \emph{finite dual cyclic Rees
+\(z\)-differential module} means a finite subobject of the dual sectorial Rees
+connection, with its Stokes filtration and ramified deck action, generated by
+the marked row under the \(z\)-connection and the normalized formal monodromy.
+It is not merely the Krylov vector space of the monodromy endomorphism.  The
+latter is the subspace \(C_T(r)\) used in Lemma~\ref{lem:cyclic-row-support}.
 
 \begin{hypothesis}[Marked threshold compatibility]
 \label{hyp:marked-threshold}

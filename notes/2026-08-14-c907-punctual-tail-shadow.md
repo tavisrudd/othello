@@ -37,10 +37,11 @@ point-marked output classes have the same image in `K_0(Y)/K_0^D(Y)`.
 Equivalently, their difference is boundary-supported and is annihilated by
 the Gamma point row.
 
-A stronger statement would identify the fixed derived clutching factors,
-their universal curves, evaluation maps, fixed perfect obstruction theories,
-virtual classes, automorphisms, and inertia gluing.  The quotient statement is
-all the conditional theorem consumes.
+The stronger statement proved below identifies the fixed derived clutching
+factors, their universal domains and evaluations, the fixed parts of their
+perfect obstruction theories, virtual classes, automorphisms, and inertia
+gluing.  The universal gauged maps themselves vary with affine degree; the
+invariant deformation complexes do not vary between thresholds.
 
 ## What Woodward gives
 
@@ -120,20 +121,31 @@ Cech complex then supplies an independent tangent-level check.
 
 ### Derived-intersection identification
 
-For a nonzero integer `a`, let `W^a` be the attracting locus on which
-`lim_{t->0}t^a x` exists.  Evaluation at `1` identifies fixed sections on one
-parametrized affine chart with `W^a`: the section determined by `x` is
-`z mapsto z^a x`, and it extends across the origin exactly when `x` belongs
-to `W^a`.  This identification is functorial in families.  On a `k`-fold
-orbifold cover the same statement holds in the inertia component labelled by
-`phi_a(theta)`.
+Fix the generic semistable locus and endpoint component `F` of the graph type.
+For a nonzero integer `a`, let `W_F^a` be the corresponding
+Bialynicki--Birula stratum.  Evaluation at `1` identifies fixed sections on
+one parametrized affine chart with `W_F^a`: the section determined by `x` is
+`z mapsto z^a x`, and it extends across the origin with limit in `F` exactly
+when `x` belongs to `W_F^a`.
+
+This is an equivalence on derived test schemes, not only on closed points.  On
+an invariant affine chart `Spec A`, with `A=sum_w A_w`, an equivariant map over
+a derived test algebra `R` is a graded map `A -> R[z]`.  A homogeneous element
+of weight `w` has the unique extension `f mapsto f(x)z^(aw)`; regularity says
+that all coefficients with `aw<0` vanish.  Thus the functor is represented by
+the derived base change of `A/(A_w:aw<0)`, with the chosen component and
+semistability open imposed.  The calculation works degreewise for simplicial
+test algebras, commutes with base change, and glues over a Sumihiro cover.  On
+a `k`-fold orbifold cover it is performed in `R[z^(1/k)]`; the stabilizer
+congruence fixes the residual grading and inertia component.
 
 A principal clutching section has two such extensions with the same generic
 value `x`.  Its derived moduli stack is therefore
 
 \[
  \mathcal C_{a_-,a_+}^{\mathrm{der}}
- = [W^{a_-}/G]\mathop{\times}^{\mathbf R}_{[W/G]}[W^{a_+}/G].       \tag{1}
+ = [W_{F_-}^{a_-}/G]\mathop{\times}^{\mathbf R}_{[W/G]}
+   [W_{F_+}^{a_+}/G].                                             \tag{1}
 \]
 
 The two maps to the inertia quotient are induced by the two attracting limit
@@ -144,16 +156,16 @@ maps.  This is the derived version of Woodward's equations (54)--(57).
 For `G=G_m`, replacing either nonzero endpoint exponent by another integer of
 the same sign does not change its attracting locus or limit map.  The
 stabilizer congruence fixes the inertia component.  Thus (1), its universal
-curve, both evaluations, and the derived fibre products with the attached
+domain, both evaluations, and the derived fibre products with the attached
 stable-map factors are literally the same derived stacks throughout one
-tail.  Derived cotangent complexes, their maps, and virtual classes are
-therefore identified automatically.
+tail.  The universal gauged maps `z mapsto z^a x` vary with `a`; their fixed
+deformation complexes are compared below.
 
 The tangent complex of (1) is
 
 \[
  \left[
-  T(W^{a_-}/G)\oplus T(W^{a_+}/G)
+  T(W_{F_-}^{a_-}/G)\oplus T(W_{F_+}^{a_+}/G)
   \longrightarrow T(W/G)
  \right].                                                   \tag{2}
 \]
@@ -267,8 +279,15 @@ formula for `T(W/G)` is obtained by applying the same construction to
 No constructible rank refinement is needed.
 
 This is the tangent complex of the derived intersection (1), providing a
-second derivation of (2).  It proves the tailwise derived identification
-stated in the manuscript for `G=G_m`.
+second derivation of (2).  In perfect complexes on (1), the two-chart
+restriction maps identify `(R pi_*u_a^*T(W/G))^rot` with (5).  The induced map
+to the tangent complex of (1) is the differential of evaluation at `1` on
+both sides.  After duality this is therefore a commutative identification of
+the fixed obstruction theory and its morphism to the cotangent complex, not
+only an equality of tangent complexes or K-classes.  Woodward's Proposition
+7.14 supplies the cutting-edge compatibility which glues this principal
+complex to the unchanged fixed bubble POTs.  This proves the tailwise derived
+identification stated in the manuscript for `G=G_m`.
 
 ## Exact line-bundle calibration
 
@@ -311,9 +330,9 @@ The proof uses only:
 3. the derived intersection (1) and its elementary invariant Cech complex
    (3).
 
-It does not use Gonz\'alez--Woodward's Picard-shift lemma, a global
-identification of different gauged-map moduli spaces, or a Mellin--Barnes
-continuation theorem.  It also explains why the statement is special to the
+It does not use Gonz\'alez--Woodward's Picard-shift lemma, an identification of
+the degree-dependent universal gauged maps, or a Mellin--Barnes continuation
+theorem.  It also explains why the statement is special to the
 rank-one cobordism group: for a higher-dimensional torus, changing a
 cocharacter can cross infinitely many directions only after the problem is
 reduced ray by ray through a finite chamber fan.
