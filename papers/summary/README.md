@@ -125,7 +125,7 @@ complex as separate victories.
   hypothesis. Under that hypothesis, the point-row primary Boolean is
   birationally invariant and distinguishes `X × P^m` from projective space
   for every smooth cubic threefold `X` and every `m ≥ 0`.
-  [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/gamma-point-row/blob/main/gamma_point_row.pdf).
+  [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 ### Coding theory and quantum information
 
@@ -199,7 +199,7 @@ boundary, and reproducible entry points.
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
-| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | Exact local point-row transport, global support collapse and coefficientwise Gamma reduction, with cubic stabilization conditional on one named continuation hypothesis. | [PDF](https://github.com/tavisrudd/gamma-point-row/blob/main/gamma_point_row.pdf) · [repo](https://github.com/tavisrudd/gamma-point-row) |
+| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | Exact local point-row transport, global support collapse and coefficientwise Gamma reduction, with cubic stabilization conditional on one named continuation hypothesis. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -418,7 +418,7 @@ membership and Appendix A, and changes no higher-discrepancy statement.
 
 #### Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing
 
-[PDF](https://github.com/tavisrudd/gamma-point-row/blob/main/gamma_point_row.pdf) · [Repository](https://github.com/tavisrudd/gamma-point-row)
+[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
 
 **Standout result.** Exact simple-wall and ordinary-flop point-row identities,
 global support collapse, and a coefficientwise Gamma-ratio reduction isolate
