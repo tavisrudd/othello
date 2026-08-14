@@ -1,4 +1,4 @@
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryDiscriminant
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 
 /-!
 # Opaque organizational relative six-axis packet
@@ -8,9 +8,13 @@ current Mathlib API.  This module provides an opaque organizational signature
 for its supplied geometric assertions.  Lean independently proves the full
 integral Smith witness for the displayed five-axis Gram matrix and computes
 the two-primary coefficient discriminant after tensoring with any `F₂`-module.
+For a two-dimensional symplectic tensor factor, it also identifies the
+rank-eight discriminant with two copies of the coefficient heart and proves
+that the five projective-line packet members are exactly the diagonally stable
+maximal-isotropic subspaces.
 
-No scheme, isogeny, torsion local system, group action, or pairing is
-constructed here.
+No relative scheme, isogeny, torsion local system, geometric group action, or
+Weil pairing is constructed here.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -96,8 +100,8 @@ structure RelativeSixAxisGeometricInput
   kernelMaximalIsotropic : Prop
 
 /-- Organizational relative-six-axis packet.  Its geometric component is
-supplied wholesale; the integral Smith witness and two-primary coefficient
-discriminant are proved by Lean. -/
+supplied wholesale; the integral Smith witness, two-primary coefficient
+discriminant, and explicit stable maximal-isotropic packet are proved by Lean. -/
 structure RelativeSixAxisConclusion
     {Base : Type*} (objects : RelativeSixAxisObjects Base) : Prop where
   /-- All relative geometric assertions of the lemma. -/
@@ -168,6 +172,18 @@ structure RelativeSixAxisConclusion
       Module.finrank GraphLattices.F2 subspace = 4 →
       GraphLattices.IsMaximalIsotropic
         GraphLattices.sixAxisStandardDiscriminantBilinForm subspace
+  /-- Under the explicit symplectic coordinate equivalence with two heart
+  copies, the five projective-line packet members are exactly the diagonally
+  stable maximal-isotropic subspaces of the rank-eight discriminant. -/
+  twoPrimaryStableMaximalIsotropicPacket :
+    ∀ subspace : Submodule GraphLattices.F2
+        GraphLattices.SixAxisStandardDiscriminantCoordinates,
+      subspace.map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+          GraphLattices.SixPointHeartStableHalfPacket ↔
+        GraphLattices.SixAxisStandardDiscriminantGeneratorStable subspace ∧
+          GraphLattices.IsMaximalIsotropic
+            GraphLattices.sixAxisStandardDiscriminantBilinForm subspace
 
 /-- Package the supplied opaque relative-six-axis fields with the independently
 proved integral Smith witness and two-primary coefficient calculation. -/
@@ -190,7 +206,8 @@ theorem relativeSixAxis_of_geometricInputs
     GraphLattices.sixPointHeartWordAction_preserves_coefficientForm,
     ⟨GraphLattices.sixAxisStandardDiscriminantBilinForm_isAlt,
       GraphLattices.sixAxisStandardDiscriminantBilinForm_nondegenerate⟩,
-    GraphLattices.sixAxisStandardDiscriminant_maximalIsotropic_of_finrank_four⟩
+    GraphLattices.sixAxisStandardDiscriminant_maximalIsotropic_of_finrank_four,
+    GraphLattices.sixAxisStandardDiscriminant_stablePacket_iff⟩
 
 end Applications
 

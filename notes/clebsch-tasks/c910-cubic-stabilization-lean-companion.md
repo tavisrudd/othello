@@ -161,7 +161,9 @@ product is bilinear, alternating, nondegenerate, and preserved by the full
 generated six-point action.  After choosing a symplectic basis of the
 two-dimensional factor, the induced rank-eight tensor-product form is also
 alternating and nondegenerate, and every isotropic four-dimensional subspace
-is maximal.  The row remains a
+is maximal.  The explicit two-heart equivalence preserves this form and
+identifies the five projective-line packet members exactly with the diagonally
+stable maximal-isotropic subspaces of the rank-eight discriminant.  The row remains a
 fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,
@@ -294,7 +296,10 @@ five subspaces are distinct.  An explicit equivalence with the actual
 `P¹(F4)` sends its vertical chart point to the vertical half and the affine
 labels `0,1,root,root+1` to the graphs of `0,1,W,W+1`; the explicit alternating
 form on the two heart copies is nondegenerate, and the five packet members are
-exactly the diagonally stable maximal-isotropic subspaces.  All six Sylow-five subgroups of this concrete
+exactly the diagonally stable maximal-isotropic subspaces.  The chosen
+symplectic coordinates identify the rank-eight tensor discriminant with this
+two-heart model, preserve the form, and transport the exact classification.
+All six Sylow-five subgroups of this concrete
 `A5` are now constructed, and their conjugation action is exactly the original
 six-point action.  The resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to

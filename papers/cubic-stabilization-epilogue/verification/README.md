@@ -50,7 +50,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   `P¹(F4)` identifies its vertical-plus-affine chart with the vertical half and
   the four graphs.  The explicit alternating polarization on the two heart
   copies is nondegenerate, and those five halves are exactly the diagonally
-  stable maximal-isotropic subspaces.  It identifies
+  stable maximal-isotropic subspaces.  The chosen symplectic coordinates
+  identify the rank-eight tensor-product discriminant with the two-heart
+  model, preserve the form, and transport that exact classification.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is
@@ -92,7 +94,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   the coefficient-module identity behind `D₂ ≃ H₂ ⊗ E[2]`, including the
   order `2⁸` calculation and the invariant nondegenerate alternating
   coefficient form, together with the standard rank-eight tensor-product
-  symplectic model and its half-dimensional maximal-isotropy criterion,
+  symplectic model, its half-dimensional maximal-isotropy criterion, and the
+  exact five-member diagonally stable maximal-isotropic packet under the
+  explicit two-heart equivalence,
   but not the elliptic scheme, torsion local system,
   symplectic pairing, relative isogeny, or maximal-isotropic kernel.
 - Formalize the remaining quantum inputs: the separation family, construct the

@@ -1043,6 +1043,157 @@ theorem sixPointHeartStableHalfPacket_iff_stable_maximalIsotropic
       ⟨stable,
         sixPointHeartPairPolarization_maximalIsotropic_finrank subspace maximal⟩
 
+/-- Choosing the standard symplectic basis of the two-dimensional torsion
+factor identifies the rank-eight discriminant coordinates with two copies of
+the six-point coefficient heart. -/
+def sixAxisStandardDiscriminantPairLinearEquiv :
+    SixAxisStandardDiscriminantCoordinates ≃ₗ[F2]
+      (SixPointHeart × SixPointHeart) where
+  toFun vector :=
+    (sixAxisStandardDiscriminantFirst vector,
+      sixAxisStandardDiscriminantSecond vector)
+  invFun pair :=
+    sixAxisStandardDiscriminantOfFirst pair.1 +
+      sixAxisStandardDiscriminantOfSecond pair.2
+  left_inv vector := by
+    funext index coordinate
+    fin_cases coordinate <;>
+      simp [sixAxisStandardDiscriminantFirst,
+        sixAxisStandardDiscriminantSecond,
+        sixAxisStandardDiscriminantOfFirst,
+        sixAxisStandardDiscriminantOfSecond]
+  right_inv pair := by
+    ext index <;>
+      simp [sixAxisStandardDiscriminantFirst,
+        sixAxisStandardDiscriminantSecond,
+        sixAxisStandardDiscriminantOfFirst,
+        sixAxisStandardDiscriminantOfSecond]
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+/-- The standard tensor-product discriminant form becomes the explicit
+two-heart polarization form under the chosen-coordinate equivalence. -/
+theorem sixAxisStandardDiscriminantPairLinearEquiv_preserves_form
+    (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixPointHeartPairPolarizationBilinForm
+        (sixAxisStandardDiscriminantPairLinearEquiv left)
+        (sixAxisStandardDiscriminantPairLinearEquiv right) =
+      sixAxisStandardDiscriminantBilinForm left right :=
+  rfl
+
+/-- Diagonal generator stability for a subspace of the standard
+discriminant coordinates, transported to the two-heart model. -/
+def SixAxisStandardDiscriminantGeneratorStable
+    (subspace : Submodule F2 SixAxisStandardDiscriminantCoordinates) : Prop :=
+  SixPointHeartPairGeneratorStable
+    (subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap)
+
+/-- Maximal isotropy is invariant under the chosen symplectic coordinate
+equivalence between the standard discriminant and the two-heart model. -/
+theorem sixAxisStandardDiscriminant_maximalIsotropic_iff_pair
+    (subspace : Submodule F2 SixAxisStandardDiscriminantCoordinates) :
+    IsMaximalIsotropic sixAxisStandardDiscriminantBilinForm subspace ↔
+      IsMaximalIsotropic sixPointHeartPairPolarizationBilinForm
+        (subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap) := by
+  constructor
+  · rintro ⟨isotropic, maximal⟩
+    constructor
+    · intro left leftMember right rightMember
+      obtain ⟨leftPreimage, leftPreimageMember, rfl⟩ := leftMember
+      obtain ⟨rightPreimage, rightPreimageMember, rfl⟩ := rightMember
+      change sixAxisStandardDiscriminantBilinForm
+        rightPreimage leftPreimage = 0
+      exact isotropic leftPreimageMember rightPreimage rightPreimageMember
+    · intro larger contains largerIsotropic
+      let preimage := larger.comap
+        sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap
+      have preimageContains : subspace ≤ preimage := by
+        intro vector vectorMember
+        exact contains (Submodule.mem_map_of_mem vectorMember)
+      have preimageIsotropic :
+          preimage ≤ sixAxisStandardDiscriminantBilinForm.orthogonal preimage := by
+        intro left leftMember right rightMember
+        have mappedLeft :
+            sixAxisStandardDiscriminantPairLinearEquiv left ∈ larger := leftMember
+        have mappedRight :
+            sixAxisStandardDiscriminantPairLinearEquiv right ∈ larger := rightMember
+        have mappedZero := largerIsotropic mappedLeft
+          (sixAxisStandardDiscriminantPairLinearEquiv right) mappedRight
+        change sixAxisStandardDiscriminantBilinForm right left = 0 at mappedZero
+        exact mappedZero
+      have preimageEquality := maximal preimage preimageContains preimageIsotropic
+      ext vector
+      constructor
+      · intro vectorMember
+        have preimageMember :
+            sixAxisStandardDiscriminantPairLinearEquiv.symm vector ∈ preimage := by
+          change sixAxisStandardDiscriminantPairLinearEquiv
+              (sixAxisStandardDiscriminantPairLinearEquiv.symm vector) ∈ larger
+          simpa using vectorMember
+        have sourceMember :
+            sixAxisStandardDiscriminantPairLinearEquiv.symm vector ∈ subspace := by
+          rw [← preimageEquality]
+          exact preimageMember
+        exact Submodule.mem_map.mpr
+          ⟨sixAxisStandardDiscriminantPairLinearEquiv.symm vector,
+            sourceMember, by simp⟩
+      · intro vectorMember
+        exact contains vectorMember
+  · rintro ⟨isotropic, maximal⟩
+    constructor
+    · intro left leftMember right rightMember
+      have mappedLeft :
+          sixAxisStandardDiscriminantPairLinearEquiv left ∈
+            subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap :=
+        Submodule.mem_map_of_mem leftMember
+      have mappedRight :
+          sixAxisStandardDiscriminantPairLinearEquiv right ∈
+            subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap :=
+        Submodule.mem_map_of_mem rightMember
+      have mappedZero := isotropic mappedLeft
+        (sixAxisStandardDiscriminantPairLinearEquiv right) mappedRight
+      change sixAxisStandardDiscriminantBilinForm right left = 0 at mappedZero
+      exact mappedZero
+    · intro larger contains largerIsotropic
+      let image := larger.map
+        sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap
+      have imageContains :
+          subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ≤ image :=
+        Submodule.map_mono contains
+      have imageIsotropic :
+          image ≤ sixPointHeartPairPolarizationBilinForm.orthogonal image := by
+        intro left leftMember right rightMember
+        obtain ⟨leftPreimage, leftPreimageMember, rfl⟩ := leftMember
+        obtain ⟨rightPreimage, rightPreimageMember, rfl⟩ := rightMember
+        change sixAxisStandardDiscriminantBilinForm
+          rightPreimage leftPreimage = 0
+        exact largerIsotropic leftPreimageMember
+          rightPreimage rightPreimageMember
+      have imageEquality := maximal image imageContains imageIsotropic
+      apply le_antisymm
+      · intro vector vectorMember
+        have mappedMember :
+            sixAxisStandardDiscriminantPairLinearEquiv vector ∈ image :=
+          Submodule.mem_map_of_mem vectorMember
+        rw [imageEquality] at mappedMember
+        obtain ⟨source, sourceMember, sourceEquality⟩ := mappedMember
+        have sourceEqualsVector :=
+          sixAxisStandardDiscriminantPairLinearEquiv.injective sourceEquality
+        exact sourceEqualsVector ▸ sourceMember
+      · exact contains
+
+/-- The five transported projective-line halves are exactly the diagonally
+stable maximal-isotropic subspaces of the standard rank-eight discriminant. -/
+theorem sixAxisStandardDiscriminant_stablePacket_iff
+    (subspace : Submodule F2 SixAxisStandardDiscriminantCoordinates) :
+    subspace.map sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        SixPointHeartStableHalfPacket ↔
+      SixAxisStandardDiscriminantGeneratorStable subspace ∧
+        IsMaximalIsotropic sixAxisStandardDiscriminantBilinForm subspace := by
+  rw [sixPointHeartStableHalfPacket_iff_stable_maximalIsotropic]
+  exact and_congr_right fun _ ↦
+    sixAxisStandardDiscriminant_maximalIsotropic_iff_pair subspace |>.symm
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

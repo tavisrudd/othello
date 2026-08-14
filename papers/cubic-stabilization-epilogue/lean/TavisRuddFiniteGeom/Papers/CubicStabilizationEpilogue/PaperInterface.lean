@@ -137,7 +137,9 @@ nondegenerate, and every word in the generated six-point action preserves it.
 After choosing a symplectic basis of a two-dimensional tensor factor, the
 induced rank-eight tensor-product form is also alternating and nondegenerate.
 Every isotropic four-dimensional subspace of this model is proved maximal
-isotropic.
+isotropic.  Under the explicit symplectic coordinate equivalence with two
+heart copies, the five projective-line packet members are exactly the
+diagonally stable maximal-isotropic subspaces of this rank-eight model.
 The named proposition fields do not define
 scheme-theoretic semantics, and Lean constructs none of the relative
 geometry. -/
@@ -2011,21 +2013,38 @@ theorem principalGluing_sixPointCoefficientHeart_projectiveLine_packet :
 
 /-- The explicit alternating polarization form on two copies of the six-point
 coefficient heart is nondegenerate, and the five packet members are exactly
-the diagonally stable maximal-isotropic subspaces.  This is the polarization
-statement for the concrete modular packet; it does not identify the form or
-its maximal-isotropic halves with a geometric Weil pairing or isogeny kernel. -/
+the diagonally stable maximal-isotropic subspaces.  Choosing the standard
+symplectic basis of the two-dimensional torsion factor identifies the
+rank-eight tensor discriminant with this two-heart model, preserves the form,
+and transports the same exact classification.  This does not identify the
+explicit form or packet with a geometric Weil pairing or isogeny kernel. -/
 theorem principalGluing_sixPointCoefficientHeart_packet_maximalIsotropic :
     GraphLattices.sixPointHeartPairPolarizationBilinForm.IsAlt ∧
     GraphLattices.sixPointHeartPairPolarizationBilinForm.Nondegenerate ∧
-    ∀ subspace : Submodule GraphLattices.F2
+    (∀ subspace : Submodule GraphLattices.F2
         (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart),
       subspace ∈ GraphLattices.SixPointHeartStableHalfPacket ↔
         GraphLattices.SixPointHeartPairGeneratorStable subspace ∧
           GraphLattices.IsMaximalIsotropic
-            GraphLattices.sixPointHeartPairPolarizationBilinForm subspace :=
+            GraphLattices.sixPointHeartPairPolarizationBilinForm subspace) ∧
+    (∀ left right : GraphLattices.SixAxisStandardDiscriminantCoordinates,
+      GraphLattices.sixPointHeartPairPolarizationBilinForm
+          (GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv left)
+          (GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv right) =
+        GraphLattices.sixAxisStandardDiscriminantBilinForm left right) ∧
+    ∀ subspace : Submodule GraphLattices.F2
+        GraphLattices.SixAxisStandardDiscriminantCoordinates,
+      subspace.map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+          GraphLattices.SixPointHeartStableHalfPacket ↔
+        GraphLattices.SixAxisStandardDiscriminantGeneratorStable subspace ∧
+          GraphLattices.IsMaximalIsotropic
+            GraphLattices.sixAxisStandardDiscriminantBilinForm subspace :=
   ⟨GraphLattices.sixPointHeartPairPolarizationBilinForm_isAlt,
     GraphLattices.sixPointHeartPairPolarizationBilinForm_nondegenerate,
-    GraphLattices.sixPointHeartStableHalfPacket_iff_stable_maximalIsotropic⟩
+    GraphLattices.sixPointHeartStableHalfPacket_iff_stable_maximalIsotropic,
+    GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv_preserves_form,
+    GraphLattices.sixAxisStandardDiscriminant_stablePacket_iff⟩
 
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has

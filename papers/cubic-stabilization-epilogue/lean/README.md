@@ -110,7 +110,9 @@ The 159 reviewer-facing terminals currently verify:
   chart to the vertical half and the graphs of `0`, `1`, `W`, and `W+1`;
   the explicit alternating form on the two heart copies is nondegenerate, and
   the five packet members are exactly the diagonally stable maximal-isotropic
-  subspaces;
+  subspaces; the chosen symplectic coordinates identify the rank-eight
+  tensor-product discriminant with this two-heart model, preserve the form,
+  and transport the exact packet classification;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
@@ -427,7 +429,9 @@ The 159 reviewer-facing terminals currently verify:
   alternating, nondegenerate, and preserved by the full generated six-point
   action; after choosing a symplectic basis of the two-dimensional factor,
   the induced rank-eight tensor-product form is also alternating and
-  nondegenerate, and every isotropic four-dimensional subspace is maximal;
+  nondegenerate, every isotropic four-dimensional subspace is maximal, and
+  the five projective-line packet members are exactly its diagonally stable
+  maximal-isotropic subspaces under the explicit two-heart equivalence;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.
