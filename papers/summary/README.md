@@ -18,8 +18,9 @@ Threefolds* obtains this dimension-independent conclusion from point-class
 rank under quantum wall crossing. Its local transport, endpoint calculation,
 support collapse, and coefficientwise Gamma reduction are proved.  Tailwise
 derived identification and holonomicity are proved by a rank-one derived
-intersection; the remaining analytic threshold hypothesis asks for Stokes- and
-monodromy-intertwining isomorphisms of the cyclic point-row modules.
+intersection; the remaining analytic threshold hypothesis asks for
+isomorphisms of the cyclic point-row modules that intertwine both Stokes data
+and monodromy.
 
 The strongest unconditional statement is the first stabilization:
 *Irrationality after one stabilization* proves that
