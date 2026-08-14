@@ -207,6 +207,28 @@ Thus the exact remaining theorem is:
 This is strictly more concrete than a general Gamma/Orlov conjecture, but it
 is still a new theorem.
 
+### Smallest plausible proof decomposition
+
+Full Conjecture 43 is stronger than C907 needs.  A bounded proof can be split
+into three independently falsifiable statements:
+
+1. **Adjoint point row.**  The adjoint discrete Fourier transform sends the
+   point/rank row of every chamber to the same equivariant common-orbit row.
+   Only the degree-zero/common-open quotient is involved; cone preservation
+   for arbitrary inputs is unnecessary.
+2. **Formal packet.**  The generalized primitive-sixth packet in each
+   chamber is the conservative image of one packet in the completed global
+   equivariant QDM.  This is a formal generalized-eigenspace assertion, not
+   an analytic Gamma comparison.
+3. **Neutral analytification.**  Between the two formal images, use the
+   parameterized Calabi--Yau contour lemma of Section 1.  This is the only
+   analytic step and is already proved once the common kernel exists.
+
+Statements 1 and 2 together are the point-row/packet fragment of the
+reduction conjecture.  Either can be attacked directly from Iritani's
+discrete shift-operator formula; failure of either gives a precise
+counterexample, rather than another ambiguous frame mismatch.
+
 ## 5. Stronger elimination for the fixed-curve suspect
 
 There is one unconditional strengthening of the low-moment sieve.  Let `Y`
