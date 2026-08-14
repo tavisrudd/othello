@@ -1966,6 +1966,49 @@ theorem principalGluing_sixPointCoefficientHeart_stableHalf_classification
   simpa [GraphLattices.SixPointHeartStableHalfPacket] using
     GraphLattices.sixPointHeartStableHalfPacket_iff subspace
 
+/-- The actual projective line over `F4` is explicitly equivalent to the
+five-member stable-half packet of the concrete six-point heart.  In the
+vertical-plus-affine chart, `none` is the vertical half, while `0`, `1`, the
+transported marked quadratic root, and its `root+1` conjugate map respectively
+to the graphs of `0`, `1`, `W`, and `W+1`.  This is a concrete modular
+parameterization; it does not identify the heart, projective line, or packet
+with the geometric two-primary kernel family. -/
+theorem principalGluing_sixPointCoefficientHeart_projectiveLine_packet :
+    Nonempty
+      (Projectivization GraphLattices.F4
+          (GraphLattices.F4 × GraphLattices.F4) ≃
+        {subspace // subspace ∈
+          GraphLattices.SixPointHeartStableHalfPacket}) ∧
+    (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket none).1 =
+        LinearMap.range
+          (GraphLattices.verticalEmbedding (K := GraphLattices.F2)
+            (H := GraphLattices.SixPointHeart)) ∧
+    (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some 0)).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin'
+              (0 : Matrix (Fin 4) (Fin 4) GraphLattices.F2))) ∧
+    (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some 1)).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin'
+              (1 : Matrix (Fin 4) (Fin 4) GraphLattices.F2))) ∧
+    (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some GraphLattices.sixAxisQuadraticSlopeRootInF4)).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin' GraphLattices.sixPointHeartCommutantRoot)) ∧
+    (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1))).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin'
+              (GraphLattices.sixPointHeartCommutantRoot + 1))) := by
+  exact ⟨⟨GraphLattices.sixPointHeartProjectiveLineEquivStableHalfPacket⟩,
+    GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket_marked_values⟩
+
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has
 the dimension of one coefficient copy while the ambient pair has twice that

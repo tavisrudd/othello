@@ -279,7 +279,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 87 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 157 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 158 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -518,7 +518,8 @@ quadratic algebra; the same classification is proved for every matrix word in
 the full generated action.  A subspace of two heart copies is four-dimensional
 and stable under the diagonal action exactly when it is the vertical half or
 the graph of one of those four commutant endomorphisms; these five subspaces are
-distinct.  All six Sylow-five subgroups of this concrete `A5` are
+distinct.  An explicit equivalence with the actual `P¹(F4)` sends the marked
+vertical-plus-affine chart to the vertical half and the four graphs.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;

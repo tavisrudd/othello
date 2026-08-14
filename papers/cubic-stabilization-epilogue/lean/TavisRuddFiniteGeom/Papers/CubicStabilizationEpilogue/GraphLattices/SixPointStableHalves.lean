@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import Mathlib.Data.Set.Card
 
 /-!
@@ -305,6 +306,232 @@ theorem sixPointHeartStableHalfPacket_ncard :
     Set.ncard_insert_of_notMem oneNotMem (Set.toFinite _),
     Set.ncard_insert_of_notMem rootNotMem (Set.toFinite _)]
   simp
+
+/-- The four field elements label the four matrices in the quadratic
+commutant, with the transported marked root sent to `W`. -/
+noncomputable def sixPointHeartCommutantMatrixOfF4 (scalar : F4) :
+    Matrix (Fin 4) (Fin 4) F2 := by
+  classical
+  exact if scalar = 0 then 0
+    else if scalar = 1 then 1
+    else if scalar = sixAxisQuadraticSlopeRootInF4 then
+      sixPointHeartCommutantRoot
+    else sixPointHeartCommutantRoot + 1
+
+/-- The marked labels `0`, `1`, the transported root, and its conjugate map to
+the four displayed commutant matrices. -/
+theorem sixPointHeartCommutantMatrixOfF4_marked_values :
+    sixPointHeartCommutantMatrixOfF4 0 = 0 ∧
+    sixPointHeartCommutantMatrixOfF4 1 = 1 ∧
+    sixPointHeartCommutantMatrixOfF4
+        sixAxisQuadraticSlopeRootInF4 = sixPointHeartCommutantRoot ∧
+    sixPointHeartCommutantMatrixOfF4
+        (sixAxisQuadraticSlopeRootInF4 + 1) =
+      sixPointHeartCommutantRoot + 1 := by
+  letI : Algebra (ZMod 2) F4 :=
+    FiniteField.instAlgebraExtension (ZMod 2) 2 2
+  letI : CharP F4 2 :=
+    charP_of_injective_algebraMap' (ZMod 2) 2
+  let root := sixAxisQuadraticSlopeRootInF4
+  have rootZero : root ≠ 0 :=
+    sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.1
+  have rootOne : root ≠ 1 :=
+    sixAxisQuadraticSlopeRootInF4_equation_and_exotic.2.2
+  have oneAddOne : (1 : F4) + 1 = 0 :=
+    CharTwo.add_self_eq_zero 1
+  have rootOneZero : root + 1 ≠ 0 := by
+    intro equality
+    apply rootOne
+    have := congrArg (fun value : F4 => value + 1) equality
+    simpa [add_assoc, oneAddOne] using this
+  have rootOneOne : root + 1 ≠ 1 := by
+    intro equality
+    apply rootZero
+    have := congrArg (fun value : F4 => value + 1) equality
+    simpa [add_assoc, oneAddOne] using this
+  have rootOneRoot : root + 1 ≠ root := by
+    intro equality
+    have := congrArg (fun value : F4 => value + root) equality
+    simp [add_assoc] at this
+  simp [sixPointHeartCommutantMatrixOfF4, root, rootZero, rootOne,
+    rootOneZero, rootOneOne, rootOneRoot]
+
+/-- The field labelling of the quadratic commutant is injective. -/
+theorem sixPointHeartCommutantMatrixOfF4_injective :
+    Function.Injective sixPointHeartCommutantMatrixOfF4 := by
+  intro left right equality
+  have matrixZeroOne :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠ 1 := by decide
+  have matrixZeroRoot :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot := by decide
+  have matrixZeroRootOne :
+      (0 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  have matrixOneRoot :
+      (1 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot := by decide
+  have matrixOneRootOne :
+      (1 : Matrix (Fin 4) (Fin 4) F2) ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  have matrixRootRootOne :
+      sixPointHeartCommutantRoot ≠
+        sixPointHeartCommutantRoot + 1 := by decide
+  rcases f4_eq_zero_or_one_or_markedRoot_or_conjugate left with
+    leftZero | leftOne | leftRoot | leftConjugate <;>
+  rcases f4_eq_zero_or_one_or_markedRoot_or_conjugate right with
+    rightZero | rightOne | rightRoot | rightConjugate <;>
+  subst left <;> subst right
+  all_goals
+    simp only [sixPointHeartCommutantMatrixOfF4_marked_values.1,
+      sixPointHeartCommutantMatrixOfF4_marked_values.2.1,
+      sixPointHeartCommutantMatrixOfF4_marked_values.2.2.1,
+      sixPointHeartCommutantMatrixOfF4_marked_values.2.2.2] at equality ⊢
+  all_goals exfalso
+  all_goals first
+    | exact matrixZeroOne equality
+    | exact matrixZeroOne equality.symm
+    | exact matrixZeroRoot equality
+    | exact matrixZeroRoot equality.symm
+    | exact matrixZeroRootOne equality
+    | exact matrixZeroRootOne equality.symm
+    | exact matrixOneRoot equality
+    | exact matrixOneRoot equality.symm
+    | exact matrixOneRootOne equality
+    | exact matrixOneRootOne equality.symm
+    | exact matrixRootRootOne equality
+    | exact matrixRootRootOne equality.symm
+
+/-- The affine projective chart sends `none` to the vertical half and a scalar
+to the graph of its labelled commutant matrix. -/
+noncomputable def sixPointHeartStableHalfOfProjectiveChart :
+    Option F4 → Submodule F2 (SixPointHeart × SixPointHeart)
+  | none => LinearMap.range
+      (verticalEmbedding (K := F2) (H := SixPointHeart))
+  | some scalar => LinearMap.range
+      (graphEmbedding (K := F2)
+        (Matrix.toLin' (sixPointHeartCommutantMatrixOfF4 scalar)))
+
+/-- Every affine-chart point labels a member of the stable-half packet. -/
+theorem sixPointHeartStableHalfOfProjectiveChart_mem (point : Option F4) :
+    sixPointHeartStableHalfOfProjectiveChart point ∈
+      SixPointHeartStableHalfPacket := by
+  cases point with
+  | none => simp [sixPointHeartStableHalfOfProjectiveChart,
+      SixPointHeartStableHalfPacket]
+  | some scalar =>
+      rcases f4_eq_zero_or_one_or_markedRoot_or_conjugate scalar with
+        zero | one | root | conjugate <;> subst scalar <;>
+      simp [sixPointHeartStableHalfOfProjectiveChart,
+        SixPointHeartStableHalfPacket,
+        sixPointHeartCommutantMatrixOfF4_marked_values]
+
+/-- The affine-chart labelling of stable halves is injective. -/
+theorem sixPointHeartStableHalfOfProjectiveChart_injective :
+    Function.Injective sixPointHeartStableHalfOfProjectiveChart := by
+  intro left right equality
+  cases left with
+  | none =>
+      cases right with
+      | none => rfl
+      | some scalar =>
+          exact (sixPointHeartVertical_ne_graphRange
+            (Matrix.toLin' (sixPointHeartCommutantMatrixOfF4 scalar))
+            equality).elim
+  | some leftScalar =>
+      cases right with
+      | none =>
+          exact (sixPointHeartVertical_ne_graphRange
+            (Matrix.toLin' (sixPointHeartCommutantMatrixOfF4 leftScalar))
+            equality.symm).elim
+      | some rightScalar =>
+          apply congrArg some
+          apply sixPointHeartCommutantMatrixOfF4_injective
+          apply Matrix.toLin'.injective
+          exact sixPointHeartGraphRange_injective equality
+
+/-- The chart labelling, regarded as a map into the subtype of packet
+members. -/
+noncomputable def sixPointHeartStableHalfPacketFromChart (point : Option F4) :
+    {subspace // subspace ∈ SixPointHeartStableHalfPacket} :=
+  ⟨sixPointHeartStableHalfOfProjectiveChart point,
+    sixPointHeartStableHalfOfProjectiveChart_mem point⟩
+
+/-- Every member of the stable-half packet has one of the five affine-chart
+labels. -/
+theorem sixPointHeartStableHalfPacketFromChart_surjective :
+    Function.Surjective sixPointHeartStableHalfPacketFromChart := by
+  intro target
+  have member := target.property
+  simp only [SixPointHeartStableHalfPacket, Set.mem_union,
+    Set.mem_singleton_iff, Set.mem_insert_iff] at member
+  rcases member with vertical | zero | one | root | rootOne
+  · refine ⟨none, Subtype.ext ?_⟩
+    simpa [sixPointHeartStableHalfPacketFromChart,
+      sixPointHeartStableHalfOfProjectiveChart] using vertical.symm
+  · refine ⟨some 0, Subtype.ext ?_⟩
+    simpa [sixPointHeartStableHalfPacketFromChart,
+      sixPointHeartStableHalfOfProjectiveChart,
+      sixPointHeartCommutantMatrixOfF4_marked_values] using zero.symm
+  · refine ⟨some 1, Subtype.ext ?_⟩
+    simpa [sixPointHeartStableHalfPacketFromChart,
+      sixPointHeartStableHalfOfProjectiveChart,
+      sixPointHeartCommutantMatrixOfF4_marked_values] using one.symm
+  · refine ⟨some sixAxisQuadraticSlopeRootInF4, Subtype.ext ?_⟩
+    simpa [sixPointHeartStableHalfPacketFromChart,
+      sixPointHeartStableHalfOfProjectiveChart,
+      sixPointHeartCommutantMatrixOfF4_marked_values] using root.symm
+  · refine ⟨some (sixAxisQuadraticSlopeRootInF4 + 1), Subtype.ext ?_⟩
+    simpa [sixPointHeartStableHalfPacketFromChart,
+      sixPointHeartStableHalfOfProjectiveChart,
+      sixPointHeartCommutantMatrixOfF4_marked_values] using rootOne.symm
+
+/-- The affine projective chart is explicitly equivalent to the stable-half
+packet. -/
+noncomputable def sixPointHeartProjectiveChartEquivStableHalfPacket :
+    Option F4 ≃ {subspace // subspace ∈ SixPointHeartStableHalfPacket} :=
+  Equiv.ofBijective sixPointHeartStableHalfPacketFromChart
+    ⟨fun _ _ equality =>
+      sixPointHeartStableHalfOfProjectiveChart_injective
+        (congrArg Subtype.val equality),
+      sixPointHeartStableHalfPacketFromChart_surjective⟩
+
+/-- The actual projective line over `F4` is explicitly equivalent to the
+stable-half packet through its vertical-plus-affine chart. -/
+noncomputable def sixPointHeartProjectiveLineEquivStableHalfPacket :
+    Projectivization F4 (F4 × F4) ≃
+      {subspace // subspace ∈ SixPointHeartStableHalfPacket} :=
+  (optionEquivProjectiveLine F4).symm.trans
+    sixPointHeartProjectiveChartEquivStableHalfPacket
+
+/-- The projective-chart equivalence sends the marked points to the vertical
+half and the four displayed commutant graphs. -/
+theorem sixPointHeartProjectiveChartEquivStableHalfPacket_marked_values :
+    (sixPointHeartProjectiveChartEquivStableHalfPacket none).1 =
+        LinearMap.range
+          (verticalEmbedding (K := F2) (H := SixPointHeart)) ∧
+    (sixPointHeartProjectiveChartEquivStableHalfPacket (some 0)).1 =
+        LinearMap.range
+          (graphEmbedding (K := F2)
+            (Matrix.toLin' (0 : Matrix (Fin 4) (Fin 4) F2))) ∧
+    (sixPointHeartProjectiveChartEquivStableHalfPacket (some 1)).1 =
+        LinearMap.range
+          (graphEmbedding (K := F2)
+            (Matrix.toLin' (1 : Matrix (Fin 4) (Fin 4) F2))) ∧
+    (sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some sixAxisQuadraticSlopeRootInF4)).1 =
+        LinearMap.range
+          (graphEmbedding (K := F2)
+            (Matrix.toLin' sixPointHeartCommutantRoot)) ∧
+    (sixPointHeartProjectiveChartEquivStableHalfPacket
+        (some (sixAxisQuadraticSlopeRootInF4 + 1))).1 =
+        LinearMap.range
+          (graphEmbedding (K := F2)
+            (Matrix.toLin' (sixPointHeartCommutantRoot + 1))) := by
+  simp [sixPointHeartProjectiveChartEquivStableHalfPacket,
+    sixPointHeartStableHalfPacketFromChart,
+    sixPointHeartStableHalfOfProjectiveChart,
+    sixPointHeartCommutantMatrixOfF4_marked_values]
 
 /-- Every four-dimensional diagonally stable subspace of two coefficient-heart
 copies is one of the vertical half or the four quadratic-commutant graphs. -/
