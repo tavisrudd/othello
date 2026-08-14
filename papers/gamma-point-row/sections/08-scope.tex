@@ -4,8 +4,8 @@
 The results have deliberately different logical strengths.
 \begin{enumerate}[label=\textup{(\arabic*)}]
 \item Theorem~\ref{thm:simple-wall-point-column} is an exact identity inside
-  the Gu--Yu--Yu completed formal comparison.  It concerns the ambient point
-  coordinate only.
+  the Gu--Yu--Yu completed formal comparison for \(r_+<r_-\).  It concerns
+  the ambient point coordinate only.
 \item Theorem~\ref{thm:ordinary-flop-point-row} is an intrinsic point-section
   identity on one fixed Lee--Lin--Qu--Wang continuation domain.  It does not
   assert full descendant invariance or a Gamma/Fourier--Mukai square for all
@@ -18,7 +18,9 @@ The results have deliberately different logical strengths.
   \ref{prop:punctual-corner} are exact analytic and algebraic countermodels.
   They are not asserted to arise from smooth projective quantum connections.
 \item Theorem~\ref{thm:rank-zero-target} is a conditional assembly theorem.
-  Its proof is exact once the directed target-support hypothesis is supplied.
+  Its proof is exact once the factorwise rank-zero-target hypothesis is
+  supplied.  Boundary-supported targets are one sufficient geometric source
+  of that condition.
 \end{enumerate}
 
 There is a second, geometric limitation.  Birational cobordism decomposes a
@@ -37,13 +39,13 @@ irregular problem uses localized Fourier--Laplace transforms, which kill the
 constant modules in (6.2).  An unlocalized comparison with its boundary
 triangle is needed before that marking can control the point row.  General
 discrepant toric continuation results such as \cite{AcostaShoemaker} do not,
-without additional Gamma calibration, supply the two-wall identity (7.5).
+without additional Gamma calibration, supply the two-wall identity (7.6).
 
 The resulting open problem is precise.
 \begin{quote}
 For two incident noncrepant unit wall crossings with a common smooth
 projective chamber, construct the complete oriented Fourier/window boundary
-correction block by block, construct the point-row marking (7.7), and prove
+correction block by block, construct the point-row marking (7.8), and prove
 that every marked block has zero punctual coefficient, or exhibit a
 geometric residue block for which it does not.
 \end{quote}
@@ -53,3 +55,8 @@ window matrices.  The countermodels show that the row cannot be recovered
 from formal monodromy, a flat pairing, integrality, a nilpotent divisor tag,
 or unmarked singular support.  A proof must retain the augmentation marking
 through the unlocalized two-wall comparison.
+
+For a smooth cubic threefold \(X\), such a marked comparison is the exact
+missing input in this approach to \(X\times\mathbf P^2\).  Proving it would
+make the one-wall identities composable along a factorization; finding one
+marked block with nonzero point row would rule out that composition argument.

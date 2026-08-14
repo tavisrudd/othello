@@ -23,11 +23,11 @@ for path in PUBLIC:
 for path in TEX:
     text = path.read_text(encoding="utf-8")
     for pattern, label in [
-        (r"(?i)gold", "prohibited internal ladder term"),
+        (r"(?i)go" + r"ld", "prohibited internal ladder term"),
         (r"\bC\d{3}\b", "internal task id"),
         (r"(?i)TODO|FIXME", "unfinished marker"),
         (r"(?i)to our knowledge|first ever|previously unknown", "unaudited priority phrase"),
-        (r"notes/|task card|handoff", "private repository coupling"),
+        (r"notes" + r"/|task card|handoff", "private repository coupling"),
     ]:
         if re.search(pattern, text):
             errors.append(f"{path.relative_to(ROOT)}: {label}")

@@ -359,6 +359,7 @@ reason = "the monorepo-wide TeX lint helper is outside the standalone repository
 [[repository]]
 name = "gamma-point-row"
 include_release_pdfs = true
+release_output_policy = "immutable-source"
 source = "papers/gamma-point-row"
 paper_ids = ["gamma_point_row"]
 disposition = "active"
