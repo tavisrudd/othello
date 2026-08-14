@@ -285,6 +285,22 @@ factorization through one supported block is harmless; a Gold obstruction
 requires a genuinely off-diagonal component which, after gluing to the two
 ambient sides, produces the nonzero-rank shear (7)--(8).
 
+The expected one-wall incidence locus has no primitive primary freedom.  In
+a fivefold, (15a) has virtual dimension four.  For a standard wall with
+`E_+=P_S(N_+)`, `E_-=P_S(N_-)`, the identity
+`dim S+r_++r_--1=5` gives
+
+\[
+ \dim(E_+\times_S E_-)=4.
+\]
+
+Hence a primary two-leg pushforward supported there is a scalar fundamental
+correspondence and factors through `H^*(S)`.  It is a supported center factor,
+not a primitive ambient target.  If its image has dimension below four, it
+vanishes.  A surviving primary bridge must therefore exhibit excess
+incidence—a nonfundamental four-cycle in a larger evaluation locus—or else
+come from genuinely relative/descendant gluing data.
+
 Thus the dangerous object is not a curve class alone.  At minimum it is an
 unbounded neutral tower together with a **mixed boundary-to-ambient coupling**.
 A multi-legged boundary propagator joining two carrier components is the

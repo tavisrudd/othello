@@ -127,6 +127,13 @@ This gives three bounded proof routes:
 3. compare only the image row of the two Mellin--Barnes orders, showing that
    their difference is spanned by wall columns.
 
+The first route has an exact necessary shadow: by joint flatness, a failure
+must carry a nontrivial braid of the leading spectral roots around the peak
+discriminant.  See
+`2026-08-13-c907-stokes-anomaly-requires-spectral-braid.md`.  A model whose
+ambient cluster has trivial braid satisfies the target lemma without a
+multiplier computation.
+
 None requires a full equality of Stokes and window matrices.
 
 ## 5. Relation to the shadow sieve

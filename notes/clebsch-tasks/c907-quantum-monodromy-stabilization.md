@@ -223,6 +223,22 @@ operator and cannot create a new exponential or turning ray.  Only an affine
 carrier tower `beta_0+n delta` with `c1.beta_0!=0` can remain dangerous.  See
 `../2026-08-13-c907-pure-neutral-spectral-invisibility.md`.
 
+The primary bridge is also structurally restricted.  Its virtual dimension
+is four, while a standard wall satisfies
+`dim(P_S(N_+) times_S P_S(N_-))=4`.  Any primary two-leg class confined to
+that expected incidence locus is therefore only a scalar fundamental
+correspondence and factors through the supported center `H^*(S)`.  A survivor
+must carry an excess-incidence four-cycle in a larger locus, or use genuinely
+relative/descendant gluing data.
+
+Joint flatness replaces arbitrary mixed-series analysis by a spectral braid
+test.  On every convergent nonturning domain the Stokes word is locally
+constant; hence a target-support failure must braid a wall/relative leading
+root around an ambient rank-visible root at the peak discriminant.  The next
+cheap object is the relevant characteristic-polynomial resultant and its
+root braid, not a Mellin--Barnes multiplier.  See
+`../2026-08-13-c907-stokes-anomaly-requires-spectral-braid.md`.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map

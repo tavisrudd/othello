@@ -32,6 +32,42 @@ is the rank-zero-target Stokes lemma of
 Stokes/window comparison and, if proved, makes the seven tests fallback
 proof tools rather than separate obligations.
 
+### Expected-incidence factorization
+
+A pure neutral two-leg class on a fivefold has virtual dimension four.  Let
+`I` be an irreducible component of the image of `(ev_1,ev_2)`.  If
+`dim I<4`, its virtual pushforward is zero.  If `dim I=4`, that pushforward
+is only a scalar multiple of `[I]`.
+
+For one standard wall the endpoint loci are
+
+\[
+ E_+=\mathbf P_S(N_+),\qquad E_-=\mathbf P_S(N_-),
+\]
+
+and `dim S+r_++r_--1=5`.  Therefore
+
+\[
+ \dim(E_+\times_S E_-)=4.                                       \tag{1}
+\]
+
+Every primary neutral bridge confined to this expected incidence locus is a
+fundamental correspondence.  Its action factors, up to the projective-bundle
+degree shifts, through
+
+\[
+ H^*(E_+)\xrightarrow{\pi_{+*}}H^*(S)
+ \xrightarrow{\pi_-^*}H^*(E_-),                                 \tag{2}
+\]
+
+and hence through the supported center block.  It cannot be the primitive
+ambient target required by the dangerous shear.
+
+Thus a surviving primary bridge needs an **excess-incidence shadow**: a
+four-cycle with primitive content inside an evaluation locus of dimension
+greater than four.  Otherwise it must use genuinely relative/descendant data
+whose degree is not the primary two-leg degree above.
+
 ## 2. What the object would have to be
 
 The smallest possible geometry is not a center object by itself.  It is a
@@ -106,6 +142,15 @@ factor `c1.gamma`.  Hence every pure neutral class `n delta`, with
 small `z`-connection.  It cannot create an exponential or turning ray.  Only
 the carrier-dressed affine tower `beta_0+n delta` survives this lemma; see
 `2026-08-13-c907-pure-neutral-spectral-invisibility.md`.
+
+Joint flatness supplies the next structural shadow.  On a convergent
+nonturning parameter domain the quantum connection is isomonodromic, so a
+zero relative Stokes coefficient cannot be born coefficientwise from the
+mixed series.  Any failure must produce a nontrivial braid of the leading
+eigenvalues around the peak discriminant, involving an ambient rank-visible
+branch.  This reduces the spectral test to a characteristic-polynomial
+resultant and root braid; see
+`2026-08-13-c907-stokes-anomaly-requires-spectral-braid.md`.
 
 ## 5. Bounded attack
 
