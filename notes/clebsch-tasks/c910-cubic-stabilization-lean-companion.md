@@ -532,7 +532,11 @@ are current, and the committed paper export verifies byte-for-byte in
   Generic-fibre identities are now extended by the explicit density and
   separatedness argument rather than an uncited rigidity slogan.  The
   separation-family proof now pins non-isotriviality to Hartlieb's
-  one-dimensional intermediate-Jacobian image (Proposition 5.7).
+  one-dimensional intermediate-Jacobian image (Proposition 5.7).  The
+  principal-packet exclusion no longer relies on the shorthand that the
+  generic cubic has automorphism group exactly \(A_5\): Strong Torelli would
+  produce a faithful \(S_6\)-action, which Hartlieb's Theorem 2.1 excludes
+  because every listed ambient group has two-primary order at most \(8\).
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

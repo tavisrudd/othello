@@ -352,6 +352,11 @@ and separatedness argument.  This closes a referee-facing relative-geometry
 seam without upgrading the Lean row beyond fragmentary coverage.  The
 separation-family proof also now cites Hartlieb's one-dimensional period image
 for its non-isotriviality conclusion.
+The principal-gluing contradiction no longer uses the broad assertion that the
+generic cubic has automorphism group exactly \(A_5\).  Strong Torelli would
+instead give a faithful \(S_6\)-action on a smooth cubic threefold, directly
+excluded by Hartlieb's Theorem 2.1 because the six classified ambient groups
+all have two-primary order at most eight.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
