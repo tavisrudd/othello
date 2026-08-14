@@ -634,6 +634,24 @@ Gold counterexample must realize *all* six shadows simultaneously.  The
 named C908, Geiser, ordinary-flop, and one-wall center objects already fail at
 the first or second shadow.
 
+The cone/incidence tests are not vacuous.  The first exact survivor is
+`2026-08-13-c907-minimal-neutral-toric-shadow.md`: blow up a codimension-two
+toric center meeting the negative exceptional line of the point `(1,3)`
+flip.  The strict line and exceptional fibre have `c_1`-degrees `-3` and
+`+1`, and the neutral class has charge
+
+\[
+ (3,1,1,-1,-1,-1,-2).
+\]
+
+Its reduced GKZ shadow is the rank-three regular-singular system
+`_3F_2(1,1,1/2;1/3,2/3;4q/27)`.  This proves that a connected infinite
+neutral boundary tower can occur.  It remains pure-boundary and rank-zero,
+and it fails the next primary low-moment shadow: its one- and two-leg
+evaluation pushforwards vanish because their images lie in a fixed boundary
+curve and its square.  The hypergeometric tail is a descendant/equivariant
+calibration, not yet an ambient carrier-coupling row.
+
 ### Route A: vanishing/triangularity
 
 Prove that every neutral-tail Stokes term between incident unit walls factors
@@ -668,6 +686,12 @@ AKMW chain because all other variables remain Artin-formal.
 - Center-row computation: center rows are annihilated already by (4).
 - The C908 theta lattice: its ordinary blowup framing contains the primitive
   exceptional identity component and does not constrain (7).
+- Bare Barnes-integrality: the two cubic point coefficients prove that both
+  primitive-sixth branch ranks are nonzero, but they are given only up to
+  independent nonzero normalizations of the formal branches.  They do not
+  determine the integral `K`-lattice rank values or an integral ratio against
+  which a Stokes coefficient could be tested.  Integrality becomes a usable
+  shadow only after the numerical window/Gamma comparison is supplied.
 - General birational rigidity: the product has explicit relative Sarkisov
   links and lies outside known rigidity criteria.
 

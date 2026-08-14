@@ -114,6 +114,28 @@ object would be a **categorically phantom but analytically nontrivial**
 ambient shear.  Pure boundary packets, mutations by wall objects, ordinary
 flop packets, and the C908/Fano-surface packet cannot have this form.
 
+## 5. Why toroidal localization does not automatically close it
+
+The valence/contact-budget lemma forces a surviving tower into a connected
+toroidal boundary neighborhood, so it is tempting to invoke toric mirror
+symmetry there.  Iritani's global toric Landau--Ginzburg theorem does prove a
+formal QDM decomposition for general discrepant toric wall crossings.  Its
+analytic Gamma/Stokes identification with an Orlov `K`-decomposition is
+proved, however, for weighted blowups of weak-Fano compact toric stacks along
+toric centres; the general discrepant Riemann--Hilbert functoriality is stated
+conjecturally.
+
+A chamber supporting the present mixed-sign shadow has an effective ray on
+which `c_1=-K` is negative.  It is therefore not weak Fano.  Moreover, the two
+incident unit circuits need not combine into a single weighted blowup.  Thus
+the toroidal normal model supplies the right finite Mellin--Barnes regression,
+but the published toric analytic theorem does not already identify its two
+window orders.
+
+This is useful localization, not closure: any remaining anomaly is confined
+to a non-weak-Fano two-circuit toric normal model over the common boundary
+stratum.
+
 ## EJ / TT / AA
 
 - **EJ:** the entire derived/window side already fixes rank; the only missing
@@ -134,3 +156,7 @@ flop packets, and the C908/Fano-surface packet cannot have this form.
   Cobordisms*, arXiv:2001.10431v1, especially the weight-truncation
   semiorthogonal decompositions and the flip/flop application under the
   local-cohomology-duality hypothesis.
+- Hiroshi Iritani, *Global Mirrors and Discrepant Transformations for Toric
+  Deligne--Mumford Stacks*, arXiv:1906.00801v2, for the general formal toric
+  split and the analytic Gamma/Orlov theorem in the weighted weak-Fano
+  blowup range.

@@ -190,6 +190,22 @@ classes throughout the cobordism.  This is not Gold: BFK/Yeung do not identify
 the analytic Stokes transition with that window action.  A counterexample is
 therefore forced to be categorically phantom but analytically nontrivial.
 
+The incidence sieve has a first exact survivor, so it is not itself the
+closure.  In
+`../2026-08-13-c907-minimal-neutral-toric-shadow.md`, the positive side of
+the point `(1,3)` flip is blown up along a codimension-two toric center meeting
+its negative exceptional line.  The strict line has `c1=-3`, the blowup fibre
+has `c1=1`, and their primitive neutral tower has charge
+`(3,1,1,-1,-1,-1,-2)`.  Its reduced GKZ system is exactly
+`_3F_2(1,1,1/2;1/3,2/3;4q/27)`, verified by a standard-library replay.  This
+is a connected, nonpolynomial neutral boundary tower, but still has rank zero.
+Moreover its primary one- and two-leg evaluation pushforwards vanish by
+dimension: all images lie in a fixed nodal boundary curve and its square.
+The displayed hypergeometric system is therefore a descendant/equivariant
+calibration shadow.  It becomes dangerous only if a relative/descendant
+gluing state can enter the small ambient connection and couple to the
+off-boundary cubic carrier with a nonzero ambient row.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
