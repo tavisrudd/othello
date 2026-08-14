@@ -218,10 +218,25 @@ nearby/vanishing-cycle boundary morphism (`can/var`, or the corresponding
 reduced to proving that the primitive-sixth carrier component of this
 boundary morphism has zero output zero-section multiplicity.
 
-This is the first singular shadow which has not been falsified.  It is also
-minimal: discarding (9) produces the exact incomplete-Gamma ambiguity, while
-retaining the whole unlocalized GKZ module is more information than the
-rank row needs.
+This is the first singular datum which has not been discarded, but its bare
+support is not a vanishing theorem.  The exact Weyl-algebra model in
+`2026-08-13-c907-punctual-fourier-corner-no-go.md` sharpens the point:
+`delta_(0,0)` is killed by localization at either Fourier coordinate, yet
+inverse Fourier transform sends it to a constant module of generic rank
+one.  Thus an object supported at the **double Fourier boundary** can be the
+dangerous full-support output itself.
+
+What survives is the signed punctual coefficient of the complete oriented
+boundary complex.  If `mu_00` denotes the alternating `delta_(0,0)`
+multiplicity, the exact target is
+
+\[
+ \mu_{00}(B_{\rm corner})=0.                                  \tag{9a}
+\]
+
+This is also minimal: discarding (9) produces the exact incomplete-Gamma
+ambiguity, while retaining the whole unlocalized GKZ module is more
+information than the scalar (9a) needs.
 
 It is also already present elsewhere in the C907 architecture.  Under
 Riemann--Hilbert, (9) is the same minimum datum isolated in
@@ -239,13 +254,15 @@ The negative-shadow audit now proves that the directed data left in (10) are
 not optional: localized Fourier--Laplace and unmarked Morse data both forget
 exactly enough to permit (8).
 
-Thus the strongest combined route is a **double-boundary cleanliness
+Thus the strongest combined route is a **signed double-boundary cleanliness
 theorem**.  A one-wall anomaly lies in the boundary cone (9).  Away from the
-second unstable boundary the second wall map is an isomorphism, so its
-generic-rank output remains zero.  Only the intersection of the two proper
-bad images can contribute to (3).  This is the same two-model mechanism
-already proved in the order-zero pilot; Gold asks for its carrier-dressed
-unit-circuit version, together with the directed diagram (10).
+second unstable boundary the second wall map is an isomorphism, so only the
+intersection of the two proper bad images can contribute to (3).  The new
+punctual model proves that support on this intersection is not enough:
+Fourier transform can turn it into the output zero section.  The required
+carrier-dressed unit-circuit theorem is precisely cancellation of its signed
+punctual multiplicity, with the directed diagram (10) fixing the signs and
+order.
 
 ### Why a single common reduced image is the wrong replacement
 

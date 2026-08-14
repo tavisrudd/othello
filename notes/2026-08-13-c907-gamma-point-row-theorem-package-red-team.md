@@ -235,6 +235,26 @@ reproducibility bundle has not been assembled for this paper.  It may be
 mentioned as motivation or future evidence, but it will not be a premise or
 headline theorem of the first manuscript version.
 
+### J. Punctual Fourier-corner no-go — accepted
+
+In two Fourier variables,
+
+```text
+FL(O_A2) = delta_(0,0).
+```
+
+The punctual module is killed after inverting either Fourier coordinate,
+but inverse Fourier transform returns a constant module of generic rank one.
+After tensoring with the primitive-sixth rank-one connection, hyperbolic
+doubling, and the length-three nilpotent tag, the same conclusion persists.
+Thus support at the intersection of the two deleted Fourier axes is not a
+rank-zero condition.
+
+The exact singular invariant is the signed `delta_(0,0)` multiplicity of the
+complete oriented Cech/boundary complex.  The manuscript may state the
+countermodel and the elementary two-monodromy Koszul sieve.  It must not call
+bare double-boundary support a cleanliness theorem.
+
 ## Corrected manuscript hierarchy
 
 1. Define the Gamma point row and distinguish a formal block, a sectorial
@@ -243,9 +263,11 @@ headline theorem of the first manuscript version.
 3. Prove the path-local ordinary-flop point-row theorem.
 4. State the discrepant primitive-sixth consequence under a named sectorial
    realization hypothesis.
-5. Prove the incomplete-Gamma and localized-Fourier no-go theorems.
-6. Formulate the two-wall rank-zero-target statement and prove that it is
-   sufficient for factorization-level rank-row invariance.
+5. Prove the incomplete-Gamma, localized-Fourier, and punctual-corner no-go
+   theorems.
+6. Formulate the two-wall rank-zero-target statement as vanishing of the
+   signed punctual/output-rank coefficient and prove that it is sufficient
+   for factorization-level rank-row invariance.
 7. End with the exact open problem: establish that statement for the first
    noncrepant carrier-dressed unit circuits.
 

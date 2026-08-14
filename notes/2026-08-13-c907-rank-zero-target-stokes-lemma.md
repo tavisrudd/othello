@@ -160,6 +160,15 @@ General noncrepant toric continuation has an asymptotic `I`-function map but
 no Gamma/window calibration.  The missing result is precisely the numerical
 rank-row extension across two discrepant unit circuits.
 
+The unlocalized Fourier boundary must be read with the opposite support
+intuition.  A module `delta_(0,0)` supported at the intersection of the two
+deleted Fourier axes is killed by either one-wall localization, but inverse
+Fourier transform sends it to a constant full-support module.  Therefore
+"supported at the double Fourier boundary" does not imply (4).  The exact
+singular scalar equivalent to (2) is the **signed punctual multiplicity** of
+the complete oriented two-wall boundary complex.  See
+`2026-08-13-c907-punctual-fourier-corner-no-go.md`.
+
 ## 5. Relation to the shadow sieve
 
 The cone, incidence, primary-moment, and turning shadows are now fallback

@@ -158,16 +158,64 @@ while at `q=infinity` the hypergeometric numerator parameters give
 modulo integers; the repeated exponent one produces the expected logarithmic
 branch.  The finite singular point is `4q/27=1`.
 
+### Exact infinity connection coefficients
+
+The scalar shadow already passes a stronger analytic test than its local
+exponents suggest.  Put `s=4q/27`.  The standard Barnes residue formula for
+`_3F_2` gives, on a fixed non-Stokes branch at infinity,
+
+\[
+ F(s)=C_{1/2}(-s)^{-1/2}
+      +(-s)^{-1}\bigl(A_1\log(-s)+B_1\bigr)
+      +O(|s|^{-3/2}\log|s|),                                   \tag{14}
+\]
+
+where `B_1` depends on the logarithm convention, but the two load-bearing
+coefficients are canonical and nonzero:
+
+\[
+ \boxed{C_{1/2}=-\frac{\pi}{6\sqrt3},
+        \qquad A_1=-\frac49.}                                  \tag{15}
+\]
+
+For the simple exponent `a_3=1/2`, the Barnes coefficient is
+
+\[
+ \frac{\Gamma(1/3)\Gamma(2/3)\Gamma(1/2)^2}
+      {\Gamma(-1/6)\Gamma(1/6)}
+ =-\frac{\pi}{6\sqrt3}.                                       \tag{16}
+\]
+
+For the repeated exponent `a_1=a_2=1`, first replace one copy by
+`1+epsilon`.  The two simple residues have opposite `1/epsilon` poles;
+expanding `(-s)^{-1-epsilon}` makes their finite sum logarithmic.  Its
+coefficient is
+
+\[
+ \frac{\Gamma(1/3)\Gamma(2/3)\Gamma(-1/2)}
+      {\Gamma(1/2)\Gamma(-2/3)\Gamma(-1/3)}
+ =-\frac49.                                                     \tag{17}
+\]
+
+Thus the neutral tower has both a nonzero half-integral infinity branch and
+a nonzero logarithmic **integer-exponent** branch.  Neither
+formal-monodromy separation nor vanishing of the scalar connection
+coefficient into the unipotent branch eliminates this model.  It remains
+rank zero only because its geometric output marking is boundary-supported.
+The analytic coefficient and the output rank are genuinely different
+shadows.
+
 ## 3. Meaning for C907
 
-This example passes two geometric necessary tests and one weaker calibration
-test:
+This example passes two geometric necessary tests and two calibration tests:
 
 1. it has the uniquely forced mixed `ker(c_1)` slope;
 2. the positive and negative boundary curves meet, so the incidence path is
    real;
 3. its descendant/equivariant neutral calibration has a nonconstant
-   regular-singular connection rather than a finite polynomial tail.
+   regular-singular connection rather than a finite polynomial tail; and
+4. its Barnes connection formula has a nonzero logarithmic integer-exponent
+   branch by (14)--(17).
 
 It fails the first **primary low-moment** test.  Every map in class `n delta`
 has image in the fixed nodal boundary curve
@@ -188,6 +236,11 @@ and
 The primary one- and two-leg evaluation pushforwards therefore vanish.  The
 `_3F_2` series can survive only after descendant/equivariant calibration; by
 itself it is not the low-moment state read by the ambient rank functional.
+
+The infinity calculation makes the distinction sharp: the model already has
+a nonzero analytic coefficient in an ambient-primary-looking branch.  What
+it lacks is not scalar continuation but a nonzero common-open/rank marking
+of that branch.
 
 It still fails to be the dangerous object itself.  Every component of the
 class `n delta` lies in the toroidal boundary, so its direct quantum output is
@@ -211,11 +264,10 @@ this dimension shadow before its two-chamber ambient row is worth computing.
   do not replace (8) by `binom(3n,n)` without stating the chamber.  The latter
   is an analytically related algebraic shadow, not the large-radius series
   used in (10).
-- **AA:** this proves that cone/incidence elimination alone cannot close
-  Gold, but also kills the model at the next primary shadow.  The next
-  legitimate calculation is to decide whether a relative/descendant gluing
-  state contributes to the small ambient connection; only then compute its
-  window-constrained ambient row.
+- **AA:** cone/incidence, scalar continuation, and an integer-exponent
+  connection coefficient still do not close Gold.  The next legitimate
+  calculation is the signed punctual/output-rank marking of the complete
+  two-wall residue block, not another scalar connection coefficient.
 
 ## Replay
 
