@@ -22,8 +22,8 @@ from pathlib import Path
 
 
 PAPER = Path(__file__).resolve().parents[1]
-SOURCE = "gamma_point_row.tex"
-TRACKED_PDF = PAPER / "gamma_point_row.pdf"
+SOURCE = "cubic_stabilization_irrationality.tex"
+TRACKED_PDF = PAPER / "cubic_stabilization_irrationality.pdf"
 EXPECTED_PAGES = 20
 DETERMINISTIC_EPOCH = "1785888000"
 
@@ -36,7 +36,7 @@ PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
 
 
 def fail(message: str) -> None:
-    raise SystemExit(f"gamma-point-row manuscript: FAIL: {message}")
+    raise SystemExit(f"cubic-stabilization-irrationality manuscript: FAIL: {message}")
 
 
 def deterministic_environment() -> dict[str, str]:
@@ -89,12 +89,17 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    with tempfile.TemporaryDirectory(prefix="gamma-point-row-build-") as scratch:
+    with tempfile.TemporaryDirectory(
+        prefix="cubic-stabilization-irrationality-build-"
+    ) as scratch:
         rebuilt = build_pdf(Path(scratch))
 
     if args.update:
         TRACKED_PDF.write_bytes(rebuilt)
-        print(f"gamma-point-row manuscript: UPDATED [{len(rebuilt)} bytes]")
+        print(
+            f"cubic-stabilization-irrationality manuscript: UPDATED "
+            f"[{len(rebuilt)} bytes]"
+        )
         return 0
 
     if not TRACKED_PDF.is_file():
@@ -105,7 +110,7 @@ def main() -> int:
             "rerun with `make manuscript-update`"
         )
     print(
-        f"gamma-point-row manuscript: PASS "
+        f"cubic-stabilization-irrationality manuscript: PASS "
         f"[{EXPECTED_PAGES} pages, warning-free, tracked PDF current]"
     )
     return 0

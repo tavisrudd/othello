@@ -10,7 +10,7 @@ TEXSHELL ?= nix develop ..\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
-SOURCE := gamma_point_row.tex
+SOURCE := cubic_stabilization_irrationality.tex
 
 .PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean
 
@@ -30,7 +30,7 @@ manuscript: $(SOURCE) sections/*.tex refs.bib
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: manuscript
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' gamma_point_row.log; then \
+	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' cubic_stabilization_irrationality.log; then \
 		exit 1; \
 	fi
 

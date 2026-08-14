@@ -357,11 +357,11 @@ expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository]]
-name = "gamma-point-row"
+name = "cubic-stabilization-irrationality"
 include_release_pdfs = true
 release_output_policy = "immutable-source"
-source = "papers/gamma-point-row"
-paper_ids = ["gamma_point_row"]
+source = "papers/cubic-stabilization-irrationality"
+paper_ids = ["cubic_stabilization_irrationality"]
 disposition = "active"
 
 [[repository.exclude_path]]

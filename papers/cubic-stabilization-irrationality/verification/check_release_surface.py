@@ -7,7 +7,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEX = [ROOT / "gamma_point_row.tex", *sorted((ROOT / "sections").glob("*.tex"))]
+TEX = [
+    ROOT / "cubic_stabilization_irrationality.tex",
+    *sorted((ROOT / "sections").glob("*.tex")),
+]
 PUBLIC = [
     *TEX,
     ROOT / "README.md",
@@ -79,7 +82,9 @@ if "does not prove it in the generality used" not in global_text:
 if "the proposition does not construct the common realization" not in global_text:
     errors.append("support-collapse coefficient-field boundary is missing")
 
-main_text = (ROOT / "gamma_point_row.tex").read_text(encoding="utf-8")
+main_text = (ROOT / "cubic_stabilization_irrationality.tex").read_text(
+    encoding="utf-8"
+)
 intro_text = (ROOT / "sections/01-introduction.tex").read_text(encoding="utf-8")
 readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"

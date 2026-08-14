@@ -53,7 +53,7 @@ the claim-surface audit, and the metadata checks pass on this surface.
 
 The committed authority was exported from source snapshot
 `9d5b8248ff22089019ed800d95147ca66d3ece0a` to the local standalone repository
-`~/src/math-papers/gamma-point-row`. The exporter audit and manifest
+`~/src/math-papers/cubic-stabilization-irrationality`. The exporter audit and manifest
 verification pass; the standalone `make check` reproduces the same PDF hash.
 Its initial local commit is `54f4ec8`. No remote was configured and nothing
 was pushed. The public portfolio summary was synchronized separately to local

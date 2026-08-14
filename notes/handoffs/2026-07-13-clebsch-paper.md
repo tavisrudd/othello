@@ -159,7 +159,7 @@ blowup/down peaks whose receiver frames are not coherent.  See
 discrepancy-one standard flip, not only codimension-two blowups.
 The wall-local theorem, the path-local ordinary-flop point-row theorem, and
 the two negative shadow results are now packaged in the warning-free
-13-page manuscript `papers/gamma-point-row/`.  Its final fixed surface is
+13-page manuscript now at `papers/cubic-stabilization-irrationality/`.  Its final fixed surface is
 authority commit `fec94f383044d1e96684d876ca26d0cfec5e091e`, PDF SHA-256
 `d8bb7b7165b0a928d09d9a0bd6de628ce3b5853fae855ffe0deb52b304ff9f65`;
 the final quantum-VGIT and adjacent-birational focused reruns both returned

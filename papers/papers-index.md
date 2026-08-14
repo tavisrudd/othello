@@ -131,20 +131,20 @@ F13*)
   requires a selected chordal line, and Paper IV remains an independent
   reconstruction branch.
 
-**Active unnumbered candidate — gamma-point-row** — *The Point-Class Rank
-Functional under Birational Wall Crossing: Exact One-Wall Identities toward
-the \(X\times\mathbf P^2\) Problem*
-- *Status:* externally circulation-ready 13-page preprint with exact claim and
+**Active unnumbered candidate — cubic-stabilization-irrationality** —
+*Conditional Irrationality of All Projective Stabilizations of Cubic
+Threefolds: Point-Class Rank under Quantum Wall Crossing*
+- *Status:* externally circulation-ready 20-page preprint with exact claim and
   literature ledgers, a paper-owned release checker, an isolated referee
   dossier, and a verified standalone export.
 - *Scope:* proves an exact ambient common-point coordinate for smooth
   projective simple VGIT walls oriented by \(r_+<r_-\), and a path-local
   point-row theorem for projective ordinary flops; gives incomplete-Gamma and Fourier-boundary
-  no-go theorems; and states the multi-wall assembly only under an explicit
-  rank-zero-target hypothesis.
-- *Boundary:* no unconditional general factorization or stabilization theorem
-  is claimed; in particular the paper does not prove irrationality of a
-  cubic-threefold product with `P²`.
+  no-go theorems; proves the cubic/projective endpoint contrast; and derives
+  irrationality of every \(X\times\mathbf P^m\) under the explicitly named
+  complete-neutral continuation hypothesis.
+- *Boundary:* the all-stabilizations conclusion is conditional; no
+  unconditional general factorization theorem is claimed.
 
 **5 · `complete-repair-ports`** — *Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure*

@@ -20,7 +20,7 @@ been contacted.
 - authority commit:
   `f73bcb4f837eed0aa8d512567b70c74534b1f61a`;
 - manuscript:
-  `papers/gamma-point-row/gamma_point_row.pdf`;
+  `papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.pdf`;
 - PDF SHA-256:
   `ed5c6c5d98ab158164e4885e8fc3734060b5fa724290b78658a20dbf9e2bd8b8`;
 - source gate: `make check`;

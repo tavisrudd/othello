@@ -2,7 +2,7 @@
 
 ## Read the paper
 
-[**Open the paper (PDF) →**](gamma_point_row.pdf)
+[**Open the paper (PDF) →**](cubic_stabilization_irrationality.pdf)
 
 **Title:** *Conditional Irrationality of All Projective Stabilizations of
 Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.

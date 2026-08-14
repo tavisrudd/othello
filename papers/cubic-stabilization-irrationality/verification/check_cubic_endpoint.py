@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CERTIFICATE = ROOT / "cubic_endpoint_certificate.json"
-SCHEMA = "gamma-point-row-cubic-endpoint-v1"
+SCHEMA = "cubic-stabilization-irrationality-cubic-endpoint-v1"
 
 
 def evaluate_quadratic(coefficients: list[Fraction], value: Fraction) -> Fraction:
