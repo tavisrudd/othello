@@ -52,7 +52,7 @@ nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for it
 explicit family; its theorem for all smooth cubic threefolds is independent of
 that special construction. *Conditional Irrationality of All Projective
 Stabilizations of Cubic Threefolds* replaces the dimension-four center bound
-by a global point-row comparison, conditional on the two finite clutching
+by a global point-row comparison, conditional on the two locally finite clutching
 hypotheses above. Every paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
