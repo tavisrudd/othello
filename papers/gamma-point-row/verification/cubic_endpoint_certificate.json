@@ -498,5 +498,5 @@
     "identity": "sum_{k=0}^m (m/2-k)=0"
   },
   "schema": "gamma-point-row-cubic-endpoint-v1",
-  "trust_boundary": "Exact three-specialization arithmetic regression only; the Barnes asymptotic theorem, quantum Kunneth theorem, complete-neutral continuation, and conditional birational transport are not machine-verified."
+  "trust_boundary": "Exact three-specialization arithmetic regression only; the Barnes asymptotic theorem, quantum Kunneth theorem, virtual localization, complete-neutral continuation, and conditional birational transport are not machine-verified."
 }

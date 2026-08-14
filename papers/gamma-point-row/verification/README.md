@@ -27,11 +27,11 @@ from the paper root. Regenerate the canonical certificate by omitting the
 check flag. The exact source hashes and byte counts are:
 
 - check_cubic_endpoint.py: SHA-256
-  6ea617521b7259106db62a48cffb42217543dccd424de8767bf86555977ab463,
-  10,459 bytes;
+  b7b6e54b49d258169d2e30a971288a937ca013d0af7812ba166162b8187a5e57,
+  10,481 bytes;
 - cubic_endpoint_certificate.json: SHA-256
-  74a60e24dcb221a40912bae9f3c66140287c6b49e70b1967fd7f84e945cea986,
-  10,195 bytes.
+  54d391961fcb6360b5e5757b8cc1103818ce2ad45ea814fe1828ab1febe3d224,
+  10,217 bytes.
 
 The displayed derivation in the manuscript is the independent check of the
 script. The artifact does not verify the Barnes asymptotic theorem, quantum
