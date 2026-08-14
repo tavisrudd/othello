@@ -237,9 +237,11 @@ by an integer.  For a nonzero integer `m`, the limit of `m(t)x` depends only
 on the sign of `m`; its inertia label depends only on `m` modulo the finite
 stabilizer order.  Hence, after a finite sign/congruence split, the limit
 strata, the two stable-map factors, their fibre product, and all evaluation
-maps are constant.  The finitely many degrees at which the principal
-component becomes unstable are separated off and contribute only a Laurent
-polynomial.
+maps are constant.  Stability of the principal component is also constant
+after this split.  A stable tail retains the node and attaching factors; a
+contracted tail uses Woodward's unstable irreducible convention and retains
+only the moving index.  Only the finitely many transition degrees are
+separated off, and they contribute a Laurent polynomial.
 
 It remains to identify the induced fixed obstruction theory.  Pull the
 equivariant tangent complex of `W/G_m` to the normalization of the universal
@@ -253,7 +255,9 @@ character `h` has degree
  hk+s.
 \]
 
-The weights of its `H^0-H^1` index form one consecutive affine interval.
+Roots with `h=0` are independent of the affine degree and belong to the
+constant coefficient complex.  For `h` nonzero, the weights of the
+`H^0-H^1` index form one consecutive affine interval.
 Away from the finitely many integers at which an endpoint crosses zero, its
 weight-zero summand has constant rank and is identified, by evaluation at a
 generic point of the principal component, with the same root bundle on the
