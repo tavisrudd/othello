@@ -36,6 +36,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBa
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.DifferentialConstantsBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HorizontalMonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalDifferentialModuleBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompletedDivisorSubstitution
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
@@ -2877,6 +2878,35 @@ theorem proLaurent_conjugatedMonodromy_compatible_and_charpoly
           (system.monodromy level).charpoly) :=
   ⟨system.conjugatedMonodromy_compatible,
     system.conjugatedMonodromy_charpoly⟩
+
+/-- A multiplicative character of effective curve classes defines the exact
+divisor substitution on a completed Novikov ring: the coefficient of `Q^d` is
+multiplied by the character value at `d`.  Lean proves directly that this
+coefficientwise operation preserves zero, one, addition, and completed
+convolution, hence is a unital ring endomorphism.  This is the algebraic formula
+`Q^d ↦ exp(⟨a₂,d⟩)Q^d` once the multiplicative exponential character is
+supplied.  No geometric pairing, exponential, divisor equation, or
+identification with the manuscript's completed Novikov ring is constructed. -/
+theorem formalBaseShift_completedDivisorSubstitution
+    {Curve Coefficient : Type*} [AddCommMonoid Curve] [CommRing Coefficient]
+    (grading : Quantum.FiniteDegreeAddCommMonoid Curve)
+    (weight : Multiplicative Curve →* Coefficient)
+    (series : Quantum.FiniteDegreeAddCommMonoid.CompletedNovikovRing
+      grading Coefficient) (curve : Curve) :
+    let substitution :=
+      Quantum.completedDivisorSubstitutionRingHom grading weight
+    (substitution series).coefficient curve =
+        weight (.ofAdd curve) * series.coefficient curve ∧
+    substitution 0 = 0 ∧
+    substitution 1 = 1 ∧
+    (∀ left right, substitution (left + right) =
+      substitution left + substitution right) ∧
+    (∀ left right, substitution (left * right) =
+      substitution left * substitution right) := by
+  dsimp only
+  exact ⟨Quantum.completedDivisorSubstitution_coefficient
+      grading weight series curve,
+    map_zero _, map_one _, map_add _, map_mul _⟩
 
 /-- Once the finite-level string/divisor/bulk analysis supplies an explicit
 integral-frame conjugacy, the bulk monodromy characteristic polynomial is the

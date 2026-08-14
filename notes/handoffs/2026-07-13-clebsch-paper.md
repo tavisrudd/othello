@@ -241,8 +241,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-84 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 154 reviewer terminals, audit
+85 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 155 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -361,7 +361,12 @@ quotient-horizontal families.  Identification with the manuscript's
 coefficient algebra and ideal, proof of the required completeness and
 separatedness properties for its filtration, and construction of its
 Levelt--Turrittin algebra, fundamental solution, continuation, analytic
-monodromy, and inverse-limit differential module remain open.  Compatible coefficient
+monodromy, and inverse-limit differential module remain open.  A supplied
+multiplicative character of curve classes now defines an exact unital
+endomorphism of the completed Novikov ring with coefficient formula
+`Q^d ↦ χ(d)Q^d`, including preservation of completed convolution.  The
+geometric divisor pairing, exponential character, and divisor equation remain
+unconstructed.  Compatible coefficient
 reductions, divisor substitutions, small matrices, and gauges derive the bulk
 matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial

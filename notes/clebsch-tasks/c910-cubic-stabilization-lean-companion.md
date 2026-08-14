@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 84 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 85 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 154 audited terminals.  The rejecting manuscript inventory covers all
+exports 155 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -134,7 +134,11 @@ quotient-horizontal families.  The manuscript's Levelt--Turrittin algebra,
 fundamental solution, continuation, geometric coefficient data, and analytic
 framed-monodromy interpretation remain unconstructed or unidentified.
 The quantum algebra also includes formal-base-shift and block-formula
-deductions, numerical coefficient pushforward, strict-Novikov data,
+deductions, including the exact unital endomorphism of a completed Novikov ring
+defined by any supplied multiplicative curve-class character and its
+coefficient formula `Q^d ↦ χ(d)Q^d`; the geometric pairing, exponential
+character, and divisor equation remain outside that result.  It also includes
+numerical coefficient pushforward, strict-Novikov data,
 divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial
 polynomial, and the exact implication from a `{1,-1}` characteristic-root

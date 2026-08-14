@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 154 reviewer terminals.
+1 complete; 155 reviewer terminals.
 
-The 154 reviewer-facing terminals currently verify:
+The 155 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -138,6 +138,12 @@ The 154 reviewer-facing terminals currently verify:
 - the order-120 full symmetric normalizer, its index-two alternating subgroup,
   and affine-chart Frobenius as an odd transposition in the nontrivial coset,
   without identifying it with a geometric normalizer;
+- for a completed Novikov ring over a finite-degree effective monoid and a
+  supplied multiplicative curve-class character, construction of the exact
+  unital ring endomorphism multiplying the `Q^d` coefficient by that character;
+  this proves preservation of completed convolution and models
+  `Q^d ↦ exp(⟨a₂,d⟩)Q^d`, but does not construct the geometric pairing,
+  exponential character, or divisor equation;
 - from a supplied commutative ring with a decreasing ideal filtration,
   construction of every quotient coefficient ring and canonical adjacent
   reduction; a supplied filtration-preserving endomorphism descends to
