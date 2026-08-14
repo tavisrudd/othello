@@ -296,3 +296,57 @@ SHA-256 values, and all other source loci.
   simple-wall decomposition into an intrinsic primitive-sixth statement.
 - Open: prove the directed two-wall boundary comparison, or exhibit a
   smooth-projective residue block with nonzero common-open rank.
+
+## 2026-08-14 fixed-version EJ/TT closeout
+
+The release candidate at commit `ffc62de83` replaces the proposed
+unconditional global comparison by an explicit complete-neutral continuation
+hypothesis.  Three independent fixed-commit reviews found no residual source,
+claim-surface, or endpoint-regression defect.  The unconditional package now
+consists of the local simple-wall and ordinary-flop point-row identities, the
+incomplete-Gamma and Fourier-boundary countermodels, global support collapse,
+coefficientwise Gamma-ratio reduction, and the cubic/projective endpoint
+calculation.  The stabilization application is conditional.
+
+### EJ
+
+- The failed contour shortcut leaves a sharper publishable result: the global
+  obstruction is concentrated in one named continuation statement, while the
+  geometric support collapse and every individual neutral graph coefficient
+  are already controlled.
+- Gonz\'alez--Woodward's distributional crepant equality supplies useful
+  boundary data but not the marked analytic receiver.  The paper now records
+  that exact distinction rather than discarding the theorem as irrelevant.
+- A proof of the missing receiver would be uniform in the projective factor;
+  the cubic and projective endpoint calculation would then require no new
+  case-by-case work.
+
+### TT
+
+- Almost-everywhere equality of distributions is not equality of marked
+  sectorial packets.  Delta derivatives are precisely the singular terms
+  that the punctual Fourier countermodel warns can recover generic rank after
+  inverse transform.
+- Horizontal scalar constancy is useful only after both scalars have been
+  placed in the same differential object.  It cannot manufacture the common
+  object or identify two chamber-normalized point rows.
+- The smallest honest successor is therefore not a broader wall-crossing
+  theorem.  It is a marked complete-neutral receiver theorem: one
+  regular-holonomic or Artin-valued object, two endpoint residue expansions,
+  and compatibility with the point row, derivatives, and Rees grading.
+
+### Refreshed mystery ledger
+
+- **Settled:** the endpoint primitive-sixth packet and point-row nonvanishing;
+  the projective-space packet calculation; local simple-wall and ordinary-flop
+  point transport; Wlodarczyk support collapse; individual neutral
+  Gamma-ratio reduction; and the insufficiency of formal monodromy, pairing,
+  integrality, localized Fourier support, or distributional almost-everywhere
+  equality by themselves.
+- **Open, single load-bearing gate:** construct the marked complete-neutral
+  receiver for the full nonlinear fixed-graph sum.  Existing linear GLSM
+  contour theorems and crepant distribution identities do not state it.
+- **No hidden endpoint mystery remains:** the final arithmetic regression is
+  deliberately limited to three exact specializations and does not claim to
+  machine-verify Barnes asymptotics, quantum Kunneth, virtual localization, or
+  conditional transport.
