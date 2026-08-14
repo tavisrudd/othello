@@ -2,9 +2,14 @@
 
 **Lane:** `clebsch`
 
-**Status:** the `m=2` stabilization obstruction is internally closed by the
-global-cobordism complete-neutral theorem; external referee audit of that new
-nonlinear localization step is still required.  Earlier one-arrow and
+**Status:** the all-stabilization theorem is conditional on gauged-admissible
+smooth projective completions and one locally finite marked-threshold
+compatibility hypothesis.  Tailwise derived identification and holonomicity
+are proved.  Iritani's weak-Fano toric blowups verify the intrinsic marked
+Gamma/QDM mechanism, and Woodward's toric graph-potential formula identifies
+the same one-object continuation in the linear toric gauged model.  A literal
+instance for the manuscript's projective master still requires a quantum
+reduction-in-stages comparison of its clutching tails.  Earlier one-arrow and
 multi-arrow audits are retained below as the failure history that fixes the
 scope of the new proof.  The Gamma point
 solution is correctly constructed in each Artin-quotient sectorial receiver;

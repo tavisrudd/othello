@@ -159,7 +159,11 @@ all residual summands.  The discrepancy-one model
 `Bl_p(P^2) -> P^2` is the smallest example.  This proves the intrinsic
 Gamma/QDM mechanism, but a literal instance of the manuscript hypothesis still
 requires identifying the Woodward clutching tails with those toric mirror
-boundary modules.  The sharper type-(1,2) flip test also gives an exact no-go:
+boundary modules.  Woodward's toric graph-potential formula sharpens this:
+the ordinary-threshold clause is literally realized in the linear toric
+gauged presentation, so the remaining bridge is specifically quantum
+reduction in stages from that presentation to the smooth projective master.
+The sharper type-(1,2) flip test also gives an exact no-go:
 adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
 necessarily makes the previously unstable spectator-plus-`O` locus semistable,
 since `(1,0)=(-3,4)+4(1,-1)`.  Thus the bare spectator shortcut to
@@ -189,14 +193,14 @@ all-projective-stabilizations theorem and the unconditional cubic endpoint
 contrast, simple-wall ambient point coordinate, path-local ordinary-flop
 point-row theorem, support collapse, tailwise derived identification and
 holonomicity, and Gamma-ratio reduction.  Its reviewed paper surface is
-authority commit `932ca381e`, PDF SHA-256
-`9ebb6630a72a9cf86b8958dae73188e6f5c8bb2901d2b0136315c35efc5b57f4`;
+authority commit `a4b71d518`, PDF SHA-256
+`8afee301820fc8d4a793b88a3015ff8b3f5077093d85493ca8897143cbf57479`;
 the GW/POT, D-module/Stokes, birational, and adjacent cold-reader passes found
 no major defect, and `make check` is warning-free and deterministic.  The
 title, abstract, README, Zenodo metadata, claim ledger, and portfolio summary
 expose gauged-admissibility and the marked threshold hypothesis separately.
-Export source `932ca381e` is synchronized to the clean local paper repository
-at `748f903`; the portfolio summary remains at `9200ec2`.  All remain unpushed,
+Export source `a4b71d518` is synchronized to the clean local paper repository
+at `7bfe4d953`; the portfolio summary remains at `9200ec2`.  All remain unpushed,
 and the live Zenodo version still needs a deliberate release update.  Review records are
 `../2026-08-13-c907-gamma-point-row-reviewer-dossier.md` and
 `../2026-08-13-c907-gamma-point-row-cold-read-synthesis.md`.
