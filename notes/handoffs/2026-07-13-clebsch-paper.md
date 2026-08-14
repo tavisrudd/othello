@@ -242,7 +242,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 83 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 150 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 151 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -330,7 +330,9 @@ extended horizontal kernel with the kernel of the extended derivative, proves
 that the restricted monodromies are intertwined and conjugate, and maps their
 characteristic polynomial coefficientwise.  For every supplied tower of
 coefficient algebras and adjacent reductions, these polynomials form an
-explicit compatible inverse system.  Lean now also constructs this inverse
+explicit compatible inverse system.  The adjacent reductions canonically map
+the scalar-extended horizontal kernels and intertwine their restricted
+monodromies.  Lean now also constructs this inverse
 system on the actual adic quotients `B/I^n` of a supplied coefficient algebra
 and ideal, using the canonical adjacent quotient reductions.  Every fixed
 level polynomial is the reduction of the horizontal characteristic polynomial
@@ -474,7 +476,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 150-terminal axiom transcript
+The aggregate build, source correspondence, and 151-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent

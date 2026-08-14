@@ -2310,6 +2310,36 @@ theorem horizontalMonodromy_characteristicPolynomialTower
   ⟨tower.characteristicPolynomialSystem_level,
     tower.characteristicPolynomialSystem.compatible⟩
 
+/-- Every supplied coefficient-algebra tower has canonical adjacent maps
+between the scalar-extended horizontal kernels.  On pure tensors the map
+applies the coefficient reduction and leaves the original horizontal vector
+unchanged; for arbitrary horizontal vectors it intertwines the restricted
+monodromy operators.  The derivative, monodromy, coefficient algebras, and
+reductions are supplied.  No inverse-limit differential module, fundamental
+solution, or analytic monodromy construction is asserted. -/
+theorem horizontalMonodromy_coefficientTower_horizontalReduction
+    {k V : Type*} [Field k]
+    [AddCommGroup V] [Module k V]
+    (tower : Quantum.HorizontalMonodromyCoefficientTower k V) :
+    (∀ level (coefficient : tower.Coefficient (level + 1))
+        (value : LinearMap.ker tower.derivative),
+      tower.horizontalKernelReduction level
+          (Quantum.horizontalBaseChangeEquivOfField tower.derivative
+            (coefficient ⊗ₜ[k] value)) =
+        Quantum.horizontalBaseChangeEquivOfField tower.derivative
+          (tower.reduction level coefficient ⊗ₜ[k] value)) ∧
+    (∀ level,
+      (tower.horizontalKernelReduction level).comp
+          ((Quantum.extendedHorizontalEndomorphism
+            (B := tower.Coefficient (level + 1)) tower.derivative
+            tower.monodromy tower.commutes).restrictScalars k) =
+        ((Quantum.extendedHorizontalEndomorphism
+          (B := tower.Coefficient level) tower.derivative tower.monodromy
+          tower.commutes).restrictScalars k).comp
+            (tower.horizontalKernelReduction level)) :=
+  ⟨tower.horizontalKernelReduction_baseChange_tmul,
+    tower.horizontalKernelReduction_intertwines⟩
+
 /-- An actual adic coefficient tower carries the horizontal-monodromy
 characteristic polynomials compatibly.  Let `B` be a commutative algebra over
 the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses

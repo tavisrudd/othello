@@ -20,10 +20,11 @@ horizontal monodromy, whose characteristic polynomial is obtained by applying
 the coefficient map.  For a commutative algebra with a decreasing ideal
 filtration, Lean also constructs the coefficient-algebra tower from the actual
 quotients.  In particular, powers of one ideal give the adic tower, and the
-horizontal characteristic polynomials commute with its canonical adjacent
-reductions.  Each fixed polynomial coefficient is packaged as a compatible
-quotient family represented by its corresponding coefficient over the base
-algebra.
+canonical adjacent reductions induce maps between the horizontal kernels that
+intertwine their monodromy operators.  The horizontal characteristic
+polynomials commute with the same reductions.  Each fixed polynomial
+coefficient is packaged as a compatible quotient family represented by its
+corresponding coefficient over the base algebra.
 
 This is the horizontal-module linear algebra in coefficientwise base change.
 It assumes the derivative and commuting monodromy operator; it does not
@@ -262,6 +263,121 @@ noncomputable def horizontalCharacteristicPolynomialOver
     Polynomial B :=
   (horizontalEndomorphism derivative monodromy commutes).charpoly.map
     (algebraMap k B)
+
+/-- The canonical reduction between horizontal kernels at two adjacent
+coefficient levels.  It transports a horizontal vector to the scalar-extended
+original kernel, maps its coefficient factor, and transports back. -/
+noncomputable def horizontalKernelReduction
+    (tower : HorizontalMonodromyCoefficientTower k V) (level : ℕ) :
+    LinearMap.ker (tower.derivative.baseChange (tower.Coefficient (level + 1))) →ₗ[k]
+      LinearMap.ker (tower.derivative.baseChange (tower.Coefficient level)) :=
+  ((horizontalBaseChangeEquivOfField
+      (B := tower.Coefficient level) tower.derivative).toLinearMap.restrictScalars k).comp
+    ((TensorProduct.map (tower.reduction level).toLinearMap LinearMap.id).comp
+      ((horizontalBaseChangeEquivOfField
+        (B := tower.Coefficient (level + 1)) tower.derivative).symm.toLinearMap.restrictScalars k))
+
+omit [FiniteDimensional k V] in
+/-- Adjacent horizontal-kernel reduction maps a pure scalar extension of an
+original horizontal vector by applying the coefficient reduction. -/
+theorem horizontalKernelReduction_baseChange_tmul
+    (tower : HorizontalMonodromyCoefficientTower k V) (level : ℕ)
+    (coefficient : tower.Coefficient (level + 1))
+    (value : LinearMap.ker tower.derivative) :
+    tower.horizontalKernelReduction level
+        (horizontalBaseChangeEquivOfField tower.derivative
+          (coefficient ⊗ₜ[k] value)) =
+      horizontalBaseChangeEquivOfField tower.derivative
+        (tower.reduction level coefficient ⊗ₜ[k] value) := by
+  simp [horizontalKernelReduction]
+
+omit [FiniteDimensional k V] in
+/-- Canonical adjacent reduction of horizontal kernels intertwines the
+extended horizontal monodromy operators. -/
+theorem horizontalKernelReduction_intertwines
+    (tower : HorizontalMonodromyCoefficientTower k V) (level : ℕ) :
+    (tower.horizontalKernelReduction level).comp
+        ((extendedHorizontalEndomorphism (B := tower.Coefficient (level + 1))
+          tower.derivative tower.monodromy tower.commutes).restrictScalars k) =
+      ((extendedHorizontalEndomorphism (B := tower.Coefficient level)
+          tower.derivative tower.monodromy tower.commutes).restrictScalars k).comp
+        (tower.horizontalKernelReduction level) := by
+  apply LinearMap.ext
+  intro value
+  obtain ⟨tensor, rfl⟩ :=
+    (horizontalBaseChangeEquivOfField
+      (B := tower.Coefficient (level + 1)) tower.derivative).surjective value
+  induction tensor using TensorProduct.induction_on with
+  | zero => simp
+  | add left right hleft hright =>
+      simpa only [map_add] using congrArg₂ (fun x y => x + y) hleft hright
+  | tmul coefficient horizontal =>
+      have highIntertwines := LinearMap.congr_fun
+        (horizontalBaseChangeEquivOfField_intertwines
+          (B := tower.Coefficient (level + 1)) tower.derivative
+          tower.monodromy tower.commutes)
+        (coefficient ⊗ₜ[k] horizontal)
+      have lowIntertwines := LinearMap.congr_fun
+        (horizontalBaseChangeEquivOfField_intertwines
+          (B := tower.Coefficient level) tower.derivative
+          tower.monodromy tower.commutes)
+        (tower.reduction level coefficient ⊗ₜ[k] horizontal)
+      simp only [LinearMap.comp_apply] at highIntertwines lowIntertwines
+      have highPure :
+          extendedHorizontalEndomorphism
+              (B := tower.Coefficient (level + 1)) tower.derivative
+              tower.monodromy tower.commutes
+                (horizontalBaseChangeEquivOfField tower.derivative
+                  (coefficient ⊗ₜ[k] horizontal)) =
+            horizontalBaseChangeEquivOfField tower.derivative
+              (coefficient ⊗ₜ[k]
+                horizontalEndomorphism tower.derivative tower.monodromy
+                  tower.commutes horizontal) := by
+        simpa using highIntertwines
+      have lowPure :
+          extendedHorizontalEndomorphism (B := tower.Coefficient level)
+              tower.derivative tower.monodromy tower.commutes
+                (horizontalBaseChangeEquivOfField tower.derivative
+                  (tower.reduction level coefficient ⊗ₜ[k] horizontal)) =
+            horizontalBaseChangeEquivOfField tower.derivative
+              (tower.reduction level coefficient ⊗ₜ[k]
+                horizontalEndomorphism tower.derivative tower.monodromy
+                  tower.commutes horizontal) := by
+        simpa using lowIntertwines
+      simp only [LinearMap.comp_apply]
+      calc
+        tower.horizontalKernelReduction level
+            (extendedHorizontalEndomorphism
+              (B := tower.Coefficient (level + 1)) tower.derivative
+              tower.monodromy tower.commutes
+                (horizontalBaseChangeEquivOfField tower.derivative
+                  (coefficient ⊗ₜ[k] horizontal))) =
+          tower.horizontalKernelReduction level
+            (horizontalBaseChangeEquivOfField tower.derivative
+              (coefficient ⊗ₜ[k]
+                horizontalEndomorphism tower.derivative tower.monodromy
+                  tower.commutes horizontal)) :=
+            congrArg (tower.horizontalKernelReduction level) highPure
+        _ = horizontalBaseChangeEquivOfField tower.derivative
+              (tower.reduction level coefficient ⊗ₜ[k]
+                horizontalEndomorphism tower.derivative tower.monodromy
+                  tower.commutes horizontal) :=
+            horizontalKernelReduction_baseChange_tmul tower level coefficient
+              (horizontalEndomorphism tower.derivative tower.monodromy
+                tower.commutes horizontal)
+        _ = extendedHorizontalEndomorphism (B := tower.Coefficient level)
+              tower.derivative tower.monodromy tower.commutes
+                (horizontalBaseChangeEquivOfField tower.derivative
+                  (tower.reduction level coefficient ⊗ₜ[k] horizontal)) :=
+            lowPure.symm
+        _ = extendedHorizontalEndomorphism (B := tower.Coefficient level)
+              tower.derivative tower.monodromy tower.commutes
+                (tower.horizontalKernelReduction level
+                  (horizontalBaseChangeEquivOfField tower.derivative
+                    (coefficient ⊗ₜ[k] horizontal))) := by
+            apply congrArg
+            exact (horizontalKernelReduction_baseChange_tmul
+              tower level coefficient horizontal).symm
 
 /-- The horizontal monodromy characteristic polynomials at all coefficient
 levels form an explicit compatible polynomial system. -/
