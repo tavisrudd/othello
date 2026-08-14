@@ -49,8 +49,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   has exactly five distinct members.  An explicit equivalence with the actual
   `P¹(F4)` identifies its vertical-plus-affine chart with the vertical half and
   the four graphs.  The explicit alternating polarization on the two heart
-  copies is nondegenerate, and every one of those five halves is maximal
-  isotropic.  It identifies
+  copies is nondegenerate, and those five halves are exactly the diagonally
+  stable maximal-isotropic subspaces.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

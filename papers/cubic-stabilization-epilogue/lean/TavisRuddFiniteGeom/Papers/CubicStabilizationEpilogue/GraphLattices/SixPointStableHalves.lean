@@ -585,6 +585,18 @@ theorem sixPointHeartPairPolarizationBilinForm_isAlt :
   rw [sixPointHeartCoefficientForm_comm pair.2 pair.1]
   exact sixAxisF2Module_add_self_eq_zero _
 
+/-- The bundled two-copy polarization form is symmetric in characteristic
+two. -/
+theorem sixPointHeartPairPolarizationBilinForm_comm
+    (left right : SixPointHeart × SixPointHeart) :
+    sixPointHeartPairPolarizationBilinForm left right =
+      sixPointHeartPairPolarizationBilinForm right left := by
+  simp only [sixPointHeartPairPolarizationBilinForm_apply,
+    sixPointHeartPairPolarizationForm]
+  rw [sixPointHeartCoefficientForm_comm left.1 right.2,
+    sixPointHeartCoefficientForm_comm left.2 right.1]
+  exact add_comm _ _
+
 /-- The two-copy polarization form is nondegenerate. -/
 theorem sixPointHeartPairPolarizationBilinForm_nondegenerate :
     sixPointHeartPairPolarizationBilinForm.Nondegenerate := by
@@ -944,6 +956,92 @@ theorem sixPointHeartStableHalfPacket_iff
   · rintro ⟨stable, halfDimension⟩
     exact sixPointHeartPair_stableHalf_classification
       subspace stable halfDimension
+
+/-- A maximal isotropic subspace for the explicit nondegenerate alternating
+form has dimension four. -/
+theorem sixPointHeartPairPolarization_maximalIsotropic_finrank
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (maximal :
+      IsMaximalIsotropic sixPointHeartPairPolarizationBilinForm subspace) :
+    Module.finrank F2 subspace = 4 := by
+  have orthogonalLe :
+      sixPointHeartPairPolarizationBilinForm.orthogonal subspace ≤
+        subspace := by
+    by_contra notLe
+    have unequal : subspace ≠
+        sixPointHeartPairPolarizationBilinForm.orthogonal subspace := by
+      intro equality
+      apply notLe
+      rw [← equality]
+    have strict : subspace <
+        sixPointHeartPairPolarizationBilinForm.orthogonal subspace :=
+      lt_of_le_of_ne maximal.1 unequal
+    obtain ⟨vector, vectorOrthogonal, vectorOutside⟩ :=
+      SetLike.exists_of_lt strict
+    let larger : Submodule F2 (SixPointHeart × SixPointHeart) :=
+      subspace ⊔ F2 ∙ vector
+    have contains : subspace ≤ larger := le_sup_left
+    have largerIsotropic :
+        larger ≤ sixPointHeartPairPolarizationBilinForm.orthogonal larger := by
+      intro left leftMember right rightMember
+      obtain ⟨leftBase, leftBaseMember, leftSpan, leftSpanMember, rfl⟩ :=
+        Submodule.mem_sup.mp leftMember
+      obtain ⟨rightBase, rightBaseMember, rightSpan, rightSpanMember, rfl⟩ :=
+        Submodule.mem_sup.mp rightMember
+      obtain ⟨leftScalar, rfl⟩ :=
+        Submodule.mem_span_singleton.mp leftSpanMember
+      obtain ⟨rightScalar, rfl⟩ :=
+        Submodule.mem_span_singleton.mp rightSpanMember
+      have baseBase :
+          sixPointHeartPairPolarizationBilinForm rightBase leftBase = 0 :=
+        maximal.1 leftBaseMember rightBase rightBaseMember
+      have baseVector :
+          sixPointHeartPairPolarizationBilinForm rightBase vector = 0 :=
+        vectorOrthogonal rightBase rightBaseMember
+      have vectorBase :
+          sixPointHeartPairPolarizationBilinForm vector leftBase = 0 := by
+        rw [sixPointHeartPairPolarizationBilinForm_comm]
+        exact vectorOrthogonal leftBase leftBaseMember
+      have vectorVector :
+          sixPointHeartPairPolarizationBilinForm vector vector = 0 :=
+        sixPointHeartPairPolarizationBilinForm_isAlt vector
+      simp only [map_add, map_smul, LinearMap.add_apply,
+        LinearMap.smul_apply, baseBase, baseVector, vectorBase,
+        vectorVector, smul_zero, add_zero]
+    have largerEquality := maximal.2 larger contains largerIsotropic
+    have vectorLarger : vector ∈ larger :=
+      Submodule.mem_sup_right
+        (Submodule.mem_span_singleton_self vector)
+    exact vectorOutside (by simpa [largerEquality] using vectorLarger)
+  have orthogonalEquality :
+      sixPointHeartPairPolarizationBilinForm.orthogonal subspace =
+        subspace :=
+    le_antisymm orthogonalLe maximal.1
+  have rankEquality :=
+    sixPointHeartPairPolarizationBilinForm.finrank_orthogonal
+      sixPointHeartPairPolarizationBilinForm_nondegenerate subspace
+  rw [orthogonalEquality] at rankEquality
+  have ambientRank :
+      Module.finrank F2 (SixPointHeart × SixPointHeart) = 8 := by
+    simp [SixPointHeart, Module.finrank_prod]
+  omega
+
+/-- The five displayed halves are exactly the diagonally stable maximal
+isotropic subspaces for the explicit two-copy polarization. -/
+theorem sixPointHeartStableHalfPacket_iff_stable_maximalIsotropic
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart)) :
+    subspace ∈ SixPointHeartStableHalfPacket ↔
+      SixPointHeartPairGeneratorStable subspace ∧
+        IsMaximalIsotropic
+          sixPointHeartPairPolarizationBilinForm subspace := by
+  constructor
+  · intro member
+    exact ⟨(sixPointHeartStableHalfPacket_iff subspace).mp member |>.1,
+      sixPointHeartStableHalfPacket_maximalIsotropic subspace member⟩
+  · rintro ⟨stable, maximal⟩
+    exact (sixPointHeartStableHalfPacket_iff subspace).mpr
+      ⟨stable,
+        sixPointHeartPairPolarization_maximalIsotropic_finrank subspace maximal⟩
 
 end GraphLattices
 

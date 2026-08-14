@@ -538,8 +538,9 @@ and stable under the diagonal action exactly when it is the vertical half or
 the graph of one of those four commutant endomorphisms; these five subspaces are
 distinct.  An explicit equivalence with the actual `P¹(F4)` sends the marked
 vertical-plus-affine chart to the vertical half and the four graphs.  The
-explicit alternating form on the two heart copies is nondegenerate, and all
-five packet members are maximal isotropic for it.  All six Sylow-five subgroups of this concrete `A5` are
+explicit alternating form on the two heart copies is nondegenerate, and the
+five packet members are exactly the diagonally stable maximal-isotropic
+subspaces.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;

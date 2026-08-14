@@ -108,8 +108,9 @@ The 159 reviewer-facing terminals currently verify:
   the resulting packet has exactly five distinct members; an explicit
   equivalence with the actual `P¹(F4)` sends the marked vertical-plus-affine
   chart to the vertical half and the graphs of `0`, `1`, `W`, and `W+1`;
-  the explicit alternating form on the two heart copies is nondegenerate and
-  all five packet members are maximal isotropic for it;
+  the explicit alternating form on the two heart copies is nondegenerate, and
+  the five packet members are exactly the diagonally stable maximal-isotropic
+  subspaces;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
