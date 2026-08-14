@@ -102,6 +102,16 @@ blowup/down peaks whose receiver frames are not coherent.  See
 `../2026-08-13-c907-simple-wall-coverage-obstruction.md`.  Independently, the printed
 `r-s=1` Shen--Shoemaker omission is repaired for every genuine
 discrepancy-one standard flip, not only codimension-two blowups.
+The wall-local theorem, the path-local ordinary-flop point-row theorem, and
+the two negative shadow results are now packaged in the warning-free
+13-page manuscript `papers/gamma-point-row/`.  Its final fixed surface is
+authority commit `fec94f383044d1e96684d876ca26d0cfec5e091e`, PDF SHA-256
+`d8bb7b7165b0a928d09d9a0bd6de628ce3b5853fae855ffe0deb52b304ff9f65`;
+the final quantum-VGIT and adjacent-birational focused reruns both returned
+GO.  The manuscript states the `X x P^2` endpoint only as motivation and
+keeps the marked blockwise comparison visibly open.  Review and release
+records are `../2026-08-13-c907-gamma-point-row-reviewer-dossier.md` and
+`../2026-08-13-c907-gamma-point-row-cold-read-synthesis.md`.
 That repair is now a reviewed standalone ten-page correction note at
 `papers/discrepancy-one-flips/`, DOI `10.5281/zenodo.21924799`.  Its exact
 `z`-order, nonsplit descent, corrected `nu=1` aperture, and source-local
