@@ -11,6 +11,18 @@ and Poincare pairings after analytic continuation
 The continuation is analytic in the extremal variable and formal in the
 other Novikov variables.
 
+Fix a simply connected nonsingular domain \(U\) for the continued extremal
+variable.  We use the hybrid coefficient ring
+\[
+ \mathcal O(U)\widehat\otimes\Lambda_{\perp}[[\tau]],       \tag{4.2}
+\]
+where \(\Lambda_{\perp}\) is the transverse Novikov completion and \(\tau\)
+denotes the bulk variables; the coefficient recursion below is taken after
+extension to \(\C((z))\).  The \emph{graph gauge} is the horizontal gauge
+obtained from the Lee--Lin--Qu--Wang comparison of big quantum connections on
+\(U\), normalized by the classical graph correspondence.  Thus it acts on
+flat columns, not only on quantum products.
+
 Choose corresponding points \(p\in Y\) and \(p'\in Y'\) outside the
 exceptional loci.  Let \(A\) be an ample divisor on the common contraction
 and write \(D,D'\) for its pullbacks.  Then
@@ -20,11 +32,9 @@ by \(D\)-degree.
 
 \begin{theorem}[Point-section preservation]
 \label{thm:ordinary-flop-point-row}
-On each fixed nonsingular domain for the continuation in
-\cite{LeeLinQuWang}, the
-graph gauge satisfies
+On \(U\), the graph gauge satisfies
 \[
- F(s_Y(\OO_p))=s_{Y'}(\OO_{p'}).                         \tag{4.2}
+ F(s_Y(\OO_p))=s_{Y'}(\OO_{p'}).                         \tag{4.3}
 \]
 Consequently it preserves the Gamma point row.
 \end{theorem}
@@ -52,14 +62,14 @@ coefficient and vanishes.  Horizontality for the Novikov derivation defined
 by \(D\) therefore gives
 \[
  \bigl((D\cdot\beta)\id+z^{-1}(D\star_q-)\bigr)
- \delta_\beta=0.                                           \tag{4.3}
+ \delta_\beta=0.                                           \tag{4.4}
 \]
 At transverse degree zero, quantum corrections to \(D\star_q\) have pure
 extremal degree.  The divisor axiom multiplies them by
-\(D\cdot\ell=0\).  Thus \(D\star_q=D\cup-\) in (4.3).  Cup product by \(D\)
+\(D\cdot\ell=0\).  Thus \(D\star_q=D\cup-\) in (4.4).  Cup product by \(D\)
 is nilpotent and \(D\cdot\beta>0\), so the displayed operator is invertible
 over \(\C((z))\).  This contradiction kills the first possible coefficient.
-Induction proves (4.2).  Flatness of the pairing then preserves the row
+Induction proves (4.3).  Flatness of the pairing then preserves the row
 (2.3).
 \end{proof}
 
@@ -70,7 +80,7 @@ packet whose chosen realization is transported by the Lee--Lin--Qu--Wang
 graph gauge to a sectorially realized packet
 \(\cP'\subset\mathcal S(Y')\).  On the fixed continuation domain,
 \[
- b(Y,\cP)=b(Y',\cP').                                      \tag{4.4}
+ b(Y,\cP)=b(Y',\cP').                                      \tag{4.5}
 \]
 \end{corollary}
 
@@ -78,7 +88,7 @@ graph gauge to a sectorially realized packet
 The graph gauge preserves the quantum connection, grading, first Chern class,
 and Poincare pairing.  It therefore transports the complete \(z=0\) formal
 type.  Theorem~\ref{thm:ordinary-flop-point-row} identifies the covector on
-the transported sectorial realization, and (4.4) follows.
+the transported sectorial realization, and (4.5) follows.
 \end{proof}
 
 The theorem is narrower than a Gamma/Fourier--Mukai comparison for every

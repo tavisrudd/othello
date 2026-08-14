@@ -38,7 +38,7 @@ the wall variable, the ambient coordinate of (3.1) satisfies
 \end{theorem}
 
 \begin{proof}
-Let \(S=S_{F_0}\) denote the wall variable, let \(\lambda\) be the
+Let \(q_{mathrm w}=S_{F_0}\) denote the wall variable, let \(\lambda\) be the
 equivariant wall frequency, and put \(D=\kappa_+(\lambda)\).
 Lemma~5.10 of \cite{GuYuYu} applies to \(a_p\) because its wall
 restriction is zero.  It gives
@@ -47,7 +47,7 @@ restriction is zero.  It gives
 \]
 at the specialization under consideration.  Lemma~5.8 gives only
 \[
- \FT_{X_+}(a_p)=[p_+]+O(S).                               \tag{3.5}
+ \FT_{X_+}(a_p)=[p_+]+O(q_{\mathrm w}).                    \tag{3.5}
 \]
 
 Apply Lemma~5.10 again to \(\lambda a_p\).  Its wall restriction is zero and
@@ -67,15 +67,17 @@ particular,
 Fourier covariance, Proposition~4.14(2) of \cite{GuYuYu}, together with the
 quantum-D-module construction of Proposition~4.21, rewrites (3.7) as
 \[
- \bigl(zS\partial_S+D\star_{\tau_+(S)}
- +(S\partial_S\tau_+(S))\star_{\tau_+(S)}\bigr)
+ \bigl(zq_{\mathrm w}\partial_{q_{\mathrm w}}+D\star_{\tau_+(q_{\mathrm w})}
+ +(q_{\mathrm w}\partial_{q_{\mathrm w}}\tau_+(q_{\mathrm w}))
+   \star_{\tau_+(q_{\mathrm w})}\bigr)
  \FT_{X_+}(a_p)=0.                                        \tag{3.8}
 \]
-Here \(\tau_+(S)\) is the specialized receiver coordinate.  Write
+Here \(\tau_+(q_{\mathrm w})\) is the specialized receiver coordinate.  Write
 \[
- \FT_{X_+}(a_p)=[p_+]+\sum_{k>0}S^kv_k,
+ \FT_{X_+}(a_p)=[p_+]+\sum_{k>0}q_{\mathrm w}^kv_k,
  \qquad
- \tau_+(S)=f(S)\mathbf1+\eta(S),                           \tag{3.9}
+ \tau_+(q_{\mathrm w})=f(q_{\mathrm w})\mathbf1+\eta(q_{\mathrm w}),
+                                                               \tag{3.9}
 \]
 where \(f(0)=0=\eta(0)\) and \(\eta(S)\) has positive cohomological degree.
 Lemma~5.8 gives \(v_k\in H^*(X_+)[z]\).  Every nonconstant stable map in a
@@ -85,7 +87,7 @@ and misses \(p_+\).  Thus the positive-wall quantum corrections and
 
 We prove simultaneously that every \(v_k\) and every coefficient of \(f\)
 vanishes.  Suppose this is known below order \(m>0\), and write
-\([S^m]f=c_m\).  The coefficient of \(S^m\) in (3.8) is
+\([q_{\mathrm w}^m]f=c_m\).  The coefficient of \(q_{\mathrm w}^m\) in (3.8) is
 \[
  (zm\,\id+D\cup-)v_m+mc_m[p_+]=0.                           \tag{3.10}
 \]
