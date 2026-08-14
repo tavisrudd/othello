@@ -1730,8 +1730,10 @@ on five letters, thereby identifying the abstract generated action with a
 concrete `A5`.  It constructs all six Sylow-five subgroups, proves that
 conjugation by the two generators permutes them by exactly the original
 six-point action, and identifies each ten-element normalizer explicitly with
-the dihedral group `D5`.  This is the concrete group-theoretic six-label
-packet, but the terminal does not identify it with the manuscript's six
+the dihedral group `D5`.  The resulting six-label equivalence intertwines both
+displayed generators with conjugation, and each point stabilizer is its
+normalizer.  This is the concrete group-theoretic six-label packet, but the
+terminal does not identify it with the manuscript's six
 geometrically defined `D5` normalizers, elliptic quotients, or axes. -/
 theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     (∀ heart : Fin 4 → GraphLattices.F2,
@@ -1779,6 +1781,20 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     Nat.card (Sylow 5 (alternatingGroup (Fin 5))) = 6 ∧
     Function.Surjective GraphLattices.sixPointFiveSylow ∧
     (∀ label : Fin 6,
+      GraphLattices.sixPointFiveSylowEquiv
+          (GraphLattices.sixPointTranslationPermutation label) =
+        GraphLattices.sixPointFactorTranslationA5 •
+          GraphLattices.sixPointFiveSylowEquiv label ∧
+      GraphLattices.sixPointFiveSylowEquiv
+          (GraphLattices.sixPointInversionPermutation label) =
+        GraphLattices.sixPointFactorInversionA5 •
+          GraphLattices.sixPointFiveSylowEquiv label ∧
+      MulAction.stabilizer (alternatingGroup (Fin 5))
+          (GraphLattices.sixPointFiveSylow label) =
+        Subgroup.normalizer
+          (GraphLattices.sixPointFiveSubgroup label :
+            Set (alternatingGroup (Fin 5)))) ∧
+    (∀ label : Fin 6,
       Nat.card (Subgroup.normalizer
         (GraphLattices.sixPointFiveSubgroup label :
           Set (alternatingGroup (Fin 5)))) = 10 ∧
@@ -1810,6 +1826,9 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       GraphLattices.sixPointFiveSubgroup_inversion_conjugation label⟩,
     GraphLattices.sixPointFiveSylow_card,
     GraphLattices.sixPointFiveSylow_surjective,
+    fun label => ⟨GraphLattices.sixPointFiveSylowEquiv_translation label,
+      GraphLattices.sixPointFiveSylowEquiv_inversion label,
+      GraphLattices.sixPointFiveSylow_stabilizer_eq_normalizer label⟩,
     fun label => ⟨GraphLattices.sixPointFiveSubgroup_normalizer_card label,
       ⟨GraphLattices.sixPointFiveNormalizerMulEquivDihedral label⟩⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,

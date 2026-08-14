@@ -370,6 +370,41 @@ theorem sixPointFiveSylow_surjective :
     Function.Surjective sixPointFiveSylow :=
   sixPointFiveSylowEquiv.surjective
 
+/-- The six-label equivalence intertwines factor translation with conjugation
+on Sylow-five subgroups. -/
+theorem sixPointFiveSylowEquiv_translation (label : Fin 6) :
+    sixPointFiveSylowEquiv
+        (sixPointTranslationPermutation label) =
+      sixPointFactorTranslationA5 • sixPointFiveSylowEquiv label := by
+  apply Sylow.ext
+  change sixPointFiveSubgroup (sixPointTranslationPermutation label) =
+    (sixPointFiveSubgroup label).map
+      (MulAut.conj sixPointFactorTranslationA5)
+  exact (sixPointFiveSubgroup_translation_conjugation label).symm
+
+/-- The six-label equivalence intertwines factor inversion with conjugation on
+Sylow-five subgroups. -/
+theorem sixPointFiveSylowEquiv_inversion (label : Fin 6) :
+    sixPointFiveSylowEquiv
+        (sixPointInversionPermutation label) =
+      sixPointFactorInversionA5 • sixPointFiveSylowEquiv label := by
+  apply Sylow.ext
+  change sixPointFiveSubgroup (sixPointInversionPermutation label) =
+    (sixPointFiveSubgroup label).map
+      (MulAut.conj sixPointFactorInversionA5)
+  exact (sixPointFiveSubgroup_inversion_conjugation label).symm
+
+/-- The stabilizer of a displayed Sylow-five point is its ten-element
+normalizer. -/
+theorem sixPointFiveSylow_stabilizer_eq_normalizer (label : Fin 6) :
+    MulAction.stabilizer (alternatingGroup (Fin 5))
+        (sixPointFiveSylow label) =
+      Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) := by
+  rw [Sylow.stabilizer_eq_normalizer]
+  apply congrArg Subgroup.normalizer
+  exact congrArg SetLike.coe (sixPointFiveSylow_coe label)
+
 /-- The normalizer of each of the six displayed Sylow-five subgroups has ten
 elements. -/
 theorem sixPointFiveSubgroup_normalizer_card (label : Fin 6) :
