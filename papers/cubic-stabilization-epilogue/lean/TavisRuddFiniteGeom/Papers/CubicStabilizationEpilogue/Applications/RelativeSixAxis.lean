@@ -138,6 +138,25 @@ structure RelativeSixAxisConclusion
   alternating, and nondegenerate. -/
   twoPrimaryHeartCoefficientForm :
     GraphLattices.SixPointHeartCoefficientFormProperties
+  /-- The same coefficient form, bundled as a Mathlib bilinear form, is
+  alternating and nondegenerate. -/
+  twoPrimaryHeartCoefficientBilinForm :
+    GraphLattices.sixPointHeartCoefficientBilinForm.IsAlt ∧
+      GraphLattices.sixPointHeartCoefficientBilinForm.Nondegenerate
+  /-- Every word in the explicit generated six-point action preserves the
+  coefficient form. -/
+  twoPrimaryHeartActionPreservesForm :
+    ∀ word left right,
+      GraphLattices.sixPointHeartCoefficientForm
+          (GraphLattices.sixPointHeartWordAction word left)
+          (GraphLattices.sixPointHeartWordAction word right) =
+        GraphLattices.sixPointHeartCoefficientForm left right
+  /-- After choosing a symplectic basis of a two-dimensional tensor factor,
+  the induced rank-eight tensor-product form is alternating and
+  nondegenerate. -/
+  twoPrimaryStandardTensorForm :
+    GraphLattices.sixAxisStandardDiscriminantBilinForm.IsAlt ∧
+      GraphLattices.sixAxisStandardDiscriminantBilinForm.Nondegenerate
 
 /-- Package the supplied opaque relative-six-axis fields with the independently
 proved integral Smith witness and two-primary coefficient calculation. -/
@@ -154,7 +173,12 @@ theorem relativeSixAxis_of_geometricInputs
     fun T _ _ ↦ ⟨GraphLattices.sixAxisTwoPrimaryDiscriminantLinearEquiv T⟩,
     GraphLattices.sixAxisTwoPrimaryDiscriminant_rankEight_card,
     GraphLattices.sixAxisTwoPrimaryDiscriminantRepresentative_eq_heart,
-    GraphLattices.sixPointHeartCoefficientForm_properties⟩
+    GraphLattices.sixPointHeartCoefficientForm_properties,
+    ⟨GraphLattices.sixPointHeartCoefficientBilinForm_isAlt,
+      GraphLattices.sixPointHeartCoefficientBilinForm_nondegenerate⟩,
+    GraphLattices.sixPointHeartWordAction_preserves_coefficientForm,
+    ⟨GraphLattices.sixAxisStandardDiscriminantBilinForm_isAlt,
+      GraphLattices.sixAxisStandardDiscriminantBilinForm_nondegenerate⟩⟩
 
 end Applications
 

@@ -111,7 +111,10 @@ full integral Smith witness and, after tensoring with any `F₂`-module `T`, an
 explicit linear identification of the two-primary coefficient kernel with four
 copies of `T`.  This gives order `2⁸` for a two-dimensional tensor factor and
 identifies the scalar coordinates with `Aug(F₂⁶)/⟨1⟩`; their normalized dot
-product is bilinear, alternating, and nondegenerate.  The row remains a
+product is bilinear, alternating, nondegenerate, and preserved by the full
+generated six-point action.  After choosing a symplectic basis of the
+two-dimensional factor, the induced rank-eight tensor-product form is also
+alternating and nondegenerate.  The row remains a
 fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,

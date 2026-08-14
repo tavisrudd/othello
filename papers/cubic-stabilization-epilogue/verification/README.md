@@ -83,7 +83,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   fibre (`cor:universal-ch0`), then the remaining relative-family geometry in
   `lem:relative-six-axis`.  Lean now proves its full integral Smith witness and
   the coefficient-module identity behind `D₂ ≃ H₂ ⊗ E[2]`, including the
-  order `2⁸` calculation and the nondegenerate alternating coefficient form,
+  order `2⁸` calculation and the invariant nondegenerate alternating
+  coefficient form, together with the standard rank-eight tensor-product
+  symplectic model,
   but not the elliptic scheme, torsion local system,
   symplectic pairing, relative isogeny, or maximal-isotropic kernel.
 - Formalize the remaining quantum inputs: the separation family, construct the

@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
+import Mathlib.LinearAlgebra.BilinearForm.Properties
 
 /-!
 # The two-primary coefficient discriminant of the six-axis form
@@ -15,7 +16,10 @@ For `T = F₂`, the explicit equivalence agrees with the normalized coordinates
 for the six-point coefficient heart
 `Aug(F₂⁶)/⟨1⟩`.  Thus the calculation proves the coefficient-module
 part of the relative identification `D₂ ≃ H₂ ⊗ E[2]`; the normalized
-heart dot product is also proved bilinear, alternating, and nondegenerate.  It does not
+heart dot product is also proved bilinear, alternating, nondegenerate, and
+invariant under every word in the generated six-point action.  After choosing
+a symplectic basis of a two-dimensional tensor factor, the resulting
+rank-eight tensor-product form is likewise alternating and nondegenerate.  It does not
 construct an elliptic scheme, its two-torsion local system, the Weil pairing,
 or the relative isogeny kernel.
 -/
@@ -281,6 +285,20 @@ theorem sixPointHeartCoefficientForm_add_right
   rw [sixPointHeartCoefficientForm_comm left right₁,
     sixPointHeartCoefficientForm_comm left right₂]
 
+/-- Zero in the first variable pairs trivially. -/
+@[simp]
+theorem sixPointHeartCoefficientForm_zero_left (right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm 0 right = 0 := by
+  simp [sixPointHeartCoefficientForm,
+    sixPointHeartRepresentative, Fin.sum_univ_succ]
+
+/-- Zero in the second variable pairs trivially. -/
+@[simp]
+theorem sixPointHeartCoefficientForm_zero_right (left : Fin 4 → F2) :
+    sixPointHeartCoefficientForm left 0 = 0 := by
+  rw [sixPointHeartCoefficientForm_comm]
+  exact sixPointHeartCoefficientForm_zero_left left
+
 /-- The coefficient pairing respects scalar multiplication in its second
 argument. -/
 theorem sixPointHeartCoefficientForm_smul_right
@@ -315,6 +333,309 @@ theorem sixPointHeartCoefficientForm_nondegenerate
   have againstBasis := annihilates (fun test ↦ if test = index then 1 else 0)
   rw [sixPointHeartCoefficientForm_formula] at againstBasis
   simpa [sumZero] using againstBasis
+
+/-- The coefficient pairing bundled as an `F₂`-bilinear form. -/
+def sixPointHeartCoefficientBilinForm :
+    LinearMap.BilinForm F2 (Fin 4 → F2) :=
+  LinearMap.mk₂ F2 sixPointHeartCoefficientForm
+    sixPointHeartCoefficientForm_add_left
+    (by
+      intro scalar left right
+      simpa only [smul_eq_mul] using
+        sixPointHeartCoefficientForm_smul_left scalar left right)
+    sixPointHeartCoefficientForm_add_right
+    (by
+      intro scalar left right
+      simpa only [smul_eq_mul] using
+        sixPointHeartCoefficientForm_smul_right scalar left right)
+
+/-- Evaluation of the bundled form is the explicit coefficient pairing. -/
+@[simp]
+theorem sixPointHeartCoefficientBilinForm_apply
+    (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientBilinForm left right =
+      sixPointHeartCoefficientForm left right :=
+  rfl
+
+/-- The bundled coefficient form is alternating. -/
+theorem sixPointHeartCoefficientBilinForm_isAlt :
+    sixPointHeartCoefficientBilinForm.IsAlt :=
+  sixPointHeartCoefficientForm_self
+
+/-- The bundled coefficient form is nondegenerate on both sides. -/
+theorem sixPointHeartCoefficientBilinForm_nondegenerate :
+    sixPointHeartCoefficientBilinForm.Nondegenerate := by
+  constructor
+  · exact sixPointHeartCoefficientForm_nondegenerate
+  · intro heart annihilates
+    apply sixPointHeartCoefficientForm_nondegenerate heart
+    intro test
+    rw [sixPointHeartCoefficientForm_comm]
+    exact annihilates test
+
+/-- The translation generator preserves the coefficient form.  Kernel
+reduction checks all `16²` ordered pairs of heart vectors. -/
+theorem sixPointHeartTranslation_preserves_coefficientForm
+    (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm
+        (Matrix.mulVec sixPointHeartTranslation left)
+        (Matrix.mulVec sixPointHeartTranslation right) =
+      sixPointHeartCoefficientForm left right := by
+  revert left right
+  decide
+
+/-- The inversion generator preserves the coefficient form.  Kernel
+reduction checks all `16²` ordered pairs of heart vectors. -/
+theorem sixPointHeartInversion_preserves_coefficientForm
+    (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm
+        (Matrix.mulVec sixPointHeartInversion left)
+        (Matrix.mulVec sixPointHeartInversion right) =
+      sixPointHeartCoefficientForm left right := by
+  revert left right
+  decide
+
+/-- Every word in the full generated six-point action preserves the
+nondegenerate alternating coefficient form. -/
+theorem sixPointHeartWordAction_preserves_coefficientForm
+    (word : List Bool) (left right : Fin 4 → F2) :
+    sixPointHeartCoefficientForm (sixPointHeartWordAction word left)
+        (sixPointHeartWordAction word right) =
+      sixPointHeartCoefficientForm left right := by
+  induction word generalizing left right with
+  | nil => rfl
+  | cons generator word induction =>
+      simp only [sixPointHeartWordAction]
+      rw [induction]
+      cases generator
+      · exact sixPointHeartTranslation_preserves_coefficientForm left right
+      · exact sixPointHeartInversion_preserves_coefficientForm left right
+
+/-- Coordinates for `H₂ ⊗ V` after choosing a symplectic basis of the
+two-dimensional factor `V`. -/
+abbrev SixAxisStandardDiscriminantCoordinates := Fin 4 → Fin 2 → F2
+
+/-- First coordinate layer of the chosen two-dimensional tensor factor. -/
+def sixAxisStandardDiscriminantFirst
+    (vector : SixAxisStandardDiscriminantCoordinates) : Fin 4 → F2 :=
+  fun index ↦ vector index 0
+
+/-- Second coordinate layer of the chosen two-dimensional tensor factor. -/
+def sixAxisStandardDiscriminantSecond
+    (vector : SixAxisStandardDiscriminantCoordinates) : Fin 4 → F2 :=
+  fun index ↦ vector index 1
+
+/-- Embed a heart vector in the first tensor-coordinate layer. -/
+def sixAxisStandardDiscriminantOfFirst
+    (heart : Fin 4 → F2) : SixAxisStandardDiscriminantCoordinates :=
+  fun index ↦ ![heart index, 0]
+
+/-- Embed a heart vector in the second tensor-coordinate layer. -/
+def sixAxisStandardDiscriminantOfSecond
+    (heart : Fin 4 → F2) : SixAxisStandardDiscriminantCoordinates :=
+  fun index ↦ ![0, heart index]
+
+/-- The first tensor layer is additive. -/
+@[simp]
+theorem sixAxisStandardDiscriminantFirst_add
+    (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantFirst (left + right) =
+      sixAxisStandardDiscriminantFirst left +
+        sixAxisStandardDiscriminantFirst right :=
+  rfl
+
+/-- The second tensor layer is additive. -/
+@[simp]
+theorem sixAxisStandardDiscriminantSecond_add
+    (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantSecond (left + right) =
+      sixAxisStandardDiscriminantSecond left +
+        sixAxisStandardDiscriminantSecond right :=
+  rfl
+
+/-- The first tensor layer respects scalar multiplication. -/
+@[simp]
+theorem sixAxisStandardDiscriminantFirst_smul
+    (scalar : F2) (vector : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantFirst (scalar • vector) =
+      scalar • sixAxisStandardDiscriminantFirst vector :=
+  rfl
+
+/-- The second tensor layer respects scalar multiplication. -/
+@[simp]
+theorem sixAxisStandardDiscriminantSecond_smul
+    (scalar : F2) (vector : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantSecond (scalar • vector) =
+      scalar • sixAxisStandardDiscriminantSecond vector :=
+  rfl
+
+/-- Projection to the first layer recovers a first-layer embedding. -/
+@[simp]
+theorem sixAxisStandardDiscriminantFirst_ofFirst
+    (heart : Fin 4 → F2) :
+    sixAxisStandardDiscriminantFirst
+      (sixAxisStandardDiscriminantOfFirst heart) = heart := by
+  funext index
+  rfl
+
+/-- Projection to the second layer of a first-layer embedding is zero. -/
+@[simp]
+theorem sixAxisStandardDiscriminantSecond_ofFirst
+    (heart : Fin 4 → F2) :
+    sixAxisStandardDiscriminantSecond
+      (sixAxisStandardDiscriminantOfFirst heart) = 0 := by
+  funext index
+  rfl
+
+/-- Projection to the first layer of a second-layer embedding is zero. -/
+@[simp]
+theorem sixAxisStandardDiscriminantFirst_ofSecond
+    (heart : Fin 4 → F2) :
+    sixAxisStandardDiscriminantFirst
+      (sixAxisStandardDiscriminantOfSecond heart) = 0 := by
+  funext index
+  rfl
+
+/-- Projection to the second layer recovers a second-layer embedding. -/
+@[simp]
+theorem sixAxisStandardDiscriminantSecond_ofSecond
+    (heart : Fin 4 → F2) :
+    sixAxisStandardDiscriminantSecond
+      (sixAxisStandardDiscriminantOfSecond heart) = heart := by
+  funext index
+  rfl
+
+/-- Tensor-product alternating form obtained from the coefficient-heart form
+and the standard symplectic form on `F₂²`. -/
+def sixAxisStandardDiscriminantForm
+    (left right : SixAxisStandardDiscriminantCoordinates) : F2 :=
+  sixPointHeartCoefficientForm
+      (sixAxisStandardDiscriminantFirst left)
+      (sixAxisStandardDiscriminantSecond right) +
+    sixPointHeartCoefficientForm
+      (sixAxisStandardDiscriminantSecond left)
+      (sixAxisStandardDiscriminantFirst right)
+
+/-- The standard discriminant form is additive in its first variable. -/
+theorem sixAxisStandardDiscriminantForm_add_left
+    (left₁ left₂ right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm (left₁ + left₂) right =
+      sixAxisStandardDiscriminantForm left₁ right +
+        sixAxisStandardDiscriminantForm left₂ right := by
+  simp [sixAxisStandardDiscriminantForm,
+    sixPointHeartCoefficientForm_add_left]
+  abel
+
+/-- The standard discriminant form respects scalar multiplication in its
+first variable. -/
+theorem sixAxisStandardDiscriminantForm_smul_left
+    (scalar : F2) (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm (scalar • left) right =
+      scalar * sixAxisStandardDiscriminantForm left right := by
+  simp [sixAxisStandardDiscriminantForm,
+    sixPointHeartCoefficientForm_smul_left, mul_add]
+
+/-- The standard discriminant form is symmetric in characteristic two. -/
+theorem sixAxisStandardDiscriminantForm_comm
+    (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm left right =
+      sixAxisStandardDiscriminantForm right left := by
+  simp only [sixAxisStandardDiscriminantForm]
+  rw [sixPointHeartCoefficientForm_comm
+      (sixAxisStandardDiscriminantFirst left)
+      (sixAxisStandardDiscriminantSecond right),
+    sixPointHeartCoefficientForm_comm
+      (sixAxisStandardDiscriminantSecond left)
+      (sixAxisStandardDiscriminantFirst right)]
+  abel
+
+/-- The standard discriminant form is additive in its second variable. -/
+theorem sixAxisStandardDiscriminantForm_add_right
+    (left right₁ right₂ : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm left (right₁ + right₂) =
+      sixAxisStandardDiscriminantForm left right₁ +
+        sixAxisStandardDiscriminantForm left right₂ := by
+  rw [sixAxisStandardDiscriminantForm_comm]
+  simp only [sixAxisStandardDiscriminantForm_add_left]
+  rw [sixAxisStandardDiscriminantForm_comm left right₁,
+    sixAxisStandardDiscriminantForm_comm left right₂]
+
+/-- The standard discriminant form respects scalar multiplication in its
+second variable. -/
+theorem sixAxisStandardDiscriminantForm_smul_right
+    (scalar : F2) (left right : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm left (scalar • right) =
+      scalar * sixAxisStandardDiscriminantForm left right := by
+  rw [sixAxisStandardDiscriminantForm_comm]
+  simp only [sixAxisStandardDiscriminantForm_smul_left]
+  rw [sixAxisStandardDiscriminantForm_comm left right]
+
+/-- The standard tensor-product discriminant form is alternating. -/
+theorem sixAxisStandardDiscriminantForm_self
+    (vector : SixAxisStandardDiscriminantCoordinates) :
+    sixAxisStandardDiscriminantForm vector vector = 0 := by
+  rw [sixAxisStandardDiscriminantForm]
+  rw [sixPointHeartCoefficientForm_comm
+    (sixAxisStandardDiscriminantSecond vector)
+    (sixAxisStandardDiscriminantFirst vector)]
+  exact sixAxisF2Module_add_self_eq_zero _
+
+/-- The standard tensor-product discriminant form is nondegenerate. -/
+theorem sixAxisStandardDiscriminantForm_nondegenerate
+    (vector : SixAxisStandardDiscriminantCoordinates)
+    (annihilates : ∀ test, sixAxisStandardDiscriminantForm vector test = 0) :
+    vector = 0 := by
+  have firstZero : sixAxisStandardDiscriminantFirst vector = 0 := by
+    apply sixPointHeartCoefficientForm_nondegenerate
+    intro test
+    have evaluated := annihilates (sixAxisStandardDiscriminantOfSecond test)
+    simpa [sixAxisStandardDiscriminantForm,
+      sixAxisStandardDiscriminantFirst,
+      sixAxisStandardDiscriminantSecond,
+      sixAxisStandardDiscriminantOfSecond] using evaluated
+  have secondZero : sixAxisStandardDiscriminantSecond vector = 0 := by
+    apply sixPointHeartCoefficientForm_nondegenerate
+    intro test
+    have evaluated := annihilates (sixAxisStandardDiscriminantOfFirst test)
+    simpa [sixAxisStandardDiscriminantForm,
+      sixAxisStandardDiscriminantFirst,
+      sixAxisStandardDiscriminantSecond,
+      sixAxisStandardDiscriminantOfFirst] using evaluated
+  funext index coordinate
+  fin_cases coordinate
+  · exact congrFun firstZero index
+  · exact congrFun secondZero index
+
+/-- The standard tensor-product pairing bundled as a Mathlib bilinear form. -/
+def sixAxisStandardDiscriminantBilinForm :
+    LinearMap.BilinForm F2 SixAxisStandardDiscriminantCoordinates :=
+  LinearMap.mk₂ F2 sixAxisStandardDiscriminantForm
+    sixAxisStandardDiscriminantForm_add_left
+    (by
+      intro scalar left right
+      simpa only [smul_eq_mul] using
+        sixAxisStandardDiscriminantForm_smul_left scalar left right)
+    sixAxisStandardDiscriminantForm_add_right
+    (by
+      intro scalar left right
+      simpa only [smul_eq_mul] using
+        sixAxisStandardDiscriminantForm_smul_right scalar left right)
+
+/-- The bundled standard discriminant form is alternating. -/
+theorem sixAxisStandardDiscriminantBilinForm_isAlt :
+    sixAxisStandardDiscriminantBilinForm.IsAlt :=
+  sixAxisStandardDiscriminantForm_self
+
+/-- The bundled standard discriminant form is nondegenerate. -/
+theorem sixAxisStandardDiscriminantBilinForm_nondegenerate :
+    sixAxisStandardDiscriminantBilinForm.Nondegenerate := by
+  constructor
+  · exact sixAxisStandardDiscriminantForm_nondegenerate
+  · intro vector annihilates
+    apply sixAxisStandardDiscriminantForm_nondegenerate vector
+    intro test
+    rw [sixAxisStandardDiscriminantForm_comm]
+    exact annihilates test
 
 /-- The exact bilinear, alternating, and nondegenerate properties of the
 six-point heart coefficient form. -/
