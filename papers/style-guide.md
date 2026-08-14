@@ -187,6 +187,10 @@ well-shaped paragraphs instead of five labeled subsections.
   to a rendered theorem number.  Rendered numbers are presentation output and
   may change when statements move; reordering must not rename the stable
   identifier or silently break its evidence mapping.
+- Give every cross-referenced display a stable semantic `\label`, refer to it
+  with `\eqref`, and let TeX assign its rendered number.  Do not hard-code
+  equation numbers with `\tag` or cite a display by typing its current number
+  into prose; both practices make reordering silently brittle.
 - Before a proof, identify any classical result on which it depends and any
   exhaustive finite step. Inside the proof, say exactly where each enters.
 - For a substantial proof, provide a strategy paragraph or section that gives
