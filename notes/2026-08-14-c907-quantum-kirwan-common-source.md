@@ -292,6 +292,50 @@ the virtual normal Euler class and node-smoothing factors reproduce the same
 Gamma kernel, rather than an incomplete residue.  That check is the theorem,
 not bookkeeping to suppress.
 
+### A stronger support-collapse candidate
+
+There is a route that may eliminate the fixed terms before any contour sum.
+Choose the point in the common stable open of the two adjacent chambers, and
+let `a_p` be an equivariant common-open lift of its point class with
+
+\[
+ a_p|_{W^\zeta}=0                                             \tag{18}
+\]
+
+for every wall one-parameter subgroup.  Such a lift is the same zero-wall
+class used in the simple-VGIT point-column theorem; geometrically its cycle is
+disjoint from the wall fixed locus.
+
+Run the quantum Kalkman master-space localization equivariantly for the
+commuting rotation of the graph `P^1`, and pair the output of the localized
+graph potential with `a_p`.  On a graph-space fixed locus, the output
+evaluation in `tau_-` is evaluation at the node joining the bubble to the
+principal parametrized component.  On a polarization-wall fixed stratum that
+principal component maps to `W^zeta/G_zeta`.  Continuity therefore makes the
+output evaluation factor through `W^zeta`, and (18) kills the entire virtual
+fixed contribution, including its normal Euler class and all neutral towers.
+The two endpoint contributions are exactly the two localized point rows.
+
+This proves the localized point-row theorem provided the following formal
+enhancement of Gonzalez--Woodward's construction is written down:
+
+> **Commuting-rotation enhancement.**  The virtual Kalkman localization
+> identity remains valid in the equivariant Chow/cohomology ring for the
+> auxiliary `C*` rotating `P^1`, with the distinguished output node retained;
+> localizing in that auxiliary parameter gives Woodward's `tau_-` endpoint
+> terms.
+
+This enhancement changes neither the moduli spaces nor their perfect
+obstruction theories: the auxiliary action commutes with the polarization
+torus, and virtual localization is coefficient-linear in the output insertion.
+It is therefore substantially smaller than a general fundamental-solution
+wall theorem.  It is not stated in the cited papers, and the identification of
+the endpoint conventions with `tau_-` must be checked rather than inferred
+from the scalar graph formula.  The decisive falsifier is equally concrete:
+find a wall-fixed graph stratum whose distinguished output evaluation does
+not factor through the wall fixed locus.  Standard graph-space fixed-locus
+geometry predicts that no such stratum exists.
+
 ## 6. Conditional application to `X x P^2`
 
 Assume:
@@ -353,7 +397,9 @@ recorded.
 - **Localized point-row wall formula.**  Extend quantum Kalkman virtual
   localization to the single localized graph coefficient measured by the
   point row, including the neutral complete residue.  Equality of the scalar
-  graph trace is insufficient because of the factorization shear (17).
+  graph trace is insufficient because of the factorization shear (17).  The
+  strongest candidate proof is the commuting-rotation enhancement above:
+  every wall term should vanish by the zero restriction (18).
 - **Homogeneous packet map.**  The `mu`/Novikov-Euler correction and uniform
   half-Tate shift are the exact Rees identities (12a)--(12c).  Check Euler
   multiplication (12d), curvature, and bulk isomonodromy in the localized

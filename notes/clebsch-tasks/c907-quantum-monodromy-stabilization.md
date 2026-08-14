@@ -928,6 +928,17 @@ canonical Rees homogenization `Q^d -> z^(c_1.d)Q^d` cancels it and gives the
 exact common half-Tate shift; what remains is Euler-multiplication and curved
 bulk compatibility in the localized receiver.  Full Gu--Yu--Yu Conjecture
 1.11 / Iritani Conjecture 43 is no longer on the critical path.
+
+The strongest one-lemma attack is now support-theoretic.  Run the Kalkman
+master localization equivariantly for the commuting rotation of the graph
+`P^1` and retain the distinguished output node.  Choose its point insertion
+in the common stable open.  Every polarization-wall fixed graph has that node
+on a principal component mapping to the wall fixed locus, so the point lift
+restricts to zero and kills the whole wall residue, including neutral towers.
+What must be proved is the **commuting-rotation enhancement** identifying the
+two endpoint terms with Woodward's localized `tau_-`; see the common-source
+note.  Falsify it by finding a wall-fixed graph whose output node does not
+factor through the wall fixed locus before returning to Gamma residues.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed

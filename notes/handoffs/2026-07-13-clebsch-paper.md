@@ -114,6 +114,11 @@ The raw linearized map has a Novikov-Euler correction, so it must not be
 treated as having a constant `mu` commutator at fixed Novikov parameter.  Its
 canonical Rees homogenization has the exact uniform half-Tate shift; the
 remaining packet-side check is Euler multiplication at the curved bulk point.
+The highest-EV wall proof is even smaller: enhance quantum Kalkman localization
+by the commuting rotation of the graph `P^1` and retain the output node.  An
+off-wall point lift restricts to zero on every wall fixed locus, so all wall
+terms should vanish before Gamma summation.  The exact open lemma is that this
+equivariant enhancement has Woodward's localized `tau_-` as its endpoint term.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
