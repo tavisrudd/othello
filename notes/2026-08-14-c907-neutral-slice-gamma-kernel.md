@@ -237,8 +237,10 @@ degree-zero augmentation to Gu--Yu--Yu's discrete formula gives
 the same universal scalar shift sum in every chamber.  Statement 2 also has
 an exact formal reduction: at a smooth free quotient the linearized quantum
 Kirwan map is surjective by classical Kirwan and a Novikov-adic Neumann
-series; if its homogeneous `z`-intertwining has the expected common half-Tate
-shift, primary decomposition lifts the whole primitive-sixth packet.
+series.  The raw map has a Novikov-Euler correction; after the canonical Rees
+homogenization `Q^d -> z^(c_1.d)Q^d`, it has the exact common half-Tate shift.
+Provided Euler multiplication is intertwined at the curved bulk point,
+primary decomposition lifts the whole primitive-sixth packet.
 
 What remains is not the algebra of these two statements but their common
 analytic receiver.  Woodward supplies a localized adiabatic receiver for each
@@ -318,10 +320,10 @@ candidate enumeration.
   What is absent is their equality in one localized gauged solution object
   across a wall.  Exact evidence gap: Gonzalez--Woodward Remark 1.18(b).
   Owning successor: the localized quantum-Kalkman point-row theorem.
-- **Homogeneous packet convention.**  The linearized quantum Kirwan map must
-  intertwine Euler multiplication and `mu` with the same half-Tate shift in
-  both chambers, at the curved bulk point `kappa(0)`.  This is a bounded
-  grading calculation, not yet banked as a theorem.
+- **Homogeneous packet convention.**  The `mu`/Novikov-Euler calculation and
+  Rees half-Tate shift are now exact.  The linearized quantum Kirwan receiver
+  must still intertwine Euler multiplication at the curved bulk point
+  `kappa(0)` and be compared by bulk isomonodromy.
 - **Geometric falsifier.**  The incomplete-Gamma model is not a
   smooth-projective peak.  No geometric unit-circuit peak is known whose
   complete neutral residue has nonzero common-open rank.  A direct

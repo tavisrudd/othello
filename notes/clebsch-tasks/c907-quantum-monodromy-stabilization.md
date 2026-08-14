@@ -922,10 +922,12 @@ Calabi--Yau contour lemma in
 `../2026-08-14-c907-neutral-slice-gamma-kernel.md` then sums every unbounded
 fixed-stratum tower.  Gonzalez--Woodward prove the graph-potential wall formula
 but explicitly leave its localized/fundamental-solution extension open in
-Remark 1.18(b); do not cite it as already proved.  In parallel, check the
-Euler/`mu` homogeneity and common half-Tate shift of the endpoint linearized
-quantum Kirwan maps.  Full Gu--Yu--Yu Conjecture 1.11 / Iritani Conjecture 43
-is no longer on the critical path.
+Remark 1.18(b); do not cite it as already proved.  The raw linearized quantum
+Kirwan map has a Novikov-Euler term, not a constant `mu` commutator.  The
+canonical Rees homogenization `Q^d -> z^(c_1.d)Q^d` cancels it and gives the
+exact common half-Tate shift; what remains is Euler-multiplication and curved
+bulk compatibility in the localized receiver.  Full Gu--Yu--Yu Conjecture
+1.11 / Iritani Conjecture 43 is no longer on the critical path.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed

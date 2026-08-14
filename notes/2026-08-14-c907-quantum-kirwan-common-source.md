@@ -116,7 +116,7 @@ points.  It does **not** by itself say that `Dkappa` is horizontal in every
 bulk direction: differentiating it produces a `D^2 kappa` term.  The present
 route uses (6) only at a fixed bulk for the `z`-formal packet.
 
-## 3. The equally shifted packet lemma
+## 3. Rees homogenization and the equally shifted packet lemma
 
 The next statement isolates the exact homogeneity input still to be verified
 for the intended quantum Kirwan receiver.
@@ -145,20 +145,50 @@ Indeed, a polynomial Bezout projector onto the generalized `lambda-a`
 eigenspace commutes with (9); applying it to an arbitrary lift of a target
 generalized eigenvector proves surjectivity in (11).
 
-For a homogeneous `C*` quotient the expected shift is the uniform half-Tate
-shift coming from the tangent sequence: if the complex dimension drops by
-one, then
+The raw linearized quantum Kirwan map does **not** satisfy (10) merely because
+it is graded.  Let the group have complex dimension `g`, and give `Q^d` total
+degree `2 c_1^G(TW).d`.  If `A=Dkappa` preserves total degree, comparison of
+the two grading operators gives
 
 \[
- \mu_YA=A\mu_W+\tfrac12A.                                     \tag{12}
+ \mu_YA-A\mu_W=\tfrac g2A-\Theta_QA,                          \tag{12a}
 \]
 
-Together with preservation of Euler multiplication this gives the `z`
-version of (10).  Equation (12) is a grading calculation, not a quoted
-conclusion of the quantum Kirwan papers; an application must check their
-grading and curvature conventions.  In particular, `kappa(0)` need not be
-zero.  The target module must first be taken at bulk `kappa(0)` and only then
-compared with the small-bulk module by formal bulk isomonodromy.
+where `Theta_Q(Q^d)=c_1^G(TW).d Q^d`.  Indeed, on a coefficient carrying a
+source class of degree `p` to a target class of degree `q`, total homogeneity
+says `p=q+2c_1.d`; substituting the definitions of `mu_W` and `mu_Y` gives
+(12a).  Omitting `Theta_Q` would be another illegal fixed-parameter frame
+change.
+
+Rees-homogenize the map by
+
+\[
+ A^{\rm h}(z,Q)=\sum_d z^{c_1.d}Q^d A_d.                      \tag{12b}
+\]
+
+On a ramified `z`-cover if necessary,
+
+\[
+ z\partial_zA^{\rm h}+\mu_YA^{\rm h}-A^{\rm h}\mu_W
+   =\tfrac g2A^{\rm h}.                                       \tag{12c}
+\]
+
+If the star-morphism and Euler-homogeneity identities also give
+
+\[
+ E_Y\star A^{\rm h}=A^{\rm h}(E_W\star-),                    \tag{12d}
+\]
+
+then (12c)--(12d) intertwine the two `z`-connections up to the uniform
+`g/2` Tate shift.  Thus (10)--(11) apply to `A^h`; for a `C*` quotient the
+shift is exactly `1/2`.
+
+The total-degree part of this calculation is the virtual-dimension axiom, and
+the equality of first Chern classes on the stable locus follows from the
+quotient tangent sequence.  The remaining application check is (12d) in the
+curved receiver conventions.  In particular, `kappa(0)` need not be zero.
+The target module must first be taken at bulk `kappa(0)` and only then compared
+with the small-bulk module by formal bulk isomonodromy.
 
 ## 4. Common-source Boolean theorem
 
@@ -197,8 +227,8 @@ finite-rank presentation of equivariant quantum cohomology.
 For C907 take `lambda=zeta_6`, `r_i` the Gamma rank rows, and `A_i` the
 linearized quantum Kirwan receivers.  Sections 1--4 show that the global
 telescope would follow from one common-source equality (13), plus the
-homogeneous `z`-intertwining check.  No comparison of the two chamber
-large-radius coefficient rings is involved.
+Rees-homogenized Euler-intertwining check (12d).  No comparison of the two
+chamber large-radius coefficient rings is involved.
 
 ## 5. What Woodward supplies, and what is missing
 
@@ -270,7 +300,7 @@ Assume:
    objects for the two smooth endpoint chambers, or the localized theorem is
    functorial through a finite cobordism decomposition;
 2. the smooth endpoint linearized quantum Kirwan maps are homogeneous in the
-   sense of (10)--(12) and formally surjective;
+   Rees sense of (10)--(12d) and formally surjective;
 3. the localized quantum-Kalkman point-row theorem holds at every intervening
    wall.
 
@@ -324,9 +354,10 @@ recorded.
   localization to the single localized graph coefficient measured by the
   point row, including the neutral complete residue.  Equality of the scalar
   graph trace is insufficient because of the factorization shear (17).
-- **Homogeneous packet map.**  Check Euler multiplication, `mu`, curvature,
-  and the uniform half-Tate shift for the linearized quantum Kirwan map in the
-  exact receiver conventions.
+- **Homogeneous packet map.**  The `mu`/Novikov-Euler correction and uniform
+  half-Tate shift are the exact Rees identities (12a)--(12c).  Check Euler
+  multiplication (12d), curvature, and bulk isomonodromy in the localized
+  receiver conventions.
 - **Global source coherence.**  Put the endpoint maps in one equivariant
   source, or prove functoriality through the pi-desingularized cobordism.
 

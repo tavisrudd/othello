@@ -110,6 +110,10 @@ unlocalized graph-potential wall formula and explicitly leave its
 localized/fundamental-solution extension open.  Exact theorem, proof reduction,
 source hashes, and red-team boundary:
 `../2026-08-14-c907-quantum-kirwan-common-source.md`.
+The raw linearized map has a Novikov-Euler correction, so it must not be
+treated as having a constant `mu` commutator at fixed Novikov parameter.  Its
+canonical Rees homogenization has the exact uniform half-Tate shift; the
+remaining packet-side check is Euler multiplication at the curved bulk point.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
