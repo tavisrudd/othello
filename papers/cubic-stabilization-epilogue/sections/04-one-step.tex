@@ -66,9 +66,11 @@ It is generally larger than
 \(\operatorname{GL}(V\otimes B((z)))\), because the lower Laurent bound may
 decrease with \(N\).  For a compatible differential-module system over the
 quotients \(B/F^NB\), its framed-monodromy characteristic polynomial is the
-common finite-level polynomial, when these polynomials agree under
-reduction.  A pro-Laurent gauge preserves it if every finite-level gauge
-uses only integral powers of \(z\).
+compatible system \((\chi_N)_N\) of finite-level polynomials, provided
+reduction sends \(\chi_{N+1}\) to \(\chi_N\).  Since \(B\) is complete and
+separated and the matrix rank is finite, this system is equivalently one
+polynomial over \(B\).  A pro-Laurent gauge preserves it if every finite-level
+gauge uses only integral powers of \(z\).
 \end{definition}
 
 We first record two formal facts used in the comparison theorems.  They also
@@ -77,15 +79,16 @@ fix the completion convention in the proof.
 \begin{lemma}[Coefficientwise base change]
 \label{lem:pv-base-change}
 Let \(D\) be a formal differential module over \(k((z))\), and let \(B\) be a
-complete separated \(I\)-adic \(k\)-algebra on which \(d/dz\) is zero.  Scalar
-extension in the coefficient direction preserves the characteristic polynomial
-of framed formal monodromy.  The same holds after a connection gauge whose
-entries use only integral powers of \(z\).
+complete separated \(I\)-adic \(k\)-algebra on which \(d/dz\) is zero.  Fix a
+Levelt--Turrittin solution algebra \(R\) for \(D\), with a fundamental solution
+matrix and with differential constants \(R^{d/dz}=k\).  Scalar extension in
+the coefficient direction preserves the characteristic polynomial of framed
+formal monodromy.  The same holds after a connection gauge whose entries use
+only integral powers of \(z\).
 \end{lemma}
 
 \begin{proof}
-Choose a Levelt--Turrittin solution algebra \(R\) for \(D\) with differential
-constants \(k\).  At every finite level, the constants of
+At every finite level, the constants of
 \(R\otimes_k B/I^N\) are \(B/I^N\): expansion in a \(k\)-basis reduces this to
 \(R^{d/dz}=k\).  A fundamental solution matrix then identifies the horizontal
 module with
@@ -109,9 +112,8 @@ bulk coordinate has the form
  \qquad \eta\in F^1B\widehat\otimes H^{\rm ev}(T).
 \]
 Assume that \(a_0\) and \(a_2^\circ\) are constant in the positive filtration.
-Its
-framed formal-monodromy characteristic polynomial equals that of the small
-connection after the divisor substitution
+Its framed formal-monodromy characteristic polynomial equals that of the
+small connection after the divisor substitution, coefficientwise in \(B\),
 \[
  Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d.
  \tag{4.1}
@@ -149,7 +151,9 @@ is single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} makes
 the characteristic polynomial constant there.  Compatibility of the
 finite-level solutions identifies these polynomials under every reduction
 map, so the hypothesis in Definition~\ref{def:pro-laurent-monodromy} is
-satisfied and they define its pro-system invariant.  No
+satisfied.  Completeness and separatedness identify this compatible system
+with a polynomial over \(B\); its equality with the shifted small polynomial
+therefore survives every subsequent coefficient-field extension.  No
 Levelt--Turrittin decomposition over a larger analytic field, and no
 evaluation at a nonnilpotent analytic bulk point, is used.
 \end{proof}

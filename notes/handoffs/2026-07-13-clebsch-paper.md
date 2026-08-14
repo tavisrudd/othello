@@ -554,6 +554,12 @@ In the strongest base-data branch, Lean also constructs the compatible
 quotient small-monodromy family by reducing one supplied Laurent matrix over
 the base ring.  That base matrix's geometric monodromy origin also remains
 open; the other geometric gaps above are unchanged.
+The manuscript's coefficientwise base-change lemma now exposes the exact
+Levelt--Turrittin solution algebra and constant-field hypothesis used in its
+proof.  Its pro-Laurent characteristic polynomial is stated first as a
+compatible finite-level system and only then identified, by completeness and
+separatedness, with a polynomial over the coefficient ring.  This removes two
+hidden formal assumptions without changing the operation formulas.
 A normalized multiplicative ideal filtration is now an explicit formal object
 with `F^0=B` and `F^mF^n⊆F^(m+n)`; its quotient tower feeds the finite-level
 base-shift packet, while the manuscript's actual filtration remains unidentified.

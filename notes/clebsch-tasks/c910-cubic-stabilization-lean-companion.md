@@ -485,7 +485,10 @@ are current, and the committed paper export verifies byte-for-byte in
   of its Laurent bulk connection and verification of the potentiality,
   commutative-associative product, and positivity premises.  Lean now derives formal
   zero curvature from the first two identities rather than retaining it as an
-  opaque premise.
+  opaque premise.  The manuscript's coefficientwise base-change lemma now
+  states the exact Levelt--Turrittin solution-algebra and constant-field input,
+  and its pro-Laurent definition records a compatible polynomial system before
+  using completeness and separatedness to recover one polynomial over the base.
 - **Closeout `ej`+`tt` pass:** settled the cheap algebraic opportunity.  The
   finite-level formal-base-shift packet now derives not only compatible bulk
   matrices and the substituted polynomial identity, but also compatibility of
