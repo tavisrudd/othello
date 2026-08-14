@@ -297,7 +297,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 87 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 159 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 160 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -324,7 +324,11 @@ alternating and nondegenerate after choosing a symplectic basis of the
 two-dimensional factor; every isotropic four-dimensional subspace is then
 maximal isotropic.  The explicit two-heart equivalence preserves the form and
 identifies the five projective-line packet members exactly with the diagonally
-stable maximal-isotropic subspaces of this rank-eight discriminant.
+stable maximal-isotropic subspaces of this rank-eight discriminant.  Given a
+supplied fibrewise coordinate realization whose image is exactly the named
+geometric kernel, Lean constructs a kernel-to-subspace equivalence and proves
+that every fibre belongs to the five-member packet; the coordinate
+realization, stability, and maximal isotropy remain external inputs.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then
@@ -570,7 +574,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 159-terminal axiom transcript
+The aggregate build, source correspondence, and 160-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent

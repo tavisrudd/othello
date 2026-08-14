@@ -149,6 +149,27 @@ theorem relativeSixAxis_of_supplied_relative_geometry
     Applications.RelativeSixAxisConclusion objects :=
   Applications.relativeSixAxis_of_geometricInputs objects geometry
 
+/-- Exact conditional bridge from a supplied geometric kernel fibre to the
+explicit five-member packet.  The input supplies coordinates on each
+discriminant fibre, proves that the geometric kernel inclusion has exactly a
+displayed standard-coordinate subspace as its image, and proves that this
+subspace is diagonally stable and maximal isotropic.  Lean constructs a
+fibrewise equivalence from the geometric kernel carrier to that subspace and
+proves that every transported subspace belongs to the five-member packet.  It
+does not construct the coordinates or verify these hypotheses for the
+manuscript's relative isogeny. -/
+theorem relativeSixAxis_kernelCoordinates_classify_packet
+    {Base : Type*} {objects : Applications.RelativeSixAxisObjects Base}
+    {geometry : Applications.RelativeSixAxisGeometricInput objects}
+    (input : Applications.RelativeSixAxisKernelCoordinateInput objects geometry) :
+    (∀ parameter,
+      Nonempty (objects.KernelTwo parameter ≃ input.kernelSubspace parameter)) ∧
+    ∀ parameter,
+      (input.kernelSubspace parameter).map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        GraphLattices.SixPointHeartStableHalfPacket :=
+  Applications.relativeSixAxisKernelCoordinateInput_packet input
+
 /-- Exact conditional assembly of low-dimensional primitive-sixth vanishing.
 The classification into nef seeds, a point, projective bundles, and point
 blowups is supplied, as are the regular-singular root restriction, operation

@@ -99,6 +99,87 @@ structure RelativeSixAxisGeometricInput
   /-- The relative two-primary kernel is maximal isotropic. -/
   kernelMaximalIsotropic : Prop
 
+/-- Fibrewise standard-coordinate data identifying the supplied geometric
+two-primary kernel with a diagonally stable maximal-isotropic subspace of the
+explicit rank-eight discriminant. -/
+structure RelativeSixAxisKernelCoordinateInput
+    {Base : Type*} (objects : RelativeSixAxisObjects Base)
+    (geometry : RelativeSixAxisGeometricInput objects) where
+  /-- Coordinates on each supplied discriminant fibre. -/
+  discriminantCoordinates : ∀ parameter,
+    objects.DiscriminantTwo parameter ≃
+      GraphLattices.SixAxisStandardDiscriminantCoordinates
+  /-- The coordinate subspace occupied by the geometric kernel fibre. -/
+  kernelSubspace : Base → Submodule GraphLattices.F2
+    GraphLattices.SixAxisStandardDiscriminantCoordinates
+  /-- Every geometric kernel element maps into the displayed subspace. -/
+  kernelInclusion_mem : ∀ parameter kernelElement,
+    discriminantCoordinates parameter
+        (geometry.kernelInclusion parameter kernelElement) ∈
+      kernelSubspace parameter
+  /-- Every vector of the displayed subspace comes from a geometric kernel
+  element. -/
+  kernelInclusion_surjective : ∀ parameter
+      (vector : kernelSubspace parameter),
+    ∃ kernelElement,
+      discriminantCoordinates parameter
+          (geometry.kernelInclusion parameter kernelElement) = vector.1
+  /-- The transported kernel is stable under the two diagonal generators. -/
+  diagonalStable : ∀ parameter,
+    GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+      (kernelSubspace parameter)
+  /-- The transported kernel is maximal isotropic for the explicit
+  rank-eight form. -/
+  maximalIsotropic : ∀ parameter,
+    GraphLattices.IsMaximalIsotropic
+      GraphLattices.sixAxisStandardDiscriminantBilinForm
+      (kernelSubspace parameter)
+
+/-- The supplied coordinate identification gives a fibrewise equivalence from
+the geometric kernel carrier to its displayed standard-coordinate subspace. -/
+noncomputable def relativeSixAxisKernelCoordinateEquiv
+    {Base : Type*} {objects : RelativeSixAxisObjects Base}
+    {geometry : RelativeSixAxisGeometricInput objects}
+    (input : RelativeSixAxisKernelCoordinateInput objects geometry)
+    (parameter : Base) :
+    objects.KernelTwo parameter ≃ input.kernelSubspace parameter :=
+  Equiv.ofBijective
+    (fun kernelElement ↦
+      ⟨input.discriminantCoordinates parameter
+          (geometry.kernelInclusion parameter kernelElement),
+        input.kernelInclusion_mem parameter kernelElement⟩)
+    ⟨by
+        intro left right equality
+        apply geometry.kernelInclusionInjective parameter
+        apply (input.discriminantCoordinates parameter).injective
+        exact congrArg Subtype.val equality,
+      by
+        intro vector
+        obtain ⟨kernelElement, equality⟩ :=
+          input.kernelInclusion_surjective parameter vector
+        exact ⟨kernelElement, Subtype.ext equality⟩⟩
+
+/-- A fibrewise coordinate realization of the geometric kernel as a stable
+maximal-isotropic subspace forces every fibre into the explicit five-member
+projective-line packet. -/
+theorem relativeSixAxisKernelCoordinateInput_packet
+    {Base : Type*} {objects : RelativeSixAxisObjects Base}
+    {geometry : RelativeSixAxisGeometricInput objects}
+    (input : RelativeSixAxisKernelCoordinateInput objects geometry) :
+    (∀ parameter,
+      Nonempty (objects.KernelTwo parameter ≃ input.kernelSubspace parameter)) ∧
+    ∀ parameter,
+      (input.kernelSubspace parameter).map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        GraphLattices.SixPointHeartStableHalfPacket := by
+  constructor
+  · exact fun parameter ↦
+      ⟨relativeSixAxisKernelCoordinateEquiv input parameter⟩
+  · intro parameter
+    exact (GraphLattices.sixAxisStandardDiscriminant_stablePacket_iff
+      (input.kernelSubspace parameter)).mpr
+        ⟨input.diagonalStable parameter, input.maximalIsotropic parameter⟩
+
 /-- Organizational relative-six-axis packet.  Its geometric component is
 supplied wholesale; the integral Smith witness, two-primary coefficient
 discriminant, and explicit stable maximal-isotropic packet are proved by Lean. -/

@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 159 reviewer terminals.
+1 complete; 160 reviewer terminals.
 
-The 159 reviewer-facing terminals currently verify:
+The 160 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -431,7 +431,10 @@ The 159 reviewer-facing terminals currently verify:
   the induced rank-eight tensor-product form is also alternating and
   nondegenerate, every isotropic four-dimensional subspace is maximal, and
   the five projective-line packet members are exactly its diagonally stable
-  maximal-isotropic subspaces under the explicit two-heart equivalence;
+  maximal-isotropic subspaces under the explicit two-heart equivalence; from
+  a supplied fibrewise coordinate realization whose image is exactly the
+  geometric kernel, Lean constructs a kernel-to-subspace equivalence and
+  proves membership in that five-member packet;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.

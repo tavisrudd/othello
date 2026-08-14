@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 87 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 159 audited terminals.  The rejecting manuscript inventory covers all
+exports 160 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -163,7 +163,11 @@ two-dimensional factor, the induced rank-eight tensor-product form is also
 alternating and nondegenerate, and every isotropic four-dimensional subspace
 is maximal.  The explicit two-heart equivalence preserves this form and
 identifies the five projective-line packet members exactly with the diagonally
-stable maximal-isotropic subspaces of the rank-eight discriminant.  The row remains a
+stable maximal-isotropic subspaces of the rank-eight discriminant.  From a
+supplied fibrewise coordinate realization whose image is exactly the named
+geometric kernel, Lean constructs a kernel-to-subspace equivalence and proves
+that every fibre belongs to the five-member packet.  The coordinate
+realization, stability, and maximal isotropy remain supplied.  The row remains a
 fragment rather than a conditional proof of the scheme-theoretic lemma.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,
