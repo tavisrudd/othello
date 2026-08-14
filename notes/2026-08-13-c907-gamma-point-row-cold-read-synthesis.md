@@ -51,6 +51,13 @@ The PDF is 13 pages. The final ordinary-flop/adjacent-birational and
 quantum-VGIT focused reruns both returned GO. The source gate `make check`,
 the claim-surface audit, and the metadata checks pass on this surface.
 
+The committed authority was exported from source snapshot
+`9d5b8248ff22089019ed800d95147ca66d3ece0a` to the local standalone repository
+`~/src/math-papers/gamma-point-row`. The exporter audit and manifest
+verification pass; the standalone `make check` reproduces the same PDF hash.
+Its initial local commit is `54f4ec8`. No remote was configured and nothing
+was pushed.
+
 The final title is *The Point-Class Rank Functional under Birational Wall
 Crossing: Exact One-Wall Identities toward the X × P² Problem*. The abstract
 and introduction state the expected endpoint contrast, label it unproved in
