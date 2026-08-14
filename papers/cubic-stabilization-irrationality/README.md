@@ -1,6 +1,6 @@
 # Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937491-blue.svg)](https://doi.org/10.5281/zenodo.21937491)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 
 ## Read the paper
 
