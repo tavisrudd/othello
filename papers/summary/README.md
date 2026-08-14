@@ -437,11 +437,12 @@ membership and Appendix A, and changes no higher-discrepancy statement.
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937491-blue.svg)](https://doi.org/10.5281/zenodo.21937491)
 
 **Standout result.** A rank-one derived-intersection theorem identifies the
-fixed clutching data along every tail. Together with exact local point
-transport, global support collapse, and coefficientwise Gamma reduction, it
-isolates one locally finite hypothesis: analytic threshold isomorphisms of the
-cyclic point-row `z`-modules. Under it, every projective stabilization of every
-smooth cubic threefold is irrational.
+fixed clutching data along every tail. Together with an exact simple-wall
+point coordinate, ordinary-flop point-row transport, global support collapse,
+and coefficientwise Gamma reduction, it isolates one locally finite
+hypothesis: analytic threshold isomorphisms of the cyclic point-row
+`z`-modules. Under it, every projective stabilization of every smooth cubic
+threefold is irrational.
 
 > *Abstract* Assume that every smooth projective birational map admits a
 > Włodarczyk completion with marked threshold isomorphisms of the finite
