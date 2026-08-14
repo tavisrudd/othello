@@ -89,6 +89,8 @@ if "\\begin{theorem}[Rank-one tailwise derived identification]" not in global_te
     errors.append("rank-one tailwise derived identification is not a theorem")
 if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
     errors.append("marked threshold compatibility is not an explicit hypothesis")
+if "\\label{def:finite-dual-cyclic-rees}" not in global_text:
+    errors.append("finite cyclic Rees definition lacks a stable label")
 if (
     "stable equals semistable for the chamber polarizations" not in global_text
     or "not imposed at a critical wall" not in global_text

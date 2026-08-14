@@ -54,7 +54,7 @@ The marked class has the restrictions
 for every fixed component \(F\) occurring at an intermediate polarization.
 Here \(p_-\) and \(p_+\) lie in the common birational open set.
 
-\begin{lemma}[Point insertion equals the Gamma row]
+\begin{lemma}[Point insertion and the Gamma row]
 \label{lem:point-insertion-row}
 Let \(R\) be a finite Artin quotient of the Novikov--bulk coefficient ring.
 Write \(\mathcal H_Y(R)\) for the cohomological input module and
@@ -64,24 +64,27 @@ Woodward's graph-space normalization,
  D\tau_{Y,-}:\mathcal H_Y(R)\longrightarrow\mathcal S_Y(R).
 \]
 If \(\epsilon_{Y,p}\) is the normalized Poincar\'e covector defined by a
-point insertion, then
+point insertion and \(n=\dim Y\), then there is an invertible scalar
+\(c_n(z)\), depending only on \(n\) and the two normalization conventions,
+such that
 \begin{equation}\label{eq:point-insertion-row}
- \rrow_{Y,p}\,D\tau_{Y,-}=\epsilon_{Y,p}.
+ \rrow_{Y,p}\,D\tau_{Y,-}=c_n(z)\epsilon_{Y,p}.
 \end{equation}
 Consequently the endpoint functional with distinguished insertion
 \(\operatorname{Kir}(a_p)=[p]\) is
 \[
- \rrow_{Y,p}D\tau_{Y,-}D\kappa.
+ c_n(z)^{-1}\rrow_{Y,p}D\tau_{Y,-}D\kappa.
 \]
 \end{lemma}
 
 \begin{proof}
 The Gamma framing of \(\OO_p\) is the graph fundamental solution applied to
-the normalized top cohomology class: \(\Ghat_Y\) and \(z^{c_1(Y)}\) act
-trivially on that class, and the power of \(z\) is precisely the one included
-in the normalized graph-space point insertion.  Unitarity of the fundamental
-solution therefore identifies pairing against \(s_Y(\OO_p)\) with the
-Poincar\'e point covector.  This is
+the top cohomology class.  The Gamma and Chern-class factors act trivially on
+that class.  The remaining dimension sign, power of \(z\), and power of
+\(2\pi i\) are invertible and depend only on \(n\) and on the chosen Gamma and
+graph-space normalizations; their product is \(c_n(z)\).  Unitarity of the
+fundamental solution then identifies pairing against \(s_Y(\OO_p)\) with
+\(c_n(z)\) times the Poincar\'e point covector.  This is
 \eqref{eq:point-insertion-row}, and composition with \(D\kappa\)
 gives the last assertion.  The argument is coefficientwise over \(R\), so it
 commutes with input and bulk differentiation.
@@ -140,8 +143,12 @@ insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
 \([p_\pm]\) by \eqref{eq:marked-class-restrictions}; the quantum Kirwan
 derivatives remain inside
 \(A_\pm\).  Lemma~\ref{lem:point-insertion-row} identifies the resulting
-endpoint covector with \(\rrow_{Y_\pm,p_\pm}D\tau_{Y_\pm,-}\); differentiating
-the affine-gauged input gives the remaining factor \(D\kappa_\pm\).  Thus the
+endpoint covector with
+\(c_{\dim Y_\pm}(z)^{-1}\rrow_{Y_\pm,p_\pm}D\tau_{Y_\pm,-}\);
+differentiating the affine-gauged input gives the remaining factor
+\(D\kappa_\pm\).  The
+endpoints have the same dimension, so the common invertible scalar
+\(c_{\dim Y_\pm}(z)\) cancels.  Thus the
 coefficientwise Kalkman identity is \eqref{eq:support-collapse-row} as an
 equality of functionals on
 the common equivariant input module.  Applying arbitrary further input and
@@ -430,10 +437,9 @@ the comparison is the following (2)-commutative square:
 \]
 The lower arrow is the canonical truncation map.  The square commutes because
 both horizontal maps are adjoint to the same differential of evaluation on
-the two-chart universal section.  Thus the left arrow is an isomorphism on
-\(h^0\) and a surjection on \(h^{-1}\), and the two perfect obstruction
-theories are isomorphic as morphisms to the cotangent complex, not merely as
-perfect complexes.
+the two-chart universal section.  The left vertical arrow is therefore a
+quasi-isomorphism, and the two perfect obstruction theories are isomorphic as
+morphisms to the cotangent complex, not merely as perfect complexes.
 
 For an attached stable-map factor, the fixed graph stack is a derived fibre
 product over its inertia evaluation.  Its cotangent triangle is the direct
@@ -550,6 +556,21 @@ taken after passage to the dual category, so our convention is
 \(\operatorname{var}:\phi_tM\to\psi_tM\); dualizing first exchanges the
 usual canonical and variation maps.
 
+\begin{definition}[Finite dual cyclic Rees module]
+\label{def:finite-dual-cyclic-rees}
+If \(L\subset H\) is a submodule of an ambient Rees--Stokes module, its
+\emph{strict Rees--Stokes saturation} is
+\[
+ \operatorname{Sat}^{\mathrm{str}}_H(L)
+ :=H\cap L[z^{-1}]\subset H[z^{-1}],
+\]
+equipped with the induced Stokes filtration
+\(F_\alpha\operatorname{Sat}^{\mathrm{str}}_H(L)
+=\operatorname{Sat}^{\mathrm{str}}_H(L)\cap F_\alpha H\).
+Whenever this operation is used below, finite local freeness of the result and
+strictness of its inclusion are part of
+Hypothesis~\ref{hyp:marked-threshold}.
+
 Let \(T\) be normalized formal monodromy on an ambient object of rank \(d\),
 let \(G\) be its finite ramified deck group, and let \(r\) be the marked
 horizontal row.  A \emph{finite dual cyclic Rees \(z\)-differential module}
@@ -563,6 +584,7 @@ Cayley--Hamilton makes it stable under \(T\), and it inherits the connection;
 it is not generated by applying the connection to a horizontal section.  Its
 distinguished formal-monodromy Krylov subspace is \(C_T(r)\) from
 Lemma~\ref{lem:cyclic-row-support}.
+\end{definition}
 
 \begin{hypothesis}[Marked threshold compatibility]
 \label{hyp:marked-threshold}
@@ -570,49 +592,55 @@ At every finite Artin level and fixed ordinary degree, choose a common
 ramified admissible \(z\)-sector.  At a sign or stability threshold, let
 \(K_j^-\) and \(K_j^+\) be the finite dual cyclic Rees
 \(z\)-differential modules of the two adjacent tails.  There must be a
-connected local domain in the Fourier variable and one marked finite locally
-free Rees \(z\)-differential module \((\mathcal K_j,\mathfrak r_j)\) on that
-domain whose two oriented boundary restrictions are the adjacent cyclic
-modules with their marked rows.  Its connection is compatible with the relative Stokes
-filtration and deck action.  The threshold map is the continuation induced by
-this one object; it is not an arbitrary isomorphism of two abstract cyclic
-modules.  The boundary identifications use the common equivariant-input
-coordinate space furnished by Proposition~\ref{prop:support-collapse} and are
-the identity on its marked coefficient functions and their chosen input and
-bulk derivatives; a wall-dependent change of input frame is not allowed.
+simply connected local domain \(U_j\) in the Fourier variable, with oriented
+cuts fixed, and one marked finite locally free Rees module
+\((\mathcal K_j,\mathfrak r_j)\) on \(U_j\times S\).  It carries compatible
+integrable connections in the Fourier and \(z\) directions, a relative good
+Stokes filtration, and deck action; its two oriented boundary restrictions
+are the adjacent cyclic modules with their marked rows.  Choose an oriented
+path \(\gamma_j\subset U_j\) between those restrictions.  The threshold map
+is parallel transport along \(\gamma_j\); it is not an arbitrary isomorphism
+of two abstract cyclic modules.  The boundary identifications use the common
+equivariant-input module on which \eqref{eq:support-collapse-row} is stated and
+are the identity on its marked coefficient functions and their chosen input
+and bulk derivatives; a wall-dependent change of input frame is not allowed.
 
-At a zero-mode rank change, write \(M_j^\pm\) for those adjacent modules,
-choose a transverse
-parameter \(t\) and a specified meromorphic Rees family whose two punctured
-sectorial germs are \(M_j^-\) and \(M_j^+\), with the same fixed
-equivariant-input coordinate identifications.  Use its ramified
+At a zero-mode rank change, choose a transverse parameter \(t\) and a
+specified marked meromorphic Rees family \(\mathcal M_j\) whose two punctured
+sectorial boundary germs are the adjacent modules \(M_j^-\) and \(M_j^+\),
+with the same fixed equivariant-input coordinate identifications.  Use its ramified
 Stokes-filtered nearby- and vanishing-cycle functors in the standard triangle
 \[
- i^*M\longrightarrow\psi_tM\xrightarrow{\operatorname{can}}\phi_tM
+ i^*\mathcal M_j\longrightarrow\psi_t\mathcal M_j
+ \xrightarrow{\operatorname{can}}\phi_t\mathcal M_j
  \xrightarrow{+1},
  \qquad
- \operatorname{var}:\phi_tM\longrightarrow\psi_tM.
+ \operatorname{var}:\phi_t\mathcal M_j\longrightarrow\psi_t\mathcal M_j.
 \]
-For either adjacent module \(M\), let \(d_M\) be the rank of \(\psi_tM\) and
-let \(V_t(M)\subset\psi_tM\) be the strict Rees--Stokes saturation of the
+Let \(d_j\) be the rank of \(\psi_t\mathcal M_j\) and let
+\(V_t(\mathcal M_j)\subset\psi_t\mathcal M_j\) be the strict
+Rees--Stokes saturation of the
 finite submodule generated by
 \[
- \{g(T^k v):g\in G,\ 0\leq k<d_M,\
+ \{g(T^k v):g\in G,\ 0\leq k<d_j,\
    v\in\operatorname{im}(\operatorname{var})\}.
 \]
 Cayley--Hamilton makes it stable under formal monodromy and the deck action.
 Put
 \[
- \psi_t^{\mathrm{red}}M:=\psi_tM/V_t(M).
+ \psi_t^{\mathrm{red}}\mathcal M_j
+ :=\psi_t\mathcal M_j/V_t(\mathcal M_j).
 \]
 Thus reduced nearby cycles are defined by the nearby/vanishing-cycle triangle,
 not by a choice of a complementary summand.  We require the inclusion
-\(V_t(M)\subset\psi_tM\) to be strict and the quotient to remain finite
+\(V_t(\mathcal M_j)\subset\psi_t\mathcal M_j\) to be strict and the quotient to remain finite
 locally free over \(R_N\); functoriality of \(\operatorname{var}\) then makes
-the induced monodromy and deck actions well defined.  In this case let
-\(K_j^\pm\) be the strict Rees--Stokes saturations of the finite monodromy--deck
-orbits of the specialized marked rows in
-\(\psi_t^{\mathrm{red}}M_j^\pm\).  Let
+the induced monodromy and deck actions well defined.  The usual
+canonical/variation relation makes \(V_t(\mathcal M_j)\) the canonical
+monodromy--deck-stable part generated by vanishing variation.  In this case
+let \(K_j^\pm\) be the strict Rees--Stokes saturations of the finite
+monodromy--deck orbits of the two specialized marked rows in the single object
+\(\psi_t^{\mathrm{red}}\mathcal M_j\).  Let
 \(\widetilde K_j^\pm\subset M_j^\pm\) be
 the row-generated cyclic modules on the adjacent tails.  Specialization is
 required to induce strict isomorphisms
