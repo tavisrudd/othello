@@ -166,7 +166,9 @@ identifies the five projective-line packet members exactly with the diagonally
 stable maximal-isotropic subspaces of the rank-eight discriminant.  Lean now
 also gives the parallel three-primary coefficient calculation explicitly:
 `H₃ = Aug(F₃⁶)/⟨1⟩`, the normalized coefficient form is minus the dot
-product, and the four stable maximal-isotropic halves are the three scalar
+product descended through the constant line, the quotient chart intertwines
+the induced generators, both coefficient and tensor forms are invariant, and
+the four stable maximal-isotropic halves are the three scalar
 graphs and the vertical line in `P¹(F₃)` (made affine by changing the marked
 symplectic ruling when necessary).  Identifying this model with the geometric
 three-primary discriminant and kernel remains open.  From a
@@ -389,8 +391,8 @@ cost materially:
 
 Completed in the current tranche: the **three-primary coefficient packet**,
 including `H₃`, its normalized symmetric minus-dot-product form, the explicit
-tensor symplectic model, the exact four-half classification `P¹(F₃)`, and
-maximal isotropy.  Its geometric discriminant identification remains part of
+quotient action, tensor symplectic model, the exact four-half classification
+`P¹(F₃)`, and maximal isotropy.  Its geometric discriminant identification remains part of
 priority 2 below.
 
 1. **Explicit six-axis local-chart bridge.**  Connect the concrete `6I-J`
@@ -415,7 +417,7 @@ priority 2 below.
    Iritani comparison theorems, the low-dimensional classification inputs,
    and related geometric results.
 
-The submission-ready partial-companion gate does not require all seven items:
+The submission-ready partial-companion gate does not require all six remaining items:
 all 23 claims are already tracked honestly.  This list is the route from the
 current `13 fragment / 9 conditional / 1 complete` partition toward an
 end-to-end formalization; no item authorizes downgrading a manuscript theorem

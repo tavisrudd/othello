@@ -438,8 +438,10 @@ The 168 reviewer-facing terminals currently verify:
   maximal-isotropic subspaces under the explicit two-heart equivalence.  The
   parallel characteristic-three heart is also explicit: Lean identifies
   `H₃` with `Aug(F₃⁶)/⟨1⟩`, proves that its normalized symmetric form is
-  minus the six-coordinate dot product and is nondegenerate, and proves that
-  the induced rank-eight tensor form is alternating and nondegenerate; its
+  the descended minus-dot-product form, proves that the quotient chart
+  intertwines the induced translation and inversion actions, and proves that
+  both the symmetric form and the induced alternating nondegenerate
+  rank-eight tensor form are generator-invariant; its
   four diagonally stable halves are exactly the vertical copy and the three
   scalar graphs, and all four are maximal isotropic.  Separately, on the
   two-primary side, from a supplied

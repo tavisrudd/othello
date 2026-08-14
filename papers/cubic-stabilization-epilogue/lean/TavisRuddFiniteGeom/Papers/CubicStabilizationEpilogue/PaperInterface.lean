@@ -311,9 +311,13 @@ theorem relativeSixAxis_integralCoefficientQuotient_and_form :
 
 /-- Exact three-primary coefficient packet for the six-label action.
 Normalizing the last coordinate identifies `Aug(F₃⁶)/⟨1⟩` with `F₃⁴`.
+The quotient chart intertwines the induced translation and inversion actions
+with their displayed matrices and is an isometry for the descended
+minus-dot-product form.
 The normalized symmetric form is minus the six-coordinate dot product and is
-nondegenerate.  Its tensor product with a two-dimensional symplectic form is
-an alternating nondegenerate form on two heart copies.  The four-dimensional
+nondegenerate and is preserved by both generators.  Its tensor product with a
+two-dimensional symplectic form is an alternating nondegenerate form on two
+heart copies and is preserved by the diagonal generator actions.  The four-dimensional
 subspaces stable under the displayed translation and inversion generators are
 exactly the vertical copy and the three scalar graphs; these four subspaces
 are maximal isotropic.  This terminal does not identify the coefficient model
@@ -325,13 +329,54 @@ theorem relativeSixAxis_threePrimary_stableMaximalIsotropicPacket :
       GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
           (Submodule.Quotient.mk vector) =
         GraphLattices.sixPointThreeHeartCoordinates vector.1) ∧
+    (∀ heart : GraphLattices.SixPointThreeAugmentationQuotient,
+      GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+          (GraphLattices.sixPointThreeAugmentationQuotientTranslation heart) =
+        Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation
+          (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart heart)) ∧
+    (∀ heart : GraphLattices.SixPointThreeAugmentationQuotient,
+      GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+          (GraphLattices.sixPointThreeAugmentationQuotientInversion heart) =
+        Matrix.mulVec GraphLattices.sixPointThreeHeartInversion
+          (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart heart)) ∧
+    (∀ left right : GraphLattices.SixPointThreeAugmentationQuotient,
+      GraphLattices.sixPointThreeAugmentationQuotientBilinForm left right =
+        GraphLattices.sixPointThreeHeartCoefficientForm
+          (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart left)
+          (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart right)) ∧
     (∀ left right : GraphLattices.SixPointThreeHeart,
       GraphLattices.sixPointThreeHeartCoefficientForm left right =
         -dotProduct (GraphLattices.sixPointThreeHeartRepresentative left)
           (GraphLattices.sixPointThreeHeartRepresentative right)) ∧
+    (∀ left right : GraphLattices.SixPointThreeHeart,
+      GraphLattices.sixPointThreeHeartCoefficientForm
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation left)
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation right) =
+        GraphLattices.sixPointThreeHeartCoefficientForm left right) ∧
+    (∀ left right : GraphLattices.SixPointThreeHeart,
+      GraphLattices.sixPointThreeHeartCoefficientForm
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartInversion left)
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartInversion right) =
+        GraphLattices.sixPointThreeHeartCoefficientForm left right) ∧
     GraphLattices.sixPointThreeHeartCoefficientForm.Nondegenerate ∧
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm.IsAlt ∧
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm.Nondegenerate ∧
+    (∀ left right : GraphLattices.SixPointThreeHeart ×
+        GraphLattices.SixPointThreeHeart,
+      GraphLattices.sixPointThreeHeartPairPolarizationBilinForm
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation left.1,
+            Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation left.2)
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation right.1,
+            Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation right.2) =
+        GraphLattices.sixPointThreeHeartPairPolarizationBilinForm left right) ∧
+    (∀ left right : GraphLattices.SixPointThreeHeart ×
+        GraphLattices.SixPointThreeHeart,
+      GraphLattices.sixPointThreeHeartPairPolarizationBilinForm
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartInversion left.1,
+            Matrix.mulVec GraphLattices.sixPointThreeHeartInversion left.2)
+          (Matrix.mulVec GraphLattices.sixPointThreeHeartInversion right.1,
+            Matrix.mulVec GraphLattices.sixPointThreeHeartInversion right.2) =
+        GraphLattices.sixPointThreeHeartPairPolarizationBilinForm left right) ∧
     GraphLattices.SixPointThreeHeartStableHalfPacket.ncard = 4 ∧
     (∀ subspace : Submodule GraphLattices.F3
         (GraphLattices.SixPointThreeHeart × GraphLattices.SixPointThreeHeart),
@@ -344,10 +389,17 @@ theorem relativeSixAxis_threePrimary_stableMaximalIsotropicPacket :
         GraphLattices.IsMaximalIsotropic
           GraphLattices.sixPointThreeHeartPairPolarizationBilinForm subspace := by
   refine ⟨GraphLattices.sixPointThreeAugmentationQuotientEquivHeart_mk,
+    GraphLattices.sixPointThreeAugmentationQuotientEquivHeart_translation,
+    GraphLattices.sixPointThreeAugmentationQuotientEquivHeart_inversion,
+    GraphLattices.sixPointThreeAugmentationQuotientEquivHeart_isometry,
     GraphLattices.sixPointThreeHeartCoefficientForm_eq_negative_dotProduct,
+    GraphLattices.sixPointThreeHeartCoefficientForm_translation,
+    GraphLattices.sixPointThreeHeartCoefficientForm_inversion,
     GraphLattices.sixPointThreeHeartCoefficientForm_nondegenerate,
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_isAlt,
     GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_nondegenerate,
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_translation,
+    GraphLattices.sixPointThreeHeartPairPolarizationBilinForm_inversion,
     GraphLattices.sixPointThreeHeartStableHalfPacket_ncard,
     GraphLattices.sixPointThreeHeartStableHalfPacket_iff, ?_⟩
   rintro subspace ⟨slope, rfl⟩

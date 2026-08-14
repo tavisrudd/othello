@@ -99,8 +99,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   explicit two-heart equivalence.  The characteristic-three coefficient
   model is now likewise explicit:
   `H₃ = Aug(F₃⁶)/⟨1⟩`, its normalized symmetric form is minus the dot
-  product, the induced rank-eight tensor form is alternating and
-  nondegenerate, and its four diagonally stable halves are exactly the
+  product descended through the constant line, the quotient chart
+  intertwines the induced generators, both the symmetric form and induced
+  alternating nondegenerate rank-eight tensor form are generator-invariant,
+  and its four diagonally stable halves are exactly the
   vertical copy and three scalar graphs, all maximal isotropic.  Separately,
   on the two-primary side, a conditional bridge proves that
   supplied fibre coordinates identifying the actual kernel image with one of

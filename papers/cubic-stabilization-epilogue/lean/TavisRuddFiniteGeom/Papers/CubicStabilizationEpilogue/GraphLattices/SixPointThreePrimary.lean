@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Mathlib.LinearAlgebra.Quotient.Bilinear
 
 /-!
 # The three-primary six-point coefficient packet
@@ -218,6 +219,100 @@ theorem sixPointThreeAugmentationQuotientEquivHeart_mk
       sixPointThreeHeartCoordinates vector.1 :=
   rfl
 
+/-- Translation of the six labels preserves the augmentation hyperplane. -/
+def sixPointThreeAugmentationTranslation :
+    SixPointThreeAugmentation →ₗ[F3] SixPointThreeAugmentation where
+  toFun vector := by
+    refine ⟨vector.1 ∘ sixPointTranslationPreimage, ?_⟩
+    have augmentation : ∑ point, vector.1 point = 0 := vector.2
+    change ∑ point, vector.1 (sixPointTranslationPreimage point) = 0
+    simp [sixPointTranslationPreimage, Fin.sum_univ_succ] at augmentation ⊢
+    linear_combination augmentation
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- Inversion of the six labels preserves the augmentation hyperplane. -/
+def sixPointThreeAugmentationInversion :
+    SixPointThreeAugmentation →ₗ[F3] SixPointThreeAugmentation where
+  toFun vector := by
+    refine ⟨vector.1 ∘ sixPointInversionPreimage, ?_⟩
+    have augmentation : ∑ point, vector.1 point = 0 := vector.2
+    change ∑ point, vector.1 (sixPointInversionPreimage point) = 0
+    simp [sixPointInversionPreimage, Fin.sum_univ_succ] at augmentation ⊢
+    linear_combination augmentation
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- Translation preserves the constant augmentation line. -/
+theorem sixPointThreeAugmentationTranslation_constantLine :
+    ∀ vector ∈ sixPointThreeConstantLine,
+      sixPointThreeAugmentationTranslation vector ∈
+        sixPointThreeConstantLine := by
+  intro vector member
+  rw [sixPointThreeConstantLine, Submodule.mem_span_singleton] at member ⊢
+  obtain ⟨scalar, rfl⟩ := member
+  refine ⟨scalar, ?_⟩
+  apply Subtype.ext
+  funext point
+  simp [sixPointThreeAugmentationTranslation,
+    sixPointThreeConstantVector]
+
+/-- Inversion preserves the constant augmentation line. -/
+theorem sixPointThreeAugmentationInversion_constantLine :
+    ∀ vector ∈ sixPointThreeConstantLine,
+      sixPointThreeAugmentationInversion vector ∈
+        sixPointThreeConstantLine := by
+  intro vector member
+  rw [sixPointThreeConstantLine, Submodule.mem_span_singleton] at member ⊢
+  obtain ⟨scalar, rfl⟩ := member
+  refine ⟨scalar, ?_⟩
+  apply Subtype.ext
+  funext point
+  simp [sixPointThreeAugmentationInversion,
+    sixPointThreeConstantVector]
+
+/-- Translation followed by passage to the quotient. -/
+def sixPointThreeAugmentationTranslationToQuotient :
+    SixPointThreeAugmentation →ₗ[F3] SixPointThreeAugmentationQuotient where
+  toFun vector := Submodule.Quotient.mk
+    (sixPointThreeAugmentationTranslation vector)
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- The translation induced on `Aug(F₃⁶)/⟨1⟩`. -/
+def sixPointThreeAugmentationQuotientTranslation :
+    SixPointThreeAugmentationQuotient →ₗ[F3]
+      SixPointThreeAugmentationQuotient :=
+  sixPointThreeConstantLine.liftQ
+    sixPointThreeAugmentationTranslationToQuotient (by
+      intro vector member
+      rw [LinearMap.mem_ker]
+      change Submodule.Quotient.mk
+        (sixPointThreeAugmentationTranslation vector) = 0
+      rw [Submodule.Quotient.mk_eq_zero]
+      exact sixPointThreeAugmentationTranslation_constantLine vector member)
+
+/-- Inversion followed by passage to the quotient. -/
+def sixPointThreeAugmentationInversionToQuotient :
+    SixPointThreeAugmentation →ₗ[F3] SixPointThreeAugmentationQuotient where
+  toFun vector := Submodule.Quotient.mk
+    (sixPointThreeAugmentationInversion vector)
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- The inversion induced on `Aug(F₃⁶)/⟨1⟩`. -/
+def sixPointThreeAugmentationQuotientInversion :
+    SixPointThreeAugmentationQuotient →ₗ[F3]
+      SixPointThreeAugmentationQuotient :=
+  sixPointThreeConstantLine.liftQ
+    sixPointThreeAugmentationInversionToQuotient (by
+      intro vector member
+      rw [LinearMap.mem_ker]
+      change Submodule.Quotient.mk
+        (sixPointThreeAugmentationInversion vector) = 0
+      rw [Submodule.Quotient.mk_eq_zero]
+      exact sixPointThreeAugmentationInversion_constantLine vector member)
+
 /-- The induced translation matrix on the three-primary heart. -/
 def sixPointThreeHeartTranslation : Matrix (Fin 4) (Fin 4) F3 :=
   !![2, 2, 2, 2;
@@ -263,6 +358,84 @@ theorem sixPointThreeHeartCoordinates_inversion (heart : SixPointThreeHeart) :
     decide
   case «2» => ring
   case «3» => ring
+
+/-- Difference coordinates intertwine augmentation translation with the
+displayed translation matrix. -/
+theorem sixPointThreeAugmentationCoordinates_translation
+    (vector : SixPointThreeAugmentation) :
+    sixPointThreeAugmentationCoordinates
+        (sixPointThreeAugmentationTranslation vector) =
+      Matrix.mulVec sixPointThreeHeartTranslation
+        (sixPointThreeAugmentationCoordinates vector) := by
+  have augmentation : ∑ point, vector.1 point = 0 := vector.2
+  simp [Fin.sum_univ_succ] at augmentation
+  have fourthCoordinate :
+      vector.1 4 = -(vector.1 0 + vector.1 1 + vector.1 2 +
+        vector.1 3 + vector.1 5) := by
+    linear_combination augmentation
+  ext index
+  fin_cases index <;>
+    simp [sixPointThreeAugmentationCoordinates,
+      sixPointThreeAugmentationTranslation, sixPointThreeHeartCoordinates,
+      sixPointTranslationPreimage, sixPointThreeHeartTranslation,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals
+    simp only [fourthCoordinate, show (2 : F3) = -1 by decide,
+      show (4 : F3) = 1 by decide] at * <;> try ring
+  case «0» =>
+    have sixMul : vector.1 5 * 6 = 0 := by
+      rw [show (6 : F3) = 0 by decide, mul_zero]
+    linear_combination -sixMul
+
+/-- Difference coordinates intertwine augmentation inversion with the
+displayed inversion matrix. -/
+theorem sixPointThreeAugmentationCoordinates_inversion
+    (vector : SixPointThreeAugmentation) :
+    sixPointThreeAugmentationCoordinates
+        (sixPointThreeAugmentationInversion vector) =
+      Matrix.mulVec sixPointThreeHeartInversion
+        (sixPointThreeAugmentationCoordinates vector) := by
+  have augmentation : ∑ point, vector.1 point = 0 := vector.2
+  simp [Fin.sum_univ_succ] at augmentation
+  have fourthCoordinate :
+      vector.1 4 = -(vector.1 0 + vector.1 1 + vector.1 2 +
+        vector.1 3 + vector.1 5) := by
+    linear_combination augmentation
+  ext index
+  fin_cases index <;>
+    simp [sixPointThreeAugmentationCoordinates,
+      sixPointThreeAugmentationInversion, sixPointThreeHeartCoordinates,
+      sixPointInversionPreimage, sixPointThreeHeartInversion,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals
+    simp only [fourthCoordinate, show (2 : F3) = -1 by decide,
+      show (7 : F3) = 1 by decide] at * <;> try ring
+  case «1» =>
+    have threeMul : (vector.1 0 + vector.1 5) * 3 = 0 := by
+      rw [show (3 : F3) = 0 by decide, mul_zero]
+    linear_combination -threeMul
+
+/-- The quotient chart intertwines the induced translation with its displayed
+heart matrix. -/
+theorem sixPointThreeAugmentationQuotientEquivHeart_translation
+    (heart : SixPointThreeAugmentationQuotient) :
+    sixPointThreeAugmentationQuotientEquivHeart
+        (sixPointThreeAugmentationQuotientTranslation heart) =
+      Matrix.mulVec sixPointThreeHeartTranslation
+        (sixPointThreeAugmentationQuotientEquivHeart heart) := by
+  refine Submodule.Quotient.induction_on sixPointThreeConstantLine heart ?_
+  exact sixPointThreeAugmentationCoordinates_translation
+
+/-- The quotient chart intertwines the induced inversion with its displayed
+heart matrix. -/
+theorem sixPointThreeAugmentationQuotientEquivHeart_inversion
+    (heart : SixPointThreeAugmentationQuotient) :
+    sixPointThreeAugmentationQuotientEquivHeart
+        (sixPointThreeAugmentationQuotientInversion heart) =
+      Matrix.mulVec sixPointThreeHeartInversion
+        (sixPointThreeAugmentationQuotientEquivHeart heart) := by
+  refine Submodule.Quotient.induction_on sixPointThreeConstantLine heart ?_
+  exact sixPointThreeAugmentationCoordinates_inversion
 
 /-- The matrix whose columns are the first four translation iterates of a
 heart vector. -/
@@ -478,6 +651,64 @@ theorem sixPointThreeHeart_commonCommutant_classification
   · rintro ⟨scalar, rfl⟩
     exact sixPointThreeHeart_scalar_commutes scalar
 
+/-- Minus the dot product restricted to the augmentation hyperplane. -/
+def sixPointThreeAugmentationPairing
+    (left right : SixPointThreeAugmentation) : F3 :=
+  -dotProduct left.1 right.1
+
+/-- The restricted minus-dot-product pairing as a bilinear form. -/
+def sixPointThreeAugmentationBilinForm :
+    LinearMap.BilinForm F3 SixPointThreeAugmentation :=
+  LinearMap.mk₂ F3 sixPointThreeAugmentationPairing
+    (by intro left₁ left₂ right; simp [sixPointThreeAugmentationPairing]; ring)
+    (by intro scalar left right; simp [sixPointThreeAugmentationPairing])
+    (by intro left right₁ right₂; simp [sixPointThreeAugmentationPairing]; ring)
+    (by intro scalar left right; simp [sixPointThreeAugmentationPairing])
+
+/-- The constant line annihilates the augmentation hyperplane on the left. -/
+theorem sixPointThreeConstantLine_le_augmentationPairing_ker :
+    sixPointThreeConstantLine ≤ sixPointThreeAugmentationBilinForm.ker := by
+  rw [sixPointThreeConstantLine, Submodule.span_singleton_le_iff_mem,
+    LinearMap.mem_ker]
+  apply LinearMap.ext
+  intro right
+  have augmentation : ∑ point, right.1 point = 0 := right.2
+  simp [sixPointThreeAugmentationBilinForm,
+    sixPointThreeAugmentationPairing, sixPointThreeConstantVector,
+    dotProduct, augmentation]
+
+/-- The constant line annihilates the augmentation hyperplane on the right. -/
+theorem sixPointThreeConstantLine_le_augmentationPairing_flip_ker :
+    sixPointThreeConstantLine ≤
+      sixPointThreeAugmentationBilinForm.flip.ker := by
+  rw [sixPointThreeConstantLine, Submodule.span_singleton_le_iff_mem,
+    LinearMap.mem_ker]
+  apply LinearMap.ext
+  intro left
+  have augmentation : ∑ point, left.1 point = 0 := left.2
+  simp [sixPointThreeAugmentationBilinForm,
+    sixPointThreeAugmentationPairing, sixPointThreeConstantVector,
+    dotProduct, augmentation]
+
+/-- The normalized minus-dot-product pairing descended to
+`Aug(F₃⁶)/⟨1⟩`. -/
+def sixPointThreeAugmentationQuotientBilinForm :
+    LinearMap.BilinForm F3 SixPointThreeAugmentationQuotient :=
+  sixPointThreeAugmentationBilinForm.liftQ₂
+    sixPointThreeConstantLine sixPointThreeConstantLine
+    sixPointThreeConstantLine_le_augmentationPairing_ker
+    sixPointThreeConstantLine_le_augmentationPairing_flip_ker
+
+/-- The descended quotient form evaluates on representatives by minus the dot
+product. -/
+@[simp]
+theorem sixPointThreeAugmentationQuotientBilinForm_mk
+    (left right : SixPointThreeAugmentation) :
+    sixPointThreeAugmentationQuotientBilinForm
+        (Submodule.Quotient.mk left) (Submodule.Quotient.mk right) =
+      -dotProduct left.1 right.1 :=
+  rfl
+
 /-- Matrix of the normalized three-primary coefficient pairing in the
 four-coordinate chart. -/
 def sixPointThreeHeartCoefficientMatrix : Matrix (Fin 4) (Fin 4) F3 :=
@@ -500,6 +731,129 @@ theorem sixPointThreeHeartCoefficientForm_eq_negative_dotProduct
         (sixPointThreeHeartRepresentative right) := by
   revert left right
   decide
+
+/-- The quotient chart is an isometry from the descended minus-dot-product
+form to the displayed four-coordinate coefficient form. -/
+theorem sixPointThreeAugmentationQuotientEquivHeart_isometry
+    (left right : SixPointThreeAugmentationQuotient) :
+    sixPointThreeAugmentationQuotientBilinForm left right =
+      sixPointThreeHeartCoefficientForm
+        (sixPointThreeAugmentationQuotientEquivHeart left)
+        (sixPointThreeAugmentationQuotientEquivHeart right) := by
+  refine Submodule.Quotient.induction_on sixPointThreeConstantLine left ?_
+  intro leftRepresentative
+  refine Submodule.Quotient.induction_on sixPointThreeConstantLine right ?_
+  intro rightRepresentative
+  have leftClass :
+      (Submodule.Quotient.mk leftRepresentative :
+        SixPointThreeAugmentationQuotient) =
+        Submodule.Quotient.mk
+          (sixPointThreeAugmentationRepresentative
+            (sixPointThreeAugmentationCoordinates leftRepresentative)) := by
+    apply sixPointThreeAugmentationQuotientEquivHeart.injective
+    exact (sixPointThreeHeartCoordinates_representative
+      (sixPointThreeAugmentationCoordinates leftRepresentative)).symm
+  have rightClass :
+      (Submodule.Quotient.mk rightRepresentative :
+        SixPointThreeAugmentationQuotient) =
+        Submodule.Quotient.mk
+          (sixPointThreeAugmentationRepresentative
+            (sixPointThreeAugmentationCoordinates rightRepresentative)) := by
+    apply sixPointThreeAugmentationQuotientEquivHeart.injective
+    exact (sixPointThreeHeartCoordinates_representative
+      (sixPointThreeAugmentationCoordinates rightRepresentative)).symm
+  rw [leftClass, rightClass]
+  simp only [sixPointThreeAugmentationQuotientBilinForm_mk,
+    sixPointThreeAugmentationQuotientEquivHeart_mk]
+  change -dotProduct
+      (sixPointThreeHeartRepresentative
+        (sixPointThreeAugmentationCoordinates leftRepresentative))
+      (sixPointThreeHeartRepresentative
+        (sixPointThreeAugmentationCoordinates rightRepresentative)) =
+    sixPointThreeHeartCoefficientForm
+      (sixPointThreeHeartCoordinates
+        (sixPointThreeHeartRepresentative
+          (sixPointThreeAugmentationCoordinates leftRepresentative)))
+      (sixPointThreeHeartCoordinates
+        (sixPointThreeHeartRepresentative
+          (sixPointThreeAugmentationCoordinates rightRepresentative)))
+  rw [sixPointThreeHeartCoordinates_representative,
+    sixPointThreeHeartCoordinates_representative]
+  exact (sixPointThreeHeartCoefficientForm_eq_negative_dotProduct
+    (sixPointThreeAugmentationCoordinates leftRepresentative)
+    (sixPointThreeAugmentationCoordinates rightRepresentative)).symm
+
+/-- Matrix certificate that translation preserves the coefficient form. -/
+theorem sixPointThreeHeartTranslation_preserves_coefficientMatrix :
+    sixPointThreeHeartTranslationᵀ * sixPointThreeHeartCoefficientMatrix *
+        sixPointThreeHeartTranslation =
+      sixPointThreeHeartCoefficientMatrix := by
+  decide
+
+/-- Matrix certificate that inversion preserves the coefficient form. -/
+theorem sixPointThreeHeartInversion_preserves_coefficientMatrix :
+    sixPointThreeHeartInversionᵀ * sixPointThreeHeartCoefficientMatrix *
+        sixPointThreeHeartInversion =
+      sixPointThreeHeartCoefficientMatrix := by
+  decide
+
+/-- Translation preserves the normalized coefficient form. -/
+theorem sixPointThreeHeartCoefficientForm_translation
+    (left right : SixPointThreeHeart) :
+    sixPointThreeHeartCoefficientForm
+        (Matrix.mulVec sixPointThreeHeartTranslation left)
+        (Matrix.mulVec sixPointThreeHeartTranslation right) =
+      sixPointThreeHeartCoefficientForm left right := by
+  rw [sixPointThreeHeartCoefficientForm,
+    Matrix.toLinearMap₂'_apply', Matrix.toLinearMap₂'_apply']
+  calc
+    Matrix.mulVec sixPointThreeHeartTranslation left ⬝ᵥ
+          (sixPointThreeHeartCoefficientMatrix *ᵥ
+            Matrix.mulVec sixPointThreeHeartTranslation right) =
+        left ⬝ᵥ (sixPointThreeHeartTranslationᵀ *ᵥ
+          (sixPointThreeHeartCoefficientMatrix *ᵥ
+            Matrix.mulVec sixPointThreeHeartTranslation right)) := by
+          symm
+          simpa [dotProduct_comm] using Matrix.dotProduct_transpose_mulVec
+            (A := sixPointThreeHeartTranslation) (x := left)
+            (y := sixPointThreeHeartCoefficientMatrix *ᵥ
+              Matrix.mulVec sixPointThreeHeartTranslation right)
+    _ = left ⬝ᵥ
+        ((sixPointThreeHeartTranslationᵀ *
+          sixPointThreeHeartCoefficientMatrix *
+          sixPointThreeHeartTranslation) *ᵥ right) := by
+          rw [Matrix.mulVec_mulVec, Matrix.mulVec_mulVec]
+    _ = left ⬝ᵥ (sixPointThreeHeartCoefficientMatrix *ᵥ right) := by
+          rw [sixPointThreeHeartTranslation_preserves_coefficientMatrix]
+
+/-- Inversion preserves the normalized coefficient form. -/
+theorem sixPointThreeHeartCoefficientForm_inversion
+    (left right : SixPointThreeHeart) :
+    sixPointThreeHeartCoefficientForm
+        (Matrix.mulVec sixPointThreeHeartInversion left)
+        (Matrix.mulVec sixPointThreeHeartInversion right) =
+      sixPointThreeHeartCoefficientForm left right := by
+  rw [sixPointThreeHeartCoefficientForm,
+    Matrix.toLinearMap₂'_apply', Matrix.toLinearMap₂'_apply']
+  calc
+    Matrix.mulVec sixPointThreeHeartInversion left ⬝ᵥ
+          (sixPointThreeHeartCoefficientMatrix *ᵥ
+            Matrix.mulVec sixPointThreeHeartInversion right) =
+        left ⬝ᵥ (sixPointThreeHeartInversionᵀ *ᵥ
+          (sixPointThreeHeartCoefficientMatrix *ᵥ
+            Matrix.mulVec sixPointThreeHeartInversion right)) := by
+          symm
+          simpa [dotProduct_comm] using Matrix.dotProduct_transpose_mulVec
+            (A := sixPointThreeHeartInversion) (x := left)
+            (y := sixPointThreeHeartCoefficientMatrix *ᵥ
+              Matrix.mulVec sixPointThreeHeartInversion right)
+    _ = left ⬝ᵥ
+        ((sixPointThreeHeartInversionᵀ *
+          sixPointThreeHeartCoefficientMatrix *
+          sixPointThreeHeartInversion) *ᵥ right) := by
+          rw [Matrix.mulVec_mulVec, Matrix.mulVec_mulVec]
+    _ = left ⬝ᵥ (sixPointThreeHeartCoefficientMatrix *ᵥ right) := by
+          rw [sixPointThreeHeartInversion_preserves_coefficientMatrix]
 
 /-- The normalized three-primary coefficient pairing is symmetric. -/
 theorem sixPointThreeHeartCoefficientForm_comm
@@ -588,6 +942,34 @@ theorem sixPointThreeHeartPairPolarizationBilinForm_nondegenerate :
       intro test
       have evaluated := annihilates (test, 0)
       simpa [sixPointThreeHeartPairPolarizationForm] using evaluated
+
+/-- Diagonal translation preserves the alternating tensor-product form. -/
+theorem sixPointThreeHeartPairPolarizationBilinForm_translation
+    (left right : SixPointThreeHeart × SixPointThreeHeart) :
+    sixPointThreeHeartPairPolarizationBilinForm
+        (Matrix.mulVec sixPointThreeHeartTranslation left.1,
+          Matrix.mulVec sixPointThreeHeartTranslation left.2)
+        (Matrix.mulVec sixPointThreeHeartTranslation right.1,
+          Matrix.mulVec sixPointThreeHeartTranslation right.2) =
+      sixPointThreeHeartPairPolarizationBilinForm left right := by
+  simp only [sixPointThreeHeartPairPolarizationBilinForm_apply,
+    sixPointThreeHeartPairPolarizationForm]
+  rw [sixPointThreeHeartCoefficientForm_translation,
+    sixPointThreeHeartCoefficientForm_translation]
+
+/-- Diagonal inversion preserves the alternating tensor-product form. -/
+theorem sixPointThreeHeartPairPolarizationBilinForm_inversion
+    (left right : SixPointThreeHeart × SixPointThreeHeart) :
+    sixPointThreeHeartPairPolarizationBilinForm
+        (Matrix.mulVec sixPointThreeHeartInversion left.1,
+          Matrix.mulVec sixPointThreeHeartInversion left.2)
+        (Matrix.mulVec sixPointThreeHeartInversion right.1,
+          Matrix.mulVec sixPointThreeHeartInversion right.2) =
+      sixPointThreeHeartPairPolarizationBilinForm left right := by
+  simp only [sixPointThreeHeartPairPolarizationBilinForm_apply,
+    sixPointThreeHeartPairPolarizationForm]
+  rw [sixPointThreeHeartCoefficientForm_inversion,
+    sixPointThreeHeartCoefficientForm_inversion]
 
 /-- Diagonal stability of a subspace of two three-primary heart copies. -/
 def SixPointThreeHeartPairGeneratorStable
