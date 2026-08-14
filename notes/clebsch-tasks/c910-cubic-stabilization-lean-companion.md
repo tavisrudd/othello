@@ -552,6 +552,11 @@ are current, and the committed paper export verifies byte-for-byte in
   polynomial dependence on the self-adjoint slope makes their images
   orthogonal, and scalarity modulo the relevant depth gives the displayed
   block form.
+  The relative six-axis proof now derives the relation \(\sum_H i_H=0\)
+  directly inside \(\operatorname{Hom}^0(E,J)\simeq W_5\): coherent transport
+  makes the sum \(A_5\)-invariant, and \(W_5\) has no invariant line.  This
+  replaces the shorthand that the inclusions are simply the six displayed
+  coefficient vectors.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

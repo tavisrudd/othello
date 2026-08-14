@@ -370,6 +370,9 @@ The marked graph theorem now records why its split blocks exist: Henselian
 idempotent lifting in the complete DVR, followed by self-adjointness of the
 polynomial spectral projectors, gives the orthogonal decomposition and the
 claimed scalar-modulo-depth form.
+The relative six-axis relation \(\sum_H i_H=0\) is now derived intrinsically:
+Hartlieb's generic isogeny identifies \(\operatorname{Hom}^0(E,J)\) with
+\(W_5\), coherent transport makes the sum invariant, and \(W_5^{A_5}=0\).
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
