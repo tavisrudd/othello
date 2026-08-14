@@ -21,8 +21,8 @@ Its scalar GKZ shadow is the regular-singular rank-three hypergeometric system
 Thus the cone and incidence shadows in
 `2026-08-13-c907-remaining-mixed-stokes-shear-gate.md` are not vacuous: a
 connected unbounded neutral boundary tower exists in the smallest point-flip
-plus blowup model.  It remains pure-boundary and rank-zero, and its primary
-one- and two-leg evaluation shadows vanish by dimension.  The displayed
+plus blowup model.  It remains pure-boundary and rank-zero, and in fact every
+primary multi-leg evaluation shadow vanishes by dimension.  The displayed
 hypergeometric series is therefore a descendant/equivariant calibration
 shadow, not yet a primary carrier coupling.  To threaten Gold it would still
 need a relative/descendant boundary-to-ambient coupling that survives in the
@@ -217,7 +217,7 @@ This example passes two geometric necessary tests and two calibration tests:
 4. its Barnes connection formula has a nonzero logarithmic integer-exponent
    branch by (14)--(17).
 
-It fails the first **primary low-moment** test.  Every map in class `n delta`
+It fails the entire **primary moment** test.  Every map in class `n delta`
 has image in the fixed nodal boundary curve
 `C=tilde ell union e`.  Hence
 
@@ -233,9 +233,19 @@ and
  \qquad \dim(C\times C)=2.
 \]
 
-The primary one- and two-leg evaluation pushforwards therefore vanish.  The
-`_3F_2` series can survive only after descendant/equivariant calibration; by
-itself it is not the low-moment state read by the ambient rank functional.
+More generally,
+
+\[
+ \operatorname{vdim}_\mathbf C\overline M_{0,k}(X_+,n\delta)=2+k,
+ \qquad \dim C^k=k.
+\]
+
+The total evaluation pushforward therefore vanishes for every `k`, since its
+virtual dimension exceeds the dimension of its image by two.  The `_3F_2`
+series can survive only after descendant/equivariant calibration; by itself
+it is not any primary state read by the ambient rank functional.  This is the
+fixed-curve case of
+`2026-08-14-c907-neutral-slice-gamma-kernel.md`, Section 5.
 
 The infinity calculation makes the distinction sharp: the model already has
 a nonzero analytic coefficient in an ambient-primary-looking branch.  What

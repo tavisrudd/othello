@@ -85,6 +85,20 @@ Boolean depends.  Exact peak audit:
 `../2026-08-13-c907-peak-confluence-obstruction.md`.  Current card:
 `../clebsch-tasks/c907-quantum-monodromy-stabilization.md`; exact reduction:
 `../2026-08-13-c907-gold-relative-cap-attack.md`.
+The newest reduction isolates a theorem already available on the neutral
+slice.  After fixing anticanonical degree, every unbounded two-wall direction
+has restricted weights summing to zero.  A parameterized form of
+Aleshkin--Liu's Calabi--Yau hemisphere-contour theorem therefore identifies
+the complete neutral residue with the grade-restriction/Fourier--Mukai
+correction and makes its common-open rank zero whenever the two receiver
+expansions come from one kernel.  The sole remaining application gate is the
+**common-master rank-row theorem**: construct one equivariant Fourier object
+whose conservative images contain the point row and total primitive-sixth
+packet in both incident receivers.  Gu--Yu--Yu Conjecture 1.11 is exactly the
+missing full-cone statement for a general intermediate quotient; only its
+point-row/packet fragment is needed.  Exact theorem, proof, source boundary,
+and strengthened all-primary fixed-curve elimination:
+`../2026-08-14-c907-neutral-slice-gamma-kernel.md`.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove

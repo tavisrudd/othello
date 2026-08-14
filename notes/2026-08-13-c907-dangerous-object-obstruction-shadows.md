@@ -108,13 +108,15 @@ calibration
 \]
 
 It therefore passes the cone and incidence shadows.  But every map in the
-tower is supported on a fixed nodal boundary curve.  The one-leg moduli has
-virtual dimension three and evaluation image of dimension at most one; the
-two-leg moduli has virtual dimension four and image in a surface.  Its
-primary one- and two-leg pushforwards vanish.  The hypergeometric series is a
-descendant/equivariant calibration shadow, not a primary ambient coupling.
+tower is supported on a fixed nodal boundary curve.  More generally, its
+`k`-leg moduli has virtual dimension `2+k` and evaluation image in the
+`k`-dimensional product of that curve.  Every primary multi-leg pushforward
+therefore vanishes, with a uniform two-dimensional deficit.  The
+hypergeometric series is a descendant/equivariant calibration shadow, not a
+primary ambient coupling; see
+`2026-08-14-c907-neutral-slice-gamma-kernel.md`, Section 5.
 
-So the first exact suspect is ruled out at the primary low-moment shadow.  A
+So the first exact suspect is ruled out at the full primary-moment shadow.  A
 replacement must explain exactly how a relative or descendant gluing state
 enters the small ambient quantum connection despite that dimension deficit.
 

@@ -199,8 +199,9 @@ has `c1=1`, and their primitive neutral tower has charge
 `(3,1,1,-1,-1,-1,-2)`.  Its reduced GKZ system is exactly
 `_3F_2(1,1,1/2;1/3,2/3;4q/27)`, verified by a standard-library replay.  This
 is a connected, nonpolynomial neutral boundary tower, but still has rank zero.
-Moreover its primary one- and two-leg evaluation pushforwards vanish by
-dimension: all images lie in a fixed nodal boundary curve and its square.
+Moreover every primary multi-leg evaluation pushforward vanishes by
+dimension: for `k` legs the virtual dimension is `2+k`, while the image lies
+in the `k`-dimensional power of a fixed nodal boundary curve.
 The displayed hypergeometric system is therefore a descendant/equivariant
 calibration shadow.  It becomes dangerous only if a relative/descendant
 gluing state can enter the small ambient connection and couple to the
@@ -274,6 +275,22 @@ range; Gu--Yu--Yu supply the full formal simple-VGIT QDM split without the
 analytic lattice comparison.  Thus Gold's remaining lemma is a genuinely
 new two-wall **numerical** Fourier--window theorem, not a missed consequence
 of an existing general theorem.
+
+The neutral part of that theorem is now proved conditionally on a common
+kernel; see `../2026-08-14-c907-neutral-slice-gamma-kernel.md`.  If `delta`
+is the primitive unbounded direction left after fixing anticanonical degree,
+then the restricted wall weights satisfy
+`sum_i <D_i,delta>=c_1.delta=0`.  Aleshkin--Liu's Calabi--Yau hemisphere
+contour theorem, extended coefficientwise to polynomial/Artin amplitudes,
+therefore identifies the complete neutral residue with the
+grade-restriction/Fourier--Mukai correction, which is the identity on the
+common open and has rank-zero error.  The remaining gate is no longer the
+one-variable residue calculation: it is proving that the two incident
+receivers are asymptotic expansions of one common equivariant Fourier
+kernel.  Gu--Yu--Yu leave the needed cone-preservation statement for a
+general intermediate GIT quotient as Conjecture 1.11, proving it only for
+highest/lowest quotients.  Aleshkin--Fang--Wang prove Gamma/Fourier for one
+toric Fano chamber but do not compare chambers.
 
 The cheapest singular-shadow closure is now excluded exactly.  The safe
 `dP7` carrier peak has toric potential
@@ -889,8 +906,15 @@ two incident receivers at a discrepant peak are compared.  The geometric
 alternative is now settled: Morelli pi-nonsingularity makes every elementary
 circuit unit-coefficient, so the pi-desingularized AKMW chain consists of
 closed ordinary walls and covered discrepant simple-VGIT walls.  The
-remaining bounded task is to compare the two fixed-sector embeddings of the
-intermediate primitive-sixth packet at consecutive discrepant unit walls.
+remaining bounded task is the **common-master rank-row theorem** of
+`../2026-08-14-c907-neutral-slice-gamma-kernel.md`: construct one equivariant
+Fourier solution object whose conservative images give the point row and
+total primitive-sixth packet in both incident receivers.  Once that common
+kernel is available, the neutral Calabi--Yau contour lemma proves that every
+complete residue block has rank-zero target.  Equivalently, prove the
+point-row/packet fragment of Gu--Yu--Yu Conjecture 1.11 for the intermediate
+quotients in the selected toroidal cobordism; full cone preservation is not
+needed.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
