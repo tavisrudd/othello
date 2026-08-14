@@ -14,6 +14,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveSpecialLinearAction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisFixedLine
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisNorm
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
@@ -192,6 +193,36 @@ theorem relativeSixAxis_sixPointAxis_norm :
   exact ⟨GraphLattices.sixPointAxisNorm_square label,
     GraphLattices.sixPointAxisNorm_range_eq_span label,
     GraphLattices.sixPointAxisNormalizedNorm_idempotent label⟩
+
+/-- Exact self-normalizing statement for the six concrete dihedral axis
+stabilizers.  Each is the normalizer of a Sylow-five subgroup, and its own
+normalizer inside the alternating group is itself. -/
+theorem relativeSixAxis_sixPointAxis_stabilizer_selfNormalizing :
+    ∀ label : Fin 6,
+      Subgroup.normalizer
+          (GraphLattices.alternatingFiveSixPointStabilizer label :
+            Set (alternatingGroup (Fin 5))) =
+        GraphLattices.alternatingFiveSixPointStabilizer label :=
+  GraphLattices.alternatingFiveSixPointStabilizer_normalizer_eq_self
+
+/-- Exact abstract coherence step for the six axes.  If an object is fixed by
+one labelled axis stabilizer, then any two alternating-group elements carrying
+that label to the same target carry the object to the same image.  The theorem
+does not construct the manuscript's elliptic schemes or geometric transport
+maps. -/
+theorem relativeSixAxis_sixPointAxis_transport_independent
+    {Object : Type*} [MulAction (alternatingGroup (Fin 5)) Object]
+    (source target : Fin 6) (object : Object)
+    (fixed : ∀ transformation : alternatingGroup (Fin 5),
+      transformation ∈
+          GraphLattices.alternatingFiveSixPointStabilizer source →
+        transformation • object = object)
+    (left right : alternatingGroup (Fin 5))
+    (leftMaps : GraphLattices.alternatingFiveSixPointAction left source = target)
+    (rightMaps : GraphLattices.alternatingFiveSixPointAction right source = target) :
+    left • object = right • object :=
+  GraphLattices.sixPointAxis_transport_independent source target object fixed
+    left right leftMaps rightMaps
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each

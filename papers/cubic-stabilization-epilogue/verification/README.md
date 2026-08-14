@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 162 reviewer-facing Lean terminals.  These counts summarize the
+There are 164 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 162 reviewer terminals.
+1 complete; 164 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -103,10 +103,12 @@ objects, hypotheses, conclusions, and cautions recorded in
   that every concrete ten-element dihedral axis stabilizer has the explicit
   one-dimensional fixed line in the rational augmentation representation and
   that the sum `N` of its ten action operators has this line as its range and
-  satisfies `N² = 10N`.  This coordinate norm is not identified with a norm
-  endomorphism of an elliptic scheme; the torsion local system, symplectic
-  pairing, relative isogeny, and geometric maximal-isotropic kernel remain
-  unconstructed.
+  satisfies `N² = 10N`.  Each stabilizer is self-normalizing, and Lean proves
+  the abstract transporter-independence implication for every object fixed by
+  the source stabilizer.  The coordinate norm and abstract transport are not
+  identified with endomorphisms or elliptic axes of an abelian scheme; the
+  torsion local system, symplectic pairing, relative isogeny, and geometric
+  maximal-isotropic kernel remain unconstructed.
 - Formalize the remaining quantum inputs: the separation family, construct the
   filtered target/associated graded and prove the now-explicit compatibility
   identifying the initial form of a geometric specialized series with its

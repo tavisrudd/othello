@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 162 reviewer terminals.
+1 complete; 164 reviewer terminals.
 
-The 162 reviewer-facing terminals currently verify:
+The 164 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -440,7 +440,9 @@ The 162 reviewer-facing terminals currently verify:
   the vector with axis coordinate `5` and all other coordinates `-1`; the sum
   `N` of the ten stabilizer operators has exactly this line as its range,
   satisfies `N² = 10N`, and yields an idempotent projector after division by
-  ten;
+  ten; each stabilizer is self-normalizing, and any object fixed by a source
+  stabilizer has the same transported image under all group elements carrying
+  that source label to a fixed target label;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.
