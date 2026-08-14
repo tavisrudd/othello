@@ -170,6 +170,10 @@ affine marked input itself is exact: for weights
 The affine presentation has rank-two gauge torus, however, and quotienting
 to a rank-one master introduces curve classes.  Thus dropping projectivity
 alone does not remove the reduction-in-stages/common-frame gap.
+The blowup direction is nonneutral, so this remains a normalization and
+mechanism check rather than a verification of the analytic hypothesis used
+for neutral tails.  The next load-bearing test must be a neutral threshold
+beyond the path-local ordinary-flop theorem, or a zero-mode threshold.
 The sharper type-(1,2) flip test also gives an exact no-go:
 adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
 necessarily makes the previously unstable spectator-plus-`O` locus semistable,

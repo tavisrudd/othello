@@ -14,6 +14,10 @@ wall quotient, so the marked input is not the gap.  A literal instance for
 the manuscript's rank-one master still requires a quantum
 reduction-in-stages comparison of its clutching tails in the fixed common
 input-and-derivative frame; merely relaxing projectivity does not supply it.
+The discrepancy-one blowup direction is nonneutral, so this is a structural
+calibration rather than a test of the load-bearing neutral hypothesis.  The
+next decisive model must be neutral beyond the already proved path-local
+ordinary-flop case, or must exhibit a zero-mode threshold.
 Earlier one-arrow and
 multi-arrow audits are retained below as the failure history that fixes the
 scope of the new proof.  The Gamma point
