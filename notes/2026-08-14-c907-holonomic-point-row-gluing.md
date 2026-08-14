@@ -330,6 +330,62 @@ normalization triangle simultaneously for every character root and every
 bubble-tree edge.  It shows, however, that a genuine nonlinear bubble does
 not create the residue-exhaustion pathology which killed the earlier proof.
 
+## 7. Preferred bypass: shift the polarization-fixed stack
+
+The general-tree audit suggests that extending Picard twisting directly to
+the endpoint clutching graphs is unnecessary.  The safer object is the
+polarization-wall fixed stack in Gonzalez--Woodward's virtual Kalkman
+formula, while retaining Woodward's auxiliary graph rotation only to extract
+the oriented point row.
+
+On that fixed stack, Gonzalez--Woodward Lemma 4.5 gives exactly the
+coefficient-ring separation needed here.  Tensoring the principal bundle by
+the Picard generator:
+
+- identifies the degree-shifted fixed stacks;
+- preserves their relative obstruction theories, virtual classes, and
+  evaluation classes;
+- is trivial on every attached bubble, so the bubble tangent complexes are
+  literally unchanged;
+- changes only the moving normal index on the principal component.
+
+Equations (40)--(45) of that source compute the entire shift dependence from
+the principal normal characters.  In the neutral case their signed sum is
+zero.  Thus, after a finite Artin reduction, the nonlinear wall moduli really
+is a passive coefficient algebra for one rank-one balanced Gamma recurrence.
+There are no additional bubble pole families to match to graph refinements.
+
+The common-open class `a_p` restricts to zero on this polarization-fixed
+stack.  After the commuting-rotation extraction, every wall coefficient of
+the marked row is therefore zero before the normal Euler class is inverted.
+The A-valued rank-one continuation only supplies the common analytic domain;
+it is not asked to identify a nonzero nonlinear residue.  This is precisely
+the situation in which generic pole splitting and graphwise effectivity are
+irrelevant.
+
+The resulting preferred gate is:
+
+> **Localized Picard-row lemma.**  The auxiliary rotation localization used
+> to extract the oriented row commutes with the Picard identifications of
+> the polarization-fixed stack, and its two endpoint row germs are the two
+> boundary germs of the resulting A-valued balanced principal-normal
+> kernel.
+
+This is strictly weaker than the localized fundamental-solution extension
+left open in Gonzalez--Woodward Remark 1.18(b): it treats one marked row, and
+all wall residues in that row vanish by support.  It is also narrower than
+the endpoint-tail gate in Section 4.  A proof should combine the equivariant
+POT already used by support collapse with Lemma 4.5 before applying rotation
+localization; the two torus actions commute, so the fixed/moving
+decomposition can be taken in either order.  The only remaining hostile
+check is that the Liouville zero-character extraction and the unstable
+identity convention commute with this Picard identification.
+
+If this lemma holds, Lemmas 1--2 give unconditional point-row primary
+Boolean invariance without constructing the complete nonlinear graph
+continuation postulated in Hypothesis 8.2.  The endpoint clutching-tail proof
+then becomes an independent fallback rather than the critical path.
+
 ## Sources
 
 - Gonzalez--Woodward, arXiv:1208.1727v7, Lemma 4.5, equations (40)--(47),
@@ -348,9 +404,15 @@ not create the residue-exhaustion pathology which killed the earlier proof.
   defines a holonomic germ.
 - **Settled:** complete residue/graph exhaustiveness is unnecessary for the
   Boolean; the dual cyclic point row suffices.
-- **Open:** constancy of the localized fixed coefficient stack and POT along
-  every stable clutching tail.  Owner: the projective-bundle falsifier and,
-  if it passes, the bubble-tree induction.
+- **Settled in the first nonlinear model:** the balanced projective-bundle
+  master with one fixed bubble has constant coefficient stack and POT on
+  each tail; all unbounded dependence is one rational Gamma recurrence.
+- **Open, preferred gate:** commute auxiliary rotation/Liouville row
+  extraction with the published Picard identification on the
+  polarization-fixed stack.  The unstable identity convention is the
+  sharpest remaining check.
+- **Open, fallback:** prove constant fixed POT on every endpoint clutching
+  tail by induction over the normalization tree.
 - **Open:** whether the manuscript's word `meromorphic` should explicitly
   allow the finite ramified/logarithmic cover naturally produced by regular
   holonomic continuation.  This is a statement-level audit after the
