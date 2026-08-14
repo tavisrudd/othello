@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 83 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 84 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 153 audited terminals.  The rejecting manuscript inventory covers all
+exports 154 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -123,6 +123,16 @@ characteristic polynomial over `B` reduces exactly to the polynomial at every
 quotient level.  Every fixed
 horizontal characteristic-polynomial coefficient is now also packaged as the
 compatible quotient family represented by its corresponding base coefficient.
+Lean now additionally represents a formal differential module and a conditional
+solution presentation with a differential solution algebra, scalar-extended
+connection, framed horizontal identification, commuting continuation, and exact
+ground-field constants.  From these supplied premises it constructs framed
+monodromy, proves coefficientwise characteristic-polynomial base change and
+linear-gauge invariance, and, under explicit adic completeness and zero ideal
+intersection, identifies framed horizontal tensors bijectively with compatible
+quotient-horizontal families.  The manuscript's Levelt--Turrittin algebra,
+fundamental solution, continuation, geometric coefficient data, and analytic
+framed-monodromy interpretation remain unconstructed or unidentified.
 The quantum algebra also includes formal-base-shift and block-formula
 deductions, numerical coefficient pushforward, strict-Novikov data,
 divisor-tag separation, typed

@@ -241,8 +241,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-83 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 153 reviewer terminals, audit
+84 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 154 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -350,11 +350,18 @@ level polynomial is the reduction of the horizontal characteristic polynomial
 over `B`.  Every fixed horizontal characteristic-polynomial coefficient is
 packaged as the compatible
 quotient family represented by its corresponding base coefficient.
-Identification with the manuscript's coefficient algebra and ideal, proof of
-the required completeness and separatedness properties for its filtration, the
-formal differential module, Levelt--Turrittin solution
-algebra, fundamental solution, analytic monodromy construction, and
-inverse-limit differential module remain open.  Compatible coefficient
+Lean now also types a formal differential module and a conditional solution
+presentation containing the differential solution algebra, extended
+connection, framed horizontal identification, commuting continuation, and
+exact ground-field constants.  From those supplied data it constructs framed
+monodromy, proves coefficientwise characteristic-polynomial base change and
+gauge invariance, and under explicit adic completeness and zero-intersection
+premises proves that framed horizontal tensors are exactly the compatible
+quotient-horizontal families.  Identification with the manuscript's
+coefficient algebra and ideal, proof of the required completeness and
+separatedness properties for its filtration, and construction of its
+Levelt--Turrittin algebra, fundamental solution, continuation, analytic
+monodromy, and inverse-limit differential module remain open.  Compatible coefficient
 reductions, divisor substitutions, small matrices, and gauges derive the bulk
 matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial

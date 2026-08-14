@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 153 reviewer-facing Lean terminals.  These counts summarize the
+There are 154 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 153 reviewer terminals.
+1 complete; 154 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -127,12 +127,19 @@ objects, hypotheses, conclusions, and cautions recorded in
   over `B` reduces exactly to the polynomial at every quotient level.  Each
   fixed polynomial coefficient is
   packaged as the compatible quotient family represented by its corresponding
-  base-ring coefficient.  Identification of `B` and `I` with the
-  manuscript's coefficient data, proof that the manuscript filtration has the
-  stated completeness and separatedness properties, the formal
-  differential module, Levelt--Turrittin solution algebra, fundamental
-  solution, analytic monodromy construction, and inverse-limit differential
-  module remain open.  Lean proves the coefficientwise
+  base-ring coefficient.  Lean also represents a formal differential module
+  and a conditional solution presentation with a differential solution
+  algebra, extended connection, framed horizontal identification, commuting
+  continuation, and exact ground-field constants.  From these supplied data it
+  derives framed-monodromy coefficient base change and gauge invariance and,
+  under explicit adic completeness and zero-intersection premises, a bijection
+  between framed horizontal tensors and compatible quotient-horizontal
+  families.  Identification of `B` and `I` with the manuscript's coefficient
+  data, proof that the manuscript filtration has the stated completeness and
+  separatedness properties, and construction of the manuscript's
+  Levelt--Turrittin solution algebra, fundamental solution, continuation,
+  analytic monodromy, and inverse-limit differential module remain open.  Lean
+  proves the coefficientwise
   multivariate partial derivatives are commuting derivations, derives their
   necessary zero-curvature identity from an invertible supplied solution, and
   conversely constructs the unique

@@ -35,6 +35,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurentG
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.DifferentialConstantsBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HorizontalMonodromyBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalDifferentialModuleBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
@@ -2472,6 +2473,69 @@ theorem horizontalMonodromy_adicCharacteristicPolynomialTower
         ideal derivative monodromy commutes degree,
     Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily_value
       ideal derivative monodromy commutes degree⟩
+
+/-- Conditional formal-differential realization of the monodromy base-change
+packet.  A supplied differential module and solution presentation include a
+solution algebra, its extending derivation, the extended connection and
+pure-tensor rule, a framed horizontal space identified with the connection
+kernel, continuation commuting with the connection, and the assertion that
+the solution-algebra constants are exactly the ground field.  Lean restricts
+continuation to the framed horizontal space, proves coefficientwise
+characteristic-polynomial base change and gauge-conjugacy invariance, and, for
+a coefficientwise complete and zero-intersection adic filtration, identifies
+base horizontal tensors bijectively with all compatible quotient-horizontal
+families.  The same characteristic-polynomial and gauge identities hold at
+every quotient level.
+
+The differential module, solution algebra, fundamental horizontal
+identification, continuation, and all differential identities are premises;
+Lean does not construct the manuscript's Levelt--Turrittin algebra, formal
+fundamental solution, geometric coefficient ring, or analytic continuation.
+Completeness is only surjectivity onto explicit compatible quotient families,
+not a topological or categorical limit theorem. -/
+theorem formalDifferentialModule_solutionPresentation_baseChange
+    {k K M H R B C : Type*}
+    [Field k] [CommRing K] [Algebra k K]
+    [AddCommGroup M] [Module k M] [Module K M] [IsScalarTower k K M]
+    [AddCommGroup H] [Module k H] [Module.Free k H] [Module.Finite k H]
+    [CommRing R] [Algebra k R] [Algebra K R] [IsScalarTower k K R]
+    [CommRing B] [Algebra k B] [CommRing C] [Algebra k C]
+    (differentialModule : Quantum.FormalDifferentialModule k K M)
+    (presentation : Quantum.FormalDifferentialSolutionPresentation
+      differentialModule R (H := H))
+    (ideal : Ideal B) (complete : (Quantum.adicFiltration ideal).IsComplete)
+    (separated : iInf (Quantum.adicFiltration ideal).ideal = ⊥)
+    (gauge : (C ⊗[k] H) ≃ₗ[C] (C ⊗[k] H)) :
+    presentation.framedMonodromy =
+        presentation.horizontalEquiv.symm.conj
+          (Quantum.horizontalEndomorphism presentation.extendedConnection
+            presentation.continuation.toLinearMap
+              presentation.continuation_commutes) ∧
+    (presentation.framedMonodromy.baseChange C).charpoly =
+      presentation.framedMonodromy.charpoly.map (algebraMap k C) ∧
+    (gauge.conj (presentation.framedMonodromy.baseChange C)).charpoly =
+      presentation.framedMonodromy.charpoly.map (algebraMap k C) ∧
+    Function.Bijective
+      (presentation.adicHorizontalFamilyOfSolutionTensor ideal) ∧
+    (∀ level,
+      (presentation.framedMonodromy.baseChange
+        ((Quantum.adicFiltration ideal).QuotientRing level)).charpoly =
+          presentation.framedMonodromy.charpoly.map
+            (algebraMap k ((Quantum.adicFiltration ideal).QuotientRing level))) ∧
+    (∀ level
+        (levelGauge :
+          ((Quantum.adicFiltration ideal).QuotientRing level ⊗[k] H) ≃ₗ[
+            (Quantum.adicFiltration ideal).QuotientRing level]
+              ((Quantum.adicFiltration ideal).QuotientRing level ⊗[k] H)),
+      (levelGauge.conj (presentation.framedMonodromy.baseChange
+        ((Quantum.adicFiltration ideal).QuotientRing level))).charpoly =
+          presentation.framedMonodromy.charpoly.map
+            (algebraMap k ((Quantum.adicFiltration ideal).QuotientRing level))) := by
+  refine ⟨rfl, presentation.framedMonodromy_charpoly_baseChange,
+    presentation.framedMonodromy_charpoly_baseChange_and_gauge gauge,
+    presentation.adicHorizontalFamilyOfSolutionTensor_bijective
+      ideal complete separated, ?_⟩
+  exact presentation.adicFramedMonodromy_charpoly_and_gauge ideal
 
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.

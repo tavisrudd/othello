@@ -198,9 +198,9 @@ coefficient of the horizontal-monodromy characteristic polynomial along the
 coefficient algebra map. -/
 theorem horizontalEndomorphism_charpoly_baseChange
     {k V B : Type*} [Field k] [AddCommGroup V] [Module k V]
-    [FiniteDimensional k V]
     [CommRing B] [Algebra k B]
     (derivative monodromy : V →ₗ[k] V)
+    [FiniteDimensional k (LinearMap.ker derivative)]
     (commutes : derivative.comp monodromy = monodromy.comp derivative) :
     ((horizontalEndomorphism derivative monodromy commutes).baseChange B).charpoly =
       (horizontalEndomorphism derivative monodromy commutes).charpoly.map
@@ -433,6 +433,7 @@ theorem basisBaseChange_repr_tensorProduct_map
   | tmul coefficient value =>
       simp [Module.Basis.baseChange_repr_tmul]
 
+omit [FiniteDimensional k V] in
 /-- Compatible coefficient maps from one module into a coefficient-algebra
 tower send a tensor with an original horizontal vector to a compatible family
 of extended horizontal vectors. -/
@@ -491,6 +492,7 @@ theorem compatibleHorizontalKernelFamilyOfTensor_monodromy
         (coefficientMap level coefficient ⊗ₜ[k] horizontal)
       simpa [compatibleHorizontalKernelFamilyOfTensor] using equality
 
+omit [FiniteDimensional k V] in
 /-- A horizontal tensor over the base coefficient algebra determines a
 compatible family over every quotient of a decreasing ideal filtration. -/
 noncomputable def horizontalKernelFamilyOfBaseTensor
@@ -672,12 +674,14 @@ theorem compatibleHorizontalKernelFamilyCoordinate_ofBaseTensor
   exact (basisBaseChange_repr_tensorProduct_map basis
     (Ideal.Quotient.mkₐ k (filtration.ideal level)) tensor index).symm
 
+omit [FiniteDimensional k V] in
 /-- Zero intersection of the filtration ideals makes the canonical map from
 base horizontal tensors to compatible horizontal quotient families injective. -/
 theorem horizontalKernelFamilyOfBaseTensor_injective
     {B : Type*} [CommRing B] [Algebra k B]
     (filtration : DecreasingIdealFiltration B)
     (derivative monodromy : V →ₗ[k] V)
+    [FiniteDimensional k (LinearMap.ker derivative)]
     (commutes : derivative.comp monodromy = monodromy.comp derivative)
     (separated : iInf filtration.ideal = ⊥) :
     Function.Injective
@@ -698,12 +702,14 @@ theorem horizontalKernelFamilyOfBaseTensor_injective
   exact (filtration.ofRingElement_injective_iff_iInf_eq_bot.mpr separated)
     coordinateFamiliesEqual
 
+omit [FiniteDimensional k V] in
 /-- Coefficientwise completeness makes every compatible horizontal quotient
 family arise from a tensor over the base coefficient algebra. -/
 theorem horizontalKernelFamilyOfBaseTensor_surjective
     {B : Type*} [CommRing B] [Algebra k B]
     (filtration : DecreasingIdealFiltration B)
     (derivative monodromy : V →ₗ[k] V)
+    [FiniteDimensional k (LinearMap.ker derivative)]
     (commutes : derivative.comp monodromy = monodromy.comp derivative)
     (complete : filtration.IsComplete) :
     Function.Surjective
@@ -743,6 +749,7 @@ theorem horizontalKernelFamilyOfBaseTensor_surjective
       coefficientFamily.value level)
     coordinateEquality
 
+omit [FiniteDimensional k V] in
 /-- The canonical map from base horizontal tensors to compatible horizontal
 quotient families is bijective for a coefficientwise complete and separated
 filtration. -/
@@ -750,6 +757,7 @@ theorem horizontalKernelFamilyOfBaseTensor_bijective
     {B : Type*} [CommRing B] [Algebra k B]
     (filtration : DecreasingIdealFiltration B)
     (derivative monodromy : V →ₗ[k] V)
+    [FiniteDimensional k (LinearMap.ker derivative)]
     (commutes : derivative.comp monodromy = monodromy.comp derivative)
     (complete : filtration.IsComplete)
     (separated : iInf filtration.ideal = ⊥) :

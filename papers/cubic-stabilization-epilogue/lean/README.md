@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 153 reviewer terminals.
+1 complete; 154 reviewer terminals.
 
-The 153 reviewer-facing terminals currently verify:
+The 154 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -320,11 +320,19 @@ The 153 reviewer-facing terminals currently verify:
   reduces exactly to the polynomial at every quotient level.  Every fixed
   polynomial coefficient is an explicit
   compatible quotient family represented by its corresponding base-ring
-  coefficient.  Lean does not identify `B` or `I` with the manuscript's
-  coefficient data, prove completeness or separatedness, or construct the
-  formal differential module, Levelt--Turrittin solution algebra, fundamental
-  solution, inverse-limit differential module, or analytic framed-monodromy
-  operator;
+  coefficient.  Lean now also types a formal differential module and a
+  conditional solution presentation containing a differential solution
+  algebra, extended connection, framed horizontal identification, commuting
+  continuation, and exact ground-field constants.  From those supplied data it
+  constructs framed monodromy, proves coefficientwise characteristic-polynomial
+  base change and gauge invariance, and, under explicit adic completeness and
+  zero-intersection hypotheses, identifies framed horizontal tensors
+  bijectively with compatible quotient-horizontal families.  The same
+  polynomial identities hold at every quotient.  Lean does not identify `B` or
+  `I` with the manuscript's coefficient data, prove its completeness or
+  separatedness, or construct the manuscript's Levelt--Turrittin solution
+  algebra, fundamental solution, continuation, inverse-limit differential
+  module, or analytic framed-monodromy operator;
 - derivation of a compatible characteristic-polynomial inverse system from
   entrywise compatible finite-level square matrices; the differential modules
   and analytic monodromy operators producing those matrices are not constructed;
