@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 158 reviewer terminals.
+1 complete; 159 reviewer terminals.
 
-The 158 reviewer-facing terminals currently verify:
+The 159 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -108,6 +108,8 @@ The 158 reviewer-facing terminals currently verify:
   the resulting packet has exactly five distinct members; an explicit
   equivalence with the actual `P¹(F4)` sends the marked vertical-plus-affine
   chart to the vertical half and the graphs of `0`, `1`, `W`, and `W+1`;
+  the explicit alternating form on the two heart copies is nondegenerate and
+  all five packet members are maximal isotropic for it;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,

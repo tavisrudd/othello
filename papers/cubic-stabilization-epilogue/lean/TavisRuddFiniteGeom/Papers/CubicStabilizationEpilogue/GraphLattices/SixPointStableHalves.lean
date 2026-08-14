@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryDiscriminant
 import Mathlib.Data.Set.Card
 
 /-!
@@ -13,6 +14,9 @@ generators.  Lean proves that every such half is either the vertical copy of
 `{0, 1, W, W + 1}`.  The converse is also proved: the displayed vertical copy
 and four graphs all have dimension four and are diagonally stable.  Their graph
 slopes and first projections distinguish them, so the packet has five members.
+The coefficient-heart form induces an explicit nondegenerate alternating
+pairing on `H × H`; all five packet members are maximal isotropic for this
+pairing.
 
 The argument is structural.  Simplicity of `H` makes the first projection and
 the vertical kernel either zero or the whole heart.  A half with surjective
@@ -532,6 +536,167 @@ theorem sixPointHeartProjectiveChartEquivStableHalfPacket_marked_values :
     sixPointHeartStableHalfPacketFromChart,
     sixPointHeartStableHalfOfProjectiveChart,
     sixPointHeartCommutantMatrixOfF4_marked_values]
+
+/-- The alternating polarization form on two heart copies. -/
+def sixPointHeartPairPolarizationForm
+    (left right : SixPointHeart × SixPointHeart) : F2 :=
+  sixPointHeartCoefficientForm left.1 right.2 +
+    sixPointHeartCoefficientForm left.2 right.1
+
+/-- The two-copy polarization pairing bundled as an `F₂`-bilinear form. -/
+def sixPointHeartPairPolarizationBilinForm :
+    LinearMap.BilinForm F2 (SixPointHeart × SixPointHeart) :=
+  LinearMap.mk₂ F2 sixPointHeartPairPolarizationForm
+    (by
+      intro left₁ left₂ right
+      simp [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_add_left]
+      abel)
+    (by
+      intro scalar left right
+      simp [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_smul_left, mul_add])
+    (by
+      intro left right₁ right₂
+      simp [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_add_right]
+      abel)
+    (by
+      intro scalar left right
+      simp [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_smul_right, mul_add])
+
+/-- Evaluation of the bundled two-copy form is the explicit polarization
+pairing. -/
+@[simp]
+theorem sixPointHeartPairPolarizationBilinForm_apply
+    (left right : SixPointHeart × SixPointHeart) :
+    sixPointHeartPairPolarizationBilinForm left right =
+      sixPointHeartPairPolarizationForm left right :=
+  rfl
+
+/-- The bundled two-copy polarization form is alternating. -/
+theorem sixPointHeartPairPolarizationBilinForm_isAlt :
+    sixPointHeartPairPolarizationBilinForm.IsAlt := by
+  intro pair
+  rw [sixPointHeartPairPolarizationBilinForm_apply]
+  change sixPointHeartCoefficientForm pair.1 pair.2 +
+    sixPointHeartCoefficientForm pair.2 pair.1 = 0
+  rw [sixPointHeartCoefficientForm_comm pair.2 pair.1]
+  exact sixAxisF2Module_add_self_eq_zero _
+
+/-- The two-copy polarization form is nondegenerate. -/
+theorem sixPointHeartPairPolarizationBilinForm_nondegenerate :
+    sixPointHeartPairPolarizationBilinForm.Nondegenerate := by
+  constructor
+  · intro pair annihilates
+    apply Prod.ext
+    · apply sixPointHeartCoefficientForm_nondegenerate pair.1
+      intro test
+      simpa [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_zero_left,
+        sixPointHeartCoefficientForm_zero_right] using annihilates (0, test)
+    · apply sixPointHeartCoefficientForm_nondegenerate pair.2
+      intro test
+      simpa [sixPointHeartPairPolarizationForm,
+        sixPointHeartCoefficientForm_zero_left,
+        sixPointHeartCoefficientForm_zero_right] using annihilates (test, 0)
+  · intro pair annihilates
+    apply Prod.ext
+    · apply sixPointHeartCoefficientForm_nondegenerate pair.1
+      intro test
+      have evaluated : sixPointHeartCoefficientForm test pair.1 = 0 := by
+        simpa [sixPointHeartPairPolarizationForm,
+          sixPointHeartCoefficientForm_zero_left,
+          sixPointHeartCoefficientForm_zero_right] using annihilates (0, test)
+      rwa [sixPointHeartCoefficientForm_comm] at evaluated
+    · apply sixPointHeartCoefficientForm_nondegenerate pair.2
+      intro test
+      have evaluated : sixPointHeartCoefficientForm test pair.2 = 0 := by
+        simpa [sixPointHeartPairPolarizationForm,
+          sixPointHeartCoefficientForm_zero_left,
+          sixPointHeartCoefficientForm_zero_right] using annihilates (test, 0)
+      rwa [sixPointHeartCoefficientForm_comm] at evaluated
+
+/-- Every matrix in the quadratic commutant is self-adjoint for the explicit
+heart coefficient form.  The zero and identity cases are symbolic; kernel
+reduction checks all `16²` ordered heart-vector pairs for `W` and `W+1`. -/
+theorem sixPointHeartCommutant_selfAdjoint
+    (matrix : Matrix (Fin 4) (Fin 4) F2)
+    (member : matrix = 0 ∨ matrix = 1 ∨
+      matrix = sixPointHeartCommutantRoot ∨
+      matrix = sixPointHeartCommutantRoot + 1)
+    (left right : SixPointHeart) :
+    sixPointHeartCoefficientForm (Matrix.mulVec matrix left) right =
+      sixPointHeartCoefficientForm left (Matrix.mulVec matrix right) := by
+  rcases member with zero | one | root | rootOne <;> subst matrix
+  · simp [sixPointHeartCoefficientForm_zero_left,
+      sixPointHeartCoefficientForm_zero_right]
+  · simp [sixPointHeartCoefficientForm]
+  · revert left right
+    decide
+  · revert left right
+    decide
+
+/-- Every displayed stable half is isotropic for the two-copy polarization
+form. -/
+theorem sixPointHeartStableHalfPacket_isotropic
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (member : subspace ∈ SixPointHeartStableHalfPacket) :
+    subspace ≤ sixPointHeartPairPolarizationBilinForm.orthogonal subspace := by
+  simp only [SixPointHeartStableHalfPacket, Set.mem_union,
+    Set.mem_singleton_iff, Set.mem_insert_iff] at member
+  rcases member with vertical | zero | one | root | rootOne
+  · subst subspace
+    rintro _ ⟨left, rfl⟩ _ ⟨right, rfl⟩
+    simp [sixPointHeartPairPolarizationForm, verticalEmbedding,
+      sixPointHeartCoefficientForm_zero_left,
+      sixPointHeartCoefficientForm_zero_right]
+  all_goals
+    subst subspace
+    rintro _ ⟨left, rfl⟩ _ ⟨right, rfl⟩
+    simp only [sixPointHeartPairPolarizationBilinForm_apply,
+      sixPointHeartPairPolarizationForm, graphEmbedding,
+      LinearMap.prod_apply, LinearMap.id_coe, Function.prod_apply,
+      id_eq, Matrix.toLin'_apply]
+  · rw [sixPointHeartCommutant_selfAdjoint 0 (Or.inl rfl)]
+    exact sixAxisF2Module_add_self_eq_zero _
+  · rw [sixPointHeartCommutant_selfAdjoint 1 (Or.inr (Or.inl rfl))]
+    exact sixAxisF2Module_add_self_eq_zero _
+  · rw [sixPointHeartCommutant_selfAdjoint sixPointHeartCommutantRoot
+      (Or.inr (Or.inr (Or.inl rfl)))]
+    exact sixAxisF2Module_add_self_eq_zero _
+  · rw [sixPointHeartCommutant_selfAdjoint
+      (sixPointHeartCommutantRoot + 1) (Or.inr (Or.inr (Or.inr rfl)))]
+    exact sixAxisF2Module_add_self_eq_zero _
+
+/-- Every member of the stable-half packet is maximal isotropic for the
+explicit two-copy polarization form. -/
+theorem sixPointHeartStableHalfPacket_maximalIsotropic
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (member : subspace ∈ SixPointHeartStableHalfPacket) :
+    IsMaximalIsotropic sixPointHeartPairPolarizationBilinForm subspace := by
+  have finrankFour : Module.finrank F2 subspace = 4 := by
+    have classified := member
+    simp only [SixPointHeartStableHalfPacket, Set.mem_union,
+      Set.mem_singleton_iff, Set.mem_insert_iff] at classified
+    rcases classified with vertical | zero | one | root | rootOne
+    · subst subspace
+      exact sixPointHeartVertical_finrank
+    · subst subspace
+      exact sixPointHeartGraph_finrank 0
+    · subst subspace
+      exact sixPointHeartGraph_finrank 1
+    · subst subspace
+      exact sixPointHeartGraph_finrank sixPointHeartCommutantRoot
+    · subst subspace
+      exact sixPointHeartGraph_finrank (sixPointHeartCommutantRoot + 1)
+  apply isMaximalIsotropic_of_isotropic_of_twice_finrank_eq
+    sixPointHeartPairPolarizationBilinForm
+    sixPointHeartPairPolarizationBilinForm_nondegenerate subspace
+    (sixPointHeartStableHalfPacket_isotropic subspace member)
+  rw [finrankFour, Module.finrank_prod]
+  simp [SixPointHeart]
 
 /-- Every four-dimensional diagonally stable subspace of two coefficient-heart
 copies is one of the vertical half or the four quadratic-commutant graphs. -/

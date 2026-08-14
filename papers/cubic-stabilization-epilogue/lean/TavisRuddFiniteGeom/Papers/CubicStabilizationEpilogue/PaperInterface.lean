@@ -2009,6 +2009,23 @@ theorem principalGluing_sixPointCoefficientHeart_projectiveLine_packet :
   exact ⟨⟨GraphLattices.sixPointHeartProjectiveLineEquivStableHalfPacket⟩,
     GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket_marked_values⟩
 
+/-- The explicit alternating polarization form on two copies of the six-point
+coefficient heart is nondegenerate, and every member of the five-element
+stable-half packet is maximal isotropic for it.  This is the polarization
+statement for the concrete modular packet; it does not identify the form or
+its maximal-isotropic halves with a geometric Weil pairing or isogeny kernel. -/
+theorem principalGluing_sixPointCoefficientHeart_packet_maximalIsotropic :
+    GraphLattices.sixPointHeartPairPolarizationBilinForm.IsAlt ∧
+    GraphLattices.sixPointHeartPairPolarizationBilinForm.Nondegenerate ∧
+    ∀ subspace : Submodule GraphLattices.F2
+        (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart),
+      subspace ∈ GraphLattices.SixPointHeartStableHalfPacket →
+        GraphLattices.IsMaximalIsotropic
+          GraphLattices.sixPointHeartPairPolarizationBilinForm subspace :=
+  ⟨GraphLattices.sixPointHeartPairPolarizationBilinForm_isAlt,
+    GraphLattices.sixPointHeartPairPolarizationBilinForm_nondegenerate,
+    GraphLattices.sixPointHeartStableHalfPacket_maximalIsotropic⟩
+
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has
 the dimension of one coefficient copy while the ambient pair has twice that

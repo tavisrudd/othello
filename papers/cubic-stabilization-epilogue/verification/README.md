@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 158 reviewer-facing Lean terminals.  These counts summarize the
+There are 159 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 158 reviewer terminals.
+1 complete; 159 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -48,7 +48,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   or a graph of one of those four commutant endomorphisms; the resulting packet
   has exactly five distinct members.  An explicit equivalence with the actual
   `P¹(F4)` identifies its vertical-plus-affine chart with the vertical half and
-  the four graphs.  It identifies
+  the four graphs.  The explicit alternating polarization on the two heart
+  copies is nondegenerate, and every one of those five halves is maximal
+  isotropic.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

@@ -297,7 +297,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 87 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 158 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 159 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -537,7 +537,9 @@ the full generated action.  A subspace of two heart copies is four-dimensional
 and stable under the diagonal action exactly when it is the vertical half or
 the graph of one of those four commutant endomorphisms; these five subspaces are
 distinct.  An explicit equivalence with the actual `P¹(F4)` sends the marked
-vertical-plus-affine chart to the vertical half and the four graphs.  All six Sylow-five subgroups of this concrete `A5` are
+vertical-plus-affine chart to the vertical half and the four graphs.  The
+explicit alternating form on the two heart copies is nondegenerate, and all
+five packet members are maximal isotropic for it.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;
@@ -563,7 +565,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 153-terminal axiom transcript
+The aggregate build, source correspondence, and 159-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent
