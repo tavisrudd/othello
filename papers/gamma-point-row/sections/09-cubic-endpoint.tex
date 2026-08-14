@@ -100,10 +100,11 @@ nonvanishing is the direct Barnes calculation (9.5)--(9.8).
 \end{proposition}
 
 \begin{remark}[Exact regression]
-The paper's verification package constructs
-\(\operatorname{im}K^2\oplus\ker K^2\) from (9.2), normalizes the nilpotent
-link, solves the first off-block Sylvester equation, and reconstructs
-(9.3)--(9.4) by exact rational arithmetic.  It also checks the
+The paper's verification package uses and verifies an explicit basis of
+\(\operatorname{im}K^2\oplus\ker K^2\), normalizes the nilpotent link, solves
+the first off-block Sylvester equation, and reconstructs (9.3)--(9.4) at
+three nonzero rational specializations of the quantum parameter by exact
+rational arithmetic.  It also checks the
 hypergeometric recurrence behind (9.5) and the projective-space grading
 calculation below.  The proof remains the calculation displayed above.
 \end{remark}
@@ -113,7 +114,7 @@ calculation below.  The proof remains the calculation displayed above.
 For \(\mathbf P^m\), write \(n=m+1\).  At a nonzero quantum parameter,
 multiplication by \(c_1(\mathbf P^m)\) is a weighted cyclic shift multiplied
 by \(n\).  After adjoining the \(n\)-th root of the parameter and rescaling
-the basis, it is \(nq^{1/n}\) times the standard cyclic shift.  In its
+the basis, it is \(nq_{\mathbf P}^{1/n}\) times the standard cyclic shift.  In its
 Fourier eigenbasis the diagonal of the grading operator is
 \[
  \frac1n\sum_{k=0}^{m}(m/2-k)=0.                             \tag{9.10}

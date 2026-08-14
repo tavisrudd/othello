@@ -12,8 +12,10 @@ either endpoint Novikov completion is taken.
 Let \(W\) be a smooth projective variety with a \(\Gm\)-action and let
 \(Y_-\) and \(Y_+\) be smooth free GIT quotients for two extreme
 linearizations.  We assume the stable-equals-semistable and properness
-hypotheses under which Woodward's localized gauged theory is defined, and we
-work coefficientwise at sufficiently large area.  Write \(\kappa_\pm\) for
+hypotheses under which Woodward's localized gauged theory is defined.  In
+particular, degree by degree, the polarization master stack is a proper
+Deligne--Mumford stack with its stated perfect obstruction theory.  We work
+coefficientwise at sufficiently large area.  Write \(\kappa_\pm\) for
 the corresponding quantum Kirwan maps and \(\tau_{Y_\pm,-}\) for Woodward's
 localized graph potentials.  The
 derivatives
@@ -33,11 +35,16 @@ Here \(p_-\) and \(p_+\) lie in the common birational open set.
 
 \begin{proposition}[Support collapse]
 \label{prop:support-collapse}
-After Rees homogenization, the two endpoint point rows have one pullback:
+At every fixed equivariant degree, the point-marked virtual Kalkman formula
+has no intermediate-polarization contribution.  Hence its two endpoint
+coefficients agree in the extended Novikov coefficient-function space.
+After Rees homogenization and in any common realization of the two endpoint
+series, this reads
 \[
  \rrow_{Y_-,p_-}A_- =\rrow_{Y_+,p_+}A_+.                    \tag{8.3}
 \]
-The identity is coefficientwise in all remaining Novikov and bulk variables.
+The identity is coefficientwise in all remaining Novikov and bulk
+variables; the proposition does not construct the common realization.
 \end{proposition}
 
 \begin{proof}
@@ -45,9 +52,10 @@ Retain rotation of the parametrized graph curve, with equivariant parameter
 \(\hbar\).  At each ordinary input marking insert the normalized equivariant
 point class of \(0\in\mathbf P^1\).  Rotation localization then puts every
 input on the zero-side bubble tree.  Next choose equivariant divisor classes
-\(D_1,\ldots,D_s\) whose endpoint Kirwan restrictions span the two numerical
-divisor spaces, and insert Woodward's Liouville classes with parameters
-\(t_j\).  On a graph fixed locus their contribution is
+\(D_1,\ldots,D_s\) spanning the full equivariant numerical dual of the
+allowed total degrees; their endpoint Kirwan restrictions in particular span
+the endpoint numerical divisor spaces.  Insert Woodward's Liouville classes
+with parameters \(t_j\).  On a graph fixed locus their contribution is
 \[
  \exp\!\left(\sum_jt_jD_j\right)
  \prod_j x_j^{D_j\cdot \widetilde d_+},
@@ -57,10 +65,11 @@ where \(\widetilde d_+\) is the total infinity-side equivariant degree: the
 bubble degree together with the affine cocharacter degree of the gauged
 principal component \cite[Corollary~9.10(c)]{WoodwardQKIII}.  Extracting the
 trivial character in all \(x_j\) forces \(\widetilde d_+=0\).  The infinity
-factor is therefore the unstable identity, while the zero factor is exactly
-the localized graph potential in (8.1).  Using the full divisor lattice is
-important: a single wall-nef divisor can vanish on an extremal ray and would
-not detect \(\widetilde d_+\).
+factor is therefore the unstable identity: positivity on the effective
+infinity-side semigroup leaves no nonconstant degree-zero component.  The
+zero factor is exactly the localized graph potential in (8.1).  Using the
+full equivariant divisor lattice is important: endpoint divisor spaces alone
+need not separate an affine cocharacter degree.
 
 For each fixed degree and sufficiently large area, every nonendpoint
 polarization-fixed graph has its principal component in a fixed quotient.
@@ -143,7 +152,10 @@ virtual-normal splitting gives
 \]
 The last two factors smooth the node and move the attaching point.  They are
 independent of the affine gauge degree, so gluing neither removes one end of
-the degree lattice nor creates a degree-dependent pole.
+the degree lattice nor creates a degree-dependent pole.  Formula (8.7)
+applies when a nontrivial attached component is present; in the irreducible
+unstable type those factors are absent and only the moving index remains
+\cite[Example~9.15]{WoodwardQKIII}.
 
 Pass to a finite cover which clears stabilizer denominators and apply the
 splitting principle.  A virtual line in the moving index of the principal
@@ -189,10 +201,11 @@ has the exact normalization
  =\frac{(-1)^m}{h\,m!}.                                      \tag{8.12}
 \]
 The factorial is the moving-mode Euler factor, \(1/h\) is the
-stabilizer/Jacobian factor, and the sign is the complex virtual-normal
-orientation.  Products of (8.12), followed by finite nilpotent derivatives,
-reproduce the corresponding fixed coefficient with its
-virtual-localization multiplicity.
+one-character Jacobian factor, and the sign is the complex orientation.  We
+use (8.12) only as the normalization of a single simple pole.  Coincident or
+higher poles require derivatives and the full localization expression,
+including graph automorphism factors; no product-of-simple-residues formula
+is asserted here.
 
 If (8.5) fails, the virtual-dimension equation fixes \(k\) in each homogeneous
 coefficient, hence the coefficient is Laurent-finite.  This proves the last
@@ -212,6 +225,17 @@ their theorem supplies the linear model for Hypothesis
 \ref{hyp:complete-neutral}, but does not prove it in the generality used
 here.  Complete-neutral continuation is an explicit open input of the global
 argument.
+
+Gonz\'alez--Woodward's crepant wall-crossing theorem gives a weaker
+distributional statement: neutral Picard shifts produce sums of derivatives
+of delta distributions, and the authors explicitly do not deduce analytic
+continuation without an independent convergence input
+\cite[Theorem~1.17 and Remark~4.7]{GonzalezWoodward}.  This does not replace
+Hypothesis~\ref{hyp:complete-neutral}.  Proposition
+\ref{prop:punctual-corner} exhibits the underlying obstruction: information
+supported at a Fourier boundary can reappear with full support after inverse
+transform, so almost-everywhere equality does not identify the marked formal
+packet.
 \end{remark}
 
 \subsection{The finite packet}

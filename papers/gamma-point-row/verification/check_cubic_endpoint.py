@@ -118,7 +118,9 @@ def block(matrix: Matrix, row: int, column: int) -> Matrix:
     ]
 
 
-def reconstruct_cai_block(q: Fraction) -> dict[str, object]:
+def reconstruct_cai_block(
+    q: Fraction,
+) -> tuple[dict[str, object], Matrix, Matrix, Matrix]:
     zero = Fraction()
     K = [
         [zero, 12 * q, zero, 72 * q * q],
@@ -189,21 +191,32 @@ def reconstruct_cai_block(q: Fraction) -> dict[str, object]:
         [zero, Fraction(-7, 243) / q],
         [Fraction(-16, 81), zero],
     ]
-    return {
-        "q": str(q),
-        "normalized_zero_block_M1": [[str(value) for value in row] for row in M1W],
-        "normalized_zero_block_B2": [[str(value) for value in row] for row in B2W],
-    }
+    return (
+        {
+            "q": str(q),
+            "normalized_zero_block_M1": [
+                [str(value) for value in row] for row in M1W
+            ],
+            "normalized_zero_block_B2": [
+                [str(value) for value in row] for row in B2W
+            ],
+        },
+        KW,
+        M1W,
+        B2W,
+    )
 
 
 def build_certificate() -> dict[str, object]:
-    block_reconstructions = [
+    reconstructed = [
         reconstruct_cai_block(Fraction(q)) for q in (1, 2, 3)
     ]
-    d11 = Fraction(-19, 18)
-    d22 = Fraction(19, 18)
-    jordan_link = Fraction(1)
-    return_link = Fraction(-16, 81)
+    block_reconstructions = [item[0] for item in reconstructed]
+    _, KW, M1W, B2W = reconstructed[0]
+    d11 = M1W[0][0]
+    d22 = M1W[1][1]
+    jordan_link = KW[0][1]
+    return_link = B2W[1][0]
 
     # (rho-d11)(rho+1-d22)-jordan_link*return_link
     indicial = [
@@ -280,8 +293,9 @@ def build_certificate() -> dict[str, object]:
             "checks": projective_checks,
         },
         "trust_boundary": (
-            "Exact arithmetic regression only; the Barnes asymptotic theorem, "
-            "quantum Kunneth theorem, and birational localization proof are not "
+            "Exact three-specialization arithmetic regression only; the Barnes "
+            "asymptotic theorem, quantum Kunneth theorem, complete-neutral "
+            "continuation, and conditional birational transport are not "
             "machine-verified."
         ),
     }

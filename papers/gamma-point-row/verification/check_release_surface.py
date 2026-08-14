@@ -76,6 +76,26 @@ if "\\begin{hypothesis}[Complete-neutral continuation]" not in global_text:
     errors.append("complete-neutral continuation is not an explicit hypothesis")
 if "does not prove it in the generality used" not in global_text:
     errors.append("Aleshkin--Liu nonlinear source boundary is missing")
+if "the proposition does not construct the common realization" not in global_text:
+    errors.append("support-collapse coefficient-field boundary is missing")
+
+main_text = (ROOT / "gamma_point_row.tex").read_text(encoding="utf-8")
+intro_text = (ROOT / "sections/01-introduction.tex").read_text(encoding="utf-8")
+readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
+ledger_text = (ROOT / "claim-proof-novelty-ledger.md").read_text(encoding="utf-8")
+if not re.search(
+    r"Conditional birational\s+invariance therefore yields irrationality",
+    main_text,
+):
+    errors.append("abstract does not make the cubic conclusion conditional")
+if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
+    errors.append("headline cubic theorem is not visibly conditional")
+if "Hypothesis~\\ref{hyp:complete-neutral}" not in intro_text:
+    errors.append("headline theorem does not name the continuation hypothesis")
+if "Under that hypothesis" not in readme_text:
+    errors.append("README cubic conclusion is not visibly conditional")
+if "| conditional application |" not in ledger_text:
+    errors.append("claim ledger does not mark the cubic application conditional")
 
 endpoint_text = (ROOT / "sections/09-cubic-endpoint.tex").read_text(encoding="utf-8")
 if "conditional transport" not in endpoint_text or "does not use Cai" not in endpoint_text:
@@ -89,6 +109,8 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
+if "Under this hypothesis" not in metadata.get("description", ""):
+    errors.append("Zenodo description does not make global invariance conditional")
 
 if errors:
     for error in errors:
