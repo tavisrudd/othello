@@ -95,3 +95,34 @@ hidden in notation.
 
 No additional unexplained feature affects the stated theorems or the release
 surface.
+
+## Superseding 2026-08-14 conditional-theorem review
+
+The paper now proves a conditional all-projective-stabilizations theorem under
+two explicit locally finite hypotheses rather than the earlier local package
+alone.  The final reviewed surface is authority commit `505f2acdc`, PDF
+SHA-256
+`99a3b92348ce930f1485e47c6df37387b6855dfce2a6db95687880eda488937a`,
+22 pages.  The warning-free deterministic `make check` gate passes.
+
+Three hostile packets first found two MAJOR omissions: Woodward's degreewise
+clutching description did not identify fixed stacks, obstruction theories,
+and virtual classes across affine degrees; and the threshold comparison was
+not typed as an isomorphism intertwining the formal `z`-module structures.
+The final manuscript states both inputs as hypotheses.  The GW/POT,
+D-module/Stokes, and adjacent cold-reader reruns then returned GO.  Their final
+grades were respectively 9.7/10 overall, A overall, and 9.7/10 release
+readiness.  No unsupported implication remains inside the conditional proof.
+
+The style pass exposes the proof in two stages: derived-geometric
+identification freezes the fixed clutching data along each tail; marked
+threshold maps join the resulting cyclic Rees `z`-modules.  It also makes the
+finite threshold composition and separated Artin inverse-limit step explicit.
+The portfolio summary places this broader conditional theorem before the
+unconditional `m=1` theorem while naming the latter as the strongest
+unconditional result.
+
+The remaining mathematical problems are exactly the two stated hypotheses.
+Tailwise holonomicity, formal monodromy, pairing, integrality, or localized
+Fourier support alone do not imply them; the paper's three explicit
+countermodels establish those negative boundaries.

@@ -58,6 +58,31 @@ The original major finding was removed from the claim surface: one global
 signed punctual coefficient is now only a candidate shadow. The sufficient
 theorem assumes factorwise rank-zero targets directly.
 
+### Superseding conditional all-stabilizations surface (2026-08-14)
+
+The manuscript was subsequently strengthened to a conditional global theorem
+under two explicit hypotheses.  The current frozen surface is:
+
+- public title: *Conditional Irrationality of All Projective Stabilizations
+  of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*;
+- authority commit: `505f2acdc`;
+- PDF SHA-256:
+  `99a3b92348ce930f1485e47c6df37387b6855dfce2a6db95687880eda488937a`;
+- length: 22 pages;
+- source gate: `make check`;
+- status: GO from the GW/POT, D-module/Stokes, and adjacent cold-reader
+  rereads.
+
+The first hypothesis supplies tailwise derived identifications of the fixed
+clutching geometry, obstruction theories, and virtual classes.  The second
+supplies marked isomorphisms of the finite cyclic Rees `z`-differential
+modules across the locally finite thresholds, with the stated monodromy,
+Stokes, deck, nearby-cycle, Artin, and Rees compatibilities.  The abstract,
+introduction, theorem statements, scope section, ledger, README, local Zenodo
+metadata, and portfolio summary all state both assumptions.  This surface
+supersedes the 13-page circulation surface above; the earlier review record is
+retained to document the local theorem package from which it grew.
+
 ## 2. Editorial route
 
 The most natural first route is **SIGMA**, an arXiv-overlay journal whose
