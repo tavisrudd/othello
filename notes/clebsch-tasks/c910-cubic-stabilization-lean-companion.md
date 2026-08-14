@@ -522,6 +522,13 @@ are current, and the committed paper export verifies byte-for-byte in
   separatedness argument rather than an uncited rigidity slogan.  The
   separation-family proof now pins non-isotriviality to Hartlieb's
   one-dimensional intermediate-Jacobian image (Proposition 5.7).
+- **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
+  exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
+  only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The
+  manuscript produces that class as an ordinary product of integral divisor
+  classes, so the cited implication has no missing cycle-theoretic premise.
+  The source passage was checked in arXiv:1407.7261, cache SHA-256
+  `514e5634d920f4b8e9c6797f3de5ad34afea65624ba23cc764d329ebcdd2c4e4`.
 - **Reusable extraction:** deferred.  The matrix-of-ideals theorem may later
   deserve a separate general library, but the first authority remains the
   paper-bundled package.

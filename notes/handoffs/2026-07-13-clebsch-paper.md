@@ -352,6 +352,11 @@ and separatedness argument.  This closes a referee-facing relative-geometry
 seam without upgrading the Lean row beyond fragmentary coverage.  The
 separation-family proof also now cites Hartlieb's one-dimensional period image
 for its non-isotriviality conclusion.
+Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
+threefold it is exactly the equivalence between universal \(CH_0\)-triviality
+and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
+class in the ordinary integral divisor-product image, no further
+cycle-theoretic hypothesis is hidden in the corollary's application.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then
