@@ -52,32 +52,59 @@ the transition kernel relative to the diagonal has support
 \[
  \Supp(K_{\mathrm{rel}})\subset Y\times D,                    \tag{7.4}
 \]
-with \(D\) in the output factor, then every correction target is supported on
-\(D\) and Theorem~\ref{thm:rank-zero-target} applies.  Support in
-\(D\times Y\) would constrain the source and would not imply (7.3).
+with \(D\) in the output factor, and if its induced action satisfies
+\(\operatorname{im}(T-\id)\subset\mathcal S_D(Y)\), then (7.1) gives
+\(\rrow_{Y,p}T=\rrow_{Y,p}\) directly.  This conclusion does not require, and
+does not imply, that every factor in an independently chosen factorization
+of \(T\) has supported target.  Support in \(D\times Y\) instead constrains
+the source and would not imply (7.3).
 
-In the Fourier-boundary language, let \(B_{\mathrm{corner}}\) be the complete
-oriented correction left by the two localizations after subtracting the
-common point contribution.  Its signed punctual multiplicity is the
-alternating \(\delta_{00}\) coefficient
+There is a tempting singular shadow of the factorwise condition.  Let
+\(B_{\mathrm{corner}}\) be a complete oriented correction left by the two
+localizations after subtracting the common point contribution, and let its
+signed punctual multiplicity be the alternating \(\delta_{00}\) coefficient
 \[
  \mu_{00}(B_{\mathrm{corner}}).
 \]
-Fourier transform exchanges this coefficient with the zero-section
-multiplicity, hence with generic output rank.  The singular form of the
-rank-zero-target condition is therefore
+Fourier transform exchanges a punctual coefficient with a zero-section
+multiplicity, hence with generic output rank in the elementary model of
+Proposition~\ref{prop:punctual-corner}.  One might therefore hope for
 \[
  \mu_{00}(B_{\mathrm{corner}})=0                              \tag{7.5}
 \]
-after applying the point-row marking.  Proposition
-\ref{prop:punctual-corner} explains why merely knowing that
-\(B_{\mathrm{corner}}\) is punctual proves nothing.
+as a numerical test.  This implication is \emph{not} proved here.  A single
+alternating multiplicity can vanish by cancellation even when individual
+ray targets have nonzero point row, and no exact point-row marking on
+\(B_{\mathrm{corner}}\) has yet been constructed.  Proposition
+\ref{prop:punctual-corner} also explains why merely knowing that the boundary
+object is punctual proves nothing.
+
+The failure of a global-to-factorwise inference already occurs in dimension
+two.  Let \(r=e_1^*\) on \(V=\C^2\), and put
+\(A=e_1\otimes e_2^*\).  Then \(A^2=0\) and
+\[
+ \id=(\id+A)(\id-A),                                      \tag{7.6}
+\]
+although both elementary factors have target \(e_1\) and
+\(r(e_1)=1\).  Thus even a vanishing total correction does not force the
+targets in a chosen ray factorization to lie in \(\ker r\).
+
+The missing comparison can be stated blockwise: for each complete ray block
+one would need an unlocalized boundary object \(B_a\) and an identity
+\[
+ \rrow_{Y,p}(v_a)=\mu_{00}(B_a).                              \tag{7.7}
+ \label{eq:blockwise-boundary-marking}
+\]
+with enough concentration or effectivity to prevent cancellation inside the
+block.  Equation (7.7) and \(\mu_{00}(B_a)=0\) for every \(a\) would imply
+Hypothesis~\ref{hyp:rank-zero-target}; the single global equation (7.5) does
+not.
 
 \begin{remark}[What remains to be proved]
-Neither (7.2), (7.4), nor (7.5) is deduced here for a general pair of
-discrepant walls.  Existing one-wall theorems determine formal decompositions
-and, in special toric settings, Gamma/window comparisons.  The missing
-statement is directed and two-wall: it must retain which side of every
-vanishing cycle is the output and must compare that orientation with the
-Gamma point row.
+Neither (7.2), the action condition following (7.4), nor the blockwise
+comparison (7.7) is deduced here for a general pair of discrepant walls.
+Existing one-wall theorems determine formal decompositions and, in special
+toric settings, Gamma/window comparisons.  The missing statement is directed
+and two-wall: it must retain which side of every vanishing cycle is the
+output and must compare that orientation with the Gamma point row.
 \end{remark}

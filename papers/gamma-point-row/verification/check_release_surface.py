@@ -43,6 +43,7 @@ required_labels = {
     "prop:punctual-corner",
     "hyp:rank-zero-target",
     "thm:rank-zero-target",
+    "eq:blockwise-boundary-marking",
 }
 found = set(re.findall(r"\\label\{([^}]+)\}", all_tex))
 for label in sorted(required_labels - found):
@@ -51,6 +52,8 @@ for label in sorted(required_labels - found):
 conditional_text = (ROOT / "sections/07-two-wall-criterion.tex").read_text(encoding="utf-8")
 if "Under Hypothesis~\\ref{hyp:rank-zero-target}" not in conditional_text:
     errors.append("two-wall theorem is not visibly conditional")
+if "This implication is \\emph{not} proved here" not in conditional_text:
+    errors.append("global signed-punctual shadow is not visibly open")
 
 scope_text = (ROOT / "sections/08-scope.tex").read_text(encoding="utf-8")
 if "They are not asserted to arise from smooth projective quantum connections" not in scope_text:
@@ -58,8 +61,8 @@ if "They are not asserted to arise from smooth projective quantum connections" n
 
 metadata = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
 if metadata.get("title") != (
-    "The Gamma Point Row at Birational Walls: Exact Wall Identities, "
-    "Boundary Loss, and the Two-Wall Obstruction"
+    "The Point-Class Rank Functional under Birational Wall Crossing: "
+    "Exact One-Wall Identities toward the X × P² Problem"
 ):
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":

@@ -36,6 +36,12 @@ number, and in no manuscript yet.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
+The quantum-birational methods branch now also contains the unnumbered paper
+*The Point-Class Rank Functional under Birational Wall Crossing: Exact
+One-Wall Identities toward the \(X\times\mathbf P^2\) Problem*. It separates
+exact one-wall point identities from a conditional two-wall assembly
+criterion.
+
 ---
 
 ## 1. The unifying frame

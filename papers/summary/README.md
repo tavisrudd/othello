@@ -115,6 +115,14 @@ complex as separate victories.
   one-step irrationality for every smooth prime Fano threefold of genus eight.
   [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf).
 
+- **The Gamma point row has exact one-wall identities and a sharp
+  `X × P²` assembly boundary.** A common-open point has exact ambient coordinate in the
+  Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
+  continuation preserves its intrinsic row on a fixed continuation domain.
+  Incomplete-Gamma and Fourier-corner countermodels show why the multi-wall
+  assembly requires an additional directed target-support hypothesis.
+  [The Point-Class Rank Functional under Birational Wall Crossing](../gamma-point-row/gamma_point_row.pdf).
+
 ### Coding theory and quantum information
 
 - **Projective Reed–Solomon deep holes beyond redundancy four.** Split-free
@@ -184,6 +192,7 @@ boundary, and reproducible entry points.
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
+| *The Point-Class Rank Functional under Birational Wall Crossing: Exact One-Wall Identities toward the X × P² Problem* | Algebraic geometry / quantum cohomology | Exact simple-wall and path-local ordinary-flop point-row identities, together with two countermodels and a conditional multi-wall criterion. | [PDF](../gamma-point-row/gamma_point_row.pdf) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -397,6 +406,48 @@ asymptotics.
 **Why it matters.** The omitted range is geometrically basic: it includes
 every codimension-two blow-up. The repair uses the source's own cone
 membership and Appendix A, and changes no higher-discrepancy statement.
+
+---
+
+#### The Point-Class Rank Functional under Birational Wall Crossing: Exact One-Wall Identities toward the X × P² Problem
+
+[PDF](../gamma-point-row/gamma_point_row.pdf)
+
+**Standout result.** The common-open point has an exact ambient coordinate in
+the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
+continuation preserves the intrinsic point row on a fixed continuation
+domain. Two exact countermodels identify why these one-wall results do not
+yet compose across a discrepant peak.
+
+> *Abstract* The Gamma integral structure turns the class of a point into the
+> flat Euler covector which reads ordinary rank. We isolate the behavior of
+> this single row under birational quantum wall crossing. For a smooth
+> projective simple VGIT wall, the formal quantum-D-module comparison of
+> Gu--Yu--Yu sends the common-open point class to the point class in its
+> ambient summand exactly; the assertion concerns the full wall parameter,
+> not only its leading term. For a projective ordinary flop, the
+> Lee--Lin--Qu--Wang continuation preserves the intrinsic point row on each
+> fixed continuation domain. An incomplete-Gamma connection and a punctual
+> Fourier-corner module then show that formal monodromy, pairing, integrality,
+> nilpotent tagging, and bare boundary support do not determine the row. A
+> factorwise rank-zero-target condition is sufficient for
+> factorization-level invariance. A single signed punctual boundary
+> coefficient is only a candidate shadow of that condition; a marked
+> blockwise comparison remains open. For a smooth cubic threefold `X`, that
+> comparison is part of the unresolved assembly step in the point-row
+> approach to the `m=2` problem for `X × P²`; the paper makes no irrationality
+> claim for this product.
+
+**Delivers.** Two exact one-wall theorems, two minimal failure models, and a
+named conditional criterion for the remaining multi-wall comparison.
+
+**Who cares.** Researchers in quantum cohomology, birational wall crossing,
+Gamma structures, irregular connections, Fourier--Laplace methods, and
+stable-rationality obstructions.
+
+**Why it matters.** It separates what current wall-crossing theorems really
+prove about the rank-reading point row from the additional oriented boundary
+datum needed to address the cubic-threefold product with `P²`.
 
 ---
 

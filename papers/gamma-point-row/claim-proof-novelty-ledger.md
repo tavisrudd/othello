@@ -17,8 +17,9 @@ makes no negative novelty claim.
 | `cor:ordinary-flop-packet` | The point-row Boolean is preserved on a graph-gauge transported formal packet. | unconditional and path-local | Flop point-row theorem plus graph-gauge preservation of connection, grading, Chern class, and pairing | No phase-independence statement outside the fixed domain |
 | `prop:incomplete-gamma` | Formal monodromy, pairing, integrality, and a length-three nilpotent tag do not determine the point row. | unconditional abstract no-go | Explicit incomplete-Gamma flat columns, continuation shear, hyperbolic double, and tensor tag | Not a smooth-projective quantum counterexample |
 | `prop:punctual-corner` | A module killed by either Fourier localization can have full-support inverse transform. | unconditional algebraic no-go | Weyl-algebra Fourier transform exchanges `O_A2` and `delta_00` | Up to conventional signs and cohomological shift |
-| `hyp:rank-zero-target` | Every complete ray-ordered correction has boundary-supported output target. | explicit hypothesis | Not proved in the paper | Bare Fourier-boundary support does not imply it |
+| `hyp:rank-zero-target` | Every complete ray-ordered correction has boundary-supported output target. | explicit hypothesis | Not proved in the paper | Bare Fourier-boundary support and one global signed punctual coefficient do not imply it |
 | `thm:rank-zero-target` | The rank-zero-target condition is sufficient for point-row invariance through a finite factorization. | unconditional implication from named hypothesis | One-line covector calculation and induction | No general factorization consequence without the hypothesis |
+| `eq:blockwise-boundary-marking` | A blockwise identity between the point row of a ray target and a marked punctual coefficient would reduce the remaining problem to singular data. | open comparison, not a theorem | Formulated as equation (7.7) | The global alternating coefficient (7.5) can vanish by cancellation and is not sufficient |
 
 ## Novelty language
 

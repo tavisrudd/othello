@@ -28,8 +28,10 @@ manuscript. This is not an exhaustive citation-graph or novelty search.
    connection comparison; it is not attributed to a descendant theorem.
 4. The incomplete-Gamma and Weyl-algebra calculations are proved directly
    and are not presented as geometric quantum examples.
-5. The two-wall result is an implication from a named hypothesis, not a
-   theorem that the hypothesis holds.
+5. The two-wall result is an implication from a named factorwise hypothesis,
+   not a theorem that the hypothesis holds. A single signed punctual
+   coefficient is recorded only as a candidate shadow; no equivalence with
+   the factorwise point-row values is claimed.
 6. No cited factorization theorem is used to claim that every chamber remains
    smooth projective.
 
@@ -38,3 +40,11 @@ manuscript. This is not an exhaustive citation-graph or novelty search.
 No exhaustive novelty search was undertaken and the manuscript makes no
 negative novelty claim. Any claim of firstness or absence from the literature
 is outside this audit.
+
+## Published-metadata corrections
+
+The bibliography was checked against the publisher records on 2026-08-13.
+In particular, Acosta--Shoemaker is *IMRN* 2020(20), 7037--7072,
+doi:10.1093/imrn/rnz001, and Reichelt--Schulze--Sevenheck--Walther is
+*Beitr. Algebra Geom.* 62(1), 137--203,
+doi:10.1007/s13366-020-00560-1.
