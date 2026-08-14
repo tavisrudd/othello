@@ -365,3 +365,23 @@ identity to an isomorphism of fixed perfect obstruction theories.  The first
 manuscript hypothesis is therefore closed by an algebraic rank-one clutching
 argument.  This does not touch the second, Stokes-theoretic marked-threshold
 hypothesis.
+
+## Mystery ledger
+
+- **Settled:** changing the affine clutching degree inside one
+  sign/congruence tail does not change the fixed stack, the invariant
+  deformation complex, the fixed POT morphism, or the virtual class.  The
+  common-open quotient shadow was weaker than necessary.
+- **Settled:** the zero-mode threshold list is the exact list on which the
+  invariant Cech complex can change; formula (4) supplies the local model.
+- **Open:** the elementary exact triangle at a zero-mode crossing may help
+  construct the corresponding marked nearby-cycle map, but it does not by
+  itself control the Stokes filtration or preserve the Gamma point row.  This
+  belongs to the marked-threshold problem.
+- **Open:** sign and stability thresholds change attracting or semistable
+  geometry and still require the marked cyclic `z`-module comparison.  The
+  bilateral rational counterexample shows that the two tail recurrences do
+  not determine it.
+- **Evidence boundary:** large-area semistability, properness, and existence
+  of the gauged-map POT are the standing Section 8 assumptions and Woodward's
+  input, not conclusions of this note.
