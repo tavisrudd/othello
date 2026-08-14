@@ -8,6 +8,16 @@ The gate checks the public claim boundary, rejects internal task language and
 unaudited priority phrases, checks the cubic endpoint certificate, lints TeX
 spacing, builds the manuscript, and rejects LaTeX warnings.
 
+The manuscript check builds from a clean temporary copy of the source with a
+pinned source date and byte-compares that deterministic result with the tracked
+PDF. This makes stale source/PDF pairs fail even when local latexmk auxiliary
+files claim the manuscript is current. Use
+
+    make manuscript-update
+
+to refresh the tracked PDF through the same isolated build, then rerun the
+complete gate.
+
 The mathematical proofs are human proofs in the manuscript. The verification
 script checks release consistency; it is not a substitute for those proofs.
 

@@ -1,17 +1,22 @@
 export SOURCE_DATE_EPOCH = 1785888000
 export FORCE_SOURCE_DATE = 1
 
+# The tracked PDF is byte-reproducible.  The isolated-build check below makes
+# source/PDF staleness an exact failure instead of trusting latexmk's local
+# auxiliary-file state.  Use `make manuscript-update` to refresh the PDF from
+# the same clean deterministic build used by the release gate.
+
 TEXSHELL ?= nix develop ..\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
 SOURCE := gamma_point_row.tex
 
-.PHONY: all check evidence lint manuscript warnings clean distclean
+.PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean
 
-all: lint manuscript
+all: evidence lint manuscript-check
 
-check: evidence lint manuscript warnings
+check: evidence lint manuscript-check
 
 evidence:
 	$(PYTHON) verification/check_release_surface.py
@@ -28,6 +33,12 @@ warnings: manuscript
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' gamma_point_row.log; then \
 		exit 1; \
 	fi
+
+manuscript-check: warnings
+	$(TEXSHELL) python3 verification/check_manuscript_build.py
+
+manuscript-update:
+	$(TEXSHELL) python3 verification/check_manuscript_build.py --update
 
 clean:
 	$(LATEXMK) -c $(SOURCE)

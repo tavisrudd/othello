@@ -39,10 +39,14 @@ Run:
     make check
 
 This executes the paper-owned release-surface and cubic-endpoint checks,
-applies the monorepo TeX spacing lint in the authority repository, rebuilds
-the PDF with the pinned Nix toolchain, and fails on LaTeX warnings or overfull
-boxes. In the standalone export, the monorepo-only spacing lint is omitted;
-the mathematical release checks and warning gate remain.
+applies the monorepo TeX spacing lint in the authority repository, and rebuilds
+the manuscript in an isolated directory with the pinned Nix toolchain. The
+fresh deterministic PDF must match the tracked PDF byte for byte, so stale
+auxiliary files cannot conceal a source/PDF mismatch. The gate also fails on
+LaTeX warnings or overfull boxes. After editing manuscript sources, refresh the
+tracked artifact with `make manuscript-update`, then run `make check`. In the
+standalone export, the monorepo-only spacing lint is omitted; the mathematical
+release checks, isolated-build comparison, and warning gate remain.
 
 ## License
 

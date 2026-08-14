@@ -435,9 +435,10 @@ projective stabilization of a smooth cubic threefold.
 > matrices give a rank-two block with
 > primitive-sixth formal monodromy. We reconstruct its indicial polynomial
 > directly, and an elementary `₂F₃` Barnes calculation shows that the Gamma
-> point row is nonzero on both primitive-sixth lines. Quantum Künneth produces
-> `m+1` detected copies under multiplication by `P^m`, whereas projective
-> space itself has no primitive-sixth packet.
+> point row is nonzero on both primitive-sixth lines. Under multiplication by
+> `P^m`, quantum Künneth produces `m+1` copies and preserves detection of the
+> resulting packet, whereas projective space itself has no primitive-sixth
+> packet.
 >
 > For the global comparison, the Gamma integral structure turns the class of
 > a point into the flat Euler covector which reads ordinary rank. We prove an
