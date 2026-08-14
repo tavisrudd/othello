@@ -381,6 +381,44 @@ semantics producing the supplied divisor-tagging equalities, operation
 comparisons, the geometric argument producing the `{1,-1}` spectrum in low
 dimensions, and Cai's actual integral-`z` block diagonalization.
 
+## Prioritized Lean backlog
+
+Work in this order unless a later literature or library dependency changes the
+cost materially:
+
+1. **Three-primary packet.**  Formalize `H₃`, its normalized symmetric
+   minus-dot-product form, the tensor symplectic discriminant
+   `H₃ ⊗ E[3]`, the four stable halves `P¹(F₃)`, and maximal isotropy.
+   This is the highest-EV self-contained gap created by the strengthened
+   manuscript proof.
+2. **Explicit six-axis local-chart bridge.**  Connect the concrete `6I-J`
+   lattice and both primary packets to the abstract graph-coordinate and
+   self-adjoint lifting theorems, reducing the supplied local-chart premises.
+3. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
+   schemes, quotient and inclusion maps, the relative isogeny, polarization
+   pullback, discriminant kernels, and continuous packet classifier.
+4. **Geometric cohomology realization.**  Identify the formal graph divisor
+   lattice with the intermediate-Jacobian divisor lattice and transport the
+   all-degree saturation theorem to the principal minimal class.
+5. **Quantum instantiation.**  Connect the formal completed-series,
+   finite-quotient gauge, numerical base-change, and divisor-tagging machinery
+   to genuine Gromov--Witten quantum connections and the Iritani and
+   Iritani--Koto comparison maps.
+6. **Cubic spectral endpoint.**  Formalize Cai's cubic block diagonalization
+   and identify its characteristic polynomial with the framed-monodromy
+   polynomial used by the multiplicity terminal.
+7. **External theorem closure.**  Only after the paper-specific bridges above,
+   formalize or import the large cited inputs needed to upgrade the nine
+   conditional deductions: Voisin's criterion, weak factorization, the
+   Iritani comparison theorems, the low-dimensional classification inputs,
+   and related geometric results.
+
+The submission-ready partial-companion gate does not require all seven items:
+all 23 claims are already tracked honestly.  This list is the route from the
+current `13 fragment / 9 conditional / 1 complete` partition toward an
+end-to-end formalization; no item authorizes downgrading a manuscript theorem
+or hiding an external premise.
+
 ## Package shape
 
 ```text
