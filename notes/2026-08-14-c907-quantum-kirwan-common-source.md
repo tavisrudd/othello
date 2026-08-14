@@ -316,6 +316,15 @@ output evaluation factor through `W^zeta`, and (18) kills the entire virtual
 fixed contribution, including its normal Euler class and all neutral towers.
 The two endpoint contributions are exactly the two localized point rows.
 
+The support assertion is already in the primary source.  Gonzalez--Woodward
+Proposition 3.15(c) says that **every node or marking** of a
+polarization-fixed gauged map lands in the fixed point set; Lemma 3.17 and
+Proposition 3.18 say that the principal component maps to
+`W^zeta/G_zeta`.  Thus no wall-fixed graph can evade (18) by moving the
+output onto a bubble.  What is not in the source is the auxiliary-rotation
+enhancement that turns this support fact into an identity of localized
+endpoint rows.
+
 This proves the localized point-row theorem provided the following formal
 enhancement of Gonzalez--Woodward's construction is written down:
 
@@ -334,7 +343,11 @@ the endpoint conventions with `tau_-` must be checked rather than inferred
 from the scalar graph formula.  The decisive falsifier is equally concrete:
 find a wall-fixed graph stratum whose distinguished output evaluation does
 not factor through the wall fixed locus.  Standard graph-space fixed-locus
-geometry predicts that no such stratum exists.
+geometry predicts that no such stratum exists, and Proposition 3.15(c) rules
+it out in the published fixed-stack geometry.  A separate per-wall input is
+the existence of the lift `a_p` with (18); it is proved for the smooth simple
+VGIT walls used by C907, but should not be inferred for an arbitrary singular
+intermediate quotient.
 
 ## 6. Conditional application to `X x P^2`
 
@@ -424,7 +437,8 @@ window correction.
   `5aa794f4d83dd8d127aab769d95a71a4691d7a35d220e81ca73c5b8bb360ea51`.
 - Eduardo Gonzalez and Chris T. Woodward, *A wall-crossing formula for
   Gromov--Witten invariants under variation of GIT quotient*,
-  arXiv:1208.1727v7, Theorems 1.13 and 1.17 and Remark 1.18(b); cached PDF
+  arXiv:1208.1727v7, Theorems 1.13 and 1.17, Proposition 3.15(c), and Remark
+  1.18(b); cached PDF
   SHA-256
   `2c99203c8e1d7dd373112629bbfac0760e7a3812d348e9110a1eb2b894d9d84c`.
 - Zhaoxing Gu, Song Yu, and Tony Yue Yu, *Quantum cohomology of variations

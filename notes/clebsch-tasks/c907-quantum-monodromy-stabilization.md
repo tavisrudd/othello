@@ -939,6 +939,10 @@ What must be proved is the **commuting-rotation enhancement** identifying the
 two endpoint terms with Woodward's localized `tau_-`; see the common-source
 note.  Falsify it by finding a wall-fixed graph whose output node does not
 factor through the wall fixed locus before returning to Gamma residues.
+Gonzalez--Woodward Proposition 3.15(c) rules out that falsifier in their
+fixed-stack geometry: every node or marking lands in the fixed set.  The live
+work is therefore the auxiliary-equivariant virtual-localization identity and
+endpoint normalization, plus the already wall-local zero-restriction lift.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
