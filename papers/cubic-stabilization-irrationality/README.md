@@ -9,21 +9,26 @@
 **Title:** *Conditional Irrationality of All Projective Stabilizations of
 Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.
 
-Assuming the marked threshold compatibility hypothesis stated in the paper,
-the product of any smooth complex cubic threefold with any projective space
-is irrational. The paper proves an exact ambient point-column identity for a
+Assuming a gauged-admissible marked Włodarczyk completion and the
+inverse-system family of one-object marked threshold comparisons stated in the paper,
+the product of any
+smooth complex cubic threefold with any projective space is irrational. The
+paper proves an exact ambient point-column identity for a
 simple VGIT wall and exact point-row transport across an ordinary flop,
 together with countermodels that obstruct naive
 composition. For a global equivariant cobordism it proves support collapse
 and a coefficientwise balanced Gamma-ratio reduction. It further proves that
 the derived fixed clutching stacks are constant along every rank-one tail
 between thresholds, so the complete neutral tails are holonomic and tempered.
-The remaining analytic input is
-locally finite: an isomorphism of cyclic Rees \(z\)-modules at each sign or
-stability threshold, and on row-generated nearby cycles at each zero-mode
-rank change, must intertwine formal monodromy and carry
-the marked point row while preserving the stated Stokes, deck, nearby-cycle,
-Artin, and Rees data. Under this hypothesis, the
+Beyond gauged-admissibility, the remaining unproved input is a family of
+one-object local comparisons over all finite Artin levels,
+ordinary degrees, neutral directions, and thresholds. At sign and stability
+thresholds it compares cyclic Rees \(z\)-modules; at zero modes it compares
+row-generated reduced nearby cycles. These maps must carry the marked row,
+intertwine formal monodromy, preserve the stated Stokes, deck, Artin, and Rees
+data, and identify the entire adjacent row-generated cyclic module with its
+reduced nearby-cycle realization. Primary support is then preserved by
+polynomial functional calculus. Under these assumptions, the
 point-row primary Boolean is birationally invariant and
 \(X\times\mathbf P^m\) is irrational for every smooth cubic threefold \(X\)
 and every \(m\). A rational two-tail counterexample shows why tailwise

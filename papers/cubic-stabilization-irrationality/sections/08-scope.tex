@@ -23,9 +23,13 @@ roles explicitly.
   They show why the local receivers cannot simply be glued by formal
   monodromy, pairing, or localized support.
 \item Proposition~\ref{prop:support-collapse} uses the global orbit-cylinder
-  marking.  The wall contributions vanish because their attaching nodes land
-  in intermediate fixed loci on which this particular class restricts to
-  zero.  No claim is made that arbitrary insertions enjoy the same collapse.
+  marking and every condition in
+  Definition~\ref{def:gauged-admissible}.  W{\l}odarczyk supplies the smooth
+  completion and orbit cylinder, but the proper-DM master-stack, obstruction-
+  theory, stability, and numerical-separation conditions remain assumptions.
+  The wall contributions vanish because their attaching nodes land in
+  intermediate fixed loci on which this particular class restricts to zero.
+  No claim is made that arbitrary insertions enjoy the same collapse.
 \item Proposition~\ref{prop:gamma-ratio-reduction} proves the
   coefficientwise Gamma-ratio and balance identities for individual
   fixed-graph contributions.  Theorem~\ref{thm:tailwise-derived} supplies
@@ -34,9 +38,15 @@ roles explicitly.
   Proposition~\ref{prop:clutching-tail-holonomicity} proves holonomicity and
   tempered growth for each complete clutching tail, including arbitrary
   bubble trees.
-\item Hypothesis~\ref{hyp:marked-threshold} asks for isomorphisms of the finite
-  cyclic Rees \(z\)-modules which intertwine formal monodromy and carry the
-  point row across every threshold.  Aleshkin--Liu prove a balanced contour
+\item Hypothesis~\ref{hyp:marked-threshold} is an inverse-system family over
+  all finite Artin levels, ordinary degrees, neutral directions, and
+  thresholds.  It asks for one-object local Fourier comparisons inducing
+  strict isomorphisms of finite cyclic Rees
+  \(z\)-modules which intertwine formal monodromy, carry the point row, and at
+  zero modes identify the entire adjacent row-generated module with its
+  reduced nearby-cycle realization.  Preservation of primary support is a
+  consequence, not part of the hypothesis.  No
+  instance is proved here for a general geometric threshold.  Aleshkin--Liu prove a balanced contour
   theorem for finite-dimensional linear abelian GLSMs; they prove neither
   this marked compatibility nor its nonlinear virtual fixed-graph analogue.
   The rational two-tail example shows that
@@ -46,8 +56,10 @@ roles explicitly.
   equivariant quantum source has finite rank or admits a common continuation.
   No formal Novikov variable is evaluated at a nonzero complex number.
 \item Cai enters only Proposition~\ref{prop:cubic-endpoint}.  Equations
-  (9.1)--(9.4) reconstruct the formal block from his displayed matrices, and
-  (9.5)--(9.8) independently compute the point coefficient.  The birational
+  \eqref{eq:cubic-small-z-equation}--\eqref{eq:cubic-indicial-polynomial}
+  reconstruct the formal block from his displayed matrices, and
+  \eqref{eq:cubic-quantum-period}--\eqref{eq:cubic-barnes-z-powers}
+  independently compute the point coefficient.  The birational
   conditional transport theorem is unchanged if this endpoint lemma is
   replaced by any other detected primary packet.
 \end{enumerate}
@@ -59,8 +71,9 @@ completion, the smooth extreme quotients, and the complete fixed loci in the
 gauged theory.  This is why resolving and composing the intermediate walls is
 unnecessary.
 
-Theorem~\ref{thm:birational-point-primary} is conditional on
-Hypothesis~\ref{hyp:marked-threshold}.  It
+Theorem~\ref{thm:birational-point-primary} is conditional on both the
+gauged-admissibility conditions of Definition~\ref{def:gauged-admissible} and
+the inverse-system family in Hypothesis~\ref{hyp:marked-threshold}.  It
 concerns the point row on a formal primary packet in the marked cyclic
 continuation postulated by that hypothesis.
 It is not a claim that all Stokes matrices, Gamma lattices, or derived

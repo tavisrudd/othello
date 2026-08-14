@@ -7,35 +7,36 @@ Suppose a common analytic receiver contains the two sectorial realizations
 under comparison, and let \(T\) be their transition.  Write
 \(\mathcal S_D(Y)\) for a span of Gamma sections represented by classes
 supported on \(D\).  The point row annihilates this span:
-\[
- \rrow_{Y,p}(v)=0\qquad(v\in\mathcal S_D(Y)).                  \tag{7.1}
-\]
+\begin{equation}\label{eq:boundary-point-annihilation}
+ \rrow_{Y,p}(v)=0\qquad(v\in\mathcal S_D(Y)).
+\end{equation}
 
 \begin{hypothesis}[Rank-zero-target condition]
 \label{hyp:rank-zero-target}
 On the packet under consideration, the relative transition admits a
 canonical ray-ordered factorization
-\[
- T=\prod_{a=1}^m(1+v_a\otimes\lambda_a)                       \tag{7.2}
-\]
+\begin{equation}\label{eq:ray-transition-factorization}
+ T=\prod_{a=1}^m(1+v_a\otimes\lambda_a)
+\end{equation}
 whose complete residue targets satisfy
-\[
- \rrow_{Y,p}(v_a)=0\qquad(1\le a\le m).                       \tag{7.3}
-\]
+\begin{equation}\label{eq:rank-zero-targets}
+ \rrow_{Y,p}(v_a)=0\qquad(1\le a\le m).
+\end{equation}
 \end{hypothesis}
 
 The word \emph{complete} is essential.  Refining a residue block into
 coordinate terms can create nonzero ranks which cancel only after the full
 block is assembled.  The boundary-support condition
-\(v_a\in\mathcal S_D(Y)\) is a geometric sufficient condition for (7.3), by
-(7.1), but it is not part of the abstract hypothesis.
+\(v_a\in\mathcal S_D(Y)\) is a geometric sufficient condition for
+\eqref{eq:rank-zero-targets}, by \eqref{eq:boundary-point-annihilation}, but
+it is not part of the abstract hypothesis.
 
 \begin{theorem}[One-row assembly]
 \label{thm:rank-zero-target}
 Under Hypothesis~\ref{hyp:rank-zero-target},
-\[
- \rrow_{Y,p}T=\rrow_{Y,p}.                                    \tag{7.4}
-\]
+\begin{equation}\label{eq:point-row-transition}
+ \rrow_{Y,p}T=\rrow_{Y,p}.
+\end{equation}
 Consequently, any finite factorization whose ordinary-flop steps satisfy
 Theorem~\ref{thm:ordinary-flop-point-row} and whose discrepant adjacent-wall
 transitions satisfy Hypothesis~\ref{hyp:rank-zero-target} preserves the
@@ -43,26 +44,28 @@ point-row Boolean on the transported packet.
 \end{theorem}
 
 \begin{proof}
-Equation (7.3) gives
+Equation~\eqref{eq:rank-zero-targets} gives
 \[
  \rrow_{Y,p}(1+v_a\otimes\lambda_a)=\rrow_{Y,p}
 \]
-for every factor in (7.2).  Multiplying the identities proves (7.4).  The
+for every factor in \eqref{eq:ray-transition-factorization}.  Multiplying the
+identities proves \eqref{eq:point-row-transition}.  The
 factorization statement follows by induction, using
 Theorem~\ref{thm:ordinary-flop-point-row} at crepant steps.
 \end{proof}
 
 A stronger geometric condition is one-sided kernel support.  If the cone of
 the transition kernel relative to the diagonal has support
-\[
- \Supp(K_{\mathrm{rel}})\subset Y\times D,                    \tag{7.5}
-\]
+\begin{equation}\label{eq:output-kernel-support}
+ \Supp(K_{\mathrm{rel}})\subset Y\times D,
+\end{equation}
 with \(D\) in the output factor, and if its induced action satisfies
-\(\operatorname{im}(T-\id)\subset\mathcal S_D(Y)\), then (7.1) gives
+\(\operatorname{im}(T-\id)\subset\mathcal S_D(Y)\), then
+\eqref{eq:boundary-point-annihilation} gives
 \(\rrow_{Y,p}T=\rrow_{Y,p}\) directly.  This conclusion does not require, and
 does not imply, that every factor in an independently chosen factorization
 of \(T\) has supported target.  Support in \(D\times Y\) instead constrains
-the source and would not imply (7.4).
+the source and would not imply \eqref{eq:point-row-transition}.
 
 There is a tempting singular shadow of the factorwise condition.  Let
 \(B_{\mathrm{corner}}\) be a complete oriented correction left by the two
@@ -74,9 +77,9 @@ signed punctual multiplicity be the alternating \(\delta_{00}\) coefficient
 Fourier transform exchanges a punctual coefficient with a zero-section
 multiplicity, hence with generic output rank in the elementary model of
 Proposition~\ref{prop:punctual-corner}.  One might therefore hope for
-\[
- \mu_{00}(B_{\mathrm{corner}})=0                              \tag{7.6}
-\]
+\begin{equation}\label{eq:punctual-shadow-vanishing}
+ \mu_{00}(B_{\mathrm{corner}})=0
+\end{equation}
 as a numerical test.  This implication is \emph{not} proved here.  A single
 alternating multiplicity can vanish by cancellation even when individual
 ray targets have nonzero point row, and no exact point-row marking on
@@ -87,27 +90,30 @@ object is punctual proves nothing.
 The failure of a global-to-factorwise inference already occurs in dimension
 two.  Let \(r=e_1^*\) on \(V=\C^2\), and put
 \(A=e_1\otimes e_2^*\).  Then \(A^2=0\) and
-\[
- \id=(\id+A)(\id-A),                                      \tag{7.7}
-\]
+\begin{equation}\label{eq:factor-cancellation}
+ \id=(\id+A)(\id-A),
+\end{equation}
 although both elementary factors have target \(e_1\) and
 \(r(e_1)=1\).  Thus even a vanishing total correction does not force the
 targets in a chosen ray factorization to lie in \(\ker r\).
 
 The missing comparison can be stated blockwise: for each complete ray block
 one would need an unlocalized boundary object \(B_a\) and an identity
-\[
- \rrow_{Y,p}(v_a)=\mu_{00}(B_a).                              \tag{7.8}
- \label{eq:blockwise-boundary-marking}
-\]
+\begin{equation}\label{eq:blockwise-boundary-marking}
+ \rrow_{Y,p}(v_a)=\mu_{00}(B_a).
+\end{equation}
 with enough concentration or effectivity to prevent cancellation inside the
-block.  Equation (7.8) and \(\mu_{00}(B_a)=0\) for every \(a\) would imply
-Hypothesis~\ref{hyp:rank-zero-target}; the single global equation (7.6) does
+block.  Equation~\eqref{eq:blockwise-boundary-marking} and
+\(\mu_{00}(B_a)=0\) for every \(a\) would imply
+Hypothesis~\ref{hyp:rank-zero-target}; the single global equation
+\eqref{eq:punctual-shadow-vanishing} does
 not.
 
 \begin{remark}[What remains to be proved]
-Neither (7.2), the action condition following (7.5), nor the blockwise
-comparison (7.8) is deduced here for a general pair of discrepant walls.
+Neither \eqref{eq:ray-transition-factorization}, the action condition following
+\eqref{eq:output-kernel-support}, nor the blockwise comparison
+\eqref{eq:blockwise-boundary-marking} is deduced here for a general pair of
+discrepant walls.
 Existing one-wall theorems determine formal decompositions and, in special
 toric settings, Gamma/window comparisons.  The missing statement is directed
 and two-wall: it must retain which side of every vanishing cycle is the

@@ -9,31 +9,83 @@ either endpoint Novikov completion is taken.
 
 \subsection{The common point row}
 
-Let \(W\) be a smooth projective variety with a \(\Gm\)-action and let
-\(Y_-\) and \(Y_+\) be smooth free GIT quotients for two extreme
-linearizations.  We assume the stable-equals-semistable and properness
-hypotheses under which Woodward's localized gauged theory is defined.  In
-particular, degree by degree, the polarization master stack is a proper
-Deligne--Mumford stack with its stated perfect obstruction theory.  We work
-coefficientwise at sufficiently large area.  Write \(\kappa_\pm\) for
+\begin{definition}[Admissible marked completion]
+\label{def:gauged-admissible}
+A smooth projective \(\Gm\)-completion \(W\), two extreme linearizations,
+and a point \(p\) in their common birational open are
+\emph{gauged-admissible} if the following conditions hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The extreme quotients \(Y_-\) and \(Y_+\) are smooth and free, and
+stable equals semistable for the chamber polarizations used to define their
+gauged theories.  This equality is not imposed at a critical wall
+polarization; the wall is handled by the master stacks in \textup{(ii)}.
+\item Degree by degree, the polarization master stacks are proper
+Deligne--Mumford stacks with Woodward's relative perfect obstruction theories,
+and the localized large-area formula applies coefficientwise.
+\item Finitely many equivariant numerical divisor classes separate every
+allowed total equivariant degree, and the effective infinity-side degree
+semigroup is pointed.
+\item There is a class \(a_p\in H^*_{\Gm}(W)\) whose ordinary Kirwan
+restrictions are the two endpoint point classes and whose restriction to
+every intermediate fixed component is zero.
+\end{enumerate}
+These are assumptions on the gauged completion, not consequences of smooth
+projectivity alone.
+\end{definition}
+
+Fix such a completion.  We work coefficientwise at sufficiently large area.
+Write \(\kappa_\pm\) for
 the corresponding quantum Kirwan maps, write
 \(\operatorname{Kir}_\pm:H^*_{\Gm}(W)\to H^*(Y_\pm)\) for the ordinary
 cohomological Kirwan maps, and write \(\tau_{Y_\pm,-}\) for Woodward's
 localized graph potentials.  The
 derivatives
-\[
- A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm                       \tag{8.1}
-\]
+\begin{equation}\label{eq:endpoint-gauged-maps}
+ A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm.
+\end{equation}
 are the endpoint localized gauged maps; this is the localized adiabatic
 identity \cite[Equation~(68)]{WoodwardQKIII}.
 
-Suppose that a class \(a_p\in H^*_{\Gm}(W)\) has the following restrictions:
-\[
+The marked class has the restrictions
+\begin{equation}\label{eq:marked-class-restrictions}
  \operatorname{Kir}_\pm(a_p)=[p_\pm],\qquad
- a_p|_F=0                                                     \tag{8.2}
-\]
+ a_p|_F=0.
+\end{equation}
 for every fixed component \(F\) occurring at an intermediate polarization.
 Here \(p_-\) and \(p_+\) lie in the common birational open set.
+
+\begin{lemma}[Point insertion equals the Gamma row]
+\label{lem:point-insertion-row}
+Let \(R\) be a finite Artin quotient of the Novikov--bulk coefficient ring.
+Write \(\mathcal H_Y(R)\) for the cohomological input module and
+\(\mathcal S_Y(R)\) for the corresponding module of flat sections.  With
+Woodward's graph-space normalization,
+\[
+ D\tau_{Y,-}:\mathcal H_Y(R)\longrightarrow\mathcal S_Y(R).
+\]
+If \(\epsilon_{Y,p}\) is the normalized Poincar\'e covector defined by a
+point insertion, then
+\begin{equation}\label{eq:point-insertion-row}
+ \rrow_{Y,p}\,D\tau_{Y,-}=\epsilon_{Y,p}.
+\end{equation}
+Consequently the endpoint functional with distinguished insertion
+\(\operatorname{Kir}(a_p)=[p]\) is
+\[
+ \rrow_{Y,p}D\tau_{Y,-}D\kappa.
+\]
+\end{lemma}
+
+\begin{proof}
+The Gamma framing of \(\OO_p\) is the graph fundamental solution applied to
+the normalized top cohomology class: \(\Ghat_Y\) and \(z^{c_1(Y)}\) act
+trivially on that class, and the power of \(z\) is precisely the one included
+in the normalized graph-space point insertion.  Unitarity of the fundamental
+solution therefore identifies pairing against \(s_Y(\OO_p)\) with the
+Poincar\'e point covector.  This is
+\eqref{eq:point-insertion-row}, and composition with \(D\kappa\)
+gives the last assertion.  The argument is coefficientwise over \(R\), so it
+commutes with input and bulk differentiation.
+\end{proof}
 
 \begin{proposition}[Support collapse]
 \label{prop:support-collapse}
@@ -42,9 +94,9 @@ has no intermediate-polarization contribution.  Hence its two endpoint
 coefficients agree in the extended Novikov coefficient-function space.
 After Rees homogenization and in any common realization of the two endpoint
 series, this reads
-\[
- \rrow_{Y_-,p_-}A_- =\rrow_{Y_+,p_+}A_+.                    \tag{8.3}
-\]
+\begin{equation}\label{eq:support-collapse-row}
+ \rrow_{Y_-,p_-}A_- =\rrow_{Y_+,p_+}A_+.
+\end{equation}
 The identity is coefficientwise in all remaining Novikov and bulk
 variables; the proposition does not construct the common realization.
 \end{proposition}
@@ -58,18 +110,19 @@ input on the zero-side bubble tree.  Next choose equivariant divisor classes
 allowed total degrees; their endpoint Kirwan restrictions in particular span
 the endpoint numerical divisor spaces.  Insert Woodward's Liouville classes
 with parameters \(t_j\).  On a graph fixed locus their contribution is
-\[
+\begin{equation}\label{eq:liouville-character}
  \exp\!\left(\sum_jt_jD_j\right)
  \prod_j x_j^{D_j\cdot \widetilde d_+},
- \qquad x_j=\exp(t_j\hbar),                                  \tag{8.4}
-\]
+ \qquad x_j=\exp(t_j\hbar).
+\end{equation}
 where \(\widetilde d_+\) is the total infinity-side equivariant degree: the
 bubble degree together with the affine cocharacter degree of the gauged
 principal component \cite[Corollary~9.10(c)]{WoodwardQKIII}.  Extracting the
 trivial character in all \(x_j\) forces \(\widetilde d_+=0\).  The infinity
 factor is therefore the unstable identity: positivity on the effective
 infinity-side semigroup leaves no nonconstant degree-zero component.  The
-zero factor is exactly the localized graph potential in (8.1).  Using the
+zero factor is exactly the localized graph potential in
+\eqref{eq:endpoint-gauged-maps}.  Using the
 full equivariant divisor lattice is important: endpoint divisor spaces alone
 need not separate an affine cocharacter degree.
 
@@ -78,14 +131,22 @@ polarization-fixed graph has its principal component in a fixed quotient.
 Moreover every marking and node lands in the corresponding fixed locus
 \cite[Proposition~3.15(c), Lemma~3.17 and
 Proposition~3.18]{GonzalezWoodward}.  Its insertion therefore factors through
-one of the restrictions in (8.2) and vanishes before division by the virtual
+one of the restrictions in \eqref{eq:marked-class-restrictions} and vanishes
+before division by the virtual
 normal Euler class.  Only the two endpoints survive the virtual Kalkman
 identity.  Their signs and node factors agree with Woodward's localized
 adiabatic identity.  At either endpoint the distinguished equivariant
 insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
-\([p_\pm]\) by (8.2); the quantum Kirwan derivatives remain inside
-\(A_\pm\).  This gives (8.3).  Polarizing in the ordinary inputs gives
-the entire row rather than only the scalar potential.
+\([p_\pm]\) by \eqref{eq:marked-class-restrictions}; the quantum Kirwan
+derivatives remain inside
+\(A_\pm\).  Lemma~\ref{lem:point-insertion-row} identifies the resulting
+endpoint covector with \(\rrow_{Y_\pm,p_\pm}D\tau_{Y_\pm,-}\); differentiating
+the affine-gauged input gives the remaining factor \(D\kappa_\pm\).  Thus the
+coefficientwise Kalkman identity is \eqref{eq:support-collapse-row} as an
+equality of functionals on
+the common equivariant input module.  Applying arbitrary further input and
+bulk derivatives before coefficient extraction gives the polarized row
+identity, not only its value on the unit.
 \end{proof}
 
 For a birational map between smooth projective varieties, the required class
@@ -96,9 +157,14 @@ birational open supplied as a trivialized cylinder by the construction.
 There the cobordism is a trivial orbit cylinder.  The
 equivariant Poincar\'e dual of the closure of that orbit restricts to the two
 point classes and misses every intermediate fixed component.  It is the
-class \(a_p\) in (8.2).  This assertion concerns the ordinary Kirwan
+class \(a_p\) in \eqref{eq:marked-class-restrictions}.  This assertion
+concerns the ordinary Kirwan
 restrictions only; no vanishing of positive-degree corrections to the quantum
-Kirwan maps is used.
+Kirwan maps is used.  The cited cobordism theorem supplies this underlying
+completion and marking; it does not by itself verify conditions
+\textup{(i)}--\textup{(iii)} of
+Definition~\ref{def:gauged-admissible}.  Those conditions remain explicit
+assumptions in the global theorem.
 
 There is a terminology point in the source.  W{\l}odarczyk calls the open
 cobordism \emph{projective} when it is quasiprojective.  We use the resolved
@@ -109,7 +175,8 @@ are unchanged.
 
 \subsection{Neutral tails and threshold comparison}
 
-The two maps in (8.1) initially belong to opposite Novikov completions.  The
+The two maps in \eqref{eq:endpoint-gauged-maps} initially belong to opposite
+Novikov completions.  The
 comparison needed for the point-row Boolean is smaller than a common field
 for the complete source.  Fix a finite ample-energy and bulk Artin quotient
 of the equivariant Novikov ring.  For a primitive affine gauge direction
@@ -125,13 +192,13 @@ cyclic \(z\)-modules across the finitely many changes of sign, stability, and
 zero-mode rank.
 
 Call the direction neutral when
-\[
- c_1^{\Gm}(TW)\cdot\delta=0.                                 \tag{8.5}
-\]
+\begin{equation}\label{eq:neutral-direction}
+ c_1^{\Gm}(TW)\cdot\delta=0.
+\end{equation}
 We compare formal monodromy after the Rees substitution
-\[
- Q^d\longmapsto z^{c_1^{\Gm}(TW)\cdot d}Q^d.                 \tag{8.6}
-\]
+\begin{equation}\label{eq:rees-substitution}
+ Q^d\longmapsto z^{c_1^{\Gm}(TW)\cdot d}Q^d.
+\end{equation}
 
 \begin{proposition}[Gamma-ratio reduction]
 \label{prop:gamma-ratio-reduction}
@@ -146,15 +213,16 @@ coefficient is Laurent-finite.
 Woodward's classification of the rotation-fixed graph locus is exhaustive
 for sufficiently large area \cite[Corollary~9.10]{WoodwardQKIII}.  His
 virtual-normal splitting gives
-\[
+\begin{equation}\label{eq:virtual-normal-euler}
  \operatorname{Eul}(N_\pm)=
  \operatorname{Eul}\!\left(
   (R\pi_*\operatorname{ev}^*T(W/\Gm))_{\mathrm{mov}}
- \right)(\mp\zeta)(\mp\zeta-\psi).                           \tag{8.7}
-\]
+ \right)(\mp\zeta)(\mp\zeta-\psi).
+\end{equation}
 The last two factors smooth the node and move the attaching point.  They are
 independent of the affine gauge degree, so gluing neither removes one end of
-the degree lattice nor creates a degree-dependent pole.  Formula (8.7)
+the degree lattice nor creates a degree-dependent pole.  Formula
+\eqref{eq:virtual-normal-euler}
 applies when a nontrivial attached component is present; in the irreducible
 unstable type those factors are absent and only the moving index remains
 \cite[Example~9.15]{WoodwardQKIII}.
@@ -162,54 +230,59 @@ unstable type those factors are absent and only the moving index remains
 Pass to a finite cover which clears stabilizer denominators and apply the
 splitting principle.  A virtual line in the moving index of the principal
 weighted component has nilpotent Chern root \(\alpha_a\) and degree
-\[
- n_a(k)=h_ak+s_a.                                             \tag{8.8}
-\]
+\begin{equation}\label{eq:affine-moving-degree}
+ n_a(k)=h_ak+s_a.
+\end{equation}
 For every integer \(n\), its inverse index Euler factor is the single
 meromorphic expression
-\[
+\begin{equation}\label{eq:gamma-index-factor}
  \frac{1}{\prod_{m=0}^{n}(\alpha_a+m\zeta)}
  =\zeta^{-n-1}
    \frac{\Gamma(\alpha_a/\zeta)}
-        {\Gamma(\alpha_a/\zeta+n+1)}.                         \tag{8.9}
-\]
+        {\Gamma(\alpha_a/\zeta+n+1)}.
+\end{equation}
 For \(n<0\), the left side denotes the Euler class of \(H^1\); for
 \(n\geq0\), it denotes the inverse Euler class of \(H^0\).  Thus the two
 degree rays are not assigned unrelated Gamma products.
 
 The signed sum of the moving slopes is
-\[
- \sum_a\epsilon_a h_a=c_1^{\Gm}(TW)\cdot\delta.              \tag{8.10}
-\]
+\begin{equation}\label{eq:signed-moving-slope}
+ \sum_a\epsilon_a h_a=c_1^{\Gm}(TW)\cdot\delta.
+\end{equation}
 The gauge Lie algebra has slope zero.  Moving modes on attached fixed bubbles
 have fixed rank at the chosen ordinary degree.  Their Euler factors are
 finite products of linear functions of \(k\), possibly inverted.  Each
 inverse factor is an adjacent Gamma ratio
-\[
- (hk+a)^{-1}=\frac{\Gamma(hk+a)}{\Gamma(hk+a+1)},              \tag{8.11}
-\]
-so it has zero signed slope and does not alter (8.10).  Equivariant inputs
+\begin{equation}\label{eq:adjacent-gamma-ratio}
+ (hk+a)^{-1}=\frac{\Gamma(hk+a)}{\Gamma(hk+a+1)},
+\end{equation}
+so it has zero signed slope and does not alter
+\eqref{eq:signed-moving-slope}.  Equivariant inputs
 are polynomial in \(k\); Chern roots and psi classes are nilpotent at Artin
 level; Liouville classes supply the Fourier exponential.
 
-Under (8.5), equations (8.7)--(8.11) therefore give a balanced Gamma-ratio
-kernel coefficientwise.  Polynomial equivariant insertions are Fourier
+Under \eqref{eq:neutral-direction}, equations
+\eqref{eq:virtual-normal-euler}--\eqref{eq:adjacent-gamma-ratio} therefore
+give a balanced Gamma-ratio kernel coefficientwise.  Polynomial equivariant
+insertions are Fourier
 derivatives, while nilpotent Chern-root and bulk shifts give only finitely
 many parameter derivatives.  For comparison, one moving-character residue
 has the exact normalization
-\[
+\begin{equation}\label{eq:simple-gamma-residue}
  \operatorname*{Res}_{h\sigma+\alpha=-m}
  \Gamma(h\sigma+\alpha)\,d\sigma
- =\frac{(-1)^m}{h\,m!}.                                      \tag{8.12}
-\]
+ =\frac{(-1)^m}{h\,m!}.
+\end{equation}
 The factorial is the moving-mode Euler factor, \(1/h\) is the
 one-character Jacobian factor, and the sign is the complex orientation.  We
-use (8.12) only as the normalization of a single simple pole.  Coincident or
+use \eqref{eq:simple-gamma-residue} only as the normalization of a single
+simple pole.  Coincident or
 higher poles require derivatives and the full localization expression,
 including graph automorphism factors; no product-of-simple-residues formula
 is asserted here.
 
-If (8.5) fails, the virtual-dimension equation fixes \(k\) in each homogeneous
+If \eqref{eq:neutral-direction} fails, the virtual-dimension equation fixes
+\(k\) in each homogeneous
 coefficient, hence the coefficient is Laurent-finite.  This proves the last
 assertion.
 \end{proof}
@@ -338,39 +411,67 @@ constant, and the zero-weight changes were removed as thresholds.  The two
 extension subbundles and the restriction morphism are therefore constant,
 even though the universal gauged map varies with \(a\).
 
-The dual of the fixed perfect obstruction theory is the derived pushforward
-of \(T(W/\Gm)\) \cite[Definition~7.13]{WoodwardQKIII}; it is the truncation of
-the intrinsic tangent complex of this derived section stack.  Woodward's
-cutting-edge compatibility identifies the obstruction theory of the glued
-fixed graph with the corresponding derived fibre-product triangle
-\cite[Proposition~7.14]{WoodwardQKIII}.  Since the comparison
-above identifies its invariant \v{C}ech model as a perfect complex and the
-differential displayed above, duality identifies the fixed
-obstruction-theory morphisms to \(L_{t_0\mathfrak Z/\mathfrak M}\), hence the virtual
-classes.  The cotangent triangle for the derived fibre products over inertia
-then glues this identification to the unchanged perfect obstruction theories
-of the fixed ordinary stable-map factors.
+Put
+\(E_a=((R\pi_*u_a^*T(W/\Gm))^{\mathrm{rot}})^\vee\).  Woodward's relative
+perfect obstruction theory is the natural truncation map
+\(E_a\to L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\)
+\cite[Definition~7.13]{WoodwardQKIII}.  The mapping-stack cotangent formula
+identifies \(E_a\) with
+\(\tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}\).  Under the derived
+equivalence \(\operatorname{ev}_1:\mathfrak S_{a_-,a_+}\simeq\mathfrak Z\),
+the comparison is the following (2)-commutative square:
+\[
+\begin{array}{ccc}
+ E_a & \longrightarrow & L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\\
+ \big\downarrow\scriptstyle\sim && \big\downarrow\scriptstyle\sim\\
+ \tau_{[-1,0]}L_{\mathfrak Z/\mathfrak M}
+   & \longrightarrow & L_{t_0\mathfrak Z/\mathfrak M}.
+\end{array}
+\]
+The lower arrow is the canonical truncation map.  The square commutes because
+both horizontal maps are adjoint to the same differential of evaluation on
+the two-chart universal section.  Thus the left arrow is an isomorphism on
+\(h^0\) and a surjection on \(h^{-1}\), and the two perfect obstruction
+theories are isomorphic as morphisms to the cotangent complex, not merely as
+perfect complexes.
 
-On a \(k\)-fold orbifold cover the same affine calculation is made in
-\(R[z^{1/k}]\) with its residual \(\mu_k\)-grading.  The stabilizer congruence
-fixes that grading and the twisted-sector evaluation.  Rigidifying the inertia
-receiver quotients both sides by the same residual gerbe, so the derived
-equivalence descends.  Because it is an equivalence of stacks, stabilizer and
-graph-automorphism groups, and hence their localization multiplicities, are
-preserved.  The parametrized principal component has no domain automorphisms;
-the fixed bubble factors retain theirs.  Every construction above is by base
-change and therefore commutes with Artin reduction.  The irreducible unstable
-type is the corresponding localized endpoint-chart calculation with no
-bubble, node, or attaching factor.  This proves every assertion.
+For an attached stable-map factor, the fixed graph stack is a derived fibre
+product over its inertia evaluation.  Its cotangent triangle is the direct
+sum of the two factor obstruction theories with the pullback of the inertia
+cotangent complex removed.  The comparison above is the identity on the
+stable-map and inertia terms, so it gives an isomorphism of these exact
+triangles.  This is the perfect-obstruction-theory compatibility used in
+Woodward's cutting formula
+\cite[Proposition~7.14]{WoodwardQKIII}, and it identifies the virtual classes.
+
+On a \(k\)-fold orbifold chart the same calculation takes place on
+\([\operatorname{Spec}R[z^{1/k}]/\mu_k]\).  In characteristic zero,
+\(\mu_k\)-invariants are exact.  Fixing the stabilizer congruence fixes the
+graded universal bundle and its twisted-sector evaluation, so the preceding
+equivalence and the (2)-commutative obstruction-theory square are
+\(\mu_k\)-equivariant.  Rigidification quotients both sides by the same finite
+central gerbe; pullback to that gerbe is conservative, and hence the
+equivalence and obstruction theory descend.  Stabilizer and graph-automorphism
+groups, including their localization multiplicities, are unchanged.  The
+parametrized principal component has no domain automorphisms, while the fixed
+bubble factors retain theirs.
+
+For the irreducible unstable convention there is no stable-map factor.  Its
+fixed deformation complex is exactly
+\([F^0_{\leq0}V\oplus F^\infty_{\leq0}V\to V]\); the moving complement is
+the normal index, and the node and attaching factors are absent.  Thus the
+same square applies without a gluing term.  Every construction above is a
+finite derived base change, so it commutes with Artin reduction.  This proves
+every assertion.
 \end{proof}
 
 \begin{proposition}[Clutching-tail holonomicity]
 \label{prop:clutching-tail-holonomicity}
 Every point-marked endpoint tail is a finite nilpotent derivative of one
 Gamma-ratio recurrence with affine arguments.  Its generating series is
-holonomic.  In a neutral direction its coefficients have
+holonomic over the finite Artin coefficient algebra.  In a neutral direction its coefficients have
 polynomial-logarithmic growth after one exponential rescaling, so the tail
-has tempered radial boundary values.
+has radial boundary values which are distributions of finite order.
 \end{proposition}
 
 \begin{proof}
@@ -388,21 +489,36 @@ evaluations.  This is stronger than the normal-complex identity in equations
 For \(G=\Gm\), an affine clutching cocharacter is an integer.  On one of the
 identified tails, apply the splitting principle to the moving part of the
 normal complex.  A character root of weight \(h\) has degree \(hk+s\), so
-the complementary moving weights give (8.9), with nilpotent Chern roots on
+the complementary moving weights give \eqref{eq:gamma-index-factor}, with
+nilpotent Chern roots on
 the fixed coefficient stack.  Stable attached components, including
 degree-zero bubbles stabilized by markings and nodes, retain the node and
-attaching factors in (8.7).  Only the irreducible unstable type has no such
+attaching factors in \eqref{eq:virtual-normal-euler}.  Only the irreducible
+unstable type has no such
 factors.  They are adjacent Gamma ratios and do not change the signed slope.
 
 Only finitely many parameter derivatives are therefore needed.  Gamma
 arguments do not cross a pole inside a tail, since every zero-mode crossing
 was removed as a threshold.  Clearing recurrence denominators is therefore
-legitimate there.  Gamma recurrence gives a rational finite-state recurrence in \(k\), hence a
-holonomic generating series.  Under (8.5), Stirling's formula cancels the
+legitimate there.  If \(c_k\in R_N^r\) is the resulting virtual pushforward,
+Gamma recurrence gives a rational finite-state recurrence in \(k\).  Clearing
+its denominators yields
+\[
+ \sum_{i=0}^d p_i(k)c_{k+i}=0,
+ \qquad p_i(k)\in R_N[k],
+\]
+on the tail.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is (D)-finite over
+\(R_N\).  Finite Chern-root, input, and bulk derivatives commute with this
+identity and preserve (D)-finiteness.  Under
+\eqref{eq:neutral-direction}, Stirling's
+formula cancels the
 \(k\log k\) terms in the signed product; the remaining exponential is removed
 by one rescaling and the coefficients grow by a power of \(k\) and
-\(\log k\).  This gives tempered Fourier growth.  Finite threshold terms are
-Laurent polynomials and do not alter the conclusion.
+\(\log k\).  After that rescaling, radial limits of \(F\) therefore define
+finite-order distributions, with polynomial-logarithmic bounds in the radial
+parameter.  This is the meaning of tempered radial boundary values here.
+Finite threshold terms are Laurent polynomials and do not alter the
+conclusion.
 \end{proof}
 
 Tailwise holonomicity does not identify the two selected solutions.  The
@@ -422,71 +538,139 @@ functions are not branches of one meromorphic function.  Thus neither a
 polynomial recurrence nor tailwise holonomicity determines the finite
 connection data across a threshold.
 
-In the next hypothesis, a \emph{finite dual cyclic Rees
-\(z\)-differential module} means the Rees differential module corresponding,
-under the sectorial irregular Riemann--Hilbert correspondence, to the smallest
-finite Stokes-filtered local subsystem which contains the marked horizontal
-row and is stable under normalized formal monodromy and the ramified deck
-action.  It inherits the flat connection; it is not generated by applying the
-connection to a horizontal section.  Its distinguished formal-monodromy
-Krylov subspace is \(C_T(r)\) from Lemma~\ref{lem:cyclic-row-support}.
+Fix a finite local Artin coefficient algebra \(R_N\), a ramified admissible
+sector \(S\), and the duality convention of Section~\ref{sec:point-row}.  Let
+\(\mathcal C_N(S)\) be the exact category of finite locally free dual Rees
+\(z\)-differential modules on \(S\) with good Stokes filtration and ramified
+deck action; morphisms are horizontal and strict for the Stokes and Rees
+filtrations.  We use nearby and vanishing cycles only for the specified
+meromorphic families in Hypothesis~\ref{hyp:marked-threshold}; their existence,
+strictness, and finite local freeness are part of that hypothesis.  They are
+taken after passage to the dual category, so our convention is
+\(\operatorname{var}:\phi_tM\to\psi_tM\); dualizing first exchanges the
+usual canonical and variation maps.
+
+Let \(T\) be normalized formal monodromy on an ambient object of rank \(d\),
+let \(G\) be its finite ramified deck group, and let \(r\) be the marked
+horizontal row.  A \emph{finite dual cyclic Rees \(z\)-differential module}
+is the strict Rees--Stokes saturation, inside that ambient object, of the
+finite submodule generated by
+\[
+ \{g(rT^k):g\in G,\ 0\leq k<d\}.
+\]
+The threshold hypothesis requires this saturation to be finite locally free.
+Cayley--Hamilton makes it stable under \(T\), and it inherits the connection;
+it is not generated by applying the connection to a horizontal section.  Its
+distinguished formal-monodromy Krylov subspace is \(C_T(r)\) from
+Lemma~\ref{lem:cyclic-row-support}.
 
 \begin{hypothesis}[Marked threshold compatibility]
 \label{hyp:marked-threshold}
 At every finite Artin level and fixed ordinary degree, choose a common
 ramified admissible \(z\)-sector.  At a sign or stability threshold, let
 \(K_j^-\) and \(K_j^+\) be the finite dual cyclic Rees
-\(z\)-differential modules of the two adjacent tails.  At a zero-mode rank
-change, write \(M_j^\pm\) for those adjacent modules, choose a transverse
-parameter \(t\), and use the ramified Stokes-filtered nearby- and
-vanishing-cycle functors in the standard triangle
+\(z\)-differential modules of the two adjacent tails.  There must be a
+connected local domain in the Fourier variable and one marked finite locally
+free Rees \(z\)-differential module \((\mathcal K_j,\mathfrak r_j)\) on that
+domain whose two oriented boundary restrictions are the adjacent cyclic
+modules with their marked rows.  Its connection is compatible with the relative Stokes
+filtration and deck action.  The threshold map is the continuation induced by
+this one object; it is not an arbitrary isomorphism of two abstract cyclic
+modules.  The boundary identifications use the common equivariant-input
+coordinate space furnished by Proposition~\ref{prop:support-collapse} and are
+the identity on its marked coefficient functions and their chosen input and
+bulk derivatives; a wall-dependent change of input frame is not allowed.
+
+At a zero-mode rank change, write \(M_j^\pm\) for those adjacent modules,
+choose a transverse
+parameter \(t\) and a specified meromorphic Rees family whose two punctured
+sectorial germs are \(M_j^-\) and \(M_j^+\), with the same fixed
+equivariant-input coordinate identifications.  Use its ramified
+Stokes-filtered nearby- and vanishing-cycle functors in the standard triangle
 \[
  i^*M\longrightarrow\psi_tM\xrightarrow{\operatorname{can}}\phi_tM
  \xrightarrow{+1},
  \qquad
  \operatorname{var}:\phi_tM\longrightarrow\psi_tM.
 \]
-For either adjacent module \(M\), let
-\(V_t(M)\subset\psi_tM\) be the smallest Stokes-filtered Rees submodule that
-contains the image of \(\operatorname{var}:\phi_tM\to\psi_tM\) and is stable
-under formal monodromy and the deck action.  Put
+For either adjacent module \(M\), let \(d_M\) be the rank of \(\psi_tM\) and
+let \(V_t(M)\subset\psi_tM\) be the strict Rees--Stokes saturation of the
+finite submodule generated by
+\[
+ \{g(T^k v):g\in G,\ 0\leq k<d_M,\
+   v\in\operatorname{im}(\operatorname{var})\}.
+\]
+Cayley--Hamilton makes it stable under formal monodromy and the deck action.
+Put
 \[
  \psi_t^{\mathrm{red}}M:=\psi_tM/V_t(M).
 \]
 Thus reduced nearby cycles are defined by the nearby/vanishing-cycle triangle,
-not by a choice of a complementary summand.  In this case let \(K_j^\pm\) be
-the smallest subobjects of \(\psi_t^{\mathrm{red}}M_j^\pm\) containing the
-specialized marked rows and stable under the induced monodromy, Stokes
-filtration, and deck action.  The specialization maps from the adjacent tail
-modules to \(K_j^\pm\) are required to preserve and reflect nonvanishing of
-every primary projection for the induced formal monodromy.  Denote the
-resulting rows by \(r_j^\pm\) and the
-half-Tate-normalized formal monodromies by \(T_j^\pm\).  There is an invertible comparison
-\[
+not by a choice of a complementary summand.  We require the inclusion
+\(V_t(M)\subset\psi_tM\) to be strict and the quotient to remain finite
+locally free over \(R_N\); functoriality of \(\operatorname{var}\) then makes
+the induced monodromy and deck actions well defined.  In this case let
+\(K_j^\pm\) be the strict Rees--Stokes saturations of the finite monodromy--deck
+orbits of the specialized marked rows in
+\(\psi_t^{\mathrm{red}}M_j^\pm\).  Let
+\(\widetilde K_j^\pm\subset M_j^\pm\) be
+the row-generated cyclic modules on the adjacent tails.  Specialization is
+required to induce strict isomorphisms
+\begin{equation}\label{eq:zero-mode-specialization}
+ \operatorname{sp}_j^\pm:\widetilde K_j^\pm
+   \xrightarrow{\sim}K_j^\pm
+\end{equation}
+in \(\mathcal C_N(S)\).  These isomorphisms carry the marked rows to their
+specializations and intertwine the \(z\)-connection, formal monodromy, Stokes
+filtration, and deck action.  Thus no statement about an individual primary
+projection is included in the zero-mode assumption.  Denote the resulting
+rows by \(r_j^\pm\) and the
+half-Tate-normalized formal monodromies by \(T_j^\pm\).  The one-object
+continuation induces an invertible comparison
+\begin{equation}\label{eq:marked-threshold-map}
  \Phi_j:K_j^-\xrightarrow{\sim}K_j^+,
  \qquad
  \Phi_jT_j^-=T_j^+\Phi_j,
- \qquad
- \Phi_j(r_j^-)=r_j^+.                                      \tag{8.13}
-\]
+ \qquad \Phi_j(r_j^-)=r_j^+.
+\end{equation}
 It is horizontal for the tail and \(z\)-connections, preserves the chosen
 Stokes filtration, is equivariant for the ramified deck action, and commutes
 with input and bulk derivatives, quotient maps between Artin levels, and the
-Rees substitution (8.6).  At a zero-mode rank change, \(\Phi_j\) compares the
-two row-generated nearby-cycle modules, not ambient modules of unequal rank.
+Rees substitution \eqref{eq:rees-substitution}.  It identifies the marked
+boundary germs of the two adjacent holonomic tails constructed in
+Proposition~\ref{prop:clutching-tail-holonomicity}.  At a zero-mode rank
+change, \(\Phi_j\) compares the two row-generated reduced nearby-cycle
+modules, not ambient modules of unequal rank.  Together with
+\eqref{eq:zero-mode-specialization}, it therefore gives a strict isomorphism
+between the two adjacent row-generated cyclic modules.
 These maps are compatible over
 the complete separated inverse system of Artin quotients.
 \end{hypothesis}
 
-Condition (8.13) concerns only the cyclic module and allows arbitrary
+At a zero mode, the unproved assertion therefore has two parts: construct the
+marked meromorphic threshold family, and prove that its vanishing-cycle
+submodule removes no part of the row-generated cyclic module.  The second
+part is exactly the strict specialization isomorphism
+\eqref{eq:zero-mode-specialization}.
+
+Condition \eqref{eq:marked-threshold-map} concerns only the cyclic module and
+allows arbitrary
 connection on the complementary source.  A one-object Gamma/window comparison
 compatible with all structures in Hypothesis~\ref{hyp:marked-threshold} would
 imply it: a
 window mutation is supported on the wall, whereas the skyscraper of a point
 in the common open is unchanged and Euler-orthogonal to wall-supported
 objects.  Pairing preservation and formal exponential labels alone do not
-imply (8.13), as Sections~\ref{sec:incomplete-gamma}--\ref{sec:two-wall}
+imply \eqref{eq:marked-threshold-map}, as
+Sections~\ref{sec:incomplete-gamma}--\ref{sec:two-wall}
 show.
+
+The primary Boolean does not imply Hypothesis~\ref{hyp:marked-threshold}.
+Equality of the zero or nonzero primary projections supplies neither a
+horizontal map of Rees modules nor compatibility with Stokes filtrations,
+deck actions, boundary germs, or the Artin inverse system.  Thus the
+hypothesis is an independently falsifiable marked irregular-connection
+statement.  No nontrivial geometric threshold is verified here.
 
 \begin{lemma}[Cyclic-row spectral support]
 \label{lem:cyclic-row-support}
@@ -515,16 +699,19 @@ of the classical Kirwan map and is surjective.  Choose a linear section of
 the reduction.  Its arbitrary lift has composite \(1+N\), with \(N\) in the
 augmentation ideal, and the convergent Neumann series
 \(\sum_{j\geq0}(-N)^j\) gives a right inverse.  Since
-\(D\tau_{Y_\pm,-}\) is an invertible fundamental solution, the maps (8.1)
+\(D\tau_{Y_\pm,-}\) is an invertible fundamental solution, the maps
+\eqref{eq:endpoint-gauged-maps}
 are surjective as well.
 
-The Rees factor in (8.6) is needed to compare formal monodromy.  Homogeneity
+The Rees factor in \eqref{eq:rees-substitution} is needed to compare formal
+monodromy.  Homogeneity
 of \(D\kappa\) gives
-\[
- \mu_YA-A\mu_W=\frac12A-\Theta_QA,                            \tag{8.14}
-\]
+\begin{equation}\label{eq:rees-homogeneity}
+ \mu_YA-A\mu_W=\frac12A-\Theta_QA,
+\end{equation}
 because the acting group has dimension one and
-\(\Theta_Q(Q^d)=c_1^{\Gm}(TW)\cdot d\,Q^d\).  After (8.6), the
+\(\Theta_Q(Q^d)=c_1^{\Gm}(TW)\cdot d\,Q^d\).  After
+\eqref{eq:rees-substitution}, the
 \(\Theta_Q\)-term becomes \(z\partial_z\), so both endpoint maps intertwine
 the \(z\)-connections with the same half-Tate shift.  The Euler-product term
 intertwines because the virtual-dimension identity makes the quantum Kirwan
@@ -533,9 +720,11 @@ bulk point \(\kappa(0)\) has positive energy and is formally parallel to the
 large-radius point; this transport preserves the point row.
 
 Choose finitely many common equivariant inputs whose images under each
-surjection in (8.1) span the corresponding endpoint module; take the union
+surjection in \eqref{eq:endpoint-gauged-maps} span the corresponding endpoint
+module; take the union
 of two lift sets if necessary.  Evaluation on these images embeds the dual
-endpoint module into one finite coordinate space.  After (8.6), this
+endpoint module into one finite coordinate space.  After
+\eqref{eq:rees-substitution}, this
 embedding intertwines the dual \(z\)-connections up to the same half-Tate
 shift.  Let \(T_\pm\) denote the induced half-Tate-normalized formal
 monodromies.  The Krylov spans
@@ -545,53 +734,76 @@ monodromies.  The Krylov spans
 \]
 are the distinguished formal-monodromy subspaces inside the finite dual cyclic
 modules in that coordinate space.  Injectivity here is simply dual to the
-surjectivity of (8.1).
+surjectivity of \eqref{eq:endpoint-gauged-maps}.
 
 Proposition~\ref{prop:support-collapse} identifies the marked coefficient
 functions before either endpoint completion is taken.
 Theorem~\ref{thm:tailwise-derived} and
 Proposition~\ref{prop:clutching-tail-holonomicity} supply their holonomic tail
-systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the finite cyclic
-Rees \(z\)-modules across every threshold, while nonneutral directions are
-Laurent-finite by Proposition~\ref{prop:gamma-ratio-reduction}.  Thus the two
-intrinsic endpoint cyclic row modules are conservative realizations of one
-continued marked cyclic module: at each Artin level, compose the finitely many
-threshold maps \(\Phi_j\), then pass to the complete inverse system using their
-reduction compatibility.  No continuation of the complementary equivariant
-quantum source is used.
+systems, while nonneutral directions are Laurent-finite by
+Proposition~\ref{prop:gamma-ratio-reduction}.  The following elementary gluing
+step records exactly what the remaining hypothesis adds.
+
+\begin{lemma}[Finite marked threshold gluing]
+\label{lem:finite-threshold-gluing}
+Fix \(R_N\), an ordinary degree, and a neutral direction.  Suppose the ordered
+affine line is cut into finitely many tails by its thresholds, and suppose the
+adjacent tail modules carry the maps in
+Hypothesis~\ref{hyp:marked-threshold}.  Then their marked boundary germs glue
+to one object of \(\mathcal C_N(S)\).  Its endpoint realizations have the same
+zero or nonzero primary projections.  These glued objects form an inverse
+system under \(R_{N+1}\to R_N\).
+\end{lemma}
+
+\begin{proof}
+At a sign or stability threshold, glue by the strict horizontal isomorphism
+\(\Phi_j\).  It identifies the marked germs, and polynomial functional
+calculus in \eqref{eq:marked-threshold-map} identifies every primary
+projection.  At a zero-mode threshold, first apply the specified
+strict specialization isomorphism to reduced nearby cycles, use \(\Phi_j\)
+there, and return through the inverse specialization isomorphism to the
+adjacent tail.  This composite intertwines formal monodromy, so polynomial
+functional calculus gives the same zero or nonzero primary projections.
+There are finitely many thresholds at fixed
+\(R_N\), so these maps have a finite ordered composite.  Their compatibility
+with Artin reduction makes the composites an inverse system.  No colimit of
+the complementary equivariant source is formed.
+\end{proof}
 
 \begin{theorem}[Conditional birational invariance of the point-row primary Boolean]
 \label{thm:birational-point-primary}
 Let \(Y_-\) and \(Y_+\) be smooth projective birational complex varieties.
-Suppose a W{\l}odarczyk completion for this birational map satisfies
-Hypothesis~\ref{hyp:marked-threshold} in every neutral affine gauge direction.
+Suppose a W{\l}odarczyk completion for this birational map is
+gauged-admissible in the sense of Definition~\ref{def:gauged-admissible} and
+satisfies Hypothesis~\ref{hyp:marked-threshold} at every Artin level,
+ordinary degree, neutral affine gauge direction, and threshold.
 Then, for every formal-monodromy eigenvalue
 \(\lambda\),
-\[
+\begin{equation}\label{eq:point-row-primary-boolean}
  \rrow_{Y_-}|_{\cP_\lambda(Y_-)}\ne0
  \quad\Longleftrightarrow\quad
- \rrow_{Y_+}|_{\cP_\lambda(Y_+)}\ne0.                       \tag{8.15}
-\]
+ \rrow_{Y_+}|_{\cP_\lambda(Y_+)}\ne0.
+\end{equation}
 Here the packets are realized through the marked cyclic continuation in the
 hypothesis; no continuation of the complementary source is part of the
 statement.
 \end{theorem}
 
 \begin{proof}
-Use the global W{\l}odarczyk completion and its orbit-cylinder class.  By
-the preceding construction, the two endpoint point rows generate the same
-marked cyclic module under the dual formal-monodromy action.  More explicitly,
-polynomial functional calculus in (8.13) gives
+Use the gauged-admissible completion and its orbit-cylinder class.
+Lemma~\ref{lem:finite-threshold-gluing} compares the two endpoint marked
+cyclic modules at every finite Artin level.  More explicitly,
+polynomial functional calculus in \eqref{eq:marked-threshold-map} gives
 \[
  \Phi_j\bigl(r_j^-e_\lambda(T_j^-)\bigr)
    =r_j^+e_\lambda(T_j^+)
 \]
 at every threshold.  Hence the relevant primary row vanishes on one side if
 and only if it vanishes on the other.  At a zero-mode threshold this equality
-is taken in the row-generated nearby-cycle modules; the preserve-and-reflect
-clause in Hypothesis~\ref{hyp:marked-threshold} transfers the vanishing
-statement to the two adjacent tail modules.  Iterate through the locally finite
-threshold system and apply Lemma~\ref{lem:cyclic-row-support} at the endpoints.
+is taken first in the row-generated reduced nearby-cycle modules and then
+transported to the adjacent tails by the strict isomorphisms
+\eqref{eq:zero-mode-specialization}.  Apply
+Lemma~\ref{lem:cyclic-row-support} at the endpoints.
 Because the Artin inverse system is separated, a projected row is nonzero
 exactly when it survives at some finite level.  This proves both implications.
 \end{proof}

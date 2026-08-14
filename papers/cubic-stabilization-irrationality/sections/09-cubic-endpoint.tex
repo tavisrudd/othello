@@ -13,11 +13,11 @@ summary of his result.
 Let \(X\subset\mathbf P^4\) be a smooth cubic threefold, let \(P\) be its
 hyperplane class, and put \(q=u^2\ne0\).  In the basis
 \(1,P,P^2,P^3\), Cai writes the small \(z\)-equation as
-\[
- z^2\partial_zS=(K+zG)S,                                    \tag{9.1}
-\]
+\begin{equation}\label{eq:cubic-small-z-equation}
+ z^2\partial_zS=(K+zG)S,
+\end{equation}
 where
-\[
+\begin{equation}\label{eq:cai-cubic-matrices}
  K=2\begin{pmatrix}
  0&6q&0&36q^2\\
  1&0&15q&0\\
@@ -26,22 +26,21 @@ where
  \end{pmatrix},
  \qquad
  G=\operatorname{diag}\!\left(\frac32,\frac12,-\frac12,-\frac32\right).
-                                                                    \tag{9.2}
-\]
+\end{equation}
 See \cite[Section~3]{Cai}.  Over \(\Q(\sqrt3)(u)\), the eigenvalues of \(K\)
 are \(6\sqrt3u,-6\sqrt3u,0,0\), and its zero eigenspace is one rank-two
 Jordan block.  Solving the first off-block Sylvester equation gives, on this
 block,
-\[
+\begin{equation}\label{eq:cubic-zero-block-data}
  M_1=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},
- \qquad (R_2)_{21}=-16/81,                                  \tag{9.3}
-\]
+ \qquad (R_2)_{21}=-16/81,
+\end{equation}
 when the Jordan link is normalized to one.  The indicial polynomial is
 therefore
-\[
+\begin{equation}\label{eq:cubic-indicial-polynomial}
  (\rho+19/18)(\rho-1/18)+16/81
-   =\rho^2+\rho+\frac5{36}.                                 \tag{9.4}
-\]
+   =\rho^2+\rho+\frac5{36}.
+\end{equation}
 Its roots are \(-1/6\) and \(-5/6\), hence the formal-monodromy eigenvalues
 of this block are \(\zeta_6^{-1}\) and \(\zeta_6\).  This direct calculation
 recovers the small-connection part of \cite[Proposition~6]{Cai}.  Cai's
@@ -53,60 +52,64 @@ the small one and preserves this rank-two block.
 The preceding calculation finds the packet but does not say whether the
 point row detects it.  That coefficient follows from one scalar period.  The
 regularized cubic quantum period is
-\[
+\begin{equation}\label{eq:cubic-quantum-period}
  F(t)=\sum_{d\geq0}\frac{(3d)!}{(d!)^5}t^d
  ={}_2F_3\!\left(
    \begin{matrix}1/3,\,2/3\\1,\,1,\,1\end{matrix};27t
- \right).                                                    \tag{9.5}
-\]
+ \right).
+\end{equation}
 For the Gamma-framed point class, multiplication by \(\Ghat_X\) and
 \(z^{c_1(X)}\) leaves the top class unchanged.  Pairing with the unit selects
 the degree-zero coefficient of the small \(I\)-function.  Up to one fixed
 nonzero normalization, its central charge is
-\[
- Z_p(z)=z^{-3/2}F(q/z^2).                                    \tag{9.6}
-\]
+\begin{equation}\label{eq:cubic-point-central-charge}
+ Z_p(z)=z^{-3/2}F(q/z^2).
+\end{equation}
 
 The algebraic part of the large-variable \({}_2F_3\) expansion has simple
 poles at \(1/3\) and \(2/3\); their difference is not integral.  The standard
 Barnes formula \cite[Equations~16.11.2 and 16.11.8]{DLMF} gives the leading
 coefficients
-\[
+\begin{equation}\label{eq:cubic-barnes-coefficients}
  C_{1/3}=\frac{\Gamma(1/3)}{\Gamma(2/3)^4},
  \qquad
- C_{2/3}=\frac{\Gamma(-1/3)}{\Gamma(1/3)^4}.                 \tag{9.7}
-\]
+ C_{2/3}=\frac{\Gamma(-1/3)}{\Gamma(1/3)^4}.
+\end{equation}
 Both are nonzero.  The sector-dependent branch phases of
 \((-x)^{-1/3}\) and \((-x)^{-2/3}\) are nonzero as well.  Substituting
-\(x=27q/z^2\) in (9.6) gives the powers
-\[
+\(x=27q/z^2\) in \eqref{eq:cubic-point-central-charge} gives the powers
+\begin{equation}\label{eq:cubic-barnes-z-powers}
  z^{-3/2}x^{-1/3}\sim z^{-5/6},
  \qquad
- z^{-3/2}x^{-2/3}\sim z^{-1/6}.                             \tag{9.8}
-\]
+ z^{-3/2}x^{-2/3}\sim z^{-1/6}.
+\end{equation}
 Thus the Gamma point section has a nonzero coefficient in both formal lines
-found in (9.4).  The flat pairing identifies inverse-monodromy lines
+found in \eqref{eq:cubic-indicial-polynomial}.  The flat pairing identifies
+inverse-monodromy lines
 nondegenerately.  Equivalently, the point row is nonzero on both dual lines.
 
 \begin{proposition}[Cubic endpoint lemma]
 \label{prop:cubic-endpoint}
 For every smooth cubic threefold \(X\),
-\[
+\begin{equation}\label{eq:cubic-point-packet}
  \rrow_X|_{\cP_{\zeta_6}(X)}\ne0,
  \qquad
- \rrow_X|_{\cP_{\zeta_6^{-1}}(X)}\ne0.                     \tag{9.9}
-\]
+ \rrow_X|_{\cP_{\zeta_6^{-1}}(X)}\ne0.
+\end{equation}
 The packet assertion follows from Cai's connection, while the point-row
-nonvanishing is the direct Barnes calculation (9.5)--(9.8).
+nonvanishing is the direct Barnes calculation
+\eqref{eq:cubic-quantum-period}--\eqref{eq:cubic-barnes-z-powers}.
 \end{proposition}
 
 \begin{remark}[Exact regression]
 The paper's verification package uses and verifies an explicit basis of
 \(\operatorname{im}K^2\oplus\ker K^2\), normalizes the nilpotent link, solves
-the first off-block Sylvester equation, and reconstructs (9.3)--(9.4) at
+the first off-block Sylvester equation, and reconstructs
+\eqref{eq:cubic-zero-block-data}--\eqref{eq:cubic-indicial-polynomial} at
 three nonzero rational specializations of the quantum parameter by exact
 rational arithmetic.  It also checks the
-hypergeometric recurrence behind (9.5) and the projective-space grading
+hypergeometric recurrence behind \eqref{eq:cubic-quantum-period} and the
+projective-space grading
 calculation below.  The proof remains the calculation displayed above.
 \end{remark}
 
@@ -118,9 +121,9 @@ multiplication by \(c_1(\mathbf P^m)\) is a weighted cyclic shift multiplied
 by \(n\).  After adjoining the \(n\)-th root of the parameter and rescaling
 the basis, it is \(nq_{\mathbf P}^{1/n}\) times the standard cyclic shift.  In its
 Fourier eigenbasis the diagonal of the grading operator is
-\[
- \frac1n\sum_{k=0}^{m}(m/2-k)=0.                             \tag{9.10}
-\]
+\begin{equation}\label{eq:projective-grading-average}
+ \frac1n\sum_{k=0}^{m}(m/2-k)=0.
+\end{equation}
 All \(n\) rank-one formal factors therefore have formal-monodromy exponent
 zero.  In particular, \(\mathbf P^{m+3}\) has no primitive-sixth packet.
 
@@ -128,19 +131,20 @@ The quantum connection of a product is the tensor connection.  Hence
 \(X\times\mathbf P^m\) has \(m+1\) copies of each cubic primitive-sixth line.
 The extended Gamma framing is multiplicative under products
 \cite[Remark~1.2]{IritaniGamma}, and the rank row is the tensor product of
-the two rank rows.  Since the rank row of \(\mathbf P^m\) is nonzero, (9.9)
-implies
-\[
+the two rank rows.  Since the rank row of \(\mathbf P^m\) is nonzero,
+\eqref{eq:cubic-point-packet} implies
+\begin{equation}\label{eq:stabilized-endpoint-contrast}
  \rrow_{X\times\mathbf P^m}
    |_{\cP_{\zeta_6}(X\times\mathbf P^m)}\ne0,
  \qquad
- \cP_{\zeta_6}(\mathbf P^{m+3})=0.                          \tag{9.11}
-\]
+ \cP_{\zeta_6}(\mathbf P^{m+3})=0.
+\end{equation}
 
 \begin{proof}[Proof of Theorem~\ref{thm:intro-cubic-conditional}]
 If \(X\times\mathbf P^m\) were rational, it would be birational to
 \(\mathbf P^{m+3}\).  Theorem~\ref{thm:birational-point-primary} would identify
-the two point-row Booleans at \(\zeta_6\).  Equation (9.11) gives the values
+the two point-row Booleans at \(\zeta_6\).
+Equation~\eqref{eq:stabilized-endpoint-contrast} gives the values
 one and zero, a contradiction.
 \end{proof}
 

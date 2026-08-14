@@ -4,10 +4,11 @@ Let \(Y\) be a smooth projective complex variety.  Iritani's Gamma integral
 structure associates a flat section \(s_Y(E)\) of the quantum connection to a
 topological \(K\)-class \(E\) and identifies the flat pairing with the Euler
 pairing \cite{IritaniGamma}.  If \(p\in Y\) is a point, then
-\[
- [s_Y(E),s_Y(\OO_p))=\chi(E,\OO_p)=\rk(E).              \tag{1.1}
-\]
-The second entry in (1.1) is therefore a distinguished flat covector.  We
+\begin{equation}\label{eq:intro-gamma-rank}
+ [s_Y(E),s_Y(\OO_p))=\chi(E,\OO_p)=\rk(E).
+\end{equation}
+The second entry in \eqref{eq:intro-gamma-rank} is therefore a distinguished
+flat covector.  We
 call it the \emph{Gamma point row}.
 
 We study whether the zero or nonzero restriction of this row to a formal
@@ -25,7 +26,9 @@ irrationality for every smooth cubic threefold.
 \label{thm:intro-cubic-conditional}
 Let \(X\subset\mathbf P^4_{\C}\) be a smooth cubic threefold.  Assume that
 every smooth projective birational map admits a W{\l}odarczyk completion
-satisfying marked threshold compatibility in the sense of
+which is gauged-admissible in the sense of
+Definition~\ref{def:gauged-admissible} and satisfies the inverse-system
+family of one-object marked comparisons in
 Hypothesis~\ref{hyp:marked-threshold}.  Then
 \(X\times\mathbf P^m\) is irrational for every \(m\geq0\).
 \end{theorem}
@@ -45,13 +48,14 @@ quantum-monodromy data instead; it makes no assertion about the Hodge
 conjecture.
 
 The unconditional endpoint contrast is
-\[
+\begin{equation}\label{eq:intro-endpoint-contrast}
  b(X\times\mathbf P^m,\cP_6)=1,
- \qquad b(\mathbf P^{m+3},\cP_6)=0.                          \tag{1.2}
-\]
+ \qquad b(\mathbf P^{m+3},\cP_6)=0.
+\end{equation}
 where an empty packet has value zero.  Here \(b\) records whether the point
 row is nonzero on the indicated packet.  Section~\ref{sec:cubic-endpoint}
-proves (1.2).  Cai's cubic connection supplies the primitive-sixth block; we
+proves \eqref{eq:intro-endpoint-contrast}.  Cai's cubic connection supplies
+the primitive-sixth block; we
 reconstruct its indicial polynomial from his matrices and compute the point
 coefficient independently from the cubic hypergeometric period.  Thus the
 cubic-specific source dependency is confined to one endpoint lemma.
@@ -61,7 +65,8 @@ The birational statement behind the application is more general.
 \begin{theorem}[Conditional point-row primary invariance]
 \label{thm:intro-birational-conditional}
 For smooth projective birational complex varieties whose global cobordism
-satisfies Hypothesis~\ref{hyp:marked-threshold}, the Gamma point row is nonzero on a
+is gauged-admissible and satisfies
+Hypothesis~\ref{hyp:marked-threshold}, the Gamma point row is nonzero on a
 formal-monodromy primary packet at one endpoint if and only if it is nonzero
 on the corresponding packet at the other endpoint.
 \end{theorem}
@@ -78,26 +83,33 @@ fixed stable-map factors.  Theorem~\ref{thm:tailwise-derived} identifies
 their fixed stacks, perfect obstruction theories, virtual classes, and
 evaluations along each affine tail.  The moving factors then give a finite-jet
 Gamma recurrence, so each tail is holonomic and tempered.  Second,
-Hypothesis~\ref{hyp:marked-threshold} identifies the finite cyclic Rees
-\(z\)-modules across the intervening thresholds while preserving formal
-monodromy and the marked point row.  Nonneutral directions are Laurent-finite,
+Hypothesis~\ref{hyp:marked-threshold} postulates an inverse-system family of
+one-object comparisons of the finite cyclic Rees \(z\)-modules across the intervening
+thresholds.  Besides preserving formal monodromy and the marked point row,
+the zero-mode specialization must identify the entire adjacent row-generated
+cyclic module with its reduced nearby-cycle realization.  Primary support is
+then preserved by polynomial functional calculus.  Nonneutral directions are Laurent-finite,
 and Rees homogenization makes both endpoint maps intertwine formal monodromy
 with the same half-Tate shift.  The resulting cyclic module determines which
 primary packets the point row detects.
 
-The remaining hypothesis continues the marked cyclic module, not the complete
-nonlinear quantum source.  Its verification is a marked connection problem
-and does not follow from the available linear GLSM contour theorem.
+Beyond the gauged-admissibility conditions, the remaining threshold hypothesis
+continues the marked cyclic module, not
+the complete nonlinear quantum source.  It is finite at each Artin-energy
+truncation but is a family over all truncations, ordinary degrees, neutral
+directions, and thresholds.  No general geometric threshold is verified in
+this paper.  The comparison is a marked irregular-connection problem and
+does not follow from the available linear GLSM contour theorem.
 
 The paper also records two local results which motivated the global
 construction.  The first concerns a smooth projective simple VGIT wall
 \(X_-\dashrightarrow X_+\) in the sense of Gu--Yu--Yu, oriented so that
 \(r_+<r_-\) \cite{GuYuYu}.  Their comparison is a formal, pairing-preserving
 decomposition
-\[
+\begin{equation}\label{eq:intro-vgit-decomposition}
  \QDM(X_-)
- \cong \QDM(X_+)\oplus\bigoplus_j\QDM(S)_j               \tag{1.3}
-\]
+ \cong \QDM(X_+)\oplus\bigoplus_j\QDM(S)_j.
+\end{equation}
 over an exceptional Laurent completion, where \(S\) is the wall quotient.
 Choose corresponding points \(p_\pm\) in the common open set.
 
@@ -105,9 +117,9 @@ Choose corresponding points \(p_\pm\) in the common open set.
 \label{thm:intro-simple-wall}
 At the extremal specialization used in the Gu--Yu--Yu comparison, the
 ambient coordinate of the point class is exact when \(r_+<r_-\):
-\[
- \pr_{X_+}\Phi([p_-])=[p_+].                              \tag{1.4}
-\]
+\begin{equation}\label{eq:intro-common-open-point}
+ \pr_{X_+}\Phi([p_-])=[p_+].
+\end{equation}
 No assertion is made that every wall coordinate of \(\Phi([p_-])\) vanishes.
 \end{theorem}
 
@@ -141,7 +153,8 @@ of \cite{LeeLinQuWang} to full descendant invariance.
 
 The discrepant local case contains a further frame comparison.  A formal
 summand, its sectorial lift, and the intrinsic large-radius Gamma section are
-different objects.  Gu--Yu--Yu prove (1.3) in a Laurent/formal
+different objects.  Gu--Yu--Yu prove
+\eqref{eq:intro-vgit-decomposition} in a Laurent/formal
 coefficient ring, while Shen--Shoemaker identify Gamma asymptotic classes at
 an extremal specialization \cite{ShenShoemaker}.  Passing from these results
 to an intrinsic Gamma point row requires a common pairing-preserving
@@ -176,6 +189,7 @@ formalism and the local identities.  Sections~\ref{sec:incomplete-gamma} and
 Section~\ref{sec:two-wall} isolates the local composition condition they
 force.  Section~\ref{sec:global-transport} proves the Gamma-ratio reduction
 and conditional Theorem~\ref{thm:intro-birational-conditional} by the
-common-master method.  Section~\ref{sec:cubic-endpoint} proves (1.2) and
+common-master method.  Section~\ref{sec:cubic-endpoint} proves
+\eqref{eq:intro-endpoint-contrast} and
 Theorem~\ref{thm:intro-cubic-conditional}.  Section~\ref{sec:scope} records the source,
 analytic, and verification boundaries.

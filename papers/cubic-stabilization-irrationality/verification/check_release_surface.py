@@ -49,11 +49,14 @@ required_labels = {
     "hyp:rank-zero-target",
     "thm:rank-zero-target",
     "eq:blockwise-boundary-marking",
+    "def:gauged-admissible",
+    "lem:point-insertion-row",
     "prop:support-collapse",
     "prop:gamma-ratio-reduction",
     "thm:tailwise-derived",
     "prop:clutching-tail-holonomicity",
     "hyp:marked-threshold",
+    "lem:finite-threshold-gluing",
     "lem:cyclic-row-support",
     "rem:neutral-boundary",
     "thm:birational-point-primary",
@@ -75,8 +78,9 @@ if "They are not asserted to arise from smooth projective quantum connections" n
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
 if (
-    "Hypothesis~\\ref{hyp:marked-threshold} asks" not in scope_text
+    "Hypothesis~\\ref{hyp:marked-threshold} is an inverse-system family" not in scope_text
     or "separate holonomicity does not determine the threshold maps" not in scope_text
+    or "gauged-admissibility conditions" not in scope_text
 ):
     errors.append("global continuation boundary is not visibly conditional")
 
@@ -85,6 +89,11 @@ if "\\begin{theorem}[Rank-one tailwise derived identification]" not in global_te
     errors.append("rank-one tailwise derived identification is not a theorem")
 if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
     errors.append("marked threshold compatibility is not an explicit hypothesis")
+if (
+    "stable equals semistable for the chamber polarizations" not in global_text
+    or "not imposed at a critical wall" not in global_text
+):
+    errors.append("gauged-admissibility incorrectly includes critical wall stability")
 if "prove neither" not in scope_text:
     errors.append("Aleshkin--Liu nonlinear source boundary is missing")
 if "the proposition does not construct the common realization" not in global_text:
@@ -98,7 +107,7 @@ readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
-    r"Assume that every smooth projective birational map.*?finite cyclic Rees.*?Gamma point row.*?We prove that",
+    r"Assume that every smooth projective birational map.*?gauged-admissible.*?marked threshold comparisons.*?We prove that",
     main_text,
     flags=re.DOTALL,
 ):
@@ -109,7 +118,15 @@ if "Theorem~\\ref{thm:tailwise-derived}" not in intro_text:
     errors.append("introduction does not name the derived-tail theorem")
 if "\\ref{hyp:marked-threshold}" not in intro_text:
     errors.append("headline theorem does not name the marked-threshold hypothesis")
-if "Under this hypothesis" not in readme_text:
+if (
+    "strict isomorphisms" not in global_text
+    or "eq:zero-mode-specialization" not in global_text
+    or "no statement about an individual primary" not in global_text
+    or "one marked finite locally" not in global_text
+    or "wall-dependent change of input frame is not allowed" not in global_text
+):
+    errors.append("zero-mode hypothesis is not framed as a whole-module isomorphism")
+if not re.search(r"Under these\s+assumptions", readme_text):
     errors.append("README cubic conclusion is not visibly conditional")
 if ledger_path.is_file():
     ledger_text = ledger_path.read_text(encoding="utf-8")
@@ -130,7 +147,7 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Assuming the marked threshold compatibility hypothesis" not in metadata.get(
+if "Assuming a gauged-admissible marked Wlodarczyk completion" not in metadata.get(
     "description", ""
 ):
     errors.append("Zenodo description does not lead with the conditional hypothesis")

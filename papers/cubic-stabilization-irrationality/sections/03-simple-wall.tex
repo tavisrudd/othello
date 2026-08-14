@@ -6,24 +6,24 @@ hypotheses of \cite[Definition~3.2]{GuYuYu}: the chamber quotients and wall
 quotient \(S\) are smooth and projective, and the normal weights at the wall
 are \(\pm1\).  Assume \(r_+<r_-\) and write \(\nu=r_--r_+\).
 Theorem~6.2 of \cite{GuYuYu} gives a pairing-preserving isomorphism
-\[
+\begin{equation}\label{eq:simple-wall-qdm-decomposition}
  \Phi:\QDM(X_-)^{\mathrm{La,red}}
  \longrightarrow
  (\tau_+^{\mathrm{red}})^*\QDM(X_+)^{\mathrm{La,red}}
  \oplus\bigoplus_{j=0}^{\nu-1}
- (\zeta_j^{\mathrm{red}})^*\QDM(S)^{\mathrm{La,red}}.       \tag{3.1}
-\]
+ (\zeta_j^{\mathrm{red}})^*\QDM(S)^{\mathrm{La,red}}.
+\end{equation}
 Its coefficient ring is Laurent in a fractional wall variable and complete
 in the remaining Novikov and bulk variables.  We use only the extremal
-specialization of (3.1).
+specialization of \eqref{eq:simple-wall-qdm-decomposition}.
 
 Let \(p_\pm\) be corresponding points in the common open set.  Gu--Yu--Yu's
 Lemma~3.27 constructs a unique master-space lift \(a_p\) with
-\[
+\begin{equation}\label{eq:master-point-restrictions}
  \kappa_+(a_p)=[p_+],\qquad
  \kappa_-(a_p)=[p_-],\qquad
- a_p|_{F_0}=0.                                             \tag{3.2}
-\]
+ a_p|_{F_0}=0.
+\end{equation}
 The last equality follows from the proof of that lemma: the wall restriction
 is the polynomial determined by the restriction of \([p_+]\) to the positive
 exceptional locus, which is zero.
@@ -31,10 +31,11 @@ exceptional locus, which is zero.
 \begin{theorem}[Exact ambient point coordinate]
 \label{thm:simple-wall-point-column}
 After setting the master Novikov and bulk variables to zero while retaining
-the wall variable, the ambient coordinate of (3.1) satisfies
-\[
- \pr_{X_+}\Phi([p_-])=[p_+].                              \tag{3.3}
-\]
+the wall variable, the ambient coordinate of
+\eqref{eq:simple-wall-qdm-decomposition} satisfies
+\begin{equation}\label{eq:simple-wall-point-column}
+ \pr_{X_+}\Phi([p_-])=[p_+].
+\end{equation}
 \end{theorem}
 
 \begin{proof}
@@ -42,43 +43,44 @@ Let \(q_{\mathrm w}=S_{F_0}\) denote the wall variable, let \(\lambda\) be the
 equivariant wall frequency, and put \(D=\kappa_+(\lambda)\).
 Lemma~5.10 of \cite{GuYuYu} applies to \(a_p\) because its wall
 restriction is zero.  It gives
-\[
- \FT_{X_-}(a_p)=[p_-]                                     \tag{3.4}
-\]
+\begin{equation}\label{eq:negative-fourier-point}
+ \FT_{X_-}(a_p)=[p_-].
+\end{equation}
 at the specialization under consideration.  Lemma~5.8 gives only
-\[
- \FT_{X_+}(a_p)=[p_+]+O(q_{\mathrm w}).                    \tag{3.5}
-\]
+\begin{equation}\label{eq:positive-fourier-point-tail}
+ \FT_{X_+}(a_p)=[p_+]+O(q_{\mathrm w}).
+\end{equation}
 
 Apply Lemma~5.10 again to \(\lambda a_p\).  Its wall restriction is zero and
-\[
- \kappa_-(\lambda a_p)=\kappa_-(\lambda)[p_-]=0           \tag{3.6}
-\]
+\begin{equation}\label{eq:negative-frequency-kernel}
+ \kappa_-(\lambda a_p)=\kappa_-(\lambda)[p_-]=0.
+\end{equation}
 by degree.  The completed source in Proposition~5.2 is finite free, and the
 negative Fourier map in Theorem~5.5 and Proposition~5.9 is an isomorphism
 over that completed ring.  Base change to the extremal specialization
-preserves the isomorphism.  Equations (3.6) and Lemma~5.10 therefore imply
+preserves the isomorphism.  Equation~\eqref{eq:negative-frequency-kernel} and
+Lemma~5.10 therefore imply
 that \(\lambda a_p\) is zero in the specialized completed source.  In
 particular,
-\[
- \FT_{X_+}(\lambda a_p)=0.                                 \tag{3.7}
-\]
+\begin{equation}\label{eq:positive-frequency-kernel}
+ \FT_{X_+}(\lambda a_p)=0.
+\end{equation}
 
 Fourier covariance, Proposition~4.14(2) of \cite{GuYuYu}, together with the
-quantum-D-module construction of Proposition~4.21, rewrites (3.7) as
-\[
+quantum-D-module construction of Proposition~4.21, rewrites
+\eqref{eq:positive-frequency-kernel} as
+\begin{equation}\label{eq:positive-fourier-connection}
  \bigl(zq_{\mathrm w}\partial_{q_{\mathrm w}}+D\star_{\tau_+(q_{\mathrm w})}
  +(q_{\mathrm w}\partial_{q_{\mathrm w}}\tau_+(q_{\mathrm w}))
    \star_{\tau_+(q_{\mathrm w})}\bigr)
- \FT_{X_+}(a_p)=0.                                        \tag{3.8}
-\]
+ \FT_{X_+}(a_p)=0.
+\end{equation}
 Here \(\tau_+(q_{\mathrm w})\) is the specialized receiver coordinate.  Write
-\[
+\begin{equation}\label{eq:point-tail-expansions}
  \FT_{X_+}(a_p)=[p_+]+\sum_{k>0}q_{\mathrm w}^kv_k,
  \qquad
  \tau_+(q_{\mathrm w})=f(q_{\mathrm w})\mathbf1+\eta(q_{\mathrm w}),
-                                                               \tag{3.9}
-\]
+\end{equation}
 where \(f(0)=0=\eta(0)\) and \(\eta(q_{\mathrm w})\) has positive
 cohomological degree.
 Lemma~5.8 gives \(v_k\in H^*(X_+)[z]\).  Every nonconstant stable map in a
@@ -88,15 +90,16 @@ and misses \(p_+\).  Thus the positive-wall quantum corrections and
 
 We prove simultaneously that every \(v_k\) and every coefficient of \(f\)
 vanishes.  Suppose this is known below order \(m>0\), and write
-\([q_{\mathrm w}^m]f=c_m\).  The coefficient of \(q_{\mathrm w}^m\) in (3.8) is
-\[
- (zm\,\id+D\cup-)v_m+mc_m[p_+]=0.                           \tag{3.10}
-\]
+\([q_{\mathrm w}^m]f=c_m\).  The coefficient of \(q_{\mathrm w}^m\) in
+\eqref{eq:positive-fourier-connection} is
+\begin{equation}\label{eq:first-point-tail-coefficient}
+ (zm\,\id+D\cup-)v_m+mc_m[p_+]=0.
+\end{equation}
 If \(v_m\ne0\), the highest power of \(z\) in \(zmv_m\) cannot be cancelled
 by either \(D\cup v_m\) or the constant term \(mc_m[p_+]\), because \(v_m\)
 is polynomial in \(z\).  Hence \(v_m=0\), and then \(c_m=0\).  Induction
 kills the complete tail and the possible unit part of the receiver
-coordinate, proving (3.3).
+coordinate, proving \eqref{eq:simple-wall-point-column}.
 \end{proof}
 
 \begin{warning}\label{warn:center-coordinates}
@@ -111,18 +114,20 @@ unit correction.
 \end{warning}
 
 The following consequence isolates the extra analytic premise required to
-turn (3.3) into a Gamma-row statement.
+turn \eqref{eq:simple-wall-point-column} into a Gamma-row statement.
 
 \begin{hypothesis}[One-wall sectorial realization]
 \label{hyp:one-wall-sectorial}
 At a fixed nonzero wall parameter there is a pairing-preserving sectorial
-realization of (3.1) on one common admissible sector such that:
+realization of \eqref{eq:simple-wall-qdm-decomposition} on one common
+admissible sector such that:
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item the ambient formal summand realizes the intrinsic sectorial solution
   space of \(X_+\);
 \item the wall summands realize the Gamma spans of the wall functors in the
   Shen--Shoemaker semiorthogonal decomposition;
-\item the realized point row has ambient coordinate (3.3).
+\item the realized point row has ambient coordinate
+  \eqref{eq:simple-wall-point-column}.
 \end{enumerate}
 \end{hypothesis}
 
@@ -132,9 +137,9 @@ Under Hypothesis~\ref{hyp:one-wall-sectorial}, the point row restricts to the
 point row of \(X_+\) on the ambient packet and vanishes on every wall packet.
 In particular, for the whole generalized \(\zetaSix\) packet in this one
 receiver,
-\[
- b(X_-,\cP_6(X_-))=b(X_+,\cP_6(X_+)).                       \tag{3.11}
-\]
+\begin{equation}\label{eq:simple-wall-primary-boolean}
+ b(X_-,\cP_6(X_-))=b(X_+,\cP_6(X_+)).
+\end{equation}
 \end{corollary}
 
 \begin{proof}
@@ -145,7 +150,7 @@ the common open gives zero Euler characteristic.  Shen--Shoemaker's oriented
 Gamma asymptotics identify these supported classes with the wall blocks on
 the chosen common sector \cite{ShenShoemaker}.  Hence the point row vanishes
 there.  Restricting the resulting whole-block identity to the generalized
-\(\zetaSix\) packet gives (3.11).
+\(\zetaSix\) packet gives \eqref{eq:simple-wall-primary-boolean}.
 \end{proof}
 
 The hypothesis is not a reformulation of the cited formal theorems.

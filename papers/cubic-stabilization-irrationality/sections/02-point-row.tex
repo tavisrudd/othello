@@ -4,31 +4,30 @@ We fix the pairing convention before discussing wall crossing.  Let
 \(\mathcal S(Y)\) denote a space of flat sections of the quantum connection on
 a domain where the Gamma framing is defined.  Iritani's section associated
 with \(E\in K^0_{\mathrm{top}}(Y)\) has the form
-\[
+\begin{equation}\label{eq:gamma-framed-section}
  s_Y(E)=L_Y(\tau,z)z^{-\mu}z^{c_1(Y)}
  (2\pi)^{-\dim Y/2}\Ghat_Y(2\pi i)^{\deg/2}\operatorname{ch}(E),
-                                                               \tag{2.1}
-\]
+\end{equation}
 up to the standard choice of normalization.  The flat pairing is
-\[
+\begin{equation}\label{eq:flat-euler-pairing}
  [s_1,s_2):=(s_1(\tau,e^{-\pi i}z),s_2(\tau,z))_Y,
- \qquad [s_Y(E),s_Y(F))=\chi(E,F).                  \tag{2.2}
-\]
+ \qquad [s_Y(E),s_Y(F))=\chi(E,F).
+\end{equation}
 See \cite[Section~1]{IritaniGamma}.
 
 \begin{definition}[Gamma point row]\label{def:point-row}
 For \(p\in Y\), the Gamma point row is
-\[
- \rrow_{Y,p}(v):=[v,s_Y(\OO_p)).                       \tag{2.3}
-\]
+\begin{equation}\label{eq:gamma-point-row}
+ \rrow_{Y,p}(v):=[v,s_Y(\OO_p)).
+\end{equation}
 On Gamma-framed \(K\)-classes it is ordinary rank:
-\[
- \rrow_{Y,p}(s_Y(E))=\chi(E,\OO_p)=\rk(E).             \tag{2.4}
-\]
+\begin{equation}\label{eq:point-row-rank}
+ \rrow_{Y,p}(s_Y(E))=\chi(E,\OO_p)=\rk(E).
+\end{equation}
 \end{definition}
 
 Putting the point in the first entry instead would introduce the usual
-dimension sign.  We use (2.3) throughout.
+dimension sign.  We use \eqref{eq:gamma-point-row} throughout.
 
 Three levels of structure occur in the arguments below.
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -43,7 +42,8 @@ Three levels of structure occur in the arguments below.
 A positive-\(z\) gauge can identify formal quantum D-modules without
 identifying (iii) across two incompatible Novikov completions.  Likewise,
 two sectorial lifts of the same formal packet can differ by a Stokes shear.
-The zero or nonzero restriction of (2.3) is therefore not determined by the
+The zero or nonzero restriction of \eqref{eq:gamma-point-row} is therefore
+not determined by the
 formal packet alone.
 
 We write \(\cP_6(Y)\) for the generalized formal-monodromy block with
@@ -53,13 +53,13 @@ different lift is different data.  An empty block has Boolean value zero.
 
 \begin{definition}[Point-row Boolean]\label{def:boolean}
 For a sectorially realized formal packet \(\cP\subset\mathcal S(Y)\), put
-\[
+\begin{equation}\label{eq:point-row-boolean}
  b(Y,\cP)=
  \begin{cases}
  1,&\rrow_{Y,p}|_{\cP}\ne0,\\
  0,&\rrow_{Y,p}|_{\cP}=0.
- \end{cases}                                                \tag{2.5}
-\]
+ \end{cases}
+\end{equation}
 \end{definition}
 
 The paper's exact wall identities either identify the intrinsic point

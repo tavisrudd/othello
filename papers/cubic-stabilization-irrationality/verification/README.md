@@ -5,8 +5,9 @@ Run the complete paper gate from the repository root:
     make check
 
 The gate checks the public claim boundary, rejects internal task language and
-unaudited priority phrases, checks the cubic endpoint certificate, lints TeX
-spacing, builds the manuscript, and rejects LaTeX warnings.
+unaudited priority phrases, checks the cubic endpoint certificate, builds the
+manuscript, and rejects LaTeX warnings.  The monorepo authority gate also runs
+its shared TeX-spacing linter before this common release gate.
 
 The manuscript check builds from a clean temporary copy of the source with a
 pinned source date and byte-compares that deterministic result with the tracked

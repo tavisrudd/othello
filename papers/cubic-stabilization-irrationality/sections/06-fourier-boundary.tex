@@ -3,20 +3,21 @@
 
 The incomplete-Gamma jump has an elementary differential-algebraic shadow.
 For \(g(x)=\Gamma(1-\alpha,x)\),
-\[
- (\partial_x+1+\alpha/x)\partial_xg=0.                         \tag{6.1}
-\]
+\begin{equation}\label{eq:incomplete-gamma-differential-shadow}
+ (\partial_x+1+\alpha/x)\partial_xg=0.
+\end{equation}
 Differentiation forgets the constant solution, and that constant is the
 additive datum in the continuation formula.
 
 Let \(D_t=\C\langle t,\partial_t\rangle\).  Under algebraic Fourier transform,
-\[
+\begin{equation}\label{eq:fourier-constant-delta}
  \C[t]=D_t/D_t\partial_t
  \quad\longmapsto\quad
- \delta_0=D_\tau/D_\tau\tau.                                \tag{6.2}
-\]
+ \delta_0=D_\tau/D_\tau\tau.
+\end{equation}
 Localizing at \(\tau\) kills \(\delta_0\).  Localized partial
-Fourier--Laplace therefore cannot recover the extension constant in (6.1).
+Fourier--Laplace therefore cannot recover the extension constant in
+\eqref{eq:incomplete-gamma-differential-shadow}.
 The four-term GKZ/Gauss--Manin comparison in \cite{RSSW} uses the same
 nonconservativity.
 
@@ -28,9 +29,9 @@ Let
  D_{\tau_1,\tau_2}/D_{\tau_1,\tau_2}(\tau_1,\tau_2).
 \]
 Localization at either \(\tau_i\) kills \(\delta_{00}\), whereas
-\[
- \FL^{-1}(\delta_{00})=\OO_{\A^2}                            \tag{6.3}
-\]
+\begin{equation}\label{eq:punctual-inverse-transform}
+ \FL^{-1}(\delta_{00})=\OO_{\A^2}
+\end{equation}
 up to shift and sign conventions.  Thus an object supported at the
 intersection of two deleted Fourier boundaries can have generic-rank-one
 inverse transform.
@@ -64,10 +65,10 @@ the kernel of the point row makes the quotient one-dimensional only
 tautologically: invariance of that kernel is the theorem one seeks.
 
 The unlocalized boundary map
-\[
+\begin{equation}\label{eq:unlocalized-boundary-map}
  \FL(M)\longrightarrow j_*j^*\FL(M),\qquad
- j:\Gm\hookrightarrow\A^1,                                  \tag{6.4}
-\]
+ j:\Gm\hookrightarrow\A^1,
+\end{equation}
 retains the missing object.  In a two-coordinate problem one must also retain
 the orientation, duality, and \(!\to *\) or
 \(\operatorname{can}/\operatorname{var}\) maps of the complete Cech boundary
