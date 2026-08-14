@@ -126,3 +126,9 @@ The remaining mathematical problems are exactly the two stated hypotheses.
 Tailwise holonomicity, formal monodromy, pairing, integrality, or localized
 Fourier support alone do not imply them; the paper's three explicit
 countermodels establish those negative boundaries.
+
+The committed authority was exported from source `d85a4ccbf` to the clean
+local standalone paper repository at commit `e487363`; its `make check` gate
+reproduces the 22-page PDF hash above.  The portfolio summary is synchronized
+to local commit `00011eb`.  Neither repository was pushed, and the live Zenodo
+record was not mutated.

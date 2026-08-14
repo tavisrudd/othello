@@ -166,7 +166,10 @@ style-reviewed surface is authority commit `505f2acdc`, PDF SHA-256
 the GW/POT, D-module/Stokes, and adjacent cold-reader passes all returned GO,
 and `make check` is warning-free and deterministic.  The title, abstract,
 README, Zenodo metadata, claim ledger, and portfolio summary expose both
-hypotheses.  Review records are
+hypotheses.  Export source `d85a4ccbf` is synchronized to the clean local
+paper repository at `e487363` and the portfolio summary to `00011eb`; both
+remain unpushed, and the live Zenodo version still needs a deliberate release
+update.  Review records are
 `../2026-08-13-c907-gamma-point-row-reviewer-dossier.md` and
 `../2026-08-13-c907-gamma-point-row-cold-read-synthesis.md`.
 That repair is now a reviewed standalone ten-page correction note at
