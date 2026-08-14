@@ -2,12 +2,14 @@
 
 Date: 2026-08-13
 
-Status: exact reduction and two structural no-go results.  The cheapest
+Status: exact reduction and three structural no-go results.  The cheapest
 unmarked singular shadow fails on the safe `dP7` peak.  Quasi-symmetric
-completion marks the correct vanishing category before confluence, but no
-published theorem carries that marking through the nonconvex discrepant
-confluence.  The remaining scalar is the zero-section multiplicity of the
-output vanishing cycle; its vanishing is equivalent to the Gold rank row.
+completion marks the correct vanishing category before confluence, but the
+localized Fourier--Laplace functor used in the regular-to-irregular passage
+is nonconservative on exactly the tame/free summands which can carry the
+rank row.  Thus the balanced-parent marking cannot by itself prove Gold.
+The remaining scalar is the zero-section multiplicity of the output
+vanishing cycle; its vanishing is equivalent to the Gold rank row.
 
 ## 1. What the dangerous object is
 
@@ -146,8 +148,49 @@ creates the forbidden ambient target.  Therefore one cannot simply say that
 the supported parent monodromy remains supported after deleting the
 compensators.
 
-The quasi-symmetric completion reduces the missing theorem to a smaller
-one, but does not prove it:
+There is a stronger obstruction than the absence of a published theorem.
+The standard homogenized-GKZ passage to the irregular Landau--Ginzburg
+system uses **localized partial Fourier--Laplace transform**.  On global
+sections it is ordinary Fourier--Laplace followed by localization at the
+dual derivative.  Consequently
+
+\[
+ \mathbf C[t]=D_t/D_t\partial_t
+ \quad\longmapsto\quad 0.                                    \tag{6}
+\]
+
+Reichelt--Sevenheck--Walther use exactly this fact: in the four-term
+comparison between the homogenized GKZ module and the torus Gauss--Manin
+module, the two outer free `O`-modules disappear under localized
+Fourier--Laplace.  The functor is exact, but not conservative.
+
+This is not an irrelevant kernel.  The incomplete-Gamma countermodel (4)
+satisfies
+
+\[
+ \bigl(\partial_x+1+\alpha/x\bigr)\partial_x g=0,
+ \qquad g=\Gamma(1-\alpha,x),                                 \tag{7}
+\]
+
+and differentiation gives an exact sequence of solution spaces
+
+\[
+ 0\longrightarrow \mathbf C\!\cdot\!1
+ \longrightarrow \operatorname{Sol}(7)
+ \xrightarrow{\partial_x}
+ \operatorname{Sol}(\partial_x+1+\alpha/x)
+ \longrightarrow0.                                           \tag{8}
+\]
+
+The forbidden ambient Stokes coefficient is precisely the constant of
+integration forgotten by the last map.  Equations (6)--(8) show that the
+kernel of localized confluence is large enough to contain the dangerous
+marking, even for an algebraic geometric period with the required Kummer
+exponent.  Tensoring (6) with an ambient primitive-sixth atom also shows
+that formal-monodromy separation does not repair the loss.
+
+Therefore the quasi-symmetric completion reduces the missing theorem only
+after retaining the deleted boundary datum:
 
 > **Saturated rank-row confluence lemma.**  Under simultaneous compensator
 > confluence, the categorical/window vanishing lattice of the balanced
@@ -156,7 +199,53 @@ one, but does not prove it:
 
 This is a numerical, one-row version of nonconvex quantum-Serre compatibility
 with the Gamma lattice.  It is strictly weaker than a full discrepant
-schober/QDM comparison.
+schober/QDM comparison, but it **cannot** be deduced from the localized GKZ
+system alone.  It must be a theorem about the unlocalized transform and its
+boundary triangle.
+
+### The surviving singular shadow
+
+Let `j:G_m -> A1_tau` be the localization used by partial Fourier--Laplace.
+The missing datum is the cone of the unlocalized-to-localized map
+
+\[
+ \mathrm{FL}(M)\longrightarrow j_*j^*\mathrm{FL}(M),          \tag{9}
+\]
+
+which is supported at `tau=0`.  Equivalently it is the marked
+nearby/vanishing-cycle boundary morphism (`can/var`, or the corresponding
+`V`-filtration extension class) at the deleted Fourier coordinate.  Gold is
+reduced to proving that the primitive-sixth carrier component of this
+boundary morphism has zero output zero-section multiplicity.
+
+This is the first singular shadow which has not been falsified.  It is also
+minimal: discarding (9) produces the exact incomplete-Gamma ambiguity, while
+retaining the whole unlocalized GKZ module is more information than the
+rank row needs.
+
+It is also already present elsewhere in the C907 architecture.  Under
+Riemann--Hilbert, (9) is the same minimum datum isolated in
+`2026-08-13-c907-oriented-residual-excision-reduction.md`: the full
+
+\[
+ K_!\longrightarrow K_*;\qquad \operatorname{can},\operatorname{var}
+                                                               \tag{10}
+\]
+
+diagram, with Verdier duality, orientations, and an ordered nonbraiding path
+star.  The order-zero proper-support theorem proves the support/rank half of
+(10) in the toric pilot by intersecting the bad images of two proper models.
+The negative-shadow audit now proves that the directed data left in (10) are
+not optional: localized Fourier--Laplace and unmarked Morse data both forget
+exactly enough to permit (8).
+
+Thus the strongest combined route is a **double-boundary cleanliness
+theorem**.  A one-wall anomaly lies in the boundary cone (9).  Away from the
+second unstable boundary the second wall map is an isomorphism, so its
+generic-rank output remains zero.  Only the intersection of the two proper
+bad images can contribute to (3).  This is the same two-model mechanism
+already proved in the order-zero pilot; Gold asks for its carrier-dressed
+unit-circuit version, together with the directed diagram (10).
 
 ## 4. Structural filters which remain valid
 
@@ -169,12 +258,14 @@ A dangerous block must satisfy all of the following.
    are killed by the rank row; only an invariant combination can survive.
 4. **Zero-section output.**  Its marked vanishing cycle must have nonzero
    generic output rank, i.e. violate (3).
-5. **Confluence escape.**  In a balanced completion it must arise by loss of
-   saturation/support during the nonconvex compensator limit.
+5. **Confluence escape.**  In a balanced completion it must arise from the
+   `tau=0` boundary cone (9), the information killed by localized
+   Fourier--Laplace.
 
 Items 1--3 are cheap necessary shadows and discard many terms.  The `dP7`
 calculation proves they cannot discard every safe peak.  Item 4 is the exact
-binary detector.  Item 5 is the most structured remaining attack on it.
+binary detector.  Item 5 is now a concrete boundary-cycle calculation,
+rather than an unspecified confluence theorem.
 
 ## 5. What the C908 lattice can and cannot see
 
@@ -198,6 +289,11 @@ specialization**, not the particular `2`-primary lattice.
 - Iritani--Mann--Mignon, *Quantum Serre theorem as a duality between quantum
   D-modules*, arXiv:1412.4523, treats convex quantum Serre/QDM duality; it
   does not supply the two-order nonconvex Gamma-lattice confluence above.
+- Reichelt--Sevenheck--Walther, *Algebraic aspects of hypergeometric
+  differential equations*, arXiv:2004.07262, Definition 5.6 and the
+  discussion following its four-term sequence, states that localized
+  partial Fourier--Laplace kills the outer free modules because
+  `C[t]=D_t/D_t partial_t` localizes to zero.
 
 ## EJ / TT / AA
 
@@ -205,5 +301,6 @@ specialization**, not the particular `2`-primary lattice.
   the output zero-section multiplicity (3).
 - **TT:** an `A1` braid, a geometric period, and even an integral paired
   Stokes lattice do not say whether the vanishing cycle is boundary-supported.
-- **AA:** balance the weights, use the proved GKZ schober upstairs, and prove
-  only saturation of the supported rank row under compensator confluence.
+- **AA:** balance the weights and use the proved GKZ schober upstairs, but
+  retain the unlocalized `tau=0` boundary triangle; the only remaining
+  scalar is its primitive-sixth output zero-section multiplicity.

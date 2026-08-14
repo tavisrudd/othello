@@ -294,6 +294,19 @@ the target.  The sharpened Gold target is therefore the **saturated rank-row
 confluence lemma**, recorded with the complete shadow sieve in
 `../2026-08-13-c907-marked-singular-shadow-sieve.md`.
 
+The confluence target has now been cut more sharply.  Localized partial
+Fourier--Laplace is exact but nonconservative: it kills free constant
+modules, and the incomplete-Gamma anomaly is exactly a lost constant of
+integration.  Hence the balanced-parent GKZ/window theorem cannot determine
+the rank row after localization.  The surviving datum is the `tau=0`
+boundary cone of the unlocalized transform, equivalently the full
+`K_! -> K_*; can,var` diagram already isolated by oriented residual
+excision.  Combining the one-wall theorem with proper support shows that a
+peak anomaly can occur only in the intersection of the two walls' proper
+bad images.  The next theorem is therefore a carrier-dressed
+**double-boundary cleanliness** statement for fivefold unit circuits, not a
+general Stokes computation.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
