@@ -58,6 +58,37 @@ with the linear-presentation tails in the same equivariant input-and-derivative
 frame.  This is now the exact gap between the positive model and a literal
 example of the manuscript hypothesis.
 
+The smallest blowup presentation makes the marked input completely explicit.
+Woodward's Example 5.23 presents \(\mathbf P^2\) and
+\(\operatorname{Bl}_p\mathbf P^2\) as the two quotients of \(\mathbf C^4\)
+by \((\mathbf C^\times)^2\) with weights
+\[
+ (1,0),(1,0),(1,1),(0,1).
+\]
+Write \(x,y\in H^2_{(\mathbf C^\times)^2}(\mathbf C^4)\) for the two
+character classes.  In the \(\mathbf P^2\) chamber the Kirwan map sends
+\(x\mapsto H\) and \(y\mapsto0\).  In the blowup chamber it sends
+\(x\mapsto H-E\), \(y\mapsto E\), and \(x+y\mapsto H\).  Therefore the
+single ordinary equivariant class
+\[
+ a_p=x(x+y)
+\]
+maps to the point class on both sides.  At the intervening wall the fixed
+quotient is a point, so this positive-degree class restricts to zero.  Thus
+the affine model passes the marked-input test in ordinary equivariant
+cohomology; compact support is not needed for this example.
+
+This calculation does **not** make the affine model a literal instance of
+the manuscript's admissible completion.  The affine presentation has a
+rank-two gauge torus, whereas the cobordism in Definition 8.1 has one
+residual \(\mathbf C^\times\).  Quotienting one torus factor first gives a
+smooth quasiprojective rank-one master, but that master contains projective
+curve classes.  Woodward's vector-space computation no longer identifies
+its clutching tails without a quantum reduction-in-stages theorem.  Hence
+dropping the word ``projective'' from Definition 8.1 would not close the
+remaining comparison; the obstruction is the rank-one common-frame descent,
+not properness of the two endpoint quotients or existence of the point lift.
+
 ## Proof
 
 Iritani's Theorem 1.3, assembled from Theorems 7.25, 7.31, and 7.33, gives
@@ -185,6 +216,10 @@ presented as a proof for the original flip.
   `arXiv:2508.15770`; PDF SHA-256
   `9c00f826cb13ad243bd2ad126e74733cacf650a385160a11adc785693c01a358`.
 
+- Chris T. Woodward, *Quantum Kirwan morphism and Gromov--Witten invariants
+  of quotients II*, arXiv:1408.5864v4, especially Examples 5.23 and 5.25.
+  Cached key `arXiv:1408.5864`; PDF SHA-256
+  `018530b8cc031ab5020120259ee0f4eca0688829c79076d0d603cb76f91d349c`.
 - Chris T. Woodward, *Quantum Kirwan morphism and Gromov--Witten invariants
   of quotients III*, arXiv:1408.5869, especially Example 9.15 and equations
   (63)--(65).  Cached key `arXiv:1408.5869`; PDF SHA-256

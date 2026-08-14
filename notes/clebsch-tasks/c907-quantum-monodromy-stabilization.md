@@ -8,9 +8,13 @@ compatibility hypothesis.  Tailwise derived identification and holonomicity
 are proved.  Iritani's weak-Fano toric blowups verify the intrinsic marked
 Gamma/QDM mechanism, and Woodward's toric graph-potential formula identifies
 the same analytic one-object and marked row in the linear toric gauged model.
-A literal instance for the manuscript's projective master still requires a
-quantum reduction-in-stages comparison of its clutching tails in the fixed
-common input-and-derivative frame.  Earlier one-arrow and
+In the smallest affine blowup presentation the single class
+`a_p=x(x+y)` maps to the point class in both chambers and vanishes on the
+wall quotient, so the marked input is not the gap.  A literal instance for
+the manuscript's rank-one master still requires a quantum
+reduction-in-stages comparison of its clutching tails in the fixed common
+input-and-derivative frame; merely relaxing projectivity does not supply it.
+Earlier one-arrow and
 multi-arrow audits are retained below as the failure history that fixes the
 scope of the new proof.  The Gamma point
 solution is correctly constructed in each Artin-quotient sectorial receiver;

@@ -163,7 +163,13 @@ boundary modules.  Woodward's toric graph-potential formula sharpens this:
 the analytic one-object and marked-row clauses are realized in the linear
 toric gauged presentation.  The remaining bridge is specifically quantum
 reduction in stages from that presentation to the smooth projective master,
-including the manuscript's fixed common input-and-derivative frame.
+including the manuscript's fixed common input-and-derivative frame.  The
+affine marked input itself is exact: for weights
+`(1,0),(1,0),(1,1),(0,1)`, the class `x(x+y)` maps to the point on both
+`P^2` and `Bl_p(P^2)` and vanishes on the intermediate fixed quotient.
+The affine presentation has rank-two gauge torus, however, and quotienting
+to a rank-one master introduces curve classes.  Thus dropping projectivity
+alone does not remove the reduction-in-stages/common-frame gap.
 The sharper type-(1,2) flip test also gives an exact no-go:
 adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
 necessarily makes the previously unstable spectator-plus-`O` locus semistable,
