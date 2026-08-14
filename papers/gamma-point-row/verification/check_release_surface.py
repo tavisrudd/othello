@@ -82,7 +82,8 @@ if "the proposition does not construct the common realization" not in global_tex
 main_text = (ROOT / "gamma_point_row.tex").read_text(encoding="utf-8")
 intro_text = (ROOT / "sections/01-introduction.tex").read_text(encoding="utf-8")
 readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
-ledger_text = (ROOT / "claim-proof-novelty-ledger.md").read_text(encoding="utf-8")
+ledger_path = ROOT / "claim-proof-novelty-ledger.md"
+export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
     r"Conditional birational\s+invariance therefore yields irrationality",
     main_text,
@@ -94,8 +95,12 @@ if "Hypothesis~\\ref{hyp:complete-neutral}" not in intro_text:
     errors.append("headline theorem does not name the continuation hypothesis")
 if "Under that hypothesis" not in readme_text:
     errors.append("README cubic conclusion is not visibly conditional")
-if "| conditional application |" not in ledger_text:
-    errors.append("claim ledger does not mark the cubic application conditional")
+if ledger_path.is_file():
+    ledger_text = ledger_path.read_text(encoding="utf-8")
+    if "| conditional application |" not in ledger_text:
+        errors.append("claim ledger does not mark the cubic application conditional")
+elif not export_manifest_path.is_file():
+    errors.append("claim ledger missing outside a guarded standalone export")
 
 endpoint_text = (ROOT / "sections/09-cubic-endpoint.tex").read_text(encoding="utf-8")
 if "conditional transport" not in endpoint_text or "does not use Cai" not in endpoint_text:
