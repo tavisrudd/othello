@@ -21,10 +21,11 @@ makes no negative novelty claim.
 | `thm:rank-zero-target` | The rank-zero-target condition is sufficient for point-row invariance through a finite factorization. | unconditional implication from named hypothesis | One-line covector calculation and induction | No general factorization consequence without the hypothesis |
 | `eq:blockwise-boundary-marking` | A blockwise identity between the point row of a ray target and a marked punctual coefficient would reduce the remaining problem to singular data. | open comparison, not a theorem | Formulated as equation (7.8) | The global alternating coefficient (7.6) can vanish by cancellation and is not sufficient |
 | `prop:support-collapse` | The two extreme localized gauged maps pull the endpoint point rows back to one row on a global master source. | unconditional | Global orbit-cylinder class; commuting graph rotation; full divisor-character extraction; wall-fixed support vanishing | One distinguished point row only; does not identify arbitrary rows or full Stokes data |
-| `thm:complete-neutral` | Complete neutral fixed-graph sums at the two extreme polarizations are residue expansions of one balanced Mellin--Barnes kernel. | unconditional new synthesis | Woodward exhaustive fixed loci and virtual-normal splitting; whole-integer Gamma continuation of each moving index; adjacent-ratio bubble factors; oriented residues; Aleshkin--Liu balanced contour theorem | Nonlinear coefficientwise reduction is proved here, not stated by either source; external specialist review remains important |
-| `thm:birational-point-primary` | Nonvanishing of the point row on a formal-monodromy primary packet is invariant under smooth projective birational equivalence. | unconditional | Support collapse; complete-neutral common field; Rees half-Tate shift; formal endpoint surjectivity; finite kernel-intersection quotient; primary decomposition | A one-row Boolean theorem, not birational invariance of all Stokes or Gamma data |
+| `prop:gamma-ratio-reduction` | Every individual neutral fixed-graph coefficient has balanced Gamma-ratio form, while nonneutral homogeneous coefficients are Laurent-finite. | unconditional | Woodward exhaustive fixed loci and virtual-normal splitting; whole-integer Gamma continuation of each moving index; adjacent-ratio bubble factors; exact oriented residues | Does not construct a common contour for the complete nonlinear graph sum |
+| `hyp:complete-neutral` | Complete neutral fixed-graph sums at the two extreme polarizations are residue expansions of one common meromorphic continuation. | explicit hypothesis | Not proved in the paper | Aleshkin--Liu prove the model statement for linear abelian GLSMs, not this nonlinear virtual extension |
+| `thm:birational-point-primary` | Nonvanishing of the point row on a formal-monodromy primary packet is invariant under smooth projective birational equivalence. | conditional | Support collapse; `hyp:complete-neutral`; Rees half-Tate shift; formal endpoint surjectivity; finite kernel-intersection quotient; primary decomposition | A one-row Boolean implication under the named analytic hypothesis |
 | `prop:cubic-endpoint` | The cubic Gamma point row is nonzero on both primitive-sixth lines. | unconditional endpoint lemma | Cai matrices reconstructed through the exact indicial polynomial; direct hypergeometric Barnes coefficients | Cai is used only for the cubic connection and big/small flatness; point coefficient is proved independently |
-| `thm:intro-cubic-stable` | For every smooth complex cubic threefold `X`, `X × P^m` is irrational for every `m ≥ 0`. | unconditional application | Cubic endpoint lemma; quantum Künneth; uniform projective-space exponent calculation; birational point-primary invariance | This is the stable-irrationality conclusion; the `m=2` case is the first beyond the companion epilogue |
+| `thm:intro-cubic-conditional` | For every smooth complex cubic threefold `X`, `X × P^m` is irrational for every `m ≥ 0` if complete-neutral continuation holds for global birational cobordisms. | conditional application | Cubic endpoint lemma; quantum Künneth; uniform projective-space exponent calculation; conditional birational point-primary invariance | The endpoint obstruction is unconditional; `m=2` and higher remain conditional here |
 
 ## Novelty language
 
@@ -39,8 +40,8 @@ The closest source-level relationship is stated positively:
 - Lee--Lin--Qu--Wang supply ordinary-flop continuation;
 - Woodward and Gonzalez--Woodward supply the global gauged fixed-locus and
   virtual Kalkman formulas;
-- Aleshkin--Liu supply the balanced linear Mellin--Barnes theorem used after
-  the coefficientwise fixed-graph reduction;
+- Aleshkin--Liu supply the balanced linear Mellin--Barnes model; the nonlinear
+  complete-neutral extension remains an explicit hypothesis;
 - Cai supplies the cubic connection matrices and big/small flatness, while
   the point coefficient is recomputed in the manuscript;
 - Reichelt--Schulze--Sevenheck--Walther identify the localized

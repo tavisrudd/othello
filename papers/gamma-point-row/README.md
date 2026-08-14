@@ -1,18 +1,20 @@
-# The Point-Class Rank Functional under Birational Wall Crossing
+# Point-Class Rank under Quantum Wall Crossing
 
 ## Read the paper
 
 [**Open the paper (PDF) →**](gamma_point_row.pdf)
 
-**Title:** *The Point-Class Rank Functional under Birational Wall Crossing:
-Irrationality of \(X\times\mathbf P^m\) for Every Cubic Threefold*.
+**Title:** *Point-Class Rank under Quantum Wall Crossing: Local Transport,
+Global Obstructions, and Cubic Threefolds*.
 
-The paper proves that the zero or nonzero restriction of the Gamma point row
-to a formal-monodromy primary packet is invariant under birational maps of
-smooth projective varieties. The proof uses one global equivariant cobordism,
-rotation localization, balanced Mellin--Barnes continuation, and a finite
-common primary quotient. Applied to the primitive-sixth packet of a cubic
-threefold, it proves that X × P^m is irrational for every m.
+The paper proves exact point-row transport identities for a simple VGIT wall
+and an ordinary flop, together with countermodels that obstruct naive
+composition. For a global equivariant cobordism it proves support collapse
+and a coefficientwise balanced Gamma-ratio reduction. The remaining
+complete-neutral continuation of the nonlinear fixed-graph sum is stated as
+an explicit hypothesis. Under that hypothesis, the point-row primary
+Boolean is birationally invariant and \(X\times\mathbf P^m\) is irrational
+for every smooth cubic threefold \(X\) and every \(m\).
 
 The cubic-specific input is isolated:
 

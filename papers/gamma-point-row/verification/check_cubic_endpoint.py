@@ -26,7 +26,180 @@ def evaluate_quadratic(coefficients: list[Fraction], value: Fraction) -> Fractio
     return constant + linear * value + quadratic * value * value
 
 
+Matrix = list[list[Fraction]]
+
+
+def matrix_add(left: Matrix, right: Matrix) -> Matrix:
+    return [
+        [a + b for a, b in zip(left_row, right_row, strict=True)]
+        for left_row, right_row in zip(left, right, strict=True)
+    ]
+
+
+def matrix_sub(left: Matrix, right: Matrix) -> Matrix:
+    return [
+        [a - b for a, b in zip(left_row, right_row, strict=True)]
+        for left_row, right_row in zip(left, right, strict=True)
+    ]
+
+
+def matrix_mul(left: Matrix, right: Matrix) -> Matrix:
+    return [
+        [
+            sum(
+                (left[i][k] * right[k][j] for k in range(len(right))),
+                Fraction(0),
+            )
+            for j in range(len(right[0]))
+        ]
+        for i in range(len(left))
+    ]
+
+
+def commutator(left: Matrix, right: Matrix) -> Matrix:
+    return matrix_sub(matrix_mul(left, right), matrix_mul(right, left))
+
+
+def matrix_inverse(matrix: Matrix) -> Matrix:
+    size = len(matrix)
+    augmented = [
+        row[:] + [Fraction(int(i == j)) for j in range(size)]
+        for i, row in enumerate(matrix)
+    ]
+    for column in range(size):
+        pivot = next(row for row in range(column, size) if augmented[row][column])
+        augmented[column], augmented[pivot] = augmented[pivot], augmented[column]
+        scale = augmented[column][column]
+        augmented[column] = [entry / scale for entry in augmented[column]]
+        for row in range(size):
+            if row == column:
+                continue
+            scale = augmented[row][column]
+            augmented[row] = [
+                entry - scale * pivot_entry
+                for entry, pivot_entry in zip(
+                    augmented[row], augmented[column], strict=True
+                )
+            ]
+    return [row[size:] for row in augmented]
+
+
+def solve_linear(matrix: Matrix, vector: list[Fraction]) -> list[Fraction]:
+    inverse = matrix_inverse(matrix)
+    return [
+        sum((entry * value for entry, value in zip(row, vector, strict=True)), Fraction())
+        for row in inverse
+    ]
+
+
+def solve_sylvester(left: Matrix, right: Matrix, target: Matrix) -> Matrix:
+    """Solve left*x - x*right = target for a 2 by 2 matrix x."""
+    system: Matrix = []
+    values: list[Fraction] = []
+    for i in range(2):
+        for j in range(2):
+            equation: list[Fraction] = []
+            for k in range(2):
+                for ell in range(2):
+                    coefficient = left[i][k] if ell == j else Fraction()
+                    if i == k:
+                        coefficient -= right[ell][j]
+                    equation.append(coefficient)
+            system.append(equation)
+            values.append(target[i][j])
+    solution = solve_linear(system, values)
+    return [solution[:2], solution[2:]]
+
+
+def block(matrix: Matrix, row: int, column: int) -> Matrix:
+    return [
+        matrix[2 * row + i][2 * column : 2 * column + 2]
+        for i in range(2)
+    ]
+
+
+def reconstruct_cai_block(q: Fraction) -> dict[str, object]:
+    zero = Fraction()
+    K = [
+        [zero, 12 * q, zero, 72 * q * q],
+        [Fraction(2), zero, 30 * q, zero],
+        [zero, Fraction(2), zero, 12 * q],
+        [zero, zero, Fraction(2), zero],
+    ]
+    G = [
+        [Fraction(3, 2), zero, zero, zero],
+        [zero, Fraction(1, 2), zero, zero],
+        [zero, zero, Fraction(-1, 2), zero],
+        [zero, zero, zero, Fraction(-3, 2)],
+    ]
+    columns = [
+        [6 * q, zero, Fraction(1), zero],
+        [zero, 21 * q, zero, Fraction(1)],
+        [zero, -6 * q, zero, Fraction(1)],
+        [Fraction(-21, 2) * q, zero, Fraction(1, 2), zero],
+    ]
+    P = [[columns[j][i] for j in range(4)] for i in range(4)]
+    inverse_P = matrix_inverse(P)
+    K0 = matrix_mul(matrix_mul(inverse_P, K), P)
+    G0 = matrix_mul(matrix_mul(inverse_P, G), P)
+
+    expected_K0 = [
+        [zero, 54 * q, zero, zero],
+        [Fraction(2), zero, zero, zero],
+        [zero, zero, zero, Fraction(1)],
+        [zero, zero, zero, zero],
+    ]
+    expected_G0 = [
+        [Fraction(-1, 18), zero, zero, Fraction(-7, 9)],
+        [zero, Fraction(1, 18), Fraction(-4, 9), zero],
+        [zero, Fraction(-14, 9), Fraction(-19, 18), zero],
+        [Fraction(-8, 9), zero, zero, Fraction(19, 18)],
+    ]
+    assert K0 == expected_K0
+    assert G0 == expected_G0
+
+    KU, KW = block(K0, 0, 0), block(K0, 1, 1)
+    GUW, GWU = block(G0, 0, 1), block(G0, 1, 0)
+    X = solve_sylvester(KU, KW, [[-value for value in row] for row in GUW])
+    Y = solve_sylvester(KW, KU, [[-value for value in row] for row in GWU])
+    assert X == [[Fraction(2, 9), zero], [zero, Fraction(1, 54) / q]]
+    assert Y == [[Fraction(-1, 27) / q, zero], [zero, Fraction(-4, 9)]]
+
+    A1 = [
+        [zero, zero, X[0][0], X[0][1]],
+        [zero, zero, X[1][0], X[1][1]],
+        [Y[0][0], Y[0][1], zero, zero],
+        [Y[1][0], Y[1][1], zero, zero],
+    ]
+    M1 = matrix_add(commutator(K0, A1), G0)
+    M1W = block(M1, 1, 1)
+    assert M1W == [
+        [Fraction(-19, 18), zero],
+        [zero, Fraction(19, 18)],
+    ]
+    B2 = matrix_sub(
+        matrix_add(
+            matrix_mul(A1, commutator(A1, K0)),
+            commutator(G0, A1),
+        ),
+        A1,
+    )
+    B2W = block(B2, 1, 1)
+    assert B2W == [
+        [zero, Fraction(-7, 243) / q],
+        [Fraction(-16, 81), zero],
+    ]
+    return {
+        "q": str(q),
+        "normalized_zero_block_M1": [[str(value) for value in row] for row in M1W],
+        "normalized_zero_block_B2": [[str(value) for value in row] for row in B2W],
+    }
+
+
 def build_certificate() -> dict[str, object]:
+    block_reconstructions = [
+        reconstruct_cai_block(Fraction(q)) for q in (1, 2, 3)
+    ]
     d11 = Fraction(-19, 18)
     d22 = Fraction(19, 18)
     jordan_link = Fraction(1)
@@ -86,6 +259,7 @@ def build_certificate() -> dict[str, object]:
     return {
         "schema": SCHEMA,
         "cai_rank_two_block": {
+            "direct_matrix_reconstructions": block_reconstructions,
             "d11": str(d11),
             "d22": str(d22),
             "jordan_link": str(jordan_link),

@@ -26,12 +26,14 @@ roles explicitly.
   marking.  The wall contributions vanish because their attaching nodes land
   in intermediate fixed loci on which this particular class restricts to
   zero.  No claim is made that arbitrary insertions enjoy the same collapse.
-\item Theorem~\ref{thm:complete-neutral} is the new analytic step.  Woodward
-  supplies the exhaustive fixed-locus and virtual-normal formulas;
-  Aleshkin--Liu supply the balanced contour theorem for abelian linear GLSMs.
-  The reduction of the complete nonlinear fixed-graph sum to an
-  Artin-valued balanced kernel is proved in
-  Section~\ref{sec:global-transport}; it is not stated in either source.
+\item Proposition~\ref{prop:gamma-ratio-reduction} proves the
+  coefficientwise Gamma-ratio and balance identities for individual
+  fixed-graph contributions.  Hypothesis~\ref{hyp:complete-neutral} is the
+  additional analytic step needed for the complete nonlinear graph sum.
+  Aleshkin--Liu prove a balanced contour theorem for finite-dimensional
+  linear abelian GLSMs; they do not prove this nonlinear virtual extension.
+  The manuscript therefore treats complete-neutral continuation as an open
+  input, not as a consequence of their theorem.
 \item The finite module (8.14) is a quotient by the intersection of the two
   endpoint kernels.  The proof does not assume that the entire equivariant
   quantum source has finite rank.  Likewise, the common field is obtained by
@@ -40,7 +42,7 @@ roles explicitly.
 \item Cai enters only Proposition~\ref{prop:cubic-endpoint}.  Equations
   (9.1)--(9.4) reconstruct the formal block from his displayed matrices, and
   (9.5)--(9.8) independently compute the point coefficient.  The birational
-  transport theorem is unchanged if this endpoint lemma is replaced by any
+  conditional transport theorem is unchanged if this endpoint lemma is replaced by any
   other detected primary packet.
 \end{enumerate}
 
@@ -51,14 +53,17 @@ completion, the smooth extreme quotients, and the complete fixed loci in the
 gauged theory.  This is why resolving and composing the intermediate walls is
 unnecessary.
 
-Theorem~\ref{thm:birational-point-primary} concerns the point row on a formal
-primary packet in the common meromorphic receiver constructed in the proof.
+Theorem~\ref{thm:birational-point-primary} is conditional on
+Hypothesis~\ref{hyp:complete-neutral}.  It concerns the point row on a formal
+primary packet in the common meromorphic receiver postulated by that
+hypothesis.
 It is not a claim that all Stokes matrices, Gamma lattices, or derived
 categories are birational invariants.  The incomplete-Gamma and punctual
 countermodels rule out those stronger inferences.  What survives is exactly
 one Boolean row, obtained from one globally marked class.
 
 The computational artifact has a similarly narrow role.  It recomputes the
-cubic indicial polynomial, the period recurrence, and the projective grading
-identity.  It does not verify virtual localization, contour completeness, or
-the birational theorem.  Those are human proofs in the text.
+cubic block and indicial polynomial, the period recurrence, and the
+projective grading identity.  It does not verify virtual localization or
+complete-neutral continuation.  In particular, it cannot turn the
+conditional birational theorem into an unconditional one.

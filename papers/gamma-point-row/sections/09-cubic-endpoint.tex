@@ -1,7 +1,7 @@
 \section{The cubic endpoint}
 \label{sec:cubic-endpoint}
 
-The transport theorem contains no special feature of cubic threefolds.  This
+The conditional transport theorem contains no special feature of cubic threefolds.  This
 section proves the endpoint statement needed for the application.  We retain
 Cai's quantum-connection convention and reconstruct the exact block used
 below, so the application does not depend on translating a qualitative
@@ -100,18 +100,21 @@ nonvanishing is the direct Barnes calculation (9.5)--(9.8).
 \end{proposition}
 
 \begin{remark}[Exact regression]
-The paper's verification package independently reconstructs (9.4) from the
-matrices (9.2), checks the hypergeometric recurrence behind (9.5), and checks
-the projective-space grading calculation below using exact rational
-arithmetic.  These checks guard basis, sign, and normalization changes; the
-proof is the calculation displayed above.
+The paper's verification package constructs
+\(\operatorname{im}K^2\oplus\ker K^2\) from (9.2), normalizes the nilpotent
+link, solves the first off-block Sylvester equation, and reconstructs
+(9.3)--(9.4) by exact rational arithmetic.  It also checks the
+hypergeometric recurrence behind (9.5) and the projective-space grading
+calculation below.  The proof remains the calculation displayed above.
 \end{remark}
 
 \subsection{The two endpoints}
 
 For \(\mathbf P^m\), write \(n=m+1\).  At a nonzero quantum parameter,
-multiplication by \(c_1(\mathbf P^m)\) is \(n\) times the cyclic shift.  In
-its Fourier eigenbasis the diagonal of the grading operator is
+multiplication by \(c_1(\mathbf P^m)\) is a weighted cyclic shift multiplied
+by \(n\).  After adjoining the \(n\)-th root of the parameter and rescaling
+the basis, it is \(nq^{1/n}\) times the standard cyclic shift.  In its
+Fourier eigenbasis the diagonal of the grading operator is
 \[
  \frac1n\sum_{k=0}^{m}(m/2-k)=0.                             \tag{9.10}
 \]
@@ -131,7 +134,7 @@ implies
  \cP_{\zeta_6}(\mathbf P^{m+3})=0.                          \tag{9.11}
 \]
 
-\begin{proof}[Proof of Theorem~\ref{thm:intro-cubic-stable}]
+\begin{proof}[Proof of Theorem~\ref{thm:intro-cubic-conditional}]
 If \(X\times\mathbf P^m\) were rational, it would be birational to
 \(\mathbf P^{m+3}\).  Theorem~\ref{thm:birational-point-primary} would identify
 the two point-row Booleans at \(\zeta_6\).  Equation (9.11) gives the values
@@ -139,7 +142,7 @@ one and zero, a contradiction.
 \end{proof}
 
 The separation between Theorems~\ref{thm:birational-point-primary} and
-\ref{thm:intro-cubic-stable} is deliberate.  The transport theorem and its
-localization proof do not use Cai's calculation.  Any replacement endpoint
-with a point-row-detected primary packet gives another application of the
-same theorem.
+\ref{thm:intro-cubic-conditional} is deliberate.  The conditional transport
+argument does not use Cai's calculation.  Any replacement endpoint with a
+point-row-detected primary packet gives another application of the same
+criterion.

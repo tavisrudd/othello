@@ -7,6 +7,77 @@
   "cai_rank_two_block": {
     "d11": "-19/18",
     "d22": "19/18",
+    "direct_matrix_reconstructions": [
+      {
+        "normalized_zero_block_B2": [
+          [
+            "0",
+            "-7/243"
+          ],
+          [
+            "-16/81",
+            "0"
+          ]
+        ],
+        "normalized_zero_block_M1": [
+          [
+            "-19/18",
+            "0"
+          ],
+          [
+            "0",
+            "19/18"
+          ]
+        ],
+        "q": "1"
+      },
+      {
+        "normalized_zero_block_B2": [
+          [
+            "0",
+            "-7/486"
+          ],
+          [
+            "-16/81",
+            "0"
+          ]
+        ],
+        "normalized_zero_block_M1": [
+          [
+            "-19/18",
+            "0"
+          ],
+          [
+            "0",
+            "19/18"
+          ]
+        ],
+        "q": "2"
+      },
+      {
+        "normalized_zero_block_B2": [
+          [
+            "0",
+            "-7/729"
+          ],
+          [
+            "-16/81",
+            "0"
+          ]
+        ],
+        "normalized_zero_block_M1": [
+          [
+            "-19/18",
+            "0"
+          ],
+          [
+            "0",
+            "19/18"
+          ]
+        ],
+        "q": "3"
+      }
+    ],
     "fractional_residues_mod_Z": [
       "-1/6",
       "1/6"

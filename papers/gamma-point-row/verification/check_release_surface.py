@@ -35,8 +35,8 @@ for path in TEX:
 all_tex = "\n".join(path.read_text(encoding="utf-8") for path in TEX)
 required_labels = {
     "def:point-row",
-    "thm:intro-cubic-stable",
-    "thm:intro-birational-point-primary",
+    "thm:intro-cubic-conditional",
+    "thm:intro-birational-conditional",
     "thm:simple-wall-point-column",
     "hyp:one-wall-sectorial",
     "cor:simple-wall-rank",
@@ -47,7 +47,9 @@ required_labels = {
     "thm:rank-zero-target",
     "eq:blockwise-boundary-marking",
     "prop:support-collapse",
-    "thm:complete-neutral",
+    "hyp:complete-neutral",
+    "prop:gamma-ratio-reduction",
+    "rem:neutral-boundary",
     "thm:birational-point-primary",
     "prop:cubic-endpoint",
 }
@@ -66,15 +68,23 @@ if "They are not asserted to arise from smooth projective quantum connections" n
     errors.append("analytic countermodel scope boundary missing")
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
+if "complete-neutral continuation as an open" not in scope_text:
+    errors.append("global continuation boundary is not visibly conditional")
+
+global_text = (ROOT / "sections/08-global-transport.tex").read_text(encoding="utf-8")
+if "\\begin{hypothesis}[Complete-neutral continuation]" not in global_text:
+    errors.append("complete-neutral continuation is not an explicit hypothesis")
+if "does not prove it in the generality used" not in global_text:
+    errors.append("Aleshkin--Liu nonlinear source boundary is missing")
 
 endpoint_text = (ROOT / "sections/09-cubic-endpoint.tex").read_text(encoding="utf-8")
-if "The transport theorem and its" not in endpoint_text or "do not use Cai" not in endpoint_text:
+if "conditional transport" not in endpoint_text or "does not use Cai" not in endpoint_text:
     errors.append("transport theorem is not visibly separated from the Cai endpoint")
 
 metadata = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
 if metadata.get("title") != (
-    "The Point-Class Rank Functional under Birational Wall Crossing: "
-    "Irrationality of X × P^m for Every Cubic Threefold"
+    "Point-Class Rank under Quantum Wall Crossing: "
+    "Local Transport, Global Obstructions, and Cubic Threefolds"
 ):
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":

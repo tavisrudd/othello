@@ -18,14 +18,16 @@ a rank-visible Stokes correction.  The main construction instead puts the
 two birational endpoints in one equivariant cobordism and compares their
 localized gauged theories before either exceptional completion is taken.
 
-The resulting invariant proves stable irrationality for every smooth cubic
-threefold.
+The resulting conditional invariant gives a precise route to stable
+irrationality for every smooth cubic threefold.
 
-\begin{theorem}
-\label{thm:intro-cubic-stable}
+\begin{theorem}[Conditional cubic stabilization criterion]
+\label{thm:intro-cubic-conditional}
 Let \(X\subset\mathbf P^4_{\C}\) be a smooth cubic threefold.  Then
-\(X\times\mathbf P^m\) is irrational for every \(m\geq0\).  In particular,
-\(X\) is not stably rational.
+assume that complete-neutral continuation, in the sense of
+Hypothesis~\ref{hyp:complete-neutral}, holds for every W{\l}odarczyk
+completion of a smooth projective birational map.  Under this hypothesis,
+\(X\times\mathbf P^m\) is irrational for every \(m\geq0\).
 \end{theorem}
 
 The \(X\times\mathbf P^1\) case has a separate
@@ -34,20 +36,21 @@ argument separate: the present proof introduces a global gauged-localization
 mechanism which is independent of the stabilization dimension.  The case
 \(m=2\) is the first one not covered by the dimension-four argument.
 
-The conclusion is independent of the classical decomposition of the diagonal
-and integral Hodge shadows of stable rationality.  The companion paper
+The conditional conclusion is independent of the classical decomposition of
+the diagonal and integral Hodge shadows of stable rationality.  The companion paper
 exhibits universally \(\mathrm{CH}_0\)-trivial cubic threefolds, for which that
 cycle-theoretic obstruction vanishes, while their first stabilizations remain
 irrational \cite{RuddEpilogue}.  The present invariant records irregular
 quantum-monodromy data instead; it makes no assertion about the Hodge
 conjecture.
 
-The endpoint contrast is
+The unconditional endpoint contrast is
 \[
  b(X\times\mathbf P^m,\cP_6)=1,
  \qquad b(\mathbf P^{m+3},\cP_6)=0.                          \tag{1.2}
 \]
-where an empty packet has value zero.  Section~\ref{sec:cubic-endpoint}
+where an empty packet has value zero.  Here \(b\) records whether the point
+row is nonzero on the indicated packet.  Section~\ref{sec:cubic-endpoint}
 proves (1.2).  Cai's cubic connection supplies the primitive-sixth block; we
 reconstruct its indicial polynomial from his matrices and compute the point
 coefficient independently from the cubic hypergeometric period.  Thus the
@@ -55,25 +58,31 @@ cubic-specific source dependency is confined to one endpoint lemma.
 
 The birational statement behind the application is more general.
 
-\begin{theorem}[Point-row primary invariance]
-\label{thm:intro-birational-point-primary}
-For smooth projective birational complex varieties, the Gamma point row is
+\begin{theorem}[Conditional point-row primary invariance]
+\label{thm:intro-birational-conditional}
+For smooth projective birational complex varieties whose global cobordism
+satisfies Hypothesis~\ref{hyp:complete-neutral}, the Gamma point row is
 nonzero on a formal-monodromy primary packet at one endpoint if and only if
 it is nonzero on the corresponding packet at the other endpoint.
 \end{theorem}
 
-The proof uses a smooth projective equivariant completion of one W{\l}odarczyk
-cobordism.  A point in the common birational open sweeps out an orbit
+The conditional proof uses a smooth projective equivariant completion of one
+W{\l}odarczyk cobordism.  A point in the trivialized common birational open
+sweeps out an orbit
 cylinder.  Its equivariant class restricts to the two endpoint point classes
 and vanishes on all intermediate fixed strata.  Rotation localization
-therefore removes every wall contribution.  In a neutral affine gauge
-direction, the two remaining endpoint series are the opposite residue
-expansions of one balanced Mellin--Barnes kernel.  Positive directions are
-Laurent-finite.  Rees homogenization makes both endpoint maps intertwine
+therefore removes every wall contribution.  For each neutral affine gauge
+direction, the paper proves that every individual fixed-graph coefficient is
+a balanced Gamma-ratio kernel.  Hypothesis~\ref{hyp:complete-neutral} asserts
+that the complete nonlinear graph sum has the required common
+Mellin--Barnes continuation.  Nonneutral directions are Laurent-finite.
+Rees homogenization then makes both endpoint maps intertwine
 formal monodromy with the same half-Tate shift.  Finally, quotienting the
 common source by the intersection of the two kernels produces a finite
 differential module, where ordinary primary decomposition proves the
-theorem.
+theorem.  Aleshkin--Liu prove the contour statement for linear abelian GLSMs;
+the passage to the complete nonlinear virtual graph sum is not supplied by
+their theorem and remains the named global input here.
 
 The paper also records two local results which motivated the global
 construction.  The first concerns a smooth projective simple VGIT wall
@@ -152,15 +161,15 @@ preserves the point row by elementary linear algebra.  A signed punctual
 coefficient of an oriented boundary complex is a plausible shadow of these
 factorwise conditions, but it is not equivalent to them in the local
 formalism.  A single alternating coefficient can vanish by cancellation.
-The global construction in Section~\ref{sec:global-transport} bypasses this
-missing marked comparison.
+Under Hypothesis~\ref{hyp:complete-neutral}, the global construction in
+Section~\ref{sec:global-transport} bypasses this missing marked comparison.
 
 Sections~\ref{sec:point-row}--\ref{sec:ordinary-flop} establish the point-row
 formalism and the local identities.  Sections~\ref{sec:incomplete-gamma} and
 \ref{sec:fourier-boundary} give the countermodels, and
 Section~\ref{sec:two-wall} isolates the local composition condition they
-force.  Section~\ref{sec:global-transport} proves
-Theorem~\ref{thm:intro-birational-point-primary} by the common-master method.
-Section~\ref{sec:cubic-endpoint} proves (1.2) and
-Theorem~\ref{thm:intro-cubic-stable}.  Section~\ref{sec:scope} records the source,
+force.  Section~\ref{sec:global-transport} proves the Gamma-ratio reduction
+and conditional Theorem~\ref{thm:intro-birational-conditional} by the
+common-master method.  Section~\ref{sec:cubic-endpoint} proves (1.2) and
+Theorem~\ref{thm:intro-cubic-conditional}.  Section~\ref{sec:scope} records the source,
 analytic, and verification boundaries.

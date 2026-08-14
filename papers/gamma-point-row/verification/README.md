@@ -11,8 +11,11 @@ spacing, builds the manuscript, and rejects LaTeX warnings.
 The mathematical proofs are human proofs in the manuscript. The verification
 script checks release consistency; it is not a substitute for those proofs.
 
-The endpoint checker uses exact rational arithmetic to reconstruct the
-rank-two indicial polynomial in (9.4), verify the normalized hypergeometric
+The endpoint checker uses exact rational arithmetic to construct
+\(\operatorname{im}K^2\oplus\ker K^2\) from the displayed cubic matrix,
+normalize the nilpotent link, solve the off-block Sylvester equation,
+reconstruct the rank-two block and indicial polynomial in (9.3)--(9.4),
+verify the normalized hypergeometric
 recurrence through degree 12, check that the Barnes arguments used in (9.7)
 are not Gamma poles, and regress the projective-space grading identity through
 dimension 64. Run
@@ -23,12 +26,13 @@ from the paper root. Regenerate the canonical certificate by omitting the
 check flag. The exact source hashes and byte counts are:
 
 - check_cubic_endpoint.py: SHA-256
-  d6f3a0cbd42ccf964c886cee1d1d4bc772976843553b9a14e396066162b2940d,
-  4,484 bytes;
+  4d24aa3c819fe0ad9d3fd96bc2dba618c353979ec72ae53e5dcd4458637e97e2,
+  10,151 bytes;
 - cubic_endpoint_certificate.json: SHA-256
-  75b01b9ecabd8e28ef95c8e1f8bdccc8003a1e10a13c0d3cf0b09017f1844e50,
-  8,952 bytes.
+  447b7146b24e9b70a93716dba4604fddb53b10353e0aabff538e4d3101b04b19,
+  10,140 bytes.
 
-The symbolic derivation in the manuscript is the independent check of the
+The displayed derivation in the manuscript is the independent check of the
 script. The artifact does not verify the Barnes asymptotic theorem, quantum
-Künneth, virtual localization, or the birational transport theorem.
+Künneth, virtual localization, complete-neutral continuation, or the
+conditional birational transport theorem.
