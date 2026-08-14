@@ -28,10 +28,10 @@ fixed-sector receiver, not an intrinsic large-radius Boolean: the exact QDM
 coordinate does not algebraize the large-radius-to-sector connection row.
 Gold and Platinum therefore retain the adjacent-receiver peak-coherence gate.
 The gate is no longer completely unlanded: the point-centred Geiser peak is
-closed below by an analytic Novikov-line continuation theorem.  What remains
-is coverage by, or extension to, the other peak types.
-The alternative direct-cobordism route has a second gate because its chamber
-quotients can be singular/toroidal.  No Paper V or Lean promotion.
+closed below by an analytic Novikov-line continuation theorem.  Morelli
+pi-desingularization plus the unit-circuit theorem below now supplies the
+other geometric peak types.  What remains is the common analytic realization
+of consecutive discrepant walls.  No Paper V or Lean promotion.
 The coverage audit is negative: a smooth projective master gives projective
 locally toric chamber quotients, generally with cyclic singularities, and
 regular subdivision inserts genuine blowups/down rather than smooth simple
@@ -129,11 +129,26 @@ pairing.  This removes the surface-family `P1` flop and all other crepant
 ordinary peaks from Gold without claiming descendant invariance.
 
 Consequently the intrinsic theorem covers every ordinary standard peak, and
-the simple-VGIT theorem covers the discrepant curve row wall by wall.  Gold
-still has three coupled gates: arbitrary global point `(1,3)` coverage,
-adjacent-receiver coherence for discrepant walls, and whether AKMW's
-pi-nonsingular elementary pieces are globally standard unit-coefficient
-walls rather than merely smooth-boundary toroidal diagrams.
+the simple-VGIT theorem covers the discrepant curve row wall by wall.  The
+geometric AKMW coverage gate is now closed by
+`../2026-08-13-c907-akmw-pi-nonsingular-circuits-are-unit.md`.
+Morelli pi-nonsingularity makes every complementary projected circuit face
+unimodular, so the primitive circuit cofactors are all `+/-1`.  Hence every
+elementary wall after pi-desingularization is a unit-coefficient standard
+wall (or blowup/down), with smooth projective chambers.  Gold's sole
+remaining gate is adjacent-receiver coherence for consecutive discrepant
+unit walls.
+
+The first gate is now a binary index question; see
+`../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
+standard point `(1,3)` wall, the image of the local Cartier restriction map
+in `Pic(P3)=Z` has generator `d=1` or `d=2`, since `K|P3=O(-2)`.
+Index one supplies the primitive `O(1)` polarization and satisfies
+Gu--Yu--Yu Lemma 6.9.  Index two is the sole uncovered geometry: a second-
+Veronese/`mu_2` root-stack wall.  The unit-circuit theorem shows that AKMW's
+pi-nonsingular chain always has `d=1`; the index-two geometry remains a useful
+boundary for arbitrary standard walls but is absent from the chosen Gold
+factorization.
 
 The opposite/rigidity red team is closed in
 `../2026-08-13-c907-opposite-rigidity-red-team.md`.  A March 2026 theorem of
@@ -186,8 +201,8 @@ the proper turning, level-changing, singular, and resonance loci.  Therefore
 the complete Geiser peak and its product with `P2` preserve the Gamma rank
 Boolean.  Exact audit:
 `../2026-08-13-c907-geiser-parameterized-continuation-hostile-audit.md`.
-This is a publishable peak theorem, not Gold: the remaining global gate is
-coverage/classification of all peak types in a smooth fivefold factorization.
+This is a publishable peak theorem, not Gold: the surviving global gate is
+coherence of the incident fixed-sector receivers at discrepant peaks.
 
 **Load next:** `c907-solver-dossier.md`.
 
@@ -645,24 +660,19 @@ reverse blow-down implication, conditional weak-factorization telescope, and
 `../2026-08-13-c907-formal-novikov-sectorial-receiver.md`, and
 `../2026-08-13-c907-rank-telescope-and-product.md`.
 
-The next bounded pass returns to coverage.  The exact ambient point
+The next bounded pass returns to coherence.  The exact ambient point
 coordinate and wall-local rank identity are proved for every
 smooth-projective simple VGIT wall in
 `../2026-08-13-c907-simple-vgit-rank-theorem.md`, and the valid minimal toric
-discrepancy-one model passes term by term.  This does not compose even for
-blowups until the two incident receivers at a peak are compared.  In
-parallel, determine whether the peaks needed for a fivefold factorization
-can all be replaced directly by such walls.  Otherwise
-extend the ambient-coordinate theorem to the finite-quotient or toroidal wall spaces
-produced by birational cobordism/destacking.  The K-positive carrier-face
-theorem handles peaks for which all atom variables, not merely the two
-contraction rays, lie on one exposed rational-polyhedral `c_1`-positive
-face.  Audit whether AKMW's regular subdivisions can be chosen so that every
-remaining zero-budget elementary peak is an ordinary split flop, and attack
-the first negative-contact-budget peak by a discrepant Sarkisov/VGIT
-intertwiner;
-the older two-radial-leg nearby-cycle comparison remains the fallback for
-any peak outside those two classes.
+discrepancy-one model passes term by term.  This does not compose until the
+two incident receivers at a discrepant peak are compared.  The geometric
+alternative is now settled: Morelli pi-nonsingularity makes every elementary
+circuit unit-coefficient, so the pi-desingularized AKMW chain consists of
+closed ordinary walls and covered discrepant simple-VGIT walls.  The
+remaining bounded task is to compare the two fixed-sector embeddings of the
+intermediate primitive-sixth packet at consecutive discrepant unit walls.
+The older two-radial-leg nearby-cycle comparison remains the fallback, but it
+must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
 repairs and AA split:
 `../2026-08-13-c907-simple-wall-coverage-obstruction.md`,
@@ -775,13 +785,11 @@ a separate possible construction, not a premise of this Platinum route.
 - **Silver:** closed by the unconditional `X x P^1` theorem.
 - **Gold:** the exact ambient point coordinate is closed wall by wall, but
   the Gamma rank Boolean still needs coherent realization across adjacent
-  smooth-wall receivers.  The direct-cobordism alternative additionally
-  needs singular/toroidal wall coverage; the one-arrow theorem and `P^2`
-  endpoint are closed.
+  smooth-wall receivers.  Geometric coverage of a pi-desingularized AKMW
+  chain and the `P^2` endpoint are closed.
 - **Platinum:** the all-codimension source audit is clean and the nonzero-`k`
   exceptional twists and uniform projective-product step are rank-theoretically
-  harmless; it rises or falls with the same coherence gate as Gold, plus
-  coverage if the direct-cobordism route is used.
+  harmless; it rises or falls with the same coherence gate as Gold.
 - **Negative progress:** an exact counterexample to either gate, with the
   minimum missing datum or corrected invariant identified.
 

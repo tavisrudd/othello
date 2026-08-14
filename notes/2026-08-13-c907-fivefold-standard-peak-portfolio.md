@@ -120,9 +120,17 @@ over a connected curve is covered by Corollary 6.12.
 
 The **geometric/QDM coverage** is now closed for ordinary flops and curve
 `(1,2)` flips, and for the explicit point `(1,3)` regression.  It is not yet
-closed for every semi-free smooth standard peak: an arbitrary global point
-`(1,3)` wall is uncovered, and the discrepant simple-VGIT conclusions are
+closed for every semi-free smooth standard peak: the index-two form of an
+arbitrary global point `(1,3)` wall is uncovered, and the discrepant
+simple-VGIT conclusions are
 still wall-local rather than composable intrinsic Gamma-row identities.
+
+The point obstruction is only binary.  By
+`2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`, the local
+Cartier restriction lattice on the exceptional `P^3` has index `d=1` or
+`d=2`, because the canonical bundle restricts as `O(-2)`.  Index one meets
+Gu--Yu--Yu Lemma 6.9 by the same degree-one generation/Rees argument as the
+curve wall.  Index two is the exact uncovered `mu_2`/second-Veronese case.
 
 This finite list does not prove that AKMW's regular-subdivision peaks are
 semi-free standard walls.  AKMW supplies smooth toroidal blowups/down at the
@@ -131,16 +139,25 @@ weight-`(+/-1)` normal directions.  Weighted walls and common refinements
 with several interacting exceptional classes remain a separate coverage
 gate.
 
+That coverage gate is closed by
+`2026-08-13-c907-akmw-pi-nonsingular-circuits-are-unit.md`.  Morelli
+pi-nonsingularity says every projected independent face is regular.  For a
+circuit, each complementary face is therefore a lattice basis, so the
+primitive relation's cofactor coefficients are all `+/-1`.  The elementary
+AKMW pieces after pi-desingularization are consequently unit-coefficient
+standard walls (or blowups/down), and the point `(1,3)` restriction index is
+one.  What remains is the analytic coherence of consecutive discrepant wall
+receivers, not geometric wall coverage.
+
 ## EJ / TT / AA
 
 - **EJ:** in dimension five, the apparently unbounded standard-flip problem
   collapses to four rows; only one global geometric row and one common
   realization issue remain.
-- **TT:** “smooth endpoints” does not imply “semi-free smooth master”; the
-  finite table begins only after that additional hypothesis is verified.
-- **AA:** audit whether AKMW pi-nonsingularity gives unit-coefficient standard
-  circuits globally.  If it does, the geometric coverage gate closes; if it
-  does not, the first weighted circuit is the next orbifold target.
+- **TT:** “smooth endpoints” alone does not imply a semi-free master; the
+  conclusion uses the pi-nonsingular subdivision, not the raw cobordism.
+- **AA:** geometric coverage is closed.  Audit only the transition between
+  the two fixed-sector receivers incident to a discrepant intermediate.
 
 ## Sources
 
