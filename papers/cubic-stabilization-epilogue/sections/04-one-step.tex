@@ -78,10 +78,11 @@ fix the completion convention in the proof.
 
 \begin{lemma}[Coefficientwise base change]
 \label{lem:pv-base-change}
-Let \(D\) be a formal differential module over \(k((z))\), and let \(B\) be a
-complete separated \(I\)-adic \(k\)-algebra on which \(d/dz\) is zero.  Fix a
-Levelt--Turrittin solution algebra \(R\) for \(D\), with a fundamental solution
-matrix and with differential constants \(R^{d/dz}=k\).  Scalar extension in
+Write \(\partial=d/dz\).  Let \(D\) be a formal differential module over
+\(k((z))\), and let \(B\) be a complete separated \(I\)-adic \(k\)-algebra on
+which \(\partial\) is zero.  Fix a Levelt--Turrittin solution algebra \(R\) for
+\(D\), with a fundamental solution matrix and differential constants
+\(R^\partial=k\).  Scalar extension in
 the coefficient direction preserves the characteristic polynomial of framed
 formal monodromy.  The same holds after a connection gauge whose entries use
 only integral powers of \(z\).
@@ -90,7 +91,7 @@ only integral powers of \(z\).
 \begin{proof}
 At every finite level, the constants of
 \(R\otimes_k B/I^N\) are \(B/I^N\): expansion in a \(k\)-basis reduces this to
-\(R^{d/dz}=k\).  A fundamental solution matrix then identifies the horizontal
+\(R^\partial=k\).  A fundamental solution matrix then identifies the horizontal
 module with
 \[
  \operatorname{Sol}(D)\otimes_k B/I^N.
