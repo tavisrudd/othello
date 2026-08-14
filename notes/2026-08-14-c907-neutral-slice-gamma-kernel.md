@@ -256,6 +256,35 @@ candidate enumeration.
   neutral Gamma kernel; that would be the first geometric counterexample to
   the C907 telescope.
 
+## 7. Mystery ledger
+
+### Settled in this pass
+
+- **Why the surviving unbounded direction looks Calabi--Yau.**  This is no
+  analogy: equation (5) is the exact restriction of the anticanonical
+  character.
+- **Whether nonzero Barnes coefficients refute rank-zero output.**  They do
+  not.  Aleshkin--Liu continuation marks the complete residue by the window
+  transform; the first `_3F_2` model is the explicit regression.
+- **Whether the fixed-curve suspect can hide a higher primary moment.**  It
+  cannot: (9) kills every number of primary legs.
+
+### Still open
+
+- **Common master.**  No theorem identifies the two incident sectorial
+  amplitudes as expansions of one equivariant Fourier object.  Exact evidence
+  gap: Gu--Yu--Yu Conjecture 1.11 / Iritani Conjecture 43 at an intermediate
+  quotient.  Owning successor: the common-master rank-row theorem.
+- **Smallest sufficient fragment.**  It is not known whether the adjoint
+  transform of the common-open point row together with the formal
+  primitive-sixth packet can be proved without full cone preservation.
+  This is the highest-EV next proof attempt.
+- **Geometric falsifier.**  The incomplete-Gamma model is not a
+  smooth-projective peak.  No geometric unit-circuit peak is known whose
+  complete neutral residue has nonzero common-open rank.  A direct
+  `(2,3; curve)` or `(2,4; point)` computation remains the bounded
+  falsification route.
+
 ## Sources
 
 - Konstantin Aleshkin and Chiu-Chu Melissa Liu, *Higgs--Coulomb
