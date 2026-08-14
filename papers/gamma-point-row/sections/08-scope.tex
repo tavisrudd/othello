@@ -1,62 +1,64 @@
-\section{Scope, source boundaries, and the next problem}
+\section{Scope and source boundaries}
 \label{sec:scope}
 
-The results have deliberately different logical strengths.
+The proof combines statements of different kinds.  We record their logical
+roles explicitly.
+
 \begin{enumerate}[label=\textup{(\arabic*)}]
 \item Theorem~\ref{thm:simple-wall-point-column} is an exact identity inside
   the Gu--Yu--Yu completed formal comparison for \(r_+<r_-\).  It concerns
-  the ambient point coordinate only.
+  only the ambient point coordinate.  It is not used to compose the global
+  cobordism.
 \item Theorem~\ref{thm:ordinary-flop-point-row} is an intrinsic point-section
   identity on one fixed Lee--Lin--Qu--Wang continuation domain.  It does not
   assert full descendant invariance or a Gamma/Fourier--Mukai square for all
   classes.
-\item Corollary~\ref{cor:simple-wall-rank} requires the named one-wall
+\item Corollary~\ref{cor:simple-wall-rank} requires its named one-wall
   sectorial realization hypothesis.  The formal Gu--Yu--Yu decomposition and
   the extremal Shen--Shoemaker asymptotics do not by themselves identify the
   intrinsic large-radius point section in a common receiver.
 \item Propositions~\ref{prop:incomplete-gamma} and
   \ref{prop:punctual-corner} are exact analytic and algebraic countermodels.
   They are not asserted to arise from smooth projective quantum connections.
-\item Theorem~\ref{thm:rank-zero-target} is a conditional assembly theorem.
-  Its proof is exact once the factorwise rank-zero-target hypothesis is
-  supplied.  Boundary-supported targets are one sufficient geometric source
-  of that condition.
+  They show why the local receivers cannot simply be glued by formal
+  monodromy, pairing, or localized support.
+\item Proposition~\ref{prop:support-collapse} uses the global orbit-cylinder
+  marking.  The wall contributions vanish because their attaching nodes land
+  in intermediate fixed loci on which this particular class restricts to
+  zero.  No claim is made that arbitrary insertions enjoy the same collapse.
+\item Theorem~\ref{thm:complete-neutral} is the new analytic step.  Woodward
+  supplies the exhaustive fixed-locus and virtual-normal formulas;
+  Aleshkin--Liu supply the balanced contour theorem for abelian linear GLSMs.
+  The reduction of the complete nonlinear fixed-graph sum to an
+  Artin-valued balanced kernel is proved in
+  Section~\ref{sec:global-transport}; it is not stated in either source.
+\item The finite module (8.14) is a quotient by the intersection of the two
+  endpoint kernels.  The proof does not assume that the entire equivariant
+  quantum source has finite rank.  Likewise, the common field is obtained by
+  localization and balanced continuation before the inverse Artin limit; no
+  formal Novikov variable is evaluated at a nonzero complex number.
+\item Cai enters only Proposition~\ref{prop:cubic-endpoint}.  Equations
+  (9.1)--(9.4) reconstruct the formal block from his displayed matrices, and
+  (9.5)--(9.8) independently compute the point coefficient.  The birational
+  transport theorem is unchanged if this endpoint lemma is replaced by any
+  other detected primary packet.
 \end{enumerate}
 
-There is a second, geometric limitation.  Birational cobordism decomposes a
-birational map into elementary toroidal wall crossings, but smooth master
-spaces can have chamber quotients with finite-quotient singularities
-\cite{Wlodarczyk,AKMW}.  Gu--Yu--Yu assume smooth projective chamber
-quotients.  Resolving the singular chambers introduces further walls and
-does not provide the missing common sectorial point-row realization for
-free.  The paper therefore makes no general factorization theorem without
-Hypothesis~\ref{hyp:rank-zero-target}.
+Birational cobordism can have intermediate coarse quotients with finite
+quotient singularities \cite{Wlodarczyk,AKMW}.  The global proof does not form
+their quantum D-modules.  It uses only the smooth projective equivariant
+completion, the smooth extreme quotients, and the complete fixed loci in the
+gauged theory.  This is why resolving and composing the intermediate walls is
+unnecessary.
 
-The boundary-loss mechanism also limits what a GKZ argument can establish.
-For quasi-symmetric representations, the GKZ local system can carry a
-categorical window marking \cite{SpVdB}.  Discrepant confluence to the
-irregular problem uses localized Fourier--Laplace transforms, which kill the
-constant modules in (6.2).  An unlocalized comparison with its boundary
-triangle is needed before that marking can control the point row.  General
-discrepant toric continuation results such as \cite{AcostaShoemaker} do not,
-without additional Gamma calibration, supply the two-wall identity (7.6).
+Theorem~\ref{thm:birational-point-primary} concerns the point row on a formal
+primary packet in the common meromorphic receiver constructed in the proof.
+It is not a claim that all Stokes matrices, Gamma lattices, or derived
+categories are birational invariants.  The incomplete-Gamma and punctual
+countermodels rule out those stronger inferences.  What survives is exactly
+one Boolean row, obtained from one globally marked class.
 
-The resulting open problem is precise.
-\begin{quote}
-For two incident noncrepant unit wall crossings with a common smooth
-projective chamber, construct the complete oriented Fourier/window boundary
-correction block by block, construct the point-row marking (7.8), and prove
-that every marked block has zero punctual coefficient, or exhibit a
-geometric residue block for which it does not.
-\end{quote}
-
-This asks for one numerical row rather than a full equality of Stokes and
-window matrices.  The countermodels show that the row cannot be recovered
-from formal monodromy, a flat pairing, integrality, a nilpotent divisor tag,
-or unmarked singular support.  A proof must retain the augmentation marking
-through the unlocalized two-wall comparison.
-
-For a smooth cubic threefold \(X\), such a marked comparison is the exact
-missing input in this approach to \(X\times\mathbf P^2\).  Proving it would
-make the one-wall identities composable along a factorization; finding one
-marked block with nonzero point row would rule out that composition argument.
+The computational artifact has a similarly narrow role.  It recomputes the
+cubic indicial polynomial, the period recurrence, and the projective grading
+identity.  It does not verify virtual localization, contour completeness, or
+the birational theorem.  Those are human proofs in the text.

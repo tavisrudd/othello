@@ -10,34 +10,73 @@ pairing \cite{IritaniGamma}.  If \(p\in Y\) is a point, then
 The second entry in (1.1) is therefore a distinguished flat covector.  We
 call it the \emph{Gamma point row}.
 
-Birational quantum comparison theorems often split a quantum D-module into
-an ambient summand and summands associated with the wall or blow-up centre.
-For rank questions, it is unnecessary to identify every entry of the
-comparison matrix.  It is enough to know that the point row restricts to the
-point row on the ambient summand and vanishes on the supported summands.
-This paper separates the exact statements of that form from the additional
-analytic input needed to compose several discrepant walls.
+We study whether the zero or nonzero restriction of this row to a formal
+monodromy packet survives birational modification.  A direct composition of
+one-wall quantum comparisons does not answer the question: adjacent walls
+use incompatible Novikov completions, and changing a sectorial lift can add
+a rank-visible Stokes correction.  The main construction instead puts the
+two birational endpoints in one equivariant cobordism and compares their
+localized gauged theories before either exceptional completion is taken.
 
-The motivating stabilization problem is concrete.  If \(X\) is a smooth
-cubic threefold, the case \(m=2\) asks whether
-\(X\times\mathbf P^2\) can be rational.  The point-row approach would compare
-the primitive-sixth formal-monodromy packet of this product with that of
-projective space along a smooth birational factorization.  The endpoint
-input, not proved here, is the expected contrast
+The resulting invariant proves stable irrationality for every smooth cubic
+threefold.
+
+\begin{theorem}
+\label{thm:intro-cubic-stable}
+Let \(X\subset\mathbf P^4_{\C}\) be a smooth cubic threefold.  Then
+\(X\times\mathbf P^m\) is irrational for every \(m\geq0\).  In particular,
+\(X\) is not stably rational.
+\end{theorem}
+
+The \(X\times\mathbf P^1\) case has a separate
+dimension-four proof by weak factorization \cite{RuddEpilogue}.  We keep that
+argument separate: the present proof introduces a global gauged-localization
+mechanism which is independent of the stabilization dimension.  The case
+\(m=2\) is the first one not covered by the dimension-four argument.
+
+The conclusion is independent of the classical decomposition of the diagonal
+and integral Hodge shadows of stable rationality.  The companion paper
+exhibits universally \(\mathrm{CH}_0\)-trivial cubic threefolds, for which that
+cycle-theoretic obstruction vanishes, while their first stabilizations remain
+irrational \cite{RuddEpilogue}.  The present invariant records irregular
+quantum-monodromy data instead; it makes no assertion about the Hodge
+conjecture.
+
+The endpoint contrast is
 \[
- b(X\times\mathbf P^2,\cP_6)=1,
- \qquad b(\mathbf P^5,\cP_6)=0,                            \tag{1.2}
+ b(X\times\mathbf P^m,\cP_6)=1,
+ \qquad b(\mathbf P^{m+3},\cP_6)=0.                          \tag{1.2}
 \]
-where an empty packet has value zero.  Conditional on (1.2),
-factorization-level invariance would obstruct a birational map between the
-two varieties.  The one-wall identities proved below supply the local rank
-row needed by that comparison.
-What is not supplied is a wall-independent sectorial realization at an
-intermediate chamber.  We call this the \(X\times\mathbf P^2\) assembly
-obstruction.  The terminology names the missing comparison, not a proved
-irrationality obstruction for the product.
+where an empty packet has value zero.  Section~\ref{sec:cubic-endpoint}
+proves (1.2).  Cai's cubic connection supplies the primitive-sixth block; we
+reconstruct its indicial polynomial from his matrices and compute the point
+coefficient independently from the cubic hypergeometric period.  Thus the
+cubic-specific source dependency is confined to one endpoint lemma.
 
-Our first result concerns a smooth projective simple VGIT wall
+The birational statement behind the application is more general.
+
+\begin{theorem}[Point-row primary invariance]
+\label{thm:intro-birational-point-primary}
+For smooth projective birational complex varieties, the Gamma point row is
+nonzero on a formal-monodromy primary packet at one endpoint if and only if
+it is nonzero on the corresponding packet at the other endpoint.
+\end{theorem}
+
+The proof uses a smooth projective equivariant completion of one W{\l}odarczyk
+cobordism.  A point in the common birational open sweeps out an orbit
+cylinder.  Its equivariant class restricts to the two endpoint point classes
+and vanishes on all intermediate fixed strata.  Rotation localization
+therefore removes every wall contribution.  In a neutral affine gauge
+direction, the two remaining endpoint series are the opposite residue
+expansions of one balanced Mellin--Barnes kernel.  Positive directions are
+Laurent-finite.  Rees homogenization makes both endpoint maps intertwine
+formal monodromy with the same half-Tate shift.  Finally, quotienting the
+common source by the intersection of the two kernels produces a finite
+differential module, where ordinary primary decomposition proves the
+theorem.
+
+The paper also records two local results which motivated the global
+construction.  The first concerns a smooth projective simple VGIT wall
 \(X_-\dashrightarrow X_+\) in the sense of Gu--Yu--Yu, oriented so that
 \(r_+<r_-\) \cite{GuYuYu}.  Their comparison is a formal, pairing-preserving
 decomposition
@@ -86,7 +125,7 @@ kills the transverse tail coefficient by coefficient.  This is a theorem
 about one distinguished column; it does not promote the ancestor comparison
 of \cite{LeeLinQuWang} to full descendant invariance.
 
-The discrepant case contains a further frame comparison.  A formal summand,
+The discrepant local case contains a further frame comparison.  A formal summand,
 a sectorial lift of that summand, and the intrinsic large-radius Gamma
 section are different objects.  Gu--Yu--Yu prove (1.3) in a Laurent/formal
 coefficient ring, while Shen--Shoemaker identify Gamma asymptotic classes at
@@ -106,17 +145,22 @@ but transforms back to a constant full-support module.  Boundary support in
 Fourier coordinates therefore points in the opposite direction from the
 desired rank conclusion.
 
-The surviving two-wall statement is one-sided.  Complete ray-ordered
+At the local level, the surviving two-wall statement is one-sided.  Complete ray-ordered
 corrections must have rank-zero \emph{targets}; their sources and scalar
 coefficients are irrelevant.  Under that hypothesis, a finite factorization
 preserves the point row by elementary linear algebra.  A signed punctual
 coefficient of an oriented boundary complex is a plausible shadow of these
-factorwise conditions, but it is not proved equivalent to them here.  A
-single alternating coefficient can vanish by cancellation; a marked
-blockwise comparison is still required.
+factorwise conditions, but it is not equivalent to them in the local
+formalism.  A single alternating coefficient can vanish by cancellation.
+The global construction in Section~\ref{sec:global-transport} bypasses this
+missing marked comparison.
 
-Sections~\ref{sec:point-row}--\ref{sec:ordinary-flop} prove the positive
-results.  Sections~\ref{sec:incomplete-gamma} and
-\ref{sec:fourier-boundary} give the countermodels.  Section~\ref{sec:two-wall}
-states the conditional assembly theorem, and Section~\ref{sec:scope}
-records the exact source and inference boundaries.
+Sections~\ref{sec:point-row}--\ref{sec:ordinary-flop} establish the point-row
+formalism and the local identities.  Sections~\ref{sec:incomplete-gamma} and
+\ref{sec:fourier-boundary} give the countermodels, and
+Section~\ref{sec:two-wall} isolates the local composition condition they
+force.  Section~\ref{sec:global-transport} proves
+Theorem~\ref{thm:intro-birational-point-primary} by the common-master method.
+Section~\ref{sec:cubic-endpoint} proves (1.2) and
+Theorem~\ref{thm:intro-cubic-stable}.  Section~\ref{sec:scope} records the source,
+analytic, and verification boundaries.

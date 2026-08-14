@@ -1,0 +1,255 @@
+\section{A common master and birational transport}
+\label{sec:global-transport}
+
+The obstruction in Sections~\ref{sec:incomplete-gamma}--\ref{sec:two-wall}
+comes from comparing two local receivers at an intermediate chamber.  We now
+avoid that comparison.  A single equivariant cobordism carries both endpoint
+quantum Kirwan maps, and virtual localization compares their point rows before
+either endpoint Novikov completion is taken.
+
+\subsection{The common point row}
+
+Let \(W\) be a smooth projective variety with a \(\Gm\)-action and let
+\(Y_-\) and \(Y_+\) be smooth free GIT quotients for two extreme
+linearizations.  Write \(\kappa_\pm\) for the corresponding quantum Kirwan
+maps and \(\tau_{Y_\pm,-}\) for Woodward's localized graph potentials.  The
+derivatives
+\[
+ A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm                       \tag{8.1}
+\]
+are the endpoint localized gauged maps; this is the localized adiabatic
+identity \cite[Equation~(68)]{WoodwardQKIII}.
+
+Suppose that a class \(a_p\in H^*_{\Gm}(W)\) has the following restrictions:
+\[
+ \kappa_\pm(a_p)=[p_\pm],\qquad
+ a_p|_F=0                                                     \tag{8.2}
+\]
+for every fixed component \(F\) occurring at an intermediate polarization.
+Here \(p_-\) and \(p_+\) lie in the common birational open set.
+
+\begin{proposition}[Support collapse]
+\label{prop:support-collapse}
+After Rees homogenization, the two endpoint point rows have one pullback:
+\[
+ \rrow_{Y_-,p_-}A_- =\rrow_{Y_+,p_+}A_+.                    \tag{8.3}
+\]
+The identity is coefficientwise in all remaining Novikov and bulk variables.
+\end{proposition}
+
+\begin{proof}
+Retain rotation of the parametrized graph curve, with equivariant parameter
+\(\hbar\).  At each ordinary input marking insert the normalized equivariant
+point class of \(0\in\mathbf P^1\).  Rotation localization then puts every
+input on the zero-side bubble tree.  Next choose equivariant divisor classes
+\(D_1,\ldots,D_s\) whose endpoint Kirwan restrictions span the two numerical
+divisor spaces, and insert Woodward's Liouville classes with parameters
+\(t_j\).  On a graph fixed locus their contribution is
+\[
+ \exp\!\left(\sum_jt_jD_j\right)
+ \prod_j x_j^{D_j\cdot d_+},
+ \qquad x_j=\exp(t_j\hbar),                                  \tag{8.4}
+\]
+where \(d_+\) is the degree on the infinity side
+\cite[Lemma~9.3]{WoodwardQKIII}.  Extracting the trivial character in all
+\(x_j\) forces \(d_+=0\).  The infinity factor is therefore the unstable
+identity, while the zero factor is exactly the localized graph potential in
+(8.1).  Using the full divisor lattice is important: a single wall-nef
+divisor can vanish on an extremal ray and would not detect \(d_+\).
+
+Every nonendpoint polarization-fixed graph has its principal component in a
+fixed quotient.  Moreover every marking and node lands in the corresponding
+fixed locus \cite[Proposition~3.15(c), Lemma~3.17 and
+Proposition~3.18]{GonzalezWoodward}.  Its insertion therefore factors through
+one of the restrictions in (8.2) and vanishes before division by the virtual
+normal Euler class.  Only the two endpoints survive the virtual Kalkman
+identity.  Their signs and node factors agree with Woodward's localized
+adiabatic identity, giving (8.3).  Polarizing in the ordinary inputs gives
+the entire row rather than only the scalar potential.
+\end{proof}
+
+For a birational map between smooth projective varieties, the required class
+exists globally.  W{\l}odarczyk's smooth birational cobordism admits a smooth
+projective equivariant completion whose source and sink quotients are the two
+endpoints \cite[Proposition~2(B')]{Wlodarczyk}.  Choose \(p\) in the common
+birational open.  There the cobordism is a trivial orbit cylinder.  The
+equivariant Poincar\'e dual of the closure of that orbit restricts to the two
+point classes and misses every intermediate fixed component.  It is the
+class \(a_p\) in (8.2).
+
+\subsection{One coefficient field}
+
+The two maps in (8.1) initially belong to opposite Novikov completions.  The
+next theorem compares them before completing in the exceptional directions.
+Fix a finite ample-energy and bulk Artin quotient of the equivariant Novikov
+ring.  For a primitive affine gauge direction \(\delta\), all ordinary curve
+degrees and fixed graph types are then finite; only the integer coordinate
+along \(\delta\) can remain unbounded.
+
+\begin{theorem}[Complete-neutral localization]
+\label{thm:complete-neutral}
+Suppose
+\[
+ c_1^{\Gm}(TW)\cdot\delta=0.                                 \tag{8.5}
+\]
+For every fixed ordinary curve class, the complete sum of rotation-fixed
+terms in the localized gauged potential is an Artin-valued balanced
+Mellin--Barnes kernel.  The two extreme polarization series are its two
+oriented residue expansions.  The assertion is preserved by arbitrary input
+and bulk derivatives and by the Rees substitution
+\[
+ Q^d\longmapsto z^{c_1^{\Gm}(TW)\cdot d}Q^d.                 \tag{8.6}
+\]
+If (8.5) fails, each homogeneous Artin coefficient is Laurent-finite in the
+\(\delta\)-direction.  Consequently the two maps \(A_-\) and \(A_+\) coexist
+over one meromorphic differential field.
+\end{theorem}
+
+\begin{proof}
+Woodward's classification of the rotation-fixed graph locus is exhaustive
+\cite[Corollary~9.10]{WoodwardQKIII}.  His virtual-normal splitting gives
+\[
+ \operatorname{Eul}(N_\pm)=
+ \operatorname{Eul}\!\left(
+  (R\pi_*\operatorname{ev}^*T(W/\Gm))_{\mathrm{mov}}
+ \right)(\mp\zeta)(\mp\zeta-\psi).                           \tag{8.7}
+\]
+The last two factors smooth the node and move the attaching point.  They are
+independent of the affine gauge degree, so gluing neither removes one end of
+the degree lattice nor creates a degree-dependent pole.
+
+Pass to a finite cover which clears stabilizer denominators and apply the
+splitting principle.  A virtual line in the moving index of the principal
+weighted component has nilpotent Chern root \(\alpha_a\) and degree
+\[
+ n_a(k)=h_ak+s_a.                                             \tag{8.8}
+\]
+For every integer \(n\), its inverse index Euler factor is the single
+meromorphic expression
+\[
+ \frac{1}{\prod_{m=0}^{n}(\alpha_a+m\zeta)}
+ =\zeta^{-n-1}
+   \frac{\Gamma(\alpha_a/\zeta)}
+        {\Gamma(\alpha_a/\zeta+n+1)}.                         \tag{8.9}
+\]
+For \(n<0\), the left side denotes the Euler class of \(H^1\); for
+\(n\geq0\), it denotes the inverse Euler class of \(H^0\).  Thus the two
+degree rays are not assigned unrelated Gamma products.
+
+The signed sum of the moving slopes is
+\[
+ \sum_a\epsilon_a h_a=c_1^{\Gm}(TW)\cdot\delta.              \tag{8.10}
+\]
+The gauge Lie algebra has slope zero.  Moving modes on attached fixed bubbles
+have fixed rank at the chosen ordinary degree.  Their Euler factors are
+finite products of linear functions of \(k\), possibly inverted.  Each
+inverse factor is an adjacent Gamma ratio
+\[
+ (hk+a)^{-1}=\frac{\Gamma(hk+a)}{\Gamma(hk+a+1)},              \tag{8.11}
+\]
+so it has zero signed slope and does not alter (8.10).  Equivariant inputs
+are polynomial in \(k\); Chern roots and psi classes are nilpotent at Artin
+level; Liouville classes supply the Fourier exponential.
+
+Under (8.5), these factors satisfy the balanced contour hypotheses of
+Aleshkin--Liu's Mellin--Barnes wall-crossing theorem
+\cite[Definition~5.18 and Theorem~5.21]{AleshkinLiu}.  The present use is not
+a direct quotation of their linear GLSM theorem: equations (8.7)--(8.11)
+reduce each nonlinear fixed-graph coefficient to their balanced kernel.
+The residue orientation is fixed by virtual localization.  For one moving
+character,
+\[
+ \operatorname*{Res}_{h\sigma+\alpha=-m}
+ \Gamma(h\sigma+\alpha)\,d\sigma
+ =\frac{(-1)^m}{h\,m!}.                                      \tag{8.12}
+\]
+The factorial is the moving-mode Euler factor, \(1/h\) is the
+stabilizer/Jacobian factor, and the sign is the complex virtual-normal
+orientation.  Products of (8.12), followed by the finite nilpotent
+derivatives, reproduce every fixed term with its multiplicity.
+
+One must sum the gluing types before moving the contour.  A pole in (8.11)
+can be the boundary presentation of another fixed graph.  Woodward's cutting
+and gluing identities and the exhaustive fixed-locus union show that the
+complete finite graph sum contains each such boundary term once.  Contour
+deformation therefore produces the two complete chamber expansions, not
+merely two sequences satisfying the same recurrence.
+
+If (8.5) fails, the virtual-dimension equation fixes \(k\) in each homogeneous
+coefficient, hence the coefficient is Laurent-finite.  Taking a basis of the
+degree lattice combines the Laurent-finite and balanced directions into one
+field.  Differentiation and (8.6) only add polynomial factors or nilpotent
+Gamma shifts.  All operations commute with quotient maps between Artin
+truncations, so the inverse limit never evaluates a formal Novikov variable
+at a nonzero value.
+\end{proof}
+
+\subsection{The finite packet}
+
+Formal smooth-endpoint quantum Kirwan surjectivity is elementary in this
+setting.  Modulo the positive-energy ideal, \(D\kappa_\pm\) is the derivative
+of the classical Kirwan map and is surjective.  Choose a linear section of
+the reduction.  Its arbitrary lift has composite \(1+N\), with \(N\) in the
+augmentation ideal, and the convergent Neumann series
+\(\sum_{j\geq0}(-N)^j\) gives a right inverse.  Since
+\(D\tau_{Y_\pm,-}\) is an invertible fundamental solution, the maps (8.1)
+are surjective as well.
+
+The Rees factor in (8.6) is needed to compare formal monodromy.  Homogeneity
+of \(D\kappa\) gives
+\[
+ \mu_YA-A\mu_W=\frac12A-\Theta_QA,                            \tag{8.13}
+\]
+because the acting group has dimension one and
+\(\Theta_Q(Q^d)=c_1^{\Gm}(TW)\cdot d\,Q^d\).  After (8.6), the
+\(\Theta_Q\)-term becomes \(z\partial_z\), so both endpoint maps intertwine
+the \(z\)-connections with the same half-Tate shift.  The Euler-product term
+intertwines because the virtual-dimension identity makes the quantum Kirwan
+map homogeneous and its derivative a quantum-product morphism.  The target
+bulk point \(\kappa(0)\) has positive energy and is formally parallel to the
+large-radius point; this transport preserves the point row.
+
+Let \(M\) be the common continued source supplied by
+Theorem~\ref{thm:complete-neutral}.  It need not have finite rank.  Set
+\[
+ \overline M=M/(\ker A_-\cap\ker A_+).                        \tag{8.14}
+\]
+It injects into the direct sum of the two finite endpoint modules and is
+therefore finite.  Both kernels are stable under the common connection, so
+formal monodromy acts on \(\overline M\).  Primary decomposition and
+surjectivity show that each endpoint \(\lambda\)-primary packet is the image
+of the same shifted primary packet of \(\overline M\).
+
+\begin{theorem}[Birational invariance of the point-row primary Boolean]
+\label{thm:birational-point-primary}
+Let \(Y_-\) and \(Y_+\) be smooth projective birational complex varieties.
+For every formal-monodromy eigenvalue \(\lambda\),
+\[
+ \rrow_{Y_-}|_{\cP_\lambda(Y_-)}\ne0
+ \quad\Longleftrightarrow\quad
+ \rrow_{Y_+}|_{\cP_\lambda(Y_+)}\ne0.                       \tag{8.15}
+\]
+Here the packets are realized in the common field constructed in
+Theorem~\ref{thm:complete-neutral}; no chamberwise sector identification is
+part of the statement.
+\end{theorem}
+
+\begin{proof}
+Use the global W{\l}odarczyk completion and its orbit-cylinder class.  By
+Proposition~\ref{prop:support-collapse}, there is one row \(\rho\) on \(M\)
+such that
+\[
+ \rrow_{Y_-}A_-=\rho=\rrow_{Y_+}A_+.                         \tag{8.16}
+\]
+Theorem~\ref{thm:complete-neutral} and (8.14) place both surjections and this
+row in one finite differential module.  If a vector in the first endpoint
+\(\lambda\)-packet is detected by the point row, lift it to the corresponding
+primary packet of \(\overline M\).  Equation (8.16) shows that its image at
+the second endpoint is detected by the second point row.  The reverse
+implication is symmetric.
+\end{proof}
+
+Theorem~\ref{thm:birational-point-primary} is the global replacement for
+Hypothesis~\ref{hyp:rank-zero-target}.  The countermodels remain relevant:
+they show why the theorem cannot be obtained by composing the localized
+one-wall receivers or by retaining only their unmarked Fourier boundary.

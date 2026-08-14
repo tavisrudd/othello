@@ -35,6 +35,8 @@ for path in TEX:
 all_tex = "\n".join(path.read_text(encoding="utf-8") for path in TEX)
 required_labels = {
     "def:point-row",
+    "thm:intro-cubic-stable",
+    "thm:intro-birational-point-primary",
     "thm:simple-wall-point-column",
     "hyp:one-wall-sectorial",
     "cor:simple-wall-rank",
@@ -44,6 +46,10 @@ required_labels = {
     "hyp:rank-zero-target",
     "thm:rank-zero-target",
     "eq:blockwise-boundary-marking",
+    "prop:support-collapse",
+    "thm:complete-neutral",
+    "thm:birational-point-primary",
+    "prop:cubic-endpoint",
 }
 found = set(re.findall(r"\\label\{([^}]+)\}", all_tex))
 for label in sorted(required_labels - found):
@@ -58,11 +64,17 @@ if "This implication is \\emph{not} proved here" not in conditional_text:
 scope_text = (ROOT / "sections/08-scope.tex").read_text(encoding="utf-8")
 if "They are not asserted to arise from smooth projective quantum connections" not in scope_text:
     errors.append("analytic countermodel scope boundary missing")
+if "Cai enters only Proposition" not in scope_text:
+    errors.append("Cai endpoint dependency is not visibly isolated")
+
+endpoint_text = (ROOT / "sections/09-cubic-endpoint.tex").read_text(encoding="utf-8")
+if "The transport theorem and its" not in endpoint_text or "do not use Cai" not in endpoint_text:
+    errors.append("transport theorem is not visibly separated from the Cai endpoint")
 
 metadata = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
 if metadata.get("title") != (
     "The Point-Class Rank Functional under Birational Wall Crossing: "
-    "Exact One-Wall Identities toward the X × P² Problem"
+    "Irrationality of X × P^m for Every Cubic Threefold"
 ):
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":

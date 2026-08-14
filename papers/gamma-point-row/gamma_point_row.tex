@@ -37,13 +37,12 @@
 \newcommand{\zetaSix}{\zeta_{6}}
 
 \title{The Point-Class Rank Functional under Birational Wall Crossing:\\
-  Exact One-Wall Identities toward the
-  \(X\times\mathbf P^2\) Problem}
+  Irrationality of \(X\times\mathbf P^m\) for Every Cubic Threefold}
 \author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
 \date{August 2026}
 \hypersetup{
   pdftitle={The Point-Class Rank Functional under Birational Wall Crossing:
-    Exact One-Wall Identities toward the X times P2 Problem},
+    Irrationality of X times Pm for Every Cubic Threefold},
   pdfauthor={Tavis Rudd},
   pdfsubject={Gamma-framed rank under birational quantum wall crossing},
   pdfkeywords={quantum cohomology, birational wall crossing, Gamma class,
@@ -55,34 +54,29 @@
 
 \begin{abstract}
 The Gamma integral structure turns the class of a point into the flat Euler
-covector which reads ordinary rank.  We isolate the behavior of this single
-row under birational quantum wall crossing.  For a smooth projective simple
-VGIT wall with positive discrepancy \(r_+<r_-\), the formal
-quantum-D-module comparison of Gu--Yu--Yu sends the
-common-open point class to the point class in its ambient summand exactly;
-the assertion concerns the full wall parameter, not only its leading term.
-For a projective ordinary flop, the Lee--Lin--Qu--Wang continuation preserves
-the intrinsic point row on each fixed continuation domain.  The proof uses
-support at transverse degree zero and a divisor recursion, and does not
-invoke full descendant invariance.
+covector which reads ordinary rank.  We prove that the zero or nonzero
+restriction of this row to a fixed formal-monodromy primary packet is a
+birational invariant of smooth projective varieties.  The proof uses one
+smooth projective equivariant completion of a W{\l}odarczyk cobordism rather
+than a sequence of chamberwise comparisons.  A common-open orbit cylinder
+gives one point row at the two endpoints.  Rotation localization kills every
+intermediate fixed stratum.  The remaining two endpoint gauged series are
+the opposite residue expansions of one balanced Mellin--Barnes kernel;
+after Rees homogenization, a finite quotient of their common source carries
+the formal primary decomposition needed to compare the rows.
 
-We then locate the obstruction to composing discrepant wall comparisons.
-An incomplete-Gamma connection gives a rank-two Stokes shear from a
-primitive-sixth formal line into a rank-visible ambient line.  The shear
-persists after imposing a flat integral pairing and a length-three nilpotent
-tag.  Localized Fourier--Laplace transform forgets precisely the constant
-extension responsible for this jump, while a punctual module at a
-two-coordinate Fourier corner can transform back to a full-support module.
-Thus formal monodromy, pairing, integrality, nilpotent tagging, and bare
-boundary support do not determine the point row.  We formulate the remaining
-two-wall problem as a factorwise rank-zero-target condition and prove that
-this condition is sufficient for factorization-level point-row invariance.
-A single signed punctual boundary coefficient is only a candidate shadow of
-that condition: identifying the two requires an additional marked comparison
-theorem.  For a smooth cubic threefold
-\(X\), this is the unresolved assembly step in the point-row approach to the
-\(m=2\) stabilization problem for \(X\times\mathbf P^2\); no irrationality
-statement for that product is asserted here.
+For a smooth cubic threefold \(X\), we isolate the only cubic-specific input.
+Cai's small quantum-connection matrices give a rank-two block with
+primitive-sixth formal monodromy.  We reconstruct its indicial polynomial
+directly, and an elementary \({}_2F_3\) Barnes calculation shows that the
+Gamma point row is nonzero on both primitive-sixth lines.  Quantum K\"unneth
+then makes the packet nonzero on \(X\times\mathbf P^m\), whereas
+\(\mathbf P^{m+3}\) has no primitive-sixth packet.  Birational invariance
+therefore implies that \(X\times\mathbf P^m\) is irrational for every
+\(m\geq0\).  We also prove exact
+one-wall point identities and give countermodels showing why formal
+monodromy, pairing, integrality, and localized Fourier support alone cannot
+replace the common-master argument.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Gamma class; quantum cohomology; birational wall
@@ -96,6 +90,8 @@ GKZ system.
 \input{sections/05-incomplete-gamma}
 \input{sections/06-fourier-boundary}
 \input{sections/07-two-wall-criterion}
+\input{sections/08-global-transport}
+\input{sections/09-cubic-endpoint}
 \input{sections/08-scope}
 
 \section*{AI assistance disclosure}

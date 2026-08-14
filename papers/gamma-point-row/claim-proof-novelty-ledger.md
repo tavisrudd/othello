@@ -1,6 +1,6 @@
 # Claim--proof--novelty ledger
 
-Date: 2026-08-13
+Date: 2026-08-14
 
 This ledger governs the public claim surface of the manuscript. It is not
 exported to the standalone paper repository. The audit is a
@@ -20,6 +20,11 @@ makes no negative novelty claim.
 | `hyp:rank-zero-target` | Every complete ray-ordered correction has point-row-zero output target. | explicit hypothesis | Not proved in the paper | Boundary-supported targets are one sufficient geometric source; bare Fourier support and one global signed coefficient do not imply the condition |
 | `thm:rank-zero-target` | The rank-zero-target condition is sufficient for point-row invariance through a finite factorization. | unconditional implication from named hypothesis | One-line covector calculation and induction | No general factorization consequence without the hypothesis |
 | `eq:blockwise-boundary-marking` | A blockwise identity between the point row of a ray target and a marked punctual coefficient would reduce the remaining problem to singular data. | open comparison, not a theorem | Formulated as equation (7.8) | The global alternating coefficient (7.6) can vanish by cancellation and is not sufficient |
+| `prop:support-collapse` | The two extreme localized gauged maps pull the endpoint point rows back to one row on a global master source. | unconditional | Global orbit-cylinder class; commuting graph rotation; full divisor-character extraction; wall-fixed support vanishing | One distinguished point row only; does not identify arbitrary rows or full Stokes data |
+| `thm:complete-neutral` | Complete neutral fixed-graph sums at the two extreme polarizations are residue expansions of one balanced Mellin--Barnes kernel. | unconditional new synthesis | Woodward exhaustive fixed loci and virtual-normal splitting; whole-integer Gamma continuation of each moving index; adjacent-ratio bubble factors; oriented residues; Aleshkin--Liu balanced contour theorem | Nonlinear coefficientwise reduction is proved here, not stated by either source; external specialist review remains important |
+| `thm:birational-point-primary` | Nonvanishing of the point row on a formal-monodromy primary packet is invariant under smooth projective birational equivalence. | unconditional | Support collapse; complete-neutral common field; Rees half-Tate shift; formal endpoint surjectivity; finite kernel-intersection quotient; primary decomposition | A one-row Boolean theorem, not birational invariance of all Stokes or Gamma data |
+| `prop:cubic-endpoint` | The cubic Gamma point row is nonzero on both primitive-sixth lines. | unconditional endpoint lemma | Cai matrices reconstructed through the exact indicial polynomial; direct hypergeometric Barnes coefficients | Cai is used only for the cubic connection and big/small flatness; point coefficient is proved independently |
+| `thm:intro-cubic-stable` | For every smooth complex cubic threefold `X`, `X × P^m` is irrational for every `m ≥ 0`. | unconditional application | Cubic endpoint lemma; quantum Künneth; uniform projective-space exponent calculation; birational point-primary invariance | This is the stable-irrationality conclusion; the `m=2` case is the first beyond the companion epilogue |
 
 ## Novelty language
 
@@ -32,6 +37,12 @@ The closest source-level relationship is stated positively:
 - Gu--Yu--Yu supply the formal pairing-preserving comparison and Fourier maps;
 - Shen--Shoemaker supply the extremal Gamma asymptotic blocks;
 - Lee--Lin--Qu--Wang supply ordinary-flop continuation;
+- Woodward and Gonzalez--Woodward supply the global gauged fixed-locus and
+  virtual Kalkman formulas;
+- Aleshkin--Liu supply the balanced linear Mellin--Barnes theorem used after
+  the coefficientwise fixed-graph reduction;
+- Cai supplies the cubic connection matrices and big/small flatness, while
+  the point coefficient is recomputed in the manuscript;
 - Reichelt--Schulze--Sevenheck--Walther identify the localized
   Fourier--Laplace kernel used in the methodological boundary.
 

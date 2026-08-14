@@ -1,0 +1,431 @@
+{
+  "barnes_nonpole_arguments": [
+    "1/3",
+    "2/3",
+    "-1/3"
+  ],
+  "cai_rank_two_block": {
+    "d11": "-19/18",
+    "d22": "19/18",
+    "fractional_residues_mod_Z": [
+      "-1/6",
+      "1/6"
+    ],
+    "indicial_coefficients_constant_first": [
+      "5/36",
+      "1",
+      "1"
+    ],
+    "jordan_link": "1",
+    "return_link": "-16/81",
+    "roots": [
+      "-1/6",
+      "-5/6"
+    ]
+  },
+  "hypergeometric": {
+    "checked_degree_range": [
+      0,
+      12
+    ],
+    "checks": [
+      {
+        "coefficient_in_x": "2/9",
+        "degree": 1,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "5/162",
+        "degree": 2,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "140/59049",
+        "degree": 3,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "1925/17006112",
+        "degree": 4,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "7007/1913187600",
+        "degree": 5,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "119119/1394713760400",
+        "degree": 6,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "46189/30753438416820",
+        "degree": 7,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "11685817/566847376898826240",
+        "degree": 8,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "759578105/3347177075849879064576",
+        "degree": 9,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "4405553009/2151756691617779398656000",
+        "degree": 10,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "1128695399/73226969911617555160512000",
+        "degree": 11,
+        "recurrence": true
+      },
+      {
+        "coefficient_in_x": "19187821783/195227286182653065918219878400",
+        "degree": 12,
+        "recurrence": true
+      }
+    ],
+    "operator": "D^4-x(D+1/3)(D+2/3)"
+  },
+  "projective_space": {
+    "checked_dimension_range": [
+      0,
+      64
+    ],
+    "checks": [
+      {
+        "dimension": 0,
+        "grading_diagonal_average": "0",
+        "rank": 1
+      },
+      {
+        "dimension": 1,
+        "grading_diagonal_average": "0",
+        "rank": 2
+      },
+      {
+        "dimension": 2,
+        "grading_diagonal_average": "0",
+        "rank": 3
+      },
+      {
+        "dimension": 3,
+        "grading_diagonal_average": "0",
+        "rank": 4
+      },
+      {
+        "dimension": 4,
+        "grading_diagonal_average": "0",
+        "rank": 5
+      },
+      {
+        "dimension": 5,
+        "grading_diagonal_average": "0",
+        "rank": 6
+      },
+      {
+        "dimension": 6,
+        "grading_diagonal_average": "0",
+        "rank": 7
+      },
+      {
+        "dimension": 7,
+        "grading_diagonal_average": "0",
+        "rank": 8
+      },
+      {
+        "dimension": 8,
+        "grading_diagonal_average": "0",
+        "rank": 9
+      },
+      {
+        "dimension": 9,
+        "grading_diagonal_average": "0",
+        "rank": 10
+      },
+      {
+        "dimension": 10,
+        "grading_diagonal_average": "0",
+        "rank": 11
+      },
+      {
+        "dimension": 11,
+        "grading_diagonal_average": "0",
+        "rank": 12
+      },
+      {
+        "dimension": 12,
+        "grading_diagonal_average": "0",
+        "rank": 13
+      },
+      {
+        "dimension": 13,
+        "grading_diagonal_average": "0",
+        "rank": 14
+      },
+      {
+        "dimension": 14,
+        "grading_diagonal_average": "0",
+        "rank": 15
+      },
+      {
+        "dimension": 15,
+        "grading_diagonal_average": "0",
+        "rank": 16
+      },
+      {
+        "dimension": 16,
+        "grading_diagonal_average": "0",
+        "rank": 17
+      },
+      {
+        "dimension": 17,
+        "grading_diagonal_average": "0",
+        "rank": 18
+      },
+      {
+        "dimension": 18,
+        "grading_diagonal_average": "0",
+        "rank": 19
+      },
+      {
+        "dimension": 19,
+        "grading_diagonal_average": "0",
+        "rank": 20
+      },
+      {
+        "dimension": 20,
+        "grading_diagonal_average": "0",
+        "rank": 21
+      },
+      {
+        "dimension": 21,
+        "grading_diagonal_average": "0",
+        "rank": 22
+      },
+      {
+        "dimension": 22,
+        "grading_diagonal_average": "0",
+        "rank": 23
+      },
+      {
+        "dimension": 23,
+        "grading_diagonal_average": "0",
+        "rank": 24
+      },
+      {
+        "dimension": 24,
+        "grading_diagonal_average": "0",
+        "rank": 25
+      },
+      {
+        "dimension": 25,
+        "grading_diagonal_average": "0",
+        "rank": 26
+      },
+      {
+        "dimension": 26,
+        "grading_diagonal_average": "0",
+        "rank": 27
+      },
+      {
+        "dimension": 27,
+        "grading_diagonal_average": "0",
+        "rank": 28
+      },
+      {
+        "dimension": 28,
+        "grading_diagonal_average": "0",
+        "rank": 29
+      },
+      {
+        "dimension": 29,
+        "grading_diagonal_average": "0",
+        "rank": 30
+      },
+      {
+        "dimension": 30,
+        "grading_diagonal_average": "0",
+        "rank": 31
+      },
+      {
+        "dimension": 31,
+        "grading_diagonal_average": "0",
+        "rank": 32
+      },
+      {
+        "dimension": 32,
+        "grading_diagonal_average": "0",
+        "rank": 33
+      },
+      {
+        "dimension": 33,
+        "grading_diagonal_average": "0",
+        "rank": 34
+      },
+      {
+        "dimension": 34,
+        "grading_diagonal_average": "0",
+        "rank": 35
+      },
+      {
+        "dimension": 35,
+        "grading_diagonal_average": "0",
+        "rank": 36
+      },
+      {
+        "dimension": 36,
+        "grading_diagonal_average": "0",
+        "rank": 37
+      },
+      {
+        "dimension": 37,
+        "grading_diagonal_average": "0",
+        "rank": 38
+      },
+      {
+        "dimension": 38,
+        "grading_diagonal_average": "0",
+        "rank": 39
+      },
+      {
+        "dimension": 39,
+        "grading_diagonal_average": "0",
+        "rank": 40
+      },
+      {
+        "dimension": 40,
+        "grading_diagonal_average": "0",
+        "rank": 41
+      },
+      {
+        "dimension": 41,
+        "grading_diagonal_average": "0",
+        "rank": 42
+      },
+      {
+        "dimension": 42,
+        "grading_diagonal_average": "0",
+        "rank": 43
+      },
+      {
+        "dimension": 43,
+        "grading_diagonal_average": "0",
+        "rank": 44
+      },
+      {
+        "dimension": 44,
+        "grading_diagonal_average": "0",
+        "rank": 45
+      },
+      {
+        "dimension": 45,
+        "grading_diagonal_average": "0",
+        "rank": 46
+      },
+      {
+        "dimension": 46,
+        "grading_diagonal_average": "0",
+        "rank": 47
+      },
+      {
+        "dimension": 47,
+        "grading_diagonal_average": "0",
+        "rank": 48
+      },
+      {
+        "dimension": 48,
+        "grading_diagonal_average": "0",
+        "rank": 49
+      },
+      {
+        "dimension": 49,
+        "grading_diagonal_average": "0",
+        "rank": 50
+      },
+      {
+        "dimension": 50,
+        "grading_diagonal_average": "0",
+        "rank": 51
+      },
+      {
+        "dimension": 51,
+        "grading_diagonal_average": "0",
+        "rank": 52
+      },
+      {
+        "dimension": 52,
+        "grading_diagonal_average": "0",
+        "rank": 53
+      },
+      {
+        "dimension": 53,
+        "grading_diagonal_average": "0",
+        "rank": 54
+      },
+      {
+        "dimension": 54,
+        "grading_diagonal_average": "0",
+        "rank": 55
+      },
+      {
+        "dimension": 55,
+        "grading_diagonal_average": "0",
+        "rank": 56
+      },
+      {
+        "dimension": 56,
+        "grading_diagonal_average": "0",
+        "rank": 57
+      },
+      {
+        "dimension": 57,
+        "grading_diagonal_average": "0",
+        "rank": 58
+      },
+      {
+        "dimension": 58,
+        "grading_diagonal_average": "0",
+        "rank": 59
+      },
+      {
+        "dimension": 59,
+        "grading_diagonal_average": "0",
+        "rank": 60
+      },
+      {
+        "dimension": 60,
+        "grading_diagonal_average": "0",
+        "rank": 61
+      },
+      {
+        "dimension": 61,
+        "grading_diagonal_average": "0",
+        "rank": 62
+      },
+      {
+        "dimension": 62,
+        "grading_diagonal_average": "0",
+        "rank": 63
+      },
+      {
+        "dimension": 63,
+        "grading_diagonal_average": "0",
+        "rank": 64
+      },
+      {
+        "dimension": 64,
+        "grading_diagonal_average": "0",
+        "rank": 65
+      }
+    ],
+    "identity": "sum_{k=0}^m (m/2-k)=0"
+  },
+  "schema": "gamma-point-row-cubic-endpoint-v1",
+  "trust_boundary": "Exact arithmetic regression only; the Barnes asymptotic theorem, quantum Kunneth theorem, and birational localization proof are not machine-verified."
+}

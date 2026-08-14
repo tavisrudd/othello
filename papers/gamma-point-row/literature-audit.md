@@ -1,6 +1,6 @@
 # Literature audit
 
-Date: 2026-08-13
+Date: 2026-08-14
 
 Scope: theorem and source-characterization audit for the claims used in the
 manuscript. This is not an exhaustive citation-graph or novelty search.
@@ -16,6 +16,12 @@ manuscript. This is not an exhaustive citation-graph or novelty search.
 | Reichelt--Schulze--Sevenheck--Walther | arXiv:2004.07262; cache key `arXiv:2004.07262`; SHA-256 `4ec2933d806effbfa4cef9301348e0f6649c949830fa951b0c84944b40bdbdf8` | Definition 5.6 and discussion of the four-term comparison; relevant non-affine mirror summary | Localized partial Fourier--Laplace and loss of free constant modules | Does not identify the two-wall point row |
 | Špenko--Van den Bergh | *Advances in Mathematics* 402 (2022), 108307, DOI `10.1016/j.aim.2022.108307`; arXiv:2007.04924; cache key `arXiv:2007.04924`; SHA-256 `73dffed6c948ac1dd48de1bab994a09e55e875b29dc69473d1d5d6d1e324fd0d` | Main schober/GKZ comparison and quasi-symmetric hypotheses | Scope paragraph on categorical window markings | Quasi-symmetric, nonresonant setting; no discrepant confluence theorem used |
 | Acosta--Shoemaker | arXiv:1604.03491v2; cache key `arXiv:1604.03491`; SHA-256 `c9762c933a64ea3d415bd1ad955f673d6d8e24a7c130a573fbd96d7aeb6bbd94` | Main discrepant toric continuation statements and complete-intersection compatibility | Scope paragraph on general toric asymptotic continuation | No general Gamma/window-calibrated two-wall point-row theorem |
+| Woodward | arXiv:1408.5869v7; cache key `arXiv:1408.5869`; SHA-256 `5aa794f4d83dd8d127aab769d95a71a4691d7a35d220e81ca73c5b8bb360ea51` | Corollary 9.10; equations (57)--(59), Definition 9.13, equation (68); rotation-localization and adiabatic-limit sections | Exhaustive rotation-fixed graph loci, virtual-normal splitting, localized gauged maps | Does not state the nonlinear complete-neutral continuation theorem proved here; general quantum Kirwan surjectivity remains conjectural, so the paper proves only the smooth formal endpoint lemma it needs |
+| Gonzalez--Woodward | arXiv:1208.1727v7; cache key `arXiv:1208.1727`; SHA-256 `2c99203c8e1d7dd373112629bbfac0760e7a3812d348e9110a1eb2b894d9d84c` | Proposition 3.15(c), Lemma 3.17, Proposition 3.18, virtual Kalkman formula | Marking/node support on wall-fixed loci and polarization localization | Supplies the support statement, not the orbit-cylinder point-row theorem |
+| Aleshkin--Liu | arXiv:2301.01266v1; cache key `arXiv:2301.01266`; SHA-256 `921af8ed2105d6a511c0cf485550a263e222983c6fcc628b44c838bb3d8de81f` | Definition 5.18, Theorem 5.21, Remark 5.4 and surrounding Mellin--Barnes construction | Balanced contour continuation after coefficientwise reduction of the nonlinear fixed-graph sum | Proved for abelian linear GLSMs; the reduction from Woodward's nonlinear virtual localization is new in the manuscript |
+| Cai | arXiv:2608.01577v1; cache key `arXiv:2608.01577`; SHA-256 `06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e` | Full paper, especially Section 3 and Proposition 6 | Cubic small-connection matrices, primitive-sixth block, and big/small flatness | The manuscript reconstructs the indicial polynomial and independently computes the Gamma point coefficient; Cai is not used in the birational transport theorem |
+| NIST DLMF | Section 16.11, equations 16.11.2 and 16.11.8; official web reference accessed 2026-08-14 | Generalized-hypergeometric algebraic asymptotic coefficients | Two nonzero Barnes coefficients for the cubic point period | Standard analytic source; branch phases affect only nonzero scalar factors |
+| Rudd epilogue | Zenodo DOI `10.5281/zenodo.21909944`; current companion preprint | Main dimension-four theorem and universal-CH0 examples | Independent `X × P^1` comparison and cycle-theoretic context | Logically separate proof; not used in the all-`m` transport argument |
 | Wlodarczyk | arXiv:math/9904074v1; cache key `arXiv:math/9904074`; SHA-256 `ac86c460c3a039284565630ef63a77028af53a71697d4d0deb356574d2b3aa9c` | Propositions 1--2, Lemmas 4, 9, 11, Theorems 1--3, definitions and local quotient example | Scope of birational cobordism and finite-quotient chamber singularities | Smooth master does not force smooth chamber quotients |
 | Abramovich--Karu--Matsuki--Wlodarczyk | arXiv:math/9904135; cache key `arXiv:math/9904135`; SHA-256 `55bbc2c58f29d4b9dbe965035f80f3844f6968eaf98076ac625132ac3b3977a5` | Theorems 0.1.1, 0.3.1, 2.3.1, 2.6.2, 2.7.1 and surrounding quotient/subdivision lemmas | Scope of locally toric wall quotients and the cost of desingularizing them | Smooth weak factorization replaces walls by actual blow-ups/down |
 
@@ -28,12 +34,18 @@ manuscript. This is not an exhaustive citation-graph or novelty search.
    connection comparison; it is not attributed to a descendant theorem.
 4. The incomplete-Gamma and Weyl-algebra calculations are proved directly
    and are not presented as geometric quantum examples.
-5. The two-wall result is an implication from a named factorwise hypothesis,
-   not a theorem that the hypothesis holds. A single signed punctual
-   coefficient is recorded only as a candidate shadow; no equivalence with
-   the factorwise point-row values is claimed.
-6. No cited factorization theorem is used to claim that every chamber remains
-   smooth projective.
+5. The local two-wall result remains an implication from a named factorwise
+   hypothesis. The global theorem bypasses, rather than proves, that local
+   hypothesis.
+6. No cited factorization theorem is used to claim that every intermediate
+   chamber remains smooth projective. The global proof forms quantum
+   D-modules only at the two smooth endpoints.
+7. The complete-neutral theorem is a new synthesis. The fixed-locus formulas
+   and the linear balanced contour theorem are cited separately from the
+   coefficientwise reduction joining them.
+8. Cai is not cited for point-row nonvanishing. His matrices and flatness
+   identify the cubic block; the point coefficient is derived from the
+   hypergeometric Barnes expansion in the manuscript.
 
 ## Priority boundary
 
