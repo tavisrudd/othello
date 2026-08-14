@@ -231,8 +231,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-81 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 144 reviewer terminals, audit
+82 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 145 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -307,8 +307,12 @@ geometric Gromov--Witten invariance, curve-pairing weights, and quantum
 connection remain open.
 Compatible finite-level monodromy matrices now derive their characteristic-
 polynomial inverse system; compatible pro-Laurent gauges preserve it under
-conjugacy; and compatible coefficient reductions, divisor substitutions, small
-matrices, and gauges derive the bulk matrices and levelwise substituted
+conjugacy.  Flat coefficient extension over a field now also preserves the
+kernel of a supplied derivative and every supplied exact constants--derivative
+pair, closing the linear differential-constant step of coefficientwise base
+change while leaving the Levelt--Turrittin solution algebra, horizontal module,
+and inverse-limit passage open.  Compatible coefficient reductions, divisor
+substitutions, small matrices, and gauges derive the bulk matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial
 system.  A supplied decreasing ideal filtration now constructs the finite-level
 quotient rings and reductions, and a filtration-preserving endomorphism descends

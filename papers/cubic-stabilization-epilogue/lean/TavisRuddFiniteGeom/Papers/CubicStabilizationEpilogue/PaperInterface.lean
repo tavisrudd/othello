@@ -33,6 +33,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurent
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurentGaugeConjugacy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.DifferentialConstantsBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent
@@ -2176,6 +2177,26 @@ theorem framedMonodromy_characteristicPolynomial_baseChange_and_gauge
       monodromy.charpoly.map extension :=
   Quantum.framedCharacteristicPolynomial_map_and_conjugate
     monodromy extension gauge
+
+/-- The differential-constant step in coefficientwise base change.  Over a
+field, tensoring a linear derivative with any commutative coefficient algebra
+preserves its kernel: the extended constants are exactly the scalar extensions
+of the original constants.  More generally, any exact presentation of the
+original constants remains exact after extension.  This does not construct a
+Levelt--Turrittin algebra, horizontal module, or framed-monodromy operator. -/
+theorem differentialConstants_flatCoefficientBaseChange
+    {k C R B : Type*} [Field k]
+    [AddCommGroup C] [Module k C]
+    [AddCommGroup R] [Module k R]
+    [CommRing B] [Algebra k B]
+    (constants : C →ₗ[k] R) (derivative : R →ₗ[k] R)
+    (exact : Function.Exact constants derivative) :
+    LinearMap.ker (derivative.lTensor B) =
+        LinearMap.range ((LinearMap.ker derivative).subtype.lTensor B) ∧
+      Function.Exact
+        (constants.lTensor B) (derivative.lTensor B) :=
+  ⟨Quantum.differentialConstants_baseChange derivative,
+    Quantum.differentialConstants_exact_baseChange constants derivative exact⟩
 
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.

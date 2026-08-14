@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 144 reviewer-facing Lean terminals.  These counts summarize the
+There are 145 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 144 reviewer terminals.
+1 complete; 145 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -98,9 +98,13 @@ objects, hypotheses, conclusions, and cautions recorded in
   quotients, construction of the small and bulk
   monodromy matrices, divisor substitutions, and the manuscript's
   multivariable Laurent integral-`z` gauge from the string/divisor/bulk flat
-  equations.  Lean proves the coefficientwise multivariate partial derivatives
-  are commuting derivations, derives their necessary zero-curvature identity
-  from an invertible supplied solution, and conversely constructs the unique
+  equations.  The linear differential-constant calculation under flat
+  coefficient extension is now proved; the Levelt--Turrittin solution algebra,
+  fundamental solution, horizontal-module identification, and completed
+  inverse-limit passage remain open.  Lean proves the coefficientwise
+  multivariate partial derivatives are commuting derivations, derives their
+  necessary zero-curvature identity from an invertible supplied solution, and
+  conversely constructs the unique
   normalized invertible multivariable formal gauge from zero curvature over any
   commutative rational algebra, naturally under rational-algebra coefficient
   homomorphisms.  It also proves the necessary result for

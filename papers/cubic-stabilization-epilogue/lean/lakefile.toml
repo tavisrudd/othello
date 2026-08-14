@@ -57,6 +57,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProLaurentGaugeConjugacy",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonodromyBaseChange",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.DifferentialConstantsBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikov",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalNovikovCompletion",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NumericalCoefficientDescent",
