@@ -7,9 +7,10 @@ smooth projective completions and one locally finite marked-threshold
 compatibility hypothesis.  Tailwise derived identification and holonomicity
 are proved.  Iritani's weak-Fano toric blowups verify the intrinsic marked
 Gamma/QDM mechanism, and Woodward's toric graph-potential formula identifies
-the same one-object continuation in the linear toric gauged model.  A literal
-instance for the manuscript's projective master still requires a quantum
-reduction-in-stages comparison of its clutching tails.  Earlier one-arrow and
+the same analytic one-object and marked row in the linear toric gauged model.
+A literal instance for the manuscript's projective master still requires a
+quantum reduction-in-stages comparison of its clutching tails in the fixed
+common input-and-derivative frame.  Earlier one-arrow and
 multi-arrow audits are retained below as the failure history that fixes the
 scope of the new proof.  The Gamma point
 solution is correctly constructed in each Artin-quotient sectorial receiver;

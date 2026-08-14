@@ -49,13 +49,14 @@ torus representation with Givental's toric \(I\)-function.  Iritani's global
 mirror starts from the same type of quotient \([\mathbf C^S/\!/\mathbb L]\):
 one Brieskorn module has the chamber \(I\)-functions as its large-radius
 expansions, and Theorems 7.25 and 7.33 identify its ambient Gamma lattice and
-sectorial continuation.  Thus the ordinary-threshold clause has a literal
-one-object realization for the **linear toric gauged model**.  The remaining
-comparison is geometric rather than hypergeometric: Definition 8.1 of the
+sectorial continuation.  Thus the analytic one-object and marked-row clauses
+have a genuine realization in the **linear toric gauged model**.  This is not
+yet the whole ordinary-threshold hypothesis.  Definition 8.1 of the
 manuscript uses a smooth projective \(\mathbf G_m\)-completion, and no cited
 quantum reduction-in-stages theorem identifies its Woodward clutching tails
-with the linear-presentation tails.  This is now the exact gap between the
-positive model and a literal example of the manuscript hypothesis.
+with the linear-presentation tails in the same equivariant input-and-derivative
+frame.  This is now the exact gap between the positive model and a literal
+example of the manuscript hypothesis.
 
 ## Proof
 

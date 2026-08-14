@@ -160,9 +160,10 @@ all residual summands.  The discrepancy-one model
 Gamma/QDM mechanism, but a literal instance of the manuscript hypothesis still
 requires identifying the Woodward clutching tails with those toric mirror
 boundary modules.  Woodward's toric graph-potential formula sharpens this:
-the ordinary-threshold clause is literally realized in the linear toric
-gauged presentation, so the remaining bridge is specifically quantum
-reduction in stages from that presentation to the smooth projective master.
+the analytic one-object and marked-row clauses are realized in the linear
+toric gauged presentation.  The remaining bridge is specifically quantum
+reduction in stages from that presentation to the smooth projective master,
+including the manuscript's fixed common input-and-derivative frame.
 The sharper type-(1,2) flip test also gives an exact no-go:
 adding coordinate weights of total `(-3,4)` balances the Calabi--Yau charge but
 necessarily makes the previously unstable spectator-plus-`O` locus semistable,
