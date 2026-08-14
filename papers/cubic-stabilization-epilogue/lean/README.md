@@ -110,7 +110,8 @@ The 144 reviewer-facing terminals currently verify:
   be `60`, explicit determinant-one matrices induce the displayed generators,
   and an explicit isomorphism `PSL₂(F5) ≃ A5` intertwines the full projective
   action with conjugation on the Sylow-five packet; every natural projective
-  point stabilizer has order ten and is explicitly equivalent to `D5`,
+  point stabilizer has order ten and is explicitly equivalent to `D5`, and
+  both six-point actions are two-transitive,
   without identifying this packet with the manuscript's geometric `D5`
   subgroups and axes;
 - the

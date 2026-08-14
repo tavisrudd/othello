@@ -241,6 +241,9 @@ constructed, has proved order `60`, realizes the displayed generators by
 determinant-one matrices, and is identified with the same concrete `A5` by an
 isomorphism intertwining the full six-point actions.  Each natural projective
 point stabilizer has order ten and is explicitly equivalent to `D5`.
+Both the natural projective action and the conjugation action on Sylow-five
+subgroups are two-transitive, formalizing the transitivity input used by the
+six-axis intersection calculation.
 Identifying this concrete
 packet with the manuscript's geometric `D5`
 subgroups and axes remains open.  The explicit

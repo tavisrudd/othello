@@ -412,7 +412,8 @@ the faithful natural `PSL₂(F5)` action has proved order `60`, its displayed
 generators come from explicit determinant-one matrices, and an explicit
 action-compatible isomorphism identifies it with the same concrete `A5`; each
 natural projective point stabilizer has order ten and is explicitly equivalent
-to `D5`.
+to `D5`, and both the natural projective action and the conjugation action on
+the Sylow-five packet are two-transitive.
 Identification with the manuscript's geometric `D5` subgroups and axes remains
 open.  The explicit
 two-primary companion model now has a concrete quadratic

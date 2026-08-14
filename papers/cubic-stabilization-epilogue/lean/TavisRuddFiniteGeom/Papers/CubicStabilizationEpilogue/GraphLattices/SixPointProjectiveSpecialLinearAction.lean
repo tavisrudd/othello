@@ -14,6 +14,10 @@ action already obtained from the invariant one-factorization.
 This is a finite group-theoretic identification.  It does not identify the
 six projective points with the manuscript's geometrically constructed elliptic
 quotients or axes.
+
+The two-transitivity certificate checks the existing sixty-word normal-form
+list by kernel reduction with `decide`; no external computation or oracle is
+used.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -354,6 +358,53 @@ theorem psl2F5SixPointAction_word (word : List Bool) :
       by_cases inversion : generator
       · simp [inversion, psl2F5SixPointAction_inversion]
       · simp [inversion, psl2F5SixPointAction_translation]
+
+/-- The tracked sixty normal words contain a witness for every ordered pair
+of distinct source labels and every ordered pair of distinct target labels. -/
+theorem sixPointPermutationNormalWords_two_transitive :
+    ∀ source otherSource target otherTarget : Fin 6,
+      source ≠ otherSource → target ≠ otherTarget →
+        ∃ word ∈ sixPointFactorNormalWords,
+          sixPointPermutationWord word source = target ∧
+            sixPointPermutationWord word otherSource = otherTarget := by
+  decide
+
+/-- The conjugation action of `A5` on its six Sylow-five subgroups is
+two-transitive. -/
+theorem alternatingFiveSixPointAction_two_transitive
+    (source otherSource target otherTarget : Fin 6)
+    (sourceDistinct : source ≠ otherSource)
+    (targetDistinct : target ≠ otherTarget) :
+    ∃ transformation : alternatingGroup (Fin 5),
+      alternatingFiveSixPointAction transformation source = target ∧
+        alternatingFiveSixPointAction transformation otherSource =
+          otherTarget := by
+  obtain ⟨word, _, firstImage, secondImage⟩ :=
+    sixPointPermutationNormalWords_two_transitive source otherSource target
+      otherTarget sourceDistinct targetDistinct
+  exact ⟨sixPointFactorWordA5 word, by
+    rw [alternatingFiveSixPointAction_word]
+    exact firstImage, by
+    rw [alternatingFiveSixPointAction_word]
+    exact secondImage⟩
+
+/-- The natural projective action of `PSL₂(F5)` on its six projective
+points is two-transitive. -/
+theorem psl2F5SixPointAction_two_transitive
+    (source otherSource target otherTarget : Fin 6)
+    (sourceDistinct : source ≠ otherSource)
+    (targetDistinct : target ≠ otherTarget) :
+    ∃ transformation : PSL(2, F5),
+      psl2F5SixPointAction transformation source = target ∧
+        psl2F5SixPointAction transformation otherSource = otherTarget := by
+  obtain ⟨word, _, firstImage, secondImage⟩ :=
+    sixPointPermutationNormalWords_two_transitive source otherSource target
+      otherTarget sourceDistinct targetDistinct
+  exact ⟨psl2F5Word word, by
+    rw [psl2F5SixPointAction_word]
+    exact firstImage, by
+    rw [psl2F5SixPointAction_word]
+    exact secondImage⟩
 
 /-- Every permutation arising from the alternating-group conjugation action
 also arises from the natural projective action. -/

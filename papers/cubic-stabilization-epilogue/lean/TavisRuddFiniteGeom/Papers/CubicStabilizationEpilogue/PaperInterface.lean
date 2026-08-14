@@ -1738,7 +1738,8 @@ the dihedral group `D5`.  It also constructs the faithful natural
 inversion come from explicit determinant-one matrices, computes
 `|PSL₂(F5)|=60`, and constructs an explicit isomorphism `PSL₂(F5) ≃ A5`
 intertwining that projective action with conjugation on the six Sylow-five
-subgroups.  Each stabilizer in the natural projective action is proved to
+subgroups.  Both six-point actions are proved two-transitive.  Each
+stabilizer in the natural projective action is proved to
 have order ten and is explicitly equivalent to `D5`.  The resulting
 six-label equivalence intertwines both
 displayed generators with conjugation, and each point stabilizer is its
@@ -1839,6 +1840,19 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       GraphLattices.alternatingFiveSixPointAction
           (GraphLattices.psl2F5EquivAlternatingFive transformation) =
         GraphLattices.psl2F5SixPointAction transformation) ∧
+    (∀ source otherSource target otherTarget : Fin 6,
+      source ≠ otherSource → target ≠ otherTarget →
+        ∃ transformation : alternatingGroup (Fin 5),
+          GraphLattices.alternatingFiveSixPointAction transformation source =
+              target ∧
+            GraphLattices.alternatingFiveSixPointAction transformation
+                otherSource = otherTarget) ∧
+    (∀ source otherSource target otherTarget : Fin 6,
+      source ≠ otherSource → target ≠ otherTarget →
+        ∃ transformation : PSL(2, GraphLattices.F5),
+          GraphLattices.psl2F5SixPointAction transformation source = target ∧
+            GraphLattices.psl2F5SixPointAction transformation otherSource =
+              otherTarget) ∧
     (∀ label : Fin 6,
       Nat.card (GraphLattices.psl2F5SixPointStabilizer label) = 10 ∧
       Nonempty (DihedralGroup 5 ≃*
@@ -1883,6 +1897,8 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     GraphLattices.psl2F5SixPointAction_translation,
     GraphLattices.psl2F5SixPointAction_inversion,
     GraphLattices.psl2F5EquivAlternatingFive_action,
+    GraphLattices.alternatingFiveSixPointAction_two_transitive,
+    GraphLattices.psl2F5SixPointAction_two_transitive,
     fun label => ⟨GraphLattices.psl2F5SixPointStabilizer_card label,
       ⟨GraphLattices.psl2F5SixPointStabilizerEquivDihedral label⟩,
       fun transformation =>
