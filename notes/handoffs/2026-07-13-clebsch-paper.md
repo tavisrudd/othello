@@ -123,22 +123,34 @@ packet map wall-locally.  The remaining global gate is one intrinsic sectorial
 fiber functor for the intermediate variety's formal `P_6` packet over its full
 Novikov field, conservative for both incident wall comparisons.
 
-The 2026-08-14 global-cobordism pass remains conditional but now has an exact
-two-hypothesis form.  Tailwise derived identification supplies the missing
-degree-shift isomorphisms of fixed clutching stacks, universal curves,
-evaluations, perfect obstruction theories, and virtual classes; conditional
-on it, the moving normal complex gives holonomic tempered Gamma tails.  Marked
-threshold compatibility then identifies the finite cyclic Rees `z`-modules
+The 2026-08-14 global-cobordism pass remains conditional at one analytic gate.
+The formerly assumed tailwise derived identification is now proved for the
+rank-one cobordism group under the manuscript's standing proper-DM,
+large-area, and perfect-obstruction-theory assumptions.  Same-sign endpoint
+cocharacters have identical attracting loci and limit maps, congruence fixes
+the inertia labels, and evaluation at the generic point identifies the fixed
+derived sections with an invariant Cech complex
+`[TW^- + TW^+ -> TW]`.  This identifies the clutching stacks, evaluations,
+fixed POT morphisms, virtual classes, bubbles, automorphisms, and Artin
+reductions along every tail between the declared thresholds; the line-bundle
+model shows that the complex changes exactly at a zero-mode threshold.
+The moving normal complex therefore gives holonomic tempered Gamma tails
+without that hypothesis.  Marked threshold compatibility still must identify
+the finite cyclic Rees `z`-modules
 across the locally finite sign, stability, and zero-mode thresholds while
 preserving formal monodromy, the point row, and the required Stokes, deck,
 nearby-cycle, Artin, and Rees data.  Polynomial primary projectors and the
 separated Artin inverse system then prove the point-row Boolean invariant.
-Woodward supplies the degreewise clutching loci and normal-complex splitting,
-not the first hypothesis; the available linear GLSM contour theorem supplies
-neither hypothesis.  The bilateral sequence `2^k` for `k>=0` and `3^{-k}` for
+Woodward supplies the degreewise clutching loci and normal-complex splitting;
+the new rank-one Cech argument supplies their degree-shift comparison.  The
+available linear GLSM contour theorem does not supply the marked threshold
+map.  The bilateral sequence `2^k` for `k>=0` and `3^{-k}` for
 `k<0` proves that tailwise holonomicity alone cannot recover the threshold
 map.  Exact precursor reduction and falsifier:
-`../2026-08-14-c907-holonomic-point-row-gluing.md`.
+`../2026-08-14-c907-holonomic-point-row-gluing.md`; tailwise proof and audit:
+`../2026-08-14-c907-punctual-tail-shadow.md`.  The circulated manuscript still
+states both hypotheses until the new proof receives paper-level promotion and
+review.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
