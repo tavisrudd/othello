@@ -2,12 +2,13 @@
 
 Date: 2026-08-14
 
-**Status:** candidate unconditional replacement for complete-neutral
-continuation.  The finite-dimensional cyclic-row and analytic gluing lemmas
-below are proved.  The remaining geometric gate is narrower than the
-manuscript's Hypothesis 8.2: prove finite-Artin regular holonomicity for the
-**point-marked** Woodward graph series, including its clutching tails.  No
-complete residue/graph bijection is assumed or proved here.
+**Status:** internally closed candidate replacement for complete-neutral
+continuation, pending hostile source and sign audit.  The finite-dimensional
+cyclic-row and analytic gluing lemmas are proved below; Lemma 3 proves general
+endpoint clutching-tail holonomicity from Woodward's fixed-locus
+factorization; and Picard twisting proves the required marked wall jump is
+zero.  No complete residue/graph bijection is assumed.  The manuscript must
+remain conditional until the new Lemma 3 has passed an independent audit.
 
 This note supersedes the unconditional claims in
 `2026-08-14-c907-complete-neutral-localization.md` and the complete-residue
@@ -202,41 +203,87 @@ Gonzalez--Woodward Lemma 4.5 proves precisely this constancy for their
 polarization-fixed Picard orbits: twisting preserves the relative
 obstruction theory, virtual class, bubble components, and evaluation
 classes.  It is not a published theorem for Woodward's localized
-rotation-fixed graph receiver.  Extending that identification to the marked
-clutching tails is the remaining geometric proof obligation.
+rotation-fixed graph receiver.  The following is the required extension.
 
-There is a concrete candidate proof.  Corollary 9.10 writes a rotation-fixed
-component as a fibre product of two fixed stable-map bubble factors with a
-clutched principal factor.  On a tail where the signs of the two clutching
-cocharacters and the stabilizer congruence are fixed, the middle quotient,
-its evaluation maps, and both bubble factors are constant.  After the
-splitting principle, the normalization triangle for the pulled-back tangent
-complex separates:
+### Lemma 3 (clutching-tail holonomicity)
 
-- a fixed zero-mode bundle, identified by evaluation with the tangent of
-  that constant coefficient stack;
-- moving character lines whose degrees are `h_a k+s_a`;
-- node and attaching-point terms independent of `k`.
+Assume the degreewise proper Deligne--Mumford and perfect-obstruction-theory
+hypotheses used for Woodward's localized gauged graph potentials.  Fix an
+ordinary bubble degree, a rotation-fixed graph type, and a finite stabilizer
+congruence class.  Along a rank-one affine clutching direction, remove
+finitely many degrees at which a sign, stability, or zero-weight condition
+changes.  On each remaining tail:
 
-Twisting is trivial on every attached bubble, exactly as in the proof of
-Gonzalez--Woodward Lemma 4.5.  Hence the normalization triangle should give
-the required fixed-POT identification and put all unbounded dependence in
-the moving Gamma recurrence.  The unresolved checks are that no zero mode
-enters or leaves inside a declared tail and that contraction of an unstable
-principal component contributes only a finite exceptional value.  These are
-the four assertions tested in Section 6.
+1. the fixed coefficient stack, its fixed perfect obstruction theory,
+   virtual class, and evaluation maps are independent of the affine degree;
+2. the moving virtual-normal Euler factor is a finite nilpotent derivative
+   of one Gamma-ratio recurrence with affine arguments.
 
-For `G=G_m` these checks are finite in shape.  A clutching cocharacter is an
-integer, so its limit stratum depends only on its sign; a finite stabilizer
-adds only a congruence class.  Each cocharacter therefore has finitely many
-threshold values and finitely many stable tails.  On one tail, a character
-line of degree `h k+s` has a rotation-zero monomial precisely on a fixed
-interval condition.  When present, that monomial is identified by endpoint
-evaluation with the same root line on the coefficient stack; all other
-monomials form the moving Gamma factor.  The analogous `H^1` assertion
-follows by Serre duality.  This is the local calculation that must be written
-inside the normalization triangle to turn the candidate proof into a
-theorem.
+Consequently every neutral point-marked endpoint tail satisfies the
+point-row holonomicity gate.
+
+### Proof
+
+Woodward Corollary 9.10 and equations (54), (56), and (57) express a
+rotation-fixed component as a fibre product of two factors
+`F_n^{G,+}(phi_+,d_+)` and `F_n^{G,-}(phi_-,d_-)` over the inertia quotient.
+Each factor already contains the full ordinary stable-map space attached at
+that end.  Thus arbitrary bubble trees are not an additional induction:
+for fixed `d_+`, `d_-`, and markings they lie in fixed proper stable-map
+factors with their usual fixed obstruction theories.
+
+For `G=G_m`, changing the affine degree changes each clutching cocharacter
+by an integer.  For a nonzero integer `m`, the limit of `m(t)x` depends only
+on the sign of `m`; its inertia label depends only on `m` modulo the finite
+stabilizer order.  Hence, after a finite sign/congruence split, the limit
+strata, the two stable-map factors, their fibre product, and all evaluation
+maps are constant.  The finitely many degrees at which the principal
+component becomes unstable are separated off and contribute only a Laurent
+polynomial.
+
+It remains to identify the induced fixed obstruction theory.  Pull the
+equivariant tangent complex of `W/G_m` to the normalization of the universal
+domain and apply the normalization triangle.  On every attached bubble the
+clutching line is canonically trivial, so the bubble complexes and the node
+matching maps are independent of the affine degree.  On the principal
+component, split the tangent complex into character roots.  A root of
+character `h` has degree
+
+\[
+ hk+s.
+\]
+
+The weights of its `H^0-H^1` index form one consecutive affine interval.
+Away from the finitely many integers at which an endpoint crosses zero, its
+weight-zero summand has constant rank and is identified, by evaluation at a
+generic point of the principal component, with the same root bundle on the
+constant coefficient stack.  The `H^1` statement is the dual assertion by
+Serre duality.  This is an identification of complexes, not only of their
+K-classes: evaluation at the generic point sends the unique zero-weight
+monomial to the root vector with coefficient one, and the normalization maps
+are the fixed endpoint evaluations.  Any clutching integer appearing in the
+infinitesimal gauge map is a nonzero scalar on the declared tail and is
+removed by rescaling that summand; its zero value was already separated as a
+threshold.  Therefore the fixed part of the normalization triangle, its
+maps, and hence the induced fixed perfect obstruction theory are constant on
+the tail.  This also fixes its virtual class.
+
+The complementary moving weights are all nonzero members of the same affine
+intervals.  Woodward equations (58)--(59) add only the node-smoothing and
+attaching-point factors, which are independent of the clutching degree (and
+are omitted for the unstable irreducible type under the source convention).
+The uniform `H^0/H^1` Gamma identity therefore writes their Euler factor as
+one Gamma ratio with affine arguments.  Chern roots on the constant
+coefficient stack are nilpotent, so only finitely many parameter derivatives
+occur.  This proves both assertions.  In a neutral direction the signed
+slopes cancel, and Section 2 gives holonomicity and tempered boundary values.
+\(\square\)
+
+The proof is a new deduction from Woodward's factorization, not a theorem
+stated in that source.  Its two most sensitive points are the fixed-POT
+identification through the normalization triangle and the unstable-type
+convention.  They require independent hostile audit before promotion to the
+manuscript.
 
 ## 5. Why this avoids the failed complete-residue route
 
@@ -324,11 +371,10 @@ them leaves finitely many stable tails with constant fixed POT; the threshold
 terms themselves are a Laurent polynomial.  Thus all four falsifier checks
 pass in this first nonlinear model.
 
-This calculation is not yet the general tail theorem: for an arbitrary
-fixed component one must perform the same fixed/moving separation in the
-normalization triangle simultaneously for every character root and every
-bubble-tree edge.  It shows, however, that a genuine nonlinear bubble does
-not create the residue-exhaustion pathology which killed the earlier proof.
+This is the smallest nonlinear regression for Lemma 3.  It confirms the
+normalization-triangle argument with a genuine bubble and node; the general
+lemma does not require an induction over bubble-tree edges because
+Corollary 9.10 packages the complete tree in the stable-map factors.
 
 ## 7. Preferred bypass: shift the polarization-fixed stack
 
@@ -377,14 +423,51 @@ all wall residues in that row vanish by support.  It is also narrower than
 the endpoint-tail gate in Section 4.  A proof should combine the equivariant
 POT already used by support collapse with Lemma 4.5 before applying rotation
 localization; the two torus actions commute, so the fixed/moving
-decomposition can be taken in either order.  The only remaining hostile
-check is that the Liouville zero-character extraction and the unstable
-identity convention commute with this Picard identification.
+decomposition can be taken in either order.
 
-If this lemma holds, Lemmas 1--2 give unconditional point-row primary
-Boolean invariance without constructing the complete nonlinear graph
-continuation postulated in Hypothesis 8.2.  The endpoint clutching-tail proof
-then becomes an independent fallback rather than the critical path.
+That last compatibility is algebraic.  Represent the `r`-th Picard shift by
+the rotation-linearized line bundle
+
+\[
+ Q_r=\mathcal O_{\mathbf P^1}(r[0]),                           \tag{12}
+\]
+
+with its canonical trivialization near infinity.  Tensoring by `Q_r` shifts
+only the zero-side clutching cocharacter.  It leaves the infinity-side total
+degree `d_+ + phi_+` unchanged.  Woodward's Liouville restriction depends
+on precisely that total degree, so its full-divisor character and the
+zero-character extraction commute with the Picard action.  In particular,
+the extracted infinity factor remains the same degree-zero unstable
+identity throughout the orbit.
+
+The rotation linearization in (12) makes the Picard action equivariant for
+the auxiliary graph rotation.  On the polarization-fixed principal
+component, the shifting subgroup acts trivially on the target fixed locus;
+on every attached bubble, `Q_r` is trivial.  Gonzalez--Woodward Lemma 4.5
+therefore identifies the fixed coefficient stack, POT, virtual class, and
+evaluation insertions equivariantly.  Woodward's node-smoothing and
+attaching-point factors depend only on graph rotation and are unchanged.
+All `r`-dependence is consequently the principal moving-normal index
+computed in Gonzalez--Woodward equations (40)--(45).
+
+In a neutral direction its signed character sum is zero.  Since `a_p`
+restricts identically to zero on the polarization-fixed stack, its marked
+wall coefficient is zero before this normal factor is inverted.  This proves
+the required zero-jump statement, subject only to checking the stated
+linearization convention against the source's signs.
+
+It does **not** by itself prove that either endpoint row germ is holonomic.
+That input comes from Lemma 3.  With that lemma, the endpoint germs are
+tempered, the zero jump becomes
+equality of their boundary distributions, and Lemma 2 continues them to one
+row.  Picard twisting therefore removes the residue/graph matching problem,
+while Lemma 3 supplies the separate endpoint control.
+
+Combining the localized Picard-row argument with Lemmas 1--3 gives the
+candidate unconditional point-row primary Boolean invariance without
+constructing the complete nonlinear graph continuation postulated in
+Hypothesis 8.2.  The result remains an internally proved candidate until the
+two new geometric arguments have passed external audit.
 
 ## Sources
 
@@ -407,12 +490,14 @@ then becomes an independent fallback rather than the critical path.
 - **Settled in the first nonlinear model:** the balanced projective-bundle
   master with one fixed bubble has constant coefficient stack and POT on
   each tail; all unbounded dependence is one rational Gamma recurrence.
-- **Open, preferred gate:** commute auxiliary rotation/Liouville row
-  extraction with the published Picard identification on the
-  polarization-fixed stack.  The unstable identity convention is the
-  sharpest remaining check.
-- **Open, fallback:** prove constant fixed POT on every endpoint clutching
-  tail by induction over the normalization tree.
+- **Settled internally:** choosing the Picard generator as
+  `O(r[0])`, trivialized at infinity, makes auxiliary rotation and the
+  Liouville zero-character extraction commute with the published Picard
+  identification.  External sign/convention audit remains.
+- **Settled internally, external audit required:** Lemma 3 proves constant
+  fixed POT and Gamma recurrence on every endpoint clutching tail.  The key
+  simplification is that Corollary 9.10 packages complete bubble trees into
+  fixed stable-map factors, so no edge induction is required.
 - **Open:** whether the manuscript's word `meromorphic` should explicitly
   allow the finite ramified/logarithmic cover naturally produced by regular
   holonomic continuation.  This is a statement-level audit after the
