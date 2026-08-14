@@ -431,8 +431,11 @@ Consequently, for smooth projective threefolds,
 Weak factorization decomposes a birational map between smooth varieties into
 blowups and blowdowns with smooth centers of codimension at least two
 \cite{AKMW}.  In dimension at most four every nontrivial center has dimension
-at most two.  Proposition~\ref{prop:low-dimensional-vanishing} makes every
-center term in (4.3) zero, so the endpoint values agree at each step.
+at most two.  The calculation following
+Definition~\ref{def:strict-novikov-admissible} shows that every center
+specialization in (4.3) is strictly admissible.
+Proposition~\ref{prop:low-dimensional-vanishing} therefore makes every center
+term zero, so the endpoint values agree at each step.
 
 If \(Y,Y'\) are smooth threefolds and
 \(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
@@ -464,7 +467,9 @@ with roots \(-1/6\) and \(-5/6\) \cite[Section~3 and Proposition~6]{Cai}.  His g
 integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
 are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
 blocks have formal-monodromy factor \(1\), hence contribute no primitive sixth root.
-Thus the multiplicity is exactly two.  The numerical curve lattice of a cubic
+Thus the multiplicity is exactly two.  By definition, \(\nu_6\) uses the small
+even connection, so no odd-cohomology block enters this count.  The numerical
+curve lattice of a cubic
 threefold has rank one, so the numerical-Novikov convention does not change
 the calculation.
 \end{proof}

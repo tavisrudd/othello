@@ -199,6 +199,8 @@ The cubic packet is now an exact conditional deduction: from the supplied
 four-factor framed-monodromy characteristic polynomial, Lean proves that the
 two primitive-sixth roots occur once each, the two unit blocks contribute
 nothing, and the multiplicity is exactly two for every smooth cubic threefold.
+The manuscript now states explicitly that this count is for the small even
+connection, so no odd-cohomology block is being suppressed.
 Divisor-tagging vanishing is now an exact conditional endpoint deduction: two
 supplied final characteristic-polynomial equalities over `ℂ` imply equality
 of intrinsic, tagged, and specialized primitive-sixth multiplicities and hence
@@ -450,7 +452,9 @@ are current, and the committed paper export verifies byte-for-byte in
   classification, nef spectral restriction, projective-bundle and point-blowup
   formulas, and divisor-tagging comparison are supplied, Lean now proves the
   full quantified proposition.  The remaining gap is exactly those geometric
-  and quantum premises, not the induction joining them.
+  and quantum premises, not the induction joining them.  The manuscript also
+  now points explicitly to the proof that every weak-factorization center
+  specialization is strictly Novikov-admissible before applying this vanishing.
 - **Framed operation deduction:** settled at the conditional level.  Lean now
   derives both multiplicity formulas from the exact characteristic-polynomial
   block identities; constructing the geometry and proving Iritani's comparison

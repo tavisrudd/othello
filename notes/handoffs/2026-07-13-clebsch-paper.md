@@ -354,7 +354,9 @@ deductions from supplied characteristic-polynomial block comparisons, including
 the precise intrinsic endpoints and `c-1` specialized center summands.
 The cubic packet is now an exact conditional deduction from Cai's supplied
 four-factor framed characteristic polynomial: Lean proves both primitive roots
-have multiplicity one and the two unit factors contribute zero.  Cai's geometric
+have multiplicity one and the two unit factors contribute zero.  The manuscript
+now states explicitly that this is the small even connection, so no odd block
+is omitted from the defined invariant.  Cai's geometric
 block comparison and the numerical-Novikov bridge remain explicit inputs.
 Divisor-tagging vanishing is now an exact conditional endpoint deduction from
 two supplied final characteristic-polynomial equalities over `ℂ`; Lean
