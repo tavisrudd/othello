@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 165 reviewer-facing Lean terminals.  These counts summarize the
+There are 166 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 165 reviewer terminals.
+1 complete; 166 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -108,6 +108,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   the source stabilizer.  The six rational axis vectors sum to zero, and their
   equivariant synthesis identifies the quotient of the rational
   six-coordinate module by the constant line with the augmentation module.
+  Integrally, subtracting the sixth coordinate identifies `ℤ⁶/ℤ1` with
+  `ℤ⁵`; the symmetric `6I₆-J₆` form descends through the constant line and
+  has matrix `6I₅-J₅` in this chart.
   These coordinate results are not identified with endomorphisms, elliptic
   axes, or primitive inclusions of an abelian scheme; the
   torsion local system, symplectic pairing, relative isogeny, and geometric

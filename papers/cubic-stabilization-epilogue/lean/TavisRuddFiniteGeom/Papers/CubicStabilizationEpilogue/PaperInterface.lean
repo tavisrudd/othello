@@ -16,6 +16,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisNorm
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisTransport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAxisDescent
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointIntegralQuotient
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
@@ -258,6 +259,35 @@ theorem relativeSixAxis_sixPointAxis_coefficientDescent :
     ⟨GraphLattices.sixPointRationalCoefficientQuotientEquivAugmentation⟩,
     GraphLattices.sixPointRationalCoefficientQuotientEquivAugmentation_mk,
     GraphLattices.sixPointRationalAxisSynthesis_equivariant⟩
+
+/-- Exact integral quotient-lattice calculation for the six-axis source.
+Subtracting the sixth coordinate identifies the quotient of `ℤ⁶` by its
+constant line with `ℤ⁵`.  The symmetric six-coordinate form
+`6Σ xᵢyᵢ-(Σ xᵢ)(Σ yᵢ)` annihilates the constant line in both
+variables and descends to the quotient; in the displayed five-coordinate
+chart its Gram matrix is exactly `6I₅-J₅`.  This does not identify the
+quotient with an elliptic-power abelian scheme or the descended form with a
+geometric polarization. -/
+theorem relativeSixAxis_integralCoefficientQuotient_and_form :
+    Nonempty (GraphLattices.SixPointIntegralCoefficientQuotient ≃ₗ[ℤ]
+      (Fin 5 → ℤ)) ∧
+    (∀ vector : Fin 6 → ℤ,
+      GraphLattices.sixPointIntegralCoefficientQuotientEquivFive
+          (Submodule.Quotient.mk vector) =
+        GraphLattices.sixPointIntegralDifferenceCoordinates vector) ∧
+    (∀ left right : Fin 6 → ℤ,
+      GraphLattices.sixPointIntegralDescendedPairing
+          (Submodule.Quotient.mk left) (Submodule.Quotient.mk right) =
+        GraphLattices.sixPointIntegralQuotientPairing left right) ∧
+    ∀ left right : Fin 5 → ℤ,
+      GraphLattices.sixPointIntegralDescendedPairing
+          (GraphLattices.sixPointIntegralClassFromFive left)
+          (GraphLattices.sixPointIntegralClassFromFive right) =
+        dotProduct left (Matrix.mulVec (GraphLattices.sixAxisGram ℤ) right) :=
+  ⟨⟨GraphLattices.sixPointIntegralCoefficientQuotientEquivFive⟩,
+    GraphLattices.sixPointIntegralCoefficientQuotientEquivFive_mk,
+    GraphLattices.sixPointIntegralDescendedPairing_mk,
+    GraphLattices.sixPointIntegralDescendedPairing_classFromFive⟩
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each

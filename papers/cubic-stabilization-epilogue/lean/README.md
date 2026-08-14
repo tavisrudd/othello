@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 165 reviewer terminals.
+1 complete; 166 reviewer terminals.
 
-The 165 reviewer-facing terminals currently verify:
+The 166 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -446,6 +446,9 @@ The 165 reviewer-facing terminals currently verify:
   sum to zero, and their synthesis map has kernel exactly the constant line,
   is onto the augmentation module, induces the corresponding quotient linear
   equivalence, and intertwines the concrete alternating-group actions;
+  integrally, subtracting the sixth coordinate identifies `ℤ⁶/ℤ1` with
+  `ℤ⁵`, the symmetric `6I₆-J₆` form descends through the constant line,
+  and its matrix in this quotient chart is exactly `6I₅-J₅`;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.

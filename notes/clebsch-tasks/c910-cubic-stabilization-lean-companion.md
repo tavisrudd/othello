@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 91 Lean
+The package has a pinned standalone Nix and Mathlib environment.  Its 92 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 165 audited terminals.  The rejecting manuscript inventory covers all
+exports 166 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -180,7 +180,10 @@ transporter-independent image at a fixed target label.  The six rational axis
 vectors sum to zero, and their equivariant synthesis identifies the quotient
 of the six-coordinate module by its constant line with the augmentation
 module.  Identifying these coordinate results with the geometric
-endomorphisms, elliptic axes, and primitive inclusions remains open.
+endomorphisms, elliptic axes, and primitive inclusions remains open.  Integrally,
+Lean identifies `ℤ⁶/ℤ1` with five coordinates and proves that the descended
+six-coordinate form has matrix `6I₅-J₅` in that chart; no geometric
+polarization is inferred.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,
 arbitrary positive-rank projective-bundle presentations, and iterated point
