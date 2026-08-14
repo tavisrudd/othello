@@ -194,14 +194,14 @@ all-projective-stabilizations theorem and the unconditional cubic endpoint
 contrast, simple-wall ambient point coordinate, path-local ordinary-flop
 point-row theorem, support collapse, tailwise derived identification and
 holonomicity, and Gamma-ratio reduction.  Its reviewed paper surface is
-authority commit `a4b71d518`, PDF SHA-256
-`8afee301820fc8d4a793b88a3015ff8b3f5077093d85493ca8897143cbf57479`;
+authority commit `9acab5fdc`, PDF SHA-256
+`43ed960d4df9ccacdb529e58092bf07bcdd1e4456039db44b2d7a62a1fffa78e`;
 the GW/POT, D-module/Stokes, birational, and adjacent cold-reader passes found
 no major defect, and `make check` is warning-free and deterministic.  The
 title, abstract, README, Zenodo metadata, claim ledger, and portfolio summary
 expose gauged-admissibility and the marked threshold hypothesis separately.
-Export source `a4b71d518` is synchronized to the clean local paper repository
-at `7bfe4d953`; the portfolio summary remains at `9200ec2`.  All remain unpushed,
+Export source `9acab5fdc` is synchronized to the clean local paper repository
+at `db8e059`; the portfolio summary remains at `9200ec2`.  All remain unpushed,
 and the live Zenodo version still needs a deliberate release update.  Review records are
 `../2026-08-13-c907-gamma-point-row-reviewer-dossier.md` and
 `../2026-08-13-c907-gamma-point-row-cold-read-synthesis.md`.
