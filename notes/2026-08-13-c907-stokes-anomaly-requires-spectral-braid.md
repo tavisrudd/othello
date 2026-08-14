@@ -5,6 +5,13 @@ Date: 2026-08-13
 Status: exact reduction on every convergent nonturning parameter domain.  It
 does not compute the peak discriminant.
 
+The reduction is sharp in the category of meromorphic connections.  The
+incomplete-Gamma extension in
+`2026-08-13-c907-minimal-ambient-target-stokes-countermodel.md` has a
+primitive-sixth branch, a rank-visible ambient target, and a confluence at
+the carrier value `t=0`; its Stokes jump is nonzero.  Hence confluence cannot
+be declared harmless from formal labels, pairing, or divisor tags alone.
+
 ## 1. No coefficientwise birth of a Stokes multiplier
 
 The quantum connection is jointly flat in `z`, Novikov, and bulk directions.

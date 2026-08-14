@@ -3,7 +3,11 @@
 Date: 2026-08-13
 
 Status: single-lemma Gold target; not proved.  This is the weakest clean
-support statement which kills every dangerous neutral propagator at once.
+geometric support statement which kills every dangerous neutral propagator
+at once.  It is not a formal consequence of pairing, integrality, formal
+monodromy, or the common `P2` divisor tag: the exact incomplete-Gamma model
+in `2026-08-13-c907-minimal-ambient-target-stokes-countermodel.md` violates
+the conclusion while retaining all of those shadows.
 
 ## 1. Setup
 
@@ -52,9 +56,19 @@ factor and hence
 This proves the Gold Boolean without knowing any Stokes coefficient, source
 covector, neutral curve class, or ordering inside the supported span.
 
-> **Rank-zero-target Stokes lemma.**  Every elementary shear in the relative
-> transition between two incident unit-wall receivers has target in the
+> **Rank-zero-target Stokes lemma (geometric form).**  After grouping the
+> canonical ray-ordered residues by unstable stratum, the image of every
+> complete residue block in the relative transition lies in the
 > boundary-supported Gamma span.
+
+Both `canonical` and `complete residue block` are essential.  For an
+arbitrary factorization the statement is not invariant: one may insert a
+shear and its inverse.  Even in the genuine carrier peak
+`X times Bl_{p1,p2}P2`, a supported curve class has ambient line-bundle
+coordinates of ranks `+1` and `-1`; only the aggregate residue has rank
+zero.  See `2026-08-13-c907-dp7-carrier-peak-rank-matrix.md`.  The invariant
+conclusion needed by Gold is only `r_p(T-1)=0`; block target support is the
+proposed geometric mechanism.
 
 This is the sharpest singular shadow: only the image of each rank-one jump
 is constrained.  The source of the jump may be ambient and the coefficients
@@ -147,6 +161,12 @@ rank.  That single target vector is the minimal falsifier.
 The C908 theta lattice can constrain such a vector only after a comparison
 places the same elementary Stokes factor on its integral lattice.  Without
 that bridge, its saturation and mod-two shadows do not prove (4).
+
+The minimal incomplete-Gamma countermodel sharpens this boundary.  Even an
+integral paired Stokes lattice, after tensoring with a length-three
+`Q[N]/(N^3)` module, admits a primitive-sixth-to-ambient jump with nonzero
+rank target.  Consequently the Euler/nullity and divisor-tag shadows cannot
+close the lemma without a geometric output-support input.
 
 ## EJ / TT / AA
 

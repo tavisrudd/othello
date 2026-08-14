@@ -15,6 +15,24 @@ wall parameters.
 
 This is the precise target for either a final proof or a counterexample.
 
+An exact rank-two analytic realization of the forbidden arrow is now in
+`2026-08-13-c907-minimal-ambient-target-stokes-countermodel.md`.  Its
+incomplete-Gamma Stokes jump sends a `zeta_6` formal line into a rank-visible
+ambient line.  The paired, integral, and `P2`-tagged extensions show that the
+Euler/nullity and divisor-tag shadows alone cannot rule out (7).  The model
+is not known to arise from a smooth-projective peak, so the geometric gate
+below remains open; its role is to force the next argument to use actual
+kernel/residue support.
+
+The smallest genuine carrier-dressed peak is also now computed exactly in
+`2026-08-13-c907-dp7-carrier-peak-rank-matrix.md`.  For
+`X times Bl_{p1,p2}P2`, the two blowdown-window bases are related by an
+integral matrix which fixes the rank row.  Its supported `O_C` column has
+ambient line-bundle coordinates of ranks `+1` and `-1`.  Therefore the
+correct target-support statement is blockwise: the **sum** of all residues
+belonging to one unstable stratum must be supported.  Termwise coordinate
+support is false even in this safe product calibration.
+
 ## 1. Set-up after geometric coverage
 
 Choose the projective pi-desingularized AKMW elementary chain between
@@ -641,6 +659,12 @@ functor would be too much; it is enough to prove that it has the shadows in
 (19).  Shen--Shoemaker and Gu--Yu--Yu provide these shadows one wall at a
 time, so the remaining task is their two-wall compatibility, not a direct
 evaluation of the rubber series.
+
+The incomplete-Gamma countermodel shows that (19) alone is not a structural
+closure: after hyperbolic doubling and tensoring by `Q[N]/(N^3)`, it satisfies
+pairing preservation, integrality, and the divisor tag while retaining a
+rank-visible target.  A nullity computation is useful only after additional
+geometric zero entries are supplied by incidence or Fourier-residue support.
 
 The practical order is therefore:
 

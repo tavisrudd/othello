@@ -239,6 +239,29 @@ cheap object is the relevant characteristic-polynomial resultant and its
 root braid, not a Mellin--Barnes multiplier.  See
 `../2026-08-13-c907-stokes-anomaly-requires-spectral-braid.md`.
 
+The braid/confluence shadow is sharp but not a closure.  The exact rank-two
+incomplete-Gamma connection in
+`../2026-08-13-c907-minimal-ambient-target-stokes-countermodel.md` has a
+primitive-sixth branch whose Stokes jump acquires a rank-visible ambient
+target at a carrier confluence.  Hyperbolic doubling supplies a flat integral
+pairing, and tensoring by `Q[N]/(N^3)` preserves the common `P2` divisor tag.
+Therefore formal monodromy, pairing/integrality, and `N`-linearity cannot
+prove the rank-zero-target lemma.  This is not a smooth-projective peak and
+does not refute Gold; it proves that the remaining proof must use actual
+one-sided Fourier-kernel/residue support (or the numerical Gamma/window row),
+not another abstract Stokes nullity calculation.
+
+The smallest genuine carrier-dressed peak is safe and fixes the correct
+granularity of that support statement.  For
+`X x Bl_(p1,p2)P2`, the contractions of `E1` and
+`C=H-E1-E2` give two incompatible blowdown charts, but the exact integral
+window matrix fixes the rank row.  The supported class `O_C` has ambient
+line-bundle coordinates of ranks `+1` and `-1`; cancellation occurs only in
+the complete residue block.  See
+`../2026-08-13-c907-dp7-carrier-peak-rank-matrix.md`.  Thus the final lemma
+must say that each unstable-stratum **residue block** has supported output,
+not that every coordinate term or arbitrarily refined shear does.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
