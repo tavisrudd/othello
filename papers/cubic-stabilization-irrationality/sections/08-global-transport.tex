@@ -111,9 +111,9 @@ only the integer coordinate along \(\delta\) can remain unbounded.  We first
 control those unbounded tails.
 
 The argument separates the fixed geometry from the remaining analytic
-comparison.  Tailwise derived identification makes the fixed clutching data
-constant along each affine tail; the moving normal weights then give a Gamma
-recurrence.  Marked threshold compatibility subsequently joins the resulting
+comparison.  A rank-one derived-intersection theorem makes the fixed clutching
+data constant along each affine tail; the moving normal weights then give a
+Gamma recurrence.  Marked threshold compatibility subsequently joins the resulting
 cyclic \(z\)-modules across the finitely many changes of sign, stability, and
 zero-mode rank.
 
@@ -214,8 +214,8 @@ finite-dimensional linear abelian GLSM with adjacent secondary-fan chambers,
 a circuit, Calabi--Yau charges, and a grade-restriction window
 \cite[Definition~5.18 and Theorem~5.21]{AleshkinLiu}.  Proposition
 \ref{prop:gamma-ratio-reduction} does not construct those data for a nonlinear
-virtual fixed graph.  Their theorem therefore supplies neither the tailwise
-derived identifications nor the marked threshold comparisons below.
+virtual fixed graph.  Their theorem therefore supplies neither the
+derived-intersection argument below nor the marked threshold comparisons.
 
 Gonz\'alez--Woodward's crepant wall-crossing theorem gives a weaker
 distributional statement: neutral Picard shifts produce sums of derivatives
@@ -223,16 +223,15 @@ of delta distributions
 \cite[Remark~1.18(d), Remark~4.6, and equation~(47)]{GonzalezWoodward},
 and the authors explicitly do not deduce analytic continuation without an
 independent convergence input \cite[Remark~4.7]{GonzalezWoodward}.  This does
-not replace Hypotheses~\ref{hyp:tailwise-derived} and
-\ref{hyp:marked-threshold}.  Proposition
+not replace Hypothesis~\ref{hyp:marked-threshold}.  Proposition
 \ref{prop:punctual-corner} exhibits the underlying obstruction: information
 supported at a Fourier boundary can reappear with full support after inverse
 transform, so almost-everywhere equality does not identify the marked formal
 packet.
 \end{remark}
 
-\begin{hypothesis}[Tailwise derived identification]
-\label{hyp:tailwise-derived}
+\begin{theorem}[Rank-one tailwise derived identification]
+\label{thm:tailwise-derived}
 For every finite Artin level, ordinary bubble degree, and rotation-fixed
 graph type, after splitting the affine degrees into stabilizer congruence
 classes and removing the finite sign, stability, and zero-mode thresholds,
@@ -245,22 +244,73 @@ classes.  They respect stack automorphisms, gluing over the inertia quotient,
 and reduction between Artin levels.  Stable degree-zero attached bubbles are
 retained as fixed stable-map factors; the irreducible unstable type is treated
 by its separate convention.
-\end{hypothesis}
+\end{theorem}
 
-Woodward's clutching description gives the degreewise fixed stacks and the
-normal-complex splitting, but not the degree-shift isomorphisms in this
-hypothesis.  Gonz\'alez--Woodward prove an analogous Picard-shift statement
-for polarization-fixed loci when the shifting subgroup acts trivially on the
-fixed target \cite[Lemma~4.5]{GonzalezWoodward}.  That argument does not
-automatically apply to the endpoint clutching sections here.
+\begin{proof}
+Write \(W^a\) for the relevant attracting stratum on which
+\(\lim_{t\to0}t^a x\) exists.  Evaluation at \(1\) identifies fixed sections
+on one parametrized affine chart with \(W^a\): the section determined by
+\(x\) is \(z\mapsto z^a x\), and it extends across the origin exactly when
+\(x\in W^a\).  This is an isomorphism on derived test schemes, since the
+section is recovered uniquely from its value at \(1\), while extension is
+exactly the attracting-locus condition.  A principal clutching section has two such extensions with
+the same generic value.  Its derived moduli stack is therefore
+\[
+ [W^{a_-}/\Gm]\mathop{\times}^{\mathbf R}_{[W/\Gm]}
+ [W^{a_+}/\Gm].
+\]
+The attached stable-map factors in Woodward's equations (54)--(57) are added
+by derived fibre products over the two inertia evaluations.
 
-\begin{proposition}[Conditional clutching-tail holonomicity]
+For \(\Gm\), replacing a nonzero endpoint exponent by another integer of the
+same sign leaves its attracting locus and limit map unchanged.  Passing to a
+fixed stabilizer congruence class also fixes the inertia label.  Thus the
+displayed derived intersection,
+its universal curve and evaluations, and its derived fibre products with the
+fixed ordinary stable-map factors are identical throughout one tail.
+
+For completeness, the tangent complex of this derived intersection is
+\[
+ \left[
+  T(W^{a_-}/\Gm)\oplus T(W^{a_+}/\Gm)
+  \longrightarrow T(W/\Gm)
+ \right].
+\]
+It retains the degree-one term when the two attracting loci meet
+nontransversely.  Equivalently, trivialize the pulled-back tangent complex on
+the open orbit by evaluation at (1).  Taking invariants in the two-chart
+\v{C}ech resolution gives
+\[
+ \left[
+  F^0_{\leq0}V\oplus F^\infty_{\leq0}V\longrightarrow V
+ \right],
+\]
+where the two terms are the extension subbundles at the endpoints.  They are
+the tangent bundles of the two attracting loci.  Thus this invariant
+\v{C}ech complex agrees with the preceding tangent complex without choosing
+an equivariant splitting.
+
+The fixed perfect obstruction theory is the dual of the derived pushforward
+of \(T(W/\Gm)\) \cite[Definition~7.13]{WoodwardQKIII}.  Since the comparison
+above identifies the derived fixed stack and its universal restriction and
+evaluation maps, it identifies the obstruction-theory morphisms to the
+cotangent complexes, hence the virtual classes.  On a \(k\)-fold orbifold
+cover, taking the residual \(\mu_k\)-invariants preserves the argument; the
+congruence class fixes the twisted-sector evaluation.  The parametrized
+principal component has no domain automorphisms, while the fixed bubble
+factors retain theirs.  All constructions commute with Artin reduction.
+The unstable irreducible type is the displayed tangent complex without
+bubble, node, or attaching
+terms.  This proves every assertion.
+\end{proof}
+
+\begin{proposition}[Clutching-tail holonomicity]
 \label{prop:clutching-tail-holonomicity}
-Under Hypothesis~\ref{hyp:tailwise-derived}, every point-marked endpoint tail
-is a finite nilpotent derivative of one Gamma-ratio recurrence with affine
-arguments.  Its generating series is holonomic.  In a neutral direction its
-coefficients have polynomial-logarithmic growth after one exponential
-rescaling, so the tail has tempered radial boundary values.
+Every point-marked endpoint tail is a finite nilpotent derivative of one
+Gamma-ratio recurrence with affine arguments.  Its generating series is
+holonomic.  In a neutral direction its coefficients have
+polynomial-logarithmic growth after one exponential rescaling, so the tail
+has tempered radial boundary values.
 \end{proposition}
 
 \begin{proof}
@@ -270,10 +320,10 @@ two clutching factors over the inertia quotient.  Each factor already
 contains the complete ordinary stable-map space attached at that end.  Thus
 arbitrary bubble trees occur in fixed proper stable-map factors once their
 ordinary degrees and markings are fixed; no induction over bubble-tree edges
-is required.  Hypothesis~\ref{hyp:tailwise-derived} supplies the additional
-degree-shift identification of those fixed factors, their obstruction
-theories, and their evaluations.  This is stronger than the normal-complex
-identity in equations (58)--(59) of \cite{WoodwardQKIII}.
+is required.  Theorem~\ref{thm:tailwise-derived} supplies the degree-shift
+identification of those fixed factors, their obstruction theories, and their
+evaluations.  This is stronger than the normal-complex identity in equations
+(58)--(59) of \cite{WoodwardQKIII}.
 
 For \(G=\Gm\), an affine clutching cocharacter is an integer.  On one of the
 identified tails, apply the splitting principle to the moving part of the
@@ -403,7 +453,7 @@ is simply dual to the surjectivity of (8.1).
 
 Proposition~\ref{prop:support-collapse} identifies the marked coefficient
 functions before either endpoint completion is taken.
-Hypothesis~\ref{hyp:tailwise-derived} and
+Theorem~\ref{thm:tailwise-derived} and
 Proposition~\ref{prop:clutching-tail-holonomicity} supply their holonomic tail
 systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the finite cyclic
 Rees \(z\)-modules across every threshold, while nonneutral directions are
@@ -418,8 +468,8 @@ quantum source is used.
 \label{thm:birational-point-primary}
 Let \(Y_-\) and \(Y_+\) be smooth projective birational complex varieties.
 Suppose a W{\l}odarczyk completion for this birational map satisfies
-Hypotheses~\ref{hyp:tailwise-derived} and \ref{hyp:marked-threshold} in every
-neutral affine gauge direction.  Then, for every formal-monodromy eigenvalue
+Hypothesis~\ref{hyp:marked-threshold} in every neutral affine gauge direction.
+Then, for every formal-monodromy eigenvalue
 \(\lambda\),
 \[
  \rrow_{Y_-}|_{\cP_\lambda(Y_-)}\ne0
@@ -447,8 +497,8 @@ Because the Artin inverse system is separated, a projected row is nonzero
 exactly when it survives at some finite level.  This proves both implications.
 \end{proof}
 
-Under Hypotheses~\ref{hyp:tailwise-derived} and
-\ref{hyp:marked-threshold}, Theorem~\ref{thm:birational-point-primary} is the
+Under Hypothesis~\ref{hyp:marked-threshold},
+Theorem~\ref{thm:birational-point-primary} is the
 global replacement for Hypothesis~\ref{hyp:rank-zero-target}.  Without those
 inputs, the two-tail example above and the earlier countermodels show why the conclusion
 cannot be obtained from tailwise holonomicity, localized one-wall receivers,

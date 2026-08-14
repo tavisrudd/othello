@@ -498,5 +498,5 @@
     "identity": "sum_{k=0}^m (m/2-k)=0"
   },
   "schema": "cubic-stabilization-irrationality-cubic-endpoint-v1",
-  "trust_boundary": "Exact three-specialization arithmetic regression only; the Barnes asymptotic theorem, quantum Kunneth theorem, virtual localization, tailwise derived identification, marked threshold compatibility, and conditional birational transport are not machine-verified."
+  "trust_boundary": "Exact three-specialization arithmetic regression only; the Barnes asymptotic theorem, quantum Kunneth theorem, virtual localization, rank-one derived clutching theorem, marked threshold compatibility, and conditional birational transport are not machine-verified."
 }

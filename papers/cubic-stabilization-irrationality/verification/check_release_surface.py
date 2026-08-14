@@ -51,7 +51,7 @@ required_labels = {
     "eq:blockwise-boundary-marking",
     "prop:support-collapse",
     "prop:gamma-ratio-reduction",
-    "hyp:tailwise-derived",
+    "thm:tailwise-derived",
     "prop:clutching-tail-holonomicity",
     "hyp:marked-threshold",
     "lem:cyclic-row-support",
@@ -74,12 +74,15 @@ if "They are not asserted to arise from smooth projective quantum connections" n
     errors.append("analytic countermodel scope boundary missing")
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
-if "nonlinear virtual fixed graphs" not in scope_text:
+if (
+    "Hypothesis~\\ref{hyp:marked-threshold} asks" not in scope_text
+    or "separate holonomicity does not determine the threshold maps" not in scope_text
+):
     errors.append("global continuation boundary is not visibly conditional")
 
 global_text = (ROOT / "sections/08-global-transport.tex").read_text(encoding="utf-8")
-if "\\begin{hypothesis}[Tailwise derived identification]" not in global_text:
-    errors.append("tailwise derived identification is not an explicit hypothesis")
+if "\\begin{theorem}[Rank-one tailwise derived identification]" not in global_text:
+    errors.append("rank-one tailwise derived identification is not a theorem")
 if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
     errors.append("marked threshold compatibility is not an explicit hypothesis")
 if "prove neither" not in scope_text:
@@ -102,11 +105,11 @@ if not re.search(
     errors.append("abstract does not lead with the conditional cubic theorem")
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
-if "Hypotheses~\\ref{hyp:tailwise-derived}" not in intro_text:
-    errors.append("headline theorem does not name the derived-tail hypothesis")
+if "Theorem~\\ref{thm:tailwise-derived}" not in intro_text:
+    errors.append("introduction does not name the derived-tail theorem")
 if "\\ref{hyp:marked-threshold}" not in intro_text:
     errors.append("headline theorem does not name the marked-threshold hypothesis")
-if "Under these hypotheses" not in readme_text:
+if "Under this hypothesis" not in readme_text:
     errors.append("README cubic conclusion is not visibly conditional")
 if ledger_path.is_file():
     ledger_text = ledger_path.read_text(encoding="utf-8")
@@ -127,7 +130,7 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Assuming the tailwise derived identification and marked threshold compatibility hypotheses" not in metadata.get(
+if "Assuming the marked threshold compatibility hypothesis" not in metadata.get(
     "description", ""
 ):
     errors.append("Zenodo description does not lead with the conditional hypothesis")
