@@ -139,7 +139,27 @@ wall (or blowup/down), with smooth projective chambers.  Gold's sole
 remaining gate is adjacent-receiver coherence for consecutive discrepant
 unit walls.
 
-The first gate is now a binary index question; see
+The exact failure certificate is
+`../2026-08-13-c907-remaining-mixed-stokes-shear-gate.md`.  A change of basis
+inside `P6` cannot alter vanishing of a covector on the whole packet, and
+center-supported Stokes shears have rank zero.  A failure must therefore be
+an exponentially small ambient-to-ambient shear with a nonzero-rank target,
+supported by an affine tower in a mixed `c1`-neutral direction involving both
+incident wall variables.
+Positive carrier faces and ordinary crepant rays are already closed.
+
+Most concrete suspects are eliminated further.  If every stable map in the
+neutral direction lies in the AKMW boundary, its pure quantum correction has image in
+boundary-supported cohomology; modulo that rank-zero subspace, no irregular
+Stokes change remains.  This kills exceptional differences, ordinary flop
+curves, center packets, and the C908/Fano-surface packet.  The sole surviving
+geometry is a tower `beta_n=beta_carrier+tau_0+n delta`, with
+`c1(delta)=0`, whose connected maps have an off-boundary cubic-carrier
+component and boundary tails.  The total `c1(beta_n)` may be positive and
+fixed.  No computed regression currently exhibits a nonzero dangerous
+coefficient of this form.
+
+The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
 in `Pic(P3)=Z` has generator `d=1` or `d=2`, since `K|P3=O(-2)`.
