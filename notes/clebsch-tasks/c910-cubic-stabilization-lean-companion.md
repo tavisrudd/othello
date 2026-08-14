@@ -611,6 +611,22 @@ are current, and the committed paper export verifies byte-for-byte in
   classes, so the cited implication has no missing cycle-theoretic premise.
   The source passage was checked in arXiv:1407.7261, cache SHA-256
   `514e5634d920f4b8e9c6797f3de5ad34afea65624ba23cc764d329ebcdd2c4e4`.
+- **Third cold-review repair (`RT3-*`):** the red-team found no fatal
+  counterexample but rejected two bridges.  `RT3-001` is closed by comparing
+  the normalized connection and Iritani's mutually inverse maps after the
+  canonical base change at every finite quotient
+  `R_j/J_j^N -> S_j/(J_j S_j)^N`, then taking the inverse limit in Iritani's
+  completed comparison ring; no unproved embedding of the abstract
+  completion into a Laurent field is used.  `RT3-002` is closed by recording
+  explicitly in the claim inventory that the manuscript's three-primary
+  discriminant, normalized form, and geometric maximal-isotropic kernel are
+  not formalized in Lean.  `RT3-003` is closed by lifting the changed
+  three-primary ruling through `Sp_2(Z_3) -> Sp_2(F_3)` and retaining the
+  depth-one scale `P=3I`.  `RT3-004` is closed by the Hilbert-class-polynomial
+  function-field argument and by placing it after identification of the norm
+  axis with Hartlieb's elliptic factor up to isogeny.  `RT3-005` is closed by
+  giving the Atlas table version and exact characteristic/ring/dimension/ID
+  rows.  The guarded authority gate passes after all five repairs.
 - **Six-axis polarization inputs:** source-checked.  The manuscript now cites
   Roulleau's Theorem 11(D) for the dihedral fibre and, separately, Lemma 14
   together with table (3.1) for deformation-invariance and the exact

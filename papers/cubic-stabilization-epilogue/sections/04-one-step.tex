@@ -283,11 +283,20 @@ First separate the single-valued rank-one exponential twist associated with
 connection descends to \(B_j\).  Apply
 Lemma~\ref{lem:formal-base-shift} modulo every \(J_j^N\).  Uniqueness of the
 normalized solution makes the gauges, and hence their characteristic
-polynomials, compatible under all reductions.  Take the inverse limit, and
-only then extend scalars to Iritani's Laurent comparison field and apply
-\(\Psi\).  Theorem~5.18 supplies both \(\Psi\) and its inverse with only
-integral powers of \(z\), so these mutually inverse maps preserve the framed
-characteristic polynomial on the original disc.  The fixed-divisor
+polynomials, compatible under all reductions.  No embedding of the abstract
+completion \(B_j\) into a Laurent field is used.  Instead let \(S_j\) denote
+Iritani's completed Laurent comparison ring and base-change at every finite
+stage along the canonical map
+\[
+ R_j/J_j^N\longrightarrow S_j/(J_jS_j)^N.
+\]
+The formal coefficient maps defining \(\Psi\) and \(\Psi^{-1}\) are continuous
+for this Novikov--bulk filtration, so their inverse identities and the
+connection intertwining descend to these finite quotients and are compatible
+in \(N\).  Taking their inverse limit gives the comparison directly over
+\(S_j\).  Theorem~5.18 supplies both maps there with only integral powers of
+\(z\), so they preserve the framed characteristic polynomial on the original
+disc.  The fixed-divisor
 substitution is a \(z\)-constant
 coefficient automorphism, so it does not change \(\nu_6\); it is well defined
 on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus each center target summand has the
@@ -334,10 +343,14 @@ Separate the Laurent unit as a single-valued rank-one exponential twist and
 apply the fixed divisor shift first.  The normalized connection descends to
 \(B_j\); apply Lemma~\ref{lem:formal-base-shift} in its
 finite quotients.  Uniqueness makes the gauges and characteristic
-polynomials compatible under reduction.  Then extend scalars to the Laurent
-comparison field.  Theorem~5.1 and Proposition~5.6 provide mutually inverse
-comparison maps using integral powers of \(z\), so the framed characteristic
-polynomial is preserved.
+polynomials compatible under reduction.  As in the blowup case, write \(S_j\)
+for the completed Laurent comparison ring and use the compatible finite-stage
+maps \(R_j/J_j^N\to S_j/(J_jS_j)^N\); no map from the abstract completion into
+a field is asserted.  The formal comparison maps and their inverse identities
+are continuous for this filtration, so they descend at every stage and pass
+to the inverse limit over \(S_j\).  Theorem~5.1 and Proposition~5.6 provide
+these mutually inverse maps using integral powers of \(z\), so the framed
+characteristic polynomial is preserved.
 Again the divisor substitution is a \(z\)-constant coefficient automorphism;
 it factors through the displayed \(u\)-exponent.
 This gives \(r\)

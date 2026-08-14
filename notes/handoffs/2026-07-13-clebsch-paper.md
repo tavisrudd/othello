@@ -358,6 +358,15 @@ and integral-`z` comparison maps; removal of a nonnilpotent unit term is
 correctly described as a rank-one exponential twist rather than a pro-Laurent
 gauge.  These changes strengthen the standalone proof and do not downgrade any
 theorem or Lean coverage classification.
+The final coefficient-ring seam is now typed at finite level: the normalized
+connection and Iritani's continuous mutually inverse maps are compared after
+`R_j/J_j^N -> S_j/(J_jS_j)^N` for every `N`, and only then passed to the
+inverse limit in the completed comparison ring.  No embedding of the abstract
+completion in a Laurent field is asserted.  The three-primary change of
+ruling is lifted integrally through `Sp_2(Z_3) -> Sp_2(F_3)`, the generic
+non-CM argument uses a Hilbert class polynomial after the norm axis is matched
+to Hartlieb's elliptic factor up to isogeny, and the claim inventory now
+explicitly marks the new three-primary geometric content as absent from Lean.
 The manuscript's scheme-theoretic norm-image step is now pinned to
 Achter--Casalaina-Martin--Wise, Theorem~A: in characteristic zero the image is
 an abelian subscheme and the quotient factorization is stable under base
