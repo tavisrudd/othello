@@ -6,21 +6,25 @@ They ask two related questions: how much structure can be recovered after most
 of the original information has been discarded, and which obstructions persist
 under operations, such as stabilization, that might be expected to weaken them?
 
-The broadest geometric theorem is conditional on one explicitly isolated,
-locally finite analytic hypothesis:
+The broadest geometric theorem is conditional on explicit gauged-admissibility
+conditions and an inverse-system family of one-object marked threshold comparisons:
 
-> **Assuming marked threshold compatibility, every projective stabilization
-> `X × P^m` of every smooth
-> complex cubic threefold `X` is irrational.**
+> **Assuming every relevant birational map has a gauged-admissible marked
+> completion satisfying marked threshold compatibility, every projective
+> stabilization `X × P^m` of every smooth complex cubic threefold `X` is
+> irrational.**
 
 *Conditional Irrationality of All Projective Stabilizations of Cubic
 Threefolds* obtains this dimension-independent conclusion from point-class
 rank under quantum wall crossing. Its local transport, endpoint calculation,
-support collapse, and coefficientwise Gamma reduction are proved.  Tailwise
-derived identification and holonomicity are proved by a rank-one derived
-intersection; the remaining analytic threshold hypothesis asks for
-isomorphisms of the cyclic point-row modules that intertwine both Stokes data
-and monodromy.
+and coefficientwise Gamma reduction are proved.  Under the stated
+gauged-admissibility conditions, support collapse, tailwise derived
+identification, and holonomicity follow from rank-one localization and a
+derived intersection.  The remaining unproved input is a family over all
+finite Artin levels, ordinary degrees, neutral directions, and thresholds;
+at zero modes it assumes a strict isomorphism from the complete adjacent
+row-generated cyclic module to its reduced nearby-cycle realization. Primary
+support is then preserved by polynomial functional calculus.
 
 The strongest unconditional statement is the first stabilization:
 *Irrationality after one stabilization* proves that
@@ -126,9 +130,10 @@ complex as separate victories.
   in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
   continuation preserves its intrinsic row on a fixed continuation domain.
   For a global cobordism, support collapse and coefficientwise Gamma-ratio
-  reduction combine with a rank-one derived-intersection theorem to isolate one
-  locally finite hypothesis: marked threshold compatibility for the cyclic
-  Rees `z`-modules. Under that hypothesis, the point-row primary Boolean is
+  reduction combine with a rank-one derived-intersection theorem. In addition
+  to the stated gauged-admissibility conditions, the remaining unproved input
+  is one-object marked threshold compatibility for the cyclic Rees `z`-modules. Under
+  those assumptions, the point-row primary Boolean is
   birationally invariant and distinguishes `X × P^m` from projective space
   for every smooth cubic threefold `X` and every `m ≥ 0`.
   [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
@@ -184,8 +189,8 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Conditional cubic stabilization | Conditional on every smooth projective birational map admitting a Włodarczyk completion with marked threshold compatibility, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
-| Conditional cubic stabilization | Conditional on marked threshold compatibility for a Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated hypothesis. |
+| Conditional cubic stabilization | Conditional on every smooth projective birational map admitting a gauged-admissible marked Włodarczyk completion with marked threshold compatibility, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
+| Conditional cubic stabilization | Conditional on gauged-admissibility and marked threshold compatibility for a marked Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated hypotheses. |
 | Irrationality after one stabilization | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
@@ -214,7 +219,7 @@ boundary, and reproducible entry points.
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
-| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction isolate one marked threshold hypothesis under which every projective stabilization of every smooth cubic threefold is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
+| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, exact local point transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -440,13 +445,13 @@ membership and Appendix A, and changes no higher-discrepancy statement.
 **Standout result.** A rank-one derived-intersection theorem identifies the
 fixed clutching data along every tail. Together with an exact simple-wall
 point coordinate, ordinary-flop point-row transport, global support collapse,
-and coefficientwise Gamma reduction, it isolates one locally finite
-hypothesis: analytic threshold isomorphisms of the cyclic point-row
-`z`-modules. Under it, every projective stabilization of every smooth cubic
-threefold is irrational.
+and coefficientwise Gamma reduction, it reduces the remaining analytic input
+to one-object threshold isomorphisms of the cyclic point-row `z`-modules. Under those
+isomorphisms and the stated gauged-admissibility conditions, every projective
+stabilization of every smooth cubic threefold is irrational.
 
 > *Abstract* Assume that every smooth projective birational map admits a
-> Włodarczyk completion with marked threshold isomorphisms of the finite
+> gauged-admissible marked Włodarczyk completion with one-object threshold isomorphisms of the finite
 > cyclic Rees `z`-differential modules
 > generated by the Gamma point row. We prove that
 > `X × P^m` is irrational for every smooth complex cubic threefold `X` and
@@ -469,12 +474,15 @@ threefold is irrational.
 > cylinder gives one endpoint point row, rotation localization kills every
 > intermediate fixed stratum, and Woodward's clutching factorization packages
 > every remaining bubble tree into endpoint tails. The rank-one derived
-> clutching theorem proved here makes each such tail holonomic and tempered. The
-> remaining analytic input is locally finite: at each sign or stability
-> threshold, and on the row-generated nearby-cycle modules at each zero-mode
-> rank change, an isomorphism of the cyclic Rees `z`-modules must
-> intertwine formal monodromy, carry the marked row, and preserve the stated
-> Stokes, deck, and nearby-cycle data. Under this hypothesis,
+> clutching theorem proved here makes each such tail holonomic and tempered.
+> The global statement also assumes the gauged-admissibility conditions stated
+> in the paper. Beyond those conditions, the remaining unproved input is an inverse-system family over
+> all finite Artin levels, ordinary degrees, neutral directions, and
+> thresholds. At zero modes it compares row-generated reduced nearby cycles
+> and must identify the entire adjacent row-generated cyclic module with its
+> reduced nearby-cycle realization. Primary support is then preserved by
+> polynomial functional calculus. Under these
+> assumptions,
 > Rees homogenization makes point-row nonvanishing on a formal-monodromy
 > primary packet birationally invariant. A two-tail rational counterexample
 > shows that separate holonomicity does not determine the threshold map. The
@@ -492,8 +500,9 @@ Gamma structures, irregular connections, Fourier--Laplace methods, and
 stable-rationality obstructions.
 
 **Why it matters.** It separates the proved rank-one derived geometry from the
-one locally finite marked threshold comparison still needed to turn the cubic
-endpoint contrast into a global birational obstruction.
+locally finite marked threshold comparisons still needed, in addition to the
+explicit gauged-admissibility conditions, to turn the cubic endpoint contrast
+into a global birational obstruction.
 
 ---
 
