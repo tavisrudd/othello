@@ -1,4 +1,5 @@
 import Mathlib.LinearAlgebra.Charpoly.BaseChange
+import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.RingTheory.Flat.Equalizer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CompatibleMonodromySystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
@@ -35,10 +36,13 @@ It assumes the derivative and commuting monodromy operator; it does not
 construct a formal differential module, Levelt--Turrittin solution algebra,
 fundamental solution, inverse-limit differential module, or analytic framed
 monodromy.  The supplied coefficient algebra and ideal are not identified with
-the manuscript's geometric coefficient data.  The compatible-family map is
-not proved injective or surjective, and arbitrary compatible horizontal
-families are not reconstructed.  All proofs are symbolic and kernel checked,
-with no external computation or oracle.
+the manuscript's geometric coefficient data.  Without completeness and
+separatedness the compatible-family map is not claimed injective or surjective.
+For a finite-dimensional source and a filtration satisfying the explicit
+coefficientwise completeness and zero-intersection hypotheses, Lean proves
+that the map is bijective.  This is not a topological or categorical inverse-limit
+statement.  All proofs are symbolic and kernel checked, with no external
+computation or oracle.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -394,6 +398,41 @@ structure CompatibleHorizontalKernelFamily
   compatible : ∀ level,
     tower.horizontalKernelReduction level (value (level + 1)) = value level
 
+omit [FiniteDimensional k V] in
+/-- Two compatible horizontal families are equal when their values agree at
+every coefficient level. -/
+@[ext]
+theorem CompatibleHorizontalKernelFamily.ext
+    {tower : HorizontalMonodromyCoefficientTower k V}
+    {left right : CompatibleHorizontalKernelFamily tower}
+    (equality : ∀ level, left.value level = right.value level) : left = right := by
+  cases left with
+  | mk leftValue leftCompatible =>
+    cases right with
+    | mk rightValue rightCompatible =>
+      have valueEquality : leftValue = rightValue := funext equality
+      subst rightValue
+      rfl
+
+/-- Base change of coefficients commutes with every coordinate in a
+base-changed module basis. -/
+theorem basisBaseChange_repr_tensorProduct_map
+    {H B C ι : Type*} [AddCommGroup H] [Module k H]
+    [CommRing B] [Algebra k B] [CommRing C] [Algebra k C]
+    (basis : Module.Basis ι k H) (coefficientMap : B →ₐ[k] C)
+    (tensor : B ⊗[k] H) (index : ι) :
+    coefficientMap ((basis.baseChange B).repr tensor index) =
+      (basis.baseChange C).repr
+        (TensorProduct.map coefficientMap.toLinearMap LinearMap.id tensor)
+        index := by
+  induction tensor using TensorProduct.induction_on with
+  | zero => simp
+  | add left right hleft hright =>
+      simpa only [map_add, Finsupp.add_apply] using
+        congrArg₂ (fun x y => x + y) hleft hright
+  | tmul coefficient value =>
+      simp [Module.Basis.baseChange_repr_tmul]
+
 /-- Compatible coefficient maps from one module into a coefficient-algebra
 tower send a tensor with an original horizontal vector to a compatible family
 of extended horizontal vectors. -/
@@ -520,6 +559,207 @@ theorem horizontalKernelFamilyOfBaseTensor_monodromy
       intro quotientLevel coefficient
       exact filtration.reduction_mk quotientLevel coefficient)
     tensor level
+
+omit [FiniteDimensional k V] in
+/-- Relative to a basis of the original horizontal subspace, this is one
+coefficient of a compatible horizontal family at a selected tower level. -/
+noncomputable def compatibleHorizontalKernelFamilyCoordinateValue
+    {ι : Type*} (tower : HorizontalMonodromyCoefficientTower k V)
+    (basis : Module.Basis ι k (LinearMap.ker tower.derivative))
+    (family : CompatibleHorizontalKernelFamily tower)
+    (index : ι) (level : ℕ) : tower.Coefficient level :=
+  (basis.baseChange (tower.Coefficient level)).repr
+    ((horizontalBaseChangeEquivOfField tower.derivative).symm
+      (family.value level)) index
+
+omit [FiniteDimensional k V] in
+/-- Coordinates of a compatible horizontal family commute with every adjacent
+coefficient reduction. -/
+theorem compatibleHorizontalKernelFamilyCoordinateValue_compatible
+    {ι : Type*} (tower : HorizontalMonodromyCoefficientTower k V)
+    (basis : Module.Basis ι k (LinearMap.ker tower.derivative))
+    (family : CompatibleHorizontalKernelFamily tower)
+    (index : ι) (level : ℕ) :
+    tower.reduction level
+        (compatibleHorizontalKernelFamilyCoordinateValue tower basis family
+          index (level + 1)) =
+      compatibleHorizontalKernelFamilyCoordinateValue tower basis family
+        index level := by
+    have tensorCompatible :
+        TensorProduct.map
+            (tower.reduction level).toLinearMap LinearMap.id
+            ((horizontalBaseChangeEquivOfField tower.derivative).symm
+              (family.value (level + 1))) =
+          (horizontalBaseChangeEquivOfField tower.derivative).symm
+            (family.value level) := by
+      apply (horizontalBaseChangeEquivOfField
+        (B := tower.Coefficient level) tower.derivative).injective
+      rw [(horizontalBaseChangeEquivOfField
+        (B := tower.Coefficient level) tower.derivative).apply_symm_apply]
+      change tower.horizontalKernelReduction level (family.value (level + 1)) =
+        family.value level
+      exact family.compatible level
+    calc
+      tower.reduction level
+          ((basis.baseChange (tower.Coefficient (level + 1))).repr
+            ((horizontalBaseChangeEquivOfField tower.derivative).symm
+              (family.value (level + 1))) index) =
+        (basis.baseChange (tower.Coefficient level)).repr
+          (TensorProduct.map
+            (tower.reduction level).toLinearMap
+            LinearMap.id
+            ((horizontalBaseChangeEquivOfField tower.derivative).symm
+              (family.value (level + 1)))) index :=
+        basisBaseChange_repr_tensorProduct_map basis
+          (tower.reduction level)
+          ((horizontalBaseChangeEquivOfField tower.derivative).symm
+            (family.value (level + 1))) index
+      _ = (basis.baseChange (tower.Coefficient level)).repr
+          ((horizontalBaseChangeEquivOfField tower.derivative).symm
+            (family.value level)) index :=
+        congrArg
+          (fun tensor =>
+            (basis.baseChange (tower.Coefficient level)).repr tensor index)
+          tensorCompatible
+
+omit [FiniteDimensional k V] in
+/-- Relative to a basis of the original horizontal subspace, one coordinate of
+a compatible horizontal family over quotient rings is a compatible quotient
+family. -/
+noncomputable def compatibleHorizontalKernelFamilyCoordinate
+    {B ι : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (basis : Module.Basis ι k (LinearMap.ker derivative))
+    (family : CompatibleHorizontalKernelFamily
+      (ofIdealFiltration filtration derivative monodromy commutes))
+    (index : ι) : filtration.CompatibleQuotientFamily where
+  value level := compatibleHorizontalKernelFamilyCoordinateValue
+    (ofIdealFiltration filtration derivative monodromy commutes) basis family
+      index level
+  compatible level :=
+    compatibleHorizontalKernelFamilyCoordinateValue_compatible
+      (ofIdealFiltration filtration derivative monodromy commutes) basis family
+        index level
+
+omit [FiniteDimensional k V] in
+/-- Every coordinate family of the horizontal family represented by a base
+tensor is the compatible quotient family represented by the corresponding
+base-tensor coordinate. -/
+theorem compatibleHorizontalKernelFamilyCoordinate_ofBaseTensor
+    {B ι : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (basis : Module.Basis ι k (LinearMap.ker derivative))
+    (tensor : B ⊗[k] LinearMap.ker derivative) (index : ι) :
+    compatibleHorizontalKernelFamilyCoordinate filtration derivative monodromy
+        commutes basis
+        (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+          commutes tensor) index =
+      filtration.ofRingElement ((basis.baseChange B).repr tensor index) := by
+  ext level
+  change (basis.baseChange (filtration.QuotientRing level)).repr
+      ((horizontalBaseChangeEquivOfField derivative).symm
+        (horizontalBaseChangeEquivOfField derivative
+          (TensorProduct.map
+            (Ideal.Quotient.mkₐ k (filtration.ideal level)).toLinearMap
+            LinearMap.id tensor))) index =
+    Ideal.Quotient.mk (filtration.ideal level)
+      ((basis.baseChange B).repr tensor index)
+  rw [(horizontalBaseChangeEquivOfField derivative).symm_apply_apply]
+  exact (basisBaseChange_repr_tensorProduct_map basis
+    (Ideal.Quotient.mkₐ k (filtration.ideal level)) tensor index).symm
+
+/-- Zero intersection of the filtration ideals makes the canonical map from
+base horizontal tensors to compatible horizontal quotient families injective. -/
+theorem horizontalKernelFamilyOfBaseTensor_injective
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (separated : iInf filtration.ideal = ⊥) :
+    Function.Injective
+      (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+        commutes) := by
+  let basis := Module.finBasis k (LinearMap.ker derivative)
+  intro left right familiesEqual
+  apply (basis.baseChange B).repr.injective
+  apply Finsupp.ext
+  intro index
+  have coordinateFamiliesEqual := congrArg
+    (fun family => compatibleHorizontalKernelFamilyCoordinate filtration
+      derivative monodromy commutes basis family index)
+    familiesEqual
+  rw [compatibleHorizontalKernelFamilyCoordinate_ofBaseTensor,
+    compatibleHorizontalKernelFamilyCoordinate_ofBaseTensor]
+    at coordinateFamiliesEqual
+  exact (filtration.ofRingElement_injective_iff_iInf_eq_bot.mpr separated)
+    coordinateFamiliesEqual
+
+/-- Coefficientwise completeness makes every compatible horizontal quotient
+family arise from a tensor over the base coefficient algebra. -/
+theorem horizontalKernelFamilyOfBaseTensor_surjective
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (complete : filtration.IsComplete) :
+    Function.Surjective
+      (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+        commutes) := by
+  let basis := Module.finBasis k (LinearMap.ker derivative)
+  intro family
+  choose coefficient coefficientRepresents using fun index =>
+    complete (compatibleHorizontalKernelFamilyCoordinate filtration derivative
+      monodromy commutes basis family index)
+  let tensor : B ⊗[k] LinearMap.ker derivative :=
+    (basis.baseChange B).repr.symm
+      (Finsupp.equivFunOnFinite.symm coefficient)
+  refine ⟨tensor, ?_⟩
+  apply CompatibleHorizontalKernelFamily.ext
+  intro level
+  apply (horizontalBaseChangeEquivOfField
+    (B := filtration.QuotientRing level) derivative).symm.injective
+  apply (basis.baseChange (filtration.QuotientRing level)).repr.injective
+  apply Finsupp.ext
+  intro index
+  have coordinateEquality :
+      compatibleHorizontalKernelFamilyCoordinate filtration derivative
+          monodromy commutes basis
+          (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+            commutes tensor) index =
+        compatibleHorizontalKernelFamilyCoordinate filtration derivative
+          monodromy commutes basis family index := by
+    rw [compatibleHorizontalKernelFamilyCoordinate_ofBaseTensor]
+    have representation : (basis.baseChange B).repr tensor index =
+        coefficient index := by simp [tensor]
+    rw [representation]
+    change filtration.ofRingElement (coefficient index) = _
+    exact coefficientRepresents index
+  exact congrArg
+    (fun coefficientFamily : filtration.CompatibleQuotientFamily =>
+      coefficientFamily.value level)
+    coordinateEquality
+
+/-- The canonical map from base horizontal tensors to compatible horizontal
+quotient families is bijective for a coefficientwise complete and separated
+filtration. -/
+theorem horizontalKernelFamilyOfBaseTensor_bijective
+    {B : Type*} [CommRing B] [Algebra k B]
+    (filtration : DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (complete : filtration.IsComplete)
+    (separated : iInf filtration.ideal = ⊥) :
+    Function.Bijective
+      (horizontalKernelFamilyOfBaseTensor filtration derivative monodromy
+        commutes) :=
+  ⟨horizontalKernelFamilyOfBaseTensor_injective filtration derivative monodromy
+      commutes separated,
+    horizontalKernelFamilyOfBaseTensor_surjective filtration derivative monodromy
+      commutes complete⟩
 
 /-- The horizontal monodromy characteristic polynomials at all coefficient
 levels form an explicit compatible polynomial system. -/

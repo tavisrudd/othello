@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 152 reviewer-facing Lean terminals.  These counts summarize the
+There are 153 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 152 reviewer terminals.
+1 complete; 153 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -115,15 +115,21 @@ objects, hypotheses, conclusions, and cautions recorded in
   coefficient tensor with an original horizontal vector determines an explicit
   compatible family over the quotient tower; pure tensors map only their
   coefficient, and pointwise monodromy comes from the original restricted
-  monodromy.  No injectivity, surjectivity, or reconstruction theorem for
-  arbitrary compatible horizontal families is claimed.  Lean also constructs the tower from the actual adic quotients
+  monodromy.  Without additional hypotheses, no injectivity or surjectivity is
+  claimed.  For a finite-dimensional source and a filtration that is complete
+  in the explicit compatible-quotient-family sense and has zero ideal
+  intersection, the canonical map is bijective: every compatible horizontal
+  family is represented by a unique base tensor.  This is a coefficientwise
+  inverse-family theorem, not a topological or categorical inverse-limit
+  statement.  Lean also constructs the tower from the actual adic quotients
   `B/I^n` of a supplied coefficient algebra and ideal and proves compatibility
   under the canonical reductions.  The horizontal characteristic polynomial
   over `B` reduces exactly to the polynomial at every quotient level.  Each
   fixed polynomial coefficient is
   packaged as the compatible quotient family represented by its corresponding
   base-ring coefficient.  Identification of `B` and `I` with the
-  manuscript's coefficient data, completeness, separatedness, the formal
+  manuscript's coefficient data, proof that the manuscript filtration has the
+  stated completeness and separatedness properties, the formal
   differential module, Levelt--Turrittin solution algebra, fundamental
   solution, analytic monodromy construction, and inverse-limit differential
   module remain open.  Lean proves the coefficientwise

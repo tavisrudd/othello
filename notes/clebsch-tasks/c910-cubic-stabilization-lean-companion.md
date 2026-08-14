@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 83 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 152 audited terminals.  The rejecting manuscript inventory covers all
+exports 153 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -109,11 +109,16 @@ scalar-extended horizontal kernels apply coefficient reduction on pure tensors
 and intertwine the restricted monodromies.  Every base coefficient tensor with
 an original horizontal vector also gives a compatible family over the quotient
 tower of a supplied decreasing ideal filtration, and pointwise monodromy agrees
-with the original restricted action.  Injectivity, surjectivity, and recovery
-of arbitrary compatible families remain unproved.  The same inverse system is now constructed
+with the original restricted action.  Without stronger hypotheses, no
+injectivity or surjectivity is claimed.  For finite-dimensional source space
+and an explicitly coefficientwise-complete filtration with zero ideal
+intersection, the canonical map is bijective, so every compatible horizontal
+family has a unique base tensor.  This is a coefficientwise result, not a
+topological or categorical inverse-limit theorem.  The same inverse system is now constructed
 on the actual adic quotients `B/I^n` of a supplied coefficient algebra and
-ideal, with canonical adjacent quotient reductions; completeness,
-separatedness, and geometric identification remain unproved.  The horizontal
+ideal, with canonical adjacent quotient reductions; the required completeness
+and separatedness properties for the manuscript filtration, and its geometric
+identification, remain unproved.  The horizontal
 characteristic polynomial over `B` reduces exactly to the polynomial at every
 quotient level.  Every fixed
 horizontal characteristic-polynomial coefficient is now also packaged as the

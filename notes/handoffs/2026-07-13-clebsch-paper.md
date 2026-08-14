@@ -242,7 +242,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 83 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 152 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 153 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -336,16 +336,23 @@ monodromies.  For the quotient tower of any supplied decreasing ideal
 filtration, every base coefficient tensor with an original horizontal vector
 now determines an explicit compatible family; pure tensors map only their
 coefficient, and pointwise monodromy is inherited from the original restricted
-monodromy.  This does not prove injectivity, surjectivity, or reconstruction of
-arbitrary compatible horizontal families.  Lean now also constructs this inverse
+monodromy.  Without stronger hypotheses, this construction makes no
+injectivity, surjectivity, or reconstruction claim for arbitrary compatible
+horizontal families.  For a
+finite-dimensional source and an explicitly coefficientwise-complete
+filtration with zero ideal intersection, the canonical map is bijective, so
+every compatible horizontal family comes from a unique base tensor.  This is a
+coefficientwise result, not a topological or categorical inverse-limit theorem.
+Lean now also constructs this inverse
 system on the actual adic quotients `B/I^n` of a supplied coefficient algebra
 and ideal, using the canonical adjacent quotient reductions.  Every fixed
 level polynomial is the reduction of the horizontal characteristic polynomial
 over `B`.  Every fixed horizontal characteristic-polynomial coefficient is
 packaged as the compatible
 quotient family represented by its corresponding base coefficient.
-Identification with the manuscript's coefficient algebra and ideal, completeness,
-separatedness, the formal differential module, Levelt--Turrittin solution
+Identification with the manuscript's coefficient algebra and ideal, proof of
+the required completeness and separatedness properties for its filtration, the
+formal differential module, Levelt--Turrittin solution
 algebra, fundamental solution, analytic monodromy construction, and
 inverse-limit differential module remain open.  Compatible coefficient
 reductions, divisor substitutions, small matrices, and gauges derive the bulk
@@ -481,7 +488,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 152-terminal axiom transcript
+The aggregate build, source correspondence, and 153-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent

@@ -2389,6 +2389,29 @@ theorem horizontalMonodromy_idealFiltration_horizontalFamily
       Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor_monodromy
         filtration derivative monodromy commutes
 
+/-- Let the original vector space be finite dimensional and let a decreasing
+ideal filtration be complete in the explicit compatible-quotient-family sense
+and separated by zero ideal intersection.  Then the canonical map from tensors
+over the base coefficient algebra with an original horizontal vector to
+compatible horizontal vectors over every quotient level is bijective.  This is
+a coefficientwise inverse-family theorem; it does not construct a topology,
+categorical inverse limit, formal differential module, Levelt--Turrittin
+solution algebra, or analytic monodromy operator. -/
+theorem horizontalMonodromy_completeSeparatedFiltration_horizontalFamily_bijective
+    {k V B : Type*} [Field k]
+    [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+    [CommRing B] [Algebra k B]
+    (filtration : Quantum.DecreasingIdealFiltration B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (complete : filtration.IsComplete)
+    (separated : iInf filtration.ideal = ⊥) :
+    Function.Bijective
+      (Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor
+        filtration derivative monodromy commutes) :=
+  Quantum.HorizontalMonodromyCoefficientTower.horizontalKernelFamilyOfBaseTensor_bijective
+    filtration derivative monodromy commutes complete separated
+
 /-- An actual adic coefficient tower carries the horizontal-monodromy
 characteristic polynomials compatibly.  Let `B` be a commutative algebra over
 the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses
