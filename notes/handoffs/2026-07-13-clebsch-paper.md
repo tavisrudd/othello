@@ -297,7 +297,7 @@ must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
 92 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 166 reviewer terminals, audit
+exact bijection among all 23 manuscript claims, 167 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -485,7 +485,10 @@ For arbitrary coordinate sets and multivariate formal power series over a
 commutative rational algebra, Lean proves that two normalized solutions of the
 same coordinate equations are equal.  For the coefficientwise commuting formal
 partial derivatives, an invertible supplied solution forces the exact
-zero-curvature identity; conversely, the exact zero-curvature identity yields a
+zero-curvature identity.  Symmetric mixed connection derivatives and pairwise
+commuting connection matrices also imply zero curvature directly, isolating
+the potentiality and commutative-associative product bridge for a Frobenius-type quantum product.
+Conversely, the exact zero-curvature identity yields a
 recursively constructed unique normalized invertible formal gauge, naturally
 under rational-algebra coefficient homomorphisms.  From a supplied commutative
 rational algebra, decreasing ideal filtration, base multivariable connection,
@@ -589,7 +592,7 @@ from one fibre to all fibres.  On the actual `F4` projective line, nonfixity
 under Frobenius at one fibre already identifies and propagates the exact marked
 pair.  Constructing the manuscript's geometric packet and continuous
 classifying map remains open.
-The aggregate build, source correspondence, and 166-terminal axiom transcript
+The aggregate build, source correspondence, and 167-terminal axiom transcript
 are green, and the committed standalone export verifies byte-for-byte.  The next formal gates are
 the geometric identification of that finite-etale splitting/eigenbasis and
 proof that geometric divisor descent

@@ -4369,6 +4369,37 @@ theorem multivariableFormalPartialDerivations_and_curvature
     Quantum.multivariableFlatGaugeSeries_curvature_eq_zero connection solution
       solutionUnit flatEquation first second⟩
 
+/-- On a multivariate formal power-series coefficient ring, symmetric mixed
+derivatives of the connection matrices and pairwise commutativity of those
+matrices imply the exact zero-curvature identity.  These are the abstract
+potentiality and commutative-associative product identities used for a
+Frobenius-type quantum product.  The theorem assumes those identities explicitly; it does not
+construct or identify a geometric quantum product. -/
+theorem multivariableFormalConnection_curvature_of_potential_and_commutingProduct
+    {Coordinate Index R : Type*} [DecidableEq Coordinate]
+    [Fintype Index] [DecidableEq Index] [CommRing R]
+    (connection : Coordinate →
+      Matrix Index Index (MvPowerSeries Coordinate R))
+    (mixedDerivative : ∀ first second,
+      (connection second).map
+          (Quantum.multivariablePartialDerivative first) =
+        (connection first).map
+          (Quantum.multivariablePartialDerivative second))
+    (connectionCommutes : ∀ first second,
+      connection first * connection second =
+        connection second * connection first)
+    (first second : Coordinate) :
+    (connection second).map
+          (Quantum.multivariablePartialDerivative first) -
+        (connection first).map
+          (Quantum.multivariablePartialDerivative second) +
+        connection first * connection second -
+        connection second * connection first = 0 :=
+  Quantum.connection_curvature_eq_zero_of_mixedDerivative_eq_and_mul_comm
+    (Quantum.multivariablePartialDerivationSystem
+      (Coordinate := Coordinate) (R := R))
+    connection mixedDerivative connectionCommutes first second
+
 /-- The divisor-tag separation fragment: an injective integral tag makes the
 pair of specialized monomial and tag injective even if the specialized
 monomial map alone is not injective. -/

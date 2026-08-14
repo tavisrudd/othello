@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 92 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 166 audited terminals.  The rejecting manuscript inventory covers all
+exports 167 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -246,7 +246,10 @@ coefficientwise partial derivatives satisfy the Leibniz rule and commute.  Lean
 proves both directions at the formal level: an invertible supplied solution
 forces zero curvature, and zero curvature yields a recursively constructed
 unique normalized invertible gauge, naturally under rational-algebra
-coefficient homomorphisms.  This applies to ordinary Laurent-series
+coefficient homomorphisms.  Lean also proves directly that the potentiality
+identity for mixed connection derivatives together with pairwise commutativity
+of the connection matrices implies zero curvature, isolating the exact
+Frobenius-product bridge used in the manuscript.  This applies to ordinary Laurent-series
 coefficients, but identification of the manuscript's connection and curvature
 premise and a Laurent lower bound uniform in bulk monomials and levels remain
 unproved.  From a supplied rational algebra, ideal filtration, base
@@ -475,8 +478,10 @@ are current, and the committed paper export verifies byte-for-byte in
   gap is construction and geometric identification of the manuscript's
   coefficient rings, filtration, small monodromy, and the preserving base
   endomorphism realizing its divisor substitution, together with construction
-  of its Laurent bulk connection and verification of the formal zero-curvature
-  and positivity premises.
+  of its Laurent bulk connection and verification of the potentiality,
+  commutative-associative product, and positivity premises.  Lean now derives formal
+  zero curvature from the first two identities rather than retaining it as an
+  opaque premise.
 - **Closeout `ej`+`tt` pass:** settled the cheap algebraic opportunity.  The
   finite-level formal-base-shift packet now derives not only compatible bulk
   matrices and the substituted polynomial identity, but also compatibility of

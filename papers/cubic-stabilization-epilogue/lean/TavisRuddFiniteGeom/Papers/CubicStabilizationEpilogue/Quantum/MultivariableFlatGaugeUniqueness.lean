@@ -23,7 +23,9 @@ the multivariate formal power-series ring, Lean proves the coefficientwise
 partial derivatives satisfy the Leibniz rule, packages them as commuting
 derivations, and specializes the zero-curvature identity to those actual
 partials.  The same necessary identity is also proved for an arbitrary
-commutative coefficient algebra with commuting derivations.
+commutative coefficient algebra with commuting derivations.  Conversely, the
+two Frobenius-type identities consisting of symmetric mixed derivatives and
+pairwise commuting connection matrices imply zero curvature directly.
 
 For a zero-curvature connection over a commutative `\mathbb{Q}`-algebra, Lean
 also constructs the coefficients recursively in one chosen support coordinate,
@@ -485,6 +487,32 @@ noncomputable def multivariablePartialDerivationSystem
       (MvPowerSeries Coordinate R) where
   derivation := multivariablePartialDerivation
   commute := multivariablePartialDerivative_comm
+
+/-- Symmetry of the mixed connection derivatives and pairwise commutativity
+of the connection matrices imply the zero-curvature identity.  These are the
+two algebraic inputs supplied by potentiality and the commutative-associative
+product law for a Frobenius-type quantum product; no solution matrix is
+assumed. -/
+theorem connection_curvature_eq_zero_of_mixedDerivative_eq_and_mul_comm
+    {Coordinate Index Base Coefficient : Type*}
+    [Fintype Index] [DecidableEq Index]
+    [CommRing Base] [CommRing Coefficient] [Algebra Base Coefficient]
+    (directions : CommutingCoordinateDerivations
+      Coordinate Base Coefficient)
+    (connection : Coordinate → Matrix Index Index Coefficient)
+    (mixedDerivative : ∀ first second,
+      (connection second).map (directions.derivation first) =
+        (connection first).map (directions.derivation second))
+    (connectionCommutes : ∀ first second,
+      connection first * connection second =
+        connection second * connection first)
+    (first second : Coordinate) :
+    (connection second).map (directions.derivation first) -
+        (connection first).map (directions.derivation second) +
+        connection first * connection second -
+        connection second * connection first = 0 := by
+  rw [mixedDerivative first second, connectionCommutes first second]
+  abel
 
 /-- An invertible solution of all coordinate equations forces the standard
 zero-curvature identity for the supplied connection.  This theorem proves a

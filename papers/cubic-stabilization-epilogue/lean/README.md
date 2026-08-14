@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 166 reviewer terminals.
+1 complete; 167 reviewer terminals.
 
-The 166 reviewer-facing terminals currently verify:
+The 167 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -225,8 +225,12 @@ The 166 reviewer-facing terminals currently verify:
   satisfying all the same coordinate equations are equal by total-degree
   induction; the coefficientwise multivariate formal partial derivatives are
   proved to satisfy the Leibniz rule and commute, an invertible supplied
-  solution is proved to force their exact zero-curvature identity, and,
-  conversely, zero curvature over any commutative rational algebra is proved to
+  solution is proved to force their exact zero-curvature identity, while
+  symmetric mixed connection derivatives and pairwise commuting connection
+  matrices are proved to imply that identity without a supplied solution; in
+  the quantum-product interpretation these are the potentiality and
+  commutative-associative product inputs, which remain supplied rather than geometrically
+  constructed; conversely, zero curvature over any commutative rational algebra is proved to
   yield a recursively constructed unique normalized invertible multivariable
   formal gauge, naturally under every rational-algebra coefficient
   homomorphism; the same necessary result holds for arbitrary commuting

@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 166 reviewer-facing Lean terminals.  These counts summarize the
+There are 167 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 166 reviewer terminals.
+1 complete; 167 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -170,6 +170,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   proves the coefficientwise
   multivariate partial derivatives are commuting derivations, derives their
   necessary zero-curvature identity from an invertible supplied solution, and
+  proves independently that symmetric mixed connection derivatives together
+  with pairwise commuting connection matrices imply zero curvature; these
+  potentiality and commutative-associative product identities are supplied rather than derived
+  from the manuscript's quantum product.  Lean
   conversely constructs the unique
   normalized invertible multivariable formal gauge from zero curvature over any
   commutative rational algebra, naturally under rational-algebra coefficient
