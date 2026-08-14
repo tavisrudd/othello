@@ -239,17 +239,19 @@ an exact formal reduction: at a smooth free quotient the linearized quantum
 Kirwan map is surjective by classical Kirwan and a Novikov-adic Neumann
 series.  The raw map has a Novikov-Euler correction; after the canonical Rees
 homogenization `Q^d -> z^(c_1.d)Q^d`, it has the exact common half-Tate shift.
-Provided Euler multiplication is intertwined at the curved bulk point,
-primary decomposition lifts the whole primitive-sixth packet.
+Virtual-dimension Euler homogeneity and the star-morphism identity intertwine
+Euler multiplication at the curved bulk point; Artin-level bulk transport
+returns to the small point.  Primary decomposition therefore lifts the whole
+primitive-sixth packet.
 
-What remains is not the algebra of these two statements but their common
-analytic receiver.  Woodward supplies a localized adiabatic receiver for each
-quotient.  Gonzalez--Woodward's published quantum Kalkman formula compares
-unlocalized graph potentials, and their Remark 1.18(b) explicitly leaves the
-localized/fundamental-solution extension open.  The exact successor is the
-localized quantum-Kalkman **point-row** theorem stated in the common-source
-note.  Either its proof or a nonzero point-augmentation residue gives a
-decisive result.
+The wall-local analytic row is now closed as well.  A commuting graph rotation,
+pole-constrained input markings, and full divisor-lattice Liouville character
+extraction isolate one oriented localized factor.  The common-open point lift
+then kills every wall-fixed graph by Gonzalez--Woodward Proposition 3.15(c).
+The remaining application gate is one sectorial realization of the intrinsic
+`z=0` packet over the intermediate variety's full Novikov field, conservative
+for both incident wall comparisons.  Exact proof and boundary are in the
+common-source note.
 
 ## 5. Stronger elimination for the fixed-curve suspect
 
@@ -315,15 +317,10 @@ candidate enumeration.
 
 ### Still open
 
-- **Localized common row.**  The adjoint discrete Fourier point row and the
-  formal smooth-endpoint packet lift no longer require full cone preservation.
-  What is absent is their equality in one localized gauged solution object
-  across a wall.  Exact evidence gap: Gonzalez--Woodward Remark 1.18(b).
-  Owning successor: the localized quantum-Kalkman point-row theorem.
-- **Homogeneous packet convention.**  The `mu`/Novikov-Euler calculation and
-  Rees half-Tate shift are now exact.  The linearized quantum Kirwan receiver
-  must still intertwine Euler multiplication at the curved bulk point
-  `kappa(0)` and be compared by bulk isomonodromy.
+- **Common packet fiber.**  The localized point row and shifted wall packet
+  map are now exact.  What is absent is one sectorial realization of the
+  intermediate variety's intrinsic formal `P_6` packet over its full Novikov
+  field that both incident wall receivers conservatively compare to.
 - **Geometric falsifier.**  The incomplete-Gamma model is not a
   smooth-projective peak.  No geometric unit-circuit peak is known whose
   complete neutral residue has nonzero common-open rank.  A direct

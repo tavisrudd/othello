@@ -2,24 +2,26 @@
 
 Date: 2026-08-14
 
-**Status:** exact formal reduction, not an `X x P^2` irrationality proof.  Two
-pieces that were previously charged to a full intermediate-quotient Fourier
-conjecture can be separated.  First, the adjoint discrete Fourier formula has a
-chamber-independent scalar augmentation, so the point/rank row is already
-common on every input on which the formula is defined.  Second, for smooth free
-quotients, the linearized quantum Kirwan map is formally surjective by a
-classical-Kirwan plus Neumann-series argument.  These facts combine with a
-finite-module Boolean lemma: two surjective, equally shifted monodromy maps with
-one common source row carry the same primitive-sixth rank Boolean.
+**Status:** theorem-grade wall-local reduction, not yet an `X x P^2`
+irrationality proof.  Three pieces previously charged to a full
+intermediate-quotient Fourier conjecture are now separated and proved.  The
+adjoint discrete Fourier formula has a chamber-independent scalar
+augmentation.  At a smooth free quotient, linearized quantum Kirwan is
+formally surjective and, after the necessary Rees homogenization, intertwines
+the formal packet with one uniform half-Tate shift.  Finally, a
+component-selective refinement of quantum Kalkman localization proves equality
+of the two oriented localized point rows: pole classes put all inputs on one
+side, a Liouville character extracts zero degree on the other, and the
+common-open point lift kills every wall-fixed term by
+Gonzalez--Woodward Proposition 3.15(c).
 
-This can bypass full Gu--Yu--Yu Conjecture 1.11 / Iritani Conjecture 43.  The
-remaining geometric input is nevertheless new and load-bearing: a **localized
-quantum-Kalkman point-row theorem** identifying the two chamber pullbacks of the
-Gamma point row in one localized gauged solution object.  Gonzalez--Woodward's
-published quantum Kalkman formula treats graph potentials.  Their Remark
-1.18(b) explicitly leaves its extension to localized graph potentials, hence
-fundamental solutions, for future work.  Nothing below silently fills that
-gap.
+These facts combine with a finite-module Boolean lemma: two surjective,
+equally shifted monodromy maps with one common source row carry the same
+primitive-sixth rank Boolean.  This bypasses full Gu--Yu--Yu Conjecture 1.11 /
+Iritani Conjecture 43.  The remaining application audit is global: realize the
+two endpoint packet maps in one common coefficient/fiber category at each wall
+and verify that the resulting intrinsic Boolean composes through the selected
+pi-desingularized chain.  Nothing below claims that audit has already passed.
 
 ## 1. The adjoint augmentation lemma
 
@@ -190,6 +192,30 @@ curved receiver conventions.  In particular, `kappa(0)` need not be zero.
 The target module must first be taken at bulk `kappa(0)` and only then compared
 with the small-bulk module by formal bulk isomonodromy.
 
+That application check is also formal.  Give the source and target big quantum
+spaces their total Euler fields `E_W` and `E_Y`.  The virtual-dimension formula
+for each affine-gauged coefficient of `kappa` gives the termwise homogeneity
+identity
+
+\[
+ D\kappa(E_W)=E_Y\circ\kappa.                                 \tag{12e}
+\]
+
+At the source origin, with `A=D_0kappa`, equation (12e) says
+
+\[
+ A(c_1^G(TW))=E_Y(\kappa(0)).                                 \tag{12f}
+\]
+
+Because `A` is an algebra map from the source product at zero to the target
+product at `kappa(0)`, equation (12f) implies (12d).  Thus the
+Rees-homogenized map really is a shifted `z`-connection morphism.  Finally,
+`kappa(0)` has positive Novikov energy.  On every Artin quotient, flatness of
+the big quantum connection gives unique parallel transport along
+`s kappa(0)`, `0<=s<=1`; the compatible inverse limit conjugates formal
+monodromy and transports the Gamma point row.  Hence the primitive-sixth rank
+Boolean at the curved target point is the intrinsic small-point Boolean.
+
 ## 4. Common-source Boolean theorem
 
 Let the hypotheses of Section 3 hold with the same shift for `i=1,2`.  Let
@@ -292,105 +318,177 @@ the virtual normal Euler class and node-smoothing factors reproduce the same
 Gamma kernel, rather than an incomplete residue.  That check is the theorem,
 not bookkeeping to suppress.
 
-### A stronger support-collapse candidate
+### Support-collapse theorem for the localized point row
 
-There is a route that may eliminate the fixed terms before any contour sum.
+The fixed terms can in fact be eliminated before any contour sum, provided
+the wall has the common-open point lift already constructed for the smooth
+simple-VGIT theorem.
+
+> **Theorem (commuting-rotation point row).**  Let `W` be a smooth projective
+> master with two adjacent smooth free quotient chambers `Y_-` and `Y_+`.
+> Assume that a common equivariant class `a_p` restricts to the point class in
+> both chambers and to zero on every polarization-wall fixed locus.  Then,
+> after the usual quantum-Kirwan change of variables and on the common
+> localized graph receiver,
+> \[
+>  \langle [p],\tau_{Y_-,-}(\kappa_-(\alpha))\rangle
+>   =
+>  \langle [p],\tau_{Y_+,-}(\kappa_+(\alpha))\rangle .          \tag{18}
+> \]
+> The equality holds coefficientwise in the remaining Novikov and bulk
+> variables.  Its derivatives give equality of the full oriented point row,
+> not merely of the scalar graph trace.
+
+### Proof
+
 Choose the point in the common stable open of the two adjacent chambers, and
 let `a_p` be an equivariant common-open lift of its point class with
 
 \[
- a_p|_{W^\zeta}=0                                             \tag{18}
+ a_p|_{W^\lambda}=0                                           \tag{19}
 \]
 
 for every wall one-parameter subgroup.  Such a lift is the same zero-wall
 class used in the simple-VGIT point-column theorem; geometrically its cycle is
 disjoint from the wall fixed locus.
 
-Run the quantum Kalkman master-space localization equivariantly for the
-commuting rotation of the graph `P^1`, and pair the output of the localized
-graph potential with `a_p`.  On a graph-space fixed locus, the output
-evaluation in `tau_-` is evaluation at the node joining the bubble to the
-principal parametrized component.  On a polarization-wall fixed stratum that
-principal component maps to `W^zeta/G_zeta`.  Continuity therefore makes the
-output evaluation factor through `W^zeta`, and (18) kills the entire virtual
-fixed contribution, including its normal Euler class and all neutral towers.
-The two endpoint contributions are exactly the two localized point rows.
+Take the graph curve to be `P^1` and retain its commuting rotation torus, with
+equivariant parameter `hbar`.  The perfect obstruction theory and the
+polarization master space are rotation-equivariant: rotation acts on the
+domain and commutes with the group acting on `W`.  Hence the virtual Kalkman
+localization identity holds over `Q(hbar)`, with the insertion obtained by
+evaluating `a_p` on the parametrized component at `0 in P^1`.
+
+Two standard decorations isolate one oriented localized factor rather than
+only their product.
+
+1. For each ordinary input marking, insert the normalized equivariant point
+   class of `0 in P^1` through its projection to the parametrized curve.  In
+   rotation localization this class is one at the zero pole and zero at the
+   infinity pole, so every input lies on the zero-side bubble tree.
+2. Choose common equivariant divisor classes `D_1,...,D_r` whose Kirwan
+   restrictions span `H^2` of both chambers, and insert the product of
+   Woodward Liouville classes with formal parameters `t_j`.  Lemma 9.3
+   restricts it on a graph fixed locus to
+   \[
+    \exp\!\left(\sum_jt_jD_j\right)
+    \prod_jx_j^{D_j\cdot d_+},\qquad x_j=\exp(t_j\hbar),        \tag{20}
+   \]
+   where `d_+` is the curve class on the infinity side.  Multiplication by
+   the cohomological exponential does not change the top point insertion.
+   Classical Kirwan surjectivity in degree two lets the `D_j` be chosen to
+   detect the numerical curve lattices of both endpoints.  Therefore the
+   zero Laurent character in all `x_j` is exactly the locus `d_+=0`.
+
+   Using the full divisor lattice is essential.  Adjacent birational chambers
+   need not have one common ample class; a wall-nef class can vanish on the
+   very extremal ray that must be removed.  The multicharacter extraction has
+   no positivity assumption and works in the numerical Novikov group algebra.
+
+Apply rotation localization and extract this zero character.  All
+ordinary inputs are on the zero side and the infinity side has degree zero,
+so the infinity factor is the unstable identity.  The zero-side fixed
+contribution is precisely the defining fixed locus
+`Mbar_{0,n+1}(Y,d)` of `tau_{Y,-}`, with inverse Euler factor
+`-1/(hbar(-hbar-psi))`; evaluation of `a_p` on the parametrized component is
+evaluation at its attaching node.  The two endpoint terms of the polarization
+master identity are the localized gauged rows.  Woodward's localized
+adiabatic limit, equation (68), identifies them with the two sides of (18),
+with the same sign and `hbar` convention.
+
+Every nonendpoint polarization-fixed graph contributes zero.  Indeed, its
+principal component maps to `W^lambda/G_lambda`, and the attaching-node
+evaluation factors through `W^lambda`.  Equation (19) kills the integrand
+before division by the virtual normal Euler class.  Thus no positive-degree,
+neutral, descendant, or equivariant residue survives.  The endpoint equality
+(18) follows.  Since the construction is multilinear in the ordinary inputs,
+polarization/differentiation in `alpha` gives the entire row.  \(\square\)
 
 The support assertion is already in the primary source.  Gonzalez--Woodward
 Proposition 3.15(c) says that **every node or marking** of a
 polarization-fixed gauged map lands in the fixed point set; Lemma 3.17 and
 Proposition 3.18 say that the principal component maps to
-`W^zeta/G_zeta`.  Thus no wall-fixed graph can evade (18) by moving the
+`W^lambda/G_lambda`.  Thus no wall-fixed graph can evade (19) by moving the
 output onto a bubble.  What is not in the source is the auxiliary-rotation
-enhancement that turns this support fact into an identity of localized
-endpoint rows.
-
-This proves the localized point-row theorem provided the following formal
-enhancement of Gonzalez--Woodward's construction is written down:
-
-> **Commuting-rotation enhancement.**  The virtual Kalkman localization
-> identity remains valid in the equivariant Chow/cohomology ring for the
-> auxiliary `C*` rotating `P^1`, with the distinguished output node retained;
-> localizing in that auxiliary parameter gives Woodward's `tau_-` endpoint
-> terms.
-
-This enhancement changes neither the moduli spaces nor their perfect
-obstruction theories: the auxiliary action commutes with the polarization
-torus, and virtual localization is coefficient-linear in the output insertion.
-It is therefore substantially smaller than a general fundamental-solution
-wall theorem.  It is not stated in the cited papers, and the identification of
-the endpoint conventions with `tau_-` must be checked rather than inferred
-from the scalar graph formula.  The decisive falsifier is equally concrete:
-find a wall-fixed graph stratum whose distinguished output evaluation does
-not factor through the wall fixed locus.  Standard graph-space fixed-locus
-geometry predicts that no such stratum exists, and Proposition 3.15(c) rules
-it out in the published fixed-stack geometry.  A separate per-wall input is
-the existence of the lift `a_p` with (18); it is proved for the smooth simple
+equivariant version and the component extraction, which are derived above
+from the same equivariant perfect obstruction theory and Woodward's published
+rotation-localization formulas.  A separate per-wall input is the existence
+of the lift `a_p` with (19); it is proved for the smooth simple
 VGIT walls used by C907, but should not be inferred for an arbitrary singular
 intermediate quotient.
 
-## 6. Conditional application to `X x P^2`
+The theorem is a special point-row extension, not the full localized
+fundamental-solution wall theorem left open in Remark 1.18(b).  Without the
+zero-wall restriction (19), the wall fixed contributions remain and the full
+problem returns.
 
-Assume:
+## 6. Global-cobordism reduction and the exact remaining gate
 
-1. one smooth projective equivariant cobordism supplies common gauged source
-   objects for the two smooth endpoint chambers, or the localized theorem is
-   functorial through a finite cobordism decomposition;
-2. the smooth endpoint linearized quantum Kirwan maps are homogeneous in the
-   Rees sense of (10)--(12d) and formally surjective;
-3. the localized quantum-Kalkman point-row theorem holds at every intervening
-   wall.
+Wlodarczyk Proposition 2(B') supplies a smooth projective `C*` cobordism `W`
+between any two smooth projective birational endpoints.  In the explicit
+construction its extreme opens are punctured line bundles with the standard
+weight-one action, so their geometric quotients are the ordinary smooth
+endpoints.  The equivariant resolution is unchanged on those opens.
 
-Then (13) holds between consecutive chambers.  The Boolean theorem transports
-nonvanishing of the primitive-sixth Gamma rank row from `X x P^2` to the final
-projective chamber.  The existing endpoint computation gives a rank-visible
-length-three primitive-sixth packet on `X x P^2` and none on `P^5`, a
-contradiction.  Thus these three assumptions imply irrationality of
-`X x P^2`.
+Choose `p` in the common birational open.  Over that open the cobordism is the
+trivial cylinder, and the closure of the orbit of `p` joins only the source and
+sink copies of `p`.  Its equivariant Poincare dual is a global class `a_p`:
 
-This is not yet unconditional for two separate reasons.  First, the localized
-point-row wall theorem is absent from the literature.  Second, the smooth
-projective cobordism theorem gives a smooth master before chamber quotient,
-while intermediate coarse quotients can have cyclic singularities; resolving
-them materializes extra walls.  The common-source formulation avoids needing
-quantum Kirwan surjectivity for those singular intermediate quotients, but a
-functorial localized source through the chosen resolution still has to be
-recorded.
+- its two extreme Kirwan restrictions are the two point classes;
+- it restricts to zero on every intermediate fixed component.
+
+Therefore the support-collapse theorem applies **once to the global
+cobordism**.  All intermediate wall terms vanish, regardless of singularities
+of their coarse quotients, and the two endpoint localized point rows pull back
+to one gauged row.  Smooth endpoint classical Kirwan surjectivity and Sections
+2--4 then reduce endpoint Boolean invariance to a single common-source packet.
+No weak-factorization telescope or intermediate quotient QDM is needed.
+
+The remaining gate is purely a coefficient/fiber-category issue.  The two
+endpoint quantum Kirwan maps are initially completed in opposite GIT Novikov
+cones.  Their common finite-support input is not automatically large enough to
+lift a target formal-monodromy packet, while completing in both directions can
+destroy the Novikov topology.  The exact needed statement is:
+
+> **Two-sided gauged packet lemma.**  For the smooth projective global
+> cobordism `W`, the two Rees-homogenized endpoint linearized quantum Kirwan
+> maps admit one finite meromorphic source module over a common differential
+> coefficient field, are surjective there, and have the localized common row
+> of (18).  Its shifted formal-primary packet maps onto the intrinsic
+> primitive-sixth packets of both endpoints.
+
+There is a sharp positive/neutral split.  In a direction on which
+`c_1^G(TW)` is nonzero, the virtual-dimension axiom bounds the gauge degree at
+each Artin/cohomological coefficient, so both chamber maps are Laurent
+polynomial and share a fixed-nonzero-parameter receiver.  An unbounded kernel
+direction is `c_1`-neutral, hence its restricted moving weights sum to zero.
+The parameterized Calabi--Yau Gamma contour theorem in
+`2026-08-14-c907-neutral-slice-gamma-kernel.md` gives the required two-sided
+analytic completion **if** virtual localization of the gauged packet is
+identified with that complete common Mellin--Barnes kernel.  This last
+identification, for the full packet rather than the already-vanishing point
+row, is not yet written down.
+
+Once the two-sided gauged packet lemma is proved, the common-source Boolean
+theorem compares the endpoints directly.  The existing endpoint computation
+gives a rank-visible length-three primitive-sixth packet on `X x P^2` and no
+primitive-sixth packet on `P^5`, yielding the desired contradiction.  This is
+the sole remaining implication; the localized row, half-Tate shift, endpoint
+surjectivity, and global geometric master are no longer conditional inputs.
 
 ## 7. EJ / TT / AA
 
-- **EJ:** telescope the primitive-sixth **Boolean through one source**, not a
-  vector through incompatible chamber completions.  Surjectivity plus a common
-  row is enough; full cone preservation is not.
-- **TT:** a CohFT star-morphism is not automatically a horizontal QDM map,
-  quantum Kirwan surjectivity is conjectural in the orbifold generality, and
-  the published Kalkman theorem is not localized.  These are three distinct
-  seams.
-- **AA:** prove the localized theorem only after pairing with the point row.
-  Its scalar fixed-locus sum has the exact augmentation identity (4), while
-  the neutral nonpolynomial tail is already controlled by the Gamma contour
-  lemma.  A direct counterexample would be a smooth master wall whose complete
-  localized point residue has nonzero common-open rank.
+- **EJ:** use Wlodarczyk's global smooth projective cobordism once, not a
+  sequence of chamber quotient QDMs.  The orbit cylinder through a common-open
+  point supplies the global zero-wall row.
+- **TT:** equality of the localized point row does not put the **packet** maps
+  over one ring.  The endpoint quantum Kirwan series begin in opposite Novikov
+  completions; completing both directions without a convergence theorem is
+  illegal.
+- **AA:** apply virtual localization to the whole Rees-homogenized packet.
+  Positive `c_1` directions are Laurent-finite.  In every neutral direction,
+  prove that the complete fixed-locus sum is exactly the parameterized
+  Calabi--Yau Mellin--Barnes kernel, not an incomplete Gamma tail.
 
 ## 8. Mystery ledger
 
@@ -404,26 +502,25 @@ recorded.
 - Given equally shifted monodromy maps and the common source row, the
   primitive-sixth rank Boolean is chamber-independent by elementary primary
   decomposition.
+- Rees homogenization cancels the Novikov-Euler defect; virtual-dimension
+  homogeneity and the star-morphism property give the Euler-product identity,
+  while Artin-level bulk transport returns the packet from `kappa(0)` to zero.
+- The commuting-rotation point-row theorem isolates one localized factor and
+  kills every wall term by the zero-wall point restriction.  It is strictly
+  weaker than the full fundamental-solution wall theorem left open in the
+  literature.
 
 ### Open
 
-- **Localized point-row wall formula.**  Extend quantum Kalkman virtual
-  localization to the single localized graph coefficient measured by the
-  point row, including the neutral complete residue.  Equality of the scalar
-  graph trace is insufficient because of the factorization shear (17).  The
-  strongest candidate proof is the commuting-rotation enhancement above:
-  every wall term should vanish by the zero restriction (18).
-- **Homogeneous packet map.**  The `mu`/Novikov-Euler correction and uniform
-  half-Tate shift are the exact Rees identities (12a)--(12c).  Check Euler
-  multiplication (12d), curvature, and bulk isomonodromy in the localized
-  receiver conventions.
-- **Global source coherence.**  Put the endpoint maps in one equivariant
-  source, or prove functoriality through the pi-desingularized cobordism.
+- **Two-sided gauged packet.**  Construct the common differential coefficient
+  field for the two global endpoint quantum Kirwan maps.  The only unbounded
+  terms are `c_1`-neutral; identify their complete virtual-localization sum
+  with the parameterized Calabi--Yau Gamma kernel.  This must be an identity
+  for the full packet map, not merely the already-vanishing point row.
 
-The first item is the highest-value next proof attempt.  If it fails, the
-failure term is itself the sought dangerous object: a localized fixed-stratum
-residue with nonzero point augmentation despite zero rank of every complete
-window correction.
+This is now the decisive audit.  It is narrower than the old peak comparison:
+the geometry is one smooth global master, the oriented row is fixed, and the
+shifted packet maps are fixed.  Only their two-sided neutral completion remains.
 
 ## Sources
 
@@ -433,15 +530,20 @@ window correction.
   `ebaaeaca4149ea5e44884efab02a7ed58c7be552d9572e6513b3b2f40158b5ef`.
 - Chris T. Woodward, *Quantum Kirwan morphism and Gromov--Witten invariants
   of quotients III*, arXiv:1408.5869v7, Remark 8.10(a), Section 9, and the
-  localized adiabatic limit around equation (68); cached PDF SHA-256
+  Liouville restriction in Lemma 9.3 and localized adiabatic limit around
+  equation (68); cached PDF SHA-256
   `5aa794f4d83dd8d127aab769d95a71a4691d7a35d220e81ca73c5b8bb360ea51`.
 - Eduardo Gonzalez and Chris T. Woodward, *A wall-crossing formula for
   Gromov--Witten invariants under variation of GIT quotient*,
-  arXiv:1208.1727v7, Theorems 1.13 and 1.17, Proposition 3.15(c), and Remark
-  1.18(b); cached PDF
+  arXiv:1208.1727v7, Theorems 1.13, 1.17, and 3.25, Proposition 3.15(c), and
+  Remark 1.18(b); cached PDF
   SHA-256
   `2c99203c8e1d7dd373112629bbfac0760e7a3812d348e9110a1eb2b894d9d84c`.
 - Zhaoxing Gu, Song Yu, and Tony Yue Yu, *Quantum cohomology of variations
   of GIT quotients and flips*, arXiv:2508.15770v1, Definition 4.13 and
   Proposition 4.14; cached PDF SHA-256
   `9c00f826cb13ad243bd2ad126e74733cacf650a385160a11adc785693c01a358`.
+- Jaroslaw Wlodarczyk, *Birational cobordisms and factorization of birational
+  maps*, arXiv:math/9904074v1, Proposition 2(B') and its punctured-line-bundle
+  construction of the extreme quotients; cached PDF SHA-256
+  `ac86c460c3a039284565630ef63a77028af53a71697d4d0deb356574d2b3aa9c`.

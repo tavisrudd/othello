@@ -915,34 +915,35 @@ primitive-sixth rank Boolean by elementary primary decomposition.  Exact
 lemmas and source boundaries are in
 `../2026-08-14-c907-quantum-kirwan-common-source.md`.
 
-The highest-EV next proof is the **localized quantum-Kalkman point-row
-theorem**: extend the master-space wall formula only to the localized graph
-coefficient measured by the Gamma point row.  The parameterized neutral
-Calabi--Yau contour lemma in
-`../2026-08-14-c907-neutral-slice-gamma-kernel.md` then sums every unbounded
-fixed-stratum tower.  Gonzalez--Woodward prove the graph-potential wall formula
-but explicitly leave its localized/fundamental-solution extension open in
-Remark 1.18(b); do not cite it as already proved.  The raw linearized quantum
-Kirwan map has a Novikov-Euler term, not a constant `mu` commutator.  The
-canonical Rees homogenization `Q^d -> z^(c_1.d)Q^d` cancels it and gives the
-exact common half-Tate shift; what remains is Euler-multiplication and curved
-bulk compatibility in the localized receiver.  Full Gu--Yu--Yu Conjecture
-1.11 / Iritani Conjecture 43 is no longer on the critical path.
+The **localized quantum-Kalkman point-row theorem** is now proved in
+`../2026-08-14-c907-quantum-kirwan-common-source.md`.  Run the Kalkman master
+localization equivariantly for the commuting rotation of the graph `P^1`.
+Normalized pole classes put all ordinary inputs on the zero side.  A full
+basis of common equivariant divisor Liouville characters extracts numerical
+degree zero on the infinity side; using one allegedly common ample divisor is
+invalid for a flip and has been removed.  The infinity factor is then the
+identity and the zero factor is exactly Woodward's localized `tau_-`.  Every
+polarization-wall term vanishes because the common-open point lift restricts
+to zero, while Gonzalez--Woodward Proposition 3.15(c) forces every node or
+marking into the wall fixed locus.  Thus the theorem identifies the **oriented
+row**, not just the scalar graph trace.
 
-The strongest one-lemma attack is now support-theoretic.  Run the Kalkman
-master localization equivariantly for the commuting rotation of the graph
-`P^1` and retain the distinguished output node.  Choose its point insertion
-in the common stable open.  Every polarization-wall fixed graph has that node
-on a principal component mapping to the wall fixed locus, so the point lift
-restricts to zero and kills the whole wall residue, including neutral towers.
-What must be proved is the **commuting-rotation enhancement** identifying the
-two endpoint terms with Woodward's localized `tau_-`; see the common-source
-note.  Falsify it by finding a wall-fixed graph whose output node does not
-factor through the wall fixed locus before returning to Gamma residues.
-Gonzalez--Woodward Proposition 3.15(c) rules out that falsifier in their
-fixed-stack geometry: every node or marking lands in the fixed set.  The live
-work is therefore the auxiliary-equivariant virtual-localization identity and
-endpoint normalization, plus the already wall-local zero-restriction lift.
+The packet side is also exact wall-locally.  Smooth-endpoint linearized
+quantum Kirwan is formally surjective.  Its raw grading commutator has a
+Novikov-Euler defect; the canonical Rees homogenization
+`Q^d -> z^(c_1.d)Q^d` cancels it.  Virtual-dimension Euler homogeneity, the
+star-morphism property, and Artin-level bulk transport give a genuine shifted
+`z`-connection map and the common-source Boolean theorem.
+
+The sole remaining gate is now the **common coefficient/fiber-category
+audit**.  At an intermediate variety, the intrinsic large-radius point row is
+fixed by the new theorem, but restriction to its `z=0` formal `P_6` packet
+still needs one sectorial realization over the full numerical Novikov field
+that is conservative for both incident walls.  The old fixed-nonzero-`q`
+Artin receivers use incompatible analytic/formal parameter choices.  Prove
+that both compare to one intrinsic target fiber functor, or construct the
+same functor directly from the global equivariant source.  Do not re-open
+wall residues, weighted coverage, or the half-Tate calculation.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
