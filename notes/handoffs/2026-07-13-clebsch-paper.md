@@ -99,6 +99,17 @@ missing full-cone statement for a general intermediate quotient; only its
 point-row/packet fragment is needed.  Exact theorem, proof, source boundary,
 and strengthened all-primary fixed-curve elimination:
 `../2026-08-14-c907-neutral-slice-gamma-kernel.md`.
+A sharper common-source reduction now removes full intermediate-quotient cone
+preservation from the critical path.  The adjoint discrete Fourier point row
+is a universal scalar shift sum; smooth-endpoint linearized quantum Kirwan is
+formally surjective; and an elementary primary-decomposition lemma transports
+the primitive-sixth rank Boolean between equally shifted quotient packets once
+their pulled-back rows agree.  The exact remaining analytic input is a
+**localized quantum-Kalkman point-row theorem**.  Gonzalez--Woodward prove the
+unlocalized graph-potential wall formula and explicitly leave its
+localized/fundamental-solution extension open.  Exact theorem, proof reduction,
+source hashes, and red-team boundary:
+`../2026-08-14-c907-quantum-kirwan-common-source.md`.
 Gu--Yu--Yu's August 2025 simple-VGIT theorem now gives an exact wall-local
 positive class.  A common-point lift with zero wall restriction, Lemma
 5.10, specialized Fourier injectivity, and regular-singular uniqueness prove
@@ -255,8 +266,8 @@ must remain visible in theorem types until proved, and conditional deductions
 must not be reported as unconditional manuscript coverage.  Current card:
 `../clebsch-tasks/c910-cubic-stabilization-lean-companion.md`.
 The pinned package has reached a stronger publishable partial checkpoint: all
-86 sources build through the guarded queue, and the rejecting audit gives an
-exact bijection among all 23 manuscript claims, 156 reviewer terminals, audit
+87 sources build through the guarded queue, and the rejecting audit gives an
+exact bijection among all 23 manuscript claims, 157 reviewer terminals, audit
 commands, and expected axiom rows.  Coverage is explicitly 0 absent, 13
 fragmentary, 9 conditional deductions, and 1 complete.  The DVR rank-one
 criterion is complete.  Exact fragments include flattened split-coordinate
@@ -492,7 +503,9 @@ from `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`; they preserve a one-factorizati
 faithful factor action exhausting the alternating group `A5`; their heart
 action is simple and its common commutant is exactly the four-element
 quadratic algebra; the same classification is proved for every matrix word in
-the full generated action.  All six Sylow-five subgroups of this concrete `A5` are
+the full generated action.  Every four-dimensional subspace of two heart copies
+stable under the diagonal action is the vertical half or the graph of one of
+those four commutant endomorphisms.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;

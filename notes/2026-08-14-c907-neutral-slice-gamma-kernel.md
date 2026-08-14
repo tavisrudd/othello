@@ -15,9 +15,11 @@ It does not yet prove the stabilization theorem.  The two incident receivers
 of a general AKMW peak have not been shown to be asymptotic expansions of one
 common equivariant Fourier integral.  Gu--Yu--Yu formulate precisely the
 needed Fourier-cone statement for an arbitrary intermediate GIT quotient as
-Conjecture 1.11 and prove it only for highest/lowest quotients.  The remaining
-global gate is consequently a common-master realization theorem, not a new
-one-variable Stokes calculation.
+Conjecture 1.11 and prove it only for highest/lowest quotients.  A subsequent
+common-source reduction shows that full cone preservation is stronger than
+needed: the exact remaining analytic gate can be phrased as a localized
+quantum-Kalkman theorem for the single Gamma point row.  See
+`2026-08-14-c907-quantum-kirwan-common-source.md`.
 
 ## 1. The parameterized Calabi--Yau contour lemma
 
@@ -224,10 +226,28 @@ into three independently falsifiable statements:
    parameterized Calabi--Yau contour lemma of Section 1.  This is the only
    analytic step and is already proved once the common kernel exists.
 
-Statements 1 and 2 together are the point-row/packet fragment of the
-reduction conjecture.  Either can be attacked directly from Iritani's
-discrete shift-operator formula; failure of either gives a precise
-counterexample, rather than another ambiguous frame mismatch.
+Statement 1 is now proved on every common equivariant input.  Applying the
+degree-zero augmentation to Gu--Yu--Yu's discrete formula gives
+
+\[
+ \epsilon_X\mathcal F_X(f)
+ =\sum_k S^{-k}\epsilon_W(\mathbb S^k f),
+\]
+
+the same universal scalar shift sum in every chamber.  Statement 2 also has
+an exact formal reduction: at a smooth free quotient the linearized quantum
+Kirwan map is surjective by classical Kirwan and a Novikov-adic Neumann
+series; if its homogeneous `z`-intertwining has the expected common half-Tate
+shift, primary decomposition lifts the whole primitive-sixth packet.
+
+What remains is not the algebra of these two statements but their common
+analytic receiver.  Woodward supplies a localized adiabatic receiver for each
+quotient.  Gonzalez--Woodward's published quantum Kalkman formula compares
+unlocalized graph potentials, and their Remark 1.18(b) explicitly leaves the
+localized/fundamental-solution extension open.  The exact successor is the
+localized quantum-Kalkman **point-row** theorem stated in the common-source
+note.  Either its proof or a nonzero point-augmentation residue gives a
+decisive result.
 
 ## 5. Stronger elimination for the fixed-curve suspect
 
@@ -293,14 +313,15 @@ candidate enumeration.
 
 ### Still open
 
-- **Common master.**  No theorem identifies the two incident sectorial
-  amplitudes as expansions of one equivariant Fourier object.  Exact evidence
-  gap: Gu--Yu--Yu Conjecture 1.11 / Iritani Conjecture 43 at an intermediate
-  quotient.  Owning successor: the common-master rank-row theorem.
-- **Smallest sufficient fragment.**  It is not known whether the adjoint
-  transform of the common-open point row together with the formal
-  primitive-sixth packet can be proved without full cone preservation.
-  This is the highest-EV next proof attempt.
+- **Localized common row.**  The adjoint discrete Fourier point row and the
+  formal smooth-endpoint packet lift no longer require full cone preservation.
+  What is absent is their equality in one localized gauged solution object
+  across a wall.  Exact evidence gap: Gonzalez--Woodward Remark 1.18(b).
+  Owning successor: the localized quantum-Kalkman point-row theorem.
+- **Homogeneous packet convention.**  The linearized quantum Kirwan map must
+  intertwine Euler multiplication and `mu` with the same half-Tate shift in
+  both chambers, at the curved bulk point `kappa(0)`.  This is a bounded
+  grading calculation, not yet banked as a theorem.
 - **Geometric falsifier.**  The incomplete-Gamma model is not a
   smooth-projective peak.  No geometric unit-circuit peak is known whose
   complete neutral residue has nonzero common-open rank.  A direct

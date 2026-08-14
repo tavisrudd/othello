@@ -906,15 +906,26 @@ two incident receivers at a discrepant peak are compared.  The geometric
 alternative is now settled: Morelli pi-nonsingularity makes every elementary
 circuit unit-coefficient, so the pi-desingularized AKMW chain consists of
 closed ordinary walls and covered discrepant simple-VGIT walls.  The
-remaining bounded task is the **common-master rank-row theorem** of
-`../2026-08-14-c907-neutral-slice-gamma-kernel.md`: construct one equivariant
-Fourier solution object whose conservative images give the point row and
-total primitive-sixth packet in both incident receivers.  Once that common
-kernel is available, the neutral Calabi--Yau contour lemma proves that every
-complete residue block has rank-zero target.  Equivalently, prove the
-point-row/packet fragment of Gu--Yu--Yu Conjecture 1.11 for the intermediate
-quotients in the selected toroidal cobordism; full cone preservation is not
-needed.
+remaining bounded task is now smaller than the former common-master theorem.
+The adjoint discrete Fourier point row is one chamber-independent scalar shift
+sum on every common input.  At a smooth free endpoint, linearized quantum
+Kirwan is formally surjective by classical Kirwan plus a Novikov-adic Neumann
+series; equally shifted monodromy maps with this common row transport the
+primitive-sixth rank Boolean by elementary primary decomposition.  Exact
+lemmas and source boundaries are in
+`../2026-08-14-c907-quantum-kirwan-common-source.md`.
+
+The highest-EV next proof is the **localized quantum-Kalkman point-row
+theorem**: extend the master-space wall formula only to the localized graph
+coefficient measured by the Gamma point row.  The parameterized neutral
+Calabi--Yau contour lemma in
+`../2026-08-14-c907-neutral-slice-gamma-kernel.md` then sums every unbounded
+fixed-stratum tower.  Gonzalez--Woodward prove the graph-potential wall formula
+but explicitly leave its localized/fundamental-solution extension open in
+Remark 1.18(b); do not cite it as already proved.  In parallel, check the
+Euler/`mu` homogeneity and common half-Tate shift of the endpoint linearized
+quantum Kirwan maps.  Full Gu--Yu--Yu Conjecture 1.11 / Iritani Conjecture 43
+is no longer on the critical path.
 The older two-radial-leg nearby-cycle comparison remains the fallback, but it
 must transport the analytic rank row, not merely formal exponential labels.
 The all-codimension and product audits need not be repeated.  Exact failed
