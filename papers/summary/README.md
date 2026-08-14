@@ -6,17 +6,20 @@ They ask two related questions: how much structure can be recovered after most
 of the original information has been discarded, and which obstructions persist
 under operations, such as stabilization, that might be expected to weaken them?
 
-The broadest geometric theorem is conditional on one explicitly isolated
-analytic-continuation hypothesis:
+The broadest geometric theorem is conditional on two explicitly isolated,
+locally finite clutching hypotheses:
 
-> **Assuming complete-neutral continuation, every projective stabilization
-> `X × P^m` of every smooth complex cubic threefold `X` is irrational.**
+> **Assuming tailwise derived identification and marked threshold
+> compatibility, every projective stabilization `X × P^m` of every smooth
+> complex cubic threefold `X` is irrational.**
 
 *Conditional Irrationality of All Projective Stabilizations of Cubic
 Threefolds* obtains this dimension-independent conclusion from point-class
 rank under quantum wall crossing. Its local transport, endpoint calculation,
-support collapse, and coefficientwise Gamma reduction are proved; continuation
-of the complete neutral graph sum is the one explicit hypothesis.
+support collapse, and coefficientwise Gamma reduction are proved.  Tailwise
+holonomicity follows under the algebraic derived-identification hypothesis;
+the analytic threshold hypothesis asks for Stokes- and
+monodromy-intertwining isomorphisms of the cyclic point-row modules.
 
 The strongest unconditional statement is the first stabilization:
 *Irrationality after one stabilization* proves that
@@ -49,8 +52,8 @@ nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for it
 explicit family; its theorem for all smooth cubic threefolds is independent of
 that special construction. *Conditional Irrationality of All Projective
 Stabilizations of Cubic Threefolds* replaces the dimension-four center bound
-by a global point-row comparison, conditional on complete-neutral
-continuation. Every paper is intended to stand on its own mathematically.
+by a global point-row comparison, conditional on the two finite clutching
+hypotheses above. Every paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
@@ -122,8 +125,9 @@ complex as separate victories.
   in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
   continuation preserves its intrinsic row on a fixed continuation domain.
   For a global cobordism, support collapse and coefficientwise Gamma-ratio
-  reduction leave one explicitly named complete-neutral continuation
-  hypothesis. Under that hypothesis, the point-row primary Boolean is
+  reduction isolate two locally finite hypotheses: tailwise derived identification
+  and marked threshold compatibility for the cyclic Rees `z`-modules. Under
+  those hypotheses, the point-row primary Boolean is
   birationally invariant and distinguishes `X × P^m` from projective space
   for every smooth cubic threefold `X` and every `m ≥ 0`.
   [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
@@ -179,8 +183,8 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Conditional cubic stabilization | Conditional on complete-neutral continuation for every Włodarczyk completion of a smooth projective birational map, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
-| Conditional cubic stabilization | Conditional on complete-neutral continuation for a Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated continuation hypothesis. |
+| Conditional cubic stabilization | Conditional on every smooth projective birational map admitting a Włodarczyk completion with tailwise derived identification and marked threshold compatibility, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
+| Conditional cubic stabilization | Conditional on those two clutching hypotheses for a Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated hypotheses. |
 | Irrationality after one stabilization | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
@@ -209,9 +213,9 @@ boundary, and reproducible entry points.
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
+| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | Exact local point-row transport, global support collapse, and Gamma reduction isolate two locally finite clutching hypotheses under which every projective stabilization of every smooth cubic threefold is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
-| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | Exact local point-row transport, global support collapse and coefficientwise Gamma reduction, with cubic stabilization conditional on one named continuation hypothesis. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States* | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -432,17 +436,20 @@ membership and Appendix A, and changes no higher-discrepancy statement.
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937491-blue.svg)](https://doi.org/10.5281/zenodo.21937491)
 
-**Standout result.** Exact simple-wall and ordinary-flop point-row identities,
-global support collapse, and a coefficientwise Gamma-ratio reduction isolate
-the complete-neutral continuation of the nonlinear graph sum as the single
-remaining hypothesis in a conditional birational criterion for every
-projective stabilization of a smooth cubic threefold.
+**Standout result.** An exact simple-wall point-column identity, ordinary-flop
+point-row transport, global support collapse, and a coefficientwise
+Gamma-ratio reduction isolate two locally finite hypotheses: algebraic
+identification of the derived fixed data along each clutching tail, and
+analytic threshold isomorphisms of the cyclic point-row `z`-modules.  Under
+them, every projective stabilization of every smooth cubic threefold is
+irrational.
 
-> *Abstract* Assume that complete-neutral continuation holds for every
-> Włodarczyk completion of a smooth projective birational map: namely, that
-> the complete neutral fixed-graph sum has the common Mellin--Barnes
-> continuation specified below. We prove that `X × P^m` is irrational
-> for every smooth complex cubic threefold `X` and every `m ≥ 0`.
+> *Abstract* Assume that every smooth projective birational map admits a
+> Włodarczyk completion with tailwise derived identifications and with
+> threshold isomorphisms of the finite cyclic Rees `z`-differential modules
+> generated by the Gamma point row. We prove that
+> `X × P^m` is irrational for every smooth complex cubic threefold `X` and
+> every `m ≥ 0`.
 >
 > The endpoint contrast is unconditional. Cai's small quantum-connection
 > matrices give a rank-two block with
@@ -459,29 +466,32 @@ projective stabilization of a smooth cubic threefold.
 > specialization and exact point-row transport across an ordinary flop on a
 > fixed continuation domain. In a global cobordism, a common-open orbit
 > cylinder gives one endpoint point row, rotation localization kills every
-> intermediate fixed stratum, and each remaining neutral fixed-graph
-> coefficient reduces to a balanced Gamma-ratio kernel. What remains is the
-> assertion that the complete nonlinear graph sum has one Mellin--Barnes
-> continuation. We state it as the
-> explicit hypothesis above and do not claim that it follows from the
-> available linear GLSM contour theorem. Under this hypothesis, Rees
-> homogenization and a finite common quotient make point-row nonvanishing on a
-> formal-monodromy primary packet birationally invariant. Finally,
-> incomplete-Gamma and Fourier-boundary countermodels show why formal
-> monodromy, pairing, integrality, or localized Fourier support cannot replace
-> the missing continuation theorem.
+> intermediate fixed stratum, and Woodward's clutching factorization packages
+> every remaining bubble tree into endpoint tails. Under the tailwise derived
+> identification hypothesis, each such tail is holonomic and tempered. The
+> remaining analytic input is locally finite: at each sign, stability, or
+> zero-mode threshold, an isomorphism of the cyclic Rees `z`-modules must
+> intertwine formal monodromy, carry the marked row, and preserve the stated
+> Stokes, deck, and nearby-cycle data. Under these hypotheses,
+> Rees homogenization makes point-row nonvanishing on a formal-monodromy
+> primary packet birationally invariant. A two-tail rational counterexample
+> shows that separate holonomicity does not determine the threshold map. The
+> incomplete-Gamma and Fourier-boundary countermodels rule out still weaker
+> replacements based only on formal monodromy, pairing, integrality, or
+> localized Fourier support.
 
-**Delivers.** Exact local transport theorems, two minimal failure models,
-global support collapse, coefficientwise Gamma reduction, an unconditional
-cubic endpoint calculation, and a conditional all-stabilizations criterion.
+**Delivers.** Exact local transport theorems, three minimal failure models,
+global support collapse, coefficientwise Gamma reduction, a conditional
+tail-holonomicity reduction, an unconditional cubic endpoint calculation, and
+a conditional all-stabilizations criterion.
 
 **Who cares.** Researchers in quantum cohomology, birational wall crossing,
 Gamma structures, irregular connections, Fourier--Laplace methods, and
 stable-rationality obstructions.
 
 **Why it matters.** It separates what current wall-crossing theorems really
-prove about the rank-reading point row from the one nonlinear continuation
-statement still needed to turn the cubic endpoint obstruction into a global
+prove about the rank-reading point row from the two locally finite comparison
+statements still needed to turn the cubic endpoint obstruction into a global
 birational theorem.
 
 ---
