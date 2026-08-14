@@ -116,16 +116,18 @@ The two-primary part \(\mathscr K_2\) of \(\ker f\) is an
 \begin{proof}
 For \(H\in\Omega\), the integral norm
 \(n_H=\sum_{h\in H}h\) is a relative endomorphism of \(\mathcal J\).  Its
-image has constant dimension one: on rational homology it is ten times the
-projector onto the one-dimensional \(H\)-fixed line in the five-dimensional
-coefficient representation.  More concretely,
-\(n_H^2=10n_H\).  Since \(10\) is invertible on the complex base, the
-differential of \(n_H\) is a projector up to an invertible scalar.  Its
-kernel has constant dimension, its identity component is an abelian
-subscheme, and the induced finite-kernel quotient map has an elliptic abelian
-scheme as its image.  Denote this connected image by
-\(\mathcal E_H\subset\mathcal J\).  The subgroup \(H\) acts trivially on
-this image.  Moreover
+action on rational first homology is ten times the projector onto the
+\(H\)-fixed summand.  Fibrewise, the representation-theoretic isogeny
+decomposition is the self-product of an elliptic curve through the
+five-dimensional module \(W_5\) \cite[Remark~5.8]{Hartlieb}.  Since
+\(\dim W_5^H=1\), the fixed summand has rank two.  More concretely,
+\(n_H^2=10n_H\).  The scheme-theoretic image of a homomorphism of abelian
+schemes in characteristic zero is an abelian subscheme, and its quotient
+factorization commutes with base change
+\cite[Theorem~A]{ACMW}.  Thus the scheme-theoretic image
+\(\mathcal E_H\subset\mathcal J\) is an abelian scheme of relative dimension
+one.  It is therefore an elliptic scheme.  Since \(hn_H=n_H\) for every
+\(h\in H\), the subgroup \(H\) acts trivially on \(\mathcal E_H\).  Moreover
 \(N_{A_5}(H)=H\), so transport by an element carrying \(H\) to \(H'\) is
 independent of the chosen transporter.  The six elliptic schemes are
 therefore coherently isomorphic; fix one of them as \(\mathcal E\).
@@ -133,8 +135,9 @@ therefore coherently isomorphic; fix one of them as \(\mathcal E\).
 Write \(i_H:\mathcal E\to\mathcal J\) for the transported primitive
 inclusions.  On the geometric generic fibre these maps are the six vectors
 of the standard five-dimensional coefficient representation, whose sum is
-zero.  Homomorphisms of abelian schemes are determined on the generic fibre,
-so \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
+zero.  The connected smooth curve \(B^\circ\) is integral, \(\mathcal E\) is
+integral, and \(\mathcal J\) is separated.  Equality on the generic fibre
+therefore gives \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
 \((i_H)_{H\in\Omega}\) descends from
 \(\mathcal E^\Omega\) to the displayed map
 \(f:\mathcal A\to\mathcal J\), and the construction is
@@ -148,8 +151,8 @@ automorphism, the Rosati adjoint of
 in Proposition~\ref{prop:six-axis-polarization} compute these relative
 homomorphisms, rather than merely isogenous quotients.  On the
 generic non-CM fibre they give diagonal entry \(5\) and off-diagonal entry
-\(-1\).  Homomorphisms of abelian schemes are determined on the generic
-fibre, so the same identities hold over \(B^\circ\).  They give (2.1).
+\(-1\).  Applying the same generic-density and separatedness argument to
+these homomorphisms gives the identities over \(B^\circ\), hence (2.1).
 Choosing any five coordinate classes identifies the quotient lattice with
 \(\mathbf Z^5\), where its matrix is \(6I_5-J_5\).  Since this has Smith type
 \((1,6,6,6,6)\), \(f\) is a finite flat isogeny and its kernel is maximal

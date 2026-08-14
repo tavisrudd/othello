@@ -508,7 +508,17 @@ are current, and the committed paper export verifies byte-for-byte in
   additive pairing weights and quantum connection, and the comparison maps.
 - **Relative geometry:** unsettled.  The six-axis local-system argument and
   Voisin implication are mathematically human proofs but sit beyond Mathlib's
-  present abelian-scheme and decomposition-of-diagonal APIs.
+  present abelian-scheme and decomposition-of-diagonal APIs.  The
+  scheme-theoretic image step is now pinned to Achter--Casalaina-Martin--Wise,
+  Theorem~A: over the characteristic-zero base the norm image is an abelian
+  subscheme and its quotient factorization commutes with base change.  The
+  source was checked at the theorem statement and characteristic-zero clause
+  in arXiv:2312.13262v2, cache SHA-256
+  `4cb31c6be7fae97742df78079b9296c6547aaa1e1b1f81706695a58cac8e7a81`.
+  Generic-fibre identities are now extended by the explicit density and
+  separatedness argument rather than an uncited rigidity slogan.  The
+  separation-family proof now pins non-isotriviality to Hartlieb's
+  one-dimensional intermediate-Jacobian image (Proposition 5.7).
 - **Reusable extraction:** deferred.  The matrix-of-ideals theorem may later
   deserve a separate general library, but the first authority remains the
   paper-bundled package.

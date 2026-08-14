@@ -344,6 +344,14 @@ inclusions remains open.  Integrally, Lean identifies `ℤ⁶/ℤ1` with five
 coordinates and proves that the descended six-coordinate form has matrix
 `6I₅-J₅` and is invariant under the induced full permutation action; no
 geometric polarization is inferred.
+The manuscript's scheme-theoretic norm-image step is now pinned to
+Achter--Casalaina-Martin--Wise, Theorem~A: in characteristic zero the image is
+an abelian subscheme and the quotient factorization is stable under base
+change.  Its two generic-fibre extension steps now use the explicit density
+and separatedness argument.  This closes a referee-facing relative-geometry
+seam without upgrading the Lean row beyond fragmentary coverage.  The
+separation-family proof also now cites Hartlieb's one-dimensional period image
+for its non-isotriviality conclusion.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the classification induction through nef seeds,
 points, arbitrary projective-bundle presentations, and point blowups, then
