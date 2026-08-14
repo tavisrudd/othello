@@ -3086,8 +3086,26 @@
       "last": 910,
       "purpose": "standalone Lean formal companion for cubic stabilization epilogue",
       "sequence": 343
+    },
+    {
+      "count": 1,
+      "first": 911,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 911,
+      "purpose": "Standalone note: discrepancy-one standard-flip repair of Shen-Shoemaker, with math-papers export",
+      "sequence": 344
+    },
+    {
+      "count": 1,
+      "first": 912,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 912,
+      "purpose": "repair framed cyclotomic monodromy foundations and referee interfaces for cubic stabilization paper",
+      "sequence": 345
     }
   ],
-  "next_id": 911,
+  "next_id": 913,
   "schema": "codex-task-id-allocations-v1"
 }
