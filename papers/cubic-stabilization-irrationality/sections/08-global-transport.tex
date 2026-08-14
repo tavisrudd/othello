@@ -437,11 +437,30 @@ At every finite Artin level and fixed ordinary degree, choose a common
 ramified admissible \(z\)-sector.  At a sign or stability threshold, let
 \(K_j^-\) and \(K_j^+\) be the finite dual cyclic Rees
 \(z\)-differential modules of the two adjacent tails.  At a zero-mode rank
-change, instead let \(K_j^\pm\) denote the row-generated nearby-cycle modules
-after removal of the canonical vanishing-cycle summands.  The specialization
-maps from the adjacent tail modules to \(K_j^\pm\) are required to preserve and
-reflect nonvanishing of every formal-monodromy primary projection of the
-marked rows.  Denote the resulting rows by \(r_j^\pm\) and the
+change, write \(M_j^\pm\) for those adjacent modules, choose a transverse
+parameter \(t\), and use the ramified Stokes-filtered nearby- and
+vanishing-cycle functors in the standard triangle
+\[
+ i^*M\longrightarrow\psi_tM\xrightarrow{\operatorname{can}}\phi_tM
+ \xrightarrow{+1},
+ \qquad
+ \operatorname{var}:\phi_tM\longrightarrow\psi_tM.
+\]
+For either adjacent module \(M\), let
+\(V_t(M)\subset\psi_tM\) be the smallest Stokes-filtered Rees submodule that
+contains the image of \(\operatorname{var}:\phi_tM\to\psi_tM\) and is stable
+under formal monodromy and the deck action.  Put
+\[
+ \psi_t^{\mathrm{red}}M:=\psi_tM/V_t(M).
+\]
+Thus reduced nearby cycles are defined by the nearby/vanishing-cycle triangle,
+not by a choice of a complementary summand.  In this case let \(K_j^\pm\) be
+the smallest subobjects of \(\psi_t^{\mathrm{red}}M_j^\pm\) containing the
+specialized marked rows and stable under the induced monodromy, Stokes
+filtration, and deck action.  The specialization maps from the adjacent tail
+modules to \(K_j^\pm\) are required to preserve and reflect nonvanishing of
+every primary projection for the induced formal monodromy.  Denote the
+resulting rows by \(r_j^\pm\) and the
 half-Tate-normalized formal monodromies by \(T_j^\pm\).  There is an invertible comparison
 \[
  \Phi_j:K_j^-\xrightarrow{\sim}K_j^+,
