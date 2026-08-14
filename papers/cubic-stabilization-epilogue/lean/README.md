@@ -102,9 +102,9 @@ The 157 reviewer-facing terminals currently verify:
   one-factorization identifying their
   generated action faithfully with the alternating group `A5`, simplicity of
   the induced heart, and the exact four-element quadratic matrix commutant of
-  the entire generated heart action; every four-dimensional subspace of two
-  heart copies stable under the diagonal action is the vertical half or the
-  graph of one of those four commutant endomorphisms;
+  the entire generated heart action; a subspace of two heart copies is
+  four-dimensional and stable under the diagonal action exactly when it is the
+  vertical half or the graph of one of those four commutant endomorphisms;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,

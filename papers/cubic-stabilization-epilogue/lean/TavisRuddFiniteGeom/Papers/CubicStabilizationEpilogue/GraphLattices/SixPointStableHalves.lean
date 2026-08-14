@@ -8,8 +8,8 @@ with its translation and inversion generators.  This module studies
 four-dimensional subspaces of `H × H` stable under the diagonal action of both
 generators.  Lean proves that every such half is either the vertical copy of
 `H` or the graph of one of the four endomorphisms in the quadratic commutant
-`{0, 1, W, W + 1}`.  These are the five displayed candidates predicted by the
-projective line over the four-element commutant.
+`{0, 1, W, W + 1}`.  The converse is also proved: the displayed vertical copy
+and four graphs all have dimension four and are diagonally stable.
 
 The argument is structural.  Simplicity of `H` makes the first projection and
 the vertical kernel either zero or the whole heart.  A half with surjective
@@ -96,7 +96,7 @@ theorem sixPointHeartPair_projection_and_vertical_simple
     sixPointHeartGeneratorStable_simple _
       (sixPointHeartPairVerticalPart_generatorStable subspace stable)⟩
 
-/-- The five explicit stable halves: the vertical copy and the graphs of the
+/-- The displayed candidate halves: the vertical copy and the graphs of the
 four matrices in the quadratic commutant. -/
 def SixPointHeartStableHalfPacket : Set
     (Submodule F2 (SixPointHeart × SixPointHeart)) :=
@@ -109,6 +109,75 @@ def SixPointHeartStableHalfPacket : Set
         (Matrix.toLin' sixPointHeartCommutantRoot)),
       LinearMap.range (graphEmbedding (K := F2)
         (Matrix.toLin' (sixPointHeartCommutantRoot + 1)))}
+
+/-- The vertical copy of the coefficient heart is diagonally stable. -/
+theorem sixPointHeartVertical_generatorStable :
+    SixPointHeartPairGeneratorStable
+      (LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart))) := by
+  constructor
+  · rintro pair ⟨vector, rfl⟩
+    refine ⟨Matrix.mulVec sixPointHeartTranslation vector, ?_⟩
+    rfl
+  · rintro pair ⟨vector, rfl⟩
+    refine ⟨Matrix.mulVec sixPointHeartInversion vector, ?_⟩
+    rfl
+
+/-- A matrix commuting with both heart generators has a diagonally stable
+graph. -/
+theorem sixPointHeartGraph_generatorStable_of_commutes
+    (matrix : Matrix (Fin 4) (Fin 4) F2)
+    (commutes :
+      matrix * sixPointHeartTranslation = sixPointHeartTranslation * matrix ∧
+      matrix * sixPointHeartInversion = sixPointHeartInversion * matrix) :
+    SixPointHeartPairGeneratorStable
+      (LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' matrix))) := by
+  constructor
+  · rintro pair ⟨vector, rfl⟩
+    refine ⟨Matrix.mulVec sixPointHeartTranslation vector, ?_⟩
+    apply Prod.ext
+    · rfl
+    · simpa [graphEmbedding, Matrix.mulVec_mulVec] using
+        congrArg (fun value => Matrix.mulVec value vector) commutes.1
+  · rintro pair ⟨vector, rfl⟩
+    refine ⟨Matrix.mulVec sixPointHeartInversion vector, ?_⟩
+    apply Prod.ext
+    · rfl
+    · simpa [graphEmbedding, Matrix.mulVec_mulVec] using
+        congrArg (fun value => Matrix.mulVec value vector) commutes.2
+
+/-- Every displayed commutant graph is diagonally stable. -/
+theorem sixPointHeartGraph_generatorStable_of_mem_commutant
+    (matrix : Matrix (Fin 4) (Fin 4) F2)
+    (member : matrix = 0 ∨ matrix = 1 ∨
+      matrix = sixPointHeartCommutantRoot ∨
+      matrix = sixPointHeartCommutantRoot + 1) :
+    SixPointHeartPairGeneratorStable
+      (LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' matrix))) :=
+  sixPointHeartGraph_generatorStable_of_commutes matrix
+    ((sixPointHeart_commonCommutant_classification matrix).mpr member)
+
+/-- The vertical copy has the dimension of one coefficient heart. -/
+theorem sixPointHeartVertical_finrank :
+    Module.finrank F2
+      (LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart))) = 4 := by
+  calc
+    Module.finrank F2
+        (LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart))) =
+        Module.finrank F2 SixPointHeart := by
+      apply LinearMap.finrank_range_of_inj
+      intro left right equality
+      exact congrArg Prod.snd equality
+    _ = 4 := by simp [SixPointHeart]
+
+/-- Every displayed commutant graph has the dimension of one coefficient
+heart. -/
+theorem sixPointHeartGraph_finrank
+    (matrix : Matrix (Fin 4) (Fin 4) F2) :
+    Module.finrank F2
+      (LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' matrix))) = 4 := by
+  simpa [SixPointHeart] using
+    finrank_graphEmbedding_range (K := F2) (H := SixPointHeart)
+      (Matrix.toLin' matrix)
 
 /-- Every four-dimensional diagonally stable subspace of two coefficient-heart
 copies is one of the vertical half or the four quadratic-commutant graphs. -/
@@ -321,6 +390,41 @@ theorem sixPointHeartPair_stableHalf_classification
         rw [subspaceFull] at halfDimension
         norm_num [Module.finrank_prod] at halfDimension
       exact impossible.elim
+
+/-- Membership in the displayed packet is equivalent to being a
+four-dimensional diagonally stable subspace. -/
+theorem sixPointHeartStableHalfPacket_iff
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart)) :
+    subspace ∈ SixPointHeartStableHalfPacket ↔
+      SixPointHeartPairGeneratorStable subspace ∧
+        Module.finrank F2 subspace = 4 := by
+  constructor
+  · intro member
+    simp only [SixPointHeartStableHalfPacket, Set.mem_union,
+      Set.mem_singleton_iff, Set.mem_insert_iff] at member
+    rcases member with vertical | zero | one | root | rootOne
+    · subst subspace
+      exact ⟨sixPointHeartVertical_generatorStable,
+        sixPointHeartVertical_finrank⟩
+    · subst subspace
+      exact ⟨sixPointHeartGraph_generatorStable_of_mem_commutant 0
+          (Or.inl rfl),
+        sixPointHeartGraph_finrank 0⟩
+    · subst subspace
+      exact ⟨sixPointHeartGraph_generatorStable_of_mem_commutant 1
+          (Or.inr (Or.inl rfl)),
+        sixPointHeartGraph_finrank 1⟩
+    · subst subspace
+      exact ⟨sixPointHeartGraph_generatorStable_of_mem_commutant
+          sixPointHeartCommutantRoot (Or.inr (Or.inr (Or.inl rfl))),
+        sixPointHeartGraph_finrank sixPointHeartCommutantRoot⟩
+    · subst subspace
+      exact ⟨sixPointHeartGraph_generatorStable_of_mem_commutant
+          (sixPointHeartCommutantRoot + 1) (Or.inr (Or.inr (Or.inr rfl))),
+        sixPointHeartGraph_finrank (sixPointHeartCommutantRoot + 1)⟩
+  · rintro ⟨stable, halfDimension⟩
+    exact sixPointHeartPair_stableHalf_classification
+      subspace stable halfDimension
 
 end GraphLattices
 

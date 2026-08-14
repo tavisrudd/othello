@@ -43,9 +43,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   proves that the two displayed permutations preserve a one-factorization,
   faithfully generate the alternating group `A5`, act simply on the heart,
   and the entire generated heart action has exactly the quadratic four-element
-  matrix commutant.  It also classifies every four-dimensional diagonally
-  stable subspace of two heart copies as the vertical half or a graph of one
-  of those four commutant endomorphisms.  It identifies
+  matrix commutant.  It also proves that a subspace of two heart copies is
+  four-dimensional and diagonally stable exactly when it is the vertical half
+  or a graph of one of those four commutant endomorphisms.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

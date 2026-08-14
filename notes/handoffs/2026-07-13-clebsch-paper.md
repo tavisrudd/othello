@@ -512,9 +512,9 @@ from `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`; they preserve a one-factorizati
 faithful factor action exhausting the alternating group `A5`; their heart
 action is simple and its common commutant is exactly the four-element
 quadratic algebra; the same classification is proved for every matrix word in
-the full generated action.  Every four-dimensional subspace of two heart copies
-stable under the diagonal action is the vertical half or the graph of one of
-those four commutant endomorphisms.  All six Sylow-five subgroups of this concrete `A5` are
+the full generated action.  A subspace of two heart copies is four-dimensional
+and stable under the diagonal action exactly when it is the vertical half or
+the graph of one of those four commutant endomorphisms.  All six Sylow-five subgroups of this concrete `A5` are
 constructed, with conjugation action exactly equal to the original six-point
 action, and the resulting Sylow-five packet is explicitly equivalent to
 `P¹(F5)`.  Each ten-element normalizer is explicitly equivalent to `D5`;
