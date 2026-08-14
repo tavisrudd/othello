@@ -425,27 +425,30 @@ the complete-neutral continuation of the nonlinear graph sum as the single
 remaining hypothesis in a conditional birational criterion for every
 projective stabilization of a smooth cubic threefold.
 
-> *Abstract* Assume that complete-neutral continuation, in the sense
-> formulated in the paper, holds for every Włodarczyk completion of a smooth
-> projective birational map. We prove that `X × P^m` is irrational for every
-> smooth complex cubic threefold `X` and every `m ≥ 0`.
+> *Abstract* Assume that complete-neutral continuation holds for every
+> Włodarczyk completion of a smooth projective birational map: namely, that
+> the complete neutral fixed-graph sum has the common Mellin--Barnes
+> continuation specified below. We prove that `X × P^m` is irrational
+> for every smooth complex cubic threefold `X` and every `m ≥ 0`.
 >
-> The endpoint obstruction is unconditional. Cai's small quantum-connection
+> The endpoint contrast is unconditional. Cai's small quantum-connection
 > matrices give a rank-two block with
 > primitive-sixth formal monodromy. We reconstruct its indicial polynomial
 > directly, and an elementary `₂F₃` Barnes calculation shows that the Gamma
-> point row is nonzero on both primitive-sixth lines. Quantum Künneth preserves
-> this packet under multiplication by projective space, whereas projective
+> point row is nonzero on both primitive-sixth lines. Quantum Künneth produces
+> `m+1` detected copies under multiplication by `P^m`, whereas projective
 > space itself has no primitive-sixth packet.
 >
 > For the global comparison, the Gamma integral structure turns the class of
-> a point into the flat Euler covector which reads ordinary rank. We prove
-> exact transport identities for this row across a simple VGIT wall and an
-> ordinary flop. In a global cobordism, a common-open orbit cylinder gives one
-> endpoint point row, rotation localization kills every intermediate fixed
-> stratum, and each remaining neutral fixed-graph coefficient reduces to a
-> balanced Gamma-ratio kernel. What remains is the assertion that the complete
-> nonlinear graph sum has one Mellin--Barnes continuation. We state it as the
+> a point into the flat Euler covector which reads ordinary rank. We prove an
+> exact ambient point-column identity at a simple VGIT wall's extremal
+> specialization and exact point-row transport across an ordinary flop on a
+> fixed continuation domain. In a global cobordism, a common-open orbit
+> cylinder gives one endpoint point row, rotation localization kills every
+> intermediate fixed stratum, and each remaining neutral fixed-graph
+> coefficient reduces to a balanced Gamma-ratio kernel. What remains is the
+> assertion that the complete nonlinear graph sum has one Mellin--Barnes
+> continuation. We state it as the
 > explicit hypothesis above and do not claim that it follows from the
 > available linear GLSM contour theorem. Under this hypothesis, Rees
 > homogenization and a finite common quotient make point-row nonvanishing on a

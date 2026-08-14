@@ -9,8 +9,9 @@ Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.
 
 Assuming the complete-neutral continuation hypothesis stated in the paper,
 the product of any smooth complex cubic threefold with any projective space
-is irrational. The paper proves exact point-row transport identities for a simple VGIT wall
-and an ordinary flop, together with countermodels that obstruct naive
+is irrational. The paper proves an exact ambient point-column identity for a
+simple VGIT wall and exact point-row transport across an ordinary flop,
+together with countermodels that obstruct naive
 composition. For a global equivariant cobordism it proves support collapse
 and a coefficientwise balanced Gamma-ratio reduction. The remaining
 complete-neutral continuation of the nonlinear fixed-graph sum is stated as
