@@ -247,6 +247,29 @@ bad images can contribute to (3).  This is the same two-model mechanism
 already proved in the order-zero pilot; Gold asks for its carrier-dressed
 unit-circuit version, together with the directed diagram (10).
 
+### Why a single common reduced image is the wrong replacement
+
+The reduced quantum module suggests replacing the raw affine Gauss--Manin
+module by the image of a GKZ contiguity morphism coming from a projective
+intersection-complex model.  This is a real improvement: in the nef
+complete-intersection case Reichelt--Sevenheck identify that image with the
+reduced QDM and prove that it underlies a pure polarizable twistor module.
+It prevents the raw free summands in (6) from being mistaken for the quantum
+module.
+
+It does **not** put the ordinary packet and the compactly supported point row
+in one common coordinate-face image.  Steiner proves, for a normal GKZ
+semigroup and a face `F`, that at least one of coordinate restriction
+`i_F^+ M_A(beta)` and coordinate projection `pi_{F+} M_A(beta)` is zero.
+The ordinary and compact-support systems are instead dual
+restriction/projection objects, with dual parameters.  For the
+primitive-sixth pair these are the `1/6` and `5/6` Kummer sectors.
+
+Therefore the correct survivor is a **pairing morphism between two dual
+images**, not a common-image vector.  This independently forces the full
+`! -> *`/duality diagram (10).  A proposed proof which identifies both sides
+inside one reduced GKZ image is using the wrong variance.
+
 ## 4. Structural filters which remain valid
 
 A dangerous block must satisfy all of the following.
@@ -294,6 +317,14 @@ specialization**, not the particular `2`-primary lattice.
   discussion following its four-term sequence, states that localized
   partial Fourier--Laplace kills the outer free modules because
   `C[t]=D_t/D_t partial_t` localizes to zero.
+- Reichelt--Sevenheck's non-affine mirror theorem, summarized as Theorems
+  5.16--5.17 in the same survey, realizes the reduced QDM from the image of a
+  contiguity map and a projective intersection-complex model, in the nef
+  complete-intersection range.
+- Steiner, *Dualizing, projecting, and restricting GKZ systems*,
+  arXiv:1805.02727, Corollary 5.9, proves that for a normal semigroup at
+  least one of coordinate restriction and projection to a proper face is
+  zero.
 
 ## EJ / TT / AA
 

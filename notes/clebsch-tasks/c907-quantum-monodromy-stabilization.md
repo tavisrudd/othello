@@ -307,6 +307,14 @@ bad images.  The next theorem is therefore a carrier-dressed
 **double-boundary cleanliness** statement for fivefold unit circuits, not a
 general Stokes computation.
 
+The reduced/intersection-complex refinement does not collapse the two sides
+to one common image.  Steiner's normal-GKZ face theorem says at least one of
+coordinate restriction and coordinate projection is zero; ordinary and
+compact-support packets occur with opposite variance and dual `1/6,5/6`
+parameters.  Hence the rank row is intrinsically a pairing between two
+images.  This independently confirms that the `K_! -> K_*; can,var` diagram,
+not a common-image vector, is the minimal remaining object.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map
