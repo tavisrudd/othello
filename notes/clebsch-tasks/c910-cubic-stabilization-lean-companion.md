@@ -557,6 +557,14 @@ are current, and the committed paper export verifies byte-for-byte in
   makes the sum \(A_5\)-invariant, and \(W_5\) has no invariant line.  This
   replaces the shorthand that the inclusions are simply the six displayed
   coefficient vectors.
+  Roulleau's Albanese construction has also been checked at the exact bridge:
+  Lemma 17 constructs the elliptic quotient by a four-dimensional abelian
+  subvariety, and the following sentence applies the same construction to
+  Theorem 11(D).  The manuscript now uses that connected kernel to identify
+  the primitive Rosati dual with the norm image and to justify that the fibre
+  intersections compute the actual relative maps.  The checked source is
+  arXiv:1002.4467, cache SHA-256
+  `c66706bfa8977656043a8c068d9f2cabc7e72dc0f53eac3fab680ac82172c7bd`.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

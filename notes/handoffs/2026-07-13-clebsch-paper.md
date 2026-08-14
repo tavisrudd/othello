@@ -373,6 +373,11 @@ claimed scalar-modulo-depth form.
 The relative six-axis relation \(\sum_H i_H=0\) is now derived intrinsically:
 Hartlieb's generic isogeny identifies \(\operatorname{Hom}^0(E,J)\) with
 \(W_5\), coherent transport makes the sum invariant, and \(W_5^{A_5}=0\).
+Roulleau's Albanese-level construction is now cited at Lemma 17 and the
+following proof of Theorem 11(D): the elliptic fibration is the quotient by a
+four-dimensional abelian subvariety.  Its connected kernel makes the Rosati
+dual primitive and identifies its image with the norm elliptic axis, closing
+the scale bridge between the fibre intersections and the relative maps.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
