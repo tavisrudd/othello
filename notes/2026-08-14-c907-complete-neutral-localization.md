@@ -111,6 +111,24 @@ kernel of the kind treated in
 Fourier derivatives.  Nilpotent shifts are finite parameter derivatives.
 Adjacent ratios have zero net slope.
 
+The contour orientation is fixed by the virtual-localization orientation,
+not chosen after seeing the two series.  For one moving character,
+
+\[
+ \operatorname*{Res}_{h\sigma+\alpha=-m}
+ \Gamma(h\sigma+\alpha)\,d\sigma
+ =\frac{(-1)^m}{h\,m!}.                                        \tag{8}
+\]
+
+The factorial is the Euler factor of the `m` moving polynomial modes, `1/h`
+is the finite stabilizer/Jacobian factor after clearing denominators, and the
+sign is the complex virtual-normal orientation.  Taking products of (8) and
+nilpotent parameter derivatives reproduces the full inverse Euler class of
+each rotation-fixed locus.  Conversely Corollary 9.10 says that every such
+locus occurs.  Thus the geometric fixed terms are literally, with their
+orientations and multiplicities, the residues of this one contour integrand;
+they are not merely a sequence satisfying the same recurrence.
+
 One must sum all gluing types before moving the contour.  A pole in (7) can
 be the boundary presentation of another fixed graph.  Woodward's cutting and
 gluing identities and the exhaustive union (57) provide the complete finite
@@ -136,7 +154,7 @@ Let `A_i` be the Rees-homogenized derivative of the endpoint localized gauged
 potential.  Woodward's localized adiabatic identity (68) gives
 
 \[
- A_i=D\tau_{Y_i,-}\,D\kappa_i.                                  \tag{8}
+ A_i=D\tau_{Y_i,-}\,D\kappa_i.                                  \tag{9}
 \]
 
 The graph fundamental solution `D tau` is invertible.  Formal smooth-endpoint
@@ -147,7 +165,7 @@ the common source connection.
 The equivariant source itself need not have finite rank.  Set
 
 \[
- \overline M=M/(\ker A_-\cap\ker A_+).                           \tag{9}
+ \overline M=M/(\ker A_-\cap\ker A_+).                          \tag{10}
 \]
 
 It injects into the direct sum of the two finite endpoint modules, hence is
@@ -162,7 +180,7 @@ Boolean lemma yields
 
 \[
  r_-|P_6(Y_-)\ne0\quad\Longleftrightarrow\quad
- r_+|P_6(Y_+)\ne0.                                               \tag{10}
+ r_+|P_6(Y_+)\ne0.                                              \tag{11}
 \]
 
 For `Y_-=X x P^2` and `Y_+=P^5`, the left side is true and the right side is
@@ -175,10 +193,10 @@ birational.
    Laurent-finite coefficients and analytic balanced kernels before the
    inverse Artin limit.
 2. **Not scalar trace factorization.**  The common maps are the oriented
-   localized gauged maps (8); the point row was isolated separately.
+   localized gauged maps (9); the point row was isolated separately.
 3. **Not one graph at a time.**  Boundary poles require the complete finite
    graph sum before contour movement.
-4. **Not full Fourier-cone preservation.**  Only the quotient (9) and its
+4. **Not full Fourier-cone preservation.**  Only the quotient (10) and its
    primitive-sixth primary part are used.
 5. **Not a published nonlinear theorem.**  Aleshkin--Liu prove the balanced
    contour theorem for abelian linear GLSMs.  The reduction of the nonlinear

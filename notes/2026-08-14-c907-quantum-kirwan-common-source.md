@@ -540,6 +540,19 @@ until the sum over all fixed graph types has been taken.  Woodward's cutting
 and gluing identities for the virtual classes, together with the exhaustive
 fixed-locus union (57), identify precisely that complete sum.
 
+The contour is canonically oriented.  At a pole of one moving character,
+
+\[
+ \operatorname*{Res}_{h\sigma+\alpha=-m}
+ \Gamma(h\sigma+\alpha)\,d\sigma=\frac{(-1)^m}{h\,m!}.          \tag{25b}
+\]
+
+These are exactly the moving-mode Euler factor, the stabilizer/Jacobian
+factor, and the complex virtual-normal sign.  Products and nilpotent
+parameter derivatives reproduce each fixed-locus contribution.  Hence the
+geometric chamber sums are residues of one oriented integrand, not merely
+two hypergeometric sequences with the same recurrence.
+
 Under (21), (25) is therefore exactly the Calabi--Yau balance condition.  All
 remaining factors satisfy the hypotheses of the parameterized contour lemma in
 `2026-08-14-c907-neutral-slice-gamma-kernel.md`:
