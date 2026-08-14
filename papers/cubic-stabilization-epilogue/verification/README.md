@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 160 reviewer-facing Lean terminals.  These counts summarize the
+There are 161 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 160 reviewer terminals.
+1 complete; 161 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -99,8 +99,10 @@ objects, hypotheses, conclusions, and cautions recorded in
   explicit two-heart equivalence.  A separate conditional bridge proves that
   supplied fibre coordinates identifying the actual kernel image with one of
   these stable maximal-isotropic subspaces give a kernel-to-subspace
-  equivalence and membership in the five-member packet,
-  but not the elliptic scheme, torsion local system,
+  equivalence and membership in the five-member packet.  Lean also proves
+  that every concrete ten-element dihedral axis stabilizer has the explicit
+  one-dimensional fixed line in the rational augmentation representation,
+  but not the norm endomorphism, elliptic scheme, torsion local system,
   symplectic pairing, relative isogeny, or maximal-isotropic kernel.
 - Formalize the remaining quantum inputs: the separation family, construct the
   filtered target/associated graded and prove the now-explicit compatibility
