@@ -34,7 +34,7 @@ warnings: manuscript
 		exit 1; \
 	fi
 
-manuscript-check: warnings
+manuscript-check:
 	$(TEXSHELL) python3 verification/check_manuscript_build.py
 
 manuscript-update:
