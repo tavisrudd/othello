@@ -11,13 +11,13 @@ deduction, or complete.  It does not build Lean.
 
 At the current interim checkpoint the exact inventory is 23 manuscript claims,
 with 0 absent, 13 fragmentary, 9 conditional deductions, and 1 complete.
-There are 156 reviewer-facing Lean terminals.  These counts summarize the
+There are 157 reviewer-facing Lean terminals.  These counts summarize the
 current checked map; any change to manuscript labels, claim-map declarations,
 public terminals, axiom-audit commands, or expected axiom rows must preserve
 their exact correspondence.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 156 reviewer terminals.
+1 complete; 157 reviewer terminals.
 
 The Lean modules and axiom audit can be built with the pinned package command
 documented in `lean/README.md`.  Passing the captured audit output to
@@ -43,7 +43,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   proves that the two displayed permutations preserve a one-factorization,
   faithfully generate the alternating group `A5`, act simply on the heart,
   and the entire generated heart action has exactly the quadratic four-element
-  matrix commutant.  It identifies
+  matrix commutant.  It also classifies every four-dimensional diagonally
+  stable subspace of two heart copies as the vertical half or a graph of one
+  of those four commutant endomorphisms.  It identifies
   the six labels with the actual `P¹(F5)`, where the permutations are induced
   by `(x,y) ↦ (x,x+y)` and `(x,y) ↦ (y,-x)`.  It also
   constructs all six Sylow-five subgroups, proves their conjugation action is

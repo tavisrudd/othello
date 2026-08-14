@@ -12,6 +12,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveLine
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveSpecialLinearAction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.PrincipalGluingPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.TraceDeterminantPairing
@@ -1931,6 +1932,38 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification,
     GraphLattices.sixPointHeart_fullActionCommutant_classification⟩
+
+/-- Every four-dimensional subspace of two copies of the explicit six-point
+coefficient heart that is stable under the diagonal translation and inversion
+actions is one of five displayed halves: the vertical copy or the graph of
+`0`, `1`, `W`, or `W+1`, where `W²+W+1=0` is the proved quadratic commutant
+generator.  This classifies the stable halves of the concrete modular model;
+it does not identify that model or any of its halves with the geometric
+two-primary kernel of a relative isogeny. -/
+theorem principalGluing_sixPointCoefficientHeart_stableHalf_classification
+    (subspace : Submodule GraphLattices.F2
+      (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart))
+    (stable : GraphLattices.SixPointHeartPairGeneratorStable subspace)
+    (halfDimension : Module.finrank GraphLattices.F2 subspace = 4) :
+    subspace = LinearMap.range
+        (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+          (Matrix.toLin' (0 : Matrix (Fin 4) (Fin 4) GraphLattices.F2))) ∨
+    subspace = LinearMap.range
+        (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+          (Matrix.toLin' (1 : Matrix (Fin 4) (Fin 4) GraphLattices.F2))) ∨
+    subspace = LinearMap.range
+        (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+          (Matrix.toLin' GraphLattices.sixPointHeartCommutantRoot)) ∨
+    subspace = LinearMap.range
+        (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+          (Matrix.toLin'
+            (GraphLattices.sixPointHeartCommutantRoot + 1))) ∨
+    subspace = LinearMap.range
+        (GraphLattices.verticalEmbedding
+          (K := GraphLattices.F2) (H := GraphLattices.SixPointHeart)) := by
+  simpa [GraphLattices.SixPointHeartStableHalfPacket] using
+    GraphLattices.sixPointHeartPair_stableHalf_classification
+      subspace stable halfDimension
 
 /-- Polarization core for the gluing packet: a self-adjoint linear slope has
 isotropic graph for the alternating two-copy pairing; its graph range has

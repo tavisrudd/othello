@@ -1,0 +1,327 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart
+
+/-!
+# Stable halves of the six-point coefficient heart
+
+Let `H` be the explicit four-dimensional characteristic-two coefficient heart
+with its translation and inversion generators.  This module studies
+four-dimensional subspaces of `H × H` stable under the diagonal action of both
+generators.  Lean proves that every such half is either the vertical copy of
+`H` or the graph of one of the four endomorphisms in the quadratic commutant
+`{0, 1, W, W + 1}`.  These are the five displayed candidates predicted by the
+projective line over the four-element commutant.
+
+The argument is structural.  Simplicity of `H` makes the first projection and
+the vertical kernel either zero or the whole heart.  A half with surjective
+first projection and zero vertical kernel is the graph of a unique linear
+endomorphism; diagonal stability makes that endomorphism commute with both
+generators, so the previously proved commutant classification applies.  No
+geometric isogeny kernel or family local system is identified here.
+-/
+
+namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
+
+namespace GraphLattices
+
+open scoped Matrix
+
+/-- The explicit four-dimensional characteristic-two coefficient heart. -/
+abbrev SixPointHeart := Fin 4 → F2
+
+/-- Diagonal stability of a subspace of two copies of the coefficient heart
+under the displayed translation and inversion generators. -/
+def SixPointHeartPairGeneratorStable
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart)) : Prop :=
+  (∀ vector ∈ subspace,
+    (Matrix.mulVec sixPointHeartTranslation vector.1,
+      Matrix.mulVec sixPointHeartTranslation vector.2) ∈ subspace) ∧
+  (∀ vector ∈ subspace,
+    (Matrix.mulVec sixPointHeartInversion vector.1,
+      Matrix.mulVec sixPointHeartInversion vector.2) ∈ subspace)
+
+/-- The image of a pair subspace under first projection. -/
+def sixPointHeartPairFirstRange
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart)) :
+    Submodule F2 SixPointHeart :=
+  subspace.map (LinearMap.fst F2 SixPointHeart SixPointHeart)
+
+/-- The vectors occurring in the vertical part of a pair subspace. -/
+def sixPointHeartPairVerticalPart
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart)) :
+    Submodule F2 SixPointHeart :=
+  subspace.comap (LinearMap.inr F2 SixPointHeart SixPointHeart)
+
+/-- Diagonal generator stability descends to the first-projection image. -/
+theorem sixPointHeartPairFirstRange_generatorStable
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (stable : SixPointHeartPairGeneratorStable subspace) :
+    SixPointHeartGeneratorStable (sixPointHeartPairFirstRange subspace) := by
+  constructor
+  · intro vector member
+    rcases member with ⟨pair, pairMember, rfl⟩
+    refine ⟨(Matrix.mulVec sixPointHeartTranslation pair.1,
+      Matrix.mulVec sixPointHeartTranslation pair.2),
+      stable.1 pair pairMember, rfl⟩
+  · intro vector member
+    rcases member with ⟨pair, pairMember, rfl⟩
+    refine ⟨(Matrix.mulVec sixPointHeartInversion pair.1,
+      Matrix.mulVec sixPointHeartInversion pair.2),
+      stable.2 pair pairMember, rfl⟩
+
+/-- Diagonal generator stability descends to the vertical part. -/
+theorem sixPointHeartPairVerticalPart_generatorStable
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (stable : SixPointHeartPairGeneratorStable subspace) :
+    SixPointHeartGeneratorStable (sixPointHeartPairVerticalPart subspace) := by
+  constructor
+  · intro vector member
+    change (0, vector) ∈ subspace at member
+    change (0, Matrix.mulVec sixPointHeartTranslation vector) ∈ subspace
+    simpa using stable.1 (0, vector) member
+  · intro vector member
+    change (0, vector) ∈ subspace at member
+    change (0, Matrix.mulVec sixPointHeartInversion vector) ∈ subspace
+    simpa using stable.2 (0, vector) member
+
+/-- A stable pair subspace has simple first image and simple vertical part. -/
+theorem sixPointHeartPair_projection_and_vertical_simple
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (stable : SixPointHeartPairGeneratorStable subspace) :
+    (sixPointHeartPairFirstRange subspace = ⊥ ∨
+      sixPointHeartPairFirstRange subspace = ⊤) ∧
+    (sixPointHeartPairVerticalPart subspace = ⊥ ∨
+      sixPointHeartPairVerticalPart subspace = ⊤) :=
+  ⟨sixPointHeartGeneratorStable_simple _
+      (sixPointHeartPairFirstRange_generatorStable subspace stable),
+    sixPointHeartGeneratorStable_simple _
+      (sixPointHeartPairVerticalPart_generatorStable subspace stable)⟩
+
+/-- The five explicit stable halves: the vertical copy and the graphs of the
+four matrices in the quadratic commutant. -/
+def SixPointHeartStableHalfPacket : Set
+    (Submodule F2 (SixPointHeart × SixPointHeart)) :=
+  {LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart))} ∪
+    {LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' (0 :
+        Matrix (Fin 4) (Fin 4) F2))),
+      LinearMap.range (graphEmbedding (K := F2) (Matrix.toLin' (1 :
+        Matrix (Fin 4) (Fin 4) F2))),
+      LinearMap.range (graphEmbedding (K := F2)
+        (Matrix.toLin' sixPointHeartCommutantRoot)),
+      LinearMap.range (graphEmbedding (K := F2)
+        (Matrix.toLin' (sixPointHeartCommutantRoot + 1)))}
+
+/-- Every four-dimensional diagonally stable subspace of two coefficient-heart
+copies is one of the vertical half or the four quadratic-commutant graphs. -/
+theorem sixPointHeartPair_stableHalf_classification
+    (subspace : Submodule F2 (SixPointHeart × SixPointHeart))
+    (stable : SixPointHeartPairGeneratorStable subspace)
+    (halfDimension : Module.finrank F2 subspace = 4) :
+    subspace ∈ SixPointHeartStableHalfPacket := by
+  classical
+  obtain ⟨firstRangeSimple, verticalPartSimple⟩ :=
+    sixPointHeartPair_projection_and_vertical_simple subspace stable
+  rcases firstRangeSimple with firstRangeZero | firstRangeFull
+  · rcases verticalPartSimple with verticalPartZero | verticalPartFull
+    · have subspaceZero : subspace = ⊥ := by
+        apply bot_unique
+        intro pair pairMember
+        have firstMember : pair.1 ∈ sixPointHeartPairFirstRange subspace :=
+          ⟨pair, pairMember, rfl⟩
+        have firstZero : pair.1 = 0 := by
+          have : pair.1 ∈ (⊥ : Submodule F2 SixPointHeart) := by
+            simpa [firstRangeZero] using firstMember
+          simpa using this
+        have secondMember : pair.2 ∈
+            sixPointHeartPairVerticalPart subspace := by
+          change (0, pair.2) ∈ subspace
+          have pairEquality : pair = (0, pair.2) := by
+            apply Prod.ext firstZero
+            rfl
+          rwa [← pairEquality]
+        have secondZero : pair.2 = 0 := by
+          have : pair.2 ∈ (⊥ : Submodule F2 SixPointHeart) := by
+            simpa [verticalPartZero] using secondMember
+          simpa using this
+        exact Prod.ext firstZero secondZero
+      have impossible : False := by
+        rw [subspaceZero] at halfDimension
+        norm_num at halfDimension
+      exact impossible.elim
+    · have verticalEquality : subspace =
+          LinearMap.range (verticalEmbedding (K := F2) (H := SixPointHeart)) := by
+        ext pair
+        constructor
+        · intro pairMember
+          have firstMember : pair.1 ∈ sixPointHeartPairFirstRange subspace :=
+            ⟨pair, pairMember, rfl⟩
+          have firstZero : pair.1 = 0 := by
+            have : pair.1 ∈ (⊥ : Submodule F2 SixPointHeart) := by
+              simpa [firstRangeZero] using firstMember
+            simpa using this
+          refine ⟨pair.2, ?_⟩
+          ext <;> simp [verticalEmbedding, firstZero]
+        · rintro ⟨vector, rfl⟩
+          have vectorMember : vector ∈
+              sixPointHeartPairVerticalPart subspace := by
+            simp [verticalPartFull]
+          exact vectorMember
+      simp [SixPointHeartStableHalfPacket, verticalEquality]
+  · rcases verticalPartSimple with verticalPartZero | verticalPartFull
+    · let projection : subspace →ₗ[F2] SixPointHeart :=
+        (LinearMap.fst F2 SixPointHeart SixPointHeart).domRestrict subspace
+      have projectionInjective : Function.Injective projection := by
+        intro left right equality
+        apply Subtype.ext
+        apply Prod.ext equality
+        have differenceMember : left.1.2 - right.1.2 ∈
+            sixPointHeartPairVerticalPart subspace := by
+          change (0, left.1.2 - right.1.2) ∈ subspace
+          have member := subspace.sub_mem left.2 right.2
+          have pairEquality : left.1 - right.1 =
+              (0, left.1.2 - right.1.2) := by
+            apply Prod.ext
+            · exact sub_eq_zero.mpr equality
+            · rfl
+          rwa [← pairEquality]
+        have differenceZero : left.1.2 - right.1.2 = 0 := by
+          have : left.1.2 - right.1.2 ∈
+              (⊥ : Submodule F2 SixPointHeart) := by
+            simpa [verticalPartZero] using differenceMember
+          simpa using this
+        exact sub_eq_zero.mp differenceZero
+      have projectionSurjective : Function.Surjective projection := by
+        intro vector
+        have vectorMember : vector ∈ sixPointHeartPairFirstRange subspace := by
+          simp [firstRangeFull]
+        rcases vectorMember with ⟨pair, pairMember, equality⟩
+        exact ⟨⟨pair, pairMember⟩, equality⟩
+      let projectionEquiv : subspace ≃ₗ[F2] SixPointHeart :=
+        LinearEquiv.ofBijective projection
+          ⟨projectionInjective, projectionSurjective⟩
+      let slope : SixPointHeart →ₗ[F2] SixPointHeart :=
+        (LinearMap.snd F2 SixPointHeart SixPointHeart).comp
+          (subspace.subtype.comp projectionEquiv.symm.toLinearMap)
+      have graphValue (vector : SixPointHeart) :
+          (projectionEquiv.symm vector :
+              subspace).1 = graphEmbedding (K := F2) slope vector := by
+        apply Prod.ext
+        · exact projectionEquiv.apply_symm_apply vector
+        · rfl
+      have subspaceGraph : subspace =
+          LinearMap.range (graphEmbedding (K := F2) slope) := by
+        ext pair
+        constructor
+        · intro pairMember
+          let member : subspace := ⟨pair, pairMember⟩
+          refine ⟨pair.1, ?_⟩
+          rw [← graphValue]
+          have subtypeEquality : projectionEquiv.symm pair.1 = member := by
+            apply projectionEquiv.injective
+            exact projectionEquiv.apply_symm_apply pair.1
+          exact congrArg Subtype.val subtypeEquality
+        · rintro ⟨vector, rfl⟩
+          rw [← graphValue]
+          exact (projectionEquiv.symm vector).2
+      have slopeCommutes
+          (generator : Matrix (Fin 4) (Fin 4) F2)
+          (generatorStable : ∀ pair ∈ subspace,
+            (Matrix.mulVec generator pair.1,
+              Matrix.mulVec generator pair.2) ∈ subspace)
+          (vector : SixPointHeart) :
+          slope (Matrix.mulVec generator vector) =
+            Matrix.mulVec generator (slope vector) := by
+        let lifted : subspace := projectionEquiv.symm vector
+        let acted : subspace :=
+          ⟨(Matrix.mulVec generator lifted.1.1,
+              Matrix.mulVec generator lifted.1.2),
+            generatorStable lifted.1 lifted.2⟩
+        have actedEquality : acted =
+            projectionEquiv.symm (Matrix.mulVec generator vector) := by
+          apply projectionInjective
+          calc
+            projection acted = Matrix.mulVec generator vector := by
+              change Matrix.mulVec generator lifted.1.1 =
+                Matrix.mulVec generator vector
+              rw [show lifted.1.1 = vector by
+                exact projectionEquiv.apply_symm_apply vector]
+            _ = projection
+                (projectionEquiv.symm (Matrix.mulVec generator vector)) := by
+              exact (projectionEquiv.apply_symm_apply _).symm
+        have secondEquality := congrArg (fun value : subspace => value.1.2)
+          actedEquality
+        change Matrix.mulVec generator lifted.1.2 =
+          slope (Matrix.mulVec generator vector) at secondEquality
+        have liftedSecond : lifted.1.2 = slope vector := by
+          have := congrArg Prod.snd (graphValue vector)
+          exact this
+        rw [liftedSecond] at secondEquality
+        exact secondEquality.symm
+      let slopeMatrix : Matrix (Fin 4) (Fin 4) F2 :=
+        LinearMap.toMatrix' slope
+      have matrixCommutesTranslation :
+          slopeMatrix * sixPointHeartTranslation =
+            sixPointHeartTranslation * slopeMatrix := by
+        apply Matrix.toLin'.injective
+        apply LinearMap.ext
+        intro vector
+        simpa [slopeMatrix] using
+          slopeCommutes sixPointHeartTranslation stable.1 vector
+      have matrixCommutesInversion :
+          slopeMatrix * sixPointHeartInversion =
+            sixPointHeartInversion * slopeMatrix := by
+        apply Matrix.toLin'.injective
+        apply LinearMap.ext
+        intro vector
+        simpa [slopeMatrix] using
+          slopeCommutes sixPointHeartInversion stable.2 vector
+      have matrixClassification :=
+        (sixPointHeart_commonCommutant_classification slopeMatrix).mp
+          ⟨matrixCommutesTranslation, matrixCommutesInversion⟩
+      have slopeFromMatrix : Matrix.toLin' slopeMatrix = slope := by
+        simp [slopeMatrix]
+      rcases matrixClassification with
+          matrixZero | matrixOne | matrixRoot | matrixRootOne
+      · have graphZero : subspace = LinearMap.range
+            (graphEmbedding (K := F2) (Matrix.toLin' (0 :
+              Matrix (Fin 4) (Fin 4) F2))) := by
+          rw [subspaceGraph, ← slopeFromMatrix, matrixZero]
+        simp [SixPointHeartStableHalfPacket, graphZero]
+      · have graphOne : subspace = LinearMap.range
+            (graphEmbedding (K := F2) (Matrix.toLin' (1 :
+              Matrix (Fin 4) (Fin 4) F2))) := by
+          rw [subspaceGraph, ← slopeFromMatrix, matrixOne]
+        simp [SixPointHeartStableHalfPacket, graphOne]
+      · have graphRoot : subspace = LinearMap.range
+            (graphEmbedding (K := F2)
+              (Matrix.toLin' sixPointHeartCommutantRoot)) := by
+          rw [subspaceGraph, ← slopeFromMatrix, matrixRoot]
+        simp [SixPointHeartStableHalfPacket, graphRoot]
+      · have graphRootOne : subspace = LinearMap.range
+            (graphEmbedding (K := F2)
+              (Matrix.toLin' (sixPointHeartCommutantRoot + 1))) := by
+          rw [subspaceGraph, ← slopeFromMatrix, matrixRootOne]
+        simp [SixPointHeartStableHalfPacket, graphRootOne]
+    · have subspaceFull : subspace = ⊤ := by
+        apply top_unique
+        intro pair _
+        have firstMember : pair.1 ∈ sixPointHeartPairFirstRange subspace := by
+          simp [firstRangeFull]
+        rcases firstMember with ⟨lift, liftMember, firstEquality⟩
+        have verticalMember : pair.2 - lift.2 ∈
+            sixPointHeartPairVerticalPart subspace := by
+          simp [verticalPartFull]
+        change (0, pair.2 - lift.2) ∈ subspace at verticalMember
+        have sumMember := subspace.add_mem liftMember verticalMember
+        have pairEquality : lift + (0, pair.2 - lift.2) = pair := by
+          apply Prod.ext
+          · simpa using firstEquality
+          · simp
+        rwa [pairEquality] at sumMember
+      have impossible : False := by
+        rw [subspaceFull] at halfDimension
+        norm_num [Module.finrank_prod] at halfDimension
+      exact impossible.elim
+
+end GraphLattices
+
+end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

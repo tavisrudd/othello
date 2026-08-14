@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 156 reviewer terminals.
+1 complete; 157 reviewer terminals.
 
-The 156 reviewer-facing terminals currently verify:
+The 157 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -102,7 +102,9 @@ The 156 reviewer-facing terminals currently verify:
   one-factorization identifying their
   generated action faithfully with the alternating group `A5`, simplicity of
   the induced heart, and the exact four-element quadratic matrix commutant of
-  the entire generated heart action;
+  the entire generated heart action; every four-dimensional subspace of two
+  heart copies stable under the diagonal action is the vertical half or the
+  graph of one of those four commutant endomorphisms;
   all six Sylow-five subgroups of that concrete `A5` are constructed, their
   conjugation action is exactly the original six-point action, and each
   ten-element normalizer is explicitly equivalent to the dihedral group `D5`,
