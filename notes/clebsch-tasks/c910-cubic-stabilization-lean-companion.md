@@ -515,6 +515,11 @@ are current, and the committed paper export verifies byte-for-byte in
   property are not represented; the substantive
   missing bridges are geometric Gromov--Witten invariance, construction of the
   additive pairing weights and quantum connection, and the comparison maps.
+  The manuscript now writes the numerical coefficient pushforward explicitly
+  as the finite fibre sum, states why it is a unital completed-convolution
+  homomorphism, and identifies the curve pushforward, divisor weights, and
+  Novikov derivations as fibrewise constant.  This aligns the human
+  numerical-base-change proof with the kernel-checked algebraic terminal.
 - **Relative geometry:** unsettled.  The six-axis local-system argument and
   Voisin implication are mathematically human proofs but sit beyond Mathlib's
   present abelian-scheme and decomposition-of-diagonal APIs.  The

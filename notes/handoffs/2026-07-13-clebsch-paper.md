@@ -417,6 +417,11 @@ numerical pushforward
 commutes when the weight factors through the quotient.  The corresponding
 geometric Gromov--Witten invariance, curve-pairing weights, and quantum
 connection remain open.
+The manuscript's numerical-base-change proof now displays the finite fibre-sum
+coefficient formula, proves it is a unital homomorphism for completed
+convolution, and states exactly which curve maps, divisor weights, and Novikov
+derivations are constant on numerical fibres.  This removes the former
+one-sentence descent shortcut.
 Compatible finite-level monodromy matrices now derive their characteristic-
 polynomial inverse system; compatible pro-Laurent gauges preserve it under
 conjugacy, and for each fixed Laurent coefficient tower the compatible
