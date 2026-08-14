@@ -537,6 +537,11 @@ are current, and the committed paper export verifies byte-for-byte in
   generic cubic has automorphism group exactly \(A_5\): Strong Torelli would
   produce a faithful \(S_6\)-action, which Hartlieb's Theorem 2.1 excludes
   because every listed ambient group has two-primary order at most \(8\).
+  The local-chart proof now also states why the unit summand has no
+  \(p\)-primary kernel and invokes the packet classification fibre by fibre:
+  the two exotic slopes share the squarefree polynomial \(t^2+t+1\), while
+  every three-primary half is a scalar graph.  It no longer appeals to an
+  unspecified persistence of local presentations.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

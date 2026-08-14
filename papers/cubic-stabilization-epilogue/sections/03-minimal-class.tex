@@ -223,14 +223,18 @@ Let \(e_1,\ldots,e_5\) be the standard basis.  Since
 \]
 span the orthogonal complement of \(e_1\) over \(\Z_p\).  Its Gram matrix is
 \(\frac65(5I_4-J_4)\), and \(\det(5I_4-J_4)=5^3\).  This gives the asserted
-unit line and depth-one block at two and three.
+unit line and depth-one block at two and three.  The unit line contributes
+nothing to the \(p\)-primary discriminant group, so the \(p\)-primary
+isogeny kernel is supported entirely on \(U_1/pU_1\).
 
-At two, Proposition~\ref{prop:principal-gluing-packet} identifies the
-geometric kernel with an exotic graph.  Its slope is
-\(\omega\in\F_4\), whose polynomial is \(t^2+t+1\).  At three the
-coefficient heart is simple with scalar
-commutant.  These are the actual kernels of the six-axis quotient, so the
-local presentations persist throughout each connected smooth component.
+At two, Proposition~\ref{prop:principal-gluing-packet} applies to every
+smooth fibre and identifies its geometric kernel with one of the two exotic
+graphs.  Either slope is a root in \(\F_4\) of \(t^2+t+1\), so the same
+squarefree minimal polynomial works fibrewise.  At three, the same
+proposition says that every \(A_5\)-stable half is a scalar graph because the
+coefficient heart is simple with commutant \(\F_3\).  The algebra generated
+by such a scalar is \(\F_3\), hence is a one-point finite-etale block.  No
+global choice of either slope is needed.
 \end{proof}
 
 \begin{theorem}[Divided powers for the six-axis family]

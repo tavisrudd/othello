@@ -357,6 +357,11 @@ generic cubic has automorphism group exactly \(A_5\).  Strong Torelli would
 instead give a faithful \(S_6\)-action on a smooth cubic threefold, directly
 excluded by Hartlieb's Theorem 2.1 because the six classified ambient groups
 all have two-primary order at most eight.
+The six-axis local-chart proof now makes the remaining fibrewise step exact:
+the unimodular line contributes no primary discriminant, the two exotic
+two-primary slopes have the common squarefree polynomial \(t^2+t+1\), and
+each three-primary half is already a scalar graph.  No unproved persistence
+of a chosen slope or local presentation is used.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
