@@ -207,32 +207,52 @@ finite-dimensional linear abelian GLSM with adjacent secondary-fan chambers,
 a circuit, Calabi--Yau charges, and a grade-restriction window
 \cite[Definition~5.18 and Theorem~5.21]{AleshkinLiu}.  Proposition
 \ref{prop:gamma-ratio-reduction} does not construct those data for a nonlinear
-virtual fixed graph.  Their theorem therefore does not determine the marked
-connection matrices in Hypothesis~\ref{hyp:marked-threshold} below.
+virtual fixed graph.  Their theorem therefore supplies neither the tailwise
+derived identifications nor the marked threshold comparisons below.
 
 Gonz\'alez--Woodward's crepant wall-crossing theorem gives a weaker
 distributional statement: neutral Picard shifts produce sums of derivatives
 of delta distributions
 \cite[Remark~1.18(d), Remark~4.6, and equation~(47)]{GonzalezWoodward},
 and the authors explicitly do not deduce analytic continuation without an
-independent convergence input \cite[Remark~4.7]{GonzalezWoodward}.  This does not replace
-Hypothesis~\ref{hyp:marked-threshold}.  Proposition
+independent convergence input \cite[Remark~4.7]{GonzalezWoodward}.  This does
+not replace Hypotheses~\ref{hyp:tailwise-derived} and
+\ref{hyp:marked-threshold}.  Proposition
 \ref{prop:punctual-corner} exhibits the underlying obstruction: information
 supported at a Fourier boundary can reappear with full support after inverse
 transform, so almost-everywhere equality does not identify the marked formal
 packet.
 \end{remark}
 
-\begin{proposition}[Clutching-tail holonomicity]
-\label{prop:clutching-tail-holonomicity}
+\begin{hypothesis}[Tailwise derived identification]
+\label{hyp:tailwise-derived}
 Fix a finite Artin level, an ordinary bubble degree, and a rotation-fixed
-graph type.  After splitting into finitely many stabilizer congruence classes
-and removing finitely many sign, stability, and zero-mode thresholds, every
-point-marked endpoint tail is a finite nilpotent derivative of one
-Gamma-ratio recurrence with affine arguments.  Its generating series is
-holonomic.  In a neutral direction its coefficients have polynomial-logarithmic
-growth after one exponential rescaling, so the tail has tempered radial
-boundary values.
+graph type.  After splitting into stabilizer congruence classes and removing
+the finite sign, stability, and zero-mode thresholds, consecutive affine
+degrees in each remaining tail are identified by isomorphisms of the fixed
+clutching stacks and their universal curves.  These isomorphisms identify the
+evaluation maps and the fixed relative perfect obstruction theories as
+morphisms to the corresponding cotangent complexes, hence also their virtual
+classes.  They respect stack automorphisms, gluing over the inertia quotient,
+and reduction between Artin levels.  Stable degree-zero attached bubbles are
+retained as fixed stable-map factors; the irreducible unstable type is treated
+by its separate convention.
+\end{hypothesis}
+
+Woodward's clutching description gives the degreewise fixed stacks and the
+normal-complex splitting, but not the degree-shift isomorphisms in this
+hypothesis.  Gonz\'alez--Woodward prove an analogous Picard-shift statement
+for polarization-fixed loci when the shifting subgroup acts trivially on the
+fixed target \cite[Lemma~4.5]{GonzalezWoodward}.  That argument does not
+automatically apply to the endpoint clutching sections here.
+
+\begin{proposition}[Conditional clutching-tail holonomicity]
+\label{prop:clutching-tail-holonomicity}
+Under Hypothesis~\ref{hyp:tailwise-derived}, every point-marked endpoint tail
+is a finite nilpotent derivative of one Gamma-ratio recurrence with affine
+arguments.  Its generating series is holonomic.  In a neutral direction its
+coefficients have polynomial-logarithmic growth after one exponential
+rescaling, so the tail has tempered radial boundary values.
 \end{proposition}
 
 \begin{proof}
@@ -242,40 +262,27 @@ two clutching factors over the inertia quotient.  Each factor already
 contains the complete ordinary stable-map space attached at that end.  Thus
 arbitrary bubble trees occur in fixed proper stable-map factors once their
 ordinary degrees and markings are fixed; no induction over bubble-tree edges
-is required.
+is required.  Hypothesis~\ref{hyp:tailwise-derived} supplies the additional
+degree-shift identification of those fixed factors, their obstruction
+theories, and their evaluations.  This is stronger than the normal-complex
+identity in equations (58)--(59) of \cite{WoodwardQKIII}.
 
-For \(G=\Gm\), an affine clutching cocharacter is an integer.  Away from
-zero, its limit stratum depends only on its sign, while its inertia label
-depends only on its residue modulo the finite stabilizer order.  A finite
-sign/congruence split therefore fixes the coefficient stack and all
-evaluation maps.  The stability type of the principal component is constant
-on each resulting tail.  Stable tails retain the node and attaching factors
-in (8.7); contracted tails use the unstable irreducible convention and
-retain only the moving index.  The transition degrees form a finite set.
+For \(G=\Gm\), an affine clutching cocharacter is an integer.  On one of the
+identified tails, apply the splitting principle to the moving part of the
+normal complex.  A character root of weight \(h\) has degree \(hk+s\), so
+the complementary moving weights give (8.9), with nilpotent Chern roots on
+the fixed coefficient stack.  Stable attached components, including
+degree-zero bubbles stabilized by markings and nodes, retain the node and
+attaching factors in (8.7).  Only the irreducible unstable type has no such
+factors.  They are adjacent Gamma ratios and do not change the signed slope.
 
-We also need the fixed obstruction theory, not only the fixed stack.  Apply
-the normalization triangle to the pullback of the equivariant tangent
-complex of \(W/\Gm\).  The clutching line is trivial on every attached
-bubble, so the bubble complexes and node matching maps are independent of
-the affine degree.  On the principal component, apply the splitting
-principle.  A character root of weight \(h\) has degree \(hk+s\).  Roots
-with \(h=0\) are constant.  For \(h\ne0\), the weights of its
-\(H^0-H^1\) index form one consecutive affine interval.  Between consecutive
-thresholds the zero-weight summand has constant rank and evaluation at a
-generic point identifies it with the same root bundle on the coefficient
-stack.  The \(H^1\) assertion is dual by Serre duality.  Any nonzero
-clutching integer in the infinitesimal gauge map is removed by rescaling that
-summand.  Hence the fixed normalization complex, its maps, its virtual class,
-and its evaluations are constant on the tail.
-
-The complementary moving weights give (8.9), with nilpotent Chern roots on
-the fixed coefficient stack.  Only finitely many parameter derivatives are
-therefore needed.  Gamma recurrence gives a rational finite-state recurrence
-in \(k\), hence a holonomic generating series.  Under (8.5), Stirling's
-formula cancels the \(k\log k\) terms in the signed product; the remaining
-exponential is removed by one rescaling and the coefficients grow by a power
-of \(k\) and \(\log k\).  This is exactly tempered Fourier growth.  Finite
-threshold terms are Laurent polynomials and do not alter the conclusion.
+Only finitely many parameter derivatives are therefore needed.  Gamma
+recurrence gives a rational finite-state recurrence in \(k\), hence a
+holonomic generating series.  Under (8.5), Stirling's formula cancels the
+\(k\log k\) terms in the signed product; the remaining exponential is removed
+by one rescaling and the coefficients grow by a power of \(k\) and
+\(\log k\).  This gives tempered Fourier growth.  Finite threshold terms are
+Laurent polynomials and do not alter the conclusion.
 \end{proof}
 
 Tailwise holonomicity does not identify the two selected solutions.  The
@@ -292,26 +299,36 @@ boundary circles.  Away from the single threshold, the bilateral sequence
 is annihilated by \((E-2)(E-1/3)\); multiplying by a polynomial in the index
 absorbs the finite defect.  Nevertheless the two displayed rational
 functions are not branches of one meromorphic function.  Thus neither a
-zero wall term nor a polynomial recurrence determines the finite connection
-data across a threshold.
+polynomial recurrence nor tailwise holonomicity determines the finite
+connection data across a threshold.
 
 \begin{hypothesis}[Marked threshold compatibility]
 \label{hyp:marked-threshold}
-At every finite Artin level and fixed ordinary degree, let \(C_j\) be the
-connection matrix between two adjacent neutral clutching-tail systems.  Take
-as state vector the pullback of the Gamma point row on finitely many common
-equivariant inputs, together with its \(z\)-covariant derivatives until the
-generated cyclic space stabilizes.  For every threshold,
+At every finite Artin level and fixed ordinary degree, choose a common
+ramified admissible \(z\)-sector.  On the two sides of every threshold, let
+\(K_j^-\) and \(K_j^+\) be the finite dual cyclic Rees
+\(z\)-differential modules generated by the corresponding Gamma point rows
+\(r_j^-\) and \(r_j^+\) under the half-Tate-normalized formal monodromies
+\(T_j^-\) and \(T_j^+\).  There is an invertible comparison
 \[
- r_jC_j=r_j,                                                  \tag{8.13}
+ \Phi_j:K_j^-\xrightarrow{\sim}K_j^+,
+ \qquad
+ \Phi_jT_j^-=T_j^+\Phi_j,
+ \qquad
+ \Phi_j(r_j^-)=r_j^+.                                      \tag{8.13}
 \]
-where \(r_j\) is this marked cyclic row.  These identifications commute with
-input and bulk derivatives, quotient maps between Artin levels, and the Rees
-substitution (8.6).
+It is horizontal for the tail and \(z\)-connections, preserves the chosen
+Stokes filtration, is equivariant for the ramified deck action, and commutes
+with input and bulk derivatives, quotient maps between Artin levels, and the
+Rees substitution (8.6).  At a zero-mode rank change, \(\Phi_j\) is supplied
+through a specified nearby-cycle comparison.  These maps are compatible over
+the complete separated inverse system of Artin quotients.
 \end{hypothesis}
 
-Condition (8.13) allows arbitrary connection on directions annihilated by
-the point row.  A one-object Gamma/window comparison would imply it: a
+Condition (8.13) concerns only the cyclic module and allows arbitrary
+connection on the complementary source.  After bases are chosen, its marked
+generator condition is the row equation \(r_j^+C_j=r_j^-\).  A one-object
+Gamma/window comparison would imply it: a
 window mutation is supported on the wall, whereas the skyscraper of a point
 in the common open is unchanged and Euler-orthogonal to wall-supported
 objects.  Pairing preservation and formal exponential labels alone do not
@@ -367,14 +384,21 @@ surjection in (8.1) span the corresponding endpoint module; take the union
 of two lift sets if necessary.  Evaluation on these images embeds the dual
 endpoint module into one finite coordinate space.  After (8.6), this
 embedding intertwines the dual \(z\)-connections up to the same half-Tate
-shift.  The point row and its successive \(z\)-covariant derivatives
-therefore generate a finite cyclic submodule in that coordinate space.
+shift.  Let \(T_\pm\) denote the induced half-Tate-normalized formal
+monodromies.  The Krylov spans
+\[
+ \operatorname{span}\{\rrow_\pm,\rrow_\pm T_\pm,
+   \rrow_\pm T_\pm^2,\ldots\}
+\]
+are finite dual cyclic submodules in that coordinate space.  Injectivity here
+is simply dual to the surjectivity of (8.1).
 
 Proposition~\ref{prop:support-collapse} identifies the marked coefficient
 functions before either endpoint completion is taken.
-Proposition~\ref{prop:clutching-tail-holonomicity} supplies their holonomic
-tail systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the marked
-solutions across every finite threshold, while nonneutral directions are
+Hypothesis~\ref{hyp:tailwise-derived} and
+Proposition~\ref{prop:clutching-tail-holonomicity} supply their holonomic tail
+systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the finite cyclic
+Rees \(z\)-modules across every threshold, while nonneutral directions are
 Laurent-finite by Proposition~\ref{prop:gamma-ratio-reduction}.  Thus the two
 intrinsic endpoint cyclic row modules are conservative realizations of one
 continued marked cyclic module.  No continuation of the complementary
@@ -384,8 +408,9 @@ equivariant quantum source is used.
 \label{thm:birational-point-primary}
 Let \(Y_-\) and \(Y_+\) be smooth projective birational complex varieties.
 Suppose a W{\l}odarczyk completion for this birational map satisfies
-Hypothesis~\ref{hyp:marked-threshold} in every neutral affine gauge
-direction.  Then, for every formal-monodromy eigenvalue \(\lambda\),
+Hypotheses~\ref{hyp:tailwise-derived} and \ref{hyp:marked-threshold} in every
+neutral affine gauge direction.  Then, for every formal-monodromy eigenvalue
+\(\lambda\),
 \[
  \rrow_{Y_-}|_{\cP_\lambda(Y_-)}\ne0
  \quad\Longleftrightarrow\quad
@@ -399,15 +424,21 @@ statement.
 \begin{proof}
 Use the global W{\l}odarczyk completion and its orbit-cylinder class.  By
 the preceding construction, the two endpoint point rows generate the same
-marked cyclic module under the dual formal-monodromy action.  Apply
-Lemma~\ref{lem:cyclic-row-support}: the set of primary eigenvalues detected by
-the marked row depends only on that cyclic module.  This gives the forward
-implication, and the reverse implication is symmetric.
+marked cyclic module under the dual formal-monodromy action.  More explicitly,
+polynomial functional calculus in (8.13) gives
+\[
+ \Phi_j\bigl(r_j^-e_\lambda(T_j^-)\bigr)
+   =r_j^+e_\lambda(T_j^+)
+\]
+at every threshold.  Hence the relevant primary row vanishes on one side if
+and only if it vanishes on the other.  Iterate through the locally finite
+threshold system and apply Lemma~\ref{lem:cyclic-row-support} at the endpoints.
+This proves both implications.
 \end{proof}
 
-Under Hypothesis~\ref{hyp:marked-threshold},
-Theorem~\ref{thm:birational-point-primary} is the global replacement for
-Hypothesis~\ref{hyp:rank-zero-target}.  Without that analytic input, the
-two-tail example above and the earlier countermodels show why the conclusion
+Under Hypotheses~\ref{hyp:tailwise-derived} and
+\ref{hyp:marked-threshold}, Theorem~\ref{thm:birational-point-primary} is the
+global replacement for Hypothesis~\ref{hyp:rank-zero-target}.  Without those
+inputs, the two-tail example above and the earlier countermodels show why the conclusion
 cannot be obtained from tailwise holonomicity, localized one-wall receivers,
 or unmarked Fourier boundary data alone.

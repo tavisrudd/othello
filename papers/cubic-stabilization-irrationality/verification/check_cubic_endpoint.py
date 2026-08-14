@@ -295,8 +295,8 @@ def build_certificate() -> dict[str, object]:
         "trust_boundary": (
             "Exact three-specialization arithmetic regression only; the Barnes "
             "asymptotic theorem, quantum Kunneth theorem, virtual localization, "
-            "marked threshold compatibility, and conditional birational transport are not "
-            "machine-verified."
+            "tailwise derived identification, marked threshold compatibility, and "
+            "conditional birational transport are not machine-verified."
         ),
     }
 

@@ -51,6 +51,7 @@ required_labels = {
     "eq:blockwise-boundary-marking",
     "prop:support-collapse",
     "prop:gamma-ratio-reduction",
+    "hyp:tailwise-derived",
     "prop:clutching-tail-holonomicity",
     "hyp:marked-threshold",
     "lem:cyclic-row-support",
@@ -73,13 +74,15 @@ if "They are not asserted to arise from smooth projective quantum connections" n
     errors.append("analytic countermodel scope boundary missing")
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
-if "marked compatibility for nonlinear virtual fixed graphs" not in scope_text:
+if "nonlinear virtual fixed graphs" not in scope_text:
     errors.append("global continuation boundary is not visibly conditional")
 
 global_text = (ROOT / "sections/08-global-transport.tex").read_text(encoding="utf-8")
+if "\\begin{hypothesis}[Tailwise derived identification]" not in global_text:
+    errors.append("tailwise derived identification is not an explicit hypothesis")
 if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
     errors.append("marked threshold compatibility is not an explicit hypothesis")
-if "do not prove this marked compatibility" not in scope_text:
+if "prove neither" not in scope_text:
     errors.append("Aleshkin--Liu nonlinear source boundary is missing")
 if "the proposition does not construct the common realization" not in global_text:
     errors.append("support-collapse coefficient-field boundary is missing")
@@ -92,16 +95,18 @@ readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
-    r"Assume that, for every W.*?finite connection matrices.*?We prove that",
+    r"Assume that every smooth projective birational map.*?cyclic Gamma point.*?We prove that",
     main_text,
     flags=re.DOTALL,
 ):
     errors.append("abstract does not lead with the conditional cubic theorem")
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
-if "Hypothesis~\\ref{hyp:marked-threshold}" not in intro_text:
-    errors.append("headline theorem does not name the continuation hypothesis")
-if "Under that hypothesis" not in readme_text:
+if "Hypotheses~\\ref{hyp:tailwise-derived}" not in intro_text:
+    errors.append("headline theorem does not name the derived-tail hypothesis")
+if "\\ref{hyp:marked-threshold}" not in intro_text:
+    errors.append("headline theorem does not name the marked-threshold hypothesis")
+if "Under these hypotheses" not in readme_text:
     errors.append("README cubic conclusion is not visibly conditional")
 if ledger_path.is_file():
     ledger_text = ledger_path.read_text(encoding="utf-8")
@@ -122,10 +127,24 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Assuming the marked threshold compatibility hypothesis" not in metadata.get(
+if "Assuming the tailwise derived identification and marked threshold compatibility hypotheses" not in metadata.get(
     "description", ""
 ):
     errors.append("Zenodo description does not lead with the conditional hypothesis")
+
+for boundary_path in [
+    ROOT / "literature-audit.md",
+    ROOT / "claim-proof-novelty-ledger.md",
+    ROOT / "verification" / "README.md",
+    ROOT / "verification" / "check_cubic_endpoint.py",
+    ROOT / "verification" / "cubic_endpoint_certificate.json",
+]:
+    if boundary_path.is_file() and "complete-neutral" in boundary_path.read_text(
+        encoding="utf-8"
+    ):
+        errors.append(
+            f"{boundary_path.relative_to(ROOT)}: superseded continuation hypothesis"
+        )
 
 if errors:
     for error in errors:

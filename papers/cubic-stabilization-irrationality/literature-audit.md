@@ -40,10 +40,11 @@ manuscript. This is not an exhaustive citation-graph or novelty search.
 6. No cited factorization theorem is used to claim that every intermediate
    chamber remains smooth projective. The global proof forms quantum
    D-modules only at the two smooth endpoints.
-7. The manuscript proves coefficientwise Gamma-ratio reduction and
-   clutching-tail holonomicity. Marked threshold compatibility is an explicit
-   hypothesis: the finite connection matrices between adjacent sign,
-   stability, and zero-mode tails must fix the cyclic Gamma point row.
+7. The manuscript proves coefficientwise Gamma-ratio reduction. Tailwise
+   derived identification is an explicit algebraic hypothesis; under it, the
+   paper deduces clutching-tail holonomicity. Marked threshold compatibility
+   is a second, analytic hypothesis requiring isomorphisms of the cyclic Rees
+   z-modules which intertwine formal monodromy and carry the point row.
 8. Cai is not cited for point-row nonvanishing. His matrices and flatness
    identify the cubic block; the point coefficient is derived from the
    hypergeometric Barnes expansion in the manuscript.

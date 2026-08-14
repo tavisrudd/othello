@@ -37,13 +37,13 @@ from the paper root. Regenerate the canonical certificate by omitting the
 check flag. The exact source hashes and byte counts are:
 
 - check_cubic_endpoint.py: SHA-256
-  e90844f0f108096b504ea950fd4b48b7e9d810e83f0caec48eda6ea91b79b480,
-  10,500 bytes;
+  ccfccdd47645a3d70c3d56a708ff22b9d30f91c5dcf05428173580a85d314b31,
+  10,533 bytes;
 - cubic_endpoint_certificate.json: SHA-256
-  bde2bf98df7c6f454a98c44f769ef9b6d1a9c5425387e4985b09d879087bcb5b,
-  10,236 bytes.
+  6548a2a30b07d58670aa73bf51b3b2bc43faf215eea7784b16f149280c03d20f,
+  10,269 bytes.
 
 The displayed derivation in the manuscript is the independent check of the
 script. The artifact does not verify the Barnes asymptotic theorem, quantum
-Künneth, virtual localization, marked threshold compatibility, or the
-conditional birational transport theorem.
+Künneth, virtual localization, tailwise derived identification, marked
+threshold compatibility, or the conditional birational transport theorem.

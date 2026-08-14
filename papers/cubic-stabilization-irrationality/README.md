@@ -9,21 +9,23 @@
 **Title:** *Conditional Irrationality of All Projective Stabilizations of
 Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.
 
-Assuming the marked threshold compatibility hypothesis stated in the paper,
+Assuming the tailwise derived identification and marked threshold
+compatibility hypotheses stated in the paper,
 the product of any smooth complex cubic threefold with any projective space
 is irrational. The paper proves an exact ambient point-column identity for a
 simple VGIT wall and exact point-row transport across an ordinary flop,
 together with countermodels that obstruct naive
 composition. For a global equivariant cobordism it proves support collapse
 and a coefficientwise balanced Gamma-ratio reduction. It further proves that
-the complete neutral clutching tails are holonomic and tempered. The remaining
-input is finite: the connection matrix at each sign, stability, or zero-mode
-threshold must fix the marked cyclic point row. Under that hypothesis, the
+the complete neutral clutching tails are holonomic and tempered under the
+tailwise derived identification hypothesis. The remaining analytic input is
+locally finite: an isomorphism of cyclic Rees \(z\)-modules at each sign,
+stability, or zero-mode threshold must intertwine formal monodromy and carry
+the marked point row. Under these hypotheses, the
 point-row primary Boolean is birationally invariant and
 \(X\times\mathbf P^m\) is irrational for every smooth cubic threefold \(X\)
 and every \(m\). A rational two-tail counterexample shows why tailwise
-holonomicity and a vanishing wall term alone do not determine the needed
-connection matrices.
+holonomicity alone does not determine the needed threshold maps.
 
 The cubic-specific input is isolated:
 
