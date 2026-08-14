@@ -337,6 +337,20 @@ induce the same generator of this one-dimensional quotient.  This is smaller
 than a full Stokes matrix, but it is not supplied by bare characteristic
 cycle support or by unmarked punctual multiplicity.
 
+The final formal shortcut is now excluded in
+`../2026-08-13-c907-marked-punctual-saturation-no-go.md`.  Tensoring a
+punctual Fourier delta by an arbitrary coefficient space gives an
+arbitrarily large quotient invisible to both one-wall localizations.  A
+hyperbolic doubling permits pairing-preserving transitions which change the
+chosen point row, and primitive-sixth/dual labels plus the `P2` nilpotent tag
+do not remove them.  Quotienting instead by the full rank kernel makes the
+surviving line one-dimensional only tautologically: preservation of that
+kernel is the rank-row theorem itself.  Thus marked punctual saturation is a
+valid geometric target but not a cheaper formal shadow.  The singular-shadow
+campaign is closed; further progress requires an actual unlocalized
+Gamma/window augmentation-row comparison, an oriented residue calculation,
+or a common intrinsic large-radius realization.
+
 The first mixed-sign toric survivor is sharper as well.  Barnes continuation
 of its `_3F_2(1,1,1/2;1/3,2/3)` solution has exact nonzero coefficients
 `-pi/(6 sqrt(3))` in the half-integral branch and `-4/9` in the logarithmic
