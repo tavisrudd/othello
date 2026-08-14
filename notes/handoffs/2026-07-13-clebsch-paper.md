@@ -322,12 +322,15 @@ characteristic polynomial coefficientwise.  For every supplied tower of
 coefficient algebras and adjacent reductions, these polynomials form an
 explicit compatible inverse system.  Lean now also constructs this inverse
 system on the actual adic quotients `B/I^n` of a supplied coefficient algebra
-and ideal, using the canonical adjacent quotient reductions.  Identification
-with the manuscript's coefficient algebra and ideal, completeness,
+and ideal, using the canonical adjacent quotient reductions.  Every fixed
+horizontal characteristic-polynomial coefficient is packaged as the compatible
+quotient family represented by its corresponding base coefficient.
+Identification with the manuscript's coefficient algebra and ideal, completeness,
 separatedness, the formal differential module, Levelt--Turrittin solution
 algebra, fundamental solution, analytic monodromy construction, and
-inverse-limit differential module remain open.  Compatible coefficient reductions, divisor
-substitutions, small matrices, and gauges derive the bulk matrices and levelwise substituted
+inverse-limit differential module remain open.  Compatible coefficient
+reductions, divisor substitutions, small matrices, and gauges derive the bulk
+matrices and levelwise substituted
 characteristic polynomials, including an explicit compatible bulk-polynomial
 system.  A supplied decreasing ideal filtration now constructs the finite-level
 quotient rings and reductions, and a filtration-preserving endomorphism descends

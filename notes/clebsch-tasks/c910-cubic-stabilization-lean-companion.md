@@ -107,9 +107,12 @@ polynomial, including its explicit compatible inverse system over every
 supplied coefficient-algebra tower.  The same inverse system is now constructed
 on the actual adic quotients `B/I^n` of a supplied coefficient algebra and
 ideal, with canonical adjacent quotient reductions; completeness,
-separatedness, and geometric identification remain unproved,
-formal-base-shift and block-formula deductions, numerical coefficient
-pushforward, strict-Novikov data, divisor-tag separation, typed
+separatedness, and geometric identification remain unproved.  Every fixed
+horizontal characteristic-polynomial coefficient is now also packaged as the
+compatible quotient family represented by its corresponding base coefficient.
+The quantum algebra also includes formal-base-shift and block-formula
+deductions, numerical coefficient pushforward, strict-Novikov data,
+divisor-tag separation, typed
 weak-factorization telescoping, the arithmetic core of Cai's rank-two indicial
 polynomial, and the exact implication from a `{1,-1}` characteristic-root
 spectrum to low-dimensional sixth-root vanishing.  The cycle side now also

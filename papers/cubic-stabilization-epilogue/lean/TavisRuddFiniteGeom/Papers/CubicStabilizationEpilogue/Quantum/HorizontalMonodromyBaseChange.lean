@@ -21,7 +21,9 @@ the coefficient map.  For a commutative algebra with a decreasing ideal
 filtration, Lean also constructs the coefficient-algebra tower from the actual
 quotients.  In particular, powers of one ideal give the adic tower, and the
 horizontal characteristic polynomials commute with its canonical adjacent
-reductions.
+reductions.  Each fixed polynomial coefficient is packaged as a compatible
+quotient family represented by its corresponding coefficient over the base
+algebra.
 
 This is the horizontal-module linear algebra in coefficientwise base change.
 It assumes the derivative and commuting monodromy operator; it does not
@@ -304,6 +306,56 @@ theorem ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
     rfl
   · exact
       (ofAdicIdeal ideal derivative monodromy commutes).characteristicPolynomialSystem.compatible
+
+/-- For one polynomial degree, the coefficients of the horizontal-monodromy
+characteristic polynomials over all adic quotients form a compatible quotient
+family. -/
+noncomputable def adicCharacteristicPolynomialCoefficientFamily
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (degree : ℕ) :
+    (adicFiltration ideal).CompatibleQuotientFamily where
+  value level :=
+    Ideal.Quotient.mk (ideal ^ level)
+      (algebraMap k B
+        ((horizontalEndomorphism derivative monodromy commutes).charpoly.coeff degree))
+  compatible level :=
+    (adicFiltration ideal).reduction_mk level
+      (algebraMap k B
+        ((horizontalEndomorphism derivative monodromy commutes).charpoly.coeff degree))
+
+/-- The value of the compatible coefficient family at each level is literally
+the corresponding coefficient of that level's horizontal characteristic
+polynomial. -/
+theorem adicCharacteristicPolynomialCoefficientFamily_value
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (degree level : ℕ) :
+    (adicCharacteristicPolynomialCoefficientFamily ideal derivative monodromy
+      commutes degree).value level =
+      ((horizontalEndomorphism derivative monodromy commutes).charpoly.map
+        ((Ideal.Quotient.mk (ideal ^ level)).comp (algebraMap k B))).coeff degree := by
+  simp [adicCharacteristicPolynomialCoefficientFamily, Polynomial.coeff_map]
+
+/-- Each compatible adic coefficient family is the family represented by the
+corresponding coefficient of the original horizontal characteristic polynomial,
+mapped first into the base coefficient algebra. -/
+theorem adicCharacteristicPolynomialCoefficientFamily_eq_ofRingElement
+    {B : Type*} [CommRing B] [Algebra k B]
+    (ideal : Ideal B)
+    (derivative monodromy : V →ₗ[k] V)
+    (commutes : derivative.comp monodromy = monodromy.comp derivative)
+    (degree : ℕ) :
+    adicCharacteristicPolynomialCoefficientFamily ideal derivative monodromy
+        commutes degree =
+      (adicFiltration ideal).ofRingElement
+        (algebraMap k B
+          ((horizontalEndomorphism derivative monodromy commutes).charpoly.coeff degree)) := by
+  rfl
 
 end HorizontalMonodromyCoefficientTower
 

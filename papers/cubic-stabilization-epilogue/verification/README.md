@@ -111,7 +111,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   explicit compatible inverse system of these horizontal characteristic
   polynomials.  Lean also constructs the tower from the actual adic quotients
   `B/I^n` of a supplied coefficient algebra and ideal and proves compatibility
-  under the canonical reductions.  Identification of `B` and `I` with the
+  under the canonical reductions.  Each fixed polynomial coefficient is
+  packaged as the compatible quotient family represented by its corresponding
+  base-ring coefficient.  Identification of `B` and `I` with the
   manuscript's coefficient data, completeness, separatedness, the formal
   differential module, Levelt--Turrittin solution algebra, fundamental
   solution, analytic monodromy construction, and inverse-limit differential

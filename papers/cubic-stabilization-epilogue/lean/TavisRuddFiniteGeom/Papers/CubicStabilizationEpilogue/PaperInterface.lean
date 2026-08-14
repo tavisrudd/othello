@@ -2315,8 +2315,10 @@ characteristic polynomials compatibly.  Let `B` be a commutative algebra over
 the ground field and `I` an ideal.  Lean constructs level `n` as `B/I^n`, uses
 the canonical quotient reduction from level `n+1` to level `n`, identifies
 every level polynomial with the coefficientwise image of the original
-horizontal characteristic polynomial, and proves adjacent compatibility.  The
-algebra, ideal, derivative, and commuting monodromy are supplied; no
+horizontal characteristic polynomial, proves adjacent compatibility, and
+packages each fixed polynomial coefficient as the compatible quotient family
+represented by its corresponding base-ring coefficient.  The algebra, ideal,
+derivative, and commuting monodromy are supplied; no
 completeness, separatedness, formal differential module, inverse-limit
 differential module, or analytic monodromy construction is asserted. -/
 theorem horizontalMonodromy_adicCharacteristicPolynomialTower
@@ -2336,9 +2338,28 @@ theorem horizontalMonodromy_adicCharacteristicPolynomialTower
       Polynomial.map ((Quantum.adicFiltration ideal).reduction level)
           (tower.characteristicPolynomialSystem.characteristicPolynomial
             (level + 1)) =
-        tower.characteristicPolynomialSystem.characteristicPolynomial level) :=
-  Quantum.HorizontalMonodromyCoefficientTower.ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
-    ideal derivative monodromy commutes
+        tower.characteristicPolynomialSystem.characteristicPolynomial level) ∧
+    (∀ degree,
+      Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily
+          ideal derivative monodromy commutes degree =
+        (Quantum.adicFiltration ideal).ofRingElement
+          (algebraMap k B
+            ((Quantum.horizontalEndomorphism derivative monodromy commutes).charpoly.coeff
+              degree)) ∧
+      (∀ level,
+        (Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily
+            ideal derivative monodromy commutes degree).value level =
+          ((Quantum.horizontalEndomorphism derivative monodromy commutes).charpoly.map
+            ((Ideal.Quotient.mk (ideal ^ level)).comp (algebraMap k B))).coeff degree)) := by
+  have adicSystem :=
+    Quantum.HorizontalMonodromyCoefficientTower.ofAdicIdeal_characteristicPolynomialSystem_level_and_compatible
+      ideal derivative monodromy commutes
+  refine ⟨adicSystem.1, adicSystem.2, ?_⟩
+  intro degree
+  exact ⟨Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily_eq_ofRingElement
+        ideal derivative monodromy commutes degree,
+    Quantum.HorizontalMonodromyCoefficientTower.adicCharacteristicPolynomialCoefficientFamily_value
+      ideal derivative monodromy commutes degree⟩
 
 /-- Bounded-degree finiteness makes the homological fiber over each numerical
 class a finite set, with no extra cutoff condition in its membership theorem.
