@@ -547,6 +547,11 @@ are current, and the committed paper export verifies byte-for-byte in
   polarization with a descended graph divisor via
   \(f_b^*\Theta_b=\lambda_{\mathcal A_b}\), rather than leaving both bridges
   implicit.
+  The graph-lattice proof now also gives the missing splitting mechanism:
+  completeness lifts the primitive idempotents of the finite-etale quotient,
+  polynomial dependence on the self-adjoint slope makes their images
+  orthogonal, and scalarity modulo the relevant depth gives the displayed
+  block form.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The

@@ -366,6 +366,10 @@ The ensuing local-to-global step now works in the explicit finitely generated
 quotient \(H^{2k}(J_b,\mathbf Z)/P_{J_b}^k\), and the minimal-class conclusion
 explicitly uses \(f_b^*\Theta_b=\lambda_{\mathcal A_b}\) to place the principal
 polarization in the descended graph-divisor lattice.
+The marked graph theorem now records why its split blocks exist: Henselian
+idempotent lifting in the complete DVR, followed by self-adjointness of the
+polynomial spectral projectors, gives the orthogonal decomposition and the
+claimed scalar-modulo-depth form.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that
