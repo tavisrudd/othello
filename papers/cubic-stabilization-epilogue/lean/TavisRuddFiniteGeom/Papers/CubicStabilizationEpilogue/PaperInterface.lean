@@ -1738,7 +1738,9 @@ the dihedral group `D5`.  It also constructs the faithful natural
 inversion come from explicit determinant-one matrices, computes
 `|PSL₂(F5)|=60`, and constructs an explicit isomorphism `PSL₂(F5) ≃ A5`
 intertwining that projective action with conjugation on the six Sylow-five
-subgroups.  The resulting six-label equivalence intertwines both
+subgroups.  Each stabilizer in the natural projective action is proved to
+have order ten and is explicitly equivalent to `D5`.  The resulting
+six-label equivalence intertwines both
 displayed generators with conjugation, and each point stabilizer is its
 normalizer.  This is the concrete group-theoretic six-label packet, but the
 terminal does not identify it with the manuscript's six
@@ -1837,6 +1839,13 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
       GraphLattices.alternatingFiveSixPointAction
           (GraphLattices.psl2F5EquivAlternatingFive transformation) =
         GraphLattices.psl2F5SixPointAction transformation) ∧
+    (∀ label : Fin 6,
+      Nat.card (GraphLattices.psl2F5SixPointStabilizer label) = 10 ∧
+      Nonempty (DihedralGroup 5 ≃*
+        GraphLattices.psl2F5SixPointStabilizer label) ∧
+      ∀ transformation : PSL(2, GraphLattices.F5),
+        transformation ∈ GraphLattices.psl2F5SixPointStabilizer label ↔
+          GraphLattices.psl2F5SixPointAction transformation label = label) ∧
     GraphLattices.sixPointHeartCommutantRoot ^ 2 +
         GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
     (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
@@ -1874,6 +1883,10 @@ theorem principalGluing_sixPointCoefficientHeart_quadraticCommutant :
     GraphLattices.psl2F5SixPointAction_translation,
     GraphLattices.psl2F5SixPointAction_inversion,
     GraphLattices.psl2F5EquivAlternatingFive_action,
+    fun label => ⟨GraphLattices.psl2F5SixPointStabilizer_card label,
+      ⟨GraphLattices.psl2F5SixPointStabilizerEquivDihedral label⟩,
+      fun transformation =>
+        GraphLattices.mem_psl2F5SixPointStabilizer_iff transformation label⟩,
     GraphLattices.sixPointHeartCommutantRoot_quadratic,
     GraphLattices.sixPointHeart_commonCommutant_classification⟩
 

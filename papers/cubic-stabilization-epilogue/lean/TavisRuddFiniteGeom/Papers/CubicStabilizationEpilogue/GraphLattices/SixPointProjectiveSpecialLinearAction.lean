@@ -442,6 +442,97 @@ theorem psl2F5EquivAlternatingFive_action (transformation : PSL(2, F5)) :
           commonRangeElement) = psl2F5SixPointAction transformation
   exact inverseEquality.trans commonEquality
 
+/-- The stabilizer of one label under the natural `PSL₂(F5)` permutation
+action. -/
+def psl2F5SixPointStabilizer (label : Fin 6) : Subgroup PSL(2, F5) :=
+  (MulAction.stabilizer (Equiv.Perm (Fin 6)) label).comap
+    psl2F5SixPointAction
+
+/-- Membership in the projective-linear point stabilizer is literal point
+fixing. -/
+theorem mem_psl2F5SixPointStabilizer_iff
+    (transformation : PSL(2, F5)) (label : Fin 6) :
+    transformation ∈ psl2F5SixPointStabilizer label ↔
+      psl2F5SixPointAction transformation label = label :=
+  Iff.rfl
+
+/-- The stabilizer of one label under the transported alternating-group
+action. -/
+def alternatingFiveSixPointStabilizer (label : Fin 6) :
+    Subgroup (alternatingGroup (Fin 5)) :=
+  (MulAction.stabilizer (Equiv.Perm (Fin 6)) label).comap
+    alternatingFiveSixPointAction
+
+/-- Membership in the alternating-group point stabilizer is literal point
+fixing. -/
+theorem mem_alternatingFiveSixPointStabilizer_iff
+    (transformation : alternatingGroup (Fin 5)) (label : Fin 6) :
+    transformation ∈ alternatingFiveSixPointStabilizer label ↔
+      alternatingFiveSixPointAction transformation label = label :=
+  Iff.rfl
+
+/-- Under the Sylow-five labelling, the alternating-group point stabilizer is
+exactly the normalizer of the corresponding order-five subgroup. -/
+theorem alternatingFiveSixPointStabilizer_eq_normalizer (label : Fin 6) :
+    alternatingFiveSixPointStabilizer label =
+      Subgroup.normalizer
+        (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5))) := by
+  rw [← sixPointFiveSylow_stabilizer_eq_normalizer]
+  ext transformation
+  rw [mem_alternatingFiveSixPointStabilizer_iff]
+  change alternatingFiveSixPointAction transformation label = label ↔
+    transformation • sixPointFiveSylowEquiv label =
+      sixPointFiveSylowEquiv label
+  rw [alternatingFiveSixPointAction_apply]
+  constructor
+  · intro equality
+    have transported := congrArg sixPointFiveSylowEquiv equality
+    simpa using transported
+  · intro equality
+    have transported := congrArg sixPointFiveSylowEquiv.symm equality
+    simpa using transported
+
+/-- The exceptional isomorphism restricts to an isomorphism of corresponding
+six-point stabilizers. -/
+def psl2F5SixPointStabilizerEquivAlternatingFiveSixPointStabilizer
+    (label : Fin 6) :
+    psl2F5SixPointStabilizer label ≃*
+      alternatingFiveSixPointStabilizer label where
+  toFun transformation := ⟨psl2F5EquivAlternatingFive transformation.1, by
+    rw [mem_alternatingFiveSixPointStabilizer_iff,
+      psl2F5EquivAlternatingFive_action]
+    exact (mem_psl2F5SixPointStabilizer_iff _ _).mp transformation.2⟩
+  invFun transformation := ⟨psl2F5EquivAlternatingFive.symm transformation.1, by
+    rw [mem_psl2F5SixPointStabilizer_iff,
+      ← psl2F5EquivAlternatingFive_action]
+    simpa using
+      (mem_alternatingFiveSixPointStabilizer_iff _ _).mp transformation.2⟩
+  left_inv transformation := Subtype.ext (by simp)
+  right_inv transformation := Subtype.ext (by simp)
+  map_mul' _ _ := Subtype.ext (by simp)
+
+/-- The natural projective-linear stabilizer is the same abstract dihedral
+group as the corresponding Sylow-five normalizer. -/
+noncomputable def psl2F5SixPointStabilizerEquivDihedral (label : Fin 6) :
+    DihedralGroup 5 ≃* psl2F5SixPointStabilizer label :=
+  sixPointFiveNormalizerMulEquivDihedral label |>.trans
+    ((by
+      rw [alternatingFiveSixPointStabilizer_eq_normalizer] :
+      alternatingFiveSixPointStabilizer label ≃*
+        Subgroup.normalizer
+          (sixPointFiveSubgroup label : Set (alternatingGroup (Fin 5)))).symm) |>.trans
+    (psl2F5SixPointStabilizerEquivAlternatingFiveSixPointStabilizer label).symm
+
+/-- Every point stabilizer in the natural six-point `PSL₂(F5)` action has
+order ten. -/
+theorem psl2F5SixPointStabilizer_card (label : Fin 6) :
+    Nat.card (psl2F5SixPointStabilizer label) = 10 := by
+  rw [Nat.card_congr
+    (psl2F5SixPointStabilizerEquivAlternatingFiveSixPointStabilizer
+      label).toEquiv]
+  rw [alternatingFiveSixPointStabilizer_eq_normalizer]
+  exact sixPointFiveSubgroup_normalizer_card label
+
 end
 
 end GraphLattices

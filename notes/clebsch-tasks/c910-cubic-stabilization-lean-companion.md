@@ -239,7 +239,9 @@ six-point action.  The resulting Sylow-five packet is explicitly equivalent to
 `D5`.  The faithful natural `PSL₂(F5)` action on this projective line is now
 constructed, has proved order `60`, realizes the displayed generators by
 determinant-one matrices, and is identified with the same concrete `A5` by an
-isomorphism intertwining the full six-point actions.  Identifying this concrete
+isomorphism intertwining the full six-point actions.  Each natural projective
+point stabilizer has order ten and is explicitly equivalent to `D5`.
+Identifying this concrete
 packet with the manuscript's geometric `D5`
 subgroups and axes remains open.  The explicit
 characteristic-two companion model now has a constructed

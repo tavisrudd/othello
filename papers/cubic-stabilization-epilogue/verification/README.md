@@ -51,7 +51,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   that Sylow-five packet.  Lean also constructs the faithful natural
   `PSL₂(F5)` action, proves its order is `60`, realizes the two displayed
   generators by determinant-one matrices, and constructs an action-compatible
-  isomorphism `PSL₂(F5) ≃ A5`.  Identification of those concrete subgroups,
+  isomorphism `PSL₂(F5) ≃ A5`; each natural projective point stabilizer has
+  order ten and is explicitly equivalent to `D5`.  Identification of those concrete subgroups,
   action, normalizers, and heart with the geometric ones remains open
   (`prop:principal-gluing-packet`).
 - Identify the explicitly constructed quadratic finite-etale splitting field
