@@ -4,7 +4,7 @@
 
 ## Read the paper
 
-[**Open the paper (PDF) →**](cubic_stabilization_epilogue.pdf)
+[**Open the paper (PDF) →**](irrationality_after_one_stabilization.pdf)
 
 **Title:** *Irrationality after one stabilization of universally
 CH₀-trivial cubic threefolds.*

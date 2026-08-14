@@ -6,6 +6,7 @@ LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3
 SOURCE := cubic_stabilization_epilogue.tex
+JOBNAME := irrationality_after_one_stabilization
 
 .PHONY: all check lint formal-static formal-audit manuscript warnings clean distclean
 
@@ -25,15 +26,15 @@ formal-audit:
 
 manuscript: $(SOURCE) sections/*.tex
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
-	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
+	$(LATEXMK) $(LATEXMK_FLAGS) -jobname=$(JOBNAME) $(SOURCE)
 
 warnings: manuscript
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' cubic_stabilization_epilogue.log; then \
+	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' $(JOBNAME).log; then \
 		exit 1; \
 	fi
 
 clean:
-	$(LATEXMK) -c $(SOURCE)
+	$(LATEXMK) -c -jobname=$(JOBNAME) $(SOURCE)
 
 distclean:
-	$(LATEXMK) -C $(SOURCE)
+	$(LATEXMK) -C -jobname=$(JOBNAME) $(SOURCE)

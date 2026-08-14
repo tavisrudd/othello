@@ -114,7 +114,7 @@ complex as separate victories.
   on the same stabilized varieties. The framed-monodromy multiplicity used in
   the proof is birationally invariant through dimension four; it also proves
   one-step irrationality for every smooth prime Fano threefold of genus eight.
-  [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf).
+  [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
 
 - **Point-class rank admits exact local transport and a conditional global
   cubic criterion.** A common-open point has exact ambient coordinate in the
@@ -197,7 +197,7 @@ boundary, and reproducible entry points.
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
-| *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | Exact local point-row transport, global support collapse and coefficientwise Gamma reduction, with cubic stabilization conditional on one named continuation hypothesis. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -476,7 +476,7 @@ birational theorem.
 
 #### Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds
 
-[PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/cubic_stabilization_epilogue.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue)
+[PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue)
 
 **Standout results.** Every smooth complex cubic threefold remains irrational
 after multiplication by a projective line.  On an explicit non-isotrivial
