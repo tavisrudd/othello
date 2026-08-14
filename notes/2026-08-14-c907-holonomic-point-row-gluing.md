@@ -272,6 +272,64 @@ induction over bubble-tree edges; the induction step is the normalization
 exact triangle for the moving index together with the standard gluing
 formula for the fixed virtual class.
 
+### Regression calculation
+
+Take
+
+\[
+ W=\mathbf P_B(\mathcal O\oplus L_+\oplus L_-),\qquad
+ B=\mathbf P^1,                                                \tag{8}
+\]
+
+with `G_m`-weights `0,+1,-1` on the three summands.  The central fixed
+section is `B`, with moving normal bundle `L_+ direct-sum L_-` carrying the
+two opposite characters.  Fix a degree-`d` bubble in the central section and
+one attaching node.  Its coefficient stack is a stable-map stack
+
+\[
+ \overline M_{0,n+1}(B,d),                                    \tag{9}
+\]
+
+with fixed obstruction complex `R pi_* f^*T B`; none of these data depends
+on the principal bundle degree `k`.
+
+Twisting the principal bundle by `O(k)` changes the moving normal complex to
+a sum of the following two kinds of terms:
+
+\[
+ R\Gamma(\mathbf P^1,\mathcal O(k))\otimes L_+|_b,
+ \quad
+ R\Gamma(\mathbf P^1,\mathcal O(-k))\otimes L_-|_b,            \tag{10}
+\]
+
+on the principal component, and
+
+\[
+ R\pi_*f^*L_+\otimes\chi^k,
+ \quad
+ R\pi_*f^*L_-\otimes\chi^{-k}                                \tag{11}
+\]
+
+on the fixed bubble.  After the splitting principle, every root of (11) is
+`alpha_j+(k+c_j)zeta` or `beta_j+(-k+c'_j)zeta`; the ranks and roots are
+classes on (9) independent of `k`.  Equations (10)--(11) therefore have one
+rational Gamma recurrence.  Their signed slopes cancel.  The node-smoothing
+and attaching-point terms are `(-zeta)(-zeta-psi)` and contain no `k`.
+Stable-map automorphisms are those of (9), also independent of `k`.
+
+A mode becomes rotation-fixed only when one of finitely many affine weights
+in (10)--(11) is zero.  These are finitely many threshold integers (and,
+with finite stabilizers, finitely many congruence thresholds).  Removing
+them leaves finitely many stable tails with constant fixed POT; the threshold
+terms themselves are a Laurent polynomial.  Thus all four falsifier checks
+pass in this first nonlinear model.
+
+This calculation is not yet the general tail theorem: for an arbitrary
+fixed component one must perform the same fixed/moving separation in the
+normalization triangle simultaneously for every character root and every
+bubble-tree edge.  It shows, however, that a genuine nonlinear bubble does
+not create the residue-exhaustion pathology which killed the earlier proof.
+
 ## Sources
 
 - Gonzalez--Woodward, arXiv:1208.1727v7, Lemma 4.5, equations (40)--(47),
