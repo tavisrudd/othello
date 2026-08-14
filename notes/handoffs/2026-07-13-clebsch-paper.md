@@ -378,6 +378,11 @@ following proof of Theorem 11(D): the elliptic fibration is the quotient by a
 four-dimensional abelian subvariety.  Its connected kernel makes the Rosati
 dual primitive and identifies its image with the norm elliptic axis, closing
 the scale bridge between the fibre intersections and the relative maps.
+The two-primary symplectic identification now states its normalized
+coefficient pairing explicitly:
+\(\frac12x^{\mathsf t}(6I_6-J_6)y=\bar x\cdot\bar y\pmod2\) on augmentation
+lifts.  This is the nondegenerate heart form tensoring with the Weil pairing,
+not the zero restriction of the Gram form modulo two.
 Voisin's Corollary~4.4 has been checked at full statement: for a smooth cubic
 threefold it is exactly the equivalence between universal \(CH_0\)-triviality
 and algebraicity of \(\theta^4/4!\).  Since the six-axis theorem places that

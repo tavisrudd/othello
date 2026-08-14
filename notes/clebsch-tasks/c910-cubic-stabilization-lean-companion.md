@@ -565,6 +565,13 @@ are current, and the committed paper export verifies byte-for-byte in
   intersections compute the actual relative maps.  The checked source is
   arXiv:1002.4467, cache SHA-256
   `c66706bfa8977656043a8c068d9f2cabc7e72dc0f53eac3fab680ac82172c7bd`.
+  The manuscript now also identifies the actual two-primary discriminant
+  pairing, rather than silently restricting a form that vanishes modulo two:
+  on augmentation lifts it is
+  \(\frac12x^{\mathsf t}(6I_6-J_6)y=\bar x\cdot\bar y\pmod2\).
+  Its well-definedness, alternation, and nondegeneracy explain precisely why
+  the commutator pairing is the tensor product of the formalized coefficient
+  form with the Weil pairing.
 - **Universal \(CH_0\) bridge:** source-checked.  Voisin's Corollary 4.4 states
   exactly that a smooth cubic threefold is universally \(CH_0\)-trivial if and
   only if \(\theta^4/4!\) is algebraic on its intermediate Jacobian.  The
