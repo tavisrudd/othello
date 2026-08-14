@@ -182,7 +182,8 @@ of the six-coordinate module by its constant line with the augmentation
 module.  Identifying these coordinate results with the geometric
 endomorphisms, elliptic axes, and primitive inclusions remains open.  Integrally,
 Lean identifies `ℤ⁶/ℤ1` with five coordinates and proves that the descended
-six-coordinate form has matrix `6I₅-J₅` in that chart; no geometric
+six-coordinate form has matrix `6I₅-J₅` in that chart and is invariant under
+the induced full permutation action; no geometric
 polarization is inferred.
 Low-dimensional primitive-sixth vanishing is now an exact conditional
 deduction: Lean performs the induction through nef seeds, the point,

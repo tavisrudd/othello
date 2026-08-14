@@ -448,7 +448,8 @@ The 166 reviewer-facing terminals currently verify:
   equivalence, and intertwines the concrete alternating-group actions;
   integrally, subtracting the sixth coordinate identifies `ℤ⁶/ℤ1` with
   `ℤ⁵`, the symmetric `6I₆-J₆` form descends through the constant line,
-  and its matrix in this quotient chart is exactly `6I₅-J₅`;
+  its matrix in this quotient chart is exactly `6I₅-J₅`, and the induced
+  full permutation action preserves the descended form;
 - the conditional cubic packet formula: from Cai's supplied four-block
   characteristic polynomial, the two primitive-sixth roots have multiplicity
   one each and the unit blocks contribute zero, giving multiplicity two.

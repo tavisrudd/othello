@@ -238,6 +238,125 @@ theorem sixPointIntegralDescendedPairing_mk
       sixPointIntegralQuotientPairing left right :=
   rfl
 
+/-- A permutation of the six labels acts linearly on integral coordinate
+families by inverse precomposition. -/
+def sixPointIntegralPermutationLinear
+    (permutation : Equiv.Perm (Fin 6)) :
+    (Fin 6 → ℤ) →ₗ[ℤ] (Fin 6 → ℤ) where
+  toFun vector := fun index ↦ vector (permutation⁻¹ index)
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- Every coordinate permutation preserves the constant line. -/
+theorem sixPointIntegralPermutationLinear_constantLine
+    (permutation : Equiv.Perm (Fin 6)) :
+    ∀ vector ∈ sixPointIntegralConstantLine,
+      sixPointIntegralPermutationLinear permutation vector ∈
+        sixPointIntegralConstantLine := by
+  intro vector member
+  rw [sixPointIntegralConstantLine, Submodule.mem_span_singleton] at member ⊢
+  obtain ⟨scalar, rfl⟩ := member
+  refine ⟨scalar, ?_⟩
+  funext index
+  simp [sixPointIntegralPermutationLinear]
+
+/-- Permute an integral representative and then take its quotient class. -/
+def sixPointIntegralPermutationToQuotient
+    (permutation : Equiv.Perm (Fin 6)) :
+    (Fin 6 → ℤ) →ₗ[ℤ] SixPointIntegralCoefficientQuotient where
+  toFun vector := Submodule.Quotient.mk
+    (sixPointIntegralPermutationLinear permutation vector)
+  map_add' left right := by rfl
+  map_smul' scalar vector := by rfl
+
+/-- The linear map induced by a permutation on the integral quotient. -/
+def sixPointIntegralQuotientPermutation
+    (permutation : Equiv.Perm (Fin 6)) :
+    SixPointIntegralCoefficientQuotient →ₗ[ℤ]
+      SixPointIntegralCoefficientQuotient :=
+  sixPointIntegralConstantLine.liftQ
+    (sixPointIntegralPermutationToQuotient permutation) (by
+        intro vector member
+        rw [LinearMap.mem_ker]
+        change Submodule.Quotient.mk
+          (sixPointIntegralPermutationLinear permutation vector) = 0
+        rw [Submodule.Quotient.mk_eq_zero]
+        exact sixPointIntegralPermutationLinear_constantLine
+          permutation vector member)
+
+/-- The quotient permutation map acts on a representative by permuting that
+representative. -/
+@[simp]
+theorem sixPointIntegralQuotientPermutation_mk
+    (permutation : Equiv.Perm (Fin 6)) (vector : Fin 6 → ℤ) :
+    sixPointIntegralQuotientPermutation permutation
+        (Submodule.Quotient.mk vector) =
+      Submodule.Quotient.mk
+        (sixPointIntegralPermutationLinear permutation vector) :=
+  rfl
+
+/-- The identity permutation induces the identity map on the quotient. -/
+theorem sixPointIntegralQuotientPermutation_one
+    (vector : SixPointIntegralCoefficientQuotient) :
+    sixPointIntegralQuotientPermutation 1 vector = vector := by
+  refine Submodule.Quotient.induction_on sixPointIntegralConstantLine vector ?_
+  intro representative
+  rfl
+
+/-- Products of permutations act by composition on the quotient. -/
+theorem sixPointIntegralQuotientPermutation_mul
+    (left right : Equiv.Perm (Fin 6))
+    (vector : SixPointIntegralCoefficientQuotient) :
+    sixPointIntegralQuotientPermutation (left * right) vector =
+      sixPointIntegralQuotientPermutation left
+        (sixPointIntegralQuotientPermutation right vector) := by
+  refine Submodule.Quotient.induction_on sixPointIntegralConstantLine vector ?_
+  intro representative
+  change Submodule.Quotient.mk
+      (sixPointIntegralPermutationLinear (left * right) representative) =
+    Submodule.Quotient.mk
+      (sixPointIntegralPermutationLinear left
+        (sixPointIntegralPermutationLinear right representative))
+  congr 1
+
+/-- The six-coordinate form is invariant under every permutation of the six
+labels. -/
+theorem sixPointIntegralQuotientPairing_permutation
+    (permutation : Equiv.Perm (Fin 6)) (left right : Fin 6 → ℤ) :
+    sixPointIntegralQuotientPairing
+        (sixPointIntegralPermutationLinear permutation left)
+        (sixPointIntegralPermutationLinear permutation right) =
+      sixPointIntegralQuotientPairing left right := by
+  change sixPointIntegralQuotientPairing
+      (fun index ↦ left (permutation⁻¹ index))
+      (fun index ↦ right (permutation⁻¹ index)) =
+    sixPointIntegralQuotientPairing left right
+  unfold sixPointIntegralQuotientPairing
+  rw [Fintype.sum_equiv permutation⁻¹
+      (fun index ↦ left (permutation⁻¹ index) *
+        right (permutation⁻¹ index))
+      (fun index ↦ left index * right index) (fun _ ↦ rfl),
+    Fintype.sum_equiv permutation⁻¹
+      (fun index ↦ left (permutation⁻¹ index)) left (fun _ ↦ rfl),
+    Fintype.sum_equiv permutation⁻¹
+      (fun index ↦ right (permutation⁻¹ index)) right (fun _ ↦ rfl)]
+
+/-- The descended integral form is invariant under every induced quotient
+permutation. -/
+theorem sixPointIntegralDescendedPairing_permutation
+    (permutation : Equiv.Perm (Fin 6))
+    (left right : SixPointIntegralCoefficientQuotient) :
+    sixPointIntegralDescendedPairing
+        (sixPointIntegralQuotientPermutation permutation left)
+        (sixPointIntegralQuotientPermutation permutation right) =
+      sixPointIntegralDescendedPairing left right := by
+  refine Submodule.Quotient.induction_on sixPointIntegralConstantLine left ?_
+  intro leftRepresentative
+  refine Submodule.Quotient.induction_on sixPointIntegralConstantLine right ?_
+  intro rightRepresentative
+  exact sixPointIntegralQuotientPairing_permutation permutation
+    leftRepresentative rightRepresentative
+
 /-- The representative with prescribed first five coordinates and sixth
 coordinate zero. -/
 def sixPointIntegralRepresentativeFromFive :

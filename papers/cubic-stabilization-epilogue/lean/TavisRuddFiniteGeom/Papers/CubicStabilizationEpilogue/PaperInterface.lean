@@ -265,7 +265,9 @@ Subtracting the sixth coordinate identifies the quotient of `ℤ⁶` by its
 constant line with `ℤ⁵`.  The symmetric six-coordinate form
 `6Σ xᵢyᵢ-(Σ xᵢ)(Σ yᵢ)` annihilates the constant line in both
 variables and descends to the quotient; in the displayed five-coordinate
-chart its Gram matrix is exactly `6I₅-J₅`.  This does not identify the
+chart its Gram matrix is exactly `6I₅-J₅`.  Every permutation of the six
+labels induces a quotient map satisfying the identity and multiplication laws,
+and these maps preserve the descended form.  This does not identify the
 quotient with an elliptic-power abelian scheme or the descended form with a
 geometric polarization. -/
 theorem relativeSixAxis_integralCoefficientQuotient_and_form :
@@ -283,11 +285,28 @@ theorem relativeSixAxis_integralCoefficientQuotient_and_form :
       GraphLattices.sixPointIntegralDescendedPairing
           (GraphLattices.sixPointIntegralClassFromFive left)
           (GraphLattices.sixPointIntegralClassFromFive right) =
-        dotProduct left (Matrix.mulVec (GraphLattices.sixAxisGram ℤ) right) :=
+        dotProduct left (Matrix.mulVec (GraphLattices.sixAxisGram ℤ) right) ∧
+    (∀ vector : GraphLattices.SixPointIntegralCoefficientQuotient,
+      GraphLattices.sixPointIntegralQuotientPermutation 1 vector = vector) ∧
+    (∀ (left right : Equiv.Perm (Fin 6))
+      (vector : GraphLattices.SixPointIntegralCoefficientQuotient),
+      GraphLattices.sixPointIntegralQuotientPermutation (left * right) vector =
+        GraphLattices.sixPointIntegralQuotientPermutation left
+          (GraphLattices.sixPointIntegralQuotientPermutation right vector)) ∧
+    ∀ (permutation : Equiv.Perm (Fin 6))
+      (left right : GraphLattices.SixPointIntegralCoefficientQuotient),
+      GraphLattices.sixPointIntegralDescendedPairing
+          (GraphLattices.sixPointIntegralQuotientPermutation permutation left)
+          (GraphLattices.sixPointIntegralQuotientPermutation permutation right) =
+        GraphLattices.sixPointIntegralDescendedPairing left right :=
   ⟨⟨GraphLattices.sixPointIntegralCoefficientQuotientEquivFive⟩,
     GraphLattices.sixPointIntegralCoefficientQuotientEquivFive_mk,
     GraphLattices.sixPointIntegralDescendedPairing_mk,
-    GraphLattices.sixPointIntegralDescendedPairing_classFromFive⟩
+    fun left right ↦ ⟨
+      GraphLattices.sixPointIntegralDescendedPairing_classFromFive left right,
+      GraphLattices.sixPointIntegralQuotientPermutation_one,
+      GraphLattices.sixPointIntegralQuotientPermutation_mul,
+      GraphLattices.sixPointIntegralDescendedPairing_permutation⟩⟩
 
 /-- Exact conditional bridge from a supplied geometric kernel fibre to the
 explicit five-member packet.  The input supplies coordinates on each

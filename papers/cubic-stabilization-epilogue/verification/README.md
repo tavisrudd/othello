@@ -110,7 +110,8 @@ objects, hypotheses, conclusions, and cautions recorded in
   six-coordinate module by the constant line with the augmentation module.
   Integrally, subtracting the sixth coordinate identifies `ℤ⁶/ℤ1` with
   `ℤ⁵`; the symmetric `6I₆-J₆` form descends through the constant line and
-  has matrix `6I₅-J₅` in this chart.
+  has matrix `6I₅-J₅` in this chart.  The induced maps of all six-label
+  permutations satisfy the action laws and preserve the descended form.
   These coordinate results are not identified with endomorphisms, elliptic
   axes, or primitive inclusions of an abelian scheme; the
   torsion local system, symplectic pairing, relative isogeny, and geometric
