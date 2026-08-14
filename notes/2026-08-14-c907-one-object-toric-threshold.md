@@ -52,16 +52,18 @@ test of the remaining hypothesis must be a neutral threshold not already
 covered by that theorem, or a zero-mode threshold.
 
 Coates--Iritani--Jiang supply exactly such a neutral calibration in the
-linear toric category.  Their Theorem 6.3 constructs one global quantum
-connection across a crepant toric wall and a continuation gauge that
-intertwines the quantum and grading connections, preserves the Poincare
-pairing, and carries Gamma-framed flat sections by Fourier--Mukai.  A
-skyscraper at a common-open point is unchanged by the graph
-Fourier--Mukai transform.  Therefore its Gamma point row is carried exactly.
+linear toric category.  Their Theorems 6.1 and 6.3 construct the two chamber
+quantum connections and a continuation gauge between them that intertwines the
+quantum and grading connections, preserves the Poincare pairing, and carries
+Gamma-framed flat sections by Fourier--Mukai.  Gluing along the gauge gives a
+local one-object calibration.  A
+skyscraper at a common-open point is unchanged by the graph Fourier--Mukai
+transform after non-equivariant specialization.  Pairing preservation then
+carries its Gamma point row exactly.
 Together with Woodward's identification of the linear toric localized graph
-potential with the toric I-function, this is a genuine neutral, ordinary
-one-object model at the intrinsic QDM/I-function level in the common toric
-Fourier coordinates.  It does not test
+potential with the toric I-function, this is a genuine neutral calibration of
+the ordinary intrinsic marked-continuation mechanism at the QDM/I-function
+level in the common toric Fourier coordinates.  It does not test
 the zero-mode reduced-nearby-cycle clause or identify the thresholds of an
 arbitrary projective Wlodarczyk master.
 

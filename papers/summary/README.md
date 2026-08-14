@@ -24,7 +24,16 @@ derived intersection.  The remaining unproved input is a family over all
 finite Artin levels, ordinary degrees, neutral directions, and thresholds;
 at zero modes it assumes a strict isomorphism from the complete adjacent
 row-generated cyclic module to its reduced nearby-cycle realization. Primary
-support is then preserved by polynomial functional calculus.
+support is then preserved by polynomial functional calculus.  The ordinary
+non-zero-mode mechanism has a neutral linear-toric calibration: across a
+crepant toric wall, Coates--Iritani--Jiang construct the two chamber quantum
+connections and a continuation gauge carrying the common-open Gamma point row
+by Fourier--Mukai transport.  Gluing along that gauge gives a local one-object
+calibration, while Woodward's toric `I`-function formula identifies the
+corresponding gauged series.  This verifies the intrinsic marked-continuation
+part of the mechanism at the QDM/`I`-function level; it does not supply the
+inverse-system comparison for an arbitrary projective master or the reduced
+nearby-cycle assertion at a zero mode.
 
 The strongest unconditional statement is the first stabilization:
 *Irrationality after one stabilization* proves that
@@ -132,10 +141,14 @@ complex as separate victories.
   For a global cobordism, support collapse and coefficientwise Gamma-ratio
   reduction combine with a rank-one derived-intersection theorem. In addition
   to the stated gauged-admissibility conditions, the remaining unproved input
-  is one-object marked threshold compatibility for the cyclic Rees `z`-modules. Under
-  those assumptions, the point-row primary Boolean is
-  birationally invariant and distinguishes `X × P^m` from projective space
-  for every smooth cubic threefold `X` and every `m ≥ 0`.
+  is one-object marked threshold compatibility for the cyclic Rees `z`-modules.
+  A crepant toric wall supplies a genuine neutral linear-toric calibration of
+  the intrinsic marked-continuation mechanism at the QDM/`I`-function level,
+  but not the arbitrary-master inverse system or the zero-mode nearby-cycle
+  comparison.
+  Under those assumptions, the point-row primary Boolean is birationally
+  invariant and distinguishes `X × P^m` from projective space for every smooth
+  cubic threefold `X` and every `m ≥ 0`.
   [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Unconditionally, every smooth cubic threefold remains irrational after
