@@ -25,32 +25,130 @@ the numerical curve lattice
  \operatorname{Hom}(\operatorname{NS}(T)/\mathrm{tors},\mathbf Z)\right).
 \]
 Thus \(N_1(T)\) is torsion-free and is separated by integral divisors.  Let
-\(\mathcal K_T\) be an algebraic closure of its fraction field.  The loop coordinate
-\(z\) remains independent: in particular, \(\mathcal K_T\) contains no chosen root of
-\(z\).  Apply the Levelt--Turrittin construction to the small even quantum
-connection over \(\mathcal K_T((z))\).  Its formal monodromy is the action of one turn on
-the original \(z\)-disc.  Thus it includes both regular-singular monodromy and
-the deck permutation of ramified exponential factors.
+\(\mathcal K_T\) be an algebraic closure of its fraction field.  The loop
+coordinate \(z\) remains independent: in particular, \(\mathcal K_T\)
+contains no chosen root of \(z\).  We first isolate the cyclotomic part of
+formal monodromy without choosing values for the exponentials of arbitrary
+elements of \(\mathcal K_T\).
+
+Let \(K\supset\C\) be an algebraically closed field of characteristic zero.
+Choose a complement \(K=\C\oplus V\) of \(\mathbf Q\)-vector spaces, let
+\(K[V]\) be the group algebra of the additive group of \(V\), and let
+\(\Omega_V\) be an algebraic closure of its fraction field.  Thus
+\(K\subset\Omega_V\).  The map
+\[
+ \operatorname{Exp}_V(c+v)=e^{2\pi i c}[v]
+ \colon (K,+)\longrightarrow\Omega_V^\times
+ \tag{4.0}
+ \label{eq:universal-exponential}
+\]
+is a group homomorphism.  Since \(V\) is torsion-free, \(K[V]\) is a domain,
+and its distinct monomials are linearly independent.  Consequently
+\[
+ \ker(\operatorname{Exp}_V)=\mathbf Z,
+ \qquad
+ \operatorname{Exp}_V(a)\text{ is a root of unity}
+ \Longleftrightarrow a\in\mathbf Q.
+ \tag{4.0a}
+ \label{eq:universal-exponential-torsion}
+\]
+
+Apply Levelt--Turrittin after a ramification \(z=w^e\).  In the formal
+decomposition, write the residue on a regular-singular block as
+\(R=R_s+R_n\), with commuting semisimple and nilpotent parts.  In the
+universal formal solution algebra, define a full turn of \(w\) on that block
+by
+\[
+ M_{\mathrm{RS},V}
+ =\operatorname{Exp}_V(R_s)\exp(2\pi iR_n),
+\]
+where \(\operatorname{Exp}_V\) is applied to the eigenvalues of \(R_s\).
+The lift of one turn of the original \(z\)-disc acts on the formal symbols by
+\(w\mapsto e^{2\pi i/e}w\), and on the blocks by their descent
+intertwiners.  Its \(e\)-th power is \(M_{\mathrm{RS},V}\) on every returned
+regular-singular block.  An integral change of residue representative
+multiplies the formal solution by an integral power of \(w\), so it conjugates
+this lifted action rather than changing it.  Since the coefficient and
+descent matrices lie in \(K\subset\Omega_V\), this defines the framed
+operator \(M_{\mathrm f,V}\) over \(\Omega_V\).  Ramified exponential factors
+are thereby permuted rather than made single-valued by changing the frame.
+
+\paragraph{Choice independence.}
+For every root of unity \(\zeta\in\C\), its algebraic multiplicity as an
+eigenvalue of \(M_{\mathrm f,V}\) is independent of the complement \(V\), the
+Levelt--Turrittin ramification and decomposition, and the algebraic closure
+\(\Omega_V\).  It is also unchanged when the chosen algebraic closure of the
+original coefficient field is replaced by a common algebraically closed
+overfield.  When \(K=\C\), it is the usual multiplicity in the analytic
+formal monodromy on the original \(z\)-disc.
+Consider one orbit of Levelt--Turrittin blocks under a turn of the original
+disc, let \(d\) be its length, and write
+\(A_i:E_i\longrightarrow E_{i+1}\) for its successive deck/descent maps,
+with indices modulo \(d\).  Put
+\(U=A_{d-1}\cdots A_0\) on \(E_0\).  A cyclic-block determinant gives
+\[
+ \chi_{\bigoplus_iE_i}(X)=\det(X^dI-U).
+ \tag{4.0b}
+ \label{eq:deck-orbit-polynomial}
+\]
+Put \(r=e/d\).  Equivariance of the descent datum gives the intrinsic return
+relation
+\[
+ U^r=M_{\mathrm{RS},V}.
+ \tag{4.0c}
+ \label{eq:deck-return-power}
+\]
+Thus, if \(\mu\) is an eigenvalue of \(U\), then
+\(\mu^r=\operatorname{Exp}_V(\rho)\) for a residue exponent \(\rho\), with
+algebraic multiplicities read on the corresponding generalized eigenspaces.
+If a root of unity \(\zeta\) occurs in
+\eqref{eq:deck-orbit-polynomial}, then \(\mu=\zeta^d\) and
+\(\operatorname{Exp}_V(\rho)=\zeta^e\); hence \(\rho\in\mathbf Q\) by
+\eqref{eq:universal-exponential-torsion}.  Conversely, if \(\rho\) is
+rational, then \(\mu^r\) is torsion, so every corresponding \(\mu\), and
+hence every root of \(X^d-\mu\), is torsion.  On these rational residue
+classes \(\operatorname{Exp}_V\) is the usual complex exponential; the
+finite descent operator is the same intrinsic operator.  The exact roots of
+unity and their algebraic multiplicities are therefore those of the ordinary
+complex construction.  Nonrational residue classes contribute no root of
+unity.  This criterion does not depend on \(V\) and does not require a
+fractional residue factor to commute with the descent action.
+
+For completeness, compare two Levelt--Turrittin choices after pulling both to
+a common ramification \(z=u^E\).  Equivariant uniqueness of the formal
+decomposition identifies their total horizontal solution spaces and carries
+the original-\(z\)-turn deck/descent operator for one choice to the scalar
+extension of the other.  Thus the product of all orbit polynomials
+\eqref{eq:deck-orbit-polynomial}, rather than any individually labelled
+return map, is invariant under refinement and re-decomposition.  The same
+argument after a common algebraically closed coefficient extension preserves
+the intrinsic multiset of residue classes and finite descent characters.
+The relation \eqref{eq:deck-return-power} is itself invariant under integral
+changes of residue representative.  Hence the cyclotomic test above and its
+algebraic multiplicities depend only on the original framed module, not on
+the coefficient closure or complement.  Finally, for \(K=\C\) one has
+\(V=0\) and
+\(\operatorname{Exp}_V(a)=e^{2\pi i a}\), which gives the usual analytic
+formal monodromy.
 
 \begin{definition}
 \label{def:framed-sixth-multiplicity}
-Let \(M_{\rm f}(T)\) be this framed formal-monodromy operator, and put
+Apply the preceding construction to the small even quantum connection over
+\(\mathcal K_T((z))\), and put
 \[
  \nu_6(T)=
- \operatorname{mult}_{e^{\pi i/3}}M_{\rm f}(T)+
- \operatorname{mult}_{e^{-\pi i/3}}M_{\rm f}(T).
+ \operatorname{mult}_{e^{\pi i/3}}M_{\mathrm f,V}(T)+
+ \operatorname{mult}_{e^{-\pi i/3}}M_{\mathrm f,V}(T).
 \]
 The multiplicities are algebraic multiplicities in the characteristic
-polynomial.
+polynomial.  The choice-independence argument above makes their sum independent
+of all the auxiliary choices.
 \end{definition}
 
-The characteristic polynomial is unchanged by extending one algebraic
-closure of the numerical Novikov fraction field to a common overfield.
-Thus \(\nu_6(T)\) is independent of that choice.
-
-The frame matters.  Adjoining roots of Novikov monomials is harmless, but
-adjoining a root of \(z\) would replace the original loop and could erase the
-deck part of the operator.
+The frame matters.  Adjoining roots of Novikov monomials is an algebraic
+coefficient extension and is harmless by choice independence.  Adjoining a root of
+\(z\), by contrast, would replace the original loop and could erase the deck
+part of the operator.
 
 \begin{definition}[Pro-Laurent framed monodromy]
 \label{def:pro-laurent-monodromy}

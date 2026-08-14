@@ -65,13 +65,13 @@ exact bridge is formalized.
 - [x] Verify that the phrase "one turn" does not canonically define
   `exp(2 pi i a)` over an abstract algebraically closed coefficient field.
 - [x] Verdict: **genuine foundational defect; first priority**.
-- [ ] Choose and state a canonical cyclotomic formulation whose root-of-unity
+- [x] Choose and state a canonical cyclotomic formulation whose root-of-unity
   multiplicities do not depend on auxiliary exponential choices.
-- [ ] Prove equivalence with ordinary framed formal monodromy over `C`.
-- [ ] Prove invariance under algebraic coefficient extension and adjoining
+- [x] Prove equivalence with ordinary framed formal monodromy over `C`.
+- [x] Prove invariance under algebraic coefficient extension and adjoining
   numerical Novikov roots inside the fixed algebraic closure.
-- [ ] State separately how ramified `z`-extensions contribute deck factors.
-- [ ] Rewrite `nu_6` using the repaired definition.
+- [x] State separately how ramified `z`-extensions contribute deck factors.
+- [x] Rewrite `nu_6` using the repaired definition.
 - [ ] Audit every theorem and proof using `nu_6` for unchanged meaning.
 - [ ] Ask a differential-equations referee to cold-check the construction,
   choice independence, ramification convention, and primitive-root count.
@@ -186,19 +186,19 @@ exact bridge is formalized.
 
 ### WP1 — cyclotomic framed spectrum
 
-- [ ] Write a self-contained algebraic definition of the cyclotomic part of
+- [x] Write a self-contained algebraic definition of the cyclotomic part of
   framed formal monodromy after Levelt--Turrittin.
-- [ ] Specify the allowed exponential extension and prove that precisely the
+- [x] Specify the allowed exponential extension and prove that precisely the
   rational exponent classes map to roots of unity.
-- [ ] Show primitive-sixth multiplicity is independent of complement,
+- [x] Show primitive-sixth multiplicity is independent of complement,
   exponential splitting, ordering of LT blocks, and algebraic coefficient
   extension.
-- [ ] Treat ramified blocks and deck permutations explicitly.
-- [ ] Prove agreement with analytic monodromy over `C`.
+- [x] Treat ramified blocks and deck permutations explicitly.
+- [x] Prove agreement with analytic monodromy over `C`.
 - [ ] Replace the old Definition 4.1 and update Definition 4.2 and all uses.
 - [ ] Add a short reader-facing example, including the nonconstant rank-one
   exponent that invalidates the old wording.
-- [ ] Run a dedicated adversarial mathematical review before moving to WP2.
+- [x] Run a dedicated adversarial mathematical review before moving to WP2.
 
 ### WP2 — normalized-gauge finite levels
 
@@ -327,7 +327,9 @@ become manuscript edits.
 | C912-M03 | confirmed | The source comparison formulas are substantially present, while continuity for the paper's own completions is not proved. | WP3; C912 |
 | C912-M04 | confirmed | The nef vanishing proof is already self-contained in substance. | Wording/source audit only |
 | C912-M05 | confirmed | The referee's claimed torsion prerequisite for the final local-to-integral step is unnecessary in the finitely generated setting. | Preserve proof; optional clarification |
-| C912-M06 | open | Determine the cleanest choice-independent cyclotomic LT formulation and its ramified deck convention. | WP1; differential-equations review |
+| C912-M06 | resolved | The choice-independent formulation uses `K[V]`, the universal exponential with torsion preimage `Q`, and the intrinsic orbit relation `U^(e/d) = M_RS`; a focused adversarial review rejected three weaker drafts before accepting this form. | WP1; `C912-QF-001` and `C912-QF-002` closed |
+| C912-M07 | resolved | A universal exponential field built from `C[V]` does not contain the original coefficient field and cannot carry its LT matrices. | Replaced by `K[V]`; `C912-QF-001` |
+| C912-M08 | resolved | Factoring a ramified return as a scalar finite descent character times a fractional residue exponential fails in resonant multiplicity spaces. | Replaced by the intrinsic return-power argument; `C912-QF-002` |
 
 ## Close condition
 
