@@ -32,9 +32,9 @@ labelled theorem-like environments in the manuscript and classifies them as:
 - 1 completely formalized from the manuscript's stated hypotheses.
 
 Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
-1 complete; 145 reviewer terminals.
+1 complete; 146 reviewer terminals.
 
-The 145 reviewer-facing terminals currently verify:
+The 146 reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;
@@ -168,8 +168,10 @@ The 145 reviewer-facing terminals currently verify:
   identification with the manuscript's geometric coefficient quotients is
   not formalized;
 - finite-matrix definitions and deductions for primitive-sixth multiplicity,
-  coefficient extension, conjugacy, pro-Laurent inverse systems, formal base
-  shift, and block multiplicity formulas; for a constant matrix over a
+  coefficient extension, conjugacy, pro-Laurent inverse systems, and the actual
+  subgroup of compatible general-linear families over any fixed Laurent
+  coefficient tower, as well as formal base shift and block multiplicity
+  formulas; for a constant matrix over a
   commutative rational algebra, the normalized exponential coefficients are
   constructed, proved to satisfy the formal flat recursion in every degree,
   assembled into an entrywise formal power-series matrix satisfying the exact

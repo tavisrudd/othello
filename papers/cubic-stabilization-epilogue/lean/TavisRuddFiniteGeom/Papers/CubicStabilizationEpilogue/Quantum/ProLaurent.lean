@@ -1,4 +1,5 @@
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 import Mathlib.RingTheory.LaurentSeries
 
 /-!
@@ -38,6 +39,52 @@ structure ProLaurentGaugeSystem (Index : Type*) [Fintype Index]
     reduction level (gauge (level + 1) row column) = gauge level row column
   inverse_compatible : ∀ level row column,
     reduction level (inverse (level + 1) row column) = inverse level row column
+
+/-- For a fixed Laurent coefficient tower, the compatible levelwise general
+linear groups form an actual group under pointwise multiplication.  This is
+the group object underlying the manuscript's pro-Laurent gauge-group
+notation. -/
+def proLaurentGaugeGroup
+    (Index : Type*) [Fintype Index] [DecidableEq Index]
+    (Coefficient : ℕ → Type u) [∀ level, CommRing (Coefficient level)]
+    (reduction : ∀ level,
+      LaurentSeries (Coefficient (level + 1)) →+*
+        LaurentSeries (Coefficient level)) :
+    Subgroup (∀ level, Matrix.GeneralLinearGroup Index
+      (LaurentSeries (Coefficient level))) where
+  carrier gauge := ∀ level,
+    Matrix.GeneralLinearGroup.map (reduction level) (gauge (level + 1)) =
+      gauge level
+  one_mem' := by
+    intro level
+    simp
+  mul_mem' := by
+    intro left right leftCompatible rightCompatible level
+    change Matrix.GeneralLinearGroup.map (reduction level)
+        (left (level + 1) * right (level + 1)) =
+      left level * right level
+    rw [map_mul, leftCompatible level, rightCompatible level]
+  inv_mem' := by
+    intro gauge compatible level
+    change Matrix.GeneralLinearGroup.map (reduction level)
+        (gauge (level + 1))⁻¹ = (gauge level)⁻¹
+    rw [map_inv, compatible level]
+
+/-- Compatibility in the pro-Laurent gauge group is literally the adjacent
+reduction equation. -/
+theorem mem_proLaurentGaugeGroup_iff
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    {Coefficient : ℕ → Type u} [∀ level, CommRing (Coefficient level)]
+    {reduction : ∀ level,
+      LaurentSeries (Coefficient (level + 1)) →+*
+        LaurentSeries (Coefficient level)}
+    (gauge : ∀ level, Matrix.GeneralLinearGroup Index
+      (LaurentSeries (Coefficient level))) :
+    gauge ∈ proLaurentGaugeGroup Index Coefficient reduction ↔
+      ∀ level,
+        Matrix.GeneralLinearGroup.map (reduction level) (gauge (level + 1)) =
+          gauge level :=
+  Iff.rfl
 
 /-- A finite-level Laurent lower-bound function has a uniform lower bound
 exactly when one integer bounds it at every level.  Pro-Laurent systems do not

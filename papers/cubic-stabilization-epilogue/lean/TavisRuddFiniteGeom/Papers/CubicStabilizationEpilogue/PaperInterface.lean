@@ -2160,6 +2160,22 @@ def proLaurentGaugeSystem
     (Index : Type*) [Fintype Index] [DecidableEq Index] : Type _ :=
   Quantum.ProLaurentGaugeSystem Index
 
+/-- For any fixed tower of ordinary Laurent-series coefficient rings, the
+levelwise invertible matrices satisfying every adjacent reduction equation
+form a genuine subgroup of the product of the finite-level general linear
+groups.  Thus the manuscript's pro-Laurent gauge-group notation is closed
+under identity, multiplication, and inversion without imposing a Laurent
+lower bound uniform across levels. -/
+def proLaurentGaugeGroup
+    (Index : Type*) [Fintype Index] [DecidableEq Index]
+    (Coefficient : ℕ → Type*) [∀ level, CommRing (Coefficient level)]
+    (reduction : ∀ level,
+      LaurentSeries (Coefficient (level + 1)) →+*
+        LaurentSeries (Coefficient level)) :
+    Subgroup (∀ level, Matrix.GeneralLinearGroup Index
+      (LaurentSeries (Coefficient level))) :=
+  Quantum.proLaurentGaugeGroup Index Coefficient reduction
+
 /-- Reviewer-facing type of finite-level characteristic polynomials compatible
 under all coefficient reductions. -/
 def proLaurentCharacteristicPolynomialSystem : Type _ :=

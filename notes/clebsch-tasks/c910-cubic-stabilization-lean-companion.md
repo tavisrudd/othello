@@ -82,7 +82,7 @@ visible in theorem types and in the claim map.
 
 The package has a pinned standalone Nix and Mathlib environment.  Its 82 Lean
 sources build through the guarded queue.  The reviewer interface currently
-exports 145 audited terminals.  The rejecting manuscript inventory covers all
+exports 146 audited terminals.  The rejecting manuscript inventory covers all
 23 labelled theorem-like environments: 0 absent, 13 fragmentary, 9 conditional
 deductions, and 1 complete.
 
@@ -95,7 +95,9 @@ faithful-flat ordinary-product descent, square-zero divided powers, the `6I-J` S
 calculations, and exact characteristic-two slope-model minimal polynomial,
 scalar extension, and repeated-root diagonalization.  The quantum algebra
 includes framed-sixth multiplicity for supplied monodromy matrices,
-pro-Laurent inverse-system types, coefficient-extension and conjugacy, and the
+pro-Laurent inverse-system types, an actual subgroup of compatible invertible
+families over every fixed Laurent coefficient tower, coefficient-extension and
+conjugacy, and the
 flat linear-algebra theorem identifying differential constants after
 coefficient extension,
 formal-base-shift and block-formula deductions, numerical coefficient

@@ -79,6 +79,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_facto
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_charpoly: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeGroup: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedMonodromy_characteristicPolynomial_baseChange_and_gauge: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.differentialConstants_flatCoefficientBaseChange: propext, Classical.choice, Quot.sound
