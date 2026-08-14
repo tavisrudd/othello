@@ -275,6 +275,25 @@ analytic lattice comparison.  Thus Gold's remaining lemma is a genuinely
 new two-wall **numerical** Fourier--window theorem, not a missed consequence
 of an existing general theorem.
 
+The cheapest singular-shadow closure is now excluded exactly.  The safe
+`dP7` carrier peak has toric potential
+`x+y+a/x+B/(xy)+a/y`; its escaping wall critical point collides with an
+ambient critical point at `4a^3=27B^2`, producing a simple `A1`
+transposition braid.  Thus absence of turning, braid, ambient--wall
+collision, or Picard--Lefschetz rank cannot prove Gold.  Exact calculation:
+`../2026-08-13-c907-dp7-spectral-braid-shadow-failure.md`.
+
+The remaining singular scalar is the output zero-section multiplicity of a
+complete peak vanishing-cycle block, equivalently its generic rank or image
+in `K0num(Y)/K0num_D(Y)`.  Quasi-symmetric compensator completion puts the
+balanced parent under Špenko--Van den Bergh's proved GKZ/schober comparison,
+but deleting the compensators is a convex/concave noncrepant quantum-Serre
+confluence.  No cited theorem preserves the Gamma/window marking through
+that limit, and the incomplete-Gamma model shows that confluence can reverse
+the target.  The sharpened Gold target is therefore the **saturated rank-row
+confluence lemma**, recorded with the complete shadow sieve in
+`../2026-08-13-c907-marked-singular-shadow-sieve.md`.
+
 The point-coverage subcase has a binary index description; see
 `../2026-08-13-c907-point-13-standard-wall-index-dichotomy.md`.  For a
 standard point `(1,3)` wall, the image of the local Cartier restriction map

@@ -141,6 +141,23 @@ residue at infinity introduced when one passes between the two discrepant
 asymptotic orders.  The theorem says that this infinity residue is still a
 window/unstable-stratum class on the output side.
 
+## 7. Singular-shadow refinement
+
+The cheapest unmarked singular test is now excluded by the safe `dP7`
+carrier peak: its wall and ambient critical values have a simple `A1`
+collision and a nontrivial transposition braid, while its complete residue
+block still has rank zero.  See
+`2026-08-13-c907-dp7-spectral-braid-shadow-failure.md`.
+
+The exact scalar shadow is instead the coefficient of the output zero
+section in the characteristic cycle of the complete residue.  Its vanishing
+is equivalent to zero common-open rank.  A quasi-symmetric compensator
+completion places the parent GKZ system under Špenko--Van den Bergh's proved
+schober comparison, but descending back to the discrepant wall is a
+nonconvex quantum-Serre confluence not covered by that theorem.  The resulting
+minimal target is a saturated rank-row confluence lemma; see
+`2026-08-13-c907-marked-singular-shadow-sieve.md`.
+
 ## EJ / TT / AA
 
 - **EJ:** crepant `FM=AC` already proves the desired support pattern; Gold
@@ -165,3 +182,7 @@ window/unstable-stratum class on the output side.
   Deligne--Mumford Stacks*, arXiv:1906.00801v2.
 - Hsian-Hua Gu, Yuan-Pin Yu, and Zhengyu Yu, *Quantum Cohomology of
   Variations of GIT Quotients and Flips*, arXiv:2508.15770v1.
+- Špenko and Van den Bergh, *Perverse schobers and GKZ systems*,
+  arXiv:2007.04924.
+- Hiroshi Iritani, Etienne Mann, and Thierry Mignon, *Quantum Serre theorem
+  as a duality between quantum D-modules*, arXiv:1412.4523.
