@@ -454,13 +454,12 @@ it is not asked to identify a nonzero nonlinear residue.  This is precisely
 the situation in which generic pole splitting and graphwise effectivity are
 irrelevant.
 
-The resulting preferred gate is:
+The resulting wall statement is:
 
-> **Localized Picard-row lemma.**  The auxiliary rotation localization used
-> to extract the oriented row commutes with the Picard identifications of
-> the polarization-fixed stack, and its two endpoint row germs are the two
-> boundary germs of the resulting A-valued balanced principal-normal
-> kernel.
+> **Picard zero-wall lemma.**  The auxiliary rotation localization used to
+> extract the oriented row commutes with the Picard identifications of the
+> polarization-fixed stack.  The complete marked wall coefficient is
+> therefore zero throughout every neutral Picard orbit.
 
 This is strictly weaker than the localized fundamental-solution extension
 left open in Gonzalez--Woodward Remark 1.18(b): it treats one marked row, and
@@ -508,7 +507,7 @@ thresholds.  Picard twisting removes the nonzero wall-residue problem, and
 Lemma 3 removes the infinite nonlinear-tail problem, but neither determines
 the remaining marked connection matrix.
 
-Combining the localized Picard-row argument with Lemmas 1--3 therefore
+Combining the Picard zero-wall argument with Lemmas 1--3 therefore
 reduces Hypothesis 8.2 to the marked threshold-connection gate.  This is a
 finite-dimensional connection problem for one cyclic row, rather than a
 continuation theorem for the complete nonlinear source, but it is still
