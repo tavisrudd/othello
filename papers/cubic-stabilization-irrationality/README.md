@@ -21,7 +21,8 @@ the complete neutral clutching tails are holonomic and tempered under the
 tailwise derived identification hypothesis. The remaining analytic input is
 locally finite: an isomorphism of cyclic Rees \(z\)-modules at each sign,
 stability, or zero-mode threshold must intertwine formal monodromy and carry
-the marked point row. Under these hypotheses, the
+the marked point row while preserving the stated Stokes, deck, nearby-cycle,
+Artin, and Rees data. Under these hypotheses, the
 point-row primary Boolean is birationally invariant and
 \(X\times\mathbf P^m\) is irrational for every smooth cubic threefold \(X\)
 and every \(m\). A rational two-tail counterexample shows why tailwise

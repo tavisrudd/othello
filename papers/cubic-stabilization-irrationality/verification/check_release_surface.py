@@ -95,7 +95,7 @@ readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
-    r"Assume that every smooth projective birational map.*?cyclic Gamma point.*?We prove that",
+    r"Assume that every smooth projective birational map.*?finite cyclic Rees.*?Gamma point row.*?We prove that",
     main_text,
     flags=re.DOTALL,
 ):

@@ -100,7 +100,7 @@ Proposition~2(B'); the resolution is an isomorphism over the source, sink,
 and common-open cylinder.  Thus the extreme quotients and the class \(a_p\)
 are unchanged.
 
-\subsection{Neutral tails and the finite connection gate}
+\subsection{Neutral tails and threshold comparison}
 
 The two maps in (8.1) initially belong to opposite Novikov completions.  The
 comparison needed for the point-row Boolean is smaller than a common field
@@ -109,6 +109,13 @@ of the equivariant Novikov ring.  For a primitive affine gauge direction
 \(\delta\), all ordinary curve degrees and fixed graph types are then finite;
 only the integer coordinate along \(\delta\) can remain unbounded.  We first
 control those unbounded tails.
+
+The argument separates the fixed geometry from the remaining analytic
+comparison.  Tailwise derived identification makes the fixed clutching data
+constant along each affine tail; the moving normal weights then give a Gamma
+recurrence.  Marked threshold compatibility subsequently joins the resulting
+cyclic \(z\)-modules across the finitely many changes of sign, stability, and
+zero-mode rank.
 
 Call the direction neutral when
 \[
@@ -226,11 +233,12 @@ packet.
 
 \begin{hypothesis}[Tailwise derived identification]
 \label{hyp:tailwise-derived}
-Fix a finite Artin level, an ordinary bubble degree, and a rotation-fixed
-graph type.  After splitting into stabilizer congruence classes and removing
-the finite sign, stability, and zero-mode thresholds, consecutive affine
-degrees in each remaining tail are identified by isomorphisms of the fixed
-clutching stacks and their universal curves.  These isomorphisms identify the
+For every finite Artin level, ordinary bubble degree, and rotation-fixed
+graph type, after splitting the affine degrees into stabilizer congruence
+classes and removing the finite sign, stability, and zero-mode thresholds,
+there are isomorphisms of the fixed clutching stacks and their universal
+curves which identify consecutive degrees in each remaining tail.  These
+isomorphisms identify the
 evaluation maps and the fixed relative perfect obstruction theories as
 morphisms to the corresponding cotangent complexes, hence also their virtual
 classes.  They respect stack automorphisms, gluing over the inertia quotient,
@@ -326,9 +334,8 @@ the complete separated inverse system of Artin quotients.
 \end{hypothesis}
 
 Condition (8.13) concerns only the cyclic module and allows arbitrary
-connection on the complementary source.  After bases are chosen, its marked
-generator condition is the row equation \(r_j^+C_j=r_j^-\).  A one-object
-Gamma/window comparison would imply it: a
+connection on the complementary source.  A one-object Gamma/window comparison
+would imply it: a
 window mutation is supported on the wall, whereas the skyscraper of a point
 in the common open is unchanged and Euler-orthogonal to wall-supported
 objects.  Pairing preservation and formal exponential labels alone do not
@@ -354,7 +361,7 @@ Let \(e_\lambda(T)\) be the polynomial B\'ezout projector onto the generalized
 restriction of \(r\) does.
 \end{proof}
 
-\subsection{The finite packet}
+\subsection{The finite cyclic packet}
 
 Formal smooth-endpoint quantum Kirwan surjectivity is elementary in this
 setting.  Modulo the positive-energy ideal, \(D\kappa_\pm\) is the derivative
@@ -401,8 +408,10 @@ systems.  Hypothesis~\ref{hyp:marked-threshold} identifies the finite cyclic
 Rees \(z\)-modules across every threshold, while nonneutral directions are
 Laurent-finite by Proposition~\ref{prop:gamma-ratio-reduction}.  Thus the two
 intrinsic endpoint cyclic row modules are conservative realizations of one
-continued marked cyclic module.  No continuation of the complementary
-equivariant quantum source is used.
+continued marked cyclic module: at each Artin level, compose the finitely many
+threshold maps \(\Phi_j\), then pass to the complete inverse system using their
+reduction compatibility.  No continuation of the complementary equivariant
+quantum source is used.
 
 \begin{theorem}[Conditional birational invariance of the point-row primary Boolean]
 \label{thm:birational-point-primary}
@@ -433,7 +442,8 @@ polynomial functional calculus in (8.13) gives
 at every threshold.  Hence the relevant primary row vanishes on one side if
 and only if it vanishes on the other.  Iterate through the locally finite
 threshold system and apply Lemma~\ref{lem:cyclic-row-support} at the endpoints.
-This proves both implications.
+Because the Artin inverse system is separated, a projected row is nonzero
+exactly when it survives at some finite level.  This proves both implications.
 \end{proof}
 
 Under Hypotheses~\ref{hyp:tailwise-derived} and
