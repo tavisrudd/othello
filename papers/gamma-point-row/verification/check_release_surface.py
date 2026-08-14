@@ -85,10 +85,11 @@ readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
 if not re.search(
-    r"Conditional birational\s+invariance therefore yields irrationality",
+    r"Assume that complete-neutral continuation.*?We prove that",
     main_text,
+    flags=re.DOTALL,
 ):
-    errors.append("abstract does not make the cubic conclusion conditional")
+    errors.append("abstract does not lead with the conditional cubic theorem")
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
 if "Hypothesis~\\ref{hyp:complete-neutral}" not in intro_text:
@@ -108,14 +109,16 @@ if "conditional transport" not in endpoint_text or "does not use Cai" not in end
 
 metadata = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
 if metadata.get("title") != (
-    "Point-Class Rank under Quantum Wall Crossing: "
-    "Local Transport, Global Obstructions, and Cubic Threefolds"
+    "Conditional Irrationality of All Projective Stabilizations of "
+    "Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing"
 ):
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Under this hypothesis" not in metadata.get("description", ""):
-    errors.append("Zenodo description does not make global invariance conditional")
+if "Assuming the complete-neutral continuation hypothesis" not in metadata.get(
+    "description", ""
+):
+    errors.append("Zenodo description does not lead with the conditional hypothesis")
 
 if errors:
     for error in errors:

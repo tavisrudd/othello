@@ -1,13 +1,15 @@
-# Point-Class Rank under Quantum Wall Crossing
+# Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds
 
 ## Read the paper
 
 [**Open the paper (PDF) →**](gamma_point_row.pdf)
 
-**Title:** *Point-Class Rank under Quantum Wall Crossing: Local Transport,
-Global Obstructions, and Cubic Threefolds*.
+**Title:** *Conditional Irrationality of All Projective Stabilizations of
+Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.
 
-The paper proves exact point-row transport identities for a simple VGIT wall
+Assuming the complete-neutral continuation hypothesis stated in the paper,
+the product of any smooth complex cubic threefold with any projective space
+is irrational. The paper proves exact point-row transport identities for a simple VGIT wall
 and an ordinary flop, together with countermodels that obstruct naive
 composition. For a global equivariant cobordism it proves support collapse
 and a coefficientwise balanced Gamma-ratio reduction. The remaining
