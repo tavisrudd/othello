@@ -408,8 +408,9 @@ over a Laurent extension in the exceptional Novikov variable
 \cite[Theorem~5.18]{IritaniBlowup}.  The isomorphism and its inverse use only
 integral powers of \(z\), and the mirror coordinates are independent of \(z\).
 The comparison field adjoins \(q^{-1/s_c}\), where
-\(s_c=c-1\) for even \(c\) and \(s_c=2(c-1)\) for odd \(c\); this is only a
-coefficient extension.  The reconstruction coordinate below is
+\(s_c=c-1\) for even \(c\) and \(s_c=2(c-1)\) for odd \(c\); this is a
+coefficient extension in the Novikov direction, not a ramification of \(z\),
+so the original loop is untouched.  The reconstruction coordinate below is
 \(u=q^{-1/(c-1)}\).
 The center base shift is controlled before passage to the final Laurent
 chart.  Put \(u=q^{-1/(c-1)}\) and use the reconstruction coordinates of
@@ -571,7 +572,8 @@ extension preserves the intrinsic endpoint characteristic polynomials.
 The projective-bundle proof is parallel, again in reconstruction coordinates.
 Its comparison field adjoins \(q^{-1/r'}\), with \(r'=r\) when \(r-1\) is
 even and \(r'=2r\) when \(r-1\) is odd; the reconstruction coordinate remains
-\(u=q^{-1/r}\).  The extra root is again a coefficient extension.
+\(u=q^{-1/r}\).  The extra root is again a coefficient extension in the
+Novikov direction, not a ramification of \(z\).
 Put \(u=q^{-1/r}\).  For its \(j\)-th target summand let \(R_j\) be the image
 of \(Q_T^d\mapsto Q^d u^{c_1(V)\cdot d}\), together with \(u\) and \(s_j\),
 and set
@@ -873,9 +875,12 @@ root cannot occur.
 
 This treats curves of positive genus and minimal surfaces with nef canonical
 class.  A point is immediate.  The remaining minimal varieties are
-\(\PP^1\), \(\PP^2\), and ruled surfaces;
-\eqref{eq:projective-bundle-nu} reduces them to a point or a
-curve.  Every nonminimal surface is obtained from a minimal surface by point
+\(\PP^1\), \(\PP^2\), and ruled surfaces, and
+\eqref{eq:projective-bundle-nu} reduces each to a point or a curve
+explicitly: \(\PP^1=\PP_{\rm pt}(\C^2)\) and \(\PP^2=\PP_{\rm pt}(\C^3)\)
+give \(\nu_6=2\nu_6({\rm pt})=0\) and \(3\nu_6({\rm pt})=0\), while a ruled
+surface is \(\PP_C(V)\) for a rank-two bundle on a curve \(C\), giving
+\(2\nu_6(C)=0\).  Every nonminimal surface is obtained from a minimal surface by point
 blowups, and \eqref{eq:blowup-nu} adds only point summands.  Hence the
 intrinsic generic invariant vanishes in every case.
 Lemma~\ref{lem:divisor-tagging} gives
@@ -1199,8 +1204,10 @@ For every smooth prime Fano threefold \(V\) of genus eight,
 \end{corollary}
 
 \begin{proof}
-The flop gives a birational map between the smooth projective fourfolds
-\(\PP_V(U)\) and \(\PP_X(E^*)\).  By
+The flop of \cite[Theorems~2.17--2.18]{KuznetsovV14} gives a birational map
+between \(\PP_V(U)\) and \(\PP_X(E^*)\).  Both are rank-two projective bundles
+over smooth projective threefolds, hence smooth projective fourfolds, which is
+what Theorem~\ref{thm:nu6-birational-invariance} requires.  By
 Theorem~\ref{thm:nu6-birational-invariance}, Proposition
 \ref{prop:framed-operations}, and Proposition~\ref{prop:cubic-packet},
 \[

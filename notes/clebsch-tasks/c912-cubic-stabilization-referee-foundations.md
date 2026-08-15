@@ -303,14 +303,39 @@ WP5 is complete. The paper now runs 29 pages and builds warning-free.
 
 ### WP6 — cycle and exposition seams
 
-- [ ] Add the generic-point non-CM qualification and CM-fibre cross-reference.
-- [ ] Add the coherent `+/-1` target-automorphism explanation.
-- [ ] Add the Hom-scheme extension input.
-- [ ] Add the two-/three-primary logical dependency sentence.
-- [ ] Add the polarization-class/semicharacter sentence.
-- [ ] Add the finite-generation clarification only if useful.
-- [ ] Resolve all verified minor comments.
-- [ ] Keep prose changes surgical; do not add a new page without need.
+- [x] Add the generic-point non-CM qualification and CM-fibre cross-reference:
+  the non-CM statement is now marked as holding at the geometric generic point,
+  with special fibres routed to the prescribed-lattice reading after
+  `thm:all-degree-graph-saturation`.
+- [x] Add the coherent `+/-1` target-automorphism explanation. Negating a
+  target identification negates `q_H` and, by functoriality of Rosati duality,
+  `i_H`, so `N_H = i_H q_H` and `D_H = q_H^*[0]` are unchanged; the Gram matrix
+  moves only by a signed congruence, which preserves the Smith type. Note the
+  off-diagonal entries do flip under a single-index change of sign, so the
+  claim is invariance of the objects used, not entrywise invariance.
+- [x] State the extension input for abelian-scheme homomorphisms. The
+  scheme-theoretic image cites Achter--Casalaina-Martin--Wise for the
+  abelian-scheme structure, with the relative dimension pinned locally by
+  `n_H^2 = 10 n_H`; the generic-fibre equality extends because two morphisms
+  from an integral scheme to a separated one agree along a closed subscheme
+  containing the dense generic fibre.
+- [x] Add the two-/three-primary logical dependency sentence, stated in the
+  three-clause form the review asked for.
+- [x] Add the polarization-class/semicharacter sentence at the descent step.
+- [x] Add the finite-generation clarification: free and finite parts are both
+  detected by the `p`-adic completions.
+- [x] Resolve the verified minor comments: the coefficient-extension reminder
+  now says "in the Novikov direction, not a ramification of `z`" at both
+  comparison-field uses; the `P^1`, `P^2`, and ruled-surface reductions are
+  written out; the genus-eight bundles are identified as rank-two bundles over
+  threefolds, hence fourfolds, with the flop citation moved into the proof.
+  The `(0,2)` row needs no repair: no section claims publication for any
+  preprint, and the cited version is pinned.
+- [x] Keep prose changes surgical: the paper stayed at 29 pages across the
+  whole work package.
+- [ ] Declined for now: the higher-stabilization companion cross-reference. It
+  would add an external dependency to a scope paragraph that already states
+  the boundary, which the review made conditional on improving clarity.
 
 ### WP7 — positioning against the pre-emptions
 

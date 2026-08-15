@@ -21,8 +21,8 @@ Fano surface of a smooth member of the \(A_5\)-pencil and
 dual \(i_H:E_H\to J\).
 
 \noindent\textbf{Generic non-CM axis.}
-Hartlieb's elliptic isogeny factor, and hence every generic six-axis elliptic
-quotient, is non-CM.  Indeed, a
+Hartlieb's elliptic isogeny factor, and hence every six-axis elliptic
+quotient, is non-CM at the geometric generic point of the pencil.  Indeed, a
 CM endomorphism has a fixed imaginary-quadratic order, so the generic
 \(j\)-invariant is a root of its Hilbert class polynomial and is constant.
 After a finite base change the elliptic factor would then be isotrivial.
@@ -33,7 +33,12 @@ both positive-dimensional and countable.  This contradicts the fact that the
 closure of the intermediate-Jacobian image is a one-dimensional special
 subvariety \cite[Proposition~5.7 and Remark~5.8]{Hartlieb}.  Since the generic
 intermediate Jacobian is isotypic to \(E_b^5\), each nonzero elliptic quotient
-is isogenous to \(E_b\), and so is non-CM as well.
+is isogenous to \(E_b\), and so is non-CM as well.  This is a statement about
+the geometric generic point, not about every member: individual fibres may
+have complex multiplication, and there the divisor lattice selected by the
+marked presentation can be smaller than the full Neron--Severi lattice.  Those
+fibres are covered by the prescribed-lattice reading of
+Theorem~\ref{thm:all-degree-graph-saturation} recorded after its proof.
 
 \begin{proposition}[Six-axis polarization]
 \label{prop:six-axis-polarization}
@@ -83,7 +88,17 @@ off-diagonal \(m\).  Put
 \]
 Then \(D_H|_S=F_H\), and \(N_H\) is the Rosati endomorphism attached to
 \(D_H\).  Coherent identification gives \(q_Hi_H=[d]\) and
-\(q_Hi_{H'}=[m]\) for \(H\ne H'\).  The invariant sum of the six axis maps
+\(q_Hi_{H'}=[m]\) for \(H\ne H'\).  Each target identification is determined
+only up to a sign, and the ambiguity changes nothing used here.  Replacing the
+chosen isomorphism \(E_H\to\mathcal E\) by its negative replaces \(q_H\) by
+\(-q_H\) and, by functoriality of Rosati duality, \(i_H\) by \(-i_H\) at the
+same time.  Hence \(N_H=i_Hq_H\) is unchanged, and so is
+\(D_H=q_H^*[0]\), since \([-1]^*[0]=[0]\).  The diagonal entry \(q_Hi_H\) is
+likewise unchanged, while the Gram matrix changes by a signed congruence
+\(DG_6D\) with \(D=\operatorname{diag}(\pm1)\), which alters neither the Smith
+type of the pulled-back polarization nor anything below.  The coherent choice
+is the one making all off-diagonal entries equal; it is unique up to a global
+sign, which acts trivially.  The invariant sum of the six axis maps
 vanishes because the five-dimensional constituent has no trivial summand;
 composing with \(q_H\) gives \(d+5m=0\).  The minimal-class identity
 \([S]=\Theta^3/3!\) \cite{CG}, together with the polarized
@@ -157,9 +172,12 @@ self-product of an elliptic curve through the five-dimensional module
 \(n_H^2=10n_H\).  The scheme-theoretic image of a homomorphism of abelian
 schemes in characteristic zero is an abelian subscheme, and its quotient
 factorization commutes with base change
-\cite[Theorem~A]{ACMW}.  Thus the scheme-theoretic image
-\(\mathcal E_H\subset\mathcal J\) is an abelian scheme of relative dimension
-one.  It is therefore an elliptic scheme.  Since \(hn_H=n_H\) for every
+\cite[Theorem~A]{ACMW}.  That citation supplies the abelian-scheme structure;
+the relative dimension is pinned by \(n_H^2=10n_H\), which makes
+\(n_H/10\) a projector, so on every fibre the image is the connected abelian
+subvariety it cuts out, of dimension one by \(\dim W_5^H=1\).  Thus the
+scheme-theoretic image \(\mathcal E_H\subset\mathcal J\) is an elliptic
+scheme.  Since \(hn_H=n_H\) for every
 \(h\in H\), the subgroup \(H\) acts trivially on \(\mathcal E_H\).  Moreover
 \(N_{A_5}(H)=H\), so transport by an element carrying \(H\) to \(H'\) is
 independent of the chosen transporter.  The six elliptic schemes are
@@ -171,8 +189,10 @@ identifies \(\operatorname{Hom}^0(E,J)\) with the irreducible module \(W_5\).
 The coherently transported maps \((i_H)_{H\in\Omega}\) form one \(A_5\)-orbit,
 so their sum is invariant.  Since \(W_5^{A_5}=0\), that sum is zero.  The
 connected smooth curve \(B^\circ\) is integral, \(\mathcal E\) is integral,
-and \(\mathcal J\) is separated.  Equality on the generic fibre therefore
-gives \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
+and \(\mathcal J\) is separated over \(B^\circ\).  Two morphisms from an
+integral scheme to a separated one agree along a closed subscheme; here that
+subscheme contains the dense generic fibre, so \(\sum_Hi_H\) and the zero
+map agree everywhere and \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
 \((i_H)_{H\in\Omega}\) descends from
 \(\mathcal E^\Omega\) to the displayed map
 \(f:\mathcal A\to\mathcal J\), and the construction is
@@ -332,11 +352,16 @@ coefficient heart \(H_3\) is simple and
 The tensor pairing is \(b_3\) times the alternating multiplicity pairing, so
 the three affine scalar graphs and the vertical line are all maximal
 isotropic.  The natural \(S_6\)-action is the same on both multiplicity
-copies, so it fixes every one of these four lines.  Since \(|\ker f|=6^4\),
-its two- and
-three-primary parts exhaust the kernel.  The full kernel would therefore be
-\(S_6\)-stable.  Since this action preserves \(6I_6-J_6\), it would descend
-through the principally polarized quotient.  It would act faithfully: if a
+copies, so it fixes every one of these four lines.  The dependency is thus:
+a rational two-primary half is \(S_6\)-fixed, every three-primary half is
+\(S_6\)-fixed, and \(|\ker f|=6^4\) makes the two primary parts exhaust
+\(\ker f\).  The full kernel would therefore be \(S_6\)-stable.  Since this
+action preserves \(6I_6-J_6\), it would descend through the principally
+polarized quotient.  That descent is a statement about polarization classes:
+a polarization is a class in \(\NS\), and the translation and
+Appell--Humbert semicharacter choices that realize it by an actual line bundle
+change neither its first Chern class nor the Neron--Severi coefficient
+lattice.  It would act faithfully: if a
 source automorphism acts
 trivially on the quotient, the image of its difference from the identity is
 both connected and contained in the finite isogeny kernel, hence zero.
