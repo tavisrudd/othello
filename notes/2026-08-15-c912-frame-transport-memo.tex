@@ -1388,6 +1388,57 @@ avoids the gauge altogether and produces a $\tau$-constant characteristic
 polynomial, so specialization is a substitution into constants.
 \end{remark}
 
+\subsection*{A shorter route to the endpoint, in the sources' own terms}
+\label{sec:kkpy-serre}
+
+Two paragraphs of Katzarkov--Kontsevich--Pantev--Yu's Example 6.21 bear directly
+on this and should be on the record, because between them they suggest a route
+to the one-stabilization theorem that needs neither this memo's transport lemma
+nor its rigidity theorem.
+
+First, they compute the atomic composition of a smooth cubic threefold at the
+hyperplane point: two one-dimensional atoms for the nonzero eigenvalues of
+$\operatorname{Eu}\star$, and one atom $\alpha(X)$ for the eigenvalue $0$. That
+is the block structure used throughout this memo, in their language. They add
+that ``the Witt algebra argument from Remark~3.14 shows that there is no further
+splitting in a neighborhood of $b$'' --- which is
+Theorem~\ref{thm:no-splitting}, asserted rather than proved, and their
+Remark~3.14 introduces its finer clauses with ``more fine results can be
+proved''. Section~\ref{sec:rigid} supplies proofs of both the splitting
+statement and the finer one, for this block type, from flatness alone.
+
+Second, and more consequentially, they separate $\alpha(X)$ from a curve atom
+not by formal monodromy but by a Serre automorphism. They observe that
+$\alpha(X)$ looks like the atom of a smooth projective genus-five curve, then
+note that as a Hodge atom enhanced with its Serre automorphism $S$ one has the
+graded minimal polynomial $S^5=[3]$, so $S$ cannot have eigenvalue $-1$ and
+cannot be the Serre automorphism of a genus-five curve. They conclude that every
+smooth cubic threefold is irrational, and remark that the same approach applies
+to other Fano threefolds.
+
+The consequence for the endpoint is worth stating plainly. Their argument is
+dimension three, where Proposition~5.30 requires excluding only points and
+curves. The one-stabilization statement is dimension four, where the same
+proposition requires excluding points, curves \emph{and surfaces}. Everything
+else --- the projective-bundle formula putting two copies of $\alpha(X)$ in
+$X\times\PP^1$, the non-rationality criterion, and the decoration itself ---
+is already theirs. So the endpoint theorem may reduce to one finite
+classification question: whether any atom of a smooth projective surface can
+carry a Serre automorphism with $S^5=[3]$. For a surface with nef canonical
+class their Lemma~5.24 gives a single atom and Claim~6.15 gives a regular
+singularity with nilpotent residue after the half-parity gauge; the remaining
+surfaces are $\PP^2$, ruled surfaces and point blowups, which the
+projective-bundle and blowup formulas reduce to points and curves.
+
+This is not the same invariant as $\nu_6$, and it is not obviously weaker or
+stronger; it is the sources' own, which is an argument for using it. Two
+cautions. It buys the Hodge-atom, motive and Serre-enhancement machinery that
+the earlier blueprint deliberately avoided, so the manuscript would import more
+than the two decomposition theorems. And their sentence is a worked example,
+not a theorem with hypotheses; before anything rests on it, the graded minimal
+polynomial and the surface exclusion both need to be checked at the level of
+detail this memo has applied to everything else.
+
 \begin{remark}[Scope]
 Steps 2 to 5 used rank two only through the identities
 $\operatorname{adj}(N)=-N$ and $N^2=-\det(N)I$ and through the single shearing.

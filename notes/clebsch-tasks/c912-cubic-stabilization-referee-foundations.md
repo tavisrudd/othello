@@ -625,7 +625,7 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   fifth version, carries those verdicts in its Section 6, attacks the residual
   gap through the flatness identities in Section 7, and closes it for the cubic
   block in Section 8: 25 pages, PDF SHA-256
-  `6c5b06a02b35b0685db820702464e8ade9f91de86e8c3471a77520d7261248e8`.  Either
+  `e6777ab8104c209f34d20b5f889958b45bb67d693fe77b20b35972875a0939da`.  Either
   document can be read first; the report is the shorter route in, the memo's
   Section 8 is where the mathematics now is.  A source-verified assessment of
   the proposed Hodge-atom spine, which is the alternative presentation, is
@@ -650,6 +650,23 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   shearing.  Not covered: derogatory blocks, semisimple blocks with a
   `rho_i - rho_j = -1` resonance, and Jordan blocks of size above two, which is
   what an arbitrary-center statement would need.
+
+  *A shorter endpoint route, from KKPY's own Example 6.21.*  They compute the
+  cubic's atomic composition as two one-dimensional atoms plus the zero atom
+  `alpha(X)`, assert the no-splitting statement from their Remark 3.14, and then
+  separate `alpha(X)` from a genus-five curve atom by its Serre automorphism:
+  the graded minimal polynomial is `S^5 = [3]`, so `S` cannot have eigenvalue
+  `-1`.  They conclude that every smooth cubic threefold is irrational.  That is
+  dimension three, where only points and curves must be excluded.  The
+  one-stabilization statement is dimension four and additionally needs surfaces
+  excluded; the projective-bundle formula, the criterion, and the decoration are
+  already theirs.  So the endpoint may reduce to one finite classification
+  question -- can a surface atom carry `S^5 = [3]` -- with nef canonical class
+  covered by their Lemma 5.24 and Claim 6.15 and the rest reduced by the
+  projective-bundle and blowup formulas.  Cost: this imports the Hodge-atom,
+  motive, and Serre-enhancement machinery the 2026-08-10 blueprint deliberately
+  avoided, and their sentence is a worked example, not a theorem with
+  hypotheses.
 
   *Correction carried by Section 8.*  Cai's Proposition 6 already states the
   `+/-1/6` exponents for the big quantum connection, proved by a bulk gauge
