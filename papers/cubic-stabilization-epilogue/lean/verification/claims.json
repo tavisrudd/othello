@@ -4,6 +4,33 @@
   "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
   "claims": [
     {
+      "manuscript_label": "cor:voisin-separation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The moduli space of smooth complex cubic threefolds, the countable union of subvarieties of codimension at most three along which the primitive minimal class is algebraic, the product with projective one-space, universal CH0-triviality, and rationality.",
+      "hypotheses": "Voisin's construction of the codimension-at-most-three components, the projective bundle formula for Chow groups, and the one-step irrationality theorem of this paper.",
+      "conclusion": "Along that countable union both the threefold and its product with projective one-space are universally CH0-trivial while the product is irrational.",
+      "cautions": "Not formalized. The cited Voisin construction is an imported classical input and is not reproved here."
+    },
+    {
+      "manuscript_label": "cor:fermat-separation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The Fermat cubic threefold, its product with projective one-space, universal CH0-triviality, and rationality.",
+      "hypotheses": "Colliot-Thelene's almost-diagonal theorem applied to the Fermat equation, the projective bundle formula for Chow groups, and the one-step irrationality theorem of this paper.",
+      "conclusion": "The named fourfold is universally CH0-trivial and irrational.",
+      "cautions": "Not formalized. Universal CH0-triviality of the threefold is an imported classical input."
+    },
+    {
+      "manuscript_label": "cor:coprime-separation",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The Yang-Yu-Zhu cubic threefolds with unirational parametrizations of degrees two and three, their products with projective spaces, universal CH0-triviality, and rationality.",
+      "hypotheses": "The Yang-Yu-Zhu parametrization theorem and its persistence under multiplication by projective space, the diagonal-decomposition consequence of coprime degrees, and the one-step irrationality theorem of this paper.",
+      "conclusion": "For those threefolds the product with projective one-space carries unirational parametrizations of coprime degrees, is universally CH0-trivial, and is irrational.",
+      "cautions": "Not formalized. The parametrizations and their coprime-degree consequence are imported inputs; the statement does not address stable rationality."
+    },
+    {
       "manuscript_label": "thm:separation-family",
       "coverage": "conditional_deduction",
       "declarations": [

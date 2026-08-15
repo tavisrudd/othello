@@ -308,8 +308,13 @@ exact bridge is formalized.
   irrationality theorem; present the `A_5`-pencil as a separate mechanism.
 - [x] Record both pre-emptions and the read depths in the novelty ledger.
 - [x] State the pencil's moduli dimension against the Yang--Yu--Zhu locus, and
-  print the Fermat membership proved in C914.
-- [ ] Recheck the synthesis section and the scope paragraph for any remaining
+  print the Fermat membership, crediting Hartlieb's Lemma 5.5.
+- [x] Turn the imported loci into separation corollaries of the one-step
+  theorem: Voisin's codimension-three components, the Fermat equation, and the
+  Yang--Yu--Zhu family, proved in the synthesis section.
+- [x] Frame the Yang--Yu--Zhu stable-rationality question as verified at the
+  first stabilization only, not answered.
+- [ ] Recheck the scope paragraph and the abstract for any remaining
   first-example rhetoric.
 
 ### WP8 — source-version locator repair

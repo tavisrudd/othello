@@ -9,6 +9,22 @@ threefold. The pencil therefore is not disjoint from the cubics that
 Yang--Yu--Zhu parametrize in coprime degrees, and it is not disjoint from the
 universally `CH_0`-trivial examples that were already explicit in 2017.
 
+**Priority correction, 2026-08-14.** This membership is not new here. Hartlieb
+states it in Lemma 5.5, the lemma the epilogue already cites one line earlier
+for the identification of the component: the two `A_5`-components of the locus
+meet exactly in the Fermat cubic threefold and one further member. Section 1
+below is a re-derivation, useful as an independent check and as a one-line
+reason, and it is written into the manuscript as a remark crediting Hartlieb.
+
+**Second correction.** Saying that the separation family is pre-empted
+overstates it. What the earlier work supplies is the universally
+`CH_0`-trivial locus. No earlier source knew that `X x P^1` is irrational, so
+the separation after one stabilization is still this paper's, and the
+manuscript now states it as three corollaries of the one-step theorem drawn
+against Voisin's loci, the Fermat equation, and the Yang--Yu--Zhu family. The
+accurate statement is that the `A_5`-pencil is no longer needed to exhibit a
+positive-dimensional separation family.
+
 A second finding, from the manuscript's own principal citation: Voisin
 established positive-dimensional loci of universally `CH_0`-trivial smooth
 cubic threefolds in 2017, of codimension at most three in a ten-dimensional

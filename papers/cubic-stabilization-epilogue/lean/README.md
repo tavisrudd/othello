@@ -31,7 +31,7 @@ labelled theorem-like environments in the manuscript and classifies them as:
   in the theorem type;
 - 1 completely formalized from the manuscript's stated hypotheses.
 
-Checked coverage snapshot: 23 claims; 0 absent; 13 fragmentary; 9 conditional;
+Checked coverage snapshot: 26 claims; 3 absent; 13 fragmentary; 9 conditional;
 1 complete; 168 reviewer terminals.
 
 The 168 reviewer-facing terminals currently verify:
