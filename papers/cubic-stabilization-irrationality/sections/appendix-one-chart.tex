@@ -283,9 +283,10 @@ the pullback of the tangent complex of the quotient stack along evaluation at
 of \(V\) consisting of the rotation-invariant sections of
 \(u_a^*T([W/\Gm])\) over the chart at \(0\), respectively at \(\infty\),
 viewed inside \(V\) by restriction to the open orbit.  These are the extension
-subcomplexes of the in-text display; the subscript records which half of the
-weight decomposition at the corresponding limit point they select, and only the
-intrinsic description just given is used below.  No equivariant splitting of
+subcomplexes of the in-text display; the subscript records that they select the
+tangent weights \(w\) with \(aw\leq0\) at the corresponding limit point, as
+computed in Lemma~\ref{lem:app-cech}, and only the intrinsic description just
+given is used below.  No equivariant splitting of
 \(V\) is chosen.
 
 \begin{lemma}[Invariant \v{C}ech presentation]
@@ -320,9 +321,17 @@ rotation-invariant section over the open orbit is determined by its value at
 
 For the identification of the two extension subcomplexes, apply
 Lemma~\ref{lem:app-graded-extension} to the module of sections rather than to
-the ring: on an invariant affine chart, a graded \(A\)-module \(M=\bigoplus_wM_w\)
-gives \((M\otimes_AR[z])^{\mathrm{rot}}=\bigoplus_{aw\geq0}(M_w\otimes_AR)\) and
-\((M\otimes_AR[z^{\pm1}])^{\mathrm{rot}}=\bigoplus_w(M_w\otimes_AR)\).  Taking
+the ring, with one change of sign.  A vector field \(D\) has weight \(w\) when
+\(D(A_v)\subset A_{v+w}\), so tangent weights are opposite to the weights of
+the coordinate functions, and along the universal section a tangent vector of
+weight \(w\) acquires \(z^{-aw}\) rather than \(z^{aw}\).  Hence on an
+invariant affine chart a graded module \(M=\bigoplus_wM_w\) of sections gives
+\((M\otimes_AR[z])^{\mathrm{rot}}=\bigoplus_{aw\leq0}(M_w\otimes_AR)\) and
+\((M\otimes_AR[z^{\pm1}])^{\mathrm{rot}}=\bigoplus_w(M_w\otimes_AR)\).  This
+nonpositive half is what the subscript in \(F^0_{\leq0}V\) and
+\(F^\infty_{\leq0}V\) records.  For \(W=\A^1\) with \(t\cdot y=t^ky\) and
+\(a>0\), the attracting locus is all of \(\A^1\) and its tangent direction has
+weight \(-k\), which the displayed condition retains.  Taking
 \(M\) to be the module of sections of \(T([W/\Gm])\) identifies the invariants
 over the chart with the tangent complex of the attractor subscheme, which is
 the content of Bia{\l}ynicki--Birula's description of the attracting locus of a
