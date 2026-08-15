@@ -624,15 +624,16 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
   fifth version, carries those verdicts in its Section 6, attacks the residual
   gap through the flatness identities in Section 7, and closes it for the cubic
-  block in Section 8, and proves the one-stabilization theorem unconditionally
-  in Section 9: 29 pages, PDF SHA-256
-  `808276808a9cf9d8dbe1f26be69f4ede5912e38016fd42bbcde83db27cce652b`.  Either
+  block in Section 8, and assembles the one-stabilization statement in
+  Section 9: 30 pages, PDF SHA-256
+  `556a17d8dc580823852ae780f97691dd7d1a2daf4590d7c5ab3c5252d0a84445`.  Either
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
-  *The endpoint theorem is closed (Section 9).*  `X x P^1` is irrational for
-  every smooth cubic threefold, unconditionally, and Hypothesis 4.7H does not
-  appear.  The route is not the draft's: in the atom formulation the
+  *The endpoint, and the one step it still needs (Section 9).*  A first pass
+  claimed this closed unconditionally; a red team found one genuine gap, and the
+  memo now states the endpoint with it.  Hypothesis 4.7H does not appear at all:
+  in the atom formulation the
   intermediate fourfolds of a weak factorization cancel in the ledger instead of
   being visited, so no framed operator is transported across a comparison.  Four
   steps.  (i) Bulk local constancy: solving `d_{t_i} M = -z^-1 P_i M` with
@@ -647,9 +648,36 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   surface classification using the projective-bundle and blowup identities plus
   Claim 6.15 for nef canonical class.  (iv) `X x P^1 = P(O + O)` puts two copies
   of the cubic zero atom in its composition, and Proposition 5.17/5.30 gives the
-  contradiction.  The one analytic step invoked rather than proved is the
-  passage from formal-germ constancy to local constancy on the base, recorded as
-  a remark in the memo and owed when this is drafted.  A source-verified assessment of
+  contradiction.
+
+  *The gap, exactly.*  An atom is a geometric atomic F-bundle modulo isomorphism
+  **and** modulo change of base point within a connected component of the
+  spectral cover.  Step (i) gives the second only along formal germs, and it
+  does not globalize: the gauge is the pro-Laurent object, convergent only for
+  topologically nilpotent bulk parameters, so the receiver difficulty reappears
+  at the globalization step instead of being escaped.  Comparing value sets over
+  representatives does not rescue it, since the class to be excluded is exactly
+  one whose value set would contain both 2 and 0.  What the gap does not touch:
+  Theorem 8.7 and the `nu_6 = 2` computation, and step (iii), whose
+  nef-canonical input is pointwise -- their Claim 6.15 proof shows that for `K`
+  nef at any even point with vanishing `H^0` coordinate the Euler operator's
+  block components vanish in nonpositive degree.  The visible route to closing
+  it is Section 8 rather than the gauge: `d_a R = [R, G_a]` is a differential
+  identity between functions on the base, and vanishing derivative gives local
+  constancy; what it needs is its two hypotheses at every point of the
+  component, including the locus where the nilpotent part degenerates.
+
+  *Why the Serre decoration is now the leading candidate.*  It avoids the gap by
+  construction.  KKPY Proposition 5.23 proves the fibre representation's
+  isomorphism class independent of the representative by rigidity of
+  representations of a proreductive group -- a global argument that monodromy
+  data does not enjoy.  Their Example 6.17 runs the exact endpoint pattern in
+  dimension four for a very general cubic fourfold containing a plane, excluding
+  surfaces of general type by playing `S^3 = [4]` against the unipotency Claim
+  6.15 forces; Example 6.21 gives the cubic threefold `S^5 = [3]`.  Cautions:
+  the enhanced theory is asserted straightforward rather than written out, the
+  integral-structure enhancement is deferred to their forthcoming work, and both
+  are worked examples rather than theorems with hypotheses.  A source-verified assessment of
   the proposed Hodge-atom spine, which is the alternative presentation, is
   `../2026-08-15-c912-atom-spine-source-assessment.md`.
 

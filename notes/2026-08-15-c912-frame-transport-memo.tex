@@ -82,20 +82,26 @@ parameter, including a specialized one. No receiver, no bulk gauge, and no
 convergence question enters, because specialization is substitution into
 constants.
 
-Section~\ref{sec:endpoint} then proves the one-stabilization theorem
-unconditionally: for every smooth cubic threefold $X$, the fourfold
-$X\times\PP^1$ is irrational. The route is not the draft's. In the atom
-formulation the intermediate varieties of a weak factorization cancel in the
-ledger instead of being visited, so no framed operator is ever transported
-across a comparison isomorphism and Hypothesis 4.7H does not arise. The one
-invariance that formulation does need --- that the formal type is constant along
-the base --- has an elementary general proof, which is Cai's gauge argument
-stated in the generality it deserves; the receiver problem never appears there
-because that comparison is between two points of one base with the bulk
-parameters formal, not a specialization. What remains is a finite induction over
-the classification of surfaces, given here, and two imported decomposition
-theorems. Section~\ref{sec:corrections} lists what the earlier versions got
-wrong; readers of those versions should start there.
+Section~\ref{sec:endpoint} assembles the one-stabilization statement --- that
+$X\times\PP^1$ is irrational for every smooth cubic threefold --- in the atom
+formulation, where the intermediate varieties of a weak factorization cancel in
+the ledger instead of being visited, so that no framed operator is transported
+across a comparison isomorphism and Hypothesis 4.7H does not arise. Every step
+is proved there except one, and that one is stated as the gap it is: the
+primitive-sixth count must be invariant under change of base point within a
+connected component of the spectral cover, which is part of the definition of an
+atom. Cai's gauge argument gives that invariance along a formal germ, and it
+does not globalize, because the gauge is the pro-Laurent object whose sum over
+bulk degrees loses its lower bound in the loop coordinate outside topologically
+nilpotent parameters. So the receiver difficulty of the earlier sections
+reappears at the globalization step rather than being escaped. Two consequences
+are recorded: the low-dimensional side needs no such invariance, because the
+sources' nef-canonical claim is pointwise structural; and the sources' own
+architecture avoids the gap by decorating with a Serre automorphism, whose
+well-definedness on atoms follows from rigidity of representations of a
+proreductive group rather than from any constancy of monodromy.
+Section~\ref{sec:corrections} lists what the earlier versions got wrong;
+readers of those versions should start there.
 \end{abstract}
 
 \section{The assertion at issue}
@@ -1467,18 +1473,21 @@ and a resonance $\rho_i-\rho_j=-1$ must be excluded before the same conclusion
 follows.
 \end{remark}
 
-\section{The one-stabilization theorem, closed}
+\section{The one-stabilization theorem, and the one step it still needs}
 \label{sec:endpoint}
 
 Section~\ref{sec:rigid} closes the residual gap for the cubic block, but the
 draft's own presentation needs the same statement at every intermediate fourfold
 of a weak factorization, and that is a statement about arbitrary blocks. This
-section closes the endpoint theorem instead by changing where the bookkeeping
-happens. In the atom formulation the intermediate fourfolds never appear,
-because the weak-factorization ledger is an identity in the free abelian group
-on atoms; and the one invariance the formulation does require has an elementary
-general proof. The result is unconditional after two imported decomposition
-theorems.
+section changes where the bookkeeping happens. In the atom formulation the
+intermediate fourfolds never appear, because the weak-factorization ledger is an
+identity in the free abelian group on atoms. That removes the transport problem
+completely. It introduces one requirement of its own, which the first draft of
+this section wrongly called standard: the invariant must be well defined on
+atoms, and an atom is a geometric atomic $F$-bundle modulo isomorphism
+\emph{and} modulo change of base point within a connected component of the
+spectral cover. The second equivalence is where the argument is still open, and
+Section~\ref{sec:endpoint-gap} states exactly why.
 
 \subsection*{The invariant}
 
@@ -1536,18 +1545,47 @@ Proposition~\ref{prop:framed-is-turn}. A locally constant integer-valued
 function on a connected base is constant.
 \end{proof}
 
-\begin{remark}[The one step that is stated rather than proved here]
-\label{rem:formal-to-local}
-What the gauge argument gives directly is constancy along the \emph{formal} germ
-at each point: the deformed connection is gauge equivalent to the one at $b$
-over $\Lambda[z,z^{-1}][[t]]$. Passing from that to local constancy in the
-analytic topology of the base is the standard step that a function agreeing with
-its value at $b$ to all orders at every point of a reduced connected analytic
-space is locally constant. It is used in the form: the eigenvalues of the framed
-monodromy vary analytically and are constant to infinite order at every point.
-This is the only place in Section~\ref{sec:endpoint} where an analytic rather
-than formal statement is invoked, and it should be written out when the argument
-is drafted, not left as an aside.
+\subsection*{The gap, stated exactly}
+\label{sec:endpoint-gap}
+
+Theorem~\ref{thm:bulk-constancy} is a statement about the \emph{formal} germ: the
+deformed connection is gauge equivalent to the one at $b$ over
+$\Lambda[z,z^{-1}][[t]]$, with $t$ formal. The atom equivalence asks for more.
+Two geometric atomic $F$-bundles of the same variety are identified when their
+spectral lifts lie in the same connected component, and two points of one
+connected component of a non-archimedean analytic space are not in general
+related by a chain of formal germs. What is needed is local constancy in the
+analytic topology, and then connectedness.
+
+The obstruction to upgrading is not bookkeeping. It is the same divergence this
+memo has been circling from the start. The gauge $M$ of
+Theorem~\ref{thm:bulk-constancy} has $z$-order bounded below by $-|n|$ in bulk
+degree $n$, so it converges when the bulk parameter is topologically nilpotent
+and not otherwise; at a bulk parameter that is merely nearby in the analytic
+topology, the sum over bulk degrees has no lower bound in the loop coordinate,
+and $M$ is not a gauge in any ring where the turn argument runs. So the
+receiver problem of Sections~\ref{sec:lemma} and \ref{sec:receiver} is not
+escaped by moving to atoms; it is relocated to the globalization step.
+
+One route to closing it is visible, and it is Section~\ref{sec:rigid} rather
+than Cai's gauge. That argument produces the differential identity
+$\partial_aR=[R,G_a]$ between honest matrix-valued functions on the base, and a
+function with identically vanishing derivative on a smooth connected space in
+characteristic zero is locally constant. So the shearing argument globalizes
+where the gauge argument does not, and what it needs in exchange is its two
+hypotheses at every point of the component: the block must stay a rank-two
+Jordan block, and it must stay regular singular after one shearing.
+Theorem~\ref{thm:no-splitting} propagates nilpotency and
+Theorem~\ref{thm:no-irregularity} propagates regularity, but neither excludes
+the locus where the nilpotent part degenerates to zero, which is where the
+argument would have to be extended.
+
+\begin{remark}[What the gap does and does not touch]
+It does not touch Theorem~\ref{thm:low-dim}: the nef-canonical input there is
+pointwise. It does not touch the computation
+$\nu_6(\alpha(X))=2$ at the hyperplane point, nor its stability under
+specialization, which is Corollary~\ref{cor:cubic-closed}. It touches exactly
+the claim that these two facts may be compared as statements about one atom.
 \end{remark}
 
 \begin{remark}[Why this is not in tension with the receiver problem]
@@ -1569,7 +1607,9 @@ specialization; Theorem~\ref{thm:bulk-constancy} is the general one.
 
 \begin{proposition}
 \label{prop:nu6-atom}
-$\nu_6$ is well defined on the set of atoms.
+$\nu_6$ is invariant under isomorphism of geometric atomic $F$-bundles. It is
+well defined on atoms if and only if it is in addition constant on connected
+components of the spectral cover of each variety, which is open.
 \end{proposition}
 
 \begin{proof}
@@ -1577,15 +1617,18 @@ Atoms are geometric atomic $F$-bundles modulo the equivalence generated by
 isomorphism of atomic $F$-bundles and by change of the base point within one
 connected component of the spectral cover of one variety. An isomorphism carries
 the connection, hence the Levelt--Turrittin separation and the framed monodromy,
-so it preserves $\operatorname{Mon}$ and $\nu_6$. A change of base point within
-a connected component is covered by Theorem~\ref{thm:bulk-constancy}.
+so it preserves $\operatorname{Mon}$ and $\nu_6$. The second equivalence is
+exactly the constancy statement, which Theorem~\ref{thm:bulk-constancy} supplies
+along formal germs only.
 \end{proof}
 
-This is the lemma the earlier blueprint listed as owed and proved only for the
-regular-singular residue; the deformation argument there could not see the
-higher loop orders, which is the failure
-Section~\ref{sec:not-yet} exhibits. Theorem~\ref{thm:bulk-constancy} freezes the
-entire formal type, so the objection does not apply to it.
+It is worth being precise about why the weaker statement does not suffice. One
+might hope to compare the set of values of $\nu_6$ over the representatives of a
+class, which is well defined without any constancy. It does not help: the class
+one is trying to exclude is precisely a class whose value set would contain both
+$2$, from the cubic representative, and $0$, from a surface representative, and
+a non-constant value set is not by itself absurd. The contradiction needs
+constancy, not a value set.
 
 \subsection*{No atom in dimension at most two carries the invariant}
 
@@ -1611,11 +1654,13 @@ gives a gauge, by $u^{g}$ with $g=\mathrm{Gr}+\tfrac12T_{\mathrm d}$, after whic
 the connection has a first-order pole with nilpotent residue. Undoing that gauge
 shifts the exponents by the eigenvalues of $g$, which lie in $\tfrac12\Z$. So
 the framed monodromy is unipotent on even cohomology and has eigenvalue $-1$ on
-odd cohomology, and $\nu_6=0$. Claim 6.15 is applied at one point of the base,
-where the Euler operator is nilpotent for the usual degree reason; that it may
-be applied at one point and not at all of them is exactly what
-Theorem~\ref{thm:bulk-constancy} supplies, and this is the second place where
-that theorem is load-bearing rather than convenient.
+odd cohomology, and $\nu_6=0$. This input is pointwise and needs no constancy
+statement: their proof shows that for $K_T$ nef, at any even base point with
+vanishing $H^0$-coordinate, quantum multiplication by the Euler field moves the
+grading eigenspace for $m$ into eigenspaces for values at least $m+1$, so its
+block components $\kappa_{ij}$ vanish for $j\le0$ and the gauged operator has a
+first-order pole. The normalization of the $H^0$-coordinate costs nothing, since
+translation in the identity direction only twists by a scalar exponential.
 
 Curves: $\PP^1=\PP(\mathcal O^{\oplus2})$ over a point, so its atoms are point
 atoms; a curve of genus at least one has nef canonical class.
@@ -1640,8 +1685,9 @@ canonical class.
 
 \begin{theorem}[One stabilization]
 \label{thm:endpoint}
-Let $X\subset\PP^4_{\C}$ be a smooth cubic threefold. Then $X\times\PP^1$ is
-irrational.
+Assume $\nu_6$ is constant on connected components of the spectral cover, as
+discussed in Section~\ref{sec:endpoint-gap}. Let $X\subset\PP^4_{\C}$ be a
+smooth cubic threefold. Then $X\times\PP^1$ is irrational.
 \end{theorem}
 
 \begin{proof}
@@ -1690,17 +1736,17 @@ Imported, and not reproved:
 \item Weak factorization in characteristic zero.
 \end{itemize}
 
-Proved here or in the draft: bulk local constancy of the formal type
-(Theorem~\ref{thm:bulk-constancy}), descent of $\nu_6$ to atoms
+Proved here or in the draft: constancy of the formal type along formal germs
+(Theorem~\ref{thm:bulk-constancy}), invariance of $\nu_6$ under isomorphism
 (Proposition~\ref{prop:nu6-atom}), the low-dimensional vanishing
-(Theorem~\ref{thm:low-dim}), the cubic block computation, and --- not needed for
-the endpoint but needed if the draft keeps its own presentation --- the
+(Theorem~\ref{thm:low-dim}), the cubic block computation, and the
 specialization-safe rigidity of Section~\ref{sec:rigid}.
 
-Nothing in the chain is conditional, and Hypothesis 4.7H does not appear:
-the endpoint never transports a framed operator across a comparison
-isomorphism, because the intermediate varieties of the weak factorization cancel
-in the atom ledger rather than being visited.
+Open: constancy of $\nu_6$ on connected components, which is
+Section~\ref{sec:endpoint-gap}. Hypothesis 4.7H does not appear anywhere in the
+chain --- no framed operator is transported across a comparison isomorphism ---
+so the residual conditionality is of a different kind and a smaller one, but it
+is conditionality and the theorem should be stated with it until it is removed.
 
 \subsection*{Which other routes also close}
 
@@ -1714,14 +1760,35 @@ plausible for a single Jordan block of any size by the same shearing, and needs
 a resonance hypothesis in the semisimple case; it is real work, and it is the
 only route that keeps the draft's current architecture.
 
-\emph{The sources' Serre decoration.} Katzarkov--Kontsevich--Pantev--Yu separate
-$\alpha(X)$ from a genus-five curve atom by the graded minimal polynomial
-$S^5=[3]$ of its Serre automorphism, and conclude that every smooth cubic
-threefold is irrational. Substituting that decoration for $\nu_6$ in
-Theorem~\ref{thm:endpoint} requires only the surface case of
-Theorem~\ref{thm:low-dim} in the Serre form. It buys their Hodge-atom and
-motive machinery, and their statement is a worked example rather than a theorem
-with hypotheses.
+\emph{The sources' Serre decoration, which is now the leading candidate.} It
+avoids the gap of Section~\ref{sec:endpoint-gap} by construction, and this is
+the strongest reason to prefer it. Their Proposition 5.23 proves that the
+isomorphism class of the fibre representation of an atom is independent of the
+representative, using rigidity of finite-dimensional representations of a
+proreductive group --- a global argument, valid across a connected component,
+which monodromy data does not enjoy. They then decorate with a Serre
+automorphism and state that the enhanced theory is a straightforward repeat of
+the undecorated one, with the corresponding strengthened non-rationality
+criterion.
+
+Their Example 6.21 separates $\alpha(X)$ from a genus-five curve atom by the
+graded minimal polynomial $S^5=[3]$ and concludes that every smooth cubic
+threefold is irrational. More to the point for the endpoint, their Example 6.17
+runs the same pattern in \emph{dimension four}, for a very general cubic
+fourfold containing a plane: there $\alpha(X)$ is shaped like the atom of a
+surface of general type, and they exclude it by playing $S^3=[4]$ against the
+unipotency that Claim 6.15 forces on the even cohomology of a nef-canonical
+surface. That is exactly the shape the one-stabilization argument needs, with
+$X\times\PP^1$ in place of their fourfold, and it pairs their globally
+well-defined decoration on the cubic side with a pointwise structural statement
+on the surface side --- the two halves whose mismatch is the gap above.
+
+Two cautions remain. The enhanced theory is asserted straightforward rather than
+written out, and the integral-structure enhancement is explicitly deferred to
+forthcoming work; only the Euler-pairing and Serre-automorphism enhancements are
+claimed here. And their examples are worked examples, not theorems with
+hypotheses, so the surface exclusion for $X\times\PP^1$ has to be done rather
+than cited.
 
 \emph{Both decorations at once.} They are independent invariants of the same
 atom, so proving the surface exclusion twice is a genuine referee-facing check
