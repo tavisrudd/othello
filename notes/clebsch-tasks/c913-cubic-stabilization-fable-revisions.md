@@ -130,10 +130,22 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
 6. Freeze the revised PDF and obtain two new independent cold reads: one
    derived/gauged-GW reader and one birational/quantum reader.
 
+Package D is complete in the authority tree (report:
+`notes/2026-08-14-c913-package-d-expansions.md`): Major 3 is discharged by
+`lem:orbit-cylinder-disjoint` (Hilbert--Mumford interval argument run
+directly on the resolved completion, making resolution persistence moot),
+and Major 4 by the one-chart appendix `app:one-chart` (attractor
+equivalence, 2-commutative square via naturality plus a Čech-level equality
+of representatives, µ_k/rigidification descent, cutting and Artin
+reduction), with the two imported derived comparisons cited
+(`ToenVezzosiHAGII`, `SchurgToenVezzosi`).  `make check` passes at 39
+pages.  Source extractions for Włodarczyk 2(B′) and Woodward QK II/III are
+in the dated notes files of 2026-08-14.
+
 ## Immediate next step
 
-Begin Package D: expand the orbit-cylinder marking into a proved
-disjointness lemma (referee Major 3) and expand the rank-one derived
-clutching theorem, with the one-chart calculation in an appendix (referee
-Major 4).  Confirm the expected-versus-open clause labels with Tavis before
-the next export.
+Author sign-offs: the expected-versus-open labels for Definition
+8.1(i)--(iii) (Package C) and the `F^0_{≤0}` subscript convention check
+(Package D report, open point 1).  Then the acceptance-gate closeout:
+ej+tt pass with Mystery ledger, fresh frozen PDF, and the two independent
+cold reads (derived/gauged-GW and birational/quantum) before re-export.

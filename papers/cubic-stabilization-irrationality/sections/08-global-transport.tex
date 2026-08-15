@@ -196,14 +196,105 @@ exists globally.  W{\l}odarczyk's smooth birational cobordism admits a smooth
 projective equivariant completion whose source and sink quotients are the two
 endpoints \cite[Proposition~2(B')]{Wlodarczyk}.  Choose \(p\) in the common
 birational open supplied as a trivialized cylinder by the construction.
-There the cobordism is a trivial orbit cylinder.  The
-equivariant Poincar\'e dual of the closure of that orbit restricts to the two
-point classes and misses every intermediate fixed component.  It is the
-class \(a_p\) in \eqref{eq:marked-class-restrictions}.  This assertion
+There the cobordism is a trivial orbit cylinder.  The following lemma
+produces the class \(a_p\) from that orbit.  It is stated for an arbitrary
+smooth projective \(\Gm\)-variety carrying the two chamber polarizations of
+Definition~\ref{def:gauged-admissible}\textup{(i)}, so it applies directly
+to the resolved completion.
+
+\begin{lemma}[Orbit-cylinder disjointness]
+\label{lem:orbit-cylinder-disjoint}
+Let \(W\) be a smooth projective variety with a \(\Gm\)-action and two
+equivariant ample linearizations \(L_-\) and \(L_+\) at which stable equals
+semistable and the semistable loci are free.  For a rational
+\(u\in[0,1]\), write \(L_u=L_-^{1-u}\otimes L_+^{u}\) for the interpolated
+polarization, and for a fixed point \(w\) write \(\mu_u(w)\) for the weight
+of the \(\Gm\)-action on the fibre of \(L_u\) at \(w\).  Let \(x\in
+W^{\mathrm{ss}}(L_-)\cap W^{\mathrm{ss}}(L_+)\), let
+\(O=\Gm\cdot x\), and let
+\(w_0=\lim_{t\to0}t\cdot x\) and \(w_\infty=\lim_{t\to\infty}t\cdot x\) be
+its Bia{\l}ynicki--Birula limits in \(W\).  Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \(\overline O=O\cup\{w_0,w_\infty\}\), and \(w_0\ne w_\infty\) are
+  fixed points;
+\item if a fixed component \(F\) is semistable for some \(L_u\) with
+  \(u\in[0,1]\), then \(\overline O\cap F=\emptyset\);
+\item \(\overline O\cap W^{\mathrm{ss}}(L_\pm)=O\), and the equivariant
+  Poincar\'e dual \(a=\mathrm{PD}[\overline O]\in H^*_{\Gm}(W)\) satisfies
+  \(\operatorname{Kir}_\pm(a)=[q_\pm]\), where \(q_\pm\) are the images of
+  \(x\) in the two quotients, and \(a|_F=0\) for every fixed component
+  \(F\) as in \textup{(b)}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We use the numerical criterion for \(\Gm\) in the fibre-weight form: a point
+\(y\) is semistable for an equivariant ample \(M\) if and only if
+\begin{equation}\label{eq:gm-weight-criterion}
+ \mu_M(y_\infty)\leq 0\leq\mu_M(y_0),
+\end{equation}
+where \(y_0,y_\infty\) are its two limits and \(\mu_M\) is the fibre
+weight; \(y\) is stable if and only if both inequalities are strict.  This
+is Mumford's criterion \cite[Theorem~2.1]{MumfordGIT} made explicit for the
+two one-parameter subgroups of \(\Gm\): embed \(W\) equivariantly in
+\(\mathbf P(V)\) by sections of a power of \(M\).  For
+\(v=\sum_kv_k\) with \(t\cdot v_k=t^kv_k\), the limit of \([t\cdot v]\) at
+\(t\to0\) is \([v_{k_{\min}}]\) and at \(t\to\infty\) is
+\([v_{k_{\max}}]\), where \(k_{\min}<k_{\max}\) bound the support of \(v\);
+the fibre of \(\OO(1)\) at the fixed point \([v_k]\) has weight \(-k\); and
+\([v]\) is semistable exactly when \(k_{\min}\leq0\leq k_{\max}\).  A fixed
+point is its own pair of limits, so it is semistable for \(M\) exactly when
+\(\mu_M\) vanishes on it.
+
+\textup{(a)}  The stabilizer of \(x\) is trivial because the semistable
+loci are free, so \(O\cong\Gm\) and its closure in the projective \(W\) is
+the image of the completed parametrization \(\mathbf P^1\to W\),
+\(t\mapsto t\cdot x\); it adds exactly the two limits, which are fixed.
+Strict inequalities in \eqref{eq:gm-weight-criterion} for \(L_-\) give
+\(\mu_0(w_0)>0>\mu_0(w_\infty)\), so \(w_0\ne w_\infty\).
+
+\textup{(b)}  The fibre weight \(\mu_u(w)\) is affine in \(u\).  Stability
+of \(x\) at \(u=0\) and \(u=1\) gives \(\mu_u(w_0)>0\) at both ends, hence
+\(\mu_u(w_0)>0\) for every \(u\in[0,1]\); likewise \(\mu_u(w_\infty)<0\) on
+all of \([0,1]\).  A fixed component \(F\) semistable at \(L_u\) has
+\(\mu_u(F)=0\) by the criterion applied to its points.  Since \(\mu_u\) is
+constant on \(F\), neither \(w_0\) nor \(w_\infty\) lies in \(F\).  The
+open orbit \(O\) contains no fixed point, so
+\(\overline O\cap F=\emptyset\).
+
+\textup{(c)}  The limits are unstable for both \(L_\pm\): their
+\(\mu_u\)-values at \(u\in\{0,1\}\) are nonzero.  Hence
+\(\overline O\cap W^{\mathrm{ss}}(L_\pm)=O\).  Restriction of a Poincar\'e
+dual to an open invariant subset is the Poincar\'e dual of the intersected
+cycle, so \(a\) restricts on \(W^{\mathrm{ss}}(L_\pm)\) to
+\(\mathrm{PD}[O]\).  Under the free quotient this is the point class of the
+image of \(O\), which is \([q_\pm]\).  The vanishing \(a|_F=0\) follows
+from \textup{(b)}, since the restriction of \(\mathrm{PD}[\overline O]\) to
+a closed subvariety disjoint from \(\overline O\) is zero.
+\end{proof}
+
+Applied to the resolved completion, with \(x\) the cylinder point over
+\(p\), the lemma produces the class \(a_p\) in
+\eqref{eq:marked-class-restrictions}.  The cylinder orbit is free.  It is
+semistable for both chamber polarizations because the identification of the
+extreme quotients with the two endpoints in
+Definition~\ref{def:gauged-admissible}\textup{(i)} is an identification of
+birational varieties: it restricts over the common open to the cobordism
+quotients, which are defined at \(p\), and the free semistable fibre over
+\(p_\pm\) is then the cylinder orbit itself.  A fixed component occurring at an intermediate polarization in
+the wall-crossing sense is semistable for some interpolated \(L_u\), so
+clause \textup{(b)} covers every wall term in the polarization sweep.  The
+lemma answers the completion question intrinsically: its hypotheses are
+conditions on the resolved completion itself, namely
+Definition~\ref{def:gauged-admissible}\textup{(i)} and bistability of the
+cylinder orbit, so no compatibility between the resolution and the orbit
+limits is needed.  In particular it does not matter that the limits
+\(w_0,w_\infty\) lie outside the cylinder over which the resolution is an
+isomorphism; the numerical criterion is evaluated upstairs.  This assertion
 concerns the ordinary Kirwan
 restrictions only; no vanishing of positive-degree corrections to the quantum
-Kirwan maps is used.  The cited cobordism theorem supplies this underlying
-completion and marking; it does not by itself verify conditions
+Kirwan maps is used.  The cited cobordism theorem supplies the underlying
+completion and cylinder; it does not by itself verify conditions
 \textup{(i)}--\textup{(iii)} of
 Definition~\ref{def:gauged-admissible}.  Those conditions remain explicit
 assumptions in the global theorem.
@@ -211,9 +302,13 @@ assumptions in the global theorem.
 There is a terminology point in the source.  W{\l}odarczyk calls the open
 cobordism \emph{projective} when it is quasiprojective.  We use the resolved
 proper equivariant completion constructed in the proof of
-Proposition~2(B'); the resolution is an isomorphism over the source, sink,
-and common-open cylinder.  Thus the extreme quotients and the class \(a_p\)
-are unchanged.
+Proposition~2(B'): the equivariant projective completion of the glued
+double line-bundle space, followed by its canonical equivariant resolution.
+The glued space is smooth, so the canonical resolution is an isomorphism
+over it, in particular over the source, sink, and common-open cylinder.
+Thus the extreme quotients and the cylinder orbit are unchanged.
+Lemma~\ref{lem:orbit-cylinder-disjoint} uses nothing else about the
+completion.
 
 \subsection{Neutral tails and threshold comparison}
 
@@ -407,6 +502,8 @@ Derived descent over the two-chart cover then gives the displayed homotopy
 fibre product.  Its inverse equips a family \(x\) with the prescribed two
 clutching bundles and the sections \(z\mapsto z^{a_\pm}x\).  The chosen strata
 impose the generic stability and graph-component conditions.
+Appendix~\ref{app:attractor} carries out this affine verification, together
+with chart independence and the descent step.
 The attached stable-map factors in Woodward's equations (54)--(57) are added
 by derived fibre products over the two inertia evaluations.
 
@@ -474,11 +571,16 @@ the comparison is the following \(2\)-commutative square:
    & \longrightarrow & L_{t_0\mathfrak Z/\mathfrak M}.
 \end{array}
 \]
-The lower arrow is the canonical truncation map.  The square commutes because
-both horizontal maps are adjoint to the same differential of evaluation on
-the two-chart universal section.  The left vertical arrow is therefore a
+The lower arrow is the canonical truncation map.  The square is the
+naturality square of the truncation transformation evaluated at the
+equivalence \(\operatorname{ev}_1\), and on the two-chart \v{C}ech
+presentation both composites are the same difference of restrictions to the
+open orbit, so the comparison homotopy may be taken to be the identity
+(Proposition~\ref{prop:app-square}).  The left vertical arrow is therefore a
 quasi-isomorphism, and the two perfect obstruction theories are isomorphic as
 morphisms to the cotangent complex, not merely as perfect complexes.
+Appendix~\ref{app:square} also records the two imported comparisons the
+argument uses.
 
 For an attached stable-map factor, the fixed graph stack is a derived fibre
 product over its inertia evaluation.  Its cotangent triangle is the direct
@@ -499,7 +601,8 @@ central gerbe; pullback to that gerbe is conservative, and hence the
 equivalence and obstruction theory descend.  Stabilizer and graph-automorphism
 groups, including their localization multiplicities, are unchanged.  The
 parametrized principal component has no domain automorphisms, while the fixed
-bubble factors retain theirs.
+bubble factors retain theirs.  Appendix~\ref{app:rigidification} expands the
+orbifold chart, the invariants, and the descent along the gerbe.
 
 For the irreducible unstable convention there is no stable-map factor.  Its
 fixed deformation complex is exactly

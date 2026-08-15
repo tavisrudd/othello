@@ -1,0 +1,623 @@
+\section{The one-chart calculation}
+\label{app:one-chart}
+
+This appendix expands the proof of Theorem~\ref{thm:tailwise-derived} at the
+three places where it is compressed: the affine verification of the derived
+equivalence, the two-commutative obstruction-theory square, and the
+\(\mu_k\)-equivariance and rigidification step.  The hypotheses, the statement,
+and the conclusions of that theorem are unchanged; what follows adds no new
+assumption and asserts nothing stronger.
+
+One convention must be fixed before any comparison.  Woodward works with
+classical stacks carrying perfect obstruction theories in the sense of
+Behrend--Fantechi, over Artin stacks of prestable domains, and with Vistoli's
+bivariant Chow groups for representable morphisms; his index complex is
+\((Rp_*e^*T(X/G))^\vee\), stated absolutely in
+\cite[Definition~7.13(a)]{WoodwardQKIII} and relative over the twisted domain
+stack in \cite[Section~8.3]{WoodwardQKIII} and
+\cite[Example~6.6(c)]{WoodwardQKII}.  Derived stacks play no role there.  The
+derived fixed-section stacks used in Theorem~\ref{thm:tailwise-derived} are an
+auxiliary layer of the present manuscript.  Their only purpose is to make the
+degree-shift comparison functorial in nilpotent and simplicial thickenings of
+the test base, which is what upgrades an isomorphism of perfect complexes to an
+isomorphism of obstruction theories \emph{as morphisms to a cotangent complex}.
+Every comparison below is returned to Woodward's setting by
+Proposition~\ref{prop:app-square}: the classical truncation of the derived
+obstruction theory is his relative perfect obstruction theory over the fixed
+moduli of marked domains, so the identification is an identification of the
+relative virtual classes he uses.
+
+The imported statements are: the clutching description of the rotation-fixed
+gauged maps \cite[Definition~9.7, Lemmas~9.8 and~9.9,
+Corollary~9.10]{WoodwardQKIII}; the obstruction theory
+\cite[Definition~7.13]{WoodwardQKIII} in its relative form
+\cite[Section~8.3]{WoodwardQKIII}, \cite[Example~6.6(c)]{WoodwardQKII}; the
+cutting axiom \cite[Proposition~7.14(b)]{WoodwardQKIII} together with the fibre
+product over the diagonal on which its proof rests
+\cite[Proposition~5.21]{WoodwardQKII}; and the rigidified inertia conventions
+\cite[Section~4.3, Proposition~4.3(f),(g)]{WoodwardQKII}.  Two standard
+comparisons are used and not reproved: the cotangent complex of a derived
+mapping stack is the pushforward of the pulled-back cotangent complex of the
+target, and a classical obstruction theory built from the deformation theory of
+a universal object is the classical truncation of the derived one.
+Remark~\ref{rem:app-imports} says exactly where each enters.
+
+\subsection{Graded setup and the derived fixed-section stack}
+\label{app:setup}
+
+Throughout, \(W\) is the smooth projective \(\Gm\)-variety of
+Definition~\ref{def:gauged-admissible} and we work over \(\C\).  Fix the
+generic semistable locus \(W^{\mathrm{gen}}\subset W\) and the two fixed
+components \(F_-,F_+\) prescribed by the rotation-fixed graph type, as in the
+proof of Theorem~\ref{thm:tailwise-derived}.  The gauge group is \(\Gm\); the
+domain rotation group is written \(\C^\times_{\mathrm{rot}}\).
+
+The domain of the principal component is the parametrized line \(P\) with its
+two marked points \(0,\infty\) and the two affine charts
+\[
+ P^0=\operatorname{Spec}\C[z],\qquad
+ P^\infty=\operatorname{Spec}\C[z'],\qquad z'=z^{-1},
+\]
+glued along the open orbit \(\Gm\subset P\).  Each chart carries the rotation
+action scaling its own coordinate.  We record an exponent \(a_\pm\in\mathbf Z\)
+in each chart's own coordinate, so that both extension conditions below are
+conditions at the vanishing locus of the local coordinate; this matches the
+convention \(W_F^a=\{x\in W^{\mathrm{gen}}:\lim_{t\to0}t^ax\in F\}\) used in
+the proof of Theorem~\ref{thm:tailwise-derived}.
+
+\begin{definition}[Derived fixed-section stack]
+\label{def:app-fixed-section}
+Let \(R\) be a simplicial commutative \(\C\)-algebra.  An \(R\)-point of
+\(\mathfrak S_{a_-,a_+}\) is a rotation-equivariant map
+\(u\colon P_R\to[W/\Gm]\) whose rotation-equivariant structure on the
+underlying \(\Gm\)-bundle is the clutching datum of
+\cite[Definition~9.7]{WoodwardQKIII} for the pair of cocharacters
+\(t\mapsto t^{a_\pm}\), together with the prescribed stabilizer lift and graph
+component.  Morphisms of \(R\)-points are isomorphisms of these data.  This is
+a functor on simplicial commutative \(\C\)-algebras, defined degreewise in the
+simplicial direction; characteristic zero is used throughout, both for
+simplicial commutative algebras to model connective commutative differential
+graded algebras and for exactness of invariants under the reductive groups that
+appear.
+\end{definition}
+
+By Sumihiro's theorem \(W\) is covered by \(\Gm\)-invariant affine opens.  Fix
+one, \(\operatorname{Spec}A\), and write its coordinate ring as a
+\(\Gm\)-representation,
+\begin{equation}\label{eq:app-grading}
+ A=\bigoplus_{w\in\mathbf Z}A_w,
+ \qquad
+ f\in A_w\iff f(t\cdot x)=t^wf(x).
+\end{equation}
+Over a test algebra \(R\), the trivialized chart at \(0\) has coordinate ring
+\(R[z]\), graded with \(z\) in degree \(1\) and \(R\) in degree \(0\); the open
+orbit has \(R[z^{\pm1}]\) with the same grading.
+
+\begin{remark}[What the exponent does and does not change]
+\label{rem:app-exponent}
+The exponent \(a\) enters the chart only through the twist of the
+rotation-equivariant structure on the \(\Gm\)-bundle.  It does not change the
+domain, the target, or the trivializations.  This is the reason the
+calculations below separate cleanly into a part that depends on \(a\) only
+through its sign and a part---the universal section itself---that depends on
+\(a\) exactly.
+\end{remark}
+
+\subsection{Evaluation at one and the attractor algebra}
+\label{app:attractor}
+
+\begin{lemma}[Unique extension on one chart]
+\label{lem:app-graded-extension}
+Let \(R\) be a simplicial commutative \(\C\)-algebra and \(a\in\mathbf Z\).
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Ring maps \(\psi\colon A\to R[z^{\pm1}]\) sending \(A_w\) into the
+\(z\)-degree \(aw\) part --- the equivariance condition for a rotation-fixed
+section with clutching exponent \(a\), for the gradings
+\eqref{eq:app-grading} --- correspond bijectively, degreewise in the
+simplicial direction, to ring maps \(x\colon A\to R\), by
+\begin{equation}\label{eq:app-graded-map}
+ \psi(f)=x(f)\,z^{aw}\qquad(f\in A_w).
+\end{equation}
+The correspondence is evaluation at \(z=1\).
+\item Such a \(\psi\) takes values in \(R[z]\) if and only if \(x\) annihilates
+every \(A_w\) with \(aw<0\), that is, if and only if \(x\) factors through the
+\emph{attractor algebra}
+\begin{equation}\label{eq:app-attractor-ideal}
+ A^a:=A/I_a,\qquad I_a:=\bigl(A_w:aw<0\bigr).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The grading forces \(\psi(A_w)\subset(R[z^{\pm1}])_{aw}=R\,z^{aw}\), so
+\(\psi\) is determined by the \(R\)-linear maps \(x_w\colon A_w\to R\) defined
+by \(\psi(f)=x_w(f)z^{aw}\).  Since \(z^{aw}z^{aw'}=z^{a(w+w')}\), the
+collection \((x_w)\) is multiplicative if and only if the single map
+\(x=\bigoplus_wx_w\colon A\to R\) is a ring map; unitality corresponds to
+\(x(1)=1\).  This is (a), and both directions are levelwise constructions in
+the simplicial variable, so they hold degreewise.  For (b), \(R[z]\) is the
+part of \(R[z^{\pm1}]\) of nonnegative degree, so \(\psi(A_w)\subset R[z]\)
+fails exactly when \(aw<0\) and \(x_w\neq0\).  The elements with \(aw<0\)
+generate \(I_a\), and a ring map killing a generating set of an ideal kills the
+ideal.
+\end{proof}
+
+Nothing in Lemma~\ref{lem:app-graded-extension} required \(A\) to be resolved:
+the target \(R[z]\) is a polynomial extension of \(R\), and the graded pieces
+were used only to split a map of sets.  The next two statements record the
+consequences that the proof of Theorem~\ref{thm:tailwise-derived} uses.
+
+\begin{lemma}[Sign dependence]
+\label{lem:app-sign}
+For \(a\neq0\) the ideal \(I_a\) of \eqref{eq:app-attractor-ideal} depends only
+on the sign of \(a\).  Consequently, for two exponents \(a,a'\) of the same
+sign, the attractor algebras \(A^a=A^{a'}\), the induced strata, and the
+restriction maps to the open orbit coincide; only the universal section
+\(z\mapsto z^ax\) of \eqref{eq:app-graded-map} differs.  For \(a=0\) one has
+\(I_0=0\) and \(A^0=A\).
+\end{lemma}
+
+\begin{proof}
+The condition \(aw<0\) is the condition \(\operatorname{sign}(a)w<0\), which
+depends on \(a\) only through its sign; for \(a=0\) it is empty.  The strata
+and the restriction maps are defined from \(A^a\) and the inclusion
+\(\operatorname{Spec}A^a\subset\operatorname{Spec}A\), so they inherit this.
+The section \eqref{eq:app-graded-map} is \(z\mapsto z^ax\), which changes with
+\(a\).
+\end{proof}
+
+The value \(a=0\) is the degenerate case in which the extension condition is
+vacuous, the limit point need not be fixed, and no fixed component \(F\) is
+selected.  This is why exponent zero occurs in
+Theorem~\ref{thm:tailwise-derived} as a removed threshold rather than as an
+interior point of a tail.
+
+\begin{proposition}[One-chart equivalence]
+\label{prop:app-one-chart}
+Let \(a\neq0\) and let \(F\) be a connected component of \(W^{\Gm}\).  Write
+\(\mathfrak S^{\,0}_a\) for the stack of rotation-fixed sections over the chart
+\(P^0\) with exponent \(a\), imposing membership in \(W^{\mathrm{gen}}\) and
+limit in \(F\).  Then evaluation at \(z=1\) is an equivalence of derived stacks
+\[
+ \operatorname{ev}_1\colon\mathfrak S^{\,0}_a
+ \xrightarrow{\ \sim\ }[W_F^a/\Gm],
+\]
+natural in the simplicial test algebra, compatible with arbitrary derived base
+change, and independent of the chosen invariant affine chart.  In particular
+\(\mathfrak S^{\,0}_a\) has no derived structure, and its classical truncation
+is the Bia{\l}ynicki--Birula stratum \(W_F^a\) modulo the gauge group,
+including stabilizers.
+\end{proposition}
+
+\begin{proof}
+Work first on \(\operatorname{Spec}A\) and before taking the quotient by the
+gauge group.  By Lemma~\ref{lem:app-graded-extension} the sections over
+\(P^0\) with exponent \(a\) and values in \(\operatorname{Spec}A\) are, via
+evaluation at \(1\), the \(R\)-points of \(\operatorname{Spec}A^a\); this is an
+isomorphism of functors on simplicial commutative \(\C\)-algebras, hence
+commutes with base change, since \eqref{eq:app-graded-map} is levelwise and
+does not involve \(R\).  For \(a>0\) the ideal \(I_a\) is generated by the
+negative weight spaces, so \(\operatorname{Spec}A^a\) is the locus where
+\(\lim_{t\to0}t\cdot x\) exists; for \(a<0\) it is the locus where the opposite
+limit exists.  The subalgebra of positive-degree elements of \(A^a\) is an
+ideal, so the projection to the weight-zero part is a ring map and defines the
+limit morphism \(\operatorname{Spec}A^a\to\operatorname{Spec}A_0\) onto the
+fixed locus of the chart.  The preimage of a connected component \(F\) is open
+and closed in \(\operatorname{Spec}A^a\); intersecting with the open
+\(W^{\mathrm{gen}}\) imposes generic semistability.  This is the chartwise
+description of \(W_F^a\).
+
+Chart independence.  Because \(W\) is projective, the limit
+\(\lim_{t\to0}t^ax\) exists in \(W\) for every \(x\), and because \(W\) is
+separated an extension of a section across the origin is unique when it
+exists.  Two invariant affine charts therefore impose the same condition on
+their overlap, and the chartwise closed subschemes glue to the locally closed
+subscheme \(W_F^a\subset W\).  Uniqueness also makes the identification
+\(\operatorname{ev}_1\) compatible on overlaps, so it globalizes.
+
+Descent to the quotient stack.  A rotation-fixed section over \(P^0_R\) with
+values in \([W/\Gm]\) is, locally on \(\operatorname{Spec}R\), a trivialization
+of the \(\Gm\)-bundle together with a section as above; two trivializations
+differ by a rotation-invariant gauge transformation, and the rotation-invariant
+gauge transformations over \(P^0\) are the constants \(\Gm(R)\).  Quotienting
+by this action turns the previous paragraph into the asserted equivalence with
+\([W_F^a/\Gm]\), stabilizers included.
+
+Absence of derived structure.  The chart with its rotation action is the
+quotient stack \([\A^1/\C^\times_{\mathrm{rot}}]\).  Its quasicoherent
+cohomology vanishes in positive degrees, since cohomology on \(\A^1\) vanishes
+there and taking rotation invariants is exact in characteristic zero.  Hence
+the deformation theory of \(\mathfrak S^{\,0}_a\) relative to a point is
+concentrated in degree zero, so the stack is smooth and its structure sheaf is
+discrete.  This is consistent with Bia{\l}ynicki--Birula: for smooth \(W\) the
+fixed components and their attracting loci are smooth.
+\end{proof}
+
+\begin{proposition}[Two-chart descent]
+\label{prop:app-descent}
+With \(\mathfrak S_{a_-,a_+}\) as in Definition~\ref{def:app-fixed-section},
+evaluation at \(1\) is an equivalence of derived stacks
+\[
+ \operatorname{ev}_1\colon\mathfrak S_{a_-,a_+}
+ \xrightarrow{\ \sim\ }
+ \mathfrak Z=
+ [W_{F_-}^{a_-}/\Gm]\mathop{\times}^{\mathbf R}_{[W/\Gm]}
+ [W_{F_+}^{a_+}/\Gm],
+\]
+and the inverse equivalence equips a family \(x\) with the two prescribed
+clutching bundles and the sections \(z\mapsto z^{a_\pm}x\).  By
+Lemma~\ref{lem:app-sign}, the right-hand side depends on the pair
+\((a_-,a_+)\) only through the two signs and the two components
+\(F_-,F_+\).
+\end{proposition}
+
+\begin{proof}
+The two charts cover \(P\) and meet in the open orbit.  A section over \(P_R\)
+is a pair of sections over the two charts together with an identification of
+their restrictions to the open orbit, and mapping into a stack makes this a
+homotopy limit rather than a strict equality of restrictions; that homotopy
+limit is the homotopy fibre product of the two chart-section stacks over the
+section stack of the open orbit.  The rotation-fixed sections over the open
+orbit are, by evaluation at \(1\) and the argument of
+Proposition~\ref{prop:app-one-chart} with \(I_a=0\), the stack \([W/\Gm]\); the
+restriction maps from the two charts are the two stratum inclusions.  Applying
+Proposition~\ref{prop:app-one-chart} to each chart gives the displayed
+equivalence.  Since evaluation at \(1\) is the common value of the two
+extensions, the inverse construction reads off \(x\) and reconstructs the two
+sections by \eqref{eq:app-graded-map}, which is where the exponents reappear.
+\end{proof}
+
+\subsection{Tangent complexes and the two-commutative square}
+\label{app:square}
+
+All complexes in this subsection are relative to the fixed moduli \(\mathfrak
+M\) of marked domains.  Let \(\pi\colon\mathcal P\to\mathfrak Z\) be the
+universal domain, \(u_a\colon\mathcal P\to[W/\Gm]\) the universal gauged map
+with exponents \(a=(a_-,a_+)\), and
+\[
+ V:=\operatorname{ev}_1^*T([W/\Gm])
+\]
+the pullback of the tangent complex of the quotient stack along evaluation at
+\(1\).  Define \(F^0_{\leq0}V\) and \(F^\infty_{\leq0}V\) to be the subcomplexes
+of \(V\) consisting of the rotation-invariant sections of
+\(u_a^*T([W/\Gm])\) over the chart at \(0\), respectively at \(\infty\),
+viewed inside \(V\) by restriction to the open orbit.  These are the extension
+subcomplexes of the in-text display; the subscript records which half of the
+weight decomposition at the corresponding limit point they select, and only the
+intrinsic description just given is used below.  No equivariant splitting of
+\(V\) is chosen.
+
+\begin{lemma}[Invariant \v{C}ech presentation]
+\label{lem:app-cech}
+There are canonical equivalences, natural in \(\mathfrak Z\),
+\begin{equation}\label{eq:app-cech}
+ \bigl(R\pi_*u_a^*T([W/\Gm])\bigr)^{\mathrm{rot}}
+ \simeq
+ \bigl[F^0_{\leq0}V\oplus F^\infty_{\leq0}V\longrightarrow V\bigr]
+ \simeq
+ T_{\mathfrak Z/\mathfrak M},
+\end{equation}
+where the middle complex sits in degrees \(0\) and \(1\) and its differential
+is the difference of the two restrictions to the open orbit.  Moreover
+\(F^0_{\leq0}V\) and \(F^\infty_{\leq0}V\) are the pullbacks of
+\(T([W_{F_-}^{a_-}/\Gm])\) and \(T([W_{F_+}^{a_+}/\Gm])\), and all three terms
+depend on \(a\) only through the two signs.
+\end{lemma}
+
+\begin{proof}
+The pullback \(u_a^*T([W/\Gm])\) is a two-term complex of vector bundles on
+\(\mathcal P\), and the two charts are affine over \(\mathfrak Z\), so the
+\v{C}ech complex of the two-chart cover computes \(R\pi_*\).  It is
+\([\,\Gamma(P^0)\oplus\Gamma(P^\infty)\to\Gamma(\Gm)\,]\) with the difference
+differential.  Taking \(\C^\times_{\mathrm{rot}}\)-invariants is exact in
+characteristic zero, because the rotation group is linearly reductive and
+invariants are the weight-zero summand of a weight decomposition; so invariants
+may be taken termwise.  By definition the invariants of the three terms are
+\(F^0_{\leq0}V\), \(F^\infty_{\leq0}V\) and \(V\), the last because a
+rotation-invariant section over the open orbit is determined by its value at
+\(z=1\).  This gives the first equivalence.
+
+For the identification of the two extension subcomplexes, apply
+Lemma~\ref{lem:app-graded-extension} to the module of sections rather than to
+the ring: on an invariant affine chart, a graded \(A\)-module \(M=\bigoplus_wM_w\)
+gives \((M\otimes_AR[z])^{\mathrm{rot}}=\bigoplus_{aw\geq0}(M_w\otimes_AR)\) and
+\((M\otimes_AR[z^{\pm1}])^{\mathrm{rot}}=\bigoplus_w(M_w\otimes_AR)\).  Taking
+\(M\) to be the module of sections of \(T([W/\Gm])\) identifies the invariants
+over the chart with the tangent complex of the attractor subscheme, which is
+the content of Bia{\l}ynicki--Birula's description of the attracting locus of a
+smooth \(\Gm\)-variety.  The same statement in family form over a simplicial
+base is the module version of Proposition~\ref{prop:app-one-chart}.
+
+The second equivalence in \eqref{eq:app-cech} is the tangent complex of a
+homotopy fibre product: for \(\mathfrak Z\) as in
+Proposition~\ref{prop:app-descent} there is a fibre sequence
+\(T_{\mathfrak Z/\mathfrak M}\to T_{-}\oplus T_{+}\to V\) with
+\(T_\pm=T([W_{F_\pm}^{a_\pm}/\Gm])\) pulled back, which is the displayed
+two-term complex.  Finally, sign dependence follows from
+Lemma~\ref{lem:app-sign} applied to the module computation above.
+\end{proof}
+
+\begin{remark}[Where the degree-one term comes from]
+\label{rem:app-degree-one}
+The complex \eqref{eq:app-cech} has \(h^1\) equal to the cokernel of
+\(F^0_{\leq0}V\oplus F^\infty_{\leq0}V\to V\), which is nonzero exactly when
+the two attracting loci fail to meet transversely at the point in question.
+The gauge direction contributes to all three terms and cancels in the
+difference; on the generic semistable locus the stabilizers are finite, so
+\(h^{-1}\) vanishes and the complex is supported in degrees \(0\) and \(1\).
+Along one tail the two signs are constant and the zero-weight changes were
+removed as thresholds, so the two subcomplexes and the restriction map are
+constant, while the universal section \(z\mapsto z^{a_\pm}x\) is not.
+\end{remark}
+
+\begin{lemma}[Woodward's obstruction theory as a truncation]
+\label{lem:app-truncation}
+Put
+\[
+ E_a=\bigl((R\pi_*u_a^*T([W/\Gm]))^{\mathrm{rot}}\bigr)^\vee.
+\]
+The cotangent complex of the derived mapping stack gives
+\(E_a\simeq\tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}\), and under this
+identification the morphism
+\(E_a\to L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\) of
+\cite[Definition~7.13]{WoodwardQKIII}, in its relative form over the twisted
+domain stack \cite[Section~8.3]{WoodwardQKIII},
+\cite[Example~6.6(c)]{WoodwardQKII}, is the composite
+\[
+ \tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}
+ \longrightarrow L_{\mathfrak S_{a_-,a_+}/\mathfrak M}
+ \longrightarrow L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}.
+\]
+\end{lemma}
+
+\begin{proof}
+The first assertion is the cotangent complex formula for a mapping stack
+\cite{ToenVezzosiHAGII}: the
+relative cotangent complex of \(\mathfrak S_{a_-,a_+}\) over \(\mathfrak M\) is
+the pushforward along \(\pi\) of the pullback of the cotangent complex of the
+target, dualized as above, and the rotation-invariant part appears because the
+sections are rotation-fixed.  Both sides are perfect of amplitude
+\([-1,0]\) by Lemma~\ref{lem:app-cech}.
+
+For the second assertion, both morphisms are the map classifying the
+deformation theory of the same universal object: Woodward's is obtained from
+the Kodaira--Spencer map of the universal gauged map relative to the domain
+stack, which is exactly the map that the derived structure of the mapping stack
+induces on the classical truncation.  In the presentation of
+Lemma~\ref{lem:app-cech} both are represented by the same map, namely the dual
+of the map that sends a first-order deformation of a section to the induced
+pair of deformations over the two charts.  We use here the standard comparison
+between a classical obstruction theory built from the deformation theory of a
+universal object and the truncation of the derived cotangent complex; that
+comparison is imported from \cite{SchurgToenVezzosi}, not reproved.
+\end{proof}
+
+\begin{proposition}[The two-commutative square]
+\label{prop:app-square}
+Under the equivalence
+\(\operatorname{ev}_1\colon\mathfrak S_{a_-,a_+}\simeq\mathfrak Z\) of
+Proposition~\ref{prop:app-descent}, the square
+\[
+\begin{array}{ccc}
+ E_a & \longrightarrow & L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\\
+ \big\downarrow\scriptstyle\sim && \big\downarrow\scriptstyle\sim\\
+ \tau_{[-1,0]}L_{\mathfrak Z/\mathfrak M}
+   & \longrightarrow & L_{t_0\mathfrak Z/\mathfrak M}
+\end{array}
+\]
+is two-commutative, its left vertical arrow is a quasi-isomorphism, and the two
+perfect obstruction theories are isomorphic as morphisms to the cotangent
+complex.  Passing to classical truncations, the derived data recover Woodward's
+relative perfect obstruction theory, hence his relative virtual class.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:app-truncation} the upper horizontal map is the truncation
+map of \(L_{\mathfrak S_{a_-,a_+}/\mathfrak M}\); the lower horizontal map is
+by definition the truncation map of \(L_{\mathfrak Z/\mathfrak M}\).  The
+assignment \(\mathfrak X\mapsto\bigl(\tau_{[-1,0]}L_{\mathfrak X/\mathfrak
+M}\to L_{t_0\mathfrak X/\mathfrak M}\bigr)\) is functorial for equivalences of
+derived stacks over \(\mathfrak M\), and the two vertical arrows are the values
+of that functor on \(\operatorname{ev}_1\).  The square is therefore the
+naturality square of a natural transformation evaluated at an equivalence, and
+the required homotopy is the one supplied by \(\operatorname{ev}_1\).
+
+It remains to check that this homotopy is the one asserted in the proof of
+Theorem~\ref{thm:tailwise-derived}, namely the differential of evaluation at
+\(1\) on the two-chart universal section.  In the presentation
+\eqref{eq:app-cech} this is an equality of representatives rather than a
+homotopy.  Indeed, both composites in the square are, after dualizing,
+computed on a first-order deformation as follows.  Restrict the deformation of
+the section to the two charts; each restriction is a section of the extension
+subcomplex at that chart by Lemma~\ref{lem:app-cech}; then restrict both to the
+open orbit and take the difference in \(V\).  For the upper route this is the
+\v{C}ech differential of \(R\pi_*u_a^*T([W/\Gm])\); for the lower route it is
+the structure map of the homotopy fibre product \(\mathfrak Z\).  Both are the
+map \(F^0_{\leq0}V\oplus F^\infty_{\leq0}V\to V\) given by the difference of
+the two restrictions to the open orbit, and these restrictions are the same
+morphisms of sheaves in the two cases, because the universal section restricted
+to a chart is the composite of the stratum inclusion with the chart section
+\eqref{eq:app-graded-map}, and the latter is an isomorphism onto its image
+after evaluation at \(1\).  The two representatives are equal, so the
+comparison homotopy may be taken to be the identity.
+
+Since \(\operatorname{ev}_1\) is an equivalence, its induced map on
+\(\tau_{[-1,0]}L_{-/\mathfrak M}\) is a quasi-isomorphism; this is the left
+vertical arrow.  A commuting square whose verticals are quasi-isomorphisms is
+an isomorphism of the two morphisms to the cotangent complex, which is the
+assertion for obstruction theories.  Taking \(t_0\) and using
+Lemma~\ref{lem:app-truncation} identifies the upper row with Woodward's
+relative perfect obstruction theory, and an isomorphism of relative perfect
+obstruction theories over a common base induces equality of the associated
+relative virtual classes in Vistoli's bivariant Chow groups
+\cite[Example~6.6(c)]{WoodwardQKII}.
+\end{proof}
+
+\subsection{Orbifold charts, \texorpdfstring{\(\mu_k\)}{mu-k}-equivariance, and
+rigidification}
+\label{app:rigidification}
+
+Woodward's clutching construction has an orbifold form
+\cite[Definition~9.7]{WoodwardQKIII}: one passes to a \(k\)-fold cover of the
+open orbit, the cocharacters \(\widetilde\varphi_\pm\) are taken with values in
+\(\tfrac1k\mathbf Z\), and the section on a chart is
+\(z\mapsto\widetilde\varphi_\pm(z^{1/k})x\).  The chart is then
+\([\operatorname{Spec}R[z^{1/k}]/\mu_k]\) with \(\mu_k\) acting by
+\(z^{1/k}\mapsto\theta z^{1/k}\) for a primitive \(k\)-th root of unity
+\(\theta\).
+
+\begin{proposition}[Equivariance and descent]
+\label{prop:app-mu-k}
+Write \(a=b/k\) with \(b\in\mathbf Z\).  Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Lemma~\ref{lem:app-graded-extension} holds verbatim with \(R[z]\)
+replaced by \(R[z^{1/k}]\) and \(aw\in\tfrac1k\mathbf Z\); the attractor ideal
+is unchanged, being \((A_w:bw<0)\).
+\item The stabilizer element of the clutching datum is
+\(\widetilde\varphi(\theta)=\theta^{\,b}\), so the inertia label, the
+\(\mu_k\)-weights of the universal bundle at the orbifold point, and the
+twisted-sector evaluation depend on \(b\) only through its class modulo \(k\).
+Within one tail, consecutive affine degrees differ by \(k\) and the sign of
+\(b\) is constant.
+\item Taking \(\mu_k\)-invariants is exact in characteristic zero, and the
+equivalence of Proposition~\ref{prop:app-descent} and the square of
+Proposition~\ref{prop:app-square} are \(\mu_k\)-equivariant.
+\item Rigidification replaces the inertia stack by its quotient by the finite
+central \(B\mu_k\), \(\bar I_{X,r}=I_{X,r}/B\mu_r\)
+\cite[Section~4.3, Proposition~4.3(f),(g)]{WoodwardQKII}.  Pullback along this
+gerbe is fully faithful with \(\pi_*\pi^*\simeq\id\), hence conservative, so
+the equivalence and the obstruction theory descend.  Stabilizer and
+graph-automorphism groups, and their localization multiplicities, are
+unchanged.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a)  The proof of Lemma~\ref{lem:app-graded-extension} used only that the
+target is a graded polynomial extension of \(R\) whose degrees are bounded
+below by zero.  With \(z^{1/k}\) of degree \(1/k\) the same splitting applies,
+and \(aw<0\) is the condition \(bw<0\).
+
+(b)  The stabilizer of the orbifold point acts through
+\(\widetilde\varphi(\theta)\), which for \(G=\Gm\) and
+\(\widetilde\varphi(t)=t^{b/k}\) is \(\theta^{\,b}\); this depends only on
+\(b\bmod k\).  The isotropy representation of the universal bundle at the
+orbifold point is determined by the same element, and the twisted-sector
+evaluation of \cite[Corollary~9.10]{WoodwardQKIII} is the corresponding
+component of the inertia stack.  Fixing the stabilizer congruence class of
+Theorem~\ref{thm:tailwise-derived} is exactly fixing \(b\bmod k\), so a tail
+consists of the \(b\) in one class with one sign, and its consecutive elements
+differ by \(k\).
+
+(c)  Exactness of invariants under a finite group in characteristic zero is
+standard, and it is the only property of \(\mu_k\) used in
+Lemma~\ref{lem:app-cech}.  All the constructions of
+Sections~\ref{app:attractor} and~\ref{app:square} are defined by the graded
+formula \eqref{eq:app-graded-map} and by restriction morphisms, both of which
+commute with the \(\mu_k\)-action on \(z^{1/k}\); the equivalence and the
+square are therefore diagrams of \(\mu_k\)-equivariant objects and morphisms.
+
+(d)  A \(B\mu_k\)-gerbe in characteristic zero has \(\pi_*\pi^*\simeq\id\) on
+quasicoherent complexes, because \(\pi_*\) takes the weight-zero part of the
+\(\mu_k\)-decomposition and a pulled-back complex is concentrated in weight
+zero.  Hence \(\pi^*\) is fully faithful and conservative, and a morphism of
+pulled-back objects which is \(\mu_k\)-equivariant descends and is an
+equivalence downstairs precisely when it is one upstairs.  The equivalence of
+Proposition~\ref{prop:app-descent} and the square of
+Proposition~\ref{prop:app-square} are of that form by (c).  The fibre products
+of \cite[equations~(54) and~(57)]{WoodwardQKIII} are taken over the
+unrigidified inertia stack, so the constructions above take place there;
+passage to the rigidified inertia stack used for the evaluation maps changes
+rational cohomology only by the factors of \(r\) on \(r\)-twisted sectors
+recorded in \cite[Proposition~4.3(f),(g)]{WoodwardQKII}, and those factors
+depend only on the order of the stabilizer, which is constant along a tail by
+(b).  The parametrized principal component has no domain automorphisms; the
+fixed bubble factors retain theirs, and their automorphism groups are the ones
+appearing in the localization multiplicities.
+\end{proof}
+
+\subsection{Attached bubbles, cutting, and reduction between Artin levels}
+\label{app:cutting}
+
+\begin{proposition}[Attached factors and cutting]
+\label{prop:app-cutting}
+Let \(\mathfrak F\) be the fixed graph stack obtained from
+\(\mathfrak S_{a_-,a_+}\) by attaching the fixed stable-map factors of
+\cite[equations~(54)--(57)]{WoodwardQKIII} along the two inertia evaluations,
+as a derived fibre product.  Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the relative cotangent complex of \(\mathfrak F\) fits in the exact
+triangle whose outer terms are the direct sum of the factor obstruction
+theories and the pullback of the cotangent complex of the inertia stack;
+\item the identification of Proposition~\ref{prop:app-square} is the identity
+on the stable-map and inertia terms, hence induces an isomorphism of these
+triangles;
+\item consequently the identification is compatible with the cutting axiom
+\cite[Proposition~7.14(b)]{WoodwardQKIII}, whose proof identifies the gauged
+moduli stack with a fibre product over the diagonal
+\cite[Proposition~5.21]{WoodwardQKII}, and it identifies the resulting virtual
+classes;
+\item every construction above is a derived fibre product along finitely many
+morphisms of stacks over \(\C\); the coefficient ring enters only through the
+localization coefficients, so the identifications commute with the reduction
+maps between finite Artin levels.
+\end{enumerate}
+For the irreducible unstable convention there is no stable-map factor: by
+\cite[Example~9.15]{WoodwardQKIII} the domain is irreducible and the normal
+complex is the moving index alone, so the node and attaching factors of
+\eqref{eq:virtual-normal-euler} are absent and the square of
+Proposition~\ref{prop:app-square} applies with no gluing term.
+\end{proposition}
+
+\begin{proof}
+(a) is the cotangent triangle of a derived fibre product, applied to
+\(\mathfrak F=\mathfrak F_-\times^{\mathbf R}_{I}\mathfrak F_+\) with \(I\) the
+inertia stack of the quotient: the triangle reads
+\(\operatorname{ev}^*L_I\to L_{\mathfrak F_-}\oplus L_{\mathfrak F_+}\to
+L_{\mathfrak F}\) after pullback to \(\mathfrak F\).  This is the derived form
+of the exact triangle by which Woodward derives cutting-edge compatibility for
+the index complexes \cite[Equation~(35) and Section~7.1]{WoodwardQKIII}.
+
+(b)  The degree shift changes only the principal factor.  The attached
+stable-map factors and their obstruction theories are the fixed proper
+stable-map data at a fixed ordinary degree and marking set, and the inertia
+term is determined by the stabilizer congruence class, which is fixed along a
+tail by Proposition~\ref{prop:app-mu-k}(b).  Hence the comparison map is the
+identity on those two terms, and Proposition~\ref{prop:app-square} supplies the
+map on the third; a map of triangles with two identity legs and one
+quasi-isomorphism is an isomorphism of triangles.
+
+(c)  Woodward's cutting axiom expresses the virtual class of the glued type as
+the Gysin pullback \(\Delta^!\) of the virtual class of the cut type, using the
+identification of the moduli stack with a fibre product over the diagonal.  The
+Gysin map is determined by the obstruction theory of the factors and the
+regular embedding \(\Delta\); by (a) and (b) both are identified, so the two
+cut classes agree.
+
+(d)  Each construction is one of: the equivalence of
+Proposition~\ref{prop:app-descent}, a homotopy fibre product along evaluation
+maps, or the truncation map of a cotangent complex.  All are morphisms of
+stacks and of complexes over \(\C\), independent of the Novikov and bulk
+coefficients; a finite Artin quotient enters only when the resulting virtual
+classes are paired with localization coefficients.  The identifications are
+therefore compatible with every reduction \(R_{N+1}\to R_N\).
+\end{proof}
+
+\begin{remark}[Imported statements]
+\label{rem:app-imports}
+Two comparisons are used above without proof.  The first, from
+\cite{ToenVezzosiHAGII}, is the cotangent complex formula for a derived
+mapping stack, used in Lemma~\ref{lem:app-truncation} to identify \(E_a\)
+with \(\tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}\).  The second,
+from \cite{SchurgToenVezzosi}, is the identification of a classical perfect
+obstruction theory built from the deformation theory of a universal object
+with the classical truncation of the derived one; it is used in the same
+lemma to recognize \cite[Definition~7.13]{WoodwardQKIII} in that
+truncation.  Everything else is
+either the graded computation of Lemma~\ref{lem:app-graded-extension} and its
+module form, or a statement of Woodward's cited at the locators given at the
+start of this appendix.  In particular, no derived statement is used at any
+point where a virtual class or a localization contribution is finally
+evaluated: those are read off from the classical truncations, in the form in
+which \cite{WoodwardQKIII} states them.
+\end{remark}
