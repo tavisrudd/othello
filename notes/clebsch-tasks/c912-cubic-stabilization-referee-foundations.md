@@ -325,19 +325,41 @@ exact bridge is formalized.
 
 ### WP8 — source-version locator repair
 
-- [ ] Repair `sections/04-one-step.tex` line 594: it cites "Section 5.8,
-  especially (5.11)" of Iritani--Koto for the coordinate asymptotics, but in
-  the pinned arXiv:2307.03696v4 that section is the added
-  Hinault--Yu--Zhang--Zhang reconstruction algorithm and the content used is
-  Theorem 5.1(4).
-- [ ] Recheck the use of Theorem 5.1(5), the item v4 corrected, against its v4
-  statement `(d_{tau i,k} sigma_j)|_{Q=tau=0} = lambda_j^k (phi_i + O(q^{-1/r}))`,
-  invertible over `C((q^{-1/r}))`.
-- [ ] Check whether anything in the paper depends on the `log q` term that v4
-  removed from the change of coordinates for Theorem 1.7.
-- [ ] Audit every Iritani, Iritani--Koto, and Cai locator against its pinned
-  version, and put version numbers and dates in prose wherever a corrected
-  formula is invoked.
+- [x] Repair both stale Iritani--Koto locators in `sections/04-one-step.tex`.
+  The asymptotic display cited "Section 5.8, especially (5.11)", and the
+  maximal-ideal placement cited "Formula (5.11)"; in the pinned
+  arXiv:2307.03696v4 that section is the added Hinault--Yu--Zhang--Zhang
+  reconstruction algorithm. Both now cite Theorem 5.1(4) and Proposition 5.6,
+  which carry the content actually used.
+- [x] Recheck the use of Theorem 5.1(5), the item v4 corrected, against its v4
+  statement `(d_{tau i,k} varsigma_j)|_{Q=tau=0} = lambda_j^k (phi_i + O(q^{-1/r}))`,
+  invertible over `C((q^{-1/r}))`. The corrected statement still supports the
+  use, and the prose now records the correction and the version date.
+- [x] Check whether anything depends on the `log q` term that v4 removed from
+  the change of coordinates for Theorem 1.7. Nothing does: the paper cites
+  only Section 5.1 with its equations (5.1)--(5.3), Theorem 5.1, Proposition
+  5.6, Corollary 1.8, equation (1.1), Remark 1.2, and Remark 5.2, and Section
+  5.1 opens by presenting itself as the precise version of Theorem 1.7. Every
+  one of those locators was checked against v4 and carries the claimed
+  content.
+- [x] Audit the Iritani blowup locators against the pinned arXiv:2307.13555v3:
+  Corollary 1.2, Remarks 1.3--1.5, Proposition 5.4 with (5.13)--(5.14),
+  (5.15), Remark 5.6, Theorem 5.18, and Section 5.8.2 all exist there and
+  carry the claimed content. Note that (5.15) is exactly the center Novikov
+  specialization the reader flagged as possibly noninjective, so WP9 inherits
+  it with a verified locator.
+- [x] Pin every version that was unpinned, since the bibliography now promises
+  it: Iritani's notes to v2, Hartlieb to v2, Voisin to v2, Colliot-Thélène to
+  v3, Grieve to v2, Roulleau to v1, Kuznetsov to v1. A line before the
+  bibliography states that numbered statements follow the preprint versions,
+  which matters because Hartlieb's Lemma 5.5, Voisin's Theorem 4.5, and
+  Colliot-Thélène's main statement were all verified in the preprints and the
+  published articles were not accessible.
+- [ ] Re-verify Cai's page-level locators against the pagination of
+  arXiv:2608.01577v1, and Engel--de Gaay Fortman--Schreieder Theorem 1.3 and
+  Corollary 1.4 against arXiv:2507.15704v3. The cached copies match the
+  pinned versions; the individual pages and statements were not re-read in
+  this pass.
 
 ### WP9 — reopened foundation rechecks
 
