@@ -785,9 +785,12 @@ standalone forward commit is `b0b3861` and the summary mirror is `11b6e63`.
 Nothing was pushed.  The next step is the frame-transport lemma owed to
 referee A.  Its reviewer-facing memo and the red team that corrected it are
 `../2026-08-15-c912-frame-transport-memo.tex` and
-`../2026-08-15-c912-frame-transport-memo-red-team.md`; the likely repair is the
-Hinault--Yu--Zhang--Zhang regular decomposition gauge, and the card lists the
-three compatibility checks that would close it.  Current
+`../2026-08-15-c912-frame-transport-memo-red-team.md`.  The three
+framing-compatibility checks proposed there have been run against the pinned
+sources and close off the Hinault--Yu--Zhang--Zhang route; the comparison maps
+need no receiver, and the surviving gap is invariance of the framed spectrum
+under one positive-filtration bulk displacement.  Verdicts, routes, and source
+hashes: `../2026-08-15-c912-framing-compatibility-checks.md`.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial

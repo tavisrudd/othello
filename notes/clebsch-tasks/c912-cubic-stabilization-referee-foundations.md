@@ -35,9 +35,12 @@ retitle and two-theorem framing (WP12 below) and builds warning-free at 30
 pages.  What remains open on this card is the residual list under each work
 package, not a whole package, plus the frame-transport lemma owed to referee A.
 That is the one blocker: `prop:framed-operations` and `lem:divisor-tagging` are
-unproved as written, and the current state, the likely repair, and the three
-checks that would close it are under the review protocol below.  Start a fresh
-session there and with `../2026-08-15-c912-frame-transport-memo.pdf`.
+unproved as written.  The three framing-compatibility checks have now been run
+against the pinned sources and the framing route is closed off; the surviving
+gap is one statement about bulk displacement, and the next routes are under the
+review protocol below.  Start a fresh session with
+`../2026-08-15-c912-framing-compatibility-checks.md`, then the memo
+`../2026-08-15-c912-frame-transport-memo.pdf` for the underlying analysis.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -587,63 +590,64 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   exactly.  Its moderate gap, that the tagged polynomial was never placed in
   the same coefficient ring as the transported operator, is repaired by
   reading all three polynomials in the graded Hahn receiver.
-- [ ] **Frame transport: blocked, with a likely repair identified.**
-  `prop:framed-operations` is unproved as written, and `lem:divisor-tagging`
-  carries the same problem.  Full analysis, proofs, and manuscript placement:
-  `../2026-08-15-c912-frame-transport-memo.tex` and its built PDF, rebuilt with
-  `nix develop papers#manuscript --command latexmk -xelatex`; the adversarial
-  check that corrected two earlier versions is
-  `../2026-08-15-c912-frame-transport-memo-red-team.md`.  Read the memo before
-  resuming; the summary below is a map, not a substitute.
+- [ ] **Frame transport: blocked; the framing route is now closed off, and the
+  gap is exactly located.**  `prop:framed-operations` is unproved as written,
+  and `lem:divisor-tagging` carries the same problem.  Analysis and manuscript
+  placement: `../2026-08-15-c912-frame-transport-memo.tex` and its built PDF,
+  rebuilt with `nix develop papers#manuscript --command latexmk -xelatex`; the
+  adversarial check that corrected two earlier versions is
+  `../2026-08-15-c912-frame-transport-memo-red-team.md`.  The three
+  framing-compatibility checks the memo proposed have been run against the
+  pinned sources; verdicts, locators, and hashes are in
+  `../2026-08-15-c912-framing-compatibility-checks.md`, which supersedes the
+  memo's Section 6 and its Section 5 diagnosis.  Read that report first.
 
-  *State.* The transport lemma is true and short over a differential field, but
-  its hypotheses have no common instance over the receiver the draft builds.
-  Two proposed repairs failed on inspection: a mixed-order Hahn receiver needs
-  an inequality that the draft's own weight normalization violates, and an
-  iterated receiver needs a semipositivity hypothesis on the ambient variety
-  that weak factorization does not supply.  The root cause is that the draft
-  realizes the bulk transport by a pro-Laurent gauge with unbounded negative
-  loop order.  That is the manuscript's choice, not something the comparison
-  theorems impose.
+  *State after the checks.*  Check 1 fails: Hinault--Yu--Zhang--Zhang's
+  Theorem 4.34 governs F-bundles over the large-radius limit point `q=t=0`,
+  where the K-operator is a nilpotent cup product, while `nu_6` is evaluated
+  where the eigenvalues separate; their blowup analogue Theorem 5.22 is stated
+  without proof and outside Theorem 4.34's equal-dimension hypothesis, since
+  the blowup summands `H^*(X)` and `H^*(Z)` differ in dimension; and the gauge
+  it would supply lands at the shifted base point that the pro-Laurent gauge
+  exists to undo.  Do not cite Theorem 5.22 for the blowup formula.  Check 2
+  passes: the base-map ambiguity of their Theorems 5.20/5.24 is a Novikov
+  character, hence the divisor substitution (4.1), hence `nu_6`-invariant, and
+  Iritani--Koto (5.11)--(5.12) and Iritani Section 5.8.1 pin it anyway; one
+  manuscript sentence is owed.  Check 3 confirms the separation and is sharper
+  than assumed: their center F-bundle is itself built on a collapsed Novikov
+  variable, so the framing theory can never certify an intrinsic center
+  invariant, while their Lemma 2.24 is the divisor-tagging mechanism in print.
 
-  *Likely repair.*  Hinault--Yu--Zhang--Zhang, arXiv:2411.02266, cached; their
-  reconstruction algorithm is Iritani--Koto's Section 5.8.  Their Theorem 4.34
-  gives a decomposition gauge in `GL(H[[u]])`, regular in the loop coordinate
-  and unique given its value at `u=0`; they verify its hypotheses in the
-  projective-bundle application and give the analogous blowup isomorphism in
-  Theorem 5.22, referring to Iritani for existence.  A regular gauge adjoins no
-  root of the loop coordinate and is fixed by the turn, so the memo's
-  field-level lemma applies directly: no Hahn receiver, no gauge product, no
-  inequality.
+  *Correction carried by the checks.*  The memo's claim that the unbounded
+  negative loop order is the manuscript's own choice is wrong.  Iritani--Koto's
+  reconstruction transports along the same object, their fundamental solution
+  `M` of Section 5.8 with `M = id + O(z^-1)`, polynomial in `z^-1` per bulk
+  degree exactly as `(4.1a)` says, unbounded only after summing bulk degrees.
+  The sources handle it by Birkhoff factorization, not by an ordered receiver.
 
-  *Three checks that close it.*
-  1. Identify the decomposition used in `prop:framed-operations`, after the
-     coefficient extensions, with an isomorphism of exactly the A-model
-     `F`-bundles their uniqueness governs, and write that identification down.
-  2. Match the `u=0` map and the reconstruction coordinate.  Their bundle map is
-     determined by its limiting restriction, but the base map is unique only up
-     to a multiplicative constant in a logarithmic Novikov direction; show that
-     ambiguity harmless or match it to Iritani's normalization.
-  3. Keep the center specialization separate.  Their result is upstream of the
-     noninjective numerical center map, so it does not show that the specialized
-     center module carries the intrinsic framed monodromy used in `nu_6(C;chi)`.
+  *The residual gap, and it is the whole blocker.*  The comparison maps need no
+  receiver: Iritani's `Psi` and Iritani--Koto's `Phi` are `z`-polynomial module
+  maps with inverses in the same ring, so the memo's transport lemma applies to
+  them with `Gamma=0`.  What remains is one statement: for a bulk parameter in
+  the positive filtration -- `tau^0 = q^-1[Z] + O(q^-2)` on the ambient summand,
+  the `O(q^{-1/(c-1)})` tail plus `s_j` on a center summand -- the framed formal
+  monodromy at that parameter has the same primitive-sixth multiplicity as at
+  the origin.
 
-  *Caveat.*  Theorem 4.34 is not general: it assumes equal-dimensional
-  generalized eigenspaces and the universal-algebra form of their Definition
-  4.33.  That is not a weakness here, since they check the setup for projective
-  bundles and supply the blowup construction.
-
-  *Then.*  Direct specialized vanishing for centers of dimension at most two,
-  using the classification already in the draft, which for nef canonical class
-  gives an integral-loop gauge to a regular-singular connection.  Divisor
-  tagging only if that fails.  The mixed-receiver inequality is fallback
-  machinery.  A separate scope reduction stands on its own: a direct
-  quantum-Kuenneth computation for `X x P^1` plus a direct computation for
-  `P^4` would leave the blowup step as the only operation formula the headline
-  theorem needs, with the genus-eight corollary waiting.
-
-  *If the repair lands*, the final proof should use the regular `F`-bundle gauge
-  directly; the receiver analysis stays out of the manuscript as forensic work.
+  *Next routes, in order.*  (i) Birkhoff: show the `id + O(z^-1)` factor of
+  `(Phi^0)^-1 M = M' Phi^-1` preserves the multiplicity.  (ii) Pointwise
+  residues instead of transport, using `[E*, phi_a*] = 0` and
+  `d_a(E*) = phi_a* + [phi_a*, mu]`, so that bulk displacement never mixes
+  exponential blocks.  (iii) Direct specialized vanishing for centers of
+  dimension at most two, using the classification already in the draft, which
+  for nef canonical class gives an integral-loop gauge to a regular-singular
+  connection.  Divisor tagging only if those fail; the mixed-receiver
+  inequality is fallback machinery.  A separate scope reduction stands on its
+  own: a direct quantum-Kuenneth computation for `X x P^1` plus a direct
+  computation for `P^4` would leave the blowup step as the only operation
+  formula the headline theorem needs, with the genus-eight corollary waiting.
+  Note that the trivial-bundle case does not escape the bulk gauge: even for
+  `V = O + O` the initial coordinate keeps its `O(q^{-1/r})` tail.
 
 - [ ] **Owed to referee A, the one item left open.** The frame-transport step
   in `prop:framed-operations` — that a turn-invariant gauge conjugates framed
@@ -735,6 +739,11 @@ become manuscript edits.
 | C912-M11 | resolved | Extending the positive ideal across Iritani's Laurent coordinate makes it the unit ideal, while ordinary localization misses series whose Laurent pole order grows with bulk degree. | Use the sources' homogeneous scaled variables and finite-below grading; pull through the full nonlinear coordinate isomorphism, embed in a coefficient Hahn field, construct `Omega_V`, then adjoin only integral powers of the independent loop coordinate |
 | C912-M12 | resolved | Presenting the elementary Hahn embedding as a standalone unlabelled result escaped the rejecting theorem inventory even though the proof used it twice. | Fold its full well-ordering, multiplication, injectivity, and localization argument into the mapped operation-formula proof; three cold rereads found no lost premise |
 | C912-M13 | resolved | The public literature ledger retained internal commit, cache, and task-routing residue, while the Lean claim caution described an obsolete inverse-limit architecture. | Rewrite the public ledger as a stable literature-scope note and name the manuscript-only Hahn/nonlinear-coordinate bridge explicitly in the formal claim boundary |
+| C912-M14 | resolved | The receiver problem was attributed to the comparison isomorphism; both `Psi` and `Phi` are `z`-polynomial module maps, so the transport lemma applies to them unconditionally. | `../2026-08-15-c912-framing-compatibility-checks.md`, check 1d; the gap is the residual bulk gauge alone |
+| C912-M15 | confirmed | The pro-Laurent bulk gauge is Iritani--Koto's own fundamental solution `M`; per bulk degree it is polynomial in `z^-1`, unbounded only in the limit. | Same report, Section 5; corrects the memo's Section 6 |
+| C912-M16 | confirmed | Hinault--Yu--Zhang--Zhang Theorem 5.22 (blowup) has no proof in the paper and falls outside Theorem 4.34's equal-dimension hypothesis. | Same report, finding 1b; do not cite for (4.3) |
+| C912-M17 | resolved | The base-map ambiguity of their Theorems 5.20/5.24 is a Novikov character, hence the divisor substitution (4.1), hence `nu_6`-invariant; the sources' initial conditions pin it anyway. | Same report, check 2; one manuscript sentence owed |
+| C912-M18 | confirmed | Their center F-bundle is itself built on a collapsed Novikov variable, so the framing theory cannot certify intrinsic center invariants; their Lemma 2.24 is nonetheless the divisor-tagging mechanism in print. | Same report, check 3; `lem:divisor-tagging` stays owner |
 
 The final `ej`+`tt` closeout found no unresolved mystery in the completed
 WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the
