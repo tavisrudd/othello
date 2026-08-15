@@ -6,38 +6,8 @@ They ask two related questions: how much structure can be recovered after most
 of the original information has been discarded, and which obstructions persist
 under operations, such as stabilization, that might be expected to weaken them?
 
-The broadest geometric theorem is conditional on explicit gauged-admissibility
-conditions and an inverse-system family of one-object marked threshold comparisons:
-
-> **Assuming every relevant birational map has a gauged-admissible marked
-> completion satisfying marked threshold compatibility, every projective
-> stabilization `X × P^m` of every smooth complex cubic threefold `X` is
-> irrational.**
-
-*Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
-Irrationality* obtains this dimension-independent conclusion from the Gamma
-point row, the flat covector which reads ordinary rank, under quantum wall
-crossing.  **That paper is an early draft, likely to contain logical gaps and
-notational issues.** Its local transport, endpoint calculation,
-and coefficientwise Gamma reduction are proved.  Under the stated
-gauged-admissibility conditions, support collapse, tailwise derived
-identification, and D-finiteness of the tails follow from rank-one
-localization and a derived intersection.  The remaining unproved input is a family over all
-finite Artin levels, ordinary degrees, neutral directions, and thresholds;
-at zero modes it assumes a strict isomorphism from the complete adjacent
-row-generated cyclic module to its reduced nearby-cycle realization. Primary
-support is then preserved by polynomial functional calculus.  The ordinary
-non-zero-mode mechanism has a neutral linear-toric calibration: across a
-crepant toric wall, Coates--Iritani--Jiang construct the two chamber quantum
-connections and a continuation gauge carrying the common-open Gamma point row
-by Fourier--Mukai transport.  Gluing along that gauge gives a local one-object
-calibration, while Woodward's toric `I`-function formula identifies the
-corresponding gauged series.  This verifies the intrinsic marked-continuation
-part of the mechanism at the QDM/`I`-function level; it does not supply the
-inverse-system comparison for an arbitrary projective master or the reduced
-nearby-cycle assertion at a zero mode.
-
-The strongest unconditional statement is the first stabilization:
+The strongest geometric statement in the collection concerns the first
+stabilization:
 *Irrationality after one stabilization* proves that
 `X × P¹` is irrational for every smooth complex cubic threefold `X`. It also
 constructs an explicit non-isotrivial family whose cubic-threefold fibres are
@@ -66,10 +36,7 @@ Golden interferometer paper are related unnumbered companions.
 *Irrationality after one stabilization* uses the six-axis structure of the
 nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for its
 explicit family; its theorem for all smooth cubic threefolds is independent of
-that special construction. *Gamma Point Rows under Quantum Wall Crossing and a
-Criterion for Stable Irrationality* replaces the dimension-four center bound
-by a global point-row comparison, conditional on the locally finite marked
-threshold hypothesis above. Every paper is intended to stand on its own mathematically.
+that special construction. Every paper is intended to stand on its own mathematically.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
@@ -136,6 +103,17 @@ complex as separate victories.
 
 ### Algebraic geometry and rationality
 
+- **Unconditionally, every smooth cubic threefold remains irrational after
+  one stabilization.** For every smooth complex cubic threefold `X`, the
+  fourfold `X × P¹` is irrational. On an explicit non-isotrivial
+  `A₅`-invariant family, the cubic threefolds are nevertheless universally
+  `CH₀`-trivial, so the usual decomposition-of-the-diagonal detector and the
+  quantum obstruction separate on the same stabilized varieties. The
+  framed-monodromy multiplicity used in the proof is birationally invariant
+  through dimension four; it also proves one-step irrationality for every
+  smooth prime Fano threefold of genus eight.
+  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
+
 - **Conditionally, every projective stabilization of a smooth cubic
   threefold is irrational.** A common-open point has exact ambient coordinate
   in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
@@ -150,19 +128,9 @@ complex as separate victories.
   comparison.
   Under those assumptions, the point-row primary Boolean is birationally
   invariant and distinguishes `X × P^m` from projective space for every smooth
-  cubic threefold `X` and every `m ≥ 0`.
+  cubic threefold `X` and every `m ≥ 0`.  That paper is an early draft, likely
+  to contain logical gaps and notational issues.
   [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
-
-- **Unconditionally, every smooth cubic threefold remains irrational after
-  one stabilization.** For every smooth complex cubic threefold `X`, the
-  fourfold `X × P¹` is irrational. On an explicit non-isotrivial
-  `A₅`-invariant family, the cubic threefolds are nevertheless universally
-  `CH₀`-trivial, so the usual decomposition-of-the-diagonal detector and the
-  quantum obstruction separate on the same stabilized varieties. The
-  framed-monodromy multiplicity used in the proof is birationally invariant
-  through dimension four; it also proves one-step irrationality for every
-  smooth prime Fano threefold of genus eight.
-  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
 
 ### Coding theory and quantum information
 
@@ -204,8 +172,6 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Conditional cubic stabilization | Conditional on every smooth projective birational map admitting a gauged-admissible marked Włodarczyk completion with marked threshold compatibility, `X × P^m` is irrational. | Every smooth complex cubic threefold `X` and every `m ≥ 0`. |
-| Conditional cubic stabilization | Conditional on gauged-admissibility and marked threshold compatibility for a marked Włodarczyk completion, the point-row primary Boolean is birationally invariant for every formal-monodromy eigenvalue. | Every pair of smooth projective birational complex varieties satisfying the stated hypotheses. |
 | Irrationality after one stabilization | `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
@@ -455,6 +421,8 @@ changes no higher-discrepancy statement.
 ---
 
 #### Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality
+
+**Early draft, likely to contain logical gaps and notational issues.**
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 
