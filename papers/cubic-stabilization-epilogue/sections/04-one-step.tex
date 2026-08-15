@@ -1017,11 +1017,56 @@ regular-monodromy eigenvalue \(1\), so neither contributes a primitive sixth
 root.  This agrees
 with Cai's scalar solutions~\cite[pp.~5--6]{Cai}.
 
-Thus the multiplicity is exactly two.  By definition, \(\nu_6\) uses the small
-even connection, so no odd-cohomology block enters this count.  The numerical
-curve lattice of a cubic
-threefold has rank one, so the numerical-Novikov convention does not change
-the calculation.
+It remains to count the rank-two solutions.  Write its ansatz as
+\(\widetilde S_3=z^\rho\sum_{n\ge0}a_nz^n\) and
+\(\widetilde S_4=z^{\rho+1}\sum_{n\ge0}b_nz^n\), with \(a_0=1\).
+At coefficient \(n\), the two equations have the form
+\[
+ L_{\rho+n}\begin{pmatrix}a_n\\b_n\end{pmatrix}
+ =\begin{pmatrix}\alpha_n\\\beta_n\end{pmatrix},
+ \qquad
+ L_s=
+ \begin{pmatrix}
+ s+19/18&-2\\
+ 8/81&s-1/18
+ \end{pmatrix},
+ \qquad
+ \det L_s=\left(s+\frac16\right)\left(s+\frac56\right).
+ \tag{4.9m}
+ \label{eq:cubic-frobenius-recursion}
+\]
+Here \((\alpha_n,\beta_n)\) depends only on coefficients of lower index;
+for \(n=0\) it is zero, and \eqref{eq:cubic-indicial-polynomial} is exactly
+the condition that \(L_\rho\) have a kernel.  The roots in
+\eqref{eq:cubic-indicial-roots} are distinct modulo \(\Z\), so
+\(L_{\rho+n}\) is invertible for every \(n\ge1\).  For either root,
+\(\ker L_\rho\) is one-dimensional and its first coordinate is nonzero;
+the normalization \(a_0=1\) fixes \(b_0\).  The recursion therefore gives
+one formal solution for each root and no further solution in its exponent
+class.  The two resulting solutions are independent, and exhaust the
+rank-two block.
+
+Consequently each eigenvalue in \eqref{eq:cubic-framed-eigenvalues} has
+algebraic multiplicity one, while
+\eqref{eq:cubic-rank-one-solutions} contributes neither primitive sixth root.
+Hence
+\[
+ \nu_6(X)=2.
+ \tag{4.9n}
+ \label{eq:cubic-packet-internal-count}
+\]
+This is a calculation in the small even connection, so no odd-cohomology block
+enters the count.  Moreover, \(N_1(X)=\Z\ell\), and the numerical Novikov
+ring is exactly \(\C[[Q^\ell]]=\C[[q]]\); thus the numerical-Novikov
+convention does not alter the calculation.
+
+Cai's Section~3 is used only for line-by-line comparison: the original matrix
+appears on p.~4, the constant and integral-\(z\) reductions on pp.~4--5, the
+rank-two ansatz on p.~6, and the scalar solutions on pp.~5--6.  The matrix
+calculation, gauge construction, recursion, and framed count used above are
+proved in \eqref{eq:cubic-small-even-connection}--
+\eqref{eq:cubic-packet-internal-count}; no assertion about Cai's gauge is used
+as an input.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
