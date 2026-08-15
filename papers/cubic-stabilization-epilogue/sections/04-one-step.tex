@@ -836,6 +836,37 @@ For every smooth cubic threefold \(X\),
 \end{proposition}
 
 \begin{proof}
+Fix the positive generator \(\ell\) of the numerical curve lattice of \(X\),
+normalized by \(P\cdot\ell=1\), and write \(q=Q^\ell\).  Thus the
+coefficient ring is \(\C[[q]]\), with the calculation taking place after
+extension to \(\mathcal K_X=\overline{\operatorname{Frac}\C[[q]]}\) as in
+the convention at the start of this section.  Cai's small even horizontal
+system, written in the ordered classical basis \(1,P,P^2,P^3\), is
+\[
+ \begin{aligned}
+ z^2\partial_zS&=(K_X+zG_X)S,\\
+ K_X&=2\begin{pmatrix}
+ 0&6q&0&36q^2\\
+ 1&0&15q&0\\
+ 0&1&0&6q\\
+ 0&0&1&0
+ \end{pmatrix},\\
+ G_X&=\frac12\begin{pmatrix}
+ 3&0&0&0\\
+ 0&1&0&0\\
+ 0&0&-1&0\\
+ 0&0&0&-3
+ \end{pmatrix}.
+ \end{aligned}
+ \tag{4.9a}
+ \label{eq:cubic-small-even-connection}
+\]
+Here \(S\) is the column of coordinates in that basis.  This is the
+original-\(z\)-disc frame: any later occurrence of \(q^{1/2}\) is an
+algebraic Novikov-coefficient extension inside \(\mathcal K_X\), not a
+ramification of \(z\).  Equation~\eqref{eq:cubic-small-even-connection} is
+the displayed system in Cai, Section~3, p.~4\cite{Cai}.
+
 In the basis \(1,P,P^2,P^3\), Cai explicitly block-diagonalizes the small even
 quantum connection.  The rank-two zero-exponential block has indicial
 polynomial
