@@ -1732,3 +1732,40 @@ multiplicity contributed by a cubic-threefold centre is not computed here.
 **Status:** open, unpromoted. Incidental; raised by the m=1 lane, corrected
 here. No new identifier: any successor work belongs to the existing
 higher-stabilization quantum task.
+
+## 2026-08-14 (C913): Bl_0(Theta) as a candidate replacement endpoint
+
+**Observation.** The C913 criterion is endpoint-agnostic: Section 9 closes with
+the remark that any variety whose Gamma point row is nonzero on a
+formal-monodromy primary packet supplies another application of
+`thm:birational-point-primary`. Bayer--Beentjes--Feyzbakhsh--Hein--Martinelli--
+Rezaee--Schmidt (arXiv:2011.12240, Geometry & Topology 2024, Thm 7.1) realize
+`M = Bl_0(Theta)` for a cubic threefold as a moduli space of stable sheaves in
+the Kuznetsov component. That makes `M` a named candidate endpoint rather than
+a hypothetical one.
+
+**What would be needed.** A small quantum connection for `M` with an identified
+formal-monodromy packet, and a point-row coefficient on it -- the exact analogue
+of `lem:cubic-central-charge` plus the Barnes step. Nothing of the kind is
+available for `M`, and the moduli description alone gives no quantum
+connection. This is a long-range lead, not a queued task.
+
+**Why the rest of the C908 asset does not feed C913.** Recorded so it is not
+re-litigated: the C913 invariant is read entirely off the small *even* quantum
+connection and the Gamma framing on topological K-theory, while the C908 asset
+(integral `H^3(M,Z)`, the saturation of `Theta ^ ^3 Lambda` inside `^5 Lambda`,
+the rank-ten escape group, the `(Z/2)^10` shadows of `H^3(X,Z) (x) F_2`) is
+odd-degree lattice data on an auxiliary variety. For a cubic threefold `H^3`
+contributes nothing to the small even quantum connection, so there is no channel
+into the transport machinery, the endpoint contrast, or the threshold
+hypotheses. C913 also advertises independence from decomposition-of-the-diagonal
+and integral Hodge obstructions, which importing that asset would blur. Its
+natural consumer is the cycle-theoretic companion, which already argues by
+integral lattice saturation on the intermediate Jacobian.
+
+**Evidence:** REASONED from the C913 manuscript and the relayed C908 summary;
+the BBFHMRS locator is taken from that summary and is NOT independently verified
+here, and no quantum-cohomology computation for `M` was attempted.
+
+**Status:** open, unpromoted. Incidental; surfaced when the C908 lane asked
+whether its asset helps C913. No identifier allocated.
