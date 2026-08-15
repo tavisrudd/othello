@@ -20,7 +20,7 @@
 
 \title{Frame transport for framed formal monodromy:\\
   the lemma, its hypotheses, and the receiver problem\\
-  \large Fourth version, correcting the blockwise section of the third}
+  \large Fifth version, closing the coalesced case}
 \author{Memo for a reader of \emph{Irrationality of Cubic Threefolds after One
     Stabilization}}
 \date{15 August 2026}
@@ -66,8 +66,22 @@ such a reduction and was wrong twice over, once in dropping a term from the
 off-block Sylvester equation and once in modelling a nonsemisimple block by its
 compressed pair. Both errors, and the cubic $2\times2$ example that is the
 regression test for any repair, are recorded there.
-Section~\ref{sec:corrections} lists what the earlier versions
-got wrong; readers of those versions should start there.
+
+Section~\ref{sec:rigid}, new in this version, closes the coalesced case for a
+block of the cubic's type, and with it the residual gap for the cubic ambient
+summand. The device is to shear the block before deforming it. Three statements
+are proved over the formal even bulk germ, from the flatness identities and
+nothing else: the double eigenvalue never splits, because $\det N$ satisfies
+$\partial_a\det N=2q_a\det N$ and vanishes initially; no irregularity appears,
+because the commutant of a regular block forbids a $z^{-2}$ bulk term and the
+$z^{-1}$ flatness equation then forces the surviving pole to vanish; and the
+residue of the sheared block moves by conjugation alone, so its characteristic
+polynomial is constant. For the cubic that polynomial is $\rho^2+\rho+5/36$
+with roots $-1/6,-5/6$, so the primitive-sixth multiplicity is $2$ at every bulk
+parameter, including a specialized one. No receiver, no bulk gauge, and no
+convergence question enters, because specialization is substitution into
+constants. Section~\ref{sec:corrections} lists what the earlier versions got
+wrong; readers of those versions should start there.
 \end{abstract}
 
 \section{The assertion at issue}
@@ -822,6 +836,11 @@ comparison. It is one statement:
 
 Everything else in Proposition~4.7 is proved or reduced to a regular gauge, and
 \texttt{lem:divisor-tagging} inherits this gap and nothing else.
+Section~\ref{sec:rigid} proves this statement whenever the block carrying
+$\nu_6$ is a rank-two Jordan block that is regular singular after one shearing,
+which covers the cubic ambient summand. What is still open is the same
+statement for an arbitrary block, which is what a center-by-center treatment
+would require.
 
 \section{The blockwise route, and what the flatness identities already give}
 \label{sec:blockwise}
@@ -1080,23 +1099,324 @@ $D_aU_i$, and if the rank-two block carrying $\pm1/6$ split into simple blocks
 those would carry residue $0$ by Theorem~\ref{thm:simple-blocks} and $\nu_6$
 would drop by two. Proving that the reconstruction displacement does not do
 that, or does it in a count-preserving way, is the residual problem.
+Section~\ref{sec:rigid} now does exactly that, by shearing the block before
+deforming it.
+
+\section{The coalesced block is rigid}
+\label{sec:rigid}
+
+This section closes the residual gap of Section~\ref{sec:hyzz} for a block of
+the cubic's type. The route is the one Section~\ref{sec:not-yet} said was
+needed: deform the \emph{full} formal normal form rather than the compressed
+pair. The device that makes it finite is to shear first. After the shearing the
+block is regular singular, its residue already contains the $z^2$ coefficient
+that the regression test showed to be load-bearing, and --- this is the point
+--- the bulk connection loses its pole, so the residue moves by conjugation
+alone.
+
+\subsection*{Setting}
+
+Let $\Lambda$ be the coefficient field of the small connection, containing
+$r=(3q)^{1/2}$ and its inverse, and let $B=\Lambda[[\tau]]$ be the formal even
+bulk germ in finitely many even coordinates $\tau_a$. Write the quantum
+connection in the conventions of Section~\ref{sec:blockwise},
+\[
+  z\partial_zY=\bigl(z^{-1}U-\mu\bigr)Y,
+  \qquad
+  \partial_aY=-z^{-1}C_aY,
+\]
+with $U=E\star_\tau$, $C_a=\phi_a\star_\tau$ and $\mu$ constant, so that
+Lemma~\ref{lem:flatness-ids} holds: $[U,C_a]=0$ and
+$\partial_aU=C_a+[C_a,\mu]$. Everything below is formal in $\tau$ and needs no
+completion of the loop coordinate, no ordered receiver, and no bulk gauge.
+
+Standing hypotheses, all verified for the cubic at $\tau=0$:
+
+\begin{itemize}
+\item[(H1)] $U(0)$ has an eigenvalue $u_0$ whose generalized eigenspace $H_0$
+  has rank two and on which the nilpotent part is nonzero; every other
+  eigenvalue differs from $u_0$ by a unit of $\Lambda$.
+\item[(H2)] After the shearing of Step~4 the block is regular singular at
+  $\tau=0$, that is $f(0)=0$ in the notation there.
+\end{itemize}
+
+For the cubic, (H1) holds with $u_0=0$ and the other eigenvalues $\pm6r$, and
+(H2) holds because the draft's $D_0$ is diagonal.
+
+\subsection*{Step 1: decoupling, and the bulk connection stays block diagonal}
+
+\begin{lemma}
+\label{lem:decouple}
+There is a unique gauge $g=I+O(z)$ over $B$, block-diagonalizing the
+$z$-connection with respect to the generalized eigenspaces of $U$. In the
+gauged frame the bulk connection is block diagonal as well, and its leading
+coefficient on $H_0$ is $C_{a,0}=P_0C_aP_0$.
+\end{lemma}
+
+\begin{proof}
+Existence and uniqueness of $g$ is the splitting lemma at Poincar\'e rank one,
+solved order by order by Sylvester equations whose operators are invertible
+because the eigenvalue differences are units. For the second statement write
+the gauged pair as $\widetilde{\mathcal A}=z^{-1}U+O(1)$, block diagonal, and
+$\widetilde{\mathcal C}_a=z^{-1}\check C_a(z)$ with
+$\check C_a=\check C^{(0)}+z\check C^{(1)}+\cdots$, and expand the flatness
+identity
+\[
+  \partial_a\widetilde{\mathcal A}
+  =-z\partial_z\widetilde{\mathcal C}_a
+  +[\widetilde{\mathcal A},\widetilde{\mathcal C}_a].
+  \tag{8.1}
+  \label{eq:flat-pair}
+\]
+Its off-block part in bidegree $(i,j)$, $i\ne j$, has zero left side because
+$\widetilde{\mathcal A}$ is block diagonal. At order $z^{-2}$ this reads
+$(u_i-u_j)(\check C^{(0)})_{ij}=0$, and at each successive order the same
+invertible factor multiplies the next off-block coefficient. So every off-block
+coefficient vanishes. Since $g=I+O(z)$, the leading term is unchanged.
+\end{proof}
+
+\subsection*{Step 2: the exponential factor, and the commutant}
+
+Put $u_0(\tau)=\tfrac12\operatorname{tr}\bigl(U|_{H_0}\bigr)$ and
+$N:=U|_{H_0}-u_0I$, so $N$ is traceless and $N(0)\ne0$ is nilpotent. Twisting
+the block by $\exp(u_0/z)$ removes its exponential factor; this changes neither
+the regular-singular part nor the framed monodromy. The twist replaces the
+leading bulk coefficient $C_{a,0}$ by $C_{a,0}-(\partial_au_0)I$.
+
+\begin{lemma}
+\label{lem:commutant}
+$C_{a,0}=p_aI+q_aN$ with $p_a,q_a\in B$, and $p_a=\partial_au_0$. After the
+twist the leading bulk coefficient on the block is $q_aN$.
+\end{lemma}
+
+\begin{proof}
+$[U,C_a]=0$ gives $[U|_{H_0},C_{a,0}]=0$. A $2\times2$ matrix over a local ring
+whose reduction is non-scalar is regular, and $U|_{H_0}$ reduces to
+$u_0(0)I+N(0)$ with $N(0)\ne0$; the commutant of a regular $2\times2$ matrix is
+free of rank two on $I$ and the matrix itself, hence equals
+$B\cdot I\oplus B\cdot N$. Taking traces in $\partial_aU=C_a+[C_a,\mu]$ on the
+block gives $2\partial_au_0=\operatorname{tr}C_{a,0}=2p_a$.
+\end{proof}
+
+\subsection*{Step 3: the eigenvalue never splits}
+
+\begin{theorem}[No splitting]
+\label{thm:no-splitting}
+$\det N\equiv0$ on $B$. Consequently $N$ is nilpotent at every point of the
+formal germ, the block keeps a single eigenvalue of multiplicity two, and by
+(H1) it is a single Jordan block.
+\end{theorem}
+
+\begin{proof}
+Write $d:=\det N\in B$; by (H1), $d(0)=0$. From
+Theorem~\ref{thm:block-evolution} the block leading operator evolves by
+$D_aU_0=C_{a,0}+[C_{a,0},\mu_0]$, so by Lemma~\ref{lem:commutant}
+\[
+  D_aN=D_aU_0-(\partial_au_0)I=q_aN+q_a[N,\mu_0].
+\]
+For a traceless $2\times2$ matrix $\operatorname{adj}(N)=-N$ and
+$N^2=-dI$, so
+\[
+  \partial_ad=\operatorname{tr}\bigl(\operatorname{adj}(N)\,D_aN\bigr)
+  =-q_a\operatorname{tr}(N^2)-q_a\operatorname{tr}\bigl(N[N,\mu_0]\bigr)
+  =2q_ad,
+\]
+using $\operatorname{tr}(N[N,\mu_0])=\operatorname{tr}(N^2\mu_0)
+-\operatorname{tr}(N\mu_0N)=0$. Now suppose $d\ne0$ and let $m\ge1$ be the
+order of its lowest nonvanishing homogeneous part $d_m$ in $\tau$. The right
+side of $\partial_ad=2q_ad$ has order at least $m$, while the left side has
+order $m-1$ with homogeneous part $\partial_ad_m$. Hence $\partial_ad_m=0$ for
+every $a$, so $d_m=0$, a contradiction. Note $d$ is basis independent, so no
+choice of block frame enters.
+\end{proof}
+
+This is the falsifier of Section~\ref{sec:not-yet} answered: the reconstruction
+displacement cannot split the block that carries $\nu_6$. It also shows the
+Kato frame is not needed for this step, since $\det N$ is frame independent.
+
+\subsection*{Step 4: shear}
+
+By Theorem~\ref{thm:no-splitting}, $N^2=0$ and $N\ne0$, so $\ker N=\operatorname{im}N$
+is a free rank-one submodule; choose a frame $(e_1,e_2)$ of $H_0$ with
+$Ne_1=0$, $Ne_2=\nu e_1$, $\nu\in B^\times$, depending formally on $\tau$, and
+let $\Gamma_a$ be the resulting frame connection, which has no pole in $z$.
+Apply $S=\operatorname{diag}(1,z)$ and write the sheared pair as
+\[
+  z\partial_z\widehat Y=\widehat{\mathcal A}\widehat Y,\quad
+  \widehat{\mathcal A}=z^{-1}A_{-1}+A_0+zA_1+\cdots,
+  \qquad
+  \partial_a\widehat Y=-\widehat{\mathcal C}_a\widehat Y,\quad
+  \widehat{\mathcal C}_a=z^{-1}K_a+G_a+\cdots.
+\]
+Conjugation by $S$ sends $E_{12}\mapsto zE_{12}$, $E_{21}\mapsto z^{-1}E_{21}$
+and fixes diagonal matrices, and $-S^{-1}z\partial_zS=-\operatorname{diag}(0,1)$.
+Writing the decoupled block connection before shearing as
+$z^{-1}N+A_0'+zA_1'+\cdots$, one gets
+\[
+  A_{-1}=f\,E_{21},\quad f:=(A_0')_{21},
+  \qquad
+  A_0=R:=\nu E_{12}+\operatorname{diag}\bigl((A_0')_{11},(A_0')_{22}-1\bigr)
+        +(A_1')_{21}E_{21}.
+  \tag{8.2}
+  \label{eq:sheared-data}
+\]
+On the bulk side, the leading coefficient $q_aN=q_a\nu E_{12}$ shears
+\emph{up} to order $z^0$, and the only surviving pole comes from the $(2,1)$
+entry of the regular part:
+\[
+  K_a=k_aE_{21},
+  \qquad
+  k_a:=\bigl(\check C^{(1)}_{a,0}+\Gamma_a\bigr)_{21}.
+  \tag{8.3}
+  \label{eq:sheared-bulk}
+\]
+There is no $z^{-2}$ term, and this is where Lemma~\ref{lem:commutant} does its
+work: a $(2,1)$ entry in $C_{a,0}$ would have produced one, and the commutant
+forbids it.
+
+For the cubic, \eqref{eq:sheared-data} reproduces the draft's own numbers. With
+$\nu=2$, $A_0'=D_0=\operatorname{diag}(-19/18,19/18)$ and $(A_1')_{21}=-8/81$,
+\[
+  f=0,\qquad
+  R=\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix},
+  \qquad
+  \operatorname{tr}R=-1,\quad\det R=\tfrac5{36},
+\]
+so the characteristic polynomial of $R$ is exactly $\rho^2+\rho+5/36$ and its
+roots are $-1/6$ and $-5/6$. The $z^2$ coefficient enters through
+$(A_1')_{21}$, so the regression test of Section~\ref{sec:not-yet} is met by
+construction rather than by accident: the object being deformed below is $R$,
+which sees it.
+
+\subsection*{Step 5: no irregularity appears, and the bulk connection is regular}
+
+\begin{theorem}[The sheared block stays regular singular]
+\label{thm:no-irregularity}
+$f\equiv0$ and $k_a\equiv0$ on $B$. Hence at every point of the formal germ the
+block is regular singular with residue $R$, and in the sheared frame the bulk
+connection has no pole in $z$.
+\end{theorem}
+
+\begin{proof}
+Expand \eqref{eq:flat-pair} for the sheared pair. The coefficient of $z^{-2}$ is
+$[A_{-1},K_a]=[fE_{21},k_aE_{21}]=0$, which is vacuous. The coefficient of
+$z^{-1}$ is
+\[
+  \partial_a(f)E_{21}
+  =k_aE_{21}+f\,[E_{21},G_a]+k_a\operatorname{ad}_R(E_{21}).
+\]
+Writing $R=\begin{pmatrix}\alpha&\nu\\\gamma&\delta\end{pmatrix}$ one computes
+$\operatorname{ad}_R(E_{21})
+=\begin{pmatrix}\nu&0\\\delta-\alpha&-\nu\end{pmatrix}$, whose diagonal is
+$\operatorname{diag}(\nu,-\nu)$ and does not involve $\gamma$. The left side is
+off-diagonal, so comparing diagonal entries gives
+$k_a\nu=-f\,\bigl([E_{21},G_a]\bigr)_{11}$, and since $\nu$ is a unit,
+$k_a=f\,h_a$ for some $h_a\in B$. Comparing $(2,1)$ entries then gives
+\[
+  \partial_af=f\Bigl(h_a\bigl(1+\delta-\alpha\bigr)
+  +\bigl([E_{21},G_a]\bigr)_{21}\Bigr),
+\]
+a linear equation $\partial_af=f\,w_a$. By (H2), $f(0)=0$, and the
+lowest-order argument of Theorem~\ref{thm:no-splitting} applies verbatim, so
+$f\equiv0$ and therefore $k_a\equiv0$.
+\end{proof}
+
+\subsection*{Step 6: the exponents are constant}
+
+\begin{theorem}[Rigidity of the formal type]
+\label{thm:rigidity}
+$\partial_aR=[R,G_a]$ for every bulk direction $a$. Hence the characteristic
+polynomial of $R$ has coefficients in $\Lambda$, constant in $\tau$; the
+formal monodromy of the block is conjugate to $\exp(2\pi iR)$ at every point of
+the formal germ; and the primitive-sixth multiplicity of the block is constant.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:no-irregularity} the sheared pair has $A_{-1}=0$ and
+$K_a=0$. The coefficient of $z^0$ in \eqref{eq:flat-pair} is
+$\partial_aA_0=[A_{-1},H_a]+[A_0,G_a]+[A_1,K_a]$, which collapses to
+$\partial_aR=[R,G_a]$. A matrix moving by an infinitesimal conjugation has
+constant characteristic polynomial: $\partial_a\det(XI-R)=0$ entrywise. Since
+$\widehat{\mathcal A}=R+O(z)$, the block is regular singular and its formal
+monodromy is conjugate to $\exp(2\pi iR)$; shearing changed the exponents by
+integers only, which $\nu_6$ does not see.
+\end{proof}
+
+\begin{corollary}[The residual gap, closed at the cubic]
+\label{cor:cubic-closed}
+For a smooth cubic threefold, the framed formal monodromy of the zero block has
+$\nu_6=2$ at every point of the formal even bulk germ, in particular at any
+bulk parameter $\tau^\bullet$ in the positive filtration. The statement of
+Section~\ref{sec:hyzz} therefore holds for the cubic ambient summand.
+\end{corollary}
+
+\begin{proof}
+Combine Theorem~\ref{thm:rigidity} with the computation after
+\eqref{eq:sheared-data}: the characteristic polynomial is $\rho^2+\rho+5/36$
+everywhere, with roots $-1/6,-5/6$, whose monodromy eigenvalues
+$e^{\mp\pi i/3}$ are primitive sixth roots of unity. Since the coefficients of
+the characteristic polynomial are constants of $\Lambda$, evaluation at a
+topologically nilpotent $\tau^\bullet$ is legitimate and returns the same
+polynomial; no convergence of a bulk gauge is involved.
+\end{proof}
+
+\subsection*{Three remarks}
+
+\begin{remark}[Why this is not the compressed-pair argument]
+The deformed object is $R$ of \eqref{eq:sheared-data}, not the pair
+$(U_0,\mu_0)$. The shearing has folded the $z^2$ coefficient of the unsheared
+block into the residue, so the failure mode of Section~\ref{sec:not-yet} ---
+deleting $-8/81$ and moving the exponents to $\pm1/18$ --- cannot occur here:
+that deletion changes $R$ itself, hence its characteristic polynomial, and
+Theorem~\ref{thm:rigidity} freezes exactly that polynomial.
+\end{remark}
+
+\begin{remark}[Relation to Cai's Proposition 6]
+Cai states the $\pm1/6$ exponents for the \emph{big} quantum connection and
+proves it by constructing $M=I+\sum M_n t^n$ with $\partial_{t_i}M=-z^{-1}P_iM$,
+so that $M^{-1}\nabla_{t_i}M=\partial_{t_i}$ and $M^{-1}\nabla_zM$ is bulk
+independent. That gauge is precisely the pro-Laurent object of
+Lemma~4.5 and of Iritani--Koto's Section 5.8: per bulk degree it is polynomial
+in $z^{-1}$, unbounded only after summing bulk degrees. Over
+$\Lambda((z))[[t]]$, with the bulk kept formal, that argument is sound and
+proves the same conclusion, because $M$ is fixed by the turn and
+Theorem~\ref{thm:transport} applies with the bulk variables as formal
+parameters. What it does not do by itself is license evaluation at a
+\emph{specialized} bulk parameter with Novikov coefficients, which is where the
+receiver discussion of Section~\ref{sec:receiver} came from. The argument above
+avoids the gauge altogether and produces a $\tau$-constant characteristic
+polynomial, so specialization is a substitution into constants.
+\end{remark}
+
+\begin{remark}[Scope]
+Steps 2 to 5 used rank two only through the identities
+$\operatorname{adj}(N)=-N$ and $N^2=-\det(N)I$ and through the single shearing.
+The mechanism --- commutant of a regular block kills the would-be $z^{-2}$ bulk
+term, one shearing makes the block regular singular, flatness then forces the
+bulk pole to vanish --- should extend to a single Jordan block of any size with
+the shearing $\operatorname{diag}(1,z,\dots,z^{m-1})$, and this is worth doing
+because it is what a general center statement would need. It does not cover a
+derogatory block, where the commutant is larger, nor a semisimple block, where
+the $z^{-1}$ equation instead reads $(I+\operatorname{ad}_R)(C_{a,0}-p_aI)=0$
+and a resonance $\rho_i-\rho_j=-1$ must be excluded before the same conclusion
+follows.
+\end{remark}
 
 \section{Routes, in the order I would now try them}
 
 The framing route has been removed from this list by the checks of
-Section~\ref{sec:hyzz}. All below attack the residual gap stated at the end of
-that section, and the order has changed: the blockwise route is now first,
-because Section~\ref{sec:blockwise} has already carried it past the point where
-the Birkhoff route still stands.
+Section~\ref{sec:hyzz}. The blockwise route has now been carried to its
+conclusion for a block of the cubic's type in Section~\ref{sec:rigid}, so what
+follows is the residue of the list: what the remaining routes are still for.
 
 \begin{enumerate}
 \item \textbf{Blockwise, avoiding transport altogether.} Developed in
-  Section~\ref{sec:blockwise}. It has produced the unconditional evolution
-  $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, the vanishing of every multiplicity-one
-  block residue, and the corrected off-block Sylvester equations. It has
-  \emph{not} reduced the coalesced case: the compressed pair $(U_i,\mu_i)$ does
-  not determine the exponents there, as the cubic regression test shows. The
-  next calculation is the deformation of the full formal block normal form.
+  Section~\ref{sec:blockwise} and completed in Section~\ref{sec:rigid} for a
+  single Jordan block of rank two. What remains of this route is generalization,
+  not repair: a single Jordan block of arbitrary size, by the same shearing with
+  $\operatorname{diag}(1,z,\dots,z^{m-1})$, and the semisimple case with its
+  resonance condition. That generalization is what a statement covering
+  arbitrary centers would need; it is not needed for the cubic endpoint.
   Signs follow the displayed connection of Iritani--Koto's Theorem~5.1 and
   should be rechecked against the draft's normalization before anything is
   written into the manuscript.
@@ -1150,8 +1470,14 @@ Stated by label because these insertions renumber Section~4. Items 1 to 3 and
 item 5 are unconditional and can be written now; the checks of
 Section~\ref{sec:hyzz} also make item 6 partly unconditional, since the
 comparison isomorphisms themselves are $z$-polynomial and the transport lemma
-applies to them with no receiver. Only the steps that pass through the
-pro-Laurent bulk gauge remain conditional on closing the residual gap.
+applies to them with no receiver. With Section~\ref{sec:rigid} the step that
+removes the positive-filtration bulk parameter is unconditional as well for the
+cubic ambient summand, so what is left conditional is the corresponding step at
+an arbitrary center. A ninth item is therefore owed: the rigidity theorem
+itself, as a lemma before \texttt{prop:framed-operations}, stated for the block
+type it covers and with its two hypotheses displayed rather than assumed.
+Nothing here should be written into the manuscript before the sign conventions
+are rechecked against the draft's normalization.
 
 \begin{enumerate}
 \item The ground field and solution algebra go immediately before ``Apply
@@ -1199,7 +1525,30 @@ READMEs must be regenerated.
 \section{Corrections to the earlier versions of this memo}
 \label{sec:corrections}
 
-\subsection*{From the third version to this one}
+\subsection*{From the fourth version to this one}
+
+Nothing in the fourth version is retracted. Section~\ref{sec:rigid} is added,
+and three of its consequences change earlier readings.
+
+\begin{enumerate}
+\item Section~\ref{sec:not-yet} said the coalesced case was not reduced and
+  named the block-splitting risk as the residual problem. Both are now settled
+  for a rank-two Jordan block: Theorem~\ref{thm:no-splitting} excludes the
+  splitting and Theorem~\ref{thm:rigidity} freezes the exponents. The section is
+  left standing because its diagnosis --- that the compressed pair is the wrong
+  object --- is what the shearing acts on.
+\item The residual gap of Section~\ref{sec:hyzz} is closed for the cubic
+  ambient summand by Corollary~\ref{cor:cubic-closed}. It remains open as
+  stated for arbitrary smooth projective $T$, which is a statement about
+  arbitrary blocks, not about transport.
+\item Cai's Proposition~6 already asserts the $\pm1/6$ exponents for the big
+  quantum connection, by a bulk gauge of exactly the pro-Laurent shape this memo
+  scrutinized. That argument is sound with the bulk kept formal; the receiver
+  discussion was always about specialization, not about the formal statement.
+  Section~\ref{sec:rigid} makes the point moot by producing constants.
+\end{enumerate}
+
+\subsection*{From the third version to the fourth}
 
 Both are in Section~\ref{sec:blockwise}, and both are at the coalesced blocks,
 which are the ones that matter.
@@ -1285,30 +1634,38 @@ For readers of the first version, these are the substantive changes.
 
 The first question of the second version --- whether the two connections
 compared in Proposition~4.7 lie in the class Theorem~4.34 governs --- has been
-answered no, three times over, in Section~\ref{sec:hyzz}. These replace it.
+answered no, three times over, in Section~\ref{sec:hyzz}. Questions 1 and 2 of
+the fourth version are answered in Section~\ref{sec:rigid}: the object to deform
+is the residue of the sheared block, which sees the $z^2$ coefficient by
+construction, and its characteristic polynomial is constant; and the
+displacement cannot split the block, because $\det N$ satisfies a linear
+equation with zero initial value. Question 3 is no longer on the critical path,
+since the coalescence literature is not used. These remain.
 
 \begin{enumerate}
-\item What is the deformation equation for the \emph{full} formal normal form
-  $J+zD+z^2E+\cdots$ of a coalesced block, and does it keep the exponent classes
-  fixed? Any candidate must reproduce the cubic $2\times2$ example, where
-  deleting the $z^2$ coefficient moves the exponents from $\pm1/6$ to $\pm1/18$.
-\item Can the reconstruction displacement split a coalesced block that carries
-  $\nu_6$? The splitting is governed by $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, and by
-  Theorem~\ref{thm:simple-blocks} a split into simple blocks would destroy the
-  primitive-sixth exponents outright.
-\item Is there a coalescence result for isomonodromic deformations that covers
-  the formal exponents, rather than only the Stokes matrices, and that does not
-  assume the leading matrix is diagonalizable at the coalescence point? The
-  carrier here has $J_0\ne0$, so the standard hypotheses are not met.
+\item Does the argument of Section~\ref{sec:rigid} extend to a single Jordan
+  block of arbitrary size, and to a semisimple block once the resonance
+  $\rho_i-\rho_j=-1$ is excluded? This is what a statement about arbitrary
+  centers, rather than the cubic endpoint, would need.
+\item Is hypothesis (H2) --- that the sheared block is regular singular at the
+  base point --- structural rather than computed? Self-adjointness of $E\star$
+  and anti-self-adjointness of $\mu$ force the $(2,1)$ entry of $\mu_0$ to
+  vanish in the shearing frame, which is suggestive; what is missing is the
+  same statement for the decoupling correction.
 \item Does the factor $M'=\mathrm{id}+O(z^{-1})$ of the sources' Birkhoff
-  factorization preserve the primitive-sixth multiplicity? This is the same
-  question in the other coordinates, and is worth keeping as a cross-check.
+  factorization preserve the primitive-sixth multiplicity? Now a cross-check
+  rather than a route.
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
-  directly in the coordinates Iritani's specialization produces, given that the
+  pointwise in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular
-  connection?
-\item Failing all of these, what is the right restriction on centers, and does
-  weak factorization stay inside it?
+  connection and that Theorem~\ref{thm:simple-blocks} disposes of every
+  multiplicity-one block? A pointwise statement there needs no transport at all,
+  which is the shape the endpoint theorem wants.
+\item Which presentation should the manuscript take: the operation formulas
+  with $\nu_6$ transported summand by summand, which needs the generalization in
+  item 1, or the atom formulation, in which the intermediate fourfolds never
+  appear because the weak-factorization bookkeeping happens at the level of
+  atoms as objects?
 \end{enumerate}
 
 \end{document}
