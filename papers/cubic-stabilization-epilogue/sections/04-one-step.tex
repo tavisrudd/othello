@@ -931,12 +931,37 @@ pp.~4--5\cite{Cai}; the displayed change of basis and recurrence make the
 reduction \eqref{eq:cubic-integral-block-reduction} internal to the present
 calculation.
 
-The rank-two zero-exponential block has indicial
-polynomial
+For the rank-two block, seek a formal solution in the form
 \[
- \rho^2+\rho+\frac5{36},
+ \widetilde S_3=z^\rho(1+O(z)),
+ \qquad
+ \widetilde S_4=cz^{\rho+1}(1+O(z)).
+ \tag{4.9f}
+ \label{eq:cubic-indicial-ansatz}
 \]
-with roots \(-1/6\) and \(-5/6\) \cite[Section~3, pp.~5--6]{Cai}.  His gauge uses only
+The coefficient of \(z^{\rho+1}\) in the first coordinate of
+\eqref{eq:cubic-integral-block-reduction}, and that of \(z^{\rho+2}\) in
+the second, give respectively
+\[
+ \rho=2c-\frac{19}{18},
+ \qquad
+ c(\rho+1)=\frac{19}{18}c-\frac8{81}.
+ \tag{4.9g}
+ \label{eq:cubic-indicial-coefficients}
+\]
+Eliminating \(c\) gives
+\[
+ \frac12\left(\rho+\frac{19}{18}\right)
+ \left(\rho-\frac1{18}\right)=-\frac8{81},
+ \qquad\text{hence}\qquad
+ \rho^2+\rho+\frac5{36}=0.
+ \tag{4.9h}
+ \label{eq:cubic-indicial-polynomial}
+\]
+This is the coefficient comparison in Cai's displayed rank-two ansatz
+on p.~6\cite[p.~6]{Cai}.
+
+Its roots are \(-1/6\) and \(-5/6\) \cite[Section~3, pp.~5--6]{Cai}.  His gauge uses only
 integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
 are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
 blocks are displayed as exponentials in \(z^{-1}\) times series in nonnegative
