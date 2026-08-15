@@ -158,8 +158,8 @@ if "conditional transport" not in endpoint_text or "does not use Cai" not in end
 
 metadata = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
 if metadata.get("title") != (
-    "Conditional Irrationality of All Projective Stabilizations of "
-    "Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing"
+    "Gamma Point Rows under Quantum Wall Crossing and a Criterion for "
+    "Stable Irrationality"
 ):
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":

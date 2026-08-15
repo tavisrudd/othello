@@ -132,9 +132,9 @@ F13*)
   reconstruction branch.
 
 **Active unnumbered candidate — cubic-stabilization-irrationality** —
-*Conditional Irrationality of All Projective Stabilizations of Cubic
-Threefolds: Point-Class Rank under Quantum Wall Crossing*
-- *Status:* externally circulation-ready 20-page preprint with exact claim and
+*Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
+Irrationality*
+- *Status:* externally circulation-ready preprint with exact claim and
   literature ledgers, a paper-owned release checker, an isolated referee
   dossier, and a verified standalone export.
 - *Scope:* proves an exact ambient common-point coordinate for smooth

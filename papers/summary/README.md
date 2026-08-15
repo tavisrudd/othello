@@ -14,8 +14,8 @@ conditions and an inverse-system family of one-object marked threshold compariso
 > stabilization `X × P^m` of every smooth complex cubic threefold `X` is
 > irrational.**
 
-*Conditional Irrationality of All Projective Stabilizations of Cubic
-Threefolds* obtains this dimension-independent conclusion from point-class
+*Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
+Irrationality* obtains this dimension-independent conclusion from point-class
 rank under quantum wall crossing. Its local transport, endpoint calculation,
 and coefficientwise Gamma reduction are proved.  Under the stated
 gauged-admissibility conditions, support collapse, tailwise derived
@@ -64,8 +64,8 @@ Golden interferometer paper are related unnumbered companions.
 *Irrationality after one stabilization* uses the six-axis structure of the
 nonstandard `A₅`-invariant pencil to prove universal `CH₀`-triviality for its
 explicit family; its theorem for all smooth cubic threefolds is independent of
-that special construction. *Conditional Irrationality of All Projective
-Stabilizations of Cubic Threefolds* replaces the dimension-four center bound
+that special construction. *Gamma Point Rows under Quantum Wall Crossing and a
+Criterion for Stable Irrationality* replaces the dimension-four center bound
 by a global point-row comparison, conditional on the locally finite marked
 threshold hypothesis above. Every paper is intended to stand on its own mathematically.
 
@@ -149,7 +149,7 @@ complex as separate victories.
   Under those assumptions, the point-row primary Boolean is birationally
   invariant and distinguishes `X × P^m` from projective space for every smooth
   cubic threefold `X` and every `m ≥ 0`.
-  [Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+  [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Unconditionally, every smooth cubic threefold remains irrational after
   one stabilization.** For every smooth complex cubic threefold `X`, the
@@ -232,7 +232,7 @@ boundary, and reproducible entry points.
 | *Golden Descent and Operator Realizations of the Clebsch Cubic* | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
-| *Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing* | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
+| *Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality* | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -452,7 +452,7 @@ changes no higher-discrepancy statement.
 
 ---
 
-#### Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing
+#### Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 

@@ -1,4 +1,4 @@
-# Conditional Irrationality of All Projective Stabilizations of Cubic Threefolds
+# Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 
@@ -6,8 +6,8 @@
 
 [**Open the paper (PDF) →**](cubic_stabilization_irrationality.pdf)
 
-**Title:** *Conditional Irrationality of All Projective Stabilizations of
-Cubic Threefolds: Point-Class Rank under Quantum Wall Crossing*.
+**Title:** *Gamma Point Rows under Quantum Wall Crossing and a Criterion for
+Stable Irrationality*.
 
 Assuming a gauged-admissible marked Włodarczyk completion and the
 inverse-system family of one-object marked threshold comparisons stated in the paper,
