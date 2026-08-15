@@ -21,8 +21,10 @@ framed eigenvalues are derived in commits `af1cc0c9e` and
 `18fd50077`; commits `62c9b068e` and `44ddeb801` derive the two unramified
 rank-one factors and their trivial regular monodromy; commits `23ddd1c6f`
 and `e99e503b1` close the nonresonant Frobenius recursion and exact framed
-count while preserving Cai's starting-matrix role.  WP4 is complete pending
-its coherent-tranche cold review; WP5--WP6 remain prioritized work.
+count while preserving Cai's starting-matrix role.  The independent
+coherent-tranche reviews are GO (`C912-WP4-CR-GO-001` and the closed
+`R-WP4-*` findings), with source/scope repairs at `f4a959bf8`.  WP4 is
+accepted; WP5--WP6 remain prioritized work.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
