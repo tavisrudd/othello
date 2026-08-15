@@ -24,13 +24,15 @@ and `e99e503b1` close the nonresonant Frobenius recursion and exact framed
 count while preserving Cai's starting-matrix role.  The independent
 coherent-tranche reviews are GO (`C912-WP4-CR-GO-001` and the closed
 `R-WP4-*` findings), with source/scope repairs at `f4a959bf8`.  WP4 is
-accepted.  WP5 has begun at `5a6362680`, which exposes the divisor-tag initial
-form.  WP7 is landed at `0db2a97fc`, `131e926d6`, `d92f27904`, and
-`ac0bfee7b`, which reposition the paper against Yang--Yu--Zhu and Voisin's
-Theorem 4.5, restate the separation as three corollaries of the one-step
-theorem, credit Hartlieb's Lemma 5.5 for the Fermat membership of the pencil,
-and widen the theorem to the whole birational class.  WP5, WP6, WP8, WP9, and
-WP10 remain prioritized work; the paper now builds warning-free at 28 pages.
+accepted.  WP5 through WP11 are landed: the divisor-tagging exposition at
+`5a6362680` and `a9fd9b84e`, the cycle and exposition seams at `011580e55`,
+the repositioning at `0db2a97fc`, `131e926d6`, `d92f27904`, `ac0bfee7b`, and
+`0378e2ae1`, the source-version locator repair at `9c3518861`, the reopened
+foundation rechecks at `87b6170e1`, the cold-read repairs at `a5fd508c2`, and
+the forward-citation sweep recorded in
+`../2026-08-14-c912-forward-citation-sweep.md`.  The paper builds
+warning-free at 29 pages.  What remains open on this card is the residual list
+under each work package, not a whole package.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -121,8 +123,10 @@ exact bridge is formalized.
   Iritani's blowup theorem and Iritani--Koto's projective-bundle theorem.
 - [x] Verdict: **partly addressed already, but the paper's own adic-continuity
   step remains asserted rather than proved**.
-- [ ] Pin exact versions for every load-bearing preprint in the bibliography
-  and verification record.
+- [x] Pin exact versions for every load-bearing preprint in the bibliography
+  and verification record; done in WP8, including the seven entries that
+  carried no version and a line stating that numbered statements follow the
+  preprint versions.
 - [ ] Quote the precise integral-`z`, `z`-independent mirror-coordinate,
   normalized-bulk, definedness, and inverse identities used from each source.
 - [ ] Add an internal lemma: a coefficient map taking the source augmentation
@@ -451,32 +455,32 @@ forward trees of the principal sources as unclosed. This work package closes
 that gap. It is bound by `notes/literature-audit-conventions.md` in full; the
 verdict text lives only in `claim-proof-novelty-ledger.md`.
 
-- [ ] Pin every seed by identifier resolved from a consulted source, never by
+- [x] Pin every seed by identifier resolved from a consulted source, never by
   title search: Voisin arXiv:1407.7261, Colliot-Thélène arXiv:1607.05673,
   Yang--Yu--Zhu arXiv:2508.03623, Hartlieb arXiv:2304.03214, Wei--Yu
   arXiv:1907.00392, Engel--de Gaay Fortman--Schreieder arXiv:2507.15704, Cai
   arXiv:2608.01577, Katzarkov--Kontsevich--Pantev--Yu arXiv:2508.05105.
   Record the resolved DOI or OpenAlex identifier for each in the report.
-- [ ] Take the forward-citation set of each seed independently from OpenAlex,
+- [x] Take the forward-citation set of each seed independently from OpenAlex,
   Crossref, and Semantic Scholar. Record the three counts separately, screen
   the largest set, and report any disagreement between the services as a
   finding rather than collapsing them.
-- [ ] Record every load-bearing query verbatim, and state for each service how
+- [x] Record every load-bearing query verbatim, and state for each service how
   an empty result was distinguished from an error.
-- [ ] Screen the citing sets for two targets: further constructions of
+- [x] Screen the citing sets for two targets: further constructions of
   universally `CH_0`-trivial cubic threefolds, whether by unirational
   parametrizations, minimal-class algebraicity, or specialization; and any
   statement about irrationality or rationality of a cubic threefold times
   projective space.
-- [ ] Record the set size, provenance, screened fields, and the verbatim
+- [x] Record the set size, provenance, screened fields, and the verbatim
   discriminator for each screened set. Promote a member out of the set only
   with an ordinary read-depth field attached.
-- [ ] Search zbMATH Open, which is reachable, over the same two targets.
-- [ ] Record MathSciNet as NOT COVERED if it cannot be authenticated, and keep
+- [x] Search zbMATH Open, which is reachable, over the same two targets.
+- [x] Record MathSciNet as NOT COVERED if it cannot be authenticated, and keep
   every claim it would have gated at the weaker strength.
-- [ ] Add every fetched source to the shared literature cache with its key and
+- [x] Add every fetched source to the shared literature cache with its key and
   SHA-256.
-- [ ] Rewrite the ledger's audit boundary from the result, keeping "searched
+- [x] Rewrite the ledger's audit boundary from the result, keeping "searched
   and found nothing" strictly apart from "could not access", and state which
   of the paper's remaining claims the sweep now licenses at full strength.
 - [ ] Recheck the second distinguished member of the pencil,

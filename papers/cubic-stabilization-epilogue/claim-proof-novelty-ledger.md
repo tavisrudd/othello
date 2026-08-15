@@ -40,11 +40,23 @@ The cycle and quantum literature searches were bounded to the exact queries,
 screened sets, and source depths used for the statements above.  A separate
 forward-citation check was made for the \(V_{14}\) consequence.
 
-This is not yet a final comprehensive priority audit. MathSciNet was not
-covered; zbMATH/OpenAlex/Crossref/Semantic Scholar forward trees have not yet
-been closed for the two recent quantum sources; and several web results were
-abstract/metadata only. Until that audit is completed, public prose should
-say only what is proved and should avoid “first,” “new,” or “to our knowledge.”
+The forward-citation sweep of 2026-08-14 closes most of that gap. It resolved
+eight seeds to pinned identifiers, took each forward tree from Semantic
+Scholar, Crossref, and OpenAlex separately, screened the largest set with a
+recorded discriminator, ran four OpenAlex topical searches and four zbMATH
+Open API queries, and found no construction of universally `CH_0`-trivial
+smooth cubic threefolds beyond Voisin, Colliot-Thélène, and Yang--Yu--Zhu, and
+no statement about a cubic threefold times a projective space. Full search
+record, including the three services' disagreement on the Voisin count of 71,
+27, and 9: `../../notes/2026-08-14-c912-forward-citation-sweep.md`.
+
+What remains uncovered: MathSciNet, which needs institutional authentication;
+the zbMATH web interface, which refuses automated fetches; Google Scholar; and
+the 2019 survey chapter *Birational Invariants and Decomposition of the
+Diagonal*, which is paywalled and is exactly the kind of source that could
+carry a construction the citation graph hides. Until those are covered, public
+prose should say only what is proved and should avoid “first,” “new,” or “to
+our knowledge.”
 
 ## Read depth for principal sources
 
