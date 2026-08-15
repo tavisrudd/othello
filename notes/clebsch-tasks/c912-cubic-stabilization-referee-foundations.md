@@ -53,9 +53,14 @@ coefficient-field gauge, which covers Iritani's `Psi` and Iritani--Koto's
 Theorem 1.5, and `cor:v14-one-step`.  Unconditional: Sections 2--3,
 `prop:cubic-packet`, and every universal `CH_0`-triviality assertion.
 Lemma 4.3 and Lemma 4.5 no longer claim intrinsic frame transport, and
-equation (4.6b) is deleted.  Authority commit `bca9aec73` after the author's
-review pass, warning-free at 32 pages, PDF SHA-256
-`446242498cbb0a5e48c74e9aad31450984feec575b5876fae86206bf7abbcbb0`.  Exact
+equation (4.6b) is deleted.  Authority commit `7ed8fc604` after two author
+review passes and the metadata alignment, warning-free at 32 pages, PDF SHA-256
+`742d4510ba37d8254edb1800093756809bf383ddcb992baa780ad1a30c10dbeb`.  The
+README, Zenodo metadata, claim ledger, and portfolio summary now carry one
+canonical status sentence.  Export is done and unpushed: audit zero findings,
+`verify` accepts 120 tracked files, the mirror's own gate passes with a
+byte-identical PDF, standalone commit `f6d1480`, summary mirror `5bd57c9`.
+Exact
 partition, downgrades, and the README/ledger/summary residuals:
 `../2026-08-15-c912-hypothesis-4-7h-conditionalization.md`.
 

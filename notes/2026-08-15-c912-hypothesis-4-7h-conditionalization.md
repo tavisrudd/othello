@@ -110,15 +110,58 @@ Kato transport operators, no HYZZ repair narrative, no `±1/18` regression
 variant.  The title is unchanged.  No stable-irrationality claim was added.  No
 quantum-Künneth shortcut for `X × P^1` was invented.
 
+## Metadata alignment and export, same day
+
+The author's second review pass took two standalone-safety edits in the
+introduction (the separation sentence before Corollary 1.2 and the genus-eight
+`nu_6=2` sentence, both now carrying the hypothesis in their own sentence),
+landed at `62f51b5bf`.  Final manuscript: 32 pages, PDF SHA-256
+`742d4510ba37d8254edb1800093756809bf383ddcb992baa780ad1a30c10dbeb`.
+
+All four non-manuscript surfaces then carried the unconditional claim and are
+corrected at `7ed8fc604`, each using one canonical status sentence:
+
+- `README.md`: headline description and trust boundary, the latter now naming
+  the unresolved step explicitly.
+- `.zenodo.json`: description rewritten, plain-ASCII as that file requires.
+- `claim-proof-novelty-ledger.md`: explicit `STATUS:` markers per claim family
+  — conditional for the main theorem, birational invariance, and the
+  genus-eight corollary; mixed for the separation family, whose universal
+  `CH_0`-triviality half is unconditional; unconditional for graph saturation
+  and for a new row covering the cubic packet, which the ledger had never
+  carried as its own claim family.
+- `papers/summary/README.md`: seven occurrences, including a headline bullet
+  that was titled "Unconditionally", both infinite-family table rows (whose
+  own preamble requires a conditional statement to display its hypothesis), the
+  papers table row, and the quoted abstract, retranscribed verbatim from the
+  manuscript.  A new unconditional `nu_6 = 2` row was added to the
+  infinite-family table.  The two cubic rationality papers also moved out of
+  the Clebsch-series paragraph, where they did not belong.
+
+The Lean companion README and the `BirationalDeduction` docstring needed no
+change: both already exposed the operation formulas as supplied premises and
+described the deductions as conditional.
+
+A repository-wide scan for the unconditional claim phrases returns only
+qualified hits.
+
+Export is complete and unpushed.  `plan` reports the repository active with
+zero reference findings, `audit` zero findings, `sync` from `7ed8fc604` changed
+nine files with no deletions, and `verify` accepts 120 tracked files.  The
+mirror's own `make check` passes and its rebuilt PDF hashes byte-identically to
+the authority.  Standalone commit `f6d1480`.  The portfolio summary is not
+carried by the exporter, so its mirror was refreshed by copying the authority
+tree; the trees are identical and its commit is `5bd57c9`.  The claim ledger is
+excluded from the export by `papers/repositories.toml` as a private surface,
+which is why its internal task references do not reach the audit.
+
 ## Residuals for the author
 
-1. `README.md`, `.zenodo.json`, `claim-proof-novelty-ledger.md`, the C910 Lean
-   companion prose, and the portfolio summary still describe the one-step
-   irrationality theorem as unconditional.  The edit specification scoped
-   itself to the manuscript, so these were left alone and need the same
-   conditional/unconditional partition before any export or release.
-2. The detector table in Section 5 lists `ν_6(P^3)=0`, which now depends on the
-   conditional projective-bundle formula (4.2).  The specification did not
-   cover that row.
-3. The standalone paper repository under `~/src/math-papers/` is now two
-   repairs behind, and re-export is gated on items 1--2.
+1. The detector table in Section 5 lists `ν_6(P^3)=0`, which now depends on the
+   conditional projective-bundle formula (4.2).  Neither the edit
+   specification nor either review pass covered that row; it is the one
+   remaining spot inside the manuscript where the partition is not explicit.
+2. The next Zenodo release deposits the new description as a new version; the
+   existing deposit keeps the unconditional one until then.
+3. Nothing is pushed.  Publishing both the standalone repository and the
+   portfolio summary remains the author's decision.
