@@ -618,7 +618,19 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   survive over such a receiver; plausible for the injective ambient endpoint,
   not for the noninjective center.  Attack order: ambient iterated receiver,
   then low-dimensional centers directly, then divisor tagging, then the
-  inequality case by case.  Independently,
+  inequality case by case.  The source check is done against the pinned
+  versions and split: Iritani's Theorem 5.18 is an isomorphism of
+  `C[z]((q^-1/s))[[Q,tau]]`-modules, so inverting the Novikov monomials and
+  completing in the exceptional and bulk directions is a ring map and the
+  comparison, its inverse, and their identities base-change unchanged; but his
+  reconstruction has `t` and `s_j` in `H^*((q^-1))[[Q,tau]]` vanishing only at
+  `Q=tau=0`, so the coordinate shift retains pure-Novikov terms whose removal by
+  the normalized gauge needs Novikov-adic convergence.  The initial terms are
+  harmless, being restrictions to `Q=0`.  The decisive question is now graded
+  and small: is the pure-Novikov part of that shift confined to `H^0 + H^2`?  If
+  yes the string and divisor equations absorb it and the ambient summand needs
+  no inequality; if no, the Novikov directions stay in the filtration and the
+  criterion returns.  Independently,
   the obstruction is order-free: for the critical ratio the loop coefficient of
   the gauge product is an infinite sum of bounded weight, hence undefined in any
   completion.  `lem:divisor-tagging` carries the same obstruction and needs the
