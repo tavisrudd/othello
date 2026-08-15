@@ -50,43 +50,127 @@ the small one and preserves this rank-two block.
 \subsection{The point coefficient}
 
 The preceding calculation finds the packet but does not say whether the
-point row detects it.  That coefficient follows from one scalar period.  The
-regularized cubic quantum period is
+point row detects it.  That coefficient follows from one scalar period.  Write
 \begin{equation}\label{eq:cubic-quantum-period}
  F(t)=\sum_{d\geq0}\frac{(3d)!}{(d!)^5}t^d
  ={}_2F_3\!\left(
    \begin{matrix}1/3,\,2/3\\1,\,1,\,1\end{matrix};27t
- \right).
+ \right),
 \end{equation}
-For the Gamma-framed point class, multiplication by \(\Ghat_X\) and
-\(z^{c_1(X)}\) leaves the top class unchanged.  Pairing with the unit selects
-the degree-zero coefficient of the small \(I\)-function.  Up to one fixed
-nonzero normalization, its central charge is
-\begin{equation}\label{eq:cubic-point-central-charge}
- Z_p(z)=z^{-3/2}F(q/z^2).
-\end{equation}
+the equality of the two expressions being the identity
+\((3d)!=27^d\,d!\,(1/3)_d(2/3)_d\).
 
-The algebraic part of the large-variable \({}_2F_3\) expansion has simple
-poles at \(1/3\) and \(2/3\); their difference is not integral.  The standard
-Barnes formula \cite[Equations~16.11.2 and 16.11.8]{DLMF} gives the leading
-coefficients
-\begin{equation}\label{eq:cubic-barnes-coefficients}
- C_{1/3}=\frac{\Gamma(1/3)}{\Gamma(2/3)^4},
- \qquad
- C_{2/3}=\frac{\Gamma(-1/3)}{\Gamma(1/3)^4}.
+\begin{lemma}[Central charge of the point class]
+\label{lem:cubic-central-charge}
+Let \(X\subset\mathbf P^4\) be a smooth cubic threefold and \(p\in X\).  In
+the small quantum limit there are a nonzero constant \(C\) and an integer
+\(k\), both independent of \(z\) and fixed by the chosen Gamma and
+graph-space normalizations, such that the component of the Gamma point
+section along the unit is
+\begin{equation}\label{eq:cubic-point-central-charge}
+ Z_p(z):=(s_X(\OO_p),\mathbf 1)_X
+ =C\,z^{\,k-3/2}F(q/z^2).
 \end{equation}
-Both are nonzero.  The sector-dependent branch phases of
-\((-x)^{-1/3}\) and \((-x)^{-2/3}\) are nonzero as well.  Substituting
-\(x=27q/z^2\) in \eqref{eq:cubic-point-central-charge} gives the powers
+\end{lemma}
+
+\begin{proof}
+Read \eqref{eq:gamma-framed-section} from the right.  For a point on a smooth
+threefold \(\operatorname{ch}(\OO_p)=[p]\) with no lower-degree terms, and
+\([p]\) has cohomological degree \(6\), so
+\((2\pi i)^{\deg/2}\operatorname{ch}(\OO_p)=(2\pi i)^3[p]\).  Every
+positive-degree term of \(\Ghat_X\) annihilates the top class, so
+\(\Ghat_X[p]=[p]\), and \(c_1(X)\cup[p]=0\) gives \(z^{c_1(X)}[p]=[p]\).  The
+grading operator satisfies \(\mu[p]=(3-\tfrac32)[p]\), whence
+\(z^{-\mu}[p]=z^{-3/2}[p]\).  Collecting these scalars,
+\[
+ s_X(\OO_p)=(2\pi)^{-3/2}(2\pi i)^3z^{-3/2}\,L_X(0,z)[p].
+\]
+Pairing against the unit and expanding the fundamental solution in
+descendants leaves the one-point generating function with a point insertion,
+\(\sum_dq^d\langle[p]/(z-\psi)\rangle_{0,1,d}\), which is the coefficient of
+\(\mathbf 1\) in the small \(J\)-function.
+
+That coefficient is \eqref{eq:cubic-quantum-period}.  Givental's mirror
+theorem for toric complete intersections gives the small \(I\)-function of a
+degree-three hypersurface in \(\mathbf P^4\),
+\begin{equation}\label{eq:cubic-i-function}
+ I(q,z)=z\sum_{d\geq0}q^d
+ \frac{\prod_{m=1}^{3d}(3P+mz)}{\prod_{m=1}^{d}(P+mz)^5},
+\end{equation}
+and identifies it with the small \(J\)-function up to a mirror map
+\cite{GiventalToricCI,CoatesGivental}.  The degree-\(d\) term here carries
+\(z^{3d-5d}=z^{-2d}\), so \(I=z\mathbf 1+O(z^{-1})\) and the mirror map is
+trivial.  Setting \(P=0\) in \eqref{eq:cubic-i-function} leaves
+\[
+ z\sum_{d\geq0}q^d\frac{(3d)!\,z^{3d}}{(d!)^5z^{5d}}
+ =z\,F(q/z^2),
+\]
+which is that coefficient up to the power of \(z\) carried by the chosen
+normalization.  The accumulated factors---\((2\pi)^{-3/2}(2\pi i)^3\), the
+sign convention relating \(L_X(0,z)\) to \(J\), and the overall power of
+\(z\) in the \(I\)- and \(J\)-function conventions---are a nonzero constant
+times an integral power of \(z\).
+\end{proof}
+
+Only the fractional part of the exponent of \(z\) is used below, so the
+integer \(k\) in \eqref{eq:cubic-point-central-charge} never enters, and
+neither does a convention which replaces \(z\) by \(-z\): that moves the
+branch phases but not the exponents.
+
+The two asymptotic regimes of \eqref{eq:cubic-point-central-charge} match the
+two parts of \eqref{eq:cai-cubic-matrices}.  The eigenvalues
+\(\pm6\sqrt3u\) of \(K\) produce the exponentially large and small terms of
+the expansion, while the rank-two zero block---the one carrying the
+primitive-sixth formal monodromy---is regular singular and produces the
+algebraic terms.  The packet in question is therefore read from the algebraic
+part alone.
+
+That part is a Barnes expansion.  For \({}_pF_q\) with \(p\leq q\) and
+\(a_k\) distinct modulo the integers, its algebraic terms are
+\begin{equation}\label{eq:barnes-algebraic-part}
+ \frac{\prod_{j}\Gamma(b_j)}{\prod_{j}\Gamma(a_j)}
+ \sum_{k}
+ \frac{\Gamma(a_k)\prod_{j\neq k}\Gamma(a_j-a_k)}
+      {\prod_{j}\Gamma(b_j-a_k)}\,
+ (-x)^{-a_k}\bigl(1+O(x^{-1})\bigr)
+\end{equation}
+\cite[Equations~16.11.2 and 16.11.8]{DLMF}.  Here \(a=(1/3,2/3)\) and
+\(b=(1,1,1)\); the difference \(1/3\) is not an integer, so no logarithms
+occur and the two algebraic series are distinct.  The prefactor is
+\(1/(\Gamma(1/3)\Gamma(2/3))\), and \eqref{eq:barnes-algebraic-part} gives the
+leading coefficients
+\begin{equation}\label{eq:cubic-barnes-coefficients}
+\begin{aligned}
+ C_{1/3}&=\frac{\Gamma(1/3)\Gamma(1/3)}{\Gamma(2/3)^3}
+   \cdot\frac{1}{\Gamma(1/3)\Gamma(2/3)}
+  =\frac{\Gamma(1/3)}{\Gamma(2/3)^4},\\
+ C_{2/3}&=\frac{\Gamma(2/3)\Gamma(-1/3)}{\Gamma(1/3)^3}
+   \cdot\frac{1}{\Gamma(1/3)\Gamma(2/3)}
+  =\frac{\Gamma(-1/3)}{\Gamma(1/3)^4}.
+\end{aligned}
+\end{equation}
+The Gamma function has no zeros, and \(-1/3\) is not one of its poles, so both
+coefficients are nonzero; the branch factors \((-x)^{-1/3}\) and
+\((-x)^{-2/3}\) are nonzero on every sector.  Substituting \(x=27q/z^2\) in
+\eqref{eq:cubic-point-central-charge} turns them into the powers
 \begin{equation}\label{eq:cubic-barnes-z-powers}
  z^{-3/2}x^{-1/3}\sim z^{-5/6},
  \qquad
- z^{-3/2}x^{-2/3}\sim z^{-1/6}.
+ z^{-3/2}x^{-2/3}\sim z^{-1/6},
 \end{equation}
-Thus the Gamma point section has a nonzero coefficient in both formal lines
-found in \eqref{eq:cubic-indicial-polynomial}.  The flat pairing identifies
-inverse-monodromy lines
-nondegenerately.  Equivalently, the point row is nonzero on both dual lines.
+whose exponents reduce modulo the integers to the roots \(-5/6\) and
+\(-1/6\) of \eqref{eq:cubic-indicial-polynomial}, with monodromy factors
+\(\zetaSix\) and \(\zetaSix^{-1}\).  Thus the Gamma point section has a
+nonzero coefficient along each of the two formal lines of that block.
+
+It remains to pass from the section to the row.  The row is
+\(v\mapsto[v,s_X(\OO_p))\), and \eqref{eq:flat-euler-pairing} is
+nondegenerate; because of the half-turn \(z\mapsto e^{-\pi i}z\) in its first
+slot, it pairs a formal line of monodromy \(\lambda\) with the line of
+monodromy \(\lambda^{-1}\).  A nonzero coefficient of \(s_X(\OO_p)\) along
+one of the two lines therefore makes the row nonzero on the other.  Both
+coefficients are nonzero here, so the conclusion is the same for both packets
+and does not depend on resolving which line is paired with which.
 
 \begin{proposition}[Cubic endpoint lemma]
 \label{prop:cubic-endpoint}
