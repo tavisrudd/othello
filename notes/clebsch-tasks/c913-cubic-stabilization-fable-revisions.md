@@ -2,7 +2,10 @@
 
 **Lane:** `clebsch`
 
-**Status:** active.  A fresh Fable referee report finds no endpoint
+**Status:** active.  Milestone 1 (Packages A/B) is complete at authority
+commit `28a4457aa`: the 29-page PDF is warning-free and byte-current, the GYY
+input proposition has passed a primary-source reread, and the paper and
+portfolio mirrors have been exported and rechecked.  A fresh Fable referee report finds no endpoint
 calculation error or hidden discharge of the global hypotheses.  It requests
 a major presentation and proof expansion before broad circulation.  The first
 pass is deliberately local: repair endpoint/frame exposition, source
@@ -116,5 +119,6 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
 
 ## Immediate next step
 
-Land Package A, then run a narrow citation audit for Package B before any
-structural rewrite.
+Begin Package C without changing the theorem: separate the two open inputs at
+first read, state the endpoint-only application form, and formulate the
+manuscript-local marked Gamma/window implication target.
