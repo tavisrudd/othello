@@ -9,10 +9,11 @@ Build the single-column IEEEtran review PDF from the paper directory:
 make tit-check
 ```
 
-The output is `prs-beyond-redundancy-four-tit-submission.pdf`.  The current
-build has 22 single-column pages, below the 50-page submission limit effective
-since 2025-05-01.  The canonical preprint PDF remains a separate build from
-`main.tex`.
+The output is `prs-beyond-redundancy-four-tit-submission.pdf`.  The tracked
+build has 45 single-column pages, under the 50-page submission limit effective
+since 2025-05-01, but the margin is small: recheck the page count after any
+manuscript change and before submitting.  The canonical preprint PDF remains a
+separate build from `main.tex`.
 
 Before submission:
 
