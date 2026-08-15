@@ -13,8 +13,8 @@ on which a referee is most likely to press.
 ## Objective
 
 Prepare a referee-resistant revision of
-`papers/cubic-stabilization-irrationality/` that makes its unconditional
-reduction theorem, its two independent open inputs, and the exact scope of
+`papers/cubic-stabilization-irrationality/` that makes its proved reduction
+under the standing gauged setup, its two independent open inputs, and the exact scope of
 the toric calibrations clear at first read.
 
 ## Frozen mathematical position
@@ -25,9 +25,9 @@ The headline remains conditional on two distinct inputs:
 2. the locally finite marked threshold compatibility family for its neutral
    clutching tails.
 
-The paper proves the endpoint contrast, local simple-wall and ordinary-flop
-identities, support collapse, tailwise derived identification, and tail
-holonomicity.  A crepant toric wall gives a genuine ordinary non-zero-mode
+Under its stated gauged setup, the paper proves the endpoint contrast, local
+simple-wall and ordinary-flop identities, support collapse, tailwise derived
+identification, and tail holonomicity.  A crepant toric wall gives a genuine ordinary non-zero-mode
 calibration of the intrinsic marked-continuation mechanism at the
 QDM/`I`-function level.  It does not prove either the arbitrary-projective-
 master inverse-system comparison or the zero-mode nearby-cycle clause.
@@ -45,10 +45,12 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
   centre-coordinate limitation into the theorem statement; make the
   single-simple-pole residue disclaimer a numbered remark; cross-reference the
   rational two-tail counterexample from the threshold hypothesis.
-- Standardize Poincare/Poincare accenting, `2`-commutative terminology, and
+- Standardize Poincaré spelling, `2`-commutative terminology, and
   packet notation.
 - State the archive location and trust boundary of the endpoint checker in
-  the verification prose, consistent with the current public release surface.
+  the verification prose: the checker and certificate ship in the paper
+  release at Zenodo concept DOI `10.5281/zenodo.21937490`; it is a regression
+  artifact, not a proof substitute.
 
 ### B. Source robustness
 
@@ -66,7 +68,8 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
   assumptions in the introduction, with a one-paragraph account of which
   clauses are standard gauged-theory conditions and which remain open.
 - State the cleanest named marked Gamma/window continuation conjecture that
-  would imply threshold compatibility.  Do not claim it is established.
+  would imply threshold compatibility.  Label it explicitly as a new
+  manuscript conjecture, not as a theorem sourced from the literature.
 - State the endpoint-only form sufficient for the cubic application: it is
   enough to have the two inputs for a birational map
   `X x P^m dashrightarrow P^(m+3)`.
@@ -94,15 +97,21 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
 ## Acceptance gate
 
 1. Every Package A/B edit passes source, notation, and endpoint-frame audit.
-2. Package C displays both inputs and the endpoint-only corollary without
+2. **Milestone 1 — local revision/export:** Packages A/B are complete; the
+   authority paper has passed its scoped build and cold check; the standalone
+   mirror and portfolio summary carry the same local corrections; and the
+   frozen PDF is exported before Package C/D begins.
+3. Package C displays both inputs and the endpoint-only corollary without
    making either look vacuous.
-3. Package D either proves the requested expansions or records its exact
-   remaining statement as a hypothesis; no compressed derived/POT bridge
-   remains implicit.
-4. The manuscript, README, `.zenodo.json`, claim ledger, portfolio summary,
+4. Package D supplies the requested expansions. If either proposed theorem
+   cannot be sustained, stop and request author approval before changing its
+   statement, moving any assertion into a hypothesis, or otherwise changing
+   the theorem architecture; no compressed derived/POT bridge remains
+   implicit.
+5. The manuscript, README, `.zenodo.json`, claim ledger, portfolio summary,
    and standalone mirror agree; deterministic `make check` passes before and
    after sync.
-5. Freeze the revised PDF and obtain two new independent cold reads: one
+6. Freeze the revised PDF and obtain two new independent cold reads: one
    derived/gauged-GW reader and one birational/quantum reader.
 
 ## Immediate next step

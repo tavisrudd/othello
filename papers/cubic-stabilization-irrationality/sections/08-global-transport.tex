@@ -281,18 +281,21 @@ has the exact normalization
  =\frac{(-1)^m}{h\,m!}.
 \end{equation}
 The factorial is the moving-mode Euler factor, \(1/h\) is the
-one-character Jacobian factor, and the sign is the complex orientation.  We
-use \eqref{eq:simple-gamma-residue} only as the normalization of a single
-simple pole.  Coincident or
-higher poles require derivatives and the full localization expression,
-including graph automorphism factors; no product-of-simple-residues formula
-is asserted here.
+one-character Jacobian factor, and the sign is the complex orientation.
 
 If \eqref{eq:neutral-direction} fails, the virtual-dimension equation fixes
 \(k\) in each homogeneous
 coefficient, hence the coefficient is Laurent-finite.  This proves the last
 assertion.
 \end{proof}
+
+\begin{remark}[Higher-pole localization boundary]
+\label{rem:higher-pole-localization-boundary}
+Equation~\eqref{eq:simple-gamma-residue} is used only to normalize one simple
+moving-character pole.  Coincident or higher poles require derivatives and
+the full localization expression, including graph automorphism factors; no
+product-of-simple-residues formula is used or asserted.
+\end{remark}
 
 \begin{remark}[Exact analytic boundary]
 \label{rem:neutral-boundary}
@@ -426,7 +429,7 @@ perfect obstruction theory is the natural truncation map
 identifies \(E_a\) with
 \(\tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}\).  Under the derived
 equivalence \(\operatorname{ev}_1:\mathfrak S_{a_-,a_+}\simeq\mathfrak Z\),
-the comparison is the following (2)-commutative square:
+the comparison is the following \(2\)-commutative square:
 \[
 \begin{array}{ccc}
  E_a & \longrightarrow & L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\\
@@ -454,7 +457,7 @@ On a \(k\)-fold orbifold chart the same calculation takes place on
 \([\operatorname{Spec}R[z^{1/k}]/\mu_k]\).  In characteristic zero,
 \(\mu_k\)-invariants are exact.  Fixing the stabilizer congruence fixes the
 graded universal bundle and its twisted-sector evaluation, so the preceding
-equivalence and the (2)-commutative obstruction-theory square are
+equivalence and the \(2\)-commutative obstruction-theory square are
 \(\mu_k\)-equivariant.  Rigidification quotients both sides by the same finite
 central gerbe; pullback to that gerbe is conservative, and hence the
 equivalence and obstruction theory descend.  Stabilizer and graph-automorphism
@@ -527,6 +530,8 @@ Finite threshold terms are Laurent polynomials and do not alter the
 conclusion.
 \end{proof}
 
+\begin{remark}[Two-tail threshold obstruction]
+\label{rem:two-tail-threshold-obstruction}
 Tailwise holonomicity does not identify the two selected solutions.  The
 bilateral sequence
 \[
@@ -543,6 +548,7 @@ absorbs the finite defect.  Nevertheless the two displayed rational
 functions are not branches of one meromorphic function.  Thus neither a
 polynomial recurrence nor tailwise holonomicity determines the finite
 connection data across a threshold.
+\end{remark}
 
 Fix a finite local Artin coefficient algebra \(R_N\), a ramified admissible
 sector \(S\), and the duality convention of Section~\ref{sec:point-row}.  Let
@@ -604,6 +610,8 @@ of two abstract cyclic modules.  The boundary identifications use the common
 equivariant-input module on which \eqref{eq:support-collapse-row} is stated and
 are the identity on its marked coefficient functions and their chosen input
 and bulk derivatives; a wall-dependent change of input frame is not allowed.
+Remark~\ref{rem:two-tail-threshold-obstruction} explains why tailwise
+holonomicity cannot replace this one-object condition.
 
 At a zero-mode rank change, choose a transverse parameter \(t\) and a
 specified marked meromorphic Rees family \(\mathcal M_j\) whose two punctured
@@ -898,6 +906,7 @@ exactly when it survives at some finite level.  This proves both implications.
 Under Hypothesis~\ref{hyp:marked-threshold},
 Theorem~\ref{thm:birational-point-primary} is the
 global replacement for Hypothesis~\ref{hyp:rank-zero-target}.  Without those
-inputs, the two-tail example above and the earlier countermodels show why the conclusion
+inputs, Remark~\ref{rem:two-tail-threshold-obstruction} and the earlier
+countermodels show why the conclusion
 cannot be obtained from tailwise holonomicity, localized one-wall receivers,
 or unmarked Fourier boundary data alone.

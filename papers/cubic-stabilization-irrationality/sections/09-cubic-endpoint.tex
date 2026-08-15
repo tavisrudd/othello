@@ -99,6 +99,15 @@ For every smooth cubic threefold \(X\),
 The packet assertion follows from Cai's connection, while the point-row
 nonvanishing is the direct Barnes calculation
 \eqref{eq:cubic-quantum-period}--\eqref{eq:cubic-barnes-z-powers}.
+Both assertions are made at the formal-primary level: the sector-dependent
+Barnes phases prove nonvanishing of the intrinsic formal primary projections,
+and no comparison between alternative sectorial lifts is used in the endpoint
+contrast.  The
+formal-primary Boolean is the one recovered from the cyclic row by
+Lemma~\ref{lem:cyclic-row-support}.  The
+paper uses half-Tate-normalized labels throughout.  Relative to unnormalized
+monodromy, the common shift relabels both endpoints equally, so the normalized
+primitive-sixth contrast in \eqref{eq:cubic-point-packet} is unchanged.
 \end{proposition}
 
 \begin{remark}[Exact regression]
@@ -110,7 +119,13 @@ three nonzero rational specializations of the quantum parameter by exact
 rational arithmetic.  It also checks the
 hypergeometric recurrence behind \eqref{eq:cubic-quantum-period} and the
 projective-space grading
-calculation below.  The proof remains the calculation displayed above.
+calculation below.  The exact source, checker, and certificate are included
+in the archived release at \url{https://doi.org/10.5281/zenodo.21937490}; the
+artifact regresses the matrix-to-block and indicial arithmetic at three
+rational specializations, the hypergeometric recurrence, the Barnes non-pole
+arguments, and the projective-space grading identity.  It does not verify the
+Barnes asymptotic theorem or quantum K\"unneth.  The proof remains the
+calculation displayed above.
 \end{remark}
 
 \subsection{The two endpoints}
@@ -124,6 +139,12 @@ Fourier eigenbasis the diagonal of the grading operator is
 \begin{equation}\label{eq:projective-grading-average}
  \frac1n\sum_{k=0}^{m}(m/2-k)=0.
 \end{equation}
+Indeed, if \(F\) is the unitary discrete Fourier matrix, then every diagonal
+entry of the Fourier conjugate of the grading operator is
+\(\sum_j |F_{jk}|^2(m/2-j)=n^{-1}\sum_j(m/2-j)\), since
+\(|F_{jk}|^2=1/n\).  Thus the vanishing in
+\eqref{eq:projective-grading-average} is entrywise, not merely a trace
+identity.
 All \(n\) rank-one formal factors therefore have formal-monodromy exponent
 zero.  In particular, \(\mathbf P^{m+3}\) has no primitive-sixth packet.
 
