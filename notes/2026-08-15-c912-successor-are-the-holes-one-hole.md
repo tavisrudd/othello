@@ -149,6 +149,48 @@ invariant to use and would end the programme by solving the problem.
 before investing: identify which axis a proposal gives up, and predict the shape of its hole
 in advance. *Falsified by*: a route whose hole is of a different kind than the axis it drops.
 
+## The series' own phenomenon, and a sharper form of the conjecture
+
+The three-axis trade above is a heuristic. The numbered series is already about the same
+shape at the level of objects rather than proofs, and taking that seriously turns the
+heuristic into something with a candidate mechanism.
+
+Paper V leads with a portable inverse problem: two geometrically inequivalent cubic
+invariants may retain the same marked source information, and the reconstruction it proves
+is up to a residual `C_2`-torsor. C906's surviving theorem has the same form — an exact
+sparse marked entry through the `E_6` carrier, reversible only with a residue flag. In both,
+the sparse shadow determines the object up to a residual ambiguity, that ambiguity is a
+torsor rather than a group with a distinguished point, and the price of a canonical
+inversion is carrying a marking that trivializes it. The series' own editorial care about
+not conflating the free reconstruction quotient with the conference-orientation torsor is
+the same distinction in miniature.
+
+That is exactly the shape of our situation, one level up. Formal data is the sparse shadow;
+the analytic data is what is being reconstructed; and the classical statement is that for a
+fixed formal type the analytic connections form a torsor under the Stokes group
+(Malgrange--Sibuya, isomorphism classes as `H^1` of the Stokes sheaf). So:
+
+**Sharpened conjecture.** The invariant between the holes is the Stokes torsor. A formal
+decoration sees only the quotient — cheap and computable, blind to the torsor's action. An
+integral or Gamma decoration sees the total space — well defined, at the cost of controlling
+that action. Each hole is then the assertion that some marked structure either descends
+through the torsor or admits a section of it, and the missing axis measures which.
+
+This is worth more than the trade because it names a specific object, and because the series
+supplies a precedent for discharging one: a residual torsor is killed by a marking, and the
+papers already do that with an orientation.
+
+**The prediction that would matter most.** The general hole is a section problem for the
+full Stokes group. The m = 1 hole concerns a single variety, a rank-two block, and needs
+only a lower bound — so its torsor may be *finite*, plausibly of order two, in which case it
+is killable by an orientation or parity argument of exactly the kind the series already
+uses, rather than by analytic control. If that is right, m = 1 is a localization of the
+general problem in a precise sense — same torsor, collapsed to a finite quotient — and it is
+closable by a technique already in the lane's hands. *Falsified by*: computing the m = 1
+ambiguity and finding it continuous.
+
+That computation is the first thing to do, before any of the tests below.
+
 ## Method notes for the fresh session
 
 Numerical experiments on quantum products need a validity check built in. The `P^2` caustic
