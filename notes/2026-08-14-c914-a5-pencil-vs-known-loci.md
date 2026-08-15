@@ -110,6 +110,23 @@ conclusion on that fibre is a reproof.
    theorem: the theorem's conclusion on that fibre agrees with three earlier
    proofs.
 
+## 3b. The second distinguished member
+
+Hartlieb's Lemma 5.5 gives two members carrying both `A_5`-actions. The other
+one is Example 2.2's sixth cubic,
+
+    x_0^3 + x_1^2 x_2 + x_2^2 x_3 + x_3^2 x_4 + x_4^2 x_1,
+
+with automorphism group `Sym(5) x Z/3`, one of the six maximal groups in
+Wei--Yu's classification (arXiv:1907.00392, Theorem 1.1). Its equation is not
+a sum of forms in separated groups of at most three variables, so
+Colliot-Thélène's theorem does not apply to it as written, and its shape does
+not match the Yang--Yu--Zhu normal form. It is therefore the natural candidate
+for an explicit member of the pencil whose universal `CH_0`-triviality is not
+available from either pre-empting source. Printing that as a claim requires a
+bounded literature check first, since Voisin's components are not given by
+equations and could contain it.
+
 ## 4. Open, and what was abandoned
 
 - Whether the generic member of the pencil lies inside the Yang--Yu--Zhu
