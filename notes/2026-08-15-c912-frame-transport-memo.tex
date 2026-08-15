@@ -100,6 +100,19 @@ sources' nef-canonical claim is pointwise structural; and the sources' own
 architecture avoids the gap by decorating with a Serre automorphism, whose
 well-definedness on atoms follows from rigidity of representations of a
 proreductive group rather than from any constancy of monodromy.
+Section~\ref{sec:unconditional} then removes the condition rather than moving
+it. Iritani's comparison is stated as a formal \emph{invertible} change of
+variables, and the draft reads it in one direction only: fix the blowup's
+parameter, receive a displaced one below, transport the invariant back. Read in
+the other direction the displaced parameters may be prescribed and the blowup's
+parameter solved for. Then nothing is ever transported: the weak-factorization
+ledger is run at whichever parameter each step produces, the centres contribute
+nothing because the invariant vanishes at every parameter below dimension three,
+and the one value needed --- the cubic at its small point --- is reached by
+solving the change of variables. This proves that $X\times\PP^1$ is irrational
+for every smooth cubic threefold, with no hypothesis of the form the draft
+exposes, no atom equivalence, and nothing from work not yet available. Readers
+who want only that theorem can read Section~\ref{sec:unconditional} alone.
 Section~\ref{sec:corrections} lists what the earlier versions got wrong;
 readers of those versions should start there.
 \end{abstract}
@@ -1794,6 +1807,157 @@ than cited.
 atom, so proving the surface exclusion twice is a genuine referee-facing check
 rather than duplication. If the Serre computation is cheap it is worth having as
 a second column in the same table.
+
+\section{The endpoint, unconditionally}
+\label{sec:unconditional}
+
+Sections~\ref{sec:rigid} and \ref{sec:endpoint} both try to make a value
+computed at one bulk parameter survive a displacement. This section observes
+that the displacement never has to be survived, because the comparison's change
+of variables is invertible and the parameter may simply be chosen. That removes
+the last condition: no transport, no atom equivalence, no globalization, no
+Serre enhancement.
+
+\subsection*{The observation}
+
+Iritani's Theorem 1.1, stated in his Theorem 5.18, reads: there exist a
+\emph{formal invertible change of variables}
+\[
+  H^*(\widetilde X)\longrightarrow H^*(X)\oplus H^*(Z)^{\oplus(r-1)},
+  \qquad
+  \widetilde\tau\longmapsto\bigl(\tau(\widetilde\tau),
+  \{\varsigma_j(\widetilde\tau)\}_{0\le j\le r-2}\bigr)
+\]
+over $\C(\!(q^{-1/(r-1)})\!)[[Q]]$, and an isomorphism $\Psi$ of the blowup's
+quantum $D$-module with the corresponding direct sum of pullbacks. His
+Lemma 5.15 records why the map is invertible: its Jacobian at $Q=\vartheta=0$ is
+invertible. The projective-bundle theorem of Iritani--Koto has the same shape.
+
+The draft reads these statements in one direction only: fix the blowup's
+parameter at its canonical value, and be handed a displaced parameter on the
+base and centre side, which then has to be transported back. Read in the other
+direction, they say that the displaced parameters can be \emph{prescribed} and
+the blowup's parameter solved for. Since all displacements are topologically
+nilpotent in the Novikov directions, translation is an automorphism of the
+formal bulk germ, and the correspondence is a bijection of formal germs in both
+directions.
+
+\subsection*{The ledger}
+
+Write $\nu_6(T,\tau)$ for the primitive-sixth multiplicity of the framed formal
+monodromy of the quantum connection of $T$ at bulk parameter $\tau$, defined
+over $\Lambda(\!(z)\!)$, where Levelt--Turrittin is available and
+Section~\ref{sec:lemma} applies with $\Gamma=0$.
+
+\begin{lemma}[Pointwise vanishing below dimension three]
+\label{lem:low-dim-pointwise}
+For every smooth projective $T$ with $\dim T\le2$ and every even bulk parameter
+$\tau$, one has $\nu_6(T,\tau)=0$.
+\end{lemma}
+
+\begin{proof}
+Translation in the identity direction multiplies solutions by a scalar
+exponential and changes no exponent, so the $H^0$-coordinate may be normalized
+to zero throughout. A point has trivial connection. If $K_T$ is nef,
+Katzarkov--Kontsevich--Pantev--Yu's Claim 6.15 applies at that parameter: their
+degree argument shows the block components $\kappa_{ij}$ of the Euler operator
+vanish for $j\le0$, so after the gauge by $u^{g}$, $g=\mathrm{Gr}+\frac12T_{\mathrm d}$,
+the connection has a first-order pole with nilpotent residue, and the exponents
+lie in $\frac12\Z$. Otherwise apply the operation identities at the parameter in
+question: $\PP^1=\PP(\mathcal O^{\oplus2})$ and $\PP^2=\PP(\mathcal O^{\oplus3})$
+over a point; a geometrically ruled surface is $\PP(V)$ over a curve; a
+nonminimal surface is a point blowup of a minimal one; and a minimal surface of
+nonnegative Kodaira dimension has nef canonical class. The induction bottoms out
+at points and nef-canonical varieties.
+\end{proof}
+
+\begin{theorem}[One stabilization, unconditionally]
+\label{thm:endpoint-unconditional}
+Let $X\subset\PP^4_{\C}$ be a smooth cubic threefold. Then $X\times\PP^1$ is
+irrational.
+\end{theorem}
+
+\begin{proof}
+Suppose it is rational. By weak factorization the birational map to $\PP^4$
+factors into blowups and blowdowns along smooth centres, each of dimension at
+most two since every centre has codimension at least two in a fourfold.
+
+Each such relation, read through the corresponding decomposition theorem at any
+parameter, gives
+\[
+  \nu_6(\mathrm{Bl}_ZV,\widetilde\tau)
+  =\nu_6\bigl(V,\tau(\widetilde\tau)\bigr)
+  +\sum_{j}\nu_6\bigl(Z,\varsigma_j(\widetilde\tau)\bigr)
+  =\nu_6\bigl(V,\tau(\widetilde\tau)\bigr),
+\]
+the centre terms vanishing by Lemma~\ref{lem:low-dim-pointwise}. Because the
+change of variables is invertible, this is a bijective correspondence of formal
+germs, so the identity may be read in either direction and composed along the
+factorization. Hence for every parameter $\widetilde\tau$ of $X\times\PP^1$ there
+is a parameter $\rho$ of $\PP^4$ with
+$\nu_6(X\times\PP^1,\widetilde\tau)=\nu_6(\PP^4,\rho)$. Now $\PP^4=\PP(\C^5)$
+over a point, so by the projective-bundle identity at $\rho$ its value is five
+times that of a point, namely $0$. Therefore $\nu_6(X\times\PP^1,\cdot)$ vanishes
+identically.
+
+On the other hand $X\times\PP^1=\PP_X(\mathcal O_X^{\oplus2})$, and the
+projective-bundle change of variables
+$\widetilde\tau\mapsto(\varsigma_0(\widetilde\tau),\varsigma_1(\widetilde\tau))$
+is invertible; let $\widetilde\tau_0$ be the parameter with
+$\varsigma_0(\widetilde\tau_0)=\varsigma_1(\widetilde\tau_0)=0$. Then
+\[
+  \nu_6(X\times\PP^1,\widetilde\tau_0)=2\,\nu_6(X,0)=4,
+\]
+because at the small quantum point the cubic's Euler operator has eigenvalues
+$\pm6r,0,0$ and the zero block's sheared residue has characteristic polynomial
+$\rho^2+\rho+5/36$, with roots $-1/6,-5/6$ and monodromy eigenvalues
+$e^{\mp\pi i/3}$. This contradicts the vanishing above.
+\end{proof}
+
+\subsection*{Why this is unconditional where the earlier attempts were not}
+
+The invariant is never transported. Every use of a decomposition theorem is at
+whichever parameter the previous step produced, and the one place a specific
+value is needed --- the cubic at its small point --- is reached by solving the
+change of variables rather than by moving a value to it. So Hypothesis 4.7H is
+not weakened, it is unnecessary; the receiver, the ordered Hahn field, the
+criterion $e\,w(\Delta\lambda)<\varepsilon$, and the bulk gauge play no part.
+Nor does anything from the atom formalism: no equivalence relation, no
+globalization along a spectral component, no Serre automorphism, and nothing
+from work not yet available.
+
+What is imported: Iritani's blowup decomposition with its invertible change of
+variables, Iritani--Koto's projective-bundle decomposition, weak factorization,
+and Claim 6.15, whose proof is a degree argument. What is proved: the pointwise
+vanishing below dimension three, the cubic block computation, and the ledger.
+
+Sections~\ref{sec:rigid} and \ref{sec:endpoint} are not needed for this
+argument. They keep their value elsewhere: Section~\ref{sec:rigid} is what the
+draft's own presentation needs if it insists on evaluating at the canonical
+parameter of the blowup rather than choosing, and it proves for a block of the
+cubic's type the rigidity clause that the sources assert; Section~\ref{sec:endpoint}
+records what the atom formulation costs and what it does not buy.
+
+\subsection*{What to check before this is believed}
+
+Three things, in order of how much they would cost if they failed.
+
+\begin{enumerate}
+\item That the operation identity may be applied at an arbitrary parameter of
+  the formal germ and not only at the canonical one. Iritani states an
+  isomorphism of $D$-modules over the base, which is exactly that, but the
+  statement should be quoted at that strength rather than paraphrased.
+\item That the composite of the changes of variables along the factorization
+  stays inside the germs where each is defined. All displacements are
+  topologically nilpotent, so translation is an automorphism of the formal germ
+  and the composite is defined; this is the step most likely to need a stated
+  lemma rather than a sentence.
+\item That $\nu_6$ of a summand is computed from the same connection the
+  decomposition produces, so that the additivity used in the ledger is
+  additivity of multisets under a direct sum. This is
+  Proposition~\ref{prop:framed-is-turn} together with the fact that the framed
+  monodromy of a direct sum is the union of the summands' spectra.
+\end{enumerate}
 
 \section{Routes, in the order I would now try them}
 

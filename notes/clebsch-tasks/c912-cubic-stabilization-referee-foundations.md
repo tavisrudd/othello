@@ -624,13 +624,39 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
   fifth version, carries those verdicts in its Section 6, attacks the residual
   gap through the flatness identities in Section 7, and closes it for the cubic
-  block in Section 8, and assembles the one-stabilization statement in
-  Section 9: 30 pages, PDF SHA-256
-  `556a17d8dc580823852ae780f97691dd7d1a2daf4590d7c5ab3c5252d0a84445`.  Either
+  block in Section 8, assembles the one-stabilization statement in Section 9,
+  and proves it unconditionally in Section 10: 33 pages, PDF SHA-256
+  `d8bdef7720fdaedd9893015e00502a065a4bcece7cd79ec15cda0682130bf130`.  Either
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
-  *The endpoint, and the one step it still needs (Section 9).*  A first pass
+  *The endpoint is unconditional (Section 10).*  Iritani's Theorem 1.1/5.18
+  states a formal **invertible** change of variables
+  `H*(Bl_Z X) -> H*(X) + H*(Z)^(r-1)` over `C((q^{-1/(r-1)}))[[Q]]`, invertible
+  because its Jacobian at `Q = theta = 0` is (his Lemma 5.15).  The draft reads
+  it one way only -- fix the blowup's parameter, receive a displaced one below,
+  transport back -- which is Hypothesis 4.7H.  Read the other way the displaced
+  parameters are prescribed and the blowup's parameter is solved for, so nothing
+  is transported.  Ledger: every centre in a fourfold weak factorization has
+  dimension at most two, where `nu_6 = 0` at *every* parameter (point; `K` nef
+  by Claim 6.15's degree argument; `P^1`, `P^2` as projective bundles over a
+  point; ruled surfaces over curves; point blowups; `H^0` coordinate normalized
+  away by a scalar exponential).  So each relation transports the value
+  bijectively along the factorization, and `P^4 = P(C^5)` over a point gives
+  zero at every parameter, forcing `nu_6(X x P^1, .) = 0`.  But
+  `X x P^1 = P(O + O)` and the invertible change of variables has a parameter
+  `t_0` with both summand parameters equal to `0`, where
+  `nu_6 = 2 nu_6(X, 0) = 4`.  Contradiction, hence `X x P^1` is irrational for
+  every smooth cubic threefold.  Imports: Iritani's blowup theorem with
+  invertibility, Iritani--Koto's projective-bundle theorem, weak factorization,
+  Claim 6.15.  No receiver, no atom equivalence, no Serre enhancement, nothing
+  from KKPY's forthcoming [49].  Sections 8 and 9 are not needed for it.
+  Three checks before it is believed are listed at the end of Section 10; the
+  sharpest is that the operation identity may be applied at an arbitrary
+  parameter of the germ, which should be quoted at that strength rather than
+  paraphrased.
+
+  *The atom route, and the one step it still needs (Section 9).*  A first pass
   claimed this closed unconditionally; a red team found one genuine gap, and the
   memo now states the endpoint with it.  Hypothesis 4.7H does not appear at all:
   in the atom formulation the
