@@ -652,10 +652,21 @@ has invertible Jacobian by Theorem~5.1(5) of \cite{IritaniKoto}, an item
 corrected in the fourth version of that preprint, dated 31 January 2026, and
 hence is a graded formal coordinate isomorphism; its derivative gives the ring
 isomorphism in \cite[Corollary~1.8]{IritaniKoto}.  Pull the target completions, connections,
-and gauges through this full map.  The map and its inverse are continuous for
-the homogeneous finite-below topology: at each degree substitution is a
-finite sum, and the inverse is constructed recursively from the invertible
-linear term.
+and gauges through this full map.  Continuity is a degreewise statement.
+Write \(\varsigma=L+h\), with \(L\) the linear term, invertible by
+Theorem~5.1(5), and \(h\) the higher-order part, whose support lies strictly
+above that of its argument in the order just fixed.  Substitution into a
+series is then a finite sum in each degree, so the map is continuous.  For the
+inverse, iterate
+\[
+ \widehat\tau_0=L^{-1}\varsigma,
+ \qquad
+ \widehat\tau_{n+1}=L^{-1}\bigl(\varsigma-h(\widehat\tau_n)\bigr).
+\]
+Because \(h\) raises the order, \(\widehat\tau_{n+1}\) agrees with
+\(\widehat\tau_n\) in one more degree than its predecessor, so the sequence
+stabilizes degreewise; its limit is the unique preimage, and the same bound
+makes the inverse continuous.
 
 Form the coefficient exponent lattice \(\Gamma_j^{\rm coeff}\) from the
 source homogeneous generators in
