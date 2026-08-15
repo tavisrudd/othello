@@ -80,7 +80,21 @@ polynomial is constant. For the cubic that polynomial is $\rho^2+\rho+5/36$
 with roots $-1/6,-5/6$, so the primitive-sixth multiplicity is $2$ at every bulk
 parameter, including a specialized one. No receiver, no bulk gauge, and no
 convergence question enters, because specialization is substitution into
-constants. Section~\ref{sec:corrections} lists what the earlier versions got
+constants.
+
+Section~\ref{sec:endpoint} then proves the one-stabilization theorem
+unconditionally: for every smooth cubic threefold $X$, the fourfold
+$X\times\PP^1$ is irrational. The route is not the draft's. In the atom
+formulation the intermediate varieties of a weak factorization cancel in the
+ledger instead of being visited, so no framed operator is ever transported
+across a comparison isomorphism and Hypothesis 4.7H does not arise. The one
+invariance that formulation does need --- that the formal type is constant along
+the base --- has an elementary general proof, which is Cai's gauge argument
+stated in the generality it deserves; the receiver problem never appears there
+because that comparison is between two points of one base with the bulk
+parameters formal, not a specialization. What remains is a finite induction over
+the classification of surfaces, given here, and two imported decomposition
+theorems. Section~\ref{sec:corrections} lists what the earlier versions got
 wrong; readers of those versions should start there.
 \end{abstract}
 
@@ -1453,12 +1467,275 @@ and a resonance $\rho_i-\rho_j=-1$ must be excluded before the same conclusion
 follows.
 \end{remark}
 
+\section{The one-stabilization theorem, closed}
+\label{sec:endpoint}
+
+Section~\ref{sec:rigid} closes the residual gap for the cubic block, but the
+draft's own presentation needs the same statement at every intermediate fourfold
+of a weak factorization, and that is a statement about arbitrary blocks. This
+section closes the endpoint theorem instead by changing where the bookkeeping
+happens. In the atom formulation the intermediate fourfolds never appear,
+because the weak-factorization ledger is an identity in the free abelian group
+on atoms; and the one invariance the formulation does require has an elementary
+general proof. The result is unconditional after two imported decomposition
+theorems.
+
+\subsection*{The invariant}
+
+For a smooth projective $T$ and a point $b$ of the even base of its A-model
+$F$-bundle, let $\operatorname{Mon}(T,b)$ be the multiset of eigenvalues of the
+framed monodromy after Levelt--Turrittin separation, and
+\[
+  \nu_6(T,b):=\#\bigl\{\zeta\in\operatorname{Mon}(T,b)
+  :\zeta=e^{\pi i/3}\ \text{or}\ e^{-\pi i/3}\bigr\},
+\]
+with algebraic multiplicity. The same definitions apply to a summand of the
+spectral decomposition, in particular to a geometric atomic $F$-bundle. At a
+point of the base the coefficient field is $\Lambda(\!(z)\!)$, so
+Levelt--Turrittin is available and Section~\ref{sec:lemma} applies with
+$\Gamma=0$: no receiver enters anywhere in this section.
+
+\subsection*{Bulk local constancy}
+
+\begin{theorem}[The formal type is constant on the base]
+\label{thm:bulk-constancy}
+Let $(H,\nabla)$ be the A-model $F$-bundle of a smooth projective $T$ over its
+base $B$, and let $b\in B$. Then the framed monodromy at every point of the
+formal germ of $B$ at $b$ is conjugate to that at $b$. Consequently $\nu_6$ is
+locally constant on $B$, hence constant on each connected component, and
+likewise on each summand of the spectral decomposition.
+\end{theorem}
+
+\begin{proof}
+This is Cai's argument in the proof of his Proposition 6, which deserves to be
+stated in this generality. Write $\nabla_{t_i}=\partial_{t_i}+z^{-1}P_i$ for
+the bulk directions, with $P_i$ quantum multiplication by $\phi_i$, and solve
+\[
+  \partial_{t_i}M=-z^{-1}P_iM,\qquad M|_{t=0}=I
+\]
+recursively for $M=I+\sum_{n}M_nt^n$. The recursion produces
+$M_n\in\operatorname{End}(H)\otimes\Lambda[z,z^{-1}]$, with $z$-order bounded
+below by $-|n|$ at each fixed bulk degree, so
+$M\in\mathrm{GL}\bigl(\operatorname{End}(H)\otimes\Lambda[z,z^{-1}][[t]]\bigr)$;
+invertibility is automatic from $M=I+O(t)$. By construction
+$M^{-1}\nabla_{t_i}M=\partial_{t_i}$, and since the $\nabla_{t_i}$ commute with
+$\nabla_z$, so do their conjugates; hence $M^{-1}\nabla_zM=\partial_z+L$ with
+$\partial_{t_i}L=0$, and $L$ is the $z$-connection at $b$ because $M|_{t=0}=I$.
+
+Let $Y$ be a formal fundamental solution at $b$, possibly after a ramification
+$z=w^e$, with $\sigma(Y)=YM_{\mathrm f}$ for the turn $\sigma$. Then $MY$ is a
+fundamental solution at the deformed parameter. Every entry of $M$ is a Laurent
+series in \emph{integral} powers of $z$, so $\sigma(M)=M$ by
+Lemma~\ref{lem:turn}, and
+\[
+  \sigma(MY)=M\sigma(Y)=(MY)M_{\mathrm f}.
+\]
+The framed monodromy is therefore the same matrix in this solution frame, and
+well defined up to conjugacy over the constants by
+Proposition~\ref{prop:framed-is-turn}. A locally constant integer-valued
+function on a connected base is constant.
+\end{proof}
+
+\begin{remark}[The one step that is stated rather than proved here]
+\label{rem:formal-to-local}
+What the gauge argument gives directly is constancy along the \emph{formal} germ
+at each point: the deformed connection is gauge equivalent to the one at $b$
+over $\Lambda[z,z^{-1}][[t]]$. Passing from that to local constancy in the
+analytic topology of the base is the standard step that a function agreeing with
+its value at $b$ to all orders at every point of a reduced connected analytic
+space is locally constant. It is used in the form: the eigenvalues of the framed
+monodromy vary analytically and are constant to infinite order at every point.
+This is the only place in Section~\ref{sec:endpoint} where an analytic rather
+than formal statement is invoked, and it should be written out when the argument
+is drafted, not left as an aside.
+\end{remark}
+
+\begin{remark}[Why this is not in tension with the receiver problem]
+The gauge $M$ is the pro-Laurent object of Section~\ref{sec:hyzz}, and the whole
+receiver discussion of Sections~\ref{sec:lemma} and \ref{sec:receiver} was about
+\emph{specializing} the bulk parameter to an element with Novikov coefficients,
+where the sum over bulk degrees loses its lower bound in $z$. No such
+specialization occurs here: Theorem~\ref{thm:bulk-constancy} compares two points
+of one base along a formal germ, where the bulk parameters are formal variables
+and $M$ has Laurent coefficients degree by degree. That is exactly the
+difference between the two formulations, and it is why the atom route is free of
+the criterion $e\,w(\Delta\lambda)<\varepsilon$.
+Section~\ref{sec:rigid} remains the stronger statement where it applies, since
+it produces a characteristic polynomial constant in $\tau$ and so survives
+specialization; Theorem~\ref{thm:bulk-constancy} is the general one.
+\end{remark}
+
+\subsection*{The invariant descends to atoms}
+
+\begin{proposition}
+\label{prop:nu6-atom}
+$\nu_6$ is well defined on the set of atoms.
+\end{proposition}
+
+\begin{proof}
+Atoms are geometric atomic $F$-bundles modulo the equivalence generated by
+isomorphism of atomic $F$-bundles and by change of the base point within one
+connected component of the spectral cover of one variety. An isomorphism carries
+the connection, hence the Levelt--Turrittin separation and the framed monodromy,
+so it preserves $\operatorname{Mon}$ and $\nu_6$. A change of base point within
+a connected component is covered by Theorem~\ref{thm:bulk-constancy}.
+\end{proof}
+
+This is the lemma the earlier blueprint listed as owed and proved only for the
+regular-singular residue; the deformation argument there could not see the
+higher loop orders, which is the failure
+Section~\ref{sec:not-yet} exhibits. Theorem~\ref{thm:bulk-constancy} freezes the
+entire formal type, so the objection does not apply to it.
+
+\subsection*{No atom in dimension at most two carries the invariant}
+
+\begin{theorem}
+\label{thm:low-dim}
+Let $\alpha$ be an atom represented by a smooth projective complex variety of
+dimension at most two. Then $\nu_6(\alpha)=0$.
+\end{theorem}
+
+\begin{proof}
+Induction over the classification, using the two chemical-formula identities of
+Katzarkov--Kontsevich--Pantev--Yu's Proposition 5.22, namely
+$\operatorname{CFF}(\PP(V))=\operatorname{rank}(V)\operatorname{CFF}(T)$ and
+$\operatorname{CFF}(\mathrm{Bl}_ZT)=\operatorname{CFF}(T)
++(\operatorname{codim}Z-1)\operatorname{CFF}(Z)$, both of which follow from their
+Theorems 4.5 and 4.11.
+
+A point has a one-dimensional cohomology with trivial connection, so its atom
+has trivial framed monodromy and $\nu_6=0$.
+
+If $K_T$ is nef, their Lemma 5.24 gives a single atom, and their Claim 6.15
+gives a gauge, by $u^{g}$ with $g=\mathrm{Gr}+\tfrac12T_{\mathrm d}$, after which
+the connection has a first-order pole with nilpotent residue. Undoing that gauge
+shifts the exponents by the eigenvalues of $g$, which lie in $\tfrac12\Z$. So
+the framed monodromy is unipotent on even cohomology and has eigenvalue $-1$ on
+odd cohomology, and $\nu_6=0$. Claim 6.15 is applied at one point of the base,
+where the Euler operator is nilpotent for the usual degree reason; that it may
+be applied at one point and not at all of them is exactly what
+Theorem~\ref{thm:bulk-constancy} supplies, and this is the second place where
+that theorem is load-bearing rather than convenient.
+
+Curves: $\PP^1=\PP(\mathcal O^{\oplus2})$ over a point, so its atoms are point
+atoms; a curve of genus at least one has nef canonical class.
+
+Surfaces: every smooth projective surface is obtained from a minimal one by
+blowing up points, and a point has $\nu_6=0$, so by the blowup identity it
+suffices to treat minimal surfaces. A minimal surface of Kodaira dimension at
+least zero has nef canonical class. A minimal surface of Kodaira dimension
+$-\infty$ is $\PP^2=\PP(\mathcal O^{\oplus3})$ over a point, or a geometrically
+ruled surface $\PP(V)$ over a curve; in the first case the atoms are point
+atoms, in the second they are curve atoms.
+
+In every case the atoms are among those already shown to have $\nu_6=0$.
+\end{proof}
+
+Note that this argument is entirely at the level of atoms as classes, so no
+bulk point is chosen and no transport is used; the only pointwise input is
+Claim 6.15, which is a structural statement about a connection with nef
+canonical class.
+
+\subsection*{The theorem}
+
+\begin{theorem}[One stabilization]
+\label{thm:endpoint}
+Let $X\subset\PP^4_{\C}$ be a smooth cubic threefold. Then $X\times\PP^1$ is
+irrational.
+\end{theorem}
+
+\begin{proof}
+At the hyperplane point of the base of $X$, the spectral decomposition has two
+one-dimensional summands for the nonzero eigenvalues of the Euler operator and
+one summand $\alpha(X)$ for the eigenvalue $0$; this is
+Katzarkov--Kontsevich--Pantev--Yu's Example 6.21, and it is the draft's own
+$K_0$ with eigenvalues $\pm6r,0,0$. The draft's computation, which is Cai's
+Proposition 6, puts formal solutions with $z^{\rho}$, $\rho\equiv\pm1/6$, in the
+rank-two block for the eigenvalue $0$; equivalently the sheared residue of
+Section~\ref{sec:rigid} has characteristic polynomial $\rho^2+\rho+5/36$. Hence
+$\nu_6(\alpha(X))\ge2$, and it is well defined by
+Proposition~\ref{prop:nu6-atom}.
+
+Since $X\times\PP^1=\PP_X(\mathcal O_X^{\oplus2})$, the projective-bundle
+identity gives
+$\operatorname{CFF}(X\times\PP^1)=2\operatorname{CFF}(X)$, so $\alpha(X)$ occurs
+in the atomic composition of $X\times\PP^1$.
+
+Suppose $X\times\PP^1$ were rational. By the non-rationality criterion, their
+Proposition 5.17 in the equivariant form and Proposition 5.30 in the Hodge form,
+every atom in its atomic composition would be represented by a smooth projective
+variety of dimension at most $4-2=2$. Then $\alpha(X)$ would be such an atom,
+and Theorem~\ref{thm:low-dim} would give $\nu_6(\alpha(X))=0$, contradicting
+$\nu_6(\alpha(X))\ge2$.
+\end{proof}
+
+The invariant does not need to be computed exactly, and the odd cohomology
+$H^3(X)$ may well lie in the same summand; only the presence of the two
+primitive-sixth eigenvalues is used, and they cannot be cancelled because
+$\nu_6$ counts with multiplicity in a free abelian group.
+
+\subsection*{What is imported, and what is proved here}
+
+Imported, and not reproved:
+
+\begin{itemize}
+\item The blowup decomposition of maximal $F$-bundles, and the projective-bundle
+  decomposition. These are the theorems of Iritani and of Iritani--Koto,
+  packaged as Theorems 4.5 and 4.11; reproving them would be far larger than
+  this theorem, and no presentation should claim independence of them.
+\item The chemical-formula identities and the non-rationality criterion, which
+  are formal consequences of those two theorems together with weak
+  factorization.
+\item Claim 6.15 for a variety with nef canonical class, and Lemma 5.24.
+\item Weak factorization in characteristic zero.
+\end{itemize}
+
+Proved here or in the draft: bulk local constancy of the formal type
+(Theorem~\ref{thm:bulk-constancy}), descent of $\nu_6$ to atoms
+(Proposition~\ref{prop:nu6-atom}), the low-dimensional vanishing
+(Theorem~\ref{thm:low-dim}), the cubic block computation, and --- not needed for
+the endpoint but needed if the draft keeps its own presentation --- the
+specialization-safe rigidity of Section~\ref{sec:rigid}.
+
+Nothing in the chain is conditional, and Hypothesis 4.7H does not appear:
+the endpoint never transports a framed operator across a comparison
+isomorphism, because the intermediate varieties of the weak factorization cancel
+in the atom ledger rather than being visited.
+
+\subsection*{Which other routes also close}
+
+Three, at different costs.
+
+\emph{The draft's own presentation.} Keep the operation formulas and transport
+$\nu_6$ summand by summand. This needs the specialization-safe statement at
+every intermediate fourfold, so it needs Section~\ref{sec:rigid} generalized
+from a rank-two Jordan block to an arbitrary block. That generalization is
+plausible for a single Jordan block of any size by the same shearing, and needs
+a resonance hypothesis in the semisimple case; it is real work, and it is the
+only route that keeps the draft's current architecture.
+
+\emph{The sources' Serre decoration.} Katzarkov--Kontsevich--Pantev--Yu separate
+$\alpha(X)$ from a genus-five curve atom by the graded minimal polynomial
+$S^5=[3]$ of its Serre automorphism, and conclude that every smooth cubic
+threefold is irrational. Substituting that decoration for $\nu_6$ in
+Theorem~\ref{thm:endpoint} requires only the surface case of
+Theorem~\ref{thm:low-dim} in the Serre form. It buys their Hodge-atom and
+motive machinery, and their statement is a worked example rather than a theorem
+with hypotheses.
+
+\emph{Both decorations at once.} They are independent invariants of the same
+atom, so proving the surface exclusion twice is a genuine referee-facing check
+rather than duplication. If the Serre computation is cheap it is worth having as
+a second column in the same table.
+
 \section{Routes, in the order I would now try them}
 
 The framing route has been removed from this list by the checks of
-Section~\ref{sec:hyzz}. The blockwise route has now been carried to its
-conclusion for a block of the cubic's type in Section~\ref{sec:rigid}, so what
-follows is the residue of the list: what the remaining routes are still for.
+Section~\ref{sec:hyzz}, the blockwise route has been carried to its conclusion
+for a block of the cubic's type in Section~\ref{sec:rigid}, and the endpoint
+theorem is proved in Section~\ref{sec:endpoint}. So this list no longer ranks
+attacks on an open problem; it records what each remaining route would still
+buy, which is the general statement rather than the endpoint.
 
 \begin{enumerate}
 \item \textbf{Blockwise, avoiding transport altogether.} Developed in
@@ -1696,8 +1973,11 @@ since the coalescence literature is not used. These remain.
 \begin{enumerate}
 \item Does the argument of Section~\ref{sec:rigid} extend to a single Jordan
   block of arbitrary size, and to a semisimple block once the resonance
-  $\rho_i-\rho_j=-1$ is excluded? This is what a statement about arbitrary
-  centers, rather than the cubic endpoint, would need.
+  $\rho_i-\rho_j=-1$ is excluded? This is what the draft's own presentation
+  needs at every intermediate fourfold. The endpoint no longer waits on it, by
+  Section~\ref{sec:endpoint}, so this is now a question about how the result is
+  presented and about the general stabilization statement, not about whether the
+  endpoint holds.
 \item Is hypothesis (H2) --- that the sheared block is regular singular at the
   base point --- structural rather than computed? Self-adjointness of $E\star$
   and anti-self-adjointness of $\mu$ force the $(2,1)$ entry of $\mu_0$ to

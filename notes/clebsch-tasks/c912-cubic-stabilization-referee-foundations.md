@@ -624,10 +624,32 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
   fifth version, carries those verdicts in its Section 6, attacks the residual
   gap through the flatness identities in Section 7, and closes it for the cubic
-  block in Section 8: 25 pages, PDF SHA-256
-  `e6777ab8104c209f34d20b5f889958b45bb67d693fe77b20b35972875a0939da`.  Either
+  block in Section 8, and proves the one-stabilization theorem unconditionally
+  in Section 9: 29 pages, PDF SHA-256
+  `808276808a9cf9d8dbe1f26be69f4ede5912e38016fd42bbcde83db27cce652b`.  Either
   document can be read first; the report is the shorter route in, the memo's
-  Section 8 is where the mathematics now is.  A source-verified assessment of
+  Sections 8 and 9 are where the mathematics now is.
+
+  *The endpoint theorem is closed (Section 9).*  `X x P^1` is irrational for
+  every smooth cubic threefold, unconditionally, and Hypothesis 4.7H does not
+  appear.  The route is not the draft's: in the atom formulation the
+  intermediate fourfolds of a weak factorization cancel in the ledger instead of
+  being visited, so no framed operator is transported across a comparison.  Four
+  steps.  (i) Bulk local constancy: solving `d_{t_i} M = -z^-1 P_i M` with
+  `M|_0 = I` gives a gauge with integral `z` powers per bulk degree, fixed by
+  the turn, conjugating the deformed `z`-connection to the one at the base
+  point; so the whole formal type, not just the compressed pair, is constant
+  along the base.  This is Cai's own argument stated generally, and the receiver
+  problem does not arise because both points lie on one base with the bulk
+  parameters formal.  (ii) Hence `nu_6` descends to atoms: isomorphism preserves
+  it, and base-point change within a spectral component is (i).  (iii) No atom
+  of a variety of dimension at most two carries it, by induction over the
+  surface classification using the projective-bundle and blowup identities plus
+  Claim 6.15 for nef canonical class.  (iv) `X x P^1 = P(O + O)` puts two copies
+  of the cubic zero atom in its composition, and Proposition 5.17/5.30 gives the
+  contradiction.  The one analytic step invoked rather than proved is the
+  passage from formal-germ constancy to local constancy on the base, recorded as
+  a remark in the memo and owed when this is drafted.  A source-verified assessment of
   the proposed Hodge-atom spine, which is the alternative presentation, is
   `../2026-08-15-c912-atom-spine-source-assessment.md`.
 
