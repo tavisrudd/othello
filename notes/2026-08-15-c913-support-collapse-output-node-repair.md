@@ -267,6 +267,62 @@ QK II loci remain verified only against the extraction note.
 
 `make check` passes at 46 pages, warning-free, tracked PDF current.
 
+## 6. Fourth batch: round-2 adjudication and the defects the repairs introduced
+
+The referee re-read the repairs (adjudication: `2026-08-15-c913-cold-read-post-repair-round2.md`,
+comparing `5c8d0957a → 9043b8131`). Six of the ten were closed outright and four partially, and the
+repairs introduced six new defects of their own. All are now fixed.
+
+**The notation repair made things worse before making them better.** `ξ` is González–Woodward's own
+symbol for the equivariant parameter — verified in four places in their text — so renaming the wall
+cocharacter to `ξ` swapped their two symbols inside the paragraph that cites them four times. The
+wall cocharacter is now `\mathsf w`, a letter neither source uses, and the parenthetical states both
+halves of the correspondence: they write `ζ` for the cocharacter and `ξ` for the equivariant
+parameter, we write `\mathsf w` and `ζ`, the latter following Woodward.
+
+**Two genuinely new unproved inputs had entered the proof without entering either place the
+manuscript tracks hypotheses.** Making the Kalkman endpoint normalization and the `Dτ_{Y,-}`
+normalization explicit was right, but `08-scope.tex` item (5) was not updated and
+`def:gauged-admissible`(ii) was credited with covering the first when its text did not mention
+Kalkman or any endpoint normalization. Clause (ii) now names the virtual Kalkman identity and its
+endpoint normalization, and scope item (5) registers both inputs.
+
+**The virtual-class bridge needed a realization step.** "Those points are exactly the square-zero
+extension data" is not an identity: the obstruction classes arising from square-zero extensions of a
+fixed test scheme are images of `Ext^1(L_T, J) → Ext^1(g^*L, J)`, which need not be surjective for
+that `T`. The text now names the standard remedy — vary the test scheme over a smooth cover so every
+class is realized — attributes it to Behrend–Fantechi Section 4, and says it is used rather than
+reproved. The proposition statement now says "the cotangent complex truncated to `[-1,0]`, which is
+the datum the virtual class sees", since that is all the Picard-stack comparison delivers and all
+the class consumes. The paragraph order is fixed so the bridge precedes the conclusion it supports.
+
+**The replacement locator overstated.** González–Woodward Corollary 3.20 is the fixed-part principle
+for the master-space circle of the wall crossing, not for the domain-rotation circle the appendix
+needs; the principle is shared and Graber–Pandharipande covers both, but Corollary 3.20 is not an
+instance of our application. All three occurrences now say "whose gauged instance for the
+wall-crossing circle is".
+
+**`rem:app-imports` had gone stale.** Its inventory said every remaining import is "a statement of
+Woodward's", which repair 5 made false, and it did not mention the Picard-stack bridge that now
+carries the comparison to virtual classes. Both fixed.
+
+Also taken: González–Woodward Lemma 3.21 now supports the opposite-normal-weight claim (their
+obstruction theory for the master space differs by the trivial factor from the fibre of
+`P(D(L_-) ⊕ D(L_+))`), turning the weakest sentence in the support-collapse proof from an assertion
+into a citation; the twisted-pairing pointer goes to `eq:flat-euler-pairing` rather than
+`def:point-row`; the orbifold slope passage now says the index downstairs is the invariant part of
+the index on the cover and that age terms are bounded independently of the affine degree, so they
+cannot move a coefficient of `k`; "the linear term" is replaced by the term it means, since
+`-k ∑ h_a log|h_a|` is also linear and is not killed by neutrality; and the canonical-resolution
+step names the standard property it uses, which Włodarczyk does not state.
+
+Independently re-verified by the referee this round: the four-term Stirling display term by term
+including the new scale term, the `U_F` cover and its openness, the evaluation-slot gloss against
+QK III Section 9.4 clause by clause, and all three manuscript uses of Włodarczyk Proposition 2(B')
+against the dated extraction note.
+
+`make check` passes at 47 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph

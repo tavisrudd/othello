@@ -21,7 +21,11 @@ gauged theories.  This equality is not imposed at a critical wall
 polarization; the wall is handled by the master stacks in \textup{(ii)}.
 \item Degree by degree, the polarization master stacks are proper
 Deligne--Mumford stacks with Woodward's relative perfect obstruction theories,
-and the localized large-area formula applies coefficientwise.
+and the localized large-area formula applies coefficientwise.  This includes
+the virtual Kalkman identity for the polarization sweep, with the endpoint
+normalization recalled in the proof of
+Proposition~\ref{prop:support-collapse}: the two endpoint components enter with
+opposite signs and a common normalization.
 \item Finitely many equivariant numerical divisor classes separate every
 allowed total equivariant degree, and the effective infinity-side degree
 semigroup is pointed.
@@ -165,7 +169,7 @@ Consequently the endpoint functional with distinguished output insertion
 One input is taken from the normalization and not proved here: in Woodward's
 graph-space normalization, \(D\tau_{Y,-}\) is the genus-zero fundamental
 solution of the quantum connection on \(Y\), and it is unitary for the
-\(z\mapsto e^{-\pi i}z\)-twisted pairing of Definition~\ref{def:point-row}.
+\(z\mapsto e^{-\pi i}z\)-twisted pairing \eqref{eq:flat-euler-pairing}.
 Everything below is a consequence of that normalization, and a different
 normalization would change only the scalar \(c_n(z)\).
 The Gamma framing of \(\OO_p\) is the graph fundamental solution applied to
@@ -196,8 +200,9 @@ variables; the proposition does not construct the common realization.
 
 \begin{proof}
 Retain rotation of the parametrized graph curve, with equivariant parameter
-\(\zeta\); this is the same parameter that appears in the Gamma factors
-below, and the wall cocharacter is written \(\xi\) to keep the two apart.
+\(\zeta\), as in \cite{WoodwardQKIII}; this is the same parameter that
+appears in the Gamma factors below, and the wall cocharacter is written
+\(\mathsf w\) to keep the two apart.
 At each ordinary input marking insert the normalized equivariant
 point class of \(0\in\mathbf P^1\).  Rotation localization then puts every
 input on the zero-side bubble tree.  Next choose equivariant divisor classes
@@ -240,20 +245,22 @@ cocharacter limit carrying no semistability.
 The ordinary inputs remain at their own markings.
 
 For each fixed degree and sufficiently large area, a nonendpoint
-polarization-fixed graph is a Mundet-semistable \(\C^\times_\xi\)-fixed
-object for a wall cocharacter \(\xi\) --- written \(\zeta\) in
-\cite{GonzalezWoodward}, renamed here because \(\zeta\) is the rotation
-equivariant parameter throughout this section --- and its principal component
+polarization-fixed graph is a Mundet-semistable \(\C^\times_\mathsf w\)-fixed
+object for a wall cocharacter \(\mathsf w\) --- the symbols need care
+here: \cite{GonzalezWoodward} write \(\zeta\) for this cocharacter and
+\(\xi\) for the equivariant parameter, while we write \(\mathsf w\) for the
+cocharacter and \(\zeta\) for the equivariant parameter, following
+\cite{WoodwardQKIII} --- and its principal component
 maps to
-\(W^{\xi,t}/G_\xi\), where \(W^{\xi,t}\) is the locus of
-\(L_t\)-semistable points of the \(\xi\)-fixed locus and \(t\) runs over the
+\(W^{\mathsf w,t}/G_\mathsf w\), where \(W^{\mathsf w,t}\) is the locus of
+\(L_t\)-semistable points of the \(\mathsf w\)-fixed locus and \(t\) runs over the
 interpolation between the two chamber linearizations
 \cite[Lemma~3.17 and Proposition~3.18]{GonzalezWoodward}.  In the bubble-tree
 description of that fixed locus, the principal factor is a gauged-map stack
-over \(W^{\xi,t}\) framed at its attaching points, and the bubble factors are
+over \(W^{\mathsf w,t}\) framed at its attaching points, and the bubble factors are
 glued to it along those framings
 \cite[Remark~3.19]{GonzalezWoodward}; note that the framings are compared in
-the ambient \(W^\xi\), so it is the principal side that carries the
+the ambient \(W^\mathsf w\), so it is the principal side that carries the
 semistability.  The distinguished output
 evaluation is a principal-component value, and therefore lands in a fixed
 component which is \(L_t\)-semistable,
@@ -263,7 +270,7 @@ before division by the virtual normal Euler class.
 
 The placement is what makes this work, and the weaker statement for an
 arbitrary marking would not.  Proposition~3.15(c) of the same source places an
-arbitrary node or marking only in the full fixed locus \(W^\xi\), with no
+arbitrary node or marking only in the full fixed locus \(W^\mathsf w\), with no
 semistability, so a marking carried off on a bubble tree may land on a fixed
 component that is unstable for every interpolated polarization --- for
 instance on a component containing one of the two limits of the cylinder
@@ -275,17 +282,20 @@ vanishing must come from the placement of the distinguished insertion rather
 than from a stronger property of the class.
 
 Only the two endpoints survive the virtual Kalkman
-identity.  Two things about that identity are used and neither is proved here.
-The two surviving components are the gauged-map stacks at \(L_-\) and \(L_+\),
-sitting in the polarization master stack with opposite normal weights along
-the master-space direction, so that after the residue extraction their
-contributions enter with opposite signs and a common normalization; this is
-why the vanishing of all wall terms gives the equality
-\eqref{eq:support-collapse-row} rather than a proportionality.  Both the
-localized formula and this endpoint normalization are part of the large-area
-package assumed in
-Definition~\ref{def:gauged-admissible}\textup{(ii)}; we do not exhibit the
-master-space normal complex.  At either endpoint there is no wall, and the
+identity.  The two surviving components are the gauged-map stacks at \(L_-\)
+and \(L_+\).  Their normal directions in the polarization master stack are the
+two ends of the master-space fibre: the obstruction theory of
+\(M^G_n(C,X,L_-,L_+)\) differs from that of \(M^G_n(C,X)\) by the trivial
+factor coming from the fibre of \(\mathbf P(D(L_-)\oplus D(L_+))\)
+\cite[Lemma~3.21]{GonzalezWoodward}, whose two sections carry opposite
+weights.  After the residue extraction the two endpoint
+contributions therefore enter with opposite signs and a common normalization,
+which is why the vanishing of all wall terms gives the equality
+\eqref{eq:support-collapse-row} rather than a proportionality.  We do not
+exhibit the master-space normal complex; that the virtual Kalkman formula
+applies with this normalization at every degree used is the content of
+Definition~\ref{def:gauged-admissible}\textup{(ii)}.  At either endpoint there
+is no wall, and the
 distinguished output evaluation is exactly the slot through which
 \(\tau_{Y_\pm,-}\) is defined, so the distinguished equivariant
 insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
@@ -430,7 +440,11 @@ cobordism \emph{projective} when it is quasiprojective.  We use the resolved
 proper equivariant completion constructed in the proof of
 Proposition~2(B'): the equivariant projective completion of the glued
 double line-bundle space, followed by its canonical equivariant resolution.
-The glued space is smooth, so the canonical resolution is an isomorphism
+The glued space is smooth, being glued from two line bundles over smooth
+varieties, and a canonical resolution is functorial and therefore an
+isomorphism over the smooth locus --- a standard property of canonical
+resolution, not part of the cited proposition.  So the resolution is an
+isomorphism
 over it, in particular over the source, sink, and common-open cylinder.
 Thus the extreme quotients and the cylinder orbit are unchanged.
 Lemma~\ref{lem:orbit-cylinder-disjoint} uses nothing else about the
@@ -494,7 +508,11 @@ Pass to a finite cover which clears stabilizer denominators and apply the
 splitting principle; the domain there is an ordinary line, and slopes are
 counted per unit of the primitive affine direction \(\delta\) on both sides of
 the identity below, while consecutive degrees inside a tail differ by the
-stabilizer order of Proposition~\ref{prop:app-mu-k}\textup{(b)}.  A virtual
+stabilizer order of Proposition~\ref{prop:app-mu-k}\textup{(b)}.  The index
+downstairs is the invariant part of the index on that cover, and the age
+contributions of the orbifold Riemann--Roch formula are bounded independently
+of the affine degree, so they enter the rank as a constant and cannot change a
+coefficient of \(k\).  A virtual
 line in the moving index of the principal
 weighted component has Chern root \(\alpha_a\) and degree
 \begin{equation}\label{eq:affine-moving-degree}
@@ -840,8 +858,9 @@ displayed term is the one contributed by the scale of \(\zeta\); it is written
 out because the display is the general expansion, before neutrality is
 imposed.  Thus
 \eqref{eq:total-moving-slope} together with \eqref{eq:neutral-direction}
-kills the \(k\log k\) term, the linear term, and that scale term.  The
-remaining
+kills the \(k\log k\) term, the term \(\bigl(\sum_ah_a\bigr)k\), and that
+scale term; the remaining term \(-k\sum_ah_a\log|h_a|\) is also linear in
+\(k\) and is not killed.  That remaining
 exponential rate \(-\sum_ah_a\log|h_a|\) is removed by one rescaling, after
 which the coefficients grow by a power of \(k\) and
 \(\log k\).  After that rescaling, radial limits of \(F\) therefore define

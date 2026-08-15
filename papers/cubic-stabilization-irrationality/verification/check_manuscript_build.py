@@ -24,7 +24,7 @@ from pathlib import Path
 PAPER = Path(__file__).resolve().parents[1]
 SOURCE = "cubic_stabilization_irrationality.tex"
 TRACKED_PDF = PAPER / "cubic_stabilization_irrationality.pdf"
-EXPECTED_PAGES = 46
+EXPECTED_PAGES = 47
 DETERMINISTIC_EPOCH = "1785888000"
 
 WARNING_RE = re.compile(

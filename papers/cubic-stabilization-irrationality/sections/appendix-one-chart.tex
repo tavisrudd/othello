@@ -18,8 +18,8 @@ stack for scaled gauged maps in \cite[Section~8.3]{WoodwardQKIII}, and for
 affine gauged maps in \cite[Example~6.6(c)]{WoodwardQKII}.  Those are three
 different moduli stacks; the form used here is the fixed part of the ambient
 theory on the rotation-fixed locus, which is
-\cite{GraberPandharipande} in general and
-\cite[Corollary~3.20]{GonzalezWoodward} in the gauged setting.
+\cite{GraberPandharipande} in general, its gauged instance for the
+wall-crossing circle being \cite[Corollary~3.20]{GonzalezWoodward}.
 Derived stacks play no role there.  The
 derived fixed-section stacks used in Theorem~\ref{thm:tailwise-derived} are an
 auxiliary layer of the present manuscript.  Their only purpose is to make the
@@ -41,8 +41,9 @@ cutting axiom \cite[Proposition~7.14(b)]{WoodwardQKIII} together with the fibre
 product over the diagonal on which its proof rests
 \cite[Proposition~5.21]{WoodwardQKII}; the fixed part of an ambient relative
 perfect obstruction theory as a relative perfect obstruction theory on the
-fixed locus \cite{GraberPandharipande}, applied in the gauged setting exactly
-this way in \cite[Corollary~3.20]{GonzalezWoodward}; and the rigidified
+fixed locus \cite{GraberPandharipande}, whose gauged instance for the
+wall-crossing circle is \cite[Corollary~3.20]{GonzalezWoodward}; and the
+rigidified
 inertia conventions
 \cite[Section~4.3, Proposition~4.3(f),(g)]{WoodwardQKII}.  One standard
 comparison is used as precedent and not reproved: the cotangent complex of a
@@ -440,8 +441,9 @@ identification the morphism
 \(E_a\to L_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\) whose complex is
 \cite[Definition~7.13]{WoodwardQKIII} and whose relative form on the
 rotation-fixed locus is its fixed part, a relative perfect obstruction theory
-there by \cite{GraberPandharipande} and applied in the gauged setting in
-\cite[Corollary~3.20]{GonzalezWoodward}, is the composite
+there by \cite{GraberPandharipande}, whose gauged instance for the
+wall-crossing circle is \cite[Corollary~3.20]{GonzalezWoodward}, is the
+composite
 \[
  \tau_{[-1,0]}L_{\mathfrak S_{a_-,a_+}/\mathfrak M}
  \longrightarrow L_{\mathfrak S_{a_-,a_+}/\mathfrak M}
@@ -505,7 +507,8 @@ Proposition~\ref{prop:app-descent}, the square
 \]
 is \(2\)-commutative, its left vertical arrow is a quasi-isomorphism, and the two
 perfect obstruction theories are isomorphic as morphisms to the cotangent
-complex.  Passing to classical truncations, the derived data recover Woodward's
+complex truncated to \([-1,0]\), which is the datum the virtual class sees.
+Passing to classical truncations, the derived data recover Woodward's
 relative perfect obstruction theory, hence his relative virtual class.
 \end{proposition}
 
@@ -548,30 +551,41 @@ that the comparison is the differential of evaluation at \(1\).
 Since \(\operatorname{ev}_1\) is an equivalence, its induced map on
 \(\tau_{[-1,0]}L_{-/\mathfrak M}\) is a quasi-isomorphism; this is the left
 vertical arrow.  A commuting square whose verticals are quasi-isomorphisms is
-an isomorphism of the two morphisms to the cotangent complex, which is the
-assertion for obstruction theories.  Taking \(t_0\) and using
-Lemma~\ref{lem:app-truncation} identifies the upper row with Woodward's
-relative perfect obstruction theory.
+an isomorphism of the two morphisms to the truncated cotangent complex, which
+is the assertion for obstruction theories.
 
-One step must be spelled out, because Lemma~\ref{lem:app-truncation} compares
-the two morphisms on square-zero extensions while the virtual class is built
-from more than that comparison at first sight.  The Behrend--Fantechi class is
+One step must now be spelled out, because Lemma~\ref{lem:app-truncation}
+compares the two morphisms on square-zero extensions while the virtual class is
+built from more than that comparison at first sight.  The Behrend--Fantechi
+class is
 formed from the closed embedding of the intrinsic normal cone in the Picard
 stack \(h^1/h^0(E_a^\vee)\), that is, from the morphism of Picard stacks
 \(\mathfrak N_{t_0\mathfrak S_{a_-,a_+}/\mathfrak M}\to h^1/h^0(E_a^\vee)\)
 induced by the obstruction morphism \cite{BehrendFantechi}.  A morphism of
 Picard stacks is determined by its values on points with values in test
-schemes, and by the construction of the intrinsic normal sheaf those points
-are exactly the square-zero extension data compared in
-Lemma~\ref{lem:app-truncation}: an extension of the test scheme with a given
-ideal, its obstruction class, and the torsor of its extensions when that class
-vanishes.  The comparison there is by one recipe applied to both morphisms, so
-it is natural in the test scheme.  Hence the two obstruction morphisms induce
+schemes, together with the naturality data, and the automorphisms are part of
+that determination, not only the isomorphism classes.  On such a point the
+morphism is computed from square-zero extension data: an extension of the test
+scheme with a given ideal, its obstruction class, and the torsor of its
+extensions when that class vanishes.  Every class arising in
+\(h^1/h^0(E_a^\vee)\) over a test scheme is realized this way once the test
+scheme is allowed to vary over a smooth cover, which is the standard step in
+the passage between an obstruction theory in the deformation-theoretic sense
+and a morphism to the cotangent complex \cite[Section~4]{BehrendFantechi}; it
+is not a formal consequence of the definitions, and we use it here.
+Lemma~\ref{lem:app-truncation} compares the two morphisms on exactly those
+data, by one recipe applied to both, so the comparison is natural in the test
+scheme.  Hence the two obstruction morphisms induce
 the same morphism of Picard stacks, the same embedded cone, and the same
 virtual class.  This is why
 Convention~\ref{conv:app-obstruction-morphism} records the torsor of
 extensions and not only the obstruction class: the \(h^0\) half of the
 comparison is what the deformation side of the cone needs.
+
+Taking \(t_0\) and using
+Lemma~\ref{lem:app-truncation} identifies the upper row with Woodward's
+relative perfect obstruction theory, and by the previous paragraph the
+identification is one of virtual classes.
 The relative bivariant form of that construction, in
 Vistoli's bivariant Chow groups, is the one set up in
 \cite[Section~6]{WoodwardQKII}.
@@ -750,12 +764,19 @@ and not the morphism, Convention~\ref{conv:app-obstruction-morphism} fixes the
 morphism, and the comparison is then made in
 Lemma~\ref{lem:app-truncation} on square-zero extensions of classical test
 schemes, in the \v{C}ech presentation of Lemma~\ref{lem:app-cech}.
+Proposition~\ref{prop:app-square} carries that comparison the rest of the way
+to virtual classes, through the morphism of Picard stacks that
+\cite{BehrendFantechi} forms the class from; the realization step there, that
+every class over a test scheme comes from an actual square-zero extension after
+passing to a smooth cover, is theirs and is used rather than reproved.
 \cite{SchurgToenVezzosi} is cited as precedent for reading a classical
 obstruction theory off a derived enhancement in a given geometry; its own
 mapping-stack application is to stable maps, and it is not used as a general
 recognition theorem here.  Everything else is
 either the graded computation of Lemma~\ref{lem:app-graded-extension} and its
-module form, or a statement of Woodward's cited at the locators given at the
+module form, or a statement of Woodward's, of
+\cite{GonzalezWoodward}, or of \cite{GraberPandharipande}, cited at the
+locators given at the
 start of this appendix.  In particular, no derived statement is used at any
 point where a virtual class or a localization contribution is finally
 evaluated: those are read off from the classical truncations, in the form in
