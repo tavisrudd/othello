@@ -601,9 +601,9 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   pinned sources; verdicts, locators, and hashes are in
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
   third version, carries those verdicts in its Section 6, and adds Section 7,
-  which attacks the residual gap through the flatness identities: 18 pages, PDF
+  which attacks the residual gap through the flatness identities: 20 pages, PDF
   SHA-256
-  `20b348901afba5fd8234fd46bceb4da62389a892a6c1bb8565866aee25dd18fa`.  Either
+  `814c1a0c0816bcd1aa4b25483847893f796ae7aba2dbaaf7fe4de86bd1814694`.  Either
   document can be read first; the report is the shorter route in, the memo's
   Section 7 is where the mathematics now is.
 
@@ -640,23 +640,29 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   monodromy at that parameter has the same primitive-sixth multiplicity as at
   the origin.
 
-  *Blockwise progress, memo Section 7.*  The flatness identities
-  `[E*, phi_a*] = 0` and `d_a(E*) = phi_a* + [phi_a*, mu]` are exact.  In the
-  Kato block frame the block data evolves by
-  `D_a U_i = C_{a,i} + [C_{a,i}, mu_i]` and `D_a mu_i = [C_{a,i}, S_i]` with
-  `S_i = sum_{j!=i} mu_{ij} mu_{ji}/(u_i - u_j)`.  Self-adjointness of `E*` and
+  *Blockwise progress and its limit, memo Section 7.*  The flatness identities
+  `[E*, phi_a*] = 0` and `d_a(E*) = phi_a* + [phi_a*, mu]` are exact, and in the
+  Kato block frame the leading operator evolves unconditionally by
+  `D_a U_i = C_{a,i} + [C_{a,i}, mu_i]`.  Self-adjointness of `E*` and
   anti-self-adjointness of `mu` for the Poincare pairing make every block
   residue traceless with spectrum symmetric about zero, and force it to vanish
   on every multiplicity-one block; so `nu_6` is carried entirely by coalesced
   blocks, and the draft's cubic roots `1/6` and `5/6` are the forced `+/-1/6`.
-  Deformation by an infinitesimal gauge then reduces to one Sylvester condition
-  per coalesced block: a `beta` commuting with `U_i` with
-  `[beta, mu_i] = [C_{a,i}, S_i]`.  The live danger is block splitting, which
-  would drop `nu_6` by two; that is a coalescence question.
+  That much is unconditional.  The coalesced case is **not** reduced: the
+  off-block projector equation is the full Sylvester equation
+  `(u_j-u_i)X + N_j X - X N_i = -(d_a U)_{ji}`, so the closed form
+  `D_a mu_i = [C_{a,i}, S_i]` covers only semisimple blocks, and a
+  nonsemisimple block is not modelled by the compressed pair at all.  The
+  manuscript's own cubic block is the regression test: with the `z^2`
+  coefficient's `-8/81` entry the indicial polynomial is `rho^2 + rho + 5/36`
+  with roots `-1/6, -5/6`; without it the roots are `+/-1/18` mod `Z` and
+  contribute nothing.  The live danger is block splitting, which would drop
+  `nu_6` by two; the standard coalescence results assume a diagonalizable
+  leading matrix and do not apply, since `J_0 != 0` here.
 
-  *Next routes, in order.*  (i) The Sylvester condition and the splitting
-  question above, with the isomonodromy-at-coalescence literature still to be
-  read.  (ii) Birkhoff: show the `id + O(z^-1)` factor of
+  *Next routes, in order.*  (i) Deformation of the full formal block normal
+  form `J + zD + z^2 E + ...` for a coalesced block, tested against the cubic
+  example, plus the splitting question.  (ii) Birkhoff: show the `id + O(z^-1)` factor of
   `(Phi^0)^-1 M = M' Phi^-1` preserves the multiplicity; same question in other
   coordinates, useful as a cross-check.  (iii) Direct specialized vanishing for centers of
   dimension at most two, using the classification already in the draft, which

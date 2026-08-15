@@ -10,10 +10,11 @@ pro-Laurent bulk gauge of `lem:formal-base-shift` in the proof of
 `2026-08-15-c912-frame-transport-memo.tex`, Section 6 (`sec:hyzz`); the adversarial
 check that corrected the memo is `2026-08-15-c912-frame-transport-memo-red-team.md`.
 The memo has since been revised to its third version, which carries the verdicts below
-in its Section 6, replaces its route list and questions accordingly, records the two
-corrections in `sec:corrections`, and adds Section 7 carrying out the blockwise attack
-on the residual gap; that version is 18 pages with PDF SHA-256
-`20b348901afba5fd8234fd46bceb4da62389a892a6c1bb8565866aee25dd18fa`.
+in its Section 6, replaces its route list and questions accordingly, and adds Section 7
+carrying out the blockwise attack on the residual gap.  A fourth version then corrects
+two errors in that attack, both at the coalesced blocks; the current file is 20 pages
+with PDF SHA-256
+`814c1a0c0816bcd1aa4b25483847893f796ae7aba2dbaaf7fe4de86bd1814694`.
 No manuscript, Lean, or export change is made by this pass.
 
 **Headline.**  Check 1 fails as posed, for three independent reasons; check 2 passes and
@@ -237,12 +238,19 @@ Recorded as leads, with their status marked; none is a claim.
    `∂_a(E⋆) = φ_a⋆ + [φ_a⋆, μ]` (signs follow the displayed connection and should be
    rechecked against the manuscript's normalization before use).  The first says bulk
    displacement never mixes exponential blocks; the second identifies `∂_aλ_i` with the
-   `i`-th eigenvalue of `φ_a⋆`.  In the Kato block frame these give
-   `D_aU_i = C_{a,i} + [C_{a,i}, μ_i]` and `D_aμ_i = [C_{a,i}, S_i]` with
-   `S_i = Σ_{j≠i} μ_{ij}μ_{ji}/(u_i-u_j)`, and the whole isomonodromy question collapses
-   to one Sylvester condition per coalesced block: a `β` commuting with `U_i` with
-   `[β, μ_i] = [C_{a,i}, S_i]`.  The live danger is that the displacement *splits* a
-   coalesced block, which by item 3 below would drop `ν_6` by two.
+   `i`-th eigenvalue of `φ_a⋆`.  In the Kato block frame the leading operator evolves
+   unconditionally by `D_aU_i = C_{a,i} + [C_{a,i}, μ_i]`.  The corresponding closed form
+   for the residue, `D_aμ_i = [C_{a,i}, S_i]`, holds only when the block itself is
+   semisimple: the off-block projector equation is the full Sylvester equation
+   `(u_j-u_i)X + N_jX - XN_i = -(∂_aU)_{ji}`, and the blocks carrying `ν_6` are exactly
+   those with `N_i ≠ 0`.  Worse, a nonsemisimple block is not modelled by the compressed
+   pair `(U_i, μ_i)` at all — after decoupling it is `J + zD + z²E + ⋯`, and the
+   manuscript's own cubic block shows the `z²` coefficient entering the exponents:
+   with the `-8/81` entry the indicial polynomial is `ρ² + ρ + 5/36` with roots
+   `-1/6, -5/6`, and without it the roots are `1/18, -19/18`, i.e. `±1/18` mod `Z`,
+   contributing nothing to `ν_6`.  So this route has *not* reduced the coalesced case;
+   what it has delivered is item 3 below plus the corrected equations.  The live danger
+   is that the displacement *splits* a coalesced block, which would drop `ν_6` by two.
 3. **Where `ν_6` can live at all — now proved, see the memo's Section 7.**  Quantum
    multiplication is Frobenius, so `E⋆` is self-adjoint for the Poincaré pairing and its
    distinct generalized eigenspaces are orthogonal; `μ` is anti-self-adjoint because the

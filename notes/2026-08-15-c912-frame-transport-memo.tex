@@ -20,7 +20,7 @@
 
 \title{Frame transport for framed formal monodromy:\\
   the lemma, its hypotheses, and the receiver problem\\
-  \large Third version, reporting the source checks and correcting the second}
+  \large Fourth version, correcting the blockwise section of the third}
 \author{Memo for a reader of \emph{Irrationality of Cubic Threefolds after One
     Stabilization}}
 \date{15 August 2026}
@@ -58,10 +58,14 @@ but Iritani--Koto's own fundamental solution, which the sources meet and handle
 by Birkhoff factorization. What is left is a single statement about one bulk
 displacement, recorded in Section~\ref{sec:hyzz}.
 Section~\ref{sec:blockwise} then attacks that statement directly through the
-flatness identities, and gets far enough to prove that multiplicity-one blocks
-carry no framed monodromy, to write down how a block residue evolves under bulk
-motion, and to reduce what remains to one solvability condition on the coalesced
-blocks.
+flatness identities. It proves that multiplicity-one blocks carry no framed
+monodromy, which is unconditional and leaves only coalesced blocks in play, and
+writes down the exact evolution of the block's leading operator. It does
+\emph{not} reduce the coalesced case: the third version of this memo claimed
+such a reduction and was wrong twice over, once in dropping a term from the
+off-block Sylvester equation and once in modelling a nonsemisimple block by its
+compressed pair. Both errors, and the cubic $2\times2$ example that is the
+regression test for any repair, are recorded there.
 Section~\ref{sec:corrections} lists what the earlier versions
 got wrong; readers of those versions should start there.
 \end{abstract}
@@ -871,43 +875,70 @@ short computation using $\partial_aP_i=[T_a,P_i]$ gives the general rule
 \begin{theorem}[Block evolution]
 \label{thm:block-evolution}
 Assume the eigenvalues $u_j$ of $U$ are pairwise distinct as scalars, so that
-each difference $u_i-u_j$ is invertible, and assume for the residue formula that
-the neighbouring blocks are semisimple, $N_j=0$ for $j\ne i$. Then
+each difference $u_i-u_j$ is invertible. Then, unconditionally,
 \[
   D_aU_i=C_{a,i}+[C_{a,i},\mu_i],
   \qquad
+  D_a\mu_i=\sum_{j\ne i}\bigl(\mu_{ij}X_{ji}-Y_{ij}\mu_{ji}\bigr),
+\]
+where $X_{ji}=P_j(\partial_aP_i)P_i$ and $Y_{ij}=P_i(\partial_aP_j)P_j$ are the
+unique solutions of the Sylvester equations
+\[
+  \mathcal S_{ji}(X_{ji})=-(\partial_aU)_{ji},
+  \qquad
+  \mathcal S_{ij}(Y_{ij})=-(\partial_aU)_{ij},
+  \qquad
+  \mathcal S_{ji}(X):=(u_j-u_i)X+N_jX-XN_i ,
+\]
+with $(\partial_aU)_{ji}=C_{a,j}\mu_{ji}-\mu_{ji}C_{a,i}$ and
+$(\partial_aU)_{ij}=C_{a,i}\mu_{ij}-\mu_{ij}C_{a,j}$. If \emph{both} blocks are
+semisimple, $N_i=N_j=0$, then $\mathcal S_{ji}$ is multiplication by $u_j-u_i$
+and the formula collapses to
+\[
   D_a\mu_i=[\,C_{a,i},S_i\,],
   \qquad
   S_i:=\sum_{j\ne i}\frac{\mu_{ij}\mu_{ji}}{u_i-u_j} .
+  \tag{6.2}
+  \label{eq:semisimple-residue-evolution}
 \]
 \end{theorem}
 
 \begin{proof}
-For $U$: by \eqref{eq:block-covariant-rule} and
-Lemma~\ref{lem:flatness-ids}, $D_aU_i=P_i(C_a+[C_a,\mu])P_i+P_i[U,T_a]P_i$. Since
-$C_a$ commutes with $P_i$, the first term is $C_{a,i}+[C_{a,i},\mu_i]$; since $U$
-commutes with $P_i$, the second is $[U_i,P_iT_aP_i]=0$.
+For $U$: by \eqref{eq:block-covariant-rule} and Lemma~\ref{lem:flatness-ids},
+$D_aU_i=P_i(C_a+[C_a,\mu])P_i+P_i[U,T_a]P_i$. Since $C_a$ commutes with $P_i$,
+the first term is $C_{a,i}+[C_{a,i},\mu_i]$; since $U$ commutes with $P_i$, the
+second is $[U_i,P_iT_aP_i]=0$. No perturbation formula is used, so this identity
+holds whatever the nilpotent parts.
 
 For $\mu$: $\partial_a\mu=0$, so \eqref{eq:block-covariant-rule} gives
-$D_a\mu_i=P_i[\mu,T_a]P_i=\sum_{j\ne i}\bigl(\mu_{ij}X_{ji}-Y_{ij}\mu_{ji}\bigr)$
-with $X_{ji}=P_j(\partial_aP_i)P_i$ and $Y_{ij}=P_i(\partial_aP_j)P_j$.
-Differentiating $UP_i=(u_i+N_i)P_i$ and compressing by $P_j(\cdot)P_i$ gives
-$(\partial_aU)_{ji}+(u_j-u_i+N_j)X_{ji}=0$, so under the semisimplicity
-assumption $X_{ji}=(\partial_aU)_{ji}/(u_i-u_j)$ and likewise
-$Y_{ij}=-(\partial_aU)_{ij}/(u_i-u_j)$. Substituting
-$(\partial_aU)_{ji}=C_{a,j}\mu_{ji}-\mu_{ji}C_{a,i}$ and
-$(\partial_aU)_{ij}=C_{a,i}\mu_{ij}-\mu_{ij}C_{a,j}$, the two terms containing
-$C_{a,j}$ cancel and what remains is
-$\sum_{j\ne i}[C_{a,i},\mu_{ij}\mu_{ji}]/(u_i-u_j)$.
+$D_a\mu_i=P_i[\mu,T_a]P_i$, which is the displayed sum. To evaluate $X_{ji}$,
+differentiate $[U,P_i]=0$ to get $[\partial_aU,P_i]+[U,\partial_aP_i]=0$ and
+compress by $P_j(\cdot)P_i$ with $j\ne i$: the first bracket contributes
+$(\partial_aU)_{ji}$ and the second contributes $U_jX_{ji}-X_{ji}U_i$, which is
+$\mathcal S_{ji}(X_{ji})$. The operator $\mathcal S_{ji}$ is invertible because
+$u_j-u_i$ is invertible and $X\mapsto N_jX-XN_i$ is nilpotent. The same argument
+with $i$ and $j$ exchanged gives $Y_{ij}$. When $N_i=N_j=0$, substituting the
+two displayed expressions for $\partial_aU$ makes the terms containing $C_{a,j}$
+cancel, leaving $\sum_{j\ne i}[C_{a,i},\mu_{ij}\mu_{ji}]/(u_i-u_j)$.
 \end{proof}
 
-The cancellation is the point. The neighbouring blocks enter $D_a\mu_i$ only
-through the symmetric combination $S_i$, and the motion of the block residue is
-a commutator with the block's own quantum multiplication operator. Without the
-semisimplicity of the neighbours the same computation leaves the residual term
-$-\mu_{ij}(\Delta_{ji}+\Delta_{ij})C_{a,j}\mu_{ji}$ with
-$\Delta_{ji}=(u_j-u_i+N_j)^{-1}$, which vanishes exactly when the nilpotent parts
-do; that correction is where a general statement would have to work harder.
+\begin{remark}[The clean form does not cover the blocks that matter]
+\label{rem:sylvester-correction}
+An earlier version of this memo stated \eqref{eq:semisimple-residue-evolution}
+under the weaker hypothesis $N_j=0$ for the \emph{neighbouring} blocks only.
+That was an error: differentiating $UP_i=(u_i+N_i)P_i$, the off-block part of
+$\partial_a(N_iP_i)$ contributes $X_{ji}N_i$, so the term $-XN_i$ cannot be
+dropped when the block $i$ itself is nonsemisimple. By
+Corollary~\ref{cor:coalesced-only} the only blocks that can carry $\nu_6$ are
+the coalesced ones, and in the draft's cubic calculation that block has
+$J_0=\left(\begin{smallmatrix}0&2\\0&0\end{smallmatrix}\right)\ne0$. So
+$N_i\ne0$ is the case of interest, and
+\eqref{eq:semisimple-residue-evolution} does not apply to it. The cancellation
+that produced $S_i$ has to be redone with $\mathcal S_{ji}^{-1}$ in place of the
+scalar $1/(u_j-u_i)$; expanding
+$\mathcal S_{ji}^{-1}=\sum_{k\ge0}(-1)^k(u_j-u_i)^{-k-1}(L_{N_j}-R_{N_i})^k$
+shows the clean commutator is only the leading term of that expansion.
+\end{remark}
 
 \subsection*{Multiplicity-one blocks carry nothing}
 
@@ -920,8 +951,9 @@ Let $(\cdot,\cdot)$ be the Poincar\'e pairing. Then each $\mu_i$ is
 anti-self-adjoint for the restriction of the pairing to $H_i$, which is
 nondegenerate; consequently $\operatorname{tr}\mu_i=0$ and the spectrum of
 $\mu_i$ is symmetric about $0$. If $u_i$ has multiplicity one, then $\mu_i=0$,
-the block's formal solution is $e^{-u_i/z}$ times a constant, its framed
-monodromy is the identity, and it contributes no root of unity to $\nu_6$.
+the block's formal solution is $e^{-u_i/z}$ times a single-valued formal unit,
+its framed monodromy is the identity, and it contributes no root of unity to
+$\nu_6$.
 \end{theorem}
 
 \begin{proof}
@@ -933,9 +965,14 @@ complementary, so $\mu$ is anti-self-adjoint; hence so is
 $\mu_i=P_i\mu P_i$ on $H_i$. An anti-self-adjoint operator has
 $\operatorname{tr}\mu_i=\operatorname{tr}\mu_i^{\dagger}=-\operatorname{tr}\mu_i$
 and characteristic polynomial even up to sign, giving the trace and symmetry
-statements. On a one-dimensional space anti-self-adjointness forces $\mu_i=0$,
-and then $z^2\partial_zY=u_iY$ integrates to $e^{-u_i/z}$, single-valued under
-the turn.
+statements. On a one-dimensional space anti-self-adjointness forces $\mu_i=0$.
+Formal decoupling from the other eigenspaces by a gauge $g=1+zg_1+\cdots$ can
+add terms $z\,c_1+z^2c_2+\cdots$ to the scalar block, but it does not change its
+$z^0$ coefficient, since the only $z^0$ contribution is
+$-[g_1,U]_{ii}=[U_i,g_{1,ii}]=0$ in rank one. So the decoupled block is
+$z^2\partial_zy=(u_i+z^2c_2+\cdots)y$, whose solution is $e^{-u_i/z}$ times a
+formal unit with no $\log z$ and no fractional power: single-valued under the
+turn.
 \end{proof}
 
 \begin{corollary}
@@ -952,13 +989,13 @@ $\Z$, exactly the symmetry about $0$ that the theorem forces on a block residue.
 
 \subsection*{What is left, exactly}
 
-\begin{proposition}[Isomonodromy criterion for a block]
+\begin{proposition}[Isomonodromy criterion, semisimple blocks only]
 \label{prop:block-isomonodromy}
-Write the block connection as
-$\nabla_i=z\partial_z+A_i(z)$ with $A_i(z)=-z^{-1}U_i+\mu_i$. Under the
-hypotheses of Theorem~\ref{thm:block-evolution}, the deformation $D_a\nabla_i$ is
-an infinitesimal gauge transformation by
-$\Theta_a(z)=-z^{-1}C_{a,i}+\beta$ if and only if
+Suppose $N_i=0$ and $N_j=0$ for all $j$, so that the decoupled block connection
+is $\nabla_i=z\partial_z+A_i(z)$ with $A_i(z)=-z^{-1}U_i+\mu_i$ and
+\eqref{eq:semisimple-residue-evolution} applies. Then $D_a\nabla_i$ is an
+infinitesimal gauge transformation by $\Theta_a(z)=-z^{-1}C_{a,i}+\beta$ if and
+only if
 \[
   [\beta,U_i]=0
   \qquad\text{and}\qquad
@@ -972,35 +1009,74 @@ leading term; only the $z^0$ equation remains.
 Infinitesimally, $\delta A_i=[\Theta_a,A_i]-z\partial_z\Theta_a$. With
 $\Theta_a=z^{-1}\alpha+\beta$ this is
 $-z^{-2}[\alpha,U_i]+z^{-1}\bigl([\alpha,\mu_i]-[\beta,U_i]+\alpha\bigr)+[\beta,\mu_i]$.
-Theorem~\ref{thm:block-evolution} gives
+Under the stated hypotheses Theorem~\ref{thm:block-evolution} gives
 $D_a\nabla_i=-z^{-1}\bigl(C_{a,i}+[C_{a,i},\mu_i]\bigr)+[C_{a,i},S_i]$. Taking
 $\alpha=-C_{a,i}$ kills the $z^{-2}$ term because $C_{a,i}$ commutes with $U_i$,
 and reduces the $z^{-1}$ equation to $[\beta,U_i]=0$; the $z^0$ equation is the
 second displayed condition.
 \end{proof}
 
-So the residual statement of Section~\ref{sec:hyzz} is now one solvability
-question, asked only of the coalesced blocks that
-Corollary~\ref{cor:coalesced-only} leaves in play: is there, in the commutant of
-$U_i$, a $\beta$ with $[\beta,\mu_i]=[C_{a,i},S_i]$? If yes in every bulk
-direction, the block connection is isomonodromic along the displacement, its
-formal invariants are constant, and Proposition~4.7 closes without any receiver.
+\subsection*{Why this is not yet a reduction of the coalesced case}
+\label{sec:not-yet}
 
-Two remarks on the shape of the risk, so that the next attempt does not start
-optimistic. First, $[C_{a,i},S_i]$ is a commutator of two self-adjoint operators
---- $C_{a,i}$ by the Frobenius property, $S_i$ because
-$\mu_{ij}^\dagger=-\mu_{ji}$ makes each $\mu_{ij}\mu_{ji}$ self-adjoint --- hence
-anti-self-adjoint, which is consistent with $\mu_i$ remaining anti-self-adjoint
-but is not by itself the solvability. Second, and this is the real danger, a
-coalesced block can \emph{split} under the displacement: the splitting is
-governed by $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, and if a rank-two block carrying
-the exponents $\pm1/6$ split into two simple blocks, those would carry residue
-$0$ by Theorem~\ref{thm:simple-blocks} and $\nu_6$ would drop by two. So the
-theorem that has to be proved is not general isomonodromy but exactly this: the
-reconstruction displacement does not split the blocks that carry $\nu_6$, or
-splits them in a way that preserves the count. That is a coalescence question in
-the sense of the isomonodromy-at-coalescing-eigenvalues literature, which is the
-next thing to read.
+Proposition~\ref{prop:block-isomonodromy} is stated where it is true, and that is
+not where the problem is. Two things fail for a coalesced block, and the second
+is the deeper one.
+
+First, by Remark~\ref{rem:sylvester-correction}, $S_i$ is not the right object
+once $N_i\ne0$: the full Sylvester inverse has to be carried.
+
+Second, and independently, the compressed pair $(U_i,\mu_i)$ does not determine
+the block's exponents. Formal decoupling of a nonsemisimple block from the other
+eigenspaces produces higher powers of $z$, and for a nilpotent leading term the
+Turrittin reduction reaches down into them. The draft's own cubic calculation is
+the demonstration. Its reduced rank-two block is
+\[
+  z^2\partial_z\binom{\widetilde S_3}{\widetilde S_4}
+  =\bigl[J_0+zD_0+z^2E_0+O(z^3)\bigr]\binom{\widetilde S_3}{\widetilde S_4},
+  \qquad
+  J_0=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
+  D_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},
+\]
+with $E_0$ carrying the entry $-8/81$. The ansatz
+$\widetilde S_3=z^\rho(1+O(z))$, $\widetilde S_4=cz^{\rho+1}(1+O(z))$ gives
+$\rho=2c-19/18$ and $c(\rho+1)=\tfrac{19}{18}c-\tfrac8{81}$, hence
+$\rho^2+\rho+\tfrac5{36}=0$ and $\rho=-\tfrac16,-\tfrac56$. The $z^2$ coefficient
+is not decoration: setting its $-8/81$ entry to zero leaves
+$c(\rho+1)=\tfrac{19}{18}c$, whose solutions are $\rho=1/18$ with $c=5/9$, and
+$\rho=-19/18$ with $c=0$ --- the classes $\pm1/18$ modulo $\Z$, which are
+eighteenth roots of unity and contribute nothing to $\nu_6$. So a deformation
+theory that tracks only $U_i$ and $P_i\mu P_i$ cannot see the primitive-sixth
+exponents at all, and any proposed evolution theorem must reproduce this
+example. It is the regression test.
+
+\subsection*{The corrected program}
+
+\begin{enumerate}
+\item Flatness preserves the spectral decomposition of $U$ and gives the exact
+  evolution $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, unconditionally.
+\item Multiplicity-one blocks contribute no cyclotomic monodromy
+  (Theorem~\ref{thm:simple-blocks}), so only coalesced blocks are in play.
+\item For a coalesced block the off-block projector equations are governed by the
+  full Sylvester operator $(u_j-u_i)+L_{N_j}-R_{N_i}$, invertible but not scalar.
+\item What must be deformed is the entire formal block normal form
+  $J+zD+z^2E+\cdots$, not the compressed pair, and the deformation theory has to
+  reproduce the cubic $2\times2$ example above.
+\end{enumerate}
+
+A caution on the literature before it is leaned on. The extension results for
+isomonodromic deformations with coalescing eigenvalues assume, among other
+hypotheses, that the leading matrix is diagonalizable at the coalescence point.
+The carrier here is nonsemisimple at leading order --- $J_0\ne0$ --- so those
+theorems do not apply off the shelf, and the coalescence question stated below
+is not answered by citing them.
+
+The risk that remains is unchanged in kind and now better located: a coalesced
+block can \emph{split} under the displacement, the splitting being governed by
+$D_aU_i$, and if the rank-two block carrying $\pm1/6$ split into simple blocks
+those would carry residue $0$ by Theorem~\ref{thm:simple-blocks} and $\nu_6$
+would drop by two. Proving that the reconstruction displacement does not do
+that, or does it in a count-preserving way, is the residual problem.
 
 \section{Routes, in the order I would now try them}
 
@@ -1012,14 +1088,15 @@ the Birkhoff route still stands.
 
 \begin{enumerate}
 \item \textbf{Blockwise, avoiding transport altogether.} Developed in
-  Section~\ref{sec:blockwise}. It has already produced the two evolution
-  equations $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$ and $D_a\mu_i=[C_{a,i},S_i]$, the
-  vanishing of every multiplicity-one block residue, and a reduction of the
-  residual statement to one Sylvester condition per coalesced block. What
-  remains is that condition and the coalescence question stated at the end of
-  that section. Signs follow the displayed connection of Iritani--Koto's
-  Theorem~5.1 and should be rechecked against the draft's normalization before
-  anything is written into the manuscript.
+  Section~\ref{sec:blockwise}. It has produced the unconditional evolution
+  $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, the vanishing of every multiplicity-one
+  block residue, and the corrected off-block Sylvester equations. It has
+  \emph{not} reduced the coalesced case: the compressed pair $(U_i,\mu_i)$ does
+  not determine the exponents there, as the cubic regression test shows. The
+  next calculation is the deformation of the full formal block normal form.
+  Signs follow the displayed connection of Iritani--Koto's Theorem~5.1 and
+  should be rechecked against the draft's normalization before anything is
+  written into the manuscript.
 \item \textbf{Birkhoff.} The identity $(\Phi^\circ)^{-1}\circ M=M'\circ\Phi^{-1}$
   of Iritani--Koto's Section~5.8, and its counterpart in Iritani's
   Section~5.8.2, already factors the bulk transport into a $z$-regular factor,
@@ -1119,7 +1196,34 @@ READMEs must be regenerated.
 \section{Corrections to the earlier versions of this memo}
 \label{sec:corrections}
 
-\subsection*{From the second version to this one}
+\subsection*{From the third version to this one}
+
+Both are in Section~\ref{sec:blockwise}, and both are at the coalesced blocks,
+which are the ones that matter.
+
+\begin{enumerate}
+\item The off-block projector equation was derived as
+  $(\partial_aU)_{ji}+(u_j-u_i+N_j)X_{ji}=0$, dropping the term $-X_{ji}N_i$.
+  The correct equation is $\mathcal S_{ji}(X_{ji})=-(\partial_aU)_{ji}$ with
+  $\mathcal S_{ji}(X)=(u_j-u_i)X+N_jX-XN_i$. The closed form
+  $D_a\mu_i=[C_{a,i},S_i]$ therefore holds only when the block itself is
+  semisimple, and the blocks carrying $\nu_6$ are exactly the ones where it is
+  not; in the draft's cubic block $J_0\ne0$.
+\item The block was modelled as $z\partial_z-z^{-1}U_i+\mu_i$. After formal
+  decoupling a nonsemisimple block carries higher powers of $z$, and its
+  exponents depend on them: in the cubic block the $z^2$ coefficient's entry
+  $-8/81$ enters $\rho^2+\rho+5/36=0$, and deleting it moves the exponents from
+  $\pm1/6$ to $\pm1/18$. So the isomonodromy criterion stated there is a
+  statement about semisimple blocks and is not a reduction of the residual
+  problem. It is restated with that hypothesis.
+\end{enumerate}
+
+The simple-block theorem survives, with one wording repair: the formal solution
+of a simple block is $e^{-u_i/z}$ times a single-valued formal unit, not times a
+constant, since decoupling can generate higher $z$-terms there too. The
+monodromy conclusion is unaffected.
+
+\subsection*{From the second version to the third}
 
 Both changes come from running the three checks against the sources.
 
@@ -1179,17 +1283,18 @@ compared in Proposition~4.7 lie in the class Theorem~4.34 governs --- has been
 answered no, three times over, in Section~\ref{sec:hyzz}. These replace it.
 
 \begin{enumerate}
-\item In the commutant of $U_i$, is there a $\beta$ with
-  $[\beta,\mu_i]=[C_{a,i},S_i]$, in every bulk direction and for every coalesced
-  block? By Proposition~\ref{prop:block-isomonodromy} this is now the question
-  that decides the repair.
+\item What is the deformation equation for the \emph{full} formal normal form
+  $J+zD+z^2E+\cdots$ of a coalesced block, and does it keep the exponent classes
+  fixed? Any candidate must reproduce the cubic $2\times2$ example, where
+  deleting the $z^2$ coefficient moves the exponents from $\pm1/6$ to $\pm1/18$.
 \item Can the reconstruction displacement split a coalesced block that carries
   $\nu_6$? The splitting is governed by $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, and by
   Theorem~\ref{thm:simple-blocks} a split into simple blocks would destroy the
   primitive-sixth exponents outright.
-\item Failing a general answer, does the coalescence literature on isomonodromic
-  deformations with coalescing eigenvalues cover the formal exponents, rather
-  than only the Stokes matrices?
+\item Is there a coalescence result for isomonodromic deformations that covers
+  the formal exponents, rather than only the Stokes matrices, and that does not
+  assume the leading matrix is diagonalizable at the coalescence point? The
+  carrier here has $J_0\ne0$, so the standard hypotheses are not met.
 \item Does the factor $M'=\mathrm{id}+O(z^{-1})$ of the sources' Birkhoff
   factorization preserve the primitive-sixth multiplicity? This is the same
   question in the other coordinates, and is worth keeping as a cross-check.
