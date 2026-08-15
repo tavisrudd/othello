@@ -772,6 +772,19 @@ low-dimensional spectral input, and full cubic-packet
 geometry.  Initial interim release report:
 `../2026-08-12-c910-partial-lean-release.md`.
 
+C912 is active and author-close only.  Its WP1--WP3 referee-foundation tranche
+is green: the universal cyclotomic framed operator, normalized finite-cutoff
+gauges, full nonlinear Iritani coordinate pullbacks, and the separated
+coefficient/loop Hahn receiver have passed quantum, geometry, and general cold
+reads.  The warning-free 23-page paper authority is committed at `9ee4987c7`,
+the immutable exported source is `2405ca85a`, and the clean local standalone
+forward commit is `f336131`; PDF SHA-256 is
+`cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`.
+Nothing was pushed.  The next prioritized work remains WP4--WP6: internalize
+the cubic endpoint, make divisor tagging fully explicit, and close the verified
+cycle/exposition seams.  Current card:
+`../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
+
 The 2026-08-12 crown-compression pass adds two exact structural conclusions.
 First, in dimension five the full one-depth finite-etale ambient
 Hodge/product quotient is certificate-free and complete in every degree:
