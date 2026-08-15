@@ -20,8 +20,8 @@ point row, the flat covector which reads ordinary rank, under quantum wall
 crossing. Its local transport, endpoint calculation,
 and coefficientwise Gamma reduction are proved.  Under the stated
 gauged-admissibility conditions, support collapse, tailwise derived
-identification, and holonomicity follow from rank-one localization and a
-derived intersection.  The remaining unproved input is a family over all
+identification, and D-finiteness of the tails follow from rank-one
+localization and a derived intersection.  The remaining unproved input is a family over all
 finite Artin levels, ordinary degrees, neutral directions, and thresholds;
 at zero modes it assumes a strict isomorphism from the complete adjacent
 row-generated cyclic module to its reduced nearby-cycle realization. Primary
