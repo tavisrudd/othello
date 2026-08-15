@@ -19,7 +19,8 @@
 \newcommand{\PP}{\mathbf P}
 
 \title{Frame transport for framed formal monodromy:\\
-  the lemma, and why the present receiver cannot host it}
+  the lemma, its hypotheses, and the receiver problem\\
+  \large Second version, correcting the first}
 \author{Memo for a reader of \emph{Irrationality of Cubic Threefolds after One
     Stabilization}}
 \date{15 August 2026}
@@ -29,53 +30,55 @@
 
 \begin{abstract}
 Proposition~4.7 of the draft transports framed formal monodromy across the
-comparison isomorphisms of Iritani and Iritani--Koto. The transport step itself
-is asserted in one sentence. This memo proves it, in the form it should take,
-over a differential field; then shows that the coefficient receiver the draft
-constructs cannot be that field, for a reason that is quantitative rather than
-cosmetic; and isolates the exact inequality any repair must establish. The
-inequality holds at the cubic endpoint and is not supplied for a general
-blow-up center. Section~\ref{sec:placement} says where each piece belongs in
-the manuscript.
+comparison isomorphisms of Iritani and Iritani--Koto, and the transport step
+itself is asserted in one sentence. This memo states and proves the missing
+lemma over a differential field, with its hypotheses made explicit; shows that
+those hypotheses are jointly unsatisfiable over the coefficient receiver the
+draft builds, so that the lemma as proved has no verified instance in the
+application; corrects the receiver; and reduces the remaining question to one
+inequality that depends on a normalization the draft is free to choose. The
+inequality fails under the draft's current instruction to take the separating
+weight parameter large, and holds at the cubic endpoint under the smallest
+admissible choice. Section~\ref{sec:corrections} lists what the first version
+of this memo got wrong; readers of that version should start there.
 \end{abstract}
 
 \section{The assertion at issue}
 
-Everything below refers to Section~4 of the draft, \emph{Framed formal
-monodromy}. The relevant statements are Definition~4.1 (the multiplicity
-$\nu_6$, p.~15), Definition~4.2 (the pro-Laurent gauge group, p.~15),
-Lemma~4.3 (coefficientwise base change, p.~16), Lemma~4.5 (formal base shift,
-p.~16) and Proposition~4.7 (framed operation formulas, p.~18).
+References are to Section~4 of the draft, \emph{Framed formal monodromy}. I name
+statements by their semantic labels as well as by number, because the edits
+proposed in Section~\ref{sec:placement} renumber the section: Definition~4.1
+(\texttt{def:framed-sixth-multiplicity}), Definition~4.2
+(\texttt{def:pro-laurent-gauge-group}), Lemma~4.3
+(\texttt{lem:pv-base-change}), Lemma~4.5 (\texttt{lem:formal-base-shift}),
+Proposition~4.7 (\texttt{prop:framed-operations}), Lemma~4.9
+(\texttt{lem:divisor-tagging}).
 
 Lemma~4.3 ends with the sentence
 \begin{quote}
   \emph{If the gauge uses only integral powers of $z$ at every finite level,
   this conjugacy preserves the original-$z$-disc frame,}
 \end{quote}
-and its proof discharges that clause in one sentence: ``the deck action fixes
-every integral power of $z$ at each finite level, so the compatible gauge is
-single-valued for the framed turn.'' Lemma~4.5 then \emph{defines}
+whose proof is the single sentence ``the deck action fixes every integral power
+of $z$ at each finite level, so the compatible gauge is single-valued for the
+framed turn.'' Lemma~4.5 then \emph{defines}
 \[
   M^{\mathrm{bulk}}=G\,M^{\mathrm{small,shifted}}_{\mathrm f,V}G^{-1}
   \tag{4.1c}
 \]
-and Proposition~4.7 concludes from it that ``each center target summand has the
-framed monodromy of its specialized small connection.'' That conclusion is the
-content of the proposition, and it does not follow from the displayed
-definition alone: conjugating a matrix by an arbitrary invertible matrix
-preserves its characteristic polynomial for trivial reasons, but says nothing
-about whether the result is the framed operator of the other module. What is
-missing is a statement that a gauge fixed by the turn transports framed
-operators, together with an algebra in which the turn acts on solutions. The
-draft constructs a common coefficient receiver, and the turn acts trivially on
-it, so the content has to live on the solution side.
+and Proposition~4.7 concludes that ``each center target summand has the framed
+monodromy of its specialized small connection.'' The conclusion does not follow
+from the display: conjugation preserves a characteristic polynomial for trivial
+reasons, but says nothing about whether the conjugated matrix is the intrinsic
+turn operator on horizontal solutions of the gauged module. What is missing is a
+transport lemma together with an algebra in which the turn acts on solutions.
 
-\section{The lemma, over a differential field}
+\section{The lemma over a differential field}
 \label{sec:lemma}
 
-This section is self-contained and, I believe, complete. Notation for
-$\operatorname{Exp}_V$, $\Omega_V$ and the complement $K=\C\oplus V$ is the
-draft's, from (4.0) and (4.0a).
+Notation for $\operatorname{Exp}_V$, $K=\C\oplus V$ and $\Omega_V$ is the
+draft's, from (4.0) and (4.0a). Recall that $\operatorname{Exp}_V$ is defined on
+$(K,+)$, not on $\Omega_V$.
 
 \subsection*{The ground field}
 
@@ -83,32 +86,35 @@ Let $\Gamma$ be a totally ordered abelian group and let
 \[
   \mathcal H=\Omega_V(\!(\Gamma\oplus\Z e_z)\!)
 \]
-be the Hahn field of series $\sum_g c_gx^g$ with well-ordered support and
-coefficients in $\Omega_V$, the value group ordered lexicographically with the
-$e_z$-coordinate \emph{last}. Write $z=x^{e_z}$, and let $\theta$ be the
-derivation multiplying the coefficient at $(\gamma,k)$ by $k$; Leibniz holds
-because $k$ is additive on the value group. Then $\theta z=z$ and
+be the Hahn field of series with well-ordered support and coefficients in
+$\Omega_V$, the value group ordered lexicographically with the $e_z$-coordinate
+\emph{last}, as in the draft. Write $z=x^{e_z}$ and let $\theta$ multiply the
+coefficient at $(\gamma,k)$ by $k$; this is a derivation because $k$ is additive
+on the value group, and $\theta z=z$. Its constants are
 \[
-  \mathcal C:=\mathcal H^{\theta=0}=\Omega_V(\!(\Gamma)\!),
+  \mathcal C:=\mathcal H^{\theta=0}=\Omega_V(\!(\Gamma)\!).
 \]
-a field. Taking $\Gamma=0$ gives $\mathcal H=\Omega_V(\!(z)\!)$, the classical
-case. For $e\ge1$ put
-$\mathcal H_e=\Omega_V(\!(\Gamma\oplus\tfrac1e\Z e_z)\!)$, a degree-$e$
-extension of $\mathcal H$ containing $w=x^{e_z/e}$ with $w^e=z$, and
-$\theta_w=e\theta$, so $\theta_ww=w$.
+Taking $\Gamma=0$ gives $\mathcal H=\Omega_V(\!(z)\!)$. For $e\ge1$ put
+$\mathcal H_e=\Omega_V(\!(\Gamma\oplus\frac1e\Z e_z)\!)$, a degree-$e$ extension
+containing $w=x^{e_z/e}$, and $\theta_w=e\theta$, so $\theta_ww=w$. All residues
+below are taken with respect to $\theta_w$ on the ramified side; the draft's
+$M_{\mathrm{RS},V}$ uses the same convention, and the two differ by the factor
+$e$ if one is careless.
 
 \subsection*{The solution algebra and the turn}
 
 \begin{definition}
-The \emph{universal formal solution algebra} $\mathcal U_e$ is the
-$\mathcal H_e$-algebra generated by symbols
+\label{def:solution-algebra}
+Assume the exponential factors under consideration have \emph{constant}
+coefficients, that is $\varphi\in w^{-1}\Omega_V[w^{-1}]$. The \emph{universal
+formal solution algebra} $\mathcal U_e$ is the $\mathcal H_e$-algebra generated
+by symbols
 \[
-  w^\rho\ (\rho\in\Omega_V),\qquad \ell,\qquad
-  E(\varphi)\ \bigl(\varphi\in w^{-1}\Omega_V[w^{-1}]\bigr),
+  w^\rho\ (\rho\in K),\qquad \ell,\qquad E(\varphi),
 \]
 subject to $w^\rho w^{\rho'}=w^{\rho+\rho'}$, $w^n=$ the element $w^n$ of
-$\mathcal H_e$ for $n\in\Z$, $E(\varphi)E(\varphi')=E(\varphi+\varphi')$ and
-$E(0)=1$, with the derivation extending $\theta_w$ by
+$\mathcal H_e$ for $n\in\Z$, $E(\varphi)E(\varphi')=E(\varphi+\varphi')$,
+$E(0)=1$, with
 \[
   \theta_w(w^\rho)=\rho\,w^\rho,\qquad
   \theta_w(\ell)=1,\qquad
@@ -116,362 +122,445 @@ $E(0)=1$, with the derivation extending $\theta_w$ by
 \]
 \end{definition}
 
+The two hypotheses buried in that definition --- constant coefficients in
+$\varphi$, and exponents $\rho$ in $K$ rather than in $\Omega_V$ --- are not
+bookkeeping. The first is false for the modules the draft transports and is
+discussed at Remark~\ref{rem:constants-fails}; the second is forced because
+$\operatorname{Exp}_V$ is defined only on $K$, so a module whose residues leave
+$K$ needs $\operatorname{Exp}$ rebuilt over a larger field.
+
 \begin{lemma}[Structure]
 \label{lem:structure}
-Fix representatives $\Lambda\subset\Omega_V$ for $\Omega_V/\Z$ with
-$0\in\Lambda$. Then $\mathcal U_e$ is free as an $\mathcal H_e$-module with
-basis $\{w^\rho\ell^mE(\varphi):\rho\in\Lambda,\ m\ge0,\ \varphi\}$. In
-particular $\mathcal U_e\neq0$ and $\mathcal H\subset\mathcal U_e$.
+Fix representatives $\Lambda\subset K$ for $K/\Z$ with $0\in\Lambda$. Then
+$\mathcal U_e$ is free as an $\mathcal H_e$-module with basis
+$\{w^\rho\ell^mE(\varphi)\}$, $\rho\in\Lambda$, $m\ge0$. In particular
+$\mathcal U_e\ne0$ and $\mathcal H\subset\mathcal U_e$.
 \end{lemma}
 
 \begin{proof}
-The $w^\rho$ generate the group algebra of $\Omega_V/\Z$ over
-$\mathcal H_e$, the $E(\varphi)$ that of the additive group
-$w^{-1}\Omega_V[w^{-1}]$; both groups are torsion-free, so distinct monomials
-are independent, and $\ell$ is a polynomial variable.
+One cannot argue that $K/\Z$ is torsion-free; it is not, since it contains
+$\Q/\Z$, and the rational classes are exactly the ones $\nu_6$ counts. Instead
+use base change. The group algebra $\mathcal H_e[K]$ is free over
+$\mathcal H_e[\Z]=\mathcal H_e[t,t^{-1}]$ on any set $\Lambda$ of coset
+representatives, and $\mathcal U_e$ is obtained from it by the base change
+$\mathcal H_e[t,t^{-1}]\to\mathcal H_e$, $t\mapsto w$, a surjection with kernel
+$(t-w)$ generated by a nonzerodivisor. Base change of a free module is free on
+the image of the same basis. The crossed multiplication $w^\rho
+w^{\rho'}=w^nw^{\rho''}$ is well defined, and the derivation is consistent with
+the integer identification because $w^n$ sits at $e_z$-exponent $n/e$ and
+$\theta_w$ multiplies it by $n$. The factors $E(\varphi)$ form the group algebra
+of a torsion-free group and $\ell$ is a polynomial variable.
 \end{proof}
 
 \begin{lemma}[The turn]
 \label{lem:turn}
 There is a unique automorphism $\sigma$ of $\mathcal U_e$ with
 \[
-  \sigma(w)=e^{2\pi i/e}w,\qquad
-  \sigma(w^\rho)=\operatorname{Exp}_V(\rho/e)\,w^\rho,\qquad
-  \sigma(\ell)=\ell+\tfrac{2\pi i}{e},\qquad
+  \sigma(w)=e^{2\pi i/e}w,\quad
+  \sigma(w^\rho)=\operatorname{Exp}_V(\rho/e)\,w^\rho,\quad
+  \sigma(\ell)=\ell+\tfrac{2\pi i}{e},\quad
   \sigma\bigl(E(\varphi)\bigr)=E(\sigma\varphi),
 \]
-acting on $\mathcal H_e$ by multiplying the coefficient at
-$(\gamma,j/e)$ by $e^{2\pi ij/e}$. It fixes $\mathcal H$, hence $\mathcal C$,
-pointwise; it commutes with $\theta_w$; and on a regular-singular block with
-residue $R=R_s+R_n$, whose solution is $w^{R_s}e^{R_n\ell}$, the automorphism
-$\sigma^e$ acts by
-$\operatorname{Exp}_V(R_s)\exp(2\pi iR_n)=M_{\mathrm{RS},V}$, the operator of
-the draft's construction.
+acting on $\mathcal H_e$ by multiplying the coefficient at $(\gamma,j/e)$ by
+$e^{2\pi ij/e}$. It fixes $\mathcal H$, hence $\mathcal C$, pointwise, and
+commutes with $\theta_w$.
 \end{lemma}
 
 \begin{proof}
-The action on $\mathcal H_e$ multiplies coefficients by a character of the
-value group, hence is a ring automorphism, and it is the identity on
-$\mathcal H$ because there $j\in e\Z$. The two prescriptions agree on integral
-exponents: $\operatorname{Exp}_V(n/e)=e^{2\pi in/e}$ by (4.0a), since
-$n/e\in\Q$. Both $\sigma$ and $\theta_w$ are diagonal in the basis of
-Lemma~\ref{lem:structure}, and $\theta_w$ commutes with $\varphi\mapsto
-\sigma\varphi$, so they commute. The last claim is the computation
-$\sigma^e(w^{R_s})=\operatorname{Exp}_V(R_s)w^{R_s}$ and
-$\sigma^e(e^{R_n\ell})=e^{R_n\ell}\exp(2\pi iR_n)$.
+The action on $\mathcal H_e$ multiplies coefficients by a character of the value
+group, hence is a support-preserving ring automorphism, and is the identity on
+$\mathcal H$ because there $j\in e\Z$. Multiplicativity in $\rho$ is the
+homomorphism property of $\operatorname{Exp}_V$ on $(K,+)$, and the two
+prescriptions agree on integral exponents because
+$\operatorname{Exp}_V(n/e)=e^{2\pi in/e}$ by (4.0a). Commutation with
+$\theta_w$ is not a diagonality argument, since neither
+$\sigma(\ell)=\ell+2\pi i/e$ nor $\theta_w(\ell^m)=m\ell^{m-1}$ is diagonal; it
+is the direct check
+$\sigma\theta_w(\ell^m)=m(\ell+\tfrac{2\pi i}e)^{m-1}=\theta_w\sigma(\ell^m)$,
+together with the diagonal cases.
 \end{proof}
 
 \begin{lemma}[Constants]
 \label{lem:constants}
-$\mathcal U_e^{\theta_w=0}=\mathcal C$.
+Under the constant-coefficient hypothesis of
+Definition~\ref{def:solution-algebra}, $\mathcal U_e^{\theta_w=0}=\mathcal C$.
 \end{lemma}
 
 \begin{proof}
-Let $v$ denote the Hahn valuation of $\mathcal H_e$, with values in the
-lexicographically ordered group $\Gamma\oplus\frac1e\Z e_z$; it is additive,
-and $\theta_w$ does not enlarge supports, so
-$v(\theta_wc)\ge v(c)$.
+Let $v$ be the Hahn valuation of $\mathcal H_e$, additive because the
+coefficient field is a field; $\theta_w$ multiplies coefficients by integers and
+never enlarges a support, so $v(\theta_wc)\ge v(c)$.
 
-Write $x=\sum c_{\rho,m,\varphi}\,w^\rho\ell^mE(\varphi)$ in the basis of
-Lemma~\ref{lem:structure} and suppose $\theta_wx=0$. Since
-$\theta_w(E(\varphi))=\theta_w(\varphi)E(\varphi)$, the equation splits over
-$\varphi$.
+Write $x=\sum c_{\rho,m,\varphi}w^\rho\ell^mE(\varphi)$ in the basis of
+Lemma~\ref{lem:structure} with $\theta_wx=0$; the equation splits over
+$\varphi$. For $\varphi\ne0$, let $M$ be the top $\ell$-degree in that block;
+for each $\rho$,
+$\theta_w(c_{\rho,M})+\rho c_{\rho,M}+\theta_w(\varphi)c_{\rho,M}=0$. Every
+monomial of $\theta_w(\varphi)$ has $\Gamma$-part $0$ and strictly negative
+$e_z$-part, so $v(\theta_w(\varphi)c)<v(c)\le v(\theta_wc+\rho c)$ for $c\ne0$
+and the lowest term cannot cancel; hence $c_{\rho,M}=0$, and descending in $M$
+kills the block.
 
-Fix $\varphi\ne0$ and let $M$ be the top $\ell$-degree in that block. For each
-$\rho$,
-\[
-  \theta_w(c_{\rho,M})+\rho\,c_{\rho,M}+\theta_w(\varphi)c_{\rho,M}=0 .
-\]
-Now $\theta_w(\varphi)\ne0$ and every monomial of $\theta_w(\varphi)$ has
-$\Gamma$-part $0$ and strictly negative $e_z$-part, so
-$v(\theta_w(\varphi)c)<v(c)\le v(\theta_w(c)+\rho c)$ for $c\ne0$; the lowest
-term cannot cancel, so $c_{\rho,M}=0$. Descending in $M$ kills the block.
-
-For $\varphi=0$ and $\rho\in\Lambda$, the coefficient equations are
-$\theta_w(c_{\rho,m})+\rho\,c_{\rho,m}+(m+1)c_{\rho,m+1}=0$. On monomials
-$\theta_w$ acts by the integer $j$ attached to the $e_z$-exponent $j/e$, so
-$\theta_w(c)+\rho c=0$ forces $c=0$ unless $\rho\in\Z$, that is unless
-$\rho=0$. For $\rho=0$: the top-degree coefficient $c_{0,M}$ is
-$\theta_w$-constant, and the next equation gives $Mc_{0,M}=-\theta_w(c_{0,M-1})$,
-whose right side has zero component in $e_z$-degree $0$; comparing that
-component gives $c_{0,M}=0$ for $M\ge1$. So only $\rho=0$, $m=0$,
-$\varphi=0$ survives, with $\theta_w$-constant coefficient, and the
-$\theta_w$-constants of $\mathcal H_e$ are those supported in $e_z$-degree
-zero, namely $\mathcal C$.
+For $\varphi=0$ the coefficient equations are
+$\theta_w(c_{\rho,m})+\rho c_{\rho,m}+(m+1)c_{\rho,m+1}=0$. Descending in $m$:
+the top-degree coefficient satisfies the homogeneous equation
+$\theta_w(c)+\rho c=0$, and on each monomial this reads $(j+\rho)c=0$ with
+$j\in\Z$, so $c=0$ unless $\rho\in\Z$, that is unless $\rho=0$. For $\rho=0$ the
+top coefficient is $\theta_w$-constant and the next equation gives
+$Mc_{0,M}=-\theta_w(c_{0,M-1})$, whose right side has zero component in
+$e_z$-degree $0$; comparing that component gives $c_{0,M}=0$ for $M\ge1$. What
+survives is $\rho=0$, $m=0$, $\varphi=0$ with $\theta_w$-constant coefficient,
+and the $\theta_w$-constants of $\mathcal H_e$ are those supported in
+$e_z$-degree zero, namely $\mathcal C$.
 \end{proof}
+
+\begin{remark}[The constant-coefficient hypothesis is necessary, and fails in
+the application]
+\label{rem:constants-fails}
+Allow $\varphi$ a Novikov coefficient of positive weight, $\varphi=x^\gamma
+w^{-1}$ with $\gamma\in\Gamma$, $\gamma>0$ --- the shape of every exponential
+factor the draft actually meets, since the eigenvalues $\lambda$ of $c_1\star$
+have positive Novikov weight. Then $v(\theta_w\varphi)>0$ in the
+coefficient-dominant order and the domination argument reverses. Worse, the
+equation $\theta_w(c)=\theta_w(\varphi)c$ is solved by
+\[
+  c=\sum_{n\ge0}\frac{(-1)^n}{n!}\,x^{n\gamma}w^{-n},
+\]
+whose support $\{(n\gamma,-n/e)\}_{n\ge0}$ is increasing, hence well ordered, so
+$c\in\mathcal H_e$ and $cE(\varphi)$ is a $\theta_w$-constant outside
+$\mathcal C$. Lemma~\ref{lem:constants} is therefore false in that regime, and
+with it Proposition~\ref{prop:framed-is-turn}. The structural reason is worth
+stating on its own: \emph{in the draft's coefficient-dominant order,
+$\exp(-\lambda/z)$ is already a unit of the coefficient field}, so adjoining
+$E(\varphi)$ as a free symbol duplicates an existing element and inflates the
+constants. In that order the exponential factors are not symbols at all, and the
+entire irregularity of the formal solution sits in its divergent unit part,
+which is exactly where the rate comparison of Section~\ref{sec:receiver} lives.
+\end{remark}
 
 \subsection*{Framed operators and transport}
 
-Let $D$ be a differential module over $\mathcal H$, free of rank $n$, with
-connection matrix $\Omega$, so that $\nabla=\theta+\Omega$. A
-\emph{fundamental solution matrix} is $Y\in\mathrm{GL}_n(\mathcal U_e)$ with
-$\theta Y=-\Omega Y$; Levelt--Turrittin supplies one, after a suitable $e$, for
-every module over $\Omega_V(\!(z)\!)$, and this is the algebra the draft's
-phrase ``in the universal formal solution algebra'' refers to.
-
 \begin{proposition}[The framed operator is the matrix of the turn]
 \label{prop:framed-is-turn}
-Let $Y$ be a fundamental solution matrix for $D$. Then
-\[
-  \operatorname{Sol}(D)
-  =\{v\in\mathcal U_e^{\,n}:\theta v+\Omega v=0\}
-  =Y\mathcal C^{\,n},
-\]
-free of rank $n$ over $\mathcal C$ and stable under $\sigma$. The matrix $M$
-defined by $\sigma(Y)=YM$ lies in $\mathrm{GL}_n(\mathcal C)$, and replacing
-$Y$ by another fundamental solution matrix replaces $M$ by a
-$\mathrm{GL}_n(\mathcal C)$-conjugate. For $D$ over $\Omega_V(\!(z)\!)$ in
-Levelt--Turrittin form, $M$ is the framed operator $M_{\mathrm f,V}(D)$ of the
-draft's construction.
+Let $D$ be a differential module over $\mathcal H$, free of rank $n$, with
+connection matrix $\Omega$, and let $Y\in\mathrm{GL}_n(\mathcal U_e)$ satisfy
+$\theta Y=-\Omega Y$. Then
+$\operatorname{Sol}(D)=\{v:\theta v+\Omega v=0\}=Y\mathcal C^{\,n}$, free of
+rank $n$ and $\sigma$-stable; the matrix $M$ with $\sigma(Y)=YM$ lies in
+$\mathrm{GL}_n(\mathcal C)$ and is well defined up to
+$\mathrm{GL}_n(\mathcal C)$-conjugacy. For $D$ over $\Omega_V(\!(z)\!)$ in
+Levelt--Turrittin form, $M$ is the draft's framed operator: in a solution basis
+adapted to one deck orbit of length $d$ the matrix of $\sigma$ is block-cyclic
+with the draft's intertwiners $A_i$ as blocks, and the cyclic-block determinant
+gives $\chi(X)=\det(X^dI-U)$ with $U=A_{d-1}\cdots A_0$, which is (4.0b).
 \end{proposition}
 
 \begin{proof}
-From $\theta(Y^{-1})=Y^{-1}\Omega$ one gets
-$\theta(Y^{-1}v)=Y^{-1}(\theta v+\Omega v)$, so $v$ is horizontal exactly when
-$Y^{-1}v$ has $\theta_w$-constant entries, and Lemma~\ref{lem:constants}
-identifies those with $\mathcal C$. Since $\sigma$ commutes with $\theta$ and
-fixes $\Omega$, whose entries lie in $\mathcal H$, it preserves
-$\operatorname{Sol}(D)$; hence $M=Y^{-1}\sigma(Y)$ has entries in
-$\mathcal C$, and it is invertible with inverse $Y^{-1}\sigma(Y^{-1})^{-1}$.
-Two fundamental solution matrices differ by right multiplication by an element
-of $\mathrm{GL}_n(\mathcal C)$, which conjugates $M$. The last sentence is the
-definition: the draft's operator is by construction the action of the lifted
-turn on the Levelt--Turrittin solution basis.
+From $\theta(Y^{-1})=Y^{-1}\Omega$ one gets $\theta(Y^{-1}v)=Y^{-1}(\theta
+v+\Omega v)$, so horizontality of $v$ means $Y^{-1}v$ has $\theta_w$-constant
+entries, and Lemma~\ref{lem:constants} identifies those with $\mathcal C$. Since
+$\sigma$ commutes with $\theta$ and fixes $\Omega$, it preserves
+$\operatorname{Sol}(D)$; so $M=Y^{-1}\sigma(Y)$ has entries in $\mathcal C$ and
+is invertible, being a product of invertibles, with inverse
+$\sigma(Y^{-1})Y$. Two solution matrices differ on the right by an element of
+$\mathrm{GL}_n(\mathcal C)$, which conjugates $M$.
 \end{proof}
 
 \begin{theorem}[Frame transport]
 \label{thm:transport}
-Let $D,D'$ be differential modules over $\mathcal H$, free of rank $n$, with
-connection matrices $\Omega,\Omega'$ and fundamental solution matrices
-$Y,Y'\in\mathrm{GL}_n(\mathcal U_e)$. Suppose $G\in\mathrm{GL}_n(\mathcal H)$
-carries $D$ to $D'$:
+Let $D,D'$ be as in Proposition~\ref{prop:framed-is-turn}, with solution
+matrices $Y,Y'$, and let $G\in\mathrm{GL}_n(\mathcal H)$ satisfy
+$\Omega'=G\Omega G^{-1}-\theta(G)G^{-1}$. Then $GY$ is a solution matrix for
+$D'$ and $\sigma(GY)=(GY)M$. Consequently
 \[
-  \Omega'=G\Omega G^{-1}-\theta(G)G^{-1}.
-\]
-Then $GY$ is a fundamental solution matrix for $D'$ and
-$\sigma(GY)=(GY)M$, where $\sigma(Y)=YM$. Consequently
-\[
-  M_{\mathrm f,V}(D')=C\,M_{\mathrm f,V}(D)\,C^{-1}
-  \qquad\text{for some }C\in\mathrm{GL}_n(\mathcal C),
+  M_{\mathrm f,V}(D')=C_0^{-1}M_{\mathrm f,V}(D)\,C_0
+  \qquad\text{for some }C_0\in\mathrm{GL}_n(\mathcal C),
 \]
 so the two framed operators have the same characteristic polynomial in
-$\mathcal C[X]$ and the same multiplicity at every root of unity. Moreover
-$GM_{\mathrm f,V}(D)G^{-1}$ is the matrix of the framed turn of $D'$ in the
-transported frame $GY$.
+$\mathcal C[X]$ and the same multiplicity at every root of unity.
 \end{theorem}
 
 \begin{proof}
-$\theta(GY)=\theta(G)Y-G\Omega Y=-\Omega'(GY)$, using the displayed relation.
-Since $\sigma$ fixes $\mathcal H$ pointwise, $\sigma(G)=G$, so
-$\sigma(GY)=G\sigma(Y)=GYM$. Comparing $GY$ with $Y'$ through
-Proposition~\ref{prop:framed-is-turn} gives $Y'=(GY)C_0$ with
-$C_0\in\mathrm{GL}_n(\mathcal C)$, whence $M'=C_0^{-1}MC_0$. The final claim
-is the identity $\sigma(GY)=(GY)M$ read in the frame $GY$, whose matrix in the
-original frame of $D'$ is $GMG^{-1}$.
+$\theta(GY)=\theta(G)Y-G\Omega Y=-\Omega'(GY)$. Since $\sigma$ fixes
+$\mathcal H$ pointwise, $\sigma(G)=G$, so $\sigma(GY)=G\sigma(Y)=GYM$. Writing
+$Y'=(GY)C_0$ with $C_0\in\mathrm{GL}_n(\mathcal C)$ gives $M'=C_0^{-1}MC_0$.
 \end{proof}
 
-\begin{remark}[The hypothesis is exactly ``no root of $z$, no symbol'']
-Because $\sigma$ fixes $\mathcal H$ pointwise, the invariance $\sigma(G)=G$ is
-automatic once $G$ has entries in $\mathcal H$; the whole content of the
-hypothesis is that $G$ lies in $\mathcal H$ rather than in $\mathcal U_e$. No
-hypothesis-free statement is available: $Y$ itself is a gauge over
-$\mathcal U_e$ carrying $D$ to the trivial module, whose framed operator is
-the identity. The rank-one case shows what survives. If $g\in\mathcal H^\times$
-and $\theta(g)/g=\delta\in\Omega_V$, comparing coefficients gives
-$(k-\delta)g_{(\gamma,k)}=0$ for every monomial, so $\delta\in\Z$ and
-$g$ is a constant times $z^{\delta}$. A gauge over $\mathcal H$ shifts residues
-only by integers, and $\operatorname{Exp}_V$ kills those. This is the precise
-sense in which ``integral powers of $z$'' is the right hypothesis, and it is
-what the draft's one-sentence proof was gesturing at.
+\begin{remark}[Which object is $M_{\mathrm f,V}$]
+The framed operator is an automorphism of the horizontal module; its matrix
+depends on a choice of \emph{solution} frame and is well defined up to
+conjugacy over the constants. The conjugate $GM G^{-1}$ appearing in the draft's
+(4.1c) is not the matrix of the turn in any solution frame --- $Y'$ differs from
+$GY$ by a constant matrix, not by $G$ --- but the matrix of the transported
+automorphism read in the \emph{module} frame of $D'$. Both readings are
+legitimate, and they give the same characteristic polynomial, but the draft
+should say which it means, since conflating them is exactly the step at issue.
 \end{remark}
 
-So the lemma the referee asked for is true and short. The difficulty is
-elsewhere.
+\begin{remark}[The hypothesis on $G$ is the whole content]
+Since $\sigma$ fixes $\mathcal H$ pointwise, $\sigma(G)=G$ is automatic once $G$
+has entries in $\mathcal H$; what matters is that $G$ lies in $\mathcal H$ and
+not in $\mathcal U_e$. No hypothesis-free statement exists: $Y$ itself is a
+gauge over $\mathcal U_e$ carrying $D$ to the trivial module, whose framed
+operator is the identity. The rank-one case shows what survives: if
+$g\in\mathcal H^\times$ and $\theta(g)/g=\delta$, then each monomial gives
+$(k-\delta)g_{(\gamma,k)}=0$, so $\delta\in\Z$; a gauge over $\mathcal H$ shifts
+residues only by integers, which $\operatorname{Exp}_V$ kills.
+\end{remark}
 
-\section{The receiver cannot be that field}
-\label{sec:obstruction}
+\subsection*{The scissors: these hypotheses have no common instance in the
+application}
+\label{sec:scissors}
 
-Theorem~\ref{thm:transport} needs one ring containing both the comparison gauge
-and the two modules' formal solutions. The draft's receiver, built in the proof
-of Proposition~4.7, is
+Theorem~\ref{thm:transport} is true, and in the application it is empty. Its two
+hypotheses pull in opposite directions.
+
+\begin{itemize}
+\item If $\Gamma=0$, so $\mathcal H=\Omega_V(\!(z)\!)$, then Levelt--Turrittin
+  supplies solution matrices, but the pro-Laurent comparison gauge has
+  unbounded negative $z$-order and is not in $\mathrm{GL}_n(\mathcal H)$.
+\item If $\Gamma\ne0$ with the draft's coefficient-dominant order, the gauge
+  lies in $\mathcal H$, but $\mathcal H$ is not a formal Laurent series field
+  over its constants and Levelt--Turrittin is unavailable. Concretely, the
+  $e_z$-component of the Hahn valuation is not a valuation on $\mathcal H$:
+  for $f=x^{(0,0)}+x^{(1,-100)}$ and $g=-x^{(0,0)}$ its values on $f$ and $g$
+  are $0$ while its value on $f+g$ is $-100$. So there is no Newton polygon, no
+  slope filtration and no Turrittin algorithm. Nor can one descend to the
+  bounded-$z$-order elements: $f=1-zx^{-\gamma}$ has inverse
+  $-\sum_{k\ge1}z^{-k}x^{k\gamma}$, so they do not form a field.
+\end{itemize}
+
+An abstract Picard--Vessiot ring for a module over $\mathcal H$ does exist, with
+constants $\mathcal C$ after passing to the divisible hull. So the missing
+ingredient is \emph{not} a solution algebra. It is a canonical Levelt--Turrittin
+normal form over $\mathcal H$, singling out which element of the differential
+Galois group deserves to be called the turn. That is the precise shape of the
+remaining problem, and it also shows why a purely valuation-theoretic argument
+cannot supply it.
+
+\section{The receiver}
+\label{sec:receiver}
+
+The draft's receiver, in the proof of Proposition~4.7, is
 \[
   \mathscr R_j=\Omega_{V,j}\otimes_{H_{0,j}}H_{\mathrm{tot},j},
   \qquad
-  H_{\mathrm{tot},j}=\C(\!(\Gamma^{\mathrm{coeff}}_j\oplus\Z e_z)\!) .
+  H_{\mathrm{tot},j}=\C(\!(\Gamma^{\mathrm{coeff}}_j\oplus\Z e_z)\!).
   \tag{4.4c}
 \]
-It is not such a ring, for three independent reasons.
 
-\paragraph{Finite tensors.} An element of $\mathscr R_j$ is a \emph{finite}
-sum $\sum b_\lambda\otimes h_\lambda$. A Levelt--Turrittin gauge is a series
-$\sum_jP_jw^j$ whose coefficients $P_j$ span an infinite-dimensional
-$H_{0,j}$-subspace of $\Omega_{V,j}$ in general. Such a series is not in
-$\mathscr R_j$, and adjoining formal symbols to $\mathscr R_j$ does not add it.
+\subsection*{Why the tensor product cannot simply be dissolved}
 
-\paragraph{The obvious enlargement is not well defined.} One would like to map
-$\mathscr R_j$ into the Hahn field
-$\Omega_{V,j}(\!(\Gamma_j^{\mathrm{coeff}}\oplus\Z e_z)\!)$ by
-$a\otimes h\mapsto a\cdot h$. This is not well defined. The tensor product over
-$H_{0,j}$ exists precisely to identify two copies of $H_{0,j}$: one sitting
-inside $\Omega_{V,j}$ as coefficients, one inside $H_{\mathrm{tot},j}$ as
-monomial series. In the Hahn field those two copies are different elements, so
-the map does not respect the relation $ah_0\otimes h=a\otimes h_0h$. The
-tensor product is doing real work and cannot be dissolved by hand.
+The map $a\otimes h\mapsto a\cdot h$ into the Hahn field with $\Omega_{V,j}$
+coefficients is not well defined: the copy of $H_{0,j}$ inside $\Omega_{V,j}$
+consists of degree-zero constants, the copy inside $H_{\mathrm{tot},j}$ of
+monomial series, and the tensor product exists precisely to identify them. Nor
+can the two copies be assigned different jobs, with module coefficients read as
+constants and gauge bookkeeping as monomials: the gauge relation
+$\Omega'=G\Omega G^{-1}-\theta(G)G^{-1}$ ties $G$ and $\Omega$ through the same
+Novikov variables, so one copy is forced. With the constants reading the gauge
+leaves the field; with the monomial reading the exponential factors become
+$\Gamma$-supported and Remark~\ref{rem:constants-fails} applies.
 
-\paragraph{No single Hahn field holds both families.} Order the value group
-with the coefficient degree dominant, as the draft does. Then a pro-Laurent
-element is legitimate: its $z$-order runs to $-\infty$ while its coefficient
-degree grows, so its support is well ordered. But a formal solution whose
-coefficient degrees run to $-\infty$ at fixed $z$-power is not. Order it with
-$e_z$ dominant and the two verdicts swap. The two objects are well ordered for
-opposite reasons.
+Two things should also be said about $\mathscr R_j$ itself. It is a tensor
+product of two field extensions and need not be a domain, and the draft reads
+characteristic polynomials and algebraic multiplicities in $\mathscr R_j[X]$;
+that deserves an explicit remark, which the draft partly gives by proving each
+factor injects.
 
-\subsection*{The exact criterion}
+\subsection*{A better receiver}
 
-A mixed order is the remaining possibility, and it turns the obstruction into
-one inequality. Weight a monomial of coefficient degree $d$ and $z$-power $k$
-by $a\,d+b\,k$ with $a,b>0$.
+Extend the $\Gamma$-valuation of $H_{0,j}$ to its algebraic closure and then to
+$\Omega_{V,j}$, and take the field of series $\sum_kc_kz^k$ with
+$c_k\in\Omega_{V,j}$ whose support $\{(v_\Omega(c_k),k)\}$ is well ordered in
+the chosen order. This has a single copy of the coefficients, is a field rather
+than a tensor product of two fields, hosts the pro-Laurent gauge, and hosts the
+exponential factors as honest units. It is strictly better than (4.4c). It does
+not by itself supply Levelt--Turrittin, and it does not remove the rate
+criterion below.
+
+\subsection*{The two rates}
+
+Weight a monomial of coefficient weight $d$ and $z$-power $k$ by $a\,d+b\,k$,
+$a,b>0$, and let $\varepsilon$ be the minimal weight of a generator of $J_j$.
 
 \begin{itemize}
 \item \emph{Pro-Laurent gauges gain one filtration unit per unit of $z$-pole.}
-  The recursion (4.1a) in the proof of Lemma~4.5 gives the bulk-degree-$m$
-  coefficient $z$-order at least $-m$ and places it in $F^m$. Its weight grows
-  like $m(a-b)$, so these are well ordered exactly when $a>b$.
+  By the recursion (4.1a) and the draft's own conclusion, $G_\alpha$ has no
+  power of $z$ below $-|\alpha|$ and a term of bulk degree $m$ lies in $F^mB$;
+  every monomial of $J_j^N$ has weight at least $N$. Their weights grow like
+  $m(a-b)$, which together with the draft's finite-below argument gives well
+  ordered support when $a>b$.
 \item \emph{Splitting gauges lose $w(\Delta\lambda)$ per unit of $z$-power.}
-  The formal decomposition divides once per order by differences of eigenvalues
-  of the leading matrix $c_1\star$: writing $P=\sum_kP_kz^k$, the
-  splitting equation at order $k$ is $[A_0,P_k]=R_k$ with $R_k$ built from
-  earlier data. Hence $P_k$ has weight at least $-kC$ with
-  $C=w(\Delta\lambda)$, and the weights grow like $k(b-aC)$, well ordered
-  exactly when $b>aC$. Inside a block the regular-singular normalization
-  divides only by residue differences offset by integers, which are nonzero
-  constants and cost nothing.
+  This is the draft's own construction (4.9d): at order $n$ the block
+  off-diagonal coefficient is removed by a Sylvester equation $[K_0,A_n]=B_n$
+  with $K_0$ the leading matrix, so one division by an eigenvalue difference per
+  order, and $w(A_n)\ge-n\,w(\Delta\lambda)$. The draft's displayed cubic entry
+  $-14/(81r^2)$ at $z$-order two exhibits the rate: one factor of $r^{-1}$ per
+  unit of $z$-power. Three caveats. After a ramification $z=w^e$ the divisions
+  occur once per $w$-order, so the loss is $e\,w(\Delta\lambda)$ per unit of
+  $z$-power; at the cubic the draft proves the exponential blocks are
+  unramified in $z$, so $e=1$ there. The claim that the regular-singular
+  normalization costs nothing needs the homogeneity argument that residue
+  eigenvalues are rational, verified in the cubic block where
+  $\det L_s=(s+1/6)(s+5/6)$. And $w(\Delta\lambda)$ is not controlled by
+  $w(\lambda)$ when the Picard rank exceeds one, since $w$ and the quantum
+  grading are different functionals and leading terms can cancel.
 \end{itemize}
 
-Both hold together iff $C<1$, measured in units of the minimal weight
-$\varepsilon$ of a generator of $J_j$; that is, iff
+Both conditions hold together iff
 \[
-  \boxed{\ w(\Delta\lambda)<\varepsilon\ }
+  \boxed{\ e\,w(\Delta\lambda)<\varepsilon\ }
 \]
-\emph{The ratio is scale-invariant}: rescaling the weight function $w$ moves
-the pro-Laurent gain and the splitting loss by the same factor, so the choice
-of the integer $L$ in the draft's separation argument is not a free parameter
-here.
 
-\subsection*{What the criterion depends on}
+\subsection*{The criterion is not an artifact of choosing an order}
 
-The eigenvalues of $c_1\star$ are homogeneous of quantum degree one, where
-$Q^d$ has degree $c_1\cdot d$. When the relevant eigenvalue is a root of a
-monomial, $\lambda^{c_1\cdot d_0}\sim Q^{d_0}$, the criterion reads
+For $C:=e\,w(\Delta\lambda)/\varepsilon\ge1$ the obstruction is not about well
+ordering at all. The $z^n$-coefficient of the single product $GP$ of a
+pro-Laurent gauge with a splitting gauge is $\sum_mg_mp_{n+m}$, whose terms have
+weight at least $m(1-C)-nC$; for $C\ge1$ infinitely many terms have bounded
+weight, so that coefficient is an infinite sum in no completion, ordered or not.
+Any repair that forms this product must therefore establish $C<1$. A repair that
+never forms it --- see route~2 below --- is not bound by this.
+
+\subsection*{The criterion depends on a normalization the draft may choose}
+
+This is the practical point, and it reverses the recommendation of the first
+version of this memo. The draft fixes $w(u)=1$ and $w(s_{j,\ell})=1$
+independently of $L$, and sets
+$w(Q^{i_*d}u^{\rho_C\cdot d})=L(H\cdot i_*d)+\rho_C\cdot d$. Hence
+$\varepsilon=1$ always, while the weights of the Novikov generators grow
+linearly in $L$. The criterion is therefore
 \[
-  w(Q^{d_0})<\varepsilon\cdot(c_1\cdot d_0).
+  e\bigl(L(H\cdot i_*d_0)+\rho_C\cdot d_0\bigr)<c_1\cdot d_0,
 \]
-Since $Q^{d_0}$ is itself among the generators of $J_j$, one has
-$w(Q^{d_0})\ge\varepsilon$, so the criterion is a Fano-index condition:
+using that the eigenvalues of $c_1\star$ are homogeneous of quantum degree one
+when $Q^d$ has degree $c_1\cdot d$ --- a convention I have checked against the
+draft's own low-dimensional vanishing proof, where the $Q^\beta$-component of
+$c_1\star$ maps $H^i$ to $H^{i+2-2c_1\cdot\beta}$, and against its explicit
+cubic block, where $K_0$ has eigenvalues $\pm6r$, $0$, $0$ with $r=(3q)^{1/2}$
+and $c_1\cdot\ell=2$. Consequences:
 
 \begin{itemize}
-\item \textbf{It holds at the cubic endpoint.} There $c_1=2H$ and the
-  exponential factors are governed by $\lambda\sim q^{1/2}$, a square root of a
-  Novikov generator, so $w(\Delta\lambda)=\varepsilon/2$. This is consistent
-  with the draft's own finding that the two rank-one exponential blocks of the
-  cubic are unramified in $z$, the square root being a coefficient extension.
-\item \textbf{It fails as soon as $c_1\cdot d_0=1$}, since then the criterion
-  demands $w(Q^{d_0})<\varepsilon$. Proposition~4.7 quantifies over arbitrary
-  smooth centers arising in a weak factorization, and nothing in that
-  hypothesis excludes index one.
-\item \textbf{A center whose small connection is regular singular costs
-  nothing}, $C=0$: no splitting divisions occur.
+\item Under the draft's instruction to choose $L$ ``so large that'' separation
+  holds, the criterion fails at essentially every comparison with two distinct
+  exponential factors --- including the cubic endpoint.
+\item Under the smallest admissible $L$ it can hold. For a projective bundle
+  with $c_1(V)\cdot\ell=0$ one may take $L=1$, giving $w(Q^\ell)=1=\varepsilon$
+  and $w(\Delta\lambda)=w(q^{1/2})=1/2$.
+\item Independently of $L$: separation forces $w\ge\varepsilon$ on every
+  generator of $J_j$, and the image of $Q^{d_0}$ is a generator, so
+  $c_1\cdot d_0\ge2$ is necessary under any admissible weight. Index one fails
+  outright.
 \end{itemize}
 
-So the gap is confined to centers whose small even connection has at least two
-distinct exponential factors separated by an eigenvalue difference of low
-fractional index. That is smaller than ``all centers'', and it is not empty.
+So the cheapest available repair is to choose the separating weight minimally
+rather than large, and to check the resulting inequality case by case. The first
+version of this memo asserted the opposite, on the false ground that the ratio
+was scale-invariant; rescaling $w$ does move both rates equally, but $L$ is not
+a rescaling, because the bulk generators' weights are pinned at one.
 
-\subsection*{The levelwise route fails for the same reason}
-
-It is natural to retreat to finite level, where $(B_j/F^NB_j)(\!(z)\!)$ is an
-honest Laurent series ring hosting both a bounded-order gauge and a solution
-algebra with no support conditions at all, and then to pass to the limit of
-characteristic polynomials rather than of solution algebras. This does not
-work. The splitting needs $\Delta\lambda$ invertible, and $\Delta\lambda$ lies
-in $J_j$, hence is nilpotent at every finite level. It would also place framed
-monodromy over the nonfield quotients, which the draft deliberately removed.
-
-\section{Three routes, and what each must prove}
+\section{Three routes}
 
 \begin{enumerate}
-\item \textbf{Mixed-order receiver plus a criterion.} Replace (4.4c) by the
-  mixed-order Hahn receiver and prove $w(\Delta\lambda)<\varepsilon$ for the
-  centers the theorem actually uses. The most promising form of this is to
-  show that the centers surviving the draft's own low-dimensional analysis
-  contribute either no distinct exponential factors or a high enough index.
-\item \textbf{A solution-free transport theorem.} Prove that the
-  Levelt--Turrittin data of a module over a field --- exponential factors,
-  residues modulo $\Z$, deck permutation --- are determined by the module
-  after base change along a $z$-integral isomorphism over $\mathscr R_j$,
-  by a slope and valuation argument rather than by comparing solutions. The
-  obstacle to check first: $\mathscr R_j$ is not a domain, being a tensor
-  product of two fields, so the $e_z$-component of the Hahn valuation, which
-  is additive on $H_{\mathrm{tot},j}$, must be shown to behave on the tensor
-  product.
-\item \textbf{Restrict the proposition.} State Proposition~4.7 for centers
-  satisfying the criterion, and check that the weak factorization used in the
-  main theorem can be run inside that class. This changes the shape of the
-  result and is the author's call, not a referee's.
+\item \textbf{Normalize, then verify.} Replace ``choose $L$ so large'' by the
+  smallest weight satisfying separation, adopt the single-copy receiver above,
+  and verify $e\,w(\Delta\lambda)<\varepsilon$ for the comparisons the theorem
+  uses. This keeps the architecture and is the first thing to try.
+\item \textbf{A transport theorem that never forms $GP$.} Prove that the
+  cyclotomic framed monodromy is functorial under a connection isomorphism whose
+  gauge lies in the pro-Laurent completion with integral $z$-powers, arguing
+  graded piece by graded piece rather than by comparing complete solutions. The
+  rank-one case is exactly this argument. What such a route must supply, by the
+  scissors above, is a canonical normal form over the receiver singling out the
+  turn; it cannot be a pure valuation argument.
+\item \textbf{Restrict the proposition} to centers satisfying the criterion, and
+  check that weak factorization stays inside that class. This changes the shape
+  of the result and is the author's decision.
 \end{enumerate}
 
 \section{Placement in the manuscript}
 \label{sec:placement}
 
-If the mathematics is settled, the edits are localized.
+Conditional on a receiver repair, and stated by label because these insertions
+renumber Section~4.
 
 \begin{enumerate}
-\item \textbf{The ground field and solution algebra} go immediately before the
-  sentence ``Apply Levelt--Turrittin after a ramification $z=w^e$'' on p.~14.
-  That sentence already speaks of ``the universal formal solution algebra''
-  without having constructed one, so this repairs a forward reference as well.
-\item \textbf{Lemma~\ref{lem:constants} and
-  Proposition~\ref{prop:framed-is-turn}} go directly after Definition~4.1,
-  where the framed operator has just been defined. They convert that
-  definition from a recipe into a characterization: $M_{\mathrm f,V}$ is the
-  matrix of the turn on the horizontal module.
-\item \textbf{Theorem~\ref{thm:transport}} becomes a new lemma, placed after
-  the paragraph beginning ``The frame matters'' on p.~15 and before
-  Definition~4.2. It must carry one semantic label,
-  \texttt{lem:frame-transport}.
-\item \textbf{Lemma~4.3} loses its final asserted sentence and the
-  corresponding sentence of its proof; both become a reference to the new
-  lemma.
-\item \textbf{Lemma~4.5}, at (4.1c), gains one sentence: by the new lemma,
-  $M^{\mathrm{bulk}}$ is the framed operator of the gauged module in the
-  transported frame, not merely a conjugate of the small one.
-\item \textbf{Proposition~4.7} cites the new lemma at its three load-bearing
-  steps --- the appeal to Theorem~5.18 of Iritani's blow-up paper, the center
-  summand conclusion, and the projective-bundle conclusion --- and must say
-  explicitly which field plays the role of $\mathcal H$ at each, together with
-  the criterion verified there.
+\item The ground field and solution algebra go immediately before ``Apply
+  Levelt--Turrittin after a ramification $z=w^e$'', which already refers to a
+  universal formal solution algebra that is never constructed.
+\item Lemma~\ref{lem:constants} and Proposition~\ref{prop:framed-is-turn} go
+  after \texttt{def:framed-sixth-multiplicity}, converting that definition into
+  a characterization, with Remark~\ref{rem:constants-fails} stating the
+  hypothesis that makes it available.
+\item Theorem~\ref{thm:transport} becomes \texttt{lem:frame-transport}, after
+  the paragraph beginning ``The frame matters'' and before
+  \texttt{def:pro-laurent-gauge-group}.
+\item In \texttt{lem:pv-base-change}, the asserted final clause and the
+  corresponding sentence of its proof become a reference to
+  \texttt{lem:frame-transport} --- but only once the receiver repair makes that
+  lemma applicable there, since that lemma lives over the pro-Laurent receiver.
+\item At (4.1c) in \texttt{lem:formal-base-shift}, one sentence identifying
+  $M^{\mathrm{bulk}}$ as the transported framed automorphism, in the module
+  frame, with the solution-frame statement cited.
+\item \texttt{prop:framed-operations} cites the lemma at its three load-bearing
+  steps and says which field plays the role of $\mathcal H$ at each, with the
+  criterion verified there.
+\item \texttt{lem:divisor-tagging} carries the same obstruction --- it embeds
+  the gauge of \texttt{lem:formal-base-shift}, whose negative $z$-order is
+  unbounded, together with every transported operator, into one ordered Hahn
+  field --- and needs whatever repair the receiver gets.
 \end{enumerate}
 
-Two mechanical consequences: a new theorem-like environment must carry exactly
-one semantic label and a matching row in the claim map consumed by the
-manuscript's source-only gate, and the coverage snapshot recorded in the two
-verification READMEs changes with it.
+Mechanically, a new theorem-like environment must carry exactly one semantic
+label and a matching row in the claim map consumed by the manuscript's
+source-only gate, with an empty declaration list exactly when its coverage is
+recorded as absent, and the coverage snapshot string in both verification
+READMEs must be regenerated.
 
-\section{Questions I would like answered}
+\section{Corrections to the first version of this memo}
+\label{sec:corrections}
+
+For readers of the first version, these are the substantive changes.
 
 \begin{enumerate}
-\item Is there a receiver that holds both families that we have missed ---
-  in particular, a completion of $\mathscr R_j$ in which the convolution
-  defining a product of a pro-Laurent gauge with a formal solution converges
-  for structural reasons rather than by a rate comparison?
-\item Is route~2 available? A transport theorem that never compares solutions
-  would make the receiver question moot.
-\item Failing both: is $w(\Delta\lambda)<\varepsilon$ automatic for the centers
-  that actually arise in a weak factorization between $X\times\PP^1$ and a
-  rational model, given the draft's own vanishing result for centers of
-  dimension at most two?
-\item Is the criterion the right invariant at all, or is it an artifact of
-  proving transport through an ordered receiver?
+\item The Constants Lemma was stated without the constant-coefficient
+  hypothesis and is false without it; see Remark~\ref{rem:constants-fails}. The
+  framed-operator characterization inherits the hypothesis.
+\item The scissors were only implicit. The transport theorem has no verified
+  instance in the application, and that now appears where the theorem does.
+\item The claim that the criterion is scale-invariant, and the inference that
+  the separating parameter $L$ cannot be tuned, were both wrong. Tuning $L$ down
+  is now the first proposed route.
+\item The cubic-endpoint bullet compared two different normalizations. Corrected
+  above.
+\item The finite-tensor objection to the receiver was wrong twice over: the
+  pro-Laurent gauge lies in the Hahn factor alone, and the splitting gauge's
+  coefficients lie in one finite extension of $H_{0,j}$. It is replaced by the
+  gauge-relation argument.
+\item The remark that a tensor product of two fields is not a domain was
+  asserted as a general principle, which is false. The correct statement is that
+  $\mathscr R_j$ need not be one.
+\item The obstruction is now given in its order-free form, which answers two of
+  the questions the first version left open: no completion helps, and the
+  criterion is not an artifact of the ordered receiver.
+\item Smaller repairs: the freeness proof (the relevant quotient group has
+  torsion), the commutation of $\sigma$ with the derivation, the inverse of $M$,
+  the range of the exponents, the ramification factor in the splitting rate, and
+  the divisor-tagging observation, which is new.
+\end{enumerate}
+
+\section{Questions}
+
+\begin{enumerate}
+\item Is route~1 enough --- does the smallest admissible weight satisfy the
+  criterion at every comparison the main theorem uses, once the Picard rank
+  caveat is taken into account?
+\item Is there a canonical normal form over the receiver singling out the turn,
+  which is what route~2 needs and what the existence of a Picard--Vessiot ring
+  does not give?
+\item Failing both, what is the right restriction on centers, and does weak
+  factorization stay inside it?
 \end{enumerate}
 
 \end{document}
