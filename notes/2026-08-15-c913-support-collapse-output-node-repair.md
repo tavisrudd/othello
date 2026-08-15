@@ -417,6 +417,42 @@ judgment on a part of the manuscript outside this repair sequence.
 
 `make check` passes at 47 pages, warning-free, tracked PDF current.
 
+## 9. Seventh batch: the third fresh round
+
+A third fresh referee read the scope cold at `46500c918`, with its effort deliberately weighted
+toward the passages earlier rounds had examined least (report:
+`2026-08-15-c913-cold-read-round5.md`). One required repair and ten optional improvements; every
+other statement it judged came back correct, and every openable citation supported its use.
+
+**The cutting proposition proved one thing and argued from another.** Its setup sentence builds the
+fixed graph stack by attaching the stable-map factors to the principal component along the two
+inertia evaluations — three factors. The proof of (a) then computed the cotangent triangle of a
+two-factor product `𝔉_- ×_I 𝔉_+`, which is Woodward's equation (57) grouping. Those groupings are
+not interchangeable here: in his (55)–(57) each `F^G_{n_±}` already carries half of the principal
+clutching datum, namely the cocharacter, so both factors move under a degree shift. Part (b) argues
+that the shift fixes all legs but one and that the square supplies the remaining quasi-isomorphism,
+which is true of the three-factor triangle and has no referent in the two-factor one. The proof now
+uses the three-factor presentation named in the statement, with the two inertia pullbacks appearing
+as such, and says why the (57) grouping is not the one to use. The main text's corresponding passage
+already read the three-factor way, which is corroborating evidence that the two-factor clause was the
+slip.
+
+Optional improvements taken: the limit morphism's target no longer collides with the graded piece
+fixed earlier; the virtual-normal Euler locator now says the display follows equation (59) and the
+normalization sits where (64) is introduced, rather than naming both equations; Example 9.15 is cited
+as the toric illustration of a statement whose general form is in the prose attached to (59), at both
+occurrences; the appendix opening says four expansions rather than three and no longer claims to add
+nothing, since it does fix one reading by convention; the main text's pointer goes to the import
+remark rather than to the section containing it; the two chart exponents are assigned to their
+charts; the affine-line illustration states the weight sign it assumes and what happens in the other
+case; and the rigidification clause uses one letter for the stabilizer order instead of two.
+
+Not taken, again: the `k` collision between affine degree and orbifold order. That is now the only
+finding to survive three consecutive rounds untouched, and it is a notation pass rather than a
+repair.
+
+`make check` passes at 48 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph

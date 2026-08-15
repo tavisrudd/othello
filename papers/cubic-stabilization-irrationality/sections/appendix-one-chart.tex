@@ -2,11 +2,14 @@
 \label{app:one-chart}
 
 This appendix expands the proof of Theorem~\ref{thm:tailwise-derived} at the
-three places where it is compressed: the affine verification of the derived
-equivalence, the \(2\)-commutative obstruction-theory square, and the
-\(\mu_k\)-equivariance and rigidification step.  The hypotheses, the statement,
-and the conclusions of that theorem are unchanged; what follows adds no new
-assumption and asserts nothing stronger.
+four places where it is compressed: the affine verification of the derived
+equivalence, the \(2\)-commutative obstruction-theory square, the
+\(\mu_k\)-equivariance and rigidification step, and the attached factors and
+cutting.  The hypotheses, the statement,
+and the conclusions of that theorem are unchanged, and nothing here is
+stronger than what that theorem asserts.  One reading is fixed rather than
+proved, in Convention~\ref{conv:app-obstruction-morphism}, because the source
+specifies a complex and not a morphism; no other assumption is added.
 
 One convention must be fixed before any comparison.  Woodward works with
 classical stacks carrying perfect obstruction theories in the sense of
@@ -89,8 +92,8 @@ two marked points \(0,\infty\) and the two affine charts
  P^\infty=\operatorname{Spec}\C[z'],\qquad z'=z^{-1},
 \]
 glued along the open orbit \(\Gm\subset P\).  Each chart carries the rotation
-action scaling its own coordinate.  We record an exponent \(a_\pm\in\mathbf Z\)
-in each chart's own coordinate, so that both extension conditions below are
+action scaling its own coordinate.  We record an exponent \(a_-\) on \(P^0\) and \(a_+\) on \(P^\infty\), each in
+that chart's own coordinate, so that both extension conditions below are
 conditions at the vanishing locus of the local coordinate; this matches the
 convention \(W_F^a=\{x\in W^{\mathrm{gen}}:\lim_{t\to0}t^ax\in F\}\) used in
 the proof of Theorem~\ref{thm:tailwise-derived}.
@@ -233,7 +236,7 @@ negative weight spaces, so \(\operatorname{Spec}A^a\) is the locus where
 \(\lim_{t\to0}t\cdot x\) exists; for \(a<0\) it is the locus where the opposite
 limit exists.  The subalgebra of positive-degree elements of \(A^a\) is an
 ideal, so the projection to the weight-zero part is a ring map and defines the
-limit morphism \(\operatorname{Spec}A^a\to\operatorname{Spec}A_0\) onto the
+limit morphism \(\operatorname{Spec}A^a\to\operatorname{Spec}(A^a)_0\) onto the
 fixed locus of the chart.  The preimage of a connected component \(F\) is open
 and closed in \(\operatorname{Spec}A^a\); intersecting with the open
 \(W^{\mathrm{gen}}\) imposes generic semistability.  This is the chartwise
@@ -398,9 +401,11 @@ invariant affine chart a graded module \(M=\bigoplus_wM_w\) of sections gives
 \((M\otimes_AR[z])^{\mathrm{rot}}=\bigoplus_{aw\leq0}(M_w\otimes_AR)\) and
 \((M\otimes_AR[z^{\pm1}])^{\mathrm{rot}}=\bigoplus_w(M_w\otimes_AR)\).  This
 nonpositive half is what the subscript in \(F^0_{\leq0}V\) and
-\(F^\infty_{\leq0}V\) records.  For \(W=\A^1\) with \(t\cdot y=t^ky\) and
+\(F^\infty_{\leq0}V\) records.  For \(W=\A^1\) with \(t\cdot y=t^ky\), \(k>0\) and
 \(a>0\), the attracting locus is all of \(\A^1\) and its tangent direction has
-weight \(-k\), which the displayed condition retains.  Taking
+weight \(-k\), which the displayed condition retains; for \(k<0\) the
+attracting locus is the origin and that direction is excluded, as it should
+be.  Taking
 \(M\) to be the module of sections of \(T([W/\Gm])\) identifies the invariants
 over the chart with the tangent complex of the attractor subscheme, which is
 the content of Bia{\l}ynicki--Birula's description of the attracting locus of a
@@ -669,9 +674,9 @@ Proposition~\ref{prop:app-descent} and the square of
 Proposition~\ref{prop:app-square} are of that form by (c).  The fibre products
 of \cite[equations~(54) and~(57)]{WoodwardQKIII} are taken over the
 \emph{rigidified} inertia stack.  The constructions above take place on the
-unrigidified cover and descend along the \(B\mu_r\)-gerbe by the previous
+unrigidified cover and descend along the \(B\mu_k\)-gerbe by the previous
 paragraph; passage between the two changes
-rational cohomology only by the factors of \(r\) on \(r\)-twisted sectors
+rational cohomology only by the factors of \(k\) on \(k\)-twisted sectors
 recorded in \cite[Example~4.3(f),(g)]{WoodwardQKII}, and those factors
 depend only on the order of the stabilizer, which is constant along a tail by
 (b).  The parametrized principal component has no domain automorphisms; the
@@ -690,8 +695,9 @@ Let \(\mathfrak F\) be the fixed graph stack obtained from
 as a derived fibre product.  Then:
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item the relative cotangent complex of \(\mathfrak F\) fits in the exact
-triangle whose outer terms are the direct sum of the factor obstruction
-theories and the pullback of the cotangent complex of the inertia stack;
+triangle whose outer terms are the direct sum of the three factor obstruction
+theories and the pullback of the cotangent complex of the inertia stack at
+each of the two evaluations;
 \item the identification of Proposition~\ref{prop:app-square} is the identity
 on the stable-map and inertia terms, hence induces an isomorphism of these
 triangles;
@@ -705,30 +711,43 @@ morphisms of stacks over \(\C\); the coefficient ring enters only through the
 localization coefficients, so the identifications commute with the reduction
 maps between finite Artin levels.
 \end{enumerate}
-For the irreducible unstable convention there is no stable-map factor: by
-\cite[Example~9.15]{WoodwardQKIII} the domain is irreducible and the normal
-complex is the moving index alone, so the node and attaching factors of
+For the irreducible unstable convention there is no stable-map factor: the
+domain is irreducible and the normal
+complex is the moving index alone, as the prose attached to
+\cite[equation~(59)]{WoodwardQKIII} states in general and
+\cite[Example~9.15]{WoodwardQKIII} illustrates for toric quotients, so the node and attaching factors of
 \eqref{eq:virtual-normal-euler} are absent and the square of
 Proposition~\ref{prop:app-square} applies with no gluing term.
 \end{proposition}
 
 \begin{proof}
-(a) is the cotangent triangle of a derived fibre product, applied to
-\(\mathfrak F=\mathfrak F_-\times^{\mathbf R}_{I}\mathfrak F_+\) with \(I\) the
-inertia stack of the quotient: the triangle reads
-\(\operatorname{ev}^*L_I\to L_{\mathfrak F_-}\oplus L_{\mathfrak F_+}\to
-L_{\mathfrak F}\) after pullback to \(\mathfrak F\).  This is the derived form
+(a) is the cotangent triangle of an iterated derived fibre product, applied to
+the presentation
+\(\mathfrak F=\mathfrak M_-\times^{\mathbf R}_{I}
+\mathfrak S_{a_-,a_+}\times^{\mathbf R}_{I}\mathfrak M_+\), in which
+\(\mathfrak M_\pm\) are the attached fixed stable-map factors, the principal
+component is the middle factor, and \(I\) is the inertia stack of the
+quotient at each of the two evaluations: the triangle reads
+\((\operatorname{ev}^*L_I)^{\oplus2}\to L_{\mathfrak M_-}\oplus
+L_{\mathfrak S_{a_-,a_+}}\oplus L_{\mathfrak M_+}\to
+L_{\mathfrak F}\) after pullback to \(\mathfrak F\).  We use this
+three-factor presentation, the one named in the statement, and not the
+two-factor grouping of \cite[equation~(57)]{WoodwardQKIII}, whose two factors
+each carry half of the principal clutching datum and so both move under a
+degree shift.  This is the derived form
 of the exact triangle by which Woodward derives cutting-edge compatibility for
 the index complexes \cite[Equation~(35) and Section~7.1]{WoodwardQKIII}.
 
 (b)  The degree shift changes only the principal factor.  The attached
 stable-map factors and their obstruction theories are the fixed proper
 stable-map data at a fixed ordinary degree and marking set, and the inertia
-term is determined by the stabilizer congruence class, which is fixed along a
+terms are determined by the stabilizer congruence class, which is fixed along a
 tail by Proposition~\ref{prop:app-mu-k}(b).  Hence the comparison map is the
-identity on those two terms, and Proposition~\ref{prop:app-square} supplies the
-map on the third; a map of triangles with two identity legs and one
-quasi-isomorphism is an isomorphism of triangles.
+identity on \(L_{\mathfrak M_\pm}\) and on both inertia pullbacks, while
+Proposition~\ref{prop:app-square} supplies the quasi-isomorphism on
+\(L_{\mathfrak S_{a_-,a_+}}\); a map of triangles which is the identity on
+every other leg and a quasi-isomorphism on that one is an isomorphism of
+triangles.
 
 (c)  Woodward's cutting axiom expresses the virtual class of the glued type as
 the Gysin pullback \(\Delta^!\) of the virtual class of the cut type, using the
