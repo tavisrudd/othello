@@ -1,0 +1,32 @@
+1. char poly of U = E-star on QH_even(X x P^1):
+    (-lam**2 + 4*q2)**2*(lam**4 - 216*lam**2*q1 - 8*lam**2*q2 + 11664*q1**2 - 864*q1*q2 + 16*q2**2)
+   sheets, with algebraic multiplicity:
+      -2*sqrt(q2)   mult 2
+      2*sqrt(q2)   mult 2
+      -2*sqrt(-6*sqrt(3)*sqrt(q1)*sqrt(q2) + 27*q1 + q2)   mult 1
+      -2*sqrt(6*sqrt(3)*sqrt(q1)*sqrt(q2) + 27*q1 + q2)   mult 1
+      2*sqrt(-6*sqrt(3)*sqrt(q1)*sqrt(q2) + 27*q1 + q2)   mult 1
+      2*sqrt(6*sqrt(3)*sqrt(q1)*sqrt(q2) + 27*q1 + q2)   mult 1
+   expected: +-2s doubled, and the four simple 6r+-2s, -6r+-2s
+     check 6r+2s: quartic factor vanishes -> True
+     check 6r-2s: quartic factor vanishes -> True
+
+2. Jordan type at the doubled sheets:
+   +2s: dim ker = 1, dim ker^2 = 2  -> single J_2 block, nilpotent part nonzero
+   -2s: dim ker = 1, dim ker^2 = 2  -> single J_2 block, nilpotent part nonzero
+
+3. connected components of the spectral cover over L0 = C((q1,q2)):
+    x-factor: x**2*(-27*q1 + x**2)  ->  L0[x]/(x^2)  x  L0[x]/(x^2 - 27 q1)
+    x^2 - 27 q1 irreducible over L0: True
+    y^2 - q2   irreducible over L0: True
+    => two components: A_nilp = K2[x]/(x^2) with K2 = L0(sqrt q2), rank 4,
+       geometric points +-2s exchanged by Gal(K2/L0) = Z/2;
+       A_reg  = L0(sqrt q1, sqrt q2), rank 4, four simple sheets.
+
+4. caustic locus (sheet collisions):
+       +2s = 6r-2s   at [{q2: 27*q1/4}]
+       -2s = -6r+2s  at [{q2: 27*q1/4}]
+     6r-2s = -6r+2s  at [{q2: 27*q1}]
+   the doubled sheets meet a simple sheet only at 4 q2 = 27 q1;
+   the two simple sheets 6r-2s and -6r+2s meet each other (at value 0)
+   only at q2 = 27 q1.

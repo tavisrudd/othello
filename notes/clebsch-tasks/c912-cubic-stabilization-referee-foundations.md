@@ -41,6 +41,13 @@ gap is one statement about bulk displacement, and the next routes are under the
 review protocol below.  Start a fresh session with
 `../2026-08-15-c912-framing-compatibility-checks.md`, then the memo
 `../2026-08-15-c912-frame-transport-memo.pdf` for the underlying analysis.
+The one-stabilization base-point ambiguity is now computed against the atom
+route: it is finite of order two at the sheet level and acts trivially, the
+formal bulk germ is caustic-free for a filtration reason, the only crossing
+question sits at `4q_2 = 27q_1`, and the count is not a Stokes-torsor invariant,
+so that hole and the Gamma-rank route's hole are different objects.  Report:
+`../2026-08-15-c912-m1-ambiguity-computation.md`, with committed script and
+output `../2026-08-15-c912-xp1-spectral-check.py` and `.out`.
 
 **Manuscript status change, 2026-08-15.**  On author instruction the paper no
 longer asserts the bulk-displacement step.  It is now the manually named
@@ -938,6 +945,10 @@ become manuscript edits.
 | C912-M16 | confirmed | Hinault--Yu--Zhang--Zhang Theorem 5.22 (blowup) is asserted, with uniqueness in Theorem 5.24, but is not derived from Theorem 4.34, whose hypotheses miss the unequal block sizes; existence is referred to the earlier decomposition work. | Same report, finding 1b; it adds nothing to (4.3) beyond Iritani |
 | C912-M17 | resolved | The base-map ambiguity of their Theorems 5.20/5.24 is a Novikov character, hence the divisor substitution (4.1), hence `nu_6`-invariant; the sources' initial conditions pin it anyway. | Same report, check 2; one manuscript sentence owed |
 | C912-M18 | confirmed | Their center F-bundle is itself built on a collapsed Novikov variable, so the framing theory cannot certify intrinsic center invariants; their Lemma 2.24 is nonetheless the divisor-tagging mechanism in print. | Same report, check 3; `lem:divisor-tagging` stays owner |
+| C912-M19 | confirmed | The count of `X x P^1` is carried by one connected component of its spectral cover, with two geometric points exchanged by a Galois group of order two that fixes the rational exponents; the sheet-level base-point ambiguity is finite and acts trivially. | `../2026-08-15-c912-m1-ambiguity-computation.md`, Propositions 2--3 |
+| C912-M20 | confirmed | The carrier block meets another sheet only at `4q_2 = 27q_1`, which equates two distinct Novikov monomials, so the formal germ is caustic-free by filtration rather than by genericity and the rigidity theorem applies at every point of it. | Same report, Proposition 4 and Section 4 |
+| C912-M21 | open | At `q_2 = 27q_1` two simple sheets coalesce at value zero, so the count can rise there. Harmless for the lower bound the one-stabilization theorem needs; a real gap in any equality form of birational invariance of the count. | Same report, Section 4; owner is whichever successor states the invariance as an equality |
+| C912-M22 | confirmed | The Stokes torsor of the `X x P^1` small even connection is 52-dimensional and acts trivially on the count, since the count is a formal invariant; the one-stabilization hole is a discriminant-crossing problem, not a Stokes-section problem. | Same report, Section 5 |
 
 The final `ej`+`tt` closeout found no unresolved mystery in the completed
 WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the
