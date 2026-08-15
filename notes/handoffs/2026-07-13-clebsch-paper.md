@@ -151,7 +151,9 @@ map.  Exact precursor reduction and falsifier:
 `../2026-08-14-c907-punctual-tail-shadow.md`.  The current manuscript promotes
 the tailwise theorem and isolates marked threshold compatibility as the one
 analytic hypothesis, with gauged-admissibility remaining a separate geometric
-input.
+input.  C913 owns the referee revision: local frame/source repairs first,
+then a modular hypothesis presentation and expanded orbit-cylinder and
+derived-clutching proofs before the next frozen cold-read cycle.
 Iritani's weak-Fano toric blowup theorem now supplies a genuine geometric
 calibration of the one-object marked comparison: for every common-open point,
 the Gamma point row is exactly the base row on the ambient summand and zero on
