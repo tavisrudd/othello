@@ -155,9 +155,9 @@ version record 21941287 (v0.4.0), whose archive carries `check_cubic_endpoint.py
 `cubic_endpoint_certificate.json`, `SHA256SUMS`, and the verification README;
 the archived checker and certificate are byte-identical to the authority copies
 and pass standalone.  That deposit is the pre-Package-D manuscript (mirror
-commit `2e49e2c`, no appendix), so a new version deposit is due when the
-current manuscript is refrozen.  The standalone mirror has not yet taken these
-minor fixes.
+commit `2e49e2c`, no appendix); deposits follow the GitHub release
+automatically, so this is a note on what the current DOI resolves to, not an
+open task.
 
 Referee-driven revision of 2026-08-14, all committed and synced: the paper is
 retitled *Gamma Point Rows under Quantum Wall Crossing and a Criterion for
