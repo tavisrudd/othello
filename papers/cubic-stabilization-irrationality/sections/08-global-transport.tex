@@ -703,11 +703,14 @@ finite derived base change, so it commutes with Artin reduction.  This proves
 every assertion.
 \end{proof}
 
-\begin{proposition}[Clutching-tail holonomicity]
+\begin{proposition}[Clutching-tail \((D)\)-finiteness]
 \label{prop:clutching-tail-holonomicity}
 Every point-marked endpoint tail is a finite nilpotent derivative of one
 Gamma-ratio recurrence with affine arguments.  Its generating series is
-holonomic over the finite Artin coefficient algebra.  In a neutral direction its coefficients have
+\((D)\)-finite over the finite Artin coefficient algebra: it satisfies a linear
+recurrence with polynomial coefficients in the degree.  We do not say
+\emph{holonomic}, which has no standard meaning over a coefficient ring with
+nilpotents.  In a neutral direction its coefficients have
 polynomial-logarithmic growth after one exponential rescaling, so the tail
 has radial boundary values which are distributions of finite order.
 \end{proposition}
@@ -776,14 +779,26 @@ exponential rate \(-\sum_ah_a\log|h_a|\) is removed by one rescaling, after
 which the coefficients grow by a power of \(k\) and
 \(\log k\).  After that rescaling, radial limits of \(F\) therefore define
 finite-order distributions, with polynomial-logarithmic bounds in the radial
-parameter.  This is the meaning of tempered radial boundary values here.
+parameter.  This is the meaning of tempered radial boundary values here, and
+the implication is elementary.  Work componentwise in a \(\C\)-basis of
+\(R_N\) and suppose \(|c_k|\leq Ck^N(\log k)^M\) for \(k\geq2\).  Choose an
+integer \(q>N+2\) and set \(b_k=c_k/(ik)^q\) for \(k\neq0\) and \(b_0=0\); the
+one omitted term is a constant and changes nothing.  Then
+\(\sum_kb_k\) converges absolutely, so \(\sum_kb_kr^ke^{ik\theta}\) converges
+uniformly in \(\theta\) for \(r\leq1\) and its radial limit at \(r=1\) is a
+continuous function of \(\theta\); applying \(\partial_\theta^q\) recovers
+\(\sum_kc_kr^ke^{ik\theta}\).  A uniform limit of continuous functions
+differentiated \(q\) times converges in \(\mathcal D'(S^1)\), so the radial
+limit exists there and has order at most \(q\).  The bound on \(q\) depends
+only on the exponents \(N,M\), which are uniform on the tail, so the order is
+uniform as well.
 Finite threshold terms are Laurent polynomials and do not alter the
 conclusion.
 \end{proof}
 
 \begin{remark}[Two-tail threshold obstruction]
 \label{rem:two-tail-threshold-obstruction}
-Tailwise holonomicity does not identify the two selected solutions.  The
+Tailwise \((D)\)-finiteness does not identify the two selected solutions.  The
 bilateral sequence
 \[
  c_k=\begin{cases}2^k,&k\geq0,\\3^{-k},&k<0\end{cases}
@@ -797,7 +812,7 @@ boundary circles.  Away from the single threshold, the bilateral sequence
 is annihilated by \((E-2)(E-1/3)\); multiplying by a polynomial in the index
 absorbs the finite defect.  Nevertheless the two displayed rational
 functions are not branches of one meromorphic function.  Thus neither a
-polynomial recurrence nor tailwise holonomicity determines the finite
+polynomial recurrence nor tailwise \((D)\)-finiteness determines the finite
 connection data across a threshold.
 \end{remark}
 
@@ -864,7 +879,7 @@ equivariant-input module on which \eqref{eq:support-collapse-row} is stated and
 are the identity on its marked coefficient functions and their chosen input
 and bulk derivatives; a wall-dependent change of input frame is not allowed.
 Remark~\ref{rem:two-tail-threshold-obstruction} explains why tailwise
-holonomicity cannot replace this one-object condition.
+\((D)\)-finiteness cannot replace this one-object condition.
 
 Denote by \(r_j^\pm\) the marked rows and by \(T_j^\pm\) the
 half-Tate-normalized formal monodromies of \(K_j^\pm\).  The one-object
@@ -879,7 +894,7 @@ It is horizontal for the tail and \(z\)-connections, preserves the chosen
 Stokes filtration, is equivariant for the ramified deck action, and commutes
 with input and bulk derivatives, quotient maps between Artin levels, and the
 Rees substitution \eqref{eq:rees-substitution}.  It identifies the marked
-boundary germs of the two adjacent holonomic tails constructed in
+boundary germs of the two adjacent \((D)\)-finite tails constructed in
 Proposition~\ref{prop:clutching-tail-holonomicity}.  These maps are
 compatible over the complete separated inverse system of Artin quotients.
 \end{hypothesis}
@@ -1160,7 +1175,7 @@ surjectivity of \eqref{eq:endpoint-gauged-maps}.
 Proposition~\ref{prop:support-collapse} identifies the marked coefficient
 functions before either endpoint completion is taken.
 Theorem~\ref{thm:tailwise-derived} and
-Proposition~\ref{prop:clutching-tail-holonomicity} supply their holonomic tail
+Proposition~\ref{prop:clutching-tail-holonomicity} supply their \((D)\)-finite tail
 systems, while nonneutral directions are Laurent-finite by
 Proposition~\ref{prop:gamma-ratio-reduction}.  The following elementary gluing
 step records exactly what the remaining hypotheses add.
@@ -1236,5 +1251,5 @@ Theorem~\ref{thm:birational-point-primary} is the
 global replacement for Hypothesis~\ref{hyp:rank-zero-target}.  Without those
 inputs, Remark~\ref{rem:two-tail-threshold-obstruction} and the earlier
 countermodels show why the conclusion
-cannot be obtained from tailwise holonomicity, localized one-wall receivers,
+cannot be obtained from tailwise \((D)\)-finiteness, localized one-wall receivers,
 or unmarked Fourier boundary data alone.

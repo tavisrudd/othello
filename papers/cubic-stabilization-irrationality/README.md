@@ -19,7 +19,7 @@ together with countermodels that obstruct naive
 composition. For a global equivariant cobordism it proves support collapse
 and a coefficientwise balanced Gamma-ratio reduction. It further proves that
 the derived fixed clutching stacks are constant along every rank-one tail
-between thresholds, so the complete neutral tails are holonomic and tempered.
+between thresholds, so the complete neutral tails are D-finite and tempered.
 Beyond gauged-admissibility, the remaining unproved input is a family of
 one-object local comparisons over all finite Artin levels,
 ordinary degrees, neutral directions, and thresholds. At sign and stability
@@ -32,7 +32,7 @@ polynomial functional calculus. Under these assumptions, the
 point-row primary Boolean is birationally invariant and
 \(X\times\mathbf P^m\) is irrational for every smooth cubic threefold \(X\)
 and every \(m\). A rational two-tail counterexample shows why tailwise
-holonomicity alone does not determine the needed threshold maps.
+D-finiteness alone does not determine the needed threshold maps.
 
 The cubic-specific input is isolated:
 

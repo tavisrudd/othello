@@ -86,7 +86,8 @@ if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
 if (
     "and~\\ref{hyp:marked-threshold-zero} form an inverse-system family" not in scope_text
-    or "separate holonomicity does not determine the threshold maps" not in scope_text
+    or "separate \\((D)\\)-finiteness does not determine the threshold maps"
+    not in scope_text
     or "gauged-admissibility conditions" not in scope_text
 ):
     errors.append("global continuation boundary is not visibly conditional")

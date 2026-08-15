@@ -136,23 +136,63 @@ because the target `R[z]` is a polynomial extension; and local triviality of a r
 `G_m`-bundle on `P^0_R` is now justified by the graded Picard group of `R[z]` being
 `Pic(R) × Z`, with the note that the nonequivariant analogue fails for nonreduced `R`.
 
+## 4. Second batch: imports, locators, D-finiteness (same day)
+
+**Schürg–Toën–Vezzosi no longer carries the identification.** The cited paper constructs derived
+enhancements and reads off the induced obstruction theory in its own geometry (stable maps); it is
+not a general recognition theorem for an arbitrary classically constructed obstruction *morphism*,
+and Woodward's Definition 7.13 names only the complex `(Rp_*e^*T(X/G))^∨`. New
+`conv:app-obstruction-morphism` fixes the reading: Woodward's obstruction morphism is the
+Illusie–Kodaira–Spencer map of the universal gauged map relative to the domain stack, which is the
+reading his virtual classes are formed under and the one that makes the comparison a statement.
+`lem:app-truncation` then makes the comparison internally: both morphisms send a first-order
+deformation of the section to the induced pair of chart deformations compared on the open orbit, and
+in the Čech presentation they are the same map of two-term complexes. The claim is explicitly bounded
+to square-zero extensions of classical test schemes — the level at which Woodward's morphism is
+specified and the virtual class is formed. Schürg–Toën–Vezzosi stays cited as precedent.
+
+**Toën–Vezzosi is now precedent, not a load-bearing import.** Its general mapping-stack formula
+assumes a proper flat source, which the rotation quotient of the domain is not. The equivariant
+relative form actually used is derived from `def:app-fixed-section` (a map from a square-zero
+extension is a rotation-fixed section of the pullback tangent complex), and perfectness comes from
+`lem:app-cech` rather than from properness. Stated in the appendix opening, in the proof, and in
+`rem:app-imports`.
+
+**Locators.** The relative perfect obstruction theory on the rotation-fixed locus, induced from the
+ambient one, is QK III Section 9.4 (pp. 35–36) — not Definition 7.13 plus Section 8.3 plus QK II
+Example 6.6(c), which are three different moduli stacks (single-vertex gauged maps, scaled gauged
+maps, affine gauged maps). The appendix opening now says that explicitly. The fixed-part step is
+cited to Graber–Pandharipande, previously invisible. Invariance of virtual classes under an
+isomorphism of obstruction theories is now Behrend–Fantechi (the intrinsic normal cone depends only
+on the morphism to the cotangent complex), with QK II Section 6 for the relative bivariant form;
+Example 6.6(c) was a mis-citation for that. Both new entries added to `refs.bib`.
+
+**"Comparison homotopy may be taken to be the identity" demoted.** The Čech computation compares the
+differentials of two presentations of the same two-term complex — it identifies the left vertical
+arrow strictly and says nothing about the classical truncations the two composites factor through.
+The text now says exactly that, and notes that 2-commutativity comes from functoriality and does not
+depend on it.
+
+**D-finite, not holonomic.** Holonomicity has no standard meaning over a coefficient ring with
+nilpotents, and the proof proves a linear recurrence with polynomial coefficients. The proposition
+title and every prose use now say `(D)`-finite; the label `prop:clutching-tail-holonomicity` is kept
+so cross-references and the release-surface gate keep their anchors, and the gate's pinned sentence
+was updated to the new wording. README and ledger follow.
+
+**Finite-order boundary values now argued, not asserted.** With `|c_k| ≤ Ck^N(log k)^M`, pick
+`q > N+2` and set `b_k = c_k/(ik)^q`; then `∑ b_k r^k e^{ikθ}` converges uniformly up to `r = 1` with
+continuous radial limit, and `∂_θ^q` recovers the original series, so the radial limit exists in
+`D'(S^1)` with order at most `q`. Uniform on the tail because `N, M` are. Argued componentwise in a
+`C`-basis of `R_N`.
+
+`make check` passes at 45 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
-- **Schürg–Toën–Vezzosi import** (its item 4): the cited paper's mapping-stack application is the
-  reduced obstruction theory for stable maps to a K3 surface, not a general recognition theorem.
-  Woodward's Definition 7.13 fixes the complex and not the morphism, so this is where the
-  "as morphisms to a cotangent complex" upgrade actually rests. Repair: state as a convention that
-  Woodward's obstruction morphism is the Illusie/Kodaira–Spencer map of the universal gauged map and
-  finish the identification internally in `prop:app-square`, which already has the ingredients.
-- **Locators** (its item 5): QK III Section 9.4, p. 35 for the relative perfect obstruction theory on
-  the fixed locus; the uncited Graber–Pandharipande fixed-part step; the mis-citation of QK II
-  Example 6.6(c) for invariance of virtual classes; a theorem number and equivariant relative form
-  for the Toën–Vezzosi mapping-stack formula.
-- **`prop:clutching-tail-holonomicity` wording** (its item 6): say D-finite, not holonomic, over an
-  Artin coefficient ring, and give the paragraph turning polynomially bounded coefficients into a
-  finite-order distributional radial boundary value.
-- Optional items: demote the "comparison homotopy may be taken to be the identity" claim; give the
-  reason for constancy of graph automorphism groups along a tail; cite `Dτ_{Y,-}` as the graph
-  fundamental solution; note the rotation-parameter inversion at the chart at infinity.
-- Standalone paper repository and portfolio summary are **not** synchronized for this change set;
-  that waits until the remaining cold-read items land, so the mirror takes one forward commit.
+- Optional items not taken: the reason (rather than the conclusion) for constancy of graph
+  automorphism groups along a tail; a citation for `Dτ_{Y,-}` being the graph fundamental solution;
+  the rotation-parameter inversion gloss at the chart at infinity.
+- Coverage the cold read did not reach: Aleshkin–Liu Definition 5.18 / Theorem 5.21 and
+  González–Woodward Remarks 1.18(d), 4.6, 4.7 as characterized in `rem:neutral-boundary`; QK II
+  Proposition 5.21 and QK III Proposition 7.14(b) beyond the extraction note's transcription.
+- Standalone paper repository and portfolio summary sync: pending the fresh cold read on this text.
