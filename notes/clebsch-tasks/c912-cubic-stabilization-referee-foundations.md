@@ -33,9 +33,11 @@ the forward-citation sweep recorded in
 `../2026-08-14-c912-forward-citation-sweep.md`.  The paper now carries the
 retitle and two-theorem framing (WP12 below) and builds warning-free at 30
 pages.  What remains open on this card is the residual list under each work
-package, not a whole package, plus the frame-transport lemma owed to referee A,
-which is blocked on an architecture decision recorded in
-`../2026-08-15-c912-frame-transport-receiver-obstruction.md`.
+package, not a whole package, plus the frame-transport lemma owed to referee A.
+That is the one blocker: `prop:framed-operations` and `lem:divisor-tagging` are
+unproved as written, and the current state, the likely repair, and the three
+checks that would close it are under the review protocol below.  Start a fresh
+session there and with `../2026-08-15-c912-frame-transport-memo.pdf`.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
