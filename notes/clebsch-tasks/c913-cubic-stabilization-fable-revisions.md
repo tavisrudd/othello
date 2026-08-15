@@ -145,6 +145,20 @@ reduction), with the two imported derived comparisons cited
 pages.  Source extractions for Włodarczyk 2(B′) and Woodward QK II/III are
 in the dated notes files of 2026-08-14.
 
+Cold-read minor fixes landed at `9d934f974`: the Mumford numerical-criterion
+locator is pinned to Chapter 2, Section 2.1; `2`-commutative is now used
+everywhere; Proposition A.12(d) says why Artin-level compatibility is automatic
+for the identifications as opposed to the paired numbers; and the
+Gamma/window implication paragraph is labelled a sketch.  `make check` passes
+at 39 pages.  The Zenodo concept DOI `10.5281/zenodo.21937490` resolves to
+version record 21941287 (v0.4.0), whose archive carries `check_cubic_endpoint.py`,
+`cubic_endpoint_certificate.json`, `SHA256SUMS`, and the verification README;
+the archived checker and certificate are byte-identical to the authority copies
+and pass standalone.  That deposit is the pre-Package-D manuscript (mirror
+commit `2e49e2c`, no appendix), so a new version deposit is due when the
+current manuscript is refrozen.  The standalone mirror has not yet taken these
+minor fixes.
+
 ## Immediate next step
 
 Author sign-offs: the expected-versus-open labels for Definition
