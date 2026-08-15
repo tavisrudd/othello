@@ -120,12 +120,26 @@ intro_text = (ROOT / "sections/01-introduction.tex").read_text(encoding="utf-8")
 readme_text = (ROOT / "README.md").read_text(encoding="utf-8")
 ledger_path = ROOT / "claim-proof-novelty-ledger.md"
 export_manifest_path = ROOT / "export-manifest.json"
-if not re.search(
-    r"Assume that every smooth projective birational map.*?gauged-admissible.*?marked threshold comparisons.*?We prove that",
-    main_text,
-    flags=re.DOTALL,
-):
-    errors.append("abstract does not lead with the conditional cubic theorem")
+abstract_match = re.search(
+    r"\\begin\{abstract\}(.*?)\\end\{abstract\}", main_text, flags=re.DOTALL
+)
+if abstract_match is None:
+    errors.append("manuscript has no abstract")
+else:
+    # The abstract may lead with the mechanism, but the irrationality
+    # conclusion must never appear before both standing assumptions.
+    abstract_text = abstract_match.group(1)
+    conclusion = abstract_text.find("is irrational")
+    if conclusion < 0:
+        errors.append("abstract does not state the cubic conclusion")
+    else:
+        for phrase in ("gauged-admissible", "marked threshold compatibility"):
+            position = abstract_text.find(phrase)
+            if position < 0 or position > conclusion:
+                errors.append(
+                    "abstract states the cubic conclusion before its standing "
+                    f"assumption: {phrase}"
+                )
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
 if "Theorem~\\ref{thm:tailwise-derived}" not in intro_text:
