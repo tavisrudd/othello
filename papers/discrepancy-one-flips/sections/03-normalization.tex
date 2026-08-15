@@ -155,18 +155,29 @@ the authors name do the work.
   \(k_{i}>0\), and, the dual graph being a connected tree with at least one
   such component, on the contracted components as well; so
   \(H^{0}(C,f^{*}V'(-1))=0\) and
-  \(V'(-1)\) is concave along every extremal class.  For a concave bundle,
-  the theory twisted by the inverse \(\C^{\times}\)-equivariant Euler class
-  is the Gromov--Witten theory of the total space, the concave case recorded
-  in the introduction of \cite{CoatesGivental}; and quantum Riemann--Roch
-  \cite[Theorem~1]{CoatesGivental}, in its genus-zero cone form
-  \cite[Corollary~4]{CoatesGivental}, presents the twisted cone as the image
-  of \(\mathcal L_{\PP(V)}\) under an explicit symplectic transformation.  It multiplies the degree-\(d\) summand of
-  \cite[(34)]{SS} by \(\prod_{j=1}^{s}\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\);
-  after the extremal specialization appropriate to \(T\), which replaces
-  \(q^{rd}\) by \(q^{(r-s)d}\) and \(c_{1}(\PP(V))\) by \(c_{1}(T)\), the
-  result is \eqref{eq:ss35}.  The statement of the transformation involves
-  the characteristic class of \(V'(-1)\) and nothing else; here too \(r\) and
+  \(V'(-1)\) is concave along every extremal class, while its dual
+  \(E:=(V'(-1))^{\vee}=\pi^{*}(V')^{\vee}\otimes\mathcal O_{\PP(V)}(1)\) is
+  convex there.  Twisting by the inverse equivariant Euler class of a concave
+  bundle gives the Gromov--Witten theory of its total space, and the
+  hypergeometric modification \cite[Theorem~2]{CoatesGivental} of the
+  \(J\)-function has a Serre-dual partner obtained by replacing \(e,E\) with
+  \(e^{-1},E^{\vee}\); both are the discussion ``On Serre duality'' of
+  \cite{CoatesGivental}.
+
+  The dual modification is termwise, so its degree-\(d\) factor can be read
+  off.  The Chern roots of \(E\) are \(H-\sigma_{j}\), and each pairs to
+  \(d\) on \(d[L]\), so the factor contributed by the \(j\)-th root is
+  \(\prod_{k=-d+1}^{0}\bigl(-\lambda-(H-\sigma_{j})+kz\bigr)\), which is
+  empty for \(d=0\).  In positive degree the concave local theory admits the
+  non-equivariant specialization, and letting \(\lambda\to0\) and writing
+  \(m=-k\) turns this into
+  \(\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\).  Applying the modification to
+  Brown's projective-bundle \(I\)-function \cite[(34)]{SS}, and passing to
+  the extremal specialization appropriate to \(T\), which replaces
+  \(q^{rd}\) by \(q^{(r-s)d}\) and \(c_{1}(\PP(V))\) by \(c_{1}(T)\), gives
+  \eqref{eq:ss35}.  The \(d=0\) summand is untouched by the modification and
+  remains the classical term \(z\,e^{\bar{\mathbf t}/z}\).  The modification
+  involves the Chern roots of \(V'(-1)\) and nothing else; here too \(r\) and
   \(s\) enter only as numbers of factors.
 \end{proof}
 
@@ -206,18 +217,19 @@ cone.
   A^{1}\) with \(\ker(g)_{1}=V\) and \(\ker(g)_{0}=A\oplus Q\), hence a
   smooth projective family \(\PP(\ker g)\to Z\times\mathbf A^{1}\) carrying
   the bundle \(V'(-1)\).  By \cite[Proposition~3.1]{SS} the moduli spaces
-  \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) are smooth and proper and form
-  a family over \(\mathbf A^{1}\); by concavity the sheaf
-  \(R^{1}\pi_{C*}f^{*}V'(-1)\) is locally free of rank \(s(k-1)\) on each
-  fibre, and by \cite[Corollary~3.2]{SS} its Euler class is the virtual
-  class.  The family of moduli spaces and the sheaf are both flat over
-  \(\mathbf A^{1}\), so the extremal genus-zero
-  invariants do not depend on \(t\), and the extremal \(J\)-functions of the
-  two fibres agree under the isomorphism of cohomology rings of
+  \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) form a smooth proper family
+  over \(\mathbf A^{1}\), and concavity makes
+  \(R^{1}\pi_{\mathcal C*}f^{*}V'(-1)\) a relative locally free obstruction
+  bundle of rank \(s(k-1)\).  Its Euler class defines a relative virtual
+  class restricting on each fibre to the extremal virtual class of
+  \cite[Corollary~3.2]{SS}.  Deformation invariance therefore identifies all
+  extremal genus-zero descendant invariants, and with them the extremal
+  \(J\)-functions, under the isomorphism of cohomology rings of
   \cite[Lemma~9.4]{SS}.  The right-hand side of \eqref{eq:ss35} is likewise
   unchanged, because \(V\) and \(A\oplus Q\) have the same Chern roots.
-  Iterating along the filtrations, as in \cite[Lemma~9.6]{SS}, reaches a
-  local model whose bundles split.
+  Repeating the construction for the filtration of \(V'\), and iterating both
+  filtrations as in \cite[Lemma~9.6]{SS}, reaches the split
+  associated-graded local model.
 \end{proof}
 
 \begin{proposition}
