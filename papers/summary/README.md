@@ -17,7 +17,8 @@ conditions and an inverse-system family of one-object marked threshold compariso
 *Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
 Irrationality* obtains this dimension-independent conclusion from the Gamma
 point row, the flat covector which reads ordinary rank, under quantum wall
-crossing. Its local transport, endpoint calculation,
+crossing.  **That paper is an early draft, likely to contain logical gaps and
+notational issues.** Its local transport, endpoint calculation,
 and coefficientwise Gamma reduction are proved.  Under the stated
 gauged-admissibility conditions, support collapse, tailwise derived
 identification, and D-finiteness of the tails follow from rank-one

@@ -1,5 +1,7 @@
 # Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality
 
+**Early draft, likely to contain logical gaps and notational issues.**
+
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 
 ## Read the paper
