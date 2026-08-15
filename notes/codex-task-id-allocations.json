@@ -3104,8 +3104,26 @@
       "last": 912,
       "purpose": "repair framed cyclotomic monodromy foundations and referee interfaces for cubic stabilization paper",
       "sequence": 345
+    },
+    {
+      "count": 1,
+      "first": 913,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 913,
+      "purpose": "Revise the conditional cubic-stabilization paper after the Fable referee report",
+      "sequence": 346
+    },
+    {
+      "count": 1,
+      "first": 914,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 914,
+      "purpose": "Decide whether the A5-invariant cubic pencil meets the Yang-Yu-Zhu coprime-degree locus in cubic-threefold moduli",
+      "sequence": 347
     }
   ],
-  "next_id": 913,
+  "next_id": 915,
   "schema": "codex-task-id-allocations-v1"
 }
