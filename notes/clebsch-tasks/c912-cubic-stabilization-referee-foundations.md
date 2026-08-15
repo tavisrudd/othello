@@ -11,7 +11,10 @@ universal framed operator, normalized gauges, and Iritani comparison maps now
 meet only in a faithful graded Hahn receiver after the positive completion,
 with the coefficient field algebraically closed before the independent
 integral loop coordinate is adjoined.  C912 remains active and author-close
-only; WP4--WP6 remain prioritized work.
+only.  WP4 has begun in reviewed microincrements: commit `7f5d1439b`
+displays Cai's exact small-even cubic connection matrix with its coefficient
+and original-loop-coordinate conventions.  The remaining WP4 steps, then
+WP5--WP6, remain prioritized work.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -235,7 +238,7 @@ exact bridge is formalized.
 
 ### WP4 — internal cubic endpoint
 
-- [ ] Display the small even quantum connection matrix in the basis
+- [x] Display the small even quantum connection matrix in the basis
   `1,P,P^2,P^3`.
 - [ ] Perform the formal integral-`z` block reduction in the paper.
 - [ ] Derive the rank-two indicial polynomial
