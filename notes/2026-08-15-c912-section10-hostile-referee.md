@@ -492,3 +492,296 @@ Absent all three, Section 10 proves nothing that Section 9 did not already
 concede was open, and the accurate statement of the current position is the one in
 F4: the theorem holds if $\nu_6$ of the cubic threefold is $2$ at the displaced
 parameter $\varsigma_j^\circ$, which is Hypothesis 4.7H.
+
+---
+
+# Second pass: the two replacement claims
+
+Verdicts up front. **Claim A SURVIVES** --- and survives a stronger attack than the
+one it defends against, because there is a second, independent proof of it that
+does not go through the $z$-power count at all. **Claim B is FATAL as stated**, and
+REPAIRABLE only by discarding its own engine: Cai's gauge cannot be made
+admissible by per-slot polynomiality, but Section 8's $z$-regular rigidity can be
+run along the same pencil and does what Claim B wants. **Claim B is the weaker of
+the two, by a wide margin.**
+
+## CLAIM A: SURVIVES
+
+### The prior assertion in the memo is the wrong one
+
+The memo's earlier sentence (lines 771-774) --- "for a trivial rank-two bundle all
+$c_i(V)$ vanish and their $\Delta(a)$ is purely $H^0\oplus H^2$, yet
+Iritani-Koto's $\varsigma_j^\circ$ still carries its $O(q^{-1/r})$ tail" --- is an
+inference from the $O(\cdot)$ symbol in IK's displayed asymptotics, and the
+coordinator is right to distrust it. $(1+O(q^{-1/r}))$ is a bound on which powers
+of $q$ may occur, not an assertion that any of them do. It carries no information
+either way about $[z^{-1}]\log$. So the memo's earlier claim was never supported;
+it should be struck.
+
+But the offered replacement reasoning ("for $c_1(V)=0$ the exponential is absent,
+so the claim is that the $z^{-1}$-coefficient vanishes") is equally unsupported by
+that sentence alone. What decides the question is the construction of $F_j$, and
+it decides it in Claim A's favour, twice over.
+
+### Proof 1: for a trivial bundle $F_j(1)$ is a scalar, and the $z$-power count is complete
+
+IK build $F_j$ by stationary phase (IK §5.3, lines 2451-2540). The integrand is
+
+> $\int e^{-\phi(\lambda)/z}\lambda^{-c_1(V)/z}\lambda^{-r/2}K(\lambda)d\lambda$
+> where $\phi(\lambda)=r(\lambda\log\lambda-\lambda)-\lambda\log q$ and
+> $K(\lambda)=(\widetilde\Delta^\lambda_V)^{-1}J(\lambda)$ (IK lines 2457-2460),
+
+and $\widetilde\Delta^\lambda_V$ is the modified QRR operator, whose defining
+asymptotic (IK lines 1285-1290) is
+
+> $\Delta^\lambda_W\sim\prod_\delta\sqrt{\frac z{2\pi}}z^{\frac{\lambda+\delta}
+> z}\Gamma\bigl(1+\frac{\lambda+\delta}z\bigr)$, $\delta$ ranging over the Chern
+> roots of $W$.
+
+For $V=\mathcal O_B^{\oplus r}$ every Chern root is $0$, so
+$\widetilde\Delta^\lambda_V$ is a **scalar** function of $(\lambda,z)$ --- it
+contains no class of $B$ at all --- and Stirling's expansion gives it as an
+exponential of $\sum_{n\ge1}\frac{B_{2n}}{2n(2n-1)}\lambda^{1-2n}z^{2n-1}$, i.e.
+strictly **non-negative** powers of $z$. Hence for $J=1$:
+
+- $K(\lambda)$ is a scalar with only non-negative powers of $z$. This closes the
+  coordinator's question "whether the K-tail can contribute negative $z$-powers for
+  a trivial bundle": it cannot, and the reason is that the QRR operator is an
+  exponential of a series in $z^{+1},z^{+3},\dots$
+- $L(s,\lambda_0)=e^{-(\frac r2-1)u}e^{-uc_1(V)/z}e^{-\phi_{\ge3}(s,\lambda_0)/z}
+  K(\lambda_0e^{s/\sqrt{\lambda_0}})$ (IK lines 2470-2474) is likewise a scalar,
+  since $c_1(V)=0$ kills the middle factor and $u=s/\sqrt{\lambda_0}$,
+  $\phi_{\ge3}$ are scalars. So $F_j(1)$ is a **scalar**, with no
+  $H^{\ge2}(B)$-component whatsoever. That alone already forbids an $H^{\ge4}$
+  tail in $\varsigma_j^\circ$, independently of any $z$-count.
+- $\lambda_j^{-(r-1)/2}$ carries no $z$: it is a pure power of $q^{1/r}$, since IK
+  define $\lambda_j=e^{2\pi\sqrt{-1}j/r}q^{1/r}$ (IK line 2354). The coordinator's
+  worry that $\lambda_j$ might carry higher-degree components is a real one in the
+  Hinault-Yu-Zhang-Zhang / KKPY convention, where the eigenvalue is
+  cohomology-valued --- the memo itself flags this at lines 758-763 --- but **not**
+  in Iritani-Koto's convention, which is the one in play. In IK's coordinates
+  $\lambda_j$ is a scalar and there is nothing for the divisor equation to do.
+- The factor $e^{-c_1(V)\log\lambda_0/z}$ in $F_0$ (IK line 2534) is $1$, and
+  $\log\lambda_0$ therefore never enters, so the $[\log\lambda_0]$-part of IK's
+  target ring is unoccupied.
+- The $z$-count as offered is then complete and correct: $\phi_{\ge3}=r\sum_{k\ge3}
+  \frac{s^k}{k!\lambda_0^{(k-2)/2}}$ (IK lines 2464-2467) gives $s$-degree $\ge3$
+  per $z^{-1}$; the Gaussian operator $e^{z\partial_s^2/(2r)}$ evaluated at $s=0$
+  converts $s^m$ into $z^{m/2}$; $K$ gives $z^{\ge0}$; the prefactor
+  $e^{-(\frac r2-1)u}$ has $s$-degree $\ge1$ and no $z$ at all. Net exponent
+  $\ge m/2-a\ge a/2\ge0$. So $q^{c_1(V)/(rz)}F_j(1)$ has only non-negative powers
+  of $z$, its logarithm does too, and $[z^{-1}]\log(\cdot)=0$.
+
+Two loose ends I checked rather than assumed. The logarithm is taken "with respect
+to the cup product structure on $H^*(B)$" (IK line 3243); for a trivial bundle the
+argument is a scalar, so the cup-product logarithm is the ordinary one and
+introduces nothing. And convergence of that logarithm is IK's own assertion
+("its logarithm ... is well-defined", line 3243), justified because the argument is
+$\frac1{\sqrt r}\lambda_j^{-(r-1)/2}(1+O(q^{-1/r}))$ and the coefficient ring
+$C[z,z^{-1}]((q^{-1/r'}))$ does admit infinite series in $q^{-1/r'}$ --- unlike
+$\C((q^{-1/s}))$ with scalar coefficients --- because $K=\C[z,z^{-1}]$ has
+unbounded degree in Iritani's $K((x))$ convention (I-Bl lines 671-674).
+
+So $\varsigma_j^\circ=r\lambda_j$ exactly, by IK (5.11) (line 3251).
+
+### Proof 2: the Kunneth/spectral argument, which needs none of the above
+
+$\PP(\mathcal O_X^{\oplus2})=X\times\PP^1$, and the small quantum cohomology of a
+product is the tensor product of the factors'. The operator $E\star$ on the product
+is $E_X\star\otimes1+1\otimes E_{\PP^1}\star$, so its generalized eigenspace for the
+cluster around $r\lambda_j$ is $H^*(X)\otimes v_j$, where $v_j$ is the
+$j$-th eigenline of $E_{\PP^1}\star$ with eigenvalue $r\lambda_j$. The grading
+operator is $\mu_X\otimes1+1\otimes\mu_{\PP^1}$, and its compression to that line
+is $\mu_X+\mathrm{tr}(P_j\mu_{\PP^1})$. For $\PP^{r-1}$ the numbers
+$\mathrm{tr}(P_j\mu)$ are degree-zero, permuted by the deck action
+$q^{1/r}\mapsto e^{2\pi i/r}q^{1/r}$, hence all equal, and they sum to
+$\mathrm{tr}\,\mu=0$; so each is $0$ (I verified this by hand for $r=2$, where
+$P_\pm=\frac12(I\pm H\star/q^{1/2})$ and $\mathrm{tr}(P_\pm\mu)=0$). The $j$-th
+summand is therefore $z^2\partial_z=(U_X+r\lambda_j)-z\mu_X$, which is exactly
+$QDM(X)$ at bulk parameter $r\lambda_j\cdot1\in H^0$. Since the spectral summands
+are canonical (they are generalized eigenspaces, not a choice), this pins
+$\varsigma_j^\circ=r\lambda_j$ with no appeal to $F_j$ at all.
+
+Two independent routes agreeing is as much as I can ask of a claim I was trying to
+break.
+
+### The string equation is exact here, and needs no smallness
+
+This is the one place where "exact and needs no smallness" is literally true, and
+it is worth saying why, since the memo's other uses of that slogan are not.
+The string equation gives $\langle1,\gamma_1,\dots,\gamma_n\rangle_{0,n+1,d}=0$
+except for $(n+1,d)=(3,0)$, so the structure constants of $\star_\tau$ do not
+depend on the $H^0$-coordinate at all: $\star_{\tau+c\cdot1}=\star_\tau$ as an
+identity, for any $c$ in the coefficient ring, with no substitution and no
+convergence. The Euler field gains exactly $c\cdot1$, so
+$E\star_{\tau+c1}=E\star_\tau+c\,\mathrm{id}$. Adding a scalar to $U$ translates
+every exponential factor by the same $c/z$, leaves every spectral projector,
+every block, and every residue untouched, and hence leaves the framed formal
+monodromy unchanged. So
+$\nu_6(X,\varsigma_j^\circ)=\nu_6(X,0)=2$ by Cai's Proposition 6, and
+
+$$\nu_6(X\times\PP^1,\hat\tau=0)=\nu_6(X,2\lambda_0)+\nu_6(X,-2\lambda_1)=4$$
+
+at the **canonical** parameter $\hat\tau=0$, inside the germ where IK Theorem 5.1
+lives. No inversion, no displaced evaluation, no Hypothesis 4.7H.
+
+### Is F4 answered?
+
+**At the endpoint, yes.** F4's complaint was that setting $\widetilde\tau_0=0$
+leaves you needing $\nu_6$ of the cubic at a displaced parameter. Claim A shows the
+displacement is a pure $H^0$ shift for the trivial bundle, and an $H^0$ shift is
+not a displacement the invariant can feel. The "4" half of the contradiction is now
+a computed fact at a parameter that indisputably exists. F1, F2, F3 and F5 are
+untouched --- they were about the *other* half.
+
+### What then remains open for the full theorem
+
+Exactly the zero half, and it has moved rather than vanished. With Claim A the
+architecture is:
+
+- Weak factorization can be arranged as a roof: $X\times\PP^1\leftarrow\cdots
+  \leftarrow V_{i_0}\rightarrow\cdots\rightarrow\PP^4$, with every arrow a
+  blowdown. Descending from any parameter of the roof --- take $0$ --- is a
+  composition of **forward** substitutions only, so no inversion is needed
+  anywhere. It yields $\nu_6(X\times\PP^1,\hat\tau_L)=\nu_6(\PP^4,\rho_R)=0$ for
+  the two specific parameters the two descents produce, with the centre terms
+  killed by the low-dimensional lemma (subject to R1's restrictions).
+- Claim A gives $\nu_6(X\times\PP^1,0)=4$.
+- The gap is now precisely: $\nu_6(X\times\PP^1,\hat\tau_L)$ versus
+  $\nu_6(X\times\PP^1,0)$, i.e. constancy of $\nu_6$ **for $X\times\PP^1$ itself**
+  along the accumulated displacement $\hat\tau_L$.
+
+That is a strictly smaller problem than the one Section 10 previously had, and
+smaller than what Claim B sets out to solve, because it is a statement about one
+variety whose $\nu_6$-carrying blocks are two copies of the cubic's rank-two
+Jordan block --- Section 8's exact hypotheses --- rather than a statement about
+arbitrary intermediate fourfolds. Also note that only a **lower** bound is needed:
+if the two cubic-type blocks keep their exponents at $\hat\tau_L$ then
+$\nu_6(X\times\PP^1,\hat\tau_L)\ge4>0$ and the contradiction closes; no control of
+the other blocks is required. That asymmetry is worth exploiting and the memo does
+not currently use it.
+
+One caveat on the descent: at each step past the first, the base parameter is
+$\tau_{i+1}(\cdot)$ evaluated at the accumulated parameter, not at $0$. That
+substitution is legitimate for the same reason Iritani's own pullback is --- the
+accumulated parameter has only $H^{\ge4}$ components, each insertion costs at
+least $2$ in the dimension axiom, so only finitely many insertions survive per
+Novikov degree --- but it is a lemma, and it should be stated and proved rather
+than assumed.
+
+## CLAIM B: FATAL as stated; REPAIRABLE by replacing its engine
+
+### What is right in it
+
+Two of the three ingredients are real.
+
+- **The three shapes are supported by the sources, for the ambient displacement.**
+  I-Bl Theorem 5.18(6) (line 5661) gives $\tau^\circ=q^{-1}[Z]+O(q^{-2})$, which is
+  *purely* the third shape: $[Z]\in H^{2r}$ with $r\ge2$, so there is no $H^0$ and
+  no $H^2$ part at all in the ambient displacement, and every term is a negative
+  power of $q$. The first two shapes occur only in the centre displacement
+  $\varsigma_j^\circ=-(r-1)\lambda_j+h_{Z,j}+O(q^{-1/(r-1)})$, with
+  $h_{Z,j}=\frac{2\pi i}{r-1}(j+\frac r2)\rho_Z$ a $q$-free divisor class (I-Bl
+  (5.19), line 4300) --- and the centre terms are the ones the ledger discards
+  anyway. So for the chain the claim is not merely supported, it is stronger than
+  stated. Whether the *accumulated* displacement keeps the three shapes is not in
+  any source and does need the lemma noted above.
+- **Per-slot polynomiality in $t$ is real, not a truncation artifact --- but the
+  reason given is not the reason.** The offered justification ("at $Q^0$ the
+  monomial order is bounded by $\dim V-1$") covers only the classical slot, and
+  even there it is off: at $Q^0$ the structure constants have *no* $t$-dependence
+  at all, since $\langle\phi_a,\phi_b,\phi^c,\delta,\dots,\delta\rangle_{0,n+3,0}=0$
+  for $n\ge1$. The real mechanism is the dimension axiom: a term with $n$ bulk
+  insertions of $\delta$ shifts cohomological degree by
+  $\sum_k(\deg\delta_k-2)-2c_1\cdot d$, so with $\delta\in H^{\ge4}$ each insertion
+  costs at least $2$ and $n\le(2\dim+2c_1\cdot d)/2$ is bounded **for each fixed
+  Novikov degree $d$**. That gives polynomiality in $t$ per $Q^d$ slot for the
+  connection matrix, and it is exactly why the $H^2$ part must be removed by the
+  divisor equation first: a degree-2 insertion costs $0$, permits unboundedly many
+  insertions, and resums to $e^{\delta_2\cdot d}Q^d$, which is not polynomial in
+  $t$. The claim is right to dispose of the first two shapes before starting, but
+  it should say that this is a precondition of the pencil argument rather than a
+  convenience.
+- **Flatness in the $t$-direction is not an issue.** The quantum connection is flat
+  over the whole bulk space; its pullback along any map, in particular along the
+  affine line $t\mapsto t\delta$, is flat, with $\nabla_t=\partial_t+z^{-1}
+  (\delta\star_{t\delta})$ by the chain rule. The coordinator's third attack point
+  fails: there is nothing non-integrable about a pencil.
+
+### Where it dies
+
+Cai's gauge does not become admissible. Solve $\partial_tM=-z^{-1}C_tM$,
+$M|_{t=0}=I$. Track it per Novikov slot:
+
+- at $Q^0$, $C_t$ is the constant $\delta\cup$, so $M^{(0)}=\exp(-tz^{-1}\delta\cup)$,
+  which terminates by nilpotency of $\delta\in H^{\ge4}$ and has $z$-order $\ge-\dim$;
+- at $Q^d$, a term is a product of at most $N(d)\le\omega\cdot d/\omega_{\min}$
+  quantum factors interleaved with those terminating exponentials, so it is
+  polynomial in $t$ **and** has $z$-order bounded below --- by roughly
+  $-(1+\dim)N(d)$.
+
+So the per-slot picture is exactly as Claim B says, and $M|_{t=1}$ makes sense slot
+by slot. And that is the problem: the bound degrades **linearly in $\omega\cdot d$**,
+so summed over Novikov degrees the $z$-order of $M|_{t=1}$ is unbounded below.
+$M|_{t=1}$ lies in $\mathrm{End}(H)\otimes\Lambda_{\mathrm{Nov}}[[z^{-1}]]$ and not
+in $\mathrm{End}(H)\otimes\Lambda_{\mathrm{Nov}}((z))$. Theorem `thm:transport`
+requires $G\in\mathrm{GL}_n(\mathcal H)$ with $\mathcal H=\Omega_V((z))$; $M|_{t=1}$
+is not in it, for precisely the reason the memo already identified for the
+pro-Laurent gauge (its own lines 851-853, "per bulk degree it is a polynomial in
+$z^{-1}$ ... unbounded only after summing over bulk degrees"). Claim B has changed
+the index of summation from bulk degree to Novikov degree and left the divergence
+where it was.
+
+Worse, the trade it induces is the memo's own criterion in disguise. $M$ gains one
+$z$-pole per Novikov unit, while the splitting gauge that produces the
+Levelt-Turrittin form loses $w(\Delta\lambda)$ per unit of $z$-power (memo's
+Section 3, "the two rates"). Forming the comparison at all is the product $GP$
+whose convergence is exactly $e\,w(\Delta\lambda)<\varepsilon$. So Claim B's
+promise --- "without any Hahn field, any receiver, or the weight criterion" --- is
+the one part of it that is false. Answering the coordinator's second attack point
+directly: Cai's argument uses only flatness and ring structure, as claimed; what it
+smuggles in is not analyticity but a **ring** in which an $\mathrm{id}+O(z^{-1})$
+series is a gauge, and no such ring is available once the bulk parameter is
+specialized.
+
+### The repair, named
+
+Do not use Cai's gauge. Use Section 8's machine along the same pencil. Its objects
+live on the right side of the loop coordinate: the block-diagonalizing gauge is
+$g=I+O(z)$, a **positive** power series in $z$, and the shear is
+$\mathrm{diag}(1,z)$; both are in $\mathrm{GL}(\Lambda((z)))$, and no
+$\mathrm{id}+O(z^{-1})$ object appears anywhere in Steps 1-6. Then:
+
+1. Per-slot polynomiality in $t$ propagates through Steps 1-6: the Sylvester
+   recursions multiply connection coefficients and divide by eigenvalue differences,
+   and the inverse of a unit $u_0(1+v)$ with $v$ in the Novikov ideal contributes at
+   most $N(d)$ terms per $Q^d$ slot, each polynomial in $t$. So $g$, the frame, and
+   $R$ are polynomial in $t$ per $(Q^d,z^k)$ slot. This needs writing out, but I see
+   no obstruction.
+2. Section 8's vanishing arguments then upgrade from formal to global on the
+   pencil for free: $\det N$ and $f$ are shown to vanish as elements of
+   $\Lambda[[t]]$, and a power series that vanishes and is *also* a polynomial per
+   slot vanishes identically, hence at $t=1$. Likewise $\partial_tR=[R,G_t]$ makes
+   $\det(XI-R)$ a $t$-constant polynomial, so its value at $t=1$ is its value at
+   $t=0$. This is the "domain rather than validity" upgrade Claim B was reaching
+   for, and the pencil is what supplies it --- but it works only for the
+   $z$-regular argument, not for Cai's.
+3. What it costs: Section 8's (H1) and (H2) must hold along the whole pencil. Its
+   own Theorems `thm:no-splitting` and `thm:no-irregularity` propagate them, so the
+   requirement is really at $t=0$ only, plus the exclusion of the degeneration
+   locus where the nilpotent part vanishes --- which is the caveat the memo's own
+   Section 9 already records at lines 1591-1594.
+
+Combined with the observation at the end of the Claim A discussion --- that after
+Claim A the only constancy still needed is for $X\times\PP^1$, whose
+$\nu_6$-carrying blocks are two copies of the cubic's rank-two Jordan block, and
+that only a lower bound is needed --- this repair is within reach in a way that
+Claim B's own version is not. But as written, Claim B asserts the thing that fails
+and justifies the things that do not need justifying.
+
+## Which is weaker
+
+Claim B, decisively. Claim A is a computation with two independent proofs and an
+exact invariance principle behind it. Claim B is a correct observation about
+polynomiality attached to an engine that the observation does not fix; its
+substance survives only if it is rebuilt around Section 8.
