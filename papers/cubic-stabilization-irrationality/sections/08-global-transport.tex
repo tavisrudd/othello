@@ -28,7 +28,10 @@ semigroup is pointed.
 \item There is a class \(a_p\in H^*_{\Gm}(W)\) whose ordinary Kirwan
 restrictions are the two endpoint point classes and whose restriction to
 every fixed component that is semistable for some polarization interpolating
-the two chamber linearizations is zero.
+the two chamber linearizations is zero.  This \(a_p\) is the global
+orbit-cylinder class of Lemma~\ref{lem:orbit-cylinder-disjoint}; it is
+unrelated to the Gu--Yu--Yu wall-local class written \(a_p\) in
+Section~\ref{sec:simple-wall}.
 \end{enumerate}
 These are assumptions on the gauged completion, not consequences of smooth
 projectivity alone.
@@ -39,15 +42,23 @@ components]
 \label{rem:iv-semistable-restriction}
 Condition \textup{(iv)} cannot be strengthened to vanishing on every
 component of \(W^{\Gm}\).  For a smooth projective \(W\) with \(\Gm\)-action
-the Bia{\l}ynicki--Birula decomposition makes \(H^*_{\Gm}(W;\Q)\) a free
-module over \(H^*(B\Gm;\Q)\), so the restriction
-\(H^*_{\Gm}(W)\to H^*_{\Gm}(W^{\Gm})\) is injective.  A class vanishing on
-every fixed component is therefore zero, and cannot have the two endpoint
+the Bia{\l}ynicki--Birula decomposition is filtrable, its cells are affine
+bundles over the fixed components, and all cells are even-dimensional, so the
+Gysin sequences degenerate and \(H^*_{\Gm}(W;\Q)\) is a free module over
+\(H^*(B\Gm;\Q)\), in particular torsion free.  By the localization theorem the
+kernel of the restriction
+\(H^*_{\Gm}(W)\to H^*_{\Gm}(W^{\Gm})\) is a torsion \(H^*(B\Gm;\Q)\)-module;
+freeness alone would not give this.  The two facts together make the
+restriction injective, so a class vanishing on
+every fixed component is zero and cannot have the two endpoint
 point classes as its Kirwan restrictions.  The vanishing needed in the
 polarization sweep is only on the fixed components that the distinguished
-output evaluation can reach at an intermediate polarization, and those are
-semistable for the corresponding interpolated linearization; that is what
-Lemma~\ref{lem:orbit-cylinder-disjoint}\textup{(b)} supplies.  In particular
+output evaluation can reach at an intermediate polarization.  Those components
+are semistable for the corresponding interpolated linearization, which is the
+reachability statement proved inside
+Proposition~\ref{prop:support-collapse} from
+\cite[Lemma~3.17]{GonzalezWoodward}, and on such components the vanishing is
+supplied by Lemma~\ref{lem:orbit-cylinder-disjoint}\textup{(b)}.  In particular
 the two limits of the cylinder orbit, whose weights stay strictly nonzero
 along the whole interpolation, are outside the scope of \textup{(iv)} by
 design.
@@ -108,8 +119,12 @@ derivatives
 \begin{equation}\label{eq:endpoint-gauged-maps}
  A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm.
 \end{equation}
-are the endpoint localized gauged maps; this is the localized adiabatic
-identity \cite[Equation~(68)]{WoodwardQKIII}.
+are the endpoint localized gauged maps.  The display is a definition; what is
+cited is the localized adiabatic identity
+\cite[Equation~(68)]{WoodwardQKIII}, which equates the composite
+\(\tau_{Y_\pm,-}\circ\kappa_\pm\) with the gauged graph potential in the
+distinguished output slot, and \eqref{eq:endpoint-gauged-maps} is its
+derivative in the input directions.
 
 The marked class has the restrictions
 \begin{equation}\label{eq:marked-class-restrictions}
@@ -147,6 +162,12 @@ Consequently the endpoint functional with distinguished output insertion
 \end{lemma}
 
 \begin{proof}
+One input is taken from the normalization and not proved here: in Woodward's
+graph-space normalization, \(D\tau_{Y,-}\) is the genus-zero fundamental
+solution of the quantum connection on \(Y\), and it is unitary for the
+\(z\mapsto e^{-\pi i}z\)-twisted pairing of Definition~\ref{def:point-row}.
+Everything below is a consequence of that normalization, and a different
+normalization would change only the scalar \(c_n(z)\).
 The Gamma framing of \(\OO_p\) is the graph fundamental solution applied to
 the top cohomology class.  The Gamma and Chern-class factors act trivially on
 that class.  The remaining dimension sign, power of \(z\), and power of
@@ -175,7 +196,9 @@ variables; the proposition does not construct the common realization.
 
 \begin{proof}
 Retain rotation of the parametrized graph curve, with equivariant parameter
-\(\hbar\).  At each ordinary input marking insert the normalized equivariant
+\(\zeta\); this is the same parameter that appears in the Gamma factors
+below, and the wall cocharacter is written \(\xi\) to keep the two apart.
+At each ordinary input marking insert the normalized equivariant
 point class of \(0\in\mathbf P^1\).  Rotation localization then puts every
 input on the zero-side bubble tree.  Next choose equivariant divisor classes
 \(D_1,\ldots,D_s\) spanning the full equivariant numerical dual of the
@@ -185,12 +208,18 @@ with parameters \(t_j\).  On a graph fixed locus their contribution is
 \begin{equation}\label{eq:liouville-character}
  \exp\!\left(\sum_jt_jD_j\right)
  \prod_j x_j^{D_j\cdot \widetilde d_+},
- \qquad x_j=\exp(t_j\hbar).
+ \qquad x_j=\exp(t_j\zeta).
 \end{equation}
 where \(\widetilde d_+\) is the total infinity-side equivariant degree: the
 bubble degree together with the affine cocharacter degree of the gauged
-principal component \cite[Corollary~9.10(c)]{WoodwardQKIII}.  Extracting the
-trivial character in all \(x_j\) forces \(\widetilde d_+=0\).  The infinity
+principal component \cite[Corollary~9.10(c)]{WoodwardQKIII}.  The variables
+\(x_j\) are not independent of the \(t_j\), so the extraction is by linear
+independence of characters: the total is a finite sum, over the allowed
+degrees, of a polynomial in \(t\) times
+\(\exp(\zeta\sum_jt_j(D_j\cdot\widetilde d_+))\), and keeping the terms whose
+exponential rate vanishes identically as a linear form in \(t\) forces
+\(D_j\cdot\widetilde d_+=0\) for every \(j\), hence \(\widetilde d_+=0\) by
+condition \textup{(iii)}.  The infinity
 factor is therefore the unstable identity: positivity on the effective
 infinity-side semigroup leaves no nonconstant degree-zero component.  The
 zero factor is exactly the localized graph potential in
@@ -199,33 +228,42 @@ full equivariant divisor lattice is important: endpoint divisor spaces alone
 need not separate an affine cocharacter degree.
 
 The distinguished class \(a_p\) is inserted at the distinguished output
-evaluation of the graph factor, not at an ordinary input marking.  This is
-the evaluation through which Woodward's localized graph potential is defined
-by pushforward: it is the evaluation of the principal component at a fixed
-parametrized point of the domain, so when a bubble tree sits over that point
-it is the evaluation at the attaching node, computed from the principal side.
+evaluation of the graph factor, not at an ordinary input marking.  This is the
+evaluation through which Woodward's localized graph potential is defined by
+pushforward: on the locus of bundles with sections that are constant in some
+trivialization near the distinguished parametrized point, it is the evaluation
+there, valued in the inertia stack of the quotient
+\cite[Section~9.4]{WoodwardQKIII}.  Its value is the principal-component value,
+because the section is constant near that point; it is not the value at
+\(0\) or \(\infty\), where the bubble trees attach and where the value is a
+cocharacter limit carrying no semistability.
 The ordinary inputs remain at their own markings.
 
 For each fixed degree and sufficiently large area, a nonendpoint
-polarization-fixed graph is a Mundet-semistable \(\C^\times_\zeta\)-fixed
-object for a wall cocharacter \(\zeta\), and its principal component maps to
-\(W^{\zeta,t}/G_\zeta\), where \(W^{\zeta,t}\) is the locus of
-\(L_t\)-semistable points of the \(\zeta\)-fixed locus and \(t\) runs over the
+polarization-fixed graph is a Mundet-semistable \(\C^\times_\xi\)-fixed
+object for a wall cocharacter \(\xi\) --- written \(\zeta\) in
+\cite{GonzalezWoodward}, renamed here because \(\zeta\) is the rotation
+equivariant parameter throughout this section --- and its principal component
+maps to
+\(W^{\xi,t}/G_\xi\), where \(W^{\xi,t}\) is the locus of
+\(L_t\)-semistable points of the \(\xi\)-fixed locus and \(t\) runs over the
 interpolation between the two chamber linearizations
 \cite[Lemma~3.17 and Proposition~3.18]{GonzalezWoodward}.  In the bubble-tree
 description of that fixed locus, the principal factor is a gauged-map stack
-over \(W^{\zeta,t}\) framed at its attaching points, and the bubble factors are
+over \(W^{\xi,t}\) framed at its attaching points, and the bubble factors are
 glued to it along those framings
-\cite[Remark~3.19]{GonzalezWoodward}; so an attaching node, evaluated from the
-principal side, again lies in \(W^{\zeta,t}\).  The distinguished output
-evaluation therefore lands in a fixed component which is \(L_t\)-semistable,
+\cite[Remark~3.19]{GonzalezWoodward}; note that the framings are compared in
+the ambient \(W^\xi\), so it is the principal side that carries the
+semistability.  The distinguished output
+evaluation is a principal-component value, and therefore lands in a fixed
+component which is \(L_t\)-semistable,
 so \(a_p\) restricts to zero on it by
 \eqref{eq:marked-class-restrictions} and the wall term vanishes
 before division by the virtual normal Euler class.
 
 The placement is what makes this work, and the weaker statement for an
 arbitrary marking would not.  Proposition~3.15(c) of the same source places an
-arbitrary node or marking only in the full fixed locus \(W^\zeta\), with no
+arbitrary node or marking only in the full fixed locus \(W^\xi\), with no
 semistability, so a marking carried off on a bubble tree may land on a fixed
 component that is unstable for every interpolated polarization --- for
 instance on a component containing one of the two limits of the cylinder
@@ -237,8 +275,17 @@ vanishing must come from the placement of the distinguished insertion rather
 than from a stronger property of the class.
 
 Only the two endpoints survive the virtual Kalkman
-identity.  Their signs and node factors agree with Woodward's localized
-adiabatic identity.  At either endpoint there is no wall, and the
+identity.  Two things about that identity are used and neither is proved here.
+The two surviving components are the gauged-map stacks at \(L_-\) and \(L_+\),
+sitting in the polarization master stack with opposite normal weights along
+the master-space direction, so that after the residue extraction their
+contributions enter with opposite signs and a common normalization; this is
+why the vanishing of all wall terms gives the equality
+\eqref{eq:support-collapse-row} rather than a proportionality.  Both the
+localized formula and this endpoint normalization are part of the large-area
+package assumed in
+Definition~\ref{def:gauged-admissible}\textup{(ii)}; we do not exhibit the
+master-space normal complex.  At either endpoint there is no wall, and the
 distinguished output evaluation is exactly the slot through which
 \(\tau_{Y_\pm,-}\) is defined, so the distinguished equivariant
 insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
@@ -444,8 +491,12 @@ unstable type those factors are absent and only the moving index remains
 \cite[Example~9.15]{WoodwardQKIII}.
 
 Pass to a finite cover which clears stabilizer denominators and apply the
-splitting principle.  A virtual line in the moving index of the principal
-weighted component has nilpotent Chern root \(\alpha_a\) and degree
+splitting principle; the domain there is an ordinary line, and slopes are
+counted per unit of the primitive affine direction \(\delta\) on both sides of
+the identity below, while consecutive degrees inside a tail differ by the
+stabilizer order of Proposition~\ref{prop:app-mu-k}\textup{(b)}.  A virtual
+line in the moving index of the principal
+weighted component has Chern root \(\alpha_a\) and degree
 \begin{equation}\label{eq:affine-moving-degree}
  n_a(k)=h_ak+s_a.
 \end{equation}
@@ -459,7 +510,11 @@ meromorphic expression
 \end{equation}
 For \(n<0\), the left side denotes the Euler class of \(H^1\); for
 \(n\geq0\), it denotes the inverse Euler class of \(H^0\).  Thus the two
-degree rays are not assigned unrelated Gamma products.
+degree rays are not assigned unrelated Gamma products.  The root
+\(\alpha_a\) is a moving root: it carries a nonzero equivariant weight, and
+only its correction is nilpotent at Artin level.  This is what makes the
+\(m=0\) factor invertible, and it is the standing hypothesis that the virtual
+normal Euler class is invertible; a purely nilpotent root would not be.
 
 The total affine slope of the moving index carries no ray sign:
 \begin{equation}\label{eq:total-moving-slope}
@@ -663,14 +718,15 @@ the comparison is the following \(2\)-commutative square:
 \]
 The lower arrow is the canonical truncation map.  The square is the
 naturality square of the truncation transformation evaluated at the
-equivalence \(\operatorname{ev}_1\), and on the two-chart \v{C}ech
-presentation both composites are the same difference of restrictions to the
-open orbit, so the comparison homotopy may be taken to be the identity
+equivalence \(\operatorname{ev}_1\), which is what makes it
+\(2\)-commutative; the two-chart \v{C}ech presentation additionally
+identifies the left vertical arrow strictly, both sides being the same
+difference of restrictions to the open orbit
 (Proposition~\ref{prop:app-square}).  The left vertical arrow is therefore a
 quasi-isomorphism, and the two perfect obstruction theories are isomorphic as
 morphisms to the cotangent complex, not merely as perfect complexes.
-Appendix~\ref{app:square} also records the two imported comparisons the
-argument uses.
+Appendix~\ref{app:square} also records what the argument imports, what it
+fixes by convention, and what it proves internally.
 
 For an attached stable-map factor, the fixed graph stack is a derived fibre
 product over its inertia evaluation.  Its cotangent triangle is the direct
@@ -703,6 +759,9 @@ finite derived base change, so it commutes with Artin reduction.  This proves
 every assertion.
 \end{proof}
 
+% The label keeps the word "holonomicity" deliberately: it is the stable
+% anchor for cross-references and for the release-surface gate.  The
+% statement says (D)-finite, which is what is proved.
 \begin{proposition}[Clutching-tail \((D)\)-finiteness]
 \label{prop:clutching-tail-holonomicity}
 Every point-marked endpoint tail is a finite nilpotent derivative of one
@@ -731,7 +790,7 @@ For \(G=\Gm\), an affine clutching cocharacter is an integer.  On one of the
 identified tails, apply the splitting principle to the moving part of the
 normal complex.  A character root of weight \(h\) has degree \(hk+s\), so
 the complementary moving weights give \eqref{eq:gamma-index-factor}, with
-nilpotent Chern roots on
+moving Chern roots whose corrections are nilpotent on
 the fixed coefficient stack.  Stable attached components, including
 degree-zero bubbles stabilized by markings and nodes, retain the node and
 attaching factors in \eqref{eq:virtual-normal-euler}.  Only the irreducible
@@ -749,14 +808,16 @@ its denominators yields
  \sum_{i=0}^d p_i(k)c_{k+i}=0,
  \qquad p_i(k)\in R_N[k],
 \]
-on the tail.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is (D)-finite over
+on the tail.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is \((D)\)-finite over
 \(R_N\).  Finite Chern-root, input, and bulk derivatives commute with this
-identity and preserve (D)-finiteness.  Under
+identity and preserve \((D)\)-finiteness.  Under
 \eqref{eq:neutral-direction}, Stirling's
 formula cancels the
 \(k\log k\) terms.  Sizes here are those of the coefficients in a fixed
-\(\C\)-basis of \(R_N\), so the estimate is componentwise and the nilpotent
-Chern roots contribute only bounded factors.  The cancellation is uniform in
+\(\C\)-basis of \(R_N\) after specializing the rotation parameter \(\zeta\) to
+a nonzero complex number, so the estimate is componentwise and the nilpotent
+parts of the moving roots contribute only bounded factors.  The cancellation
+is uniform in
 the two degree rays
 because each virtual line contributes the same expression to \(\log|c_k|\) on
 both of them: for \(n_a\geq0\) the factor \eqref{eq:gamma-index-factor} has
@@ -769,12 +830,18 @@ log-magnitude \(|n_a|\log|n_a|-|n_a|+O(\log|n_a|)
  \log|c_k|=
  -\Bigl(\sum_ah_a\Bigr)k\log k
  -k\sum_ah_a\log|h_a|
- +\Bigl(\sum_ah_a\Bigr)k+O(\log k),
+ +\Bigl(\sum_ah_a\Bigr)k
+ -\Bigl(\sum_ah_a\Bigr)k\log|\zeta|
+ +O(\log k),
 \]
 where the sums run over the roots with \(h_a\neq0\); a root with \(h_a=0\) has
-constant degree along the tail and contributes a bounded factor.  Thus
+constant degree along the tail and contributes a bounded factor.  The last
+displayed term is the one contributed by the scale of \(\zeta\); it is written
+out because the display is the general expansion, before neutrality is
+imposed.  Thus
 \eqref{eq:total-moving-slope} together with \eqref{eq:neutral-direction}
-kills both the \(k\log k\) term and the linear term.  The remaining
+kills the \(k\log k\) term, the linear term, and that scale term.  The
+remaining
 exponential rate \(-\sum_ah_a\log|h_a|\) is removed by one rescaling, after
 which the coefficients grow by a power of \(k\) and
 \(\log k\).  After that rescaling, radial limits of \(F\) therefore define
@@ -789,9 +856,10 @@ uniformly in \(\theta\) for \(r\leq1\) and its radial limit at \(r=1\) is a
 continuous function of \(\theta\); applying \(\partial_\theta^q\) recovers
 \(\sum_kc_kr^ke^{ik\theta}\).  A uniform limit of continuous functions
 differentiated \(q\) times converges in \(\mathcal D'(S^1)\), so the radial
-limit exists there and has order at most \(q\).  The bound on \(q\) depends
-only on the exponents \(N,M\), which are uniform on the tail, so the order is
-uniform as well.
+limit exists there and has order at most \(q\).  The order depends only on the
+exponent \(N\), and at a fixed Artin level the finitely many tails, threshold
+classes, and basis components admit a common \(N\), so one \(q\) serves all of
+them.
 Finite threshold terms are Laurent polynomials and do not alter the
 conclusion.
 \end{proof}

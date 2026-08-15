@@ -187,6 +187,86 @@ continuous radial limit, and `∂_θ^q` recovers the original series, so the rad
 
 `make check` passes at 45 pages, warning-free, tracked PDF current.
 
+## 5. Third batch: disposition of the post-repair cold read
+
+An adversarial referee cold read of the revised text (frozen at `5c8d0957a`) is in
+`2026-08-15-c913-cold-read-post-repair.md`. It found ten required repairs, none of which changes a
+theorem statement, and it independently confirmed `lem:orbit-cylinder-disjoint` in full, the Gamma
+index factor on both rays, the residue normalization, the slope identity as equivariant
+Riemann–Roch, the `P^1` chart counterexample and the invariance argument, and the boundary-value
+argument end to end. It also read González–Woodward Remark 3.19 untruncated from the cache,
+discharging the extraction note's open caveat and confirming the manuscript's paraphrase.
+
+All ten are now repaired, plus the presentational findings.
+
+1. **Virtual-class bridge.** `lem:app-truncation` compared the two obstruction morphisms on
+   square-zero extensions and said "no more is claimed", while `prop:app-square` then invoked
+   Behrend–Fantechi, whose virtual class is built from the induced morphism of Picard stacks
+   `𝔑 → h^1/h^0(E^∨)`. The bridge is now written out: a morphism of Picard stacks is determined by
+   its test-scheme points, and by the construction of the intrinsic normal sheaf those points are
+   exactly the square-zero extension data — obstruction class plus torsor of extensions — that the
+   lemma compares, naturally in the test scheme. This is why the convention records the torsor and
+   not only the obstruction class; the `h^0` half is what the deformation side of the cone needs.
+2. **Contradiction between the theorem and the appendix.** Section 8 still said the comparison
+   homotopy "may be taken to be the identity" and cited `prop:app-square`, which denies exactly that
+   about the composites. Section 8 now says 2-commutativity comes from functoriality at `ev_1` and
+   that the Čech presentation identifies the left vertical arrow strictly.
+3. **The evaluation-slot gloss was wrong.** Woodward's distinguished evaluation is at `BZ_k`, on the
+   locus where the section is constant in a trivialization near that point; the bubble trees attach
+   at `0` and `∞`, where the value is a cocharacter limit with no semistability. The manuscript now
+   says the slot evaluates the principal-component value and explicitly not the value at `0` or `∞`,
+   citing QK III Section 9.4 for the slot. The referee notes this makes the argument stronger, since
+   the fibre product of Remark 3.19 is over `(X^ξ)^r` and only the principal side carries
+   semistability; that is now stated too.
+4. **Freeness does not imply injectivity.** `rem:iv-semistable-restriction` needed the localization
+   theorem — the kernel of restriction to the fixed locus is torsion — combined with freeness, which
+   supplies torsion-freeness. Both steps are now named, along with filtrability of the
+   Białynicki-Birula decomposition. The ambiguous antecedent that appeared to attribute reachability
+   to clause (b) is fixed: reachability is González–Woodward Lemma 3.17, vanishing is clause (b).
+5. **QK III Section 9.4 was the wrong locator for the fixed-locus obstruction theory.** It induces a
+   theory *from* the fixed locus onto a different stack. The right citations are
+   Graber–Pandharipande for the fixed-part principle and González–Woodward Corollary 3.20 for its
+   application in the gauged setting — and Corollary 3.20 itself cites Graber–Pandharipande for
+   exactly this. Section 9.4 is retained only where it does support the manuscript, namely the
+   distinguished evaluation slot.
+6. **The family form used the wrong open cover.** `x ∈ U` does not put the `z = 0` value of the
+   section in `U` — the counterexample two paragraphs earlier is precisely that. The cover is now by
+   `U_F = {x ∈ U ∩ W^gen : lim_{t→0} t^a x ∈ U ∩ F}`, open in `W_F^a`, which is what the preceding
+   paragraph actually proves covers `W_F^a`.
+7. **The Kalkman endpoint normalization was one sentence of assertion.** The text now states what is
+   used — the two surviving components sit in the polarization master stack with opposite normal
+   weights along the master-space direction, so after residue extraction they enter with opposite
+   signs and a common normalization, which is why wall vanishing gives an equality — and says
+   plainly that this, like the localized formula itself, is part of the large-area package assumed
+   in gauged-admissibility (ii), with no master-space normal complex exhibited here.
+8. **Three-way notation collision.** `ζ` was both the wall cocharacter and the rotation equivariant
+   parameter, while `ħ` was a second name for the latter. `ħ` is gone, `ζ` is the rotation
+   parameter throughout, and the wall cocharacter is `ξ`, with a note that González–Woodward write
+   `ζ` for it.
+9. **The `log|c_k|` display omitted `-(∑ h_a) k log|ζ|`.** Added, with the note that it vanishes only
+   after neutrality is imposed, and with the specialization of `ζ` to a nonzero complex number made
+   explicit where magnitudes are taken.
+10. **The introduction misattributed the wall removal to rotation localization.** The wall terms are
+    polarization-sweep terms; rotation localization produces the graph factor and the degree
+    extraction. Reworded.
+
+Also taken from the same report: the Liouville extraction now argues by linear independence of
+characters rather than appearing to treat `x_j` and `t_j` as independent; the moving Chern roots are
+described as carrying a nonzero equivariant weight with nilpotent correction, which is what makes
+the `m = 0` factor invertible; the slope identity records that both sides are counted per unit of
+the primitive affine direction while a tail steps by the stabilizer order;
+`lem:point-insertion-row` names its normalization input explicitly; `eq:endpoint-gauged-maps` is
+labelled a definition whose cited content is the identity it differentiates; the `a_p` symbol reuse
+against Section 3 is disambiguated; the `(D)`-finite typesetting is consistent; the deliberate
+retention of the `holonomicity` label is recorded in a source comment.
+
+One referee UNVERIFIED item is already discharged elsewhere: Włodarczyk Proposition 2(B') is
+source-verified in `2026-08-14-c913-wlodarczyk-2bprime-extraction.md` (cache key
+`arXiv:math/9904074`, sha256 `ac86c460…`). The referee did not have that note. Mumford GIT and the
+QK II loci remain verified only against the extraction note.
+
+`make check` passes at 46 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph
