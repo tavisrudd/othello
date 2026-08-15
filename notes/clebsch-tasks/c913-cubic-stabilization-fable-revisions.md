@@ -159,6 +159,36 @@ commit `2e49e2c`, no appendix), so a new version deposit is due when the
 current manuscript is refrozen.  The standalone mirror has not yet taken these
 minor fixes.
 
+Referee-driven revision of 2026-08-14, all committed and synced: the paper is
+retitled *Gamma Point Rows under Quantum Wall Crossing and a Criterion for
+Stable Irrationality*; the abstract opens with the transport mechanism and
+names the Gamma/window conjecture as the route to removing the hypotheses; the
+introduction says why counting packets stops working from `m = 2`; and
+`lem:cubic-central-charge` derives the cubic central charge from the small
+`I`-function instead of asserting its normalization.  Three cold reads ran
+(reports: `notes/2026-08-14-c913-cold-read-cubic-endpoint.md`,
+`notes/2026-08-14-c913-cold-read-counting-failure.md`,
+`notes/2026-08-14-c913-consistency-check.md`).  They found one off-by-one (a
+cubic threefold is an admissible centre only from `m >= 2`), three
+overstatements, a false Barnes hypothesis (`p = q-1`, not `p <= q`), a ledger
+row claiming an integral power where the lemma proves `z^{k-3/2}`, and an
+abstract gate that passed a wording denying its own assumptions; all are
+repaired.  Both release gates now collapse whitespace, scan every occurrence of
+the conclusion, and require the sentence stating it to carry a condition.
+`make check` passes at 42 pages; the standalone repository is synced and
+verified against the export manifest at authority commit `a5fd508c2`, with PDF
+and certificate hashes byte-identical, and the portfolio summary mirror is
+refreshed.
+
+Source check of the Cai dependency (cached `arXiv:2608.01577`, sha256
+`06bfccf9...`, re-fetched 2026-08-14 and byte-identical): the matrices `K` and
+`G`, the basis, and Proposition 6 are quoted correctly by
+Section~9.1.  One slip in the source, not in ours: Cai's prose gives the
+eigenvalues of `K` as `+-3 sqrt3 q^{1/2}`, which is the spectrum of `K/2` --
+the bracketed matrix has characteristic polynomial `l^4 - 27q l^2`, so the
+displayed `K = 2(...)` has `+-6 sqrt3 q^{1/2}`, as our Section~9.1 states.
+Nothing downstream moves; raised with the author by email.
+
 ## Immediate next step
 
 Author sign-offs: the expected-versus-open labels for Definition
