@@ -16,8 +16,10 @@ displays Cai's exact small-even cubic connection matrix with its coefficient
 and original-loop-coordinate conventions; commits `4a8d4d638` and
 `09c571ec2` give the independently checked integral-`z` block reduction and
 its stable Section~4 numbering; commits `f8f9f0bda` and `ae0cad04f` derive
-the rank-two indicial equation coefficient by coefficient.  The remaining
-WP4 steps, then WP5--WP6, remain prioritized work.
+the rank-two indicial equation coefficient by coefficient.  The roots and
+framed eigenvalues are derived in commits `af1cc0c9e` and
+`18fd50077`.  The remaining WP4 steps, then WP5--WP6, remain prioritized
+work.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -246,7 +248,7 @@ exact bridge is formalized.
 - [x] Perform the formal integral-`z` block reduction in the paper.
 - [x] Derive the rank-two indicial polynomial
   `rho^2 + rho + 5/36`.
-- [ ] Derive roots `-1/6,-5/6` and eigenvalues
+- [x] Derive roots `-1/6,-5/6` and eigenvalues
   `exp(+/- pi i/3)` with the repaired framed convention.
 - [ ] Show the two rank-one exponential blocks are unramified and contribute
   no primitive-sixth eigenvalues.
