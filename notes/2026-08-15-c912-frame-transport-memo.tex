@@ -1918,6 +1918,63 @@ which the dimension axiom gives, each insertion of an $H^{\ge4}$ class costing a
 least two --- the identity holds over $\Lambda[t]$ and $t=1$ is inside the domain
 rather than at its edge.
 
+\subsection*{The trade between the two sides, and where it cancels}
+\label{sec:trade}
+
+It is worth being explicit about what is being traded, because the accounting
+localizes the remaining debt more sharply than the narrative does.
+
+\emph{Vertical motion is free; horizontal motion is the whole debt.} Each step of
+a factorization gives an exact identity
+$\nu_6(\mathrm{Bl}_ZV,w)=\nu_6(V,\tau(w))+\sum_j\nu_6(Z,\varsigma_j(w))$, and with
+$\dim Z\le2$ the centre terms vanish. So moving between varieties conserves the
+invariant exactly: nothing leaks into a centre and nothing is created. The only
+way the invariant can change anywhere in the ledger is by moving between two
+parameters of \emph{one} variety. Every obligation this memo has chased is a
+horizontal one, and the vertical steps have never been in doubt.
+
+\emph{Consequence, in contrapositive form.} Suppose $X\times\PP^1$ is rational.
+The left end carries $4$ and the right end carries $0$, and conservation across
+every vertical step then forces some valley of the zigzag to have a
+bulk-parameter-dependent primitive-sixth multiplicity. So the theorem is
+equivalent to: no smooth projective fourfold arising as a valley has a
+$\nu_6$-carrying block that degenerates along the displacement the chain
+produces. Stated this way the debt is a single negative statement about
+degeneration, not a positive statement about transport.
+
+\emph{The balance has slack, and the slack is three.} The left end supplies $4$,
+being two copies of the cubic's rank-two block, and the contradiction needs only
+$1$. So up to three of the four eigenvalues may be lost anywhere along the chain
+without harming the argument. What must be excluded is total collapse, not any
+loss --- a weaker statement than constancy, and one that Section~\ref{sec:rigid}
+overshoots, since it proves the characteristic polynomial exactly constant.
+
+\emph{Four places where the debt cancels outright.}
+\begin{enumerate}
+\item Any step whose accumulated displacement lies in $H^0\oplus H^2$. The string
+  and divisor equations are exact there, so such a step costs nothing. This is
+  not a rare case: it is exactly what makes the endpoint free, where the
+  displacement is $\pm2q^{1/2}$ and purely $H^0$.
+\item An adjacent blowup and blowdown of the same centre, where the composite
+  parameter map is the identity and no comparison of two parameters arises.
+\item Any valley whose Euler operator is semisimple, or more generally has only
+  multiplicity-one eigenvalues in the relevant range. There
+  Theorem~\ref{thm:simple-blocks} gives $\nu_6=0$ at every parameter
+  unconditionally, so the two incoming parameters agree trivially and the valley
+  is vacuous.
+\item Every centre, by the low-dimensional lemma. Centres are where a leak would
+  have to go, and they cannot receive one.
+\end{enumerate}
+
+\emph{What is left after the cancellations.} The debt sits only at valleys that
+simultaneously carry a nonzero $\nu_6$ and receive a displacement with a nonzero
+$H^{\ge4}$ part. By the dimension axiom each such displacement contributes
+finitely much per Novikov degree, so the surviving obligation is finite data at
+finitely many places, and by the slack it need only be shown not to annihilate
+all four eigenvalues at once. That is the sharpest available statement of what
+remains, and it is what a next attempt should target rather than constancy in
+general.
+
 \subsection*{Owed lemmas}
 
 \begin{enumerate}
