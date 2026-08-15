@@ -365,6 +365,58 @@ One presentational consequence of the repair: adding the per-ray display overflo
 `H^0` estimate is split across a display and a following clause. `make check` passes at 47 pages,
 warning-free, tracked PDF current.
 
+## 8. Sixth batch: the second fresh round
+
+A second fresh referee read the primary scope cold at `8bdc3a890`
+(report: `2026-08-15-c913-cold-read-round4.md`) and returned two required repairs, both inside
+`prop:app-mu-k`, and eleven optional improvements. It found no place where a proof bounds less than a
+later step consumes, no input used in a primary-scope proof that is absent from both
+`def:gauged-admissible` and scope item (5), and no citation pointing at a different object or the
+wrong direction. Both required repairs are closed.
+
+**The inertia-stack direction was reversed.** The text said Woodward's equations (54) and (57) take
+their fibre products over the unrigidified inertia stack, with the rigidified one entering for the
+evaluation maps. It is the other way round. I verified this independently rather than on the
+referee's word, using the control it identified: `pdftotext` drops the overline but leaves a space, and
+Woodward's own Example 4.3(h) prints both forms adjacently — `IX//G = ⊔ X^{ss,g}/Z_g` unspaced for the
+unrigidified stack and `I X//G = ⊔ X^{ss,g}/(Z_g/⟨g⟩)` spaced for the rigidified one. Equations (54)
+and (57) both carry the space. The sentence now says the fibre products are rigidified and that the
+constructions descend along the `Bμ_r`-gerbe by the preceding paragraph, which is what the argument
+actually uses; the conclusion of clause (d) is unchanged, since full faithfulness and conservativity
+of `π^*` were already established there.
+
+**A cocharacter exponent contradicted itself.** Clause (b) asserts `φ̃(θ) = θ^b` but the proof
+computed with `φ̃(t) = t^{b/k}`, which gives `θ^{b/k}` — not single-valued, and not the section the
+construction uses. Woodward's Definition 9.7 has the cocharacter integral and the composite
+`z ↦ φ̃(z^{1/k})x` rational, so `φ̃(t) = t^b` and the composite is `z^{b/k}x = z^a x`. Corrected, with
+the composite displayed so the denominator's origin is visible, and the earlier sentence that
+described the cocharacters as taking values in `(1/k)Z` now says it is the exponent of the section
+that does.
+
+Optional improvements taken: "bounded" became "polylogarithmically bounded" for the nilpotent
+corrections, since `∑_{m≤n}(m+w)^{-1} ~ log n` and the error terms already absorb it; the recurrence
+now says its coefficients may be taken scalar and how; the invertibility of the virtual normal Euler
+class is cross-referred to gauged-admissibility (ii), which implies it through virtual localization;
+Woodward's `Example 4.3` replaces `Proposition 4.3` at both occurrences, the environment in his paper
+being an example despite his own prose calling it a proposition; the two verbs describing the node
+and attaching factors are swapped to match the order of the display; three displays that continue
+into a sentence no longer end in a full stop; and the statement of support collapse now points
+forward to the Rees substitution it invokes.
+
+The referee also caught that the prose after `lem:orbit-cylinder-disjoint` argued for bistability of
+the cylinder orbit while both assumption registers list it as an input — the argument silently used
+that the endpoint identification restricts over the common open to the cobordism quotients. The
+prose now presents that restriction as the content of the registered assumption rather than as a
+proof, and scope item (5) spells out what is assumed.
+
+Optional improvements not taken and left for a deliberate pass: the symbol collisions on `a`, `k`,
+and `x` within Section 8, for the same reason as last round; and two locator additions in
+`rem:verification-status` (Iritani's global Landau–Ginzburg construction, and the kernel description
+behind the graph Fourier–Mukai transform's action on skyscrapers), which need source-level
+judgment on a part of the manuscript outside this repair sequence.
+
+`make check` passes at 47 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph

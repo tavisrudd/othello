@@ -45,7 +45,7 @@ fixed locus \cite{GraberPandharipande}, whose gauged instance for the
 wall-crossing circle is \cite[Corollary~3.20]{GonzalezWoodward}; and the
 rigidified
 inertia conventions
-\cite[Section~4.3, Proposition~4.3(f),(g)]{WoodwardQKII}.  One standard
+\cite[Section~4.3, Example~4.3(f),(g)]{WoodwardQKII}.  One standard
 comparison is used as precedent and not reproved: the cotangent complex of a
 derived mapping stack is the pushforward of the pulled-back cotangent complex
 of the target.  The equivariant relative form of that formula needed here is
@@ -598,9 +598,10 @@ rigidification}
 
 Woodward's clutching construction has an orbifold form
 \cite[Definition~9.7]{WoodwardQKIII}: one passes to a \(k\)-fold cover of the
-open orbit, the cocharacters \(\widetilde\varphi_\pm\) are taken with values in
-\(\tfrac1k\mathbf Z\), and the section on a chart is
-\(z\mapsto\widetilde\varphi_\pm(z^{1/k})x\).  The chart is then
+open orbit and the section on a chart is
+\(z\mapsto\widetilde\varphi_\pm(z^{1/k})x\).  The cocharacters
+\(\widetilde\varphi_\pm\) themselves are integral; it is the exponent of the
+resulting section that lies in \(\tfrac1k\mathbf Z\).  The chart is then
 \([\operatorname{Spec}R[z^{1/k}]/\mu_k]\) with \(\mu_k\) acting by
 \(z^{1/k}\mapsto\theta z^{1/k}\) for a primitive \(k\)-th root of unity
 \(\theta\).
@@ -623,7 +624,7 @@ equivalence of Proposition~\ref{prop:app-descent} and the square of
 Proposition~\ref{prop:app-square} are \(\mu_k\)-equivariant.
 \item Rigidification replaces the inertia stack by its quotient by the finite
 central \(B\mu_k\), \(\bar I_{X,r}=I_{X,r}/B\mu_r\)
-\cite[Section~4.3, Proposition~4.3(f),(g)]{WoodwardQKII}.  Pullback along this
+\cite[Section~4.3, Example~4.3(f),(g)]{WoodwardQKII}.  Pullback along this
 gerbe is fully faithful with \(\pi_*\pi^*\simeq\id\), hence conservative, so
 the equivalence and the obstruction theory descend.  Stabilizer and
 graph-automorphism groups, and their localization multiplicities, are
@@ -639,8 +640,10 @@ and \(aw<0\) is the condition \(bw<0\).
 
 (b)  The stabilizer of the orbifold point acts through
 \(\widetilde\varphi(\theta)\), which for \(G=\Gm\) and
-\(\widetilde\varphi(t)=t^{b/k}\) is \(\theta^{\,b}\); this depends only on
-\(b\bmod k\).  The isotropy representation of the universal bundle at the
+\(\widetilde\varphi(t)=t^{b}\) is \(\theta^{\,b}\); this depends only on
+\(b\bmod k\).  The composite
+\(z\mapsto\widetilde\varphi(z^{1/k})x=z^{b/k}x=z^ax\) is the section of the
+chart, which is where the denominator \(k\) enters.  The isotropy representation of the universal bundle at the
 orbifold point is determined by the same element, and the twisted-sector
 evaluation of \cite[Corollary~9.10]{WoodwardQKIII} is the corresponding
 component of the inertia stack.  Fixing the stabilizer congruence class of
@@ -665,10 +668,11 @@ equivalence downstairs precisely when it is one upstairs.  The equivalence of
 Proposition~\ref{prop:app-descent} and the square of
 Proposition~\ref{prop:app-square} are of that form by (c).  The fibre products
 of \cite[equations~(54) and~(57)]{WoodwardQKIII} are taken over the
-unrigidified inertia stack, so the constructions above take place there;
-passage to the rigidified inertia stack used for the evaluation maps changes
+\emph{rigidified} inertia stack.  The constructions above take place on the
+unrigidified cover and descend along the \(B\mu_r\)-gerbe by the previous
+paragraph; passage between the two changes
 rational cohomology only by the factors of \(r\) on \(r\)-twisted sectors
-recorded in \cite[Proposition~4.3(f),(g)]{WoodwardQKII}, and those factors
+recorded in \cite[Example~4.3(f),(g)]{WoodwardQKII}, and those factors
 depend only on the order of the stabilizer, which is constant along a tail by
 (b).  The parametrized principal component has no domain automorphisms; the
 fixed bubble factors retain theirs, and their automorphism groups are the ones

@@ -131,7 +131,7 @@ cohomological Kirwan maps, and write \(\tau_{Y_\pm,-}\) for Woodward's
 localized graph potentials.  The
 derivatives
 \begin{equation}\label{eq:endpoint-gauged-maps}
- A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm.
+ A_\pm=D\tau_{Y_\pm,-}\,D\kappa_\pm
 \end{equation}
 are the endpoint localized gauged maps.  The display is a definition; what is
 cited is the localized adiabatic identity
@@ -143,7 +143,7 @@ derivative in the input directions.
 The marked class has the restrictions
 \begin{equation}\label{eq:marked-class-restrictions}
  \operatorname{Kir}_\pm(a_p)=[p_\pm],\qquad
- a_p|_F=0.
+ a_p|_F=0
 \end{equation}
 for every fixed component \(F\) that is semistable for some polarization
 interpolating the two chamber linearizations.
@@ -199,8 +199,8 @@ commutes with input and bulk differentiation.
 At every fixed equivariant degree, the point-marked virtual Kalkman formula
 has no intermediate-polarization contribution.  Hence its two endpoint
 coefficients agree in the extended Novikov coefficient-function space.
-After Rees homogenization and in any common realization of the two endpoint
-series, this reads
+After the Rees homogenization \eqref{eq:rees-substitution} and in any common
+realization of the two endpoint series, this reads
 \begin{equation}\label{eq:support-collapse-row}
  \rrow_{Y_-,p_-}A_- =\rrow_{Y_+,p_+}A_+.
 \end{equation}
@@ -223,7 +223,7 @@ with parameters \(t_j\).  On a graph fixed locus their contribution is
 \begin{equation}\label{eq:liouville-character}
  \exp\!\left(\sum_jt_jD_j\right)
  \prod_j x_j^{D_j\cdot \widetilde d_+},
- \qquad x_j=\exp(t_j\zeta).
+ \qquad x_j=\exp(t_j\zeta),
 \end{equation}
 where \(\widetilde d_+\) is the total infinity-side equivariant degree: the
 bubble degree together with the affine cocharacter degree of the gauged
@@ -415,13 +415,16 @@ a closed subvariety disjoint from \(\overline O\) is zero.
 
 Applied to the resolved completion, with \(x\) the cylinder point over
 \(p\), the lemma produces the class \(a_p\) in
-\eqref{eq:marked-class-restrictions}.  The cylinder orbit is free.  It is
-semistable for both chamber polarizations because the identification of the
-extreme quotients with the two endpoints in
-Definition~\ref{def:gauged-admissible}\textup{(i)} is an identification of
-birational varieties: it restricts over the common open to the cobordism
-quotients, which are defined at \(p\), and the free semistable fibre over
-\(p_\pm\) is then the cylinder orbit itself.  Every fixed component reached by
+\eqref{eq:marked-class-restrictions}.  The cylinder orbit is free.  That it is
+semistable for both chamber polarizations is the registered input recorded in
+Section~\ref{sec:scope}, and not a consequence of
+Definition~\ref{def:gauged-admissible}\textup{(i)} as stated.  What makes it
+the expected one is that the identification of the
+extreme quotients with the two endpoints in \textup{(i)} is an identification
+of birational varieties: if it restricts over the common open to the cobordism
+quotients, which are defined at \(p\), then the free semistable fibre over
+\(p_\pm\) is the cylinder orbit itself.  That restriction property is the
+content of the registered assumption.  Every fixed component reached by
 the distinguished output evaluation at an intermediate polarization is
 semistable for the corresponding interpolated \(L_u\), so
 clause \textup{(b)} covers every wall term in the polarization sweep.  It does
@@ -507,7 +510,8 @@ virtual-normal splitting gives, in the signed Euler-class form of
   (R\pi_*\operatorname{ev}^*T(W/\Gm))_{\mathrm{mov}}
  \right)(\mp\zeta)(\mp\zeta-\psi).
 \end{equation}
-The last two factors smooth the node and move the attaching point.  They are
+The last two factors move the attaching point and smooth the node,
+respectively.  They are
 independent of the affine gauge degree, so gluing neither removes one end of
 the degree lattice nor creates a degree-dependent pole.  Formula
 \eqref{eq:virtual-normal-euler}
@@ -543,7 +547,9 @@ degree rays are not assigned unrelated Gamma products.  The root
 \(\alpha_a\) is a moving root: it carries a nonzero equivariant weight, and
 only its correction is nilpotent at Artin level.  This is what makes the
 \(m=0\) factor invertible, and it is the standing hypothesis that the virtual
-normal Euler class is invertible; a purely nilpotent root would not be.
+normal Euler class is invertible, which is implied by
+Definition~\ref{def:gauged-admissible}\textup{(ii)}, since virtual
+localization inverts that class; a purely nilpotent root would not be.
 
 The total affine slope of the moving index carries no ray sign:
 \begin{equation}\label{eq:total-moving-slope}
@@ -837,7 +843,10 @@ its denominators yields
  \sum_{i=0}^d p_i(k)c_{k+i}=0,
  \qquad p_i(k)\in R_N[k],
 \]
-on the tail.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is \((D)\)-finite over
+on the tail, with scalar \(p_i\): fix a \(\C\)-basis of \(R_N\), view the
+Gamma recurrence as a first-order system of size \(r\dim_{\C}R_N\) over
+\(\C(k)\), and take a linear relation among the first \(r\dim_{\C}R_N+1\)
+shifts.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is \((D)\)-finite over
 \(R_N\).  Finite Chern-root, input, and bulk derivatives commute with this
 identity and preserve \((D)\)-finiteness.  Under
 \eqref{eq:neutral-direction}, Stirling's
@@ -845,7 +854,8 @@ formula cancels the
 \(k\log k\) terms.  Sizes here are those of the coefficients in a fixed
 \(\C\)-basis of \(R_N\) after specializing the rotation parameter \(\zeta\) to
 a nonzero complex number, so the estimate is componentwise and the nilpotent
-parts of the moving roots contribute only bounded factors.  The cancellation
+parts of the moving roots contribute only polylogarithmically bounded factors,
+which the error terms below absorb.  The cancellation
 is uniform in
 the two degree rays
 because each virtual line contributes the same expression to \(\log|c_k|\) on
