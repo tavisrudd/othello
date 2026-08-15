@@ -509,12 +509,42 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
 
 ### Mathematical cold reads
 
-- [ ] Quantum referee A: read the revised paper context-free, concentrating on
-  LT theory, cyclotomic exponent classes, ramification, and field extensions.
-- [ ] Quantum referee B: independently verify Proposition 4.6 against the
-  frozen versions of every cited preprint.
-- [ ] Quantum referee C: recompute the cubic block and divisor-tagging endpoint
-  without using the manuscript's intermediate assertions.
+- [x] Quantum referee A, context-free on the differential-equations
+  foundation: **GO with required revisions**, report
+  `../2026-08-14-c912-quantum-referee-a.md`.  It found no false statement, and
+  confirmed that `nu_6` is canonical and the receiver construction sound.  Its
+  three smaller items are repaired: the Levelt--Turrittin passage now states
+  the algebraic form it needs and cites Sabbah for the complex-analytic
+  account only; ambient endpoint faithfulness is stated for both endpoints;
+  and the global-generation reduction now rests on the intrinsic Novikov
+  embedding of Iritani--Koto Remark 5.2 rather than on a divisor shift that
+  does not arise.
+- [x] Quantum referee B, source exactness for `prop:framed-operations`:
+  **NO-GO as written, now repaired**, report
+  `../2026-08-14-c912-quantum-referee-b.md`.  Every external attribution
+  checked out with no mismatch.  The blocking gap was the paper's own
+  blowup-side completion, which built its value group from an infinite family
+  of bulk generators all of weight one; it now uses the finite-dimensional
+  parameter of Theorem 5.18, matching the projective-bundle half.  Also
+  repaired: the false positivity claim for the ramified Novikov generator,
+  parity for the projective-bundle decomposition, the filtration citation, the
+  center-reduction over-read, and the ring citation.
+- [x] Quantum referee C, independent recomputation: **GO**, report
+  `../2026-08-14-c912-quantum-referee-c.md`.  The cubic block reproduces
+  exactly.  Its moderate gap, that the tagged polynomial was never placed in
+  the same coefficient ring as the transported operator, is repaired by
+  reading all three polynomials in the graded Hahn receiver.
+- [ ] **Owed to referee A, the one item left open.** The frame-transport step
+  in `prop:framed-operations` — that a turn-invariant gauge conjugates framed
+  operators — is asserted in one sentence, and no solution algebra carrying
+  the turn is built.  State and prove it as a lemma, adjoining `z^rho`,
+  `log z`, and the exponential symbols formally over the receiver, and place
+  it before the proposition.  The referee expects about a page.  Until then
+  that proposition is unproved as written.
+- [ ] Repeat review of the frame-transport lemma once written, per the rule
+  that every NO-GO finding receives a fresh review.
+- [ ] Re-export after the lemma lands; the standalone repository is currently
+  at source commit `f0c46af5a`, one repair behind.
 - [x] Geometry referee: recheck the complete cycle spine and every new
   Roulleau/Hartlieb/polarization clarification for regressions.
 - [x] General referee: cold-read the entire paper at the stated landmark-result

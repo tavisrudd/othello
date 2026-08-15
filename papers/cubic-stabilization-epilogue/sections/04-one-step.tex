@@ -82,8 +82,10 @@ original coefficient field is replaced by a common algebraically closed
 overfield.  When \(K=\C\), it is the usual multiplicity in the analytic
 formal monodromy on the original \(z\)-disc.
 We use here the functoriality and uniqueness of the ramified formal
-decomposition; see Sabbah's treatment of ramified descent and the functorial
-Levelt--Turrittin decomposition
+decomposition.  That statement holds over any algebraically closed coefficient
+field of characteristic zero, and it is the algebraic form we need; Sabbah
+gives the complex-analytic account, where the same decomposition appears
+alongside the Riemann--Hilbert correspondence
 \cite[Lecture~5, Section~5.c, proofs of Theorem~5.8 and
 Proposition~5.10]{SabbahStokes}.
 Consider one orbit of Levelt--Turrittin blocks under a turn of the original
@@ -581,7 +583,9 @@ The endpoint map is faithful: on numerical curve lattices
  \bigl(\phi_*\bar\beta,-E\cdot\bar\beta\bigr)
 \]
 is injective because
-\(N^1(\widetilde T)=\phi^*N^1(T)\oplus\mathbf Z[E]\).  Hence the Laurent
+\(N^1(\widetilde T)=\phi^*N^1(T)\oplus\mathbf Z[E]\).  On the ambient
+endpoint the corresponding map is the Novikov injection
+\cite[(1.1)]{IritaniKoto}.  Hence the Laurent
 extension preserves the intrinsic endpoint characteristic polynomials.
 
 The projective-bundle proof is parallel, again in reconstruction coordinates.
@@ -710,8 +714,10 @@ copies of the intrinsic base module and proves
 embedding in \cite[(1.1) and Remark~5.2]{IritaniKoto}.  The theorem assumes
 \(V^\vee\) globally generated.  Tensoring \(V\) by a sufficiently negative
 line bundle achieves this without changing \(\PP_T(V)\)
-\cite[Remark~1.2]{IritaniKoto}; the resulting divisor shift preserves framed
-monodromy by Lemma~\ref{lem:formal-base-shift}.  All other Novikov extensions
+\cite[Remark~1.2]{IritaniKoto}, and no divisor shift arises: the Novikov
+embedding is intrinsic, defined by the kernel of \(c_1(T_{\rm vert})\) and
+independent of \(V\) up to tensoring by a line bundle
+\cite[Remark~5.2]{IritaniKoto}.  All other Novikov extensions
 are in the coefficient direction.  For the blowup decomposition the parity
 statement is recorded in \cite[Section~2]{IritaniNotes}, together with the
 observation that the ramified Novikov root keeps even parity although its
