@@ -776,13 +776,15 @@ C912 is active and author-close only.  Its WP1--WP3 referee-foundation tranche
 is green: the universal cyclotomic framed operator, normalized finite-cutoff
 gauges, full nonlinear Iritani coordinate pullbacks, and the separated
 coefficient/loop Hahn receiver have passed quantum, geometry, and general cold
-reads.  The warning-free 23-page paper authority is committed at `9ee4987c7`,
-the immutable exported source is `2405ca85a`, and the clean local standalone
-forward commit is `f336131`; PDF SHA-256 is
-`cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`.
-Nothing was pushed.  The next prioritized work is WP5--WP8: make divisor
-tagging fully explicit, close the verified cycle/exposition seams, finish the
-external-reader repositioning, and repair the source-version locators.  Current
+reads.  The paper is now titled *Irrationality of Cubic Threefolds after One
+Stabilization*, and its introduction presents the framed-multiplicity and
+six-axis theorems as the two halves one fourfold requires.  The warning-free
+30-page authority is committed at `a85ddbb32` with PDF SHA-256
+`a06cc45ce5b9adac5c1795320d0c4162166ae47d70de4eee922caec3512d2f33`; the
+standalone forward commit is `8678447` and the summary mirror is `11b6e63`.
+Nothing was pushed.  The next step is the frame-transport lemma owed to
+referee A, which is blocked on an architecture decision and awaiting a second
+opinion: `../2026-08-15-c912-frame-transport-receiver-obstruction.md`.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial

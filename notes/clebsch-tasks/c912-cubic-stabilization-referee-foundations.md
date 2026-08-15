@@ -30,9 +30,12 @@ the repositioning at `0db2a97fc`, `131e926d6`, `d92f27904`, `ac0bfee7b`, and
 `0378e2ae1`, the source-version locator repair at `9c3518861`, the reopened
 foundation rechecks at `87b6170e1`, the cold-read repairs at `a5fd508c2`, and
 the forward-citation sweep recorded in
-`../2026-08-14-c912-forward-citation-sweep.md`.  The paper builds
-warning-free at 29 pages.  What remains open on this card is the residual list
-under each work package, not a whole package.
+`../2026-08-14-c912-forward-citation-sweep.md`.  The paper now carries the
+retitle and two-theorem framing (WP12 below) and builds warning-free at 30
+pages.  What remains open on this card is the residual list under each work
+package, not a whole package, plus the frame-transport lemma owed to referee A,
+which is blocked on an architecture decision recorded in
+`../2026-08-15-c912-frame-transport-receiver-obstruction.md`.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -505,6 +508,40 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   the Brauer-atlas endomorphism rings, `prop:cubic-packet` with its Cai input,
   and the priority question itself, which WP10 owns.
 
+### WP12 — title and two-theorem framing
+
+- [x] Retitle to *Irrationality of Cubic Threefolds after One Stabilization*.
+  The old title named universal `CH_0`-triviality, which is a hypothesis only in
+  the separation corollaries, so it advertised a restriction
+  `thm:every-cubic` does not carry.  Applied to the manuscript, `README.md`,
+  `.zenodo.json`, and `lean/README.md`.
+- [x] Reframe the introduction so the two theorems read as the two halves one
+  fourfold requires, rather than as parallel results with an asserted unity.
+- [x] Independent cold read of both changes, read-only against the theorem
+  statements: GO on the retitle, NO-GO on the framing pending four sentence
+  repairs.  Report: `../2026-08-15-c912-title-framing-cold-read.md`.
+- [x] Repair all four: the unrestricted "every cycle-theoretic obstruction",
+  falsified by the paper's own Fermat corollary; "the criterion available for a
+  cubic threefold", contradicted by the Colliot-Thélène and Yang--Yu--Zhu
+  routes; "up to torsion", where the obstruction is divisibility by two; and
+  "carries no rational parametrization", which contradicts the coprime-degree
+  corollary.  Also took the recommended repairs: an explicit pointer to
+  `thm:six-axis-divided-powers`, the dangling "irrationality half", and the
+  duplication in the new lead and closing sentences.
+- [x] Deterministic rebuild confirmed at 30 pages, PDF SHA-256
+  `a06cc45ce5b9adac5c1795320d0c4162166ae47d70de4eee922caec3512d2f33`,
+  authority commit `a85ddbb32`; `make check` warning-free with the claim
+  inventory unchanged.
+- [x] Carry the retitle and the current abstract into the portfolio summary,
+  whose quoted abstract still led with the family rather than the uniform
+  theorem.
+- [x] Export: audit reports zero findings, `sync` from `a85ddbb32`, mirror gate
+  replayed with a byte-identical PDF, `verify` accepts 120 tracked files.
+  Standalone commit `8678447`; summary mirror commit `11b6e63`.  Neither is
+  pushed.
+- [ ] The next Zenodo release deposits the new title as a new version; the
+  existing deposit keeps the old one.
+
 ## Review protocol
 
 ### Mathematical cold reads
@@ -534,6 +571,19 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   exactly.  Its moderate gap, that the tagged polynomial was never placed in
   the same coefficient ring as the transported operator, is repaired by
   reading all three polynomials in the graded Hahn receiver.
+- [ ] **Blocked, not merely unwritten.** The lemma statement and proof are
+  worked out in
+  `../2026-08-15-c912-frame-transport-receiver-obstruction.md`, and they are
+  short over a differential field.  The receiver cannot host them: its elements
+  are finite tensors, so it does not contain a Levelt--Turrittin gauge, and no
+  single Hahn field holds both a pro-Laurent gauge and a formal solution.  The
+  two rates are exact — the pro-Laurent gauge gains one filtration unit per
+  unit of `z`-pole, the splitting gauge loses `w(Delta lambda)` per unit of
+  `z`-power — so a common order exists exactly when
+  `w(Delta lambda)` is below the minimal generator weight.  That holds at the
+  cubic endpoint and is not supplied for arbitrary weak-factorization centers.
+  A second opinion on the architecture is the next step; `prop:framed-operations`
+  stays unproved as written until it lands.
 - [ ] **Owed to referee A, the one item left open.** The frame-transport step
   in `prop:framed-operations` — that a turn-invariant gauge conjugates framed
   operators — is asserted in one sentence, and no solution algebra carrying
