@@ -17,7 +17,8 @@ and a point \(p\) in their common birational open are
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item The extreme quotients \(Y_-\) and \(Y_+\) are smooth and free, and
 stable equals semistable for the chamber polarizations used to define their
-gauged theories.  This equality is not imposed at a critical wall
+gauged theories, which are equivariant and ample as
+Lemma~\ref{lem:orbit-cylinder-disjoint} requires.  This equality is not imposed at a critical wall
 polarization; the wall is handled by the master stacks in \textup{(ii)}.
 \item Degree by degree, the polarization master stacks are proper
 Deligne--Mumford stacks with Woodward's relative perfect obstruction theories,
@@ -32,7 +33,9 @@ semigroup is pointed.
 \item There is a class \(a_p\in H^*_{\Gm}(W)\) whose ordinary Kirwan
 restrictions are the two endpoint point classes and whose restriction to
 every fixed component that is semistable for some polarization interpolating
-the two chamber linearizations is zero.  This \(a_p\) is the global
+the two chamber linearizations is zero.  Its construction uses one further
+input, bistability of the cylinder orbit, recorded with the other unproved
+inputs of Proposition~\ref{prop:support-collapse} in Section~\ref{sec:scope}.  This \(a_p\) is the global
 orbit-cylinder class of Lemma~\ref{lem:orbit-cylinder-disjoint}; it is
 unrelated to the Gu--Yu--Yu wall-local class written \(a_p\) in
 Section~\ref{sec:simple-wall}.
@@ -46,10 +49,17 @@ components]
 \label{rem:iv-semistable-restriction}
 Condition \textup{(iv)} cannot be strengthened to vanishing on every
 component of \(W^{\Gm}\).  For a smooth projective \(W\) with \(\Gm\)-action
-the Bia{\l}ynicki--Birula decomposition is filtrable, its cells are affine
-bundles over the fixed components, and all cells are even-dimensional, so the
-Gysin sequences degenerate and \(H^*_{\Gm}(W;\Q)\) is a free module over
-\(H^*(B\Gm;\Q)\), in particular torsion free.  By the localization theorem the
+the Bia{\l}ynicki--Birula decomposition is filtrable and its cells are affine
+bundles over the fixed components, and the decomposition is perfect, so
+\(H^*_{\Gm}(W;\Q)\) is a free module over
+\(H^*(B\Gm;\Q)\), in particular torsion free.  Perfectness is not a parity
+statement: the fixed components of the completions used here can carry odd
+cohomology, so the connecting maps are not killed by evenness of the cell
+dimensions.  It holds because each cell is an affine bundle over a smooth
+projective base, so its Borel--Moore homology is pure and the weight-shifting
+connecting maps vanish by strictness; equivalently, by Frankel's theorem the
+moment map of the circle action on the compact K\"ahler \(W\) is a perfect
+Morse--Bott function.  By the localization theorem the
 kernel of the restriction
 \(H^*_{\Gm}(W)\to H^*_{\Gm}(W^{\Gm})\) is a torsion \(H^*(B\Gm;\Q)\)-module;
 freeness alone would not give this.  The two facts together make the
@@ -287,8 +297,8 @@ and \(L_+\).  Their normal directions in the polarization master stack are the
 two ends of the master-space fibre: the obstruction theory of
 \(M^G_n(C,X,L_-,L_+)\) differs from that of \(M^G_n(C,X)\) by the trivial
 factor coming from the fibre of \(\mathbf P(D(L_-)\oplus D(L_+))\)
-\cite[Lemma~3.21]{GonzalezWoodward}, whose two sections carry opposite
-weights.  After the residue extraction the two endpoint
+\cite[Lemma~3.21 and its proof]{GonzalezWoodward}, whose two sections carry
+opposite weights.  After the residue extraction the two endpoint
 contributions therefore enter with opposite signs and a common normalization,
 which is why the vanishing of all wall terms gives the equality
 \eqref{eq:support-collapse-row} rather than a proportionality.  We do not
@@ -489,7 +499,8 @@ coefficient is Laurent-finite.
 \begin{proof}
 Woodward's classification of the rotation-fixed graph locus is exhaustive
 for sufficiently large area \cite[Corollary~9.10]{WoodwardQKIII}.  His
-virtual-normal splitting gives
+virtual-normal splitting gives, in the signed Euler-class form of
+\cite[equations~(59) and~(64)]{WoodwardQKIII},
 \begin{equation}\label{eq:virtual-normal-euler}
  \operatorname{Eul}(N_\pm)=
  \operatorname{Eul}\!\left(
@@ -595,7 +606,7 @@ product-of-simple-residues formula is used or asserted.
 Aleshkin--Liu prove the relevant contour statement for a
 finite-dimensional linear abelian GLSM with adjacent secondary-fan chambers,
 a circuit, Calabi--Yau charges, and a grade-restriction window
-\cite[Definition~5.18 and Theorem~5.21]{AleshkinLiu}.  Proposition
+\cite[Definition~5.18, Remark~5.20 and Theorem~5.21]{AleshkinLiu}.  Proposition
 \ref{prop:gamma-ratio-reduction} does not construct those data for a nonlinear
 virtual fixed graph.  Their theorem therefore supplies neither the
 derived-intersection argument below nor the marked threshold comparisons.
@@ -838,11 +849,20 @@ parts of the moving roots contribute only bounded factors.  The cancellation
 is uniform in
 the two degree rays
 because each virtual line contributes the same expression to \(\log|c_k|\) on
-both of them: for \(n_a\geq0\) the factor \eqref{eq:gamma-index-factor} has
-log-magnitude \(-n_a\log n_a+n_a+O(\log n_a)\), and for \(n_a<0\) the
-\(H^1\) Euler class \(\prod_{m=n_a+1}^{-1}(\alpha_a+m\zeta)\) has
-log-magnitude \(|n_a|\log|n_a|-|n_a|+O(\log|n_a|)
-=-n_a\log|n_a|+n_a+O(\log|n_a|)\).  With
+both of them.  Write \(x_a=\alpha_a/\zeta\).  For \(n_a\geq0\) the factor
+\eqref{eq:gamma-index-factor} is an inverse \(H^0\) Euler class and has
+log-magnitude
+\[
+ -\sum_{m=0}^{n_a}\log|\alpha_a+m\zeta|
+ =-(n_a+1)\log|\zeta|-\sum_{m=0}^{n_a}\log|m+x_a|,
+\]
+which is \(-n_a\log n_a+n_a-n_a\log|\zeta|+O(\log n_a)\),
+and for \(n_a<0\) the
+\(H^1\) Euler class \(\prod_{m=n_a+1}^{-1}(\alpha_a+m\zeta)\), a product of
+\(|n_a|-1\) factors, has
+log-magnitude \(|n_a|\log|n_a|-|n_a|+|n_a|\log|\zeta|+O(\log|n_a|)
+=-n_a\log|n_a|+n_a-n_a\log|\zeta|+O(\log|n_a|)\).  The two rays therefore
+contribute the same expression, the \(\zeta\)-scale term included.  With
 \eqref{eq:affine-moving-degree} this gives
 \[
  \log|c_k|=

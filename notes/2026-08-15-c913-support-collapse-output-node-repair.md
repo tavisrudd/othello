@@ -323,6 +323,48 @@ against the dated extraction note.
 
 `make check` passes at 47 pages, warning-free, tracked PDF current.
 
+## 7. Fifth batch: the fresh independent round
+
+A fresh referee with no prior involvement read the primary scope cold at `101d2e990`
+(report: `2026-08-15-c913-cold-read-round3.md`). It judged every statement in the scope, verified
+every citation against the cached primary sources — including Woodward's quantum Kirwan papers and
+Aleshkin–Liu, which earlier rounds had left at the extraction note — and returned two required
+repairs and eight optional improvements. Both required repairs are now closed.
+
+**The `ζ`-scale term was missing from the two per-ray estimates.** Round 2 had added that term to the
+`log|c_k|` display but not to the two per-ray log-magnitudes the display is derived from, so the
+display did not follow from its own justification. Both estimates now carry `-n_a log|ζ|`, with the
+`H^0` side written out through `-(n_a+1) log|ζ| - ∑ log|m + α_a/ζ|` so the term's origin is visible.
+
+**Parity of the cells does not give freeness.** The remark argued that all Białynicki-Birula cells
+being even-dimensional makes the Gysin sequences degenerate. That closes only when the fixed
+components have no odd cohomology, and here they generally do — one endpoint is `X × P^m` with `X` a
+cubic threefold, `b_3 = 10`. The conclusion is a standard theorem by a different route, and the text
+now gives it: each cell is an affine bundle over a smooth projective base, so its Borel–Moore
+homology is pure and the weight-shifting connecting maps vanish by strictness; Frankel's theorem is
+named as the equivalent Morse-theoretic route.
+
+Optional improvements taken, all locator or clarity work with no mathematical content: González–
+Woodward Lemma 3.21 is cited "and its proof", since the sentence used is the first line of the proof
+rather than the statement; Woodward's equations (59) and (64) are both cited for the virtual-normal
+splitting, (64) being where the signed Euler-class form the manuscript uses actually appears;
+Aleshkin–Liu Remark 5.20 is added for the grade restriction rule the manuscript's phrase echoes;
+`def:gauged-admissible`(i) now says the chamber polarizations are equivariant and ample, which is
+what `lem:orbit-cylinder-disjoint` uses; clause (iv) cross-refers to the scope section for
+bistability of the cylinder orbit, the one input to `a_p` that is registered there rather than in the
+four numbered conditions; and `lem:app-truncation`'s conclusion is stated at the level its proof
+reaches, namely agreement of deformations and obstructions naturally in the test scheme.
+
+Optional improvements not taken: the referee flagged that `a` carries three meanings across the
+section (root index, a free scalar in the adjacent-Gamma-ratio display, clutching exponent) and that
+`k` is both the tail variable and the orbifold cover order. Both are real, but renaming across the
+section and appendix is the kind of sweeping edit that introduced defects in the previous round, and
+the manuscript already carries a reconciling sentence for `k`. Left for a deliberate notation pass.
+
+One presentational consequence of the repair: adding the per-ray display overflowed a line, so the
+`H^0` estimate is split across a display and a following clause. `make check` passes at 47 pages,
+warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph
