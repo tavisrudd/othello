@@ -25,10 +25,12 @@ count while preserving Cai's starting-matrix role.  The independent
 coherent-tranche reviews are GO (`C912-WP4-CR-GO-001` and the closed
 `R-WP4-*` findings), with source/scope repairs at `f4a959bf8`.  WP4 is
 accepted.  WP5 has begun at `5a6362680`, which exposes the divisor-tag initial
-form.  WP7 is landed at `0db2a97fc` and `131e926d6`, which reposition the paper
-against Yang--Yu--Zhu and Voisin's Theorem 4.5 and print the Fermat membership
-of the pencil proved in C914.  WP5, WP6, WP8, and WP9 remain prioritized work;
-the paper now builds warning-free at 27 pages.
+form.  WP7 is landed at `0db2a97fc`, `131e926d6`, `d92f27904`, and
+`ac0bfee7b`, which reposition the paper against Yang--Yu--Zhu and Voisin's
+Theorem 4.5, restate the separation as three corollaries of the one-step
+theorem, credit Hartlieb's Lemma 5.5 for the Fermat membership of the pencil,
+and widen the theorem to the whole birational class.  WP5, WP6, WP8, WP9, and
+WP10 remain prioritized work; the paper now builds warning-free at 28 pages.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -60,7 +62,11 @@ before acting:
 
 7. reposition the paper against the pre-emptions of the separation family;
 8. repair the source-version locators, which are not all at the pinned
-   version.
+   version;
+9. recheck the four load-bearing points the reader named inside the accepted
+   foundation tranche;
+10. close the pre-emption risk with a forward-citation sweep of the principal
+    sources.
 
 The task is manuscript-facing. C910 retains ownership of the standalone Lean
 companion and its formal coverage classification. Any Lean strengthening
@@ -347,6 +353,47 @@ WP1--WP3 tranche. Each needs an independent recheck, not a re-reading.
   a noninjective center monomial map and cannot alter `nu_6`.
 - [ ] Lemma 4.8: a self-contained statement of divisor tagging saying exactly
   where the domain hypothesis on `gr A` enters. This is WP5's remaining work.
+
+### WP10 — deep literature sweep closing the pre-emption risk
+
+Three pre-emptions surfaced on 2026-08-14 from a single external prompt, and
+the ledger's audit boundary still records MathSciNet as uncovered and the
+forward trees of the principal sources as unclosed. This work package closes
+that gap. It is bound by `notes/literature-audit-conventions.md` in full; the
+verdict text lives only in `claim-proof-novelty-ledger.md`.
+
+- [ ] Pin every seed by identifier resolved from a consulted source, never by
+  title search: Voisin arXiv:1407.7261, Colliot-Thélène arXiv:1607.05673,
+  Yang--Yu--Zhu arXiv:2508.03623, Hartlieb arXiv:2304.03214, Wei--Yu
+  arXiv:1907.00392, Engel--de Gaay Fortman--Schreieder arXiv:2507.15704, Cai
+  arXiv:2608.01577, Katzarkov--Kontsevich--Pantev--Yu arXiv:2508.05105.
+  Record the resolved DOI or OpenAlex identifier for each in the report.
+- [ ] Take the forward-citation set of each seed independently from OpenAlex,
+  Crossref, and Semantic Scholar. Record the three counts separately, screen
+  the largest set, and report any disagreement between the services as a
+  finding rather than collapsing them.
+- [ ] Record every load-bearing query verbatim, and state for each service how
+  an empty result was distinguished from an error.
+- [ ] Screen the citing sets for two targets: further constructions of
+  universally `CH_0`-trivial cubic threefolds, whether by unirational
+  parametrizations, minimal-class algebraicity, or specialization; and any
+  statement about irrationality or rationality of a cubic threefold times
+  projective space.
+- [ ] Record the set size, provenance, screened fields, and the verbatim
+  discriminator for each screened set. Promote a member out of the set only
+  with an ordinary read-depth field attached.
+- [ ] Search zbMATH Open, which is reachable, over the same two targets.
+- [ ] Record MathSciNet as NOT COVERED if it cannot be authenticated, and keep
+  every claim it would have gated at the weaker strength.
+- [ ] Add every fetched source to the shared literature cache with its key and
+  SHA-256.
+- [ ] Rewrite the ledger's audit boundary from the result, keeping "searched
+  and found nothing" strictly apart from "could not access", and state which
+  of the paper's remaining claims the sweep now licenses at full strength.
+- [ ] Recheck the second distinguished member of the pencil,
+  `x_0^3 + x_1^2 x_2 + x_2^2 x_3 + x_3^2 x_4 + x_4^2 x_1`, against the swept
+  literature before any claim that its universal `CH_0`-triviality has no
+  earlier proof; see `../2026-08-14-c914-a5-pencil-vs-known-loci.md`.
 
 ## Review protocol
 
